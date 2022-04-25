@@ -29,10 +29,8 @@ public class StaticData {
     private final String blockDataFolder;
     private final CardDb commonCards;
     private final CardDb variantCards;
-    private final CardDb customCards;
     private final TokenDb allTokens;
     private final CardEdition.Collection editions;
-    private final CardEdition.Collection customEditions;
 
     private Predicate<PaperCard> standardPredicate;
     private Predicate<PaperCard> brawlPredicate;
@@ -61,35 +59,36 @@ public class StaticData {
     private static StaticData lastInstance = null;
 
     public StaticData(CardStorageReader cardReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards) {
-        this(cardReader, null, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, "", cardArtPreference, enableUnknownCards, loadNonLegalCards, false, false);
+        this(cardReader, null, customCardReader, null, editionFolder, customEditionsFolder, blockDataFolder, "", cardArtPreference, enableUnknownCards, loadNonLegalCards, false, false);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance){
-        this(cardReader, tokenReader, customCardReader, editionFolder, customEditionsFolder, blockDataFolder, setLookupFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, allowCustomCardsInDecksConformance, false);
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance){
+        this(cardReader, tokenReader, customCardReader, customTokenReader, editionFolder, customEditionsFolder, blockDataFolder, setLookupFolder, cardArtPreference, enableUnknownCards, loadNonLegalCards, allowCustomCardsInDecksConformance, false);
     }
 
-    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection) {
+    public StaticData(CardStorageReader cardReader, CardStorageReader tokenReader, CardStorageReader customCardReader, CardStorageReader customTokenReader, String editionFolder, String customEditionsFolder, String blockDataFolder, String setLookupFolder, String cardArtPreference, boolean enableUnknownCards, boolean loadNonLegalCards, boolean allowCustomCardsInDecksConformance, boolean enableSmartCardArtSelection) {
         this.cardReader = cardReader;
         this.tokenReader = tokenReader;
         this.editions = new CardEdition.Collection(new CardEdition.Reader(new File(editionFolder)));
         this.blockDataFolder = blockDataFolder;
         this.customCardReader = customCardReader;
-        this.customEditions = new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder), true));
         this.allowCustomCardsInDecksConformance = allowCustomCardsInDecksConformance;
         this.enableSmartCardArtSelection = enableSmartCardArtSelection;
         lastInstance = this;
         List<String> funnyCards = new ArrayList<>();
         List<String> filtered = new ArrayList<>();
+        editions.append(new CardEdition.Collection(new CardEdition.Reader(new File(customEditionsFolder), true)));
 
         {
             final Map<String, CardRules> regularCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
             final Map<String, CardRules> variantsCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-            final Map<String, CardRules> customizedCards = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
-            for (CardEdition e : editions) {
-                if (e.getType() == CardEdition.Type.FUNNY || e.getBorderColor() == CardEdition.BorderColor.SILVER) {
-                    for (CardEdition.CardInSet cis : e.getAllCardsInSet()) {
-                        funnyCards.add(cis.name);
+            if (!loadNonLegalCards) {
+                for (CardEdition e : editions) {
+                    if (e.getType() == CardEdition.Type.FUNNY || e.getBorderColor() == CardEdition.BorderColor.SILVER) {
+                        for (CardEdition.CardInSet cis : e.getAllCardsInSet()) {
+                            funnyCards.add(cis.name);
+                        }
                     }
                 }
             }
@@ -108,12 +107,17 @@ public class StaticData {
                     regularCards.put(cardName, card);
                 }
             }
-            if (customCardReader != null) {
+            if (customCardReader != null) { //Load user's custom cards.
                 for (CardRules card : customCardReader.loadCards()) {
                     if (null == card) continue;
 
                     final String cardName = card.getName();
-                    customizedCards.put(cardName, card);
+                    card.setCustom();
+                    if(card.isVariant()) { //Append loaded custom cards to the respective list.
+                        variantsCards.put(cardName, card);
+                    } else {
+                        regularCards.put(cardName, card);
+                    }
                 }
             }
 
@@ -123,12 +127,10 @@ public class StaticData {
 
             commonCards = new CardDb(regularCards, editions, filtered, cardArtPreference);
             variantCards = new CardDb(variantsCards, editions, filtered, cardArtPreference);
-            customCards = new CardDb(customizedCards, customEditions, filtered, cardArtPreference);
 
             //must initialize after establish field values for the sake of card image logic
             commonCards.initialize(false, false, enableUnknownCards);
             variantCards.initialize(false, false, enableUnknownCards);
-            customCards.initialize(false, false, enableUnknownCards);
         }
 
         if (this.tokenReader != null){
@@ -136,13 +138,20 @@ public class StaticData {
 
             for (CardRules card : this.tokenReader.loadCards()) {
                 if (null == card) continue;
-
                 tokens.put(card.getNormalizedName(), card);
+            }
+            if (customTokenReader != null){
+                for (CardRules card : customTokenReader.loadCards()){
+                    if (null == card) continue;
+                    card.setCustom();
+                    tokens.put(card.getNormalizedName(), card);
+                }
             }
             allTokens = new TokenDb(tokens, editions);
         } else {
             allTokens = null;
         }
+
         //initialize setLookup
         if (FileUtil.isDirectoryWithFiles(setLookupFolder)){
             for (File f : Objects.requireNonNull(new File(setLookupFolder).listFiles())){
@@ -165,21 +174,12 @@ public class StaticData {
         return this.editions;
     }
 
-    public final CardEdition.Collection getCustomEditions() {
-        return this.customEditions;
-    }
-
     private List<CardEdition> sortedEditions;
     public final List<CardEdition> getSortedEditions() {
         if (sortedEditions == null) {
             sortedEditions = new ArrayList<>();
             for (CardEdition set : editions) {
                 sortedEditions.add(set);
-            }
-            if (customEditions.size() > 0){
-                for (CardEdition set : customEditions) {
-                    sortedEditions.add(set);
-                }
             }
             Collections.sort(sortedEditions);
             Collections.reverse(sortedEditions); //put newer sets at the top
@@ -205,8 +205,6 @@ public class StaticData {
 
     public CardEdition getCardEdition(String setCode) {
         CardEdition edition = this.editions.get(setCode);
-        if (edition == null) // try custom editions
-            edition = this.customEditions.get(setCode);
         return edition;
     }
 
@@ -219,10 +217,6 @@ public class StaticData {
         if (card == null)
             card = commonCards.getCard(cardName, setCode);
         if (card == null)
-            card = customCards.getCard(cardName, setCode, artIndex);
-        if (card == null)
-            card = customCards.getCard(cardName, setCode);
-        if (card == null)
             return null;
         return foil ? card.getFoiled() : card;
     }
@@ -232,19 +226,12 @@ public class StaticData {
     }
     public void attemptToLoadCard(String cardName, String setCode) {
         CardRules rules = cardReader.attemptToLoadCard(cardName);
-        CardRules customRules = null;
-        if (customCardReader != null) {
-            customRules = customCardReader.attemptToLoadCard(cardName);
-        }
         if (rules != null) {
             if (rules.isVariant()) {
                 variantCards.loadCard(cardName, setCode, rules);
             } else {
                 commonCards.loadCard(cardName, setCode, rules);
             }
-        }
-        if (customRules != null) {
-            customCards.loadCard(cardName, setCode, customRules);
         }
     }
 
@@ -362,9 +349,7 @@ public class StaticData {
         if (cardName == null || cardName.trim().length() == 0)
             return false;
         CardDb.CardRequest cr = CardDb.CardRequest.fromString(cardName);  // accounts for any foil request ending with +
-        return this.commonCards.contains(cr.cardName) ||
-                this.variantCards.contains(cr.cardName) ||
-                this.customCards.contains(cr.cardName);
+        return this.commonCards.contains(cr.cardName) || this.variantCards.contains(cr.cardName);
     }
 
     /** @return {@link forge.util.storage.IStorage}<{@link forge.item.SealedProduct.Template}> */
@@ -397,10 +382,6 @@ public class StaticData {
         return commonCards;
     }
 
-    public CardDb getCustomCards() {
-        return customCards;
-    }
-
     public CardDb getVariantCards() {
         return variantCards;
     }
@@ -408,7 +389,6 @@ public class StaticData {
     public Map<String, CardDb> getAvailableDatabases(){
         Map<String, CardDb> databases = new LinkedHashMap<>();  // to process dbs in this exact order
         databases.put("Common", commonCards);
-        databases.put("Custom", customCards);
         databases.put("Variant", variantCards);
         return databases;
     }
@@ -705,8 +685,6 @@ public class StaticData {
         return altCandidate;
     }
 
-
-
     /**
      * Get the Art Count for a given <code>PaperCard</code> looking for a candidate in all
      * available databases.
@@ -734,7 +712,6 @@ public class StaticData {
     public void setMulliganRule(MulliganDefs.MulliganRule rule) {
         mulliganRule = rule;
     }
-
     public MulliganDefs.MulliganRule getMulliganRule() {
         return mulliganRule;
     }
@@ -742,7 +719,6 @@ public class StaticData {
     public void setCardArtPreference(boolean latestArt, boolean coreExpansionOnly) {
         this.commonCards.setCardArtPreference(latestArt, coreExpansionOnly);
         this.variantCards.setCardArtPreference(latestArt, coreExpansionOnly);
-        this.customCards.setCardArtPreference(latestArt, coreExpansionOnly);
     }
 
     public String getCardArtPreferenceName() {
@@ -754,7 +730,7 @@ public class StaticData {
     }
 
     public CardDb.CardArtPreference getCardArtPreference(boolean latestArt, boolean coreExpansionOnly) {
-        if (latestArt){
+        if (latestArt) {
             return coreExpansionOnly ? CardDb.CardArtPreference.LATEST_ART_CORE_EXPANSIONS_REPRINT_ONLY : CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS;
         }
         return coreExpansionOnly ? CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY : CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS;
@@ -788,7 +764,6 @@ public class StaticData {
     public void setCardArtPreference(String artPreference) {
         this.commonCards.setCardArtPreference(artPreference);
         this.variantCards.setCardArtPreference(artPreference);
-        this.customCards.setCardArtPreference(artPreference);
     }
 
     public boolean isEnabledCardArtSmartSelection() {

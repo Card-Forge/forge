@@ -1,0 +1,9 @@
+Name:Akki Battle Squad
+ManaCost:5 R
+Types:Creature Goblin Samurai
+PT:6/6
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.modified+YouCtrl | Execute$ TrigUntap | TriggerZones$ Battlefield | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more modified creatures you control attack, untap all modified creatures you control. After this combat phase, there is an additional combat phase. This ability triggers only once each turn. (Equipment, Auras you control, and counters are modifications.)
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature.modified+YouCtrl | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
+DeckHints:Type$Aura|Equipment & Ability$Counters
+Oracle:Whenever one or more modified creatures you control attack, untap all modified creatures you control. After this combat phase, there is an additional combat phase. This ability triggers only once each turn. (Equipment, Auras you control, and counters are modifications.)

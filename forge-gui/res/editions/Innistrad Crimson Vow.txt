@@ -6,7 +6,7 @@ Code2=VOW
 MciCode=vow
 Type=Expansion
 ScryfallCode=VOW
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+Booster=10 Common:fromSheet("VOW cards"), 3 Uncommon:fromSheet("VOW cards"), 1 RareMythic:fromSheet("VOW cards"), 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
 
 [cards]
@@ -434,7 +434,10 @@ Prerelease=6 Boosters, 1 RareMythic+
 412 L Forest @Pig Hands
 
 [rebalanced]
+A52 U A-Cobbled Lancer @Igor Kieryluk
 A63 R A-Hullbreaker Horror @Svetlin Velinov
+A81 C A-Stitched Assistant @Andrey Kuzinskiy
+A248 U A-Skull Skaab @Nicholas Gregory
 
 [tokens]
 b_1_1_slug

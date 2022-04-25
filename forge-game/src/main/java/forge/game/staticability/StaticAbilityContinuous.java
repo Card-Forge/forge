@@ -56,11 +56,9 @@ import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
-import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.AbilityStatic;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
-import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
 
@@ -319,18 +317,18 @@ public final class StaticAbilityContinuous {
                     String[] restrictions = params.containsKey("SharedRestrictions") ? params.get("SharedRestrictions").split(",") : new String[] {"Card"};
                     addKeywords = CardFactoryUtil.sharedKeywords(addKeywords, restrictions, zones, hostCard, stAb);
                 }
+            }
 
-                if (params.containsKey("CantHaveKeyword")) {
-                    cantHaveKeyword = Keyword.setValueOf(params.get("CantHaveKeyword"));
-                }
+            if (params.containsKey("CantHaveKeyword")) {
+                cantHaveKeyword = Keyword.setValueOf(params.get("CantHaveKeyword"));
+            }
 
-                if (params.containsKey("RemoveKeyword")) {
-                    removeKeywords = Arrays.asList(params.get("RemoveKeyword").split(" & "));
-                }
+            if (params.containsKey("RemoveKeyword")) {
+                removeKeywords = Arrays.asList(params.get("RemoveKeyword").split(" & "));
             }
         }
 
-        if ((layer == StaticAbilityLayer.RULES) && params.containsKey("AddHiddenKeyword")) {
+        if (layer == StaticAbilityLayer.RULES && params.containsKey("AddHiddenKeyword")) {
             addHiddenKeywords.addAll(Arrays.asList(params.get("AddHiddenKeyword").split(" & ")));
         }
 
@@ -675,6 +673,10 @@ public final class StaticAbilityContinuous {
                 if (stAb.hasParam("AddNames")) { // currently only for AllNonLegendaryCreatureNames
                     affectedCard.addChangedName(null, true, se.getTimestamp(), stAb.getId());
                 }
+                if (stAb.hasParam("SetName")) {
+                    affectedCard.addChangedName(stAb.getParam("SetName"), false,
+                            se.getTimestamp(), stAb.getId());
+                }
 
                 // Change color words
                 if (params.containsKey("ChangeColorWordsTo")) {
@@ -724,8 +726,6 @@ public final class StaticAbilityContinuous {
             }
 
             // add keywords
-            // TODO regular keywords currently don't try to use keyword multiplier
-            // (Although nothing uses it at this time)
             if (addKeywords != null || removeKeywords != null || removeAllAbilities) {
                 List<String> newKeywords = null;
                 if (addKeywords != null) {
@@ -806,10 +806,7 @@ public final class StaticAbilityContinuous {
                             abilty = TextUtil.fastReplace(abilty, "ConvertedManaCost", costcmc);
                         }
                         if (abilty.startsWith("AB") || abilty.startsWith("ST")) { // grant the ability
-                            final SpellAbility sa = AbilityFactory.getAbility(abilty, affectedCard, stAb);
-                            sa.setIntrinsic(false);
-                            sa.setGrantorStatic(stAb);
-                            addedAbilities.add(sa);
+                            addedAbilities.add(affectedCard.getSpellAbilityForStaticAbility(abilty, stAb));
                         }
                     }
                 }
@@ -855,15 +852,14 @@ public final class StaticAbilityContinuous {
                 // add Replacement effects
                 if (addReplacements != null) {
                     for (String rep : addReplacements) {
-                        final ReplacementEffect actualRep = ReplacementHandler.parseReplacement(rep, affectedCard, false, stAb);
-                        addedReplacementEffects.add(actualRep);
+                        addedReplacementEffects.add(affectedCard.getReplacementEffectForStaticAbility(rep, stAb));
                     }
                 }
 
                 // add triggers
                 if (addTriggers != null) {
                     for (final String trigger : addTriggers) {
-                        final Trigger actualTrigger = TriggerHandler.parseTrigger(trigger, affectedCard, false, stAb);
+                        final Trigger actualTrigger = affectedCard.getTriggerForStaticAbility(trigger, stAb);
                         // if the trigger has Execute param, which most trigger gained by Static Abilties should have
                         // turn them into SpellAbility object before adding to card
                         // with that the TargetedCard does not need the Svars added to them anymore
@@ -888,7 +884,7 @@ public final class StaticAbilityContinuous {
                             s = TextUtil.fastReplace(s, "ConvertedManaCost", costcmc);
                         }
 
-                        addedStaticAbility.add(StaticAbility.create(s, affectedCard, stAb.getCardState(), false));
+                        addedStaticAbility.add(affectedCard.getStaticAbilityForStaticAbility(s, stAb));
                     }
                 }
 
@@ -937,25 +933,32 @@ public final class StaticAbilityContinuous {
 
             if (controllerMayPlay && (mayPlayLimit == null || stAb.getMayPlayTurn() < mayPlayLimit)) {
                 String mayPlayAltCost = mayPlayAltManaCost;
+                boolean additional = mayPlayAltCost != null && mayPlayAltCost.contains("RegularCost");
 
-                if (mayPlayAltCost != null && mayPlayAltCost.contains("ConvertedManaCost")) {
-                    final String costcmc = Integer.toString(affectedCard.getCMC());
-                    mayPlayAltCost = mayPlayAltCost.replace("ConvertedManaCost", costcmc);
+                if (mayPlayAltCost != null) {
+                    if (mayPlayAltCost.contains("ConvertedManaCost")) {
+                        final String costcmc = Integer.toString(affectedCard.getCMC());
+                        mayPlayAltCost = mayPlayAltCost.replace("ConvertedManaCost", costcmc);
+                    } else if (additional) {
+                        final String regCost = affectedCard.getManaCost().getShortString();
+                        mayPlayAltCost = mayPlayAltManaCost.replace("RegularCost", regCost);
+
+                    }
                 }
 
                 Player mayPlayController = params.containsKey("MayPlayPlayer") ?
                     AbilityUtils.getDefinedPlayers(affectedCard, params.get("MayPlayPlayer"), stAb).get(0) :
                     controller;
                 affectedCard.setMayPlay(mayPlayController, mayPlayWithoutManaCost,
-                        mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
-                        mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
+                        mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null, additional, mayPlayWithFlash,
+                        mayPlayGrantZonePermissions, stAb);
 
                 // If the MayPlay effect only affected itself, check if it is in graveyard and give other player who cast Shaman's Trance MayPlay
                 if (stAb.hasParam("Affected") && stAb.getParam("Affected").equals("Card.Self") && affectedCard.isInZone(ZoneType.Graveyard)) {
                     for (final Player p : game.getPlayers()) {
                         if (p.hasKeyword("Shaman's Trance") && mayPlayController != p) {
                             affectedCard.setMayPlay(p, mayPlayWithoutManaCost,
-                                    mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null,
+                                    mayPlayAltCost != null ? new Cost(mayPlayAltCost, false) : null, additional,
                                     mayPlayWithFlash, mayPlayGrantZonePermissions, stAb);
                         }
                     }
@@ -1070,7 +1073,7 @@ public final class StaticAbilityContinuous {
                 affectedCardsOriginal = new CardCollection(affectedCards);
             }
 
-            affectedCards = CardLists.getValidCards(affectedCards, stAb.getParam("Affected").split(","), controller, hostCard, stAb);
+            affectedCards = CardLists.getValidCards(affectedCards, stAb.getParam("Affected"), controller, hostCard, stAb);
 
             // Add back all cards that are in other player's graveyard, and meet the restrictions without YouOwn/YouCtrl (treat it as in your graveyard)
             if (affectedCardsOriginal != null) {

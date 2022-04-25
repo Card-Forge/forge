@@ -3,8 +3,8 @@ ManaCost:1 W
 Types:Creature Spirit Soldier
 PT:2/2
 K:Disturb:3 W
-AlternateMode:DoubleFaced
 DeckHas:Ability$Graveyard
+AlternateMode:DoubleFaced
 Oracle:Disturb {3}{W} (You may cast this card from your graveyard transformed for its disturb cost.)
 
 ALTERNATE

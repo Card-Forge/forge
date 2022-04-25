@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Creature Human Shaman
 PT:3/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, create a 2/2 green Wolf creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You | LegacyImage$ g 2 2 wolf m10
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You
 A:AB$ DealDamage | Cost$ T | SubAbility$ TapWolves | ValidTgts$ Creature | NumDmg$ 0 | AILogic$ WildHunt | SpellDescription$ Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to target creature. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves. | StackDescription$ Tap all untapped Wolf creatures you control. Each Wolf tapped this way deals damage equal to its power to {c:Targeted}. That creature deals damage equal to its power divided as its controller chooses among any number of those Wolves.
 SVar:TapWolves:DB$ TapAll | ValidCards$ Creature.Wolf+YouCtrl+untapped | RememberTapped$ True | SubAbility$ WildHuntDamage | StackDescription$ None
 SVar:WildHuntDamage:DB$ RepeatEach | RepeatSubAbility$ WolfStrike | UseImprinted$ True | RepeatCards$ Card.IsRemembered | DamageMap$ True | SubAbility$ HuntedDamage | StackDescription$ None

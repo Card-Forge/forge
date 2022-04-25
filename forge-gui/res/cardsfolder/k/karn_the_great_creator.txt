@@ -2,7 +2,7 @@ Name:Karn, the Great Creator
 ManaCost:4
 Types:Legendary Planeswalker Karn
 Loyalty:5
-S:Mode$ Continuous | Affected$ Artifact.OppCtrl | AddHiddenKeyword$ CARDNAME's activated abilities can't be activated. | Description$ Activated abilities of artifacts your opponents control can't be activated.
+S:Mode$ CantBeActivated | Activator$ Opponent | AffectedZone$ Battlefield | ValidCard$ Artifact | ValidSA$ Activated | Description$ Activated abilities of artifacts your opponents control can't be activated.
 SVar:NonStackingEffect:True
 A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | TargetMin$ 0 | TargetMax$ 1 | Planeswalker$ True | ValidTgts$ Artifact.nonCreature | TgtPrompt$ Select target noncreature artifact | Power$ X | Toughness$ X | Types$ Artifact,Creature | Duration$ UntilYourNextTurn | AILogic$ PTByCMC | SpellDescription$ Until your next turn, up to one target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value.
 SVar:X:Targeted$CardManaCost

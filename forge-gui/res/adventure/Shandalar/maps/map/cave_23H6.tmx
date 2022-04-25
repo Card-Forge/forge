@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="63">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+M1f/cupjJJBeUlVVVVVV1UcHjs4f3w==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlm0OgjAMhvdzSzyC11EMF0XBW/Ehx3ANNNZZDWxlLHFN3pQwsj3pu46djVJnTx0Py+Q7f6gyX+bLfFlZWVn7qtZKdTbfdfx1m1mwdq3fGXC8t88QJXkfg7WY14VozcQBuZnr1ZNx/KZjvtuCtdaf6/sGskpyFkJsGJVlGwX9vwjzufuiDfBd0ttfcUqYzZdP2lcuYC8+zGs/rtFgddPTHJBT4XIZxw162MfPJbVMlS+0V8DPK1Gor9L1Cznj1vQz7RV8rhhuOoZZumbfegUyekTfUW53bGu2JcIej+HlWtH+ieGlj/for/TZ8W/+IiPcn6TvoqG14yIFvwcz/e+5M7zciYmTeydLrZcHUsOU6sbVMHU+yb54AgrX1OA=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1lEKgCAMgGFfyu5/hUw6ZgU9iMKqYRvR/4GIDNlUREMAAAAAvisr5ozdq2ilvUWDPG8q61+Mc09CbBBi9Z6XY+25S/k0pLX9zdUdqePp5jwLxzl617E65wcAPDOfveb/asn7fQN62gD8iQTy
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="62" template="../obj/door_up.tx" x="319.688" y="638.393">
+   <properties>
+    <property name="teleport" value="maps/map/cave_23I6.tmx"/>
+    <property name="teleportObjectId" value="61"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

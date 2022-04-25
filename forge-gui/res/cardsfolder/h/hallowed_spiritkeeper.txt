@@ -3,8 +3,8 @@ ManaCost:1 W W
 Types:Creature Avatar
 PT:3/2
 K:Vigilance
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, create X 1/1 white Spirit creature tokens with flying, where X is the number of creature cards in your graveyard.
-SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit flying c14
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create X 1/1 white Spirit creature tokens with flying, where X is the number of creature cards in your graveyard.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 SVar:X:Count$TypeInYourYard.Creature
 DeckHas:Ability$Token
 Oracle:Vigilance\nWhen Hallowed Spiritkeeper dies, create X 1/1 white Spirit creature tokens with flying, where X is the number of creature cards in your graveyard.

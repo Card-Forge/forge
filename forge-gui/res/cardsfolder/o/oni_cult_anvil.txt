@@ -1,0 +1,10 @@
+Name:Oni-Cult Anvil
+ManaCost:B R
+Types:Artifact
+T:Mode$ ChangesZoneAll | ValidCards$ Artifact.YouCtrl | Origin$ Battlefield | TriggerZones$ Battlefield | PlayerTurn$ True | ActivationLimit$ 1 | Execute$ TrigToken | TriggerDescription$ Whenever one or more artifacts you control leave the battlefield during your turn, create a 1/1 colorless Construct artifact creature token. This ability triggers only once each turn.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_construct
+A:AB$ DealDamage | Cost$ T Sac<1/Artifact> | Defined$ Player.Opponent | NumDmg$ 1 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 1 damage to each opponent.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1 | SpellDescription$ You gain 1 life.
+DeckHints:Type$Artifact & Ability$Discard
+DeckHas:Ability$Sacrifice|Token|LifeGain & Type$Construct
+Oracle:Whenever one or more artifacts you control leave the battlefield during your turn, create a 1/1 colorless Construct artifact creature token. This ability triggers only once each turn.\n{T}, Sacrifice an artifact: Oni-Cult Anvil deals 1 damage to each opponent. You gain 1 life.

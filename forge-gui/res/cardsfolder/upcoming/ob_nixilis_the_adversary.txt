@@ -1,0 +1,14 @@
+Name:Ob Nixilis, the Adversary
+ManaCost:1 B R
+Types:Legendary Planeswalker Nixilis
+Loyalty:3
+K:Casualty:X:NonLegendary$ True | CopySetLoyalty$ Casualty:The copy isn't legendary and has starting loyalty X.
+A:AB$ RepeatEach | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | RepeatPlayers$ Opponent | RepeatSubAbility$ DBDrain | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 2 life unless they discard a card. If you control a Demon or Devil, you gain 2 life.
+SVar:DBDrain:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 2 | UnlessCost$ Discard<1/Card> | UnlessPayer$ Player.IsRemembered
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | ConditionPresent$ Demon.YouCtrl,Devil.YouCtrl | StackDescription$ None
+A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | TokenScript$ r_1_1_devil_burn | Planeswalker$ True | SpellDescription$ Create a 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."
+A:AB$ Draw | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 7 | SubAbility$ DBLoseLife | SpellDescription$ Target player draws seven cards and loses 7 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 7 | Defined$ Targeted
+DeckHas:Ability$Sacrifice|LifeGain|Token & Type$Devil
+DeckHints:Type$Demon|Devil
+Oracle:Casualty X. The copy isn't legendary and has starting loyalty X. (As you cast this spell, you may sacrifice a creature with power X. When you do, copy this spell and you may choose new targets for the copy.)\n[+1]: Each opponent loses 2 life unless they discard a card. If you control a Demon or Devil, you gain 2 life.\n[−2]: Create a 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."\n[−7]: Target player draws seven cards and loses 7 life.

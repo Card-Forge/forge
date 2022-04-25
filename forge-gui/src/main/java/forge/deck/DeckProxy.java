@@ -42,7 +42,6 @@ public class DeckProxy implements InventoryItem {
     // cached values
     protected ColorSet color;
     protected ColorSet colorIdentity;
-    protected Boolean ai;
     protected Set<GameFormat> formats;
     protected Set<GameFormat> exhaustiveFormats;
     private Integer mainSize = null;
@@ -141,7 +140,6 @@ public class DeckProxy implements InventoryItem {
         edition = null;
         mainSize = null;
         sbSize = null;
-        ai = null;
     }
 
     public ColorSet getColor() {
@@ -213,32 +211,8 @@ public class DeckProxy implements InventoryItem {
         return colorIdentity;
     }
 
-    public boolean getAI() {
-        if (ai == null) {
-            boolean hasAi = true;
-            for (final Entry<DeckSection, CardPool> deckEntry : getDeck()) {
-                switch (deckEntry.getKey()) {
-                case Main:
-                case Commander:
-                    for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
-                        CardAiHints ai = poolEntry.getKey().getRules().getAiHints();
-                        if (ai.getRemAIDecks()) {
-                            hasAi = false;
-                            break;
-                        }
-                    }
-                    break;
-                case Sideboard: // Let's pretend the sideboard doesn't matter
-                default:
-                    break; //ignore other sections
-                }
-                if (hasAi == false) {
-                    break;
-                }
-            }
-            ai = hasAi;
-        }
-        return ai;
+    public Deck.UnplayableAICards getAI() {
+        return getDeck().getUnplayableAICards();
     }
 
 
@@ -335,10 +309,11 @@ public class DeckProxy implements InventoryItem {
     private boolean isCustomDeckFormat(){
         Deck deck = this.getDeck();
         CardPool cards = deck.getAllCardsInASinglePool();
-        CardEdition.Collection customEditions = StaticData.instance().getCustomEditions();
+        CardEdition.Collection customEditions = StaticData.instance().getEditions();
         for (Entry<PaperCard, Integer> entry : cards){
             String setCode = entry.getKey().getEdition();
-            if (customEditions.contains(setCode))
+            CardEdition E = customEditions.getEditionByCodeOrThrow(setCode);
+            if (E != null && E.getType() == CardEdition.Type.CUSTOM_SET)
                 return true;
         }
         return false;
@@ -373,32 +348,9 @@ public class DeckProxy implements InventoryItem {
         return sbSize;
     }
 
-    public static int getAverageCMC(Deck deck) {
-        int totalCMC = 0;
-        int totalCount = 0;
-        for (final Entry<DeckSection, CardPool> deckEntry : deck) {
-            switch (deckEntry.getKey()) {
-            case Main:
-            case Commander:
-                for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
-                    CardRules rules = poolEntry.getKey().getRules();
-                    CardType type = rules.getType();
-                    if (!type.isLand() && (type.isArtifact() || type.isCreature() || type.isEnchantment() || type.isPlaneswalker() || type.isInstant() || type.isSorcery())) {
-                        totalCMC += rules.getManaCost().getCMC();
-                        totalCount++;
-                    }
-                }
-                break;
-            default:
-                break; //ignore other sections
-            }
-        }
-        return Math.round(totalCMC / totalCount);
-    }
-
     public Integer getAverageCMC() {
         if (avgCMC == null) {
-            avgCMC = getAverageCMC(getDeck());
+            avgCMC = Deck.getAverageCMC(getDeck());
         }
         return avgCMC;
     }

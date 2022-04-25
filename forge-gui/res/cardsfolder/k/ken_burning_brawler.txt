@@ -1,0 +1,11 @@
+Name:Ken, Burning Brawler
+ManaCost:1 R R
+Types:Legendary Creature Human Warrior
+PT:4/2
+K:Prowess
+A:AB$ Pump | Cost$ RW | Defined$ Self | KW$ First Strike | SpellDescription$ NICKNAME gains first strike until end of turn.
+T:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Card.Self | Execute$ TrigCast | OptionalDecider$ You | TriggerDescription$ Shoryuken – When NICKNAME deals combat damage, you may cast a sorcery spell from your hand with mana value less than or equal to that damage without paying its mana cost.
+SVar:TrigCast:DB$ Play | Valid$ Sorcery.YouOwn+cmcLEX | ValidSA$ Spell | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Optional$ True
+SVar:X:TriggerCount$DamageAmount
+DeckHints:Type$Sorcery
+Oracle:Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\n{R/W}: Ken gains first strike until end of turn.\nShoryuken — Whenever Ken deals combat damage, you may cast a sorcery spell from your hand with mana value less than or equal to that damage without paying its mana cost.

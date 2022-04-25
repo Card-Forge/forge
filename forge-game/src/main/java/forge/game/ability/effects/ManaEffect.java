@@ -23,8 +23,8 @@ import forge.game.spellability.AbilityManaPart;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 public class ManaEffect extends SpellAbilityEffect {
 
@@ -144,26 +144,36 @@ public class ManaEffect extends SpellAbilityEffect {
 
                 if (type.equals("EnchantedManaCost")) {
                     Card enchanted = card.getEnchantingCard();
-                    if (enchanted == null )
+                    if (enchanted == null)
                         continue;
 
                     StringBuilder sb = new StringBuilder();
                     int generic = enchanted.getManaCost().getGenericCost();
-                    if (generic > 0)
-                        sb.append(generic);
 
                     for (ManaCostShard s : enchanted.getManaCost()) {
                         ColorSet cs = ColorSet.fromMask(s.getColorMask());
+                        byte chosenColor;
                         if (cs.isColorless())
                             continue;
-                        sb.append(' ');
-                        if (cs.isMonoColor())
-                            sb.append(MagicColor.toShortString(s.getColorMask()));
-                        else /* (cs.isMulticolor()) */ {
-                            byte chosenColor = p.getController().chooseColor(Localizer.getInstance().getMessage("lblChooseSingleColorFromTarget", s.toString()), sa, cs);
-                            sb.append(MagicColor.toShortString(chosenColor));
+                        if (s.isOr2Generic()) { // CR 106.8
+                            chosenColor = p.getController().chooseColorAllowColorless(Localizer.getInstance().getMessage("lblChooseSingleColorFromTarget", s.toString()), card, cs);
+                            if (chosenColor == MagicColor.COLORLESS) {
+                                generic += 2;
+                                continue;
+                            }
                         }
+                        else if (cs.isMonoColor())
+                            chosenColor = s.getColorMask();
+                        else /* (cs.isMulticolor()) */ {
+                            chosenColor = p.getController().chooseColor(Localizer.getInstance().getMessage("lblChooseSingleColorFromTarget", s.toString()), sa, cs);
+                        }
+                        sb.append(MagicColor.toShortString(chosenColor));
+                        sb.append(' ');
                     }
+                    if (generic > 0) {
+                        sb.append(generic);
+                    }
+
                     abMana.setExpressChoice(sb.toString().trim());
                 } else if (type.equals("LastNotedType")) {
                     final StringBuilder sb = new StringBuilder();
@@ -221,10 +231,12 @@ public class ManaEffect extends SpellAbilityEffect {
             // this can happen when mana is based on criteria that didn't match
             if (mana.isEmpty()) {
                 String msg = "AbilityFactoryMana::manaResolve() - special mana effect is empty for";
-                Sentry.getContext().recordBreadcrumb(
-                        new BreadcrumbBuilder().setMessage(msg)
-                        .withData("Card", card.getName()).withData("SA", sa.toString()).build()
-                );
+
+                Breadcrumb bread = new Breadcrumb(msg);
+                bread.setData("Card", card.getName());
+                bread.setData("SA", sa.toString());
+                Sentry.addBreadcrumb(bread, sa);
+
                 continue;
             }
 
@@ -257,6 +269,11 @@ public class ManaEffect extends SpellAbilityEffect {
         String mana = !sa.hasParam("Amount") || StringUtils.isNumeric(sa.getParam("Amount"))
                 ? GameActionUtil.generatedMana(sa) : "mana";
         sb.append("Add ").append(toManaString(mana)).append(".");
+        if (sa.hasParam("RestrictValid")) {
+            String desc = sa.getDescription();
+            int i = desc.indexOf("Spend this");
+            sb.append(" ").append(desc, i, desc.indexOf(".", i) + 1);
+        }
         return sb.toString();
     }
 }

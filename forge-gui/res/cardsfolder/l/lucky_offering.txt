@@ -1,0 +1,7 @@
+Name:Lucky Offering
+ManaCost:W
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Artifact.cmcLE3 | TgtPrompt$ Choose target artifact with mana value 3 or less | SubAbility$ DBGainLife | SpellDescription$ Destroy target artifact with mana value 3 or less. You gain 3 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3
+DeckHas:Ability$LifeGain
+Oracle:Destroy target artifact with mana value 3 or less. You gain 3 life.

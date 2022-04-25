@@ -1,11 +1,11 @@
 Name:Dusk
 ManaCost:2 W W
-AlternateMode: Split
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 2 W W | ValidCards$ Creature.powerGE3 | SpellDescription$ Destroy all creatures with power 3 or greater.
 SVar:NeedsToPlayVar:Y GTZ
 SVar:Y:Count$Valid Creature.OppCtrl+powerGE3
 SVar:Z:Count$Valid Creature.YouCtrl+powerGE3
+AlternateMode:Split
 Oracle:Destroy all creatures with power 3 or greater.
 
 ALTERNATE

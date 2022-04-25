@@ -1,0 +1,8 @@
+Name:Whack
+ManaCost:3 B
+Types:Sorcery
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ CostReduction | Relative$ True | EffectZone$ All | Description$ This spell costs {3} less to cast if it targets a a white creature.
+SVar:CostReduction:Count$Compare CheckTgt GE1.3.0
+SVar:CheckTgt:Targeted$Valid Creature.White
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -4 | NumDef$ -4 | IsCurse$ True | SpellDescription$ Target creature gets -4/-4 until end of turn.
+Oracle:This spell costs {3} less to cast if it targets a white creature.\nTarget creature gets -4/-4 until end of turn.

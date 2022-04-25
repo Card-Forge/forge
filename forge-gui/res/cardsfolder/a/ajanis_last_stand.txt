@@ -2,7 +2,7 @@ Name:Ajani's Last Stand
 ManaCost:2 W W
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Creature.YouCtrl,Planeswalker.YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDiesToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature or planeswalker you control dies, you may sacrifice CARDNAME. If you do, create a 4/4 white Avatar creature token with flying.
-SVar:TrigDiesToken:AB$ Token | Cost$ Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_4_4_avatar_flying | LegacyImage$ w 4 4 avatar flying m19
+SVar:TrigDiesToken:AB$ Token | Cost$ Sac<1/CARDNAME> | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_4_4_avatar_flying
 T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.OppCtrl | Execute$ TrigDiscardedToken | TriggerZones$ Battlefield | TriggerDescription$ When a spell or ability an opponent controls causes you to discard this card, if you control a Plains, create a 4/4 white Avatar creature token with flying.
-SVar:TrigDiscardedToken:DB$ Token | ConditionPresent$ Plains.YouCtrl | ConditionCompare$ GE1 | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_4_4_avatar_flying | LegacyImage$ w 4 4 avatar flying m19
+SVar:TrigDiscardedToken:DB$ Token | ConditionPresent$ Plains.YouCtrl | ConditionCompare$ GE1 | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ w_4_4_avatar_flying
 Oracle:Whenever a creature or planeswalker you control dies, you may sacrifice Ajani's Last Stand. If you do, create a 4/4 white Avatar creature token with flying.\nWhen a spell or ability an opponent controls causes you to discard this card, if you control a Plains, create a 4/4 white Avatar creature token with flying.

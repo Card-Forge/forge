@@ -1,0 +1,10 @@
+Name:Seven-Tail Mentor
+ManaCost:3 W
+Types:Creature Fox Samurai
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield or dies, put a +1/+1 counter on target creature or Vehicle you control.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, put a +1/+1 counter on target creature or Vehicle you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl,Vehicle.YouCtrl | TgtPrompt$ Select target creature or Vehicle you control | CounterType$ P1P1 | CounterNum$ 1
+DeckHints:Type$Creature|Vehicle
+DeckHas:Ability$Counters
+Oracle:When Seven-Tail Mentor enters the battlefield or dies, put a +1/+1 counter on target creature or Vehicle you control.

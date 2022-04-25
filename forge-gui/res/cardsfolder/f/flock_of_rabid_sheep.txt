@@ -1,9 +1,9 @@
 Name:Flock of Rabid Sheep
 ManaCost:X G G
 Types:Sorcery
-SVar:X:Count$xPaid
 A:SP$ Repeat | Cost$ X G G | MaxRepeat$ X | RepeatSubAbility$ DBFlip | AILogic$ MaxX | StackDescription$ SpellDescription | SpellDescription$ Flip X coins. For each flip you win, create a 2/2 green Sheep creature token named Rabid Sheep.
 SVar:DBFlip:DB$ FlipACoin | WinSubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenScript$ g_2_2_rabid_sheep | TokenOwner$ You
-DeckHas:Ability$Token
+SVar:DBToken:DB$ Token | TokenScript$ rabid_sheep | TokenOwner$ You
+SVar:X:Count$xPaid
+DeckHas:Ability$Token & Type$Sheep
 Oracle:Flip X coins. For each flip you win, create a 2/2 green Sheep creature token named Rabid Sheep.

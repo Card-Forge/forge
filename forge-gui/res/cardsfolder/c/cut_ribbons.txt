@@ -1,8 +1,8 @@
 Name:Cut
 ManaCost:1 R
-AlternateMode: Split
 Types:Sorcery
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature.
+AlternateMode:Split
 Oracle:Cut deals 4 damage to target creature.
 
 ALTERNATE

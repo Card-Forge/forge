@@ -1,0 +1,11 @@
+Name:Paragon of Modernity
+ManaCost:4
+Types:Artifact Creature Angel Warrior
+PT:2/2
+K:Flying
+A:AB$ Branch | Cost$ 3 | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ3 | FalseSubAbility$ DBPump | TrueSubAbility$ DBPutCounter | SpellDescription$ CARDNAME gets +1/+1 until end of turn. If exactly three colors of mana were spent to activate this ability, put a +1/+1 counter on it instead.
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1
+SVar:X:Count$ManaColorsPaid
+DeckHas:Ability$Counters
+Oracle:Flying\n{3}: Paragon of Modernity gets +1/+1 until end of turn. If exactly three colors of mana were spent to activate this ability, put a +1/+1 counter on it instead.

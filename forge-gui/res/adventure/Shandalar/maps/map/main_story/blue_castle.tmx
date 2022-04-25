@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="52">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="4425" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzjE2Bg4BvFGFgQiNdgwQI0tpcfiLEB3lF7qYqL+RkYCoC4kB9iXz6UX8RPn/QF8zet/UlPe0F5Zj0Qr8NCr4XauxqHPIgmN2/hSkPEAnLDAmZvIzDNNJGAm/mpY688kFYgAStSGPej9o7aO2rvqL3k2rsXSO/DglVxiO+nkr24gBIB+VF7icOwthQ2DGpfgezNx6OGFm0uUFiA7B2I9tVQthcA8ByJ4Q==
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt0rEJADAIAEGrTJD9x8h8TiBoFZC78uuPANjlnlmHjlf8U3Xo8BXwWwKJagMl
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwQEBAAAAgiD/r25IQAEAAPBoDhAAAQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../../obj/gold.tx" x="323" y="219"/>
+  <object id="48" template="../../obj/treasure.tx" x="208" y="80">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;life&quot;,
+    &quot;count&quot;: 2
+  }
+]
+</property>
+    <property name="sprite" value="sprites/2life.atlas"/>
+   </properties>
+  </object>
+  <object id="49" template="../../obj/gold.tx" x="106" y="216"/>
+  <object id="50" template="../../obj/enemy.tx" x="200" y="148" width="32" height="32">
+   <properties>
+    <property name="enemy" value="Lorthos"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/entry_up.tx" x="209" y="480">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

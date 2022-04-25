@@ -1,0 +1,10 @@
+Name:A-Stitched Assistant
+ManaCost:1 U
+Types:Creature Zombie
+PT:2/1
+K:Exploit
+T:Mode$ Exploited | ValidCard$ Creature | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ When CARDNAME exploits a creature, scry 2, then draw a card.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+DeckHas:Ability$Sacrifice
+Oracle:Exploit \nWhen Stitched Assistant exploits a creature, scry 2, then draw a card.

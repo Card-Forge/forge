@@ -2,7 +2,7 @@ Name:Warren Weirding
 ManaCost:1 B
 Types:Tribal Sorcery Goblin
 A:SP$ Sacrifice | Cost$ 1 B | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | RememberSacrificed$ True | SubAbility$ DBToken | SpellDescription$ Target player sacrifices a creature. If a Goblin is sacrificed this way, that player creates two 1/1 black Goblin Rogue creature tokens, and those tokens gain haste until end of turn.
-SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card.Goblin | ConditionCompare$ GE1 | TokenAmount$ 2 | TokenScript$ b_1_1_goblin_rogue | TokenOwner$ Targeted | LegacyImage$ b 1 1 goblin rogue mor | RememberTokens$ True | ForgetOtherRemembered$ True | SubAbility$ AdditionalPump
+SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card.Goblin | ConditionCompare$ GE1 | TokenAmount$ 2 | TokenScript$ b_1_1_goblin_rogue | TokenOwner$ Targeted | RememberTokens$ True | ForgetOtherRemembered$ True | SubAbility$ AdditionalPump
 SVar:AdditionalPump:DB$ PumpAll | ValidCards$ Creature.IsRemembered | KW$ Haste | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All

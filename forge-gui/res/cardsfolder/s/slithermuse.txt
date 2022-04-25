@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Creature Elemental
 PT:3/3
 K:Evoke:3 U
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigChooseOpp | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigChooseOpp | TriggerDescription$ When CARDNAME leaves the battlefield, choose an opponent. If that player has more cards in hand than you, draw cards equal to the difference.
 SVar:TrigChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ MostCardsInHand | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ You | IsPresent$ Card.ChosenCtrl | PresentCompare$ GTY | PresentZone$ Hand
 SVar:Y:Count$InYourHand

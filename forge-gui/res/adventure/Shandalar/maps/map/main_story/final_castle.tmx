@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="114" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="63">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="114">
+  <data encoding="base64" compression="zlib">
+   eJztw8EJAAAMA6H7dn/IvF1EwV1NVVVVVVVVVVVVVVVV1R62fUyd
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="114">
+  <data encoding="base64" compression="zlib">
+   eJztmOlOFEEQgPuXf3Z6Z0AwJkIEE58ABE8OBR9CHgIFUf4gUZ8BPLlRTDzw4I8c8gwcKh4cAg9CTaY2NOP0hJ7q2c1OapIvne2p3i/Vma6a3Za8EC3Mf7QDfyNoS9nbCkRd19hrlSkpxDgwIQPfGH6elMV5vgp5p51nMb3+mdkGtiLGTfT+0dz3x6RnS/cMnT4R/5n6rBW8D10hHhnw2LXjPesJUWdAvcde9rKXvaXxLsH3fIvgvGZ+2ZJXd53z4u+z93gU3qWi8N+vfO9YTEwa71z+XvjeUrxflbP3hiEd6L2eYC2FLHpvAv8U9oB9HHfRuxOaV+M7CTlR6kbSvWAve7PkfQN97JWG19gHp2NiZqT9mlLuddK0f6leSh+8ZMhl9F5MsJZCFr1XgZ8Kv4DfOG6g90doXo2/QsiJUjeS7gV72Zsl7yj0sRcaXmIffB4TMyLt15Ryr5Om/Uv1UvrgSc+MKi/wVhquo5Km9xTwSeELMIfjZ/R+DM2r8dWEnCjnN+lesJe9WfL2u0L0abjnBt67MTH3Xfs1pdzrpGkfUb2UfpT3zHDRKw3XUUnTWwG8U/gAzOL4Hr1vQ/NqvEfIiXJ+k+4Fe9mbJW8v9JPbGu5gP+qOielx7deULNbJYngb82ZcwN9lDYbrqKTpbQZWFdaB7ziuoXclNK/GNxFyopzfpHvBXvZmyftMCjGs4Qn+XzcUE/NU2q8ppaqTtU7gPePQvqfGMUP1mq6lwN506IIzMe8csoDer87R+VvSfn7HqRu282cve9PwLgEPcocM5gLvQO7o/KJlb1T+NurGAUtl9o4=
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="114">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJACAMRUE30AHEUcXRLdzAIgRy1/wy5YO0BkTb/e3psXfneLtG7F0AAAAA/vgjAZCBHgGQgR4BkIEeAVCZDgLVXAhtCMU=
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="114">
+  <data encoding="base64" compression="zlib">
+   eJzt2EENAEAIA0EcnGSsnwxKmFHQ3yatAib0m14AAAAAwAZ+JAAS6BEACfQIgAR6BMBlOghc8gEcxwNV
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="208" y="1824">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="47" template="../../obj/gold.tx" x="323" y="219"/>
+  <object id="49" template="../../obj/gold.tx" x="106" y="216"/>
+  <object id="50" template="../../obj/enemy.tx" x="185" y="213" width="64" height="64">
+   <properties>
+    <property name="enemy" value="Sliver Queen"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/enemy.tx" x="208" y="1456">
+   <properties>
+    <property name="enemy" value="Dragon"/>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/enemy.tx" x="208" y="1231">
+   <properties>
+    <property name="enemy" value="Elemental"/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/enemy.tx" x="208" y="1008">
+   <properties>
+    <property name="enemy" value="Dinosaur"/>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="208" y="783">
+   <properties>
+    <property name="enemy" value="Eldraine Knight"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/enemy.tx" x="208" y="544">
+   <properties>
+    <property name="enemy" value="Demon"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/gate.tx" x="208" y="1680">
+   <properties>
+    <property name="dialog">[{
+  &quot;text&quot;:&quot;A big red gate is blocking the path&quot;,
+  &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+      &quot;name&quot;:&quot;unlock with red key&quot;,     
+      &quot;condition&quot;:[ { &quot;item&quot;: &quot;Red Key&quot; } ],    
+      &quot;text&quot;:&quot;The gate is unlocked&quot;,
+      &quot;options&quot;:[
+        {
+          &quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[{&quot;removeItem&quot;:&quot;Red Key&quot;,&quot;deleteMapObject&quot;:-1}]
+        }
+      ]
+    }
+  ]
+}]</property>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/gate.tx" x="208" y="1440">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A big blue gate is blocking the path&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+        &quot;name&quot;:&quot;unlock with blue key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Blue Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[ {&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[{&quot;removeItem&quot;:&quot;Blue Key&quot;,&quot;deleteMapObject&quot;:-1}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/gate.tx" x="208" y="1216">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A big green gate is blocking the path&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+        &quot;name&quot;:&quot;unlock with green key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Green Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[ {&quot;removeItem&quot;:&quot;Green Key&quot;,&quot;deleteMapObject&quot;:-1}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/gate.tx" x="208" y="992">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A big white gate is blocking the path&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+        &quot;name&quot;:&quot;unlock with white key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;White Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;removeItem&quot;:&quot;White Key&quot;,&quot;deleteMapObject&quot;:-1}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/gate.tx" x="208" y="768">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A big black gate is blocking the path&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+        &quot;name&quot;:&quot;unlock with black key&quot;,     
+        &quot;condition&quot;:[{&quot;item&quot;:&quot;Black Key&quot;}],    
+        &quot;text&quot;:&quot;The gate is unlocked&quot;,
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;removeItem&quot;:&quot;Black Key&quot;,&quot;deleteMapObject&quot;:-1}]} ]
+    }
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/treasure.tx" x="208" y="80">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;life&quot;,
+    &quot;count&quot;: 3
+  }
+]
+</property>
+    <property name="sprite" value="sprites/3life.atlas"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

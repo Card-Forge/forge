@@ -2,6 +2,6 @@ Name:Giant Ox
 ManaCost:1 W
 Types:Creature Ox
 PT:0/6
-K:CARDNAME crews Vehicles using its toughness rather than its power.
+S:Mode$ CrewValue | ValidCard$ Card.Self | Value$ Toughness | Description$ CARDNAME crews Vehicles using its toughness rather than its power.
 DeckHints:Type$Vehicle
 Oracle:Giant Ox crews Vehicles using its toughness rather than its power.

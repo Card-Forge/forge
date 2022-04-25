@@ -3,6 +3,6 @@ ManaCost:U B
 Types:Creature Sliver
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Bounce | Description$ All Slivers have "Pay 2 life, Return this permanent to its owner's hand."
-SVar:Bounce:AB$ChangeZone | Cost$ PayLife<2> | Defined$ Self | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return this permanent to its owner's hand
+SVar:Bounce:AB$ ChangeZone | Cost$ PayLife<2> | Defined$ Self | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return this permanent to its owner's hand
 SVar:PlayMain1:TRUE
 Oracle:All Slivers have "Pay 2 life: Return this permanent to its owner's hand."

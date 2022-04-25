@@ -20,7 +20,6 @@ import forge.localinstance.skin.FSkinProp;
 import forge.screens.LoadingOverlay;
 import forge.screens.constructed.LobbyScreen;
 import forge.screens.online.OnlineMenu.OnlineScreen;
-import forge.util.Localizer;
 
 public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
     public OnlineLobbyScreen() {
@@ -60,7 +59,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
             FThreads.invokeInBackgroundThread(new Runnable() {
                 @Override
                 public void run() {
-                    final boolean callBackAlwaysTrue = SOptionPane.showOptionDialog(msg, Localizer.getInstance().getMessage("lblError"), FSkinProp.ICO_WARNING, ImmutableList.of(Localizer.getInstance().getMessage("lblOk")), 1) == 0;
+                    final boolean callBackAlwaysTrue = SOptionPane.showOptionDialog(msg, Forge.getLocalizer().getMessage("lblError"), FSkinProp.ICO_WARNING, ImmutableList.of(Forge.getLocalizer().getMessage("lblOk")), 1) == 0;
                     if (callBackAlwaysTrue) { //to activate online menu popup when player press play online
                         GuiBase.setInterrupted(false);
 
@@ -107,7 +106,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
                             }
 
                             final boolean joinServer = url.length() > 0;
-                            final String caption = joinServer ?  Localizer.getInstance().getMessage("lblConnectingToServer") : Localizer.getInstance().getMessage("lblStartingServer");
+                            final String caption = joinServer ?  Forge.getLocalizer().getMessage("lblConnectingToServer") : Forge.getLocalizer().getMessage("lblStartingServer");
                             LoadingOverlay.show(caption, new Runnable() {
                                 @Override
                                 public void run() {
@@ -116,7 +115,7 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
                                     if (joinServer) {
                                         result = NetConnectUtil.join(url, OnlineLobbyScreen.this, chatInterface);
                                         if (result.getMessage() == ForgeConstants.CLOSE_CONN_COMMAND) { //this message is returned via netconnectutil on exception
-                                            closeConn(Localizer.getInstance().getMessage("lblDetectedInvalidHostAddress", url));
+                                            closeConn(Forge.getLocalizer().getMessage("lblDetectedInvalidHostAddress", url));
                                             return;
                                         }
                                     }

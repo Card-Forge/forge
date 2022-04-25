@@ -7,8 +7,10 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -31,47 +33,64 @@ public class DiscardEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final String mode = sa.getParam("Mode");
+        final List<Player> tgtPlayers = getTargetPlayers(sa).filter(PlayerPredicates.canDiscardBy(sa, true));
         final StringBuilder sb = new StringBuilder();
 
-        final Iterable<Player> tgtPlayers = Iterables.filter(getTargetPlayers(sa), PlayerPredicates.canDiscardBy(sa, true));
+        if (!tgtPlayers.isEmpty()) {
+            final String tgtPs = Lang.joinHomogenous(tgtPlayers);
+            final String mode = sa.getParam("Mode");
+            final boolean revealYouChoose = mode.equals("RevealYouChoose");
+            final boolean revealDiscardAll = mode.equals("RevealDiscardAll");
+            final Player you = sa.getActivatingPlayer();
+            final boolean oneTgtP = tgtPlayers.size() == 1;
 
-        if (!Iterables.isEmpty(tgtPlayers)) {
-            sb.append(Lang.joinHomogenous(tgtPlayers)).append(" ");
+            sb.append(tgtPs).append(" ");
 
-            if (mode.equals("RevealYouChoose")) {
-                sb.append("reveals their hand.").append("  You choose (");
-            } else if (mode.equals("RevealDiscardAll")) {
-                sb.append("reveals their hand. Discard (");
+            if (revealYouChoose) {
+                sb.append(oneTgtP ? "reveals their hand. " : "reveal their hands. ");
+                sb.append(you).append(" chooses ");
+            } else if (revealDiscardAll) {
+                sb.append(oneTgtP ? "reveals their hand. " : "reveal their hands. ");
+                sb.append("They discard ");
             } else {
-                sb.append("discards ");
+                sb.append(oneTgtP ? "discards " : "discard ");
             }
 
-            int numCards = 1;
-            if (sa.hasParam("NumCards")) {
-                numCards = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa);
+            int numCards = sa.hasParam("NumCards") ?
+                    AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
+            final boolean oneCard = numCards == 1 && oneTgtP;
+
+            String valid = oneCard ? "card" : "cards";
+            if (sa.hasParam("DiscardValid")) {
+                String validD = sa.hasParam("DiscardValidDesc") ? sa.getParam("DiscardValidDesc")
+                        : sa.getParam("DiscardValid");
+                if (validD.equals("card.nonLand")) {
+                    validD = "nonland";
+                } else if (CardType.CoreType.isValidEnum(validD)) {
+                    validD = validD.toLowerCase();
+                }
+                valid = validD.contains(" card") ?
+                        (oneCard ? validD : validD.replace(" card", " cards")) : validD + " " + valid;
             }
 
             if (mode.equals("Hand")) {
-                sb.append("their hand");
-            } else if (mode.equals("RevealDiscardAll")) {
-                sb.append("All");
+                sb.append(oneTgtP ? "their hand" : "their hands");
+            } else if (revealDiscardAll) {
+                sb.append("all");
             } else if (sa.hasParam("AnyNumber")) {
                 sb.append("any number");
             } else if (sa.hasParam("NumCards") && sa.getParam("NumCards").equals("X")
                     && sa.getSVar("X").equals("Remembered$Amount")) {
                 sb.append("that many");
             } else {
-                sb.append(numCards == 1 ? "a card" : (Lang.getNumeral(numCards) + " cards"));
+                sb.append(Lang.nounWithNumeralExceptOne(numCards, valid));
             }
 
-            if (mode.equals("RevealYouChoose")) {
-                sb.append(" to discard");
-            } else if (mode.equals("RevealDiscardAll")) {
-                String valid = sa.getParam("DiscardValid");
-                if (valid == null) {
-                    valid = "Card";
-                }
+            if (revealYouChoose) {
+                sb.append(valid.contains(" from ") ? ". " : (oneTgtP ? " from it. " : " from them. ")).append(tgtPs);
+                sb.append(oneTgtP ? " discards " : " discard ");
+                sb.append(oneCard ? "that card" : "those cards");
+            } else if (revealDiscardAll) {
                 sb.append(" of type: ").append(valid);
             }
 
@@ -233,12 +252,12 @@ public class DiscardEffect extends SpellAbilityEffect {
                                 "X", Integer.toString(AbilityUtils.calculateAmount(source, "X", sa)));
                     }
 
-                    toBeDiscarded = CardLists.getValidCards(dPHand, valid.split(","), source.getController(), source, sa);
+                    toBeDiscarded = CardLists.getValidCards(dPHand, valid, source.getController(), source, sa);
                     toBeDiscarded = CardLists.filter(toBeDiscarded, Presets.NON_TOKEN);
                     if (toBeDiscarded.size() > 1) {
                         toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
                     }
-                } else if (mode.equals("RevealYouChoose") || mode.equals("RevealTgtChoose") || mode.equals("TgtChoose")) {
+                } else if (mode.endsWith("YouChoose") || mode.endsWith("TgtChoose")) {
                     CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
                     dPHand = CardLists.filter(dPHand, Presets.NON_TOKEN);
                     if (dPHand.isEmpty())
@@ -250,18 +269,20 @@ public class DiscardEffect extends SpellAbilityEffect {
                     }
 
                     final String valid = sa.getParamOrDefault("DiscardValid", "Card");
-                    String[] dValid = valid.split(",");
-                    CardCollection validCards = CardLists.getValidCards(dPHand, dValid, source.getController(), source, sa);
+                    CardCollection validCards = CardLists.getValidCards(dPHand, valid, source.getController(), source, sa);
 
                     Player chooser = p;
-                    if (mode.equals("RevealYouChoose")) {
+                    if (mode.endsWith("YouChoose")) {
                         chooser = source.getController();
                     } else if (mode.equals("RevealTgtChoose")) {
                         chooser = firstTarget;
                     }
 
-                    if (mode.startsWith("Reveal") && p != chooser) {
+                    if (mode.startsWith("Reveal")) {
                         game.getAction().reveal(dPHand, p);
+                    }
+                    if (mode.startsWith("Look") && p != chooser) {
+                        game.getAction().revealTo(dPHand, chooser);
                     }
 
                     if (!p.canDiscardBy(sa, true)) {
@@ -277,7 +298,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
                     }
 
-                    if (mode.startsWith("Reveal") ) {
+                    if (mode.startsWith("Reveal") && p != chooser) {
                         p.getController().reveal(toBeDiscarded, ZoneType.Hand, p, Localizer.getInstance().getMessage("lblPlayerHasChosenCardsFrom", chooser.getName()));
                     }
                 }
@@ -285,7 +306,11 @@ public class DiscardEffect extends SpellAbilityEffect {
             discardedMap.put(p, toBeDiscarded);
         }
 
-        discard(sa, table, true, discardedMap);
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
+        params.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+        params.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
+
+        discard(sa, table, true, discardedMap, params);
 
         // run trigger if something got milled
         table.triggerChangesZoneAll(game, sa);

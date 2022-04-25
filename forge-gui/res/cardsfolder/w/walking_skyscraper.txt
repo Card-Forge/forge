@@ -1,0 +1,10 @@
+Name:Walking Skyscraper
+ManaCost:8
+Types:Artifact Creature Construct
+PT:8/8
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each modified creature you control. (Equipment, Auras you control, and counters are modifications.)
+SVar:X:Count$Valid Creature.YouCtrl+modified
+K:Trample
+S:Mode$ Continuous | Affected$ Card.Self+untapped | AddKeyword$ Hexproof | Description$ CARDNAME has hexproof as long as it's untapped. (It can't be the target of spells or abilities your opponents control.)
+DeckHints:Type$Aura|Equipment & Ability$Counters
+Oracle:This spell costs {1} less to cast for each modified creature you control. (Equipment, Auras you control, and counters are modifications.)\nTrample\nWalking Skyscraper has hexproof as long as it's untapped. (It can't be the target of spells or abilities your opponents control.)

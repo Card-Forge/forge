@@ -1,6 +1,6 @@
 [format]
-Name:Standard, Scars of Mirrodin
+Name:Standard (SOM)
 Type:Historic
 Subtype:Standard
-Effective:2010-07-16
+Effective:2010-10-01
 Sets:ZEN, WWK, ROE, M11, SOM

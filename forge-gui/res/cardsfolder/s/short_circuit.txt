@@ -1,0 +1,8 @@
+Name:Short Circuit
+ManaCost:1 U
+Types:Enchantment Aura
+K:Flash
+K:Enchant artifact or creature
+A:SP$ Attach | ValidTgts$ Creature,Artifact | TgtPrompt$ Select target artifact or creature | AITgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -3 | RemoveKeyword$ Flying | Description$ As long as enchanted permanent is a creature, it gets -3/-0 and loses flying.
+Oracle:Flash\nEnchant artifact or creature\nAs long as enchanted permanent is a creature, it gets -3/-0 and loses flying.

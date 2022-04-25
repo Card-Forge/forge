@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+M1f/cupjJJBeUlVVVVVV1UcHjs4f3w==
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztl31qQyEQxN+fT+i18kFP0pu1TXKrmFePUQcyZLOoIR/gtLgwyBOMP3d1NOswTeuhoaGhoX+t3TxNMbeHuT9Lie2U28/cJgGeEhviKJi/7ZmN8S7AZLVk/WR9z7r1xblAjVcCPKX8IXeKtaU2QYMPtdwbn8M3WvLh/MZw2wc57t65OcZ7LbnoI2TBN1sf6Oda7HqiGbefL/p4a7NxTAzXfhYr898btXUwWnzWw+AR3O+PRG18qR998CaoxcczSP/ynut/8+us0nzJnBcbKzcPmKxXgu8WYwrX91WJLRXWZRn8er1vL+E5D/dz1tj83iixpxfw1Bh9/Wp3A2vZ4+7w+7LF1+vt0qqP36u97w8v70tqbxfWXzF3VO/915Ldf+r1VXyb2voq8tn6Kp4P+w5QPB9LuPx3U80hRJ9WzCHz+FdyqM73Sp/5BeUEHBA=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt1j0OgCAMgNFOChdz8JqicfBgHsOFgcES7FBM+N5Cw2+BkCACAAAwrrl3AoDBFUSW6LPW0dhvKuI12vKrDUkvddr7PXMZlPY752c9Q23eL/Yi1vbhdcfett4JAADM/v53bv23ABjHAysGB58=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="62" template="../obj/door_up.tx" x="321.655" y="637.409">
+   <properties>
+    <property name="teleport" value="maps/map/cave_23B2.tmx"/>
+    <property name="teleportObjectId" value="61"/>
+   </properties>
+  </object>
+  <object id="63" template="../obj/treasure.tx" x="40.3333" y="338.333"/>
+  <object id="64" template="../obj/gold.tx" x="56.3333" y="312.667"/>
+  <object id="65" template="../obj/enemy.tx" x="79.6667" y="331.333">
+   <properties>
+    <property name="enemy" value="Hydra"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="312" y="226.333">
+   <properties>
+    <property name="enemy" value="Green Beast"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/gold.tx" x="326.667" y="168"/>
+  <object id="68" template="../obj/gold.tx" x="278.667" y="206"/>
+  <object id="69" template="../obj/treasure.tx" x="510.333" y="315.667"/>
+  <object id="70" template="../obj/treasure.tx" x="467.667" y="315.667"/>
+  <object id="71" template="../obj/enemy.tx" x="429.333" y="329.667">
+   <properties>
+    <property name="enemy" value="Cyclops"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

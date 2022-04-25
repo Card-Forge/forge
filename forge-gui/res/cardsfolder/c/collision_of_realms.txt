@@ -1,0 +1,8 @@
+Name:Collision of Realms
+ManaCost:6 R
+Types:Sorcery
+A:SP$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBShuffle | SpellDescription$ Each player shuffles all creatures they own into their library. Each player who shuffled a nontoken creature into their library this way reveals cards from the top of their library until they reveal a creature card, then puts that card onto the battlefield and the rest on the bottom of their library in a random order.
+SVar:DBShuffle:DB$ ChangeZoneAll | ChangeType$ Creature.RememberedPlayerOwn | Imprint$ True | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBDigUntil
+SVar:DBDigUntil:DB$ DigUntil | ConditionDefined$ Imprinted | ConditionPresent$ Card.nonToken | ConditionCompare$ GE1 | Defined$ Remembered | Amount$ 1 | Valid$ Creature | FoundDestination$ Battlefield | RevealedDestination$ Library | Reveal$ True | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | SubAbility$ DBCleanImprint
+SVar:DBCleanImprint:DB$ Cleanup | ClearImprinted$ True
+Oracle:Each player shuffles all creatures they own into their library. Each player who shuffled a nontoken creature into their library this way reveals cards from the top of their library until they reveal a creature card, then puts that card onto the battlefield and the rest on the bottom of their library in a random order.

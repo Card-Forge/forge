@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.card.CardType;
+import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Maps;
@@ -211,26 +213,30 @@ public class SacrificeEffect extends SpellAbilityEffect {
         String valid = sa.getParamOrDefault("SacValid", "Self");
         String num = sa.getParamOrDefault("Amount", "1");
 
+        if (sa.hasParam("Optional")) { // TODO make boolean and handle verb reconjugation throughout
+            sb.append("(OPTIONAL) ");
+        }
+
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
 
         if (valid.equals("Self")) {
             sb.append("Sacrifices ").append(sa.getHostCard().toString());
         } else if (valid.equals("Card.AttachedBy")) {
             final Card toSac = sa.getHostCard().getEnchantingCard();
-            sb.append(toSac.getController()).append(" Sacrifices ").append(toSac).append(".");
+            sb.append(toSac.getController()).append(" sacrifices ").append(toSac).append(".");
         } else {
-            for (final Player p : tgts) {
-                sb.append(p.getName()).append(" ");
-            }
+            sb.append(Lang.joinHomogenous(tgts)).append(" ");
+            boolean oneTgtP = tgts.size() == 1;
 
             String msg = sa.getParamOrDefault("SacMessage", valid);
+            msg = CardType.CoreType.isValidEnum(msg) ? msg.toLowerCase() : msg;
 
             if (sa.hasParam("Destroy")) {
-                sb.append("Destroys ");
+                sb.append(oneTgtP ? "destroys " : " destroy ");
             } else {
-                sb.append("Sacrifices ");
+                sb.append(oneTgtP ? "sacrifices " : "sacrifice ");
             }
-            sb.append(amount).append(" ").append(msg).append(".");
+            sb.append(Lang.nounWithNumeralExceptOne(amount, msg)).append(".");
         }
 
         return sb.toString();

@@ -1,0 +1,9 @@
+Name:Out of the Way
+ManaCost:3 U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ CostReduction | Relative$ True | EffectZone$ All | Description$ This spell costs {2} less to cast if it targets a a green permanent.
+SVar:CostReduction:Count$Compare CheckTgt GE1.2.0
+SVar:CheckTgt:Targeted$Valid Permanent.Green
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target nonland permanent an opponent controls to its owner's hand.
+SVar:DBDraw:DB$ Draw
+Oracle:This spell costs {2} less to cast if it targets a green permanent.\nReturn target nonland permanent an opponent controls to its owner's hand.\nDraw a card.

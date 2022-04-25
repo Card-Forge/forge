@@ -332,11 +332,16 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
         for (CardRules cr : rulesByName.values()) {
             if (!contains(cr.getName())) {
-                if (upcomingSet != null) {
-                    addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown));
-                } else if (enableUnknownCards && !this.filtered.contains(cr.getName())) {
-                    System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
-                    addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special));
+                if (!cr.isCustom()) {
+                    if (upcomingSet != null) {
+                        addCard(new PaperCard(cr, upcomingSet.getCode(), CardRarity.Unknown));
+                    } else if (enableUnknownCards && !this.filtered.contains(cr.getName())) {
+                        System.err.println("The card " + cr.getName() + " was not assigned to any set. Adding it to UNKNOWN set... to fix see res/editions/ folder. ");
+                        addCard(new PaperCard(cr, CardEdition.UNKNOWN.getCode(), CardRarity.Special));
+                    }
+                } else {
+                    System.err.println("The custom card " + cr.getName() + " was not assigned to any set. Adding it to custom USER set, and will try to load custom art from USER edition.");
+                    addCard(new PaperCard(cr, "USER", CardRarity.Special));
                 }
             }
         }
@@ -867,6 +872,23 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }));
     }
 
+    public Collection<PaperCard> getUniqueCardsNoAltNoOnline() {
+        return Lists.newArrayList(Iterables.filter(getUniqueCardsNoAlt(), new Predicate<PaperCard>() {
+            @Override
+            public boolean apply(final PaperCard paperCard) {
+                CardEdition edition = null;
+                try {
+                    edition = editions.getEditionByCodeOrThrow(paperCard.getEdition());
+                    if (edition.getType() == Type.ONLINE||edition.getType() == Type.FUNNY)
+                        return false;
+                } catch (Exception ex) {
+                    return false;
+                }
+                return true;
+            }
+        }));
+    }
+
     public Collection<PaperCard> getAllNonPromosNonReprintsNoAlt() {
         return Lists.newArrayList(Iterables.filter(getAllCardsNoAlt(), new Predicate<PaperCard>() {
             @Override
@@ -1037,7 +1059,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     }
 
     public PaperCard createUnsupportedCard(String cardRequest) {
-
         CardRequest request = CardRequest.fromString(cardRequest);
         CardEdition cardEdition = CardEdition.UNKNOWN;
         CardRarity cardRarity = CardRarity.Unknown;
@@ -1078,7 +1099,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
         }
 
         return new PaperCard(CardRules.getUnsupportedCardNamed(request.cardName), cardEdition.getCode(), cardRarity);
-
     }
 
     private final Editor editor = new Editor();

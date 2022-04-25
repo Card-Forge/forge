@@ -4,6 +4,6 @@ Types:Sorcery
 K:Strive:1
 A:SP$ Animate | Cost$ W | TargetMin$ 0 | TargetMax$ MaxTargets | AILogic$ Attacking | ValidTgts$ Creature | Triggers$ AttackTrigger | sVars$ LaunchTokenAttacking | SpellDescription$ Until end of turn, any number of target creatures each gain "Whenever this creature attacks, create a 1/1 white Soldier creature token that's tapped and attacking."
 SVar:AttackTrigger:Mode$ Attacks | ValidCard$ Card.Self | Execute$ LaunchTokenAttacking | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, create a 1/1 white Soldier creature token that's tapped and attacking.
-SVar:LaunchTokenAttacking:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | LegacyImage$ w 1 1 soldier jou | TokenAttacking$ True | TokenTapped$ True
+SVar:LaunchTokenAttacking:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | TokenAttacking$ True | TokenTapped$ True
 SVar:MaxTargets:Count$Valid Creature
 Oracle:Strive — This spell costs {1} more to cast for each target beyond the first.\nUntil end of turn, any number of target creatures each gain "Whenever this creature attacks, create a 1/1 white Soldier creature token that's tapped and attacking."

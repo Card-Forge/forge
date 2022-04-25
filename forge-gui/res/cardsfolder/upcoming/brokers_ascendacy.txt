@@ -1,0 +1,8 @@
+Name:Brokers Ascendancy
+ManaCost:G W U
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on each creature you control and a loyalty counter on each planeswalker you control.
+SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | ValidCards2$ Planeswalker.YouCtrl | CounterType2$ LOYALTY
+DeckHas:Ability$Counters
+DeckHints:Type$Planeswalker
+Oracle:At the beginning of your end step, put a +1/+1 counter on each creature you control and a loyalty counter on each planeswalker you control.

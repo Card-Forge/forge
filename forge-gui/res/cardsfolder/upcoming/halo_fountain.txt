@@ -1,0 +1,9 @@
+Name:Halo Fountain
+ManaCost:2 W
+Types:Artifact
+A:AB$ Token | Cost$ W T untapYType<1/Creature.YouCtrl/creature> | TokenScript$ gw_1_1_citizen | SpellDescription$ Create a 1/1 green and white Citizen creature token.
+A:AB$ Draw | Cost$ W W T untapYType<2/Creature.YouCtrl/creatures> | SpellDescription$ Draw a card.
+A:AB$ WinsGame | Cost$ W W W W W T untapYType<15/Creature.YouCtrl/creatures> | Defined$ You | SpellDescription$ You win the game.
+DeckHints:Type$Citizen
+DeckHas:Ability$Token
+Oracle:{W}, {T}, Untap a tapped creature you control: Create a 1/1 green and white Citizen creature token.\n{W}{W}, {T}, Untap two tapped creatures you control: Draw a card.\n{W}{W}{W}{W}{W}, {T}, Untap fifteen tapped creatures you control: You win the game.

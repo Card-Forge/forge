@@ -33,6 +33,8 @@ import javax.swing.Timer;
 import com.mortennobel.imagescaling.DimensionConstrain;
 import com.mortennobel.imagescaling.ResampleOp;
 
+import forge.gui.GuiBase;
+
 /**
  * Displays a {@code BufferedImage} at its center.
  * <p>
@@ -295,8 +297,11 @@ public class FImagePanel extends JPanel {
         at.rotate(Math.toRadians(degreesOfRotation));
 
         // 2. scale image.
+        float screenScale = GuiBase.getInterface().getScreenScale();
         if (createScaleTransform) {
-            at.scale(this.imageScale, this.imageScale);
+            at.scale(this.imageScale / screenScale, this.imageScale / screenScale);
+        } else {
+            at.scale(1 / screenScale, 1 / screenScale);
         }
 
         // 1. move the image so that its center is at (0,0).
@@ -334,6 +339,8 @@ public class FImagePanel extends JPanel {
         if (this.sourceImage != null) {
             if (this.autoSizeMode != AutoSizeImageMode.OFF) {
                 Double newScale = FImageUtil.getBestFitScale(getSourceImageSize(), this.getSize());
+                // apply DPI based scale
+                newScale *= GuiBase.getInterface().getScreenScale();
                 if (newScale != this.imageScale) {
                     isResampleEnabled = true;
                     this.imageScale = newScale;

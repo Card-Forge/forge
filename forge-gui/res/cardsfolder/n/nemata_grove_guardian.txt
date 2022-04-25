@@ -2,7 +2,7 @@ Name:Nemata, Grove Guardian
 ManaCost:4 G G
 Types:Legendary Creature Treefolk
 PT:4/5
-A:AB$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | LegacyImage$ g 1 1 saproling pls | SpellDescription$ Create a 1/1 green Saproling creature token.
+A:AB$ Token | Cost$ 2 G | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
 A:AB$ PumpAll | Cost$ Sac<1/Saproling> | ValidCards$ Creature.Saproling | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Saproling creatures get +1/+1 until end of turn.
 AI:RemoveDeck:All
 DeckHints:Type$Fungus

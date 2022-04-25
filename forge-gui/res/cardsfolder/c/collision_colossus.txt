@@ -1,8 +1,8 @@
 Name:Collision
 ManaCost:1 RG
-AlternateMode: Split
 Types:Instant
 A:SP$ DealDamage | Cost$ 1 RG | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to target creature with flying.
+AlternateMode:Split
 Oracle:Collision deals 6 damage to target creature with flying.
 
 ALTERNATE

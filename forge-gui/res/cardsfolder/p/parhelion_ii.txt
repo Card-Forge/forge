@@ -6,7 +6,7 @@ K:Flying
 K:First Strike
 K:Vigilance
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create two 4/4 white Angel creature tokens with flying and vigilance that are attacking.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_4_4_angel_flying_vigilance | TokenOwner$ You | TokenAttacking$ True | LegacyImage$ w 4 4 angel war
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_4_4_angel_flying_vigilance | TokenOwner$ You | TokenAttacking$ True
 SVar:HasAttackEffect:TRUE
 K:Crew:4
 DeckHas:Ability$Token

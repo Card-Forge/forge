@@ -10,6 +10,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.card.ColorSet;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
+import forge.gui.GuiBase;
 import forge.localinstance.skin.FSkinProp;
 import forge.toolbox.FSkin.SkinImage;
 
@@ -78,6 +79,16 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("PU", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_U));
         MANA_IMAGES.put("PB", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_B));
         MANA_IMAGES.put("PG", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_G));
+        MANA_IMAGES.put("PBG", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_BG));
+        MANA_IMAGES.put("PBR", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_BR));
+        MANA_IMAGES.put("PGU", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_GU));
+        MANA_IMAGES.put("PGW", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_GW));
+        MANA_IMAGES.put("PRG", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_RG));
+        MANA_IMAGES.put("PRW", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_RW));
+        MANA_IMAGES.put("PUB", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_UB));
+        MANA_IMAGES.put("PUR", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_UR));
+        MANA_IMAGES.put("PWB", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_WB));
+        MANA_IMAGES.put("PWU", FSkin.getImage(FSkinProp.IMG_MANA_PHRYX_WU));
         MANA_IMAGES.put("2W", FSkin.getImage(FSkinProp.IMG_MANA_2W));
         MANA_IMAGES.put("2U", FSkin.getImage(FSkinProp.IMG_MANA_2U));
         MANA_IMAGES.put("2R", FSkin.getImage(FSkinProp.IMG_MANA_2R));
@@ -285,13 +296,23 @@ public class CardFaceSymbols {
         FSkin.drawImage(g, MANA_IMAGES.get(imageName), x, y);
     }
     public static void drawManaSymbol(final String imageName, final Graphics g, final int x, final int y) {
-        FSkin.drawImage(g, MANA_IMAGES.get(imageName).resize(manaImageSize, manaImageSize), x, y);
+        drawSymbol(imageName, g, x, y, manaImageSize);
     }
     public static void drawSymbol(final String imageName, final Graphics g, final int x, final int y, final int size) {
-        FSkin.drawImage(g, MANA_IMAGES.get(imageName).resize(size, size), x, y);
+        // Obtain screen DPI scale
+        float screenScale = GuiBase.getInterface().getScreenScale();
+        int imageSize = Math.round(size * screenScale);
+
+        FSkin.drawImage(g, MANA_IMAGES.get(imageName).resize(imageSize, imageSize),
+            x, y, x + size, y + size, 0, 0, imageSize, imageSize);
     }
     public static void drawWatermark(final String imageName, final Graphics g, final int x, final int y, final int size) {
-        FSkin.drawImage(g, WATERMARKS.get(imageName).resize(size, size), x, y);
+        // Obtain screen DPI scale
+        float screenScale = GuiBase.getInterface().getScreenScale();
+        int imageSize = Math.round(size * screenScale);
+
+        FSkin.drawImage(g, WATERMARKS.get(imageName).resize(imageSize, imageSize),
+            x, y, x + size, y + size, 0, 0, imageSize, imageSize);
     }
     public static void drawAbilitySymbol(final String imageName, final Graphics g, final int x, final int y, final int w, final int h) {
         FSkin.drawImage(g, MANA_IMAGES.get(imageName), x, y, w, h);

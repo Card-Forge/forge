@@ -5,10 +5,10 @@ PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard two cards, then draw two cards. For each nonland card discarded this way, create a 1/1 red Elemental creature token.
 SVar:TrigDiscard:DB$ Discard | NumCards$ 2 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ r_1_1_elemental | TokenOwner$ You | LegacyImage$ r 1 1 elemental mh1 | SubAbility$ DBCleanup
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ r_1_1_elemental | TokenOwner$ You | SubAbility$ DBCleanup
 SVar:X:Remembered$Valid Card.nonLand
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ Token | Cost$ 3 R R ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | TokenAmount$ 2 | TokenScript$ r_1_1_elemental | TokenOwner$ You | LegacyImage$ r 1 1 elemental mh1 | SpellDescription$ Create two 1/1 red Elemental creature tokens.
+A:AB$ Token | Cost$ 3 R R ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | TokenAmount$ 2 | TokenScript$ r_1_1_elemental | TokenOwner$ You | SpellDescription$ Create two 1/1 red Elemental creature tokens.
 SVar:AIPreference:ExileFromGraveCost$Card.Self
 DeckHas:Ability$Token
 Oracle:When Seasoned Pyromancer enters the battlefield, discard two cards, then draw two cards. For each nonland card discarded this way, create a 1/1 red Elemental creature token.\n{3}{R}{R}, Exile Seasoned Pyromancer from your graveyard: Create two 1/1 red Elemental creature tokens.

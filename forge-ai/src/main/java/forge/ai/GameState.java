@@ -329,13 +329,13 @@ public abstract class GameState {
                 newText.append("|Damage:").append(c.getDamage());
             }
 
-            if (!c.getChosenColor().isEmpty()) {
+            if (c.hasChosenColor()) {
                 newText.append("|ChosenColor:").append(TextUtil.join(c.getChosenColors(), ","));
             }
-            if (!c.getChosenType().isEmpty()) {
+            if (c.hasChosenType()) {
                 newText.append("|ChosenType:").append(c.getChosenType());
             }
-            if (!c.getChosenType2().isEmpty()) {
+            if (c.hasChosenType2()) {
                 newText.append("|ChosenType2:").append(c.getChosenType2());
             }
             if (!c.getNamedCard().isEmpty()) {
@@ -707,6 +707,14 @@ public abstract class GameState {
         }
 
         game.getAction().checkStateEffects(true); //ensure state based effects and triggers are updated
+
+        // Set negative or zero life after state effects if need be, important for some puzzles that rely on
+        // pre-setting negative life (e.g. PS_NEO4).
+        if (humanLife <= 0) {
+            human.setLife(humanLife, null);
+        } else if (computerLife <= 0) {
+            ai.setLife(computerLife, null);
+        }
     }
 
     private String processManaPool(ManaPool manaPool) {
@@ -1250,7 +1258,7 @@ public abstract class GameState {
                     }
 
                     if (cardsWithoutETBTrigs.contains(c)) {
-                        p.getGame().getAction().moveTo(ZoneType.Battlefield, c, null);
+                        p.getGame().getAction().moveTo(ZoneType.Battlefield, c, null, null);
                     } else {
                         p.getZone(ZoneType.Hand).add(c);
                         p.getGame().getAction().moveToPlay(c, null, null);

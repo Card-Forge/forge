@@ -7,7 +7,7 @@
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMBzAXh4Ghnpu+tsbzcvAsJuH/vaOAvIAAN0IAoM=
+   eJxjYBgFo2AUjIJRAAN7eAbG3iheys3YC3R7PTfl5pAKooFu3z1A4TYKSAcAGL8Dsg==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -17,18 +17,13 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzNlF0KwjAQhPvYQK+l2BzAxz4LHkyM3kpTPYYJdjEO3Z8QEAsDgd3NV2aHhL7rLo26JgWlvnXf2iXtG+WVe7zjuaf0Tw+n69x/+umc752L+rRS57g3Z/OT+j3M3hdF9+aWdYnLaVqELIu3Epf8segJd0mz2IvcYMwkKRr3gjvhfNZ8a8m4lStlO2d0FHrKDNdyOQ/Ju3Hpx71weW/1mXryt9bP5V3jcvlE75BLnmOGLVwpnxHuyj5vmFnslbjHoS6jyP3Vu0G50t6NuTgj9zDUqdxvzdy/cF+TeQL1
+   eJzNlEEKwjAQRbtsoNdSbA7gsmvBg4nRW2mqxzDBDMZPZjIhLix8KMxkXvvnEzcOw6VT1yBXqW/Nt3ZB+07ZyhxreO4pfNPD1HUeP/30HueuWX0p1Dnuzej8pH4LZ+9J3ry5eV3iclqSkKXxVuKSPxo9YZZ0FnuR65SZJHnlXnAnnM8133oyruVK2Y4ZnYWePMOtXM5D8m5O/biXUt7j0+szzsL+Ut41XC6f6B1yyXPMsIYr5dPDrOjzhjmLvRL3OLVlFLmanfzi3qBc1e6NNXtH7mFqU/4PLef+hfsCDZoBGg==
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
   </data>
@@ -46,7 +41,7 @@
    </properties>
   </object>
   <object id="51" template="../obj/treasure.tx" x="384.492" y="232.777"/>
-  <object id="53" template="../obj/enemy.tx" x="383.233" y="187.963">
+  <object id="53" template="../obj/enemy.tx" x="382.233" y="183.963">
    <properties>
     <property name="enemy" value="Minotaur"/>
    </properties>

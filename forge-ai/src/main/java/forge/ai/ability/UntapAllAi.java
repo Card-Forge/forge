@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import com.google.common.collect.Iterables;
+
 import forge.ai.SpellAbilityAi;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -8,7 +10,6 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.player.PlayerCollection;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -26,12 +27,9 @@ public class UntapAllAi extends SpellAbilityAi {
         	}
             CardCollectionView list = CardLists.filter(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.TAPPED);
             final String valid = sa.getParamOrDefault("ValidCards", "");
-            list = CardLists.getValidCards(list, valid.split(","), source.getController(), source, sa);
+            list = CardLists.getValidCards(list, valid, source.getController(), source, sa);
             // don't untap if only opponent benefits
-            PlayerCollection goodControllers = aiPlayer.getAllies();
-            goodControllers.add(aiPlayer);
-            list = CardLists.filter(list, CardPredicates.isControlledByAnyOf(goodControllers));
-            return !list.isEmpty();
+            return Iterables.any(list, CardPredicates.isControlledByAnyOf(aiPlayer.getYourTeam()));
         }
         return false;
     }
@@ -43,7 +41,7 @@ public class UntapAllAi extends SpellAbilityAi {
         if (sa.hasParam("ValidCards")) {
             String valid = sa.getParam("ValidCards");
             CardCollectionView list = CardLists.filter(aiPlayer.getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.TAPPED);
-            list = CardLists.getValidCards(list, valid.split(","), source.getController(), source, sa);
+            list = CardLists.getValidCards(list, valid, source.getController(), source, sa);
             return mandatory || !list.isEmpty();
         }
 

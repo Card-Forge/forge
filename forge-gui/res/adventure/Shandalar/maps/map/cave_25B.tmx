@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="60" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="71">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="7" name="Collision" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzgENAAAIA6AXMLPVjeGmkIAEAAAAAADgjq7tAQAA8MkA/f0AjQ==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6C+M1f/cqphPyT0kqqqqqqqqqqqqvo+qPovzg==
+  </data>
+ </layer>
+ <layer id="6" name="Background Tint" width="60" height="40" opacity="0.75">
+  <data encoding="base64" compression="zlib">
+   eJztwzENAAAMA6D+M1z51bAfEnpJVVVVVVVVVVVVfR/0r8xd
+  </data>
+ </layer>
+ <layer id="2" name="Walls" width="60" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzNWm1uWjEQfD8fEkfodRqiXDQEeoDcp4T2GH1WWGm6mf2yrYAlS0HY652d/bLJ025Znr55Pm+zjZ8DMk7rspy3edn+/rV+P4aKnh83vL8Lup5u2No8gwyRMxP3LFuelJ4VzNdtvq2LOV637/5OwhjZ8sf+c0YyDzuuaxaztX8Gx55sLT+Dl3GLIxPLEcdtvHTy6unWfEfObbjPgb9HWEVOhpvnQK+qT0e8ikzrXMGPuns6VjFbHPfGr+czKLOtO672WvF3z1deyf4q5ibjOJirNMdN5p8dlylnM92tgToy7jMxKPuq8ZrhOMol15stMvlE+x3bE3GM+WCkZ9EYjg6vvfHP9GN7ZJ30GZgTdX28Z39VzZ9W7pa8F+X10T5jdixEejX7sNiXGI/i4978Mo49Dpp9JPaP69cYEvt5+bAnhnU/PmIz5Djjb9KfsYk2Yb7Q488jfbw1JQdF9cLDqntUwY35rdo3v+/jXqmHb5Hp2Q1xvTs4Pf+p+nQ7J6ohiD1rS5TJOI54jTCj/IpPZ3p5HJ5srJUi01vfg1nOQJ0rPVaGW30fYhx7dfRC9vRyy2KvEsMYC4hLemapDXqd5qx9H9VLHWMZflnOss7I8iy6Ci7WQ2Z6Vi82rN5Kvxmw3MUwCxeIfWbvgXa18Hq9ktVboZ4Mo4VZPut4HL0vnaAWRe+o193/vRLGg5bJ3hix9glGPD8Tj6O9dLOf7t17/Ab1zryNncEm0XmHAb08+2mdItnCI+qdufNYNrDOw5w9w58t/byeplrXZVTuBSwuRu//Fr+WzZkOcreL6pXEX/NPhltjYe9OM+7CmXdu9vbAdLDsp98CMzVf14MZb1k6Pioj+57h8eLlIrGLrJnxlmXFIb4/9NRcHB4vuN7KWTPzs+XLoiPzPQuDZbssXsuG0V2sMlm8Wee2ta2/sN6/rbiwdNT20feC0btSBvNIDqzYzlqPuCt5oEfX0d8tGMdRjqnkyln5eebU+kc5xuKYjUd4m430z/ighZnVhUfkWPJpJd4aZqx/7Pe2e//WEOHt6Q8abt2veTXhEeaM/0fqnf8AMLUwOw==
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="60" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmFEOgjAQRPnRBBMPpolH8CpeRhI9GsfwQ4glIeC2s+0U5v2UkHYh29nZQtMIwcvLKe4NHO+ZsPYAe4sp3TBehrF3ek4sKTkrxREUp1uf8heP83dE5tJLjylcI9bE5oRFl+M+oOoWpTlRnja4tniSpZ+ivE7kY6nGGX09xNOfWDy9JvZa/29QnL3mzwtUDYdx2D2RAVQ9iCls2svZI+WN20bfmsJKbj+8G+d7+mNqvVj8tJbaZOuPMaxpxrIXteyb+HFyiFnq7MR8ZmP2ilED+ge1zFx+2pl7W4VZw96ot4k98gFeWBYY
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="66" template="../obj/door_up.tx" x="480" y="640">
+   <properties>
+    <property name="teleport" value="maps/map/cave_25.tmx"/>
+    <property name="teleportObjectId" value="65"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/door_down.tx" x="480.438" y="17.5026">
+   <properties>
+    <property name="teleport" value="maps/map/cave_25C.tmx"/>
+    <property name="teleportObjectId" value="66"/>
+   </properties>
+  </object>
+  <object id="68" template="../obj/enemy.tx" x="223.302" y="88.091">
+   <properties>
+    <property name="enemy" value="Harpy 2"/>
+   </properties>
+  </object>
+  <object id="69" template="../obj/enemy.tx" x="7.5" y="319">
+   <properties>
+    <property name="enemy" value="Mimic"/>
+   </properties>
+  </object>
+  <object id="70" template="../obj/treasure.tx" x="72.75" y="114.5"/>
+ </objectgroup>
+</map>

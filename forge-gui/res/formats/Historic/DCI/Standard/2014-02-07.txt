@@ -1,5 +1,5 @@
 [format]
-Name:Standard, Born of the Gods
+Name:Standard (BNG)
 Type:Historic
 Subtype:Standard
 Effective:2014-02-07

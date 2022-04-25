@@ -3,6 +3,6 @@ ManaCost:2 W W
 Types:Legendary Creature Angel
 PT:3/4
 K:Flying
-S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME's activated abilities can't be activated. | Description$ Activated abilities of creatures your opponents control can't be activated.
+S:Mode$ CantBeActivated | Activator$ Opponent | AffectedZone$ Battlefield | ValidCard$ Creature | ValidSA$ Activated | Description$ Activated abilities of creatures your opponents control can't be activated.
 SVar:PlayMain1:TRUE
 Oracle:Flying\nActivated abilities of creatures your opponents control can't be activated.

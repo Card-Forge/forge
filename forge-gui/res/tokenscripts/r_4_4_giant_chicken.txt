@@ -1,6 +1,0 @@
-Name:Giant Chicken Token
-ManaCost:no cost
-Types:Creature Giant Bird
-Colors:red
-PT:4/4
-Oracle:

@@ -3,8 +3,8 @@ ManaCost:2 U
 Types:Creature Faerie
 PT:2/2
 K:Flying
-Oracle:Flying
 AlternateMode:Adventure
+Oracle:Flying
 
 ALTERNATE
 

@@ -5,9 +5,9 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Hidden Collision" width="30" height="17">
+ <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJy1VMENwyAM5B9nAsRizSy0czVNdmtRZOVkzkDU1pIVBJizL2cnCWGZQ1jF95tz3orDGHuvnCU5vGXRwXo14jBG398+312Os0T27brcu0+HsxxXqddPqfMrdZa8La7u2zV74xuzuL8y5Uo5UsfzEZ4zxD6mUJnlmWkxwp00yDPTSM9UE6hFtat63uFunmoe0Tc5uS0xVqfJ+RfsDcwROfBc603i8zfiDLc3Owq2rWsj77J3VCPLfOJqb43ODutoWo/dv9q/OJdKfWxOMtwRy42+wrnEZlx06vUwEEc5bOVp/wXyYHGZtlXPUWpd9XoBc0Ue0Hp6ZrijfdDi+V+4rI/eYfy+yg==
+   eJy1VdsNgzAMzD/OBAmLwSyUj07Vlu5Wouok1y9Cq1qyFJH4zr7YoVJKc07pTr5P+34l7VEcj8E5GT/uHllxuB5BXDHwPd5NrJ/kY3CrpNc30vk1Deassdp3rBEDjDUf19hrJajhF4NWl+HT192X4b3PebGPnKBzO9vqRaw0qbPXi43HujPoD16+7u1BWCHN2+7oxnI6088j00DqyH0zeKEL8Ky78DBG0rkcOZ+9s7Eeb8/bIeuytLBwJmPmMJ+9b0dPPVVgWW9AZLIeWYvX6z22DP5cSVyJaelg8S5i9nlslKe8C6/Hvd6O+vloFniu3n/tm34+ExPp/A/ea9b+Ag/8f38=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -44,13 +44,13 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../obj/enemy.tx" x="156.735" y="81.7253">
+  <object id="50" template="../obj/enemy.tx" x="159.735" y="80.2253">
    <properties>
     <property name="enemy" value="ClayGolem"/>
    </properties>
   </object>
   <object id="62" template="../obj/gold.tx" x="456" y="154.333"/>
-  <object id="65" template="../obj/gold.tx" x="459.333" y="268"/>
+  <object id="65" template="../obj/gold.tx" x="457" y="200"/>
   <object id="66" template="../obj/gold.tx" x="20.6667" y="81.3333"/>
   <object id="67" template="../obj/enemy.tx" x="94" y="210.667">
    <properties>

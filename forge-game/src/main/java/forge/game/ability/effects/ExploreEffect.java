@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Lists;
 
@@ -48,6 +49,9 @@ public class ExploreEffect extends SpellAbilityEffect {
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         final CardZoneTable triggerList = new CardZoneTable();
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
         for (final Card c : getTargetCards(sa)) {
             // revealed land card
             boolean revealedLand = false;
@@ -59,7 +63,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                 final Card r = top.getFirst();
                 final Zone originZone = game.getZoneOf(r);
                 if (r.isLand()) {
-                    movedCard = game.getAction().moveTo(ZoneType.Hand, r, sa);
+                    movedCard = game.getAction().moveTo(ZoneType.Hand, r, sa, moveParams);
                     revealedLand = true;
                 } else {
                     // TODO find better way to choose optional send away
@@ -67,7 +71,7 @@ public class ExploreEffect extends SpellAbilityEffect {
                             ZoneType.Graveyard, Lists.newArrayList(ZoneType.Library), sa, top, null,
                             Localizer.getInstance().getMessage("lblPutThisCardToYourGraveyard"), true, pl);
                     if (choosen != null) {
-                        movedCard = game.getAction().moveTo(ZoneType.Graveyard, choosen, sa);
+                        movedCard = game.getAction().moveTo(ZoneType.Graveyard, choosen, sa, moveParams);
                     }
                 }
 

@@ -2,7 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
+import forge.util.Lang;
 
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -28,8 +28,8 @@ public class PhasesEffect extends SpellAbilityEffect {
         // when getStackDesc is called, just build exactly what is happening
         final StringBuilder sb = new StringBuilder();
         final List<Card> tgtCards = getTargetCards(sa);
-        sb.append(StringUtils.join(tgtCards, ", "));
-        sb.append(" Phases Out.");
+        sb.append(Lang.joinHomogenous(tgtCards));
+        sb.append(tgtCards.size() == 1 ? " phases out." : " phase out.");
         return sb.toString();
     }
 

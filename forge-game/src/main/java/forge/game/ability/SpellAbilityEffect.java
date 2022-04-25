@@ -98,16 +98,16 @@ public abstract class SpellAbilityEffect {
             		sb.append(" (Targeting: ").append(sa.getTargets()).append(")");
             	}
             } else if (!"None".equalsIgnoreCase(stackDesc)) { // by typing "none" they want to suppress output
-                makeSpellDescription(sa, sb, stackDesc);
+                tokenizeString(sa, sb, stackDesc);
             }
         } else {
-            final String conditionDesc = sa.getParam("ConditionDescription");
+            final String condDesc = sa.getParam("ConditionDescription");
             final String afterDesc = sa.getParam("AfterDescription");
             final String baseDesc = CardTranslation.translateSingleDescriptionText(this.getStackDescription(sa), sa.getHostCard().getName());
-            if (conditionDesc != null) {
-                sb.append(conditionDesc).append(" ");
+            if (condDesc != null) {
+                sb.append(condDesc).append(" ");
             }
-            sb.append(baseDesc);
+            sb.append(condDesc != null && condDesc.endsWith(",") ? StringUtils.uncapitalize(baseDesc) : baseDesc);
             if (afterDesc != null) {
                 sb.append(" ").append(afterDesc);
             }
@@ -155,7 +155,7 @@ public abstract class SpellAbilityEffect {
      *            {@link Player}, {@link SpellAbility}, and {@link Card}
      *            objects.
      */
-    private static void makeSpellDescription(final SpellAbility sa, final StringBuilder sb, final String stackDesc) {
+    public static void tokenizeString(final SpellAbility sa, final StringBuilder sb, final String stackDesc) {
         final StringTokenizer st = new StringTokenizer(stackDesc, "{}", true);
         boolean isPlainText = true;
 
@@ -165,18 +165,23 @@ public abstract class SpellAbilityEffect {
             if ("}".equals(t)) { isPlainText = true; continue; }
 
             if (!isPlainText) {
-                final List<? extends GameObject> objs;
-                if (t.startsWith("p:")) {
-                    objs = AbilityUtils.getDefinedPlayers(sa.getHostCard(), t.substring(2), sa);
-                } else if (t.startsWith("s:")) {
-                    objs = AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), t.substring(2), sa);
-                } else if (t.startsWith("c:")) {
-                    objs = AbilityUtils.getDefinedCards(sa.getHostCard(), t.substring(2), sa);
+                if (t.startsWith("n:")) { // {n:<SVar> <noun(opt.)>}
+                    String parts[] = t.substring(2).split(" ", 2);
+                    int n = AbilityUtils.calculateAmount(sa.getHostCard(), parts[0], sa);
+                    sb.append(parts.length == 1 ? Lang.getNumeral(n) : Lang.nounWithNumeral(n, parts[1]));
                 } else {
-                    objs = AbilityUtils.getDefinedObjects(sa.getHostCard(), t, sa);
+                    final List<? extends GameObject> objs;
+                    if (t.startsWith("p:")) {
+                        objs = AbilityUtils.getDefinedPlayers(sa.getHostCard(), t.substring(2), sa);
+                    } else if (t.startsWith("s:")) {
+                        objs = AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), t.substring(2), sa);
+                    } else if (t.startsWith("c:")) {
+                        objs = AbilityUtils.getDefinedCards(sa.getHostCard(), t.substring(2), sa);
+                    } else {
+                        objs = AbilityUtils.getDefinedObjects(sa.getHostCard(), t, sa);
+                    }
+                    sb.append(StringUtils.join(objs, ", "));
                 }
-
-                sb.append(StringUtils.join(objs, ", "));
             } else {
                 sb.append(t);
             }
@@ -435,7 +440,7 @@ public abstract class SpellAbilityEffect {
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa);
+        game.getAction().moveTo(ZoneType.Command, eff, sa, null);
         eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
@@ -483,7 +488,6 @@ public abstract class SpellAbilityEffect {
 
     protected static void replaceDying(final SpellAbility sa) {
         if (sa.hasParam("ReplaceDyingDefined") || sa.hasParam("ReplaceDyingValid")) {
-
             if (sa.hasParam("ReplaceDyingCondition")) {
                 // currently there is only one with Kicker
                 final String condition = sa.getParam("ReplaceDyingCondition");
@@ -553,7 +557,7 @@ public abstract class SpellAbilityEffect {
 
             // TODO: Add targeting to the effect so it knows who it's dealing with
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-            game.getAction().moveTo(ZoneType.Command, eff, sa);
+            game.getAction().moveTo(ZoneType.Command, eff, sa, null);
             eff.updateStateForView();
             game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
@@ -654,15 +658,15 @@ public abstract class SpellAbilityEffect {
 
             @Override
             public void run() {
-                CardZoneTable untilTable = new CardZoneTable();
                 CardCollectionView untilCards = hostCard.getUntilLeavesBattlefield();
                 // if the list is empty, then the table doesn't need to be checked anymore
                 if (untilCards.isEmpty()) {
                     return;
                 }
+                CardZoneTable untilTable = new CardZoneTable();
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
-                moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateGraveyard());
+                moveParams.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
                 for (Table.Cell<ZoneType, ZoneType, CardCollection> cell : triggerList.cellSet()) {
                     for (Card c : cell.getValue()) {
                         // check if card is still in the until host leaves play list
@@ -685,13 +689,13 @@ public abstract class SpellAbilityEffect {
         };
     }
 
-    protected static void discard(SpellAbility sa, CardZoneTable table, final boolean effect, Map<Player, CardCollectionView> discardedMap) {
+    protected static void discard(SpellAbility sa, CardZoneTable table, final boolean effect, Map<Player, CardCollectionView> discardedMap, Map<AbilityKey, Object> params) {
         Set<Player> discarders = discardedMap.keySet();
         for (Player p : discarders) {
             final CardCollection discardedByPlayer = new CardCollection();
             for (Card card : Lists.newArrayList(discardedMap.get(p))) { // without copying will get concurrent modification exception
                 if (card == null) { continue; }
-                if (p.discard(card, sa, effect, table) != null) {
+                if (p.discard(card, sa, effect, table, params) != null) {
                     discardedByPlayer.add(card);
 
                     if (sa.hasParam("RememberDiscarded")) {
@@ -744,6 +748,13 @@ public abstract class SpellAbilityEffect {
                 game.getEndOfTurn().registerUntilEnd(sa.getActivatingPlayer(), until);
             } else {
                 game.getEndOfTurn().addUntilEnd(sa.getActivatingPlayer(), until);
+            }
+        } else if ("UntilTheEndOfTargetedNextTurn".equals(duration)) {
+            Player targeted = sa.getTargets().getFirstTargetedPlayer();
+            if (game.getPhaseHandler().isPlayerTurn(targeted)) {
+                game.getEndOfTurn().registerUntilEnd(targeted, until);
+            } else {
+                game.getEndOfTurn().addUntilEnd(targeted, until);
             }
         } else if (duration != null && duration.startsWith("UntilAPlayerCastSpell")) {
             game.getStack().addCastCommand(duration.split(" ")[1], until);

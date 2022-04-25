@@ -1,7 +1,7 @@
 [format]
-Name:Standard, Urza's Legacy
+Name:Standard (ULG)
 Type:Historic
 Subtype:Standard
 Effective:1999-03-01
 Sets:5ED, TMP, STH, EXO, USG, ULG
-Banned:Tolarian Academy, Windfall
+Banned:Tolarian Academy; Windfall

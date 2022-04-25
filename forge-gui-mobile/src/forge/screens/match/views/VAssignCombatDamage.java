@@ -48,7 +48,6 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
 import forge.util.CardTranslation;
-import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Utils;
 import forge.util.WaitCallback;
@@ -69,8 +68,8 @@ public class VAssignCombatDamage extends FDialog {
 
     private final GameEntityView defender;
 
-    private final FLabel lblTotalDamage = add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblTotalDamageText")).align(Align.center).build());
-    private final FLabel lblAssignRemaining = add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblAssignRemainingText")).align(Align.center).build());
+    private final FLabel lblTotalDamage = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblTotalDamageText")).align(Align.center).build());
+    private final FLabel lblAssignRemaining = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblAssignRemainingText")).align(Align.center).build());
 
     private final AttDefCardPanel pnlAttacker;
     private final DefendersPanel pnlDefenders;
@@ -98,7 +97,7 @@ public class VAssignCombatDamage extends FDialog {
      * @param overrideOrder override combatant order
      */
     public VAssignCombatDamage(final CardView attacker, final List<CardView> blockers, final int damage0, final GameEntityView defender0, boolean overrideOrder, boolean maySkip, final WaitCallback<Map<CardView, Integer>> waitCallback) {
-        super(Localizer.getInstance().getMessage("lbLAssignDamageDealtBy").replace("%s",CardTranslation.getTranslatedName(attacker.getName())) , 3);
+        super(Forge.getLocalizer().getMessage("lbLAssignDamageDealtBy").replace("%s",CardTranslation.getTranslatedName(attacker.getName())) , 3);
 
         callback = waitCallback;
         totalDamageToAssign = damage0;
@@ -112,7 +111,7 @@ public class VAssignCombatDamage extends FDialog {
         pnlAttacker = add(new AttDefCardPanel(attacker));
         pnlDefenders = add(new DefendersPanel(blockers));
 
-        initButton(0, Localizer.getInstance().getMessage("lblAuto"), new FEventHandler() {
+        initButton(0, Forge.getLocalizer().getMessage("lblAuto"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 resetAssignedDamage();
@@ -120,13 +119,13 @@ public class VAssignCombatDamage extends FDialog {
                 finish();
             }
         });
-        initButton(1, Localizer.getInstance().getMessage("lblOK"), new FEventHandler() {
+        initButton(1, Forge.getLocalizer().getMessage("lblOK"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 finish();
             }
         });
-        initButton(2, Localizer.getInstance().getMessage("lblReset"), new FEventHandler() {
+        initButton(2, Forge.getLocalizer().getMessage("lblReset"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 resetAssignedDamage();
@@ -134,7 +133,7 @@ public class VAssignCombatDamage extends FDialog {
             }
         });
         if (maySkip) {
-            initButton(2, Localizer.getInstance().getMessage("lblSkip"), new FEventHandler() {
+            initButton(2, Forge.getLocalizer().getMessage("lblSkip"), new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     skip = true;
@@ -431,7 +430,7 @@ public class VAssignCombatDamage extends FDialog {
             StringBuilder sb = new StringBuilder();
             sb.append(dmg);
             if(overkill >= 0) { 
-                sb.append(" (" + Localizer.getInstance().getMessage("lblLethal"));
+                sb.append(" (" + Forge.getLocalizer().getMessage("lblLethal"));
                 if(overkill > 0) 
                     sb.append(" +").append(overkill);
                 sb.append(")");
@@ -440,7 +439,7 @@ public class VAssignCombatDamage extends FDialog {
             dt.label.setText(sb.toString());
         }
 
-        lblTotalDamage.setText(TextUtil.concatNoSpace(Localizer.getInstance().getMessage("lblAvailableDamagePoints") + ": ",
+        lblTotalDamage.setText(TextUtil.concatNoSpace(Forge.getLocalizer().getMessage("lblAvailableDamagePoints") + ": ",
                 String.valueOf(damageLeft), " (of ", String.valueOf(totalDamageToAssign), ")"));
         setButtonEnabled(1, damageLeft == 0);
         lblAssignRemaining.setVisible(allHaveLethal && damageLeft > 0);

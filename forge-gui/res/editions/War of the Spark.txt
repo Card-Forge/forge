@@ -6,7 +6,7 @@ Code2=WAR
 MciCode=war
 Type=Expansion
 BoosterCovers=3
-Booster=10 Common:!fromSheet("WAR Secret Cards"), 3 Uncommon:!fromSheet("WAR Secret Cards"), 1 RareMythic:!fromSheet("WAR Secret Cards"), 1 BasicLand
+Booster=10 Common:fromSheet("WAR cards"):!fromSheet("WAR Secret Cards"), 3 Uncommon:fromSheet("WAR cards"):!fromSheet("WAR Secret Cards"), 1 RareMythic:fromSheet("WAR cards"):!fromSheet("WAR Secret Cards"), 1 BasicLand
 BoosterMustContain=Planeswalker
 FatPack=10
 FatPackExtraSlots=80 BasicLands
@@ -330,7 +330,7 @@ ScryfallCode=WAR
 A221 R A-Teferi, Time Raveler @Chris Rallis
 
 [tokens]
-wubrg_2_2_citizen
+all_2_2_citizen
 b_0_0_zombie_army
 b_0_0_zombie_army
 b_0_0_zombie_army

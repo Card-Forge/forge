@@ -39,7 +39,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
 import forge.toolbox.FTextArea;
-import forge.util.Localizer;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 
@@ -49,12 +48,11 @@ public class LoadQuestScreen extends LaunchScreen {
     private static final FSkinColor OLD_QUESTS_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).getContrastColor(20);
     private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
 
-    private final Localizer localizer = Localizer.getInstance();
-    private final FTextArea lblOldQuests = add(new FTextArea(false, Localizer.getInstance().getMessage("lblLoadingExistingQuests")));
+    private final FTextArea lblOldQuests = add(new FTextArea(false, Forge.getLocalizer().getInstance().getMessage("lblLoadingExistingQuests")));
     private final QuestFileLister lstQuests = add(new QuestFileLister());
-    private final FButton btnNewQuest = add(new FButton(Localizer.getInstance().getMessage("lblNewQuest")));
-    private final FButton btnRenameQuest = add(new FButton(Localizer.getInstance().getMessage("lblRename")));
-    private final FButton btnDeleteQuest = add(new FButton(Localizer.getInstance().getMessage("lblDelete")));
+    private final FButton btnNewQuest = add(new FButton(Forge.getLocalizer().getInstance().getMessage("lblNewQuest")));
+    private final FButton btnRenameQuest = add(new FButton(Forge.getLocalizer().getInstance().getMessage("lblRename")));
+    private final FButton btnDeleteQuest = add(new FButton(Forge.getLocalizer().getInstance().getMessage("lblDelete")));
 
     public LoadQuestScreen() {
         super(null, LoadGameMenu.getMenu());
@@ -87,7 +85,7 @@ public class LoadQuestScreen extends LaunchScreen {
 
     @Override
     public void onActivate() {
-        lblOldQuests.setText(localizer.getMessage("lblLoadingExistingQuests"));
+        lblOldQuests.setText(Forge.getLocalizer().getMessage("lblLoadingExistingQuests"));
         lstQuests.clear();
         updateEnabledButtons();
         revalidate();
@@ -142,7 +140,7 @@ public class LoadQuestScreen extends LaunchScreen {
                     @Override
                     public void run() {
                         final String str= ForgeConstants.QUEST_SAVE_DIR.replace('\\', '/');
-                        lblOldQuests.setText(localizer.getMessage("lblOldQuestData").replace("%s",str));
+                        lblOldQuests.setText(Forge.getLocalizer().getMessage("lblOldQuestData").replace("%s",str));
                         updateEnabledButtons();
                         revalidate();
                         lstQuests.scrollIntoView(lstQuests.selectedIndex);
@@ -210,14 +208,14 @@ public class LoadQuestScreen extends LaunchScreen {
                 String questName;
                 String oldQuestName = quest.getName();
                 while (true) {
-                    questName = SOptionPane.showInputDialog(localizer.getMessage("lblEnterNewQuestName"), localizer.getMessage("lblRenameQuest"), null, oldQuestName);
+                    questName = SOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblEnterNewQuestName"), Forge.getLocalizer().getMessage("lblRenameQuest"), null, oldQuestName);
                     if (questName == null) { return; }
 
                     questName = QuestUtil.cleanString(questName);
                     if (questName.equals(oldQuestName)) { return; } //quit if chose same name
 
                     if (questName.isEmpty()) {
-                        SOptionPane.showMessageDialog(localizer.getMessage("lblQuestNameEmpty"));
+                        SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblQuestNameEmpty"));
                         continue;
                     }
 
@@ -229,7 +227,7 @@ public class LoadQuestScreen extends LaunchScreen {
                         }
                     }
                     if (exists) {
-                        SOptionPane.showMessageDialog(localizer.getMessage("lblQuestExists"));
+                        SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblQuestExists"));
                         continue;
                     }
                     break;
@@ -247,8 +245,8 @@ public class LoadQuestScreen extends LaunchScreen {
             @Override
             public void run() {
                 if (!SOptionPane.showConfirmDialog(
-                        localizer.getMessage("lblConfirmDelete") + " '" + quest.getName() + "'?",
-                        localizer.getMessage("lblDeleteQuest"), localizer.getMessage("lblDelete"), localizer.getMessage("lblCancel"))) {
+                        Forge.getLocalizer().getMessage("lblConfirmDelete") + " '" + quest.getName() + "'?",
+                        Forge.getLocalizer().getMessage("lblDeleteQuest"), Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblCancel"))) {
                     return;
                 }
 

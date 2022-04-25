@@ -1,5 +1,5 @@
 Name:Vampire Envoy
-ManaCost: 2 B
+ManaCost:2 B
 Types:Creature Vampire Cleric Ally
 PT:1/4
 K:Flying

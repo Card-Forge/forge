@@ -1,6 +1,6 @@
 [format]
-Name:Standard, Oath of the Gatewatch
+Name:Standard (OGW)
 Type:Historic
 Subtype:Standard
 Effective:2016-01-22
-Sets:KTK, FRF, DTK, ORI, BFZ, OGW
+Sets:KTK, FRF, UGF, DTK, ORI, BFZ, OGW

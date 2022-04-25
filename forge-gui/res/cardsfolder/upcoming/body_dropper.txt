@@ -1,0 +1,10 @@
+Name:Body Dropper
+ManaCost:B R
+Types:Creature Devil Warrior
+PT:2/2
+T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you sacrifice another creature, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1
+A:AB$ Pump | Cost$ B R Sac<1/Creature.Other/another creature> | Defined$ Self | KW$ Menace | AILogic$ Aristocrat | SpellDescription$ CARDNAME gains menace until end of turn. (It can't be blocked except by two or more creatures.)
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE2
+DeckHas:Ability$Counters|Sacrifice
+Oracle:Whenever you sacrifice another creature, put a +1/+1 counter on Body Dropper.\n{B}{R}, Sacrifice another creature: Body Dropper gains menace until end of turn. (It can't be blocked except by two or more creatures.)

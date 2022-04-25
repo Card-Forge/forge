@@ -20,6 +20,7 @@ public class CardDamageHistory {
     private boolean creatureAttackedThisCombat = false;
     private boolean creatureBlockedThisCombat = false;
     private boolean creatureGotBlockedThisCombat = false;
+    private boolean receivedNonCombatDamageThisTurn = false;
     private int attacksThisTurn = 0;
 
     private final List<Player> creatureAttackedLastTurnOf = Lists.newArrayList();
@@ -247,6 +248,30 @@ public class CardDamageHistory {
     public final boolean getCreatureGotBlockedThisCombat() {
         return this.creatureGotBlockedThisCombat;
     }
+
+    /**
+     * <p>
+     * Getter for the field <code>receivedNonCombatDamageThisTurn</code>.
+     * </p>
+     *
+     * @return a boolean.
+     */
+    public boolean hasBeenDealtNonCombatDamageThisTurn() {
+        return this.receivedNonCombatDamageThisTurn;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>receivedNonCombatDamageThisTurn</code>.
+     * </p>
+     *
+     * @param b
+     *            a boolean.
+     */
+    public void setHasBeenDealtNonCombatDamageThisTurn(boolean b) {
+        this.receivedNonCombatDamageThisTurn = b;
+    }
+
     public final Map<GameEntity, Integer> getThisCombatDamaged() {
         return damagedThisCombat;
     }

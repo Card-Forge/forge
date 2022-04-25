@@ -2,5 +2,5 @@ Name:Patrol Signaler
 ManaCost:1 W
 Types:Creature Kithkin Soldier
 PT:1/1
-A:AB$ Token | Cost$ 1 W Untap | TokenAmount$ 1 | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ You | LegacyImage$ w 1 1 kithkin soldier shm | SpellDescription$ Create a 1/1 white Kithkin Soldier creature token.
+A:AB$ Token | Cost$ 1 W Untap | TokenAmount$ 1 | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ You | SpellDescription$ Create a 1/1 white Kithkin Soldier creature token.
 Oracle:{1}{W}, {Q}: Create a 1/1 white Kithkin Soldier creature token. ({Q} is the untap symbol.)

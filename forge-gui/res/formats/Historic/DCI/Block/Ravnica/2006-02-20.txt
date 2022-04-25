@@ -1,5 +1,5 @@
 [format]
-Name:Ravnica Block, Guildpact
+Name:Block: Ravnica (GPT)
 Type:Historic
 Subtype:Block
 Effective:2006-02-20

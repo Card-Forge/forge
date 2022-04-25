@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -12,6 +13,7 @@ import forge.card.CardRarity;
 import forge.game.Game;
 import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -56,6 +58,15 @@ public class EffectEffect extends SpellAbilityEffect {
         String noteCounterDefined = null;
         List<Player> effectOwner = null;
         boolean imprintOnHost = false;
+        final String duration = sa.getParam("Duration");
+
+        if (("UntilHostLeavesPlay".equals(duration) || "UntilLoseControlOfHost".equals(duration))
+                && !(hostCard.isInPlay() || hostCard.isInZone(ZoneType.Stack))) {
+            return;
+        }
+        if ("UntilLoseControlOfHost".equals(duration) && hostCard.getController() != sa.getActivatingPlayer()) {
+            return;
+        }
 
         if (sa.hasParam("Abilities")) {
             effectAbilities = sa.getParam("Abilities").split(",");
@@ -136,6 +147,10 @@ public class EffectEffect extends SpellAbilityEffect {
             image = hostCard.getImageKey();
         }
 
+        Map<AbilityKey, Object> params = AbilityKey.newMap();
+        params.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+        params.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
+
         for (Player controller : effectOwner) {
             final Card eff = createEffect(sa, controller, name, image);
             eff.setSetCode(sa.getHostCard().getSetCode());
@@ -198,9 +213,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // Set Remembered
             if (rememberList != null) {
-                for (final Object o : rememberList) {
-                    eff.addRemembered(o);
-                }
+                eff.addRemembered(rememberList);
                 if (sa.hasParam("ForgetOnMoved")) {
                     addForgetOnMovedTrigger(eff, sa.getParam("ForgetOnMoved"));
                     if (!"Stack".equals(sa.getParam("ForgetOnMoved"))) {
@@ -219,9 +232,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // Set Imprinted
             if (effectImprinted != null) {
-                for (final Card c : AbilityUtils.getDefinedCards(hostCard, effectImprinted, sa)) {
-                    eff.addImprintedCard(c);
-                }
+                eff.addImprintedCards(AbilityUtils.getDefinedCards(hostCard, effectImprinted, sa));
             }
 
             // Note counters on defined
@@ -242,7 +253,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // Set Chosen Player
-            if (hostCard.getChosenPlayer() != null) {
+            if (hostCard.hasChosenPlayer()) {
                 eff.setChosenPlayer(hostCard.getChosenPlayer());
             }
 
@@ -273,8 +284,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // Duration
-            final String duration = sa.getParam("Duration");
-            if ((duration == null) || !duration.equals("Permanent")) {
+            if (duration == null || !duration.equals("Permanent")) {
                 final GameCommand endEffect = new GameCommand() {
                     private static final long serialVersionUID = -5861759814760561373L;
 
@@ -284,19 +294,24 @@ public class EffectEffect extends SpellAbilityEffect {
                     }
                 };
 
-                if ((duration == null) || duration.equals("EndOfTurn")) {
+                if (duration == null || duration.equals("EndOfTurn")) {
                     game.getEndOfTurn().addUntil(endEffect);
                 } else if (duration.equals("UntilHostLeavesPlay")) {
                     hostCard.addLeavesPlayCommand(endEffect);
                 } else if (duration.equals("UntilHostLeavesPlayOrEOT")) {
                     game.getEndOfTurn().addUntil(endEffect);
                     hostCard.addLeavesPlayCommand(endEffect);
+                } else if (duration.equals("UntilLoseControlOfHost")) {
+                    hostCard.addLeavesPlayCommand(endEffect);
+                    hostCard.addChangeControllerCommand(endEffect);
                 } else if (duration.equals("UntilYourNextTurn")) {
                     game.getCleanup().addUntil(controller, endEffect);
                 } else if (duration.equals("UntilYourNextUpkeep")) {
                     game.getUpkeep().addUntil(controller, endEffect);
                 } else if (duration.equals("UntilEndOfCombat")) {
                     game.getEndOfCombat().addUntil(endEffect);
+                } else if (duration.equals("UntilYourNextEndStep")) {
+                    game.getEndOfTurn().addUntil(controller, endEffect);
                 } else if (duration.equals("UntilTheEndOfYourNextTurn")) {
                     if (game.getPhaseHandler().isPlayerTurn(controller)) {
                         game.getEndOfTurn().registerUntilEnd(controller, endEffect);
@@ -304,7 +319,7 @@ public class EffectEffect extends SpellAbilityEffect {
                         game.getEndOfTurn().addUntilEnd(controller, endEffect);
                     }
                 } else if (duration.equals("ThisTurnAndNextTurn")) {
-                    game.getUntap().addAt(new GameCommand() {
+                    game.getEndOfTurn().addUntil(new GameCommand() {
                         private static final long serialVersionUID = -5054153666503075717L;
 
                         @Override
@@ -323,7 +338,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             // TODO: Add targeting to the effect so it knows who it's dealing with
             game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-            game.getAction().moveTo(ZoneType.Command, eff, sa);
+            game.getAction().moveTo(ZoneType.Command, eff, sa, params);
             eff.updateStateForView();
             game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
             //if (effectTriggers != null) {

@@ -1,5 +1,5 @@
 [format]
-Name:Theros Block, Born of the Gods
+Name:Block: Theros (BNG)
 Type:Historic
 Subtype:Block
 Effective:2014-02-07

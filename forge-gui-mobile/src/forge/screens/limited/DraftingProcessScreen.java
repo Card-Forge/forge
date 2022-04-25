@@ -1,5 +1,6 @@
 package forge.screens.limited;
 
+import forge.Forge;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.deck.Deck;
@@ -15,11 +16,9 @@ import forge.screens.FScreen;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
-import forge.util.Localizer;
 
 public class DraftingProcessScreen extends FDeckEditor {
     private boolean isDraftSaved;
-    private final Localizer localizer = Localizer.getInstance();
     private final BoosterDraft draft;
     private final QuestTournamentController questDraftController;
 
@@ -50,7 +49,7 @@ public class DraftingProcessScreen extends FDeckEditor {
             return;
         }
 
-        FOptionPane.showInputDialog(localizer.getMessage("lblSaveDraftAs") + "?", new Callback<String>() {
+        FOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblSaveDraftAs") + "?", new Callback<String>() {
             @Override
             public void run(final String name) {
                 if (StringUtils.isEmpty(name)) {
@@ -62,8 +61,8 @@ public class DraftingProcessScreen extends FDeckEditor {
                 for (DeckGroup d : FModel.getDecks().getDraft()) {
                     if (name.equalsIgnoreCase(d.getName())) {
                         FOptionPane.showConfirmDialog(
-                            localizer.getMessage("lblAlreadyDeckName") + name + localizer.getMessage("lblOverwriteConfirm"),
-                            localizer.getMessage("lblOverwriteDeck"), false, new Callback<Boolean>() {
+                            Forge.getLocalizer().getMessage("lblAlreadyDeckName") + name + Forge.getLocalizer().getMessage("lblOverwriteConfirm"),
+                            Forge.getLocalizer().getMessage("lblOverwriteDeck"), false, new Callback<Boolean>() {
                                 @Override
                                 public void run(Boolean result) {
                                     if (result) {
@@ -106,6 +105,7 @@ public class DraftingProcessScreen extends FDeckEditor {
             DeckPreferences.setDraftDeck(name);
 
             LoadGameScreen.BoosterDraft.setAsBackScreen(false); //set load draft screen to be opened when user done editing deck
+            LoadGameScreen.BoosterDraft.open();
             break;
         case QuestDraft:
             FModel.getQuest().getDraftDecks().add(finishedDraft);
@@ -144,7 +144,7 @@ public class DraftingProcessScreen extends FDeckEditor {
             return;
         }
 
-        FOptionPane.showConfirmDialog(localizer.getMessage("lblEndDraftConfirm"), localizer.getMessage("lblLeaveDraft"), localizer.getMessage("lblLeave"), localizer.getMessage("lblCancel"), false, canCloseCallback);
+        FOptionPane.showConfirmDialog(Forge.getLocalizer().getMessage("lblEndDraftConfirm"), Forge.getLocalizer().getMessage("lblLeaveDraft"), Forge.getLocalizer().getMessage("lblLeave"), Forge.getLocalizer().getMessage("lblCancel"), false, canCloseCallback);
     }
 
     @Override

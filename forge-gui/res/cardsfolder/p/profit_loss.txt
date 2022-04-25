@@ -1,9 +1,9 @@
 Name:Profit
 ManaCost:1 W
-AlternateMode: Split
 Types:Instant
 K:Fuse
 A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+AlternateMode:Split
 Oracle:Creatures you control get +1/+1 until end of turn.\nFuse (You may cast one or both halves of this card from your hand.)
 
 ALTERNATE

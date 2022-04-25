@@ -5,9 +5,9 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Hidden Collision" width="30" height="17">
+ <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJztkWEKwyAMhfO/6QlGL9adRXcua3u3KRr6FpraMdiPYiAk6ku+BxLt8RyJFiaax9Jj1e/fhOywZicu9cGllxqqHt/PGHk/ZuR9Rs9mfTS4eJcjKN/IioanIy4yrQhqZ+A2q8WdLsz9Gp3buZ17L+6W+tfwf67Fdunsa1q+UHOms7jCxh0rnC1fK3/6lj9z4AN1muuHdiLbKV/yLt7RD+rk/g0bmEEi
+   eJzNlWEKgzAMhft32J3A7joewp1l7F7V3c0GHYRH0tRCqw9CwPr6JRHb4J0LFXFG76dzc4ro90zS9suxclzJt6QYD88/az1Y3NJZBOAh1xK982IerMHqv5ZbI2kO1pxbsDVuK/4V/XI2cnuoNzf3fXvoTtyWbPxXRi+vWfWWPsd1PK9IseJumB5lZ3SOqzEoeE3fQfZg3Rif5FsVblT8keWfUKvmwz14kDbVtimh
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -20,17 +20,12 @@
    eJydlUFOwzAQRS2FItscoZRyuW66YMkOiFhwtbRV70ADPQgZxV/+GexJ4EtWpMYzb/xnnDr3P62jc1fv3HOYri+/LP4h1t91Q46jkUezwZyLE8l+sD/u8lNin8K4ajmQX/jftKeJY9ytcSbU2obMlOVj5p5Szs/huR1+7/20rpLO3q5Zc0XMlLWKI/MxZn/6BX7U3nf+N3cXpkycVfeyVftKEr9Xymv4pLlNnJ6TJez7tDbKE6uXmgmuzOGG4lCneNsbcyn7zgW/Je5SiN1TnaX7hjjp51vFQ80vzYGOZS9LQi9faYZE1p1skl/v1Dtw+T7DI61OzRF6gBm32HxWxKGnelY0k2dkHXPf2aMa+yX8nSnazcwn99Hiir/IdZqZNX2mWu+t2nHP4NEN7UVNbSWvsMFHnVuDdUzfzEM6x6HSA/S9xtXCfJb+t/T3lBffZZ61peLvI98pi6nZ+MaxfgC4a38Z
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJytlV1OhUAMhRsTn2AXoBiju9AnXQkL0Zt4r3uC6/VnRz5Kw3yh1DIY4kkaZqZlzum0DLWItDLi7mwcY0+FyEUpcjlYU45zjPWtplxieMRoUByHmLfBTuXki3irFIfVK7yglTnIq00avKaj4zml80Dv5wp3tC/ozVjjvs8nTV4beDe6c9z2nQdzvlvw6HS2mbzRa3MAjK8Cjs7N0d/I75pE3DY/zu2/gN6oD9GqviazRy1TTnV6VulJ3UFn/F9p7HnJ92ZLQn/AtcT52r76kHFu+7iXGNTD6uXeseB7iXh13feJrzu4Tc9a5rhf0AeWzjnqWYXWvArWiY98Fmj2vLth/bWY7xHlv4alnuS+ie7zrhy5fW0i3QBd0T1jNas/qq/n9nXdD3YoJh/8jL2f94nTXPcr/y+42Vfj++Q7mHpYXez3UszPjN62e+SsSzXfBfGN+X9pPz+7GHRz9+Y4fwB/lnBz
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
+   eJydVVtOwzAQXCHx5dwiboMQ3AK+4CQ5SB+icKe0tNAb8Vmv4lGGzTqtMtIqrnfrmX3EiSLSSo+Xu34NWwWRRSWyTNZU/W8Y9ueacgnxCGlQHFLMd7JjNfg83jrHweIVXqCV/0BebdZgNR0MzzHXg/VOcXvnAntacz3+7sfagBPp/p3g5vPexOe/Fe+0hp5S3vB7fNh7cDi6Ancj4554eaMf4Jmbr50P1uvNIf6jvsb8jzVFOjvmJ/psgVrUyc55bXlx9tMtSc3Ao/j5cn1+8pPnmNcM9IP14t5h4H3xeHW/o7gSh+I5P6OJeS3oA0p19mZWfdrz2vEh3vN5mi3vJu1vw/iM0ntSgp1JQOun8+fd513Vc3s1trqtLp55T7P6vf4y91cYv8/rZJ9h8IEf6132b8PAwfeA5qpn7CfuauSN+53jwW1rgDw+st9+U3dXOJlbe75x4hv6fuk82zxYd+v42S48YHJK
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -39,18 +34,18 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../obj/treasure.tx" x="178.834" y="30.5833"/>
-  <object id="63" template="../obj/gold.tx" x="194.333" y="28.667"/>
+  <object id="48" template="../obj/treasure.tx" x="176.334" y="32.5833"/>
+  <object id="63" template="../obj/gold.tx" x="192.333" y="29.167"/>
   <object id="65" template="../obj/enemy.tx" x="207.25" y="229.833">
    <properties>
     <property name="enemy" value="Hydra"/>
    </properties>
   </object>
-  <object id="66" template="../obj/enemy.tx" x="190.833" y="72.6667">
+  <object id="66" template="../obj/enemy.tx" x="188.083" y="72.6667">
    <properties>
     <property name="enemy" value="Hydra"/>
    </properties>
   </object>
-  <object id="68" template="../obj/gold.tx" x="178.667" y="45.6667"/>
+  <object id="68" template="../obj/gold.tx" x="177.667" y="45.6667"/>
  </objectgroup>
 </map>

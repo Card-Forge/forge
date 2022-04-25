@@ -1,0 +1,11 @@
+Name:Mysterious Limousine
+ManaCost:3 W W
+Types:Artifact Vehicle
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, exile up to one other target creature until CARDNAME leaves the battlefield. If a creature is put into exile this way, return each other card exiled with CARDNAME to the battlefield under its owner's control.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, exile up to one other target creature until CARDNAME leaves the battlefield. If a creature is put into exile this way, return each other card exiled with CARDNAME to the battlefield under its owner's control.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.Other | TgtPrompt$ Select up to one other target creature | TargetMin$ 0 | TargetMax$ 1 | Duration$ UntilHostLeavesPlay | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | ConditionDefined$ Remembered | ConditionPresent$ Card | Defined$ Card.ExiledWithSource+IsNotRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Crew:2
+Oracle:Whenever Mysterious Limousine enters the battlefield or attacks, exile up to one other target creature until Mysterious Limousine leaves the battlefield. If a creature is put into exile this way, return each other card exiled with Mysterious Limousine to the battlefield under its owner's control.\nCrew 2

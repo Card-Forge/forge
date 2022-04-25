@@ -1,6 +1,6 @@
 [format]
-Name:Standard, Battle for Zendikar
+Name:Standard (BFZ)
 Type:Historic
 Subtype:Standard
 Effective:2015-10-02
-Sets:KTK, FRF, DTK, ORI, BFZ
+Sets:KTK, FRF, UGF, DTK, ORI, BFZ

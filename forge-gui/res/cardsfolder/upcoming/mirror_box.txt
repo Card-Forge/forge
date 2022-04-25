@@ -1,8 +1,0 @@
-Name:Mirror Box
-ManaCost:3
-Types:Artifact
-S:Mode$ Continuous | Affected$ Permanent.YouCtrl | AddHiddenKeyword$ Legend rule doesn't apply to CARDNAME. | Description$ The "legend rule" doesn't apply to permanents you control.
-S:Mode$ Continuous | Affected$ Creature.Legendary+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Each legendary creature you control gets +1/+1.
-S:Mode$ Continuous | Affected$ Creature.nonToken+YouCtrl | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Each nontoken creature you control gets +1/+1 for each other creature you control with the same name as that creature.
-SVar:AffectedX:Count$Valid Creature.Other+sharesNameWith+YouCtrl
-Oracle:The "legend rule" doesn’t apply to permanents you control.\nEach legendary creature you control gets +1/+1.\nEach nontoken creature you control gets +1/+1 for each other creature you control with the same name as that creature.

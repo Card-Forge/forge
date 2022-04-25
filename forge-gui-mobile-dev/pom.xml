@@ -4,7 +4,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.48-SNAPSHOT</version>
+        <version>1.6.50-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-mobile-dev</artifactId>
@@ -19,6 +19,11 @@
                 <includes>
                     <include>**/*.vert</include>
                     <include>**/*.frag</include>
+                    <include>**/title_bg_lq.png</include>
+                    <include>**/transition.png</include>
+                    <include>**/bg_splash.png</include>
+                    <include>**/bg_texture.jpg</include>
+                    <include>**/font1.ttf</include>
                 </includes>
             </resource>
         </resources>

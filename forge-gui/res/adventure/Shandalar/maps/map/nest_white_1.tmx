@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="59">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2MEJgDAQAMEUECtQGzOVqtibOdACFCOr7MB9E5bkdaVLacltZq0T5kbnnzPVhvG468v6bAeJHSx2sNjBYgeLHSx2sNjBYgeLHSx2sNhxzbkvC1uD+3yP+0r3/JlvdcT+dchtGoL/isUOFjtY7GCxg8UOFjtY7GCxg8UOlugYfjI7HCk/rg==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1yEOACAMADEsH0fuzVgEIQiSAamoGmI3R9RSYqINZvPV+wy37qXjTEvWDXTo0KFDhw4d/3Zk7KJjr+OF/wcAAAAAAAB36k/HeTg=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzVWllOw0AM7WdzuBSUizbQ3oqW5gjEUi0sy+PxFkKflB/IeLzNG9vp9Xg4nAb5eV+fDEYm702R97X+70p0+V6fj6N9L74en8/1b/eEHed1/UJk3Ya+PNDlRvTx+nHa0IaIPmDPpaMD7MHjhevAD5INsGZen4cx1hhjaxy8QD9B7s0NeyQbIr6VZFWA62PNnez5w729a1pyIjYgOO+ALdYcA0wO+zWbp8HHGxwtTrPoRn2ovX9+nr9Fec9y/qO2aOeF54FmC5efvbu8tmj7Ud7CdVpOU/ne3I3YonG09D68Y80Jepdl7zELtuJV6qdMbiFfVHFlFFE/cb5YEv5GWZV+sPhV4pXT8BsX6e7XgDneqhu8+s9P/Xp5xutMypFonydXpRogYg+vma35Qc9Ypv5txdfji2zNDBgTNgBa8fXoktUB9UAdtB7OI8erS5UOU9E9hPpEdMG4ZuupqntuqzsTgBz/yqBc8KrgfBaV8Rh8PXs1OCdGZWR73SqgPZn11r5Hq232rkcB6IseN45K3LB3z9ZhFFvU7L0aid7bVfmJvtFmXF4sHT23OGtS/52RezbWm3xf6e739g98VpWZvfGaV6tNJqOtVl1a8x1vfcTl9Go1fF/jvcnpV48OGifQu8rih14dFqmB6exJs8Hab1bWnN5ZSm9/b5yrIOmVqY/4/G+vOTwg48/oHICuzfR6FFFu5bzqXU9rlYqaOdLL8zhYZ73S+qp73KsDYGS2e/ioNRPKzgIinBj9niJ9F8vMRGg/95eQ5kARn9BZaaavzSA7y5Fietm5D4sgM9v7b5BiWvlte88+W/vOawH9/lN1N0d8gtwX5b1oXdKT6fUt7O35vQHfr6r/nUlcIzKtvzfgqOzlK34D9gMJRs0E
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztWUtOAzEMnR10gXoqPhLchAOUFi4Gd0DtBi4ALNpTwIhafXJtx544nUHibVpl4sTx59mZ6boDNrPf3x2MrYWxjj2/2f9fXRw/fz1TBA08CutkQTrHrUPu/jxbkwO0815XrEnnXO7XvjPmkv+2MCb5UsOVMEZx49UB9fCOEyK6IpZMrrQP328zOx7roeWKB1z2ITEXtuUpbnA9yXaeXCJoca/p2dsY7YH5wfWRfEA+4ja14qclF2kg/Rawtzc2OWo4xIuobsgDKLtjz9GHi4IfiG+sGC+tQVgl2D0TyDMSSjG6NuTRxnjuCO+U9BsC5BHJp1GOxbORvbJyY2j9IZT0QP9a/Cr5rCZ+v4QxsjvpROvzvXFfzPeI36yzlmLeG7+aPtH4suZn1l1cq0XenQJWvljcy/mbYkCKExpD7tNihveBFobmU6n3/YcPUl5HezSrHiKm5rNSnampQxKXaOvV1rtsZPsJ18vgbq3vPOXd4kMY0/jUg8g9z5Id434VQR/rz/Oue5nH5KS40eLAU8cpJmtq/tvPGd7n/ntQj8z7z9C1rBw8BRddNlqXfOmtR565Q2xck8s9+t63dR5Lce+JY64X2SfS8/Gew1NvcN9IjE6ttraCJ+a474bUYryXefw2lZ4vclbp/TtCuptGOOev49MxR8o7D6c9NerJW793jPCfhizOnyLncX6KvIuOQOrLOdDOmXvXIttvnJOQAzO/gw3B2PtbqLlXRBDxN+YP16Nlr4h7RThUetddC+IMq9ep7b3HhOXHEk9x2VI9svbiPRvZtFUN9XwbaHVnRFg93FjfLSWdJN7QbEi9msY1Nfli+W3svl+qL16+ranDNVw8VDZSlyQeiX6bQ9uWZL8BeaSKhw==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="50" template="../obj/enemy.tx" x="455.333" y="335.167">
+   <properties>
+    <property name="enemy" value="Griffin"/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/treasure.tx" x="431.833" y="431.833"/>
+  <object id="52" template="../obj/gold.tx" x="418.667" y="426.834"/>
+  <object id="53" template="../obj/enemy.tx" x="345.75" y="383.917">
+   <properties>
+    <property name="enemy" value="Griffin"/>
+   </properties>
+  </object>
+  <object id="54" template="../obj/enemy.tx" x="390.584" y="427.916">
+   <properties>
+    <property name="enemy" value="Griffin"/>
+   </properties>
+  </object>
+  <object id="56" template="../obj/entry_down.tx" x="385" y="16.6667"/>
+  <object id="57" template="../obj/gold.tx" x="418.667" y="437.333"/>
+  <object id="58" template="../obj/enemy.tx" x="404.333" y="427.917">
+   <properties>
+    <property name="enemy" value="Griffin"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

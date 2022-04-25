@@ -25,6 +25,7 @@ import forge.card.CardType;
 import forge.card.CardType.CoreType;
 import forge.card.CardType.Supertype;
 import forge.card.MagicColor;
+import forge.deck.Deck;
 import forge.deck.CardPool;
 import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
@@ -331,8 +332,6 @@ public class AdvancedSearch {
             protected CardEdition getItemValue(InventoryItem input) {
                 if (input instanceof PaperCard) {
                     CardEdition set = FModel.getMagicDb().getEditions().get(((PaperCard)input).getEdition());
-                    if (set == null)  // try custom set
-                        set = FModel.getMagicDb().getCustomEditions().get(((PaperCard)input).getEdition());
                     return set;
                 } else if (input instanceof SealedProduct) {
                     return FModel.getMagicDb().getEditions().get(((SealedProduct)input).getEdition());
@@ -633,7 +632,7 @@ public class AdvancedSearch {
             protected Map<String, Integer> getItemValue(DeckProxy input) {
                 CardPool sideboard = input.getDeck().get(DeckSection.Sideboard);
                 if (sideboard != null) {
-                    sideboard.toNameLookup();
+                    return sideboard.toNameLookup();
                 }
                 return null;
             }
@@ -647,7 +646,7 @@ public class AdvancedSearch {
         DECK_SIDE_SIZE("lblSideboardSize", DeckProxy.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<DeckProxy>(0, 15) {
             @Override
             protected Integer getItemValue(DeckProxy input) {
-                return Math.min(input.getSideSize(), 0);
+                return Math.max(input.getSideSize(), 0);
             }
         }),
         COMMANDER_NAME("lblName", ConquestCommander.class, FilterOperator.STRING_OPS, new StringEvaluator<ConquestCommander>() {
@@ -681,7 +680,7 @@ public class AdvancedSearch {
         COMMANDER_DECK_AVERAGE_CMC("lblDeckAverageCMC", ConquestCommander.class, FilterOperator.NUMBER_OPS, new NumericEvaluator<ConquestCommander>(0, 20) {
             @Override
             protected Integer getItemValue(ConquestCommander input) {
-                return DeckProxy.getAverageCMC(input.getDeck());
+                return Deck.getAverageCMC(input.getDeck());
             }
         }),
         COMMANDER_DECK_CONTENTS("lblDeckContents", ConquestCommander.class, FilterOperator.DECK_CONTENT_OPS, new DeckContentEvaluator<ConquestCommander>() {

@@ -5,8 +5,8 @@ PT:2/4
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast a noncreature spell, CARDNAME deals 1 damage to each opponent.
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ 1 | Defined$ Player.Opponent
 K:Daybound
-AlternateMode:DoubleFaced
 SVar:BuffedBy:Card.nonCreature+nonLand
+AlternateMode:DoubleFaced
 Oracle:Whenever you cast a noncreature spell, Lambholt Raconteur deals 1 damage to each opponent.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
 
 ALTERNATE

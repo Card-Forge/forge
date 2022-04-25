@@ -5,6 +5,11 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="5" name="Collision" width="30" height="17">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFIwXUcjMw1EFxPTf97JXmYWDYBcWyPPS1FwZg9u6ig/07kfy7m47+HYkAFMd7eOgTr+iAnml5FIwCagIA69wKDQ==
+  </data>
+ </layer>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFNMerOAbeDaN4FI/iUTyKRzEAYUGtrg==
@@ -19,11 +24,6 @@
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
   </data>

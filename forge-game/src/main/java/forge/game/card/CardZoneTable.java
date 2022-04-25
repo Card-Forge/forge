@@ -90,7 +90,7 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
         }
 
         if (valid != null) {
-            allCards = CardLists.getValidCards(allCards, valid.split(","), host.getController(), host, sa);
+            allCards = CardLists.getValidCards(allCards, valid, host.getController(), host, sa);
         }
         return allCards;
     }

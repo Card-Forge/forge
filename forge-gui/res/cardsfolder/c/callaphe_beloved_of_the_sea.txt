@@ -2,7 +2,7 @@ Name:Callaphe, Beloved of the Sea
 ManaCost:1 U U
 Types:Legendary Enchantment Creature Demigod
 PT:*/3
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to your devotion to blue.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ NICKNAME's power is equal to your devotion to blue.
 SVar:X:Count$Devotion.Blue
 SVar:BuffedBy:Permanent.Blue
 S:Mode$ Continuous | Affected$ Creature.YouCtrl,Enchantment.YouCtrl | AddStaticAbility$ RaiseCost | Description$ Creatures and enchantments you control have "Spells your opponents cast that target this permanent cost {1} more to cast."

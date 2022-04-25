@@ -74,7 +74,7 @@ public class TriggerDrawn extends Trigger {
             final String sIsPresent = this.getParam("ValidPlayerControls");
             final Player p = ((Player)runParams.get(AbilityKey.Player));
             CardCollection list = (CardCollection) p.getCardsIn(ZoneType.Battlefield);
-            list = CardLists.getValidCards(list, sIsPresent.split(","), this.getHostCard().getController(),
+            list = CardLists.getValidCards(list, sIsPresent, this.getHostCard().getController(),
                     this.getHostCard(), this);
             if (list.size() == 0) {
                 return false;
@@ -87,10 +87,16 @@ public class TriggerDrawn extends Trigger {
             }
         }
 
-        if (hasParam("NotFirstCardInDrawStep")) {
+        if (hasParam("FirstCardInDrawStep")) {
             final Player p = ((Player)runParams.get(AbilityKey.Player));
-            if (p.numDrawnThisDrawStep() == 1 && game.getPhaseHandler().is(PhaseType.DRAW, p)) {
-                return false;
+            if (getParam("FirstCardInDrawStep").equals("True")) {
+                if (!game.getPhaseHandler().is(PhaseType.DRAW, p) || p.numDrawnThisDrawStep() > 1) {
+                    return false;
+                }
+            } else {
+                if (p.numDrawnThisDrawStep() == 1 && game.getPhaseHandler().is(PhaseType.DRAW, p)) {
+                    return false;
+                }
             }
         }
 

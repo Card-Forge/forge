@@ -198,7 +198,7 @@ public class CloneAi extends SpellAbilityAi {
             filter = filter.replace(".nonLegendary+", ".").replace(".nonLegendary", "");
         }
 
-        CardCollection newOptions = CardLists.getValidCards(options, filter.split(","), ctrl, host, sa);
+        CardCollection newOptions = CardLists.getValidCards(options, filter, ctrl, host, sa);
         if (!newOptions.isEmpty()) {
             options = newOptions;
         }

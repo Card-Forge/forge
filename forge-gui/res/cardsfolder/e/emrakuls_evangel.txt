@@ -2,7 +2,7 @@ Name:Emrakul's Evangel
 ManaCost:2 G
 Types:Creature Human Horror
 PT:3/2
-A:AB$ Token | Cost$ T Sac<X/Creature.Other+nonEldrazi/other non-Eldrazi creatures> Sac<1/CARDNAME> | TokenAmount$ Y | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You | LegacyImage$ c 3 2 eldrazi horror emn | SpellDescription$ Create a 3/2 colorless Eldrazi Horror creature token for each creature sacrificed this way. | CostDesc$ {T}, Sacrifice CARDNAME and any number of other non-Eldrazi creatures:
+A:AB$ Token | Cost$ T Sac<X/Creature.Other+nonEldrazi/other non-Eldrazi creatures> Sac<1/CARDNAME> | TokenAmount$ Y | TokenScript$ c_3_2_eldrazi_horror | TokenOwner$ You | SpellDescription$ Create a 3/2 colorless Eldrazi Horror creature token for each creature sacrificed this way. | CostDesc$ {T}, Sacrifice CARDNAME and any number of other non-Eldrazi creatures:
 SVar:Y:Sacrificed$Valid Creature
 SVar:X:Count$xPaid
 DeckHints:Ability$Token & Type$Eldrazi|Horror

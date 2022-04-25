@@ -1,0 +1,8 @@
+Name:Armguard Familiar
+ManaCost:1 U
+Types:Artifact Creature Equipment Beast
+PT:2/1
+K:Ward:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 1 | AddKeyword$ Ward:2 | Description$ Equipped creature gets +2/+1 and has ward {2}.
+K:Reconfigure:4
+Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nEquipped creature gets +2/+1 and has ward {2}.\nReconfigure {4} ({4}: Attach to target creature you control; or unattach from a creature. Reconfigure only as a sorcery. While attached, this isn't a creature.)

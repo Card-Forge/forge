@@ -1,9 +1,9 @@
 Name:Catch
 ManaCost:1 U R
-AlternateMode: Split
 Types:Sorcery
 K:Fuse
 A:SP$ GainControl | Cost$ 1 U R | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SpellDescription$ Gain control of target permanent until end of turn. Untap it. It gains haste until end of turn.
+AlternateMode:Split
 Oracle:Gain control of target permanent until end of turn. Untap it. It gains haste until end of turn.\nFuse (You may cast one or both halves of this card from your hand.)
 
 ALTERNATE

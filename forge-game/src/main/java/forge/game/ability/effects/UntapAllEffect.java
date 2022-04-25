@@ -37,7 +37,7 @@ public class UntapAllEffect extends SpellAbilityEffect {
             }
             list = list2;
         }
-        list = CardLists.getValidCards(list, valid.split(","), card.getController(), card, sa);
+        list = CardLists.getValidCards(list, valid, card.getController(), card, sa);
 
         boolean remember = sa.hasParam("RememberUntapped");
         for (Card c : list) {

@@ -1,0 +1,10 @@
+Name:A-Cosmos Charger
+ManaCost:2 U
+Types:Creature Horse Spirit
+PT:3/2
+K:Flash
+K:Flying
+S:Mode$ ReduceCost | ValidSpell$ Static.Foretelling | Activator$ You | Amount$ 1 | Description$ Foretelling cards from your hand costs {1} less and can be done on any player's turn.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Foretell on any player's turn | Secondary$ True | Description$ Foretelling cards from your hand on any player's turn.
+K:Foretell:U
+Oracle:Flash\nFlying\nForetelling cards from your hand costs {1} less and can be done on any player's turn.\nForetell {U}

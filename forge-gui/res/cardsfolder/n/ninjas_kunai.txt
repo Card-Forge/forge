@@ -1,0 +1,8 @@
+Name:Ninja's Kunai
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddAbility$ MakeYourPoint | Description$ Equipped creature has "{1}, {T}, Sacrifice CARDNAME: CARDNAME deals 3 damage to any target.
+SVar:MakeYourPoint:AB$ DealDamage | Cost$ 1 T Sac<1/OriginalHost/Ninja's Kunai> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | DamageSource$ OriginalHost | SpellDescription$ ORIGINALHOST deals 3 damage to any target.
+SVar:NonStackingAttachEffect:True
+Oracle:Equipped creature has "{1}, {T}, Sacrifice Ninja's Kunai: Ninja's Kunai deals 3 damage to any target."\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

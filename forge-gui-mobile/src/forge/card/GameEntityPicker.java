@@ -21,21 +21,20 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.util.Callback;
-import forge.util.Localizer;
 
 public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
     private final FOptionPane optionPane;
 
     public GameEntityPicker(String title, Collection<? extends GameEntityView> choiceList, Collection<CardView> revealList, String revealListCaption, FImage revealListImage, boolean isOptional, final Callback<GameEntityView> callback) {
         super(new PickerTab[] {
-                new PickerTab(choiceList, Localizer.getInstance().getMessage("lblChoices"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, 1),
+                new PickerTab(choiceList, Forge.getLocalizer().getMessage("lblChoices"), Forge.hdbuttons ? FSkinImage.HDCHOICE : FSkinImage.DECKLIST, 1),
                 new PickerTab(revealList, revealListCaption, revealListImage, 0)
         }, false);
 
         setHeight(FOptionPane.getMaxDisplayObjHeight());
 
         optionPane = new FOptionPane(null, null, title, null, this,
-                isOptional ? ImmutableList.of(Localizer.getInstance().getMessage("lblOK"), Localizer.getInstance().getMessage("lblCancel")) : ImmutableList.of(Localizer.getInstance().getMessage("lblOK")), 0, new Callback<Integer>() {
+                isOptional ? ImmutableList.of(Forge.getLocalizer().getMessage("lblOK"), Forge.getLocalizer().getMessage("lblCancel")) : ImmutableList.of(Forge.getLocalizer().getMessage("lblOK")), 0, new Callback<Integer>() {
                     @Override
                     public void run(Integer result) {
                         if (result == 0) {
@@ -75,7 +74,7 @@ public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
             super(caption0 + " (" + items.size() + ")", icon0);
             txtSearch = add(new FTextField());
             txtSearch.setFont(FSkinFont.get(12));
-            txtSearch.setGhostText(Localizer.getInstance().getMessage("lblSearch"));
+            txtSearch.setGhostText(Forge.getLocalizer().getMessage("lblSearch"));
             txtSearch.setChangedHandler(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {

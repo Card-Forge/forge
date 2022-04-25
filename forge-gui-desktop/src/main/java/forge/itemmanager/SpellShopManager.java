@@ -17,7 +17,7 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
     private final boolean wantUnique02;
 
     public SpellShopManager(final CDetailPicture cDetailPicture, final boolean wantUnique0) {
-        super(InventoryItem.class, cDetailPicture, wantUnique0);
+        super(InventoryItem.class, cDetailPicture, wantUnique0, false);
         cDetailPicture2 = cDetailPicture;
         wantUnique02 = wantUnique0;
     }
@@ -34,7 +34,7 @@ public final class SpellShopManager extends ItemManager<InventoryItem> {
 
     @Override
     protected void buildAddFilterMenu(JMenu menu) {
-        CardManager CM = new CardManager(cDetailPicture2, wantUnique02, true);
+        CardManager CM = new CardManager(cDetailPicture2, wantUnique02, true, false);
         CM.buildAddFilterMenu(menu, this);
     }
 }

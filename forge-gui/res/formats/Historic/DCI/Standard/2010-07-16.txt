@@ -1,5 +1,5 @@
 [format]
-Name:Standard, 2011 Core Set
+Name:Standard (M11)
 Type:Historic
 Subtype:Standard
 Effective:2010-07-16

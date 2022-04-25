@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Function;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -19,7 +20,6 @@ import forge.itemmanager.filters.AdvancedSearchFilter;
 import forge.itemmanager.filters.TextSearchFilter;
 import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
-import forge.util.Localizer;
 
 
 public class SpellShopManager extends ItemManager<InventoryItem> {
@@ -30,7 +30,7 @@ public class SpellShopManager extends ItemManager<InventoryItem> {
 
         fnGetPrice = isShop0 ? QuestSpellShop.fnPriceGet : QuestSpellShop.fnPriceSellGet;
         if (!isShop0) {
-            setCaption(Localizer.getInstance().getMessage("lblCards"));
+            setCaption(Forge.getLocalizer().getMessage("lblCards"));
         }
     }
 

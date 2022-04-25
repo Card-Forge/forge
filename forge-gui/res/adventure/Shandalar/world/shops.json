@@ -1,4 +1,83 @@
 [{                                      
+"name":"Equipment",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"EquipmentShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Mithril Boots"  },
+    { "type": "item","count":1, "itemName": "Mithril Shield"  },
+    { "type": "item","count":1, "itemName": "Mithril Armor"  },      
+    { "type": "item","count":1, "itemName": "Steel Boots"  },
+    { "type": "item","count":1, "itemName": "Steel Shield"  },
+    { "type": "item","count":1, "itemName": "Steel Armor"  } 
+    
+    ]
+
+},{                                      
+"name":"Swamp",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"LandShop",      
+"unlimited":true,
+  "rewards": [
+    {
+      "count":1,
+      "superTypes": ["Basic"],
+      "cardTypes": ["Land"],
+      "subTypes": ["Swamp"]
+    }]
+
+},{                                      
+"name":"Forest",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"LandShop",      
+"unlimited":true,
+  "rewards": [
+    {
+      "count":1,
+      "superTypes": ["Basic"],
+      "cardTypes": ["Land"],
+      "subTypes": ["Forest"]
+    }]
+
+},{                                      
+"name":"Mountain",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"LandShop",      
+"unlimited":true,
+  "rewards": [
+    {
+      "count":1,
+      "superTypes": ["Basic"],
+      "cardTypes": ["Land"],
+      "subTypes": ["Mountain"]
+    }]
+
+},{                                      
+"name":"Island",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"LandShop",      
+"unlimited":true,
+  "rewards": [
+    {
+      "count":1,
+      "superTypes": ["Basic"],
+      "cardTypes": ["Land"],
+      "subTypes": ["Island"]
+    }]
+
+},{                                      
+"name":"Plains",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"LandShop",      
+"unlimited":true,
+  "rewards": [
+    {
+      "count":1,
+      "superTypes": ["Basic"],
+      "cardTypes": ["Land"],
+      "subTypes": ["Plains"]
+    }]
+
+},{                                      
 "name":"Instant",                  
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"InstantShop",
@@ -34,6 +113,16 @@
     {
       "count":8,
       "colorType": "Colorless"
+    }]
+},{                                    
+"name":"Artefact",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"ArtefactShop",
+  "rewards": [
+    {
+      "count":8,
+      "colorType": "Colorless",
+      "cardTypes": ["Artifact"]
     }]
 },{                                    
 "name":"Multicolor",                  
@@ -90,26 +179,12 @@
       "colors": ["blue"]
     }]
 } ,{                                    
-"name":"Azorius",                  
+"name":"Azorius",      
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"AzoriusShop",
   "rewards": [
-    {
-      "count":8,
-      "colors": ["white","blue"]
-    },
     {
       "count":4,
-      "colors": ["white","blue"],
-      "colorType": "MultiColor"
-    }]
-}   ,{                                    
-"name":"Azorius",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"AzoriusShop",
-  "rewards": [
-    {
-      "count":8,
       "colors": ["white","blue"]
     },
     {

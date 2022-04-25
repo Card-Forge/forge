@@ -32,11 +32,22 @@ public class ChooseCardEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
+        final int numCards = sa.hasParam("Amount") ?
+                AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
 
-        for (final Player p : getTargetPlayers(sa)) {
-            sb.append(p).append(" ");
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa))).append(" ");
+        if (sa.hasParam("Mandatory")) {
+            sb.append(getTargetPlayers(sa).size() == 1 ? "chooses " : "choose ");
+        } else {
+            sb.append("may choose ");
         }
-        sb.append("chooses a card.");
+        String desc = sa.getParamOrDefault("ChoiceDesc", "");
+        desc = desc.isEmpty() ? "card" : desc + " card";
+        sb.append(Lang.nounWithNumeralExceptOne(numCards, desc));
+        if (sa.hasParam("FromDesc")) {
+            sb.append(" ").append(sa.getParam("FromDesc"));
+        }
+        sb.append(".");
 
         return sb.toString();
     }

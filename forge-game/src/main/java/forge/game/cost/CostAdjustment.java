@@ -137,7 +137,8 @@ public class CostAdjustment {
                 if (StringUtils.isNumeric(amount)) {
                     count = Integer.parseInt(amount);
                 } else {
-                    if (st.hasParam("AffectedAmount")) {
+                    if (st.hasParam("Relative")) {
+                        // grab SVar here already to avoid potential collision when SA has one with same name
                         count = AbilityUtils.calculateAmount(hostCard, st.hasSVar(amount) ? st.getSVar(amount) : amount, sa);
                     } else {
                         count = AbilityUtils.calculateAmount(hostCard, amount, st);
@@ -379,7 +380,7 @@ public class CostAdjustment {
             // TODO: update cards with "This spell costs X less to cast...if you..."
             // The caster is sa.getActivatingPlayer()
             // cards like Hostage Taker can cast spells from other players.
-            value = AbilityUtils.calculateAmount(hostCard, amount, sa);
+            value = AbilityUtils.calculateAmount(hostCard, staticAbility.hasSVar(amount) ? staticAbility.getSVar(amount) : amount, sa);
         } else {
             value = AbilityUtils.calculateAmount(hostCard, amount, staticAbility);
         }
@@ -470,36 +471,8 @@ public class CostAdjustment {
                 if (!sa.isActivatedAbility() || sa.isManaAbility() || sa.isReplacementAbility()) {
                     return false;
                 }
-            } else if (type.equals("Buyback")) {
-                if (!sa.isBuyBackAbility()) {
-                    return false;
-                }
-            } else if (type.equals("Cycling")) {
-                if (!sa.isCycling()) {
-                    return false;
-                }
-            } else if (type.equals("Dash")) {
-                if (!sa.isDash()) {
-                    return false;
-                }
-            } else if (type.equals("Equip")) {
-                if (!sa.isActivatedAbility() || !sa.hasParam("Equip")) {
-                    return false;
-                }
-            } else if (type.equals("Flashback")) {
-                if (!sa.isFlashBackAbility()) {
-                    return false;
-                }
-            } else if (type.equals("MorphUp")) {
-                if (!sa.isMorphUp()) {
-                    return false;
-                }
             } else if (type.equals("MorphDown")) {
                 if (!sa.isSpell() || !sa.isCastFaceDown()) {
-                    return false;
-                }
-            } else if (type.equals("Loyalty")) {
-                if (!sa.isPwAbility()) {
                     return false;
                 }
             } else if (type.equals("Foretell")) {
@@ -513,8 +486,8 @@ public class CostAdjustment {
         }
         if (st.hasParam("AffectedZone")) {
             List<ZoneType> zones = ZoneType.listValueOf(st.getParam("AffectedZone"));
-            if (sa.isSpell()) {
-                if (!zones.contains(card.getCastFrom())) {
+            if (sa.isSpell() && sa.getHostCard().wasCast()) {
+                if (!zones.contains(card.getCastFrom().getZoneType())) {
                     return false;
                 }
             } else {

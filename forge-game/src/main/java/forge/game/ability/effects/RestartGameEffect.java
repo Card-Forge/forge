@@ -72,7 +72,6 @@ public class RestartGameEffect extends SpellAbilityEffect {
             p.resetCompletedDungeons();
             p.setBlessing(false);
             p.clearController();
-            p.setMustAttackEntity(null);
 
             CardCollection newLibrary = new CardCollection(p.getCardsIn(restartZones, false));
             List<Card> filteredCards = null;
@@ -91,6 +90,9 @@ public class RestartGameEffect extends SpellAbilityEffect {
             p.getZone(ZoneType.Command).removeAllCards(true);
 
             for (Card c : newLibrary) {
+                if (c.getIntensity(false) > 0) {
+                    c.setIntensity(0);
+                }
                 action.moveToLibrary(c, 0, sa);
             }
             p.initVariantsZones(p.getRegisteredPlayer());
@@ -103,8 +105,8 @@ public class RestartGameEffect extends SpellAbilityEffect {
 
         game.resetTurnOrder();
         game.setAge(GameStage.RestartedByKarn);
-        // Do not need this because ability will resolve only during that player's turn
-        //game.getPhaseHandler().setPlayerTurn(sa.getActivatingPlayer());
+        // For the rare case that you get to resolve it during another players turn
+        game.getPhaseHandler().setPlayerTurn(sa.getActivatingPlayer());
 
         // Set turn number?
 

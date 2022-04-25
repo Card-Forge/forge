@@ -2,7 +2,7 @@ Name:War Barge
 ManaCost:4
 Types:Artifact
 A:AB$ Pump | Cost$ 3 | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Islandwalk | RememberTargets$ True | SpellDescription$ Target creature gains islandwalk until end of turn.
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigDestroy | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield this turn, destroy that creature. A creature destroyed this way can't be regenerated.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME leaves the battlefield this turn, destroy that creature. A creature destroyed this way can't be regenerated.
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Card.IsRemembered | NoRegen$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigClearRemembered | Static$ True | Secondary$ True | TriggerDescription$ Clear Remembered at the end of any turn.
 SVar:TrigClearRemembered:DB$ Cleanup | ClearRemembered$ True

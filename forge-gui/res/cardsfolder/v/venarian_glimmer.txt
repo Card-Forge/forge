@@ -1,7 +1,7 @@
 Name:Venarian Glimmer
 ManaCost:X U
 Types:Instant
-A:SP$ Discard | Cost$ X U | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand+cmcLEX | NumCards$ 1 | SpellDescription$ Target player reveals their hand. You choose a nonland card with mana value X or less from it. That player discards that card.
+A:SP$ Discard | ValidTgts$ Player | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand+cmcLEX | DiscardValidDesc$ nonland card with mana value X or less | SpellDescription$ Target player reveals their hand. You choose a nonland card with mana value X or less from it. That player discards that card.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:Target player reveals their hand. You choose a nonland card with mana value X or less from it. That player discards that card.

@@ -1,8 +1,9 @@
 Name:Mosswort Bridge
 ManaCost:no cost
 Types:Land
-K:Hideaway
+K:Hideaway:4
+K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
 A:AB$ Play | Cost$ G T | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | ForgetRemembered$ True | AILogic$ CheckCondition | SpellDescription$ You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater.
 SVar:X:Count$SumPower_Creature.YouCtrl
-Oracle:Hideaway (This land enters the battlefield tapped. When it does, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\n{T}: Add {G}.\n{G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater.
+Oracle:Hideaway 4 (When this permanent enters the battlefield, look at the top four cards of your library, exile one face down, then put the rest on the bottom of your library.)\nMosswort Bridge enters the battlefield tapped.\n{T}: Add {G}.\n{G}, {T}: You may play the exiled card without paying its mana cost if creatures you control have total power 10 or greater.

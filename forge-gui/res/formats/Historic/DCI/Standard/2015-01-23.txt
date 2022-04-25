@@ -1,6 +1,6 @@
 [format]
-Name:Standard, Fate Reforged
+Name:Standard (FRF)
 Type:Historic
 Subtype:Standard
 Effective:2015-01-23
-Sets:THS, BNG, JOU, M15, KTK, FRF
+Sets:THS, BNG, JOU, M15, KTK, FRF, UGF

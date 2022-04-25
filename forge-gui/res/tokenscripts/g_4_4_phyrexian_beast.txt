@@ -1,6 +1,6 @@
 Name:Phyrexian Beast Token
-Colors:green
 ManaCost:no cost
-PT:4/4
+Colors:green
 Types:Creature Phyrexian Beast
+PT:4/4
 Oracle:

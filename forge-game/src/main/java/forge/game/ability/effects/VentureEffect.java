@@ -27,7 +27,7 @@ import forge.util.Localizer;
 
 public class VentureEffect  extends SpellAbilityEffect {
 
-    private Card getDungeonCard(SpellAbility sa, Player player) {
+    private Card getDungeonCard(SpellAbility sa, Player player, Map<AbilityKey, Object> moveParams) {
         final Game game = player.getGame();
 
         CardCollectionView commandCards = player.getCardsIn(ZoneType.Command);
@@ -50,7 +50,7 @@ public class VentureEffect  extends SpellAbilityEffect {
         Card dungeon = player.getController().chooseDungeon(player, dungeonCards, message);
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, dungeon, sa);
+        game.getAction().moveTo(ZoneType.Command, dungeon, sa, moveParams);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         return dungeon;
@@ -85,13 +85,13 @@ public class VentureEffect  extends SpellAbilityEffect {
         }
     }
 
-    private void ventureIntoDungeon(SpellAbility sa, Player player) {
+    private void ventureIntoDungeon(SpellAbility sa, Player player, Map<AbilityKey, Object> moveParams) {
         if (StaticAbilityCantVenture.cantVenture(player)) {
             return;
         }
 
         final Game game = player.getGame();
-        Card dungeon = getDungeonCard(sa, player);
+        Card dungeon = getDungeonCard(sa, player, moveParams);
         String room = dungeon.getCurrentRoom();
         String nextRoom = null;
 
@@ -117,9 +117,13 @@ public class VentureEffect  extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
+
         for (final Player p : getTargetPlayers(sa)) {
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                ventureIntoDungeon(sa, p);
+                ventureIntoDungeon(sa, p, moveParams);
             }
         }
     }

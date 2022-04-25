@@ -8,7 +8,195 @@ ScryfallCode=NEC
 [cards]
 1 M Chishiro, the Shattered Blade @Lius Lasahido
 2 M Kotori, Pilot Prodigy @Aaron J. Riley
-3 M Kaima, the Fractured Calm @
-4 M Shorikai, Genesis Engine @
+3 M Kaima, the Fractured Calm @Filip Burburan
+4 M Shorikai, Genesis Engine @Wisnu Tan
+5 R Aerial Surveyor @Antonio José Manzanedo
+6 R Drumbellower @Lie Setiawan
+7 R Ironsoul Enforcer @Antonio José Manzanedo
+8 R Organic Extinction @Cristi Balanescu
+9 R Release to Memory @Alayna Danner
+10 R Swift Reconfiguration @Nicholas Gregory
+11 R Access Denied @Johan Grenier
+12 R Cyberdrive Awakener @Zezhou Chen
+13 R Imposter Mech @Andrew Mar
+14 R Kappa Cannoneer @Jesper Ejsing
+15 R Katsumasa, the Animator @Heonhwa Choe
+16 R Research Thief @Cristi Balanescu
+17 R Universal Surveillance @Aaron J. Riley
+18 R Akki Battle Squad @Steve Prescott
+19 R Collision of Realms @Piotr Dura
+20 R Kami of Celebration @Milivoj Ćeran
+21 R Komainu Battle Armor @Nestor Ossandon Leal
+22 R Smoke Spirits' Aid @Uriah Voth
+23 R Unquenchable Fury @Livia Prima
+24 R Ascendant Acolyte @Micah Epstein
+25 R Concord with the Kami @Marta Nael
+26 R Kosei, Penitent Warlord @Matt Stewart
+27 R One with the Kami @Justyna Gil
+28 R Rampant Rejuvenator @Andrey Kuzinskiy
+29 R Silkguard @Dan Scott
+30 R Tanuki Transplanter @Oleksandr Kozachenko
+31 R Myojin of Blooming Dawn @Yigit Koroglu
+32 M Yoshimaru, Ever Faithful @Ilse Gort
+33 R Myojin of Cryptic Dreams @Yigit Koroglu
+34 R Myojin of Grim Betrayal @Jason A. Engle
+35 R Ruthless Technomancer @PINDURSKI
+36 R Myojin of Roaring Blades @Jason A. Engle
+37 M Go-Shintai of Life's Origin @Alexander Mokhov
+38 R Myojin of Towering Might @Ryan Pancoast
+39 R Aerial Surveyor @Antonio José Manzanedo
+40 R Drumbellower @Lie Setiawan
+41 R Ironsoul Enforcer @Antonio José Manzanedo
+42 R Myojin of Blooming Dawn @Yigit Koroglu
+43 R Organic Extinction @Cristi Balanescu
+44 R Release to Memory @Alayna Danner
+45 R Swift Reconfiguration @Nicholas Gregory
+46 M Yoshimaru, Ever Faithful @Ilse Gort
+47 R Access Denied @Johan Grenier
+48 R Cyberdrive Awakener @Zezhou Chen
+49 R Imposter Mech @Andrew Mar
+50 R Kappa Cannoneer @Jesper Ejsing
+51 R Katsumasa, the Animator @Heonhwa Choe
+52 R Myojin of Cryptic Dreams @Yigit Koroglu
+53 R Research Thief @Cristi Balanescu
+54 R Universal Surveillance @Aaron J. Riley
+55 R Myojin of Grim Betrayal @Jason A. Engle
+56 R Ruthless Technomancer @PINDURSKI
+57 R Akki Battle Squad @Steve Prescott
+58 R Collision of Realms @Piotr Dura
+59 R Kami of Celebration @Milivoj Ćeran
+60 R Komainu Battle Armor @Nestor Ossandon Leal
+61 R Myojin of Roaring Blades @Jason A. Engle
+62 R Smoke Spirits' Aid @Uriah Voth
+63 R Unquenchable Fury @Livia Prima
+64 R Ascendant Acolyte @Micah Epstein
+65 R Concord with the Kami @Marta Nael
+66 M Go-Shintai of Life's Origin @Alexander Mokhov
+67 R Kosei, Penitent Warlord @Matt Stewart
+68 R Myojin of Towering Might @Ryan Pancoast
+69 R One with the Kami @Justyna Gil
+70 R Rampant Rejuvenator @Andrey Kuzinskiy
+71 R Silkguard @Dan Scott
+72 R Tanuki Transplanter @Oleksandr Kozachenko
+73 M Chishiro, the Shattered Blade @Lius Lasahido
+74 M Kaima, the Fractured Calm @Filip Burburan
+75 M Kotori, Pilot Prodigy @Aaron J. Riley
+76 M Shorikai, Genesis Engine @Wisnu Tan
 77 M Chishiro, the Shattered Blade @Lius Lasahido
 78 M Kotori, Pilot Prodigy @Aaron J. Riley
+79 U Aeronaut Admiral @E. M. Gist
+80 U Armed and Armored @Svetlin Velinov
+81 M Cataclysmic Gearhulk @Victor Adame Minguez
+82 U Crush Contraband @Jason A. Engle
+83 U Dispatch @Erica Yang
+84 U Generous Gift @Kev Walker
+85 M Indomitable Archangel @Allen Williams
+86 U Myrsmith @Eric Deschamps
+87 R Parhelion II @Adam Paquette
+88 R Sram, Senior Edificer @Chris Rahn
+89 U Swords to Plowshares @Jesper Ejsing
+90 R Teshar, Ancestor's Apostle @Even Amundsen
+91 R Emry, Lurker of the Loch @Livia Prima
+92 C Etherium Sculptor @Steven Belledin
+93 M Jace, Architect of Thought @Jaime Jones
+94 R Master of Etherium @Matt Cavotta
+95 U Reality Shift @Howard Lyon
+96 U Riddlesmith @Eric Deschamps
+97 R Sai, Master Thopterist @Adam Paquette
+98 R Thopter Spy Network @Jung Park
+99 C Thoughtcast @Greg Hildebrandt
+100 C Vedalken Engineer @Lars Grant-West
+101 U Whirler Rogue @Winona Nelson
+102 R Agitator Ant @Igor Kieryluk
+103 R Chain Reaction @Trevor Claxton
+104 R Chaos Warp @Trevor Claxton
+105 R Elemental Mastery @Cyril Van Der Haegen
+106 R Goblin Razerunners @Raymond Swanland
+107 R Krenko, Tin Street Kingpin @Mark Behm
+108 M Ox of Agonas @Lie Setiawan
+109 R Shifting Shadow @Christopher Burdett
+110 R Starstorm @Jonas De Ro
+111 R Taurean Mauler @Dominick Domingo
+112 U Acidic Slime @Karl Kopinski
+113 R Bear Umbra @Howard Lyon
+114 U Beast Within @Jesper Ejsing
+115 R Champion of Lambholt @Christopher Moeller
+116 C Fertilid @Nicholas Gregory
+117 R Forgotten Ancient @Mark Tedin
+118 R Genesis Hydra @Donato Giancola
+119 U Hunter's Insight @Jim Murray
+120 C Kodama's Reach @Sam Burley
+121 U Loyal Guardian @Robbie Trevino
+122 M Nissa, Voice of Zendikar @Raymond Swanland
+123 U Ordeal of Nylea @David Palumbo
+124 R Primeval Protector @Jaime Jones
+125 C Rampant Growth @Steven Belledin
+126 R Rishkar, Peema Renegade @Todd Lockwood
+127 R Rishkar's Expertise @Magali Villeneuve
+128 C Sakura-Tribe Elder @Anastasia Ovchinnikova
+129 R Shamanic Revelation @Cynthia Sheppard
+130 U Snake Umbra @Christopher Moeller
+131 R Soul's Majesty @Jesper Ejsing
+132 R Spearbreaker Behemoth @Christopher Moeller
+133 U Vastwood Surge @Jason Rainville
+134 R Whiptongue Hydra @Tomasz Jedruszek
+135 U Arcanist's Owl @Véronique Meignaud
+136 R Dance of the Manse @Yeong-Hao Han
+137 R Decimate @Zoltan Boros
+138 U Grumgully, the Generous @Milivoj Ćeran
+139 R Hanna, Ship's Navigator @Chris Rallis
+140 U Mage Slayer @Lars Grant-West
+141 U Raff Capashen, Ship's Mage @John Stanko
+142 U Rhythm of the Wild @Tomasz Jedruszek
+143 R Ulasht, the Hate Seed @Nottsuo
+144 C Arcane Signet @Dan Scott
+145 U Azorius Signet @Raoul Vitale
+146 R Blackblade Reforged @Chris Rahn
+147 R Bonehoard @Chippy
+148 U Colossal Plow @Joe Slucher
+149 R Cultivator's Caravan @Mark Zug
+150 U Fellwar Stone @John Avon
+151 U Fireshrieker @Christopher Moeller
+152 C Foundry Inspector @Jason A. Engle
+153 C Gold Myr @Kev Walker
+154 R Mirage Mirror @Craig J Spearing
+155 R Peacewalker Colossus @Vincent Proce
+156 C Raiders' Karve @Aaron Miller
+157 U Shimmer Myr @Jana Schirmer & Johannes Voss
+158 C Silver Myr @Kev Walker
+159 M Skysovereign, Consul Flagship @Jung Park
+160 R Smuggler's Copter @Florian de Gesincourt
+161 U Sol Ring @Mike Bierek
+162 R Solemn Simulacrum @Donato Giancola
+163 U Swiftfoot Boots @Svetlin Velinov
+164 R Sword of Vengeance @Dan Scott
+165 M Weatherlight @Jaime Jones
+166 R Cinder Glade @Adam Paquette
+167 C Command Tower @Ryan Yee
+168 R Exotic Orchard @Steven Belledin
+169 R Game Trail @Adam Paquette
+170 U Gruul Turf @John Avon
+171 R Mossfire Valley @Sarah Finnigan
+172 C Opal Palace @Andreas Rocha
+173 R Oran-Rief, the Vastwood @Mike Bierek
+174 R Port Town @Kamila Szutenberg
+175 R Prairie Stream @Adam Paquette
+176 R Raging Ravine @Todd Lockwood
+177 R Skycloud Expanse @Sam Burley
+178 R Spire of Industry @John Avon
+179 R Temple of Abandon @Adam Paquette
+180 R Temple of Enlightenment @Piotr Dura
+
+[tokens]
+b_0_0_phyrexian_germ
+c_1_1_a_myr
+c_1_1_a_thopter_flying
+c_1_1_e_shrine
+g_0_1_plant
+g_1_1_saproling
+g_3_3_beast
+g_3_3_elephant
+r_1_1_elemental
+r_1_1_goblin
+smoke_blessing
+w_4_4_angel_flying_vigilance

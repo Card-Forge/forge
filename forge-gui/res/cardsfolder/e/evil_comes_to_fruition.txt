@@ -2,7 +2,7 @@ Name:Evil Comes to Fruition
 ManaCost:no cost
 Types:Scheme
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ NewEvil | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, create seven 0/1 green Plant creature tokens. If you control ten or more lands, create seven 3/3 green Elemental creature tokens instead.
-SVar:NewEvil:DB$ Token | TokenAmount$ 7 | TokenScript$ g_0_1_plant | TokenOwner$ You | LegacyImage$ g 0 1 plant arc | ConditionPresent$ Land.YouCtrl | ConditionCompare$ LT10 | SubAbility$ MatureEvil
-SVar:MatureEvil:DB$ Token | TokenAmount$ 7 | TokenScript$ g_3_3_elemental | TokenOwner$ You | LegacyImage$ g 3 3 elemental arc | ConditionPresent$ Land.YouCtrl | ConditionCompare$ GE10
+SVar:NewEvil:DB$ Token | TokenAmount$ 7 | TokenScript$ g_0_1_plant | TokenOwner$ You | ConditionPresent$ Land.YouCtrl | ConditionCompare$ LT10 | SubAbility$ MatureEvil
+SVar:MatureEvil:DB$ Token | TokenAmount$ 7 | TokenScript$ g_3_3_elemental | TokenOwner$ You | ConditionPresent$ Land.YouCtrl | ConditionCompare$ GE10
 SVar:X:Count$NumTypeYouCtrl.Land
 Oracle:When you set this scheme in motion, create seven 0/1 green Plant creature tokens. If you control ten or more lands, create seven 3/3 green Elemental creature tokens instead.

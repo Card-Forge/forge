@@ -1,5 +1,5 @@
 [format]
-Name:Pauper, 10/25/19
+Name:Pauper (2019-10-25)
 Type:Historic
 Subtype:Custom
 Effective:2019-10-25

@@ -7,8 +7,8 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ You | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 K:Daybound
-AlternateMode:DoubleFaced
 DeckHas:Ability$Discard
+AlternateMode:DoubleFaced
 Oracle:Suspicious Stowaway can't be blocked.\nWhenever Suspicious Stowaway deals combat damage to a player, draw a card, then discard a card.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
 
 ALTERNATE

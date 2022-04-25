@@ -14,6 +14,6 @@ ManaCost:no cost
 Colors:red
 Types:Creature Werewolf
 PT:6/6
-K:CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
 K:Nightbound
 Oracle:Wrathful Jailbreaker attacks each combat if able.\nNightbound (If a player casts at least two spells during their own turn, it becomes day next turn.)

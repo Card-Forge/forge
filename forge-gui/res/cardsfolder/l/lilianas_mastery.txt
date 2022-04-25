@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Zombie.YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Zombies you control get +1/+1.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 2/2 black Zombie creature tokens.
-SVar:TrigToken:DB$ Token | LegacyImage$ b 2 2 zombie akh | TokenAmount$ 2 | TokenScript$ b_2_2_zombie | TokenOwner$ You
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ b_2_2_zombie | TokenOwner$ You
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Zombie
 DeckHints:Type$Zombie

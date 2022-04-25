@@ -5,7 +5,7 @@ A:AB$ ChooseSource | Cost$ 3 | Choices$ Card,Emblem | AILogic$ NeedsPrevention |
 SVar:DBEffect:DB$ Effect | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to redirect damage to | ReplacementEffects$ GeneralDamage | Triggers$ OutOfSight | RememberObjects$ Targeted | SubAbility$ DBCleanup
 SVar:GeneralDamage:Event$ DamageDone | ValidSource$ Card.ChosenCard,Emblem.ChosenCard | ValidTarget$ You | DamageTarget$ Remembered | ReplaceWith$ GeneralDmg | Description$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to target creature you control instead.
 SVar:GeneralDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ Remembered | VarType$ Card | SubAbility$ ExileEffect
-SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Defined$ Imprinted | Execute$ ExileEffect | Static$ True
+SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsRemembered | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 AI:RemoveDeck:All

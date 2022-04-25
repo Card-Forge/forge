@@ -15,5 +15,5 @@ humanhand=Inspired Charge;Jaya's Immolating Inferno;Sky Tether;Tenth District Le
 humanlibrary=Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate;Dimir Guildgate
 humanbattlefield=Angrath's Marauders;Truefire Captain;The Flame of Keld|Counters:LORE=2;Grateful Apparition;Mountain;Mountain;Mountain;Mountain;Plains;Plains;Plains;Plains
 aibattlefield=Leonin Warleader;Shalai, Voice of Plenty
-aiprecast=Leonin Warleader:CustomScript:DB$ Token | TokenAmount$ 4 | TokenScript$ w_1_1_cat_lifelink | TokenOwner$ You | LegacyImage$ w 1 1 cat lifelink m19
+aiprecast=Leonin Warleader:CustomScript:DB$ Token | TokenAmount$ 4 | TokenScript$ w_1_1_cat_lifelink | TokenOwner$ You
 removesummoningsickness=true

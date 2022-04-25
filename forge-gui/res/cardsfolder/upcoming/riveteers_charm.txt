@@ -1,0 +1,15 @@
+Name:Riveteers Charm
+ManaCost:B R G
+Types:Instant
+A:SP$ Charm | Choices$ DBSac,DBExilePlay,DBExileGrave
+SVar:DBSac:DB$ Sacrifice | ValidTgts$ Opponent | TgtPrompt$ Choose target opponent | SacValid$ Creature.cmcEQX,Planeswalker.cmcEQX | SacMessage$ creature or planeswalker they control with the highest mana value among creatures and planeswalkers they control | SpellDescription$ Target opponent sacrifices a creature or planeswalker they control with the highest mana value among creatures and planeswalkers they control.
+SVar:X:SVar$Y/LimitMin.Z
+SVar:Y:Count$HighestCMC_Creature.TargetedPlayerCtrl+inZoneBattlefield
+SVar:Z:Count$HighestCMC_Planeswalker.TargetedPlayerCtrl+inZoneBattlefield
+SVar:DBExilePlay:DB$ Dig | Defined$ You | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect | SpellDescription$ Exile the top three cards of your library. Until your next end step, you may play those cards.
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ForgetOnMoved$ Exile | Duration$ UntilYourNextEndStep
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until your next end step, you may play those cards.
+SVar:DBExileGrave:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | SpellDescription$ Exile target player's graveyard.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Sacrifice
+Oracle:Choose one —\n• Target opponent sacrifices a creature or planeswalker they control with the highest mana value among creatures and planeswalkers they control.\n• Exile the top three cards of your library. Until your next end step, you may play those cards.\n• Exile target player's graveyard.

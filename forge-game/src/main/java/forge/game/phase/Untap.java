@@ -57,12 +57,12 @@ import forge.game.zone.ZoneType;
 public class Untap extends Phase {
     private static final long serialVersionUID = 4515266331266259123L;
     protected final Game game;
-    
+
     public Untap(final Game game0) {
         super(PhaseType.UNTAP);
         game = game0;
     }
-    
+
     /**
      * <p>
      * Executes any hardcoded triggers that happen "at end of combat".
@@ -108,7 +108,7 @@ public class Untap extends Phase {
             return Untap.canUntap(c);
         }
     };
-    
+
     /**
      * <p>
      * doUntap.
@@ -231,26 +231,24 @@ public class Untap extends Phase {
     } // end doUntap
 
     private static void optionalUntap(final Card c) {
-        if (c.hasKeyword("You may choose not to untap CARDNAME during your untap step.")) {
-            if (c.isTapped()) {
-                StringBuilder prompt = new StringBuilder("Untap " + c.toString() + "?");
-                boolean defaultChoice = true;
-                if (c.getGainControlTargets().size() > 0) {
-                    final Iterable<Card> targets = c.getGainControlTargets();
-                    prompt.append("\r\n").append(c).append(" is controlling: ");
-                    for (final Card target : targets) {
-                        prompt.append(target);
-                        if (target.isInPlay()) {
-                            defaultChoice = false;
-                        }
+        boolean untap = true;
+
+        if (c.hasKeyword("You may choose not to untap CARDNAME during your untap step.") && c.isTapped()) {
+            StringBuilder prompt = new StringBuilder("Untap " + c.toString() + "?");
+            boolean defaultChoice = true;
+            if (c.getGainControlTargets().size() > 0) {
+                final Iterable<Card> targets = c.getGainControlTargets();
+                prompt.append("\r\n").append(c).append(" is controlling: ");
+                for (final Card target : targets) {
+                    prompt.append(target);
+                    if (target.isInPlay()) {
+                        defaultChoice = false;
                     }
                 }
-                boolean untap = c.getController().getController().chooseBinary(new SpellAbility.EmptySa(c, c.getController()), prompt.toString(), BinaryChoiceType.UntapOrLeaveTapped, defaultChoice);
-                if (untap) {
-                    c.untap(true);
-                }
             }
-        } else {
+            untap = c.getController().getController().chooseBinary(new SpellAbility.EmptySa(c, c.getController()), prompt.toString(), BinaryChoiceType.UntapOrLeaveTapped, defaultChoice);
+        }
+        if (untap) {
             c.untap(true);
         }
     }
@@ -296,8 +294,8 @@ public class Untap extends Phase {
 
         if (game.isDay() && !cantBeNight && !Iterables.any(casted, CardPredicates.isController(previous))) {
             game.setDayTime(true);
-        } else if (game.isNight() && Iterables.size(Iterables.filter(casted, CardPredicates.isController(previous))) > 1) {
+        } else if (game.isNight() && CardLists.count(casted, CardPredicates.isController(previous)) > 1) {
             game.setDayTime(false);
         }
     }
-} //end class Untap
+}

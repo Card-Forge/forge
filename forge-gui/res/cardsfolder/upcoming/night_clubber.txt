@@ -1,0 +1,10 @@
+Name:Night Clubber
+ManaCost:1 B B
+Types:Creature Human Warrior
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, creatures your opponents control get -1/-1 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | NumAtt$ -1 | NumDef$ -1 | ValidCards$ Creature.OppCtrl | IsCurse$ True
+K:Blitz:2 B
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Sacrifice
+Oracle:When Night Clubber enters the battlefield, creatures your opponents control get -1/-1 until end of turn.\nBlitz {2}{B} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)

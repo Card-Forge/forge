@@ -1,6 +1,5 @@
 package forge.ai.ability;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -37,22 +36,21 @@ public class PowerExchangeAi extends SpellAbilityAi {
                 return c.canBeTargetedBy(sa) && c.getController() != ai;
             }
         });
-        CardLists.sortByPowerAsc(list);
+        CardLists.sortByPowerDesc(list);
         c1 = list.isEmpty() ? null : list.get(0);
         if (sa.hasParam("Defined")) {
             c2 = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa).get(0);
         }
         else if (tgt.getMinTargets(sa.getHostCard(), sa) > 1) {
             CardCollection list2 = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getHostCard(), sa);
-            CardLists.sortByPowerAsc(list2);
-            Collections.reverse(list2);
+            CardLists.sortByPowerDesc(list2);
             c2 = list2.isEmpty() ? null : list2.get(0);
             sa.getTargets().add(c2);
         }
         if (c1 == null || c2 == null) {
             return false;
         }
-        if (ComputerUtilCard.evaluateCreature(c1) > ComputerUtilCard.evaluateCreature(c2) + 40) {
+        if (sa.isMandatory() || ComputerUtilCard.evaluateCreature(c1) > ComputerUtilCard.evaluateCreature(c2) + 40) {
             sa.getTargets().add(c1);
             return MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
         }

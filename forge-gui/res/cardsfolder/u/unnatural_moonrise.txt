@@ -1,5 +1,5 @@
 Name:Unnatural Moonrise
-ManaCost: R G
+ManaCost:R G
 Types:Sorcery
 A:SP$ DayTime | Value$ Night | SubAbility$ DBPump | SpellDescription$ It becomes night. Until end of turn, target creature gets +1/+0 and gains trample and "Whenever this creature deals combat damage to a player, draw a card."
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | KW$ Trample | SubAbility$ DBAnimate | StackDescription$ Until end of turn, {c:Targeted} gets +1/+0 and gains trample and "Whenever this creature deals combat damage to a player, draw a card."

@@ -1,0 +1,11 @@
+[metadata]
+Code=GDY
+Date=2022-04-08
+Name=Game Day Promos
+Type=Promo
+ScryfallCode=GDY
+
+[cards]
+1 R Power Word Kill @Andreas Zafiratos
+2 R Skyclave Apparition @Mila Pesic
+3 M All-Seeing Arbiter @Nicholas Gregory

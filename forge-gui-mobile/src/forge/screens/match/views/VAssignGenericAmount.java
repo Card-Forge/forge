@@ -47,7 +47,6 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
 import forge.util.CardTranslation;
-import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Utils;
 import forge.util.WaitCallback;
@@ -77,25 +76,25 @@ public class VAssignGenericAmount extends FDialog {
      * @param atLeastOne Must assign at least one amount to each target
      */
     public VAssignGenericAmount(final CardView effectSource, final Map<Object, Integer> targets, final int amount, final boolean atLeastOne, final String amountLabel, final WaitCallback<Map<Object, Integer>> waitCallback) {
-        super(Localizer.getInstance().getMessage("lbLAssignAmountForEffect", amountLabel, CardTranslation.getTranslatedName(effectSource.getName())) , 2);
+        super(Forge.getLocalizer().getMessage("lbLAssignAmountForEffect", amountLabel, CardTranslation.getTranslatedName(effectSource.getName())) , 2);
 
         callback = waitCallback;
         totalAmountToAssign = amount;
         this.atLeastOne = atLeastOne;
 
         lblAmount = amountLabel;
-        lblTotalAmount = add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblTotalAmountText", lblAmount)).align(Align.center).build());
+        lblTotalAmount = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblTotalAmountText", lblAmount)).align(Align.center).build());
 
         pnlSource = add(new EffectSourcePanel(effectSource));
         pnlTargets = add(new TargetsPanel(targets));
 
-        initButton(0, Localizer.getInstance().getMessage("lblOK"), new FEventHandler() {
+        initButton(0, Forge.getLocalizer().getMessage("lblOK"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 finish();
             }
         });
-        initButton(1, Localizer.getInstance().getMessage("lblReset"), new FEventHandler() {
+        initButton(1, Forge.getLocalizer().getMessage("lblReset"), new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 resetAssignedDamage();
@@ -338,12 +337,12 @@ public class VAssignGenericAmount extends FDialog {
             StringBuilder sb = new StringBuilder();
             sb.append(at.amount);
             if (at.max - at.amount == 0) {
-                sb.append(" (").append(Localizer.getInstance().getMessage("lblMax")).append(")");
+                sb.append(" (").append(Forge.getLocalizer().getMessage("lblMax")).append(")");
             }
             at.label.setText(sb.toString());
         }
 
-        lblTotalAmount.setText(TextUtil.concatNoSpace(Localizer.getInstance().getMessage("lblAvailableAmount", lblAmount) + ": ",
+        lblTotalAmount.setText(TextUtil.concatNoSpace(Forge.getLocalizer().getMessage("lblAvailableAmount", lblAmount) + ": ",
                 String.valueOf(amountLeft), " (of ", String.valueOf(totalAmountToAssign), ")"));
         setButtonEnabled(0, amountLeft == 0);
     }

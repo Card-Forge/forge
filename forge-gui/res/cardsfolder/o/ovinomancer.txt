@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 PT:0/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return three basic lands you control to their owner's hand.
 A:AB$ Destroy | Cost$ Return<1/CARDNAME> T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SubAbility$ DBToken | SpellDescription$ Destroy target creature. It can't be regenerated.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_0_1_sheep | TokenOwner$ TargetedController | LegacyImage$ g 0 1 sheep vis
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_0_1_sheep | TokenOwner$ TargetedController
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Land.Basic+YouCtrl | ChangeNum$ 3 | Optional$ True | RememberChanged$ True | SubAbility$ DBSacSelf
 SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT3
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

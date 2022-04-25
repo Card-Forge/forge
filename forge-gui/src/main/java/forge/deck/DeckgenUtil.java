@@ -601,15 +601,8 @@ public class DeckgenUtil {
         final DeckFormat format = gameType.getDeckFormat();
         Predicate<CardRules> canPlay = forAi ? DeckGeneratorBase.AI_CAN_PLAY : DeckGeneratorBase.HUMAN_CAN_PLAY;
         @SuppressWarnings("unchecked")
-        Iterable<PaperCard> legends = cardDb.getAllCards(Predicates.and(format.isLegalCardPredicate(),
-                Predicates.compose(Predicates.and(
-                new Predicate<CardRules>() {
-                    @Override
-                    public boolean apply(CardRules rules) {
-                        return format.isLegalCommander(rules);
-                    }
-                },
-                canPlay), PaperCard.FN_GET_RULES)));
+        Iterable<PaperCard> legends = cardDb.getAllCards(Predicates.and(format.isLegalCardPredicate(), format.isLegalCommanderPredicate(),
+                Predicates.compose(canPlay, PaperCard.FN_GET_RULES)));
 
         commander = Aggregates.random(legends);
         return generateRandomCommanderDeck(commander, format, forAi, false);

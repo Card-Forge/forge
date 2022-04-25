@@ -66,6 +66,7 @@ public class GauntletIO {
         xStream.allowTypeHierarchy(TreeMap.class);
         xStream.allowTypeHierarchy(List.class);
         xStream.allowTypeHierarchy(DeckSection.class);
+        xStream.omitField(Deck.class, "unplayableAI");
         // allow any type from the same package
         xStream.allowTypesByWildcard(new String[] {
                 GauntletIO.class.getPackage().getName()+".*",
@@ -210,7 +211,7 @@ public class GauntletIO {
             final boolean foil = "1".equals(reader.getAttribute("foil"));
             PaperCard card = FModel.getMagicDb().getOrLoadCommonCard(name, set, index, foil);
             if (null == card) {
-                throw new RuntimeException("Unsupported card found in quest save: " + name + " from edition " + set);
+                throw new RuntimeException("Unsupported card found in gauntlet save: " + name + " from edition " + set);
             }
             return card;
         }

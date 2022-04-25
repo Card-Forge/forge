@@ -6,9 +6,9 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, create a 1/1 green Insect creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_insect
 K:Daybound
-AlternateMode:DoubleFaced
-DeckHas:Ability$Token
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+AlternateMode:DoubleFaced
 Oracle:Whenever Infestation Expert enters the battlefield or attacks, create a 1/1 green Insect creature token.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
 
 ALTERNATE

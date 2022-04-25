@@ -12,13 +12,7 @@ import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardZoneTable;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.event.GameEventCombatChanged;
 import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
@@ -40,10 +34,18 @@ public class DigEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
         final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
+        final String toChange = sa.getParamOrDefault("ChangeNum", "1");
+        final int numToChange = toChange.startsWith("All") ? numToDig : AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        sb.append(host.getController()).append(sa.hasParam("Reveal") && sa.getParam("Reveal").equals("True")
-                ? " reveals " : " looks at ").append("the top ");
+        String verb = " looks at ";
+        if (sa.hasParam("Reveal") && sa.getParam("Reveal").equals("True")) {
+            verb = " reveals ";
+        } else if (sa.hasParam("DestinationZone") && sa.getParam("DestinationZone").equals("Exile") &&
+                numToDig == numToChange) {
+            verb = " exiles ";
+        }
+        sb.append(host.getController()).append(verb).append("the top ");
         sb.append(numToDig == 1 ? "card" : (Lang.getNumeral(numToDig) + " cards")).append(" of ");
 
         if (tgtPlayers.contains(host.getController())) {
@@ -54,6 +56,47 @@ public class DigEffect extends SpellAbilityEffect {
             }
         }
         sb.append("library.");
+
+        if (numToDig != numToChange) {
+            String destZone1 = sa.hasParam("DestinationZone") ?
+                    sa.getParam("DestinationZone").toLowerCase() : "hand";
+            String destZone2 = sa.hasParam("DestinationZone2") ?
+                    sa.getParam("DestinationZone2").toLowerCase() : "on the bottom of their library in any order.";
+            if (sa.hasParam("RestRandomOrder")) {
+                destZone2 = destZone2.replace("any", "a random");
+            }
+
+            String verb2 = "put ";
+            String where = " in their hand ";
+            if (destZone1.equals("exile")) {
+                verb2 = "exile ";
+                where = " ";
+            } else if (destZone1.equals("battlefield")) {
+                verb2 = "put ";
+                where = " onto the battlefield ";
+            }
+
+            sb.append(" They ").append(sa.hasParam("Optional") ? "may " : "").append(verb2);
+            if (sa.hasParam("ChangeValid")) {
+                String what = sa.hasParam("ChangeValidDesc") ? sa.getParam("ChangeValidDesc") :
+                        sa.getParam("ChangeValid");
+                sb.append(Lang.nounWithNumeralExceptOne(numToChange, what)).append(" from among them").append(where);
+            } else {
+                sb.append(Lang.getNumeral(numToChange)).append(" of them").append(where);
+            }
+            sb.append(sa.hasParam("ExileFaceDown") ? "face down " : "");
+            if (sa.hasParam("WithCounter") || sa.hasParam("ExileWithCounter")) {
+                String ctr = sa.hasParam("WithCounter") ? sa.getParam("WithCounter") :
+                        sa.getParam("ExileWithCounter");
+                sb.append("with a ");
+                sb.append(CounterType.getType(ctr).getName().toLowerCase());
+                sb.append(" counter on it. They ");
+            } else {
+                sb.append("and ");
+            }
+            sb.append("put the rest ").append(destZone2);
+        }
+
         return sb.toString();
     }
 
@@ -62,6 +105,7 @@ public class DigEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
+        final Player cont = host.getController();
         Player chooser = player;
         int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
 
@@ -105,6 +149,8 @@ public class DigEffect extends SpellAbilityEffect {
 
         boolean changeAll = false;
         boolean allButOne = false;
+        boolean totalCMC = sa.hasParam("WithTotalCMC");
+        int totcmc = AbilityUtils.calculateAmount(host, sa.getParam("WithTotalCMC"), sa);
 
         if (sa.hasParam("ChangeNum")) {
             if (sa.getParam("ChangeNum").equalsIgnoreCase("All")) {
@@ -156,13 +202,11 @@ public class DigEffect extends SpellAbilityEffect {
                 }
                 else if (sa.hasParam("RevealValid")) {
                     final String revealValid = sa.getParam("RevealValid");
-                    final CardCollection toReveal = CardLists.getValidCards(top, revealValid, host.getController(), host, sa);
+                    final CardCollection toReveal = CardLists.getValidCards(top, revealValid, cont, host, sa);
                     if (!toReveal.isEmpty()) {
-                        game.getAction().reveal(toReveal, host.getController());
+                        game.getAction().reveal(toReveal, cont);
                         if (sa.hasParam("RememberRevealed")) {
-                            for (final Card one : toReveal) {
-                                host.addRemembered(one);
-                            }
+                            host.addRemembered(toReveal);
                         }
                     }
                 }
@@ -197,14 +241,17 @@ public class DigEffect extends SpellAbilityEffect {
                     CardCollection valid;
                     if (mitosis) {
                         valid = sharesNameWithCardOnBattlefield(game, top);
-                    }
-                    else if (!changeValid.isEmpty()) {
+                    } else if (!changeValid.isEmpty()) {
                         if (changeValid.contains("ChosenType")) {
                             changeValid = changeValid.replace("ChosenType", host.getChosenType());
                         }
-                        valid = CardLists.getValidCards(top, changeValid.split(","), host.getController(), host, sa);
-                    }
-                    else {
+                        valid = CardLists.getValidCards(top, changeValid, cont, host, sa);
+                        if (totalCMC) {
+                            valid = CardLists.getValidCards(valid, "Card.cmcLE" + totcmc, cont, host, sa);
+                        }
+                    } else if (totalCMC) {
+                        valid = CardLists.getValidCards(top, "Card.cmcLE" + totcmc, cont, host, sa);
+                    } else {
                         // If all the cards are valid choices, no need for a separate reveal dialog to the chooser. pfps??
                         if (p == chooser && destZone1ChangeNum > 1) {
                             delayedReveal = null;
@@ -228,19 +275,49 @@ public class DigEffect extends SpellAbilityEffect {
 
                     if (changeAll) {
                         movedCards = new CardCollection(valid);
-                    }
-                    else if (sa.hasParam("RandomChange")) {
+                    } else if (sa.hasParam("RandomChange")) {
                         int numChanging = Math.min(destZone1ChangeNum, valid.size());
                         movedCards = CardLists.getRandomSubList(valid, numChanging);
-                    }
-                    else if (sa.hasParam("ForEachColorPair")) {
+                    } else if (totalCMC) {
+                        movedCards = new CardCollection();
+                        if (p == chooser) {
+                            chooser.getController().tempShowCards(top);
+                        }
+                        if (valid.isEmpty()) {
+                            chooser.getController().notifyOfValue(sa, null,
+                                    Localizer.getInstance().getMessage("lblNoValidCards"));
+                        }
+                        boolean opt = false;
+                        if (anyNumber) {
+                            opt = true;
+                        }
+                        while (!valid.isEmpty()) {
+                            Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, delayedReveal, sa,
+                                    Localizer.getInstance().getMessage("lblChooseOne"), opt, p, null);
+                            if (chosen != null) {
+                                movedCards.add(chosen);
+                                valid.remove(chosen);
+                                totcmc = totcmc - chosen.getCMC();
+                                valid = CardLists.getValidCards(valid, "Card.cmcLE" + totcmc, cont, host, sa);
+                            } else { //if they can and did choose nothing, we're done here
+                                break;
+                            }
+                        }
+                        chooser.getController().endTempShowCards();
+                        if (!movedCards.isEmpty()) {
+                            game.getAction().reveal(movedCards, chooser, true,
+                                    Localizer.getInstance().getMessage("lblPlayerPickedChosen",
+                                            chooser.getName(), ""));
+                        }
+                    } else if (sa.hasParam("ForEachColorPair")) {
                         movedCards = new CardCollection();
                         if (p == chooser) {
                             chooser.getController().tempShowCards(top);
                         }
                         for (final byte pair : MagicColor.COLORPAIR) {
-                            Card chosen = chooser.getController().chooseSingleEntityForEffect(CardLists.filter(valid, CardPredicates.isExactlyColor(pair)),
-                                    delayedReveal, sa, Localizer.getInstance().getMessage("lblChooseOne"), false, p, null);
+                            Card chosen = chooser.getController().chooseSingleEntityForEffect(CardLists.filter(valid,
+                                    CardPredicates.isExactlyColor(pair)), delayedReveal, sa,
+                                    Localizer.getInstance().getMessage("lblChooseOne"), false, p, null);
                             if (chosen != null) {
                                 movedCards.add(chosen);
                             }
@@ -249,14 +326,12 @@ public class DigEffect extends SpellAbilityEffect {
                         if (!movedCards.isEmpty()) {
                             game.getAction().reveal(movedCards, chooser, true, Localizer.getInstance().getMessage("lblPlayerPickedChosen", chooser.getName(), ""));
                         }
-                    }
-                    else if (allButOne) {
+                    } else if (allButOne) {
                         movedCards = new CardCollection(valid);
                         String prompt;
                         if (destZone2.equals(ZoneType.Library) && libraryPosition2 == 0) {
                             prompt = Localizer.getInstance().getMessage("lblChooseACardToLeaveTargetLibraryTop", p.getName());
-                        }
-                        else {
+                        } else {
                             prompt = Localizer.getInstance().getMessage("lblChooseACardLeaveTarget", p.getName(), destZone2.getTranslatedName());
                         }
 
@@ -290,7 +365,7 @@ public class DigEffect extends SpellAbilityEffect {
                             }
                             List<Card> chosen = new ArrayList<>();
 
-                            int max = anyNumber ? valid.size() : Math.min(valid.size(),destZone1ChangeNum);
+                            int max = anyNumber ? valid.size() : Math.min(valid.size(), destZone1ChangeNum);
                             int min = (anyNumber || optional) ? 0 : max;
                             if (max > 0) { // if max is 0 don't make a choice
                                 chosen = chooser.getController().chooseEntitiesForEffect(valid, min, max, delayedReveal, sa, prompt, p, null);
@@ -330,11 +405,14 @@ public class DigEffect extends SpellAbilityEffect {
                             Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                             moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                             moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+                            if (sa.hasParam("Tapped")) {
+                                c.setTapped(true);
+                            }
+                            if (destZone1.equals(ZoneType.Battlefield) && sa.hasParam("WithCounter")) {
+                                c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), 1, player);
+                            }
                             c = game.getAction().moveTo(zone, c, sa, moveParams);
                             if (destZone1.equals(ZoneType.Battlefield)) {
-                                if (sa.hasParam("Tapped")) {
-                                    c.setTapped(true);
-                                }
                                 if (addToCombat(c, c.getController(), sa, "Attacking", "Blocking")) {
                                     combatChanged = true;
                                 }
@@ -352,6 +430,9 @@ public class DigEffect extends SpellAbilityEffect {
 
                         if (sa.hasParam("ExileFaceDown")) {
                             c.turnFaceDown(true);
+                        }
+                        if (sa.hasParam("WithMayLook")) {
+                            c.addMayLookFaceDownExile(c.getOwner());
                         }
                         if (sa.hasParam("Imprint")) {
                             host.addImprintedCard(c);
@@ -439,7 +520,7 @@ public class DigEffect extends SpellAbilityEffect {
         final CardCollectionView play = game.getCardsIn(ZoneType.Battlefield);
         for (final Card c : list) {
             for (final Card p : play) {
-                if (p.getName().equals(c.getName()) && !toReturn.contains(c)) {
+                if (p.sharesNameWith(c) && !toReturn.contains(c)) {
                     toReturn.add(c);
                 }
             }

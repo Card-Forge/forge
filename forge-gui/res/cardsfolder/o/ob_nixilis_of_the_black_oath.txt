@@ -6,7 +6,7 @@ Text:CARDNAME can be your commander.
 A:AB$ LoseLife | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 1 life. You gain life equal to the life lost this way.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
 SVar:AFLifeLost:Number$0
-A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | LegacyImage$ b 5 5 demon flying c14 | TokenAmount$ 1 | TokenScript$ b_5_5_demon_flying | TokenOwner$ You | SubAbility$ DBLoselife | SpellDescription$ Create a 5/5 black Demon creature token with flying. You lose 2 life.
+A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ b_5_5_demon_flying | TokenOwner$ You | SubAbility$ DBLoselife | SpellDescription$ Create a 5/5 black Demon creature token with flying. You lose 2 life.
 SVar:DBLoselife:DB$ LoseLife | LifeAmount$ 2
 A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Ob Nixilis of the Black Oath | Image$ emblem_ob_nixilis_of_the_black_oath | Stackable$ False | Abilities$ ObGainLife | Duration$ Permanent | SpellDescription$ You get an emblem with "{1}{B}, Sacrifice a creature: You gain X life and draw X cards, where X is the sacrificed creature's power."
 SVar:ObGainLife:AB$ GainLife | Cost$ 1 B Sac<1/Creature> | ActivationZone$ Command | LifeAmount$ X | SubAbility$ DBDraw | SpellDescription$ You gain X life and draw X cards, where X is the sacrificed creature's power.

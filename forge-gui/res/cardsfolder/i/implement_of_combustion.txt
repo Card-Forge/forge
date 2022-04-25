@@ -2,7 +2,7 @@ Name:Implement of Combustion
 ManaCost:1
 Types:Artifact
 A:AB$ DealDamage | Cost$ R Sac<1/CARDNAME> | NumDmg$ 1 | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker | SpellDescription$ CARDNAME deals 1 damage to target player or planeswalker.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredCardController
 AI:RemoveDeck:Random
 DeckNeeds:Color$Red

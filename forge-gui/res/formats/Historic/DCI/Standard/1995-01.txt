@@ -1,8 +1,0 @@
-[format]
-Name:Type II, Fourth Edition
-Type:Historic
-Subtype:Standard
-Effective:1995-01
-Sets:DRK, FEM, 4ED
-Restricted:Balance, Channel, Ivory Tower, Maze of Ith, Mind Twist
-Banned:Bronze Tablet, Rebirth, Tempest Efreet

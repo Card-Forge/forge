@@ -4,5 +4,5 @@ Types:Creature Wolf Spirit
 PT:4/3
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a land card. If you do, create a 2/2 green Wolf creature token.
-SVar:TrigToken:AB$ Token | Cost$ Discard<1/Land> | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You | LegacyImage$ g 2 2 wolf soi
+SVar:TrigToken:AB$ Token | Cost$ Discard<1/Land> | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Pack Guardian enters the battlefield, you may discard a land card. If you do, create a 2/2 green Wolf creature token.

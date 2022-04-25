@@ -5,8 +5,8 @@ PT:6/6
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 2/2 green Wolf creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_2_2_wolf
 K:Daybound
-AlternateMode:DoubleFaced
 DeckHas:Ability$Token
+AlternateMode:DoubleFaced
 Oracle:When Tovolar's Huntmaster enters the battlefield, create two 2/2 green Wolf creature tokens.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
 
 ALTERNATE

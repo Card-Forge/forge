@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.*;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -16,11 +17,6 @@ import com.google.common.collect.Maps;
 import forge.GameCommand;
 import forge.card.CardStateName;
 import forge.card.CardType;
-import forge.game.Game;
-import forge.game.GameActionUtil;
-import forge.game.GameEntity;
-import forge.game.GameEntityCounterTable;
-import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -42,7 +38,6 @@ import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerView;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
-import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
@@ -81,11 +76,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getHostCard();
 
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(" -");
+        if (sa.hasParam("Optional")) { // TODO make boolean and handle verb reconjugation throughout
+            sb.append("(OPTIONAL) ");
         }
-
-        sb.append(" ");
 
         // Player whose cards will change zones
         List<Player> fetchers = null;
@@ -129,15 +122,31 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String destination = sa.getParam("Destination");
 
         String type = "card";
+        boolean defined = false;
         if (sa.hasParam("ChangeTypeDesc")) {
             type = sa.getParam("ChangeTypeDesc");
-        }
-        else if (sa.hasParam("ChangeType")) {
-            type = sa.getParam("ChangeType");
+            if (type.contains("{")) {
+                final StringBuilder typesb = new StringBuilder();
+                SpellAbilityEffect.tokenizeString(sa, typesb, type);
+                type = typesb.toString();
+            }
+        } else if (sa.usesTargeting() || sa.hasParam("Defined")) {
+            List<Card> tgts = getDefinedCardsOrTargeted(sa, "Defined");
+            type = Lang.joinHomogenous(tgts);
+            defined = true;
+        } else if (sa.hasParam("ChangeType") && !sa.getParam("ChangeType").equals("Card")) {
+            final String ct = sa.getParam("ChangeType");
+            type = CardType.CoreType.isValidEnum(ct) ? ct.toLowerCase() : ct;
         }
 
         final int num = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(host,
                 sa.getParam("ChangeNum"), sa) : 1;
+        boolean tapped = sa.hasParam("Tapped");
+        boolean attacking = sa.hasParam("Attacking");
+        if (sa.hasParam("Ninjutsu")) {
+            tapped = true;
+            attacking = true;
+        }
 
         if (origin.equals("Library") && sa.hasParam("Defined")) {
             // for now, just handle the Exile from top of library case, but
@@ -152,62 +161,63 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             sb.append(".");
         } else if (origin.equals("Library")) {
-            sb.append(chooserNames);
-            sb.append(" search").append(choosers.size() > 1 ? " " : "es ");
-            sb.append(fetchPlayer).append(fetchPlayer.equals(chooserNames) ? "'s " : " ");
-            sb.append("library for ").append(num).append(" ");
-            sb.append(type).append(num > 1 ? "s" : "");
-            if (!sa.hasParam("NoReveal")) {
+            final boolean originAlt = sa.hasParam("OriginAlternative");
+            sb.append(chooserNames).append(" search").append(choosers.size() > 1 ? " " : "es ");
+            sb.append(fetchPlayer).append(fetchPlayer.equals(chooserNames) ? "'s " : " ").append("library");
+            if (originAlt) {
+                sb.append(sa.getParam("OriginAlternative").contains("Hand") ? ", hand, and/or graveyard for " :
+                                " and/or graveyard for ");
+            } else {
+                sb.append(" for ");
+            }
+            final String cardTag = type.contains("card") ? "" : " card";
+            sb.append(Lang.nounWithNumeralExceptOne(num, type + cardTag)).append(", ");
+            if (!sa.hasParam("NoReveal") && ZoneType.smartValueOf(destination).isHidden()) {
                 if (choosers.size() == 1) {
-                    sb.append(num > 1 ? ", reveals those cards," : ", reveals that card,");
+                    sb.append(num > 1 ? "reveals them, " : "reveals it, ");
                 } else {
-                    sb.append(num > 1 ? ", reveal those cards," : ", reveal that card,");
+                    sb.append(num > 1 ? "reveal them, " : "reveal it, ");
                 }
             }
-            sb.append(" and ");
 
             if (destination.equals("Exile")) {
                 if (num == 1) {
-                    sb.append("exiles that card ");
+                    sb.append("exiles it");
                 } else {
-                    sb.append("exiles those cards ");
+                    sb.append("exiles them");
                 }
             } else {
                 if (num == 1) {
-                    sb.append("puts that card ");
+                    sb.append("puts it ");
                 } else {
-                    sb.append("puts those cards ");
+                    sb.append("puts them ");
                 }
 
                 if (destination.equals("Battlefield")) {
                     sb.append("onto the battlefield");
-                    if (sa.hasParam("Tapped")) {
+                    if (tapped) {
                         sb.append(" tapped");
                     }
                     if (sa.hasParam("GainControl")) {
                         sb.append(" under ").append(chooserNames).append("'s control");
                     }
-
-                    sb.append(".");
-
                 }
                 if (destination.equals("Hand")) {
                     if (num == 1) {
-                        sb.append("into its owner's hand.");
+                        sb.append("into their hand");
                     } else {
-                        sb.append("into their owner's hand.");
+                        sb.append("into their owner's hand");
                     }
                 }
                 if (destination.equals("Graveyard")) {
                     if (num == 1) {
-                        sb.append("into its owner's graveyard.");
+                        sb.append("into its owner's graveyard");
                     } else {
-                        sb.append("into their owner's graveyard.");
+                        sb.append("into their owner's graveyard");
                     }
-
                 }
             }
-            sb.append(" Then shuffle that library.");
+            sb.append(", then shuffles").append(originAlt ? " if they searched their library." : ".");
         } else if (origin.equals("Sideboard")) {
             sb.append(chooserNames);
             //currently Reveal is always True in ChangeZone
@@ -236,18 +246,26 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sb.append(num).append(" of those ").append(type).append(" card(s)");
             } else {
                 sb.append(destination.equals("Exile") ? " exiles " : " puts ");
-                if (type.equals("Card")) {
-                    sb.append(num);
+                if (defined) {
+                    sb.append(type);
+                } else if (StringUtils.containsIgnoreCase(type, "Card")) {
+                    sb.append(Lang.nounWithNumeralExceptOne(num, type));
                 } else {
-                    sb.append(num).append(" ").append(type);
+                    sb.append(Lang.nounWithNumeralExceptOne(num, type + " card"));
                 }
-                sb.append(" card(s) from ").append(fetchPlayer).append(" hand");
+                sb.append(" from ").append(fetchPlayer).append(" hand");
             }
 
             if (destination.equals("Battlefield")) {
                 sb.append(" onto the battlefield");
-                if (sa.hasParam("Tapped")) {
+                if (tapped) {
                     sb.append(" tapped");
+                    if (attacking) {
+                        sb.append(" and");
+                    }
+                }
+                if (attacking) {
+                    sb.append(" attacking");
                 }
                 if (sa.hasParam("GainControl")) {
                     sb.append(" under ").append(chooserNames).append("'s control");
@@ -276,6 +294,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             // for the non-targeted SAs when you choose what is returned on resolution
             sb.append("Return ").append(num).append(" ").append(type).append(" card(s) ");
             sb.append(" to your ").append(destination);
+        } else if (origin.equals("Graveyard")) {
+            // for non-targeted SAs when you choose what is moved on resolution
+            // this will need expansion as more cards use it
+            sb.append(chooserNames).append(" puts ");
+            final String cardTag = type.contains("card") ? "" : " card";
+            sb.append(num != 0 ? Lang.nounWithNumeralExceptOne(num, type + cardTag) :
+                    sa.getParamOrDefault("ChangeNumDesc", "") + " " + type + cardTag);
+            sb.append(" into their ").append(destination.toLowerCase()).append(".");
         }
 
         return sb.toString();
@@ -293,13 +319,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
     private static String changeKnownOriginStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getHostCard();
-
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(host.getName()).append(" -");
-        }
-
-        sb.append(" ");
-
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         ZoneType origin = null;
         if (sa.hasParam("Origin")) {
@@ -310,11 +329,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         Iterable<Card> tgts;
         if (sa.usesTargeting()) {
             tgts = sa.getTargets().getTargetCards();
-        } else {
-            // otherwise add self to list and go from there
+        } else { // otherwise add self to list and go from there
             tgts = sa.knownDetermineDefined(sa.getParam("Defined"));
         }
-        sbTargets.append(" ").append(StringUtils.join(tgts, ", "));
+
+        sbTargets.append(" ").append(sa.getParamOrDefault("DefinedDesc", StringUtils.join(tgts, ", ")));
 
         final String targetname = sbTargets.toString();
 
@@ -324,14 +343,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         if (destination.equals(ZoneType.Battlefield)) {
             if (ZoneType.Graveyard.equals(origin)) {
-                sb.append("Return").append(targetname);
+                sb.append("Return").append(targetname).append(fromGraveyard).append(" to the battlefield");
             } else {
-                sb.append("Put").append(targetname);
-            }
-            if (ZoneType.Graveyard.equals(origin)) {
-                sb.append(fromGraveyard).append(" to the battlefield");
-            } else {
-                sb.append(" onto the battlefield");
+                sb.append("Put").append(targetname).append(" onto the battlefield");
             }
             if (sa.hasParam("Tapped")) {
                 sb.append(" tapped");
@@ -343,11 +357,14 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         }
 
         if (destination.equals(ZoneType.Hand)) {
-            sb.append("Return").append(targetname);
             if (ZoneType.Graveyard.equals(origin)) {
-                sb.append(fromGraveyard);
+                sb.append("Return").append(targetname).append(fromGraveyard).append(" to");
+            } else if (ZoneType.Battlefield.equals(origin)) {
+                sb.append("Return").append(targetname).append(" to");
+            } else {
+                sb.append("Put").append(targetname).append(" in");
             }
-            sb.append(" to").append(pronoun).append("owner's hand.");
+            sb.append(pronoun).append("owner's hand.");
         }
 
         if (destination.equals(ZoneType.Library)) {
@@ -572,23 +589,21 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             continue;
                         }
                     }
-                    if (sa.hasParam("WithCounters")) {
-                        String[] parse = sa.getParam("WithCounters").split("_");
-                        gameCard.addEtbCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), player);
-                    }
                     if (sa.hasParam("WithCountersType")) {
                         CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                         int cAmount = AbilityUtils.calculateAmount(hostCard, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
                         gameCard.addEtbCounter(cType, cAmount, player);
                     }
                     if (sa.hasParam("GainControl")) {
+                        Player newController = player;
                         if (sa.hasParam("NewController")) {
-                            final Player p = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("NewController"), sa), null);
-                            if (p != null) {
-                                gameCard.setController(p, game.getNextTimestamp());
+                            newController = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("NewController"), sa), null);
+                        }
+                        if (newController != null) {
+                            if (newController != gameCard.getController()) {
+                                gameCard.runChangeControllerCommands();
                             }
-                        } else {
-                            gameCard.setController(player, game.getNextTimestamp());
+                            gameCard.setController(newController, game.getNextTimestamp());
                         }
                     }
                     if (sa.hasParam("AttachedTo")) {
@@ -628,7 +643,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
 
-                    Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                     moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                     moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
                     if (sa.isReplacementAbility()) {
@@ -707,7 +722,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         gameCard.setExiledWith(host);
                         gameCard.setExiledBy(host.getController());
                     }
-                    movedCard = game.getAction().moveTo(destination, gameCard, sa);
+                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                    moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                    moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+                    movedCard = game.getAction().moveTo(destination, gameCard, sa, moveParams);
                     if (ZoneType.Hand.equals(destination) && ZoneType.Command.equals(originZone.getZoneType())) {
                         StringBuilder sb = new StringBuilder();
                         sb.append(movedCard.getName()).append(" has moved from Command Zone to ").append(player).append("'s hand.");
@@ -862,12 +880,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (sa.hasParam("DefinedPlayer")) {
             fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa);
         } else {
-            fetchers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
-        }
-
-        // handle case when Defined is for a Card
-        if (fetchers.isEmpty()) {
-            fetchers.add(sa.getHostCard().getController());
+            fetchers = Lists.newArrayList(sa.getActivatingPlayer());
         }
 
         Player chooser = null;
@@ -964,7 +977,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             boolean shuffleMandatory = true;
             boolean searchedLibrary = false;
             if (defined) {
-                fetchList = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa));
+                fetchList = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
                 if (!sa.hasParam("ChangeNum")) {
                     changeNum = fetchList.size();
                 }
@@ -1218,7 +1231,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             for (final Card c : chosenCards) {
                 Card movedCard = null;
                 final Zone originZone = game.getZoneOf(c);
-                Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.FoundSearchingLibrary, searchedLibrary);
                 moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                 moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
@@ -1244,11 +1257,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         if (sa.hasParam("NewController")) {
                             newController = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("NewController"), sa).get(0);
                         }
+                        if (newController != c.getController()) {
+                            c.runChangeControllerCommands();
+                        }
                         c.setController(newController, game.getNextTimestamp());
-                    }
-                    if (sa.hasParam("WithCounters")) {
-                        String[] parse = sa.getParam("WithCounters").split("_");
-                        c.addEtbCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), player);
                     }
 
                     if (sa.hasParam("WithCountersType")) {

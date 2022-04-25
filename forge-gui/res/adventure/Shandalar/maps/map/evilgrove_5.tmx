@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="68">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2UEKgzAURVGnQpfQ9bj/JZUMikHUxuSF3Py+Aw5b/5WkSt3WZdk6Hrme5zmeq0Tt51r9uj6zuJp3to4rLWuLRLFXFN6v/agxsiOfXdUxgmL+L8LeaG1I3KHjdbUjdCi4g8UdLP/UQXiOvFM6G+WZ+EztXFE6qNzB4g6WKHvdHSwRGpIIHVHWVOIOFnewuGMcxXtOQndNh+r9bg9ROvL/t0vnojUckWd7wh0s7mBRdBCuRet9oefv8ZPvvrvHz3Z8ALNsVV4=
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztmkEKhSAURRs0sKYRtdJ24foiajH/S0UWatDE6+UODgnW651MjUe2rir7Zzb7cWrC+H22voidn4oztPcYi7lyGNv4dU/8vEL9peE8ns+mRFJjVhIsHgILpveKwYNlPJzDZvLnIYQQb7j1atZ6BQPLPni65M5BHlweLPODxYMFjQUW+ibBoieoiTLBsn/IAwt5YCEPPOSBBYMHy/yQBxbywILJI3cO8oh7fPknLBXTb69HbabzagKuvZrw/UNxU/wAofCAsg==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJy9Wlty00AQVEIRK67yCQKBW8BPyK34M1F0jUBwToZJuAYPDVbjdnt2dld2UNWUX6vZ7XnPyN2i+Xv1w+vbedPcDq8vZ01zM7x24/t+fL0dv/s6vP951jT39JtRR+vwHS7wuZxv1n1vN5+/tZv1dvGezAd7rogeZlu+uIyXYfh0vuUR0deRT8naFBmeN/PNvvw+tf7LeH6T34d2I0P8tlxsMNdgAM/7wrXHJNv3uv1/+z0Oe/14hv1Ssoa9/x501RwRw+tBv8sK/ZbyfTVPy+d0oM8D3Q304gj73Zxv/a30HpOjncOTpZ3/aZRNxNdszvxGfcd0WOMzoMuMv4JORhkavXP2Z7ngSum4W+zGyJQsnp7B3iG/X2fp2PdIesjFs5xsLc7bdRHYZg1Bz9C1xfBU7ON4HNnGreSdlL3j6h1eiBGRjXsYjOyeVXAPnz2KRZZPLYdEWHM6uWo3McJixSohWz0/yGwrsiu1wxRms78Se2Esnq/B1iMMHDfZrq4S93l6f+eshQ+ZbdVgqckLjIHj5pQ4aLJ63+7qw/iY3XeLfEzje0pjqocBe0yN58CCugT6BW/UnDXnK/kN54UeWRcRD9Q0uTU4v/Fdt9s4NFVG4Ks5hv25O9/abm4fXhvZ+JpyCuLu1PwS1QyRXUU82Q9rZDsVA3yM+xfPP1R2ObsC355iXFQfGvVSl2iuNeI8p7E7F8O8nIHvNW9Cd9DvxXyr53UQ5/7xadJ7IlehjtS4ByyRTj2etjfy5gOt4zzFNURKf8zHs2fOVYop14+dzPaxKh/02ujxPTvUGOftxflX9XEzxosnJ/96cdXj7eUrT8f3gR1Azx8LfF1rRE+3F/NdX0vtq1hyekvxyfH2yGrE3vFz9HTAg/f9gfvpes47KV6l/D39Q6ewVbznuDlFjopBay69p6QXgF09BPIqJcR5T7YejggDzo65Acc0j6DTu1kZ5pRMEe/Zn7Q29/S9bvf1e0Jnx7wt1Q8AA2p2jX+lZPtaLeRdqVoqp1f0VbnzsE5R79g914GfQddeTuBYr1dtfcSxLidTrXfZPyJftbx1N9utTzTWo4YCJi8PezmylhQDagnNp9AZ2zj0bVi0t1Tc3fm+/7I8orlCCWk/Y9/1NC/RWKL+GvXgamtefIbNrBwspfmH9RHZrfpuae9T4sds/yYP7k9tj9LZtjfT6px8rnVJbU9dkg+Z0P+xDdTams5E2W91ZlUTeziX5XzBq+cOxaIxCPGnJoZizpTLYSlbhg3U4lgmdKK1VqltTXlWpXmoViep2e7U2q+EcnhgAykseN7AM+XTAEvKZlK9njf3rMWhPhPNYHmmbNQHOBjv6cyvPTU2aN6ZggNYUn2/9Yh49g0/jPgDOz+3VtvX/Kmxmon1eegzSZ5vY+6Tk1nJPJ2fk6C/V72gd0dvcegzeD1H1F/mbMHLOV49wLVJ7nla6bk1n7NtA4/WilOwRD3r1P8SaDyx79imtK7yasWoLmMs63a/3zuG7bAP6jO+brGfv9U2FH9OL4fEqRIM0TxZ5ZmaT5ac6Vjy9zBwPGRdaG/nxZ/cbOZY/+lIUeechX83H+d5iacXnfczDsyJ0fOWyBUxJPcsgGdXsPm1gwHE/8vqyO8RA/rxFb8t6VkD+t0VYfH+B2bnNj5mG91i95merQEe3Luk/40pX/5vGX/+A5uVj3g=
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="50" height="50">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzNWltSG0EM9A/54zQhVHjch0vEYGMfLFewgzEpjpAD8AuTsqq6OpJG0uxS6S/vzKxGq209RuvFIobN+b9jF/B7S/PLj+vVaezuLLiJA9zr67i4v9glZU3xHIztyU5sPwv3wXUezr6MyxDslTGNK954FWiLtSL7NiGr8bXp92DoaPFkCeu/J/YbQY8rz3TdnulCXdnHE10vO3tfB2TuirogNN6N4DHITYsHB0fOqsj7A/zOykDuI180u0VjTwZRe04Jy3fnwFti7UhcYP9jP74symVbCV9YvudnvVjQwLzNxGQE2+G1KCfK9Wy81OJCdC+M15F7oja8outvyhrLZ/heK3dreZfxq78kfF/E76K54cWZs/xqivrLw4+A/Cnj3MqoodC3ZQ3uq9VKkRzFfuyhcVDjwEbRR7uuQPO/Sn70bME+I7nyBsbkuY8whvMCtCfL1daPAuNcNEZqtcDaeIeM3rxm52qtq+3V7Muxz9IJ61pNh2gNhzZGP4zEfdHBys1Z26Aczw8eHD2tep95ITGl529sR16Pcr2zxtGZi+5dgbbvnuYisYx10XST98dnwipwj4iO9+Tn1rtFP5O12bqB/RTzO+otNtZqmjXsLfMyZsWBG7r28NsYn+J83qvHWb8j6MPPqumk6Rjpl/RqmkgN2eD1j1BGhjej9Zxm803AR7gO8rgz2i/R6mG2uayJ6N7g1c4N4hNN3tLpq/X0+my03CHc9fiG8STT1+R3qfHHqiMkblm9FS+fcQ3PtTzHZT7/WHErgvY8vX5QpXYX27HuWh6s9Gu8ekvyaTR+XC8WP/F66v7lZ0LrI0SQ7SUjMN5U+5UVm3vv92BPqbB8AH3Nin9TffPSYPXs2Ser7z3r2149zxBfr/aYehC5fzrrMnmrJ4shvLXqAO7VIeSeLFcFld41+0y2tpXnnZPzDSOc0XRDnkf54J0nJcdg3PT6L+Kf7D+ol+TxkZqyelaZC5H48npa12odK55UzgI747fnk3PBy6fR73HZHFn5zoec7/WDp/6mh37ZODFX3qgiUxP1oNlue27/z4HrXbRV9budpUvvzNTjxf8WgzLg+CwxPetLc/wnSpNtQd4pcnavzHsQHlTPQ7yHdTbw7INcfAdgfL13
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="48" template="../obj/treasure.tx" x="127.833" y="672.917"/>
+  <object id="50" template="../obj/enemy.tx" x="110.583" y="673.75">
+   <properties>
+    <property name="enemy" value="Zombie Lord"/>
+   </properties>
+  </object>
+  <object id="51" template="../obj/treasure.tx" x="159.848" y="336.886"/>
+  <object id="52" template="../obj/gold.tx" x="767.75" y="783.417"/>
+  <object id="53" template="../obj/enemy.tx" x="736.205" y="50.333">
+   <properties>
+    <property name="enemy" value="Death Knight"/>
+   </properties>
+  </object>
+  <object id="54" template="../obj/enemy.tx" x="142.583" y="338.417">
+   <properties>
+    <property name="enemy" value="Lich"/>
+   </properties>
+  </object>
+  <object id="55" template="../obj/enemy.tx" x="767.069" y="767.78">
+   <properties>
+    <property name="enemy" value="Ghost"/>
+   </properties>
+  </object>
+  <object id="56" template="../obj/enemy.tx" x="438.667" y="631.667">
+   <properties>
+    <property name="enemy" value="Ghoul"/>
+   </properties>
+  </object>
+  <object id="57" template="../obj/enemy.tx" x="643.333" y="337.5">
+   <properties>
+    <property name="enemy" value="Big Zombie"/>
+   </properties>
+  </object>
+  <object id="58" template="../obj/enemy.tx" x="358.606" y="385.031">
+   <properties>
+    <property name="enemy" value="Zombie"/>
+   </properties>
+  </object>
+  <object id="59" template="../obj/enemy.tx" x="384" y="63.333">
+   <properties>
+    <property name="enemy" value="Geist"/>
+   </properties>
+  </object>
+  <object id="62" template="../obj/entry_down.tx" x="400.667" y="16"/>
+  <object id="63" template="../obj/gold.tx" x="720.667" y="46.6667"/>
+  <object id="64" template="../obj/enemy.tx" x="416" y="63.6667">
+   <properties>
+    <property name="enemy" value="Skeleton Soldier"/>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="276" y="208">
+   <properties>
+    <property name="enemy" value="Skeleton"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

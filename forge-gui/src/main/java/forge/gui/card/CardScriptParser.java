@@ -15,6 +15,7 @@ import com.google.common.collect.Sets;
 
 import forge.card.CardType;
 import forge.game.ability.ApiType;
+import forge.game.replacement.ReplacementType;
 import forge.game.trigger.TriggerType;
 
 public final class CardScriptParser {
@@ -74,6 +75,10 @@ public final class CardScriptParser {
                 }
             } else if (trimLine.startsWith("A:")) {
                 result.putAll(getActivatedAbilityErrors(trimLine.substring("A:".length()), index + "A:".length()));
+            } else if (trimLine.startsWith("R:")) {
+                result.putAll(getReplacementErrors(trimLine.substring("R:".length()), index + "R:".length()));
+            } else if (trimLine.startsWith("S:")) {
+                // TODO
             } else if (trimLine.startsWith("T:")) {
                 result.putAll(getTriggerErrors(trimLine.substring("T:".length()), index + "T:".length()));
             } else if (trimLine.startsWith("SVar:")) {
@@ -120,7 +125,7 @@ public final class CardScriptParser {
             if (!(part.startsWith("P") || part.startsWith("2") || isManaSymbol(part.charAt(0)))) {
                 return false;
             }
-            if ((!isManaSymbol(part.charAt(1))) || part.charAt(0) == part.charAt(1)) {
+            if (!isManaSymbol(part.charAt(1)) || part.charAt(0) == part.charAt(1)) {
                 return false;
             }
             return true;
@@ -128,7 +133,7 @@ public final class CardScriptParser {
         return false;
     }
     private static boolean isManaSymbol(final char c) {
-        return c == 'W' || c == 'U' || c == 'B' || c == 'R' || c == 'G';
+        return c == 'W' || c == 'U' || c == 'B' || c == 'R' || c == 'G' || c == 'S' || c == 'C';
     }
 
     private static boolean isTypeLegal(final String type) {
@@ -211,7 +216,8 @@ public final class CardScriptParser {
                 if (!isDefinedLegal(trimValue)) {
                     isBadValue = true;
                 }
-            } else if (trimKey.equals("TgtPrompt") || trimKey.equals("StackDescription") || trimKey.equals("SpellDescription")) {
+            } else if (trimKey.equals("TgtPrompt") || trimKey.equals("TargetMin") || trimKey.equals("TargetMax")
+                    || trimKey.equals("AILogic") || trimKey.equals("StackDescription") || trimKey.equals("SpellDescription")) {
                 if (trimValue.isEmpty()) {
                     isBadValue = true;
                 }
@@ -219,6 +225,38 @@ public final class CardScriptParser {
                 if (sVars.contains(trimValue)) {
                     sVarAbilities.add(trimValue);
                 } else {
+                    isBadValue = true;
+                }
+            } else {
+                result.put(param.startIndex(), param.keyLength());
+            }
+            if (isBadValue) {
+                result.put(param.startIndexValue(), param.valueLength());
+            }
+        }
+        return result;
+    }
+
+    private Map<Integer, Integer> getReplacementErrors(final String replacement, final int offset) {
+        final Map<Integer, Integer> result = Maps.newTreeMap();
+        final List<KeyValuePair> params = getParams(replacement, offset, result);
+
+        // Check all parameters
+        for (final KeyValuePair param : params) {
+            boolean isBadValue = false;
+            final String trimKey = param.getKey().trim(), trimValue = param.getValue().trim();
+            if (trimKey.equals("Event")) {
+                if (!isReplacementApiLegal(trimValue)) {
+                    isBadValue = true;
+                }
+            } else if (trimKey.equals("ReplaceWith")) {
+                if (sVars.contains(trimValue)) {
+                    sVarAbilities.add(trimValue);
+                } else {
+                    isBadValue = true;
+                }
+            } else if (trimKey.equals("Description")) {
+                if (trimValue.isEmpty()) {
                     isBadValue = true;
                 }
             } else {
@@ -255,7 +293,7 @@ public final class CardScriptParser {
                 }
             } else if (trimKey.equals("TriggerDescription")) {
                 if (trimValue.isEmpty()) {
-                    //isBadValue = true;
+                    isBadValue = true;
                 }
             } else if (trimKey.equals("ValidCard")) {
                 if (!isValidLegal(trimValue)) {
@@ -282,6 +320,13 @@ public final class CardScriptParser {
     private static boolean isAbilityApiLegal(final String api) {
         try {
             return ApiType.smartValueOf(api.trim()) != null;
+        } catch (final RuntimeException e) {
+            return false;
+        }
+    }
+    private static boolean isReplacementApiLegal(final String api) {
+        try {
+            return ReplacementType.smartValueOf(api.trim()) != null;
         } catch (final RuntimeException e) {
             return false;
         }
@@ -442,7 +487,7 @@ public final class CardScriptParser {
             "HasDevoured", "HasNotDevoured", "IsMonstrous", "IsNotMonstrous",
             "CostsPhyrexianMana", "IsRemembered", "IsNotRemembered",
             "IsImprinted", "IsNotImprinted", "hasActivatedAbilityWithTapCost",
-            "hasActivatedAbility", "hasManaAbility", "withoutManaAbility",
+            "hasActivatedAbility", "hasManaAbility",
             "hasNonManaActivatedAbility", "NoAbilities", "HasCounters",
             "wasNotCast", "ChosenType", "IsNotChosenType", "IsCommander",
             "IsNotCommander","IsRenowned", "IsNotRenowned");

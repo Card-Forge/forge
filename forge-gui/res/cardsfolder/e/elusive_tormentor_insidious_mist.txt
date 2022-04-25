@@ -3,10 +3,10 @@ ManaCost:2 B B
 Types:Creature Vampire Wizard
 PT:4/4
 A:AB$ SetState | Cost$ 1 Discard<1/Card> | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
-AlternateMode:DoubleFaced
 AI:RemoveDeck:All
 DeckHas:Ability$Discard
 DeckHints:Keyword$Madness & Ability$Delirium
+AlternateMode:DoubleFaced
 Oracle:{1}, Discard a card: Transform Elusive Tormentor.
 
 ALTERNATE

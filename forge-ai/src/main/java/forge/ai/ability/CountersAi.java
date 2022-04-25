@@ -101,6 +101,7 @@ public abstract class CountersAi extends SpellAbilityAi {
         Card choice = null;
 
         if (type.equals("P1P1")) {
+            // TODO look for modified
             choice = ComputerUtilCard.getBestCreatureAI(list);
 
             if (choice == null) {

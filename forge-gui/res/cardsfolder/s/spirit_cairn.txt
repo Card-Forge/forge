@@ -2,7 +2,7 @@ Name:Spirit Cairn
 ManaCost:2 W
 Types:Enchantment
 T:Mode$ Discarded | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a player discards a card, you may pay {W}. If you do, create a 1/1 white Spirit creature token with flying.
-SVar:TrigToken:AB$Token | Cost$ W | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ w 1 1 spirit flying jud
+SVar:TrigToken:AB$Token | Cost$ W | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ You
 DeckHints:Ability$Discard
 DeckHas:Ability$Token
 Oracle:Whenever a player discards a card, you may pay {W}. If you do, create a 1/1 white Spirit creature token with flying.

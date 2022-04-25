@@ -1,0 +1,10 @@
+Name:Black Market Tycoon
+ManaCost:R G
+Types:Creature Cat Rogue
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of your upkeep, CARDNAME deals 2 damage to you for each Treasure you control.
+SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ X
+SVar:X:Count$Valid Treasure.YouCtrl/Times.2
+A:AB$ Token | Cost$ T | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token.
+DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
+Oracle:At the beginning of your upkeep, Black Market Tycoon deals 2 damage to you for each Treasure you control.\n{T}: Create a Treasure token.

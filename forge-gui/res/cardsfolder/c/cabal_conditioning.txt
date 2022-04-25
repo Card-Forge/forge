@@ -2,6 +2,6 @@ Name:Cabal Conditioning
 ManaCost:6 B
 Types:Sorcery
 A:SP$ Discard | Cost$ 6 B | ValidTgts$ Player | TgtPrompt$ Select target player | TargetMin$ 0 | TargetMax$ MaxTgt | NumCards$ X | Mode$ TgtChoose | SpellDescription$ Any number of target players each discard a number of cards equal to the highest mana value among permanents you control.
-SVar:X:Count$MaxCMCYouCtrl
+SVar:X:Count$HighestCMC_Permanent.YouCtrl+inZoneBattlefield
 SVar:MaxTgt:PlayerCountPlayers$Amount
 Oracle:Any number of target players each discard a number of cards equal to the highest mana value among permanents you control.

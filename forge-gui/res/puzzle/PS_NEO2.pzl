@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Kamigawa: Neon Dynasty #02
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/02/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Start in your first main phase (Saga has resolved). Assume opponent has no mana.
+[state]
+humanlife=4
+ailife=8
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Jugan Defends the Temple;Satsuki, the Living Lore;The Kami War;Fall of the Impostor;Croaking Counterpart
+humanbattlefield=Battle for Bretagard|Counters:LORE=2;Tuktuk Rubblefort;Overgrown Farmland;Overgrown Farmland;Overgrown Farmland;Overgrown Farmland;Vineglimmer Snarl;Vineglimmer Snarl;Vineglimmer Snarl;The World Tree
+aibattlefield=Flamescroll Celebrant;Colossal Skyturtle;Weaver of Harmony;Greater Tanuki
+humanprecast=Battle for Bretagard:TrigToken1;Battle for Bretagard:TrigToken2

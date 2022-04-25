@@ -30,7 +30,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
 import forge.toolbox.FTextArea;
-import forge.util.Localizer;
 import forge.util.Utils;
 
 public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
@@ -88,16 +87,15 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
             control = new ControlWinLose(this, game0);
         }
 
-        final Localizer localizer = Localizer.getInstance();
-        btnContinue.setText(localizer.getMessage("btnNextGame"));
+        btnContinue.setText(Forge.getLocalizer().getMessage("btnNextGame"));
         btnContinue.setFont(FSkinFont.get(22));
-        btnRestart.setText(localizer.getMessage("btnStartNewMatch"));
+        btnRestart.setText(Forge.getLocalizer().getMessage("btnStartNewMatch"));
         btnRestart.setFont(btnContinue.getFont());
-        btnQuit.setText(localizer.getMessage("btnQuitMatch"));
+        btnQuit.setText(Forge.getLocalizer().getMessage("btnQuitMatch"));
         btnQuit.setFont(btnContinue.getFont());
         btnContinue.setEnabled(!game0.isMatchOver());
 
-        lblLog = add(new FLabel.Builder().text(localizer.getMessage("lblGameLog")).align(Align.center).font(FSkinFont.get(18)).build());
+        lblLog = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblGameLog")).align(Align.center).font(FSkinFont.get(18)).build());
         txtLog = add(new FTextArea(true, StringUtils.join(game.getGameLog().getLogEntries(null), "\r\n").replace("[COMPUTER]", "[AI]")) {
             @Override
             public boolean tap(float x, float y, int count) {
@@ -109,14 +107,14 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
         });
         txtLog.setFont(FSkinFont.get(12));
 
-        btnCopyLog = add(new FLabel.ButtonBuilder().text(localizer.getMessage("btnCopyToClipboard")).selectable().command(new FEventHandler() {
+        btnCopyLog = add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("btnCopyToClipboard")).selectable().command(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 Forge.getClipboard().setContents(txtLog.getText());
             }
         }).build());
 
-        btnShowBattlefield = add(new FLabel.ButtonBuilder().text(localizer.getMessage("lblShowBattlefield")).font(FSkinFont.get(12)).selectable().command(new FEventHandler() {
+        btnShowBattlefield = add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblShowBattlefield")).font(FSkinFont.get(12)).selectable().command(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 hide();
@@ -132,13 +130,12 @@ public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     private String composeTitle(final GameView game) {
         final String winner = game.getWinningPlayerName();
         final int winningTeam = game.getWinningTeam();
-        final Localizer localizer = Localizer.getInstance();
         if (winner == null) {
-            return localizer.getMessage("lblItsADraw");
+            return Forge.getLocalizer().getMessage("lblItsADraw");
         } else if (winningTeam != -1) {
-            return localizer.getMessage("lblTeamWon").replace("%s", String.valueOf(winningTeam));
+            return Forge.getLocalizer().getMessage("lblTeamWon").replace("%s", String.valueOf(winningTeam));
         } else {
-            return localizer.getMessage("lblWinnerWon").replace("%s", winner);
+            return Forge.getLocalizer().getMessage("lblWinnerWon").replace("%s", winner);
         }
     }
 

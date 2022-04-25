@@ -5,6 +5,7 @@ import java.util.Map;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
+import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -56,18 +57,22 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("RememberObjects")) {
             for (final String rem : sa.getParam("RememberObjects").split(",")) {
-                for (final Object o : AbilityUtils.getDefinedEntities(sa.getHostCard(), rem, sa)) {
+                for (final Object o : AbilityUtils.getDefinedEntities(host, rem, sa)) {
                     delTrig.addRemembered(o);
                 }
             }
         }
 
         if (sa.hasParam("RememberNumber")) {
-            for (final Object o : sa.getHostCard().getRemembered()) {
+            for (final Object o : host.getRemembered()) {
                 if (o instanceof Integer) {
                     delTrig.addRemembered(o);
                 }
             }
+        }
+
+        if (sa.hasParam("RememberSVarAmount")) {
+            delTrig.addRemembered(AbilityUtils.calculateAmount(host, host.getSVar(sa.getParam("RememberSVarAmount")), sa));
         }
 
         if (sa.hasAdditionalAbility("Execute")) {
@@ -78,7 +83,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
             }
             // Set Transform timestamp when the delayed trigger is created
             if (ApiType.SetState == overridingSA.getApi()) {
-                overridingSA.setSVar("StoredTransform", String.valueOf(sa.getHostCard().getTransformedTimestamp()));
+                overridingSA.setSVar("StoredTransform", String.valueOf(host.getTransformedTimestamp()));
             }
 
             if (sa.hasParam("CopyTriggeringObjects")) {
@@ -89,10 +94,20 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         }
         final TriggerHandler trigHandler  = game.getTriggerHandler();
         if (mapParams.containsKey("DelayedTriggerDefinedPlayer")) { // on sb's next turn
-            Player p = Iterables.getFirst(AbilityUtils.getDefinedPlayers(sa.getHostCard(), mapParams.get("DelayedTriggerDefinedPlayer"), sa), null);
+            Player p = Iterables.getFirst(AbilityUtils.getDefinedPlayers(host, mapParams.get("DelayedTriggerDefinedPlayer"), sa), null);
             trigHandler.registerPlayerDefinedDelayedTrigger(p, delTrig);
         } else if (mapParams.containsKey("ThisTurn")) {
             trigHandler.registerThisTurnDelayedTrigger(delTrig);
+        } else if (mapParams.containsKey("NextTurn")) {
+            final GameCommand nextTurnTrig = new GameCommand() {
+                private static final long serialVersionUID = -5861518814760561373L;
+
+                @Override
+                public void run() {
+                    trigHandler.registerThisTurnDelayedTrigger(delTrig);
+                }
+            };
+            game.getCleanup().addUntil(nextTurnTrig);
         } else {
             trigHandler.registerDelayedTrigger(delTrig);
         }

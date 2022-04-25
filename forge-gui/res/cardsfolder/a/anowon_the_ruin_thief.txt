@@ -5,7 +5,7 @@ PT:2/4
 S:Mode$ Continuous | Affected$ Rogue.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Rogues you control get +1/+1.
 T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Rogue.YouCtrl | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ Whenever one or more Rogues you control deal combat damage to a player, that player mills a card for each 1 damage dealt to them. If the player mills at least one creature card this way, you draw a card. (To mill a card, a player puts the top card of their library into their graveyard.)
 SVar:TrigMill:DB$ Mill | Defined$ TriggeredTarget | NumCards$ X | RememberMilled$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Creature | SubAbility$ DBCleanup
+SVar:DBDraw:DB$ Draw | Defined$ You | ConditionDefined$ Remembered | ConditionPresent$ Creature | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggerCount$DamageAmount
 DeckNeeds:Type$Rogue

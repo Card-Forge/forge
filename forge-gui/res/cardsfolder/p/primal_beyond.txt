@@ -2,7 +2,7 @@ Name:Primal Beyond
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
-A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Card.Elemental,Activated.Elemental | SpellDescription$ Add one mana of any color. Spend this mana only to cast an Elemental spell or activate an ability of an Elemental.
+A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.Elemental,Activated.Elemental+inZoneBattlefield | SpellDescription$ Add one mana of any color. Spend this mana only to cast an Elemental spell or activate an ability of an Elemental.
 K:ETBReplacement:Other:DBTap
 SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | UnlessCost$ Reveal<1/Elemental> | UnlessPayer$ You | StackDescription$ enters the battlefield tapped. | SpellDescription$ As CARDNAME enters the battlefield, you may reveal an Elemental card from your hand. If you don't, CARDNAME enters the battlefield tapped.
 AI:RemoveDeck:Random

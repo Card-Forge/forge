@@ -44,7 +44,7 @@ public class FTitleBar extends FTitleBarBase {
     @Override
     public void setIconImage(Image image) {
         if (image != null) {
-            this.lblTitle.setIcon(new ImageIcon(image.getScaledInstance(16, 16, Image.SCALE_AREA_AVERAGING)));
+            this.lblTitle.setIcon(new ImageIcon(image.getScaledInstance(16, 16, Image.SCALE_SMOOTH)));
         }
         else {
             this.lblTitle.setIcon((ImageIcon)null);

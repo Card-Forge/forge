@@ -112,7 +112,7 @@ public class FCardPanel extends FDisplayObject {
             return;
         }
 
-        if (!animate || MatchController.instance.isGameFast() || MatchController.instance.getGameView().isMatchOver()) {
+        if (!animate || MatchController.instance.isGameFast() || (MatchController.instance.getGameView() != null && MatchController.instance.getGameView().isMatchOver())) {
             //don't animate if game is fast or match is over
             rotateTransform(g, x, y, w, h, edgeOffset, false);
             card.updateNeedsTapAnimation(false);

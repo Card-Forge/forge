@@ -1,8 +1,0 @@
-[format]
-Name:Type II, Ice Age
-Type:Historic
-Subtype:Standard
-Effective:1995-06
-Sets:FEM, 4ED, ICE
-Restricted:Balance, Channel, Ivory Tower, Maze of Ith, Mind Twist
-Banned:Bronze Tablet, Rebirth, Tempest Efreet

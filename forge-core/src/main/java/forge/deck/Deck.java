@@ -23,6 +23,8 @@ import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.CardDb;
 import forge.card.CardEdition;
+import forge.card.CardRules;
+import forge.card.CardType;
 import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import org.apache.commons.lang3.StringUtils;
@@ -51,6 +53,7 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
     private String lastCardArtPreferenceUsed = "";
     private Boolean lastCardArtOptimisationOptionUsed = null;
     private boolean includeCardsFromUnspecifiedSet = false;
+    private transient UnplayableAICards unplayableAI = null;
 
     public Deck() {
         this("");
@@ -533,6 +536,37 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
         return allCards;
     }
 
+    public UnplayableAICards getUnplayableAICards() {
+        if (unplayableAI == null) {
+            unplayableAI = new UnplayableAICards(this);
+        }
+        return unplayableAI;
+    }
+
+    public static final class UnplayableAICards {
+        public final Map<DeckSection, List<? extends PaperCard>> unplayable = new HashMap<>();
+        public final int inMainDeck;
+
+        private UnplayableAICards(Deck myDeck) {
+            int mainDeck = 0;
+            for (Entry<DeckSection, CardPool> ds : myDeck) {
+                List<PaperCard> result = Lists.newArrayList();
+                for (Entry<PaperCard, Integer> cp : ds.getValue()) {
+                    if (cp.getKey().getRules().getAiHints().getRemAIDecks()) {
+                        result.add(cp.getKey());
+                    }
+                }
+                if (ds.getKey().equals(DeckSection.Main)) {
+                  mainDeck = result.size();
+                }
+                if (!result.isEmpty()) {
+                    unplayable.put(ds.getKey(), result);
+                }
+            }
+            inMainDeck = mainDeck;
+        }
+    }
+
     @Override
     public boolean isEmpty() {
         loadDeferredSections();
@@ -580,5 +614,28 @@ public class Deck extends DeckBase implements Iterable<Entry<DeckSection, CardPo
             return true;
         }
         return false;
+    }
+
+    public static int getAverageCMC(Deck deck) {
+        int totalCMC = 0;
+        int totalCount = 0;
+        for (final Entry<DeckSection, CardPool> deckEntry : deck) {
+            switch (deckEntry.getKey()) {
+            case Main:
+            case Commander:
+                for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                    CardRules rules = poolEntry.getKey().getRules();
+                    CardType type = rules.getType();
+                    if (!type.isLand() && (type.isArtifact() || type.isCreature() || type.isEnchantment() || type.isPlaneswalker() || type.isInstant() || type.isSorcery())) {
+                        totalCMC += rules.getManaCost().getCMC();
+                        totalCount++;
+                    }
+                }
+                break;
+            default:
+                break; //ignore other sections
+            }
+        }
+        return totalCount == 0 ? 0 : Math.round(totalCMC / totalCount);
     }
 }

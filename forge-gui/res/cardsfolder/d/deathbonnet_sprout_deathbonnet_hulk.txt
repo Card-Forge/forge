@@ -5,9 +5,9 @@ PT:1/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, mill a card. Then if there are three or more creature cards in your graveyard, transform CARDNAME. (To mill a card, put the top card of your library into your graveyard.)
 SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 1 | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionPresent$ Creature.YouOwn | ConditionZone$ Graveyard | ConditionCompare$ GE3 | Mode$ Transform
-AlternateMode:DoubleFaced
 DeckHas:Ability$Mill|Counters
 DeckHints:Ability$Discard|Sacrifice
+AlternateMode:DoubleFaced
 Oracle:At the beginning of your upkeep, mill a card. Then if there are three or more creature cards in your graveyard, transform Deathbonnet Sprout. (To mill a card, put the top card of your library into your graveyard.)
 
 ALTERNATE

@@ -1,0 +1,9 @@
+Name:Cut of the Profits
+ManaCost:X B B
+Types:Sorcery
+K:Casualty:3
+A:SP$ Draw | NumCards$ X | SubAbility$ DBLoseLife | SpellDescription$ You draw X cards and you lose X life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
+SVar:X:Count$xPaid
+DeckHas:Ability$Sacrifice
+Oracle:Casualty 3 (As you cast this spell, you may sacrifice a creature with power 3 or greater. When you do, copy this spell.)\nYou draw X cards and you lose X life.

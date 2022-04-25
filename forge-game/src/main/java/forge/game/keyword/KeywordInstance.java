@@ -16,8 +16,8 @@ import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.util.Lang;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 public abstract class KeywordInstance<T extends KeywordInstance<?>> implements KeywordInterface {
     private Keyword keyword;
@@ -53,7 +53,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
 
         StringBuffer sb = new StringBuffer();
         while (m.find()) {
-            m.appendReplacement(sb, Lang.nounWithNumeral(m.group(1), m.group(2)));
+            m.appendReplacement(sb, Lang.nounWithNumeralExceptOne(m.group(1), m.group(2)));
         }
         m.appendTail(sb);
         return sb.toString();
@@ -95,14 +95,15 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
 
         try {
             String msg = "KeywordInstance:createTraits: make Traits for Keyword";
-            Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Card", host.getName()).withData("Keyword", this.original).build()
-            );
+
+            Breadcrumb bread = new Breadcrumb(msg);
+            bread.setData("Card", host.getName());
+            bread.setData("Keyword", this.original);
+            Sentry.addBreadcrumb(bread, this);
 
             // add Extra for debugging
-            Sentry.getContext().addExtra("Card", host);
-            Sentry.getContext().addExtra("Keyword", this.original);
+            Sentry.setExtra("Card", host.getName());
+            Sentry.setExtra("Keyword", this.original);
 
             CardFactoryUtil.addTriggerAbility(this, host, intrinsic);
             CardFactoryUtil.addReplacementEffect(this, host.getCurrentState(), intrinsic);
@@ -110,16 +111,18 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             CardFactoryUtil.addStaticAbility(this, host.getCurrentState(), intrinsic);
         } catch (Exception e) {
             String msg = "KeywordInstance:createTraits: failed Traits for Keyword";
-            Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Card", host.getName()).withData("Keyword", this.original).build()
-            );
+
+            Breadcrumb bread = new Breadcrumb(msg);
+            bread.setData("Card", host.getName());
+            bread.setData("Keyword", this.original);
+            Sentry.addBreadcrumb(bread, this);
+
             //rethrow
             throw new RuntimeException("Error in Keyword " + this.original + " for card " + host.getName(), e);
         } finally {
             // remove added extra
-            Sentry.getContext().removeExtra("Card");
-            Sentry.getContext().removeExtra("Keyword");
+            Sentry.removeExtra("Card");
+            Sentry.removeExtra("Keyword");
         }
     }
 
@@ -143,14 +146,15 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
         }
         try {
             String msg = "KeywordInstance:createTraits: make Traits for Keyword";
-            Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Player", player.getName()).withData("Keyword", this.original).build()
-            );
+            
+            Breadcrumb bread = new Breadcrumb(msg);
+            bread.setData("Player", player.getName());
+            bread.setData("Keyword", this.original);
+            Sentry.addBreadcrumb(bread, this);
 
             // add Extra for debugging
-            Sentry.getContext().addExtra("Player", player);
-            Sentry.getContext().addExtra("Keyword", this.original);
+            Sentry.setExtra("Player", player.getName());
+            Sentry.setExtra("Keyword", this.original);
 
             PlayerFactoryUtil.addTriggerAbility(this, player);
             PlayerFactoryUtil.addReplacementEffect(this, player);
@@ -158,16 +162,18 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
             PlayerFactoryUtil.addStaticAbility(this, player);
         } catch (Exception e) {
             String msg = "KeywordInstance:createTraits: failed Traits for Keyword";
-            Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Player", player.getName()).withData("Keyword", this.original).build()
-            );
+
+            Breadcrumb bread = new Breadcrumb(msg);
+            bread.setData("Player", player.getName());
+            bread.setData("Keyword", this.original);
+            Sentry.addBreadcrumb(bread, this);
+
             //rethrow
             throw new RuntimeException("Error in Keyword " + this.original + " for player " + player.getName(), e);
         } finally {
             // remove added extra
-            Sentry.getContext().removeExtra("Player");
-            Sentry.getContext().removeExtra("Keyword");
+            Sentry.removeExtra("Player");
+            Sentry.removeExtra("Keyword");
         }
     }
     /*

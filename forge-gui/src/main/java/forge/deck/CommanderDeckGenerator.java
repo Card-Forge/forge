@@ -37,14 +37,8 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
         }
         Predicate<CardRules> canPlay = isForAi ? DeckGeneratorBase.AI_CAN_PLAY : DeckGeneratorBase.HUMAN_CAN_PLAY;
         @SuppressWarnings("unchecked")
-        Iterable<PaperCard> legends = Iterables.filter(uniqueCards.toFlatList(), Predicates.compose(Predicates.and(
-                    new Predicate<CardRules>() {
-                        @Override
-                        public boolean apply(CardRules rules) {
-                            return format.isLegalCommander(rules);
-                        }
-                    },
-                    canPlay), PaperCard.FN_GET_RULES));
+        Iterable<PaperCard> legends = Iterables.filter(uniqueCards.toFlatList(), Predicates.and(format.isLegalCommanderPredicate(), Predicates.compose(
+                    canPlay, PaperCard.FN_GET_RULES)));
         final List<DeckProxy> decks = new ArrayList<>();
         for (PaperCard legend: legends) {
             decks.add(new CommanderDeckGenerator(legend, format, isForAi, isCardGen));

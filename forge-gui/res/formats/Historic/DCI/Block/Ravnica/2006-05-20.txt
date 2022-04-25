@@ -1,5 +1,5 @@
 [format]
-Name:Ravnica Block, Dissension
+Name:Block: Ravnica (DIS)
 Type:Historic
 Subtype:Block
 Effective:2006-05-20

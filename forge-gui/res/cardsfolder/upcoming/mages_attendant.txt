@@ -1,0 +1,8 @@
+Name:Mage's Attendant
+ManaCost:2 W
+Types:Creature Cat Rogue
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 blue Wizard creature token with "{1}, Sacrifice this creature: Counter target noncreature spell unless its controller pays {1}."
+SVar:TrigToken:DB$ Token | TokenScript$ u_1_1_wizard_countersac
+DeckHas:Ability$Token|Sacrifice & Type$Wizard
+Oracle:When Mage's Attendant enters the battlefield, create a 1/1 blue Wizard creature token with "{1}, Sacrifice this creature: Counter target noncreature spell unless its controller pays {1}."

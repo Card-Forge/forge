@@ -5,8 +5,10 @@ Name=Kamigawa: Neon Dynasty
 Code2=NEO
 MciCode=neo
 Type=Expansion
-TODO: Make sure Booster is correct closer to release - these are placeholders
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+BoosterCovers=3
+Booster=9 Common:!dfc:!fromSheet("NEO lands"):fromSheet("NEO cards"), 3 Uncommon:!dfc:!fromSheet("NEO lands"):fromSheet("NEO cards"), 1 dfc:!Rare:!Mythic:fromSheet("NEO cards"), 1 RareMythic:fromSheet("NEO cards"), 1 fromSheet("NEO lands")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=NEO
 
 [cards]
@@ -14,86 +16,294 @@ ScryfallCode=NEO
 2 M Ao, the Dawn Sky @Chris Rahn
 3 U Banishing Slash @Josu Hernaiz
 4 C Befriending the Moths @Matt Stewart
+5 U Blade-Blizzard Kitsune @Andrew Mar
+6 U Born to Drive @Heonhwa Choe
+7 R Brilliant Restoration @Wylie Beckert
+8 R Cloudsteel Kirin @Jonathan Kuo
+9 C Dragonfly Suit @Darren Tan
+10 C Eiganjo Exemplar @Ernanda Souza
 11 C Era of Enlightenment @Amayagido
+12 U The Fall of Lord Konda @Andrew Mar
+13 R Farewell @Seb McKinnon
 14 U Go-Shintai of Shared Purpose @Johannes Voss
+15 C Golden-Tail Disciple @Jesper Ejsing
 16 U Hotshot Mechanic @Julio Reyna
+17 C Imperial Oath @Nicholas Elias
+18 U Imperial Recovery Unit @Steve Prescott
 19 C Imperial Subduer @Zara Alfonso
+20 C Intercessor's Arrest @Steve Prescott
+21 R Invoke Justice @Kekai Kotaki
+22 C Kitsune Ace @Joseph Weston
 23 R Kyodai, Soul of Kamigawa @Daniel Zrom
+24 C Light the Way @Benjamin Ee
+25 R Light-Paws, Emperor's Voice @Randy Vargas
 26 R Lion Sash @Yongjae Choi
+27 C Lucky Offering @Fiona Hsieh
+28 R March of Otherworldly Light @Nils Hamm
 29 U Michiko's Reign of Truth @Volkan Baǵa
+30 C Mothrider Patrol @Ilse Gort
+31 U Norika Yamazaki, the Poet @Magali Villeneuve
+32 C Regent's Authority @A. M. Sartor
+33 C Repel the Vile @Dominik Mayer
+34 R The Restoration of Eiganjo @Titus Lunter
+35 U Selfless Samurai @PINDURSKI
+36 C Seven-Tail Mentor @Eelis Kyttanen
+37 U Sky-Blessed Samurai @Victor Adame Minguez
 38 C Spirited Companion @Ilse Gort
 39 C Sunblade Samurai @Aaron Miller
+40 U Touch the Spirit Realm @Marta Nael
+41 C Wanderer's Intervention @Cristi Balanescu
 42 M The Wandering Emperor @William Arnold
+43 U When We Were Young @Eric Deschamps
+44 U Acquisition Octopus @Francisco Miyara
+45 U Anchor to Reality @Alix Branwyn
 46 C Armguard Familiar @Joshua Raphael
 47 U Awakened Awareness @Tran Nguyen
 48 U Behold the Unspeakable @Ravenna Tran
 49 U Covert Technician @Lucas Graciano
+50 U Discover the Impossible @Ryan Pancoast
+51 C Disruption Protocol @Pauline Voss
+52 U Essence Capture @Campbell White
+53 U Futurist Operative @Justine Cruz
+54 C Futurist Sentinel @Daniel Ljunggren
+55 U Go-Shintai of Lost Wisdom @Johannes Voss
 56 C Guardians of Oboro @Anna Steinbauer
+57 R Inventive Iteration @Nestor Ossandon Leal
+58 R Invoke the Winds @Olivier Bernard
 59 M Jin-Gitaxias, Progress Tyrant @Chase Stone
 60 M Kairi, the Swirling Sky @Tyler Jacobson
+61 R March of Swirling Mist @Iris Compiet
+62 R Mindlink Mech @Robbie Trevino
+63 C Mirrorshell Crab @Cristi Balanescu
+64 C Mnemonic Sphere @Robin Olausson
+65 U Mobilizer Mech @Jonathan Kuo
 66 C The Modern Age @Anastasia Ovchinnikova
 67 C Moon-Circuit Hacker @Tia Masic
+68 C Moonfolk Puzzlemaker @Miguel Mercado
 69 C Moonsnare Prototype @Fariba Khamseh
+70 C Moonsnare Specialist @Lie Setiawan
+71 C Network Disruptor @Viko Menezes
+72 C Planar Incision @Joshua Raphael
+73 U Prosperous Thief @Fajareka Setiawan
 74 R The Reality Chip @Campbell White
+75 U Reality Heist @Mila Pesic
+76 U Replication Specialist @Cristi Balanescu
+77 C Saiba Trespassers @Evyn Fong
+78 C Short Circuit @Andreas Zafiratos
+79 C Skyswimmer Koi @Donato Giancola
+80 C Spell Pierce @Lie Setiawan
+81 C Suit Up @Miguel Mercado
 82 R Tameshi, Reality Architect @Scott M. Fischer
 83 C Tamiyo's Compleation @Dominik Mayer
 84 M Tezzeret, Betrayer of Flesh @Bryan Sola
+85 U Thirst for Knowledge @Anna Pavleeva
 86 R Thousand-Faced Shadow @Ekaterina Burmak
+87 U Assassin's Ink @Heonhwa Choe
 88 R Biting-Palm Ninja @Andreas Zafiratos
+89 M Blade of the Oni @Jason A. Engle
+90 C Chainflail Centipede @Viko Menezes
+91 C Clawing Torment @Rovina Cai
+92 C Debt to the Kami @Jodie Muir
+93 U Dockside Chef @Steven Belledin
 94 C Dokuchi Shadow-Walker @Manuel Castañón
+95 U Dokuchi Silencer @David Rapoza
+96 U Enormous Energy Blade @Campbell White
+97 U Go-Shintai of Hidden Cruelty @Johannes Voss
+98 U Gravelighter @Miranda Meeks
 99 R Hidetsugu, Devouring Chaos @Isis
+100 C Inkrise Infiltrator @Campbell White
 101 R Invoke Despair @Olivier Bernard
 102 M Junji, the Midnight Sky @Chase Stone
+103 C Kaito's Pursuit @Cristi Balanescu
+104 C Kami of Restless Shadows @rk post
+105 C Kami of Terrible Secrets @Mark Zug
 106 U Leech Gauntlet @Robin Olausson
 107 C Lethal Exploit @Sam Guay
 108 U Life of Toshiro Umezawa @Sidharth Chaturvedi
+109 U The Long Reach of Night @Tuan Duong Chu
+110 U Malicious Malfunction @Deruchenko Alexander
+111 R March of Wretched Sorrow @Tyler Jacobson
+112 C Mukotai Ambusher @Raymond Swanland
+113 R Mukotai Soulripper @Eddie Mendoza
+114 M Nashi, Moon Sage's Scion @Valera Lutfullina
+115 C Nezumi Bladeblesser @Ilse Gort
+116 U Nezumi Prowler @Joseph Weston
+117 C Okiba Reckoner Raid @Victor Adame Minguez
+118 U Okiba Salvage @Lie Setiawan
+119 C Reckoner Shakedown @Josu Hernaiz
+120 C Reckoner's Bargain @Justine Cruz
+121 C Return to Action @Jeremy Wilson
+122 R Soul Transfer @Lorenzo Mastroianni
 123 R Tatsunari, Toad Rider @Justine Cruz
+124 R Tribute to Horobi @Robin Olausson
+125 C Twisted Embrace @Betty Jiang
+126 C Undercity Scrounger @Mike Jordana
+127 U Unforgiving One @Fariba Khamseh
+128 C Virus Beetle @Dan Scott
+129 C You Are Already Dead @Zoltan Boros
 130 C Akki Ember-Keeper @April Prime
+131 C Akki Ronin @Olivier Bernard
 132 C Akki War Paint @Jeremy Wilson
+133 C Ambitious Assault @Wayne Reynolds
 134 M Atsushi, the Blazing Sky @Victor Adame Minguez
 135 U Bronzeplate Boar @Campbell White
+136 C Crackling Emergence @Jason Kang
+137 U Dragonspark Reactor @Billy Christian
+138 C Experimental Synthesizer @Yeong-Hao Han
+139 C Explosive Entry @Marta Nael
+140 M Explosive Singularity @Liiga Smilshkalne
+141 R Fable of the Mirror-Breaker @Joseph Meehan
+142 U Flame Discharge @Joshua Raphael
+143 C Gift of Wrath @Isis
 144 U Go-Shintai of Ancient Wars @Johannes Voss
 145 R Goro-Goro, Disciple of Ryusei @Mike Jordana
+146 U Heiko Yamazaki, the General @Magali Villeneuve
 147 R Invoke Calamity @Svetlin Velinov
+148 C Ironhoof Boar @Antonio José Manzanedo
+149 C Kami of Industry @Chris Rahn
+150 C Kami's Flare @Tia Masic
+151 C Kindled Fury @Dmitry Burmak
+152 U Kumano Faces Kakkazan @Mike Bierek
 153 R Lizard Blades @Jason Kang
+154 R March of Reckless Joy @Fiona Hsieh
+155 R Ogre-Head Helm @Viko Menezes
 156 C Peerless Samurai @Micah Epstein
+157 U Rabbit Battery @Justyna Gil
+158 U Reinforced Ronin @Kekai Kotaki
 159 R Scrap Welder @Simon Dominic
+160 C Scrapyard Steelbreaker @Eric Wilkerson
+161 U Seismic Wave @Aaron J. Riley
 162 C The Shattered States Era @David Gaillet
 163 C Simian Sling @Nicholas Elias
 164 U Sokenzan Smelter @Svetlin Velinov
 165 U Tempered in Solitude @Chris Cold
+166 R Thundering Raiju @Xavier Ribeiro
+167 C Towashi Songshaper @Fajareka Setiawan
 168 U Twinshot Sniper @Brent Hollowell
 169 C Unstoppable Ogre @Xavier Ribeiro
+170 U Upriser Renegade @David Auden Nash
+171 C Voltage Surge @Randy Vargas
 172 U Azusa's Many Journeys @Lindsey Look
 173 C Bamboo Grove Archer @Steve Prescott
+174 C Bearer of Memory @Randy Vargas
+175 U Blossom Prancer @Ryan Yee
+176 U Boon of Boseiju @Anastasia Ovchinnikova
 177 U Boseiju Reaches Skyward @Zezhou Chen
+178 C Careful Cultivation @A. M. Sartor
+179 C Coiling Stalker @Svetlin Velinov
+180 C Commune with Spirits @Aurore Folny
 181 R The Dragon-Kami Reborn @Alix Branwyn
+182 C Fade into Antiquity @Muhammad Firdaus
+183 C Fang of Shigeki @Yigit Koroglu
+184 C Favor of Jukai @Howard Lyon
 185 U Generous Visitor @Iris Compiet
 186 C Geothermal Kami @Rudy Siswanto
+187 U Go-Shintai of Boundless Vigor @Johannes Voss
+188 C Grafted Growth @Piotr Dura
 189 C Greater Tanuki @Ilse Gort
+190 C Harmonious Emergence @Simon Dominic
+191 C Heir of the Ancient Fang @Joseph Weston
 192 U Historian's Wisdom @Jarel Threat
+193 R Invoke the Ancients @Filip Burburan
+194 M Jugan Defends the Temple @Daniel Ljunggren
+195 C Jukai Preserver @Donato Giancola
+196 C Jukai Trainee @Francisco Miyara
+197 R Kami of Transience @Steve Prescott
 198 U Kappa Tech-Wrecker @Jehan Choo
 199 M Kodama of the West Tree @Daarken
+200 M Kura, the Boundless Sky @Donato Giancola
+201 R March of Burgeoning Life @Wylie Beckert
+202 C Master's Rebuke @Francisco Miyara
+203 U Orochi Merge-Keeper @Brent Hollowell
+204 U Roaring Earth @Tuan Duong Chu
+205 C Season of Renewal @Rovina Cai
+206 R Shigeki, Jukai Visionary @Anna Podedworna
+207 U Spinning Wheel Kick @Evyn Fong
+208 R Spring-Leaf Avenger @Wisnu Tan
+209 U Storyweave @Rovina Cai
+210 C Tales of Master Seshiro @Olena Richards
+211 C Tamiyo's Safekeeping @Aurore Folny
 212 R Teachings of the Kirin @Sam Burley
+213 R Weaver of Harmony @Tuan Duong Chu
+214 U Webspinner Cuff @Andrew Mar
 215 U Asari Captain @Donato Giancola
+216 U Colossal Skyturtle @Nicholas Gregory
+217 R Eiganjo Uprising @Johan Grenier
 218 U Enthusiastic Mechanaut @Anna Steinbauer
+219 U Gloomshrieker @Fiona Hsieh
+220 R Greasefang, Okiba Boss @Victor Adame Minguez
+221 M Hidetsugu Consumes All @Chris Cold
+222 R Hinata, Dawn-Crowned @Alexander Mokhov
+223 U Invigorating Hot Spring @Gabor Szikszai
+224 R Isshin, Two Heavens as One @Ryan Pancoast
 225 U Jukai Naturalist @Anna Steinbauer
 226 M Kaito Shizuki @Yongjae Choi
 227 M The Kami War @Kieran Yanner
+228 R Kotose, the Silent Spider @Marta Nael
 229 U Naomi, Pillar of Order @Joshua Raphael
+230 U Oni-Cult Anvil @Yeong-Hao Han
 231 U Prodigy's Prototype @Ryan Pancoast
 232 R Raiyuu, Storm's Edge @Heonhwa Choe
+233 R Risona, Asari Commander @Ekaterina Burmak
 234 R Satoru Umezawa @Anna Pavleeva
 235 R Satsuki, the Living Lore @Ryan Pancoast
 236 U Silver-Fur Master @Carl Critchlow
+237 M Spirit-Sister's Call @Dominik Mayer
 238 M Tamiyo, Compleated Sage @Chris Rahn
+239 C Automated Artificer @Izzy
+240 U Bronze Cudgels @Nestor Ossandon Leal
+241 C Brute Suit @Raymond Swanland
 242 U Circuit Mender @Hector Ortiz
+243 U Containment Construct @Julian Kok Joon Wen
+244 C Dramatist's Puppet @Livia Prima
+245 R Eater of Virtue @Tuan Duong Chu
+246 C Ecologist's Terrarium @Daniel Ljunggren
+247 U High-Speed Hoverbike @Julian Kok Joon Wen
+248 C Iron Apprentice @Kekai Kotaki
+249 R Mechtitan Core @Victor Adame Minguez
 250 R Mirror Box @Nestor Ossandon Leal
+251 C Network Terminal @Andreas Zafiratos
+252 C Ninja's Kunai @Tomasz Jedruszek
+253 C Papercraft Decoy @Brian Valeza
+254 U Patchwork Automaton @Donato Giancola
+255 R Reckoner Bankbuster @Steve Prescott
+256 U Reito Sentinel @David Auden Nash
 257 U Runaway Trash-Bot @Nicholas Gregory
+258 C Searchlight Companion @Rudy Siswanto
+259 C Shrine Steward @kleinerHai
 260 R Surgehacker Mech @Wisnu Tan
+261 C Thundersteel Colossus @Victor Adame Minguez
+262 U Towashi Guide-Bot @Jinho Bae
+263 U Walking Skyscraper @David Auden Nash
+264 C Bloodfell Caves @Julian Kok Joon Wen
+265 C Blossoming Sands @Sarah Finnigan
 266 R Boseiju, Who Endures @Chris Ostrowski
+267 C Dismal Backwater @Chris Ostrowski
+268 R Eiganjo, Seat of the Empire @Julian Kok Joon Wen
+269 C Jungle Hollow @Lucas Staniec
+270 U Mech Hangar @Julian Kok Joon Wen
+271 R Otawara, Soaring City @Alayna Danner
+272 U Roadside Reliquary @Robin Olausson
+273 C Rugged Highlands @Alayna Danner
+274 C Scoured Barrens @Julian Kok Joon Wen
 275 U Secluded Courtyard @Sam Burley
 276 R Sokenzan, Crucible of Defiance @Lucas Staniec
+277 C Swiftwater Cliffs @Alayna Danner
+278 R Takenuma, Abandoned Mire @Sam Burley
+279 C Thornwood Falls @Sam Burley
+280 C Tranquil Cove @Alayna Danner
+281 C Uncharted Haven @Lorenzo Lanfranconi
+282 C Wind-Scarred Crag @Yeong-Hao Han
+283 L Plains @Piotr Dura
+284 L Plains @Adam Paquette
+285 L Island @Piotr Dura
+286 L Island @Adam Paquette
+287 L Swamp @Piotr Dura
+288 L Swamp @Adam Paquette
+289 L Mountain @Piotr Dura
+290 L Mountain @Adam Paquette
+291 L Forest @Piotr Dura
+292 L Forest @Adam Paquette
 293 L Plains @Amayagido
 294 L Plains @Tomohito
 295 L Island @Amayagido
@@ -104,91 +314,274 @@ ScryfallCode=NEO
 300 L Mountain @Ayami Nakashima
 301 L Forest @Ezoi
 302 L Forest @Ezoi
+
+[borderless]
 303 M The Wandering Emperor @Terada Katsuya
 304 M Tezzeret, Betrayer of Flesh @Lack
 305 M Kaito Shizuki @Tetsuo Hara
 306 M Tamiyo, Compleated Sage @Terada Katsuya
+406 M Ao, the Dawn Sky @Ishikawa Kenta
+407 R Kyodai, Soul of Kamigawa @Yukihiro Maruo
+408 M Kairi, the Swirling Sky @Yoshiya
+409 M Junji, the Midnight Sky @Satoru Senda
+410 M Atsushi, the Blazing Sky @Toshiaki Takayama
+411 M Kura, the Boundless Sky @Satoru Senda
+412 R Boseiju, Who Endures @Esuthio
+413 R Eiganjo, Seat of the Empire @ZOUNOSE
+414 R Otawara, Soaring City @Yuta Shimpo
+415 R Sokenzan, Crucible of Defiance @Nao Miyoshi
+416 R Takenuma, Abandoned Mire @Nao Miyoshi
+
+[showcase]
 307 M Jin-Gitaxias, Progress Tyrant @Chase Stone
 308 M Tamiyo, Compleated Sage @Chris Rahn
+309 C Eiganjo Exemplar @Yamada Rokkaku
 310 C Imperial Subduer @Yunomachi
+311 U Norika Yamazaki, the Poet @Xiaji
+312 U Selfless Samurai @Ishikawa Kenta
+313 C Seven-Tail Mentor @Aogachou
+314 U Sky-Blessed Samurai @Misei Ito
 315 C Sunblade Samurai @Shirai Hidemi
 316 M The Wandering Emperor @Hisashi Momose
 317 C Guardians of Oboro @Domco.
+318 C Nezumi Bladeblesser @Kemonomichi
+319 C Akki Ronin @Nijimaarc
 320 R Goro-Goro, Disciple of Ryusei @Rorubei
+321 U Heiko Yamazaki, the General @Xiaji
 322 C Peerless Samurai @Yosuke Adachi
+323 U Reinforced Ronin @Inuchiyo Meimaru
+324 U Upriser Renegade @Maji
+325 C Heir of the Ancient Fang @T-Track
+326 C Jukai Trainee @Ebila
 327 U Asari Captain @Inuchiyo Meimaru
+328 R Isshin, Two Heavens as One @Yamada Rokkaku
 329 R Raiyuu, Storm's Edge @Ichiko Milk Tei
+330 R Risona, Asari Commander @Kato Ayaka
+331 U Blade-Blizzard Kitsune @Rorubei
 332 U Covert Technician @Daisuke Izuka
+333 U Futurist Operative @Clover.K
 334 C Moon-Circuit Hacker @SS39
+335 C Moonsnare Specialist @Hisashi Momose
+336 U Prosperous Thief @SS39
 337 R Thousand-Faced Shadow @Maji
 338 R Biting-Palm Ninja @Piyo
 339 C Dokuchi Shadow-Walker @Sansyu
+340 U Dokuchi Silencer @Clover.K
+341 C Inkrise Infiltrator @Umiu Geso
+342 C Mukotai Ambusher @Areku Nishiki
+343 M Nashi, Moon Sage's Scion @Yoshiya
+344 U Nezumi Prowler @Yukihiro Maruo
 345 R Tatsunari, Toad Rider @Rinco.
+346 C Coiling Stalker @M.Matsumoto
+347 C Fang of Shigeki @Murakami Hisashi
 348 U Kappa Tech-Wrecker @Yoshiro Ambe
+349 R Spring-Leaf Avenger @Hirokorin
 350 M Kaito Shizuki @Hagiya Kaoru
+351 R Kotose, the Silent Spider @Penekor
 352 R Satoru Umezawa @Raita Kazama
 353 U Silver-Fur Master @Fukuzo Katsura
+354 R The Restoration of Eiganjo @yo-ne
+355 R Inventive Iteration @Syutsuri
+356 R Tribute to Horobi @Tetsu Kurosawa
+357 R Fable of the Mirror-Breaker @akio
 358 R The Dragon-Kami Reborn @Kota Nakatsubo
-360 R Teachings of the Kirin Orochi @Azur
+359 M Jugan Defends the Temple @Susumu Kuroi
+360 R Teachings of the Kirin @Azur
+361 M Hidetsugu Consumes All @Azur
 362 M The Kami War @Kiritada
+363 R Brilliant Restoration @Totetsu Kondo
+364 R Cloudsteel Kirin @Moopic
+365 R Farewell @Fuzichoco
+366 R Invoke Justice @TODEE
+367 R Light-Paws, Emperor's Voice @Nijimaarc
 368 R Lion Sash @TODEE
-369 R March of Otherworldly Light
+369 R March of Otherworldly Light @Gozz
+370 R Invoke the Winds @Nakamura8
 371 M Jin-Gitaxias, Progress Tyrant @Ai Nanahira
+372 R March of Swirling Mist @Haku Tatsufuchi
+373 R Mindlink Mech @Naochika Morishita
+374 R The Reality Chip @Tubaki Halsame
 375 R Tameshi, Reality Architect @Koji Nishino
 376 M Tezzeret, Betrayer of Flesh @Maekawa Yuichi
+377 M Blade of the Oni @Tubaki Halsame
 378 R Hidetsugu, Devouring Chaos @SENNSU
 379 R Invoke Despair @Tomohito
+380 R March of Wretched Sorrow @Sansyu
+381 R Mukotai Soulripper @T-Track
+382 R Soul Transfer @Dai-XT
+383 M Explosive Singularity @Ari
 384 R Invoke Calamity @ZOUNOSE
+385 R Lizard Blades @Penekor
+386 R March of Reckless Joy @Miyaki Hajime
+387 R Ogre-Head Helm @Dai-XT
 388 R Scrap Welder @Areku Nishiki
+389 R Thundering Raiju @TAPIOCA
+390 R Invoke the Ancients @Nablange
+391 R Kami of Transience @Kemonomichi
 392 M Kodama of the West Tree @TAPIOCA
+393 R March of Burgeoning Life @SENNSU
+394 R Shigeki, Jukai Visionary @Nablange
+395 R Weaver of Harmony @Miyaki Hajime
+396 R Eiganjo Uprising @Ari
+397 R Greasefang, Okiba Boss @TAPIOCA
+398 R Hinata, Dawn-Crowned @Ryota Murayama
 399 R Satsuki, the Living Lore @Domco.
+400 M Spirit-Sister's Call @RYUTETSU
+401 R Eater of Virtue @Katana Canata
+402 R Mechtitan Core @Naochika Morishita
 403 R Mirror Box @Mid
+404 R Reckoner Bankbuster @Yoshiya
 405 R Surgehacker Mech @Inuchiyo Meimaru
-406 M Ao, the Dawn Sky @Ishikawa Kenta
-407 R Kyodai, Soul of Kamigawa @Yukihiro Maruo
-408 M Kairi, the Swirling Sky @ZOUNOSE
-409 M Junji, the Midnight Sky @Satoru Senda
-410 M Atsushi, the Blazing Sky @Toshiaki Takayama
-412 R Boseiju, Who Endures @Esuthio
-415 R Sokenzan, Crucible of Defiance @Nao Miyoshi
+417 R Farewell @Fuzichoco
+418 M The Wandering Emperor @Hisashi Momose
+419 M Tezzeret, Betrayer of Flesh @Maekawa Yuichi
+420 M Blade of the Oni @Tubaki Halsame
+421 M Nashi, Moon Sage's Scion @Yoshiya
+422 M Explosive Singularity @Ari
+423 M Kodama of the West Tree @TAPIOCA
+424 M Kaito Shizuki @Hagiya Kaoru
+425 R Risona, Asari Commander @Kato Ayaka
+426 R Satoru Umezawa @Raita Kazama
+427 M Jin-Gitaxias, Progress Tyrant @Chase Stone
+428 M Tamiyo, Compleated Sage @Chris Rahn
 429 R Hidetsugu, Devouring Chaos @SENNSU
 430 R Hidetsugu, Devouring Chaos @SENNSU
 431 R Hidetsugu, Devouring Chaos @SENNSU
 432 R Hidetsugu, Devouring Chaos @SENNSU
+
+[extended art]
 433 M Ao, the Dawn Sky @Chris Rahn
+434 R Brilliant Restoration @Wylie Beckert
+435 R Cloudsteel Kirin @Jonathan Kuo
+436 R Farewell @Seb McKinnon
+437 R Invoke Justice @Kekai Kotaki
 438 R Kyodai, Soul of Kamigawa @Daniel Zrom
+439 R Light-Paws, Emperor's Voice @Randy Vargas
 440 R Lion Sash @Yongjae Choi
 441 R March of Otherworldly Light @Nils Hamm
+442 R The Restoration of Eiganjo @Titus Lunter
+443 R Inventive Iteration @Nestor Ossandon Leal
+444 R Invoke the Winds @Olivier Bernard
 445 M Jin-Gitaxias, Progress Tyrant @Chase Stone
 446 M Kairi, the Swirling Sky @Tyler Jacobson
+447 R March of Swirling Mist @Iris Compiet
+448 R Mindlink Mech @Robbie Trevino
 449 R The Reality Chip @Campbell White
 450 R Tameshi, Reality Architect @Scott M. Fischer
 451 R Thousand-Faced Shadow @Ekaterina Burmak
 452 R Biting-Palm Ninja @Andreas Zafiratos
+453 M Blade of the Oni @Jason A. Engle
 454 R Hidetsugu, Devouring Chaos @Isis
 455 R Invoke Despair @Olivier Bernard
 456 M Junji, the Midnight Sky @Chase Stone
+457 R March of Wretched Sorrow @Tyler Jacobson
+458 R Mukotai Soulripper @Eddie Mendoza
+459 M Nashi, Moon Sage's Scion @Valera Lutfullina
+460 R Soul Transfer @Lorenzo Mastroianni
 461 R Tatsunari, Toad Rider @Justine Cruz
+462 R Tribute to Horobi @Robin Olausson
 463 M Atsushi, the Blazing Sky @Victor Adame Minguez
+464 M Explosive Singularity @Liiga Smilshkalne
+465 R Fable of the Mirror-Breaker @Joseph Meehan
 466 R Goro-Goro, Disciple of Ryusei @Mike Jordana
 467 R Invoke Calamity @Svetlin Velinov
 468 R Lizard Blades @Jason Kang
+469 R March of Reckless Joy @Fiona Hsieh
+470 R Ogre-Head Helm @Viko Menezes
 471 R Scrap Welder @Simon Dominic
+472 R Thundering Raiju @Xavier Ribeiro
 473 R The Dragon-Kami Reborn @Alix Branwyn
+474 R Invoke the Ancients @Filip Burburan
+475 M Jugan Defends the Temple @Daniel Ljunggren
+476 R Kami of Transience @Steve Prescott
 477 M Kodama of the West Tree @Daarken
+478 M Kura, the Boundless Sky @Donato Giancola
+479 R March of Burgeoning Life @Wylie Beckert
+480 R Shigeki, Jukai Visionary @Anna Podedworna
+481 R Spring-Leaf Avenger @Wisnu Tan
 482 R Teachings of the Kirin @Sam Burley
+483 R Weaver of Harmony @Tuan Duong Chu
+484 R Eiganjo Uprising @Johan Grenier
+485 R Greasefang, Okiba Boss @Victor Adame Minguez
+486 M Hidetsugu Consumes All @Chris Cold
+487 R Hinata, Dawn-Crowned @Alexander Mokhov
+488 R Isshin, Two Heavens as One @Ryan Pancoast
 489 M The Kami War @Kieran Yanner
+490 R Kotose, the Silent Spider @Marta Nael
 491 R Raiyuu, Storm's Edge @Heonhwa Choe
+492 R Risona, Asari Commander @Ekaterina Burmak
 493 R Satoru Umezawa @Anna Pavleeva
 494 R Satsuki, the Living Lore @Ryan Pancoast
+495 M Spirit-Sister's Call @Dominik Mayer
+496 R Eater of Virtue @Tuan Duong Chu
+497 R Mechtitan Core @Victor Adame Minguez
 498 R Mirror Box @Nestor Ossandon Leal
+499 R Reckoner Bankbuster @Steve Prescott
 500 R Surgehacker Mech @Wisnu Tan
 501 R Boseiju, Who Endures @Chris Ostrowski
+502 R Eiganjo, Seat of the Empire @Julian Kok Joon Wen
+503 R Otawara, Soaring City @Alayna Danner
 504 R Sokenzan, Crucible of Defiance @Lucas Staniec
-506 R Invoke Despair @Donato Giancola
+505 R Takenuma, Abandoned Mire @Sam Burley
+
+[buy a box]
 507 R Satoru Umezawa @Yoji Shinkawa
+
+[promo]
+506 R Invoke Despair @Donato Giancola
 508 C Spirited Companion @Ilse Gort
 509 U Enthusiastic Mechanaut @Anna Steinbauer
 510 U Jukai Naturalist @Anna Steinbauer
 511 U Silver-Fur Master @Carl Critchlow
 512 U Secluded Courtyard @Sam Burley
+
+[lands]
+1 Plains|NEO|1
+1 Plains|NEO|2
+1 Plains|NEO|3
+1 Plains|NEO|4
+1 Island|NEO|1
+1 Island|NEO|2
+1 Island|NEO|3
+1 Island|NEO|4
+1 Swamp|NEO|1
+1 Swamp|NEO|2
+1 Swamp|NEO|3
+1 Swamp|NEO|4
+1 Mountain|NEO|1
+1 Mountain|NEO|2
+1 Mountain|NEO|3
+1 Mountain|NEO|4
+1 Forest|NEO|1
+1 Forest|NEO|2
+1 Forest|NEO|3
+1 Forest|NEO|4
+1 Bloodfell Caves|NEO
+1 Blossoming Sands|NEO
+1 Dismal Backwater|NEO
+1 Jungle Hollow|NEO
+1 Rugged Highlands|NEO
+1 Scoured Barrens|NEO
+1 Swiftwater Cliffs|NEO
+1 Thornwood Falls|NEO
+1 Tranquil Cove|NEO
+1 Wind-Scarred Crag|NEO
+
+[tokens]
+b_1_1_rat_rogue
+c_1_1_a_construct
+c_1_1_pilot_crewbuff
+c_1_1_spirit
+c_a_treasure_sac
+g_1_1_human_monk_g
+g_4_5_spirit
+g_x_x_spirit_total_lands
+keimi
+mechtitan
+r_2_2_goblin_shaman_treasure
+r_2_2_spirit_menace
+r_3_1_a_construct_haste
+r_5_5_dragon_spirit_flying
+tamiyos_notebook
+u_1_1_ninja_unblockable
+w_2_2_samurai_vigilance

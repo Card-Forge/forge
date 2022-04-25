@@ -2,7 +2,7 @@
 Name:Extended
 Type:Historic
 Subtype:Extended
-Effective:2013-07-19
+Effective:2013-09-27
 Retired:2013-10-08
-Sets:ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC, DGM, M14
+Sets:SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC, DGM, M14, THS
 Banned:Mental Misstep; Ponder

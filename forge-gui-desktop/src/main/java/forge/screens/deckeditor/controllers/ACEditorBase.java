@@ -37,6 +37,7 @@ import forge.deck.DeckBase;
 import forge.deck.DeckFormat;
 import forge.deck.DeckSection;
 import forge.game.GameType;
+import forge.gui.GuiBase;
 import forge.gui.GuiChoose;
 import forge.gui.GuiUtils;
 import forge.gui.UiCommand;
@@ -126,7 +127,9 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
             .fontSize(14)
             .text(localizer.getMessage("lblAddBasicLands"))
             .tooltip(localizer.getMessage("ttAddBasicLands"))
-            .icon(FSkin.getImage(FSkinProp.IMG_LAND, 18, 18))
+            .icon(FSkin.getImage(FSkinProp.IMG_LAND,
+                Math.round(18 * GuiBase.getInterface().getScreenScale()),
+                Math.round(18 * GuiBase.getInterface().getScreenScale())))
             .iconScaleAuto(false).hoverable().build();
 
     protected ACEditorBase(final FScreen screen0, final CDetailPicture cDetailPicture0, final GameType gameType0) {

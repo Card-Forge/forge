@@ -176,7 +176,14 @@ public class DeckHints {
             case TYPE:
                 String[] types = param.split("\\|");
                 for (String t : types) {
-                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.subType(t), PaperCard.FN_GET_RULES));
+                    Predicate<CardRules> op;
+                    if (t.contains(".")) {
+                        String[] typeParts = t.split("\\.");
+                        op = Predicates.and(CardRulesPredicates.coreType(true, typeParts[0]), CardRulesPredicates.subType(typeParts[1]));
+                    } else {
+                        op = CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, t);
+                    }
+                    Iterables.addAll(cards, getMatchingItems(cardList, op, PaperCard.FN_GET_RULES));
                 }
                 break;
             case NONE:

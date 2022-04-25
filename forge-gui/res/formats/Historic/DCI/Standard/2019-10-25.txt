@@ -1,7 +1,7 @@
 [format]
-Name:Standard, 10/25/19
+Name:Standard (2019-10-25)
 Type:Historic
 Subtype:Standard
 Effective:2019-10-25
 Sets:GRN, RNA, WAR, M20, ELD
-Banned: Field of the Dead
+Banned:Field of the Dead

@@ -17,6 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeSet;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Range;
@@ -133,6 +134,7 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.util.CardTranslation;
+import forge.util.DeckAIUtils;
 import forge.util.ITriggerEvent;
 import forge.util.Lang;
 import forge.util.Localizer;
@@ -284,6 +286,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 return null;
             }
         }
+        //FIXME - on mobile gui it allows the card to cast from opponent hands issue #2127, investigate where the bug occurs before this method is called
         spellViewCache = SpellAbilityView.getMap(abilities);
         final SpellAbilityView resultView = getGui().getAbilityToPlay(CardView.get(hostCard),
                 Lists.newArrayList(spellViewCache.keySet()), triggerEvent);
@@ -354,47 +357,35 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // Attacker is a poor name here, since the creature assigning damage
         // could just as easily be the blocker.
         final Map<Card, Integer> map = Maps.newHashMap();
-        if (defender != null && assignDamageAsIfNotBlocked(attacker)) {
-            map.put(null, damageDealt);
-        } else {
-            if ((attacker.hasKeyword(Keyword.TRAMPLE) && defender != null) || (blockers.size() > 1)
-                    || ((attacker.hasKeyword("You may assign CARDNAME's combat damage divided as you choose among " +
-                    "defending player and/or any number of creatures they control.")) && overrideOrder &&
-                    blockers.size() > 0) || (attacker.hasKeyword("Trample:Planeswalker") && defender instanceof Card)) {
-                GameEntityViewMap<Card, CardView> gameCacheBlockers = GameEntityView.getMap(blockers);
-                final CardView vAttacker = CardView.get(attacker);
-                final GameEntityView vDefender = GameEntityView.get(defender);
-                boolean maySkip = false;
-                if (remaining != null && remaining.size() > 1 && attacker.isAttacking()) {
-                    maySkip = true;
-                }
-                final Map<CardView, Integer> result = getGui().assignCombatDamage(vAttacker, gameCacheBlockers.getTrackableKeys(), damageDealt,
-                        vDefender, overrideOrder, maySkip);
-                if (result == null) {
-                    return null;
-                }
-                for (final Entry<CardView, Integer> e : result.entrySet()) {
-                    if (gameCacheBlockers.containsKey(e.getKey())) {
-                        map.put(gameCacheBlockers.get(e.getKey()), e.getValue());
-                    } else if (e.getKey() == null || e.getKey().getId() == -1) {
-                        // null key or key with -1 means defender
-                        map.put(null, e.getValue());
-                    }
-                }
-            } else {
-                map.put(blockers.isEmpty() ? null : blockers.get(0), damageDealt);
+
+        if ((attacker.hasKeyword(Keyword.TRAMPLE) && defender != null) || (blockers.size() > 1)
+                || ((attacker.hasKeyword("You may assign CARDNAME's combat damage divided as you choose among " +
+                        "defending player and/or any number of creatures they control.")) && overrideOrder &&
+                        blockers.size() > 0) || (attacker.hasKeyword("Trample:Planeswalker") && defender instanceof Card)) {
+            GameEntityViewMap<Card, CardView> gameCacheBlockers = GameEntityView.getMap(blockers);
+            final CardView vAttacker = CardView.get(attacker);
+            final GameEntityView vDefender = GameEntityView.get(defender);
+            boolean maySkip = false;
+            if (remaining != null && remaining.size() > 1 && attacker.isAttacking()) {
+                maySkip = true;
             }
+            final Map<CardView, Integer> result = getGui().assignCombatDamage(vAttacker, gameCacheBlockers.getTrackableKeys(), damageDealt,
+                    vDefender, overrideOrder, maySkip);
+            if (result == null) {
+                return null;
+            }
+            for (final Entry<CardView, Integer> e : result.entrySet()) {
+                if (gameCacheBlockers.containsKey(e.getKey())) {
+                    map.put(gameCacheBlockers.get(e.getKey()), e.getValue());
+                } else if (e.getKey() == null || e.getKey().getId() == -1) {
+                    // null key or key with -1 means defender
+                    map.put(null, e.getValue());
+                }
+            }
+        } else {
+            map.put(blockers.isEmpty() ? null : blockers.get(0), damageDealt);
         }
         return map;
-    }
-
-    private final boolean assignDamageAsIfNotBlocked(final Card attacker) {
-        if (attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.") || attacker
-                .hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
-            return InputConfirm.confirm(this, CardView.get(attacker),
-                    localizer.getMessage("lblAssignCombatDamageWerentBlocked"));
-        }
-        return false;
     }
 
     @Override
@@ -470,7 +461,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             return null;
         }
 
-        String announceTitle = ability.getParamOrDefault("AnnounceTitle", announce);
+        String announceTitle = "X".equals(announce) ? ability.getParamOrDefault("XAnnounceTitle", announce) :
+                ability.getParamOrDefault("AnnounceTitle", announce);
         if (cost.isMandatory()) {
             return chooseNumber(ability, localizer.getMessage("lblChooseAnnounceForCard", announceTitle,
                     CardTranslation.getTranslatedName(ability.getHostCard().getName())) , min, max);
@@ -636,8 +628,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public <T extends GameEntity> List<T> chooseEntitiesForEffect(final FCollectionView<T> optionList, final int  min, final int max,
             final DelayedReveal delayedReveal, final SpellAbility sa, final String title, final Player targetedPlayer, Map<String, Object> params) {
         // useful details for debugging problems with the mass select logic
-        Sentry.getContext().addExtra("Card", sa.getCardView().toString());
-        Sentry.getContext().addExtra("SpellAbility", sa.toString());
+        Sentry.setExtra("Card", sa.getCardView().toString());
+        Sentry.setExtra("SpellAbility", sa.toString());
 
         // Human is supposed to read the message and understand from it what to choose
         if (optionList.isEmpty()) {
@@ -1276,7 +1268,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
         // TODO JAVA 8 use getOrDefault
         for (Card c : player.getAllCards()) {
-
             // Changeling are all creature types, they are not interesting for
             // counting creature types
             if (c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
@@ -2090,31 +2081,35 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public void revealAISkipCards(final String message, final Map<Player, Map<DeckSection, List<? extends PaperCard>>> unplayable) {
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            //restore old functionality for mobile version since list of card names can't be zoomed to display the cards
+            for (Player p : unplayable.keySet()) {
+                final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
+                final List<PaperCard> labels = new ArrayList<>();
+                for (final DeckSection s: new TreeSet<>(removedUnplayableCards.keySet())) {
+                    if (DeckSection.Sideboard.equals(s))
+                        continue;
+                    for (PaperCard c: removedUnplayableCards.get(s)) {
+                        labels.add(c);
+                    }
+                }
+                if (!labels.isEmpty())
+                    getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
+                        ImmutableList.copyOf(labels));
+            }
+            return;
+        }
         for (Player p : unplayable.keySet()) {
             final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
             final List<String> labels = new ArrayList<>();
-            for (final DeckSection s: removedUnplayableCards.keySet()) {
-                labels.add("=== " + getLocalizedDeckSection(s) + " ===");
+            for (final DeckSection s: new TreeSet<>(removedUnplayableCards.keySet())) {
+                labels.add("=== " + DeckAIUtils.getLocalizedDeckSection(localizer, s) + " ===");
                 for (PaperCard c: removedUnplayableCards.get(s)) {
                     labels.add(c.toString());
                 }
             }
             getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
                     ImmutableList.copyOf(labels));
-        }
-    }
-
-    private String getLocalizedDeckSection(DeckSection d) {
-        switch (d) {
-            case Avatar: return localizer.getMessage("lblAvatar");
-            case Commander: return localizer.getMessage("lblCommanderDeck");
-            case Main: return localizer.getMessage("lblMainDeck");
-            case Sideboard: return localizer.getMessage("lblSideboard");
-            case Planes: return localizer.getMessage("lblPlanarDeck");
-            case Schemes: return localizer.getMessage("lblSchemeDeck");
-            case Conspiracy: return /* TODO localise */ "Conspiracy";
-            case Dungeon: return /* TODO localise */ "Dungeon";
-            default: return /* TODO better handling */ "UNKNOWN";
         }
     }
 
@@ -2749,15 +2744,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             final CardDb carddb = FModel.getMagicDb().getCommonCards();
             final List<ICardFace> faces = Lists.newArrayList(carddb.getAllFaces());
-            final CardDb customDb = FModel.getMagicDb().getCustomCards();
-            final List<ICardFace> customFaces = Lists.newArrayList(customDb.getAllFaces());
+
             List<CardFaceView> choices = new ArrayList<>();
             CardFaceView cardFaceView;
             for (ICardFace cardFace : faces) {
-                cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName());
-                choices.add(cardFaceView);
-            }
-            for (ICardFace cardFace : customFaces) {
                 cardFaceView = new CardFaceView(CardTranslation.getTranslatedName(cardFace.getName()), cardFace.getName());
                 choices.add(cardFaceView);
             }
@@ -2770,8 +2760,6 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
 
             PaperCard c = carddb.getUniqueByName(f.getOracleName());
-            if (c == null)
-                c = customDb.getUniqueByName(f.getOracleName());
             final Card forgeCard = Card.fromPaperCard(c, p);
             forgeCard.setTimestamp(getGame().getNextTimestamp());
 
@@ -2798,7 +2786,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                                         }
                                     }
                                 }
-                                getGame().getAction().moveTo(targetZone, forgeCard, null);
+                                getGame().getAction().moveTo(targetZone, forgeCard, null, AbilityKey.newMap());
                                 if (forgeCard.isCreature()) {
                                     forgeCard.setSickness(lastSummoningSickness);
                                 }
@@ -2853,7 +2841,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                             getGame().getAction().moveToBottomOfLibrary(forgeCard, null);
                         }
                     } else {
-                        getGame().getAction().moveTo(targetZone, forgeCard, null);
+                        getGame().getAction().moveTo(targetZone, forgeCard, null, AbilityKey.newMap());
                     }
 
                     lastAdded = f;
@@ -2893,7 +2881,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (c == null) {
                     continue;
                 }
-                if (getGame().getAction().moveTo(ZoneType.Exile, c, null) != null) {
+                if (getGame().getAction().moveTo(ZoneType.Exile, c, null, AbilityKey.newMap()) != null) {
                     StringBuilder sb = new StringBuilder();
                     sb.append(p).append(" exiles ").append(c).append(" due to Dev Cheats.");
                     getGame().getGameLog().add(GameLogEntryType.DISCARD, sb.toString());
@@ -2932,7 +2920,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (c == null) {
                     continue;
                 }
-                if (getGame().getAction().moveTo(ZoneType.Exile, c, null) != null) {
+                if (getGame().getAction().moveTo(ZoneType.Exile, c, null, AbilityKey.newMap()) != null) {
                     StringBuilder sb = new StringBuilder();
                     sb.append(p).append(" exiles ").append(c).append(" due to Dev Cheats.");
                     getGame().getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());

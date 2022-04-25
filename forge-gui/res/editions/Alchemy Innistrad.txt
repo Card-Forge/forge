@@ -1,9 +1,10 @@
 [metadata]
-Code=Y22
+Code=YMID
 Date=2021-12-09
 Name=Alchemy: Innistrad
+Alias=Y22
 Type=Online
-ScryfallCode=Y22
+ScryfallCode=YMID
 
 [cards]
 1 R Angel of Eternal Dawn @Aurore Folny
@@ -50,7 +51,7 @@ ScryfallCode=Y22
 42 M Rahilda, Wanted Cutthroat @Betty Jiang
 43 M Tibalt, Wicked Tormentor @PINDURSKI
 44 R Toralf's Disciple @Olivier Bernard
-45 R Town-razer Tyrant @Daniel Romanovsky
+45 R Town-Razer Tyrant @Daniel Romanovsky
 46 R Antique Collector @Wisnu Tan
 47 M Garruk, Wrath of the Wilds @Tyler Walpole
 48 R Geistpack Alpha @Brian Valeza

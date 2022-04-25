@@ -45,7 +45,7 @@ import forge.util.collect.FCollection;
  */
 public class TargetChoices extends ForwardingList<GameObject> implements Cloneable {
 
-    private final FCollection<GameObject> targets = new FCollection<GameObject>();
+    private final FCollection<GameObject> targets = new FCollection<>();
 
     private final Map<GameObject, Integer> dividedMap = Maps.newHashMap();
 

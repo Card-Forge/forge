@@ -1,0 +1,7 @@
+Name:Human Monk Token
+ManaCost:no cost
+Types:Creature Human Monk
+Colors:green
+PT:1/1
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+Oracle:{T}: Add {G}.

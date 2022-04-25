@@ -1,6 +1,6 @@
 Name:Golem Token
-Types:Artifact Creature Golem
-Colors:red,white
 ManaCost:no cost
+Colors:red,white
+Types:Artifact Creature Golem
 PT:4/4
 Oracle:

@@ -6,5 +6,5 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Descr
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance & Trample | CheckSVar$ X | SVarCompare$ GE2 | Description$ As long as you control two or more Gates, Gatebreaker Ram has vigilance and trample.
 SVar:X:Count$Valid Land.Gate+YouCtrl
 SVar:BuffedBy:Land.Gate
-DeckNeeds:Type$Land.Gate
+DeckNeeds:Type$Gate
 Oracle:Gatebreaker Ram gets +1/+1 for each Gate you control.\nAs long as you control two or more Gates, Gatebreaker Ram has vigilance and trample.

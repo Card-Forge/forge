@@ -1,8 +1,8 @@
 # Forge
 
-[Official GitLab repo](https://git.cardforge.org/core-developers/forge).
+[Official repo](https://github.com/Card-Forge/forge.git).
 
-Dev instructions here: [Getting Started](https://git.cardforge.org/core-developers/forge/-/wikis/(SM-autoconverted)-how-to-get-started-developing-forge) (Somewhat outdated)
+Dev instructions here: [Getting Started](https://github.com/Card-Forge/forge/wiki) (Somewhat outdated)
 
 Discord channel [here](https://discord.gg/fWfNgCUNRq)
 
@@ -13,14 +13,14 @@ Discord channel [here](https://discord.gg/fWfNgCUNRq)
 - Git
 - Git client (optional)
 - Maven
-- Gitlab account
+- GitHub account
 - Libgdx (optional: familiarity with this library is helpful for mobile platform development)
 - Android SDK (optional: for Android releases)
 - RoboVM (optional: for iOS releases) (TBD: Current status of support by libgdx)
 
 ## Project Quick Setup
 
-- Log in to gitlab with your user account and fork the project.
+- Login into GitHub with your user account and fork the project.
 
 - Clone your forked project to your local machine
 
@@ -32,13 +32,13 @@ Eclipse includes Maven integration so a separate install is not necessary.  For 
 
 ### Project Setup
 
-- Follow the instructions for cloning from Gitlab.  You'll need a Gitlab account setup and an SSH key defined.
+- Follow the instructions for cloning from GitHub.  You'll need to setup an account and your SSH key.
 
   If you are on a Windows machine you can use Putty with TortoiseGit for SSH keys.  Run puttygen.exe to generate the key -- save the private key and export
-  the OpenSSH public key.  If you just leave the dialog open, you can copy and paste the key from it to your Gitlab profile under
-  "SSH keys".  Run pageant.exe and add the private key generated earlier.  TortoiseGit will use this for accessing Gitlab.
+  the OpenSSH public key.  If you just leave the dialog open, you can copy and paste the key from it to your GitHub profile under
+  "SSH keys".  Run pageant.exe and add the private key generated earlier.  TortoiseGit will use this for accessing GitHub.
 
-- Fork the Forge git repo to your Gitlab account.
+- Fork the Forge git repo to your GitHub account.
 
 - Clone your forked repo to your local machine.
 
@@ -168,11 +168,11 @@ The resulting snapshot will be found at: forge-gui-desktop/target/forge-gui-desk
 
 ## IntelliJ
 
-Quick start guide for [setting up the Forge project within IntelliJ](https://git.cardforge.org/core-developers/forge/-/wikis/Development/intellij-setup).
+Quick start guide for [setting up the Forge project within IntelliJ](https://github.com/Card-Forge/forge/wiki/IntelliJ-setup).
 
 ## Card Scripting
 
-Visit [this page](https://git.cardforge.org/core-developers/forge/-/wikis/Card-scripting-API/Card-scripting-API) for information on scripting.
+Visit [this page](https://github.com/Card-Forge/forge/wiki/Card-scripting-API) for information on scripting.
 
 Card scripting resources are found in the forge-gui/res/ path.
 

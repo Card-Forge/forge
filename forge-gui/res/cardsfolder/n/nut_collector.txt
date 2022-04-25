@@ -4,5 +4,5 @@ Types:Creature Human Druid
 PT:1/1
 S:Mode$ Continuous | Affected$ Creature.Squirrel | AddPower$ 2 | AddToughness$ 2 | Condition$ Threshold | Description$ Threshold — Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigToken | TriggerDescription$ At the beginning of your upkeep, you may create a 1/1 green Squirrel creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_squirrel | TokenOwner$ You | LegacyImage$ g 1 1 squirrel ody
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_squirrel | TokenOwner$ You
 Oracle:At the beginning of your upkeep, you may create a 1/1 green Squirrel creature token.\nThreshold — Squirrel creatures get +2/+2 as long as seven or more cards are in your graveyard.

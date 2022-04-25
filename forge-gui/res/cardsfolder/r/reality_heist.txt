@@ -1,0 +1,8 @@
+Name:Reality Heist
+ManaCost:5 U U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each artifact you control.
+SVar:X:Count$Valid Artifact.YouCtrl
+A:SP$ Dig | Defined$ You | DigNum$ 7 | ChangeNum$ 2 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Artifact | RestRandomOrder$ True | SpellDescription$ Look at the top seven cards of your library. You may reveal up to two artifact cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order.
+DeckNeeds:Type$Artifact
+Oracle:This spell costs {1} less to cast for each artifact you control.\nLook at the top seven cards of your library. You may reveal up to two artifact cards from among them and put them into your hand. Put the rest on the bottom of your library in a random order.

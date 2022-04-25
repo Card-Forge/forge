@@ -1,0 +1,6 @@
+[format]
+Name:Pre-format (LEB)
+Type:Historic
+Subtype:Vintage
+Effective:1993-10-04
+Sets:LEA, LEB

@@ -11,7 +11,7 @@ SVar:X:ReplaceCount$DamageAmount
 R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | AiLogic$ LichDraw | ReplaceWith$ Draw | Description$ If you would gain life, draw that many cards instead.
 SVar:Draw:DB$ Draw | Defined$ You | NumCards$ Y
 SVar:Y:ReplaceCount$LifeGained
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | TriggerController$ TriggeredCardController | Execute$ TrigLose | TriggerDescription$ When CARDNAME leaves the battlefield, you lose the game.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigLose | TriggerDescription$ When CARDNAME leaves the battlefield, you lose the game.
 SVar:TrigLose:DB$ LosesGame | Defined$ You
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

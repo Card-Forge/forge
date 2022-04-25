@@ -117,9 +117,7 @@ public class VoteEffect extends SpellAbilityEffect {
             if (sa.hasParam("Tied") && mostVotes.size() > 1) {
                 subAbs.add(sa.getParam("Tied"));
             } else if (sa.hasParam("VoteSubAbility")) {
-                for (final Object o : mostVotes) {
-                    host.addRemembered(o);
-                }
+                host.addRemembered(mostVotes);
                 subAbs.add(sa.getParam("VoteSubAbility"));
             } else {
                 for (Object type : mostVotes) {

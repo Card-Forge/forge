@@ -348,7 +348,7 @@ public class ComputerUtilMana {
                 // For cards like Genju of the Cedars, make sure we're not attaching to the same land that will
                 // be tapped to pay its own cost if there's another untapped land like that available
                 if (ma.getHostCard().equals(sa.getTargetCard())) {
-                    if (CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.nameEquals(ma.getHostCard().getName()), CardPredicates.Presets.UNTAPPED)).size() > 1) {
+                    if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), Predicates.and(CardPredicates.nameEquals(ma.getHostCard().getName()), CardPredicates.Presets.UNTAPPED)) > 1) {
                         continue;
                     }
                 }
@@ -795,6 +795,9 @@ public class ComputerUtilMana {
 
                 if (toPay.isPhyrexian()) {
                     cost.payPhyrexian();
+                    if (!test) {
+                        sa.setSpendPhyrexianMana(true);
+                    }
                 } else if (lifeInsteadOfBlack) {
                     cost.decreaseShard(ManaCostShard.BLACK, 1);
                 }
@@ -1568,7 +1571,7 @@ public class ComputerUtilMana {
             System.out.println("DEBUG_MANA_PAYMENT: sortedManaSources = " + sortedManaSources);
         }
         return sortedManaSources;
-    } // getAvailableManaSources()
+    }
 
     //This method is currently used by AI to estimate mana available
     private static ListMultimap<Integer, SpellAbility> groupSourcesByManaColor(final Player ai, boolean checkPlayable) {

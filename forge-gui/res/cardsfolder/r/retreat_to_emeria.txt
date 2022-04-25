@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigCharm | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBToken,DBPumpAll
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_kor_ally | TokenOwner$ You | LegacyImage$ w 1 1 kor ally bfz | SpellDescription$ Create a 1/1 white Kor Ally creature token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_kor_ally | TokenOwner$ You | SpellDescription$ Create a 1/1 white Kor Ally creature token.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
 DeckHints:Type$Ally
 DeckHas:Ability$Token

@@ -3,7 +3,7 @@ ManaCost:1 U/R U/R
 Types:Legendary Planeswalker Saheeli
 Loyalty:5
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast a noncreature spell, create a 1/1 colorless Servo artifact creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_servo | TokenOwner$ You | LegacyImage$ c 1 1 a servo war
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_servo | TokenOwner$ You
 SVar:BuffedBy:Card.nonCreature+nonLand
 A:AB$ Pump | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | SubAbility$ SaheeliCopy | StackDescription$ None | SpellDescription$ Target artifact you control becomes a copy of another target artifact or creature you control until end of turn, except it's an artifact in addition to its other types.
 SVar:SaheeliCopy:DB$ Clone | CloneTarget$ ParentTarget | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl | TgtPrompt$ Select another target artifact or creature you control | AddTypes$ Artifact | Duration$ UntilEndOfTurn

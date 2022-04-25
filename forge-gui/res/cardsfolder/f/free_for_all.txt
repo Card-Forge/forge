@@ -2,7 +2,7 @@ Name:Free-for-All
 ManaCost:3 U
 Types:Enchantment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all creatures.
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigReturn | Secondary$ True | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, put all cards exiled with it into their owners' graveyards.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigReturn | Secondary$ True | TriggerDescription$ When CARDNAME leaves the battlefield, put all cards exiled with it into their owners' graveyards.
 SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ForgetOtherRemembered$ True | ChangeType$ Creature | ExileFaceDown$ True
 SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Graveyard | ChangeType$ Card.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

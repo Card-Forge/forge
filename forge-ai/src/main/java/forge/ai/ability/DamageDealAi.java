@@ -9,7 +9,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -308,7 +307,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if ("DiscardCMCX".equals(sa.getParam("AILogic"))) {
             final int cmc = sa.getXManaCostPaid();
-            return Iterables.any(ai.getCardsIn(ZoneType.Hand), CardPredicates.hasCMC(cmc));
+            return ai.getZone(ZoneType.Hand).contains(CardPredicates.hasCMC(cmc));
         }
 
         return true;
@@ -356,7 +355,8 @@ public class DamageDealAi extends DamageAiBase {
                 return c.getSVar("Targeting").equals("Dies")
                         || (ComputerUtilCombat.getEnoughDamageToKill(c, d, source, false, noPrevention) <= d)
                             && !ComputerUtil.canRegenerate(ai, c)
-                            && !(c.getSVar("SacMe").length() > 0);
+                            && !(c.getSVar("SacMe").length() > 0)
+                            && !ComputerUtilCard.hasActiveUndyingOrPersist(c);
             }
         });
 
@@ -489,10 +489,7 @@ public class DamageDealAi extends DamageAiBase {
      */
     private boolean damageTargetAI(final Player ai, final SpellAbility saMe, final int dmg, final boolean immediately) {
         final TargetRestrictions tgt = saMe.getTargetRestrictions();
-        if ("Atarka's Command".equals(ComputerUtilAbility.getAbilitySourceName(saMe))) {
-            // playReusable in damageChooseNontargeted wrongly assumes that CharmEffect options are re-usable
-            return shouldTgtP(ai, saMe, dmg, false);
-        }
+
         if (tgt == null) {
             return damageChooseNontargeted(ai, saMe, dmg);
         }
@@ -834,6 +831,10 @@ public class DamageDealAi extends DamageAiBase {
                 }
             }
         }
+        if ("Atarka's Command".equals(ComputerUtilAbility.getAbilitySourceName(saMe))) {
+            // playReusable wrongly assumes that CharmEffect options are re-usable
+            return positive;
+        }
         if (!positive && !(saMe instanceof AbilitySub)) {
             return false;
         }
@@ -998,10 +999,7 @@ public class DamageDealAi extends DamageAiBase {
         String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
 
         // detect the top ability that actually targets in Drain Life and Soul Burn scripts
-        SpellAbility saTgt = sa;
-        while (saTgt.getParent() != null) {
-            saTgt = saTgt.getParent();
-        }
+        SpellAbility saTgt = sa.getRootAbility();
 
         Player opponent = ai.getWeakestOpponent();
 
@@ -1026,13 +1024,13 @@ public class DamageDealAi extends DamageAiBase {
             return false;
         }
 
-        CardCollection creatures = CardLists.filter(ai.getOpponents().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+        CardCollection creatures = ai.getOpponents().getCreaturesInPlay();
 
         Card tgtCreature = null;
         for (Card c : creatures) {
             int power = c.getNetPower();
             int toughness = c.getNetToughness();
-            boolean canDie = !(c.hasKeyword(Keyword.INDESTRUCTIBLE) || ComputerUtil.canRegenerate(c.getController(), c));
+            boolean canDie = !ComputerUtilCombat.combatantCantBeDestroyed(c.getController(), c);
 
             // Currently will target creatures with toughness 3+ (or power 5+)
             // and only if the creature can actually die, do not "underdrain"

@@ -25,6 +25,7 @@ import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
+import forge.util.Lang;
 
 
 public class CopySpellAbilityEffect extends SpellAbilityEffect {
@@ -48,7 +49,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa);
         }
         if (amount > 1) {
-            sb.append(amount).append(" times");
+            sb.append(" ").append(Lang.getNumeral(amount)).append(" times");
         }
         sb.append(".");
         // TODO probably add an optional "You may choose new targets..."
@@ -107,7 +108,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                 if (sa.hasParam("CanTargetPlayer")) {
                     // Radiate
                     // Remove targeted players because getAllCandidates include all the valid players
-                    for(Player p : targetedSA.getTargets().getTargetPlayers())
+                    for (Player p : targetedSA.getTargets().getTargetPlayers())
                         candidates.remove(p);
 
                     for (GameEntity o : candidates) {
@@ -132,7 +133,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                             }
                         }
                     }
-                    valid = CardLists.getValidCards(valid, type.split(","), chosenSA.getActivatingPlayer(), chosenSA.getHostCard(), sa);
+                    valid = CardLists.getValidCards(valid, type, chosenSA.getActivatingPlayer(), chosenSA.getHostCard(), sa);
                     Card originalTarget = Iterables.getFirst(getTargetCards(chosenSA), null);
                     valid.remove(originalTarget);
 
@@ -157,6 +158,9 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             } else {
                 for (int i = 0; i < amount; i++) {
                     SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                    if (sa.hasParam("IgnoreFreeze")) {
+                        copy.putParam("IgnoreFreeze", "True");
+                    }
                     if (sa.hasParam("MayChooseTarget")) {
                         copy.setMayChooseNewTargets(true);
                     }

@@ -19,12 +19,16 @@ import forge.StaticData;
 import forge.card.CardRulesPredicates;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
 import forge.game.cost.Cost;
+import forge.game.cost.CostDiscard;
+import forge.game.cost.CostPart;
+import forge.game.cost.CostReveal;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -47,17 +51,28 @@ public class PlayEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
+        sb.append(sa.getActivatingPlayer().toString()).append(" ");
 
-        sb.append("Play ");
-        final List<Card> tgtCards = getTargetCards(sa);
+        if (sa.hasParam("ValidSA")) {
+            sb.append(sa.hasParam("Optional") ? "may cast " : "cast ");
+        } else {
+            sb.append(sa.hasParam("Optional") ? "may play " : "plays ");
+        }
+
+        final List<Card> tgtCards = getDefinedCardsOrTargeted(sa);
 
         if (sa.hasParam("Valid")) {
             sb.append("cards");
+        } else if (sa.hasParam("DefinedDesc")) {
+            sb.append(sa.getParam("DefinedDesc"));
         } else {
-            sb.append(StringUtils.join(tgtCards, ", "));
+            sb.append(Lang.joinHomogenous(tgtCards));
         }
         if (sa.hasParam("WithoutManaCost")) {
-            sb.append(" without paying the mana cost");
+            sb.append(" without paying ").append(tgtCards.size()==1 ? "its" : "their").append(" mana cost");
+        }
+        if (sa.hasParam("IfDesc")) {
+            sb.append(" ").append(sa.getParam("IfDesc"));
         }
         sb.append(".");
         return sb.toString();
@@ -70,7 +85,7 @@ public class PlayEffect extends SpellAbilityEffect {
         Player controlledByPlayer = null;
         long controlledByTimeStamp = -1;
         final Game game = activator.getGame();
-        final boolean optional = sa.hasParam("Optional");
+        boolean optional = sa.hasParam("Optional");
         boolean remember = sa.hasParam("RememberPlayed");
         int amount = 1;
         boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
@@ -152,8 +167,7 @@ public class PlayEffect extends SpellAbilityEffect {
             // so it gets added to stack
             card.setCopiedPermanent(card);
             card.setToken(true);
-            tgtCards = new CardCollection();
-            tgtCards.add(card);
+            tgtCards = new CardCollection(card);
         } else {
             tgtCards = new CardCollection();
             // filter only cards that didn't changed zones
@@ -202,6 +216,10 @@ public class PlayEffect extends SpellAbilityEffect {
         boolean singleOption = tgtCards.size() == 1 && amount == 1 && optional;
         Map<String, Object> params = hasTotalCMCLimit ? new HashMap<>() : null;
 
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
+
         while (!tgtCards.isEmpty() && amount > 0 && totalCMCLimit >= 0) {
             if (hasTotalCMCLimit) {
                 // filter out cards with mana value greater than limit
@@ -236,7 +254,8 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ShowCardToActivator")) {
                 game.getAction().revealTo(tgtCard, activator);
             }
-
+            if (singleOption && sa.getTargetCard() == null)
+                sa.setPlayEffectCard(tgtCard);// show card to play rather than showing the source card
             if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
@@ -330,7 +349,17 @@ public class PlayEffect extends SpellAbilityEffect {
             }
 
             if (!optional) {
-                tgtSA.getPayCosts().setMandatory(true);
+                // 118.8c
+                for (CostPart cost : tgtSA.getPayCosts().getCostParts()) {
+                    if ((cost instanceof CostDiscard || cost instanceof CostReveal)
+                            && !cost.getType().equals("Card") && !cost.getType().equals("Random")) {
+                        optional = true;
+                        break;
+                    }
+                }
+                if (!optional) {
+                    tgtSA.getPayCosts().setMandatory(true);
+                }
             }
 
             if (sa.hasParam("PlayReduceCost")) {
@@ -352,12 +381,12 @@ public class PlayEffect extends SpellAbilityEffect {
 
             // can't be done later
             if (sa.hasParam("ReplaceGraveyard")) {
-                addReplaceGraveyardEffect(tgtCard, sa, sa.getParam("ReplaceGraveyard"));
+                addReplaceGraveyardEffect(tgtCard, sa, sa.getParam("ReplaceGraveyard"), moveParams);
             }
 
             // For Illusionary Mask effect
             if (sa.hasParam("ReplaceIlluMask")) {
-                addIllusionaryMaskReplace(tgtCard, sa);
+                addIllusionaryMaskReplace(tgtCard, sa, moveParams);
             }
 
             tgtSA.setSVar("IsCastFromPlayEffect", "True");
@@ -395,8 +424,7 @@ public class PlayEffect extends SpellAbilityEffect {
         }
     } // end resolve
 
-
-    protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, String zone) {
+    protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, String zone, Map<AbilityKey, Object> moveParams) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Player controller = sa.getActivatingPlayer();
@@ -437,12 +465,12 @@ public class PlayEffect extends SpellAbilityEffect {
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa);
+        game.getAction().moveTo(ZoneType.Command, eff, sa, moveParams);
         eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 
-    protected void addIllusionaryMaskReplace(Card c, SpellAbility sa) {
+    protected void addIllusionaryMaskReplace(Card c, SpellAbility sa, Map<AbilityKey, Object> moveParams) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Player controller = sa.getActivatingPlayer();
@@ -473,7 +501,7 @@ public class PlayEffect extends SpellAbilityEffect {
         addExileOnCounteredTrigger(eff);
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa);
+        game.getAction().moveTo(ZoneType.Command, eff, sa, moveParams);
         eff.updateStateForView();
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }

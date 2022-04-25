@@ -1,0 +1,5 @@
+Name:Antagonize
+ManaCost:1 R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +4 | NumDef$ +3 | SpellDescription$ Target creature gets +4/+3 until end of turn.
+Oracle:Target creature gets +4/+3 until end of turn.

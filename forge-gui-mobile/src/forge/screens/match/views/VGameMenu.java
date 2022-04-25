@@ -8,7 +8,6 @@ import forge.screens.match.MatchController;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.Localizer;
 import forge.util.ThreadUtil;
 
 public class VGameMenu extends FDropDownMenu {
@@ -17,7 +16,6 @@ public class VGameMenu extends FDropDownMenu {
 
     @Override
     protected void buildMenu() {
-        final Localizer localizer = Localizer.getInstance();
 
         addItem(new FMenuItem(MatchController.instance.getConcedeCaption(), FSkinImage.CONCEDE, new FEventHandler() {
             @Override
@@ -43,7 +41,7 @@ public class VGameMenu extends FDropDownMenu {
                 GameStateDeserializer.loadGameState(MatchUtil.getGame(), ForgeConstants.USER_GAMES_DIR + "GameSave.txt");
             }
         }));*/
-        addItem(new FMenuItem(localizer.getMessage("lblAutoYields"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, new FEventHandler() {
+        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAutoYields"), Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
                 final boolean autoYieldsDisabled = MatchController.instance.getDisableAutoYields();
@@ -54,12 +52,14 @@ public class VGameMenu extends FDropDownMenu {
                         if (!b0) {
                             if (autoYieldsDisabled && !MatchController.instance.getDisableAutoYields()) {
                                 //if re-enabling auto-yields, auto-yield to current ability on stack if applicable
-                                final String key = MatchController.instance.getGameView().peekStack().getKey();
-                                final boolean autoYield = MatchController.instance.shouldAutoYield(key);
-                                MatchController.instance.setShouldAutoYield(key, !autoYield);
-                                if (!autoYield && MatchController.instance.shouldAutoYield(key)) {
-                                    //auto-pass priority if ability is on top of stack
-                                    MatchController.instance.getGameController().passPriority();
+                                if (MatchController.instance.getGameView().peekStack() != null) {
+                                    final String key = MatchController.instance.getGameView().peekStack().getKey();
+                                    final boolean autoYield = MatchController.instance.shouldAutoYield(key);
+                                    MatchController.instance.setShouldAutoYield(key, !autoYield);
+                                    if (!autoYield && MatchController.instance.shouldAutoYield(key)) {
+                                        //auto-pass priority if ability is on top of stack
+                                        MatchController.instance.getGameController().passPriority();
+                                    }
                                 }
                             }
                         }
@@ -68,22 +68,24 @@ public class VGameMenu extends FDropDownMenu {
                 autoYields.show();
             }
         }));
-        addItem(new FMenuItem(localizer.getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                //pause game when spectating AI Match
-                if (!MatchController.instance.hasLocalPlayers()) {
-                    if(!MatchController.instance.isGamePaused())
-                        MatchController.instance.pauseMatch();
+        if (!Forge.isMobileAdventureMode) {
+            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblSettings"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    //pause game when spectating AI Match
+                    if (!MatchController.instance.hasLocalPlayers()) {
+                        if(!MatchController.instance.isGamePaused())
+                            MatchController.instance.pauseMatch();
+                    }
+                    SettingsScreen.show(false);
                 }
-                SettingsScreen.show(false);
-            }
-        }));
-        addItem(new FMenuItem(localizer.getMessage("lblShowWinLoseOverlay"), FSkinImage.ENDTURN, new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                MatchController.instance.showWinlose();
-            }
-        }));
+            }));
+            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblShowWinLoseOverlay"), FSkinImage.ENDTURN, new FEventHandler() {
+                @Override
+                public void handleEvent(FEvent e) {
+                    MatchController.instance.showWinlose();
+                }
+            }));
+        }
     }
 }

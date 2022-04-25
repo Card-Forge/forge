@@ -26,6 +26,7 @@ import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
+import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -121,10 +122,7 @@ public class ControlGainAi extends SpellAbilityAi {
             return true;
         }
 
-        CardCollection list = new CardCollection();
-        for (Player pl : opponents) {
-            list.addAll(pl.getCardsIn(ZoneType.Battlefield));
-        }
+        CardCollection list = opponents.getCardsIn(ZoneType.Battlefield);
 
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
         
@@ -142,6 +140,10 @@ public class ControlGainAi extends SpellAbilityAi {
                 }
                 if (sa.isTrigger()) {
                     return true;
+                }
+
+                if (!c.canBeControlledBy(ai)) {
+                    return false;
                 }
 
                 // do not take perm control on something that leaves the play end of turn 
@@ -296,6 +298,15 @@ public class ControlGainAi extends SpellAbilityAi {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, final Player ai) {
         final Game game = ai.getGame();
+
+        // Special card logic that is processed elsewhere
+        if (sa.hasParam("AILogic")) {
+            if (("DonateTargetPerm").equals(sa.getParam("AILogic"))) {
+                // Donate step 2 - target a donatable permanent.
+                return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);
+            }
+        }
+
         if (!sa.usesTargeting()) {
             if (sa.hasParam("AllValid")) {
                 CardCollectionView tgtCards = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
@@ -315,7 +326,7 @@ public class ControlGainAi extends SpellAbilityAi {
         } else {
             return this.canPlayAI(ai, sa);
         }
-    } // pumpDrawbackAI()
+    }
 
     @Override
     protected Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> options, Map<String, Object> params) {

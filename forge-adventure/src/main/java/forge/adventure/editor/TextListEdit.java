@@ -3,6 +3,8 @@ package forge.adventure.editor;
 import forge.adventure.util.Config;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,7 +18,12 @@ public class TextListEdit extends Box {
     public TextListEdit(String[] possibleElements) {
         super(BoxLayout.X_AXIS);
 
-        findButton.addActionListener(e->find());
+        findButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TextListEdit.this.find();
+            }
+        });
 
         add(edit);
         //add(findButton);

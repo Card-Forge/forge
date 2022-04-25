@@ -3,14 +3,14 @@ ManaCost:2 G
 Types:Creature Beast Noble
 PT:5/5
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can't attack. | IsPresent$ Creature.YouCtrl+powerEQ1+toughnessEQ1 | PresentCompare$ EQ0 | Description$ CARDNAME can't attack unless you control a 1/1 creature.
-Oracle:Lovestruck Beast can't attack unless you control a 1/1 creature.
 AlternateMode:Adventure
+Oracle:Lovestruck Beast can't attack unless you control a 1/1 creature.
 
 ALTERNATE
 
 Name:Heart's Desire
 ManaCost:G
 Types:Sorcery Adventure
-A:SP$ Token | Cost$ G | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ w_1_1_human | LegacyImage$ w 1 1 human eld | SpellDescription$ Create a 1/1 white Human creature token. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Token | Cost$ G | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ w_1_1_human | SpellDescription$ Create a 1/1 white Human creature token. (Then exile this card. You may cast the creature later from exile.)
 DeckHas:Ability$Token
 Oracle:Create a 1/1 white Human creature token. (Then exile this card. You may cast the creature later from exile.)

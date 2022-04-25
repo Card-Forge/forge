@@ -3,7 +3,7 @@ ManaCost:3 R G
 Types:Creature Dinosaur
 PT:4/4
 S:Mode$ Continuous | Affected$ Creature.Dinosaur+Other+YouCtrl | AddKeyword$ Haste | Description$ Other Dinosaurs you control have haste.
-T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/3 green Dinosaur creature token with trample.
-SVar:DBToken:DB$ Token | TokenOwner$ You | TokenScript$ g_3_3_dinosaur_trample | LegacyImage$ g 3 3 dinosaur trample xln | TokenAmount$ 1
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 3/3 green Dinosaur creature token with trample.
+SVar:DBToken:DB$ Token | TokenOwner$ You | TokenScript$ g_3_3_dinosaur_trample | TokenAmount$ 1
 DeckHas:Ability$Token
 Oracle:Other Dinosaurs you control have haste.\nWhen Regisaur Alpha enters the battlefield, create a 3/3 green Dinosaur creature token with trample.

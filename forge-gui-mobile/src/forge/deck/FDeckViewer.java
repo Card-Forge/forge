@@ -19,7 +19,6 @@ import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
-import forge.util.Localizer;
 
 public class FDeckViewer extends FScreen {
     private static FDeckViewer deckViewer;
@@ -38,27 +37,27 @@ public class FDeckViewer extends FScreen {
                 switch (section) {
                 default:
                 case Main:
-                    captionPrefix = Localizer.getInstance().getMessage("ttMain");
+                    captionPrefix = Forge.getLocalizer().getMessage("ttMain");
                     icon = FDeckEditor.MAIN_DECK_ICON;
                     break;
                 case Sideboard:
-                    captionPrefix = Localizer.getInstance().getMessage("lblSideboard");
+                    captionPrefix = Forge.getLocalizer().getMessage("lblSideboard");
                     icon = FDeckEditor.SIDEBOARD_ICON;
                     break;
                 case Commander:
-                    captionPrefix = Localizer.getInstance().getMessage("lblCommander");
+                    captionPrefix = Forge.getLocalizer().getMessage("lblCommander");
                     icon = FSkinImage.COMMANDER;
                     break;
                 case Avatar:
-                    captionPrefix = Localizer.getInstance().getMessage("lblAvatar");
+                    captionPrefix = Forge.getLocalizer().getMessage("lblAvatar");
                     icon = new FTextureRegionImage(FSkin.getAvatars().get(0));
                     break;
                 case Planes:
-                    captionPrefix = Localizer.getInstance().getMessage("lblPlanes");
+                    captionPrefix = Forge.getLocalizer().getMessage("lblPlanes");
                     icon = FSkinImage.CHAOS;
                     break;
                 case Schemes:
-                    captionPrefix = Localizer.getInstance().getMessage("lblSchemes");
+                    captionPrefix = Forge.getLocalizer().getMessage("lblSchemes");
                     icon = FSkinImage.POISON;
                     break;
                 }
@@ -74,7 +73,7 @@ public class FDeckViewer extends FScreen {
                 }
                 addItem(item);
             }
-            addItem(new FMenuItem(Localizer.getInstance().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, new FEventHandler() {
+            addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     copyDeckToClipboard(deckViewer.deck);
@@ -106,7 +105,7 @@ public class FDeckViewer extends FScreen {
         }
 
         Forge.getClipboard().setContents(deckList.toString());
-        FOptionPane.showMessageDialog(Localizer.getInstance().getMessage("lblDeckListCopiedClipboard", deck.getName()));
+        FOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblDeckListCopiedClipboard", deck.getName()));
     }
 
     private final Deck deck;
@@ -114,9 +113,12 @@ public class FDeckViewer extends FScreen {
     private DeckSection currentSection;
 
     public static void show(final Deck deck0) {
-        show(deck0, false);
+        show(deck0, false, false);
     }
     public static void show(final Deck deck0, boolean noPreload) {
+        show(deck0, noPreload, false);
+    }
+    public static void show(final Deck deck0, boolean noPreload, boolean showRanking) {
         if (deck0 == null) { return; }
 
         if (!noPreload){
@@ -124,12 +126,12 @@ public class FDeckViewer extends FScreen {
             ImageCache.preloadCache(deck0);
         }
 
-        deckViewer = new FDeckViewer(deck0);
+        deckViewer = new FDeckViewer(deck0, showRanking);
         deckViewer.setRotate180(MatchController.getView() != null && MatchController.getView().isTopHumanPlayerActive());
         Forge.openScreen(deckViewer);
     }
 
-    private FDeckViewer(Deck deck0) {
+    private FDeckViewer(Deck deck0, boolean showRanking) {
         super(new MenuHeader(deck0.getName(), menu) {
             @Override
             protected boolean displaySidebarForLandscapeMode() {
@@ -139,6 +141,7 @@ public class FDeckViewer extends FScreen {
         deck = deck0;
         cardManager = new CardManager(false);
         cardManager.setPool(deck.getMain());
+        cardManager.setShowRanking(showRanking);
 
         currentSection = DeckSection.Main;
         updateCaption();

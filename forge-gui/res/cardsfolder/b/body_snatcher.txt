@@ -4,7 +4,7 @@ Types:Creature Phyrexian Minion
 PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBExileMe | TriggerDescription$ When CARDNAME enters the battlefield, exile it unless you discard a creature card.
 SVar:DBExileMe:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | UnlessCost$ Discard<1/Creature> | UnlessPayer$ You
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigBodySnatcherExileMe | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, exile CARDNAME and return target creature card from your graveyard to the battlefield.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigBodySnatcherExileMe | TriggerDescription$ When CARDNAME dies, exile CARDNAME and return target creature card from your graveyard to the battlefield.
 SVar:TrigBodySnatcherExileMe:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBBodySnatcherReturnCreature
 SVar:DBBodySnatcherReturnCreature:DB$ ChangeZone | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredCardController | TgtPrompt$ Select target creature from your graveyard | Origin$ Graveyard | Destination$ Battlefield
 SVar:NeedsToPlayVar:Y GE2

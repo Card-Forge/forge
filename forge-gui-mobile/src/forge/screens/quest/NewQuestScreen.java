@@ -51,7 +51,6 @@ import forge.toolbox.FRadioButton;
 import forge.toolbox.FRadioButton.RadioButtonGroup;
 import forge.toolbox.FScrollPane;
 import forge.util.FileUtil;
-import forge.util.Localizer;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
 
@@ -62,7 +61,6 @@ public class NewQuestScreen extends FScreen {
 
     private final List<String> customFormatCodes = new ArrayList<>();
     private final List<String> customPrizeFormatCodes = new ArrayList<>();
-    private final Localizer localizer = Localizer.getInstance();
 
     private final class FColorCheckBox extends FCheckBox {
         private FColorCheckBox(final String text0) {
@@ -125,70 +123,70 @@ public class NewQuestScreen extends FScreen {
     });
 
     @SuppressWarnings("unused")
-    private final FLabel lblStartingWorld = scroller.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblStartingWorld") + ":").build());
+    private final FLabel lblStartingWorld = scroller.add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblStartingWorld") + ":").build());
     private final FComboBox<QuestWorld> cbxStartingWorld = scroller.add(new FComboBox<>());
 
     @SuppressWarnings("unused")
-    private final FLabel lblDifficulty = scroller.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblDifficulty") + ":").build());
+    private final FLabel lblDifficulty = scroller.add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblDifficulty") + ":").build());
     private final FComboBox<String> cbxDifficulty = scroller.add(new FComboBox<>(new String[]{
-        Localizer.getInstance().getMessage("questDifficultyEasy"), Localizer.getInstance().getMessage("questDifficultyMedium"),
-        Localizer.getInstance().getMessage("questDifficultyHard"), Localizer.getInstance().getMessage("questDifficultyExpert")
+        Forge.getLocalizer().getMessage("questDifficultyEasy"), Forge.getLocalizer().getMessage("questDifficultyMedium"),
+        Forge.getLocalizer().getMessage("questDifficultyHard"), Forge.getLocalizer().getMessage("questDifficultyExpert")
     }));
 
     @SuppressWarnings("unused")
-    private final FLabel lblStartingPool = scroller.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblStartingPool") + ":").build());
+    private final FLabel lblStartingPool = scroller.add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblStartingPool") + ":").build());
     private final FComboBox<StartingPoolType> cbxStartingPool = scroller.add(new FComboBox<>());
 
-    private final FLabel lblUnrestricted = scroller.add(new FLabel.Builder().align(Align.right).font(FSkinFont.get(12)).text(Localizer.getInstance().getMessage("lblAllCardsAvailable")).build());
+    private final FLabel lblUnrestricted = scroller.add(new FLabel.Builder().align(Align.right).font(FSkinFont.get(12)).text(Forge.getLocalizer().getMessage("lblAllCardsAvailable")).build());
 
-    private final FLabel lblPreconDeck = scroller.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblStarterEventdeck") + ":").build());
+    private final FLabel lblPreconDeck = scroller.add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblStarterEventdeck") + ":").build());
     private final FComboBox<String> cbxPreconDeck = scroller.add(new FComboBox<>());
 
-    private final FLabel lblFormat = scroller.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblSelectFormat") + ":").build());
+    private final FLabel lblFormat = scroller.add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblSelectFormat") + ":").build());
     private final FComboBox<GameFormat> cbxFormat = scroller.add(new FComboBox<>());
 
-    private final FLabel lblCustomDeck = scroller.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblCustomdeck") + ":").build());
+    private final FLabel lblCustomDeck = scroller.add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblCustomdeck") + ":").build());
     private final FComboBox<Deck> cbxCustomDeck = scroller.add(new FComboBox<>());
 
-    private final FLabel btnSelectFormat = scroller.add(new FLabel.ButtonBuilder().text(Localizer.getInstance().getMessage("lblChooseFormats")).build());
+    private final FLabel btnSelectFormat = scroller.add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblChooseFormats")).build());
 
-    private final FLabel lblPoolDistribution = scroller.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblStartingPoolDistribution") + ":").build());
-    private final FRadioButton radBalanced = scroller.add(new FRadioButton(Localizer.getInstance().getMessage("lblBalanced")));
-    private final FRadioButton radSurpriseMe = scroller.add(new FRadioButton(Localizer.getInstance().getMessage("lblSurpriseMe")));
-    private final FRadioButton radRandom = scroller.add(new FRadioButton(Localizer.getInstance().getMessage("lblRandom")));
-    private final FRadioButton radBoosters = scroller.add(new FRadioButton(Localizer.getInstance().getMessage("lblBoosters")));
+    private final FLabel lblPoolDistribution = scroller.add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblStartingPoolDistribution") + ":").build());
+    private final FRadioButton radBalanced = scroller.add(new FRadioButton(Forge.getLocalizer().getMessage("lblBalanced")));
+    private final FRadioButton radSurpriseMe = scroller.add(new FRadioButton(Forge.getLocalizer().getMessage("lblSurpriseMe")));
+    private final FRadioButton radRandom = scroller.add(new FRadioButton(Forge.getLocalizer().getMessage("lblRandom")));
+    private final FRadioButton radBoosters = scroller.add(new FRadioButton(Forge.getLocalizer().getMessage("lblBoosters")));
     private final FNumericTextField numberOfBoostersField = scroller.add(new FNumericTextField(10));
 
-    private final FLabel lblPreferredColor = scroller.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblStartingPoolColors") + ":").build());
-    private final FColorCheckBox cbBlack = scroller.add(new FColorCheckBox(Localizer.getInstance().getMessage("lblBlack")));
-    private final FColorCheckBox cbBlue = scroller.add(new FColorCheckBox(Localizer.getInstance().getMessage("lblBlue")));
-    private final FColorCheckBox cbGreen = scroller.add(new FColorCheckBox(Localizer.getInstance().getMessage("lblGreen")));
-    private final FColorCheckBox cbRed = scroller.add(new FColorCheckBox(Localizer.getInstance().getMessage("lblRed")));
-    private final FColorCheckBox cbWhite = scroller.add(new FColorCheckBox(Localizer.getInstance().getMessage("lblWhite")));
-    private final FColorCheckBox cbColorless = scroller.add(new FColorCheckBox(Localizer.getInstance().getMessage("lblColorless")));
+    private final FLabel lblPreferredColor = scroller.add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblStartingPoolColors") + ":").build());
+    private final FColorCheckBox cbBlack = scroller.add(new FColorCheckBox(Forge.getLocalizer().getMessage("lblBlack")));
+    private final FColorCheckBox cbBlue = scroller.add(new FColorCheckBox(Forge.getLocalizer().getMessage("lblBlue")));
+    private final FColorCheckBox cbGreen = scroller.add(new FColorCheckBox(Forge.getLocalizer().getMessage("lblGreen")));
+    private final FColorCheckBox cbRed = scroller.add(new FColorCheckBox(Forge.getLocalizer().getMessage("lblRed")));
+    private final FColorCheckBox cbWhite = scroller.add(new FColorCheckBox(Forge.getLocalizer().getMessage("lblWhite")));
+    private final FColorCheckBox cbColorless = scroller.add(new FColorCheckBox(Forge.getLocalizer().getMessage("lblColorless")));
 
-    private final FLabel lblPoolOptions = scroller.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblStartingPoolOptions") + ":").build());
-    private final FCheckBox cbCompleteSet = scroller.add(new FCheckBox(Localizer.getInstance().getMessage("lblStartWithAllCards")));
-    private final FCheckBox cbDuplicateCards = scroller.add(new FCheckBox(Localizer.getInstance().getMessage("lblAllowDuplicatesStartingPool")));
-    private final FCheckBox cbIncludeArtifacts = scroller.add(new FCheckBox(Localizer.getInstance().getMessage("lblIncludeArtifactsStartingPool")));
+    private final FLabel lblPoolOptions = scroller.add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblStartingPoolOptions") + ":").build());
+    private final FCheckBox cbCompleteSet = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("lblStartWithAllCards")));
+    private final FCheckBox cbDuplicateCards = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("lblAllowDuplicatesStartingPool")));
+    private final FCheckBox cbIncludeArtifacts = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("lblIncludeArtifactsStartingPool")));
 
     @SuppressWarnings("unused")
-    private final FLabel lblPrizedCards = scroller.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblPrizedCards") + ":").build());
+    private final FLabel lblPrizedCards = scroller.add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblPrizedCards") + ":").build());
     private final FComboBox<Object> cbxPrizedCards = scroller.add(new FComboBox<>());
 
-    private final FLabel lblPrizeFormat = scroller.add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblDefinedFormat") + ":").build());
+    private final FLabel lblPrizeFormat = scroller.add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblDefinedFormat") + ":").build());
     private final FComboBox<GameFormat> cbxPrizeFormat = scroller.add(new FComboBox<>());
 
-    private final FLabel lblPrizeUnrestricted = scroller.add(new FLabel.Builder().align(Align.right).font(FSkinFont.get(12)).text(Localizer.getInstance().getMessage("lblAllCardsAvailableWin")).build());
-    private final FLabel lblPrizeSameAsStarting = scroller.add(new FLabel.Builder().align(Align.right).font(FSkinFont.get(12)).text(Localizer.getInstance().getMessage("lblOnlyInStartingPoolAvailable")).build());
-    private final FLabel btnPrizeSelectFormat = scroller.add(new FLabel.ButtonBuilder().text(Localizer.getInstance().getMessage("lblChooseFormats")).build());
+    private final FLabel lblPrizeUnrestricted = scroller.add(new FLabel.Builder().align(Align.right).font(FSkinFont.get(12)).text(Forge.getLocalizer().getMessage("lblAllCardsAvailableWin")).build());
+    private final FLabel lblPrizeSameAsStarting = scroller.add(new FLabel.Builder().align(Align.right).font(FSkinFont.get(12)).text(Forge.getLocalizer().getMessage("lblOnlyInStartingPoolAvailable")).build());
+    private final FLabel btnPrizeSelectFormat = scroller.add(new FLabel.ButtonBuilder().text(Forge.getLocalizer().getMessage("lblChooseFormats")).build());
 
-    private final FCheckBox cbAllowUnlocks = scroller.add(new FCheckBox(Localizer.getInstance().getMessage("lblAllowUnlockAdEd")));
-    private final FCheckBox cbFantasy = scroller.add(new FCheckBox(Localizer.getInstance().getMessage("rbFantasyMode")));
-    private final FCheckBox cbCommander = scroller.add(new FCheckBox(Localizer.getInstance().getMessage("rbCommanderSubformat")));
+    private final FCheckBox cbAllowUnlocks = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("lblAllowUnlockAdEd")));
+    private final FCheckBox cbFantasy = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("rbFantasyMode")));
+    private final FCheckBox cbCommander = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("rbCommanderSubformat")));
 
     private final FLabel btnEmbark = add(new FLabel.ButtonBuilder()
-            .font(FSkinFont.get(22)).text(Localizer.getInstance().getMessage("lblEmbark")).icon(FSkinImage.QUEST_ZEP).command(new FEventHandler() {
+            .font(FSkinFont.get(22)).text(Forge.getLocalizer().getMessage("lblEmbark")).icon(FSkinImage.QUEST_ZEP).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     //create new quest in game thread so option panes can wait for input
@@ -219,7 +217,7 @@ public class NewQuestScreen extends FScreen {
             }
         });
 
-        cbxPrizedCards.addItem(localizer.getMessage("lblSameAsStartingPool"));
+        cbxPrizedCards.addItem(Forge.getLocalizer().getMessage("lblSameAsStartingPool"));
         cbxPrizedCards.addItem(StartingPoolType.Complete);
         cbxPrizedCards.addItem(StartingPoolType.Sanctioned);
         cbxPrizedCards.addItem(StartingPoolType.Casual);
@@ -549,7 +547,7 @@ public class NewQuestScreen extends FScreen {
             case CustomFormat:
                 if (customFormatCodes.isEmpty()) {
                     if (!SOptionPane.showConfirmDialog(
-                            localizer.getMessage("lblCustomFormatWithoutRestrictionGame"))) {
+                            Forge.getLocalizer().getMessage("lblCustomFormatWithoutRestrictionGame"))) {
                         return;
                     }
                 }
@@ -562,7 +560,7 @@ public class NewQuestScreen extends FScreen {
                 dckStartPool = getSelectedDeck();
                 if (dckStartPool == null) {
                     SOptionPane.showMessageDialog(
-                            localizer.getMessage("lbldckStartPool"), localizer.getMessage("lblCannotStartaQuest"), SOptionPane.ERROR_ICON);
+                            Forge.getLocalizer().getMessage("lbldckStartPool"), Forge.getLocalizer().getMessage("lblCannotStartaQuest"), SOptionPane.ERROR_ICON);
                     return;
                 }
                 break;
@@ -610,7 +608,7 @@ public class NewQuestScreen extends FScreen {
             case CustomFormat:
                 if (customPrizeFormatCodes.isEmpty()) {
                     if (!SOptionPane.showConfirmDialog(
-                            localizer.getMessage("lblCustomFormatWithoutRestrictionPrized"))) {
+                            Forge.getLocalizer().getMessage("lblCustomFormatWithoutRestrictionPrized"))) {
                         return;
                     }
                 }
@@ -626,17 +624,17 @@ public class NewQuestScreen extends FScreen {
 
         String questName;
         while (true) {
-            questName = SOptionPane.showInputDialog(localizer.getMessage("MsgQuestNewName") + ":", localizer.getMessage("TitQuestNewName"));
+            questName = SOptionPane.showInputDialog(Forge.getLocalizer().getMessage("MsgQuestNewName") + ":", Forge.getLocalizer().getMessage("TitQuestNewName"));
             if (questName == null) { return; }
 
             questName = QuestUtil.cleanString(questName);
 
             if (questName.isEmpty()) {
-                SOptionPane.showMessageDialog(localizer.getMessage("lblQuestNameEmpty"));
+                SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblQuestNameEmpty"));
                 continue;
             }
             if (FileUtil.doesFileExist(ForgeConstants.QUEST_SAVE_DIR + questName + ".dat")) {
-                SOptionPane.showMessageDialog(localizer.getMessage("lblQuestExists"));
+                SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblQuestExists"));
                 continue;
             }
             break;
@@ -649,7 +647,7 @@ public class NewQuestScreen extends FScreen {
         FThreads.invokeInEdtLater(new Runnable() {
             @Override
             public void run() {
-                LoadingOverlay.show(localizer.getMessage("lblCreatingNewQuest"), new Runnable() {
+                LoadingOverlay.show(Forge.getLocalizer().getMessage("lblCreatingNewQuest"), new Runnable() {
                     @Override
                     public void run() {
                         final QuestMode mode = isFantasy() ? QuestMode.Fantasy : QuestMode.Classic;

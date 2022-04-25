@@ -1,0 +1,10 @@
+Name:Inspiring Overseer
+ManaCost:2 W
+Types:Creature Angel Cleric
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 1 life and draw a card.
+SVar:TrigLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+DeckHas:Ability$LifeGain
+Oracle:When Inspiring Overseer enters the battlefield, you gain 1 life and draw a card.

@@ -1,4 +1,3 @@
-
 items.png
 size: 128,64
 format: RGBA8888
@@ -12,4 +11,220 @@ Gold
   size: 16, 16              
 Life 
   xy: 48, 16
+  size: 16, 16   
+SolRing
+  xy: 320, 144
+  size: 16, 16          
+BlackLotus
+  xy: 320, 128
+  size: 16, 16
+MoxEmerald
+  xy: 320, 0
+  size: 16, 16
+MoxJet
+  xy: 320, 16
+  size: 16, 16
+MoxRuby
+  xy: 320, 32
+  size: 16, 16
+MoxSapphire
+  xy: 320, 48
+  size: 16, 16
+MoxPearl
+  xy: 320, 64
+  size: 16, 16
+BattleStandard
+  xy: 96, 592
+  size: 16, 16 
+LifeAmulet
+  xy: 0, 864
   size: 16, 16       
+RedKey
+  xy: 176, 992
+  size: 16, 16             
+BlueKey
+  xy: 192, 992
+  size: 16, 16   
+GreenKey
+  xy: 208, 992
+  size: 16, 16   
+BlackKey
+  xy: 240, 992
+  size: 16, 16       
+StrangeKey
+  xy: 224, 992
+  size: 16, 16   
+WhiteKey
+  xy: 272, 992
+  size: 16, 16
+SteelArmor
+  xy: 224, 0
+  size: 16, 16     
+SteelShield
+  xy: 256, 144
+  size: 16, 16
+SteelBoots
+  xy: 48, 160
+  size: 16, 16
+SteelSword
+  xy: 208, 656
+  size: 16, 16
+SteelAxt
+  xy: 160, 272
+  size: 16, 16     
+LeatherBoots
+  xy: 0, 96
+  size: 16, 16       
+JungleShield
+  xy: 240, 128
+  size: 16, 16       
+Dagger
+  xy: 288, 352
+  size: 16, 16
+Goose              
+  xy: 144, 624
+  size: 16, 16
+SpellBook
+  xy: 144, 688
+  size: 16, 16  
+MithrilShield
+  xy: 224, 176
+  size: 16, 16    
+MithrilArmor
+  xy: 224, 64
+  size: 16, 16       
+MithrilBoots
+  xy: 96, 176
+  size: 16, 16      
+AladdinsRing
+  xy: 112, 992
+  size: 16, 16         
+CursedRing
+  xy: 80, 928
+  size: 16, 16
+FlameSword
+  xy: 288, 656
+  size: 16, 16
+DeathRing
+  xy: 32, 944
+  size: 16, 16
+MirrorShield
+  xy: 256, 208
+  size: 16, 16
+AladdinsLamp
+  xy: 128, 528
+  size: 16, 16
+WoodBow
+  xy: 176, 464
+  size: 16, 16
+CompositeBow
+  xy: 224, 480
+  size: 16, 16
+Sandals
+  xy: 16, 112
+  size: 16, 16
+GoldBoots
+  xy: 64, 176
+  size: 16, 16
+GoldArmor
+  xy: 288, 96
+  size: 16, 16
+GoldShield
+  xy: 272, 144
+  size: 16, 16
+DarkBoots
+  xy: 32, 176
+  size: 16, 16
+DarkArmor
+  xy: 272, 112
+  size: 16, 16
+DarkShield
+  xy: 288, 160
+  size: 16, 16
+MadStaff
+  xy: 304, 608
+  size: 16, 16
+Clue
+  xy: 144, 976
+  size: 16, 16
+Blood
+  xy: 80, 528
+  size: 16, 16
+Cheese
+  xy: 80, 768
+  size: 16, 16
+Gold
+  xy: 208, 816
+  size: 16, 16
+Treasure
+  xy: 48, 768
+  size: 16, 16
+Shard
+  xy: 16, 608
+  size: 16, 16
+DarkAmulet
+  xy: 80, 816
+  size: 16, 16
+PandorasBox
+  xy: 320, 80
+  size: 16, 16
+DisruptingScepter
+  xy: 208, 576
+  size: 16, 16
+EntrancingLyre
+  xy: 128, 640
+  size: 16, 16
+HeavyArbalest
+  xy: 288, 448
+  size: 16, 16
+RingofThreeWishes
+  xy: 320, 96
+  size: 16, 16
+TheBlackstaffofWaterdeep
+  xy: 320, 112
+  size: 16, 16
+UnerringSling
+  xy: 176, 448
+  size: 16, 16
+JeweledAmulet
+  xy: 80, 848
+  size: 16, 16
+TravelersAmulet
+  xy: 144, 864
+  size: 16, 16
+RelicAmulet
+  xy: 144, 800
+  size: 16, 16
+AmuletofKroog
+  xy: 128, 864
+  size: 16, 16
+AmuletofVigor
+  xy: 64, 848
+  size: 16, 16
+VeilstoneAmulet
+  xy: 48, 864
+  size: 16, 16
+JandorsRing
+  xy: 128, 976
+  size: 16, 16
+JinxedRing
+  xy: 48, 976
+  size: 16, 16
+Nine-RingedBo
+  xy: 272, 608
+  size: 16, 16
+RingofImmortals
+  xy: 48, 992
+  size: 16, 16
+PrismRing
+  xy: 16, 896
+  size: 16, 16
+RingofRenewal
+  xy: 16, 992
+  size: 16, 16
+KiteShield
+  xy: 272, 192
+  size: 16, 16      
+DungeonMap
+  xy: 176, 848
+  size: 16, 16

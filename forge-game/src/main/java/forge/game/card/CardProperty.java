@@ -21,9 +21,7 @@ import forge.game.mana.Mana;
 import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.trigger.Trigger;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -32,6 +30,7 @@ import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collections;
 import java.util.List;
@@ -337,7 +336,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("StrictlySelf")) {
-            if (!card.equals(source) || card.getTimestamp() != source.getTimestamp()) {
+            if (!card.equalsWithTimestamp(source)) {
                 return false;
             }
         } else if (property.startsWith("Self")) {
@@ -387,15 +386,6 @@ public class CardProperty {
             if (!card.equals(source.getEffectSource())) {
                 return false;
             }
-        } else if (property.equals("withoutManaAbility")) {
-            if (Iterables.any(card.getSpellAbilities(), SpellAbilityPredicates.isManaAbility())) {
-                return false;
-            }
-            for (final Trigger trig : card.getTriggers()) {
-                if (trig.getOverridingAbility() != null && !trig.getOverridingAbility().isManaAbility()) {
-                    return false;
-                }
-            }
         } else if (property.equals("CanBeSacrificedBy") && spellAbility instanceof SpellAbility) {
             // used for Emerge and Offering, these are SpellCost, not effect
             if (!card.canBeSacrificedBy((SpellAbility) spellAbility, false)) {
@@ -412,7 +402,7 @@ public class CardProperty {
         } else if (property.startsWith("AttachedTo")) {
             final String restriction = property.split("AttachedTo ")[1];
 
-            if (card.getEntityAttachedTo() == null) {
+            if (!card.isAttachedToEntity()) {
                 return false;
             }
 
@@ -543,10 +533,6 @@ public class CardProperty {
             if (!card.canBeAttached(source)) {
                 return false;
             }
-        } else if (property.startsWith("Equipped")) {
-            if (!source.hasCardAttachment(card)) {
-                return false;
-            }
         } else if (property.startsWith("Fortified")) {
             // FIXME TODO what property has this?
             if (!source.hasCardAttachment(card)) {
@@ -633,18 +619,21 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("DamagedBy")) {
+            List<Card> damaged = Lists.newArrayList();
+            for (Pair<Card, Integer> pair : card.getReceivedDamageFromThisTurn()) {
+                damaged.add(pair.getLeft());
+            }
             if (property.endsWith("Source") || property.equals("DamagedBy")) {
-                if (!card.getReceivedDamageFromThisTurn().containsKey(source)) {
+                if (!damaged.contains(source)) {
                     return false;
                 }
             } else {
                 String prop = property.substring("DamagedBy".length());
-                final Iterable<Card> list = Iterables.filter(card.getReceivedDamageFromThisTurn().keySet(), Card.class);
-                boolean found = Iterables.any(list, CardPredicates.restriction(prop, sourceController, source, spellAbility));
+                boolean found = Iterables.any(damaged, CardPredicates.restriction(prop, sourceController, source, spellAbility));
 
                 if (!found) {
                     for (Card d : AbilityUtils.getDefinedCards(source, prop, spellAbility)) {
-                        if (card.getReceivedDamageFromThisTurn().containsKey(d)) {
+                        if (damaged.contains(d)) {
                             found = true;
                             break;
                         }
@@ -1066,6 +1055,10 @@ public class CardProperty {
             if (p == null || !controller.equals(game.getNextPlayerAfter(p, direction))) {
                 return false;
             }
+        } else if (property.equals("hasABasicLandType")) {
+            if (!card.hasABasicLandType()) {
+                return false;
+            }
         } else if (property.startsWith("hasKeyword")) {
             // "withFlash" would find Flashback cards, add this to fix Mystical Teachings
             if (!card.hasKeyword(property.substring(10))) {
@@ -1177,7 +1170,11 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
-            if ((card.getReceivedDamageFromThisTurn().keySet()).isEmpty()) {
+            if (card.getReceivedDamageFromPlayerThisTurn().isEmpty()) {
+                return false;
+            }
+        } else if (property.equals("wasDealtNonCombatDamageThisTurn")) {
+            if (!card.getDamageHistory().hasBeenDealtNonCombatDamageThisTurn()) {
                 return false;
             }
         } else if (property.startsWith("dealtDamageThisTurn")) {
@@ -1420,8 +1417,8 @@ public class CardProperty {
             if (card.getCMC() != source.getChosenNumber()) {
                 return false;
             }
-        } else if (property.startsWith("power") || property.startsWith("toughness")
-                || property.startsWith("cmc") || property.startsWith("totalPT")) {
+        } else if (property.startsWith("power") || property.startsWith("toughness") || property.startsWith("cmc")
+                || property.startsWith("totalPT") || property.startsWith("numColors")) {
             int x;
             int y = 0;
             String rhs = "";
@@ -1438,6 +1435,9 @@ public class CardProperty {
             } else if (property.startsWith("totalPT")) {
                 rhs = property.substring(10);
                 y = card.getNetPower() + card.getNetToughness();
+            } else if (property.startsWith("numColors")) {
+                rhs = property.substring(11);
+                y = card.getColor().countColors();
             }
             x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
 
@@ -1485,7 +1485,9 @@ public class CardProperty {
         // These predicated refer to ongoing combat. If no combat happens, they'll return false (meaning not attacking/blocking ATM)
         else if (property.startsWith("attacking")) {
             if (null == combat) return false;
-            if (property.equals("attacking")) return card.isAttacking();
+            // check this always first to make sure lki is only used when the card provides it
+            if (!(property.contains("LKI") ? lki : card).isAttacking()) return false;
+            if (property.equals("attacking")) return true;
             if (property.equals("attackingYou")) return combat.isAttacking(card, sourceController);
             if (property.equals("attackingSame")) {
                 final GameEntity attacked = combat.getDefenderByAttacker(source);
@@ -1493,7 +1495,7 @@ public class CardProperty {
                     return false;
                 }
             }
-            if (property.equals("attackingYouOrYourPW")) {
+            if (property.startsWith("attackingYouOrYourPW")) {
                 GameEntity defender = combat.getDefenderByAttacker(card);
                 if (defender instanceof Card) {
                     // attack on a planeswalker that was removed from combat
@@ -1583,8 +1585,8 @@ public class CardProperty {
         } else if (property.startsWith("blockedByThisTurn")) {
             return !card.getBlockedByThisTurn().isEmpty();
         } else if (property.startsWith("blockedValidThisTurn ")) {
-            CardCollectionView blocked = card.getBlockedThisTurn();
-            if (blocked == null) {
+            List<Card> blocked = card.getBlockedThisTurn();
+            if (blocked.isEmpty()) {
                 return false;
             }
             String valid = property.split(" ")[1];
@@ -1600,8 +1602,8 @@ public class CardProperty {
             }
             return false;
         } else if (property.startsWith("blockedByValidThisTurn ")) {
-            CardCollectionView blocked = card.getBlockedByThisTurn();
-            if (blocked == null) {
+            List<Card> blocked = card.getBlockedByThisTurn();
+            if (blocked.isEmpty()) {
                 return false;
             }
             String valid = property.split(" ")[1];
@@ -1687,6 +1689,11 @@ public class CardProperty {
                 return false;
             }
             return card.getCastSA().isSurged();
+        } else if (property.equals("blitzed")) {
+            if (card.getCastSA() == null) {
+                return false;
+            }
+            return card.getCastSA().isBlitz();
         } else if (property.equals("dashed")) {
             if (card.getCastSA() == null) {
                 return false;
@@ -1785,7 +1792,7 @@ public class CardProperty {
             if (!castSA.isValid(v, sourceController, source, spellAbility)) {
                 return false;
             }
-        }else if (property.startsWith("wasCastFrom")) {
+        } else if (property.startsWith("wasCastFrom")) {
             boolean byYou = property.contains("ByYou");
             String strZone = property.substring(11);
             Player zoneOwner = null;

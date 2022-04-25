@@ -31,6 +31,7 @@ public final class ForgeConstants {
     public static final String PROFILE_TEMPLATE_FILE = PROFILE_FILE + ".example";
 
     public static final String RES_DIR = ASSETS_DIR + "res" + PATH_SEPARATOR;
+    public static final String ADVENTURE_DIR = RES_DIR + "adventure" + PATH_SEPARATOR;
     public static final String LISTS_DIR = RES_DIR + "lists" + PATH_SEPARATOR;
     public static final String SETLOOKUP_DIR = RES_DIR + "setlookup" + PATH_SEPARATOR;
     public static final String KEYWORD_LIST_FILE                     = LISTS_DIR + "NonStackingKWList.txt";
@@ -116,6 +117,8 @@ public final class ForgeConstants {
     public static final String SPRITE_DECKBOX_FILE    = "sprite_deckbox.png";
     public static final String SPRITE_START_FILE      = "sprite_start.png";
     public static final String SPRITE_MANAICONS_FILE  = "sprite_manaicons.png";
+    public static final String SPRITE_PHYREXIAN_FILE  = "sprite_phyrexian.png";
+    public static final String SPRITE_CURSOR_FILE     = "sprite_cursor.png";
     public static final String SPRITE_AVATARS_FILE    = "sprite_avatars.png";
     public static final String SPRITE_CRACKS_FILE     = "sprite_cracks.png";
     public static final String SPRITE_SLEEVES_FILE    = "sprite_sleeves.png";
@@ -124,6 +127,7 @@ public final class ForgeConstants {
     public static final String SPRITE_PLANAR_CONQUEST_FILE = "sprite_planar_conquest.png";
     public static final String SPRITE_SETLOGO_FILE    = "sprite_setlogo.png";
     public static final String SPRITE_WATERMARK_FILE  = "sprite_watermark.png";
+    public static final String SPRITE_DRAFTRANKS_FILE  = "sprite_draftranks.png";
     public static String SPRITE_CARDBG_FILE           = "sprite_cardbg.png";
     public static final String FONT_FILE              = "font1.ttf";
     public static final String SPLASH_BG_FILE         = "bg_splash.png";
@@ -239,13 +243,15 @@ public final class ForgeConstants {
     public static final String USER_CONQUEST_DIR    = USER_DIR + "conquest" + PATH_SEPARATOR;
     public static final String USER_PREFS_DIR       = USER_DIR + "preferences" + PATH_SEPARATOR;
     public static final String USER_GAMES_DIR       = USER_DIR + "games" + PATH_SEPARATOR;
-    public static final String USER_FORMATS_DIR     = USER_DIR + "customformats" + PATH_SEPARATOR;
     public static final String USER_PUZZLE_DIR      = USER_DIR + "puzzle" + PATH_SEPARATOR;
     public static final String LOG_FILE             = USER_DIR + "forge.log";
     public static final String ACHIEVEMENTS_DIR     = USER_DIR + "achievements" + PATH_SEPARATOR;
     public static final String USER_CUSTOM_DIR      = USER_DIR + "custom" + PATH_SEPARATOR;
     public static final String USER_CUSTOM_EDITIONS_DIR = USER_CUSTOM_DIR + "editions" + PATH_SEPARATOR;
     public static final String USER_CUSTOM_CARDS_DIR = USER_CUSTOM_DIR + "cards" + PATH_SEPARATOR;
+    public static final String USER_CUSTOM_TOKENS_DIR = USER_CUSTOM_DIR + "tokens" + PATH_SEPARATOR;
+    public static final String USER_FORMATS_DIR     = USER_CUSTOM_DIR + "formats" + PATH_SEPARATOR;
+    public static final String USER_ADVENTURE_DIR   = USER_DIR + "adventure" + PATH_SEPARATOR;
     public static final String DECK_DRAFT_DIR       = DECK_BASE_DIR + "draft" + PATH_SEPARATOR;
     public static final String DECK_WINSTON_DIR     = DECK_BASE_DIR + "winston" + PATH_SEPARATOR;
     public static final String DECK_SEALED_DIR      = DECK_BASE_DIR + "sealed" + PATH_SEPARATOR;

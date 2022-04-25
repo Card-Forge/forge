@@ -1,8 +1,9 @@
 [format]
-Name:Type I, Fourth Edition
+Name:Type 1 (4ED)
 Type:Historic
 Subtype:Vintage
 Effective:1995-04-19
-Sets:LEA, LEB, 2ED, ARN, DRC94, ATQ, 3ED, LEG, DRK, ARENA, FEM, WW, SHC, FS, 4ED
-Restricted:Ali from Cairo, Ancestral Recall, Balance, Berserk, Black Lotus, Braingeyser, Candelabra of Tawnos, Channel, Chaos Orb, Copy Artifact, Demonic Tutor, Falling Star, Feldon's Cane, Fork, Ivory Tower, Library of Alexandria, Maze of Ith, Mind Twist, Mirror Universe, Mishra's Workshop, Mox Pearl, Mox Emerald, Mox Ruby, Mox Sapphire, Mox Jet, Recall, Regrowth, Sol Ring, Sword of the Ages, Timetwister, Time Walk, Underworld Dreams, Wheel of Fortune
-Banned:Bronze Tablet, Contract from Below, Darkpact, Demonic Attorney, Divine Intervention, Jeweled Bird, Rebirth, Shahrazad, Time Vault, Tempest Efreet
+Sets:LEA, LEB, 2ED, ARN, ATQ, 3ED, LEG, DRC94, DRK, FEM, ARENA, WW, FS, SHC, 4ED
+RestrictedLegendary:true
+Restricted:Ali from Cairo; Ancestral Recall; Balance; Berserk; Black Lotus; Braingeyser; Candelabra of Tawnos; Channel; Chaos Orb; Copy Artifact; Demonic Tutor; Falling Star; Feldon's Cane; Fork; Ivory Tower; Library of Alexandria; Maze of Ith; Mind Twist; Mirror Universe; Mishra's Workshop; Mox Emerald; Mox Jet; Mox Pearl; Mox Ruby; Mox Sapphire; Recall; Regrowth; Sol Ring; Sword of the Ages; Time Walk; Timetwister; Underworld Dreams; Wheel of Fortune
+Banned:Bronze Tablet; Contract from Below; Darkpact; Demonic Attorney; Divine Intervention; Jeweled Bird; Rebirth; Shahrazad; Tempest Efreet; Time Vault

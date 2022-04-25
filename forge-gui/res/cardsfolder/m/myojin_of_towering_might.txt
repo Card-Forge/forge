@@ -1,0 +1,10 @@
+Name:Myojin of Towering Might
+ManaCost:5 G G G
+Types:Legendary Creature Spirit
+PT:8/8
+K:etbCounter:Indestructible:1:CheckSVar$ FromHand:CARDNAME enters the battlefield with an indestructible counter on it if you cast it from your hand.
+SVar:FromHand:Count$wasCastFromYourHandByYou.1.0
+A:AB$ PutCounter | Cost$ SubCounter<1/Indestructible> | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select any number of target creatures you control | CounterType$ P1P1 | CounterNum$ 8 | TargetMin$ 1 | TargetMax$ 8 | DividedAsYouChoose$ 8 | SubAbility$ DBPump | SpellDescription$ Distribute eight +1/+1 counters among any number of target creatures you control.
+SVar:DBPump:DB$ Pump | KW$ Trample | Defined$ Targeted | SpellDescription$ They gain trample until end of turn.
+DeckHas:Ability$Counters & Keyword$Trample
+Oracle:Myojin of Towering Might enters the battlefield with an indestructible counter on it if you cast it from your hand.\nRemove an indestructible counter from Myojin of Towering Might: Distribute eight +1/+1 counters among any number of target creatures you control. They gain trample until end of turn.

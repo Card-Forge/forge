@@ -17,6 +17,7 @@
  */
 package forge.game.ability;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.card.CardStateName;
+import forge.card.CardType;
 import forge.game.CardTraitBase;
 import forge.game.IHasSVars;
 import forge.game.ability.effects.CharmEffect;
@@ -35,8 +37,8 @@ import forge.game.cost.Cost;
 import forge.game.spellability.*;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 /**
  * <p>
@@ -145,10 +147,12 @@ public final class AbilityFactory {
             return getAbility(mapParams, type, state, sVarHolder);
         } catch (Error | Exception ex) {
             String msg = "AbilityFactory:getAbility: crash when trying to create ability ";
-            Sentry.getContext().recordBreadcrumb(
-                new BreadcrumbBuilder().setMessage(msg)
-                .withData("Card", state.getName()).withData("Ability", abString).build()
-            );
+            
+            Breadcrumb bread = new Breadcrumb(msg);
+            bread.setData("Card", state.getName());
+            bread.setData("Ability", abString);
+            
+            Sentry.addBreadcrumb(bread);
             throw new RuntimeException(msg + " of card: " + state.getName(), ex);
         }
     }
@@ -325,8 +329,17 @@ public final class AbilityFactory {
         final String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
         final String max = mapParams.containsKey("TargetMax") ? mapParams.get("TargetMax") : "1";
 
-        // TgtPrompt now optional
-        final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") : "Select target " + mapParams.get("ValidTgts");
+        // TgtPrompt should only be needed for more complicated ValidTgts
+        String tgtWhat = mapParams.get("ValidTgts");
+        final String[] commonStuff = new String[] {
+                //list of common one word non-core type ValidTgts that should be lowercase in the target prompt
+                "Player", "Opponent"
+        };
+        if (Arrays.asList(commonStuff).contains(tgtWhat) || CardType.CoreType.isValidEnum(tgtWhat)) {
+            tgtWhat = tgtWhat.toLowerCase();
+        }
+        final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") :
+                "Select target " + tgtWhat;
 
         TargetRestrictions abTgt = new TargetRestrictions(prompt, mapParams.get("ValidTgts").split(","), min, max);
 
@@ -498,4 +511,4 @@ public final class AbilityFactory {
         left.appendSubAbility(right);
         return left;
     }
-} // end class AbilityFactory
+}

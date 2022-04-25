@@ -1,7 +1,7 @@
 Name:Marit Lage
-Types:Legendary Creature Avatar
-Colors:black
 ManaCost:no cost
+Colors:black
+Types:Legendary Creature Avatar
 PT:20/20
 K:Flying
 K:Indestructible

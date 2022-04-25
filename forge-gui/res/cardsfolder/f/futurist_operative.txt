@@ -1,0 +1,7 @@
+Name:Futurist Operative
+ManaCost:3 U
+Types:Creature Human Ninja
+PT:3/4
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 1 | AddType$ Human & Citizen | RemoveCreatureTypes$ True | AddHiddenKeyword$ Unblockable | IsPresent$ Card.Self+tapped | Description$ As long as CARDNAME is tapped, it is a Human Citizen with base power and toughness 1/1 and it can't be blocked.
+A:AB$ Untap | Cost$ 2 U | SpellDescription$ Untap CARDNAME.
+Oracle:As long as Futurist Operative is tapped, it is a Human Citizen with base power and toughness 1/1 and it can't be blocked.\n{2}{U}: Untap Futurist Operative.

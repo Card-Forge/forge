@@ -2,7 +2,7 @@ Name:Sliversmith
 ManaCost:2
 Types:Artifact Creature Spellshaper
 PT:1/1
-A:AB$ Token | Cost$ 1 T Discard<1/Card> | TokenAmount$ 1 | TokenScript$ metallic_sliver | TokenOwner$ You | LegacyImage$ metallic sliver fut | SpellDescription$ Create a 1/1 colorless Sliver artifact creature token named Metallic Sliver.
+A:AB$ Token | Cost$ 1 T Discard<1/Card> | TokenAmount$ 1 | TokenScript$ metallic_sliver | TokenOwner$ You | SpellDescription$ Create a 1/1 colorless Sliver artifact creature token named Metallic Sliver.
 AI:RemoveDeck:Random
 SVar:AIPreference:DiscardCost$Card
 DeckHints:Type$Sliver

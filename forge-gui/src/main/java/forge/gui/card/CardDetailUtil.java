@@ -349,6 +349,14 @@ public class CardDetailUtil {
             }
         }
 
+        final int intensity = card.getIntensity();
+        if (intensity > 0) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("Intensity: ").append(intensity);
+        }
+
         // counter text
         if (card.getCounters() != null) {
             for (final Entry<CounterType, Integer> c : card.getCounters().entrySet()) {

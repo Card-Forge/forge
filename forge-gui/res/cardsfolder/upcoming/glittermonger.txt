@@ -1,0 +1,7 @@
+Name:Glittermonger
+ManaCost:3 G
+Types:Creature Elf Rogue
+PT:1/4
+A:AB$ Token | Cost$ T | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
+Oracle:{T}: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

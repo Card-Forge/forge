@@ -3,7 +3,7 @@ ManaCost:2 W W
 Types:Enchantment
 K:Fading:5
 A:AB$ ChangeZone | Cost$ SubCounter<1/FADE> | ValidTgts$ Creature | TgtPrompt$ Select target creature | ImprintTargets$ True | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, each player returns to the battlefield all cards they own exiled with CARDNAME.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, each player returns to the battlefield all cards they own exiled with CARDNAME.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Imprinted | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:PlayMain1:TRUE

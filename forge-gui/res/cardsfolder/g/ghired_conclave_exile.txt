@@ -3,7 +3,7 @@ ManaCost:2 R G W
 Types:Legendary Creature Human Shaman
 PT:2/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 4/4 green Rhino creature token with trample.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_rhino_trample | TokenOwner$ You | LegacyImage$ g 4 4 rhino trample c19
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_rhino_trample | TokenOwner$ You
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ Whenever CARDNAME attacks, populate. The token enters the battlefield tapped and attacking. (To populate, create a token that's a copy of a creature token you control.)
 SVar:TrigCopy:DB$ CopyPermanent | Choices$ Creature.token+YouCtrl | NumCopies$ 1 | Populate$ True | TokenTapped$ True | TokenAttacking$ True
 Oracle:When Ghired, Conclave Exile enters the battlefield, create a 4/4 green Rhino creature token with trample.\nWhenever Ghired attacks, populate. The token enters the battlefield tapped and attacking. (To populate, create a token that's a copy of a creature token you control.)

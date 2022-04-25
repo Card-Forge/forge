@@ -1,6 +1,7 @@
 package forge.screens.match.winlose;
 
 import forge.Forge;
+import forge.assets.FSkin;
 import forge.game.GameView;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
@@ -90,6 +91,8 @@ public class ControlWinLose {
         view.hide();
         if (openHomeScreen || humancount == 0)
             Forge.openHomeScreen(Forge.lastButtonIndex, Forge.getCurrentScreen());
+        //reset cursor
+        Forge.setCursor(FSkin.getCursor().get(0), "0");
     }
 
     /**

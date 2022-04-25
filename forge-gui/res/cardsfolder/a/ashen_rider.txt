@@ -4,6 +4,6 @@ Types:Creature Archon
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield or dies, exile target permanent.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | TriggerController$ TriggeredCardController | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, exile target permanent.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, exile target permanent.
 SVar:TrigChange:DB$ ChangeZone | ValidTgts$ Permanent | Origin$ Battlefield | Destination$ Exile
 Oracle:Flying\nWhen Ashen Rider enters the battlefield or dies, exile target permanent.

@@ -4,6 +4,6 @@ Types:Sorcery
 K:Convoke
 A:SP$ Charm | Cost$ 2 G | Choices$ DBToken,DBDestroy
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ gw_2_2_elf_knight_vigilance | LegacyImage$ gw 2 2 elf knight vigilance grn | SpellDescription$ Create a 2/2 green and white Elf Knight creature token with vigilance.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ gw_2_2_elf_knight_vigilance | SpellDescription$ Create a 2/2 green and white Elf Knight creature token with vigilance.
 DeckHas:Ability$Token
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nChoose one —\n• Create a 2/2 green and white Elf Knight creature token with vigilance.\n• Destroy target artifact or enchantment.

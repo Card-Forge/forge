@@ -19,6 +19,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
     private String label = "";
     private final DropDown dropDown = new DropDown();
     private FEventHandler dropDownItemTap, dropDownChangeHandler;
+    private boolean autoClose = true;
 
     public FComboBox() {
         initialize();
@@ -36,6 +37,10 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
             items.add(item);
         }
         initialize();
+    }
+
+    public void setAutoClose(boolean autoClose) {
+        this.autoClose = autoClose;
     }
 
     private void initialize() {
@@ -183,6 +188,13 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
     public FEventHandler getDropDownChangeHandler() {
         return dropDownChangeHandler;
     }
+    public boolean getDropDownisVisible() {
+        return dropDown != null && dropDown.isVisible();
+    }
+    public void hideDropDown() {
+        if (dropDown != null)
+            dropDown.hide();
+    }
     public void setDropDownChangeHandler(FEventHandler changedHandler0) {
         dropDownChangeHandler = changedHandler0;
     }
@@ -233,6 +245,18 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
     }
 
     private class DropDown extends FDropDownMenu {
+        @Override
+        protected boolean autoHide() {
+            return autoClose;
+        }
+
+        @Override
+        public boolean tap(float x, float y, int count) {
+            if (!autoClose)
+                hide();
+            return super.tap(x, y, count);
+        }
+
         @Override
         protected void buildMenu() {
             for (final T item : FComboBox.this.items) {

@@ -1,0 +1,25 @@
+Name:Havengul Laboratory
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Investigate | Cost$ 4 T | SpellDescription$ Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ ClueResearch | SVarCompare$ GE3 | Execute$ TrigTransform | TriggerDescription$ At the beginning of your end step, if you sacrificed three or more clues this turn, transform CARDNAME.
+SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
+SVar:ClueResearch:Count$SacrificedThisTurn Clue
+DeckHas:Ability$Investigate|Token|Sacrifice|Graveyard
+DeckHints:Ability$Investigate
+AlternateMode:DoubleFaced
+Oracle:{T}: Add {C}.\n{4}, {T}: Investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\nAt the beginning of your end step, if you sacrificed three or more clues this turn, transform Havengul Laboratory.
+
+ALTERNATE
+
+Name:Havengul Mystery
+ManaCost:no cost
+Types:Legendary Land
+T:Mode$ Transformed | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this land transforms into CARDNAME, return target creature card from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card from your graveyard | Origin$ Graveyard | Destination$ Battlefield | RememberTargets$ True
+T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ TrigTransform2 | TriggerZones$ Battlefield | TriggerDescription$ When the creature card put onto the battlefield with CARDNAME leaves the battlefield, transform CARDNAME.
+SVar:TrigTransform2:DB$ SetState | Defined$ Self | Mode$ Transform | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ B | SpellDescription$ Add {B}.
+Oracle:When this land transforms into Havengul Mystery, return target creature card from your graveyard to the battlefield.\nWhen the creature card put onto the battlefield with Havengul Mystery leaves the battlefield, transform Havengul Mystery.\n{T}, Pay 1 life: Add {B}.

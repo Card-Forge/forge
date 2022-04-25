@@ -2,7 +2,7 @@ Name:Elspeth, Knight-Errant
 ManaCost:2 W W
 Types:Legendary Planeswalker Elspeth
 Loyalty:4
-A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | Planeswalker$ True | LegacyImage$ w 1 1 soldier ala | SpellDescription$ Create a 1/1 white Soldier creature token.
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 1/1 white Soldier creature token.
 A:AB$ Pump | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | KW$ Flying | Planeswalker$ True | SpellDescription$ Target creature gets +3/+3 and gains flying until end of turn.
 A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Name$ Emblem - Elspeth, Knight-Errant | Image$ emblem_elspeth_knight_errant | StaticAbilities$ STIndestructible | Planeswalker$ True | Ultimate$ True | Stackable$ False | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Artifacts, creatures, enchantments, and lands you control have indestructible."
 SVar:STIndestructible:Mode$ Continuous | EffectZone$ Command | Affected$ Artifact.YouCtrl,Creature.YouCtrl,Enchantment.YouCtrl,Land.YouCtrl | AffectedZone$ Battlefield | AddKeyword$ Indestructible | Description$ Artifacts, creatures, enchantments, and lands you control are indestructible.

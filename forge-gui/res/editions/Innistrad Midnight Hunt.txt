@@ -6,7 +6,7 @@ Code2=MID
 MciCode=mid
 Type=Expansion
 ScryfallCode=MID
-Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand
+Booster=10 Common:fromSheet("MID cards"), 3 Uncommon:fromSheet("MID cards"), 1 RareMythic:fromSheet("MID cards"), 1 BasicLand
 Prerelease=6 Boosters, 1 RareMythic+
 
 [cards]
@@ -414,7 +414,9 @@ Prerelease=6 Boosters, 1 RareMythic+
 391 U Join the Dance @Raoul Vitale
 
 [rebalanced]
+A52 C A-Falcon Abomination @Brent Hollowell
 A59 M A-Lier, Disciple of the Drowned @Ekaterina Burmak
+A106 C A-Hobbling Zombie @Josh Hass
 
 [tokens]
 b_1_1_bat_flying

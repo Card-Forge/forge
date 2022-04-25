@@ -3,5 +3,5 @@ ManaCost:1 G
 Types:Creature Elf Warrior
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.YouCtrl+Other+Elf | PresentCompare$ GE1 | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if you control another Elf, create a 1/1 green Elf Warrior creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You | LegacyImage$ g 1 1 elf warrior ori
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_elf_warrior | TokenOwner$ You
 Oracle:When Dwynen's Elite enters the battlefield, if you control another Elf, create a 1/1 green Elf Warrior creature token.

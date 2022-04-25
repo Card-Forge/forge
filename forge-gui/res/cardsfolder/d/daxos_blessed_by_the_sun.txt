@@ -2,7 +2,7 @@ Name:Daxos, Blessed by the Sun
 ManaCost:W W
 Types:Legendary Enchantment Creature Demigod
 PT:2/*
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to your devotion to white.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ NICKNAME's toughness is equal to your devotion to white.
 SVar:X:Count$Devotion.White
 SVar:BuffedBy:Permanent.White
 T:Mode$ ChangesZone | TriggerZones$ Battlefield | ValidCard$ Creature.YouCtrl+Other | Origin$ Any | Destination$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature you control enters the battlefield or dies, you gain 1 life.

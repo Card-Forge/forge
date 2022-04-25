@@ -1,0 +1,12 @@
+Name:Kura, the Boundless Sky
+ManaCost:3 G G
+Types:Legendary Creature Dragon Spirit
+PT:4/4
+K:Flying
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ RampThree,SpiritLand
+SVar:RampThree:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Land | ChangeNum$ 3 | Reveal$ True | SpellDescription$ Search your library for up to three land cards, reveal them, put them in your hand, then shuffle.
+SVar:SpiritLand:DB$ Token | TokenScript$ g_x_x_spirit_total_lands | SpellDescription$ Create an X/X green Spirit creature token, where X is the number of lands you control.
+DeckHas:Ability$Token
+Oracle:Flying, deathtouch\nWhen Kura, the Boundless Sky dies, choose one:\n• Search your library for up to three land cards, reveal them, put them into your hand, then shuffle.\n• Create an X/X green Spirit creature token, where X is the number of lands you control.

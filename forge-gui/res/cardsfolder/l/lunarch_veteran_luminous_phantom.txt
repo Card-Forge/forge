@@ -5,8 +5,8 @@ PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature enters the battlefield under your control, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 K:Disturb:1 W
-AlternateMode:DoubleFaced
 DeckHas:Ability$LifeGain|Graveyard
+AlternateMode:DoubleFaced
 Oracle:Whenever another creature enters the battlefield under your control, you gain 1 life.\nDisturb {1}{W} (You may cast this card from your graveyard transformed for its disturb cost.)
 
 ALTERNATE

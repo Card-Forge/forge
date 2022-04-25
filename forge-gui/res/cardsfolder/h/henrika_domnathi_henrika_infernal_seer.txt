@@ -9,8 +9,8 @@ SVar:SacDom:DB$ Sacrifice | Amount$ 1 | SacValid$ Creature | Defined$ Player | S
 SVar:DrawDom:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1 | StackDescription$ None
 SVar:TransDom:DB$ SetState | Defined$ Self | Mode$ Transform | SpellDescription$ Transform CARDNAME.
-AlternateMode:DoubleFaced
 DeckHas:Ability$Sacrifice|LifeGain
+AlternateMode:DoubleFaced
 Oracle:Flying\nAt the beginning of combat on your turn, choose one that hasn't been chosen –\n• Each player sacrifices a creature.\n• You draw a card and you lose 1 life.\n•Transform Henrika Domnathi.
 
 ALTERNATE

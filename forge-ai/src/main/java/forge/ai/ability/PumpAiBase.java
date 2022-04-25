@@ -166,10 +166,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return false;
             }
             return ph.isPlayerTurn(ai) || (combat != null && combat.isAttacking(card) && card.getNetCombatDamage() > 0);
-        } else if (keyword.endsWith("CARDNAME attacks each turn if able.")
-                || keyword.endsWith("CARDNAME attacks each combat if able.")) {
-            return !ph.isPlayerTurn(ai) && CombatUtil.canAttack(card, ai) && CombatUtil.canBeBlocked(card, ai)
-                    && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS);
         } else if (keyword.endsWith("CARDNAME can't be regenerated.")) {
             if (card.getShieldCount() > 0) {
                 return true;
@@ -200,7 +196,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             return false;
         }
 
-        final boolean evasive = (keyword.endsWith("Unblockable") || keyword.endsWith("Shadow") || keyword.startsWith("CantBeBlockedBy"));
+        final boolean evasive = keyword.endsWith("Unblockable") || keyword.endsWith("Shadow");
         // give evasive keywords to creatures that can or do attack
         if (evasive) {
             return !ph.isPlayerTurn(opp) && (CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
@@ -302,7 +298,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     && !opp.getCreaturesInPlay().isEmpty()
                     && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
         } else if (keyword.equals("First Strike")) {
-            if (card.hasKeyword(Keyword.DOUBLE_STRIKE)) {
+            if (card.hasDoubleStrike()) {
                 return false;
             }
             if (combat != null && combat.isBlocked(card) && !combat.getBlockers(card).isEmpty()) {
@@ -358,12 +354,12 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             if (newPower <= 0 || card.hasKeyword(Keyword.INFECT)) {
                 return false;
             }
-            return combat != null && ( combat.isBlocking(card) || (combat.isAttacking(card) && combat.isBlocked(card)) );
+            return combat != null && (combat.isBlocking(card) || (combat.isAttacking(card) && combat.isBlocked(card)));
         } else if (keyword.equals("Lifelink")) {
             if (newPower <= 0 || ai.canGainLife()) {
                 return false;
             }
-            return combat != null && ( combat.isAttacking(card) || combat.isBlocking(card) );
+            return combat != null && (combat.isAttacking(card) || combat.isBlocking(card));
         } else if (keyword.equals("Vigilance")) {
             return !ph.isPlayerTurn(opp) && CombatUtil.canAttack(card, opp)
                     && newPower > 0
@@ -448,14 +444,11 @@ public abstract class PumpAiBase extends SpellAbilityAi {
      * @return a {@link forge.CardList} object.
      */
     protected CardCollection getCurseCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack, final List<String> keywords) {
-        CardCollection list = new CardCollection();
-        for (final Player opp : ai.getOpponents()) {
-            list.addAll(opp.getCardsIn(ZoneType.Battlefield));
-        }
+        CardCollection list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
         final Game game = ai.getGame();
         final Combat combat = game.getCombat();
         list = CardLists.getTargetableCards(list, sa);
-        
+
         if (list.isEmpty()) {
             return list;
         }

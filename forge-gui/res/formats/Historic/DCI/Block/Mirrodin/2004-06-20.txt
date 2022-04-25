@@ -1,5 +1,5 @@
 [format]
-Name:Mirrodin Block, Fifth Dawn
+Name:Block: Mirrodin (5DN)
 Type:Historic
 Subtype:Block
 Effective:2004-06-20

@@ -39,6 +39,7 @@ import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+//import java.awt.image.BaseMultiResolutionImage;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -463,7 +464,7 @@ public class FSkin {
         }
 
         private void updateColor() {
-            tempCoords = skinProp.getCoords();
+            int[] tempCoords = skinProp.getCoords();
             x0 = tempCoords[0];
             y0 = tempCoords[1];
 
@@ -549,7 +550,7 @@ public class FSkin {
          * @param s0 &emsp; An address in the hashmap, derived from FSkinProp enum
          */
         private static void setImage(final FSkinProp s0, final boolean scale) {
-            tempCoords = s0.getCoords();
+            int[] tempCoords = s0.getCoords();
             x0 = tempCoords[0];
             y0 = tempCoords[1];
             w0 = tempCoords[2];
@@ -560,7 +561,7 @@ public class FSkin {
             final BufferedImage bi0 = img.getSubimage(x0, y0, w0, h0);
 
             if (scale && newW != 0) {
-                setImage(s0, bi0.getScaledInstance(newW, newH, Image.SCALE_AREA_AVERAGING));
+                setImage(s0, bi0.getScaledInstance(newW, newH, Image.SCALE_SMOOTH));
             }
             else {
                 setImage(s0, bi0);
@@ -569,8 +570,8 @@ public class FSkin {
 
         protected Image image;
         protected ImageIcon imageIcon;
-        protected HashMap<String, SkinImage> scaledImages;
-        private HashMap<String, SkinCursor> cursors;
+        protected HashMap<String, SkinImage> scaledImages = new HashMap<>();
+        private HashMap<String, SkinCursor> cursors = new HashMap<>();
 
         private SkinImage(final Image image0) {
             this.image = image0;
@@ -589,9 +590,6 @@ public class FSkin {
         }
 
         public SkinImage resize(final int w, final int h) {
-            if (this.scaledImages == null) {
-                this.scaledImages = new HashMap<>();
-            }
             final String key = w + "x" + h;
             SkinImage scaledImage = this.scaledImages.get(key);
             if (scaledImage == null) {
@@ -603,11 +601,13 @@ public class FSkin {
         }
 
         public boolean save(final String path, final int w, final int h) {
+            final Image scaledImage = this.image.getScaledInstance(w, h, Image.SCALE_SMOOTH);
+
             final BufferedImage resizedImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 
             final Graphics2D g2d = resizedImage.createGraphics();
             g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            g2d.drawImage(this.image, 0, 0, w, h, 0, 0, this.getWidth(), this.getHeight(), null);
+            g2d.drawImage(scaledImage, 0, 0, null);
             g2d.dispose();
 
             final File outputfile = new File(path);
@@ -624,9 +624,6 @@ public class FSkin {
             return scale(scale, scale);
         }
         public SkinImage scale(final double scaleX, final double scaleY) {
-            if (this.scaledImages == null) {
-                this.scaledImages = new HashMap<>();
-            }
             final String key = scaleX + "|" + scaleY;
             SkinImage scaledImage = this.scaledImages.get(key);
             if (scaledImage == null) {
@@ -638,8 +635,6 @@ public class FSkin {
         }
 
         protected void updateScaledImages() {
-            if (this.scaledImages == null) { return; }
-
             for (final Entry<String, SkinImage> i : this.scaledImages.entrySet()) {
                 String[] dims = i.getKey().split("x");
                 if (dims.length == 2) { //static scale
@@ -653,14 +648,7 @@ public class FSkin {
         }
 
         protected void createResizedImage(final SkinImage baseImage, final int w, final int h) {
-            final BufferedImage resizedImage = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-
-            final Graphics2D g2d = resizedImage.createGraphics();
-            g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-            g2d.drawImage(baseImage.image, 0, 0, w, h, 0, 0, baseImage.getWidth(), baseImage.getHeight(), null);
-            g2d.dispose();
-
-            this.changeImage(resizedImage, null);
+            this.changeImage(baseImage.image.getScaledInstance(w, h, Image.SCALE_SMOOTH), null);
         }
 
         private void createScaledImage(final SkinImage baseImage, final double scaleX, final double scaleY) {
@@ -668,9 +656,6 @@ public class FSkin {
         }
 
         private SkinCursor toCursor(final int hotSpotX, final int hotSpotY, final String name) {
-            if (this.cursors == null) {
-                this.cursors = new HashMap<>();
-            }
             final String key = hotSpotX + "|" + hotSpotY + "|" + name;
             SkinCursor cursor = this.cursors.get(key);
             if (cursor == null) {
@@ -682,8 +667,6 @@ public class FSkin {
         }
 
         private void updateCursors() {
-            if (this.cursors == null) { return; }
-
             for (final SkinCursor cursor : this.cursors.values()) {
                 cursor.updateCursor(this.image);
             }
@@ -706,7 +689,14 @@ public class FSkin {
 
         protected ImageIcon getIcon() {
             if (this.imageIcon == null) {
-                this.imageIcon = new ImageIcon(this.image);
+                /*float screenScale = GuiBase.getInterface().getScreenScale();
+                int iconWidth = Math.round(image.getWidth(null) / screenScale);
+                int iconHeight = Math.round(image.getHeight(null) / screenScale);
+                Image [] iconImages = new Image[2];
+                iconImages[0] = image.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+                iconImages[1] = image;
+                BaseMultiResolutionImage multiImage = new BaseMultiResolutionImage(iconImages);*/
+                this.imageIcon = new ImageIcon(this.image/*multiImage*/);
             }
             return this.imageIcon;
         }
@@ -778,7 +768,7 @@ public class FSkin {
         }
 
         private static void setIcon(final FSkinProp s0) {
-            tempCoords = s0.getCoords();
+            int[] tempCoords = s0.getCoords();
             x0 = tempCoords[0];
             y0 = tempCoords[1];
             w0 = tempCoords[2];
@@ -1089,9 +1079,9 @@ public class FSkin {
             return str;
         }
         //format mana symbols to display as icons
-        pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
+        pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
         try {
-            replacement = "<img src=\"" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3.png").toURI().toURL().toString() + "\" width=" + SYMBOL_WIDTH + " height=" + SYMBOL_HEIGHT + ">";
+            replacement = "<img src=\"" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3$4$5$6.png").toURI().toURL().toString() + "\" width=" + SYMBOL_WIDTH + " height=" + SYMBOL_HEIGHT + ">";
             str = str.replaceAll(pattern, replacement);
         } catch (final MalformedURLException e) {
             e.printStackTrace();
@@ -1108,9 +1098,9 @@ public class FSkin {
     private static String preferredDir;
     private static String preferredName;
     private static BufferedImage bimDefaultSprite, bimFavIcon, bimPreferredSprite, bimFoils, bimQuestDraftDeck, bimOldFoils,
-    bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons, bimDefaultSleeve, bimDefaultSleeve2, bimDefaultDeckbox, bimPrefferedSetLogo, bimDefaultWatermark;
+    bimDefaultAvatars, bimPreferredAvatars, bimTrophies, bimAbilities, bimManaIcons, bimPhyrexian, bimDefaultSleeve,
+            bimDefaultSleeve2, bimDefaultDeckbox, bimPrefferedSetLogo, bimDefaultWatermark, bimDefaultDraftRank;
     private static int x0, y0, w0, h0, newW, newH, preferredW, preferredH;
-    private static int[] tempCoords;
     private static int defaultFontSize = 12;
     private static boolean loaded = false;
 
@@ -1249,6 +1239,8 @@ public class FSkin {
         final File f15 = new File(defaultDir + ForgeConstants.SPRITE_SETLOGO_FILE);
         final File f16 = new File(preferredDir + ForgeConstants.SPRITE_SETLOGO_FILE);
         final File f17 = new File(defaultDir + ForgeConstants.SPRITE_WATERMARK_FILE);
+        final File f18 = new File(defaultDir +ForgeConstants.SPRITE_PHYREXIAN_FILE);
+        final File f19 = new File(defaultDir + ForgeConstants.SPRITE_DRAFTRANKS_FILE);
 
         try {
             int p = 0;
@@ -1257,6 +1249,8 @@ public class FSkin {
             bimAbilities = ImageIO.read(f10);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimManaIcons = ImageIO.read(f11);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimPhyrexian = ImageIO.read(f18);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimPreferredSprite = ImageIO.read(f2);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -1272,6 +1266,8 @@ public class FSkin {
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimDefaultDeckbox = ImageIO.read(f14);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
+            bimDefaultDraftRank = ImageIO.read(f19);
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimPrefferedSetLogo = f16.exists() ? ImageIO.read(f16) : ImageIO.read(f15);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimDefaultWatermark = ImageIO.read(f17);
@@ -1281,7 +1277,7 @@ public class FSkin {
             bimQuestDraftDeck = ImageIO.read(f8);
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             bimFavIcon = ImageIO.read(f9);
-
+            FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
             if (f5.exists()) { bimPreferredAvatars = ImageIO.read(f5); }
 
             FView.SINGLETON_INSTANCE.incrementSplashProgessBar(++p);
@@ -1337,8 +1333,14 @@ public class FSkin {
                 case MANAICONS:
                     setImage(prop, bimManaIcons);
                     break;
+                case PHYREXIAN:
+                    setImage(prop, bimPhyrexian);
+                    break;
                 case DECKBOX:
                     setImage(prop, bimDefaultDeckbox);
+                    break;
+                case DRAFTRANKS:
+                    setImage(prop, bimDefaultDraftRank);
                     break;
                 case SETLOGO:
                     setImage(prop, bimPrefferedSetLogo);
@@ -1369,11 +1371,13 @@ public class FSkin {
         bimDefaultSleeve.flush();
         bimDefaultSleeve2.flush();
         bimDefaultDeckbox.flush();
+        bimDefaultDraftRank.flush();
         bimPrefferedSetLogo.flush();
         bimDefaultWatermark.flush();
         bimQuestDraftDeck.flush();
         bimTrophies.flush();
         bimAbilities.flush();
+        bimPhyrexian.flush();
         bimManaIcons.flush();
 
         if (bimPreferredAvatars != null) { bimPreferredAvatars.flush(); }
@@ -1386,12 +1390,14 @@ public class FSkin {
         bimDefaultSleeve = null;
         bimDefaultSleeve2 = null;
         bimDefaultDeckbox = null;
+        bimDefaultDraftRank = null;
         bimPrefferedSetLogo = null;
         bimDefaultWatermark = null;
         bimPreferredAvatars = null;
         bimQuestDraftDeck = null;
         bimTrophies = null;
         bimAbilities = null;
+        bimPhyrexian = null;
         bimManaIcons = null;
 
         //establish encoding symbols
@@ -1436,6 +1442,16 @@ public class FSkin {
         addEncodingSymbol("B/P", FSkinProp.IMG_MANA_PHRYX_B);
         addEncodingSymbol("R/P", FSkinProp.IMG_MANA_PHRYX_R);
         addEncodingSymbol("G/P", FSkinProp.IMG_MANA_PHRYX_G);
+        addEncodingSymbol("P/B/G", FSkinProp.IMG_MANA_PHRYX_BG);
+        addEncodingSymbol("P/B/R", FSkinProp.IMG_MANA_PHRYX_BR);
+        addEncodingSymbol("P/G/U", FSkinProp.IMG_MANA_PHRYX_GU);
+        addEncodingSymbol("P/G/W", FSkinProp.IMG_MANA_PHRYX_GW);
+        addEncodingSymbol("P/R/G", FSkinProp.IMG_MANA_PHRYX_RG);
+        addEncodingSymbol("P/R/W", FSkinProp.IMG_MANA_PHRYX_RW);
+        addEncodingSymbol("P/U/B", FSkinProp.IMG_MANA_PHRYX_UB);
+        addEncodingSymbol("P/U/R", FSkinProp.IMG_MANA_PHRYX_UR);
+        addEncodingSymbol("P/W/B", FSkinProp.IMG_MANA_PHRYX_WB);
+        addEncodingSymbol("P/W/U", FSkinProp.IMG_MANA_PHRYX_WU);
         for (int i = 0; i <= 20; i++) {
             addEncodingSymbol(String.valueOf(i), FSkinProp.valueOf("IMG_MANA_" + i));
         }
@@ -1511,7 +1527,7 @@ public class FSkin {
     }
 
     private static BufferedImage testPreferredSprite(final FSkinProp s0) {
-        tempCoords = s0.getCoords();
+        int[] tempCoords = s0.getCoords();
         x0 = tempCoords[0];
         y0 = tempCoords[1];
         w0 = tempCoords[2];
@@ -1626,7 +1642,7 @@ public class FSkin {
     }
 
     private static void setImage(final FSkinProp s0, final BufferedImage bim) {
-        tempCoords = s0.getCoords();
+        int[] tempCoords = s0.getCoords();
         x0 = tempCoords[0];
         y0 = tempCoords[1];
         w0 = tempCoords[2];

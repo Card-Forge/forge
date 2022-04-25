@@ -10,6 +10,6 @@ SVar:DBExile:DB$ ChangeZoneAll | ChangeType$ Card.OppCtrl | Origin$ Graveyard | 
 SVar:DBToken:DB$ Token | TokenScript$ b_0_1_thrull | TokenAmount$ Z | SubAbility$ DBCleanup
 SVar:X:Count$Compare Y GE1.2.1
 SVar:Y:Count$Valid Card.IsCommander+YouCtrl
-SVar:Z:Count$GreatestPowerExile_Creature.IsRemembered
+SVar:Z:Count$ValidExile Creature.IsRemembered$GreatestPower
 DeckHas:Ability$Token
 Oracle:Choose one. If you control a commander as you cast this spell, you may choose both.\n• Each opponent sacrifices a creature they control with the greatest power.\n• Exile all cards from all opponents' graveyards, then create X 0/1 black Thrull creature tokens, where X is the greatest power among creature cards exiled this way.

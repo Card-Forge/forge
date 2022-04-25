@@ -1,0 +1,8 @@
+Name:Kaito's Pursuit
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Player | TgtPrompt$ Select a player | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBPumpAll | SpellDescription$ Target player discards two cards. Ninjas and Rogues you control gain menace until end of turn. | StackDescription$ {p:Targeted} discards two cards.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Ninja.YouCtrl,Rogue.YouCtrl | KW$ Menace | StackDescription$ Ninjas and Rogues you control gain menace until end of turn.
+DeckHas:Ability$Discard
+DeckHints:Type$Ninja|Rogue
+Oracle:Target player discards two cards. Ninjas and Rogues you control gain menace until end of turn. (They can't be blocked except by two or more creatures.)

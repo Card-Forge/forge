@@ -11,6 +11,7 @@ import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 
 public class CountersPutAllEffect extends SpellAbilityEffect  {
 
@@ -22,15 +23,18 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
         final String zone = sa.getParamOrDefault("ValidZone", "Battlefield");
 
-        sb.append("Put ").append(amount).append(" ").append(cType.getName()).append(" counter");
-        if (amount != 1) {
-            sb.append("s");
-        }
-        sb.append(" on each valid ");
-        if (zone.matches("Battlefield")) {
-            sb.append("permanent.");
+        sb.append("Put ");
+        sb.append(Lang.nounWithNumeralExceptOne(amount, cType.getName().toLowerCase() + " counter"));
+        sb.append(" on each ");
+        if (sa.hasParam("ValidCardsDesc")) {
+            sb.append(sa.getParam("ValidCardsDesc")).append(".");
         } else {
-            sb.append("card in ").append(zone).append(".");
+            sb.append("valid ");
+            if (zone.matches("Battlefield")) {
+                sb.append("permanent.");
+            } else {
+                sb.append("card in ").append(zone).append(".");
+            }
         }
 
         return sb.toString();
@@ -40,11 +44,10 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
-        final String type = sa.getParam("CounterType");
+        final CounterType type = CounterType.getType(sa.getParam("CounterType"));
         final int counterAmount = AbilityUtils.calculateAmount(host, sa.getParam("CounterNum"), sa);
         final String valid = sa.getParam("ValidCards");
         final ZoneType zone = sa.hasParam("ValidZone") ? ZoneType.smartValueOf(sa.getParam("ValidZone")) : ZoneType.Battlefield;
-        final boolean etbcounter = sa.hasParam("ETB");
         final Game game = activator.getGame();
 
         if (counterAmount <= 0) {
@@ -67,12 +70,29 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         for (final Card tgtCard : cards) {
-            if (etbcounter) {
-                tgtCard.addEtbCounter(CounterType.getType(type), counterAmount, placer);
-            } else {
-                tgtCard.addCounter(CounterType.getType(type), counterAmount, placer, table);
+            tgtCard.addCounter(type, counterAmount, placer, table);
+        }
+
+        if (sa.hasParam("ValidCards2") || sa.hasParam("CounterType2") || sa.hasParam("CounterNum2")) {
+            final CounterType type2 = sa.hasParam("CounterType2") ?
+                    CounterType.getType(sa.getParam("CounterType2")) : type;
+            final ZoneType zone2 = sa.hasParam("ValidZone2") ?
+                    ZoneType.smartValueOf(sa.getParam("ValidZone2")) : zone;
+            if (sa.hasParam("ValidCards2")) {
+                cards = CardLists.getValidCards(game.getCardsIn(zone2), sa.getParam("ValidCards2"),
+                        host.getController(), host, sa);
+                if (sa.usesTargeting()) {
+                    cards = CardLists.filterControlledBy(cards, sa.getTargets().getFirstTargetedPlayer());
+                }
+            }
+            final int counterAmount2 = sa.hasParam("CounterNum2") ?
+                    AbilityUtils.calculateAmount(host, sa.getParam("CounterNum2"), sa) : counterAmount;
+
+            for (final Card tgtCard : cards) {
+                tgtCard.addCounter(type2, counterAmount2, placer, table);
             }
         }
+
         table.replaceCounterEffect(game, sa, true);
     }
 

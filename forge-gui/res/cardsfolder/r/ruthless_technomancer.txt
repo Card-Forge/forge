@@ -1,0 +1,13 @@
+Name:Ruthless Technomancer
+ManaCost:3 B
+Types:Creature Human Wizard
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice another creature you control. If you do, create a number of Treasure tokens equal to that creature's power.
+SVar:TrigToken:AB$ Token | Cost$ Sac<1/Creature.Other/another creature you control> | TokenScript$ c_a_treasure_sac | TokenAmount$ Y
+SVar:Y:Sacrificed$CardPower
+A:AB$ ChangeZone | Cost$ XCantBe0 2 B Sac<X/Artifact> | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.powerLEX+YouOwn | TgtPrompt$ Select target creature with power X or less | SpellDescription$ Return target creature card with power X or less from your graveyard to the battlefield. X can't be 0.
+SVar:X:Count$xPaid
+DeckHas:Ability$Sacrifice|Token|Graveyard & Type$Treasure|Artifact
+DeckHints:Type$Artifact
+SVar:AIPreference:SacCost$Artifact.cmcLE1
+Oracle:When Ruthless Technomancer enters the battlefield, you may sacrifice another creature you control. If you do, create a number of Treasure tokens equal to that creature's power.\n{2}{B}, Sacrifice X artifacts: Return target creature card with power X or less from your graveyard to the battlefield. X can't be 0.

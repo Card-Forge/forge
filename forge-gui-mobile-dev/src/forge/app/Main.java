@@ -1,27 +1,8 @@
 package forge.app;
 
-import java.awt.Desktop;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import javax.imageio.ImageIO;
-
-import com.badlogic.gdx.graphics.glutils.HdpiMode;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
-
+import com.badlogic.gdx.backends.lwjgl3.*;
+import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import forge.Forge;
 import forge.assets.AssetsDownloader;
 import forge.interfaces.IDeviceAdapter;
@@ -31,6 +12,15 @@ import forge.util.FileUtil;
 import forge.util.OperatingSystem;
 import forge.util.RestartUtil;
 import forge.util.Utils;
+import org.apache.commons.cli.*;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class Main {
     public static void main(String[] args) {
@@ -106,6 +96,50 @@ public class Main {
             config.setAutoIconify(true); //fix alt-tab when running fullscreen
         }
         config.setTitle("Forge");
+        config.setWindowListener(new Lwjgl3WindowListener() {
+            @Override
+            public void created(Lwjgl3Window lwjgl3Window) {
+
+            }
+
+            @Override
+            public void iconified(boolean b) {
+
+            }
+
+            @Override
+            public void maximized(boolean b) {
+
+            }
+
+            @Override
+            public void focusLost() {
+
+            }
+
+            @Override
+            public void focusGained() {
+
+            }
+
+            @Override
+            public boolean closeRequested() {
+                //use the device adpater to exit properly
+                if (Forge.safeToClose)
+                    Forge.exit(true);
+                return false;
+            }
+
+            @Override
+            public void filesDropped(String[] strings) {
+
+            }
+
+            @Override
+            public void refreshRequested() {
+
+            }
+        });
         if (desktopMode)
             config.setHdpiMode(HdpiMode.Logical);
 

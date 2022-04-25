@@ -2,7 +2,7 @@ Name:Orochi Eggwatcher
 ManaCost:2 G
 Types:Creature Snake Shaman
 PT:1/1
-A:AB$ Token | Cost$ 2 G T | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ g_1_1_snake | LegacyImage$ g 1 1 snake chk | SubAbility$ DBFlip | SpellDescription$ Create a 1/1 green Snake creature token. If you control ten or more creatures, flip CARDNAME.
+A:AB$ Token | Cost$ 2 G T | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ g_1_1_snake | SubAbility$ DBFlip | SpellDescription$ Create a 1/1 green Snake creature token. If you control ten or more creatures, flip CARDNAME.
 SVar:DBFlip:DB$ SetState | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | Mode$ Flip
 SVar:X:Count$Valid Creature.YouCtrl
 AlternateMode:Flip

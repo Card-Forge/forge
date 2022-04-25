@@ -1,7 +1,0 @@
-[format]
-Name:China Arena Standard, 2/14/19
-Type:Historic
-Subtype:Standard
-Effective:2019-02-14
-Sets:XLN, RIX, DOM, GS1, M19, GRN, G18, RNA
-Banned:Nexus of Fate; Rampaging Ferocidon

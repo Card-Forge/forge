@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="53">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="4425" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxz5mNgcB7FGNgNiB9iwa40ttcFiLEBp1F7qYpX8DIwLAXiZbwQ+5ZA+ct56ZO+YP6mtT/paS8ozzwB4sdY6EdQex/gkAfR5OYtbGmohhd7usImTm5YwOxt5GdgaCIBN/NTx155AQYGBRKwosCovaP2jto7au/A2LsXaM4+LFgVh/h+KtmLCygJ4JcftZc4DGtLYcOg9hXI3iV41NCizQUKC5C9A9G+Gsr2AgDO0wnp
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt0cEJACAMBME0YMvWnnd+Ioj3mKlgYasA4N5evwumtB7OJb1LagF4qQHcQwIt
+  </data>
+ </layer>
+ <layer id="5" name="AboveSprites" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztwQEBAAAAgiD/r25IQAEAAPBoDhAAAQ==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../../obj/gold.tx" x="323" y="219"/>
+  <object id="49" template="../../obj/gold.tx" x="106" y="216"/>
+  <object id="50" template="../../obj/enemy.tx" x="198" y="153" width="32" height="32">
+   <properties>
+    <property name="enemy" value="Griselbrand"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/entry_up.tx" x="209" y="480">
+   <properties>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/treasure.tx" x="208" y="80">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;life&quot;,
+    &quot;count&quot;: 2
+  }
+]
+</property>
+    <property name="sprite" value="sprites/2life.atlas"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

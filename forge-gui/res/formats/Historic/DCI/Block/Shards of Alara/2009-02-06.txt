@@ -1,5 +1,5 @@
 [format]
-Name:Shards of Alara Block, Conflux
+Name:Block: Shards of Alara (CFX)
 Type:Historic
 Subtype:Block
 Effective:2009-02-06

@@ -1,0 +1,7 @@
+Name:Arc Spitter
+ManaCost:1
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ ABDealDamage | Description$ Equipped creature has "{1}: This creature deals 1 damage to target creature that's blocking it."
+SVar:ABDealDamage:AB$ DealDamage | Cost$ 1 | ValidTgts$ Creature.blockingSource | TgtPrompt$ Select target blocking creature | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature that's blocking it.
+K:Equip:1
+Oracle:Equipped creature has "{1}: This creature deals 1 damage to target creature that's blocking it."\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

@@ -1,0 +1,116 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "image": "ui/title_bg.png",
+      "width": 480,
+      "height": 270
+    },
+    {
+      "type": "Image",
+      "image": "ui/equipment.png",
+      "x": 8,
+      "y": 8,
+      "width": 129,
+      "height": 243
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Neck",
+      "style": "item_frame",
+      "width": 20,
+      "height": 20,
+      "x": 62,
+      "y": 40
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Body",
+      "style": "item_frame",
+      "width": 20,
+      "height": 20,
+      "x": 62,
+      "y": 85
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Boots",
+      "style": "item_frame",
+      "width": 20,
+      "height": 20,
+      "x": 62,
+      "y": 220
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Left",
+      "style": "item_frame",
+      "width": 20,
+      "height": 20,
+      "x": 17,
+      "y": 130
+    },
+    {
+      "type": "ImageButton",
+      "name": "Equipment_Right",
+      "style": "item_frame",
+      "width": 20,
+      "height": 20,
+      "x": 107,
+      "y": 130
+    },
+    {
+      "type": "Scroll",
+      "name": "inventory",
+      "x": 145,
+      "y": 110,
+      "width": 330,
+      "height": 100
+    },
+    {
+      "type": "Window",
+      "x": 145,
+      "y": 8,
+      "width": 330,
+      "height": 98
+    },
+    {
+      "type": "Label",
+      "name": "item_description",
+      "x": 155,
+      "y": 12,
+      "width": 310,
+      "height": 94
+    },
+    {
+      "type": "TextButton",
+      "name": "return",
+      "text": "Back",
+      "width": 60,
+      "height": 30,
+      "x": 400,
+      "y": 222
+    },
+    {
+      "type": "TextButton",
+      "name": "equip",
+      "text": "Equip",
+      "width": 60,
+      "height": 30,
+      "x": 320,
+      "y": 222
+    },
+    {
+      "type": "TextButton",
+      "name": "delete",
+      "text": "Discard",
+      "width": 60,
+      "height": 30,
+      "x": 240,
+      "y": 222
+    }
+  ]
+}

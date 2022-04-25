@@ -3,7 +3,6 @@ package forge.ai;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +52,6 @@ import forge.game.cost.CostPartMana;
 import forge.game.keyword.KeywordInterface;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaConversionMatrix;
-import forge.game.mana.ManaCostBeingPaid;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
@@ -90,10 +88,20 @@ import forge.util.collect.FCollectionView;
 public class PlayerControllerAi extends PlayerController {
     private final AiController brains;
 
+    private boolean pilotsNonAggroDeck = false;
+
     public PlayerControllerAi(Game game, Player p, LobbyPlayer lp) {
         super(game, p, lp);
 
         brains = new AiController(p, game);
+    }
+
+    public boolean pilotsNonAggroDeck() {
+        return pilotsNonAggroDeck;
+    }
+
+    public void setupAutoProfile(Deck deck) {
+        pilotsNonAggroDeck = deck.getName().contains("Control") || Deck.getAverageCMC(deck) > 3;
     }
 
     public void allowCheatShuffle(boolean value) {
@@ -242,11 +250,11 @@ public class PlayerControllerAi extends PlayerController {
         SpellAbility selected;
         do {
             selected = chooseSingleSpellForEffect(remaining, sa, title, params);
-            if ( selected != null ) {
+            if (selected != null) {
                 remaining.remove(selected);
                 selecteds.add(selected);
             }
-        } while ( (selected != null ) && (selecteds.size() < num) );
+        } while (selected != null && selecteds.size() < num);
         return selecteds;
     }
 
@@ -368,7 +376,7 @@ public class PlayerControllerAi extends PlayerController {
         }
 
         // put the rest on top in random order
-        Collections.shuffle(toTop, MyRandom.getRandom());
+        CardLists.shuffle(toTop);
         return ImmutablePair.of(toTop, toBottom);
     }
 
@@ -394,7 +402,7 @@ public class PlayerControllerAi extends PlayerController {
             }
         }
 
-        Collections.shuffle(toTop, MyRandom.getRandom());
+        CardLists.shuffle(toTop);
         return ImmutablePair.of(toTop, toGraveyard);
     }
 
@@ -416,13 +424,13 @@ public class PlayerControllerAi extends PlayerController {
 
         if (destinationZone == ZoneType.Graveyard) {
             // In presence of Volrath's Shapeshifter in deck, try to place the best creature on top of the graveyard
-            if (!CardLists.filter(getGame().getCardsInGame(), new Predicate<Card>() {
+            if (Iterables.any(getGame().getCardsInGame(), new Predicate<Card>() {
                 @Override
                 public boolean apply(Card card) {
                     // need a custom predicate here since Volrath's Shapeshifter may have a different name OTB
                     return card.getOriginalState(CardStateName.Original).getName().equals("Volrath's Shapeshifter");
                 }
-            }).isEmpty()) {
+            })) {
                 int bestValue = 0;
                 Card bestCreature = null;
                 for (Card c : cards) {
@@ -463,7 +471,7 @@ public class PlayerControllerAi extends PlayerController {
                 }
             }
 
-            int landsOTB = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA).size();
+            int landsOTB = CardLists.count(p.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS_PRODUCING_MANA);
 
             if (!p.isOpponentOf(player)) {
                 if (landsOTB <= 2) {
@@ -545,12 +553,6 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public TargetChoices chooseNewTargetsFor(SpellAbility ability, Predicate<GameObject> filter, boolean optional) {
-        // AI currently can't do this. But when it can it will need to be based on Ability API
-        return null;
-    }
-
-    @Override
     public CardCollectionView chooseCardsToDiscardUnlessType(int num, CardCollectionView hand, String uType, SpellAbility sa) {
         String [] splitUTypes = uType.split(",");
         CardCollection cardsOfType = new CardCollection();
@@ -618,7 +620,7 @@ public class PlayerControllerAi extends PlayerController {
             hand.removeAll(toReturn);
 
             CardCollection landsInHand = CardLists.filter(hand, Presets.LANDS);
-            int numLandsInHand = landsInHand.size() - CardLists.filter(toReturn, Presets.LANDS).size();
+            int numLandsInHand = landsInHand.size() - CardLists.count(toReturn, Presets.LANDS);
 
             // If we're flooding with lands, get rid of the worst land we have
             if (numLandsInHand > 0 && numLandsInHand > numLandsDesired) {
@@ -696,6 +698,7 @@ public class PlayerControllerAi extends PlayerController {
         // TODO replace with EmptySa
         final Ability ability = new AbilityStatic(c, cost, null) { @Override public void resolve() {} };
         ability.setActivatingPlayer(c.getController());
+        ability.setCardState(sa.getCardState());
 
         // FIXME: This is a hack to check if the AI can play the "exile from library" pay costs (Cumulative Upkeep,
         // e.g. Thought Lash). We have to do it and bail early if the AI can't pay, because otherwise the AI will
@@ -925,6 +928,10 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt,
             Map<String, Object> params) {
+        // short cut if there is no options to choose
+        if (options.size() <= 1) {
+            return Iterables.getFirst(options, null);
+        }
         ApiType api = sa.getApi();
         if (null == api) {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
@@ -994,10 +1001,7 @@ public class PlayerControllerAi extends PlayerController {
         }
         final String logic = sa.getParam("AILogic");
         if (logic == null || logic.equals("MostProminentHumanCreatures")) {
-            CardCollection list = new CardCollection();
-            for (Player opp : player.getOpponents()) {
-                list.addAll(opp.getCreaturesInPlay());
-            }
+            CardCollection list = player.getOpponents().getCreaturesInPlay();
             if (list.isEmpty()) {
                 list = CardLists.filterControlledBy(getGame().getCardsInGame(), player.getOpponents());
             }
@@ -1016,6 +1020,7 @@ public class PlayerControllerAi extends PlayerController {
         emptyAbility.setActivatingPlayer(player);
         emptyAbility.setTriggeringObjects(sa.getTriggeringObjects());
         emptyAbility.setSVars(sa.getSVars());
+        emptyAbility.setCardState(sa.getCardState());
         emptyAbility.setXManaCostPaid(sa.getRootAbility().getXManaCostPaid());
         if (ComputerUtilCost.willPayUnlessCost(sa, player, cost, alreadyPaid, allPayers) && ComputerUtilCost.canPayCost(emptyAbility, player, true)) {
             ComputerUtil.playNoStack(player, emptyAbility, getGame(), true); // AI needs something to resolve to pay that cost
@@ -1035,9 +1040,9 @@ public class PlayerControllerAi extends PlayerController {
                 if (sa.isCopied()) {
                     if (sa.isSpell()) {
                         if (!sa.getHostCard().isInZone(ZoneType.Stack)) {
-                            sa.setHostCard(player.getGame().getAction().moveToStack(sa.getHostCard(), sa));
+                            sa.setHostCard(getGame().getAction().moveToStack(sa.getHostCard(), sa));
                         } else {
-                            player.getGame().getStackZone().add(sa.getHostCard());
+                            getGame().getStackZone().add(sa.getHostCard());
                         }
                     }
 
@@ -1048,13 +1053,13 @@ public class PlayerControllerAi extends PlayerController {
                     */
                     if (sa.isMayChooseNewTargets() && !sa.setupTargets()) {
                         if (sa.isSpell()) {
-                            player.getGame().getAction().ceaseToExist(sa.getHostCard(), false);
+                            getGame().getAction().ceaseToExist(sa.getHostCard(), false);
                         }
                         continue;
                     }
                 }
                 // need finally add the new spell to the stack
-                player.getGame().getStack().add(sa);
+                getGame().getStack().add(sa);
             }
         }
     }
@@ -1100,6 +1105,12 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public TargetChoices chooseNewTargetsFor(SpellAbility ability, Predicate<GameObject> filter, boolean optional) {
+        // AI currently can't do this. But when it can it will need to be based on Ability API
+        return null;
+    }
+
+    @Override
     public boolean chooseCardsPile(SpellAbility sa, CardCollectionView pile1, CardCollectionView pile2, String faceUp) {
         if (faceUp.equals("True")) {
             // AI will choose the first pile if it is larger or the same
@@ -1132,6 +1143,9 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public Map<DeckSection, List<? extends PaperCard>> complainCardsCantPlayWell(Deck myDeck) {
+        // TODO check if profile detection set to Auto
+        setupAutoProfile(myDeck);
+
         return brains.complainCardsCantPlayWell(myDeck);
     }
 
@@ -1148,9 +1162,7 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public boolean payManaCost(ManaCost toPay, CostPartMana costPartMana, SpellAbility sa, String prompt /* ai needs hints as well */, ManaConversionMatrix matrix, boolean effect) {
-        // TODO Auto-generated method stub
-        ManaCostBeingPaid cost = !effect ? ComputerUtilMana.calculateManaCost(sa, false, 0) : new ManaCostBeingPaid(toPay);
-        return ComputerUtilMana.payManaCost(cost, sa, player, effect);
+        return ComputerUtilMana.payManaCost(player, sa, effect);
     }
 
     @Override
@@ -1200,9 +1212,15 @@ public class PlayerControllerAi extends PlayerController {
     public String chooseCardName(SpellAbility sa, Predicate<ICardFace> cpp, String valid, String message) {
         if (sa.hasParam("AILogic")) {
             CardCollectionView aiLibrary = player.getCardsIn(ZoneType.Library);
-            CardCollectionView oppLibrary = player.getWeakestOpponent().getCardsIn(ZoneType.Library);
+            CardCollectionView oppLibrary = player.getStrongestOpponent().getCardsIn(ZoneType.Library);
             final Card source = sa.getHostCard();
             final String logic = sa.getParam("AILogic");
+
+            // Filter for valid options only
+            if (!valid.isEmpty()) {
+                aiLibrary = CardLists.getValidCards(aiLibrary, valid, source.getController(), source, sa);
+                oppLibrary = CardLists.getValidCards(oppLibrary, valid, source.getController(), source, sa);
+            }
 
             if (source != null && source.getState(CardStateName.Original).hasIntrinsicKeyword("Hidden agenda")) {
                 // If any Conspiracies are present, try not to choose the same name twice
@@ -1335,8 +1353,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen,
-            List<OptionalCostValue> optionalCostValues) {
+    public List<OptionalCostValue> chooseOptionalCosts(SpellAbility chosen, List<OptionalCostValue> optionalCostValues) {
         List<OptionalCostValue> chosenOptCosts = Lists.newArrayList();
         Cost costSoFar = chosen.getPayCosts().copy();
 

@@ -4,7 +4,7 @@ Types:Creature Zombie Elf
 PT:3/3
 K:Deathtouch
 K:Encore:5 B B
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPump | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, non-Elf creatures get -3/-3 until end of turn.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPump | TriggerDescription$ When CARDNAME dies, non-Elf creatures get -3/-3 until end of turn.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.nonElf | NumAtt$ -3 | NumDef$ -3
 DeckHints:Type$Elf
 DeckHas:Ability$Token

@@ -48,6 +48,7 @@ public final class CardRules implements ICardCharacteristics {
     private ColorSet deckbuildingColors;
     private String meldWith;
     private String partnerWith;
+    private boolean custom;
 
     private CardRules(ICardFace[] faces, CardSplitType altMode, CardAiHints cah) {
         splitType = altMode;
@@ -93,7 +94,7 @@ public final class CardRules implements ICardCharacteristics {
         int len = oracleText.length();
         for (int i = 0; i < len; i++) {
             char c = oracleText.charAt(i); // This is to avoid needless allocations performed by toCharArray()
-            switch(c) {
+            switch (c) {
                 case('('): isReminder = i > 0; break; // if oracle has only reminder, consider it valid rules (basic and true lands need this)
                 case(')'): isReminder = false; break;
                 case('{'): isSymbol = true; break;
@@ -132,7 +133,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public String getName() {
-        switch(splitType.getAggregationMethod()) {
+        switch (splitType.getAggregationMethod()) {
             case COMBINE:
                 return mainPart.getName() + " // " + otherPart.getName();
             default:
@@ -147,9 +148,12 @@ public final class CardRules implements ICardCharacteristics {
         return aiHints;
     }
 
+    public boolean isCustom() { return custom; }
+    public void setCustom() { custom = true;   }
+
     @Override
     public CardType getType() {
-        switch(splitType.getAggregationMethod()) {
+        switch (splitType.getAggregationMethod()) {
             case COMBINE: // no cards currently have different types
                 return CardType.combine(mainPart.getType(), otherPart.getType());
             default:
@@ -159,7 +163,7 @@ public final class CardRules implements ICardCharacteristics {
 
     @Override
     public ManaCost getManaCost() {
-        switch(splitType.getAggregationMethod()) {
+        switch (splitType.getAggregationMethod()) {
         case COMBINE:
             return ManaCost.combine(mainPart.getManaCost(), otherPart.getManaCost());
         default:
@@ -169,7 +173,7 @@ public final class CardRules implements ICardCharacteristics {
 
     @Override
     public ColorSet getColor() {
-        switch(splitType.getAggregationMethod()) {
+        switch (splitType.getAggregationMethod()) {
         case COMBINE:
             return ColorSet.fromMask(mainPart.getColor().getColor() | otherPart.getColor().getColor());
         default:
@@ -186,7 +190,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean canCastWithAvailable(byte colorCode) {
-        switch(splitType.getAggregationMethod()) {
+        switch (splitType.getAggregationMethod()) {
         case COMBINE:
             return canCastFace(mainPart, colorCode) || canCastFace(otherPart, colorCode);
         default:
@@ -202,7 +206,7 @@ public final class CardRules implements ICardCharacteristics {
 
     @Override
     public String getOracleText() {
-        switch(splitType.getAggregationMethod()) {
+        switch (splitType.getAggregationMethod()) {
         case COMBINE:
             return mainPart.getOracleText() + "\r\n\r\n" + otherPart.getOracleText();
         default:

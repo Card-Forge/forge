@@ -46,9 +46,13 @@ public class RevealHandEffect extends SpellAbilityEffect {
                 }
                 CardCollectionView hand = p.getCardsIn(ZoneType.Hand);
                 if (sa.hasParam("RevealType")) {
-                    hand = CardLists.filter(hand, CardPredicates.isType(sa.getParam("RevealType")));
+                    hand = CardLists.getType(hand, sa.getParam("RevealType"));
                 }
-                sa.getActivatingPlayer().getController().reveal(hand, ZoneType.Hand, p);
+                if (sa.hasParam("Look")) {
+                    sa.getActivatingPlayer().getController().reveal(hand, ZoneType.Hand, p);
+                } else {
+                    host.getGame().getAction().reveal(hand, p);
+                }
                 if (sa.hasParam("RememberRevealed")) {
                     host.addRemembered(hand);
                 }

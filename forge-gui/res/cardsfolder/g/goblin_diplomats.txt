@@ -2,7 +2,7 @@ Name:Goblin Diplomats
 ManaCost:1 R
 Types:Creature Goblin
 PT:2/1
-A:AB$ Effect | Cost$ T | Name$ Goblin Diplomats Effect | StaticAbilities$ KWPump | SpellDescription$ Each creature attacks this turn if able.
-SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Each creature attacks this turn if able.
+A:AB$ Effect | Cost$ T | StaticAbilities$ MustAttack | SpellDescription$ Each creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature | Description$ Each creature attacks this turn if able.
 AI:RemoveDeck:All
 Oracle:{T}: Each creature attacks this turn if able.

@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import forge.game.event.GameEventDayTimeChanged;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -55,6 +54,7 @@ import forge.game.card.CardView;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.event.Event;
+import forge.game.event.GameEventDayTimeChanged;
 import forge.game.event.GameEventGameOutcome;
 import forge.game.phase.Phase;
 import forge.game.phase.PhaseHandler;
@@ -861,7 +861,7 @@ public class Game {
             getNextPlayerAfter(p).initPlane();
         }
 
-        if (p != null && p.isMonarch()) {
+        if (p.isMonarch()) {
             // if the player who lost was the Monarch, someone else will be the monarch
             // TODO need to check rules if it should try the next player if able
             if (p.equals(getPhaseHandler().getPlayerTurn())) {
@@ -1093,6 +1093,8 @@ public class Game {
 
     public void onCleanupPhase() {
         clearCounterAddedThisTurn();
+        // Reset the attackers this turn/last turn
+        resetPlayersAttackedOnNextTurn();
         // some cards need this info updated even after a player lost, so don't skip them
         for (Player player : getRegisteredPlayers()) {
             player.onCleanupPhase();

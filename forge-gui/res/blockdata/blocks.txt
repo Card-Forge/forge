@@ -100,3 +100,6 @@ Modern Horizons 2, 3/6/MH2, MH2
 Adventures in the Forgotten Realms, 3/6/AFR, AFR
 Innistrad: Midnight Hunt, 3/6/MID, MID
 Innistrad: Crimson Vow, 3/6/VOW, VOW
+Innistrad: Double Feature, 3/6/MID, DBL
+Kamigawa: Neon Dynasty, 3/6/NEO, NEO
+Streets of New Capenna, 3/6/SNC, SNC

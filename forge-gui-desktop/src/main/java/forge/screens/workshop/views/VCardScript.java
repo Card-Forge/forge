@@ -36,6 +36,7 @@ public enum VCardScript implements IVDoc<CCardScript> {
     private final FScrollPane scrollScript;
     private final StyledDocument doc;
     private final Style error;
+    private final Style empty;
 
     //========== Constructor
     VCardScript() {
@@ -47,6 +48,7 @@ public enum VCardScript implements IVDoc<CCardScript> {
         error = doc.addStyle("error", null);
         error.addAttribute(StyleConstants.Background, Color.red);
         error.addAttribute(StyleConstants.Bold, Boolean.valueOf(true));
+        empty = doc.addStyle("empty", null);
     }
 
     public JTextPane getTxtScript() {
@@ -59,6 +61,10 @@ public enum VCardScript implements IVDoc<CCardScript> {
 
     public Style getErrorStyle() {
         return error;
+    }
+
+    public Style getEmptyStyle() {
+        return empty;
     }
 
     //========== Overridden methods

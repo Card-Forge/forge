@@ -52,7 +52,11 @@ public class FSkinFont {
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.FONTS_DIR);
     }
-
+    public static void clear() {
+        fonts.clear();
+        //reset maxFontSize and Preload
+        preloadAll("");
+    }
     public static FSkinFont get(final int unscaledSize) {
         return _get((int)Utils.scale(unscaledSize));
     }
@@ -391,7 +395,7 @@ public class FSkinFont {
         }
 
         String fontName = "f" + fontSize;
-        if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP")) {
+        if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
             fontName += Forge.locale;
         }
         FileHandle fontFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + fontName + ".fnt");
@@ -404,7 +408,7 @@ public class FSkinFont {
                 }
             });
         } else {
-            if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP")) {
+            if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
                 String ttfName = Forge.CJK_Font;
                 FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
                 if (ttfFile != null && ttfFile.exists()) {

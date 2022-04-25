@@ -4,9 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -44,8 +42,26 @@ public class Graphics {
     private final ShaderProgram shaderWarp = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("warp.frag"));
     private final ShaderProgram shaderUnderwater = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("underwater.frag"));
 
+    private Texture dummyTexture = null;
+
     public Graphics() {
         ShaderProgram.pedantic = false;
+    }
+
+    public ShaderProgram getShaderOutline() {
+        return shaderOutline;
+    }
+
+    public ShaderProgram getShaderGrayscale() {
+        return shaderGrayscale;
+    }
+
+    public ShaderProgram getShaderWarp() {
+        return shaderWarp;
+    }
+
+    public ShaderProgram getShaderUnderwater() {
+        return shaderUnderwater;
     }
 
     public void begin(float regionWidth0, float regionHeight0) {
@@ -71,6 +87,7 @@ public class Graphics {
         shaderGrayscale.dispose();
         shaderUnderwater.dispose();
         shaderWarp.dispose();
+        if(dummyTexture != null) dummyTexture.dispose();
     }
 
     public SpriteBatch getBatch() {
@@ -753,11 +770,49 @@ public class Graphics {
             setAlphaComposite(oldalpha);
         }
     }
+    public void drawGrayTransitionImage(Texture image, float x, float y, float w, float h, boolean withDarkOverlay, float percentage) {
+        batch.end();
+        shaderGrayscale.bind();
+        shaderGrayscale.setUniformf("u_grayness", percentage);
+        batch.setShader(shaderGrayscale);
+        batch.begin();
+        //draw gray
+        batch.draw(image, x, y, w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+        if(withDarkOverlay){
+            float oldalpha = alphaComposite;
+            setAlphaComposite(0.4f);
+            fillRect(Color.BLACK, x, y, w, h);
+            setAlphaComposite(oldalpha);
+        }
+    }
+    public void drawGrayTransitionImage(TextureRegion image, float x, float y, float w, float h, boolean withDarkOverlay, float percentage) {
+        batch.end();
+        shaderGrayscale.bind();
+        shaderGrayscale.setUniformf("u_grayness", percentage);
+        batch.setShader(shaderGrayscale);
+        batch.begin();
+        //draw gray
+        batch.draw(image, x, y, w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+        if(withDarkOverlay){
+            float oldalpha = alphaComposite;
+            setAlphaComposite(0.4f);
+            fillRect(Color.BLACK, x, y, w, h);
+            setAlphaComposite(oldalpha);
+        }
+    }
     public void drawWarpImage(Texture image, float x, float y, float w, float h, float time) {
         batch.end();
         shaderWarp.bind();
         shaderWarp.setUniformf("u_amount", 0.2f);
-        shaderWarp.setUniformf("u_speed", 0.6f);
+        shaderWarp.setUniformf("u_speed", 0.5f);
         shaderWarp.setUniformf("u_time", time);
         batch.setShader(shaderWarp);
         batch.begin();
@@ -971,58 +1026,63 @@ public class Graphics {
         drawText(text, font, skinColor.getColor(), x, y, w, h, wrap, horzAlignment, centerVertically);
     }
     public void drawText(String text, FSkinFont font, Color color, float x, float y, float w, float h, boolean wrap, int horzAlignment, boolean centerVertically) {
-        if (text == null)
-            return;
-        if (alphaComposite < 1) {
-            color = FSkinColor.alphaColor(color, color.a * alphaComposite);
-        }
-        if (color.a < 1) { //enable blending so alpha colored shapes work properly
-            Gdx.gl.glEnable(GL_BLEND);
-        }
+        try {
+            if (text == null)
+                return;
+            if (alphaComposite < 1) {
+                color = FSkinColor.alphaColor(color, color.a * alphaComposite);
+            }
+            if (color.a < 1) { //enable blending so alpha colored shapes work properly
+                Gdx.gl.glEnable(GL_BLEND);
+            }
 
-        TextBounds textBounds;
-        if (wrap) {
-            textBounds = font.getWrappedBounds(text, w);
-        }
-        else {
-            textBounds = font.getMultiLineBounds(text);
-        }
-
-        boolean needClip = false;
-
-        while (textBounds.width > w || textBounds.height > h) {
-            if (font.canShrink()) { //shrink font to fit if possible
-                font = font.shrink();
-                if (wrap) {
-                    textBounds = font.getWrappedBounds(text, w);
-                }
-                else {
-                    textBounds = font.getMultiLineBounds(text);
-                }
+            TextBounds textBounds;
+            if (wrap) {
+                textBounds = font.getWrappedBounds(text, w);
             }
             else {
-                needClip = true;
-                break;
+                textBounds = font.getMultiLineBounds(text);
             }
-        }
 
-        if (needClip) { //prevent text flowing outside region if couldn't shrink it to fit
-            startClip(x, y, w, h);
-        }
+            boolean needClip = false;
 
-        float textHeight = textBounds.height;
-        if (h > textHeight && centerVertically) {
-            y += (h - textHeight) / 2;
-        }
+            while (textBounds.width > w || textBounds.height > h) {
+                if (font.canShrink()) { //shrink font to fit if possible
+                    font = font.shrink();
+                    if (wrap) {
+                        textBounds = font.getWrappedBounds(text, w);
+                    }
+                    else {
+                        textBounds = font.getMultiLineBounds(text);
+                    }
+                }
+                else {
+                    needClip = true;
+                    break;
+                }
+            }
 
-        font.draw(batch, text, color, adjustX(x), adjustY(y, 0), w, wrap, horzAlignment);
+            if (needClip) { //prevent text flowing outside region if couldn't shrink it to fit
+                startClip(x, y, w, h);
+            }
 
-        if (needClip) {
-            endClip();
-        }
+            float textHeight = textBounds.height;
+            if (h > textHeight && centerVertically) {
+                y += (h - textHeight) / 2;
+            }
 
-        if (color.a < 1) {
-            Gdx.gl.glDisable(GL_BLEND);
+            font.draw(batch, text, color, adjustX(x), adjustY(y, 0), w, wrap, horzAlignment);
+
+            if (needClip) {
+                endClip();
+            }
+
+            if (color.a < 1) {
+                Gdx.gl.glDisable(GL_BLEND);
+            }
+        } catch (Exception e) {
+            //shouldnt be here but force English on CJK Error
+            Forge.setForcedEnglishonCJKMissing();
         }
     }
 
@@ -1064,5 +1124,15 @@ public class Graphics {
         int c_b = Integer.parseInt(c.substring(4,6),16);
         int brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
         return  brightness > 155 ? Color.valueOf("#171717") : Color.valueOf("#fffffd");
+    }
+
+    public Texture getDummyTexture(){
+        if (dummyTexture == null){
+            Pixmap P = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+            P.setColor(1f,1f,1f,1f);
+            P.drawPixel(0, 0);
+            dummyTexture = new Texture(P);
+        }
+        return dummyTexture;
     }
 }

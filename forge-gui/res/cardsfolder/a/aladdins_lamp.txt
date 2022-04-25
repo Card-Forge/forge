@@ -5,7 +5,7 @@ A:AB$ StoreSVar | Cost$ XCantBe0 X T | SVar$ DigNum | Type$ Count | Expression$ 
 SVar:TheMagic:DB$ Effect | Name$ Aladdin's Wish | ReplacementEffects$ DrawReplace
 SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ AladdinDraw | Description$ The next time you would draw a card this turn, instead look at the top X cards of your library, put all but one of them on the bottom of your library in a random order, then draw a card.
 SVar:AladdinDraw:DB$ Dig | DigNum$ DigNum | ChangeNum$ AllButOne | RandomOrder$ True | DestinationZone$ Library | LibraryPosition$ -1 | DestinationZone2$ Library | LibraryPosition2$ 0 | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ ExileEffect
+SVar:DBDraw:DB$ Draw | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:X:Count$xPaid
 SVar:DigNum:Number$0

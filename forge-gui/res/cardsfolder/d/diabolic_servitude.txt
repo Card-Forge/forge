@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Desti
 SVar:TrigExileAndBounce:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBCleanupAndBounce
 SVar:DBCleanupAndBounce:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBBounceMe
 SVar:DBBounceMe:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand | Hidden$ True
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigExileCreature | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, exile the creature put onto the battlefield with CARDNAME.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigExileCreature | TriggerDescription$ When CARDNAME leaves the battlefield, exile the creature put onto the battlefield with CARDNAME.
 SVar:TrigExileCreature:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Exile | IsPresent$ Card.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Exile | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget remembered card if it goes into Exile.

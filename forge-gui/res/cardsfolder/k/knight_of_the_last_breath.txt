@@ -2,7 +2,7 @@ Name:Knight of the Last Breath
 ManaCost:5 W B
 Types:Creature Giant Knight
 PT:4/4
-A:AB$ Token | Cost$ 3 Sac<1/Creature.nonToken+Other/another nontoken creature> | TokenAmount$ 1 | TokenScript$ wb_1_1_spirit_flying | TokenOwner$ You | LegacyImage$ wb 1 1 spirit flying rna | SpellDescription$ Create a 1/1 white and black Spirit creature token with flying.
+A:AB$ Token | Cost$ 3 Sac<1/Creature.nonToken+Other/another nontoken creature> | TokenAmount$ 1 | TokenScript$ wb_1_1_spirit_flying | TokenOwner$ You | SpellDescription$ Create a 1/1 white and black Spirit creature token with flying.
 AI:RemoveDeck:Random
 K:Afterlife:3
 SVar:AIPreference:SacCost$Creature.cmcLE1

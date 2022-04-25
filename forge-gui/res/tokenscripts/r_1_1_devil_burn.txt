@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Creature Devil
 Colors:red
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DevilTrigDamage | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, it deals 1 damage to any target.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DevilTrigDamage | TriggerDescription$ When this creature dies, it deals 1 damage to any target.
 SVar:DevilTrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
 Oracle:When this creature dies, it deals 1 damage to any target.

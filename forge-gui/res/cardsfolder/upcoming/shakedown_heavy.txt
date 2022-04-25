@@ -1,0 +1,11 @@
+Name:Shakedown Heavy
+ManaCost:2 B
+Types:Creature Ogre Warrior
+PT:6/4
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ DefendingPlayer | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, defending player may have you draw a card. If they do, untap CARDNAME and remove it from combat.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ TrigUntap
+SVar:TrigUntap:DB$ Untap | Defined$ Self | SubAbility$ RemCombat
+SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Self
+SVar:HasAttackEffect:True
+Oracle:Menace\nWhenever Shakedown Heavy attacks, defending player may have you draw a card. If they do, untap Shakedown Heavy and remove it from combat.

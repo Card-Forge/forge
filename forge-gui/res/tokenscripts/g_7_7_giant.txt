@@ -1,6 +1,6 @@
 Name:Giant Token
-Colors:green
 ManaCost:no cost
-PT:7/7
+Colors:green
 Types:Creature Giant
+PT:7/7
 Oracle:

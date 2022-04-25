@@ -41,12 +41,12 @@ public class LearnAi extends SpellAbilityAi {
         CardCollection hand = CardLists.filter(options, CardPredicates.inZone(ZoneType.Hand));
         hand.remove(sa.getHostCard()); // this card will be used in the process, don't consider it for discard
 
-        CardCollection lessons = CardLists.filter(sideboard, CardPredicates.isType("Lesson"));
+        CardCollection lessons = CardLists.getType(sideboard, "Lesson");
         CardCollection goodDiscards = ((PlayerControllerAi)ai.getController()).getAi().getCardsToDiscard(1, 1, hand, sa);
 
         if (!lessons.isEmpty()) {
             return ComputerUtilCard.getBestAI(lessons);
-        } else if (!goodDiscards.isEmpty()) {
+        } else if (goodDiscards != null && !goodDiscards.isEmpty()) {
             return ComputerUtilCard.getWorstAI(goodDiscards);
         }
 

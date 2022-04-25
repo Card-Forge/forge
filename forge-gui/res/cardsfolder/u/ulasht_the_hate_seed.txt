@@ -4,7 +4,7 @@ Types:Legendary Creature Hellion Hydra
 PT:0/0
 K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each other red creature you control and a +1/+1 counter on it for each other green creature you control.
 A:AB$ DealDamage | Cost$ 1 SubCounter<1/P1P1> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 1 | SpellDescription$ Ulasht deals 1 damage to target creature.
-A:AB$ Token | Cost$ 1 SubCounter<1/P1P1> | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | LegacyImage$ g 1 1 saproling gpt | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
+A:AB$ Token | Cost$ 1 SubCounter<1/P1P1> | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ You | SpellDescription$ Create a 1/1 green Saproling creature token.
 SVar:X:Count$LastStateBattlefield Creature.YouCtrl+Red+Other/Plus.B
 SVar:B:Count$LastStateBattlefield Creature.YouCtrl+Green+Other
 SVar:NeedsToPlay:X GE3

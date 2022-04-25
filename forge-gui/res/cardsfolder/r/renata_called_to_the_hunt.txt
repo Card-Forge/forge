@@ -2,7 +2,7 @@ Name:Renata, Called to the Hunt
 ManaCost:2 G G
 Types:Legendary Enchantment Creature Demigod
 PT:*/3
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to your devotion to green.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ NICKNAME's power is equal to your devotion to green.
 SVar:X:Count$Devotion.Green
 SVar:BuffedBy:Permanent.Green
 K:ETBReplacement:Other:AddExtraCounter:Mandatory:Battlefield:Creature.Other+YouCtrl

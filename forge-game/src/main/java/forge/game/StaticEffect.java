@@ -242,7 +242,7 @@ public class StaticEffect {
             }
 
             // remove Types
-            if (hasParam("AddType") || hasParam("RemoveType")) {
+            if (hasParam("AddType") || hasParam("AddAllCreatureTypes") || hasParam("RemoveType")) {
                 // the view is updated in GameAction#checkStaticAbilities to avoid flickering
                 affectedCard.removeChangedCardTypes(getTimestamp(), ability.getId(), false);
             }
@@ -250,6 +250,11 @@ public class StaticEffect {
             // remove colors
             if (hasParam("AddColor") || hasParam("SetColor")) {
                 affectedCard.removeColor(getTimestamp(), ability.getId());
+            }
+
+            // remove changed name
+            if (hasParam("SetName") || hasParam("AddNames")) {
+                affectedCard.removeChangedName(timestamp, ability.getId());
             }
 
             // remove may look at
@@ -292,4 +297,4 @@ public class StaticEffect {
         makeMappedCopy(map).remove();
     }
 
-} // end class StaticEffect
+}

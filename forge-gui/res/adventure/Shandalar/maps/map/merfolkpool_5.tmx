@@ -7,7 +7,7 @@
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzFlVEOgzAIhvtuPYHxYutZzM5Vp3fbGvtn2CDQYTKSxgSBry1Q0hjCGs/rwei4f2nk7ZPgD/v5820lKz6I/aq6icSAXpJiz3E1nzb2FM97scTo4S5DCBvjA641Vg8XTNz1czj0G8nB3VzKxH3ONa+0pvb43Y+XyzGRx1y5lG05h8aVmJCWbTmzxkXt0j7i6pX2XeHvzj76td7LXr1ca61QpvfdyOTeJHYP08Jt2VfSw7RywV4Fu6t683Lvln9ypTnJzUAq2pyV1hs4l3K6
+   eJzFlVEOwyAIQP2vPYHZxeZZmp3Lrr1bZ1oyxhBwmIzENKHAQ0TJcwhr/Fx3Rsf9yzNvnwV/sL+9vlSK4gOxn5dvQjGwviXVnuNqPjR2it+5jOQuUwgb4wNca6weLjCh1o/p1G/oDEZzMRPqWf0S6ak9vvPxcjkmnGO5uJht2YfGlZgglG3Zs8aF3sX3iOtXfO8qf3feo1/7vebq5Vp7BTO970ZBdZPYPUwLl7Jb0sO0coG9CnatfvNyR8s/udKc5GYgFm3OSusAnMlx9A==
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">

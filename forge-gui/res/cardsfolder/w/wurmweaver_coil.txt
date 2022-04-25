@@ -4,5 +4,5 @@ Types:Enchantment Aura
 K:Enchant green creature
 A:SP$ Attach | Cost$ 4 G G | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 6 | AddToughness$ 6 | Description$ Enchanted creature gets +6/+6.
-A:AB$ Token | Cost$ G G G Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ g_6_6_wurm | TokenOwner$ You | LegacyImage$ g 6 6 wurm gpt | SpellDescription$ Create a 6/6 green Wurm creature token.
+A:AB$ Token | Cost$ G G G Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ g_6_6_wurm | TokenOwner$ You | SpellDescription$ Create a 6/6 green Wurm creature token.
 Oracle:Enchant green creature\nEnchanted creature gets +6/+6.\n{G}{G}{G}, Sacrifice Wurmweaver Coil: Create a 6/6 green Wurm creature token.

@@ -1,51 +1,76 @@
 {
-    "width": 480,
-    "height": 270, 
-    "yDown": true, 
-    "elements":[     
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [
     {
-      "type" : "Image",      
-      "image":"ui/title_bg.png",
+      "type": "Image",
+      "image": "ui/title_bg.png",
       "width": 480,
       "height": 270
-    }    ,
-            
+    },
     {
-      "type" : "Image",                
-      "name": "preview",
-      "x": 364, 
-      "y": 10 ,
-      "width": 96,
-      "height": 54
-    } ,
-            
-    {
-      "type" : "Scroll",                
+      "type": "Scroll",
       "name": "saveSlots",
-      "x": 10, 
-      "y": 10 ,
-      "width": 344,
+      "x": 15,
+      "y": 18,
+      "width": 332,
       "height": 235
-    } ,
+    },
     {
-         "type" : "TextButton",     
-         "name" : "return" ,             
-         "text" : "Back" ,       
-         "width": 48,
-          "height": 16,     
-          "x": 15, 
-          "y": 250 
-    }         ,
+      "type": "Image",
+      "image": "ui/blank.png",
+      "width": 96,
+      "height": 54,
+      "x": 370,
+      "y": 30
+    },
     {
-         "type" : "TextButton",     
-         "name" : "save" ,             
-         "text" : "saveLoad" ,       
-         "width": 48,
-          "height": 16,     
-          "x": 115, 
-          "y": 250 
-    }   
-    ]
-
-
+      "type": "Image",
+      "name" : "preview_border",
+      "image": "ui/avatarhud.png",
+      "width": 96,
+      "height": 54,
+      "x": 370,
+      "y": 30
+    },
+    {
+      "type": "Image",
+      "name": "preview",
+      "width": 86,
+      "height": 48,
+      "x": 376,
+      "y": 33
+    },             
+    {
+      "type": "Label",
+      "name": "saveDate",
+      "x": 376,
+      "y": 85,
+      "width": 86,
+      "height": 32
+    },
+    {
+      "type": "TextButton",
+      "name": "return",
+      "text": "Back",
+      "width": 100,
+      "height": 30,
+      "x": 368,
+      "y": 125
+    },
+    {
+      "type": "TextButton",
+      "name": "save",
+      "text": "saveLoad",
+      "width": 100,
+      "height": 30,
+      "x": 368,
+      "y": 195
+    },
+    {
+      "type": "Table",
+      "font": "default"
+    }
+  ]
 }

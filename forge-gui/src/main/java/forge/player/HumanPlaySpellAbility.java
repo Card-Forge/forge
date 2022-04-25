@@ -217,6 +217,15 @@ public class HumanPlaySpellAbility {
             fromZone.add(oldCard, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
             ability.setHostCard(oldCard);
             ability.setXManaCostPaid(null);
+            ability.setSpendPhyrexianMana(false);
+            if (ability.hasParam("Announce")) {
+                for (final String aVar : ability.getParam("Announce").split(",")) {
+                    final String varName = aVar.trim();
+                    if (!varName.equals("X")) {
+                        ability.setSVar(varName, "0");
+                    }
+                }
+            }
             // better safe than sorry approach in case rolled back ability was copy (from addExtraKeywordCost)
             for (SpellAbility sa : oldCard.getSpells()) {
                 sa.setHostCard(oldCard);

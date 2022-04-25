@@ -1,0 +1,10 @@
+Name:E. Honda, Sumo Champion
+ManaCost:4 W W
+Types:Legendary Creature Human Warrior
+PT:0/7
+S:Mode$ Continuous | Condition$ PlayerTurn | Affected$ Creature | AddHiddenKeyword$ CARDNAME assigns combat damage equal to its toughness rather than its power | Description$ Sumo Spirit — As long as it's your turn, each creature assigns combat damage equal to its toughness rather than its power.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Hundred Hand Slap — Whenever CARDNAME attacks, up to one hundred target creatures each get +0/+X until end of turn, where X is the number of cards in your hand.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 100 | NumDef$ +X | AILogic$ Pump
+SVar:HasAttackEffect:TRUE
+SVar:X:Count$CardsInYourHand
+Oracle:Sumo Spirit — As long as it's your turn, each creature assigns combat damage equal to its toughness rather than its power.\nHundred Hand Slap — Whenever E. Honda, Sumo Champion attacks, up to one hundred target creatures each get +0/+X until end of turn, where X is the number of cards in your hand.

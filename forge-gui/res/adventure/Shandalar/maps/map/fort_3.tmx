@@ -5,9 +5,9 @@
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Hidden Collision" width="30" height="17">
+ <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzNlGEOQDAMhfcfJ8DFOAvOhbmbLbxkaptIXsNLFlrSr2/p1pTGND9dfWXMUh6rq64xchrM1T2h2b23QYwcky2ZOTHZ0teTapLfza2puNdP9cPiyvmBYv0MLrYkbsoX+oHYc53iau/zV9wtUt9m+tGaqyWRwxnX2Gc5S9r7PBYH80kj8Rx5f95D7O4I5c9ue/7P4IIN3zmfTCa48r4KFX5/U3cHJ9hhhg==
+   eJzNlGEOQDAMhfcfJ8DFOAvOZeZutvCSqY1IXsNLFlrSr2/p1pTGND9dfWWMLffVVecYOQ3m4p/Q7N/bKEaOyZbMOzHZ0teTapLf1a+puNbP9cPiyvmBUv0MPnYkbs4X+oHYc53jau/zV9w1Ud/d9KM1VzaTwxnX2Gc5S9r7PBY780kj8RwFf8FD6u6IFc5ue/zP4IIN36m7Aj6ZTHBtxI/lxPc3dTdbjWQp
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">

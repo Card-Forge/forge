@@ -3,8 +3,8 @@ ManaCost:2 B G
 Types:Legendary Creature Frog Horror
 PT:6/6
 K:Menace
-T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigSac | IsPresent$ Card.Self+untapped | TriggerDescription$ At the beginning of each combat, if CARDNAME is untapped, any opponent may sacrifice a creature. If they do, tap CARDNAME, then seek a land card and put it onto the battlefield tapped.
-SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | Amount$ 1 | SacValid$ Creature | RememberSacrificed$ True | Optional$ True | AILogic$ DesecrationDemon | SubAbility$ DBTap
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigSac | IsPresent$ Card.Self+untapped | TriggerDescription$ At the beginning of each combat, if CARDNAME is untapped, any opponent may sacrifice a nontoken creature. If they do, tap CARDNAME, then seek a land card and put it onto the battlefield tapped.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | Amount$ 1 | SacValid$ Creature.nonToken | RememberSacrificed$ True | Optional$ True | AILogic$ DesecrationDemon | SubAbility$ DBTap
 SVar:DBTap:DB$ Tap | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBSeek
 SVar:DBSeek:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Land | ChangeNum$ 1 | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -14,4 +14,4 @@ SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ P
 SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddAbility$ PerpetualSacDraw | EffectZone$ All | Description$ This land card perpetually gains "{B}{G}, {T}, Sacrifice this land: Draw a card."
 SVar:PerpetualSacDraw:AB$ Draw | Cost$ B G Sac<1/CARDNAME/this land> | NumCards$ 1 | SpellDescription$ Draw a card.
 DeckHas:Ability$Sacrifice
-Oracle:Menace\nAt the beginning of each combat, if Gitrog, Horror of Zhava is untapped, any opponent may sacrifice a creature. If they do, tap Gitrog, Horror of Zhava, then seek a land card and put it onto the battlefield tapped.\nWhenever a land enters the battlefield under your control, it perpetually gains "{B}{G}, {T}, Sacrifice this land: Draw a card."
+Oracle:Menace\nAt the beginning of each combat, if Gitrog, Horror of Zhava is untapped, any opponent may sacrifice a nontoken creature. If they do, tap Gitrog, Horror of Zhava, then seek a land card and put it onto the battlefield tapped.\nWhenever a land enters the battlefield under your control, it perpetually gains "{B}{G}, {T}, Sacrifice this land: Draw a card."

@@ -4,5 +4,5 @@ Types:Creature Horror
 PT:7/7
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, target opponent creates two 3/3 green Centaur creature tokens with protection from black.
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_3_3_centaur_pro_black | ValidTgts$ Opponent | TokenOwner$ Targeted | LegacyImage$ g 3 3 centaur pro black rav
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_3_3_centaur_pro_black | ValidTgts$ Opponent | TokenOwner$ Targeted
 Oracle:Trample\nWhen Hunted Horror enters the battlefield, target opponent creates two 3/3 green Centaur creature tokens with protection from black.

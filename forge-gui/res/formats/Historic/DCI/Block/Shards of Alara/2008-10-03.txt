@@ -1,5 +1,5 @@
 [format]
-Name:Shards of Alara Block, Shards of Alara
+Name:Block: Shards of Alara (ALA)
 Type:Historic
 Subtype:Block
 Effective:2008-10-03

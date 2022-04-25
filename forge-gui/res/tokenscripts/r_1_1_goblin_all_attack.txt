@@ -3,5 +3,5 @@ ManaCost:no cost
 Types:Creature Goblin
 Colors:red
 PT:1/1
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Creatures you control attack each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Creature.YouCtrl | Description$ Creatures you control attack each combat if able.
 Oracle:Creatures you control attack each combat if able.

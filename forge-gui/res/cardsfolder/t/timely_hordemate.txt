@@ -4,5 +4,5 @@ Types:Creature Human Warrior
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ RaidTest | Execute$ TrigChange | TriggerDescription$ Raid — When CARDNAME enters the battlefield, if you attacked this turn, return target creature card with mana value 2 or less from your graveyard to the battlefield.
 SVar:RaidTest:Count$AttackersDeclared
-SVar:TrigChange:AB$ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+cmcLE2 | Cost$ 0
+SVar:TrigChange:AB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+cmcLE2 | Cost$ 0
 Oracle:Raid — When Timely Hordemate enters the battlefield, if you attacked this turn, return target creature card with mana value 2 or less from your graveyard to the battlefield.

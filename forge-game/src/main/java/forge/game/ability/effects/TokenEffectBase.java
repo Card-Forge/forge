@@ -145,10 +145,6 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 if (!sa.hasParam("AttachAfter") && sa.hasParam("AttachedTo") && !attachTokenTo(tok, sa)) {
                     continue;
                 }
-                if (sa.hasParam("WithCounters")) {
-                    String[] parse = sa.getParam("WithCounters").split("_");
-                    tok.addEtbCounter(CounterType.getType(parse[0]), Integer.parseInt(parse[1]), creator);
-                }
 
                 if (sa.hasParam("WithCountersType")) {
                     CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));

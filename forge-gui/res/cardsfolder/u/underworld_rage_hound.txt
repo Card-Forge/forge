@@ -2,7 +2,7 @@ Name:Underworld Rage-Hound
 ManaCost:1 R
 Types:Creature Elemental Dog
 PT:3/1
-K:CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
 K:Escape:3 R ExileFromGrave<3/Card.Other/other>
 K:etbCounter:P1P1:1:ValidCard$ Card.Self+escaped:CARDNAME escapes with a +1/+1 counter on it.
 DeckHas:Ability$Counters

@@ -68,6 +68,16 @@ public enum FSkinImage implements FImage {
     MANA_PHRYX_R   (FSkinProp.IMG_MANA_PHRYX_R, SourceFile.MANAICONS),
     MANA_PHRYX_G   (FSkinProp.IMG_MANA_PHRYX_G, SourceFile.MANAICONS),
     MANA_PHRYX_B   (FSkinProp.IMG_MANA_PHRYX_B, SourceFile.MANAICONS),
+    MANA_PHRYX_BG   (FSkinProp.IMG_MANA_PHRYX_BG, SourceFile.PHYREXIAN),
+    MANA_PHRYX_BR   (FSkinProp.IMG_MANA_PHRYX_BR, SourceFile.PHYREXIAN),
+    MANA_PHRYX_GU   (FSkinProp.IMG_MANA_PHRYX_GU, SourceFile.PHYREXIAN),
+    MANA_PHRYX_GW   (FSkinProp.IMG_MANA_PHRYX_GW, SourceFile.PHYREXIAN),
+    MANA_PHRYX_RG   (FSkinProp.IMG_MANA_PHRYX_RG, SourceFile.PHYREXIAN),
+    MANA_PHRYX_RW   (FSkinProp.IMG_MANA_PHRYX_RW, SourceFile.PHYREXIAN),
+    MANA_PHRYX_UB   (FSkinProp.IMG_MANA_PHRYX_UB, SourceFile.PHYREXIAN),
+    MANA_PHRYX_UR   (FSkinProp.IMG_MANA_PHRYX_UR, SourceFile.PHYREXIAN),
+    MANA_PHRYX_WB   (FSkinProp.IMG_MANA_PHRYX_WB, SourceFile.PHYREXIAN),
+    MANA_PHRYX_WU   (FSkinProp.IMG_MANA_PHRYX_WU, SourceFile.PHYREXIAN),
     MANA_SNOW      (FSkinProp.IMG_MANA_SNOW, SourceFile.MANAICONS),
     MANA_0         (FSkinProp.IMG_MANA_0, SourceFile.MANAICONS),
     MANA_1         (FSkinProp.IMG_MANA_1, SourceFile.MANAICONS),
@@ -114,6 +124,13 @@ public enum FSkinImage implements FImage {
     WATERMARK_U    (FSkinProp.IMG_WATERMARK_U, SourceFile.WATERMARKS),
     WATERMARK_W    (FSkinProp.IMG_WATERMARK_W, SourceFile.WATERMARKS),
     WATERMARK_C    (FSkinProp.IMG_WATERMARK_C, SourceFile.WATERMARKS),
+
+    //draft ranks
+    DRAFTRANK_D (FSkinProp.IMG_DRAFTRANK_D, SourceFile.DRAFTRANKS),
+    DRAFTRANK_C (FSkinProp.IMG_DRAFTRANK_C, SourceFile.DRAFTRANKS),
+    DRAFTRANK_B (FSkinProp.IMG_DRAFTRANK_B, SourceFile.DRAFTRANKS),
+    DRAFTRANK_A (FSkinProp.IMG_DRAFTRANK_A, SourceFile.DRAFTRANKS),
+    DRAFTRANK_S (FSkinProp.IMG_DRAFTRANK_S, SourceFile.DRAFTRANKS),
 
     //CardBG
     CARDBG_A       (FSkinProp.IMG_CARDBG_A, SourceFile.CARDBG),
@@ -335,6 +352,8 @@ public enum FSkinImage implements FImage {
     HDSTAR_OUTLINE  (FSkinProp.IMG_HDSTAR_OUTLINE, SourceFile.BUTTONS),
     STAR_FILLED     (FSkinProp.IMG_STAR_FILLED, SourceFile.ICONS),
     HDSTAR_FILLED   (FSkinProp.IMG_HDSTAR_FILLED, SourceFile.BUTTONS),
+    AI_ACTIVE       (FSkinProp.IMG_AI_ACTIVE, SourceFile.ICONS),
+    AI_INACTIVE     (FSkinProp.IMG_AI_INACTIVE, SourceFile.ICONS),
 
     ARTIFACT        (FSkinProp.IMG_ARTIFACT, SourceFile.MANAICONS),
     CREATURE        (FSkinProp.IMG_CREATURE, SourceFile.MANAICONS),
@@ -484,8 +503,10 @@ public enum FSkinImage implements FImage {
         BUTTONS(ForgeConstants.SPRITE_BUTTONS_FILE),
         BTNSTART(ForgeConstants.SPRITE_START_FILE),
         MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
+        PHYREXIAN(ForgeConstants.SPRITE_PHYREXIAN_FILE),
         SETLOGOS(ForgeConstants.SPRITE_SETLOGO_FILE),
         WATERMARKS(ForgeConstants.SPRITE_WATERMARK_FILE),
+        DRAFTRANKS(ForgeConstants.SPRITE_DRAFTRANKS_FILE),
         CRACKS(ForgeConstants.SPRITE_CRACKS_FILE),
         CARDBG(ForgeConstants.SPRITE_CARDBG_FILE),
         PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE);

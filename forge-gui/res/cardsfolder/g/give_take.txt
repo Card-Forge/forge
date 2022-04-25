@@ -1,10 +1,10 @@
 Name:Give
 ManaCost:2 G
-AlternateMode: Split
 Types:Sorcery
 K:Fuse
 A:SP$ PutCounter | Cost$ 2 G | ValidTgts$ Creature | TgtPrompt$ Select target creature to put counters | CounterType$ P1P1 | CounterNum$ 3 | SpellDescription$ Put three +1/+1 counters on target creature.
 DeckHas:Ability$Counters
+AlternateMode:Split
 Oracle:Put three +1/+1 counters on target creature.\nFuse (You may cast one or both halves of this card from your hand.)
 
 ALTERNATE

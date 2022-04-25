@@ -1,0 +1,9 @@
+Name:Sokenzan, Crucible of Defiance
+ManaCost:no cost
+Types:Legendary Land
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
+A:AB$ Token | PrecostDesc$ Channel — | Cost$ 3 R Discard<1/CARDNAME> | ActivationZone$ Hand | TokenAmount$ 2 | TokenScript$ c_1_1_spirit | PumpKeywords$ Haste | PumpDuration$ EOT | ReduceCost$ X | StackDescription$ Create two 1/1 colorless Spirit creature tokens. They gain haste until end of turn. | SpellDescription$ Create two 1/1 colorless Spirit creature tokens. They gain haste until end of turn. This ability costs {1} less to activate for each legendary creature you control.
+SVar:X:Count$Valid Creature.Legendary+YouCtrl
+DeckHints:Type$Legendary
+DeckHas:Ability$Token|Discard & Type$Spirit
+Oracle:{T}: Add {R}.\nChannel — {3}{R}, Discard Sokenzan, Crucible of Defiance: Create two 1/1 colorless Spirit creature tokens. They gain haste until end of turn. This ability costs {1} less to activate for each legendary creature you control.

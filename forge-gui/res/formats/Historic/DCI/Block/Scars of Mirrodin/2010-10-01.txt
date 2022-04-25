@@ -1,5 +1,5 @@
 [format]
-Name:Scars of Mirrodin Block, Scars of Mirrodin
+Name:Block: Scars of Mirrodin (SOM)
 Type:Historic
 Subtype:Block
 Effective:2010-10-01

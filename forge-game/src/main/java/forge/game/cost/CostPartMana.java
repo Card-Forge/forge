@@ -141,7 +141,7 @@ public class CostPartMana extends CostPart {
             // back from the brink
             return sa.getPaidList(CostExile.HashLKIListKey).get(0).getManaCost();
         }
-        if (isEnchantedCreatureCost() && sa.getHostCard().getEnchantingCard() != null) {
+        if (isEnchantedCreatureCost() && sa.getHostCard().isEnchantingCard()) {
             return sa.getHostCard().getEnchantingCard().getManaCost();
         }
         if (isCostPayAnyNumberOfTimes) {

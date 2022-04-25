@@ -15,17 +15,12 @@
    eJzNk80NgCAMRvFsnUC8OZWOYtS1/N1NiBKFACkVjE1ePDTtA/XjwBgPoC0YW8SzKcLmMDsVcvcEOpVAVomcx3jlzi6/KcHvtfXMeYp3Bv38kvXyunoxvL1gMBjz0+vqxfDa5nzfl/qed9DPvwV6MfNUfN6UpPBi8pcqv8+i5FdV6P/8LEp+Y3gp+Y3hpeSX4v17fuvs+/yqO729ywE/CY5x
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBg6IJR9oF0wuMAS5oF2AengNpn67KnqipEN7g20AwYRqOFlYPgOpOt4SdcbQoXy6AflRmAABwLy5Pj1LpS2JV0rCnhNof5RQB0AAKs6CSo=
-  </data>
- </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwUgBAAf4AAE=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

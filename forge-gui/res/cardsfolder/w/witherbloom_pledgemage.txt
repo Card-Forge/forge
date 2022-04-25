@@ -1,5 +1,5 @@
 Name:Witherbloom Pledgemage
-ManaCost:3 G/B G/B
+ManaCost:3 B/G B/G
 Types:Creature Treefolk Warlock
 PT:5/5
 T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ LifeGain | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, you gain 1 life.

@@ -1,10 +1,10 @@
 package forge.ai.ability;
 
 import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 
 import forge.ai.SpellAbilityAi;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -21,10 +21,10 @@ public class MeldAi extends SpellAbilityAi {
             return false;
         }
         
-        boolean hasPrimaryMeld = !CardLists.filter(cardsOTB, Predicates.and(
-                CardPredicates.nameEquals(primaryMeld), CardPredicates.isOwner(aiPlayer))).isEmpty();
-        boolean hasSecondaryMeld = !CardLists.filter(cardsOTB, Predicates.and(
-                CardPredicates.nameEquals(secondaryMeld), CardPredicates.isOwner(aiPlayer))).isEmpty();
+        boolean hasPrimaryMeld = Iterables.any(cardsOTB, Predicates.and(
+                CardPredicates.nameEquals(primaryMeld), CardPredicates.isOwner(aiPlayer)));
+        boolean hasSecondaryMeld = Iterables.any(cardsOTB, Predicates.and(
+                CardPredicates.nameEquals(secondaryMeld), CardPredicates.isOwner(aiPlayer)));
         
         return hasPrimaryMeld && hasSecondaryMeld && sa.getHostCard().getName().equals(primaryMeld);
     }

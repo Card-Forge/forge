@@ -1,5 +1,5 @@
 [format]
-Name:Masques Block, Mercadian Masques
+Name:Block: Masques (MMQ)
 Type:Historic
 Subtype:Block
 Effective:1999-11-01

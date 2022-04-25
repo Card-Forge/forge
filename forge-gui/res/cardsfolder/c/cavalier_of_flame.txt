@@ -8,7 +8,7 @@ SVar:TrigDiscard:DB$ Discard | Cost$ 3 R | AnyNumber$ True | Optional$ True | Mo
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Remembered$Amount
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, it deals X damage to each opponent and each planeswalker they control, where X is the number of land cards in your graveyard.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ When CARDNAME dies, it deals X damage to each opponent and each planeswalker they control, where X is the number of land cards in your graveyard.
 SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ Player.Opponent | ValidCards$ Planeswalker.OppCtrl | NumDmg$ X | SpellDescription$ CARDNAME deals X damage to each opponent and each planeswalker they control, where X is the number of land cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Land
 Oracle:{1}{R}: Creatures you control get +1/+0 and gain haste until end of turn.\nWhen Cavalier of Flame enters the battlefield, discard any number of cards, then draw that many cards.\nWhen Cavalier of Flame dies, it deals X damage to each opponent and each planeswalker they control, where X is the number of land cards in your graveyard.

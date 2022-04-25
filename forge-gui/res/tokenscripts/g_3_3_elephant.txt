@@ -1,6 +1,6 @@
 Name:Elephant Token
-Colors:green
 ManaCost:no cost
-PT:3/3
+Colors:green
 Types:Creature Elephant
+PT:3/3
 Oracle:

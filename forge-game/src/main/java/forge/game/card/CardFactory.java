@@ -96,12 +96,8 @@ public class CardFactory {
         out.setAttachedCards(in.getAttachedCards());
         out.setEntityAttachedTo(in.getEntityAttachedTo());
 
-        for (final Object o : in.getRemembered()) {
-            out.addRemembered(o);
-        }
-        for (final Card o : in.getImprintedCards()) {
-            out.addImprintedCard(o);
-        }
+        out.addRemembered(in.getRemembered());
+        out.addImprintedCards(in.getImprintedCards());
         out.setCommander(in.isRealCommander());
         //out.setFaceDown(in.isFaceDown());
 
@@ -125,11 +121,9 @@ public class CardFactory {
     private final static Card copySpellHost(final SpellAbility sourceSA, final SpellAbility targetSA, Player controller) {
         final Card source = sourceSA.getHostCard();
         final Card original = targetSA.getHostCard();
-        final Card c = copyCard(original, true);
-
-        // clear remember/imprint for copied spells
-        c.clearRemembered();
-        c.clearImprintedCards();
+        final Game game = source.getGame();
+        final Card c = new Card(game.nextCardId(), original.getPaperCard(), game);
+        copyCopiableCharacteristics(original, c);
 
         if (sourceSA.hasParam("NonLegendary")) {
             c.removeType(CardType.Supertype.Legendary);
@@ -141,6 +135,10 @@ public class CardFactory {
 
         if (sourceSA.hasParam("CopySetToughness")) {
             c.setBaseToughness(Integer.parseInt(sourceSA.getParam("CopySetToughness")));
+        }
+
+        if (sourceSA.hasParam("CopySetLoyalty")) {
+            c.setBaseLoyalty(AbilityUtils.calculateAmount(source, sourceSA.getParam("CopySetLoyalty"), sourceSA));
         }
 
         if (sourceSA.hasParam("CopyAddTypes")) {
@@ -174,8 +172,10 @@ public class CardFactory {
         if (targetSA.isBestow()) {
             c.animateBestow();
         }
+        
         return c;
     }
+
     /**
      * <p>
      * copySpellAbilityAndPossiblyHost.
@@ -202,9 +202,12 @@ public class CardFactory {
             copySA = getCopiedTriggeredAbility((WrappedAbility)targetSA, c, controller);
         } else {
             copySA = targetSA.copy(c, controller, false);
+            c.setCastSA(copySA);
         }
 
         copySA.setCopied(true);
+        // 707.10b
+        copySA.setOriginalAbility(targetSA);
 
         if (targetSA.usesTargeting()) {
             // do for SubAbilities too?
@@ -306,7 +309,7 @@ public class CardFactory {
             buildPlaneAbilities(card);
         }
         CardFactoryUtil.setupKeywordedAbilities(card); // Should happen AFTER setting left/right split abilities to set Fuse ability to both sides
-        card.getView().updateState(card);
+        card.updateStateForView();
     }
 
     private static void buildPlaneAbilities(Card card) {
@@ -524,8 +527,6 @@ public class CardFactory {
     public static void copyState(final Card from, final CardStateName fromState, final Card to,
             final CardStateName toState, boolean updateView) {
         // copy characteristics not associated with a state
-        to.setBasePowerString(from.getBasePowerString());
-        to.setBaseToughnessString(from.getBaseToughnessString());
         to.setText(from.getSpellText());
 
         // get CardCharacteristics for desired state
@@ -537,7 +538,7 @@ public class CardFactory {
     }
 
     public static void copySpellAbility(SpellAbility from, SpellAbility to, final Card host, final Player p, final boolean lki) {
-        if (from.getTargetRestrictions() != null) {
+        if (from.usesTargeting()) {
             to.setTargetRestrictions(from.getTargetRestrictions());
         }
         to.setDescription(from.getOriginalDescription());
@@ -631,30 +632,30 @@ public class CardFactory {
             // if something is cloning a facedown card, it only clones the
             // facedown state into original
             final CardState ret = new CardState(out, CardStateName.Original);
-            ret.copyFrom(in.getFaceDownState(), false);
+            ret.copyFrom(in.getFaceDownState(), false, sa);
             result.put(CardStateName.Original, ret);
         } else if (in.isFlipCard()) {
             // if something is cloning a flip card, copy both original and
             // flipped state
             final CardState ret1 = new CardState(out, CardStateName.Original);
-            ret1.copyFrom(in.getState(CardStateName.Original), false);
+            ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
             result.put(CardStateName.Original, ret1);
 
             final CardState ret2 = new CardState(out, CardStateName.Flipped);
-            ret2.copyFrom(in.getState(CardStateName.Flipped), false);
+            ret2.copyFrom(in.getState(CardStateName.Flipped), false, sa);
             result.put(CardStateName.Flipped, ret2);
         } else if (in.isAdventureCard()) {
             final CardState ret1 = new CardState(out, CardStateName.Original);
-            ret1.copyFrom(in.getState(CardStateName.Original), false);
+            ret1.copyFrom(in.getState(CardStateName.Original), false, sa);
             result.put(CardStateName.Original, ret1);
 
             final CardState ret2 = new CardState(out, CardStateName.Adventure);
-            ret2.copyFrom(in.getState(CardStateName.Adventure), false);
+            ret2.copyFrom(in.getState(CardStateName.Adventure), false, sa);
             result.put(CardStateName.Adventure, ret2);
         } else {
             // in all other cases just copy the current state to original
             final CardState ret = new CardState(out, CardStateName.Original);
-            ret.copyFrom(in.getState(in.getCurrentStateName()), false);
+            ret.copyFrom(in.getState(in.getCurrentStateName()), false, sa);
             result.put(CardStateName.Original, ret);
         }
 
@@ -681,6 +682,10 @@ public class CardFactory {
                 state.removeType(CardType.Supertype.Legendary);
             }
 
+            if (sa.hasParam("RemoveCardTypes")) {
+                state.removeCardTypes();
+            }
+
             state.addType(types);
 
             if (!creatureReplacement && creatureTypes != null) {
@@ -693,6 +698,7 @@ public class CardFactory {
             }
 
             if (!creatureReplacement) {
+            if (state.getType().isCreature()) {
                 if (sa.hasParam("SetPower")) {
                     state.setBasePower(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetPower"), sa));
                 }
@@ -700,8 +706,9 @@ public class CardFactory {
                     state.setBaseToughness(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetToughness"), sa));
                 }
             }
+            }
 
-            if (sa.hasParam("SetLoyalty")) {
+            if (state.getType().isPlaneswalker() && sa.hasParam("SetLoyalty")) {
                 state.setBaseLoyalty(String.valueOf(sa.getParam("SetLoyalty")));
             }
 
@@ -759,7 +766,7 @@ public class CardFactory {
             if (sa.hasParam("GainThisAbility") && sa instanceof SpellAbility) {
                 SpellAbility root = ((SpellAbility) sa).getRootAbility();
 
-                if (root.isTrigger() && root.getTrigger() != null) {
+                if (root.isTrigger()) {
                     state.addTrigger(root.getTrigger().copy(out, false));
                 } else if (root.isReplacementAbility()) {
                     state.addReplacementEffect(root.getReplacementEffect().copy(out, false));
@@ -794,9 +801,6 @@ public class CardFactory {
                 String set = host.getSetCode().toLowerCase();
                 state.setImageKey(ImageKeys.getTokenKey("eternalize_" + name + "_" + set));
             }
-
-            // set the host card for copied replacement effects
-            // needed for copied xPaid ETB effects (for the copy, xPaid = 0)
 
             if (sa.hasParam("GainTextOf") && originalState != null) {
                 state.setSetCode(originalState.getSetCode());
@@ -848,9 +852,9 @@ public class CardFactory {
         final CardStateName state = top.getCurrentStateName();
         final CardState ret = new CardState(card, state);
         if (top.isCloned()) {
-            ret.copyFrom(top.getState(state), false);
+            ret.copyFrom(top.getState(state), false, sa);
         } else {
-            ret.copyFrom(top.getOriginalState(state), false);
+            ret.copyFrom(top.getOriginalState(state), false, sa);
         }
 
         boolean first = true;
@@ -868,7 +872,7 @@ public class CardFactory {
         // For face down, flipped, transformed, melded or MDFC card, also copy the original state to avoid crash
         if (state != CardStateName.Original) {
             final CardState ret1 = new CardState(card, CardStateName.Original);
-            ret1.copyFrom(top.getState(CardStateName.Original), false);
+            ret1.copyFrom(top.getState(CardStateName.Original), false, sa);
             result.put(CardStateName.Original, ret1);
         }
 

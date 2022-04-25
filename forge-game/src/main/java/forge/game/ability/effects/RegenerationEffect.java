@@ -36,7 +36,7 @@ public class RegenerationEffect extends SpellAbilityEffect {
             }
 
             // Play the Regen sound
-            game.fireEvent(new GameEventCardRegenerated());
+            game.fireEvent(new GameEventCardRegenerated(c));
             
             if (host.isImmutable()) {
                 c.subtractShield(host);

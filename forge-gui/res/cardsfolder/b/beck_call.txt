@@ -1,11 +1,11 @@
 Name:Beck
 ManaCost:G U
-AlternateMode: Split
 Types:Sorcery
 K:Fuse
 A:SP$ Effect | Cost$ G U | Name$ Beck Effect | Triggers$ CreatureEntered | SpellDescription$ Whenever a creature enters the battlefield this turn, you may draw a card.
 SVar:CreatureEntered:Mode$ ChangesZone | ValidCard$ Creature | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerZones$ Command | OptionalDecider$ You | TriggerDescription$ Whenever a creature enters the battlefield this turn, you may draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AlternateMode:Split
 Oracle:Whenever a creature enters the battlefield this turn, you may draw a card.\nFuse (You may cast one or both halves of this card from your hand.)
 
 ALTERNATE
@@ -13,5 +13,5 @@ ALTERNATE
 Name:Call
 ManaCost:4 W U
 Types:Sorcery
-A:SP$ Token | Cost$ 4 W U | LegacyImage$ w 1 1 bird flying dgm | TokenAmount$ 4 | TokenScript$ w_1_1_bird_flying | TokenOwner$ You | SpellDescription$ Create four 1/1 white Bird creature tokens with flying.
+A:SP$ Token | Cost$ 4 W U | TokenAmount$ 4 | TokenScript$ w_1_1_bird_flying | TokenOwner$ You | SpellDescription$ Create four 1/1 white Bird creature tokens with flying.
 Oracle:Create four 1/1 white Bird creature tokens with flying.\nFuse (You may cast one or both halves of this card from your hand.)

@@ -3,7 +3,7 @@ ManaCost:R
 Types:Creature Zombie Warrior
 PT:1/1
 K:First Strike
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DBAmass | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, amass 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ DBAmass | TriggerDescription$ When CARDNAME dies, amass 1. (Put a +1/+1 counter on an Army you control. If you don't control one, create a 0/0 black Zombie Army creature token first.)
 SVar:DBAmass:DB$ Amass | Num$ 1
 DeckHints:Ability$Amass & Type$Zombie
 DeckHas:Ability$Amass|Counters|Token

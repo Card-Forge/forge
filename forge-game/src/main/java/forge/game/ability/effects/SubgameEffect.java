@@ -9,6 +9,7 @@ import com.google.common.collect.Lists;
 import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameOutcome;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -127,7 +128,7 @@ public class SubgameEffect extends SpellAbilityEffect {
                 // Create an effect that lets you cast your companion from your sideboard
                 if (companion != null) {
                     PlayerZone commandZone = player.getZone(ZoneType.Command);
-                    companion = subgame.getAction().moveTo(ZoneType.Command, companion, null);
+                    companion = subgame.getAction().moveTo(ZoneType.Command, companion, null, AbilityKey.newMap());
                     commandZone.add(Player.createCompanionEffect(subgame, companion));
 
                     player.updateZoneForView(commandZone);
@@ -193,13 +194,9 @@ public class SubgameEffect extends SpellAbilityEffect {
         if (sa.hasParam("RememberPlayers")) {
             final String param = sa.getParam("RememberPlayers");
             if (param.equals("Win")) {
-                for (Player p : winPlayers) {
-                    hostCard.addRemembered(p);
-                }
+                hostCard.addRemembered(winPlayers);
             } else if (param.equals("NotWin")) {
-                for (Player p : notWinPlayers) {
-                    hostCard.addRemembered(p);
-                }
+                hostCard.addRemembered(notWinPlayers);
             }
         }
 
@@ -246,7 +243,7 @@ public class SubgameEffect extends SpellAbilityEffect {
                 }
             }
             for (final Card card : movedCommanders) {
-                maingame.getAction().moveTo(ZoneType.Library, card, null);
+                maingame.getAction().moveTo(ZoneType.Library, card, null, AbilityKey.newMap());
             }
 
             player.shuffle(sa);

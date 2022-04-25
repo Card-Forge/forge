@@ -432,11 +432,26 @@ ScryfallCode=KHM
 405 C Masked Vandal @Jason A. Engle
 
 [rebalanced]
+A40 M A-Alrund, God of the Cosmos @Kieran Yanner
 A41 M A-Alrund's Epiphany @Kieran Yanner
+A51 R A-Cosmos Charger @Nils Hamm
+A106 U A-Return Upon the Tide @Martina Fackova
+A109 R A-Skemfar Avenger @Randy Vargas
 A139 M A-Goldspan Dragon @Andrew Mar
+A165 C A-Elderleaf Mentor @Zoltan Boros
+A166 U A-Elven Bow @Dallas Williams
 A169 R A-Esika's Chariot @Raoul Vitale
+A198 M A-Tyvar Kell @Chris Rallis
+A224 U A-Narfi, Betrayer King @Daarken
+A212 U A-Harald, King of Skemfar @Grzegorz Rutkowski
+A213 R A-Harald Unites the Elves @Ryan Pancoast
+A233 U A-Vega, the Watcher @Paul Scott Canavan
 A237 R A-Cosmos Elixir @Volkan Baǵa
 A255 R A-Faceless Haven @Titus Lunter
+A268 U A-Skemfar Elderhall @Johannes Voss
+A378 R A-Canopy Tactician @Ekaterina Burmak
+A385 U A-Elderfang Ritualist @Wisnu Tan
+A387 U A-Thornmantle Striker @Magali Villeneuve
 
 [Snow Lands]
 5 Snow-Covered Plains|KHM|1

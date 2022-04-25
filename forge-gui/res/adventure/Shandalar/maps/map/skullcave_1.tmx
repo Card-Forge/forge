@@ -7,7 +7,7 @@
  <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBj8QJoHlS/Lg13dULd3F9T8nUA6ihfCjgbSu3lQ5YcTwOcnWBjQyz5s4T9QgNK4Jsaf1LRvMIHB4hd6hPNg8OtwT0/DEQAAgJQQKQ==
+   eJxjYBj8QJqHgSGaF8KOAtKyPPSzF2YXMptWYBfU/J08EH+i27uLTv6mJ8DnJ2ka+LeOm7BbkMN/oAClaQ1f2A2mdEQLtwwW/2FzB7XdNhj8Sg9/jnQACk/0MMUmRiwAALFiEcg=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -20,7 +20,7 @@
    eJzt1FsKgCAQBVD/zRVoG6u1WNuy194yYkik8s4QfUTCRVDGM4IYKqXCC3FZkJrWKDVW12nMcy7tb+YU57sxADbnvoiJ2qjLMREbcSVmyUbcWmjSsML7/u633SWm1zLTx7pZ6DqhTebZuZx/kmPfmdx/ErVLJtdN7U7voR68PtZKpsTNa+itW0H/aVYIl805
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="3" name="Clutter" width="30" height="17">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
@@ -34,7 +34,7 @@
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="50" template="../obj/enemy.tx" x="206.508" y="70.1465">
+  <object id="50" template="../obj/enemy.tx" x="209.781" y="66.3283">
    <properties>
     <property name="enemy" value="Black Wiz1"/>
    </properties>

@@ -27,7 +27,6 @@ import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDialog;
 import forge.toolbox.FOverlay;
-import forge.util.Localizer;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
 
@@ -284,7 +283,7 @@ public class CardZoom extends FOverlay {
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
             
             boolean rotateSplit = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS);
-            if (currentCard.isSplitCard() && rotateSplit) {
+            if (currentCard != null && currentCard.isSplitCard() && rotateSplit) {
                 // card will be rotated.  Make sure that the height does not exceed the width of the view
                 if (cardHeight > Gdx.graphics.getWidth())
                 {
@@ -347,10 +346,10 @@ public class CardZoom extends FOverlay {
 
         if (currentActivateAction != null) {
             g.fillRect(FDialog.MSG_BACK_COLOR, 0, 0, w, messageHeight);
-            g.drawText(Localizer.getInstance().getMessage("lblSwipeUpTo").replace("%s", currentActivateAction), FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, 0, w, messageHeight, false, Align.center, true);
+            g.drawText(Forge.getLocalizer().getMessage("lblSwipeUpTo").replace("%s", currentActivateAction), FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, 0, w, messageHeight, false, Align.center, true);
         }
         g.fillRect(FDialog.MSG_BACK_COLOR, 0, h - messageHeight, w, messageHeight);
-        g.drawText(zoomMode ? Localizer.getInstance().getMessage("lblSwipeDownDetailView") : Localizer.getInstance().getMessage("lblSwipeDownPictureView"), FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, Align.center, true);
+        g.drawText(zoomMode ? Forge.getLocalizer().getMessage("lblSwipeDownDetailView") : Forge.getLocalizer().getMessage("lblSwipeDownPictureView"), FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, Align.center, true);
 
         interrupt(false);
     }

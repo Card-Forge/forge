@@ -34,3 +34,9 @@ ScryfallCode=PPRO
 2035 U Saw it Coming @Anato Finnstark
 2036 M Kaya the Inexorable @Jason A. Engle
 2037 R Faceless Haven @Pablo Mendoza
+2038 M Grand Master of Flowers @Toshiaki Takayama
+2039 R Adult Gold Dragon @Kotakan
+2040 U Krydle of Baldur's Gate @ Sansyu
+2041 R Lava Spike @Igor Kieryluk
+2042 R Nykthos, Shrine to Nyx @Alayna Danner
+2043 M Teferi, Hero of Dominaria @Chris Rallis

@@ -6,7 +6,7 @@ PT:8/8
 K:Haste
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TripleGoat | TriggerDescription$ When CARDNAME enters the battlefield, target opponent creates three 0/1 white Goat creature tokens.
-SVar:TripleGoat:DB$ Token | TokenAmount$ 3 | TokenScript$ w_0_1_goat | LegacyImage$ w 0 1 goat eld | ValidTgts$ Opponent | TokenOwner$ Targeted
+SVar:TripleGoat:DB$ Token | TokenAmount$ 3 | TokenScript$ w_0_1_goat | ValidTgts$ Opponent | TokenOwner$ Targeted
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigTap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, any opponent may sacrifice a creature. If a player does, tap CARDNAME, you gain 3 life, and you draw a card.
 SVar:TrigTap:DB$ Tap | Defined$ Self | UnlessCost$ Sac<1/Creature> | UnlessPayer$ Player.Opponent | UnlessSwitched$ True | UnlessAI$ LifeLE10 | UnlessResolveSubs$ WhenPaid | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBDraw

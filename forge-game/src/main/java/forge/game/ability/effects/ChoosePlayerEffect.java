@@ -42,17 +42,13 @@ public class ChoosePlayerEffect extends SpellAbilityEffect {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-
-                // Was if (sa.getActivatingPlayer().isHuman()) but defined player was being
-                // overwritten by activatingPlayer (or controller if no activator was set).
-                // Revert if it causes issues and remove Goblin Festival from card database.
                 Player chosen;
                 if (random) {
                     chosen = choices.isEmpty() ? null : Aggregates.random(choices);
                 } else {
                     chosen = choices.isEmpty() ? null : p.getController().chooseSingleEntityForEffect(choices, sa, choiceDesc, null);
                 }
-                if( null != chosen ) {
+                if (null != chosen) {
                     if (sa.hasParam("Secretly")) {
                         card.setSecretChosenPlayer(chosen);
                     } else {

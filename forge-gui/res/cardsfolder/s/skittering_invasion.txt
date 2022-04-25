@@ -1,7 +1,7 @@
 Name:Skittering Invasion
 ManaCost:7
 Types:Tribal Sorcery Eldrazi
-A:SP$ Token | Cost$ 7 | TokenAmount$ 5 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You | LegacyImage$ c 0 1 eldrazi spawn sac roe | SpellDescription$ Create five 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."
+A:SP$ Token | Cost$ 7 | TokenAmount$ 5 | TokenScript$ c_0_1_eldrazi_spawn_sac | TokenOwner$ You | SpellDescription$ Create five 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."
 DeckHints:Type$Eldrazi
 DeckHas:Ability$Mana.Colorless|Token
 Oracle:Create five 0/1 colorless Eldrazi Spawn creature tokens. They have "Sacrifice this creature: Add {C}."

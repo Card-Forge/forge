@@ -8,8 +8,8 @@ SVar:DBRemoveCtrs:DB$ RemoveCounter | Defined$ Self | CounterType$ SOUL | Counte
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | SubAbility$ DBUntap
 SVar:DBUntap:DB$ Untap
 SVar:Soul:Count$Valid Card.Self+counters_GE3_SOUL
-AlternateMode:DoubleFaced
 DeckHas:Ability$Mana.Colorless|Sacrifice|Counters|LifeGain|Graveyard
+AlternateMode:DoubleFaced
 Oracle:{T}: Add {C}.\n{1}, {T}, Sacrifice a creature: Put a soul counter on Hostile Hostel. Then if there are three or more soul counters on it, remove those counters, transform it, then untap it. Activate only as a sorcery.
 
 ALTERNATE

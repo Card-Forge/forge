@@ -34,6 +34,7 @@ import forge.game.ability.effects.SkipPhaseEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
+import forge.game.card.CardUtil;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardZoneTable;
 import forge.game.card.CounterEnumType;
@@ -133,7 +134,7 @@ public class PhaseHandler implements java.io.Serializable {
     public final Player getPlayerTurn() {
         return playerTurn;
     }
-    private final void setPlayerTurn(final Player playerTurn0) {
+    public final void setPlayerTurn(final Player playerTurn0) {
         if (playerTurn == playerTurn0) { return; }
         playerTurn = playerTurn0;
         game.updatePlayerTurnForView();
@@ -280,6 +281,9 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
 
                 case DRAW:
+                    for (Player p : game.getPlayers()) {
+                        p.resetNumDrawnThisDrawStep();
+                    }
                     playerTurn.drawCard();
                     for (Player p : game.getPlayers()) {
                         if (p.isOpponentOf(playerTurn) &&
@@ -312,17 +316,15 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
 
                 case COMBAT_DECLARE_ATTACKERS:
-                    if (!playerTurn.hasLost()) {
-                        combat.initConstraints();
-                        game.getStack().freezeStack();
-                        declareAttackersTurnBasedAction();
-                        game.getStack().unfreezeStack();
+                    combat.initConstraints();
+                    game.getStack().freezeStack();
+                    declareAttackersTurnBasedAction();
+                    game.getStack().unfreezeStack();
 
-                        if (combat != null) {
-                            for (Card c : combat.getAttackers()) {
-                                if (combat.getDefenderByAttacker(c) instanceof Player) {
-                                    game.addPlayerAttackedThisTurn(c.getController(), (Player)combat.getDefenderByAttacker(c));
-                                }
+                    if (combat != null) {
+                        for (Card c : combat.getAttackers()) {
+                            if (combat.getDefenderByAttacker(c) instanceof Player) {
+                                game.addPlayerAttackedThisTurn(c.getController(), (Player)combat.getDefenderByAttacker(c));
                             }
                         }
                     }
@@ -364,7 +366,6 @@ public class PhaseHandler implements java.io.Serializable {
 
                 case COMBAT_END:
                     // End Combat always happens
-                    game.getEndOfCombat().executeUntil();
                     game.getEndOfCombat().executeAt();
 
                     //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
@@ -375,12 +376,10 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
 
                 case END_OF_TURN:
+                    game.getEndOfTurn().executeUntil(playerTurn);
                     if (playerTurn.getController().isAI()) {
                         playerTurn.getController().resetAtEndOfTurn();
                     }
-
-                    // Reset the attackers this turn/last turn
-                    game.resetPlayersAttackedOnNextTurn();
 
                     game.getEndOfTurn().executeAt();
                     break;
@@ -392,11 +391,15 @@ public class PhaseHandler implements java.io.Serializable {
                     int numDiscard = playerTurn.isUnlimitedHandSize() || handSize <= max || handSize == 0 ? 0 : handSize - max;
 
                     if (numDiscard > 0) {
+                        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                        moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
+                        moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
+
                         final CardZoneTable table = new CardZoneTable();
                         final CardCollection discarded = new CardCollection();
                         boolean firstDiscarded = playerTurn.getNumDiscardedThisTurn() == 0;
                         for (Card c : playerTurn.getController().chooseCardsToDiscardToMaximumHandSize(numDiscard)) {
-                            if (playerTurn.discard(c, null, false, table) != null) {
+                            if (playerTurn.discard(c, null, false, table, moveParams) != null) {
                                 discarded.add(c);
                             }
                         }
@@ -418,17 +421,13 @@ public class PhaseHandler implements java.io.Serializable {
                         c.onCleanupPhase(playerTurn);
                     }
 
-                    game.getEndOfCombat().executeUntil(); //Repeat here in case Time Stop et. al. ends combat early
+                    endCombat(); //Repeat here in case Time Stop et. al. ends combat early
                     game.getEndOfTurn().executeUntil();
                     game.getEndOfTurn().executeUntilEndOfPhase(playerTurn);
                     game.getEndOfTurn().registerUntilEndCommand(playerTurn);
 
                     for (Player player : game.getPlayers()) {
                         player.getController().autoPassCancel(); // autopass won't wrap to next turn
-                    }
-                    // TODO can probably be removed now that onCleanupPhase is done for all Registered
-                    for (Player player : game.getLostPlayers()) {
-                        player.clearAssignedDamage();
                     }
 
                     nUpkeepsThisTurn = 0;
@@ -440,9 +439,6 @@ public class PhaseHandler implements java.io.Serializable {
 
                     // Rule 514.3a - state-based actions
                     game.getAction().checkStateEffects(true);
-
-                    // done this after check state effects, so it only has effect next check
-                    game.getCleanup().executeUntil(getNextTurn());
                     break;
 
                 default:
@@ -528,6 +524,12 @@ public class PhaseHandler implements java.io.Serializable {
                     // set previous player
                     playerPreviousTurn = this.getPlayerTurn();
                     setPlayerTurn(handleNextTurn());
+
+                    // done this after check state effects, so it only has effect next check
+                    game.getCleanup().executeUntil(playerTurn);
+                    // start effects for next turn
+                    game.getCleanup().executeUntil();
+
                     // "Trigger" for begin turn to get around a phase skipping
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                     runParams.put(AbilityKey.Player, playerTurn);
@@ -562,30 +564,48 @@ public class PhaseHandler implements java.io.Serializable {
                     continue;
                 }
 
+                final CardCollection untapFromCancel = new CardCollection();
+                // do a full loop first so attackers can't be used to pay for Propaganda
                 for (final Card attacker : combat.getAttackers()) {
                     final boolean shouldTapForAttack = !attacker.hasKeyword(Keyword.VIGILANCE) && !attacker.hasKeyword("Attacking doesn't cause CARDNAME to tap.");
                     if (shouldTapForAttack) {
                         // set tapped to true without firing triggers because it may affect propaganda costs
                         attacker.setTapped(true);
+                        untapFromCancel.add(attacker);
                     }
+                }
 
+                for (final Card attacker : combat.getAttackers()) {
+                    // TODO currently doesn't refund previous attackers (can really only happen if you cancel paying for a creature with an attack requirement that could be satisfied without a tax)
                     final boolean canAttack = CombatUtil.checkPropagandaEffects(game, attacker, combat);
-                    attacker.setTapped(false);
 
-                    if (canAttack) {
-                        if (shouldTapForAttack) {
-                            attacker.tap(true, true);
-                        }
-                    } else {
+                    if (!canAttack) {
                         combat.removeFromCombat(attacker);
+                        if (untapFromCancel.contains(attacker)) {
+                            attacker.setTapped(false);
+                        }
                         success = CombatUtil.validateAttackers(combat);
                         if (!success) {
+                            for (Card c : untapFromCancel) {
+                                c.setTapped(false);
+                            }
+                            // might have been sacrificed while paying
+                            combat.removeAbsentCombatants();
+                            combat.initConstraints();
                             break;
                         }
                     }
                 }
 
             } while (!success);
+
+            for (final Card attacker : combat.getAttackers()) {
+                final boolean shouldTapForAttack = !attacker.hasKeyword(Keyword.VIGILANCE) && !attacker.hasKeyword("Attacking doesn't cause CARDNAME to tap.");
+                if (shouldTapForAttack) {
+                    attacker.setTapped(false);
+                    attacker.tap(true, true);
+                }
+            }
 
             // Exert creatures here
             List<Card> possibleExerters = CardLists.getKeyword(combat.getAttackers(),
@@ -795,8 +815,8 @@ public class PhaseHandler implements java.io.Serializable {
 
             // Run this trigger once for each blocker
             for (final Card b : blockers) {
-                b.addBlockedThisTurn(a);
-                a.addBlockedByThisTurn(b);
+                b.addBlockedThisTurn(CardUtil.getLKICopy(a));
+                a.addBlockedByThisTurn(CardUtil.getLKICopy(b));
 
             	final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Attacker, a);
@@ -824,9 +844,6 @@ public class PhaseHandler implements java.io.Serializable {
 
     private Player handleNextTurn() {
         game.getStack().onNextTurn();
-        // reset mustAttackEntity
-        playerTurn.setMustAttackEntityThisTurn(playerTurn.getMustAttackEntity());
-        playerTurn.setMustAttackEntity(null);
 
         game.getTriggerHandler().clearThisTurnDelayedTrigger();
         game.getTriggerHandler().resetTurnTriggerState();
@@ -1061,6 +1078,7 @@ public class PhaseHandler implements java.io.Serializable {
                         }
 
                     }
+                    game.copyLastState();
                     loopCount++;
                 } while (loopCount < 999 || !pPlayerPriority.getController().isAI());
 
@@ -1201,8 +1219,6 @@ public class PhaseHandler implements java.io.Serializable {
         endCombat();
         game.getAction().checkStateEffects(true);
         setPhase(PhaseType.COMBAT_END);
-        // End Combat always happens
-        game.getEndOfCombat().executeUntil();
         advanceToNextPhase();
     }
 
@@ -1238,6 +1254,7 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public void endCombat() {
+        game.getEndOfCombat().executeUntil();
         if (combat != null) {
             combat.endCombat();
             combat = null;

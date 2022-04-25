@@ -9,7 +9,7 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
 SVar:NoZeroToughnessAI:True
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a number of 2/2 white Knight creature tokens with vigilance equal to the number of opponents you have.
-SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ Y | TokenScript$ w_2_2_knight_vigilance | LegacyImage$ w 2 2 knight vigilance eld
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ Y | TokenScript$ w_2_2_knight_vigilance
 SVar:Y:PlayerCountOpponents$Amount
 DeckHas:Ability$Token
 Oracle:Flying, vigilance\nSilverwing Squadron's power and toughness are each equal to the number of creatures you control.\nWhenever Silverwing Squadron attacks, create a number of 2/2 white Knight creature tokens with vigilance equal to the number of opponents you have.

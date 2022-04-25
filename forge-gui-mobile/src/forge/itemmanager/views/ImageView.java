@@ -17,15 +17,17 @@ import forge.card.CardRenderer.CardStackPosition;
 import forge.deck.*;
 import forge.deck.io.DeckPreferences;
 import forge.game.card.CardView;
+import forge.gamemodes.limited.CardRanker;
 import forge.gamemodes.planarconquest.ConquestCommander;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.*;
 import forge.itemmanager.filters.ItemFilter;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.ImageUtil;
-import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Utils;
 
@@ -129,8 +131,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         }
     }
     private final ExpandCollapseButton btnExpandCollapseAll = new ExpandCollapseButton();
-    private final FComboBox<Object> cbGroupByOptions = new FComboBox<>(Localizer.getInstance().getMessage("lblGroups") + " ");
-    private final FComboBox<Object> cbPileByOptions = new FComboBox<>(Localizer.getInstance().getMessage("lblPiles") + " ");
+    private final FComboBox<Object> cbGroupByOptions = new FComboBox<>(Forge.getLocalizer().getMessage("lblGroups") + " ");
+    private final FComboBox<Object> cbPileByOptions = new FComboBox<>(Forge.getLocalizer().getMessage("lblPiles") + " ");
 
     public ImageView(ItemManager<T> itemManager0, ItemManagerModel<T> model0) {
         super(itemManager0, model0);
@@ -352,7 +354,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         otherItems = groups.get(groups.size() - 1);
                     }
                     else {
-                        otherItems = new Group(Localizer.getInstance().getMessage("lblOther"));
+                        otherItems = new Group(Forge.getLocalizer().getMessage("lblOther"));
                         otherItems.isCollapsed = btnExpandCollapseAll.isAllCollapsed;
                         groups.add(otherItems);
                     }
@@ -659,7 +661,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public String getCaption() {
-        return Localizer.getInstance().getMessage("lblImageView");
+        return Forge.getLocalizer().getMessage("lblImageView");
     }
 
     @Override
@@ -985,6 +987,26 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
             if (item instanceof PaperCard) {
                 CardRenderer.drawCard(g, (PaperCard) item, x, y, w, h, pos);
+                if (itemManager.getShowRanking() && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_OVERLAY_DRAFT_RANKING)) {
+                    double score = CardRanker.getRawScore((PaperCard) item);
+                    int draftRank = score <= 0 ? 0 : score > 99 ? 99 : (int) Math.round(CardRanker.getRawScore((PaperCard) item));
+                    float rankSize = w/2;
+                    float y2 = y+(rankSize-(rankSize*0.1f));
+                    float x2 = x+rankSize/2;
+                    if (draftRank >= 90) {
+                        g.drawImage(FSkinImage.DRAFTRANK_S, x2, y2+1, rankSize, rankSize);
+                    } else if (draftRank >= 80 && draftRank <= 89 ) {
+                        g.drawImage(FSkinImage.DRAFTRANK_A, x2, y2+1, rankSize, rankSize);
+                    } else if (draftRank >= 60 && draftRank <= 79 ) {
+                        g.drawImage(FSkinImage.DRAFTRANK_B, x2, y2+1, rankSize, rankSize);
+                    } else if (draftRank >= 25 && draftRank <= 59 ) {
+                        g.drawImage(FSkinImage.DRAFTRANK_C, x2, y2+1, rankSize, rankSize);
+                    } else {
+                        g.drawImage(FSkinImage.DRAFTRANK_D, x2, y2+1, rankSize, rankSize);
+                    }
+                    String value = String.valueOf(draftRank);
+                    g.drawText(value, FSkinFont.forHeight(rankSize/4), Color.WHITE, x, y, w, h, true, Align.center, true);
+                }
             } else if (item instanceof ConquestCommander) {
                 CardRenderer.drawCard(g, ((ConquestCommander) item).getCard(), x, y, w, h, pos);
             } else if (deckSelectMode) {
@@ -1065,9 +1087,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                                     g.drawImage(DeckPreferences.getPrefs(dp).getStarCount() > 0 ? FSkinImage.HDSTAR_FILLED : FSkinImage.HDSTAR_OUTLINE, x, y, symbolSize, symbolSize);
                                 else
                                     g.drawImage(DeckPreferences.getPrefs(dp).getStarCount() > 0 ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTLINE, x, y, symbolSize, symbolSize);
-                                if (dp.getAI()) {
-                                    g.drawOutlinedText("AI", GROUP_HEADER_FONT, Color.GREEN, Color.BLACK, x+PADDING, y+symbolSize+PADDING, w, h, true, Align.left, false, false);
-                                }
+                                //AI Icon
+                                g.drawImage(dp.getAI().inMainDeck == 0 ? FSkinImage.AI_ACTIVE : FSkinImage.AI_INACTIVE, x, y+symbolSize, symbolSize, symbolSize);
                             }
                         }
                     }

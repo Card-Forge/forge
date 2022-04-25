@@ -1,7 +1,9 @@
 package forge.game.ability.effects;
 
 import java.util.List;
+import java.util.Map;
 
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -16,6 +18,16 @@ public class DrawEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
+
+        if (sa.hasParam("IfDesc")) {
+            if (sa.getParam("IfDesc").equals("True") && sa.hasParam("SpellDescription")) {
+                String ifDesc = sa.getParam("SpellDescription");
+                sb.append(ifDesc, 0, ifDesc.indexOf(",") + 1);
+            } else {
+                sb.append(sa.getParam("IfDesc"));
+            }
+            sb.append(" ");
+        }
 
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
@@ -42,6 +54,9 @@ public class DrawEffect extends SpellAbilityEffect {
 
         final boolean upto = sa.hasParam("Upto");
         final boolean optional = sa.hasParam("OptionalDecider") || upto;
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
 
         for (final Player p : getDefinedPlayersOrTargeted(sa)) {
             // TODO can this be removed?
@@ -70,7 +85,7 @@ public class DrawEffect extends SpellAbilityEffect {
                 actualNum = p.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblHowManyCardDoYouWantDraw"), 0, actualNum);
             }
 
-            final CardCollectionView drawn = p.drawCards(actualNum, sa);
+            final CardCollectionView drawn = p.drawCards(actualNum, sa, moveParams);
             if (sa.hasParam("Reveal")) {
                 if (sa.getParam("Reveal").equals("All")) {
                     p.getGame().getAction().reveal(drawn, p, false);

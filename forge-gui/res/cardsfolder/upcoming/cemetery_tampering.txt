@@ -1,0 +1,10 @@
+Name:Cemetery Tampering
+ManaCost:2 B
+Types:Enchantment
+K:Hideaway:5
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may mill three cards. Then if there are twenty or more cards in your graveyard, you may play the exiled card without paying its mana cost.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Optional$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | ConditionPresent$ Card.IsRemembered | ConditionZone$ Exile | ConditionCheckSVar$ X | ConditionSVarCompare$ GE20 | Defined$ Remembered | Amount$ All | Controller$ You | WithoutManaCost$ True | Optional$ True
+SVar:X:Count$ValidGraveyard Card.YouOwn
+DeckHas:Ability$Mill
+Oracle:Hideaway 5 (When this enchantment enters the battlefield, look at the top five cards of your library, exile one face down, then put the rest on the bottom in a random order.)\nAt the beginning of your upkeep, you may mill three cards. Then if there are twenty or more cards in your graveyard, you may play the exiled card without paying its mana cost.

@@ -36,7 +36,7 @@ public class ComputerUtilAbility {
             public boolean apply(final Card c) {
                 if (!c.getSVar("NeedsToPlay").isEmpty()) {
                     final String needsToPlay = c.getSVar("NeedsToPlay");
-                    CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), needsToPlay.split(","), c.getController(), c, null);
+                    CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), needsToPlay, c.getController(), c, null);
                     if (list.isEmpty()) {
                         return false;
                     }
@@ -72,10 +72,8 @@ public class ComputerUtilAbility {
         if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
             all.add(player.getCardsIn(ZoneType.Library).get(0));
         }
-        for (Player p : game.getPlayers()) {
-            all.addAll(p.getCardsIn(ZoneType.Exile));
-            all.addAll(p.getCardsIn(ZoneType.Battlefield));
-        }
+        all.addAll(game.getPlayers().getCardsIn(ZoneType.Exile));
+        all.addAll(game.getPlayers().getCardsIn(ZoneType.Battlefield));
         return all;
     }
 

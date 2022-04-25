@@ -18,5 +18,4 @@ Colors:red
 Types:Legendary Creature Spirit
 PT:5/2
 A:AB$ GainControl | Cost$ SubCounter<1/KI> | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | SpellDescription$ Gain control of target creature until end of turn.
-# This link may be a temporary solution and could change in the near future.
 Oracle:Remove a ki counter from Azamuki, Treachery Incarnate: Gain control of target creature until end of turn.

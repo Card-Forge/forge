@@ -3,8 +3,6 @@ ManaCost:5 U
 Types:Creature Dinosaur
 PT:3/6
 K:ETBReplacement:Other:CounterChoice
-SVar:CounterChoice:DB$ GenericChoice | Defined$ You | Choices$ Flying,Hexproof | SpellDescription$ CARDNAME enters the battlefield with your choice of a flying counter or a hexproof counter on it.
-SVar:Flying:DB$ PutCounter | ETB$ True | CounterType$ Flying | CounterNum$ 1 | SpellDescription$ CARDNAME enters the battlefield with a flying counter on it
-SVar:Hexproof:DB$ PutCounter | ETB$ True | CounterType$ Hexproof | CounterNum$ 1 | SpellDescription$ CARDNAME enters the battlefield with a hexproof counter on it
+SVar:CounterChoice:DB$ PutCounter | ETB$ True | CounterType$ Flying,Hexproof | SpellDescription$ CARDNAME enters the battlefield with your choice of a flying counter or a hexproof counter on it.
 DeckHas:Ability$Counters
 Oracle:Wingfold Pteron enters the battlefield with your choice of a flying counter or a hexproof counter on it. (A creature with hexproof can't be the target of spells or abilities your opponents control.)

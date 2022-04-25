@@ -4,7 +4,7 @@ Types:Artifact Equipment
 K:Equip:2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 1 | Description$ Equipped creature gets +2/+1.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigOppToken | TriggerDescription$ When CARDNAME enters the battlefield, target opponent creates two 0/2 green Plant creature tokens with defender.
-SVar:TrigOppToken:DB$ Token | ValidTgts$ Opponent | TokenAmount$ 2 | LegacyImage$ g 0 2 plant defender xln | TokenScript$ g_0_2_plant_defender | TokenOwner$ Targeted
+SVar:TrigOppToken:DB$ Token | ValidTgts$ Opponent | TokenAmount$ 2 | TokenScript$ g_0_2_plant_defender | TokenOwner$ Targeted
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ DBTransform | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may transform CARDNAME.
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | Optional$ True
 AlternateMode:DoubleFaced

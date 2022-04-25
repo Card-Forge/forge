@@ -4,7 +4,7 @@ Types:Creature Eldrazi Drone
 PT:5/4
 K:Devoid
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 colorless Eldrazi Scion creature tokens. They have "Sacrifice this creature: Add {C}." ({C} represents colorless mana.)
-SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You | LegacyImage$ c 1 1 eldrazi scion sac ogw
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_eldrazi_scion_sac | TokenOwner$ You
 A:AB$ Regenerate | Cost$ 1 C | SpellDescription$ Regenerate CARDNAME.
 DeckNeeds:Ability$Mana.Colorless
 DeckHints:Type$Eldrazi

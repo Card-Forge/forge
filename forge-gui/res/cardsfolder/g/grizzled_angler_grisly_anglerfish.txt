@@ -5,9 +5,9 @@ PT:2/3
 A:AB$ Mill | Cost$ T | Defined$ You | NumCards$ 2 | SubAbility$ DBTransform | SpellDescription$ Mill two cards. Then if there is a colorless creature card in your graveyard, transform CARDNAME.
 SVar:DBTransform:DB$ SetState | Defined$ Self | Mode$ Transform | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 SVar:X:Count$ValidGraveyard Creature.YouOwn+Colorless
-AlternateMode:DoubleFaced
-DeckHints:Ability$Delirium & Color$Colorless
 DeckHas:Ability$Graveyard
+DeckHints:Ability$Delirium & Color$Colorless
+AlternateMode:DoubleFaced
 Oracle:{T}: Mill two cards. Then if there is a colorless creature card in your graveyard, transform Grizzled Angler.
 
 ALTERNATE
@@ -17,5 +17,5 @@ ManaCost:no cost
 Types:Creature Eldrazi Fish
 PT:4/5
 A:AB$ Effect | Cost$ 6 | StaticAbilities$ MustAttack | SpellDescription$ Creatures your opponents control attack this turn if able.
-SVar:MustAttack:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Creatures your opponents control attack this turn if able.
+SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.OppCtrl | Description$ Creatures your opponents control attack this turn if able.
 Oracle:{6}: Creatures your opponents control attack this turn if able.

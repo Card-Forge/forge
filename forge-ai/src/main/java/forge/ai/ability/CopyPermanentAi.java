@@ -98,7 +98,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
                         sa.getTargets().add(aiPlayer);
                         return true;
                     } else {
-                        for (Player p : aiPlayer.getTeamMates(true)) {
+                        for (Player p : aiPlayer.getYourTeam()) {
                             if (sa.canTarget(p)) {
                                 sa.getTargets().add(p);
                                 return true;
@@ -248,7 +248,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
         final boolean canCopyLegendary = sa.hasParam("NonLegendary");
         final String filter = canCopyLegendary ? "Permanent" : "Permanent.YouDontCtrl,Permanent.nonLegendary";
         // TODO add filter to not select Legendary from Other Player when ai already have a Legendary with that name
-        return CardLists.getValidCards(options, filter.split(","), ctrl, host, sa);
+        return CardLists.getValidCards(options, filter, ctrl, host, sa);
     }
 
     @Override

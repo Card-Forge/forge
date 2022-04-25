@@ -1,0 +1,8 @@
+Name:Shrine Steward
+ManaCost:5
+Types:Artifact Creature Construct
+PT:3/2
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an Aura or Shrine card, reveal it, put it into your hand, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Aura,Shrine | ChangeNum$ 1 | ChangeTypeDesc$ Aura or Shrine card | ShuffleNonMandatory$ True
+DeckNeeds:Type$Aura|Shrine
+Oracle:When Shrine Steward enters the battlefield, you may search your library for an Aura or Shrine card, reveal it, put it into your hand, then shuffle.

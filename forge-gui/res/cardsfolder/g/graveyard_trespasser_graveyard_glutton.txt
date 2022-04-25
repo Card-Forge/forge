@@ -10,8 +10,8 @@ SVar:DBDrain:DB$ LoseLife | ConditionDefined$ Remembered | ConditionPresent$ Cre
 SVar:DBGainLife:DB$ GainLife | ConditionDefined$ Remembered | ConditionPresent$ Creature | Defined$ You | LifeAmount$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Daybound
-AlternateMode:DoubleFaced
 DeckHas:Ability$Graveyard|LifeGain
+AlternateMode:DoubleFaced
 Oracle:Ward—Discard a card.\nWhenever Graveyard Trespasser enters the battlefield or attacks, exile up to one target card from a graveyard. If a creature card was exiled this way, each opponent loses 1 life and you gain 1 life.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)
 
 ALTERNATE

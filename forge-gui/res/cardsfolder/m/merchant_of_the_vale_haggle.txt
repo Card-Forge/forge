@@ -3,8 +3,8 @@ ManaCost:2 R
 Types:Creature Human Peasant
 PT:2/3
 A:AB$ Draw | Cost$ 2 R Discard<1/Card> | NumCards$ 1 | Defined$ You | SpellDescription$ Draw a card.
-Oracle:{2}{R}, Discard a card: Draw a card.
 AlternateMode:Adventure
+Oracle:{2}{R}, Discard a card: Draw a card.
 
 ALTERNATE
 

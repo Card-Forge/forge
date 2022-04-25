@@ -3,5 +3,5 @@ ManaCost:10
 Types:Creature Eldrazi
 PT:10/10
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast this spell, create a 10/10 colorless Eldrazi creature token.
-SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_10_10_eldrazi | TokenOwner$ You | LegacyImage$ c 10 10 eldrazi bfz
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_10_10_eldrazi | TokenOwner$ You
 Oracle:When you cast this spell, create a 10/10 colorless Eldrazi creature token.

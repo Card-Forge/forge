@@ -32,21 +32,22 @@ public enum ProtocolMethod {
     // Server -> Client
     setGameView         (Mode.SERVER, Void.TYPE, GameView.class),
     openView            (Mode.SERVER, Void.TYPE, TrackableCollection/*PlayerView*/.class),
-    afterGameEnd        (Mode.SERVER),
-    showCombat          (Mode.SERVER),
+    afterGameEnd        (Mode.SERVER, Void.TYPE),
+    showCombat          (Mode.SERVER, Void.TYPE),
     showPromptMessage   (Mode.SERVER, Void.TYPE, PlayerView.class, String.class),
+    showCardPromptMessage   (Mode.SERVER, Void.TYPE, PlayerView.class, String.class, CardView.class),
     updateButtons       (Mode.SERVER, Void.TYPE, PlayerView.class, String.class, String.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
-    flashIncorrectAction(Mode.SERVER),
-    alertUser           (Mode.SERVER),
+    flashIncorrectAction(Mode.SERVER, Void.TYPE),
+    alertUser           (Mode.SERVER, Void.TYPE),
     updatePhase         (Mode.SERVER, Void.TYPE, Boolean.TYPE),
     updateTurn          (Mode.SERVER, Void.TYPE, PlayerView.class),
-    updatePlayerControl (Mode.SERVER),
-    enableOverlay       (Mode.SERVER),
-    disableOverlay      (Mode.SERVER),
-    finishGame          (Mode.SERVER),
+    updatePlayerControl (Mode.SERVER, Void.TYPE),
+    enableOverlay       (Mode.SERVER, Void.TYPE),
+    disableOverlay      (Mode.SERVER, Void.TYPE),
+    finishGame          (Mode.SERVER, Void.TYPE),
     showManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
     hideManaPool        (Mode.SERVER, Void.TYPE, PlayerView.class),
-    updateStack         (Mode.SERVER),
+    updateStack         (Mode.SERVER, Void.TYPE),
     updateZones         (Mode.SERVER, Void.TYPE, Iterable/*PlayerZoneUpdate*/.class),
     tempShowZones       (Mode.SERVER, Iterable/*PlayerZoneUpdate*/.class, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
     hideZones           (Mode.SERVER, Void.TYPE, PlayerView.class, Iterable/*PlayerZoneUpdate*/.class),
@@ -71,8 +72,8 @@ public enum ProtocolMethod {
     manipulateCardList   (Mode.SERVER, List.class, String.class, Iterable.class, Iterable.class, Boolean.TYPE, Boolean.TYPE, Boolean.TYPE),
     setCard             (Mode.SERVER, Void.TYPE, CardView.class),
     setSelectables      (Mode.SERVER, Void.TYPE, Iterable/*CardView*/.class),
-    clearSelectables    (Mode.SERVER),
-    refreshField        (Mode.SERVER),
+    clearSelectables    (Mode.SERVER, Void.TYPE),
+    refreshField        (Mode.SERVER, Void.TYPE),
     // TODO case "setPlayerAvatar":
     openZones           (Mode.SERVER, PlayerZoneUpdates.class, PlayerView.class, Collection/*ZoneType*/.class, Map/*PlayerView,Object*/.class),
     restoreOldZones     (Mode.SERVER, Void.TYPE, PlayerView.class, PlayerZoneUpdates.class),
@@ -85,18 +86,18 @@ public enum ProtocolMethod {
     // which client and server wait for one another's response and block
     // the threads that're supposed to give that response
     useMana                   (Mode.CLIENT, Void.TYPE, Byte.TYPE),
-    undoLastAction            (Mode.CLIENT, Void.TYPE, Boolean.TYPE),
+    undoLastAction            (Mode.CLIENT, Void.TYPE),
     selectPlayer              (Mode.CLIENT, Void.TYPE, PlayerView.class, ITriggerEvent.class),
     selectCard                (Mode.CLIENT, Void.TYPE, CardView.class, List.class, ITriggerEvent.class),
-    selectButtonOk            (Mode.CLIENT),
-    selectButtonCancel        (Mode.CLIENT),
+    selectButtonOk            (Mode.CLIENT, Void.TYPE),
+    selectButtonCancel        (Mode.CLIENT, Void.TYPE),
     selectAbility             (Mode.CLIENT, Void.TYPE, SpellAbilityView.class),
-    passPriorityUntilEndOfTurn(Mode.CLIENT),
-    passPriority              (Mode.CLIENT),
+    passPriorityUntilEndOfTurn(Mode.CLIENT, Void.TYPE),
+    passPriority              (Mode.CLIENT, Void.TYPE),
     nextGameDecision          (Mode.CLIENT, Void.TYPE, NextGameDecision.class),
     getActivateDescription    (Mode.CLIENT, String.class, CardView.class),
-    concede                   (Mode.CLIENT),
-    alphaStrike               (Mode.CLIENT),
+    concede                   (Mode.CLIENT, Void.TYPE),
+    alphaStrike               (Mode.CLIENT, Void.TYPE),
     reorderHand               (Mode.CLIENT, Void.TYPE, CardView.class, Integer.TYPE);
 
     private enum Mode {
@@ -161,13 +162,17 @@ public enum ProtocolMethod {
         if(!GuiBase.hasPropertyConfig())
             return; //if the experimental network option is enabled, then check the args, else let the default decoder handle it
 
-        for (int iArg = 0; iArg < args.length; iArg++) {
-            final Object arg = args[iArg];
-            final Class<?> type = this.args[iArg];
-            if (!ReflectionUtil.isInstance(arg, type)) {
-                //throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
-                System.err.println(String.format("InternalError: Protocol method %s: illegal argument (%d) of type %s, %s expected (ProtocolMethod.java)", name(), iArg, arg.getClass().getName(), type.getName()));
+        try {
+            for (int iArg = 0; iArg < args.length; iArg++) {
+                final Object arg = args[iArg];
+                final Class<?> type = this.args[iArg];
+                if (!ReflectionUtil.isInstance(arg, type)) {
+                    //throw new InternalError(String.format("Protocol method %s: illegal argument (%d) of type %s, %s expected", name(), iArg, arg.getClass().getName(), type.getName()));
+                    System.err.println(String.format("InternalError: Protocol method %s: illegal argument (%d) of type %s, %s expected (ProtocolMethod.java)", name(), iArg, arg.getClass().getName(), type.getName()));
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

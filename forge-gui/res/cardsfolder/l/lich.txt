@@ -14,7 +14,7 @@ SVar:TrigLoseOrSac:DB$ LosesGame | Defined$ You | ConditionCheckSVar$ Permanents
 SVar:DBSacrificePerm:DB$ Sacrifice | Amount$ PermanentsToSac | SacValid$ Permanent.nontoken | ConditionCheckSVar$ PermanentsToSac | ConditionSVarCompare$ LEY
 SVar:PermanentsToSac:TriggerCount$DamageAmount
 SVar:Y:Count$Valid Permanent.nontoken+YouCtrl
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLose | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you lose the game.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLose | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you lose the game.
 SVar:TrigLose:DB$ LosesGame | Defined$ You
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True

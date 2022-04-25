@@ -17,6 +17,10 @@
  */
 package forge.game.cost;
 
+import java.util.Map;
+
+import forge.game.Game;
+import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
@@ -94,8 +98,12 @@ public class CostDraw extends CostPart {
      */
     @Override
     public final boolean payAsDecided(final Player ai, final PaymentDecision decision, SpellAbility ability, final boolean effect) {
+        final Game game = ai.getGame();
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+        moveParams.put(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield());
+        moveParams.put(AbilityKey.LastStateGraveyard, game.getLastStateGraveyard());
         for (final Player p : decision.players) {
-            p.drawCards(decision.c, ability);
+            p.drawCards(decision.c, ability, moveParams);
         }
         return true;
     }

@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ NameCard | Cost$ 1 U | Defined$ You | SubAbility$ DBMill | SpellDescription$ Choose a card name, then target opponent puts the top card of their library into their graveyard. If a card with the chosen name was milled this way, you draw a card. Draw a card at the beginning of the next turn's upkeep.
 SVar:DBMill:DB$ Mill | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | RememberMilled$ True | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DelTrigSlowtrip
-SVar:DelTrigSlowtrip:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
+SVar:DelTrigSlowtrip:DB$ DelayedTrigger | NextTurn$ True | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ DrawSlowtrip | TriggerDescription$ Draw a card.
 SVar:DrawSlowtrip:DB$ Draw | NumCards$ 1 | Defined$ You
 SVar:X:Remembered$Valid Card.NamedCard
 AI:RemoveDeck:All

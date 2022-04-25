@@ -4,6 +4,6 @@ Types:Legendary Planeswalker Ajani
 Loyalty:4
 A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | CounterNum$ 1 | CounterType$ P1P1 | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Put a +1/+1 counter on up to one target creature.
 A:AB$ Pump | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Flying & Double Strike | SpellDescription$ Target creature gains flying and double strike until end of turn.
-A:AB$ Token | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | TokenAmount$ X | TokenScript$ w_2_2_cat | TokenOwner$ You | LegacyImage$ w 2 2 cat m13 | Ultimate$ True | SpellDescription$ Create X 2/2 white Cat creature tokens, where X is your life total.
+A:AB$ Token | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | TokenAmount$ X | TokenScript$ w_2_2_cat | TokenOwner$ You | Ultimate$ True | SpellDescription$ Create X 2/2 white Cat creature tokens, where X is your life total.
 SVar:X:Count$YourLifeTotal
 Oracle:[+1]: Put a +1/+1 counter on up to one target creature.\n[-3]: Target creature gains flying and double strike until end of turn.\n[-8]: Create X 2/2 white Cat creature tokens, where X is your life total.

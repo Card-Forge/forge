@@ -1,0 +1,14 @@
+Name:Kami of Transience
+ManaCost:1 G
+Types:Creature Spirit
+PT:2/2
+K:Trample
+T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an enchantment spell, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ At the beginning of each end step, if an enchantment was put into your graveyard from the battlefield this turn, you may return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Enchantment.YouOwn
+SVar:BuffedBy:Enchantment
+DeckHas:Ability$Counters
+DeckNeeds:Type$Enchantment
+Oracle:Trample\nWhenever you cast an enchantment spell, put a +1/+1 counter on Kami of Transience.\nAt the beginning of each end step, if an enchantment was put into your graveyard from the battlefield this turn, you may return Kami of Transience from your graveyard to your hand.

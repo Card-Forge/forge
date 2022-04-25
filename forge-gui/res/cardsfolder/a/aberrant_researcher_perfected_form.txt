@@ -4,11 +4,11 @@ Types:Creature Human Insect
 PT:3/2
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, mill a card. If an instant or sorcery card was milled this way, transform CARDNAME.
-SVar:TrigMill:DB$ Mill | Defined$ You | NumCards$ 1 | RememberMilled$ True | SubAbility$ DBTransform
+SVar:TrigMill:DB$ Mill | Defined$ You | RememberMilled$ True | SubAbility$ DBTransform
 SVar:DBTransform:DB$ SetState | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Instant,Card.Sorcery | ConditionCompare$ EQ1 | SubAbility$ Cleanup | Mode$ Transform
 SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
-AlternateMode:DoubleFaced
 DeckHints:Ability$Delirium & Type$Instant|Sorcery
+AlternateMode:DoubleFaced
 Oracle:Flying\nAt the beginning of your upkeep, mill a card. If an instant or sorcery card was milled this way, transform Aberrant Researcher.
 
 ALTERNATE

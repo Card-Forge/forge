@@ -69,7 +69,7 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 CardCollection pool;
                 if (sa.hasParam("DefinedCards")) {
-                    pool = new CardCollection(AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa));
+                    pool = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
                 } else {
                     pool = new CardCollection(p.getCardsIn(zone));
                 }
@@ -92,9 +92,7 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
         if (randomChosen) {
             for (Entry<Player, List<CardCollectionView>> ev : record.entrySet()) {
                 CardCollectionView chosen = Aggregates.random(ev.getValue());
-                for (Card c : chosen) {
-                    source.addRemembered(c);
-                }
+                source.addRemembered(chosen);
             }
 
             SpellAbility sub = sa.getAdditionalAbility("ChosenPile");

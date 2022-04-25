@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import forge.card.CardType;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -834,9 +835,14 @@ public class Cost implements Serializable {
             sb.append(Cost.NUM_NAMES[i]);
         }
 
-        sb.append(" ").append(type);
+        sb.append(" ");
         if (1 != i) {
-            sb.append("s");
+            String [] typewords = type.split(" ");
+            String lastWord = typewords[typewords.length - 1];
+            sb.append(CardType.isASubType(lastWord) ? type.replace(lastWord, CardType.getPluralType(lastWord))
+                    : type + "s");
+        } else {
+            sb.append(type);
         }
 
         return sb.toString();
@@ -884,9 +890,9 @@ public class Cost implements Serializable {
                 } else {
                     costParts.add(0, new CostPartMana(oldManaCost.toManaCost(), r));
                 }
-            } else if (part instanceof CostDiscard || part instanceof CostTapType ||
+            } else if (part instanceof CostDiscard || part instanceof CostDraw ||
                     part instanceof CostAddMana || part instanceof CostPayLife
-                    || part instanceof CostPutCounter) {
+                    || part instanceof CostPutCounter || part instanceof CostTapType) {
                 boolean alreadyAdded = false;
                 for (final CostPart other : costParts) {
                     if ((other.getClass().equals(part.getClass()) || (part instanceof CostPutCounter && ((CostPutCounter)part).getCounter().is(CounterEnumType.LOYALTY))) &&
@@ -894,9 +900,9 @@ public class Cost implements Serializable {
                             StringUtils.isNumeric(part.getAmount()) &&
                             StringUtils.isNumeric(other.getAmount())) {
                         String amount = String.valueOf(Integer.parseInt(part.getAmount()) + Integer.parseInt(other.getAmount()));
-                        if (part instanceof CostPutCounter) { // path for Carth
-                            if (other instanceof CostPutCounter && ((CostPutCounter)other).getCounter().is(CounterEnumType.LOYALTY)) {
-                                costParts.add(new CostPutCounter(amount, CounterType.get(CounterEnumType.LOYALTY), part.getType(), part.getTypeDescription()));
+                        if (part instanceof CostPutCounter) { // path for Carth & Cumulative Upkeep
+                            if (other instanceof CostPutCounter && ((CostPutCounter)other).getCounter().equals(((CostPutCounter) part).getCounter())) {
+                                costParts.add(new CostPutCounter(amount, ((CostPutCounter) part).getCounter(), part.getType(), part.getTypeDescription()));
                             } else if (other instanceof CostRemoveCounter && ((CostRemoveCounter)other).counter.is(CounterEnumType.LOYALTY)) {
                                 Integer counters = Integer.parseInt(other.getAmount()) - Integer.parseInt(part.getAmount());
                                 // the cost can turn positive if multiple Carth raise it
@@ -910,6 +916,8 @@ public class Cost implements Serializable {
                             }
                         } else if (part instanceof CostDiscard) {
                             costParts.add(new CostDiscard(amount, part.getType(), part.getTypeDescription()));
+                        } else if (part instanceof CostDraw) {
+                            costParts.add(new CostDraw(amount, part.getType()));
                         } else if (part instanceof CostTapType) {
                             CostTapType tappart = (CostTapType)part;
                             costParts.add(new CostTapType(amount, part.getType(), part.getTypeDescription(), !tappart.canTapSource));

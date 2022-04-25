@@ -451,9 +451,6 @@ public class PumpAi extends PumpAiBase {
                 } else {
                     return false;
                 }
-            } else if (sa.getParam("AILogic").equals("DonateTargetPerm")) {
-                // Donate step 2 - target a donatable permanent.
-                return SpecialCardAi.Donate.considerDonatingPermanent(ai, sa);
             } else if (sa.getParam("AILogic").equals("SacOneEach")) {
                 // each player sacrifices one permanent, e.g. Vaevictis, Asmadi the Dire - grab the worst for allied and
                 // the best for opponents
@@ -543,11 +540,8 @@ public class PumpAi extends PumpAiBase {
         // Filter AI-specific targets if provided
         list = ComputerUtil.filterAITgts(sa, ai, list, true);
 
-        if (list.isEmpty()) {
-            if (ComputerUtil.activateForCost(sa, ai)) {
-                return pumpMandatoryTarget(ai, sa);
-            }
-            return mandatory && pumpMandatoryTarget(ai, sa);
+        if (list.isEmpty() && (mandatory || ComputerUtil.activateForCost(sa, ai))) {
+            return pumpMandatoryTarget(ai, sa);
         }
 
         if (!sa.isCurse()) {
@@ -626,9 +620,9 @@ public class PumpAi extends PumpAiBase {
 
         if (sa.isCurse()) {
             pref = CardLists.filterControlledBy(list, ai.getOpponents());
-            forced = CardLists.filterControlledBy(list, ai);
+            forced = CardLists.filterControlledBy(list, ai.getYourTeam());
         } else {
-            pref = CardLists.filterControlledBy(list, ai);
+            pref = CardLists.filterControlledBy(list, ai.getYourTeam());
             forced = CardLists.filterControlledBy(list, ai.getOpponents());
         }
 
@@ -637,7 +631,7 @@ public class PumpAi extends PumpAiBase {
                 break;
             }
 
-            Card c = ComputerUtilCard.getBestAI(list);
+            Card c = ComputerUtilCard.getBestAI(pref);
             pref.remove(c);
             sa.getTargets().add(c);
         }
@@ -655,7 +649,6 @@ public class PumpAi extends PumpAiBase {
             }
 
             forced.remove(c);
-
             sa.getTargets().add(c);
         }
 

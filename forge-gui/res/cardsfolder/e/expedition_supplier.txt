@@ -2,7 +2,7 @@ Name:Expedition Supplier
 ManaCost:2 W
 Types:Creature Human Warrior
 PT:2/2
-T:Mode$ ChangesZoneAll | ValidCards$ Human.YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ DBMakeCard | TriggerDescription$ Whenever CARDNAME or another Human enters the battlefield under your control, conjure a card named Utility Knife onto the battlefield. This ability triggers only once each turn.
+T:Mode$ ChangesZoneAll | ValidCards$ Human.YouCtrl,Warrior.YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ DBMakeCard | TriggerDescription$ Whenever one or more Humans and/or Warriors enter the battlefield under your control, conjure a card named Utility Knife onto the battlefield. This ability triggers only once each turn.
 SVar:DBMakeCard:DB$ MakeCard | Name$ Utility Knife | Zone$ Battlefield | SpellDescription$ Conjure a card named Utility Knife onto the battlefield.
-DeckHints:Type$Human
-Oracle:Whenever Expedition Supplier or another Human enters the battlefield under your control, conjure a card named Utility Knife onto the battlefield. This ability triggers only once each turn.
+DeckHints:Type$Human|Warrior
+Oracle:Whenever one or more Humans and/or Warriors enter the battlefield under your control, conjure a card named Utility Knife onto the battlefield. This ability triggers only once each turn.

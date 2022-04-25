@@ -1,0 +1,7 @@
+Name:Brokers Initiate
+ManaCost:W
+Types:Creature Cat Citizen
+PT:0/4
+A:AB$ Animate | Cost$ 4 GU | Defined$ Self | Power$ 5 | Toughness$ 5 | SpellDescription$ CARDNAME has base power and toughness 5/5 until end of turn.
+DeckHints:Color$Green|Blue
+Oracle:{4}{G/U}: Brokers Initiate has base power and toughness 5/5 until end of turn.

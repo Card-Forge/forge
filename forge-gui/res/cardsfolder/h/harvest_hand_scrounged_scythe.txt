@@ -2,10 +2,10 @@ Name:Harvest Hand
 ManaCost:3
 Types:Artifact Creature Scarecrow
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, return it to the battlefield transformed under your control.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Defined$ TriggeredNewCardLKICopy | Destination$ Battlefield | Transformed$ True | GainControl$ True
-AlternateMode:DoubleFaced
 DeckHints:Type$Human
+AlternateMode:DoubleFaced
 Oracle:When Harvest Hand dies, return it to the battlefield transformed under your control.
 
 ALTERNATE

@@ -3,7 +3,7 @@ ManaCost:1 B B
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a Blood token and conjure a card named Blood Artist onto the battlefield.
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_blood_draw | SubAbility$ DBMakeCard
-SVar:DBMakeCard:DB$ MakeCard | Name$ Blood Artist | Zone$ Battlefield
+SVar:DBMakeCard:DB$ MakeCard | Name$ A-Blood Artist | Zone$ Battlefield
 T:Mode$ Sacrificed | ValidCard$ Blood.token+YouCtrl | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice a Blood token, each opponent loses 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1
 DeckHas:Ability$Token|Sacrifice|LifeGain & Type$Blood

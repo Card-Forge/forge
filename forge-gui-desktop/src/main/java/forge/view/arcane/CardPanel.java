@@ -56,6 +56,7 @@ import forge.game.keyword.Keyword;
 import forge.game.zone.ZoneType;
 import forge.gui.CardContainer;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeConstants.CounterDisplayType;
@@ -215,7 +216,11 @@ public class CardPanel extends SkinnedPanel implements CardContainer, IDisposabl
             return;
         }
 
-        cachedImage = new CachedCardImage(card, matchUI.getLocalPlayers(), imagePanel.getWidth(), imagePanel.getHeight()) {
+        // Obtain screen DPI scale and apply them
+        final float screenScale = GuiBase.getInterface().getScreenScale();
+        int imageWidth = Math.round(imagePanel.getWidth() * screenScale);
+        int imageHeight = Math.round(imagePanel.getHeight() * screenScale);
+        cachedImage = new CachedCardImage(card, matchUI.getLocalPlayers(), imageWidth, imageHeight) {
             @Override
             public void onImageFetched() {
                 if (cachedImage != null) {

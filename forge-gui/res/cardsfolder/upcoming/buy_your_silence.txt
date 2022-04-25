@@ -1,0 +1,7 @@
+Name:Buy Your Silence
+ManaCost:4 W
+Types:Sorcery
+A:SP$ ChangeZone | Cost$ 4 W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | TgtPromt$ Select target nonland permanant | SubAbility$ DBTreasure | StackDescription$ SpellDescription | SpellDescription$ Exile target nonland permanent. Its controller creates a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:DBTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ TargetedController
+DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
+Oracle:Exile target nonland permanent. Its controller creates a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

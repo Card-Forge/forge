@@ -1,0 +1,8 @@
+Name:Assassin's Ink
+ManaCost:2 B B
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Artifact.YouCtrl | Description$ This spell costs {1} less to cast if you control an artifact and {1} less to cast if you control an enchantment.
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Enchantment.YouCtrl | Secondary$ True | Description$ This spell costs {1} less to cast if you control an artifact and {1} less to cast if you control an enchantment.
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
+DeckHints:Type$Artifact|Enchantment
+Oracle:This spell costs {1} less to cast if you control an artifact and {1} less to cast if you control an enchantment.\nDestroy target creature or planeswalker.

@@ -4,7 +4,7 @@ Types:Legendary Planeswalker Garruk
 Loyalty:3
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_LE2_LOYALTY | Execute$ TrigTransform | TriggerDescription$ When CARDNAME has two or fewer loyalty counters on him, transform him.
 A:AB$ DealDamage | Cost$ AddCounter<0/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SubAbility$ DamageThis | Planeswalker$ True | SpellDescription$ CARDNAME deals 3 damage to target creature. That creature deals damage equal to its power to him.
-A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You | LegacyImage$ g 2 2 wolf isd | Planeswalker$ True | SpellDescription$ Create a 2/2 green Wolf creature token.
+A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenScript$ g_2_2_wolf | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 2/2 green Wolf creature token.
 SVar:DamageThis:DB$ DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
 SVar:Y:Targeted$CardPower
 SVar:TrigTransform:DB$ SetState | Defined$ Self | Mode$ Transform
@@ -18,7 +18,7 @@ ManaCost:no cost
 Colors:green,black
 Types:Legendary Planeswalker Garruk
 Loyalty:3
-A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ b_1_1_wolf_deathtouch | LegacyImage$ b 1 1 wolf deathtouch isd | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 1/1 black Wolf creature token with deathtouch.
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | TokenAmount$ 1 | TokenScript$ b_1_1_wolf_deathtouch | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 1/1 black Wolf creature token with deathtouch.
 A:AB$ ChangeZone | Cost$ SubCounter<1/LOYALTY> | UnlessCost$ Sac<1/Creature> | UnlessSwitched$ True | UnlessPayer$ You | Origin$ Library | Destination$ Hand | ChangeType$ Creature | ChangeNum$ 1 | Planeswalker$ True | SpellDescription$ Sacrifice a creature. If you do, search your library for a creature card, reveal it, put it into your hand, then shuffle.
 A:AB$ PumpAll | Cost$ SubCounter<3/LOYALTY> | ValidCards$ Creature.YouCtrl | KW$ Trample | NumAtt$ X | NumDef$ X | Planeswalker$ True | Ultimate$ True | SpellDescription$ Creatures you control gain trample and get +X/+X until end of turn, where X is the number of creature cards in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature

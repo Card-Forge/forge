@@ -34,7 +34,7 @@ public class CharmAi extends SpellAbilityAi {
             num = min = choices.size();
         } else {
             num = AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa);
-            min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParamOrDefault("MinCharmNum", "1"), sa) : num;
+            min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParam("MinCharmNum"), sa) : num;
         }
 
         boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
@@ -181,7 +181,7 @@ public class CharmAi extends SpellAbilityAi {
         } else if (ai.canGainLife() && aiLife <= 5) {
             // critical Life try to gain more
             chosenList.add(gain);
-        } else if (!ai.canGainLife() && aiLife == 14 ) {
+        } else if (!ai.canGainLife() && aiLife == 14) {
             // ai cant gain life, but try to avoid falling to 13
             // but if a opponent does control Tainted Remedy its irrelevant
             chosenList.add(oppTainted ? lose : gain);

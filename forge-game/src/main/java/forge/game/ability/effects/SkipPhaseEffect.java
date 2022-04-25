@@ -5,6 +5,7 @@ import java.util.List;
 import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -114,9 +115,24 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
         }
         eff.addReplacementEffect(re);
 
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, sa);
-        eff.updateStateForView();
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        if (sa.hasParam("Start")) {
+            final GameCommand startEffect = new GameCommand() {
+                private static final long serialVersionUID = -5861749814760561373L;
+
+                @Override
+                public void run() {
+                    game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+                    game.getAction().moveTo(ZoneType.Command, eff, sa, AbilityKey.newMap());
+                    eff.updateStateForView();
+                    game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+                }
+            };
+            game.getUpkeep().addUntil(player, startEffect);
+        } else {
+            game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+            game.getAction().moveTo(ZoneType.Command, eff, sa, AbilityKey.newMap());
+            eff.updateStateForView();
+            game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        }
     }
 }

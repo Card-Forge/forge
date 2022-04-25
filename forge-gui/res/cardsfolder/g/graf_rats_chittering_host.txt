@@ -5,8 +5,8 @@ PT:2/1
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+YouOwn | IsPresent2$ Creature.YouCtrl+YouOwn+namedMidnight Scavengers | Execute$ Meld | TriggerDescription$ At the beginning of combat on your turn, if you both own and control Graf Rats and a creature named Midnight Scavengers, exile them, then meld them into Chittering Host.
 SVar:Meld:DB$ Meld | Name$ Chittering Host | Primary$ Graf Rats | Secondary$ Midnight Scavengers
 DeckHints:Name$Midnight Scavengers
-AlternateMode:Meld
 MeldPair:Midnight Scavengers
+AlternateMode:Meld
 Oracle:At the beginning of combat on your turn, if you both own and control Graf Rats and a creature named Midnight Scavengers, exile them, then meld them into Chittering Host.
 
 ALTERNATE

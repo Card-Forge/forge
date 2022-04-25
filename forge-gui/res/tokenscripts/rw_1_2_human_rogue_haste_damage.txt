@@ -1,7 +1,7 @@
 Name:Human Rogue Token
-Types:Creature Human Rogue
-Colors:red,white
 ManaCost:no cost
+Colors:red,white
+Types:Creature Human Rogue
 PT:1/2
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When this creature enters the battlefield, it deals 1 damage to any target.

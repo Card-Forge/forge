@@ -31,7 +31,7 @@ public class DayTimeEffect extends SpellAbilityEffect {
             Boolean oldValue = game.getDayTime();
             if (oldValue == null && !cantBeNight) {
                 game.setDayTime(true); // if it was neither it becomes night
-            } else {
+            } else if (oldValue == true || !cantBeNight) {
                 game.setDayTime(!oldValue);
             }
         }

@@ -1,5 +1,5 @@
 [format]
-Name:Mirrodin Block, 03/20/06
+Name:Block: Mirrodin (2006-03-20)
 Type:Historic
 Subtype:Block
 Effective:2006-03-20

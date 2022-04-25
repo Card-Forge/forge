@@ -2,7 +2,7 @@ Name:Trading Post
 ManaCost:4
 Types:Artifact
 A:AB$ GainLife | Cost$ 1 T Discard<1/Card> | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
-A:AB$ Token | Cost$ 1 T PayLife<1> | TokenAmount$ 1 | TokenScript$ w_0_1_goat | TokenOwner$ You | LegacyImage$ w 0 1 goat m13 | SpellDescription$ Create a 0/1 white Goat creature token.
+A:AB$ Token | Cost$ 1 T PayLife<1> | TokenAmount$ 1 | TokenScript$ w_0_1_goat | TokenOwner$ You | SpellDescription$ Create a 0/1 white Goat creature token.
 A:AB$ ChangeZone | Cost$ 1 T Sac<1/Creature> | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact card from your graveyard to your hand.
 A:AB$ Draw | Cost$ 1 T Sac<1/Artifact> | NumCards$ 1 | SpellDescription$ Draw a card.
 AI:RemoveDeck:All

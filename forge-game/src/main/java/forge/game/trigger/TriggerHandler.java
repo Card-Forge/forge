@@ -20,11 +20,13 @@ package forge.game.trigger;
 import java.util.*;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
 
 import forge.game.CardTraitBase;
+import forge.game.CardTraitPredicates;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.IHasSVars;
@@ -40,11 +42,12 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.FileSection;
 import forge.util.Visitor;
+import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
-import io.sentry.event.BreadcrumbBuilder;
 
 public class TriggerHandler {
-    private final List<TriggerType> suppressedModes = Collections.synchronizedList(new ArrayList<>());
+    private final Set<TriggerType> suppressedModes = Collections.synchronizedSet(EnumSet.noneOf(TriggerType.class));
+    private boolean allSuppressed = false;
     private final List<Trigger> activeTriggers = Collections.synchronizedList(new ArrayList<>());
 
     private final List<Trigger> delayedTriggers = Collections.synchronizedList(new ArrayList<>());
@@ -98,7 +101,9 @@ public class TriggerHandler {
     }
 
     public final void handlePlayerDefinedDelTriggers(final Player player) {
-        delayedTriggers.addAll(playerDefinedDelayedTriggers.removeAll(player));
+        final List<Trigger> playerTriggers = playerDefinedDelayedTriggers.removeAll(player);
+        Iterables.addAll(thisTurnDelayedTriggers, Iterables.filter(playerTriggers, CardTraitPredicates.hasParam("ThisTurn")));
+        delayedTriggers.addAll(playerTriggers);
     }
 
     public final void suppressMode(final TriggerType mode) {
@@ -106,17 +111,14 @@ public class TriggerHandler {
     }
 
     public final void setSuppressAllTriggers(final boolean suppress) {
-        for (TriggerType t : TriggerType.values()) {
-            if (suppress) {
-                suppressMode(t);
-            } else {
-                clearSuppression(t);
-            }
-        }
+        allSuppressed = suppress;
     }
 
     public final void clearSuppression(final TriggerType mode) {
         suppressedModes.remove(mode);
+    }
+    public boolean isTriggerSuppressed(final TriggerType mode) {
+        return allSuppressed || suppressedModes.contains(mode);
     }
 
     public static Trigger parseTrigger(final String trigParse, final Card host, final boolean intrinsic) {
@@ -129,10 +131,12 @@ public class TriggerHandler {
             return TriggerHandler.parseTrigger(mapParams, host, intrinsic, sVarHolder);
         } catch (Exception e) {
             String msg = "TriggerHandler:parseTrigger failed to parse";
-            Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Card", host.getName()).withData("Trigger", trigParse).build()
-            );
+
+            Breadcrumb bread = new Breadcrumb(msg);
+            bread.setData("Card", host.getName());
+            bread.setData("Trigger", trigParse);
+            Sentry.addBreadcrumb(bread, host);
+
             //rethrow
             throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);
         }
@@ -155,10 +159,12 @@ public class TriggerHandler {
             }
         } catch (Exception e) {
             String msg = "TriggerHandler:parseTrigger failed to parse";
-            Sentry.getContext().recordBreadcrumb(
-                    new BreadcrumbBuilder().setMessage(msg)
-                    .withData("Card", host.getName()).withData("Params", mapParams.toString()).build()
-            );
+
+            Breadcrumb bread = new Breadcrumb(msg);
+            bread.setData("Card", host.getName());
+            bread.setData("Params", mapParams.toString());
+            Sentry.addBreadcrumb(bread, host);
+
             //rethrow
             throw new RuntimeException("Error in Trigger for Card: " + host.getName(), e);
         }
@@ -252,7 +258,7 @@ public class TriggerHandler {
     }
 
     public final void runTrigger(final TriggerType mode, final Map<AbilityKey, Object> runParams, boolean holdTrigger) {
-        if (suppressedModes.contains(mode)) {
+        if (isTriggerSuppressed(mode)) {
             return;
         }
 
@@ -527,7 +533,7 @@ public class TriggerHandler {
                 }
 
                 sa = AbilityFactory.getAbility(host, name);
-                // need to set as Overriding Abiltiy so it can be copied better
+                // need to set as Overriding Ability so it can be copied better
                 regtrig.setOverridingAbility(sa);
             }
             sa.setActivatingPlayer(host.getController());

@@ -1,0 +1,14 @@
+Name:Glamorous Outlaw
+ManaCost:3 U B R
+Types:Creature Vampire Rogue
+PT:4/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 2 damage to each opponent and you scry 2.
+SVar:TrigDealDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ Opponent | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 2
+A:AB$ Effect | Cost$ 2 ExileFromHand<1/CARDNAME> | ActivationZone$ Hand | ValidTgts$ Land | TgtPrompt$ Select target land | RememberObjects$ Targeted,Self | StaticAbilities$ Land,MayPlay | Triggers$ Cast | ImprintCards$ Self | Duration$ Permanent | ForgetOnMoved$ Exile | SpellDescription$ Target land gains "{T}: Add {U}, {B}, or {R}" until CARDNAME is cast from exile. You may cast CARDNAME for as long as it remains exiled.
+SVar:Land:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.IsRemembered+IsNotImprinted | AddAbility$ Mana | Description$ Target land gains "{T}: Add {U}, {B}, or {R}" until EFFECTSOURCE is cast from exile. You may cast EFFECTSOURCE for as long as it remains exiled.
+SVar:Mana:AB$ Mana | Cost$ T | Produced$ Combo U B R | Amount$ 1 | SpellDescription$ Add {U}, {B}, or {R}
+SVar:MayPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsImprinted+IsRemembered | AffectedZone$ Exile | Secondary$ True | Description$ You may cast EFFECTSOURCE for as long as it remains exiled.
+SVar:Cast:Mode$ SpellCast | ValidCard$ Card.IsImprinted+IsRemembered+wasCastFromExile | Execute$ ExileSelf | Static$ True
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+Oracle:When Glamorous Outlaw enters the battlefield, it deals 2 damage to each opponent and you scry 2.\n{2}, Exile Glamorous Outlaw from your hand: Target land gains "{T}: Add {U}, {B}, or {R}" until Glamorous Outlaw is cast from exile. You may cast Glamorous Outlaw for as long as it remains exiled.

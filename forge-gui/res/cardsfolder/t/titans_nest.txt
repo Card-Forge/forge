@@ -3,6 +3,6 @@ ManaCost:1 B G U
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
 SVar:TrigDig:DB$ Dig | DigNum$ 1 | ChangeNum$ 1 | DestinationZone$ Graveyard | Optional$ True | LibraryPosition2$ 0
-A:AB$ Mana | Cost$ ExileFromGrave<1/Card> | Produced$ C | RestrictValid$ Card.nonColorless+withoutXCost | SpellDescription$ Add {C}. Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost.
+A:AB$ Mana | Cost$ ExileFromGrave<1/Card> | Produced$ C | RestrictValid$ Spell.nonColorless+withoutXCost | SpellDescription$ Add {C}. Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost.
 AI:RemoveDeck:All
 Oracle:At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.\nExile a card from your graveyard: Add {C}. Spend this mana only to cast a spell that's one or more colors without {X} in its mana cost.

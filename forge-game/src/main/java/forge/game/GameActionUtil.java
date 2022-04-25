@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.*;
+import forge.game.card.*;
+import forge.util.Aggregates;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.MagicColor;
@@ -30,17 +32,10 @@ import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardPlayOption;
 import forge.game.card.CardPlayOption.PayManaCost;
-import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
-import forge.game.keyword.KeywordsChange;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerController;
@@ -288,7 +283,8 @@ public final class GameActionUtil {
                         && source.isForetold() && !source.isForetoldThisTurn() && !source.getManaCost().isNoCost()) {
                     // Its foretell cost is equal to its mana cost reduced by {2}.
                     final SpellAbility foretold = sa.copy(activator);
-                    foretold.putParam("ReduceCost", "2");
+                    Integer reduced = Math.min(2, sa.getPayCosts().getCostMana().getMana().getGenericCost());
+                    foretold.putParam("ReduceCost", reduced.toString());
                     foretold.setAlternativeCost(AlternativeCost.Foretold);
                     foretold.getRestrictions().setZone(ZoneType.Exile);
                     foretold.putParam("AfterDescription", "(Foretold)");
@@ -460,6 +456,9 @@ public final class GameActionUtil {
             return sa;
         }
         final SpellAbility result = sa.copy();
+        if (sa.hasParam("ReduceCost")) {
+            result.putParam("ReduceCost", sa.getParam("ReduceCost"));
+        }
         for (OptionalCostValue v : list) {
             result.getPayCosts().add(v.getCost());
             result.addOptionalCost(v.getType());
@@ -558,7 +557,35 @@ public final class GameActionUtil {
 
         for (KeywordInterface ki : host.getKeywords()) {
             final String o = ki.getOriginal();
-            if (o.equals("Conspire")) {
+            if (o.startsWith("Casualty")) {
+                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
+                if (tr != null) {
+                    String n = o.split(":")[1];
+                    if (host.wasCast() && n.equals("X")) {
+                        CardCollectionView creatures = CardLists.filter(CardLists.filterControlledBy(game.getCardsIn
+                                (ZoneType.Battlefield), activator), CardPredicates.Presets.CREATURES);
+                        int max = Aggregates.max(creatures, CardPredicates.Accessors.fnGetNetPower);
+                        int min = Aggregates.min(creatures, CardPredicates.Accessors.fnGetNetPower);
+                        n = Integer.toString(pc.chooseNumber(sa, "Choose X for Casualty", min, max));
+                    }
+                    final String casualtyCost = "Sac<1/Creature.powerGE" + n + "/creature with power " + n +
+                            " or greater>";
+                    final Cost cost = new Cost(casualtyCost, false);
+                    String str = "Pay for Casualty? " + cost.toSimpleString();
+                    boolean v = pc.addKeywordCost(sa, cost, ki, str);
+
+                    tr.setSVar("Casualty", v ? n : "0");
+                    tr.getOverridingAbility().setSVar("Casualty", v ? n : "0");
+
+                    if (v) {
+                        if (result == null) {
+                            result = sa.copy();
+                        }
+                        result.getPayCosts().add(cost);
+                        reset = true;
+                    }
+                }
+            } else if (o.equals("Conspire")) {
                 Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
                 if (tr != null) {
                     final String conspireCost = "tapXType<2/Creature.SharesColorWith/" +
@@ -691,9 +718,9 @@ public final class GameActionUtil {
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        game.getAction().moveTo(ZoneType.Command, eff, null);
+        game.getAction().moveTo(ZoneType.Command, eff, null, null);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        
+
         return eff;
     }
 
@@ -740,7 +767,7 @@ public final class GameActionUtil {
             // Mark SAs with subAbilities as undoable. These are generally things like damage, and other stuff
             // that's hard to track and remove
             sa.setUndoable(false);
-        } else if ((sa.getParam("Amount") != null) && (amount != AbilityUtils.calculateAmount(sa.getHostCard(),sa.getParam("Amount"), sa))) {
+        } else if (sa.getParam("Amount") != null && amount != AbilityUtils.calculateAmount(sa.getHostCard(),sa.getParam("Amount"), sa)) {
             sa.setUndoable(false);
         }
 
@@ -792,22 +819,8 @@ public final class GameActionUtil {
     }
 
     public static void checkStaticAfterPaying(Card c) {
-        Table<Long, Long, KeywordsChange> oldKW = TreeBasedTable.create((TreeBasedTable<Long, Long, KeywordsChange>) c.getChangedCardKeywords());
-        // this should be the last time checkStaticAbilities is called before SpellCast triggers to
-        // - setup Cascade dependent on high enough X (Imoti)
-        // - remove Replicate if Djinn Illuminatus gets sacrificed as payment
-        // because this will remove the payment SVars for Replicate we need to restore them
         c.getGame().getAction().checkStaticAbilities(false);
 
-        Table<Long, Long, KeywordsChange> updatedKW = c.getChangedCardKeywords();
-        for (Table.Cell<Long, Long, KeywordsChange> entry : oldKW.cellSet()) {
-            for (KeywordInterface ki : entry.getValue().getKeywords()) {
-                // check if this keyword existed previously
-                if ((ki.getOriginal().startsWith("Replicate") || ki.getOriginal().startsWith("Conspire")) && updatedKW.get(entry.getRowKey(), entry.getColumnKey()) != null) {
-                    updatedKW.put(entry.getRowKey(), entry.getColumnKey(), oldKW.get(entry.getRowKey(), entry.getColumnKey()));
-                }
-            }
-        }
         c.updateKeywords();
 
         c.getGame().getTriggerHandler().resetActiveTriggers();

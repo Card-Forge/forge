@@ -3,22 +3,22 @@ package forge.screens.quest;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.gui.interfaces.IButton;
 import forge.model.FModel;
 import forge.toolbox.FLabel;
-import forge.util.Localizer;
 
 public class QuestChallengesScreen extends QuestLaunchScreen {
-    private final FLabel lblInfo = add(new FLabel.Builder().text(Localizer.getInstance().getMessage("lblWhichChallenge"))
+    private final FLabel lblInfo = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblWhichChallenge"))
             .align(Align.center).font(FSkinFont.get(16)).build());
 
     private final FLabel lblCurrentDeck = add(new FLabel.Builder()
-        .text(Localizer.getInstance().getMessage("lblNoDuelDeck")).align(Align.center).insets(Vector2.Zero)
+        .text(Forge.getLocalizer().getMessage("lblNoDuelDeck")).align(Align.center).insets(Vector2.Zero)
         .font(FSkinFont.get(12)).build());
 
     private final FLabel lblNextChallengeInWins = add(new FLabel.Builder()
-        .text(Localizer.getInstance().getMessage("lblNextChallengeNotYet")).align(Align.center).insets(Vector2.Zero)
+        .text(Forge.getLocalizer().getMessage("lblNextChallengeNotYet")).align(Align.center).insets(Vector2.Zero)
         .font(FSkinFont.get(12)).build());
 
     private final QuestEventPanel.Container pnlChallenges = add(new QuestEventPanel.Container());

@@ -2,6 +2,5 @@ Name:Serrated Biskelion
 ManaCost:3
 Types:Artifact Creature Construct
 PT:2/2
-A:AB$ PutCounter | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | CounterNum$ 1 | SubAbility$ DBPutCounter | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on target creature and a -1/-1 counter on CARDNAME.
-SVar:DBPutCounter:DB$ PutCounter | CounterType$ M1M1 | CounterNum$ 1
+A:AB$ PutCounter | Cost$ T | Defined$ Self & Targeted | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ M1M1 | IsCurse$ True | SpellDescription$ Put a -1/-1 counter on target creature and a -1/-1 counter on CARDNAME.
 Oracle:{T}: Put a -1/-1 counter on Serrated Biskelion and a -1/-1 counter on target creature.

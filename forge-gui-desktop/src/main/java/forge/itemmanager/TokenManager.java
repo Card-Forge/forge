@@ -9,7 +9,7 @@ import forge.screens.match.controllers.CDetailPicture;
 
 public class TokenManager extends ItemManager<PaperToken> {
     public TokenManager(final CDetailPicture cDetailPicture, final boolean wantUnique0) {
-        super(PaperToken.class, cDetailPicture, wantUnique0);
+        super(PaperToken.class, cDetailPicture, wantUnique0, false);
     }
 
     @Override

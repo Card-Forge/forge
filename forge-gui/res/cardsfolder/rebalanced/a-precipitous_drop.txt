@@ -2,7 +2,7 @@ Name:A-Precipitous Drop
 ManaCost:1 B
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 B | ValidTgts$ Creature | AILogic$ Curse
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigVenture | TriggerDescription$ When CARDNAME enters the battlefield, venture into the dungeon.
 SVar:TrigVenture:DB$ Venture
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -X | AddToughness$ -X | Description$ Enchanted creature gets -2/-2. It gets -5/-5 instead as long as you've completed a dungeon.

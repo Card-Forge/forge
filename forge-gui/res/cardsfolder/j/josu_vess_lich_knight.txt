@@ -5,6 +5,6 @@ PT:4/5
 K:Kicker:5 B
 K:Menace
 T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, create eight 2/2 black Zombie Knight creature tokens with menace.
-SVar:TrigToken:DB$ Token | TokenAmount$ 8 | TokenScript$ b_2_2_zombie_knight_menace | TokenOwner$ You | LegacyImage$ b 2 2 zombie knight dom | SpellDescription$ When CARDNAME enters the battlefield, if it was kicked, create eight 2/2 black Zombie Knight creature tokens with menace.
+SVar:TrigToken:DB$ Token | TokenAmount$ 8 | TokenScript$ b_2_2_zombie_knight_menace | TokenOwner$ You | SpellDescription$ When CARDNAME enters the battlefield, if it was kicked, create eight 2/2 black Zombie Knight creature tokens with menace.
 DeckHas:Ability$Token
 Oracle:Kicker {5}{B} (You may pay an additional {5}{B} as you cast this spell.)\nMenace\nWhen Josu Vess, Lich Knight enters the battlefield, if it was kicked, create eight 2/2 black Zombie Knight creature tokens with menace.

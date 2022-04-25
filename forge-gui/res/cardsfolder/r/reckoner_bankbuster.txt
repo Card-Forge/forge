@@ -1,0 +1,11 @@
+Name:Reckoner Bankbuster
+ManaCost:2
+Types:Artifact Vehicle
+PT:4/4
+K:etbCounter:CHARGE:3
+A:AB$ Draw | Cost$ 2 T SubCounter<1/CHARGE> | SubAbility$ DBToken | SpellDescription$ Draw a card.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac,c_1_1_pilot_crewbuff | ConditionDefined$ Self | ConditionPresent$ Card.counters_EQ0_CHARGE | SpellDescription$ Then if there are no charge counters on CARDNAME, create a Treasure token and a 1/1 colorless Pilot creature token with "This creature crews Vehicles as though its power were 2 greater."
+K:Crew:3
+DeckHas:Ability$Counters|Token|Sacrifice & Type$Pilot|Treasure
+DeckHints:Type$Vehicle
+Oracle:Reckoner Bankbuster enters the battlefield with three charge counters on it.\n{2}, {T}, Remove a charge counter from Reckoner Bankbuster: Draw a card. Then if there are no charge counters on Reckoner Bankbuster, create a Treasure token and a 1/1 colorless Pilot creature token with "This creature crews Vehicles as though its power were 2 greater."\nCrew 3

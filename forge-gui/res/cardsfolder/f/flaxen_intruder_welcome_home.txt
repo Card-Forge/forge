@@ -5,14 +5,14 @@ PT:1/2
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ Trigtrig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may sacrifice it. When you do, destroy target artifact or enchantment.
 SVar:Trigtrig:AB$ ImmediateTrigger | Cost$ Sac<1/CARDNAME> | Execute$ TrigDestroy | TriggerDescription$ When you do, destroy target artifact or enchantment.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment
-Oracle:Whenever Flaxen Intruder deals combat damage to a player, you may sacrifice it. When you do, destroy target artifact or enchantment.
 AlternateMode:Adventure
+Oracle:Whenever Flaxen Intruder deals combat damage to a player, you may sacrifice it. When you do, destroy target artifact or enchantment.
 
 ALTERNATE
 
 Name:Welcome Home
 ManaCost:5 G G
 Types:Sorcery Adventure
-A:SP$ Token | Cost$ 5 G G | TokenAmount$ 3 | TokenScript$ g_2_2_bear | TokenOwner$ You | LegacyImage$ g 2 2 bear eld | SpellDescription$ Create three 2/2 green Bear creature tokens. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Token | Cost$ 5 G G | TokenAmount$ 3 | TokenScript$ g_2_2_bear | TokenOwner$ You | SpellDescription$ Create three 2/2 green Bear creature tokens. (Then exile this card. You may cast the creature later from exile.)
 DeckHas:Ability$Token
 Oracle:Create three 2/2 green Bear creature tokens. (Then exile this card. You may cast the creature later from exile.)

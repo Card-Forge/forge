@@ -7,7 +7,7 @@ A:AB$ ChangeZone | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$
 SVar:DBGainLife:DB$ GainLife | Defined$ RememberedController | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$CardPower
-A:AB$ PutCounterAll | Cost$ SubCounter<9/LOYALTY> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 5 | Planeswalker$ True | Ultimate$ True | SubAbility$ DBPutCounterAll | SpellDescription$ Put five +1/+1 counters on each creature you control and five loyalty counters on each other planeswalker you control.
-SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Planeswalker.YouCtrl+Other | CounterType$ LOYALTY | CounterNum$ 5
+A:AB$ PutCounterAll | Cost$ SubCounter<9/LOYALTY> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 5 | Planeswalker$ True | Ultimate$ True | ValidCards2$ Planeswalker.YouCtrl+Other | CounterType2$ LOYALTY | AILogic$ OwnCreatsAndOtherPWs | SpellDescription$ Put five +1/+1 counters on each creature you control and five loyalty counters on each other planeswalker you control.
 DeckHas:Ability$Counters
+DeckHints:Type$Planeswalker
 Oracle:[+2]: Reveal the top three cards of your library. Put all nonland permanent cards revealed this way into your hand and the rest on the bottom of your library in any order.\n[-2]: Exile target creature. Its controller gains life equal to its power.\n[-9]: Put five +1/+1 counters on each creature you control and five loyalty counters on each other planeswalker you control.

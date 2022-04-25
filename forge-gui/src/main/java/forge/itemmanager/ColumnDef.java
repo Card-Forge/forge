@@ -18,6 +18,7 @@
 package forge.itemmanager;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import forge.card.*;
 import forge.card.mana.ManaCost;
 import forge.deck.DeckProxy;
@@ -33,11 +34,15 @@ import forge.itemmanager.ItemColumnConfig.SortState;
 import forge.model.FModel;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
+import forge.util.TextUtil;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashSet;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public enum ColumnDef {
     /**
@@ -63,9 +68,11 @@ public enum ColumnDef {
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
                 @Override
                 public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                    if (from.getKey() instanceof PaperCard)
-                        return toSortableName(from.getKey().toString());
-                    return toSortableName(from.getKey().getName());
+                    if (from.getKey() instanceof PaperCard) {
+                        String sortableName = ((PaperCard)from.getKey()).getSortableName();
+                        return sortableName == null ? TextUtil.toSortableName(from.getKey().getName()) : sortableName;
+                    }
+                    return TextUtil.toSortableName(from.getKey().getName());
                 }
             },
             new Function<Entry<? extends InventoryItem, Integer>, Object>() {
@@ -251,6 +258,47 @@ public enum ColumnDef {
 
                     return ai.getRemAIDecks() ? (ai.getRemRandomDecks() ? "X?" : "X")
                             : (ai.getRemRandomDecks() ? "?" : "");
+                }
+            }),
+    /**
+     * The card format column.
+     */
+    FORMAT("lblFormat", "ttFormats", 60, false, SortState.DESC,
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+                @Override
+                public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+                    PaperCard card = toPaperCard(from.getKey());
+                    if (card == null) {
+                        return -1;
+                    }
+                    Iterable<GameFormat> formats = FModel.getFormats().getAllFormatsOfCard(card);
+                    int acc = 0;
+                    for (GameFormat gf : formats) {
+                        if (!gf.getFormatType().equals(GameFormat.FormatType.SANCTIONED)) {
+                            continue;
+                        }
+                        int ix = gf.getIndex();
+                        if (ix < 30 && ix > 0)
+                            acc |= 0x40000000 >> (ix - 1);
+                    }
+                    return acc;
+                }
+            },
+            new Function<Entry<? extends InventoryItem, Integer>, Object>() {
+                @Override
+                public Object apply(final Entry<? extends InventoryItem, Integer> from) {
+                    PaperCard card = toPaperCard(from.getKey());
+                    if (card == null) {
+                        return -1;
+                    }
+                    Iterable<GameFormat> formats = FModel.getFormats().getAllFormatsOfCard(card);
+                    Set<GameFormat> sanctioned = new HashSet<>();
+                    for (GameFormat gf : formats) {
+                        if (gf.getFormatType().equals(GameFormat.FormatType.SANCTIONED)) {
+                            sanctioned.add(gf);
+                        }
+                    }
+                    return StringUtils.join(Iterables.transform(sanctioned, GameFormat.FN_GET_NAME), ", ");
                 }
             }),
     /**
@@ -463,13 +511,13 @@ public enum ColumnDef {
         new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
             @Override
             public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-                return toDeck(from.getKey()).getAI() ? Integer.valueOf(1) : Integer.valueOf(-1);
+                return toDeck(from.getKey()).getAI().inMainDeck;
             }
         },
         new Function<Entry<? extends InventoryItem, Integer>, Object>() {
             @Override
             public Object apply(final Entry<? extends InventoryItem, Integer> from) {
-                return toDeck(from.getKey()).getAI()? "" : "X";
+                return toDeck(from.getKey()).getAI();
             }
         }),
     /**
@@ -540,59 +588,16 @@ public enum ColumnDef {
         return this.longName;
     }
 
-    /**
-     * Converts a card name to a sortable name.
-     * Trim leading quotes, then move article last, then replace characters.
-     * Because An-Havva Constable.
-     * Capitals and lowercase sorted as one: "my deck" before "Myr Retribution"
-     * Apostrophes matter, though: "D'Avenant" before "Danitha"
-     * TO DO: Commas before apostrophes: "Rakdos, Lord of Riots" before "Rakdos's Return"
-     *
-     * @param printedName The name of the card.
-     * @return A sortable name.
-     */
-    private static String toSortableName(String printedName) {
-        if (printedName.startsWith("\"")) printedName = printedName.substring(1);
-        return moveArticleToEnd(printedName).toLowerCase().replaceAll("[^\\s'0-9a-z]", "");
-    }
-
-
-    /**
-     * Article words. These words get kicked to the end of a sortable name.
-     * For localization, simply overwrite this array with appropriate words.
-     * Words in this list are used by the method String moveArticleToEnd(String), useful
-     * for alphabetizing phrases, in particular card or other inventory object names.
-     */
-    private static final String[] ARTICLE_WORDS = {
-            "A",
-            "An",
-            "The"
-    };
-
-    /**
-     * Detects whether a string begins with an article word
-     *
-     * @param str The name of the card.
-     * @return The sort-friendly name of the card. Example: "The Hive" becomes "Hive The".
-     */
-    private static String moveArticleToEnd(String str) {
-        String articleWord;
-        for (int i = 0; i < ARTICLE_WORDS.length; i++) {
-            articleWord = ARTICLE_WORDS[i];
-            if (str.startsWith(articleWord + " ")) {
-                str = str.substring(articleWord.length() + 1) + " " + articleWord;
-                return str;
-            }
-        }
-        return str;
-    }
-
     private static String toType(final InventoryItem i) {
         return i instanceof IPaperCard ? ((IPaperCard) i).getRules().getType().toString() : i.getItemType();
     }
 
     private static IPaperCard toCard(final InventoryItem i) {
         return i instanceof IPaperCard ? ((IPaperCard) i) : null;
+    }
+
+    private static PaperCard toPaperCard(final InventoryItem i) {
+        return i instanceof PaperCard ? ((PaperCard) i) : null;
     }
 
     private static ManaCost toManaCost(final InventoryItem i) {

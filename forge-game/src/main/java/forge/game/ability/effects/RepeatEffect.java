@@ -84,7 +84,7 @@ public class RepeatEffect extends SpellAbilityEffect {
             } else {
                 list = game.getCardsIn(ZoneType.Battlefield);
             }
-            list = CardLists.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa);
+            list = CardLists.getValidCards(list, repeatPresent, sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
             final String rightString = repeatCompare.substring(2);
             int right = AbilityUtils.calculateAmount(sa.getHostCard(), rightString, sa);

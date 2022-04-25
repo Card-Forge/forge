@@ -3,6 +3,7 @@ package forge.screens.online;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -21,7 +22,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FScrollPane;
 import forge.toolbox.FTextField;
-import forge.util.Localizer;
 import forge.util.Utils;
 
 public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
@@ -35,7 +35,7 @@ public class OnlineChatScreen extends FScreen implements IOnlineChatInterface {
     public OnlineChatScreen() {
         super(null, OnlineMenu.getMenu());
 
-        txtSendMessage.setGhostText(Localizer.getInstance().getMessage("lblEnterMessageToSend"));
+        txtSendMessage.setGhostText(Forge.getLocalizer().getMessage("lblEnterMessageToSend"));
         txtSendMessage.setChangedHandler(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {

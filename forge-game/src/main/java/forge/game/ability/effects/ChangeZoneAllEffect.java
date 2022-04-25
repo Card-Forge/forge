@@ -226,7 +226,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                         }
                     }
                 }
-                if (remLKI && movedCard != null) {
+                if (remLKI) {
                     final Card lki = CardUtil.getLKICopy(c);
                     game.getCardState(source).addRemembered(lki);
                     if (!source.isRemembered(lki)) {

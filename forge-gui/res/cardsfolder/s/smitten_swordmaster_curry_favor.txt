@@ -3,8 +3,8 @@ ManaCost:1 B
 Types:Creature Human Knight
 PT:2/1
 K:Lifelink
-Oracle:Lifelink
 AlternateMode:Adventure
+Oracle:Lifelink
 
 ALTERNATE
 

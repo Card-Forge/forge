@@ -16,7 +16,6 @@ import forge.screens.planarconquest.LoadConquestScreen;
 import forge.screens.quest.LoadQuestScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.Localizer;
 
 public class LoadGameMenu extends FPopupMenu {
     public enum LoadGameScreen {
@@ -32,7 +31,7 @@ public class LoadGameMenu extends FPopupMenu {
 
         LoadGameScreen(final String caption0, final FImage icon0, final Class<? extends FScreen> screenClass0) {
             screenClass = screenClass0;
-            item = new FMenuItem(Localizer.getInstance().getMessage(caption0), icon0, new FEventHandler() {
+            item = new FMenuItem(Forge.getLocalizer().getMessage(caption0), icon0, new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     open(true); //remove current screen from chain
@@ -45,7 +44,7 @@ public class LoadGameMenu extends FPopupMenu {
             if (screen == null) { //don't initialize screen until it's opened the first time
                 try {
                     screen = screenClass.getConstructor().newInstance();
-                    screen.setHeaderCaption(Localizer.getInstance().getMessage("lblLoadGame") + " - " + item.getText());
+                    screen.setHeaderCaption(Forge.getLocalizer().getMessage("lblLoadGame") + " - " + item.getText());
                 }
                 catch (Exception e) {
                     e.printStackTrace();

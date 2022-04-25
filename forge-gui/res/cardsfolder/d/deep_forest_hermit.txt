@@ -5,7 +5,7 @@ PT:1/1
 K:Vanishing:3
 S:Mode$ Continuous | Affected$ Creature.Squirrel+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Squirrel creatures you control get +1/+1.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create four 1/1 green Squirrel creature tokens.
-SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ g_1_1_squirrel | TokenOwner$ You | LegacyImage$ g 1 1 squirrel mh1
+SVar:TrigToken:DB$ Token | TokenAmount$ 4 | TokenScript$ g_1_1_squirrel | TokenOwner$ You
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token
 Oracle:Vanishing 3 (This creature enters the battlefield with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen Deep Forest Hermit enters the battlefield, create four 1/1 green Squirrel creature tokens.\nSquirrels you control get +1/+1.
