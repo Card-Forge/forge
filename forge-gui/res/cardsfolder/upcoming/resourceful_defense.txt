@@ -1,13 +1,8 @@
 Name:Resourceful Defense
 ManaCost:2 W
 Types:Enchantment
-
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Permanent.YouCtrl+HasCounters | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever a permanent you control leaves the battlefield, if it had counters on it, put those counters on target permanent you control.
-
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | CounterType$ EachFromSource | EachFromSource$ TriggeredCardLKICopy
-
-DeckHas:Ability$Counters 
-
+DeckNeeds:Ability$Counters 
 A:AB$ MoveCounter | Cost$ 4 W | ValidSource$ Permanent.YouCtrl | ValidTgts$ Permanent.YouCtrl | CounterType$ All | CounterNum$ Any | Defined$ Targeted | SpellDescription$ Move any number of counters from target permanent you control to another target permanent you control.
-
 Oracle:Whenever a permanent you control leaves the battlefield, if it had counters on it, put those counters on target permanent you control.\n{4}{W}: Move any number of counters from target permanent you control to another target permanent you control.
