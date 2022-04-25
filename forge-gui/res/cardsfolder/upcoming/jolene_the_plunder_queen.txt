@@ -2,15 +2,10 @@ Name:Jolene, the Plunder Queen
 ManaCost:2 R G
 Types:Legendary Creature Human Warrior
 PT:2/2
-
 T:Mode$ AttackersDeclared | AttackedTarget$ Opponent | Execute$ TrigTreasure | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player attacks one or more of your opponents, that attacking player creates a Treasure token.
-
 SVar:TrigTreasure:DB$ Token | Defined$ AttackingPlayer | TokenScript$ c_a_treasure_sac | TokenOwner$ TriggeredAttackingPlayer
-
 R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ValidToken$ Treasure | ReplaceWith$ DBReplace | Description$ If you would create one or more Treasure tokens, instead create those tokens plus an additional Treasure token.
 SVar:DBReplace:DB$ ReplaceToken | Type$ AddToken | Amount$ 1 | ValidCard$ Treasure | TokenScript$ c_a_treasure_sac
-DeckNeeds:Type$Token
-
 A:AB$ PutCounter | Cost$ Sac<5/Treasure> | CounterType$ P1P1 | CounterNum$ 5 | SpellDescription$ Put 5 +1/+1 counters on CARDNAME.
-
+DeckHas:Ability$Counters|Token
 Oracle:Whenever a player attacks one or more of your opponents, that attacking player creates a Treasure token.\nIf you would create one or more Treasure tokens, instead create those tokens plus an additional Treasure token.\nSacrifice five Treasures: Put five +1/+1 counters on Jolene.
