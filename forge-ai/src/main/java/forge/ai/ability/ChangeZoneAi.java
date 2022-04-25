@@ -388,14 +388,12 @@ public class ChangeZoneAi extends SpellAbilityAi {
             }
 
             String num = sa.getParamOrDefault("ChangeNum", "1");
-            if (num != null) {
-                if (num.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
-                    // Set PayX here to maximum value.
-                    int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
-                    if (xPay == 0) return false;
-                    xPay = Math.min(xPay, list.size());
-                    sa.setXManaCostPaid(xPay);
-                }
+            if (num.contains("X") && sa.getSVar("X").equals("Count$xPaid")) {
+                // Set PayX here to maximum value.
+                int xPay = ComputerUtilCost.getMaxXValue(sa, ai, sa.isTrigger());
+                if (xPay == 0) return false;
+                xPay = Math.min(xPay, list.size());
+                sa.setXManaCostPaid(xPay);
             }
 
             if (sourceName.equals("Temur Sabertooth")) {
