@@ -7,5 +7,5 @@ SVar:TrigTreasure:DB$ Token | Defined$ AttackingPlayer | TokenScript$ c_a_treasu
 R:Event$ CreateToken | ActiveZones$ Battlefield | ValidPlayer$ You | ValidToken$ Treasure | ReplaceWith$ DBReplace | Description$ If you would create one or more Treasure tokens, instead create those tokens plus an additional Treasure token.
 SVar:DBReplace:DB$ ReplaceToken | Type$ AddToken | Amount$ 1 | ValidCard$ Treasure | TokenScript$ c_a_treasure_sac
 A:AB$ PutCounter | Cost$ Sac<5/Treasure> | CounterType$ P1P1 | CounterNum$ 5 | SpellDescription$ Put 5 +1/+1 counters on CARDNAME.
-DeckHas:Ability$Counters|Token
+DeckHas:Ability$Counters|Token|Sacrifice & Type$Artifact|Treasure
 Oracle:Whenever a player attacks one or more of your opponents, that attacking player creates a Treasure token.\nIf you would create one or more Treasure tokens, instead create those tokens plus an additional Treasure token.\nSacrifice five Treasures: Put five +1/+1 counters on Jolene.
