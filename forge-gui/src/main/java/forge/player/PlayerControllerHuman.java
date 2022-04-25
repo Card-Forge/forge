@@ -1842,7 +1842,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (!currentSa.isTrigger() && currentSa.usesTargeting()) {
                     needPrompt = true;
                 }
-                if (!needPrompt && !saStr.equals(firstStr)) {
+                if (!needPrompt && !saStr.equals(firstStr) && !currentSa.hasParam("OrderDuplicates")) {
                     needPrompt = true; // prompt by default unless all abilities
                                        // are the same
                 }
