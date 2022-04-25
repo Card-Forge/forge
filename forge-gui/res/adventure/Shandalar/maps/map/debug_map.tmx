@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="94">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="95">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -15,12 +15,17 @@
  <tileset firstgid="6321" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztzaENADAIADBuIFnC/5dxCnoegaiobmVEASzp9/MCANw1XzWdLQ==
+   eJxjYGBgkBCiL4aBUXtH7R21d3ja+0AUFdPC3mmcEDwS7IXZaciFaTe5WAMN47MXm5+Hq71TBtC/Axm/IH4aJwIjm6UggImR5cs4ERjEn8CO3150TE17QRhXPqKVvdgwOeUzIXuJwaP2kmY/OfpG7R21dzjaCwBbaKfR
+  </data>
+ </layer>
+ <layer id="6" name="BGBlend" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGwWABFzgo0/+AAv1t3JTZPQoIAx4uyvTLUKh/FIyCUTAK0AEAlJ4Cjg==
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJyTEGBgkBjFGFgaiLdhwVI0tlcSRAthYvFRe6mKa/kZGKqAuJofYl8llF/DT1t70f1Na3/S015pKI2eZ0Bi26H2bsUiT2nekoTS6ACbGDZAbliQam+jJANDkyR17IWFGQyg85HBXKCd86hkLyVg1N5RewfaXuQyiZ72UhOQY+9IiV9S7FUiID9qL3EY1pZCxvjsRVdLzTYXPnupZQchu5HtpbWdyHEPspfSdh0A9Qp8zA==
+   eJztls1KAzEQgAcs/cPdrSLatYL4DOIP1VNfQfocRXvyp4dW7BuIFmlPHj3Xk/bq0SKI6EEfxRmSYIyT7abdeurAR36azbcTmmGLBYDiDJYS0mdYnbI3pHbxLyszb6I0AoAT5DQQvmM5Pgum6zXznnae/+ktyda8MzR3L70U3L2a5G6FsjWDm+PC5Sx2fIBt3917OwfQDAFaoei7eMn5ggylO9TOTIU5VlFJAXTR2QtFX3kXkDtJweLd8vnzOsjw/bjRTws8R29SEeV9yuF/Fd9tE/tLMf8/tqjgHoG2h83b8QCukEvk2hPe56xgmBXPNrEutRjOA/H7J677kpC3jvOHSA05iqhpHemkvp5vLSfadcsZbMj5Ru53vrQP5WzLlSMpb31Ervq9nMT7jvfoI/XjjYMZ83mBl4/nLeG6Nck4XlWvzBjl1UPVq3307zm8Q1LeMjp3I7xx4gHXPSJteW8uAjEeGM9XM8JLub4hrxE5u4TKm8vTFrack/RWmToeddY66ltKJ8prrqVvrrLv7uVYTvNemufW97D23Ui63vheom14aTzJfi7o3nH3+AaIP56Y
   </data>
  </layer>
  <layer id="3" name="Foreground" width="30" height="30">
@@ -28,12 +33,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBg4oCAAweh8ZDFyzECmiVFDin2EzMBnJjY1pNpNrF8Gyr+Ewp3S+EW3Axt/FFAXkJpudgDV7RRA0ITkcakbCDCQaYuc/DEKRsEoGAWjYBSMglFAKQAAIRMR9g==
+   eJxjYBg4oCAAweh8ZDFyzECmiVFDin2EzMBnJjY1pNpNrF8Gyr+Ewp3S+EW3Axt/FFAXkJpudgDV7RRA0NgAsjw+dfQGA5m2yMkfo2AUUBu08TAwtPKQrs+MCnar8FLBEBIByK8dZPjXlPpOGQWjYBSMggEDAHPWFBI=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../obj/gold.tx" x="32" y="352"/>
-  <object id="50" template="../obj/enemy.tx" x="112" y="192" width="64" height="64">
+  <object id="47" template="../obj/gold.tx" x="48" y="352"/>
+  <object id="50" template="../obj/enemy.tx" x="128" y="192" width="64" height="64">
    <properties>
     <property name="effect">{
  &quot;lifeModifier&quot;: -25,
@@ -45,20 +50,21 @@
     <property name="name" value="Emrakul, the promised rest"/>
    </properties>
   </object>
-  <object id="51" template="../obj/entry_up.tx" x="209" y="480">
+  <object id="51" template="../obj/entry_up.tx" x="208" y="480" width="48" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="52" template="../obj/gate.tx" x="208" y="384">
+  <object id="52" template="../obj/gate.tx" x="224" y="384">
    <properties>
     <property name="dialog">[{
- &quot;text&quot;:&quot;I am a big gate. Greetings.&quot;,
- &quot;options&quot;:[ { &quot;name&quot;:&quot;Okay...&quot; } ]
+  &quot;text&quot;:&quot;I am a big gate. Greetings.&quot;,
+  &quot;options&quot;:[ { &quot;name&quot;:&quot;Okay...&quot; } ],
+  &quot;action&quot;: [ { &quot;setMapFlag&quot;: {&quot;key&quot;: &quot;gate&quot;, &quot;val&quot;: 1} } ]
 }]</property>
    </properties>
   </object>
-  <object id="54" template="../obj/treasure.tx" x="320" y="176">
+  <object id="54" template="../obj/treasure.tx" x="336" y="176">
    <properties>
     <property name="reward">[
   {
@@ -70,12 +76,12 @@
     <property name="sprite" value="sprites/3life.atlas"/>
    </properties>
   </object>
-  <object id="69" template="../obj/treasure.tx" x="48" y="336"/>
-  <object id="74" template="../obj/treasure.tx" x="224" y="64"/>
-  <object id="70" template="../obj/booster.tx" x="32" y="336"/>
-  <object id="72" template="../obj/booster.tx" x="192" y="64"/>
-  <object id="71" template="../obj/gold.tx" x="48" y="352"/>
-  <object id="79" template="../obj/gate.tx" x="128" y="208" width="32" height="16" visible="1">
+  <object id="69" template="../obj/treasure.tx" x="64" y="336"/>
+  <object id="74" template="../obj/treasure.tx" x="240" y="64"/>
+  <object id="70" template="../obj/booster.tx" x="48" y="336"/>
+  <object id="72" template="../obj/booster.tx" x="208" y="64"/>
+  <object id="71" template="../obj/gold.tx" x="64" y="352"/>
+  <object id="79" template="../obj/gate.tx" x="144" y="208" width="32" height="16" visible="1">
    <properties>
     <property name="dialog">[{
  &quot;text&quot;:&quot;Don't mind me, just chilling.&quot;,
@@ -83,7 +89,7 @@
 }]</property>
    </properties>
   </object>
-  <object id="80" template="../obj/enemy.tx" x="96" y="304">
+  <object id="80" template="../obj/enemy.tx" x="112" y="304">
    <properties>
     <property name="defeatDialog">[
   {
@@ -191,7 +197,7 @@
     <property name="name" value="Debug Elf"/>
    </properties>
   </object>
-  <object id="81" template="../obj/enemy.tx" x="288" y="224">
+  <object id="81" template="../obj/enemy.tx" x="64" y="224">
    <properties>
     <property name="dialog">[
   {
@@ -225,7 +231,7 @@
     <property name="enemy" value="Goblin"/>
    </properties>
   </object>
-  <object id="82" template="../obj/enemy.tx" gid="2147491275" x="272" y="224">
+  <object id="82" template="../obj/enemy.tx" gid="2147491275" x="48" y="224">
    <properties>
     <property name="dialog">[
   {
@@ -239,8 +245,8 @@
     <property name="enemy" value="Goblin"/>
    </properties>
   </object>
-  <object id="83" template="../obj/gate.tx" type="dummy" gid="3651" x="64" y="336" width="16" height="16"/>
-  <object id="84" template="../obj/enemy.tx" x="320" y="304">
+  <object id="83" template="../obj/gate.tx" type="dummy" gid="3651" x="80" y="336" width="16" height="16"/>
+  <object id="84" template="../obj/enemy.tx" x="336" y="304">
    <properties>
     <property name="dialog">[
   {
@@ -305,14 +311,14 @@
     <property name="name" value="Debug Demon"/>
    </properties>
   </object>
-  <object id="85" template="../obj/scroll.tx" x="208" y="96">
+  <object id="85" template="../obj/scroll.tx" x="224" y="96">
    <properties>
     <property name="reward">[
  { &quot;cardName&quot;: &quot;Black Lotus&quot;, &quot;type&quot;:&quot;card&quot;, &quot;count&quot;:1 }
 ]</property>
    </properties>
   </object>
-  <object id="86" template="../obj/treasure.tx" x="320" y="368" visible="0">
+  <object id="86" template="../obj/treasure.tx" x="336" y="368" visible="0">
    <properties>
     <property name="reward">[{
  &quot;type&quot;: &quot;randomCard&quot;,
@@ -322,28 +328,28 @@
 </property>
    </properties>
   </object>
-  <object id="87" template="../obj/enemy.tx" x="96" y="416">
+  <object id="87" template="../obj/enemy.tx" x="48" y="384">
    <properties>
     <property name="enemy" value="Geist"/>
     <property name="spawn.Hard" type="bool" value="true"/>
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="88" template="../obj/enemy.tx" x="112" y="416">
+  <object id="88" template="../obj/enemy.tx" x="48" y="400">
    <properties>
     <property name="enemy" value="Geist"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Hard" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="89" template="../obj/enemy.tx" x="128" y="416">
+  <object id="89" template="../obj/enemy.tx" x="48" y="416">
    <properties>
     <property name="enemy" value="Geist"/>
     <property name="spawn.Easy" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="93" template="../obj/enemy.tx" x="288" y="400">
+  <object id="93" template="../obj/enemy.tx" x="304" y="400">
    <properties>
     <property name="enemy" value="Geist"/>
     <property name="reward">[
@@ -353,17 +359,43 @@
     <property name="spawn.Normal" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="90" template="../obj/treasure.tx" x="112" y="400">
+  <object id="90" template="../obj/treasure.tx" x="32" y="400">
    <properties>
     <property name="spawn.Hard" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="92" template="../obj/treasure.tx" x="128" y="400">
+  <object id="92" template="../obj/treasure.tx" x="32" y="416">
    <properties>
     <property name="spawn.Hard" type="bool" value="false"/>
     <property name="spawn.Normal" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="91" template="../obj/treasure.tx" x="96" y="400"/>
+  <object id="91" template="../obj/treasure.tx" x="32" y="384"/>
+  <object id="94" template="../obj/enemy.tx" x="400" y="240">
+   <properties>
+    <property name="dialog">[
+  {
+    &quot;text&quot;:&quot;*glub*\n(According to your Fish to English dictionary, he's greeting you)&quot;,
+    &quot;options&quot;:[
+      { &quot;name&quot;:&quot;Glub.&quot; },
+      {
+        &quot;name&quot;: &quot;I like your fishiness. I would like to be blue and smell funny too.&quot;,
+        &quot;text&quot;: &quot;*glub*\n(Your color identify is now blue)&quot;,
+        &quot;condition&quot;: [ { &quot;colorIdentity&quot;: &quot;U&quot;, &quot;not&quot;: true } ],
+        &quot;options&quot;: [ { &quot;name&quot;: &quot;It's working. Man, I can go eat some krill right now.&quot;, &quot;action&quot;: [ { &quot;setColorIdentity&quot;: &quot;U&quot; } ]} ]
+      },{
+        &quot;name&quot;: &quot;I talked to the gate. Somehow I think you will find this relevant.&quot;,
+        &quot;text&quot;: &quot;*glub, glub*\n (Fascinating.)&quot;,
+        &quot;condition&quot;: [ {&quot;checkMapFlag&quot;: &quot;gate&quot; } ],
+        &quot;options&quot;: [
+          { &quot;name&quot;: &quot;I know, right?&quot; }
+        ]
+      }
+    ]
+  }
+]</property>
+    <property name="enemy" value="Merfolk Soldier"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

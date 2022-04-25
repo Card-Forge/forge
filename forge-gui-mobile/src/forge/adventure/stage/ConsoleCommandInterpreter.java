@@ -188,6 +188,11 @@ public class ConsoleCommandInterpreter {
             Current.player().resetQuestFlags();
             return "All global quest flags have been reset.";
         });
+        registerCommand(new String[]{"resetMapQuests"}, s -> {
+            if(!MapStage.getInstance().isInMap()) return "Only supported inside a map.";
+            MapStage.getInstance().resetQuestFlags();
+            return "All local quest flags have been reset.";
+        });
         registerCommand(new String[]{"dumpEnemyDeckColors"}, s -> {
             for(EnemyData E : new Array.ArrayIterator<>(WorldData.getAllEnemies())){
                 Deck D = E.generateDeck();

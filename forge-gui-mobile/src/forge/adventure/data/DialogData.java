@@ -11,12 +11,10 @@ public class DialogData {
     public String locname;            //References a localized string for the button labels.
     public String text;               //The text body.
     public String loctext;            //References a localized string for the text body.
-    public DialogData[] options;      //
-
-
+    public DialogData[] options;      //List of sub-dialogs. Show up as options in the current one.
 
     static public class ActionData {
-        static public class QuestFlag{
+        static public class QuestFlag {
             public String key;
             public int val;
         }
@@ -29,8 +27,11 @@ public class DialogData {
         public EffectData giveBlessing;   //Give a blessing to the player.
         public String setColorIdentity;   //Change player's color identity.
         public String advanceQuestFlag;   //Increase given quest flag by 1.
+        public String advanceMapFlag;     //Increase given map flag by 1.
         public EffectData setEffect;      //Set or replace current effects on current actor.
-        public QuestFlag setQuestFlag;    //Set quest flag {flag ID, value}
+        public QuestFlag setQuestFlag;    //Set quest flag.
+        public QuestFlag setMapFlag;      //Set map flag.
+
     }
 
     static public class ConditionData {
@@ -46,8 +47,9 @@ public class DialogData {
         public int hasLife = 0;                    //Check for player life. True if life is equal or higher than X.
         public String colorIdentity = null;        //Check for player's current color identity.
         public String checkQuestFlag = null;       //Check if a quest flag is not 0. False if equals 0 (not started, not set).
+        public String checkMapFlag = null;         //Check if a map flag is not 0. False if equals 0 (not started, not set).
         public QueryQuestFlag getQuestFlag = null; //Check for value of a flag { <flagID>, <comparison>, <value> }
-        public QueryQuestFlag getMapflag = null;   //Check for a local dungeon flag.
+        public QueryQuestFlag getMapFlag = null;   //Check for a local dungeon flag ("map flag").
         public boolean not = false;                //Reverse the result of a condition ("actorID":"XX" + "not":true => true if XX is not in the map.)
     }
 }

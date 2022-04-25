@@ -118,6 +118,12 @@ public class MapDialog {
             if(E.advanceQuestFlag != null && !E.advanceQuestFlag.isEmpty()){ //Increase a given quest flag by 1.
                 Current.player().advanceQuestFlag(E.advanceQuestFlag);
             }
+            if(E.setMapFlag != null && !E.setMapFlag.key.isEmpty()){ //Set a local quest to given value.
+                stage.setQuestFlag(E.setMapFlag.key, E.setMapFlag.val);
+            }
+            if(E.advanceMapFlag != null && !E.advanceMapFlag.isEmpty()){ //Increase a given local quest flag by 1.
+                stage.advanceQuestFlag(E.advanceMapFlag);
+            }
             if(E.setEffect != null){ //Replace current effects.
                 EnemySprite EN = stage.getEnemyByID(parentID);
                 EN.effect = E.setEffect;
@@ -140,7 +146,6 @@ public class MapDialog {
         AdventurePlayer player = Current.player();
         for(DialogData.ConditionData condition:data) {
             //TODO:Check for card in inventory.
-            //TODO:Check local map flag.
             if(condition.item != null && !condition.item.isEmpty()) { //Check for an item in player's inventory.
                 if(!player.hasItem(condition.item)) {
                     if(!condition.not) return false; //Only return on a false.
@@ -174,22 +179,10 @@ public class MapDialog {
             if(condition.getQuestFlag != null){
                 String key = condition.getQuestFlag.key;
                 String cond = condition.getQuestFlag.op;
-
                 int val = condition.getQuestFlag.val;
                 int QF = player.getQuestFlag(key);
-                boolean result = false;
                 if(!player.checkQuestFlag(key)) return false; //If the quest is not ongoing, stop.
-
-
-                switch(cond){
-                    default: case "EQUALS": case"EQUAL": case "=":
-                        if(QF == val) result = true; break;
-                    case "LESSTHAN": case "<":  if(QF < val) result = true; break;
-                    case "MORETHAN": case ">":  if(QF > val) result = true; break;
-                    case "LE_THAN": case "<=":  if(QF <= val) result = true; break;
-                    case "ME_THAN": case ">=":  if(QF >= val) result = true; break;
-                }
-                if(!result) { if(!condition.not) return false; }
+                if(!checkFlagCondition(QF, cond, val)) { if(!condition.not) return false; }
                 else { if(condition.not) return false; }
             }
             if(condition.checkQuestFlag != null && !condition.checkQuestFlag.isEmpty()){
@@ -197,7 +190,32 @@ public class MapDialog {
                     if(!condition.not) return false;
                 } else if(condition.not) return false;
             }
+            if(condition.getMapFlag != null){
+                String key = condition.getMapFlag.key;
+                String cond = condition.getMapFlag.op;
+                int val = condition.getMapFlag.val;
+                int QF = stage.getQuestFlag(key);
+                if(!stage.checkQuestFlag(key)) return false; //If the quest is not ongoing, stop.
+                if(!checkFlagCondition(QF, cond, val)) { if(!condition.not) return false; }
+                else { if(condition.not) return false; }
+            }
+            if(condition.checkMapFlag != null && !condition.checkMapFlag.isEmpty()){
+                if(!stage.checkQuestFlag(condition.checkMapFlag)){
+                    if(!condition.not) return false;
+                } else if(condition.not) return false;
+            }
         }
         return true;
+    }
+    private boolean checkFlagCondition(int flag, String condition, int value){
+        switch(condition.toUpperCase()){
+            default: case "EQUALS": case"EQUAL": case "=":
+                if(flag == value) return true;
+            case "LESSTHAN": case "<":  if(flag < value) return true;
+            case "MORETHAN": case ">":  if(flag > value) return true;
+            case "LE_THAN": case "<=":  if(flag <= value) return true;
+            case "ME_THAN": case ">=":  if(flag >= value) return true;
+        }
+        return false;
     }
 }
