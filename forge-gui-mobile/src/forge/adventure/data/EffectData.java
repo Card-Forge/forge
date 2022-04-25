@@ -15,7 +15,7 @@ public class EffectData implements Serializable {
     public int changeStartCards = 0;     //Amount to add to starting hand size.
     public String[] startBattleWithCard; //Cards that start in the Battlefield.
     //Map only effects.
-    public boolean colorView = false;    //Allows to display enemy colors on the map (TODO)
+    public boolean colorView = false;    //Allows to display enemy colors on the map.
     public float moveSpeed = 1.0f;       //Change of movement speed. Map only.
     //Opponent field.
     public EffectData opponent;          //Effects to be applied to the opponent's side.

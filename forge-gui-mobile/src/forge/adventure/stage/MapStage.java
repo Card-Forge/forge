@@ -31,9 +31,7 @@ import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Stage to handle tiled maps for points of interests
@@ -57,6 +55,7 @@ public class MapStage extends GameStage {
     private final Vector2 oldPosition3 = new Vector2();
     private final Vector2 oldPosition4 = new Vector2();
     private boolean isLoadingMatch = false;
+    private Map<String, Byte> mapFlags = new HashMap<>(); //Stores local map flags. These aren't available outside this map.
 
     private Dialog dialog;
     private Stage dialogStage;
@@ -596,5 +595,24 @@ public class MapStage extends GameStage {
     public void resetPosition() {
         player.setPosition(oldPosition4);
         stop();
+    }
+
+    public void setQuestFlag(String key, int value){ changes.getMapFlags().put(key, (byte) value); }
+    public void advanceQuestFlag(String key){
+        Map<String, Byte> C = changes.getMapFlags();
+        if(C.get(key) != null){
+            C.put(key, (byte) (C.get(key) + 1));
+        } else {
+            C.put(key, (byte) 1);
+        }
+    }
+    public boolean checkQuestFlag(String key){
+        return changes.getMapFlags().get(key) != null;
+    }
+    public int getQuestFlag(String key){
+        return (int) changes.getMapFlags().getOrDefault(key, (byte) 0);
+    }
+    public void resetQuestFlags(){
+        changes.getMapFlags().clear();
     }
 }
