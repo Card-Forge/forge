@@ -9,8 +9,6 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.MapStage;
 import forge.util.Localizer;
 
-import java.util.Map;
-
 /**
  * MapDialog
  * Implements a dialogue/event tree for dialogs.

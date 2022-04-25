@@ -6,7 +6,6 @@ import forge.adventure.util.SaveFileData;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 /**
  * Class to save point of interest changes, like sold cards and dead enemies
