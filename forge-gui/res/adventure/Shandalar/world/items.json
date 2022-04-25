@@ -1,706 +1,709 @@
 [
-  {
-    "name": "Sol Ring",
-    "equipmentSlot": "Left",
-    "iconName": "SolRing",
-    "effect": {
-      "startBattleWithCard": [
-        "Sol Ring"
-      ]
-    }
-  },
-  {
-    "name": "Mox Emerald",
-    "equipmentSlot": "Neck",
-    "iconName": "MoxEmerald",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Emerald"
-      ]
-    }
-  },
-  {
-    "name": "Black Lotus",
-    "equipmentSlot": "Right",
-    "iconName": "BlackLotus",
-    "effect": {
-      "startBattleWithCard": [
-        "Black Lotus"
-      ]
-    }
-  },
-  {
-    "name": "Mox Jet",
-    "equipmentSlot": "Neck",
-    "iconName": "MoxJet",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Jet"
-      ]
-    }
-  },
-  {
-    "name": "Mox Pearl",
-    "equipmentSlot": "Neck",
-    "iconName": "MoxPearl",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Pearl"
-      ]
-    }
-  },
-  {
-    "name": "Mox Ruby",
-    "equipmentSlot": "Neck",
-    "iconName": "MoxRuby",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Ruby"
-      ]
-    }
-  },
-  {
-    "name": "Mox Sapphire",
-    "equipmentSlot": "Neck",
-    "iconName": "MoxSapphire",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Sapphire"
-      ]
-    }
-  },
-  {
-    "name": "Battle Standard",
-    "equipmentSlot": "Left",
-    "iconName": "BattleStandard",
-    "effect": {
-      "lifeModifier": -1,
-      "startBattleWithCard": [
-        "r_1_1_goblin"
-      ]
-    }
-  },
-  {
-    "name": "Life Amulet",
-    "equipmentSlot": "Neck",
-    "iconName": "LifeAmulet",
-    "effect": {
-      "lifeModifier": 2
-    }
-  },
-  {
-    "name": "Red Key",
-    "iconName": "RedKey",
-    "description": "A mysterious red key.",
-    "questItem": true
-  },
-  {
-    "name": "White Key",
-    "iconName": "WhiteKey",
-    "description": "A mysterious white key.",
-    "questItem": true
-  },
-  {
-    "name": "Blue Key",
-    "iconName": "BlueKey",
-    "description": "A mysterious blue key.",
-    "questItem": true
-  },
-  {
-    "name": "Green Key",
-    "iconName": "GreenKey",
-    "description": "A mysterious green key.",
-    "questItem": true
-  },
-  {
-    "name": "Black Key",
-    "iconName": "BlackKey",
-    "description": "A mysterious black key.",
-    "questItem": true
-  },
-  {
-    "name": "Strange Key",
-    "iconName": "StrangeKey",
-    "description": "A mysterious key.",
-    "questItem": true
-  },
-  {
-    "name": "Steel Sword",
-    "equipmentSlot": "Left",
-    "iconName": "SteelSword",
-    "effect": {
-      "startBattleWithCard": [
-        "Greatsword"
-      ]
-    }
-  },
-  {
-    "name": "Axt",
-    "equipmentSlot": "Left",
-    "iconName": "SteelAxt",
-    "effect": {
-      "startBattleWithCard": [
-        "Bonesplitter"
-      ]
-    }
-  },
-  {
-    "name": "Steel Boots",
-    "equipmentSlot": "Boots",
-    "iconName": "SteelBoots",
-    "cost": 500,
-    "effect": {
-      "lifeModifier": 1,
-      "moveSpeed": 1.2
-    }
-  },
-  {
-    "name": "Steel Shield",
-    "equipmentSlot": "Right",
-    "iconName": "SteelShield",
-    "cost": 500,
-    "effect": {
-      "startBattleWithCard": [
-        "w_0_3_wall_defender"
-      ]
-    }
-  },
-  {
-    "name": "Steel Armor",
-    "equipmentSlot": "Body",
-    "cost": 500,
-    "iconName": "SteelArmor",
-    "effect": {
-      "lifeModifier": 3
-    }
-  },
-  {
-    "name": "Leather Boots",
-    "equipmentSlot": "Boots",
-    "iconName": "LeatherBoots",
-    "effect": {
-      "moveSpeed": 1.15
-    }
-  },
-  {
-    "name": "Jungle Shield",
-    "equipmentSlot": "Right",
-    "iconName": "JungleShield",
-    "effect": {
-      "startBattleWithCard": [
-        "g_0_1_plant"
-      ]
-    }
-  },
-  {
-    "name": "Dagger",
-    "equipmentSlot": "Left",
-    "iconName": "Dagger",
-    "effect": {
-      "startBattleWithCard": [
-        "Spare Dagger"
-      ]
-    }
-  },
-  {
-    "name": "Cheat",
-    "equipmentSlot": "Neck",
-    "iconName": "Goose",
-    "effect": {
-      "startBattleWithCard": [
-        "Blightsteel Colossus",
-        "Lightning Greaves"
-      ]
-    }
-  },
-  {
-    "name": "Aladdin's Ring",
-    "equipmentSlot": "Right",
-    "iconName": "AladdinsRing",
-    "effect": {
-      "startBattleWithCard": [
-        "Aladdin's Ring"
-      ]
-    }
-  },
-  {
-    "name": "Spell Book",
-    "iconName": "SpellBook",
-    "equipmentSlot": "Left",
-    "effect": {
-      "changeStartCards": 1
-    }
-  },
-  {
-    "name": "Cursed Ring",
-    "equipmentSlot": "Right",
-    "iconName": "CursedRing",
-    "effect": {
-      "startBattleWithCard": [
-        "c_0_1_a_goblin_construct_noblock_ping",
-        "c_0_1_a_goblin_construct_noblock_ping",
-        "c_0_1_a_goblin_construct_noblock_ping"
-      ]
-    }
-  },
-  {
-    "name": "Mithril Boots",
-    "equipmentSlot": "Boots",
-    "iconName": "MithrilBoots",
-    "cost": 1500,
-    "effect": {
-      "lifeModifier": 2,
-      "moveSpeed": 1.3
-    }
-  },
-  {
-    "name": "Mithril Shield",
-    "equipmentSlot": "Right",
-    "iconName": "MithrilShield",
-    "cost": 1500,
-    "effect": {
-      "startBattleWithCard": [
-        "c_0_4_a_wall_defender"
-      ]
-    }
-
-  },
-  {
-    "name": "Mithril Armor",
-    "equipmentSlot": "Body",
-    "iconName": "MithrilArmor",
-    "cost": 1500,
-    "effect": {
-      "lifeModifier": 5
-    }
-  },
-  {
-    "name": "Death Ring",
-    "equipmentSlot": "Right",
-    "iconName": "DeathRing",
-    "effect": {
-      "opponent": {
-        "startBattleWithCard": [
-          "c_0_1_a_goblin_construct_noblock_ping",
-          "c_0_1_a_goblin_construct_noblock_ping",
-          "c_0_1_a_goblin_construct_noblock_ping"
-        ]
-      }
-    }
-  },
-  {
-    "name": "Flame Sword",
-    "equipmentSlot": "Left",
-    "iconName": "FlameSword",
-    "effect": {
-      "opponent": {
-        "lifeModifier": -5
-      }
-    }
-  },
-  {
-    "name": "Mirror Shield",
-    "equipmentSlot": "Right",
-    "iconName": "MirrorShield",
-    "effect": {
-      "startBattleWithCard": [
-        "Mirror Shield"
-      ]
-    }
-  },
-  {
-    "name": "Dungeon Map",
-    "equipmentSlot": "Right",
-    "iconName": "DungeonMap",
-    "effect": {
-      "startBattleWithCard": [
-        "Dungeon Map"
-      ]
-    }
-  },
-  {
-    "name": "Aladdin's Lamp",
-    "equipmentSlot": "Right",
-    "iconName": "AladdinsLamp",
-    "effect": {
-      "startBattleWithCard": [
-        "Aladdin's Lamp"
-      ]
-    }
-  },
-  {
-    "name": "Heart-Piercer",
-    "equipmentSlot": "Left",
-    "iconName": "CompositeBow",
-    "effect": {
-      "startBattleWithCard": [
-        "Heart-Piercer Bow"
-      ]
-    }
-  },
-  {
-    "name": "Wood Bow",
-    "equipmentSlot": "Left",
-    "iconName": "WoodBow",
-    "effect": {
-      "startBattleWithCard": [ "Fyndhorn Bow" ]
-    }
-  },
-  {
-    "name": "Sandals",
-    "equipmentSlot": "Boots",
-    "iconName": "Sandals",
-    "effect": {
-      "moveSpeed": 1.1
-    }
-  },
-  {
-    "name": "Gold Boots",
-    "equipmentSlot": "Boots",
-    "iconName": "GoldBoots",
-    "effect": {
-      "lifeModifier": 2,
-      "moveSpeed": 1.3
-    }
-  },
-  {
-    "name": "Gold Shield",
-    "equipmentSlot": "Right",
-    "iconName": "GoldShield",
-    "effect": {
-      "lifeModifier": 3
-    }
-  },
-  {
-    "name": "Gold Armor",
-    "equipmentSlot": "Body",
-    "iconName": "GoldArmor",
-    "effect": {
-      "lifeModifier": 4
-    }
-  },
-  {
-    "name": "Dark Boots",
-    "equipmentSlot": "Boots",
-    "iconName": "DarkBoots",
-    "effect": {
-      "startBattleWithCard": [
-        "Clattering Augur"
-      ],
-      "lifeModifier": -2,
-      "moveSpeed": 1.3
-    }
-  },
-  {
-    "name": "Dark Shield",
-    "equipmentSlot": "Right",
-    "iconName": "DarkShield",
-    "effect": {
-      "startBattleWithCard": [
-        "Barrier of Bones"
-      ],
-      "lifeModifier": -3
-    }
-  },
-  {
-    "name": "Dark Armor",
-    "equipmentSlot": "Body",
-    "iconName": "DarkArmor",
-    "effect": {
-      "startBattleWithCard": [
-        "Skeletal Snake"
-      ],
-      "lifeModifier": -4
-    }
-  },
-  {
-    "name": "Blood Vial",
-    "equipmentSlot": "Right",
-    "iconName": "Blood",
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_blood_draw"
-      ]
-    }
-  },
-  {
-    "name": "Charm",
-    "equipmentSlot": "Right",
-    "iconName": "Clue",
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_clue_draw"
-      ]
-    }
-  },
-  {
-    "name": "Snack",
-    "equipmentSlot": "Right",
-    "iconName": "Cheese",
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_food_sac"
-      ]
-    }
-  },
-  {
-    "name": "Change",
-    "equipmentSlot": "Right",
-    "iconName": "Gold",
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_gold_draw"
-      ]
-    }
-  },
-  {
-    "name": "Treasure",
-    "equipmentSlot": "Right",
-    "iconName": "Treasure",
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_treasure_sac"
-      ]
-    }
-  },
-  {
-    "name": "Magic Shard",
-    "equipmentSlot": "Right",
-    "iconName": "Shard",
-    "effect": {
-      "startBattleWithCard": [
-        "c_e_shard_draw"
-      ]
-    }
-  },
-  {
-    "name": "Mad Staff",
-    "equipmentSlot": "Left",
-    "iconName": "MadStaff",
-    "effect": {
-      "startBattleWithCard": [
-        "Power Struggle"
-      ]
-    }
-  },
-  {
-    "name": "Dark Amulet",
-    "equipmentSlot": "Neck",
-    "iconName": "DarkAmulet",
-    "effect": {
-      "startBattleWithCard": [
-        "Necropolis of Azar"
-      ]
-    }
-  },
-  {
-    "name": "Pandora's Box",
-    "equipmentSlot": "Right",
-    "iconName": "PandorasBox",
-    "effect": {
-      "startBattleWithCard": [
-        "Pandora's Box"
-      ]
-    }
-  },
-  {
-    "name": "Disrupting Scepter",
-    "equipmentSlot": "Left",
-    "iconName": "DisruptingScepter",
-    "effect": {
-      "startBattleWithCard": [
-        "Disrupting Scepter"
-      ]
-    }
-  },
-  {
-    "name": "Entrancing Lyre",
-    "equipmentSlot": "Right",
-    "iconName": "EntrancingLyre",
-    "effect": {
-      "startBattleWithCard": [
-        "Entrancing Lyre"
-      ]
-    }
-  },
-  {
-    "name": "Heavy Arbalest",
-    "equipmentSlot": "Left",
-    "iconName": "HeavyArbalest",
-    "effect": {
-      "startBattleWithCard": [
-        "Heavy Arbalest"
-      ]
-    }
-  },
-  {
-    "name": "Ring of Three Wishes",
-    "equipmentSlot": "Right",
-    "iconName": "RingofThreeWishes",
-    "effect": {
-      "startBattleWithCard": [
-        "Ring of Three Wishes"
-      ]
-    }
-  },
-  {
-    "name": "The Blackstaff of Waterdeep",
-    "equipmentSlot": "Left",
-    "iconName": "TheBlackstaffofWaterdeep",
-    "effect": {
-      "startBattleWithCard": [
-        "The Blackstaff of Waterdeep"
-      ]
-    }
-  },
-  {
-    "name": "Unerring Sling",
-    "equipmentSlot": "Left",
-    "iconName": "UnerringSling",
-    "effect": {
-      "startBattleWithCard": [
-        "Unerring Sling"
-      ]
-    }
-  },
-  {
-    "name": "Jeweled Amulet",
-    "equipmentSlot": "Neck",
-    "iconName": "JeweledAmulet",
-    "effect": {
-      "startBattleWithCard": [
-        "Jeweled Amulet"
-      ]
-    }
-  },
-  {
-    "name": "Traveler's Amulet",
-    "equipmentSlot": "Neck",
-    "iconName": "TravelersAmulet",
-    "effect": {
-      "startBattleWithCard": [
-        "Traveler's Amulet"
-      ]
-    }
-  },
-  {
-    "name": "Relic Amulet",
-    "equipmentSlot": "Neck",
-    "iconName": "RelicAmulet",
-    "effect": {
-      "startBattleWithCard": [
-        "Relic Amulet"
-      ]
-    }
-  },
-  {
-    "name": "Manasight Amulet",
-    "equipmentSlot": "Neck",
-    "iconName": "RelicAmulet",
-    "effect": {
-      "colorView": true
-    }
-  },
-  {
-    "name": "Amulet of Kroog",
-    "equipmentSlot": "Neck",
-    "iconName": "AmuletofKroog",
-    "effect": {
-      "startBattleWithCard": [
-        "Amulet of Kroog"
-      ]
-    }
-  },
-  {
-    "name": "Amulet of Vigor",
-    "equipmentSlot": "Neck",
-    "iconName": "AmuletofVigor",
-    "effect": {
-      "startBattleWithCard": [
-        "Amulet of Vigor"
-      ]
-    }
-  },
-  {
-    "name": "Veilstone Amulet",
-    "equipmentSlot": "Neck",
-    "iconName": "VeilstoneAmulet",
-    "effect": {
-      "startBattleWithCard": [
-        "Veilstone Amulet"
-      ]
-    }
-  },
-  {
-    "name": "Jandor's Ring",
-    "equipmentSlot": "Right",
-    "iconName": "JandorsRing",
-    "effect": {
-      "startBattleWithCard": [
-        "Jandor's Ring"
-      ]
-    }
-  },
-  {
-    "name": "Jinxed Ring",
-    "equipmentSlot": "Right",
-    "iconName": "JinxedRing",
-    "effect": {
-      "opponent": {
-        "startBattleWithCard": [
-          "Jinxed Ring"
-        ]
-      }
-    }
-  },
-  {
-    "name": "Nine-Ringed Bo",
-    "equipmentSlot": "Left",
-    "iconName": "Nine-RingedBo",
-    "effect": {
-      "startBattleWithCard": [
-        "Nine-Ringed Bo"
-      ]
-    }
-  },
-  {
-    "name": "Ring of Immortals",
-    "equipmentSlot": "Right",
-    "iconName": "RingofImmortals",
-    "effect": {
-      "startBattleWithCard": [
-        "Ring of Immortals"
-      ]
-    }
-  },
-  {
-    "name": "Prism Ring",
-    "equipmentSlot": "Right",
-    "iconName": "PrismRing",
-    "effect": {
-      "startBattleWithCard": [
-        "Prism Ring"
-      ]
-    }
-  },
-  {
-    "name": "Ring of Renewal",
-    "equipmentSlot": "Right",
-    "iconName": "RingofRenewal",
-    "effect": {
-      "startBattleWithCard": [
-        "Ring of Renewal"
-      ]
-    }
-  },
-  {
-    "name": "Kite Shield",
-    "equipmentSlot": "Right",
-    "iconName": "KiteShield",
-    "effect": {
-      "startBattleWithCard": [
-        "Kite Shield"
-      ]
-    }
-  }
+{
+	"name": "Sol Ring",
+	"equipmentSlot": "Left",
+	"effect": {
+		"startBattleWithCard": [
+			"Sol Ring"
+		]
+	},
+	"iconName": "SolRing"
+},
+{
+	"name": "Mox Emerald",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Mox Emerald"
+		]
+	},
+	"description": "",
+	"iconName": "MoxEmerald"
+},
+{
+	"name": "Black Lotus",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Black Lotus"
+		]
+	},
+	"iconName": "BlackLotus"
+},
+{
+	"name": "Mox Jet",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Mox Jet"
+		]
+	},
+	"iconName": "MoxJet"
+},
+{
+	"name": "Mox Pearl",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Mox Pearl"
+		]
+	},
+	"description": "",
+	"iconName": "MoxPearl"
+},
+{
+	"name": "Mox Ruby",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Mox Ruby"
+		]
+	},
+	"iconName": "MoxRuby"
+},
+{
+	"name": "Mox Sapphire",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Mox Sapphire"
+		]
+	},
+	"iconName": "MoxSapphire"
+},
+{
+	"name": "Battle Standard",
+	"equipmentSlot": "Left",
+	"effect": {
+		"lifeModifier": -1,
+		"startBattleWithCard": [
+			"r_1_1_goblin"
+		]
+	},
+	"iconName": "BattleStandard"
+},
+{
+	"name": "Life Amulet",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"lifeModifier": 2
+	},
+	"iconName": "LifeAmulet"
+},
+{
+	"name": "Red Key",
+	"description": "A mysterious red key.",
+	"iconName": "RedKey",
+	"questItem": true
+},
+{
+	"name": "White Key",
+	"description": "A mysterious white key.",
+	"iconName": "WhiteKey",
+	"questItem": true
+},
+{
+	"name": "Blue Key",
+	"description": "A mysterious blue key.",
+	"iconName": "BlueKey",
+	"questItem": true
+},
+{
+	"name": "Green Key",
+	"description": "A mysterious green key.",
+	"iconName": "GreenKey",
+	"questItem": true
+},
+{
+	"name": "Black Key",
+	"description": "A mysterious black key.",
+	"iconName": "BlackKey",
+	"questItem": true
+},
+{
+	"name": "Strange Key",
+	"description": "A mysterious key.",
+	"iconName": "StrangeKey",
+	"questItem": true
+},
+{
+	"name": "Steel Sword",
+	"equipmentSlot": "Left",
+	"effect": {
+		"startBattleWithCard": [
+			"Greatsword"
+		]
+	},
+	"iconName": "SteelSword"
+},
+{
+	"name": "Axt",
+	"equipmentSlot": "Left",
+	"effect": {
+		"startBattleWithCard": [
+			"Bonesplitter"
+		]
+	},
+	"iconName": "SteelAxt"
+},
+{
+	"name": "Steel Boots",
+	"equipmentSlot": "Boots",
+	"effect": {
+		"lifeModifier": 1,
+		"moveSpeed": 1.2
+	},
+	"iconName": "SteelBoots",
+	"cost": 500
+},
+{
+	"name": "Steel Shield",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"w_0_3_wall_defender"
+		]
+	},
+	"iconName": "SteelShield",
+	"cost": 500
+},
+{
+	"name": "Steel Armor",
+	"equipmentSlot": "Body",
+	"effect": {
+		"lifeModifier": 3
+	},
+	"iconName": "SteelArmor",
+	"cost": 500
+},
+{
+	"name": "Leather Boots",
+	"equipmentSlot": "Boots",
+	"effect": {
+		"moveSpeed": 1.15
+	},
+	"iconName": "LeatherBoots"
+},
+{
+	"name": "Jungle Shield",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"g_0_1_plant"
+		]
+	},
+	"iconName": "JungleShield"
+},
+{
+	"name": "Dagger",
+	"equipmentSlot": "Left",
+	"effect": {
+		"startBattleWithCard": [
+			"Spare Dagger"
+		]
+	},
+	"iconName": "Dagger"
+},
+{
+	"name": "Cheat",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Blightsteel Colossus",
+			"Lightning Greaves"
+		]
+	},
+	"iconName": "Goose"
+},
+{
+	"name": "Aladdin's Ring",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Aladdin's Ring"
+		]
+	},
+	"iconName": "AladdinsRing"
+},
+{
+	"name": "Spell Book",
+	"equipmentSlot": "Left",
+	"effect": {
+		"changeStartCards": 1
+	},
+	"iconName": "SpellBook"
+},
+{
+	"name": "Cursed Ring",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"c_0_1_a_goblin_construct_noblock_ping",
+			"c_0_1_a_goblin_construct_noblock_ping",
+			"c_0_1_a_goblin_construct_noblock_ping"
+		]
+	},
+	"iconName": "CursedRing"
+},
+{
+	"name": "Mithril Boots",
+	"equipmentSlot": "Boots",
+	"effect": {
+		"lifeModifier": 2,
+		"moveSpeed": 1.3
+	},
+	"iconName": "MithrilBoots",
+	"cost": 1500
+},
+{
+	"name": "Mithril Shield",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"c_0_4_a_wall_defender"
+		]
+	},
+	"iconName": "MithrilShield",
+	"cost": 1500
+},
+{
+	"name": "Mithril Armor",
+	"equipmentSlot": "Body",
+	"effect": {
+		"lifeModifier": 5
+	},
+	"iconName": "MithrilArmor",
+	"cost": 1500
+},
+{
+	"name": "Death Ring",
+	"equipmentSlot": "Right",
+	"effect": {
+		"opponent": {
+			"startBattleWithCard": [
+				"c_0_1_a_goblin_construct_noblock_ping",
+				"c_0_1_a_goblin_construct_noblock_ping",
+				"c_0_1_a_goblin_construct_noblock_ping"
+			]
+		}
+	},
+	"iconName": "DeathRing"
+},
+{
+	"name": "Flame Sword",
+	"equipmentSlot": "Left",
+	"effect": {
+		"opponent": {
+			"lifeModifier": -5
+		}
+	},
+	"iconName": "FlameSword"
+},
+{
+	"name": "Mirror Shield",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Mirror Shield"
+		]
+	},
+	"iconName": "MirrorShield"
+},
+{
+	"name": "Dungeon Map",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Dungeon Map"
+		]
+	},
+	"iconName": "DungeonMap"
+},
+{
+	"name": "Aladdin's Lamp",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Aladdin's Lamp"
+		]
+	},
+	"iconName": "AladdinsLamp"
+},
+{
+	"name": "Heart-Piercer",
+	"equipmentSlot": "Left",
+	"effect": {
+		"startBattleWithCard": [
+			"Heart-Piercer Bow"
+		]
+	},
+	"iconName": "CompositeBow"
+},
+{
+	"name": "Wood Bow",
+	"equipmentSlot": "Left",
+	"effect": {
+		"startBattleWithCard": [
+			"Fyndhorn Bow"
+		]
+	},
+	"iconName": "WoodBow"
+},
+{
+	"name": "Sandals",
+	"equipmentSlot": "Boots",
+	"effect": {
+		"moveSpeed": 1.1
+	},
+	"iconName": "Sandals"
+},
+{
+	"name": "Gold Boots",
+	"equipmentSlot": "Boots",
+	"effect": {
+		"lifeModifier": 2,
+		"moveSpeed": 1.3
+	},
+	"iconName": "GoldBoots"
+},
+{
+	"name": "Gold Shield",
+	"equipmentSlot": "Right",
+	"effect": {
+		"lifeModifier": 3
+	},
+	"iconName": "GoldShield"
+},
+{
+	"name": "Gold Armor",
+	"equipmentSlot": "Body",
+	"effect": {
+		"lifeModifier": 4
+	},
+	"iconName": "GoldArmor"
+},
+{
+	"name": "Dark Boots",
+	"equipmentSlot": "Boots",
+	"effect": {
+		"lifeModifier": -2,
+		"startBattleWithCard": [
+			"Clattering Augur"
+		],
+		"moveSpeed": 1.3
+	},
+	"iconName": "DarkBoots"
+},
+{
+	"name": "Dark Shield",
+	"equipmentSlot": "Right",
+	"effect": {
+		"lifeModifier": -3,
+		"startBattleWithCard": [
+			"Barrier of Bones"
+		]
+	},
+	"iconName": "DarkShield"
+},
+{
+	"name": "Dark Armor",
+	"equipmentSlot": "Body",
+	"effect": {
+		"lifeModifier": -4,
+		"startBattleWithCard": [
+			"Skeletal Snake"
+		]
+	},
+	"iconName": "DarkArmor"
+},
+{
+	"name": "Blood Vial",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"c_a_blood_draw"
+		]
+	},
+	"iconName": "Blood"
+},
+{
+	"name": "Charm",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"c_a_clue_draw"
+		]
+	},
+	"iconName": "Clue"
+},
+{
+	"name": "Snack",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"c_a_food_sac"
+		]
+	},
+	"iconName": "Cheese"
+},
+{
+	"name": "Change",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"c_a_gold_draw"
+		]
+	},
+	"iconName": "Gold"
+},
+{
+	"name": "Treasure",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"c_a_treasure_sac"
+		]
+	},
+	"iconName": "Treasure"
+},
+{
+	"name": "Magic Shard",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"c_e_shard_draw"
+		]
+	},
+	"iconName": "Shard"
+},
+{
+	"name": "Mad Staff",
+	"equipmentSlot": "Left",
+	"effect": {
+		"startBattleWithCard": [
+			"Power Struggle"
+		]
+	},
+	"iconName": "MadStaff"
+},
+{
+	"name": "Dark Amulet",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Necropolis of Azar"
+		]
+	},
+	"iconName": "DarkAmulet"
+},
+{
+	"name": "Pandora's Box",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Pandora's Box"
+		]
+	},
+	"iconName": "PandorasBox"
+},
+{
+	"name": "Disrupting Scepter",
+	"equipmentSlot": "Left",
+	"effect": {
+		"startBattleWithCard": [
+			"Disrupting Scepter"
+		]
+	},
+	"iconName": "DisruptingScepter"
+},
+{
+	"name": "Entrancing Lyre",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Entrancing Lyre"
+		]
+	},
+	"iconName": "EntrancingLyre"
+},
+{
+	"name": "Heavy Arbalest",
+	"equipmentSlot": "Left",
+	"effect": {
+		"startBattleWithCard": [
+			"Heavy Arbalest"
+		]
+	},
+	"iconName": "HeavyArbalest"
+},
+{
+	"name": "Ring of Three Wishes",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Ring of Three Wishes"
+		]
+	},
+	"iconName": "RingofThreeWishes"
+},
+{
+	"name": "The Blackstaff of Waterdeep",
+	"equipmentSlot": "Left",
+	"effect": {
+		"startBattleWithCard": [
+			"The Blackstaff of Waterdeep"
+		]
+	},
+	"iconName": "TheBlackstaffofWaterdeep"
+},
+{
+	"name": "Unerring Sling",
+	"equipmentSlot": "Left",
+	"effect": {
+		"startBattleWithCard": [
+			"Unerring Sling"
+		]
+	},
+	"iconName": "UnerringSling"
+},
+{
+	"name": "Jeweled Amulet",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Jeweled Amulet"
+		]
+	},
+	"iconName": "JeweledAmulet"
+},
+{
+	"name": "Traveler's Amulet",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Traveler's Amulet"
+		]
+	},
+	"iconName": "TravelersAmulet"
+},
+{
+	"name": "Relic Amulet",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Relic Amulet"
+		]
+	},
+	"iconName": "RelicAmulet"
+},
+{
+	"name": "Manasight Amulet",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"colorView": true
+	},
+	"iconName": "RelicAmulet"
+},
+{
+	"name": "Amulet of Kroog",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Amulet of Kroog"
+		]
+	},
+	"iconName": "AmuletofKroog"
+},
+{
+	"name": "Amulet of Vigor",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Amulet of Vigor"
+		]
+	},
+	"iconName": "AmuletofVigor"
+},
+{
+	"name": "Veilstone Amulet",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Veilstone Amulet"
+		]
+	},
+	"iconName": "VeilstoneAmulet"
+},
+{
+	"name": "Jandor's Ring",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Jandor's Ring"
+		]
+	},
+	"iconName": "JandorsRing"
+},
+{
+	"name": "Jinxed Ring",
+	"equipmentSlot": "Right",
+	"effect": {
+		"opponent": {
+			"startBattleWithCard": [
+				"Jinxed Ring"
+			]
+		}
+	},
+	"iconName": "JinxedRing"
+},
+{
+	"name": "Nine-Ringed Bo",
+	"equipmentSlot": "Left",
+	"effect": {
+		"startBattleWithCard": [
+			"Nine-Ringed Bo"
+		]
+	},
+	"iconName": "Nine-RingedBo"
+},
+{
+	"name": "Ring of Immortals",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Ring of Immortals"
+		]
+	},
+	"iconName": "RingofImmortals"
+},
+{
+	"name": "Prism Ring",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Prism Ring"
+		]
+	},
+	"iconName": "PrismRing"
+},
+{
+	"name": "Ring of Renewal",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Ring of Renewal"
+		]
+	},
+	"iconName": "RingofRenewal"
+},
+{
+	"name": "Kite Shield",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Kite Shield"
+		]
+	},
+	"iconName": "KiteShield"
+}
 ]
