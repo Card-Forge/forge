@@ -647,6 +647,10 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.ImprintedCards);
     }
 
+    public FCollectionView<CardView> getExiledCards() {
+        return get(TrackableProperty.ExiledCards);
+    }
+
     public FCollectionView<CardView> getHauntedBy() {
         return get(TrackableProperty.HauntedBy);
     }
