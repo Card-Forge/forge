@@ -109,7 +109,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Table<Long, Long, List<String>> hiddenExtrinsicKeywords = TreeBasedTable.create();
 
     // cards attached or otherwise linked to this card
-    private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, convokedCards, imprintedCards, encodedCards;
+    private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, convokedCards, imprintedCards,
+            exiledCards, encodedCards;
     private CardCollection gainControlTargets, chosenCards;
     private CardCollection mergedCards;
     private Map<Long, CardCollection> mustBlockCards = Maps.newHashMap();
@@ -1079,6 +1080,31 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         imprintedCards = view.clearCards(imprintedCards, TrackableProperty.ImprintedCards);
     }
 
+    public final CardCollectionView getExiledCards() {
+        return CardCollection.getView(exiledCards);
+    }
+    public final boolean hasExiledCard() {
+        return FCollection.hasElements(exiledCards);
+    }
+    public final boolean hasExiledCard(Card c) {
+        return FCollection.hasElement(exiledCards, c);
+    }
+    public final void addExiledCard(final Card c) {
+        exiledCards = view.addCard(exiledCards, c, TrackableProperty.ExiledCards);
+    }
+    public final void addExiledCards(final Iterable<Card> cards) {
+        exiledCards = view.addCards(exiledCards, cards, TrackableProperty.ExiledCards);
+    }
+    public final void removeExiledCard(final Card c) {
+        exiledCards = view.removeCard(exiledCards, c, TrackableProperty.ExiledCards);
+    }
+    public final void removeExiledCards(final Iterable<Card> cards) {
+        exiledCards = view.removeCards(exiledCards, cards, TrackableProperty.ExiledCards);
+    }
+    public final void clearExiledCards() {
+        exiledCards = view.clearCards(exiledCards, TrackableProperty.ExiledCards);
+    }
+
     public final CardCollectionView getEncodedCards() {
         return CardCollection.getView(encodedCards);
     }
@@ -1668,6 +1694,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return;
         }
 
+        exiledWith.removeExiledCard(this);
         exiledWith.removeUntilLeavesBattlefield(this);
 
         exiledWith = null;

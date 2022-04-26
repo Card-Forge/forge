@@ -719,6 +719,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         if (host == null) {
                             host = sa.getHostCard();
                         }
+                        host.addExiledCard(gameCard);
                         gameCard.setExiledWith(host);
                         gameCard.setExiledBy(host.getController());
                     }
@@ -745,6 +746,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (destination.equals(ZoneType.Exile) && !movedCard.isToken()) {
                         movedCard.setExiledWith(host);
                         if (host != null) {
+                            host.addExiledCard(movedCard);
                             movedCard.setExiledBy(host.getController());
                         }
                     }
@@ -1350,6 +1352,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         if (host == null) {
                             host = sa.getHostCard();
                         }
+                        host.addExiledCard(movedCard);
                         movedCard.setExiledWith(host);
                         movedCard.setExiledBy(host.getController());
                     }
@@ -1541,6 +1544,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     host = srcSA.getHostCard();
                 }
                 movedCard = game.getAction().exile(tgtHost, srcSA, params);
+                host.addExiledCard(movedCard);
                 movedCard.setExiledWith(host);
                 movedCard.setExiledBy(host.getController());
             } else if (srcSA.getParam("Destination").equals("TopOfLibrary")) {

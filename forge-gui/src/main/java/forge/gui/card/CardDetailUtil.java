@@ -560,6 +560,15 @@ public class CardDetailUtil {
             area.append(StringUtils.join(card.getImprintedCards(), ", "));
         }
 
+        // CardsExiledBy
+        if (card.getExiledCards() != null) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("Exiled: ");
+            area.append(StringUtils.join(card.getExiledCards(), ", "));
+        }
+
         // Haunt
         if (card.getHauntedBy() != null) {
             if (area.length() != 0) {
