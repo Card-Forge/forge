@@ -3185,22 +3185,19 @@ public class CardFactoryUtil {
             final String manacost = k[1];
 
             final String effect = "AB$ CopyPermanent | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard" +
-                    "| Defined$ Self | PumpKeywords$ HIDDEN CARDNAME attacks specific player each combat if able:Remembered | PumpDuration$ EOT" +
-                    "| AddKeywords$ Haste | ForEach$ Opponent | CleanupForEach$ EOT" +
+                    "| Defined$ Self | PumpKeywords$ Haste | RememberTokens$ True | ForEach$ Opponent | CleanupForEach$ EOT" +
                     "| AtEOT$ Sacrifice | PrecostDesc$ Encore | CostDesc$ " + ManaCostParser.parse(manacost) +
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
-            sa.setIntrinsic(intrinsic);
-            inst.addSpellAbility(sa);
-            final String copyStr = "DB$ CopyPermanent | Defined$ Self | ImprintTokens$ True " +
-                    "| AddKeywords$ Haste | RememberTokens$ True | TokenRemembered$ Player.IsRemembered " +
-                    "| AddStaticAbilities$ MustAttack";
-
-            final String pumpStr = "DB$ Animate | Defined$ Creature.IsRemembered | staticAbilities$ AttackChosen ";
-
+            final String animateStr = "DB$ Animate | Defined$ Remembered | staticAbilities$ AttackChosen";
+            final AbilitySub animateSub = (AbilitySub) AbilityFactory.getAbility(animateStr, card);
+            sa.setSubAbility(animateSub);
             final String attackStaticStr = "Mode$ MustAttack | ValidCreature$ Card.Self | MustAttack$ Remembered" +
                     " | Description$ This token copy attacks that opponent this turn if able.";
+            sa.setSVar("AttackChosen", attackStaticStr);
+            sa.setIntrinsic(intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Spectacle")) {
             final String[] k = keyword.split(":");
             final Cost cost = new Cost(k[1], false);
