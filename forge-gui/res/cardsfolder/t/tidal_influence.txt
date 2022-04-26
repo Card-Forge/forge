@@ -2,13 +2,11 @@ Name:Tidal Influence
 ManaCost:2 U
 Types:Enchantment
 K:etbCounter:TIDE:1
-S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | Description$ Cast CARDNAME only if no permanents named Tidal Influence are on the battlefield.
-SVar:X:Count$Valid Permanent.namedTidal Influence
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | IsPresent$ Permanent.namedTidal Influence | Description$ Cast this spell only if no permanents named Tidal Influence are on the battlefield.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBPutCounter | TriggerDescription$ At the beginning of your upkeep, put a tide counter on CARDNAME.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ TIDE | CounterNum$ 1
-S:Mode$ Continuous | Affected$ Creature.Blue | AddPower$ -2 | CheckSVar$ TidalCounters | SVarCompare$ EQ1 | Description$ As long as there is exactly one tide counter on CARDNAME, all blue creatures get -2/-0.
-S:Mode$ Continuous | Affected$ Creature.Blue | AddPower$ +2 | CheckSVar$ TidalCounters | SVarCompare$ EQ3 | Description$ As long as there are exactly three tide counters on CARDNAME, all blue creatures get +2/+0.
-SVar:TidalCounters:Count$CardCounters.TIDE
+S:Mode$ Continuous | Affected$ Creature.Blue | AddPower$ -2 | IsPresent$ Card.Self+counters_EQ1_TIDE | Description$ As long as there is exactly one tide counter on CARDNAME, all blue creatures get -2/-0.
+S:Mode$ Continuous | Affected$ Creature.Blue | AddPower$ +2 | IsPresent$ Card.Self+counters_EQ3_TIDE | Description$ As long as there are exactly three tide counters on CARDNAME, all blue creatures get +2/+0.
 T:Mode$ Always | IsPresent$ Card.Self+counters_GE4_TIDE | TriggerZones$ Battlefield | Execute$ TrigRemove | TriggerDescription$ Whenever there are four or more tide counters on CARDNAME, remove all tide counters from it.
 SVar:TrigRemove:DB$ RemoveCounter | CounterType$ TIDE | CounterNum$ All
 AI:RemoveDeck:Random
