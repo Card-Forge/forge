@@ -286,13 +286,13 @@ ScryfallCode=SNC
 272 L Plains @Elektrodeko
 273 L Plains @Olga Tereshenko
 274 L Island @Matteo Bassini
-275 L Island @W.Flemming
+275 L Island @WFlemming Illustration
 276 L Swamp @Matteo Bassini
 277 L Swamp @Zoran Cardula
 278 L Mountain @Zbigniew M. Bielak
 279 L Mountain @Ann-Sophie De Steur
 280 L Forest @Matteo Bassini
-281 L Forest @W.Flemming
+281 L Forest @WFlemming Illustration
 
 [borderless]
 282 M Elspeth Resplendent @Tom Roberts
@@ -370,7 +370,7 @@ ScryfallCode=SNC
 352 C Racers' Ring @David Curtis
 353 R Raffine's Tower @Elektrodeko
 354 C Skybridge Towers @Sam Chivers
-355 R Spara's Headquarters @W.Flemming
+355 R Spara's Headquarters @WFlemming Illustration
 356 C Tramway Station @BEMOCS
 357 C Waterfront District @Matteo Bassini
 358 R Xander's Lounge @Véronique Meignaud
