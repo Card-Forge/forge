@@ -338,6 +338,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private CombatLki combatLKI;
 
+    private ReplacementEffect shieldCounterReplaceDamage = null;
+    private ReplacementEffect shieldCounterReplaceDestroy = null;
+
     // Enumeration for CMC request types
     public enum SplitCMCMode {
         CurrentSideCMC,
@@ -6130,6 +6133,26 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // Keywords are already sorted by Layer
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
             list.addAll(kw.getReplacements());
+        }
+
+        // Shield Counter aren't affected by Changed Card Traits
+        if (this.getCounters(CounterEnumType.SHIELD) > 0) {
+            String sa = "DB$ RemoveCounter | Defined$ Self | CounterType$ Shield | CounterNum$ 1";
+            if (shieldCounterReplaceDamage == null) {
+                String reStr = "Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | PreventionEffect$ True | AlwaysReplace$ True "
+            + "| Description$ If damage would be dealt to this permanent, prevent that damage and remove a shield counter from it.";
+                shieldCounterReplaceDamage = ReplacementHandler.parseReplacement(reStr, this, false, null);
+                shieldCounterReplaceDamage.setOverridingAbility(AbilityFactory.getAbility(sa, this));
+            }
+            if (shieldCounterReplaceDestroy == null) {
+                String reStr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.Self | ValidSource$ SpellAbility "
+            + "| Description$ If this permanent would be destroyed as the result of an effect, instead remove a shield counter from it";
+                shieldCounterReplaceDestroy = ReplacementHandler.parseReplacement(reStr, this, false, null);
+                shieldCounterReplaceDestroy.setOverridingAbility(AbilityFactory.getAbility(sa, this));
+            }
+
+            list.add(shieldCounterReplaceDamage);
+            list.add(shieldCounterReplaceDestroy);
         }
     }
 
