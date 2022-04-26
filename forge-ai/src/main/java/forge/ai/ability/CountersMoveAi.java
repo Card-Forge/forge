@@ -214,7 +214,7 @@ public class CountersMoveAi extends SpellAbilityAi {
     private static int calcAmount(final SpellAbility sa, final CounterType cType) {
         final Card host = sa.getHostCard();
 
-        final String amountStr = sa.getParam("CounterNum");
+        final String amountStr = sa.getParamOrDefault("CounterNum", "1");
 
         // TODO handle proper calculation of X values based on Cost
         int amount = 0;

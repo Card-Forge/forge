@@ -29,7 +29,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         final String counterName = sa.getParam("CounterType");
-        final String num = sa.getParam("CounterNum");
+        final String num = sa.getParamOrDefault("CounterNum", "1");
 
         int amount = 0;
         if (!num.equals("All") && !num.equals("Any")) {
@@ -77,7 +77,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
         PlayerController pc = player.getController();
         final String type = sa.getParam("CounterType");
-        final String num = sa.getParam("CounterNum");
+        final String num = sa.getParamOrDefault("CounterNum", "1");
 
         int cntToRemove = 0;
         if (!num.equals("All") && !num.equals("Any")) {
