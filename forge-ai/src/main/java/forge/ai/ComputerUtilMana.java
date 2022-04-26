@@ -680,6 +680,8 @@ public class ComputerUtilMana {
             } else if (mayPlay.hasParam("MayPlayIgnoreType")) {
                 ignoreType = true;
             }
+        } else if (sa.hasParam("ActivateIgnoreColor")) {
+            ignoreColor = true;
         }
         boolean hasConverge = sa.getHostCard().hasConverge();
         ListMultimap<ManaCostShard, SpellAbility> sourcesForShards = getSourcesForShards(cost, sa, ai, test,
