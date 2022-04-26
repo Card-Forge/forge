@@ -7,16 +7,18 @@ Building on a Budget | https://downloads.cardforge.org/decks/buildingonabudget.z
 Card Preview | https://downloads.cardforge.org/decks/cardpreview.zip
 Community Cup | https://downloads.cardforge.org/decks/communitycup.zip
 Current Alchemy Metagame | https://downloads.cardforge.org/decks/currentalchemymetagame.zip
-Current Bo1 Alchemy Metagame | https://downloads.cardforge.org/decks/currentbo1alchemymetagame.zip
-Current Bo1 Historic Metagame | https://downloads.cardforge.org/decks/currentbo1historicmetagame.zip
-Current Bo1 Standard Metagame | https://downloads.cardforge.org/decks/currentbo1standardmetagame.zip
+Current Alchemy-BO1 Metagame | https://downloads.cardforge.org/decks/currentalchemybo1metagame.zip
+Current Explorer Metagame | https://downloads.cardforge.org/decks/currentexplorermetagame.zip
+Current Explorer-BO1 Metagame | https://downloads.cardforge.org/decks/currentexplorerbo1metagame.zip
 Current Historic Metagame | https://downloads.cardforge.org/decks/currenthistoricmetagame.zip
+Current Historic-BO1 Metagame | https://downloads.cardforge.org/decks/currenthistoricbo1metagame.zip
 Current Legacy Metagame | https://downloads.cardforge.org/decks/currentlegacymetagame.zip
 Current Modern Metagame | https://downloads.cardforge.org/decks/currentmodernmetagame.zip
 Current Pauper Metagame | https://downloads.cardforge.org/decks/currentpaupermetagame.zip
 Current Penny Dreadful Metagame | https://downloads.cardforge.org/decks/currentpennydreadfulmetagame.zip
 Current Pioneer Metagame | https://downloads.cardforge.org/decks/currentpioneermetagame.zip
 Current Standard Metagame | https://downloads.cardforge.org/decks/currentstandardmetagame.zip
+Current Standard-BO1 Metagame | https://downloads.cardforge.org/decks/currentstandardbo1metagame.zip
 Current Vintage Metagame | https://downloads.cardforge.org/decks/currentvintagemetagame.zip
 Daily Deck List | https://downloads.cardforge.org/decks/dailydecks.zip
 Daily Magic Update | https://downloads.cardforge.org/decks/dailymagicupdate.zip
