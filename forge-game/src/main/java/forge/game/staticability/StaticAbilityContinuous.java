@@ -813,7 +813,6 @@ public final class StaticAbilityContinuous {
 
                 if (params.containsKey("GainsAbilitiesOf") || params.containsKey("GainsAbilitiesOfDefined")) {
                     CardCollection cardsIGainedAbilitiesFrom = new CardCollection();
-                    final boolean loyaltyAB = params.containsKey("GainsLoyaltyAbilities");
 
                     if (params.containsKey("GainsAbilitiesOf")) {
                         final String[] valids = params.get("GainsAbilitiesOf").split(",");
@@ -832,7 +831,10 @@ public final class StaticAbilityContinuous {
                     for (Card c : cardsIGainedAbilitiesFrom) {
                         for (SpellAbility sa : c.getSpellAbilities()) {
                             if (sa.isActivatedAbility()) {
-                                if (loyaltyAB && !sa.isPwAbility()) {
+                                if (params.containsKey("GainsValidAbilities") &&
+                                        !sa.isValid(params.get("GainsValidAbilities").split(","),
+                                                hostCard.getController(), hostCard, stAb)) {
+
                                     continue;
                                 }
                                 SpellAbility newSA = sa.copy(affectedCard, false);
