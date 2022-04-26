@@ -31,7 +31,7 @@ ScryfallCode=NCC
 23 R Cephalid Facetaker @Uriah Voth
 24 R Change of Plans @Campbell White
 25 R Extravagant Replication @Pauline Voss
-26 R Flawless Forgery @
+26 R Flawless Forgery @Durbon
 27 R In Too Deep @José Parodi
 28 R Mask of the Schemer @James Paick
 29 R Shield Broker @Daniel Ljunggren
@@ -39,7 +39,7 @@ ScryfallCode=NCC
 31 R Skyway Robber @Denys Tsiperko
 32 R Storm of Forms @Campbell White
 33 R Bellowing Mauler @Daarken
-34 R Body Count @
+34 R Body Count @Vladimir Krisetskiy
 35 R Dogged Detective @Caroline Gariba
 36 R Lethal Scheme @Tuan Duong Chu
 37 R Make an Example @Igor Grechanyi
@@ -84,7 +84,7 @@ ScryfallCode=NCC
 76 R Obscura Confluence @Wisnu Tan
 77 R Oskar, Rubbish Reclaimer @Leonardo Santanna
 78 R Prosperous Partnership @Evyn Fong
-79 R Riveteers Confluence @
+79 R Riveteers Confluence @Vladimir Krisetskiy
 80 R Syrix, Carrier of the Flame @Brian Valeza
 81 R Currency Converter @Sean Murray
 82 R False Floor @James Paick
@@ -132,7 +132,7 @@ ScryfallCode=NCC
 124 R Cephalid Facetaker @Uriah Voth
 125 R Change of Plans @Campbell White
 126 R Extravagant Replication @Pauline Voss
-127 R Flawless Forgery @
+127 R Flawless Forgery @Durbon
 128 R In Too Deep @José Parodi
 129 R Mask of the Schemer @James Paick
 130 R Shield Broker @Daniel Ljunggren
@@ -140,7 +140,7 @@ ScryfallCode=NCC
 132 R Skyway Robber @Denys Tsiperko
 133 R Storm of Forms @Campbell White
 134 R Bellowing Mauler @Daarken
-135 R Body Count @
+135 R Body Count @Vladimir Krisetskiy
 136 R Dogged Detective @Caroline Gariba
 137 R Lethal Scheme @Tuan Duong Chu
 138 R Make an Example @Igor Grechanyi
@@ -184,7 +184,7 @@ ScryfallCode=NCC
 176 R Obscura Confluence @Wisnu Tan
 177 R Oskar, Rubbish Reclaimer @Leonardo Santanna
 178 R Prosperous Partnership @Evyn Fong
-179 R Riveteers Confluence @
+179 R Riveteers Confluence @Vladimir Krisetskiy
 180 R Syrix, Carrier of the Flame @Brian Valeza
 181 R Currency Converter @Sean Murray
 182 R False Floor @James Paick
