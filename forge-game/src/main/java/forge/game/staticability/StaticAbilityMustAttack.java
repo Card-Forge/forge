@@ -22,7 +22,7 @@ public class StaticAbilityMustAttack {
                 if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
                     continue;
                 }
-                if (stAb.matchesValidParam(stAb.getParam("ValidCreature"), attacker)) {
+                if (stAb.matchesValidParam("ValidCreature", attacker)) {
                     if (stAb.hasParam("MustAttack")) {
                         List<GameEntity> def = AbilityUtils.getDefinedEntities(stAb.getHostCard(),
                                 stAb.getParam("MustAttack"), stAb);

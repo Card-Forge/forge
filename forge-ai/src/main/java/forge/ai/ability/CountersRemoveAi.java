@@ -102,7 +102,7 @@ public class CountersRemoveAi extends SpellAbilityAi {
         final Game game = ai.getGame();
 
         final String type = sa.getParam("CounterType");
-        final String amountStr = sa.getParam("CounterNum");
+        final String amountStr = sa.getParamOrDefault("CounterNum", "1");
 
         // remove counter with Time might use Exile Zone too
         final TargetRestrictions tgt = sa.getTargetRestrictions();

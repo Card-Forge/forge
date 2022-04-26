@@ -1,11 +1,10 @@
 Name:Alliance of Arms
 ManaCost:W
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ W | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBPay | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Join forces — Starting with you, each player may pay any amount of mana. Each player creates X 1/1 white Soldier creature tokens, where X is the total amount of mana paid this way.
+A:SP$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBPay | SubAbility$ DBToken | StackDescription$ SpellDescription | SpellDescription$ Join forces — Starting with you, each player may pay any amount of mana. Each player creates X 1/1 white Soldier creature tokens, where X is the total amount of mana paid this way.
 SVar:DBPay:DB$ ChooseNumber | Defined$ Player.IsRemembered | ChooseAnyNumber$ True | ListTitle$ Pay Any Mana | SubAbility$ DBStore
 SVar:DBStore:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ CountSVar | Expression$ JoinForcesAmount/Plus.X | UnlessCost$ X | UnlessPayer$ Player.IsRemembered | UnlessSwitched$ True | UnlessAI$ OnlyOwn
 SVar:DBToken:DB$ Token | TokenAmount$ JoinForcesAmount | TokenScript$ w_1_1_soldier | TokenOwner$ Player | StackDescription$ None
-SVar:DBReset:DB$ StoreSVar | SVar$ JoinForcesAmount | Type$ Number | Expression$ 0
 SVar:X:Count$ChosenNumber
 SVar:JoinForcesAmount:Number$0
 AI:RemoveDeck:All
