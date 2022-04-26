@@ -1,0 +1,14 @@
+Name:Unlicensed Hearse
+ManaCost:2
+Types:Artifact Vehicle
+PT:*/*
+A:AB$ ChangeZone | Cost$ T | TargetMin$ 0 | TargetMax$ 2 | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBStore | TgtPrompt$ Select up to two target cards in a graveyard | ValidTgts$ Card | RememberChanged$ True | SpellDescription$ Exile up to two target cards from a single graveyard.
+SVar:DBStore:DB$ StoreSVar | SVar$ ExiledAmount | Type$ CountSVar | Expression$ ExiledAmount/Plus.X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ ExiledAmount | SetToughness$ ExiledAmount | Description$ CARDNAME's power and toughness are each equal to the number of cards exiled with it.
+SVar:X:Remembered$Amount
+SVar:ExiledAmount:Number$0
+K:Crew:2
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Mill
+Oracle:{T}: Exile up to two target cards from a single graveyard.\nUnlicensed Hearse's power and toughness are each equal to the number of cards exiled with it.\nCrew 2
