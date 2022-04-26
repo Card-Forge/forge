@@ -525,10 +525,10 @@ public class PhaseHandler implements java.io.Serializable {
                     playerPreviousTurn = this.getPlayerTurn();
                     setPlayerTurn(handleNextTurn());
 
+                    // start effects for next turn (do this first for ControlPlayer)
+                    game.getCleanup().executeUntil();
                     // done this after check state effects, so it only has effect next check
                     game.getCleanup().executeUntil(playerTurn);
-                    // start effects for next turn
-                    game.getCleanup().executeUntil();
 
                     // "Trigger" for begin turn to get around a phase skipping
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
