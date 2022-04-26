@@ -840,6 +840,9 @@ public final class StaticAbilityContinuous {
                                     newSA.setRestrictions(sa.getRestrictions());
                                     newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
                                 }
+                                if (params.containsKey("GainsAbilitiesActivateIgnoreColor")) {
+                                    newSA.putParam("ActivateIgnoreColor","True");
+                                }
                                 newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
                                 newSA.setGrantorStatic(stAb);
                                 newSA.setIntrinsic(false);
