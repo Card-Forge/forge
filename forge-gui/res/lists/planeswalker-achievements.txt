@@ -46,6 +46,7 @@ Dovin, Architect of Law|Dovin's Freeze|With one gear out of place, the whole mac
 Dovin, Grand Arbiter|Dovin's Modern Recall|The best solutions for the worst problems.
 Dungeon Master|Dungeons and Dragons|A fighter, a wizard, a rogue, and a cleric walk into a dungeon...
 Ellywick Tumblestrum|Ellywick's Song|Hear the tale of dungeons... and dragons!
+Elspeth Resplendent|Elspeth's Heavenly Cavalry|Forward! For Giada!
 Elspeth Tirel|Elspeth's Solitude|Tokens are my only friends...
 Elspeth, Knight-Errant|Elspeth's Endurance|Bant will prevail!
 Elspeth, Sun's Champion|Elspeth's Crusade|With Heliod on my side, I'm invincible!
@@ -136,6 +137,7 @@ Nissa, Who Shakes the World|Nissa's Primeval Forest|No trees fall in MY forest, 
 Nissa, Worldwaker|Nissa's Awakening|The whole country is here!
 Ob Nixilis of the Black Oath|Nixilis's Black Oath|We all have to bring sacrifices sometimes.
 Ob Nixilis Reignited|Ob Nixilis's Torment|I'll give you dreams from beyond the underworld!
+Ob Nixilis, the Adversary|Ob Nixilis's Pact|The price is, let's see... everything.
 Oko, the Trickster|Oko's Massive Friends|And watch where you're stomping!
 Oko, Thief of Crowns|Oko's Unfair Switcheroo|How about some magic beans for that?
 Professor Onyx|Professor's Discipline|You'll get it back at the end of the semester unless you pay a... fine.
