@@ -1,0 +1,10 @@
+Name:Plasma Jockey
+ManaCost:3 R
+Types:Creature Viashino Warrior
+PT:3/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature an opponent controls can't block this turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | KW$ HIDDEN CARDNAME can't block. | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True
+K:Blitz:2 R
+SVar:HasAttackEffect:True
+DeckHas:Ability$Sacrifice
+Oracle:Whenever Plasma Jockey attacks, target creature an opponent controls can't block this turn.\nBlitz {2}{R} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)

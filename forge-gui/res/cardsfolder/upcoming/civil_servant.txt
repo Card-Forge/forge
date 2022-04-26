@@ -1,0 +1,10 @@
+Name:Civil Servant
+ManaCost:G W
+Types:Creature Cat Citizen
+PT:2/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may tap another untapped Citizen you control. If you do, Civil Servant gets +1/+0 and gains lifelink until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ tapXType<1/Creature.Citizen/Citizen> | Defined$ Self | NumAtt$ 1 | KW$ Lifelink
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$LifeGain
+DeckNeeds:Type$Citizen
+Oracle:Whenever Civil Servant attacks, you may tap another untapped Citizen you control. If you do, Civil Servant gets +1/+0 and gains lifelink until end of turn.

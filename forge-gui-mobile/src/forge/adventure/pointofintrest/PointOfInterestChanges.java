@@ -53,8 +53,8 @@ public class PointOfInterestChanges implements SaveFileContent  {
         deletedObjects.addAll((HashSet<Integer>) data.readObject("deletedObjects"));
         cardsBought.clear();
         cardsBought.putAll((HashMap<Integer, HashSet<Integer>>) data.readObject("cardsBought"));
-
-
+        mapFlags.clear();
+        mapFlags.putAll((java.util.Map<String, Byte>) data.readObject("mapFlags"));
     }
 
     @Override
@@ -62,11 +62,13 @@ public class PointOfInterestChanges implements SaveFileContent  {
         SaveFileData data=new SaveFileData();
         data.storeObject("deletedObjects",deletedObjects);
         data.storeObject("cardsBought",cardsBought);
+        data.storeObject("mapFlags", mapFlags);
         return data;
     }
 
     private final HashSet<Integer> deletedObjects=new HashSet<>();
     private final HashMap<Integer, HashSet<Integer>> cardsBought=new HashMap<>();
+    private java.util.Map<String, Byte> mapFlags = new HashMap<>();
 
     public boolean isObjectDeleted(int objectID)
     {
@@ -77,7 +79,11 @@ public class PointOfInterestChanges implements SaveFileContent  {
         return deletedObjects.add(objectID);
     }
 
-    public void buyCard(int objectID,int cardIndex)
+    public java.util.Map<String, Byte> getMapFlags() {
+        return mapFlags;
+    }
+
+    public void buyCard(int objectID, int cardIndex)
     {
         if( !cardsBought.containsKey(objectID))
         {

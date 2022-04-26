@@ -20,11 +20,13 @@ package forge.game.trigger;
 import java.util.*;
 
 import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
 
 import forge.game.CardTraitBase;
+import forge.game.CardTraitPredicates;
 import forge.game.Game;
 import forge.game.GlobalRuleChange;
 import forge.game.IHasSVars;
@@ -99,7 +101,9 @@ public class TriggerHandler {
     }
 
     public final void handlePlayerDefinedDelTriggers(final Player player) {
-        delayedTriggers.addAll(playerDefinedDelayedTriggers.removeAll(player));
+        final List<Trigger> playerTriggers = playerDefinedDelayedTriggers.removeAll(player);
+        Iterables.addAll(thisTurnDelayedTriggers, Iterables.filter(playerTriggers, CardTraitPredicates.hasParam("ThisTurn")));
+        delayedTriggers.addAll(playerTriggers);
     }
 
     public final void suppressMode(final TriggerType mode) {

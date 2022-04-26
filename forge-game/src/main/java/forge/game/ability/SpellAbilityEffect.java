@@ -165,18 +165,23 @@ public abstract class SpellAbilityEffect {
             if ("}".equals(t)) { isPlainText = true; continue; }
 
             if (!isPlainText) {
-                final List<? extends GameObject> objs;
-                if (t.startsWith("p:")) {
-                    objs = AbilityUtils.getDefinedPlayers(sa.getHostCard(), t.substring(2), sa);
-                } else if (t.startsWith("s:")) {
-                    objs = AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), t.substring(2), sa);
-                } else if (t.startsWith("c:")) {
-                    objs = AbilityUtils.getDefinedCards(sa.getHostCard(), t.substring(2), sa);
+                if (t.startsWith("n:")) { // {n:<SVar> <noun(opt.)>}
+                    String parts[] = t.substring(2).split(" ", 2);
+                    int n = AbilityUtils.calculateAmount(sa.getHostCard(), parts[0], sa);
+                    sb.append(parts.length == 1 ? Lang.getNumeral(n) : Lang.nounWithNumeral(n, parts[1]));
                 } else {
-                    objs = AbilityUtils.getDefinedObjects(sa.getHostCard(), t, sa);
+                    final List<? extends GameObject> objs;
+                    if (t.startsWith("p:")) {
+                        objs = AbilityUtils.getDefinedPlayers(sa.getHostCard(), t.substring(2), sa);
+                    } else if (t.startsWith("s:")) {
+                        objs = AbilityUtils.getDefinedSpellAbilities(sa.getHostCard(), t.substring(2), sa);
+                    } else if (t.startsWith("c:")) {
+                        objs = AbilityUtils.getDefinedCards(sa.getHostCard(), t.substring(2), sa);
+                    } else {
+                        objs = AbilityUtils.getDefinedObjects(sa.getHostCard(), t, sa);
+                    }
+                    sb.append(StringUtils.join(objs, ", "));
                 }
-
-                sb.append(StringUtils.join(objs, ", "));
             } else {
                 sb.append(t);
             }
@@ -661,7 +666,7 @@ public abstract class SpellAbilityEffect {
                 CardZoneTable untilTable = new CardZoneTable();
                 Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateBattlefield());
-                moveParams.put(AbilityKey.LastStateBattlefield, game.copyLastStateGraveyard());
+                moveParams.put(AbilityKey.LastStateGraveyard, game.copyLastStateGraveyard());
                 for (Table.Cell<ZoneType, ZoneType, CardCollection> cell : triggerList.cellSet()) {
                     for (Card c : cell.getValue()) {
                         // check if card is still in the until host leaves play list

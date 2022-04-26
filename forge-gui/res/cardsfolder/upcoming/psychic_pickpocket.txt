@@ -1,0 +1,10 @@
+Name:Psychic Pickpocket
+ManaCost:4 U
+Types:Creature Cephalid Rogue
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerDescription$ When CARDNAME enters the battlefield, it connives. When it connives this way, return up to one target spell to its owner's hand. (To have a creature connive, draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+SVar:TrigConnive:DB$ Connive | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigReturn | TriggerDescription$ When it connives this way, return up to one target nonland permanent to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | TargetMax$ 1 | TargetMin$ 0 | Origin$ Battlefield | Destination$ Hand
+DeckHas:Ability$Discard|Counters
+Oracle:When Psychic Pickpocket enters the battlefield, it connives. When it connives this way, return up to one target nonland permanent to its owner's hand. (To have a creature connive, draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)

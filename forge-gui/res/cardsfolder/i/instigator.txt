@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Creature Human Spellshaper
 PT:1/1
 A:AB$ Effect | Cost$ 1 B B T Discard<1/Card> | Name$ Instigator Effect | ValidTgts$ Player | TgtPrompt$ Select target player | StaticAbilities$ AttackThisTurn | RememberObjects$ Targeted | SpellDescription$ Creatures target player controls attack this turn if able.
-SVar:AttackThisTurn:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.RememberedPlayerCtrl | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Creatures targeted player controls attack this turn if able.
+SVar:AttackThisTurn:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.RememberedPlayerCtrl | Description$ Creatures targeted player controls attack this turn if able.
 AI:RemoveDeck:All
 Oracle:{1}{B}{B}, {T}, Discard a card: Creatures target player controls attack this turn if able.

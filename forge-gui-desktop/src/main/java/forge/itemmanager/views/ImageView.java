@@ -7,6 +7,7 @@ import forge.deck.io.DeckPreferences;
 import forge.game.card.Card;
 import forge.game.card.CardView;
 import forge.gamemodes.limited.CardRanker;
+import forge.gui.GuiBase;
 import forge.gui.framework.ILocalRepaint;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
@@ -1164,10 +1165,17 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             g.setColor(Color.black);
             g.fillRoundRect(bounds.x, bounds.y, bounds.width, bounds.height, cornerSize, cornerSize);
 
-            BufferedImage img = ImageCache.getImage(item, bounds.width - 2 * borderSize, bounds.height - 2 * borderSize, itemInfo.alt);
+            final float screenScale = GuiBase.getInterface().getScreenScale();
+            final int drawX = bounds.x + borderSize;
+            final int drawY = bounds.y + borderSize;
+            final int drawWidth = bounds.width - 2 * borderSize;
+            final int drawHeight = bounds.height - 2 * borderSize;
+            final int imageWidth = Math.round(drawWidth * screenScale);
+            final int imageHeight = Math.round(drawHeight * screenScale);
+            BufferedImage img = ImageCache.getImage(item, imageWidth, imageHeight, itemInfo.alt);
 
             if (img != null) {
-                g.drawImage(img, null, bounds.x + borderSize, bounds.y + borderSize);
+                g.drawImage(img, drawX, drawY, drawWidth, drawHeight, null);
             }
             else {
                 if (deckSelectMode) {

@@ -66,7 +66,7 @@ public class RewardScene extends UIScene {
                 }
             }
             if (wait) {
-                flipCountDown = 3.0f;
+                flipCountDown = 1.5f;
                 doneClicked = true;
             } else {
                 Forge.switchToLast();

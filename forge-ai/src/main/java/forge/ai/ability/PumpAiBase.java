@@ -166,10 +166,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                 return false;
             }
             return ph.isPlayerTurn(ai) || (combat != null && combat.isAttacking(card) && card.getNetCombatDamage() > 0);
-        } else if (keyword.endsWith("CARDNAME attacks each turn if able.")
-                || keyword.endsWith("CARDNAME attacks each combat if able.")) {
-            return !ph.isPlayerTurn(ai) && CombatUtil.canAttack(card, ai) && CombatUtil.canBeBlocked(card, ai)
-                    && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS);
         } else if (keyword.endsWith("CARDNAME can't be regenerated.")) {
             if (card.getShieldCount() > 0) {
                 return true;

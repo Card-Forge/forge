@@ -249,6 +249,25 @@
 		"frameDuration": 0.03,
 		"regions": [],
 		"playMode": 2
+	},
+	"dummy": {
+		"region": "dummy",
+		"horizontalStretchAreas": [ 1, 1 ],
+		"verticalStretchAreas": [ 1, 1 ],
+		"tiling": true,
+		"minWidth": 5,
+		"minHeight": 5,
+		"rightWidth": 0,
+		"leftWidth": 0,
+		"bottomHeight": 0,
+		"topHeight": 0,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Button$ButtonStyle": {
@@ -316,6 +335,9 @@
 	"whiteBig": {
 		"font": "default"
 	}
+	"nobg": {
+		"font": "black"
+	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle": {
 	"default": {
@@ -345,6 +367,9 @@
 	},
 	"gold": {
 		"background": "9patch4"
+	},
+	"nobg": {
+		"background": "dummy",
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle": {

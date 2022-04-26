@@ -2,6 +2,7 @@ package forge.ai;
 
 import com.google.common.base.Function;
 
+import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -9,6 +10,9 @@ import forge.game.card.CounterEnumType;
 import forge.game.cost.CostPayEnergy;
 import forge.game.keyword.Keyword;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityMustAttack;
+
+import java.util.List;
 
 public class CreatureEvaluator implements Function<Card, Integer> {
     @Override
@@ -174,13 +178,16 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value = addValue(50 + (c.getCMC() * 5), "useless"); // reset everything - useless
         } else if (c.hasKeyword("CARDNAME can't block.")) {
             value -= subValue(10, "cant-block");
-        } else if (c.hasKeyword("CARDNAME attacks each combat if able.")) {
-            value -= subValue(10, "must-attack");
-        } else if (c.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
-            value -= subValue(10, "must-attack-player");
-        }/* else if (c.hasKeyword("CARDNAME can block only creatures with flying.")) {
+        } else {
+            List<GameEntity> mAEnt = StaticAbilityMustAttack.entitiesMustAttack(c);
+            if (mAEnt.contains(c)) {
+                value -= subValue(10, "must-attack");
+            } else if (!mAEnt.isEmpty()) {
+                value -= subValue(10, "must-attack-player");
+            }/* else if (c.hasKeyword("CARDNAME can block only creatures with flying.")) {
             value -= subValue(toughness * 5, "reverse-reach");
         }//*/
+        }
 
         if (c.hasSVar("DestroyWhenDamaged")) {
             value -= subValue((toughness - 1) * 9, "dies-to-dmg");

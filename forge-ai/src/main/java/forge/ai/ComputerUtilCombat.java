@@ -41,7 +41,6 @@ import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostPayment;
 import forge.game.keyword.Keyword;
-import forge.game.keyword.KeywordInterface;
 import forge.game.phase.Untap;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
@@ -49,6 +48,7 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -114,25 +114,11 @@ public class ComputerUtilCombat {
             return false;
         }
 
-        // TODO replace with Static Ability
-        for (final String keyword : attacker.getHiddenExtrinsicKeywords()) {
-            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
-                final String defined = keyword.split(":")[1];
-                final Player player = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
-                if (!defender.equals(player)) {
-                    return false;
-                }
-            }
-        }
-        for (final KeywordInterface inst : attacker.getKeywords(Keyword.UNDEFINED)) {
-            final String keyword = inst.getOriginal();
-            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
-                final String defined = keyword.split(":")[1];
-                final Player player = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
-                if (!defender.equals(player)) {
-                    return false;
-                }
-            }
+        final List<GameEntity> mustAttack = StaticAbilityMustAttack.entitiesMustAttack(attacker);
+        //if it contains only attacker, it only has a non-specific must attack
+        mustAttack.removeAll(new CardCollection(attacker));
+        if (!mustAttack.isEmpty() && !mustAttack.contains(defender)) {
+            return false;
         }
 
         // TODO this should be a factor but needs some alignment with AttachAi

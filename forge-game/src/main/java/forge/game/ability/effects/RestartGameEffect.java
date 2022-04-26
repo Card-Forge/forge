@@ -72,7 +72,6 @@ public class RestartGameEffect extends SpellAbilityEffect {
             p.resetCompletedDungeons();
             p.setBlessing(false);
             p.clearController();
-            p.setMustAttackEntity(null);
 
             CardCollection newLibrary = new CardCollection(p.getCardsIn(restartZones, false));
             List<Card> filteredCards = null;

@@ -63,91 +63,92 @@ public class InventoryScene  extends UIScene {
     @Override
     public void resLoaded() {
         super.resLoaded();
-            equipOverlay = new Texture(Config.instance().getFile(Paths.ITEMS_EQUIP));
-            ui.onButtonPress("return", () -> done());
-            leave = ui.findActor("return");
-            ui.onButtonPress("delete", () -> confirm.show(stage));
-            ui.onButtonPress("equip", () -> equip());
-            equipButton = ui.findActor("equip");
-            deleteButton = ui.findActor("delete");
-            itemDescription = ui.findActor("item_description");
-            leave.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
+        equipOverlay = new Texture(Config.instance().getFile(Paths.ITEMS_EQUIP));
+        ui.onButtonPress("return", () -> done());
+        leave = ui.findActor("return");
+        ui.onButtonPress("delete", () -> confirm.show(stage));
+        ui.onButtonPress("equip", () -> equip());
+        equipButton = ui.findActor("equip");
+        deleteButton = ui.findActor("delete");
+        itemDescription = ui.findActor("item_description");
+        itemDescription.setAlignment(Align.topLeft);
+        leave.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
 
-            inventoryButtons=new Array<>();
-            equipmentSlots=new HashMap<>();
+        inventoryButtons=new Array<>();
+        equipmentSlots=new HashMap<>();
 
-            Array<Actor> children = ui.getChildren();
-            for (int i = 0, n = children.size; i < n; i++)
+        Array<Actor> children = ui.getChildren();
+        for (int i = 0, n = children.size; i < n; i++)
+        {
+
+            if(children.get(i).getName()!=null&&children.get(i).getName().startsWith("Equipment"))
             {
-
-                if(children.get(i).getName()!=null&&children.get(i).getName().startsWith("Equipment"))
-                {
-                    String slotName=children.get(i).getName().split("_")[1];
-                    equipmentSlots.put(slotName, (Button) children.get(i));
-                    Actor slot=children.get(i);
-                    slot.addListener(new ChangeListener() {
-                        @Override
-                        public void changed(ChangeEvent event, Actor actor) {
-                            Button button=((Button) actor);
-                            if(button.isChecked())
+                String slotName=children.get(i).getName().split("_")[1];
+                equipmentSlots.put(slotName, (Button) children.get(i));
+                Actor slot=children.get(i);
+                slot.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        Button button=((Button) actor);
+                        if(button.isChecked())
+                        {
+                            for(Button otherButton:equipmentSlots.values())
                             {
-                                for(Button otherButton:equipmentSlots.values())
-                                {
-                                    if(button!=otherButton&&otherButton.isChecked()){
-                                        otherButton.setChecked(false);
-                                    }
-                                }
-                                String item=Current.player().itemInSlot(slotName);
-                                if(item!=null&&item!="")
-                                {
-                                    Button changeButton=null;
-                                    for(Button invButton:inventoryButtons)
-                                    {
-                                        if(itemLocation.get(invButton)!=null&&itemLocation.get(invButton).equals(item))
-                                        {
-                                            changeButton=invButton;
-                                            break;
-                                        }
-                                    }
-                                    if(changeButton!=null)
-                                        changeButton.setChecked(true);
-                                }
-                                else
-                                {
-                                    setSelected(null);
+                                if(button!=otherButton&&otherButton.isChecked()){
+                                    otherButton.setChecked(false);
                                 }
                             }
-
+                            String item=Current.player().itemInSlot(slotName);
+                            if(item!=null&&item!="")
+                            {
+                                Button changeButton=null;
+                                for(Button invButton:inventoryButtons)
+                                {
+                                    if(itemLocation.get(invButton)!=null&&itemLocation.get(invButton).equals(item))
+                                    {
+                                        changeButton=invButton;
+                                        break;
+                                    }
+                                }
+                                if(changeButton!=null)
+                                    changeButton.setChecked(true);
+                            }
+                            else
+                            {
+                                setSelected(null);
+                            }
                         }
-                    });
-                }
+
+                    }
+                });
             }
-            inventory = new Table(Controls.GetSkin());
-            ScrollPane scrollPane = ui.findActor("inventory");
-            scrollPane.setScrollingDisabled(true,false);
-            scrollPane.setActor(inventory);
-            columns= (int) (scrollPane.getWidth()/createInventorySlot().getWidth());
-            columns-=1;
-            if(columns<=0)columns=1;
-            scrollPane.setActor(inventory);
-            confirm = new Dialog("\n "+Forge.getLocalizer().getMessage("lblDelete"), Controls.GetSkin())
+        }
+        inventory = new Table(Controls.GetSkin());
+        ScrollPane scrollPane = ui.findActor("inventory");
+        scrollPane.setScrollingDisabled(true,false);
+        scrollPane.setActor(inventory);
+        columns= (int) (scrollPane.getWidth()/createInventorySlot().getWidth());
+        columns-=1;
+        if(columns<=0)columns=1;
+        scrollPane.setActor(inventory);
+        confirm = new Dialog("\n "+Forge.getLocalizer().getMessage("lblDelete"), Controls.GetSkin())
+        {
+            protected void result(Object object)
             {
-                protected void result(Object object)
-                {
-                     if(object!=null&&object.equals(true))
-                         delete();
-                     confirm.hide();
-                };
+                 if(object!=null&&object.equals(true))
+                     delete();
+                 confirm.hide();
             };
+        };
 
-            confirm.button(Forge.getLocalizer().getMessage("lblYes"), true);
-            confirm.button(Forge.getLocalizer().getMessage("lblNo"), false);
-            ui.addActor(confirm);
-            confirm.hide();
+        confirm.button(Forge.getLocalizer().getMessage("lblYes"), true);
+        confirm.button(Forge.getLocalizer().getMessage("lblNo"), false);
+        ui.addActor(confirm);
+        confirm.hide();
 
-            itemDescription.setWrap(true);
-            //makes confirm dialog hidden immediately when you open inventory first time..
-            confirm.getColor().a = 0;
+        itemDescription.setWrap(true);
+        //makes confirm dialog hidden immediately when you open inventory first time..
+        confirm.getColor().a = 0;
     }
 
     private void setSelected(Button actor) {
@@ -198,17 +199,15 @@ public class InventoryScene  extends UIScene {
 
     }
 
-    private void updateInventory()
-    {
+    private void updateInventory() {
         inventoryButtons.clear();
         inventory.clear();
-        for(int i=0;i<Current.player().getItems().size;i++)
-        {
+        for(int i=0;i<Current.player().getItems().size;i++) {
 
             if(i%columns==0)
                 inventory.row();
             Button newActor=createInventorySlot();
-            inventory.add(newActor).align(Align.left|Align.top).space(1);
+            inventory.add(newActor).top().left().space(1);
             inventoryButtons.add(newActor);
             ItemData item=ItemData.getItem(Current.player().getItems().get(i));
             if(item==null)

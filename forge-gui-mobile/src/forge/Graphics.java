@@ -4,9 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -43,6 +41,8 @@ public class Graphics {
     private final ShaderProgram shaderGrayscale = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("grayscale.frag"));
     private final ShaderProgram shaderWarp = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("warp.frag"));
     private final ShaderProgram shaderUnderwater = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("underwater.frag"));
+
+    private Texture dummyTexture = null;
 
     public Graphics() {
         ShaderProgram.pedantic = false;
@@ -87,6 +87,7 @@ public class Graphics {
         shaderGrayscale.dispose();
         shaderUnderwater.dispose();
         shaderWarp.dispose();
+        if(dummyTexture != null) dummyTexture.dispose();
     }
 
     public SpriteBatch getBatch() {
@@ -1123,5 +1124,15 @@ public class Graphics {
         int c_b = Integer.parseInt(c.substring(4,6),16);
         int brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
         return  brightness > 155 ? Color.valueOf("#171717") : Color.valueOf("#fffffd");
+    }
+
+    public Texture getDummyTexture(){
+        if (dummyTexture == null){
+            Pixmap P = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+            P.setColor(1f,1f,1f,1f);
+            P.drawPixel(0, 0);
+            dummyTexture = new Texture(P);
+        }
+        return dummyTexture;
     }
 }

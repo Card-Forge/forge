@@ -316,17 +316,15 @@ public class PhaseHandler implements java.io.Serializable {
                     break;
 
                 case COMBAT_DECLARE_ATTACKERS:
-                    if (!playerTurn.hasLost()) {
-                        combat.initConstraints();
-                        game.getStack().freezeStack();
-                        declareAttackersTurnBasedAction();
-                        game.getStack().unfreezeStack();
+                    combat.initConstraints();
+                    game.getStack().freezeStack();
+                    declareAttackersTurnBasedAction();
+                    game.getStack().unfreezeStack();
 
-                        if (combat != null) {
-                            for (Card c : combat.getAttackers()) {
-                                if (combat.getDefenderByAttacker(c) instanceof Player) {
-                                    game.addPlayerAttackedThisTurn(c.getController(), (Player)combat.getDefenderByAttacker(c));
-                                }
+                    if (combat != null) {
+                        for (Card c : combat.getAttackers()) {
+                            if (combat.getDefenderByAttacker(c) instanceof Player) {
+                                game.addPlayerAttackedThisTurn(c.getController(), (Player)combat.getDefenderByAttacker(c));
                             }
                         }
                     }
@@ -441,9 +439,6 @@ public class PhaseHandler implements java.io.Serializable {
 
                     // Rule 514.3a - state-based actions
                     game.getAction().checkStateEffects(true);
-
-                    // done this after check state effects, so it only has effect next check
-                    game.getCleanup().executeUntil(getNextTurn());
                     break;
 
                 default:
@@ -529,6 +524,12 @@ public class PhaseHandler implements java.io.Serializable {
                     // set previous player
                     playerPreviousTurn = this.getPlayerTurn();
                     setPlayerTurn(handleNextTurn());
+
+                    // done this after check state effects, so it only has effect next check
+                    game.getCleanup().executeUntil(playerTurn);
+                    // start effects for next turn
+                    game.getCleanup().executeUntil();
+
                     // "Trigger" for begin turn to get around a phase skipping
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                     runParams.put(AbilityKey.Player, playerTurn);
@@ -843,9 +844,6 @@ public class PhaseHandler implements java.io.Serializable {
 
     private Player handleNextTurn() {
         game.getStack().onNextTurn();
-        // reset mustAttackEntity
-        playerTurn.setMustAttackEntityThisTurn(playerTurn.getMustAttackEntity());
-        playerTurn.setMustAttackEntity(null);
 
         game.getTriggerHandler().clearThisTurnDelayedTrigger();
         game.getTriggerHandler().resetTurnTriggerState();

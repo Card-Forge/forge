@@ -1417,8 +1417,8 @@ public class CardProperty {
             if (card.getCMC() != source.getChosenNumber()) {
                 return false;
             }
-        } else if (property.startsWith("power") || property.startsWith("toughness")
-                || property.startsWith("cmc") || property.startsWith("totalPT")) {
+        } else if (property.startsWith("power") || property.startsWith("toughness") || property.startsWith("cmc")
+                || property.startsWith("totalPT") || property.startsWith("numColors")) {
             int x;
             int y = 0;
             String rhs = "";
@@ -1435,6 +1435,9 @@ public class CardProperty {
             } else if (property.startsWith("totalPT")) {
                 rhs = property.substring(10);
                 y = card.getNetPower() + card.getNetToughness();
+            } else if (property.startsWith("numColors")) {
+                rhs = property.substring(11);
+                y = card.getColor().countColors();
             }
             x = AbilityUtils.calculateAmount(source, rhs, spellAbility);
 
@@ -1482,7 +1485,9 @@ public class CardProperty {
         // These predicated refer to ongoing combat. If no combat happens, they'll return false (meaning not attacking/blocking ATM)
         else if (property.startsWith("attacking")) {
             if (null == combat) return false;
-            if (property.equals("attacking")) return card.isAttacking();
+            // check this always first to make sure lki is only used when the card provides it
+            if (!(property.contains("LKI") ? lki : card).isAttacking()) return false;
+            if (property.equals("attacking")) return true;
             if (property.equals("attackingYou")) return combat.isAttacking(card, sourceController);
             if (property.equals("attackingSame")) {
                 final GameEntity attacked = combat.getDefenderByAttacker(source);
@@ -1490,7 +1495,7 @@ public class CardProperty {
                     return false;
                 }
             }
-            if (property.equals("attackingYouOrYourPW")) {
+            if (property.startsWith("attackingYouOrYourPW")) {
                 GameEntity defender = combat.getDefenderByAttacker(card);
                 if (defender instanceof Card) {
                     // attack on a planeswalker that was removed from combat

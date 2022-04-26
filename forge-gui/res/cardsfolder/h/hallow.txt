@@ -1,11 +1,9 @@
 Name:Hallow
 ManaCost:W
 Types:Instant
-A:SP$ Effect | Cost$ W | ValidTgts$ Card.inZoneStack | TgtZone$ Stack | TgtPrompt$ Select target spell to prevent damage from | ReplacementEffects$ PreventDmg | Triggers$ TargetMoved | RememberObjects$ TargetedSource | SpellDescription$ Prevent all damage target spell would deal this turn. You gain life equal to the damage prevented this way.
+A:SP$ Effect | Cost$ W | ValidTgts$ Card.inZoneStack | TgtZone$ Stack | TgtPrompt$ Select target spell to prevent damage from | ReplacementEffects$ PreventDmg | ExileOnMoved$ Stack | RememberObjects$ TargetedSource | SpellDescription$ Prevent all damage target spell would deal this turn. You gain life equal to the damage prevented this way.
 SVar:PreventDmg:Event$ DamageDone | ValidSource$ Card.IsRemembered | ReplaceWith$ GainLifeYou | PreventionEffect$ True | Description$ Prevent all damage that would be dealt by targeted spell this turn. You gain life equal to the damage prevented this way.
 SVar:GainLifeYou:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:ReplaceCount$DamageAmount
-SVar:TargetMoved:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | ExcludedDestinations$ Battlefield | Execute$ ExileEffect | TriggerZones$ Command | Static$ True
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 AI:RemoveDeck:All
 Oracle:Prevent all damage target spell would deal this turn. You gain life equal to the damage prevented this way.

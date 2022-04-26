@@ -147,11 +147,19 @@ public class CountersPutAi extends CountersAi {
         final String sourceName = ComputerUtilAbility.getAbilitySourceName(sa);
         CardCollection list;
         Card choice = null;
-        final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final boolean divided = sa.isDividedAsYouChoose();
         final String logic = sa.getParamOrDefault("AILogic", "");
         PhaseHandler ph = ai.getGame().getPhaseHandler();
+        final String[] types;
+        if (sa.hasParam("CounterType")) {
+            // TODO some cards let you choose types, should check each
+            types = sa.getParam("CounterType").split(",");
+        } else {
+            // all types will be added
+            types = sa.getParam("CounterTypes").split(",");
+        }
+        final String type = types[0];
 
         final boolean isClockwork = "True".equals(sa.getParam("UpTo")) && "Self".equals(sa.getParam("Defined"))
                 && "P1P0".equals(sa.getParam("CounterType")) && "Count$xPaid".equals(source.getSVar("X"))
@@ -362,7 +370,7 @@ public class CountersPutAi extends CountersAi {
             }
         }
 
-        if ("Fight".equals(logic)) {
+        if ("Fight".equals(logic) || "PowerDmg".equals(logic)) {
             int nPump = 0;
             if (type.equals("P1P1")) {
                 nPump = amount;
@@ -739,11 +747,19 @@ public class CountersPutAi extends CountersAi {
         // boolean chance = true;
         boolean preferred = true;
         CardCollection list;
-        final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParamOrDefault("CounterNum", "1");
         final boolean divided = sa.isDividedAsYouChoose();
         final int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         int left = amount;
+        final String[] types;
+        if (sa.hasParam("CounterType")) {
+            // TODO some cards let you choose types, should check each
+            types = sa.getParam("CounterType").split(",");
+        } else {
+            // all types will be added
+            types = sa.getParam("CounterTypes").split(",");
+        }
+        final String type = types[0];
 
         if (!sa.usesTargeting()) {
             // No target. So must be defined

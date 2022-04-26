@@ -1,0 +1,7 @@
+Name:Halo Scarab
+ManaCost:2
+Types:Artifact Creature Insect
+PT:2/1
+A:AB$ Token | Cost$ 2 ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
+Oracle:{2}, Exile Halo Scarab from your graveyard: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

@@ -1,9 +1,11 @@
 package forge.game.combat;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.staticability.StaticAbilityMustAttack;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -11,9 +13,8 @@ import com.google.common.collect.Lists;
 
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
-import forge.game.keyword.KeywordInterface;
+import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
@@ -37,12 +38,6 @@ public class AttackRequirement {
 
         this.causesToAttack = causesToAttack;
 
-        final GameEntity mustAttackThisTurn = attacker.getController().getMustAttackEntityThisTurn();
-        // TODO check if this always illegal (e.g. Taunt cast on self)
-        if (mustAttackThisTurn != null) {
-            defenderSpecific.add(mustAttackThisTurn);
-        }
-
         int nAttackAnything = 0;
 
         if (attacker.isGoaded()) {
@@ -50,34 +45,15 @@ public class AttackRequirement {
             nAttackAnything += attacker.getGoaded().size();
         }
 
-        // remove it when all of them are HIDDEN or static
-        for (final KeywordInterface inst : attacker.getKeywords()) {
-            final String keyword = inst.getOriginal();
-            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
-                final String defined = keyword.split(":")[1];
-                final GameEntity mustAttack2 = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
-                defenderSpecific.add(mustAttack2);
-            } else if (keyword.equals("CARDNAME attacks each combat if able.")) {
-                nAttackAnything++;
-            }
-        }
-        for (final String keyword : attacker.getHiddenExtrinsicKeywords()) {
-            if (keyword.startsWith("CARDNAME attacks specific player each combat if able")) {
-                final String defined = keyword.split(":")[1];
-                final GameEntity mustAttack2 = AbilityUtils.getDefinedPlayers(attacker, defined, null).get(0);
-                defenderSpecific.add(mustAttack2);
-            } else if (keyword.equals("CARDNAME attacks each combat if able.")) {
-                nAttackAnything++;
-            }
-        }
-
-        final GameEntity mustAttackThisTurn3 = attacker.getMustAttackEntityThisTurn();
-        if (mustAttackThisTurn3 != null) {
-            defenderSpecific.add(mustAttackThisTurn3);
+        //MustAttack static check
+        final List<GameEntity> mustAttack = StaticAbilityMustAttack.entitiesMustAttack(attacker);
+        nAttackAnything += Collections.frequency(mustAttack, attacker);
+        for (GameEntity e : mustAttack) {
+            if (e.equals(attacker)) continue;
+            defenderSpecific.add(e);
         }
 
         final Game game = attacker.getGame();
-
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (c.hasKeyword("Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.")) {
                 if (attacker.getController().isOpponentOf(c.getController()) && !defenderOrPWSpecific.containsKey(c.getController())) {
@@ -101,7 +77,7 @@ public class AttackRequirement {
             }
         }
 
-        // Remove GameEntities that are no longer on the battlefield or are
+        // Remove GameEntities that are no longer on an opposing battlefield or are
         // related to Players who have lost the game
         final MapToAmount<GameEntity> combinedDefMap = new LinkedHashMapToAmount<>();
         combinedDefMap.putAll(defenderSpecific);
@@ -115,8 +91,9 @@ public class AttackRequirement {
                     removeThis = true;
                 }
             } else if (entity instanceof Card) {
-                final Player controller = ((Card) entity).getController();
-                if (controller.hasLost() || !controller.getCardsIn(ZoneType.Battlefield).contains(entity)) {
+                final Card reqPW = (Card) entity;
+                final List<Card> actualPW = CardLists.getValidCards(attacker.getController().getOpponents().getCardsIn(ZoneType.Battlefield), "Card.StrictlySelf", null, reqPW, null);
+                if (reqPW.getController().hasLost() || actualPW.isEmpty()) {
                     removeThis = true;
                 }
             }

@@ -143,7 +143,8 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             layers.add(StaticAbilityLayer.CONTROL);
         }
 
-        if (hasParam("ChangeColorWordsTo") || hasParam("GainTextOf") || hasParam("AddNames")) {
+        if (hasParam("ChangeColorWordsTo") || hasParam("GainTextOf") || hasParam("AddNames") ||
+                hasParam("SetName")) {
             layers.add(StaticAbilityLayer.TEXT);
         }
 

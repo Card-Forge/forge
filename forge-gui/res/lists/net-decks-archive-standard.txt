@@ -2613,3 +2613,16 @@
 2022-03-27 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-03-27-standard-challenge.zip
 2022-03-28 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-03-28-standard-challenge.zip
 2022-03-28 Standard League (13 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-03-28-standard-league.zip
+2022-03-31 Standard League (14 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-03-31-standard-league.zip
+2022-04-03 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-04-03-standard-challenge.zip
+2022-04-04 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-04-04-standard-challenge.zip
+2022-04-04 Standard League (15 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-04-04-standard-league.zip
+2022-04-06 Standard Preliminary (3 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-04-06-standard-preliminary.zip
+2022-04-07 Standard League (13 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-04-07-standard-league.zip
+2022-04-10 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-04-10-standard-challenge.zip
+2022-04-11 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-04-11-standard-challenge.zip
+2022-04-11 Standard League (15 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-04-11-standard-league.zip
+2022-04-14 Standard League (10 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-04-14-standard-league.zip
+2022-04-17 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-04-17-standard-challenge.zip
+2022-04-18 Standard Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-04-18-standard-challenge.zip
+2022-04-18 Standard League (10 decks) | https://downloads.cardforge.org/decks/archive/standard/2022-04-18-standard-league.zip

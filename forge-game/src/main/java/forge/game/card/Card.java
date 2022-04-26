@@ -128,9 +128,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private GameEntity entityAttachedTo;
 
-    private GameEntity mustAttackEntity;
-    private GameEntity mustAttackEntityThisTurn;
-
     private final Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
 
     // changes by AF animate and continuous static effects
@@ -1337,21 +1334,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         mustBlockCards.clear();
         view.updateMustBlockCards(this);
     }
-
-    public final void setMustAttackEntity(final GameEntity e) {
-        mustAttackEntity = e;
-    }
-    public final GameEntity getMustAttackEntity() {
-        return mustAttackEntity;
-    }
-    public final void clearMustAttackEntity(final Player playerturn) {
-        if (getController().equals(playerturn)) {
-            mustAttackEntity = null;
-        }
-        mustAttackEntityThisTurn = null;
-    }
-    public final GameEntity getMustAttackEntityThisTurn() { return mustAttackEntityThisTurn; }
-    public final void setMustAttackEntityThisTurn(GameEntity entThisTurn) { mustAttackEntityThisTurn = entThisTurn; }
 
     public final Card getCloneOrigin() {
         return cloneOrigin;
@@ -4439,7 +4421,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             final boolean removeAllKeywords, final long timestamp, final long staticId, final boolean updateView) {
         List<KeywordInterface> kws = Lists.newArrayList();
         if (keywords != null) {
-            for(String kw : keywords) {
+            for (String kw : keywords) {
                 kws.add(getKeywordForStaticAbility(kw, staticId));
             }
         }
@@ -6086,7 +6068,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     @Override
     protected final boolean canBeEquippedBy(final Card equip) {
-        return isCreature() && isInPlay();
+        if (isCreature() && isInPlay()) {
+            return true;
+        } else if (isPlaneswalker() && isInPlay()) {
+            for (KeywordInterface inst : equip.getKeywords(Keyword.EQUIP)) {
+                if (inst.getOriginal().contains("planeswalker")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -6216,7 +6207,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         setRegeneratedThisTurn(0);
         resetShield();
         setBecameTargetThisTurn(false);
-        clearMustAttackEntity(turn);
         clearMustBlockCards();
         getDamageHistory().newTurn();
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttackedThisTurn());

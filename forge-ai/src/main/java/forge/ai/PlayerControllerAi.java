@@ -1040,9 +1040,9 @@ public class PlayerControllerAi extends PlayerController {
                 if (sa.isCopied()) {
                     if (sa.isSpell()) {
                         if (!sa.getHostCard().isInZone(ZoneType.Stack)) {
-                            sa.setHostCard(player.getGame().getAction().moveToStack(sa.getHostCard(), sa));
+                            sa.setHostCard(getGame().getAction().moveToStack(sa.getHostCard(), sa));
                         } else {
-                            player.getGame().getStackZone().add(sa.getHostCard());
+                            getGame().getStackZone().add(sa.getHostCard());
                         }
                     }
 
@@ -1053,13 +1053,13 @@ public class PlayerControllerAi extends PlayerController {
                     */
                     if (sa.isMayChooseNewTargets() && !sa.setupTargets()) {
                         if (sa.isSpell()) {
-                            player.getGame().getAction().ceaseToExist(sa.getHostCard(), false);
+                            getGame().getAction().ceaseToExist(sa.getHostCard(), false);
                         }
                         continue;
                     }
                 }
                 // need finally add the new spell to the stack
-                player.getGame().getStack().add(sa);
+                getGame().getStack().add(sa);
             }
         }
     }

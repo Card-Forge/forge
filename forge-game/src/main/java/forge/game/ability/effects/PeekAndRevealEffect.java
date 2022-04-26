@@ -17,32 +17,52 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 /** 
- * PeeakAndReveal is a simplified why of handling something that could
- * be done with dig and NoMove$ . All of the Kinship cards are going to use this
- * And there's probably a bunch of existing cards that would have simpler scripts
- * by just using PeekAndReveal
- *
+ * PeekAndReveal is a simplified way of handling something that could be done with Dig and NoMove$.
+ * Kinship cards use this, and many other cards could have simpler scripts by just using PeekAndReveal.
  */
 public class PeekAndRevealEffect extends SpellAbilityEffect {
     
+    @Override
+    protected String getStackDescription(SpellAbility sa) {
+        final Player peeker = sa.getActivatingPlayer();
+
+        final int numPeek = sa.hasParam("PeekAmount") ?
+                AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("PeekAmount"), sa) : 1;
+        final String verb = sa.hasParam("NoReveal") || sa.hasParam("RevealOptional") ? " looks at " :
+                " reveals ";
+        final String defined = sa.getParamOrDefault("Defined", "their");
+        String whose;
+        if (defined.equals("Player")) {
+            whose = "each player's";
+        } else { // other else ifs for specific defined can be added above as needs arise
+            whose = Lang.joinHomogenous(getTargetPlayers(sa));
+        }
+        final StringBuilder sb = new StringBuilder();
+
+        sb.append(peeker).append(verb).append("the top ");
+        sb.append(numPeek > 1 ? Lang.getNumeral(numPeek) + " cards " : "card ").append("of ").append(whose);
+        sb.append(" library.");
+
+        return sb.toString();
+    }
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(forge.card.spellability.SpellAbility)
      */
     @Override
     public void resolve(SpellAbility sa) {
-        //RevealValid$ Card.sharesCreatureTypeWith | RevealOptional$ True | RememberRevealed$ True
-        Card source = sa.getHostCard();
+        final Card source = sa.getHostCard();
         final boolean rememberRevealed = sa.hasParam("RememberRevealed");
         final boolean imprintRevealed = sa.hasParam("ImprintRevealed");
         String revealValid = sa.getParamOrDefault("RevealValid", "Card");
         String peekAmount = sa.getParamOrDefault("PeekAmount", "1");
-        int numPeek = AbilityUtils.calculateAmount(sa.getHostCard(), peekAmount, sa);
+        int numPeek = AbilityUtils.calculateAmount(source, peekAmount, sa);
         
-        // Right now, this is only used on your own library.
-        List<Player> libraryPlayers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa);
+        List<Player> libraryPlayers = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
         Player peekingPlayer = sa.getActivatingPlayer();
         
         for (Player libraryToPeek : libraryPlayers) {
@@ -54,10 +74,13 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
                 peekCards.add(library.get(i));
             }
 
-            CardCollectionView revealableCards = CardLists.getValidCards(peekCards, revealValid, sa.getActivatingPlayer(), sa.getHostCard(), sa);
+            CardCollectionView revealableCards = CardLists.getValidCards(peekCards, revealValid,
+                    sa.getActivatingPlayer(), source, sa);
             boolean doReveal = !sa.hasParam("NoReveal") && !revealableCards.isEmpty();
             if (!sa.hasParam("NoPeek")) {
-                peekingPlayer.getController().reveal(peekCards, ZoneType.Library, peekingPlayer, CardTranslation.getTranslatedName(source.getName()) + " - " + Localizer.getInstance().getMessage("lblRevealingCardFrom") + " ");
+                peekingPlayer.getController().reveal(peekCards, ZoneType.Library, libraryToPeek,
+                        CardTranslation.getTranslatedName(source.getName()) + " - " +
+                                Localizer.getInstance().getMessage("lblRevealingCardFrom"));
             }
             
             if (doReveal && sa.hasParam("RevealOptional"))

@@ -2,9 +2,8 @@ package forge.adventure.character;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.SerializationException;
 import forge.adventure.data.RewardData;
+import forge.adventure.util.JSONStringLoader;
 import forge.adventure.util.Reward;
 
 /**
@@ -26,18 +25,11 @@ public class RewardSprite extends CharacterSprite {
 
     public RewardSprite(String data, String _sprite){
         super(_sprite);
-        Json json = new Json();
         if (data != null) {
-            try { rewards = json.fromJson(RewardData[].class, data); }
-            catch(SerializationException E){
-                //JSON parsing could fail. Since this an user written part, assume failure is possible (it happens).
-                System.err.printf("[%s] while loading JSON file for reward actor. JSON:\n%s\nUsing a default reward.", E.getMessage(), data);
-                rewards = json.fromJson(RewardData[].class, default_reward);
-            }
-
+            rewards = JSONStringLoader.parse(RewardData[].class, data, default_reward);
         } else { //Shouldn't happen, but make sure it doesn't fly by.
             System.err.printf("Reward data is null. Using a default reward.");
-            rewards = json.fromJson(RewardData[].class, default_reward);
+            rewards = JSONStringLoader.parse(RewardData[].class, default_reward, default_reward);
         }
     }
 

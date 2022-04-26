@@ -25,6 +25,7 @@ public class CharacterSprite extends MapActor {
     private AnimationTypes currentAnimationType = AnimationTypes.Idle;
     private AnimationDirections currentAnimationDir = AnimationDirections.None;
     private Sprite avatar;
+    public boolean hidden = false;
 
     public CharacterSprite(int id,String path) {
         super(id);
@@ -213,7 +214,7 @@ public class CharacterSprite extends MapActor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (currentAnimation == null)
+        if (currentAnimation == null || hidden)
             return;
         TextureRegion currentFrame = currentAnimation.getKeyFrame(timer, true);
         setHeight(currentFrame.getRegionHeight());

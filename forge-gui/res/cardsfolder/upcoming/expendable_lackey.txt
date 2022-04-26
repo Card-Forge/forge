@@ -1,0 +1,7 @@
+Name:Expendable Lackey
+ManaCost:U
+Types:Creature Human Citizen
+PT:1/1
+A:AB$ Token | Cost$ 1 U ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | SorcerySpeed$ True | TokenScript$ u_1_1_fish_unblockable | SpellDescription$ Create a 1/1 blue Fish creature token with "This creature can't be blocked." Activate only as a sorcery.
+DeckHas:Ability$Token & Type$Fish
+Oracle:{1}{U}, Exile Expendable Lackey from your graveyard: Create a 1/1 blue Fish creature token with "This creature can't be blocked." Activate only as a sorcery.

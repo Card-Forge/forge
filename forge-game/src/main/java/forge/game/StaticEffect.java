@@ -252,6 +252,11 @@ public class StaticEffect {
                 affectedCard.removeColor(getTimestamp(), ability.getId());
             }
 
+            // remove changed name
+            if (hasParam("SetName") || hasParam("AddNames")) {
+                affectedCard.removeChangedName(timestamp, ability.getId());
+            }
+
             // remove may look at
             if (hasParam("MayLookAt")) {
                 affectedCard.removeMayLookAt(getTimestamp());

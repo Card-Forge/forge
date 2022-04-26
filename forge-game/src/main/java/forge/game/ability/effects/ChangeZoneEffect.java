@@ -359,6 +359,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (destination.equals(ZoneType.Hand)) {
             if (ZoneType.Graveyard.equals(origin)) {
                 sb.append("Return").append(targetname).append(fromGraveyard).append(" to");
+            } else if (ZoneType.Battlefield.equals(origin)) {
+                sb.append("Return").append(targetname).append(" to");
             } else {
                 sb.append("Put").append(targetname).append(" in");
             }

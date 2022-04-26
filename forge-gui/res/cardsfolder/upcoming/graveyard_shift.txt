@@ -1,0 +1,9 @@
+Name:Graveyard Shift
+ManaCost:4 B
+Types:Sorcery
+S:Mode$ Continuous | CharacteristicDefining$ True | Affected$ Card.Self | AddKeyword$ Flash | CheckSVar$ X | SVarCompare$ GE5 | Description$ This spell has flash as long as there are five or more mana values among cards in your graveyard.
+SVar:X:Count$ValidGraveyard Card.YouOwn$DifferentCMC
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card in your graveyard | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Discard|Mill
+Oracle:This spell has flash as long as there are five or more mana values among cards in your graveyard.\nReturn target creature card from your graveyard to the battlefield.

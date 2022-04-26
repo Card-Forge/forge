@@ -20,7 +20,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "UW"
 },
 {
 	"name": "Amonkhet Minotaur",
@@ -43,7 +44,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BR"
 },
 {
 	"name": "Ape",
@@ -66,7 +68,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GR"
 },
 {
 	"name": "Archer",
@@ -89,7 +92,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GW"
 },
 {
 	"name": "Ashmouth Devil",
@@ -112,7 +116,8 @@
 			"count": 13,
 			"addMaxCount": 87
 		}
-	]
+	],
+	"colors": "BR"
 },
 {
 	"name": "Axgard Dwarf",
@@ -135,7 +140,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "RW"
 },
 {
 	"name": "Bandit",
@@ -158,7 +164,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BR"
 },
 {
 	"name": "Bear",
@@ -181,7 +188,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "G"
 },
 {
 	"name": "Beholder",
@@ -204,7 +212,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BRU"
 },
 {
 	"name": "Berserker",
@@ -227,7 +236,8 @@
 			"count": 5,
 			"addMaxCount": 95
 		}
-	]
+	],
+	"colors": "BGR"
 },
 {
 	"name": "Big Zombie",
@@ -261,7 +271,8 @@
 				"Rare"
 			]
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Bird",
@@ -284,7 +295,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "U"
 },
 {
 	"name": "Black Wiz1",
@@ -307,7 +319,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Black Wiz2",
@@ -330,7 +343,8 @@
 			"count": 20,
 			"addMaxCount": 80
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Black Wiz3",
@@ -353,7 +367,8 @@
 			"count": 20,
 			"addMaxCount": 80
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Blue Wiz1",
@@ -376,7 +391,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "U"
 },
 {
 	"name": "Blue Wiz2",
@@ -399,7 +415,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "U"
 },
 {
 	"name": "Blue Wiz3",
@@ -422,7 +439,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "U"
 },
 {
 	"name": "Boggart",
@@ -456,7 +474,8 @@
 				"Rare"
 			]
 		}
-	]
+	],
+	"colors": "GR"
 },
 {
 	"name": "Cat",
@@ -479,7 +498,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GW"
 },
 {
 	"name": "Cathar",
@@ -502,7 +522,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GW"
 },
 {
 	"name": "Centaur",
@@ -525,7 +546,8 @@
 			"count": 15,
 			"addMaxCount": 85
 		}
-	]
+	],
+	"colors": "GW"
 },
 {
 	"name": "Centaur Warrior",
@@ -548,7 +570,8 @@
 			"count": 15,
 			"addMaxCount": 85
 		}
-	]
+	],
+	"colors": "GW"
 },
 {
 	"name": "ClayGolem",
@@ -580,7 +603,8 @@
 			],
 			"colorType": "Colorless"
 		}
-	]
+	],
+	"colors": "W"
 },
 {
 	"name": "Cleric",
@@ -603,7 +627,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "W"
 },
 {
 	"name": "Construct",
@@ -626,7 +651,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "RU"
 },
 {
 	"name": "Cyclops",
@@ -649,7 +675,8 @@
 			"count": 15,
 			"addMaxCount": 85
 		}
-	]
+	],
+	"colors": "R"
 },
 {
 	"name": "Dark Knight",
@@ -672,7 +699,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Dawnhart Witch",
@@ -695,7 +723,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GW"
 },
 {
 	"name": "Death Knight",
@@ -718,7 +747,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Demon",
@@ -741,7 +771,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Devil",
@@ -764,7 +795,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "R"
 },
 {
 	"name": "Dino",
@@ -800,7 +832,8 @@
 				"Mythic Rare"
 			]
 		}
-	]
+	],
+	"colors": "GRW"
 },
 {
 	"name": "Dinosaur",
@@ -836,7 +869,8 @@
 				"Mythic Rare"
 			]
 		}
-	]
+	],
+	"colors": "RW"
 },
 {
 	"name": "Djinn",
@@ -859,7 +893,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "RU"
 },
 {
 	"name": "Dragon",
@@ -882,7 +917,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "R"
 },
 {
 	"name": "Dwarf",
@@ -905,7 +941,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "RW"
 },
 {
 	"name": "Efreet",
@@ -928,7 +965,8 @@
 			"count": 50,
 			"addMaxCount": 95
 		}
-	]
+	],
+	"colors": "RU"
 },
 {
 	"name": "Eldraine Faerie",
@@ -951,7 +989,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GU"
 },
 {
 	"name": "Eldraine Knight",
@@ -974,7 +1013,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "RW"
 },
 {
 	"name": "Eldrazi",
@@ -997,7 +1037,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BGU"
 },
 {
 	"name": "Elemental",
@@ -1020,7 +1061,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "U"
 },
 {
 	"name": "Elf",
@@ -1054,7 +1096,8 @@
 				"Rare"
 			]
 		}
-	]
+	],
+	"colors": "G"
 },
 {
 	"name": "Elf warrior",
@@ -1088,7 +1131,8 @@
 				"Rare"
 			]
 		}
-	]
+	],
+	"colors": "G"
 },
 {
 	"name": "Elk",
@@ -1111,7 +1155,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "G"
 },
 {
 	"name": "Faerie",
@@ -1134,7 +1179,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BGU"
 },
 {
 	"name": "Fire Elemental",
@@ -1157,7 +1203,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "R"
 },
 {
 	"name": "Flame Elemental",
@@ -1180,7 +1227,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "R"
 },
 {
 	"name": "Gargoyle",
@@ -1203,7 +1251,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "RUW"
 },
 {
 	"name": "Gargoyle 2",
@@ -1226,7 +1275,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "W"
 },
 {
 	"name": "Geist",
@@ -1249,7 +1299,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "U"
 },
 {
 	"name": "Ghoul",
@@ -1272,7 +1323,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BU"
 },
 {
 	"name": "Ghost",
@@ -1295,7 +1347,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Giant Spider",
@@ -1318,7 +1371,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "G"
 },
 {
 	"name": "Goblin",
@@ -1360,7 +1414,8 @@
 	],
 	"equipment": [
 		"Battle Standard"
-	]
+	],
+	"colors": "R"
 },
 {
 	"name": "Goblin Chief",
@@ -1394,7 +1449,8 @@
 				"Mythic Rare"
 			]
 		}
-	]
+	],
+	"colors": "BR"
 },
 {
 	"name": "Goblin Warrior",
@@ -1428,7 +1484,8 @@
 				"Rare"
 			]
 		}
-	]
+	],
+	"colors": "R"
 },
 {
 	"name": "Golem",
@@ -1466,7 +1523,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GW"
 },
 {
 	"name": "Golem that is Generous",
@@ -1516,7 +1574,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GW"
 },
 {
 	"name": "Gorgon",
@@ -1539,7 +1598,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BG"
 },
 {
 	"name": "Gorgon 2",
@@ -1562,7 +1622,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BG"
 },
 {
 	"name": "Green Beast",
@@ -1585,7 +1646,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "G"
 },
 {
 	"name": "Green Wiz1",
@@ -1608,7 +1670,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "G"
 },
 {
 	"name": "Green Wiz2",
@@ -1631,7 +1694,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "G"
 },
 {
 	"name": "Green Wiz3",
@@ -1654,7 +1718,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "G"
 },
 {
 	"name": "Griffin",
@@ -1677,7 +1742,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "W"
 },
 {
 	"name": "Harpy",
@@ -1700,7 +1766,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Harpy 2",
@@ -1723,7 +1790,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BU"
 },
 {
 	"name": "Hellhound",
@@ -1746,7 +1814,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BR"
 },
 {
 	"name": "High Elf",
@@ -1780,7 +1849,8 @@
 				"Mythic Rare"
 			]
 		}
-	]
+	],
+	"colors": "BG"
 },
 {
 	"name": "High Vampire",
@@ -1803,7 +1873,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Horseman",
@@ -1837,7 +1908,8 @@
 				"Mythic Rare"
 			]
 		}
-	]
+	],
+	"colors": "UW"
 },
 {
 	"name": "Human",
@@ -1871,7 +1943,8 @@
 				"Rare"
 			]
 		}
-	]
+	],
+	"colors": "BRW"
 },
 {
 	"name": "Human elite",
@@ -1905,7 +1978,8 @@
 				"Mythic Rare"
 			]
 		}
-	]
+	],
+	"colors": "W"
 },
 {
 	"name": "Human guard",
@@ -1939,7 +2013,8 @@
 				"Rare"
 			]
 		}
-	]
+	],
+	"colors": "BW"
 },
 {
 	"name": "Hydra",
@@ -1973,7 +2048,8 @@
 				"Mythic Rare"
 			]
 		}
-	]
+	],
+	"colors": "G"
 },
 {
 	"name": "Immersturm Demon",
@@ -1996,7 +2072,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BR"
 },
 {
 	"name": "Khan",
@@ -2019,7 +2096,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BRW"
 },
 {
 	"name": "Knight",
@@ -2053,7 +2131,8 @@
 				"Mythic Rare"
 			]
 		}
-	]
+	],
+	"colors": "W"
 },
 {
 	"name": "Lich",
@@ -2076,7 +2155,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Merfolk",
@@ -2110,7 +2190,8 @@
 				"Rare"
 			]
 		}
-	]
+	],
+	"colors": "U"
 },
 {
 	"name": "Merfolk Avatar",
@@ -2144,7 +2225,8 @@
 				"Mythic Rare"
 			]
 		}
-	]
+	],
+	"colors": "GU"
 },
 {
 	"name": "Merfolk Fighter",
@@ -2178,7 +2260,8 @@
 				"Rare"
 			]
 		}
-	]
+	],
+	"colors": "GU"
 },
 {
 	"name": "Merfolk Lord",
@@ -2201,7 +2284,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GU"
 },
 {
 	"name": "Merfolk Soldier",
@@ -2235,7 +2319,8 @@
 				"Rare"
 			]
 		}
-	]
+	],
+	"colors": "U"
 },
 {
 	"name": "Merfolk warrior",
@@ -2269,7 +2354,8 @@
 				"Rare"
 			]
 		}
-	]
+	],
+	"colors": "U"
 },
 {
 	"name": "Mimic",
@@ -2292,7 +2378,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BU"
 },
 {
 	"name": "Minotaur",
@@ -2315,7 +2402,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "R"
 },
 {
 	"name": "Minotaur Flayer",
@@ -2338,7 +2426,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BR"
 },
 {
 	"name": "Monk",
@@ -2361,7 +2450,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "W"
 },
 {
 	"name": "Rakdos Devil",
@@ -2384,7 +2474,8 @@
 			"count": 5,
 			"addMaxCount": 95
 		}
-	]
+	],
+	"colors": "BR"
 },
 {
 	"name": "Red Beast",
@@ -2407,7 +2498,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "R"
 },
 {
 	"name": "Red Wiz1",
@@ -2430,7 +2522,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "R"
 },
 {
 	"name": "Red Wiz2",
@@ -2453,7 +2546,8 @@
 			"count": 5,
 			"addMaxCount": 95
 		}
-	]
+	],
+	"colors": "R"
 },
 {
 	"name": "Red Wiz3",
@@ -2476,7 +2570,8 @@
 			"count": 5,
 			"addMaxCount": 95
 		}
-	]
+	],
+	"colors": "R"
 },
 {
 	"name": "Rogue",
@@ -2499,7 +2594,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BU"
 },
 {
 	"name": "Satyr",
@@ -2522,7 +2618,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GR"
 },
 {
 	"name": "Sea Monster",
@@ -2545,7 +2642,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "U"
 },
 {
 	"name": "Shaman",
@@ -2568,7 +2666,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GR"
 },
 {
 	"name": "Skeleton",
@@ -2590,7 +2689,8 @@
 			"count": 7,
 			"addMaxCount": 32
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Skeleton Soldier",
@@ -2612,7 +2712,8 @@
 			"count": 7,
 			"addMaxCount": 32
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Sliver",
@@ -2634,7 +2735,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GRW"
 },
 {
 	"name": "Snake",
@@ -2657,7 +2759,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GU"
 },
 {
 	"name": "Spider",
@@ -2680,7 +2783,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BG"
 },
 {
 	"name": "Tarkir Djinn",
@@ -2703,7 +2807,8 @@
 			"count": 50,
 			"addMaxCount": 95
 		}
-	]
+	],
+	"colors": "RU"
 },
 {
 	"name": "Treefolk",
@@ -2726,7 +2831,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "G"
 },
 {
 	"name": "Treefolk Guardian",
@@ -2749,7 +2855,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "G"
 },
 {
 	"name": "Troll",
@@ -2772,7 +2879,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GR"
 },
 {
 	"name": "Vampire",
@@ -2788,7 +2896,8 @@
 			"count": 2,
 			"addMaxCount": 8
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Vampire Lord",
@@ -2804,7 +2913,8 @@
 			"count": 2,
 			"addMaxCount": 8
 		}
-	]
+	],
+	"colors": "BR"
 },
 {
 	"name": "Viashino",
@@ -2827,7 +2937,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BGR"
 },
 {
 	"name": "Viper",
@@ -2850,7 +2961,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "BG"
 },
 {
 	"name": "Werewolf",
@@ -2872,7 +2984,8 @@
 			"count": 7,
 			"addMaxCount": 32
 		}
-	]
+	],
+	"colors": "GR"
 },
 {
 	"name": "White Dwarf",
@@ -2895,7 +3008,8 @@
 			"count": 20,
 			"addMaxCount": 80
 		}
-	]
+	],
+	"colors": "W"
 },
 {
 	"name": "White Wiz1",
@@ -2918,7 +3032,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "W"
 },
 {
 	"name": "White Wiz2",
@@ -2941,7 +3056,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "W"
 },
 {
 	"name": "White Wiz3",
@@ -2964,15 +3080,16 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "W"
 },
 {
 	"name": "Wurm",
 	"sprite": "sprites/leech.atlas",
 	"deck": "decks/wurm.json",
+	"ai": "reckless",
 	"spawnRate": 0.2,
 	"difficulty": 0.1,
-	"ai": "reckless",
 	"speed": 15,
 	"life": 19,
 	"rewards": [
@@ -2999,7 +3116,8 @@
 				"Rare"
 			]
 		}
-	]
+	],
+	"colors": "G"
 },
 {
 	"name": "Yeti",
@@ -3022,7 +3140,8 @@
 			"count": 10,
 			"addMaxCount": 90
 		}
-	]
+	],
+	"colors": "GRU"
 },
 {
 	"name": "Zombie",
@@ -3056,7 +3175,8 @@
 				"Rare"
 			]
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Zombie Lord",
@@ -3090,14 +3210,15 @@
 				"Rare"
 			]
 		}
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Sliver Queen",
 	"sprite": "sprites/boss/sliver_queen.atlas",
 	"deck": "decks/boss/sliver_queen.dck",
 	"speed": 1,
-	"life": 50,
+	"life": 100,
 	"rewards": [
 		{
 			"type": "item",
@@ -3114,14 +3235,15 @@
 	],
 	"equipment": [
 		"Black Lotus"
-	]
+	],
+	"colors": "BGRUW"
 },
 {
 	"name": "Griselbrand",
 	"sprite": "sprites/boss/griselbrand.atlas",
 	"deck": "decks/boss/griselbrand.dck",
 	"speed": 1,
-	"life": 40,
+	"life": 80,
 	"rewards": [
 		{
 			"type": "item",
@@ -3138,7 +3260,8 @@
 	],
 	"equipment": [
 		"Mox Jet"
-	]
+	],
+	"colors": "B"
 },
 {
 	"name": "Akroma",
@@ -3162,14 +3285,15 @@
 	],
 	"equipment": [
 		"Mox Pearl"
-	]
+	],
+	"colors": "W"
 },
 {
 	"name": "Emrakul",
 	"sprite": "sprites/boss/emrakul.atlas",
 	"deck": "decks/boss/emrakul.dck",
 	"speed": 1,
-	"life": 40,
+	"life": 100,
 	"rewards": [
 		{
 			"type": "item",
@@ -3180,7 +3304,8 @@
 	],
 	"equipment": [
 		"Sol Ring"
-	]
+	],
+	"colors": "C"
 },
 {
 	"name": "Ghalta",
@@ -3204,7 +3329,8 @@
 	],
 	"equipment": [
 		"Mox Emerald"
-	]
+	],
+	"colors": "G"
 },
 {
 	"name": "Lorthos",
@@ -3228,7 +3354,8 @@
 	],
 	"equipment": [
 		"Mox Sapphire"
-	]
+	],
+	"colors": "U"
 },
 {
 	"name": "Lathliss",
@@ -3252,6 +3379,7 @@
 	],
 	"equipment": [
 		"Mox Ruby"
-	]
+	],
+	"colors": "R"
 }
 ]

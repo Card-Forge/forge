@@ -1,0 +1,10 @@
+Name:Angel of Suffering
+ManaCost:3 B B
+Types:Creature Nightmare Angel
+PT:5/3
+K:Flying
+R:Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ You | ReplaceWith$ DoubleMill | PreventionEffect$ True | Description$ If damage would be dealt to you, prevent that damage and mill twice that many cards.
+SVar:DoubleMill:DB$ Mill | Defined$ ReplacedTarget | NumCards$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+DeckHas:Ability$Mill
+Oracle:Flying\nIf damage would be dealt to you, prevent that damage and mill twice that many cards.

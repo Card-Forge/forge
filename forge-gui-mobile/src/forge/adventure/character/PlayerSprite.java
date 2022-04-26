@@ -25,8 +25,9 @@ public class PlayerSprite extends CharacterSprite {
                 PlayerSprite.this.updatePlayer();
             }
         });
-        playerSpeed=Config.instance().getConfigData().playerBaseSpeed;
-        Current.player().onEquipmentChanged(() -> playerSpeedEquipmentModifier=Current.player().equipmentSpeed());
+        playerSpeed = Config.instance().getConfigData().playerBaseSpeed;
+        Current.player().onBlessing( () -> playerSpeedEquipmentModifier = Current.player().equipmentSpeed() );
+        Current.player().onEquipmentChanged( () -> playerSpeedEquipmentModifier=Current.player().equipmentSpeed() );
     }
 
     private void updatePlayer() {

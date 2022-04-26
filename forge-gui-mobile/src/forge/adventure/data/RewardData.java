@@ -6,6 +6,7 @@ import com.google.common.collect.Iterables;
 import forge.StaticData;
 import forge.adventure.util.CardUtil;
 import forge.adventure.util.Config;
+import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.adventure.world.WorldSave;
 import forge.item.PaperCard;
@@ -78,11 +79,11 @@ public class RewardData {
             RewardData legals=Config.instance().getConfigData().legalCards;
             if(legals==null)
             {
-                allCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
+                allCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAltNoOnline();
             }
             else
             {
-                allCards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(),  new CardUtil.CardPredicate(legals, true));
+                allCards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCardsNoAltNoOnline(),  new CardUtil.CardPredicate(legals, true));
             }
             allEnemyCards=Iterables.filter(allCards, new Predicate<PaperCard>() {
                 @Override
@@ -93,27 +94,35 @@ public class RewardData {
             });
         }
         Array<Reward> ret=new Array<>();
-        if(probability==0|| WorldSave.getCurrentSave().getWorld().getRandom().nextFloat()<=probability)
-        {
+        if(probability==0|| WorldSave.getCurrentSave().getWorld().getRandom().nextFloat()<=probability) {
             if(type==null||type.isEmpty())
                 type="randomCard";
             int addedCount=(int)((float)(addMaxCount)* WorldSave.getCurrentSave().getWorld().getRandom().nextFloat());
 
-            switch(type)
-            {
+            if( colors != null && colors.length > 0 ) { //Filter special "colorID" case.
+                String C = Current.player().getColorIdentityLong();
+                for(int i = 0; i < colors.length; i++){
+                    if(colors[i].equals("colorID")){
+                        if(C.equals("colorless")) { //Colorless nullifies all other possible colors.
+                            //A quirk of the filter, but flavorful.
+                            colorType = "Colorless";
+                            colors = null;
+                            break;
+                        }
+                        else colors[i] = C;
+                    }
+                }
+            }
+
+            switch(type) {
                 case "card":
                 case "randomCard":
-                    if(cardName!=null&&!cardName.isEmpty())
-                    {
-                        for(int i=0;i<count+addedCount;i++)
-                        {
+                    if( cardName!=null && !cardName.isEmpty() ) {
+                        for(int i=0;i<count+addedCount;i++) {
                             ret.add(new Reward(StaticData.instance().getCommonCards().getCard(cardName)));
                         }
-                    }
-                    else
-                    {
-                        for(PaperCard card:CardUtil.generateCards(isForEnemy?allEnemyCards:allCards,this, count+addedCount))
-                        {
+                    } else {
+                        for(PaperCard card:CardUtil.generateCards(isForEnemy?allEnemyCards:allCards,this, count+addedCount)) {
                             ret.add(new Reward(card));
                         }
                     }

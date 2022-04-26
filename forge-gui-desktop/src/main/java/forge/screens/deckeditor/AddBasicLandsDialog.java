@@ -43,6 +43,7 @@ import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.deck.DeckgenUtil;
+import forge.gui.GuiBase;
 import forge.gui.UiCommand;
 import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
@@ -436,12 +437,15 @@ public class AddBasicLandsDialog {
 
                 final Graphics2D g2d = (Graphics2D) g;
 
-                int width = getWidth();
-                int height = getHeight();
+                final float screenScale = GuiBase.getInterface().getScreenScale();
+                final int drawWidth = getWidth();
+                final int drawHeight = getHeight();
+                final int imageWidth = Math.round(drawWidth * screenScale);
+                final int imageHeight = Math.round(drawHeight * screenScale);
 
-                final BufferedImage img = ImageCache.getImage(card, width, height);
+                final BufferedImage img = ImageCache.getImage(card, imageWidth, imageHeight);
                 if (img != null) {
-                    g2d.drawImage(img, null, (width - img.getWidth()) / 2, (height - img.getHeight()) / 2);
+                    g2d.drawImage(img, 0, 0, drawWidth, drawHeight, 0, 0, imageWidth, imageHeight, null);
                 }
             }
         }

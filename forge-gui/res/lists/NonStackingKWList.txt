@@ -1,7 +1,6 @@
 All creatures able to block CARDNAME do so.
 Banding
 CARDNAME's activated abilities can't be activated.
-CARDNAME attacks each combat if able.
 CARDNAME blocks each combat if able.
 CARDNAME can attack as though it didn't have defender.
 CARDNAME can block any number of creatures.

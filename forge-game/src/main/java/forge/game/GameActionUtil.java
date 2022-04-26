@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.*;
+import forge.game.card.*;
+import forge.util.Aggregates;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.MagicColor;
@@ -30,13 +32,7 @@ import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardFactoryUtil;
-import forge.game.card.CardPlayOption;
 import forge.game.card.CardPlayOption.PayManaCost;
-import forge.game.card.CounterType;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -566,7 +562,11 @@ public final class GameActionUtil {
                 if (tr != null) {
                     String n = o.split(":")[1];
                     if (host.wasCast() && n.equals("X")) {
-                        n = Integer.toString(pc.announceRequirements(sa, "X for Casualty"));
+                        CardCollectionView creatures = CardLists.filter(CardLists.filterControlledBy(game.getCardsIn
+                                (ZoneType.Battlefield), activator), CardPredicates.Presets.CREATURES);
+                        int max = Aggregates.max(creatures, CardPredicates.Accessors.fnGetNetPower);
+                        int min = Aggregates.min(creatures, CardPredicates.Accessors.fnGetNetPower);
+                        n = Integer.toString(pc.chooseNumber(sa, "Choose X for Casualty", min, max));
                     }
                     final String casualtyCost = "Sac<1/Creature.powerGE" + n + "/creature with power " + n +
                             " or greater>";
@@ -575,16 +575,14 @@ public final class GameActionUtil {
                     boolean v = pc.addKeywordCost(sa, cost, ki, str);
 
                     tr.setSVar("Casualty", v ? n : "0");
+                    tr.getOverridingAbility().setSVar("Casualty", v ? n : "0");
 
                     if (v) {
                         if (result == null) {
                             result = sa.copy();
                         }
                         result.getPayCosts().add(cost);
-                        tr.getOverridingAbility().setSVar("Casualty", n);
                         reset = true;
-                    } else {
-                        tr.getOverridingAbility().setSVar("Casualty", "0");
                     }
                 }
             } else if (o.equals("Conspire")) {
@@ -769,7 +767,7 @@ public final class GameActionUtil {
             // Mark SAs with subAbilities as undoable. These are generally things like damage, and other stuff
             // that's hard to track and remove
             sa.setUndoable(false);
-        } else if ((sa.getParam("Amount") != null) && (amount != AbilityUtils.calculateAmount(sa.getHostCard(),sa.getParam("Amount"), sa))) {
+        } else if (sa.getParam("Amount") != null && amount != AbilityUtils.calculateAmount(sa.getHostCard(),sa.getParam("Amount"), sa)) {
             sa.setUndoable(false);
         }
 

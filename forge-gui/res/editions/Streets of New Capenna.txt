@@ -5,6 +5,10 @@ Name=Streets of New Capenna
 Code2=SNC
 MciCode=snc
 Type=Expansion
+BoosterCovers=3
+Booster=10 Common:fromsheet("SNC cards"), 3 Uncommon:fromSheet("SNC cards"), 1 RareMythic:fromSheet("SNC cards"), 1 fromSheet("SNC lands")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=SNC
 
 [cards]
@@ -41,7 +45,7 @@ ScryfallCode=SNC
 31 C Sky Crier @Raoul Vitale
 32 C Speakeasy Server @Scott Murphy
 33 U Swooping Protector @Mark Behm
-34 M All-Seeing Arbiter @Anato Finnstark
+34 M All-Seeing Arbiter @Robin Olausson
 35 C Backstreet Bruiser @Aaron Miller
 36 C Brokers Veteran @Lie Setiawan
 37 C Case the Joint @Stella Spente
@@ -137,8 +141,8 @@ ScryfallCode=SNC
 127 U Torch Breath @Cristi Balanescu
 128 U Unlucky Witness @Tyler Walpole
 129 M Urabrask, Heretic Praetor @Simon Dominic
-130 R Widespread Thievery @Andrew Mar
-131 C Witty Roaster @Joe Slucher
+130 R Widespread Thieving @Andrew Mar
+131 C Witty Roastmaster @Joe Slucher
 132 C Wrecking Crew @Joshua Raphael
 133 C Attended Socialite @Drew Baker
 134 M Bootleggers' Stash @Anastasia Ovchinnikova
@@ -214,7 +218,7 @@ ScryfallCode=SNC
 204 U Mr. Orfeo, the Boulder @Daarken
 205 U Nimble Larcenist @Volkan Baǵa
 206 M Ob Nixilis, the Adversary @Yongjae Choi
-207 R Obscura Ascendancy @Josh Hass
+207 R Obscura Ascendancy @Igor Krstic
 208 U Obscura Charm @Steve Argyle
 209 R Obscura Interceptor @Jason A. Engle
 210 R Ognis, the Dragon's Lash @Andreas Zafiratos
@@ -289,6 +293,8 @@ ScryfallCode=SNC
 279 L Mountain @Ann-Sophie De Steur
 280 L Forest @Matteo Bassini
 281 L Forest @W.Flemming
+
+[borderless]
 282 M Elspeth Resplendent @Tom Roberts
 283 M Vivien on the Hunt @Tom Roberts
 284 M Ob Nixilis, the Adversary @Tom Roberts
@@ -303,6 +309,8 @@ ScryfallCode=SNC
 293 R Spara's Headquarters @Dominik Mayer
 294 R Xander's Lounge @Dominik Mayer
 295 R Ziatora's Proving Ground @Dominik Mayer
+
+[showcase]
 296 U Brazen Upstart @Samy Halim
 297 R Brokers Ascendancy @Shawn Pagels
 298 U Brokers Charm @Jérémie Solomon
@@ -413,6 +421,17 @@ ScryfallCode=SNC
 403 R Void Rend @Krharts
 404 M Ziatora, the Incinerator @Scott M. Fischer
 405 R Ziatora's Envoy @Olga Tereshenko
+441 M Elspeth Resplendent @Krharts
+442 R Giada, Font of Hope @Scott M. Fischer
+443 M Sanctuary Warden @Julie Dillon
+444 R Errant, Street Artist @Alix Branwyn
+445 R Tenacious Underdog @Jason A. Engle
+446 M Urabrask, Heretic Praetor @Igor Kieryluk
+447 M Vivien on the Hunt @Jason A. Engle
+448 M Ob Nixilis, the Adversary @Igor Kieryluk
+449 R Scheming Fence @Artur Treffner
+
+[extended art]
 406 R Depopulate @Jokubas Uogintas
 407 R Extraction Specialist @Irina Nordsol
 408 R Mysterious Limousine @Dan Scott
@@ -435,7 +454,7 @@ ScryfallCode=SNC
 425 R Jaxis, the Troublemaker @Zoltan Boros
 426 R Professional Face-Breaker @Dan Scott
 427 R Structural Assault @Liiga Smilshkalne
-428 R Widespread Thievery @Andrew Mar
+428 R Widespread Thieving @Andrew Mar
 429 R Evolving Door @Drew Baker
 430 R Fight Rigging @Daarken
 431 R Gala Greeters @Bud Cook
@@ -448,15 +467,8 @@ ScryfallCode=SNC
 438 R Getaway Car @Donato Giancola
 439 M Luxior, Giada's Gift @Volkan Baǵa
 440 R Unlicensed Hearse @Chris Seaman
-441 M Elspeth Resplendent @Krharts
-442 R Giada, Font of Hope @Scott M. Fischer
-443 M Sanctuary Warden @Julie Dillon
-444 R Errant, Street Artist @Alix Branwyn
-445 R Tenacious Underdog @Jason A. Engle
-446 M Urabrask, Heretic Praetor @Igor Kieryluk
-447 M Vivien on the Hunt @Jason A. Engle
-448 M Ob Nixilis, the Adversary @Igor Kieryluk
-449 R Scheming Fence @Artur Treffner
+
+[box topper]
 450 R Gala Greeters @Fay Dalton
 451 R Gala Greeters @Song Qijin
 452 R Gala Greeters @SENSEN
@@ -468,10 +480,54 @@ ScryfallCode=SNC
 458 R Gala Greeters @Daniel Correia
 459 R Gala Greeters @Olga Tereshenko
 460 R Gala Greeters @Voyager Illustration
+
+[buy a box]
 461 R Jaxis, the Troublemaker @Taras Susak
+
+[promo]
 462 R Mysterious Limousine @Hector Ortiz
 463 U Rumor Gatherer @Simon Dominic
 464 U An Offer You Can't Refuse @Dallas Williams
 465 C Incriminate @Kieran Yanner
 466 C Light 'Em Up @Tony Foti
 467 U Courier's Briefcase @Josu Hernaiz
+
+[lands]
+2 Plains|SNC|1
+2 Plains|SNC|2
+1 Plains|SNC|3
+1 Plains|SNC|4
+2 Island|SNC|1
+2 Island|SNC|2
+1 Island|SNC|3
+1 Island|SNC|4
+2 Swamp|SNC|1
+2 Swamp|SNC|2
+1 Swamp|SNC|3
+1 Swamp|SNC|4
+2 Mountain|SNC|1
+2 Mountain|SNC|2
+1 Mountain|SNC|3
+1 Mountain|SNC|4
+2 Forest|SNC|1
+2 Forest|SNC|2
+1 Forest|SNC|3
+1 Forest|SNC|4
+
+[tokens]
+b_2_2_rogue
+b_4_3_ogre_warrior
+c_a_treasure_sac
+c_a_treasure_sac
+c_a_treasure_sac
+c_a_treasure_sac
+c_a_treasure_sac
+g_2_2_cat_haste
+g_3_1_dog_vigilance
+g_4_4_rhino_warrior
+gw_1_1_citizen
+r_1_1_devil_burn
+u_1_1_fish_unblockable
+u_1_1_wizard_countersac
+w_2_2_spirit_flying
+w_3_3_angel_flying

@@ -20,6 +20,7 @@ package forge.ai;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.game.staticability.StaticAbilityMustAttack;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -57,6 +58,9 @@ import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import forge.util.maps.LinkedHashMapToAmount;
+import forge.util.maps.MapToAmount;
+import forge.util.maps.MapToAmountUtil;
 
 
 /**
@@ -688,33 +692,18 @@ public class AiAttackController {
         }
         GameEntity prefDefender = defs.contains(defendingOpponent) ? defendingOpponent : defs.get(0);
 
-        // Attempt to see if there's a defined entity that must be attacked strictly this turn...
-        GameEntity entity = ai.getMustAttackEntityThisTurn();
-        if (nextTurn || entity == null) {
-            // ...or during the attacking creature controller's turn
-            entity = ai.getMustAttackEntity();
+        // 1. assault the opponent if you can kill him
+        if (bAssault) {
+            return prefDefender;
         }
-        if (null != entity) {
-            int n = defs.indexOf(entity);
-            if (-1 == n) {
-                System.out.println("getMustAttackEntity() or getMustAttackEntityThisTurn() returned something not in defenders.");
-                return prefDefender;
-            }
-            return entity;
-        } else {
-            // 1. assault the opponent if you can kill him
-            if (bAssault) {
-                return prefDefender;
-            }
-            // 2. attack planeswalkers
-            List<Card> pwDefending = c.getDefendingPlaneswalkers();
-            if (!pwDefending.isEmpty()) {
-                final Card pwNearUlti = ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
-                return pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
-            } else {
-                return prefDefender;
-            }
+        // 2. attack planeswalkers
+        List<Card> pwDefending = c.getDefendingPlaneswalkers();
+        if (!pwDefending.isEmpty()) {
+            final Card pwNearUlti = ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
+            return pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);
         }
+
+        return prefDefender;
     }
 
     final boolean LOG_AI_ATTACKS = false;
@@ -785,29 +774,41 @@ public class AiAttackController {
         // because creatures not chosen can't attack.
         if (!nextTurn) {
             for (final Card attacker : this.attackers) {
-                boolean mustAttack = false;
-                // TODO this might result into trying to attack the wrong player
+                GameEntity mustAttackDef = null;
                 if (attacker.isGoaded()) {
-                    mustAttack = true;
+                    // TODO this might result into trying to attack the wrong player
+                    mustAttackDef = defender;
                 } else if (attacker.getSVar("MustAttack").equals("True")) {
-                    mustAttack = true;
+                    mustAttackDef = defender;
                 } else if (attacker.hasSVar("EndOfTurnLeavePlay")
                         && isEffectiveAttacker(ai, attacker, combat, defender)) {
-                    mustAttack = true;
+                    mustAttackDef = defender;
                 } else if (seasonOfTheWitch) {
-                    // TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
-                    mustAttack = true;
+                    //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
+                    mustAttackDef = defender;
                 } else {
-                    // TODO move to static Ability
-                    if (attacker.hasKeyword("CARDNAME attacks each combat if able.") || attacker.hasStartOfKeyword("CARDNAME attacks specific player each combat if able")) {
-                        // TODO switch defender if there's one without a cost or it's not the specific player
-                        mustAttack = true;
-                    } else if (attacker.getController().getMustAttackEntityThisTurn() != null && CombatUtil.getAttackCost(ai.getGame(), attacker, defender) == null) {
-                        mustAttack = true;
+                    final List<GameEntity> attackRequirements = StaticAbilityMustAttack.entitiesMustAttack(attacker);
+                    if (attackRequirements.contains(attacker)) {
+                        // TODO add cost check here and switch defender if there's one without a cost
+                        // must attack anything
+                        mustAttackDef = defender;
+                        // next check if there's also a specific defender to attack, so don't count them
+                        attackRequirements.removeAll(new CardCollection(attacker));
+                    }
+                    final MapToAmount<GameEntity> amounts = new LinkedHashMapToAmount<>();
+                    amounts.addAll(attackRequirements);
+                    while (!amounts.isEmpty()) {
+                        // check defenders in order of maximum requirements
+                        GameEntity mustAttackDefMaybe = MapToAmountUtil.max(amounts).getKey();
+                        if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
+                            mustAttackDef = mustAttackDefMaybe;
+                            break;
+                        }
+                        amounts.remove(mustAttackDefMaybe);
                     }
                 }
-                if (mustAttack) {
-                    combat.addAttacker(attacker, defender);
+                if (mustAttackDef != null) {
+                    combat.addAttacker(attacker, mustAttackDef);
                     attackersLeft.remove(attacker);
                     numForcedAttackers++;
                 }
