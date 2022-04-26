@@ -15,7 +15,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardFactory;
 import forge.game.card.TokenCreateTable;
 import forge.game.card.token.TokenInfo;
 import forge.game.player.Player;
@@ -82,56 +81,39 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
             }
         } else if ("ReplaceToken".equals(sa.getParam("Type"))) {
             long timestamp = game.getNextTimestamp();
-            SpellAbility sourceSA = (SpellAbility) originalParams.get(AbilityKey.SourceSA);
 
-            Map<Player, List<Integer>> toInsertMap = Maps.newHashMap();
-            Map<Player, List<Card>> oldTokenMap = Maps.newHashMap();
+            Map<Player, Integer> toInsertMap = Maps.newHashMap();
+            Map<Player, Iterable<Object>> toRememberMap = Maps.newHashMap();
             Set<Card> toRemoveSet = Sets.newHashSet();
             for (Map.Entry<Card, Integer> e : table.row(affected).entrySet()) {
                 if (!sa.matchesValidParam("ValidCard", e.getKey())) {
                     continue;
                 }
                 Player controller = e.getKey().getController();
-                if (toInsertMap.get(controller) == null) {
-                    toInsertMap.put(controller, Lists.newArrayList());
-                }
-                toInsertMap.get(controller).add(e.getValue());
-                if (oldTokenMap.get(controller) == null) {
-                    oldTokenMap.put(controller, Lists.newArrayList());
-                }
-                oldTokenMap.get(controller).add(e.getKey());
+                int old = ObjectUtils.defaultIfNull(toInsertMap.get(controller), 0);
+                toInsertMap.put(controller, old + e.getValue());
+                toRememberMap.put(controller, e.getKey().getRemembered());
                 toRemoveSet.add(e.getKey());
             }
             // remove replaced tokens
             table.row(affected).keySet().removeAll(toRemoveSet);
 
             // insert new tokens
-            for (Map.Entry<Player, List<Integer>> pe : toInsertMap.entrySet()) {
-                List<Integer> amounts = transformAmounts(pe.getValue(), sourceSA);
-                int oldIndex = -1;
-                for (Integer amt : amounts) {
-                    oldIndex++;
-                    if (amt <= 0) {
-                        continue;
+            for (Map.Entry<Player, Integer> pe : toInsertMap.entrySet()) {
+                if (pe.getValue() <= 0) {
+                    continue;
+                }
+                for (String script : sa.getParam("TokenScript").split(",")) {
+                    final Card token = TokenInfo.getProtoType(script, sa, pe.getKey());
+
+                    if (token == null) {
+                        throw new RuntimeException("don't find Token for TokenScript: " + script);
                     }
-                    for (String script : sa.getParam("TokenScript").split(",")) {
-                        final Card token = TokenInfo.getProtoType(script, sa, pe.getKey());
 
-                        if (token == null) {
-                            throw new RuntimeException("don't find Token for TokenScript: " + script);
-                        }
-
-                        token.setController(pe.getKey(), timestamp);
-
-                        // reapply state to new token
-                        final Card newToken = CardFactory.copyCard(token, true);
-                        newToken.setStates(CardFactory.getCloneStates(token, newToken, sourceSA, true));
-                        // force update the now set State
-                        newToken.setState(newToken.getCurrentStateName(), true, true);
-                        // if token is created from ForEach keep that
-                        newToken.addRemembered(oldTokenMap.get(pe.getKey()).get(oldIndex).getRemembered());
-                        table.put(affected, newToken, amt);
-                    }
+                    token.setController(pe.getKey(), timestamp);
+                    // if token is created from ForEach keep that
+                    token.addRemembered(toRememberMap.get(pe.getKey()));
+                    table.put(affected, token, pe.getValue());
                 }
             }
         } else if ("ReplaceController".equals(sa.getParam("Type"))) {
@@ -152,18 +134,4 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
         originalParams.put(AbilityKey.ReplacementResult, ReplacementResult.Updated);
     }
 
-    private static List<Integer> transformAmounts(List<Integer> in, SpellAbility sa) {
-        if (sa.hasParam("ForEach")) {
-            return in;
-        }
-        // we can merge the amounts without losing information
-        // which avoids creating identical prototypes for performance
-        List<Integer> result = Lists.newArrayList();
-        int sum = 0;
-        for (int e : in) {
-            sum += e;
-        }
-        result.add(sum);
-        return result;
-    }
 }

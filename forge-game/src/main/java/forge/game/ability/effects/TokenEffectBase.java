@@ -84,7 +84,6 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         for (Player p : tokenTable.rowKeySet()) {
             final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(p);
             repParams.put(AbilityKey.Token, tokenTable);
-            repParams.put(AbilityKey.SourceSA, sa);
             repParams.put(AbilityKey.EffectOnly, true); // currently only effects can create tokens?
 
             switch (game.getReplacementHandler().run(ReplacementType.CreateToken, repParams)) {

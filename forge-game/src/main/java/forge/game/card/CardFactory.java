@@ -587,9 +587,6 @@ public class CardFactory {
     }
 
     public static CardCloneStates getCloneStates(final Card in, final Card out, final CardTraitBase sa) {
-        return getCloneStates(in, out, sa, false);
-    }
-    public static CardCloneStates getCloneStates(final Card in, final Card out, final CardTraitBase sa, boolean creatureReplacement) {
         final Card host = sa.getHostCard();
         final Map<String,String> origSVars = host.getSVars();
         final List<String> types = Lists.newArrayList();
@@ -674,7 +671,7 @@ public class CardFactory {
                 state.addColor(shortColors);
             }
 
-            if (!creatureReplacement && sa.hasParam("SetColor")) {
+            if (sa.hasParam("SetColor")) {
                 state.setColor(shortColors);
             }
 
@@ -688,7 +685,7 @@ public class CardFactory {
 
             state.addType(types);
 
-            if (!creatureReplacement && creatureTypes != null) {
+            if (creatureTypes != null) {
                 state.setCreatureTypes(creatureTypes);
             }
 
@@ -697,7 +694,6 @@ public class CardFactory {
                 state.removeIntrinsicKeyword(kw);
             }
 
-            if (!creatureReplacement) {
             if (state.getType().isCreature()) {
                 if (sa.hasParam("SetPower")) {
                     state.setBasePower(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetPower"), sa));
@@ -705,7 +701,6 @@ public class CardFactory {
                 if (sa.hasParam("SetToughness")) {
                     state.setBaseToughness(AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("SetToughness"), sa));
                 }
-            }
             }
 
             if (state.getType().isPlaneswalker() && sa.hasParam("SetLoyalty")) {
@@ -814,11 +809,11 @@ public class CardFactory {
                     continue;
                 }
 
-                if (sa.hasParam("SetPower") || sa.hasParam("Eternalize") || creatureReplacement) {
+                if (sa.hasParam("SetPower") || sa.hasParam("Eternalize")) {
                     if (sta.hasParam("SetPower"))
                         state.removeStaticAbility(sta);
                 }
-                if (sa.hasParam("SetToughness") || sa.hasParam("Eternalize") || creatureReplacement) {
+                if (sa.hasParam("SetToughness") || sa.hasParam("Eternalize")) {
                     if (sta.hasParam("SetToughness"))
                         state.removeStaticAbility(sta);
                 }
@@ -829,7 +824,7 @@ public class CardFactory {
                         state.removeStaticAbility(sta);
                     }
                 }
-                if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize") || creatureReplacement) {
+                if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
                     if (sta.hasParam("SetColor")) {
                         state.removeStaticAbility(sta);
                     }
@@ -837,10 +832,10 @@ public class CardFactory {
             }
 
             // remove some keywords
-            if (sa.hasParam("SetCreatureTypes") || creatureReplacement) {
+            if (sa.hasParam("SetCreatureTypes")) {
                 state.removeIntrinsicKeyword("Changeling");
             }
-            if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize") || creatureReplacement) {
+            if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
                 state.removeIntrinsicKeyword("Devoid");
             }
         }
