@@ -145,6 +145,7 @@ public class PumpAi extends PumpAiBase {
             }
 
             final String counterType = moveSA.getParam("CounterType");
+            final String amountStr = moveSA.getParamOrDefault("CounterNum", "1");
             final CounterType cType = "Any".equals(counterType) ? null : CounterType.getType(counterType);
 
             final PhaseHandler ph = game.getPhaseHandler();
@@ -157,7 +158,6 @@ public class PumpAi extends PumpAiBase {
                     if (attr.isEmpty()) {
                         return false;
                     }
-                    final String amountStr = moveSA.getParam("CounterNum");
                     CardCollection best = CardLists.filter(attr, new Predicate<Card>() {
                         @Override
                         public boolean apply(Card card) {
@@ -198,7 +198,6 @@ public class PumpAi extends PumpAiBase {
                     return true;
                 }
             } else {
-                final String amountStr = moveSA.getParam("CounterNum");
                 final boolean sameCtrl = moveSA.getTargetRestrictions().isSameController();
 
                 List<Card> list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);

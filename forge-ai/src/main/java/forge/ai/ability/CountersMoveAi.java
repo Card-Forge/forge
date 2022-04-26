@@ -350,6 +350,9 @@ public class CountersMoveAi extends SpellAbilityAi {
             }
 
             return false;
+        } else if (sa.getMaxTargets() == 2) {
+            // TODO
+            return false;
         } else {
             // SA uses target for Defined
             // Source => Targeted
@@ -361,10 +364,8 @@ public class CountersMoveAi extends SpellAbilityAi {
             }
 
             final Card src = srcCards.get(0);
-            if (cType != null) {
-                if (src.getCounters(cType) <= 0) {
-                    return false;
-                }
+            if (cType != null && src.getCounters(cType) <= 0) {
+                return false;
             }
 
             Card lki = CardUtil.getLKICopy(src);

@@ -1341,12 +1341,14 @@ public abstract class GameState {
                     }
                 } else if (info.startsWith("Transformed")) {
                     c.setState(CardStateName.Transformed, true);
+                    c.setBackSide(true);
                 } else if (info.startsWith("Flipped")) {
                     c.setState(CardStateName.Flipped, true);
                 } else if (info.startsWith("Meld")) {
                     c.setState(CardStateName.Meld, true);
                 } else if (info.startsWith("Modal")) {
                     c.setState(CardStateName.Modal, true);
+                    c.setBackSide(true);
                 }
                 else if (info.startsWith("OnAdventure")) {
                     String abAdventure = "DB$ Effect | RememberObjects$ Self | StaticAbilities$ Play | ExileOnMoved$ Exile | Duration$ Permanent | ConditionDefined$ Self | ConditionPresent$ Card.nonCopiedSpell";
