@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -18,7 +19,12 @@ public class CleanUpEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        Card source = sa.getHostCard();
+        Card source;
+        if (sa.hasParam("Defined")) {
+            source = getDefinedCardsOrTargeted(sa).get(0);
+        } else {
+            source = sa.getHostCard();
+        }
         final Game game = source.getGame();
 
         String logMessage = "";
@@ -31,13 +37,8 @@ public class CleanUpEffect extends SpellAbilityEffect {
             game.getCardState(source).clearRemembered();
         }
         if (sa.hasParam("ForgetDefined")) {
-            for (final Card card : AbilityUtils.getDefinedCards(source, sa.getParam("ForgetDefined"), sa)) {
-                source.removeRemembered(card);
-            }
-        }
-        if (sa.hasParam("ForgetDefinedPlayer")) {
-            for (final Player player : AbilityUtils.getDefinedPlayers(source, sa.getParam("ForgetDefinedPlayer"), sa)) {
-                source.removeRemembered(player);
+            for (final GameEntity ge : AbilityUtils.getDefinedEntities(source, sa.getParam("ForgetDefined"), sa)) {
+                source.removeRemembered(ge);
             }
         }
         if (sa.hasParam("ClearImprinted")) {

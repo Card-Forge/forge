@@ -117,7 +117,6 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             Player creator = c.getRowKey();
             Player controller = prototype.getController();
             int cellAmount = c.getValue();
-            String cleanupForEach = sa.getParamOrDefault("CleanupForEach", "");
 
             for (int i = 0; i < cellAmount; i++) {
                 Card tok = CardFactory.copyCard(prototype, true);
@@ -206,17 +205,8 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 }
                 allTokens.add(moved);
 
-                if (cleanupForEach.equals("Immediately")) {
+                if (sa.hasParam("CleanupForEach")) {
                     moved.removeRemembered(prototype.getRemembered());
-                } else if (cleanupForEach.equals("EOT")) {
-                    final GameCommand untilEOT = new GameCommand() {
-                        private static final long serialVersionUID = -42244224L;
-                        @Override
-                        public void run() {
-                            moved.removeRemembered(prototype.getRemembered());
-                        }
-                    };
-                    game.getCleanup().addUntil(untilEOT);
                 }
             }
         }

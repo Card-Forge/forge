@@ -1506,7 +1506,7 @@ public class CardFactoryUtil {
                     + " | TriggerDescription$ Myriad (" + inst.getReminderText() + ")";
 
             final String copyStr = "DB$ CopyPermanent | Defined$ Self | TokenTapped$ True | Optional$ True | TokenAttacking$ Remembered"
-                    + "| ForEach$ OpponentsOtherThanDefendingPlayer | ChoosePlayerOrPlaneswalker$ True | AtEOT$ ExileCombat | CleanupForEach$ Immediately";
+                    + "| ForEach$ OpponentsOtherThanDefendingPlayer | ChoosePlayerOrPlaneswalker$ True | AtEOT$ ExileCombat | CleanupForEach$ True";
 
             final SpellAbility copySA = AbilityFactory.getAbility(copyStr, card);
             copySA.setIntrinsic(intrinsic);
@@ -3185,17 +3185,28 @@ public class CardFactoryUtil {
             final String manacost = k[1];
 
             final String effect = "AB$ CopyPermanent | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard" +
-                    "| Defined$ Self | PumpKeywords$ Haste | RememberTokens$ True | ForEach$ Opponent | CleanupForEach$ EOT" +
+                    "| Defined$ Self | PumpKeywords$ Haste | RememberTokens$ True | ForEach$ Opponent" +
                     "| AtEOT$ Sacrifice | PrecostDesc$ Encore | CostDesc$ " + ManaCostParser.parse(manacost) +
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
-            final String animateStr = "DB$ Animate | Defined$ Remembered | staticAbilities$ AttackChosen";
-            final AbilitySub animateSub = (AbilitySub) AbilityFactory.getAbility(animateStr, card);
-            sa.setSubAbility(animateSub);
-            final String attackStaticStr = "Mode$ MustAttack | ValidCreature$ Card.Self | MustAttack$ Remembered" +
+
+            final String repeatStr = "DB$ RepeatEach | DefinedCards$ Remembered | UseImprinted$ True";
+            final AbilitySub repeatSub = (AbilitySub) AbilityFactory.getAbility(repeatStr, card);
+            sa.setSubAbility(repeatSub);
+
+            final String effectStr = "DB$ Effect | RememberObjects$ Imprinted,ImprintedRemembered | StaticAbilities$ AttackChosen";
+            final AbilitySub effectSub = (AbilitySub) AbilityFactory.getAbility(effectStr, card);
+            repeatSub.setAdditionalAbility("RepeatSubAbility", effectSub);
+
+            final String attackStaticStr = "Mode$ MustAttack | ValidCreature$ Card.IsRemembered | MustAttack$ RememberedPlayer" +
                     " | Description$ This token copy attacks that opponent this turn if able.";
-            sa.setSVar("AttackChosen", attackStaticStr);
+            effectSub.setSVar("AttackChosen", attackStaticStr);
+
+            final String cleanStr = "DB$ Cleanup | Defined$ Imprinted | ForgetDefined$ Remembered";
+            final AbilitySub cleanSub = (AbilitySub) AbilityFactory.getAbility(cleanStr, card);
+            effectSub.setSubAbility(cleanSub);
+
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Spectacle")) {

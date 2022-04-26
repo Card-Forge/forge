@@ -3043,6 +3043,8 @@ public class AbilityUtils {
                     players.add(c.getController());
                 } else if (def.endsWith("Owner")) {
                     players.add(c.getOwner());
+                } else if (def.endsWith("Remembered")) {
+                    addPlayer(c.getRemembered(), def, players);
                 }
             } else if (o instanceof SpellAbility) {
                 final SpellAbility c = (SpellAbility) o;

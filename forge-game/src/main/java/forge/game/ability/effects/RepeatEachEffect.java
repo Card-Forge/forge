@@ -109,7 +109,6 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 } else {
                     source.addRemembered(card);
                 }
-
                 AbilityUtils.resolve(repeat);
                 if (useImprinted) {
                     source.removeImprintedCard(card);
