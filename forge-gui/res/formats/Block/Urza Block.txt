@@ -1,6 +1,6 @@
 [format]
 Name:Urza Block
-Type:Historic
+Type:Archive
 Subtype:Block
 Order:132
 Sets:UDS, ULG, USG

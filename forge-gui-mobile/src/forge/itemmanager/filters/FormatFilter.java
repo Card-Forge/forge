@@ -66,16 +66,16 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
                     preventHandling = true;
                     cbxFormats.setText(selectedFormat); //restore previous selection by default
                     preventHandling = false;
-                    HistoricFormatSelect historicFormatSelect = new HistoricFormatSelect();
-                    historicFormatSelect.setOnCloseCallBack(new Runnable(){
+                    ArchiveFormatSelect archiveFormatSelect = new ArchiveFormatSelect();
+                    archiveFormatSelect.setOnCloseCallBack(new Runnable(){
                         @Override
                         public void run() {
-                            format = historicFormatSelect.getSelectedFormat();
+                            format = archiveFormatSelect.getSelectedFormat();
                             cbxFormats.setText(format.getName());
                             applyChange();
                         }
                     });
-                    Forge.openScreen(historicFormatSelect);
+                    Forge.openScreen(archiveFormatSelect);
                 }
                 else if (index == cbxFormats.getItemCount() - 1) {
                     preventHandling = true;

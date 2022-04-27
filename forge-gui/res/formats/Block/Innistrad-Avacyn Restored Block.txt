@@ -1,6 +1,6 @@
 [format]
 Name:Innistrad-Avacyn Restored Block
-Type:Historic
+Type:Archive
 Subtype:Block
 Order:119
 Sets:ISD, AVR, DKA

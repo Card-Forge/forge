@@ -1,7 +1,0 @@
-[format]
-Name:Block: Ice Age (HML)
-Type:Historic
-Subtype:Block
-Effective:1997-07-01
-Sets:ICE, HML, ALL
-Banned:Amulet of Quoz, Thawing Glaciers, Timmerian Fiends, Zuran Orb

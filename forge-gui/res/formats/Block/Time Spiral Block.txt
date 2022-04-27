@@ -1,6 +1,6 @@
 [format]
 Name:Time Spiral Block
-Type:Historic
+Type:Archive
 Subtype:Block
 Order:124
 Sets:FUT, PLC, TSP

@@ -216,7 +216,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         DEV_LOG_ENTRY_TYPE (GameLogEntryType.DAMAGE.toString()),
 
         LOAD_CARD_SCRIPTS_LAZILY ("false"),
-        LOAD_HISTORIC_FORMATS ("false"),
+        LOAD_ARCHIVE_FORMATS ("false"),
 
         DECK_DEFAULT_CARD_LIMIT ("4"),
         DECKGEN_SINGLETONS ("false"),

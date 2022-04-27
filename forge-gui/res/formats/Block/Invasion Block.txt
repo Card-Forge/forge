@@ -1,6 +1,6 @@
 [format]
 Name:Invasion Block
-Type:Historic
+Type:Archive
 Subtype:Block
 Order:130
 Sets:APC, PLS, INV

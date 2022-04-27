@@ -31,7 +31,7 @@ import forge.gui.UiCommand;
 import forge.gui.util.SOptionPane;
 import forge.item.PaperCard;
 import forge.item.PreconDeck;
-import forge.itemmanager.filters.HistoricFormatSelect;
+import forge.itemmanager.filters.ArchiveFormatSelect;
 import forge.localinstance.properties.ForgeConstants;
 import forge.model.CardCollections;
 import forge.model.FModel;
@@ -301,13 +301,13 @@ public class NewQuestScreen extends FScreen {
         btnSelectFormat.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                HistoricFormatSelect historicFormatSelect = new HistoricFormatSelect();
-                historicFormatSelect.setOnCloseCallBack(new Runnable() {
+                ArchiveFormatSelect archiveFormatSelect = new ArchiveFormatSelect();
+                archiveFormatSelect.setOnCloseCallBack(new Runnable() {
                     @Override
                     public void run() {
                         customFormatCodes.clear();
-                        btnSelectFormat.setText(historicFormatSelect.getSelectedFormat().getName());
-                        List<String> setsToAdd = historicFormatSelect.getSelectedFormat().getAllowedSetCodes();
+                        btnSelectFormat.setText(archiveFormatSelect.getSelectedFormat().getName());
+                        List<String> setsToAdd = archiveFormatSelect.getSelectedFormat().getAllowedSetCodes();
                         for (String setName:setsToAdd){
                             if(!unselectableSets.contains(setName)){
                                 customFormatCodes.add(setName);
@@ -315,20 +315,20 @@ public class NewQuestScreen extends FScreen {
                         }
                     }
                 });
-                Forge.openScreen(historicFormatSelect);
+                Forge.openScreen(archiveFormatSelect);
             }
         });
 
         btnPrizeSelectFormat.setCommand(new FEventHandler() {
             @Override
             public void handleEvent(FEvent e) {
-                HistoricFormatSelect historicFormatSelect = new HistoricFormatSelect();
-                historicFormatSelect.setOnCloseCallBack(new Runnable() {
+                ArchiveFormatSelect  archiveFormatSelect = new ArchiveFormatSelect();
+                archiveFormatSelect.setOnCloseCallBack(new Runnable() {
                     @Override
                     public void run() {
                         customPrizeFormatCodes.clear();
-                        btnPrizeSelectFormat.setText(historicFormatSelect.getSelectedFormat().getName());
-                        List<String> setsToAdd = historicFormatSelect.getSelectedFormat().getAllowedSetCodes();
+                        btnPrizeSelectFormat.setText(archiveFormatSelect.getSelectedFormat().getName());
+                        List<String> setsToAdd = archiveFormatSelect.getSelectedFormat().getAllowedSetCodes();
                         for (String setName:setsToAdd){
                             if(!unselectableSets.contains(setName)){
                                 customPrizeFormatCodes.add(setName);
@@ -336,7 +336,7 @@ public class NewQuestScreen extends FScreen {
                         }
                     }
                 });
-                Forge.openScreen(historicFormatSelect);
+                Forge.openScreen(archiveFormatSelect);
             }
         });
 

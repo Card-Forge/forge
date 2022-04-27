@@ -1,6 +1,6 @@
 [format]
 Name:Ravnica Block
-Type:Historic
+Type:Archive
 Subtype:Block
 Order:125
 Sets:DIS, GPT, RAV

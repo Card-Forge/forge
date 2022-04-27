@@ -72,7 +72,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbManaLostPrompt = new OptionsCheckBox(localizer.getMessage("cbManaLostPrompt"));
     private final JCheckBox cbDevMode = new OptionsCheckBox(localizer.getMessage("cbDevMode"));
     private final JCheckBox cbLoadCardsLazily = new OptionsCheckBox(localizer.getMessage("cbLoadCardsLazily"));
-    private final JCheckBox cbLoadHistoricFormats = new OptionsCheckBox(localizer.getMessage("cbLoadHistoricFormats"));
+    private final JCheckBox cbLoadArchiveFormats = new OptionsCheckBox(localizer.getMessage("cbLoadArchiveFormats"));
     private final JCheckBox cbWorkshopSyntax = new OptionsCheckBox(localizer.getMessage("cbWorkshopSyntax"));
     private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox(localizer.getMessage("cbEnforceDeckLegality"));
     private final JCheckBox cbSideboardForAI = new OptionsCheckBox(localizer.getMessage("cbSideboardForAI"));
@@ -322,8 +322,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbLoadCardsLazily, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLoadCardsLazily")), descriptionConstraints);
 
-        pnlPrefs.add(cbLoadHistoricFormats, titleConstraints);
-        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLoadHistoricFormats")), descriptionConstraints);
+        pnlPrefs.add(cbLoadArchiveFormats, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlLoadArchiveFormats")), descriptionConstraints);
 
         pnlPrefs.add(cbEnableUnknownCards, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnableUnknownCards")), descriptionConstraints);
@@ -741,8 +741,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getCbLoadHistoricFormats() {
-        return cbLoadHistoricFormats;
+    public JCheckBox getCbLoadArchiveFormats() {
+        return cbLoadArchiveFormats;
     }
 
     public JCheckBox getCbWorkshopSyntax() {
