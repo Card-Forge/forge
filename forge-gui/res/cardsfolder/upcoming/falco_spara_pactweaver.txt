@@ -4,7 +4,7 @@ Types:Legendary Creature Bird Demon
 PT:3/3
 K:Flying
 K:Trample
-K:etbCounter:Shield:1
+K:etbCounter:SHIELD:1
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouOwn | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouOwn+nonLand | AffectedZone$ Library | MayPlay$ True | MayPlayAltManaCost$ RegularCost RemoveAnyCounter<1/Any/Creature.YouCtrl/a creature you control> | Description$ You may cast spells from the top of your library by removing a counter from a creature you control in addition to paying their other costs.
 DeckHas:Ability$Counters

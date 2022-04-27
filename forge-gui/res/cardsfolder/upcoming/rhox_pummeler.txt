@@ -2,7 +2,7 @@ Name:Rhox Pummeler
 ManaCost:3 G
 Types:Creature Rhino Soldier
 PT:3/3
-K:etbCounter:Shield:1:no Condition:CARDNAME enters the battlefield with a shield counter on it.  (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
-S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_Shield | AddKeyword$ Trample | Description$ CARDNAME has trample as long as it has a shield counter on it.
+K:etbCounter:SHIELD:1
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_SHIELD | AddKeyword$ Trample | Description$ CARDNAME has trample as long as it has a shield counter on it.
 DeckHas:Ability$Counters
 Oracle:Rhox Pummeler enters the battlefield with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)\nRhox Pummeler has trample as long as it has a shield counter on it.

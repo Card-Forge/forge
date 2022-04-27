@@ -3,6 +3,6 @@ ManaCost:G W U
 Types:Creature Human Citizen
 PT:2/1
 K:Double Strike
-K:etbCounter:Shield:1:no Condition:CARDNAME enters the battlefield with a shield counter on it.  (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
+K:etbCounter:SHIELD:1
 DeckHas:Ability$Counters
 Oracle:Double strike\nDisciplined Duelist enters the battlefield with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
