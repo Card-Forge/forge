@@ -1775,9 +1775,8 @@ public class GameAction {
         }
 
         // Replacement effects
-        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromCard(c);
+        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(c);
         repRunParams.put(AbilityKey.Source, sa);
-        repRunParams.put(AbilityKey.Affected, c);
         repRunParams.put(AbilityKey.Regeneration, regenerate);
         if (params != null) {
             repRunParams.putAll(params);
