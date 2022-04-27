@@ -487,27 +487,18 @@ public final class GameActionUtil {
                 final String keyword = inst.getOriginal();
                 if (keyword.startsWith("AlternateAdditionalCost")) {
                     final List<SpellAbility> newAbilities = Lists.newArrayList();
-                    String[] costs = TextUtil.split(keyword, ':');
+                    final String[] costs = (keyword.split(":", 2)[1]).split(":");
 
-                    final SpellAbility newSA = sa.copy();
-                    newSA.setBasicSpell(false);
+                    for (String s : costs) {
+                        final SpellAbility newSA = sa.copy();
+                        newSA.setBasicSpell(false);
 
-                    final Cost cost1 = new Cost(costs[1], false);
-                    newSA.setDescription(sa.getDescription() + " (Additional cost " + cost1.toSimpleString() + ")");
-                    newSA.setPayCosts(cost1.add(sa.getPayCosts()));
-                    if (newSA.canPlay()) {
-                        newAbilities.add(newSA);
-                    }
-
-                    //second option
-                    final SpellAbility newSA2 = sa.copy();
-                    newSA2.setBasicSpell(false);
-
-                    final Cost cost2 = new Cost(costs[2], false);
-                    newSA2.setDescription(sa.getDescription() + " (Additional cost " + cost2.toSimpleString() + ")");
-                    newSA2.setPayCosts(cost2.add(sa.getPayCosts()));
-                    if (newSA2.canPlay()) {
-                        newAbilities.add(newSA2);
+                        final Cost cost = new Cost(s, false);
+                        newSA.setDescription(sa.getDescription() + " (Additional cost: " + cost.toSimpleString() + ")");
+                        newSA.setPayCosts(cost.add(sa.getPayCosts()));
+                        if (newSA.canPlay()) {
+                            newAbilities.add(newSA);
+                        }
                     }
 
                     abilities.clear();
