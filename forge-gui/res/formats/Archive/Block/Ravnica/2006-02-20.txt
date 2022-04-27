@@ -1,6 +1,0 @@
-[format]
-Name:Block: Ravnica (GPT)
-Type:Archive
-Subtype:Block
-Effective:2006-02-20
-Sets:RAV, GPT

@@ -362,9 +362,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("cbLoadCardsLazily"),
                 Forge.getLocalizer().getMessage("nlLoadCardsLazily")),
                 3);
-        lstSettings.addItem(new BooleanSetting(FPref.LOAD_ARCHIVE_FORMATS,
-                Forge.getLocalizer().getMessage("cbLoadArchiveFormats"),
-                Forge.getLocalizer().getMessage("nlLoadArchiveFormats")),
+        lstSettings.addItem(new BooleanSetting(FPref.LOAD_ARCHIVED_FORMATS,
+                Forge.getLocalizer().getMessage("cbLoadArchivedFormats"),
+                Forge.getLocalizer().getMessage("nlLoadArchivedFormats")),
                 3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_UNKNOWN_CARDS,
                 Forge.getLocalizer().getMessage("lblEnableUnknownCards"),

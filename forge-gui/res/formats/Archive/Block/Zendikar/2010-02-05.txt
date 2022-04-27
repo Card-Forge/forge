@@ -1,6 +1,0 @@
-[format]
-Name:Block: Zendikar (WWK)
-Type:Archive
-Subtype:Block
-Effective:2010-02-05
-Sets:ZEN, WWK

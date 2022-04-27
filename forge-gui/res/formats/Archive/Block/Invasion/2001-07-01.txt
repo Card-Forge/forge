@@ -1,6 +1,0 @@
-[format]
-Name:Block: Invasion (APC)
-Type:Archive
-Subtype:Block
-Effective:2001-07-01
-Sets:INV, PLS, APC

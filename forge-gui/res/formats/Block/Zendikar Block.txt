@@ -1,6 +1,6 @@
 [format]
 Name:Zendikar Block
-Type:Archive
+Type:Archived
 Subtype:Block
 Order:121
 Sets:ROE, WWK, ZEN

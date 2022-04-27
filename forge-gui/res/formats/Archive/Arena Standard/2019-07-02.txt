@@ -1,7 +1,0 @@
-[format]
-Name:Arena Standard (M20)
-Type:Archive
-Subtype:Arena
-Effective:2019-07-02
-Sets:XLN, RIX, DOM, M19, ANA, PANA, GRN, G18, RNA, WAR, M20
-Banned:Nexus of Fate; Rampaging Ferocidon

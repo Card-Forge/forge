@@ -1,7 +1,0 @@
-[format]
-Name:Standard (MMQ)
-Type:Archive
-Subtype:Standard
-Effective:1999-11-01
-Sets:USG, ULG, 6ED, UDS, MMQ
-Banned:Fluctuator; Memory Jar; Time Spiral; Tolarian Academy; Windfall

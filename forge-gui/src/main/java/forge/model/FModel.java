@@ -208,7 +208,7 @@ public final class FModel {
         ForgePreferences.UPLOAD_DRAFT = ForgePreferences.NET_CONN;
 
         formats = new GameFormat.Collection(new GameFormat.Reader( new File(ForgeConstants.FORMATS_DATA_DIR),
-                new File(ForgeConstants.USER_FORMATS_DIR), preferences.getPrefBoolean(FPref.LOAD_ARCHIVE_FORMATS)));
+                new File(ForgeConstants.USER_FORMATS_DIR), preferences.getPrefBoolean(FPref.LOAD_ARCHIVED_FORMATS)));
 
         magicDb.setStandardPredicate(formats.getStandard().getFilterRules());
         magicDb.setPioneerPredicate(formats.getPioneer().getFilterRules());

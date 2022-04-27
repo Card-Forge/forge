@@ -279,7 +279,7 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         }
         menu.add(world);
 
-        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_ARCHIVE_FORMATS)) {
+        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.LOAD_ARCHIVED_FORMATS)) {
             JMenu blocks = GuiUtils.createMenu(localizer.getMessage("lblBlock"));
             final Iterable<GameFormat> blockFormats = FModel.getFormats().getBlockList();
             for (final GameFormat f : blockFormats) {

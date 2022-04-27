@@ -1,0 +1,7 @@
+[format]
+Name:Standard (2017-06-19)
+Type:Archived
+Subtype:Standard
+Effective:2017-06-19
+Sets:BFZ, OGW, SOI, W16, EMN, KLD, AER, AKH, W17
+Banned:Aetherworks Marvel; Emrakul, the Promised End; Felidar Guardian; Reflector Mage; Smuggler's Copter

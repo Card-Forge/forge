@@ -1,6 +1,0 @@
-[format]
-Name:Standard (USG)
-Type:Archive
-Subtype:Standard
-Effective:1998-11-01
-Sets:5ED, TMP, STH, EXO, USG

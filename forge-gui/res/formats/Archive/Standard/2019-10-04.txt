@@ -1,6 +1,0 @@
-[format]
-Name:Standard (ELD)
-Type:Archive
-Subtype:Standard
-Effective:2019-10-04
-Sets:GRN, RNA, WAR, M20, ELD

@@ -1,6 +1,0 @@
-[format]
-Name:Block: Innistrad (DKA)
-Type:Archive
-Subtype:Block
-Effective:2012-02-03
-Sets:ISD, DKA

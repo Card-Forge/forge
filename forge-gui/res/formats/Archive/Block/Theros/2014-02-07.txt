@@ -1,6 +1,0 @@
-[format]
-Name:Block: Theros (BNG)
-Type:Archive
-Subtype:Block
-Effective:2014-02-07
-Sets:THS, BNG

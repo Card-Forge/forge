@@ -1,6 +1,0 @@
-[format]
-Name:Standard (OGW)
-Type:Archive
-Subtype:Standard
-Effective:2016-01-22
-Sets:KTK, FRF, UGF, DTK, ORI, BFZ, OGW

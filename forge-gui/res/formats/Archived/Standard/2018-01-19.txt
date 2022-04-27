@@ -1,0 +1,7 @@
+[format]
+Name:Standard (RIX)
+Type:Archived
+Subtype:Standard
+Effective:2018-01-19
+Sets:KLD, AER, AKH, W17, HOU, XLN, RIX
+Banned:Aetherworks Marvel; Attune with Aether; Felidar Guardian; Rampaging Ferocidon; Ramunap Ruins; Rogue Refiner; Smuggler's Copter

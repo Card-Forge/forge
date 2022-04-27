@@ -1,7 +1,0 @@
-[format]
-Name:Standard (NMS)
-Type:Archive
-Subtype:Standard
-Effective:2000-03-01
-Sets:USG, ULG, 6ED, UDS, MMQ, NMS
-Banned:Fluctuator; Memory Jar; Time Spiral; Tolarian Academy; Windfall

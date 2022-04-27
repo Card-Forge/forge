@@ -1,7 +1,0 @@
-[format]
-Name:Arena Standard (MID)
-Type:Archive
-Subtype:Arena
-Effective:2021-09-16
-Sets:ANA, PANA, ANB, ZNR, KHM, STX, AFR, MID
-Banned:Omnath, Locus of Creation

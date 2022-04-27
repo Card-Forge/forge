@@ -1,6 +1,0 @@
-[format]
-Name:Standard (CFX)
-Type:Archive
-Subtype:Standard
-Effective:2009-02-06
-Sets:10E, LRW, MOR, SHM, EVE, ALA, CFX

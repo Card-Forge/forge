@@ -1,6 +1,0 @@
-[format]
-Name:Block: Theros (JOU)
-Type:Archive
-Subtype:Block
-Effective:2014-05-02
-Sets:THS, BNG, JOU

@@ -1,0 +1,7 @@
+[format]
+Name:Block: Mirrodin (5DN)
+Type:Archived
+Subtype:Block
+Effective:2004-06-20
+Sets:MRD, DST, 5DN
+Banned:Skullclamp

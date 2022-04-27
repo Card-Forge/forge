@@ -1,6 +1,0 @@
-[format]
-Name:Block: Kamigawa (BOK)
-Type:Archive
-Subtype:Block
-Effective:2005-02-20
-Sets:CHK, BOK

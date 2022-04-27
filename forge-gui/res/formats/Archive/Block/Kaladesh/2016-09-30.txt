@@ -1,6 +1,0 @@
-[format]
-Name:Block: Kaladesh (KLD)
-Type:Archive
-Subtype:Block
-Effective:2016-09-30
-Sets:KLD

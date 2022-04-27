@@ -1,6 +1,0 @@
-[format]
-Name:Block: Kamigawa (SOK)
-Type:Archive
-Subtype:Block
-Effective:2005-06-20
-Sets:CHK, BOK, SOK

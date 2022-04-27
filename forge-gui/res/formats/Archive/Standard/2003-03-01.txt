@@ -1,6 +1,0 @@
-[format]
-Name:Standard (LGN)
-Type:Archive
-Subtype:Standard
-Effective:2003-03-01
-Sets:7ED, ODY, TOR, JUD, ONS, LGN

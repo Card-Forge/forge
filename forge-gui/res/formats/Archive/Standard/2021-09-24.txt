@@ -1,7 +1,0 @@
-[format]
-Name:Standard (MID)
-Type:Archive
-Subtype:Standard
-Effective:2021-09-24
-Sets:ZNR, KHM, STX, AFR, MID
-Banned:Omnath, Locus of Creation

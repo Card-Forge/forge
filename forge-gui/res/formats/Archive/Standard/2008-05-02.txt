@@ -1,6 +1,0 @@
-[format]
-Name:Standard (SHM)
-Type:Archive
-Subtype:Standard
-Effective:2008-05-02
-Sets:CSP, TSP, TSB, PLC, FUT, 10E, LRW, MOR, SHM

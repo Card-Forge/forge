@@ -1,6 +1,0 @@
-[format]
-Name:Pre-format (2ED)
-Type:Archive
-Subtype:Vintage
-Effective:1993-12-01
-Sets:LEA, LEB, 2ED

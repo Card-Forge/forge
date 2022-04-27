@@ -1,6 +1,6 @@
 [format]
 Name:Extended
-Type:Archive
+Type:Archived
 Subtype:Extended
 Effective:2013-09-27
 Retired:2013-10-08

@@ -1,0 +1,8 @@
+[format]
+Name:Extended (2001-04-01)
+Type:Archived
+Subtype:Extended
+Effective:2001-04-01
+Sets:ICE, HML, ALL, MIR, VIS, 5ED, WTH, TMP, STH, EXO, USG, ULG, 6ED, UDS, MMQ, NMS, PCY, INV, PLS
+Banned:Amulet of Quoz; Dark Ritual; Demonic Consultation; Dream Halls; Earthcraft; Lotus Petal; Mana Vault; Memory Jar; Mind Over Matter; Necropotence; Replenish; Survival of the Fittest; Time Spiral; Timmerian Fiends; Tolarian Academy; Windfall; Yawgmoth's Bargain; Yawgmoth's Will; Zuran Orb
+Additional:Badlands; Bayou; Plateau; Savannah; Scrubland; Taiga; Tropical Island; Tundra; Underground Sea; Volcanic Island

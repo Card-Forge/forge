@@ -1,6 +1,6 @@
 [format]
 Name:Mirrodin Block
-Type:Archive
+Type:Archived
 Subtype:Block
 Order:127
 Sets:5DN, DST, MRD

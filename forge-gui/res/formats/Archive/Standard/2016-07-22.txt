@@ -1,6 +1,0 @@
-[format]
-Name:Standard (EMN)
-Type:Archive
-Subtype:Standard
-Effective:2016-07-22
-Sets:DTK, ORI, BFZ, OGW, SOI, W16, EMN

@@ -1,6 +1,0 @@
-[format]
-Name:Block: Battle for Zendikar (BFZ)
-Type:Archive
-Subtype:Block
-Effective:2015-10-02
-Sets:BFZ

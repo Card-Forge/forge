@@ -1,6 +1,0 @@
-[format]
-Name:Arena Standard (ELD)
-Type:Archive
-Subtype:Arena
-Effective:2019-09-26
-Sets:ANA, PANA, GRN, RNA, WAR, M20, ELD

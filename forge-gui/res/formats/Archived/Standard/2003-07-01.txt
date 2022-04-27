@@ -1,0 +1,6 @@
+[format]
+Name:Standard (SCG)
+Type:Archived
+Subtype:Standard
+Effective:2003-07-01
+Sets:7ED, ODY, TOR, JUD, ONS, LGN, SCG

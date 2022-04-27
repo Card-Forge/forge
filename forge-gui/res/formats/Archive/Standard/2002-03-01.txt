@@ -1,6 +1,0 @@
-[format]
-Name:Standard (TOR)
-Type:Archive
-Subtype:Standard
-Effective:2002-03-01
-Sets:INV, PLS, 7ED, APC, ODY, TOR

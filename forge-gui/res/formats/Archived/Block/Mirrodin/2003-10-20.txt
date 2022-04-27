@@ -1,0 +1,6 @@
+[format]
+Name:Block: Mirrodin (MRD)
+Type:Archived
+Subtype:Block
+Effective:2003-10-20
+Sets:MRD

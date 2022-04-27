@@ -1,6 +1,6 @@
 [format]
 Name:Mirage Block
-Type:Archive
+Type:Archived
 Subtype:Block
 Order:134
 Sets:VIS, WTH, MIR

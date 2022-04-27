@@ -1,6 +1,0 @@
-[format]
-Name:Standard (DKA)
-Type:Archive
-Subtype:Standard
-Effective:2012-02-03
-Sets:SOM, MBS, NPH, M12, ISD, DKA

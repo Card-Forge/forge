@@ -1,6 +1,0 @@
-[format]
-Name:Standard (M13)
-Type:Archive
-Subtype:Standard
-Effective:2012-07-13
-Sets:SOM, MBS, NPH, M12, ISD, DKA, AVR, M13
