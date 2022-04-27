@@ -813,7 +813,6 @@ public final class StaticAbilityContinuous {
 
                 if (params.containsKey("GainsAbilitiesOf") || params.containsKey("GainsAbilitiesOfDefined")) {
                     CardCollection cardsIGainedAbilitiesFrom = new CardCollection();
-                    final boolean loyaltyAB = params.containsKey("GainsLoyaltyAbilities");
 
                     if (params.containsKey("GainsAbilitiesOf")) {
                         final String[] valids = params.get("GainsAbilitiesOf").split(",");
@@ -832,13 +831,16 @@ public final class StaticAbilityContinuous {
                     for (Card c : cardsIGainedAbilitiesFrom) {
                         for (SpellAbility sa : c.getSpellAbilities()) {
                             if (sa.isActivatedAbility()) {
-                                if (loyaltyAB && !sa.isPwAbility()) {
+                                if (!stAb.matchesValidParam("GainsValidAbilities", sa)) {
                                     continue;
                                 }
                                 SpellAbility newSA = sa.copy(affectedCard, false);
                                 if (params.containsKey("GainsAbilitiesLimitPerTurn")) {
                                     newSA.setRestrictions(sa.getRestrictions());
                                     newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
+                                }
+                                if (params.containsKey("GainsAbilitiesActivateIgnoreColor")) {
+                                    newSA.putParam("ActivateIgnoreColor","True");
                                 }
                                 newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
                                 newSA.setGrantorStatic(stAb);
