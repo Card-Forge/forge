@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Maps;
@@ -82,7 +84,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
         } else if ("ReplaceToken".equals(sa.getParam("Type"))) {
             long timestamp = game.getNextTimestamp();
 
-            Multimap<Player, Map<Integer, Iterable<Object>>> toInsertMap = ArrayListMultimap.create();
+            Multimap<Player, Pair<Integer, Iterable<Object>>> toInsertMap = ArrayListMultimap.create();
             Set<Card> toRemoveSet = Sets.newHashSet();
             for (Map.Entry<Card, Integer> e : table.row(affected).entrySet()) {
                 if (!sa.matchesValidParam("ValidCard", e.getKey())) {
@@ -91,32 +93,30 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                 Player controller = e.getKey().getController();
                 // TODO should still merge the amounts to avoid additional prototypes when sourceSA doesn't use ForEach
                 //int old = ObjectUtils.defaultIfNull(toInsertMap.get(controller), 0);
-                Map<Integer, Iterable<Object>> tokenAmountMap = Maps.newHashMap();
-                tokenAmountMap.put(e.getValue(), e.getKey().getRemembered());
-                toInsertMap.put(controller, tokenAmountMap);
+                Pair<Integer, Iterable<Object>> tokenAmountPair = new ImmutablePair<>(e.getValue(), e.getKey().getRemembered());
+                toInsertMap.put(controller, tokenAmountPair);
                 toRemoveSet.add(e.getKey());
             }
             // remove replaced tokens
             table.row(affected).keySet().removeAll(toRemoveSet);
 
             // insert new tokens
-            for (Map.Entry<Player, Map<Integer, Iterable<Object>>> pe : toInsertMap.entries()) {
-                for (Map.Entry<Integer, Iterable<Object>> amounts : pe.getValue().entrySet()) {
-                    if (amounts.getKey() <= 0) {
-                        continue;
-                    }
-                    for (String script : sa.getParam("TokenScript").split(",")) {
-                        final Card token = TokenInfo.getProtoType(script, sa, pe.getKey());
+            for (Map.Entry<Player, Pair<Integer, Iterable<Object>>> pe : toInsertMap.entries()) {
+                int amt = pe.getValue().getLeft();
+                if (amt <= 0) {
+                    continue;
+                }
+                for (String script : sa.getParam("TokenScript").split(",")) {
+                    final Card token = TokenInfo.getProtoType(script, sa, pe.getKey());
 
-                        if (token == null) {
-                            throw new RuntimeException("don't find Token for TokenScript: " + script);
-                        }
-
-                        token.setController(pe.getKey(), timestamp);
-                        // if token is created from ForEach keep that
-                        token.addRemembered(amounts.getValue());
-                        table.put(affected, token, amounts.getKey());
+                    if (token == null) {
+                        throw new RuntimeException("don't find Token for TokenScript: " + script);
                     }
+
+                    token.setController(pe.getKey(), timestamp);
+                    // if token is created from ForEach keep that
+                    token.addRemembered(pe.getValue().getRight());
+                    table.put(affected, token, amt);
                 }
             }
         } else if ("ReplaceController".equals(sa.getParam("Type"))) {
