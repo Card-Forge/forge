@@ -831,10 +831,7 @@ public final class StaticAbilityContinuous {
                     for (Card c : cardsIGainedAbilitiesFrom) {
                         for (SpellAbility sa : c.getSpellAbilities()) {
                             if (sa.isActivatedAbility()) {
-                                if (params.containsKey("GainsValidAbilities") &&
-                                        !sa.isValid(params.get("GainsValidAbilities").split(","),
-                                                hostCard.getController(), hostCard, stAb)) {
-
+                                if (!stAb.matchesValidParam("GainsValidAbilities", sa)) {
                                     continue;
                                 }
                                 SpellAbility newSA = sa.copy(affectedCard, false);
