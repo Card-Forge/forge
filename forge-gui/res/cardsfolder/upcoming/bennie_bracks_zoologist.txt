@@ -1,0 +1,9 @@
+Name:Bennie Bracks, Zoologist
+ManaCost:3 W
+Types:Legendary Creature Elf Druid
+PT:3/2
+K:Convoke
+T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each end step, if you created a token this turn, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:X:Count$ThisTurnEntered_Battlefield_Card.token+YouCtrl
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature’s color.)\nAt the beginning of each end step, if you created a token this turn, draw a card.
