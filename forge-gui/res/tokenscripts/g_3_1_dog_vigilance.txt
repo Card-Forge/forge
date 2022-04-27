@@ -1,0 +1,7 @@
+Name:Dog Token
+ManaCost:no cost
+Colors:green
+Types:Creature Dog
+PT:3/1
+K:Vigilance
+Oracle:Vigilance
