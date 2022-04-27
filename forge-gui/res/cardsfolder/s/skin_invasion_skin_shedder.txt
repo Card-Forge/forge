@@ -2,8 +2,8 @@ Name:Skin Invasion
 ManaCost:R
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Enchanted creature attacks each combat if able.
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ MustAttack | ValidCreature$ Creature.EnchantedBy | Description$ Enchanted creature attacks each combat if able.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | Execute$ TrigChangeZone | TriggerDescription$ When enchanted creature dies, return CARDNAME to the battlefield transformed under your control.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Transformed$ True | GainControl$ True | Defined$ CorrectedSelf
 AlternateMode:DoubleFaced

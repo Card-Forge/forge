@@ -44,16 +44,13 @@ public class ReplaceDestroy extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
-            return false;
-        }
-        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
+        if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
             return false;
         }
 
         // extra check for Regeneration
         if (hasParam("Regeneration")) {
-            Card card = (Card) runParams.get(AbilityKey.Card);
+            Card card = (Card) runParams.get(AbilityKey.Affected);
             if (!runParams.containsKey(AbilityKey.Regeneration) || !(Boolean)runParams.get(AbilityKey.Regeneration)) {
                 return false;
             }
@@ -78,7 +75,7 @@ public class ReplaceDestroy extends ReplacementEffect {
      */
     @Override
     public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
-        sa.setReplacingObject(AbilityKey.Card, runParams.get(AbilityKey.Card));
+        sa.setReplacingObject(AbilityKey.Card, runParams.get(AbilityKey.Affected));
     }
 
 }

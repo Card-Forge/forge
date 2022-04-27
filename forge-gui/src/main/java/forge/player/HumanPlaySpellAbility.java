@@ -138,6 +138,10 @@ public class HumanPlaySpellAbility {
                     keywordColor = true;
                 }
             }
+            if (ability.hasParam("ActivateIgnoreColor")) {
+                AbilityUtils.applyManaColorConversion(payment, MagicColor.Constant.ANY_COLOR_CONVERSION);
+                manaColorConversion = true;
+            }
 
             if (keywordColor) {
                 AbilityUtils.applyManaColorConversion(payment, params);

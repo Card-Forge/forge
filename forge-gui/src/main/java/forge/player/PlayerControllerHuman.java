@@ -1842,7 +1842,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 if (!currentSa.isTrigger() && currentSa.usesTargeting()) {
                     needPrompt = true;
                 }
-                if (!needPrompt && !saStr.equals(firstStr)) {
+                if (!needPrompt && !saStr.equals(firstStr) && !currentSa.hasParam("OrderDuplicates")) {
                     needPrompt = true; // prompt by default unless all abilities
                                        // are the same
                 }
@@ -2101,12 +2101,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         for (Player p : unplayable.keySet()) {
             final Map<DeckSection, List<? extends PaperCard>> removedUnplayableCards = unplayable.get(p);
-            final List<String> labels = new ArrayList<>();
+            final List<Object> labels = new ArrayList<>();
             for (final DeckSection s: new TreeSet<>(removedUnplayableCards.keySet())) {
                 labels.add("=== " + DeckAIUtils.getLocalizedDeckSection(localizer, s) + " ===");
-                for (PaperCard c: removedUnplayableCards.get(s)) {
-                    labels.add(c.toString());
-                }
+                labels.addAll(removedUnplayableCards.get(s));
             }
             getGui().reveal(localizer.getMessage("lblActionFromPlayerDeck", message, Lang.getInstance().getPossessedObject(MessageUtil.mayBeYou(player, p), "")),
                     ImmutableList.copyOf(labels));

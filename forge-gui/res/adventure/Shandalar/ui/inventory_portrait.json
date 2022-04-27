@@ -87,7 +87,7 @@
     {
       "type": "TextButton",
       "name": "delete",
-      "text": "Delete",
+      "text": "Discard",
       "width": 80,
       "height": 30,
       "x": 8,

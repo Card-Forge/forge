@@ -4,7 +4,7 @@ Types:Creature Dragon
 PT:4/4
 K:Flying
 K:Haste
-K:CARDNAME attacks each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRollDice | TriggerDescription$ At the beginning of combat on your turn, each player rolls a d20. If one or more opponents had the highest result, CARDNAME can't attack those players or planeswalkers they control this combat.
 SVar:TrigRollDice:DB$ RollDice | Defined$ Player | Sides$ 20 | RememberHighestPlayer$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STCantAttack | RememberObjects$ Player.Opponent+IsRemembered | Duration$ UntilEndOfCombat | SubAbility$ DBCleanup

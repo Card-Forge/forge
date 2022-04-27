@@ -321,3 +321,12 @@ touchKnob
   orig: 72, 72
   offset: 0, 0
   index: -1
+dummy
+    rotate: false
+    xy: 0, 360
+    size: 5,5
+    orig: 1,1
+    split: 1, 1, 1, 1
+    pad: 0, 0, 0, 0
+    offset: 0,0
+    index:-1

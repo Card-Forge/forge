@@ -180,8 +180,10 @@ public class CostExile extends CostPartWithList {
     @Override
     protected Card doPayment(SpellAbility ability, Card targetCard, final boolean effect) {
         final Game game = targetCard.getGame();
+        final Card host = ability.getHostCard();
         Card newCard = game.getAction().exile(targetCard, null);
-        newCard.setExiledWith(ability.getHostCard());
+        host.addExiledCard(newCard);
+        newCard.setExiledWith(host);
         newCard.setExiledBy(ability.getActivatingPlayer());
         return newCard;
     }

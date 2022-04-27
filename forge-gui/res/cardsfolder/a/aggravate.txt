@@ -1,7 +1,8 @@
 Name:Aggravate
 ManaCost:3 R R
 Types:Instant
-A:SP$ DamageAll | Cost$ 3 R R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | RememberDamaged$ True | ValidCards$ Creature | ValidDescription$ each creature target player controls. | SubAbility$ DBAttack | SpellDescription$ CARDNAME deals 1 damage to each creature target player controls.
-SVar:DBAttack:DB$ Pump | Defined$ Remembered | KW$ HIDDEN CARDNAME attacks each combat if able. | SubAbility$ DBCleanup | SpellDescription$ Each creature dealt damage this way attacks this turn if able.
+A:SP$ DamageAll | ValidTgts$ Player | NumDmg$ 1 | RememberDamaged$ True | ValidCards$ Creature | ValidDescription$ each creature target player controls. | SubAbility$ DBAnimate | SpellDescription$ CARDNAME deals 1 damage to each creature target player controls.
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | DefinedDesc$ Each creature dealt damage this way | staticAbilities$ MustAttack | SubAbility$ DBCleanup | SpellDescription$ Each creature dealt damage this way attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks this turn if able.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Aggravate deals 1 damage to each creature target player controls. Each creature dealt damage this way attacks this turn if able.

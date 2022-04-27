@@ -68,6 +68,7 @@ public class MillEffect extends SpellAbilityEffect {
                         host = sa.getHostCard();
                     }
                     for (final Card c : milled) {
+                        host.addExiledCard(c);
                         c.setExiledWith(host);
                         if (facedown) {
                             c.turnFaceDown(true);

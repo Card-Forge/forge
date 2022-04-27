@@ -45,10 +45,10 @@ public class CountersMoveEffect extends SpellAbilityEffect {
             }
         }
         final String countername = sa.getParam("CounterType");
-        final String counterAmount = sa.getParam("CounterNum");
+        final String counterAmount = sa.getParamOrDefault("CounterNum", "1");
         int amount = 0;
         if (!"Any".equals(counterAmount) && !"All".equals(counterAmount)) {
-            amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
+            amount = AbilityUtils.calculateAmount(sa.getHostCard(), counterAmount, sa);
         }
 
         sb.append("Move ");
@@ -81,7 +81,7 @@ public class CountersMoveEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final String counterName = sa.getParam("CounterType");
-        final String counterNum = sa.getParam("CounterNum");
+        final String counterNum = sa.getParamOrDefault("CounterNum", "1");
         final Player player = sa.getActivatingPlayer();
         final PlayerController pc = player.getController();
         final Game game = host.getGame();
@@ -320,7 +320,6 @@ public class CountersMoveEffect extends SpellAbilityEffect {
 
     protected void removeCounter(SpellAbility sa, final Card src, final Card dest, CounterType cType, String counterNum, Map<CounterType, Integer> countersToAdd) {
         final Card host = sa.getHostCard();
-        //final String counterNum = sa.getParam("CounterNum");
         final Player player = sa.getActivatingPlayer();
         final PlayerController pc = player.getController();
         final Game game = host.getGame();

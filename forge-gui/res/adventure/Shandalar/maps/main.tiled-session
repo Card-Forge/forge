@@ -3,12 +3,12 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/waste_town.tmx",
+    "activeFile": "map/debug_map.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
+        "obj",
         "tileset",
         "map/main_story",
-        "obj",
         "map"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -102,11 +102,11 @@
             }
         },
         "map/catlair_1.tmx": {
-            "scale": 3,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 235.5,
-                "y": 135.66666666666663
+                "x": 280.3333333333333,
+                "y": 108
             }
         },
         "map/catlair_2.tmx": {
@@ -142,11 +142,11 @@
             }
         },
         "map/cave_1.tmx": {
-            "scale": 1,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 219.5,
-                "y": 135
+                "x": 234.33333333333331,
+                "y": 217.3333333333333
             }
         },
         "map/cave_10.tmx": {
@@ -1382,11 +1382,11 @@
             }
         },
         "map/crypt.tmx": {
-            "scale": 2,
+            "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 225.25,
-                "y": 135.5
+                "x": 242.99999999999997,
+                "y": 150
             }
         },
         "map/crypt_2.tmx": {
@@ -1418,15 +1418,15 @@
             "selectedLayer": 3,
             "viewCenter": {
                 "x": 311,
-                "y": 319.33333333333326
+                "y": 318.6666666666667
             }
         },
         "map/debug_map.tmx": {
-            "scale": 8,
-            "selectedLayer": 3,
+            "scale": 3,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 240,
-                "y": 239.875
+                "x": 242.83333333333334,
+                "y": 325.3333333333333
             }
         },
         "map/djinnpalace_1.tmx": {
@@ -1542,11 +1542,11 @@
             }
         },
         "map/forest_town.tmx": {
-            "scale": 2,
+            "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 233.25,
-                "y": 135.5
+                "x": 254.99999999999997,
+                "y": 132.66666666666669
             }
         },
         "map/fort_1.tmx": {
@@ -1689,7 +1689,7 @@
             "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 232,
+                "x": 232.5,
                 "y": 136
             }
         },
@@ -1726,11 +1726,11 @@
             }
         },
         "map/grove_1.tmx": {
-            "scale": 3,
+            "scale": 1.5,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": 240,
-                "y": 136
+                "x": 255.66666666666666,
+                "y": 103.33333333333334
             }
         },
         "map/grove_10.tmx": {
@@ -1918,11 +1918,11 @@
             }
         },
         "map/island_town.tmx": {
-            "scale": 4,
+            "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 236.625,
-                "y": 135.75
+                "x": 248.99999999999997,
+                "y": 114
             }
         },
         "map/magetower_1.tmx": {
@@ -2065,8 +2065,8 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 233.25,
-                "y": 311
+                "x": 235.25,
+                "y": 208.5
             }
         },
         "map/main_story/blue_castle.tmx": {
@@ -2078,11 +2078,11 @@
             }
         },
         "map/main_story/colorless_castle.tmx": {
-            "scale": 3,
-            "selectedLayer": 4,
+            "scale": 2,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 179.5,
-                "y": 358
+                "x": 243.25,
+                "y": 340
             }
         },
         "map/main_story/crypt.tmx": {
@@ -2094,11 +2094,11 @@
             }
         },
         "map/main_story/final_castle.tmx": {
-            "scale": 2,
-            "selectedLayer": 2,
+            "scale": 1.5,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 266.25,
-                "y": 554
+                "x": 269,
+                "y": 1692
             }
         },
         "map/main_story/green_castle.tmx": {
@@ -2663,7 +2663,7 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 235.33333333333331,
+                "x": 235.5,
                 "y": 135.66666666666663
             }
         },
@@ -2714,7 +2714,7 @@
         "tileset/main.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1.5,
-            "scaleInEditor": 0.75
+            "scaleInEditor": 1
         }
     },
     "map.height": 60,
@@ -2726,24 +2726,23 @@
     "openFiles": [
         "map/debug_map.tmx",
         "tileset/buildings.tsx",
-        "tileset/main.tsx",
-        "map/waste_town.tmx"
+        "tileset/main.tsx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
     "recentFiles": [
+        "map/main_story/black_castle.tmx",
+        "map/main_story/final_castle.tmx",
+        "map/main_story/green_castle.tmx",
+        "map/main_story/colorless_castle.tmx",
         "map/debug_map.tmx",
         "tileset/buildings.tsx",
         "tileset/main.tsx",
-        "map/waste_town.tmx",
-        "map/main_story/white_castle.tmx",
-        "map/main_story/final_castle.tmx",
-        "map/main_story/black_castle.tmx",
-        "map/main_story/red_castle.tmx",
-        "map/main_story/green_castle.tmx",
-        "map/main_story/blue_castle.tmx",
-        "map/main_story/colorless_castle.tmx",
-        "map/barbariancamp_2.tmx"
+        "map/cave_1.tmx",
+        "map/catlair_1.tmx",
+        "map/cave_2.tmx",
+        "map/crypt.tmx",
+        "map/crypt_2.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true

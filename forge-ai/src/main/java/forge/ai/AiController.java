@@ -642,20 +642,18 @@ public class AiController {
             // Ideally this should cast canPlaySa to determine that the AI is truly able/willing to cast a spell,
             // but that is currently difficult to implement due to various side effects leading to stack overflow.
             Card host = sa.getHostCard();
-            if (!ComputerUtil.castPermanentInMain1(player, sa) && host != null && !host.isLand() && ComputerUtilCost.canPayCost(sa, player, false)) {
-                if (sa instanceof SpellPermanent) {
-                    return sa;
-                }
+            if (sa instanceof SpellPermanent && host != null && !host.isLand() && !ComputerUtil.castPermanentInMain1(player, sa) && ComputerUtilCost.canPayCost(sa, player, false)) {
+                return sa;
             }
         }
         return null;
     }
 
-    public boolean reserveManaSources(SpellAbility sa) {
-        return reserveManaSources(sa, PhaseType.MAIN2, false, false, null);
-    }
     public boolean reserveManaSourcesForNextSpell(SpellAbility sa, SpellAbility exceptForSa) {
         return reserveManaSources(sa, null, false, true, exceptForSa);
+    }
+    public boolean reserveManaSources(SpellAbility sa) {
+        return reserveManaSources(sa, PhaseType.MAIN2, false, false, null);
     }
     public boolean reserveManaSources(SpellAbility sa, PhaseType phaseType, boolean enemy) {
         return reserveManaSources(sa, phaseType, enemy, true, null);

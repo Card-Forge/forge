@@ -192,6 +192,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                     if (host == null) {
                         host = sa.getHostCard();
                     }
+                    host.addExiledCard(movedCard);
                     movedCard.setExiledWith(host);
                     movedCard.setExiledBy(host.getController());
                 }

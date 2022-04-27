@@ -51,9 +51,7 @@ public class WorldData implements Serializable {
         if (allEnemies == null) {
             Json json = new Json();
             FileHandle handle = Config.instance().getFile(Paths.ENEMIES);
-            if (handle.exists())
-            {
-
+            if (handle.exists()) {
                 Array readList =  json.fromJson(Array.class, EnemyData.class, handle);
                 allEnemies = readList;
             }
@@ -62,8 +60,7 @@ public class WorldData implements Serializable {
     }
 
     public static EnemyData getEnemy(String enemy) {
-        for(EnemyData data: new Array.ArrayIterator<>(getAllEnemies()))
-        {
+        for(EnemyData data: new Array.ArrayIterator<>(getAllEnemies())) {
             if(data.name.equals(enemy))
                 return data;
         }
@@ -88,6 +85,5 @@ public class WorldData implements Serializable {
         }
         return biomes;
     }
-
 
 }

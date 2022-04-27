@@ -709,7 +709,8 @@ public class SpecialCardAi {
                 }
             }
 
-            int changeNum = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("ChangeNum"), sa);
+            int changeNum = AbilityUtils.calculateAmount(sa.getHostCard(),
+                    sa.getParamOrDefault("ChangeNum", "1"), sa);
             CardCollection lib = CardLists.filter(ai.getCardsIn(ZoneType.Library),
                     Predicates.not(CardPredicates.nameEquals(sa.getHostCard().getName())));
             Collections.sort(lib, CardLists.CmcComparatorInv);

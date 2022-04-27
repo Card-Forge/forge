@@ -11,7 +11,6 @@ import forge.ai.AiController;
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCombat;
-import forge.ai.ComputerUtilMana;
 import forge.ai.PlayerControllerAi;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
@@ -122,8 +121,8 @@ public class EffectAi extends SpellAbilityAi {
                 randomReturn = true;
             } else if (logic.equals("WillCastCreature") && ai.isAI()) {
                 AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-                SpellAbility saCreature = aic.predictSpellToCastInMain2(ApiType.PermanentCreature);
-                randomReturn = saCreature != null && ComputerUtilMana.canPayManaCost(saCreature, ai, 0, false);
+                SpellAbility saCreature = aic.predictSpellToCastInMain2(ApiType.PermanentNoncreature);
+                randomReturn = saCreature != null;
             } else if (logic.equals("Always")) {
                 randomReturn = true;
             } else if (logic.equals("Main1")) {

@@ -2,6 +2,7 @@ Name:Furor of the Bitten
 ManaCost:R
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME attacks each combat if able. | Description$ Enchanted creature gets +2/+2 and attacks each combat if able.
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2 and attacks each combat if able.
+S:Mode$ MustAttack | ValidCreature$ Creature.EnchantedBy | Secondary$ True
 Oracle:Enchant creature\nEnchanted creature gets +2/+2 and attacks each combat if able.

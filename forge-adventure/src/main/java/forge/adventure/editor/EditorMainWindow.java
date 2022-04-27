@@ -14,6 +14,9 @@ public class EditorMainWindow extends JFrame {
         BorderLayout layout=new BorderLayout();
         setLayout(layout);
         add(tabs);
+        tabs.addTab("POI",new PointOfInterestEditor());
+        tabs.addTab("World",new WorldEditor());
+        tabs.addTab("Items",new ItemsEditor());
         tabs.addTab("Enemies",new EnemyEditor());
         setVisible(true);
         setSize(800,600);

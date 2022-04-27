@@ -87,6 +87,7 @@ public enum TrackableProperty {
     NeedsTapAnimation(TrackableTypes.BooleanType, FreezeMode.IgnoresFreeze),
 
     ImprintedCards(TrackableTypes.CardViewCollectionType),
+    ExiledCards(TrackableTypes.CardViewCollectionType),
     HauntedBy(TrackableTypes.CardViewCollectionType),
     Haunting(TrackableTypes.CardViewType),
     MustBlockCards(TrackableTypes.CardViewCollectionType),

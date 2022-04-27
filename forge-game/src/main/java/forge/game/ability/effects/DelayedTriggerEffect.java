@@ -108,6 +108,17 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
                 }
             };
             game.getCleanup().addUntil(nextTurnTrig);
+        }  else if (mapParams.containsKey("UpcomingTurn")) {
+            final GameCommand upcomingTurnTrig = new GameCommand() {
+                private static final long serialVersionUID = -5860518814760461373L;
+
+                @Override
+                public void run() {
+                    trigHandler.registerDelayedTrigger(delTrig);
+                    
+                }
+            };
+            game.getCleanup().addUntil(upcomingTurnTrig);
         } else {
             trigHandler.registerDelayedTrigger(delTrig);
         }

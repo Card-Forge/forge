@@ -575,7 +575,6 @@ public class GameAction {
                 copied.setTapped(false); //untap card after it leaves the battlefield if needed
                 game.fireEvent(new GameEventCardTapped(c, false));
             }
-            copied.setMustAttackEntity(null);
         }
 
         // Need to apply any static effects to produce correct triggers
@@ -957,7 +956,10 @@ public class GameAction {
         if (c.isInZone(ZoneType.Stack)) {
             c.getGame().getStack().remove(c);
         }
-        c.getZone().remove(c);
+        // in some corner cases there's no zone yet (copied spell that failed targeting)
+        if (c.getZone() != null) {
+            c.getZone().remove(c);
+        }
 
         // CR 603.6c other players LTB triggers should work
         if (!skipTrig) {
@@ -971,13 +973,15 @@ public class GameAction {
             if (lki == null) {
                 lki = CardUtil.getLKICopy(c);
             }
-            if (game.getCombat() != null) {
-                game.getCombat().removeFromCombat(c);
-                game.getCombat().saveLKI(lki);
-            }
-            // again, make sure no triggers run from cards leaving controlled by loser
-            if (!lki.getController().equals(lki.getOwner())) {
-                game.getTriggerHandler().registerActiveLTBTrigger(lki);
+            if (lki.isInPlay()) {
+                if (game.getCombat() != null) {
+                    game.getCombat().saveLKI(lki);
+                    game.getCombat().removeFromCombat(c);
+                }
+                // again, make sure no triggers run from cards leaving controlled by loser
+                if (!lki.getController().equals(lki.getOwner())) {
+                    game.getTriggerHandler().registerActiveLTBTrigger(lki);
+                }
             }
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
             runParams.put(AbilityKey.CardLKI, lki);
@@ -1771,9 +1775,8 @@ public class GameAction {
         }
 
         // Replacement effects
-        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromCard(c);
+        final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(c);
         repRunParams.put(AbilityKey.Source, sa);
-        repRunParams.put(AbilityKey.Affected, c);
         repRunParams.put(AbilityKey.Regeneration, regenerate);
         if (params != null) {
             repRunParams.putAll(params);

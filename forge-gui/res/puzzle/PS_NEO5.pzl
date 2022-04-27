@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Kamigawa: Neon Dynasty #05
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/03/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume that any additional cards which could be accessed (drawn, searched, etc.) are not relevant to the puzzle. Remember that your solution must satisfy all possible blocking options!
+[state]
+humanlife=20
+ailife=22
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Kami of Transmutation;Sokenzan Smelter;Eiganjo, Seat of the Empire;Artillery Enthusiast;Rabbit Battery;Ironhoof Boar
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Tameshi, Reality Architect;Towashi Songshaper;Towashi Songshaper;Wedding Invitation;Furycalm Snarl;Furycalm Snarl;Furycalm Snarl;Stormcarved Coast;Stormcarved Coast;Eiganjo, Seat of the Empire
+aibattlefield=Angel of Unity;Nullpriest of Oblivion

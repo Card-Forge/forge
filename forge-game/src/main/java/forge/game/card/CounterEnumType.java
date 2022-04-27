@@ -18,6 +18,8 @@
 
 package forge.game.card;
 
+import java.util.Locale;
+
 import com.google.common.collect.ImmutableList;
 
 /**
@@ -431,7 +433,7 @@ public enum CounterEnumType {
     }
 
     public static CounterEnumType getType(final String name) {
-        final String replacedName = name.replace("/", "").replaceAll("\\+", "p").replaceAll("\\-", "m").toUpperCase();
+        final String replacedName = name.replace("/", "").replaceAll("\\+", "p").replaceAll("\\-", "m").toUpperCase(Locale.ROOT);
         return Enum.valueOf(CounterEnumType.class, replacedName);
     }
 

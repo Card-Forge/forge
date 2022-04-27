@@ -3,8 +3,6 @@ package forge.adventure.editor;
 import forge.adventure.data.EnemyData;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 /**
@@ -15,6 +13,7 @@ public class EnemyEdit extends JComponent {
 
 
     JTextField nameField=new JTextField();
+    JTextField colorField=new JTextField();
     JSpinner lifeFiled= new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
     JSpinner spawnRate= new JSpinner(new SpinnerNumberModel(0.0, 0., 1, 0.1));
     JSpinner difficulty= new JSpinner(new SpinnerNumberModel(0.0, 0., 1, 0.1));
@@ -30,7 +29,7 @@ public class EnemyEdit extends JComponent {
     {
 
         JComponent center=new JComponent() {  };
-        center.setLayout(new GridLayout(8,2));
+        center.setLayout(new GridLayout(9,2));
 
         center.add(new JLabel("Name:")); center.add(nameField);
         center.add(new JLabel("Life:")); center.add(lifeFiled);
@@ -40,72 +39,24 @@ public class EnemyEdit extends JComponent {
         center.add(new JLabel("Deck:")); center.add(deck);
         center.add(new JLabel("Sprite:")); center.add(atlas);
         center.add(new JLabel("Equipment:")); center.add(equipment);
+        center.add(new JLabel("Colors:")); center.add(colorField);
         BorderLayout layout=new BorderLayout();
         setLayout(layout);
         add(center,BorderLayout.PAGE_START);
         add(rewards,BorderLayout.CENTER);
         add(preview,BorderLayout.LINE_START);
 
-        equipment.getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
-            @Override
-            public void run() {
-                EnemyEdit.this.updateEnemy();
-            }
-        }));
-        atlas.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
-            @Override
-            public void run() {
-                EnemyEdit.this.updateEnemy();
-            }
-        }));
-        nameField.getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
-            @Override
-            public void run() {
-                EnemyEdit.this.updateEnemy();
-            }
-        }));
-        deck.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(new Runnable() {
-            @Override
-            public void run() {
-                EnemyEdit.this.updateEnemy();
-            }
-        }));
-        lifeFiled.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                EnemyEdit.this.updateEnemy();
-            }
-        });
-        speed.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                EnemyEdit.this.updateEnemy();
-            }
-        });
-        difficulty.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                EnemyEdit.this.updateEnemy();
-            }
-        });
-        spawnRate.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                EnemyEdit.this.updateEnemy();
-            }
-        });
-        rewards.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                EnemyEdit.this.updateEnemy();
-            }
-        });
-        lifeFiled.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                EnemyEdit.this.updateEnemy();
-            }
-        });
+        equipment.getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
+        atlas.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
+        colorField.getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
+        nameField.getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
+        deck.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
+        lifeFiled.addChangeListener(e -> EnemyEdit.this.updateEnemy());
+        speed.addChangeListener(e -> EnemyEdit.this.updateEnemy());
+        difficulty.addChangeListener(e -> EnemyEdit.this.updateEnemy());
+        spawnRate.addChangeListener(e -> EnemyEdit.this.updateEnemy());
+        rewards.addChangeListener(e -> EnemyEdit.this.updateEnemy());
+        lifeFiled.addChangeListener(e -> EnemyEdit.this.updateEnemy());
         refresh();
     }
 
@@ -113,6 +64,7 @@ public class EnemyEdit extends JComponent {
         if(currentData==null||updating)
             return;
         currentData.name=nameField.getText();
+        currentData.colors=colorField.getText();
         currentData.life= (int) lifeFiled.getValue();
         currentData.sprite= atlas.getEdit().getText();
         if(equipment.getText().isEmpty())
@@ -141,6 +93,7 @@ public class EnemyEdit extends JComponent {
         }
         updating=true;
         nameField.setText(currentData.name);
+        colorField.setText(currentData.colors);
         lifeFiled.setValue(currentData.life);
         atlas.getEdit().setText(currentData.sprite);
         if(currentData.equipment!=null)

@@ -2,6 +2,7 @@ Name:Alluring Siren
 ManaCost:1 U
 Types:Creature Siren
 PT:1/1
-A:AB$ MustAttack | Cost$ T | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls. | Defender$ You | ThisTurn$ True | SpellDescription$ Target creature an opponent controls attacks you this turn if able.
+A:AB$ Effect | Cost$ T | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | RememberObjects$ Targeted | StaticAbilities$ MustAttack | IsCurse$ True | StackDescription$ {c:Targeted} attacks you this turn if able. | SpellDescription$ Target creature an opponent controls attacks you this turn if able.
+SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.IsRemembered | MustAttack$ You | Description$ This creature attacks you this turn if able.
 AI:RemoveDeck:All
 Oracle:{T}: Target creature an opponent controls attacks you this turn if able.

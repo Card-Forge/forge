@@ -2,6 +2,7 @@ Name:Into the Fray
 ManaCost:R
 Types:Instant Arcane
 K:Splice:Arcane:R
-A:SP$ Pump | Cost$ R | ValidTgts$ Creature | KW$ HIDDEN CARDNAME attacks each combat if able. | TgtPrompt$ Select target creature | SpellDescription$ Target creature attacks this turn if able.
+A:SP$ Animate | ValidTgts$ Creature | staticAbilities$ MustAttack | SpellDescription$ Target creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks this turn if able.
 AI:RemoveDeck:All
 Oracle:Target creature attacks this turn if able.\nSplice onto Arcane {R} (As you cast an Arcane spell, you may reveal this card from your hand and pay its splice cost. If you do, add this card's effects to that spell.)

@@ -1,9 +1,17 @@
 package forge.adventure.stage;
 
 
+import com.badlogic.gdx.utils.Array;
 import forge.StaticData;
+import forge.adventure.data.EnemyData;
+import forge.adventure.data.WorldData;
 import forge.adventure.pointofintrest.PointOfInterest;
+import forge.adventure.scene.SceneType;
 import forge.adventure.util.Current;
+import forge.card.ColorSet;
+import forge.deck.Deck;
+import forge.deck.DeckProxy;
+import forge.game.GameType;
 import forge.item.PaperCard;
 
 import java.util.ArrayList;
@@ -161,9 +169,53 @@ public class ConsoleCommandInterpreter {
                 return "Added item "+s[0];
             return "can not find item "+s[0];
         });
-        registerCommand(new String[]{"heal"}, s -> {
-            Current.player().heal();
+        registerCommand(new String[]{"fullHeal"}, s -> {
+            Current.player().fullHeal();
             return "Player life back to "+Current.player().getLife();
+        });
+        registerCommand(new String[]{"setColorID"}, s -> {
+            if(s.length < 1) return "Please specify color ID: Valid choices: B, G, R, U, W, C. Example:\n\"setColorID G\"";
+            Current.player().setColorIdentity(s[0]);
+            return "Player color identity set to " + Current.player().getColorIdentity();
+        });
+        registerCommand(new String[]{"reloadScenes"}, s -> {
+            SceneType.InventoryScene.instance.resLoaded();
+            SceneType.PlayerStatisticScene.instance.resLoaded();
+
+            return "Force reload status scenes. Might be unstable.";
+        });
+        registerCommand(new String[]{"resetQuests"}, s -> {
+            Current.player().resetQuestFlags();
+            return "All global quest flags have been reset.";
+        });
+        registerCommand(new String[]{"resetMapQuests"}, s -> {
+            if(!MapStage.getInstance().isInMap()) return "Only supported inside a map.";
+            MapStage.getInstance().resetQuestFlags();
+            return "All local quest flags have been reset.";
+        });
+        registerCommand(new String[]{"dumpEnemyDeckColors"}, s -> {
+            for(EnemyData E : new Array.ArrayIterator<>(WorldData.getAllEnemies())){
+                Deck D = E.generateDeck();
+                DeckProxy DP = new DeckProxy(D, "Constructed", GameType.Constructed, null);
+                ColorSet colorSet = DP.getColor();
+                System.out.printf("%s: Colors: %s (%s%s%s%s%s%s)\n", D.getName(), DP.getColor(),
+                        (colorSet.hasBlack()    ? "B" : ""),
+                        (colorSet.hasGreen()    ? "G" : ""),
+                        (colorSet.hasRed()      ? "R" : ""),
+                        (colorSet.hasBlue()     ? "U" : ""),
+                        (colorSet.hasWhite()    ? "W" : ""),
+                        (colorSet.isColorless() ? "C" : "")
+                );
+            }
+            return "Enemy deck color list dumped to stdout.";
+        });
+        registerCommand(new String[]{"heal", "amount"}, s -> {
+            if(s.length<1) return "Command needs 1 parameter";
+            int N = 0;
+            try { N = Integer.parseInt(s[0]); }
+            catch (Exception e) { return "Can not convert " + s[0] + " to integer"; }
+            Current.player().heal(N);
+            return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
         });
         registerCommand(new String[]{"debug","on"}, s -> {
             Current.setDebug(true);

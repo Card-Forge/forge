@@ -109,7 +109,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Table<Long, Long, List<String>> hiddenExtrinsicKeywords = TreeBasedTable.create();
 
     // cards attached or otherwise linked to this card
-    private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, convokedCards, imprintedCards, encodedCards;
+    private CardCollection hauntedBy, devouredCards, exploitedCards, delvedCards, convokedCards, imprintedCards,
+            exiledCards, encodedCards;
     private CardCollection gainControlTargets, chosenCards;
     private CardCollection mergedCards;
     private Map<Long, CardCollection> mustBlockCards = Maps.newHashMap();
@@ -125,9 +126,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private SpellAbility effectSourceAbility;
 
     private GameEntity entityAttachedTo;
-
-    private GameEntity mustAttackEntity;
-    private GameEntity mustAttackEntityThisTurn;
 
     private final Map<StaticAbility, CardPlayOption> mayPlay = Maps.newHashMap();
 
@@ -339,6 +337,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesGameStatic = HashBasedTable.create();
 
     private CombatLki combatLKI;
+
+    private ReplacementEffect shieldCounterReplaceDamage = null;
+    private ReplacementEffect shieldCounterReplaceDestroy = null;
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -1082,6 +1083,31 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         imprintedCards = view.clearCards(imprintedCards, TrackableProperty.ImprintedCards);
     }
 
+    public final CardCollectionView getExiledCards() {
+        return CardCollection.getView(exiledCards);
+    }
+    public final boolean hasExiledCard() {
+        return FCollection.hasElements(exiledCards);
+    }
+    public final boolean hasExiledCard(Card c) {
+        return FCollection.hasElement(exiledCards, c);
+    }
+    public final void addExiledCard(final Card c) {
+        exiledCards = view.addCard(exiledCards, c, TrackableProperty.ExiledCards);
+    }
+    public final void addExiledCards(final Iterable<Card> cards) {
+        exiledCards = view.addCards(exiledCards, cards, TrackableProperty.ExiledCards);
+    }
+    public final void removeExiledCard(final Card c) {
+        exiledCards = view.removeCard(exiledCards, c, TrackableProperty.ExiledCards);
+    }
+    public final void removeExiledCards(final Iterable<Card> cards) {
+        exiledCards = view.removeCards(exiledCards, cards, TrackableProperty.ExiledCards);
+    }
+    public final void clearExiledCards() {
+        exiledCards = view.clearCards(exiledCards, TrackableProperty.ExiledCards);
+    }
+
     public final CardCollectionView getEncodedCards() {
         return CardCollection.getView(encodedCards);
     }
@@ -1336,21 +1362,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         mustBlockCards.clear();
         view.updateMustBlockCards(this);
     }
-
-    public final void setMustAttackEntity(final GameEntity e) {
-        mustAttackEntity = e;
-    }
-    public final GameEntity getMustAttackEntity() {
-        return mustAttackEntity;
-    }
-    public final void clearMustAttackEntity(final Player playerturn) {
-        if (getController().equals(playerturn)) {
-            mustAttackEntity = null;
-        }
-        mustAttackEntityThisTurn = mustAttackEntity;
-    }
-    public final GameEntity getMustAttackEntityThisTurn() { return mustAttackEntityThisTurn; }
-    public final void setMustAttackEntityThisTurn(GameEntity entThisTurn) { mustAttackEntityThisTurn = entThisTurn; }
 
     public final Card getCloneOrigin() {
         return cloneOrigin;
@@ -1686,6 +1697,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return;
         }
 
+        exiledWith.removeExiledCard(this);
         exiledWith.removeUntilLeavesBattlefield(this);
 
         exiledWith = null;
@@ -6066,7 +6078,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     @Override
     protected final boolean canBeEquippedBy(final Card equip) {
-        return isCreature() && isInPlay();
+        if (isCreature() && isInPlay()) {
+            return true;
+        } else if (isPlaneswalker() && isInPlay()) {
+            for (KeywordInterface inst : equip.getKeywords(Keyword.EQUIP)) {
+                if (inst.getOriginal().contains("planeswalker")) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -6112,6 +6133,26 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // Keywords are already sorted by Layer
         for (KeywordInterface kw : getUnhiddenKeywords(state)) {
             list.addAll(kw.getReplacements());
+        }
+
+        // Shield Counter aren't affected by Changed Card Traits
+        if (this.getCounters(CounterEnumType.SHIELD) > 0) {
+            String sa = "DB$ RemoveCounter | Defined$ Self | CounterType$ Shield | CounterNum$ 1";
+            if (shieldCounterReplaceDamage == null) {
+                String reStr = "Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | PreventionEffect$ True | AlwaysReplace$ True "
+            + "| Description$ If damage would be dealt to this permanent, prevent that damage and remove a shield counter from it.";
+                shieldCounterReplaceDamage = ReplacementHandler.parseReplacement(reStr, this, false, null);
+                shieldCounterReplaceDamage.setOverridingAbility(AbilityFactory.getAbility(sa, this));
+            }
+            if (shieldCounterReplaceDestroy == null) {
+                String reStr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.Self | ValidSource$ SpellAbility "
+            + "| Description$ If this permanent would be destroyed as the result of an effect, instead remove a shield counter from it";
+                shieldCounterReplaceDestroy = ReplacementHandler.parseReplacement(reStr, this, false, null);
+                shieldCounterReplaceDestroy.setOverridingAbility(AbilityFactory.getAbility(sa, this));
+            }
+
+            list.add(shieldCounterReplaceDamage);
+            list.add(shieldCounterReplaceDestroy);
         }
     }
 
@@ -6196,7 +6237,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         setRegeneratedThisTurn(0);
         resetShield();
         setBecameTargetThisTurn(false);
-        clearMustAttackEntity(turn);
         clearMustBlockCards();
         getDamageHistory().newTurn();
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttackedThisTurn());

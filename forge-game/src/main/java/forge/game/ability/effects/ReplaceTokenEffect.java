@@ -26,14 +26,18 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
         final Player p = sa.getActivatingPlayer();
         final Game game = card.getGame();
+        SpellAbility repSA = sa;
 
+        if (repSA.getReplacingObjects().isEmpty()) {
+            repSA = sa.getRootAbility();
+        }
         // ReplaceToken Effect only applies to one Player
-        Player affected = (Player) sa.getReplacingObject(AbilityKey.Player);
-        TokenCreateTable table = (TokenCreateTable) sa.getReplacingObject(AbilityKey.Token);
+        Player affected = (Player) repSA.getReplacingObject(AbilityKey.Player);
+        TokenCreateTable table = (TokenCreateTable) repSA.getReplacingObject(AbilityKey.Token);
 
         @SuppressWarnings("unchecked")
-        Map<AbilityKey, Object> originalParams = (Map<AbilityKey, Object>) sa
-                .getReplacingObject(AbilityKey.OriginalParams);
+        Map<AbilityKey, Object> originalParams =
+                (Map<AbilityKey, Object>) repSA.getReplacingObject(AbilityKey.OriginalParams);
 
         // currently the only ones that changes the amount does double it
         if ("Amount".equals(sa.getParam("Type"))) {

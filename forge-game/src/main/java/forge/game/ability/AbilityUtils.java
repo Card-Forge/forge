@@ -494,37 +494,30 @@ public class AbilityUtils {
             if (hType.equals("Players") || hType.equals("")) {
                 players.addAll(game.getPlayers());
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.equals("YourTeam")) {
+            } else if (hType.equals("YourTeam")) {
                 players.addAll(player.getYourTeam());
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.equals("Opponents")) {
+            } else if (hType.equals("Opponents")) {
                 players.addAll(player.getOpponents());
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.equals("RegisteredOpponents")) {
+            } else if (hType.equals("RegisteredOpponents")) {
                 players.addAll(Iterables.filter(game.getRegisteredPlayers(),PlayerPredicates.isOpponentOf(player)));
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.equals("Other")) {
+            } else if (hType.equals("Other")) {
                 players.addAll(player.getAllOtherPlayers());
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.equals("Remembered")) {
+            } else if (hType.equals("Remembered")) {
                 for (final Object o : card.getRemembered()) {
                     if (o instanceof Player) {
                         players.add((Player) o);
                     }
                 }
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.equals("NonActive")) {
+            } else if (hType.equals("NonActive")) {
                 players.addAll(game.getPlayers());
                 players.remove(game.getPhaseHandler().getPlayerTurn());
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.startsWith("PropertyYou")) {
+            } else if (hType.startsWith("PropertyYou")) {
                 if (ability instanceof SpellAbility) {
                     // Hollow One
                     players.add(((SpellAbility) ability).getActivatingPlayer());
@@ -532,8 +525,7 @@ public class AbilityUtils {
                     players.add(player);
                 }
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else if (hType.startsWith("Property")) {
+            } else if (hType.startsWith("Property")) {
                 String defined = hType.split("Property")[1];
                 for (Player p : game.getPlayersInTurnOrder()) {
                     if (ability instanceof SpellAbility && p.hasProperty(defined, ((SpellAbility) ability).getActivatingPlayer(), ability.getHostCard(), ability)) {
@@ -543,15 +535,12 @@ public class AbilityUtils {
                     }
                 }
                 val = playerXCount(players, calcX[1], card, ability);
-            }
-            else {
+            } else {
                 val = 0;
             }
-        }
-        else if (calcX[0].equals("OriginalHost")) {
+        } else if (calcX[0].equals("OriginalHost")) {
             val = xCount(ability.getOriginalHost(), calcX[1], ability);
-        }
-        else if (calcX[0].startsWith("Remembered")) {
+        } else if (calcX[0].startsWith("Remembered")) {
             // Add whole Remembered list to handlePaid
             final CardCollection list = new CardCollection();
             Card newCard = card;
@@ -595,7 +584,7 @@ public class AbilityUtils {
 
             val = handlePaid(list, calcX[1], card, ability);
         }
-        else if (calcX[0].matches("Enchanted")) {
+        else if (calcX[0].matches("Enchanted") || calcX[0].matches("Equipped")) {
             // Add whole Enchanted list to handlePaid
             final CardCollection list = new CardCollection();
             if (card.isEnchanting()) {
@@ -2762,14 +2751,22 @@ public class AbilityUtils {
             String[] paidparts = l[0].split("\\$", 2);
             String[] lparts = paidparts[0].split(" ", 2);
 
-            final CardCollectionView cardsInZones = lparts[0].length() > 5
-                ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(5)))
-                : game.getCardsIn(ZoneType.Battlefield);
-
-            if (paidparts.length > 1) {
-                return doXMath(handlePaid(CardLists.getValidCards(cardsInZones, lparts[1], player, c, ctb), paidparts[1], c, ctb), expr, c, ctb);
+            final CardCollectionView cardsInZones;
+            if (lparts[0].contains("All")) {
+                cardsInZones = game.getCardsInGame();
+            } else {
+                cardsInZones = lparts[0].length() > 5
+                        ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(5)))
+                                : game.getCardsIn(ZoneType.Battlefield);
             }
-            return doXMath(CardLists.getValidCardCount(cardsInZones, lparts[1], player, c, ctb), expr, c, ctb);
+
+            int cnt;
+            if (paidparts.length > 1) {
+                cnt = handlePaid(CardLists.getValidCards(cardsInZones, lparts[1], player, c, ctb), paidparts[1], c, ctb);
+            } else {
+                cnt = CardLists.getValidCardCount(cardsInZones, lparts[1], player, c, ctb);
+            }
+            return doXMath(cnt, expr, c, ctb);
         }
 
         if (sq[0].startsWith("MostCardName")) {

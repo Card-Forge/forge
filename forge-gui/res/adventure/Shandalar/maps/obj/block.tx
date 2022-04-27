@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <template>
- <tileset firstgid="1" source="../tileset/buildings.tsx"/>
- <object name="Dummy" type="dummy" gid="1307" width="16" height="16">
+ <tileset firstgid="1" source="../tileset/main.tsx"/>
+ <object name="Dummy" type="dummy" gid="4120" width="16" height="16">
   <properties>
    <property name="sprite" value=""/>
   </properties>

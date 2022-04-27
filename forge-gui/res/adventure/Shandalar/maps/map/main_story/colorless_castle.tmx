@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="69">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="69">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -7,7 +7,12 @@
  <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+   eJztkzEKwDAMA7N27iP7o7y3Q7cQFUm2KRQPtwScs+VkHmPMpml+y3U+rGdMXZYbwfSa5VJ7qXY6Ga+1js91KhlmZcx40Ntx3ezO0N2RmaNvtcrL1jl/CPmZ+apzfvO58yr/ZlfnZszuGfWU4XWyj3iVXCu8ajZN8yU3OswQ5g==
+  </data>
+ </layer>
+ <layer id="6" name="BackgroundBlend" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhDRxEIXQ4HjX45CixcyDAQNgdSn8r4YCSuBtId5MLwsjU95mqrqAPeAJMy1/I1EvtPE0vQKq7kdPwIzLz/hMKyoxQCu11ocBucu2tFWNgcAXqdUPSD8sfuNyDnO/ItRcZgOxHxujuQ3abCxY1tAKwsKGXfaNgaAAAL10Ung==
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="30">
@@ -43,13 +48,8 @@
   </object>
   <object id="52" template="../../obj/gate.tx" x="208" y="448">
    <properties>
-    <property name="dialog">[
-  {
-    &quot;effect&quot;:[],
-    &quot;name&quot;:&quot;ABC&quot;,
+    <property name="dialog">[{
     &quot;text&quot;:&quot;A big gate is blocking the path.&quot;,
-    &quot;loctext&quot;:&quot;&quot;,
-    &quot;condition&quot;:[],
     &quot;options&quot;:[
         { &quot;name&quot;:&quot;go away&quot; },
         {
@@ -57,12 +57,11 @@
           &quot;condition&quot;:[ { &quot;item&quot;:&quot;Strange Key&quot;} ],
           &quot;text&quot;:&quot;The gate is unlocked&quot;,
           &quot;options&quot;:[
-          {&quot;name&quot;:&quot;continue&quot;,&quot;effect&quot;: [ { &quot;removeItem&quot;:&quot;Strange Key&quot;,&quot;deleteMapObject&quot;:-1 } ] }
+          {&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;: [ { &quot;removeItem&quot;:&quot;Strange Key&quot;,&quot;deleteMapObject&quot;:-1 } ] }
         ]
       }
     ]
-  }
-]</property>
+}]</property>
    </properties>
   </object>
   <object id="54" template="../../obj/treasure.tx" x="208" y="80">

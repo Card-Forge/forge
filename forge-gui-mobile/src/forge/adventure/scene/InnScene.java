@@ -24,7 +24,7 @@ public class InnScene extends UIScene {
     }
 
     public void heal() {
-        Current.player().heal();
+        Current.player().fullHeal();
     }
 
     @Override

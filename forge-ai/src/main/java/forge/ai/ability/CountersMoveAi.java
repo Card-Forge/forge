@@ -214,7 +214,7 @@ public class CountersMoveAi extends SpellAbilityAi {
     private static int calcAmount(final SpellAbility sa, final CounterType cType) {
         final Card host = sa.getHostCard();
 
-        final String amountStr = sa.getParam("CounterNum");
+        final String amountStr = sa.getParamOrDefault("CounterNum", "1");
 
         // TODO handle proper calculation of X values based on Cost
         int amount = 0;
@@ -350,6 +350,9 @@ public class CountersMoveAi extends SpellAbilityAi {
             }
 
             return false;
+        } else if (sa.getMaxTargets() == 2) {
+            // TODO
+            return false;
         } else {
             // SA uses target for Defined
             // Source => Targeted
@@ -361,10 +364,8 @@ public class CountersMoveAi extends SpellAbilityAi {
             }
 
             final Card src = srcCards.get(0);
-            if (cType != null) {
-                if (src.getCounters(cType) <= 0) {
-                    return false;
-                }
+            if (cType != null && src.getCounters(cType) <= 0) {
+                return false;
             }
 
             Card lki = CardUtil.getLKICopy(src);

@@ -1663,7 +1663,7 @@ public class ComputerUtil {
         }
 
         if (saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll) {
-            if (saviour != null && saviour.getParam("CounterType").equals("P1P1")) {
+            if (saviour != null && saviour.hasParam("CounterType") && saviour.getParam("CounterType").equals("P1P1")) {
                 toughness = AbilityUtils.calculateAmount(saviour.getHostCard(), saviour.getParamOrDefault("CounterNum", "1"), saviour);
             } else {
                 return threatened;
@@ -1676,7 +1676,7 @@ public class ComputerUtil {
         // Lethal Damage => prevent damage/regeneration/bounce/shroud
         if (threatApi == ApiType.DealDamage || threatApi == ApiType.DamageAll) {
             // If PredictDamage is >= Lethal Damage
-            final int dmg = AbilityUtils.calculateAmount(topStack.getHostCard(),
+            final int dmg = AbilityUtils.calculateAmount(source,
                     topStack.getParam("NumDmg"), topStack);
             final SpellAbility sub = topStack.getSubAbility();
             boolean noRegen = false;
@@ -1756,7 +1756,7 @@ public class ComputerUtil {
                 && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump || saviourApi == ApiType.PumpAll
                 || saviourApi == ApiType.Protection || saviourApi == ApiType.PutCounter || saviourApi == ApiType.PutCounterAll
                 || saviourApi == null)) {
-            final int dmg = -AbilityUtils.calculateAmount(topStack.getHostCard(),
+            final int dmg = -AbilityUtils.calculateAmount(source,
                     topStack.getParam("NumDef"), topStack);
             for (final Object o : objects) {
                 if (o instanceof Card) {

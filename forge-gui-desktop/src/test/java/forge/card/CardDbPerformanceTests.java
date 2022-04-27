@@ -1,16 +1,17 @@
 package forge.card;
 
-import forge.item.PaperCard;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertNotNull;
 
 import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static org.testng.Assert.assertNotNull;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-public class CardDbPerformanceTests  extends CardDbTestCase {
+import forge.item.PaperCard;
+
+public class CardDbPerformanceTests extends CardDbCardMockTestCase {
 
     private Set<String> fullDbCardNames = new TreeSet<>();
 
@@ -23,11 +24,11 @@ public class CardDbPerformanceTests  extends CardDbTestCase {
             this.fullDbCardNames.add(card.getName());
     }
 
-    @Test(enabled = false)  // disabled to not run in battery
+    @Test(enabled = false) // disabled to not run in battery
     public void testBenchmarkFullDbGetCardLegacyImplementation() {
         int nRuns = 100;
         long averageTime = 0;
-        long minTime = 10000;   // 10 secs
+        long minTime = 10000; // 10 secs
         long maxTime = 0;
         for (int r = 1; r <= nRuns; r++) {
             long start = System.currentTimeMillis();
@@ -42,17 +43,17 @@ public class CardDbPerformanceTests  extends CardDbTestCase {
             if (timeRun > maxTime)
                 maxTime = timeRun;
         }
-        System.out.println("[LEGACY] Total Time (in sec): " + ((double) averageTime)/ 1000);
-        System.out.println("[LEGACY] Average Time (in sec): " + ((double) averageTime / nRuns)/ 1000);
-        System.out.println("[LEGACY] Best Time (in sec): " + ((double) minTime)/ 1000);
-        System.out.println("[LEGACY] Worst Time (in sec): " + ((double) maxTime)/ 1000);
+        System.out.println("[LEGACY] Total Time (in sec): " + ((double) averageTime) / 1000);
+        System.out.println("[LEGACY] Average Time (in sec): " + ((double) averageTime / nRuns) / 1000);
+        System.out.println("[LEGACY] Best Time (in sec): " + ((double) minTime) / 1000);
+        System.out.println("[LEGACY] Worst Time (in sec): " + ((double) maxTime) / 1000);
     }
 
-    @Test(enabled = false)  // disabled to not run in battery
+    @Test(enabled = false) // disabled to not run in battery
     public void testBenchmarkFullDbGetCardNewDbImplementation() {
         int nRuns = 100;
         long averageTime = 0;
-        long minTime = 10000;   // 10 secs
+        long minTime = 10000; // 10 secs
         long maxTime = 0;
         for (int r = 1; r <= nRuns; r++) {
             long start = System.currentTimeMillis();
@@ -67,14 +68,14 @@ public class CardDbPerformanceTests  extends CardDbTestCase {
             if (timeRun > maxTime)
                 maxTime = timeRun;
         }
-        System.out.println("[NEW] Total Time (in sec): " + ((double) averageTime)/ 1000);
-        System.out.println("[NEW] Average Time (in sec): " + ((double) averageTime / nRuns)/ 1000);
-        System.out.println("[NEW] Best Time (in sec): " + ((double) minTime)/ 1000);
-        System.out.println("[NEW] Worst Time (in sec): " + ((double) maxTime)/ 1000);
+        System.out.println("[NEW] Total Time (in sec): " + ((double) averageTime) / 1000);
+        System.out.println("[NEW] Average Time (in sec): " + ((double) averageTime / nRuns) / 1000);
+        System.out.println("[NEW] Best Time (in sec): " + ((double) minTime) / 1000);
+        System.out.println("[NEW] Worst Time (in sec): " + ((double) maxTime) / 1000);
     }
 
     @Test
-    public void testGetCardFullDbNewImplementationToProfile(){
+    public void testGetCardFullDbNewImplementationToProfile() {
         for (String name : this.fullDbCardNames) {
             PaperCard card = this.cardDb.getCard(name);
             assertNotNull(card);
@@ -82,7 +83,7 @@ public class CardDbPerformanceTests  extends CardDbTestCase {
     }
 
     @Test
-    public void testGetCardFullDbLegacyImplementationToProfile(){
+    public void testGetCardFullDbLegacyImplementationToProfile() {
         for (String name : this.fullDbCardNames) {
             PaperCard card = this.legacyCardDb.getCard(name);
             assertNotNull(card);
