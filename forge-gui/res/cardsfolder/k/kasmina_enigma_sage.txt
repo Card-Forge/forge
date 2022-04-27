@@ -2,7 +2,7 @@ Name:Kasmina, Enigma Sage
 ManaCost:1 G U
 Types:Legendary Planeswalker Kasmina
 Loyalty:2
-S:Mode$ Continuous | Affected$ Planeswalker.Other+YouCtrl | EffectZone$ Battlefield | GainsAbilitiesOf$ Card.Self | GainsLoyaltyAbilities$ True | Description$ Each other planeswalker you control has the loyalty abilities of CARDNAME.
+S:Mode$ Continuous | Affected$ Planeswalker.Other+YouCtrl | EffectZone$ Battlefield | GainsAbilitiesOfDefined$ Self | GainsValidAbilities$ Activated.Loyalty | Description$ Each other planeswalker you control has the loyalty abilities of CARDNAME.
 A:AB$ Scry | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | ScryNum$ 1 | SpellDescription$ Scry 1.
 A:AB$ Token | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | TokenScript$ gu_0_0_fractal | SubAbility$ DBPutCounter | RememberTokens$ True | SpellDescription$ Create a 0/0 green and blue Fractal creature token. Put X +1/+1 counters on it.
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
