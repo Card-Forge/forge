@@ -1,0 +1,12 @@
+Name:Dusk Mangler
+ManaCost:5 B B
+Types:Creature Horror
+PT:5/4
+K:AlternateAdditionalCost:Sac<1/Creature>:Discard<1/Card>:PayLife<4>
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, each opponent sacrifices a creature, discards a card, and loses 4 life.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ Opponent | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 4
+DeckHas:Ability$Sacrifice|Discard
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE3
+Oracle:As an additional cost to cast this spell, sacrifice a creature, discard a card, or pay 4 life.\nWhen Dusk Mangler enters the battlefield, each opponent sacrifices a creature, discards a card, and loses 4 life.
