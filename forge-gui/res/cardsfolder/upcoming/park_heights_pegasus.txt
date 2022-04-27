@@ -6,6 +6,5 @@ K:Flying
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | CheckSVar$ X | SVarCompare$ GE2 | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card if you had two or more creatures enter the battlefield under your control this turn.
 SVar:TrigDraw:DB$ Draw
-Oracle:Flying, trample
 SVar:X:Count$ThisTurnEntered_Battlefield_Creature.YouCtrl
-Whenever Park Heights Pegasus deals combat damage to a player, draw a card if you had two or more creatures enter the battlefield under your control this turn.
+Oracle:Flying, trample\nWhenever Park Heights Pegasus deals combat damage to a player, draw a card if you had two or more creatures enter the battlefield under your control this turn.
