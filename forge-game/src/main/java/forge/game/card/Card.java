@@ -36,6 +36,7 @@ import forge.game.GameEntityCounterTable;
 import forge.game.GameStage;
 import forge.game.GlobalRuleChange;
 import forge.game.IHasSVars;
+import forge.game.StaticLayerInterface;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -74,6 +75,7 @@ import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 import org.apache.commons.lang3.tuple.Pair;
@@ -150,10 +152,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final Table<Long, Long, CardTraitChanges> changedCardTraits = TreeBasedTable.create(); // Layer 6
 
     // stores the card traits created by static abilities
-    private final Table<StaticAbility, String, SpellAbility> storedSpellAbilility = TreeBasedTable.create();
+    private final Table<StaticAbility, String, SpellAbility> storedSpellAbility = TreeBasedTable.create();
     private final Table<StaticAbility, String, Trigger> storedTrigger = TreeBasedTable.create();
     private final Table<StaticAbility, String, ReplacementEffect> storedReplacementEffect = TreeBasedTable.create();
     private final Table<StaticAbility, String, StaticAbility> storedStaticAbility = TreeBasedTable.create();
+
+    private final Table<StaticLayerInterface, SpellAbility, SpellAbility> copiedSpellAbility = HashBasedTable.create();
 
     // x=timestamp y=StaticAbility id
     private final Table<Long, Long, CardColor> changedCardColorsByText = TreeBasedTable.create(); // Layer 3 by Text Change
@@ -330,11 +334,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private final ActivationTable numberGameActivations = new ActivationTable();
     private final ActivationTable numberAbilityResolved = new ActivationTable();
 
-    private final Map<SpellAbility, List<String>> chosenModesTurn = Maps.newHashMap();
-    private final Map<SpellAbility, List<String>> chosenModesGame = Maps.newHashMap();
-
-    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesTurnStatic = HashBasedTable.create();
-    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesGameStatic = HashBasedTable.create();
+    private final LinkedAbilityTable<String> chosenModesTurn = new LinkedAbilityTable<String>();
+    private final LinkedAbilityTable<String> chosenModesGame = new LinkedAbilityTable<String>();
 
     private CombatLki combatLKI;
 
@@ -4284,12 +4285,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final SpellAbility getSpellAbilityForStaticAbility(final String str, final StaticAbility stAb) {
-        SpellAbility result = storedSpellAbilility.get(stAb, str);
+        SpellAbility result = storedSpellAbility.get(stAb, str);
         if (result == null) {
             result = AbilityFactory.getAbility(str, this, stAb);
             result.setIntrinsic(false);
-            result.setGrantorStatic(stAb);
-            storedSpellAbilility.put(stAb, str, result);
+            result.addGrantedByStatic(stAb);
+            storedSpellAbility.put(stAb, str, result);
         }
         return result;
     }
@@ -4298,6 +4299,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         Trigger result = storedTrigger.get(stAb, str);
         if (result == null) {
             result = TriggerHandler.parseTrigger(str, this, false, stAb);
+            result.addGrantedByStatic(stAb);
             storedTrigger.put(stAb, str, result);
         }
         return result;
@@ -4308,6 +4310,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         ReplacementEffect result = storedReplacementEffect.get(stAb, str);
         if (result == null) {
             result = ReplacementHandler.parseReplacement(str, this, false, stAb);
+            result.addGrantedByStatic(stAb);
             storedReplacementEffect.put(stAb, str, result);
         }
         return result;
@@ -4317,7 +4320,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         StaticAbility result = storedStaticAbility.get(stAb, str);
         if (result == null) {
             result = StaticAbility.create(str, this, stAb.getCardState(), false);
+            result.addGrantedByStatic(stAb);
             storedStaticAbility.put(stAb, str, result);
+        }
+        return result;
+    }
+
+    public final SpellAbility copySpellAbilityForStaticAbility(final SpellAbility sa, final StaticAbility stAb, final boolean intrinsic) {
+        SpellAbility result = copiedSpellAbility.get(stAb, sa);
+        if (result == null) {
+            result = sa.copy(this, false);
+            if (stAb.hasParam("GainsAbilitiesLimitPerTurn")) {
+                result.setRestrictions(sa.getRestrictions());
+                result.getRestrictions().setLimitToCheck(stAb.getParam("GainsAbilitiesLimitPerTurn"));
+            }
+            result.setOriginalAbility(sa.getOriginalAbility()); // need to be set to get the Once Per turn Clause correct
+            result.addGrantedByStatic(stAb);
+            result.setIntrinsic(intrinsic);
+            copiedSpellAbility.put(stAb, sa, result);
         }
         return result;
     }
@@ -6913,91 +6933,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public List<String> getChosenModesTurn(SpellAbility ability) {
-        SpellAbility original = null;
-        SpellAbility root = ability.getRootAbility();
-
-        // because trigger spell abilities are copied, try to get original one
-        if (root.isTrigger()) {
-            original = root.getTrigger().getOverridingAbility();
-        } else {
-            original = ability.getOriginalAbility();
-            if (original == null) {
-                original = ability;
-            }
-        }
-
-        if (ability.getGrantorStatic() != null) {
-            return chosenModesTurnStatic.get(original, ability.getGrantorStatic());
-        }
-        return chosenModesTurn.get(original);
+        return chosenModesTurn.get(ability);
     }
     public List<String> getChosenModesGame(SpellAbility ability) {
-        SpellAbility original = null;
-        SpellAbility root = ability.getRootAbility();
-
-        // because trigger spell abilities are copied, try to get original one
-        if (root.isTrigger()) {
-            original = root.getTrigger().getOverridingAbility();
-        } else {
-            original = ability.getOriginalAbility();
-            if (original == null) {
-                original = ability;
-            }
-        }
-
-        if (ability.getGrantorStatic() != null) {
-            return chosenModesGameStatic.get(original, ability.getGrantorStatic());
-        }
-        return chosenModesGame.get(original);
+        return chosenModesGame.get(ability);
     }
 
     public void addChosenModes(SpellAbility ability, String mode) {
-        SpellAbility original = null;
-        SpellAbility root = ability.getRootAbility();
-
-        // because trigger spell abilities are copied, try to get original one
-        if (root.isTrigger()) {
-            original = root.getTrigger().getOverridingAbility();
-        } else {
-            original = ability.getOriginalAbility();
-            if (original == null) {
-                original = ability;
-            }
-        }
-
-        if (ability.getGrantorStatic() != null) {
-            List<String> result = chosenModesTurnStatic.get(original, ability.getGrantorStatic());
-            if (result == null) {
-                result = Lists.newArrayList();
-                chosenModesTurnStatic.put(original, ability.getGrantorStatic(), result);
-            }
-            result.add(mode);
-            result = chosenModesGameStatic.get(original, ability.getGrantorStatic());
-            if (result == null) {
-                result = Lists.newArrayList();
-                chosenModesGameStatic.put(original, ability.getGrantorStatic(), result);
-            }
-            result.add(mode);
-        } else {
-            List<String> result = chosenModesTurn.get(original);
-            if (result == null) {
-                result = Lists.newArrayList();
-                chosenModesTurn.put(original, result);
-            }
-            result.add(mode);
-
-            result = chosenModesGame.get(original);
-            if (result == null) {
-                result = Lists.newArrayList();
-                chosenModesGame.put(original, result);
-            }
-            result.add(mode);
-        }
+        this.chosenModesTurn.put(mode, ability);
+        this.chosenModesGame.put(mode, ability);
     }
 
     public void resetChosenModeTurn() {
         chosenModesTurn.clear();
-        chosenModesTurnStatic.clear();
     }
 
     public int getPlaneswalkerAbilityActivated() {

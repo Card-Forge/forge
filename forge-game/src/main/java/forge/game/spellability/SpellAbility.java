@@ -920,8 +920,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 desc = CardTranslation.translateMultipleDescriptionText(desc, currentName);
                 desc = TextUtil.fastReplace(desc, "CARDNAME", CardTranslation.getTranslatedName(currentName));
                 desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
-                if (node.getOriginalHost() != null) {
-                    desc = TextUtil.fastReplace(desc, "ORIGINALHOST", node.getOriginalHost().getName());
+                if (node.getFirstGrantor() != null) {
+                    desc = TextUtil.fastReplace(desc, "ORIGINALHOST", node.getFirstGrantor().getName());
                 }
                 sb.append(desc);
             }
@@ -2354,7 +2354,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     }
 
     public SpellAbility getOriginalAbility() {
-        return grantorOriginal;
+        return ObjectUtils.defaultIfNull(grantorOriginal, this);
     }
     public void setOriginalAbility(final SpellAbility sa) {
         grantorOriginal = sa;

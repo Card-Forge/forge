@@ -76,7 +76,7 @@ public class CostUnattach extends CostPartWithList {
         if (type.equals("CARDNAME")) {
             return source.isEquipping();
         } else if (type.equals("OriginalHost")) {
-            Card originalEquipment = ability.getOriginalHost();
+            Card originalEquipment = ability.getFirstGrantor();
             return originalEquipment.isEquipping();
         } else {
             return CardLists.getValidCards(source.getEquippedBy(), type, payer, source, ability).size() > 0;
@@ -89,7 +89,7 @@ public class CostUnattach extends CostPartWithList {
                 return source;
             }
         } else if (getType().equals("OriginalHost")) {
-            Card originalEquipment = ability.getOriginalHost();
+            Card originalEquipment = ability.getFirstGrantor();
             if (originalEquipment.isEquipping()) {
                 return originalEquipment;
             }

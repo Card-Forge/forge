@@ -943,7 +943,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             return PaymentDecision.card(source, cntRemoved >= 0 ? cntRemoved : maxCounters);
 
         } else if (type.equals("OriginalHost")) {
-            final int maxCounters = ability.getOriginalHost().getCounters(cost.counter);
+            final int maxCounters = ability.getFirstGrantor().getCounters(cost.counter);
             if (amount.equals("All")) {
                 cntRemoved = maxCounters;
             }
@@ -951,7 +951,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
                 return null;
             }
 
-            return PaymentDecision.card(ability.getOriginalHost(), cntRemoved >= 0 ? cntRemoved : maxCounters);
+            return PaymentDecision.card(ability.getFirstGrantor(), cntRemoved >= 0 ? cntRemoved : maxCounters);
         }
 
         CardCollectionView validCards = CardLists.getValidCards(player.getCardsIn(cost.zone), type.split(";"), player, source, ability);
@@ -994,7 +994,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         }
 
         if (type.equals("OriginalHost")) {
-            Card host = ability.getOriginalHost();
+            Card host = ability.getFirstGrantor();
             if (host.getController() == ability.getActivatingPlayer() && host.isInPlay()) {
                 return controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblSacrificeCardConfirm", CardTranslation.getTranslatedName(host.getName())), ability) ? PaymentDecision.card(host) : null;
             }

@@ -615,9 +615,7 @@ public final class StaticAbilityContinuous {
                         List<KeywordInterface> keywords = Lists.newArrayList();
 
                         for (SpellAbility sa : state.getSpellAbilities()) {
-                            SpellAbility newSA = sa.copy(affectedCard, false);
-                            newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
-                            newSA.setGrantorStatic(stAb);
+                            SpellAbility newSA = affectedCard.copySpellAbilityForStaticAbility(sa, stAb, true);
                             //newSA.setIntrinsic(false); needs to be changed by CardTextChanges
 
                             spellAbilities.add(newSA);
@@ -626,7 +624,6 @@ public final class StaticAbilityContinuous {
                             for (String ability : params.get("GainTextAbilities").split(" & ")) {
                                 final SpellAbility sa = AbilityFactory.getAbility(AbilityUtils.getSVar(stAb, ability), affectedCard, stAb);
                                 sa.setIntrinsic(true); // needs to be affected by Text
-                                sa.setGrantorStatic(stAb);
                                 spellAbilities.add(sa);
                             }
                         }
@@ -835,15 +832,7 @@ public final class StaticAbilityContinuous {
                                 if (loyaltyAB && !sa.isPwAbility()) {
                                     continue;
                                 }
-                                SpellAbility newSA = sa.copy(affectedCard, false);
-                                if (params.containsKey("GainsAbilitiesLimitPerTurn")) {
-                                    newSA.setRestrictions(sa.getRestrictions());
-                                    newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
-                                }
-                                newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
-                                newSA.setGrantorStatic(stAb);
-                                newSA.setIntrinsic(false);
-                                addedAbilities.add(newSA);
+                                addedAbilities.add(affectedCard.copySpellAbilityForStaticAbility(sa, stAb, false));
                             }
                         }
                     }
