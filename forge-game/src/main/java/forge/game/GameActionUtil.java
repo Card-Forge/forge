@@ -487,9 +487,8 @@ public final class GameActionUtil {
                 final String keyword = inst.getOriginal();
                 if (keyword.startsWith("AlternateAdditionalCost")) {
                     final List<SpellAbility> newAbilities = Lists.newArrayList();
-                    final String[] costs = (keyword.split(":", 2)[1]).split(":");
 
-                    for (String s : costs) {
+                    for (String s : keyword.split(":", 2)[1].split(":")) {
                         final SpellAbility newSA = sa.copy();
                         newSA.setBasicSpell(false);
 
