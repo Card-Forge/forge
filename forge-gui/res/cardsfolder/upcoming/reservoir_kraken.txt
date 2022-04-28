@@ -1,0 +1,11 @@
+Name:Reservoir Kraken
+ManaCost:2 U U
+Types:Creature Kraken
+PT:6/6
+K:Trample
+K:Ward:2
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigTap | IsPresent$ Card.Self+untapped | TriggerDescription$ At the beginning of each combat, if CARDNAME is untapped, any opponent may tap an untapped creature they control. If they do, tap CARDNAME and create a 1/1 blue Fish creature token with "This creature can't be blocked."
+SVar:TrigTap:DB$ Tap | Defined$ Self | UnlessCost$ tapXType<1/Creature> | UnlessPayer$ Player.Opponent | UnlessSwitched$ True | UnlessAI$ LifeLE8 | UnlessResolveSubs$ WhenPaid | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ u_1_1_fish_unblockable
+DeckHas:Ability$Token & Type$Fish
+Oracle:Trample, ward {2}\nAt the beginning of each combat, if Reservoir Kraken is untapped, any opponent may tap an untapped creature they control. If they do, tap Reservoir Kraken and create a 1/1 blue Fish creature token with "This creature can't be blocked."
