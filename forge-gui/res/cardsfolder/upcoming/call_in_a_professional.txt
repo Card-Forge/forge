@@ -1,0 +1,8 @@
+Name:Call In a Professional
+ManaCost:2 R
+Types:Instant
+A:SP$ Effect | StaticAbilities$ STCantGain,STCantPrevent | AILogic$ Burn | SubAbility$ DBDamage | SpellDescription$ Players can't gain life this turn. Damage can't be prevented this turn.
+SVar:STCantGain:Mode$ CantGainLife | ValidPlayer$ Player | Description$ Players can't gain life this turn.
+SVar:STCantPrevent:Mode$ CantPreventDamage | EffectZone$ Command | Description$ Damage can't be prevented this turn.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 3 | NoPrevention$ True | SpellDescription$ CARDNAME deals 3 damage to any target. (Shield counters don't prevent this damage as they're removed.)
+Oracle:Players can't gain life this turn. Damage can't be prevented this turn. Call In a Professional deals 3 damage to any target. (Shield counters don't prevent this damage as they're removed.)

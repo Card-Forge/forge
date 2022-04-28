@@ -1,0 +1,13 @@
+Name:Sanguine Spy
+ManaCost:2 B
+Types:Creature Vampire Rogue
+PT:2/3
+K:Menace
+K:Lifelink
+A:AB$ Dig | Cost$ 1 Sac<1/Creature.Other/another creature> | DigNum$ 1 | ChangeNum$ 1 | DestinationZone$ Graveyard | Optional$ True | LibraryPosition2$ 0 | SpellDescription$ Look at the top card of your library. You may put that card into your graveyard.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE5 | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if there are five or more mana values among cards in your graveyard, you may pay 2 life. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ PayLife<2>
+SVar:X:Count$ValidGraveyard Card.YouOwn$DifferentCMC
+DeckHas:Ability$Sacrifice|LifeGain|Graveyard
+SVar:AIPreference:SacCost$Creature.token,Creature.cmcLE2
+Oracle:Menace, lifelink\n{1}, Sacrifice another creature: Look at the top card of your library. You may put that card into your graveyard.\nAt the beginning of your end step, if there are five or more mana values among cards in your graveyard, you may pay 2 life. If you do, draw a card.

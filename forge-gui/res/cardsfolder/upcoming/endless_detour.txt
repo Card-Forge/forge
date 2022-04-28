@@ -1,0 +1,5 @@
+Name:Endless Detour
+ManaCost:G W U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Card.inZoneStack,Permanent.nonLand,Card.inZoneGraveyard | TgtZone$ Battlefield,Stack,Graveyard | TgtPrompt$ Select target spell, nonland permanent, or card in a graveyard | AlternativeDecider$ TargetedController | Origin$ Battlefield,Stack,Graveyard | Fizzle$ True | Destination$ Library | LibraryPosition$ 0 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDestinationMessage$ Would you like to put the card on the top of your library (and not on the bottom)? | SpellDescription$ The owner of target spell, nonland permanent, or card in a graveyard puts it on the top or bottom of their library.
+Oracle:The owner of target spell, nonland permanent, or card in a graveyard puts it on the top or bottom of their library.

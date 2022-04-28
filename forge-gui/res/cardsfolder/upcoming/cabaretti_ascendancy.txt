@@ -1,0 +1,10 @@
+Name:Cabaretti Ascendancy
+ManaCost:R G W
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPeek | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, look at the top card of your library. If it's a creature or planeswalker card, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it on the bottom of your library.
+SVar:TrigPeek:DB$ PeekAndReveal | PeekAmount$ 1 | RevealValid$ Creature,Planeswalker | RevealOptional$ True | RememberRevealed$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBChangeZone2
+SVar:DBChangeZone2:DB$ ChangeZone | Optional$ True | Defined$ TopOfLibrary | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Creature|Planeswalker
+Oracle:At the beginning of your upkeep, look at the top card of your library. If it's a creature or planeswalker card, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it on the bottom of your library.
