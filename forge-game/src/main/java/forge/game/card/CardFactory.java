@@ -758,7 +758,7 @@ public class CardFactory {
                 }
             }
 
-            if (sa.hasParam("GainThisAbility") && (sa instanceof SpellAbility)) {
+            if (sa.hasParam("GainThisAbility") && sa instanceof SpellAbility) {
                 SpellAbility root = ((SpellAbility) sa).getRootAbility();
 
                 if (root.isTrigger()) {
@@ -803,7 +803,7 @@ public class CardFactory {
                 state.setImageKey(originalState.getImageKey());
             }
 
-            // remove some characteristic static abilties
+            // remove some characteristic static abilities
             for (StaticAbility sta : state.getStaticAbilities()) {
                 if (!sta.hasParam("CharacteristicDefining")) {
                     continue;

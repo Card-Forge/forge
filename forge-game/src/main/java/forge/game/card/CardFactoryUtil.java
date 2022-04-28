@@ -1505,38 +1505,15 @@ public class CardFactoryUtil {
             final String actualTrigger = "Mode$ Attacks | ValidCard$ Card.Self | Secondary$ True"
                     + " | TriggerDescription$ Myriad (" + inst.getReminderText() + ")";
 
-            final String repeatStr = "DB$ RepeatEach | RepeatPlayers$ OpponentsOtherThanDefendingPlayer | ChangeZoneTable$ True";
-
             final String copyStr = "DB$ CopyPermanent | Defined$ Self | TokenTapped$ True | Optional$ True | TokenAttacking$ Remembered"
-                    + " | ChoosePlayerOrPlaneswalker$ True | ImprintTokens$ True";
+                    + "| ForEach$ OpponentsOtherThanDefendingPlayer | ChoosePlayerOrPlaneswalker$ True | AtEOT$ ExileCombat | CleanupForEach$ True";
 
-            final String delTrigStr = "DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | RememberObjects$ Imprinted"
-            + " | TriggerDescription$ Exile the tokens at end of combat.";
-
-            final String exileStr = "DB$ ChangeZone | Defined$ DelayTriggerRemembered | Origin$ Battlefield | Destination$ Exile";
-
-            final String cleanupStr = "DB$ Cleanup | ClearImprinted$ True";
-
-            SpellAbility repeatSA = AbilityFactory.getAbility(repeatStr, card);
-
-            AbilitySub copySA = (AbilitySub) AbilityFactory.getAbility(copyStr, card);
-            repeatSA.setAdditionalAbility("RepeatSubAbility", copySA);
-
-            AbilitySub delTrigSA = (AbilitySub) AbilityFactory.getAbility(delTrigStr, card);
-
-            AbilitySub exileSA = (AbilitySub) AbilityFactory.getAbility(exileStr, card);
-            delTrigSA.setAdditionalAbility("Execute", exileSA);
-
-            AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
-            delTrigSA.setSubAbility(cleanupSA);
-
-            repeatSA.setSubAbility(delTrigSA);
+            final SpellAbility copySA = AbilityFactory.getAbility(copyStr, card);
+            copySA.setIntrinsic(intrinsic);
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, intrinsic);
+            parsedTrigger.setOverridingAbility(copySA);
 
-            repeatSA.setIntrinsic(intrinsic);
-
-            parsedTrigger.setOverridingAbility(repeatSA);
             inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Nightbound")) {
             // Set Night when it's Neither
@@ -3207,52 +3184,31 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String manacost = k[1];
 
-            String effect = "AB$ RepeatEach | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> " +
-                    "| ActivationZone$ Graveyard | ClearRememberedBeforeLoop$ True | RepeatPlayers$ Opponent" +
-                    "| PrecostDesc$ Encore | CostDesc$ " + ManaCostParser.parse(manacost) +
+            final String effect = "AB$ CopyPermanent | Cost$ " + manacost + " ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard" +
+                    "| Defined$ Self | PumpKeywords$ Haste | RememberTokens$ True | ForEach$ Opponent" +
+                    "| AtEOT$ Sacrifice | PrecostDesc$ Encore | CostDesc$ " + ManaCostParser.parse(manacost) +
                     "| SpellDescription$ (" + inst.getReminderText() + ")";
 
-            final String copyStr = "DB$ CopyPermanent | Defined$ Self | ImprintTokens$ True " +
-                    "| AddKeywords$ Haste | RememberTokens$ True | TokenRemembered$ Player.IsRemembered " +
-                    "| AddStaticAbilities$ MustAttack";
-
-            final String pumpStr = "DB$ Animate | Defined$ Creature.IsRemembered | staticAbilities$ AttackChosen ";
-
-            final String attackStaticStr = "Mode$ MustAttack | ValidCreature$ Card.Self | MustAttack$ Remembered" +
-                    " | Description$ This token copy attacks that opponent this turn if able.";
-
-            final String pumpcleanStr = "DB$ Cleanup | ForgetDefined$ RememberedCard";
-
-            final String delTrigStr = "DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Imprinted " +
-                    "| StackDescription$ None | TriggerDescription$ Sacrifice them at the beginning of the next end step.";
-
-            final String sacStr = "DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI | Controller$ You";
-
-            final String cleanupStr = "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True";
-
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+
+            final String repeatStr = "DB$ RepeatEach | DefinedCards$ Remembered | UseImprinted$ True";
+            final AbilitySub repeatSub = (AbilitySub) AbilityFactory.getAbility(repeatStr, card);
+            sa.setSubAbility(repeatSub);
+
+            final String effectStr = "DB$ Effect | RememberObjects$ Imprinted,ImprintedRemembered | ExileOnMoved$ Battlefield | StaticAbilities$ AttackChosen";
+            final AbilitySub effectSub = (AbilitySub) AbilityFactory.getAbility(effectStr, card);
+            repeatSub.setAdditionalAbility("RepeatSubAbility", effectSub);
+
+            final String attackStaticStr = "Mode$ MustAttack | ValidCreature$ Card.IsRemembered | MustAttack$ RememberedPlayer" +
+                    " | Description$ This token copy attacks that opponent this turn if able.";
+            effectSub.setSVar("AttackChosen", attackStaticStr);
+
+            final String cleanStr = "DB$ Cleanup | Defined$ Imprinted | ForgetDefined$ Remembered";
+            final AbilitySub cleanSub = (AbilitySub) AbilityFactory.getAbility(cleanStr, card);
+            effectSub.setSubAbility(cleanSub);
+
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
-
-            AbilitySub copySA = (AbilitySub) AbilityFactory.getAbility(copyStr, card);
-            sa.setAdditionalAbility("RepeatSubAbility", copySA);
-
-            AbilitySub pumpSA = (AbilitySub) AbilityFactory.getAbility(pumpStr, card);
-            copySA.setSubAbility(pumpSA);
-
-            sa.setSVar("MustAttack", attackStaticStr);
-
-            AbilitySub pumpcleanSA = (AbilitySub) AbilityFactory.getAbility(pumpcleanStr, card);
-            pumpSA.setSubAbility(pumpcleanSA);
-
-            AbilitySub delTrigSA = (AbilitySub) AbilityFactory.getAbility(delTrigStr, card);
-            sa.setSubAbility(delTrigSA);
-
-            AbilitySub sacSA = (AbilitySub) AbilityFactory.getAbility(sacStr, card);
-            delTrigSA.setAdditionalAbility("Execute", sacSA);
-
-            AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
-            delTrigSA.setSubAbility(cleanupSA);
         } else if (keyword.startsWith("Spectacle")) {
             final String[] k = keyword.split(":");
             final Cost cost = new Cost(k[1], false);
@@ -3260,8 +3216,7 @@ public class CardFactoryUtil {
 
             newSA.setAlternativeCost(AlternativeCost.Spectacle);
 
-            String desc = "Spectacle " + cost.toSimpleString() + " (" + inst.getReminderText()
-                    + ")";
+            String desc = "Spectacle " + cost.toSimpleString() + " (" + inst.getReminderText() + ")";
             newSA.setDescription(desc);
 
             newSA.setIntrinsic(intrinsic);

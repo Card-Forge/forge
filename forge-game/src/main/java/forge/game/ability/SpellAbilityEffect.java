@@ -580,7 +580,7 @@ public abstract class SpellAbilityEffect {
             // important to update defenders here, maybe some PW got removed
             combat.initConstraints();
             if (sa.hasParam("ChoosePlayerOrPlaneswalker")) {
-                PlayerCollection defendingPlayers = AbilityUtils.getDefinedPlayers(host, attacking, sa);
+                PlayerCollection defendingPlayers = AbilityUtils.getDefinedPlayers(sa.hasParam("ForEach") ? c : host, attacking, sa);
                 defs = new FCollection<>();
                 for (Player p : defendingPlayers) {
                     defs.addAll(combat.getDefendersControlledBy(p));

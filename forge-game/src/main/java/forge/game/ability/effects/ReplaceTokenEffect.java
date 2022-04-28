@@ -4,8 +4,12 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
 import forge.game.Game;
@@ -84,23 +88,26 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
         } else if ("ReplaceToken".equals(sa.getParam("Type"))) {
             long timestamp = game.getNextTimestamp();
 
-            Map<Player, Integer> toInsertMap = Maps.newHashMap();
+            Multimap<Player, Pair<Integer, Iterable<Object>>> toInsertMap = ArrayListMultimap.create();
             Set<Card> toRemoveSet = Sets.newHashSet();
             for (Map.Entry<Card, Integer> e : table.row(affected).entrySet()) {
                 if (!sa.matchesValidParam("ValidCard", e.getKey())) {
                     continue;
                 }
                 Player controller = e.getKey().getController();
-                int old = ObjectUtils.defaultIfNull(toInsertMap.get(controller), 0);
-                toInsertMap.put(controller, old + e.getValue());
+                // TODO should still merge the amounts to avoid additional prototypes when sourceSA doesn't use ForEach
+                //int old = ObjectUtils.defaultIfNull(toInsertMap.get(controller), 0);
+                Pair<Integer, Iterable<Object>> tokenAmountPair = new ImmutablePair<>(e.getValue(), e.getKey().getRemembered());
+                toInsertMap.put(controller, tokenAmountPair);
                 toRemoveSet.add(e.getKey());
             }
             // remove replaced tokens
             table.row(affected).keySet().removeAll(toRemoveSet);
 
             // insert new tokens
-            for (Map.Entry<Player, Integer> pe : toInsertMap.entrySet()) {
-                if (pe.getValue() <= 0) {
+            for (Map.Entry<Player, Pair<Integer, Iterable<Object>>> pe : toInsertMap.entries()) {
+                int amt = pe.getValue().getLeft();
+                if (amt <= 0) {
                     continue;
                 }
                 for (String script : sa.getParam("TokenScript").split(",")) {
@@ -111,7 +118,9 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                     }
 
                     token.setController(pe.getKey(), timestamp);
-                    table.put(affected, token, pe.getValue());
+                    // if token is created from ForEach keep that
+                    token.addRemembered(pe.getValue().getRight());
+                    table.put(affected, token, amt);
                 }
             }
         } else if ("ReplaceController".equals(sa.getParam("Type"))) {

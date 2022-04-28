@@ -117,6 +117,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
             Player creator = c.getRowKey();
             Player controller = prototype.getController();
             int cellAmount = c.getValue();
+
             for (int i = 0; i < cellAmount; i++) {
                 Card tok = CardFactory.copyCard(prototype, true);
                 // Crafty Cutpurse would change under which control it does enter,
@@ -170,6 +171,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 if (clone) {
                     moved.setCloneOrigin(host);
                 }
+
                 if (!pumpKeywords.isEmpty()) {
                     moved.addChangedCardKeywords(pumpKeywords, Lists.newArrayList(), false, timestamp, 0);
                     addPumpUntil(sa, moved, timestamp);
@@ -202,6 +204,10 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                     moved.addRemembered(AbilityUtils.getDefinedObjects(host, sa.getParam("TokenRemembered"), sa));
                 }
                 allTokens.add(moved);
+
+                if (sa.hasParam("CleanupForEach")) {
+                    moved.removeRemembered(prototype.getRemembered());
+                }
             }
         }
 
