@@ -251,7 +251,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
         }
     } // end resolve
 
-    private Card getProtoType(final SpellAbility sa, final Card original, final Player newOwner) {
+    public static Card getProtoType(final SpellAbility sa, final Card original, final Player newOwner) {
         final Card host = sa.getHostCard();
         int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
         final Card copy = new Card(id, original.getPaperCard(), host.getGame());

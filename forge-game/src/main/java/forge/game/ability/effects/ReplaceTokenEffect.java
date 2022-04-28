@@ -17,11 +17,15 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
 import forge.game.card.TokenCreateTable;
 import forge.game.card.token.TokenInfo;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class ReplaceTokenEffect extends SpellAbilityEffect {
 
@@ -86,6 +90,16 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                 }
             }
         } else if ("ReplaceToken".equals(sa.getParam("Type"))) {
+            Card chosen = null;
+            if (sa.hasParam("ValidChoices")) {
+                CardCollectionView choices = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("ValidChoices").split(","), p, card, sa);
+                if (choices.isEmpty()) {
+                    originalParams.put(AbilityKey.ReplacementResult, ReplacementResult.NotReplaced);
+                    return;
+                }
+                chosen = p.getController().chooseSingleEntityForEffect(choices, sa, Localizer.getInstance().getMessage("lblChooseaCard"), false, null);
+            }
+
             long timestamp = game.getNextTimestamp();
 
             Multimap<Player, Pair<Integer, Iterable<Object>>> toInsertMap = ArrayListMultimap.create();
@@ -111,7 +125,12 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
                     continue;
                 }
                 for (String script : sa.getParam("TokenScript").split(",")) {
-                    final Card token = TokenInfo.getProtoType(script, sa, pe.getKey());
+                    final Card token;
+                    if (script.equals("Chosen")) {
+                        token = CopyPermanentEffect.getProtoType(sa, chosen, pe.getKey());
+                    } else {
+                        token = TokenInfo.getProtoType(script, sa, pe.getKey());
+                    }
 
                     if (token == null) {
                         throw new RuntimeException("don't find Token for TokenScript: " + script);
