@@ -1,5 +1,5 @@
 [format]
-Name:Explorer (SNC)
+Name:Explorer (2022-04-28)
 Type:Archived
 Subtype:Arena
 Effective:2022-04-28
