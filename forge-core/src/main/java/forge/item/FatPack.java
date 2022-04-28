@@ -38,6 +38,10 @@ public class FatPack extends BoxedProduct {
 
             FatPack.Template d = new Template(edition);
             if (d == null) { return null; }
+            if (edition.getName() == "USER") {
+                if (null == StaticData.instance().getBoosters().get(d.getEdition()))
+                    return null;
+            }
             return new FatPack(edition.getName(), d, d.cntBoosters);
         }
     };
