@@ -1,0 +1,10 @@
+Name:Falco Spara, Pactweaver
+ManaCost:1 G W U
+Types:Legendary Creature Bird Demon
+PT:3/3
+K:Flying
+K:Trample
+K:etbCounter:Shield:1
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Card.TopLibrary+nonLand | AffectedZone$ Library | MayPlay$ True | MayPlayAltManaCost$ RegularCost RemoveAnyCounter<1/Any/Card.Creature/creature> | Description$ You may cast spells from the top of your library by removing a counter from a creature you control in addition to paying their other costs.
+Oracle:Flying, trample\nFalco Spara, Pactweaver enters the battlefield with a shield counter on it.\nYou may look at the top card of your library any time.\nYou may cast spells from the top of your library by removing a counter from a creature you control in addition to paying their other costs.
