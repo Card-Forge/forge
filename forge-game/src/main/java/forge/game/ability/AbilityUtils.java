@@ -3029,6 +3029,10 @@ public class AbilityUtils {
     }
 
     private static void addPlayer(Iterable<Object> objects, final String def, FCollection<Player> players) {
+        addPlayer(objects, def, players, false);
+    }
+
+    private static void addPlayer(Iterable<Object> objects, final String def, FCollection<Player> players, boolean skipRemembered) {
         for (Object o : objects) {
             if (o instanceof Player) {
                 final Player p = (Player) o;
@@ -3043,8 +3047,9 @@ public class AbilityUtils {
                     players.add(c.getController());
                 } else if (def.endsWith("Owner")) {
                     players.add(c.getOwner());
-                } else if (def.endsWith("Remembered")) {
-                    addPlayer(c.getRemembered(), def, players);
+                } else if (def.endsWith("Remembered") && !skipRemembered) {
+                    //recursive call to skip so it will not cause StackOverflow, ie Riveteers Overlook
+                    addPlayer(c.getRemembered(), def, players, true);
                 }
             } else if (o instanceof SpellAbility) {
                 final SpellAbility c = (SpellAbility) o;
