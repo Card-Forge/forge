@@ -4,7 +4,7 @@ Types:Legendary Artifact
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Permanent.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigEnergy | TriggerDescription$ Whenever a permanent you control is put into a graveyard, you get {E} (an energy counter).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 1
 A:AB$ PeekAndReveal | Cost$ T PayEnergy<6> | Defined$ You | PeekAmount$ 6 | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBPlay | SpellDescription$ Look at the top six cards of your library. You may cast a spell from among them without paying its mana cost. Put the rest on the bottom of your library in a random order.
-SVar:DBPlay:DB$ Play | ValidZone$ Library | Valid$ Card.IsRemembered+nonLand | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1 | ForgetTargetRemembered$ True | SubAbility$ DBRestRandomOrder
+SVar:DBPlay:DB$ Play | ValidZone$ Library | Valid$ Card.IsRemembered+nonLand | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ 1 | ForgetPlayed$ True | SubAbility$ DBRestRandomOrder
 SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Whenever a permanent you control is put into a graveyard, you get {E} (an energy counter).\n{T}, Pay {E}{E}{E}{E}{E}{E}: Look at the top six cards of your library. You may cast a spell from among them without paying its mana cost. Put the rest on the bottom of your library in a random order.

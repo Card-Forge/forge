@@ -326,6 +326,10 @@ public class PlayEffect extends SpellAbilityEffect {
                 if (remember) {
                     source.addRemembered(tgtCard);
                 }
+                //Forget only if playing was successful
+                if (sa.hasParam("ForgetPlayed")) {
+                    source.removeRemembered(tgtCard);
+                }
                 continue;
             }
 
@@ -408,7 +412,7 @@ public class PlayEffect extends SpellAbilityEffect {
                     source.clearRemembered();
                 }
 
-                if (sa.hasParam("ForgetTargetRemembered")) {
+                if (sa.hasParam("ForgetPlayed")) {
                     source.removeRemembered(tgtCard);
                 }
             }
