@@ -1,0 +1,7 @@
+Name:Boon of Safety
+ManaCost:W
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature | CounterType$ SHIELD | SubAbility$ DBScry | SpellDescription$ Put a shield counter on target creature. (If that creature would be dealt damage or destroyed, remove a shield counter from it instead.)
+SVar:DBScry:DB$ Scry | SpellDescription$ Scry 1.
+DeckHas:Ability$Counters
+Oracle:Put a shield counter on target creature. (If that creature would be dealt damage or destroyed, remove a shield counter from it instead.)\nScry 1.

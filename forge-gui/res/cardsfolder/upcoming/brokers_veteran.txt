@@ -1,0 +1,8 @@
+Name:Brokers Veteran
+ManaCost:1 U
+Types:Creature Human Soldier
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME dies, put a shield counter on target creature you control. (If that creature would be dealt damage or destroyed, remove a shield counter from it instead.)
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ SHIELD
+DeckHas:Ability$Counters
+Oracle:When Brokers Veteran dies, put a shield counter on target creature you control. (If that creature would be dealt damage or destroyed, remove a shield counter from it instead.)

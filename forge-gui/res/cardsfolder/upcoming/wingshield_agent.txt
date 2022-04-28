@@ -1,0 +1,10 @@
+Name:Wingshield Agent
+ManaCost:2 U
+Types:Creature Human Soldier
+PT:2/3
+K:etbCounter:SHIELD:1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, up to one other target creature gains flying until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other | TgtPrompt$ Select up to one other target creature | TargetMin$ 0 | TargetMax$ 1 | KW$ Flying
+DeckHas:Ability$Counters
+SVar:HasAttackEffect:TRUE
+Oracle:Wingshield Agent enters the battlefield with a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)\nWhenever Wingshield Agent attacks, up to one other target creature gains flying until end of turn.
