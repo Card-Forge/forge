@@ -1,0 +1,8 @@
+Name:Even the Score
+ManaCost:X U U U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | Color$ U U U | EffectZone$ All | CheckSVar$ Y | SVarCompare$ GE4 | Description$ This spell costs {U}{U}{U} less to cast if an opponent has drawn four or more cards this turn.
+SVar:Y:PlayerCountOpponents$HighestCardsDrawn
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw X cards.
+SVar:X:Count$xPaid
+Oracle:This spell costs {U}{U}{U} less to cast if an opponent has drawn four or more cards this turn.\nDraw X cards.
