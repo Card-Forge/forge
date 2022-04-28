@@ -3400,7 +3400,7 @@ public class CardFactoryUtil {
             String effect = "AB$ Animate | Cost$ tapXType<Any/Creature.Other+withTotalPowerGE" + power + "> | " +
                     "CostDesc$ Crew " + power + " (Tap any number of creatures you control with total power " + power +
                     " or more: | Crew$ True | Secondary$ True | Defined$ Self | Types$ Artifact,Creature | " +
-                    "RemoveCardTypes$ True | SpellDescription$ CARDNAME becomes an artifact creature until end of turn.)";
+                    "SpellDescription$ CARDNAME becomes an artifact creature until end of turn.)";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
