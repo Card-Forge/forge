@@ -2011,15 +2011,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("Alternative Cost")) {
                     sbLong.append("Has alternative cost.");
                 } else if (keyword.startsWith("AlternateAdditionalCost")) {
-                    final String costString1 = keyword.split(":")[1];
-                    final String costString2 = keyword.split(":")[2];
-                    final Cost cost1 = new Cost(costString1, false);
-                    final Cost cost2 = new Cost(costString2, false);
-                    sbLong.append("As an additional cost to cast this spell, ")
-                            .append(StringUtils.uncapitalize(cost1.toSimpleString()))
-                            .append(" or pay ")
-                            .append(StringUtils.uncapitalize(cost2.toSimpleString()))
-                            .append(".\r\n\r\n");
+                    final String[] costs = keyword.split(":", 2)[1].split(":");
+                    sbLong.append("As an additional cost to cast this spell, ");
+                    for (int n = 0; n < costs.length; n++) {
+                        final Cost cost = new Cost(costs[n], false);
+                        if (cost.isOnlyManaCost()) {
+                            sbLong.append(" pay ");
+                        }
+                        sbLong.append(StringUtils.uncapitalize(cost.toSimpleString()));
+                        sbLong.append(n + 1 == costs.length ? ".\r\n\r\n" : n + 2 == costs.length && costs.length > 2
+                                ? ", or " : n + 2 == costs.length ? " or " : ", ");
+                    }
                 } else if (keyword.startsWith("Multikicker")) {
                     if (!keyword.endsWith("Generic")) {
                         final String[] n = keyword.split(":");
@@ -2632,14 +2634,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     }
                     sbBefore.append(sbx).append("\r\n");
                 } else if (keyword.startsWith("AlternateAdditionalCost")) {
-                    final String[] k = keyword.split(":");
-                    final Cost cost1 = new Cost(k[1], false);
-                    final Cost cost2 = new Cost(k[2], false);
-                    sbBefore.append("As an additional cost to cast this spell, ")
-                            .append(StringUtils.uncapitalize(cost1.toSimpleString()))
-                            .append(" or pay ")
-                            .append(StringUtils.uncapitalize(cost2.toSimpleString()))
-                            .append(".\r\n\r\n");
+                    final String[] costs = keyword.split(":", 2)[1].split(":");
+                    sbBefore.append("As an additional cost to cast this spell, ");
+                    for (int n = 0; n < costs.length; n++) {
+                        final Cost cost = new Cost(costs[n], false);
+                        if (cost.isOnlyManaCost()) {
+                            sbBefore.append(" pay ");
+                        }
+                        sbBefore.append(StringUtils.uncapitalize(cost.toSimpleString()));
+                        sbBefore.append(n + 1 == costs.length ? ".\r\n\r\n" : n + 2 == costs.length && costs.length > 2
+                                ? ", or " : n + 2 == costs.length ? " or " : ", ");
+                    }
                 } else if (keyword.startsWith("Presence") || keyword.startsWith("MayFlash")) {
                     // Pseudo keywords, only print Reminder
                     sbBefore.append(inst.getReminderText());

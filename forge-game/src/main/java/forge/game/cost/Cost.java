@@ -155,7 +155,7 @@ public class Cost implements Serializable {
      * @return a boolean.
      */
     public final boolean isOnlyManaCost() {
-        // Only used by Morph and Equip... why do we need this?
+        // used by Morph, Equip and some string builders
         for (final CostPart part : this.costParts) {
             if (!(part instanceof CostPartMana)) {
                 return false;
