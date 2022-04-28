@@ -2011,7 +2011,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("Alternative Cost")) {
                     sbLong.append("Has alternative cost.");
                 } else if (keyword.startsWith("AlternateAdditionalCost")) {
-                    final String[] costs = (keyword.split(":", 2)[1]).split(":");
+                    final String[] costs = keyword.split(":", 2)[1].split(":");
                     sbLong.append("As an additional cost to cast this spell, ");
                     for (int n = 0; n < costs.length; n++) {
                         final Cost cost = new Cost(costs[n], false);
@@ -2634,7 +2634,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     }
                     sbBefore.append(sbx).append("\r\n");
                 } else if (keyword.startsWith("AlternateAdditionalCost")) {
-                    final String[] costs = (keyword.split(":", 2)[1]).split(":");
+                    final String[] costs = keyword.split(":", 2)[1].split(":");
                     sbBefore.append("As an additional cost to cast this spell, ");
                     for (int n = 0; n < costs.length; n++) {
                         final Cost cost = new Cost(costs[n], false);
