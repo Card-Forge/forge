@@ -5,5 +5,4 @@ PT:2/3
 K:Reach
 T:Mode$ AttackerBlocked | ValidCard$ Creature.withFlying | ValidBlocker$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks a creature with flying, CARDNAME gets +2/+0 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2
-SVar:BuffedBy:Creature
 Oracle:Reach\nWhenever High-Rise Sawjack blocks a creature with flying, High-Rise Sawjack gets +2/+0 until end of turn.
