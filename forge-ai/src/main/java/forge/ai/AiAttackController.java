@@ -572,8 +572,7 @@ public class AiAttackController {
             if (numExtraBlocks > 0) {
                 // TODO should be limited to how much getBlockCost the opp can pay
                 while (numExtraBlocks-- > 0 && !remainingAttackers.isEmpty()) {
-                    blockedAttackers.add(remainingAttackers.get(0));
-                    remainingAttackers.remove(0);
+                    blockedAttackers.add(remainingAttackers.remove(0));
                     maxBlockersAfterCrew--;
                 }
             }
@@ -581,8 +580,7 @@ public class AiAttackController {
             if (remainingAttackers.isEmpty()) {
                 break;
             }
-            blockedAttackers.add(remainingAttackers.get(0));
-            remainingAttackers.remove(0);
+            blockedAttackers.add(remainingAttackers.remove(0));
             maxBlockersAfterCrew--;
         }
         unblockedAttackers.addAll(remainingAttackers);
@@ -605,8 +603,8 @@ public class AiAttackController {
             final CardCollection unblockableCantPayFor = new CardCollection();
             final CardCollection unblockableWithoutCost = new CardCollection();
             // TODO also check poison
-            for (Card attacker : CardLists.getKeyword(unblockedAttackers, Keyword.TRAMPLE)) {
-                Cost tax = CombatUtil.getAttackCost(attacker.getGame(), attacker, defendingOpponent);
+            for (Card attacker : unblockedAttackers) {
+                Cost tax = CombatUtil.getAttackCost(ai.getGame(), attacker, defendingOpponent);
                 if (tax == null) {
                     unblockableWithoutCost.add(attacker);
                 } else {
@@ -620,19 +618,17 @@ public class AiAttackController {
                 }
             }
             int dmgUnblockableAfterPaying = ComputerUtilCombat.sumDamageIfUnblocked(unblockableWithPaying, defendingOpponent);
+            unblockedAttackers = unblockableWithoutCost;
             if (dmgUnblockableAfterPaying > trampleDamage) {
-                unblockedAttackers.removeAll(unblockableCantPayFor);
-                unblockedAttackers.removeAll(unblockableWithPaying);
+                myFreeMana -= unblockableAttackTax;
                 totalCombatDamage = dmgUnblockableAfterPaying;
                 // recalculate the trampler damage with the reduced mana available now
-                myFreeMana -= unblockableAttackTax;
                 trampleDamage = getDamageFromBlockingTramplers(blockedAttackers, remainingBlockers, myFreeMana).getLeft();
             } else {
-                unblockedAttackers = unblockableWithoutCost;
                 myFreeMana -= tramplerTaxPaid;
                 // find out if we can still pay for some left
                 for (Card attacker : unblockableWithPaying) {
-                    Cost tax = CombatUtil.getAttackCost(attacker.getGame(), attacker, defendingOpponent);
+                    Cost tax = CombatUtil.getAttackCost(ai.getGame(), attacker, defendingOpponent);
                     int taxCMC = tax.getCostMana().getMana().getCMC();
                     if (myFreeMana < unblockableAttackTax + taxCMC) {
                         continue;
@@ -664,7 +660,7 @@ public class AiAttackController {
         CardCollection remainingBlockers = new CardCollection(blockers);
         for (Card attacker : CardLists.getKeyword(blockedAttackers, Keyword.TRAMPLE)) {
             // TODO might sort by quotient of dmg/cost for best combination
-            Cost tax = CombatUtil.getAttackCost(attacker.getGame(), attacker, defendingOpponent);
+            Cost tax = CombatUtil.getAttackCost(ai.getGame(), attacker, defendingOpponent);
             int taxCMC = tax != null ? tax.getCostMana().getMana().getCMC() : 0;
             if (myFreeMana < currentAttackTax + taxCMC) {
                 continue;
