@@ -28,6 +28,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
+import forge.util.collect.FCollectionView;
 
 /**
  * The Class CostExile.
