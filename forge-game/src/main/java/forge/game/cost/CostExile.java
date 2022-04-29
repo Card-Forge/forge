@@ -17,6 +17,7 @@
  */
 package forge.game.cost;
 
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -25,8 +26,8 @@ import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.TextUtil;
-import forge.util.collect.FCollectionView;
 
 /**
  * The Class CostExile.
@@ -83,6 +84,9 @@ public class CostExile extends CostPartWithList {
     public final String toString() {
         final Integer i = this.convertAmount();
         String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
+        if (CardType.CoreType.isValidEnum(desc)) {
+            desc = desc.toLowerCase();
+        }
         String origin = this.from.name().toLowerCase();
 
         if (this.payCostFromSource()) {
@@ -103,9 +107,11 @@ public class CostExile extends CostPartWithList {
 
         if (!desc.equals("Card") && !desc.contains("card")) {
             if (this.sameZone) {
-                return String.format("Exile card %s from the same %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
+                return String.format("Exile %s from the same %s", Lang.nounWithNumeralExceptOne(this.getAmount(),
+                        desc + " card"), origin);
             }
-            return String.format("Exile card %s from your %s", Cost.convertAmountTypeToWords(i, this.getAmount(), desc), origin);
+            return String.format("Exile %s from your %s", Lang.nounWithNumeralExceptOne(this.getAmount(),
+                    desc + " card"), origin);
         }
 
         if (this.sameZone) {
