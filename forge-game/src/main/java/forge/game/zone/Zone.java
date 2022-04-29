@@ -121,11 +121,11 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             c.setTapped(false);
         }
 
+        c.setZone(this);
+
         // Do not add Tokens to other zones than the battlefield. (unless it's a copy of a card 707.12)
         // But Effects/Emblems count as Tokens too, so allow Command too.
         if ((zoneType == ZoneType.Battlefield || !c.isToken()) || (zoneType == ZoneType.Stack && c.getCopiedPermanent() != null)) {
-            c.setZone(this);
-
             if (index == null) {
                 cardList.add(c);
             } else {
