@@ -1,0 +1,8 @@
+Name:Corpse Explosion
+ManaCost:1 B R
+Types:Sorcery
+A:SP$ DamageAll | Cost$ 1 B R ExileFromGrave<1/Creature> | NumDmg$ X | ValidCards$ Creature,Planeswalker | ValidDescription$ each creature and each planeswalker. | SpellDescription$ CARDNAME deals damage equal to the exiled card's power to each creature and each planeswalker.
+SVar:X:Exiled$CardPower
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Discard|Mill|Sacrifice
+Oracle:As an additional cost to cast this spell, exile a creature card from your graveyard.\nCorpse Explosion deals damage equal to the exiled card's power to each creature and each planeswalker.
