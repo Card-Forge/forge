@@ -3,8 +3,7 @@ ManaCost:W W U U U B B
 Types:Sorcery
 A:SP$ Dig | Cost$ W W U U U B B | Defined$ You | DigNum$ 5 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBTwoPiles | SpellDescription$ Exile the top five cards of your library. An opponent separates those cards into two piles. You may play lands and cast spells from one of those piles. If you cast a spell this way, you cast it without paying its mana cost.
 SVar:DBTwoPiles:DB$ TwoPiles | Defined$ You | DefinedCards$ Remembered | Separator$ Opponent | ChosenPile$ DBPlay | SubAbility$ DBCleanup
-SVar:DBPlay:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered | ChooseOrder$ True | Zone$ Exile | RepeatSubAbility$ DBPlayCard
-SVar:DBPlayCard:DB$ Play | Defined$ Imprinted | Controller$ You | WithoutManaCost$ True | Optional$ True
+SVar:DBPlay:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | Amount$ All
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Count$InYourLibrary
 SVar:NeedsToPlayVar:Y GE8

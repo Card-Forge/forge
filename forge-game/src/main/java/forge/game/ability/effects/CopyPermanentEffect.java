@@ -228,7 +228,15 @@ public class CopyPermanentEffect extends TokenEffectBase {
             if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer() && !c.canBeTargetedBy(sa)) {
                 continue;
             }
-            tokenTable.put(controller, getProtoType(sa, c, controller), numCopies);
+            if (sa.hasParam("ForEach")) {
+                for (Player p : AbilityUtils.getDefinedPlayers(host, sa.getParam("ForEach"), sa)) {
+                    Card proto = getProtoType(sa, c, controller);
+                    proto.addRemembered(p);
+                    tokenTable.put(controller, proto, numCopies);
+                }
+            } else {
+                tokenTable.put(controller, getProtoType(sa, c, controller), numCopies);
+            }
         } // end foreach Card
 
         makeTokenTable(tokenTable, true, triggerList, combatChanged, sa);
@@ -243,7 +251,7 @@ public class CopyPermanentEffect extends TokenEffectBase {
         }
     } // end resolve
 
-    private Card getProtoType(final SpellAbility sa, final Card original, final Player newOwner) {
+    public static Card getProtoType(final SpellAbility sa, final Card original, final Player newOwner) {
         final Card host = sa.getHostCard();
         int id = newOwner == null ? 0 : newOwner.getGame().nextCardId();
         final Card copy = new Card(id, original.getPaperCard(), host.getGame());

@@ -1,0 +1,11 @@
+Name:Undercover Operative
+ManaCost:2 U U
+Types:Creature Shapeshifter Rogue
+PT:0/0
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | SubAbility$ DBAddCounter | RememberCloneOrigin$ True | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except it enters with a shield counter on it if you control that creature. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
+SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | CounterType$ SHIELD | ETB$ True | ConditionDefined$ Remembered | ConditionPresent$ Creature.YouCtrl | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+Oracle:You may have Undercover Operative enter the battlefield as a copy of any creature on the battlefield, except it enters with a shield counter on it if you control that creature. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
