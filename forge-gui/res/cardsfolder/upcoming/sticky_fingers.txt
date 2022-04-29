@@ -1,0 +1,12 @@
+Name:Sticky Fingers
+ManaCost:R
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Menace | AddTrigger$ TriggerDamageDone | Description$ Enchanted creature has menace and "Whenever this creature deals combat damage to a player, create a Treasure token." (It can't be blocked except by two or more creatures. The token is an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TriggerDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | CombatDamage$ True | ValidTarget$ Player | Execute$ DBToken | TriggerDescription$ Whenever this creature deals combat damage to a player, create a Treasure token." (It can't be blocked except by two or more creatures. The token is an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac
+T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerDescription$ When enchanted creature dies, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
+Oracle:Enchant creature\nEnchanted creature has menace and "Whenever this creature deals combat damage to a player, create a Treasure token." (It can't be blocked except by two or more creatures. The token is an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nWhen enchanted creature dies, draw a card.
