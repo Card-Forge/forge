@@ -1,0 +1,8 @@
+Name:Involuntary Employment
+ManaCost:3 R
+Types:Sorcery
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | Untap$ True | AddKWs$ Haste | LoseControl$ EOT | SubAbility$ DBToken | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
+Oracle:Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
