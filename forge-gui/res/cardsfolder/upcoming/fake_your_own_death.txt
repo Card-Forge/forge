@@ -2,10 +2,10 @@ Name:Fake Your Own Death
 ManaCost:1 B
 Types:Instant
 A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control and you create a Treasure token." (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
-SVar:DBAnimate:DB$ Animate | Triggers$ TrigChangeZone | sVars$ TrigChangeZone2 | Defined$ ParentTarget
+SVar:DBAnimate:DB$ Animate | Triggers$ TrigChangeZone | Defined$ ParentTarget
 SVar:TrigChangeZone:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone2 | TriggerController$ TriggeredCardController | TriggerDescription$ When this creature dies, return it to the battlefield tapped under its owner's control and you create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
 SVar:TrigChangeZone2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ TriggeredNewCardLKICopy | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ TriggeredCardController
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
 Oracle:Until end of turn, target creature gets +2/+0 and gains "When this creature dies, return it to the battlefield tapped under its owner's control and you create a Treasure token." (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
