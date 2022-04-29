@@ -724,7 +724,7 @@ public class ComputerUtilCost {
 
         // ward or human misplay
         if (ApiType.Counter.equals(sa.getApi())) {
-            List<SpellAbility> spells = AbilityUtils.getDefinedSpellAbilities(source, sa.hasParam("Defined") ? sa.getParam("Defined") : "Targeted", sa);
+            List<SpellAbility> spells = AbilityUtils.getDefinedSpellAbilities(source, sa.getParamOrDefault("Defined", "Targeted"), sa);
             for (SpellAbility toBeCountered : spells) {
                 if (!CardFactoryUtil.isCounterable(toBeCountered.getHostCard())) {
                     return false;
