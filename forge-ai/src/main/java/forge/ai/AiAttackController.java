@@ -776,7 +776,7 @@ public class AiAttackController {
                     //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
                     mustAttackDef = defender;
                 } else {
-                    combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
+                    if (combat.getAttackConstraints().getRequirements().get(attacker) == null) continue;
                     // check defenders in order of maximum requirements
                     for (Pair<GameEntity, Integer> e : combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements()) {
                         if (e.getRight() == 0) continue;
