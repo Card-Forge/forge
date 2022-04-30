@@ -101,6 +101,10 @@ public class AttackConstraints {
         return restrictions;
     }
 
+    public Map<Card, AttackRequirement> getRequirements() {
+        return requirements;
+    }
+
     /**
      * Get a set of legal attackers.
      * 
