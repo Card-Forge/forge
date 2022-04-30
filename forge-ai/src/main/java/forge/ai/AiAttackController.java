@@ -20,7 +20,6 @@ package forge.ai;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.game.staticability.StaticAbilityMustAttack;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -58,9 +57,6 @@ import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.LinkedHashMapToAmount;
-import forge.util.maps.MapToAmount;
-import forge.util.maps.MapToAmountUtil;
 
 
 /**
@@ -771,10 +767,7 @@ public class AiAttackController {
         if (!nextTurn) {
             for (final Card attacker : this.attackers) {
                 GameEntity mustAttackDef = null;
-                if (attacker.isGoaded()) {
-                    // TODO this might result into trying to attack the wrong player
-                    mustAttackDef = defender;
-                } else if (attacker.getSVar("MustAttack").equals("True")) {
+                if (attacker.getSVar("MustAttack").equals("True")) {
                     mustAttackDef = defender;
                 } else if (attacker.hasSVar("EndOfTurnLeavePlay")
                         && isEffectiveAttacker(ai, attacker, combat, defender)) {
@@ -783,24 +776,19 @@ public class AiAttackController {
                     //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
                     mustAttackDef = defender;
                 } else {
-                    final List<GameEntity> attackRequirements = StaticAbilityMustAttack.entitiesMustAttack(attacker);
-                    if (attackRequirements.contains(attacker)) {
-                        // TODO add cost check here and switch defender if there's one without a cost
-                        // must attack anything
-                        mustAttackDef = defender;
-                        // next check if there's also a specific defender to attack, so don't count them
-                        attackRequirements.removeAll(new CardCollection(attacker));
-                    }
-                    final MapToAmount<GameEntity> amounts = new LinkedHashMapToAmount<>();
-                    amounts.addAll(attackRequirements);
-                    while (!amounts.isEmpty()) {
-                        // check defenders in order of maximum requirements
-                        GameEntity mustAttackDefMaybe = MapToAmountUtil.max(amounts).getKey();
+                    combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements();
+                    // check defenders in order of maximum requirements
+                    for (Pair<GameEntity, Integer> e : combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements()) {
+                        if (e.getRight() == 0) continue;
+                        GameEntity mustAttackDefMaybe = e.getLeft();
+                        // Gideon Jura returns LKI
+                        if (mustAttackDefMaybe instanceof Card) {
+                            mustAttackDefMaybe = ai.getGame().getCardState((Card) mustAttackDefMaybe);
+                        }
                         if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
                             mustAttackDef = mustAttackDefMaybe;
                             break;
                         }
-                        amounts.remove(mustAttackDefMaybe);
                     }
                 }
                 if (mustAttackDef != null) {
