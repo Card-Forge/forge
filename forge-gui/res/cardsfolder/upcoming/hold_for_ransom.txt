@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | AddAbility$ PayRansom | Description$ Enchanted creature can't attack or block and has "{7}: Hold for Ransom's controller sacrifices it and draws a card. Activate only as a sorcery."
-SVar:PayRansom:AB$ Sacrifice | Cost$ 7 | SacValid$ Defined | SacDefined$ OriginalHost | SacMessage$ {c:OriginalHost} | Defined$ OriginalHostController | SubAbility$ DBDraw | SorcerySpeed$ True | SpellDescription$ ORIGINALHOST's controller sacrifices it and draws a card. Activate only as a sorcery.
+SVar:PayRansom:AB$ Sacrifice | Cost$ 7 | SacDefined$ OriginalHost | Defined$ OriginalHostController | SubAbility$ DBDraw | SorcerySpeed$ True | SpellDescription$ ORIGINALHOST's controller sacrifices it and draws a card. Activate only as a sorcery.
 SVar:DBDraw:DB$ Draw | Defined$ OriginalHostController
 Oracle:Enchant creature\nEnchanted creature can't attack or block and has "{7}: Hold for Ransom's controller sacrifices it and draws a card. Activate only as a sorcery."
