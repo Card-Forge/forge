@@ -1,0 +1,11 @@
+Name:Most Wanted
+ManaCost:2 G
+Types:Enchantment Aura
+K:Flash
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 2 | AddToughness$ 1 | Description$ Enchanted creature gets +2/+1.
+T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerDescription$ When enchanted creature dies, create two Treasure tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac
+DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
+Oracle:Flash\nEnchant creature\nEnchanted creature gets +2/+1.\nWhen enchanted creature dies, create two Treasure tokens.

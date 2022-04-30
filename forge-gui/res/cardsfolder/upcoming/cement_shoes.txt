@@ -1,0 +1,9 @@
+Name:Cement Shoes
+ManaCost:1
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 3 | AddToughness$ 3 | AddTrigger$ TrigEndStep | Description$ Equipped creature gets +3/+3 and has "At the beginning of your end step, tap this creature."
+SVar:TrigEndStep:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBTap | TriggerDescription$ At the beginning of your end step, tap this creature.
+SVar:DBTap:DB$ Tap | Defined$ Self
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Equipped creature doesn't untap during its controller's untap step.
+K:Equip:2
+Oracle:Equipped creature gets +3/+3 and has "At the beginning of your end step, tap this creature."\nEquipped creature doesn't untap during its controller's untap step.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
