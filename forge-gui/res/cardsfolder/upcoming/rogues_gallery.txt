@@ -1,11 +1,11 @@
 Name:Rogues' Gallery
 ManaCost:2 B
 Types:Sorcery
-A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select up to one target white creature card in your graveyard | ValidTgts$ Creature.White+YouOwn | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ ReturnU | SpellDescription$ For each color, return up to one target creature card of that color from your graveyard to your hand.
-SVar:ReturnU:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select up to one target blue creature card in your graveyard | ValidTgts$ Creature.Blue+YouOwn | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ ReturnB
-SVar:ReturnB:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select up to one target black creature card in your graveyard | ValidTgts$ Creature.Black+YouOwn | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ ReturnR
-SVar:ReturnR:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select up to one target red creature card in your graveyard | ValidTgts$ Creature.Red+YouOwn | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ ReturnG
-SVar:ReturnG:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select up to one target green creature card in your graveyard | ValidTgts$ Creature.Green+YouOwn | TargetMin$ 0 | TargetMax$ 1
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select up to one target white creature card in your graveyard | ValidTgts$ Creature.White+YouOwn | TargetMin$ 0 | TargetMax$ 1 | LockInText$ True | SubAbility$ ReturnU | SpellDescription$ For each color, return up to one target creature card of that color from your graveyard to your hand.
+SVar:ReturnU:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select up to one target blue creature card in your graveyard | ValidTgts$ Creature.Blue+YouOwn | TargetMin$ 0 | TargetMax$ 1 | LockInText$ True | SubAbility$ ReturnB
+SVar:ReturnB:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select up to one target black creature card in your graveyard | ValidTgts$ Creature.Black+YouOwn | TargetMin$ 0 | TargetMax$ 1 | LockInText$ True | SubAbility$ ReturnR
+SVar:ReturnR:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select up to one target red creature card in your graveyard | ValidTgts$ Creature.Red+YouOwn | TargetMin$ 0 | TargetMax$ 1 | LockInText$ True | SubAbility$ ReturnG
+SVar:ReturnG:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select up to one target green creature card in your graveyard | ValidTgts$ Creature.Green+YouOwn | TargetMin$ 0 | LockInText$ True | TargetMax$ 1
 DeckHas:Ability$Graveyard
 AI:RemoveDeck:Random
 Oracle:For each color, return up to one target creature card of that color from your graveyard to your hand.
