@@ -1,0 +1,9 @@
+Name:Glittering Stockpile
+ManaCost:2 R
+Types:Artifact Treasure
+A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBPutCounter | SpellDescription$ Add {R}.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ STASH | SpellDescription$ Put a stash counter on CARDNAME.
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | Amount$ X | SpellDescription$ Add X mana of any one color, where X is the number of stash counters on CARDNAME.
+SVar:X:Count$CardCounters.STASH
+DeckHas:Ability$Counters|Sacrifice
+Oracle:{T}: Add {R}. Put a stash counter on Glittering Stockpile.\n{T}, Sacrifice Glittering Stockpile: Add X mana of any one color, where X is the number of stash counters on Glittering Stockpile.
