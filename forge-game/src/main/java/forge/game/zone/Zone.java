@@ -121,7 +121,7 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             c.setTapped(false);
         }
         //Emblem/Effects are Immutable..
-        if (!c.isImmutable())
+        if (!c.isToken() || !c.isImmutable())
             c.setZone(this);
 
         if ((zoneType == ZoneType.Battlefield || !c.isToken()) || (zoneType == ZoneType.Stack && c.getCopiedPermanent() != null)) {
