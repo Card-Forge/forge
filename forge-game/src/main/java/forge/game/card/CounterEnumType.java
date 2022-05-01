@@ -315,6 +315,8 @@ public enum CounterEnumType {
 
     SPORE("SPORE", 122, 218, 150),
 
+    STASH("STASH", 248, 191, 0),
+
     STORAGE("STORG", 255, 177, 121),
 
     STRIFE("STRFE", 255, 89, 223),
