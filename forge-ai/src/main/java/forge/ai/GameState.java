@@ -1135,7 +1135,7 @@ public abstract class GameState {
             Card attachedTo = idToCard.get(entry.getValue());
             Card attacher = entry.getKey();
             if (attacher.isAttachment()) {
-                attacher.attachToEntity(attachedTo);
+                attacher.attachToEntity(attachedTo, null, true);
             }
         }
 
@@ -1146,7 +1146,7 @@ public abstract class GameState {
             Game game = attacher.getGame();
             Player attachedTo = entry.getValue() == TARGET_AI ? game.getPlayers().get(1) : game.getPlayers().get(0);
 
-            attacher.attachToEntity(attachedTo);
+            attacher.attachToEntity(attachedTo, null);
         }
     }
 

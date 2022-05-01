@@ -618,7 +618,7 @@ public class AttachAi extends SpellAbilityAi {
                 CardCollection preList = new CardCollection(lki);
                 preList.add(attachSourceLki);
                 c.getGame().getAction().checkStaticAbilities(false, Sets.newHashSet(preList), preList);
-                boolean result = lki.canBeAttached(attachSourceLki);
+                boolean result = lki.canBeAttached(attachSourceLki, null);
 
                 //reset static abilities
                 c.getGame().getAction().checkStaticAbilities(false);
@@ -1354,7 +1354,7 @@ public class AttachAi extends SpellAbilityAi {
         if (tgt == null) {
             list = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Defined"), sa);
         } else {
-            list = CardLists.filter(CardUtil.getValidCardsToTarget(tgt, sa), CardPredicates.canBeAttached(attachSource));
+            list = CardLists.filter(CardUtil.getValidCardsToTarget(tgt, sa), CardPredicates.canBeAttached(attachSource, sa));
         }
 
         if (list.isEmpty()) {
@@ -1627,7 +1627,6 @@ public class AttachAi extends SpellAbilityAi {
      * @return true, if is useful keyword
      */
     private static boolean isUsefulCurseKeyword(final String keyword, final Card card, final SpellAbility sa) {
-        final Player ai = sa.getActivatingPlayer();
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }

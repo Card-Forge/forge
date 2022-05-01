@@ -162,13 +162,13 @@ public class GameAction {
         // need to check before it enters
         if (c.isAura() && !c.isAttachedToEntity() && toBattlefield && (zoneFrom == null || !zoneFrom.is(ZoneType.Stack))) {
             boolean found = false;
-            if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(c))) {
+            if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(c, null))) {
                 found = true;
             }
-            else if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(c))) {
+            else if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(c, null))) {
                 found = true;
             }
-            else if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateGraveyard), CardPredicates.canBeAttached(c))) {
+            else if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateGraveyard), CardPredicates.canBeAttached(c, null))) {
                 found = true;
             }
             if (!found) {
@@ -398,13 +398,13 @@ public class GameAction {
         if (copied.isAura() && !copied.isAttachedToEntity() && toBattlefield) {
             if (zoneFrom != null && zoneFrom.is(ZoneType.Stack) && game.getStack().isResolving(c)) {
                 boolean found = false;
-                if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(copied))) {
+                if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(copied, null))) {
                     found = true;
                 }
-                if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(copied))) {
+                if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(copied, null))) {
                     found = true;
                 }
-                if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateGraveyard), CardPredicates.canBeAttached(copied))) {
+                if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateGraveyard), CardPredicates.canBeAttached(copied, null))) {
                     found = true;
                 }
                 if (!found) {
@@ -1515,7 +1515,7 @@ public class GameAction {
 
         if (c.isAttachedToEntity()) {
             final GameEntity ge = c.getEntityAttachedTo();
-            if (!ge.canBeAttached(c, true)) {
+            if (!ge.canBeAttached(c, null, true)) {
                 unAttachList.add(c);
                 checkAgain = true;
             }
@@ -2381,7 +2381,7 @@ public class GameAction {
             final Player pa = p.getController().chooseSingleEntityForEffect(players, aura,
                     Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
             if (pa != null) {
-                source.attachToEntity(pa);
+                source.attachToEntity(pa, null);
                 return true;
             }
         } else {
@@ -2408,7 +2408,7 @@ public class GameAction {
             final Card o = p.getController().chooseSingleEntityForEffect(list, aura,
                     Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(source.getName())), null);
             if (o != null) {
-                source.attachToEntity(game.getCardState(o), true);
+                source.attachToEntity(game.getCardState(o), null, true);
                 return true;
             }
         }

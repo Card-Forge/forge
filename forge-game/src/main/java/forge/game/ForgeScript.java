@@ -178,7 +178,7 @@ public class ForgeScript {
         } else if (property.equals("Modular")) {
             return sa.hasParam("Modular");
         } else if (property.equals("Equip")) {
-            return sa.hasParam("Equip");
+            return sa.isEquip();
         } else if (property.equals("Boast")) {
             return sa.isBoast();
         } else if (property.equals("Mutate")) {
