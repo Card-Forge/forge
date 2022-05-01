@@ -1181,11 +1181,6 @@ public class ComputerUtilCombat {
     public static int predictPowerBonusOfAttacker(final Card attacker, final Card blocker, final Combat combat, boolean withoutAbilities, boolean withoutCombatStaticAbilities) {
         int power = 0;
 
-        //check Exalted only for the first attacker
-        if (combat != null && combat.getAttackers().isEmpty()) {
-            power += attacker.getController().countExaltedBonus();
-        }
-
         // Serene Master switches power with attacker
         if (blocker!= null && blocker.getName().equals("Serene Master")) {
             power += blocker.getNetPower() - attacker.getNetPower();
@@ -1376,11 +1371,6 @@ public class ComputerUtilCombat {
     public static int predictToughnessBonusOfAttacker(final Card attacker, final Card blocker, final Combat combat
             , boolean withoutAbilities, boolean withoutCombatStaticAbilities) {
         int toughness = 0;
-
-        //check Exalted only for the first attacker
-        if (combat != null && combat.getAttackers().isEmpty()) {
-            toughness += attacker.getController().countExaltedBonus();
-        }
 
         if (blocker != null && attacker.getName().equals("Shape Stealer")) {
             toughness += blocker.getNetToughness() - attacker.getNetToughness();
