@@ -1,0 +1,12 @@
+Name:Citizen's Crowbar
+ManaCost:1 W
+Types:Artifact Equipment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 green and white Citizen creature token, then attach CARDNAME to it.
+SVar:TrigToken:DB$ Token | TokenScript$ gw_1_1_citizen | RememberTokens$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddAbility$ ABDestroy | Description$ Equipped creature gets +1/+1 and has "{W}, {T}, Sacrifice CARDNAME: Destroy target artifact or enchantment."
+SVar:ABDestroy:AB$ Destroy | Cost$ W T Sac<1/OriginalHost/Citizen's Crowbar> | ValidTgts$ Artifact,Enchantment  | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
+K:Equip:2
+DeckHas:Ability$Token|Sacrifice & Type$Citizen
+Oracle:When Citizen's Crowbar enters the battlefield, create a 1/1 green and white Citizen creature token, then attach Citizen's Crowbar to it.\nEquipped creature gets +1/+1 and has "{W}, {T}, Sacrifice Citizen's Crowbar: Destroy target artifact or enchantment."\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
