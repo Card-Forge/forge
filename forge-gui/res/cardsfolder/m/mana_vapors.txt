@@ -1,7 +1,11 @@
 Name:Mana Vapors
 ManaCost:1 U
 Types:Sorcery
-A:SP$ PumpAll | Cost$ 1 U | ValidTgts$ Player | IsCurse$ True | ValidCards$ Land.TargetedPlayerCtrl | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent | SpellDescription$ Lands target player controls don't untap during their next untap step.
+A:SP$ Effect | ValidTgts$ Player | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | Duration$ Permanent | RememberObjects$ Targeted | SubAbility$ DBCleanup | SpellDescription$ Lands target player controls don't untap during their next untap step.
+SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Land.RememberedPlayerCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step. | Description$ Lands target player controls don't untap during their next untap step.
+SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 #TODO: the AI doesn't really target the opponent with the tapped lands in a multiplayer game (not necessarily, anyway). Could use improvement before this card is marked AI playable.
 SVar:NeedsToPlay:Land.OppCtrl+tapped
 AI:RemoveDeck:All
