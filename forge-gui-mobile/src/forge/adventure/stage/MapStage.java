@@ -372,6 +372,7 @@ public class MapStage extends GameStage {
                         break;
                     case "shop":
                         String shopList = prop.get("shopList").toString();
+                        shopList=shopList.replaceAll("\\s","");
                         List possibleShops = Arrays.asList(shopList.split(","));
                         Array<ShopData> shops;
                         if (possibleShops.size() == 0 || shopList.equals(""))
