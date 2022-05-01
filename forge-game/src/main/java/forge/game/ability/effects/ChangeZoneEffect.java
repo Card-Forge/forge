@@ -615,7 +615,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         // only valid choices are when they could be attached
                         // TODO for multiple Auras entering attached this way, need to use LKI info
                         if (!list.isEmpty()) {
-                            list = CardLists.filter(list, CardPredicates.canBeAttached(gameCard));
+                            list = CardLists.filter(list, CardPredicates.canBeAttached(gameCard, sa));
                         }
                         if (!list.isEmpty()) {
                             Map<String, Object> params = Maps.newHashMap();
@@ -624,7 +624,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                             // TODO can't attach later or moveToPlay would attach indirectly
                             // bypass canBeAttached to skip Protection checks when trying to attach multiple auras that would grant protection
-                            gameCard.attachToEntity(game.getCardState(attachedTo), true);
+                            gameCard.attachToEntity(game.getCardState(attachedTo), sa, true);
                         } else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
                         }
@@ -636,7 +636,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             Map<String, Object> params = Maps.newHashMap();
                             params.put("Attach", gameCard);
                             Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, Localizer.getInstance().getMessage("lblSelectAPlayerAttachSourceTo", gameCard.toString()), params);
-                            gameCard.attachToEntity(attachedTo);
+                            gameCard.attachToEntity(attachedTo, sa);
                         }
                         else { // When it should enter the battlefield attached to an illegal player it fails
                             continue;
@@ -708,7 +708,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             Map<String, Object> params = Maps.newHashMap();
                             params.put("Attach", gameCard);
                             Card attachedTo = chooser.getController().chooseSingleEntityForEffect(list, sa, title, params);
-                            movedCard.attachToEntity(attachedTo);
+                            movedCard.attachToEntity(attachedTo, sa);
                         }
                     }
                 } else {
@@ -1287,7 +1287,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         // only valid choices are when they could be attached
                         // TODO for multiple Auras entering attached this way, need to use LKI info
                         if (!list.isEmpty()) {
-                            list = CardLists.filter(list, CardPredicates.canBeAttached(c));
+                            list = CardLists.filter(list, CardPredicates.canBeAttached(c, sa));
                         }
                         if (!list.isEmpty()) {
                             String title = Localizer.getInstance().getMessage("lblSelectACardAttachSourceTo", CardTranslation.getTranslatedName(c.getName()));
@@ -1297,7 +1297,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                             // TODO can't attach later or moveToPlay would attach indirectly
                             // bypass canBeAttached to skip Protection checks when trying to attach multiple auras that would grant protection
-                            c.attachToEntity(game.getCardState(attachedTo), true);
+                            c.attachToEntity(game.getCardState(attachedTo), sa, true);
                         }
                         else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
@@ -1311,7 +1311,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             Map<String, Object> params = Maps.newHashMap();
                             params.put("Attach", c);
                             Player attachedTo = player.getController().chooseSingleEntityForEffect(list, sa, title, params);
-                            c.attachToEntity(attachedTo);
+                            c.attachToEntity(attachedTo, sa);
                         }
                         else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
@@ -1341,7 +1341,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             Map<String, Object> params = Maps.newHashMap();
                             params.put("Attach", movedCard);
                             Card attachedTo = decider.getController().chooseSingleEntityForEffect(list, sa, title, params);
-                            movedCard.attachToEntity(attachedTo);
+                            movedCard.attachToEntity(attachedTo, sa);
                         }
                     }
                 }

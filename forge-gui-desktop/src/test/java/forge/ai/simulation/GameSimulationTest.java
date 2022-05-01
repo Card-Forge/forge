@@ -125,7 +125,7 @@ public class GameSimulationTest extends SimulationTest {
         Card bear = addCard(bearCardName, p);
         bear.setSickness(false);
         Card cloak = addCard("Whispersilk Cloak", p);
-        cloak.attachToEntity(bear);
+        cloak.attachToEntity(bear, null);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
         AssertJUnit.assertEquals(1, bear.getAmountOfKeyword("Unblockable"));
@@ -144,7 +144,7 @@ public class GameSimulationTest extends SimulationTest {
         Card bear = addCard(bearCardName, p);
         bear.setSickness(false);
         Card lifelink = addCard("Lifelink", p);
-        lifelink.attachToEntity(bear);
+        lifelink.attachToEntity(bear, null);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
         AssertJUnit.assertEquals(1, bear.getAmountOfKeyword("Lifelink"));
@@ -700,7 +700,7 @@ public class GameSimulationTest extends SimulationTest {
         Card pridemate = addCard(pridemateName, p1);
         Card indestructibility = addCard(indestructibilityName, p1);
 
-        indestructibility.attachToEntity(pridemate);
+        indestructibility.attachToEntity(pridemate, null);
 
         Card ignition = addCardToZone(ignitionName, p1, ZoneType.Hand);
         SpellAbility ignitionSA = ignition.getFirstSpellAbility();
@@ -816,7 +816,7 @@ public class GameSimulationTest extends SimulationTest {
         Card pridemate = addCard(pridemateName, p1);
         Card indestructibility = addCard(indestructibilityName, p1);
 
-        indestructibility.attachToEntity(pridemate);
+        indestructibility.attachToEntity(pridemate, null);
 
         Card ignition = addCardToZone(ignitionName, p1, ZoneType.Hand);
         SpellAbility ignitionSA = ignition.getFirstSpellAbility();
@@ -1425,7 +1425,7 @@ public class GameSimulationTest extends SimulationTest {
         Card bear = addCard(bearCardName, p);
         bear.setSickness(false);
         Card lifelink = addCard("Lifelink", p);
-        lifelink.attachToEntity(bear);
+        lifelink.attachToEntity(bear, null);
 
         AssertJUnit.assertTrue(bear.isEnchanted());
         AssertJUnit.assertTrue(bear.hasCardAttachment(lifelink));
@@ -1466,7 +1466,7 @@ public class GameSimulationTest extends SimulationTest {
         final String curseName = "Cruel Reality";
 
         Card curse = addCard(curseName, p);
-        curse.attachToEntity(p);
+        curse.attachToEntity(p, null);
         game.getAction().checkStateEffects(true);
         AssertJUnit.assertTrue(p.isEnchanted());
         AssertJUnit.assertTrue(p.hasCardAttachment(curse));
@@ -1500,7 +1500,7 @@ public class GameSimulationTest extends SimulationTest {
         Card mountain = addCardToZone("Mountain", p, ZoneType.Battlefield);
         Card fortification = addCardToZone("Darksteel Garrison", p, ZoneType.Battlefield);
 
-        fortification.attachToEntity(mountain);
+        fortification.attachToEntity(mountain, null);
         game.getAction().checkStateEffects(true);
 
         AssertJUnit.assertTrue(fortification.isFortification());
@@ -1535,7 +1535,7 @@ public class GameSimulationTest extends SimulationTest {
         Card dryad = addCardToZone("Dryad Arbor", p, ZoneType.Battlefield);
         Card fortification = addCardToZone("Darksteel Garrison", p, ZoneType.Battlefield);
 
-        fortification.attachToEntity(dryad);
+        fortification.attachToEntity(dryad, null);
         game.getAction().checkStateEffects(true);
 
         AssertJUnit.assertTrue(dryad.isFortified());
@@ -1693,7 +1693,7 @@ public class GameSimulationTest extends SimulationTest {
         String indestructibilityName = "Indestructibility";
         Card indestructibility = addCard(indestructibilityName, p);
 
-        indestructibility.attachToEntity(teysa);
+        indestructibility.attachToEntity(teysa, null);
 
         // update Indestructible state
         game.getAction().checkStateEffects(true);
@@ -1732,7 +1732,7 @@ public class GameSimulationTest extends SimulationTest {
         String indestructibilityName = "Indestructibility";
         Card indestructibility = addCard(indestructibilityName, p);
 
-        indestructibility.attachToEntity(gitrog);
+        indestructibility.attachToEntity(gitrog, null);
 
         // update Indestructible state
         game.getAction().checkStateEffects(true);
@@ -2305,7 +2305,7 @@ public class GameSimulationTest extends SimulationTest {
         addCard(capridorName, p1);
         Card pridemate = addCard(pridemateName, p1);
         Card indestructibility = addCard(indestructibilityName, p1);
-        indestructibility.attachToEntity(pridemate);
+        indestructibility.attachToEntity(pridemate, null);
         addCard(bearName, p1);
 
         Card alphaBrawl = addCardToZone(alphaBrawlName, p2, ZoneType.Hand);
