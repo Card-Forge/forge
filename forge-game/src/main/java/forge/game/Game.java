@@ -123,10 +123,10 @@ public class Game {
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
 
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
-    private Map<Card, Integer>  facedownWhileCasting = Maps.newHashMap();
+    private Map<Card, Integer> facedownWhileCasting = Maps.newHashMap();
 
-    private Player monarch = null;
-    private Player monarchBeginTurn = null;
+    private Player monarch;
+    private Player monarchBeginTurn;
     private Player startingPlayer;
 
     private Direction turnOrder = Direction.getDefaultDirection();
