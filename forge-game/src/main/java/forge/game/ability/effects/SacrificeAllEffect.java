@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
@@ -18,25 +19,27 @@ import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 
 public class SacrificeAllEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
         // when getStackDesc is called, just build exactly what is happening
-
         final StringBuilder sb = new StringBuilder();
 
-        /*
-         * This is not currently targeted ArrayList<Player> tgtPlayers;
-         * 
-         * Target tgt = af.getAbTgt(); if (tgt != null) tgtPlayers =
-         * tgt.getTargetPlayers(); else tgtPlayers =
-         * AbilityFactory.getDefinedPlayers(sa.getHostCard(),
-         * sa.get("Defined"), sa);
-         */
-
-        sb.append("Sacrifice permanents.");
+        if (sa.hasParam("Controller")) {
+            List<Player> conts = getDefinedPlayersOrTargeted(sa, "Controller");
+            sb.append(Lang.joinHomogenous(conts)).append(conts.size() == 1 ? " sacrifices " : " sacrifice ");
+        } else {
+            sb.append("Sacrifice ");
+        }
+        if (sa.hasParam("Defined")) {
+            List<Card> toSac = getDefinedCardsOrTargeted(sa);
+            sb.append(Lang.joinHomogenous(toSac)).append(".");
+        } else {
+            sb.append("permanents.");
+        }
         return sb.toString();
     }
 

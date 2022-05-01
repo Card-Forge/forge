@@ -1,0 +1,9 @@
+Name:Hold for Ransom
+ManaCost:1 W
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | AddAbility$ PayRansom | Description$ Enchanted creature can't attack or block and has "{7}: Hold for Ransom's controller sacrifices it and draws a card. Activate only as a sorcery."
+SVar:PayRansom:AB$ SacrificeAll | Cost$ 7 | Defined$ OriginalHost | Controller$ OriginalHostController | SubAbility$ DBDraw | SorcerySpeed$ True | SpellDescription$ ORIGINALHOST's controller sacrifices it and draws a card. Activate only as a sorcery.
+SVar:DBDraw:DB$ Draw | Defined$ OriginalHostController
+Oracle:Enchant creature\nEnchanted creature can't attack or block and has "{7}: Hold for Ransom's controller sacrifices it and draws a card. Activate only as a sorcery."

@@ -1035,6 +1035,11 @@ public class AbilityUtils {
             if (root != null) {
                 addPlayer(Lists.newArrayList(root), defined, players);
             }
+        } else if (defined.startsWith("OriginalHost")) {
+            Card originalHost = sa.getOriginalHost();
+            if (originalHost != null) {
+                addPlayer(Lists.newArrayList(originalHost), defined, players);
+            }
         }
         else if (defined.startsWith("DelayTriggerRemembered") && sa instanceof SpellAbility) {
             SpellAbility root = ((SpellAbility)sa).getRootAbility();
