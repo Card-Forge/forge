@@ -422,7 +422,7 @@ public abstract class DeckGeneratorBase {
     }
 
     public List<String> regexLandSearch(String pattern, Iterable<PaperCard> landCards){
-        final List<String> dLands = new ArrayList<>();
+        //final List<String> dLands = new ArrayList<>();
         Pattern p = Pattern.compile(pattern);
         for (PaperCard card:landCards){
             if (card.getRules().getAiHints().getRemAIDecks()) {
