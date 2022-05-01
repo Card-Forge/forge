@@ -1,7 +1,7 @@
 Name:Rhox Pummeler
-ManaCost:3 G
+ManaCost:5 G
 Types:Creature Rhino Soldier
-PT:3/3
+PT:6/3
 K:etbCounter:SHIELD:1
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_SHIELD | AddKeyword$ Trample | Description$ CARDNAME has trample as long as it has a shield counter on it.
 DeckHas:Ability$Counters
