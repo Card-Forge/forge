@@ -1678,8 +1678,7 @@ public class CardFactoryUtil {
             final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | OptionalDecider$ You | "
                     + " Secondary$ True | TriggerDescription$ Ripple " + num + " - CARDNAME";
 
-            final String abString = "DB$ Dig | NoMove$ True | DigNum$ " + num +
-                    " | Reveal$ True | RememberRevealed$ True";
+            final String abString = "DB$ PeekAndReveal | PeekAmount$ " + num + " | RememberRevealed$ True";
 
             final String dbCast = "DB$ Play | Valid$ Card.IsRemembered+sameName | " +
                     "ValidZone$ Library | WithoutManaCost$ True | Optional$ True | " +
