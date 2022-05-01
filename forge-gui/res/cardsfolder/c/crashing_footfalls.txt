@@ -1,5 +1,6 @@
 Name:Crashing Footfalls
 ManaCost:no cost
+Colors:green
 Types:Sorcery
 K:Suspend:4:G
 SVar:NonStackingEffect:True
