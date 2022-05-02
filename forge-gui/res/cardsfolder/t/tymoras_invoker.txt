@@ -1,0 +1,6 @@
+Name:Tymora's Invoker
+ManaCost:1 U
+Types:Creature Orc Rogue
+PT:1/3
+A:AB$ Draw | Cost$ 8 | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:Sleight of Hand - {8}: Draw two cards.
