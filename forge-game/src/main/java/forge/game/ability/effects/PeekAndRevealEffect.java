@@ -29,21 +29,18 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final Player peeker = sa.getActivatingPlayer();
-
         final int numPeek = sa.hasParam("PeekAmount") ?
                 AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("PeekAmount"), sa) : 1;
         final String verb = sa.hasParam("NoReveal") || sa.hasParam("RevealOptional") ? " looks at " :
                 " reveals ";
-        final String defined = sa.getParamOrDefault("Defined", "their");
-        String whose;
-        if (defined.equals("Player")) {
-            whose = "each player's";
-        } else { // other else ifs for specific defined can be added above as needs arise
-            whose = Lang.joinHomogenous(getTargetPlayers(sa));
-        }
+        final String defined = sa.getParamOrDefault("Defined", "");
+        String whose = defined.equals("Player") && verb.equals(" looks at ") ? "each player's" : "their";
+
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(peeker).append(verb).append("the top ");
+        sb.append(sa.hasParam("NoPeek") && verb.equals(" reveals ") ?
+                        Lang.joinHomogenous(getDefinedPlayersOrTargeted(sa)) : peeker);
+        sb.append(verb).append("the top ");
         sb.append(numPeek > 1 ? Lang.getNumeral(numPeek) + " cards " : "card ").append("of ").append(whose);
         sb.append(" library.");
 
