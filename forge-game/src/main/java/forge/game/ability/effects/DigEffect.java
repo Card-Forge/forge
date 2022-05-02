@@ -47,7 +47,7 @@ public class DigEffect extends SpellAbilityEffect {
             verb = " exiles ";
         }
         sb.append(host.getController()).append(verb).append("the top ");
-        sb.append(numToDig == 1 ? "card" : (Lang.getNumeral(numToDig) + " cards")).append(" of ");
+        sb.append(numToDig == 1 ? "card" : Lang.getNumeral(numToDig) + " cards").append(" of ");
 
         if (tgtPlayers.contains(host.getController())) {
             sb.append("their ");
