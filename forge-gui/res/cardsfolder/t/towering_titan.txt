@@ -3,7 +3,7 @@ ManaCost:4 G G
 Types:Creature Giant
 PT:0/0
 K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with X +1/+1 counters on it, where X is the total toughness of other creatures you control.
-SVar:X:Count$LastStateBattlefield Creature.Other+YouCtrl$SumToughness
+SVar:X:Count$Valid Creature.Other+YouCtrl$SumToughness
 A:AB$ PumpAll | Cost$ Sac<1/Creature.withDefender/creature with defender> | ValidCards$ Creature | KW$ Trample | SpellDescription$ All creatures gain trample until end of turn.
 SVar:NeedsToPlayVar:Z GE3
 SVar:Z:Count$Valid Creature.YouCtrl+toughnessGE2

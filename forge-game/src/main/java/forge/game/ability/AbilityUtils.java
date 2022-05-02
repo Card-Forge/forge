@@ -1831,8 +1831,7 @@ public class AbilityUtils {
                 }
 
                 if (sq[0].startsWith("LastStateBattlefield")) {
-                    String[] paidparts = l[0].split("\\$", 2);
-                    final String[] k = paidparts[0].split(" ");
+                    final String[] k = l[0].split(" ");
                     CardCollectionView list;
                     // this is only for spells that were cast
                     if (sq[0].contains("WithFallback")) {
@@ -1852,13 +1851,7 @@ public class AbilityUtils {
                         }
                     }
                     list = CardLists.getValidCards(list, k[1], sa.getActivatingPlayer(), c, sa);
-                    int n;
-                    if (paidparts.length > 1) {
-                        n = handlePaid(new CardCollection(list), paidparts[1], c, ctb);
-                    } else {
-                        n = list.size();
-                    }
-                    return doXMath(n, expr, c, ctb);
+                    return doXMath(list.size(), expr, c, ctb);
                 }
 
                 if (sq[0].startsWith("LastStateGraveyard")) {
@@ -2740,9 +2733,16 @@ public class AbilityUtils {
             if (lparts[0].contains("All")) {
                 cardsInZones = game.getCardsInGame();
             } else {
+                CardCollectionView battlefield = game.getCardsIn(ZoneType.Battlefield);
+                if (ctb instanceof SpellAbility) {
+                    SpellAbility sa = (SpellAbility) ctb;
+                    if (sa.isReplacementAbility()) {
+                        battlefield = sa.getLastStateBattlefield();
+                    }
+                }
                 cardsInZones = lparts[0].length() > 5
                         ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(5)))
-                                : game.getCardsIn(ZoneType.Battlefield);
+                                : battlefield;
             }
 
             int cnt;
