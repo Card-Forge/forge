@@ -38,11 +38,20 @@ public class TokenEffect extends TokenEffectBase {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         if (sa.hasParam("SpellDescription")) {
+            final Card host = sa.getHostCard();
             String desc = sa.getParam("SpellDescription");
-            if (StringUtils.containsIgnoreCase(desc,"Create")) {
-                final Card host = sa.getHostCard();
-                final List<Player> creators = AbilityUtils.getDefinedPlayers(host, sa.getParamOrDefault("TokenOwner",
-                        "You"), sa);
+            List<String> words = Arrays.asList(desc.split(" "));
+            final List<Player> creators = AbilityUtils.getDefinedPlayers(host, sa.getParamOrDefault("TokenOwner",
+                    "You"), sa);
+            if (!words.get(0).equalsIgnoreCase("Create") && desc.contains(" create")) {
+                desc = desc.replace(desc.substring(0, desc.indexOf(" create")), Lang.joinHomogenous(creators));
+                if (creators.size() == 1) {
+                    desc = desc.replaceAll(" create ", " creates ");
+                }
+                if (desc.contains("you")) {
+                    desc = desc.replaceAll("you", sa.getActivatingPlayer().getName());
+                }
+            } else if (StringUtils.containsIgnoreCase(desc,"Create")) {
                 String verb = creators.size() == 1 ? "creates" : "create";
                 String start = Lang.joinHomogenous(creators) + " " + verb;
                 String create = desc.contains("Create") ? "Create" : "create";
@@ -54,7 +63,6 @@ public class TokenEffect extends TokenEffectBase {
                     if (numTokens != 0) { //0 probably means calculation isn't ready in time for stack
                         if (numTokens != 1) { //if we are making more than one, substitute the numeral for a/an
                             String numeral = " " + Lang.getNumeral(numTokens) + " ";
-                            List<String> words = Arrays.asList(desc.split(" "));
                             String target = " " + words.get(words.indexOf(verb) + 1) + " ";
                             desc = desc.replaceFirst(target, numeral);
                         }
