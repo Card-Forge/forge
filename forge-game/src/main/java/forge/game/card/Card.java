@@ -3440,22 +3440,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return this.isAttachedToEntity();
     }
 
-    public final void equipCard(final Card c) {
-        if (!isEquipment()) {
-            return;
-        }
-
-        this.attachToEntity(c);
-    }
-
-    public final void fortifyCard(final Card c) {
-        if (!isFortification()) {
-            return;
-        }
-
-        this.attachToEntity(c);
-    }
-
     public final void unEquipCard(final Card c) { // equipment.unEquipCard(equippedCard);
         this.unattachFromEntity(c);
     }
@@ -3511,11 +3495,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getEnchantingCard() != null;
     }
 
-    public final void attachToEntity(final GameEntity entity) {
-        attachToEntity(entity, false);
+    public final void attachToEntity(final GameEntity entity, SpellAbility sa) {
+        attachToEntity(entity, sa, false);
     }
-    public final void attachToEntity(final GameEntity entity, boolean overwrite) {
-        if (!overwrite && !entity.canBeAttached(this)) {
+    public final void attachToEntity(final GameEntity entity, SpellAbility sa, boolean overwrite) {
+        if (!overwrite && !entity.canBeAttached(this, sa)) {
             return;
         }
 
@@ -6082,17 +6066,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     @Override
-    protected final boolean canBeEquippedBy(final Card equip) {
-        if (isCreature() && isInPlay()) {
-            return true;
-        } else if (isPlaneswalker() && isInPlay()) {
-            for (KeywordInterface inst : equip.getKeywords(Keyword.EQUIP)) {
-                if (inst.getOriginal().contains("planeswalker")) {
-                    return true;
-                }
-            }
+    protected final boolean canBeEquippedBy(final Card equip, SpellAbility sa) {
+        if (!isInPlay()) {
+            return false;
         }
-        return false;
+        if (sa != null && sa.isEquip()) {
+            return isValid(sa.getTargetRestrictions().getValidTgts(), sa.getActivatingPlayer(), equip, sa);
+        }
+        return isCreature();
     }
 
     @Override
@@ -6104,13 +6085,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
      * @see forge.game.GameEntity#canBeAttached(forge.game.card.Card, boolean)
      */
     @Override
-    public boolean canBeAttached(Card attach, boolean checkSBA) {
+    public boolean canBeAttached(Card attach, SpellAbility sa, boolean checkSBA) {
         // phase check there
         if (isPhasedOut() && !attach.isPhasedOut()) {
             return false;
         }
 
-        return super.canBeAttached(attach, checkSBA);
+        return super.canBeAttached(attach, sa, checkSBA);
     }
 
     public FCollectionView<ReplacementEffect> getReplacementEffects() {

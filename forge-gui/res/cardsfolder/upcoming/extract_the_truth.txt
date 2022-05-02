@@ -1,0 +1,7 @@
+Name:Extract the Truth
+ManaCost:1 B
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDiscard,DBSacrifice
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | Optional$ True | DiscardValid$ Creature,Enchantment,Planeswalker | DiscardValidDesc$ creature, enchantment, or planeswalker | SpellDescription$ Target opponent reveals their hand. You may choose a creature, enchantment, or planeswalker card from it. That player discards that card.
+SVar:DBSacrifice:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Enchantment | SpellDescription$ Target opponent sacrifices an enchantment.
+Oracle:Choose one —\n• Target opponent reveals their hand. You may choose a creature, enchantment, or planeswalker card from it. That player discards that card.\n• Target opponent sacrifices an enchantment.

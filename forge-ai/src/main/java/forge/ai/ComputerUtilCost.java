@@ -528,10 +528,11 @@ public class ComputerUtilCost {
             sa.setActivatingPlayer(player); // complaints on NPE had came before this line was added.
         }
 
+        final boolean cannotBeCountered = !CardFactoryUtil.isCounterable(sa.getHostCard());
+
         // Check for stuff like Nether Void
         int extraManaNeeded = 0;
         if (sa instanceof Spell) {
-            final boolean cannotBeCountered = !CardFactoryUtil.isCounterable(sa.getHostCard());
             for (Card c : player.getGame().getCardsIn(ZoneType.Battlefield)) {
                 final String snem = c.getSVar("AI_SpellsNeedExtraMana");
                 if (!StringUtils.isBlank(snem)) {
@@ -591,7 +592,7 @@ public class ComputerUtilCost {
         }
 
         // Ward - will be accounted for when rechecking a targeted ability
-        if (!(sa instanceof WrappedAbility) && sa.usesTargeting()) {
+        if (!(sa instanceof WrappedAbility) && sa.usesTargeting() && !cannotBeCountered) {
             for (Card tgt : sa.getTargets().getTargetCards()) {
                 if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
                     Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
@@ -719,6 +720,17 @@ public class ComputerUtilCost {
         // AI will only pay when it's not already payed and only opponents abilities
         if (alreadyPaid || (payers.size() > 1 && (isMine && !payForOwnOnly))) {
             return false;
+        }
+
+        // ward or human misplay
+        if (ApiType.Counter.equals(sa.getApi())) {
+            List<SpellAbility> spells = AbilityUtils.getDefinedSpellAbilities(source, sa.getParamOrDefault("Defined", "Targeted"), sa);
+            for (SpellAbility toBeCountered : spells) {
+                if (!CardFactoryUtil.isCounterable(toBeCountered.getHostCard())) {
+                    return false;
+                }
+                // TODO check hasFizzled
+            }
         }
 
         // AI was crashing because the blank ability used to pay costs

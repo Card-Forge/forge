@@ -341,7 +341,7 @@ public final class GameActionUtil {
                 alternatives.add(newSA);
             }
         }
-        if (sa.hasParam("Equip") && activator.hasKeyword("You may pay 0 rather than pay equip costs.")) {
+        if (sa.isEquip() && activator.hasKeyword("You may pay 0 rather than pay equip costs.")) {
             for (final KeywordInterface inst : source.getKeywords()) {
                 // need to find the correct Keyword from which this Ability is from
                 if (!inst.getAbilities().contains(sa)) {

@@ -26,6 +26,7 @@ import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.StringUtils;
 
 public class DigEffect extends SpellAbilityEffect {
 
@@ -46,7 +47,7 @@ public class DigEffect extends SpellAbilityEffect {
             verb = " exiles ";
         }
         sb.append(host.getController()).append(verb).append("the top ");
-        sb.append(numToDig == 1 ? "card" : (Lang.getNumeral(numToDig) + " cards")).append(" of ");
+        sb.append(numToDig == 1 ? "card" : Lang.getNumeral(numToDig) + " cards").append(" of ");
 
         if (tgtPlayers.contains(host.getController())) {
             sb.append("their ");
@@ -67,7 +68,7 @@ public class DigEffect extends SpellAbilityEffect {
             }
 
             String verb2 = "put ";
-            String where = " in their hand ";
+            String where = " into their hand ";
             if (destZone1.equals("exile")) {
                 verb2 = "exile ";
                 where = " ";
@@ -80,6 +81,9 @@ public class DigEffect extends SpellAbilityEffect {
             if (sa.hasParam("ChangeValid")) {
                 String what = sa.hasParam("ChangeValidDesc") ? sa.getParam("ChangeValidDesc") :
                         sa.getParam("ChangeValid");
+                if (!StringUtils.containsIgnoreCase(what, "card")) {
+                    what = what + " card";
+                }
                 sb.append(Lang.nounWithNumeralExceptOne(numToChange, what)).append(" from among them").append(where);
             } else {
                 sb.append(Lang.getNumeral(numToChange)).append(" of them").append(where);

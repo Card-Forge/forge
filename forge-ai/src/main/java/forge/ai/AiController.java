@@ -709,9 +709,10 @@ public class AiController {
             return AiPlayDecision.CantPlaySa;
         }
 
+        final Card host = sa.getHostCard();
+
         // Check a predefined condition
         if (sa.hasParam("AICheckSVar")) {
-            final Card host = sa.getHostCard();
             final String svarToCheck = sa.getParam("AICheckSVar");
             String comparator = "GE";
             int compareTo = 1;
@@ -734,7 +735,7 @@ public class AiController {
         }
 
         int oldCMC = -1;
-        boolean xCost = sa.costHasX() || sa.getHostCard().hasStartOfKeyword("Strive");
+        boolean xCost = sa.costHasX() || host.hasStartOfKeyword("Strive");
         if (!xCost) {
             if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
                 // for most costs, it's OK to check if they can be paid early in order to avoid running a heavy API check
@@ -748,15 +749,15 @@ public class AiController {
         }
 
         // state needs to be switched here so API checks evaluate the right face
-        CardStateName currentState = sa.getCardState() != null && sa.getHostCard().getCurrentStateName() != sa.getCardStateName() && !sa.getHostCard().isInPlay() ? sa.getHostCard().getCurrentStateName() : null;
+        CardStateName currentState = sa.getCardState() != null && host.getCurrentStateName() != sa.getCardStateName() && !host.isInPlay() ? host.getCurrentStateName() : null;
         if (currentState != null) {
-            sa.getHostCard().setState(sa.getCardStateName(), false);
+            host.setState(sa.getCardStateName(), false);
         }
 
         AiPlayDecision canPlay = canPlaySa(sa); // this is the "heaviest" check, which also sets up targets, defines X, etc.
 
         if (currentState != null) {
-            sa.getHostCard().setState(currentState, false);
+            host.setState(currentState, false);
         }
 
         if (canPlay != AiPlayDecision.WillPlay) {
@@ -766,10 +767,10 @@ public class AiController {
         // Account for possible Ward after the spell is fully targeted
         // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
         // one is warded and can't be paid for.
-        if (sa.usesTargeting()) {
+        if (sa.usesTargeting() && CardFactoryUtil.isCounterable(host)) {
             for (Card tgt : sa.getTargets().getTargetCards()) {
                 // TODO some older cards don't use the keyword, so check for trigger instead
-                if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
+                if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(host.getController())) {
                     int amount = 0;
                     Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
                     if (wardCost.hasManaCost()) {

@@ -1,0 +1,8 @@
+Name:Revelation of Power
+ManaCost:1 W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBPump | SpellDescription$ Target creature gets +2/+2 until end of turn. If it has a counter on it, it also gains flying and lifelink until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | ConditionPresent$ Card.HasCounters | ConditionCompare$ GE1 | KW$ Flying & Lifelink
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Counters|LifeGain
+Oracle:Target creature gets +2/+2 until end of turn. If it has a counter on it, it also gains flying and lifelink until end of turn.

@@ -20,7 +20,6 @@ package forge.ai;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.game.staticability.StaticAbilityMustAttack;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -58,9 +57,6 @@ import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import forge.util.maps.LinkedHashMapToAmount;
-import forge.util.maps.MapToAmount;
-import forge.util.maps.MapToAmountUtil;
 
 
 /**
@@ -572,8 +568,7 @@ public class AiAttackController {
             if (numExtraBlocks > 0) {
                 // TODO should be limited to how much getBlockCost the opp can pay
                 while (numExtraBlocks-- > 0 && !remainingAttackers.isEmpty()) {
-                    blockedAttackers.add(remainingAttackers.get(0));
-                    remainingAttackers.remove(0);
+                    blockedAttackers.add(remainingAttackers.remove(0));
                     maxBlockersAfterCrew--;
                 }
             }
@@ -581,8 +576,7 @@ public class AiAttackController {
             if (remainingAttackers.isEmpty()) {
                 break;
             }
-            blockedAttackers.add(remainingAttackers.get(0));
-            remainingAttackers.remove(0);
+            blockedAttackers.add(remainingAttackers.remove(0));
             maxBlockersAfterCrew--;
         }
         unblockedAttackers.addAll(remainingAttackers);
@@ -605,8 +599,8 @@ public class AiAttackController {
             final CardCollection unblockableCantPayFor = new CardCollection();
             final CardCollection unblockableWithoutCost = new CardCollection();
             // TODO also check poison
-            for (Card attacker : CardLists.getKeyword(unblockedAttackers, Keyword.TRAMPLE)) {
-                Cost tax = CombatUtil.getAttackCost(attacker.getGame(), attacker, defendingOpponent);
+            for (Card attacker : unblockedAttackers) {
+                Cost tax = CombatUtil.getAttackCost(ai.getGame(), attacker, defendingOpponent);
                 if (tax == null) {
                     unblockableWithoutCost.add(attacker);
                 } else {
@@ -620,19 +614,17 @@ public class AiAttackController {
                 }
             }
             int dmgUnblockableAfterPaying = ComputerUtilCombat.sumDamageIfUnblocked(unblockableWithPaying, defendingOpponent);
+            unblockedAttackers = unblockableWithoutCost;
             if (dmgUnblockableAfterPaying > trampleDamage) {
-                unblockedAttackers.removeAll(unblockableCantPayFor);
-                unblockedAttackers.removeAll(unblockableWithPaying);
+                myFreeMana -= unblockableAttackTax;
                 totalCombatDamage = dmgUnblockableAfterPaying;
                 // recalculate the trampler damage with the reduced mana available now
-                myFreeMana -= unblockableAttackTax;
                 trampleDamage = getDamageFromBlockingTramplers(blockedAttackers, remainingBlockers, myFreeMana).getLeft();
             } else {
-                unblockedAttackers = unblockableWithoutCost;
                 myFreeMana -= tramplerTaxPaid;
                 // find out if we can still pay for some left
                 for (Card attacker : unblockableWithPaying) {
-                    Cost tax = CombatUtil.getAttackCost(attacker.getGame(), attacker, defendingOpponent);
+                    Cost tax = CombatUtil.getAttackCost(ai.getGame(), attacker, defendingOpponent);
                     int taxCMC = tax.getCostMana().getMana().getCMC();
                     if (myFreeMana < unblockableAttackTax + taxCMC) {
                         continue;
@@ -664,7 +656,7 @@ public class AiAttackController {
         CardCollection remainingBlockers = new CardCollection(blockers);
         for (Card attacker : CardLists.getKeyword(blockedAttackers, Keyword.TRAMPLE)) {
             // TODO might sort by quotient of dmg/cost for best combination
-            Cost tax = CombatUtil.getAttackCost(attacker.getGame(), attacker, defendingOpponent);
+            Cost tax = CombatUtil.getAttackCost(ai.getGame(), attacker, defendingOpponent);
             int taxCMC = tax != null ? tax.getCostMana().getMana().getCMC() : 0;
             if (myFreeMana < currentAttackTax + taxCMC) {
                 continue;
@@ -775,10 +767,7 @@ public class AiAttackController {
         if (!nextTurn) {
             for (final Card attacker : this.attackers) {
                 GameEntity mustAttackDef = null;
-                if (attacker.isGoaded()) {
-                    // TODO this might result into trying to attack the wrong player
-                    mustAttackDef = defender;
-                } else if (attacker.getSVar("MustAttack").equals("True")) {
+                if (attacker.getSVar("MustAttack").equals("True")) {
                     mustAttackDef = defender;
                 } else if (attacker.hasSVar("EndOfTurnLeavePlay")
                         && isEffectiveAttacker(ai, attacker, combat, defender)) {
@@ -787,24 +776,19 @@ public class AiAttackController {
                     //TODO: if there are other ways to tap this creature (like mana creature), then don't need to attack
                     mustAttackDef = defender;
                 } else {
-                    final List<GameEntity> attackRequirements = StaticAbilityMustAttack.entitiesMustAttack(attacker);
-                    if (attackRequirements.contains(attacker)) {
-                        // TODO add cost check here and switch defender if there's one without a cost
-                        // must attack anything
-                        mustAttackDef = defender;
-                        // next check if there's also a specific defender to attack, so don't count them
-                        attackRequirements.removeAll(new CardCollection(attacker));
-                    }
-                    final MapToAmount<GameEntity> amounts = new LinkedHashMapToAmount<>();
-                    amounts.addAll(attackRequirements);
-                    while (!amounts.isEmpty()) {
-                        // check defenders in order of maximum requirements
-                        GameEntity mustAttackDefMaybe = MapToAmountUtil.max(amounts).getKey();
+                    if (combat.getAttackConstraints().getRequirements().get(attacker) == null) continue;
+                    // check defenders in order of maximum requirements
+                    for (Pair<GameEntity, Integer> e : combat.getAttackConstraints().getRequirements().get(attacker).getSortedRequirements()) {
+                        if (e.getRight() == 0) continue;
+                        GameEntity mustAttackDefMaybe = e.getLeft();
+                        // Gideon Jura returns LKI
+                        if (mustAttackDefMaybe instanceof Card) {
+                            mustAttackDefMaybe = ai.getGame().getCardState((Card) mustAttackDefMaybe);
+                        }
                         if (canAttackWrapper(attacker, mustAttackDefMaybe) && CombatUtil.getAttackCost(ai.getGame(), attacker, mustAttackDefMaybe) == null) {
                             mustAttackDef = mustAttackDefMaybe;
                             break;
                         }
-                        amounts.remove(mustAttackDefMaybe);
                     }
                 }
                 if (mustAttackDef != null) {

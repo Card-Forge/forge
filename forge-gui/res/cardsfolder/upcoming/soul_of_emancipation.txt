@@ -1,0 +1,10 @@
+Name:Soul of Emancipation
+ManaCost:4 G W U
+Types:Creature Avatar
+PT:5/7
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, destroy up to three other target nonland permanents. For each of those permanents, its controller creates a 3/3 white Angel creature token with flying.
+SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Choose up to three nonland permanents | RememberTargets$ True | SubAbility$ MakeTokens
+SVar:MakeTokens:DB$ RepeatEach | RepeatSubAbility$ DBToken | DefinedCards$ Remembered | UseImprinted$ True | ChangeZoneTable$ True
+SVar:DBToken:DB$ Token | TokenScript$ w_3_3_angel_flying | TokenOwner$ ImprintedController
+DeckHas:Ability$Token & Type$Angel
+Oracle:When Soul of Emancipation enters the battlefield, destroy up to three other target nonland permanents. For each of those permanents, its controller creates a 3/3 white Angel creature token with flying.

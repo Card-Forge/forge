@@ -1035,6 +1035,11 @@ public class AbilityUtils {
             if (root != null) {
                 addPlayer(Lists.newArrayList(root), defined, players);
             }
+        } else if (defined.startsWith("OriginalHost")) {
+            Card originalHost = sa.getOriginalHost();
+            if (originalHost != null) {
+                addPlayer(Lists.newArrayList(originalHost), defined, players);
+            }
         }
         else if (defined.startsWith("DelayTriggerRemembered") && sa instanceof SpellAbility) {
             SpellAbility root = ((SpellAbility)sa).getRootAbility();
@@ -2683,20 +2688,6 @@ public class AbilityUtils {
             return MyRandom.getRandom().nextInt(1+max-min) + min;
         }
 
-        // Count$TotalCounters.<counterType>_<valid>
-        if (sq[0].startsWith("TotalCounters")) {
-            final String[] restrictions = l[0].split("_");
-            final CounterType cType = CounterType.getType(restrictions[1]);
-            final String[] validFilter = restrictions[2].split(",");
-            CardCollectionView validCards = game.getCardsIn(ZoneType.Battlefield);
-            validCards = CardLists.getValidCards(validCards, validFilter, player, c, ctb);
-            int cCount = 0;
-            for (final Card card : validCards) {
-                cCount += card.getCounters(cType);
-            }
-            return doXMath(cCount, expr, c, ctb);
-        }
-
         // Count$ThisTurnCast <Valid>
         // Count$LastTurnCast <Valid>
         if (sq[0].startsWith("ThisTurnCast") || sq[0].startsWith("LastTurnCast")) {
@@ -2853,6 +2844,19 @@ public class AbilityUtils {
                 }
             }
             return doXMath(powers.size(), expr, c, ctb);
+        }
+        if (sq[0].startsWith("DifferentCounterKinds_")) {
+            final List<CounterType> kinds = Lists.newArrayList();
+            final String rest = l[0].substring(22);
+            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), rest, player, c, ctb);
+            for (final Card card : list) {
+                for (final Map.Entry<CounterType, Integer> map : card.getCounters().entrySet()) {
+                    if (!kinds.contains(map.getKey())) {
+                        kinds.add(map.getKey());
+                    }
+                }
+            }
+            return doXMath(kinds.size(), expr, c, ctb);
         }
 
         // Complex counting methods

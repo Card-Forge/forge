@@ -212,10 +212,10 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         }
     }
 
-    public boolean canBeAttached(final Card attach) {
-        return canBeAttached(attach, false);
+    public boolean canBeAttached(final Card attach, SpellAbility sa) {
+        return canBeAttached(attach, sa, false);
     }
-    public boolean canBeAttached(final Card attach, boolean checkSBA) {
+    public boolean canBeAttached(final Card attach, SpellAbility sa, boolean checkSBA) {
         // master mode
         if (!attach.isAttachment() || (attach.isCreature() && !attach.hasKeyword(Keyword.RECONFIGURE))
                 || equals(attach)) {
@@ -226,7 +226,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         if (attach.isAura() && !canBeEnchantedBy(attach)) {
             return false;
         }
-        if (attach.isEquipment() && !canBeEquippedBy(attach)) {
+        if (attach.isEquipment() && !canBeEquippedBy(attach, sa)) {
             return false;
         }
         if (attach.isFortification() && !canBeFortifiedBy(attach)) {
@@ -242,7 +242,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         return true;
     }
 
-    protected boolean canBeEquippedBy(final Card aura) {
+    protected boolean canBeEquippedBy(final Card aura, SpellAbility sa) {
         /**
          * Equip only to Creatures which are cards
          */

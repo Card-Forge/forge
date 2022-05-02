@@ -1,0 +1,17 @@
+Name:Phabine, Boss's Confidant
+ManaCost:3 R G W
+Types:Legendary Creature Cat Advisor
+PT:3/6
+S:Mode$ Continuous | Affected$ Creature.token+YouCtrl | AddKeyword$ Haste | Description$ Creature tokens you control have haste.
+SVar:PlayMain1:TRUE
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReveal | TriggerDescription$ Parley – At the beginning of combat on your turn, each player reveals the top card of their library. For each land card revealed this way, you create a 1/1 green and white Citizen creature token. Then creatures you control get +1/+1 until end of turn for each nonland card revealed this way. Then each player draws a card.
+SVar:TrigReveal:DB$ PeekAndReveal | Defined$ Player | RememberRevealed$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ gw_1_1_citizen | TokenAmount$ X | SubAbility$ DBPump
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +Y | NumDef$ +Y | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Player | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Land
+SVar:Y:Remembered$Valid Card.nonLand
+DeckHas:Ability$Token & Type$ Citizen
+DeckHints:Ability$Token
+Oracle:Creature tokens you control have haste.\nParley — At the beginning of combat on your turn, each player reveals the top card of their library. For each land card revealed this way, you create a 1/1 green and white Citizen creature token. Then creatures you control get +1/+1 until end of turn for each nonland card revealed this way. Then each player draws a card.

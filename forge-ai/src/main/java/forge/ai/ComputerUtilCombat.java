@@ -1181,11 +1181,6 @@ public class ComputerUtilCombat {
     public static int predictPowerBonusOfAttacker(final Card attacker, final Card blocker, final Combat combat, boolean withoutAbilities, boolean withoutCombatStaticAbilities) {
         int power = 0;
 
-        //check Exalted only for the first attacker
-        if (combat != null && combat.getAttackers().isEmpty()) {
-            power += attacker.getController().countExaltedBonus();
-        }
-
         // Serene Master switches power with attacker
         if (blocker!= null && blocker.getName().equals("Serene Master")) {
             power += blocker.getNetPower() - attacker.getNetPower();
@@ -1268,21 +1263,17 @@ public class ComputerUtilCombat {
             }
 
             List<Card> list = Lists.newArrayList();
-            if (!sa.hasParam("ValidCards")) {
-                list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), null);
-            }
-            if (sa.hasParam("Defined") && sa.getParam("Defined").startsWith("TriggeredAttacker")) {
-                list.add(attacker);
-            }
             if (sa.hasParam("ValidCards")) {
                 if (attacker.isValid(sa.getParam("ValidCards").split(","), source.getController(), source, null)
                         || attacker.isValid(sa.getParam("ValidCards").replace("attacking+", "").split(","),
                                 source.getController(), source, null)) {
                     list.add(attacker);
                 }
+            } else {
+                list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), null);
             }
-            if (list.isEmpty()) {
-                continue;
+            if (sa.hasParam("Defined") && sa.getParam("Defined").startsWith("TriggeredAttacker")) {
+                list.add(attacker);
             }
             if (!list.contains(attacker)) {
                 continue;
@@ -1381,11 +1372,6 @@ public class ComputerUtilCombat {
             , boolean withoutAbilities, boolean withoutCombatStaticAbilities) {
         int toughness = 0;
 
-        //check Exalted only for the first attacker
-        if (combat != null && combat.getAttackers().isEmpty()) {
-            toughness += attacker.getController().countExaltedBonus();
-        }
-
         if (blocker != null && attacker.getName().equals("Shape Stealer")) {
             toughness += blocker.getNetToughness() - attacker.getNetToughness();
         }
@@ -1464,14 +1450,15 @@ public class ComputerUtilCombat {
                 toughness -= predictDamageTo(attacker, damage, source, false);
                 continue;
             } else if (ApiType.Pump.equals(sa.getApi())) {
+                if (!sa.hasParam("NumDef")) {
+                    continue;
+                }
                 if (sa.hasParam("Cost")) {
                     if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
                         continue;
                     }
                 }
-                if (!sa.hasParam("NumDef")) {
-                    continue;
-                }
+
                 final String defined = sa.getParam("Defined");
                 CardCollection list = AbilityUtils.getDefinedCards(source, defined, sa);
                 if (defined != null && defined.startsWith("TriggeredAttacker")) {
@@ -1497,6 +1484,9 @@ public class ComputerUtilCombat {
                     toughness += AbilityUtils.calculateAmount(source, bonus, sa);
                 }
             } else if (ApiType.PumpAll.equals(sa.getApi())) {
+                if (!sa.hasParam("NumDef")) {
+                    continue;
+                }
                 if (sa.hasParam("Cost")) {
                     if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
                         continue;
@@ -1504,9 +1494,6 @@ public class ComputerUtilCombat {
                 }
 
                 if (!sa.hasParam("ValidCards")) {
-                    continue;
-                }
-                if (!sa.hasParam("NumDef")) {
                     continue;
                 }
                 if (!attacker.isValid(sa.getParam("ValidCards").replace("attacking+", "").split(","), source.getController(), source, sa)) {

@@ -1,0 +1,8 @@
+Name:Structural Assault
+ManaCost:3 R R
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Artifact | SubAbility$ DBDamageAll | SpellDescription$ Destroy all artifacts,
+SVar:DBDamageAll:DB$ DamageAll | NumDmg$ X | ValidCards$ Creature | ValidDescription$ each creature | SpellDescription$ then CARDNAME deals damage to each creature equal to the number of artifacts that were put into graveyards from the battlefield this turn.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.Artifact
+AI:RemoveDeck:Random
+Oracle:Destroy all artifacts, then Structural Assault deals damage to each creature equal to the number of artifacts that were put into graveyards from the battlefield this turn.

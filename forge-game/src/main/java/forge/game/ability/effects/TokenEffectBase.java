@@ -238,7 +238,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
 
             boolean canAttach = lki.isAttachment();
 
-            if (canAttach && !ge.canBeAttached(lki)) {
+            if (canAttach && !ge.canBeAttached(lki, sa)) {
                 canAttach = false;
             }
 
@@ -254,7 +254,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 return false;
             }
 
-            tok.attachToEntity(ge);
+            tok.attachToEntity(ge, sa);
             return true;
         }
         // not a GameEntity, cant be attach
