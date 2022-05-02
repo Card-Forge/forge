@@ -1831,7 +1831,8 @@ public class AbilityUtils {
                 }
 
                 if (sq[0].startsWith("LastStateBattlefield")) {
-                    final String[] k = l[0].split(" ");
+                    String[] paidparts = l[0].split("\\$", 2);
+                    final String[] k = paidparts[0].split(" ");
                     CardCollectionView list;
                     // this is only for spells that were cast
                     if (sq[0].contains("WithFallback")) {
@@ -1851,10 +1852,13 @@ public class AbilityUtils {
                         }
                     }
                     list = CardLists.getValidCards(list, k[1], sa.getActivatingPlayer(), c, sa);
-                    if (k[0].contains("TotalToughness")) {
-                        return doXMath(Aggregates.sum(list, CardPredicates.Accessors.fnGetNetToughness), expr, c, ctb);
+                    int n;
+                    if (paidparts.length > 1) {
+                        n = handlePaid(new CardCollection(list), paidparts[1], c, ctb);
+                    } else {
+                        n = list.size();
                     }
-                    return doXMath(list.size(), expr, c, ctb);
+                    return doXMath(n, expr, c, ctb);
                 }
 
                 if (sq[0].startsWith("LastStateGraveyard")) {
@@ -2414,16 +2418,6 @@ public class AbilityUtils {
             int cmc = player.getCardsIn(ZoneType.Library).isEmpty() ? 0 :
                 player.getCardsIn(ZoneType.Library).getFirst().getCMC();
             return doXMath(cmc, expr, c, ctb);
-        }
-
-        if (sq[0].startsWith("ColorsCtrl")) {
-            final String restriction = l[0].substring(11);
-            final CardCollection list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
-            byte n = 0;
-            for (final Card card : list) {
-                n |= card.getColor().getColor();
-            }
-            return doXMath(ColorSet.fromMask(n).countColors(), expr, c, ctb);
         }
 
         // Count$AttackersDeclared
