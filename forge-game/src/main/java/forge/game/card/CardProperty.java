@@ -477,20 +477,20 @@ public class CardProperty {
         } else if (property.startsWith("CanEnchant")) {
             final String restriction = property.substring(10);
             if (restriction.equals("EquippedBy")) {
-                if (!source.getEquipping().canBeAttached(card)) return false;
+                if (!source.getEquipping().canBeAttached(card, null)) return false;
             }
             if (restriction.equals("Remembered")) {
                 for (final Object rem : source.getRemembered()) {
-                    if (!(rem instanceof Card) || !((Card) rem).canBeAttached(card))
+                    if (!(rem instanceof Card) || !((Card) rem).canBeAttached(card, null))
                         return false;
                 }
             } else if (restriction.equals("Source")) {
-                if (!source.canBeAttached(card)) return false;
+                if (!source.canBeAttached(card, null)) return false;
             }
         } else if (property.startsWith("CanBeEnchantedBy")) {
             if (property.substring(16).equals("Targeted")) {
                 for (final Card c : AbilityUtils.getDefinedCards(source, "Targeted", spellAbility)) {
-                    if (!card.canBeAttached(c)) {
+                    if (!card.canBeAttached(c, null)) {
                         return false;
                     }
                 }
@@ -498,13 +498,13 @@ public class CardProperty {
                 for (final Object rem : source.getRemembered()) {
                     if (rem instanceof Card) {
                         final Card c = (Card) rem;
-                        if (!card.canBeAttached(c)) {
+                        if (!card.canBeAttached(c, null)) {
                             return false;
                         }
                     }
                 }
             } else {
-                if (!card.canBeAttached(source)) {
+                if (!card.canBeAttached(source, null)) {
                     return false;
                 }
             }
@@ -530,7 +530,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("CanBeAttachedBy")) {
-            if (!card.canBeAttached(source)) {
+            if (!card.canBeAttached(source, null)) {
                 return false;
             }
         } else if (property.startsWith("Fortified")) {

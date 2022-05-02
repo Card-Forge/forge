@@ -39,7 +39,7 @@ public class ZoneExchangeAi extends SpellAbilityAi {
         }
         if (type.equals("Aura")) {
             Card c = object1.getEnchantingCard();
-            if (!c.canBeAttached(object2)) {
+            if (!c.canBeAttached(object2, sa)) {
                 return false;
             }
         }

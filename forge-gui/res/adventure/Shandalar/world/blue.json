@@ -23,7 +23,7 @@
   "height": 0.7,
   "color": "10a2e0",
   "spriteNames":["IslandTree" ,"Coral" ,"Shell" ],
-  "enemies":[ "Bird","Djinn","Elemental","Merfolk","Merfolk Avatar","Merfolk Fighter","Merfolk Lord","Merfolk Soldier","Merfolk warrior","Blue Wiz1","Blue Wiz2","Blue Wiz3","Geist","Rogue","Sea Monster","Tarkir Djinn" ]  ,
+  "enemies":[ "Bird","Djinn","Elemental","Merfolk","Merfolk Avatar","Merfolk Fighter","Merfolk Lord","Merfolk Soldier","Merfolk warrior","Blue Wiz1","Blue Wiz2","Blue Wiz3","Geist","Rogue","Sea Monster","Tarkir Djinn","Doppelganger" ]  ,
   "pointsOfInterest":[
     "Blue Castle",
     "Island Town",

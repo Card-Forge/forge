@@ -121,11 +121,11 @@ public final class PlayerPredicates {
         };
     }
 
-    public static final Predicate<Player> canBeAttached(final Card aura) {
+    public static final Predicate<Player> canBeAttached(final Card aura, SpellAbility sa) {
         return new Predicate<Player>() {
             @Override
             public boolean apply(final Player p) {
-                return p.canBeAttached(aura);
+                return p.canBeAttached(aura, sa);
             }
         };
     }

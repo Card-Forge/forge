@@ -1035,6 +1035,10 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return isAlternativeCost(AlternativeCost.Outlast);
     }
 
+    public boolean isEquip() {
+        return hasParam("Equip");
+    }
+
     public boolean isBlessing() {
         return blessing;
     }

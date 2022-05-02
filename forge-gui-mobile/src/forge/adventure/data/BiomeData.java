@@ -2,6 +2,7 @@ package forge.adventure.data;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Array;
+import forge.util.MyRandom;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.Random;
  * contains the information for the biomes
  */
 public class BiomeData implements Serializable {
-    private final Random rand = new Random();
+    private final Random rand = MyRandom.getRandom();
     public float startPointX;
     public float startPointY;
     public float noiseWeight;
@@ -40,7 +41,7 @@ public class BiomeData implements Serializable {
 
     public ArrayList<EnemyData> getEnemyList() {
         if (enemyList == null) {
-            enemyList = new ArrayList<EnemyData>();
+            enemyList = new ArrayList<>();
             if (enemies == null)
                 return enemyList;
             for (EnemyData data : new Array.ArrayIterator<>(WorldData.getAllEnemies())) {
@@ -68,11 +69,11 @@ public class BiomeData implements Serializable {
     }
 
     public EnemyData getEnemy(float difficultyFactor) {
-        EnemyData bestData=null;
-        float biggestNumber=0;
+        EnemyData bestData = null;
+        float biggestNumber = 0.0f;
         for (EnemyData data : enemyList) {
-            float newNumber=data.spawnRate *rand.nextFloat()*difficultyFactor;
-            if (newNumber>biggestNumber) {
+            float newNumber= ( 1.0f + (data.spawnRate * rand.nextFloat()) ) * difficultyFactor;
+            if (newNumber > biggestNumber) {
                 biggestNumber=newNumber;
                 bestData=data;
             }

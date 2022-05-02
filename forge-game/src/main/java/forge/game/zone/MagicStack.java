@@ -328,7 +328,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
 
             // Log number of Equips
-            if (sp.hasParam("Equip")) {
+            if (sp.isEquip()) {
                 activator.addEquipped();
             }
 

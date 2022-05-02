@@ -81,14 +81,14 @@ public class ZoneExchangeEffect extends SpellAbilityEffect {
         Card c = null;
         if (type != null && type.equals("Aura") && object1.getEnchantingCard() != null) {
             c = object1.getEnchantingCard();
-            if (!c.canBeAttached(object2)) {
+            if (!c.canBeAttached(object2, sa)) {
                 return;
             }
         }
         // Enchant first
         if (c != null) {
             object1.unattachFromEntity(c);
-            object2.attachToEntity(c);
+            object2.attachToEntity(c, sa);
         }
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());

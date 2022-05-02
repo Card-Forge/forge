@@ -25,6 +25,7 @@ import forge.adventure.world.WorldSave;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
+import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
     private static WorldStage instance=null;
     protected EnemySprite currentMob;
-    protected Random rand = new Random();
+    protected Random rand = MyRandom.getRandom();
     WorldBackground background;
     private float spawnDelay = 0;
     private final float spawnInterval = 4;//todo config
@@ -194,32 +195,27 @@ public class WorldStage extends GameStage implements SaveFileContent {
     }
 
     private void HandleMonsterSpawn(float delta) {
-
-
         World world = WorldSave.getCurrentSave().getWorld();
         int currentBiome = World.highestBiome(world.getBiome((int) player.getX() / world.getTileSize(), (int) player.getY() / world.getTileSize()));
         List<BiomeData> biomeData = WorldSave.getCurrentSave().getWorld().getData().GetBiomes();
-        if (biomeData.size() <= currentBiome)
-        {
+        if (biomeData.size() <= currentBiome) {
             player.setMoveModifier(1.5f);
             return;
         }
         player.setMoveModifier(1.0f);
         BiomeData data = biomeData.get(currentBiome);
+        if (data == null) return;
 
-        if (data == null)
-            return;
+        spawnDelay -= delta;
+        if(spawnDelay>=0) return;
+        spawnDelay=spawnInterval + ( rand.nextFloat() * 4.0f );
+
         ArrayList<EnemyData> list = data.getEnemyList();
         if (list == null)
             return;
-        spawnDelay -= delta;
-        if(spawnDelay>=0)
+        EnemyData enemyData = data.getEnemy( 1.0f );
+        if (enemyData == null)
             return;
-        spawnDelay=spawnInterval+(rand.nextFloat()*4);
-        EnemyData enemyData = data.getEnemy( 1);
-        if (enemyData == null) {
-            return;
-        }
         EnemySprite sprite = new EnemySprite(enemyData);
         float unit = Scene.getIntendedHeight() / 6f;
         Vector2 spawnPos = new Vector2(1, 1);

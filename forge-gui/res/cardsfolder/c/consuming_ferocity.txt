@@ -8,7 +8,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ P1P0 | CounterNum$ 1 | SubAbility$ DBDmg
 SVar:DBDmg:DB$ DealDamage | Defined$ TriggeredPlayer | DamageSource$ Enchanted | NumDmg$ X | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3 | SubAbility$ DBDes
 SVar:DBDes:DB$ Destroy | Defined$ Enchanted | NoRegen$ True | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3
-SVar:Y:Count$TotalCounters_P1P0_Creature.EnchantedBy
+SVar:Y:Count$Valid Creature.EnchantedBy$CardCounters.P1P0
 SVar:X:Enchanted$CardPower
 AI:RemoveDeck:All
 Oracle:Enchant non-Wall creature\nEnchanted creature gets +1/+0.\nAt the beginning of your upkeep, put a +1/+0 counter on enchanted creature. If that creature has three or more +1/+0 counters on it, it deals damage equal to its power to its controller, then destroy that creature and it can't be regenerated.
