@@ -248,6 +248,22 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             }
         }
 
+        if (hasParam("ManaFrom")) {
+            boolean found = false;
+            for (Mana m : spellAbility.getPayingMana()) {
+                Card source = m.getSourceCard();
+                if (source != null) {
+                    if (source.getType().hasSubtype(getParam("ManaFrom"))) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if (!found) {
+                return false;
+            }
+        }
+
         if (hasParam("SnowSpentForCardsColor")) {
             boolean found = false;
             for (Mana m : spellAbility.getPayingMana()) {
