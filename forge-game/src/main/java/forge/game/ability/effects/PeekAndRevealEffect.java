@@ -55,11 +55,12 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final boolean rememberRevealed = sa.hasParam("RememberRevealed");
         final boolean imprintRevealed = sa.hasParam("ImprintRevealed");
+        final boolean noPeek = sa.hasParam("NoPeek");
         String revealValid = sa.getParamOrDefault("RevealValid", "Card");
         String peekAmount = sa.getParamOrDefault("PeekAmount", "1");
         int numPeek = AbilityUtils.calculateAmount(source, peekAmount, sa);
         
-        List<Player> libraryPlayers = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
+        List<Player> libraryPlayers = getDefinedPlayersOrTargeted(sa);
         Player peekingPlayer = sa.getActivatingPlayer();
         
         for (Player libraryToPeek : libraryPlayers) {
@@ -74,17 +75,19 @@ public class PeekAndRevealEffect extends SpellAbilityEffect {
             CardCollectionView revealableCards = CardLists.getValidCards(peekCards, revealValid,
                     sa.getActivatingPlayer(), source, sa);
             boolean doReveal = !sa.hasParam("NoReveal") && !revealableCards.isEmpty();
-            if (!sa.hasParam("NoPeek")) {
+            if (!noPeek) {
                 peekingPlayer.getController().reveal(peekCards, ZoneType.Library, libraryToPeek,
                         CardTranslation.getTranslatedName(source.getName()) + " - " +
-                                Localizer.getInstance().getMessage("lblRevealingCardFrom"));
+                                Localizer.getInstance().getMessage("lblLookingCardFrom"));
             }
             
             if (doReveal && sa.hasParam("RevealOptional"))
                 doReveal = peekingPlayer.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblRevealCardToOtherPlayers"));
             
             if (doReveal) {
-                peekingPlayer.getGame().getAction().reveal(revealableCards, peekingPlayer);
+                peekingPlayer.getGame().getAction().reveal(revealableCards, ZoneType.Library, libraryToPeek, !noPeek,
+                        CardTranslation.getTranslatedName(source.getName()) + " - " +
+                                Localizer.getInstance().getMessage("lblRevealingCardFrom"));
 
                 if (rememberRevealed) {
                     Map<Integer, Card> cachedMap = Maps.newHashMap();
