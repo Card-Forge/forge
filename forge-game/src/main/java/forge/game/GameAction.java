@@ -577,6 +577,8 @@ public class GameAction {
             }
         }
 
+        table.replaceCounterEffect(game, null, true);
+
         // Need to apply any static effects to produce correct triggers
         checkStaticAbilities();
 
@@ -591,8 +593,6 @@ public class GameAction {
             game.getTriggerHandler().registerActiveLTBTrigger(lki);
         }
         game.getTriggerHandler().registerActiveTrigger(copied, false);
-
-        table.replaceCounterEffect(game, null, true);
 
         // play the change zone sound
         game.fireEvent(new GameEventCardChangeZone(c, zoneFrom, zoneTo));
