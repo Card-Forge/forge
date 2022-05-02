@@ -2729,20 +2729,27 @@ public class AbilityUtils {
             String[] paidparts = l[0].split("\\$", 2);
             String[] lparts = paidparts[0].split(" ", 2);
 
-            final CardCollectionView cardsInZones;
+            CardCollectionView cardsInZones = null;
             if (lparts[0].contains("All")) {
                 cardsInZones = game.getCardsInGame();
             } else {
-                CardCollectionView battlefield = game.getCardsIn(ZoneType.Battlefield);
-                if (ctb instanceof SpellAbility) {
+                final List<ZoneType> zones = ZoneType.listValueOf(lparts[0].length() > 5 ? lparts[0].substring(5) : "Battlefield");
+                boolean usedLastState = false;
+                if (ctb instanceof SpellAbility && zones.size() == 1) {
                     SpellAbility sa = (SpellAbility) ctb;
                     if (sa.isReplacementAbility()) {
-                        battlefield = sa.getLastStateBattlefield();
+                        if (zones.get(0).equals(ZoneType.Battlefield)) {
+                            cardsInZones = sa.getLastStateBattlefield();
+                            usedLastState = true;
+                        } else if (zones.get(0).equals(ZoneType.Graveyard)) {
+                            cardsInZones = sa.getLastStateGraveyard();
+                            usedLastState = true;
+                        }
                     }
                 }
-                cardsInZones = lparts[0].length() > 5
-                        ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(5)))
-                                : battlefield;
+                if (!usedLastState) {
+                    cardsInZones = game.getCardsIn(zones);
+                }
             }
 
             int cnt;
@@ -2755,7 +2762,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].startsWith("MostCardName")) {
-                String[] lparts = l[0].split(" ", 2);
+            String[] lparts = l[0].split(" ", 2);
             final String[] rest = lparts[1].split(",");
 
             final CardCollectionView cardsInZones = lparts[0].length() > 12
