@@ -827,6 +827,7 @@ public class Game {
                         cc.removeRemembered(c);
                         cc.removeAttachedTo(c);
                     }
+                    // TODO by default this should skip effect cards
                     getAction().ceaseToExist(c, false);
                     // CR 603.2f owner of trigger source lost game
                     getTriggerHandler().clearDelayedTrigger(c);
