@@ -5,7 +5,7 @@ PT:4/4
 K:Flying
 R:Event$ CreateToken | ActiveZones$ Battlefield | CheckSVar$ X | SVarCompare$ EQ0 | ValidPlayer$ You | PlayerTurn$ True | Optional$ True | ReplaceWith$ DBCopy | Description$ The first time you would create one or more tokens during each of your turns, you may instead choose a creature other than CARDNAME and create that many tokens that are copies of that creature.
 SVar:DBCopy:DB$ ReplaceToken | Type$ ReplaceToken | ValidChoices$ Creature.Other | TokenScript$ Chosen
-SVar:X:PlayerCountPropertyYou$TokensCreatedThisTurn
+SVar:X:Count$ThisTurnEntered_Battlefield_Card.token+YouCtrl
 DeckHas:Ability$Token
 AI:RemoveDeck:All
 Oracle:Flying\nThe first time you would create one or more tokens during each of your turns, you may instead choose a creature other than Esix, Fractal Bloom and create that many tokens that are copies of that creature.
