@@ -8,7 +8,7 @@ K:Suspend:X:XCantBe0 X G G
 T:Mode$ CounterRemoved | ValidCard$ Card.Self | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigPut | OptionalDecider$ You | TriggerDescription$ Whenever a time counter is removed from CARDNAME while it's exiled, you may put a +1/+1 counter on target creature.
 SVar:TrigPut:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
 SVar:X:Count$xPaid
-SVar:Y:Count$TotalCounters_P1P1_Creature.YouCtrl
+SVar:Y:Count$Valid Creature.YouCtrl$CardCounters.P1P1
 SVar:NeedsToPlay:Creature.YouCtrl+inZoneBattlefield
 DeckHints:Ability$Counters
 Oracle:Fungal Behemoth's power and toughness are each equal to the number of +1/+1 counters on creatures you control.\nSuspend X—{X}{G}{G}. X can't be 0. (Rather than cast this card from your hand, you may pay {X}{G}{G} and exile it with X time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost. It has haste.)\nWhenever a time counter is removed from Fungal Behemoth while it's exiled, you may put a +1/+1 counter on target creature.

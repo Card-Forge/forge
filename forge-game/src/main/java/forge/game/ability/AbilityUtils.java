@@ -2688,20 +2688,6 @@ public class AbilityUtils {
             return MyRandom.getRandom().nextInt(1+max-min) + min;
         }
 
-        // Count$TotalCounters.<counterType>_<valid>
-        if (sq[0].startsWith("TotalCounters")) {
-            final String[] restrictions = l[0].split("_");
-            final CounterType cType = CounterType.getType(restrictions[1]);
-            final String[] validFilter = restrictions[2].split(",");
-            CardCollectionView validCards = game.getCardsIn(ZoneType.Battlefield);
-            validCards = CardLists.getValidCards(validCards, validFilter, player, c, ctb);
-            int cCount = 0;
-            for (final Card card : validCards) {
-                cCount += card.getCounters(cType);
-            }
-            return doXMath(cCount, expr, c, ctb);
-        }
-
         // Count$ThisTurnCast <Valid>
         // Count$LastTurnCast <Valid>
         if (sq[0].startsWith("ThisTurnCast") || sq[0].startsWith("LastTurnCast")) {
