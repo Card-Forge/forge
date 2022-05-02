@@ -3448,10 +3448,6 @@ public class AbilityUtils {
             return doXMath(player.getNumDiscardedThisTurn(), m, source, ctb);
         }
 
-        if (value.contains("TokensCreatedThisTurn")) {
-            return doXMath(player.getNumTokensCreatedThisTurn(), m, source, ctb);
-        }
-
         if (value.contains("AttackersDeclared")) {
             return doXMath(player.getCreaturesAttackedThisTurn().size(), m, source, ctb);
         }
