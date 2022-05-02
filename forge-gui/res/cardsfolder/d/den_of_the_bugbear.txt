@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 K:ETBReplacement:Other:LandTapped
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ GT1 | SpellDescription$ If you control two or more other lands, CARDNAME enters the battlefield tapped.
-SVar:ETBCheckSVar2:Count$LastStateBattlefield Land.YouCtrl
+SVar:ETBCheckSVar2:Count$Valid Land.YouCtrl
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add {R}.
 A:AB$ Animate | Cost$ 3 R | Defined$ Self | Power$ 3 | Toughness$ 2 | Types$ Creature,Goblin | Colors$ Red | Triggers$ TrigAttack | SpellDescription$ Until end of turn, CARDNAME becomes a 3/2 red Goblin creature with "Whenever this creature attacks, create a 1/1 red Goblin creature token that's tapped and attacking." It's still a land.
 SVar:TrigAttack:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a 1/1 red Goblin creature token that's tapped and attacking.
