@@ -2859,6 +2859,19 @@ public class AbilityUtils {
             }
             return doXMath(powers.size(), expr, c, ctb);
         }
+        if (sq[0].startsWith("DifferentCounterKinds_")) {
+            final List<CounterType> kinds = Lists.newArrayList();
+            final String rest = l[0].substring(22);
+            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), rest, player, c, ctb);
+            for (final Card card : list) {
+                for (final Map.Entry<CounterType, Integer> map : card.getCounters().entrySet()) {
+                    if (!kinds.contains(map.getKey())) {
+                        kinds.add(map.getKey());
+                    }
+                }
+            }
+            return doXMath(kinds.size(), expr, c, ctb);
+        }
 
         // Complex counting methods
         CardCollectionView someCards = getCardListForXCount(c, player, sq, ctb);
