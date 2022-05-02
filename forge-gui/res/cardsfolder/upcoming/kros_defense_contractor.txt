@@ -1,0 +1,13 @@
+Name:Kros, Defense Contractor
+ManaCost:1 G W U
+Types:Legendary Creature Cat Advisor
+PT:2/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a shield counter on target creature an opponent controls.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | CounterType$ SHIELD | AILogic$ Curse
+T:Mode$ CounterAddedOnce | ValidCard$ Creature.YouDontCtrl | ValidSource$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you put one or more counters on a creature you don't control, tap that creature and goad it. It gains trample until your next turn. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+SVar:TrigTap:DB$ Tap | Defined$ TriggeredCard | SubAbility$ DBGoad
+SVar:DBGoad:DB$ Goad | Defined$ TriggeredCard | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ TriggeredCard | KW$ Trample | Duration$ UntilYourNextTurn
+#Card doesn't make sense to run unless you have 2 or more opponents
+AI:RemoveDeck:Random
+Oracle:At the beginning of your upkeep, put a shield counter on target creature an opponent controls.\nWhenever you put one or more counters on a creature you don't control, tap that creature and goad it. It gains trample until your next turn. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
