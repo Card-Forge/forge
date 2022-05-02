@@ -12,6 +12,7 @@ public class EnemyData {
     public String name;
     public String sprite;
     public String deck;
+    public boolean copyPlayerDeck = false;
     public String ai;
     public float spawnRate;
     public float difficulty;
@@ -23,16 +24,17 @@ public class EnemyData {
 
     public EnemyData() { }
     public EnemyData(EnemyData enemyData) {
-        name        = enemyData.name;
-        sprite      = enemyData.sprite;
-        deck        = enemyData.deck;
-        ai          = enemyData.ai;
-        spawnRate   = enemyData.spawnRate;
-        difficulty  = enemyData.difficulty;
-        speed       = enemyData.speed;
-        life        = enemyData.life;
-        equipment   = enemyData.equipment;
-        colors    = enemyData.colors;
+        name           = enemyData.name;
+        sprite         = enemyData.sprite;
+        deck           = enemyData.deck;
+        ai             = enemyData.ai;
+        spawnRate      = enemyData.spawnRate;
+        copyPlayerDeck = enemyData.copyPlayerDeck;
+        difficulty     = enemyData.difficulty;
+        speed          = enemyData.speed;
+        life           = enemyData.life;
+        equipment      = enemyData.equipment;
+        colors         = enemyData.colors;
         if(enemyData.rewards == null) {
             rewards=null;
         } else {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="95">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="97">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -395,6 +395,16 @@
   }
 ]</property>
     <property name="enemy" value="Merfolk Soldier"/>
+   </properties>
+  </object>
+  <object id="95" template="../obj/enemy.tx" x="288" y="224">
+   <properties>
+    <property name="enemy" value="Doppelganger"/>
+   </properties>
+  </object>
+  <object id="96" template="../obj/enemy.tx" x="304" y="224">
+   <properties>
+    <property name="enemy" value="Doppelganger"/>
    </properties>
   </object>
  </objectgroup>
