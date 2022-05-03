@@ -133,6 +133,10 @@ public class UntapAi extends SpellAbilityAi {
 
         CardCollection list = CardLists.getTargetableCards(targetController.getCardsIn(ZoneType.Battlefield), sa);
 
+        if (!sa.isCurse()) {
+            list = ComputerUtil.getSafeTargets(ai, sa, list);
+        }
+
         if (list.isEmpty()) {
             return false;
         }
@@ -261,10 +265,8 @@ public class UntapAi extends SpellAbilityAi {
     }
 
     private boolean untapTargetList(final Card source, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory, 
-    		final CardCollection tapList) {
-        for (final Card c : sa.getTargets().getTargetCards()) {
-            tapList.remove(c);
-        }
+            final CardCollection tapList) {
+        tapList.removeAll(sa.getTargets().getTargetCards());
 
         if (tapList.isEmpty()) {
             return false;
