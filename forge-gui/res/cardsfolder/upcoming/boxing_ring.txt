@@ -2,7 +2,7 @@ Name:Boxing Ring
 ManaCost:1 G
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigFight | TriggerDescription$ Whenever a creature enters the battlefield under your control, it fights up to one target creature you don't control with the same mana value.
-SVar:TrigFight:DB$ Fight | Defined$ TriggeredCard | ValidTgts$ Creature.YouDontCtrl+cmcEQX | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you don't control with the same mana value
+SVar:TrigFight:DB$ Fight | Defined$ TriggeredCard | ValidTgts$ Creature.YouDontCtrl+SharesCMCWith TriggeredCard | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you don't control with the same mana value
 A:AB$ Token | Cost$ T | TokenScript$ c_a_treasure_sac | IsPresent$ Creature.YouCtrl+FoughtThisTurn | SpellDescription$ Create a Treasure token. Activate only if you control a creature that fought this turn.
 DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
 Oracle:Whenever a creature enters the battlefield under your control, it fights up to one target creature you don't control with the same mana value.\n{T}: Create a Treasure token. Activate only if you control a creature that fought this turn.
