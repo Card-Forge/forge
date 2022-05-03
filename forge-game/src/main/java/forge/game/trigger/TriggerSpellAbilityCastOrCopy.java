@@ -253,7 +253,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             for (Mana m : spellAbility.getPayingMana()) {
                 Card source = m.getSourceCard();
                 if (source != null) {
-                    if (source.isValid(getParam("ManaFrom"), source.getController(), source, spellAbility)) {
+                    if (matchesValidParam("ManaFrom", source)) {
                         found = true;
                         break;
                     }
