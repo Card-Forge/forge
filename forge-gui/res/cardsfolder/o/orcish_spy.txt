@@ -2,5 +2,5 @@ Name:Orcish Spy
 ManaCost:R
 Types:Creature Orc Rogue
 PT:1/1
-A:AB$ Dig | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | DigNum$ 3 | NoMove$ True | AILogic$ Never | SpellDescription$ Look at the top three cards of target player's library.
+A:AB$ PeekAndReveal | Cost$ T | ValidTgts$ Player | PeekAmount$ 3 | NoReveal$ True | AILogic$ Never | SpellDescription$ Look at the top three cards of target player's library.
 Oracle:{T}: Look at the top three cards of target player's library.
