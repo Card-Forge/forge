@@ -165,7 +165,9 @@ public class FightEffect extends DamageBaseEffect {
 
             damageMap.put(fighterA, fighterB, dmg1);
             damageMap.put(fighterB, fighterA, dmg2);
+            fighterB.setFoughtThisTurn(true);
         }
+        fighterA.setFoughtThisTurn(true);
 
         if (!usedDamageMap) {
             sa.getHostCard().getGame().getAction().dealDamage(false, damageMap, preventMap, counterTable, sa);
