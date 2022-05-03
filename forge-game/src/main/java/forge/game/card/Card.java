@@ -196,6 +196,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private boolean startsGameInPlay = false;
     private boolean drawnThisTurn = false;
+    private boolean foughtThisTurn = false;
     private boolean becameTargetThisTurn = false;
     private boolean startedTheTurnUntapped = false;
     private boolean cameUnderControlSinceLastUpkeep = true; // for Echo
@@ -1861,6 +1862,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setDrawnThisTurn(final boolean b) {
         drawnThisTurn = b;
+    }
+
+    public final boolean getFoughtThisTurn() {
+        return foughtThisTurn;
+    }
+    public final void setFoughtThisTurn(final boolean b) {
+        foughtThisTurn = b;
     }
 
     public final CardCollectionView getGainControlTargets() { //used primarily with AbilityFactory_GainControl
@@ -6223,6 +6231,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         setRegeneratedThisTurn(0);
         resetShield();
         setBecameTargetThisTurn(false);
+        setFoughtThisTurn(false);
         clearMustBlockCards();
         getDamageHistory().newTurn();
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttackedThisTurn());

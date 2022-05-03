@@ -1113,6 +1113,10 @@ public class CardProperty {
             if (card.getDrawnThisTurn()) {
                 return false;
             }
+        } else if (property.startsWith("FoughtThisTurn")) {
+            if (!card.getFoughtThisTurn()) {
+                return false;
+            }
         } else if (property.startsWith("firstTurnControlled")) {
             if (!card.isFirstTurnControlled()) {
                 return false;
