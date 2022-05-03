@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.Map;
 
+import forge.game.card.*;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ImmutableList;
@@ -12,10 +13,6 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
@@ -126,15 +123,26 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         }
 
         CardCollectionView srcCards = null;
+        String title = Localizer.getInstance().getMessage("lblChooseCardsToTakeTargetCounters", counterType.getName());
         if (sa.hasParam("ValidSource")) {
             srcCards = game.getCardsIn(ZoneType.Battlefield);
             srcCards = CardLists.getValidCards(srcCards, sa.getParam("ValidSource"), player, card, sa);
             if (num.equals("Any")) {
-                String title = Localizer.getInstance().getMessage("lblChooseCardsToTakeTargetCounters", counterType.getName());
                 Map<String, Object> params = Maps.newHashMap();
                 params.put("CounterType", counterType);
                 srcCards = player.getController().chooseCardsForEffect(srcCards, sa, title, 0, srcCards.size(), true, params);
             }
+        } else if (sa.hasParam("Choices") && counterType != null) {
+            ZoneType choiceZone = sa.hasParam("ChoiceZone") ? ZoneType.smartValueOf(sa.getParam("ChoiceZone"))
+                    : ZoneType.Battlefield;
+
+            CardCollection choices = CardLists.getValidCards(game.getCardsIn(choiceZone), sa.getParam("Choices"),
+                    player, card, sa);
+
+            //currently only used by one card, so for now
+            //amount is locked at 1 and choice is mandatory
+            srcCards = pc.chooseCardsForEffect(choices, sa, title, 1, 1,
+                    false, null);
         } else {
             srcCards = getTargetCards(sa);
         }
@@ -171,7 +179,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
                             Map<String, Object> params = Maps.newHashMap();
                             params.put("Target", gameCard);
                             params.put("CounterType", counterType);
-                            String title = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", type);
+                            title = Localizer.getInstance().getMessage("lblSelectRemoveCountersNumberOfTarget", type);
                             cntToRemove = pc.chooseNumber(sa, title, 0, cntToRemove, params);
                         }
                     }
