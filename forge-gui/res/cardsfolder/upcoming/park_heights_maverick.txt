@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigProliferate | Secondary$ True | TriggerDescription$ Whenever Park Heights Maverick deals combat damage to a player or dies, proliferate.
 SVar:TrigProliferate:DB$ Proliferate
 DeckHas:Ability$Proliferate|Counters
+DeckHints:Ability$Counters
 Oracle:Dethrone (Whenever this creature attacks the player with the most life or tied for the most life, put a +1/+1 counter on it.)\nPark Heights Maverick can't be blocked by creatures with power 2 or less.\nWhenever Park Heights Maverick deals combat damage to a player or dies, proliferate.
