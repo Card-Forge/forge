@@ -1,0 +1,9 @@
+Name:Swindler's Scheme
+ManaCost:2 U
+Types:Enchantment
+T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | ValidCard$ Card.wasCastFromTheirHand | Execute$ TrigReveal | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever an opponent casts a spell from their hand, you may reveal the top card of your library. If it shares a card type with that spell, counter that spell and that opponent may cast the revealed card without paying its mana cost.
+SVar:TrigReveal:DB$ PeekAndReveal | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBCounter
+SVar:DBCounter:DB$ Counter | Defined$ TriggeredSpellAbility | ConditionDefined$ Remembered | ConditionPresent$ Card.sharesCardTypeWith TriggeredCard | SubAbility$ DBCast
+SVar:DBCast:DB$ Play | WithoutManaCost$ True | Controller$ TriggeredPlayer | Optional$ True | OptionalDecider$ TriggeredPlayer | Defined$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card.sharesCardTypeWith TriggeredCard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever an opponent casts a spell from their hand, you may reveal the top card of your library. If it shares a card type with that spell, counter that spell and that opponent may cast the revealed card without paying its mana cost.

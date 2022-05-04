@@ -329,9 +329,6 @@ public class ComputerUtil {
             }
 
             AbilityUtils.resolve(sa);
-
-            // destroys creatures if they have lethal damage, etc..
-            //game.getAction().checkStateEffects();
         }
     }
 
@@ -827,7 +824,7 @@ public class ComputerUtil {
                         }
                     }
 
-                    if ("DesecrationDemon".equals(source.getParam("AILogic"))) {
+                    if ("DesecrationDemon".equals(logic)) {
                         sacThreshold = SpecialCardAi.DesecrationDemon.getSacThreshold();
                     } else if (considerSacThreshold != -1) {
                         sacThreshold = considerSacThreshold;
@@ -1227,12 +1224,12 @@ public class ComputerUtil {
         final Game game = sa.getActivatingPlayer().getGame();
         final PhaseHandler ph = game.getPhaseHandler();
 
-        return (sa.getHostCard().isCreature()
+        return sa.getHostCard().isCreature()
                 && sa.getPayCosts().hasTapCost()
                 && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
                         && !ph.getNextTurn().equals(sa.getActivatingPlayer()))
                 && !sa.getHostCard().hasSVar("EndOfTurnLeavePlay")
-                && !sa.hasParam("ActivationPhases"));
+                && !sa.hasParam("ActivationPhases");
     }
 
     //returns true if it's better to wait until blockers are declared).
@@ -2601,8 +2598,7 @@ public class ComputerUtil {
     }
 
     public static CardCollection getSafeTargets(final Player ai, SpellAbility sa, CardCollectionView validCards) {
-        CardCollection safeCards = new CardCollection(validCards);
-        safeCards = CardLists.filter(safeCards, new Predicate<Card>() {
+        CardCollection safeCards = CardLists.filter(validCards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 if (c.getController() == ai) {
@@ -2615,8 +2611,7 @@ public class ComputerUtil {
     }
 
     public static Card getKilledByTargeting(final SpellAbility sa, CardCollectionView validCards) {
-        CardCollection killables = new CardCollection(validCards);
-        killables = CardLists.filter(killables, new Predicate<Card>() {
+        CardCollection killables = CardLists.filter(validCards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.getController() != sa.getActivatingPlayer() && c.getSVar("Targeting").equals("Dies");
