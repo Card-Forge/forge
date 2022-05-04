@@ -1907,4 +1907,10 @@
 2022-04-13 Pauper League (36 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-04-13-pauper-league.zip
 2022-04-17 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-04-17-pauper-challenge.zip
 2022-04-18 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-04-18-pauper-challenge.zip
+2022-04-20 Pauper League (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-04-20-pauper-league.zip
+2022-04-24 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-04-24-pauper-challenge.zip
+2022-04-25 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-04-25-pauper-challenge.zip
+2022-04-27 Pauper League (34 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-04-27-pauper-league.zip
+2022-05-01 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-05-01-pauper-challenge.zip
+2022-05-02 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-05-02-pauper-challenge.zip
 Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/pauper-league.zip
