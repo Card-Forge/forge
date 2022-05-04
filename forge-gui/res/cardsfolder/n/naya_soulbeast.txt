@@ -2,9 +2,8 @@ Name:Naya Soulbeast
 ManaCost:6 G G
 Types:Creature Beast
 PT:0/0
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When you cast this spell, each player reveals the top card of their library.
-SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBReveal
-SVar:DBReveal:DB$ Dig | Defined$ Player.IsRemembered | DigNum$ 1 | Reveal$ True | NoMove$ True | RememberRevealed$ True
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When you cast this spell, each player reveals the top card of their library.
+SVar:TrigReveal:DB$ PeekAndReveal | Defined$ Player | RememberRevealed$ True
 K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with X +1/+1 counters on it, where X is the total mana value of all cards revealed this way.
 SVar:X:Remembered$SumCMC
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True

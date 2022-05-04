@@ -185,6 +185,16 @@ public class PumpEffect extends SpellAbilityEffect {
                 keywords.addAll(Arrays.asList(sa.getParam("KW").split(" & ")));
             }
 
+            if (sa.hasParam("IfDesc")) {
+                if (sa.getParam("IfDesc").equals("True") && sa.hasParam("SpellDescription")) {
+                    String ifDesc = sa.getParam("SpellDescription");
+                    sb.append(ifDesc, 0, ifDesc.indexOf(",") + 1);
+                } else {
+                    sb.append(sa.getParam("IfDesc"));
+                }
+                sb.append(" ");
+            }
+
             if (sa instanceof AbilitySub & sa.getRootAbility().getTargets().containsAll(tgts)) {
                 //try to avoid having the same long list of targets twice in a StackDescription
                 sb.append(tgts.size() == 1 && tgts.get(0) instanceof Card ? "It " : "They ");
