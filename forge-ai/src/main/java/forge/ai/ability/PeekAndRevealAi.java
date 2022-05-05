@@ -40,7 +40,7 @@ public class PeekAndRevealAi extends SpellAbilityAi {
         // once things get converted from Dig + NoMove
         return true;
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
      */

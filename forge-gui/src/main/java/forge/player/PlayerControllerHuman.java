@@ -1114,23 +1114,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public CardCollectionView chooseCardsToDiscardFrom(final Player p, final SpellAbility sa,
             final CardCollection valid, final int min, final int max) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
-            boolean optional = min == 0;
-            tempShowCards(valid);
-            GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(valid);
-            List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min),
-                    localizer.getMessage("lblDiscarded"), min, max, gameCacheDiscard.getTrackableKeys(), null);
-            endTempShowCards();
-            final CardCollection choices = new CardCollection();
-            gameCacheDiscard.addToList(views, choices);
-            return choices;
-        }
+        boolean optional = min == 0;
 
         if (p != player) {
             tempShowCards(valid);
             GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(valid);
-            List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), min),
-                            localizer.getMessage("lblDiscarded"), min, min, gameCacheDiscard.getTrackableKeys(), null);
+            List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min),
+                    localizer.getMessage("lblDiscarded"), min, max, gameCacheDiscard.getTrackableKeys(), null);
             endTempShowCards();
             final CardCollection choices = new CardCollection();
             gameCacheDiscard.addToList(views, choices);
