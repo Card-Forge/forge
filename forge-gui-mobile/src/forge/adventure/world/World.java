@@ -46,7 +46,7 @@ public class World implements  Disposable, SaveFileContent {
     private PointOfInterestMap mapPoiIds;
     private BiomeTexture[] biomeTexture;
     private long seed;
-    private final Random random = MyRandom.getRandom();
+    private final Random random = new Random();
     private boolean worldDataLoaded=false;
     private Texture globalTexture = null;
 
