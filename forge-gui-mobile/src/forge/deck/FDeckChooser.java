@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
@@ -195,7 +196,20 @@ public class FDeckChooser extends FScreen {
                     DeckgenUtil.randomSelect(lstDecks);
                 }
                 else {
-                    DeckgenUtil.randomSelect(lstDecks);
+                    List<DeckProxy> AIDecks = new ArrayList<>();
+                    int count = 0;
+                    if (isAi) {
+                        for (DeckProxy deckProxy : lstDecks.getPool().toFlatList()) {
+                            if (deckProxy.getAI().inMainDeck == 0) {
+                                AIDecks.add(deckProxy);
+                                count++;
+                            }
+                        }
+                    }
+                    if (count > 10)
+                        lstDecks.setSelectedItem(AIDecks.get(MyRandom.getRandom().nextInt(AIDecks.size())));
+                    else
+                        DeckgenUtil.randomSelect(lstDecks);
                 }
                 accept();
             }
