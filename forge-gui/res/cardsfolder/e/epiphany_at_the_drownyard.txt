@@ -1,7 +1,7 @@
 Name:Epiphany at the Drownyard
 ManaCost:X U
 Types:Instant
-A:SP$ PeekAndReveal | Cost$ X U | PeekAmount$ Y | RememberRevealed$ True | NoPeek$ True | SubAbility$ DBTwoPiles | AILogic$ PayX | SpellDescription$ Reveal the top X plus one cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.
+A:SP$ PeekAndReveal | Cost$ X U | PeekAmount$ Y | RememberRevealed$ True | NoPeek$ True | SubAbility$ DBTwoPiles | SpellDescription$ Reveal the top X plus one cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.
 SVar:DBTwoPiles:DB$ TwoPiles | Chooser$ Opponent | DefinedCards$ Remembered | Separator$ You | ChosenPile$ DBHand | UnchosenPile$ DBGrave | AILogic$ Worst
 SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard | SubAbility$ DBCleanup
