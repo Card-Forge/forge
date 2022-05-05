@@ -1526,10 +1526,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return newCard;
     }
 
-    public final int getNumTokensCreatedThisTurn() {
-        return numTokenCreatedThisTurn;
-    }
-
     public final void addTokensCreatedThisTurn(Card token) {
         numTokenCreatedThisTurn++;
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
