@@ -196,6 +196,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private boolean startsGameInPlay = false;
     private boolean drawnThisTurn = false;
+    private boolean foughtThisTurn = false;
     private boolean becameTargetThisTurn = false;
     private boolean startedTheTurnUntapped = false;
     private boolean cameUnderControlSinceLastUpkeep = true; // for Echo
@@ -1861,6 +1862,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public final void setDrawnThisTurn(final boolean b) {
         drawnThisTurn = b;
+    }
+
+    public final boolean getFoughtThisTurn() {
+        return foughtThisTurn;
+    }
+    public final void setFoughtThisTurn(final boolean b) {
+        foughtThisTurn = b;
     }
 
     public final CardCollectionView getGainControlTargets() { //used primarily with AbilityFactory_GainControl
@@ -6132,7 +6140,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
             if (shieldCounterReplaceDestroy == null) {
                 String reStr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.Self | ValidSource$ SpellAbility "
-            + "| Description$ If this permanent would be destroyed as the result of an effect, instead remove a shield counter from it";
+            + "| Description$ If this permanent would be destroyed as the result of an effect, instead remove a shield counter from it.";
                 shieldCounterReplaceDestroy = ReplacementHandler.parseReplacement(reStr, this, false, null);
                 shieldCounterReplaceDestroy.setOverridingAbility(AbilityFactory.getAbility(sa, this));
             }
@@ -6223,6 +6231,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         setRegeneratedThisTurn(0);
         resetShield();
         setBecameTargetThisTurn(false);
+        setFoughtThisTurn(false);
         clearMustBlockCards();
         getDamageHistory().newTurn();
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttackedThisTurn());

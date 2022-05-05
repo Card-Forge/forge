@@ -1851,9 +1851,6 @@ public class AbilityUtils {
                         }
                     }
                     list = CardLists.getValidCards(list, k[1], sa.getActivatingPlayer(), c, sa);
-                    if (k[0].contains("TotalToughness")) {
-                        return doXMath(Aggregates.sum(list, CardPredicates.Accessors.fnGetNetToughness), expr, c, ctb);
-                    }
                     return doXMath(list.size(), expr, c, ctb);
                 }
 
@@ -2416,16 +2413,6 @@ public class AbilityUtils {
             return doXMath(cmc, expr, c, ctb);
         }
 
-        if (sq[0].startsWith("ColorsCtrl")) {
-            final String restriction = l[0].substring(11);
-            final CardCollection list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
-            byte n = 0;
-            for (final Card card : list) {
-                n |= card.getColor().getColor();
-            }
-            return doXMath(ColorSet.fromMask(n).countColors(), expr, c, ctb);
-        }
-
         // Count$AttackersDeclared
         if (sq[0].startsWith("AttackersDeclared")) {
             List<Card> attackers = player.getCreaturesAttackedThisTurn();
@@ -2688,20 +2675,6 @@ public class AbilityUtils {
             return MyRandom.getRandom().nextInt(1+max-min) + min;
         }
 
-        // Count$TotalCounters.<counterType>_<valid>
-        if (sq[0].startsWith("TotalCounters")) {
-            final String[] restrictions = l[0].split("_");
-            final CounterType cType = CounterType.getType(restrictions[1]);
-            final String[] validFilter = restrictions[2].split(",");
-            CardCollectionView validCards = game.getCardsIn(ZoneType.Battlefield);
-            validCards = CardLists.getValidCards(validCards, validFilter, player, c, ctb);
-            int cCount = 0;
-            for (final Card card : validCards) {
-                cCount += card.getCounters(cType);
-            }
-            return doXMath(cCount, expr, c, ctb);
-        }
-
         // Count$ThisTurnCast <Valid>
         // Count$LastTurnCast <Valid>
         if (sq[0].startsWith("ThisTurnCast") || sq[0].startsWith("LastTurnCast")) {
@@ -2756,13 +2729,27 @@ public class AbilityUtils {
             String[] paidparts = l[0].split("\\$", 2);
             String[] lparts = paidparts[0].split(" ", 2);
 
-            final CardCollectionView cardsInZones;
+            CardCollectionView cardsInZones = null;
             if (lparts[0].contains("All")) {
                 cardsInZones = game.getCardsInGame();
             } else {
-                cardsInZones = lparts[0].length() > 5
-                        ? game.getCardsIn(ZoneType.listValueOf(lparts[0].substring(5)))
-                                : game.getCardsIn(ZoneType.Battlefield);
+                final List<ZoneType> zones = ZoneType.listValueOf(lparts[0].length() > 5 ? lparts[0].substring(5) : "Battlefield");
+                boolean usedLastState = false;
+                if (ctb instanceof SpellAbility && zones.size() == 1) {
+                    SpellAbility sa = (SpellAbility) ctb;
+                    if (sa.isReplacementAbility()) {
+                        if (zones.get(0).equals(ZoneType.Battlefield)) {
+                            cardsInZones = sa.getLastStateBattlefield();
+                            usedLastState = true;
+                        } else if (zones.get(0).equals(ZoneType.Graveyard)) {
+                            cardsInZones = sa.getLastStateGraveyard();
+                            usedLastState = true;
+                        }
+                    }
+                }
+                if (!usedLastState) {
+                    cardsInZones = game.getCardsIn(zones);
+                }
             }
 
             int cnt;
@@ -2775,7 +2762,7 @@ public class AbilityUtils {
         }
 
         if (sq[0].startsWith("MostCardName")) {
-                String[] lparts = l[0].split(" ", 2);
+            String[] lparts = l[0].split(" ", 2);
             final String[] rest = lparts[1].split(",");
 
             final CardCollectionView cardsInZones = lparts[0].length() > 12
@@ -2858,6 +2845,19 @@ public class AbilityUtils {
                 }
             }
             return doXMath(powers.size(), expr, c, ctb);
+        }
+        if (sq[0].startsWith("DifferentCounterKinds_")) {
+            final List<CounterType> kinds = Lists.newArrayList();
+            final String rest = l[0].substring(22);
+            CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), rest, player, c, ctb);
+            for (final Card card : list) {
+                for (final Map.Entry<CounterType, Integer> map : card.getCounters().entrySet()) {
+                    if (!kinds.contains(map.getKey())) {
+                        kinds.add(map.getKey());
+                    }
+                }
+            }
+            return doXMath(kinds.size(), expr, c, ctb);
         }
 
         // Complex counting methods
@@ -3446,10 +3446,6 @@ public class AbilityUtils {
 
         if (value.contains("CardsDiscardedThisTurn")) {
             return doXMath(player.getNumDiscardedThisTurn(), m, source, ctb);
-        }
-
-        if (value.contains("TokensCreatedThisTurn")) {
-            return doXMath(player.getNumTokensCreatedThisTurn(), m, source, ctb);
         }
 
         if (value.contains("AttackersDeclared")) {

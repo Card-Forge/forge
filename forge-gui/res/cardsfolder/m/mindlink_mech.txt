@@ -4,6 +4,7 @@ Types:Artifact Vehicle
 PT:4/3
 K:Flying
 T:Mode$ BecomesCrewed | ValidVehicle$ Card.Self | FirstTimeCrewed$ True | Execute$ TrigClone | TriggerDescription$ Whenever CARDNAME becomes crewed for the first time each turn, until end of turn, CARDNAME becomes a copy of target nonlegendary creature that crewed it this turn, except it's 4/3, it's a Vehicle artifact in addition to its other types, and it has flying.
-SVar:TrigClone:DB$ Clone | ValidTgts$ Creature.TriggeredCrew+nonLegendary | TgtPrompt$ Select target nonlegendary creature that crewed it this turn | Duration$ UntilEndOfTurn | SetPower$ 4 | SetToughness$ 3 | AddTypes$ Vehicle & Artifact | AddKeywords$ Flying
+SVar:TrigClone:DB$ Clone | ValidTgts$ Creature.TriggeredCrew+nonLegendary | TgtPrompt$ Select target nonlegendary creature that crewed it this turn | Duration$ UntilEndOfTurn | SetPower$ 4 | SetToughness$ 3 | AddTypes$ Vehicle & Artifact | AddKeywords$ Flying | AILogic$ CloneBestCreature
 K:Crew:1
+AI:RemoveDeck:All
 Oracle:Flying\nWhenever Mindlink Mech becomes crewed for the first time each turn, until end of turn, Mindlink Mech becomes a copy of target nonlegendary creature that crewed it this turn, except it's 4/3, it's a Vehicle artifact in addition to its other types, and it has flying.\nCrew 1

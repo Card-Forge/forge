@@ -1345,6 +1345,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             }
         }
 
+        // pre sort
+        Collections.sort(types);
+
         // create sorted list from map from least to most frequent
         List<Entry<String, Integer>> sortedList = Lists.newArrayList(typesInDeck.entrySet());
         Collections.sort(sortedList, new Comparator<Entry<String, Integer>>() {

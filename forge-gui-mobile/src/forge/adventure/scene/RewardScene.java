@@ -269,25 +269,25 @@ public class RewardScene extends UIScene {
             addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
-                    if (Current.player().getGold() >= price) {
-                        if(changes!=null)
-                            changes.buyCard(objectID, index);
-                        Current.player().takeGold(price);
-                        Current.player().addReward(reward.getReward());
+                if (Current.player().getGold() >= price) {
+                    if(changes!=null)
+                        changes.buyCard(objectID, index);
+                    Current.player().takeGold(price);
+                    Current.player().addReward(reward.getReward());
 
-                        Gdx.input.vibrate(5);
-                        SoundSystem.instance.play(SoundEffectType.FlipCoin, false);
+                    Gdx.input.vibrate(5);
+                    SoundSystem.instance.play(SoundEffectType.FlipCoin, false);
 
-                        updateBuyButtons();
-                        goldLabel.setText("Gold: " + String.valueOf(AdventurePlayer.current().getGold()));
-                        if(changes==null)
-                            return;
-                        setDisabled(true);
-                        reward.sold();
-                        getColor().a = 0.5f;
-                        setText("SOLD");
-                        removeListener(this);
-                    }
+                    updateBuyButtons();
+                    goldLabel.setText("Gold: " + String.valueOf(AdventurePlayer.current().getGold()));
+                    if(changes==null)
+                        return;
+                    setDisabled(true);
+                    reward.sold();
+                    getColor().a = 0.5f;
+                    setText("SOLD");
+                    removeListener(this);
+                }
                 }
             });
         }

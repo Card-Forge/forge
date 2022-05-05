@@ -22,7 +22,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
-import forge.util.MyRandom;
+//import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class World implements  Disposable, SaveFileContent {
     private PointOfInterestMap mapPoiIds;
     private BiomeTexture[] biomeTexture;
     private long seed;
-    private final Random random = MyRandom.getRandom();
+    private final Random random = new Random();
     private boolean worldDataLoaded=false;
     private Texture globalTexture = null;
 

@@ -68,7 +68,9 @@ public class CopyPermanentEffect extends TokenEffectBase {
 
         if (sa.hasParam("AddTriggers")) {
             final String oDesc = sa.getDescription();
-            final String trigStg = oDesc.substring(oDesc.indexOf("\""),oDesc.lastIndexOf("\"") + 1);
+            final String trigStg = oDesc.contains("\"") ?
+                    oDesc.substring(oDesc.indexOf("\""),oDesc.lastIndexOf("\"") + 1) :
+                    "[trigger text parsing error]";
             if (addKWs) {
                 sb.append(" and ").append(trigStg);
             } else {

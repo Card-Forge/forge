@@ -373,7 +373,7 @@ public class MapStage extends GameStage {
                     case "shop":
                         String shopList = prop.get("shopList").toString();
                         shopList=shopList.replaceAll("\\s","");
-                        List possibleShops = Arrays.asList(shopList.split(","));
+                        List<String> possibleShops = Arrays.asList(shopList.split(","));
                         Array<ShopData> shops;
                         if (possibleShops.size() == 0 || shopList.equals(""))
                             shops = WorldData.getShopList();
@@ -385,8 +385,7 @@ public class MapStage extends GameStage {
                                 }
                             }
                         }
-                        if (shops.size == 0)
-                            continue;
+                        if(shops.size == 0) continue;
 
                         ShopData data = shops.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(shops.size));
                         Array<Reward> ret = new Array<>();
@@ -406,6 +405,8 @@ public class MapStage extends GameStage {
                             }
                         }
                         break;
+                    default:
+                        System.err.println("Unexpected value: " + type);
                 }
             }
         }
@@ -494,16 +495,14 @@ public class MapStage extends GameStage {
         }
         currentMob = null;
     }
-    public void removeAllEnemies()
-    {
+    public void removeAllEnemies() {
         List<Integer> idsToRemove=new ArrayList<>();
         for (MapActor actor : new Array.ArrayIterator<>(actors)) {
-                if (actor instanceof EnemySprite) {
-                    idsToRemove.add(actor.getObjectId());
-                }
+            if (actor instanceof EnemySprite) {
+                idsToRemove.add(actor.getObjectId());
+            }
         }
-        for(Integer i:idsToRemove)
-            deleteObject(i);
+        for(Integer i:idsToRemove) deleteObject(i);
     }
 
     @Override

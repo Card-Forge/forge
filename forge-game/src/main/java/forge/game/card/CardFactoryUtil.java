@@ -1662,7 +1662,7 @@ public class CardFactoryUtil {
 
             inst.addTrigger(myTrigger);
         } else if (keyword.startsWith("Replicate")) {
-            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ ReplicateAmount | Secondary$ True | TriggerDescription$ Copy CARDNAME for each time you paid its replicate cost";
+            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ ReplicateAmount | Secondary$ True | TriggerDescription$ Copy CARDNAME for each time you paid its replicate cost.";
             final String abString = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ ReplicateAmount | MayChooseTarget$ True";
 
             final Trigger replicateTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
@@ -1678,8 +1678,7 @@ public class CardFactoryUtil {
             final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | OptionalDecider$ You | "
                     + " Secondary$ True | TriggerDescription$ Ripple " + num + " - CARDNAME";
 
-            final String abString = "DB$ Dig | NoMove$ True | DigNum$ " + num +
-                    " | Reveal$ True | RememberRevealed$ True";
+            final String abString = "DB$ PeekAndReveal | PeekAmount$ " + num + " | RememberRevealed$ True";
 
             final String dbCast = "DB$ Play | Valid$ Card.IsRemembered+sameName | " +
                     "ValidZone$ Library | WithoutManaCost$ True | Optional$ True | " +

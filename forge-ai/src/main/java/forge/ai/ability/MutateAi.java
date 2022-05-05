@@ -5,6 +5,7 @@ import java.util.Map;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.card.Card;
@@ -20,6 +21,7 @@ public class MutateAi extends SpellAbilityAi {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         CardCollectionView mutateTgts = CardLists.getTargetableCards(aiPlayer.getCreaturesInPlay(), sa);
+        mutateTgts = ComputerUtil.getSafeTargets(aiPlayer, sa, mutateTgts);
 
         // Filter out some abilities that are useless
         // TODO: add other stuff useless for Mutate here

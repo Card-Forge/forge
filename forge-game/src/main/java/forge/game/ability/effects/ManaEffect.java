@@ -270,9 +270,17 @@ public class ManaEffect extends SpellAbilityEffect {
                 ? GameActionUtil.generatedMana(sa) : "mana";
         sb.append("Add ").append(toManaString(mana)).append(".");
         if (sa.hasParam("RestrictValid")) {
-            String desc = sa.getDescription();
-            int i = desc.indexOf("Spend this");
-            sb.append(" ").append(desc, i, desc.indexOf(".", i) + 1);
+            sb.append(" ");
+            final String desc = sa.getDescription();
+            if (desc.contains("Spend this") && desc.contains(".")) {
+                int i = desc.indexOf("Spend this");
+                sb.append(desc, i, desc.indexOf(".", i) + 1);
+            } else if (desc.contains("This mana can't") && desc.contains(".")) { //for negative restrictions (Jegantha)
+                int i = desc.indexOf("This mana can't");
+                sb.append(desc, i, desc.indexOf(".", i) + 1);
+            } else {
+                sb.append("[failed to add RestrictValid to StackDesc]");
+            }
         }
         return sb.toString();
     }

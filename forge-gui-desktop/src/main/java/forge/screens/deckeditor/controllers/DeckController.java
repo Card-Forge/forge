@@ -91,7 +91,9 @@ public class DeckController<T extends DeckBase> {
     }
     public void loadDeck(Deck deck, boolean substituteCurrentDeck) {
         boolean isStored;
-        if (view.getCatalogManager().isInfinite()) {
+        boolean isInfinite = view.getCatalogManager().isInfinite();
+
+        if (isInfinite) {
             Deck currentDeck = view.getHumanDeck();
             if (substituteCurrentDeck || currentDeck.isEmpty()) {
                 newModel();
@@ -107,10 +109,14 @@ public class DeckController<T extends DeckBase> {
             isStored = false;
         }
 
+        // not the same as before
         Deck currentDeck = view.getHumanDeck();
         for (DeckSection section: EnumSet.allOf(DeckSection.class)) {
             if (view.isSectionImportable(section)) {
                 CardPool sectionCards = currentDeck.getOrCreate(section);
+                if (!isInfinite) {
+                    sectionCards.clear();
+                }
                 sectionCards.addAll(deck.getOrCreate(section));
             }
         }

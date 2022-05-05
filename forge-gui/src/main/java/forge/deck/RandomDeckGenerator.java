@@ -166,6 +166,18 @@ public class RandomDeckGenerator extends DeckProxy implements Comparable<RandomD
         if (Iterables.isEmpty(decks)) {
             return getGeneratedDeck(); //fall back to generated deck if no decks in filtered list
         }
+        List<DeckProxy> AIDecks = new ArrayList<>();
+        int count = 0;
+        if (isAi) {
+            for (DeckProxy deckProxy : decks) {
+                if (deckProxy.getAI().inMainDeck == 0) {
+                    AIDecks.add(deckProxy);
+                    count++;
+                }
+            }
+            if (count > 10)
+                return Aggregates.random(AIDecks).getDeck();
+        }
         return Aggregates.random(decks).getDeck();
     }
 
