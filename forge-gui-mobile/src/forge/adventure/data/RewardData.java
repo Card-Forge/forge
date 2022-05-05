@@ -95,7 +95,7 @@ public class RewardData {
         if(probability == 0 || WorldSave.getCurrentSave().getWorld().getRandom().nextFloat() <= probability) {
             if(type==null || type.isEmpty())
                 type="randomCard";
-            int addedCount = WorldSave.getCurrentSave().getWorld().getRandom().nextInt(addMaxCount);
+            int addedCount = (int)((float)(addMaxCount)* WorldSave.getCurrentSave().getWorld().getRandom().nextFloat());
             if( colors != null && colors.length > 0 ) { //Filter special "colorID" case.
                 String C = Current.player().getColorIdentityLong();
                 for(int i = 0; i < colors.length; i++){
