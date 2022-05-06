@@ -733,17 +733,3 @@ F567 R Puresteel Angel @Lukas Litzsinger
 725 R Umezawa's Jitte @Christopher Moeller
 726 R Hall of the Bandit Lord @Paolo Parente
 727 R Tendo Ice Bridge @Rob Alexander
-728 M Elspeth, Undaunted Hero @Steven Belledin
-729 R Runed Halo @Steve Prescott
-730 M Ob Nixilis, the Fallen @Jason Felix
-731 R Remorseless Punishment @Ryan Barger
-732 R Krenko, Tin Street Kingpin @Mark Behm
-733 M Urabrask the Hidden @Brad Rigney
-734 M Vivien Reid @Anna Steinbauer
-735 M Admiral Beckett Brass @Jason Rainville
-736 R Asmoranomardicadaistinaculdacar @Ryan Pancoast
-737 R Crosis, the Purger @Chris Rahn
-738 M Outlaws' Merriment @Suzanne Helmigh
-739 R Treasury Thrull @Mark Zug
-740 R Wasitora, Nekoru Queen @Cynthia Sheppard
-741 M Zacama, Primal Calamity @Jaime Jones
