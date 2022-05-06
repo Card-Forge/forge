@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
@@ -73,6 +75,7 @@ public class FDeckChooser extends FScreen {
     private boolean firstActivation = true;
 
     private final DeckManager lstDecks;
+    private List<DeckProxy> AIDecks = new ArrayList<>();
     private final FButton btnNewDeck = new FButton(Forge.getLocalizer().getInstance().getMessage("lblNewDeck"));
     private final FButton btnEditDeck = new FButton(Forge.getLocalizer().getInstance().getMessage("btnEditDeck"));
     private final FButton btnViewDeck = new FButton(Forge.getLocalizer().getInstance().getMessage("lblViewDeck"));
@@ -196,18 +199,18 @@ public class FDeckChooser extends FScreen {
                     DeckgenUtil.randomSelect(lstDecks);
                 }
                 else {
-                    List<DeckProxy> AIDecks = new ArrayList<>();
-                    int count = 0;
+                    int size = 0;
                     if (isAi) {
-                        for (DeckProxy deckProxy : lstDecks.getPool().toFlatList()) {
-                            if (deckProxy.getAI().inMainDeck == 0) {
-                                AIDecks.add(deckProxy);
-                                count++;
+                        AIDecks = lstDecks.getPool().toFlatList().parallelStream().filter(new Predicate<DeckProxy>() {
+                            @Override
+                            public boolean test(DeckProxy deckProxy) {
+                                return deckProxy.getAI().inMainDeck == 0;
                             }
-                        }
+                        }).collect(Collectors.toList());
+                        size = AIDecks.size();
                     }
-                    if (count > 10)
-                        lstDecks.setSelectedItem(AIDecks.get(MyRandom.getRandom().nextInt(AIDecks.size())));
+                    if (size > 10)
+                        lstDecks.setSelectedItem(AIDecks.get(MyRandom.getRandom().nextInt(size)));
                     else
                         DeckgenUtil.randomSelect(lstDecks);
                 }
