@@ -170,6 +170,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
         boolean existingCounter = sa.hasParam("CounterType") && sa.getParam("CounterType").equals("ExistingCounter");
         boolean eachExistingCounter = sa.hasParam("EachExistingCounter");
+        boolean putOnEachOther = sa.hasParam("PutOnEachOther");
 
         if (sa.hasParam("Optional") && !pc.confirmAction
                 (sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCounter"))) {
@@ -188,7 +189,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
             Iterables.addAll(tgtObjects, activator.getController().chooseCardsForEffect(leastToughness, sa,
                     Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false, params));
-        } else if (sa.hasParam("Choices") && counterType != null) {
+        } else if (sa.hasParam("Choices") && (counterType != null || putOnEachOther)) {
             ZoneType choiceZone = ZoneType.Battlefield;
             if (sa.hasParam("ChoiceZone")) {
                 choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
@@ -221,6 +222,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
             if ((sa.hasParam("ChoiceTitle") || sa.hasParam("SpecifyCounter")) && counterType != null) {
                 title += " (" + counterType.getName() + ")";
+            } else if (putOnEachOther) {
+                //turn into a Localizer message
+                title += "with the kind of counter you want to put on each other creature you control";
             }
 
             Map<String, Object> params = Maps.newHashMap();
@@ -354,7 +358,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     final List<CounterType> choices = Lists.newArrayList();
                     // get types of counters
                     for (CounterType ct : obj.getCounters().keySet()) {
-                        if (obj.canReceiveCounters(ct)) {
+                        if (obj.canReceiveCounters(ct) || putOnEachOther) {
                             choices.add(ct);
                         }
                     }
@@ -378,10 +382,21 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     } else {
                         Map<String, Object> params = Maps.newHashMap();
                         params.put("Target", obj);
-                        StringBuilder sb = new StringBuilder();
-                        sb.append(Localizer.getInstance().getMessage("lblSelectCounterTypeAddTo") + " ");
-                        sb.append(obj);
-                        counterType = pc.chooseCounterType(choices, sa, sb.toString(), params);
+                        String sb = Localizer.getInstance().getMessage("lblSelectCounterTypeAddTo") +
+                                " " + (putOnEachOther ? "each other creature you control" : obj);
+                        counterType = pc.chooseCounterType(choices, sa, sb, params);
+                    }
+                    if (putOnEachOther) {
+                        List<Card> others = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
+                                sa.getParam("PutOnEachOther"), activator, card, sa);
+                        for (Card other : others) {
+                            if (other.equals(obj)) {
+                                continue;
+                            }
+                            Card otherGCard = game.getCardState(other, null);
+                            otherGCard.addCounter(counterType, counterAmount, placer, table);
+                        }
+                        continue;
                     }
                 }
 
@@ -563,7 +578,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
             CounterType counterType = null;
             if (!sa.hasParam("EachExistingCounter") && !sa.hasParam("EachFromSource")
                     && !sa.hasParam("UniqueType") && !sa.hasParam("CounterTypePerDefined")
-                    && !sa.hasParam("CounterTypes") && !sa.hasParam("ChooseDifferent")) {
+                    && !sa.hasParam("CounterTypes") && !sa.hasParam("ChooseDifferent")
+                    && !sa.hasParam("PutOnEachOther")) {
                 try {
                     counterType = chooseTypeFromList(sa, sa.getParam("CounterType"), null,
                             placer.getController());
