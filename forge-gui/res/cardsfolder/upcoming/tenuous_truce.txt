@@ -1,0 +1,12 @@
+Name:Tenuous Truce
+ManaCost:1 W
+Types:Enchantment Aura
+K:Enchant opponent
+A:SP$ Attach | ValidTgts$ Opponent | AILogic$ Curse
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of enchanted opponent's end step, you and that player each draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ TriggeredPlayerAndYou
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | AttackedTarget$ Player.EnchantedBy,Planeswalker.EnchantedPlayerCtrl | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When you attack enchanted opponent or a planeswalker they control or when they attack you or a planeswalker you control, sacrifice CARDNAME.
+T:Mode$ AttackersDeclared | AttackingPlayer$ Player.EnchantedBy | AttackedTarget$ You,Planeswalker.YouCtrl | Execute$ TrigSac | Secondary$ True | TriggerZones$ Battlefield | TriggerDescription$ When you attack enchanted opponent or a planeswalker they control or when they attack you or a planeswalker you control, sacrifice CARDNAME.
+SVar:TrigSac:DB$ Sacrifice
+DeckHas:Ability$Sacrifice
+Oracle:Enchant opponent\nAt the beginning of enchanted opponent's end step, you and that player each draw a card.\nWhen you attack enchanted opponent or a planeswalker they control or when they attack you or a planeswalker you control, sacrifice Tenuous Truce.
