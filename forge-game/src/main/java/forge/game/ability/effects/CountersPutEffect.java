@@ -223,8 +223,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
             if ((sa.hasParam("ChoiceTitle") || sa.hasParam("SpecifyCounter")) && counterType != null) {
                 title += " (" + counterType.getName() + ")";
             } else if (putOnEachOther) {
-                //turn into a Localizer message
-                title += "with the kind of counter you want to put on each other creature you control";
+                title += Localizer.getInstance().getMessage("lblWithKindCounter") + " " +
+                        Localizer.getInstance().getMessage("lblEachOther");
             }
 
             Map<String, Object> params = Maps.newHashMap();
@@ -383,7 +383,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                         Map<String, Object> params = Maps.newHashMap();
                         params.put("Target", obj);
                         String sb = Localizer.getInstance().getMessage("lblSelectCounterTypeAddTo") +
-                                " " + (putOnEachOther ? "each other creature you control" : obj);
+                                " " + (putOnEachOther ? Localizer.getInstance().getMessage("lblEachOther") : obj);
                         counterType = pc.chooseCounterType(choices, sa, sb, params);
                     }
                     if (putOnEachOther) {
