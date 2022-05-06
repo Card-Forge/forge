@@ -11,6 +11,7 @@ import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
@@ -92,17 +93,40 @@ public class MillEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
+        final boolean optional = sa.hasParam("Optional");
+        final boolean eachP = sa.hasParam("Defined") && sa.getParam("Defined").equals("Player");
+        String each = "Each player";
+        final PlayerCollection tgtPs = getTargetPlayers(sa);
 
-        sb.append(Lang.joinHomogenous(getTargetPlayers(sa))).append(" ");
+        if (sa.hasParam("IfDesc")) {
+            final String ifD = sa.getParam("IfDesc");
+            if (ifD.equals("True")) {
+                String ifDesc = sa.getDescription();
+                if (ifDesc.contains(",")) {
+                    sb.append(ifDesc, 0, ifDesc.indexOf(",") + 1);
+                } else {
+                    sb.append("[MillEffect IfDesc parsing error]");
+                }
+            } else {
+                sb.append(ifD);
+            }
+            sb.append(" ");
+            each = each.toLowerCase();
+        }
+
+        sb.append(eachP ? each : Lang.joinHomogenous(tgtPs));
+        sb.append(" ");
 
         final ZoneType dest = ZoneType.smartValueOf(sa.getParam("Destination"));
+        sb.append(optional ? "may " : "");
         if ((dest == null) || dest.equals(ZoneType.Graveyard)) {
-            sb.append("mills ");
+            sb.append("mill");
         } else if (dest.equals(ZoneType.Exile)) {
-            sb.append("exiles ");
+            sb.append("exile");
         } else if (dest.equals(ZoneType.Ante)) {
-            sb.append("antes ");
+            sb.append("ante");
         }
+        sb.append((optional || tgtPs.size() > 1) && !eachP ? " " : "s ");
 
         sb.append(Lang.nounWithNumeralExceptOne(numCards, "card")).append(".");
 
