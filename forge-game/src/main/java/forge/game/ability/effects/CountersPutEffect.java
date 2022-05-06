@@ -34,54 +34,85 @@ import forge.util.Localizer;
 
 public class CountersPutEffect extends SpellAbilityEffect {
     @Override
-    protected String getStackDescription(SpellAbility spellAbility) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder stringBuilder = new StringBuilder();
-        final Card card = spellAbility.getHostCard();
+        final Card card = sa.getHostCard();
+        final String who = sa.getActivatingPlayer().getName();
+        boolean pronoun = false;
 
-        final int amount = AbilityUtils.calculateAmount(card,
-                spellAbility.getParamOrDefault("CounterNum", "1"), spellAbility);
-        if (spellAbility.hasParam("CounterTypes")) {
-            stringBuilder.append(spellAbility.getActivatingPlayer()).append(" ");
-            String desc = spellAbility.getDescription();
-            if (desc.contains("Put")) {
-                desc = desc.substring(desc.indexOf("Put"), desc.indexOf(" on ") + 4)
-                        .replaceFirst("Put", "puts");
+        if (sa.hasParam("IfDesc")) {
+            final String ifD = sa.getParam("IfDesc");
+            if (ifD.equals("True")) {
+                String ifDesc = sa.getDescription();
+                if (ifDesc.contains(",")) {
+                    if (ifDesc.contains(" you ")) {
+                        ifDesc = ifDesc.replaceFirst(" you ", " " + who + " ");
+                        pronoun = true;
+                        if (ifDesc.contains(" you ")) {
+                            ifDesc = ifDesc.replaceAll(" you ", " they ");
+                        }
+                        if (ifDesc.contains(" your ")) {
+                            ifDesc = ifDesc.replaceAll(" your ", " their ");
+                        }
+                    }
+                    stringBuilder.append(ifDesc, 0, ifDesc.indexOf(",") + 1);
+                } else {
+                    stringBuilder.append("[CountersPutEffect IfDesc parsing error]");
+                }
+            } else {
+                stringBuilder.append(ifD);
             }
-            stringBuilder.append(desc).append(Lang.joinHomogenous(getTargets(spellAbility))).append(".");
+            stringBuilder.append(" ");
+        }
+
+        stringBuilder.append(pronoun ? who : "they").append(" ");
+
+        if (sa.hasParam("CounterTypes")) {
+            String desc = sa.getDescription();
+            if (desc.contains("Put ") && desc.contains(" on ")) {
+                desc = desc.substring(desc.indexOf("Put "), desc.indexOf(" on ") + 4)
+                        .replaceFirst("Put ", "puts ");
+            }
+            stringBuilder.append(desc).append(Lang.joinHomogenous(getTargets(sa))).append(".");
             return stringBuilder.toString();
         }
         // skip the StringBuilder if no targets are chosen ("up to" scenario)
-        if (spellAbility.usesTargeting()) {
-            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
+        if (sa.usesTargeting()) {
+            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(sa);
             if (targetCards.size() == 0) {
                 return stringBuilder.toString();
             }
         }
-        if (spellAbility.hasParam("Bolster")) {
-            stringBuilder.append("Bolster ").append(amount);
+
+        final int amount = AbilityUtils.calculateAmount(card,
+                sa.getParamOrDefault("CounterNum", "1"), sa);
+
+        if (sa.hasParam("Bolster")) {
+            stringBuilder.append("bolsters ").append(amount).append(".");
             return stringBuilder.toString();
         }
-        boolean divAsChoose = spellAbility.isDividedAsYouChoose();
+        boolean divAsChoose = sa.isDividedAsYouChoose();
+        final boolean divRandom = sa.hasParam("DividedRandomly");
         if (divAsChoose) {
-            stringBuilder.append("Distribute ");
-        } else if (spellAbility.hasParam("DividedRandomly")) {
-            stringBuilder.append("Randomly distribute ");
+            stringBuilder.append(pronoun ? "distribute " : "distributes ");
+        } else if (divRandom) {
+            stringBuilder.append(pronoun ? "randomly distribute " : "randomly distributes ");
         } else {
-            stringBuilder.append("Put ");
+            stringBuilder.append(pronoun ? "put " : "puts ");
         }
-        if (spellAbility.hasParam("UpTo")) {
+        if (sa.hasParam("UpTo")) {
             stringBuilder.append("up to ");
         }
 
-        final String typeName = CounterType.getType(spellAbility.getParam("CounterType")).getName().toLowerCase();
+        final String typeName = CounterType.getType(sa.getParam("CounterType")).getName().toLowerCase();
         stringBuilder.append(Lang.nounWithNumeralExceptOne(amount, typeName + " counter"));
-        stringBuilder.append(divAsChoose || spellAbility.hasParam("DividedRandomly") ? " among " : " on ");
+        stringBuilder.append(divAsChoose || divRandom ? " among " : " on ");
 
         // special handling for multiple Defined
-        if (spellAbility.hasParam("Defined") && spellAbility.getParam("Defined").contains(" & ")) {
-            String[] def = spellAbility.getParam("Defined").split(" & ");
+        if (sa.hasParam("Defined") && sa.getParam("Defined").contains(" & ")) {
+            String[] def = sa.getParam("Defined").split(" & ");
             for (int i = 0; i < def.length; i++) {
-                stringBuilder.append(AbilityUtils.getDefinedEntities(card, def[i], spellAbility).toString()
+                stringBuilder.append(AbilityUtils.getDefinedEntities(card, def[i], sa).toString()
                         .replaceAll("[\\[\\]]", ""));
                 if (i + 1 < def.length) {
                     stringBuilder.append(" and ");
@@ -89,12 +120,12 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 }
             }
             // if use targeting we show all targets and corresponding counters
-        } else if (spellAbility.usesTargeting()) {
-            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
+        } else if (sa.usesTargeting()) {
+            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(sa);
             for (int i = 0; i < targetCards.size(); i++) {
                 Card targetCard = targetCards.get(i);
                 stringBuilder.append(targetCard);
-                Integer v = spellAbility.getDividedValue(targetCard);
+                Integer v = sa.getDividedValue(targetCard);
                 if (v != null) // fix null counter stack description
                     stringBuilder.append(" (").append(v).append(v == 1 ? " counter)" : " counters)");
 
@@ -104,8 +135,12 @@ public class CountersPutEffect extends SpellAbilityEffect {
                     stringBuilder.append(", ");
                 }
             }
+        } else if (sa.hasParam("Choices")) {
+            int n = AbilityUtils.calculateAmount(card, sa.getParamOrDefault("ChoiceAmount", "1"), sa);
+            String what = (sa.getParamOrDefault("ChoicesDesc", sa.getParam("Choices")));
+            stringBuilder.append(Lang.nounWithNumeralExceptOne(n, what));
         } else {
-            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(spellAbility);
+            final List<Card> targetCards = SpellAbilityEffect.getTargetCards(sa);
             final Iterator<Card> it = targetCards.iterator();
             while (it.hasNext()) {
                 final Card targetCard = it.next();
