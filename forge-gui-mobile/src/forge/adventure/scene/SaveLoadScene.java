@@ -229,10 +229,9 @@ public class SaveLoadScene extends UIScene {
                 header.setText(Forge.getLocalizer().getMessage("lblLoadGame"));
                 saveLoadButton.setText(Forge.getLocalizer().getMessage("lblLoad"));
                 break;
-
             case NewGamePlus:
-                header.setText("New Game Plus");
-                saveLoadButton.setText("Use selected Save");
+                header.setText(Forge.getLocalizer().getMessage("lblNewGame")+"+");
+                saveLoadButton.setText(Forge.getLocalizer().getMessage("lblStart"));
                 break;
         }
         autoSave.setDisabled(mode == Modes.Save);
