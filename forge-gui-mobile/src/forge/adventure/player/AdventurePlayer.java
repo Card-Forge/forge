@@ -99,6 +99,17 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             deck=decks[selectedDeckIndex];
         }
     }
+    public void updateDifficulty(DifficultyData diff) {
+        maxLife = diff.startingLife;
+        this.difficultyData.startingLife = diff.startingLife;
+        this.difficultyData.staringMoney = diff.staringMoney;
+        this.difficultyData.startingDifficulty = diff.startingDifficulty;
+        this.difficultyData.name = diff.name;
+        this.difficultyData.spawnRank = diff.spawnRank;
+        this.difficultyData.enemyLifeFactor = diff.enemyLifeFactor;
+        this.difficultyData.sellFactor = diff.sellFactor;
+        fullHeal();
+    }
     public int getSelectedDeckIndex() {
         return selectedDeckIndex;
     }
