@@ -206,8 +206,9 @@ public class AnimateEffect extends AnimateEffectBase {
     protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
-        final List<Card> tgts = getCardsfromTargets(sa);
-        final boolean justOne = tgts.size() == 1;
+        final List<Card> tgts = getDefinedCardsOrTargeted(sa);
+        //possible to be building stack desc before Defined is populated... for now, 0 will default to singular
+        final boolean justOne = tgts.size() <= 1;
 
         if (sa.hasParam("IfDesc")) {
             if (sa.getParam("IfDesc").equals("True") && sa.hasParam("SpellDescription")) {
@@ -264,7 +265,7 @@ public class AnimateEffect extends AnimateEffectBase {
             } else {
                 sb.append("toughness ").append(toughness).append(" ");
             }
-        } else {
+        } else if (sb.length() > initial) {
             sb.append(justOne ? "becomes " : "become ");
         }
 
@@ -291,7 +292,8 @@ public class AnimateEffect extends AnimateEffectBase {
             }
         }
         if (keywords.size() > 0) {
-            sb.append("and gains ").append(Lang.joinHomogenous(keywords).toLowerCase()).append(" ");
+            sb.append(sb.length() > initial ? "and " : "").append(" gains ");
+            sb.append(Lang.joinHomogenous(keywords).toLowerCase()).append(" ");
         }
         // sb.append(abilities)
         // sb.append(triggers)
@@ -316,6 +318,20 @@ public class AnimateEffect extends AnimateEffectBase {
             sb.append(justOne ? "attacks" : "attack").append(" this turn if able");
         }
         sb.append(".");
+
+        if (sa.hasParam("AtEOT")) {
+            sb.append(" ");
+            final String eot = sa.getParam("AtEOT");
+            final String pronoun = justOne ? "it" : "them";
+            if (eot.equals("Hand")) {
+                sb.append("Return ").append(pronoun).append(" to your hand");
+            } else if (eot.equals("SacrificeCtrl")) {
+                sb.append(justOne ? "Its controller sacrifices it" : "Their controllers sacrifice them");
+            } else { //Sacrifice,Exile
+                sb.append(eot).append(" ").append(pronoun);
+            }
+            sb.append(" at the beginning of the next end step.");
+        }
 
         return sb.toString();
     }

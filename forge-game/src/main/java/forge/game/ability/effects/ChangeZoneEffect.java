@@ -293,15 +293,36 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             // TODO Expand on this Description as more cards use it
             // for the non-targeted SAs when you choose what is returned on resolution
             sb.append("Return ").append(num).append(" ").append(type).append(" card(s) ");
-            sb.append(" to your ").append(destination);
+            sb.append(" to your ").append(destination).append(".");
         } else if (origin.equals("Graveyard")) {
             // for non-targeted SAs when you choose what is moved on resolution
             // this will need expansion as more cards use it
-            sb.append(chooserNames).append(" puts ");
             final String cardTag = type.contains("card") ? "" : " card";
-            sb.append(num != 0 ? Lang.nounWithNumeralExceptOne(num, type + cardTag) :
-                    sa.getParamOrDefault("ChangeNumDesc", "") + " " + type + cardTag);
-            sb.append(" into their ").append(destination.toLowerCase()).append(".");
+            final boolean changeNumDesc = sa.hasParam("ChangeNumDesc");
+            final boolean mandatory = sa.hasParam("Mandatory");
+            String changed;
+            if (changeNumDesc) {
+                changed = sa.getParam("ChangeNumDesc") + " " + type + cardTag;
+            } else if (!mandatory) {
+                changed = Lang.nounWithNumeral(num, type + cardTag);
+            } else {
+                changed = Lang.nounWithNumeralExceptOne(num, type + cardTag);
+            }
+            final boolean battlefield = destination.equals("Battlefield");
+            sb.append(chooserNames).append(" returns ").append(mandatory || changeNumDesc ? "" : "up to ");
+            sb.append(changed);
+            // so far, it seems non-targeted only lets you return from your own graveyard
+            sb.append(" from their graveyard").append(choosers.size() > 1 ? "s" : "");
+            sb.append(battlefield ? " to the " : " into their ").append(destination.toLowerCase());
+            if (sa.hasParam("WithCountersType")) {
+                final CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                if (cType != null) {
+                    sb.append(" with an additional ").append(cType.getName()).append(" counter on it");
+                } else {
+                    sb.append(" [ChangeZoneEffect WithCountersType error]");
+                }
+            }
+            sb.append(".");
         }
 
         return sb.toString();
