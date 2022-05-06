@@ -1,0 +1,7 @@
+Name:Eldritch Pact
+ManaCost:6 B
+Types:Sorcery
+A:SP$ Draw | NumCards$ X | ValidTgts$ Player | SubAbility$ DBLoseLife | SpellDescription$ Target player draws X cards and loses X life, where X is the number of cards in their graveyard.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ Targeted
+SVar:X:TargetedPlayer$CardsInGraveyard
+Oracle:Target player draws X cards and loses X life, where X is the number of cards in their graveyard.
