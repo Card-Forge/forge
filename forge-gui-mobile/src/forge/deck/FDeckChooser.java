@@ -201,12 +201,7 @@ public class FDeckChooser extends FScreen {
                 else {
                     int size = 0;
                     if (isAi) {
-                        AIDecks = lstDecks.getPool().toFlatList().parallelStream().filter(new Predicate<DeckProxy>() {
-                            @Override
-                            public boolean test(DeckProxy deckProxy) {
-                                return deckProxy.getAI().inMainDeck == 0;
-                            }
-                        }).collect(Collectors.toList());
+                        AIDecks = lstDecks.getPool().toFlatList().parallelStream().filter(deckProxy -> deckProxy.getAI().inMainDeck == 0).collect(Collectors.toList());
                         size = AIDecks.size();
                     }
                     if (size > 10)
