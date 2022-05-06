@@ -33,7 +33,7 @@ public class PumpAi extends PumpAiBase {
         }
         return cost.hasSpecificCostType(CostTapType.class);
     }
-    
+
     @Override
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if ("MoveCounter".equals(aiLogic)) {
