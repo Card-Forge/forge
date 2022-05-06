@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import forge.util.MyRandom;
@@ -201,12 +200,7 @@ public class FDeckChooser extends FScreen {
                 else {
                     int size = 0;
                     if (isAi) {
-                        AIDecks = lstDecks.getPool().toFlatList().parallelStream().filter(new Predicate<DeckProxy>() {
-                            @Override
-                            public boolean test(DeckProxy deckProxy) {
-                                return deckProxy.getAI().inMainDeck == 0;
-                            }
-                        }).collect(Collectors.toList());
+                        AIDecks = lstDecks.getPool().toFlatList().parallelStream().filter(deckProxy -> deckProxy.getAI().inMainDeck == 0).collect(Collectors.toList());
                         size = AIDecks.size();
                     }
                     if (size > 10)
