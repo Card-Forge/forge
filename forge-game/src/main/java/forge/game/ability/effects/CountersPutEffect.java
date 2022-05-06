@@ -171,6 +171,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         boolean existingCounter = sa.hasParam("CounterType") && sa.getParam("CounterType").equals("ExistingCounter");
         boolean eachExistingCounter = sa.hasParam("EachExistingCounter");
         boolean putOnEachOther = sa.hasParam("PutOnEachOther");
+        boolean putOnDefined = sa.hasParam("PutOnDefined");
 
         if (sa.hasParam("Optional") && !pc.confirmAction
                 (sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCounter"))) {
@@ -189,7 +190,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
             Iterables.addAll(tgtObjects, activator.getController().chooseCardsForEffect(leastToughness, sa,
                     Localizer.getInstance().getMessage("lblChooseACreatureWithLeastToughness"), 1, 1, false, params));
-        } else if (sa.hasParam("Choices") && (counterType != null || putOnEachOther)) {
+        } else if (sa.hasParam("Choices") && (counterType != null || putOnEachOther || putOnDefined)) {
             ZoneType choiceZone = ZoneType.Battlefield;
             if (sa.hasParam("ChoiceZone")) {
                 choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
@@ -222,9 +223,11 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
             if ((sa.hasParam("ChoiceTitle") || sa.hasParam("SpecifyCounter")) && counterType != null) {
                 title += " (" + counterType.getName() + ")";
-            } else if (putOnEachOther) {
-                title += Localizer.getInstance().getMessage("lblWithKindCounter") + " " +
-                        Localizer.getInstance().getMessage("lblEachOther");
+            } else if (putOnEachOther || putOnDefined) {
+                title += Localizer.getInstance().getMessage("lblWithKindCounter");
+                if (putOnEachOther) {
+                    title += " " + Localizer.getInstance().getMessage("lblEachOther");
+                }
             }
 
             Map<String, Object> params = Maps.newHashMap();
@@ -395,6 +398,15 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             }
                             Card otherGCard = game.getCardState(other, null);
                             otherGCard.addCounter(counterType, counterAmount, placer, table);
+                        }
+                        continue;
+                    } else if (putOnDefined) {
+                        List<Card> defs = AbilityUtils.getDefinedCards(card, sa.getParam("PutOnDefined"), sa);
+                        for (Card c : defs) {
+                            Card gCard = game.getCardState(c, null);
+                            if (!sa.hasParam("OnlyNewKind") || gCard.getCounters(counterType) < 1) {
+                                gCard.addCounter(counterType, counterAmount, placer, table);
+                            }
                         }
                         continue;
                     }
@@ -579,7 +591,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             if (!sa.hasParam("EachExistingCounter") && !sa.hasParam("EachFromSource")
                     && !sa.hasParam("UniqueType") && !sa.hasParam("CounterTypePerDefined")
                     && !sa.hasParam("CounterTypes") && !sa.hasParam("ChooseDifferent")
-                    && !sa.hasParam("PutOnEachOther")) {
+                    && !sa.hasParam("PutOnEachOther") && !sa.hasParam("PutOnDefined")) {
                 try {
                     counterType = chooseTypeFromList(sa, sa.getParam("CounterType"), null,
                             placer.getController());
