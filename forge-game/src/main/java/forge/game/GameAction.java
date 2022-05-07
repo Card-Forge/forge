@@ -275,7 +275,12 @@ public class GameAction {
                 lastKnownInfo = CardUtil.getLKICopy(c);
             }
 
-            copied = CardFactory.copyCard(c, false);
+            // CR 707.12 casting of a card copy, don't copy it again
+            if (zoneTo.is(ZoneType.Stack) && c.isRealToken()) {
+                copied = c;
+            } else {
+                copied = CardFactory.copyCard(c, false);
+            }
 
             if (zoneTo.is(ZoneType.Stack)) {
                 // when moving to stack, copy changed card information

@@ -34,7 +34,7 @@ public class AbandonEffect extends SpellAbilityEffect {
         if (sa.hasParam("RememberAbandoned")) {
             source.addRemembered(source);
         }
-        
+
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         controller.getZone(ZoneType.Command).remove(source);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
