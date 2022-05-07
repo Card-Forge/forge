@@ -340,6 +340,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
                                 }
                             }
                             for (CounterType ct : counterTypes) {
+                                if (sa.hasParam("AltChoiceForEach")) {
+                                    String typeChoices = sa.getParam("AltChoiceForEach") + "," + ct.toString();
+                                    ct = chooseTypeFromList(sa, typeChoices, obj, pc);
+                                }
                                 resolvePerType(sa, placer, ct, counterAmount, table, false);
                             }
                         } else {
@@ -659,7 +663,10 @@ public class CountersPutEffect extends SpellAbilityEffect {
         List<CounterType> choices = Lists.newArrayList();
         for (String s : list.split(",")) {
             if (!s.equals("") && (!sa.hasParam("UniqueType") || obj.getCounters(CounterType.getType(s)) == 0)) {
-                choices.add(CounterType.getType(s));
+                CounterType type = CounterType.getType(s);
+                if (!choices.contains(type)) {
+                    choices.add(type);
+                }
             }
         }
         if (sa.hasParam("RandomType")) {
