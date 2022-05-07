@@ -199,7 +199,7 @@ public class FDeckChooser extends FScreen {
                 }
                 else {
                     int size = 0;
-                    if (isAi && !isGeneratedDeck(selectedDeckType)) {
+                    if (isAi && !isGeneratedDeck(selectedDeckType) && Forge.autoAIDeckSelection) {
                         AIDecks = lstDecks.getPool().toFlatList().parallelStream().filter(deckProxy -> deckProxy.getAI().inMainDeck == 0).collect(Collectors.toList());
                         size = AIDecks.size();
                     }
