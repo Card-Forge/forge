@@ -531,13 +531,11 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     @Override
     protected boolean tap(float x, float y, int count) {
         ItemInfo item = getItemAtPoint(x, y);
-        if (item == null)
-            return false;
         if (count == 1) {
             selectItem(item);
             itemManager.showMenu(false);
         } else if (count == 2) {
-            if (item.selected) {
+            if (item != null && item.selected) {
                 if (!(item.getKey() instanceof DeckProxy))
                     itemManager.activateSelectedItems();
             }
