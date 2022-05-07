@@ -1,0 +1,10 @@
+Name:Bribe Taker
+ManaCost:5 G
+Types:Creature Rhino Warrior
+PT:6/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, for each kind of counter on permanents you control, you may put your choice of a +1/+1 counter or a counter of that kind on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterTypes$ EachType_Permanent.YouCtrl | AltChoiceForEach$ P1P1
+DeckNeeds:Ability$Counters
+DckHas:Ability$Counters
+Oracle:Trample\nWhen Bribe Taker enters the battlefield, for each kind of counter on permanents you control, you may put your choice of a +1/+1 counter or a counter of that kind on Bribe Taker.
