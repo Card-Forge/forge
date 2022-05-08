@@ -1,0 +1,10 @@
+Name:Denry Klin, Editor in Chief
+ManaCost:2 W U
+Types:Legendary Creature Cat Advisor
+PT:2/2
+K:ETBReplacement:Other:CounterChoice
+SVar:CounterChoice:DB$ PutCounter | ETB$ True | CounterType$ P1P1,First Strike,Vigilance | SpellDescription$ CARDNAME enters the battlefield with your choice of a +1/+1, first strike, or vigilance counter on it.
+T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | IsPresent$ Card.Self+HasCounters | Execute$ TrigPutCounters | TriggerDescription$ Whenever a nontoken creature enters the battlefield under your control, if NICKNAME has counters on it, put the same number of each kind of counter on that creature.
+SVar:TrigPutCounters:DB$ PutCounter | CounterType$ EachFromSource | EachFromSource$ Self | Defined$ TriggeredCard
+DeckHas:Ability$Counters
+Oracle:Denry Klin, Editor in Chief enters the battlefield with your choice of a +1/+1, first strike, or vigilance counter on it.\nWhenever a nontoken creature enters the battlefield under your control, if Denry has counters on it, put the same number of each kind of counter on that creature.
