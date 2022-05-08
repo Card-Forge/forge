@@ -428,7 +428,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
             }
         });
         return list;
-    } // getPumpCreatures()
+    }
 
     /**
      * <p>
@@ -519,7 +519,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
         }
 
         return list;
-    } // getCurseCreatures()
+    }
 
     protected boolean containsNonCombatKeyword(final List<String> keywords) {
         for (final String keyword : keywords) {

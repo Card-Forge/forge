@@ -596,7 +596,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         return true;
-    } // pumpTgtAI()
+    }
 
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
@@ -657,7 +657,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         return true;
-    } // pumpMandatoryTarget()
+    }
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
@@ -706,7 +706,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         return true;
-    } // pumpTriggerAI
+    }
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
@@ -778,7 +778,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         return true;
-    } // pumpDrawbackAI()
+    }
 
     @Override
     public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
