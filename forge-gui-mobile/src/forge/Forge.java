@@ -92,6 +92,7 @@ public class Forge implements ApplicationListener {
     public static String extrawide = "default";
     public static float heigtModifier = 0.0f;
     private static boolean isloadingaMatch = false;
+    public static boolean autoAIDeckSelection = false;
     public static boolean showFPS = false;
     public static boolean allowCardBG = false;
     public static boolean altPlayerLayout = false;
@@ -189,6 +190,7 @@ public class Forge implements ApplicationListener {
 
         textureFiltering = prefs.getPrefBoolean(FPref.UI_LIBGDX_TEXTURE_FILTERING);
         showFPS = prefs.getPrefBoolean(FPref.UI_SHOW_FPS);
+        autoAIDeckSelection = prefs.getPrefBoolean(FPref.UI_AUTO_AIDECK_SELECTION);
         altPlayerLayout = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
         altZoneTabs = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
         animatedCardTapUntap = prefs.getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);

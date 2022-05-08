@@ -1,6 +1,6 @@
 {
-  "width": 270,
-  "height": 480,
+  "width": 480,
+  "height": 270,
   "yDown": true,
   "elements": [
     {
@@ -9,7 +9,7 @@
       "width": 64,
       "height": 104,
       "image": "ui/hud_portrait.png",
-      "x": 206,
+      "x": 416,
       "y": 0
     },
     {
@@ -35,7 +35,7 @@
       "image": "ui/blank.png",
       "width": 46,
       "height": 46,
-      "x": 215,
+      "x": 425,
       "y": 10
     },
     {
@@ -43,7 +43,7 @@
       "name": "avatar",
       "width": 46,
       "height": 46,
-      "x": 215,
+      "x": 425,
       "y": 10
     },
     {
@@ -52,64 +52,63 @@
       "image": "ui/avatarhud.png",
       "width": 46,
       "height": 46,
-      "x": 215,
+      "x": 425,
       "y": 10
     },
     {
       "type": "Label",
-      "name": "lifePoints", 
-      "width": 48,
-      "height": 16,         
-      "fontSize": 1,
-      "x": 234,
+      "name": "lifePoints",
+      "font": "default",
+      "width": 64,
+      "height": 16,
+      "x": 442,
       "y": 64
     },
     {
       "type": "Label",
       "name": "money",
       "font": "default",
-      "width": 48,
-      "height": 3,    
-      "fontSize": 1,
-      "x": 234,
-      "y": 85
+      "width": 64,
+      "height": 16,
+      "x": 442,
+      "y": 82
     },
     {
       "type": "TextButton",
       "name": "deck",
       "text": "Deck",
       "width": 64,
-      "height": 32,
-      "x": 206,
-      "y": 306
-    }, 
+      "height": 36,
+      "x": 416,
+      "y": 106
+    },
     {
       "type": "TextButton",
       "name": "inventory",
       "text": "Inventory",
       "width": 64,
-      "height": 32,
-      "x": 206,
-      "y": 346
+      "height": 36,
+      "x": 416,
+      "y": 146
     },
-    
+
     {
       "type": "TextButton",
       "name": "statistic",
       "text": "Status",
       "width": 64,
-      "height": 32,
-      "x": 206,
-      "y": 386
+      "height": 36,
+      "x": 416,
+      "y": 186
     },
     {
       "type": "TextButton",
       "name": "menu",
       "text": "Menu",
       "width": 64,
-      "height": 32,
-      "x": 206,
-      "y": 426
+      "height": 36,
+      "x": 416,
+      "y": 226
     }
   ]
 }
