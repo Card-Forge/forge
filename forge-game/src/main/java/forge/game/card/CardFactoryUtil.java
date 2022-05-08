@@ -747,7 +747,7 @@ public class CardFactoryUtil {
         String abStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1]
                 + " | ETB$ True | CounterNum$ " + amount;
         if (splitkw[1].startsWith("EACH")) {
-            abStr = abStr.replace("CounterType$ EACH", "CounterTypes$ ");
+            abStr = abStr.replace("CounterType$ EACH ", "CounterTypes$ ");
         }
 
         SpellAbility sa = AbilityFactory.getAbility(abStr, card);
