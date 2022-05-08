@@ -77,18 +77,18 @@
       "type": "TextButton",
       "name": "deck",
       "text": "Deck",
-      "width": 40,
+      "width": 64,
       "height": 36,
-      "x": 428,
+      "x": 416,
       "y": 106
     },
     {
       "type": "TextButton",
       "name": "inventory",
       "text": "Inventory",
-      "width": 40,
+      "width": 64,
       "height": 36,
-      "x": 428,
+      "x": 416,
       "y": 146
     },
 
@@ -96,18 +96,18 @@
       "type": "TextButton",
       "name": "statistic",
       "text": "Status",
-      "width": 40,
+      "width": 64,
       "height": 36,
-      "x": 428,
+      "x": 416,
       "y": 186
     },
     {
       "type": "TextButton",
       "name": "menu",
       "text": "Menu",
-      "width": 40,
+      "width": 64,
       "height": 36,
-      "x": 428,
+      "x": 416,
       "y": 226
     }
   ]

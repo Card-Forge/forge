@@ -48,7 +48,9 @@ public class GameHUD extends Stage {
         instance = this;
         this.gameStage = gameStage;
 
-        ui = new UIActor(Config.instance().getFile(GuiBase.isAndroid() ? Forge.isLandscapeMode()?"ui/hud_landscape.json" : "ui/hud_portrait.json" : "ui/hud.json"));
+        ui = new UIActor(Config.instance().getFile(GuiBase.isAndroid()
+                ? Forge.isLandscapeMode() ? "ui/hud_landscape.json" : "ui/hud_portrait.json"
+                : Forge.isLandscapeMode() ? "ui/hud.json" : "ui/hud_portrait.json"));
 
         blank = ui.findActor("blank");
         miniMap = ui.findActor("map");

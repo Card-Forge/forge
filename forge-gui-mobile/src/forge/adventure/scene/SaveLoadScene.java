@@ -92,7 +92,7 @@ public class SaveLoadScene extends UIScene {
                 previewImage.setVisible(true);
                 previewDate.setVisible(true);
                 if (header.saveDate != null)
-                    previewDate.setText(DateFormat.getDateInstance().format(header.saveDate));
+                    previewDate.setText(DateFormat.getDateInstance().format(header.saveDate)+"\n"+DateFormat.getTimeInstance(DateFormat.SHORT).format(header.saveDate));
                 else
                     previewDate.setText("");
             }
@@ -305,7 +305,6 @@ public class SaveLoadScene extends UIScene {
         dialog.getColor().a = 0;
         previewImage = ui.findActor("preview");
         previewDate = ui.findActor("saveDate");
-        previewBorder = ui.findActor("preview_border");
         header = Controls.newLabel(Forge.getLocalizer().getMessage("lblSave"));
         header.setAlignment(Align.center);
         layout.add(header).pad(2).colspan(4).align(Align.center).expandX();
