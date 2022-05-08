@@ -2786,6 +2786,7 @@ public class CardFactoryUtil {
             String valid = k.length > 2 && !k[2].isEmpty() ? k[2] : "Creature.YouCtrl";
             String vstr = k.length > 3 && !k[3].isEmpty() ? k[3] : "creature";
             String extra = k.length > 4 ? k[4] : "";
+            boolean altCost = extra.contains("AlternateCost");
             String extraDesc = k.length > 5 ? k[5] : "";
             // Create attach ability string
             final StringBuilder abilityStr = new StringBuilder();
@@ -2803,19 +2804,21 @@ public class CardFactoryUtil {
                 abilityStr.append(" ").append(vstr);
             }
             Cost cost = new Cost(equipCost, true);
-            if (!cost.isOnlyManaCost()) { //Something other than a mana cost
+            if (!cost.isOnlyManaCost() || altCost) { //Something other than a mana cost
                 abilityStr.append("—");
             } else {
                 abilityStr.append(" ");
             }
-            abilityStr.append("| CostDesc$ ").append(cost.toSimpleString()).append(" ");
+            if (!altCost) {
+                abilityStr.append("| CostDesc$ ").append(cost.toSimpleString()).append(" ");
+            }
             abilityStr.append("| SpellDescription$ ");
             if (!extraDesc.isEmpty()) {
                 abilityStr.append(". ").append(extraDesc).append(". ");
             }
             abilityStr.append("(").append(inst.getReminderText()).append(")");
             if (!extra.isEmpty()) {
-                abilityStr.append("| ").append(extra);
+                abilityStr.append(" | ").append(extra);
             }
             // instantiate attach ability
             final SpellAbility newSA = AbilityFactory.getAbility(abilityStr.toString(), card);
