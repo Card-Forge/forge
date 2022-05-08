@@ -1,0 +1,9 @@
+Name:Agent's Toolkit
+ManaCost:1 G U
+Types:Artifact Clue
+K:etbCounter:EACHP1P1,Flying,Deathtouch,SHIELD:1:no Condition:CARDNAME enters the battlefield with a +1/+1 counter, a flying counter, a deathtouch counter, and a shield counter on it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMoveCounter | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may move a counter from CARDNAME onto that creature.
+SVar:TrigMoveCounter:DB$ MoveCounter | Source$ Self | Defined$ TriggeredCard | CounterType$ Any
+A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | SpellDescription$ Draw a card.
+DeckHas:Ability$Sacrifice|Counters
+Oracle:Agent's Toolkit enters the battlefield with a +1/+1 counter, a flying counter, a deathtouch counter, and a shield counter on it. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)\nWhenever a creature enters the battlefield under your control, you may move a counter from Agent's Toolkit onto that creature.\n{2}, Sacrifice Agent's Toolkit: Draw a card.
