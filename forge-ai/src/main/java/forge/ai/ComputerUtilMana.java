@@ -656,7 +656,7 @@ public class ComputerUtilMana {
         ManaPool.refundMana(manaSpentToPay, ai, sa);
 
         return manaSources;
-    } // getManaSourcesToPayCost()
+    }
 
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect) {
         AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_TAP_COST);
@@ -710,7 +710,7 @@ public class ComputerUtilMana {
                 }
                 manapool.applyCardMatrix(pay);
 
-                for (byte color : MagicColor.WUBRGC) {
+                for (byte color : ManaAtom.MANATYPES) {
                     if (manapool.tryPayCostWithColor(color, sa, cost)) {
                         found = true;
                         break;
@@ -886,7 +886,7 @@ public class ComputerUtilMana {
         }
 
         return true;
-    } // payManaCost()
+    }
 
     private static void resetPayment(List<SpellAbility> payments) {
         for (SpellAbility sa : payments) {
