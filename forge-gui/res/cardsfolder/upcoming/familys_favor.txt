@@ -1,7 +1,7 @@
 Name:Family's Favor
 ManaCost:2 G
 Types:Enchantment
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever you attack, put a shield counter on target attacking creature. Until end of turn, it gains "Whenever this creature deals combat damage to a player, remove a shield counter from it. If you do, draw a card." (If a creature with a shield counter on it would be dealt damage or destroyed, remove a shield counter from it instead.)
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you attack, put a shield counter on target attacking creature. Until end of turn, it gains "Whenever this creature deals combat damage to a player, remove a shield counter from it. If you do, draw a card." (If a creature with a shield counter on it would be dealt damage or destroyed, remove a shield counter from it instead.)
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | CounterType$ SHIELD | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ DealsDamage
 SVar:DealsDamage:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigRemoveCounter | TriggerDescription$ Whenever this creature deals combat damage to a player, remove a shield counter from it. If you do, draw a card.
