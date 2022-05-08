@@ -50,7 +50,7 @@ import io.sentry.Sentry;
  */
 public final class AbilityFactory {
 
-    static final List<String> additionalAbilityKeys = Lists.newArrayList(
+    public static final List<String> additionalAbilityKeys = Lists.newArrayList(
             "WinSubAbility", "OtherwiseSubAbility", // Clash
             "BidSubAbility", // BidLifeEffect
             "ChooseNumberSubAbility", "Lowest", "Highest", "NotLowest", // ChooseNumber
@@ -80,7 +80,7 @@ public final class AbilityFactory {
             return prefix;
         }
 
-        public SpellAbility buildSpellAbility(ApiType api, Card hostCard, Cost abCost, TargetRestrictions abTgt, Map<String, String> mapParams ) {
+        public SpellAbility buildSpellAbility(ApiType api, Card hostCard, Cost abCost, TargetRestrictions abTgt, Map<String, String> mapParams) {
             switch(this) {
                 case Ability: return new AbilityApiBased(api, hostCard, abCost, abTgt, mapParams);
                 case Spell: return new SpellApiBased(api, hostCard, abCost, abTgt, mapParams);
