@@ -62,7 +62,8 @@ public final class AbilityFactory {
             "FallbackAbility", // Complex Unless costs which can be unpayable
             "ChooseSubAbility", // Can choose a player via ChoosePlayer
             "CantChooseSubAbility", // Can't choose a player via ChoosePlayer
-            "AnimateSubAbility" // For ChangeZone Effects to Animate before ETB
+            "AnimateSubAbility", // For ChangeZone Effects to Animate before ETB
+            "ReturnAbility" // for Delayed Trigger on Magpie
         );
 
     public enum AbilityRecordType {
