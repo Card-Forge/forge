@@ -45,14 +45,16 @@ public class RewardScene extends UIScene {
 
     boolean doneClicked = false;
     float flipCountDown = 1.0f;
+    float exitCountDown = 0.0f; //Serves as additional check for when scene is exiting, so you can't double tap too fast.
 
     public boolean done() {
         GameHUD.getInstance().getTouchpad().setVisible(false);
-        if (doneClicked)
+        if (doneClicked) {
+            if(exitCountDown > 0.2f) { Forge.switchToLast(); } //Wait a little bit to prevent double tap.
             return true;
+        }
 
         if (type == Type.Loot) {
-
             boolean wait = false;
             for (Actor actor : new Array.ArrayIterator<>(generated)) {
                 if (!(actor instanceof RewardActor)) {
@@ -66,7 +68,8 @@ public class RewardScene extends UIScene {
                 }
             }
             if (wait) {
-                flipCountDown = 1.5f;
+                flipCountDown = Math.min(1.0f + (generated.size * 0.3f), 5.0f);
+                exitCountDown = 0.0f;
                 doneClicked = true;
             } else {
                 Forge.switchToLast();
@@ -79,12 +82,12 @@ public class RewardScene extends UIScene {
 
     @Override
     public void act(float delta) {
-
         stage.act(delta);
         ImageCache.allowSingleLoad();
         if (doneClicked) {
             if (type == Type.Loot)
                 flipCountDown -= Gdx.graphics.getDeltaTime();
+                exitCountDown += Gdx.graphics.getDeltaTime();
             if (flipCountDown <= 0) {
                 Forge.switchToLast();
             }
@@ -128,15 +131,12 @@ public class RewardScene extends UIScene {
 
 
         Actor card = ui.findActor("cards");
-        if(type==Type.Shop)
-        {
+        if(type==Type.Shop) {
             goldLabel.setText("Gold:"+Current.player().getGold());
             Actor background = ui.findActor("market_background");
             if(background!=null)
                 background.setVisible(true);
-        }
-        else
-        {
+        } else {
             goldLabel.setText("");
             Actor background = ui.findActor("market_background");
             if(background!=null)
