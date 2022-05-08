@@ -649,9 +649,15 @@ public abstract class SpellAbilityEffect {
         return combatChanged;
     }
 
-    protected static GameCommand untilHostLeavesPlayCommand(final CardZoneTable triggerList, final Card hostCard) {
+    protected static GameCommand untilHostLeavesPlayCommand(final CardZoneTable triggerList, final SpellAbility sa) {
+        final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         hostCard.addUntilLeavesBattlefield(triggerList.allCards());
+        final TriggerHandler trigHandler  = game.getTriggerHandler();
+        final Card lki = CardUtil.getLKICopy(hostCard);
+        lki.clearControllers();
+        lki.setOwner(sa.getActivatingPlayer());
+
         return new GameCommand() {
 
             private static final long serialVersionUID = 1L;
@@ -677,6 +683,29 @@ public abstract class SpellAbilityEffect {
                         Card newCard = game.getCardState(c, null);
                         if (newCard == null || !newCard.equalsWithTimestamp(c)) {
                             continue;
+                        }
+                        Trigger trig = null;
+                        if (sa.hasAdditionalAbility("ReturnAbility")) {
+                            String valid = sa.getParamOrDefault("ReturnValid", "Card.IsTriggerRemembered");
+
+                            String trigSA = "Mode$ ChangesZone | Origin$ " + cell.getColumnKey() + " | Destination$ " + cell.getRowKey() + " | ValidCard$ " + valid +
+                                    " | TriggerDescription$ " + sa.getAdditionalAbility("ReturnAbility").getParam("SpellDescription");
+
+                            trig = TriggerHandler.parseTrigger(trigSA, hostCard, sa.isIntrinsic(), null);
+                            trig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
+                            trig.setActiveZone(null);
+                            trig.addRemembered(newCard);
+
+                            SpellAbility overridingSA = sa.getAdditionalAbility("ReturnAbility").copy(hostCard, sa.getActivatingPlayer(), false);
+                            // need to reset the parent, additionalAbility does set it to this
+                            if (overridingSA instanceof AbilitySub) {
+                                ((AbilitySub)overridingSA).setParent(null);
+                            }
+
+                            trig.setOverridingAbility(overridingSA);
+
+                            // Delayed Trigger should only happen once, no need for cleanup?
+                            trigHandler.registerThisTurnDelayedTrigger(trig);
                         }
                         // no cause there?
                         Card movedCard = game.getAction().moveTo(cell.getRowKey(), newCard, 0, null, moveParams);

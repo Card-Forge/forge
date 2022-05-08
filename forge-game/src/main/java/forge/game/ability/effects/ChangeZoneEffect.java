@@ -867,7 +867,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), triggerList.allCards());
         }
         if ("UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
-            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, hostCard));
+            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, sa));
         }
 
         // for things like Gaea's Blessing
@@ -1470,7 +1470,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         triggerList.triggerChangesZoneAll(game, sa);
 
         if ("UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
-            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, source));
+            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, sa));
         }
     }
 
