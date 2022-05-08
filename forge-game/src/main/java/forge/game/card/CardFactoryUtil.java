@@ -2793,7 +2793,7 @@ public class CardFactoryUtil {
             abilityStr.append("AB$ Attach | Cost$ ");
             abilityStr.append(equipCost);
             abilityStr.append("| ValidTgts$ ").append(valid);
-            abilityStr.append("| TgtPrompt$ Select target ").append(vstr).append(" you control ");
+            abilityStr.append(" | TgtPrompt$ Select target ").append(vstr).append(" you control ");
             abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Equipment.Self+nonCreature ");
             // add AttachAi for some special cards
             if (card.hasSVar("AttachAi")) {
@@ -2816,7 +2816,9 @@ public class CardFactoryUtil {
             if (!extraDesc.isEmpty()) {
                 abilityStr.append(". ").append(extraDesc).append(". ");
             }
-            abilityStr.append("(").append(inst.getReminderText()).append(")");
+            if (!altCost) {
+                abilityStr.append("(").append(inst.getReminderText()).append(")");
+            }
             if (!extra.isEmpty()) {
                 abilityStr.append(" | ").append(extra);
             }
