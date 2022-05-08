@@ -355,7 +355,11 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             ((Player) obj).addCounter(ct, counterAmount, placer, table);
                         }
                         if (obj instanceof Card) {
-                            gameCard.addCounter(ct, counterAmount, placer, table);
+                            if (etbcounter) {
+                                gameCard.addEtbCounter(ct, counterAmount, placer);
+                            } else {
+                                gameCard.addCounter(ct, counterAmount, placer, table);
+                            }
                         }
                     }
                     continue;
