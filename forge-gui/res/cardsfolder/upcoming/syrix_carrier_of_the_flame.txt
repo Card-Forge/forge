@@ -1,0 +1,22 @@
+Name:Syrix, Carrier of the Flame
+ManaCost:2 B R
+Types:Legendary Creature Phoenix
+PT:3/3
+K:Flying
+K:Haste
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigPhoenix | CheckSVar$ X | TriggerDescription$ At the beginning of each end step, if a creature card left your graveyard this turn, target Phoenix you control deals damage equal to its power to any target.
+SVar:TrigPhoenix:DB$ Pump | ValidTgts$ Phoenix.YouCtrl | AILogic$ PowerDmg | TgtPrompt$ Select target Phoenix you control | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | AILogic$ PowerDmg | TgtPrompt$ Select any target | NumDmg$ Y | DamageSource$ ParentTarget
+SVar:Y:ParentTargeted$CardPower
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Phoenix.Other+YouCtrl | TriggerZones$ Graveyard | Execute$ TrigPlay | OptionalDecider$ You | TriggerDescription$ Whenever another Phoenix you control dies, you may cast CARDNAME from your graveyard.
+SVar:TrigPlay:DB$ Play | Optional$ True
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Any | ValidCard$ Card.Creature+YouOwn | Execute$ Tally | CheckSVar$ X | SVarCompare$ EQ0 | Static$ True
+SVar:Tally:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 1
+SVar:X:Number$0
+T:Mode$ TurnBegin | Execute$ TrigReset | Static$ True
+SVar:TrigReset:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0
+DeckNeeds:Type$Phoenix
+DeckHints:Ability$Graveyard
+DeckHas:Ability$Graveyard
+#SVar:X:Count$ThisTurnEntered_Any_from_Graveyard_Creature.YouOwn
+Oracle:Flying, haste\nAt the beginning of each end step, if a creature card left your graveyard this turn, target Phoenix you control deals damage equal to its power to any target.\nWhenever another Phoenix you control dies, you may cast Syrix, Carrier of the Flame from your graveyard.
