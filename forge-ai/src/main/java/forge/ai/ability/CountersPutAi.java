@@ -341,7 +341,7 @@ public class CountersPutAi extends CountersAi {
 
         if (sa.hasParam("Bolster")) {
             CardCollection creatsYouCtrl = ai.getCreaturesInPlay();
-            CardCollection leastToughness = new CardCollection(Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetDefense));
+            CardCollection leastToughness = new CardCollection(Aggregates.listWithMin(creatsYouCtrl, CardPredicates.Accessors.fnGetNetToughness));
             if (leastToughness.isEmpty()) {
                 return false;
             }
