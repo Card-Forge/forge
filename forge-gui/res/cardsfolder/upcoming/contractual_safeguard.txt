@@ -1,0 +1,8 @@
+Name:Contractual Safeguard
+ManaCost:2 W
+Types:Instant
+A:SP$ PutCounter | Choices$ Creature.YouCtrl | ChoicesDesc$ creature they control | CounterType$ SHIELD | ConditionPlayerTurn$ True | ConditionPhases$ Main1,Main2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCast | SubAbility$ DBPutCounter | IfDesc$ True | SpellDescription$ Addendum — If you cast this spell during your main phase, put a shield counter on a creature you control. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ ExistingCounter | Choices$ Creature.YouCtrl+HasCounters | PutOnEachOther$ Creature.YouCtrl | StackDescription$ {p:You} chooses a kind of counter on a creature they control, and puts a counter of that kind on each other creature they control. | SpellDescription$ Choose a kind of counter on a creature you control. Put a counter of that kind on each other creature you control.
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:Addendum — If you cast this spell during your main phase, put a shield counter on a creature you control. (If it would be dealt damage or destroyed, remove a shield counter from it instead.)\nChoose a kind of counter on a creature you control. Put a counter of that kind on each other creature you control.

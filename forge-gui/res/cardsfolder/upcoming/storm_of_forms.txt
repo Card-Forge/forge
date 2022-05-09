@@ -1,0 +1,9 @@
+Name:Storm of Forms
+ManaCost:3 U
+Types:Instant
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When you cast this spell, copy it for each kind of counter among permanents you control. You may choose new targets for the copies.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ X | MayChooseTarget$ True
+SVar:X:Count$DifferentCounterKinds_Permanent.YouCtrl
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SpellDescription$ Return target nonland permanent to its owner's hand.
+DeckHints:Ability$Counters
+Oracle:When you cast this spell, copy it for each kind of counter among permanents you control. You may choose new targets for the copies.\nReturn target nonland permanent to its owner's hand.

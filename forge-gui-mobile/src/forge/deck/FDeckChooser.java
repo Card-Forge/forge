@@ -7,7 +7,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
+import forge.util.MyRandom;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
@@ -72,6 +74,7 @@ public class FDeckChooser extends FScreen {
     private boolean firstActivation = true;
 
     private final DeckManager lstDecks;
+    private List<DeckProxy> AIDecks = new ArrayList<>();
     private final FButton btnNewDeck = new FButton(Forge.getLocalizer().getInstance().getMessage("lblNewDeck"));
     private final FButton btnEditDeck = new FButton(Forge.getLocalizer().getInstance().getMessage("btnEditDeck"));
     private final FButton btnViewDeck = new FButton(Forge.getLocalizer().getInstance().getMessage("lblViewDeck"));
@@ -195,7 +198,15 @@ public class FDeckChooser extends FScreen {
                     DeckgenUtil.randomSelect(lstDecks);
                 }
                 else {
-                    DeckgenUtil.randomSelect(lstDecks);
+                    int size = 0;
+                    if (isAi && !isGeneratedDeck(selectedDeckType) && Forge.autoAIDeckSelection) {
+                        AIDecks = lstDecks.getPool().toFlatList().parallelStream().filter(deckProxy -> deckProxy.getAI().inMainDeck == 0).collect(Collectors.toList());
+                        size = AIDecks.size();
+                    }
+                    if (size > 10)
+                        lstDecks.setSelectedItem(AIDecks.get(MyRandom.getRandom().nextInt(size)));
+                    else
+                        DeckgenUtil.randomSelect(lstDecks);
                 }
                 accept();
             }

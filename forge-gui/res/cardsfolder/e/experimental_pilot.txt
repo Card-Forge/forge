@@ -1,7 +1,7 @@
 Name:Experimental Pilot
 ManaCost:U
 Types:Creature Human Pilot
-PT:1/1
+PT:1/2
 K:Ward:2
 A:AB$ NameCard | Cost$ U Discard<2/Card> | Draft$ True | Defined$ You | ChooseFromList$ Cultivator's Caravan,Bomat Bazaar Barge,Raiders' Karve,Demolition Stomper,Futurist Sentinel,Mechtitan Core,Reckoner Bankbuster,High-Speed Hoverbike,Mindlink Mech,Silent Submersible,Mobile Garrison,Untethered Express,Ovalchase Dragster,Daredevil Dragster,Thundering Chariot | SubAbility$ DBMakeCard | SpellDescription$ Draft a card from CARDNAME's spellbook.
 SVar:DBMakeCard:DB$ MakeCard | Name$ ChosenName | Zone$ Hand | SubAbility$ DBCleanup

@@ -11,6 +11,17 @@
     "decks/starter/red.json",
     "decks/starter/green.json"
   ],
+  "restrictedCards": [
+    "Black Lotus",
+    "Mox Emerald",
+    "Mox Pearl",
+    "Mox Ruby",
+    "Mox Sapphire",
+    "Mox Jet",
+    "Ancestral Recall",
+    "Timetwister",
+    "Time Walk"
+  ],
   "difficulties": [
     {
       "name": "Easy",

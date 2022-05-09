@@ -23,6 +23,12 @@ public class StaticAbilityPanharmonicon {
     public static int handlePanharmonicon(final Game game, final Trigger t, final Map<AbilityKey, Object> runParams) {
         int n = 0;
 
+        // These effects say "abilities of objects trigger an additional time" which excludes Delayed Trigger
+        // 603.2e
+        if (t.getSpawningAbility() != null) {
+            return n;
+        }
+
         CardCollectionView cardList = null;
         // if LTB look back
         if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Origin"))) {
@@ -64,6 +70,13 @@ public class StaticAbilityPanharmonicon {
         // Is our trigger's mode among the other modes?
         if (stAb.hasParam("ValidMode")) {
             if (!ArrayUtils.contains(stAb.getParam("ValidMode").split(","), trigMode.toString())) {
+                return false;
+            }
+        }
+
+        // outside of Room Entered abilities, Panharmonicon effects always talk about Permanents you control which means only Battlefield
+        if (!trigMode.equals(TriggerType.RoomEntered)) {
+            if (!trigger.getHostCard().isInZone(ZoneType.Battlefield)) {
                 return false;
             }
         }

@@ -1,7 +1,7 @@
 Name:Semblance Scanner
 ManaCost:2 U
 Types:Artifact Creature Equipment Shapeshifter
-PT:3/1
+PT:3/2
 T:Mode$ DamageDone | ValidSource$ Card.Self+nonToken,Creature.EquippedBy+nonToken | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigConjure | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or equipped creature deals combat damage to a player, if it's not a token, conjure a duplicate of it into your hand.
 SVar:TrigConjure:DB$ MakeCard | DefinedName$ TriggeredSource | Zone$ Hand
 K:Reconfigure:1
