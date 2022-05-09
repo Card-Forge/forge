@@ -348,7 +348,12 @@ public class GameFormat implements Comparable<GameFormat> {
             try {
                 formatType = FormatType.valueOf(section.get("type").toUpperCase());
             } catch (Exception e) {
-                formatType = FormatType.CUSTOM;
+                if ("HISTORIC".equals(section.get("type").toUpperCase())) {
+                    System.out.println("Historic is no longer used as a format Type. Please update " + file.getAbsolutePath() + " to use 'Archived' instead");
+                    formatType = FormatType.ARCHIVED;
+                } else {
+                    formatType = FormatType.CUSTOM;
+                }
             }
             FormatSubType formatsubType;
             try {
