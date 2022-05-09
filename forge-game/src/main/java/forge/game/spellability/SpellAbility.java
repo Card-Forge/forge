@@ -873,12 +873,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     sb.append(payCosts.toString());
                     sb.append(" or ").append(altOnlyMana ? alternateCost.toString() :
                             StringUtils.uncapitalize(alternateCost.toString()));
-                    sb.append(hasParam("Equip") ? "." : "");
+                    sb.append(isEquip() ? "." : "");
                 } else {
                     sb.append(payCosts.toString());
                 }
 
-                if (payCosts.isAbility() && !hasParam("Equip")) {
+                if (payCosts.isAbility() && isEquip()) {
                     sb.append(": ");
                 }
             }
