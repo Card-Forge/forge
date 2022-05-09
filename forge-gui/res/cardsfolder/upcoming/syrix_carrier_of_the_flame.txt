@@ -18,5 +18,4 @@ SVar:TrigReset:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 0
 DeckNeeds:Type$Phoenix
 DeckHints:Ability$Graveyard
 DeckHas:Ability$Graveyard
-#SVar:X:Count$ThisTurnEntered_Any_from_Graveyard_Creature.YouOwn
 Oracle:Flying, haste\nAt the beginning of each end step, if a creature card left your graveyard this turn, target Phoenix you control deals damage equal to its power to any target.\nWhenever another Phoenix you control dies, you may cast Syrix, Carrier of the Flame from your graveyard.
