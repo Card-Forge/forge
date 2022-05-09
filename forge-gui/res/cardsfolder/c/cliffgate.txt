@@ -1,0 +1,8 @@
+Name:Cliffgate
+ManaCost:no cost
+Types:Land Gate
+K:CARDNAME enters the battlefield tapped.
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | Exclude$ red | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color other than red.
+A:AB$ Mana | Cost$ T | Produced$ Combo R Chosen | SpellDescription$ Add {R} or one mana of the chosen color.
+Oracle:Cliffgate enters the battlefield tapped.\nAs Cliffgate enters the battlefield, choose a color other than red./n{T}: Add {R} or one mana of the chosen color.
