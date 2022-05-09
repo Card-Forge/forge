@@ -120,6 +120,11 @@ public class NetGameController implements IGameController {
         send(ProtocolMethod.reorderHand, card, Integer.valueOf(index));
     }
 
+    @Override
+    public void orderHand() {
+        return;
+    }
+
     private IMacroSystem macros;
     @Override
     public IMacroSystem macros() {

@@ -3258,6 +3258,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public void orderHand() {
+        final PlayerZone hand = player.getZone(ZoneType.Hand);
+        hand.order();
+        player.updateZoneForView(hand);
+    }
+
+    @Override
     public String chooseCardName(SpellAbility sa, List<ICardFace> faces, String message) {
         ICardFace face = getGui().one(message, faces);
         return face == null ? "" : face.getName();

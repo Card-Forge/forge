@@ -46,4 +46,6 @@ public interface IGameController {
     String getActivateDescription(CardView card);
 
     void reorderHand(CardView card, int index);
+
+    void orderHand();
 }

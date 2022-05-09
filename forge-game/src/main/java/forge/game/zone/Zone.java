@@ -19,6 +19,7 @@ package forge.game.zone;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +77,46 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
     public final void reorder(final Card c, final int index) {
         cardList.remove(c);
         cardList.add(index, c);
+    }
+
+    public final void order() {
+        cardList.sort(new Comparator<Card>() {
+            @Override
+            public int compare(final Card firstCard, final Card secondCard) {
+                // if same name then keep together
+                if (firstCard
+                        .getName()
+                        .equals(secondCard
+                                .getName())) {
+                    return 0;
+                }
+
+                // reorder depending on CMC
+                int firstCardCMC = firstCard
+                        .getManaCost()
+                        .getCMC();
+                int secondCardCMC = secondCard
+                        .getManaCost()
+                        .getCMC();
+
+                if (firstCardCMC > secondCardCMC) {
+                    return 1;
+                } else if (firstCardCMC < secondCardCMC) {
+                    return -1;
+                }
+
+                // reorder depending on shared colors
+                if (!firstCard
+                        .getColor()
+                        .sharesColorWith(
+                                secondCard
+                                        .getColor())) {
+                    return 1;
+                }
+
+                return 0;
+            }
+        });
     }
 
     public final void add(final Card c) {

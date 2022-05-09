@@ -83,6 +83,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbDisableCardImages = new OptionsCheckBox(localizer.getMessage("lblDisableCardImages"));
     private final JCheckBox cbCloneImgSource = new OptionsCheckBox(localizer.getMessage("cbCloneImgSource"));
     private final JCheckBox cbScaleLarger = new OptionsCheckBox(localizer.getMessage("cbScaleLarger"));
+    private final JCheckBox cbOrderHand = new OptionsCheckBox(localizer.getMessage("cbOrderHand"));
     private final JCheckBox cbRenderBlackCardBorders = new OptionsCheckBox(localizer.getMessage("cbRenderBlackCardBorders"));
     private final JCheckBox cbLargeCardViewers = new OptionsCheckBox(localizer.getMessage("cbLargeCardViewers"));
     private final JCheckBox cbSmallDeckViewer = new OptionsCheckBox(localizer.getMessage("cbSmallDeckViewer"));
@@ -223,7 +224,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbpLandPlayed, comboBoxConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlpLandPlayed")), descriptionConstraints);
-        
+
         pnlPrefs.add(cbEnforceDeckLegality, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlEnforceDeckLegality")), descriptionConstraints);
 
@@ -360,6 +361,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbScaleLarger, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlScaleLarger")), descriptionConstraints);
+
+        pnlPrefs.add(cbOrderHand, titleConstraints);
+        pnlPrefs.add(new NoteLabel(localizer.getMessage("nlOrderHand")), descriptionConstraints);
 
         pnlPrefs.add(cbRenderBlackCardBorders, titleConstraints);
         pnlPrefs.add(new NoteLabel(localizer.getMessage("nlRenderBlackCardBorders")), descriptionConstraints);
@@ -711,6 +715,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbOrderHand() {
+        return cbOrderHand;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbRenderBlackCardBorders() {
         return cbRenderBlackCardBorders;
     }
@@ -768,11 +777,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public FComboBoxPanel<String> getCbpStackAdditionsComboBoxPanel() {
         return cbpStackAdditions;
     }
-  
+
     public FComboBoxPanel<String> getCbpLandPlayedComboBoxPanel() {
         return cbpLandPlayed;
     }
-    
+
     public FComboBoxPanel<GameLogEntryType> getGameLogVerbosityComboBoxPanel() {
         return cbpGameLogEntryType;
     }
@@ -879,7 +888,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public JCheckBox getCbSROptimize() {
         return cbSROptimize;
     }
-    
+
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbTimedTargOverlay() {
         return cbTimedTargOverlay;
@@ -924,7 +933,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     public final JCheckBox getCbManaLostPrompt() {
     	return cbManaLostPrompt;
     }
-    
+
     public final JCheckBox getCbDetailedPaymentDesc() {
         return cbDetailedPaymentDesc;
     }
