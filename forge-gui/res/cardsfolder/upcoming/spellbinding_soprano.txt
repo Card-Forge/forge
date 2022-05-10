@@ -1,0 +1,12 @@
+Name:Spellbinding Soprano
+ManaCost:1 R
+Types:Creature Human Bard
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ Whenever CARDNAME attacks, instant and sorcery spells you cast this turn cost {1} less to cast.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ ReduceCost
+SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Instant and sorcery spells you cast this turn cost {1} less to cast.
+K:Encore:3 R
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever Spellbinding Soprano attacks, instant and sorcery spells you cast this turn cost {1} less to cast.\nEncore {3}{R} ({3}{R}, Exile this card from your graveyard: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)
