@@ -88,6 +88,13 @@ public class AiController {
     private SpellAbilityPicker simPicker;
     private int lastAttackAggression;
 
+    public AiController(final Player computerPlayer, final Game game0) {
+        player = computerPlayer;
+        game = game0;
+        memory = new AiCardMemory();
+        simPicker = new SpellAbilityPicker(game, player);
+    }
+
     public boolean canCheatShuffle() {
         return cheatShuffle;
     }
@@ -139,13 +146,6 @@ public class AiController {
             aiAtk.declareAttackers(predictedCombatNextTurn);
         }
         return predictedCombatNextTurn;
-    }
-
-    public AiController(final Player computerPlayer, final Game game0) {
-        player = computerPlayer;
-        game = game0;
-        memory = new AiCardMemory();
-        simPicker = new SpellAbilityPicker(game, player);
     }
 
     private List<SpellAbility> getPossibleETBCounters() {

@@ -268,7 +268,7 @@ public class CombatUtil {
         }
 
         return true;
-    } // canAttack(Card, GameEntity)
+    }
 
     public static boolean isAttackerSick(final Card attacker, final GameEntity defender) {
         final Game game = attacker.getGame();
@@ -1158,7 +1158,7 @@ public class CombatUtil {
         }
 
         return true;
-    } // canBlock()
+    }
 
     public static boolean canAttackerBeBlockedWithAmount(Card attacker, int amount, Combat combat) {
         return canAttackerBeBlockedWithAmount(attacker, amount, combat != null ? combat.getDefenderPlayerByAttacker(attacker) : null);

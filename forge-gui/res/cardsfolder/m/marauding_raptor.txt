@@ -4,7 +4,7 @@ Types:Creature Dinosaur
 PT:2/3
 S:Mode$ ReduceCost | ValidCard$ Creature | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Creature spells you cast cost {1} less to cast.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever another creature enters the battlefield under your control, CARDNAME deals 2 damage to it. If a Dinosaur is dealt damage this way, CARDNAME gets +2/+0 until end of turn.
-SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredCard | NumDmg$ 2 | RememberDamaged$ True | SubAbility$ DBPump
+SVar:TrigDmg:DB$ DealDamage | Defined$ TriggeredCardLKICopy | NumDmg$ 2 | RememberDamaged$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Creature.Dinosaur | ConditionCompare$ EQ1 | ConditionDescription$ If a Dinosaur is dealt damage this way, CARDNAME gets +2/+0 until end of turn. | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
