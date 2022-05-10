@@ -2633,7 +2633,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                             final Cost cost2 = new Cost(n[2], false);
                             sbx.append(cost2.toSimpleString());
                         }
-                        sbx.append(" (").append(inst.getReminderText()).append(")");
+                        sbx.append(" (").append(inst.getReminderText()).append(")\r\n");
                     } else {
                         sbx.append("As an additional cost to cast this spell, you may ");
                         String costS = StringUtils.uncapitalize(cost.toSimpleString());
