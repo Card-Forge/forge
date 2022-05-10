@@ -9,4 +9,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Kicked.0.2
 SVar:Y:Count$Kicked.1.0
 SVar:Z:Remembered$Valid Creature
+DeckHas:Ability$Token|Graveyard & Type$Rogue
 Oracle:Kicker {3}{B} (You may pay an additional {3}{B} as you cast this spell.)\nExile up to two target cards from a single graveyard. If this spell was kicked, instead exile target player's graveyard. Create a 2/2 black Rogue creature token for each creature card exiled this way.
