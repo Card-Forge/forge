@@ -1,0 +1,12 @@
+Name:Waste Management
+ManaCost:2 B
+Types:Instant
+K:Kicker:3 B
+A:SP$ ChangeZone | TargetMin$ 0 | TargetMax$ X | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | AITgts$ Creature | ValidTgts$ Card | TgtPrompt$ Choose up to two target cards in a single graveyard | SubAbility$ ExileGrave | SpellDescription$ Exile up to two target cards from a single graveyard.
+SVar:ExileGrave:DB$ ChangeZoneAll | TargetMin$ Y | TargetMax$ Y | ValidTgts$ Player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | RememberChanged$ True | SubAbility$ DBToken | SpellDescription$ If this spell was kicked, instead exile target player's graveyard.
+SVar:DBToken:DB$ Token | TokenAmount$ Z | TokenScript$ b_2_2_rogue | SubAbility$ DBCleanup | SpellDescription$ Create a 2/2 black Rogue creature token for each creature card exiled this way.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Kicked.0.2
+SVar:Y:Count$Kicked.1.0
+SVar:Z:Remembered$Valid Creature
+Oracle:Kicker {3}{B} (You may pay an additional {3}{B} as you cast this spell.)\nExile up to two target cards from a single graveyard. If this spell was kicked, instead exile target player's graveyard. Create a 2/2 black Rogue creature token for each creature card exiled this way.
