@@ -85,7 +85,7 @@ public class PlayEffect extends SpellAbilityEffect {
         Player controlledByPlayer = null;
         long controlledByTimeStamp = -1;
         final Game game = activator.getGame();
-        final boolean optional = sa.hasParam("Optional");
+        boolean optional = sa.hasParam("Optional");
         final boolean remember = sa.hasParam("RememberPlayed");
         final boolean imprint = sa.hasParam("ImprintPlayed");
         final boolean forget = sa.hasParam("ForgetPlayed");
