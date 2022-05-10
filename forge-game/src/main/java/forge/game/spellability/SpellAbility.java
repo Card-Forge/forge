@@ -864,15 +864,21 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             if (hasParam("CostDesc")) {
                 sb.append(getParam("CostDesc")).append(" ");
             } else {
-                sb.append(payCosts.toString());
-
-                // for cards like  Crystal Shard with {3}, {T} or {U}, {T}:
                 if (hasParam("AlternateCost")) {
                     Cost alternateCost = new Cost(getParam("AlternateCost"), payCosts.isAbility());
-                    sb.append(" or ").append(alternateCost.toString());
+                    boolean altOnlyMana = alternateCost.isOnlyManaCost();
+                    if (payCosts.isOnlyManaCost() && !altOnlyMana) {
+                        sb.append("Pay ");
+                    }
+                    sb.append(payCosts.toString());
+                    sb.append(" or ").append(altOnlyMana ? alternateCost.toString() :
+                            StringUtils.uncapitalize(alternateCost.toString()));
+                    sb.append(isEquip() ? "." : "");
+                } else {
+                    sb.append(payCosts.toString());
                 }
 
-                if (payCosts.isAbility()) {
+                if (payCosts.isAbility() && !isEquip()) {
                     sb.append(": ");
                 }
             }
