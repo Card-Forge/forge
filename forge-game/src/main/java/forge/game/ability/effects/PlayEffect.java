@@ -85,10 +85,12 @@ public class PlayEffect extends SpellAbilityEffect {
         Player controlledByPlayer = null;
         long controlledByTimeStamp = -1;
         final Game game = activator.getGame();
-        boolean optional = sa.hasParam("Optional");
-        boolean remember = sa.hasParam("RememberPlayed");
+        final boolean optional = sa.hasParam("Optional");
+        final boolean remember = sa.hasParam("RememberPlayed");
+        final boolean imprint = sa.hasParam("ImprintPlayed");
+        final boolean forget = sa.hasParam("ForgetPlayed");
+        final boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
         int amount = 1;
-        boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
         int totalCMCLimit = Integer.MAX_VALUE;
         if (sa.hasParam("Amount") && !sa.getParam("Amount").equals("All")) {
             amount = AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa);
@@ -326,8 +328,11 @@ public class PlayEffect extends SpellAbilityEffect {
                 if (remember) {
                     source.addRemembered(tgtCard);
                 }
+                if (imprint) {
+                    source.addImprintedCard(tgtCard);
+                }
                 //Forget only if playing was successful
-                if (sa.hasParam("ForgetPlayed")) {
+                if (forget) {
                     source.removeRemembered(tgtCard);
                 }
                 continue;
@@ -403,16 +408,18 @@ public class PlayEffect extends SpellAbilityEffect {
             }
 
             if (controller.getController().playSaFromPlayEffect(tgtSA)) {
+                final Card played = tgtSA.getHostCard();
                 if (remember) {
-                    source.addRemembered(tgtSA.getHostCard());
+                    source.addRemembered(played);
                 }
-
+                if (imprint) {
+                    source.addImprintedCard(played);
+                }
                 //Forgot only if playing was successful
                 if (sa.hasParam("ForgetRemembered")) {
                     source.clearRemembered();
                 }
-
-                if (sa.hasParam("ForgetPlayed")) {
+                if (forget) {
                     source.removeRemembered(tgtCard);
                 }
             }
