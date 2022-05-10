@@ -878,7 +878,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     sb.append(payCosts.toString());
                 }
 
-                if (payCosts.isAbility() && isEquip()) {
+                if (payCosts.isAbility() && !isEquip()) {
                     sb.append(": ");
                 }
             }
