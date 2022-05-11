@@ -6,4 +6,5 @@ K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw X cards, where X is the number of creatures that died under your control this turn.
 SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
+DeckHints:Ability$Sacrifice
 Oracle:Flash\nWhen Liliana's Standard Bearer enters the battlefield, draw X cards, where X is the number of creatures that died under your control this turn.
