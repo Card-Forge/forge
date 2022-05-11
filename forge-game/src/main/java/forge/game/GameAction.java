@@ -1706,7 +1706,6 @@ public class GameAction {
         List<Card> yamazaki = CardLists.getKeyword(a, "Legend rule doesn't apply to CARDNAME.");
         a.removeAll(yamazaki);
 
-
         Multimap<String, Card> uniqueLegends = ArrayListMultimap.create();
         for (Card c : a) {
             if (!c.isFaceDown()) {
