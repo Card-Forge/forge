@@ -168,10 +168,14 @@ public class AiAttackController {
     public static Player choosePreferredDefenderPlayer(Player ai) {
         Player defender = ai.getWeakestOpponent(); //Concentrate on opponent within easy kill range
 
-        // TODO connect with evaluateBoardPosition and only fall back to random when no player is the biggest threat by a fair margin
+        // TODO for multiplayer combat avoid players with cantLose or (if not playing infect) cantLoseForZeroOrLessLife and !canLoseLife
 
-        if (defender.getLife() > 8) { //Otherwise choose a random opponent to ensure no ganging up on players
+        if (defender.getLife() > 8) {
+            // TODO connect with evaluateBoardPosition and only fall back to random when no player is the biggest threat by a fair margin
+
             // TODO should we cache the random for each turn? some functions like shouldPumpCard base their decisions on the assumption who will be attacked
+
+            //Otherwise choose a random opponent to ensure no ganging up on players
             return Aggregates.random(ai.getOpponents());
         }
         return defender;

@@ -56,8 +56,8 @@ public class PermanentAi extends SpellAbilityAi {
 
         // check on legendary
         if (card.getType().isLegendary()
-                && !game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
-            if (ai.isCardInPlay(card.getName())) {
+                && !game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) { // TODO check the risk we'd lose the effect with bad timing
+            if (ai.isCardInPlay(card.getName())) { // TODO check for keyword
                 if (!card.hasSVar("AILegendaryException")) {
                     // AiPlayDecision.WouldDestroyLegend
                     return false;
