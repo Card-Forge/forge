@@ -1,0 +1,8 @@
+Name:Body Count
+ManaCost:2 B
+Types:Instant
+K:Spectacle:B
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw a card for each creature that died under your control this turn.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl
+DeckHints:Ability$Sacrifice
+Oracle:Spectacle {B} (You may cast this spell for its spectacle cost rather than its mana cost if an opponent lost life this turn.)\nDraw a card for each creature that died under your control this turn.
