@@ -5,7 +5,7 @@ A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Permanent.nonToken | Origin$ Battlefie
 SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBDiscard | SpellDescription$ then put it into its owner's hand.
 SVar:DBDiscard:DB$ Discard | Mode$ Defined | Defined$ RememberedOwner | DefinedCards$ Remembered | SubAbility$ DBLibrary | SpellDescription$ That player discards that card,
 SVar:DBLibrary:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | Defined$ Remembered | SubAbility$ DBReturn | SpellDescription$ then puts it on top of their library.
-SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ battlefield | SubAbility$ DBCleanup | SpellDescription$ Then they put it onto the battlefield.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | SubAbility$ DBCleanup | SpellDescription$ Then they put it onto the battlefield.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 Oracle:Exile target permanent, then put it into its owner's hand. That player discards that card, then puts it on top of their library. Then they put it onto the battlefield.
