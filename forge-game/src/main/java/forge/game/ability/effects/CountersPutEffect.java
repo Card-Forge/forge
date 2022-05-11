@@ -432,6 +432,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("CounterTypePerDefined") || sa.hasParam("UniqueType")) {
                     counterType = chooseTypeFromList(sa, sa.getParam("CounterType"), obj, pc);
+                    if (counterType == null) continue;
                 }
 
                 if (obj instanceof Card) {

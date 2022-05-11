@@ -407,9 +407,6 @@ public class CountersRemoveAi extends SpellAbilityAi {
      */
     @Override
     public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, Map<String, Object> params) {
-        if (options.size() <= 1) {
-            return super.chooseCounterType(options, sa, params);
-        }
         Player ai = sa.getActivatingPlayer();
         GameEntity target = (GameEntity) params.get("Target");
 
