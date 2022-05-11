@@ -78,7 +78,7 @@
       &quot;text&quot;:&quot;The gate is unlocked&quot;,
       &quot;options&quot;:[
         {
-          &quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[{&quot;removeItem&quot;:&quot;Red Key&quot;,&quot;deleteMapObject&quot;:-1}]
+          &quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1}]
         }
       ]
     }
@@ -96,7 +96,7 @@
         &quot;name&quot;:&quot;unlock with blue key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Blue Key&quot;}],    
         &quot;text&quot;:&quot;The gate is unlocked&quot;,
-        &quot;options&quot;:[ {&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[{&quot;removeItem&quot;:&quot;Blue Key&quot;,&quot;deleteMapObject&quot;:-1}]} ]
+        &quot;options&quot;:[ {&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1}]} ]
     }
     ]
 }]</property>
@@ -112,7 +112,7 @@
         &quot;name&quot;:&quot;unlock with green key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Green Key&quot;}],    
         &quot;text&quot;:&quot;The gate is unlocked&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[ {&quot;removeItem&quot;:&quot;Green Key&quot;,&quot;deleteMapObject&quot;:-1}]} ]
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1}]} ]
     }
     ]
 }]</property>
@@ -128,7 +128,7 @@
         &quot;name&quot;:&quot;unlock with white key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;White Key&quot;}],    
         &quot;text&quot;:&quot;The gate is unlocked&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;removeItem&quot;:&quot;White Key&quot;,&quot;deleteMapObject&quot;:-1}]} ]
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1}]} ]
     }
     ]
 }]</property>
@@ -144,7 +144,7 @@
         &quot;name&quot;:&quot;unlock with black key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Black Key&quot;}],    
         &quot;text&quot;:&quot;The gate is unlocked&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;removeItem&quot;:&quot;Black Key&quot;,&quot;deleteMapObject&quot;:-1}]} ]
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1}]} ]
     }
     ]
 }]</property>

@@ -57,7 +57,7 @@
           &quot;condition&quot;:[ { &quot;item&quot;:&quot;Strange Key&quot;} ],
           &quot;text&quot;:&quot;The gate is unlocked&quot;,
           &quot;options&quot;:[
-          {&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;: [ { &quot;removeItem&quot;:&quot;Strange Key&quot;,&quot;deleteMapObject&quot;:-1 } ] }
+          {&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;: [ {&quot;deleteMapObject&quot;:-1 } ] }
         ]
       }
     ]
