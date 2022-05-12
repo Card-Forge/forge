@@ -1,6 +1,0 @@
-[format]
-Name:Duels
-Type:Digital
-Subtype:Videogame
-Order:140
-Sets:ORI, BFZ, OGW, SOI, EMN, KLD, AER, AKH
