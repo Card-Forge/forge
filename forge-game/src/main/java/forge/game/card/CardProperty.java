@@ -1433,13 +1433,13 @@ public class CardProperty {
                 y = card.getNetPower();
             } else if (property.startsWith("basePower")) {
                 rhs = property.substring(11);
-                y = card.getBasePower();
+                y = card.getCurrentPower();
             } else if (property.startsWith("toughness")) {
                 rhs = property.substring(11);
                 y = card.getNetToughness();
             } else if (property.startsWith("baseToughness")) {
                 rhs= property.substring(15);
-                y = card.getBaseToughness();
+                y = card.getCurrentToughness();
             } else if (property.startsWith("cmc")) {
                 rhs = property.substring(5);
                 y = card.getCMC();
