@@ -1,0 +1,10 @@
+Name:First Responder
+ManaCost:3 G
+Types:Creature Ogre Citizen
+PT:3/3
+K:Vigilance
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, you may return another creature you control to its owner's hand, then put a number of +1/+1 counters equal to that creature's power on CARDNAME.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ Return<1/Creature.Other/other creature> | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Returned$CardPower
+DeckHas:Ability$Counters
+Oracle:Vigilance\nAt the beginning of your end step, you may return another creature you control to its owner's hand, then put a number of +1/+1 counters equal to that creature's power on First Responder.
