@@ -2,7 +2,7 @@ Name:Grip of Chaos
 ManaCost:4 R R
 Types:Enchantment
 T:Mode$ SpellAbilityCopy | IsSingleTarget$ True | TriggerZones$ Battlefield | Execute$ TrigChangeTarget | TriggerDescription$ Whenever a spell or ability is put onto the stack, if it has a single target, reselect its target at random. (Select from among all legal targets.)
-T:Mode$ SpellAbilityCast | IsSingleTarget$ True | TriggerZones$ Battlefield | Execute$ TrigChangeTarget | TriggerDescription$ Whenever a spell or ability is put onto the stack, if it has a single target, reselect its target at random. (Select from among all legal targets.)
+T:Mode$ SpellAbilityCast | ValidSA$ SpellAbility.nonManaAbility | IsSingleTarget$ True | TriggerZones$ Battlefield | Execute$ TrigChangeTarget | TriggerDescription$ Whenever a spell or ability is put onto the stack, if it has a single target, reselect its target at random. (Select from among all legal targets.)
 SVar:TrigChangeTarget:DB$ ChangeTargets | Defined$ TriggeredSpellAbility | RandomTarget$ True
 AI:RemoveDeck:Random
 Oracle:Whenever a spell or ability is put onto the stack, if it has a single target, reselect its target at random. (Select from among all legal targets.)
