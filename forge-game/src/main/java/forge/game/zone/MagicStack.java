@@ -231,6 +231,16 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
+            Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.Cost, sp.getPayCosts());
+            runParams.put(AbilityKey.Player, sp.getHostCard().getController());
+            runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
+            runParams.put(AbilityKey.CastSA, sp);
+            game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
+            if (sp.isActivatedAbility()) {
+                game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams, true);
+            }
+
             AbilityUtils.resolve(sp);
             game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp.getDescription());
             sp.resetOnceResolved();
@@ -304,9 +314,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         if (!sp.isCopied()) {
             // Run SpellAbilityCast triggers
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
-            
+
             sp.applyPayingManaEffects();
-            
+
             // Run SpellCast triggers
             if (sp.isSpell()) {
                 if (source.isCommander() && source.getCastFrom() != null && ZoneType.Command == source.getCastFrom().getZoneType()
