@@ -240,6 +240,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams, true);
             }
 
+            // reset in case a trigger stopped it on a previous activation
+            sp.setUndoable(true);
+
             AbilityUtils.resolve(sp);
             game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp.getDescription());
             sp.resetOnceResolved();
