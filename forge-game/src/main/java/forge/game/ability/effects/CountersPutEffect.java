@@ -65,7 +65,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
             stringBuilder.append(" ");
         }
 
-        stringBuilder.append(pronoun ? who : "they").append(" ");
+        stringBuilder.append(pronoun ? "they" : who).append(" ");
 
         if (sa.hasParam("CounterTypes")) {
             String desc = sa.getDescription();
