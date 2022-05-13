@@ -1,0 +1,20 @@
+Name:Grime Gorger
+ManaCost:2 B G
+Types:Creature Horror
+PT:3/3
+K:Menace
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile up to one card of each card type from defending player's graveyard. Put a +1/+1 counter on CARDNAME for each card exiled this way.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Hidden$ True | ChangeType$ Land.OwnedBy TriggeredDefendingPlayer | RememberChanged$ True | SubAbility$ ExileCreature
+SVar:ExileCreature:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Hidden$ True | ChangeType$ Creature.OwnedBy TriggeredDefendingPlayer | RememberChanged$ True | SubAbility$ ExilePlaneswalker
+SVar:ExilePlaneswalker:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Hidden$ True | ChangeType$ Planeswalker.OwnedBy TriggeredDefendingPlayer | RememberChanged$ True | SubAbility$ ExileArtifact
+SVar:ExileArtifact:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Hidden$ True | ChangeType$ Artifact.OwnedBy TriggeredDefendingPlayer | RememberChanged$ True | SubAbility$ ExileEnchantment
+SVar:ExileEnchantment:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Hidden$ True | ChangeType$ Enchantment.OwnedBy TriggeredDefendingPlayer | RememberChanged$ True | SubAbility$ ExileInstant
+SVar:ExileInstant:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Hidden$ True | ChangeType$ Instant.OwnedBy TriggeredDefendingPlayer | RememberChanged$ True | SubAbility$ ExileSorcery
+SVar:ExileSorcery:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Hidden$ True | ChangeType$ Sorcery.OwnedBy TriggeredDefendingPlayer | RememberChanged$ True | SubAbility$ ExileTribal
+SVar:ExileTribal:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Hidden$ True | ChangeType$ Tribal.OwnedBy TriggeredDefendingPlayer | RememberChanged$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Counters
+Oracle:Menace\nWhenever Grime Gorger attacks, exile up to one card of each card type from defending player's graveyard. Put a +1/+1 counter on Grime Gorger for each card exiled this way.
