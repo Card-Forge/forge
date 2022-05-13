@@ -1,0 +1,23 @@
+[metadata]
+Code=2X2
+Date=2022-07-08
+Name=Double Masters 2022
+Type=Reprint
+ScryfallCode=2X2
+
+[cards]
+2 M Kozilek, Butcher of Truth @Michael Komarck
+34 R Weathered Wayfarer @Greg Hildebrandt & Tim Hildebrandt
+81 M Liliana, the Last Hope @Jaime Jones
+188 R Bring to Light @Jonas De Ro
+296 M Wrenn and Six @Chase Stone
+333 M Liliana, the Last Hope @Scott M. Fischer
+334 M Wrenn and Six @Donato Giancola
+336 M Kozilek, Butcher of Truth @Ian Miller
+414 M Kozilek, Butcher of Truth @Michael Komarck
+425 R Weathered Wayfarer @Greg Hildebrandt & Tim Hildebrandt
+440 M Liliana, the Last Hope @Jaime Jones
+480 R Bring to Light @Jonas De Ro
+553 M Wrenn and Six @Chase Stone
+578 R Weathered Wayfarer @Dermot Power
+579 R Bring to Light @Mark Poole

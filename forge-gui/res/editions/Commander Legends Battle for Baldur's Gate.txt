@@ -12,6 +12,7 @@ ScryfallCode=CLB
 187 C Lightning Bolt @Irina Nordsol
 204 R Wand of Wonder @Xavier Ribeiro
 285 M Minsc & Boo, Timeless Heroes @Andreas Zafiratos
+296 R Zevlor, Elturel Exile @David Rapoza
 348 R Bountiful Promenade @Alayna Danner
 355 R Luxury Suite @Titus Lunter
 357 R Morphic Pool @Chris Ostrowski

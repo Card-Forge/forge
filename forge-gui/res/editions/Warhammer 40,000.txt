@@ -1,0 +1,13 @@
+[metadata]
+Code=40K
+Date=2022-08-12
+Name=Warhammer 40,000
+Type=Commander
+ScryfallCode=40K
+
+[cards]
+2 M Abaddon the Despoiler @Johan Grenier
+27 R Vanguard Suppressor @Fajareka Setiawan
+108 C Blood for the Blood God! @Artur Nakhodkin
+171 M Abaddon the Despoiler @Johan Grenier
+181 R Fabricate @Johan Grenier
