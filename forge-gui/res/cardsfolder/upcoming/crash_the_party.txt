@@ -1,7 +1,7 @@
 Name:Crash the Party
 ManaCost:5 G
 Types:Instant
-A:SP$ Token | TokenAmount$ X | TokenScript$ g_4_4_rhino_warrior | SpellDescription$ Create a tapped 4/4 green Rhino Warrior creature token for each tapped creature you control.
+A:SP$ Token | TokenAmount$ X | TokenScript$ g_4_4_rhino_warrior | TokenTapped$ True | SpellDescription$ Create a tapped 4/4 green Rhino Warrior creature token for each tapped creature you control.
 DeckHas:Ability$Token & Type$Rhino|Warrior
 SVar:X:Count$Valid Creature.YouCtrl+tapped
 SVar:NeedsToPlayVar:X GT2
