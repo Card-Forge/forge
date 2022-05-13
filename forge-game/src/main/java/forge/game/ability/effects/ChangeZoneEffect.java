@@ -138,6 +138,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             final String ct = sa.getParam("ChangeType");
             type = CardType.CoreType.isValidEnum(ct) ? ct.toLowerCase() : ct;
         }
+        final String cardTag = type.contains("card") ? "" : " card";
 
         final int num = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(host,
                 sa.getParam("ChangeNum"), sa) : 1;
@@ -170,7 +171,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else {
                 sb.append(" for ");
             }
-            final String cardTag = type.contains("card") ? "" : " card";
             sb.append(Lang.nounWithNumeralExceptOne(num, type + cardTag)).append(", ");
             if (!sa.hasParam("NoReveal") && ZoneType.smartValueOf(destination).isHidden()) {
                 if (choosers.size() == 1) {
@@ -297,7 +297,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         } else if (origin.equals("Graveyard")) {
             // for non-targeted SAs when you choose what is moved on resolution
             // this will need expansion as more cards use it
-            final String cardTag = type.contains("card") ? "" : " card";
             final boolean changeNumDesc = sa.hasParam("ChangeNumDesc");
             final boolean mandatory = sa.hasParam("Mandatory");
             String changed;
@@ -323,6 +322,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
             sb.append(".");
+        } else if (origin.equals("Exile")) {
+            // for non-targeted, moved cards are chosen on resolution – will need expansion as more cards use it
+            sb.append(chooserNames).append(" puts ").append(Lang.nounWithNumeralExceptOne(num, type + cardTag));
+            sb.append(" into their ").append(destination.toLowerCase()).append(".");
         }
 
         return sb.toString();
