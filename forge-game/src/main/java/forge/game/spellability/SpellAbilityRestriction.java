@@ -581,6 +581,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
 
+        // Special check for Lion's Eye Diamond
+        if (sa.isManaAbility() && c.getGame().getStack().isFrozen() && isInstantSpeed()) {
+            return false;
+        }
+
         if (!sa.hasSVar("IsCastFromPlayEffect")) {
             if (!checkTimingRestrictions(c, sa)) {
                 return false;
@@ -620,6 +625,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         return true;
-    } // canPlay()
+    }
 
 }
