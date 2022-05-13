@@ -231,9 +231,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
-            Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sp.getHostCard().getController());
             runParams.put(AbilityKey.Cost, sp.getPayCosts());
-            runParams.put(AbilityKey.Player, sp.getHostCard().getController());
             runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
             runParams.put(AbilityKey.CastSA, sp);
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
@@ -302,9 +301,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         si = push(sp);
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
-        Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sp.getHostCard().getController());
         runParams.put(AbilityKey.Cost, sp.getPayCosts());
-        runParams.put(AbilityKey.Player, sp.getHostCard().getController());
         runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
         runParams.put(AbilityKey.CastSA, si.getSpellAbility(true));
         runParams.put(AbilityKey.CastSACMC, si.getSpellAbility(true).getHostCard().getCMC());

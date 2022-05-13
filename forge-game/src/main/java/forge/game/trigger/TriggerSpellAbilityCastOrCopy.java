@@ -90,14 +90,23 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
         }
 
         if (hasParam("ValidActivatingPlayer")) {
-            if (si == null || !matchesValid(si.getSpellAbility(true).getActivatingPlayer(), getParam("ValidActivatingPlayer").split(","))) {
+            Player activator;
+            if (spellAbility.isManaAbility()) {
+                activator = (Player) runParams.get(AbilityKey.Activator);
+            } else if (si == null) {
+                return false;
+            } else {
+                activator = si.getSpellAbility(true).getActivatingPlayer();
+            }
+
+            if (!matchesValid(activator, getParam("ValidActivatingPlayer").split(","))) {
                 return false;
             }
             if (hasParam("ActivatorThisTurnCast")) {
                 final String compare = getParam("ActivatorThisTurnCast");
                 final String valid = getParamOrDefault("ValidCard", "Card");
                 List<Card> thisTurnCast = CardUtil.getThisTurnCast(valid, getHostCard(), this);
-                thisTurnCast = CardLists.filterControlledBy(thisTurnCast, si.getSpellAbility(true).getActivatingPlayer());
+                thisTurnCast = CardLists.filterControlledBy(thisTurnCast, activator);
                 int left = thisTurnCast.size();
                 int right = Integer.parseInt(compare.substring(2));
                 if (!Expressions.compare(left, compare, right)) {
@@ -121,7 +130,6 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             boolean validTgtFound = false;
             while (sa != null && !validTgtFound) {
                 for (final Card tgt : sa.getTargets().getTargetCards()) {
-
                     if (matchesValid(tgt, getParam("TargetsValid").split(","))) {
                         validTgtFound = true;
                         if (this.hasParam("RememberValidCards")) {
