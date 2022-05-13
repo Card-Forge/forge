@@ -23,7 +23,7 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         // Spells are not undoable
         AbilityManaPart ma = sa.getManaPart();
-        sa.setUndoable(sa.isAbility() && sa.isUndoable());
+        sa.setUndoable(sa.isAbility() && sa.isUndoable() && sa.getSubAbility() == null);
 
         final Collection<String> colors = CardUtil.getReflectableManaColors(sa);
 
@@ -31,8 +31,6 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
             final String generated = generatedReflectedMana(sa, colors, player);
             ma.produceMana(generated, player, sa);
         }
-
-        resolveSubAbility(sa);
     }
 
 

@@ -60,15 +60,6 @@ public abstract class SpellAbilityEffect {
         return sa.getDescription();
     }
 
-    protected static final void resolveSubAbility(final SpellAbility sa) {
-        // if mana production has any type of SubAbility, undoable=false
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sa.setUndoable(false);
-            AbilityUtils.resolve(abSub);
-        }
-    }
-
     /**
      * Returns this effect description with needed prelude and epilogue.
      * @param params
