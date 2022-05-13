@@ -1,0 +1,14 @@
+Name:Boss's Chauffeur
+ManaCost:4 W
+Types:Creature Elf Citizen
+PT:0/0
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with a number of +1/+1 counters on it equal to one plus the number of other creatures you control.
+SVar:X:Count$LastStateBattlefield Creature.YouCtrl+Other/Plus.1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Alliance — Whenever another creature enters the battlefield under your control, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 green and white Citizen creature token for each +1/+1 counter on it.
+SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ gw_1_1_citizen
+SVar:Y:TriggeredCard$CardCounters.P1P1
+SVar:BuffedBy:Creature
+DeckHas:Ability$Counters|Token
+Oracle:Boss's Chauffeur enters the battlefield with a number of +1/+1 counters on it equal to one plus the number of other creatures you control.\nAlliance — Whenever another creature enters the battlefield under your control, put a +1/+1 counter on Boss's Chauffeur.\nWhen Boss's Chauffeur dies, create a 1/1 green and white Citizen creature token for each +1/+1 counter on it.
