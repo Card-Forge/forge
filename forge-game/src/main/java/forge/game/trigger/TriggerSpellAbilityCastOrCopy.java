@@ -99,7 +99,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
                 activator = si.getSpellAbility(true).getActivatingPlayer();
             }
 
-            if (!matchesValid(activator, getParam("ValidActivatingPlayer").split(","))) {
+            if (!matchesValidParam("ValidActivatingPlayer", activator)) {
                 return false;
             }
             if (hasParam("ActivatorThisTurnCast")) {
