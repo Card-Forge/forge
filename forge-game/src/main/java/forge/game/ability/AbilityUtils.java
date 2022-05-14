@@ -742,6 +742,9 @@ public class AbilityUtils {
                 else if (calcX[0].startsWith("Revealed")) {
                     list = sa.getRootAbility().getPaidList("Revealed");
                 }
+                else if (calcX[0].startsWith("Returned")) {
+                    list = sa.getRootAbility().getPaidList("Returned");
+                }
                 else if (calcX[0].startsWith("Targeted")) {
                     list = sa.findTargetedCards();
                 }

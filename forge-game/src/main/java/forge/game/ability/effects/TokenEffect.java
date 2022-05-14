@@ -44,7 +44,8 @@ public class TokenEffect extends TokenEffectBase {
             final List<Player> creators = AbilityUtils.getDefinedPlayers(host, sa.getParamOrDefault("TokenOwner",
                     "You"), sa);
             if (!words.get(0).equalsIgnoreCase("Create") && desc.contains(" create")) {
-                desc = desc.replace(desc.substring(0, desc.indexOf(" create")), Lang.joinHomogenous(creators));
+                String[] parts = desc.split(" create", 2);
+                desc = parts[0] + " " + Lang.joinHomogenous(creators) + " create" + parts[1];
                 if (creators.size() == 1) {
                     desc = desc.replaceAll(" create ", " creates ");
                 }
