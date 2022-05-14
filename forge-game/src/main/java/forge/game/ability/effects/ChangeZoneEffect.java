@@ -1436,6 +1436,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
                 }
+                if (sa.hasParam("RememberLKI")) {
+                    source.addRemembered(CardUtil.getLKICopy(c));
+                }
                 if (forget) {
                     source.removeRemembered(movedCard);
                 }
