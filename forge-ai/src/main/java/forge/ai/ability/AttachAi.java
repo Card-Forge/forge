@@ -22,7 +22,6 @@ import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.GameObject;
-import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -78,7 +77,7 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
-        if (!ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)
+        if (!source.ignoreLegendRule()
                 && source.getType().isLegendary() && sa instanceof SpellPermanent
                 && ai.isCardInPlay(source.getName())) {
             // Don't play the second copy of a legendary enchantment already in play

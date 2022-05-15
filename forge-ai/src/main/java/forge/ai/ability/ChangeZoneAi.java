@@ -11,7 +11,6 @@ import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
-import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -277,8 +276,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
             //Ninjutsu
             if (sa.hasParam("Ninjutsu")) {
                 if (source.getType().isLegendary()
-                        && !ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
-                    if (ai.getZone(ZoneType.Battlefield).contains(CardPredicates.nameEquals(source.getName()))) {
+                        && !source.ignoreLegendRule()) {
+                    if (ai.isCardInPlay(source.getName())) {
                         return false;
                     }
                 }
@@ -732,17 +731,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
                     }
                 }
                 // predict Legendary cards already present
-                if (!ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
-                    boolean nothingWillReturn = true;
-                    for (final Card c : retrieval) {
-                        if (!(c.getType().isLegendary() && ai.isCardInPlay(c.getName()))) {
-                            nothingWillReturn = false;
-                            break;
-                        }
+                boolean nothingWillReturn = true;
+                for (final Card c : retrieval) {
+                    if (!(c.getType().isLegendary() && !c.ignoreLegendRule() && ai.isCardInPlay(c.getName()))) {
+                        nothingWillReturn = false;
+                        break;
                     }
-                    if (nothingWillReturn) {
-                        return false;
-                    }
+                }
+                if (nothingWillReturn) {
+                    return false;
                 }
             }
         }

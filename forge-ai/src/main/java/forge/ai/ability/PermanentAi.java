@@ -11,8 +11,6 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.card.CardType.Supertype;
 import forge.card.mana.ManaCost;
-import forge.game.Game;
-import forge.game.GlobalRuleChange;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -52,11 +50,9 @@ public class PermanentAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
         final Card card = sa.getHostCard();
-        final Game game = ai.getGame();
 
         // check on legendary
-        if (card.getType().isLegendary()
-                && !game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) { // TODO check the risk we'd lose the effect with bad timing
+        if (card.getType().isLegendary() && !card.ignoreLegendRule()) { // TODO check the risk we'd lose the effect with bad timing
             if (ai.isCardInPlay(card.getName())) { // TODO check for keyword
                 if (!card.hasSVar("AILegendaryException")) {
                     // AiPlayDecision.WouldDestroyLegend
