@@ -28,7 +28,6 @@ public enum GlobalRuleChange {
     noCreatureETBTriggers ("Creatures entering the battlefield don't cause abilities to trigger."),
     noCreatureDyingTriggers ("Creatures dying don't cause abilities to trigger."),
     noNight ("It can't become night."),
-    noLegendRule ("The legend rule doesn't apply."),
     /* onlyOneAttackerATurn ("No more than one creature can attack each turn."), */
     onlyOneAttackerACombat ("No more than one creature can attack each combat."),
     onlyOneBlocker ("No more than one creature can block each combat."),

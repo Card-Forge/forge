@@ -20,11 +20,13 @@ package forge.ai.ability;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCard;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
-import forge.game.GlobalRuleChange;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -37,6 +39,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -97,13 +100,19 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
             return true;
         } else {
             // currently only Clockspinning
-            boolean noLegendary = game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule);
 
             // logic to remove some counter
             CardCollection countersList = CardLists.filter(list, CardPredicates.hasCounters());
 
             if (!countersList.isEmpty()) {
-                if (!ai.isCardInPlay("Marit Lage") || noLegendary) {
+                CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
+                boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card input) {
+                        return input.ignoreLegendRule();
+                    }
+                });
+                if (maritEmpty) {
                     CardCollectionView depthsList = CardLists.filter(countersList,
                             CardPredicates.nameEquals("Dark Depths"), CardPredicates.hasCounter(CounterEnumType.ICE));
 
@@ -198,9 +207,6 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
     @Override
     public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, Map<String, Object> params) {
         final Player ai = sa.getActivatingPlayer();
-        final Game game = ai.getGame();
-
-        boolean noLegendary = game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule);
 
         Card tgt = (Card) params.get("Target");
 
@@ -229,7 +235,15 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
         } else {
             // this counters are treat first to be removed
             if ("Dark Depths".equals(tgt.getName()) && options.contains(CounterType.get(CounterEnumType.ICE))) {
-                if (!ai.isCardInPlay("Marit Lage") || noLegendary) {
+                CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
+                boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card input) {
+                        return input.ignoreLegendRule();
+                    }
+                });
+
+                if (maritEmpty) {
                     return CounterType.get(CounterEnumType.ICE);
                 }
             } else if (tgt.hasKeyword(Keyword.UNDYING) && options.contains(CounterType.get(CounterEnumType.P1P1))) {
@@ -260,11 +274,9 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
     public boolean chooseBinary(BinaryChoiceType kindOfChoice, SpellAbility sa, Map<String, Object> params) {
         if (kindOfChoice.equals(BinaryChoiceType.AddOrRemove)) {
             final Player ai = sa.getActivatingPlayer();
-            final Game game = ai.getGame();
+
             Card tgt = (Card) params.get("Target");
             CounterType type = (CounterType) params.get("CounterType");
-
-            boolean noLegendary = game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule);
 
             if (tgt.getController().isOpponentOf(ai)) {
                 if (type.is(CounterEnumType.LOYALTY) && tgt.isPlaneswalker()) {
@@ -274,7 +286,15 @@ public class CountersPutOrRemoveAi extends SpellAbilityAi {
                 return ComputerUtil.isNegativeCounter(type, tgt);
             } else {
                 if (type.is(CounterEnumType.ICE) && "Dark Depths".equals(tgt.getName())) {
-                    if (!ai.isCardInPlay("Marit Lage") || noLegendary) {
+                    CardCollectionView marit = ai.getCardsIn(ZoneType.Battlefield, "Marit Lage");
+                    boolean maritEmpty = marit.isEmpty() || Iterables.contains(marit, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(Card input) {
+                            return input.ignoreLegendRule();
+                        }
+                    });
+
+                    if (maritEmpty) {
                         return false;
                     }
                 } else if (type.is(CounterEnumType.M1M1) && tgt.hasKeyword(Keyword.PERSIST)) {

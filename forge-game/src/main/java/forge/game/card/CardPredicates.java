@@ -760,6 +760,13 @@ public final class CardPredicates {
                 return a.getCMC();
             }
         };
+
+        public static final Function<Card, String> fnGetNetName = new Function<Card, String>() {
+            @Override
+            public String apply(Card a) {
+                return a.getName();
+            }
+        };
     }
 
 }

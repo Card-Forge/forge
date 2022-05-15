@@ -17,7 +17,6 @@
  */
 package forge.game;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -31,12 +30,12 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 
 import forge.GameCommand;
@@ -1697,37 +1696,70 @@ public class GameAction {
     }
 
     private boolean handleLegendRule(Player p, CardCollection noRegCreats) {
-        final List<Card> a = CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Legendary");
-        if (a.isEmpty() || game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
-            return false;
-        }
-        boolean recheck = false;
-        // TODO legend rule exception into static ability
-        List<Card> yamazaki = CardLists.getKeyword(a, "Legend rule doesn't apply to CARDNAME.");
-        a.removeAll(yamazaki);
+        final List<Card> a = Lists.newArrayList();
 
-        Multimap<String, Card> uniqueLegends = ArrayListMultimap.create();
-        for (Card c : a) {
-            if (!c.isFaceDown()) {
-                uniqueLegends.put(c.getName(), c);
+        // check for ignore legend rule
+        for (Card c : CardLists.getType(p.getCardsIn(ZoneType.Battlefield), "Legendary")) {
+            if (!c.ignoreLegendRule()) {
+                a.add(c);
             }
         }
 
-        // TODO handle Spy Kit
+        if (a.isEmpty()) {
+            return false;
+        }
+        boolean recheck = false;
+
+        // Corner Case 1: Legendary with non legendary creature names
+        CardCollection nonLegendaryNames = new CardCollection(Iterables.filter(a, new Predicate<Card>() {
+            @Override
+            public boolean apply(Card input) {
+                return input.hasNonLegendaryCreatureNames();
+            }
+
+        }));
+
+        Multimap<String, Card> uniqueLegends = Multimaps.index(a, CardPredicates.Accessors.fnGetNetName);
+        CardCollection removed = new CardCollection();
 
         for (String name : uniqueLegends.keySet()) {
-            Collection<Card> cc = uniqueLegends.get(name);
+            // skip the ones with empty names
+            if (name.isEmpty()) {
+                continue;
+            }
+            CardCollection cc = new CardCollection(uniqueLegends.get(name));
+            // check if it is a non legendary creature name
+            // if yes, then add the other legendary with Spy Kit too
+            if (!name.isEmpty() && StaticData.instance().getCommonCards().isNonLegendaryCreatureName(name)) {
+                cc.addAll(nonLegendaryNames);
+            }
             if (cc.size() < 2) {
                 continue;
             }
 
             recheck = true;
 
-            Card toKeep = p.getController().chooseSingleEntityForEffect(new CardCollection(cc), new SpellAbility.EmptySa(ApiType.InternalLegendaryRule, new Card(-1, game), p),
+            Card toKeep = p.getController().chooseSingleEntityForEffect(cc, new SpellAbility.EmptySa(ApiType.InternalLegendaryRule, new Card(-1, game), p),
                     "You have multiple legendary permanents named \""+name+"\" in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)", null);
             cc.remove(toKeep);
-            noRegCreats.addAll(cc);
+            removed.addAll(cc);
         }
+
+        // Corner Case 2: with all non legendary creature names
+        CardCollection emptyNameAllNonLegendary = new CardCollection(nonLegendaryNames);
+        // remove the ones that got already removed by other legend rule above
+        emptyNameAllNonLegendary.removeAll(removed);
+        if (emptyNameAllNonLegendary.size() > 1) {
+
+            recheck = true;
+
+            Card toKeep = p.getController().chooseSingleEntityForEffect(emptyNameAllNonLegendary, new SpellAbility.EmptySa(ApiType.InternalLegendaryRule, new Card(-1, game), p),
+                    "You have multiple legendary permanents with non legendary creature names in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)", null);
+            emptyNameAllNonLegendary.remove(toKeep);
+            removed.addAll(emptyNameAllNonLegendary);
+
+        }
+        noRegCreats.addAll(removed);
 
         return recheck;
     }
