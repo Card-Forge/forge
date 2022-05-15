@@ -2,6 +2,6 @@ Name:Kurkesh, Onakke Ancient
 ManaCost:2 R R
 Types:Legendary Creature Ogre Spirit
 PT:4/3
-T:Mode$ AbilityCast | ValidCard$ Artifact | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopyAbility | TriggerDescription$ Whenever you activate an ability of an artifact, if it isn't a mana ability, you may pay {R}. If you do, copy that ability. You may choose new targets for the copy.
+T:Mode$ AbilityCast | ValidCard$ Artifact | ValidSA$ SpellAbility.nonManaAbility | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopyAbility | TriggerDescription$ Whenever you activate an ability of an artifact, if it isn't a mana ability, you may pay {R}. If you do, copy that ability. You may choose new targets for the copy.
 SVar:TrigCopyAbility:AB$ CopySpellAbility | Cost$ R | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 Oracle:Whenever you activate an ability of an artifact, if it isn't a mana ability, you may pay {R}. If you do, copy that ability. You may choose new targets for the copy.
