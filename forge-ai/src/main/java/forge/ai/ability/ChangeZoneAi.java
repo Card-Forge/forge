@@ -275,11 +275,8 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
             //Ninjutsu
             if (sa.hasParam("Ninjutsu")) {
-                if (source.getType().isLegendary()
-                        && !source.ignoreLegendRule()) {
-                    if (ai.isCardInPlay(source.getName())) {
-                        return false;
-                    }
+                if (!source.ignoreLegendRule() && ai.isCardInPlay(source.getName())) {
+                    return false;
                 }
                 if (ai.getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE)) {
                     return false;
@@ -733,7 +730,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 // predict Legendary cards already present
                 boolean nothingWillReturn = true;
                 for (final Card c : retrieval) {
-                    if (!(c.getType().isLegendary() && !c.ignoreLegendRule() && ai.isCardInPlay(c.getName()))) {
+                    if (!(!c.ignoreLegendRule() && ai.isCardInPlay(c.getName()))) {
                         nothingWillReturn = false;
                         break;
                     }

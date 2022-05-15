@@ -42,7 +42,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -77,9 +76,7 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
-        if (!source.ignoreLegendRule()
-                && source.getType().isLegendary() && sa instanceof SpellPermanent
-                && ai.isCardInPlay(source.getName())) {
+        if (source.isAura() && sa.isSpell() && !source.ignoreLegendRule() && ai.isCardInPlay(source.getName())) {
             // Don't play the second copy of a legendary enchantment already in play
 
             // TODO: Add some extra checks for where the AI may want to cast a replacement aura

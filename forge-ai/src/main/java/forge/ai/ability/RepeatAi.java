@@ -53,7 +53,7 @@ public class RepeatAi extends SpellAbilityAi {
             if (logic.startsWith("CopyBestCreature")) {
                 Card best = null;
                 Iterable<Card> targetableAi = Iterables.filter(ai.getCreaturesInPlay(), CardPredicates.isTargetableBy(sa));
-                if (logic.endsWith("IgnoreLegendary")) {
+                if (!logic.endsWith("IgnoreLegendary")) {
                     best = ComputerUtilCard.getBestAI(Iterables.filter(targetableAi, new Predicate<Card>() {
                         @Override
                         public boolean apply(Card card) {

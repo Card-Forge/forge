@@ -52,24 +52,24 @@ public class PermanentAi extends SpellAbilityAi {
         final Card card = sa.getHostCard();
 
         // check on legendary
-        if (card.getType().isLegendary() && !card.ignoreLegendRule()) { // TODO check the risk we'd lose the effect with bad timing
-            if (ai.isCardInPlay(card.getName())) { // TODO check for keyword
-                if (!card.hasSVar("AILegendaryException")) {
-                    // AiPlayDecision.WouldDestroyLegend
-                    return false;
-                } else {
-                    String specialRule = card.getSVar("AILegendaryException");
-                    if ("TwoCopiesAllowed".equals(specialRule)) {
-                        // One extra copy allowed on the battlefield, e.g. Brothers Yamazaki
-                        if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName())) > 1) {
-                            return false;
-                        }
-                    } else if ("AlwaysAllowed".equals(specialRule)) {
-                        // Nothing to do here, check for Legendary is disabled
-                    } else {
-                        // Unknown hint, assume two copies not allowed
+        if (!card.ignoreLegendRule() && ai.isCardInPlay(card.getName())) {
+            // TODO check the risk we'd lose the effect with bad timing
+            // TODO check for keyword
+            if (!card.hasSVar("AILegendaryException")) {
+                // AiPlayDecision.WouldDestroyLegend
+                return false;
+            } else {
+                String specialRule = card.getSVar("AILegendaryException");
+                if ("TwoCopiesAllowed".equals(specialRule)) {
+                    // One extra copy allowed on the battlefield, e.g. Brothers Yamazaki
+                    if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName())) > 1) {
                         return false;
                     }
+                } else if ("AlwaysAllowed".equals(specialRule)) {
+                    // Nothing to do here, check for Legendary is disabled
+                } else {
+                    // Unknown hint, assume two copies not allowed
+                    return false;
                 }
             }
         }

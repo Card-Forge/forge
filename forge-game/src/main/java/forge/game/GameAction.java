@@ -1711,7 +1711,7 @@ public class GameAction {
         boolean recheck = false;
 
         // Corner Case 1: Legendary with non legendary creature names
-        List<Card> nonLegendaryNames = Lists.newArrayList(Iterables.filter(a, new Predicate<Card>() {
+        CardCollection nonLegendaryNames = new CardCollection(Iterables.filter(a, new Predicate<Card>() {
             @Override
             public boolean apply(Card input) {
                 return input.hasNonLegendaryCreatureNames();
@@ -1720,6 +1720,7 @@ public class GameAction {
         }));
 
         Multimap<String, Card> uniqueLegends = Multimaps.index(a, CardPredicates.Accessors.fnGetNetName);
+        CardCollection removed = new CardCollection();
 
         for (String name : uniqueLegends.keySet()) {
             // skip the ones with empty names
@@ -1741,11 +1742,13 @@ public class GameAction {
             Card toKeep = p.getController().chooseSingleEntityForEffect(cc, new SpellAbility.EmptySa(ApiType.InternalLegendaryRule, new Card(-1, game), p),
                     "You have multiple legendary permanents named \""+name+"\" in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)", null);
             cc.remove(toKeep);
-            noRegCreats.addAll(cc);
+            removed.addAll(cc);
         }
 
-        // Corner Case 2: cards with empty names, but with all non legendary creature names
-        CardCollection emptyNameAllNonLegendary = CardLists.filter(nonLegendaryNames, CardPredicates.nameEquals(""));
+        // Corner Case 2: with all non legendary creature names
+        CardCollection emptyNameAllNonLegendary = new CardCollection(nonLegendaryNames);
+        // remove the ones that got already removed by other legend rule above
+        emptyNameAllNonLegendary.removeAll(removed);
         if (emptyNameAllNonLegendary.size() > 1) {
 
             recheck = true;
@@ -1753,9 +1756,10 @@ public class GameAction {
             Card toKeep = p.getController().chooseSingleEntityForEffect(emptyNameAllNonLegendary, new SpellAbility.EmptySa(ApiType.InternalLegendaryRule, new Card(-1, game), p),
                     "You have multiple legendary permanents with non legendary creature names in play.\n\nChoose the one to stay on battlefield (the rest will be moved to graveyard)", null);
             emptyNameAllNonLegendary.remove(toKeep);
-            noRegCreats.addAll(emptyNameAllNonLegendary);
+            removed.addAll(emptyNameAllNonLegendary);
 
         }
+        noRegCreats.addAll(removed);
 
         return recheck;
     }
