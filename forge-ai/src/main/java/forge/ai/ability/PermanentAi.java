@@ -54,7 +54,6 @@ public class PermanentAi extends SpellAbilityAi {
         // check on legendary
         if (!card.ignoreLegendRule() && ai.isCardInPlay(card.getName())) {
             // TODO check the risk we'd lose the effect with bad timing
-            // TODO check for keyword
             if (!card.hasSVar("AILegendaryException")) {
                 // AiPlayDecision.WouldDestroyLegend
                 return false;

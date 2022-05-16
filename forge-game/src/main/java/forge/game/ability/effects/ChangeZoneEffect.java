@@ -144,7 +144,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sa.getParam("ChangeNum"), sa) : 1;
         boolean tapped = sa.hasParam("Tapped");
         boolean attacking = sa.hasParam("Attacking");
-        if (sa.hasParam("Ninjutsu")) {
+        if (sa.isNinjutsu()) {
             tapped = true;
             attacking = true;
         }
@@ -455,7 +455,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             return;
         }
 
-        if (sa.isHidden() && !sa.hasParam("Ninjutsu")) {
+        if (sa.isHidden() && !sa.isNinjutsu()) {
             changeHiddenOriginResolve(sa);
         } else {
             //else if (isKnown(origin) || sa.containsKey("Ninjutsu")) {
@@ -599,7 +599,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 movedCard = game.getAction().moveToLibrary(gameCard, libraryPosition, sa);
             } else {
                 if (destination.equals(ZoneType.Battlefield)) {
-                    if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
+                    if (sa.hasParam("Tapped") || sa.isNinjutsu()) {
                         gameCard.setTapped(true);
                     }
                     if (sa.hasParam("Untapped")) {
@@ -713,7 +713,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (addToCombat(movedCard, movedCard.getController(), sa, "Attacking", "Blocking")) {
                         combatChanged = true;
                     }
-                    if (sa.hasParam("Ninjutsu")) {
+                    if (sa.isNinjutsu()) {
                         // Ninjutsu need to get the Defender of the Returned Creature
                         final Card returned = sa.getPaidList("Returned").getFirst();
                         final GameEntity defender = game.getCombat().getDefenderByAttacker(returned);

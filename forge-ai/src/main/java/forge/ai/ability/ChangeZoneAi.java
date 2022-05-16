@@ -273,8 +273,7 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 }
             }
 
-            //Ninjutsu
-            if (sa.hasParam("Ninjutsu")) {
+            if (sa.isNinjutsu()) {
                 if (!source.ignoreLegendRule() && ai.isCardInPlay(source.getName())) {
                     return false;
                 }

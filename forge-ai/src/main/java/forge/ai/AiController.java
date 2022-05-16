@@ -1773,7 +1773,7 @@ public class AiController {
         }
         return toExile;
     }
-    
+
     public boolean doTrigger(SpellAbility spell, boolean mandatory) {
         if (spell instanceof WrappedAbility)
             return doTrigger(((WrappedAbility)spell).getWrappedAbility(), mandatory);
@@ -1785,7 +1785,7 @@ public class AiController {
         }
         return false;
     }
-    
+
     /**
      * Ai should run.
      *
@@ -1840,12 +1840,11 @@ public class AiController {
         } else if (effect.hasParam("AICheckDredge")) {
             return player.getCardsIn(ZoneType.Library).size() > 8 || player.isCardInPlay("Laboratory Maniac");
         } else return sa != null && doTrigger(sa, false);
-
     }
 
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
         // AI would play everything. But limits to one copy of (Leyline of Singularity) and (Gemstone Caverns)
-        
+
         List<SpellAbility> result = Lists.newArrayList();
         for (SpellAbility sa : usableFromOpeningHand) {
             // Is there a better way for the AI to decide this?
@@ -1853,7 +1852,7 @@ public class AiController {
                 result.add(sa);
             }
         }
-        
+
         boolean hasLeyline1 = false;
         SpellAbility saGemstones = null;
 
@@ -1879,7 +1878,7 @@ public class AiController {
             result.remove(saGemstones);
             result.add(saGemstones);
         }
-        
+
         return result;
     }
 
