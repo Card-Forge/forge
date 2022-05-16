@@ -73,8 +73,6 @@ public class EncodeEffect extends SpellAbilityEffect {
         // store hostcard in encoded array
         choice.addEncodedCard(movedCard);
         movedCard.setEncodingCard(choice);
-
-        return;
     }
 
 }
