@@ -1,0 +1,9 @@
+Name:Jailbreak
+ManaCost:1 W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select target permanent in an opponent's graveyard | ValidTgts$ Permanent.OppOwn | SubAbility$ DBDelayedTrigger | SpellDescription$ Return target permanent card in an opponent's graveyard to the battlefield under their control. When that permanent enters the battlefield, return up to one target permanent card with equal or lesser mana value from your graveyard to the battlefield.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | RememberObjects$ Targeted | Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.IsTriggerRemembered | Execute$ TrigReturn | TriggerDescription$ When that permanent enters the battlefield, return up to one target permanent card with equal or lesser mana value from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Select up to one target permanent with equal or lesser mana value | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Permanent.YouOwn+cmcLEX
+SVar:X:TriggeredCard$CardManaCost
+DeckHas:Ability$Graveyard
+Oracle:Return target permanent card in an opponent's graveyard to the battlefield under their control. When that permanent enters the battlefield, return up to one target permanent card with equal or lesser mana value from your graveyard to the battlefield.

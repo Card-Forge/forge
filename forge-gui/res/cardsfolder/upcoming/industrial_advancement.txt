@@ -1,0 +1,9 @@
+Name:Industrial Advancement
+ManaCost:3 R
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, you may sacrifice a creature. If you do, look at the top X cards of your library, where X is that creature's mana value. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:AB$ Dig | Cost$ Sac<1/Creature> | ForceRevealToController$ True | DigNum$ X | Optional$ True | DestinationZone$ Battlefield | ChangeValid$ Creature | AILogic$ SacAndUpgrade | RestRandomOrder$ True
+SVar:X:Sacrificed$CardManaCost
+DeckHas:Ability$Sacrifice
+SVar:AIPreference:SacCost$Creature.nonToken+cmcGE1
+Oracle:At the beginning of your end step, you may sacrifice a creature. If you do, look at the top X cards of your library, where X is that creature's mana value. You may put a creature card from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
