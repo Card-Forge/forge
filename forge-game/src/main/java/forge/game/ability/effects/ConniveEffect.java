@@ -75,7 +75,7 @@ public class ConniveEffect extends SpellAbilityEffect {
 
             int amt = Math.min(validCards.size(), num);
             CardCollectionView toBeDiscarded = amt == 0 ? CardCollection.EMPTY :
-                    hostCon.getController().chooseCardsToDiscardFrom(p, sa, validCards, amt, amt);
+                    hostCon.getController().chooseCardsToDiscardFrom(hostCon, sa, validCards, amt, amt);
 
             if (toBeDiscarded.size() > 1) {
                 toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
