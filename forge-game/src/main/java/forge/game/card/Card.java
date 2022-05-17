@@ -535,7 +535,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return currentStateName;
     }
 
-    // use by CopyPermament
+    // use by CopyPermanent
     public void setStates(Map<CardStateName, CardState> map) {
         states.clear();
         states.putAll(map);
