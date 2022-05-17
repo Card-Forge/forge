@@ -113,7 +113,7 @@ public class Config {
 
         Deck[] deck = new Deck[configData.starterDecks.length];
         for (int i = 0; i < configData.starterDecks.length; i++) {
-            deck[i] = CardUtil.getDeck(configData.starterDecks[i], false, false);
+            deck[i] = CardUtil.getDeck(configData.starterDecks[i], false, false, "", false);
         }
         return deck;
     }

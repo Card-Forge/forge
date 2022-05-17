@@ -499,13 +499,15 @@ public class CardUtil {
         return  ret;
     }
 
-    public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode)
+    public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme)
     {
         if(path.endsWith(".dck"))
             return DeckSerializer.fromFile(new File(Config.instance().getFilePath(path)));
 
         if(forAI && isFantasyMode) {
-            return DeckgenUtil.getRandomPreconDeckAdventure();
+            Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, forAI, isTheme);
+            if (deck != null)
+                return deck;
         }
         Json json = new Json();
         FileHandle handle = Config.instance().getFile(path);
