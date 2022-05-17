@@ -19,6 +19,7 @@ import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -1188,7 +1189,18 @@ public class CardProperty {
         } else if (property.startsWith("dealtDamagetoAny")) {
             return card.getDamageHistory().getHasdealtDamagetoAny();
         } else if (property.startsWith("attackedThisTurn")) {
-            if (!card.getDamageHistory().getCreatureAttackedThisTurn()) {
+            if (card.getDamageHistory().getCreatureAttacksThisTurn() == 0) {
+                return false;
+            }
+        } else if (property.startsWith("attackedYouThisTurn")) {
+            boolean found = false;
+            for (PlayerCollection players : game.getPlayersAttackedThisTurn().values()) {
+                if (players.contains(sourceController)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
                 return false;
             }
         } else if (property.startsWith("attackedLastTurn")) {
@@ -1210,7 +1222,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("notAttackedThisTurn")) {
-            if (card.getDamageHistory().getCreatureAttackedThisTurn()) {
+            if (card.getDamageHistory().getCreatureAttacksThisTurn() > 0) {
                 return false;
             }
         } else if (property.startsWith("notAttackedLastTurn")) {

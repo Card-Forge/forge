@@ -16,7 +16,6 @@ import forge.game.player.Player;
  */
 public class CardDamageHistory {
 
-    private boolean creatureAttackedThisTurn = false;
     private boolean creatureAttackedThisCombat = false;
     private boolean creatureBlockedThisCombat = false;
     private boolean creatureGotBlockedThisCombat = false;
@@ -51,7 +50,6 @@ public class CardDamageHistory {
         this.creatureAttackedThisCombat = hasAttacked;
 
         if (hasAttacked) {
-            this.setCreatureAttackedThisTurn(true);
             this.attacksThisTurn++;
         }
     }
@@ -64,27 +62,6 @@ public class CardDamageHistory {
      */
     public final boolean getCreatureAttackedThisCombat() {
         return this.creatureAttackedThisCombat;
-    }
-    /**
-     * <p>
-     * Setter for the field <code>creatureAttackedThisTurn</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setCreatureAttackedThisTurn(final boolean b) {
-        this.creatureAttackedThisTurn = b;
-     }
-    /**
-     * <p>
-     * Getter for the field <code>creatureAttackedThisTurn</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getCreatureAttackedThisTurn() {
-        return this.creatureAttackedThisTurn;
     }
     /**
      * <p>
