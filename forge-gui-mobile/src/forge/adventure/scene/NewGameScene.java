@@ -100,7 +100,7 @@ public class NewGameScene extends UIScene {
             Array<String> stringList = new Array<>(starterDeck.length);
             for (Deck deck : starterDeck)
                 stringList.add(deck.getName());
-            stringList.add("Fantasy Mode");
+            stringList.add("Chaos Mode");
 
             deck.setTextList(stringList);
             deck.addListener(new EventListener() {
@@ -204,7 +204,7 @@ public class NewGameScene extends UIScene {
     }
 
     private boolean updateFantasy() {
-        fantasyMode = "Fantasy Mode".equalsIgnoreCase(deck.getText());
+        fantasyMode = "Chaos Mode".equalsIgnoreCase(deck.getText());
         return false;
     }
 
