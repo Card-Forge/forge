@@ -19,7 +19,6 @@ import forge.game.combat.CombatUtil;
 import forge.game.keyword.Keyword;
 import forge.game.mana.Mana;
 import forge.game.player.Player;
-import forge.game.player.PlayerCollection;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -1193,14 +1192,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("attackedYouThisTurn")) {
-            boolean found = false;
-            for (PlayerCollection players : game.getPlayersAttackedThisTurn().values()) {
-                if (players.contains(sourceController)) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
+            if (!card.getDamageHistory().hasAttackedThisTurn(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("attackedLastTurn")) {
