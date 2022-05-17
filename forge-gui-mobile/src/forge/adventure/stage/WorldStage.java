@@ -249,6 +249,10 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
         }
         setBounds(WorldSave.getCurrentSave().getWorld().getWidthInPixels(), WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+        if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
+            MapStage.getInstance().showImageDialog("Fantasy Mode!\n"+"Preconstructed Deck: "+ WorldSave.getCurrentSave().getPlayer().getSelectedDeck().getName()+"\nRandom Enemies will use Preconstructed Decks.", null);
+            WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
+        }
     }
 
     @Override
