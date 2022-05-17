@@ -13,6 +13,7 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +47,7 @@ public class ConniveEffect extends SpellAbilityEffect {
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         final CardZoneTable triggerList = new CardZoneTable();
+        List<Card> allToDiscard = new ArrayList<>();
         Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
@@ -59,30 +61,29 @@ public class ConniveEffect extends SpellAbilityEffect {
             } else {
                 conniver = toConnive.get(0);
             }
-            final Player p = conniver.getController();
 
-            p.drawCards(num, sa, moveParams);
+            hostCon.drawCards(num, sa, moveParams);
 
-            CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
+            CardCollectionView dPHand = hostCon.getCardsIn(ZoneType.Hand);
             dPHand = CardLists.filter(dPHand, CardPredicates.Presets.NON_TOKEN);
-            if (dPHand.isEmpty() || !p.canDiscardBy(sa, true)) { // hand being empty unlikely, but just to be safe
+            if (dPHand.isEmpty() || !hostCon.canDiscardBy(sa, true)) { // hand being empty unlikely, but just to be safe
                 continue;
             }
 
             CardCollection validCards = CardLists.getValidCards(dPHand, "Card", hostCon, host, sa);
-            for (CardCollectionView cc : discardedMap.values()) {
-                validCards.removeAll(cc);
-            }
+            validCards.removeAll(allToDiscard); //don't allow cards already chosen for discard by other connivers
 
             int amt = Math.min(validCards.size(), num);
             CardCollectionView toBeDiscarded = amt == 0 ? CardCollection.EMPTY :
-                    p.getController().chooseCardsToDiscardFrom(p, sa, validCards, amt, amt);
+                    hostCon.getController().chooseCardsToDiscardFrom(p, sa, validCards, amt, amt);
 
             if (toBeDiscarded.size() > 1) {
                 toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
             }
 
-            discardedMap.put(p, toBeDiscarded);
+            for (Card disc : toBeDiscarded) {
+                allToDiscard.add(disc);
+            }
 
             int numCntrs = CardLists.getValidCardCount(toBeDiscarded, "Card.nonLand", hostCon, host, sa);
 
@@ -90,12 +91,16 @@ public class ConniveEffect extends SpellAbilityEffect {
             Card gamec = game.getCardState(conniver);
             // if the card is not in the game anymore, this might still return true, but it's no problem
             if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(conniver)) {
-                conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, table);
+                conniver.addCounter(CounterEnumType.P1P1, numCntrs, hostCon, table);
             }
             toConnive.remove(conniver);
         }
-        discard(sa, triggerList, true, discardedMap, moveParams);
-        table.replaceCounterEffect(game, sa, true);
-        triggerList.triggerChangesZoneAll(game, sa);
+
+        if (allToDiscard.size() > 0) {
+            discardedMap.put(hostCon, CardCollection.getView(allToDiscard));
+            discard(sa, triggerList, true, discardedMap, moveParams);
+            table.replaceCounterEffect(game, sa, true);
+            triggerList.triggerChangesZoneAll(game, sa);
+        }
     }
 }
