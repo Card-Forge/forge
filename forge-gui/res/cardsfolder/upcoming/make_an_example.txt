@@ -1,0 +1,7 @@
+Name:Make an Example
+ManaCost:3 B
+Types:Sorcery
+A:SP$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBTwoPiles | SpellDescription$ Each opponent separates the creatures they control into two piles. For each opponent, you choose one of their piles. Each opponent sacrifices the creatures in their chosen pile. (Piles can be empty.)
+SVar:DBTwoPiles:DB$ TwoPiles | Defined$ Remembered | Separator$ Remembered | Chooser$ You | ChosenPile$ DBSac | ValidCards$ Creature.RememberedPlayerCtrl | Zone$ Battlefield
+SVar:DBSac:DB$ SacrificeAll | ValidCards$ Creature.IsRemembered
+Oracle:Each opponent separates the creatures they control into two piles. For each opponent, you choose one of their piles. Each opponent sacrifices the creatures in their chosen pile. (Piles can be empty.)
