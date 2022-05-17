@@ -24,13 +24,14 @@ public class ConniveEffect extends SpellAbilityEffect {
      */
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-
         List<Card> tgt = getTargetCards(sa);
-
+        if (tgt.size() <= 0) {
+            return "";
+        } else {
+        final StringBuilder sb = new StringBuilder();
         sb.append(Lang.joinHomogenous(tgt)).append(tgt.size() > 1 ? " connive." : " connives.");
-
         return sb.toString();
+        }
     }
 
     /* (non-Javadoc)
