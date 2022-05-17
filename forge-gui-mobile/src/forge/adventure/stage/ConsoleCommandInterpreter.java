@@ -195,7 +195,7 @@ public class ConsoleCommandInterpreter {
         });
         registerCommand(new String[]{"dumpEnemyDeckColors"}, s -> {
             for(EnemyData E : new Array.ArrayIterator<>(WorldData.getAllEnemies())){
-                Deck D = E.generateDeck();
+                Deck D = E.generateDeck(Current.player().isFantasyMode());
                 DeckProxy DP = new DeckProxy(D, "Constructed", GameType.Constructed, null);
                 ColorSet colorSet = DP.getColor();
                 System.out.printf("%s: Colors: %s (%s%s%s%s%s%s)\n", D.getName(), DP.getColor(),

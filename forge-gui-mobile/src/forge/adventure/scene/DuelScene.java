@@ -111,7 +111,7 @@ public class DuelScene extends ForgeScene {
         playerObject.setAvatarIndex(90001);
         humanPlayer.setPlayer(playerObject);
         humanPlayer.setStartingLife(advPlayer.getLife());
-        Deck enemyDeck = ( enemy.getData().copyPlayerDeck ? playerDeck : enemy.getData().generateDeck() );
+        Deck enemyDeck = ( enemy.getData().copyPlayerDeck ? playerDeck : enemy.getData().generateDeck(Current.player().isFantasyMode()));
         Current.setLatestDeck(enemyDeck);
         RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, Current.latestDeck(), null, false, null, null);
         LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(this.enemy.getData().name, selectAI(this.enemy.getData().ai));

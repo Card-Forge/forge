@@ -45,6 +45,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     private final Array<String> inventoryItems=new Array<>();
     private final HashMap<String,String> equippedItems=new HashMap<>();
+    private boolean fantasyMode = false;
+    private boolean announceFantasy = false;
 
     public AdventurePlayer() {
         for(int i=0;i<NUMBER_OF_DECKS;i++) {
@@ -61,11 +63,13 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final CardPool cards=new CardPool();
     private final ItemPool<InventoryItem> newCards=new ItemPool<>(InventoryItem.class);
 
-    public void create(String n, int startingColorIdentity, Deck startingDeck, boolean male, int race, int avatar,DifficultyData difficultyData) {
+    public void create(String n, int startingColorIdentity, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy, DifficultyData difficultyData) {
         inventoryItems.clear();
         equippedItems.clear();
         deck = startingDeck;
         decks[0]=deck;
+        fantasyMode = isFantasy;
+        announceFantasy = fantasyMode;
         gold =difficultyData.staringMoney;
         cards.clear();
         cards.addAllFlat(deck.getAllCardsInASinglePool().toFlatList());
@@ -210,6 +214,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         avatarIndex = data.readInt("avatarIndex");
         heroRace = data.readInt("heroRace");
         isFemale = data.readBool("isFemale");
+        fantasyMode = data.containsKey("fantasyMode") ? data.readBool("fantasyMode") : false;
+        announceFantasy = data.containsKey("announceFantasy") ? data.readBool("announceFantasy") : false;
         colorIdentity = ColorID.COLORLESS;
         if(data.containsKey("colorIdentity"))
             setColorIdentity(data.readString("colorIdentity"));
@@ -291,6 +297,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("avatarIndex",avatarIndex);
         data.store("heroRace",heroRace);
         data.store("isFemale",isFemale);
+        data.store("fantasyMode",fantasyMode);
+        data.store("announceFantasy",announceFantasy);
         data.store("colorIdentity", getColorIdentity());
         data.store("gold",gold);
         data.store("life",life);
@@ -463,6 +471,18 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if(blessing == null) return false;
         if(blessing.name.equals(name)) return true;
         return false;
+    }
+
+    public boolean isFantasyMode(){
+        return fantasyMode;
+    }
+
+    public boolean hasAnnounceFantasy(){
+        return announceFantasy;
+    }
+
+    public void clearAnnounceFantasy(){
+        announceFantasy = false;
     }
 
     public boolean hasColorView() {

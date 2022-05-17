@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -430,6 +431,13 @@ public class DeckgenUtil {
         final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
         final String name = allDecks.getItemNames().toArray(new String[0])[rand];
         return allDecks.get(name);
+    }
+
+    /** @return {@link forge.deck.Deck} */
+    public static Deck getRandomPreconDeckAdventure() {
+        final List<DeckProxy> allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream().filter(deckProxy -> deckProxy.getMainSize() <= 60).collect(Collectors.toList());
+        final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
+        return allDecks.get(rand).getDeck();
     }
 
     /** @return {@link forge.deck.Deck} */
