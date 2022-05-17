@@ -50,21 +50,27 @@ public class ConniveEffect extends SpellAbilityEffect {
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
 
-        for (final Card c : getTargetCards(sa)) {
-            final Player p = c.getController();
+        CardCollection toConnive = getTargetCards(sa);
+        Card conniver;
+        while (toConnive.size() > 0) {
+            if (toConnive.size() > 1) {
+                conniver = hostCon.getController().chooseSingleEntityForEffect(toConnive, sa, "Choose conniver", null);
+            } else {
+                conniver = toConnive.get(0);
+            }
+            final Player p = conniver.getController();
 
             p.drawCards(num, sa, moveParams);
 
             CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
             dPHand = CardLists.filter(dPHand, CardPredicates.Presets.NON_TOKEN);
-            if (dPHand.isEmpty()) { // seems unlikely, but just to be safe
-                continue; // for loop over players
+            if (dPHand.isEmpty() || !p.canDiscardBy(sa, true)) { // hand being empty unlikely, but just to be safe
+                continue;
             }
 
             CardCollection validCards = CardLists.getValidCards(dPHand, "Card", hostCon, host, sa);
-
-            if (!p.canDiscardBy(sa, true)) {
-                continue;
+            for (CardCollectionView cc : discardedMap.values()) {
+                validCards.removeAll(cc);
             }
 
             int amt = Math.min(validCards.size(), num);
@@ -80,11 +86,12 @@ public class ConniveEffect extends SpellAbilityEffect {
             int numCntrs = CardLists.getValidCardCount(toBeDiscarded, "Card.nonLand", hostCon, host, sa);
 
             // need to get newest game state to check if it is still on the battlefield and the timestamp didn't change
-            Card gamec = game.getCardState(c);
+            Card gamec = game.getCardState(conniver);
             // if the card is not in the game anymore, this might still return true, but it's no problem
-            if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(c)) {
-                c.addCounter(CounterEnumType.P1P1, numCntrs, p, table);
+            if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(conniver)) {
+                conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, table);
             }
+            toConnive.remove(conniver);
         }
         discard(sa, triggerList, true, discardedMap, moveParams);
         table.replaceCounterEffect(game, sa, true);
