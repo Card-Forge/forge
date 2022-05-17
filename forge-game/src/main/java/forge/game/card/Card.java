@@ -5187,12 +5187,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             } else if (getName().isEmpty()) {
                 // if this does not have a name, then there is no name to share
                 return false;
-            } else {
+            } else if (StaticData.instance().getCommonCards().isNonLegendaryCreatureName(getName())) {
                 // check if this card has a name from a face
                 // in general token creatures does not have this
-                // TODO add check if face is legal in the format of the game
-                // name does need to be a non-legendary creature
-                return StaticData.instance().getCommonCards().isNonLegendaryCreatureName(getName());
+                return true;
             }
         }
         return sharesNameWith(c1.getName());
@@ -5215,8 +5213,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (!shares && hasNonLegendaryCreatureNames()) {
             // check if the name is from a face
             // in general token creatures does not have this
-            // TODO add check if face is legal in the format of the game
-            // name does need to be a non-legendary creature
             return StaticData.instance().getCommonCards().isNonLegendaryCreatureName(name);
         }
         return shares;
