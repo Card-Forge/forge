@@ -105,112 +105,6 @@ public class CopyPermanentEffect extends TokenEffectBase {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = host.getGame();
-
-        if (sa.hasParam("Optional") && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblCopyPermanentConfirm"))) {
-            return;
-        }
-
-        final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(host, sa.getParam("NumCopies"), sa) : 1;
-
-        Player controller = null;
-        if (sa.hasParam("Controller")) {
-            final FCollectionView<Player> defined = AbilityUtils.getDefinedPlayers(host, sa.getParam("Controller"), sa);
-            if (!defined.isEmpty()) {
-                controller = defined.getFirst();
-            }
-        }
-        if (controller == null) {
-            controller = activator;
-        }
-
-        List<Card> tgtCards = Lists.newArrayList();
-
-        if (sa.hasParam("ValidSupportedCopy")) {
-            List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
-            String valid = sa.getParam("ValidSupportedCopy");
-            if (valid.contains("X")) {
-                valid = TextUtil.fastReplace(valid,
-                        "X", Integer.toString(AbilityUtils.calculateAmount(host, "X", sa)));
-            }
-            if (StringUtils.containsIgnoreCase(valid, "creature")) {
-                Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES);
-                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
-            }
-            if (StringUtils.containsIgnoreCase(valid, "equipment")) {
-                Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_EQUIPMENT, PaperCard.FN_GET_RULES);
-                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
-            }
-            if (sa.hasParam("RandomCopied")) {
-                List<PaperCard> copysource = Lists.newArrayList(cards);
-                List<Card> choice = Lists.newArrayList();
-                final String num = sa.getParamOrDefault("RandomNum", "1");
-                int ncopied = AbilityUtils.calculateAmount(host, num, sa);
-                while (ncopied > 0 && !copysource.isEmpty()) {
-                    final PaperCard cp = Aggregates.random(copysource);
-                    Card possibleCard = Card.fromPaperCard(cp, activator); // Need to temporarily set the Owner so the Game is set
-
-                    if (possibleCard.isValid(valid, host.getController(), host, sa)) {
-                        if (host.getController().isAI() && possibleCard.getRules() != null && possibleCard.getRules().getAiHints().getRemAIDecks())
-                            continue;
-                        choice.add(possibleCard);
-                        ncopied -= 1;
-                    }
-                    copysource.remove(cp);
-                }
-                tgtCards = choice;
-
-                System.err.println("Copying random permanent(s): " + tgtCards.toString());
-            } else if (sa.hasParam("DefinedName")) {
-                String name = sa.getParam("DefinedName");
-                if (name.equals("NamedCard")) {
-                    if (!host.getNamedCard().isEmpty()) {
-                        name = host.getNamedCard();
-                    }
-                }
-
-                Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard.FN_GET_RULES);
-                cards = Lists.newArrayList(Iterables.filter(cards, cpp));
-
-                if (!cards.isEmpty()) {
-                    tgtCards.add(Card.fromPaperCard(cards.get(0), controller));
-                }
-            }
-        } else if (sa.hasParam("Choices")) {
-            Player chooser = activator;
-            if (sa.hasParam("Chooser")) {
-                final String choose = sa.getParam("Chooser");
-                chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), choose, sa).get(0);
-            }
-
-            // For Mimic Vat with mutated creature, need to choose one imprinted card
-            CardCollectionView choices = sa.hasParam("Defined") ? getDefinedCardsOrTargeted(sa) : game.getCardsIn(ZoneType.Battlefield);
-            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host, sa);
-            if (!choices.isEmpty()) {
-                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard");
-
-                if (sa.hasParam("WithDifferentNames")) {
-                    // any Number of choices with different names
-                    while (!choices.isEmpty()) {
-                        Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, true, null);
-
-                        if (choosen != null) {
-                            tgtCards.add(choosen);
-                            choices = CardLists.filter(choices, Predicates.not(CardPredicates.sharesNameWith(choosen)));
-                        } else if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"))) {
-                            break;
-                        }
-                    }
-                } else {
-                    Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, false, null);
-                    if (choosen != null) {
-                        tgtCards.add(choosen);
-                    }
-                }
-            }
-        } else {
-            tgtCards = getDefinedCardsOrTargeted(sa);
-        }
-
         boolean useZoneTable = true;
         CardZoneTable triggerList = sa.getChangeZoneTable();
         if (triggerList == null) {
@@ -225,25 +119,127 @@ public class CopyPermanentEffect extends TokenEffectBase {
         MutableBoolean combatChanged = new MutableBoolean(false);
         TokenCreateTable tokenTable = new TokenCreateTable();
 
-        for (final Card c : tgtCards) {
-            // if it only targets player, it already got all needed cards from defined
-            if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer() && !c.canBeTargetedBy(sa)) {
-                continue;
-            }
-            if (sa.hasParam("ForEach")) {
-                for (Player p : AbilityUtils.getDefinedPlayers(host, sa.getParam("ForEach"), sa)) {
-                    Card proto = getProtoType(sa, c, controller);
-                    proto.addRemembered(p);
-                    tokenTable.put(controller, proto, numCopies);
+        if (sa.hasParam("Optional") && !activator.getController().confirmAction(sa, null,
+                Localizer.getInstance().getMessage("lblCopyPermanentConfirm"))) {
+            return;
+        }
+
+        final int numCopies = sa.hasParam("NumCopies") ? AbilityUtils.calculateAmount(host,
+                sa.getParam("NumCopies"), sa) : 1;
+
+        List<Player> controllers = Lists.newArrayList();
+        if (sa.hasParam("Controller")) {
+            controllers = AbilityUtils.getDefinedPlayers(host, sa.getParam("Controller"), sa);
+        }
+        if (controllers.isEmpty()) {
+            controllers.add(activator);
+        }
+
+        for (final Player controller : controllers) {
+            List<Card> tgtCards = Lists.newArrayList();
+
+            if (sa.hasParam("ValidSupportedCopy")) {
+                List<PaperCard> cards = Lists.newArrayList(StaticData.instance().getCommonCards().getUniqueCards());
+                String valid = sa.getParam("ValidSupportedCopy");
+                if (valid.contains("X")) {
+                    valid = TextUtil.fastReplace(valid,
+                            "X", Integer.toString(AbilityUtils.calculateAmount(host, "X", sa)));
                 }
-            } else if (sa.hasParam("EachCreates")) {
-                for (Player p : AbilityUtils.getDefinedPlayers(host, sa.getParam("EachCreates"), sa)) {
-                    tokenTable.put(p, getProtoType(sa, c, p), numCopies);
+                if (StringUtils.containsIgnoreCase(valid, "creature")) {
+                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES);
+                    cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                }
+                if (StringUtils.containsIgnoreCase(valid, "equipment")) {
+                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.Presets.IS_EQUIPMENT, PaperCard.FN_GET_RULES);
+                    cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+                }
+                if (sa.hasParam("RandomCopied")) {
+                    List<PaperCard> copysource = Lists.newArrayList(cards);
+                    List<Card> choice = Lists.newArrayList();
+                    final String num = sa.getParamOrDefault("RandomNum", "1");
+                    int ncopied = AbilityUtils.calculateAmount(host, num, sa);
+                    while (ncopied > 0 && !copysource.isEmpty()) {
+                        final PaperCard cp = Aggregates.random(copysource);
+                        Card possibleCard = Card.fromPaperCard(cp, activator); // Need to temporarily set the Owner so the Game is set
+
+                        if (possibleCard.isValid(valid, host.getController(), host, sa)) {
+                            if (host.getController().isAI() && possibleCard.getRules() != null && possibleCard.getRules().getAiHints().getRemAIDecks())
+                                continue;
+                            choice.add(possibleCard);
+                            ncopied -= 1;
+                        }
+                        copysource.remove(cp);
+                    }
+                    tgtCards = choice;
+
+                    System.err.println("Copying random permanent(s): " + tgtCards.toString());
+                } else if (sa.hasParam("DefinedName")) {
+                    String name = sa.getParam("DefinedName");
+                    if (name.equals("NamedCard")) {
+                        if (!host.getNamedCard().isEmpty()) {
+                            name = host.getNamedCard();
+                        }
+                    }
+
+                    Predicate<PaperCard> cpp = Predicates.compose(CardRulesPredicates.name(StringOp.EQUALS, name), PaperCard.FN_GET_RULES);
+                    cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+
+                    if (!cards.isEmpty()) {
+                        tgtCards.add(Card.fromPaperCard(cards.get(0), controller));
+                    }
+                }
+            } else if (sa.hasParam("Choices")) {
+                Player chooser = activator;
+                if (sa.hasParam("Chooser")) {
+                    final String choose = sa.getParam("Chooser");
+                    chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), choose, sa).get(0);
+                }
+
+                // For Mimic Vat with mutated creature, need to choose one imprinted card
+                CardCollectionView choices = sa.hasParam("Defined") ? getDefinedCardsOrTargeted(sa) : game.getCardsIn(ZoneType.Battlefield);
+                choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, host, sa);
+                if (!choices.isEmpty()) {
+                    String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard");
+
+                    if (sa.hasParam("WithDifferentNames")) {
+                        // any Number of choices with different names
+                        while (!choices.isEmpty()) {
+                            Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, true, null);
+
+                            if (choosen != null) {
+                                tgtCards.add(choosen);
+                                choices = CardLists.filter(choices, Predicates.not(CardPredicates.sharesNameWith(choosen)));
+                            } else if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"))) {
+                                break;
+                            }
+                        }
+                    } else {
+                        Card choosen = chooser.getController().chooseSingleEntityForEffect(choices, sa, title, false, null);
+                        if (choosen != null) {
+                            tgtCards.add(choosen);
+                        }
+                    }
                 }
             } else {
-                tokenTable.put(controller, getProtoType(sa, c, controller), numCopies);
+                tgtCards = getDefinedCardsOrTargeted(sa);
             }
-        } // end foreach Card
+
+            for (final Card c : tgtCards) {
+                // if it only targets player, it already got all needed cards from defined
+                if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer() && !c.canBeTargetedBy(sa)) {
+                    continue;
+                }
+                if (sa.hasParam("ForEach")) {
+                    for (Player p : AbilityUtils.getDefinedPlayers(host, sa.getParam("ForEach"), sa)) {
+                        Card proto = getProtoType(sa, c, controller);
+                        proto.addRemembered(p);
+                        tokenTable.put(controller, proto, numCopies);
+                    }
+                } else {
+                    tokenTable.put(controller, getProtoType(sa, c, controller), numCopies);
+                }
+            } // end foreach Card
+        }
 
         makeTokenTable(tokenTable, true, triggerList, combatChanged, sa);
 
