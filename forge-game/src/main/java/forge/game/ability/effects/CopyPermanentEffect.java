@@ -33,7 +33,6 @@ import forge.util.Aggregates;
 import forge.util.Localizer;
 import forge.util.PredicateString.StringOp;
 import forge.util.TextUtil;
-import forge.util.collect.FCollectionView;
 
 public class CopyPermanentEffect extends TokenEffectBase {
 
