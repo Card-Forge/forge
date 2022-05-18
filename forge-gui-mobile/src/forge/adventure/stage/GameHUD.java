@@ -184,7 +184,7 @@ public class GameHUD extends Stage {
             return true;
         }
         //auto follow touchpad
-        if (GuiBase.isAndroid()) {
+        if (GuiBase.isAndroid() && !MapStage.getInstance().getDialogOnlyInput()) {
             if (!(Controls.actorContainsVector(miniMap,touch)) // not inside map bounds
                     && !(Controls.actorContainsVector(gamehud,touch)) //not inside gamehud bounds
                     && !(Controls.actorContainsVector(menuActor,touch)) //not inside menu button
@@ -286,27 +286,29 @@ public class GameHUD extends Stage {
             return;
         moveStarted = true;
         FThreads.invokeInEdtNowOrLater(() -> {
+            int delay = 500;
             if (menuActor.isVisible()) {
-                menuActor.addAction(Actions.sequence(Actions.delay(0.1f), Actions.moveTo(menuActor.getX()+menuActor.getWidth(), menuActor.getY(), 0.25f), Actions.hide()));
+                delay = 250;
+                menuActor.addAction(Actions.sequence(Actions.fadeOut(0.25f), Actions.hide(), Actions.moveTo(menuActor.getX()+menuActor.getWidth(), menuActor.getY())));
             } else {
-                menuActor.addAction(Actions.sequence(Actions.delay(0.1f), Actions.show(), Actions.moveTo(referenceX, menuActor.getY(), 0.25f)));
+                menuActor.addAction(Actions.sequence(Actions.delay(0.1f), Actions.parallel(Actions.show(), Actions.fadeIn(0.1f), Actions.moveTo(referenceX, menuActor.getY(), 0.25f))));
             }
             if (statsActor.isVisible()) {
-                statsActor.addAction(Actions.sequence(Actions.delay(0.15f), Actions.moveTo(statsActor.getX()+statsActor.getWidth(), statsActor.getY(), 0.25f), Actions.hide()));
+                statsActor.addAction(Actions.sequence(Actions.fadeOut(0.20f), Actions.hide(), Actions.moveTo(statsActor.getX()+statsActor.getWidth(), statsActor.getY())));
             } else {
-                statsActor.addAction(Actions.sequence(Actions.delay(0.15f), Actions.show(), Actions.moveTo(referenceX, statsActor.getY(), 0.25f)));
+                statsActor.addAction(Actions.sequence(Actions.delay(0.15f), Actions.parallel(Actions.show(), Actions.fadeIn(0.1f), Actions.moveTo(referenceX, statsActor.getY(), 0.25f))));
             }
             if (inventoryActor.isVisible()) {
-                inventoryActor.addAction(Actions.sequence(Actions.delay(0.2f), Actions.moveTo(inventoryActor.getX()+inventoryActor.getWidth(), inventoryActor.getY(), 0.25f), Actions.hide()));
+                inventoryActor.addAction(Actions.sequence(Actions.fadeOut(0.15f), Actions.hide(), Actions.moveTo(inventoryActor.getX()+inventoryActor.getWidth(), inventoryActor.getY())));
             } else {
-                inventoryActor.addAction(Actions.sequence(Actions.delay(0.2f), Actions.show(), Actions.moveTo(referenceX, inventoryActor.getY(), 0.25f)));
+                inventoryActor.addAction(Actions.sequence(Actions.delay(0.2f), Actions.parallel(Actions.fadeIn(0.1f), Actions.show(), Actions.moveTo(referenceX, inventoryActor.getY(), 0.25f))));
             }
             if (deckActor.isVisible()) {
-                deckActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.moveTo(deckActor.getX()+deckActor.getWidth(), deckActor.getY(), 0.25f), Actions.hide()));
+                deckActor.addAction(Actions.sequence(Actions.fadeOut(0.10f), Actions.hide(), Actions.moveTo(deckActor.getX()+deckActor.getWidth(), deckActor.getY())));
             } else {
-                deckActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.show(), Actions.moveTo(referenceX, deckActor.getY(), 0.25f)));
+                deckActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.parallel(Actions.fadeIn(0.1f), Actions.show(), Actions.moveTo(referenceX, deckActor.getY(), 0.25f))));
             }
-            FThreads.delayInEDT(500, () -> {
+            FThreads.delayInEDT(delay, () -> {
                 buttonsVisible = menuActor.getX() == referenceX;
                 moveStarted = false;
             });
