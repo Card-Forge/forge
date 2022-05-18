@@ -447,16 +447,19 @@ public class DeckgenUtil {
                     case 'w': selection.add("white");
                 }
             }
-            //has colors
+        }
+        //limit selection to three
+        if (!selection.isEmpty() && selection.size() < 4) {
+            //has all colors
             if (isTheme) {
                 allDecks = DeckProxy.getAllThemeDecks().parallelStream()
                         .filter(deckProxy -> deckProxy.getMainSize() <= 60)
-                        .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().containsAllColorsFrom(ColorSet.fromNames(selection).getColor()))
+                        .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor()))
                         .collect(Collectors.toList());
             } else {
                 allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
                         .filter(deckProxy -> deckProxy.getMainSize() <= 60)
-                        .filter(deckProxy -> deckProxy.getColor() != null &&  deckProxy.getColor().containsAllColorsFrom(ColorSet.fromNames(selection).getColor()))
+                        .filter(deckProxy -> deckProxy.getColor() != null &&  deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor()))
                         .collect(Collectors.toList());
             }
         } else {
@@ -472,8 +475,7 @@ public class DeckgenUtil {
             }
         }
         if (!allDecks.isEmpty()) {
-            final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
-            return allDecks.get(rand).getDeck();
+            return Aggregates.random(allDecks).getDeck();
         }
         return DeckgenUtil.buildColorDeck(selection, null, forAi);
     }
