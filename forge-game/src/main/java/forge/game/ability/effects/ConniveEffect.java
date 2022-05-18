@@ -41,7 +41,6 @@ public class ConniveEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-        final Player hostCon = host.getController();
         final Game game = host.getGame();
         final int num = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("ConniveNum", "1"), sa);
 
@@ -53,29 +52,29 @@ public class ConniveEffect extends SpellAbilityEffect {
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
 
-        CardCollection toConnive = getTargetCards(sa);
-        Card conniver;
-        while (toConnive.size() > 0) {
-            if (toConnive.size() > 1) {
-                conniver = hostCon.getController().chooseSingleEntityForEffect(toConnive, sa, "Choose conniver", null);
-            } else {
-                conniver = toConnive.get(0);
-            }
+        CardCollectionView toConnive = getTargetCards(sa);
+        final Player p = toConnive.getFirst().getController(); // currently all connivers will have the same controller
+        final int n = toConnive.size();
+        if (n > 1) {
+            toConnive = p.getController().chooseCardsForEffect(toConnive, sa, "Choose connive order", n, n, false, null);
+        }
 
-            hostCon.drawCards(num, sa, moveParams);
+        for (final Card conniver : toConnive) {
 
-            CardCollectionView dPHand = hostCon.getCardsIn(ZoneType.Hand);
+            p.drawCards(num, sa, moveParams);
+
+            CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
             dPHand = CardLists.filter(dPHand, CardPredicates.Presets.NON_TOKEN);
-            if (dPHand.isEmpty() || !hostCon.canDiscardBy(sa, true)) { // hand being empty unlikely, but just to be safe
+            if (dPHand.isEmpty() || !p.canDiscardBy(sa, true)) { // hand being empty unlikely, but just to be safe
                 continue;
             }
 
-            CardCollection validCards = CardLists.getValidCards(dPHand, "Card", hostCon, host, sa);
+            CardCollection validCards = CardLists.getValidCards(dPHand, "Card", p, host, sa);
             validCards.removeAll(allToDiscard); //don't allow cards already chosen for discard by other connivers
 
             int amt = Math.min(validCards.size(), num);
             CardCollectionView toBeDiscarded = amt == 0 ? CardCollection.EMPTY :
-                    hostCon.getController().chooseCardsToDiscardFrom(hostCon, sa, validCards, amt, amt);
+                    p.getController().chooseCardsToDiscardFrom(p, sa, validCards, amt, amt);
 
             if (toBeDiscarded.size() > 1) {
                 toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
@@ -85,19 +84,19 @@ public class ConniveEffect extends SpellAbilityEffect {
                 allToDiscard.add(disc);
             }
 
-            int numCntrs = CardLists.getValidCardCount(toBeDiscarded, "Card.nonLand", hostCon, host, sa);
+            int numCntrs = CardLists.getValidCardCount(toBeDiscarded, "Card.nonLand", p, host, sa);
 
             // need to get newest game state to check if it is still on the battlefield and the timestamp didn't change
             Card gamec = game.getCardState(conniver);
             // if the card is not in the game anymore, this might still return true, but it's no problem
             if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(conniver)) {
-                conniver.addCounter(CounterEnumType.P1P1, numCntrs, hostCon, table);
+                conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, table);
             }
-            toConnive.remove(conniver);
+            p.getController().endTempShowCards();
         }
 
         if (allToDiscard.size() > 0) {
-            discardedMap.put(hostCon, CardCollection.getView(allToDiscard));
+            discardedMap.put(p, CardCollection.getView(allToDiscard));
             discard(sa, triggerList, true, discardedMap, moveParams);
             table.replaceCounterEffect(game, sa, true);
             triggerList.triggerChangesZoneAll(game, sa);
