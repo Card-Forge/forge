@@ -1,0 +1,13 @@
+Name:Tasha, the Witch Queen
+ManaCost:3 U B
+Types:Legendary Planeswalker Tasha
+Loyalty:4
+T:Mode$ SpellCast | ValidCard$ Card.OppOwn | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell you don't own, create a 3/3 black Demon creature token.
+SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ b_3_3_demon
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ 1 | SubAbility$ DBExileForEach | SpellDescription$ Draw a card. For each opponent, exile up to one target instant or sorcery card from that player's graveyard and put a page counter on it.
+SVar:DBExileForEach:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Instant.OppCtrl,Sorcery.OppCtrl | TgtPrompt$ Choose up to one target instant or sorcery card in each opponent's graveyard | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SubAbility$ DBCounter | RememberChanged$ True
+SVar:DBCounter:DB$ PutCounter | CounterType$ PAGE | CounterNum$ 1 | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:OneEach:PlayerCountOpponents$Amount
+A:AB$ Play | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Ultimate$ True | Valid$ Card.counters_GE1_PAGE | ValidZone$ Exile | WithoutManaCost$ True | ValidSA$ Spell | Amount$ 1 | Controller$ You | Optional$ True | SpellDescription$ You may cast a spell from among cards in exile with page counters on them without paying its mana cost.
+Oracle:Whenever you cast a spell you don't own, create a 3/3 black Demon creature token.\n[+1]: Draw a card. For each opponent, exile up to one target instant or sorcery card from that player's graveyard and put a page counter on it.\n[-3]: You may cast a spell from among cards in exile with page counters on them without paying its mana cost.\nTasha, the Witch Queen can be your commander.
