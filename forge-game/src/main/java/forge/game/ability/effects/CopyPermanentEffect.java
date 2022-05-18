@@ -236,6 +236,10 @@ public class CopyPermanentEffect extends TokenEffectBase {
                     proto.addRemembered(p);
                     tokenTable.put(controller, proto, numCopies);
                 }
+            } else if (sa.hasParam("EachCreates")) {
+                for (Player p : AbilityUtils.getDefinedPlayers(host, sa.getParam("EachCreates"), sa)) {
+                    tokenTable.put(p, getProtoType(sa, c, p), numCopies);
+                }
             } else {
                 tokenTable.put(controller, getProtoType(sa, c, controller), numCopies);
             }
