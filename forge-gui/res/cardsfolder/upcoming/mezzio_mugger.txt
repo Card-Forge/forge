@@ -1,0 +1,14 @@
+Name:Mezzio Mugger
+ManaCost:4 R
+Types:Creature Viashino Rogue
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile the top card of each player's library. You may play those cards this turn, and you may spend mana as though it were mana of any color to cast those spells.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ Player | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ EffPlay | EffectOwner$ You | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:EffPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreType$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play those cards this turn, and you may spend mana as though it were mana of any color to cast those spells.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Blitz:2 R
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Sacrifice
+Oracle:Whenever Mezzio Mugger attacks, exile the top card of each player's library. You may play those cards this turn, and you may spend mana as though it were mana of any color to cast those spells.\nBlitz {2}{R} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)
+
