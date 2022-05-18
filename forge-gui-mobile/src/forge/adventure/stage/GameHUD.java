@@ -278,7 +278,7 @@ public class GameHUD extends Stage {
         return super.keyDown(keycode);
     }
     public void hideButtons() {
-        if (!buttonsVisible)
+        if (buttonsVisible)
             moveButtons();
     }
     public void moveButtons() {
