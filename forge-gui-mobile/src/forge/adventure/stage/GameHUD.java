@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -23,6 +24,7 @@ import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
+import forge.gui.FThreads;
 import forge.gui.GuiBase;
 
 /**
@@ -41,7 +43,8 @@ public class GameHUD extends Stage {
     private UIActor ui;
     private Touchpad touchpad;
     private Console console;
-    float TOUCHPAD_SCALE = 70f;
+    float TOUCHPAD_SCALE = 70f, referenceX;
+    boolean moveStarted = false, buttonsVisible = true;
 
     private GameHUD(GameStage gameStage) {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
@@ -59,6 +62,7 @@ public class GameHUD extends Stage {
         deckActor = ui.findActor("deck");
         deckActor.getLabel().setText(Forge.getLocalizer().getMessage("lblDeck"));
         menuActor = ui.findActor("menu");
+        referenceX = menuActor.getX();
         menuActor.getLabel().setText(Forge.getLocalizer().getMessage("lblMenu"));
         statsActor = ui.findActor("statistic");
         statsActor.getLabel().setText(Forge.getLocalizer().getMessage("lblStatus"));
@@ -269,17 +273,43 @@ public class GameHUD extends Stage {
             return true;
         }
         if (keycode == Input.Keys.BACK) {
-            menuActor.setVisible(!menuActor.isVisible());
-            statsActor.setVisible(!statsActor.isVisible());
-            inventoryActor.setVisible(!inventoryActor.isVisible());
-            deckActor.setVisible(!deckActor.isVisible());
+            moveButtons();
         }
         return super.keyDown(keycode);
     }
     public void hideButtons() {
-        menuActor.setVisible(false);
-        deckActor.setVisible(false);
-        inventoryActor.setVisible(false);
-        statsActor.setVisible(false);
+        if (!buttonsVisible)
+            moveButtons();
+    }
+    public void moveButtons() {
+        if (moveStarted)
+            return;
+        moveStarted = true;
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (menuActor.isVisible()) {
+                menuActor.addAction(Actions.sequence(Actions.delay(0.1f), Actions.moveTo(menuActor.getX()+menuActor.getWidth(), menuActor.getY(), 0.25f), Actions.hide()));
+            } else {
+                menuActor.addAction(Actions.sequence(Actions.delay(0.1f), Actions.show(), Actions.moveTo(referenceX, menuActor.getY(), 0.25f)));
+            }
+            if (statsActor.isVisible()) {
+                statsActor.addAction(Actions.sequence(Actions.delay(0.15f), Actions.moveTo(statsActor.getX()+statsActor.getWidth(), statsActor.getY(), 0.25f), Actions.hide()));
+            } else {
+                statsActor.addAction(Actions.sequence(Actions.delay(0.15f), Actions.show(), Actions.moveTo(referenceX, statsActor.getY(), 0.25f)));
+            }
+            if (inventoryActor.isVisible()) {
+                inventoryActor.addAction(Actions.sequence(Actions.delay(0.2f), Actions.moveTo(inventoryActor.getX()+inventoryActor.getWidth(), inventoryActor.getY(), 0.25f), Actions.hide()));
+            } else {
+                inventoryActor.addAction(Actions.sequence(Actions.delay(0.2f), Actions.show(), Actions.moveTo(referenceX, inventoryActor.getY(), 0.25f)));
+            }
+            if (deckActor.isVisible()) {
+                deckActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.moveTo(deckActor.getX()+deckActor.getWidth(), deckActor.getY(), 0.25f), Actions.hide()));
+            } else {
+                deckActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.show(), Actions.moveTo(referenceX, deckActor.getY(), 0.25f)));
+            }
+            FThreads.delayInEDT(500, () -> {
+                buttonsVisible = menuActor.getX() == referenceX;
+                moveStarted = false;
+            });
+        });
     }
 }
