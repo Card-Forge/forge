@@ -1188,7 +1188,11 @@ public class CardProperty {
         } else if (property.startsWith("dealtDamagetoAny")) {
             return card.getDamageHistory().getHasdealtDamagetoAny();
         } else if (property.startsWith("attackedThisTurn")) {
-            if (!card.getDamageHistory().getCreatureAttackedThisTurn()) {
+            if (card.getDamageHistory().getCreatureAttacksThisTurn() == 0) {
+                return false;
+            }
+        } else if (property.startsWith("attackedYouThisTurn")) {
+            if (!card.getDamageHistory().hasAttackedThisTurn(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("attackedLastTurn")) {
@@ -1210,7 +1214,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("notAttackedThisTurn")) {
-            if (card.getDamageHistory().getCreatureAttackedThisTurn()) {
+            if (card.getDamageHistory().getCreatureAttacksThisTurn() > 0) {
                 return false;
             }
         } else if (property.startsWith("notAttackedLastTurn")) {
