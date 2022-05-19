@@ -450,17 +450,31 @@ public class DeckgenUtil {
         }
         //limit selection to three
         if (!selection.isEmpty() && selection.size() < 4) {
-            //has all colors
-            if (isTheme) {
-                allDecks = DeckProxy.getAllThemeDecks().parallelStream()
-                        .filter(deckProxy -> deckProxy.getMainSize() <= 60)
-                        .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor()))
-                        .collect(Collectors.toList());
+            //monocolor
+            if (selection.size() == 1) {
+                if (isTheme) {
+                    allDecks = DeckProxy.getAllThemeDecks().parallelStream()
+                            .filter(deckProxy -> deckProxy.getMainSize() <= 60)
+                            .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasExactlyColor(ColorSet.fromNames(selection).getColor()))
+                            .collect(Collectors.toList());
+                } else {
+                    allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
+                            .filter(deckProxy -> deckProxy.getMainSize() <= 60)
+                            .filter(deckProxy -> deckProxy.getColor() != null &&  deckProxy.getColor().hasExactlyColor(ColorSet.fromNames(selection).getColor()))
+                            .collect(Collectors.toList());
+                }
             } else {
-                allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
-                        .filter(deckProxy -> deckProxy.getMainSize() <= 60)
-                        .filter(deckProxy -> deckProxy.getColor() != null &&  deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor()))
-                        .collect(Collectors.toList());
+                if (isTheme) {
+                    allDecks = DeckProxy.getAllThemeDecks().parallelStream()
+                            .filter(deckProxy -> deckProxy.getMainSize() <= 60)
+                            .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor()))
+                            .collect(Collectors.toList());
+                } else {
+                    allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
+                            .filter(deckProxy -> deckProxy.getMainSize() <= 60)
+                            .filter(deckProxy -> deckProxy.getColor() != null &&  deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor()))
+                            .collect(Collectors.toList());
+                }
             }
         } else {
             //no specific colors
