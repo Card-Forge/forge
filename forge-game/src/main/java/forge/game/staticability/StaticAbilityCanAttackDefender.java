@@ -20,12 +20,31 @@ package forge.game.staticability;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.card.Card;
+import forge.game.zone.ZoneType;
 
 /**
  * The Class StaticAbility_CanAttackDefender.
  *  - used to allow cards with Defender keyword to attack normally
  */
 public class StaticAbilityCanAttackDefender {
+
+    static String MODE = "CanAttackDefender";
+
+    public static boolean canAttack(final Card card, final GameEntity target) {
+        // CanAttack static abilities
+        for (final Card ca : target.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+
+                if (applyCanAttackAbility(stAb, card, target)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     public static boolean applyCanAttackAbility(final StaticAbility stAb, final Card card, final GameEntity target) {
         final Card hostCard = stAb.getHostCard();
