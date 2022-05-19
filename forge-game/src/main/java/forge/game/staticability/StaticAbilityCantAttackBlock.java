@@ -67,10 +67,6 @@ public class StaticAbilityCantAttackBlock {
             if (StaticAbilityCanAttackDefender.canAttack(card, target)) {
                 return false;
             }
-            //TODO goal is to remove the next three lines
-            if (card.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
-                return false;
-            }
         }
 
         final Player defender = target instanceof Card ? ((Card) target).getController() : (Player) target;
