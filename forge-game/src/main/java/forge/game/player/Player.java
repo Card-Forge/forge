@@ -204,6 +204,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Table<Long, Long, KeywordsChange> changedKeywords = TreeBasedTable.create();
     private ManaPool manaPool = new ManaPool(this);
     private List<Card> creatureAttackedThisTurn = new ArrayList<>();
+    private List<Player> attackedPlayersThisTurn = new ArrayList<>();
+    private List <Player> attackedPlayersLastTurn = new ArrayList<>();
     private boolean activateLoyaltyAbilityThisTurn = false;
     private boolean tappedLandForManaThisTurn = false;
     private List<Card> completedDungeons = new ArrayList<>();
@@ -1882,6 +1884,25 @@ public class Player extends GameEntity implements Comparable<Player> {
         creatureAttackedThisTurn.clear();
     }
 
+    public final void addAttackedPlayersMyTurn(final Player p) {
+        if (!attackedPlayersThisTurn.contains(p)) {
+            attackedPlayersThisTurn.add(p);
+        }
+    }
+    public final List<Player> getAttackedPlayersMyTurn() {
+        return attackedPlayersThisTurn;
+    }
+    public final List<Player> getAttackedPlayersMyLastTurn() {
+        return attackedPlayersLastTurn;
+    }
+    public final void clearAttackedPlayersMyTurn() {
+        attackedPlayersThisTurn.clear();
+    }
+    public final void setAttackedPlayersMyLastTurn(List<Player> players) {
+        attackedPlayersLastTurn.clear();
+        attackedPlayersLastTurn.addAll(players);
+    }
+
     public final int getVenturedThisTurn() {
         return venturedThisTurn;
     }
@@ -2436,6 +2457,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // set last turn nr
         if (game.getPhaseHandler().isPlayerTurn(this)) {
+            setAttackedPlayersMyLastTurn(attackedPlayersThisTurn);
+            clearAttackedPlayersMyTurn();
             this.lastTurnNr = game.getPhaseHandler().getTurn();
         }
     }
