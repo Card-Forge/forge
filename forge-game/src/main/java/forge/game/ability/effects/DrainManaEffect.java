@@ -36,9 +36,7 @@ public class DrainManaEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("DrainMana")) {
-            for (Mana mana : drained) {
-                sa.getActivatingPlayer().getManaPool().addMana(mana);
-            }
+            sa.getActivatingPlayer().getManaPool().add(drained);
         }
         if (sa.hasParam("RememberDrainedMana")) {
             sa.getHostCard().addRemembered(Integer.valueOf(drained.size()));
