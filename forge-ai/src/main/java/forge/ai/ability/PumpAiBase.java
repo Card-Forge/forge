@@ -399,10 +399,6 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     && newPower > 0
                     && !CardLists.getType(opp.getLandsInPlay(), "Forest").isEmpty()
                     && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));
-        } else if (keyword.endsWith("CARDNAME can attack as though it didn't have defender.")) {
-            return ph.isPlayerTurn(ai) && card.hasKeyword(Keyword.DEFENDER)
-                    && !ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN)
-                    && !card.isTapped() && newPower > 0;
         } else if (keyword.equals("Prevent all combat damage that would be dealt to CARDNAME.")) {
             return combat != null && (combat.isBlocking(card) || combat.isBlocked(card));
         } else if (keyword.equals("Menace")) {
