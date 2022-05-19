@@ -53,6 +53,9 @@ public class ConniveEffect extends SpellAbilityEffect {
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
 
         CardCollectionView toConnive = getTargetCards(sa);
+        if (toConnive.isEmpty()) { // if nothing is conniving, we're done
+            return;
+        }
         final Player p = toConnive.getFirst().getController(); // currently all connivers will have the same controller
         final int n = toConnive.size();
         if (n > 1) {
