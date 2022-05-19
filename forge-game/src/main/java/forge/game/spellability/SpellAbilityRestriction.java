@@ -330,7 +330,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.getFirstCombatOnly()) {
-            if (game.getPhaseHandler().getNumCombat() > 1) {
+            if (game.getPhaseHandler().getNumCombat() > (game.getPhaseHandler().inCombat() ? 1 : 0)) {
                 return false;
             }
         }

@@ -431,6 +431,7 @@ public class PhaseHandler implements java.io.Serializable {
                     }
 
                     nUpkeepsThisTurn = 0;
+                    nCombatsThisTurn = 0;
                     nMain2sThisTurn = 0;
                     game.getStack().resetMaxDistinctSources();
 
@@ -479,10 +480,6 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         switch (phase) {
-            case UNTAP:
-                nCombatsThisTurn = 0;
-                break;
-
             case UPKEEP:
                 for (Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
                     c.getDamageHistory().setNotAttackedSinceLastUpkeepOf(playerTurn);
