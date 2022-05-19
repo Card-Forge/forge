@@ -8,8 +8,8 @@ SVar:ChooseEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBCho
 SVar:DBChoice:DB$ GenericChoice | Defined$ Player.IsRemembered | Choices$ WarChoice,PeaceChoice
 SVar:WarChoice:DB$ Pump | Defined$ Player.IsRemembered | NoteCards$ Self | NoteCardsFor$ Strife | SpellDescription$ War
 SVar:PeaceChoice:DB$ Pump | Defined$ Player.IsRemembered | ClearNotedCardsFor$ Strife | SpellDescription$ Peace
-SVar:DBRemember:DB$ Pump | RememberObjects$ Player.NotedForStrife
+SVar:DBRemember:DB$ Pump | RememberObjects$ Player.NotedForStrife | ImprintCards$ Self
 S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Creature.ControlledBy Remembered | AddPower$ 3 | Description$ Creatures controlled by players who chose war get +3/+0.
-S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Creature.!ControlledBy Remembered | AddToughness$ 3 | Description$ Creatures controlled by players who chose peace get +0/+3.
+S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Creature.!ControlledBy Remembered | AddToughness$ 3 | IsPresent$ Card.IsImprinted | Description$ Creatures controlled by players who chose peace get +0/+3.
 AI:RemoveDeck:Random
 Oracle:Flying\nAs Archangel of Strife enters the battlefield, each player chooses war or peace.\nCreatures controlled by players who chose war get +3/+0.\nCreatures controlled by players who chose peace get +0/+3.
