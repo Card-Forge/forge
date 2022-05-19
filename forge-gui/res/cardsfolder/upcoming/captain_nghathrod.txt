@@ -1,0 +1,14 @@
+Name:Captain N'ghathrod
+ManaCost:3 U B
+Types:Legendary Creature Horror Pirate
+PT:3/6
+S:Mode$ Continuous | Affected$ Card.Horror+YouCtrl | AddKeyword$ Menace | Description$ Horrors you control have menace. (They can't be blocked except by two or more creatures.)
+T:Mode$ DamageDone | ValidSource$ Card.Horror+YouCtrl | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Horror you control deals combat damage to a player, that player mills that many cards.
+SVar:TrigMill:DB$ Mill | Defined$ TriggeredTarget | NumCards$ X
+SVar:X:TriggerCount$DamageAmount
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ At the beginning of your end step, choose target artifact or creature card in an opponent's graveyard that was put there from their library this turn. Put it onto the battlefield under your control.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Artifact.OppOwn+ThisTurnEnteredFrom_Library,Creature.OppOwn+ThisTurnEnteredFrom_Library | TgtPrompt$ Choose target artifact or creature card in an opponent's graveyard that was put there from their library this turn | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True
+SVar:PlayMain1:TRUE
+DeckHints:Type$Horror
+DeckHas:Ability$Mill
+Oracle:Horrors you control have menace.\nWhenever a Horror you control deals combat damage to a player, that player mills that many cards.\nAt the beginning of your end step, choose target artifact or creature card in an opponent's graveyard that was put there from their library this turn. Put it onto the battlefield under your control.

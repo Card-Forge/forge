@@ -1,0 +1,17 @@
+Name:Sea Hag
+ManaCost:4 U
+Types:Creature Hag
+PT:3/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME enters the battlefield, creatures your opponents control get -4/-0 until end of turn.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.OppCtrl | NumAtt$ -4 | IsCurse$ True
+AlternateMode:Adventure
+Oracle:When Sea Hag enters the battlefield, creatures your opponents control get -4/-0 until end of turn.
+
+ALTERNATE
+
+Name:Aquatic Ingress
+ManaCost:2 U
+Types:Instant Adventure
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | NumAtt$ 1 | KW$ HIDDEN Unblockable | SpellDescription$ Up to two target creatures each get +1/+0 until end of turn and can't be blocked this turn.
+SVar:PlayMain1:TRUE
+Oracle:Up to two target creatures each get +1/+0 until end of turn and can't be blocked this turn. (Then exile this card. You may cast the creature later from exile.)
