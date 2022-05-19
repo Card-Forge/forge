@@ -4,5 +4,6 @@ Types:Creature Gargoyle
 PT:3/4
 K:Defender
 K:Flying
-A:AB$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl+withDefender | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | SpellDescription$ Creatures you control with defender can attack this turn as though they didn't have defender.
+A:AB$ Effect | Cost$ 1 W | StaticAbilities$ CanAttack | SpellDescription$ Creatures you control with defender can attack this turn as though they didn't have defender.
+SVar:CanAttack:Mode$ CanAttackDefender | ValidCards$ Creature.YouCtrl+withDefender | Description$ Creatures you control with defender can attack this turn as though they didn't have defender.
 Oracle:Defender, flying\n{1}{W}: Creatures you control with defender can attack this turn as though they didn't have defender.

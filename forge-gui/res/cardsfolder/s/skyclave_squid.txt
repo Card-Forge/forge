@@ -3,7 +3,8 @@ ManaCost:1 U
 Types:Creature Squid
 PT:3/2
 K:Defender
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, CARDNAME can attack as though it didn't have defender.
-SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, CARDNAME can attack this turn as though it didn't have defender.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ CanAttack
+SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE can attack this turn as though it didn't have defender.
 SVar:BuffedBy:Land
 Oracle:Defender\nLandfall — Whenever a land enters the battlefield under your control, Skyclave Squid can attack this turn as though it didn't have defender.
