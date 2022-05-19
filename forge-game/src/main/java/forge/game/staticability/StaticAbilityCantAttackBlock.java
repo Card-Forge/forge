@@ -52,6 +52,7 @@ public class StaticAbilityCantAttackBlock {
      */
     public static boolean applyCantAttackAbility(final StaticAbility stAb, final Card card, final GameEntity target) {
         final Card hostCard = stAb.getHostCard();
+        final Game game = hostCard.getGame();
 
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
@@ -62,6 +63,15 @@ public class StaticAbilityCantAttackBlock {
         }
 
         if (stAb.hasParam("DefenderKeyword")) {
+            //return false if something allows it to attack normally
+            for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+                for (final StaticAbility defStAb : ca.getStaticAbilities()) {
+                    if (defStAb.applyAbility("CanAttackDefender", card, target)) {
+                        return false;
+                    }
+                }
+            }
+            //TODO goal is to remove the next three lines
             if (card.hasKeyword("CARDNAME can attack as though it didn't have defender.")) {
                 return false;
             }
@@ -85,7 +95,7 @@ public class StaticAbilityCantAttackBlock {
         }
         if (stAb.hasParam("DefenderNotNearestToYouInChosenDirection")
                 && (hostCard.getChosenDirection() == null
-                || defender.equals(hostCard.getGame().getNextPlayerAfter(card.getController(), hostCard.getChosenDirection())))) {
+                || defender.equals(game.getNextPlayerAfter(card.getController(), hostCard.getChosenDirection())))) {
             return false;
         }
         if (stAb.hasParam("UnlessDefender")) {
