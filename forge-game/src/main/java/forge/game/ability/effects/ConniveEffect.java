@@ -15,6 +15,7 @@ import forge.util.Lang;
 import forge.util.Localizer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -45,62 +46,81 @@ public class ConniveEffect extends SpellAbilityEffect {
         final Game game = host.getGame();
         final int num = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("ConniveNum", "1"), sa);
 
-        GameEntityCounterTable table = new GameEntityCounterTable();
-        final CardZoneTable triggerList = new CardZoneTable();
-        List<Card> allToDiscard = new ArrayList<>();
-        Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
-        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-        moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
-        moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
-
         CardCollection toConnive = getTargetCards(sa);
         if (toConnive.isEmpty()) { // if nothing is conniving, we're done
             return;
         }
-        final Player p = toConnive.getFirst().getController(); // currently all connivers will have the same controller
-        while (toConnive.size() > 0) {
-            Card conniver = toConnive.size() > 1 ? p.getController().chooseSingleEntityForEffect(toConnive, sa,
-                    Localizer.getInstance().getMessage("lblChooseConniver"), null) : toConnive.get(0);
 
-            p.drawCards(num, sa, moveParams);
-
-            CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
-            dPHand = CardLists.filter(dPHand, CardPredicates.Presets.NON_TOKEN);
-            if (dPHand.isEmpty() || !p.canDiscardBy(sa, true)) { // hand being empty unlikely, but just to be safe
-                continue;
+        List<Player> controllers = new ArrayList<>();
+        for (Card c : toConnive) {
+            final Player controller = c.getController();
+            if (!controllers.contains(controller)) {
+                controllers.add(controller);
             }
-
-            CardCollection validCards = CardLists.getValidCards(dPHand, "Card", p, host, sa);
-            validCards.removeAll(allToDiscard); //don't allow cards already chosen for discard by other connivers
-
-            int amt = Math.min(validCards.size(), num);
-            CardCollectionView toBeDiscarded = amt == 0 ? CardCollection.EMPTY :
-                    p.getController().chooseCardsToDiscardFrom(p, sa, validCards, amt, amt);
-
-            if (toBeDiscarded.size() > 1) {
-                toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
-            }
-
-            for (Card disc : toBeDiscarded) {
-                allToDiscard.add(disc);
-            }
-
-            int numCntrs = CardLists.getValidCardCount(toBeDiscarded, "Card.nonLand", p, host, sa);
-
-            // need to get newest game state to check if it is still on the battlefield and the timestamp didn't change
-            Card gamec = game.getCardState(conniver);
-            // if the card is not in the game anymore, this might still return true, but it's no problem
-            if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(conniver)) {
-                conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, table);
-            }
-            toConnive.remove(conniver);
+        }
+        //order controllers by APNAP
+        int indexAP = controllers.indexOf(game.getPhaseHandler().getPlayerTurn());
+        if (indexAP != -1) {
+            Collections.rotate(controllers, - indexAP);
         }
 
-        if (allToDiscard.size() > 0) {
-            discardedMap.put(p, CardCollection.getView(allToDiscard));
-            discard(sa, triggerList, true, discardedMap, moveParams);
-            table.replaceCounterEffect(game, sa, true);
-            triggerList.triggerChangesZoneAll(game, sa);
+        for (final Player p : controllers) {
+            GameEntityCounterTable table = new GameEntityCounterTable();
+            final CardZoneTable triggerList = new CardZoneTable();
+            List<Card> allToDiscard = new ArrayList<>();
+            Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
+            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+            moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+            moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
+            CardCollection connivers = new CardCollection();
+            for (Card c : toConnive) {
+                if (c.getController() == p) {
+                    connivers.add(c);
+                }
+            }
+            while (connivers.size() > 0) {
+                Card conniver = connivers.size() > 1 ? p.getController().chooseSingleEntityForEffect(connivers, sa,
+                        Localizer.getInstance().getMessage("lblChooseConniver"), null) : toConnive.get(0);
+
+                p.drawCards(num, sa, moveParams);
+
+                CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
+                dPHand = CardLists.filter(dPHand, CardPredicates.Presets.NON_TOKEN);
+                if (dPHand.isEmpty() || !p.canDiscardBy(sa, true)) { // hand being empty unlikely, but just to be safe
+                    continue;
+                }
+
+                CardCollection validCards = CardLists.getValidCards(dPHand, "Card", p, host, sa);
+                validCards.removeAll(allToDiscard); //don't allow cards already chosen for discard by other connivers
+
+                int amt = Math.min(validCards.size(), num);
+                CardCollectionView toBeDiscarded = amt == 0 ? CardCollection.EMPTY :
+                        p.getController().chooseCardsToDiscardFrom(p, sa, validCards, amt, amt);
+
+                if (toBeDiscarded.size() > 1) {
+                    toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
+                }
+
+                for (Card disc : toBeDiscarded) {
+                    allToDiscard.add(disc);
+                }
+
+                int numCntrs = CardLists.getValidCardCount(toBeDiscarded, "Card.nonLand", p, host, sa);
+
+                // need to get newest game state to check if it is still on the battlefield and the timestamp didn't change
+                Card gamec = game.getCardState(conniver);
+                // if the card is not in the game anymore, this might still return true, but it's no problem
+                if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(conniver)) {
+                    conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, table);
+                }
+                connivers.remove(conniver);
+            }
+            if (allToDiscard.size() > 0) {
+                discardedMap.put(p, CardCollection.getView(allToDiscard));
+                discard(sa, triggerList, true, discardedMap, moveParams);
+                table.replaceCounterEffect(game, sa, true);
+                triggerList.triggerChangesZoneAll(game, sa);
+            }
         }
     }
 }
