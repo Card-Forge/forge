@@ -5,7 +5,7 @@ PT:6/6
 K:Flying
 K:ETBReplacement:Other:ChooseEach
 SVar:ChooseEach:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoice | SubAbility$ DBRemember | ClearRememberedBeforeLoop$ True | SpellDescription$ As CARDNAME enters the battlefield, each player chooses war or peace. Creatures controlled by players who chose war get +3/+0. Creatures controlled by players who chose peace get +0/+3.
-SVar:DBChoice:DB$ GenericChoice | Defined$ Player.IsRemembered | Choices$ WarChoice,PeaceChoice
+SVar:DBChoice:DB$ GenericChoice | Defined$ Player.IsRemembered | Choices$ WarChoice,PeaceChoice | ShowChoice$ ExceptSelf
 SVar:WarChoice:DB$ Pump | Defined$ Player.IsRemembered | NoteCards$ Self | NoteCardsFor$ Strife | SpellDescription$ War
 SVar:PeaceChoice:DB$ Pump | Defined$ Player.IsRemembered | ClearNotedCardsFor$ Strife | SpellDescription$ Peace
 SVar:DBRemember:DB$ Pump | RememberObjects$ Player.NotedForStrife | ImprintCards$ Self
