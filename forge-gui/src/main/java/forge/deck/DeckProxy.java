@@ -12,6 +12,7 @@ import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestEvent;
+import forge.gamemodes.quest.QuestEventDifficulty;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.item.PreconDeck;
@@ -557,6 +558,21 @@ public class DeckProxy implements InventoryItem {
             decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
         }
         for (final QuestEvent e : quest.getChallenges()) {
+            decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
+        }
+        return decks;
+    }
+
+    public static List<DeckProxy> getNonEasyQuestDuelDecks() {
+        final List<DeckProxy> decks = new ArrayList<>();
+        final QuestController quest = FModel.getQuest();
+        for (final QuestEvent e : quest.getDuelsManager().getDuels(QuestEventDifficulty.MEDIUM)) {
+            decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
+        }
+        for (final QuestEvent e : quest.getDuelsManager().getDuels(QuestEventDifficulty.HARD)) {
+            decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
+        }
+        for (final QuestEvent e : quest.getDuelsManager().getDuels(QuestEventDifficulty.EXPERT)) {
             decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
         }
         return decks;
