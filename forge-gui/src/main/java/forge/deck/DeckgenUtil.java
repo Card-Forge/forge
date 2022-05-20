@@ -454,9 +454,15 @@ public class DeckgenUtil {
             //monocolor
             if (selection.size() == 1) {
                 if (isTheme) {
-                    allDecks = DeckProxy.getAllThemeDecks().parallelStream()
+                    //duels and theme
+                    allDecks = Stream.concat(DeckProxy.getAllThemeDecks().parallelStream()
                             .filter(deckProxy -> deckProxy.getMainSize() <= 60)
-                            .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().isMonoColor() && deckProxy.getColor().hasExactlyColor(ColorSet.fromNames(selection).getColor()))
+                            .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().isMonoColor()
+                                    && deckProxy.getColor().hasExactlyColor(ColorSet.fromNames(selection).getColor())),
+                            DeckProxy.getNonEasyQuestDuelDecks().parallelStream()
+                                    .filter(deckProxy -> deckProxy.getMainSize() <= 60)
+                                    .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().isMonoColor()
+                                     && deckProxy.getColor().hasExactlyColor(ColorSet.fromNames(selection).getColor())))
                             .collect(Collectors.toList());
                 } else {
                     allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
@@ -466,11 +472,11 @@ public class DeckgenUtil {
                 }
             } else {
                 if (isTheme) {
-                    //include both theme and precons
+                    //duels and theme
                     allDecks = Stream.concat(DeckProxy.getAllThemeDecks().parallelStream()
                             .filter(deckProxy -> deckProxy.getMainSize() <= 60)
                             .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor())),
-                            DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
+                            DeckProxy.getNonEasyQuestDuelDecks().parallelStream()
                                     .filter(deckProxy -> deckProxy.getMainSize() <= 60)
                                     .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor())))
                             .collect(Collectors.toList());
@@ -484,10 +490,10 @@ public class DeckgenUtil {
         } else {
             //no specific colors
             if (isTheme) {
-                //include both theme and precons
+                //duels and theme
                 allDecks = Stream.concat(DeckProxy.getAllThemeDecks().parallelStream()
                         .filter(deckProxy -> deckProxy.getMainSize() <= 60),
-                        DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
+                        DeckProxy.getNonEasyQuestDuelDecks().parallelStream()
                                 .filter(deckProxy -> deckProxy.getMainSize() <= 60))
                         .collect(Collectors.toList());
             } else {
