@@ -1,0 +1,8 @@
+Name:Prosperous Partnership
+ManaCost:1 R W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 1/1 green and white Citizen creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ gw_1_1_citizen
+A:AB$ Token | Cost$ tapXType<3/Creature> | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token.
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Citizen|Treasure
+Oracle:When Prosperous Partnership enters the battlefield, create two 1/1 green and white Citizen creature tokens.\nTap three untapped creatures you control: Create a Treasure token.
