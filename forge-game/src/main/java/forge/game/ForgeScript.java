@@ -10,6 +10,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardState;
 import forge.game.cost.Cost;
+import forge.game.mana.Mana;
 import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -197,6 +198,19 @@ public class ForgeScript {
             return sa.hasParam("Nightbound");
         } else if (property.equals("paidPhyrexianMana")) {
             return sa.getSpendPhyrexianMana();
+        } else if (property.startsWith("ManaFrom")) {
+            final String fromWhat = property.substring(8);
+            boolean found = false;
+            for (Mana m : sa.getPayingMana()) {
+                final Card manaSource = m.getSourceCard();
+                if (manaSource != null) {
+                    if (manaSource.isValid(fromWhat, sourceController, source, spellAbility)) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            return found;
         } else if (property.equals("MayPlaySource")) {
             StaticAbility m = sa.getMayPlay();
             if (m == null) {
