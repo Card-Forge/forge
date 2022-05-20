@@ -268,7 +268,7 @@ public class CombatUtil {
         }
 
         return true;
-    } // canAttack(Card, GameEntity)
+    }
 
     public static boolean isAttackerSick(final Card attacker, final GameEntity defender) {
         final Game game = attacker.getGame();
@@ -383,6 +383,8 @@ public class CombatUtil {
      *            a {@link forge.game.card.Card} object.
      */
     public static void checkDeclaredAttacker(final Game game, final Card c, final Combat combat, boolean triggers) {
+        GameEntity defender = combat.getDefenderByAttacker(c);
+
         // Run triggers
         if (triggers) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -390,7 +392,7 @@ public class CombatUtil {
             final List<Card> otherAttackers = combat.getAttackers();
             otherAttackers.remove(c);
             runParams.put(AbilityKey.OtherAttackers, otherAttackers);
-            runParams.put(AbilityKey.Attacked, combat.getDefenderByAttacker(c));
+            runParams.put(AbilityKey.Attacked, defender);
             runParams.put(AbilityKey.DefendingPlayer, combat.getDefenderPlayerByAttacker(c));
             // only add defenders that were attacked
             final FCollection<GameEntity> defenders = new FCollection<>();
@@ -403,9 +405,12 @@ public class CombatUtil {
             game.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
         }
 
-        c.getDamageHistory().setCreatureAttackedThisCombat(true);
+        c.getDamageHistory().setCreatureAttackedThisCombat(defender);
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
         c.getController().addCreaturesAttackedThisTurn(CardUtil.getLKICopy(c));
+        if (combat.getDefenderByAttacker(c) instanceof Player) {
+            c.getController().addAttackedPlayersMyTurn(combat.getDefenderPlayerByAttacker(c));
+        }
     }
 
     /**
@@ -1158,7 +1163,7 @@ public class CombatUtil {
         }
 
         return true;
-    } // canBlock()
+    }
 
     public static boolean canAttackerBeBlockedWithAmount(Card attacker, int amount, Combat combat) {
         return canAttackerBeBlockedWithAmount(attacker, amount, combat != null ? combat.getDefenderPlayerByAttacker(attacker) : null);

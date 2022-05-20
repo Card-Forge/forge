@@ -46,6 +46,7 @@ import forge.game.combat.GlobalAttackRestrictions;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
 import forge.game.trigger.Trigger;
@@ -71,7 +72,7 @@ public class AiAttackController {
 
     // possible attackers and blockers
     private List<Card> attackers;
-    private final List<Card> blockers;
+    private List<Card> blockers;
 
     private List<Card> oppList; // holds human player creatures
     private List<Card> myList; // holds computer creatures
@@ -95,11 +96,9 @@ public class AiAttackController {
     public AiAttackController(final Player ai, boolean nextTurn) {
         this.ai = ai;
         defendingOpponent = choosePreferredDefenderPlayer(ai);
-        this.oppList = getOpponentCreatures(defendingOpponent);
         myList = ai.getCreaturesInPlay();
         this.nextTurn = nextTurn;
-        refreshAttackers(defendingOpponent);
-        this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
+        refreshCombatants(defendingOpponent);
     } // overloaded constructor to evaluate attackers that should attack next turn
 
     public AiAttackController(final Player ai, Card attacker) {
@@ -115,13 +114,15 @@ public class AiAttackController {
         this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
     } // overloaded constructor to evaluate single specified attacker
 
-    private void refreshAttackers(GameEntity defender) {
+    private void refreshCombatants(GameEntity defender) {
+        this.oppList = getOpponentCreatures(defendingOpponent);
         this.attackers = new ArrayList<>();
         for (Card c : myList) {
             if (canAttackWrapper(c, defender)) {
                 attackers.add(c);
             }
         }
+        this.blockers = getPossibleBlockers(oppList, this.attackers, this.nextTurn);
     }
 
     public static List<Card> getOpponentCreatures(final Player defender) {
@@ -149,6 +150,7 @@ public class AiAttackController {
 
     public void removeBlocker(Card blocker) {
     	this.oppList.remove(blocker);
+        this.blockers.remove(blocker);
     }
 
     private boolean canAttackWrapper(final Card attacker, final GameEntity defender) {
@@ -166,10 +168,14 @@ public class AiAttackController {
     public static Player choosePreferredDefenderPlayer(Player ai) {
         Player defender = ai.getWeakestOpponent(); //Concentrate on opponent within easy kill range
 
-        // TODO connect with evaluateBoardPosition and only fall back to random when no player is the biggest threat by a fair margin
+        // TODO for multiplayer combat avoid players with cantLose or (if not playing infect) cantLoseForZeroOrLessLife and !canLoseLife
 
-        if (defender.getLife() > 8) { //Otherwise choose a random opponent to ensure no ganging up on players
+        if (defender.getLife() > 8) {
+            // TODO connect with evaluateBoardPosition and only fall back to random when no player is the biggest threat by a fair margin
+
             // TODO should we cache the random for each turn? some functions like shouldPumpCard base their decisions on the assumption who will be attacked
+
+            //Otherwise choose a random opponent to ensure no ganging up on players
             return Aggregates.random(ai.getOpponents());
         }
         return defender;
@@ -708,12 +714,24 @@ public class AiAttackController {
      * @return a {@link forge.game.combat.Combat} object.
      */
     public final int declareAttackers(final Combat combat) {
+        // something prevents attacking, try another
+        if (this.attackers.isEmpty() && ai.getOpponents().size() > 1) {
+            final PlayerCollection opps = ai.getOpponents();
+            opps.remove(defendingOpponent);
+            defendingOpponent = Aggregates.random(opps);
+            refreshCombatants(defendingOpponent);
+        }
+
         final boolean bAssault = doAssault();
 
         // Determine who will be attacked
         GameEntity defender = chooseDefender(combat, bAssault);
+
+        // decided to attack another defender so related lists need to be updated
+        // (though usually rather try to avoid this situation for performance reasons)
         if (defender != defendingOpponent) {
-            refreshAttackers(defender);
+            defendingOpponent = defender instanceof Player ? (Player) defender : ((Card)defender).getController();
+            refreshCombatants(defender);
         }
         if (this.attackers.isEmpty()) {
             return aiAggression;
@@ -910,8 +928,6 @@ public class AiAttackController {
         final List<Card> nextTurnAttackers = new ArrayList<>();
         int candidateCounterAttackDamage = 0;
 
-        final Player opp = defender instanceof Player ? (Player) defender : ((Card)defender).getController();
-        this.oppList = getOpponentCreatures(opp);
         // get the potential damage and strength of the AI forces
         final List<Card> candidateAttackers = new ArrayList<>();
         int candidateUnblockedDamage = 0;
@@ -920,7 +936,7 @@ public class AiAttackController {
             // turn, assume summoning sickness creatures will be able to
             if (ComputerUtilCombat.canAttackNextTurn(pCard) && pCard.getNetCombatDamage() > 0) {
                 candidateAttackers.add(pCard);
-                candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, opp, null, false);
+                candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, defendingOpponent, null, false);
                 computerForces++;
             }
         }
@@ -962,7 +978,7 @@ public class AiAttackController {
         // find the potential damage ratio the AI can cause
         double humanLifeToDamageRatio = 1000000;
         if (candidateUnblockedDamage > 0) {
-            humanLifeToDamageRatio = (double) (opp.getLife() - ComputerUtil.possibleNonCombatDamage(ai, opp)) / candidateUnblockedDamage;
+            humanLifeToDamageRatio = (double) (defendingOpponent.getLife() - ComputerUtil.possibleNonCombatDamage(ai, defendingOpponent)) / candidateUnblockedDamage;
         }
 
         // determine if the ai outnumbers the player
@@ -987,7 +1003,7 @@ public class AiAttackController {
         // get list of attackers ordered from low power to high
         CardLists.sortByPowerAsc(this.attackers);
         // get player life total
-        int humanLife = opp.getLife();
+        int humanLife = defendingOpponent.getLife();
         // get the list of attackers up to the first blocked one
         final List<Card> attritionalAttackers = new ArrayList<>();
         for (int x = 0; x < (this.attackers.size() - humanForces); x++) {
@@ -1037,7 +1053,7 @@ public class AiAttackController {
                 }
             }
             if (isUnblockableCreature) {
-                unblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat, false);
+                unblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, defendingOpponent, combat, false);
             }
         }
         for (final Card attacker : nextTurnAttackers) {
@@ -1051,13 +1067,13 @@ public class AiAttackController {
                 }
             }
             if (isUnblockableCreature) {
-                nextUnblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, opp, null, false);
+                nextUnblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, defendingOpponent, null, false);
             }
         }
-        if (unblockableDamage > 0 && !opp.cantLoseForZeroOrLessLife() && opp.canLoseLife()) {
-            turnsUntilDeathByUnblockable = 1 + (opp.getLife() - unblockableDamage) / nextUnblockableDamage;
+        if (unblockableDamage > 0 && !defendingOpponent.cantLoseForZeroOrLessLife() && defendingOpponent.canLoseLife()) {
+            turnsUntilDeathByUnblockable = 1 + (defendingOpponent.getLife() - unblockableDamage) / nextUnblockableDamage;
         }
-        if (opp.canLoseLife()) {
+        if (defendingOpponent.canLoseLife()) {
             doUnblockableAttack = true;
         }
         // *****************
@@ -1114,8 +1130,8 @@ public class AiAttackController {
         if ( LOG_AI_ATTACKS )
             System.out.println("attackersLeft = " + attackersLeft);
 
-        FCollection<GameEntity> possibleDefenders = new FCollection<>(opp);
-        possibleDefenders.addAll(opp.getPlaneswalkersInPlay());
+        FCollection<GameEntity> possibleDefenders = new FCollection<>(defendingOpponent);
+        possibleDefenders.addAll(defendingOpponent.getPlaneswalkersInPlay());
 
         while (!attackersLeft.isEmpty()) {
             CardCollection attackersAssigned = new CardCollection();
@@ -1164,7 +1180,7 @@ public class AiAttackController {
             if (pwDefending.isEmpty()) {
                 // TODO for now only looks at same player as we'd have to check the others from start too
                 //defender = new PlayerCollection(Iterables.filter(possibleDefenders, Player.class)).min(PlayerPredicates.compareByLife());
-                defender = opp;
+                defender = defendingOpponent;
             } else {
                 final Card pwNearUlti = ComputerUtilCard.getBestPlaneswalkerToDamage(pwDefending);
                 defender = pwNearUlti != null ? pwNearUlti : ComputerUtilCard.getBestPlaneswalkerAI(pwDefending);

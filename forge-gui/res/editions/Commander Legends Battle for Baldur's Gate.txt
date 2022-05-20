@@ -6,30 +6,199 @@ Type=Draft
 ScryfallCode=CLB
 
 [cards]
+1 C Faceless One @Gaboleps
+2 U Abdel Adrian, Gorion's Ward @Karl Kopinski
+6 C Astral Confrontation @Ben Hill
+7 C Bane's Invoker @Joe Slucher
+9 M Battle Angels of Tyr @Fajareka Setiawan
+16 U Ellyn Harbreeze, Busybody @Dan Scott
+29 R Lae'zel, Vlaakith's Champion @John Stanko
+32 U Lulu, Loyal Hollyphant @Jakob Eirich
+35 R Noble Heritage @Dallas Williams
+40 C Roving Harper @Anastasia Ovchinnikova
+49 R White Plume Adventurer @Joseph Weston
+54 C Aarakocra Sneak @Andrea Radeck
+55 U Alora, Merry Theief @Aaron Miller
+58 C Blur @Dave Greco
+72 R Gale, Waterdeep Prodigy @Cristi Balanescu
+74 C Goggles of Night @Forrest Imel
+76 R Illithid Harvester @David Astruga
+78 U Irenicus's Vile Duplication @Oleksandr Kozachenko
+91 R Robe of the Archmagi @Dallas Williams
+95 C Sea Hag @Andrea Piparo
+96 R Shameless Charlatan @Inka Schulz
+101 C Tymora's Invoker @Leonardo Santanna
+103 M Volo, Itinerant Scholar @Andreas Zafiratos
 111 M Ancient Brass Dragon @Johan Grenier
+122 U Criminal Past @Will Gist
+123 R Cultist of the Absolute @Artur Treffner
 125 R Elder Brain @Daarken
+141 U Passageway Seer @Konstantin Porubov
+144 U Sarevok, Deathbringer @Ben Hill
+145 C Scion of Halaster @Milivoj Ćeran
+150 C Stirge @Jamroz Gary
+151 C Summon Undead @Dallas Williams
+163 C Bhaal's Invoker @Deruchenko Alexander
+173 C Fang Dragon @Andrey Kuzinskiy
 175 U Fireball @Xavier Ribeiro
 187 C Lightning Bolt @Irina Nordsol
+188 U Livaan, Cultist of Tiamat @Ioannis Fiore
+189 U Nemesis Phoenix @Ben Wootten
 204 R Wand of Wonder @Xavier Ribeiro
+209 R Wyll's Reversal @Irina Nordsol
+218 M Bramble Sovereign @Andreas Zafiratos
+221 U Cloakwood Hermit @Kai Carpenter
+225 C Dread Linnorm @Caio Monteiro
+234 U Halsin, Emerald Archdruid @Slawomir Maniak
+235 U Hardy Outlander @Kim Sokol
+238 R Jaheira's Respite @Mila Pesic
+250 R Raised by Giants @Kai Carpenter
+254 C Silvanus's Invoker @Leanna Crossan
+262 U You Look Upon the Tarrasque @Kekai Kotaki
+265 R Astarion, the Decadent @Ben Hill
+266 R Baba Lysaga, Night Witch @Slawomir Maniak
+268 R Bhaal, Lord of Murder @Peter Polach
+270 U Commander Liara Portyr @David Rapoza
+273 R Dynaheir, Invoker Adept @Caroline Gariba
+274 M Elminster @Viktor Titov
+276 R Gorion, Wise Mentor @Jason Kang
+278 R Jon Irenicus, Shattered One @Igor Grechanyi
+281 U Lozhan, Dragons' Legacy @Rudy Siswanto
+283 R Mazzy, Truesword Paladin @Justyna Gil
 285 M Minsc & Boo, Timeless Heroes @Andreas Zafiratos
+287 R Myrkul, Lord of Bones @Isis
+290 U Oji, the Exquisite Blade @Andreas Zafiratos
+292 R Raphael, Fiendish Savior @Livia Prima
+293 U Rilsa Rael, Kingpin @Micah Epstein
+294 M Tasha, the Witch Queen @Martina Fackova
+296 R Zevlor, Elturel Exile @David Rapoza
+298 U Arcane Signet @Sam White
+305 C Charcoal Diamond @Gaboleps
+312 U Dungeoneer's Pack @Tony Foti
+313 C Fire Diamond @Gaboleps
+320 C Marble Diamond @Gaboleps
+327 C Moss Diamond @Gaboleps
+328 M Nautiloid Ship @Daniel Ljunggren
+331 U Noble's Purse @José Parodi
+337 C Sky Diamond @Gaboleps
+339 U Swiftfoot Boots @Manuel Castañón
+344 C Wayfarer's Bauble @Tomas Duchek
+345 R Baldur's Gate @Titus Lunter
 348 R Bountiful Promenade @Alayna Danner
+351 C Command Tower @Muhammad Firdaus
 355 R Luxury Suite @Titus Lunter
 357 R Morphic Pool @Chris Ostrowski
 358 R Reflecting Pool @Alayna Danner
 360 R Sea of Clouds @Matt Gaser
 361 R Spire Garden @Alexander Forssberg
+362 M Elminster @Tyler Jacobson
 363 M Minsc & Boo, Timeless Heroes @Bram Sels
+364 M Tasha, the Witch Queen @Brom
 367 M Ancient Brass Dragon @Raoul Vitale
+370 M Battle Angels of Tyr @Artur Treffner
+372 M Bramble Sovereign @Raluca Marinescu
+373 M Nautiloid Ship @Piotr Dura
+375 U Abdel Adrian, Gorion's Ward @Phil Stone
+377 U Ellyn Harbreeze, Busybody
+378 R Lae'zel, Vlaakith's Champion @Justine Jones
+379 U Lulu, Loyal Hollyphant
+383 R Gale, Waterdeep Prodigy @Mark A. Nelson
+384 C Goggles of Night @Jeff Dee
+388 M Volo, Itinerant Scholar @Justine Mara Andersen
 389 M Ancient Brass Dragon @Jeff Miracola
+391 U Sarevok, Deathbringer @Justine Jones
 397 U Fireball @Justine Jones
 401 C Lightning Bolt @Phil Stone
+402 U Livaan, Cultist of Tiamat @Jeff Miracola
+403 U Nemesis Phoenix @Justine Mara Andersen
+408 U Halsin, Emerald Archdruid @Mark A. Nelson
+413 R Astarion, the Decadent @Phil Stone
+414 R Baba Lysaga, Night Witch @Mark A. Nelson
+416 R Bhaal, Lord of Murder @Justine Jones
+418 U Commander Liara Portyr @Jeff Dee
+421 R Dynaheir, Invoker Adept @Pedro Potier
+423 R Gorion, Wise Mentor @Jeff Miracola
+425 R Jon Irenicus, Shattered One @Jeff Dee
+428 U Lozhan, Dragons' Legacy @Jeff Miracola
+430 R Mazzy, Truesword Paladin @Diesel
+433 R Myrkul, Lord of Bones @Mark A. Nelson
+436 U Oji, the Exquisite Blade @Pedro Potier
+438 R Raphael, Fiendish Savior @Justine Jones
+439 U Rilsa Rael, Kingpin @Mark A. Nelson
+441 R Zevlor, Elturel Exile @Phil Stone
+442 C Charcoal Diamond @Phil Stone
+445 C Fire Diamond @Phil Stone
+446 C Marble Diamond @Phil Stone
+448 C Moss Diamond @Phil Stone
+449 C Sky Diamond @Phil Stone
+451 L Plains @Bruce Brenneise
+452 L Plains @Leanna Crossan
+453 L Plains @Titus Lunter
+454 L Plains @Emmanuel Shiu
+455 L Island @Bruce Brenneise
+456 L Island @Piotr Dura
+457 L Island @James Paick
+458 L Island @Sam White
+459 L Swamp @Piotr Dura
+460 L Swamp @Logan Feliciano
+461 L Swamp @Grady Frederick
+462 L Swamp @Sam White
+463 L Mountain @Matt Gaser
+464 L Mountain @Lucas Graciano
+465 L Mountain @Muhammad Firdaus
+466 L Mountain @Sam White
+467 L Forest @Bruce Brenneise
+468 L Forest @Muhammad Firdaus
+469 L Forest @Lucas Graciano
+470 L Forest @Julian Kok Joon Wen
+471 U Abdel Adrian, Gorion's Ward @Karl Kopinski
+472 U Ellyn Harbreeze, Busybody @Dan Scott
+476 R Lae'zel, Vlaakith's Champion @John Stanko
+477 U Lulu, Loyal Hollyphant @Jakob Eirich
+478 R Noble Heritage @Dallas Williams
+485 R Gale, Waterdeep Prodigy @Cristi Balanescu
+491 M Volo, Itinerant Scholar @Andreas Zafiratos
+494 U Criminal Past @Will Gist
+495 R Cultist of the Absolute @Artur Treffner
+497 U Sarevok, Deathbringer @Ben Hill
+498 C Scion of Halaster @Milivoj Ćeran
+508 U Livaan, Cultist of Tiamat @Ioannis Fiore
+514 U Cloakwood Hermit @Kai Carpenter
+516 U Halsin, Emerald Archdruid @Slawomir Maniak
+519 C Master Chef @Forrest Imel
+520 R Raised by Giants @Kai Carpenter
+522 U Wilson, Refined Grizzly @Ilse Gort
+524 R Astarion, the Decadent
+525 R Baba Lysaga, Night Witch @Slawomir Maniak
+527 R Bhaal, Lord of Murder @Peter Polach
+529 U Commander Liara Portyr
+532 R Dynaheir, Invoker Adept @Caroline Gariba
+534 R Gorion, Wise Mentor @Jason Kang
+539 U Lozhan, Dragons' Legacy @Rudy Siswanto
+541 R Mazzy, Truesword Paladin @Justyna Gil
+544 R Myrkul, Lord of Bones @Isis
+547 U Oji, the Exquisite Blade @Andreas Zafiratos
+549 R Raphael, Fiendish Savior @Livia Prima
+550 U Rilsa Rael, Kingpin @Micah Epstein
+552 R Zevlor, Elturel Exile @David Rapoza
+558 R White Plume Adventurer @Joseph Weston
+561 M Elminster's Simulacrum @Irina Nordsol
+564 R Illithid Harvester @David Astruga
+566 R Robe of the Archmagi @Dallas Williams
 573 R Elder Brain @Daarken
 584 R Wand of Wonder @Xavier Ribeiro
+589 R Jaheira's Respite @Mila Pesic
+591 R Monster Manual @David Gaillet
+600 R Baldur's Gate @Titus Lunter
 601 R Bountiful Promenade @Alayna Danner
 602 R Luxury Suite @Titus Lunter
 603 R Morphic Pool @Chris Ostrowski
 604 R Reflecting Pool @Alayna Danner
 605 R Sea of Clouds @Matt Gaser
 606 R Spire Garden @Alexander Forssberg
+646 M Captain N'ghathrod @Andrey Kuzinskiy
+647 M Faldorn, Dread Wolf Herald @Jason A. Engle
+648 M Firkraag, Cunning Instigator @Andrew Mar
+649 M Nalia de'Arnise @John Stanko
 935 R Wand of Wonder @Lindsey Look
 936 R Elder Brain @Nino Is

@@ -742,6 +742,9 @@ public class AbilityUtils {
                 else if (calcX[0].startsWith("Revealed")) {
                     list = sa.getRootAbility().getPaidList("Revealed");
                 }
+                else if (calcX[0].startsWith("Returned")) {
+                    list = sa.getRootAbility().getPaidList("Returned");
+                }
                 else if (calcX[0].startsWith("Targeted")) {
                     list = sa.findTargetedCards();
                 }
@@ -2347,9 +2350,6 @@ public class AbilityUtils {
         if (sq[0].equals("BloodthirstAmount")) {
             return doXMath(player.getBloodthirstAmount(), expr, c, ctb);
         }
-        if (sq[0].equals("YourLandsPlayed")) {
-            return doXMath(player.getLandsPlayedThisTurn(), expr, c, ctb);
-        }
 
         if (sq[0].startsWith("YourCounters")) {
             // "YourCountersExperience" or "YourCountersPoison"
@@ -2835,16 +2835,10 @@ public class AbilityUtils {
             return Aggregates.max(list, CardPredicates.Accessors.fnGetCmc);
         }
         if (sq[0].startsWith("DifferentPower_")) {
-            final List<Integer> powers = Lists.newArrayList();
             final String restriction = l[0].substring(15);
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
-            for (final Card card : list) {
-                Integer pow = card.getNetPower();
-                if (!powers.contains(pow)) {
-                    powers.add(pow);
-                }
-            }
-            return doXMath(powers.size(), expr, c, ctb);
+            final Iterable<Card> powers = Aggregates.uniqueByLast(list, CardPredicates.Accessors.fnGetNetPower);
+            return doXMath(Iterables.size(powers), expr, c, ctb);
         }
         if (sq[0].startsWith("DifferentCounterKinds_")) {
             final List<CounterType> kinds = Lists.newArrayList();

@@ -8,6 +8,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.SaveFileData;
 import forge.adventure.util.SignalList;
 import forge.deck.Deck;
+import forge.deck.DeckgenUtil;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
 
@@ -118,11 +119,11 @@ public class WorldSave   {
         return currentSave;
     }
 
-    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, int startingColorIdentity, DifficultyData diff, long seed) {
+    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, int startingColorIdentity, DifficultyData diff, boolean isFantasy, long seed) {
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
-        Deck starterDeck = Config.instance().starterDecks()[startingColorIdentity];
-        currentSave.player.create(name, startingColorIdentity, starterDeck, male, race, avatarIndex,diff);
+        Deck starterDeck = isFantasy ? DeckgenUtil.getRandomOrPreconOrThemeDeck("", false, false) : Config.instance().starterDecks()[startingColorIdentity];
+        currentSave.player.create(name, startingColorIdentity, starterDeck, male, race, avatarIndex, isFantasy, diff);
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
         currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));
         currentSave.onLoadList.emit();

@@ -7,7 +7,7 @@ SVar:TrigStore:DB$ Pump | NoteNumber$ 1
 SVar:ArtAct:Count$NotedNumber
 T:Mode$ TurnBegin | Execute$ TrigReset | Static$ True
 SVar:TrigReset:DB$ Pump | NoteNumber$ 0
-S:Mode$ ReduceCost | ValidCard$ Artifact.YouCtrl | Type$ Ability | Amount$ 2 | CheckSVar$ ArtAct | SVarCompare$ NE1 | AffectedZone$ Battlefield | Description$ The first activated ability of an artifact you activate each turn costs {2} less to activate.
+S:Mode$ ReduceCost | ValidCard$ Artifact.YouCtrl | Type$ Ability | Amount$ 2 | CheckSVar$ ArtAct | SVarCompare$ NE1 | OnlyFirstActivation$ True | AffectedZone$ Battlefield | Description$ The first activated ability of an artifact you activate each turn costs {2} less to activate.
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SpellDescription$ Draw two cards. Then discard two cards unless you discard an artifact card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Artifact
 A:AB$ Animate | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Artifact | Types$ Creature,Artifact | TgtPrompt$ Select target artifact | SubAbility$ NonVehicle | Duration$ Permanent | SpellDescription$ Target artifact becomes an artifact creature. If it isn't a vehicle, it has base power and toughness 4/4.

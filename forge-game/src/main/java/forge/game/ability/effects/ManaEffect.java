@@ -245,8 +245,6 @@ public class ManaEffect extends SpellAbilityEffect {
 
         // Only clear express choice after mana has been produced
         abMana.clearExpressChoice();
-
-        //resolveDrawback(sa);
     }
 
     /**

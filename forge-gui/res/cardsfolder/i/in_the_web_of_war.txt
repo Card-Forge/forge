@@ -2,6 +2,6 @@ Name:In the Web of War
 ManaCost:3 R R
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature enters the battlefield under your control, it gets +2/+0 and gains haste until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredCard | NumAtt$ +2 | KW$ Haste
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredCardLKICopy | NumAtt$ +2 | KW$ Haste
 SVar:BuffedBy:Creature
 Oracle:Whenever a creature enters the battlefield under your control, it gets +2/+0 and gains haste until end of turn.

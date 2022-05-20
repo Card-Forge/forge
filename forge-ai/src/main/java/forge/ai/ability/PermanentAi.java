@@ -11,8 +11,6 @@ import forge.ai.ComputerUtilMana;
 import forge.ai.SpellAbilityAi;
 import forge.card.CardType.Supertype;
 import forge.card.mana.ManaCost;
-import forge.game.Game;
-import forge.game.GlobalRuleChange;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -52,28 +50,25 @@ public class PermanentAi extends SpellAbilityAi {
     @Override
     protected boolean checkApiLogic(final Player ai, final SpellAbility sa) {
         final Card card = sa.getHostCard();
-        final Game game = ai.getGame();
 
         // check on legendary
-        if (card.getType().isLegendary()
-                && !game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
-            if (ai.isCardInPlay(card.getName())) {
-                if (!card.hasSVar("AILegendaryException")) {
-                    // AiPlayDecision.WouldDestroyLegend
-                    return false;
-                } else {
-                    String specialRule = card.getSVar("AILegendaryException");
-                    if ("TwoCopiesAllowed".equals(specialRule)) {
-                        // One extra copy allowed on the battlefield, e.g. Brothers Yamazaki
-                        if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName())) > 1) {
-                            return false;
-                        }
-                    } else if ("AlwaysAllowed".equals(specialRule)) {
-                        // Nothing to do here, check for Legendary is disabled
-                    } else {
-                        // Unknown hint, assume two copies not allowed
+        if (!card.ignoreLegendRule() && ai.isCardInPlay(card.getName())) {
+            // TODO check the risk we'd lose the effect with bad timing
+            if (!card.hasSVar("AILegendaryException")) {
+                // AiPlayDecision.WouldDestroyLegend
+                return false;
+            } else {
+                String specialRule = card.getSVar("AILegendaryException");
+                if ("TwoCopiesAllowed".equals(specialRule)) {
+                    // One extra copy allowed on the battlefield, e.g. Brothers Yamazaki
+                    if (CardLists.count(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(card.getName())) > 1) {
                         return false;
                     }
+                } else if ("AlwaysAllowed".equals(specialRule)) {
+                    // Nothing to do here, check for Legendary is disabled
+                } else {
+                    // Unknown hint, assume two copies not allowed
+                    return false;
                 }
             }
         }

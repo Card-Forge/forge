@@ -16,12 +16,11 @@ import forge.game.player.Player;
  */
 public class CardDamageHistory {
 
-    private boolean creatureAttackedThisTurn = false;
     private boolean creatureAttackedThisCombat = false;
     private boolean creatureBlockedThisCombat = false;
     private boolean creatureGotBlockedThisCombat = false;
     private boolean receivedNonCombatDamageThisTurn = false;
-    private int attacksThisTurn = 0;
+    private List<GameEntity> attackedThisTurn = Lists.newArrayList();
 
     private final List<Player> creatureAttackedLastTurnOf = Lists.newArrayList();
     private final List<Player> NotAttackedSinceLastUpkeepOf = Lists.newArrayList();
@@ -32,7 +31,7 @@ public class CardDamageHistory {
     private final Map<GameEntity, Integer> damagedThisTurn = Maps.newHashMap();
     private final Map<GameEntity, Integer> damagedThisTurnInCombat = Maps.newHashMap();
     private final Map<GameEntity, Integer> damagedThisGame = Maps.newHashMap();
-    
+
     public final boolean getHasdealtDamagetoAny() {
         return !damagedThisGame.isEmpty();
     }
@@ -47,12 +46,11 @@ public class CardDamageHistory {
      * @param hasAttacked
      *            a boolean.
      */
-    public final void setCreatureAttackedThisCombat(final boolean hasAttacked) {
-        this.creatureAttackedThisCombat = hasAttacked;
+    public final void setCreatureAttackedThisCombat(GameEntity defender) {
+        this.creatureAttackedThisCombat = defender != null;
 
-        if (hasAttacked) {
-            this.setCreatureAttackedThisTurn(true);
-            this.attacksThisTurn++;
+        if (defender != null) {
+            attackedThisTurn.add(defender);
         }
     }
     /**
@@ -67,45 +65,16 @@ public class CardDamageHistory {
     }
     /**
      * <p>
-     * Setter for the field <code>creatureAttackedThisTurn</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setCreatureAttackedThisTurn(final boolean b) {
-        this.creatureAttackedThisTurn = b;
-     }
-    /**
-     * <p>
-     * Getter for the field <code>creatureAttackedThisTurn</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getCreatureAttackedThisTurn() {
-        return this.creatureAttackedThisTurn;
-    }
-    /**
-     * <p>
-     * Setter for the field <code>attacksThisTurn</code>.
-     * </p>
-     * 
-     * @param num
-     *            a integer.
-     */
-    public final void setCreatureAttacksThisTurn(final int num) {
-        this.attacksThisTurn = num;
-    }
-    /**
-     * <p>
      * Getter for the field <code>attacksThisTurn</code>.
      * </p>
      * 
      * @return a int.
      */
     public final int getCreatureAttacksThisTurn() {
-        return this.attacksThisTurn;
+        return this.attackedThisTurn.size();
+    }
+    public final boolean hasAttackedThisTurn(GameEntity e) {
+        return this.attackedThisTurn.contains(e);
     }
     /**
      * <p>
@@ -307,6 +276,8 @@ public class CardDamageHistory {
         damagedThisCombat.clear();
         damagedThisTurnInCombat.clear();
         damagedThisTurn.clear();
+        attackedThisTurn.clear();
+        setHasBeenDealtNonCombatDamageThisTurn(false);
     }
 
     public void endCombat() {

@@ -50,7 +50,7 @@ import io.sentry.Sentry;
  */
 public final class AbilityFactory {
 
-    static final List<String> additionalAbilityKeys = Lists.newArrayList(
+    public static final List<String> additionalAbilityKeys = Lists.newArrayList(
             "WinSubAbility", "OtherwiseSubAbility", // Clash
             "BidSubAbility", // BidLifeEffect
             "ChooseNumberSubAbility", "Lowest", "Highest", "NotLowest", // ChooseNumber
@@ -62,7 +62,8 @@ public final class AbilityFactory {
             "FallbackAbility", // Complex Unless costs which can be unpayable
             "ChooseSubAbility", // Can choose a player via ChoosePlayer
             "CantChooseSubAbility", // Can't choose a player via ChoosePlayer
-            "AnimateSubAbility" // For ChangeZone Effects to Animate before ETB
+            "AnimateSubAbility", // For ChangeZone Effects to Animate before ETB
+            "ReturnAbility" // for Delayed Trigger on Magpie
         );
 
     public enum AbilityRecordType {
@@ -79,7 +80,7 @@ public final class AbilityFactory {
             return prefix;
         }
 
-        public SpellAbility buildSpellAbility(ApiType api, Card hostCard, Cost abCost, TargetRestrictions abTgt, Map<String, String> mapParams ) {
+        public SpellAbility buildSpellAbility(ApiType api, Card hostCard, Cost abCost, TargetRestrictions abTgt, Map<String, String> mapParams) {
             switch(this) {
                 case Ability: return new AbilityApiBased(api, hostCard, abCost, abTgt, mapParams);
                 case Spell: return new SpellApiBased(api, hostCard, abCost, abTgt, mapParams);
@@ -333,7 +334,7 @@ public final class AbilityFactory {
         String tgtWhat = mapParams.get("ValidTgts");
         final String[] commonStuff = new String[] {
                 //list of common one word non-core type ValidTgts that should be lowercase in the target prompt
-                "Player", "Opponent"
+                "Player", "Opponent", "Card"
         };
         if (Arrays.asList(commonStuff).contains(tgtWhat) || CardType.CoreType.isValidEnum(tgtWhat)) {
             tgtWhat = tgtWhat.toLowerCase();

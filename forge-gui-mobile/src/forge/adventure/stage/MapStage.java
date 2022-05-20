@@ -2,7 +2,9 @@ package forge.adventure.stage;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -14,9 +16,12 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.ScreenUtils;
 import forge.Forge;
 import forge.adventure.character.*;
@@ -190,9 +195,28 @@ public class MapStage extends GameStage {
         text += E.getDescription();
         Label L = Controls.newLabel(text);
         L.setWrap(true);
-        dialog.getContentTable().add(L).width(260f);
-        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(260f);
+        dialog.getContentTable().add(L).width(250f);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(250f);
         dialog.setKeepWithinStage(true);
+        showDialog();
+    }
+    public void showImageDialog(String message, Texture texture) {
+        dialog.getContentTable().clear();
+        dialog.getButtonTable().clear();
+        if (texture != null) {
+            TextureRegion tr = new TextureRegion(texture);
+            tr.flip(true, true);
+            Image image = new Image(tr);
+            image.setScaling(Scaling.fit);
+            dialog.getContentTable().add(image).height(100);
+            dialog.getContentTable().add().row();
+        }
+        Label L = Controls.newLabel(message);
+        L.setWrap(true);
+        dialog.getContentTable().add(L).width(250f);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(250f);
+        dialog.setKeepWithinStage(true);
+        setDialogStage(GameHUD.getInstance());
         showDialog();
     }
 
@@ -580,11 +604,12 @@ public class MapStage extends GameStage {
     }
 
     public void showDialog() {
-        dialog.show(dialogStage);
+        dialog.show(dialogStage, Actions.show());
+        dialog.setPosition((dialogStage.getWidth() - dialog.getWidth()) / 2, (dialogStage.getHeight() - dialog.getHeight()) / 2);
         dialogOnlyInput=true;
     }
     public void hideDialog() {
-        dialog.hide();
+        dialog.hide(Actions.sequence(Actions.sizeTo(dialog.getOriginX(), dialog.getOriginY(), 0.3f), Actions.hide()));
         dialogOnlyInput=false;
     }
 

@@ -9,8 +9,10 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class PhasesEffect extends SpellAbilityEffect {
 
@@ -36,7 +38,8 @@ public class PhasesEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         CardCollectionView tgtCards;
-        final Game game = sa.getActivatingPlayer().getGame();
+        final Player activator = sa.getActivatingPlayer();
+        final Game game = activator.getGame();
         final Card source = sa.getHostCard();
         final boolean phaseInOrOut = sa.hasParam("PhaseInOrOut");
         final boolean wontPhaseInNormal = sa.hasParam("WontPhaseInNormal");
@@ -52,6 +55,11 @@ public class PhasesEffect extends SpellAbilityEffect {
             tgtCards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
         } else {
             tgtCards = getTargetCards(sa);
+        }
+        if (sa.hasParam("AnyNumber")) {
+            tgtCards = activator.getController().chooseCardsForEffect(tgtCards, sa,
+                    Localizer.getInstance().getMessage("lblChooseAnyNumberToPhase"),
+                    0, tgtCards.size(), true, null);
         }
         if (phaseInOrOut) { // Time and Tide and Oubliette
             for (final Card tgtC : tgtCards) {

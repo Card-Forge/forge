@@ -508,7 +508,7 @@ public class DrawAi extends SpellAbilityAi {
             }
 
             if (numCards >= computerLibrarySize - 3) {
-                if (ai.isCardInPlay("Laboratory Maniac")) {
+                if (ai.isCardInPlay("Laboratory Maniac") && !ai.cantWin()) {
                     return true;
                 }
                 // Don't deck yourself

@@ -14,6 +14,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
+import forge.deck.DeckgenUtil;
 import forge.deck.io.DeckSerializer;
 import forge.item.PaperCard;
 import forge.model.FModel;
@@ -498,11 +499,16 @@ public class CardUtil {
         return  ret;
     }
 
-    public static Deck getDeck(String path)
+    public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme)
     {
         if(path.endsWith(".dck"))
             return DeckSerializer.fromFile(new File(Config.instance().getFilePath(path)));
 
+        if(forAI && isFantasyMode) {
+            Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, forAI, isTheme);
+            if (deck != null)
+                return deck;
+        }
         Json json = new Json();
         FileHandle handle = Config.instance().getFile(path);
         if (handle.exists())

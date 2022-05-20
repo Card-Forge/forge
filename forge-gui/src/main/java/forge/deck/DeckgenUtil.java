@@ -8,6 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -430,6 +432,80 @@ public class DeckgenUtil {
         final int rand = (int) (Math.floor(MyRandom.getRandom().nextDouble() * allDecks.size()));
         final String name = allDecks.getItemNames().toArray(new String[0])[rand];
         return allDecks.get(name);
+    }
+
+    /** @return {@link forge.deck.Deck} */
+    public static Deck getRandomOrPreconOrThemeDeck(String colors, boolean forAi, boolean isTheme) {
+        final List<String> selection = new ArrayList<>();
+        List<DeckProxy> allDecks = new ArrayList<>();
+        if (!colors.isEmpty()) {
+            for (char c : colors.toLowerCase().toCharArray()) {
+                switch (c) {
+                    case 'b': selection.add("black");
+                    case 'r': selection.add("red");
+                    case 'g': selection.add("green");
+                    case 'u': selection.add("blue");
+                    case 'w': selection.add("white");
+                }
+            }
+        }
+        //limit selection to three
+        if (!selection.isEmpty() && selection.size() < 4) {
+            //monocolor
+            if (selection.size() == 1) {
+                if (isTheme) {
+                    //duels and theme
+                    allDecks = Stream.concat(DeckProxy.getAllThemeDecks().parallelStream()
+                            .filter(deckProxy -> deckProxy.getMainSize() <= 60)
+                            .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().isMonoColor()
+                                    && deckProxy.getColor().hasExactlyColor(ColorSet.fromNames(selection).getColor())),
+                            DeckProxy.getNonEasyQuestDuelDecks().parallelStream()
+                                    .filter(deckProxy -> deckProxy.getMainSize() <= 60)
+                                    .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().isMonoColor()
+                                     && deckProxy.getColor().hasExactlyColor(ColorSet.fromNames(selection).getColor())))
+                            .collect(Collectors.toList());
+                } else {
+                    allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
+                            .filter(deckProxy -> deckProxy.getMainSize() <= 60)
+                            .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().isMonoColor() && deckProxy.getColor().hasExactlyColor(ColorSet.fromNames(selection).getColor()))
+                            .collect(Collectors.toList());
+                }
+            } else {
+                if (isTheme) {
+                    //duels and theme
+                    allDecks = Stream.concat(DeckProxy.getAllThemeDecks().parallelStream()
+                            .filter(deckProxy -> deckProxy.getMainSize() <= 60)
+                            .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor())),
+                            DeckProxy.getNonEasyQuestDuelDecks().parallelStream()
+                                    .filter(deckProxy -> deckProxy.getMainSize() <= 60)
+                                    .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor())))
+                            .collect(Collectors.toList());
+                } else {
+                    allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
+                            .filter(deckProxy -> deckProxy.getMainSize() <= 60)
+                            .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor()))
+                            .collect(Collectors.toList());
+                }
+            }
+        } else {
+            //no specific colors
+            if (isTheme) {
+                //duels and theme
+                allDecks = Stream.concat(DeckProxy.getAllThemeDecks().parallelStream()
+                        .filter(deckProxy -> deckProxy.getMainSize() <= 60),
+                        DeckProxy.getNonEasyQuestDuelDecks().parallelStream()
+                                .filter(deckProxy -> deckProxy.getMainSize() <= 60))
+                        .collect(Collectors.toList());
+            } else {
+                allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
+                        .filter(deckProxy -> deckProxy.getMainSize() <= 60)
+                        .collect(Collectors.toList());
+            }
+        }
+        if (!allDecks.isEmpty()) {
+            return Aggregates.random(allDecks).getDeck();
+        }
+        return DeckgenUtil.buildColorDeck(selection, null, forAi);
     }
 
     /** @return {@link forge.deck.Deck} */

@@ -43,6 +43,7 @@ public class NewGameScene extends UIScene {
     private Label titleL, avatarL, nameL, raceL, genderL, difficultyL, deckL;
     private ImageButton leftArrow, rightArrow;
     private TextButton backButton, startButton;
+    boolean fantasyMode = false;
 
     public NewGameScene() {
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
@@ -61,7 +62,8 @@ public class NewGameScene extends UIScene {
                         race.getCurrentIndex(),
                         avatarIndex,
                         deck.getCurrentIndex(),
-                        Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()], 0);
+                        Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
+                        fantasyMode,0);
                 GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
                 Forge.clearTransitionScreen();
                 Forge.switchScene(SceneType.GameScene.instance);
@@ -98,8 +100,15 @@ public class NewGameScene extends UIScene {
             Array<String> stringList = new Array<>(starterDeck.length);
             for (Deck deck : starterDeck)
                 stringList.add(deck.getName());
+            stringList.add("Chaos Mode");
 
             deck.setTextList(stringList);
+            deck.addListener(new EventListener() {
+                @Override
+                public boolean handle(Event event) {
+                    return NewGameScene.this.updateFantasy();
+                }
+            });
 
             race = ui.findActor("race");
             race.addListener(new EventListener() {
@@ -174,6 +183,7 @@ public class NewGameScene extends UIScene {
             backButton.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
             startButton = ui.findActor("start");
             startButton.getLabel().setText(Forge.getLocalizer().getMessage("lblStart"));
+            updateFantasy();
 
     }
 
@@ -193,6 +203,11 @@ public class NewGameScene extends UIScene {
         return false;
     }
 
+    private boolean updateFantasy() {
+        fantasyMode = "Chaos Mode".equalsIgnoreCase(deck.getText());
+        return false;
+    }
+
     @Override
     public void create() {
 
@@ -201,6 +216,7 @@ public class NewGameScene extends UIScene {
     @Override
     public void enter() {
         updateAvatar();
+        updateFantasy();
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
     }
 

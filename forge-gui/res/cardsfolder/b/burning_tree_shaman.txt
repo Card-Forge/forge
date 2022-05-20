@@ -2,6 +2,6 @@ Name:Burning-Tree Shaman
 ManaCost:1 R G
 Types:Creature Centaur Shaman
 PT:3/4
-T:Mode$ AbilityCast | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever a player activates an ability that isn't a mana ability, CARDNAME deals 1 damage to that player.
+T:Mode$ AbilityCast | ValidActivatingPlayer$ Player | ValidSA$ SpellAbility.nonManaAbility | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever a player activates an ability that isn't a mana ability, CARDNAME deals 1 damage to that player.
 SVar:TrigDmg:DB$ DealDamage | NumDmg$ 1 | Defined$ TriggeredActivator
 Oracle:Whenever a player activates an ability that isn't a mana ability, Burning-Tree Shaman deals 1 damage to that player.

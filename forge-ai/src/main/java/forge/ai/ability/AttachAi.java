@@ -22,7 +22,6 @@ import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
 import forge.game.GameObject;
-import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -43,7 +42,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
@@ -78,9 +76,7 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
-        if (!ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)
-                && source.getType().isLegendary() && sa instanceof SpellPermanent
-                && ai.isCardInPlay(source.getName())) {
+        if (source.isAura() && sa.isSpell() && !source.ignoreLegendRule() && ai.isCardInPlay(source.getName())) {
             // Don't play the second copy of a legendary enchantment already in play
 
             // TODO: Add some extra checks for where the AI may want to cast a replacement aura
@@ -1609,8 +1605,6 @@ public class AttachAi extends SpellAbilityAi {
                     && CombatUtil.canBlock(card, true);
         } else if (keyword.equals("Reach")) {
             return !card.hasKeyword(Keyword.FLYING) && CombatUtil.canBlock(card, true);
-        } else if (keyword.equals("CARDNAME can attack as though it didn't have defender.")) {
-            return card.hasKeyword(Keyword.DEFENDER) && card.getNetCombatDamage() + powerBonus > 0;
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
             return !card.hasKeyword(Keyword.SHROUD) && !card.hasKeyword(Keyword.HEXPROOF);
         } else return !keyword.equals("Defender");

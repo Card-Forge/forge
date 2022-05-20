@@ -60,6 +60,7 @@ import forge.game.staticability.StaticAbilityCantPutCounter;
 import forge.game.staticability.StaticAbilityCantSacrifice;
 import forge.game.staticability.StaticAbilityCantTarget;
 import forge.game.staticability.StaticAbilityCantTransform;
+import forge.game.staticability.StaticAbilityIgnoreLegendRule;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
@@ -534,7 +535,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return currentStateName;
     }
 
-    // use by CopyPermament
+    // use by CopyPermanent
     public void setStates(Map<CardStateName, CardState> map) {
         states.clear();
         states.putAll(map);
@@ -2633,7 +2634,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                             final Cost cost2 = new Cost(n[2], false);
                             sbx.append(cost2.toSimpleString());
                         }
-                        sbx.append(" (").append(inst.getReminderText()).append(")");
+                        sbx.append(" (").append(inst.getReminderText()).append(")\r\n");
                     } else {
                         sbx.append("As an additional cost to cast this spell, you may ");
                         String costS = StringUtils.uncapitalize(cost.toSimpleString());
@@ -5186,18 +5187,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             } else if (getName().isEmpty()) {
                 // if this does not have a name, then there is no name to share
                 return false;
-            } else {
+            } else if (StaticData.instance().getCommonCards().isNonLegendaryCreatureName(getName())) {
                 // check if this card has a name from a face
                 // in general token creatures does not have this
-                final ICardFace face = StaticData.instance().getCommonCards().getFaceByName(getName());
-                if (face == null) {
-                    return false;
-                }
-                // TODO add check if face is legal in the format of the game
-                // name does need to be a non-legendary creature
-                final CardType type = face.getType();
-                if (type != null && type.isCreature() && !type.isLegendary())
-                    return true;
+                return true;
             }
         }
         return sharesNameWith(c1.getName());
@@ -5220,15 +5213,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (!shares && hasNonLegendaryCreatureNames()) {
             // check if the name is from a face
             // in general token creatures does not have this
-            final ICardFace face = StaticData.instance().getCommonCards().getFaceByName(name);
-            if (face == null) {
-                return false;
-            }
-            // TODO add check if face is legal in the format of the game
-            // name does need to be a non-legendary creature
-            final CardType type = face.getType();
-            if (type.isCreature() && !type.isLegendary())
-                return true;
+            return StaticData.instance().getCommonCards().isNonLegendaryCreatureName(name);
         }
         return shares;
     }
@@ -6233,11 +6218,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         setBecameTargetThisTurn(false);
         setFoughtThisTurn(false);
         clearMustBlockCards();
+        getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttacksThisTurn() > 0);
         getDamageHistory().newTurn();
-        getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttackedThisTurn());
-        getDamageHistory().setCreatureAttackedThisTurn(false);
-        getDamageHistory().setCreatureAttacksThisTurn(0);
-        getDamageHistory().setHasBeenDealtNonCombatDamageThisTurn(false);
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
         resetMayPlayTurn();
@@ -7106,5 +7088,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return getCombatLKI().isAttacker;
         }
         return getGame().getCombat().isAttacking(this);
+    }
+
+    public boolean ignoreLegendRule() {
+        // not legendary
+        if (!getType().isLegendary()) {
+            return true;
+        }
+        // empty name and no "has non legendary creature names"
+        if (this.getName().isEmpty() && !hasNonLegendaryCreatureNames()) {
+            return true;
+        }
+        return StaticAbilityIgnoreLegendRule.ignoreLegendRule(this);
     }
 }

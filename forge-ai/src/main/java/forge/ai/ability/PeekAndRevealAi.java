@@ -65,7 +65,7 @@ public class PeekAndRevealAi extends SpellAbilityAi {
 
         return true;
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
      */

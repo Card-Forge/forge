@@ -138,12 +138,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             final String ct = sa.getParam("ChangeType");
             type = CardType.CoreType.isValidEnum(ct) ? ct.toLowerCase() : ct;
         }
+        final String cardTag = type.contains("card") ? "" : " card";
 
         final int num = sa.hasParam("ChangeNum") ? AbilityUtils.calculateAmount(host,
                 sa.getParam("ChangeNum"), sa) : 1;
         boolean tapped = sa.hasParam("Tapped");
         boolean attacking = sa.hasParam("Attacking");
-        if (sa.hasParam("Ninjutsu")) {
+        if (sa.isNinjutsu()) {
             tapped = true;
             attacking = true;
         }
@@ -170,7 +171,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else {
                 sb.append(" for ");
             }
-            final String cardTag = type.contains("card") ? "" : " card";
             sb.append(Lang.nounWithNumeralExceptOne(num, type + cardTag)).append(", ");
             if (!sa.hasParam("NoReveal") && ZoneType.smartValueOf(destination).isHidden()) {
                 if (choosers.size() == 1) {
@@ -293,14 +293,38 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             // TODO Expand on this Description as more cards use it
             // for the non-targeted SAs when you choose what is returned on resolution
             sb.append("Return ").append(num).append(" ").append(type).append(" card(s) ");
-            sb.append(" to your ").append(destination);
+            sb.append(" to your ").append(destination).append(".");
         } else if (origin.equals("Graveyard")) {
             // for non-targeted SAs when you choose what is moved on resolution
             // this will need expansion as more cards use it
-            sb.append(chooserNames).append(" puts ");
-            final String cardTag = type.contains("card") ? "" : " card";
-            sb.append(num != 0 ? Lang.nounWithNumeralExceptOne(num, type + cardTag) :
-                    sa.getParamOrDefault("ChangeNumDesc", "") + " " + type + cardTag);
+            final boolean changeNumDesc = sa.hasParam("ChangeNumDesc");
+            final boolean mandatory = sa.hasParam("Mandatory");
+            String changed;
+            if (changeNumDesc) {
+                changed = sa.getParam("ChangeNumDesc") + " " + type + cardTag;
+            } else if (!mandatory) {
+                changed = Lang.nounWithNumeral(num, type + cardTag);
+            } else {
+                changed = Lang.nounWithNumeralExceptOne(num, type + cardTag);
+            }
+            final boolean battlefield = destination.equals("Battlefield");
+            sb.append(chooserNames).append(" returns ").append(mandatory || changeNumDesc ? "" : "up to ");
+            sb.append(changed);
+            // so far, it seems non-targeted only lets you return from your own graveyard
+            sb.append(" from their graveyard").append(choosers.size() > 1 ? "s" : "");
+            sb.append(battlefield ? " to the " : " into their ").append(destination.toLowerCase());
+            if (sa.hasParam("WithCountersType")) {
+                final CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                if (cType != null) {
+                    sb.append(" with an additional ").append(cType.getName()).append(" counter on it");
+                } else {
+                    sb.append(" [ChangeZoneEffect WithCountersType error]");
+                }
+            }
+            sb.append(".");
+        } else if (origin.equals("Exile")) {
+            // for non-targeted, moved cards are chosen on resolution – will need expansion as more cards use it
+            sb.append(chooserNames).append(" puts ").append(Lang.nounWithNumeralExceptOne(num, type + cardTag));
             sb.append(" into their ").append(destination.toLowerCase()).append(".");
         }
 
@@ -431,7 +455,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             return;
         }
 
-        if (sa.isHidden() && !sa.hasParam("Ninjutsu")) {
+        if (sa.isHidden() && !sa.isNinjutsu()) {
             changeHiddenOriginResolve(sa);
         } else {
             //else if (isKnown(origin) || sa.containsKey("Ninjutsu")) {
@@ -575,7 +599,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 movedCard = game.getAction().moveToLibrary(gameCard, libraryPosition, sa);
             } else {
                 if (destination.equals(ZoneType.Battlefield)) {
-                    if (sa.hasParam("Tapped") || sa.hasParam("Ninjutsu")) {
+                    if (sa.hasParam("Tapped") || sa.isNinjutsu()) {
                         gameCard.setTapped(true);
                     }
                     if (sa.hasParam("Untapped")) {
@@ -689,7 +713,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (addToCombat(movedCard, movedCard.getController(), sa, "Attacking", "Blocking")) {
                         combatChanged = true;
                     }
-                    if (sa.hasParam("Ninjutsu")) {
+                    if (sa.isNinjutsu()) {
                         // Ninjutsu need to get the Defender of the Returned Creature
                         final Card returned = sa.getPaidList("Returned").getFirst();
                         final GameEntity defender = game.getCombat().getDefenderByAttacker(returned);
@@ -846,7 +870,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             registerDelayedTrigger(sa, sa.getParam("AtEOT"), triggerList.allCards());
         }
         if ("UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
-            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, hostCard));
+            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, sa));
         }
 
         // for things like Gaea's Blessing
@@ -1412,6 +1436,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
                 }
+                if (sa.hasParam("RememberLKI")) {
+                    source.addRemembered(CardUtil.getLKICopy(c));
+                }
                 if (forget) {
                     source.removeRemembered(movedCard);
                 }
@@ -1449,7 +1476,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         triggerList.triggerChangesZoneAll(game, sa);
 
         if ("UntilHostLeavesPlay".equals(sa.getParam("Duration"))) {
-            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, source));
+            addUntilCommand(sa, untilHostLeavesPlayCommand(triggerList, sa));
         }
     }
 

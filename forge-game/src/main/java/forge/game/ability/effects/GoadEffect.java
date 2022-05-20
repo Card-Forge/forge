@@ -18,12 +18,12 @@ public class GoadEffect extends SpellAbilityEffect {
         final boolean remember = sa.hasParam("RememberGoaded");
 
         for (final Card tgtC : getDefinedCardsOrTargeted(sa)) {
-            // only pump things in PumpZone
+            // only goad things on the battlefield
             if (!game.getCardsIn(ZoneType.Battlefield).contains(tgtC)) {
                 continue;
             }
 
-            // if pump is a target, make sure we can still target now
+            // make sure we can still target now if using targeting
             if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer() && !tgtC.canBeTargetedBy(sa)) {
                 continue;
             }
@@ -31,16 +31,19 @@ public class GoadEffect extends SpellAbilityEffect {
             // 701.38d is handled by getGoaded
             tgtC.addGoad(timestamp, player);
 
-            final GameCommand untilEOT = new GameCommand() {
-                private static final long serialVersionUID = -1731759226844770852L;
+            // currently, only Life of the Party uses Duration$ – Duration$ Permanent
+            if (!sa.hasParam("Duration")) {
+                final GameCommand untilEOT = new GameCommand() {
+                    private static final long serialVersionUID = -1731759226844770852L;
 
-                @Override
-                public void run() {
-                    tgtC.removeGoad(timestamp);
-                }
-            };
+                    @Override
+                    public void run() {
+                        tgtC.removeGoad(timestamp);
+                    }
+                };
 
-            game.getCleanup().addUntil(player, untilEOT);
+                game.getCleanup().addUntil(player, untilEOT);
+            }
 
             if (remember && tgtC.isGoaded()) {
                 sa.getHostCard().addRemembered(tgtC);

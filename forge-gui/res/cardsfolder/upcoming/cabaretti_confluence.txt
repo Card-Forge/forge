@@ -1,0 +1,9 @@
+Name:Cabaretti Confluence
+ManaCost:3 R G W
+Types:Sorcery
+A:SP$ Charm | Choices$ Copy,Exile,Pump | CharmNum$ 3 | CanRepeatModes$ True
+SVar:Copy:DB$ CopyPermanent | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | PumpKeywords$ Haste | AtEOT$ Sacrifice | SpellDescription$ Create a token that's a copy of target creature you control. It gains haste. Sacrifice it at the beginning of the next end step.
+SVar:Exile:DB$ ChangeZone | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target artifact or enchantment.
+SVar:Pump:DB$ PumpAll | ValidTgts$ Player | ValidCards$ Creature | NumAtt$ 1 | NumDef$ 1 | KW$ First Strike | SpellDescription$ Creatures target player controls get +1/+1 and gain first strike until end of turn.
+DeckHas:Ability$Token|Sacrifice
+Oracle:Choose three. You may choose the same mode more than once.\n• Create a token that's a copy of target creature you control. It gains haste. Sacrifice it at the beginning of the next end step.\n• Exile target artifact or enchantment.\n• Creatures target player controls get +1/+1 and gain first strike until end of turn.
