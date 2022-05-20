@@ -55,15 +55,13 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     /** Keys of descriptive (text) parameters. */
     private static final ImmutableList<String> descriptiveKeys = ImmutableList.<String>builder()
             .add("Description", "SpellDescription", "StackDescription", "TriggerDescription").build();
-    /** Keys to be followed as SVar names when changing text. */
-    private static final ImmutableList<String> mutableKeys = ImmutableList.<String>builder()
-            .add("AddAbility").build();
 
     /**
      * Keys that should not changed
      */
     private static final ImmutableList<String> noChangeKeys = ImmutableList.<String>builder()
-            .add("TokenScript", "LegacyImage", "TokenImage", "NewName", "ChooseFromList").build();
+            .add("TokenScript", "LegacyImage", "TokenImage", "NewName", "ChooseFromList")
+            .add("AddAbility").build();
 
     /**
      * <p>
@@ -489,11 +487,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             } else if (descriptiveKeys.contains(key)) {
                 // change descriptions differently
                 newValue = AbilityUtils.applyDescriptionTextChangeEffects(value, this);
-            } else if (mutableKeys.contains(key)) {
-                // follow SVar and change it
-                final String originalSVarValue = hostCard.getSVar(value);
-                hostCard.changeSVar(value, AbilityUtils.applyAbilityTextChangeEffects(originalSVarValue, this));
-                newValue = null;
             } else if (this.getHostCard().hasSVar(value)) {
                 // don't change literal SVar names!
                 newValue = null;
