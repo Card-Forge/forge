@@ -12,6 +12,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
+import forge.util.Localizer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,17 +53,14 @@ public class ConniveEffect extends SpellAbilityEffect {
         moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
 
-        CardCollectionView toConnive = getTargetCards(sa);
+        CardCollection toConnive = getTargetCards(sa);
         if (toConnive.isEmpty()) { // if nothing is conniving, we're done
             return;
         }
         final Player p = toConnive.getFirst().getController(); // currently all connivers will have the same controller
-        final int n = toConnive.size();
-        if (n > 1) {
-            toConnive = p.getController().chooseCardsForEffect(toConnive, sa, "Choose connive order", n, n, false, null);
-        }
-
-        for (final Card conniver : toConnive) {
+        while (toConnive.size() > 0) {
+            Card conniver = toConnive.size() > 1 ? p.getController().chooseSingleEntityForEffect(toConnive, sa,
+                    Localizer.getInstance().getMessage("lblChooseConniver"), null) : toConnive.get(0);
 
             p.drawCards(num, sa, moveParams);
 
@@ -95,7 +93,7 @@ public class ConniveEffect extends SpellAbilityEffect {
             if (game.getZoneOf(gamec).is(ZoneType.Battlefield) && gamec.equalsWithTimestamp(conniver)) {
                 conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, table);
             }
-            p.getController().endTempShowCards();
+            toConnive.remove(conniver);
         }
 
         if (allToDiscard.size() > 0) {
