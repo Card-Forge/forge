@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -455,32 +456,39 @@ public class DeckgenUtil {
                 if (isTheme) {
                     allDecks = DeckProxy.getAllThemeDecks().parallelStream()
                             .filter(deckProxy -> deckProxy.getMainSize() <= 60)
-                            .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasExactlyColor(ColorSet.fromNames(selection).getColor()))
+                            .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().isMonoColor() && deckProxy.getColor().hasExactlyColor(ColorSet.fromNames(selection).getColor()))
                             .collect(Collectors.toList());
                 } else {
                     allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
                             .filter(deckProxy -> deckProxy.getMainSize() <= 60)
-                            .filter(deckProxy -> deckProxy.getColor() != null &&  deckProxy.getColor().hasExactlyColor(ColorSet.fromNames(selection).getColor()))
+                            .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().isMonoColor() && deckProxy.getColor().hasExactlyColor(ColorSet.fromNames(selection).getColor()))
                             .collect(Collectors.toList());
                 }
             } else {
                 if (isTheme) {
-                    allDecks = DeckProxy.getAllThemeDecks().parallelStream()
+                    //include both theme and precons
+                    allDecks = Stream.concat(DeckProxy.getAllThemeDecks().parallelStream()
                             .filter(deckProxy -> deckProxy.getMainSize() <= 60)
-                            .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor()))
+                            .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor())),
+                            DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
+                                    .filter(deckProxy -> deckProxy.getMainSize() <= 60)
+                                    .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor())))
                             .collect(Collectors.toList());
                 } else {
                     allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
                             .filter(deckProxy -> deckProxy.getMainSize() <= 60)
-                            .filter(deckProxy -> deckProxy.getColor() != null &&  deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor()))
+                            .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor()))
                             .collect(Collectors.toList());
                 }
             }
         } else {
             //no specific colors
             if (isTheme) {
-                allDecks = DeckProxy.getAllThemeDecks().parallelStream()
-                        .filter(deckProxy -> deckProxy.getMainSize() <= 60)
+                //include both theme and precons
+                allDecks = Stream.concat(DeckProxy.getAllThemeDecks().parallelStream()
+                        .filter(deckProxy -> deckProxy.getMainSize() <= 60),
+                        DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
+                                .filter(deckProxy -> deckProxy.getMainSize() <= 60))
                         .collect(Collectors.toList());
             } else {
                 allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
