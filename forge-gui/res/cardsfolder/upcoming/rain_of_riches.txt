@@ -3,8 +3,8 @@ ManaCost:3 R R
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two Treasure tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac
-S:Mode$ Continuous | Affected$ Card.YouCtrl+ManaFromTreasure | AffectedZone$ Stack | CheckSVar$ X | SVarCompare$ EQ0 | AddKeyword$ Cascade | Description$ The first spell you cast each turn that mana from a Treasure was spent to cast has cascade. (When you cast the spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)
-SVar:X:Count$ThisTurnCast_Card.YouCtrl+ManaFromTreasure
+S:Mode$ Continuous | Affected$ Card.YouCtrl+CastSa Spell.ManaFromTreasure | AffectedZone$ Stack | CheckSVar$ X | SVarCompare$ EQ0 | AddKeyword$ Cascade | Description$ The first spell you cast each turn that mana from a Treasure was spent to cast has cascade. (When you cast the spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)
+SVar:X:Count$ThisTurnCast_Card.YouCtrl+CastSa Spell.ManaFromTreasure
 DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
 DeckHints:Type$Treasure
 Oracle:When Rain of Riches enters the battlefield, create two Treasure tokens.\nThe first spell you cast each turn that mana from a Treasure was spent to cast has cascade. (When you cast the spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)
