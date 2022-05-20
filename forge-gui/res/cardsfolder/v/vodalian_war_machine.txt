@@ -3,7 +3,8 @@ ManaCost:1 U U
 Types:Creature Wall
 PT:0/4
 K:Defender
-A:AB$ Pump | Cost$ tapXType<1/Merfolk> | RememberCostCards$ True | Defined$ Self | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender.
+A:AB$ Effect | Cost$ tapXType<1/Merfolk> | RememberCostCards$ True | StaticAbilities$ CanAttack | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender.
+SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE can attack this turn as though it didn't have defender.
 A:AB$ Pump | Cost$ tapXType<1/Merfolk> | RememberCostCards$ True | Defined$ Self | NumAtt$ +2 | NumDef$ +1 | SpellDescription$ CARDNAME gets +2/+1 until end of turn.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME dies, destroy all Merfolk tapped this turn to pay for its abilities.
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Merfolk.IsRemembered | SubAbility$ DBCleanup

@@ -6,8 +6,8 @@ K:Defender
 K:Flying
 K:Vigilance
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+counters_LE2_JUDGMENT | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, if CARDNAME has two or fewer judgment counters on it, put a judgment counter on it.
-SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ JUDGMENT | CounterNum$ 1
-S:Mode$ Continuous | Affected$ Card.Self+counters_GE3_JUDGMENT | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Description$ As long as CARDNAME has three or more judgment counters on it, it can attack as though it didn't have defender.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ JUDGMENT
+S:Mode$ CanAttackDefender | ValidCard$ Card.Self+counters_GE3_JUDGMENT | Description$ As long as CARDNAME has three or more judgment counters on it, it can attack as though it didn't have defender.
 K:Disturb:5 W W
 DeckHas:Ability$Graveyard|Counters
 AlternateMode:DoubleFaced

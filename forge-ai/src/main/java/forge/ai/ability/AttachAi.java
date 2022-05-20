@@ -1605,8 +1605,6 @@ public class AttachAi extends SpellAbilityAi {
                     && CombatUtil.canBlock(card, true);
         } else if (keyword.equals("Reach")) {
             return !card.hasKeyword(Keyword.FLYING) && CombatUtil.canBlock(card, true);
-        } else if (keyword.equals("CARDNAME can attack as though it didn't have defender.")) {
-            return card.hasKeyword(Keyword.DEFENDER) && card.getNetCombatDamage() + powerBonus > 0;
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
             return !card.hasKeyword(Keyword.SHROUD) && !card.hasKeyword(Keyword.HEXPROOF);
         } else return !keyword.equals("Defender");

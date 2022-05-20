@@ -391,6 +391,10 @@ public class PlayerProperty {
             if (player.getCreaturesAttackedThisTurn().isEmpty()) {
                 return false;
             }
+        } else if (property.equals("attackedYouTheirLastTurn")) {
+            if (!player.getAttackedPlayersMyLastTurn().contains(sourceController)) {
+                return false;
+            }
         } else if (property.equals("VenturedThisTurn")) {
             if (player.getVenturedThisTurn() < 1) {
                 return false;
