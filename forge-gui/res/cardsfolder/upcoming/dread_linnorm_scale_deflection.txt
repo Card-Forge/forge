@@ -11,7 +11,9 @@ ALTERNATE
 Name:Scale Deflection
 ManaCost:3 G
 Types:Instant Adventure
-A:SP$ PutCounter | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBUntap | SpellDescription$ Put two +1/+1 counters on target creature and untap it.
+A:SP$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBUntap | SpellDescription$ Put two +1/+1 counters on target creature and untap it.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Hexproof
+DeckHas:Ability$Counters
 Oracle:Put two +1/+1 counters on target creature and untap it. It gains hexproof until the end of turn.
+
