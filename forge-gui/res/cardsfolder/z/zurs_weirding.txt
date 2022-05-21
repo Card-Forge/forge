@@ -11,5 +11,4 @@ SVar:DBReset:DB$ StoreSVar | SVar$ ZurCheck | Type$ Number | Expression$ 0
 SVar:ZurCheck:Number$0
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
-SVar:RemMultiplayer:True
 Oracle:Players play with their hands revealed.\nIf a player would draw a card, they reveal it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.
