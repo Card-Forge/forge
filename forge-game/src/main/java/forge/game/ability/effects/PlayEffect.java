@@ -25,6 +25,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
@@ -321,6 +322,9 @@ public class PlayEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            final CardZoneTable triggerList = new CardZoneTable();
+            final Zone originZone = tgtCard.getZone();
+
             // lands will be played
             if (tgtSA instanceof LandAbility) {
                 tgtSA.resolve();
@@ -335,6 +339,13 @@ public class PlayEffect extends SpellAbilityEffect {
                 if (forget) {
                     source.removeRemembered(tgtCard);
                 }
+
+                final Zone currentZone = game.getCardState(tgtCard).getZone();
+                if (!originZone.equals(currentZone)) {
+                    triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), game.getCardState(tgtCard));
+                }
+                triggerList.triggerChangesZoneAll(game, null);
+
                 continue;
             }
 
@@ -422,6 +433,12 @@ public class PlayEffect extends SpellAbilityEffect {
                 if (forget) {
                     source.removeRemembered(tgtCard);
                 }
+
+                final Zone currentZone = game.getCardState(tgtCard).getZone();
+                if (!originZone.equals(currentZone)) {
+                    triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), game.getCardState(tgtCard));
+                }
+                triggerList.triggerChangesZoneAll(game, null);
             }
 
             amount--;
