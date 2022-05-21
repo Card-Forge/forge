@@ -117,9 +117,6 @@ public class Game {
     private CardCollection lastStateBattlefield = new CardCollection();
     private CardCollection lastStateGraveyard = new CardCollection();
 
-    private Map<Player, PlayerCollection> attackedThisTurn = Maps.newHashMap();
-    private Map<Player, PlayerCollection> attackedLastTurn = Maps.newHashMap();
-
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
 
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
@@ -174,28 +171,6 @@ public class Game {
 
     public void setMonarchBeginTurn(Player monarchBeginTurn) {
         this.monarchBeginTurn = monarchBeginTurn;
-    }
-
-    public Map<Player, PlayerCollection> getPlayersAttackedThisTurn() {
-        return attackedThisTurn;
-    }
-
-    public Map<Player, PlayerCollection> getPlayersAttackedLastTurn() {
-        return attackedLastTurn;
-    }
-
-    public void addPlayerAttackedThisTurn(Player attacker, Player defender) {
-        PlayerCollection atk = attackedThisTurn.get(attacker);
-        if (atk == null) {
-            attackedThisTurn.put(attacker, new PlayerCollection());
-        }
-        attackedThisTurn.get(attacker).add(defender);
-    }
-
-    public void resetPlayersAttackedOnNextTurn() {
-        attackedLastTurn.clear();
-        attackedLastTurn.putAll(attackedThisTurn);
-        attackedThisTurn.clear();
     }
 
     public CardCollectionView getLastStateBattlefield() {
@@ -1093,8 +1068,6 @@ public class Game {
 
     public void onCleanupPhase() {
         clearCounterAddedThisTurn();
-        // Reset the attackers this turn/last turn
-        resetPlayersAttackedOnNextTurn();
         // some cards need this info updated even after a player lost, so don't skip them
         for (Player player : getRegisteredPlayers()) {
             player.onCleanupPhase();

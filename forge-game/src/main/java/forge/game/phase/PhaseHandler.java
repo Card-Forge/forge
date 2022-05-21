@@ -321,14 +321,6 @@ public class PhaseHandler implements java.io.Serializable {
                     declareAttackersTurnBasedAction();
                     game.getStack().unfreezeStack();
 
-                    if (combat != null) {
-                        for (Card c : combat.getAttackers()) {
-                            if (combat.getDefenderByAttacker(c) instanceof Player) {
-                                game.addPlayerAttackedThisTurn(c.getController(), (Player)combat.getDefenderByAttacker(c));
-                            }
-                        }
-                    }
-
                     givePriorityToPlayer = inCombat();
                     break;
 
