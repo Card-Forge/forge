@@ -1,17 +1,12 @@
 package forge.game.ability.effects;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.google.common.collect.Lists;
 
-import com.google.common.collect.Maps;
 import forge.GameCommand;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.event.GameEventCardStatsChanged;
