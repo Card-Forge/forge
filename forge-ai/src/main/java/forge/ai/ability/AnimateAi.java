@@ -500,17 +500,19 @@ public class AnimateAi extends SpellAbilityAi {
         }
 
         // give sVars
-        if (sVars.size() > 0) {
-            for (final String s : sVars) {
-                String actualsVar = source.getSVar(s);
+        if (sa.hasParam("sVars")) {
+            Map<String, String> sVarsMap = Maps.newHashMap();
+            for (final String s : sa.getParam("sVars").split(",")) {
+                String actualsVar = AbilityUtils.getSVar(sa, s);
                 String name = s;
                 if (actualsVar.startsWith("SVar:")) {
                     actualsVar = actualsVar.split("SVar:")[1];
                     name = actualsVar.split(":")[0];
                     actualsVar = actualsVar.split(":")[1];
                 }
-                card.setSVar(name, actualsVar);
+                sVarsMap.put(name, actualsVar);
             }
+            card.addChangedSVars(sVarsMap, timestamp, 0);
         }
         ComputerUtilCard.applyStaticContPT(game, card, null);
     }
