@@ -5,7 +5,7 @@ PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters the battlefield, target opponent loses 2 life and you gain 2 life.
 SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ At the beginning of your end step you may exile CARDNAME. If you do, return it to the battlefield under it's owner's control at the beginning of your next upkeep. It gains haste.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ At the beginning of your end step you may exile NICKNAME. If you do, return it to the battlefield under it's owner's control at the beginning of your next upkeep. It gains haste.
 SVar:TrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDelaytrig
 SVar:DBDelaytrig:DB$ Effect | Name$ Obzedat Effect | Triggers$ TrigEOT | RememberObjects$ Self | Duration$ Permanent
 SVar:TrigEOT:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ ObzedatReturn | TriggerDescription$ Return CARDNAME to the battlefield under it's owner's control. It gains haste.
