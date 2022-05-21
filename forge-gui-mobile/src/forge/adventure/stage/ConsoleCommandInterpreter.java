@@ -219,6 +219,16 @@ public class ConsoleCommandInterpreter {
             }
             return "Enemy deck list dumped to stdout.";
         });
+        registerCommand(new String[]{"dumpEnemyColorIdentity"}, s -> {
+            for(EnemyData E : new Array.ArrayIterator<>(WorldData.getAllEnemies())){
+                Deck D = E.generateDeck(Current.player().isFantasyMode());
+                DeckProxy DP = new DeckProxy(D, "Constructed", GameType.Constructed, null);
+                ColorSet colorSet = DP.getColor();
+                System.out.printf("%s Colors: %s | Deck Colors: %s (%s)\n", E.name, E.colors, DP.getColorIdentity().toEnumSet().toString(), DP.getName()
+                );
+            }
+            return "Enemy color Identity dumped to stdout.";
+        });
         registerCommand(new String[]{"heal", "amount"}, s -> {
             if(s.length<1) return "Command needs 1 parameter";
             int N = 0;
