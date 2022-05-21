@@ -171,8 +171,6 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                 }
             }
         }
-
-        // AllZone.getTriggerHandler().runTrigger("FlipsACoin",runParams);
     }
 
     /**

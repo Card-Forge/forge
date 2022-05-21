@@ -2,11 +2,11 @@ Name:Tezzeret, Betrayer of Flesh
 ManaCost:2 U U
 Types:Legendary Planeswalker Tezzeret
 Loyalty:4
-T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidCard$ Artifact | Static$ True | CheckSVar$ ArtAct | SVarCompare$ NE1 | Execute$ TrigStore
-SVar:TrigStore:DB$ Pump | NoteNumber$ 1
+T:Mode$ AbilityCast | ValidCard$ Artifact | Static$ True | CheckSVar$ ArtAct | SVarCompare$ NE1 | Execute$ TrigStore
+SVar:TrigStore:DB$ Pump | Defined$ TriggeredActivator | NoteNumber$ 1
 SVar:ArtAct:Count$NotedNumber
 T:Mode$ TurnBegin | Execute$ TrigReset | Static$ True
-SVar:TrigReset:DB$ Pump | NoteNumber$ 0
+SVar:TrigReset:DB$ Pump | Defined$ Player | NoteNumber$ 0
 S:Mode$ ReduceCost | ValidCard$ Artifact.YouCtrl | Type$ Ability | Amount$ 2 | CheckSVar$ ArtAct | SVarCompare$ NE1 | OnlyFirstActivation$ True | AffectedZone$ Battlefield | Description$ The first activated ability of an artifact you activate each turn costs {2} less to activate.
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SpellDescription$ Draw two cards. Then discard two cards unless you discard an artifact card. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | UnlessType$ Artifact
