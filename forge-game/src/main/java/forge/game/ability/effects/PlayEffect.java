@@ -344,7 +344,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 if (!originZone.equals(currentZone)) {
                     triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), game.getCardState(tgtCard));
                 }
-                triggerList.triggerChangesZoneAll(game, null);
+                triggerList.triggerChangesZoneAll(game, sa);
 
                 continue;
             }
@@ -438,7 +438,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 if (!originZone.equals(currentZone)) {
                     triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), game.getCardState(tgtCard));
                 }
-                triggerList.triggerChangesZoneAll(game, null);
+                triggerList.triggerChangesZoneAll(game, sa);
             }
 
             amount--;
