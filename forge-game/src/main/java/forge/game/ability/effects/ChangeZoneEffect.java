@@ -619,10 +619,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         gameCard.addEtbCounter(cType, cAmount, player);
                     }
                     if (sa.hasParam("GainControl")) {
-                        Player newController = player;
-                        if (sa.hasParam("NewController")) {
-                            newController = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("NewController"), sa), null);
-                        }
+                        final String g = sa.getParam("GainControl");
+                        Player newController = g.equals("True") ? sa.getActivatingPlayer() :
+                                AbilityUtils.getDefinedPlayers(sa.getHostCard(), g, sa).get(0);
                         if (newController != null) {
                             if (newController != gameCard.getController()) {
                                 gameCard.runChangeControllerCommands();
@@ -1279,10 +1278,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         source.removeRemembered(c);
                     }
                     if (sa.hasParam("GainControl")) {
-                        Player newController = sa.getActivatingPlayer();
-                        if (sa.hasParam("NewController")) {
-                            newController = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("NewController"), sa).get(0);
-                        }
+                        final String g = sa.getParam("GainControl");
+                        Player newController = g.equals("True") ? sa.getActivatingPlayer() :
+                                AbilityUtils.getDefinedPlayers(sa.getHostCard(), g, sa).get(0);
                         if (newController != c.getController()) {
                             c.runChangeControllerCommands();
                         }
