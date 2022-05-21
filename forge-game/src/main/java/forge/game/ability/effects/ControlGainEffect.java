@@ -16,6 +16,9 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ControlGainEffect extends SpellAbilityEffect {
 
     @Override
