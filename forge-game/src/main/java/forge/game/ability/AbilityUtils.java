@@ -3306,6 +3306,21 @@ public class AbilityUtils {
             return doXMath(totPlayer, m, source, ctb);
         }
 
+        if (l[0].startsWith("Condition")) {
+            int totPlayer = 0;
+            String[] parts = l[0].split(" ", 2);
+            boolean def = parts[0].equals("Condition");
+            String comparator = !def ? parts[0].substring(9, 11) : "GE";
+            int y = !def ? calculateAmount(source, parts[0].substring(11), ctb) : 1;
+            for (Player p : players) {
+                int x = playerXProperty(p, parts[1], source, ctb);
+                if (Expressions.compare(x, comparator, y)) {
+                    totPlayer++;
+                }
+            }
+            return doXMath(totPlayer, m, source, ctb);
+        }
+
         if (sq[0].contains("DamageThisTurn")) {
             int totDmg = 0;
             for (Player p : players) {
