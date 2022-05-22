@@ -32,6 +32,7 @@ import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
+import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
@@ -574,23 +575,18 @@ public class MapStage extends GameStage {
         Gdx.input.vibrate(50);
         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
         SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
-        if (!isLoadingMatch) {
-            isLoadingMatch = true;
-            Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
-                @Override
-                public void run() {
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (!isLoadingMatch) {
+                isLoadingMatch = true;
+                Forge.setTransitionScreen(new TransitionScreen(() -> {
+                    DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
+                    duelScene.initDuels(player, mob);
                     Forge.clearTransitionScreen();
-                }
-            }, ScreenUtils.getFrameBufferTexture(), true, false));
-        }
-        startPause(0.3f, new Runnable() {
-            @Override
-            public void run() {
-                DuelScene S = ((DuelScene) SceneType.DuelScene.instance);
-                S.setEnemy(mob);
-                S.setPlayer(player);
-                if(isInMap && effect != null) S.setDungeonEffect(effect);
-                Forge.switchScene(SceneType.DuelScene.instance);
+                    startPause(0.3f, () -> {
+                        if(isInMap && effect != null) duelScene.setDungeonEffect(effect);
+                        Forge.switchScene(SceneType.DuelScene.instance);
+                    });
+                }, ScreenUtils.getFrameBufferTexture(), true, false));
             }
         });
     }

@@ -23,6 +23,8 @@ import forge.util.BinaryUtil;
 import forge.util.IHasName;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -561,6 +563,16 @@ public class DeckProxy implements InventoryItem {
             decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
         }
         return decks;
+    }
+
+    public static Map<DeckProxy, Pair<List<String>, List<String>>> getAllQuestChallenges() {
+        final Map<DeckProxy, Pair<List<String>, List<String>>> deckMap = new HashMap<>();
+        final QuestController quest = FModel.getQuest();
+        for (final QuestEvent e : quest.getChallenges()) {
+            Pair<List<String>, List<String>> extras = new ImmutablePair<>(e.getHumanExtraCards(), e.getAiExtraCards());
+            deckMap.put(new DeckProxy(e.getEventDeck(), "Quest Event", null, null), extras);
+        }
+        return deckMap;
     }
 
     public static List<DeckProxy> getNonEasyQuestDuelDecks() {
