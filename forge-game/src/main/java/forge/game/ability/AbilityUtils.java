@@ -3368,6 +3368,18 @@ public class AbilityUtils {
             return doXMath(cardsonbattlefield.size(), m, source, ctb);
         }
 
+        if (l[0].startsWith("ThisTurnEntered")) {
+            final String[] workingCopy = l[0].split("_");
+
+            ZoneType destination = ZoneType.smartValueOf(workingCopy[1]);
+            final boolean hasFrom = workingCopy[2].equals("from");
+            ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
+            String validFilter = workingCopy[hasFrom ? 4 : 2] ;
+
+            final CardCollection res = CardLists.getValidCards(player.getZone(destination).getCardsAddedThisTurn(origin), validFilter, player, source, ctb);
+            return doXMath(res.size(), m, source, ctb);
+        }
+
         final String[] sq = l[0].split("\\.");
         final String value = sq[0];
 
