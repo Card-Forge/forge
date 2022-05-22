@@ -175,10 +175,10 @@ public class SaveLoadScene extends UIScene {
         dialog.hide();
         if (WorldSave.getCurrentSave().save(textInput.getText(), currentSlot)) {
             updateFiles();
+            //ensure the dialog is hidden before switching
+            dialog.getColor().a = 0f;
             Forge.switchScene(SceneType.GameScene.instance);
         }
-
-
     }
 
     private void updateFiles() {

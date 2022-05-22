@@ -86,7 +86,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         heroRace = race;
         isFemale = !male;
         name = n;
-        setColorIdentity(startingColorIdentity + 1); //+1 because index 0 is colorless.
+        //todo make coloridentity as colorset so if player is using multi color deck, get rewards based on the current selected deck color
+        setColorIdentity(fantasyMode ? 0 : startingColorIdentity + 1); //+1 because index 0 is colorless.
         statistic.clear();
         newCards.clear();
         onGoldChangeList.emit();
