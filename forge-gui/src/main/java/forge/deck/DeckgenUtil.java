@@ -474,7 +474,7 @@ public class DeckgenUtil {
         if (deck != null) {
             return deck;
         }
-        return DeckgenUtil.buildColorDeck(selection, null, forAi);
+        return getRandomColorDeck(forAi);
     }
 
     /** @return {@link forge.deck.Deck} */

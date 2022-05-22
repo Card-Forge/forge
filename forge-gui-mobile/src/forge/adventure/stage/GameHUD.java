@@ -46,6 +46,7 @@ public class GameHUD extends Stage {
     private Console console;
     float TOUCHPAD_SCALE = 70f, referenceX;
     boolean isHiding = false, isShowing = false;
+    float opacity = 1f;
 
     private GameHUD(GameStage gameStage) {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
@@ -260,11 +261,13 @@ public class GameHUD extends Stage {
             menuActor.getColor().a = 1f;
             statsActor.getColor().a = 1f;
             inventoryActor.getColor().a = 1f;
+            opacity = 1f;
         } else {
             deckActor.getColor().a = 0.5f;
             menuActor.getColor().a = 0.5f;
             statsActor.getColor().a = 0.5f;
             inventoryActor.getColor().a = 0.5f;
+            opacity = 0.5f;
         }
     }
 
@@ -312,10 +315,10 @@ public class GameHUD extends Stage {
         if (isShowing)
             return;
         isShowing = true;
-        menuActor.addAction(Actions.sequence(Actions.delay(0.1f), Actions.parallel(Actions.show(), Actions.fadeIn(0.1f), Actions.moveTo(referenceX, menuActor.getY(), 0.25f))));
-        statsActor.addAction(Actions.sequence(Actions.delay(0.15f), Actions.parallel(Actions.show(), Actions.fadeIn(0.1f), Actions.moveTo(referenceX, statsActor.getY(), 0.25f))));
-        inventoryActor.addAction(Actions.sequence(Actions.delay(0.2f), Actions.parallel(Actions.fadeIn(0.1f), Actions.show(), Actions.moveTo(referenceX, inventoryActor.getY(), 0.25f))));
-        deckActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.parallel(Actions.fadeIn(0.1f), Actions.show(), Actions.moveTo(referenceX, deckActor.getY(), 0.25f))));
+        menuActor.addAction(Actions.sequence(Actions.delay(0.1f), Actions.parallel(Actions.show(), Actions.alpha(opacity,0.1f), Actions.moveTo(referenceX, menuActor.getY(), 0.25f))));
+        statsActor.addAction(Actions.sequence(Actions.delay(0.15f), Actions.parallel(Actions.show(), Actions.alpha(opacity,0.1f), Actions.moveTo(referenceX, statsActor.getY(), 0.25f))));
+        inventoryActor.addAction(Actions.sequence(Actions.delay(0.2f), Actions.parallel(Actions.show(), Actions.alpha(opacity,0.1f), Actions.moveTo(referenceX, inventoryActor.getY(), 0.25f))));
+        deckActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.parallel(Actions.show(), Actions.alpha(opacity,0.1f), Actions.moveTo(referenceX, deckActor.getY(), 0.25f))));
         FThreads.delayInEDT(300, () -> isShowing = false);
     }
     class ConsoleToggleListener extends ActorGestureListener {

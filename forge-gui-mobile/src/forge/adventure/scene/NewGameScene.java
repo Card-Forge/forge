@@ -2,20 +2,25 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
 import forge.adventure.data.DifficultyData;
 import forge.adventure.data.HeroListData;
 import forge.adventure.util.Config;
+import forge.adventure.util.Controls;
 import forge.adventure.util.Selector;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
@@ -44,6 +49,7 @@ public class NewGameScene extends UIScene {
     private ImageButton leftArrow, rightArrow;
     private TextButton backButton, startButton;
     boolean fantasyMode = false;
+    private CheckBox box;
 
     public NewGameScene() {
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
@@ -100,15 +106,10 @@ public class NewGameScene extends UIScene {
             Array<String> stringList = new Array<>(starterDeck.length);
             for (Deck deck : starterDeck)
                 stringList.add(deck.getName());
-            stringList.add("Chaos Mode");
+            Array<String> chaos = new Array<>();
+            chaos.add("Preconstructed");
 
             deck.setTextList(stringList);
-            deck.addListener(new EventListener() {
-                @Override
-                public boolean handle(Event event) {
-                    return NewGameScene.this.updateFantasy();
-                }
-            });
 
             race = ui.findActor("race");
             race.addListener(new EventListener() {
@@ -177,13 +178,26 @@ public class NewGameScene extends UIScene {
             difficultyL.setText(Forge.getLocalizer().getMessage("lblDifficulty"));
             deckL = ui.findActor("deckL");
             deckL.setText(Forge.getLocalizer().getMessage("lblDeck"));
+            box = Controls.newCheckBox("");
+            box.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    fantasyMode = ((CheckBox) actor).isChecked();
+                    deck.setTextList(fantasyMode ? chaos : stringList);
+                }
+            });
+            box.setBounds(deckL.getX()-box.getHeight(), deckL.getY()-box.getHeight(), deckL.getHeight(), deckL.getHeight());
+            Label label = Controls.newLabel("Chaos Mode");
+            label.setColor(Color.BLACK);
+            label.setBounds(box.getX()+22, box.getY(), box.getWidth(), box.getHeight());
+            ui.addActor(box);
+            ui.addActor(label);
             leftArrow = ui.findActor("leftAvatar");
             rightArrow = ui.findActor("rightAvatar");
             backButton = ui.findActor("back");
             backButton.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
             startButton = ui.findActor("start");
             startButton.getLabel().setText(Forge.getLocalizer().getMessage("lblStart"));
-            updateFantasy();
 
     }
 
@@ -203,11 +217,6 @@ public class NewGameScene extends UIScene {
         return false;
     }
 
-    private boolean updateFantasy() {
-        fantasyMode = "Chaos Mode".equalsIgnoreCase(deck.getText());
-        return false;
-    }
-
     @Override
     public void create() {
 
@@ -216,7 +225,6 @@ public class NewGameScene extends UIScene {
     @Override
     public void enter() {
         updateAvatar();
-        updateFantasy();
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
     }
 
