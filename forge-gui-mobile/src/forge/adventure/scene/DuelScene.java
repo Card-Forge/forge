@@ -13,11 +13,13 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FSkin;
 import forge.deck.Deck;
+import forge.deck.DeckProxy;
 import forge.game.GameRules;
 import forge.game.GameType;
 import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
+import forge.gamemodes.quest.QuestUtil;
 import forge.gui.interfaces.IGuiGame;
 import forge.item.IPaperCard;
 import forge.player.GamePlayerUtil;
@@ -27,6 +29,8 @@ import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.trackable.TrackableCollection;
+import forge.util.Aggregates;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 
@@ -42,6 +46,11 @@ public class DuelScene extends ForgeScene {
     PlayerSprite player;
     RegisteredPlayer humanPlayer;
     private EffectData dungeonEffect;
+    Deck playerDeck, enemyDeck;
+    boolean chaosBattle = false;
+    List<IPaperCard> playerExtras = new ArrayList<>();
+    List<IPaperCard> AIExtras = new ArrayList<>();
+
 
     public DuelScene() {
 
@@ -101,7 +110,6 @@ public class DuelScene extends ForgeScene {
         AdventurePlayer advPlayer = Current.player();
 
         List<RegisteredPlayer> players = new ArrayList<>();
-        Deck playerDeck=(Deck)AdventurePlayer.current().getSelectedDeck().copyTo("PlayerDeckCopy");
         int missingCards= Config.instance().getConfigData().minDeckSize-playerDeck.getMain().countAll();
         if( missingCards > 0 ) //Replace unknown cards for a Wastes.
             playerDeck.getMain().add("Wastes",missingCards);
@@ -111,7 +119,6 @@ public class DuelScene extends ForgeScene {
         playerObject.setAvatarIndex(90001);
         humanPlayer.setPlayer(playerObject);
         humanPlayer.setStartingLife(advPlayer.getLife());
-        Deck enemyDeck = ( enemy.getData().copyPlayerDeck ? playerDeck : enemy.getData().generateDeck(Current.player().isFantasyMode()));
         Current.setLatestDeck(enemyDeck);
         RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, Current.latestDeck(), null, false, null, null);
         LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(this.enemy.getData().name, selectAI(this.enemy.getData().ai));
@@ -162,6 +169,12 @@ public class DuelScene extends ForgeScene {
         addEffects(humanPlayer,playerEffects);
         addEffects(aiPlayer,oppEffects);
 
+        //add extra cards for challenger mode
+        if (chaosBattle) {
+            humanPlayer.addExtraCardsOnBattlefield(playerExtras);
+            aiPlayer.addExtraCardsOnBattlefield(AIExtras);
+        }
+
         players.add(humanPlayer);
         players.add(aiPlayer);
 
@@ -204,12 +217,33 @@ public class DuelScene extends ForgeScene {
         return MatchController.getView();
     }
 
-    public void setEnemy(EnemySprite data) {
-        this.enemy = data;
-    }
-
-    public void setPlayer(PlayerSprite sprite) {
-        this.player = sprite;
+    public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite) {
+        this.player = playerSprite;
+        this.enemy = enemySprite;
+        this.playerDeck = (Deck)AdventurePlayer.current().getSelectedDeck().copyTo("PlayerDeckCopy");
+        this.chaosBattle = this.enemy.getData().copyPlayerDeck && Current.player().isFantasyMode();
+        if (this.chaosBattle) { //random challenge for chaos mode
+            Map<DeckProxy, Pair<List<String>, List<String>>> deckProxyMapMap = DeckProxy.getAllQuestChallenges();
+            List<DeckProxy> decks = new ArrayList<>(deckProxyMapMap.keySet());
+            DeckProxy deck = Aggregates.random(decks);
+            //playerextras
+            List<IPaperCard> playerCards = new ArrayList<>();
+            for (String s : deckProxyMapMap.get(deck).getLeft()) {
+                playerCards.add(QuestUtil.readExtraCard(s));
+            }
+            this.playerExtras = playerCards;
+            //aiextras
+            List<IPaperCard> aiCards = new ArrayList<>();
+            for (String s : deckProxyMapMap.get(deck).getRight()) {
+                aiCards.add(QuestUtil.readExtraCard(s));
+            }
+            this.AIExtras = aiCards;
+            this.enemyDeck = deck.getDeck();
+        } else {
+            this.AIExtras.clear();
+            this.playerExtras.clear();
+            this.enemyDeck = this.enemy.getData().copyPlayerDeck ? this.playerDeck : this.enemy.getData().generateDeck(Current.player().isFantasyMode());
+        }
     }
 
     private String selectAI(String ai) { //Decide opponent AI.
