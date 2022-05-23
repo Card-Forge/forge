@@ -123,7 +123,10 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         }
 
         CardCollectionView srcCards = null;
-        String title = Localizer.getInstance().getMessage("lblChooseCardsToTakeTargetCounters", counterType.getName());
+
+        String typeforPrompt = counterType == null ? "" : counterType.getName();
+        String title = Localizer.getInstance().getMessage("lblChooseCardsToTakeTargetCounters", typeforPrompt);
+        title = title.replace("  ", " ");
         if (sa.hasParam("ValidSource")) {
             srcCards = game.getCardsIn(ZoneType.Battlefield);
             srcCards = CardLists.getValidCards(srcCards, sa.getParam("ValidSource"), player, card, sa);
