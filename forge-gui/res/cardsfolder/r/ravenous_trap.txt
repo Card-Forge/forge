@@ -3,6 +3,6 @@ ManaCost:2 B B
 Types:Instant Trap
 SVar:AltCost:Cost$ 0 | CheckSVar$ CardsToGraveyard | Description$ If an opponent had three or more cards put into their graveyard from anywhere this turn, you may pay {0} rather than pay this spell's mana cost.
 A:SP$ ChangeZoneAll | Cost$ 2 B B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | StackDescription$ Exile all cards from {p:Targeted}'s graveyard. | SpellDescription$ Exile all cards from target player's graveyard.
-SVar:CardsToGraveyard::PlayerCountOpponents$ConditionGE3 ThisTurnEntered_Graveyard_Card.YouCtrl
+SVar:CardsToGraveyard:PlayerCountOpponents$ConditionGE3 ThisTurnEntered_Graveyard_Card.YouCtrl
 AI:RemoveDeck:Random
 Oracle:If an opponent had three or more cards put into their graveyard from anywhere this turn, you may pay {0} rather than pay this spell's mana cost.\nExile all cards from target player's graveyard.
