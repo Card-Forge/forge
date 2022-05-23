@@ -245,6 +245,12 @@ public class DuelScene extends ForgeScene {
             this.enemyDeck = this.enemy.getData().copyPlayerDeck ? this.playerDeck : this.enemy.getData().generateDeck(Current.player().isFantasyMode());
         }
     }
+    public Deck getPlayerDeck() {
+        return this.playerDeck;
+    }
+    public Deck getEnemyDeck() {
+        return this.enemyDeck;
+    }
 
     private String selectAI(String ai) { //Decide opponent AI.
         String AI = ""; //Use user settings if it's null.

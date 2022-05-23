@@ -87,9 +87,10 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     Gdx.input.vibrate(50);
                     Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
                     SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
+                    DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
                     FThreads.invokeInEdtNowOrLater(() -> {
                         Forge.setTransitionScreen(new TransitionScreen(() -> {
-                            ((DuelScene) SceneType.DuelScene.instance).initDuels(player, mob);
+                            duelScene.initDuels(player, mob);
                             Forge.clearTransitionScreen();
                             startPause(0.3f, () -> Forge.switchScene(SceneType.DuelScene.instance));
                         }, ScreenUtils.getFrameBufferTexture(), true, false));
@@ -244,9 +245,9 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
         setBounds(WorldSave.getCurrentSave().getWorld().getWidthInPixels(), WorldSave.getCurrentSave().getWorld().getHeightInPixels());
         if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
-            MapStage.getInstance().showImageDialog("Chaos Mode!\n"+ WorldSave.getCurrentSave().getPlayer().getName()+ "'s Deck: "+
+            MapStage.getInstance().showDeckAwardDialog("Chaos Mode!\n"+ WorldSave.getCurrentSave().getPlayer().getName()+ "'s Deck: "+
                     WorldSave.getCurrentSave().getPlayer().getSelectedDeck().getName()+
-                    "\nEnemy will use Preconstructed, Theme or Random Generated Decks.", null);
+                    "\nEnemy will use Preconstructed, Theme or Random Generated Decks.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
             WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
         }
     }

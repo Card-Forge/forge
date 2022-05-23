@@ -214,6 +214,28 @@ public class DeckProxy implements InventoryItem {
         return colorIdentity;
     }
 
+    public static ColorSet getColorIdentity(Deck deck) {
+        byte colorProfile = MagicColor.COLORLESS;
+        ColorSet deckIdentity = ColorSet.fromMask(colorProfile);
+        if (deck != null) {
+            for (final Entry<DeckSection, CardPool> deckEntry : deck) {
+                switch (deckEntry.getKey()) {
+                    case Main:
+                    case Sideboard:
+                    case Commander:
+                        for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                            colorProfile |= poolEntry.getKey().getRules().getColorIdentity().getColor();
+                        }
+                        break;
+                    default:
+                        break; //ignore other sections
+                }
+            }
+            deckIdentity = ColorSet.fromMask(colorProfile);
+        }
+        return deckIdentity;
+    }
+
     public Deck.UnplayableAICards getAI() {
         return getDeck().getUnplayableAICards();
     }
