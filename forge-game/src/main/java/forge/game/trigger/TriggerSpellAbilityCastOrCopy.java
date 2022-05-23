@@ -295,11 +295,14 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         final SpellAbility castSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
         final SpellAbilityStackInstance si = sa.getHostCard().getGame().getStack().getInstanceFromSpellAbility(castSA);
+        final SpellAbility saForTargets = si != null ? si.getSpellAbility(true) : castSA;
         sa.setTriggeringObject(AbilityKey.Card, castSA.getHostCard());
         sa.setTriggeringObject(AbilityKey.SpellAbility, castSA.copy(castSA.getHostCard(), true));
         sa.setTriggeringObject(AbilityKey.StackInstance, si);
-        sa.setTriggeringObject(AbilityKey.SpellAbilityTarget, (si != null ? si.getSpellAbility(true) : castSA).getTargets().get(0));
-        sa.setTriggeringObject(AbilityKey.SpellAbilityTargetingCards, (si != null ? si.getSpellAbility(true) : castSA).getTargets().getTargetCards());
+        if (!saForTargets.getTargets().isEmpty()) {
+            sa.setTriggeringObject(AbilityKey.SpellAbilityTarget, saForTargets.getTargets().get(0));
+        }
+        sa.setTriggeringObject(AbilityKey.SpellAbilityTargetingCards, (saForTargets.getTargets().getTargetCards());
         sa.setTriggeringObjectsFrom(
                 runParams,
             AbilityKey.Player,
