@@ -26,6 +26,8 @@ import forge.util.Aggregates;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.Lang;
+import forge.util.collect.FCollection;
+import forge.util.collect.FCollectionView;
 
 
 public class CopySpellAbilityEffect extends SpellAbilityEffect {
@@ -138,22 +140,29 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                     valid.remove(originalTarget);
 
                     if (sa.hasParam("ChooseOnlyOne")) {
-                        Card choice = controller.getController().chooseSingleEntityForEffect(valid, sa, Localizer.getInstance().getMessage("lblChooseOne"), null);
+                        FCollectionView<GameEntity> all = new FCollection<>();
+                        ((FCollection<GameEntity>) all).addAll(valid);
+                        ((FCollection<GameEntity>) all).addAll(players);
+                        GameEntity choice = controller.getController().chooseSingleEntityForEffect(all, sa,
+                                Localizer.getInstance().getMessage("lblChooseOne"), null);
                         if (choice != null) {
-                            valid = new CardCollection(choice);
+                            SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                            resetFirstTargetOnCopy(copy, choice, targetedSA);
+                            copies.add(copy);
+                        }
+                    } else {
+                        for (final Card c : valid) {
+                            SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                            resetFirstTargetOnCopy(copy, c, targetedSA);
+                            copies.add(copy);
+                        }
+                        for (final Player p : players) {
+                            SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                            resetFirstTargetOnCopy(copy, p, targetedSA);
+                            copies.add(copy);
                         }
                     }
 
-                    for (final Card c : valid) {
-                        SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
-                        resetFirstTargetOnCopy(copy, c, targetedSA);
-                        copies.add(copy);
-                    }
-                    for (final Player p : players) {
-                        SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
-                        resetFirstTargetOnCopy(copy, p, targetedSA);
-                        copies.add(copy);
-                    }
                 }
             } else {
                 for (int i = 0; i < amount; i++) {
