@@ -3,7 +3,7 @@ ManaCost:2 W W
 Types:Legendary Planeswalker Gideon
 Loyalty:4
 A:AB$ Animate | Cost$ AddCounter<1/LOYALTY> | Defined$ Self | Power$ 5 | Toughness$ 5 | Keywords$ Indestructible | Types$ Creature,Human,Soldier,Ally | SubAbility$ GideonPrevent | Planeswalker$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 5/5 Human Soldier Ally creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
-SVar:GideonPrevent:DB$ Effect | ReplacementEffects$ RPrevent | Duration$ UntilHostLeavesPlayOrEOT
+SVar:GideonPrevent:DB$ Effect | ReplacementEffects$ RPrevent | Duration$ UntilHostLeavesPlayOrEOT | ConditionPresent$ Card.StrictlySelf
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ValidTarget$ Card.EffectSource | Description$ Prevent all damage that would be dealt to EFFECTSOURCE.
 A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | TokenAmount$ 1 | TokenScript$ w_2_2_knight_ally | TokenOwner$ You | Planeswalker$ True | SpellDescription$ Create a 2/2 white Knight Ally creature token.
 A:AB$ Effect | Cost$ SubCounter<4/LOYALTY> | Name$ Emblem - Gideon, Ally of Zendikar | StaticAbilities$ STPump | Planeswalker$ True | Ultimate$ True | Duration$ Permanent | AILogic$ NeedCreatures:3 | SpellDescription$ You get an emblem with "Creatures you control get +1/+1."
