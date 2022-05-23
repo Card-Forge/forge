@@ -3373,7 +3373,7 @@ public class AbilityUtils {
             ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
             String validFilter = workingCopy[hasFrom ? 4 : 2] ;
 
-            final CardCollection res = CardLists.getValidCards(player.getZone(destination).getCardsAddedThisTurn(origin), validFilter, player, source, ctb);
+            final List<Card> res = CardUtil.getThisTurnEntered(destination, origin, validFilter, source, ctb, player);
             return doXMath(res.size(), m, source, ctb);
         }
 
