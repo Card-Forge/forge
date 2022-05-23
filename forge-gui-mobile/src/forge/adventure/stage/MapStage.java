@@ -4,6 +4,7 @@ package forge.adventure.stage;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
@@ -20,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -32,12 +34,17 @@ import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
+import forge.card.ColorSet;
+import forge.deck.Deck;
+import forge.deck.DeckProxy;
 import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
 import java.util.*;
+
+import static forge.adventure.util.Paths.MANA_ATLAS;
 
 /**
  * Stage to handle tiled maps for points of interests
@@ -216,6 +223,89 @@ public class MapStage extends GameStage {
         L.setWrap(true);
         dialog.getContentTable().add(L).width(250f);
         dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(250f);
+        dialog.setKeepWithinStage(true);
+        setDialogStage(GameHUD.getInstance());
+        showDialog();
+    }
+    public void showDeckAwardDialog(String message, Deck deck) {
+        dialog.getContentTable().clear();
+        dialog.getButtonTable().clear();
+        if (deck != null) {
+            TextureAtlas atlas = Config.instance().getAtlas(MANA_ATLAS);
+            ColorSet deckColor = DeckProxy.getColorIdentity(deck);
+            if (deckColor.isColorless()) {
+                Image pixC = new Image(atlas.createSprite("pixC"));
+                pixC.setScaling(Scaling.fit);
+                dialog.getContentTable().add(pixC).height(20).width(20);
+                dialog.getContentTable().add().row();
+            } else if (deckColor.isMonoColor()) {
+                Image pix = new Image(atlas.createSprite("pixC"));
+                if (deckColor.hasWhite())
+                    pix = new Image(atlas.createSprite("pixW"));
+                else if (deckColor.hasBlue())
+                    pix = new Image(atlas.createSprite("pixU"));
+                else if (deckColor.hasBlack())
+                    pix = new Image(atlas.createSprite("pixB"));
+                else if (deckColor.hasRed())
+                    pix = new Image(atlas.createSprite("pixR"));
+                else if (deckColor.hasGreen())
+                    pix = new Image(atlas.createSprite("pixG"));
+                pix.setScaling(Scaling.fit);
+                dialog.getContentTable().add(pix).height(20).width(20);
+                dialog.getContentTable().add().row();
+            } else if (deckColor.isMulticolor()) {
+                Group group = new Group();
+                int mul = 0;
+                if (deckColor.hasWhite()) {
+                    Image pix = new Image(atlas.createSprite("pixW"));
+                    pix.setScaling(Scaling.fit);
+                    pix.setSize(20,20);
+                    pix.setPosition(0, 0);
+                    group.addActor(pix);
+                    mul++;
+                }
+                if (deckColor.hasBlue()) {
+                    Image pix = new Image(atlas.createSprite("pixU"));
+                    pix.setScaling(Scaling.fit);
+                    pix.setSize(20,20);
+                    pix.setPosition(20*mul, 0);
+                    mul++;
+                    group.addActor(pix);
+                }
+                if (deckColor.hasBlack()) {
+                    Image pix = new Image(atlas.createSprite("pixB"));
+                    pix.setScaling(Scaling.fit);
+                    pix.setSize(20,20);
+                    pix.setPosition(20*mul, 0);
+                    mul++;
+                    group.addActor(pix);
+                }
+                if (deckColor.hasRed()) {
+                    Image pix = new Image(atlas.createSprite("pixR"));
+                    pix.setScaling(Scaling.fit);
+                    pix.setSize(20,20);
+                    pix.setPosition(20*mul, 0);
+                    mul++;
+                    group.addActor(pix);
+                }
+                if (deckColor.hasGreen()) {
+                    Image pix = new Image(atlas.createSprite("pixG"));
+                    pix.setScaling(Scaling.fit);
+                    pix.setSize(20,20);
+                    pix.setPosition(20*mul, 0);
+                    mul++;
+                    group.addActor(pix);
+                }
+                group.setHeight(20);
+                group.setWidth(20*mul);
+                dialog.getContentTable().add(group).align(Align.center);
+                dialog.getContentTable().add().row();
+            }
+        }
+        Label L = Controls.newLabel(message);
+        L.setWrap(true);
+        dialog.getContentTable().add(L).width(240);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(240);
         dialog.setKeepWithinStage(true);
         setDialogStage(GameHUD.getInstance());
         showDialog();
@@ -575,11 +665,11 @@ public class MapStage extends GameStage {
         Gdx.input.vibrate(50);
         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
         SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
+        DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
         FThreads.invokeInEdtNowOrLater(() -> {
             if (!isLoadingMatch) {
                 isLoadingMatch = true;
                 Forge.setTransitionScreen(new TransitionScreen(() -> {
-                    DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
                     duelScene.initDuels(player, mob);
                     Forge.clearTransitionScreen();
                     startPause(0.3f, () -> {
