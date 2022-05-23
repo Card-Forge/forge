@@ -365,9 +365,6 @@ public final class AbilityFactory {
             abTgt.setSAValidTargeting(mapParams.get("TargetValidTargeting"));
         }
 
-        if (mapParams.containsKey("TargetsSingleTarget")) {
-            abTgt.setSingleTarget(true);
-        }
         if (mapParams.containsKey("TargetUnique")) {
             abTgt.setUniqueTargets(true);
         }
