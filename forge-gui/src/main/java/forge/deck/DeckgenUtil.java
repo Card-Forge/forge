@@ -441,7 +441,7 @@ public class DeckgenUtil {
             advPrecons.addAll(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
         }
         if (advThemes.isEmpty()) {
-            advThemes.addAll(DeckProxy.getAllThemeDecks());
+            advThemes.addAll(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
             advThemes.addAll(DeckProxy.getNonEasyQuestDuelDecks());
         }
         if (!colors.isEmpty()) {

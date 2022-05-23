@@ -12,9 +12,17 @@ import forge.Forge;
 import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.RewardData;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.Current;
 import forge.adventure.util.MapDialog;
 import forge.adventure.util.Reward;
+import forge.card.CardRarity;
+import forge.item.PaperCard;
+import forge.util.Aggregates;
+import forge.util.MyRandom;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * EnemySprite
@@ -55,14 +63,51 @@ public class EnemySprite extends CharacterSprite {
 
     public Array<Reward> getRewards() {
         Array<Reward> ret=new Array<>();
-        if(data.rewards != null) { //Collect standard rewards.
-            for (RewardData rdata : data.rewards) {
-                ret.addAll(rdata.generate(false, (Current.latestDeck() != null ? Current.latestDeck().getMain().toFlatList() : null)));
+        //Collect custom rewards for chaos battles
+        if (data.copyPlayerDeck && AdventurePlayer.current().isFantasyMode()) {
+            if (Current.latestDeck() != null) {
+                List<PaperCard> paperCardList = Current.latestDeck().getMain().toFlatList().stream()
+                        .filter(paperCard -> !paperCard.isVeryBasicLand() && !paperCard.getName().startsWith("Mox"))
+                        .collect(Collectors.toList());
+                //random uncommons from deck
+                List<PaperCard> uncommonCards = paperCardList.stream()
+                        .filter(paperCard -> CardRarity.Uncommon.equals(paperCard.getRarity()) || CardRarity.Special.equals(paperCard.getRarity()))
+                        .collect(Collectors.toList());
+                if (!uncommonCards.isEmpty()) {
+                    ret.add(new Reward(Aggregates.random(uncommonCards)));
+                    ret.add(new Reward(Aggregates.random(uncommonCards)));
+                }
+                //random commons from deck
+                List<PaperCard> commmonCards = paperCardList.stream()
+                        .filter(paperCard -> CardRarity.Common.equals(paperCard.getRarity()))
+                        .collect(Collectors.toList());
+                if (!commmonCards.isEmpty()) {
+                    ret.add(new Reward(Aggregates.random(commmonCards)));
+                    ret.add(new Reward(Aggregates.random(commmonCards)));
+                    ret.add(new Reward(Aggregates.random(commmonCards)));
+                }
+                //random rare from deck
+                List<PaperCard> rareCards = paperCardList.stream()
+                        .filter(paperCard -> CardRarity.Rare.equals(paperCard.getRarity()) || CardRarity.MythicRare.equals(paperCard.getRarity()))
+                        .collect(Collectors.toList());
+                if (!rareCards.isEmpty()) {
+                    ret.add(new Reward(Aggregates.random(rareCards)));
+                    ret.add(new Reward(Aggregates.random(rareCards)));
+                }
             }
-        }
-        if(rewards != null) { //Collect additional rewards.
-            for(RewardData rdata:rewards) {
-                ret.addAll(rdata.generate(false,(Current.latestDeck()!=null? Current.latestDeck().getMain().toFlatList():null)));
+            int val = ((MyRandom.getRandom().nextInt(2)+1)*100)+(MyRandom.getRandom().nextInt(101));
+            ret.add(new Reward(val));
+            ret.add(new Reward(Reward.Type.Life, 1));
+        } else {
+            if(data.rewards != null) { //Collect standard rewards.
+                for (RewardData rdata : data.rewards) {
+                    ret.addAll(rdata.generate(false, (Current.latestDeck() != null ? Current.latestDeck().getMain().toFlatList() : null)));
+                }
+            }
+            if(rewards != null) { //Collect additional rewards.
+                for(RewardData rdata:rewards) {
+                    ret.addAll(rdata.generate(false,(Current.latestDeck()!=null? Current.latestDeck().getMain().toFlatList():null)));
+                }
             }
         }
         return ret;

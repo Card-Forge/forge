@@ -1151,17 +1151,13 @@ public class CardProperty {
             if (!card.hasDealtDamageToOpponentThisTurn()) {
                 return false;
             }
-        } else if (property.startsWith("dealtCombatDamageThisTurn ") || property.startsWith("notDealtCombatDamageThisTurn ")) {
-            final String v = property.split(" ")[1];
-            final Iterable<Card> list = Iterables.filter(card.getDamageHistory().getThisTurnCombatDamaged().keySet(), Card.class);
-            boolean found = Iterables.any(list, CardPredicates.restriction(v, sourceController, source, spellAbility));
-            if (found == property.startsWith("not")) {
-                return false;
-            }
-        } else if (property.startsWith("dealtCombatDamageThisCombat ") || property.startsWith("notDealtCombatDamageThisCombat ")) {
-            final String v = property.split(" ")[1];
-            final Iterable<Card> list = Iterables.filter(card.getDamageHistory().getThisCombatDamaged().keySet(), Card.class);
-            boolean found = Iterables.any(list, CardPredicates.restriction(v, sourceController, source, spellAbility));
+        //dealtCombatDamageThisCombat <valid>, dealtCombatDamageThisTurn <valid>, and notDealt versions
+        } else if (property.startsWith("dealtCombatDamage") || property.startsWith("notDealtCombatDamage")) {
+            final String[] v = property.split(" ")[1].split(",");
+            final Iterable<GameObject> list = property.contains("ThisCombat") ?
+                    Iterables.filter(card.getDamageHistory().getThisCombatDamaged().keySet(), GameObject.class) :
+                    Iterables.filter(card.getDamageHistory().getThisTurnCombatDamaged().keySet(), GameObject.class);
+            boolean found = Iterables.any(list, GameObjectPredicates.restriction(v, sourceController, source, spellAbility));
             if (found == property.startsWith("not")) {
                 return false;
             }
