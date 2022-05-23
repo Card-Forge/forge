@@ -1602,42 +1602,39 @@ public class AbilityUtils {
 
         if (sa.hasParam("RememberCostCards") && !sa.getPaidHash().isEmpty()) {
             List <Card> noList = Lists.newArrayList();
+            Map<String, CardCollection> paidLists = sa.getPaidHash();
             if (sa.hasParam("RememberCostExcept")) {
                 noList.addAll(AbilityUtils.getDefinedCards(host, sa.getParam("RememberCostExcept"), sa));
             }
-            if (sa.getParam("Cost").contains("Exile")) {
+            if (paidLists.containsKey("Exiled")) {
                 final CardCollection paidListExiled = sa.getPaidList("Exiled");
                 for (final Card exiledAsCost : paidListExiled) {
                     if (!noList.contains(exiledAsCost)) {
                         host.addRemembered(exiledAsCost);
                     }
                 }
-            }
-            else if (sa.getParam("Cost").contains("Sac")) {
+            } else if (paidLists.containsKey("Sacrificed")) {
                 final CardCollection paidListSacrificed = sa.getPaidList("Sacrificed");
                 for (final Card sacrificedAsCost : paidListSacrificed) {
                     if (!noList.contains(sacrificedAsCost)) {
                         host.addRemembered(sacrificedAsCost);
                     }
                 }
-            }
-            else if (sa.getParam("Cost").contains("tapXType")) {
+            } else if (paidLists.containsKey("Tapped")) {
                 final CardCollection paidListTapped = sa.getPaidList("Tapped");
                 for (final Card tappedAsCost : paidListTapped) {
                     if (!noList.contains(tappedAsCost)) {
                         host.addRemembered(tappedAsCost);
                     }
                 }
-            }
-            else if (sa.getParam("Cost").contains("Unattach")) {
+            } else if (paidLists.containsKey("Unattached")) {
                 final CardCollection paidListUnattached = sa.getPaidList("Unattached");
                 for (final Card unattachedAsCost : paidListUnattached) {
                     if (!noList.contains(unattachedAsCost)) {
                         host.addRemembered(unattachedAsCost);
                     }
                 }
-            }
-            else if (sa.getParam("Cost").contains("Discard")) {
+            } else if (paidLists.containsKey("Discarded")) {
                 final CardCollection paidListDiscarded = sa.getPaidList("Discarded");
                 for (final Card discardedAsCost : paidListDiscarded) {
                     if (!noList.contains(discardedAsCost)) {
