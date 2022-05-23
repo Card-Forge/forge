@@ -64,7 +64,7 @@ public class DiscardEffect extends SpellAbilityEffect {
             if (sa.hasParam("DiscardValid")) {
                 String validD = sa.hasParam("DiscardValidDesc") ? sa.getParam("DiscardValidDesc")
                         : sa.getParam("DiscardValid");
-                if (validD.equals("card.nonLand")) {
+                if (validD.equals("Card.nonLand")) {
                     validD = "nonland";
                 } else if (CardType.CoreType.isValidEnum(validD)) {
                     validD = validD.toLowerCase();
