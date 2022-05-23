@@ -1971,21 +1971,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
         }
 
-        if (tgt.isSingleTarget()) {
-            Set<GameObject> targets = new HashSet<>();
-            for (TargetChoices tc : topSA.getAllTargetChoices()) {
-                targets.addAll(tc);
-                if (targets.size() > 1) {
-                    // As soon as we get more than one, bail out
-                    return false;
-                }
-            }
-            if (targets.size() != 1) {
-                // Make sure that there actually is one target
-                return false;
-            }
-        }
-
         return topSA.getHostCard().isValid(tgt.getValidTgts(), getActivatingPlayer(), getHostCard(), this);
     }
 
