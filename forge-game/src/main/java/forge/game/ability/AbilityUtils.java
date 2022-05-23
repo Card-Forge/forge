@@ -969,7 +969,7 @@ public class AbilityUtils {
 
         final Player player = sa instanceof SpellAbility ? ((SpellAbility)sa).getActivatingPlayer() : card.getController();
 
-        if (defined.equals("Self") || defined.equals("ThisTargetedCard") || getPaidCards(sa, defined) != null) {
+        if (defined.equals("Self") || defined.equals("ThisTargetedCard") || defined.startsWith("Valid") || getPaidCards(sa, defined) != null) {
             // do nothing, Self is for Cards, not Players
         } else if (defined.equals("TargetedOrController")) {
             players.addAll(getDefinedPlayers(card, "Targeted", sa));
@@ -3363,6 +3363,18 @@ public class AbilityUtils {
             final String restrictions = l[0].substring(6);
             CardCollection cardsonbattlefield = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restrictions, player, source, ctb);
             return doXMath(cardsonbattlefield.size(), m, source, ctb);
+        }
+
+        if (l[0].startsWith("ThisTurnEntered")) {
+            final String[] workingCopy = l[0].split("_");
+
+            ZoneType destination = ZoneType.smartValueOf(workingCopy[1]);
+            final boolean hasFrom = workingCopy[2].equals("from");
+            ZoneType origin = hasFrom ? ZoneType.smartValueOf(workingCopy[3]) : null;
+            String validFilter = workingCopy[hasFrom ? 4 : 2] ;
+
+            final List<Card> res = CardUtil.getThisTurnEntered(destination, origin, validFilter, source, ctb, player);
+            return doXMath(res.size(), m, source, ctb);
         }
 
         final String[] sq = l[0].split("\\.");
