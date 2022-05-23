@@ -75,7 +75,7 @@ public enum DeckSection {
             @Override
             public Boolean apply(PaperCard card) {
                 CardType t = card.getRules().getType();
-                return card.getRules().canBeCommander() || t.isPlaneswalker();
+                return card.getRules().canBeCommander() || t.isPlaneswalker() || card.getRules().canBeOathbreaker() || card.getRules().canBeSignatureSpell();
             }
         };
 
