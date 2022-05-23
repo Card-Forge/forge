@@ -15,11 +15,15 @@ import forge.game.mana.ManaCostBeingPaid;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
+import forge.game.spellability.TargetChoices;
 import forge.game.staticability.StaticAbility;
 import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class ForgeScript {
 
@@ -217,6 +221,15 @@ public class ForgeScript {
                 return false;
             }
             return source.equals(m.getHostCard());
+        } else if (property.startsWith("numTargets")) {
+            Set<GameObject> targets = new HashSet<>();
+            for (TargetChoices tc : sa.getAllTargetChoices()) {
+                targets.addAll(tc);
+            }
+            String[] k = property.split(" ", 2);
+            String comparator = k[1].substring(0, 2);
+            int y = AbilityUtils.calculateAmount(sa.getHostCard(), k[1].substring(2), sa);
+            return Expressions.compare(targets.size(), comparator, y);
         } else if (property.startsWith("IsTargeting")) {
             String[] k = property.split(" ", 2);
             boolean found = false;
