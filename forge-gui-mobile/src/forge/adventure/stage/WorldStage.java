@@ -22,6 +22,7 @@ import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
 import forge.adventure.world.World;
 import forge.adventure.world.WorldSave;
+import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
@@ -86,22 +87,15 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     Gdx.input.vibrate(50);
                     Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
                     SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
-                    Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
-                        @Override
-                        public void run() {
+                    FThreads.invokeInEdtNowOrLater(() -> {
+                        Forge.setTransitionScreen(new TransitionScreen(() -> {
+                            ((DuelScene) SceneType.DuelScene.instance).initDuels(player, mob);
                             Forge.clearTransitionScreen();
-                        }
-                    }, ScreenUtils.getFrameBufferTexture(), true, false));
-                    startPause(0.3f, new Runnable() {
-                        @Override
-                        public void run() {
-                            ((DuelScene) SceneType.DuelScene.instance).setEnemy(currentMob);
-                            ((DuelScene) SceneType.DuelScene.instance).setPlayer(player);
-                            Forge.switchScene(SceneType.DuelScene.instance);
-                        }
+                            startPause(0.3f, () -> Forge.switchScene(SceneType.DuelScene.instance));
+                        }, ScreenUtils.getFrameBufferTexture(), true, false));
+                        currentMob = mob;
+                        WorldSave.getCurrentSave().autoSave();
                     });
-                    currentMob = mob;
-                    WorldSave.getCurrentSave().autoSave();
                     break;
                 }
             }
