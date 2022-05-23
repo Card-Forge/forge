@@ -2,6 +2,6 @@ Name:Bolt Bend
 ManaCost:3 R
 Types:Instant
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 3 | EffectZone$ All | IsPresent$ Creature.YouCtrl+powerGE4 | Description$ This Spell costs {3} less to cast if you control a creature with power 4 or greater.
-A:SP$ ChangeTargets | Cost$ 3 R | TargetType$ Spell,Activated,Triggered | ValidTgts$ Card | TargetsSingleTarget$ True | SpellDescription$ Change the target of target spell or ability with a single target.
+A:SP$ ChangeTargets | TargetType$ SpellAbility.numTargets EQ1 | ValidTgts$ Card | TgtPrompt$ Select target spell or ability with a single target | SpellDescription$ Change the target of target spell or ability with a single target.
 AI:RemoveDeck:All
 Oracle:This spell costs {3} less to cast if you control a creature with power 4 or greater.\nChange the target of target spell or ability with a single target.
