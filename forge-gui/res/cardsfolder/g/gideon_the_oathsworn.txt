@@ -5,7 +5,7 @@ Loyalty:4
 T:Mode$ AttackersDeclared | Execute$ TrigCounter | CheckSVar$ NonGideonAttackers | SVarCompare$ GE2 | NoResolvingCheck$ True | TriggerZones$ Battlefield | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with two or more non-Gideon creatures, put a +1/+1 counter on each of those creatures.
 SVar:TrigCounter:DB$ PutCounterAll | ValidCards$ Creature.nonGideon+YouCtrl+attacking | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ Animate | Cost$ AddCounter<2/LOYALTY> | Defined$ Self | Power$ 5 | Toughness$ 5 | Types$ Creature,Soldier | SubAbility$ GideonPrevent | Planeswalker$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 5/5 white Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
-SVar:GideonPrevent:DB$ Effect | ReplacementEffects$ RPrevent
+SVar:GideonPrevent:DB$ Effect | ReplacementEffects$ RPrevent | Duration$ UntilHostLeavesPlayOrEOT
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Card.EffectSource | Description$ Prevent all damage that would be dealt to EFFECTSOURCE.
 A:AB$ ChangeZone | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ ExileOppCreatures | SpellDescription$ Exile CARDNAME and each creature your opponents control.
 SVar:ExileOppCreatures:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.OppCtrl
