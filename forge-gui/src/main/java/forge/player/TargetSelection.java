@@ -47,6 +47,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gamemodes.match.input.InputSelectTargets;
 import forge.util.Aggregates;
+import forge.util.TextUtil;
 
 /**
  * <p>
@@ -265,10 +266,13 @@ public class TargetSelection {
         }
 
         Object chosen = null;
+        String message = TextUtil.fastReplace(getTgt().getVTSelection(),
+                "CARDNAME", ability.getHostCard().toString());
+
         if (!choices.isEmpty() && mandatory) {
-            chosen = controller.getGui().one(getTgt().getVTSelection(), choicesFiltered);
+            chosen = controller.getGui().one(message, choicesFiltered);
         } else {
-            chosen = controller.getGui().oneOrNone(getTgt().getVTSelection(), choicesFiltered);
+            chosen = controller.getGui().oneOrNone(message, choicesFiltered);
         }
         if (chosen == null) {
             return false;
@@ -303,7 +307,8 @@ public class TargetSelection {
 
     private final boolean chooseCardFromStack(final boolean mandatory) {
         final TargetRestrictions tgt = this.getTgt();
-        final String message = tgt.getVTSelection();
+        final String message = TextUtil.fastReplace(tgt.getVTSelection(),
+                "CARDNAME", ability.getHostCard().toString());
         // Find what's targetable, then allow human to choose
         final List<Object> selectOptions = new ArrayList<>();
         HashMap<StackItemView, SpellAbilityStackInstance> stackItemViewCache = new HashMap<>();
