@@ -128,12 +128,12 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                             final Player p = (Player) o;
                             if (p.equals(originalTargetPlayer))
                                 continue;
-                            if (p.isValid(type.split(","), chosenSA.getActivatingPlayer(), chosenSA.getHostCard(), sa)) {
+                            if (p.isValid(type.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                                 players.add(p);
                             }
                         }
                     }
-                    valid = CardLists.getValidCards(valid, type, chosenSA.getActivatingPlayer(), chosenSA.getHostCard(), sa);
+                    valid = CardLists.getValidCards(valid, type, sa.getActivatingPlayer(), sa.getHostCard(), sa);
                     Card originalTarget = Iterables.getFirst(getTargetCards(chosenSA), null);
                     valid.remove(originalTarget);
 
