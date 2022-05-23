@@ -641,6 +641,7 @@ public class PhaseHandler implements java.io.Serializable {
             game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
         }
 
+        playerTurn.clearAttackedPlayersMyCombat();
         for (final Card c : combat.getAttackers()) {
             CombatUtil.checkDeclaredAttacker(game, c, combat, true);
         }

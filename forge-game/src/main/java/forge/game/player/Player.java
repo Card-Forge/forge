@@ -206,6 +206,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     private List<Card> creatureAttackedThisTurn = new ArrayList<>();
     private List<Player> attackedPlayersThisTurn = new ArrayList<>();
     private List <Player> attackedPlayersLastTurn = new ArrayList<>();
+    private List<Player> attackedPlayersThisCombat = new ArrayList<>();
+
     private boolean activateLoyaltyAbilityThisTurn = false;
     private boolean tappedLandForManaThisTurn = false;
     private List<Card> completedDungeons = new ArrayList<>();
@@ -1886,6 +1888,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void addAttackedPlayersMyTurn(final Player p) {
         if (!attackedPlayersThisTurn.contains(p)) {
+            attackedPlayersThisCombat.add(p);
             attackedPlayersThisTurn.add(p);
         }
     }
@@ -1901,6 +1904,13 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void setAttackedPlayersMyLastTurn(List<Player> players) {
         attackedPlayersLastTurn.clear();
         attackedPlayersLastTurn.addAll(players);
+    }
+
+    public final List<Player> getAttackedPlayersMyCombat() {
+        return attackedPlayersThisTurn;
+    }
+    public final void clearAttackedPlayersMyCombat() {
+        attackedPlayersThisCombat.clear();
     }
 
     public final int getVenturedThisTurn() {
