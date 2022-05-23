@@ -1,5 +1,6 @@
 Name:Horn of Deafening
 ManaCost:4
 Types:Artifact
-A:AB$ Pump | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Prevent all combat damage that would be dealt by CARDNAME. | IsCurse$ True | StackDescription$ SpellDescription | SpellDescription$ Prevent all combat damage that would be dealt by target creature this turn.
+A:AB$ Effect | Cost$ 2 T | ValidTgts$ Creature | TgtPrompt$ Select target creature | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StackDescription$ SpellDescription | SpellDescription$ Prevent all combat damage that would be dealt by target creature this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt by target creature this turn.
 Oracle:{2}, {T}: Prevent all combat damage that would be dealt by target creature this turn.

@@ -2,8 +2,8 @@ Name:Gideon of the Trials
 ManaCost:1 W W
 Types:Legendary Planeswalker Gideon
 Loyalty:3
-A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Planeswalker$ True | Duration$ UntilYourNextTurn | RememberObjects$ Targeted | ReplacementEffects$ RPrevent | ExileOnMoved$ Battlefield | SpellDescription$ Until your next turn, prevent all damage target permanent would deal.
-SVar:RPrevent:Event$ DamageDone | Prevent$ True | ValidTarget$ Card.IsRemembered | Description$ Until your next turn, prevent all damage target permanent would deal.
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Planeswalker$ True | Duration$ UntilYourNextTurn | RememberObjects$ Targeted | ReplacementEffects$ RPrevent | SpellDescription$ Until your next turn, prevent all damage target permanent would deal.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ValidSource$ Card.IsRemembered | Description$ Until your next turn, prevent all damage target permanent would deal.
 A:AB$ Animate | Cost$ AddCounter<0/LOYALTY> | Defined$ Self | Power$ 4 | Toughness$ 4 | Keywords$ Indestructible | Types$ Creature,Human,Soldier | SubAbility$ GideonPrevent | Planeswalker$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 4/4 Human Soldier creature with indestructible that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
 SVar:GideonPrevent:DB$ Effect | ReplacementEffects$ RGideon | Duration$ UntilHostLeavesPlayOrEOT | ConditionPresent$ Card.StrictlySelf
 SVar:RGideon:Event$ DamageDone | Prevent$ True | ValidTarget$ Card.EffectSource | Description$ Prevent all damage that would be dealt to EFFECTSOURCE.
