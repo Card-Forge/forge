@@ -8,7 +8,8 @@ SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Destroy | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature | Planeswalker$ True | SpellDescription$ Destroy target tapped creature.
 A:AB$ Animate | Cost$ AddCounter<0/LOYALTY> | Defined$ Self | Power$ 6 | Toughness$ 6 | Types$ Creature,Human,Soldier | SubAbility$ DBPrevent | Planeswalker$ True | Ultimate$ True | SpellDescription$ Until end of turn, CARDNAME becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
-SVar:DBPrevent:DB$ Pump | Defined$ Self | KW$ Prevent all damage that would be dealt to CARDNAME.
+SVar:DBPrevent:DB$ Effect | ReplacementEffects$ RPrevent
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ Card.EffectSource | Description$ Prevent all damage that would be dealt to EFFECTSOURCE.
 #restriction logic will need to be added to Human declare attackers for this to be OK for the AI to use
 AI:RemoveDeck:All
 Oracle:[+2]: During target opponent's next turn, creatures that player controls attack Gideon Jura if able.\n[-2]: Destroy target tapped creature.\n[0]: Until end of turn, Gideon Jura becomes a 6/6 Human Soldier creature that's still a planeswalker. Prevent all damage that would be dealt to him this turn.
