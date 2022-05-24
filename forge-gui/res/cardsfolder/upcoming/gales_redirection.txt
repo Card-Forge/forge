@@ -1,0 +1,13 @@
+Name:Gale's Redirection
+ManaCost:3 U U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Card | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Destination$ Exile | TgtPrompt$ Choose target spell to exile | RememberChanged$ True | SubAbility$ DBRoll | SpellDescription$ Exile target spell.
+SVar:DBRoll:DB$ RollDice | Sides$ 20 | Modifier$ Y | ResultSubAbilities$ 1-14:DBMayPlay,Else:DBMayPlayWithoutCost | StackDescription$ SpellDescription | SpellDescription$ Roll a d20 and add that spell's mana value.
+SVar:DBMayPlay:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | Duration$ Permanent | ExileOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:DBMayPlayWithoutCost:DB$ Effect | StaticAbilities$ STPlayWithoutCost | RememberObjects$ Remembered | Duration$ Permanent | ExileOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ 1—14 VERT You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast it.
+SVar:STPlayWithoutCost:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ 15+ VERT You may cast that card without paying its mana cost for as long as it remains exiled.
+SVar:Y:RememberedLKI$CardManaCost
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:Exile target spell, then roll a d20 and add that spell's mana value.\n1-14 | You may cast the exiled card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell.\n15+ | You may cast the exiled card without paying its mana cost for as long as it remains exiled.
