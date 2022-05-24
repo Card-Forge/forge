@@ -65,13 +65,6 @@ public class ConniveEffect extends SpellAbilityEffect {
         }
 
         for (final Player p : controllers) {
-            GameEntityCounterTable table = new GameEntityCounterTable();
-            final CardZoneTable triggerList = new CardZoneTable();
-            List<Card> allToDiscard = new ArrayList<>();
-            Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
-            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-            moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
-            moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
             CardCollection connivers = new CardCollection();
             for (Card c : toConnive) {
                 if (c.getController() == p) {
@@ -79,6 +72,13 @@ public class ConniveEffect extends SpellAbilityEffect {
                 }
             }
             while (connivers.size() > 0) {
+                GameEntityCounterTable table = new GameEntityCounterTable();
+                final CardZoneTable triggerList = new CardZoneTable();
+                Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
+                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                moveParams.put(AbilityKey.LastStateBattlefield, sa.getLastStateBattlefield());
+                moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
+
                 Card conniver = connivers.size() > 1 ? p.getController().chooseSingleEntityForEffect(connivers, sa,
                         Localizer.getInstance().getMessage("lblChooseConniver"), null) : toConnive.get(0);
 
@@ -91,7 +91,6 @@ public class ConniveEffect extends SpellAbilityEffect {
                 }
 
                 CardCollection validCards = CardLists.getValidCards(dPHand, "Card", p, host, sa);
-                validCards.removeAll(allToDiscard); //don't allow cards already chosen for discard by other connivers
 
                 int amt = Math.min(validCards.size(), num);
                 CardCollectionView toBeDiscarded = amt == 0 ? CardCollection.EMPTY :
@@ -99,10 +98,6 @@ public class ConniveEffect extends SpellAbilityEffect {
 
                 if (toBeDiscarded.size() > 1) {
                     toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
-                }
-
-                for (Card disc : toBeDiscarded) {
-                    allToDiscard.add(disc);
                 }
 
                 int numCntrs = CardLists.getValidCardCount(toBeDiscarded, "Card.nonLand", p, host, sa);
@@ -114,9 +109,7 @@ public class ConniveEffect extends SpellAbilityEffect {
                     conniver.addCounter(CounterEnumType.P1P1, numCntrs, p, table);
                 }
                 connivers.remove(conniver);
-            }
-            if (allToDiscard.size() > 0) {
-                discardedMap.put(p, CardCollection.getView(allToDiscard));
+                discardedMap.put(p, CardCollection.getView(toBeDiscarded));
                 discard(sa, triggerList, true, discardedMap, moveParams);
                 table.replaceCounterEffect(game, sa, true);
                 triggerList.triggerChangesZoneAll(game, sa);
