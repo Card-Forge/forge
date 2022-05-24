@@ -1059,35 +1059,17 @@ public class AbilityUtils {
             }
             final SpellAbility root = ((SpellAbility)sa).getRootAbility();
             Object o = null;
-            if (defParsed.endsWith("OrController")) {
-                String triggeringType = defParsed.substring(9, defParsed.length() - 12);
+            if (defParsed.endsWith("Controller")) {
+                final boolean orCont = defParsed.endsWith("OrController");
+                String triggeringType = defParsed.substring(9, defParsed.length() - (orCont ? 12 : 10));
                 final Object c = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
-                if (c instanceof Player) {
+                if (orCont && c instanceof Player) {
                     o = c;
-                }
-                if (c instanceof Card) {
+                } else if (c instanceof Card) {
                     o = ((Card) c).getController();
-                }
-                if (c instanceof SpellAbility) {
+                } else if (c instanceof SpellAbility) {
                     o = ((SpellAbility) c).getActivatingPlayer();
-                }
-                // For merged permanent
-                if (c instanceof CardCollection) {
-                    o = ((CardCollection) c).get(0).getController();
-                }
-
-            } else if (defParsed.endsWith("Controller")) {
-                String triggeringType = defParsed.substring(9);
-                triggeringType = triggeringType.substring(0, triggeringType.length() - 10);
-                final Object c = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
-                if (c instanceof Card) {
-                    o = ((Card) c).getController();
-                }
-                if (c instanceof SpellAbility) {
-                    o = ((SpellAbility) c).getActivatingPlayer();
-                }
-                // For merged permanent
-                if (c instanceof CardCollection) {
+                } else if (c instanceof CardCollection) { // For merged permanent
                     o = ((CardCollection) c).get(0).getController();
                 }
             }
