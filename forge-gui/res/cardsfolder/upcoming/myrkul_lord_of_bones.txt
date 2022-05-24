@@ -7,8 +7,7 @@ SVar:X:Count$YourLifeTotal/Times.2
 SVar:Y:Count$YourStartingLife
 T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Whenever another nontoken creature you control dies, you may exile it. If you do, create a token that's a copy of that card, except it's an enchantment and loses all other card types.
 SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBCopy
-SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | AddTypes$ Enchantment | RemoveCardTypes$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQExiledCount | SubAbility$ DBCleanup
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | AddTypes$ Enchantment | RemoveCardTypes$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:ExiledCount:Count$RememberedSize
 DeckHas:Ability$Token
 Oracle:As long as your life total is less than or equal to half your starting life total, Myrkul, Lord of Bones has indestructible.\nWhenever another nontoken creature you control dies, you may exile it. If you do, create a token that's a copy of that card, except it's an enchantment and loses all other card types.
