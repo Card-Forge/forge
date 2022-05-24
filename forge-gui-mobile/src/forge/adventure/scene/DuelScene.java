@@ -2,7 +2,9 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
+import com.google.common.collect.Lists;
 import forge.Forge;
+import forge.Graphics;
 import forge.LobbyPlayer;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
@@ -11,6 +13,7 @@ import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
+import forge.assets.FBufferedImage;
 import forge.assets.FSkin;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
@@ -20,6 +23,7 @@ import forge.game.player.Player;
 import forge.game.player.RegisteredPlayer;
 import forge.gamemodes.match.HostedMatch;
 import forge.gamemodes.quest.QuestUtil;
+import forge.gui.FThreads;
 import forge.gui.interfaces.IGuiGame;
 import forge.item.IPaperCard;
 import forge.player.GamePlayerUtil;
@@ -28,6 +32,7 @@ import forge.screens.FScreen;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
+import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
 import org.apache.commons.lang3.tuple.Pair;
@@ -198,6 +203,23 @@ public class DuelScene extends ForgeScene {
         });
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap);
         MatchController.instance.setGameView(hostedMatch.getGameView());
+        if (chaosBattle) {
+            List<String> list = Lists.newArrayList("It all depends on your skill!","It's showtime!","Let's party!",
+                    "You've proved yourself!","Are you ready? Go!","Prepare to strike, now!","Let's go!","What's next?",
+                    "Yeah, I've been waitin' for this!","The stage of battle is set!","And the battle begins!","Let's get started!",
+                    "Are you ready?","It's the battle of the century!","Let's keep it up!","How long will this go on?","I hope you're ready!",
+                    "This could be the end.","Pull out all the stops!","It all comes down to this.","Who will emerge victorious?",
+                    "Nowhere to run, nowhere to hide!","This battle is over!","There was no way out of that one!","Let's do this!","Let the madness begin!",
+                    "It's all or nothing!","It's all on the line!","You can't back down now!","Do you have what it takes?","What will happen next?",
+                    "Don't blink!","You can't lose here!","There's no turning back!","It's all or nothing now!");
+            String message = Aggregates.random(list);
+            FThreads.delayInEDT(1000, () -> FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, aiPlayer.getPlayer().getName(), new FBufferedImage(120, 120) {
+                @Override
+                protected void draw(Graphics g, float w, float h) {
+                    g.drawImage(FSkin.getAvatars().get(90000), 0, 0, w, h);
+                }
+            })));
+        }
 
 
 
