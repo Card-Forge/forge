@@ -34,6 +34,7 @@ import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -1064,6 +1065,10 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     private boolean prepareSingleSa(final Card host, final SpellAbility sa, boolean isMandatory) {
+        if (sa.getApi() == ApiType.Charm && !sa.isCopied() && !CharmEffect.makeChoices(sa)) {
+            // 603.3c If no mode is chosen, the ability is removed from the stack.
+            return false;
+        }
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);

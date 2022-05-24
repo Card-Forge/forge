@@ -41,7 +41,6 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
@@ -826,18 +825,9 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         final List<SpellAbility> activePlayerSAs = Lists.newArrayList();
-        final List<SpellAbility> failedSAs = Lists.newArrayList();
         for (int i = 0; i < simultaneousStackEntryList.size(); i++) {
             SpellAbility sa = simultaneousStackEntryList.get(i);
             Player activator = sa.getActivatingPlayer();
-
-            if (sa.getApi() == ApiType.Charm) {
-                if (!CharmEffect.makeChoices(sa)) {
-                    // 603.3c If no mode is chosen, the ability is removed from the stack.
-                    failedSAs.add(sa);
-                    continue;
-                }
-            }
 
             if (activator == null) {
                 if (sa.getHostCard().getController().equals(activePlayer)) {
@@ -850,7 +840,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             }
         }
         simultaneousStackEntryList.removeAll(activePlayerSAs);
-        simultaneousStackEntryList.removeAll(failedSAs);
 
         if (activePlayerSAs.isEmpty()) {
             return false;
