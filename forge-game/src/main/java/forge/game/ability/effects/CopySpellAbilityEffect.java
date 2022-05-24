@@ -27,7 +27,6 @@ import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.Lang;
 import forge.util.collect.FCollection;
-import forge.util.collect.FCollectionView;
 
 
 public class CopySpellAbilityEffect extends SpellAbilityEffect {
