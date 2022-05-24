@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Plane Segovia
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddPower$ -5 | Description$ All Creatures get -5/-0.
 T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, you may destroy target creature if it's power is 0 or less.
-SVar:RolledChaos:DB$ Destroy | ValidTgts$ Creature | ConditionCheckSVar$ TgtPow | ConditionSVarCompare$ EQ1 | AITgts$ Creature.OpponentCtrl+powerLE0
+SVar:RolledChaos:DB$ Destroy | ValidTgts$ Creature | ConditionCheckSVar$ TgtPow | ConditionSVarCompare$ EQ1 | AITgts$ Creature.OppCtrl+powerLE0
 SVar:TgtPow:Targeted$Valid Creature.powerLE0
 SVar:AIRollPlanarDieParams:Mode$ Always
 Oracle:All creatures get -5/-0.\nWhenever you roll {CHAOS}, you may destroy target creature if its power is 0 or less.
