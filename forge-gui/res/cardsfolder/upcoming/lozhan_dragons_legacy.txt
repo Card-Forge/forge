@@ -1,0 +1,10 @@
+Name:Lozhan, Dragons' Legacy
+ManaCost:3 U R
+Types:Legendary Creature Dragon Shaman
+PT:4/2
+K:Flying
+T:Mode$ SpellCast | ValidCard$ Card.Adventure,Dragon | ValidActivatingPlayer$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an Adventure spell or Dragon spell, CARDNAME deals damage equal to that spell's mana value to any target that isn't a commander.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.IsNotCommander,Player,Planeswalker.IsNotCommander | TgtPrompt$ Select any target that isn't a commander | NumDmg$ X
+SVar:X:TriggerCount$CastSACMC
+SVar:BuffedBy:Creature.AdventureCard,Dragon
+Oracle:Flying\nWhenever you cast an Adventure spell or Dragon spell, Lozhan, Dragons' Legacy deals damage equal to that spell's mana value to any target that isn't a commander.
