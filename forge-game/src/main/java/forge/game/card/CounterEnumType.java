@@ -73,6 +73,8 @@ public enum CounterEnumType {
 
     COMPONENT("COMPN", 224, 160, 48),
 
+    CONTESTED("CONTES", 255, 76, 2),
+
     CORPSE("CRPSE", 230, 186, 209),
 
     CORRUPTION("CRPTN", 210, 121, 210),
