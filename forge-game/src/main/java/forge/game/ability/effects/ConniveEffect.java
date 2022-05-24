@@ -65,12 +65,7 @@ public class ConniveEffect extends SpellAbilityEffect {
         }
 
         for (final Player p : controllers) {
-            CardCollection connivers = new CardCollection();
-            for (Card c : toConnive) {
-                if (c.getController() == p) {
-                    connivers.add(c);
-                }
-            }
+            CardCollection connivers = CardLists.filterControlledBy(toConnive, p);
             while (connivers.size() > 0) {
                 GameEntityCounterTable table = new GameEntityCounterTable();
                 final CardZoneTable triggerList = new CardZoneTable();
@@ -84,13 +79,11 @@ public class ConniveEffect extends SpellAbilityEffect {
 
                 p.drawCards(num, sa, moveParams);
 
-                CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
-                dPHand = CardLists.filter(dPHand, CardPredicates.Presets.NON_TOKEN);
-                if (dPHand.isEmpty() || !p.canDiscardBy(sa, true)) { // hand being empty unlikely, but just to be safe
+                CardCollectionView validCards = p.getCardsIn(ZoneType.Hand);
+                validCards = CardLists.filter(validCards, CardPredicates.Presets.NON_TOKEN);
+                if (validCards.isEmpty() || !p.canDiscardBy(sa, true)) { // hand being empty unlikely, just to be safe
                     continue;
                 }
-
-                CardCollection validCards = CardLists.getValidCards(dPHand, "Card", p, host, sa);
 
                 int amt = Math.min(validCards.size(), num);
                 CardCollectionView toBeDiscarded = amt == 0 ? CardCollection.EMPTY :
