@@ -79,15 +79,15 @@ public class ConniveEffect extends SpellAbilityEffect {
 
                 p.drawCards(num, sa, moveParams);
 
-                CardCollectionView validCards = p.getCardsIn(ZoneType.Hand);
-                validCards = CardLists.filter(validCards, CardPredicates.Presets.NON_TOKEN);
-                if (validCards.isEmpty() || !p.canDiscardBy(sa, true)) { // hand being empty unlikely, just to be safe
+                CardCollection validDisards = (CardCollection) p.getCardsIn(ZoneType.Hand);
+                validDisards = CardLists.filter(validDisards, CardPredicates.Presets.NON_TOKEN);
+                if (validDisards.isEmpty() || !p.canDiscardBy(sa, true)) { // hand being empty unlikely, just to be safe
                     continue;
                 }
 
-                int amt = Math.min(validCards.size(), num);
+                int amt = Math.min(validDisards.size(), num);
                 CardCollectionView toBeDiscarded = amt == 0 ? CardCollection.EMPTY :
-                        p.getController().chooseCardsToDiscardFrom(p, sa, validCards, amt, amt);
+                        p.getController().chooseCardsToDiscardFrom(p, sa, validDisards, amt, amt);
 
                 if (toBeDiscarded.size() > 1) {
                     toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
