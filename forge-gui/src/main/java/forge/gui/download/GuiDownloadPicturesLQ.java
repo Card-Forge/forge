@@ -17,7 +17,6 @@
  */
 package forge.gui.download;
 
-import java.io.File;
 import java.util.*;
 
 import forge.ImageKeys;
@@ -38,7 +37,6 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
 
     @Override
     protected final Map<String, String> getNeededFiles() {
-        File f = new File(ForgeConstants.CACHE_CARD_PICS_DIR);
         existingSets = retrieveManifestDirectory();
 
         for (final PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards()) {
