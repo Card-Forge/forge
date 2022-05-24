@@ -140,9 +140,8 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                     valid.remove(originalTarget);
 
                     if (sa.hasParam("ChooseOnlyOne")) {
-                        FCollectionView<GameEntity> all = new FCollection<>();
-                        ((FCollection<GameEntity>) all).addAll(valid);
-                        ((FCollection<GameEntity>) all).addAll(players);
+                        FCollection<GameEntity> all = new FCollection<>(valid);
+                        all.addAll(players);
                         GameEntity choice = controller.getController().chooseSingleEntityForEffect(all, sa,
                                 Localizer.getInstance().getMessage("lblChooseOne"), null);
                         if (choice != null) {
