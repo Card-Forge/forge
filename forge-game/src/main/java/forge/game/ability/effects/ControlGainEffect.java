@@ -1,8 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
@@ -17,6 +14,10 @@ import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ControlGainEffect extends SpellAbilityEffect {
 
@@ -102,6 +103,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Card source = sa.getHostCard();
+        final Player activator = sa.getActivatingPlayer();
 
         final boolean bUntap = sa.hasParam("Untap");
         final boolean bTapOnLose = sa.hasParam("TapOnLose");
@@ -112,13 +114,24 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
         final List<Player> controllers = getDefinedPlayersOrTargeted(sa, "NewController");
 
-        final Player newController = controllers.isEmpty() ? sa.getActivatingPlayer() : controllers.get(0);
+        final Player newController = controllers.isEmpty() ? activator : controllers.get(0);
         final Game game = newController.getGame();
 
-        CardCollectionView tgtCards = getDefinedCards(sa);
-
+        CardCollectionView tgtCards = null;
         if (sa.hasParam("ControlledByTarget")) {
         	tgtCards = CardLists.filterControlledBy(tgtCards, getTargetPlayers(sa));
+        } else if (sa.hasParam("Choices")) {
+            Player chooser = sa.hasParam("Chooser") ? AbilityUtils.getDefinedPlayers(source,
+                    sa.getParam("Chooser"), sa).get(0) : activator;
+            CardCollectionView choices = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
+                    sa.getParam("Choices"), activator, source, sa);
+            if (!choices.isEmpty()) {
+                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") :
+                        Localizer.getInstance().getMessage("lblChooseaCard") +" ";
+                tgtCards = activator.getController().chooseCardsForEffect(choices, sa, title, 1, 1, false, null);
+            }
+        } else {
+            tgtCards = getDefinedCards(sa);
         }
 
         // in case source was LKI or still resolving
