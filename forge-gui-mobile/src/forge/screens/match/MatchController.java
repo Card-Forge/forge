@@ -312,14 +312,6 @@ public class MatchController extends AbstractGuiGame {
     @Override
     public void finishGame() {
         if (Forge.isMobileAdventureMode) {
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    Forge.clearTransitionScreen();
-                    Forge.clearCurrentScreen();
-                }
-            };
-            Forge.setTransitionScreen(new TransitionScreen(runnable, ScreenUtils.getFrameBufferTexture(), false, false));
             Forge.setCursor(null, "0");
             return;
         }
