@@ -3306,8 +3306,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void removeTempController(final Player player) {
+        boolean changed = false;
         // Remove each key that yields this player
-        this.tempControllers.values().remove(player);
+        while (tempControllers.values().remove(player)) {
+            changed = true;
+        }
+        if (changed) {
+            view.updateController(this);
+        }
     }
 
     public final void clearTempControllers() {
