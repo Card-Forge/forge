@@ -6,12 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.badlogic.gdx.utils.ScreenUtils;
 import forge.ai.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
 import forge.item.IPaperCard;
-import forge.screens.TransitionScreen;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
@@ -312,14 +310,6 @@ public class MatchController extends AbstractGuiGame {
     @Override
     public void finishGame() {
         if (Forge.isMobileAdventureMode) {
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    Forge.clearTransitionScreen();
-                    Forge.clearCurrentScreen();
-                }
-            };
-            Forge.setTransitionScreen(new TransitionScreen(runnable, ScreenUtils.getFrameBufferTexture(), false, false));
             Forge.setCursor(null, "0");
             return;
         }
