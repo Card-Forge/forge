@@ -1,6 +1,7 @@
 Name:Restrain
 ManaCost:2 W
 Types:Instant
-A:SP$ Pump | Cost$ 2 W | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | KW$ Prevent all combat damage that would be dealt by CARDNAME. | IsCurse$ True | SubAbility$ DBDraw | SpellDescription$ Prevent all combat damage that would be dealt by target attacking creature this turn. Draw a card.
+A:SP$ Effect | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBDraw | SpellDescription$ Prevent all combat damage that would be dealt by target attacking creature this turn. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt by target attacking creature this turn.
 Oracle:Prevent all combat damage that would be dealt by target attacking creature this turn.\nDraw a card.
