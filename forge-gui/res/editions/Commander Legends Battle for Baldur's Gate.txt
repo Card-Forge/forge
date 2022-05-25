@@ -6,63 +6,119 @@ Type=Draft
 ScryfallCode=CLB
 
 [cards]
-1 C Faceless One @Gaboleps
+1 S Faceless One @Gaboleps
 2 U Abdel Adrian, Gorion's Ward @Karl Kopinski
+4 R Archivist of Oghma @Stella Spente
+5 R Ascend from Avernus @Bruce Brenneise
 6 C Astral Confrontation @Ben Hill
 7 C Bane's Invoker @Joe Slucher
 9 M Battle Angels of Tyr @Fajareka Setiawan
+10 U Beckoning Will-o'-Wisp @Sam White
+13 U Crystal Dragon @John Severin Brassell
 16 U Ellyn Harbreeze, Busybody @Dan Scott
 17 U Far Traveler @Alix Branwyn
 18 C Flaming Fist @Diego Gisbert
+22 C Greatsword of Tyr @Titus Lunter
+23 C Guardian Naga @Tom Babbey
+25 U Hammers of Moradin @Justine Cruz
+26 R Horn of Valhalla @John Severin Brassell
+27 C Icewind Stalwart @Marcela Medeiros
 29 R Lae'zel, Vlaakith's Champion @John Stanko
 30 R Lae'zel's Acrobatics @Tatiana Kirgetova
+31 M Legion Loyalty @Aaron J. Riley
 32 U Lulu, Loyal Hollyphant @Jakob Eirich
 35 R Noble Heritage @Dallas Williams
+36 C Pegasus Guardian @Leanna Crossan
 37 U Rasaad yn Bashir @Dan Scott
 40 C Roving Harper @Anastasia Ovchinnikova
+46 C Tabaxi Toucaneers @Filipe Pagliuso
+48 U Veteran Soldier @Brock Grossman
 49 R White Plume Adventurer @Joseph Weston
 54 C Aarakocra Sneak @Andrea Radeck
 55 U Alora, Merry Thief @Aaron Miller
+56 M Ancient Silver Dragon @Raoul Vitale
 58 C Blur @Dave Greco
+61 U Cone of Cold @Kim Sokol
+63 R Displacer Kitten @Campbell White
 67 U Dungeon Delver @Edgar Sánchez Hidalgo
+68 M Elminster's Simulacrum @Irina Nordsol
 70 U Feywild Visitor @Johann Bodin
+71 M Font of Magic @Francis Tneh
 72 R Gale, Waterdeep Prodigy @Cristi Balanescu
+73 R Gale's Redirection @Yeong-Hao Han
 74 C Goggles of Night @Forrest Imel
 76 R Illithid Harvester @David Astruga
 77 U Imoen, Mystic Trickster @Alix Branwyn
 78 U Irenicus's Vile Duplication @Oleksandr Kozachenko
+81 R Kindred Discovery @Vincent Christiaens
+82 C Lapis Orb of Dragonkind @Olena Richards
+83 U Modify Memory @Dave Greco
+84 U Moonshae Pixie @Edgar Sánchez Hidalgo
+90 U Renari, Merchant of Marvels @Filip Burburan
 91 R Robe of the Archmagi @Dallas Williams
+93 U Sailors' Bane @Brian Valeza
+94 U Sapphire Dragon @Joe Slucher
 95 C Sea Hag @Andrea Piparo
 96 R Shameless Charlatan @Inka Schulz
 98 U Sword Coast Sailor @Tony Foti
+100 R Tomb of Horrors Adventurer @Irina Nordsol
 101 C Tymora's Invoker @Leonardo Santanna
 102 U Vhal, Candlekeep Researcher @David Gaillet
 103 M Volo, Itinerant Scholar @Andreas Zafiratos
 105 R Wizards of Thay @Josh Hass
 107 U Agent of the Iron Throne @Josh Hass
+108 U Agent of the Shadow Thieves @Clare Wong
+110 U Ambition's Cost @Zezhou Chen
 111 M Ancient Brass Dragon @Johan Grenier
+114 R Astarion's Thirst @Winona Nelson
+116 M Blood Money @Inka Schulz
+118 R Call to the Void @Liiga Smilshkalne
+119 U Cast Down @Tyler Walpole
+121 U Cloudkill @David Szabo
 122 U Criminal Past @Will Gist
 123 R Cultist of the Absolute @Artur Treffner
 125 R Elder Brain @Daarken
+128 U Ghost Lantern @Julian Kok Joon Wen
+139 M Pact Weapon @Volkan Baǵa
 141 U Passageway Seer @Konstantin Porubov
+142 R Ravenloft Adventurer @Jodie Muir
 143 U Safana, Calimport Cutthroat @Wisnu Tan
 144 U Sarevok, Deathbringer @Ben Hill
 145 C Scion of Halaster @Milivoj Ćeran
 146 R Shadowheart, Dark Justiciar @Cristi Balanescu
+147 U Sigil of Myrkul @David Astruga
+148 U Sivriss, Nightmare Speaker @Tuan Duong Chu
 150 C Stirge @Jamroz Gary
 151 C Summon Undead @Dallas Williams
 156 U Viconia, Drow Apostate @Daarken
+157 U Vrock @Dave Kendall
+159 U Amber Gristle O'Maul @Darek Zabrocki
+160 U Amethyst Dragon @Piotr Dura
+161 M Ancient Copper Dragon @Antonio José Manzanedo
+162 M Balor @Uriah Voth
 163 C Bhaal's Invoker @Deruchenko Alexander
+166 C Carnelian Orb of Dragonkind @Olena Richards
 169 R Descent into Avernus @Bruce Brenneise
 170 U Dragon Cultist @Cristi Balanescu
+172 R Elturel Survivors @Zoltan Boros
 173 C Fang Dragon @Andrey Kuzinskiy
 174 R Firbolg Flutist @Joseph Weston
 175 U Fireball @Xavier Ribeiro
+176 U Ganax, Astral Hunter @Aaron Miller
+177 C Genasi Enforcers @Joshua Raphael
+178 U Gnoll War Band @Ben Wootten
+180 U Gut, True Soul Zealot @Wayne Reynolds
 186 M Karlach, Fury of Avernus @Billy Christian
 187 C Lightning Bolt @Irina Nordsol
 188 U Livaan, Cultist of Tiamat @Ioannis Fiore
 189 U Nemesis Phoenix @Ben Wootten
+192 R Popular Entertainer @Zoltan Boros
+196 M Storm King's Thunder @Alexander Mokhov
+197 U Street Urchin @Julie Dillon
+201 U Thunderwave @Durion
+203 U Two-Handed Axe @Milivoj Ćeran
 204 R Wand of Wonder @Xavier Ribeiro
+207 R Wrathful Red Dragon @Dan Scott
 208 R Wyll, Blade of Frontiers @Mads Ahm
 209 R Wyll's Reversal @Irina Nordsol
 212 U Acolyte of Bahamut @Kai Carpenter
@@ -70,16 +126,23 @@ ScryfallCode=CLB
 218 M Bramble Sovereign @Andreas Zafiratos
 221 U Cloakwood Hermit @Kai Carpenter
 225 C Dread Linnorm @Caio Monteiro
+228 R Earthquake Dragon @Johan Grenier
+229 U Emerald Dragon @Diego Gisbert
 230 U Erinis, Gloom Stalker @Ioannis Fiore
+232 U Explore the Underdark @Piotr Dura
 234 U Halsin, Emerald Archdruid @Slawomir Maniak
 235 U Hardy Outlander @Kim Sokol
+236 C Jade Orb of Dragonkind @Olena Richards
 237 R Jaheira, Friend of the Forest @Mila Pesic
 238 R Jaheira's Respite @Mila Pesic
 241 C Master Chef @Forrest Imel
 242 R Monster Manual @David Gaillet
 250 R Raised by Giants @Kai Carpenter
+253 U Sharpshooter Elf @Caroline Gariba
 254 C Silvanus's Invoker @Leanna Crossan
 255 U Skanos Dragonheart @Daarken
+256 U Skullwinder @Joe Slucher
+257 U Split the Spoils @Edgar Sánchez Hidalgo
 261 U Wilson, Refined Grizzly @Ilse Gort
 262 U You Look Upon the Tarrasque @Kekai Kotaki
 264 R Alaundo the Seer @Aurore Folny
@@ -94,13 +157,18 @@ ScryfallCode=CLB
 274 M Elminster @Viktor Titov
 275 R Gluntch, the Bestower @Olivier Bernard
 276 R Gorion, Wise Mentor @Jason Kang
+277 R Jan Jansen, Chaos Crafter @Vladimir Krisetskiy
 278 R Jon Irenicus, Shattered One @Igor Grechanyi
+279 U Kagha, Shadow Archdruid @Alexander Mokhov
 280 U Korlessa, Scale Singer @Jesper Ejsing
 281 U Lozhan, Dragons' Legacy @Rudy Siswanto
 282 U Mahadi, Emporium Master @Ilse Gort
 283 R Mazzy, Truesword Paladin @Justyna Gil
+284 R Miirym, Sentinel Wyrm @Kekai Kotaki
 285 M Minsc & Boo, Timeless Heroes @Andreas Zafiratos
+286 U Minthara, Merciless Soul @Evyn Fong
 287 R Myrkul, Lord of Bones @Isis
+289 R Nine-Fingers Keene @Nils Hamm
 290 U Oji, the Exquisite Blade @Andreas Zafiratos
 291 R Raggadragga, Goreguts Boss @Xavier Ribeiro
 292 R Raphael, Fiendish Savior @Livia Prima
@@ -108,16 +176,28 @@ ScryfallCode=CLB
 294 M Tasha, the Witch Queen @Martina Fackova
 295 U Thrakkus the Butcher @Nestor Ossandon Leal
 296 R Zevlor, Elturel Exile @David Rapoza
+297 U Arcane Encyclopedia @Victor Adame Minguez
 298 U Arcane Signet @Sam White
 300 R Basilisk Collar @Craig J Spearing
+301 R Blade of Selves @Lie Setiawan
+303 U Burnished Hart @Jakub Kasper
+304 U Campfire @Edgar Sánchez Hidalgo
 305 C Charcoal Diamond @Gaboleps
+311 U Drillworks Mole @José Parodi
 312 U Dungeoneer's Pack @Tony Foti
 313 C Fire Diamond @Gaboleps
+315 U Gate Colossus @Emmanuel Shiu
 316 U Geode Golem @David Astruga
+317 U Iron Mastiff @James Paick
 320 C Marble Diamond @Gaboleps
+323 U Meteor Golem @James Paick
+324 R Mighty Servant of Leuk-o @Donato Giancola
+325 U Mind Stone @Ioannis Fiore
+326 R Mirror of Life Trapping @Dallas Williams
 327 C Moss Diamond @Gaboleps
 328 M Nautiloid Ship @Daniel Ljunggren
 331 U Noble's Purse @José Parodi
+336 U Rug of Smothering @Ioannis Fiore
 337 C Sky Diamond @Gaboleps
 339 U Swiftfoot Boots @Manuel Castañón
 340 C Trailblazer's Torch @Ioannis Fiore
@@ -136,7 +216,9 @@ ScryfallCode=CLB
 363 M Minsc & Boo, Timeless Heroes @Bram Sels
 364 M Tasha, the Witch Queen @Brom
 367 M Ancient Brass Dragon @Raoul Vitale
+368 M Ancient Copper Dragon @Johan Grenier
 370 M Battle Angels of Tyr @Artur Treffner
+371 M Legion Loyalty @Cristi Balanescu
 372 M Bramble Sovereign @Raluca Marinescu
 373 M Nautiloid Ship @Piotr Dura
 375 U Abdel Adrian, Gorion's Ward @Phil Stone
@@ -145,17 +227,24 @@ ScryfallCode=CLB
 379 U Lulu, Loyal Hollyphant
 380 U Rasaad yn Bashir @Phil Stone
 381 U Alora, Merry Thief @Jeff Dee
+382 M Ancient Silver Dragon @Pedro Potier
 383 R Gale, Waterdeep Prodigy @Mark A. Nelson
 384 C Goggles of Night @Jeff Dee
 385 U Imoen, Mystic Trickster @Pedro Potier
+386 U Renari, Merchant of Marvels @Justine Jones
 387 U Vhal, Candlekeep Researcher @Mark A. Nelson
 388 M Volo, Itinerant Scholar @Justine Mara Andersen
 389 M Ancient Brass Dragon @Jeff Miracola
 390 U Safana, Calimport Cutthroat @Justine Mara Andersen
 391 U Sarevok, Deathbringer @Justine Jones
 392 R Shadowheart, Dark Justiciar @Justine Jones
+393 U Sivriss, Nightmare Speaker @Justine Jones
 394 U Viconia, Drow Apostate @Justine Mara Andersen
+395 U Amber Gristle O'Maul @Justine Mara Andersen
+396 M Ancient Copper Dragon @Phil Stone
 397 U Fireball @Justine Jones
+398 U Ganax, Astral Hunter @Justine Jones
+399 U Gut, True Soul Zealot @Pedro Potier
 400 M Karlach, Fury of Avernus @Justine Jones
 401 C Lightning Bolt @Phil Stone
 402 U Livaan, Cultist of Tiamat @Jeff Miracola
@@ -169,6 +258,7 @@ ScryfallCode=CLB
 412 R Alaundo the Seer @Jeff Dee
 413 R Astarion, the Decadent @Phil Stone
 414 R Baba Lysaga, Night Witch @Mark A. Nelson
+415 R Bane, Lord of Darkness @Justine Mara Andersen
 416 R Bhaal, Lord of Murder @Justine Jones
 417 U Cadira, Caller of the Small @Pedro Potier
 418 U Commander Liara Portyr @Jeff Dee
@@ -177,12 +267,16 @@ ScryfallCode=CLB
 421 R Dynaheir, Invoker Adept @Pedro Potier
 422 R Gluntch, the Bestower @Mark A. Nelson
 423 R Gorion, Wise Mentor @Jeff Miracola
+424 R Jan Jansen, Chaos Crafter @Jeff Dee
 425 R Jon Irenicus, Shattered One @Jeff Dee
+426 U Kagha, Shadow Archdruid @Justine Mara Andersen
 427 U Korlessa, Scale Singer @Pedro Potier
 428 U Lozhan, Dragons' Legacy @Jeff Miracola
 429 U Mahadi, Emporium Master @Pedro Potier
 430 R Mazzy, Truesword Paladin @Diesel
+432 U Minthara, Merciless Soul @Pedro Potier
 433 R Myrkul, Lord of Bones @Mark A. Nelson
+435 R Nine-Fingers Keene @Justine Jones
 436 U Oji, the Exquisite Blade @Pedro Potier
 437 R Raggadragga, Goreguts Boss @Jeff Miracola
 438 R Raphael, Fiendish Savior @Justine Jones
@@ -222,26 +316,35 @@ ScryfallCode=CLB
 477 U Lulu, Loyal Hollyphant @Jakob Eirich
 478 R Noble Heritage @Dallas Williams
 479 U Rasaad yn Bashir @Dan Scott
+480 U Veteran Soldier @Brock Grossman
 481 U Alora, Merry Thief @Aaron Miller
 483 U Dungeon Delver @Edgar Sánchez Hidalgo
 484 U Feywild Visitor @Johann Bodin
 485 R Gale, Waterdeep Prodigy @Cristi Balanescu
 486 U Imoen, Mystic Trickster @Alix Branwyn
+487 U Renari, Merchant of Marvels @Filip Burburan
 488 R Shameless Charlatan @Inka Schulz
 489 U Sword Coast Sailor @Tony Foti
 490 U Vhal, Candlekeep Researcher @David Gaillet
 491 M Volo, Itinerant Scholar @Andreas Zafiratos
 492 U Agent of the Iron Throne @Josh Hass
+493 U Agent of the Shadow Thieves @Clare Wong
 494 U Criminal Past @Will Gist
 495 R Cultist of the Absolute @Artur Treffner
 496 U Safana, Calimport Cutthroat @Wisnu Tan
 497 U Sarevok, Deathbringer @Ben Hill
 498 C Scion of Halaster @Milivoj Ćeran
 499 R Shadowheart, Dark Justiciar @Cristi Balanescu
+500 U Sivriss, Nightmare Speaker @Tuan Duong Chu
 501 U Viconia, Drow Apostate @Daarken
+502 U Amber Gristle O'Maul @Darek Zabrocki
 503 U Dragon Cultist @Cristi Balanescu
+504 U Ganax, Astral Hunter @Aaron Miller
+506 U Gut, True Soul Zealot @Wayne Reynolds
 507 M Karlach, Fury of Avernus @Billy Christian
 508 U Livaan, Cultist of Tiamat @Ioannis Fiore
+509 R Popular Entertainer @Zoltan Boros
+510 U Street Urchin @Julie Dillon
 512 R Wyll, Blade of Frontiers @Mads Ahm
 513 U Acolyte of Bahamut @Kai Carpenter
 514 U Cloakwood Hermit @Kai Carpenter
@@ -254,37 +357,62 @@ ScryfallCode=CLB
 522 U Wilson, Refined Grizzly @Ilse Gort
 524 R Astarion, the Decadent
 525 R Baba Lysaga, Night Witch @Slawomir Maniak
+526 R Bane, Lord of Darkness @Billy Christian
 527 R Bhaal, Lord of Murder @Peter Polach
 528 U Cadira, Caller of the Small @Alexandr Leskinen
 529 U Commander Liara Portyr
+530 R The Council of Four @Justine Cruz
 531 R Duke Ulder Ravengard @Eric Deschamps
 532 R Dynaheir, Invoker Adept @Caroline Gariba
 533 R Gluntch, the Bestower @Olivier Bernard
 534 R Gorion, Wise Mentor @Jason Kang
+535 R Jan Jansen, Chaos Crafter @Vladimir Krisetskiy
 536 R Jon Irenicus, Shattered One @Igor Grechanyi
 538 U Korlessa, Scale Singer @Jesper Ejsing
 539 U Lozhan, Dragons' Legacy @Rudy Siswanto
 540 U Mahadi, Emporium Master @Ilse Gort
 541 R Mazzy, Truesword Paladin @Justyna Gil
+542 R Miirym, Sentinel Wyrm @Kekai Kotaki
+543 U Minthara, Merciless Soul @Evyn Fong
 544 R Myrkul, Lord of Bones @Isis
+546 R Nine-Fingers Keene @Nils Hamm
 547 U Oji, the Exquisite Blade @Andreas Zafiratos
 548 R Raggadragga, Goreguts Boss @Xavier Ribeiro
 549 R Raphael, Fiendish Savior @Livia Prima
 550 U Rilsa Rael, Kingpin @Micah Epstein
 551 U Thrakkus the Butcher @Nestor Ossandon Leal
 552 R Zevlor, Elturel Exile @David Rapoza
+553 R Archivist of Oghma @Stella Spente
+554 R Ascend from Avernus @Bruce Brenneise
+555 R Horn of Valhalla @John Severin Brassell
+557 U Kagha, Shadow Archdruid @Alexander Mokhov
 558 R White Plume Adventurer @Joseph Weston
+560 R Displacer Kitten @Campbell White
 561 M Elminster's Simulacrum @Irina Nordsol
+562 M Font of Magic @Francis Tneh
+563 R Gale's Redirection @Yeong-Hao Han
 564 R Illithid Harvester @David Astruga
 566 R Robe of the Archmagi @Dallas Williams
+567 R Tomb of Horrors Adventurer @Irina Nordsol
 568 R Wizards of Thay @Josh Hass
+570 R Astarion's Thirst @Winona Nelson
+571 M Blood Money @Inka Schulz
+572 R Call to the Void @Liiga Smilshkalne
 573 R Elder Brain @Daarken
+575 R Intellect Devourer @Brian Valeza
+576 M Pact Weapon @Volkan Baǵa
+577 R Ravenloft Adventurer @Jodie Muir
+578 M Balor @Uriah Voth
+580 R Descent into Avernus @Bruce Brenneise
+581 R Elturel Survivors @Zoltan Boros
 582 R Firbolg Flutist @Joseph Weston
 584 R Wand of Wonder @Xavier Ribeiro
 586 R Wyll's Reversal @Irina Nordsol
 589 R Jaheira's Respite @Mila Pesic
 591 R Monster Manual @David Gaillet
 595 R Basilisk Collar @Craig J Spearing
+598 R Mighty Servant of Leuk-o @Donato Giancola
+599 R Mirror of Life Trapping @Dallas Williams
 600 R Baldur's Gate @Titus Lunter
 601 R Bountiful Promenade @Alayna Danner
 602 R Luxury Suite @Titus Lunter
