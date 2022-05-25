@@ -118,6 +118,7 @@ public enum AbilityKey {
     SourceSA("SourceSA"),
     SpellAbility("SpellAbility"),
     SpellAbilityStackInstance("SpellAbilityStackInstance"),
+    SpellAbilityTarget("SpellAbilityTarget"),
     SpellAbilityTargetingCards("SpellAbilityTargetingCards"),
     StackInstance("StackInstance"),
     StackSa("StackSa"),

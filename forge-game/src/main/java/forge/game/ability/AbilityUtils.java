@@ -1060,17 +1060,16 @@ public class AbilityUtils {
             final SpellAbility root = ((SpellAbility)sa).getRootAbility();
             Object o = null;
             if (defParsed.endsWith("Controller")) {
-                String triggeringType = defParsed.substring(9);
-                triggeringType = triggeringType.substring(0, triggeringType.length() - 10);
+                final boolean orCont = defParsed.endsWith("OrController");
+                String triggeringType = defParsed.substring(9, defParsed.length() - (orCont ? 12 : 10));
                 final Object c = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
-                if (c instanceof Card) {
+                if (orCont && c instanceof Player) {
+                    o = c;
+                } else if (c instanceof Card) {
                     o = ((Card) c).getController();
-                }
-                if (c instanceof SpellAbility) {
+                } else if (c instanceof SpellAbility) {
                     o = ((SpellAbility) c).getActivatingPlayer();
-                }
-                // For merged permanent
-                if (c instanceof CardCollection) {
+                } else if (c instanceof CardCollection) { // For merged permanent
                     o = ((CardCollection) c).get(0).getController();
                 }
             }
