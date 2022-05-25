@@ -271,7 +271,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("CopySVar")) {
-                eff.setSVar(sa.getParam("CopySVar"), sa.getHostCard().getSVar(sa.getParam("CopySVar")));
+                eff.setSVar(sa.getParam("CopySVar"), hostCard.getSVar(sa.getParam("CopySVar")));
             }
 
             // Copy text changes
