@@ -115,8 +115,7 @@ public class CardProperty {
             if (i == -1) {
                 return false;
             }
-            Card c = chosen.get(i);
-            if (property.contains("Strict") && !c.equalsWithTimestamp(card)) {
+            if (property.contains("Strict") && !chosen.get(i).equalsWithTimestamp(card)) {
                 return false;
             }
         } else if (property.equals("nonChosenCard")) {
