@@ -109,8 +109,14 @@ public class CardProperty {
             if (card.getId() != Integer.parseInt(property.split("CardUID_")[1])) {
                 return false;
             }
-        } else if (property.equals("ChosenCard")) {
-            if (!source.hasChosenCard(card)) {
+        } else if (property.startsWith("ChosenCard")) {
+            CardCollectionView chosen = source.getChosenCards();
+            int i = chosen.indexOf(card);
+            if (i == -1) {
+                return false;
+            }
+            Card c = chosen.get(i);
+            if (property.contains("Strict") && !c.equalsWithTimestamp(card)) {
                 return false;
             }
         } else if (property.equals("nonChosenCard")) {
