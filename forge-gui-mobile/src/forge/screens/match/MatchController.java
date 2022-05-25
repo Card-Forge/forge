@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.utils.ScreenUtils;
+import forge.adventure.scene.DuelScene;
+import forge.adventure.scene.SceneType;
 import forge.ai.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
@@ -312,11 +314,13 @@ public class MatchController extends AbstractGuiGame {
     @Override
     public void finishGame() {
         if (Forge.isMobileAdventureMode) {
+            Forge.setCursor(null, "0");
+            if (((DuelScene) SceneType.DuelScene.instance).hasCallbackExit())
+                return;
             Forge.setTransitionScreen(new TransitionScreen(() -> {
                 Forge.clearTransitionScreen();
                 Forge.clearCurrentScreen();
             }, ScreenUtils.getFrameBufferTexture(), false, false));
-            Forge.setCursor(null, "0");
             return;
         }
         if (hasLocalPlayers() || getGameView().isMatchOver()) {
