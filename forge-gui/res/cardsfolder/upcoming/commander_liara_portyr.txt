@@ -1,0 +1,15 @@
+Name:Commander Liara Portyr
+ManaCost:3 R W
+Types:Legendary Creature Human Soldier
+PT:5/3
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, spells you cast from exile this turn cost {X} less to cast, where X is the number of players being attacked. Exile the top X cards of your library. Until end of turn, you may cast spells from among those exiled cards.
+SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBStoreNum
+SVar:DBStoreNum:DB$ StoreSVar | SVar$ Y | Type$ Calculate | Expression$ X | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceCost,STPlay | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Card.wasCastFromExile | Type$ Spell | Activator$ You | Amount$ Y | Description$ Spells you cast from exile this turn cost {X} less to cast, where X is the number of players you attacked.
+SVar:STPlay:Mode$ Continuous | Affected$ Card.IsRemembered+nonLand | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ Until end of turn, you may cast spells from among those exiled cards.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBResetNum
+SVar:DBResetNum:DB$ StoreSVar | SVar$ Y | Type$ Number | Expression$ 0
+SVar:X:TriggeredPlayersAttackedTarget$Amount
+SVar:Y:Number$0
+Oracle:Whenever you attack, spells you cast from exile this turn cost {X} less to cast, where X is the number of players being attacked. Exile the top X cards of your library. Until end of turn, you may cast spells from among those exiled cards.
