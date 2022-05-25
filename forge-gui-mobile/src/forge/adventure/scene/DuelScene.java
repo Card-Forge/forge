@@ -54,6 +54,7 @@ public class DuelScene extends ForgeScene {
     private EffectData dungeonEffect;
     Deck playerDeck, enemyDeck;
     boolean chaosBattle = false;
+    boolean callbackExit = false;
     List<IPaperCard> playerExtras = new ArrayList<>();
     List<IPaperCard> AIExtras = new ArrayList<>();
 
@@ -66,12 +67,16 @@ public class DuelScene extends ForgeScene {
     public void dispose() {
     }
 
+    public boolean hasCallbackExit() {
+        return callbackExit;
+    }
 
     public void GameEnd() {
         boolean winner=humanPlayer == hostedMatch.getGame().getMatch().getWinner();
         String enemyName=(enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride);
         Current.player().clearBlessing();
         if (chaosBattle && !winner) {
+            callbackExit = true;
             List<String> insult = Lists.newArrayList("I'm sorry...","... ...." ,"Learn from your defeat.",
                     "I haven't begun to use my full power.","No matter how much you try, you still won't beat me.",
                     "Your technique need work.","Rookie.","That's your best?","Hah ha ha ha ha ha ha!","?!......... (Seriously?!)",
@@ -109,6 +114,9 @@ public class DuelScene extends ForgeScene {
             public void run() {
                 SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
                 dungeonEffect = null;
+                callbackExit = false;
+                Forge.clearTransitionScreen();
+                Forge.clearCurrentScreen();
                 Scene last = Forge.switchToLast();
 
                 if (last instanceof HudScene) {
