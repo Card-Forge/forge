@@ -6,12 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.badlogic.gdx.utils.ScreenUtils;
 import forge.ai.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
 import forge.item.IPaperCard;
-import forge.screens.TransitionScreen;
 import forge.util.collect.FCollection;
 import org.apache.commons.lang3.StringUtils;
 
