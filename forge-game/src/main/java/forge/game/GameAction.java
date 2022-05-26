@@ -2203,6 +2203,32 @@ public class GameAction {
         game.getTriggerHandler().runTrigger(TriggerType.BecomeMonarch, runParams, false);
     }
 
+    public void takeInitiative(final Player p, final String set) {
+        final Player previous = game.getHasInitiative();
+        if (p == null) {
+            return;
+        }
+
+        if (!p.equals(previous)) {
+            if (previous != null) {
+                previous.removeInitiativeEffect();
+            }
+
+            if (p.hasLost()) { // the person who should take initiative is gone, it goes to next player
+                takeInitiative(game.getNextPlayerAfter(p), set);
+            }
+
+        game.setHasInitiative(p);
+        p.createInitiativeEffect(set);
+        }
+
+        // You can take the initiative even if you already have it
+        // Run triggers
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Player, p);
+        game.getTriggerHandler().runTrigger(TriggerType.TakesInitiative, runParams, false);
+    }
+
     // Make scry an action function so that it can be used for mulligans (with a null cause)
     // Assumes that the list of players is in APNAP order, which should be the case
     // Optional here as well to handle the way that mulligans do the choice
