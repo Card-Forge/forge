@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import forge.Forge;
 import forge.adventure.character.CharacterSprite;
@@ -95,7 +94,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                                 duelScene.initDuels(player, mob);
                                 Forge.clearTransitionScreen();
                                 startPause(0.3f, () -> Forge.switchScene(SceneType.DuelScene.instance));
-                            }, ScreenUtils.getFrameBufferTexture(), true, false));
+                            }, Forge.takeScreenshot(), true, false));
                             currentMob = mob;
                             WorldSave.getCurrentSave().autoSave();
                         });
