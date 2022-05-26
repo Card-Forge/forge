@@ -134,6 +134,10 @@ public class ControlGainEffect extends SpellAbilityEffect {
             tgtCards = getDefinedCards(sa);
         }
 
+        if (tgtCards == null) {
+            return;
+        }
+
         // in case source was LKI or still resolving
         if (source.isLKI() || source.getZone().is(ZoneType.Stack)) {
             source = game.getCardState(source);
