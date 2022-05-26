@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.badlogic.gdx.utils.ScreenUtils;
 import forge.adventure.scene.DuelScene;
 import forge.adventure.scene.SceneType;
 import forge.ai.GameState;
@@ -320,7 +319,7 @@ public class MatchController extends AbstractGuiGame {
             Forge.setTransitionScreen(new TransitionScreen(() -> {
                 Forge.clearTransitionScreen();
                 Forge.clearCurrentScreen();
-            }, ScreenUtils.getFrameBufferTexture(), false, false));
+            }, Forge.takeScreenshot(), false, false));
             return;
         }
         if (hasLocalPlayers() || getGameView().isMatchOver()) {

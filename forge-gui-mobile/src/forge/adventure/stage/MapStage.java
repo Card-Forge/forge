@@ -24,7 +24,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.ScreenUtils;
 import forge.Forge;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
@@ -678,7 +677,7 @@ public class MapStage extends GameStage {
                             if(isInMap && effect != null) duelScene.setDungeonEffect(effect);
                             Forge.switchScene(SceneType.DuelScene.instance);
                         });
-                    }, ScreenUtils.getFrameBufferTexture(), true, false));
+                    }, Forge.takeScreenshot(), true, false));
                 }
             });
         });
