@@ -6,7 +6,7 @@ K:Flying
 S:Mode$ Continuous | Affected$ Demon.Other+YouCtrl,Devil.Other+YouCtrl,Imp.Other+YouCtrl,Tiefling.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Lifelink | Description$ Other Demons, Devils, Imps, and Tieflings you control get +1/+1 and have lifelink.
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigToken | TriggerDescription$ At the beginning of each end step, if a creature card was put into your graveyard from anywhere this turn, create a 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."
 SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_devil_burn
-SVar:X:Count$ThisTurnEntered_Graveyard_Creature.YouOwn
+SVar:X:Count$ThisTurnEntered_Graveyard_Creature.YouOwn+nonToken
 DeckHas:Ability$LifeGain|Token
 DeckHints:Ability$Sacrifice & Type$Demon|Devil|Imp|Tiefling
 Oracle:Flying\nOther Demons, Devils, Imps, and Tieflings you control get +1/+1 and have lifelink.\nAt the beginning of each end step, if a creature card was put into your graveyard from anywhere this turn, create a 1/1 red Devil creature token with "When this creature dies, it deals 1 damage to any target."
