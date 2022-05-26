@@ -28,6 +28,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
@@ -200,8 +201,12 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             }
         }
 
-        if (hasParam("NoManaSpent")) {
-            if (spellAbility.getTotalManaSpent() != 0) {
+        if (hasParam("AmountManaSpent")) {
+            String value = getParam("AmountManaSpent");
+            int manaSpent = spellAbility.getTotalManaSpent();
+            String comparator = value.substring(0, 2);
+            int y = AbilityUtils.calculateAmount(spellAbility.getHostCard(), value.substring(2), spellAbility);
+            if (!Expressions.compare(manaSpent, comparator, y)) {
                 return false;
             }
         }

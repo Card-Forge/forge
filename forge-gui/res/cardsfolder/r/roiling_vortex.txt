@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Enchantment
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ Trig1Damage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals 1 damage to them.
 SVar:Trig1Damage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
-T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ Trig5Damage | NoManaSpent$ True | TriggerDescription$ Whenever a player casts a spell, if no mana was spent to cast that spell, CARDNAME deals 5 damage to that player.
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ Trig5Damage | AmountManaSpent$ EQ0 | TriggerDescription$ Whenever a player casts a spell, if no mana was spent to cast that spell, CARDNAME deals 5 damage to that player.
 SVar:Trig5Damage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 5
 A:AB$ Effect | Cost$ R | StaticAbilities$ STCantGain | AILogic$ NoGain | SpellDescription$ Your opponents can't gain life this turn.
 SVar:STCantGain:Mode$ CantGainLife | ValidPlayer$ Player.Opponent | Description$ Your opponents can't gain life this turn.
