@@ -395,7 +395,7 @@ public class PlayerProperty {
             if (!player.getAttackedPlayersMyLastTurn().contains(sourceController)) {
                 return false;
             }
-        } else if (property.equals("wasAttackedThisCombat")) {
+        } else if (property.equals("BeenAttackedThisCombat")) {
             for (Player p : game.getRegisteredPlayers()) {
                 if (p.getAttackedPlayersMyCombat().contains(sourceController)) {
                     return true;
