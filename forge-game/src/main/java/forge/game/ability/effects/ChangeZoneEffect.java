@@ -196,8 +196,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (destination.equals("Battlefield")) {
                     sb.append("onto the battlefield");
                     if (tapped) {
-                        sb.append(" tapped");
+                        sb.append(" tapped").append(attacking ? " and" : "");
                     }
+                    sb.append(attacking ? " attacking" : "");
                     if (sa.hasParam("GainControl")) {
                         sb.append(" under ").append(chooserNames).append("'s control");
                     }
@@ -259,13 +260,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (destination.equals("Battlefield")) {
                 sb.append(" onto the battlefield");
                 if (tapped) {
-                    sb.append(" tapped");
-                    if (attacking) {
-                        sb.append(" and");
-                    }
+                    sb.append(" tapped").append(attacking ? " and" : "");
                 }
-                if (attacking) {
-                    sb.append(" attacking");
+                sb.append(attacking ? " attacking" : "");
                 }
                 if (sa.hasParam("GainControl")) {
                     sb.append(" under ").append(chooserNames).append("'s control");
@@ -366,14 +363,16 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String fromGraveyard = " from the graveyard";
 
         if (destination.equals(ZoneType.Battlefield)) {
+            final boolean attacking = (sa.hasParam("Attacking"));
             if (ZoneType.Graveyard.equals(origin)) {
                 sb.append("Return").append(targetname).append(fromGraveyard).append(" to the battlefield");
             } else {
                 sb.append("Put").append(targetname).append(" onto the battlefield");
             }
             if (sa.hasParam("Tapped")) {
-                sb.append(" tapped");
+                sb.append(" tapped").append(attacking ? " and" : "");
             }
+            sb.append(attacking ? " attacking" : "");
             if (sa.hasParam("GainControl")) {
                 sb.append(" under your control");
             }
