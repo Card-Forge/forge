@@ -3237,11 +3237,12 @@ public class Player extends GameEntity implements Comparable<Player> {
             initiativeEffect.updateStateForView();
         }
 
-        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        final TriggerHandler triggerHandler = game.getTriggerHandler();
+        triggerHandler.suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, initiativeEffect, null, null);
-        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-
-        //com.add(initiativeEffect);
+        triggerHandler.clearSuppression(TriggerType.ChangesZone);
+        triggerHandler.clearActiveTriggers(initiativeEffect, null);
+        triggerHandler.registerActiveTrigger(initiativeEffect, false);
 
         this.updateZoneForView(com);
     }
