@@ -866,7 +866,7 @@ public class CardFactoryUtil {
             inst.addTrigger(bushidoTrigger1);
             inst.addTrigger(bushidoTrigger2);
         } else if (keyword.equals("Cascade")) {
-            final StringBuilder trigScript = new StringBuilder("Mode$ SpellCast | ValidCard$ Card.Self" +
+            final StringBuilder trigScript = new StringBuilder("Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack" +
                     " | Secondary$ True | TriggerDescription$ Cascade - CARDNAME");
 
             final String abString = "DB$ DigUntil | Defined$ You | Amount$ 1 | Valid$ Card.nonLand+cmcLTCascadeX" +
@@ -959,7 +959,7 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedTrigger);
             inst.addTrigger(parsedTrigReturn);
         } else if (keyword.startsWith("Casualty")) {
-            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ Casualty | Secondary$ True";
+            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ Casualty | TriggerZones$ Stack | Secondary$ True";
             String abString = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 1 | MayChooseTarget$ True";
             String[] k = keyword.split(":");
             if (k.length > 2) {
@@ -972,7 +972,7 @@ public class CardFactoryUtil {
 
             inst.addTrigger(casualtyTrigger);
         } else if (keyword.equals("Conspire")) {
-            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid";
+            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ Conspire | TriggerZones$ Stack | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid";
             final String abString = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 1 | MayChooseTarget$ True";
 
             final Trigger conspireTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
@@ -1037,7 +1037,7 @@ public class CardFactoryUtil {
             parsedTrigger.setOverridingAbility(delayTrigSA);
             inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Demonstrate")) {
-            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerDescription$ Demonstrate (" + inst.getReminderText() + ")";
+            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | TriggerDescription$ Demonstrate (" + inst.getReminderText() + ")";
             final String youCopyStr = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | Optional$ True | RememberCopies$ True | IgnoreFreeze$ True";
             final String chooseOppStr = "DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ConditionDefined$ Remembered | ConditionPresent$ Spell";
             final String oppCopyStr = "DB$ CopySpellAbility | Controller$ ChosenPlayer | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | ConditionDefined$ Remembered | ConditionPresent$ Spell";
@@ -1226,7 +1226,7 @@ public class CardFactoryUtil {
 
             inst.addTrigger(trigger);
         } else if (keyword.startsWith("Gravestorm")) {
-            String trigStr = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerDescription$ Gravestorm (" + inst.getReminderText() + ")";
+            String trigStr = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | TriggerDescription$ Gravestorm (" + inst.getReminderText() + ")";
             String copyStr = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ GravestormCount | MayChooseTarget$ True";
 
             SpellAbility copySa = AbilityFactory.getAbility(copyStr, card);
@@ -1784,7 +1784,7 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Storm")) {
-            final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | Secondary$ True"
+            final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | Secondary$ True"
                     + "| TriggerDescription$ Storm (" + inst.getReminderText() + ")";
 
             String effect = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ StormCount | MayChooseTarget$ True";
