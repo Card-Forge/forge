@@ -7,7 +7,7 @@ SVar:Entrance:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$
 SVar:Forge:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2 | RoomName$ Forge | NextRoom$ Trap,Arena | SpellDescription$ Put two +1/+1 counters on target creature.
 SVar:Well:DB$ Scry | ScryNum$ 2 | RoomName$ Lost Well | NextRoom$ Arena,Stash | SpellDescription$ Scry 2.
 SVar:Trap:DB$ LoseLife | ValidTgts$ Player | LifeAmount$ 5 | RoomName$ Trap! | NextRoom$ Archives | SpellDescription$ Target player loses 5 life.
-SVar:Arena:DB$ Goad | ValidTgts$ Creature | RoomName$ Trap! | NextRoom$ Archives,Catacombs | SpellDescription$ Goad target creature.
+SVar:Arena:DB$ Goad | ValidTgts$ Creature | RoomName$ Arena | NextRoom$ Archives,Catacombs | SpellDescription$ Goad target creature.
 SVar:Stash:DB$ Token | TokenScript$ c_a_treasure_sac | RoomName$ Stash | NextRoom$ Catacombs | SpellDescription$ Create a Treasure token.
 SVar:Archives:DB$ Draw | RoomName$ Archive | NextRoom$ Throne | SpellDescription$ Draw a card.
 SVar:Catacombs:DB$ Token | TokenScript$ b_4_1_skeleton_menace | RoomName$ Catacombs | NextRoom$ Throne | SpellDescription$ Create a 4/1 black Skeleton creature token with menace.
