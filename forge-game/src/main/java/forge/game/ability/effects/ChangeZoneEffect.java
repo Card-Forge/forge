@@ -263,7 +263,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     sb.append(" tapped").append(attacking ? " and" : "");
                 }
                 sb.append(attacking ? " attacking" : "");
-                }
                 if (sa.hasParam("GainControl")) {
                     sb.append(" under ").append(chooserNames).append("'s control");
                 }
