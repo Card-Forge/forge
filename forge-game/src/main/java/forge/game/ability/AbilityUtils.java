@@ -3482,6 +3482,10 @@ public class AbilityUtils {
             return doXMath(opps == null ? 0 : opps.size(), m, source, ctb);
         }
 
+        if (value.equals("OpponentsAttackedThisCombat")) {
+            return doXMath(game.getCombat().getAttackedOpponents(player).size(), m, source, ctb);
+        }
+
         if (value.equals("DungeonsCompleted")) {
             return doXMath(player.getCompletedDungeons().size(), m, source, ctb);
         }
