@@ -201,19 +201,15 @@ public class Combat {
     }
 
     //gets attacked player opponents (ignores planeswalkers)
-    //currently just for count on Nemesis Phoenix
     public final FCollection<Player> getAttackedOpponents(Player atk) {
         FCollection<Player> attackedOpps = new FCollection<Player>();
         if (atk == playerWhoAttacks) {
-            for (GameEntity defender : attackableEntries) {
-                if (defender instanceof Card) { //planeswalker
-                    continue;
-                }
+            for (Player defender : getDefendingPlayers()) {
                 CardCollection attackers = getAttackersOf(defender);
                 if (attackers.isEmpty()) {
                     continue;
                 }
-                attackedOpps.add((Player) defender);
+                attackedOpps.add(defender);
             }
         }
         return attackedOpps;
