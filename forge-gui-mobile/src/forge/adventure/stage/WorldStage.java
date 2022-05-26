@@ -84,18 +84,21 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 if (player.collideWith(mob)) {
                     player.setAnimation(CharacterSprite.AnimationTypes.Attack);
                     mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
+                    SoundSystem.instance.play(SoundEffectType.Block, false);
                     Gdx.input.vibrate(50);
-                    Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
-                    SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
-                    DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
-                    FThreads.invokeInEdtNowOrLater(() -> {
-                        Forge.setTransitionScreen(new TransitionScreen(() -> {
-                            duelScene.initDuels(player, mob);
-                            Forge.clearTransitionScreen();
-                            startPause(0.3f, () -> Forge.switchScene(SceneType.DuelScene.instance));
-                        }, ScreenUtils.getFrameBufferTexture(), true, false));
-                        currentMob = mob;
-                        WorldSave.getCurrentSave().autoSave();
+                    startPause(0.8f, () -> {
+                        Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
+                        SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
+                        DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
+                        FThreads.invokeInEdtNowOrLater(() -> {
+                            Forge.setTransitionScreen(new TransitionScreen(() -> {
+                                duelScene.initDuels(player, mob);
+                                Forge.clearTransitionScreen();
+                                startPause(0.3f, () -> Forge.switchScene(SceneType.DuelScene.instance));
+                            }, ScreenUtils.getFrameBufferTexture(), true, false));
+                            currentMob = mob;
+                            WorldSave.getCurrentSave().autoSave();
+                        });
                     });
                     break;
                 }
