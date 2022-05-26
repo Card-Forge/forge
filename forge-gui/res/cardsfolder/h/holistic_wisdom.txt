@@ -1,8 +1,7 @@
 Name:Holistic Wisdom
 ManaCost:1 G G
 Types:Enchantment
-A:AB$ Pump | Cost$ 2 ExileFromHand<1/Card> | RememberCostCards$ True | SubAbility$ DBChangeZone | ValidTgts$ Card.YouOwn | TgtZone$ Graveyard | StackDescription$ None | SpellDescription$ Return target card from your graveyard to your hand if it shares a card type with the card exiled this way. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
-SVar:DBChangeZone:DB$ ChangeZone | Defined$ ParentTarget | Origin$ Graveyard | Destination$ Hand | ConditionDefined$ ParentTarget | ConditionPresent$ Card.sharesCardTypeWith Remembered | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Pump | Cost$ 2 ExileFromHand<1/Card> | SubAbility$ DBChangeZone | ValidTgts$ Card.YouOwn | TgtZone$ Graveyard | StackDescription$ None | SpellDescription$ Return target card from your graveyard to your hand if it shares a card type with the card exiled this way. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ ParentTarget | Origin$ Graveyard | Destination$ Hand | ConditionDefined$ ParentTarget | ConditionPresent$ Card.sharesCardTypeWith Exiled | ConditionCompare$ GE1
 AI:RemoveDeck:All
 Oracle:{2}, Exile a card from your hand: Return target card from your graveyard to your hand if it shares a card type with the card exiled this way. (Artifact, creature, enchantment, instant, land, planeswalker, sorcery, and tribal are card types.)
