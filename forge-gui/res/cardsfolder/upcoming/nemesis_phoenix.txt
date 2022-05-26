@@ -1,0 +1,13 @@
+Name:Nemesis Phoenix
+ManaCost:3 R R
+Types:Creature Phoenix
+PT:4/2
+K:Flying
+A:AB$ ChangeZone | Cost$ 2 R | ActivationZone$ Graveyard | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Attacking$ True | ActivationPhases$ Declare Attackers | CheckSVar$ X | SVarCompare$ GE2 | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped and attacking. Activate only during the declare attackers step and only if you're attacking two or more opponents.
+SVar:X:PlayerCountPropertyYou$OpponentsAttackedThisCombat
+AI:RemoveDeck:Random
+DeckHints:Keyword$Encore|Myriad
+DeckHas:Ability$Graveyard
+SVar:SacMe:1
+SVar:DiscardMe:1
+Oracle:Flying\n{2}{R}: Return Nemesis Phoenix from your graveyard to the battlefield tapped and attacking. Activate only during the declare attackers step and only if you're attacking two or more opponents.
