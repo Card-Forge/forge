@@ -7,4 +7,5 @@ T:Mode$ SpellCast | ValidCard$ Card.Adventure,Dragon | ValidActivatingPlayer$ Yo
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.IsNotCommander,Player,Planeswalker.IsNotCommander | TgtPrompt$ Select any target that isn't a commander | NumDmg$ X
 SVar:X:TriggerCount$CastSACMC
 SVar:BuffedBy:Creature.AdventureCard,Dragon
+DeckHints:Type$Adventure|Dragon
 Oracle:Flying\nWhenever you cast an Adventure spell or Dragon spell, Lozhan, Dragons' Legacy deals damage equal to that spell's mana value to any target that isn't a commander.
