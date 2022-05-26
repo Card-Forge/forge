@@ -205,11 +205,9 @@ public class Combat {
         FCollection<Player> attackedOpps = new FCollection<Player>();
         if (atk == playerWhoAttacks) {
             for (Player defender : getDefendingPlayers()) {
-                CardCollection attackers = getAttackersOf(defender);
-                if (attackers.isEmpty()) {
-                    continue;
+                if (!getAttackersOf(defender).isEmpty()) {
+                    attackedOpps.add(defender);
                 }
-                attackedOpps.add(defender);
             }
         }
         return attackedOpps;
