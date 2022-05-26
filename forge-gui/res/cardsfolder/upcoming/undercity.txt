@@ -11,7 +11,7 @@ SVar:Arena:DB$ Goad | ValidTgts$ Creature | RoomName$ Arena | NextRoom$ Archives
 SVar:Stash:DB$ Token | TokenScript$ c_a_treasure_sac | RoomName$ Stash | NextRoom$ Catacombs | SpellDescription$ Create a Treasure token.
 SVar:Archives:DB$ Draw | RoomName$ Archive | NextRoom$ Throne | SpellDescription$ Draw a card.
 SVar:Catacombs:DB$ Token | TokenScript$ b_4_1_skeleton_menace | RoomName$ Catacombs | NextRoom$ Throne | SpellDescription$ Create a 4/1 black Skeleton creature token with menace.
-SVar:Throne:DB$ Dig | DigNum$ 10 | Reveal$ True | ChangeValid$ Creature | DestinationZone$ Battlefield | WithCounter$ P1P1 | WithCounterNum$ 3 | RememberChanged$ True | RoomName$ Throne of the Dead Three | SpellDescription$ Reveal the top ten cards of your library. Put a creature card from among them onto the battlefield with three +1/+1 counters on it. It gains hexproof until your next turn. Then shuffle.
+SVar:Throne:DB$ Dig | DigNum$ 10 | Reveal$ True | ChangeValid$ Creature | DestinationZone$ Battlefield | WithCounter$ P1P1 | WithCounterNum$ 3 | RememberChanged$ True | LibraryPosition2$ 0 | SkipReorder$ True | SubAbility$ DBPump | RoomName$ Throne of the Dead Three | SpellDescription$ Reveal the top ten cards of your library. Put a creature card from among them onto the battlefield with three +1/+1 counters on it. It gains hexproof until your next turn. Then shuffle.
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Hexproof | Duration$ UntilYourNextTurn | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ Shuffle | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
