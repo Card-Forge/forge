@@ -12,4 +12,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBResetNum
 SVar:DBResetNum:DB$ StoreSVar | SVar$ Y | Type$ Number | Expression$ 0
 SVar:X:TriggeredPlayersAttackedTarget$Amount
 SVar:Y:Number$0
+DeckHints:Keyword$Encore|Myriad
 Oracle:Whenever you attack, spells you cast from exile this turn cost {X} less to cast, where X is the number of players being attacked. Exile the top X cards of your library. Until end of turn, you may cast spells from among those exiled cards.
