@@ -106,10 +106,8 @@ public abstract class TapAiBase extends SpellAbilityAi {
      * @return a boolean.
      */
     protected boolean tapPrefTargeting(final Player ai, final Card source, final SpellAbility sa, final boolean mandatory) {
-        final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
         final Game game = ai.getGame();
-        CardCollection tapList = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
-        tapList = CardLists.getTargetableCards(tapList, sa);
+        CardCollection tapList = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
         tapList = CardLists.filter(tapList, Presets.UNTAPPED);
         tapList = CardLists.filter(tapList, new Predicate<Card>() {
             @Override
@@ -129,8 +127,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
 
         //use broader approach when the cost is a positive thing
         if (tapList.isEmpty() && ComputerUtil.activateForCost(sa, ai)) { 
-            tapList = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
-            tapList = CardLists.getTargetableCards(tapList, sa);
+            tapList = CardLists.getTargetableCards(ai.getOpponents().getCardsIn(ZoneType.Battlefield), sa);
             tapList = CardLists.filter(tapList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -150,8 +147,10 @@ public abstract class TapAiBase extends SpellAbilityAi {
 
         //try to exclude things that will already be tapped due to something on stack or because something is
         //already targeted in a parent or sub SA
-        CardCollection toExclude = ComputerUtilAbility.getCardsTargetedWithApi(ai, tapList, sa, ApiType.Tap);
-        tapList.removeAll(toExclude);
+        if (!sa.isTrigger() || mandatory) { // but if just confirming trigger no need to look for other targets and might still help anyway
+            CardCollection toExclude = ComputerUtilAbility.getCardsTargetedWithApi(ai, tapList, sa, ApiType.Tap);
+            tapList.removeAll(toExclude);
+        }
 
         if (tapList.isEmpty()) {
             return false;
@@ -176,6 +175,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
             }
 
             PhaseHandler phase = game.getPhaseHandler();
+            final Player opp = AiAttackController.choosePreferredDefenderPlayer(ai);
             Card primeTarget = ComputerUtil.getKilledByTargeting(sa, tapList);
             if (primeTarget != null) {
                 choice = primeTarget;
@@ -193,7 +193,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
                             return CombatUtil.canAttack(c, opp);
                         }
                     });
-                    attackers.remove(sa.getHostCard());
+                    attackers.remove(source);
                 }
                 Predicate<Card> findBlockers = CardPredicates.possibleBlockerForAtLeastOne(attackers);
                 List<Card> creatureList = CardLists.filter(tapList, findBlockers);
@@ -202,7 +202,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
 
                 if (!attackers.isEmpty() && !creatureList.isEmpty()) {
                     choice = ComputerUtilCard.getBestCreatureAI(creatureList);
-                } else if (sa.getRootAbility().isTrigger() || ComputerUtil.castSpellInMain1(ai, sa)) {
+                } else if (sa.isTrigger() || ComputerUtil.castSpellInMain1(ai, sa)) {
                     choice = ComputerUtilCard.getMostExpensivePermanentAI(tapList);
                 }
             } else if (phase.isPlayerTurn(opp)
@@ -272,7 +272,7 @@ public abstract class TapAiBase extends SpellAbilityAi {
             return true;
         }
 
-        // filter by enchantments and planeswalkers, their tapped state doesn't matter.
+        // filter by enchantments and planeswalkers, their tapped state (usually) doesn't matter.
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };
         tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source, sa);
 
