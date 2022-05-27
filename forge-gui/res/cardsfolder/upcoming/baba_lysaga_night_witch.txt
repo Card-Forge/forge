@@ -2,11 +2,10 @@ Name:Baba Lysaga, Night Witch
 ManaCost:1 B G
 Types:Legendary Creature Human Warlock
 PT:3/3
-A:AB$ LoseLife | Cost$ T Sac<X/Permanent> | Defined$ Player.Opponent | LifeAmount$ 3 | AnnounceType$ ChooseNumber | Min$ 0 | Max$ 3 | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3 | RememberCostCards$ True | NumCards$ 3 | SubAbility$DBGainThree | SpellDescription$ If there were three or more card types among the sacrificed permanents, each opponent loses 3 life, you gain 3 life, and you draw three cards.
-SVar:DBGainThree:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBDrawThree | ConditionCheckSVar$ Y | ConditionCompare$ GE3
-SVar:DBDrawThree:DB$ Draw | NumCards$ 3 | ConditionCheckSVar$ Y | ConditionCompare$ GE3 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ LoseLife | Cost$ T Sac<X/Permanent> | Defined$ Player.Opponent | LifeAmount$ 3 | AnnounceType$ ChooseNumber | Min$ 0 | Max$ 3 | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3 | NumCards$ 3 | SubAbility$DBGainThree | SpellDescription$ If there were three or more card types among the sacrificed permanents, each opponent loses 3 life, you gain 3 life, and you draw three cards.
+SVar:DBGainThree:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBDrawThree | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3
+SVar:DBDrawThree:DB$ Draw | NumCards$ 3 | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE3
 SVar:X:Count$ChosenNumber
-SVar:Y:Count$CardTypes.Remembered
+SVar:Y:Count$CardTypes.Sacrificed
 DeckHas:Ability$Sacrifice
-Oracle:{T}, Sacrifice up to three permanents: If there were three or more card types among the sacrificed permanents, each opponent loses 3 life, you gain 3F life, and you draw three cards.
+Oracle:{T}, Sacrifice up to three permanents: If there were three or more card types among the sacrificed permanents, each opponent loses 3 life, you gain 3 life, and you draw three cards.
