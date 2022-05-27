@@ -200,6 +200,19 @@ public class Combat {
         return attackableEntries;
     }
 
+    //gets attacked player opponents (ignores planeswalkers)
+    public final FCollection<Player> getAttackedOpponents(Player atk) {
+        FCollection<Player> attackedOpps = new FCollection<Player>();
+        if (atk == playerWhoAttacks) {
+            for (Player defender : getDefendingPlayers()) {
+                if (!getAttackersOf(defender).isEmpty()) {
+                    attackedOpps.add(defender);
+                }
+            }
+        }
+        return attackedOpps;
+    }
+
     public final FCollection<GameEntity> getDefendersControlledBy(Player who) {
         FCollection<GameEntity> res = new FCollection<>();
         for (GameEntity ge : attackableEntries) {
