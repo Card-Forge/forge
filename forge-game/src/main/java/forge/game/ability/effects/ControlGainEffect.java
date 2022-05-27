@@ -118,20 +118,22 @@ public class ControlGainEffect extends SpellAbilityEffect {
         final Game game = newController.getGame();
 
         CardCollectionView tgtCards = null;
-        if (sa.hasParam("ControlledByTarget")) {
-        	tgtCards = CardLists.filterControlledBy(tgtCards, getTargetPlayers(sa));
-        } else if (sa.hasParam("Choices")) {
+        if (sa.hasParam("Choices")) {
             Player chooser = sa.hasParam("Chooser") ? AbilityUtils.getDefinedPlayers(source,
                     sa.getParam("Chooser"), sa).get(0) : activator;
             CardCollectionView choices = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
                     sa.getParam("Choices"), activator, source, sa);
             if (!choices.isEmpty()) {
                 String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") :
-                        Localizer.getInstance().getMessage("lblChooseaCard") +" ";
-                tgtCards = activator.getController().chooseCardsForEffect(choices, sa, title, 1, 1, false, null);
+                    Localizer.getInstance().getMessage("lblChooseaCard") +" ";
+                tgtCards = chooser.getController().chooseCardsForEffect(choices, sa, title, 1, 1, false, null);
             }
         } else {
             tgtCards = getDefinedCards(sa);
+        }
+
+        if (tgtCards !=null & sa.hasParam("ControlledByTarget")) {
+            tgtCards = CardLists.filterControlledBy(tgtCards, getTargetPlayers(sa));
         }
 
         // in case source was LKI or still resolving
