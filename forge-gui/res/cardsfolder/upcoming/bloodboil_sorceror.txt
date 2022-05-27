@@ -1,0 +1,9 @@
+Name:Bloodboil Sorcerer
+ManaCost:3 R
+Types:Creature Human Shaman
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters the battlefield, you take the initiative.
+SVar:TrigInitiative:DB$ TakeInitiative
+A:AB$ Goad | Cost$ 1 R Sac<1/Artifact;Creature/artifact or creature> | ValidTgts$ Creature | PrecostDesc$ Crown of Madness — | SpellDescription$ Goad target creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+DeckHas:Ability$Sacrifice
+Whenever Bloodboil Sorcerer enters the battlefield, you take the initiative.\nCrown of Madness — {1}{R}, Sacrifice an artifact or creature: Goad target creature. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
