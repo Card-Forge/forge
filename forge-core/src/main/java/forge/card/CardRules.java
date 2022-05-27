@@ -215,7 +215,8 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean canBeCommander() {
-        if (mainPart.getOracleText().contains("can be your commander")) {
+        if (mainPart.getOracleText().contains("can be your commander")
+                || mainPart.getType().hasSubtype("Background")) {
             return true;
         }
         CardType type = mainPart.getType();
@@ -232,8 +233,15 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean canBePartnerCommander() {
+        if (canBeBackground()) {
+            return true;
+        }
         return canBeCommander() && (hasKeyword("Partner") || !this.partnerWith.isEmpty() ||
-                hasKeyword("Friends forever"));
+                hasKeyword("Friends forever") || hasKeyword("Choose a Background"));
+    }
+
+    public boolean canBeBackground() {
+        return mainPart.getType().hasSubtype("Background");
     }
 
     public boolean canBeOathbreaker() {
