@@ -1075,6 +1075,11 @@ public class DamageDealAi extends DamageAiBase {
             return null;
         }
 
+        // chaining to this could miscalculate
+        if (sa.isDividedAsYouChoose()) {
+            return null;
+        }
+
         // Try to chain damage/debuff effects
         if (StringUtils.isNumeric(damage) || (damage.startsWith("-") && StringUtils.isNumeric(damage.substring(1)))) {
             // currently only works for predictable numeric damage
