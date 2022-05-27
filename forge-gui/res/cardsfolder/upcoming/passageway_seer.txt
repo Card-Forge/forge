@@ -1,0 +1,12 @@
+Name:Passageway Seer
+ManaCost:3 B
+Types:Creature Tiefling Warlock
+PT:2/2
+K:Lifelink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters the battlefield, you take the initiative.
+SVar:TrigInitiative:DB$ TakeInitiative
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your end step, if you have the initiative, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1
+SVar:X:Count$Initiative.1.0
+DeckHas:Ability$LifeGain|Counters
+Oracle:Lifelink\nWhen Passageway Seer enters the battlefield, you take the initiative.\nAt the beginning of your end step, if you have the initiative, put a +1/+1 counter on Passageway Seer.
