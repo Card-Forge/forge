@@ -249,7 +249,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
             MapStage.getInstance().showDeckAwardDialog("Chaos Mode!\n"+ WorldSave.getCurrentSave().getPlayer().getName()+ "'s Deck: "+
                     WorldSave.getCurrentSave().getPlayer().getSelectedDeck().getName()+
-                    "\nEnemy will use Preconstructed, Theme or Random Generated Decks.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
+                    "\nEnemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
             WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
         }
     }

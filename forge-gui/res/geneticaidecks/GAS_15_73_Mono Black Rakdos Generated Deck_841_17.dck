@@ -1,0 +1,29 @@
+[metadata]
+Name=GAS_15_73_Mono Black Rakdos Generated Deck_841_17
+[Main]
+2 Blade Juggler|RNA
+4 Cast Down|DOM
+3 Dowsing Dagger|XLN
+4 Drill Bit|RNA
+2 Fungal Infection|DOM
+3 Gruesome Menagerie|GRN
+4 Gutterbones|RNA
+4 Kitesail Freebooter|XLN
+2 Memorial to Folly|DOM
+4 Spawn of Mayhem|RNA
+2 Swamp|DOM|1
+1 Swamp|DOM|2
+2 Swamp|DOM|3
+4 Swamp|GRN
+2 Swamp|M19|1
+2 Swamp|M19|3
+3 Swamp|RIX
+4 Swamp|RNA
+1 Swamp|WAR|1
+3 Vicious Conquistador|XLN
+4 Walk the Plank|XLN
+[Sideboard]
+4 Blight Keeper|XLN
+4 Dire Fleet Poisoner|RIX
+1 Fungal Infection|DOM
+4 Plague Mare|M19
