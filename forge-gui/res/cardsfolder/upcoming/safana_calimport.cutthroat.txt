@@ -1,0 +1,14 @@
+Name:Safana, Calimport Cutthroat
+ManaCost:2 B
+Types:Legendary Creature Human Rogue
+PT:3/2
+K:Menace
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigTreasure | TriggerDescription$ At the beginning of your end step, put a +1/+1 counter on each Ooze you control.
+SVar:TrigTreasure:DB$ Token | TokenAmount$ Z | TokenScript$ c_a_treasure_sac
+SVar:X:Count$Initiative.1.0
+SVar:Y:PlayerCountPropertyYou$DungeonsCompleted
+SVar:Z:Count$Compare Y GE1.3.1
+K:Choose a Background
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+AI:RemoveDeck:Random
+Oracle:Menace\nAt the beginning of your end step, if you have the initiative, create a Treasure token. If you've completed a dungeon, create three of those tokens instead.\nChoose a Background (You can have a Background as a second commander.)
