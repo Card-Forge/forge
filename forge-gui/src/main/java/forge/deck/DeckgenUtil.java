@@ -59,7 +59,7 @@ import forge.util.storage.IStorage;
  */
 // TODO This class can be used for home menu constructed deck generation as well.
 public class DeckgenUtil {
-    private static List<DeckProxy> advPrecons = Lists.newArrayList(), advThemes = Lists.newArrayList();
+    private static List<DeckProxy> advPrecons = Lists.newArrayList(), advThemes = Lists.newArrayList(), geneticAI = Lists.newArrayList();
 
     public static Deck buildCardGenDeck(GameFormat format, boolean isForAI){
         try {
@@ -434,7 +434,7 @@ public class DeckgenUtil {
     }
 
     /** @return {@link forge.deck.Deck} */
-    public static Deck getRandomOrPreconOrThemeDeck(String colors, boolean forAi, boolean isTheme) {
+    public static Deck getRandomOrPreconOrThemeDeck(String colors, boolean forAi, boolean isTheme, boolean useGeneticAI) {
         final List<String> selection = new ArrayList<>();
         Deck deck = null;
         if (advPrecons.isEmpty()) {
@@ -443,6 +443,9 @@ public class DeckgenUtil {
         if (advThemes.isEmpty()) {
             advThemes.addAll(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
             advThemes.addAll(DeckProxy.getNonEasyQuestDuelDecks());
+        }
+        if (geneticAI.isEmpty()) {
+            geneticAI.addAll(DeckProxy.getAllGeneticAIDecks());
         }
         if (!colors.isEmpty()) {
             for (char c : colors.toLowerCase().toCharArray()) {
@@ -456,17 +459,25 @@ public class DeckgenUtil {
             }
         }
         try {
-            if (!selection.isEmpty() && selection.size() < 4) {
-                Predicate<DeckProxy> pred = Predicates.and(deckProxy -> deckProxy.getMainSize() <= 60, deckProxy -> deckProxy.getColorIdentity().hasAllColors(ColorSet.fromNames(colors.toCharArray()).getColor()));
-                if (isTheme)
-                    deck = Aggregates.random(Iterables.filter(advThemes, pred)).getDeck();
+            if (useGeneticAI) {
+                if (!selection.isEmpty())
+                    deck = Aggregates.random(Iterables.filter(geneticAI, deckProxy -> deckProxy.getColorIdentity().sharesColorWith(ColorSet.fromNames(colors.toCharArray())))).getDeck();
                 else
-                    deck = Aggregates.random(Iterables.filter(advPrecons, pred)).getDeck();
+                    deck = Aggregates.random(geneticAI).getDeck();
+
             } else {
-                if (isTheme)
-                    deck = Aggregates.random(Iterables.filter(advThemes, deckProxy -> deckProxy.getMainSize() <= 60)).getDeck();
-                else
-                    deck = Aggregates.random(Iterables.filter(advPrecons, deckProxy -> deckProxy.getMainSize() <= 60)).getDeck();
+                if (!selection.isEmpty() && selection.size() < 4) {
+                    Predicate<DeckProxy> pred = Predicates.and(deckProxy -> deckProxy.getMainSize() <= 60, deckProxy -> deckProxy.getColorIdentity().hasAllColors(ColorSet.fromNames(colors.toCharArray()).getColor()));
+                    if (isTheme)
+                        deck = Aggregates.random(Iterables.filter(advThemes, pred)).getDeck();
+                    else
+                        deck = Aggregates.random(Iterables.filter(advPrecons, pred)).getDeck();
+                } else {
+                    if (isTheme)
+                        deck = Aggregates.random(Iterables.filter(advThemes, deckProxy -> deckProxy.getMainSize() <= 60)).getDeck();
+                    else
+                        deck = Aggregates.random(Iterables.filter(advPrecons, deckProxy -> deckProxy.getMainSize() <= 60)).getDeck();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

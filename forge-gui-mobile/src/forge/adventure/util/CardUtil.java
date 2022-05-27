@@ -499,13 +499,13 @@ public class CardUtil {
         return  ret;
     }
 
-    public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme)
+    public static Deck getDeck(String path, boolean forAI, boolean isFantasyMode, String colors, boolean isTheme, boolean useGeneticAI)
     {
         if(path.endsWith(".dck"))
             return DeckSerializer.fromFile(new File(Config.instance().getFilePath(path)));
 
         if(forAI && isFantasyMode) {
-            Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, forAI, isTheme);
+            Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, forAI, isTheme, useGeneticAI);
             if (deck != null)
                 return deck;
         }

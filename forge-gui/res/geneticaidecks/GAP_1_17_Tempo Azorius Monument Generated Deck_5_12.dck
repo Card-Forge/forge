@@ -1,0 +1,34 @@
+[metadata]
+Name=GAP_1_17_Tempo Azorius Monument Generated Deck_5_12
+[Main]
+3 Angel of Invention|KLD
+4 Archangel Avacyn|V17
+4 Castle Ardenvale|ELD
+3 Charming Prince|ELD
+3 Deputy of Detention|RNA
+4 Gideon, Ally of Zendikar|BFZ
+3 Glacial Fortress|XLN
+4 Hallowed Fountain|RNA
+1 Island|AKH|1
+1 Island|DOM|3
+1 Island|KLD|1
+1 Plains|AKH|1
+1 Plains|DOM|2
+2 Plains|DOM|4
+1 Plains|DTK|3
+2 Plains|GRN
+1 Plains|HOU|1
+1 Plains|KLD|3
+1 Plains|M19|3
+4 Reflector Mage|OGW
+4 Selfless Spirit|EMN
+4 Smuggler's Copter|KLD
+2 Spell Queller|EMN
+1 Teferi, Time Raveler|WAR
+4 Thraben Inspector|SOI
+[Sideboard]
+3 Brazen Borrower|ELD
+3 Militia Bugler|M19
+4 Oketra's Monument|AKH
+2 Teferi, Time Raveler|WAR
+3 Walking Ballista|AER

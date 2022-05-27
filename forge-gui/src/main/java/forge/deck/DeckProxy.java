@@ -612,6 +612,13 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
+    public static List<DeckProxy> getAllGeneticAIDecks() {
+        final List<DeckProxy> decks = new ArrayList<>();
+        final IStorage<Deck> genetic = FModel.getDecks().getGeneticAIDecks();
+        addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", genetic, null);
+        return decks;
+    }
+
     @SuppressWarnings("unchecked")
     public static List<DeckProxy> getAllSealedDecks() {
         final List<DeckProxy> humanDecks = new ArrayList<>();

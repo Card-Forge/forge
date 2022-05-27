@@ -1,0 +1,34 @@
+[metadata]
+Name=GAP_3_0_Mono Black Aggro Generated Deck_43_19
+[Main]
+1 Aethersphere Harvester|AER
+4 Bloodsoaked Champion|KTK
+4 Fatal Push|AER
+2 Grasp of Darkness|OGW
+4 Gutterbones|RNA
+4 Knight of the Ebon Legion|M20
+4 Murderous Rider|ELD
+1 Night Market Lookout|KLD
+4 Rankle, Master of Pranks|ELD
+4 Scrapheap Scrounger|KLD
+4 Smuggler's Copter|KLD
+1 Swamp|KLD|2
+1 Swamp|KLD|3
+2 Swamp|KTK|2
+2 Swamp|M14|1
+2 Swamp|M14|2
+1 Swamp|M14|4
+1 Swamp|M20|4
+2 Swamp|RNA
+3 Swamp|WAR|1
+1 Swamp|WAR|2
+1 Swamp|WAR|3
+2 Swamp|XLN|3
+1 Swamp|XLN|4
+4 Thoughtseize|IMA
+[Sideboard]
+2 Aethersphere Harvester|AER
+4 Fourth Bridge Prowler|AER
+4 Gnarled Scarhide|JOU
+4 Kalitas, Traitor of Ghet|OGW
+1 Ruin Raider|XLN

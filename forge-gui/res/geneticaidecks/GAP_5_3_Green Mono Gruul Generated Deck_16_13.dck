@@ -1,0 +1,36 @@
+[metadata]
+Name=GAP_5_3_Green Mono Gruul Generated Deck_16_13
+[Main]
+4 Castle Garenbrig|ELD
+4 Elvish Mystic|DDU
+1 Forest|C19|1
+1 Forest|C19|3
+1 Forest|DOM|2
+1 Forest|DOM|4
+1 Forest|DTK|1
+1 Forest|ELD|1
+1 Forest|ELD|2
+1 Forest|GK2|2
+1 Forest|GNT|1
+3 Forest|GRN
+1 Forest|RIX
+1 Forest|THS|2
+1 Forest|THS|3
+1 Forest|WAR|2
+2 Forest|WAR|3
+3 Geier Reach Sanitarium|C19
+4 Ghalta, Primal Hunger|GNT
+2 Heart of Kiran|AER
+2 Llanowar Elves|GNT
+4 Lovestruck Beast|ELD
+3 Questing Beast|ELD
+3 Rhonas the Indomitable|MPS_AKH
+4 Steel Leaf Champion|DOM
+4 Surrak, the Hunt Caller|DTK
+4 The Great Henge|ELD
+1 Yorvo, Lord of Garenbrig|ELD
+[Sideboard]
+4 Aspect of Hydra|BNG
+4 Gilded Goose|ELD
+3 Scavenging Ooze|CM2
+4 Shifting Ceratops|M20

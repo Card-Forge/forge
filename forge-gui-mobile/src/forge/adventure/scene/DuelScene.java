@@ -305,7 +305,7 @@ public class DuelScene extends ForgeScene {
         } else {
             this.AIExtras.clear();
             this.playerExtras.clear();
-            this.enemyDeck = this.enemy.getData().copyPlayerDeck ? this.playerDeck : this.enemy.getData().generateDeck(Current.player().isFantasyMode());
+            this.enemyDeck = this.enemy.getData().copyPlayerDeck ? this.playerDeck : this.enemy.getData().generateDeck(Current.player().isFantasyMode(), Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
         }
     }
     public Deck getPlayerDeck() {
