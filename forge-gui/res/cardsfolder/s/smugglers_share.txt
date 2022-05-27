@@ -7,5 +7,5 @@ SVar:DBTreasure:DB$ Token | TokenAmount$ Y | TokenScript$ c_a_treasure_sac
 SVar:X:PlayerCountOpponents$ConditionGE2 CardsDrawn
 SVar:Y:PlayerCountOpponents$ConditionGE2 ThisTurnEntered_Battlefield_Land.YouCtrl
 AI:RemoveDeck:Random
-DeckHas:Ability$Token|Sacrifice & Types$Artifact|Treasure
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
 Oracle:At the beginning of each end step, draw a card for each opponent who drew two or more cards this turn, then create a Treasure token for each opponent who had two or more lands enter the battlefield under their control this turn.

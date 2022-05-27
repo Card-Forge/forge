@@ -10,5 +10,5 @@ SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPr
 SVar:Resolved:Count$ResolvedThisTurn
 SVar:X:Count$ChosenNumber
 SVar:Y:Count$TriggerRememberAmount
-DeckHas:Ability$Token|Sacrifice & Types$Artifact|Treasure
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
 Oracle:Alliance — Whenever another creature enters the battlefield under your control, create a Treasure token if this is the first or second time this ability has resolved this turn. Otherwise, you may pay {X}. When you do, Rose Room Treasurer deals X damage to any target.
