@@ -2,11 +2,10 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
-import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import org.apache.commons.lang3.StringUtils;
+import forge.util.Lang;
 
 public class TakeInitiativeEffect extends SpellAbilityEffect {
 
@@ -16,8 +15,8 @@ public class TakeInitiativeEffect extends SpellAbilityEffect {
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        sb.append(StringUtils.join(tgtPlayers, ", "));
-        sb.append(" takes the initiative.");
+        sb.append(Lang.joinHomogenous(tgtPlayers)).append(tgtPlayers.size() == 1 ? " takes" : " take");
+        sb.append(" the initiative.");
 
         return sb.toString();
     }
@@ -28,9 +27,8 @@ public class TakeInitiativeEffect extends SpellAbilityEffect {
         final String set = sa.getHostCard().getSetCode();
 
         for (final Player p : getTargetPlayers(sa)) {
-            final Game game = p.getGame();
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                game.getAction().takeInitiative(p, set);
+                p.getGame().getAction().takeInitiative(p, set);
             }
         }
     }
