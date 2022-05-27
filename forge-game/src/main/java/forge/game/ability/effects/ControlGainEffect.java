@@ -132,7 +132,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             tgtCards = getDefinedCards(sa);
         }
 
-        if (tgtCards !=null & sa.hasParam("ControlledByTarget")) {
+        if (tgtCards != null & sa.hasParam("ControlledByTarget")) {
             tgtCards = CardLists.filterControlledBy(tgtCards, getTargetPlayers(sa));
         }
 
