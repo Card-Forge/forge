@@ -6,6 +6,6 @@ T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Exe
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
 A:AB$ Effect | Cost$ 2 U T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | ReplacementEffects$ RPrevent1,RPrevent2 | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.
 SVar:RPrevent1:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.
-SVar:RPrevent2:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidTarget$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.
+SVar:RPrevent2:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidTarget$ Card.IsRemembered | Description$ Prevent all combat damage that would be dealt to and dealt by target creature you control this turn. | Secondary$ True
 AI:RemoveDeck:All
 Oracle:Whenever Cephalid Illusionist becomes the target of a spell or ability, mill three cards.\n{2}{U}, {T}: Prevent all combat damage that would be dealt to and dealt by target creature you control this turn.

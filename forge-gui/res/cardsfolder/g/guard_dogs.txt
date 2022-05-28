@@ -4,7 +4,7 @@ Types:Creature Dog
 PT:2/2
 A:AB$ ChooseCard | Cost$ 2 W T | Choices$ Permanent.YouCtrl | Mandatory$ True | ChoiceTitle$ Choose a permanent you control | RememberChosen$ True | SubAbility$ DBPrevent | SpellDescription$ Choose a permanent you control. Prevent all combat damage target creature would deal this turn if it shares a color with that permanent.
 SVar:DBPrevent:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature whose combat damage will be prevented | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | ConditionDefined$ Targeted | ConditionPresent$ Card.SharesColorWith Card.IsRemembered | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage target creature would deal this turn if it shares a color with that permanent.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
