@@ -5,5 +5,5 @@ K:Extort
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a nontoken creature dies, you lose 1 life and create a Treasure token.
 SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 1 | SubAbility$ DBTreasure
 SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
-DeckHas:Ability$LifeGain|Token|Sacrifice & Types$Artifact|Treasure
+DeckHas:Ability$LifeGain|Token|Sacrifice & Type$Artifact|Treasure
 Oracle:Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nWhenever a nontoken creature dies, you lose 1 life and create a Treasure token.
