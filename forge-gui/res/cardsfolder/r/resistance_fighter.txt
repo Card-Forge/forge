@@ -2,7 +2,7 @@ Name:Resistance Fighter
 ManaCost:W
 Types:Creature Human Soldier
 PT:1/1
-A:AB$ Effect | Cost$ Sac<1/CARDNAME> |ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Prevent all combat damage target creature would deal this turn.
+A:AB$ Effect | Cost$ Sac<1/CARDNAME> | ReplacementEffects$ RPrevent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Prevent all combat damage target creature would deal this turn.
 SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ValidSource$ Card.IsRemembered | Description$ Prevent all combat damage target creature would deal this turn.
 AI:RemoveDeck:All
 Oracle:Sacrifice Resistance Fighter: Prevent all combat damage target creature would deal this turn.
