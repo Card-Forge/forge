@@ -1,0 +1,85 @@
+[metadata]
+Name=Buckle Up
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Description=Hitch a ride with Kotori and her fleet of souped-up vehicles, then run your opponents off the road. If you can master all the ways to bring your artifacts to life, you'll be miles ahead of the competition.
+Set=NEC
+Image=buckle_up.png
+[commander]
+1 Kotori, Pilot Prodigy|NEC
+[main]
+1 Jace, Architect of Thought|NEC
+1 Aeronaut Admiral|NEC
+1 Arcanist's Owl|NEC
+1 Cataclysmic Gearhulk|NEC
+1 Cyberdrive Awakener|NEC
+1 Drumbellower|NEC
+1 Emry, Lurker of the Loch|NEC
+1 Etherium Sculptor|NEC
+1 Foundry Inspector|NEC
+1 Gold Myr|NEC
+1 Hanna, Ship's Navigator|NEC
+1 Indomitable Archangel|NEC
+1 Ironsoul Enforcer|NEC
+1 Kappa Cannoneer|NEC
+1 Katsumasa, the Animator|NEC
+1 Master of Etherium|NEC
+1 Myrsmith|NEC
+1 Raff Capashen, Ship's Mage|NEC
+1 Research Thief|NEC
+1 Riddlesmith|NEC
+1 Sai, Master Thopterist|NEC
+1 Shimmer Myr|NEC
+1 Silver Myr|NEC
+1 Solemn Simulacrum|NEC
+1 Sram, Senior Edificer|NEC
+1 Teshar, Ancestor's Apostle|NEC
+1 Vedalken Engineer|NEC
+1 Whirler Rogue|NEC
+1 Dance of the Manse|NEC
+1 Organic Extinction|NEC
+1 Thoughtcast|NEC
+1 Universal Surveillance|NEC
+1 Access Denied|NEC
+1 Armed and Armored|NEC
+1 Crush Contraband|NEC
+1 Dispatch|NEC
+1 Generous Gift|NEC
+1 Reality Shift|NEC
+1 Release to Memory|NEC
+1 Swords to Plowshares|NEC
+1 Aerial Surveyor|NEC
+1 Arcane Signet|NEC
+1 Azorius Signet|NEC
+1 Colossal Plow|NEC
+1 Cultivator's Caravan|NEC
+1 Fellwar Stone|NEC
+1 Imposter Mech|NEC
+1 Imperial Recovery Unit|NEC
+1 Mirage Mirror|NEC
+1 Mobilizer Mech|NEC
+1 Parhelion II|NEC
+1 Peacewalker Colossus|NEC
+1 Prodigy's Prototype|NEC
+1 Raiders' Karve|NEC
+1 Shorikai, Genesis Engine|NEC
+1 Skysovereign, Consul Flagship|NEC
+1 Smuggler's Copter|NEC
+1 Sol Ring|NEC
+1 Surgehacker Mech|NEC
+1 Weatherlight|NEC
+1 Thopter Spy Network|NEC
+1 Swift Reconfiguration|NEC
+1 Command Tower|NEC
+1 Exotic Orchard|NEC
+1 Port Town|NEC
+1 Prairie Stream|NEC
+1 Skycloud Expanse|NEC
+1 Spire of Industry|NEC
+1 Temple of Enlightenment|NEC
+15 Plains|NEC
+15 Island|NEC

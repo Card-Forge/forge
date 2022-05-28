@@ -1,0 +1,91 @@
+[metadata]
+Name=Counterpunch
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Description=Use Ghave, Guru of Spores to create a strangling tangle of vines and vegetation that will crush all who oppose you! The all-consuming power of growth turns your creatures into monstrous behemoths while Saprolings fuel your increasing might.
+Set=CMD
+Image=counterpunch.png
+[commander]
+1 Ghave, Guru of Spores
+[main]
+1 Alliance of Arms
+1 Celestial Force
+1 Scavenging Ooze
+1 Acorn Catapult
+1 Syphon Flesh
+1 Karador, Ghost Chieftain
+1 Vish Kal, Blood Arbiter
+1 Vow of Duty
+1 Tribute to the Wild
+1 Command Tower
+1 Vow of Wildness
+1 Soul Snare
+1 Hornet Queen
+1 Vow of Malice
+1 Nantuko Husk
+1 Necrogenesis
+1 Oblivion Ring
+1 Death Mutation
+1 Sigil Captain
+1 Sakura-Tribe Elder
+1 Rupture Spire
+1 Aura Shards
+1 Aquastrand Spider
+1 Darksteel Ingot
+1 Skullclamp
+1 Mortify
+1 Orzhov Basilica
+1 Orzhov Signet
+1 Storm Herd
+1 Footbottom Feast
+1 Shriekmaw
+1 Vivid Grove
+1 Vivid Marsh
+1 Vivid Meadow
+1 Deadly Recluse
+1 Cultivate
+1 Doom Blade
+1 Afterlife
+1 Squallmonger
+1 Fertilid
+1 Lightning Greaves
+1 Barren Moor
+1 Secluded Steppe
+1 Symbiotic Wurm
+1 Tranquil Thicket
+1 Harmonize
+1 Teneb, the Harvester
+1 Chorus of the Conclave
+1 Fists of Ironwood
+1 Golgari Guildmage
+1 Golgari Rot Farm
+1 Golgari Signet
+1 Hex
+1 Hour of Reckoning
+1 Selesnya Evangel
+1 Selesnya Guildmage
+1 Selesnya Sanctuary
+1 Selesnya Signet
+1 Awakening Zone
+1 Evolving Wilds
+1 Temple of the False God
+1 Penumbra Spider
+1 Spike Feeder
+1 Attrition
+1 Yavimaya Elder
+1 Dark Hatchling
+1 Monk Realist
+1 Sol Ring
+1 Bestial Menace
+1 Nemesis Trap
+1 Cobra Trap
+1 Vampire Nighthawk
+10 Forest
+8 Plains
+8 Swamp
+1 Spawnwrithe
+[sideboard]
