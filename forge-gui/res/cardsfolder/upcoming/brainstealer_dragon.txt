@@ -4,12 +4,10 @@ Types:Creature Dragon Horror
 PT:6/6
 K:Flying
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ At the beginning of your end step, exile the top card of each opponent's library. You may play those cards for as long as they remain exiled. If you cast a spell this way, you may spend mana as though it were mana of any color to cast it.
-SVar:TrigExile:DB$ Mill | Defined$ Player.Opponent | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | Duration$ Permanent | Triggers$ TrigCleanup | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:TrigExile:DB$ Dig | Defined$ Player.Opponent | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlayIgnoreColor$ True | Description$ You may play those cards for as long as they remain exiled, and you may spend mana as though it were mana of any color to cast them.
-SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZones$ Command | Execute$ DBExileSelf | Static$ True
-SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.OppOwn+YouCtrl+nonLand | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a nonland permanent an opponent owns enters the battlefield under your control, they lose life equal to its mana value.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredCardOwner | LifeAmount$ X
 SVar:X:TriggeredCard$CardManaCost
