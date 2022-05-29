@@ -6,10 +6,9 @@ K:Deathtouch
 K:Lifelink
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ At the beginning of your end step, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBOppLoseLife,DBGainLife | CharmNum$ 1
-SVar:DBOppLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X | TgtPrompt$ Choose target opponent to lose life equal to the amount of life they lost this turn | SpellDescription$ Target opponent loses life equal to the amount of life they lost this turn.
-SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | SpellDescription$ You gain life equal to the amount of life you gained this turn.
+SVar:DBOppLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X | TgtPrompt$ Choose target opponent to lose life equal to the amount of life they lost this turn | SpellDescription$ Feed — Target opponent loses life equal to the amount of life they lost this turn.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | SpellDescription$ Friends — You gain life equal to the amount of life you gained this turn.
 SVar:X:TargetedPlayer$LifeLostThisTurn
 SVar:Y:Count$LifeYouGainedThisTurn
-DeckHints:Type$Vampire|Elf|Rogue
 DeckHas:Ability$LifeGain
 Oracle:Deathtouch, Lifelink\nAt the beginning of your end step, choose one —\n• Feed — Target opponent loses life equal to the amount of life they lost this turn.\n• Friends — You gain life equal to the amount of life you gained this turn.
