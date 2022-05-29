@@ -4,7 +4,7 @@ Types:Legendary Creature Elder Dragon
 PT:3/5
 K:Flying
 K:Vigilance
-S:Mode$ Continuous | Affected$ Creature.withDefender+YouCtrl | AddHiddenKeyword$ CARDNAME assigns combat damage equal to its toughness rather than its power | Description$ Each creature you control with defender assigns combat damage equal to its toughness rather than its power and can attack as though it didn't have defender.
+S:Mode$ CombatDamageToughness | ValidCard$ Creature.withDefender+YouCtrl | Description$ Each creature you control with defender assigns combat damage equal to its toughness rather than its power and can attack as though it didn't have defender.
 S:Mode$ CanAttackDefender | ValidCard$ Creature.withDefender+YouCtrl | Secondary$ True | Description$ Each creature you control with defender assigns combat damage equal to its toughness rather than its power and can attack as though it didn't have defender.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.withDefender+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature with defender enters the battlefield under your control, draw a card.
 SVar:TrigDraw:DB$ Draw
