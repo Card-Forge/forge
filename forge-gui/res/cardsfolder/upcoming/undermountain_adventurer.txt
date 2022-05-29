@@ -1,0 +1,11 @@
+Name:Undermountain Adventurer
+ManaCost:3 G
+Types:Creature Giant Warrior
+PT:3/4
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters the battlefield, you take the initiative.
+SVar:TrigInitiative:DB$ TakeInitiative
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ Y | SubAbility$ DBGainLife | AILogic$ AtOppEOT | SpellDescription$ Add {G}{G}. If you've completed a dungeon, add six {G} instead.
+SVar:X:PlayerCountPropertyYou$DungeonsCompleted
+SVar:Y:Count$Compare X GE1.6.2
+Oracle:Vigilance\nWhen Undermountain Adventurer enters the battlefield, you take the initiative.\n{T}: Add {G}{G}. If you've completed a dungeon, add six {G} instead.
