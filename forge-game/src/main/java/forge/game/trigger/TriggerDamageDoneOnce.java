@@ -53,6 +53,10 @@ public class TriggerDamageDoneOnce extends Trigger {
         }
         sa.setTriggeringObject(AbilityKey.Target, target);
         sa.setTriggeringObject(AbilityKey.Sources, getDamageSources(damageMap));
+        for (final Map.Entry<Card, Integer> entry : damageMap.entrySet()) {
+            sa.setTriggeringObject(AbilityKey.AttackingPlayer, entry.getKey().getController());
+            break;
+        }
         sa.setTriggeringObject(AbilityKey.DamageAmount, getDamageAmount(damageMap));
     }
 
