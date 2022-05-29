@@ -133,7 +133,7 @@ public class SettingsScene extends UIScene {
         Label label = Controls.newLabel(name);
         label.setWrap(true);
         settingGroup.row().space(5);
-        settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5).expand();
+        settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5).width(100).expand();
     }
 
     @Override
