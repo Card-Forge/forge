@@ -9,4 +9,5 @@ SVar:DBTokenLose3:DB$ Token | TokenScript$ c_3_2_shapeshifter_changeling | SubAb
 SVar:DBLoseLife1:DB$ LoseLife | LifeAmount$ 1 | Defined$ You
 SVar:DBLoseLife2:DB$ LoseLife | LifeAmount$ 2 | Defined$ You
 SVar:DBLoseLife3:DB$ LoseLife | LifeAmount$ 3 | Defined$ You
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure|Shapeshifter
 Oracle:At the beginning of your precombat main phase, choose one or more —\n• Sell Contraband — Create a Treasure token. You lose 1 life.\n• Buy Information — Draw a card. You lose 2 life.\n• Hire a Mercenary — Create a 3/2 colorless Shapeshifter creature token with changeling. You lose 3 life.
