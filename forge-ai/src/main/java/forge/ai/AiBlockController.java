@@ -945,6 +945,39 @@ public class AiBlockController {
         }
     }
 
+    private void makeRequiredBlocks(Combat combat) {
+        // assign blockers that have to block
+        final CardCollection chumpBlockers = CardLists.getKeyword(blockersLeft, "CARDNAME blocks each combat if able.");
+        // if an attacker with lure attacks - all that can block
+        for (final Card blocker : blockersLeft) {
+            if (CombatUtil.mustBlockAnAttacker(blocker, combat, null)) {
+                chumpBlockers.add(blocker);
+            }
+        }
+        if (!chumpBlockers.isEmpty()) {
+            for (final Card attacker : attackers) {
+                List<Card> blockers = getPossibleBlockers(combat, attacker, chumpBlockers, false);
+                for (final Card blocker : blockers) {
+                    if (CombatUtil.canBlock(attacker, blocker, combat) && blockersLeft.contains(blocker)
+                            && (CombatUtil.mustBlockAnAttacker(blocker, combat, null)
+                                    || blocker.hasKeyword("CARDNAME blocks each combat if able."))) {
+                        combat.addBlocker(attacker, blocker);
+                        if (!blocker.getMustBlockCards().isEmpty()) {
+                            int mustBlockAmt = blocker.getMustBlockCards().size();
+                            final CardCollectionView blockedSoFar = combat.getAttackersBlockedBy(blocker);
+                            boolean canBlockAnother = CombatUtil.canBlockMoreCreatures(blocker, blockedSoFar);
+                            if (!canBlockAnother || mustBlockAmt == blockedSoFar.size()) {
+                                blockersLeft.remove(blocker);
+                            }
+                        } else {
+                            blockersLeft.remove(blocker);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private void clearBlockers(final Combat combat, final List<Card> possibleBlockers) {
         for (final Card blocker : CardLists.filterControlledBy(combat.getAllBlockers(), ai)) {
             // don't touch other player's blockers
@@ -1007,9 +1040,6 @@ public class AiBlockController {
         }
 
         clearBlockers(combat, possibleBlockers);
-
-        List<Card> blockers;
-        List<Card> chumpBlockers;
 
         diff = (ai.getLife() * 2) - 5; // This is the minimal gain for an unnecessary trade
         if (ai.getController().isAI() && diff > 0 && ((PlayerControllerAi) ai.getController()).getAi().getBooleanProperty(AiProps.PLAY_AGGRO)) {
@@ -1106,37 +1136,9 @@ public class AiBlockController {
             }
         }
 
-        // assign blockers that have to block
-        chumpBlockers = CardLists.getKeyword(blockersLeft, "CARDNAME blocks each combat if able.");
-        // if an attacker with lure attacks - all that can block
-        for (final Card blocker : blockersLeft) {
-            if (CombatUtil.mustBlockAnAttacker(blocker, combat, null)) {
-                chumpBlockers.add(blocker);
-            }
-        }
-        if (!chumpBlockers.isEmpty()) {
-            CardLists.shuffle(attackers);
-            for (final Card attacker : attackers) {
-                blockers = getPossibleBlockers(combat, attacker, chumpBlockers, false);
-                for (final Card blocker : blockers) {
-                    if (CombatUtil.canBlock(attacker, blocker, combat) && blockersLeft.contains(blocker)
-                            && (CombatUtil.mustBlockAnAttacker(blocker, combat, null)
-                                    || blocker.hasKeyword("CARDNAME blocks each combat if able."))) {
-                        combat.addBlocker(attacker, blocker);
-                        if (!blocker.getMustBlockCards().isEmpty()) {
-                            int mustBlockAmt = blocker.getMustBlockCards().size();
-                            final CardCollectionView blockedSoFar = combat.getAttackersBlockedBy(blocker);
-                            boolean canBlockAnother = CombatUtil.canBlockMoreCreatures(blocker, blockedSoFar);
-                            if (!canBlockAnother || mustBlockAmt == blockedSoFar.size()) {
-                                blockersLeft.remove(blocker);
-                            }
-                        } else {
-                            blockersLeft.remove(blocker);
-                        }
-                    }
-                }
-            }
-        }
+        // block requirements
+        // TODO because this isn't done earlier, sometimes a good block will enforce a restriction that prevents another for the requirement
+        makeRequiredBlocks(combat);
 
         // check to see if it's possible to defend a Planeswalker under attack with a chump block,
         // unless life is low enough to be more worried about saving preserving the life total
@@ -1186,8 +1188,7 @@ public class AiBlockController {
      * Orders a blocker that put onto the battlefield blocking. Depends heavily
      * on the implementation of orderBlockers().
      */
-    public static CardCollection orderBlocker(final Card attacker, final Card blocker,
-            final CardCollection oldBlockers) {
+    public static CardCollection orderBlocker(final Card attacker, final Card blocker, final CardCollection oldBlockers) {
         // add blocker to existing ordering
         // sort by evaluate, then insert it appropriately
         // relies on current implementation of orderBlockers()
