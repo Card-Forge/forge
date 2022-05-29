@@ -397,10 +397,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         final Map<Object, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, shieldAmount, false,
             localizer.getMessage("lblShield"));
-        Map<GameEntity, Integer> result = new HashMap<>(vResult.size());
-        for (Map.Entry<GameEntity, Integer> e : affected.entrySet()) {
-            if (vResult.containsKey(GameEntityView.get(e.getKey()))) {
-                result.put(e.getKey(), vResult.get(GameEntityView.get(e.getKey())));
+        Map<GameEntity, Integer> result = new HashMap<>();
+        if (vResult != null) { //fix for netplay
+            for (Map.Entry<GameEntity, Integer> e : affected.entrySet()) {
+                if (vResult.containsKey(GameEntityView.get(e.getKey()))) {
+                    result.put(e.getKey(), vResult.get(GameEntityView.get(e.getKey())));
+                }
             }
         }
         return result;
@@ -417,12 +419,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         final Map<Object, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, manaAmount, false,
             localizer.getMessage("lblMana").toLowerCase());
-        Map<Byte, Integer> result = new HashMap<>(vResult.size());
-        it = colorSet.iterator();
-        while (it.hasNext()) {
-            Byte color = it.next();
-            if (vResult.containsKey(color)) {
-                result.put(color, vResult.get(color));
+        Map<Byte, Integer> result = new HashMap<>();
+        if (vResult != null) { //fix for netplay
+            it = colorSet.iterator();
+            while (it.hasNext()) {
+                Byte color = it.next();
+                if (vResult.containsKey(color)) {
+                    result.put(color, vResult.get(color));
+                }
             }
         }
         return result;
