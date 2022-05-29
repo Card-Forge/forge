@@ -3203,10 +3203,10 @@ public class Player extends GameEntity implements Comparable<Player> {
             initiativeEffect.setName("The Initiative");
 
             //Set up damage trigger
-            final String damageTrig = "Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | " +
+            final String damageTrig = "Mode$ DamageDoneOnce | ValidSource$ Creature | ValidTarget$ You | " +
                     "CombatDamage$ True | TriggerZones$ Command | TriggerDescription$ Whenever one or more " +
                     "creatures a player controls deal combat damage to you, that player takes the initiative.";
-            final String damageEff = "DB$ TakeInitiative | Defined$ TriggeredSourceController";
+            final String damageEff = "DB$ TakeInitiative | Defined$ TriggeredAttackingPlayer";
 
             final Trigger damageTrigger = TriggerHandler.parseTrigger(damageTrig, initiativeEffect, true);
 
