@@ -60,7 +60,7 @@ public class EffectEffect extends SpellAbilityEffect {
         boolean imprintOnHost = false;
         final String duration = sa.getParam("Duration");
 
-        if (("UntilHostLeavesPlay".equals(duration) || "UntilLoseControlOfHost".equals(duration))
+        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration))
                 && !(hostCard.isInPlay() || hostCard.isInZone(ZoneType.Stack))) {
             return;
         }

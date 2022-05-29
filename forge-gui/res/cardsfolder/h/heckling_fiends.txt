@@ -2,6 +2,6 @@ Name:Heckling Fiends
 ManaCost:2 R
 Types:Creature Devil
 PT:2/2
-A:AB$ Animate | Cost$ 2 R | ValidTgts$ Creature | IsCurse$ True | SpellDescription$ Target creature attacks this turn if able.
-SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks this turn if able.
+A:AB$ Effect | Cost$ 2 R | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SpellDescription$ Target creature attacks this turn if able.
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ This creature attacks this turn if able.
 Oracle:{2}{R}: Target creature attacks this turn if able.
