@@ -1,6 +1,6 @@
 Name:Thousand-Year Elixir
 ManaCost:3
 Types:Artifact
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME may activate abilities as though it has haste. | Description$ You may activate abilities of creatures you control as though those creatures had haste.
-A:AB$ Untap | Cost$ 1 T | ValidTgts$ Creature | TgtPrompt$ Select target creature. | SpellDescription$ Untap target creature.
+S:Mode$ ActivateAbilityAsIfHaste | ValidCard$ Creature.YouCtrl+inZoneBattlefield | Description$ You may activate abilities of creatures you control as though those creatures had haste.
+A:AB$ Untap | Cost$ 1 T | ValidTgts$ Creature | SpellDescription$ Untap target creature.
 Oracle:You may activate abilities of creatures you control as though those creatures had haste.\n{1}, {T}: Untap target creature.
