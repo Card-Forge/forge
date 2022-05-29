@@ -3,7 +3,7 @@ ManaCost:1 W B
 Types:Enchantment
 A:AB$ ChooseSource | Cost$ 1 Sac<1/Creature> | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to any target this turn, prevent that damage.
 SVar:DBEffect:DB$ Effect | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to prevent damage to | ExileOnMoved$ Battlefield | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Targeted | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1
-SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCard,Emblem.ChosenCard | ValidTarget$ Card.IsRemembered,Player.IsRemembered | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to the targeted permanent or player, prevent that damage.
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ValidTarget$ Card.IsRemembered,Player.IsRemembered | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to the targeted permanent or player, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:NonStackingEffect:True
