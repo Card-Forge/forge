@@ -535,6 +535,9 @@ public class AbilityUtils {
                     }
                 }
                 val = playerXCount(players, calcX[1], card, ability);
+            } else if (hType.startsWith("Defined")) {
+                String defined = hType.split("Defined")[1];
+                val = playerXCount(getDefinedPlayers(card, defined, ability), calcX[1], card, ability);
             } else {
                 val = 0;
             }
