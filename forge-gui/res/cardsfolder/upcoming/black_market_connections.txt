@@ -1,0 +1,12 @@
+Name:Black Market Connections
+ManaCost:2 B
+Types:Enchantment
+T:Mode$ Phase | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCharm | TriggerDescription$ At the beginning of your precombat main phase, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBTreasureLose1,DBDrawLose2,DBTokenLose3 | MinCharmNum$ 1 | CharmNum$ 3
+SVar:DBTreasureLose1:DB$ Token | TokenScript$ c_a_treasure_sac | SubAbility$ DBLoseLife1 | SpellDescription$ Sell Contraband — Create a Treasure token. You lose 1 life.
+SVar:DBDrawLose2:DB$ Draw | NumCards$ 1 | SubAbility$ DBLoseLife2 | SpellDescription$ Buy Information — Draw a card. You lose 2 life.
+SVar:DBTokenLose3:DB$ Token | TokenScript$ c_3_2_shapeshifter_changeling | SubAbility$ DBLoseLife3 | SpellDescription$ Hire a Mercenary — Create a 3/2 colorless Shapeshifter creature token with changeling. You lose 3 life.
+SVar:DBLoseLife1:DB$ LoseLife | LifeAmount$ 1 | Defined$ You
+SVar:DBLoseLife2:DB$ LoseLife | LifeAmount$ 2 | Defined$ You
+SVar:DBLoseLife3:DB$ LoseLife | LifeAmount$ 3 | Defined$ You
+Oracle:At the beginning of your precombat main phase, choose one or more —\n• Sell Contraband — Create a Treasure token. You lose 1 life.\n• Buy Information — Draw a card. You lose 2 life.\n• Hire a Mercenary — Create a 3/2 colorless Shapeshifter creature token with changeling. You lose 3 life.
