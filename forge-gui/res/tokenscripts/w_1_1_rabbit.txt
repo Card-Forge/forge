@@ -1,0 +1,6 @@
+Name:Rabbit Token
+ManaCost:no cost
+Types:Creature Rabbit
+Colors:white
+PT:1/1
+Oracle:
