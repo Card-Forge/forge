@@ -8,9 +8,9 @@ MaxDifficulty=5
 [metadata]
 Description=Oloro, Ageless Ascetic manipulates the forces of life and death. This commander uses powerful lifegain abilities to fuel his pursuit of knowlege and dominance.
 Set=C13
-Image=eternal_bargin.png
+Image=eternal_bargain.png
 [commander]
-1 Oloro, Ageless Ascetic|C13
+1 Oloro, Ageless Ascetic+|C13
 [main]
 1 Act of Authority|C13
 1 Ajani's Pridemate|C13
@@ -99,4 +99,3 @@ Image=eternal_bargin.png
 1 Vizkopa Guildmage|C13
 1 Wall of Reverence|C13
 1 Well of Lost Dreams|C13
-[sideboard]
