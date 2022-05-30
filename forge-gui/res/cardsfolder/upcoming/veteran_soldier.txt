@@ -6,4 +6,5 @@ SVar:AttacksPlayer:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player | Con
 SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | ChangeZoneTable$ True | RepeatSubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ w_1_1_soldier | TokenTapped$ True | TokenAttacking$ Remembered
 DeckHas:Ability$Token & Type$Soldier
+AI:RemoveDeck:NonCommander
 Oracle:Commander creatures you own have "Whenever this creature attacks a player, if no opponent has more life than that player, for each opponent, create a 1/1 white Soldier creature token that's tapped and attacking that player."
