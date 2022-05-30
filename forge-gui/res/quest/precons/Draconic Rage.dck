@@ -10,7 +10,7 @@ Description=Harness the power of rage with Vrondiss, calling upon the spirits of
 Set=AFC
 Image=draconic_rage.png
 [commander]
-1 Vrondiss, Rage of Ancients|AFC
+1 Vrondiss, Rage of Ancients+|AFC
 [main]
 1 Anger
 1 Arcane Signet|AFC
@@ -86,4 +86,3 @@ Image=draconic_rage.png
 1 Warstorm Surge|AFC
 1 Wild Endeavor|AFC
 1 Wulfgar of Icewind Dale|AFC
-[sideboard]
