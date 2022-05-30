@@ -10,8 +10,8 @@ Description=Arahbo, Roar of the World is a majestic leader and father to cats ac
 Set=C17
 Image=feline_ferocity.png
 [Commander]
-1 Arahbo, Roar of the World|C17
-[Main]
+1 Arahbo, Roar of the World+|C17
+[main]
 1 Abundance|C17
 1 Alms Collector|C17
 1 Argentum Armor|C17
@@ -104,5 +104,3 @@ Image=feline_ferocity.png
 1 White Sun's Zenith|C17
 1 Wing Shards|C17
 1 Zendikar Resurgent|C17
-[Sideboard]
-
