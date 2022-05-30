@@ -10,7 +10,7 @@ Description=The ability to cross over the barriers between realms is a deadly ad
 Set=KHC
 Image=phantom_premonition.png
 [commander]
-1 Ranar the Ever-Watchful|KHC
+1 Ranar the Ever-Watchful+|KHC
 [main]
 1 Angel of Finality|KHC
 1 Angel of Serenity|KHC
@@ -88,4 +88,3 @@ Image=phantom_premonition.png
 1 Warhorn Blast|KHC
 1 Whirler Rogue|KHC
 1 Windfall|KHC
-[sideboard]
