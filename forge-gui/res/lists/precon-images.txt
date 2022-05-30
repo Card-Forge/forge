@@ -107,7 +107,7 @@ https://downloads.cardforge.org/images/products/precons/entangling_webs.jpg
 https://downloads.cardforge.org/images/products/precons/entropic_uprising.png
 https://downloads.cardforge.org/images/products/precons/esper_air_assault.jpg
 https://downloads.cardforge.org/images/products/precons/esper_artifice.jpg
-https://downloads.cardforge.org/images/products/precons/eternal_bargin.png
+https://downloads.cardforge.org/images/products/precons/eternal_bargain.png
 https://downloads.cardforge.org/images/products/precons/eternal_siege.jpg
 https://downloads.cardforge.org/images/products/precons/evasive_maneuvers.png
 https://downloads.cardforge.org/images/products/precons/evincars_tyranny.jpg
