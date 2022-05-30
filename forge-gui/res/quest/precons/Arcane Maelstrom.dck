@@ -10,7 +10,7 @@ Description=Cast instants to turn the tide of any battle and summon creatures ri
 Set=C20
 Image=arcane_maelstrom.png
 [commander]
-1 Kalamax, the Stormsire|C20
+1 Kalamax, the Stormsire+|C20
 [main]
 1 Arcane Signet|C20
 1 Artifact Mutation|C20
