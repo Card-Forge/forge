@@ -10,7 +10,7 @@ Description=Team up with Sevinne to flashback spells for double the value, contr
 Set=C19
 Image=mystic_intellect.png
 [commander]
-1 Sevinne, the Chronoclasm|C19
+1 Sevinne, the Chronoclasm+|C19
 [main]
 1 Armillary Sphere|C19
 1 Azorius Chancery|C19
@@ -93,4 +93,3 @@ Image=mystic_intellect.png
 1 Sevinne's Reclamation|C19
 1 Thalia's Geistcaller|C19
 1 Wall of Stolen Identity|C19
-[sideboard]
