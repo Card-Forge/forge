@@ -10,7 +10,7 @@ Description=Prossh, Skyraider of Kher is the supreme predator. He feeds on his o
 Set=C13
 Image=power_hungry.png
 [commander]
-1 Prossh, Skyraider of Kher|C13
+1 Prossh, Skyraider of Kher+|C13
 [main]
 1 Akoum Refuge|C13
 1 Armillary Sphere|C13
@@ -102,4 +102,3 @@ Image=power_hungry.png
 1 Walker of the Grove|C13
 1 Widespread Panic|C13
 1 Wight of Precinct Six|C13
-[sideboard]
