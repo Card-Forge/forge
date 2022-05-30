@@ -10,8 +10,8 @@ Description=As the sole origin of their bloodline, Edgar Markov commands the Mar
 Set=C17
 Image=vampiric_bloodlust.png
 [Commander]
-1 Edgar Markov|C17
-[Main]
+1 Edgar Markov+|C17
+[main]
 1 Akoum Refuge|C17
 1 Ambition's Cost|C17
 1 Anowon, the Ruin Sage|C17
