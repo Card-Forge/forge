@@ -12,7 +12,7 @@ Image=draconic_rage.png
 [commander]
 1 Vrondiss, Rage of Ancients+|AFC
 [main]
-1 Anger
+1 Anger|AFC
 1 Arcane Signet|AFC
 1 Atarka, World Render|AFC
 1 Bag of Tricks|AFC
