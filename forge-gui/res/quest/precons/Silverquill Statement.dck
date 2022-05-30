@@ -10,7 +10,7 @@ Description=Representing Silverquill, Breena, the Demagogue is a rhetorical virt
 Set=C21
 Image=silverquill_statement.png
 [commander]
-1 Breena, the Demagogue|C21
+1 Breena, the Demagogue+|C21
 [main]
 1 Ambition's Cost|C21
 1 Angel of Serenity|C21
@@ -89,4 +89,3 @@ Image=silverquill_statement.png
 1 Vow of Duty|C21
 1 Windborn Muse|C21
 1 Zetalpa, Primal Dawn|C21
-[sideboard]
