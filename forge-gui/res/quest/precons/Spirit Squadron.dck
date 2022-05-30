@@ -10,7 +10,7 @@ Description=Flood the skies with the souls of the vengeful dead! With Millicent 
 Set=VOC
 Image=spirit_squadron.png
 [commander]
-1 Millicent, Restless Revenant|VOC
+1 Millicent, Restless Revenant+|VOC
 [main]
 1 Angel of Flight Alabaster|VOC
 1 Arcane Denial|VOC
@@ -90,4 +90,3 @@ Image=spirit_squadron.png
 1 Unclaimed Territory|VOC
 1 Verity Circle|VOC
 1 Windborn Muse|VOC
-[sideboard]
