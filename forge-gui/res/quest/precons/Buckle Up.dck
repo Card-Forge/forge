@@ -10,7 +10,7 @@ Description=Hitch a ride with Kotori and her fleet of souped-up vehicles, then r
 Set=NEC
 Image=buckle_up.png
 [commander]
-1 Kotori, Pilot Prodigy|NEC
+1 Kotori, Pilot Prodigy+|NEC
 [main]
 1 Jace, Architect of Thought|NEC
 1 Aeronaut Admiral|NEC
