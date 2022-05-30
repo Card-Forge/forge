@@ -8,7 +8,7 @@ https://downloads.cardforge.org/images/products/precons/angelic_might.jpg
 https://downloads.cardforge.org/images/products/precons/angrath_minotaur_pirate.jpg
 https://downloads.cardforge.org/images/products/precons/anthousas_army.jpg
 https://downloads.cardforge.org/images/products/precons/arcane_tempo.jpg
-https://downloads.cardforge.org/images/products/precons/arcane_wizardy.png
+https://downloads.cardforge.org/images/products/precons/arcane_wizardry.png
 https://downloads.cardforge.org/images/products/precons/arcane_maelstrom.png
 https://downloads.cardforge.org/images/products/precons/arcaniss_guile.jpg
 https://downloads.cardforge.org/images/products/precons/armada.jpg
