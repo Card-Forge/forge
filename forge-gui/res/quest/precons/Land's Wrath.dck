@@ -10,7 +10,7 @@ Description=An ancient elf spirit of the Mul Daya, Obunn is more influential in 
 Set=ZNC
 Image=lands_wrath.png
 [commander]
-1 Obuun, Mul Daya Ancestor|ZNC
+1 Obuun, Mul Daya Ancestor+|ZNC
 [main]
 1 Acidic Slime|ZNC
 1 Arcane Signet|ZNC
@@ -93,4 +93,3 @@ Image=lands_wrath.png
 1 Together Forever|ZNC
 1 Trove Warden|ZNC
 1 Waker of the Wilds|ZNC
-[sideboard]
