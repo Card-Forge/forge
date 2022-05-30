@@ -6,11 +6,11 @@ Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
 [metadata]
-Description=Venture into the Forgotten Realms’ deepest dungeons with Sefris. Emerge with a powerful army of undead and drag your opponents to their doom.
+Description=Venture into the Forgotten Realms' deepest dungeons with Sefris. Emerge with a powerful army of undead and drag your opponents to their doom.
 Set=AFC
 Image=dungeons_of_death.png
 [commander]
-1 Sefris of the Hidden Ways|AFC
+1 Sefris of the Hidden Ways+|AFC
 [main]
 1 Arcane Endeavor|AFC
 1 Arcane Sanctum|AFC
@@ -95,4 +95,3 @@ Image=dungeons_of_death.png
 1 Wall of Omens|AFC
 1 Wand of Orcus|AFC
 1 Wayfarer's Bauble|AFC
-[sideboard]
