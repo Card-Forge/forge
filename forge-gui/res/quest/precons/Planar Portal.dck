@@ -10,7 +10,7 @@ Description=Wield power drawn from Prosper’s fiendish patron, pulling spells o
 Set=AFC
 Image=planar_portal.png
 [commander]
-1 Prosper, Tome-Bound|AFC
+1 Prosper, Tome-Bound+|AFC
 [main]
 1 Apex of Power|AFC
 1 Arcane Signet|AFC
@@ -86,4 +86,3 @@ Image=planar_portal.png
 1 Wild-Magic Sorcerer|AFC
 1 You Find Some Prisoners|AFC
 1 Zhalfirin Void|AFC
-[sideboard]
