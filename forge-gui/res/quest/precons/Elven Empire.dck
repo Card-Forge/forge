@@ -10,7 +10,7 @@ Description=Hailing from a time before the wood and shadow elves were split apar
 Set=KHC
 Image=elven_empire.png
 [commander]
-1 Lathril, Blade of the Elves|KHC
+1 Lathril, Blade of the Elves+|KHC
 [main]
 1 Abomination of Llanowar|KHC
 1 Ambition's Cost|KHC
@@ -84,4 +84,3 @@ Image=elven_empire.png
 1 Wirewood Channeler|KHC
 1 Wolverine Riders|KHC
 1 Wood Elves|KHC
-[sideboard]
