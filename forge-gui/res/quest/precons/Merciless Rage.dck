@@ -10,7 +10,7 @@ Description=Team up with Anje Falkenrath to churn ruthlessly through your deck, 
 Set=C19
 Image=merciless_rage.png
 [commander]
-1 Anje Falkenrath|C19
+1 Anje Falkenrath+|C19
 [main]
 1 Akoum Refuge|C19
 1 Armillary Sphere|C19
@@ -93,4 +93,3 @@ Image=merciless_rage.png
 1 Scaretiller|C19
 1 Skyfire Phoenix|C19
 1 Wildfire Devils|C19
-[sideboard]
