@@ -4,8 +4,7 @@ Types:Creature Orc Wizard
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters the battlefield, you take the initiative.
 SVar:TrigInitiative:DB$ TakeInitiative
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you have the initiative, create a 1/1 blue Faerie Dragon creature token with flying.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckDefinedPlayer$ You.hasInitiative | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you have the initiative, create a 1/1 blue Faerie Dragon creature token with flying.
 SVar:TrigToken:DB$ Token | TokenScript$ u_1_1_faerie_dragon_flying
-SVar:X:Count$Initiative.1.0
 DeckHas:Ability$Token & Type$Faerie|Dragon
 Oracle:When Feywild Caretaker enters the battlefield, you take the initiative.\nAt the beginning of your end step, if you have the initiative, create a 1/1 blue Faerie Dragon creature token with flying.
