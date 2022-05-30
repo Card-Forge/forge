@@ -10,7 +10,7 @@ Description=Ob Nixilis of the Black Oath is a ruthless tyrant who will stop at n
 Set=C14
 Image=sworn_to_darkness.png
 [commander]
-1 Ob Nixilis of the Black Oath|C14
+1 Ob Nixilis of the Black Oath+|C14
 [main]
 1 Abyssal Persecutor|C14
 1 AEther Snap|C14
@@ -80,4 +80,3 @@ Image=sworn_to_darkness.png
 1 Wake the Dead|C14
 1 Worn Powerstone|C14
 1 Xathrid Demon|C14
-[sideboard]
