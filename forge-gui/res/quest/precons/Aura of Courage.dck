@@ -6,11 +6,11 @@ Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
 [metadata]
-Description=Stand tall next to Galea and arm your forces with powerful Auras and Equipment. With a paladin’s protection on your side, none shall do you harm.
+Description=Stand tall next to Galea and arm your forces with powerful Auras and Equipment. With a paladin's protection on your side, none shall do you harm.
 Set=AFC
 Image=aura_of_courage.png
 [commander]
-1 Galea, Kindler of Hope|AFC
+1 Galea, Kindler of Hope+|AFC
 [main]
 1 Abundant Growth|AFC
 1 Acidic Slime|AFC
@@ -100,4 +100,3 @@ Image=aura_of_courage.png
 1 Wild Growth|AFC
 1 Winds of Rath|AFC
 1 Winged Boots|AFC
-[sideboard]
