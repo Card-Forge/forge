@@ -10,7 +10,7 @@ Description=As soon as Zaffai came of age, his parents sent him to Strixhaven, a
 Set=C21
 Image=prismari_performance.png
 [commander]
-1 Zaffai, Thunder Conductor|C21
+1 Zaffai, Thunder Conductor+|C21
 [main]
 1 Aether Gale|C21
 1 Aetherspouts|C21
@@ -94,4 +94,3 @@ Image=prismari_performance.png
 1 Veyran, Voice of Duality|C21
 1 Volcanic Vision|C21
 1 Wildfire Devils|C21
-[sideboard]|
