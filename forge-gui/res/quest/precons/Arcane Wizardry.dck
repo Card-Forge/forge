@@ -10,7 +10,7 @@ Description=Inalla, Archmage Ritualist delves into arcane mysteries in pursuit o
 Set=C17
 Image=arcane_wizardry.png
 [Commander]
-1 Inalla, Archmage Ritualist|C17
+1 Inalla, Archmage Ritualist+|C17
 [Main]
 1 Apprentice Necromancer|C17
 1 Arcanis the Omnipotent|C17
