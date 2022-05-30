@@ -31,6 +31,11 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        // always add to stack, targeting happens after payment
+        if (mandatory) {
+            return true;
+        }
+
         String logic = sa.getParamOrDefault("AILogic", "");
 
         SpellAbility trigsa = sa.getAdditionalAbility("Execute");
@@ -45,11 +50,7 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
         trigsa.setActivatingPlayer(ai);
 
-        if (!sa.hasParam("OptionalDecider")) {
-            return aic.doTrigger(trigsa, true);
-        } else {
-            return aic.doTrigger(trigsa, !sa.getParam("OptionalDecider").equals("You"));
-        }
+        return aic.doTrigger(trigsa, !"You".equals(sa.getParamOrDefault("OptionalDecider", "You")));
     }
 
     @Override
