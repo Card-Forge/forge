@@ -10,7 +10,7 @@ Description=When time began, the Ur-Dragon began with it. As the primordial ance
 Set=C17
 Image=draconic_domination.png
 [Commander]
-1 The Ur-Dragon|C17
+1 The Ur-Dragon+|C17
 [Main]
 1 Arcane Sanctum|C17
 1 Armillary Sphere|C17
