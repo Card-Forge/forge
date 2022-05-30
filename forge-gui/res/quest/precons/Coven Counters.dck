@@ -6,11 +6,11 @@ Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
 [metadata]
-Description=Elected as “Harvesttide Sovereign” by the witches of the Dawnhart Coven, Leinore has thrown a festival for the ages. Her hard work has filled both the witches and townsfolk of Innistrad with hope—perhaps this long night will soon see daybreak. Leinore hands out +1/+1 counters to everyone on her guest list. At the end of the night, your horde of humans will be the last ones standing.
+Description=Elected as "Harvesttide Sovereign" by the witches of the Dawnhart Coven, Leinore has thrown a festival for the ages. Her hard work has filled both the witches and townsfolk of Innistrad with hope—perhaps this long night will soon see daybreak. Leinore hands out +1/+1 counters to everyone on her guest list. At the end of the night, your horde of humans will be the last ones standing.
 Set=MIC
 Image=coven_counters.png
 [commander]
-1 Leinore, Autumn Sovereign|MIC
+1 Leinore, Autumn Sovereign+|MIC
 [main]
 1 Abzan Falconer|MIC
 1 Ainok Bond-Kin|MIC
@@ -89,4 +89,3 @@ Image=coven_counters.png
 1 Wall of Mourning|MIC
 1 Wild Beastmaster|MIC
 1 Yavimaya Elder|MIC
-[sideboard]
