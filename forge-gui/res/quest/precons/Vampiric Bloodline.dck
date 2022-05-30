@@ -10,7 +10,7 @@ Description=Whether sipped from goblets or spilled from unlucky throats, blood g
 Set=VOC
 Image=vampiric_bloodline.png
 [commander]
-1 Strefan, Maurer Progenitor|VOC
+1 Strefan, Maurer Progenitor+|VOC
 [main]
 1 Ancient Craving|VOC
 1 Anje's Ravager|VOC
@@ -88,4 +88,3 @@ Image=vampiric_bloodline.png
 1 Vampire Nighthawk|VOC
 1 Vampiric Dragon|VOC
 1 Vandalblast|VOC
-[sideboard]
