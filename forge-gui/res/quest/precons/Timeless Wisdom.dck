@@ -10,7 +10,7 @@ Description=Cycle through your deck to fill the board with Cat Dinosaur tokens a
 Set=C20
 Image=timeless_wisdom.png
 [commander]
-1 Gavi, Nest Warden|C20
+1 Gavi, Nest Warden+|C20
 [main]
 1 Akroma's Vengeance|C20
 1 Azorius Chancery|C20
@@ -99,4 +99,3 @@ Image=timeless_wisdom.png
 1 Fierce Guardianship|C20
 1 Martial Impetus|C20
 1 Akim, the Soaring Wind|C20
-[sideboard]
