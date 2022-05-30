@@ -10,7 +10,7 @@ Description=Daretti, Scrap Savant brags that he can build anything out of anythi
 Set=C14
 Image=built_from_scratch.png
 [commander]
-1 Daretti, Scrap Savant|C14
+1 Daretti, Scrap Savant+|C14
 [main]
 1 Arcane Lighthouse|C14
 1 Beetleback Chief|C14
@@ -86,4 +86,3 @@ Image=built_from_scratch.png
 1 Whipflare|C14
 1 Word of Seizing|C14
 1 Wurmcoil Engine|C14
-[sideboard]
