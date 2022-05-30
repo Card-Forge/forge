@@ -5,4 +5,5 @@ A:SP$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | ChangeType$
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:X:Count$xPaid
 DeckHas:Ability$Graveyard
+DeckHints:Type$Planeswalker & Ability$Discard|Sacrifice
 Oracle:Return all creature and planeswalker cards with mana value X or less from your graveyard to the battlefield. Exile Ascend from Avernus.
