@@ -10,7 +10,7 @@ Description=Freyalise, Llanowar's Fury protects the forest and the elves who dwe
 Set=C14
 Image=guided_by_nature.png
 [commander]
-1 Freyalise, Llanowar's Fury|C14
+1 Freyalise, Llanowar's Fury+|C14
 [main]
 1 Assault Suit
 1 Beastmaster Ascension|C14
@@ -87,4 +87,3 @@ Image=guided_by_nature.png
 1 Wolfcaller's Howl|C14
 1 Wood Elves|C14
 1 Wren's Run Packmaster|C14
-[sideboard]
