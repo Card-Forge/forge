@@ -535,7 +535,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return currentStateName;
     }
 
-    // use by CopyPermament
+    // use by CopyPermanent
     public void setStates(Map<CardStateName, CardState> map) {
         states.clear();
         states.putAll(map);
@@ -2091,7 +2091,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Ascend") || keyword.equals("Totem armor")
                         || keyword.equals("Battle cry") || keyword.equals("Devoid") || keyword.equals("Riot")
                         || keyword.equals("Daybound") || keyword.equals("Nightbound")
-                        || keyword.equals("Friends forever")) {
+                        || keyword.equals("Friends forever") || keyword.equals("Choose a Background")) {
                     sbLong.append(keyword).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Partner:")) {
                     final String[] k = keyword.split(":");
@@ -2583,7 +2583,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Devoid") ||  keyword.equals("Lifelink")
                         || keyword.equals("Split second")) {
                     sbBefore.append(keyword).append(" (").append(inst.getReminderText()).append(")");
-                    sbBefore.append("\r\n");
+                    sbBefore.append("\r\n\r\n");
                 } else if (keyword.equals("Conspire") || keyword.equals("Epic")
                         || keyword.equals("Suspend") || keyword.equals("Jump-start")
                         || keyword.equals("Fuse")) {
@@ -3306,8 +3306,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final void removeTempController(final Player player) {
+        boolean changed = false;
         // Remove each key that yields this player
-        this.tempControllers.values().remove(player);
+        while (tempControllers.values().remove(player)) {
+            changed = true;
+        }
+        if (changed) {
+            view.updateController(this);
+        }
     }
 
     public final void clearTempControllers() {
@@ -6218,11 +6224,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         setBecameTargetThisTurn(false);
         setFoughtThisTurn(false);
         clearMustBlockCards();
+        getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttacksThisTurn() > 0);
         getDamageHistory().newTurn();
-        getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttackedThisTurn());
-        getDamageHistory().setCreatureAttackedThisTurn(false);
-        getDamageHistory().setCreatureAttacksThisTurn(0);
-        getDamageHistory().setHasBeenDealtNonCombatDamageThisTurn(false);
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
         resetMayPlayTurn();

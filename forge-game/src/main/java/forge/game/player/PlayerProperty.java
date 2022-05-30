@@ -163,6 +163,10 @@ public class PlayerProperty {
             if (game.getCombat() == null || !player.equals(game.getCombat().getDefenderPlayerByAttacker(source))) {
                 return false;
             }
+        } else if (property.equals("attackedBySourceThisTurn")) {
+            if (!source.getDamageHistory().hasAttackedThisTurn(player)) {
+                return false;
+            }
         } else if (property.equals("wasDealtDamageThisTurn")) {
             if (player.getAssignedDamage() == 0) {
                 return false;
@@ -387,6 +391,17 @@ public class PlayerProperty {
             if (player.getCreaturesAttackedThisTurn().isEmpty()) {
                 return false;
             }
+        } else if (property.equals("attackedYouTheirLastTurn")) {
+            if (!player.getAttackedPlayersMyLastTurn().contains(sourceController)) {
+                return false;
+            }
+        } else if (property.equals("BeenAttackedThisCombat")) {
+            for (Player p : game.getRegisteredPlayers()) {
+                if (p.getAttackedPlayersMyCombat().contains(sourceController)) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.equals("VenturedThisTurn")) {
             if (player.getVenturedThisTurn() < 1) {
                 return false;

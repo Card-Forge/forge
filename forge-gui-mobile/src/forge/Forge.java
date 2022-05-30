@@ -391,11 +391,17 @@ public class Forge implements ApplicationListener {
                                 FThreads.invokeInEdtLater(new Runnable() {
                                     @Override
                                     public void run() {
-                                        //selection
-                                        splashScreen.setShowModeSelector(true);
-                                        //start background music
-                                        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
-                                        safeToClose = true;
+                                        //selection transition
+                                        setTransitionScreen(new TransitionScreen(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                splashScreen.setShowModeSelector(true);
+                                                //start background music
+                                                SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+                                                safeToClose = true;
+                                                clearTransitionScreen();
+                                            }
+                                        }, Forge.takeScreenshot(), false, false, true, false));
                                     }
                                 });
                             }
@@ -747,7 +753,7 @@ public class Forge implements ApplicationListener {
                 openHomeDefault();
                 exited = false;
             }
-        }, ScreenUtils.getFrameBufferTexture(), false, false));
+        }, Forge.takeScreenshot(), false, false));
     }
 
     public static void switchToAdventure() {
@@ -772,6 +778,10 @@ public class Forge implements ApplicationListener {
 
     public static void clearSplashScreen() {
         splashScreen = null;
+    }
+    public static TextureRegion takeScreenshot() {
+        TextureRegion screenShot = ScreenUtils.getFrameBufferTexture();
+        return screenShot;
     }
 
     private static void setCurrentScreen(FScreen screen0) {
@@ -989,7 +999,7 @@ public class Forge implements ApplicationListener {
         if (!(currentScene instanceof ForgeScene)) {
             if (lastScreenTexture != null)
                 lastScreenTexture.getTexture().dispose();
-            lastScreenTexture = ScreenUtils.getFrameBufferTexture();
+            lastScreenTexture = Forge.takeScreenshot();
         }
 
 

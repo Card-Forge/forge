@@ -26,6 +26,7 @@ Artificer:Artificers
 Army:Armies
 Assassin:Assassins
 Assembly-Worker:Assembly-Workers
+Astartes:Astartes
 Atog:Atogs
 Aurochs:Aurochs
 Avatar:Avatars
@@ -294,6 +295,7 @@ Lesson
 Trap
 [EnchantmentTypes]
 Aura
+Background
 Cartouche
 Class
 Curse

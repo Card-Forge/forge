@@ -1,0 +1,14 @@
+Name:Oji, the Exquisite Blade
+ManaCost:2 W U
+Types:Legendary Creature Human Monk
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life and scry 2.
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigExile | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ2 | NoResolvingCheck$ True | TriggerDescription$ Whenever you cast your second spell each turn, exile up to one target creature you control, then return it to the battlefield under its owner's control.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBScry
+SVar:DBScry:DB$ Scry | ScryNum$ 2
+SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you control | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$LifeGain
+Oracle:When Oji, the Exquisite Blade enters the battlefield, you gain 2 life and scry 2.\nWhenever you cast your second spell each turn, exile up to one target creature you control, then return it to the battlefield under its owner's control.

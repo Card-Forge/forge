@@ -1,0 +1,37 @@
+[metadata]
+Name=GAP_1_16_Mono Blue Tempo Generated Deck_24_17
+[Main]
+1 Brazen Borrower|ELD
+3 Cloudfin Raptor|GK2
+4 Gadwick, the Wizened|ELD
+4 Harbinger of the Tides|DDT
+1 Island|DOM|4
+1 Island|ELD|4
+1 Island|KLD|1
+2 Island|KLD|2
+2 Island|KLD|3
+2 Island|M14|2
+1 Island|M14|3
+1 Island|M14|4
+1 Island|M20|2
+1 Island|M20|3
+1 Island|M20|4
+1 Island|ORI|1
+1 Island|ORI|2
+1 Island|ORI|4
+1 Island|RIX
+1 Island|THS|3
+1 Island|XLN|2
+4 Master of Waves|DDT
+4 Merfolk Trickster|DOM
+2 Nykthos, Shrine to Nyx|THS
+4 Siren Stormtamer|XLN
+3 Spectral Sailor|M20
+3 Tempest Djinn|DOM
+4 Thassa, God of the Sea|THS
+4 Wizard's Retort|DOM
+[Sideboard]
+4 Naban, Dean of Iteration|DOM
+4 Smuggler's Copter|KLD
+4 Spell Pierce|XLN
+3 Tidebinder Mage|DDT

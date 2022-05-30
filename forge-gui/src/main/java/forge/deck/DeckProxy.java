@@ -12,6 +12,7 @@ import forge.game.GameFormat;
 import forge.game.GameType;
 import forge.gamemodes.quest.QuestController;
 import forge.gamemodes.quest.QuestEvent;
+import forge.gamemodes.quest.QuestEventDifficulty;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.item.PreconDeck;
@@ -22,6 +23,8 @@ import forge.util.BinaryUtil;
 import forge.util.IHasName;
 import forge.util.storage.IStorage;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -209,6 +212,28 @@ public class DeckProxy implements InventoryItem {
             colorIdentity = ColorSet.fromMask(colorProfile);
         }
         return colorIdentity;
+    }
+
+    public static ColorSet getColorIdentity(Deck deck) {
+        byte colorProfile = MagicColor.COLORLESS;
+        ColorSet deckIdentity = ColorSet.fromMask(colorProfile);
+        if (deck != null) {
+            for (final Entry<DeckSection, CardPool> deckEntry : deck) {
+                switch (deckEntry.getKey()) {
+                    case Main:
+                    case Sideboard:
+                    case Commander:
+                        for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                            colorProfile |= poolEntry.getKey().getRules().getColorIdentity().getColor();
+                        }
+                        break;
+                    default:
+                        break; //ignore other sections
+                }
+            }
+            deckIdentity = ColorSet.fromMask(colorProfile);
+        }
+        return deckIdentity;
     }
 
     public Deck.UnplayableAICards getAI() {
@@ -559,6 +584,38 @@ public class DeckProxy implements InventoryItem {
         for (final QuestEvent e : quest.getChallenges()) {
             decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
         }
+        return decks;
+    }
+
+    public static Map<DeckProxy, Pair<List<String>, List<String>>> getAllQuestChallenges() {
+        final Map<DeckProxy, Pair<List<String>, List<String>>> deckMap = new HashMap<>();
+        final QuestController quest = FModel.getQuest();
+        for (final QuestEvent e : quest.getChallenges()) {
+            Pair<List<String>, List<String>> extras = new ImmutablePair<>(e.getHumanExtraCards(), e.getAiExtraCards());
+            deckMap.put(new DeckProxy(e.getEventDeck(), "Quest Event", null, null), extras);
+        }
+        return deckMap;
+    }
+
+    public static List<DeckProxy> getNonEasyQuestDuelDecks() {
+        final List<DeckProxy> decks = new ArrayList<>();
+        final QuestController quest = FModel.getQuest();
+        for (final QuestEvent e : quest.getDuelsManager().getDuels(QuestEventDifficulty.MEDIUM)) {
+            decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
+        }
+        for (final QuestEvent e : quest.getDuelsManager().getDuels(QuestEventDifficulty.HARD)) {
+            decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
+        }
+        for (final QuestEvent e : quest.getDuelsManager().getDuels(QuestEventDifficulty.EXPERT)) {
+            decks.add(new DeckProxy(e.getEventDeck(), "Quest Event", null, null));
+        }
+        return decks;
+    }
+
+    public static List<DeckProxy> getAllGeneticAIDecks() {
+        final List<DeckProxy> decks = new ArrayList<>();
+        final IStorage<Deck> genetic = FModel.getDecks().getGeneticAIDecks();
+        addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", genetic, null);
         return decks;
     }
 

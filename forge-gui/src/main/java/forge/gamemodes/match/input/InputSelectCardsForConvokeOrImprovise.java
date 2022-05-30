@@ -51,7 +51,7 @@ public final class InputSelectCardsForConvokeOrImprovise extends InputSelectMany
 	     sa != null ) {
 	    sb.append(sa.getStackDescription()).append("\n");
 	}
-	sb.append(TextUtil.concatNoSpace("Choose ", cardType, " to tap for ", description, " .\nRemaining mana cost is ", remainingCost.toString()));
+	sb.append(TextUtil.concatNoSpace("Choose ", cardType, " to tap for ", description, ".\nRemaining mana cost is ", remainingCost.toString()));
         return sb.toString();
     }
 

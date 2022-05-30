@@ -195,7 +195,7 @@ public class ConsoleCommandInterpreter {
         });
         registerCommand(new String[]{"dumpEnemyDeckColors"}, s -> {
             for(EnemyData E : new Array.ArrayIterator<>(WorldData.getAllEnemies())){
-                Deck D = E.generateDeck(Current.player().isFantasyMode());
+                Deck D = E.generateDeck(Current.player().isFantasyMode(), Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
                 DeckProxy DP = new DeckProxy(D, "Constructed", GameType.Constructed, null);
                 ColorSet colorSet = DP.getColor();
                 System.out.printf("%s: Colors: %s (%s%s%s%s%s%s)\n", D.getName(), DP.getColor(),
@@ -208,6 +208,26 @@ public class ConsoleCommandInterpreter {
                 );
             }
             return "Enemy deck color list dumped to stdout.";
+        });
+        registerCommand(new String[]{"dumpEnemyDeckList"}, s -> {
+            for(EnemyData E : new Array.ArrayIterator<>(WorldData.getAllEnemies())){
+                Deck D = E.generateDeck(Current.player().isFantasyMode(), Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
+                DeckProxy DP = new DeckProxy(D, "Constructed", GameType.Constructed, null);
+                ColorSet colorSet = DP.getColor();
+                System.out.printf("Deck: %s\n%s\n\n", D.getName(), DP.getDeck().getMain().toCardList("\n")
+                );
+            }
+            return "Enemy deck list dumped to stdout.";
+        });
+        registerCommand(new String[]{"dumpEnemyColorIdentity"}, s -> {
+            for(EnemyData E : new Array.ArrayIterator<>(WorldData.getAllEnemies())){
+                Deck D = E.generateDeck(Current.player().isFantasyMode(), Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
+                DeckProxy DP = new DeckProxy(D, "Constructed", GameType.Constructed, null);
+                ColorSet colorSet = DP.getColor();
+                System.out.printf("%s Colors: %s | Deck Colors: %s (%s)\n", E.name, E.colors, DP.getColorIdentity().toEnumSet().toString(), DP.getName()
+                );
+            }
+            return "Enemy color Identity dumped to stdout.";
         });
         registerCommand(new String[]{"heal", "amount"}, s -> {
             if(s.length<1) return "Command needs 1 parameter";

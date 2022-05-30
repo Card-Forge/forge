@@ -334,7 +334,7 @@ public final class AbilityFactory {
         String tgtWhat = mapParams.get("ValidTgts");
         final String[] commonStuff = new String[] {
                 //list of common one word non-core type ValidTgts that should be lowercase in the target prompt
-                "Player", "Opponent"
+                "Player", "Opponent", "Card"
         };
         if (Arrays.asList(commonStuff).contains(tgtWhat) || CardType.CoreType.isValidEnum(tgtWhat)) {
             tgtWhat = tgtWhat.toLowerCase();
@@ -365,9 +365,6 @@ public final class AbilityFactory {
             abTgt.setSAValidTargeting(mapParams.get("TargetValidTargeting"));
         }
 
-        if (mapParams.containsKey("TargetsSingleTarget")) {
-            abTgt.setSingleTarget(true);
-        }
         if (mapParams.containsKey("TargetUnique")) {
             abTgt.setUniqueTargets(true);
         }

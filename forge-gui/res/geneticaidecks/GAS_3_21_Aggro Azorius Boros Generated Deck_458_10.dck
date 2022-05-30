@@ -1,0 +1,29 @@
+[metadata]
+Name=GAS_3_21_Aggro Azorius Boros Generated Deck_458_10
+[Main]
+3 Benalish Marshal|GNT
+2 Conclave Tribunal|GRN
+3 Dauntless Bodyguard|DOM
+4 Gideon Blackblade|WAR
+2 History of Benalia|DOM
+3 Law-Rune Enforcer|WAR
+4 Legion's Landing|XLN
+2 Plains|DOM|3
+4 Plains|DOM|4
+3 Plains|GRN
+2 Plains|M19|2
+1 Plains|M19|3
+1 Plains|M19|4
+5 Plains|RIX
+2 Plains|RNA
+1 Plains|XLN|1
+2 Plains|XLN|4
+4 Skymarcher Aspirant|RIX
+2 Snubhorn Sentry|RIX
+4 Tithe Taker|RNA
+2 Tomik, Distinguished Advokist|WAR
+4 Venerated Loxodon|GRN
+[Sideboard]
+4 Ajani, Adversary of Tyrants|M19
+2 Snubhorn Sentry|RIX
+4 Unbreakable Formation|RNA

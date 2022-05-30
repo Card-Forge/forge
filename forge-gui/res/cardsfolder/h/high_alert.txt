@@ -2,7 +2,9 @@ Name:High Alert
 ManaCost:1 W U
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME assigns combat damage equal to its toughness rather than its power | Description$ Each creature you control assigns combat damage equal to its toughness rather than its power.
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | Description$ Creatures you control can attack as though they didn't have defender.
+S:Mode$ CanAttackDefender | ValidCard$ Creature.YouCtrl | Description$ Creatures you control can attack as though they didn't have defender.
 SVar:PlayMain1:TRUE
 A:AB$ Untap | Cost$ 2 W U | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Untap target creature.
+DeckHints:Keyword$Defender
+AI:RemoveDeck:Random
 Oracle:Each creature you control assigns combat damage equal to its toughness rather than its power.\nCreatures you control can attack as though they didn't have defender.\n{2}{W}{U}: Untap target creature.

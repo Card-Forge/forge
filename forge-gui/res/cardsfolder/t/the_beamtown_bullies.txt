@@ -1,0 +1,15 @@
+Name:The Beamtown Bullies
+ManaCost:1 B R G
+Types:Legendary Creature Ogre Devil Warrior
+PT:4/4
+K:Vigilance
+K:Haste
+A:AB$ Pump | Cost$ T | ValidTgts$ Player.Opponent+Active | TgtPrompt$ Select target opponent whose turn it is | SubAbility$ DBChangeZone | StackDescription$ None | StackDescription$ {p:Targeted} | SpellDescription$ Target opponent whose turn it is
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | DefinedPlayer$ ParentTarget | ValidTgts$ Creature.nonLegendary+YouOwn | TgtPrompt$ Select target nonlegendary creature card from your graveyard | GainControl$ ParentTarget | SubAbility$ DBAnimate | StackDescription$ puts {c:Targeted} onto the battlefield under their control. | SpellDescription$ puts target nonlegendary creature card from your graveyard onto the battlefield under their control.
+SVar:DBAnimate:DB$ Animate | Keywords$ Haste | Defined$ Targeted | Duration$ Permanent | SubAbility$ DBGoad | StackDescription$ SpellDescription | SpellDescription$ It gains haste.
+SVar:DBGoad:DB$ Goad | Defined$ Targeted | SubAbility$ DelTrig | SpellDescription$ Goad it.
+SVar:DelTrig:DB$ DelayedTrigger | RememberObjects$ Targeted.Creature | Mode$ Phase | Phase$ End of Turn | Execute$ TrigExile | TriggerDescription$ At the beginning of the next end step, exile it. | SpellDescription$ At the beginning of the next end step, exile it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ DelayTriggerRememberedLKI
+DeckHas:Ability$Graveyard
+AI:RemoveDeck:Random
+Oracle:Vigilance, haste\n{T}: Target opponent whose turn it is puts target nonlegendary creature card from your graveyard onto the battlefield under their control. It gains haste. Goad it. At the beginning of the next end step, exile it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)

@@ -1,10 +1,10 @@
 Name:Hoarder's Greed
 ManaCost:3 B
 Types:Sorcery
-A:SP$ Repeat | Cost$ 3 B | RepeatCheckSVar$ CheckRepeat | RepeatSVarCompare$ GT0 | RepeatSubAbility$ DBLoseLife | SubAbility$ DBReset | StackDescription$ SpellDescription | SpellDescription$ You lose 2 life and draw two cards, then clash with an opponent. If you win, repeat this process.
+A:SP$ Repeat | Cost$ 3 B | RepeatCheckSVar$ CheckRepeat | RepeatSVarCompare$ GT0 | RepeatSubAbility$ DBLoseLife | StackDescription$ SpellDescription | SpellDescription$ You lose 2 life and draw two cards, then clash with an opponent. If you win, repeat this process.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You lose 2 life and draw two cards, then clash with an opponent. If you win, repeat this process.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBClash
-SVar:DBClash:DB$ Clash | LoseSubAbility$ DBStoreSVar
+SVar:DBClash:DB$ Clash | WinSubAbility$ DBStoreSVar | OtherwiseSubAbility$ DBReset
 SVar:DBStoreSVar:DB$ StoreSVar | SVar$ CheckRepeat | Type$ Number | Expression$ 1
 SVar:DBReset:DB$ StoreSVar | SVar$ CheckRepeat | Type$ Number | Expression$ 0
 SVar:CheckRepeat:Number$0

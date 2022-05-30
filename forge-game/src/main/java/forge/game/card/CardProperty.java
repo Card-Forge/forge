@@ -109,8 +109,13 @@ public class CardProperty {
             if (card.getId() != Integer.parseInt(property.split("CardUID_")[1])) {
                 return false;
             }
-        } else if (property.equals("ChosenCard")) {
-            if (!source.hasChosenCard(card)) {
+        } else if (property.startsWith("ChosenCard")) {
+            CardCollectionView chosen = source.getChosenCards();
+            int i = chosen.indexOf(card);
+            if (i == -1) {
+                return false;
+            }
+            if (property.contains("Strict") && !chosen.get(i).equalsWithTimestamp(card)) {
                 return false;
             }
         } else if (property.equals("nonChosenCard")) {
@@ -1151,17 +1156,13 @@ public class CardProperty {
             if (!card.hasDealtDamageToOpponentThisTurn()) {
                 return false;
             }
-        } else if (property.startsWith("dealtCombatDamageThisTurn ") || property.startsWith("notDealtCombatDamageThisTurn ")) {
-            final String v = property.split(" ")[1];
-            final Iterable<Card> list = Iterables.filter(card.getDamageHistory().getThisTurnCombatDamaged().keySet(), Card.class);
-            boolean found = Iterables.any(list, CardPredicates.restriction(v, sourceController, source, spellAbility));
-            if (found == property.startsWith("not")) {
-                return false;
-            }
-        } else if (property.startsWith("dealtCombatDamageThisCombat ") || property.startsWith("notDealtCombatDamageThisCombat ")) {
-            final String v = property.split(" ")[1];
-            final Iterable<Card> list = Iterables.filter(card.getDamageHistory().getThisCombatDamaged().keySet(), Card.class);
-            boolean found = Iterables.any(list, CardPredicates.restriction(v, sourceController, source, spellAbility));
+        //dealtCombatDamageThisCombat <valid>, dealtCombatDamageThisTurn <valid>, and notDealt versions
+        } else if (property.startsWith("dealtCombatDamage") || property.startsWith("notDealtCombatDamage")) {
+            final String[] v = property.split(" ")[1].split(",");
+            final Iterable<GameEntity> list = property.contains("ThisCombat") ?
+                    card.getDamageHistory().getThisCombatDamaged().keySet() :
+                    card.getDamageHistory().getThisTurnCombatDamaged().keySet();
+            boolean found = Iterables.any(list, GameObjectPredicates.restriction(v, sourceController, source, spellAbility));
             if (found == property.startsWith("not")) {
                 return false;
             }
@@ -1188,7 +1189,11 @@ public class CardProperty {
         } else if (property.startsWith("dealtDamagetoAny")) {
             return card.getDamageHistory().getHasdealtDamagetoAny();
         } else if (property.startsWith("attackedThisTurn")) {
-            if (!card.getDamageHistory().getCreatureAttackedThisTurn()) {
+            if (card.getDamageHistory().getCreatureAttacksThisTurn() == 0) {
+                return false;
+            }
+        } else if (property.startsWith("attackedYouThisTurn")) {
+            if (!card.getDamageHistory().hasAttackedThisTurn(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("attackedLastTurn")) {
@@ -1210,7 +1215,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("notAttackedThisTurn")) {
-            if (card.getDamageHistory().getCreatureAttackedThisTurn()) {
+            if (card.getDamageHistory().getCreatureAttacksThisTurn() > 0) {
                 return false;
             }
         } else if (property.startsWith("notAttackedLastTurn")) {

@@ -8,7 +8,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -60,6 +59,7 @@ import forge.util.storage.IStorage;
  */
 // TODO This class can be used for home menu constructed deck generation as well.
 public class DeckgenUtil {
+    private static List<DeckProxy> advPrecons = Lists.newArrayList(), advThemes = Lists.newArrayList(), geneticAI = Lists.newArrayList();
 
     public static Deck buildCardGenDeck(GameFormat format, boolean isForAI){
         try {
@@ -434,9 +434,19 @@ public class DeckgenUtil {
     }
 
     /** @return {@link forge.deck.Deck} */
-    public static Deck getRandomOrPreconOrThemeDeck(String colors, boolean forAi, boolean isTheme) {
+    public static Deck getRandomOrPreconOrThemeDeck(String colors, boolean forAi, boolean isTheme, boolean useGeneticAI) {
         final List<String> selection = new ArrayList<>();
-        List<DeckProxy> allDecks = new ArrayList<>();
+        Deck deck = null;
+        if (advPrecons.isEmpty()) {
+            advPrecons.addAll(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
+        }
+        if (advThemes.isEmpty()) {
+            advThemes.addAll(DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()));
+            advThemes.addAll(DeckProxy.getNonEasyQuestDuelDecks());
+        }
+        if (geneticAI.isEmpty()) {
+            geneticAI.addAll(DeckProxy.getAllGeneticAIDecks());
+        }
         if (!colors.isEmpty()) {
             for (char c : colors.toLowerCase().toCharArray()) {
                 switch (c) {
@@ -448,36 +458,34 @@ public class DeckgenUtil {
                 }
             }
         }
-        //limit selection to three
-        if (!selection.isEmpty() && selection.size() < 4) {
-            //has all colors
-            if (isTheme) {
-                allDecks = DeckProxy.getAllThemeDecks().parallelStream()
-                        .filter(deckProxy -> deckProxy.getMainSize() <= 60)
-                        .filter(deckProxy -> deckProxy.getColor() != null && deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor()))
-                        .collect(Collectors.toList());
+        try {
+            if (useGeneticAI) {
+                if (!selection.isEmpty())
+                    deck = Aggregates.random(Iterables.filter(geneticAI, deckProxy -> deckProxy.getColorIdentity().sharesColorWith(ColorSet.fromNames(colors.toCharArray())))).getDeck();
+                else
+                    deck = Aggregates.random(geneticAI).getDeck();
+
             } else {
-                allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
-                        .filter(deckProxy -> deckProxy.getMainSize() <= 60)
-                        .filter(deckProxy -> deckProxy.getColor() != null &&  deckProxy.getColor().hasAllColors(ColorSet.fromNames(selection).getColor()))
-                        .collect(Collectors.toList());
+                if (!selection.isEmpty() && selection.size() < 4) {
+                    Predicate<DeckProxy> pred = Predicates.and(deckProxy -> deckProxy.getMainSize() <= 60, deckProxy -> deckProxy.getColorIdentity().hasAllColors(ColorSet.fromNames(colors.toCharArray()).getColor()));
+                    if (isTheme)
+                        deck = Aggregates.random(Iterables.filter(advThemes, pred)).getDeck();
+                    else
+                        deck = Aggregates.random(Iterables.filter(advPrecons, pred)).getDeck();
+                } else {
+                    if (isTheme)
+                        deck = Aggregates.random(Iterables.filter(advThemes, deckProxy -> deckProxy.getMainSize() <= 60)).getDeck();
+                    else
+                        deck = Aggregates.random(Iterables.filter(advPrecons, deckProxy -> deckProxy.getMainSize() <= 60)).getDeck();
+                }
             }
-        } else {
-            //no specific colors
-            if (isTheme) {
-                allDecks = DeckProxy.getAllThemeDecks().parallelStream()
-                        .filter(deckProxy -> deckProxy.getMainSize() <= 60)
-                        .collect(Collectors.toList());
-            } else {
-                allDecks = DeckProxy.getAllPreconstructedDecks(QuestController.getPrecons()).parallelStream()
-                        .filter(deckProxy -> deckProxy.getMainSize() <= 60)
-                        .collect(Collectors.toList());
-            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        if (!allDecks.isEmpty()) {
-            return Aggregates.random(allDecks).getDeck();
+        if (deck != null) {
+            return deck;
         }
-        return DeckgenUtil.buildColorDeck(selection, null, forAi);
+        return getRandomColorDeck(forAi);
     }
 
     /** @return {@link forge.deck.Deck} */

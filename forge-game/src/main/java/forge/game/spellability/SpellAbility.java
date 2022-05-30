@@ -21,11 +21,9 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -1967,21 +1965,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
 
             if (!result) {
-                return false;
-            }
-        }
-
-        if (tgt.isSingleTarget()) {
-            Set<GameObject> targets = new HashSet<>();
-            for (TargetChoices tc : topSA.getAllTargetChoices()) {
-                targets.addAll(tc);
-                if (targets.size() > 1) {
-                    // As soon as we get more than one, bail out
-                    return false;
-                }
-            }
-            if (targets.size() != 1) {
-                // Make sure that there actually is one target
                 return false;
             }
         }

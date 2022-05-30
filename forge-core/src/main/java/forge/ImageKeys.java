@@ -299,20 +299,13 @@ public final class ImageKeys {
     }
     private static File findFile(String dir, String filename) {
         if (dir.equals(CACHE_CARD_PICS_DIR)) {
-            File f = new File(dir+"/"+filename);
-            String initialDirectory = f.getParent();
-            String cardName = f.getName();
-            File parentDir = new File(initialDirectory);
-            String[] cardNames = parentDir.list();
-            if (cardNames != null) {
-                Set<String> cardList = new HashSet<>(Arrays.asList(cardNames));
-                for (String ext : FILE_EXTENSIONS) {
-                    if (ext.equals(""))
-                        continue;
-                    String cardLookup = cardName+ext;
-                    if (cardList.contains(cardLookup)) {
-                        return new File(parentDir+"/"+cardLookup);
-                    }
+            for (String ext : FILE_EXTENSIONS) {
+                if (ext.equals(""))
+                    continue;
+
+                File f = new File(dir, filename + ext);
+                if (f.exists()) {
+                    return f;
                 }
             }
         } else {

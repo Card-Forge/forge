@@ -321,14 +321,6 @@ public class PhaseHandler implements java.io.Serializable {
                     declareAttackersTurnBasedAction();
                     game.getStack().unfreezeStack();
 
-                    if (combat != null) {
-                        for (Card c : combat.getAttackers()) {
-                            if (combat.getDefenderByAttacker(c) instanceof Player) {
-                                game.addPlayerAttackedThisTurn(c.getController(), (Player)combat.getDefenderByAttacker(c));
-                            }
-                        }
-                    }
-
                     givePriorityToPlayer = inCombat();
                     break;
 
@@ -431,6 +423,7 @@ public class PhaseHandler implements java.io.Serializable {
                     }
 
                     nUpkeepsThisTurn = 0;
+                    nCombatsThisTurn = 0;
                     nMain2sThisTurn = 0;
                     game.getStack().resetMaxDistinctSources();
 
@@ -479,10 +472,6 @@ public class PhaseHandler implements java.io.Serializable {
         }
 
         switch (phase) {
-            case UNTAP:
-                nCombatsThisTurn = 0;
-                break;
-
             case UPKEEP:
                 for (Card c : game.getCardsIncludePhasingIn(ZoneType.Battlefield)) {
                     c.getDamageHistory().setNotAttackedSinceLastUpkeepOf(playerTurn);
@@ -652,6 +641,7 @@ public class PhaseHandler implements java.io.Serializable {
             game.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
         }
 
+        playerTurn.clearAttackedPlayersMyCombat();
         for (final Card c : combat.getAttackers()) {
             CombatUtil.checkDeclaredAttacker(game, c, combat, true);
         }

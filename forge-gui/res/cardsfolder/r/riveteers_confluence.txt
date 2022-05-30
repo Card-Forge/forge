@@ -1,0 +1,10 @@
+Name:Riveteers Confluence
+ManaCost:2 B R G
+Types:Sorcery
+A:SP$ Charm | Choices$ Draw,Damage,PutLand | CharmNum$ 3 | CanRepeatModes$ True
+SVar:Draw:DB$ Draw | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and you lose 1 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+SVar:Damage:DB$ DamageAll | ValidCards$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to each creature and planeswalker you don't control.
+SVar:PutLand:DB$ ChangeZone | Origin$ Hand,Graveyard | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.YouCtrl | SpellDescription$ You may put a land card from your hand or graveyard onto the battlefield tapped.
+DeckHas:Ability$Graveyard
+Oracle:Choose three. You may choose the same mode more than once.\n• You draw a card and you lose 1 life.\n• Riveteers Confluence deals 1 damage to each creature and planeswalker you don't control.\n• You may put a land card from your hand or graveyard onto the battlefield tapped.

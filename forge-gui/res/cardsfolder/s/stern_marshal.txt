@@ -2,5 +2,5 @@ Name:Stern Marshal
 ManaCost:2 W
 Types:Creature Human Soldier
 PT:2/2
-A:AB$ Pump | Cost$ T | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | SpellDescription$ Target creature gets +2/+2 until end of turn. Activate only during your turn, before attackers are declared.
+A:AB$ Pump | Cost$ T | NumAtt$ +2 | NumDef$ +2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | PlayerTurn$ True | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | SpellDescription$ Target creature gets +2/+2 until end of turn. Activate only during your turn, before attackers are declared.
 Oracle:{T}: Target creature gets +2/+2 until end of turn. Activate only during your turn, before attackers are declared.

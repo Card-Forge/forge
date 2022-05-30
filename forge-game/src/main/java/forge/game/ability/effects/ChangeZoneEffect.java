@@ -196,8 +196,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (destination.equals("Battlefield")) {
                     sb.append("onto the battlefield");
                     if (tapped) {
-                        sb.append(" tapped");
+                        sb.append(" tapped").append(attacking ? " and" : "");
                     }
+                    sb.append(attacking ? " attacking" : "");
                     if (sa.hasParam("GainControl")) {
                         sb.append(" under ").append(chooserNames).append("'s control");
                     }
@@ -259,14 +260,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (destination.equals("Battlefield")) {
                 sb.append(" onto the battlefield");
                 if (tapped) {
-                    sb.append(" tapped");
-                    if (attacking) {
-                        sb.append(" and");
-                    }
+                    sb.append(" tapped").append(attacking ? " and" : "");
                 }
-                if (attacking) {
-                    sb.append(" attacking");
-                }
+                sb.append(attacking ? " attacking" : "");
                 if (sa.hasParam("GainControl")) {
                     sb.append(" under ").append(chooserNames).append("'s control");
                 }
@@ -366,14 +362,16 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final String fromGraveyard = " from the graveyard";
 
         if (destination.equals(ZoneType.Battlefield)) {
+            final boolean attacking = (sa.hasParam("Attacking"));
             if (ZoneType.Graveyard.equals(origin)) {
                 sb.append("Return").append(targetname).append(fromGraveyard).append(" to the battlefield");
             } else {
                 sb.append("Put").append(targetname).append(" onto the battlefield");
             }
             if (sa.hasParam("Tapped")) {
-                sb.append(" tapped");
+                sb.append(" tapped").append(attacking ? " and" : "");
             }
+            sb.append(attacking ? " attacking" : "");
             if (sa.hasParam("GainControl")) {
                 sb.append(" under your control");
             }
@@ -619,10 +617,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         gameCard.addEtbCounter(cType, cAmount, player);
                     }
                     if (sa.hasParam("GainControl")) {
-                        Player newController = player;
-                        if (sa.hasParam("NewController")) {
-                            newController = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("NewController"), sa), null);
-                        }
+                        final String g = sa.getParam("GainControl");
+                        Player newController = g.equals("True") ? sa.getActivatingPlayer() :
+                                AbilityUtils.getDefinedPlayers(sa.getHostCard(), g, sa).get(0);
                         if (newController != null) {
                             if (newController != gameCard.getController()) {
                                 gameCard.runChangeControllerCommands();
@@ -1279,10 +1276,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         source.removeRemembered(c);
                     }
                     if (sa.hasParam("GainControl")) {
-                        Player newController = sa.getActivatingPlayer();
-                        if (sa.hasParam("NewController")) {
-                            newController = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("NewController"), sa).get(0);
-                        }
+                        final String g = sa.getParam("GainControl");
+                        Player newController = g.equals("True") ? sa.getActivatingPlayer() :
+                                AbilityUtils.getDefinedPlayers(sa.getHostCard(), g, sa).get(0);
                         if (newController != c.getController()) {
                             c.runChangeControllerCommands();
                         }

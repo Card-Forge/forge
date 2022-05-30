@@ -39,6 +39,7 @@ public enum Keyword {
     CASUALTY("Casualty", KeywordWithAmount.class, false, "As you cast this spell, you may sacrifice a creature with power %1$d or greater. When you do, copy this spell."),
     CHAMPION("Champion", KeywordWithType.class, false, "When this enters the battlefield, sacrifice it unless you exile another %s you control. When this leaves the battlefield, that card returns to the battlefield."),
     CHANGELING("Changeling", SimpleKeyword.class, true, "This card is every creature type."),
+    CHOOSE_A_BACKGROUND("Choose a Background", Partner.class, true, "You can have a Background as a second commander."),
     CIPHER("Cipher", SimpleKeyword.class, true, "Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost."),
     COMPANION("Companion", Companion.class, true, "Reveal your companion from outside the game if your deck meets the companion restriction."),
     COMPLEATED("Compleated", SimpleKeyword.class, true, "{$0} can be paid with {$1}, {$2}, or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters."),

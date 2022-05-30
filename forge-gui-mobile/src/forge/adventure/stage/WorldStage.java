@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import forge.Forge;
 import forge.adventure.character.CharacterSprite;
@@ -22,6 +21,7 @@ import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
 import forge.adventure.world.World;
 import forge.adventure.world.WorldSave;
+import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
@@ -83,25 +83,22 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 if (player.collideWith(mob)) {
                     player.setAnimation(CharacterSprite.AnimationTypes.Attack);
                     mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
+                    SoundSystem.instance.play(SoundEffectType.Block, false);
                     Gdx.input.vibrate(50);
-                    Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
-                    SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
-                    Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
-                        @Override
-                        public void run() {
-                            Forge.clearTransitionScreen();
-                        }
-                    }, ScreenUtils.getFrameBufferTexture(), true, false));
-                    startPause(0.3f, new Runnable() {
-                        @Override
-                        public void run() {
-                            ((DuelScene) SceneType.DuelScene.instance).setEnemy(currentMob);
-                            ((DuelScene) SceneType.DuelScene.instance).setPlayer(player);
-                            Forge.switchScene(SceneType.DuelScene.instance);
-                        }
+                    startPause(0.8f, () -> {
+                        Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
+                        SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
+                        DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
+                        FThreads.invokeInEdtNowOrLater(() -> {
+                            Forge.setTransitionScreen(new TransitionScreen(() -> {
+                                duelScene.initDuels(player, mob);
+                                Forge.clearTransitionScreen();
+                                startPause(0.3f, () -> Forge.switchScene(SceneType.DuelScene.instance));
+                            }, Forge.takeScreenshot(), true, false));
+                            currentMob = mob;
+                            WorldSave.getCurrentSave().autoSave();
+                        });
                     });
-                    currentMob = mob;
-                    WorldSave.getCurrentSave().autoSave();
                     break;
                 }
             }
@@ -250,9 +247,9 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
         setBounds(WorldSave.getCurrentSave().getWorld().getWidthInPixels(), WorldSave.getCurrentSave().getWorld().getHeightInPixels());
         if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
-            MapStage.getInstance().showImageDialog("Chaos Mode!\n"+ WorldSave.getCurrentSave().getPlayer().getName()+ "'s Deck: "+
+            MapStage.getInstance().showDeckAwardDialog("Chaos Mode!\n"+ WorldSave.getCurrentSave().getPlayer().getName()+ "'s Deck: "+
                     WorldSave.getCurrentSave().getPlayer().getSelectedDeck().getName()+
-                    "\nEnemy will use Preconstructed, Theme or Random Generated Decks.", null);
+                    "\nEnemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
             WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
         }
     }

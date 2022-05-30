@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.LobbyPlayer;
@@ -26,6 +27,7 @@ public class RegisteredPlayer {
     private int startingLife = 20;
     private int startingHand = 7;
     private Iterable<IPaperCard> cardsOnBattlefield = null;
+    private Iterable<IPaperCard> extraCardsOnBattlefield = null;
     private Iterable<? extends IPaperCard> schemes = null;
     private Iterable<PaperCard> planes = null;
     private Iterable<PaperCard> conspiracies = null;
@@ -48,7 +50,8 @@ public class RegisteredPlayer {
         return startingLife;
     }
     public final Iterable<? extends IPaperCard> getCardsOnBattlefield() {
-        return cardsOnBattlefield == null ? EmptyList : cardsOnBattlefield;
+        return Iterables.concat(cardsOnBattlefield == null ? EmptyList : cardsOnBattlefield,
+                extraCardsOnBattlefield == null ? EmptyList : extraCardsOnBattlefield);
     }
 
     public final void setStartingLife(int startingLife) {
@@ -57,6 +60,10 @@ public class RegisteredPlayer {
 
     public final void setCardsOnBattlefield(Iterable<IPaperCard> cardsOnTable) {
         this.cardsOnBattlefield = cardsOnTable;
+    }
+
+    public final void addExtraCardsOnBattlefield(Iterable<IPaperCard> extraCardsonTable) {
+        this.extraCardsOnBattlefield = extraCardsonTable;
     }
 
     public int getStartingHand() {

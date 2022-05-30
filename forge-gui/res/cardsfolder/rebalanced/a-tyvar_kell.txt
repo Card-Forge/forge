@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Legendary Planeswalker Tyvar
 Loyalty:4
 S:Mode$ Continuous | Affected$ Elf.YouCtrl | AddAbility$ Mana | Description$ Elves you control have "{T}: Add {B}."
-SVar:Mana:AB$Mana | Cost$ T | Produced$ B | Amount$ 1 | SpellDescription$ Add {B}.
+SVar:Mana:AB$ Mana | Cost$ T | Produced$ B | Amount$ 1 | SpellDescription$ Add {B}.
 A:AB$ PutCounter | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Elf | TgtPrompt$ Select target Elf | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBUntap | SpellDescription$ Put two +1/+1 counters on up to one target Elf. Untap it. It gains deathtouch until end of turn.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | KW$ Deathtouch | Defined$ Targeted
@@ -13,5 +13,5 @@ SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Elf | ValidActivatingPlayer$ You
 SVar:EffSpellCast:DB$ Animate | Defined$ TriggeredCard | Keywords$ Haste | SubAbility$ EffDraw
 SVar:EffDraw:DB$ Draw | Defined$ You | NumCards$ 2
 DeckHints:Type$Elf
-DeckHas:Ability$Counters|Token
+DeckHas:Ability$Counters|Token & Type$Elf|Warrior
 Oracle:Elves you control have "{T}: Add {B}."\n[+1]: Put two +1/+1 counters on up to one target Elf. Untap it. It gains deathtouch until end of turn.\n[0]: Create a 1/1 green Elf Warrior creature token.\n[-7]: You get an emblem with "Whenever you cast an Elf spell, it gains haste until end of turn and you draw two cards."
