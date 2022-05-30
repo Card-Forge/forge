@@ -10,80 +10,79 @@ Description=Make allies early by giving gifts that grant life and knowledge! Wit
 Set=CMD
 Image=political_puppets.png
 [commander]
-1 Zedruu the Greathearted|COM
+1 Zedruu the Greathearted+|CMD
 [main]
-1 Crescendo of War|COM
-1 Flusterstorm|COM
-1 Death by Dragons|COM
-1 Champion's Helm|COM
-1 Chaos Warp|COM
-1 Nin, the Pain Artist|COM
-1 Ruhan of the Fomori|COM
-1 Martyr's Bond|COM
-1 Vow of Duty|COM
-1 Vow of Lightning|COM
-1 Command Tower|COM
-1 Spell Crumple|COM
-1 Soul Snare|COM
-1 Vow of Flight|COM
-1 Windborn Muse|COM
-1 Fellwar Stone|COM
-1 Wall of Denial|COM
-1 Ghostly Prison|COM
-1 Armillary Sphere|COM
-1 Jotun Grunt|COM
-1 Perilous Research|COM
-1 Breath of Darigaaz|COM
-1 Repulse|COM
-1 Azorius Chancery|COM
-1 Azorius Guildmage|COM
-1 Court Hussar|COM
-1 Skyscribing|COM
-1 Vision Skeins|COM
-1 Darksteel Ingot|COM
-1 Dominus of Fealty|COM
-1 Izzet Boilerworks|COM
-1 Izzet Chronarch|COM
-1 Vedalken Plotter|COM
-1 Spurnmage Advocate|COM
-1 Chromeshell Crab|COM
-1 Arbiter of Knollridge|COM
-1 Austere Command|COM
-1 Brion Stoutarm|COM
-1 Lash Out|COM
-1 Pollen Lullaby|COM
-1 Scattering Stroke|COM
-1 Whirlpool Whelm|COM
-1 Wild Ricochet|COM
-1 Howling Mine|COM
-1 Terramorphic Expanse|COM
-1 Brainstorm|COM
-1 Lightning Greaves|COM
-1 Insurrection|COM
-1 Oblation|COM
-1 Trade Secrets|COM
-1 Numot, the Devastator|COM
-1 Flametongue Kavu|COM
-1 Boros Garrison|COM
-1 Dreamstone Hedron|COM
-1 Evolving Wilds|COM
-1 Guard Gomazoa|COM
-1 Prophetic Prism|COM
-1 Rapacious One|COM
-1 Wall of Omens|COM
-1 Plumeveil|COM
-1 Prison Term|COM
-1 Murmurs from Beyond|COM
-1 Reins of Power|COM
-1 Propaganda|COM
-1 False Prophet|COM
-1 Fog Bank|COM
-1 Goblin Cadets|COM
-1 Sol Ring|COM
-1 Gomazoa|COM
-1 Journey to Nowhere|COM
-1 Punishing Fire|COM
-12 Island|COM
-8 Mountain|COM
-8 Plains|COM
-[sideboard]
+1 Crescendo of War|CMD
+1 Flusterstorm|CMD
+1 Death by Dragons|CMD
+1 Champion's Helm|CMD
+1 Chaos Warp|CMD
+1 Nin, the Pain Artist|CMD
+1 Ruhan of the Fomori|CMD
+1 Martyr's Bond|CMD
+1 Vow of Duty|CMD
+1 Vow of Lightning|CMD
+1 Command Tower|CMD
+1 Spell Crumple|CMD
+1 Soul Snare|CMD
+1 Vow of Flight|CMD
+1 Windborn Muse|CMD
+1 Fellwar Stone|CMD
+1 Wall of Denial|CMD
+1 Ghostly Prison|CMD
+1 Armillary Sphere|CMD
+1 Jotun Grunt|CMD
+1 Perilous Research|CMD
+1 Breath of Darigaaz|CMD
+1 Repulse|CMD
+1 Azorius Chancery|CMD
+1 Azorius Guildmage|CMD
+1 Court Hussar|CMD
+1 Skyscribing|CMD
+1 Vision Skeins|CMD
+1 Darksteel Ingot|CMD
+1 Dominus of Fealty|CMD
+1 Izzet Boilerworks|CMD
+1 Izzet Chronarch|CMD
+1 Vedalken Plotter|CMD
+1 Spurnmage Advocate|CMD
+1 Chromeshell Crab|CMD
+1 Arbiter of Knollridge|CMD
+1 Austere Command|CMD
+1 Brion Stoutarm|CMD
+1 Lash Out|CMD
+1 Pollen Lullaby|CMD
+1 Scattering Stroke|CMD
+1 Whirlpool Whelm|CMD
+1 Wild Ricochet|CMD
+1 Howling Mine|CMD
+1 Terramorphic Expanse|CMD
+1 Brainstorm|CMD
+1 Lightning Greaves|CMD
+1 Insurrection|CMD
+1 Oblation|CMD
+1 Trade Secrets|CMD
+1 Numot, the Devastator|CMD
+1 Flametongue Kavu|CMD
+1 Boros Garrison|CMD
+1 Dreamstone Hedron|CMD
+1 Evolving Wilds|CMD
+1 Guard Gomazoa|CMD
+1 Prophetic Prism|CMD
+1 Rapacious One|CMD
+1 Wall of Omens|CMD
+1 Plumeveil|CMD
+1 Prison Term|CMD
+1 Murmurs from Beyond|CMD
+1 Reins of Power|CMD
+1 Propaganda|CMD
+1 False Prophet|CMD
+1 Fog Bank|CMD
+1 Goblin Cadets|CMD
+1 Sol Ring|CMD
+1 Gomazoa|CMD
+1 Journey to Nowhere|CMD
+1 Punishing Fire|CMD
+12 Island|CMD
+8 Mountain|CMD
+8 Plains|CMD
