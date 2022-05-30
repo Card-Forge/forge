@@ -10,7 +10,7 @@ Description=Derevi, Empyrial Tactician wants dominion over every aspect of the b
 Set=C13
 Image=evasive_maneuvers.png
 [commander]
-1 Derevi, Empyrial Tactician|C13
+1 Derevi, Empyrial Tactician+|C13
 [main]
 1 Acidic Slime|C13
 1 Aerie Mystics|C13
@@ -94,4 +94,3 @@ Image=evasive_maneuvers.png
 1 Wash Out|C13
 1 Winged Coatl|C13
 1 Wonder|C13
-[sideboard]
