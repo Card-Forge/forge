@@ -10,7 +10,7 @@ Description=Overpower opponents with brand-new mechanic from Ikoria: Lair of Beh
 Set=C20
 Image=ruthless_regiment.png
 [commander]
-1 Jirina Kudro|C20
+1 Jirina Kudro+|C20
 [main]
 1 Ambition's Cost|C20
 1 Battlefield Forge|C20
@@ -98,4 +98,3 @@ Image=ruthless_regiment.png
 1 Martial Impetus|C20
 1 Molten Echoes|C20
 1 Sanctuary Blade|C20
-[sideboard]
