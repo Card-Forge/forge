@@ -10,7 +10,7 @@ Description=Wield Chishiro's blade and cut down all who would stand before you. 
 Set=NEC
 Image=upgrades_unleashed.png
 [commander]
-1 Chishiro, the Shattered Blade|NEC
+1 Chishiro, the Shattered Blade+|NEC
 [main]
 1 Ox of Agonas|NEC
 1 Agitator Ant|NEC
