@@ -6,85 +6,84 @@ Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
 [metadata]
-Description=When The Mimeoplasm becomes your commander, death becomes your friend. Opponents will watch in helpless terror as you devour creatures from one graveyard to help you pound creatures into another. It’s a fiendish carnival of cadavers, and you’ll be the ringmaster!
+Description=When The Mimeoplasm becomes your commander, death becomes your friend. Opponents will watch in helpless terror as you devour creatures from one graveyard to help you pound creatures into another. It's a fiendish carnival of cadavers, and you'll be the ringmaster!
 Set=CMD
 Image=devour_for_power.png
 [commander]
-1 The Mimeoplasm|COM
+1 The Mimeoplasm+|CMD
 [main]
-1 Shared Trauma|COM
-1 Syphon Flesh|COM
-1 Damia, Sage of Stone|COM
-1 Sewer Nemesis|COM
-1 Skullbriar, the Walking Grave|COM
-1 Scythe Specter|COM
-1 Tribute to the Wild|COM
-1 Command Tower|COM
-1 Spell Crumple|COM
-1 Vow of Wildness|COM
-1 Riddlekeeper|COM
-1 Vow of Flight|COM
-1 Vow of Malice|COM
-1 Minds Aglow|COM
-1 Dreamborn Muse|COM
-1 Grave Pact|COM
-1 Mortivore|COM
-1 Troll Ascetic|COM
-1 Eternal Witness|COM
-1 Lhurgoyf|COM
-1 Fleshbag Marauder|COM
-1 Memory Erosion|COM
-1 Patron of the Nezumi|COM
-1 Nezumi Graverobber|COM
-1 Extractor Demon|COM
-1 Rupture Spire|COM
-1 Fact or Fiction|COM
-1 Simic Growth Chamber|COM
-1 Simic Signet|COM
-1 Desecrator Hag|COM
-1 Brawn|COM
-1 Stitch Together|COM
-1 Wonder|COM
-1 Mulldrifter|COM
-1 Acidic Slime|COM
-1 Cultivate|COM
-1 Gravedigger|COM
-1 Rise from the Grave|COM
-1 Sign in Blood|COM
-1 Terramorphic Expanse|COM
-1 Lightning Greaves|COM
-1 Oblivion Stone|COM
-1 Solemn Simulacrum|COM
-1 Buried Alive|COM
-1 Barren Moor|COM
-1 Lonely Sandbar|COM
-1 Slipstream Eel|COM
-1 Syphon Mind|COM
-1 Tranquil Thicket|COM
-1 Vorosh, the Hunter|COM
-1 Dimir Aqueduct|COM
-1 Dimir Signet|COM
-1 Golgari Rot Farm|COM
-1 Golgari Signet|COM
-1 Svogthos, the Restless Tomb|COM
-1 Szadek, Lord of Secrets|COM
-1 Vulturous Zombie|COM
-1 Artisan of Kozilek|COM
-1 Temple of the False God|COM
-1 Living Death|COM
-1 Dreadship Reef|COM
-1 Triskelavus|COM
-1 Avatar of Woe|COM
-1 Yavimaya Elder|COM
-1 Dark Hatchling|COM
-1 Unnerve|COM
-1 Windfall|COM
-1 Sol Ring|COM
-1 Butcher of Malakir|COM
-1 Wrexial, the Risen Deep|COM
-1 Jwar Isle Refuge|COM
-1 Relic Crush|COM
-8 Forest|COM
-8 Island|COM
-11 Swamp|COM
-[sideboard]
+1 Shared Trauma|CMD
+1 Syphon Flesh|CMD
+1 Damia, Sage of Stone|CMD
+1 Sewer Nemesis|CMD
+1 Skullbriar, the Walking Grave|CMD
+1 Scythe Specter|CMD
+1 Tribute to the Wild|CMD
+1 Command Tower|CMD
+1 Spell Crumple|CMD
+1 Vow of Wildness|CMD
+1 Riddlekeeper|CMD
+1 Vow of Flight|CMD
+1 Vow of Malice|CMD
+1 Minds Aglow|CMD
+1 Dreamborn Muse|CMD
+1 Grave Pact|CMD
+1 Mortivore|CMD
+1 Troll Ascetic|CMD
+1 Eternal Witness|CMD
+1 Lhurgoyf|CMD
+1 Fleshbag Marauder|CMD
+1 Memory Erosion|CMD
+1 Patron of the Nezumi|CMD
+1 Nezumi Graverobber|CMD
+1 Extractor Demon|CMD
+1 Rupture Spire|CMD
+1 Fact or Fiction|CMD
+1 Simic Growth Chamber|CMD
+1 Simic Signet|CMD
+1 Desecrator Hag|CMD
+1 Brawn|CMD
+1 Stitch Together|CMD
+1 Wonder|CMD
+1 Mulldrifter|CMD
+1 Acidic Slime|CMD
+1 Cultivate|CMD
+1 Gravedigger|CMD
+1 Rise from the Grave|CMD
+1 Sign in Blood|CMD
+1 Terramorphic Expanse|CMD
+1 Lightning Greaves|CMD
+1 Oblivion Stone|CMD
+1 Solemn Simulacrum|CMD
+1 Buried Alive|CMD
+1 Barren Moor|CMD
+1 Lonely Sandbar|CMD
+1 Slipstream Eel|CMD
+1 Syphon Mind|CMD
+1 Tranquil Thicket|CMD
+1 Vorosh, the Hunter|CMD
+1 Dimir Aqueduct|CMD
+1 Dimir Signet|CMD
+1 Golgari Rot Farm|CMD
+1 Golgari Signet|CMD
+1 Svogthos, the Restless Tomb|CMD
+1 Szadek, Lord of Secrets|CMD
+1 Vulturous Zombie|CMD
+1 Artisan of Kozilek|CMD
+1 Temple of the False God|CMD
+1 Living Death|CMD
+1 Dreadship Reef|CMD
+1 Triskelavus|CMD
+1 Avatar of Woe|CMD
+1 Yavimaya Elder|CMD
+1 Dark Hatchling|CMD
+1 Unnerve|CMD
+1 Windfall|CMD
+1 Sol Ring|CMD
+1 Butcher of Malakir|CMD
+1 Wrexial, the Risen Deep|CMD
+1 Jwar Isle Refuge|CMD
+1 Relic Crush|CMD
+8 Forest|CMD
+8 Island|CMD
+11 Swamp|CMD
