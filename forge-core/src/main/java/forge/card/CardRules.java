@@ -215,8 +215,7 @@ public final class CardRules implements ICardCharacteristics {
     }
 
     public boolean canBeCommander() {
-        if (mainPart.getOracleText().contains("can be your commander")
-                || mainPart.getType().hasSubtype("Background")) {
+        if (mainPart.getOracleText().contains("can be your commander") || canBeBackground()) {
             return true;
         }
         CardType type = mainPart.getType();
