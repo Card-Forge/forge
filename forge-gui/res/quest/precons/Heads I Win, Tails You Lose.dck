@@ -10,8 +10,8 @@ Description=“You’ll want to spend the early turns building up your mana ro
 Set=SLD
 Image=heads_i_win_tails_you_lose.png
 [commander]
-1 Okaun, Eye of Chaos|SLD
-1 Zndrsplt, Eye of Wisdom|SLD
+1 Okaun, Eye of Chaos+|SLD
+1 Zndrsplt, Eye of Wisdom+|SLD
 [main]
 1 Academy Ruins|SLD
 1 Arcane Signet|SLD
@@ -98,4 +98,3 @@ Image=heads_i_win_tails_you_lose.png
 1 Whir of Invention|SLD
 1 Whispersilk Cloak|SLD
 1 Yusri, Fortune's Flame|SLD
-[sideboard]
