@@ -2218,8 +2218,8 @@ public class GameAction {
                 takeInitiative(game.getNextPlayerAfter(p), set);
             }
 
-        game.setHasInitiative(p);
-        p.createInitiativeEffect(set);
+            game.setHasInitiative(p);
+            p.createInitiativeEffect(set);
         }
 
         // You can take the initiative even if you already have it
