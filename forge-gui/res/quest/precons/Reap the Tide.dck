@@ -10,7 +10,7 @@ Description=Unleash Aesi's wrath with a flood of abilities that activate with ea
 Set=CMR
 Image=reap_the_tide.png
 [commander]
-1 Aesi, Tyrant of Gyre Strait|CMR
+1 Aesi, Tyrant of Gyre Strait+|CMR
 [main]
 1 Acidic Slime|CMR
 1 Arcane Denial|CMR
@@ -83,4 +83,3 @@ Image=reap_the_tide.png
 1 Wickerbough Elder|CMR
 1 Woodland Stream|CMR
 1 Yavimaya Elder|CMR
-[sideboard]
