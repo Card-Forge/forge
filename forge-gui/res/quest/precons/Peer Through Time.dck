@@ -10,7 +10,7 @@ Description=Teferi, Temporal Archmage manipluates the flow of time itself. This 
 Set=C14
 Image=peer_through_time.png
 [commander]
-1 Teferi, Temporal Archmage|C14
+1 Teferi, Temporal Archmage+|C14
 [main]
 1 AEther Gale|C14
 1 Artisan of Kozilek|C14
@@ -84,4 +84,3 @@ Image=peer_through_time.png
 1 Willbender|C14
 1 Worn Powerstone|C14
 1 Zoetic Cavern|C14
-[sideboard]
