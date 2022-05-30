@@ -10,7 +10,7 @@ Description=Nothing is as it seems for your opponents. Fill the board with face-
 Set=C19
 Image=faceless_menace.png
 [commander]
-1 Kadena, Slinking Sorcerer|C19
+1 Kadena, Slinking Sorcerer+|C19
 [main]
 1 Ainok Survivalist|C19
 1 Apex Altisaur|C19
@@ -99,4 +99,3 @@ Image=faceless_menace.png
 1 Willbender|C19
 1 Woodland Stream|C19
 1 Yavimaya Coast|C19
-[sideboard]
