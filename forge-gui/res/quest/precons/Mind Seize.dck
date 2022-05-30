@@ -10,7 +10,7 @@ Description=Jeleva, Nephalia's Scourge sends her enemies flying in terror while 
 Set=C13
 Image=mind_seize.png
 [commander]
-1 Jeleva, Nephalia's Scourge|C13
+1 Jeleva, Nephalia's Scourge+|C13
 [main]
 1 Akoum Refuge|C13
 1 Annihilate|C13
@@ -101,4 +101,3 @@ Image=mind_seize.png
 1 Vivid Marsh|C13
 1 Wayfarer's Bauble|C13
 1 Wild Ricochet|C13
-[sideboard]
