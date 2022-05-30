@@ -295,6 +295,7 @@ Lesson
 Trap
 [EnchantmentTypes]
 Aura
+Background
 Cartouche
 Class
 Curse
