@@ -6,11 +6,11 @@ Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
 [metadata]
-Description=Overpower opponents with brand-new mechanic from Ikoria: Lair of Behemoths—mutate!
+Description=Overpower opponents with a brand-new mechanic from Ikoria: Lair of Behemoths—mutate!
 Set=C20
 Image=enhanced_evolution.png
 [commander]
-1 Otrimi, the Ever-Playful|C20
+1 Otrimi, the Ever-Playful+|C20
 [main]
 1 Animist's Awakening|C20
 1 Arcane Signet|C20
@@ -96,4 +96,3 @@ Image=enhanced_evolution.png
 1 Wydwen, the Biting Gale|C20
 1 Yavimaya Dryad|C20
 1 Zaxara, the Exemplary|C20
-[sideboard]
