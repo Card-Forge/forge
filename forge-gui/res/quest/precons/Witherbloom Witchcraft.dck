@@ -10,7 +10,7 @@ Description=No one knows how old Willowdusk really is. She claims to have been a
 Set=C21
 Image=witherbloom_witchcraft.png
 [commander]
-1 Willowdusk, Essence Seer|C21
+1 Willowdusk, Essence Seer+|C21
 [main]
 1 Ageless Entity|C21
 1 Alhammarret's Archive|C21
@@ -91,4 +91,3 @@ Image=witherbloom_witchcraft.png
 1 Witch's Clinic|C21
 1 Witherbloom Campus|C21
 1 Yedora, Grave Gardener|C21
-[sideboard]
