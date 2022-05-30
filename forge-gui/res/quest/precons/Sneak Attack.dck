@@ -10,7 +10,7 @@ Description=Formerly a renowned mage and scholar, Anowons reputation and fortune
 Set=ZNC
 Image=sneak_attack.png
 [commander]
-1 Anowon, the Ruin Thief|ZNC
+1 Anowon, the Ruin Thief+|ZNC
 [main]
 1 Aetherize|ZNC
 1 Arcane Signet|ZNC
@@ -83,4 +83,3 @@ Image=sneak_attack.png
 1 Whirler Rogue|ZNC
 1 Whispersteel Dagger|ZNC
 1 Zulaport Cutthroat|ZNC
-[sideboard]
