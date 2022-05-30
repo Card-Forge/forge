@@ -10,7 +10,7 @@ Description=In life, Wilhelt was the most eligible bachelor on Innistrad. In dea
 Set=MIC
 Image=undead_unleashed.png
 [commander]
-1 Wilhelt, the Rotcleaver|MIC
+1 Wilhelt, the Rotcleaver+|MIC
 [main]
 1 Aetherspouts|MIC
 1 Arcane Signet|MIC
@@ -86,4 +86,3 @@ Image=undead_unleashed.png
 1 Undead Alchemist|MIC
 1 Undead Augur|MIC
 1 Zombie Apocalypse|MIC
-[sideboard]
