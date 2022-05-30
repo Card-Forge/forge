@@ -10,7 +10,7 @@ Description=Wyleth may start small, but the Auras and Equipment in this deck can
 Set=CMR
 Image=arm_for_battle.png
 [commander]
-1 Wyleth, Soul of Steel|CMR
+1 Wyleth, Soul of Steel+|CMR
 [main]
 1 Abrade|CMR
 1 Blackblade Reforged|CMR
@@ -90,4 +90,3 @@ Image=arm_for_battle.png
 1 Wind-Scarred Crag|CMR
 1 Winds of Rath|CMR
 1 Word of Seizing|CMR
-[sideboard]
