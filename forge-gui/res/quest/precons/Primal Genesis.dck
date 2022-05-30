@@ -10,7 +10,7 @@ Description=Overrun the table with an army of massive token creatures. You may r
 Set=C19
 Image=primal_genesis.png
 [commander]
-1 Ghired, Conclave Exile|C19
+1 Ghired, Conclave Exile+|C19
 [main]
 1 Beast Within|C19
 1 Boros Garrison|C19
@@ -95,4 +95,3 @@ Image=primal_genesis.png
 1 Tahngarth, First Mate|C19
 1 Tectonic Hellion|C19
 1 Voice of Many|C19
-[sideboard]
