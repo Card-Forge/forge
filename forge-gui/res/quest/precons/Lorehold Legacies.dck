@@ -10,7 +10,7 @@ Description=Even by Lorehold standards, Osgir is obsessed with relics of the pas
 Set=C21
 Image=lorehold_legacies.png
 [commander]
-1 Osgir, the Reconstructor|C21
+1 Osgir, the Reconstructor+|C21
 [main]
 1 Alibou, Ancient Witness|C21
 1 Ancient Den|C21
@@ -93,4 +93,3 @@ Image=lorehold_legacies.png
 1 Triplicate Titan|C21
 1 Unstable Obelisk|C21
 1 Wake the Past|C21
-[sideboard]
