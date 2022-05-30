@@ -10,7 +10,7 @@ Description=Leverage your creatures’ many abilities—even if those creatures 
 Set=C20
 Image=symbiotic_swarm.png
 [commander]
-1 Kathril, Aspect Warper|C20
+1 Kathril, Aspect Warper+|C20
 [main]
 1 Abzan Ascendancy|C20
 1 Abzan Charm|C20
@@ -96,4 +96,3 @@ Image=symbiotic_swarm.png
 1 Void Beckoner|C20
 1 Yannik, Scavenging Sentinel|C20
 1 Zetalpa, Primal Dawn|C20
-[sideboard]
