@@ -10,7 +10,7 @@ Description=Nahiri, the Lithomancer knows that victory comes from having the rig
 Set=C14
 Image=forged_from_stone.png
 [commander]
-1 Nahiri, the Lithomancer|C14
+1 Nahiri, the Lithomancer+|C14
 [main]
 1 Adarkar Valkyrie|C14
 1 Afterlife|C14
@@ -83,4 +83,3 @@ Image=forged_from_stone.png
 1 White Sun's Zenith|C14
 1 Whitemane Lion|C14
 1 Wing Shards|C14
-[sideboard]
