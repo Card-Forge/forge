@@ -10,7 +10,7 @@ Description=Amid the mana-rich waters of the Pinzari Isles, the twins Adrix and 
 Set=C21
 Image=quantum_quandrix.png
 [commander]
-1 Adrix and Nev, Twincasters|C21
+1 Adrix and Nev, Twincasters+|C21
 [main]
 1 Lonely Sandbar|C21
 1 Mosswort Bridge|C21
@@ -92,4 +92,3 @@ Image=quantum_quandrix.png
 1 Trygon Predator|C21
 1 Yavimaya Coast|C21
 1 Zimone, Quandrix Prodigy|C21
-[sideboard]
