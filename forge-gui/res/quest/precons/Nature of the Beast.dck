@@ -10,7 +10,7 @@ Description=Marath, Will of the Wild is the master of aggressive beasts. This co
 Set=C13
 Image=nature_of_the_beast.png
 [commander]
-1 Marath, Will of the Wild|C13
+1 Marath, Will of the Wild+|C13
 [main]
 1 Archangel|C13
 1 Avenger of Zendikar|C13
@@ -105,4 +105,3 @@ Image=nature_of_the_beast.png
 1 Where Ancients Tread|C13
 1 Witch Hunt|C13
 1 Wrath of God|C13
-[sideboard]
