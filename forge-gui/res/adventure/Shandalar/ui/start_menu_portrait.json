@@ -56,6 +56,15 @@
     },
     {
       "type": "TextButton",
+      "name": "Continue",
+      "text": "Continue",
+      "width": 238,
+      "height": 48,
+      "x": 16,
+      "yOffset": 8
+    },
+    {
+      "type": "TextButton",
       "name": "Settings",
       "text": "Settings",
       "width": 238,
