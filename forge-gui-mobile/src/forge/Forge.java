@@ -99,6 +99,7 @@ public class Forge implements ApplicationListener {
     public static boolean altZoneTabs = false;
     public static boolean animatedCardTapUntap = false;
     public static String enableUIMask = "Crop";
+    public static String selector = "Default";
     public static boolean enablePreloadExtendedArt = false;
     public static boolean isTabletDevice = false;
     public static String locale = "en-US";
@@ -194,6 +195,7 @@ public class Forge implements ApplicationListener {
         altPlayerLayout = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
         altZoneTabs = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
         animatedCardTapUntap = prefs.getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
+        selector = prefs.getPref(FPref.UI_SELECTOR_MODE);
         enableUIMask = prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING);
         if (prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
             enableUIMask = "Full";
@@ -395,7 +397,14 @@ public class Forge implements ApplicationListener {
                                         setTransitionScreen(new TransitionScreen(new Runnable() {
                                             @Override
                                             public void run() {
-                                                splashScreen.setShowModeSelector(true);
+                                                if (selector.equals("Classic")) {
+                                                    openHomeDefault();
+                                                    clearSplashScreen();
+                                                } else if (selector.equals("Adventure")) {
+                                                    openAdventure();
+                                                    clearSplashScreen();
+                                                } else
+                                                    splashScreen.setShowModeSelector(true);
                                                 //start background music
                                                 SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
                                                 safeToClose = true;
