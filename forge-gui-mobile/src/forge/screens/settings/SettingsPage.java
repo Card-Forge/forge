@@ -179,6 +179,16 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 }
             }, 0);
         }
+        lstSettings.addItem(new CustomSelectSetting(FPref.UI_SELECTOR_MODE,
+                Forge.getLocalizer().getMessage("lblSelectorMode"),
+                Forge.getLocalizer().getMessage("nlSelectorMode"),
+                new String[]{"Default", "Classic", "Adventure"}) {
+            @Override
+            public void valueChanged(String newValue) {
+                super.valueChanged(newValue);
+                Forge.selector = FModel.getPreferences().getPref(FPref.UI_SELECTOR_MODE);
+            }
+        }, 0);
         lstSettings.addItem(new BooleanSetting(FPref.USE_SENTRY,
                 Forge.getLocalizer().getMessage("lblAutomaticBugReports"),
                 Forge.getLocalizer().getMessage("nlAutomaticBugReports")),
