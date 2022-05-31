@@ -75,7 +75,7 @@ public class ConniveEffect extends SpellAbilityEffect {
                 moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
 
                 Card conniver = connivers.size() > 1 ? p.getController().chooseSingleEntityForEffect(connivers, sa,
-                        Localizer.getInstance().getMessage("lblChooseConniver"), null) : toConnive.get(0);
+                        Localizer.getInstance().getMessage("lblChooseConniver"), null) : connivers.get(0);
 
                 p.drawCards(num, sa, moveParams);
 
