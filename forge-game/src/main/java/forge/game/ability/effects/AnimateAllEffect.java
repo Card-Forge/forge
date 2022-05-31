@@ -122,9 +122,9 @@ public class AnimateAllEffect extends AnimateEffectBase {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
         }
 
-        Map<String, String> SvarsMap = Maps.newHashMap();
+        Map<String, String> sVarsMap = Maps.newHashMap();
         for (final String s : sVars) {
-            SvarsMap.put(s, AbilityUtils.getSVar(sa, s));
+            sVarsMap.put(s, AbilityUtils.getSVar(sa, s));
         }
 
         final String valid = sa.getParamOrDefault("ValidCards", "");
@@ -146,7 +146,9 @@ public class AnimateAllEffect extends AnimateEffectBase {
                     timestamp);
 
             // give sVars
-            c.addChangedSVars(SvarsMap, timestamp, 0);
+            if (!sVarsMap.isEmpty() ) {
+                c.addChangedSVars(sVarsMap, timestamp, 0);
+            }
 
             game.fireEvent(new GameEventCardStatsChanged(c));
 
