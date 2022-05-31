@@ -34,73 +34,77 @@ public class DigEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
-        final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
-        final String toChange = sa.getParamOrDefault("ChangeNum", "1");
-        final int numToChange = toChange.startsWith("All") ? numToDig : AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-
-        String verb = " looks at ";
-        if (sa.hasParam("Reveal") && sa.getParam("Reveal").equals("True")) {
-            verb = " reveals ";
-        } else if (sa.hasParam("DestinationZone") && sa.getParam("DestinationZone").equals("Exile") &&
-                numToDig == numToChange) {
-            verb = " exiles ";
-        }
-        sb.append(host.getController()).append(verb).append("the top ");
-        sb.append(numToDig == 1 ? "card" : Lang.getNumeral(numToDig) + " cards").append(" of ");
-
-        if (tgtPlayers.contains(host.getController())) {
-            sb.append("their ");
+        final String spellDesc = sa.getParamOrDefault("SpellDescription", "");
+        if (spellDesc.contains("X card")) { // X value can be changed after this goes to the stack, so use set desc
+            sb.append("[").append(host.getController()).append("] ").append(spellDesc);
         } else {
-            for (final Player p : tgtPlayers) {
-                sb.append(Lang.getInstance().getPossesive(p.getName())).append(" ");
-            }
-        }
-        sb.append("library.");
+            final int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
+            final String toChange = sa.getParamOrDefault("ChangeNum", "1");
+            final int numToChange = toChange.startsWith("All") ? numToDig : AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
 
-        if (numToDig != numToChange) {
-            String destZone1 = sa.hasParam("DestinationZone") ?
-                    sa.getParam("DestinationZone").toLowerCase() : "hand";
-            String destZone2 = sa.hasParam("DestinationZone2") ?
-                    sa.getParam("DestinationZone2").toLowerCase() : "on the bottom of their library in any order.";
-            if (sa.hasParam("RestRandomOrder")) {
-                destZone2 = destZone2.replace("any", "a random");
+            String verb = " looks at ";
+            if (sa.hasParam("Reveal") && sa.getParam("Reveal").equals("True")) {
+                verb = " reveals ";
+            } else if (sa.hasParam("DestinationZone") && sa.getParam("DestinationZone").equals("Exile") &&
+                    numToDig == numToChange) {
+                verb = " exiles ";
             }
+            sb.append(host.getController()).append(verb).append("the top ");
+            sb.append(numToDig == 1 ? "card" : Lang.getNumeral(numToDig) + " cards").append(" of ");
 
-            String verb2 = "put ";
-            String where = " into their hand ";
-            if (destZone1.equals("exile")) {
-                verb2 = "exile ";
-                where = " ";
-            } else if (destZone1.equals("battlefield")) {
-                verb2 = "put ";
-                where = " onto the battlefield ";
-            }
-
-            sb.append(" They ").append(sa.hasParam("Optional") ? "may " : "").append(verb2);
-            if (sa.hasParam("ChangeValid")) {
-                String what = sa.hasParam("ChangeValidDesc") ? sa.getParam("ChangeValidDesc") :
-                        sa.getParam("ChangeValid");
-                if (!StringUtils.containsIgnoreCase(what, "card")) {
-                    what = what + " card";
+            if (tgtPlayers.contains(host.getController())) {
+                sb.append("their ");
+            } else {
+                for (final Player p : tgtPlayers) {
+                    sb.append(Lang.getInstance().getPossesive(p.getName())).append(" ");
                 }
-                sb.append(Lang.nounWithNumeralExceptOne(numToChange, what)).append(" from among them").append(where);
-            } else {
-                sb.append(Lang.getNumeral(numToChange)).append(" of them").append(where);
             }
-            sb.append(sa.hasParam("ExileFaceDown") ? "face down " : "");
-            if (sa.hasParam("WithCounter") || sa.hasParam("ExileWithCounter")) {
-                String ctr = sa.hasParam("WithCounter") ? sa.getParam("WithCounter") :
-                        sa.getParam("ExileWithCounter");
-                sb.append("with a ");
-                sb.append(CounterType.getType(ctr).getName().toLowerCase());
-                sb.append(" counter on it. They ");
-            } else {
-                sb.append("and ");
-            }
-            sb.append("put the rest ").append(destZone2);
-        }
+            sb.append("library.");
 
+            if (numToDig != numToChange) {
+                String destZone1 = sa.hasParam("DestinationZone") ?
+                        sa.getParam("DestinationZone").toLowerCase() : "hand";
+                String destZone2 = sa.hasParam("DestinationZone2") ?
+                        sa.getParam("DestinationZone2").toLowerCase() : "on the bottom of their library in any order.";
+                if (sa.hasParam("RestRandomOrder")) {
+                    destZone2 = destZone2.replace("any", "a random");
+                }
+
+                String verb2 = "put ";
+                String where = " into their hand ";
+                if (destZone1.equals("exile")) {
+                    verb2 = "exile ";
+                    where = " ";
+                } else if (destZone1.equals("battlefield")) {
+                    verb2 = "put ";
+                    where = " onto the battlefield ";
+                }
+
+                sb.append(" They ").append(sa.hasParam("Optional") ? "may " : "").append(verb2);
+                if (sa.hasParam("ChangeValid")) {
+                    String what = sa.hasParam("ChangeValidDesc") ? sa.getParam("ChangeValidDesc") :
+                            sa.getParam("ChangeValid");
+                    if (!StringUtils.containsIgnoreCase(what, "card")) {
+                        what = what + " card";
+                    }
+                    sb.append(Lang.nounWithNumeralExceptOne(numToChange, what)).append(" from among them").append(where);
+                } else {
+                    sb.append(Lang.getNumeral(numToChange)).append(" of them").append(where);
+                }
+                sb.append(sa.hasParam("ExileFaceDown") ? "face down " : "");
+                if (sa.hasParam("WithCounter") || sa.hasParam("ExileWithCounter")) {
+                    String ctr = sa.hasParam("WithCounter") ? sa.getParam("WithCounter") :
+                            sa.getParam("ExileWithCounter");
+                    sb.append("with a ");
+                    sb.append(CounterType.getType(ctr).getName().toLowerCase());
+                    sb.append(" counter on it. They ");
+                } else {
+                    sb.append("and ");
+                }
+                sb.append("put the rest ").append(destZone2);
+            }
+        }
         return sb.toString();
     }
 
