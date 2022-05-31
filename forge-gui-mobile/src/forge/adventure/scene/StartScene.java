@@ -3,8 +3,6 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.MapStage;
@@ -16,8 +14,6 @@ import forge.screens.TransitionScreen;
  * First scene after the splash screen
  */
 public class StartScene extends UIScene {
-
-    final Logger log = LoggerFactory.getLogger(StartScene.class);
 
     TextButton saveButton, resumeButton, continueButton, newGameButton, newGameButtonPlus, loadButton, settingsButton, exitButton, switchButton;
 
