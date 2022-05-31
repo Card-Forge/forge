@@ -2071,6 +2071,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         return Iterables.any(getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null), CardPredicates.Presets.LANDS);
     }
 
+    public boolean hasFerocious() {
+        return !CardLists.filterPower(getCreaturesInPlay(), 4).isEmpty();
+    }
+
+    public final boolean hasSurge() {
+        return !CardLists.filterControlledBy(game.getStack().getSpellsCastThisTurn(), getYourTeam()).isEmpty();
+    }
+
     public final boolean hasBloodthirst() {
         for (Player p : game.getRegisteredPlayers()) {
             if (p.isOpponentOf(this) && p.getAssignedDamage() > 0) {
@@ -2080,16 +2088,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         return false;
     }
 
-    public boolean hasFerocious() {
-        return !CardLists.filterPower(getCreaturesInPlay(), 4).isEmpty();
-    }
-
     public final int getBloodthirstAmount() {
         return Aggregates.sum(getRegisteredOpponents(), Accessors.FN_GET_ASSIGNED_DAMAGE);
-    }
-
-    public final boolean hasSurge() {
-        return !CardLists.filterControlledBy(game.getStack().getSpellsCastThisTurn(), getYourTeam()).isEmpty();
     }
 
     public final int getOpponentLostLifeThisTurn() {
