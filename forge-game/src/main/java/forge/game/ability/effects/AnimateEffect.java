@@ -179,7 +179,9 @@ public class AnimateEffect extends AnimateEffectBase {
             }
 
             // give sVars
-            c.addChangedSVars(sVarsMap, timestamp, 0);
+            if (!sVarsMap.isEmpty()) {
+                c.addChangedSVars(sVarsMap, timestamp, 0);
+            }
 
             // give Remembered
             if (animateRemembered != null) {
