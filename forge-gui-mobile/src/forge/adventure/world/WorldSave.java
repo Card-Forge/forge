@@ -166,6 +166,9 @@ public class WorldSave   {
             e.printStackTrace();
             return false;
         }
+
+        Config.instance().getSettingData().lastActiveSave = WorldSave.filename(currentSlot);
+        Config.instance().saveSettings();
         return true;
     }
 

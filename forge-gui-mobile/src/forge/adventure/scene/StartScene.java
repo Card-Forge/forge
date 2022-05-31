@@ -6,13 +6,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.MapStage;
+import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
+import forge.screens.TransitionScreen;
 
 /**
  * First scene after the splash screen
  */
 public class StartScene extends UIScene {
-    TextButton saveButton, resumeButton, newGameButton, newGameButtonPlus, loadButton, settingsButton, exitButton, switchButton;
+
+    TextButton saveButton, resumeButton, continueButton, newGameButton, newGameButtonPlus, loadButton, settingsButton, exitButton, switchButton;
 
     public StartScene() {
         super(Forge.isLandscapeMode()?"ui/start_menu.json":"ui/start_menu_portrait.json");
@@ -45,6 +48,23 @@ public class StartScene extends UIScene {
         return true;
     }
 
+    public boolean Continue() {
+        final String lastActiveSave = Config.instance().getSettingData().lastActiveSave;
+
+        if (WorldSave.isSafeFile(lastActiveSave) && WorldSave.load(WorldSave.filenameToSlot(lastActiveSave))) {
+            Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
+                @Override
+                public void run() {
+                    Forge.switchScene(SceneType.GameScene.instance);
+                }
+            }, null, false, true));
+        } else {
+            Forge.clearTransitionScreen();
+        }
+
+        return true;
+    }
+
     public boolean settings() {
         Forge.switchScene(SceneType.SettingsScene.instance);
         return true;
@@ -61,7 +81,13 @@ public class StartScene extends UIScene {
         if (hasSaveButton)
             hasSaveButton = !((TileMapScene) SceneType.TileMapScene.instance).currentMap().isInMap();
         saveButton.setVisible(hasSaveButton);
-        resumeButton.setVisible(WorldSave.getCurrentSave().getWorld().getData() != null);
+
+        boolean hasResumeButton = WorldSave.getCurrentSave().getWorld().getData() != null;
+        resumeButton.setVisible(hasResumeButton);
+
+        // Continue button mutually exclusive with resume button
+        continueButton.setVisible(Config.instance().getSettingData().lastActiveSave != null && !hasResumeButton);
+
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
     }
 
@@ -87,6 +113,7 @@ public class StartScene extends UIScene {
             ui.onButtonPress("Load", () -> StartScene.this.Load());
             ui.onButtonPress("Save", () -> StartScene.this.Save());
             ui.onButtonPress("Resume", () -> StartScene.this.Resume());
+            ui.onButtonPress("Continue", () -> StartScene.this.Continue());
             ui.onButtonPress("Settings", () -> StartScene.this.settings());
             ui.onButtonPress("Exit", () -> StartScene.this.Exit());
             ui.onButtonPress("Switch", () -> Forge.switchToClassic());
@@ -101,6 +128,8 @@ public class StartScene extends UIScene {
             saveButton.getLabel().setText(Forge.getLocalizer().getMessage("lblSave"));
             resumeButton = ui.findActor("Resume");
             resumeButton.getLabel().setText(Forge.getLocalizer().getMessage("lblResume"));
+            continueButton = ui.findActor("Continue");
+            continueButton.getLabel().setText(Forge.getLocalizer().getMessage("lblContinue"));
             settingsButton = ui.findActor("Settings");
             settingsButton.getLabel().setText(Forge.getLocalizer().getMessage("lblSettings"));
             exitButton = ui.findActor("Exit");
