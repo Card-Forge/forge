@@ -1,0 +1,13 @@
+Name:Amber Gristle O'Maul
+ManaCost:3 R
+Types:Legendary Creature Dwarf Cleric
+PT:3/3
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand. If you do, draw a card for each player being attacked.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Hand> | NumCards$ X
+SVar:X:PlayerCountPropertyYou$OpponentsAttackedThisCombat
+K:Choose a Background
+DeckHas:Ability$Discard
+SVar:HasAttackEffect:TRUE
+AI:RemoveDeck:Random
+Oracle:Haste\nWhenever Amber Gristle O'Maul attacks, you may discard your hand. If you do, draw a card for each player being attacked.\nChoose a Background (You can have a Background as a second commander.)
