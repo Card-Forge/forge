@@ -1,0 +1,38 @@
+[metadata]
+Code=YSNC
+Date=2022-06-02
+Name=Alchemy: New Capenna
+Type=Online
+ScryfallCode=YSNC
+
+[cards]
+0 R Arming Gala @Fajareka Setiawan
+0 R Agent of Raffine @Caroline Gariba
+0 M Back-Alley Gardener @Francisco Miyara
+0 R Bank Job @Jokubas Uogintas
+0 U Big Spender @Alexandr Leskinen
+0 R Brokers' Safeguard @Borja Pindado
+0 R Bind to Secrecy @David Astruga
+0 U Choice of Fortunes @Irina Nordsol
+0 R Cabaretti Revels @Gaboleps
+0 U Celestial Vault @Cristi Balanescu
+0 C Diviner of Fates @Randy Vargas
+0 M Effluence Devourer @Gaboleps
+0 R Graven Archfiend @Tuan Duong Chu
+0 U Giant Regrowth @Brian Valeza
+0 R Herald of Vengeance @Billy Christian
+0 R Loose in the Park @Julie Dillon
+0 U Menagerie Curator @Jodie Muir
+0 U Nightclub Bouncer @Taras Susak
+0 R Obscure Polymorphist @Darren Tan
+0 R Pass the Torch @Mark Behm
+0 R Racketeer Boss @Igor Grechanyi
+0 R Rope Line Attendant @Fariba Khamseh
+0 R Riveteers Provocateur @Nestor Ossandon Leal
+0 M Spelldrain Assassin @Cristi Balanescu
+0 M Spara's Bodyguard @Ilse Gort
+0 U Shattering Finale @Borja Pindado
+0 R Syndicate Recruiter @Bastien L. Deharme
+0 U Skyline Savior @Josu Hernaiz
+0 U Traumatic Prank @Brian Valeza
+0 U Xander's Wake @Jodie Muir
