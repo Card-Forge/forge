@@ -6,6 +6,7 @@ Difficulty=hard
 Description=Selesnya Stompy ramp deck with Primordial Hydra, Nullhide Ferox, Shalai, Voice of Plenty, and Ghalta, Primal Hunger.
 Deck Type=constructed
 Icon=Evangelyne.jpg
+[main]
 1 Black Lotus|LEA
 3 Conclave Tribunal|GRN
 2 Emmara, Soul of the Accord|GRN
