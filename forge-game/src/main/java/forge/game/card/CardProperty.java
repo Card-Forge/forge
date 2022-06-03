@@ -1348,6 +1348,10 @@ public class CardProperty {
             if (!card.isToken() && !card.isTokenCard()) {
                 return false;
             }
+            // copied spell don't count
+            if (property.contains("Created") && card.getCastSA() != null) {
+                return false;
+            }
         } else if (property.startsWith("nonToken")) {
             if (card.isToken() || card.isTokenCard()) {
                 return false;
