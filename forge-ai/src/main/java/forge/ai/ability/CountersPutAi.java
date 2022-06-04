@@ -752,14 +752,16 @@ public class CountersPutAi extends CountersAi {
         final int amount = AbilityUtils.calculateAmount(source, amountStr, sa);
         int left = amount;
         final String[] types;
+        String type = "";
         if (sa.hasParam("CounterType")) {
             // TODO some cards let you choose types, should check each
             types = sa.getParam("CounterType").split(",");
-        } else {
+            type = types[0];
+        } else if (sa.hasParam("CounterTypes")) {
             // all types will be added
             types = sa.getParam("CounterTypes").split(",");
+            type = types[0];
         }
-        final String type = types[0];
 
         if (!sa.usesTargeting()) {
             // No target. So must be defined
