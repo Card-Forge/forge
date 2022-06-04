@@ -65,14 +65,8 @@ public class TriggerDamagePrevented extends Trigger {
         }
 
         if (hasParam("CombatDamage")) {
-            if (getParam("CombatDamage").equals("True")) {
-                if (!((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
-                    return false;
-                }
-            } else if (getParam("CombatDamage").equals("False")) {
-                if (((Boolean) runParams.get(AbilityKey.IsCombatDamage))) {
-                    return false;
-                }
+            if (getParam("CombatDamage").equals("True") != (Boolean) runParams.get(AbilityKey.IsCombatDamage)) {
+                return false;
             }
         }
 

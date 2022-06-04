@@ -53,6 +53,7 @@ public enum TriggerType {
     DamageDealtOnce(TriggerDamageDealtOnce.class),
     DamageDone(TriggerDamageDone.class),
     DamageDoneOnce(TriggerDamageDoneOnce.class),
+    DamageDoneOnceByController(TriggerDamageDoneOnceByController.class),
     DamagePrevented(TriggerDamagePrevented.class),
     DamagePreventedOnce(TriggerDamagePreventedOnce.class),
     DayTimeChanges (TriggerDayTimeChanges.class),
