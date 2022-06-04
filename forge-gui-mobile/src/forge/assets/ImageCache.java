@@ -18,12 +18,10 @@
 package forge.assets;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import com.badlogic.gdx.utils.ObjectMap;
+import com.badlogic.gdx.utils.ObjectSet;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -68,7 +66,7 @@ import forge.util.ImageUtil;
 public class ImageCache {
     // short prefixes to save memory
 
-    private static final Set<String> missingIconKeys = new HashSet<>();
+    private static final ObjectSet<String> missingIconKeys = new ObjectSet<>();
     private static LoadingCache<String, Texture> cache;
     public static void initCache(int capacity) {
         cache = CacheBuilder.newBuilder()
@@ -92,7 +90,7 @@ public class ImageCache {
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
-    private static final Map<String, Pair<String, Boolean>> imageBorder = new HashMap<>(1024);
+    private static final ObjectMap<String, Pair<String, Boolean>> imageBorder = new ObjectMap<>(1024);
 
     private static boolean imageLoaded, delayLoadRequested;
     public static void allowSingleLoad() {
