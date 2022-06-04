@@ -22,7 +22,6 @@ import com.badlogic.gdx.utils.Array;
 
 import com.badlogic.gdx.utils.IntSet;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.badlogic.gdx.utils.ObjectSet;
 import forge.Forge;
 import forge.gui.FThreads;
 import forge.localinstance.properties.ForgeConstants;
