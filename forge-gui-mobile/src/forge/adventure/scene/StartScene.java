@@ -86,7 +86,15 @@ public class StartScene extends UIScene {
         resumeButton.setVisible(hasResumeButton);
 
         // Continue button mutually exclusive with resume button
-        continueButton.setVisible(Config.instance().getSettingData().lastActiveSave != null && !hasResumeButton);
+        if (Config.instance().getSettingData().lastActiveSave != null && !hasResumeButton) {
+            continueButton.setVisible(true);
+            if (!Forge.isLandscapeMode()) {
+                continueButton.setX(resumeButton.getX());
+                continueButton.setY(resumeButton.getY());
+            }
+        } else {
+            continueButton.setVisible(false);
+        }
 
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
     }
