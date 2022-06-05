@@ -218,7 +218,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Map<Card, Card> maingameCardsMap = Maps.newHashMap();
 
     private CardCollection currentPlanes = new CardCollection();
-    private Set<String> prowl = Sets.newHashSet();
 
     private PlayerStatistics stats = new PlayerStatistics();
     private PlayerController controller;
@@ -709,9 +708,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         if (isCombat) {
             old = assignedCombatDamage.containsKey(source) ? assignedCombatDamage.get(source) : 0;
             assignedCombatDamage.put(source, old + amount);
-            for (final String type : source.getType().getCreatureTypes()) {
-                source.getController().addProwlType(type);
-            }
             source.getDamageHistory().registerCombatDamage(this, amount);
         }
 
@@ -2080,8 +2076,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasBloodthirst() {
-        for (Player p : game.getRegisteredPlayers()) {
-            if (p.isOpponentOf(this) && p.getAssignedDamage() > 0) {
+        for (Player p : getRegisteredOpponents()) {
+            if (p.getAssignedDamage() > 0) {
                 return true;
             }
         }
@@ -2100,14 +2096,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         return lost;
     }
 
-    public final boolean hasProwl(final String type) {
-        return prowl.contains(type);
-    }
-    public final void addProwlType(final String type) {
-        prowl.add(type);
-    }
-    public final void resetProwl() {
-        prowl.clear();
+    public final boolean hasProwl(final Set<String> types) {
+        List<Pair<GameEntity, Integer>> entries = game.getDamageDoneThisTurn(true, false, false, "Card.YouCtrl", "Player", null, this, null);
+        for (Pair<GameEntity, Integer> p : entries) {
+            for (String type : types) {
+                if (((Card) p.getLeft()).getType().hasCreatureType(type)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public final void setLibrarySearched(final int l) {
@@ -2453,7 +2451,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         clearAssignedDamage();
         resetVenturedThisTurn();
         setRevolt(false);
-        resetProwl();
         setSpellsCastLastTurn(getSpellsCastThisTurn());
         resetSpellsCastThisTurn();
         setLifeLostLastTurn(getLifeLostThisTurn());
