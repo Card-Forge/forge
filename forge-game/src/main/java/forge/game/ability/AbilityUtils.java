@@ -2099,6 +2099,12 @@ public class AbilityUtils {
             }
             return doXMath(sum, expr, c, ctb);
         }
+
+        if (sq[0].startsWith("NumCombatDamageThisTurn")) {
+            String[] props = l[0].split(" ");
+            return doXMath(game.getDamageDoneThisTurn(true, false, false, props[1], props[2], c, player, ctb).size(), expr, c, ctb);
+        }
+
         if (sq[0].equals("RegeneratedThisTurn")) {
             return doXMath(c.getRegeneratedThisTurn(), expr, c, ctb);
         }
