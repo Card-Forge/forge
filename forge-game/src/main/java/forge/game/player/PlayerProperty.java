@@ -3,8 +3,11 @@ package forge.game.player;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import forge.game.CardTraitBase;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -80,6 +83,15 @@ public class PlayerProperty {
             }
         } else if (property.equals("hasBlessing")) {
             if (!player.hasBlessing()) {
+                return false;
+            }
+        } else if (property.startsWith("damageDone")) {
+            String[] props = property.split(" ");
+            int sourceDmg = 0;
+            for (Pair<GameEntity, Integer> p : game.getDamageDoneThisTurn(null, false, false, "Card.YouCtrl", null, source, sourceController, spellAbility)) {
+                sourceDmg = Math.max(sourceDmg, p.getRight());
+            }
+            if (!Expressions.compare(sourceDmg, props[1], AbilityUtils.calculateAmount(source, props[2], spellAbility))) {
                 return false;
             }
         } else if (property.startsWith("wasDealtCombatDamageThisCombatBy ")) {

@@ -1293,33 +1293,18 @@ public class GameAction {
                         noRegCreats.add(c);
                         checkAgain = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
-                        // merge entries with same source
-                        List<Integer> dmgList = Lists.newArrayList();
-                        List<Pair<Card, Integer>> remainingDamaged = Lists.newArrayList(c.getReceivedDamageFromThisTurn());
-                        while (!remainingDamaged.isEmpty()) {
-                            Pair <Card, Integer> damaged = remainingDamaged.get(0);
-                            int sum = damaged.getRight();
-                            remainingDamaged.remove(damaged);
-                            for (Pair<Card, Integer> other : Lists.newArrayList(remainingDamaged)) {
-                                if (other.getLeft().equalsWithTimestamp(damaged.getLeft())) {
-                                    sum += other.getRight();
-                                    // once it got counted keep it out
-                                    remainingDamaged.remove(other);
-                                }
-                            }
-                            dmgList.add(sum);
+                        int maxDmg = 0;
+                        for (Pair<GameEntity, Integer> p : game.getDamageDoneThisTurn(null, false, false, null, "Card.StrictlySelf", c, null, null)) {
+                            maxDmg = Math.max(maxDmg, p.getRight());
                         }
 
-                        for (final Integer dmg : dmgList) {
-                            if (c.getLethal() <= dmg.intValue() || c.hasBeenDealtDeathtouchDamage()) {
-                                if (desCreats == null) {
-                                    desCreats = new CardCollection();
-                                }
-                                desCreats.add(c);
-                                c.setHasBeenDealtDeathtouchDamage(false);
-                                checkAgain = true;
-                                break;
+                        if (c.getLethal() <= maxDmg || c.hasBeenDealtDeathtouchDamage()) {
+                            if (desCreats == null) {
+                                desCreats = new CardCollection();
                             }
+                            desCreats.add(c);
+                            c.setHasBeenDealtDeathtouchDamage(false);
+                            checkAgain = true;
                         }
                     }
                     // Rule 704.5g - Destroy due to lethal damage
@@ -2308,6 +2293,7 @@ public class GameAction {
         game.getReplacementHandler().runReplaceDamage(isCombat, damageMap, preventMap, counterTable, cause);
 
         Map<Card, Integer> lethalDamage = Maps.newHashMap();
+        Map<Integer, Card> lkiCache = Maps.newHashMap();
 
         // Actually deal damage according to replaced damage map
         for (Map.Entry<Card, Map<GameEntity, Integer>> et : damageMap.rowMap().entrySet()) {
@@ -2334,6 +2320,8 @@ public class GameAction {
 
                 e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));
                 sum += e.getValue();
+
+                game.addDamageDoneThisTurn(isCombat, e.getValue(), sourceLKI.isLKI() ? sourceLKI : CardUtil.getLKICopy(sourceLKI, lkiCache), e.getKey());
             }
 
             if (sum > 0 && sourceLKI.hasKeyword(Keyword.LIFELINK)) {

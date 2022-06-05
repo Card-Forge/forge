@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -33,9 +34,11 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.MultimapBuilder;
 import com.google.common.collect.Table;
 import com.google.common.eventbus.EventBus;
 
@@ -118,6 +121,8 @@ public class Game {
     private CardCollection lastStateGraveyard = new CardCollection();
 
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
+
+    private ListMultimap<Pair<Integer, Boolean>, Pair<Card, GameEntity>> damageDoneThisTurn = MultimapBuilder.treeKeys().arrayListValues().build();
 
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
     private Map<Card, Integer>  facedownWhileCasting = Maps.newHashMap();
@@ -1068,6 +1073,7 @@ public class Game {
 
     public void onCleanupPhase() {
         clearCounterAddedThisTurn();
+        clearDamageDoneThisTurn();
         // some cards need this info updated even after a player lost, so don't skip them
         for (Player player : getRegisteredPlayers()) {
             player.onCleanupPhase();
@@ -1107,6 +1113,73 @@ public class Game {
 
     public void clearCounterAddedThisTurn() {
         countersAddedThisTurn.clear();
+    }
+
+    /**
+     * Gets the damage instances done this turn.
+     * @param isCombat if true only combat damage matters, pass null for both
+     * @param countDamagedBy if true the returned Pairs contain the damage targets instead of the LKI of the sources
+     * @param anyIsEnough if true returns early once result has an entry
+     * @param validCard
+     * @param validEntity
+     * @param source
+     * @param sourceController
+     * @param ctb
+     * @return List<Pair<GameEntity, Integer>>
+     */
+    public List<Pair<GameEntity, Integer>> getDamageDoneThisTurn(Boolean isCombat, boolean countDamagedBy, boolean anyIsEnough, String validCard, String validEntity, Card source, Player sourceController, CardTraitBase ctb) {
+        List<Pair<GameEntity, Integer>> dmgList = Lists.newArrayList();
+        for (Entry<Pair<Integer, Boolean>, Pair<Card, GameEntity>> e : damageDoneThisTurn.entries()) {
+            Pair<Integer, Boolean> damage = e.getKey();
+            Pair<Card, GameEntity> sourceToTarget = e.getValue();
+
+            if (isCombat != null && damage.getRight() != isCombat) {
+                continue;
+            }
+            if (validCard != null && !sourceToTarget.getLeft().isValid(validCard.split(","), sourceController, source, ctb)) {
+                continue;
+            }
+            if (validEntity != null && !sourceToTarget.getRight().isValid(validEntity.split(","), sourceController, source, ctb)) {
+                continue;
+            }
+            dmgList.add(Pair.of(countDamagedBy ? sourceToTarget.getRight() : sourceToTarget.getLeft(), damage.getLeft()));
+            if (anyIsEnough) {
+                return dmgList;
+            }
+        }
+
+        List<Pair<GameEntity, Integer>> result = Lists.newArrayList();
+        // merge same objects
+        while (!dmgList.isEmpty()) {
+            Pair<GameEntity, Integer> damaged = dmgList.get(0);
+            int sum = damaged.getRight();
+            dmgList.remove(damaged);
+
+            for (Pair<GameEntity, Integer> other : Lists.newArrayList(dmgList)) {
+                boolean sameObject;
+                if (damaged.getLeft() instanceof Card && other.getLeft() instanceof Card) {
+                    sameObject = ((Card) other.getLeft()).equalsWithTimestamp((Card) damaged.getLeft());
+                } else {
+                    sameObject = other.getLeft().equals(damaged.getLeft());
+                }
+                if (sameObject) {
+                    sum += other.getRight();
+                    // once it got counted keep it out
+                    dmgList.remove(other);
+                }
+            }
+            result.add(Pair.of(damaged.getLeft(), sum));
+        }
+
+        return result;
+    }
+
+    public void addDamageDoneThisTurn(boolean isCombat, int damage, Card sourceLKI, GameEntity target) {
+        damageDoneThisTurn.put(Pair.of(damage, isCombat), Pair.of(sourceLKI, target));
+    }
+
+    public void clearDamageDoneThisTurn() {
+        damageDoneThisTurn.clear();
     }
 
     public Card getTopLibForPlayer(Player P) {
