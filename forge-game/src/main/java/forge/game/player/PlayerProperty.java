@@ -7,7 +7,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
-import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
@@ -88,7 +87,7 @@ public class PlayerProperty {
         } else if (property.startsWith("damageDone")) {
             String[] props = property.split(" ");
             int sourceDmg = 0;
-            for (Pair<GameEntity, Integer> p : game.getDamageDoneThisTurn(null, false, false, "Card.YouCtrl", null, source, sourceController, spellAbility)) {
+            for (Pair<Card, Integer> p : game.getDamageDoneThisTurn(null, false, "Card.YouCtrl", null, source, sourceController, spellAbility)) {
                 sourceDmg = Math.max(sourceDmg, p.getRight());
             }
             if (!Expressions.compare(sourceDmg, props[1], AbilityUtils.calculateAmount(source, props[2], spellAbility))) {
@@ -136,7 +135,7 @@ public class PlayerProperty {
                 right = AbilityUtils.calculateAmount(source, props[3], spellAbility);
             }
 
-            int numValid = game.getDamageDoneThisTurn(combat, false, validCard == null, validCard, "You", source, player, spellAbility).size();
+            int numValid = game.getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility).size();
             if (!Expressions.compare(numValid, comp, right)) {
                 return false;
             }

@@ -2361,13 +2361,13 @@ public class AbilityUtils {
             if (sq[0].contains("CombatDamage")) {
                 isCombat = true;
             }
-            return doXMath(game.getDamageDoneThisTurn(isCombat, false, false, props[1], props[2], c, player, ctb).size(), expr, c, ctb);
+            return doXMath(game.getDamageDoneThisTurn(isCombat, false, props[1], props[2], c, player, ctb).size(), expr, c, ctb);
         }
 
         if (sq[0].contains("TotalDamageThisTurn")) {
             String[] props = l[0].split(" ");
             int sum = 0;
-            for (Pair<GameEntity, Integer> p : game.getDamageDoneThisTurn(null, false, false, props[1], props[2], c, player, ctb)) {
+            for (Pair<Card, Integer> p : game.getDamageDoneThisTurn(null, false, props[1], props[2], c, player, ctb)) {
                 sum += p.getRight();
             }
             return doXMath(sum, expr, c, ctb);

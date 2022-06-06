@@ -1118,17 +1118,16 @@ public class Game {
     /**
      * Gets the damage instances done this turn.
      * @param isCombat if true only combat damage matters, pass null for both
-     * @param countDamagedBy if true the returned Pairs contain the damage targets instead of the LKI of the sources
      * @param anyIsEnough if true returns early once result has an entry
      * @param validSourceCard
      * @param validTargetEntity
      * @param source
      * @param sourceController
      * @param ctb
-     * @return List<Pair<GameEntity, Integer>>
+     * @return List<Pair<Card, Integer>>
      */
-    public List<Pair<GameEntity, Integer>> getDamageDoneThisTurn(Boolean isCombat, boolean countDamagedBy, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
-        List<Pair<GameEntity, Integer>> dmgList = Lists.newArrayList();
+    public List<Pair<Card, Integer>> getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
+        List<Pair<Card, Integer>> dmgList = Lists.newArrayList();
         for (Entry<Pair<Integer, Boolean>, Pair<Card, GameEntity>> e : damageDoneThisTurn.entries()) {
             Pair<Integer, Boolean> damage = e.getKey();
             Pair<Card, GameEntity> sourceToTarget = e.getValue();
@@ -1142,27 +1141,21 @@ public class Game {
             if (validTargetEntity != null && !sourceToTarget.getRight().isValid(validTargetEntity.split(","), sourceController, source, ctb)) {
                 continue;
             }
-            dmgList.add(Pair.of(countDamagedBy ? sourceToTarget.getRight() : sourceToTarget.getLeft(), damage.getLeft()));
+            dmgList.add(Pair.of(sourceToTarget.getLeft(), damage.getLeft()));
             if (anyIsEnough) {
                 return dmgList;
             }
         }
 
-        List<Pair<GameEntity, Integer>> result = Lists.newArrayList();
+        List<Pair<Card, Integer>> result = Lists.newArrayList();
         // merge same objects
         while (!dmgList.isEmpty()) {
-            Pair<GameEntity, Integer> damaged = dmgList.get(0);
+            Pair<Card, Integer> damaged = dmgList.get(0);
             int sum = damaged.getRight();
             dmgList.remove(damaged);
 
-            for (Pair<GameEntity, Integer> other : Lists.newArrayList(dmgList)) {
-                boolean sameObject;
-                if (damaged.getLeft() instanceof Card && other.getLeft() instanceof Card) {
-                    sameObject = ((Card) other.getLeft()).equalsWithTimestamp((Card) damaged.getLeft());
-                } else {
-                    sameObject = other.getLeft().equals(damaged.getLeft());
-                }
-                if (sameObject) {
+            for (Pair<Card, Integer> other : Lists.newArrayList(dmgList)) {
+                if (other.getLeft().equalsWithTimestamp(damaged.getLeft())) {
                     sum += other.getRight();
                     // once it got counted keep it out
                     dmgList.remove(other);

@@ -20,7 +20,6 @@ public class CardDamageHistory {
     private boolean creatureBlockedThisCombat = false;
     private boolean creatureGotBlockedThisCombat = false;
 
-    boolean hasdealtDamagetoAny = false;
     private List<GameEntity> attackedThisTurn = Lists.newArrayList();
 
     private final List<Player> creatureAttackedLastTurnOf = Lists.newArrayList();
@@ -32,6 +31,7 @@ public class CardDamageHistory {
     private final List<Player> damagedThisCombat = Lists.newArrayList();
     // only needed for The Fallen
     private final FCollection<GameEntity> damagedThisGame = new FCollection<>();
+    boolean hasdealtDamagetoAny = false;
 
     public final boolean getHasdealtDamagetoAny() {
         return hasdealtDamagetoAny;

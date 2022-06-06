@@ -5296,14 +5296,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final int getTotalDamageReceivedThisTurn() {
         int sum = 0;
-        for (Pair<GameEntity, Integer> p : game.getDamageDoneThisTurn(null, false, false, null, "Card.StrictlySelf", this, getController(), null)) {
+        for (Pair<Card, Integer> p : game.getDamageDoneThisTurn(null, false, null, "Card.StrictlySelf", this, getController(), null)) {
             sum += p.getRight();
         }
         return sum;
     }
 
     public final boolean hasDealtDamageToOpponentThisTurn() {
-        return !game.getDamageDoneThisTurn(null, false, true, "Card.StrictlySelf", "Player.Opponent", this, getController(), null).isEmpty();
+        return !game.getDamageDoneThisTurn(null, true, "Card.StrictlySelf", "Player.Opponent", this, getController(), null).isEmpty();
     }
 
     /**
@@ -5313,7 +5313,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
      */
     public final int getTotalDamageDoneBy() {
         int sum = 0;
-        for (Pair<GameEntity, Integer> p : game.getDamageDoneThisTurn(null, false, false, "Card.StrictlySelf", null, this, getController(), null)) {
+        for (Pair<Card, Integer> p : game.getDamageDoneThisTurn(null, false, "Card.StrictlySelf", null, this, getController(), null)) {
             sum += p.getRight();
         }
         return sum;

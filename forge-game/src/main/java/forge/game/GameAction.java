@@ -1294,7 +1294,7 @@ public class GameAction {
                         checkAgain = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
                         int maxDmg = 0;
-                        for (Pair<GameEntity, Integer> p : game.getDamageDoneThisTurn(null, false, false, null, "Card.StrictlySelf", c, null, null)) {
+                        for (Pair<Card, Integer> p : game.getDamageDoneThisTurn(null, false, null, "Card.StrictlySelf", c, null, null)) {
                             maxDmg = Math.max(maxDmg, p.getRight());
                         }
 

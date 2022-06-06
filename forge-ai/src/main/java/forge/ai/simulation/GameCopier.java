@@ -91,6 +91,7 @@ public class GameCopier {
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
             newPlayer.setLifeGainedThisTurn(origPlayer.getLifeGainedThisTurn());
+            // TODO creatureAttackedThisTurn
             for (Mana m : origPlayer.getManaPool()) {
                 newPlayer.getManaPool().addMana(m, false);
             }
@@ -207,6 +208,13 @@ public class GameCopier {
 
     private void copyGameState(Game newGame) {
         newGame.setAge(origGame.getAge());
+
+        // TODO countersAddedThisTurn + damageDoneThisTurn
+
+        if (origGame.getMonarch() != null) {
+            newGame.setMonarch(playerMap.get(origGame.getMonarch()));
+        }
+
         for (ZoneType zone : ZONES) {
             for (Card card : origGame.getCardsIn(zone)) {
                 addCard(newGame, zone, card);

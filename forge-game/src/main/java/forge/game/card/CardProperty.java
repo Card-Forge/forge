@@ -1122,8 +1122,8 @@ public class CardProperty {
         } else if (property.startsWith("DamagedBy")) {
             String prop = property.substring("DamagedBy".length());
             boolean found = false;
-            for (Pair<GameEntity, Integer> p : game.getDamageDoneThisTurn(null, false, false, prop.isEmpty() ? null : prop, "Card.StrictlySelf", card, sourceController, spellAbility)) {
-                if (!prop.isEmpty() || (p.getLeft() instanceof Card && ((Card)p.getLeft()).equalsWithTimestamp(source))) {
+            for (Pair<Card, Integer> p : game.getDamageDoneThisTurn(null, false, prop.isEmpty() ? null : prop, "Card.StrictlySelf", card, sourceController, spellAbility)) {
+                if (!prop.isEmpty() || p.getLeft().equalsWithTimestamp(source)) {
                     found = true;
                     break;
                 }
@@ -1133,8 +1133,8 @@ public class CardProperty {
             }
         } else if (property.startsWith("Damaged")) {
             boolean found = false;
-            for (Pair<GameEntity, Integer> p : game.getDamageDoneThisTurn(null, false, false, "Card.StrictlySelf", null, card, sourceController, spellAbility)) {
-                if (p.getLeft() instanceof Card && ((Card)p.getLeft()).equalsWithTimestamp(source)) {
+            for (Pair<Card, Integer> p : game.getDamageDoneThisTurn(null, false, "Card.StrictlySelf", null, card, sourceController, spellAbility)) {
+                if (p.getLeft().equalsWithTimestamp(source)) {
                     found = true;
                     break;
                 }
@@ -1147,7 +1147,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("dealtDamageToYouThisTurn")) {
-            if (game.getDamageDoneThisTurn(null, false, true, "Card.StrictlySelf", "You", card, sourceController, spellAbility).isEmpty()) {
+            if (game.getDamageDoneThisTurn(null, true, "Card.StrictlySelf", "You", card, sourceController, spellAbility).isEmpty()) {
                 return false;
             }
         } else if (property.startsWith("dealtDamageToOppThisTurn")) {
@@ -1156,7 +1156,7 @@ public class CardProperty {
             }
         } else if (property.startsWith("dealtCombatDamage") || property.startsWith("notDealtCombatDamage")) {
             final String v = property.split(" ")[1];
-            boolean found = !game.getDamageDoneThisTurn(true, false, true, "Card.StrictlySelf", v, card, sourceController, spellAbility).isEmpty();
+            boolean found = !game.getDamageDoneThisTurn(true, true, "Card.StrictlySelf", v, card, sourceController, spellAbility).isEmpty();
 
             if (found == property.startsWith("not")) {
                 return false;
@@ -1174,7 +1174,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("wasDealtNonCombatDamageThisTurn")) {
-            if (game.getDamageDoneThisTurn(false, false, true, null, "Card.StrictlySelf", card, sourceController, spellAbility).isEmpty()) {
+            if (game.getDamageDoneThisTurn(false, true, null, "Card.StrictlySelf", card, sourceController, spellAbility).isEmpty()) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageByThisGame")) {
