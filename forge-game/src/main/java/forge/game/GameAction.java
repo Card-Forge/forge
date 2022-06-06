@@ -2315,7 +2315,7 @@ public class GameAction {
                 e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));
                 sum += e.getValue();
 
-                game.addDamageDoneThisTurn(isCombat, e.getValue(), sourceLKI.isLKI() ? sourceLKI : CardUtil.getLKICopy(sourceLKI, lkiCache), e.getKey());
+                game.addDamageDoneThisTurn(e.getValue(), isCombat, sourceLKI.isLKI() ? sourceLKI : CardUtil.getLKICopy(sourceLKI, lkiCache), e.getKey() instanceof Card ? CardUtil.getLKICopy(e.getKey(), lkiCache) : e.getKey());
             }
 
             if (sum > 0 && sourceLKI.hasKeyword(Keyword.LIFELINK)) {

@@ -1127,7 +1127,7 @@ public class Game {
      * @return List<Pair<Card, Integer>>
      */
     public List<Pair<Card, Integer>> getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
-        List<Pair<Card, Integer>> dmgList = Lists.newArrayList();
+        final List<Pair<Card, Integer>> dmgList = Lists.newArrayList();
         for (Entry<Pair<Integer, Boolean>, Pair<Card, GameEntity>> e : damageDoneThisTurn.entries()) {
             Pair<Integer, Boolean> damage = e.getKey();
             Pair<Card, GameEntity> sourceToTarget = e.getValue();
@@ -1167,7 +1167,7 @@ public class Game {
         return result;
     }
 
-    public void addDamageDoneThisTurn(boolean isCombat, int damage, Card sourceLKI, GameEntity target) {
+    public void addDamageDoneThisTurn(int damage, boolean isCombat, Card sourceLKI, GameEntity target) {
         damageDoneThisTurn.put(Pair.of(damage, isCombat), Pair.of(sourceLKI, target));
     }
 
