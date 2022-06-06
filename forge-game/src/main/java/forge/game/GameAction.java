@@ -1091,6 +1091,24 @@ public class GameAction {
         return holdCheckingStaticAbilities;
     }
 
+    // This doesn't check layers or if the ability gets removed by other effects
+    public boolean hasStaticAbilityAffectingZone(ZoneType zone, StaticAbilityLayer layer) {
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals("Continuous") || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+                if (layer != null && !stAb.getLayers().contains(layer)) {
+                    continue;
+                }
+                if (ZoneType.listValueOf(stAb.getParamOrDefault("AffectedZone", ZoneType.Battlefield.toString())).contains(zone)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public final void checkStaticAbilities() {
         checkStaticAbilities(true);
     }
