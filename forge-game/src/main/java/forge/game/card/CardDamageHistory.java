@@ -35,10 +35,6 @@ public class CardDamageHistory {
     // only needed for The Fallen
     private final FCollection<GameEntity> damagedThisGame = new FCollection<>();
 
-    private final Map<GameEntity, Integer> damagedThisTurn = Maps.newHashMap();
-    private final Map<GameEntity, Integer> damagedThisTurnInCombat = Maps.newHashMap();
-    private boolean receivedNonCombatDamageThisTurn = false;
-
     public final boolean getHasdealtDamagetoAny() {
         return hasdealtDamagetoAny;
     }
@@ -225,37 +221,8 @@ public class CardDamageHistory {
         return this.creatureGotBlockedThisCombat;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>receivedNonCombatDamageThisTurn</code>.
-     * </p>
-     *
-     * @return a boolean.
-     */
-    public boolean hasBeenDealtNonCombatDamageThisTurn() {
-        return this.receivedNonCombatDamageThisTurn;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>receivedNonCombatDamageThisTurn</code>.
-     * </p>
-     *
-     * @param b
-     *            a boolean.
-     */
-    public void setHasBeenDealtNonCombatDamageThisTurn(boolean b) {
-        this.receivedNonCombatDamageThisTurn = b;
-    }
-
     public final List<Player> getThisCombatDamaged() {
         return damagedThisCombat;
-    }
-    public final Map<GameEntity, Integer> getThisTurnDamaged() {
-        return damagedThisTurn;
-    }
-    public final Map<GameEntity, Integer> getThisTurnCombatDamaged() {
-        return damagedThisTurnInCombat;
     }
     public final FCollection<GameEntity> getThisGameDamaged() {
         return damagedThisGame;
@@ -264,38 +231,17 @@ public class CardDamageHistory {
      * TODO: Write javadoc for this method.
      * @param player
      */
-    public void registerCombatDamage(GameEntity entity, int amount) {
-        int old = 0;
-        if (entity instanceof Player) {
-            damagedThisCombat.add((Player) entity);
-        }
-        old = 0;
-        if (damagedThisTurnInCombat.containsKey(entity)) {
-            old = damagedThisTurnInCombat.get(entity);
-        }
-        damagedThisTurnInCombat.put(entity, old + amount);
-        hasdealtDamagetoAny = true;
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @param player
-     */
-    public void registerDamage(GameEntity entity, int amount) {
-        int old = 0;
-        if (damagedThisTurn.containsKey(entity)) {
-            old = damagedThisTurn.get(entity);
-        }
-        damagedThisTurn.put(entity, old + amount);
+    public void registerDamage(GameEntity entity, boolean isCombat) {
         damagedThisGame.add(entity);
         hasdealtDamagetoAny = true;
+        if (isCombat && entity instanceof Player) {
+            damagedThisCombat.add((Player) entity);
+        }
     }
 
     public void newTurn() {
-        damagedThisCombat.clear();
-        damagedThisTurnInCombat.clear();
-        damagedThisTurn.clear();
         attackedThisTurn.clear();
+        damagedThisCombat.clear();
 
         // if card already LTB we can safely dereference (allows quite a few objects to be cleaned up earlier for bigger boardstates)
         CardCollection toRemove = new CardCollection();
@@ -307,7 +253,6 @@ public class CardDamageHistory {
             }
         }
         damagedThisGame.removeAll(toRemove);
-        setHasBeenDealtNonCombatDamageThisTurn(false);
     }
 
     public void endCombat() {

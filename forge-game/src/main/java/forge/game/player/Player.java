@@ -699,11 +699,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        source.getDamageHistory().registerDamage(this, amount);
-
-        if (isCombat) {
-            source.getDamageHistory().registerCombatDamage(this, amount);
-        }
+        source.getDamageHistory().registerDamage(this, isCombat);
 
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();

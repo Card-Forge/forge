@@ -5344,15 +5344,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean hasDealtDamageToOpponentThisTurn() {
-        for (final GameEntity e : getDamageHistory().getThisTurnDamaged().keySet()) {
-            if (e instanceof Player) {
-                final Player p = (Player) e;
-                if (getController().isOpponentOf(p)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return !game.getDamageDoneThisTurn(null, false, true, "Card.StrictlySelf", "Player.Opponent", this, getController(), null).isEmpty();
     }
 
     /**
@@ -5362,8 +5354,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
      */
     public final int getTotalDamageDoneBy() {
         int sum = 0;
-        for (final GameEntity e : getDamageHistory().getThisTurnDamaged().keySet()) {
-            sum += getDamageHistory().getThisTurnDamaged().get(e);
+        for (Pair<GameEntity, Integer> p : game.getDamageDoneThisTurn(null, false, false, "Card.StrictlySelf", null, this, getController(), null)) {
+            sum += p.getRight();
         }
         return sum;
     }
@@ -5548,12 +5540,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         getGame().getReplacementHandler().run(ReplacementType.DealtDamage, AbilityKey.mapFromAffected(this));
 
         addReceivedDamageFromThisTurn(source, damageIn);
-        source.getDamageHistory().registerDamage(this, damageIn);
-        if (isCombat) {
-            source.getDamageHistory().registerCombatDamage(this, damageIn);
-        } else {
-            getDamageHistory().setHasBeenDealtNonCombatDamageThisTurn(true);
-        }
+        source.getDamageHistory().registerDamage(this, isCombat);
 
         // Run triggers
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
