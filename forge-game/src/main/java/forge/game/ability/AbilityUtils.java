@@ -2100,11 +2100,6 @@ public class AbilityUtils {
             return doXMath(sum, expr, c, ctb);
         }
 
-        if (sq[0].startsWith("NumCombatDamageThisTurn")) {
-            String[] props = l[0].split(" ");
-            return doXMath(game.getDamageDoneThisTurn(true, false, false, props[1], props[2], c, player, ctb).size(), expr, c, ctb);
-        }
-
         if (sq[0].equals("RegeneratedThisTurn")) {
             return doXMath(c.getRegeneratedThisTurn(), expr, c, ctb);
         }
@@ -2363,20 +2358,17 @@ public class AbilityUtils {
             return doXMath(player.getOpponentsTotalPoisonCounters(), expr, c, ctb);
         }
 
-        if (sq[0].equals("YourDamageThisTurn")) {
-            return doXMath(player.getAssignedDamage(), expr, c, ctb);
-        }
-        if (sq[0].equals("TotalOppDamageThisTurn")) {
-            return doXMath(player.getOpponentsAssignedDamage(), expr, c, ctb);
-        }
         if (sq[0].equals("MaxOppDamageThisTurn")) {
             return doXMath(player.getMaxOpponentAssignedDamage(), expr, c, ctb);
         }
 
-        if (sq[0].startsWith("YourDamageSourcesThisTurn")) {
-            Iterable<Card> allSrc = player.getAssignedDamageSources();
-            String restriction = sq[0].split(" ")[1];
-            return doXMath(CardLists.getValidCardCount(allSrc, restriction, player, c, ctb), expr, c, ctb);
+        if (sq[0].contains("DamageThisTurn")) {
+            String[] props = l[0].split(" ");
+            Boolean isCombat = null;
+            if (sq[0].contains("CombatDamage")) {
+                isCombat = true;
+            }
+            return doXMath(game.getDamageDoneThisTurn(isCombat, false, false, props[1], props[2], c, player, ctb).size(), expr, c, ctb);
         }
 
         if (sq[0].equals("YourTurns")) {
@@ -3329,12 +3321,6 @@ public class AbilityUtils {
                 totDmg += p.getAssignedDamage();
             }
             return doXMath(totDmg, m, source, ctb);
-        } else if (sq[0].contains("LifeLostThisTurn")) {
-            int totDmg = 0;
-            for (Player p : players) {
-                totDmg += p.getLifeLostThisTurn();
-            }
-            return doXMath(totDmg, m, source, ctb);
         }
 
         if (players.size() > 0) {
@@ -3391,7 +3377,7 @@ public class AbilityUtils {
 
         if (value.contains("DomainPlayer")) {
             int n = 0;
-            final CardCollectionView someCards = player.getCardsIn(ZoneType.Battlefield);
+            final CardCollectionView someCards = player.getLandsInPlay();
             final List<String> basic = MagicColor.Constant.BASIC_LANDS;
 
             for (int i = 0; i < basic.size(); i++) {

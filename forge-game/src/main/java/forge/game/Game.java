@@ -1120,14 +1120,14 @@ public class Game {
      * @param isCombat if true only combat damage matters, pass null for both
      * @param countDamagedBy if true the returned Pairs contain the damage targets instead of the LKI of the sources
      * @param anyIsEnough if true returns early once result has an entry
-     * @param validCard
-     * @param validEntity
+     * @param validSourceCard
+     * @param validTargetEntity
      * @param source
      * @param sourceController
      * @param ctb
      * @return List<Pair<GameEntity, Integer>>
      */
-    public List<Pair<GameEntity, Integer>> getDamageDoneThisTurn(Boolean isCombat, boolean countDamagedBy, boolean anyIsEnough, String validCard, String validEntity, Card source, Player sourceController, CardTraitBase ctb) {
+    public List<Pair<GameEntity, Integer>> getDamageDoneThisTurn(Boolean isCombat, boolean countDamagedBy, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
         List<Pair<GameEntity, Integer>> dmgList = Lists.newArrayList();
         for (Entry<Pair<Integer, Boolean>, Pair<Card, GameEntity>> e : damageDoneThisTurn.entries()) {
             Pair<Integer, Boolean> damage = e.getKey();
@@ -1136,10 +1136,10 @@ public class Game {
             if (isCombat != null && damage.getRight() != isCombat) {
                 continue;
             }
-            if (validCard != null && !sourceToTarget.getLeft().isValid(validCard.split(","), sourceController, source, ctb)) {
+            if (validSourceCard != null && !sourceToTarget.getLeft().isValid(validSourceCard.split(","), sourceController, source, ctb)) {
                 continue;
             }
-            if (validEntity != null && !sourceToTarget.getRight().isValid(validEntity.split(","), sourceController, source, ctb)) {
+            if (validTargetEntity != null && !sourceToTarget.getRight().isValid(validTargetEntity.split(","), sourceController, source, ctb)) {
                 continue;
             }
             dmgList.add(Pair.of(countDamagedBy ? sourceToTarget.getRight() : sourceToTarget.getLeft(), damage.getLeft()));

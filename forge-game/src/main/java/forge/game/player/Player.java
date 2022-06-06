@@ -146,8 +146,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int life = 20;
     private int startingLife = 20;
     private int lifeStartedThisTurnWith = startingLife;
-    private final Map<Card, Integer> assignedDamage = Maps.newHashMap();
-    private final Map<Card, Integer> assignedCombatDamage = Maps.newHashMap();
     private int spellsCastThisTurn;
     private int spellsCastThisGame;
     private int spellsCastLastTurn;
@@ -701,13 +699,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        int old = assignedDamage.containsKey(source) ? assignedDamage.get(source) : 0;
-        assignedDamage.put(source, old + amount);
         source.getDamageHistory().registerDamage(this, amount);
 
         if (isCombat) {
-            old = assignedCombatDamage.containsKey(source) ? assignedCombatDamage.get(source) : 0;
-            assignedCombatDamage.put(source, old + amount);
             source.getDamageHistory().registerCombatDamage(this, amount);
         }
 
@@ -824,45 +818,16 @@ public class Player extends GameEntity implements Comparable<Player> {
         simultaneousDamage = 0;
     }
 
-    public final void clearAssignedDamage() {
-        assignedDamage.clear();
-        assignedCombatDamage.clear();
-    }
-
     public final int getAssignedDamage() {
-        int num = 0;
-        for (final Integer value : assignedDamage.values()) {
-            num += value;
-        }
-        return num;
+        return getAssignedDamage(null, null);
     }
-
     public final int getAssignedCombatDamage() {
+        return getAssignedDamage(true, null);
+    }
+    public final int getAssignedDamage(Boolean isCombat, final Card source) {
         int num = 0;
-        for (final Integer value : assignedCombatDamage.values()) {
-            num += value;
-        }
-        return num;
-    }
-
-    public final Iterable<Card> getAssignedDamageSources() {
-        return assignedDamage.keySet();
-    }
-
-    public final int getAssignedDamage(final Card c) {
-        return assignedDamage.get(c);
-    }
-
-    public final int getAssignedDamage(final String type) {
-        final Map<Card, Integer> valueMap = Maps.newHashMap();
-        for (final Card c : assignedDamage.keySet()) {
-            if (c.getType().hasStringType(type)) {
-                valueMap.put(c, assignedDamage.get(c));
-            }
-        }
-        int num = 0;
-        for (final Integer value : valueMap.values()) {
-            num += value;
+        for (Pair<GameEntity, Integer> p : game.getDamageDoneThisTurn(isCombat, false, false, source != null ? "Card.StrictlySelf" : null, "You", source, this, null)) {
+            num += p.getRight();
         }
         return num;
     }
@@ -2448,7 +2413,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetCycledThisTurn();
         resetEquippedThisTurn();
         resetSacrificedThisTurn();
-        clearAssignedDamage();
         resetVenturedThisTurn();
         setRevolt(false);
         setSpellsCastLastTurn(getSpellsCastThisTurn());
