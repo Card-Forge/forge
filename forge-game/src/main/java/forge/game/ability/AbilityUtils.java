@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
@@ -2092,14 +2093,6 @@ public class AbilityUtils {
             return doXMath(c.getTimesMutated(), expr, c, ctb);
         }
 
-        if (sq[0].startsWith("DamageDoneByPlayerThisTurn")) {
-            int sum = 0;
-            for (Player p : getDefinedPlayers(c, sq[1], ctb)) {
-                sum += c.getReceivedDamageByPlayerThisTurn(p);
-            }
-            return doXMath(sum, expr, c, ctb);
-        }
-
         if (sq[0].equals("RegeneratedThisTurn")) {
             return doXMath(c.getRegeneratedThisTurn(), expr, c, ctb);
         }
@@ -2369,6 +2362,15 @@ public class AbilityUtils {
                 isCombat = true;
             }
             return doXMath(game.getDamageDoneThisTurn(isCombat, false, false, props[1], props[2], c, player, ctb).size(), expr, c, ctb);
+        }
+
+        if (sq[0].contains("TotalDamageThisTurn")) {
+            String[] props = l[0].split(" ");
+            int sum = 0;
+            for (Pair<GameEntity, Integer> p : game.getDamageDoneThisTurn(null, false, false, props[1], props[2], c, player, ctb)) {
+                sum += p.getRight();
+            }
+            return doXMath(sum, expr, c, ctb);
         }
 
         if (sq[0].equals("YourTurns")) {

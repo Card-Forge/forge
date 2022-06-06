@@ -8,6 +8,6 @@ SVar:GrothamaFight:DB$ Fight | Defined$ TriggeredAttackerLKICopy | ExtraDefined$
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigRepeat | TriggerDescription$ When CARDNAME leaves the battlefield, each player draws cards equal to the amount of damage dealt to Grothama this turn by sources they controlled.
 SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ TrigDraw
 SVar:TrigDraw:DB$ Draw | Defined$ Remembered | NumCards$ X
-SVar:X:TriggeredCard$DamageDoneByPlayerThisTurn.Remembered
+SVar:X:TriggeredCard$TotalDamageThisTurn Card.RememberedPlayerCtrl Card.StrictlySelf
 SVar:HasAttackEffect:TRUE
 Oracle:Other creatures have "Whenever this creature attacks, you may have it fight Grothama, All-Devouring."\nWhen Grothama leaves the battlefield, each player draws cards equal to the amount of damage dealt to Grothama this turn by sources they controlled.

@@ -1120,29 +1120,16 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("DamagedBy")) {
-            List<Card> damaged = Lists.newArrayList();
-            for (Pair<Card, Integer> pair : card.getReceivedDamageFromThisTurn()) {
-                damaged.add(pair.getLeft());
+            String prop = property.substring("DamagedBy".length());
+            boolean found = false;
+            for (Pair<GameEntity, Integer> p : game.getDamageDoneThisTurn(null, false, false, prop.isEmpty() ? null : prop, "Card.StrictlySelf", card, sourceController, spellAbility)) {
+                if (!prop.isEmpty() || (p.getLeft() instanceof Card && ((Card)p.getLeft()).equalsWithTimestamp(source))) {
+                    found = true;
+                    break;
+                }
             }
-            if (property.endsWith("Source") || property.equals("DamagedBy")) {
-                if (!damaged.contains(source)) {
-                    return false;
-                }
-            } else {
-                String prop = property.substring("DamagedBy".length());
-                boolean found = Iterables.any(damaged, CardPredicates.restriction(prop, sourceController, source, spellAbility));
-
-                if (!found) {
-                    for (Card d : AbilityUtils.getDefinedCards(source, prop, spellAbility)) {
-                        if (damaged.contains(d)) {
-                            found = true;
-                            break;
-                        }
-                    }
-                }
-                if (!found) {
-                    return false;
-                }
+            if (!found) {
+                return false;
             }
         } else if (property.startsWith("Damaged")) {
             boolean found = false;
@@ -1183,7 +1170,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
-            if (card.getReceivedDamageFromPlayerThisTurn().isEmpty()) {
+            if (card.getTotalDamageReceivedThisTurn() == 0) {
                 return false;
             }
         } else if (property.equals("wasDealtNonCombatDamageThisTurn")) {
