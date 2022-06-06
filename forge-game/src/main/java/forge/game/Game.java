@@ -248,7 +248,7 @@ public class Game {
         if (c == null) {
             return null;
         }
-        return changeZoneLKIInfo.containsKey(c.getId()) ? changeZoneLKIInfo.get(c.getId()) : c;
+        return changeZoneLKIInfo.getOrDefault(c.getId(), c);
     }
     public final void clearChangeZoneLKIInfo() {
         changeZoneLKIInfo.clear();
