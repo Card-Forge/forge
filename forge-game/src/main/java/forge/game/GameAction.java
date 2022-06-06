@@ -27,7 +27,6 @@ import java.util.Set;
 import forge.util.*;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ComparisonChain;
@@ -1293,12 +1292,7 @@ public class GameAction {
                         noRegCreats.add(c);
                         checkAgain = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
-                        int maxDmg = 0;
-                        for (Pair<Card, Integer> p : game.getDamageDoneThisTurn(null, false, null, "Card.StrictlySelf", c, null, null)) {
-                            maxDmg = Math.max(maxDmg, p.getRight());
-                        }
-
-                        if (c.getLethal() <= maxDmg || c.hasBeenDealtDeathtouchDamage()) {
+                        if (c.getLethal() <= c.getMaxDamageFromSource() || c.hasBeenDealtDeathtouchDamage()) {
                             if (desCreats == null) {
                                 desCreats = new CardCollection();
                             }

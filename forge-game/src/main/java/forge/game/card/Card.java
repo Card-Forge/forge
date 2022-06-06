@@ -255,7 +255,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private String oracleText = "";
 
-    private int damage;
+    private Map<Integer, Integer> damage = Maps.newHashMap();
     private boolean hasBeenDealtDeathtouchDamage;
 
     // regeneration
@@ -5339,13 +5339,24 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final int getDamage() {
-        return damage;
+        int sum = 0;
+        for (int i : damage.values()) {
+            sum += i;
+        }
+        return sum;
     }
     public final void setDamage(int damage0) {
-        if (damage == damage0) { return; }
-        damage = damage0;
+        if (getDamage() == damage0) { return; }
+        damage.clear();
+        if (damage0 != 0) {
+            damage.put(0, damage0);
+        }
         view.updateDamage(this);
         getGame().fireEvent(new GameEventCardStatsChanged(this));
+    }
+
+    public int getMaxDamageFromSource() {
+        return damage.isEmpty() ? 0 : Collections.max(damage.values());
     }
 
     public final boolean hasBeenDealtDeathtouchDamage() {
@@ -5526,7 +5537,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 damageType = DamageType.M1M1Counters;
             }
             else { // 120.3e
-                damage += damageIn;
+                int old = damage.getOrDefault(Objects.hash(source.getId(), source.getTimestamp()), 0);
+                damage.put(Objects.hash(source.getId(), source.getTimestamp()), old + damageIn);
                 view.updateDamage(this);
             }
 
