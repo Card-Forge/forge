@@ -1,6 +1,6 @@
 [format]
 Name:Historic (YSNC)
-Type:Historic
+Type:Archived
 Subtype:Arena
 Effective:2022-06-02
 Sets:XLN, RIX, DOM, M19, ANA, PANA, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2, IKO, HA3, M21, JMP, AJMP, AKR, ANB, ZNR, KLR, KHM, HA4, STX, STA, HA5, AFR, J21, MID, VOW, YMID, NEO, YNEO, SNC, YSNC

@@ -1,4 +1,5 @@
 #Add one announcement per line
 Get in the discord if you aren't yet. https://discord.gg/3v9JCVr
 The SNC set is fully integrated, as well as most of the NCC cards (several cards are still missing from the latter).
+Historic-type formats have been renamed to Archived to reduce confusion. You may need to re-enable them in your preferences.
 *** Android 7 & 8 support is now deprecated. Support will be dropped in an upcoming release. ***
