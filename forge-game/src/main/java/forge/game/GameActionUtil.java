@@ -182,6 +182,8 @@ public final class GameActionUtil {
                         } else {
                             newSA = new SpellPermanent(source);
                             newSA.setCardState(source.getAlternateState());
+                            newSA.setPayCosts(disturbCost);
+                            newSA.setActivatingPlayer(activator);
                         }
                         newSA.setActivatingPlayer(activator);
 
