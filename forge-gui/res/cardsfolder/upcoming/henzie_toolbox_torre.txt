@@ -2,7 +2,7 @@ Name:Henzie "Toolbox" Torre
 ManaCost:B R G
 Types: Legendary Creature Devil Rogue
 PT:3/3
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Stack | AddKeyword$ Blitz:CardManaCost | Description$ Each creature spell you cast with mana value 4 or greater has blitz. The blitz cost is equal to its mana cost. (You may choose to cast that spell for its blitz cost. If you do, it gains haste and “When this creature dies, draw a card.” Sacrifice it at the beginning of the next end step.)
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Stack | AddKeyword$ Blitz:CardManaCost:Spell.Creature+cmcGE4 | Description$ Each creature spell you cast with mana value 4 or greater has blitz. The blitz cost is equal to its mana cost. (You may choose to cast that spell for its blitz cost. If you do, it gains haste and “When this creature dies, draw a card.” Sacrifice it at the beginning of the next end step.)
 S:Mode$ ReduceCost | ValidCard$ Card | ValidSpell$ Spell.Blitz | Activator$ You | Amount$ X | Description$ Blitz costs you pay cost {1} less for each time you’ve cast your commander from the command zone this game.
 SVar:X:Count$TotalCommanderCastFromCommandZone
 Oracle:Each creature spell you cast with mana value 4 or greater has blitz. The blitz cost is equal to its mana cost. (You may choose to cast that spell for its blitz cost. If you do, it gains haste and “When this creature dies, draw a card.” Sacrifice it at the beginning of the next end step.)\nBlitz costs you pay cost {1} less for each time you’ve cast your commander from the command zone this game.
