@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
@@ -2367,8 +2366,8 @@ public class AbilityUtils {
         if (sq[0].contains("TotalDamageThisTurn")) {
             String[] props = l[0].split(" ");
             int sum = 0;
-            for (Pair<Card, Integer> p : game.getDamageDoneThisTurn(null, false, props[1], props[2], c, player, ctb)) {
-                sum += p.getRight();
+            for (Integer i : game.getDamageDoneThisTurn(null, false, props[1], props[2], c, player, ctb)) {
+                sum += i;
             }
             return doXMath(sum, expr, c, ctb);
         }

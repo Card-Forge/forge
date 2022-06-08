@@ -2,7 +2,7 @@ Name:Dragon Cultist
 ManaCost:4 R
 Types:Legendary Enchantment Background
 S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ TrigDragon | Description$ Commander creatures you own have "At the beginning of your end step, if a source you controlled dealt 5 or more damage this turn, create a 4/4 red Dragon creature token with flying."
-SVar:TrigDragon:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckDefinedPlayer$ You.damageDone GE 5 | Execute$ DBDragon | TriggerDescription$ At the beginning of your end step, if a source you controlled dealt 5 or more damage this turn, create a 4/4 red Dragon creature token with flying.
+SVar:TrigDragon:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckDefinedPlayer$ You.damageDoneSingleSource GE 5 | Execute$ DBDragon | TriggerDescription$ At the beginning of your end step, if a source you controlled dealt 5 or more damage this turn, create a 4/4 red Dragon creature token with flying.
 SVar:DBDragon:DB$ Token | TokenScript$ r_4_4_dragon_flying
 DeckHas:Ability$Token & Type$Dragon
 AI:RemoveDeck:NonCommander

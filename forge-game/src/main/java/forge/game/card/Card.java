@@ -5296,14 +5296,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final int getTotalDamageReceivedThisTurn() {
         int sum = 0;
-        for (Pair<Card, Integer> p : game.getDamageDoneThisTurn(null, false, null, "Card.StrictlySelf", this, getController(), null)) {
-            sum += p.getRight();
+        for (Integer i : game.getDamageDoneThisTurn(null, false, null, "Card.StrictlySelf", this, getController(), null)) {
+            sum += i;
         }
         return sum;
     }
 
     public final boolean hasDealtDamageToOpponentThisTurn() {
-        return !game.getDamageDoneThisTurn(null, true, "Card.StrictlySelf", "Player.Opponent", this, getController(), null).isEmpty();
+        return getDamageHistory().getDamageDoneThisTurn(null, true, null, "Player.Opponent", this, getController(), null) > 0;
     }
 
     /**
@@ -5312,11 +5312,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
      * @return the damage done to player p this turn
      */
     public final int getTotalDamageDoneBy() {
-        int sum = 0;
-        for (Pair<Card, Integer> p : game.getDamageDoneThisTurn(null, false, "Card.StrictlySelf", null, this, getController(), null)) {
-            sum += p.getRight();
-        }
-        return sum;
+        return getDamageHistory().getDamageDoneThisTurn(null, false, null, null, this, getController(), null);
     }
 
     // this is the amount of damage a creature needs to receive before it dies

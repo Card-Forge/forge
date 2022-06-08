@@ -1,9 +1,8 @@
 package forge.game.player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -84,13 +83,11 @@ public class PlayerProperty {
             if (!player.hasBlessing()) {
                 return false;
             }
-        } else if (property.startsWith("damageDone")) {
+        } else if (property.startsWith("damageDoneSingleSource")) {
             String[] props = property.split(" ");
-            int sourceDmg = 0;
-            for (Pair<Card, Integer> p : game.getDamageDoneThisTurn(null, false, "Card.YouCtrl", null, source, sourceController, spellAbility)) {
-                sourceDmg = Math.max(sourceDmg, p.getRight());
-            }
-            if (!Expressions.compare(sourceDmg, props[1], AbilityUtils.calculateAmount(source, props[2], spellAbility))) {
+            List<Integer> sourceDmg = game.getDamageDoneThisTurn(null, false, "Card.YouCtrl", null, source, sourceController, spellAbility);
+            int maxDmg = sourceDmg.isEmpty() ? 0 : Collections.max(sourceDmg);
+            if (!Expressions.compare(maxDmg, props[1], AbilityUtils.calculateAmount(source, props[2], spellAbility))) {
                 return false;
             }
         } else if (property.startsWith("wasDealtCombatDamageThisCombatBy ")) {
@@ -120,23 +117,30 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.startsWith("wasDealt")) {
+            boolean found = false;
+            String validCard = null;
             Boolean combat = null;
             if (property.contains("CombatDamage")) {
                 combat = true;
             }
-            String validCard = null;
-            String comp = "GE";
-            int right = 1;
+            if (property.contains("ThisTurnBySource")) {
+                found = source.getDamageHistory().getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility) > 0;
+            } else {
+                String comp = "GE";
+                int right = 1;
+                int numValid = 0;
 
-            if (property.contains("ThisTurnBy")) {
-                String[] props = property.split(" ");
-                validCard = props[1];
-                comp = props[2];
-                right = AbilityUtils.calculateAmount(source, props[3], spellAbility);
+                if (property.contains("ThisTurnBy")) {
+                    String[] props = property.split(" ");
+                    validCard = props[1];
+                    comp = props[2];
+                    right = AbilityUtils.calculateAmount(source, props[3], spellAbility);
+                }
+
+                numValid = game.getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility).size();
+                found = Expressions.compare(numValid, comp, right);
             }
-
-            int numValid = game.getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility).size();
-            if (!Expressions.compare(numValid, comp, right)) {
+            if (!found) {
                 return false;
             }
         } else if (property.equals("attackedBySourceThisCombat")) {

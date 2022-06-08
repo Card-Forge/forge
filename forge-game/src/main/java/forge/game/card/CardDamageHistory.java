@@ -249,28 +249,27 @@ public class CardDamageHistory {
         damageDoneThisTurn.put(Pair.of(damage, isCombat), Pair.of(sourceLKI, target));
         return this;
     }
-    public Pair<Card, Integer> getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Player sourceController, Card source, CardTraitBase ctb) {
-        Pair<Card, GameEntity> sourceToTarget = null;
+    public int getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
         int sum = 0;
         for (Entry<Pair<Integer, Boolean>, Pair<Card, GameEntity>> e : damageDoneThisTurn.entries()) {
             Pair<Integer, Boolean> damage = e.getKey();
-            sourceToTarget = e.getValue();
+            Pair<Card, GameEntity> sourceToTarget = e.getValue();
 
             if (isCombat != null && damage.getRight() != isCombat) {
                 continue;
             }
-            if (validSourceCard != null && !sourceToTarget.getLeft().isValid(validSourceCard.split(","), sourceController, source, ctb)) {
+            if (validSourceCard != null && !sourceToTarget.getLeft().isValid(validSourceCard.split(","), sourceController, source == null ? sourceToTarget.getLeft() : source, ctb)) {
                 continue;
             }
             if (validTargetEntity != null && !sourceToTarget.getRight().isValid(validTargetEntity.split(","), sourceController, source, ctb)) {
                 continue;
             }
-            sum += damage.getKey();
+            sum += damage.getLeft();
             if (anyIsEnough) {
                 break;
             }
         }
-        return sourceToTarget == null ? null : Pair.of(sourceToTarget.getKey(), sum);
+        return sum;
     }
 
     public void newTurn() {

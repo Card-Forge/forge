@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -1124,18 +1123,15 @@ public class Game {
      * @param source
      * @param sourceController
      * @param ctb
-     * @return List<Pair<Card, Integer>>
+     * @return List<Integer> for each source
      */
-    public List<Pair<Card, Integer>> getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
-        final List<Pair<Card, Integer>> dmgList = Lists.newArrayList();
+    public List<Integer> getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
+        final List<Integer> dmgList = Lists.newArrayList();
         for (CardDamageHistory cdh : globalDamageHistory) {
-            Pair<Card, Integer> dmg = cdh.getDamageDoneThisTurn(isCombat, anyIsEnough, validSourceCard, validTargetEntity, sourceController, source, ctb);
+            dmgList.add(cdh.getDamageDoneThisTurn(isCombat, anyIsEnough, validSourceCard, validTargetEntity, source, sourceController, ctb));
 
-            if (dmg != null) {
-                dmgList.add(dmg);
-                if (anyIsEnough) {
-                    break;
-                }
+            if (anyIsEnough && !dmgList.isEmpty()) {
+                break;
             }
         }
 

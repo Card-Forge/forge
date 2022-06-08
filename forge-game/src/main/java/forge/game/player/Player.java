@@ -822,8 +822,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final int getAssignedDamage(Boolean isCombat, final Card source) {
         int num = 0;
-        for (Pair<Card, Integer> p : game.getDamageDoneThisTurn(isCombat, false, source != null ? "Card.StrictlySelf" : null, "You", source, this, null)) {
-            num += p.getRight();
+        for (Integer i : game.getDamageDoneThisTurn(isCombat, false, source != null ? "Card.StrictlySelf" : null, "You", source, this, null)) {
+            num += i;
         }
         return num;
     }
@@ -2058,14 +2058,11 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasProwl(final Set<String> types) {
-        for (Pair<Card, Integer> p : game.getDamageDoneThisTurn(true, false, "Card.YouCtrl", "Player", null, this, null)) {
-            for (String type : types) {
-                if (p.getLeft().getType().hasCreatureType(type)) {
-                    return true;
-                }
-            }
+        StringBuilder sb = new StringBuilder();
+        for (String type : types) {
+            sb.append("Card.YouCtrl+").append(type).append(",");
         }
-        return false;
+        return !game.getDamageDoneThisTurn(true, false, sb.toString(), "Player", null, this, null).isEmpty();
     }
 
     public final void setLibrarySearched(final int l) {
