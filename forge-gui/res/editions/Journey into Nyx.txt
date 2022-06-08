@@ -180,7 +180,7 @@ ScryfallCode=JOU
 [tokens]
 b_x_x_zombie
 bg_1_1_e_snake_deathtouch
-c_a_gold_draw
+c_a_gold_sac
 g_1_3_e_spider_reach
 g_x_x_hydra
 r_2_3_minotaur_haste
