@@ -451,7 +451,7 @@
 	"equipmentSlot": "Right",
 	"effect": {
 		"startBattleWithCard": [
-			"c_a_gold_draw"
+			"c_a_gold_sac"
 		]
 	},
 	"iconName": "Gold"
