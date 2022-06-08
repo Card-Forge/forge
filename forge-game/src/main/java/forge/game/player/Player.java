@@ -2106,7 +2106,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         } else if (incR[0].equals("EnchantedController")) {
             final GameEntity enchanted = source.getEntityAttachedTo();
-            if ((enchanted == null) || !(enchanted instanceof Card)) {
+            if (enchanted == null || !(enchanted instanceof Card)) {
                 return false;
             }
             final Card enchantedCard = (Card) enchanted;
@@ -2195,10 +2195,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         investigatedThisTurn = 0;
     }
 
-    public final List<Card> getSacrificedThisTurn() {
-        return sacrificedThisTurn;
-    }
-
     public final void addSacrificedThisTurn(final Card c, final SpellAbility source) {
         // Play the Sacrifice sound
         game.fireEvent(new GameEventCardSacrificed());
@@ -2216,6 +2212,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams, false);
     }
 
+    public final List<Card> getSacrificedThisTurn() {
+        return sacrificedThisTurn;
+    }
     public final void resetSacrificedThisTurn() {
         sacrificedThisTurn.clear();
     }

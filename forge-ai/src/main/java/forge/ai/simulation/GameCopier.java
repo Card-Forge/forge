@@ -209,7 +209,7 @@ public class GameCopier {
     private void copyGameState(Game newGame) {
         newGame.setAge(origGame.getAge());
 
-        // TODO countersAddedThisTurn + damageDoneThisTurn
+        // TODO countersAddedThisTurn
 
         if (origGame.getMonarch() != null) {
             newGame.setMonarch(playerMap.get(origGame.getMonarch()));
@@ -308,6 +308,7 @@ public class GameCopier {
             newCard.setPTCharacterDefiningTable(c.getSetPTCharacterDefiningTable());
 
             newCard.setPTBoost(c.getPTBoostTable());
+            // TODO copy by map
             newCard.setDamage(c.getDamage());
 
             newCard.setChangedCardColors(c.getChangedCardColorsTable());

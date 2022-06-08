@@ -2,9 +2,15 @@ package forge.game.card;
 
 
 import java.util.List;
+import java.util.Map.Entry;
 
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.MultimapBuilder;
 
+import forge.game.CardTraitBase;
 import forge.game.GameEntity;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -26,6 +32,8 @@ public class CardDamageHistory {
     private final List<Player> NotAttackedSinceLastUpkeepOf = Lists.newArrayList();
     private final List<Player> NotBlockedSinceLastUpkeepOf = Lists.newArrayList();
     private final List<Player> NotBeenBlockedSinceLastUpkeepOf = Lists.newArrayList();
+
+    private ListMultimap<Pair<Integer, Boolean>, Pair<Card, GameEntity>> damageDoneThisTurn = MultimapBuilder.treeKeys().arrayListValues().build();
 
     // only needed for Glen Elendra (Plane)
     private final List<Player> damagedThisCombat = Lists.newArrayList();
@@ -237,9 +245,38 @@ public class CardDamageHistory {
         }
     }
 
+    public CardDamageHistory addDamageDoneThisTurn(int damage, boolean isCombat, Card sourceLKI, GameEntity target) {
+        damageDoneThisTurn.put(Pair.of(damage, isCombat), Pair.of(sourceLKI, target));
+        return this;
+    }
+    public Pair<Card, Integer> getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Player sourceController, Card source, CardTraitBase ctb) {
+        Pair<Card, GameEntity> sourceToTarget = null;
+        int sum = 0;
+        for (Entry<Pair<Integer, Boolean>, Pair<Card, GameEntity>> e : damageDoneThisTurn.entries()) {
+            Pair<Integer, Boolean> damage = e.getKey();
+            sourceToTarget = e.getValue();
+
+            if (isCombat != null && damage.getRight() != isCombat) {
+                continue;
+            }
+            if (validSourceCard != null && !sourceToTarget.getLeft().isValid(validSourceCard.split(","), sourceController, source, ctb)) {
+                continue;
+            }
+            if (validTargetEntity != null && !sourceToTarget.getRight().isValid(validTargetEntity.split(","), sourceController, source, ctb)) {
+                continue;
+            }
+            sum += damage.getKey();
+            if (anyIsEnough) {
+                break;
+            }
+        }
+        return sourceToTarget == null ? null : Pair.of(sourceToTarget.getKey(), sum);
+    }
+
     public void newTurn() {
         attackedThisTurn.clear();
         damagedThisCombat.clear();
+        damageDoneThisTurn.clear();
 
         // if card already LTB we can safely dereference (allows quite a few objects to be cleaned up earlier for bigger boardstates)
         CardCollection toRemove = new CardCollection();

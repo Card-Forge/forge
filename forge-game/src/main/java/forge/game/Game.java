@@ -34,11 +34,9 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.MultimapBuilder;
 import com.google.common.collect.Table;
 import com.google.common.eventbus.EventBus;
 
@@ -50,6 +48,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardDamageHistory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
@@ -81,6 +80,7 @@ import forge.trackable.Tracker;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.Visitor;
+import forge.util.collect.FCollection;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -122,7 +122,7 @@ public class Game {
 
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
 
-    private ListMultimap<Pair<Integer, Boolean>, Pair<Card, GameEntity>> damageDoneThisTurn = MultimapBuilder.treeKeys().arrayListValues().build();
+    private FCollection<CardDamageHistory> globalDamageHistory = new FCollection<>();
 
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
     private Map<Card, Integer>  facedownWhileCasting = Maps.newHashMap();
@@ -1073,7 +1073,7 @@ public class Game {
 
     public void onCleanupPhase() {
         clearCounterAddedThisTurn();
-        clearDamageDoneThisTurn();
+        clearGlobalDamageHistory();
         // some cards need this info updated even after a player lost, so don't skip them
         for (Player player : getRegisteredPlayers()) {
             player.onCleanupPhase();
@@ -1128,51 +1128,25 @@ public class Game {
      */
     public List<Pair<Card, Integer>> getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
         final List<Pair<Card, Integer>> dmgList = Lists.newArrayList();
-        for (Entry<Pair<Integer, Boolean>, Pair<Card, GameEntity>> e : damageDoneThisTurn.entries()) {
-            Pair<Integer, Boolean> damage = e.getKey();
-            Pair<Card, GameEntity> sourceToTarget = e.getValue();
+        for (CardDamageHistory cdh : globalDamageHistory) {
+            Pair<Card, Integer> dmg = cdh.getDamageDoneThisTurn(isCombat, anyIsEnough, validSourceCard, validTargetEntity, sourceController, source, ctb);
 
-            if (isCombat != null && damage.getRight() != isCombat) {
-                continue;
-            }
-            if (validSourceCard != null && !sourceToTarget.getLeft().isValid(validSourceCard.split(","), sourceController, source, ctb)) {
-                continue;
-            }
-            if (validTargetEntity != null && !sourceToTarget.getRight().isValid(validTargetEntity.split(","), sourceController, source, ctb)) {
-                continue;
-            }
-            dmgList.add(Pair.of(sourceToTarget.getLeft(), damage.getLeft()));
-            if (anyIsEnough) {
-                return dmgList;
-            }
-        }
-
-        List<Pair<Card, Integer>> result = Lists.newArrayList();
-        // merge same objects
-        while (!dmgList.isEmpty()) {
-            Pair<Card, Integer> damaged = dmgList.get(0);
-            int sum = damaged.getRight();
-            dmgList.remove(damaged);
-
-            for (Pair<Card, Integer> other : Lists.newArrayList(dmgList)) {
-                if (other.getLeft().equalsWithTimestamp(damaged.getLeft())) {
-                    sum += other.getRight();
-                    // once it got counted keep it out
-                    dmgList.remove(other);
+            if (dmg != null) {
+                dmgList.add(dmg);
+                if (anyIsEnough) {
+                    break;
                 }
             }
-            result.add(Pair.of(damaged.getLeft(), sum));
         }
 
-        return result;
+        return dmgList;
     }
 
-    public void addDamageDoneThisTurn(int damage, boolean isCombat, Card sourceLKI, GameEntity target) {
-        damageDoneThisTurn.put(Pair.of(damage, isCombat), Pair.of(sourceLKI, target));
+    public void addGlobalDamageHistory(CardDamageHistory cdh) {
+        globalDamageHistory.add(cdh);
     }
-
-    public void clearDamageDoneThisTurn() {
-        damageDoneThisTurn.clear();
+    public void clearGlobalDamageHistory() {
+        globalDamageHistory.clear();
     }
 
     public Card getTopLibForPlayer(Player P) {
