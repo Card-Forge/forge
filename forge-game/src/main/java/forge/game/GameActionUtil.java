@@ -42,14 +42,7 @@ import forge.game.player.PlayerController;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.AbilityManaPart;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.AlternativeCost;
-import forge.game.spellability.OptionalCost;
-import forge.game.spellability.OptionalCostValue;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
+import forge.game.spellability.*;
 import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -183,7 +176,13 @@ public final class GameActionUtil {
                         final String[] k = keyword.split(":");
                         final Cost disturbCost = new Cost(k[1], true);
 
-                        SpellAbility newSA = source.getAlternateState().getFirstAbility().copyWithManaCostReplaced(activator, disturbCost);
+                        SpellAbility newSA;
+                        if (source.getAlternateState().getType().hasSubtype("Aura")) {
+                            newSA = source.getAlternateState().getFirstAbility().copyWithManaCostReplaced(activator, disturbCost);
+                        } else {
+                            newSA = new SpellPermanent(source);
+                            newSA.setCardState(source.getAlternateState());
+                        }
                         newSA.setActivatingPlayer(activator);
 
                         newSA.putParam("PrecostDesc", "Disturb —");
