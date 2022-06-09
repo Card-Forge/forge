@@ -185,7 +185,6 @@ public final class GameActionUtil {
                             newSA.setPayCosts(disturbCost);
                             newSA.setActivatingPlayer(activator);
                         }
-                        newSA.setActivatingPlayer(activator);
 
                         newSA.putParam("PrecostDesc", "Disturb —");
                         newSA.putParam("CostDesc", disturbCost.toString());
