@@ -7,7 +7,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
 
-public class BecomeMonarchEffect extends SpellAbilityEffect {
+public class TakeInitiativeEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
@@ -15,8 +15,8 @@ public class BecomeMonarchEffect extends SpellAbilityEffect {
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        sb.append(Lang.joinHomogenous(tgtPlayers)).append(tgtPlayers.size() == 1 ? " becomes" : " become");
-        sb.append(" the monarch.");
+        sb.append(Lang.joinHomogenous(tgtPlayers)).append(tgtPlayers.size() == 1 ? " takes" : " take");
+        sb.append(" the initiative.");
 
         return sb.toString();
     }
@@ -28,11 +28,8 @@ public class BecomeMonarchEffect extends SpellAbilityEffect {
 
         for (final Player p : getTargetPlayers(sa)) {
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                if (p.canBecomeMonarch()) {
-                    p.getGame().getAction().becomeMonarch(p, set);
-                }
+                p.getGame().getAction().takeInitiative(p, set);
             }
         }
     }
-
 }

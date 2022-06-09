@@ -214,6 +214,13 @@ public final class CardRules implements ICardCharacteristics {
         }
     }
 
+    public boolean isEnterableDungeon() {
+        if (mainPart.getOracleText().contains("You can't enter this dungeon unless")) {
+            return false;
+        }
+        return getType().isDungeon();
+    }
+
     public boolean canBeCommander() {
         if (mainPart.getOracleText().contains("can be your commander") || canBeBackground()) {
             return true;

@@ -240,6 +240,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Deque<SpellAbility> paidForStack = new ArrayDeque<>();
 
     private Card monarchEffect;
+    private Card initiativeEffect;
     private Card blessingEffect;
     private Card keywordEffect;
 
@@ -3185,6 +3186,77 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public boolean canBecomeMonarch() {
         return !StaticAbilityCantBecomeMonarch.anyCantBecomeMonarch(this);
+    }
+
+    public void createInitiativeEffect(final String set) {
+        final PlayerZone com = getZone(ZoneType.Command);
+        if (initiativeEffect == null) {
+            initiativeEffect = new Card(game.nextCardId(), null, game);
+            initiativeEffect.setOwner(this);
+            initiativeEffect.setImmutable(true);
+            if (set != null) {
+                initiativeEffect.setImageKey("t:initiative_" + set.toLowerCase());
+                initiativeEffect.setSetCode(set);
+            } else {
+                initiativeEffect.setImageKey("t:initiative");
+            }
+            initiativeEffect.setName("The Initiative");
+
+            //Set up damage trigger
+            final String damageTrig = "Mode$ DamageDoneOnceByController | ValidSource$ Player | ValidTarget$ You | " +
+                    "CombatDamage$ True | TriggerZones$ Command | TriggerDescription$ Whenever one or more " +
+                    "creatures a player controls deal combat damage to you, that player takes the initiative.";
+            final String damageEff = "DB$ TakeInitiative | Defined$ TriggeredAttackingPlayer";
+
+            final Trigger damageTrigger = TriggerHandler.parseTrigger(damageTrig, initiativeEffect, true);
+
+            damageTrigger.setOverridingAbility(AbilityFactory.getAbility(damageEff, initiativeEffect));
+            initiativeEffect.addTrigger(damageTrigger);
+
+            //Set up triggers to venture into Undercity
+            final String ventureTakeTrig  = "Mode$ TakesInitiative | ValidPlayer$ You | TriggerZones$ Command | " +
+                    "TriggerDescription$ Whenever you take the initiative and at the beginning of your upkeep, " +
+                    "venture into Undercity. (If you're in a dungeon, advance to the next room. If not, enter " +
+                    "Undercity. You can take the initiative even if you already have it.)";
+
+            final String ventureUpkpTrig = "Mode$ Phase | Phase$ Upkeep | TriggerZones$ Command | ValidPlayer$ You " +
+                    "| TriggerDescription$ Whenever you take the initiative and at the beginning of your upkeep, " +
+                    "venture into Undercity. (If you're in a dungeon, advance to the next room. If not, enter " +
+                    "Undercity. You can take the initiative even if you already have it.) | Secondary$ True";
+
+            final String ventureEff = "DB$ Venture | Dungeon$ Undercity";
+
+            final Trigger ventureUTrigger = TriggerHandler.parseTrigger(ventureUpkpTrig, initiativeEffect, true);
+            ventureUTrigger.setOverridingAbility(AbilityFactory.getAbility(ventureEff, initiativeEffect));
+            initiativeEffect.addTrigger(ventureUTrigger);
+
+            final Trigger ventureTTrigger = TriggerHandler.parseTrigger(ventureTakeTrig, initiativeEffect, true);
+            ventureTTrigger.setOverridingAbility(AbilityFactory.getAbility(ventureEff, initiativeEffect));
+            initiativeEffect.addTrigger(ventureTTrigger);
+
+            initiativeEffect.updateStateForView();
+        }
+
+        final TriggerHandler triggerHandler = game.getTriggerHandler();
+        triggerHandler.suppressMode(TriggerType.ChangesZone);
+        game.getAction().moveTo(ZoneType.Command, initiativeEffect, null, null);
+        triggerHandler.clearSuppression(TriggerType.ChangesZone);
+        triggerHandler.clearActiveTriggers(initiativeEffect, null);
+        triggerHandler.registerActiveTrigger(initiativeEffect, false);
+
+        this.updateZoneForView(com);
+    }
+
+    public boolean hasInitiative() {
+        return equals(game.getHasInitiative());
+    }
+
+    public void removeInitiativeEffect() {
+        final PlayerZone com = getZone(ZoneType.Command);
+        if (initiativeEffect != null) {
+            com.remove(initiativeEffect);
+            this.updateZoneForView(com);
+        }
     }
 
     public void updateKeywordCardAbilityText() {
