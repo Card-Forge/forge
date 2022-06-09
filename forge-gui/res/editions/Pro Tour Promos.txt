@@ -40,3 +40,4 @@ ScryfallCode=PPRO
 2041 R Lava Spike @Igor Kieryluk
 2042 R Nykthos, Shrine to Nyx @Alayna Danner
 2043 M Teferi, Hero of Dominaria @Chris Rallis
+2044 R Lava Spike @Igor Kieryluk
