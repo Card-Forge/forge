@@ -103,6 +103,7 @@ Gamer:Gamers
 Gargoyle:Gargoyles
 Germ:Germs
 Giant:Giants
+Gith:Gith
 Gnoll:Gnolls
 Gnome:Gnomes
 Goat:Goats
