@@ -15,28 +15,28 @@ ScryfallCode=PPRO
 2016 M Snapcaster Mage @Joseph Meehan
 2017 M Emrakul, the Aeons Torn @Vincent Proce
 2018 R Noble Hierarch @Matt Stewart
-2019 R Arcbound Ravager @Chase Stone
-p20191 U Pteramander @Simon Dominic
-p20192 R Experimental Frenzy @Simon Dominic
-p20193 M Vraska, Golgari Queen @Magali Villeneuve
+20191 R Arcbound Ravager @Chase Stone
+20192 U Pteramander @Simon Dominic
+20193 R Experimental Frenzy @Simon Dominic
+20194 M Vraska, Golgari Queen @Magali Villeneuve
 20201 R Cryptic Command @Jason Rainville
 20202 R Surgical Extraction @Steven Belledin
 20203 R Aether Vial @Billy Christian
-p20201 U Narset, Parter of Veils @Magali Villeneuve
-p20202 R Nissa, Who Shakes the World @Chris Rallis
-p20203 M Liliana, Dreadhorde General @Chris Rallis
-p20204 U Mystical Dispute @Ekaterina Burmak
-p20205 R Fae of Wishes @Magali Villeneuve
-p20206 M Elspeth, Sun's Nemesis @Livia Prima
-p20211 M Basri Ket @Toshiaki Takayama
-p20212 U Seasoned Hallowblade @Keiji Hida
-p20213 R Vito, Thorn of the Dusk Rose @Areku Nishiki
-p20214 U Saw It Coming @Anato Finnstark
-p20215 M Kaya the Inexorable @Jason A. Engle
-p20216 R Faceless Haven @Pablo Mendoza
+20204 U Narset, Parter of Veils @Magali Villeneuve
+20205 R Nissa, Who Shakes the World @Chris Rallis
+20206 M Liliana, Dreadhorde General @Chris Rallis
+20207 U Mystical Dispute @Ekaterina Burmak
+20208 R Fae of Wishes @Magali Villeneuve
+20209 M Elspeth, Sun's Nemesis @Livia Prima
+20211 M Basri Ket @Toshiaki Takayama
+20212 U Seasoned Hallowblade @Keiji Hida
+20213 R Vito, Thorn of the Dusk Rose @Areku Nishiki
+20214 U Saw It Coming @Anato Finnstark
+20215 M Kaya the Inexorable @Jason A. Engle
+20216 R Faceless Haven @Pablo Mendoza
 20221 U Lava Spike @Igor Kieryluk
 20222 M Teferi, Hero of Dominaria @Chris Rallis
 20223 R Nykthos, Shrine to Nyx @Alayna Danner
-p20221 M Grand Master of Flowers @Toshiaki Takayama
-p20222 R Adult Gold Dragon @Kotakan
-p20223 U Krydle of Baldur's Gate @Sansyu
+20224 M Grand Master of Flowers @Toshiaki Takayama
+20225 R Adult Gold Dragon @Kotakan
+20226 U Krydle of Baldur's Gate @Sansyu
