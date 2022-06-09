@@ -6,38 +6,37 @@ Type=Promo
 ScryfallCode=PPRO
 
 [cards]
-2007 R Eternal Dragon
-2008 R Mirari's Wake
-2009 R Treva, the Renewer
-2010 R Avatar of Woe
-2011 M Ajani Goldmane
-2015 M Liliana of the Veil
-2016 R Snapcaster Mage
-2017 M Emrakul, the Aeons Torn
-2018 R Noble Hierarch
-2019 R Arcbound Ravager
-2020 U Pteramander
-2021 R Experimental Frenzy
-2022 M Vraska, Golgari Queen
-2023 R Cryptic Command
-2024 U Narset, Parter of Veils
-2025 R Surgical Extraction
-2026 R Nissa, Who Shakes the World
-2027 R Aether Vial
-2028 M Liliana, Dreadhorde General
-2029 U Mystical Dispute
-2030 R Fae of Wishes
-2031 M Elspeth, Sun's Nemesis
-2032 M Basri Ket
-2033 U Seasoned Hallowblade
-2034 R Vito, Thorn of the Dusk Rose
-2035 U Saw it Coming @Anato Finnstark
-2036 M Kaya the Inexorable @Jason A. Engle
-2037 R Faceless Haven @Pablo Mendoza
-2038 M Grand Master of Flowers @Toshiaki Takayama
-2039 R Adult Gold Dragon @Kotakan
-2040 U Krydle of Baldur's Gate @ Sansyu
-2041 R Lava Spike @Igor Kieryluk
-2042 R Nykthos, Shrine to Nyx @Alayna Danner
-2043 M Teferi, Hero of Dominaria @Chris Rallis
-2044 R Lava Spike @Igor Kieryluk
+2007 R Eternal Dragon @Adam Rex
+2008 R Mirari's Wake @Volkan Baǵa
+2009 R Treva, the Renewer @Jean-Sébastien Rossbach
+2010 R Avatar of Woe @rk post
+2011 M Ajani Goldmane @Christopher Moeller
+2015 M Liliana of the Veil @Steve Argyle
+2016 M Snapcaster Mage @Joseph Meehan
+2017 M Emrakul, the Aeons Torn @Vincent Proce
+2018 R Noble Hierarch @Matt Stewart
+20191 R Arcbound Ravager @Chase Stone
+20192 U Pteramander @Simon Dominic
+20193 R Experimental Frenzy @Simon Dominic
+20194 M Vraska, Golgari Queen @Magali Villeneuve
+20201 R Cryptic Command @Jason Rainville
+20202 R Surgical Extraction @Steven Belledin
+20203 R Aether Vial @Billy Christian
+20204 U Narset, Parter of Veils @Magali Villeneuve
+20205 R Nissa, Who Shakes the World @Chris Rallis
+20206 M Liliana, Dreadhorde General @Chris Rallis
+20207 U Mystical Dispute @Ekaterina Burmak
+20208 R Fae of Wishes @Magali Villeneuve
+20209 M Elspeth, Sun's Nemesis @Livia Prima
+20211 M Basri Ket @Toshiaki Takayama
+20212 U Seasoned Hallowblade @Keiji Hida
+20213 R Vito, Thorn of the Dusk Rose @Areku Nishiki
+20214 U Saw It Coming @Anato Finnstark
+20215 M Kaya the Inexorable @Jason A. Engle
+20216 R Faceless Haven @Pablo Mendoza
+20221 U Lava Spike @Igor Kieryluk
+20222 M Teferi, Hero of Dominaria @Chris Rallis
+20223 R Nykthos, Shrine to Nyx @Alayna Danner
+20224 M Grand Master of Flowers @Toshiaki Takayama
+20225 R Adult Gold Dragon @Kotakan
+20226 U Krydle of Baldur's Gate @Sansyu
