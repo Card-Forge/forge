@@ -1,9 +1,0 @@
-Name:Vicious Battlerager
-ManaCost:3 B
-Types:Creature Dwarf Barbarian
-PT:1/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters the battlefield, you take the initiative.
-SVar:TrigInitiative:DB$ TakeInitiative
-T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Spiked Retribution — Whenever CARDNAME becomes blocked by a creature, that creature's controller loses 5 life.
-SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredBlockerController | LifeAmount$ 5
-Oracle:When Vicious Battlerager enters the battlefield, you take the initiative.\nSpiked Retribution — Whenever Vicious Battlerager becomes blocked by a creature, that creature's controller loses 5 life.

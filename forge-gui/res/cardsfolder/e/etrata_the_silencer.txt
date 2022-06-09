@@ -8,5 +8,5 @@ SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Creature.ControlledBy TriggeredDefend
 SVar:DBLose:DB$ LosesGame | Defined$ TriggeredTarget | ConditionCheckSVar$ CheckExile | ConditionSVarCompare$ GE3 | SubAbility$ DBShuffle
 SVar:CheckExile:Count$ValidExile Card.counters_GE1_HIT+ControlledBy TriggeredDefendingPlayer
 SVar:DBShuffle:DB$ ChangeZone | ConditionPresent$ Card.Self | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Library | Shuffle$ True
-DeckHints:Name$Mari, the Killing Quill|Ravenloft Adventurer
+DeckHints:Name$Mari, the Killing Quill
 Oracle:Etrata, the Silencer can't be blocked.\nWhenever Etrata deals combat damage to a player, exile target creature that player controls and put a hit counter on that card. That player loses the game if they own three or more exiled cards with hit counters on them. Etrata's owner shuffles Etrata into their library.

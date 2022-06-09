@@ -1,9 +1,0 @@
-Name:Stirring Bard
-ManaCost:3 R
-Types:Creature Dragon Bard
-PT:0/4
-K:Defender
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters the battlefield, you take the initiative.
-SVar:TrigInitiative:DB$ TakeInitiative
-A:AB$ Pump | PrecostDesc$ Mantle of Inspiration — | Cost$ T | ValidTgts$ Creature | KW$ Menace & Haste | SpellDescription$ Target creature gains menace and haste until end of turn.
-Oracle:Defender\nWhen Stirring Bard enters the battlefield, you take the initiative.\nMantle of Inspiration — {T}: Target creature gains menace and haste until end of turn.

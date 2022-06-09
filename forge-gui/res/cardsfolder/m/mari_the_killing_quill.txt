@@ -12,5 +12,5 @@ SVar:DBTreasure:DB$ Token | ConditionCheckSVar$ X | TokenAmount$ 2 | TokenScript
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$RememberedSize
 DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
-DeckHints:Name$Etrata, the Silencer|Ravenloft Adventurer & Type$Assassin|Mercenary|Rogue
+DeckHints:Name$Etrata, the Silencer & Type$Assassin|Mercenary|Rogue
 Oracle:Whenever a creature an opponent controls dies, exile it with a hit counter on it.\nAssassins, Mercenaries, and Rogues you control have deathtouch and "Whenever this creature deals combat damage to a player, you may remove a hit counter from a card that player owns in exile. If you do, draw a card and create two Treasure tokens."
