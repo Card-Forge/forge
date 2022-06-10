@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Editor class to edit configuration, maybe moved or removed
@@ -59,6 +60,12 @@ public class TextListEdit extends Box {
         }
     }
 
+    public void setText(List<String> itemNames) {
+        if(itemNames==null)
+            edit.setText("");
+        else
+            edit.setText(String.join(";",itemNames));
+    }
     public void setText(String[] itemName) {
         if(itemName==null)
             edit.setText("");

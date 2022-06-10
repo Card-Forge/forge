@@ -15,7 +15,6 @@ import java.util.Random;
  * contains the information for the biomes
  */
 public class BiomeData implements Serializable {
-    private final Random rand = MyRandom.getRandom();
     public float startPointX;
     public float startPointY;
     public float noiseWeight;
@@ -35,6 +34,7 @@ public class BiomeData implements Serializable {
     private ArrayList<EnemyData> enemyList;
     private ArrayList<PointOfInterestData> pointOfInterestList;
 
+    private final Random rand = MyRandom.getRandom();
     public Color GetColor() {
         return Color.valueOf(color);
     }
