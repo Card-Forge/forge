@@ -259,6 +259,18 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         }
         if (params.containsKey("Revolt")) {
             if ("True".equalsIgnoreCase(params.get("Revolt")) != hostController.hasRevolt()) return false;
+            else if ("None".equalsIgnoreCase(params.get("Revolt"))) {
+                boolean none = true;
+                for (Player p : game.getRegisteredPlayers()) {
+                    if (p.hasRevolt()) {
+                        none = false;
+                        break;
+                    }
+                }
+                if (!none) {
+                    return false;
+                }
+            }
         }
         if (params.containsKey("Desert")) {
             if ("True".equalsIgnoreCase(params.get("Desert")) != hostController.hasDesert()) return false;
