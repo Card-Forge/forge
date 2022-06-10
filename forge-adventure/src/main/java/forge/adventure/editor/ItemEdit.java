@@ -10,8 +10,6 @@ import java.awt.*;
  */
 public class ItemEdit extends JComponent {
     ItemData currentData;
-
-
     JTextField nameField=new JTextField();
     JTextField equipmentSlot=new JTextField();
     JTextField iconName=new JTextField();
@@ -39,6 +37,7 @@ public class ItemEdit extends JComponent {
 
         add(parameters);
         add(effect);
+        add(new Box.Filler(new Dimension(0,0),new Dimension(0,Integer.MAX_VALUE),new Dimension(0,Integer.MAX_VALUE)));
 
         nameField.getDocument().addDocumentListener(new DocumentChangeListener(() -> ItemEdit.this.updateItem()));
         equipmentSlot.getDocument().addDocumentListener(new DocumentChangeListener(() -> ItemEdit.this.updateItem()));

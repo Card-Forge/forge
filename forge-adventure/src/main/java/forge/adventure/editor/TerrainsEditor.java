@@ -1,5 +1,6 @@
 package forge.adventure.editor;
 
+import forge.adventure.data.BiomeTerrainData;
 import forge.adventure.data.RewardData;
 
 import javax.swing.*;
@@ -11,15 +12,15 @@ import java.awt.event.ActionListener;
 /**
  * Editor class to edit configuration, maybe moved or removed
  */
-public class RewardsEditor extends JComponent{
-    DefaultListModel<RewardData> model = new DefaultListModel<>();
-    JList<RewardData> list = new JList<>(model);
+public class TerrainsEditor extends JComponent{
+    DefaultListModel<BiomeTerrainData> model = new DefaultListModel<>();
+    JList<BiomeTerrainData> list = new JList<>(model);
     JToolBar toolBar = new JToolBar("toolbar");
-    RewardEdit edit=new RewardEdit();
+    BiomeTerrainEdit edit=new BiomeTerrainEdit();
 
 
 
-    public class RewardDataRenderer extends DefaultListCellRenderer {
+    public class TerrainDataRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(
                 JList list, Object value, int index,
@@ -30,7 +31,7 @@ public class RewardsEditor extends JComponent{
             RewardData reward=(RewardData) value;
             StringBuilder builder=new StringBuilder();
             if(reward.type==null||reward.type.isEmpty())
-                builder.append("Reward");
+                builder.append("Terrain");
             else
                 builder.append(reward.type);
             builder.append(" ");
@@ -52,14 +53,14 @@ public class RewardsEditor extends JComponent{
 
     }
 
-    public RewardsEditor()
+    public TerrainsEditor()
     {
 
-        list.setCellRenderer(new RewardDataRenderer());
-        list.addListSelectionListener(e -> RewardsEditor.this.updateEdit());
-        addButton("add", e -> RewardsEditor.this.addReward());
-        addButton("remove", e -> RewardsEditor.this.remove());
-        addButton("copy", e -> RewardsEditor.this.copy());
+        list.setCellRenderer(new TerrainDataRenderer());
+        list.addListSelectionListener(e -> TerrainsEditor.this.updateEdit());
+        addButton("add", e -> TerrainsEditor.this.addReward());
+        addButton("remove", e -> TerrainsEditor.this.remove());
+        addButton("copy", e -> TerrainsEditor.this.copy());
         BorderLayout layout=new BorderLayout();
         setLayout(layout);
         add(list, BorderLayout.LINE_START);
@@ -88,7 +89,7 @@ public class RewardsEditor extends JComponent{
         int selected=list.getSelectedIndex();
         if(selected<0)
             return;
-        RewardData data=new RewardData(model.get(selected));
+        BiomeTerrainData data=new BiomeTerrainData(model.get(selected));
         model.add(model.size(),data);
     }
 
@@ -97,12 +98,12 @@ public class RewardsEditor extends JComponent{
         int selected=list.getSelectedIndex();
         if(selected<0)
             return;
-        edit.setCurrentReward(model.get(selected));
+        edit.setCurrentTerrain(model.get(selected));
     }
 
     void addReward()
     {
-        RewardData data=new RewardData();
+        BiomeTerrainData data=new BiomeTerrainData();
         model.add(model.size(),data);
     }
     void remove()
@@ -112,19 +113,19 @@ public class RewardsEditor extends JComponent{
             return;
         model.remove(selected);
     }
-    public void setRewards(RewardData[] rewards) {
+    public void setTerrains(BiomeTerrainData[] terrain) {
 
         model.clear();
-        if(rewards==null)
+        if(terrain==null)
             return;
-        for (int i=0;i<rewards.length;i++) {
-            model.add(i,rewards[i]);
+        for (int i=0;i<terrain.length;i++) {
+            model.add(i,terrain[i]);
         }
     }
 
-    public RewardData[] getRewards() {
+    public BiomeTerrainData[] getBiomeTerrainData() {
 
-        RewardData[] rewards= new RewardData[model.getSize()];
+        BiomeTerrainData[] rewards= new BiomeTerrainData[model.getSize()];
         for(int i=0;i<model.getSize();i++)
         {
             rewards[i]=model.get(i);
