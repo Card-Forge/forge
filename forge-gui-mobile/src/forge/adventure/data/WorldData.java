@@ -17,19 +17,22 @@ import java.util.List;
  */
 public class WorldData implements Serializable {
 
-    static Array<EnemyData> allEnemies;
     public int width;
     public int height;
     public float playerStartPosX;
     public float playerStartPosY;
     public float noiseZoomBiome;
     public int tileSize;
-    public List<String> biomesNames;
     public BiomeData roadTileset;
     public String biomesSprites;
     public float maxRoadDistance;
+    public List<String> biomesNames;
+
+
     private BiomeSprites sprites;
     private List<BiomeData> biomes;
+
+    private static Array<EnemyData> allEnemies;
     private static Array<ShopData> shopList;
 
 
