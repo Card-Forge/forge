@@ -612,6 +612,45 @@ ScryfallCode=CLB
 604 R Reflecting Pool @Alayna Danner
 605 R Sea of Clouds @Matt Gaser
 606 R Spire Garden @Alexander Forssberg
+607 R Deep Gnome Terramancer @David Sladek
+608 M Folk Hero @Kai Carpenter
+609 R Harper Recruiter @Ernanda Souza
+610 R Seasoned Dungeoneer @John Stanko
+611 R Stick Together @Dave Greco
+612 R Aboleth Spawn @Sam Burley
+613 R Astral Dragon @Anastasia Ovchinnikova
+614 M Clan Crafter @Yeong-Hao Han
+615 R Endless Evil @Diego Gisbert
+616 R Grell Philosopher @David Astruga
+617 R Mocking Doppelganger @Igor Grechanyi
+618 R Psionic Ritual @Aaron J. Riley
+619 M Zellix, Sanity Flayer @Slawomir Maniak
+620 R Black Market Connections @Evyn Fong
+621 R Brainstealer Dragon @Brent Hollowell
+622 M Burakos, Party Leader @Caroline Gariba
+623 R From the Catacombs @Ben Wootten
+624 M Haunted One @Nicholas Elias
+625 R Solemn Doomguide @Micah Epstein
+626 R Uchuulon @Sam Burley
+627 M Baeloth Barrityl, Entertainer @Joshua Raphael
+628 R Bothersome Quasit @Mathias Kollros
+629 R Death Kiss @Daren Bader
+630 R Delayed Blast Fireball @Andreas Zafiratos
+631 R Loot Dispute @Francisco Miyara
+632 R Nalfeshnee @Sam White
+633 M Passionate Archaeologist @Nino Is
+634 R Spectacular Showdown @Michal Ivan
+635 M Durnan of the Yawning Portal @David Gaillet
+636 R Green Slime @Igor Kieryluk
+637 R Journey to the Lost City @Alayna Danner
+638 R Tlincalli Hunter @Helge C. Balzer
+639 R Venture Forth @Gaboleps
+640 M Captain N'ghathrod @Andrey Kuzinskiy
+641 M Faldorn, Dread Wolf Herald @Jason A. Engle
+642 M Firkraag, Cunning Instigator @Andrew Mar
+643 M Nalia de'Arnise @John Stanko
+644 R Multiclass Baldric @Franz Vohwinkel
+645 R Sarevok's Tome @Titus Lunter
 646 M Captain N'ghathrod @Andrey Kuzinskiy
 647 M Faldorn, Dread Wolf Herald @Jason A. Engle
 648 M Firkraag, Cunning Instigator @Andrew Mar
@@ -846,7 +885,7 @@ ScryfallCode=CLB
 877 U Talisman of Dominance @Mike Dringenberg
 878 U Talisman of Hierarchy @Lindsey Look
 879 U Thought Vessel @rk post
-880 C Ash Barrens @John Avon
+880 U Ash Barrens @John Avon
 881 U Blighted Woodland @Jason Felix
 882 C Bojuka Bog @Howard Lyon
 883 R Castle Embereth @Jaime Jones
@@ -897,6 +936,10 @@ ScryfallCode=CLB
 928 R Wandering Fumarole @Florian de Gesincourt
 929 R War Room @Milivoj Ćeran
 930 R Windbrisk Heights @Omar Rayyan
+931 M Captain N'ghathrod @Andrey Kuzinskiy
+932 M Faldorn, Dread Wolf Herald @Jason A. Engle
+933 M Firkraag, Cunning Instigator @Andrew Mar
+934 M Nalia de'Arnise @John Stanko
 935 R Wand of Wonder @Lindsey Look
 936 R Elder Brain @Nino Is
 
