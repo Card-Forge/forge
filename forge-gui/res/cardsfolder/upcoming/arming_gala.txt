@@ -1,0 +1,9 @@
+Name:Arming Gala
+ManaCost:3 G W
+Types:Enchantment
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBEffect | TriggerDescription$ At the beginning of your end step, creatures you control and creature cards in your hand, library, and graveyard perpetually get +1/+1.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Valid Creature.YouCtrl,ValidHand Creature.YouOwn,ValidGraveyard Creature.YouOwn,ValidLibrary Creature.YouOwn | StaticAbilities$ PerpetualP1P1 | Name$ Arming Gala's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ At the beginning of your end step, creatures you control and creature cards in your hand, library, and graveyard perpetually get +1/+1.
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+Oracle:At the beginning of your end step, creatures you control and creature cards in your hand, library, and graveyard perpetually get +1/+1.
