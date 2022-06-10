@@ -112,9 +112,14 @@ public class ConsoleCommandInterpreter {
         registerCommand(new String[]{"teleport", "to"}, s -> {
             if(s.length<2)
                 return "Command needs 2 parameter";
-            WorldStage.getInstance().GetPlayer().setPosition(Integer.parseInt(s[0]),Integer.parseInt(s[1]));
-
-            return  "teleport to ("+s[0]+","+s[1]+")";
+            try {
+                int x = Integer.parseInt(s[0]);
+                int y = Integer.parseInt(s[1]);
+                WorldStage.getInstance().GetPlayer().setPosition(x,y);
+                return  "teleport to ("+s[0]+","+s[1]+")";
+            } catch (Exception e) {
+                return "Exception occured, Invalid input";
+            }
         });
         registerCommand(new String[]{"teleport", "to", "poi"}, s -> {
             if(s.length<1)
