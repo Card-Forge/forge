@@ -2,13 +2,11 @@ package forge.game.card;
 
 
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
-import com.google.common.collect.MultimapBuilder;
 
 import forge.game.CardTraitBase;
 import forge.game.GameEntity;
@@ -33,7 +31,7 @@ public class CardDamageHistory {
     private final List<Player> NotBlockedSinceLastUpkeepOf = Lists.newArrayList();
     private final List<Player> NotBeenBlockedSinceLastUpkeepOf = Lists.newArrayList();
 
-    private ListMultimap<Pair<Integer, Boolean>, Pair<Card, GameEntity>> damageDoneThisTurn = MultimapBuilder.treeKeys().arrayListValues().build();
+    private List<Pair<Integer, Boolean>> damageDoneThisTurn = Lists.newArrayList();
 
     // only needed for Glen Elendra (Plane)
     private final List<Player> damagedThisCombat = Lists.newArrayList();
@@ -237,23 +235,21 @@ public class CardDamageHistory {
      * TODO: Write javadoc for this method.
      * @param player
      */
-    public void registerDamage(GameEntity entity, boolean isCombat) {
-        damagedThisGame.add(entity);
+    public void registerDamage(int damage, boolean isCombat, Card sourceLKI, GameEntity target, Map<Integer, Card> lkiCache) {
+        damagedThisGame.add(target);
         hasdealtDamagetoAny = true;
-        if (isCombat && entity instanceof Player) {
-            damagedThisCombat.add((Player) entity);
+        if (isCombat && target instanceof Player) {
+            damagedThisCombat.add((Player) target);
         }
+        Pair<Integer, Boolean> dmg = Pair.of(damage, isCombat);
+        damageDoneThisTurn.add(dmg);
+        sourceLKI.getGame().addGlobalDamageHistory(this, dmg, sourceLKI.isLKI() ? sourceLKI : CardUtil.getLKICopy(sourceLKI, lkiCache), CardUtil.getLKICopy(target, lkiCache));
     }
 
-    public CardDamageHistory addDamageDoneThisTurn(int damage, boolean isCombat, Card sourceLKI, GameEntity target) {
-        damageDoneThisTurn.put(Pair.of(damage, isCombat), Pair.of(sourceLKI, target));
-        return this;
-    }
     public int getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
         int sum = 0;
-        for (Entry<Pair<Integer, Boolean>, Pair<Card, GameEntity>> e : damageDoneThisTurn.entries()) {
-            Pair<Integer, Boolean> damage = e.getKey();
-            Pair<Card, GameEntity> sourceToTarget = e.getValue();
+        for (Pair<Integer, Boolean> damage : damageDoneThisTurn) {
+            Pair<Card, GameEntity> sourceToTarget = source.getGame().getDamageLKI(damage);
 
             if (isCombat != null && damage.getRight() != isCombat) {
                 continue;

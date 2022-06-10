@@ -17,9 +17,13 @@
  */
 package forge.game;
 
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import forge.game.ability.AbilityUtils;
@@ -46,6 +50,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     private String name = "";
     protected CardCollection attachedCards = new CardCollection();
     protected Map<CounterType, Integer> counters = Maps.newHashMap();
+    protected List<Pair<Integer, Boolean>> damageReceivedThisTurn = Lists.newArrayList();
 
     protected GameEntity(int id0) {
         id = id0;
@@ -328,6 +333,10 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     abstract public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table);
     public void addCounterInternal(final CounterEnumType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table) {
         addCounterInternal(CounterType.get(counterType), n, source, fireEvents, table);
+    }
+
+    public void receiveDamage(Pair<Integer, Boolean> dmg) {
+        damageReceivedThisTurn.add(dmg);
     }
 
     @Override

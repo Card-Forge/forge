@@ -5295,11 +5295,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final int getTotalDamageReceivedThisTurn() {
-        int sum = 0;
+        int total = 0;
         for (Integer i : game.getDamageDoneThisTurn(null, false, null, "Card.StrictlySelf", this, getController(), null)) {
-            sum += i;
+            total += i;
         }
-        return sum;
+        return total;
     }
 
     public final boolean hasDealtDamageToOpponentThisTurn() {
@@ -5504,8 +5504,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
         // Run replacement effects
         getGame().getReplacementHandler().run(ReplacementType.DealtDamage, AbilityKey.mapFromAffected(this));
-
-        source.getDamageHistory().registerDamage(this, isCombat);
 
         // Run triggers
         Map<AbilityKey, Object> runParams = AbilityKey.newMap();
@@ -6171,6 +6169,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         clearMustBlockCards();
         getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttacksThisTurn() > 0);
         getDamageHistory().newTurn();
+        damageReceivedThisTurn.clear();
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
         resetMayPlayTurn();

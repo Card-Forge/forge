@@ -699,8 +699,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        source.getDamageHistory().registerDamage(this, isCombat);
-
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.DamageSource, source);
@@ -2416,6 +2414,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         setLifeStartedThisTurnWith(getLife());
         setLibrarySearched(0);
         setNumManaConversion(0);
+
+        damageReceivedThisTurn.clear();
 
         // set last turn nr
         if (game.getPhaseHandler().isPlayerTurn(this)) {

@@ -285,6 +285,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
             }
 
+            // TODO if cost isn't replaced should include alternative ones
             // get basic spells (no flashback, etc.)
             List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller);
             if (sa.hasParam("ValidSA")) {

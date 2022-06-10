@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -122,6 +123,7 @@ public class Game {
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
 
     private FCollection<CardDamageHistory> globalDamageHistory = new FCollection<>();
+    private IdentityHashMap<Pair<Integer, Boolean>, Pair<Card, GameEntity>> damageThisTurnLKI = new IdentityHashMap<>();
 
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
     private Map<Card, Integer>  facedownWhileCasting = Maps.newHashMap();
@@ -1138,11 +1140,17 @@ public class Game {
         return dmgList;
     }
 
-    public void addGlobalDamageHistory(CardDamageHistory cdh) {
+    public void addGlobalDamageHistory(CardDamageHistory cdh, Pair<Integer, Boolean> dmg, Card source, GameEntity target) {
         globalDamageHistory.add(cdh);
+        damageThisTurnLKI.put(dmg, Pair.of(source, target));
     }
     public void clearGlobalDamageHistory() {
         globalDamageHistory.clear();
+        damageThisTurnLKI.clear();
+    }
+
+    public Pair<Card, GameEntity> getDamageLKI(Pair<Integer, Boolean> dmg) {
+        return damageThisTurnLKI.get(dmg);
     }
 
     public Card getTopLibForPlayer(Player P) {
