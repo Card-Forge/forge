@@ -2032,7 +2032,7 @@ public class AbilityUtils {
             return doXMath(c.getTotalDamageDoneBy(), expr, c, ctb);
         }
         if (sq[0].equals("TotalDamageReceivedThisTurn")) {
-            return doXMath(c.getTotalDamageReceivedThisTurn(), expr, c, ctb);
+            return doXMath(c.getAssignedDamage(), expr, c, ctb);
         }
 
         if (sq[0].contains("CardPower")) {

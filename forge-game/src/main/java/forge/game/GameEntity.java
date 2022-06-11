@@ -339,6 +339,26 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         damageReceivedThisTurn.add(dmg);
     }
 
+    public final int getAssignedDamage() {
+        return getAssignedDamage(null, null);
+    }
+    public final int getAssignedCombatDamage() {
+        return getAssignedDamage(true, null);
+    }
+    public final int getAssignedDamage(Boolean isCombat, final Card source) {
+        int num = 0;
+        for (Pair<Integer, Boolean> dmg : damageReceivedThisTurn) {
+            if (isCombat != null && dmg.getRight() != isCombat) {
+                continue;
+            }
+            if (source != null && !getGame().getDamageLKI(dmg).getLeft().equalsWithTimestamp(source)) {
+                continue;
+            }
+            num += dmg.getLeft();
+        }
+        return num;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (o == null) { return false; }

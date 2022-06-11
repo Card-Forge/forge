@@ -5292,19 +5292,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         damageHistory = history;
     }
 
-    public final int getTotalDamageReceivedThisTurn() {
-        int total = 0;
-        for (Pair<Integer, Boolean> p : damageReceivedThisTurn) {
-            total += p.getLeft();
-        }
-        return total;
-    }
-
     public List<Pair<Integer, Boolean>> getDamageReceivedThisTurn() {
         return damageReceivedThisTurn;
     }
     public void setDamageReceivedThisTurn(List<Pair<Integer, Boolean>> dmg) {
-        damageReceivedThisTurn.clear();
         damageReceivedThisTurn.addAll(dmg);
     }
 

@@ -812,26 +812,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         simultaneousDamage = 0;
     }
 
-    public final int getAssignedDamage() {
-        return getAssignedDamage(null, null);
-    }
-    public final int getAssignedCombatDamage() {
-        return getAssignedDamage(true, null);
-    }
-    public final int getAssignedDamage(Boolean isCombat, final Card source) {
-        int num = 0;
-        for (Pair<Integer, Boolean> dmg : damageReceivedThisTurn) {
-            if (isCombat != null && dmg.getRight() != isCombat) {
-                continue;
-            }
-            if (source != null && !game.getDamageLKI(dmg).getLeft().equalsWithTimestamp(source)) {
-                continue;
-            }
-            num += dmg.getLeft();
-        }
-        return num;
-    }
-
     /**
      * Get the total damage assigned to this player's opponents this turn.
      */

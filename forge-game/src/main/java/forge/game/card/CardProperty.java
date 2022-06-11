@@ -1186,18 +1186,11 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
-            if (card.getTotalDamageReceivedThisTurn() == 0) {
+            if (card.getAssignedDamage() == 0) {
                 return false;
             }
         } else if (property.equals("wasDealtNonCombatDamageThisTurn")) {
-            boolean found = false;
-            for (Pair<Integer, Boolean> dmg : card.getDamageReceivedThisTurn()) {
-                if (!dmg.getRight()) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
+            if (card.getAssignedDamage(false, null) == 0) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageByThisGame")) {
