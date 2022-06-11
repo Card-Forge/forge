@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
@@ -2354,6 +2355,17 @@ public class AbilityUtils {
             return doXMath(player.getMaxOpponentAssignedDamage(), expr, c, ctb);
         }
 
+        if (sq[0].contains("TotalDamageThisTurn")) {
+            String[] props = l[0].split(" ");
+            int sum = 0;
+            for (Pair<Integer, Boolean> p : c.getDamageReceivedThisTurn()) {
+                if (game.getDamageLKI(p).getLeft().isValid(props[1], player, c, ctb)) {
+                    sum += p.getLeft();
+                }
+            }
+            return doXMath(sum, expr, c, ctb);
+        }
+
         if (sq[0].contains("DamageThisTurn")) {
             String[] props = l[0].split(" ");
             Boolean isCombat = null;
@@ -2361,15 +2373,6 @@ public class AbilityUtils {
                 isCombat = true;
             }
             return doXMath(game.getDamageDoneThisTurn(isCombat, false, props[1], props[2], c, player, ctb).size(), expr, c, ctb);
-        }
-
-        if (sq[0].contains("TotalDamageThisTurn")) {
-            String[] props = l[0].split(" ");
-            int sum = 0;
-            for (Integer i : game.getDamageDoneThisTurn(null, false, props[1], props[2], c, player, ctb)) {
-                sum += i;
-            }
-            return doXMath(sum, expr, c, ctb);
         }
 
         if (sq[0].equals("YourTurns")) {

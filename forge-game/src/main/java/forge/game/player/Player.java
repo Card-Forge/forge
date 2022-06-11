@@ -820,8 +820,14 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public final int getAssignedDamage(Boolean isCombat, final Card source) {
         int num = 0;
-        for (Integer i : game.getDamageDoneThisTurn(isCombat, false, source != null ? "Card.StrictlySelf" : null, "You", source, this, null)) {
-            num += i;
+        for (Pair<Integer, Boolean> dmg : damageReceivedThisTurn) {
+            if (isCombat != null && dmg.getRight() != isCombat) {
+                continue;
+            }
+            if (source != null && !game.getDamageLKI(dmg).getLeft().equalsWithTimestamp(source)) {
+                continue;
+            }
+            num += dmg.getLeft();
         }
         return num;
     }
