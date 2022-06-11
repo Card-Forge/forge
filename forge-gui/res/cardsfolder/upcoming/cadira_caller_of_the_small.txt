@@ -7,5 +7,4 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_rabbit | TokenOwner$ You | TokenAmount$ X
 SVar:X:Count$Valid Permanent.token+YouCtrl
 DeckHas:Ability$Token & Type$Rabbit
-DeckNeeds:Ability$Token
 Oracle:Trample\nWhenever Cadira, Caller of the Small deals combat damage to a player, for each token you control, create a 1/1 white Rabbit creature token.
