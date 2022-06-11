@@ -1,0 +1,10 @@
+Name:Jan Jansen, Chaos Crafter
+ManaCost:R W B
+Types:Legendary Creature Gnome Artificer
+PT:3/3
+K:Haste
+A:AB$ Token | Cost$ T Sac<1/Creature.Artifact/artifact creature> | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | SpellDescription$ Create two Treasure tokens.
+A:AB$ Token | Cost$ T Sac<1/Artifact.nonCreature/noncreature artifact> | TokenAmount$ 2 | TokenScript$ c_1_1_a_construct | SpellDescription$ Create two 1/1 colorless Construct artifact creature tokens.
+SVar:AIPreference:SacCost$Artifact.nonCreature+Token+powerLE1+toughnessEQ1
+DeckHas:Ability$Token|Sacrifice & Type$Treasure
+Oracle:Haste\n{T}, Sacrifice an artifact creature: Create two Treasure tokens.\n{T}, Sacrifice a noncreature artifact: Create two 1/1 colorless Construct artifact creature tokens.
