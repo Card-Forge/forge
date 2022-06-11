@@ -1,7 +1,7 @@
 Name:Breath of the Sleepless
 ManaCost:3 U
 Types:Enchantment
-S:Mode$ CastWithFlash | ValidCard$ Spirit | ValidSA$ Spell | EffectZone$ All | Caster$ You | Description$ You may cast Spirit spells as though they had flash.
+S:Mode$ CastWithFlash | ValidCard$ Spirit | ValidSA$ Spell | EffectZone$ Battlefield | Caster$ You | Description$ You may cast Spirit spells as though they had flash.
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OpponentTurn$ True | Execute$ TrigTap | TriggerDescription$ Whenever you cast a creature spell during an opponent's turn, tap up to one target creature.
 SVar:TrigTap:DB$ Tap | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature
 DeckHints:Type$Spirit
