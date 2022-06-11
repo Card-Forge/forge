@@ -3206,7 +3206,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             final String damageTrig = "Mode$ DamageDoneOnceByController | ValidSource$ Player | ValidTarget$ You | " +
                     "CombatDamage$ True | TriggerZones$ Command | TriggerDescription$ Whenever one or more " +
                     "creatures a player controls deal combat damage to you, that player takes the initiative.";
-            final String damageEff = "DB$ TakeInitiative | Defined$ TriggeredAttackingPlayer";
+            final String damageEff = "DB$ TakeInitiative | Defined$ TriggeredSource";
 
             final Trigger damageTrigger = TriggerHandler.parseTrigger(damageTrig, initiativeEffect, true);
 
