@@ -1,0 +1,9 @@
+Name:Sarevok, Deathbringer
+ManaCost:3 B
+Types:Legendary Creature Human Knight
+PT:3/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Revolt$ None | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's end step, if no permanents left the battlefield this turn, that player loses X life, where X is NICKNAME's power.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ TriggeredPlayer
+SVar:X:Count$CardPower
+K:Choose a Background
+Oracle:At the beginning of each player's end step, if no permanents left the battlefield this turn, that player loses X life, where X is Sarevok's power.\nChoose a Background (You can have a Background as a second commander.)
