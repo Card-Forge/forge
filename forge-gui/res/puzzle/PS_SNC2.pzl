@@ -13,5 +13,5 @@ activeplayer=human
 activephase=MAIN1
 humanhand=Feign Death;Hostile Takeover;Murder;Even the Score;Grisly Sigil
 humanbattlefield=Behold the Unspeakable|Transformed;Cormela, Glamour Thief;Professional Face-Breaker;Stormcarved Coast;Stormcarved Coast;Stormcarved Coast;Waterfront District;Waterfront District
-humanexile=Maestros Diabolist|ExiledWith:5|Owner:Human
-aibattlefield=Disciplined Duelist|Counters:SHIELD=1;White Dragon;Duelcraft Trainer;Mysterious Limousine|Id:5|Remembered:5
+humanexile=Maestros Diabolist|ExiledWith:5
+aibattlefield=Disciplined Duelist|Counters:SHIELD=1;White Dragon;Duelcraft Trainer;Mysterious Limousine|Id:5
