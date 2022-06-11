@@ -186,6 +186,9 @@
                     <version>2.5</version>
                     <configuration>
                         <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+			<checkModificationExcludes>
+			<checkModificationExclude>.mvn/local-settings.xml</checkModificationExclude>
+			</checkModificationExcludes>
                     </configuration>
                 </plugin>
 
