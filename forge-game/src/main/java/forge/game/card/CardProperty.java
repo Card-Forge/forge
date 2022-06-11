@@ -1192,7 +1192,7 @@ public class CardProperty {
         } else if (property.equals("wasDealtNonCombatDamageThisTurn")) {
             boolean found = false;
             for (Pair<Integer, Boolean> dmg : card.getDamageReceivedThisTurn()) {
-                if (dmg.getRight()) {
+                if (!dmg.getRight()) {
                     found = true;
                     break;
                 }

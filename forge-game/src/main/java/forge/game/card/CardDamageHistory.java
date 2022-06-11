@@ -250,7 +250,7 @@ public class CardDamageHistory {
     public int getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
         int sum = 0;
         for (Pair<Integer, Boolean> damage : damageDoneThisTurn) {
-            Pair<Card, GameEntity> sourceToTarget = source.getGame().getDamageLKI(damage);
+            Pair<Card, GameEntity> sourceToTarget = sourceController.getGame().getDamageLKI(damage);
 
             if (isCombat != null && damage.getRight() != isCombat) {
                 continue;

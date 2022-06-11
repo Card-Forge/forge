@@ -949,7 +949,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         devouredCards.add(c);
     }
-
     public final void clearDevoured() {
         devouredCards = null;
     }
@@ -979,7 +978,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void clearDelved() {
         delvedCards = null;
     }
-
 
     public final CardCollectionView getConvoked() {
         return CardCollection.getView(convokedCards);
@@ -5678,7 +5676,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         return false;
     }
-
     public final void setForetold(final boolean foretold) {
         this.foretold = foretold;
     }
@@ -5696,7 +5693,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setForetoldThisTurn(final boolean foretoldThisTurn) {
         this.foretoldThisTurn = foretoldThisTurn;
     }
-
     public void resetForetoldThisTurn() {
         foretoldThisTurn = false;
     }
@@ -5767,7 +5763,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final long getBestowTimestamp() {
         return bestowTimestamp;
     }
-
     public final void setBestowTimestamp(final long t) {
         bestowTimestamp = t;
     }
