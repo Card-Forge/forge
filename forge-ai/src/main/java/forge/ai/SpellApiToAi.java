@@ -185,7 +185,6 @@ public enum SpellApiToAi {
             .put(ApiType.WinsGame, GameWinAi.class)
 
             .put(ApiType.DamageResolve, AlwaysPlayAi.class)
-            .put(ApiType.InternalEtbReplacement, CanPlayAsDrawbackAi.class)
             .put(ApiType.InternalLegendaryRule, LegendaryRuleAi.class)
             .put(ApiType.InternalIgnoreEffect, CannotPlayAi.class)
             .build());

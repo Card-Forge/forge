@@ -365,7 +365,7 @@ public class GameAction {
             }
 
             ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, repParams);
-            if (repres != ReplacementResult.NotReplaced) {
+            if (repres != ReplacementResult.NotReplaced && repres != ReplacementResult.Updated) {
                 // reset failed manifested Cards back to original
                 if (c.isManifested() && !c.isInPlay()) {
                     c.forceTurnFaceUp();
