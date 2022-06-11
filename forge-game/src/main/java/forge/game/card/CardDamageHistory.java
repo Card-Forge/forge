@@ -243,6 +243,7 @@ public class CardDamageHistory {
         }
         Pair<Integer, Boolean> dmg = Pair.of(damage, isCombat);
         damageDoneThisTurn.add(dmg);
+        target.receiveDamage(dmg);
         sourceLKI.getGame().addGlobalDamageHistory(this, dmg, sourceLKI.isLKI() ? sourceLKI : CardUtil.getLKICopy(sourceLKI, lkiCache), CardUtil.getLKICopy(target, lkiCache));
     }
 

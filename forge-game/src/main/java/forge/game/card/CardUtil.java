@@ -251,6 +251,7 @@ public final class CardUtil {
         newCopy.setPhasedOut(in.isPhasedOut());
 
         newCopy.setDamageHistory(in.getDamageHistory());
+        newCopy.setDamageReceivedThisTurn(in.getDamageReceivedThisTurn());
         for (Card c : in.getBlockedThisTurn()) {
             newCopy.addBlockedThisTurn(c);
         }

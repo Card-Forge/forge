@@ -5296,10 +5296,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final int getTotalDamageReceivedThisTurn() {
         int total = 0;
-        for (Integer i : game.getDamageDoneThisTurn(null, false, null, "Card.StrictlySelf", this, getController(), null)) {
-            total += i;
+        for (Pair<Integer, Boolean> p : damageReceivedThisTurn) {
+            total += p.getLeft();
         }
         return total;
+    }
+
+    public List<Pair<Integer, Boolean>> getDamageReceivedThisTurn() {
+        return damageReceivedThisTurn;
+    }
+    public void setDamageReceivedThisTurn(List<Pair<Integer, Boolean>> dmg) {
+        damageReceivedThisTurn.clear();
+        damageReceivedThisTurn.addAll(dmg);
     }
 
     public final boolean hasDealtDamageToOpponentThisTurn() {
