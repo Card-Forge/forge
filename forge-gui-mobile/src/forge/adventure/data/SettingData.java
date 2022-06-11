@@ -13,4 +13,5 @@ public class SettingData {
     public String plane;
     public boolean fullScreen;
     public String videomode;
+    public String lastActiveSave;
 }

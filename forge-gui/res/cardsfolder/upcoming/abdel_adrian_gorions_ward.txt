@@ -1,0 +1,14 @@
+Name:Abdel Adrian, Gorion's Ward
+ManaCost:4 W
+Types:Legendary Creature Human Warrior
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile any number of other nonland permanents you control until NICKNAME leaves the battlefield. Create a 1/1 white Soldier creature token for each permanent exiled this way.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Hidden$ True | ChangeType$ Permanent.Other+nonLand+YouCtrl | ChangeNum$ MaxTgts | RememberChanged$ True | SelectPrompt$ Choose any number of other nonland permanents you control | Duration$ UntilHostLeavesPlay | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:MaxTgts:Count$Valid Permanent.Other+nonLand+YouCtrl
+K:Choose a Background
+DeckHas:Ability$Token & Type$Soldier
+AI:RemoveDeck:Random
+Oracle:When Abdel Adrian, Gorion's Ward enters the battlefield, exile any number of other nonland permanents you control until Abdel Adrian leaves the battlefield. Create a 1/1 white Soldier creature token for each permanent exiled this way.\nChoose a Background (You can have a Background as a second commander.)

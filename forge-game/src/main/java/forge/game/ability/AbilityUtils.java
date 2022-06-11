@@ -501,7 +501,7 @@ public class AbilityUtils {
                 players.addAll(player.getOpponents());
                 val = playerXCount(players, calcX[1], card, ability);
             } else if (hType.equals("RegisteredOpponents")) {
-                players.addAll(Iterables.filter(game.getRegisteredPlayers(),PlayerPredicates.isOpponentOf(player)));
+                players.addAll(Iterables.filter(game.getRegisteredPlayers(), PlayerPredicates.isOpponentOf(player)));
                 val = playerXCount(players, calcX[1], card, ability);
             } else if (hType.equals("Other")) {
                 players.addAll(player.getAllOtherPlayers());
@@ -535,6 +535,9 @@ public class AbilityUtils {
                     }
                 }
                 val = playerXCount(players, calcX[1], card, ability);
+            } else if (hType.startsWith("Defined")) {
+                String defined = hType.split("Defined")[1];
+                val = playerXCount(getDefinedPlayers(card, defined, ability), calcX[1], card, ability);
             } else {
                 val = 0;
             }
@@ -1447,7 +1450,7 @@ public class AbilityUtils {
 
         // The player who has the chance to cancel the ability
         final String pays = sa.getParamOrDefault("UnlessPayer", "TargetedController");
-        final FCollectionView<Player> allPayers = getDefinedPlayers(sa.getHostCard(), pays, sa);
+        final FCollectionView<Player> allPayers = getDefinedPlayers(source, pays, sa);
         final String  resolveSubs = sa.getParam("UnlessResolveSubs"); // no value means 'Always'
         final boolean execSubsWhenPaid = "WhenPaid".equals(resolveSubs) || StringUtils.isBlank(resolveSubs);
         final boolean execSubsWhenNotPaid = "WhenNotPaid".equals(resolveSubs) || StringUtils.isBlank(resolveSubs);
@@ -1484,7 +1487,7 @@ public class AbilityUtils {
             cost = new Cost(new ManaCost(new ManaCostParser(String.valueOf(source.getChosenNumber()))), true);
         }
         else if (unlessCost.startsWith("DefinedCost")) {
-            CardCollection definedCards = getDefinedCards(sa.getHostCard(), unlessCost.split("_")[1], sa);
+            CardCollection definedCards = getDefinedCards(source, unlessCost.split("_")[1], sa);
             if (definedCards.isEmpty()) {
                 sa.resolve();
                 resolveSubAbilities(sa, game);
@@ -1504,7 +1507,7 @@ public class AbilityUtils {
             cost = new Cost(newCost.toManaCost(), true);
         }
         else if (unlessCost.startsWith("DefinedSACost")) {
-            FCollection<SpellAbility> definedSAs = getDefinedSpellAbilities(sa.getHostCard(), unlessCost.split("_")[1], sa);
+            FCollection<SpellAbility> definedSAs = getDefinedSpellAbilities(source, unlessCost.split("_")[1], sa);
             if (definedSAs.isEmpty()) {
                 sa.resolve();
                 resolveSubAbilities(sa, game);
@@ -2258,6 +2261,9 @@ public class AbilityUtils {
         }
         if (sq[0].equals("Monarch")) {
             return doXMath(calculateAmount(c, sq[player.isMonarch() ? 1 : 2], ctb), expr, c, ctb);
+        }
+        if (sq[0].equals("Initiative")) {
+            return doXMath(calculateAmount(c, sq[player.hasInitiative() ? 1: 2], ctb), expr, c, ctb);
         }
         if (sq[0].equals("StartingPlayer")) {
             return doXMath(calculateAmount(c, sq[player.isStartingPlayer() ? 1: 2], ctb), expr, c, ctb);

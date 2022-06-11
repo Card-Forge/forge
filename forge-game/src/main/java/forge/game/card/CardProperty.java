@@ -1160,7 +1160,7 @@ public class CardProperty {
         } else if (property.startsWith("dealtCombatDamage") || property.startsWith("notDealtCombatDamage")) {
             final String[] v = property.split(" ")[1].split(",");
             final Iterable<GameEntity> list = property.contains("ThisCombat") ?
-                    card.getDamageHistory().getThisCombatDamaged().keySet() :
+                    Lists.newArrayList(card.getDamageHistory().getThisCombatDamaged()) :
                     card.getDamageHistory().getThisTurnCombatDamaged().keySet();
             boolean found = Iterables.any(list, GameObjectPredicates.restriction(v, sourceController, source, spellAbility));
             if (found == property.startsWith("not")) {
@@ -1180,6 +1180,15 @@ public class CardProperty {
             }
         } else if (property.equals("wasDealtNonCombatDamageThisTurn")) {
             if (!card.getDamageHistory().hasBeenDealtNonCombatDamageThisTurn()) {
+                return false;
+            }
+        } else if (property.startsWith("wasDealtDamageByThisGame")) {
+            int idx = source.getDamageHistory().getThisGameDamaged().indexOf(card);
+            if (idx == -1) {
+                return false;
+            }
+            Card c = (Card) source.getDamageHistory().getThisGameDamaged().get(idx);
+            if (!c.equalsWithTimestamp(game.getCardState(card))) {
                 return false;
             }
         } else if (property.startsWith("dealtDamageThisTurn")) {
@@ -1346,6 +1355,10 @@ public class CardProperty {
             }
         } else if (property.startsWith("token")) {
             if (!card.isToken() && !card.isTokenCard()) {
+                return false;
+            }
+            // copied spell don't count
+            if (property.contains("Created") && card.getCastSA() != null) {
                 return false;
             }
         } else if (property.startsWith("nonToken")) {

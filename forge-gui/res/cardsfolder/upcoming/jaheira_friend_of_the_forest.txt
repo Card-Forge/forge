@@ -1,0 +1,9 @@
+Name:Jaheira, Friend of the Forest
+ManaCost:2 G
+Types:Legendary Creature Human Elf Druid
+PT:2/3
+S:Mode$ Continuous | Affected$ Card.token+YouCtrl | AddAbility$ Mana | Description$ Tokens you control have "{T}: Add {G}."
+SVar:Mana:AB$ Mana | Cost$ T | Produced$ G | Amount$ 1 | SpellDescription$ Add {G}.
+K:Choose a Background
+DeckNeeds:Type$Token
+Oracle:Tokens you control have "{T}: Add {G}."\nChoose a Background (You can have a Background as a second commander.)

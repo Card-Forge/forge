@@ -55,6 +55,7 @@ public class RestartGameEffect extends SpellAbilityEffect {
         game.getStack().reset();
         game.clearCounterAddedThisTurn();
         game.setMonarch(null);
+        game.setHasInitiative(null);
         game.setDayTime(null);
         GameAction action = game.getAction();
 

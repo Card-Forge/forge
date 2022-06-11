@@ -262,8 +262,8 @@ public enum DeckFormat {
                     } else if (a.getRules().hasKeyword("Friends forever") &&
                             b.getRules().hasKeyword("Friends forever")) {
                         // Stranger Things Secret Lair gimmick partner commander
-                    } else if (a.getRules().hasKeyword("Choose a Background")
-                            && b.getRules().canBeBackground()) {
+                    } else if (a.getRules().hasKeyword("Choose a Background") && b.getRules().canBeBackground()
+                            || b.getRules().hasKeyword("Choose a Background") && a.getRules().canBeBackground()) {
                         // commander with background
                     } else {
                         return "has an illegal commander partnership";

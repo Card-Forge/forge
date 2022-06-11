@@ -371,8 +371,31 @@ public abstract class Trigger extends TriggerReplacementBase {
         String condition = getParam("Condition");
         if ("AltCost".equals(condition)) {
             final Card moved = (Card) runParams.get(AbilityKey.Card);
-            if( null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
+            if (null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
                 return false;
+        } else if ("NoOpponentHasMoreLifeThanAttacked".equals(condition)) {
+            GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
+            if (attacked == null) {
+                attacked = (GameEntity) runParams.get(AbilityKey.Defender);
+            }
+            // we should not have gotten this far if planeswalker was attacked, but just to be safe
+            if (!(attacked instanceof Player)) {
+                return false;
+            }
+            final Player attackedP = (Player) attacked;
+            int life = attackedP.getLife();
+            boolean found = false;
+            for (Player opp : this.getHostCard().getController().getOpponents()) {
+                if (opp.equals(attackedP)) {
+                    continue;
+                } else if (opp.getLife() > life) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                return false;
+            }
         } else if ("AttackedPlayerWithMostLife".equals(condition)) {
             GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
             if (attacked == null) {

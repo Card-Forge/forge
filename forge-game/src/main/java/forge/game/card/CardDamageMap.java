@@ -19,6 +19,8 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameObjectPredicates;
 import forge.game.ability.AbilityKey;
+import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.trigger.TriggerType;
 
 public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
@@ -66,11 +68,15 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 game.getTriggerHandler().runTrigger(TriggerType.DamageDealtOnce, runParams, false);
             }
         }
+
         // Targets -> Source
         for (Map.Entry<GameEntity, Map<Card, Integer>> e : columnMap().entrySet()) {
             int sum = 0;
-            for (final int i : e.getValue().values()) {
-                sum += i;
+            // controller list
+            PlayerCollection controllers = new PlayerCollection();
+            for (Entry<Card, Integer> ec : e.getValue().entrySet()) {
+                sum += ec.getValue();
+                controllers.add(ec.getKey().getController());
             }
             if (sum > 0) {
                 final GameEntity ge = e.getKey();
@@ -80,6 +86,15 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
                 runParams.put(AbilityKey.IsCombatDamage, isCombat);
 
                 game.getTriggerHandler().runTrigger(TriggerType.DamageDoneOnce, runParams, false);
+            }
+            for (Player p : controllers) {
+                final GameEntity ge = e.getKey();
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.DamageTarget, ge);
+                runParams.put(AbilityKey.DamageSource, p);
+                runParams.put(AbilityKey.IsCombatDamage, isCombat);
+
+                game.getTriggerHandler().runTrigger(TriggerType.DamageDoneOnceByController, runParams, false);
             }
         }
 

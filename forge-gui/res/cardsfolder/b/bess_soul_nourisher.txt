@@ -2,7 +2,7 @@ Name:Bess, Soul Nourisher
 ManaCost:1 G W
 Types:Legendary Creature Human Citizen
 PT:1/1
-T:Mode$ ChangesZoneAll | ValidCards$ Creature.basePowerEQ1+baseToughnessEQ1+Other | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more other creatures with base power and toughness 1/1 enter the battlefield under your control, put a +1/+1 counter on CARDNAME.
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.basePowerEQ1+baseToughnessEQ1+Other+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever one or more other creatures with base power and toughness 1/1 enter the battlefield under your control, put a +1/+1 counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ Whenever NICKNAME attacks, each other creature you control with base power and toughness 1/1 gets +X/+X until end of turn, where X is the number of +1/+1 counters on NICKNAME.
 SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Creature.basePowerEQ1+baseToughnessEQ1+Other | NumAtt$ +X | NumDef$ +X

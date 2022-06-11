@@ -78,6 +78,10 @@ public class PlayerProperty {
             if (player.isMonarch()) {
                 return false;
             }
+        } else if (property.equals("hasInitiative")) {
+            if (!player.hasInitiative()) {
+                return false;
+            }
         } else if (property.equals("hasBlessing")) {
             if (!player.hasBlessing()) {
                 return false;
@@ -94,7 +98,7 @@ public class PlayerProperty {
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             int found = 0;
             for (final Card card : cards) {
-                if (card.getDamageHistory().getThisCombatDamaged().containsKey(player)) {
+                if (card.getDamageHistory().getThisCombatDamaged().contains(player)) {
                     found++;
                 }
             }
@@ -113,7 +117,7 @@ public class PlayerProperty {
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
             int found = 0;
             for (final Card card : cards) {
-                if (card.getDamageHistory().getThisGameDamaged().containsKey(player)) {
+                if (card.getDamageHistory().getThisGameDamaged().contains(player)) {
                     found++;
                 }
             }

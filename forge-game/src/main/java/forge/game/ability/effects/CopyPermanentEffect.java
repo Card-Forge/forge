@@ -224,6 +224,13 @@ public class CopyPermanentEffect extends TokenEffectBase {
             }
 
             for (final Card c : tgtCards) {
+                // 111.5. Similarly, if an effect would create a token that is a copy of an instant or sorcery card, no token is created.
+                // instant and sorcery can't enter the battlefield
+                // and it can't be replaced by other tokens
+                if (c.isInstant() || c.isSorcery()) {
+                    continue;
+                }
+
                 // if it only targets player, it already got all needed cards from defined
                 if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer() && !c.canBeTargetedBy(sa)) {
                     continue;
