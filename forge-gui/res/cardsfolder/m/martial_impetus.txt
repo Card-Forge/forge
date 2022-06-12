@@ -5,5 +5,5 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | Goad$ True | Description$ Enchanted creature gets +1/+1 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever enchanted creature attacks, each other creature that's attacking one of your opponents gets +1/+1 until end of turn.
-SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.NotEnchantedBy+attackingOpponent | NumAtt$ +1 | NumDef$ +1
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.NotEnchantedBy+attacking Opponent | NumAtt$ +1 | NumDef$ +1
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 and is goaded. (It attacks each combat if able and attacks a player other than you if able.)\nWhenever enchanted creature attacks, each other creature that's attacking one of your opponents gets +1/+1 until end of turn.

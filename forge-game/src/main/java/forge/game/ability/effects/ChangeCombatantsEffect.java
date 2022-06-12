@@ -21,7 +21,7 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetRestrictions;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
-import forge.util.collect.FCollectionView;
+import forge.util.collect.FCollection;
 
 public class ChangeCombatantsEffect extends SpellAbilityEffect {
 
@@ -47,7 +47,8 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
                 final Combat combat = game.getCombat();
                 final GameEntity originalDefender = combat.getDefenderByAttacker(c);
-                final FCollectionView<GameEntity> defs = combat.getDefenders();
+                final FCollection<GameEntity> defs = new FCollection<>();
+                defs.addAll(sa.hasParam("PlayerOnly") ? combat.getDefendingPlayers() : combat.getDefenders());
 
                 String title = Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName()));
                 Map<String, Object> params = Maps.newHashMap();
