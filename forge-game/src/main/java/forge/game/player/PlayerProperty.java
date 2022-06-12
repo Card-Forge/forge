@@ -84,10 +84,10 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.startsWith("damageDoneSingleSource")) {
-            String[] props = property.split(" ");
+            String props = property.split(" ")[1];
             List<Integer> sourceDmg = game.getDamageDoneThisTurn(null, false, "Card.YouCtrl", null, source, sourceController, spellAbility);
             int maxDmg = sourceDmg.isEmpty() ? 0 : Collections.max(sourceDmg);
-            if (!Expressions.compare(maxDmg, props[1], AbilityUtils.calculateAmount(source, props[2], spellAbility))) {
+            if (!Expressions.compare(maxDmg, props.substring(0, 2), AbilityUtils.calculateAmount(source, props.substring(2), spellAbility))) {
                 return false;
             }
         } else if (property.startsWith("wasDealtCombatDamageThisCombatBy ")) {
@@ -133,8 +133,10 @@ public class PlayerProperty {
                 if (property.contains("ThisTurnBy")) {
                     String[] props = property.split(" ");
                     validCard = props[1];
-                    comp = props[2];
-                    right = AbilityUtils.calculateAmount(source, props[3], spellAbility);
+                    if (props.length > 2) {
+                        comp = props[2].substring(0, 2);
+                        right = AbilityUtils.calculateAmount(source, props[2].substring(2), spellAbility);
+                    }
                 }
 
                 numValid = game.getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility).size();
