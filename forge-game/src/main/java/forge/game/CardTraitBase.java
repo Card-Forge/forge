@@ -446,7 +446,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             }
         }
 
-
         if (params.containsKey("ManaSpent")) {
             SpellAbility castSA = getHostCard().getCastSA();
             if (castSA == null) {
