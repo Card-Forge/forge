@@ -4,8 +4,7 @@ Types:Creature Elder Dragon
 PT:8/8
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigRoll | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, roll a d20. 
-SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | Sides$ 20 | SubAbility$ DBImmediateTrigDraw
-SVar:DBImmediateTrigDraw:DB$ ImmediateTrigger | Execute$ TrigDraw | RememberSVarAmount$ Result | TriggerDescription$ Draw cards equal to the result.
+SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | Sides$ 20 | SubAbility$ TrigDraw
 SVar:TrigDraw:DB$ Draw | NumCards$ Result | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ Permanent | SpellDescription$ You have no maximum hand size for the rest of the game.
 SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size for the rest of the game.
