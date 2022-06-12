@@ -677,13 +677,12 @@ public final class GameActionUtil {
         if (!StringUtils.isNumeric(amount)) {
             sa.setSVar(amount, sourceCard.getSVar(amount));
         }
-        CardFactoryUtil.setupETBReplacementAbility(sa);
 
         String desc = "It enters the battlefield with ";
         desc += Lang.nounWithNumeral(amount, CounterType.getType(counter).getName() + " counter");
         desc += " on it.";
 
-        String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | Description$ " + desc;
+        String repeffstr = "Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplacementResult$ Updated | Description$ " + desc;
 
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
         re.setLayer(ReplacementLayer.Other);

@@ -434,6 +434,16 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
+            if (hasParam("CheckSecondSVar")) {
+                final int sVar2 = AbilityUtils.calculateAmount(this.hostCard, getParam("CheckSecondSVar"), this);
+                final String comparator2 = getParamOrDefault("SecondSVarCompare", "GE1");
+                final String svarOperator2 = comparator2.substring(0, 2);
+                final String svarOperand2 = comparator2.substring(2);
+                final int operandValue2 = AbilityUtils.calculateAmount(this.hostCard, svarOperand2, this);
+                if (!Expressions.compare(sVar2, svarOperator2, operandValue2)) {
+                    return false;
+                }
+            }
         }
 
         if (params.containsKey("ManaSpent")) {
