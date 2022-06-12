@@ -14,6 +14,7 @@ import forge.game.ability.AbilityFactory;
 import forge.game.card.Card;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.zone.ZoneType;
@@ -156,11 +157,12 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                         "Static$ True | TriggerDescription$ When the last permanent specified in the goal leaves the battlefield, you win the game.";
                 String effKill = "DB$ WinsGame | Defined$ You | ConditionCheckSVar$ PermCount | ConditionSVarCompare$ EQ0";
                 final Trigger triggerKill = TriggerHandler.parseTrigger(trigKill, goalCard, true);
-                triggerKill.setOverridingAbility(AbilityFactory.getAbility(effKill, goalCard));
+                SpellAbility killSA = AbilityFactory.getAbility(effKill, goalCard);
+                triggerKill.setOverridingAbility(killSA);
                 goalCard.addTrigger(triggerKill);
 
                 String countVar = "Count$Valid " + targets;
-                goalCard.setSVar("PermCount", countVar);
+                killSA.setSVar("PermCount", countVar);
                 break;
             case "put the specified permanent on the battlefield":
             case "play the specified permanent":
@@ -172,11 +174,12 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                         "Static$ True | TriggerDescription$ When the specified permanent enters the battlefield, you win the game.";
                 String effPlay = "DB$ WinsGame | Defined$ You | ConditionCheckSVar$ PermCount | ConditionSVarCompare$ GE" + targetCount;
                 final Trigger triggerPlay = TriggerHandler.parseTrigger(trigPlay, goalCard, true);
-                triggerPlay.setOverridingAbility(AbilityFactory.getAbility(effPlay, goalCard));
+                SpellAbility playSA = AbilityFactory.getAbility(effPlay, goalCard);
+                triggerPlay.setOverridingAbility(playSA);
                 goalCard.addTrigger(triggerPlay);
 
                 String countPerm = "Count$Valid " + targets;
-                goalCard.setSVar("PermCount", countPerm);
+                playSA.setSVar("PermCount", countPerm);
                 break;
             case "gain control of specified permanents":
                 if (targets == null) {
@@ -186,11 +189,12 @@ public class Puzzle extends GameState implements InventoryItem, Comparable<Puzzl
                         "TriggerDescription$ When the last permanent controlled by the opponent leaves the battlefield, you win the game.";
                 String effClear = "DB$ WinsGame | Defined$ You | ConditionCheckSVar$ PermCount | ConditionSVarCompare$ EQ0";
                 final Trigger triggerClear = TriggerHandler.parseTrigger(trigClear, goalCard, true);
-                triggerClear.setOverridingAbility(AbilityFactory.getAbility(effClear, goalCard));
+                SpellAbility clearSA = AbilityFactory.getAbility(effClear, goalCard);
+                triggerClear.setOverridingAbility(clearSA);
                 goalCard.addTrigger(triggerClear);
 
                 String countOTB = "Count$Valid " + targets;
-                goalCard.setSVar("PermCount", countOTB);
+                clearSA.setSVar("PermCount", countOTB);
                 break;
             default:
                 break;

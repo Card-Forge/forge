@@ -233,13 +233,6 @@ public class GameAction {
             }
         }
 
-        // Clean up the temporary Dash/Blitz SVar when the card leaves the battlefield
-        // Clean up the temporary AtEOT SVar
-        String endofTurn = c.getSVar("EndOfTurnLeavePlay");
-        if (fromBattlefield && (endofTurn.equals("Dash") || endofTurn.equals("Blitz") || endofTurn.equals("AtEOT"))) {
-            c.removeSVar("EndOfTurnLeavePlay");
-        }
-
         if (fromBattlefield && !toBattlefield) {
             c.getController().setRevolt(true);
         }
@@ -337,7 +330,7 @@ public class GameAction {
                 CardCollectionView comCards = c.getOwner().getCardsIn(ZoneType.Command);
                 for (final Card effCard : comCards) {
                     for (final ReplacementEffect re : effCard.getReplacementEffects()) {
-                        if (re.hasSVar("CommanderMoveReplacement") && effCard.getEffectSource().getName().equals(c.getRealCommander().getName())) {
+                        if (re.hasParam("CommanderMoveReplacement") && effCard.getEffectSource().getName().equals(c.getRealCommander().getName())) {
                             commanderEffect = effCard;
                             break;
                         }
@@ -365,7 +358,7 @@ public class GameAction {
             }
 
             ReplacementResult repres = game.getReplacementHandler().run(ReplacementType.Moved, repParams);
-            if (repres != ReplacementResult.NotReplaced) {
+            if (repres != ReplacementResult.NotReplaced && repres != ReplacementResult.Updated) {
                 // reset failed manifested Cards back to original
                 if (c.isManifested() && !c.isInPlay()) {
                     c.forceTurnFaceUp();

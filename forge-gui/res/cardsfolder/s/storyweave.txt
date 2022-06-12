@@ -6,8 +6,7 @@ SVar:P1P1:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select targe
 SVar:Lore:DB$ PutCounter | ValidTgts$ Saga.YouCtrl | TgtPrompt$ Select target Saga you control | CounterType$ LORE | CounterNum$ 2 | SubAbility$ DBEffect | SpellDescription$ Put two lore counters on target Saga you control. The next time one or more enchantment creatures enter the battlefield under your control this turn, each enters with two additional +1/+1 counters on it.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ ReplaceETB | Triggers$ TrigRemove
 SVar:ReplaceETB:Event$ Moved | Destination$ Battlefield | ValidCard$ Creature.Enchantment | ReplaceWith$ DBPutP1P1
-SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ 2 | SubAbility$ MoveToBattlefield
-SVar:MoveToBattlefield:DB$ InternalEtbReplacement | SubAbility$ DBImprint
+SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ 2 | SubAbility$ DBImprint
 SVar:DBImprint:DB$ Pump | ImprintCards$ ReplacedCard
 SVar:TrigRemove:Mode$ ChangesZoneAll | CheckSVar$ Z | Execute$ ExileSelf | Static$ True
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self

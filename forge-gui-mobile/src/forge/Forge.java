@@ -59,7 +59,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Forge implements ApplicationListener {
-    public static final String CURRENT_VERSION = "1.6.49.001";
+    public static final String CURRENT_VERSION = "1.6.53.001";
 
     private static ApplicationListener app = null;
     static Scene currentScene = null;
@@ -403,8 +403,12 @@ public class Forge implements ApplicationListener {
                                                 } else if (selector.equals("Adventure")) {
                                                     openAdventure();
                                                     clearSplashScreen();
-                                                } else
+                                                } else if (splashScreen != null) {
                                                     splashScreen.setShowModeSelector(true);
+                                                } else {//default mode in case splashscreen is null at some point as seen on resume..
+                                                    openHomeDefault();
+                                                    clearSplashScreen();
+                                                }
                                                 //start background music
                                                 SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
                                                 safeToClose = true;

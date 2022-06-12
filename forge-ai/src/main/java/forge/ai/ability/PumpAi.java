@@ -731,7 +731,7 @@ public class PumpAi extends PumpAiBase {
                     if (minus > energy || minus < 1) {
                         continue; // in case the calculation gets messed up somewhere
                     }
-                    source.setSVar("EnergyToPay", "Number$" + minus);
+                    root.setSVar("EnergyToPay", "Number$" + minus);
                     return true;
                 }
             }
