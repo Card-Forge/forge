@@ -189,7 +189,6 @@ public enum ApiType {
 
     DamageResolve (DamageResolveEffect.class),
     ChangeZoneResolve (ChangeZoneResolveEffect.class),
-    InternalEtbReplacement (ETBReplacementEffect.class),
     InternalLegendaryRule (CharmEffect.class),
     InternalIgnoreEffect (CharmEffect.class),
     UpdateRemember (UpdateRememberEffect.class);
