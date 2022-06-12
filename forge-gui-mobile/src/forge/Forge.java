@@ -403,8 +403,12 @@ public class Forge implements ApplicationListener {
                                                 } else if (selector.equals("Adventure")) {
                                                     openAdventure();
                                                     clearSplashScreen();
-                                                } else
+                                                } else if (splashScreen != null) {
                                                     splashScreen.setShowModeSelector(true);
+                                                } else {//default mode in case splashscreen is null at some point as seen on resume..
+                                                    openHomeDefault();
+                                                    clearSplashScreen();
+                                                }
                                                 //start background music
                                                 SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
                                                 safeToClose = true;
