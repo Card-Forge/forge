@@ -2,7 +2,6 @@ package forge.game.ability.effects;
 
 
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
@@ -41,14 +40,7 @@ public class LifeLoseEffect extends SpellAbilityEffect {
                 lifeLost += p.loseLife(lifeAmount, false, false);
             }
         }
-        sa.getHostCard().setSVar("AFLifeLost", "Number$" + lifeLost);
-
-        // Exceptional case for Extort: must propagate the amount of life lost to subability, 
-        // otherwise the first Extort trigger per game won't work
-        if (sa.getSubAbility() != null && ApiType.GainLife.equals(sa.getSubAbility().getApi())) {
-            sa.getSubAbility().setSVar("AFLifeLost", "Number$" + lifeLost);
-        }
-        
+        sa.setSVar("AFLifeLost", "Number$" + lifeLost);
     }
 
 }

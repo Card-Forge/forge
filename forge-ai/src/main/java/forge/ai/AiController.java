@@ -1925,8 +1925,8 @@ public class AiController {
             return Math.min(player.getLife() -1,MyRandom.getRandom().nextInt(Math.max(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1);
         } else if ("HighestGetCounter".equals(logic)) {
             return MyRandom.getRandom().nextInt(3);
-        } else if (source.hasSVar("EnergyToPay")) {
-            return AbilityUtils.calculateAmount(source, source.getSVar("EnergyToPay"), sa);
+        } else if (sa.hasSVar("EnergyToPay")) {
+            return AbilityUtils.calculateAmount(source, sa.getSVar("EnergyToPay"), sa);
         } else if ("Vermin".equals(logic)) {
             return MyRandom.getRandom().nextInt(Math.max(player.getLife() - 5, 0));
         } else if ("SweepCreatures".equals(logic)) {
