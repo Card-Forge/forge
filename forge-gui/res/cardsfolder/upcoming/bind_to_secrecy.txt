@@ -1,10 +1,10 @@
 Name:Bind to Secrecy
 ManaCost:U B
 Types:Instant
-A:SP$ Charm | Choices$ CounterNonCreature,DBConjure | CharmNum$ 1 | SpellDescription$ If there are five or more mana values among cards in your graveyard, draft a card from CARDNAME's spellbook.
+A:SP$ Charm | Choices$ CounterNonCreature,DBConjure | CharmNum$ 1
 SVar:CounterNonCreature:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target noncreature spell | ValidTgts$ Card.nonCreature | SubAbility$ TrigDraft | SpellDescription$ Counter target noncreature spell.
-SVar:DBConjure:DB$ MakeCard | TgtPrompt$ Select target creature card in an opponent's graveyard | ValidTgts$ Creature.OppOwn | TgtZone$ Graveyard | DefinedName$ Targeted | Zone$ Hand | RememberMade$ True | SubAbility$ DBEffect | SubAbility$ TrigDraft | SpellDescription$ Conjure a duplicate of target creature card in an opponent's graveyard into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Bind to Secrecy's Perpetual Effect | Triggers$ Update | SubAbility$ DBCleanup
+SVar:DBConjure:DB$ MakeCard | TgtPrompt$ Select target creature card in an opponent's graveyard | ValidTgts$ Creature.OppOwn+inZoneGraveyard | TgtZone$ Graveyard | DefinedName$ Targeted | Zone$ Hand | RememberMade$ True | SubAbility$ DBEffect | SpellDescription$ Conjure a duplicate of target creature card in an opponent's graveyard into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Bind to Secrecy's Perpetual Effect | SubAbility$ DBCleanup | SubAbility$ TrigDraft | SpellDescription$ It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
 SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The conjured card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
 SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AffectedZone$ Stack | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast this spell.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
@@ -14,5 +14,4 @@ SVar:TrigDraft:DB$ NameCard | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 
 SVar:DBMakeCard:DB$ MakeCard | Name$ ChosenName | Zone$ Hand | SubAbility$ DBCleanupName
 SVar:DBCleanupName:DB$ Cleanup | ClearNamedCard$ True
 SVar:X:Count$ValidGraveyard Card.YouOwn$DifferentCMC
-DeckHas:Ability$Discard|Graveyard
-Oracle:Choose one —\n• Counter target noncreature spell.\n• Conjure a duplicate of target creature card in an opponent's graveyard into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."\nIf there are five or more mana values among cards in your graveyard, draft a card from Bind to Secrecy's spellbook.
+Oracle:Choose one —\n• Counter target noncreature spell.\n• Conjure a duplicate of target creature card in an opponent's graveyard into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."\nIf there are five or more mana values among cards in your graveyard, draft a card from Bind to Secrecy’s spellbook.
