@@ -548,6 +548,7 @@ public class GameAction {
         // do ETB counters after zone add
         if (!suppress) {
             if (toBattlefield) {
+                game.getTriggerHandler().registerActiveTrigger(copied, false);
                 copied.putEtbCounters(table);
                 // enable replacement effects again
                 for (final ReplacementEffect re : copied.getReplacementEffects()) {
