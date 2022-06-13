@@ -3,11 +3,11 @@ ManaCost:1 B
 Types:Legendary Enchantment Background
 S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddReplacementEffects$ Draw | Description$ Commander creatures you own have "The first time you would draw a card each turn, instead look at the top two cards of your library. Put one of them into your graveyard and the other back on top of your library. Then draw a card."
 SVar:Draw:Event$ Draw | ValidPlayer$ You | ReplaceWith$ DBDig | CheckSVar$ X | SVarCompare$ EQ0 | CheckSecondSVar$ Y | SecondSVarCompare$ EQ0 | Description$ The first time you would draw a card each turn, instead look at the top two cards of your library. Put one of them into your graveyard and the other back on top of your library. Then draw a card.
-SVar:DBDig:DB$ Dig | DigNum$ 2 | AnyNumber$ | DestinationZone$ Graveyard | LibraryPosition2$ 0 | SubAbility$ AllowDraw
+SVar:DBDig:DB$ Dig | DigNum$ 2 | DestinationZone$ Graveyard | LibraryPosition2$ 0 | SubAbility$ AllowDraw
 SVar:AllowDraw:DB$ StoreSVar | SVar$ Y | Type$ Number | Expression$ 1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | SubAbility$ Reset
 SVar:Reset:DB$ StoreSVar | SVar$ Y | Type$ Number | Expression$ 0
-SVar:X:PlayerCountYou$CardsDrawn
+SVar:X:Count$YouDrewThisTurn
 SVar:Y:Number$0
 DeckHas:Ability$Graveyard
 AI:RemoveDeck:NonCommander

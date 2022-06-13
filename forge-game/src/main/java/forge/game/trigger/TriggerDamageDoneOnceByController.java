@@ -36,7 +36,6 @@ public class TriggerDamageDoneOnceByController extends Trigger {
 
     @Override
     public void setTriggeringObjects(SpellAbility sa, Map<AbilityKey, Object> runParams) {
-
         Object target = runParams.get(AbilityKey.DamageTarget);
         if (target instanceof Card) {
             target = CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageTarget));

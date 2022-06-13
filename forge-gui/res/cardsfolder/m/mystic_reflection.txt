@@ -2,9 +2,8 @@ Name:Mystic Reflection
 ManaCost:1 U
 Types:Instant
 A:SP$ Effect | ValidTgts$ Creature.nonLegendary | TgtPrompt$ Choose target nonlegendary creature | RememberObjects$ Targeted | ReplacementEffects$ ReplaceETB | Triggers$ TrigRemove | SpellDescription$ Choose target nonlegendary creature. The next time one or more creatures or planeswalkers enter the battlefield this turn, they enter as copies of the chosen creature.
-SVar:ReplaceETB:Event$ Moved | Destination$ Battlefield | ValidCard$ Creature,Planeswalker | ReplaceWith$ EnterAsCopy | Description$ The next time one or more creatures or planeswalkers enter the battlefield this turn, they enter as copies of the chosen creature.
-SVar:EnterAsCopy:DB$ Clone | Defined$ Remembered | CloneTarget$ ReplacedCard | SubAbility$ MoveToBattlefield
-SVar:MoveToBattlefield:DB$ InternalEtbReplacement | SubAbility$ DBImprint
+SVar:ReplaceETB:Event$ Moved | Destination$ Battlefield | ValidCard$ Creature,Planeswalker | ReplaceWith$ EnterAsCopy | ReplacementResult$ Updated | Description$ The next time one or more creatures or planeswalkers enter the battlefield this turn, they enter as copies of the chosen creature.
+SVar:EnterAsCopy:DB$ Clone | Defined$ Remembered | CloneTarget$ ReplacedCard | SubAbility$ DBImprint
 SVar:DBImprint:DB$ Pump | ImprintCards$ ReplacedCard
 SVar:TrigRemove:Mode$ ChangesZoneAll | CheckSVar$ Z | Execute$ ExileSelf | Static$ True
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self

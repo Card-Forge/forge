@@ -211,6 +211,7 @@ public class ReplacementHandler {
                     re.setHostCard(affectedCard);
                 }
                 runParams.put(AbilityKey.Affected, affectedCard);
+                runParams.put(AbilityKey.NewCard, CardUtil.getLKICopy(affectedLKI));
             }
             game.getAction().checkStaticAbilities(false);
         }
@@ -418,8 +419,8 @@ public class ReplacementHandler {
             }
         }
 
-        if ("Replaced".equals(replacementEffect.getParam("ReplacementResult"))) {
-            return ReplacementResult.Replaced; // Event is replaced without SA.
+        if (replacementEffect.hasParam("ReplacementResult")) {
+            return ReplacementResult.valueOf(replacementEffect.getParam("ReplacementResult")); // Event is replaced without SA.
         }
 
         // if the spellability is a replace effect then its some new logic

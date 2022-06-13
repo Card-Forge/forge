@@ -288,6 +288,8 @@ public class StaticEffect {
                 affectedCard.removeCanBlockAdditional(getTimestamp());
             }
 
+            affectedCard.removeChangedSVars(getTimestamp(), ability.getId());
+
             affectedCard.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
         }
         return affectedCards;

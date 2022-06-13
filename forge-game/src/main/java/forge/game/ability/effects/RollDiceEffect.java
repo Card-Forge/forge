@@ -126,13 +126,13 @@ public class RollDiceEffect extends SpellAbilityEffect {
 
         total += modifier;
         if (sa.hasParam("ResultSVar")) {
-            host.setSVar(sa.getParam("ResultSVar"), Integer.toString(total));
+            sa.setSVar(sa.getParam("ResultSVar"), Integer.toString(total));
         }
         if (sa.hasParam("ChosenSVar")) {
             int chosen = player.getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblChooseAResult"), rolls, player);
             String message = Localizer.getInstance().getMessage("lblPlayerChooseValue", player, chosen);
             player.getGame().getAction().notifyOfValue(sa, player, message, player);
-            host.setSVar(sa.getParam("ChosenSVar"), Integer.toString(chosen));
+            sa.setSVar(sa.getParam("ChosenSVar"), Integer.toString(chosen));
             if (sa.hasParam("OtherSVar")) {
                 int other = rolls.get(0);
                 for (int i = 1; i < rolls.size(); ++i) {
@@ -141,7 +141,7 @@ public class RollDiceEffect extends SpellAbilityEffect {
                         break;
                     }
                 }
-                host.setSVar(sa.getParam("OtherSVar"), Integer.toString(other));
+                sa.setSVar(sa.getParam("OtherSVar"), Integer.toString(other));
             }
         }
 

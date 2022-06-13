@@ -52,7 +52,6 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -651,14 +650,13 @@ public class CardFactoryUtil {
             final boolean intrinsic, final String valid, final String zone) {
         Card host = card.getCard();
         String desc = repAb.getDescription();
-        setupETBReplacementAbility(repAb);
         if (!intrinsic) {
             repAb.setIntrinsic(false);
         }
 
         StringBuilder repEffsb = new StringBuilder();
         repEffsb.append("Event$ Moved | ValidCard$ ").append(valid);
-        repEffsb.append(" | Destination$ Battlefield | Description$ ").append(desc);
+        repEffsb.append(" | Destination$ Battlefield | ReplacementResult$ Updated | Description$ ").append(desc);
         if (optional) {
             repEffsb.append(" | Optional$ True");
         }
@@ -751,13 +749,12 @@ public class CardFactoryUtil {
         }
 
         SpellAbility sa = AbilityFactory.getAbility(abStr, card);
-        setupETBReplacementAbility(sa);
         if (!intrinsic) {
             sa.setIntrinsic(false);
         }
 
         String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
-                + "| Secondary$ True | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
+                + "| Secondary$ True | ReplacementResult$ Updated | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
 
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card.getCard(), intrinsic, card);
 
@@ -2055,7 +2052,7 @@ public class CardFactoryUtil {
 
             // Setup ETB replacement effects
             final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
-                    + " | Description$ Amplify " + amplifyMagnitude + " ("
+                    + " | ReplacementResult$ Updated | Description$ Amplify " + amplifyMagnitude + " ("
                     + inst.getReminderText() + ")";
 
             final String abString = "DB$ Reveal | AnyNumber$ True | RevealValid$ "
@@ -2075,7 +2072,6 @@ public class CardFactoryUtil {
             AbilitySub saCleanup = (AbilitySub) AbilityFactory.getAbility(dbClean, card);
 
             saPut.setSubAbility(saCleanup);
-            setupETBReplacementAbility(saCleanup);
 
             saReveal.setSubAbility(saPut);
 
@@ -2168,13 +2164,12 @@ public class CardFactoryUtil {
 
             inst.addReplacement(re);
         } else if (keyword.equals("Daybound")) {
-            final String actualRep = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Night | Secondary$ True | Layer$ Transform | Description$ If it is night, this permanent enters the battlefield transformed.";
+            final String actualRep = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Night | Secondary$ True | Layer$ Transform | ReplacementResult$ Updated | Description$ If it is night, this permanent enters the battlefield transformed.";
             final String abTransform = "DB$ SetState | Defined$ ReplacedCard | Mode$ Transform | ETB$ True | Daybound$ True";
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(actualRep, host, intrinsic, card);
 
             SpellAbility saTransform = AbilityFactory.getAbility(abTransform, card);
-            setupETBReplacementAbility(saTransform);
             re.setOverridingAbility(saTransform);
 
             inst.addReplacement(re);
@@ -2206,11 +2201,10 @@ public class CardFactoryUtil {
             AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
             counterSA.setSubAbility(cleanupSA);
 
-            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Secondary$ True | Description$ Devour " + magnitude + " ("+ inst.getReminderText() + ")";
+            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Secondary$ True | ReplacementResult$ Updated | Description$ Devour " + magnitude + " ("+ inst.getReminderText() + ")";
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
 
-            setupETBReplacementAbility(cleanupSA);
             re.setOverridingAbility(sacrificeSA);
 
             inst.addReplacement(re);
@@ -3691,14 +3685,6 @@ public class CardFactoryUtil {
         }
 
         return altCostSA;
-    }
-
-    private static final Map<String,String> emptyMap = Maps.newTreeMap();
-    public static SpellAbility setupETBReplacementAbility(SpellAbility sa) {
-        AbilitySub as = new AbilitySub(ApiType.InternalEtbReplacement, sa.getHostCard(), null, emptyMap);
-        sa.appendSubAbility(as);
-        return as;
-        // ETBReplacementMove(sa.getHostCard(), null));
     }
 
     public static void setupAdventureAbility(Card card) {

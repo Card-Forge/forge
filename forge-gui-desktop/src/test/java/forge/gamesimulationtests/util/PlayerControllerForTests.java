@@ -52,7 +52,7 @@ import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.testng.collections.Lists;
+import com.google.common.collect.Lists;
 
 import java.util.Collection;
 import java.util.HashMap;

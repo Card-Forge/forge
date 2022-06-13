@@ -55,6 +55,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
+import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.LandAbility;
 import forge.game.spellability.OptionalCost;
@@ -217,10 +218,15 @@ public class AbilityUtils {
         else if (defined.startsWith("Replaced") && sa instanceof SpellAbility) {
             final SpellAbility root = ((SpellAbility)sa).getRootAbility();
             AbilityKey type = AbilityKey.fromString(defined.substring(8));
+            // for Moved Effects, if it wants to know the affected Card, it might need to return the LKI
+            // or otherwise the timestamp does match
+            if (type == AbilityKey.Card && root.isReplacementAbility() && root.getReplacementEffect().getMode() == ReplacementType.Moved) {
+                type = AbilityKey.CardLKI;
+            }
             final Object crd = root.getReplacingObject(type);
 
             if (crd instanceof Card) {
-                c = game.getCardState((Card) crd);
+                c = (Card) crd;
             } else if (crd instanceof Iterable<?>) {
                 cards.addAll(Iterables.filter((Iterable<?>) crd, Card.class));
             }
@@ -1415,11 +1421,7 @@ public class AbilityUtils {
 
         // Needed - Equip an untapped creature with Sword of the Paruns then cast Deadshot on it. Should deal 2 more damage.
         game.getAction().checkStaticAbilities(); // this will refresh continuous abilities for players and permanents.
-        if (sa.isReplacementAbility() && abSub.getApi() == ApiType.InternalEtbReplacement) {
-            game.getTriggerHandler().resetActiveTriggers(false);
-        } else {
-            game.getTriggerHandler().resetActiveTriggers();
-        }
+        game.getTriggerHandler().resetActiveTriggers(!sa.isReplacementAbility());
         AbilityUtils.resolveApiAbility(abSub, game);
     }
 
