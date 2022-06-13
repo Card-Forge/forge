@@ -3052,7 +3052,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | Destination$ Graveyard,Exile,Hand,Library | " +
                     "Description$ If a signature spell would be put into another zone from the stack, put it into the command zone instead.";
             ReplacementEffect re = ReplacementHandler.parseReplacement(moved, eff, true);
-            re.setOverridingAbility(AbilityFactory.getAbility(eff, effStr));
+            re.setOverridingAbility(AbilityFactory.getAbility(effStr, eff));
             eff.addReplacementEffect(re);
 
             //signature spells can only be cast if your oathbreaker is in on the battlefield under your control
@@ -3074,7 +3074,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 moved += " | Destination$ Hand,Library | Description$ If a commander would be put into its owner's hand or library from anywhere, its owner may put it into the command zone instead.";
             }
             ReplacementEffect re = ReplacementHandler.parseReplacement(moved, eff, true);
-            re.setOverridingAbility(AbilityFactory.getAbility(eff, effStr));
+            re.setOverridingAbility(AbilityFactory.getAbility(effStr, eff));
             eff.addReplacementEffect(re);
         }
 
