@@ -246,10 +246,6 @@ public class GameAction {
                 lastKnownInfo = CardUtil.getLKICopy(c);
             }
 
-            if (!suppress) {
-                copied.setTimestamp(game.getNextTimestamp());
-            }
-
             if (!lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.")) {
                 copied.clearCounters();
             }
@@ -274,6 +270,8 @@ public class GameAction {
                 copied = CardFactory.copyCard(c, false);
             }
 
+            copied.setTimestamp(c.getTimestamp());
+
             if (zoneTo.is(ZoneType.Stack)) {
                 // when moving to stack, copy changed card information
                 copied.setChangedCardColors(c.getChangedCardColorsTable());
@@ -286,7 +284,6 @@ public class GameAction {
                 copied.setDrawnThisTurn(c.getDrawnThisTurn());
 
                 copied.copyChangedTextFrom(c);
-                copied.setTimestamp(c.getTimestamp());
 
                 // clean up changes that come from its own static abilities
                 copied.cleanupCopiedChangesFrom(c);
@@ -304,9 +301,6 @@ public class GameAction {
                 // on Transformed objects)
                 copied.setState(CardStateName.Original, false);
                 copied.setBackSide(false);
-
-                // reset timestamp in changezone effects so they have same timestamp if ETB simultaneously
-                copied.setTimestamp(game.getNextTimestamp());
             }
 
             copied.setUnearthed(c.isUnearthed());
@@ -386,6 +380,11 @@ public class GameAction {
 
                 return c;
             }
+        }
+
+        if (!zoneTo.is(ZoneType.Stack) && !suppress) {
+            // reset timestamp in changezone effects so they have same timestamp if ETB simultaneously
+            copied.setTimestamp(game.getNextTimestamp());
         }
 
         copied.getOwner().removeInboundToken(copied);
