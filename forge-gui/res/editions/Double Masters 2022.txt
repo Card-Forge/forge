@@ -19,5 +19,6 @@ ScryfallCode=2X2
 440 M Liliana, the Last Hope @Jaime Jones
 480 R Bring to Light @Jonas De Ro
 553 M Wrenn and Six @Chase Stone
+577 M Ulamog, the Infinite Gyre @Thomas M. Baxa
 578 R Weathered Wayfarer @Dermot Power
 579 R Bring to Light @Mark Poole
