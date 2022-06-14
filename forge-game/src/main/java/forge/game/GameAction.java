@@ -490,15 +490,6 @@ public class GameAction {
 
         GameEntityCounterTable table = new GameEntityCounterTable();
 
-        // need to suspend cards own replacement effects
-        if (!suppress) {
-            if (toBattlefield && !copied.getEtbCounters().isEmpty()) {
-                for (final ReplacementEffect re : copied.getReplacementEffects()) {
-                    re.setSuppressed(true);
-                }
-            }
-        }
-
         if (mergedCards != null) {
             // Move components of merged permanent here
             // Also handle 723.3e and 903.9a
@@ -545,15 +536,9 @@ public class GameAction {
         }
 
         // do ETB counters after zone add
-        if (!suppress) {
-            if (toBattlefield) {
-                game.getTriggerHandler().registerActiveTrigger(copied, false);
-                copied.putEtbCounters(table);
-                // enable replacement effects again
-                for (final ReplacementEffect re : copied.getReplacementEffects()) {
-                    re.setSuppressed(false);
-                }
-            }
+        if (!suppress && toBattlefield && !copied.getEtbCounters().isEmpty()) {
+            game.getTriggerHandler().registerActiveTrigger(copied, false);
+            copied.putEtbCounters(table);
             copied.clearEtbCounters();
         }
 
