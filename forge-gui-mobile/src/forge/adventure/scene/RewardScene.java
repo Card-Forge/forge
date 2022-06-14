@@ -50,7 +50,10 @@ public class RewardScene extends UIScene {
     public boolean done() {
         GameHUD.getInstance().getTouchpad().setVisible(false);
         if (doneClicked) {
-            if(exitCountDown > 0.2f) { Forge.switchToLast(); } //Wait a little bit to prevent double tap.
+            if(exitCountDown > 0.2f) {
+                clearGenerated();
+                Forge.switchToLast();
+            }
             return true;
         }
 
@@ -72,22 +75,26 @@ public class RewardScene extends UIScene {
                 exitCountDown = 0.0f;
                 doneClicked = true;
             } else {
-                for (Actor actor : new Array.ArrayIterator<>(generated)) {
-                    if (!(actor instanceof RewardActor)) {
-                        continue;
-                    }
-                    RewardActor reward = (RewardActor) actor;
-                    reward.clearHoldToolTip();
-                    try {
-                        stage.getActors().removeValue(reward, true);
-                    } catch (Exception e) {}
-                }
+                clearGenerated();
                 Forge.switchToLast();
             }
         } else {
+            clearGenerated();
             Forge.switchToLast();
         }
         return true;
+    }
+    void clearGenerated() {
+        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+            if (!(actor instanceof RewardActor)) {
+                continue;
+            }
+            RewardActor reward = (RewardActor) actor;
+            reward.clearHoldToolTip();
+            try {
+                stage.getActors().removeValue(reward, true);
+            } catch (Exception e) {}
+        }
     }
 
     @Override
@@ -99,6 +106,7 @@ public class RewardScene extends UIScene {
                 flipCountDown -= Gdx.graphics.getDeltaTime();
                 exitCountDown += Gdx.graphics.getDeltaTime();
             if (flipCountDown <= 0) {
+                clearGenerated();
                 Forge.switchToLast();
             }
         }
