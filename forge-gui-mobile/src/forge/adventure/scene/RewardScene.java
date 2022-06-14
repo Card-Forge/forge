@@ -117,6 +117,7 @@ public class RewardScene extends UIScene {
 
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor) {
+        RewardActor.clearHoldToolTip();
         this.type = type;
         doneClicked = false;
 
