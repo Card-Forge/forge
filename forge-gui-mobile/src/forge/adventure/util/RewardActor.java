@@ -44,7 +44,7 @@ import static forge.adventure.util.Paths.ITEMS_ATLAS;
  */
 public class RewardActor extends Actor implements Disposable, ImageFetcher.Callback {
     Tooltip<Image> tooltip;
-    static HoldTooltip holdTooltip;
+    HoldTooltip holdTooltip;
     Reward reward;
     ShaderProgram shaderGrayscale = Forge.getGraphics().getShaderGrayscale();
 
@@ -59,7 +59,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     boolean clicked = false;
     boolean sold = false;
     boolean flipOnClick;
-    private static boolean hover;
+    private boolean hover;
 
     public static int renderedCount = 0; //Counter for cards that require rendering a preview.
     static final ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
@@ -267,7 +267,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     public boolean isFlipped() {
         return (clicked && flipProcess >= 1);
     }
-    public static void clearHoldToolTip() {
+    public void clearHoldToolTip() {
         if (holdTooltip != null) {
             try {
                 hover = false;

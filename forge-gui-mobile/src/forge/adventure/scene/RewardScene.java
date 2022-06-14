@@ -72,6 +72,16 @@ public class RewardScene extends UIScene {
                 exitCountDown = 0.0f;
                 doneClicked = true;
             } else {
+                for (Actor actor : new Array.ArrayIterator<>(generated)) {
+                    if (!(actor instanceof RewardActor)) {
+                        continue;
+                    }
+                    RewardActor reward = (RewardActor) actor;
+                    reward.clearHoldToolTip();
+                    try {
+                        stage.getActors().removeValue(reward, true);
+                    } catch (Exception e) {}
+                }
                 Forge.switchToLast();
             }
         } else {
@@ -117,7 +127,6 @@ public class RewardScene extends UIScene {
 
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor) {
-        RewardActor.clearHoldToolTip();
         this.type = type;
         doneClicked = false;
 
