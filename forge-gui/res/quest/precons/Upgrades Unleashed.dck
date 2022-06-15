@@ -1,0 +1,88 @@
+[metadata]
+Name=Upgrades Unleashed
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Description=Wield Chishiro's blade and cut down all who would stand before you. Unleash the true potential of your creatures with auras, equipment and counters. Together, you are capable of anything!
+Set=NEC
+Image=upgrades_unleashed.png
+[commander]
+1 Chishiro, the Shattered Blade+|NEC
+[main]
+1 Ox of Agonas|NEC
+1 Agitator Ant|NEC
+1 Goblin Razerunners|NEC
+1 Krenko, Tin Street Kingpin|NEC
+1 Taurean Mauler|NEC
+1 Acidic Slime|NEC
+1 Champion of Lambholt|NEC
+1 Fertilid|NEC
+1 Forgotten Ancient|NEC
+1 Loyal Guardian|NEC
+1 Primeval Protector|NEC
+1 Rishkar, Peema Renegade|NEC
+1 Sakura-Tribe Elder|NEC
+1 Spearbreaker Behemoth|NEC
+1 Whiptongue Hydra|NEC
+1 Grumgully, the Generous|NEC
+1 Ulasht, the Hate Seed|NEC
+1 Kaima, the Fractured Calm|NEC
+1 Akki Battle Squad|NEC
+1 Kami of Celebration|NEC
+1 Komainu Battle Armor|NEC
+1 Tanuki Transplanter|NEC
+1 Orochi Merge-Keeper|NEC
+1 Towashi Guide-Bot|NEC
+1 Walking Skyscraper|NEC
+1 Kosei, Penitent Warlord|NEC
+1 Rampant Rejuvenator|NEC
+1 Genesis Hydra|NEC
+1 Ascendant Acolyte|NEC
+1 Chain Reaction|NEC
+1 Kodama's Reach|NEC
+1 Rampant Growth|NEC
+1 Rishkar's Expertise|NEC
+1 Shamanic Revelation|NEC
+1 Soul's Majesty|NEC
+1 Vastwood Surge|NEC
+1 Decimate|NEC
+1 Collision of Realms|NEC
+1 Smoke Spirits' Aid|NEC
+1 Chaos Warp|NEC
+1 Starstorm|NEC
+1 Beast Within|NEC
+1 Hunter's Insight|NEC
+1 Silkguard|NEC
+1 Mage Slayer|NEC
+1 Arcane Signet|NEC
+1 Blackblade Reforged|NEC
+1 Bonehoard|NEC
+1 Fireshrieker|NEC
+1 Sol Ring|NEC
+1 Swiftfoot Boots|NEC
+1 Sword of Vengeance|NEC
+1 Elemental Mastery|NEC
+1 Shifting Shadow|NEC
+1 Bear Umbra|NEC
+1 Ordeal of Nylea|NEC
+1 Snake Umbra|NEC
+1 Rhythm of the Wild|NEC
+1 Concord with the Kami|NEC
+1 Invigorating Hot Spring|NEC
+1 Unquenchable Fury|NEC
+1 One with the Kami|NEC
+1 Cinder Glade|NEC
+1 Command Tower|NEC
+1 Exotic Orchard|NEC
+1 Game Trail|NEC
+1 Gruul Turf|NEC
+2 Mossfire Valley|NEC
+1 Opal Palace|NEC
+1 Oran-Rief, the Vastwood|NEC
+1 Raging Ravine|NEC
+1 Temple of Abandon|NEC
+12 Mountain|NEC
+14 Forest|NEC

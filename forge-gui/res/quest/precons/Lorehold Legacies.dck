@@ -1,0 +1,95 @@
+[metadata]
+Name=Lorehold Legacies
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Description=Even by Lorehold standards, Osgir is obsessed with relics of the past. Whether it’s a magnificently jeweled crown or an ugly old shovel, he treasures every connection to ancient civilizations. As a student, he was constantly in detention for hoarding the best finds from Lorehold dig sites in his room; he lost count of how many times he was sternly told, “History belongs to us all!” On his way to becoming a professor, Osgir mastered the magical art of duplicative restoration. Now he specializes in creating perfect, functioning replicas of objects and devices from even the smallest of scraps, a talent which he uses to produce two identical copies every time—one for the rotating display outside his Lorehold office, and one for his personal collection.
+Set=C21
+Image=lorehold_legacies.png
+[commander]
+1 Osgir, the Reconstructor+|C21
+[main]
+1 Alibou, Ancient Witness|C21
+1 Ancient Den|C21
+1 Angel of the Ruins|C21
+1 Arcane Signet|C21
+1 Archaeomancer's Map|C21
+1 Audacious Reshapers|C21
+1 Battlefield Forge|C21
+1 Battlemage's Bracers|C21
+1 Boros Charm|C21
+1 Boros Garrison|C21
+1 Boros Locket|C21
+1 Bosh, Iron Golem|C21
+1 Bronze Guardian|C21
+1 Burnished Hart|C21
+1 Chain Reaction|C21
+1 Cleansing Nova|C21
+1 Combustible Gearhulk|C21
+1 Command Tower|C21
+1 Commander's Sphere|C21
+1 Cursed Mirror|C21
+1 Daretti, Scrap Savant|C21
+1 Darksteel Citadel|C21
+1 Darksteel Mutation|C21
+1 Digsite Engineer|C21
+1 Dispatch|C21
+1 Dispeller's Capsule|C21
+1 Duplicant|C21
+1 Excavation Technique|C21
+1 Exotic Orchard|C21
+1 Faithless Looting|C21
+1 Feldon of the Third Path|C21
+1 Forgotten Cave|C21
+1 Great Furnace|C21
+1 Hedron Archive|C21
+1 Hellkite Igniter|C21
+1 Hellkite Tyrant|C21
+1 Hoard-Smelter Dragon|C21
+1 Ichor Wellspring|C21
+1 Jor Kadeen, the Prevailer|C21
+1 Key to the City|C21
+1 Laelia, the Blade Reforged|C21
+1 Lorehold Campus|C21
+1 Losheel, Clockwork Scholar|C21
+1 Meteor Golem|C21
+1 Mind Stone|C21
+1 Monologue Tax|C21
+12 Mountain|C21
+1 Mycosynth Wellspring|C21
+1 Myr Battlesphere|C21
+1 Myriad Landscape|C21
+1 Phyrexia's Core|C21
+1 Pia Nalaar|C21
+1 Pilgrim's Eye|C21
+8 Plains|C21
+1 Quicksmith Genius|C21
+1 Reconstruct History|C21
+1 Return to Dust|C21
+1 Rip Apart|C21
+1 Rogue's Passage|C21
+1 Rout|C21
+1 Ruin Grinder|C21
+1 Sanctum Gargoyle|C21
+1 Scrap Trawler|C21
+1 Sculpting Steel|C21
+1 Secluded Steppe|C21
+1 Secret Rendezvous|C21
+1 Slayers' Stronghold|C21
+1 Sol Ring|C21
+1 Solemn Simulacrum|C21
+1 Steel Hellkite|C21
+1 Steel Overseer|C21
+1 Study Hall|C21
+1 Sun Titan|C21
+1 Sunhome, Fortress of the Legion|C21
+1 Temple of the False God|C21
+1 Temple of Triumph|C21
+1 Thopter Engineer|C21
+1 Thousand-Year Elixir|C21
+1 Triplicate Titan|C21
+1 Unstable Obelisk|C21
+1 Wake the Past|C21
