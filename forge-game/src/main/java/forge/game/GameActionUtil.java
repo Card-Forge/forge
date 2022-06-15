@@ -42,17 +42,12 @@ import forge.game.player.PlayerController;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementLayer;
-import forge.game.spellability.AbilityManaPart;
-import forge.game.spellability.AbilitySub;
-import forge.game.spellability.AlternativeCost;
-import forge.game.spellability.OptionalCost;
-import forge.game.spellability.OptionalCostValue;
-import forge.game.spellability.Spell;
-import forge.game.spellability.SpellAbility;
-import forge.game.spellability.SpellAbilityRestriction;
+import forge.game.spellability.*;
+import forge.game.staticability.StaticAbilityLayer;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.TextUtil;
@@ -91,7 +86,11 @@ public final class GameActionUtil {
         Card source = sa.getHostCard();
         final Game game = source.getGame();
 
-        if (sa.isSpell() && !source.isInPlay()) {
+        if (sa.isSpell() && source.isInPlay()) {
+            return alternatives;
+        }
+
+        if (sa.isSpell()) {
             boolean lkicheck = false;
 
             Card newHost = ((Spell)sa).getAlternateHost(source);
@@ -179,12 +178,13 @@ public final class GameActionUtil {
 
                         SpellAbility newSA;
                         if (source.getAlternateState().getType().hasSubtype("Aura")) {
-                            newSA = source.getAlternateState().getFirstAbility().copyWithManaCostReplaced(activator,
-                                    disturbCost);
+                            newSA = source.getAlternateState().getFirstAbility().copyWithManaCostReplaced(activator, disturbCost);
                         } else {
-                            newSA = sa.copyWithManaCostReplaced(activator, disturbCost);
+                            newSA = new SpellPermanent(source);
+                            newSA.setCardState(source.getAlternateState());
+                            newSA.setPayCosts(disturbCost);
+                            newSA.setActivatingPlayer(activator);
                         }
-                        newSA.setActivatingPlayer(activator);
 
                         newSA.putParam("PrecostDesc", "Disturb —");
                         newSA.putParam("CostDesc", disturbCost.toString());
@@ -290,6 +290,35 @@ public final class GameActionUtil {
                     foretold.putParam("AfterDescription", "(Foretold)");
                     alternatives.add(foretold);
                 }
+
+                // some needs to check after ability was put on the stack
+                // Currently this is only checked for Toolbox and that only cares about creature spells
+                if (source.isCreature() && game.getAction().hasStaticAbilityAffectingZone(ZoneType.Stack, StaticAbilityLayer.ABILITIES)) {
+                    Zone oldZone = source.getLastKnownZone();
+                    Card blitzCopy = source;
+                    if (!source.isLKI()) {
+                        blitzCopy = CardUtil.getLKICopy(source);
+                    }
+                    blitzCopy.setLastKnownZone(game.getStackZone());
+                    lkicheck = true;
+
+                    blitzCopy.clearStaticChangedCardKeywords(false);
+                    CardCollection preList = new CardCollection(blitzCopy);
+                    game.getAction().checkStaticAbilities(false, Sets.newHashSet(blitzCopy), preList);
+
+                    // currently only for Keyword BLitz, but should affect Dash probably too
+                    for (final KeywordInterface inst : blitzCopy.getKeywords(Keyword.BLITZ)) {
+                        // TODO with mana value 4 or greater has blitz.
+                        for (SpellAbility iSa : inst.getAbilities()) {
+                            // do only non intrinsic
+                            if (!iSa.isIntrinsic()) {
+                                alternatives.add(iSa);
+                            }
+                        }
+                    }
+                    // need to reset to Old Zone, or canPlay would fail
+                    blitzCopy.setLastKnownZone(oldZone);
+                }
             }
 
             // reset static abilities
@@ -300,74 +329,73 @@ public final class GameActionUtil {
                 // need to unfreeze tracker
                 game.getTracker().unfreeze();
             }
-        }
+        } else {
+            if (sa.isManaAbility() && sa.isActivatedAbility() && activator.hasKeyword("Piracy") && source.isLand() && source.isInPlay() && !activator.equals(source.getController()) && sa.getPayCosts().hasTapCost()) {
+                SpellAbility newSA = sa.copy(activator);
+                // to bypass Activator restriction, set Activator to Player
+                newSA.getRestrictions().setActivator("Player");
 
-        if (sa.isManaAbility() && sa.isActivatedAbility() && activator.hasKeyword("Piracy") && source.isLand() && source.isInPlay() && !activator.equals(source.getController()) && sa.getPayCosts().hasTapCost()) {
-            SpellAbility newSA = sa.copy(activator);
-            // to bypass Activator restriction, set Activator to Player
-            newSA.getRestrictions().setActivator("Player");
-
-            // extra Mana restriction to only Spells
-            for (AbilityManaPart mp : newSA.getAllManaParts()) {
-                mp.setExtraManaRestriction("Spell");
-            }
-            alternatives.add(newSA);
-        }
-
-        // below are for some special cases of activated abilities
-        if (sa.isCycling() && activator.hasKeyword("CyclingForZero")) {
-            for (final KeywordInterface inst : source.getKeywords()) {
-                // need to find the correct Keyword from which this Ability is from
-                if (!inst.getAbilities().contains(sa)) {
-                    continue;
+                // extra Mana restriction to only Spells
+                for (AbilityManaPart mp : newSA.getAllManaParts()) {
+                    mp.setExtraManaRestriction("Spell");
                 }
-
-                // set the cost to this directly to bypass non mana cost
-                final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
-                newSA.setActivatingPlayer(activator);
-                newSA.putParam("CostDesc", ManaCostParser.parse("0"));
-
-                // need to build a new Keyword to get better Reminder Text
-                String data[] = inst.getOriginal().split(":");
-                data[1] = "0";
-                KeywordInterface newKi = Keyword.getInstance(StringUtils.join(data, ":"));
-
-                // makes new SpellDescription
-                final StringBuilder sb = new StringBuilder();
-                sb.append(newSA.getCostDescription());
-                sb.append("(").append(newKi.getReminderText()).append(")");
-                newSA.setDescription(sb.toString());
-
                 alternatives.add(newSA);
             }
-        }
-        if (sa.isEquip() && activator.hasKeyword("You may pay 0 rather than pay equip costs.")) {
-            for (final KeywordInterface inst : source.getKeywords()) {
-                // need to find the correct Keyword from which this Ability is from
-                if (!inst.getAbilities().contains(sa)) {
-                    continue;
+
+            // below are for some special cases of activated abilities
+            if (sa.isCycling() && activator.hasKeyword("CyclingForZero")) {
+                for (final KeywordInterface inst : source.getKeywords()) {
+                    // need to find the correct Keyword from which this Ability is from
+                    if (!inst.getAbilities().contains(sa)) {
+                        continue;
+                    }
+
+                    // set the cost to this directly to bypass non mana cost
+                    final SpellAbility newSA = sa.copyWithDefinedCost("Discard<1/CARDNAME>");
+                    newSA.setActivatingPlayer(activator);
+                    newSA.putParam("CostDesc", ManaCostParser.parse("0"));
+
+                    // need to build a new Keyword to get better Reminder Text
+                    String data[] = inst.getOriginal().split(":");
+                    data[1] = "0";
+                    KeywordInterface newKi = Keyword.getInstance(StringUtils.join(data, ":"));
+
+                    // makes new SpellDescription
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append(newSA.getCostDescription());
+                    sb.append("(").append(newKi.getReminderText()).append(")");
+                    newSA.setDescription(sb.toString());
+
+                    alternatives.add(newSA);
                 }
+            }
+            if (sa.isEquip() && activator.hasKeyword("You may pay 0 rather than pay equip costs.")) {
+                for (final KeywordInterface inst : source.getKeywords()) {
+                    // need to find the correct Keyword from which this Ability is from
+                    if (!inst.getAbilities().contains(sa)) {
+                        continue;
+                    }
 
-                // set the cost to this directly to bypass non mana cost
-                SpellAbility newSA = sa.copyWithDefinedCost("0");
-                newSA.setActivatingPlayer(activator);
-                newSA.putParam("CostDesc", ManaCostParser.parse("0"));
+                    // set the cost to this directly to bypass non mana cost
+                    SpellAbility newSA = sa.copyWithDefinedCost("0");
+                    newSA.setActivatingPlayer(activator);
+                    newSA.putParam("CostDesc", ManaCostParser.parse("0"));
 
-                // need to build a new Keyword to get better Reminder Text
-                String data[] = inst.getOriginal().split(":");
-                data[1] = "0";
-                KeywordInterface newKi = Keyword.getInstance(StringUtils.join(data, ":"));
+                    // need to build a new Keyword to get better Reminder Text
+                    String data[] = inst.getOriginal().split(":");
+                    data[1] = "0";
+                    KeywordInterface newKi = Keyword.getInstance(StringUtils.join(data, ":"));
 
-                // makes new SpellDescription
-                final StringBuilder sb = new StringBuilder();
-                sb.append(newSA.getCostDescription());
-                sb.append("(").append(newKi.getReminderText()).append(")");
-                newSA.setDescription(sb.toString());
+                    // makes new SpellDescription
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append(newSA.getCostDescription());
+                    sb.append("(").append(newKi.getReminderText()).append(")");
+                    newSA.setDescription(sb.toString());
 
-                alternatives.add(newSA);
+                    alternatives.add(newSA);
+                }
             }
         }
-
         return alternatives;
     }
 

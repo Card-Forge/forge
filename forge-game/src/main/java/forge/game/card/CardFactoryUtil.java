@@ -2682,6 +2682,10 @@ public class CardFactoryUtil {
 
             final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(blitzCost);
 
+            if (k.length > 2) {
+                newSA.getMapParams().put("ValidAfterStack", k[2]);
+            }
+
             final StringBuilder desc = new StringBuilder();
             desc.append("Blitz ").append(blitzCost.toSimpleString()).append(" (");
             desc.append(inst.getReminderText());

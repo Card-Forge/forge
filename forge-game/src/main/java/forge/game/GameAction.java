@@ -37,6 +37,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
 
 import forge.GameCommand;
 import forge.StaticData;
@@ -66,6 +67,7 @@ import forge.game.event.GameEventGameStarted;
 import forge.game.event.GameEventScry;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordsChange;
 import forge.game.mulligan.MulliganService;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
@@ -480,6 +482,36 @@ public class GameAction {
 
             if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
                 c.cleanupExiledWith();
+            }
+
+            // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
+            // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
+            if (zoneFrom.is(ZoneType.Stack) && toBattlefield) {
+                List<KeywordInterface> newKw = Lists.newArrayList();
+                for (Table.Cell<Long, Long, KeywordsChange> cell : c.getChangedCardKeywords().cellSet()) {
+                    // comes from a static ability
+                    if (cell.getColumnKey() == 0) {
+                        continue;
+                    }
+                    for (KeywordInterface ki : cell.getValue().getKeywords()) {
+                        boolean keepKeyword = false;
+                        for (SpellAbility sa : ki.getAbilities()) {
+                            if (!sa.isSpell()) {
+                                continue;
+                            }
+                            if (sa.getAlternativeCost() != null) {
+                                keepKeyword = true;
+                                break;
+                            }
+                        }
+                        if (keepKeyword) {
+                            newKw.add(ki);
+                        }
+                    }
+                }
+                if (!newKw.isEmpty()) {
+                    copied.addChangedCardKeywordsInternal(newKw, null, false, copied.getTimestamp(), 0, true);
+                }
             }
         }
 
@@ -1035,6 +1067,24 @@ public class GameAction {
 
     private boolean isCheckingStaticAbilitiesOnHold() {
         return holdCheckingStaticAbilities;
+    }
+
+    // This doesn't check layers or if the ability gets removed by other effects
+    public boolean hasStaticAbilityAffectingZone(ZoneType zone, StaticAbilityLayer layer) {
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals("Continuous") || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+                if (layer != null && !stAb.getLayers().contains(layer)) {
+                    continue;
+                }
+                if (ZoneType.listValueOf(stAb.getParamOrDefault("AffectedZone", ZoneType.Battlefield.toString())).contains(zone)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public final void checkStaticAbilities() {
