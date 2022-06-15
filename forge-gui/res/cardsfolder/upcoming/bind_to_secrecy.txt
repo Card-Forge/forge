@@ -10,8 +10,8 @@ SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | Aff
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
 SVar:DBUpdate:DB$ UpdateRemember
-SVar:TrigDraft:DB$ NameCard | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | Draft$ True | Defined$ You | ChooseFromList$ Corpse Churn,Corpse Hauler,Courier Bat,Durable Coilbug,Fear of Death,Gorging Vulture,Locked in the Cemetery,Naga Oracle,Necrotic Wound,Obsessive Stitcher,Reassembling Skeleton,Strategic Planning,Unmarked Grave,Wonder | SubAbility$ DBMakeCard
+SVar:TrigDraft:DB$ NameCard | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | Draft$ True | Defined$ You | ChooseFromList$ Corpse Churn,Corpse Hauler,Courier Bat,Durable Coilbug,Fear of Death,Gorging Vulture,Locked in the Cemetery,Naga Oracle,Necrotic Wound,Obsessive Stitcher,Reassembling Skeleton,Strategic Planning,Unmarked Grave,Wonder | SubAbility$ DBMakeCard | SpellDescription$ If there are five or more mana values among cards in your graveyard, draft a card from CARDNAME's spellbook.
 SVar:DBMakeCard:DB$ MakeCard | Name$ ChosenName | Zone$ Hand | SubAbility$ DBCleanupName
 SVar:DBCleanupName:DB$ Cleanup | ClearNamedCard$ True
 SVar:X:Count$ValidGraveyard Card.YouOwn$DifferentCMC
-Oracle:Choose one —\n• Counter target noncreature spell.\n• Conjure a duplicate of target creature card in an opponent's graveyard into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."\nIf there are five or more mana values among cards in your graveyard, draft a card from Bind to Secrecy’s spellbook.
+Oracle:Choose one —\n• Counter target noncreature spell.\n• Conjure a duplicate of target creature card in an opponent's graveyard into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."\nIf there are five or more mana values among cards in your graveyard, draft a card from Bind to Secrecy's spellbook.
