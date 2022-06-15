@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Harness the power of rage with Vrondiss, calling upon the spirits of his dragonborn ancestors to incinerate your enemies.
 Set=AFC
 Image=draconic_rage.png

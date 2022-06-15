@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Teferi, Temporal Archmage manipluates the flow of time itself. This planeswalker commander uses an arsenal of tricks to keep his options open and his opponents guessing. With the battlefield safely under control, he sends forth massive blue creatures to deliver the killing blow.
 Set=C14
 Image=peer_through_time.png

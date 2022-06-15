@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Why play a great spell once, especially when you have a deck of 100 awesome cards? Riku of Two Reflections gives you twice the fun as you confound and dazzle your foes into oblivion with a barrage of Riku’s mirrored magic.
+Description=Why play a great spell once, especially when you have a deck of 100 awesome cards? Riku of Two Reflections gives you twice the fun as you confound and dazzle your foes into oblivion with a barrage of Riku's mirrored magic.
 Set=CMD
 Image=mirror_mastery.png
 [commander]

@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Daretti, Scrap Savant brags that he can build anything out of anything. This planeswalker commander is a master artificer. He sacrifices trinkets to bring back treasures from the graveyard and cobbles together an army of automatons to crush the opposition. 
+Description=Daretti, Scrap Savant brags that he can build anything out of anything. This planeswalker commander is a master artificer. He sacrifices trinkets to bring back treasures from the graveyard and cobbles together an army of automatons to crush the opposition.
 Set=C14
 Image=built_from_scratch.png
 [commander]

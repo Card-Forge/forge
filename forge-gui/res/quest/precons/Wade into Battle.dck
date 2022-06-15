@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Kalemne, Disciple of Iroas is a giant who's right at home on the front ranks of the fight. Her power increases as more large creatures answer her call, so her lighting fast sword swings grow deadlier as the battle wages on.  
+Description=Kalemne, Disciple of Iroas is a giant who's right at home on the front ranks of the fight. Her power increases as more large creatures answer her call, so her lighting fast sword swings grow deadlier as the battle wages on.
 Set=C15
 Image=wade_into_battle.png
 [Commander]

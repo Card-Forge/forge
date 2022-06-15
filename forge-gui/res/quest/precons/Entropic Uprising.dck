@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Yidris, Maelstrom Wielder harness raw chaotic energy to obliterate his foes, channeling the Maelstrom at Alara's center. He cares little for longterm plans, preferring to unleash bursts of devastation upon anything in his path. 
+Description=Yidris, Maelstrom Wielder harness raw chaotic energy to obliterate his foes, channeling the Maelstrom at Alara's center. He cares little for longterm plans, preferring to unleash bursts of devastation upon anything in his path.
 Set=C16
 Image=entropic_uprising.png
 [Commander]

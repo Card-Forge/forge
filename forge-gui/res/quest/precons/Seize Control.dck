@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Mizzix of the Izmagnus rose from humble beginnings to a place of power by being the craftiest goblin in the forges. As she unleashes more and more spells, they get even cheaper to cast, allowing her to sustain her dominance.  
+Description=Mizzix of the Izmagnus rose from humble beginnings to a place of power by being the craftiest goblin in the forges. As she unleashes more and more spells, they get even cheaper to cast, allowing her to sustain her dominance.
 Set=C15
 Image=seize_control.png
 [Commander]

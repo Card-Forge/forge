@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Overpower opponents with brand-new mechanic from Ikoria: Lair of Behemoths—mutate!
 Set=C20
 Image=ruthless_regiment.png

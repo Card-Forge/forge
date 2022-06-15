@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Flood the skies with the souls of the vengeful dead! With Millicent leading the charge, whenever your Spirits deal combat damage to your opponents or fall in battle, they’ll create 1/1 Spirit creature tokens. The more Spirits you control, the easier it will be for Millicent to rise and fight again.
+Description=Flood the skies with the souls of the vengeful dead! With Millicent leading the charge, whenever your Spirits deal combat damage to your opponents or fall in battle, they'll create 1/1 Spirit creature tokens. The more Spirits you control, the easier it will be for Millicent to rise and fight again.
 Set=VOC
 Image=spirit_squadron.png
 [commander]

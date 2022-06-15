@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Derevi, Empyrial Tactician wants dominion over every aspect of the battlefield. This commander's tactical expertise confounds her enemies as she undermines their plans with her cunning strategies.
 Set=C13
 Image=evasive_maneuvers.png

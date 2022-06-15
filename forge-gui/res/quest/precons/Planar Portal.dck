@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Wield power drawn from Prosper’s fiendish patron, pulling spells out of exile—whether you own them or not.
+Description=Wield power drawn from Prosper's fiendish patron, pulling spells out of exile—whether you own them or not.
 Set=AFC
 Image=planar_portal.png
 [commander]

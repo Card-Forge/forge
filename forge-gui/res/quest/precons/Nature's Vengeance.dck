@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=3600
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Lord Windgrace saw his entire world devastated by the detonation of a magical device, instilling in him a hatred of artifacts. Now he commands nature to rise and join his furious war against synthetic abominations.
 Set=C18
 Image=natures_vengeance.jpg

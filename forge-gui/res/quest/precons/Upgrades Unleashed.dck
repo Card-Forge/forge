@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Wield Chishiro's blade and cut down all who would stand before you. Unleash the true potential of your creatures with auras, equipment and counters. Together, you are capable of anything!
 Set=NEC
 Image=upgrades_unleashed.png

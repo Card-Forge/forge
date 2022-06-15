@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Cycle through your deck to fill the board with Cat Dinosaur tokens and set up the perfect turn.
 Set=C20
 Image=timeless_wisdom.png

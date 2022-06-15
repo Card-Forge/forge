@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Team up with Anje Falkenrath to churn ruthlessly through your deck, discarding madness cards for extra power as you burn down the competition.
 Set=C19
 Image=merciless_rage.png

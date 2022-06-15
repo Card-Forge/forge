@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Even by Lorehold standards, Osgir is obsessed with relics of the past. Whether it’s a magnificently jeweled crown or an ugly old shovel, he treasures every connection to ancient civilizations. As a student, he was constantly in detention for hoarding the best finds from Lorehold dig sites in his room; he lost count of how many times he was sternly told, “History belongs to us all!” On his way to becoming a professor, Osgir mastered the magical art of duplicative restoration. Now he specializes in creating perfect, functioning replicas of objects and devices from even the smallest of scraps, a talent which he uses to produce two identical copies every time—one for the rotating display outside his Lorehold office, and one for his personal collection.
+Description=Even by Lorehold standards, Osgir is obsessed with relics of the past. Whether it's a magnificently jeweled crown or an ugly old shovel, he treasures every connection to ancient civilizations. As a student, he was constantly in detention for hoarding the best finds from Lorehold dig sites in his room; he lost count of how many times he was sternly told, "History belongs to us all!" On his way to becoming a professor, Osgir mastered the magical art of duplicative restoration. Now he specializes in creating perfect, functioning replicas of objects and devices from even the smallest of scraps, a talent which he uses to produce two identical copies every time—one for the rotating display outside his Lorehold office, and one for his personal collection.
 Set=C21
 Image=lorehold_legacies.png
 [commander]

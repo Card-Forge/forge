@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Formerly a renowned mage and scholar, Anowons reputation and fortune have diminished in recent years. He knows his return to glory lies deep in the ruins and he will do anything to find it. 
+Description=Formerly a renowned mage and scholar, Anowons reputation and fortune have diminished in recent years. He knows his return to glory lies deep in the ruins and he will do anything to find it.
 Set=ZNC
 Image=sneak_attack.png
 [commander]

@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Leverage your creatures’ many abilities—even if those creatures have already died.
+Description=Leverage your creatures' many abilities—even if those creatures have already died.
 Set=C20
 Image=symbiotic_swarm.png
 [commander]

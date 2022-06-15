@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Ob Nixilis of the Black Oath is a ruthless tyrant who will stop at nothing to achieve his aims. This planeswalker commander saps his oppenents strength, summons powerful demons to the battlefield, and compels the dead to rise and fight again. 
+Description=Ob Nixilis of the Black Oath is a ruthless tyrant who will stop at nothing to achieve his aims. This planeswalker commander saps his oppenents strength, summons powerful demons to the battlefield, and compels the dead to rise and fight again.
 Set=C14
 Image=sworn_to_darkness.png
 [commander]

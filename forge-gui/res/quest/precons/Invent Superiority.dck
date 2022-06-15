@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Breya, Etherium Shaper learned to command powerful works of artifice on the esper shard of Alara. Her mastery of lighting and expertise with etherium enable her to unlock the full potential of her creations and overwhelm her foes.
 Set=C16
 Image=invent_superiority.png

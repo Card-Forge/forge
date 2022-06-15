@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Venture into the Forgotten Realms' deepest dungeons with Sefris. Emerge with a powerful army of undead and drag your opponents to their doom.
 Set=AFC
 Image=dungeons_of_death.png

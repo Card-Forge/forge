@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Inalla, Archmage Ritualist delves into arcane mysteries in pursuit of forbidden dark magic. Gathering an inner circle of loyal acolytes to her cause, Inalla harnesses their collective power to extract the life force from her enemies. 
+Description=Inalla, Archmage Ritualist delves into arcane mysteries in pursuit of forbidden dark magic. Gathering an inner circle of loyal acolytes to her cause, Inalla harnesses their collective power to extract the life force from her enemies.
 Set=C17
 Image=arcane_wizardry.png
 [Commander]

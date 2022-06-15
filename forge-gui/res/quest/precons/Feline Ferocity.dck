@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Arahbo, Roar of the World is a majestic leader and father to cats across all planes of the multiverse. His deafening voice empowers his ferocious feline allies to claw through enemy forces and crush those who dare challenge his ancient might. 
+Description=Arahbo, Roar of the World is a majestic leader and father to cats across all planes of the multiverse. His deafening voice empowers his ferocious feline allies to claw through enemy forces and crush those who dare challenge his ancient might.
 Set=C17
 Image=feline_ferocity.png
 [Commander]

@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Use Ghave, Guru of Spores to create a strangling tangle of vines and vegetation that will crush all who oppose you! The all-consuming power of growth turns your creatures into monstrous behemoths while Saprolings fuel your increasing might.
 Set=CMD
 Image=counterpunch.png
