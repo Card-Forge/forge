@@ -7,8 +7,9 @@ K:Haste
 T:Mode$ IsForetold | ValidCard$ Card.Self | TriggerZones$ Exile | Execute$ TrigNoteNum | Static$ True
 SVar:TrigNoteNum:DB$ Pump | NoteNumber$ X
 SVar:X:Count$YourTurns
-K:etbCounter:P1P1:Z:no Condition:CARDNAME enters the battlefield with X +1/+1 counters on it, where X is the number of turns you've begun since it was foretold.
+K:etbCounter:P1P1:Z:CheckSVar$ WasForetold:CARDNAME enters the battlefield with X +1/+1 counters on it, where X is the number of turns you've begun since it was foretold.
 SVar:Z:SVar$X/Minus.Y
 SVar:Y:Count$NotedNumber
+SVar:WasForetold:Count$Foretold.1.0
 K:Foretell:4 G G
 Oracle:Trample, haste\nLupine Harbingers enters the battlefield with X +1/+1 counters on it, where X is the number of turns you've begun since it was foretold.\nForetell {4}{G}{G}
