@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Cast instants to turn the tide of any battle and summon creatures right at home in the middle of a magical storm.
 Set=C20
 Image=arcane_maelstrom.png

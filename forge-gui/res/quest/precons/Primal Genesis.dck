@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Overrun the table with an army of massive token creatures. You may remember the Selesnya Conclave’s populate mechanic — a form of token generation that lets you copy tokens you already have.
+Description=Overrun the table with an army of massive token creatures. You may remember the Selesnya Conclave's populate mechanic — a form of token generation that lets you copy tokens you already have.
 Set=C19
 Image=primal_genesis.png
 [commander]

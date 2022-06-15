@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Team up with Sevinne to flashback spells for double the value, control the battlefield, and make sure you are the last player standing.
 Set=C19
 Image=mystic_intellect.png

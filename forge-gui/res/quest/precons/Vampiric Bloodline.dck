@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Whether sipped from goblets or spilled from unlucky throats, blood grants power. Sacrifice Blood tokens to sift through your library to find horrifically monstrous Vampires, and Strefan's ability will invite them to feast early. As your foes fall faint from blood loss, you need only finish your meal.
 Set=VOC
 Image=vampiric_bloodline.png

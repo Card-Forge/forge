@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Jeleva, Nephalia's Scourge sends her enemies flying in terror while co-opting their arsenals for herself. Each time she shows up on the battlefield, she snatches new and powerful spells to further her nefarious plans.   
+Description=Jeleva, Nephalia's Scourge sends her enemies flying in terror while co-opting their arsenals for herself. Each time she shows up on the battlefield, she snatches new and powerful spells to further her nefarious plans.
 Set=C13
 Image=mind_seize.png
 [commander]

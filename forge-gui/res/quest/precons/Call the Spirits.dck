@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Daxos the Returned travels across Theros in a never-ending search, surrounded by spirits that are drawn to his power. As mighty enchantments enter the battlefield, the spirits he summons grow larger and larger, leaving his enemies overwhelmed.
 Set=C15
 Image=call_the_spirits.png

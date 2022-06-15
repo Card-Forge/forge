@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=An ancient elf spirit of the Mul Daya, Obunn is more influential in death than he ever was in life. He would do anything to protect his people backed up by a mastery of the forces of nature. 
+Description=An ancient elf spirit of the Mul Daya, Obunn is more influential in death than he ever was in life. He would do anything to protect his people backed up by a mastery of the forces of nature.
 Set=ZNC
 Image=lands_wrath.png
 [commander]

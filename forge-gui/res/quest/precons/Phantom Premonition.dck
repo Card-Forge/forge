@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=The ability to cross over the barriers between realms is a deadly advantage in battle, and few know that better than Ranar. As a Spirit guardian and your commander, he’ll send a Spirit to aid your cause every time you exile something. So take advantage of your creatures’ powerful "enters-the-battlefield" abilities by blinking them in and out of existence, or open a tear in the fabric of reality and shove your opponents’ most potent threats through it—either way, Ranar will be there, calling forth yet another Spirit to help you on your way to victory.
+Description=The ability to cross over the barriers between realms is a deadly advantage in battle, and few know that better than Ranar. As a Spirit guardian and your commander, he'll send a Spirit to aid your cause every time you exile something. So take advantage of your creatures' powerful "enters-the-battlefield" abilities by blinking them in and out of existence, or open a tear in the fabric of reality and shove your opponents' most potent threats through it—either way, Ranar will be there, calling forth yet another Spirit to help you on your way to victory.
 Set=KHC
 Image=phantom_premonition.png
 [commander]

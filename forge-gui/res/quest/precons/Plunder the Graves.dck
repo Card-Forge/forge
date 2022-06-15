@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Meren of Clan Nel Toth draws on the purpose of mighty creatures to serve as her minions. The more creatures die, the faster the fallen return to fight on her behalf so she freely sacrifices the living to make room for the dead.
 Set=C15
 Image=plunder_the_graves.png

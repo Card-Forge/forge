@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Kynaios and Tiro of Meletis believe harmony is the key to true power. They share the rewards of their unshakable bond among their supporters, building alliances before unleashing powerful haymaker spells against their enemies.  
+Description=Kynaios and Tiro of Meletis believe harmony is the key to true power. They share the rewards of their unshakable bond among their supporters, building alliances before unleashing powerful haymaker spells against their enemies.
 Set=C16
 Image=stalwart_unity.png
 [Commander]

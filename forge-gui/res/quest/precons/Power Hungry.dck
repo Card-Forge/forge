@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Prossh, Skyraider of Kher is the supreme predator. He feeds on his own allies in order to fuel his devestating attacks. When creatures die his own or his enemy's this commander just gets stronger.
 Set=C13
 Image=power_hungry.png

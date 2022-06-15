@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=As soon as Zaffai came of age, his parents sent him to Strixhaven, assuring him his budding musical genius deserved the finest instruction in the world. (In truth, though his talent was indeed prodigious, they were also growing tired of their house being randomly struck by lightning or caught up in a cyclone whenever he practiced.) At Strixhaven, he flourished as both mage and musician, eventually becoming both a professor and a peerless conductor. In addition to teaching, he serves as maestro of Strixhaven’s Orchestra of the Arcane, an elite extracurricular activity for top Prismari students. For obvious reasons, their rehearsals and concerts are always held outdoors, and their music fills the sky with beautiful explosions of elemental magic.
+Description=As soon as Zaffai came of age, his parents sent him to Strixhaven, assuring him his budding musical genius deserved the finest instruction in the world. (In truth, though his talent was indeed prodigious, they were also growing tired of their house being randomly struck by lightning or caught up in a cyclone whenever he practiced.) At Strixhaven, he flourished as both mage and musician, eventually becoming both a professor and a peerless conductor. In addition to teaching, he serves as maestro of Strixhaven's Orchestra of the Arcane, an elite extracurricular activity for top Prismari students. For obvious reasons, their rehearsals and concerts are always held outdoors, and their music fills the sky with beautiful explosions of elemental magic.
 Set=C21
 Image=prismari_performance.png
 [commander]

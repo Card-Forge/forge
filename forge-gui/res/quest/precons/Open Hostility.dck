@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Saskia the Unyielding thrives in brutal combat calling upon vicious hordes to crush her adversary underfoot. Saskia strikes always find their mark, cleaving through any foe that stands between her and the focus of her fury.
 Set=C16
 Image=open_hostility.png

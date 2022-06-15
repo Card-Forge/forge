@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Marath, Will of the Wild is the master of aggressive beasts. This commander focuses on large creatures and impressive spells paired with the mana accerleration to cast them quickly.
 Set=C13
 Image=nature_of_the_beast.png

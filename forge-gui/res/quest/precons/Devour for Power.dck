@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=When The Mimeoplasm becomes your commander, death becomes your friend. Opponents will watch in helpless terror as you devour creatures from one graveyard to help you pound creatures into another. It's a fiendish carnival of cadavers, and you'll be the ringmaster!
 Set=CMD
 Image=devour_for_power.png

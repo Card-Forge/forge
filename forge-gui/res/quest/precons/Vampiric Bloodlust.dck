@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=As the sole origin of their bloodline, Edgar Markov commands the Markov vampires of innistrad. with his tremendous influence Edgar continually expands his vampire army, overwhelming foes with his ageless legion.  
+Description=As the sole origin of their bloodline, Edgar Markov commands the Markov vampires of innistrad. with his tremendous influence Edgar continually expands his vampire army, overwhelming foes with his ageless legion.
 Set=C17
 Image=vampiric_bloodlust.png
 [Commander]

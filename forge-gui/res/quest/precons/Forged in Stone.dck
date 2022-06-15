@@ -5,8 +5,7 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
-Description=Nahiri, the Lithomancer knows that victory comes from having the right weapons. This planeswalker commander is a master of arms who summons massive armies to the battlefield and creates powerful equipment and enchantments to prepare them for the fight.  
+Description=Nahiri, the Lithomancer knows that victory comes from having the right weapons. This planeswalker commander is a master of arms who summons massive armies to the battlefield and creates powerful equipment and enchantments to prepare them for the fight.
 Set=C14
 Image=forged_from_stone.png
 [commander]

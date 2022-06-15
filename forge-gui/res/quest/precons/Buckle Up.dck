@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Hitch a ride with Kotori and her fleet of souped-up vehicles, then run your opponents off the road. If you can master all the ways to bring your artifacts to life, you'll be miles ahead of the competition.
 Set=NEC
 Image=buckle_up.png

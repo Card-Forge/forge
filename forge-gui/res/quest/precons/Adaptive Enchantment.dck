@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=3600
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Estrid wears many faces, only occasionally wearing her own. Her arsenal of enchanted masks lets her shift seamlessly between the powers and fighting styles of countless creatures to adapt to enemy tactics.
 Set=C18
 Image=adaptive_enchantment.jpg

@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=5000
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Stand tall next to Galea and arm your forces with powerful Auras and Equipment. With a paladin's protection on your side, none shall do you harm.
 Set=AFC
 Image=aura_of_courage.png
