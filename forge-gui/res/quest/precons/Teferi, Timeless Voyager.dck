@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Teferi, Timeless Voyager
-Description=Teferi’s deck does what blue decks do best – it draws tons of cards! Deck also contains a bunch of cards that synergize with card draw.
+Description=Teferi's deck does what blue decks do best – it draws tons of cards! Deck also contains a bunch of cards that synergize with card draw.
 Deck Type=constructed
 Set=M21
 Image=teferi_timeless_voyager.jpg

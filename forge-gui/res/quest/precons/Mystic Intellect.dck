@@ -1,0 +1,94 @@
+[metadata]
+Name=Mystic Intellect
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+Description=Team up with Sevinne to flashback spells for double the value, control the battlefield, and make sure you are the last player standing.
+Set=C19
+Image=mystic_intellect.png
+[commander]
+1 Sevinne, the Chronoclasm+|C19
+[main]
+1 Armillary Sphere|C19
+1 Azorius Chancery|C19
+1 Boros Garrison|C19
+1 Burning Vengeance|C19
+1 Deep Analysis|C19
+1 Desperate Ravings|C19
+1 Devil's Play|C19
+1 Divine Reckoning|C19
+1 Evolving Wilds|C19
+1 Exotic Orchard|C19
+1 Fact or Fiction|C19
+1 Faithless Looting|C19
+1 Fervent Denial|C19
+1 Ghostly Prison|C19
+1 Guttersnipe|C19
+1 Increasing Devotion|C19
+1 Increasing Vengeance|C19
+8 Island|C19
+1 Izzet Boilerworks|C19
+1 Izzet Guildgate|C19
+1 Magmaquake|C19
+4 Mountain|C19
+1 Mystic Retrieval|C19
+1 Oona's Grace|C19
+9 Plains|C19
+1 Prismatic Strands|C19
+1 Pristine Angel|C19
+1 Purify the Grave|C19
+1 Ray of Distortion|C19
+1 River Kelpie|C19
+1 Rolling Temblor|C19
+1 Runic Repetition|C19
+1 Secrets of the Dead|C19
+1 Sol Ring|C19
+1 Storm Herd|C19
+1 Sun Titan|C19
+1 Talrand, Sky Summoner|C19
+1 Temple of the False God|C19
+1 Terramorphic Expanse|C19
+1 Think Twice|C19
+1 Boros Guildgate|C19
+1 Ral Zarek|C19
+1 Burnished Hart|C19
+1 Command Tower|C19
+1 Clever Impersonator|C19
+1 Mystic Monastery|C19
+1 Swiftwater Cliffs|C19
+1 Tranquil Cove|C19
+1 Wind-Scarred Crag|C19
+1 Commander's Sphere|C19
+1 Myriad Landscape|C19
+1 Pristine Skywise|C19
+1 Jace's Sanctum|C19
+1 Prairie Stream|C19
+1 Highland Lake|C19
+1 Stone Quarry|C19
+1 Ash Barrens|C19
+1 Dusk // Dawn|C19
+1 Farm // Market|C19
+1 Refuse // Cooperate|C19
+1 Zetalpa, Primal Dawn|C19
+1 Crackling Drake|C19
+1 Chemister's Insight|C19
+1 Izzet Locket|C19
+1 Azorius Locket|C19
+1 Backdraft Hellkite|C19
+1 Bloodthirsty Blade|C19
+1 Cliffside Rescuer|C19
+1 Dockside Extortionist|C19
+1 Elsha of the Infinite|C19
+1 Empowered Autogenerator|C19
+1 Gerrard, Weatherlight Hero|C19
+1 Ignite the Future|C19
+1 Leadership Vacuum|C19
+1 Mandate of Peace|C19
+1 Mass Diminish|C19
+1 Pramikon, Sky Rampart|C19
+1 Scaretiller|C19
+1 Sevinne's Reclamation|C19
+1 Thalia's Geistcaller|C19
+1 Wall of Stolen Identity|C19

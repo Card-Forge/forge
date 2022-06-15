@@ -158,23 +158,45 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 break;
             }
         }
-        addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                if (flipOnClick)
-                    flip();
-            }
+        if (GuiBase.isAndroid()) {
+            addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (flipOnClick)
+                        flip();
+                }
 
-            @Override
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                hover = true;
-            }
+                @Override
+                public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                    hover = true;
+                    return super.touchDown(event, x, y, pointer, button);
+                }
 
-            @Override
-            public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                hover = false;
-            }
-        });
+                @Override
+                public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                    hover = false;
+                    super.touchUp(event, x, y, pointer, button);
+                }
+            });
+        } else {
+            addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    if (flipOnClick)
+                        flip();
+                }
+
+                @Override
+                public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                    hover = true;
+                }
+
+                @Override
+                public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                    hover = false;
+                }
+            });
+        }
     }
 
     private void setCardImage(Texture img) {
@@ -266,6 +288,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     public boolean isFlipped() {
         return (clicked && flipProcess >= 1);
+    }
+    public void clearHoldToolTip() {
+        if (holdTooltip != null) {
+            try {
+                hover = false;
+                holdTooltip.tooltip_actor.remove();
+            } catch (Exception e){}
+        }
     }
 
     public void flip() {

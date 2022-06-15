@@ -252,7 +252,7 @@ public class ForgeScript {
         } else if (property.startsWith("cmc")) {
             int y = 0;
             // spell was on the stack
-            if (sa.getCardState().getCard().isInZone(ZoneType.Stack)) {
+            if (sa.getHostCard().isInZone(ZoneType.Stack)) {
                 y = sa.getHostCard().getCMC();
             } else {
                 y = sa.getPayCosts().getTotalMana().getCMC();

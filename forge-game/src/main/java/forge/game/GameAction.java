@@ -37,6 +37,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.Table;
 
 import forge.GameCommand;
 import forge.StaticData;
@@ -66,6 +67,7 @@ import forge.game.event.GameEventGameStarted;
 import forge.game.event.GameEventScry;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
+import forge.game.keyword.KeywordsChange;
 import forge.game.mulligan.MulliganService;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
@@ -246,10 +248,6 @@ public class GameAction {
                 lastKnownInfo = CardUtil.getLKICopy(c);
             }
 
-            if (!suppress) {
-                copied.setTimestamp(game.getNextTimestamp());
-            }
-
             if (!lastKnownInfo.hasKeyword("Counters remain on CARDNAME as it moves to any zone other than a player's hand or library.")) {
                 copied.clearCounters();
             }
@@ -274,6 +272,8 @@ public class GameAction {
                 copied = CardFactory.copyCard(c, false);
             }
 
+            copied.setTimestamp(c.getTimestamp());
+
             if (zoneTo.is(ZoneType.Stack)) {
                 // when moving to stack, copy changed card information
                 copied.setChangedCardColors(c.getChangedCardColorsTable());
@@ -286,7 +286,6 @@ public class GameAction {
                 copied.setDrawnThisTurn(c.getDrawnThisTurn());
 
                 copied.copyChangedTextFrom(c);
-                copied.setTimestamp(c.getTimestamp());
 
                 // clean up changes that come from its own static abilities
                 copied.cleanupCopiedChangesFrom(c);
@@ -304,9 +303,6 @@ public class GameAction {
                 // on Transformed objects)
                 copied.setState(CardStateName.Original, false);
                 copied.setBackSide(false);
-
-                // reset timestamp in changezone effects so they have same timestamp if ETB simultaneously
-                copied.setTimestamp(game.getNextTimestamp());
             }
 
             copied.setUnearthed(c.isUnearthed());
@@ -386,6 +382,11 @@ public class GameAction {
 
                 return c;
             }
+        }
+
+        if (!zoneTo.is(ZoneType.Stack) && !suppress) {
+            // reset timestamp in changezone effects so they have same timestamp if ETB simultaneously
+            copied.setTimestamp(game.getNextTimestamp());
         }
 
         copied.getOwner().removeInboundToken(copied);
@@ -482,6 +483,36 @@ public class GameAction {
             if (!zoneTo.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Stack)) {
                 c.cleanupExiledWith();
             }
+
+            // 400.7a Effects from static abilities that give a permanent spell on the stack an ability
+            // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
+            if (zoneFrom.is(ZoneType.Stack) && toBattlefield) {
+                List<KeywordInterface> newKw = Lists.newArrayList();
+                for (Table.Cell<Long, Long, KeywordsChange> cell : c.getChangedCardKeywords().cellSet()) {
+                    // comes from a static ability
+                    if (cell.getColumnKey() == 0) {
+                        continue;
+                    }
+                    for (KeywordInterface ki : cell.getValue().getKeywords()) {
+                        boolean keepKeyword = false;
+                        for (SpellAbility sa : ki.getAbilities()) {
+                            if (!sa.isSpell()) {
+                                continue;
+                            }
+                            if (sa.getAlternativeCost() != null) {
+                                keepKeyword = true;
+                                break;
+                            }
+                        }
+                        if (keepKeyword) {
+                            newKw.add(ki);
+                        }
+                    }
+                }
+                if (!newKw.isEmpty()) {
+                    copied.addChangedCardKeywordsInternal(newKw, null, false, copied.getTimestamp(), 0, true);
+                }
+            }
         }
 
         // if an adventureCard is put from Stack somewhere else, need to reset to Original State
@@ -490,15 +521,6 @@ public class GameAction {
         }
 
         GameEntityCounterTable table = new GameEntityCounterTable();
-
-        // need to suspend cards own replacement effects
-        if (!suppress) {
-            if (toBattlefield && !copied.getEtbCounters().isEmpty()) {
-                for (final ReplacementEffect re : copied.getReplacementEffects()) {
-                    re.setSuppressed(true);
-                }
-            }
-        }
 
         if (mergedCards != null) {
             // Move components of merged permanent here
@@ -546,14 +568,9 @@ public class GameAction {
         }
 
         // do ETB counters after zone add
-        if (!suppress) {
-            if (toBattlefield) {
-                copied.putEtbCounters(table);
-                // enable replacement effects again
-                for (final ReplacementEffect re : copied.getReplacementEffects()) {
-                    re.setSuppressed(false);
-                }
-            }
+        if (!suppress && toBattlefield && !copied.getEtbCounters().isEmpty()) {
+            game.getTriggerHandler().registerActiveTrigger(copied, false);
+            copied.putEtbCounters(table);
             copied.clearEtbCounters();
         }
 
@@ -1050,6 +1067,24 @@ public class GameAction {
 
     private boolean isCheckingStaticAbilitiesOnHold() {
         return holdCheckingStaticAbilities;
+    }
+
+    // This doesn't check layers or if the ability gets removed by other effects
+    public boolean hasStaticAbilityAffectingZone(ZoneType zone, StaticAbilityLayer layer) {
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals("Continuous") || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+                if (layer != null && !stAb.getLayers().contains(layer)) {
+                    continue;
+                }
+                if (ZoneType.listValueOf(stAb.getParamOrDefault("AffectedZone", ZoneType.Battlefield.toString())).contains(zone)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public final void checkStaticAbilities() {
