@@ -435,8 +435,9 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
 
                 final Zone currentZone = game.getCardState(tgtCard).getZone();
-                if (!originZone.equals(currentZone)) {
-                    triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), game.getCardState(tgtCard));
+                if (!currentZone.equals(originZone)) {
+                    //fix Garth One-Eye activated ability and the likes..
+                    triggerList.put(originZone == null ? null : originZone.getZoneType(), currentZone.getZoneType(), game.getCardState(tgtCard));
                 }
                 triggerList.triggerChangesZoneAll(game, sa);
             }
