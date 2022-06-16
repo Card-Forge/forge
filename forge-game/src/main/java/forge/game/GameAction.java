@@ -1211,26 +1211,26 @@ public class GameAction {
             }
         }
 
-        for (Player p : game.getPlayers()) {
-            for (Card c : p.getCardsIn(ZoneType.Battlefield).threadSafeIterable()) {
-                if (!c.getController().equals(p)) {
-                    controllerChangeZoneCorrection(c);
-                    affectedCards.add(c);
-                }
-                if (c.isCreature() && c.isPaired()) {
-                    Card partner = c.getPairedWith();
-                    if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInPlay()) {
-                        c.setPairedWith(null);
-                        partner.setPairedWith(null);
-                        affectedCards.add(c);
-                    }
-                }
-            }
-        }
-
         // preList means that this is run by a pre Check with LKI objects
         // in that case Always trigger should not Run
         if (preList.isEmpty()) {
+            for (Player p : game.getPlayers()) {
+                for (Card c : p.getCardsIn(ZoneType.Battlefield).threadSafeIterable()) {
+                    if (!c.getController().equals(p)) {
+                        controllerChangeZoneCorrection(c);
+                        affectedCards.add(c);
+                    }
+                    if (c.isCreature() && c.isPaired()) {
+                        Card partner = c.getPairedWith();
+                        if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInPlay()) {
+                            c.setPairedWith(null);
+                            partner.setPairedWith(null);
+                            affectedCards.add(c);
+                        }
+                    }
+                }
+            }
+
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
 
