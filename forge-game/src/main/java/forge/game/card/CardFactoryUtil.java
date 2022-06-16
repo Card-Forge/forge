@@ -2680,7 +2680,7 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final Cost blitzCost = new Cost(k[1], false);
 
-            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(blitzCost);
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithManaCostReplaced(host.getController(), blitzCost);
 
             if (k.length > 2) {
                 newSA.getMapParams().put("ValidAfterStack", k[2]);

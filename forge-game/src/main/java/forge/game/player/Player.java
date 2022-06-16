@@ -3036,7 +3036,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         StaticAbility stAb = StaticAbility.create(addToHandAbility, eff, eff.getCurrentState(), true);
         stAb.setSVar("MoveToHand", moveToHand);
-        eff.addStaticAbility(addToHandAbility);
+        eff.addStaticAbility(stAb);
 
         return eff;
     }
