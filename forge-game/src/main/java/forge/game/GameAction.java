@@ -1245,6 +1245,8 @@ public class GameAction {
             c.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
         }
 
+        // TODO filter out old copies from zone change
+
         if (runEvents && !affectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));
         }
