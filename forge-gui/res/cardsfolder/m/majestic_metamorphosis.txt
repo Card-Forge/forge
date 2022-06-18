@@ -1,7 +1,7 @@
 Name:Majestic Metamorphosis
 ManaCost:2 U
 Types:Instant
-A:SP$ Animate | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | Power$ 4 | Toughness$ 4 | Types$ Angel,Artifact,Creature | AddKeyword$ Flying | SubAbility$ DBDraw | SpellDescription$ Until end of turn, target artifact or creature becomes a 4/4 Angel artifact creature and gains flying. Draw a card.
+A:SP$ Animate | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | Power$ 4 | Toughness$ 4 | Types$ Angel,Artifact,Creature | Keywords$ Flying | SubAbility$ DBDraw | SpellDescription$ Until end of turn, target artifact or creature becomes a 4/4 Angel artifact creature and gains flying. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 DeckHas:Type$Angel
 DeckNeeds:Type$Artifact|Creature

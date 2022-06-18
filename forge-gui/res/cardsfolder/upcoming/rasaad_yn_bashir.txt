@@ -8,4 +8,5 @@ SVar:TrigDoubleToughness:DB$ RepeatEach | RepeatCards$ Creature.YouCtrl | Repeat
 SVar:DBPump:DB$ Pump | Defined$ Remembered | NumDef$ X | Double$ True
 SVar:X:Remembered$CardToughness
 K:Choose a Background
+SVar:HasAttackEffect:TRUE
 Oracle:Each creature you control assigns combat damage equal to its toughness rather than its power.\nWhenever Rasaad yn Bashir attacks, if you have the initiative, double the toughness of each creature you control until end of turn.\nChoose a Background (You can have a Background as a second commander.)

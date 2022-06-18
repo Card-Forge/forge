@@ -221,7 +221,7 @@ public class AbilityUtils {
             final Object crd = root.getReplacingObject(type);
 
             if (crd instanceof Card) {
-                c = game.getCardState((Card) crd);
+                c = (Card) crd;
             } else if (crd instanceof Iterable<?>) {
                 cards.addAll(Iterables.filter((Iterable<?>) crd, Card.class));
             }
@@ -536,6 +536,9 @@ public class AbilityUtils {
                     }
                 }
                 val = playerXCount(players, calcX[1], card, ability);
+            } else if (hType.startsWith("Defined")) {
+                String defined = hType.split("Defined")[1];
+                val = playerXCount(getDefinedPlayers(card, defined, ability), calcX[1], card, ability);
             } else {
                 val = 0;
             }
@@ -1413,11 +1416,7 @@ public class AbilityUtils {
 
         // Needed - Equip an untapped creature with Sword of the Paruns then cast Deadshot on it. Should deal 2 more damage.
         game.getAction().checkStaticAbilities(); // this will refresh continuous abilities for players and permanents.
-        if (sa.isReplacementAbility() && abSub.getApi() == ApiType.InternalEtbReplacement) {
-            game.getTriggerHandler().resetActiveTriggers(false);
-        } else {
-            game.getTriggerHandler().resetActiveTriggers();
-        }
+        game.getTriggerHandler().resetActiveTriggers(!sa.isReplacementAbility());
         AbilityUtils.resolveApiAbility(abSub, game);
     }
 
@@ -2252,6 +2251,9 @@ public class AbilityUtils {
         }
         if (sq[0].equals("Monarch")) {
             return doXMath(calculateAmount(c, sq[player.isMonarch() ? 1 : 2], ctb), expr, c, ctb);
+        }
+        if (sq[0].equals("Initiative")) {
+            return doXMath(calculateAmount(c, sq[player.hasInitiative() ? 1: 2], ctb), expr, c, ctb);
         }
         if (sq[0].equals("StartingPlayer")) {
             return doXMath(calculateAmount(c, sq[player.isStartingPlayer() ? 1: 2], ctb), expr, c, ctb);

@@ -409,6 +409,8 @@ public final class FModel {
                     addTo = CardType.Constant.ARTIFACT_TYPES;
                 } else if (s.equals("[WalkerTypes]")) {
                     addTo = CardType.Constant.WALKER_TYPES;
+                } else if (s.equals("[DungeonTypes]")) {
+                    addTo = CardType.Constant.DUNGEON_TYPES;
                 } else if (s.length() > 1) {
                     if (addTo != null) {
                         if (s.contains(":")) {

@@ -98,6 +98,7 @@ import forge.game.keyword.KeywordsChange;
 import forge.game.mana.ManaPool;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
@@ -237,6 +238,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Deque<SpellAbility> paidForStack = new ArrayDeque<>();
 
     private Card monarchEffect;
+    private Card initiativeEffect;
     private Card blessingEffect;
     private Card keywordEffect;
 
@@ -2969,8 +2971,10 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         String addToHandAbility = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Command | AddAbility$ MoveToHand";
         String moveToHand = "ST$ ChangeZone | Cost$ 3 | Defined$ Self | Origin$ Command | Destination$ Hand | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Companion - Put CARDNAME in to your hand";
-        eff.setSVar("MoveToHand", moveToHand);
-        eff.addStaticAbility(addToHandAbility);
+
+        StaticAbility stAb = StaticAbility.create(addToHandAbility, eff, eff.getCurrentState(), true);
+        stAb.setSVar("MoveToHand", moveToHand);
+        eff.addStaticAbility(stAb);
 
         return eff;
     }
@@ -2981,11 +2985,13 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         if (game.getRules().hasAppliedVariant(GameType.Oathbreaker) && commander.getRules().canBeSignatureSpell()) {
             //signature spells can only reside on the stack or in the command zone
-            eff.setSVar("SignatureSpellMoveReplacement", "DB$ ChangeZone | Origin$ Stack | Destination$ Command | Defined$ ReplacedCard");
+            String effStr = "DB$ ChangeZone | Origin$ Stack | Destination$ Command | Defined$ ReplacedCard";
 
-            String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | ReplaceWith$ SignatureSpellMoveReplacement | Destination$ Graveyard,Exile,Hand,Library | " +
+            String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | Destination$ Graveyard,Exile,Hand,Library | " +
                     "Description$ If a signature spell would be put into another zone from the stack, put it into the command zone instead.";
-            eff.addReplacementEffect(ReplacementHandler.parseReplacement(moved, eff, true));
+            ReplacementEffect re = ReplacementHandler.parseReplacement(moved, eff, true);
+            re.setOverridingAbility(AbilityFactory.getAbility(effStr, eff));
+            eff.addReplacementEffect(re);
 
             //signature spells can only be cast if your oathbreaker is in on the battlefield under your control
             String castRestriction = "Mode$ CantBeCast | ValidCard$ Card.EffectSource+YouOwn | EffectZone$ Command | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | PresentZone$ Battlefield | PresentCompare$ EQ0 | " +
@@ -2993,9 +2999,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             eff.addStaticAbility(castRestriction);
         }
         else {
-            eff.setSVar("CommanderMoveReplacement", "DB$ ChangeZone | Origin$ Battlefield,Graveyard,Exile,Library,Hand | Destination$ Command | Defined$ ReplacedCard");
+            String effStr = "DB$ ChangeZone | Origin$ Battlefield,Graveyard,Exile,Library,Hand | Destination$ Command | Defined$ ReplacedCard";
 
-            String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | ReplaceWith$ CommanderMoveReplacement ";
+            String moved = "Event$ Moved | ValidCard$ Card.EffectSource+YouOwn | Secondary$ True | Optional$ True | OptionalDecider$ You | CommanderMoveReplacement$ True ";
             if (game.getRules().hasAppliedVariant(GameType.TinyLeaders)) {
                 moved += " | Destination$ Graveyard,Exile | Description$ If a commander would be put into its owner's graveyard or exile from anywhere, that player may put it into the command zone instead.";
             }
@@ -3005,7 +3011,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             	// rule 903.9b
                 moved += " | Destination$ Hand,Library | Description$ If a commander would be put into its owner's hand or library from anywhere, its owner may put it into the command zone instead.";
             }
-            eff.addReplacementEffect(ReplacementHandler.parseReplacement(moved, eff, true));
+            ReplacementEffect re = ReplacementHandler.parseReplacement(moved, eff, true);
+            re.setOverridingAbility(AbilityFactory.getAbility(effStr, eff));
+            eff.addReplacementEffect(re);
         }
 
         String mayBePlayedAbility = "Mode$ Continuous | EffectZone$ Command | MayPlay$ True | Affected$ Card.YouOwn+EffectSource | AffectedZone$ Command";
@@ -3123,6 +3131,77 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
     public boolean canBecomeMonarch() {
         return !StaticAbilityCantBecomeMonarch.anyCantBecomeMonarch(this);
+    }
+
+    public void createInitiativeEffect(final String set) {
+        final PlayerZone com = getZone(ZoneType.Command);
+        if (initiativeEffect == null) {
+            initiativeEffect = new Card(game.nextCardId(), null, game);
+            initiativeEffect.setOwner(this);
+            initiativeEffect.setImmutable(true);
+            if (set != null) {
+                initiativeEffect.setImageKey("t:initiative_" + set.toLowerCase());
+                initiativeEffect.setSetCode(set);
+            } else {
+                initiativeEffect.setImageKey("t:initiative");
+            }
+            initiativeEffect.setName("The Initiative");
+
+            //Set up damage trigger
+            final String damageTrig = "Mode$ DamageDoneOnceByController | ValidSource$ Player | ValidTarget$ You | " +
+                    "CombatDamage$ True | TriggerZones$ Command | TriggerDescription$ Whenever one or more " +
+                    "creatures a player controls deal combat damage to you, that player takes the initiative.";
+            final String damageEff = "DB$ TakeInitiative | Defined$ TriggeredSource";
+
+            final Trigger damageTrigger = TriggerHandler.parseTrigger(damageTrig, initiativeEffect, true);
+
+            damageTrigger.setOverridingAbility(AbilityFactory.getAbility(damageEff, initiativeEffect));
+            initiativeEffect.addTrigger(damageTrigger);
+
+            //Set up triggers to venture into Undercity
+            final String ventureTakeTrig  = "Mode$ TakesInitiative | ValidPlayer$ You | TriggerZones$ Command | " +
+                    "TriggerDescription$ Whenever you take the initiative and at the beginning of your upkeep, " +
+                    "venture into Undercity. (If you're in a dungeon, advance to the next room. If not, enter " +
+                    "Undercity. You can take the initiative even if you already have it.)";
+
+            final String ventureUpkpTrig = "Mode$ Phase | Phase$ Upkeep | TriggerZones$ Command | ValidPlayer$ You " +
+                    "| TriggerDescription$ Whenever you take the initiative and at the beginning of your upkeep, " +
+                    "venture into Undercity. (If you're in a dungeon, advance to the next room. If not, enter " +
+                    "Undercity. You can take the initiative even if you already have it.) | Secondary$ True";
+
+            final String ventureEff = "DB$ Venture | Dungeon$ Undercity";
+
+            final Trigger ventureUTrigger = TriggerHandler.parseTrigger(ventureUpkpTrig, initiativeEffect, true);
+            ventureUTrigger.setOverridingAbility(AbilityFactory.getAbility(ventureEff, initiativeEffect));
+            initiativeEffect.addTrigger(ventureUTrigger);
+
+            final Trigger ventureTTrigger = TriggerHandler.parseTrigger(ventureTakeTrig, initiativeEffect, true);
+            ventureTTrigger.setOverridingAbility(AbilityFactory.getAbility(ventureEff, initiativeEffect));
+            initiativeEffect.addTrigger(ventureTTrigger);
+
+            initiativeEffect.updateStateForView();
+        }
+
+        final TriggerHandler triggerHandler = game.getTriggerHandler();
+        triggerHandler.suppressMode(TriggerType.ChangesZone);
+        game.getAction().moveTo(ZoneType.Command, initiativeEffect, null, null);
+        triggerHandler.clearSuppression(TriggerType.ChangesZone);
+        triggerHandler.clearActiveTriggers(initiativeEffect, null);
+        triggerHandler.registerActiveTrigger(initiativeEffect, false);
+
+        this.updateZoneForView(com);
+    }
+
+    public boolean hasInitiative() {
+        return equals(game.getHasInitiative());
+    }
+
+    public void removeInitiativeEffect() {
+        final PlayerZone com = getZone(ZoneType.Command);
+        if (initiativeEffect != null) {
+            com.remove(initiativeEffect);
+            this.updateZoneForView(com);
+        }
     }
 
     public void updateKeywordCardAbilityText() {

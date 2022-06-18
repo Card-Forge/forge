@@ -1,0 +1,9 @@
+Name:Gut, True Soul Zealot
+ManaCost:2 R
+Types:Legendary Creature Goblin Shaman
+PT:2/2
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you may sacrifice another creature or an artifact. If you do, create a 4/1 black Skeleton creature token with menace that's tapped and attacking.
+SVar:TrigToken:AB$ Token | Cost$ Sac<1/Creature.Other;Artifact/another creature or an artifact> | TokenScript$ b_4_1_skeleton_menace | TokenTapped$ True | TokenAttacking$ True
+K:Choose a Background
+DeckHas:Ability$Token & Type$Skeleton
+Oracle:Whenever you attack, you may sacrifice another creature or an artifact. If you do, create a 4/1 black Skeleton creature token with menace that's tapped and attacking.\nChoose a Background (You can have a Background as a second commander.)

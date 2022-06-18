@@ -5,7 +5,6 @@ WinsToUnlock=0
 Credits=3600
 MinDifficulty=0
 MaxDifficulty=5
-[metadata]
 Description=Saheeli Rai is a brilliant inventor who specializes in creating lifelike animated constructs as beautiful as they are deadly. Her dazzling intellect and mastery over metal make her a formidable adversary.
 Set=C18
 Image=exquisite_invention.jpg

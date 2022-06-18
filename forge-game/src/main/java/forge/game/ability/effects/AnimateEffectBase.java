@@ -137,6 +137,7 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             public void run() {
                 doUnanimate(c, timestamp);
 
+                c.removeChangedSVars(timestamp, 0);
                 c.removeChangedName(timestamp, 0);
                 c.updateStateForView();
 

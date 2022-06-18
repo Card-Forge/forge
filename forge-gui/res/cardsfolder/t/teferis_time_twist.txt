@@ -5,9 +5,8 @@ A:SP$ ChangeZone | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target perma
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | Triggers$ ReturnEOT | ReplacementEffects$ EntersAsCreature | SubAbility$ DBCleanup | SpellDescription$ Return that card to the battlefield under its owner's control at the beginning of the next end step. If it enters the battlefield as a creature, it enters with an additional +1/+1 counter on it.
 SVar:ReturnEOT:Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return that card to the battlefield under its owner's control at the beginning of the next end step. If it enters the battlefield as a creature, it enters with an additional +1/+1 counter on it.
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ RememberedLKI
-SVar:EntersAsCreature:Event$ Moved | ValidCard$ Creature.IsRemembered | Destination$ Battlefield | ReplaceWith$ PutP1P1 | Secondary$ True
-SVar:PutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | SubAbility$ ToBattlefield
-SVar:ToBattlefield:DB$ InternalEtbReplacement | SubAbility$ DBExile
+SVar:EntersAsCreature:Event$ Moved | ValidCard$ Creature.IsRemembered | Destination$ Battlefield | ReplaceWith$ PutP1P1 | Secondary$ True | ReplacementResult$ Updated
+SVar:PutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
