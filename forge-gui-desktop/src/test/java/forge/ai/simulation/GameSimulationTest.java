@@ -2394,4 +2394,105 @@ public class GameSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(20, simGame.getPlayers().get(0).getLife());
         AssertJUnit.assertEquals(2, simGame.getPlayers().get(1).getLife());
     }
+
+    @Test
+    public void testETBCounterMowu() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        //Player p2 = game.getPlayers().get(1);
+
+        String grumName = "Grumgully, the Generous";
+        String mowuName = "Mowu, Loyal Companion";
+
+        addCard(grumName, p);
+        Card mowu = addCardToZone(mowuName, p, ZoneType.Hand);
+
+        for (int i = 0; i < 7; ++i) {
+            addCard("Forest", p);
+        }
+        SpellAbility mowuSA = mowu.getFirstSpellAbility();
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(mowuSA);
+        Game simGame = sim.getSimulatedGameState();
+
+        Card simMowu = findCardWithName(simGame, mowuName);
+
+        AssertJUnit.assertNotNull(simMowu);
+        AssertJUnit.assertEquals(2, simMowu.getCounters(CounterEnumType.P1P1));
+    }
+
+    @Test
+    public void testETBCounterCorpsejack() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        //Player p2 = game.getPlayers().get(1);
+
+        String grumName = "Grumgully, the Generous";
+        String corpsejackName = "Corpsejack Menace";
+
+        addCard(grumName, p);
+        Card corpsejack = addCardToZone(corpsejackName, p, ZoneType.Hand);
+
+        for (int i = 0; i < 7; ++i) {
+            addCard("Forest", p);
+            addCard("Swamp", p);
+        }
+        SpellAbility corpsejackSA = corpsejack.getFirstSpellAbility();
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(corpsejackSA);
+        Game simGame = sim.getSimulatedGameState();
+
+        Card simCorpsejack = findCardWithName(simGame, corpsejackName);
+
+        AssertJUnit.assertNotNull(simCorpsejack);
+        AssertJUnit.assertEquals(1, simCorpsejack.getCounters(CounterEnumType.P1P1));
+    }
+
+    @Test
+    public void testETBCounterCorpsejackMentor() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(0);
+        //Player p2 = game.getPlayers().get(1);
+
+        String grumName = "Grumgully, the Generous";
+        String corpsejackName = "Corpsejack Menace";
+        String mentorName = "Conclave Mentor";
+        String everAfterName = "Ever After";
+
+        addCard(grumName, p);
+        Card corpsejack = addCardToZone(corpsejackName, p, ZoneType.Graveyard);
+        Card mentor = addCardToZone(mentorName, p, ZoneType.Graveyard);
+
+        Card everAfter = addCardToZone(everAfterName, p, ZoneType.Hand);
+
+        for (int i = 0; i < 7; ++i) {
+            addCard("Swamp", p);
+        }
+        SpellAbility everSA = everAfter.getFirstSpellAbility();
+        everSA.getTargets().add(corpsejack);
+        everSA.getTargets().add(mentor);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        GameSimulator sim = createSimulator(game, p);
+        sim.simulateSpellAbility(everSA);
+        Game simGame = sim.getSimulatedGameState();
+
+        Card simCorpsejack = findCardWithName(simGame, corpsejackName);
+        Card simMentor = findCardWithName(simGame, mentorName);
+
+        AssertJUnit.assertNotNull(simCorpsejack);
+        AssertJUnit.assertEquals(1, simCorpsejack.getCounters(CounterEnumType.P1P1));
+        AssertJUnit.assertNotNull(simMentor);
+        AssertJUnit.assertEquals(1, simMentor.getCounters(CounterEnumType.P1P1));
+    }
 }
