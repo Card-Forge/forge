@@ -60,7 +60,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
             return false;
         }
 
-        if (runParams.containsKey(AbilityKey.ETB) && (boolean)runParams.get(AbilityKey.ETB)) {
+        if (runParams.containsKey(AbilityKey.ETB) && (Boolean)runParams.get(AbilityKey.ETB)) {
             // if Card does affect something other than itself
             if (!hasParam("ValidCard") || !getParam("ValidCard").equals("Card.Self")) {
                 // and it self is entering, skip
