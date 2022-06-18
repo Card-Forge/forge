@@ -326,7 +326,7 @@ public class GameAction {
                 CardCollectionView comCards = c.getOwner().getCardsIn(ZoneType.Command);
                 for (final Card effCard : comCards) {
                     for (final ReplacementEffect re : effCard.getReplacementEffects()) {
-                        if (re.hasParam("CommanderMoveReplacement") && effCard.getEffectSource().getName().equals(c.getRealCommander().getName())) {
+                        if (re.hasParam("CommanderMoveReplacement") && c.getMergedCards().contains(effCard.getEffectSource())) {
                             commanderEffect = effCard;
                             break;
                         }
@@ -1211,26 +1211,26 @@ public class GameAction {
             }
         }
 
-        for (Player p : game.getPlayers()) {
-            for (Card c : p.getCardsIn(ZoneType.Battlefield).threadSafeIterable()) {
-                if (!c.getController().equals(p)) {
-                    controllerChangeZoneCorrection(c);
-                    affectedCards.add(c);
-                }
-                if (c.isCreature() && c.isPaired()) {
-                    Card partner = c.getPairedWith();
-                    if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInPlay()) {
-                        c.setPairedWith(null);
-                        partner.setPairedWith(null);
-                        affectedCards.add(c);
-                    }
-                }
-            }
-        }
-
         // preList means that this is run by a pre Check with LKI objects
         // in that case Always trigger should not Run
         if (preList.isEmpty()) {
+            for (Player p : game.getPlayers()) {
+                for (Card c : p.getCardsIn(ZoneType.Battlefield).threadSafeIterable()) {
+                    if (!c.getController().equals(p)) {
+                        controllerChangeZoneCorrection(c);
+                        affectedCards.add(c);
+                    }
+                    if (c.isCreature() && c.isPaired()) {
+                        Card partner = c.getPairedWith();
+                        if (!partner.isCreature() || c.getController() != partner.getController() || !c.isInPlay()) {
+                            c.setPairedWith(null);
+                            partner.setPairedWith(null);
+                            affectedCards.add(c);
+                        }
+                    }
+                }
+            }
+
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
 
@@ -1244,6 +1244,8 @@ public class GameAction {
             c.updateTypesForView();
             c.updateAbilityTextForView(); // only update keywords and text for view to avoid flickering
         }
+
+        // TODO filter out old copies from zone change
 
         if (runEvents && !affectedCards.isEmpty()) {
             game.fireEvent(new GameEventCardStatsChanged(affectedCards));

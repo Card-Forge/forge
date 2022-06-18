@@ -15,7 +15,6 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.GameObject;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.effects.DetachedCardEffect;
 import forge.game.card.Card;
@@ -862,9 +861,7 @@ public abstract class GameState {
         }
 
         if (sa.hasParam("RememberTargets")) {
-            for (final GameObject o : sa.getTargets()) {
-                sa.getHostCard().addRemembered(o);
-            }
+            sa.getHostCard().addRemembered(sa.getTargets());
         }
     }
 
