@@ -591,7 +591,7 @@ public class GameAction {
             }
         }
 
-        table.replaceCounterEffect(game, null, true);
+        table.replaceCounterEffect(game, null, true, true, params);
 
         // Need to apply any static effects to produce correct triggers
         checkStaticAbilities();
