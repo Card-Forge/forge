@@ -62,7 +62,7 @@ public class ReplaceAddCounter extends ReplacementEffect {
 
         if (runParams.containsKey(AbilityKey.ETB)) {
             // if Card does affect something other than itself
-            if (!getParam("ValidCard").equals("Card.Self")) {
+            if (!hasParam("ValidCard") || !getParam("ValidCard").equals("Card.Self")) {
                 // and it self is entering, skip
                 if (getHostCard().equals(runParams.get(AbilityKey.Affected))) {
                     return false;
