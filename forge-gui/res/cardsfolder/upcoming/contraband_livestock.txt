@@ -1,0 +1,11 @@
+Name:Contraband Livestock
+ManaCost:1 W
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select a target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBRollDice | AILogic$ Pongify | StackDescription$ SpellDescription | SpellDescription$ Exile target creature,
+SVar:DBRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:GreenOx,10-19:GreenBoar,20:WhiteGoat | SpellDescription$ then roll a d20.
+SVar:GreenOx:DB$ Token | TokenAmount$ 1 | TokenScript$ g_4_4_ox | TokenOwner$ TargetedController | SpellDescription$ 1—9 VERT Its controller creates a 4/4 green Ox creature token.
+SVar:GreenBoar:DB$ Token | TokenAmount$ 1 | TokenScript$ g_2_2_boar | TokenOwner$ TargetedController | SpellDescription$ 10—19 VERT Its controller creates a 2/2 green Boar creature token.
+SVar:WhiteGoat:DB$ Token | TokenAmount$ 1 | TokenScript$ w_0_1_goat | TokenOwner$ TargetedController | SpellDescription$  20 VERT Its controller creates a 0/1 white Goat creature token.
+DeckHas:Ability$Token
+AI:RemoveDeck:All
+Oracle:Exile target creature, then roll a d20.\n1—9 | Its controller creates a 4/4 green Ox creature token.\n10—19 | Its controller creates a 2/2 green Boar creature token.\n20 | Its controller creates a 0/1 white Goat creature token.
