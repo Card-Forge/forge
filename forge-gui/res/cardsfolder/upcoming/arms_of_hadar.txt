@@ -1,0 +1,5 @@
+Name:Arms of Hadar
+ManaCost:3 B
+Types:Sorcery
+A:SP$ PumpAll | Cost$ 3 B | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | SpellDescription$ Creatures target player controls get -2/-2 until end of turn.
+Oracle:Creatures target player controls get -2/-2 until end of turn.
