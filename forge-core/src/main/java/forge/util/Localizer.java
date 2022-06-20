@@ -76,6 +76,51 @@ public class Localizer {
             return defaultValue;
         }
     }
+    public String getEnglishMessage(final String key, final Object... messageArguments) {
+        MessageFormat formatter = null;
+
+        try {
+            //formatter = new MessageFormat(resourceBundle.getString(key.toLowerCase()), locale);
+            formatter = new MessageFormat(englishBundle.getString(key), Locale.ENGLISH);
+        } catch (final IllegalArgumentException | MissingResourceException e) {
+            if (!silent)
+                e.printStackTrace();
+        }
+
+        if (formatter == null && !silent) {
+            System.err.println("INVALID PROPERTY: '" + key + "' -- Translation Needed?");
+            return "INVALID PROPERTY: '" + key + "' -- Translation Needed?";
+        }
+
+        silent = false;
+
+        formatter.setLocale(Locale.ENGLISH);
+
+        String formattedMessage = "CHAR ENCODING ERROR";
+        final String[] charsets = { "ISO-8859-1", "UTF-8" };
+        //Support non-English-standard characters
+        String detectedCharset = charset(englishBundle.getString(key), charsets);
+
+        final int argLength = messageArguments.length;
+        Object[] syncEncodingMessageArguments = new Object[argLength];
+        //when messageArguments encoding not equal resourceBundle.getString(key),convert to equal
+        //avoid convert to a have two encoding content formattedMessage string.
+        for (int i = 0; i < argLength; i++) {
+            String objCharset = charset(messageArguments[i].toString(), charsets);
+            try {
+                syncEncodingMessageArguments[i] = convert(messageArguments[i].toString(), objCharset, detectedCharset);
+            } catch (UnsupportedEncodingException ignored) {
+                System.err.println("Cannot Convert '" + messageArguments[i].toString() + "' from '" + objCharset + "' To '" + detectedCharset + "'");
+                return "encoding '" + key + "' translate string failure";
+            }
+        }
+
+        try {
+            formattedMessage = new String(formatter.format(syncEncodingMessageArguments).getBytes(detectedCharset), StandardCharsets.UTF_8);
+        } catch(UnsupportedEncodingException ignored) {}
+
+        return formattedMessage;
+    }
     //FIXME: localizer should return default value from english locale or it will crash some GUI element like the NewGameMenu->NewGameScreen Popup when returned null...
     public String getMessage(final String key, final Object... messageArguments) {
         MessageFormat formatter = null;
