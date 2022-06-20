@@ -227,5 +227,6 @@ ScryfallCode=2X2
 573 M Liliana, the Last Hope @Scott M. Fischer
 574 M Wrenn and Six @Donato Giancola
 576 M Kozilek, Butcher of Truth @Ian Miller
+577 M Ulamog, the Infinite Gyre @Thomas M. Baxa
 578 R Weathered Wayfarer @Dermot Power
 579 R Bring to Light @Mark Poole
