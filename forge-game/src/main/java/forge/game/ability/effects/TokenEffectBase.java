@@ -41,6 +41,9 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
     protected TokenCreateTable createTokenTable(Iterable<Player> players, String[] tokenScripts, final int finalAmount, final SpellAbility sa) {
         TokenCreateTable tokenTable = new TokenCreateTable();
         for (final Player owner : players) {
+            if (!owner.isInGame()) {
+                continue;
+            }
             for (String script : tokenScripts) {
                 final Card result = TokenInfo.getProtoType(script, sa, owner);
 
@@ -126,7 +129,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
                 if (creator != controller) {
                     tok.setController(controller, timestamp);
                 }
-                tok.setTimestamp(timestamp);
+                tok.setGameTimestamp(timestamp);
                 tok.setToken(true);
 
                 // do effect stuff with the token

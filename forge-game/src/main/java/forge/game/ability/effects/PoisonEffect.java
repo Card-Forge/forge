@@ -30,12 +30,14 @@ public class PoisonEffect extends SpellAbilityEffect {
 
         GameEntityCounterTable table = new GameEntityCounterTable();
         for (final Player p : getTargetPlayers(sa)) {
-            if ((!sa.usesTargeting()) || p.canBeTargetedBy(sa)) {
-                if (amount >= 0) {
-                    p.addPoisonCounters(amount, sa.getActivatingPlayer(), table);
-                } else {
-                    p.removePoisonCounters(-amount, sa.getActivatingPlayer());
-                }
+            if (!p.isInGame()) {
+                continue;
+            }
+
+            if (amount >= 0) {
+                p.addPoisonCounters(amount, sa.getActivatingPlayer(), table);
+            } else {
+                p.removePoisonCounters(-amount, sa.getActivatingPlayer());
             }
         }
         table.replaceCounterEffect(game, sa, true);

@@ -295,7 +295,8 @@ public final class CardUtil {
 
         newCopy.setMeldedWith(getLKICopy(in.getMeldedWith(), cachedMap));
 
-        newCopy.setTimestamp(in.getTimestamp());
+        newCopy.setGameTimestamp(in.getGameTimestamp());
+        newCopy.setLayerTimestamp(in.getLayerTimestamp());
 
         // update keyword cache on all states
         for (CardStateName s : newCopy.getStates()) {

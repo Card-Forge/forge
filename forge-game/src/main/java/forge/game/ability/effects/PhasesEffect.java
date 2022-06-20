@@ -63,25 +63,41 @@ public class PhasesEffect extends SpellAbilityEffect {
         }
         if (phaseInOrOut) { // Time and Tide and Oubliette
             for (final Card tgtC : tgtCards) {
-                tgtC.phase(false);
-                if (!tgtC.isPhasedOut()) {
+                // check if the object is still in game or if it was moved
+                Card gameCard = game.getCardState(tgtC, null);
+                // gameCard is LKI in that case, the card is not in game anymore
+                // or the timestamp did change
+                // this should check Self too
+                if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                    continue;
+                }
+                gameCard.phase(false);
+                if (!gameCard.isPhasedOut()) {
                     // won't trigger tap or untap triggers when phase in
                     if (sa.hasParam("Tapped")) {
-                        tgtC.setTapped(true);
+                        gameCard.setTapped(true);
                     } else if (sa.hasParam("Untapped")) {
-                        tgtC.setTapped(false);
+                        gameCard.setTapped(false);
                     }
-                    tgtC.setWontPhaseInNormal(false);
+                    gameCard.setWontPhaseInNormal(false);
                 } else {
-                    tgtC.setWontPhaseInNormal(wontPhaseInNormal);
+                    gameCard.setWontPhaseInNormal(wontPhaseInNormal);
                 }
             }
         } else { // just phase out
             for (final Card tgtC : tgtCards) {
-                if (!tgtC.isPhasedOut()) {
-                    tgtC.phase(false);
-                    if (tgtC.isPhasedOut()) {
-                        tgtC.setWontPhaseInNormal(wontPhaseInNormal);
+                // check if the object is still in game or if it was moved
+                Card gameCard = game.getCardState(tgtC, null);
+                // gameCard is LKI in that case, the card is not in game anymore
+                // or the timestamp did change
+                // this should check Self too
+                if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                    continue;
+                }
+                if (!gameCard.isPhasedOut()) {
+                    gameCard.phase(false);
+                    if (gameCard.isPhasedOut()) {
+                        gameCard.setWontPhaseInNormal(wontPhaseInNormal);
                     }
                 }
             }

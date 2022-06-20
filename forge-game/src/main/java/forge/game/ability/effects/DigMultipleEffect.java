@@ -40,7 +40,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
 
         CardZoneTable table = new CardZoneTable();
         for (final Player chooser : getDefinedPlayersOrTargeted(sa)) {
-            if (sa.usesTargeting() && !chooser.canBeTargetedBy(sa)) {
+            if (!chooser.isInGame()) {
                 continue;
             }
             final CardCollection top = new CardCollection();

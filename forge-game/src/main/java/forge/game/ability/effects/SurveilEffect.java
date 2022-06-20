@@ -42,13 +42,15 @@ public class SurveilEffect extends SpellAbilityEffect {
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
 
         for (final Player p : getTargetPlayers(sa)) {
-            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                if (isOptional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSurveil"))) {
-                    continue;
-                }
-
-                p.surveil(num, sa, table, moveParams);
+            if (!p.isInGame()) {
+                continue;
             }
+
+            if (isOptional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSurveil"))) {
+                continue;
+            }
+
+            p.surveil(num, sa, table, moveParams);
         }
         table.triggerChangesZoneAll(sa.getHostCard().getGame(), sa);
     }

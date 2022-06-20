@@ -37,7 +37,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
-import com.google.common.collect.Table;
 
 import forge.GameCommand;
 import forge.StaticData;
@@ -272,7 +271,7 @@ public class GameAction {
                 copied = CardFactory.copyCard(c, false);
             }
 
-            copied.setTimestamp(c.getTimestamp());
+            copied.setGameTimestamp(c.getGameTimestamp());
 
             if (zoneTo.is(ZoneType.Stack)) {
                 // when moving to stack, copy changed card information
@@ -386,7 +385,7 @@ public class GameAction {
 
         if (!zoneTo.is(ZoneType.Stack) && !suppress) {
             // reset timestamp in changezone effects so they have same timestamp if ETB simultaneously
-            copied.setTimestamp(game.getNextTimestamp());
+            copied.setGameTimestamp(game.getNextTimestamp());
         }
 
         copied.getOwner().removeInboundToken(copied);
@@ -488,12 +487,9 @@ public class GameAction {
             // that allows it to be cast for an alternative cost continue to apply to the permanent that spell becomes.
             if (zoneFrom.is(ZoneType.Stack) && toBattlefield) {
                 List<KeywordInterface> newKw = Lists.newArrayList();
-                for (Table.Cell<Long, Long, KeywordsChange> cell : c.getChangedCardKeywords().cellSet()) {
-                    // comes from a static ability
-                    if (cell.getColumnKey() == 0) {
-                        continue;
-                    }
-                    for (KeywordInterface ki : cell.getValue().getKeywords()) {
+                // comes from a static ability with column = 0
+                for (KeywordsChange kwc : c.getChangedCardKeywords().column((long)0).values()) {
+                    for (KeywordInterface ki : kwc.getKeywords()) {
                         boolean keepKeyword = false;
                         for (SpellAbility sa : ki.getAbilities()) {
                             if (!sa.isSpell()) {
@@ -510,7 +506,7 @@ public class GameAction {
                     }
                 }
                 if (!newKw.isEmpty()) {
-                    copied.addChangedCardKeywordsInternal(newKw, null, false, copied.getTimestamp(), 0, true);
+                    copied.addChangedCardKeywordsInternal(newKw, null, false, copied.getGameTimestamp(), 0, true);
                 }
             }
         }
@@ -1138,7 +1134,7 @@ public class GameAction {
             public int compare(final StaticAbility a, final StaticAbility b) {
                 return ComparisonChain.start()
                         .compareTrueFirst(a.hasParam("CharacteristicDefining"), b.hasParam("CharacteristicDefining"))
-                        .compare(a.getHostCard().getTimestamp(), b.getHostCard().getTimestamp())
+                        .compare(a.getHostCard().getLayerTimestamp(), b.getHostCard().getLayerTimestamp())
                         .result();
             }
         };
@@ -1331,7 +1327,7 @@ public class GameAction {
                             int sum = damaged.getRight();
                             remainingDamaged.remove(damaged);
                             for (Pair<Card, Integer> other : Lists.newArrayList(remainingDamaged)) {
-                                if (other.getLeft().equalsWithTimestamp(damaged.getLeft())) {
+                                if (other.getLeft().equalsWithGameTimestamp(damaged.getLeft())) {
                                     sum += other.getRight();
                                     // once it got counted keep it out
                                     remainingDamaged.remove(other);
@@ -1804,7 +1800,7 @@ public class GameAction {
         long ts = 0;
 
         for (final Card crd : worlds) {
-            long crdTs = crd.getTimestamp();
+            long crdTs = crd.getGameTimestamp();
             if (crdTs > ts) {
                 ts = crdTs;
                 toKeep.clear();

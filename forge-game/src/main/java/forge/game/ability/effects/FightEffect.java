@@ -104,7 +104,7 @@ public class FightEffect extends DamageBaseEffect {
                 // 701.12b If a creature instructed to fight is no longer on the battlefield or is no longer a creature,
                 // no damage is dealt. If a creature is an illegal target
                 // for a resolving spell or ability that instructs it to fight, no damage is dealt.
-                if (g == null || !g.equalsWithTimestamp(d) || !d.isInPlay() || !d.isCreature()) {
+                if (g == null || !g.equalsWithGameTimestamp(d) || !d.isInPlay() || !d.isCreature()) {
                     // Test to see if the card we're trying to add is in the expected state
                     continue;
                 }

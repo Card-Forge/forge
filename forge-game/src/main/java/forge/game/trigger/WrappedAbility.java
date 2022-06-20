@@ -44,15 +44,44 @@ public class WrappedAbility extends Ability {
             ApiType.RemoveCounter,
             ApiType.AddOrRemoveCounter,
             ApiType.MoveCounter,
-            ApiType.Draw,
-            ApiType.GainLife,
-            ApiType.LoseLife,
+            ApiType.Draw, // only player
+            ApiType.GainLife, // only player
+            ApiType.LoseLife, // only player
             ApiType.ChangeZone,
             ApiType.Destroy,
             ApiType.Token,
             ApiType.SetState,
             ApiType.Play,
-            ApiType.SacrificeAll
+            ApiType.SacrificeAll,
+            ApiType.Pump,
+
+            ApiType.EachDamage,
+
+            ApiType.Explore,
+            ApiType.Protection, // should not care about triggered
+            ApiType.ProtectionAll, // No Triggered
+            ApiType.Proliferate, // only player no triggered interaction
+            ApiType.CopyPermanent,
+            ApiType.Debuff, // updated
+            ApiType.Venture, // only player
+            ApiType.Manifest, // no triggered
+            ApiType.Scry, // only player
+            ApiType.SetInMotion, // No Triggered
+            ApiType.Shuffle, // only player
+            ApiType.Surveil, // only player
+            ApiType.Tap, // Done
+            ApiType.TapAll, // uses filterListByType
+            ApiType.TapOrUntap, // No TriggeredCard
+            ApiType.TapOrUntapAll, // No TriggeredCard
+            ApiType.Untap, // Done
+            ApiType.UntapAll, // only player
+            ApiType.Unattach, // No Triggered
+            ApiType.UnattachAll, // No Triggered
+
+            ApiType.RemoveFromCombat, // Done
+
+            ApiType.Poison, // only player
+            ApiType.Vote // only player
             );
 
     private final SpellAbility sa;
@@ -488,7 +517,7 @@ public class WrappedAbility extends Ability {
             if (ev.getValue() instanceof Card) {
                 Card card = (Card) ev.getValue();
                 Card current = game.getCardState(card);
-                if (card.isInPlay() && current.isInPlay() && current.getTimestamp() != card.getTimestamp()) {
+                if (card.isInPlay() && current.isInPlay() && current.getGameTimestamp() != card.getGameTimestamp()) {
                     // TODO: figure out if NoTimestampCheck should be the default for ChangesZone triggers
                     sa.getTriggeringObjects().remove(ev.getKey());
                 }

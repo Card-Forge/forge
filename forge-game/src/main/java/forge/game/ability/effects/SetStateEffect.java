@@ -77,11 +77,7 @@ public class SetStateEffect extends SpellAbilityEffect {
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
             // this should check Self too
-            if (gameCard == null || !tgtCard.equalsWithTimestamp(gameCard)) {
-                continue;
-            }
-
-            if (sa.usesTargeting() && !gameCard.canBeTargetedBy(sa)) {
+            if (gameCard == null || !tgtCard.equalsWithGameTimestamp(gameCard)) {
                 continue;
             }
 

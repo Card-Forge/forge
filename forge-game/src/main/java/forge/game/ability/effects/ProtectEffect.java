@@ -136,13 +136,13 @@ public class ProtectEffect extends SpellAbilityEffect {
             if (!tgtC.isInPlay()) {
                 continue;
             }
-
-            // if this is a target, make sure we can still target now
-            if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {
-                continue;
+            // do Game Check there in case of LKI
+            final Card gameCard = game.getCardState(tgtC, null);
+            if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                return;
             }
 
-            tgtC.addChangedCardKeywords(gainsKWList, null, false, timestamp, 0, true);
+            gameCard.addChangedCardKeywords(gainsKWList, null, false, timestamp, 0, true);
 
             if (!"Permanent".equals(sa.getParam("Duration"))) {
                 // If not Permanent, remove protection at EOT
@@ -151,9 +151,7 @@ public class ProtectEffect extends SpellAbilityEffect {
 
                     @Override
                     public void run() {
-                        if (tgtC.isInPlay()) {
-                            tgtC.removeChangedCardKeywords(timestamp, 0, true);
-                        }
+                        gameCard.removeChangedCardKeywords(timestamp, 0, true);
                     }
                 };
                 addUntilCommand(sa, untilEOT);

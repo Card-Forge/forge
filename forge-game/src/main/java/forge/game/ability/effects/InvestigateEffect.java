@@ -38,6 +38,9 @@ public class InvestigateEffect extends TokenEffectBase {
 
         // Investigate in Sequence
         for (final Player p : getTargetPlayers(sa)) {
+            if (!p.isInGame()) {
+                continue;
+            }
             for (int i = 0; i < amount; i++) {
                 if (sa.hasParam("Optional") && !p.getController().confirmAction(sa, null,
                         Localizer.getInstance().getMessage("lblWouldYouLikeInvestigate"))) {

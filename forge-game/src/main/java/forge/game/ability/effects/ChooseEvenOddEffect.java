@@ -30,12 +30,13 @@ public class ChooseEvenOddEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
 
         for (final Player p : getTargetPlayers(sa)) {
-            if ((!sa.usesTargeting()) || p.canBeTargetedBy(sa)) {
-                EvenOdd chosen = p.getController().chooseBinary(sa, "odd or even", BinaryChoiceType.OddsOrEvens) ? EvenOdd.Odd : EvenOdd.Even;
-                card.setChosenEvenOdd(chosen);
-                if (sa.hasParam("Notify")) {
-                    p.getGame().getAction().notifyOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
-                }
+            if (!p.isInGame()) {
+                continue;
+            }
+            EvenOdd chosen = p.getController().chooseBinary(sa, "odd or even", BinaryChoiceType.OddsOrEvens) ? EvenOdd.Odd : EvenOdd.Even;
+            card.setChosenEvenOdd(chosen);
+            if (sa.hasParam("Notify")) {
+                p.getGame().getAction().notifyOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
             }
         }
         card.updateStateForView();

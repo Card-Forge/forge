@@ -86,7 +86,6 @@ public class FlipOntoBattlefieldEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getHostCard();
-        final Player p = sa.getActivatingPlayer();
 
         sb.append("Flip ");
         sb.append(host.toString());

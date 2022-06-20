@@ -217,7 +217,7 @@ public class GameCopier {
 
         for (Card card : origGame.getCardsIn(ZoneType.Battlefield)) {
             Card otherCard = cardMap.get(card);
-            otherCard.setTimestamp(card.getTimestamp());
+            otherCard.setGameTimestamp(card.getGameTimestamp());
             otherCard.setSickness(card.hasSickness());
             otherCard.setState(card.getCurrentStateName(), false);
             if (card.isAttachedToEntity()) {

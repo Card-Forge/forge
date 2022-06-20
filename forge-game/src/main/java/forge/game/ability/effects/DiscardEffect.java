@@ -144,163 +144,165 @@ public class DiscardEffect extends SpellAbilityEffect {
         final CardZoneTable table = new CardZoneTable();
         Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
         for (final Player p : discarders) {
+            if (!p.isInGame()) {
+                continue;
+            }
             CardCollectionView toBeDiscarded = new CardCollection();
-            if ((mode.equals("RevealTgtChoose") && firstTarget != null) || !sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                final int numCardsInHand = p.getCardsIn(ZoneType.Hand).size();
-                if (mode.equals("Defined")) {
-                    if (!p.canDiscardBy(sa, true)) {
-                        continue;
-                    }
 
-                    boolean runDiscard = !sa.hasParam("Optional")
-                            || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, sa.getParam("DiscardMessage"));
-                    if (runDiscard) {
-                        toBeDiscarded = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
-
-                        if (toBeDiscarded.size() > 1) {
-                            toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
-                        }
-                    }
+            final int numCardsInHand = p.getCardsIn(ZoneType.Hand).size();
+            if (mode.equals("Defined")) {
+                if (!p.canDiscardBy(sa, true)) {
+                    continue;
                 }
 
-                if (mode.equals("Hand")) {
-                    toBeDiscarded = p.getCardsIn(ZoneType.Hand);
-
-                    // Empty hand can still be discarded
-                    if (!toBeDiscarded.isEmpty() && !p.canDiscardBy(sa, true)) {
-                        continue;
-                    }
+                boolean runDiscard = !sa.hasParam("Optional")
+                        || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, sa.getParam("DiscardMessage"));
+                if (runDiscard) {
+                    toBeDiscarded = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
 
                     if (toBeDiscarded.size() > 1) {
                         toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
                     }
                 }
+            }
 
-                if (mode.equals("NotRemembered")) {
-                    if (!p.canDiscardBy(sa, true)) {
-                        continue;
-                    }
-                    toBeDiscarded = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), "Card.IsNotRemembered", p, source, sa);
-                    if (toBeDiscarded.size() > 1) {
-                        toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
-                    }
+            if (mode.equals("Hand")) {
+                toBeDiscarded = p.getCardsIn(ZoneType.Hand);
+
+                // Empty hand can still be discarded
+                if (!toBeDiscarded.isEmpty() && !p.canDiscardBy(sa, true)) {
+                    continue;
                 }
 
-                int numCards = 1;
-                if (sa.hasParam("NumCards")) {
-                    numCards = AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa);
-                    numCards = Math.min(numCards, numCardsInHand);
+                if (toBeDiscarded.size() > 1) {
+                    toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
                 }
+            }
 
-                if (mode.equals("Random")) {
-                    if (!p.canDiscardBy(sa, true)) {
-                        continue;
-                    }
-                    String message = Localizer.getInstance().getMessage("lblWouldYouLikeRandomDiscardTargetCard", String.valueOf(numCards));
-                    boolean runDiscard = !sa.hasParam("Optional") || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message);
-
-                    if (runDiscard) {
-                        final String valid = sa.getParamOrDefault("DiscardValid", "Card");
-                        List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, source.getController(), source, sa);
-                        list = CardLists.filter(list, Presets.NON_TOKEN);
-                        CardCollection toDiscard = new CardCollection();
-                        for (int i = 0; i < numCards; i++) {
-                            if (list.isEmpty())
-                                break;
-
-                            final Card disc = Aggregates.random(list);
-                            toDiscard.add(disc);
-                            list.remove(disc);
-                        }
-
-                        toBeDiscarded = toDiscard;
-                        if (toBeDiscarded.size() > 1) {
-                            toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
-                        }
-                    }
+            if (mode.equals("NotRemembered")) {
+                if (!p.canDiscardBy(sa, true)) {
+                    continue;
                 }
-                else if (mode.equals("TgtChoose") && sa.hasParam("UnlessType")) {
-                    if (!p.canDiscardBy(sa, true)) {
-                        continue;
-                    }
-                    if (numCardsInHand > 0) {
-                        CardCollectionView hand = p.getCardsIn(ZoneType.Hand);
-                        hand = CardLists.filter(hand, Presets.NON_TOKEN);
-                        toBeDiscarded = p.getController().chooseCardsToDiscardUnlessType(Math.min(numCards, numCardsInHand), hand, sa.getParam("UnlessType"), sa);
-
-                        if (toBeDiscarded.size() > 1) {
-                            toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game,toBeDiscarded, ZoneType.Graveyard, sa);
-                        }
-                    }
+                toBeDiscarded = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), "Card.IsNotRemembered", p, source, sa);
+                if (toBeDiscarded.size() > 1) {
+                    toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
                 }
-                else if (mode.equals("RevealDiscardAll")) {
-                    // Reveal
-                    final CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
+            }
 
-                    for (final Player opp : p.getAllOtherPlayers()) {
-                        opp.getController().reveal(dPHand, ZoneType.Hand, p, Localizer.getInstance().getMessage("lblReveal") + " ");
-                    }
+            int numCards = 1;
+            if (sa.hasParam("NumCards")) {
+                numCards = AbilityUtils.calculateAmount(source, sa.getParam("NumCards"), sa);
+                numCards = Math.min(numCards, numCardsInHand);
+            }
 
-                    if (!p.canDiscardBy(sa, true)) {
-                        continue;
-                    }
+            if (mode.equals("Random")) {
+                if (!p.canDiscardBy(sa, true)) {
+                    continue;
+                }
+                String message = Localizer.getInstance().getMessage("lblWouldYouLikeRandomDiscardTargetCard", String.valueOf(numCards));
+                boolean runDiscard = !sa.hasParam("Optional") || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message);
 
-                    String valid = sa.getParamOrDefault("DiscardValid", "Card");
-
-                    if (valid.contains("X")) {
-                        valid = TextUtil.fastReplace(valid,
-                                "X", Integer.toString(AbilityUtils.calculateAmount(source, "X", sa)));
-                    }
-
-                    toBeDiscarded = CardLists.getValidCards(dPHand, valid, source.getController(), source, sa);
-                    toBeDiscarded = CardLists.filter(toBeDiscarded, Presets.NON_TOKEN);
-                    if (toBeDiscarded.size() > 1) {
-                        toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
-                    }
-                } else if (mode.endsWith("YouChoose") || mode.endsWith("TgtChoose")) {
-                    CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
-                    dPHand = CardLists.filter(dPHand, Presets.NON_TOKEN);
-                    if (dPHand.isEmpty())
-                        continue; // for loop over players
-
-                    if (sa.hasParam("RevealNumber")) {
-                        int amount = AbilityUtils.calculateAmount(source, sa.getParam("RevealNumber"), sa);
-                        dPHand = p.getController().chooseCardsToRevealFromHand(amount, amount, dPHand);
-                    }
-
+                if (runDiscard) {
                     final String valid = sa.getParamOrDefault("DiscardValid", "Card");
-                    CardCollection validCards = CardLists.getValidCards(dPHand, valid, source.getController(), source, sa);
+                    List<Card> list = CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), valid, source.getController(), source, sa);
+                    list = CardLists.filter(list, Presets.NON_TOKEN);
+                    CardCollection toDiscard = new CardCollection();
+                    for (int i = 0; i < numCards; i++) {
+                        if (list.isEmpty())
+                            break;
 
-                    Player chooser = p;
-                    if (mode.endsWith("YouChoose")) {
-                        chooser = source.getController();
-                    } else if (mode.equals("RevealTgtChoose")) {
-                        chooser = firstTarget;
+                        final Card disc = Aggregates.random(list);
+                        toDiscard.add(disc);
+                        list.remove(disc);
                     }
 
-                    if (mode.startsWith("Reveal")) {
-                        game.getAction().reveal(dPHand, p);
-                    }
-                    if (mode.startsWith("Look") && p != chooser) {
-                        game.getAction().revealTo(dPHand, chooser);
-                    }
-
-                    if (!p.canDiscardBy(sa, true)) {
-                        continue;
-                    }
-
-                    int min = sa.hasParam("AnyNumber") || sa.hasParam("Optional") ? 0 : Math.min(validCards.size(), numCards);
-                    int max = sa.hasParam("AnyNumber") ? validCards.size() : Math.min(validCards.size(), numCards);
-
-                    toBeDiscarded = max == 0 ? CardCollection.EMPTY : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max);
-
+                    toBeDiscarded = toDiscard;
                     if (toBeDiscarded.size() > 1) {
                         toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
                     }
+                }
+            }
+            else if (mode.equals("TgtChoose") && sa.hasParam("UnlessType")) {
+                if (!p.canDiscardBy(sa, true)) {
+                    continue;
+                }
+                if (numCardsInHand > 0) {
+                    CardCollectionView hand = p.getCardsIn(ZoneType.Hand);
+                    hand = CardLists.filter(hand, Presets.NON_TOKEN);
+                    toBeDiscarded = p.getController().chooseCardsToDiscardUnlessType(Math.min(numCards, numCardsInHand), hand, sa.getParam("UnlessType"), sa);
 
-                    if (mode.startsWith("Reveal") && p != chooser) {
-                        p.getController().reveal(toBeDiscarded, ZoneType.Hand, p, Localizer.getInstance().getMessage("lblPlayerHasChosenCardsFrom", chooser.getName()));
+                    if (toBeDiscarded.size() > 1) {
+                        toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game,toBeDiscarded, ZoneType.Graveyard, sa);
                     }
+                }
+            }
+            else if (mode.equals("RevealDiscardAll")) {
+                // Reveal
+                final CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
+
+                for (final Player opp : p.getAllOtherPlayers()) {
+                    opp.getController().reveal(dPHand, ZoneType.Hand, p, Localizer.getInstance().getMessage("lblReveal") + " ");
+                }
+
+                if (!p.canDiscardBy(sa, true)) {
+                    continue;
+                }
+
+                String valid = sa.getParamOrDefault("DiscardValid", "Card");
+
+                if (valid.contains("X")) {
+                    valid = TextUtil.fastReplace(valid,
+                            "X", Integer.toString(AbilityUtils.calculateAmount(source, "X", sa)));
+                }
+
+                toBeDiscarded = CardLists.getValidCards(dPHand, valid, source.getController(), source, sa);
+                toBeDiscarded = CardLists.filter(toBeDiscarded, Presets.NON_TOKEN);
+                if (toBeDiscarded.size() > 1) {
+                    toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
+                }
+            } else if (mode.endsWith("YouChoose") || mode.endsWith("TgtChoose")) {
+                CardCollectionView dPHand = p.getCardsIn(ZoneType.Hand);
+                dPHand = CardLists.filter(dPHand, Presets.NON_TOKEN);
+                if (dPHand.isEmpty())
+                    continue; // for loop over players
+
+                if (sa.hasParam("RevealNumber")) {
+                    int amount = AbilityUtils.calculateAmount(source, sa.getParam("RevealNumber"), sa);
+                    dPHand = p.getController().chooseCardsToRevealFromHand(amount, amount, dPHand);
+                }
+
+                final String valid = sa.getParamOrDefault("DiscardValid", "Card");
+                CardCollection validCards = CardLists.getValidCards(dPHand, valid, source.getController(), source, sa);
+
+                Player chooser = p;
+                if (mode.endsWith("YouChoose")) {
+                    chooser = source.getController();
+                } else if (mode.equals("RevealTgtChoose")) {
+                    chooser = firstTarget;
+                }
+
+                if (mode.startsWith("Reveal")) {
+                    game.getAction().reveal(dPHand, p);
+                }
+                if (mode.startsWith("Look") && p != chooser) {
+                    game.getAction().revealTo(dPHand, chooser);
+                }
+
+                if (!p.canDiscardBy(sa, true)) {
+                    continue;
+                }
+
+                int min = sa.hasParam("AnyNumber") || sa.hasParam("Optional") ? 0 : Math.min(validCards.size(), numCards);
+                int max = sa.hasParam("AnyNumber") ? validCards.size() : Math.min(validCards.size(), numCards);
+
+                toBeDiscarded = max == 0 ? CardCollection.EMPTY : chooser.getController().chooseCardsToDiscardFrom(p, sa, validCards, min, max);
+
+                if (toBeDiscarded.size() > 1) {
+                    toBeDiscarded = GameActionUtil.orderCardsByTheirOwners(game, toBeDiscarded, ZoneType.Graveyard, sa);
+                }
+
+                if (mode.startsWith("Reveal") && p != chooser) {
+                    p.getController().reveal(toBeDiscarded, ZoneType.Hand, p, Localizer.getInstance().getMessage("lblPlayerHasChosenCardsFrom", chooser.getName()));
                 }
             }
             discardedMap.put(p, toBeDiscarded);

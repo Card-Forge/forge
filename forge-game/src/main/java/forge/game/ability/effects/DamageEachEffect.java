@@ -1,10 +1,8 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
-import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardDamageMap;
@@ -68,10 +66,6 @@ public class DamageEachEffect extends DamageBaseEffect {
             sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), card.getController(), card, sa);
         }
 
-        final List<GameObject> tgts = getTargets(sa, "DefinedPlayers");
-
-        final boolean targeted = sa.usesTargeting();
-
         boolean usedDamageMap = true;
         CardDamageMap damageMap = sa.getDamageMap();
         CardDamageMap preventMap = sa.getPreventMap();
@@ -85,24 +79,33 @@ public class DamageEachEffect extends DamageBaseEffect {
             usedDamageMap = false;
         }
 
-        for (final Object o : tgts) {
+        for (final GameEntity o : getTargetEntities(sa, "DefinedPlayers")) {
             for (final Card source : sources) {
                 final Card sourceLKI = game.getChangeZoneLKIInfo(source);
 
                 // TODO shouldn't that be using Num or something first?
                 final int dmg = AbilityUtils.calculateAmount(source, "X", sa);
-                
+
                 if (o instanceof Card) {
                     final Card c = (Card) o;
-                    if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
-                        damageMap.put(sourceLKI, c, dmg);
+                    if (!c.isInPlay()) {
+                        continue;
                     }
-
+                    // check if the object is still in game or if it was moved
+                    Card gameCard = game.getCardState(c, null);
+                    // gameCard is LKI in that case, the card is not in game anymore
+                    // or the timestamp did change
+                    // this should check Self too
+                    if (gameCard == null || !c.equalsWithGameTimestamp(gameCard)) {
+                        continue;
+                    }
+                    damageMap.put(sourceLKI, gameCard, dmg);
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
-                    if (!targeted || p.canBeTargetedBy(sa)) {
-                        damageMap.put(sourceLKI, p, dmg);
+                    if (!p.isInGame()) {
+                        continue;
                     }
+                    damageMap.put(sourceLKI, p, dmg);
                 }
             }
         }
@@ -124,7 +127,15 @@ public class DamageEachEffect extends DamageBaseEffect {
                     for (final Object o : sa.getHostCard().getRemembered()) {
                         if (o instanceof Card) {
                             Card rememberedcard = (Card) o;
-                            damageMap.put(sourceLKI, rememberedcard, dmg);
+                            // check if the object is still in game or if it was moved
+                            Card gameCard = game.getCardState(rememberedcard, null);
+                            // gameCard is LKI in that case, the card is not in game anymore
+                            // or the timestamp did change
+                            // this should check Self too
+                            if (gameCard == null || !rememberedcard.equalsWithGameTimestamp(gameCard)) {
+                                continue;
+                            }
+                            damageMap.put(sourceLKI, gameCard, dmg);
                         }
                     }
                 }

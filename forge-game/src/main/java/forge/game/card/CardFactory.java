@@ -155,7 +155,7 @@ public class CardFactory {
                 finalColors = ColorSet.fromNames(newColor.split(","));
             }
 
-            c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), c.getTimestamp(), 0, false);
+            c.addColor(finalColors, !sourceSA.hasParam("OverwriteColors"), c.getGameTimestamp(), 0, false);
         }
 
         c.clearControllers();

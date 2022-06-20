@@ -36,7 +36,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
 
         final SpellAbility repeat = sa.getAdditionalAbility("RepeatSubAbility");
 
-        if (repeat != null && !repeat.getHostCard().equalsWithTimestamp(source)) {
+        if (repeat != null && !repeat.getHostCard().equalsWithGameTimestamp(source)) {
             // TODO: for some reason, the host card of the original additional SA is set to the cloned card when
             // the ability is copied (e.g. Clone Legion + Swarm Intelligence). Couldn't figure out why this happens,
             // so this hack is necessary for now to work around this issue.

@@ -6,7 +6,7 @@ SVar:DBEffect:DB$ Effect | Triggers$ TrigAttack,TrigEndCombat
 SVar:TrigEndCombat:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:TrigAttack:Mode$ AttackerUnblocked | ValidCard$ Creature | Execute$ TrigUntap | TriggerZones$ Command | TriggerDescription$ Whenever a creature attacks and isn't blocked this combat, untap it and remove it from combat.
-SVar:TrigUntap:DB$ Untap | Defined$ TriggeredAttacker | SubAbility$ RemCombat
-SVar:RemCombat:DB$ RemoveFromCombat | Defined$ TriggeredAttacker
+SVar:TrigUntap:DB$ Untap | Defined$ TriggeredAttackerLKICopy | SubAbility$ RemCombat
+SVar:RemCombat:DB$ RemoveFromCombat | Defined$ TriggeredAttackerLKICopy
 AI:RemoveDeck:All
 Oracle:Cast this spell only during your turn and only during combat before blockers are declared.\nYou choose which creatures block this combat and how those creatures block.\nWhenever a creature attacks and isn't blocked this combat, untap it and remove it from combat.

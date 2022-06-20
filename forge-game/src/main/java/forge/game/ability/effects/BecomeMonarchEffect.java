@@ -27,10 +27,11 @@ public class BecomeMonarchEffect extends SpellAbilityEffect {
         final String set = sa.getHostCard().getSetCode();
 
         for (final Player p : getTargetPlayers(sa)) {
-            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                if (p.canBecomeMonarch()) {
-                    p.getGame().getAction().becomeMonarch(p, set);
-                }
+            if (!p.isInGame()) {
+                continue;
+            }
+            if (p.canBecomeMonarch()) {
+                p.getGame().getAction().becomeMonarch(p, set);
             }
         }
     }

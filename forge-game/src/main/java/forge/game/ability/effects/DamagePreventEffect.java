@@ -74,14 +74,11 @@ public class DamagePreventEffect extends DamagePreventEffectBase {
             numDam = targeted && sa.isDividedAsYouChoose() ? sa.getDividedValue(o) : numDam;
             if (o instanceof Card) {
                 final Card c = (Card) o;
-                if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
+                if (c.isInPlay()) {
                     addPreventNextDamage(sa, o, numDam);
                 }
             } else if (o instanceof Player) {
-                final Player p = (Player) o;
-                if (!targeted || p.canBeTargetedBy(sa)) {
-                    addPreventNextDamage(sa, o, numDam);
-                }
+                addPreventNextDamage(sa, o, numDam);
             }
         }
 

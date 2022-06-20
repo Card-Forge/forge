@@ -2,8 +2,6 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -125,25 +123,25 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
             return;
         }
 
-        final String numericAmount = sa.getParamOrDefault("Amount", "1");
-        final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) : AbilityUtils.calculateAmount(host, numericAmount, sa);
+        final int validAmount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Amount", "1"), sa);
 
         for (final Player p : tgtPlayers) {
             final CardCollection chosen = new CardCollection();
-            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                for (int i = 0; i < validAmount; i++) {
-                    final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseSource") + " ";
-                    Card o = null;
-                    do {
-                        o = p.getController().chooseSingleEntityForEffect(sourcesToChooseFrom, sa, choiceTitle, null);
-                    } while (o == null || o.getName().startsWith("--"));
-                    chosen.add(o);
-                    sourcesToChooseFrom.remove(o);
-                }
-                host.setChosenCards(chosen);
-                if (sa.hasParam("RememberChosen")) {
-                    host.addRemembered(chosen);
-                }
+            if (!p.isInGame()) {
+                continue;
+            }
+            for (int i = 0; i < validAmount; i++) {
+                final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseSource") + " ";
+                Card o = null;
+                do {
+                    o = p.getController().chooseSingleEntityForEffect(sourcesToChooseFrom, sa, choiceTitle, null);
+                } while (o == null || o.getName().startsWith("--"));
+                chosen.add(o);
+                sourcesToChooseFrom.remove(o);
+            }
+            host.setChosenCards(chosen);
+            if (sa.hasParam("RememberChosen")) {
+                host.addRemembered(chosen);
             }
         }
     }

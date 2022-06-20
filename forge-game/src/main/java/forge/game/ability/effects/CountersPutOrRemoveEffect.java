@@ -71,7 +71,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
             // this should check Self too
-            if (gameCard == null || !tgtCard.equalsWithTimestamp(gameCard)) {
+            if (gameCard == null || !tgtCard.equalsWithGameTimestamp(gameCard)) {
                 continue;
             }
             if (!eachExisting && sa.hasParam("Optional") && !pl.getController().confirmAction(sa, null,
@@ -79,18 +79,17 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
                             CardTranslation.getTranslatedName(gameCard.getName())))) {
                 continue;
             }
-            if (!sa.usesTargeting() || gameCard.canBeTargetedBy(sa)) {
-                if (gameCard.hasCounters()) {
-                    if (eachExisting) {
-                        for (CounterType listType : Lists.newArrayList(gameCard.getCounters().keySet())) {
-                            addOrRemoveCounter(sa, gameCard, listType, counterAmount, table, pl);
-                        }
-                    } else {
-                        addOrRemoveCounter(sa, gameCard, ctype, counterAmount, table, pl);
+
+            if (gameCard.hasCounters()) {
+                if (eachExisting) {
+                    for (CounterType listType : Lists.newArrayList(gameCard.getCounters().keySet())) {
+                        addOrRemoveCounter(sa, gameCard, listType, counterAmount, table, pl);
                     }
-                } else if (!eachExisting && ctype != null) {
-                    gameCard.addCounter(ctype, counterAmount, pl, table);
+                } else {
+                    addOrRemoveCounter(sa, gameCard, ctype, counterAmount, table, pl);
                 }
+            } else if (!eachExisting && ctype != null) {
+                gameCard.addCounter(ctype, counterAmount, pl, table);
             }
         }
         table.replaceCounterEffect(game, sa, true);

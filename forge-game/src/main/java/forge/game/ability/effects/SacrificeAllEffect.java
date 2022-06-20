@@ -71,7 +71,7 @@ public class SacrificeAllEffect extends SpellAbilityEffect {
             // gameCard is LKI in that case, the card is not in game anymore
             // or the timestamp did change
             // this should check Self too
-            if (gameCard == null || !sac.equalsWithTimestamp(gameCard) || !gameCard.canBeSacrificedBy(sa, true)) {
+            if (gameCard == null || !sac.equalsWithGameTimestamp(gameCard) || !gameCard.canBeSacrificedBy(sa, true)) {
                 continue;
             }
             gameList.add(gameCard);

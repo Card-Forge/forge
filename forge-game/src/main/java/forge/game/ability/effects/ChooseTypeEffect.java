@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +9,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.util.Aggregates;
 
 public class ChooseTypeEffect extends SpellAbilityEffect {
@@ -76,29 +74,28 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             validTypes.remove(s);
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
         if (!validTypes.isEmpty()) {
             for (final Player p : tgtPlayers) {
                 String choice;
-                if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                    Player noNotify = p;
-                    if (sa.hasParam("AtRandom")) {
-                        choice = Aggregates.random(validTypes);
-                        noNotify = null;
-                    } else {
-                        choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
-                    }
-                    if (!sa.hasParam("ChooseType2")) {
-                        card.setChosenType(choice);
-                    } else {
-                        card.setChosenType2(choice);
-                    }
-                    p.getGame().getAction().notifyOfValue(sa, p, choice, noNotify);
+                if (!p.isInGame()) {
+                    continue;
                 }
+                Player noNotify = p;
+                if (sa.hasParam("AtRandom")) {
+                    choice = Aggregates.random(validTypes);
+                    noNotify = null;
+                } else {
+                    choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
+                }
+                if (!sa.hasParam("ChooseType2")) {
+                    card.setChosenType(choice);
+                } else {
+                    card.setChosenType2(choice);
+                }
+                p.getGame().getAction().notifyOfValue(sa, p, choice, noNotify);
             }
         } else {
-            throw new InvalidParameterException(sa.getHostCard() + "'s ability resulted in no types to choose from");
+            throw new RuntimeException(sa.getHostCard() + "'s ability resulted in no types to choose from");
         }
     }
 }

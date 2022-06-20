@@ -11,7 +11,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
@@ -74,15 +73,14 @@ public class RearrangeTopOfLibraryEffect extends SpellAbilityEffect {
         Card host = sa.getHostCard();
         boolean shuffle = false;
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
         numCards = AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa);
         shuffle = sa.hasParam("MayShuffle");
 
         for (final Player p : getTargetPlayers(sa)) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                rearrangeTopOfLibrary(host, p, numCards, shuffle, sa);
+            if (!p.isInGame()) {
+                continue;
             }
+            rearrangeTopOfLibrary(host, p, numCards, shuffle, sa);
         }
     }
 

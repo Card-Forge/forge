@@ -1,9 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -14,9 +10,8 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.Localizer;
-import forge.util.collect.FCollection;
-
 
 public class TapOrUntapAllEffect extends SpellAbilityEffect {
 
@@ -29,8 +24,7 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
         if (sa.hasParam("ValidMessage")) {
             sb.append(sa.getParam("ValidMessage"));
         } else {
-            final List<Card> tgtCards = getTargetCards(sa);
-            sb.append(StringUtils.join(tgtCards, ", "));
+            sb.append(Lang.joinHomogenous(getTargetCards(sa)));
         }
         sb.append(".");
         return sb.toString();
@@ -38,19 +32,18 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        CardCollectionView validCards = getTargetCards(sa);
+        CardCollectionView validCards;
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
 
-        FCollection<Player> targetedPlayers = getTargetPlayers(sa);
-
         if (sa.hasParam("ValidCards")) {
-            validCards = game.getCardsIn(ZoneType.Battlefield);
-            validCards = AbilityUtils.filterListByType(validCards, sa.getParam("ValidCards"), sa);
+            validCards = AbilityUtils.filterListByType(game.getCardsIn(ZoneType.Battlefield), sa.getParam("ValidCards"), sa);
+        } else {
+            validCards = getTargetCards(sa);
         }
-        
+
         if (sa.usesTargeting() || sa.hasParam("Defined")) {
-            validCards = CardLists.filterControlledBy(validCards, targetedPlayers);
+            validCards = CardLists.filterControlledBy(validCards, getTargetPlayers(sa));
         }
 
         // Default to tapping for AI
@@ -66,13 +59,23 @@ public class TapOrUntapAllEffect extends SpellAbilityEffect {
 
         toTap = sa.getActivatingPlayer().getController().chooseBinary(sa, sb.toString(), PlayerController.BinaryChoiceType.TapOrUntap);
 
-        for (final Card cad : validCards) {
-            if (cad.isInPlay()) {
-                if (toTap) {
-                    cad.tap(true);
-                } else {
-                    cad.untap(true);
-                }
+        for (final Card tgtC : validCards) {
+            if (!tgtC.isInPlay()) {
+                continue;
+            }
+
+            // check if the object is still in game or if it was moved
+            Card gameCard = game.getCardState(tgtC, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                continue;
+            }
+            if (toTap) {
+                gameCard.tap(true);
+            } else {
+                gameCard.untap(true);
             }
         }
     }

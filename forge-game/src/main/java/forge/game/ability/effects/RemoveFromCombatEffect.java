@@ -1,9 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -12,7 +8,7 @@ import forge.game.card.CardCollection;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
+import forge.util.Lang;
 
 public class RemoveFromCombatEffect extends SpellAbilityEffect {
 
@@ -20,10 +16,8 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Card> tgtCards = getTargetCards(sa);
-
         sb.append("Remove ");
-        sb.append(StringUtils.join(tgtCards, ", "));
+        sb.append(Lang.joinHomogenous(getTargetCards(sa)));
         sb.append(" from combat.");
 
         return sb.toString();
@@ -35,36 +29,45 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
         final Game game = activator.getGame();
         final boolean rem = sa.hasParam("RememberRemovedFromCombat");
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         for (final Card c : getTargetCards(sa)) {
             final Combat combat = game.getPhaseHandler().getCombat();
-            if (combat != null && (tgt == null || c.canBeTargetedBy(sa))) {
-                // Unblock creatures that were blocked only by this card (e.g. Ydwen Efreet)
-                if (sa.hasParam("UnblockCreaturesBlockedOnlyBy")) {
-                    CardCollection attackers = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("UnblockCreaturesBlockedOnlyBy"), sa);
-                    if (!attackers.isEmpty()) {
-                        CardCollection blockedByCard = combat.getAttackersBlockedBy(attackers.getFirst());
-                        for (Card atk : blockedByCard) {
-                            boolean blockedOnlyByCard = true;
-                            for (Card blocker : combat.getBlockers(atk)) {
-                                if (!blocker.equals(attackers.getFirst())) {
-                                    blockedOnlyByCard = false;
-                                    break;
-                                }
+            if (combat == null || !c.isInPlay()) {
+                continue;
+            }
+            // check if the object is still in game or if it was moved
+            Card gameCard = game.getCardState(c, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !c.equalsWithGameTimestamp(gameCard)) {
+                continue;
+            }
+
+            // Unblock creatures that were blocked only by this card (e.g. Ydwen Efreet)
+            if (sa.hasParam("UnblockCreaturesBlockedOnlyBy")) {
+                CardCollection attackers = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("UnblockCreaturesBlockedOnlyBy"), sa);
+                if (!attackers.isEmpty()) {
+                    CardCollection blockedByCard = combat.getAttackersBlockedBy(attackers.getFirst());
+                    for (Card atk : blockedByCard) {
+                        boolean blockedOnlyByCard = true;
+                        for (Card blocker : combat.getBlockers(atk)) {
+                            if (!blocker.equals(attackers.getFirst())) {
+                                blockedOnlyByCard = false;
+                                break;
                             }
-                            if (blockedOnlyByCard) {
-                                combat.setBlocked(atk, false);
-                            }
+                        }
+                        if (blockedOnlyByCard) {
+                            combat.setBlocked(atk, false);
                         }
                     }
                 }
+            }
 
-                game.getCombat().saveLKI(c);
-                combat.removeFromCombat(c);
+            game.getCombat().saveLKI(gameCard);
+            combat.removeFromCombat(gameCard);
 
-                if (rem) {
-                    sa.getHostCard().addRemembered(c);
-                }
+            if (rem) {
+                sa.getHostCard().addRemembered(gameCard);
             }
         }
     }

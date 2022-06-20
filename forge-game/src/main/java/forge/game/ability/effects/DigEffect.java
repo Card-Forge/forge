@@ -18,7 +18,6 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
@@ -172,17 +171,14 @@ public class DigEffect extends SpellAbilityEffect {
             }
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
-
         CardZoneTable table = new CardZoneTable();
         GameEntityCounterTable counterTable = new GameEntityCounterTable();
         boolean combatChanged = false;
         CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
-        for (final Player p : tgtPlayers) {
-            if (tgt != null && !p.canBeTargetedBy(sa)) {
+        for (final Player p : getDefinedPlayersOrTargeted(sa)) {
+            if (!p.isInGame()) {
                 continue;
             }
             final CardCollection top = new CardCollection();

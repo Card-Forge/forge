@@ -37,39 +37,45 @@ public class ManifestEffect extends SpellAbilityEffect {
         moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
 
         for (final Player p : getTargetPlayers(sa, "DefinedPlayer")) {
-            if (sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                CardCollection tgtCards;
-                if (sa.hasParam("Choices") || sa.hasParam("ChoiceZone")) {
-                    ZoneType choiceZone = ZoneType.Hand;
-                    if (sa.hasParam("ChoiceZone")) {
-                        choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
-                    }
-                    CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
-                    if (sa.hasParam("Choices")) {
-                        choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, source, sa);
-                    }
-                    if (choices.isEmpty()) {
-                        continue;
-                    }
-
-                    String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseCardToManifest") + " ";
-
-                    tgtCards = new CardCollection(activator.getController().chooseCardsForEffect(choices, sa, title, amount, amount, false, null));
-                } else if ("TopOfLibrary".equals(defined)) {
-                    tgtCards = p.getTopXCardsFromLibrary(amount);
-                } else {
-                    tgtCards = getTargetCards(sa);
+            CardCollection tgtCards;
+            if (sa.hasParam("Choices") || sa.hasParam("ChoiceZone")) {
+                ZoneType choiceZone = ZoneType.Hand;
+                if (sa.hasParam("ChoiceZone")) {
+                    choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+                }
+                CardCollection choices = new CardCollection(game.getCardsIn(choiceZone));
+                if (sa.hasParam("Choices")) {
+                    choices = CardLists.getValidCards(choices, sa.getParam("Choices"), activator, source, sa);
+                }
+                if (choices.isEmpty()) {
+                    continue;
                 }
 
-                if (sa.hasParam("Shuffle")) {
-                    CardLists.shuffle(tgtCards);
-                }
+                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseCardToManifest") + " ";
 
-                for (Card c : tgtCards) {
-                    Card rem = c.manifest(p, sa, moveParams);
-                    if (sa.hasParam("RememberManifested") && rem != null && rem.isManifested()) {
-                        source.addRemembered(rem);
-                    }
+                tgtCards = new CardCollection(activator.getController().chooseCardsForEffect(choices, sa, title, amount, amount, false, null));
+            } else if ("TopOfLibrary".equals(defined)) {
+                tgtCards = p.getTopXCardsFromLibrary(amount);
+            } else {
+                tgtCards = getTargetCards(sa);
+            }
+
+            if (sa.hasParam("Shuffle")) {
+                CardLists.shuffle(tgtCards);
+            }
+
+            for (Card tgtC : tgtCards) {
+                // check if the object is still in game or if it was moved
+                Card gameCard = game.getCardState(tgtC, null);
+                // gameCard is LKI in that case, the card is not in game anymore
+                // or the timestamp did change
+                // this should check Self too
+                if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                    continue;
+                }
+                Card rem = gameCard.manifest(p, sa, moveParams);
+                if (sa.hasParam("RememberManifested") && rem != null && rem.isManifested()) {
+                    source.addRemembered(rem);
                 }
             }
         }

@@ -2756,7 +2756,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
             PaperCard c = carddb.getUniqueByName(f.getOracleName());
             final Card forgeCard = Card.fromPaperCard(c, p);
-            forgeCard.setTimestamp(getGame().getNextTimestamp());
+            forgeCard.setGameTimestamp(getGame().getNextTimestamp());
 
             PaperCard finalC = c;
             getGame().getAction().invoke(new Runnable() {

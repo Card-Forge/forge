@@ -36,9 +36,10 @@ public class LifeLoseEffect extends SpellAbilityEffect {
         final int lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
 
         for (final Player p : getTargetPlayers(sa)) {
-            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                lifeLost += p.loseLife(lifeAmount, false, false);
+            if (!p.isInGame()) {
+                continue;
             }
+            lifeLost += p.loseLife(lifeAmount, false, false);
         }
         sa.setSVar("AFLifeLost", "Number$" + lifeLost);
     }

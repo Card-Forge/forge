@@ -318,7 +318,7 @@ public class AbilityUtils {
                 Card gameState = game.getCardState(cl, null);
                 // cards that use this should only care about if it is still in that zone
                 // TODO if all LKI needs to be returned, need to change CardCollection return from this function
-                if (gameState != null && gameState.equalsWithTimestamp(cl)) {
+                if (gameState != null && gameState.equalsWithGameTimestamp(cl)) {
                     cards.add(gameState);
                 }
             }
@@ -2418,7 +2418,7 @@ public class AbilityUtils {
             for (Card attacker : attackers) {
                 boolean add = true;
                 for (Card different : differentAttackers) {
-                    if (different.equalsWithTimestamp(attacker)) {
+                    if (different.equalsWithGameTimestamp(attacker)) {
                         add = false;
                         break;
                     }

@@ -43,9 +43,10 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
         final SpellAbility fallback = sa.getAdditionalAbility("FallbackAbility");
         final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("ChoiceAmount", "1"), sa);
 
-        final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
-
-        for (final Player p : tgtPlayers) {
+        for (final Player p : getDefinedPlayersOrTargeted(sa)) {
+            if (!p.isInGame()) {
+                continue;
+            }
             // determine if any of the choices are not valid
             List<SpellAbility> saToRemove = Lists.newArrayList();
             
@@ -61,10 +62,6 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 }
             }
             abilities.removeAll(saToRemove);
-
-            if (sa.usesTargeting() && sa.getTargets().contains(p) && !p.canBeTargetedBy(sa)) {
-                continue;
-            }
 
             List<SpellAbility> chosenSAs = Lists.newArrayList();
             String prompt = sa.getParamOrDefault("ChoicePrompt", "Choose");

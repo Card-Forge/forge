@@ -51,7 +51,7 @@ public class PumpEffect extends SpellAbilityEffect {
 
         // do Game Check there in case of LKI
         final Card gameCard = game.getCardState(applyTo, null);
-        if (gameCard == null || !applyTo.equalsWithTimestamp(gameCard)) {
+        if (gameCard == null || !applyTo.equalsWithGameTimestamp(gameCard)) {
             return;
         }
         final List<String> kws = Lists.newArrayList();
@@ -287,11 +287,9 @@ public class PumpEffect extends SpellAbilityEffect {
             keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, sa.getHostCard(), sa);
         }
 
-        List<GameEntity> tgts = Lists.newArrayList();
         List<Card> tgtCards = getCardsfromTargets(sa);
         List<Player> tgtPlayers = getTargetPlayers(sa);
-        tgts.addAll(tgtCards);
-        tgts.addAll(tgtPlayers);
+
         final CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
         if (sa.hasParam("DefinedKW")) {
@@ -405,11 +403,6 @@ public class PumpEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            // if pump is a target, make sure we can still target now
-            if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {
-                continue;
-            }
-
             // substitute specific tgtC mana cost for keyword placeholder CardManaCost
             List<String> affectedKeywords = Lists.newArrayList(keywords);
 
@@ -458,7 +451,7 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         for (Player p : tgtPlayers) {
-            if (!p.canBeTargetedBy(sa)) {
+            if (!p.isInGame()) {
                 continue;
             }
 
