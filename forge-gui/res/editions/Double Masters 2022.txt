@@ -7,18 +7,225 @@ ScryfallCode=2X2
 
 [cards]
 2 M Kozilek, Butcher of Truth @Michael Komarck
+3 M Ulamog, the Infinite Gyre @Aleksi Briclot
+5 C Ainok Bond-Kin @Chris Rahn
+8 M Divine Visitation @Victor Adame Minguez
+9 C Doomed Traveler @Lars Grant-West
+12 C Gods Willing @Mark Winters
+20 C Momentary Blink @Evan Shipard
+22 U Myth Realized @Jason Rainville
+23 U Path to Exile @Raf Sarmento
+28 C Seeker of the Way @Craig J Spearing
+30 C Settle Beyond Reality @Anthony Palumbo
+32 R Teferi's Protection @Chase Stone
 34 R Weathered Wayfarer @Greg Hildebrandt & Tim Hildebrandt
+35 C Wingsteed Rider @Cynthia Sheppard
+36 C Advanced Stitchwing @Johann Bodin
+37 C Aethersnipe @Zoltan Boros & Gabor Szikszai
+43 M Consecrated Sphinx @Mark Zug
+44 C Deep Analysis @Jesper Ejsing
+47 U Domestication @Jesper Ejsing
+51 R Gifts Ungiven @Chris Rallis
+52 C Ingenious Skaab @Jesper Ejsing
+55 R Kederekt Leviathan @Mark Hyzer
+60 U Mulldrifter @Eric Fortune
+65 C Thought Scour @Julie Dillon
+66 R Venser, Shaper Savant @Aleksi Briclot
+67 U Wash Out @Steven Belledin
+68 C Balustrade Spy @Jaime Jones
+69 M Bitterblossom @Rebecca Guay
+73 R Damnation @Kev Walker
+75 C Eyeblight's Ending @Ron Spears
+76 U Go for the Throat @David Rapoza
+79 M Imperial Seal @Milivoj Ćeran
+80 U Inquisition of Kozilek @Tomasz Jedruszek
 81 M Liliana, the Last Hope @Jaime Jones
+85 R Oona's Prowler @Wayne Reynolds
+87 C Seekers' Squire @Anthony Palumbo
+96 C Unearth @Jehan Choo
+97 C Vampire Sovereign @Volkan Baǵa
+102 R Anger of the Gods @Yigit Koroglu
+103 R Backdraft Hellkite @Rudy Siswanto
+106 C Dark-Dweller Oracle @Deruchenko Alexander
+107 M Dockside Extortionist @Lie Setiawan
+108 U Dreamshaper Shaman @Steve Prescott
+112 C Hero of the Games @Josh Hass
+117 U Lightning Bolt @Christopher Moeller
+120 C Pirate's Pillage @Wayne Reynolds
+122 C Rift Bolt @Daniel Ljunggren
+123 M Seasoned Pyromancer @Cynthia Sheppard
+126 C Storm Fleet Pyromancer @Kieran Yanner
+132 M Allosaurus Shepherd @Randy Vargas
+134 C Annoyed Altisaur @Lars Grant-West
+138 R Bloom Tender @Chippy
+139 C Brindle Shoat @Steven Belledin
+140 U Centaur Battlemaster @Kev Walker
+144 C Elvish Rejuvenator @Winona Nelson
+146 C Experiment One @Jack Wang
+148 C Gnarlback Rhino @YW Tang
+151 R Hardened Scales @Mark Winters
+155 C Rampant Growth @Scott M. Fischer
+158 U Spider Spawning @Daniel Ljunggren
+159 R Splinterfright @Eric Deschamps
+161 C Thrive @Daren Bader
+163 C Tuskguard Captain @Aaron Miller
+164 C Webweaver Changeling @Nicholas Gregory
+165 R Abzan Ascendancy @Mark Winters
+169 M Aminatou, the Fateshifter @Seb McKinnon
+170 R Anguished Unmaking @Wesley Burt
+174 R Ashenmoor Liege @Mark Zug
+177 R Atla Palani, Nest Tender @Ekaterina Burmak
+185 C Bloodwater Entity @Viktor Titov
+186 R Boartusk Liege @Jesper Ejsing
+187 U Bounty of the Luxa @Jonas De Ro
 188 R Bring to Light @Jonas De Ro
+191 C Cartel Aristocrat @James Ryman
+193 C Chronicler of Heroes @John Stanko
+198 R Dack's Duplicate @Karl Kopinski
+202 M Dragonlord Dromoka @Eric Deschamps
+204 C Dreg Mangler @Svetlin Velinov
+206 R Dromoka's Command @James Ryman
+211 M Ezuri, Claw of Progress @James Ryman
+212 R Fiery Justice @Mathias Kollros
+214 C Fireblade Artist @Steve Argyle
+216 M Ghave, Guru of Spores @James Paick
+217 R Glen Elendra Liege @Kev Walker
+218 R Glimpse the Unthinkable @Brandon Kitkouski
+219 U Gloryscale Viashino @Volkan Baǵa
+221 R Grand Arbiter Augustin IV @Zoltan Boros & Gabor Szikszai
+227 R Hostage Taker @Wayne Reynolds
+236 R Kaervek the Merciless @rk post
+240 R Lavalanche @Steve Argyle
+244 M Lord of Extinction @Izzy
+247 R Magister Sphinx @Steven Belledin
+250 R Master Biomancer @Willian Murai
+254 R The Mimeoplasm @Svetlin Velinov
+257 M Mizzix of the Izmagnus @Cliff Childs
+258 M Muldrotha, the Gravetide @Jason Rainville
+259 R Murkfiend Liege @Carl Critchlow
+260 M Nicol Bolas, God-Pharaoh @Raymond Swanland
+262 R Phyrexian Tyranny @Kev Walker
+278 U Sprouting Thrinax @Jarreau Wimberly
+280 R Supreme Verdict @Sam Burley
+282 R Teneb, the Harvester @Zoltan Boros & Gabor Szikszai
+285 R Thistledown Liege @Adam Rex
 296 M Wrenn and Six @Chase Stone
+297 R Zur the Enchanter @Josu Hernaiz
+305 U Dragon Arch @Dana Knutson
+308 M Mana Vault @Christine Choi
+311 R Phyrexian Altar @Yigit Koroglu
+312 R Pithing Needle @Anthony Palumbo
+314 R Sensei's Divining Top @Michael Sutfin
+315 R Thrumming Stone @Rob Alexander
+317 R Vedalken Orrery @John Avon
+318 U Azorius Chancery @John Avon
+319 U Boros Garrison @John Avon
+320 M Cavern of Souls @Richard Wright
+322 U Dimir Aqueduct @John Avon
+324 U Golgari Rot Farm @John Avon
+325 U Gruul Turf @John Avon
+326 U Izzet Boilerworks @John Avon
+327 U Orzhov Basilica @John Avon
+329 U Rakdos Carnarium @John Avon
+330 U Selesnya Sanctuary @John Avon
+331 U Simic Growth Chamber @John Avon
+332 C Cryptic Spires @Sam Burley
 333 M Liliana, the Last Hope @Scott M. Fischer
 334 M Wrenn and Six @Donato Giancola
 336 M Kozilek, Butcher of Truth @Ian Miller
+337 M Ulamog, the Infinite Gyre @Thomas M. Baxa
+341 C Seeker of the Way @Douglas Shuler
+343 R Teferi's Protection @Greg Staples
+349 U Mulldrifter @Jeff Miracola
+351 C Thought Scour @Jeff Miracola
+353 R Damnation
+354 M Imperial Seal @Mark Tedin
+355 U Inquisition of Kozilek @rk post
+357 C Unearth
+358 R Anger of the Gods @Dermot Power
+359 R Chaos Warp @Phil Foglio
+360 M Dockside Extortionist @Douglas Shuler
+361 U Lightning Bolt @Chuck Lukacs
+363 M Seasoned Pyromancer
+365 M Allosaurus Shepherd @Douglas Shuler
+366 R Bloom Tender @Scott M. Fischer
+369 R Hardened Scales @Jim Nelson
+371 C Rampant Growth @Jeff Miracola
+376 M Dragonlord Dromoka @Richard Kane Ferguson
+378 R Glimpse the Unthinkable @Drew Tucker
+379 R Grand Arbiter Augustin IV @Greg Hildebrandt
+383 R The Mimeoplasm @Mark Tedin
+384 M Muldrotha, the Gravetide @Eric Velhagen
+388 R Supreme Verdict @Ron Spears
+393 M Crucible of Worlds @Mark Zug
+394 M Mana Vault @Steve Prescott
+396 R Phyrexian Altar @Pete Venters
+398 R Sensei's Divining Top @Greg Staples
+399 R Vedalken Orrery @Scott M. Fischer
+400 U Azorius Chancery @Carl Critchlow
+401 U Boros Garrison @Darrell Riche
+402 M Cavern of Souls @Drew Tucker
+404 U Dimir Aqueduct @Mark Poole
+406 U Golgari Rot Farm @Donato Giancola
+407 U Gruul Turf @Ron Spencer
+408 U Izzet Boilerworks @Keith Garletts
+409 U Orzhov Basilica
+410 U Rakdos Carnarium @Thomas M. Baxa
+411 U Selesnya Sanctuary @Ron Spears
+412 U Simic Growth Chamber
 414 M Kozilek, Butcher of Truth @Michael Komarck
+415 M Ulamog, the Infinite Gyre @Aleksi Briclot
+416 M Divine Visitation @Victor Adame Minguez
+424 R Teferi's Protection @Chase Stone
 425 R Weathered Wayfarer @Greg Hildebrandt & Tim Hildebrandt
+427 M Consecrated Sphinx @Mark Zug
+430 R Gifts Ungiven @Chris Rallis
+431 R Kederekt Leviathan @Mark Hyzer
+435 R Venser, Shaper Savant @Aleksi Briclot
+439 M Imperial Seal @Milivoj Ćeran
 440 M Liliana, the Last Hope @Jaime Jones
+448 R Anger of the Gods @Yigit Koroglu
+449 R Backdraft Hellkite @Rudy Siswanto
+452 M Dockside Extortionist @Lie Setiawan
+454 M Seasoned Pyromancer @Cynthia Sheppard
+457 M Allosaurus Shepherd @Randy Vargas
+458 R Bloom Tender @Chippy
+461 R Green Sun's Zenith @David Rapoza
+462 R Hardened Scales @Mark Winters
+468 M Aminatou, the Fateshifter @Seb McKinnon
+475 R Atarka's Command @Chris Rahn
+476 R Atla Palani, Nest Tender @Ekaterina Burmak
 480 R Bring to Light @Jonas De Ro
+483 R Dack's Duplicate @Karl Kopinski
+487 M Dragonlord Dromoka @Eric Deschamps
+490 R Dromoka's Command @James Ryman
+494 M Ezuri, Claw of Progress @James Ryman
+495 R Fiery Justice @Mathias Kollros
+498 M Ghave, Guru of Spores @James Paick
+499 R Glen Elendra Liege @Kev Walker
+500 R Glimpse the Unthinkable @Brandon Kitkouski
+501 R Grand Arbiter Augustin IV @Zoltan Boros & Gabor Szikszai
+505 R Hostage Taker @Wayne Reynolds
+512 R Kaervek the Merciless @rk post
+516 R Lavalanche @Steve Argyle
+519 R Magister Sphinx @Steven Belledin
+521 R Master Biomancer @Willian Murai
+525 R The Mimeoplasm @Svetlin Velinov
+528 M Muldrotha, the Gravetide @Jason Rainville
+529 R Murkfiend Liege @Carl Critchlow
+531 R Phyrexian Tyranny @Kev Walker
+541 R Supreme Verdict @Sam Burley
+543 R Teneb, the Harvester @Zoltan Boros & Gabor Szikszai
+544 R Thistledown Liege @Adam Rex
 553 M Wrenn and Six @Chase Stone
-577 M Ulamog, the Infinite Gyre @Thomas M. Baxa
+554 R Zur the Enchanter @Josu Hernaiz
+560 M Mana Vault @Christine Choi
+563 R Phyrexian Altar @Yigit Koroglu
+566 R Sensei's Divining Top @Michael Sutfin
+568 R Vedalken Orrery @John Avon
+569 M Cavern of Souls @Richard Wright
+573 M Liliana, the Last Hope @Scott M. Fischer
+574 M Wrenn and Six @Donato Giancola
+576 M Kozilek, Butcher of Truth @Ian Miller
 578 R Weathered Wayfarer @Dermot Power
 579 R Bring to Light @Mark Poole
