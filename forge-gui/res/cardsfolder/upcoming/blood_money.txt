@@ -1,0 +1,9 @@
+Name:Blood Money
+ManaCost:5 B B
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBTreasure | SpellDescription$ Destroy all creatures.
+SVar:DBTreasure:DB$ Token | TokenAmount$ X | TokenTapped$ True | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBCleanupSpellDescription$ For each nontoken creature destroyed this way, create a tapped Treasure token.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Card.nonToken
+DeckHas:Ability$Token
+Oracle:Destroy all creatures. For each nontoken creature destroyed this way, create a tapped Treasure token.

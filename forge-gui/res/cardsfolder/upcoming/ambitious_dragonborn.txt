@@ -1,0 +1,8 @@
+Name:Ambitious Dragonborn
+ManaCost:3 G
+Types:Creature Dragon Barbarian
+PT:0/0
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with X +1/+1 counters on it, where X is the greatest power among creatures you control and creature cards in your graveyard.
+SVar:X:Count$ValidGraveyard,Battlefield Creature.YouCtrl$GreatestPower
+DeckHas:Ability$Graveyard
+Oracle:Ambitious Dragonborn enters the battlefield with X +1/+1 counters on it, where X is the greatest power among creatures you control and creature cards in your graveyard.
