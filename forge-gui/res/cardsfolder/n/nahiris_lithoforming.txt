@@ -6,8 +6,8 @@ SVar:DBDraw:DB$ Draw | NumCards$ Y | SubAbility$ DBStoreSVar | StackDescription$
 SVar:DBStoreSVar:DB$ StoreSVar | SVar$ XLands | Type$ CountSVar | Expression$ X | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PlayMoreLand | ReplacementEffects$ LandETB | SubAbility$ DBCleanup
 SVar:PlayMoreLand:Mode$ Continuous | Affected$ You | AdjustLandPlays$ XLands | EffectZone$ Command | Description$ You may play X additional lands this turn.
-SVar:LandETB:Event$ Moved | ValidCard$ Land.YouCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | Description$ Lands you control enter the battlefield tapped this turn.
-SVar:ETBTapped:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Tapped$ True | Defined$ ReplacedCard
+SVar:LandETB:Event$ Moved | ValidCard$ Land.YouCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | Description$ Lands you control enter the battlefield tapped this turn.
+SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$xPaid
 SVar:Y:Count$RememberedSize

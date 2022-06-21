@@ -6,9 +6,8 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBDelayedTrigger
 SVar:DBDelayedTrigger:DB$ DelayedTrigger | Execute$ TrigAddAPI | Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerDescription$ When you cast your next creature spell, that creature enters the battlefield with an additional +1/+1 counter, trample counter, and vigilance counter on it.
 SVar:TrigAddAPI:DB$ Effect | RememberObjects$ TriggeredCard | ForgetOnMoved$ Stack | ReplacementEffects$ ReplaceEnter
-SVar:ReplaceEnter:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ AddExtraCounter | Description$ That creature enters the battlefield with an additional +1/+1 counter, trample counter, and vigilance counter on it.
-SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterTypes$ P1P1,Trample,Vigilance | CounterNum$ 1  | SubAbility$ ToBattlefield
-SVar:ToBattlefield:DB$ InternalEtbReplacement | SubAbility$ DBExile
+SVar:ReplaceEnter:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ AddExtraCounter | ReplacementResult$ Updated | Description$ That creature enters the battlefield with an additional +1/+1 counter, trample counter, and vigilance counter on it.
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterTypes$ P1P1,Trample,Vigilance | CounterNum$ 1  | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 DeckHas:Ability$LifeGain|Counters
 Oracle:When Tenacious Pup enters the battlefield, you gain 1 life. When you cast your next creature spell, that creature enters the battlefield with an additional +1/+1 counter, trample counter, and vigilance counter on it.

@@ -2,7 +2,9 @@ package forge.screens.constructed;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import forge.player.GamePlayerUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -165,6 +167,9 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 if (cbVariants.getSelectedIndex() <= 0) {
                     lobby.clearVariants();
                     updateLayoutForVariants();
+                    Set<GameType> gameTypes = new HashSet<>();
+                    FModel.getPreferences().setGameType(FPref.UI_APPILIED_VARIANTS, gameTypes);
+                    FModel.getPreferences().save();
                 }
                 else if (cbVariants.getSelectedIndex() == cbVariants.getItemCount() - 1) {
                     Forge.openScreen(new MultiVariantSelect());
@@ -174,6 +179,12 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                     lobby.clearVariants();
                     lobby.applyVariant((GameType)cbVariants.getSelectedItem());
                     updateLayoutForVariants();
+                    Set<GameType> gameTypes = new HashSet<>();
+                    for (GameType variant: lobby.getAppliedVariants()) {
+                        gameTypes.add(variant);
+                    }
+                    FModel.getPreferences().setGameType(FPref.UI_APPILIED_VARIANTS, gameTypes);
+                    FModel.getPreferences().save();
                 }
             }
         });
@@ -206,6 +217,15 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                     @Override
                     public void run() {
                         btnStart.setEnabled(lobby.hasControl());
+
+                        Set<GameType> gameTypes = FModel.getPreferences().getGameType(FPref.UI_APPILIED_VARIANTS);
+                        if (!gameTypes.isEmpty()) {
+                            for (GameType gameType : gameTypes) {
+                                lobby.applyVariant(gameType);
+                            }
+                            updateVariantSelection();
+                            updateLayoutForVariants();
+                        }
                     }
                 });
             }
@@ -493,6 +513,12 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 }
                 updateVariantSelection();
                 updateLayoutForVariants();
+                Set<GameType> gameTypes = new HashSet<>();
+                for (GameType variant: lobby.getAppliedVariants()) {
+                    gameTypes.add(variant);
+                }
+                FModel.getPreferences().setGameType(FPref.UI_APPILIED_VARIANTS, gameTypes);
+                FModel.getPreferences().save();
             }
         }
 

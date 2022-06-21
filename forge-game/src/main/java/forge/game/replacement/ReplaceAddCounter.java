@@ -8,9 +8,11 @@ import com.google.common.base.Optional;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
 
 /**
  * TODO: Write javadoc for this type.
@@ -56,6 +58,23 @@ public class ReplaceAddCounter extends ReplacementEffect {
 
         if (!hasAnyInCounterMap(runParams)) {
             return false;
+        }
+
+        if (runParams.containsKey(AbilityKey.ETB) && (Boolean)runParams.get(AbilityKey.ETB)) {
+            // if Card does affect something other than itself
+            if (!hasParam("ValidCard") || !getParam("ValidCard").equals("Card.Self")) {
+                // and it self is entering, skip
+                if (getHostCard().equals(runParams.get(AbilityKey.Affected))) {
+                    return false;
+                }
+                // and it wasn't already on the field, skip
+                if (getActiveZone().contains(ZoneType.Battlefield) && runParams.containsKey(AbilityKey.LastStateBattlefield)) {
+                    CardCollectionView lastBattlefield = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
+                    if (!lastBattlefield.contains(getHostCard())) {
+                        return false;
+                    }
+                }
+            }
         }
 
         return true;

@@ -29,7 +29,7 @@ ScryfallCode=YSNC
 21 R Cabaretti Revels @Gaboleps
 22 M Diviner of Fates @Randy Vargas
 23 M Effluence Devourer @Gaboleps
-24 R Obscure Polymorphist @Darren Tan
+24 R Obscura Polymorphist @Darren Tan
 25 R Racketeer Boss @Igor Grechanyi
 26 R Riveteers Provocateur @Nestor Ossandon Leal
 27 R Rope Line Attendant @Fariba Khamseh
