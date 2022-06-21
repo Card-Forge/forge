@@ -6,7 +6,7 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescriptio
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChoose | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or dies, ABILITY
 SVar:TrigChoose:DB$ Charm | MinCharmNum$ 1 | CharmNum$ MaxUniqueOpponents | Choices$ TrigDrawDiscard,TrigSacrifice,TrigPump | AdditionalDescription$ choose one or more. Each mode must target a different player.
 SVar:TrigDrawDiscard:DB$ Draw | ValidTgts$ Opponent | TargetUnique$ True | NumCards$ 3 | SubAbility$ Discard3 | SpellDescription$ Target opponent draws three cards, then discards three cards at random.
-SVar:Discard3:DB$ Discard | Defined$ Targeted | Mode$ Random | NumCards$ 3
+SVar:Discard3:DB$ Discard | Defined$ ParentTarget | Mode$ Random | NumCards$ 3
 SVar:TrigSacrifice:DB$ Sacrifice | ValidTgts$ Opponent | TargetUnique$ True | SacValid$ Artifact.nonToken | SpellDescription$ Target opponent sacrifices a nontoken artifact. | SacMessage$ nontoken artifact
 SVar:TrigPump:DB$ Pump | ValidTgts$ Opponent | TargetUnique$ True | Remember$ True | SubAbility$ DBDmg
 SVar:DBDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target opponent equal to the number of cards in their hand. | SubAbility$ DBCleanup
