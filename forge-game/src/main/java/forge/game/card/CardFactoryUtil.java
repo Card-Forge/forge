@@ -1680,7 +1680,7 @@ public class CardFactoryUtil {
 
             final String abString = "DB$ PeekAndReveal | PeekAmount$ " + num + " | RememberRevealed$ True";
 
-            final String dbCast = "DB$ Play | Valid$ Card.IsRemembered+sameName | " +
+            final String dbCast = "DB$ Play | Valid$ Card.IsRemembered+sameName | ValidSA$ Spell | " +
                     "ValidZone$ Library | WithoutManaCost$ True | Optional$ True | " +
                     "Amount$ All";
 
@@ -1893,7 +1893,7 @@ public class CardFactoryUtil {
             String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | " +
                     "TriggerDescription$ " + sb.toString();
 
-            String effect = "DB$ Sacrifice | SacValid$ Self | UnlessPayer$ You | UnlessCost$ " + k[1];
+            String effect = "DB$ SacrificeAll | Defined$ Self | Controller$ You | UnlessPayer$ You | UnlessCost$ " + k[1];
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
@@ -2323,12 +2323,11 @@ public class CardFactoryUtil {
             + " | Origin$ Stack | Destination$ Graveyard | Fizzle$ False "
             + " | Description$ Rebound (" + inst.getReminderText() + ")";
 
-            String abExile = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile";
+            String abExile = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile | RememberChanged$ True";
             String delTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You " +
-            " | OptionalDecider$ You | RememberObjects$ ReplacedCard | TriggerDescription$"
+            " | OptionalDecider$ You | RememberObjects$ Remembered | TriggerDescription$"
             + " At the beginning of your next upkeep, you may cast " + card.toString() + " without paying its mana cost.";
-            // TODO add check for still in exile
-            String abPlay = "DB$ Play | Defined$ DelayTriggerRemembered | WithoutManaCost$ True | Optional$ True";
+            String abPlay = "DB$ Play | Defined$ DelayTriggerRememberedLKI | WithoutManaCost$ True | Optional$ True";
 
             SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
 
