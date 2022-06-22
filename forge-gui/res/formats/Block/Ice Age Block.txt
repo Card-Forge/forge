@@ -1,6 +1,6 @@
 [format]
 Name:Ice Age Block
-Type:Historic
+Type:Archived
 Subtype:Block
 Order:135
 Sets:CSP, ALL, ICE

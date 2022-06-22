@@ -1,0 +1,6 @@
+[format]
+Name:Standard (BNG)
+Type:Archived
+Subtype:Standard
+Effective:2014-02-07
+Sets:RTR, GTC, DGM, M14, THS, BNG

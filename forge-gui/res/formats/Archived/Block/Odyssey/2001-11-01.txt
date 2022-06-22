@@ -1,0 +1,6 @@
+[format]
+Name:Block: Odyssey (ODY)
+Type:Archived
+Subtype:Block
+Effective:2001-11-01
+Sets:ODY

@@ -1,0 +1,7 @@
+[format]
+Name:Standard (VOW)
+Type:Archived
+Subtype:Standard
+Effective:2021-11-19
+Sets:ZNR, KHM, STX, AFR, MID, VOW
+Banned:Omnath, Locus of Creation

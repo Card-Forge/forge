@@ -1,6 +1,0 @@
-[format]
-Name:Standard (MOR)
-Type:Historic
-Subtype:Standard
-Effective:2008-02-01
-Sets:CSP, TSP, TSB, PLC, FUT, 10E, LRW, MOR

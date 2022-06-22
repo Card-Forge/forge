@@ -1,7 +1,0 @@
-[format]
-Name:China Standard (2019-08-30)
-Type:Historic
-Subtype:Standard
-Effective:2019-08-30
-Retired:2019-10-03
-Sets:XLN, RIX, DOM, GS1, M19, GRN, G18, RNA, WAR, M20

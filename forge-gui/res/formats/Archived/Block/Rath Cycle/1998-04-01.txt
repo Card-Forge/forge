@@ -1,0 +1,6 @@
+[format]
+Name:Block: Tempest;Stronghold (TMP)
+Type:Archived
+Subtype:Block
+Effective:1998-04-01
+Sets:TMP, STH

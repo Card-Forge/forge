@@ -1,0 +1,6 @@
+[format]
+Name:Standard (AVR)
+Type:Archived
+Subtype:Standard
+Effective:2012-05-04
+Sets:SOM, MBS, NPH, M12, ISD, DKA, AVR

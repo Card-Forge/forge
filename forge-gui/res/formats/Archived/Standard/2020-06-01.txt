@@ -1,0 +1,7 @@
+[format]
+Name:Standard (2020-06-01)
+Type:Archived
+Subtype:Standard
+Effective:2020-06-01
+Sets:GRN, RNA, WAR, M20, ELD, THB, IKO
+Banned:Agent of Treachery; Field of the Dead; Fires of Invention; Oko, Thief of Crowns; Once Upon a Time; Veil of Summer
