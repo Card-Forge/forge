@@ -1,54 +1,56 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
-import forge.game.ability.AbilityUtils;
+import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardLists;
+import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 public class BondEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
-        // find card that triggered pairing first
-        CardCollectionView trigCards = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
+        Card source = sa.getHostCard();
+        Player p = sa.getActivatingPlayer();
+        Game game = source.getGame();
+        for (Card tgtC : getTargetCards(sa)) {
+            Card gameCard = game.getCardState(tgtC, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !tgtC.equalsWithGameTimestamp(gameCard)) {
+                continue;
+            }
+            if (gameCard.isPaired() || !gameCard.isCreature() || !gameCard.isInPlay() || gameCard.getController() != p) {
+                continue;
+            }
 
-        // Check that this card hasn't already become paired by an earlier trigger
-        if (trigCards.getFirst().isPaired() || !trigCards.getFirst().isInPlay()) {
-            return;
+            // find list of valid cards to pair with
+            CardCollectionView cards = CardLists.getValidCards(p.getCreaturesInPlay(), sa.getParam("ValidCards"), p, source, sa);
+            if (cards.isEmpty()) {
+                continue;
+            }
+
+            Card partner = p.getController().chooseSingleEntityForEffect(cards, sa, Localizer.getInstance().getMessage("lblSelectACardPair"), true, null);
+
+            if (partner != null) {
+                // pair choices together
+                gameCard.setPairedWith(partner);
+                partner.setPairedWith(gameCard);
+            }
         }
-
-        // find list of valid cards to pair with
-        CardCollectionView cards = sa.getActivatingPlayer().getGame().getCardsIn(ZoneType.Battlefield);
-        cards = AbilityUtils.filterListByType(cards, sa.getParam("ValidCards"), sa);
-        if (cards.isEmpty()) {
-            return;
-        }
-
-        Card partner = cards.getFirst();
-        // skip choice if only one card on list
-        if (cards.size() > 1) {
-            partner = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(cards, sa, Localizer.getInstance().getMessage("lblSelectACardPair"), null);
-        }
-
-        // pair choices together
-        trigCards.getFirst().setPairedWith(partner);
-        partner.setPairedWith(trigCards.getFirst());
     }
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
-        List<Card> tgts = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("Defined"), sa);
-
         final StringBuilder sb = new StringBuilder();
 
-        for (final Card c : tgts) {
-            sb.append(c).append(" ");
-        }
-        sb.append("pairs with another unpaired creature you control.");
+        sb.append(Lang.joinHomogenous(getTargetCards(sa)));
+
+        sb.append(" pairs with another unpaired creature you control.");
         return sb.toString();
     } // end bondStackDescription()
 

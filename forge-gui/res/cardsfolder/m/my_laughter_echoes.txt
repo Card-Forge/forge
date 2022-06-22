@@ -3,7 +3,6 @@ ManaCost:no cost
 Types:Ongoing Scheme
 T:Mode$ SetInMotion | ValidCards$ Card.Other | SchemeType$ NonOngoing | Execute$ Abandon | TriggerZones$ Command | TriggerDescription$ Whenever you set a non-ongoing scheme in motion, you may abandon this scheme. If you do, set that scheme in motion again.
 SVar:Abandon:DB$ Abandon | Optional$ True | RememberAbandoned$ True | SubAbility$ DBSetInMotionAgain
-SVar:DBSetInMotionAgain:DB$ SetInMotion | Again$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBSetInMotionAgain:DB$ SetInMotion | Again$ True | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount
 Oracle:(An ongoing scheme remains face up until it's abandoned.)\nWhenever you set a non-ongoing scheme in motion, you may abandon this scheme. If you do, set that scheme in motion again.
