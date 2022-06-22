@@ -203,7 +203,7 @@ public class DigEffect extends SpellAbilityEffect {
                 else if (sa.hasParam("RevealOptional")) {
                     String question = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblReveal") + ":", TextUtil.addSuffix(Lang.joinHomogenous(top),"?"));
 
-                    hasRevealed = p.getController().confirmAction(sa, null, question);
+                    hasRevealed = p.getController().confirmAction(sa, null, question, null);
                     if (hasRevealed) {
                         game.getAction().reveal(top, p);
                     }
@@ -276,7 +276,7 @@ public class DigEffect extends SpellAbilityEffect {
                     // Optional abilities that use a dialog box to prompt the user to skip the ability (e.g. Explorer's Scope, Quest for Ula's Temple)
                     if (optional && mayBeSkipped && !valid.isEmpty()) {
                         String prompt = !optionalAbilityPrompt.isEmpty() ? optionalAbilityPrompt : Localizer.getInstance().getMessage("lblWouldYouLikeProceedWithOptionalAbility") + " " + host + "?\n\n(" + sa.getDescription() + ")";
-                        if (!p.getController().confirmAction(sa, null, TextUtil.fastReplace(prompt, "CARDNAME", CardTranslation.getTranslatedName(host.getName())))) {
+                        if (!p.getController().confirmAction(sa, null, TextUtil.fastReplace(prompt, "CARDNAME", CardTranslation.getTranslatedName(host.getName())), null)) {
                             return;
                         }
                     }

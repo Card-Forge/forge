@@ -1,5 +1,7 @@
 package forge.ai.ability;
 
+import java.util.Map;
+
 import forge.ai.SpellAbilityAi;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -30,7 +32,7 @@ public class DayTimeAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         return true;
     }
 }

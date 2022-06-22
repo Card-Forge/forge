@@ -48,7 +48,7 @@ public class MillEffect extends SpellAbilityEffect {
                 if (sa.hasParam("Optional")) {
                     final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantPutLibraryCardsTo", destination.getTranslatedName()));
                     // CR 701.13b
-                    if (numCards > p.getZone(ZoneType.Library).size() || !p.getController().confirmAction(sa, null, prompt)) {
+                    if (numCards > p.getZone(ZoneType.Library).size() || !p.getController().confirmAction(sa, null, prompt, null)) {
                         continue;
                     }
                 }

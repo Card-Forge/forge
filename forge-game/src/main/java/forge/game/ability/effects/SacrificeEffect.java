@@ -46,7 +46,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         if (sa.hasParam("Echo")) {
             boolean isPaid;
             if (activator.hasKeyword("You may pay 0 rather than pay the echo cost for permanents you control.")
-                    && activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPayEcho") + " {0}?")) {
+                    && activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPayEcho") + " {0}?", null)) {
                 isPaid = true;
             } else {
                 isPaid = activator.getController().payManaOptional(card, new Cost(sa.getParam("Echo"), true),
@@ -110,7 +110,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         if (valid.equals("Self") && game.getZoneOf(card) != null) {
             if (game.getZoneOf(card).is(ZoneType.Battlefield)) {
                 if (!optional || activator.getController().confirmAction(sa, null,
-                        Localizer.getInstance().getMessage("lblDoYouWantSacrificeThis", card.getName()))) {
+                        Localizer.getInstance().getMessage("lblDoYouWantSacrificeThis", card.getName()), null)) {
                     if (game.getAction().sacrifice(card, sa, true, table, params) != null) {
                         if (remSacrificed) {
                             card.addRemembered(card);
@@ -153,7 +153,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
                     if (sa.hasParam("Random")) {
                         choosenToSacrifice = Aggregates.random(validTargets, Math.min(amount, validTargets.size()), new CardCollection());
-                    } else if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSacrifice"))) {
+                    } else if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSacrifice"), null)) {
                         choosenToSacrifice = CardCollection.EMPTY;
                     } else {
                         boolean isStrict = sa.hasParam("StrictAmount");

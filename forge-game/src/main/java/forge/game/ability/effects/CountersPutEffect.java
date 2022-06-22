@@ -174,7 +174,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         boolean putOnDefined = sa.hasParam("PutOnDefined");
 
         if (sa.hasParam("Optional") && !pc.confirmAction
-                (sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCounter"))) {
+                (sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCounter"), null)) {
             return;
         }
 
@@ -509,7 +509,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             Player chooser = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa,
                                     Localizer.getInstance().getMessage("lblChooseAnOpponent"), params);
 
-                            if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message)) {
+                            if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message, null)) {
                                 gameCard.setTributed(true);
                             } else {
                                 continue;

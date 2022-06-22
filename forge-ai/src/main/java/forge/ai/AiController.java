@@ -1326,7 +1326,7 @@ public class AiController {
         return discardList;
     }
 
-    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         if (mode == PlayerActionConfirmMode.AlternativeDamageAssignment) {
             return true;
         }
@@ -1339,7 +1339,7 @@ public class AiController {
                     mode);
             throw new IllegalArgumentException(exMsg);
         }
-        return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message);
+        return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message, null);
     }
 
     public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, int bid, Player winner) {
