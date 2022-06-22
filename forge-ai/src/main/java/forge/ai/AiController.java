@@ -1339,7 +1339,7 @@ public class AiController {
                     mode);
             throw new IllegalArgumentException(exMsg);
         }
-        return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message, null);
+        return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message, params);
     }
 
     public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, int bid, Player winner) {
