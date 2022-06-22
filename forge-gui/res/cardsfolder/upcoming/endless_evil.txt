@@ -1,0 +1,12 @@
+Name:Endless Evil
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant creature you control
+A:SP$ Attach | ValidTgts$ Creature.YouCtrl | AILogic$ HighestEvaluation
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, create a token that's a copy of enchanted creature, except it's a 1/1.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Enchanted | SetPower$ 1 | SetToughness$
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ When enchanted creature dies, if that creature was a Horror, return CARDNAME to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ CorrectedSelf | ConditionDefined$ TriggeredCardLKICopy | ConditionPresent$ Creature.Horror | ConditionCompare$ EQ1
+DeckHints:Type$Horror
+DeckHas:Ability$Token
+Oracle:Enchant creature you control\nAt the beginning of your upkeep, create a token that's a copy of enchanted creature, except it's a 1/1.\nWhen enchanted creature dies, if that creature was a Horror, return Endless Evil to its owner's hand.

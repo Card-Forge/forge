@@ -1,0 +1,12 @@
+Name:Elturel Survivors
+ManaCost:3 R
+Types:Creature Tiefling Peasant
+PT:0/4
+K:Trample
+K:Myriad
+S:Mode$ Continuous | Affected$ Creature.Self+attacking | AddPower$ X | Description$ As long as CARDNAME is attacking, it gets +X/+0, where X is the number of lands defending player controls.
+SVar:X:Count$Valid Land.ControlledBy TriggeredDefendingPlayer
+AI:RemoveDeck:All
+SVar:BuffedBy:Land.ControlledBy TriggeredDefendingPlayer
+SVar:HasAttackEffect:TRUE
+Oracle:Trample, myriad\nAs long as Elturel Survivors is attacking, it gets +X/+0, where X is the number of lands defending player controls.

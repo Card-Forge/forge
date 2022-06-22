@@ -1,0 +1,12 @@
+Name:Earthquake Dragon
+ManaCost:14 G
+Types:Creature Elemental Dragon
+PT:10/10
+K:Flying
+K:Trample
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {X} less to cast, where X is the total mana value of Dragons you control.
+A:AB$ ChangeZone | Cost$ 2 G Sac<1/Land> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
+SVar:DiscardMe:1
+SVar:PlayMain1:TRUE
+SVar:X:Count$Valid Creature.Dragon+YouCtrl$SumCMC
+Oracle:This spell costs {X} less to cast, where X is the total mana value of Dragons you control.\nFlying, trample\n{2}{G}, Sacrifice a land: Return Earthquake Dragon from your graveyard to your hand.
