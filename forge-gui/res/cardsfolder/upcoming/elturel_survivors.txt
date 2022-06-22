@@ -5,7 +5,7 @@ PT:0/4
 K:Trample
 K:Myriad
 S:Mode$ Continuous | Affected$ Creature.Self+attacking | AddPower$ X | Description$ As long as CARDNAME is attacking, it gets +X/+0, where X is the number of lands defending player controls.
-SVar:X:Count$Valid Land.ControlledBy TriggeredDefendingPlayer
+SVar:X:Count$Valid Land.ControlledBy DefendingPlayer
 AI:RemoveDeck:All
 SVar:BuffedBy:Land.ControlledBy DefendingPlayer
 SVar:HasAttackEffect:TRUE
