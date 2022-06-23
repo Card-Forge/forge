@@ -1,6 +1,0 @@
-[format]
-Name:Standard (NPH)
-Type:Historic
-Subtype:Standard
-Effective:2011-05-13
-Sets:ZEN, WWK, ROE, M11, SOM, MBS, NPH

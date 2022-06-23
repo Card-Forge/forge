@@ -591,7 +591,7 @@ public class GameAction {
             }
         }
 
-        table.replaceCounterEffect(game, null, true);
+        table.replaceCounterEffect(game, null, true, true, params);
 
         // Need to apply any static effects to produce correct triggers
         checkStaticAbilities();
@@ -1576,7 +1576,7 @@ public class GameAction {
             c.getGame().getTracker().flush();
 
             c.setMoveToCommandZone(false);
-            if (c.getOwner().getController().confirmAction(c.getFirstSpellAbility(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.")) {
+            if (c.getOwner().getController().confirmAction(c.getFirstSpellAbility(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.", null)) {
                 moveTo(c.getOwner().getZone(ZoneType.Command), c, null);
                 return true;
             }

@@ -1,0 +1,6 @@
+[format]
+Name:Standard (ODY)
+Type:Archived
+Subtype:Standard
+Effective:2001-11-01
+Sets:INV, PLS, 7ED, APC, ODY

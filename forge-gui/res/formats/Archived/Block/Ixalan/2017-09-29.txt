@@ -1,0 +1,6 @@
+[format]
+Name:Block: Ixalan (XLN)
+Type:Archived
+Subtype:Block
+Effective:2017-09-29
+Sets:XLN

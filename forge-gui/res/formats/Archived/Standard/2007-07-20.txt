@@ -1,0 +1,6 @@
+[format]
+Name:Standard (10E)
+Type:Archived
+Subtype:Standard
+Effective:2007-07-20
+Sets:RAV, GPT, DIS, CSP, TSP, TSB, PLC, FUT, 10E

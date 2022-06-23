@@ -1,6 +1,0 @@
-[format]
-Name:Block: Onslaught (SCG)
-Type:Historic
-Subtype:Block
-Effective:2003-07-01
-Sets:ONS, LGN, SCG

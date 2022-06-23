@@ -302,7 +302,7 @@ ScryfallCode=CLB
 294 M Tasha, the Witch Queen @Martina Fackova
 295 U Thrakkus the Butcher @Nestor Ossandon Leal
 296 R Zevlor, Elturel Exile @David Rapoza
-297 U Arcane Encyclopedia @Victor Adame Minguez
+297 U Arcane Encyclopedia @Victor Harmatiuk
 298 U Arcane Signet @Sam White
 299 U Bag of Holding @Evyn Fong
 300 R Basilisk Collar @Craig J Spearing
@@ -367,6 +367,28 @@ ScryfallCode=CLB
 359 C Sea Gate @Kamila Szutenberg
 360 R Sea of Clouds @Matt Gaser
 361 R Spire Garden @Alexander Forssberg
+451 L Plains @Bruce Brenneise
+452 L Plains @Leanna Crossan
+453 L Plains @Titus Lunter
+454 L Plains @Emmanuel Shiu
+455 L Island @Bruce Brenneise
+456 L Island @Piotr Dura
+457 L Island @James Paick
+458 L Island @Sam White
+459 L Swamp @Piotr Dura
+460 L Swamp @Logan Feliciano
+461 L Swamp @Grady Frederick
+462 L Swamp @Sam White
+463 L Mountain @Matt Gaser
+464 L Mountain @Lucas Graciano
+465 L Mountain @Muhammad Firdaus
+466 L Mountain @Sam White
+467 L Forest @Bruce Brenneise
+468 L Forest @Muhammad Firdaus
+469 L Forest @Lucas Graciano
+470 L Forest @Julian Kok Joon Wen
+
+[borderless]
 362 M Elminster @Tyler Jacobson
 363 M Minsc & Boo, Timeless Heroes @Bram Sels
 364 M Tasha, the Witch Queen @Brom
@@ -380,11 +402,13 @@ ScryfallCode=CLB
 372 M Bramble Sovereign @Raluca Marinescu
 373 M Nautiloid Ship @Piotr Dura
 374 M Vexing Puzzlebox @Zezhou Chen
+
+[showcase]
 375 U Abdel Adrian, Gorion's Ward @Phil Stone
 376 M Ancient Gold Dragon @Erol Otus
-377 U Ellyn Harbreeze, Busybody
+377 U Ellyn Harbreeze, Busybody @Justine Mara Andersen
 378 R Lae'zel, Vlaakith's Champion @Justine Jones
-379 U Lulu, Loyal Hollyphant
+379 U Lulu, Loyal Hollyphant @Mark A. Nelson
 380 U Rasaad yn Bashir @Phil Stone
 381 U Alora, Merry Thief @Jeff Dee
 382 M Ancient Silver Dragon @Pedro Potier
@@ -456,26 +480,6 @@ ScryfallCode=CLB
 448 C Moss Diamond @Phil Stone
 449 C Sky Diamond @Phil Stone
 450 U Stonespeaker Crystal @Mark A. Nelson
-451 L Plains @Bruce Brenneise
-452 L Plains @Leanna Crossan
-453 L Plains @Titus Lunter
-454 L Plains @Emmanuel Shiu
-455 L Island @Bruce Brenneise
-456 L Island @Piotr Dura
-457 L Island @James Paick
-458 L Island @Sam White
-459 L Swamp @Piotr Dura
-460 L Swamp @Logan Feliciano
-461 L Swamp @Grady Frederick
-462 L Swamp @Sam White
-463 L Mountain @Matt Gaser
-464 L Mountain @Lucas Graciano
-465 L Mountain @Muhammad Firdaus
-466 L Mountain @Sam White
-467 L Forest @Bruce Brenneise
-468 L Forest @Muhammad Firdaus
-469 L Forest @Lucas Graciano
-470 L Forest @Julian Kok Joon Wen
 471 U Abdel Adrian, Gorion's Ward @Karl Kopinski
 472 U Ellyn Harbreeze, Busybody @Dan Scott
 473 U Far Traveler @Alix Branwyn
@@ -529,12 +533,12 @@ ScryfallCode=CLB
 521 U Skanos Dragonheart @Daarken
 522 U Wilson, Refined Grizzly @Ilse Gort
 523 R Alaundo the Seer @Aurore Folny
-524 R Astarion, the Decadent
+524 R Astarion, the Decadent @Ben Hill
 525 R Baba Lysaga, Night Witch @Slawomir Maniak
 526 R Bane, Lord of Darkness @Billy Christian
 527 R Bhaal, Lord of Murder @Peter Polach
 528 U Cadira, Caller of the Small @Alexandr Leskinen
-529 U Commander Liara Portyr
+529 U Commander Liara Portyr @David Rapoza
 530 R The Council of Four @Justine Cruz
 531 R Duke Ulder Ravengard @Eric Deschamps
 532 R Dynaheir, Invoker Adept @Caroline Gariba
@@ -558,6 +562,12 @@ ScryfallCode=CLB
 550 U Rilsa Rael, Kingpin @Micah Epstein
 551 U Thrakkus the Butcher @Nestor Ossandon Leal
 552 R Zevlor, Elturel Exile @David Rapoza
+931 M Captain N'ghathrod @Andrey Kuzinskiy
+932 M Faldorn, Dread Wolf Herald @Jason A. Engle
+933 M Firkraag, Cunning Instigator @Andrew Mar
+934 M Nalia de'Arnise @John Stanko
+
+[extended art]
 553 R Archivist of Oghma @Stella Spente
 554 R Ascend from Avernus @Bruce Brenneise
 555 R Horn of Valhalla @John Severin Brassell
@@ -651,6 +661,8 @@ ScryfallCode=CLB
 643 M Nalia de'Arnise @John Stanko
 644 R Multiclass Baldric @Franz Vohwinkel
 645 R Sarevok's Tome @Titus Lunter
+
+[precon product]
 646 M Captain N'ghathrod @Andrey Kuzinskiy
 647 M Faldorn, Dread Wolf Herald @Jason A. Engle
 648 M Firkraag, Cunning Instigator @Andrew Mar
@@ -826,11 +838,11 @@ ScryfallCode=CLB
 818 M Battle Mammoth @Jesper Ejsing
 819 U Beanstalk Giant @Jason A. Engle
 820 U Beast Within @Jesper Ejsing
-821 C Cultivate @Anthony Palumbo
+821 U Cultivate @Anthony Palumbo
 822 R End-Raze Forerunners @Mathias Kollros
 823 C Explore @John Avon
 824 R Ezuri's Predation @Svetlin Velinov
-825 M Hornet Queen @Jonathan Kuo
+825 R Hornet Queen @Jonathan Kuo
 826 C Kodama's Reach @Sam Burley
 827 R Lovestruck Beast @Kev Walker
 828 R Managorger Hydra @Lucas Graciano
@@ -872,7 +884,7 @@ ScryfallCode=CLB
 864 U Lightning Greaves @Jeremy Jarvis
 865 R Maskwood Nexus @Jason A. Engle
 866 U Mindcrank @Chris Rahn
-867 U Orzhov Signet @Martina Pilcerova
+867 C Orzhov Signet @Martina Pilcerova
 868 R Phyrexian Revoker @Kev Walker
 869 R Psychosis Crawler @Stephan Martiniere
 870 U Skullclamp @Daniel Ljunggren
@@ -936,11 +948,11 @@ ScryfallCode=CLB
 928 R Wandering Fumarole @Florian de Gesincourt
 929 R War Room @Milivoj Ćeran
 930 R Windbrisk Heights @Omar Rayyan
-931 M Captain N'ghathrod @Andrey Kuzinskiy
-932 M Faldorn, Dread Wolf Herald @Jason A. Engle
-933 M Firkraag, Cunning Instigator @Andrew Mar
-934 M Nalia de'Arnise @John Stanko
+
+[promo]
 935 R Wand of Wonder @Lindsey Look
+
+[buy a box]
 936 R Elder Brain @Nino Is
 
 [dungeons]

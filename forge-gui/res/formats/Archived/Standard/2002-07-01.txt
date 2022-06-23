@@ -1,0 +1,6 @@
+[format]
+Name:Standard (JUD)
+Type:Archived
+Subtype:Standard
+Effective:2002-07-01
+Sets:INV, PLS, 7ED, APC, ODY, TOR, JUD

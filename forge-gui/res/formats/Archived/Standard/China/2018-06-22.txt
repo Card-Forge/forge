@@ -1,0 +1,7 @@
+[format]
+Name:China Standard (GS1)
+Type:Archived
+Subtype:Standard
+Effective:2018-06-22
+Sets:KLD, AER, AKH, W17, HOU, XLN, RIX, DOM, GS1
+Banned:Aetherworks Marvel; Attune with Aether; Felidar Guardian; Rampaging Ferocidon; Ramunap Ruins; Rogue Refiner; Smuggler's Copter

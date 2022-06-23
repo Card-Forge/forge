@@ -6,8 +6,7 @@ K:Flying
 K:Trample
 K:Haste
 R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If CARDNAME would die, instead exile it with three egg counters on it.
-SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBAddCounter | Defined$ ReplacedCard
-SVar:DBAddCounter:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ EGG | CounterNum$ 3
+SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard | WithCountersType$ EGG | WithCountersAmount$ 3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Exile | IsPresent$ Card.Self+counters_GE1_EGG | PresentZone$ Exile | Execute$ DBRemoveCounter | TriggerDescription$ At the beginning of your upkeep, if CARDNAME is exiled with an egg counter on it, remove an egg counter from it. Then if CARDNAME has no egg counters on it, return it to the battlefield.
 SVar:DBRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ EGG | CounterNum$ 1 | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Self | Origin$ Exile | Destination$ Battlefield | ConditionDefined$ Self | ConditionPresent$ Card.counters_EQ0_EGG

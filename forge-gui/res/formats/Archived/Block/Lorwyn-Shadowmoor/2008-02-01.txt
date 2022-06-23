@@ -1,0 +1,6 @@
+[format]
+Name:Block: Lorwyn (MOR)
+Type:Archived
+Subtype:Block
+Effective:2008-02-01
+Sets:LRW, MOR

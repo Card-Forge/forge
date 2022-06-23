@@ -24,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class PumpAi extends PumpAiBase {
 
@@ -781,7 +782,7 @@ public class PumpAi extends PumpAiBase {
     }
 
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         //TODO Add logic here if necessary but I think the AI won't cast
         //the spell in the first place if it would curse its own creature
         //and the pump isn't mandatory

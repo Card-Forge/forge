@@ -1,0 +1,7 @@
+[format]
+Name:Standard (NEO)
+Type:Archived
+Subtype:Standard
+Effective:2022-02-18
+Sets:ZNR, KHM, STX, AFR, MID, VOW, NEO
+Banned:Alrund's Epiphany; Divide by Zero; Faceless Haven; Omnath, Locus of Creation
