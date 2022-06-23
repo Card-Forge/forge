@@ -320,7 +320,7 @@ public class PlayerPanel extends FContainer {
 
     public void initialize(FPref savedStateSetting, FPref savedStateSettingCommander, FPref savedStateSettingOathbreaker, FPref savedStateSettingTinyLeader, FPref savedStateSettingBrawl, DeckType defaultDeckType) {
         //order by last variant..
-        Set<GameType> gameTypes = FModel.getPreferences().getGameType(FPref.UI_APPILIED_VARIANTS);
+        Set<GameType> gameTypes = FModel.getPreferences().getGameType(FPref.UI_APPLIED_VARIANTS);
         if (gameTypes.contains(GameType.Commander)) {
             lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
             lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
