@@ -168,7 +168,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                     lobby.clearVariants();
                     updateLayoutForVariants();
                     Set<GameType> gameTypes = new HashSet<>();
-                    FModel.getPreferences().setGameType(FPref.UI_APPILIED_VARIANTS, gameTypes);
+                    FModel.getPreferences().setGameType(FPref.UI_APPLIED_VARIANTS, gameTypes);
                     FModel.getPreferences().save();
                 }
                 else if (cbVariants.getSelectedIndex() == cbVariants.getItemCount() - 1) {
@@ -183,7 +183,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                     for (GameType variant: lobby.getAppliedVariants()) {
                         gameTypes.add(variant);
                     }
-                    FModel.getPreferences().setGameType(FPref.UI_APPILIED_VARIANTS, gameTypes);
+                    FModel.getPreferences().setGameType(FPref.UI_APPLIED_VARIANTS, gameTypes);
                     FModel.getPreferences().save();
                 }
             }
@@ -218,7 +218,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                     public void run() {
                         btnStart.setEnabled(lobby.hasControl());
 
-                        Set<GameType> gameTypes = FModel.getPreferences().getGameType(FPref.UI_APPILIED_VARIANTS);
+                        Set<GameType> gameTypes = FModel.getPreferences().getGameType(FPref.UI_APPLIED_VARIANTS);
                         if (!gameTypes.isEmpty()) {
                             for (GameType gameType : gameTypes) {
                                 lobby.applyVariant(gameType);
@@ -517,7 +517,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 for (GameType variant: lobby.getAppliedVariants()) {
                     gameTypes.add(variant);
                 }
-                FModel.getPreferences().setGameType(FPref.UI_APPILIED_VARIANTS, gameTypes);
+                FModel.getPreferences().setGameType(FPref.UI_APPLIED_VARIANTS, gameTypes);
                 FModel.getPreferences().save();
             }
         }
