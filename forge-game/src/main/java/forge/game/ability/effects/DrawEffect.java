@@ -72,7 +72,7 @@ public class DrawEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDrawCards", Lang.nounWithAmount(numCards, " card")))) {
+            if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDrawCards", Lang.nounWithAmount(numCards, " card")), null)) {
                 continue;
             }
 
