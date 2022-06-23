@@ -1,4 +1,4 @@
-﻿Name:Cone of Cold
+Name:Cone of Cold
 ManaCost:3 U
 Types:Sorcery
 A:SP$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBTapAll,10-19:TapAndLock,20:TapLockETBEffect | SpellDescription$ Roll a d20.
