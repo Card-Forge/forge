@@ -4,7 +4,7 @@ Types:Creature Beholder Skeleton
 PT:6/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DB$Destroy,DBPumpAll
-SVar:DB$Destroy:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SubAbility$ DBLoseLife |SpellDescription$ Disintegration Ray — Destroy target enchantment an opponent controls. You lose life equal to its mana value.
+SVar:DB$Destroy:DB$ Destroy | ValidTgts$ Enchantment.OppCtrl | TgtPrompt$ Select target enchantment | SubAbility$ DBLoseLife |SpellDescription$ Disintegration Ray — Destroy target enchantment an opponent controls. You lose life equal to its mana value.
 SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardManaCost
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Deathtouch | SpellDescription$ Death Ray — Creatures you control gain deathtouch until end of turn.
