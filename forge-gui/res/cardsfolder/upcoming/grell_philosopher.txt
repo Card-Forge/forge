@@ -1,0 +1,12 @@
+﻿Name:Grell Philosopher
+ManaCost:2 U
+Types:Creature Horror Wizard
+PT:1/4
+K:ManaConvert:U->AnyColor:You may spend blue mana as though it were mana of any color to pay the activation costs of CARDNAME's abilities.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ Aberrant Tinkering — When CARDNAME enters the battlefield and at the beginning of your upkeep, each Horror you control gains all activated abilities of target artifact an opponent controls until end of turn.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigEffect | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Aberrant Tinkering — When CARDNAME enters the battlefield and at the beginning of your upkeep, each Horror you control gains all activated abilities of target artifact an opponent controls until end of turn.
+SVar:TrigEffect:DB$ Effect | ValidTgts$ Card.Artifact+OppCtrl | TgtZone$ Battlefield | TgtPrompt$ Select target artifact an opponent controls | StaticAbilities$ STSteal | RememberObjects$ Targeted
+SVar:STSteal:Mode$ Continuous | Affected$ Creature.Horror+YouCtrl | EffectZone$ Command | GainsAbilitiesOfDefined$ RememberedLKI
+AI:RemoveDeck:All
+DeckHints:Type$Horror
+Oracle:Aberrant Tinkering — When Grell Philosopher enters the battlefield and at the beginning of your upkeep, each Horror you control gains all activated abilities of target artifact an opponent controls until end of turn. You may spend blue mana as though it were mana of any color to activate those abilities.
