@@ -209,6 +209,12 @@ public class CardFactory {
         // 707.10b
         copySA.setOriginalAbility(targetSA);
 
+        // Copied spell is not cast face down
+        if (copySA instanceof Spell) {
+            Spell spell = (Spell) copySA;
+            spell.setCastFaceDown(false);
+        }
+
         if (targetSA.usesTargeting()) {
             // do for SubAbilities too?
             copySA.setTargets(targetSA.getTargets().clone());

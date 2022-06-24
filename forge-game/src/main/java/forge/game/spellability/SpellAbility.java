@@ -1096,12 +1096,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             // always set this to false, it is only set in CopyEffect
             clone.mayChooseNewTargets = false;
 
-            // Copied spell is not cast face down
-            if (clone instanceof Spell) {
-                Spell spell = (Spell) clone;
-                spell.setCastFaceDown(false);
-            }
-
             clone.triggeringObjects = AbilityKey.newMap(this.triggeringObjects);
 
             clone.setPayCosts(getPayCosts().copy());
