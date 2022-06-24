@@ -1,4 +1,4 @@
-﻿Name:Grell Philosopher
+Name:Grell Philosopher
 ManaCost:2 U
 Types:Creature Horror Wizard
 PT:1/4
