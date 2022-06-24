@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Ooze
 PT:2/2
 K:Flash
-K:Foretell G
+K:Foretell: G
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCounterAbility | SpellDescription$ When CARDNAME enters the battlefield, counter target activated or triggered ability from an artifact or enchantment source. If a permanent's ability is countered this way, destroy that permanent.
 SVar:TrigCounterAbility:DB$ Counter | TargetType$ Activated,Triggered | TgtPrompt$ Select target activated or triggered ability from an artifact or enchantment source. | ValidTgts$ Artifact,Enchantment | DestroyPermanent$ True
 AI:RemoveDeck:All
