@@ -1,0 +1,9 @@
+Name:Hammers of Moradin
+ManaCost:2 W
+Types:Creature Dwarf Cleric
+PT:3/3
+K:Myriad
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TapOneEach | TriggerDescription$ Whenever CARDNAME attacks, for each opponent, tap up to one target creature that player controls.
+SVar:TapOneEach:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose one target creature that each opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True
+SVar:OneEach:PlayerCountOpponents$Amount
+Oracle:Myriad\nWhenever Hammers of Moradin attacks, for each opponent, tap up to one target creature that player controls.
