@@ -4,6 +4,7 @@ Types:Artifact Equipment
 K:Equip:1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainCounter | TriggerDescription$ Whenever a creature you control dies, put a +1/+1 counter on equipped creature.
 SVar:TrigGainCounter:DB$ PutCounter | Defined$ Equipped | CounterType$ P1P1
+DeckHas:Ability$Counters
 Oracle:Whenever a creature you control dies, put a +1/+1 counter on equipped creature.\nEquip {1}
 
 ALTERNATE
