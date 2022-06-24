@@ -1,0 +1,7 @@
+Name:Gate to Manorborn
+ManaCost:no cost
+Types:Land Forest Gate
+K:CARDNAME enters the battlefield tapped.
+A:AB$ ChangeZone | Cost$ 3 G T | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 1 | ChangeType$ Card.nonLand | GameActivationLimit$ 1 | StackDescription$ SpellDescription | SpellDescription$ Seek a nonland card. Activate only once.
+DeckHints:Type$Gate
+Oracle:Gate to Manorborn enters the battlefield tapped.\n{3}{G}, {T}: Seek a nonland card. Activate only once.\n{T}: Add {G}.
