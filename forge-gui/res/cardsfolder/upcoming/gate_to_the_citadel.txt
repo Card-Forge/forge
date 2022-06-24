@@ -3,5 +3,6 @@ ManaCost:no cost
 Types:Land Plains Gate
 K:CARDNAME enters the battlefield tapped.
 A:AB$ ChangeZone | Cost$ 3 W T | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 1 | ChangeType$ Card.nonLand | GameActivationLimit$ 1 | StackDescription$ SpellDescription | SpellDescription$ Seek a nonland card. Activate only once.
+Text:{T}: Add {W}.
 DeckHints:Type$Gate
 Oracle:Gate to the Citadel enters the battlefield tapped.\n{3}{W}, {T}: Seek a nonland card. Activate only once.\n{T}: Add {W}.
