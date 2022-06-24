@@ -231,3 +231,6 @@ DungeonMap
 FortuneCoin
   xy: 336,64
   size: 16, 16
+SpiritGuard
+  xy: 192,160
+  size: 16, 16

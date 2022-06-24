@@ -126,6 +126,7 @@ public class SpellSmithScene extends UIScene {
         cost_low = -1; cost_high = 9999;
         rarity = "";
         currentPrice = (int)basePrice;
+        goldLabel.setText("Gold: "+ Current.player().getGold());
 
         for(Map.Entry<String, TextButton> B : colorButtons.entrySet())  B.getValue().setColor(Color.WHITE);
         for(Map.Entry<String, TextButton> B : costButtons.entrySet())   B.getValue().setColor(Color.WHITE);
@@ -228,6 +229,7 @@ public class SpellSmithScene extends UIScene {
     public void filterResults() {
         RewardData R = new RewardData();
         Iterable<PaperCard> P = R.getAllCards();
+        goldLabel.setText("Gold: "+ Current.player().getGold());
         float totalCost = basePrice * Current.player().goldModifier();
         final List<String> colorFilter = new ArrayList<>();
         for(Map.Entry<String, TextButton> B : colorButtons.entrySet())
