@@ -10,7 +10,7 @@
   {
     "name": "Colorless Castle",
     "count": 1,
-    "radiusFactor": 0.8,
+    "radiusFactor": 0.05,
     "spriteAtlas": "maps/tileset/buildings.atlas",
     "sprite": "colorless_castle",
     "map": "maps/map/main_story/colorless_castle.tmx"
@@ -56,6 +56,14 @@
     "map": "maps/map/main_story/blue_castle.tmx"
   },
   {
+    "name": "Skep",
+    "count": 1,
+    "radiusFactor": 0.5,
+    "spriteAtlas": "maps/tileset/buildings.atlas",
+    "sprite": "Cave",
+    "map": "maps/map/main_story/skep.tmx"
+  },
+  {
     "name": "Waste Town",
     "type": "town",
     "count": 100,
@@ -63,22 +71,6 @@
     "spriteAtlas": "maps/tileset/buildings.atlas",
     "sprite": "WasteTown",
     "map": "maps/map/waste_town.tmx"
-  },
-  {
-    "name": "Waste Town2",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "WasteTown",
-    "map": "maps/map/waste_town_2.tmx"
-  },
-  {
-    "name": "Waste Town3",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "WasteTown",
-    "map": "maps/map/waste_town_3.tmx"
   },
   {
     "name": "Forest Town",
@@ -142,22 +134,6 @@
     "map": "maps/map/vampirecastle_4.tmx"
   },
   {
-    "name": "Portal",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Portal",
-    "map": "maps/map/portal_1.tmx"
-  },
-  {
-    "name": "Portal1",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Portal",
-    "map": "maps/map/portal_2.tmx"
-  },
-  {
     "name": "MageTowerC",
     "count": 3,
     "radiusFactor": 0.8,
@@ -206,14 +182,6 @@
     "map": "maps/map/magetower_6.tmx"
   },
   {
-    "name": "MageTowerC7",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "MageTower",
-    "map": "maps/map/magetower_7.tmx"
-  },
-  {
     "name": "MageTowerC8",
     "count": 3,
     "radiusFactor": 0.8,
@@ -222,41 +190,9 @@
     "map": "maps/map/magetower_8.tmx"
   },
   {
-    "name": "MageTowerC9",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "MageTower",
-    "map": "maps/map/magetower_9.tmx"
-  },
-  {
-    "name": "MageTowerCA",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "MageTower",
-    "map": "maps/map/magetower_10.tmx"
-  },
-  {
-    "name": "MageTowerCB",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "MageTower",
-    "map": "maps/map/magetower_11.tmx"
-  },
-  {
-    "name": "MageTowerCC",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "MageTower",
-    "map": "maps/map/magetower_12.tmx"
-  },
-  {
-    "name": "MageTowerCD",
-    "count": 3,
-    "radiusFactor": 0.8,
+    "name": "MageTowerX",
+    "count": 1,
+    "radiusFactor": 0.2,
     "spriteAtlas": "maps/tileset/buildings.atlas",
     "sprite": "MageTower",
     "map": "maps/map/magetower_13.tmx"
@@ -366,36 +302,12 @@
     "map": "maps/map/cave_20.tmx"
   },
   {
-    "name": "CaveCC",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_21.tmx"
-  },
-  {
     "name": "CaveCD",
     "count": 3,
     "radiusFactor": 0.8,
     "spriteAtlas": "maps/tileset/buildings.atlas",
     "sprite": "Cave",
     "map": "maps/map/cave_22.tmx"
-  },
-  {
-    "name": "CaveCE",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_23.tmx"
-  },
-  {
-    "name": "CaveCF",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_24.tmx"
   },
   {
     "name": "Fort",
@@ -476,22 +388,6 @@
     "spriteAtlas": "maps/tileset/buildings.atlas",
     "sprite": "Fort",
     "map": "maps/map/fort_10.tmx"
-  },
-  {
-    "name": "FortA",
-    "count": 4,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Fort",
-    "map": "maps/map/fort_11.tmx"
-  },
-  {
-    "name": "FortB",
-    "count": 4,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Fort",
-    "map": "maps/map/fort_12.tmx"
   },
   {
     "name": "Factory",
@@ -726,14 +622,6 @@
     "map": "maps/map/cave_20.tmx"
   },
   {
-    "name": "CaveU5",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_25.tmx"
-  },
-  {
     "name": "MageTowerU",
     "count": 2,
     "radiusFactor": 0.8,
@@ -798,46 +686,6 @@
     "map": "maps/map/magetower_8.tmx"
   },
   {
-    "name": "MageTowerU8",
-    "count": 2,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "MageTower",
-    "map": "maps/map/magetower_9.tmx"
-  },
-  {
-    "name": "MageTowerU9",
-    "count": 2,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "MageTower",
-    "map": "maps/map/magetower_10.tmx"
-  },
-  {
-    "name": "MageTowerUA",
-    "count": 2,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "MageTower",
-    "map": "maps/map/magetower_11.tmx"
-  },
-  {
-    "name": "MageTowerUB",
-    "count": 2,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "MageTower",
-    "map": "maps/map/magetower_12.tmx"
-  },
-  {
-    "name": "MageTowerUC",
-    "count": 2,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "MageTower",
-    "map": "maps/map/magetower_13.tmx"
-  },
-  {
     "name": "MageTowerUD",
     "count": 2,
     "radiusFactor": 0.8,
@@ -894,14 +742,6 @@
     "map": "maps/map/merfolkpool_5.tmx"
   },
   {
-    "name": "MerfolkPool5",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "MerfolkPool",
-    "map": "maps/map/merfolkpool_6.tmx"
-  },
-  {
     "name": "DjinnPalace",
     "count": 3,
     "radiusFactor": 0.8,
@@ -916,14 +756,6 @@
     "spriteAtlas": "maps/tileset/buildings.atlas",
     "sprite": "DjinnPalace",
     "map": "maps/map/djinnpalace_2.tmx"
-  },
-  {
-    "name": "DjinnPalace2",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "DjinnPalace",
-    "map": "maps/map/djinnpalace_3.tmx"
   },
   {
     "name": "CaveB",
@@ -982,14 +814,6 @@
     "map": "maps/map/cave_12.tmx"
   },
   {
-    "name": "CaveB7",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_16.tmx"
-  },
-  {
     "name": "CaveB8",
     "count": 3,
     "radiusFactor": 0.8,
@@ -998,36 +822,12 @@
     "map": "maps/map/cave_20.tmx"
   },
   {
-    "name": "CaveB9",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_21.tmx"
-  },
-  {
     "name": "CaveBA",
     "count": 3,
     "radiusFactor": 0.8,
     "spriteAtlas": "maps/tileset/buildings.atlas",
     "sprite": "Cave",
     "map": "maps/map/cave_22.tmx"
-  },
-  {
-    "name": "CaveBB",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_23.tmx"
-  },
-  {
-    "name": "CaveBC",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_25.tmx"
   },
   {
     "name": "Graveyard",
@@ -1132,14 +932,6 @@
     "spriteAtlas": "maps/tileset/buildings.atlas",
     "sprite": "VampireCastle",
     "map": "maps/map/vampirecastle_3.tmx"
-  },
-  {
-    "name": "VampireCastle3",
-    "count": 4,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "VampireCastle",
-    "map": "maps/map/vampirecastle_4.tmx"
   },
   {
     "name": "SkullCaveB",
@@ -1270,28 +1062,12 @@
     "map": "maps/map/cave_15.tmx"
   },
   {
-    "name": "CaveRD",
-    "count": 2,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_16.tmx"
-  },
-  {
     "name": "CaveRE",
     "count": 2,
     "radiusFactor": 0.8,
     "spriteAtlas": "maps/tileset/buildings.atlas",
     "sprite": "Cave",
     "map": "maps/map/cave_17.tmx"
-  },
-  {
-    "name": "CaveRF",
-    "count": 2,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_18.tmx"
   },
   {
     "name": "CaveRG",
@@ -1310,36 +1086,12 @@
     "map": "maps/map/cave_20.tmx"
   },
   {
-    "name": "CaveRI",
-    "count": 2,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_21.tmx"
-  },
-  {
     "name": "CaveRJ",
     "count": 2,
     "radiusFactor": 0.8,
     "spriteAtlas": "maps/tileset/buildings.atlas",
     "sprite": "Cave",
     "map": "maps/map/cave_22.tmx"
-  },
-  {
-    "name": "CaveRK",
-    "count": 2,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_23.tmx"
-  },
-  {
-    "name": "CaveRL",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_24.tmx"
   },
   {
     "name": "Maze",
@@ -1396,14 +1148,6 @@
     "spriteAtlas": "maps/tileset/buildings.atlas",
     "sprite": "BarbarianCamp",
     "map": "maps/map/barbariancamp_3.tmx"
-  },
-  {
-    "name": "BarbarianCamp3",
-    "count": 4,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "BarbarianCamp",
-    "map": "maps/map/barbariancamp_4.tmx"
   },
   {
     "name": "SkullCaveR",
@@ -1518,36 +1262,12 @@
     "map": "maps/map/cave_15.tmx"
   },
   {
-    "name": "CaveG7",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_16.tmx"
-  },
-  {
-    "name": "CaveG8",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_18.tmx"
-  },
-  {
     "name": "CaveG9",
     "count": 3,
     "radiusFactor": 0.8,
     "spriteAtlas": "maps/tileset/buildings.atlas",
     "sprite": "Cave",
     "map": "maps/map/cave_20.tmx"
-  },
-  {
-    "name": "CaveGA",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Cave",
-    "map": "maps/map/cave_21.tmx"
   },
   {
     "name": "CaveGB",
@@ -1636,30 +1356,6 @@
     "spriteAtlas": "maps/tileset/buildings.atlas",
     "sprite": "Grove",
     "map": "maps/map/grove_9.tmx"
-  },
-  {
-    "name": "Grove9",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Grove",
-    "map": "maps/map/grove_10.tmx"
-  },
-  {
-    "name": "GroveA",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Grove",
-    "map": "maps/map/grove_11.tmx"
-  },
-  {
-    "name": "GroveB",
-    "count": 3,
-    "radiusFactor": 0.8,
-    "spriteAtlas": "maps/tileset/buildings.atlas",
-    "sprite": "Grove",
-    "map": "maps/map/grove_12.tmx"
   },
   {
     "name": "CatLairG",

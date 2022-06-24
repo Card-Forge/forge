@@ -14,6 +14,7 @@ public class EnemyData {
     public String deck;
     public boolean copyPlayerDeck = false;
     public String ai;
+    public boolean boss = false;
     public float spawnRate;
     public float difficulty;
     public float speed;
@@ -28,6 +29,7 @@ public class EnemyData {
         sprite         = enemyData.sprite;
         deck           = enemyData.deck;
         ai             = enemyData.ai;
+        boss           = enemyData.boss;
         spawnRate      = enemyData.spawnRate;
         copyPlayerDeck = enemyData.copyPlayerDeck;
         difficulty     = enemyData.difficulty;

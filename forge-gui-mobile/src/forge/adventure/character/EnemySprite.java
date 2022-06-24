@@ -8,7 +8,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
+import com.google.common.base.Predicates;
 import forge.Forge;
+import forge.adventure.data.DialogData;
 import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.RewardData;
@@ -17,6 +19,9 @@ import forge.adventure.util.Current;
 import forge.adventure.util.MapDialog;
 import forge.adventure.util.Reward;
 import forge.card.CardRarity;
+import forge.card.CardRulesPredicates;
+import forge.deck.CardPool;
+import forge.deck.Deck;
 import forge.item.PaperCard;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -35,6 +40,7 @@ public class EnemySprite extends CharacterSprite {
     public EffectData effect; //Battle effect for this enemy. Similar to a player's blessing.
     public String nameOverride = ""; //Override name of this enemy in battles.
     public RewardData[] rewards; //Additional rewards for this enemy.
+    public DialogData.ConditionData spawnCondition; //Condition to spawn.
 
     public EnemySprite(EnemyData enemyData) {
         this(0,enemyData);
@@ -100,13 +106,16 @@ public class EnemySprite extends CharacterSprite {
             ret.add(new Reward(Reward.Type.Life, 1));
         } else {
             if(data.rewards != null) { //Collect standard rewards.
+                Deck enemyDeck = Current.latestDeck(); // By popular demand, remove basic lands from the reward pool.
+                CardPool deckNoBasicLands = enemyDeck.getMain().getFilteredPool(Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), PaperCard.FN_GET_RULES));
                 for (RewardData rdata : data.rewards) {
-                    ret.addAll(rdata.generate(false, (Current.latestDeck() != null ? Current.latestDeck().getMain().toFlatList() : null)));
+                    ret.addAll(rdata.generate(false, deckNoBasicLands.toFlatList() ));
                 }
             }
             if(rewards != null) { //Collect additional rewards.
                 for(RewardData rdata:rewards) {
-                    ret.addAll(rdata.generate(false,(Current.latestDeck()!=null? Current.latestDeck().getMain().toFlatList():null)));
+                    //Do not filter in case we want to FORCE basic lands. If it ever becomes a problem just repeat the same as above.
+                    ret.addAll(rdata.generate(false,(Current.latestDeck() != null ? Current.latestDeck().getMain().toFlatList() : null)));
                 }
             }
         }

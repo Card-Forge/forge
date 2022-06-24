@@ -75,7 +75,6 @@ public class MapStage extends GameStage {
     private Stage dialogStage;
     private boolean dialogOnlyInput;
 
-
     //Map properties.
     //These maps are defined as embedded properties within the Tiled maps.
     private EffectData effect;             //"Dungeon Effect": Character Effect applied to all adversaries within the map.
@@ -469,6 +468,12 @@ public class MapStage extends GameStage {
                             public void run() {
                                 Forge.switchScene(SceneType.InnScene.instance);
                             }
+                        }));
+                        break;
+                    case "spellsmith":
+                        addMapActor(obj, new OnCollide(new Runnable() {
+                            @Override
+                            public void run() { Forge.switchScene(SceneType.SpellSmithScene.instance); }
                         }));
                         break;
                     case "exit":

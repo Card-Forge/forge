@@ -408,12 +408,11 @@
 			"probability": 1,
 			"count": 4,
 			"addMaxCount": 6
-		},
-		{
+		},{
 			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
+			"probability": 1.0,
+			"count": 80,
+			"addMaxCount": 40
 		}
 	],
 	"colors": "U"
@@ -425,19 +424,18 @@
 	"spawnRate": 1.0,
 	"difficulty": 0.1,
 	"speed": 31,
-	"life": 10,
+	"life": 14,
 	"rewards": [
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 8
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
+			"count": 50,
+			"addMaxCount": 300
 		}
 	],
 	"colors": "U"
@@ -1407,11 +1405,6 @@
 	"life": 8,
 	"rewards": [
 		{
-			"type": "enemyItems",
-			"probability": 0.2,
-			"count": 1
-		},
-		{
 			"type": "deckCard",
 			"probability": 1,
 			"count": 2,
@@ -2256,32 +2249,31 @@
 	"sprite": "sprites/merfolk.atlas",
 	"deck": "decks/merfolk_lords.dck",
 	"spawnRate": 1.0,
-	"difficulty": 0.1,
+	"difficulty": 0.2,
 	"speed": 22,
-	"life": 13,
+	"life": 16,
 	"rewards": [
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 2,
-			"addMaxCount": 4
-		},
-		{
+			"count": 1
+		},{
 			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
-		},
-		{
+			"probability": 1,
+			"count": 100,
+			"addMaxCount": 150
+		},{
 			"type": "card",
-			"probability": 0.5,
-			"count": 3,
-			"colors": [
-				"Blue"
-			],
-			"rarity": [
-				"Rare"
-			]
+			"probability": 0.65,
+			"count": 2,
+			"colors": [ "Blue" ],
+			"rarity": [ "Rare" ]
+		},{
+			"type": "card",
+			"probability": 0.0035,
+			"count": 1,
+			"colors": [ "Blue" ],
+			"rarity": [ "Mythic Rare" ]
 		}
 	],
 	"colors": "GU"
@@ -2291,21 +2283,31 @@
 	"sprite": "sprites/merfolk_lord.atlas",
 	"deck": "decks/merfolk_lord2.dck",
 	"spawnRate": 1.0,
-	"difficulty": 0.1,
+	"difficulty": 0.25,
 	"speed": 25,
-	"life": 14,
+	"life": 20,
 	"rewards": [
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
-		},
-		{
+			"count": 1
+		},{
 			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
+			"probability": 1,
+			"count": 200,
+			"addMaxCount": 100
+		},{
+			"type": "card",
+			"probability": 0.75,
+			"count": 2,
+			"colors": [ "Blue" ],
+			"rarity": [ "Rare" ]
+		},{
+			"type": "card",
+			"probability": 0.005,
+			"count": 1,
+			"colors": [ "Blue" ],
+			"rarity": [ "Mythic Rare" ]
 		}
 	],
 	"colors": "GU"
@@ -2531,7 +2533,7 @@
 	"spawnRate": 1.0,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 10,
+	"life": 8,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -2565,9 +2567,8 @@
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
-			"count": 5,
-			"addMaxCount": 95
+			"count": 25,
+			"addMaxCount": 200
 		}
 	],
 	"colors": "R"
@@ -2579,7 +2580,7 @@
 	"spawnRate": 1.0,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 10,
+	"life": 14,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -2589,9 +2590,8 @@
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
-			"count": 5,
-			"addMaxCount": 95
+			"count": 50,
+			"addMaxCount": 300
 		}
 	],
 	"colors": "R"
@@ -2607,15 +2607,12 @@
 	"rewards": [
 		{
 			"type": "deckCard",
-			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
-			"count": 10,
-			"addMaxCount": 90
+			"count": 250,
+			"addMaxCount": 250
 		}
 	],
 	"colors": "BU"
@@ -2745,18 +2742,15 @@
 	"spawnRate": 1.0,
 	"difficulty": 0.1,
 	"speed": 24,
-	"life": 14,
+	"life": 15,
 	"rewards": [
 		{
 			"type": "deckCard",
-			"count": 4,
-			"addMaxCount": 6
+			"count": 5
 		},
 		{
 			"type": "gold",
-			"probability": 0.6,
-			"count": 10,
-			"addMaxCount": 90
+			"count": 150
 		}
 	],
 	"colors": "GRW"
@@ -3219,7 +3213,7 @@
 		{
 			"type": "gold",
 			"probability": 0.7,
-			"count": 10,
+			"count": 100,
 			"addMaxCount": 90
 		},
 		{
@@ -3236,49 +3230,62 @@
 	],
 	"colors": "B"
 },
+
+
+
+
 {
-	"name": "Sliver Queen",
-	"sprite": "sprites/boss/sliver_queen.atlas",
-	"deck": "decks/boss/sliver_queen.dck",
-	"speed": 1,
-	"life": 100,
+	"name": "Wounded Sliver",
+	"sprite": "sprites/boss/wsliver.atlas",
+	"deck": "decks/miniboss/sliver_shandalar.dck",
+	"speed": 0,
+	"life": 28,
+	"boss": true,
+	"ai": "reckless",
 	"rewards": [
 		{
-			"type": "item",
+			"type": "deckCard",
 			"probability": 1,
-			"count": 1,
-			"itemName": "Black Lotus"
+			"count": 2
 		},
 		{
-			"type": "item",
+			"type": "gold",
 			"probability": 1,
-			"count": 1,
-			"itemName": "Strange Key"
+			"count": 500,
+			"addMaxCount": 150
 		}
 	],
-	"equipment": [
-		"Black Lotus"
-	],
-	"colors": "BGRUW"
+	"colors": "GRW"
 },
+
+
+
+
 {
 	"name": "Griselbrand",
 	"sprite": "sprites/boss/griselbrand.atlas",
 	"deck": "decks/boss/griselbrand.dck",
 	"speed": 1,
 	"life": 80,
+	"boss": true,
 	"rewards": [
 		{
-			"type": "item",
+			"type": "card",
 			"probability": 1,
 			"count": 1,
-			"itemName": "Mox Jet"
+			"cardName": "Mox Jet"
 		},
 		{
 			"type": "item",
 			"probability": 1,
 			"count": 1,
 			"itemName": "Black Key"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 250
 		}
 	],
 	"equipment": [
@@ -3292,18 +3299,25 @@
 	"deck": "decks/boss/akroma.dck",
 	"speed": 1,
 	"life": 80,
+	"boss": true,
 	"rewards": [
 		{
-			"type": "item",
+			"type": "card",
 			"probability": 1,
 			"count": 1,
-			"itemName": "Mox Pearl"
+			"cardName": "Mox Pearl"
 		},
 		{
 			"type": "item",
 			"probability": 1,
 			"count": 1,
 			"itemName": "White Key"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 250
 		}
 	],
 	"equipment": [
@@ -3312,42 +3326,30 @@
 	"colors": "W"
 },
 {
-	"name": "Emrakul",
-	"sprite": "sprites/boss/emrakul.atlas",
-	"deck": "decks/boss/emrakul.dck",
-	"speed": 1,
-	"life": 100,
-	"rewards": [
-		{
-			"type": "item",
-			"probability": 1,
-			"count": 1,
-			"itemName": "Sol Ring"
-		}
-	],
-	"equipment": [
-		"Sol Ring"
-	],
-	"colors": "C"
-},
-{
 	"name": "Ghalta",
 	"sprite": "sprites/boss/ghalta.atlas",
 	"deck": "decks/boss/ghalta.dck",
 	"speed": 1,
 	"life": 80,
+	"boss": true,
 	"rewards": [
 		{
-			"type": "item",
+			"type": "card",
 			"probability": 1,
 			"count": 1,
-			"itemName": "Mox Emerald"
+			"cardName": "Mox Emerald"
 		},
 		{
 			"type": "item",
 			"probability": 1,
 			"count": 1,
 			"itemName": "Green Key"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 250
 		}
 	],
 	"equipment": [
@@ -3361,18 +3363,25 @@
 	"deck": "decks/boss/lorthos.dck",
 	"speed": 1,
 	"life": 80,
+	"boss": true,
 	"rewards": [
 		{
-			"type": "item",
+			"type": "card",
 			"probability": 1,
 			"count": 1,
-			"itemName": "Mox Sapphire"
+			"cardName": "Mox Sapphire"
 		},
 		{
 			"type": "item",
 			"probability": 1,
 			"count": 1,
 			"itemName": "Blue Key"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 250
 		}
 	],
 	"equipment": [
@@ -3386,23 +3395,88 @@
 	"deck": "decks/boss/lathliss.dck",
 	"speed": 1,
 	"life": 80,
+	"boss": true,
 	"rewards": [
 		{
-			"type": "item",
+			"type": "card",
 			"probability": 1,
 			"count": 1,
-			"itemName": "Mox Ruby"
+			"cardName": "Mox Ruby"
 		},
 		{
 			"type": "item",
 			"probability": 1,
 			"count": 1,
 			"itemName": "Red Key"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 1000,
+			"addMaxCount": 250
 		}
 	],
 	"equipment": [
 		"Mox Ruby"
 	],
 	"colors": "R"
+},
+{
+	"name": "Emrakul",
+	"sprite": "sprites/boss/emrakul.atlas",
+	"deck": "decks/boss/emrakul.dck",
+	"speed": 1,
+	"life": 100,
+	"boss": true,
+	"rewards": [
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Sol Ring"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 5000,
+			"addMaxCount": 2500
+		}
+	],
+	"equipment": [
+		"Sol Ring"
+	],
+	"colors": "C"
+},
+{
+	"name": "Sliver Queen",
+	"sprite": "sprites/boss/sliver_queen.atlas",
+	"deck": "decks/boss/sliver_queen.dck",
+	"speed": 1,
+	"life": 100,
+	"boss": true,
+	"rewards": [
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Black Lotus"
+		},
+		{
+			"type": "item",
+			"probability": 1,
+			"count": 1,
+			"itemName": "Strange Key"
+		},
+		{
+			"type": "gold",
+			"probability": 1,
+			"count": 2500,
+			"addMaxCount": 1000
+		}
+	],
+	"equipment": [
+		"Black Lotus"
+	],
+	"colors": "BGRUW"
 }
 ]
