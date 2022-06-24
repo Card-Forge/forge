@@ -3,12 +3,12 @@
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"EquipmentShop",   
   "rewards": [ 
-    { "type": "item","count":1, "itemName": "Mithril Boots"  },
-    { "type": "item","count":1, "itemName": "Mithril Shield"  },
-    { "type": "item","count":1, "itemName": "Mithril Armor"  },      
     { "type": "item","count":1, "itemName": "Steel Boots"  },
     { "type": "item","count":1, "itemName": "Steel Shield"  },
-    { "type": "item","count":1, "itemName": "Steel Armor"  } 
+    { "type": "item","count":1, "itemName": "Steel Armor"  },
+    { "type": "item","count":1, "itemName": "Iron Boots"  },
+    { "type": "item","count":1, "itemName": "Iron Shield"  },
+    { "type": "item","count":1, "itemName": "Iron Armor"  }
     
     ]
 
@@ -115,9 +115,9 @@
       "colorType": "Colorless"
     }]
 },{                                    
-"name":"Artefact",                  
+"name":"Artifact",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"ArtefactShop",
+"sprite":"ArtifactShop",
   "rewards": [
     {
       "count":8,
@@ -362,6 +362,33 @@
     {
       "count":8,
       "subTypes": ["Human"]
+    }]
+},{
+  "name":"Angel",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"AngelShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Angel"]
+    }]
+},{
+  "name":"Golem",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"GolemShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Golem"]
+    }]
+},{
+  "name":"Sliver",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SliverShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Sliver"]
     }]
 }
 ]   

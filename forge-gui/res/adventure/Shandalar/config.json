@@ -2,7 +2,7 @@
   "screenWidth": 480,
   "screenHeight": 270,
   "skin": "skin/ui_skin.json",
-  "playerBaseSpeed": 30,
+  "playerBaseSpeed": 32,
   "minDeckSize": 40,
   "starterDecks": [
     "decks/starter/white.json",
@@ -20,35 +20,58 @@
     "Mox Jet",
     "Ancestral Recall",
     "Timetwister",
-    "Time Walk"
+    "Time Walk",
+    "Command Tower",
+    "Arcane Signet",
+    "Opal Palace",
+    "Path of Ancestry",
+    "War Room",
+    "Commander's Plate",
+    "Campfire",
+    "Cloudkill",
+    "Command Beacon",
+    "Commander's Insignia",
+    "Forge of Heroes",
+    "Imposing Grandeur",
+    "Jeweled Lotus",
+    "Myth Unbound",
+    "Netherborn Altar",
+    "Sanctum of Eternity",
+    "Stinging Study",
+    "Study Hall",
+    "Witch's Clinic"
   ],
+  "restrictedEditions": [],
   "difficulties": [
     {
       "name": "Easy",
       "startingLife": 16,
-      "staringMoney": 200,
+      "staringMoney": 500,
       "enemyLifeFactor": 0.8,
       "spawnRank": 0,
-      "sellFactor": 0.5     ,
-      "startItems": ["Treasure","Jungle Shield"]
-    },
-    {
+      "sellFactor": 0.6,
+      "startItems": [
+        "Manasight Amulet",
+        "Leather Boots"
+      ]
+    },{
       "name": "Normal",
       "startingLife": 12,
-      "staringMoney": 100,
+      "staringMoney": 250,
       "startingDifficulty": true,
       "enemyLifeFactor": 1.0,
       "spawnRank": 1,
-      "sellFactor": 0.2        ,
-      "startItems": [ "Treasure"]
-    },
-    {
+      "sellFactor": 0.5,
+      "startItems": [
+        "Leather Boots"
+      ]
+    },{
       "name": "Hard",
       "startingLife": 8,
-      "staringMoney": 10,
+      "staringMoney": 125,
       "enemyLifeFactor": 1.5,
       "spawnRank": 2,
-      "sellFactor": 0.1
+      "sellFactor": 0.25
     }
   ]
 }

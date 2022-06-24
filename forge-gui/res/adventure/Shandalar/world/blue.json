@@ -28,10 +28,11 @@
     "Blue Castle",
     "Island Town",
     "NestU",
-    "MerfolkPool", "MerfolkPool1", "MerfolkPool2", "MerfolkPool3", "MerfolkPool4", "MerfolkPool5",
-    "DjinnPalace", "DjinnPalace1", "DjinnPalace2",
+    "MerfolkPool", "MerfolkPool1", "MerfolkPool2", "MerfolkPool3", "MerfolkPool4",
+    "DjinnPalace", "DjinnPalace1",
     "Factory", "Factory1",
-    "MageTowerU", "MageTowerU1", "MageTowerU2", "MageTowerU3", "MageTowerU4", "MageTowerU5", "MageTowerU6", "MageTowerU7", "MageTowerU8", "MageTowerU9", "MageTowerUA", "MageTowerUB", "MageTowerUC", "MageTowerUD",
-    "CaveU", "CaveU1", "CaveU2", "CaveU3", "CaveU4", "CaveU5"
+    "MageTowerX",
+    "MageTowerU", "MageTowerU1", "MageTowerU2", "MageTowerU3", "MageTowerU4", "MageTowerU5", "MageTowerU6", "MageTowerU7", "MageTowerUD",
+    "CaveU", "CaveU1", "CaveU2", "CaveU3", "CaveU4"
   ]
 }
