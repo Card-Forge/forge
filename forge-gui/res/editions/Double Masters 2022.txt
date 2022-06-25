@@ -3,6 +3,11 @@ Code=2X2
 Date=2022-07-08
 Name=Double Masters 2022
 Type=Reprint
+BoosterCovers=3
+Booster=8 Common:fromSheet("2X2 cards"), 3 Uncommon:fromSheet("2X2 cards"), 2 RareMythic:fromSheet("2X2 cards"), 2 fromSheet("2X2 foils"), 1 fromSheet("2X2 spire")
+Foil=NotSupported
+DoublePick=FirstPick
+ChaosDraftThemes=MASTERS_SET
 ScryfallCode=2X2
 
 [cards]
@@ -338,6 +343,8 @@ ScryfallCode=2X2
 330 U Selesnya Sanctuary @John Avon
 331 U Simic Growth Chamber @John Avon
 332 C Cryptic Spires @Sam Burley
+
+[borderless]
 333 M Liliana, the Last Hope @Scott M. Fischer
 334 M Wrenn and Six @Donato Giancola
 335 M Emrakul, the Aeons Torn @Kev Walker
@@ -418,6 +425,8 @@ ScryfallCode=2X2
 410 U Rakdos Carnarium @Thomas M. Baxa
 411 U Selesnya Sanctuary @Ron Spears
 412 U Simic Growth Chamber @Pete Venters
+
+[showcase]
 413 M Emrakul, the Aeons Torn @Mark Tedin
 414 M Kozilek, Butcher of Truth @Michael Komarck
 415 M Ulamog, the Infinite Gyre @Aleksi Briclot
@@ -583,8 +592,351 @@ ScryfallCode=2X2
 575 M Emrakul, the Aeons Torn @Kev Walker
 576 M Kozilek, Butcher of Truth @Ian Miller
 577 M Ulamog, the Infinite Gyre @Thomas M. Baxa
+
+[promo]
 578 R Weathered Wayfarer @Dermot Power
 579 R Bring to Light @Mark Poole
+
+[spire]
+1 Cryptic Spires|2X2
+
+[foils]
+# Commons
+21 Advanced Stitchwing+|2X2
+21 Aethersnipe+|2X2
+21 Agony Warp+|2X2
+21 Ainok Bond-Kin+|2X2
+21 Ambuscade+|2X2
+21 Annoyed Altisaur+|2X2
+21 Anointer of Valor+|2X2
+21 Arachnus Web+|2X2
+21 Auger Spree+|2X2
+21 Aven Initiate+|2X2
+21 Balustrade Spy+|2X2
+21 Battlefield Promotion+|2X2
+21 Bloodflow Connoisseur+|2X2
+21 Bloodwater Entity+|2X2
+21 Brindle Shoat+|2X2
+21 Burning-Tree Emissary+|2X2
+21 Call to the Feast+|2X2
+21 Capture Sphere+|2X2
+21 Cartel Aristocrat+|2X2
+21 Chronicler of Heroes+|2X2
+21 Coiling Oracle+|2X2
+21 Cryptic Spires+|2X2
+21 Dark-Dweller Oracle+|2X2
+21 Deadly Recluse+|2X2
+21 Deep Analysis+|2X2
+21 Deranged Assistant+|2X2
+21 Disfigure+|2X2
+21 Doomed Traveler+|2X2
+21 Dreg Mangler+|2X2
+21 Eel Umbra+|2X2
+21 Elvish Rejuvenator+|2X2
+21 Experiment One+|2X2
+21 Eyeblight's Ending+|2X2
+21 Fiery Fall+|2X2
+21 Fireblade Artist+|2X2
+21 Forbidden Alchemy+|2X2
+21 Glowspore Shaman+|2X2
+21 Gnarlback Rhino+|2X2
+21 Gods Willing+|2X2
+21 Grapple with the Past+|2X2
+21 Ground Assault+|2X2
+21 Hero of the Games+|2X2
+21 Hissing Iguanar+|2X2
+21 Hyena Umbra+|2X2
+21 Ingenious Skaab+|2X2
+21 Izzet Charm+|2X2
+21 Jeskai Elder+|2X2
+21 Kasmina's Transmutation+|2X2
+21 Knightly Valor+|2X2
+21 Kruin Striker+|2X2
+21 Last Breath+|2X2
+21 Lava Coil+|2X2
+21 Liliana's Elite+|2X2
+21 Lyev Skyknight+|2X2
+21 Makeshift Mauler+|2X2
+21 Mana Leak+|2X2
+21 Martial Glory+|2X2
+21 Might of Old Krosa+|2X2
+21 Militia Bugler+|2X2
+21 Momentary Blink+|2X2
+21 Monastery Swiftspear+|2X2
+21 Pirate's Pillage+|2X2
+21 Purphoros's Emissary+|2X2
+21 Qasali Pridemage+|2X2
+21 Rampant Growth+|2X2
+21 Relief Captain+|2X2
+21 Rift Bolt+|2X2
+21 Seeker of the Way+|2X2
+21 Seekers' Squire+|2X2
+21 Sensor Splicer+|2X2
+21 Settle Beyond Reality+|2X2
+21 Severed Strands+|2X2
+21 Shadowborn Apostle+|2X2
+21 Skeleton Archer+|2X2
+21 Sparkmage's Gambit+|2X2
+21 Spell Pierce+|2X2
+21 Storm Fleet Pyromancer+|2X2
+21 Strands of Undeath+|2X2
+21 Supernatural Stamina+|2X2
+21 Tenth District Legionnaire+|2X2
+21 Thought Scour+|2X2
+21 Thrive+|2X2
+21 Titan's Strength+|2X2
+21 Traveler's Amulet+|2X2
+21 Tuskguard Captain+|2X2
+21 Unearth+|2X2
+21 Vampire Sovereign+|2X2
+21 Webweaver Changeling+|2X2
+21 Winged Coatl+|2X2
+21 Wingsteed Rider+|2X2
+# Uncommons
+7 Abzan Charm+|2X2
+7 Abzan Falconer+|2X2
+7 Aethermage's Touch+|2X2
+7 Arachnus Spinner+|2X2
+7 Azorius Chancery+|2X2
+7 Bant Charm+|2X2
+7 Bear's Companion+|2X2
+7 Biogenic Upgrade+|2X2
+7 Blazing Hellhound+|2X2
+7 Blood Artist+|2X2
+7 Bloodbraid Elf+|2X2
+7 Body Double+|2X2
+7 Boros Garrison+|2X2
+7 Bounty of the Luxa+|2X2
+7 Breakthrough+|2X2
+7 Carrier Thrall+|2X2
+7 Centaur Battlemaster+|2X2
+7 Civic Saber+|2X2
+7 Coldsteel Heart+|2X2
+7 Conclave Mentor+|2X2
+7 Crackling Doom+|2X2
+7 Devoted Druid+|2X2
+7 Dimir Aqueduct+|2X2
+7 Domestication+|2X2
+7 Dragon Arch+|2X2
+7 Dreamshaper Shaman+|2X2
+7 Eternal Witness+|2X2
+7 Extract from Darkness+|2X2
+7 Firemind Vessel+|2X2
+7 Flickerwisp+|2X2
+7 Gloryscale Viashino+|2X2
+7 Go for the Throat+|2X2
+7 Goblin Banneret+|2X2
+7 Golgari Rot Farm+|2X2
+7 Graveblade Marauder+|2X2
+7 Gruul Turf+|2X2
+7 Heroic Reinforcements+|2X2
+7 Inquisition of Kozilek+|2X2
+7 Izzet Boilerworks+|2X2
+7 Jeskai Charm+|2X2
+7 Labyrinth Champion+|2X2
+7 League Guildmage+|2X2
+7 Lightning Bolt+|2X2
+7 Lightning Helix+|2X2
+7 Livewire Lash+|2X2
+7 Living Lightning+|2X2
+7 Lotleth Troll+|2X2
+7 Mentor of the Meek+|2X2
+7 Mistfire Adept+|2X2
+7 Mistmeadow Witch+|2X2
+7 Mulldrifter+|2X2
+7 Myth Realized+|2X2
+7 Nephalia Smuggler+|2X2
+7 Orzhov Basilica+|2X2
+7 Orzhov Pontiff+|2X2
+7 Path to Exile+|2X2
+7 Prophetic Bolt+|2X2
+7 Psychic Symbiont+|2X2
+7 Rakdos Carnarium+|2X2
+7 Rancor+|2X2
+7 River Hoopoe+|2X2
+7 Scab-Clan Giant+|2X2
+7 Scale Blessing+|2X2
+7 Scion of Darkness+|2X2
+7 Sedraxis Specter+|2X2
+7 Selesnya Sanctuary+|2X2
+7 Simic Growth Chamber+|2X2
+7 Skinrender+|2X2
+7 Spider Spawning+|2X2
+7 Sprouting Thrinax+|2X2
+7 Staggershock+|2X2
+7 Sultai Soothsayer+|2X2
+7 Summer Bloom+|2X2
+7 Surreal Memoir+|2X2
+7 Terminate+|2X2
+7 Tower Gargoyle+|2X2
+7 Travel Preparations+|2X2
+7 Unburial Rites+|2X2
+7 Vampiric Rites+|2X2
+7 Wall of Omens+|2X2
+7 Wash Out+|2X2
+7 Young Pyromancer+|2X2
+# Rares
+2 Abbot of Keral Keep+|2X2
+2 Abzan Ascendancy+|2X2
+2 Aether Vial+|2X2
+2 Alesha, Who Smiles at Death+|2X2
+2 Anger of the Gods+|2X2
+2 Anguished Unmaking+|2X2
+2 Arjun, the Shifting Flame+|2X2
+2 Ashen Rider+|2X2
+2 Ashenmoor Liege+|2X2
+2 Assassin's Trophy+|2X2
+2 Atarka's Command+|2X2
+2 Atla Palani, Nest Tender+|2X2
+2 Backdraft Hellkite+|2X2
+2 Balefire Liege+|2X2
+2 Bedlam Reveler+|2X2
+2 Bloodforged Battle-Axe+|2X2
+2 Bloom Tender+|2X2
+2 Boartusk Liege+|2X2
+2 Bring to Light+|2X2
+2 Chaos Warp+|2X2
+2 Child of Alara+|2X2
+2 City of Brass+|2X2
+2 Conqueror's Flail+|2X2
+2 Creakwood Liege+|2X2
+2 Dack's Duplicate+|2X2
+2 Damnation+|2X2
+2 Darksteel Plate+|2X2
+2 Dauntless Escort+|2X2
+2 Deathbringer Liege+|2X2
+2 Disciple of the Ring+|2X2
+2 Doran, the Siege Tower+|2X2
+2 Drogskol Reaver+|2X2
+2 Dromoka's Command+|2X2
+2 Elsha of the Infinite+|2X2
+2 Empyrial Archangel+|2X2
+2 Fiery Justice+|2X2
+2 Figure of Destiny+|2X2
+2 Firesong and Sunspeaker+|2X2
+2 Forbidden Orchard+|2X2
+2 Force of Negation+|2X2
+2 Gifts Ungiven+|2X2
+2 Glen Elendra Liege+|2X2
+2 Glimpse the Unthinkable+|2X2
+2 Grand Arbiter Augustin IV+|2X2
+2 Gravecrawler+|2X2
+2 Greater Gargadon+|2X2
+2 Green Sun's Zenith+|2X2
+2 Grim Flayer+|2X2
+2 Guided Passage+|2X2
+2 Hardened Scales+|2X2
+2 Hostage Taker+|2X2
+2 Hydroid Krasis+|2X2
+2 Impervious Greatwurm+|2X2
+2 Intet, the Dreamer+|2X2
+2 Jeskai Ascendancy+|2X2
+2 Jodah, Archmage Eternal+|2X2
+2 Judith, the Scourge Diva+|2X2
+2 Kaervek the Merciless+|2X2
+2 Kambal, Consul of Allocation+|2X2
+2 Kederekt Leviathan+|2X2
+2 Kolaghan's Command+|2X2
+2 Lavalanche+|2X2
+2 Legion's Initiative+|2X2
+2 Leonin Arbiter+|2X2
+2 Magister Sphinx+|2X2
+2 Marchesa, the Black Rose+|2X2
+2 Master Biomancer+|2X2
+2 Mathas, Fiend Seeker+|2X2
+2 Mayael's Aria+|2X2
+2 Mikaeus, the Lunarch+|2X2
+2 Mindwrack Liege+|2X2
+2 Murkfiend Liege+|2X2
+2 Necrotic Ooze+|2X2
+2 Nim Deathmantle+|2X2
+2 Ob Nixilis, Unshackled+|2X2
+2 Oona's Prowler+|2X2
+2 Oracle of Mul Daya+|2X2
+2 Panharmonicon+|2X2
+2 Phyrexian Altar+|2X2
+2 Phyrexian Tyranny+|2X2
+2 Pillar of the Paruns+|2X2
+2 Pithing Needle+|2X2
+2 Planar Bridge+|2X2
+2 Privileged Position+|2X2
+2 Prized Amalgam+|2X2
+2 Pull from Tomorrow+|2X2
+2 Rafiq of the Many+|2X2
+2 Restoration Angel+|2X2
+2 Reveillark+|2X2
+2 Rishkar, Peema Renegade+|2X2
+2 Roon of the Hidden Realm+|2X2
+2 Ruric Thar, the Unbowed+|2X2
+2 Sensei's Divining Top+|2X2
+2 Shattergang Brothers+|2X2
+2 Sidisi, Brood Tyrant+|2X2
+2 Skullbriar, the Walking Grave+|2X2
+2 Smothering Tithe+|2X2
+2 Splinterfright+|2X2
+2 Supreme Verdict+|2X2
+2 Surgical Extraction+|2X2
+2 Talrand, Sky Summoner+|2X2
+2 Tariel, Reckoner of Souls+|2X2
+2 Teferi's Protection+|2X2
+2 Teneb, the Harvester+|2X2
+2 The Mimeoplasm+|2X2
+2 Thistledown Liege+|2X2
+2 Thousand-Year Storm+|2X2
+2 Thraximundar+|2X2
+2 Thrumming Stone+|2X2
+2 Twinflame+|2X2
+2 Ulasht, the Hate Seed+|2X2
+2 Varina, Lich Queen+|2X2
+2 Vedalken Orrery+|2X2
+2 Venser, Shaper Savant+|2X2
+2 Villainous Wealth+|2X2
+2 Wasitora, Nekoru Queen+|2X2
+2 Weathered Wayfarer+|2X2
+2 Wilt-Leaf Liege+|2X2
+2 Yahenni, Undying Partisan+|2X2
+2 Zur the Enchanter+|2X2
+# Mythics
+1 Allosaurus Shepherd+|2X2
+1 Aminatou, the Fateshifter+|2X2
+1 Animar, Soul of Elements+|2X2
+1 As Foretold+|2X2
+1 Aurelia, the Warleader+|2X2
+1 Bitterblossom+|2X2
+1 Cavern of Souls+|2X2
+1 Concordant Crossroads+|2X2
+1 Consecrated Sphinx+|2X2
+1 Crucible of Worlds+|2X2
+1 Divine Visitation+|2X2
+1 Dockside Extortionist+|2X2
+1 Dragonlord Dromoka+|2X2
+1 Dragonlord Silumgar+|2X2
+1 Elenda, the Dusk Rose+|2X2
+1 Emiel the Blessed+|2X2
+1 Emrakul, the Aeons Torn+|2X2
+1 Ezuri, Claw of Progress+|2X2
+1 Food Chain+|2X2
+1 Ghave, Guru of Spores+|2X2
+1 Hellkite Overlord+|2X2
+1 Imperial Seal+|2X2
+1 Kaalia of the Vast+|2X2
+1 Karador, Ghost Chieftain+|2X2
+1 Kozilek, Butcher of Truth+|2X2
+1 Liliana, the Last Hope+|2X2
+1 Lord of Extinction+|2X2
+1 Mana Drain+|2X2
+1 Mana Vault+|2X2
+1 Master of Cruelties+|2X2
+1 Mizzix of the Izmagnus+|2X2
+1 Monastery Mentor+|2X2
+1 Muldrotha, the Gravetide+|2X2
+1 Nicol Bolas, God-Pharaoh+|2X2
+1 Seasoned Pyromancer+|2X2
+1 Sedris, the Traitor King+|2X2
+1 Ulamog, the Infinite Gyre+|2X2
+1 Uril, the Miststalker+|2X2
+1 Warrior's Oath+|2X2
+1 Wrenn and Six+|2X2
 
 [tokens]
 c_1_1_eldrazi_scion_sac
