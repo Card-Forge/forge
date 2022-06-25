@@ -29,7 +29,7 @@ ScryfallCode=2X2
 21 M Monastery Mentor @Magali Villeneuve
 22 U Myth Realized @Jason Rainville
 23 U Path to Exile @Raf Sarmento
-24 U Relief Captain @Anastasia Ovchinnikova
+24 C Relief Captain @Anastasia Ovchinnikova
 25 R Restoration Angel @Jake Murray
 26 R Reveillark @Jim Murray
 27 U Scale Blessing @Matt Stewart
@@ -54,7 +54,7 @@ ScryfallCode=2X2
 46 R Disciple of the Ring @Clint Cearley
 47 U Domestication @Jesper Ejsing
 48 C Eel Umbra @Howard Lyon
-49 U Forbidden Alchemy @David Rapoza
+49 C Forbidden Alchemy @David Rapoza
 50 R Force of Negation @Paul Scott Canavan
 51 R Gifts Ungiven @Chris Rallis
 52 C Ingenious Skaab @Jesper Ejsing
@@ -87,7 +87,7 @@ ScryfallCode=2X2
 79 M Imperial Seal @Milivoj Ćeran
 80 U Inquisition of Kozilek @Tomasz Jedruszek
 81 M Liliana, the Last Hope @Jaime Jones
-82 U Liliana's Elite @Deruchenko Alexander
+82 C Liliana's Elite @Deruchenko Alexander
 83 R Necrotic Ooze @James Ryman
 84 R Ob Nixilis, Unshackled @Karl Kopinski
 85 R Oona's Prowler @Wayne Reynolds
@@ -126,7 +126,7 @@ ScryfallCode=2X2
 118 U Living Lightning @Caio Monteiro
 119 C Monastery Swiftspear @Steve Argyle
 120 C Pirate's Pillage @Wayne Reynolds
-121 U Purphoros's Emissary @Sam Burley
+121 C Purphoros's Emissary @Sam Burley
 122 C Rift Bolt @Daniel Ljunggren
 123 M Seasoned Pyromancer @Cynthia Sheppard
 124 C Sparkmage's Gambit @Mathias Kollros
@@ -158,14 +158,14 @@ ScryfallCode=2X2
 150 R Green Sun's Zenith @David Rapoza
 151 R Hardened Scales @Mark Winters
 152 R Impervious Greatwurm @Simon Dominic
-153 U Might of Old Krosa @Lars Grant-West
+153 C Might of Old Krosa @Lars Grant-West
 154 R Oracle of Mul Daya @Vance Kovacs
 155 C Rampant Growth @Scott M. Fischer
 156 U Rancor @Kev Walker
 157 R Rishkar, Peema Renegade @Todd Lockwood
 158 U Spider Spawning @Daniel Ljunggren
 159 R Splinterfright @Eric Deschamps
-160 U Summer Bloom @Nicola Leonard
+160 U Summer Bloom @Ernanda Souza
 161 C Thrive @Daren Bader
 162 U Travel Preparations @Vincent Proce
 163 C Tuskguard Captain @Aaron Miller
@@ -228,7 +228,7 @@ ScryfallCode=2X2
 220 C Glowspore Shaman @Lars Grant-West
 221 R Grand Arbiter Augustin IV @Zoltan Boros & Gabor Szikszai
 222 R Grim Flayer @Mathias Kollros
-223 U Ground Assault @Karl Kopinski
+223 C Ground Assault @Karl Kopinski
 224 R Guided Passage @Alex Horley-Orlandelli
 225 M Hellkite Overlord @Justin Sweet
 226 U Heroic Reinforcements @Scott Murphy
