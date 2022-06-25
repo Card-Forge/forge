@@ -297,6 +297,14 @@ public class GameAction {
 
                 // copy bestow timestamp
                 copied.setBestowTimestamp(c.getBestowTimestamp());
+
+                if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
+                    copied.setCastSA(cause);
+                    KeywordInterface kw = cause.getKeyword();
+                    if (kw != null) {
+                        copied.addKeywordForStaticAbility(kw);
+                    }
+                }
             } else {
                 // when a card leaves the battlefield, ensure it's in its original state
                 // (we need to do this on the object before copying it, or it won't work correctly e.g.
@@ -505,6 +513,7 @@ public class GameAction {
                             }
                         }
                         if (keepKeyword) {
+                            ki.setHostCard(copied);
                             newKw.add(ki);
                         }
                     }

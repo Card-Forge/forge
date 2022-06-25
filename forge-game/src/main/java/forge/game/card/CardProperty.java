@@ -34,6 +34,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class CardProperty {
@@ -1796,6 +1797,21 @@ public class CardProperty {
         } else if (property.equals("NoCounters")) {
             if (card.hasCounters()) {
                 return false;
+            }
+        } else if (property.equals("castKeyword")) {
+            SpellAbility castSA = card.getCastSA();
+            if (castSA == null) {
+                return false;
+            }
+            // intrinsic keyword might be a new one when the zone changes
+            if (castSA.isIntrinsic()) {
+                // so just check if the static is intrinsic too
+                if (!spellAbility.isIntrinsic()) {
+                    return false;
+                }
+            } else {
+                // otherwise check for keyword object
+                return Objects.equals(castSA.getKeyword(), spellAbility.getKeyword());
             }
         } else if (property.startsWith("CastSa"))  {
             SpellAbility castSA = card.getCastSA();
