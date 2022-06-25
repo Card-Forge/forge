@@ -1,7 +1,7 @@
 Name:Ganax, Astral Hunter
 ManaCost:4 R
 Types:Legendary Creature Dragon
-PT:3/3
+PT:3/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Dragon.Other+YouCtrl | Execute$ TrigTreasure | TriggerDescription$ Whenever CARDNAME or another Dragon enters the battlefield under your control, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
 SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
