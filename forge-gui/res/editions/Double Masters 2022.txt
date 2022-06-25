@@ -29,7 +29,7 @@ ScryfallCode=2X2
 21 M Monastery Mentor @Magali Villeneuve
 22 U Myth Realized @Jason Rainville
 23 U Path to Exile @Raf Sarmento
-24 C Relief Captain @Anastasia Ovchinnikova
+24 U Relief Captain @Anastasia Ovchinnikova
 25 R Restoration Angel @Jake Murray
 26 R Reveillark @Jim Murray
 27 U Scale Blessing @Matt Stewart
@@ -54,7 +54,7 @@ ScryfallCode=2X2
 46 R Disciple of the Ring @Clint Cearley
 47 U Domestication @Jesper Ejsing
 48 C Eel Umbra @Howard Lyon
-49 C Forbidden Alchemy @David Rapoza
+49 U Forbidden Alchemy @David Rapoza
 50 R Force of Negation @Paul Scott Canavan
 51 R Gifts Ungiven @Chris Rallis
 52 C Ingenious Skaab @Jesper Ejsing
@@ -87,7 +87,7 @@ ScryfallCode=2X2
 79 M Imperial Seal @Milivoj Ćeran
 80 U Inquisition of Kozilek @Tomasz Jedruszek
 81 M Liliana, the Last Hope @Jaime Jones
-82 C Liliana's Elite @Deruchenko Alexander
+82 U Liliana's Elite @Deruchenko Alexander
 83 R Necrotic Ooze @James Ryman
 84 R Ob Nixilis, Unshackled @Karl Kopinski
 85 R Oona's Prowler @Wayne Reynolds
@@ -126,7 +126,7 @@ ScryfallCode=2X2
 118 U Living Lightning @Caio Monteiro
 119 C Monastery Swiftspear @Steve Argyle
 120 C Pirate's Pillage @Wayne Reynolds
-121 C Purphoros's Emissary @Sam Burley
+121 U Purphoros's Emissary @Sam Burley
 122 C Rift Bolt @Daniel Ljunggren
 123 M Seasoned Pyromancer @Cynthia Sheppard
 124 C Sparkmage's Gambit @Mathias Kollros
@@ -158,14 +158,14 @@ ScryfallCode=2X2
 150 R Green Sun's Zenith @David Rapoza
 151 R Hardened Scales @Mark Winters
 152 R Impervious Greatwurm @Simon Dominic
-153 C Might of Old Krosa @Lars Grant-West
+153 U Might of Old Krosa @Lars Grant-West
 154 R Oracle of Mul Daya @Vance Kovacs
 155 C Rampant Growth @Scott M. Fischer
 156 U Rancor @Kev Walker
 157 R Rishkar, Peema Renegade @Todd Lockwood
 158 U Spider Spawning @Daniel Ljunggren
 159 R Splinterfright @Eric Deschamps
-160 U Summer Bloom @Ernanda Souza
+160 U Summer Bloom @Nicola Leonard
 161 C Thrive @Daren Bader
 162 U Travel Preparations @Vincent Proce
 163 C Tuskguard Captain @Aaron Miller
@@ -228,7 +228,7 @@ ScryfallCode=2X2
 220 C Glowspore Shaman @Lars Grant-West
 221 R Grand Arbiter Augustin IV @Zoltan Boros & Gabor Szikszai
 222 R Grim Flayer @Mathias Kollros
-223 C Ground Assault @Karl Kopinski
+223 U Ground Assault @Karl Kopinski
 224 R Guided Passage @Alex Horley-Orlandelli
 225 M Hellkite Overlord @Justin Sweet
 226 U Heroic Reinforcements @Scott Murphy
@@ -251,7 +251,7 @@ ScryfallCode=2X2
 243 U Lightning Helix @Raymond Swanland
 244 M Lord of Extinction @Izzy
 245 U Lotleth Troll @Vincent Proce
-246 U Lyev Skyknight @Johannes Voss
+246 C Lyev Skyknight @Johannes Voss
 247 R Magister Sphinx @Steven Belledin
 248 R Marchesa, the Black Rose @Matt Stewart
 249 C Martial Glory @Raymond Swanland
@@ -345,9 +345,9 @@ ScryfallCode=2X2
 337 M Ulamog, the Infinite Gyre @Thomas M. Baxa
 338 M Emiel the Blessed @Martina Pilcerova
 339 U Flickerwisp @Thomas M. Baxa
-340 U Mentor of the Meek
+340 U Mentor of the Meek @Alex Horley-Orlandelli
 341 C Seeker of the Way @Douglas Shuler
-342 R Smothering Tithe
+342 R Smothering Tithe @Pete Venters
 343 R Teferi's Protection @Greg Staples
 344 U Wall of Omens @Dan Frazier
 345 M Consecrated Sphinx @Mark Zug
@@ -362,7 +362,7 @@ ScryfallCode=2X2
 354 M Imperial Seal @Mark Tedin
 355 U Inquisition of Kozilek @rk post
 356 R Surgical Extraction @Thomas M. Baxa
-357 C Unearth
+357 C Unearth @Jeff Miracola
 358 R Anger of the Gods @Dermot Power
 359 R Chaos Warp @Phil Foglio
 360 M Dockside Extortionist @Douglas Shuler
@@ -375,11 +375,11 @@ ScryfallCode=2X2
 367 M Concordant Crossroads @Mark Poole
 368 U Eternal Witness @Keith Garletts
 369 R Hardened Scales @Jim Nelson
-370 R Oracle of Mul Daya
+370 R Oracle of Mul Daya @Darrell Riche
 371 C Rampant Growth @Jeff Miracola
 372 R Assassin's Trophy @Ron Spears
 373 U Bloodbraid Elf @Paolo Parente
-374 C Burning-Tree Emissary
+374 C Burning-Tree Emissary @Scott M. Fischer
 375 C Coiling Oracle @Richard Kane Ferguson
 376 M Dragonlord Dromoka @Richard Kane Ferguson
 377 M Elenda, the Dusk Rose @Richard Kane Ferguson
@@ -391,16 +391,16 @@ ScryfallCode=2X2
 383 R The Mimeoplasm @Mark Tedin
 384 M Muldrotha, the Gravetide @Eric Velhagen
 385 R Privileged Position @Donato Giancola
-386 C Qasali Pridemage
-387 M Sedris, the Traitor King
+386 C Qasali Pridemage @David O'Connor
+387 M Sedris, the Traitor King @Ian Miller
 388 R Supreme Verdict @Ron Spears
 389 U Terminate @Paolo Parente
 390 R Thousand-Year Storm @Donato Giancola
-391 R Aether Vial
+391 R Aether Vial @Greg Staples
 392 R Bloodforged Battle-Axe @Ron Spencer
 393 M Crucible of Worlds @Mark Zug
 394 M Mana Vault @Steve Prescott
-395 R Panharmonicon
+395 R Panharmonicon @Mark Poole
 396 R Phyrexian Altar @Pete Venters
 397 R Pithing Needle @Ron Spencer
 398 R Sensei's Divining Top @Greg Staples
@@ -408,13 +408,13 @@ ScryfallCode=2X2
 400 U Azorius Chancery @Carl Critchlow
 401 U Boros Garrison @Darrell Riche
 402 M Cavern of Souls @Drew Tucker
-403 R City of Brass
+403 R City of Brass @Mark Poole
 404 U Dimir Aqueduct @Mark Poole
 405 R Forbidden Orchard @Drew Tucker
 406 U Golgari Rot Farm @Donato Giancola
 407 U Gruul Turf @Ron Spencer
 408 U Izzet Boilerworks @Keith Garletts
-409 U Orzhov Basilica
+409 U Orzhov Basilica @Jim Nelson
 410 U Rakdos Carnarium @Thomas M. Baxa
 411 U Selesnya Sanctuary @Ron Spears
 412 U Simic Growth Chamber @Pete Venters
@@ -587,24 +587,24 @@ ScryfallCode=2X2
 579 R Bring to Light @Mark Poole
 
 [tokens]
-b_1_1_faerie_rogue_flying
-b_2_2_zombie
-bg_1_1_worm
-brg_3_3_cat_dragon_flying
 c_1_1_eldrazi_scion_sac
 c_1_1_spirit
-c_3_3_a_phyrexian_golem
-c_a_treasure_sac
-g_0_1_egg_defender
-g_1_1_saproling
-g_1_2_spider_reach
-g_3_3_boar
-g_4_4_bear
-r_1_1_elemental
-u_2_2_drake_flying
+w_4_4_angel_flying_vigilance
+w_2_2_knight_vigilance
 w_1_1_monk_prowess
 w_1_1_soldier
 w_1_1_spirit_flying
 w_1_1_vampire_lifelink
-w_2_2_knight_vigilance
-w_4_4_angel_flying_vigilance
+u_2_2_drake_flying
+b_1_1_faerie_rogue_flying
+b_2_2_zombie
+r_1_1_elemental
+g_4_4_bear
+g_3_3_boar
+g_0_1_egg_defender
+g_1_1_saproling
+g_1_2_spider_reach
+brg_3_3_cat_dragon_flying
+bg_1_1_worm
+c_3_3_a_phyrexian_golem
+c_a_treasure_sac
