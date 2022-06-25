@@ -1,6 +1,6 @@
 Name:Burakos, Party Leader
 ManaCost:3 B
-Types:Legendary Creature Orc
+Types:Creature Orc
 PT:2/4
 K:Choose a Background
 S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ Cleric & Rogue & Warrior & Wizard | Description$ CARDNAME is also a Cleric, Rogue, Warrior, and Wizard.
