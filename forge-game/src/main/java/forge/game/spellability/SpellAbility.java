@@ -1155,14 +1155,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
         newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
 
-        //Normal copied spell will not copy castFaceDown flag
-        //But copyWithNoManaCost is used to get SA without mana cost
-        //So it need to copy the castFaceDown flag too
-        if (newSA instanceof Spell) {
-            Spell spell = (Spell) newSA;
-            spell.setCastFaceDown(this.isCastFaceDown());
-        }
-
         return newSA;
     }
 

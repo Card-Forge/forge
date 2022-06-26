@@ -1555,7 +1555,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         Card movedCard = null;
         if (srcSA.hasParam("Destination")) {
             final boolean remember = srcSA.hasParam("RememberChanged");
-            final boolean rememberSpell = srcSA.hasParam("RememberSpell");
             final boolean imprint = srcSA.hasParam("Imprint");
             if (tgtSA.isAbility()) {
                 // Shouldn't be able to target Abilities but leaving this in for now
@@ -1590,9 +1589,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (remember) {
                 srcSA.getHostCard().addRemembered(tgtHost);
                 // TODO or remember moved?
-            }
-            if (rememberSpell) {
-                srcSA.getHostCard().addRemembered(tgtSA);
             }
             if (imprint) {
                 srcSA.getHostCard().addImprintedCard(tgtHost);
