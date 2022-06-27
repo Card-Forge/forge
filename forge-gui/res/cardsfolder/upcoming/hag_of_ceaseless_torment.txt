@@ -1,0 +1,12 @@
+Name:Hag of Ceaseless Torment
+ManaCost:2 B
+Types:Creature Hag Warlock
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRepeat | TriggerDescription$ At the beginning of your upkeep, each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChoose
+SVar:DBChoose:DB$ GenericChoice | Defined$ Player.IsRemembered | Choices$ SacNonland,Discard | FallbackAbility$ LoseLifeFallback | AILogic$ PayUnlessCost
+SVar:SacNonland:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 3 | UnlessCost$ Sac<1/Permanent.nonLand/nonland permanent> | UnlessPayer$ Player.IsRemembered | SpellDescription$ You lose 3 life unless you sacrifice a nonland permanent
+SVar:Discard:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 3 | UnlessCost$ Discard<1/Card> | UnlessPayer$ Player.IsRemembered | SpellDescription$ You lose 3 life unless you discard a card
+SVar:LoseLifeFallback:DB$ LoseLife | Defined$ Player.IsRemembered | LifeAmount$ 3
+DeckHas:Ability$Sacrifice|Discard
+Oracle:At the beginning of your upkeep, each opponent loses 3 life unless that player sacrifices a nonland permanent or discards a card.

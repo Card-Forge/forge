@@ -1,0 +1,7 @@
+Name:Hag of Twisted Visions
+ManaCost:2 B
+Types:Creature Hag Warlock
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ At the beginning of your upkeep, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+Oracle:At the beginning of your upkeep, scry 2.

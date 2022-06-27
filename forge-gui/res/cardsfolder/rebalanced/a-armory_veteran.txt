@@ -5,4 +5,4 @@ PT:2/2
 K:Ward:PayLife<2>
 S:Mode$ Continuous | Affected$ Card.Self+equipped | AddKeyword$ Menace | Description$ As long as CARDNAME is equipped, it has menace.
 SVar:EquipMe:Once
-Oracle:Ward—Pay 2 life.\nAs long as Armory Veteran is equipped, it has menace.
+Oracle:Ward — Pay 2 life.\nAs long as Armory Veteran is equipped, it has menace.
