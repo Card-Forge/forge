@@ -511,7 +511,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            removeFromStack(tgtSA, sa, si, game, triggerList);
+            removeFromStack(tgtSA, sa, si, game, triggerList, counterTable);
         } // End of change from stack
 
         final String remember = sa.getParam("RememberChanged");
@@ -1543,7 +1543,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            object.
      * @param game
      */
-    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Game game, CardZoneTable triggerList) {
+    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Game game, CardZoneTable triggerList, GameEntityCounterTable counterTable) {
         final Card tgtHost = tgtSA.getHostCard();
         final Zone originZone = tgtHost.getZone();
         game.getStack().remove(si);
@@ -1584,6 +1584,12 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else {
                 throw new IllegalArgumentException("AbilityFactory_ChangeZone: Invalid Destination argument for card "
                         + srcSA.getHostCard().getName());
+            }
+
+            if (srcSA.hasParam("WithCountersType")) {
+                CounterType cType = CounterType.getType(srcSA.getParam("WithCountersType"));
+                int cAmount = AbilityUtils.calculateAmount(srcSA.getHostCard(), srcSA.getParamOrDefault("WithCountersAmount", "1"), srcSA);
+                movedCard.addCounter(cType, cAmount, srcSA.getActivatingPlayer(), counterTable);
             }
 
             if (remember) {
