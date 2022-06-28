@@ -9,6 +9,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
@@ -60,8 +61,10 @@ public class MakeCardEffect extends SpellAbilityEffect {
                     amount--;
                 }
 
+                final CardZoneTable triggerList = new CardZoneTable();
                 for (final Card c : cards) {
                     game.getAction().moveTo(zone, c, sa, moveParams);
+                    triggerList.put(ZoneType.None, c.getZone().getZoneType(), c);
                     if (sa.hasParam("RememberMade")) {
                         sa.getHostCard().addRemembered(c);
                     }
@@ -69,6 +72,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                         sa.getHostCard().addImprintedCard(c);
                     }
                 }
+                triggerList.triggerChangesZoneAll(game, sa);
                 if (zone.equals(ZoneType.Library)) {
                     player.shuffle(sa);
                 }
