@@ -4,7 +4,7 @@ Types:Legendary Creature Human Warlock
 PT:1/1
 S:Mode$ Continuous | Affected$ You | AddKeyword$ If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll. | Description$ If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.
 T:Mode$ RolledDieOnce | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPut | TriggerDescription$ Whenever you roll one or more dice, put a +1/+1 counter on CARDNAME.
-SVar:TrigPut:DB$ PutCounter | Defined$ Self | ValidCard$ Card.Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPut:DB$ PutCounter |  CounterType$ P1P1 
 K:Choose a Background
 AI:RemoveDeck:Random
 DeckHas:Ability$Counters
