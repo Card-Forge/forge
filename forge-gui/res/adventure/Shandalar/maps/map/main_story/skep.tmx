@@ -81,7 +81,7 @@
   </object>
   <object id="63" template="../../obj/scroll.tx" x="144" y="48">
    <properties>
-    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Terraforming Expanse&quot;, &quot;count&quot;: 1 } ]"/>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Terramorphic Expanse&quot;, &quot;count&quot;: 1 } ]"/>
    </properties>
   </object>
  </objectgroup>
