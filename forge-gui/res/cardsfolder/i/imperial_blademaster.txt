@@ -4,8 +4,6 @@ Types:Creature Human Samurai
 PT:2/2
 K:Double Strike
 T:Mode$ Attacks | ValidCard$ Samurai.YouCtrl,Warrior.YouCtrl | Alone$ True | TriggerZones$ Battlefield | Execute$ TrigDraft | TriggerDescription$ Whenever a Samurai or Warrior you control attacks alone, draft a card from Imperial Blademaster's spellbook.
-SVar:TrigDraft:DB$ NameCard | Draft$ True | Defined$ You | ChooseFromList$ Eiganjo Exemplar,Imperial Subduer,Ancestral Katana,Selfless Samurai,Norika Yamazaki; the Poet,Akki Ronin,Peerless Samurai,Heiko Yamazaki; the General,Asari Captain,Eiganjo Uprising,Eater of Virtue,Sunblade Samurai,Reinforced Ronin,Adamant Will,Tempered in Solitude | SubAbility$ DBMakeCard
-SVar:DBMakeCard:DB$ MakeCard | Name$ ChosenName | Zone$ Hand | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearNamedCard$ True
+SVar:TrigDraft:DB$ Draft | Spellbook$ Eiganjo Exemplar,Imperial Subduer,Ancestral Katana,Selfless Samurai,Norika Yamazaki; the Poet,Akki Ronin,Peerless Samurai,Heiko Yamazaki; the General,Asari Captain,Eiganjo Uprising,Eater of Virtue,Sunblade Samurai,Reinforced Ronin,Adamant Will,Tempered in Solitude
 DeckHints:Type$Samurai|Warrior
 Oracle:Double strike\nWhenever a Samurai or Warrior you control attacks alone, draft a card from Imperial Blademaster's spellbook.

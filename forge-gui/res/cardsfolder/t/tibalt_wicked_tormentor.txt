@@ -3,14 +3,13 @@ ManaCost:3 R R
 Types:Legendary Planeswalker Tibalt
 Loyalty:3
 A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ R | Amount$ 2 | SubAbility$ DBDraft | SpellDescription$ Add {R}{R}.
-SVar:DBDraft:DB$ NameCard | Draft$ True | Defined$ You | ChooseFromList$ Chained Brute,Charmbreaker Devils,Festival Crasher,Forge Devil,Frenzied Devils,Havoc Jester,Hellrider,Hobblefiend,Pitchburn Devils,Sin Prodder,Spiteful Prankster,Tibalt's Rager,Torch Fiend,Brimstone Vandal,Devil's Play | SubAbility$ DBMakeCard | StackDescription$ SpellDescription | SpellDescription$ Draft a card from CARDNAME's spellbook, then exile it.
-SVar:DBMakeCard:DB$ MakeCard | Name$ ChosenName | Zone$ Exile | RememberMade$ True | SubAbility$ DBEffect
+SVar:DBDraft:DB$ Draft | Spellbook$ Chained Brute,Charmbreaker Devils,Festival Crasher,Forge Devil,Frenzied Devils,Havoc Jester,Hellrider,Hobblefiend,Pitchburn Devils,Sin Prodder,Spiteful Prankster,Tibalt's Rager,Torch Fiend,Brimstone Vandal,Devil's Play | Zone$ Exile | RememberDrafted$ True | SubAbility$ DBEffect | SpellDescription$ Draft a card from CARDNAME's spellbook, then exile it.
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ExileOnMoved$ Exile | SubAbility$ DBCleanup | SpellDescription$ Until end of turn, you may cast that card.
 SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of turn, you may cast that card.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearNamedCard$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 4 | UnlessCost$ DamageYou<4> | UnlessPayer$ TargetedController | UnlessResolveSubs$ WhenPaid | SubAbility$ DBDiscardDraw | StackDescription$ CARDNAME deals 4 damage to {c:Targeted} unless {p:TargetedController} has NICKNAME deal 4 damage to them. | SpellDescription$ CARDNAME deals 4 damage to target creature or planeswalker unless its controller has NICKNAME deal 4 damage to them.
 SVar:DBDiscardDraw:DB$ Draw | NumCards$ 1 | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | UnlessSwitched$ True | OrString$ Draw a card. | StackDescription$ SpellDescription | SpellDescription$ If they do, you may discard a card. If you do, draw card.
 A:AB$ Token | Cost$ SubCounter<X/LOYALTY> | Planeswalker$ True | TokenAmount$ X | TokenScript$ r_1_1_devil_burn | SpellDescription$ Create X 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target."
 SVar:X:Count$xPaid
-DeckHas:Ability$Discard|Token
+DeckHas:Ability$Discard|Token & Type$Devil
 Oracle:[+1]: Add {R}{R}. Draft a card from Tibalt, Wicked Tormentor's spellbook, then exile it. Until end of turn, you may cast that card.\n[+1]: Tibalt, Wicked Tormentor deals 4 damage to target creature or planeswalker unless its controller has Tibalt deal 4 damage to them. If they do, you may discard a card. If you do, draw card.\n[-X]: Create X 1/1 red Devil creature tokens with "When this creature dies, it deals 1 damage to any target."
