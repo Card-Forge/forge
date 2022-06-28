@@ -2,7 +2,7 @@ Name:Ertai's Meddling
 ManaCost:X U
 Types:Instant
 Text:X can't be 0.\r\n
-A:SP$ ChangeZone | Cost$ XCantBe0 X U | TgtZone$ Stack | TargetType$ Spell | ValidTgts$ Card | Origin$ Stack | Destination$ Exile | Imprint$ True | WithCountersType$ DELAY | WithCountersAmount$ X | SubAbility$ DBPutCounter | SpellDescription$ Target spell's controller exiles it with X delay counters on it.
+A:SP$ ChangeZone | Cost$ XCantBe0 X U | TgtZone$ Stack | TargetType$ Spell | ValidTgts$ Card | Origin$ Stack | Destination$ Exile | Imprint$ True | SubAbility$ DBPutCounter | SpellDescription$ Target spell's controller exiles it with X delay counters on it.
 SVar:X:Count$xPaid
 SVar:DBPutCounter:DB$ PutCounter | Defined$ Imprinted | CounterType$ DELAY | CounterNum$ X | SubAbility$ DBDelayEffect
 SVar:DBDelayEffect:DB$ Effect | EffectOwner$ TargetedController | RememberSpell$ Targeted | ImprintCards$ Imprinted | ConditionDefined$ Imprinted | ConditionPresent$ Card.inZoneExile | Triggers$ TrigDelay,TrigExile | Duration$ Permanent | SubAbility$ DBForget
