@@ -1587,9 +1587,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             if (srcSA.hasParam("WithCountersType")) {
+                Player placer = srcSA.getActivatingPlayer();
+                if (srcSA.hasParam("WithCountersPlacer")) {
+                    placer = AbilityUtils.getDefinedPlayers(srcSA.getHostCard(), srcSA.getParam("WithCountersPlacer"), srcSA).get(0);
+                }
                 CounterType cType = CounterType.getType(srcSA.getParam("WithCountersType"));
                 int cAmount = AbilityUtils.calculateAmount(srcSA.getHostCard(), srcSA.getParamOrDefault("WithCountersAmount", "1"), srcSA);
-                movedCard.addCounter(cType, cAmount, srcSA.getActivatingPlayer(), counterTable);
+                movedCard.addCounter(cType, cAmount, placer, counterTable);
             }
 
             if (remember) {
