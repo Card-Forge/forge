@@ -255,21 +255,6 @@ public class CardProperty {
             if (!AbilityUtils.getDefinedPlayers(source, "TargetedPlayer", spellAbility).contains(controller)) {
                 return false;
             }
-        } else if (property.equals("TargetedControllerCtrl")) {
-            final CardCollectionView cards = AbilityUtils.getDefinedCards(source, "Targeted", spellAbility);
-            final List<SpellAbility> sas = AbilityUtils.getDefinedSpellAbilities(source, "Targeted", spellAbility);
-            for (final Card c : cards) {
-                final Player p = c.getController();
-                if (!controller.equals(p)) {
-                    return false;
-                }
-            }
-            for (final SpellAbility s : sas) {
-                final Player p = s.getHostCard().getController();
-                if (!controller.equals(p)) {
-                    return false;
-                }
-            }
         } else if (property.startsWith("ActivePlayerCtrl")) {
             if (!game.getPhaseHandler().isPlayerTurn(controller)) {
                 return false;

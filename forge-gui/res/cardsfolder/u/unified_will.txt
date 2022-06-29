@@ -3,6 +3,6 @@ ManaCost:1 U
 Types:Instant
 A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | ConditionCheckSVar$ YourPeerGroup | ConditionSVarCompare$ GTY | SpellDescription$ Counter target spell if you control more creatures than that spell's controller.
 SVar:YourPeerGroup:Count$Valid Creature.YouCtrl
-SVar:Y:Count$Valid Creature.TargetedControllerCtrl
+SVar:Y:Count$Valid Creature.ControlledBy TargetedController
 SVar:NeedsToPlayVar:YourPeerGroup GTY
 Oracle:Counter target spell if you control more creatures than that spell's controller.
