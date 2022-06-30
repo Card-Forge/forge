@@ -1,9 +1,0 @@
-Name:Wrathful Red Dragon
-ManaCost:3 R R
-Types:Creature Dragon
-PT:5/5
-K:Flying
-T:Mode$ DamageDone | Execute$ TrigDamage | ValidTarget$ Creature.Dragon+YouCtrl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a Dragon you control is dealt damage, it deals that much damage to any target that isn't a Dragon.
-SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Creature.nonDragon,Player,Planeswalker | TgtPrompt$ Select any target that isn't a Dragon
-SVar:X:TriggerCount$DamageAmount
-Oracle:Flying\nWhenever a Dragon you control is dealt damage, it deals that much damage to any target that isn't a Dragon.
