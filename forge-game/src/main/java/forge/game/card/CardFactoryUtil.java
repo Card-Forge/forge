@@ -2794,7 +2794,18 @@ public class CardFactoryUtil {
             abilityStr.append(equipCost);
             abilityStr.append("| ValidTgts$ ").append(valid);
             abilityStr.append(" | TgtPrompt$ Select target ").append(vstr).append(" you control ");
-            abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Equipment.Self+nonCreature ");
+            if (card.hasKeyword(Keyword.RECONFIGURE)) {
+                /*
+                * 301.5c An Equipment that’s also a creature can’t equip a creature unless that Equipment has reconfigure (see rule 702.151, “Reconfigure”).
+                * An Equipment that loses the subtype “Equipment” can’t equip a creature. An Equipment can’t equip itself. An Equipment that equips an illegal
+                * or nonexistent permanent becomes unattached from that permanent but remains on the battlefield. (This is a state-based action. See rule 704.)
+                * An Equipment can’t equip more than one creature. If a spell or ability would cause an Equipment to equip more than one creature,
+                * the Equipment’s controller chooses which creature it equips.
+                */
+                abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Equipment.Self ");
+            } else {
+                abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Equipment.Self+nonCreature ");
+            }
             // add AttachAi for some special cards
             if (card.hasSVar("AttachAi")) {
                 abilityStr.append("| ").append(card.getSVar("AttachAi"));
