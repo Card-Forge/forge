@@ -511,7 +511,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            removeFromStack(tgtSA, sa, si, game, triggerList);
+            removeFromStack(tgtSA, sa, si, game, triggerList, counterTable);
         } // End of change from stack
 
         final String remember = sa.getParam("RememberChanged");
@@ -1543,7 +1543,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            object.
      * @param game
      */
-    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Game game, CardZoneTable triggerList) {
+    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Game game, CardZoneTable triggerList, GameEntityCounterTable counterTable) {
         final Card tgtHost = tgtSA.getHostCard();
         final Zone originZone = tgtHost.getZone();
         game.getStack().remove(si);
@@ -1555,7 +1555,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         Card movedCard = null;
         if (srcSA.hasParam("Destination")) {
             final boolean remember = srcSA.hasParam("RememberChanged");
-            final boolean rememberSpell = srcSA.hasParam("RememberSpell");
             final boolean imprint = srcSA.hasParam("Imprint");
             if (tgtSA.isAbility()) {
                 // Shouldn't be able to target Abilities but leaving this in for now
@@ -1587,12 +1586,19 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         + srcSA.getHostCard().getName());
             }
 
+            if (srcSA.hasParam("WithCountersType")) {
+                Player placer = srcSA.getActivatingPlayer();
+                if (srcSA.hasParam("WithCountersPlacer")) {
+                    placer = AbilityUtils.getDefinedPlayers(srcSA.getHostCard(), srcSA.getParam("WithCountersPlacer"), srcSA).get(0);
+                }
+                CounterType cType = CounterType.getType(srcSA.getParam("WithCountersType"));
+                int cAmount = AbilityUtils.calculateAmount(srcSA.getHostCard(), srcSA.getParamOrDefault("WithCountersAmount", "1"), srcSA);
+                movedCard.addCounter(cType, cAmount, placer, counterTable);
+            }
+
             if (remember) {
                 srcSA.getHostCard().addRemembered(tgtHost);
                 // TODO or remember moved?
-            }
-            if (rememberSpell) {
-                srcSA.getHostCard().addRemembered(tgtSA);
             }
             if (imprint) {
                 srcSA.getHostCard().addImprintedCard(tgtHost);
