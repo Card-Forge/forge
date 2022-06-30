@@ -48,7 +48,7 @@ public class EncodeEffect extends SpellAbilityEffect {
         }
         // Handle choice of whether or not to encoded
 
-        if (!player.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantExileCardAndEncodeOntoYouCreature", CardTranslation.getTranslatedName(host.getName())))) {
+        if (!player.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantExileCardAndEncodeOntoYouCreature", CardTranslation.getTranslatedName(host.getName())), null)) {
             return;
         }
 

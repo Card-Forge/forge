@@ -8,5 +8,7 @@
         "obj",
         "tileset"
     ],
-    "objectTypesFile": ""
+    "objectTypesFile": "",
+    "propertyTypes": [
+    ]
 }

@@ -20,6 +20,6 @@ ManaCost:no cost
 Colors:black
 Types:Enchantment Creature Human Samurai
 PT:2/3
-A:AB$ Mana | Cost$ T PayLife<1> | Produced$ B | RestrictValid$ Instant,Sorcery | SpellDescription$ Add {B}. Spend this mana only to cast an instant or sorcery spell.
+A:AB$ Mana | Cost$ T PayLife<1> | Produced$ B | RestrictValid$ Spell.Instant,Spell.Sorcery | SpellDescription$ Add {B}. Spend this mana only to cast an instant or sorcery spell.
 DeckHints:Type$Instant|Sorcery
 Oracle:{T}, Pay 1 life: Add {B}. Spend this mana only to cast an instant or sorcery spell.

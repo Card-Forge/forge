@@ -1,7 +1,0 @@
-[format]
-Name:Extended (RAV)
-Type:Historic
-Subtype:Extended
-Effective:2005-10-20
-Sets:INV, PLS, 7ED, APC, ODY, TOR, JUD, ONS, LGN, SCG, 8ED, MRD, DST, 5DN, CHK, BOK, SOK, 9ED, RAV
-Banned:Aether Vial; Disciple of the Vault; Entomb; Skullclamp

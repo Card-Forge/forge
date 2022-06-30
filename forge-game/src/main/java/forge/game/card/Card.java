@@ -500,7 +500,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (game != null) {
                 // update Type, color and keywords again if they have changed
                 if (!changedCardTypes.isEmpty()) {
-                    updateTypesForView();;
+                    updateTypesForView();
                 }
                 updateColorForView();
 

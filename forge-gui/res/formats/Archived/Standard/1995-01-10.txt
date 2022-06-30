@@ -1,0 +1,9 @@
+[format]
+Name:Type 2 (1995-01-10)
+Type:Archived
+Subtype:Standard
+Effective:1995-01-10
+Sets:3ED, DRK, FEM
+RestrictedLegendary:true
+Restricted:Braingeyser; Channel; Copy Artifact; Demonic Tutor; Ivory Tower; Maze of Ith; Mind Twist; Regrowth; Sol Ring; Wheel of Fortune
+Banned:Contract From Below; Darkpact; Demonic Attorney

@@ -1,0 +1,6 @@
+[format]
+Name:Pre-format (1993-08-05)
+Type:Archived
+Subtype:Vintage
+Effective:1993-08-05
+Sets:LEA

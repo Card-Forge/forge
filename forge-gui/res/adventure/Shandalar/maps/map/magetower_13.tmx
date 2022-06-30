@@ -1,39 +1,286 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="65">
+<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="83">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
+ <properties>
+  <property name="dungeonEffect">{
+  &quot;startBattleWithCard&quot;: [ &quot;As Foretold&quot; ],
+}</property>
+ </properties>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
+ <tileset firstgid="6321" source="../tileset/buildings.tsx"/>
+ <layer id="6" name="Collision" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjIJRMApGwWAFu3ggmJAYsQAA2igDGQ==
+   eJztyDENAAAIwDAE4F8M6jgQAC9Jm+xZBAAAAB9UTtu7auBAAxk=
   </data>
  </layer>
- <layer id="1" name="Background" width="30" height="17">
+ <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJxr4mZgaBrFo3gUj+JRPIpH8YjAAJnxGPY=
+   eJztw7ENAAAIA6Dufu3lHT1CSEgA4Oyoql8WoAkY9g==
   </data>
  </layer>
- <layer id="2" name="Walls" width="30" height="17">
+ <layer id="2" name="Walls" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzN1G0KgCAMBmD/myewLlZnqa7V590yYjBkzW1INBhBNR/fCJfGueWDbrOWzAzBua157z7Uc+H5be7pytUqsDV5c5PKKrWlriSnJrfEtZglW+J2RhMqGvNy/y7sKRbeq50Xu7Xz/tGVlNU9U8/eZo5p7jC6LWNz3xlMal3NOUnZby5nas9Jyqbckql1sT35p7EL90qmxc1nsKvdP+4Lkd3cuQ==
+   eJzt0mEKgkAQhuH5Gyr439WD1VmqW3QWM72bKzYwLO5k0xcRjPCysqiPu9qXRL3neZ7n/UGnimgo8x2r75iPON4ORO1zTLuDbWkuba0Vbafmnj61LSbCzn3HvTXG9Wr/Lr9T8+I6xHqXg8+li16vts+/ckO9jl2Nd6fYtbD9U+d432h0g2Jr+8xmMLqanXMRpmZvuUgztS/FmnR5Dm1Km5OunH/3mTPAN3+e
   </data>
  </layer>
- <layer id="3" name="Clutter" width="30" height="17">
+ <layer id="7" name="Walls(Ex)" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMAqGFpDlGWgXjIJRQD6ApV96p+ORZi82AHOD9CBwyygYBYMFAAAfygFw
+  </data>
+ </layer>
+ <layer id="3" name="Clutter" width="30" height="30">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFIxm0UVndKEAAWR7K9EtTqB8doMfhaJwOfTCaf0cBOQAADEIDdQ==
+   eJxjYBgFo2AUjIJRMApGwSiAgDYqqxsFCCDLQ5l+aQr1owP0OKRnnNbxMzDUA3EDPx0tHQFgNP+OAnIAAPloBR8=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entry_up.tx" x="208.333" y="270.665">
+  <object id="38" template="../obj/entry_up.tx" x="208.333" y="478.665">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="48" template="../obj/treasure.tx" x="208.174" y="46.0151"/>
+  <object id="65" template="../obj/gate.tx" gid="4125" x="208" y="384" width="16" height="16">
+   <properties>
+    <property name="dialog">[{
+  &quot;text&quot;:&quot;A big gate is blocking the path&quot;,
+  &quot;options&quot;:[
+    { &quot;name&quot;:&quot;go away&quot; },
+    {      
+      &quot;name&quot;:&quot;unlock with blue key&quot;,     
+      &quot;condition&quot;:[ { &quot;item&quot;: &quot;Blue Key&quot; } ],    
+      &quot;text&quot;:&quot;The gate is unlocked&quot;,
+      &quot;options&quot;:[
+        {
+          &quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1}]
+        }
+      ]
+    }
+  ]
+}]</property>
+   </properties>
+  </object>
+  <object id="66" template="../obj/enemy.tx" x="176" y="400">
+   <properties>
+    <property name="enemy" value="Doppelganger"/>
+   </properties>
+  </object>
+  <object id="75" template="../obj/enemy.tx" x="96" y="320">
+   <properties>
+    <property name="defeatDialog">[
+  {
+    &quot;text&quot;:&quot;The doppelganger reforms, mysteriously.&quot;,
+    &quot;loctext&quot;:&quot;&quot;,
+    &quot;options&quot;:[ { &quot;name&quot;:&quot;Leave it.&quot; } ]
+  }
+]</property>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 15,
+ &quot;changeStartCards&quot;: 2,
+ &quot;startBattleWithCard&quot;: [ &quot;Fellwar Stone&quot; ]
+}</property>
+    <property name="enemy" value="Doppelganger"/>
+   </properties>
+  </object>
+  <object id="74" template="../obj/enemy.tx" x="211" y="252">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 15,
+ &quot;changeStartCards&quot;: 2,
+ &quot;startBattleWithCard&quot;: [ &quot;Fellwar Stone&quot;, &quot;Frozen Aether&quot; ]
+}</property>
+    <property name="enemy" value="Doppelganger"/>
+   </properties>
+  </object>
+  <object id="71" template="../obj/enemy.tx" x="123" y="368">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 10,
+ &quot;startBattleWithCard&quot;: [ &quot;Hesitation&quot;, &quot;Hesitation&quot; ]
+}</property>
+    <property name="enemy" value="Blue Wiz3"/>
+   </properties>
+  </object>
+  <object id="67" template="../obj/enemy.tx" x="240" y="400">
+   <properties>
+    <property name="enemy" value="Djinn"/>
+   </properties>
+  </object>
+  <object id="82" template="../obj/enemy.tx" x="208" y="352">
+   <properties>
+    <property name="effect">{
+ &quot;lifeModifier&quot;: 30,
+ &quot;changeStartCards&quot;: 4,
+  &quot;opponent&quot;: {
+    &quot;startBattleWithCard&quot;: [ &quot;King Suleiman&quot; ],
+  }
+}</property>
+    <property name="enemy" value="Djinn"/>
+   </properties>
+  </object>
+  <object id="80" template="../obj/enemy.tx" x="288" y="312">
+   <properties>
+    <property name="enemy" value="Blue Wiz3"/>
+   </properties>
+  </object>
+  <object id="68" template="../obj/scroll.tx" x="96" y="352">
+   <properties>
+    <property name="reward" value="[ { &quot;type&quot;: &quot;card&quot;, &quot;cardName&quot;: &quot;Storm Crow&quot;, &quot;count&quot;: 1 } ]"/>
+   </properties>
+  </object>
+  <object id="69" template="../obj/booster.tx" x="96" y="368">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;editions&quot;: [ &quot;STX&quot; ],
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="78" template="../obj/booster.tx" x="304" y="320">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="81" template="../obj/booster.tx" x="320" y="368">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="79" template="../obj/booster.tx" x="304" y="304">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 10,
+    &quot;rarity&quot;: [ &quot;Common&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 3,
+    &quot;rarity&quot;: [ &quot;Uncommon&quot; ]
+  },
+  {
+    &quot;type&quot;: &quot;card&quot;,
+    &quot;count&quot;: 1,
+    &quot;rarity&quot;: [ &quot;Rare&quot;, &quot;Mythic Rare&quot; ]
+  }
+]
+</property>
+   </properties>
+  </object>
+  <object id="70" template="../obj/gold.tx" x="96" y="384">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 250,
+    &quot;addMaxCount&quot;: 250
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="76" template="../obj/gold.tx" x="320" y="320">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 250,
+    &quot;addMaxCount&quot;: 250
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="77" template="../obj/gold.tx" x="320" y="352">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 250,
+    &quot;addMaxCount&quot;: 250
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="72" template="../obj/treasure.tx" x="123" y="352">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Life Amulet&quot;
+}]</property>
+   </properties>
+  </object>
+  <object id="73" template="../obj/treasure.tx" x="192" y="256">
+   <properties>
+    <property name="reward">[{
+  &quot;type&quot;: &quot;randomCard&quot;,
+  &quot;count&quot;: 2,
+  &quot;colors&quot;: [ &quot;colorID&quot; ]
+},{
+  &quot;type&quot;: &quot;item&quot;,
+  &quot;count&quot;: 1,
+  &quot;itemName&quot;: &quot;Spirit Guard&quot;
+}]</property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

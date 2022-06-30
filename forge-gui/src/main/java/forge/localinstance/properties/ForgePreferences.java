@@ -69,7 +69,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         BRAWL_P8_DECK_STATE(""),
         UI_LANDSCAPE_MODE ("false"),
         UI_MATCHES_PER_GAME("3"),
-        UI_APPILIED_VARIANTS(""),
+        UI_APPLIED_VARIANTS(""),
         UI_COMPACT_MAIN_MENU ("false"),
         UI_USE_OLD ("false"),
         UI_RANDOM_FOIL ("false"),
@@ -217,7 +217,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         DEV_LOG_ENTRY_TYPE (GameLogEntryType.DAMAGE.toString()),
 
         LOAD_CARD_SCRIPTS_LAZILY ("false"),
-        LOAD_HISTORIC_FORMATS ("false"),
+        LOAD_ARCHIVED_FORMATS ("false"),
 
         DECK_DEFAULT_CARD_LIMIT ("4"),
         DECKGEN_SINGLETONS ("false"),

@@ -1,0 +1,7 @@
+[format]
+Name:Extended (GTC)
+Type:Archived
+Subtype:Extended
+Effective:2013-02-01
+Sets:ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR, GTC
+Banned:Jace, the Mind Sculptor; Mental Misstep; Ponder; Preordain; Stoneforge Mystic

@@ -1,0 +1,7 @@
+[format]
+Name:Standard (2019-11-22)
+Type:Archived
+Subtype:Standard
+Effective:2019-11-22
+Sets:GRN, RNA, WAR, M20, ELD
+Banned:Field of the Dead; Oko, Thief of Crowns; Once Upon a Time; Veil of Summer
