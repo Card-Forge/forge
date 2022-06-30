@@ -499,6 +499,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
             // check static abilities
             game.getTracker().freeze();
+            cp.clearStaticChangedCardKeywords(false);
             CardCollection preList = new CardCollection(cp);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(cp), preList);
 
