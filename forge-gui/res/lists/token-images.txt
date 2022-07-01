@@ -1901,7 +1901,7 @@ embalm_heart-piercer_manticore_akh.jpg https://downloads.cardforge.org/images/to
 embalm_heart-piercer_manticore_c19.jpg https://downloads.cardforge.org/images/tokens/embalm_heart-piercer_manticore_c19.jpg
 embalm_honored_hydra_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_honored_hydra_akh.jpg
 embalm_labyrinth_guardian_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_labyrinth_guardian_akh.jpg
-embalm_oketra's_attendant_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_oketra's_attendant_akh.jpg
+embalm_oketra's_attendant_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_oketra%27s_attendant_akh.jpg
 embalm_sacred_cat_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_sacred_cat_akh.jpg
 embalm_tah-crop_skirmisher_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_tah-crop_skirmisher_akh.jpg
 embalm_temmet,_vizier_of_naktamun_akh.jpg https://downloads.cardforge.org/images/tokens/embalm_temmet,_vizier_of_naktamun_akh.jpg
