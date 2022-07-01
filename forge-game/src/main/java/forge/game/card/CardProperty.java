@@ -13,6 +13,7 @@ import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.combat.AttackRequirement;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -22,6 +23,7 @@ import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
+import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -1675,6 +1677,11 @@ public class CardProperty {
             }
             AttackingBand band = combat == null ? null : combat.getBandOfAttacker(source);
             if (band == null || !band.getAttackers().contains(card)) {
+                return false;
+            }
+        } else if (property.equals("hadToAttackThisCombat")) {
+            AttackRequirement e = game.getCombat().getAttackConstraints().getRequirements().get(card);
+            if (e == null || !e.hasRequirement()) {
                 return false;
             }
         } else if (property.equals("couldAttackButNotAttacking")) {
