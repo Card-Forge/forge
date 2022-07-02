@@ -1,0 +1,8 @@
+Name:Heap Gate
+ManaCost:no cost
+Types:Land Gate
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+A:AB$ Token | Cost$ 1 T tapXType<1/Land.Gate/Gate> | TokenScript$ c_a_treasure_sac | SpellDescription$ Tap an untapped gate: create a treasure token.
+DeckHints:Type$Gate
+Oracle:{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{1}, {T}: Tap an untapped Gate you control: Create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
