@@ -20,6 +20,7 @@ package forge.game.spellability;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.zone.ZoneType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -339,8 +340,20 @@ public class AbilityManaPart implements java.io.Serializable {
                 continue;
             }
 
+            //handled in meetsManaShardRestrictions
             if (restriction.equals("CantPayGenericCosts")) {
                 return true;
+            }
+
+            if (restriction.startsWith("CantCastSpellFrom")) {
+                if (sa.isSpell()) {
+                    final ZoneType badZone = ZoneType.smartValueOf(restriction.substring(17));
+                    final ZoneType castFrom = sa.getHostCard().getCastFrom().getZoneType();
+                    if (!badZone.equals(castFrom)) {
+                        return true;
+                    }
+                }
+                continue;
             }
 
             // the payment is for a resolving SA, currently no other restrictions would allow that
