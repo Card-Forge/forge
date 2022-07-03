@@ -345,15 +345,16 @@ public class AbilityManaPart implements java.io.Serializable {
                 return true;
             }
 
+            // "can't" zone restriction – shouldn't be mixed with other restrictions
             if (restriction.startsWith("CantCastSpellFrom")) {
-                if (sa.isSpell()) {
-                    final ZoneType badZone = ZoneType.smartValueOf(restriction.substring(17));
-                    final ZoneType castFrom = sa.getHostCard().getCastFrom().getZoneType();
-                    if (!badZone.equals(castFrom)) {
-                        return true;
-                    }
+                if (!sa.isSpell()) { //
+                    return true;
                 }
-                continue;
+                final ZoneType badZone = ZoneType.smartValueOf(restriction.substring(17));
+                final ZoneType castFrom = sa.getHostCard().getCastFrom().getZoneType();
+                if (!badZone.equals(castFrom)) {
+                    return true;
+                }
             }
 
             // the payment is for a resolving SA, currently no other restrictions would allow that
