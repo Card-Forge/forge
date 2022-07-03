@@ -392,7 +392,7 @@ public class AttackConstraints {
      *         restriction is violated.
      */
     public final int countViolations(final Map<Card, GameEntity> attackers) {
-        if (!globalRestrictions.isLegal(attackers, possibleAttackers)) {
+        if (!globalRestrictions.isLegal(attackers)) {
             return -1;
         }
         for (final Entry<Card, GameEntity> attacker : attackers.entrySet()) {
