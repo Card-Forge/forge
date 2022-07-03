@@ -108,7 +108,7 @@ public class AttackRequirement {
     }
 
     public boolean hasRequirement() {
-        return !defenderSpecific.isEmpty() || !causesToAttack.isEmpty() || !defenderOrPWSpecific.isEmpty();
+        return defenderSpecific.countAll() > 0 || causesToAttack.countAll() > 0 || defenderOrPWSpecific.countAll() > 0;
     }
 
     public final MapToAmount<Card> getCausesToAttack() {
