@@ -1,0 +1,12 @@
+Name:Vogar, Necropolis Tyrant
+ManaCost:3 B B
+Types:Legendary Creature Zombie Giant
+PT:4/4
+K:Menace
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigPutCounter | PlayerTurn$ True | TriggerDescription$ Whenever another creature you control dies during your turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When Vogar dies, draw a card for each +1+1 counter on it.
+SVar:TrigDraw:DB$ Draw | NumCards$ XLKI
+SVar:XLKI:TriggeredCard$CardCounters.P1P1 
+DeckHas:Ability$Counters
+Oracle:Menace\nWhenever another creature you control dies during your turn, put a +1/+1 counter on Vogar Necropolis Tyrant.\nWhen Vogar dies, draw a card for each +1+1 counter on it.
