@@ -107,6 +107,10 @@ public class AttackRequirement {
         }
     }
 
+    public Card getAttacker() {
+        return attacker;
+    }
+
     public boolean hasRequirement() {
         return defenderSpecific.countAll() > 0 || causesToAttack.countAll() > 0 || defenderOrPWSpecific.countAll() > 0;
     }

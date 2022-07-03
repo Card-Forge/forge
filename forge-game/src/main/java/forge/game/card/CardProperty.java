@@ -23,7 +23,6 @@ import forge.game.player.Player;
 import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
@@ -1681,7 +1680,7 @@ public class CardProperty {
             }
         } else if (property.equals("hadToAttackThisCombat")) {
             AttackRequirement e = game.getCombat().getAttackConstraints().getRequirements().get(card);
-            if (e == null || !e.hasRequirement()) {
+            if (e == null || !e.hasRequirement() || !e.getAttacker().equalsWithTimestamp(card)) {
                 return false;
             }
         } else if (property.equals("couldAttackButNotAttacking")) {
