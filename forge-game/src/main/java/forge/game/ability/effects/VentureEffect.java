@@ -24,6 +24,7 @@ import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
 import forge.util.Localizer;
+import forge.util.PredicateString.StringOp;
 
 public class VentureEffect  extends SpellAbilityEffect {
 
@@ -42,10 +43,19 @@ public class VentureEffect  extends SpellAbilityEffect {
             }
         }
 
-        // Create a new dungeon card chosen by player in command zone.
-        List<PaperCard> dungeonCards = StaticData.instance().getVariantCards().getAllCards(
-            Predicates.compose(CardRulesPredicates.Presets.IS_DUNGEON, PaperCard.FN_GET_RULES));
-
+        List<PaperCard> dungeonCards = null;
+        if (sa.hasParam("Dungeon")) {
+            dungeonCards = StaticData.instance().getVariantCards()
+                    .getAllCards(Predicates.compose(
+                            Predicates.and(CardRulesPredicates.Presets.IS_DUNGEON,
+                                    CardRulesPredicates.subType(StringOp.EQUALS, sa.getParam("Dungeon"))),
+                            PaperCard.FN_GET_RULES));
+        } else {
+            // Create a new dungeon card chosen by player in command zone.
+            dungeonCards = StaticData.instance().getVariantCards().getAllCards(
+                Predicates.compose(CardRulesPredicates.Presets.IS_DUNGEON, PaperCard.FN_GET_RULES));
+            dungeonCards.removeIf(c -> !c.getRules().isEnterableDungeon());
+        }
         String message = Localizer.getInstance().getMessage("lblChooseDungeon");
         Card dungeon = player.getController().chooseDungeon(player, dungeonCards, message);
 

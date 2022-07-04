@@ -1,0 +1,6 @@
+[format]
+Name:Block: Return to Ravnica (GTC)
+Type:Archived
+Subtype:Block
+Effective:2013-02-01
+Sets:RTR, GTC

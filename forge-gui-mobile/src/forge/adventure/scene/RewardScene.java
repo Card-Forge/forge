@@ -47,10 +47,24 @@ public class RewardScene extends UIScene {
     float flipCountDown = 1.0f;
     float exitCountDown = 0.0f; //Serves as additional check for when scene is exiting, so you can't double tap too fast.
 
+    public void quitScene() {
+        //There were reports of memory leaks after using the shop many times, so remove() everything on exit to be sure.
+        for(Actor A: new Array.ArrayIterator<>(generated)) {
+            if(A instanceof RewardActor){
+                ((RewardActor) A).dispose();
+                A.remove();
+            }
+        }
+        Forge.switchToLast();
+    }
+
     public boolean done() {
         GameHUD.getInstance().getTouchpad().setVisible(false);
         if (doneClicked) {
-            if(exitCountDown > 0.2f) { Forge.switchToLast(); } //Wait a little bit to prevent double tap.
+            if(exitCountDown > 0.2f) {
+                clearGenerated();
+                Forge.switchToLast();
+            }
             return true;
         }
 
@@ -72,12 +86,26 @@ public class RewardScene extends UIScene {
                 exitCountDown = 0.0f;
                 doneClicked = true;
             } else {
-                Forge.switchToLast();
+                clearGenerated();
+                quitScene();
             }
         } else {
-            Forge.switchToLast();
+            clearGenerated();
+            quitScene();
         }
         return true;
+    }
+    void clearGenerated() {
+        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+            if (!(actor instanceof RewardActor)) {
+                continue;
+            }
+            RewardActor reward = (RewardActor) actor;
+            reward.clearHoldToolTip();
+            try {
+                stage.getActors().removeValue(reward, true);
+            } catch (Exception e) {}
+        }
     }
 
     @Override
@@ -85,10 +113,12 @@ public class RewardScene extends UIScene {
         stage.act(delta);
         ImageCache.allowSingleLoad();
         if (doneClicked) {
-            if (type == Type.Loot)
+            if (type == Type.Loot) {
                 flipCountDown -= Gdx.graphics.getDeltaTime();
                 exitCountDown += Gdx.graphics.getDeltaTime();
+            }
             if (flipCountDown <= 0) {
+                clearGenerated();
                 Forge.switchToLast();
             }
         }
@@ -117,10 +147,8 @@ public class RewardScene extends UIScene {
 
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor) {
-        this.type = type;
+        this.type   = type;
         doneClicked = false;
-
-
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
             actor.remove();
             if (actor instanceof RewardActor) {
@@ -218,9 +246,7 @@ public class RewardScene extends UIScene {
                 if (currentRow != ((i + 1) / numberOfColumns))
                     yOff += doneButton.getHeight();
 
-
                 TextButton buyCardButton = new BuyButton(shopActor.getObjectId(), i, shopActor.isUnlimited()?null:shopActor.getMapStage().getChanges(), actor, doneButton);
-
                 generated.add(buyCardButton);
                 if (!skipCard) {
                     stage.addActor(buyCardButton);
@@ -265,6 +291,7 @@ public class RewardScene extends UIScene {
             setX(actor.getX());
             setY(actor.getY() - getHeight());
             price = CardUtil.getRewardPrice(actor.getReward());
+            price *= Current.player().goldModifier();
             setText("$ " + price);
             addListener(new ClickListener() {
                 @Override

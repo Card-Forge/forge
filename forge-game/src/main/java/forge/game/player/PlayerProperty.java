@@ -79,6 +79,10 @@ public class PlayerProperty {
             if (player.isMonarch()) {
                 return false;
             }
+        } else if (property.equals("hasInitiative")) {
+            if (!player.hasInitiative()) {
+                return false;
+            }
         } else if (property.equals("hasBlessing")) {
             if (!player.hasBlessing()) {
                 return false;

@@ -1,7 +1,0 @@
-[format]
-Name:Standard (RNA)
-Type:Historic
-Subtype:Standard
-Effective:2019-01-25
-Sets:XLN, RIX, DOM, M19, GRN, G18, RNA
-Banned:Rampaging Ferocidon

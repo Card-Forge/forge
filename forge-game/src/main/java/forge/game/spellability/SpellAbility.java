@@ -1096,12 +1096,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             // always set this to false, it is only set in CopyEffect
             clone.mayChooseNewTargets = false;
 
-            // Copied spell is not cast face down
-            if (clone instanceof Spell) {
-                Spell spell = (Spell) clone;
-                spell.setCastFaceDown(false);
-            }
-
             clone.triggeringObjects = AbilityKey.newMap(this.triggeringObjects);
 
             clone.setPayCosts(getPayCosts().copy());
@@ -1160,14 +1154,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             newSA.mapParams.put("WithoutManaCost", "True");
         }
         newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
-
-        //Normal copied spell will not copy castFaceDown flag
-        //But copyWithNoManaCost is used to get SA without mana cost
-        //So it need to copy the castFaceDown flag too
-        if (newSA instanceof Spell) {
-            Spell spell = (Spell) newSA;
-            spell.setCastFaceDown(this.isCastFaceDown());
-        }
 
         return newSA;
     }
@@ -2461,5 +2447,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             hidden = ZoneType.isHidden(getParam("Origin"));
         }
         return hidden;
+    }
+
+    public boolean isLegalAfterStack() {
+        if (!matchesValidParam("ValidAfterStack", this)) {
+            return false;
+        }
+        // TODO add checks for Lurrus
+        return true;
     }
 }

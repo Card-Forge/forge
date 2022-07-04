@@ -1,0 +1,7 @@
+[format]
+Name:Extended (LGN)
+Type:Archived
+Subtype:Extended
+Effective:2003-03-01
+Sets:TMP, STH, EXO, USG, ULG, 6ED, UDS, MMQ, NMS, PCY, INV, PLS, 7ED, APC, ODY, TOR, JUD, ONS, LGN
+Banned:Dark Ritual; Dream Halls; Earthcraft; Lotus Petal; Memory Jar; Mind Over Matter; Replenish; Survival of the Fittest; Time Spiral; Tolarian Academy; Windfall; Yawgmoth's Bargain; Yawgmoth's Will

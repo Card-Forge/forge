@@ -48,7 +48,7 @@ public class GameFormat implements Comparable<GameFormat> {
     public enum FormatType {
         SANCTIONED,
         CASUAL,
-        HISTORIC,
+        ARCHIVED,
         DIGITAL,
         CUSTOM
     }
@@ -290,7 +290,7 @@ public class GameFormat implements Comparable<GameFormat> {
         if (other.formatSubType != formatSubType){
             return formatSubType.compareTo(other.formatSubType);
         }
-        if (formatType.equals(FormatType.HISTORIC)){
+        if (formatType.equals(FormatType.ARCHIVED)){
             int compareDates = this.effectiveDate.compareTo(other.effectiveDate);
             if (compareDates != 0)
                 return compareDates;
@@ -306,7 +306,7 @@ public class GameFormat implements Comparable<GameFormat> {
 
     public static class Reader extends StorageReaderRecursiveFolderWithUserFolder<GameFormat> {
         List<GameFormat> naturallyOrdered = new ArrayList<>();
-        boolean includeHistoric;
+        boolean includeArchived;
         private List<String> coreFormats = new ArrayList<>();
         {
             coreFormats.add("Standard.txt");
@@ -321,14 +321,14 @@ public class GameFormat implements Comparable<GameFormat> {
             coreFormats.add("Oathbreaker.txt");
         }
         
-        public Reader(File forgeFormats, File customFormats, boolean includeHistoric) {
+        public Reader(File forgeFormats, File customFormats, boolean includeArchived) {
             super(forgeFormats, customFormats, GameFormat.FN_GET_NAME);
-            this.includeHistoric=includeHistoric;
+            this.includeArchived=includeArchived;
         }
 
         @Override
         protected GameFormat read(File file) {
-            if (!includeHistoric && !coreFormats.contains(file.getName())) {
+            if (!includeArchived && !coreFormats.contains(file.getName())) {
                 return null;
             }
             final Map<String, List<String>> contents = FileSection.parseSections(FileUtil.readFile(file));
@@ -348,7 +348,12 @@ public class GameFormat implements Comparable<GameFormat> {
             try {
                 formatType = FormatType.valueOf(section.get("type").toUpperCase());
             } catch (Exception e) {
-                formatType = FormatType.CUSTOM;
+                if ("HISTORIC".equals(section.get("type").toUpperCase())) {
+                    System.out.println("Historic is no longer used as a format Type. Please update " + file.getAbsolutePath() + " to use 'Archived' instead");
+                    formatType = FormatType.ARCHIVED;
+                } else {
+                    formatType = FormatType.CUSTOM;
+                }
             }
             FormatSubType formatsubType;
             try {
@@ -450,7 +455,7 @@ public class GameFormat implements Comparable<GameFormat> {
         public Iterable<GameFormat> getFilterList() {
             List<GameFormat> coreList = new ArrayList<>();
             for (GameFormat format: naturallyOrdered) {
-                if (!format.getFormatType().equals(FormatType.HISTORIC)
+                if (!format.getFormatType().equals(FormatType.ARCHIVED)
                         &&!format.getFormatType().equals(FormatType.DIGITAL)){
                     coreList.add(format);
                 }
@@ -458,10 +463,10 @@ public class GameFormat implements Comparable<GameFormat> {
             return coreList;
         }
 
-        public Iterable<GameFormat> getHistoricList() {
+        public Iterable<GameFormat> getArchivedList() {
             List<GameFormat> coreList = new ArrayList<>();
             for (GameFormat format: naturallyOrdered) {
-                if (format.getFormatType().equals(FormatType.HISTORIC)){
+                if (format.getFormatType().equals(FormatType.ARCHIVED)){
                     coreList.add(format);
                 }
             }
@@ -470,7 +475,7 @@ public class GameFormat implements Comparable<GameFormat> {
 
         public Iterable<GameFormat> getBlockList() {
             List<GameFormat> blockFormats = new ArrayList<>();
-            for (GameFormat format : this.getHistoricList()){
+            for (GameFormat format : this.getArchivedList()){
                 if (format.getFormatSubType() != GameFormat.FormatSubType.BLOCK)
                     continue;
                 if (!format.getName().endsWith("Block"))
@@ -481,10 +486,10 @@ public class GameFormat implements Comparable<GameFormat> {
             return blockFormats;
         }
 
-        public Map<String, List<GameFormat>> getHistoricMap() {
+        public Map<String, List<GameFormat>> getArchivedMap() {
             Map<String, List<GameFormat>> coreList = new HashMap<>();
             for (GameFormat format: naturallyOrdered){
-                if (format.getFormatType().equals(FormatType.HISTORIC)){
+                if (format.getFormatType().equals(FormatType.ARCHIVED)){
                     String alpha = format.getName().substring(0,1);
                     if (!coreList.containsKey(alpha)) {
                         coreList.put(alpha,new ArrayList<>());
@@ -557,9 +562,9 @@ public class GameFormat implements Comparable<GameFormat> {
                     //exclude Commander format as other deck checks are not performed here
                     continue;
                 }
-                if (gf.getFormatType().equals(FormatType.HISTORIC) && coveredTypes.contains(gf.getFormatSubType())
+                if (gf.getFormatType().equals(FormatType.ARCHIVED) && coveredTypes.contains(gf.getFormatSubType())
                         && !exhaustive){
-                    //exclude duplicate formats - only keep first of e.g. Standard historical
+                    //exclude duplicate formats - only keep first of e.g. Standard archived
                     continue;
                 }
                 if (gf.isPoolLegal(allCards)) {
@@ -590,7 +595,7 @@ public class GameFormat implements Comparable<GameFormat> {
             if (gf2.formatSubType != gf1.formatSubType){
                 return gf1.formatSubType.compareTo(gf2.formatSubType);
             }
-            if (gf1.formatType.equals(FormatType.HISTORIC)){
+            if (gf1.formatType.equals(FormatType.ARCHIVED)){
                 if (gf1.effectiveDate!=gf2.effectiveDate) {//for matching dates or default dates default to name sorting
                     return gf1.effectiveDate.compareTo(gf2.effectiveDate);
                 }

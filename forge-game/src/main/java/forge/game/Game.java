@@ -129,6 +129,7 @@ public class Game {
     private Map<Card, Integer>  facedownWhileCasting = Maps.newHashMap();
 
     private Player monarch = null;
+    private Player initiative = null;
     private Player monarchBeginTurn = null;
     private Player startingPlayer;
 
@@ -177,6 +178,13 @@ public class Game {
 
     public void setMonarchBeginTurn(Player monarchBeginTurn) {
         this.monarchBeginTurn = monarchBeginTurn;
+    }
+
+    public Player getHasInitiative() {
+        return initiative;
+    }
+    public void setHasInitiative(final Player p ) {
+        initiative = p;
     }
 
     public CardCollectionView getLastStateBattlefield() {
@@ -849,6 +857,18 @@ public class Game {
                 getAction().becomeMonarch(getNextPlayerAfter(p), null);
             } else {
                 getAction().becomeMonarch(getPhaseHandler().getPlayerTurn(), null);
+            }
+        }
+
+        if (p.hasInitiative()) {
+            // The third way to take the initiative is if the player who currently has the initiative leaves the game.
+            // When that happens, the player whose turn it is takes the initiative.
+            // If the player who has the initiative leaves the game on their own turn,
+            // or the active player left the game at the same time, the next player in turn order takes the initiative.
+            if (p.equals(getPhaseHandler().getPlayerTurn())) {
+                getAction().takeInitiative(getNextPlayerAfter(p), null);
+            } else {
+                getAction().takeInitiative(getPhaseHandler().getPlayerTurn(), null);
             }
         }
 

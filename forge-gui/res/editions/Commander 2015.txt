@@ -355,7 +355,7 @@ ScryfallCode=C15
 b_0_0_phyrexian_germ
 b_2_2_zombie
 c_1_1_shapeshifter_changeling
-c_a_gold_draw
+c_a_gold_sac
 g_1_1_saproling
 g_1_1_snake
 g_1_2_spider_reach

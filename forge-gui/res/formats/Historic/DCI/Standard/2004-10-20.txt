@@ -1,7 +1,0 @@
-[format]
-Name:Standard (CHK)
-Type:Historic
-Subtype:Standard
-Effective:2004-10-20
-Sets:8ED, MRD, DST, 5DN, CHK
-Banned:Skullclamp

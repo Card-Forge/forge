@@ -106,7 +106,7 @@ public class HumanPlaySpellAbility {
         }
 
         final boolean playerManaConversion = human.hasManaConversion()
-                && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?");
+                && human.getController().confirmAction(ability, null, "Do you want to spend mana as though it were mana of any color to pay the cost?", null);
 
         Cost abCost = ability.getPayCosts();
         CostPayment payment = new CostPayment(abCost, ability);
@@ -139,11 +139,11 @@ public class HumanPlaySpellAbility {
                 }
             }
             if (ability.hasParam("ActivateIgnoreColor")) {
-                AbilityUtils.applyManaColorConversion(payment, MagicColor.Constant.ANY_COLOR_CONVERSION);
+                params.put("ManaConversion", ability.getParam("ActivateIgnoreColor"));
                 manaColorConversion = true;
             }
 
-            if (keywordColor) {
+            if (keywordColor || manaColorConversion) {
                 AbilityUtils.applyManaColorConversion(payment, params);
             }
         }
@@ -159,6 +159,7 @@ public class HumanPlaySpellAbility {
                 && (!mayChooseTargets || ability.setupTargets()) // if you can choose targets, then do choose them.
                 && ability.canCastTiming(human)
                 && ability.checkRestrictions(human)
+                && ability.isLegalAfterStack()
                 && (isFree || payment.payCost(new HumanCostDecision(controller, human, ability, false, ability.getHostCard())));
 
         if (!prerequisitesMet) {

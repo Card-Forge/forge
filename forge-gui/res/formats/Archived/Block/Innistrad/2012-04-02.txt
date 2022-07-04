@@ -1,0 +1,7 @@
+[format]
+Name:Block: Innistrad (2012-04-02)
+Type:Archived
+Subtype:Block
+Effective:2012-04-02
+Sets:ISD, DKA
+Banned:Intangible Virtue; Lingering Souls

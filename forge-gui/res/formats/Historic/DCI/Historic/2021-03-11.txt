@@ -1,7 +1,0 @@
-[format]
-Name:Historic (HA4)
-Type:Historic
-Subtype:Arena
-Effective:2021-03-11
-Sets:XLN, RIX, DOM, M19, ANA, ANA, PANA, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2, IKO, HA3, M21, JMP, AJMP, AKR, ANB, ZNR, KLR, KHM, HA4
-Banned:Agent of Treachery; Field of the Dead; Fires of Invention; Nexus of Fate; Oko, Thief of Crowns; Omnath, Locus of Creation; Once Upon a Time; Teferi, Time Raveler; Uro, Titan of Nature's Wrath; Veil of Summer; Wilderness Reclamation; Winota, Joiner of Forces

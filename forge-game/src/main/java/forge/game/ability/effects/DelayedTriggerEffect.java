@@ -72,7 +72,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("RememberSVarAmount")) {
-            delTrig.addRemembered(AbilityUtils.calculateAmount(host, host.getSVar(sa.getParam("RememberSVarAmount")), sa));
+            delTrig.addRemembered(AbilityUtils.calculateAmount(host, sa.getSVar(sa.getParam("RememberSVarAmount")), sa));
         }
 
         if (sa.hasAdditionalAbility("Execute")) {

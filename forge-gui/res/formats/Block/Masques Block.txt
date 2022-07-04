@@ -1,6 +1,6 @@
 [format]
 Name:Masques Block
-Type:Historic
+Type:Archived
 Subtype:Block
 Order:131
 Sets:MMQ, NMS, PCY

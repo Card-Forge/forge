@@ -23,28 +23,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ConsoleCommandInterpreter {
-    public String complete(String text) {
-            String[] words=splitOnSpace(text);
+    Command root = new Command();
 
+    class Command {
+        HashMap<String, Command> children = new HashMap<>();
+        Function<String[], String> function;
+    }
+
+    public String complete(String text) {
+        String[] words=splitOnSpace(text);
         Command currentCommand=root;
         String completionString="";
-        int i;
-        for(i =0;i<words.length;i++)
-        {
-            String name=words[i];
-            if(!currentCommand.children.containsKey(name))
-            {
-                for(String key:currentCommand.children.keySet())
-                {
-                    if(key.startsWith(name))
-                    {
-                        return completionString+key+" ";
+        for(String name : words) {
+            if (!currentCommand.children.containsKey(name)) {
+                for (String key : currentCommand.children.keySet()) {
+                    if (key.startsWith(name)) {
+                        return completionString + key + " ";
                     }
                 }
                 break;
             }
-            completionString+=name+" ";
-            currentCommand=currentCommand.children.get(name);
+            completionString += name + " ";
+            currentCommand = currentCommand.children.get(name);
         }
         return text;
     }
@@ -65,124 +65,108 @@ public class ConsoleCommandInterpreter {
         return matchList.toArray(new String[0]);
     }
 
-    class Command
-    {
-        HashMap<String,Command> children=new HashMap<>();
-        Function<String[],String> function;
-    }
-     String command(String text)
-    {
-        String[] words=splitOnSpace(text);
-
-        Command currentCommand=root;
+    public String command(String text) {
+        String[] words = splitOnSpace(text);
+        Command currentCommand = root;
         int i;
-        for(i =0;i<words.length;i++)
-        {
+
+        for(i = 0; i < words.length; i++) {
             String name=words[i];
-            if(!currentCommand.children.containsKey(name))
-                break;
+            if(!currentCommand.children.containsKey(name)) break;
             currentCommand=currentCommand.children.get(name);
         }
-        if(currentCommand.function==null)
-        {
-            return "Command not found options are "+String.join(" ",Arrays.copyOfRange(words, 0, i))+"\n"+String.join("\n",currentCommand.children.keySet());
+        if(currentCommand.function == null) {
+            return "Command not found. Available commands:\n" + String.join(" ",Arrays.copyOfRange(words, 0, i))+"\n"+String.join("\n",currentCommand.children.keySet());
         }
         String[] parameters=Arrays.copyOfRange(words, i, words.length);
         for(int j=0;j<parameters.length;j++)
             parameters[j]=parameters[j].replaceAll("[\"']","");
         return currentCommand.function.apply(parameters);
     }
-    Command root=new Command();
-    void registerCommand(String[] path,Function<String[],String> function)
-    {
-        if(path.length==0)
-            return;
 
+    void registerCommand(String[] path,Function<String[],String> function) {
+        if(path.length==0) return;
         Command currentCommand=root;
-        for(String name:path)
-        {
+
+        for(String name:path) {
             if(!currentCommand.children.containsKey(name))
                 currentCommand.children.put(name,new Command());
-            currentCommand=currentCommand.children.get(name);
+            currentCommand = currentCommand.children.get(name);
         }
-        currentCommand.function=function;
+        currentCommand.function = function;
     }
-    public    ConsoleCommandInterpreter()
-    {
+
+    public ConsoleCommandInterpreter() {
         registerCommand(new String[]{"teleport", "to"}, s -> {
             if(s.length<2)
                 return "Command needs 2 parameter";
-            WorldStage.getInstance().GetPlayer().setPosition(Integer.parseInt(s[0]),Integer.parseInt(s[1]));
-
-            return  "teleport to ("+s[0]+","+s[1]+")";
+            try {
+                int x = Integer.parseInt(s[0]);
+                int y = Integer.parseInt(s[1]);
+                WorldStage.getInstance().GetPlayer().setPosition(x,y);
+                return  "teleport to ("+s[0]+","+s[1]+")";
+            } catch (Exception e) {
+                return "Exception occured, Invalid input";
+            }
         });
         registerCommand(new String[]{"teleport", "to", "poi"}, s -> {
-            if(s.length<1)
-                return "Command needs 1 parameter";
+            if(s.length<1) return "Command needs 1 parameter: PoI name.";
             PointOfInterest poi=Current.world().findPointsOfInterest(s[0]);
             if(poi==null)
-                return "poi "+s[0]+" not found";
+                return "PoI " + s[0] + " not found";
             WorldStage.getInstance().GetPlayer().setPosition(poi.getPosition());
-            return  "teleport to "+s[0]+"("+poi.getPosition()+")";
+            return  "Teleported to " + s[0] + "(" + poi.getPosition() + ")";
         });
         registerCommand(new String[]{"give", "gold"}, s -> {
-            if(s.length<1)
-                return "Command needs 1 parameter";
-            int amount=0;
+            if(s.length<1) return "Command needs 1 parameter: Amount.";
+            int amount;
             try {
                 amount=Integer.parseInt(s[0]);
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 return "Can not convert "+s[0]+" to number";
             }
             Current.player().giveGold(amount);
             return "Added "+amount+" gold";
         });
         registerCommand(new String[]{"give", "life"}, s -> {
-            if(s.length<1)
-                return "Command needs 1 parameter";
-            int amount=0;
+            if(s.length<1) return "Command needs 1 parameter: Amount.";
+            int amount;
             try {
                 amount=Integer.parseInt(s[0]);
             }
-            catch (Exception e)
-            {
-                return "Can not convert "+s[0]+" to number";
+            catch (Exception e) {
+                return "Can not convert " + s[0] + " to number";
             }
             Current.player().addMaxLife(amount);
-            return "Added "+amount+" max life";
+            return "Added " + amount + " max life";
         });
         registerCommand(new String[]{"give", "card"}, s -> {
-            if(s.length<1)
-                return "Command needs 1 parameter";
-            PaperCard card=StaticData.instance().getCommonCards().getCard(s[0]);
-            if(card==null)
-                return "can not find card "+s[0];
+            //TODO: Specify optional amount.
+            if(s.length<1) return "Command needs 1 parameter: Card name.";
+            PaperCard card = StaticData.instance().getCommonCards().getCard(s[0]);
+            if(card==null) return "Cannot find card: "+s[0];
             Current.player().addCard(card);
-            return "Added card "+s[0];
+            return "Added card: " + s[0];
         });
         registerCommand(new String[]{"give", "item"}, s -> {
-            if(s.length<1)
-                return "Command needs 1 parameter";
-            if(Current.player().addItem(s[0]))
-                return "Added item "+s[0];
-            return "can not find item "+s[0];
+            if(s.length<1) return "Command needs 1 parameter: Item name.";
+            if(Current.player().addItem(s[0])) return "Added item " + s[0] + ".";
+            return "Cannot find item "+s[0];
         });
         registerCommand(new String[]{"fullHeal"}, s -> {
             Current.player().fullHeal();
-            return "Player life back to "+Current.player().getLife();
+            return "Player fully healed. Health set to " + Current.player().getLife() + ".";
         });
         registerCommand(new String[]{"setColorID"}, s -> {
             if(s.length < 1) return "Please specify color ID: Valid choices: B, G, R, U, W, C. Example:\n\"setColorID G\"";
             Current.player().setColorIdentity(s[0]);
-            return "Player color identity set to " + Current.player().getColorIdentity();
+            return "Player color identity set to " + Current.player().getColorIdentity() + ".";
         });
         registerCommand(new String[]{"reloadScenes"}, s -> {
             SceneType.InventoryScene.instance.resLoaded();
             SceneType.PlayerStatisticScene.instance.resLoaded();
-
-            return "Force reload status scenes. Might be unstable.";
+            return "Force reload status scenes. WARNING: Game might be unstable.";
         });
         registerCommand(new String[]{"resetQuests"}, s -> {
             Current.player().resetQuestFlags();
@@ -199,12 +183,12 @@ public class ConsoleCommandInterpreter {
                 DeckProxy DP = new DeckProxy(D, "Constructed", GameType.Constructed, null);
                 ColorSet colorSet = DP.getColor();
                 System.out.printf("%s: Colors: %s (%s%s%s%s%s%s)\n", D.getName(), DP.getColor(),
-                        (colorSet.hasBlack()    ? "B" : ""),
-                        (colorSet.hasGreen()    ? "G" : ""),
-                        (colorSet.hasRed()      ? "R" : ""),
-                        (colorSet.hasBlue()     ? "U" : ""),
-                        (colorSet.hasWhite()    ? "W" : ""),
-                        (colorSet.isColorless() ? "C" : "")
+                    (colorSet.hasBlack()    ? "B" : ""),
+                    (colorSet.hasGreen()    ? "G" : ""),
+                    (colorSet.hasRed()      ? "R" : ""),
+                    (colorSet.hasBlue()     ? "U" : ""),
+                    (colorSet.hasWhite()    ? "W" : ""),
+                    (colorSet.isColorless() ? "C" : "")
                 );
             }
             return "Enemy deck color list dumped to stdout.";
@@ -230,7 +214,7 @@ public class ConsoleCommandInterpreter {
             return "Enemy color Identity dumped to stdout.";
         });
         registerCommand(new String[]{"heal", "amount"}, s -> {
-            if(s.length<1) return "Command needs 1 parameter";
+            if(s.length<1) return "Command needs 1 parameter: Amount";
             int N = 0;
             try { N = Integer.parseInt(s[0]); }
             catch (Exception e) { return "Can not convert " + s[0] + " to integer"; }
@@ -239,37 +223,31 @@ public class ConsoleCommandInterpreter {
         });
         registerCommand(new String[]{"debug","on"}, s -> {
             Current.setDebug(true);
-            return "Debug mode on";
+            return "Debug mode ON";
         });
         registerCommand(new String[]{"debug","off"}, s -> {
             Current.setDebug(false);
-            return "Debug mode off";
+            return "Debug mode OFF";
         });
         registerCommand(new String[]{"remove","enemy","all"}, s -> {
-            if(!MapStage.getInstance().isInMap())
-            {
-                return "Only supported for poi";
+            //TODO: Remove all overworld enemies if not inside a map.
+            if(!MapStage.getInstance().isInMap()) {
+                return "Only supported for PoI";
             }
             MapStage.getInstance().removeAllEnemies();
             return "removed all enemies";
         });
         registerCommand(new String[]{"remove","enemy"}, s -> {
-            if(s.length<1)
-                return "Command needs 1 parameter";
-            int id=0;
-            try {
-                id=Integer.parseInt(s[0]);
-            }
-            catch (Exception e)
-            {
-                return "Can not convert "+s[0]+" to number";
+            if(s.length<1) return "Command needs 1 parameter: Enemy map ID.";
+            int id;
+            try { id=Integer.parseInt(s[0]); }
+            catch (Exception e) {
+                return "Cannot convert " + s[0] + " to number";
             }
             if(!MapStage.getInstance().isInMap())
-            {
-                return "Only supported for poi";
-            }
+                return "Only supported for PoI";
             MapStage.getInstance().deleteObject(id);
-            return "removed enemy "+s[0];
+            return "Femoved enemy "+s[0];
         });
     }
 }

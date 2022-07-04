@@ -5,7 +5,7 @@ MinDifficulty=0
 MaxDifficulty=5
 [metadata]
 Name=Ral, Caller of Storms
-Description=Ral Zarek is a quick witted storm mage who is always one step ahead of his enemies. Disrupt your opponent’s plans and pummel them with a flurry of spells on your way to victory.
+Description=Ral Zarek is a quick witted storm mage who is always one step ahead of his enemies. Disrupt your opponent's plans and pummel them with a flurry of spells on your way to victory.
 Deck Type=constructed
 Set=GRN
 Image=ral_caller_of_storms.jpg

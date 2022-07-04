@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="49">
+<map version="1.8" tiledversion="1.8.6" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="58">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -7,12 +7,12 @@
  <tileset firstgid="6321" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJyr4GZgqBjFo3gUj+IhiJtIwOh66GUvKW6jt73E2k0Le4mxe7jZS8jugYpfWtg/UHmLXDvxuYOQO2lRrlHbzFF7R/FIw9Y8A++GoYQBIy3Trg==
+   eJyr4GZgqBjFo3gUDzhuwoIr0Ni0tg+XGwarvcSaRYxdA2HvQPl3MNhLjN3DzV5Cdg9U/NLCflqXD9S0F5s+QmZSw6+kuIceeKTZO4qHN7bmGXg3DCUMAHMg1Qw=
   </data>
  </layer>
  <layer id="2" name="Ground" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzFl11OwzAMgAM8oCbhCFPhAQ7Bw1CFCkfgAIODbBxhB+iQ+FFvxAMIRNkReCdWYzXJ0sVd086Sla5189mznaRTydihYOxI6Rgy44zd85o5JvdANEzQK1n78cCHY0KsU2lzx4jbjRX1U/nytAduzFjvTjbvFWr+D2nHuRJNrMt4eC97JWzeGDJkTF2kUjX+q/SmZXSv13zzXbxfads1oSfLhLGF+r8TNZ7KRnlSK17DKNSYG6xbXr8Lmhu/cwIbuY+EXKeOPz4fTf+2seeCzqVKSmCjDXCf1Xgc0BeCDehrUs/7lrT7V2puRqgHig3alVuYQ3JDMtc1CLbnE8YuJnG4i0DNYI6/eThv1wQb0B/NNfM78/icOj3h9iquBxm31wtTsXYr3cuwJpzJhgH7UmifT6Xdo+hHZsxp9q/pp4+Je3/XcwbmIvPMic/N9c197u6FwKeyS83ddY1x93/qvg91/9WDWzjcrv72OZ/skxsS96zUl/vnOXtRpIgQ767yLsfnXkb4psLvpC7fJ9T8Ql205fIf9qthZw==
+   eJy9l1FOwzAMhjN4QE2zI4zCAxyCh6EKCkfgAIODbByBAxQkBOqNeACBKD3C3omVRHWzNnHbrJasZl2X7/fsJO5SMHYQM3YofQpbccbuuWJOyZ3FNRP8UigdD3x/TIh1KZrcKeK2YzX+JbW8TMwNzbub797LJeNTNOPE9hRWwg77WfuYWP866hDfr9A4RExxpNxnG0dcJVcabzqu9vhV8o4I/ib9VHRzi0jpiuT1RNTOI+VmDFeIMUUabrn6LXiGPsM49ewHhvtIyHUi1HzcoRHrqxzsdVxzs4Wc+9jN9sWB9WUOdqL1AZeSuytOy+81V/O+O+qv0FxKLJRnzHOFp+b3xfXZGtXgmczx+SIM17V+wUyOfwi5o+b3V3NxflctmhNrTYCOzNo7Kv2flOg+dlO7pV7LkbV3wLnkO+cT0VyjRkeK5sTrF+tsY5qzv2+fkaD9wJ7TfI/3N/t7+ywEPpVdaC5lb2sz+/yn9jhQ998juPnAnmPWU2ebDelzQnF9TLtXGsvdzof1OHmAeIfah5ieexHgncq8J/V5P6HmF+pi29JHg/0Dv4Nh9Q==
   </data>
  </layer>
  <layer id="3" name="Walls" width="30" height="30">
@@ -20,44 +20,54 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDHWwg4WBQZrGeBcLpr2hrLT3GzY7Rrq90yUZGGZIQtjaUgwMOlLYzUqWZWBIkcXPJsVeWgBK7X3PjkoTAhqM2O34SqK95AJS/HsY6NZyYNxWALEeJ6b8SIhfSuydzDEw9hIjRgyApVVy7f3CSl7ZTkp98g3JXvTwnoLGJ+RmcsIJ3c5RMApGAXkAADIWIvI=
+   eJxjYBgFo4B2YAcLA4M0jfEuFkx7Q1lp7zdsdgxFe5NlGRhSZDHZtLaXWDBqL6YYcjxpSzEw6EhhNwtX3GKL58HsX3zgPTsqTQhoMGK34yuJ9pILSPHvYaBby4FxWwHEepyY8iMhfimxdzLHwNhLjBgxAJZWybX3Cyt5dSgp9fY3JHvRw3sKGp+Qm8kJJ3Q7iQHUsJccQIq9hMKOVvZSE5BrL6V+H2r+HSz2AgAoOizU
   </data>
  </layer>
  <layer id="5" name="Overlay" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0bENABAARNFr2YDEPOzAJgxPoRQSFcl/1RXXfQkAcKM6qbnzLwYphf3Ge8xoY2ef7KXi1z/6AgB+1gHIEgcY
+   eJxjYBgFo2AUDAbgLsvA4CGLyR4FgxcQG0+44nY0ngc34ATGDRc0fqKlGBhipLCrG43fUTAKRsEoGAVDGQAA8c0ISg==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
   <object id="38" template="../obj/entry_up.tx" x="204" y="368" width="56" height="16"/>
   <object id="41" template="../obj/shop.tx" x="256" y="208">
    <properties>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artefact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
    </properties>
   </object>
-  <object id="42" template="../obj/shop.tx" x="304" y="208">
+  <object id="55" template="../obj/shop.tx" x="272" y="144">
    <properties>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artefact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Golem,Sliver"/>
    </properties>
   </object>
-  <object id="43" template="../obj/shop.tx" x="352" y="208">
+  <object id="57" template="../obj/shop.tx" x="320" y="144">
    <properties>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artefact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Golem,Sliver"/>
    </properties>
   </object>
-  <object id="44" template="../obj/shop.tx" x="256" y="272">
+  <object id="50" template="../obj/shop.tx" x="304" y="208">
    <properties>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artefact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
    </properties>
   </object>
-  <object id="45" template="../obj/shop.tx" x="304" y="272">
+  <object id="51" template="../obj/shop.tx" x="352" y="208">
    <properties>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artefact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
    </properties>
   </object>
-  <object id="46" template="../obj/shop.tx" x="352" y="272">
+  <object id="52" template="../obj/shop.tx" x="352" y="272">
    <properties>
-    <property name="shopList" value="Instant,Creature,Land,Colorless,Artefact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic"/>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
+   </properties>
+  </object>
+  <object id="53" template="../obj/shop.tx" x="304" y="272">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
+   </properties>
+  </object>
+  <object id="54" template="../obj/shop.tx" x="256" y="272">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
    </properties>
   </object>
   <object id="47" template="../obj/inn.tx" x="150" y="273"/>
@@ -66,5 +76,6 @@
     <property name="shopList" value="Equipment"/>
    </properties>
   </object>
+  <object id="49" template="../obj/spellsmith.tx" x="96" y="208"/>
  </objectgroup>
 </map>

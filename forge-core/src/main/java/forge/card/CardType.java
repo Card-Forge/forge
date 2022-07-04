@@ -33,6 +33,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -50,6 +51,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     private static final long serialVersionUID = 4629853583167022151L;
 
     public static final CardTypeView EMPTY = new CardType(false);
+    private static final Set<String> multiWordTypes = ImmutableSet.of("Serra's Realm", "Bolas's Meditation Realm", "Dungeon Master");
 
     public enum CoreType {
         Artifact(true, "artifacts"),
@@ -71,6 +73,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         public final String pluralName;
         private static Map<String, CoreType> stringToCoreType = EnumUtils.getEnumMap(CoreType.class);
         private static final Set<String> allCoreTypeNames = stringToCoreType.keySet();
+        public static final Set<CoreType> spellTypes = ImmutableSet.of(Instant, Sorcery);
 
         public static CoreType getEnum(String name) {
             return stringToCoreType.get(name);
@@ -535,7 +538,8 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 newType = new CardType(CardType.this);
 
             if (ct.isRemoveCardTypes()) {
-                newType.coreTypes.clear();
+                // 205.1a However, an object with either the instant or sorcery card type retains that type.
+                newType.coreTypes.retainAll(CoreType.spellTypes);
             }
             if (ct.isRemoveSuperTypes()) {
                 newType.supertypes.clear();
@@ -611,6 +615,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         }
         if (!isPlaneswalker()) {
             Iterables.removeIf(subtypes, Predicates.IS_WALKER_TYPE);
+        }
+        if (!isDungeon()) {
+            Iterables.removeIf(subtypes, Predicates.IS_DUNGEON_TYPE);
         }
     }
 
@@ -746,12 +753,14 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         while (hasMoreTypes) {
             final String type = typeText.substring(iTypeStart, iSpace == -1 ? typeText.length() : iSpace);
             hasMoreTypes = iSpace != -1;
-            if (!isMultiwordType(type) || !hasMoreTypes) {
-                iTypeStart = iSpace + 1;
-                if (!"-".equals(type)) {
-                    result.add(type);
-                }
+            final String rest = typeText.substring(iTypeStart);
+            if (isMultiwordType(rest)) {
+                result.add(rest);
+                break;
             }
+
+            iTypeStart = iSpace + 1;
+            result.add(type);
             iSpace = typeText.indexOf(space, iSpace + 1);
         }
         return result;
@@ -769,13 +778,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     private static boolean isMultiwordType(final String type) {
-        final String[] multiWordTypes = { "Serra's Realm", "Bolas's Meditation Realm", "Dungeon Master" };
-        for (int i = 0; i < multiWordTypes.length; ++i) {
-            if (multiWordTypes[i].startsWith(type) && !multiWordTypes[i].equals(type)) {
-                return true;
-            }
-        }
-        return false;
+        return multiWordTypes.contains(type);
     }
 
     public static class Constant {
@@ -787,6 +790,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         public static final Set<String> ENCHANTMENT_TYPES = Sets.newHashSet();
         public static final Set<String> ARTIFACT_TYPES = Sets.newHashSet();
         public static final Set<String> WALKER_TYPES = Sets.newHashSet();
+        public static final Set<String> DUNGEON_TYPES = Sets.newHashSet();
 
         // singular -> plural
         public static final BiMap<String,String> pluralTypes = HashBiMap.create();
@@ -846,6 +850,12 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
                 return CardType.isAPlaneswalkerType(input);
             }
         };
+        public static Predicate<String> IS_DUNGEON_TYPE = new Predicate<String>() {
+            @Override
+            public boolean apply(String input) {
+                return CardType.isADungeonType(input);
+            }
+        };
     }
 
     ///////// Utility methods
@@ -878,6 +888,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
             sortedSubTypes.addAll(Constant.ENCHANTMENT_TYPES);
             sortedSubTypes.addAll(Constant.ARTIFACT_TYPES);
             sortedSubTypes.addAll(Constant.WALKER_TYPES);
+            sortedSubTypes.addAll(Constant.DUNGEON_TYPES);
             Collections.sort(sortedSubTypes);
         }
         return sortedSubTypes;
@@ -933,6 +944,9 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         return (Constant.SPELL_TYPES.contains(cardType));
     }
 
+    public static boolean isADungeonType(final String cardType) {
+        return (Constant.DUNGEON_TYPES.contains(cardType));
+    }
     /**
      * If the input is a plural type, return the corresponding singular form.
      * Otherwise, simply return the input.

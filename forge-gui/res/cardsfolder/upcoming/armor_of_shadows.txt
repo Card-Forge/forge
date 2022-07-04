@@ -1,0 +1,5 @@
+Name:Armor of Shadows
+ManaCost:B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | AILogic$ Pump | NumAtt$ +1 | KW$ Indestructible | SpellDescription$ Until end of turn, target creature gets +1/+0 and gains indestructible. 
+Oracle:Until end of turn, target creature gets +1/+0 and gains indestructible. (Damage and effects that say "destroy" don't destroy it.)

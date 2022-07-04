@@ -1,0 +1,6 @@
+[format]
+Name:Standard (GTC)
+Type:Archived
+Subtype:Standard
+Effective:2013-02-01
+Sets:ISD, DKA, AVR, M13, RTR, GTC

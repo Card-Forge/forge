@@ -439,9 +439,28 @@ public class FDeckChooser extends FScreen {
                 public void run(Boolean result) {
                     if (result) {
                         Deck copiedDeck = (Deck)deck.getDeck().copyTo(deck.getName());
-                        decks.add(copiedDeck);
+                        IStorage<Deck> storage;
+
+                        switch(lstDecks.getGameType()) {
+                            case Commander:
+                                storage = FModel.getDecks().getCommander();
+                                break;
+                            case Brawl:
+                                storage = FModel.getDecks().getBrawl();
+                                break;
+                            case TinyLeaders:
+                                storage = FModel.getDecks().getTinyLeaders();
+                                break;
+                            case Oathbreaker:
+                                storage = FModel.getDecks().getOathbreaker();
+                                break;
+                            default:
+                                storage = FModel.getDecks().getConstructed();
+                                break;
+                        }
+                        storage.add(copiedDeck);
                         setSelectedDeckType(fallbackType);
-                        editDeck(new DeckProxy(copiedDeck, "Constructed", lstDecks.getGameType(), decks));
+                        editDeck(new DeckProxy(copiedDeck, "Constructed", lstDecks.getGameType(), storage));
                     }
                 }
             });

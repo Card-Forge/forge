@@ -1,0 +1,8 @@
+Name:Goliath Paladin
+ManaCost:4 W
+Types:Creature Giant Knight
+PT:3/6
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters the battlefield, you take the initiative.
+SVar:TrigInitiative:DB$ TakeInitiative
+Oracle:Vigilance\nWhen Goliath Paladin enters the battlefield, you take the initiative.

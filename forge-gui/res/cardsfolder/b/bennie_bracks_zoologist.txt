@@ -7,4 +7,4 @@ T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE1 | TriggerZo
 SVar:TrigDraw:DB$ Draw
 SVar:X:Count$ThisTurnEntered_Battlefield_Card.token+YouCtrl
 DeckHints:Ability$Token
-Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature’s color.)\nAt the beginning of each end step, if you created a token this turn, draw a card.
+Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nAt the beginning of each end step, if you created a token this turn, draw a card.

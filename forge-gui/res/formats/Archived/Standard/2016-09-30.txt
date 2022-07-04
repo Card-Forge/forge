@@ -1,0 +1,6 @@
+[format]
+Name:Standard (KLD)
+Type:Archived
+Subtype:Standard
+Effective:2016-09-30
+Sets:BFZ, OGW, SOI, W16, EMN, KLD

@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import java.util.Collections;
 import java.util.Map;
 
 import com.google.common.collect.Lists;
@@ -42,12 +43,12 @@ public class PermanentEffect extends SpellAbilityEffect {
 
         // some extra for Dashing
         if (sa.isDash() && c.isInPlay()) {
-            c.setSVar("EndOfTurnLeavePlay", "Dash");
+            c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Dash"), c.getGame().getNextTimestamp(), 0);
             registerDelayedTrigger(sa, "Hand", Lists.newArrayList(c));
         }
         // similar for Blitz keyword
         if (sa.isBlitz() && c.isInPlay()) {
-            c.setSVar("EndOfTurnLeavePlay", "Blitz");
+            c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "Blitz"), c.getGame().getNextTimestamp(), 0);
             registerDelayedTrigger(sa, "Sacrifice", Lists.newArrayList(c));
         }
 

@@ -1,0 +1,91 @@
+[metadata]
+Name=Arm for Battle
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+Description=Wyleth may start small, but the Auras and Equipment in this deck can quickly make him an imposing battlefield presence. Every attack brings you a bounty of new cards to clear opposing forces, enhance your other creatures, or make Wyleth that much more dominating.
+Set=CMR
+Image=arm_for_battle.png
+[commander]
+1 Wyleth, Soul of Steel+|CMR
+[main]
+1 Abrade|CMR
+1 Blackblade Reforged|CMR
+1 Blazing Sunsteel|CMR
+1 Bonesplitter|CMR
+1 Boros Charm|CMR
+1 Boros Garrison|CMR
+1 Boros Guildgate|CMR
+1 Boros Signet|CMR
+1 Brass Squire|CMR
+1 Comet Storm|CMR
+1 Command Tower|CMR
+1 Condemn|CMR
+1 Danitha Capashen, Paragon|CMR
+1 Dawn Charm|CMR
+1 Deflecting Palm|CMR
+1 Disenchant|CMR
+1 Dualcaster Mage|CMR
+1 Encroaching Wastes|CMR
+1 Evolving Wilds|CMR
+1 Expedite|CMR
+1 Explorer's Scope|CMR
+1 Faith Unbroken|CMR
+1 Fireshrieker|CMR
+1 Fists of Flame|CMR
+1 Flickerwisp|CMR
+1 Forgotten Cave|CMR
+1 Generous Gift|CMR
+1 Haunted Cloak|CMR
+1 Hero's Blade|CMR
+1 Ironclad Slayer|CMR
+1 Jaya's Immolating Inferno|CMR
+1 Kor Cartographer|CMR
+1 Loxodon Warhammer|CMR
+1 Martial Coup|CMR
+1 Mask of Avacyn|CMR
+1 Master Warcraft|CMR
+1 Memorial to War|CMR
+9 Mountain|CMR
+1 Myriad Landscape|CMR
+1 Odric, Lunarch Marshal|CMR
+1 On Serra's Wings|CMR
+1 Oreskos Explorer|CMR
+14 Plains|CMR
+1 Relentless Assault|CMR
+1 Relic Seeker|CMR
+1 Response // Resurgence|CMR
+1 Return to Dust|CMR
+1 Ring of Thune|CMR
+1 Ring of Valkas|CMR
+1 Rogue's Passage|CMR
+1 Rupture Spire|CMR
+1 Secluded Steppe|CMR
+1 Sigarda's Aid|CMR
+1 Slayers' Stronghold|CMR
+1 Sol Ring|CMR
+1 Spirit Mantle|CMR
+1 Sram, Senior Edificer|CMR
+1 Stone Quarry|CMR
+1 Sunforger|CMR
+1 Sunhome, Fortress of the Legion|CMR
+1 Swiftfoot Boots|CMR
+1 Sword of Vengeance|CMR
+1 Swords to Plowshares|CMR
+1 Temur Battle Rage|CMR
+1 Terramorphic Expanse|CMR
+1 Tiana, Ship's Caretaker|CMR
+1 Timely Ward|CMR
+1 Transguild Promenade|CMR
+1 Unbreakable Formation|CMR
+1 Unquestioned Authority|CMR
+1 Valorous Stance|CMR
+1 Volcanic Fallout|CMR
+1 Wear // Tear|CMR
+1 White Sun's Zenith|CMR
+1 Wild Ricochet|CMR
+1 Wind-Scarred Crag|CMR
+1 Winds of Rath|CMR
+1 Word of Seizing|CMR

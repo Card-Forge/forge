@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilAbility;
@@ -211,11 +212,11 @@ public class DiscardAi extends SpellAbilityAi {
         return true;
     }
 
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         if (mode == PlayerActionConfirmMode.Random) {
             // TODO For now AI will always discard Random used currently with: Balduvian Horde and similar cards
             return true;
         }
-        return super.confirmAction(player, sa, mode, message);
+        return super.confirmAction(player, sa, mode, message, params);
     }
 }

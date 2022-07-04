@@ -1,7 +1,0 @@
-[format]
-Name:China Standard (GRN)
-Type:Historic
-Subtype:Standard
-Effective:2018-10-05
-Sets:XLN, RIX, DOM, GS1, M19, GRN
-Banned:Rampaging Ferocidon

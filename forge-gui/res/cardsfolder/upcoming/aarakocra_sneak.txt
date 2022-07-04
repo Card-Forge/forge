@@ -1,0 +1,8 @@
+Name:Aarakocra Sneak
+ManaCost:3 U
+Types:Creature Bird Rogue
+PT:1/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters the battlefield, you take the initiative.
+SVar:TrigInitiative:DB$ TakeInitiative
+Oracle:Flying\nWhen Aarakocra Sneak enters the battlefield, you take the initiative.

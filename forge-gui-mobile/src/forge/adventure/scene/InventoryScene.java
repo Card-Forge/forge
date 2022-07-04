@@ -43,13 +43,14 @@ public class InventoryScene  extends UIScene {
     public void delete() {
 
         ItemData data = ItemData.getItem(itemLocation.get(selected));
-        Current.player().removeItem(data.name);
-
+        if(data != null) {
+            Current.player().removeItem(data.name);
+        }
         updateInventory();
 
     }
     public void equip() {
-        if(selected==null)return;
+        if(selected == null) return;
         ItemData data = ItemData.getItem(itemLocation.get(selected));
         Current.player().equip(data);
         updateInventory();
@@ -242,17 +243,19 @@ public class InventoryScene  extends UIScene {
                 }
             });
         }
-        for(Map.Entry<String, Button> slot :equipmentSlots.entrySet())
-        {
+        for(Map.Entry<String, Button> slot :equipmentSlots.entrySet()) {
             if(slot.getValue().getChildren().size>=2)
                 slot.getValue().removeActorAt(1,false);
             String equippedItem=Current.player().itemInSlot(slot.getKey());
-            if(equippedItem==null||equippedItem.equals(""))
+            if(equippedItem == null || equippedItem.equals(""))
                 continue;
-            Image img=new Image(ItemData.getItem(equippedItem).sprite());
-            img.setX((slot.getValue().getWidth()-img.getWidth())/2);
-            img.setY((slot.getValue().getHeight()-img.getHeight())/2);
-            slot.getValue().addActor(img);
+            ItemData item = ItemData.getItem(equippedItem);
+            if(item != null) {
+                Image img = new Image(item.sprite());
+                img.setX((slot.getValue().getWidth() - img.getWidth()) / 2);
+                img.setY((slot.getValue().getHeight() - img.getHeight()) / 2);
+                slot.getValue().addActor(img);
+            }
         }
     }
 

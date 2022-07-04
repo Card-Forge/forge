@@ -153,7 +153,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                     }
 
                     boolean runDiscard = !sa.hasParam("Optional")
-                            || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, sa.getParam("DiscardMessage"));
+                            || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, sa.getParam("DiscardMessage"), null);
                     if (runDiscard) {
                         toBeDiscarded = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
 
@@ -197,7 +197,7 @@ public class DiscardEffect extends SpellAbilityEffect {
                         continue;
                     }
                     String message = Localizer.getInstance().getMessage("lblWouldYouLikeRandomDiscardTargetCard", String.valueOf(numCards));
-                    boolean runDiscard = !sa.hasParam("Optional") || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message);
+                    boolean runDiscard = !sa.hasParam("Optional") || p.getController().confirmAction(sa, PlayerActionConfirmMode.Random, message, null);
 
                     if (runDiscard) {
                         final String valid = sa.getParamOrDefault("DiscardValid", "Card");

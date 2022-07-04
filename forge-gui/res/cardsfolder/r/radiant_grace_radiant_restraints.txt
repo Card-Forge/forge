@@ -18,6 +18,6 @@ Colors:white
 Types:Enchantment Aura Curse
 K:Enchant player
 A:SP$ Attach | ValidTgts$ Player | AILogic$ Curse
-R:Event$ Moved | ValidCard$ Creature.EnchantedPlayerCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | ActiveZones$ Battlefield | Description$ Creatures your opponents control enter the battlefield tapped.
-SVar:ETBTapped:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Tapped$ True | Defined$ ReplacedCard
+R:Event$ Moved | ValidCard$ Creature.EnchantedPlayerCtrl | Destination$ Battlefield | ReplaceWith$ ETBTapped | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ Creatures your opponents control enter the battlefield tapped.
+SVar:ETBTapped:DB$ Tap | ETB$ True | Defined$ ReplacedCard
 Oracle:Creatures enchanted player controls enter the battlefield tapped.

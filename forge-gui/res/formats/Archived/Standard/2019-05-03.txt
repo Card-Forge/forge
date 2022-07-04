@@ -1,0 +1,7 @@
+[format]
+Name:Standard (WAR)
+Type:Archived
+Subtype:Standard
+Effective:2019-05-03
+Sets:XLN, RIX, DOM, M19, GRN, G18, RNA, WAR
+Banned:Rampaging Ferocidon
