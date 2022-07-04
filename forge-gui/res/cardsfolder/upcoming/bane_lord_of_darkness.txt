@@ -2,7 +2,7 @@ Name: Bane, Lord of Darkness
 ManaCost: 1 W U B
 Types: Legendary Creature God
 PT: 5/2
-Oracle: As long as your life total is less than or equal to half your starting life total, Bane, Lord of Darkness has indestructible.\n\nWhenever another nontoken creature you control dies, target opponent may have you draw a card. If they don’t, you may put a creature card with equal or lesser toughness from your hand onto the battlefield.
+Oracle: As long as your life total is less than or equal to half your starting life total, Bane, Lord of Darkness has indestructible.\nWhenever another nontoken creature you control dies, target opponent may have you draw a card. If they don’t, you may put a creature card with equal or lesser toughness from your hand onto the battlefield.
 #
 #####################################################
 # As long as your life total is less than or equal  #
