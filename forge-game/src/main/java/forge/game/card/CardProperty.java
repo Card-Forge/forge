@@ -608,35 +608,6 @@ public class CardProperty {
             if ((card.getCloneOrigin() == null) || !card.getCloneOrigin().equals(source)) {
                 return false;
             }
-        } else if (property.startsWith("DamagedBy")) {
-            List<Card> damaged = Lists.newArrayList();
-            for (Pair<Card, Integer> pair : card.getReceivedDamageFromThisTurn()) {
-                damaged.add(pair.getLeft());
-            }
-            if (property.endsWith("Source") || property.equals("DamagedBy")) {
-                if (!damaged.contains(source)) {
-                    return false;
-                }
-            } else {
-                String prop = property.substring("DamagedBy".length());
-                boolean found = Iterables.any(damaged, CardPredicates.restriction(prop, sourceController, source, spellAbility));
-
-                if (!found) {
-                    for (Card d : AbilityUtils.getDefinedCards(source, prop, spellAbility)) {
-                        if (damaged.contains(d)) {
-                            found = true;
-                            break;
-                        }
-                    }
-                }
-                if (!found) {
-                    return false;
-                }
-            }
-        } else if (property.startsWith("Damaged")) {
-            if (!card.getDamageHistory().getThisTurnDamaged().containsKey(source)) {
-                return false;
-            }
         } else if (property.startsWith("SharesCMCWith")) {
             if (property.equals("SharesCMCWith")) {
                 if (!card.sharesCMCWith(source)) {
@@ -1133,38 +1104,78 @@ public class CardProperty {
                     && !card.getDamageHistory().hasBlockedSinceLastUpkeepOf(sourceController)) {
                 return false;
             }
+        } else if (property.startsWith("DamagedBy")) {
+            String prop = property.substring("DamagedBy".length());
+            CardCollection def = null;
+            if (prop.startsWith(" ")) {
+                def = AbilityUtils.getDefinedCards(source, prop.substring(1), spellAbility);
+            }
+            boolean found = false;
+            for (Pair<Integer, Boolean> p : card.getDamageReceivedThisTurn()) {
+                Card dmgSource = game.getDamageLKI(p).getLeft();
+                if (def != null) {
+                    for (Card c : def) {
+                        if (dmgSource.equalsWithTimestamp(c)) {
+                            found = true;
+                        }
+                    }
+                }
+                else if (prop.isEmpty() && dmgSource.equalsWithTimestamp(source)) {
+                    found = true;
+                } else if (dmgSource.isValid(prop.split(","), sourceController, source, spellAbility)) {
+                    found = true;
+                }
+                if (found) {
+                    break;
+                }
+            }
+            if (!found) {
+                return false;
+            }
+        } else if (property.startsWith("Damaged")) {
+            for (Pair<Integer, Boolean> p : source.getDamageReceivedThisTurn()) {
+                boolean found = false;
+                if (game.getDamageLKI(p).getLeft().equalsWithTimestamp(card)) {
+                    found = true;
+                    break;
+                }
+                if (!found) {
+                    return false;
+                }
+            }
+        } else if (property.startsWith("dealtCombatDamageThisCombat")) {
+            if (card.getDamageHistory().getThisCombatDamaged().isEmpty()) {
+                return false;
+            }
         } else if (property.startsWith("dealtDamageToYouThisTurn")) {
-            if (!card.getDamageHistory().getThisTurnDamaged().containsKey(sourceController)) {
+            if (card.getDamageHistory().getDamageDoneThisTurn(null, true, null, "You", card, sourceController, spellAbility) == 0) {
                 return false;
             }
         } else if (property.startsWith("dealtDamageToOppThisTurn")) {
             if (!card.hasDealtDamageToOpponentThisTurn()) {
                 return false;
             }
-        //dealtCombatDamageThisCombat <valid>, dealtCombatDamageThisTurn <valid>, and notDealt versions
         } else if (property.startsWith("dealtCombatDamage") || property.startsWith("notDealtCombatDamage")) {
-            final String[] v = property.split(" ")[1].split(",");
-            final Iterable<GameEntity> list = property.contains("ThisCombat") ?
-                    Lists.newArrayList(card.getDamageHistory().getThisCombatDamaged()) :
-                    card.getDamageHistory().getThisTurnCombatDamaged().keySet();
-            boolean found = Iterables.any(list, GameObjectPredicates.restriction(v, sourceController, source, spellAbility));
+            final String v = property.split(" ")[1];
+            boolean found = card.getDamageHistory().getDamageDoneThisTurn(true, true, null, v, card, sourceController, spellAbility) > 0;
+
             if (found == property.startsWith("not")) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
-            if (!source.getDamageHistory().getThisTurnCombatDamaged().containsKey(controller)) {
+            if (source.getDamageHistory().getDamageDoneThisTurn(true, true, null, "You", card, controller, spellAbility) == 0) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtDamageByThisTurn")) {
-            if (!source.getDamageHistory().getThisTurnDamaged().containsKey(controller)) {
+            if (source.getDamageHistory().getDamageDoneThisTurn(null, true, null, "You", card, controller, spellAbility) == 0) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
-            if (card.getReceivedDamageFromPlayerThisTurn().isEmpty()) {
+            if (card.getAssignedDamage() == 0) {
                 return false;
             }
         } else if (property.equals("wasDealtNonCombatDamageThisTurn")) {
-            if (!card.getDamageHistory().hasBeenDealtNonCombatDamageThisTurn()) {
+            if (card.getAssignedDamage(false, null) == 0) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageByThisGame")) {

@@ -1,0 +1,22 @@
+Name:Indulge
+ManaCost:2 R
+Types:Sorcery
+A:SP$ Effect | CounterType$ P1P1 | CounterNum$ 3 | Triggers$ TriggerAttacks | AddSVar$ AE | SpellDescription$ Whenever a creature you control attacks this turn, create a 1/1 green and white Citizen creature token that's tapped and attacking.
+SVar:TriggerAttacks:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a creature you control attacks this turn, create a 1/1 green and white Citizen creature token that's tapped and attacking.
+SVar:TrigToken:DB$ Token | TokenScript$ gw_1_1_citizen | TokenTapped$ True | TokenAttacking$ True
+SVar:AE:SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Citizen
+AlternateMode:Split
+Oracle:Whenever a creature you control attacks this turn, create a 1/1 green and white Citizen creature token that's tapped and attacking.
+
+ALTERNATE
+
+Name:Excess
+ManaCost:1 R
+Types:Sorcery
+K:Aftermath
+A:SP$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token for each creature you controlled that dealt combat damage to a player this turn.
+SVar:X:Count$NumCombatDamageThisTurn Creature.YouCtrl Player
+DeckHas:Ability$Token|Sacrifice|Graveyard & Type$Artifact|Treasure
+SVar:NeedsToPlayVar:X GE3
+Oracle:Aftermath (Cast this spell only from your graveyard. Then exile it.)\nCreate a Treasure token for each creature you controlled that dealt combat damage to a player this turn.

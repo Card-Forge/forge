@@ -5,8 +5,8 @@ A:SP$ ChangeZone | ValidTgts$ Card | TgtZone$ Stack | Origin$ Stack | Fizzle$ Tr
 SVar:DBRoll:DB$ RollDice | Sides$ 20 | Modifier$ Y | ResultSubAbilities$ 1-14:DBMayPlay,Else:DBMayPlayWithoutCost | StackDescription$ SpellDescription | SpellDescription$ Roll a d20 and add that spell's mana value.
 SVar:DBMayPlay:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | Duration$ Permanent | ExileOnMoved$ Exile | SubAbility$ DBCleanup | SpellDescription$ 1—14 VERT You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast it.
 SVar:DBMayPlayWithoutCost:DB$ Effect | StaticAbilities$ STPlayWithoutCost | RememberObjects$ Remembered | Duration$ Permanent | ExileOnMoved$ Exile | SubAbility$ DBCleanup | SpellDescription$ 15+ VERT You may cast that card without paying its mana cost for as long as it remains exiled.
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast it.
-SVar:STPlayWithoutCost:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may cast that card without paying its mana cost for as long as it remains exiled.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | MayPlayIgnoreColor$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast it.
+SVar:STPlayWithoutCost:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast that card without paying its mana cost for as long as it remains exiled.
 SVar:Y:RememberedLKI$CardManaCost
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All

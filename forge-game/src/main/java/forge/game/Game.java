@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -47,6 +48,7 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardDamageHistory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
@@ -78,6 +80,7 @@ import forge.trackable.Tracker;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.Visitor;
+import forge.util.collect.FCollection;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -118,6 +121,9 @@ public class Game {
     private CardCollection lastStateGraveyard = new CardCollection();
 
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
+
+    private FCollection<CardDamageHistory> globalDamageHistory = new FCollection<>();
+    private IdentityHashMap<Pair<Integer, Boolean>, Pair<Card, GameEntity>> damageThisTurnLKI = new IdentityHashMap<>();
 
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
     private Map<Card, Integer>  facedownWhileCasting = Maps.newHashMap();
@@ -251,7 +257,7 @@ public class Game {
         if (c == null) {
             return null;
         }
-        return changeZoneLKIInfo.containsKey(c.getId()) ? changeZoneLKIInfo.get(c.getId()) : c;
+        return changeZoneLKIInfo.getOrDefault(c.getId(), c);
     }
     public final void clearChangeZoneLKIInfo() {
         changeZoneLKIInfo.clear();
@@ -1088,6 +1094,7 @@ public class Game {
 
     public void onCleanupPhase() {
         clearCounterAddedThisTurn();
+        clearGlobalDamageHistory();
         // some cards need this info updated even after a player lost, so don't skip them
         for (Player player : getRegisteredPlayers()) {
             player.onCleanupPhase();
@@ -1127,6 +1134,48 @@ public class Game {
 
     public void clearCounterAddedThisTurn() {
         countersAddedThisTurn.clear();
+    }
+
+    /**
+     * Gets the damage instances done this turn.
+     * @param isCombat if true only combat damage matters, pass null for both
+     * @param anyIsEnough if true returns early once result has an entry
+     * @param validSourceCard
+     * @param validTargetEntity
+     * @param source
+     * @param sourceController
+     * @param ctb
+     * @return List<Integer> for each source
+     */
+    public List<Integer> getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
+        final List<Integer> dmgList = Lists.newArrayList();
+        for (CardDamageHistory cdh : globalDamageHistory) {
+            int dmg = cdh.getDamageDoneThisTurn(isCombat, anyIsEnough, validSourceCard, validTargetEntity, source, sourceController, ctb);
+            if (dmg == 0) {
+                continue;
+            }
+
+            dmgList.add(dmg);
+
+            if (anyIsEnough) {
+                break;
+            }
+        }
+
+        return dmgList;
+    }
+
+    public void addGlobalDamageHistory(CardDamageHistory cdh, Pair<Integer, Boolean> dmg, Card source, GameEntity target) {
+        globalDamageHistory.add(cdh);
+        damageThisTurnLKI.put(dmg, Pair.of(source, target));
+    }
+    public void clearGlobalDamageHistory() {
+        globalDamageHistory.clear();
+        damageThisTurnLKI.clear();
+    }
+
+    public Pair<Card, GameEntity> getDamageLKI(Pair<Integer, Boolean> dmg) {
+        return damageThisTurnLKI.get(dmg);
     }
 
     public Card getTopLibForPlayer(Player P) {

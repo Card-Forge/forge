@@ -4,9 +4,11 @@ package forge.game.card;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
+import org.apache.commons.lang3.tuple.Pair;
 
+import com.google.common.collect.Lists;
+
+import forge.game.CardTraitBase;
 import forge.game.GameEntity;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -22,7 +24,6 @@ public class CardDamageHistory {
     private boolean creatureBlockedThisCombat = false;
     private boolean creatureGotBlockedThisCombat = false;
 
-    boolean hasdealtDamagetoAny = false;
     private List<GameEntity> attackedThisTurn = Lists.newArrayList();
 
     private final List<Player> creatureAttackedLastTurnOf = Lists.newArrayList();
@@ -30,14 +31,13 @@ public class CardDamageHistory {
     private final List<Player> NotBlockedSinceLastUpkeepOf = Lists.newArrayList();
     private final List<Player> NotBeenBlockedSinceLastUpkeepOf = Lists.newArrayList();
 
+    private List<Pair<Integer, Boolean>> damageDoneThisTurn = Lists.newArrayList();
+
     // only needed for Glen Elendra (Plane)
     private final List<Player> damagedThisCombat = Lists.newArrayList();
     // only needed for The Fallen
     private final FCollection<GameEntity> damagedThisGame = new FCollection<>();
-
-    private final Map<GameEntity, Integer> damagedThisTurn = Maps.newHashMap();
-    private final Map<GameEntity, Integer> damagedThisTurnInCombat = Maps.newHashMap();
-    private boolean receivedNonCombatDamageThisTurn = false;
+    boolean hasdealtDamagetoAny = false;
 
     public final boolean getHasdealtDamagetoAny() {
         return hasdealtDamagetoAny;
@@ -225,37 +225,8 @@ public class CardDamageHistory {
         return this.creatureGotBlockedThisCombat;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>receivedNonCombatDamageThisTurn</code>.
-     * </p>
-     *
-     * @return a boolean.
-     */
-    public boolean hasBeenDealtNonCombatDamageThisTurn() {
-        return this.receivedNonCombatDamageThisTurn;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>receivedNonCombatDamageThisTurn</code>.
-     * </p>
-     *
-     * @param b
-     *            a boolean.
-     */
-    public void setHasBeenDealtNonCombatDamageThisTurn(boolean b) {
-        this.receivedNonCombatDamageThisTurn = b;
-    }
-
     public final List<Player> getThisCombatDamaged() {
         return damagedThisCombat;
-    }
-    public final Map<GameEntity, Integer> getThisTurnDamaged() {
-        return damagedThisTurn;
-    }
-    public final Map<GameEntity, Integer> getThisTurnCombatDamaged() {
-        return damagedThisTurnInCombat;
     }
     public final FCollection<GameEntity> getThisGameDamaged() {
         return damagedThisGame;
@@ -264,38 +235,44 @@ public class CardDamageHistory {
      * TODO: Write javadoc for this method.
      * @param player
      */
-    public void registerCombatDamage(GameEntity entity, int amount) {
-        int old = 0;
-        if (entity instanceof Player) {
-            damagedThisCombat.add((Player) entity);
-        }
-        old = 0;
-        if (damagedThisTurnInCombat.containsKey(entity)) {
-            old = damagedThisTurnInCombat.get(entity);
-        }
-        damagedThisTurnInCombat.put(entity, old + amount);
+    public void registerDamage(int damage, boolean isCombat, Card sourceLKI, GameEntity target, Map<Integer, Card> lkiCache) {
+        damagedThisGame.add(target);
         hasdealtDamagetoAny = true;
+        if (isCombat && target instanceof Player) {
+            damagedThisCombat.add((Player) target);
+        }
+        Pair<Integer, Boolean> dmg = Pair.of(damage, isCombat);
+        damageDoneThisTurn.add(dmg);
+        target.receiveDamage(dmg);
+        sourceLKI.getGame().addGlobalDamageHistory(this, dmg, sourceLKI.isLKI() ? sourceLKI : CardUtil.getLKICopy(sourceLKI, lkiCache), CardUtil.getLKICopy(target, lkiCache));
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param player
-     */
-    public void registerDamage(GameEntity entity, int amount) {
-        int old = 0;
-        if (damagedThisTurn.containsKey(entity)) {
-            old = damagedThisTurn.get(entity);
+    public int getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
+        int sum = 0;
+        for (Pair<Integer, Boolean> damage : damageDoneThisTurn) {
+            Pair<Card, GameEntity> sourceToTarget = sourceController.getGame().getDamageLKI(damage);
+
+            if (isCombat != null && damage.getRight() != isCombat) {
+                continue;
+            }
+            if (validSourceCard != null && !sourceToTarget.getLeft().isValid(validSourceCard.split(","), sourceController, source == null ? sourceToTarget.getLeft() : source, ctb)) {
+                continue;
+            }
+            if (validTargetEntity != null && !sourceToTarget.getRight().isValid(validTargetEntity.split(","), sourceController, source, ctb)) {
+                continue;
+            }
+            sum += damage.getLeft();
+            if (anyIsEnough) {
+                break;
+            }
         }
-        damagedThisTurn.put(entity, old + amount);
-        damagedThisGame.add(entity);
-        hasdealtDamagetoAny = true;
+        return sum;
     }
 
     public void newTurn() {
-        damagedThisCombat.clear();
-        damagedThisTurnInCombat.clear();
-        damagedThisTurn.clear();
         attackedThisTurn.clear();
+        damagedThisCombat.clear();
+        damageDoneThisTurn.clear();
 
         // if card already LTB we can safely dereference (allows quite a few objects to be cleaned up earlier for bigger boardstates)
         CardCollection toRemove = new CardCollection();
@@ -307,7 +284,6 @@ public class CardDamageHistory {
             }
         }
         damagedThisGame.removeAll(toRemove);
-        setHasBeenDealtNonCombatDamageThisTurn(false);
     }
 
     public void endCombat() {

@@ -1,0 +1,9 @@
+Name:Gnoll War Band
+ManaCost:5 R
+Types:Creature Gnoll
+PT:5/5
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each opponent who was dealt damage this turn.
+SVar:X:PlayerCountOpponents$HasPropertywasDealtDamageThisTurn
+K:Menace
+K:Myriad
+Oracle:This spell costs {1} less to cast for each opponent who was dealt damage this turn.\nMenace\nMyriad
