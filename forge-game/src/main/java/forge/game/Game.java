@@ -1130,9 +1130,14 @@ public class Game {
     public List<Integer> getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
         final List<Integer> dmgList = Lists.newArrayList();
         for (CardDamageHistory cdh : globalDamageHistory) {
-            dmgList.add(cdh.getDamageDoneThisTurn(isCombat, anyIsEnough, validSourceCard, validTargetEntity, source, sourceController, ctb));
+            int dmg = cdh.getDamageDoneThisTurn(isCombat, anyIsEnough, validSourceCard, validTargetEntity, source, sourceController, ctb);
+            if (dmg == 0) {
+                continue;
+            }
 
-            if (anyIsEnough && !dmgList.isEmpty()) {
+            dmgList.add(dmg);
+
+            if (anyIsEnough) {
                 break;
             }
         }

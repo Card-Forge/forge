@@ -2046,7 +2046,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         for (String type : types) {
             sb.append("Card.YouCtrl+").append(type).append(",");
         }
-        return !game.getDamageDoneThisTurn(true, false, sb.toString(), "Player", null, this, null).isEmpty();
+        return !game.getDamageDoneThisTurn(true, true, sb.toString(), "Player", null, this, null).isEmpty();
     }
 
     public final void setLibrarySearched(final int l) {
