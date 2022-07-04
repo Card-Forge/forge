@@ -10,4 +10,4 @@ ScryfallCode=GN3
 2 M Maeve, Insidious Singer @Jason Rainville
 3 M Vogar, Necropolis Tyrant @Jason A. Engle
 4 M Nogi, Draco-Zealot @Dmitry Burmak
-6 M Imaryll, Elfhame Elite @Ryan Pancoast
+5 M Imaryll, Elfhame Elite @Ryan Pancoast
