@@ -1,0 +1,13 @@
+[metadata]
+Code=GN3
+Date=2022-10-14
+Name=Game Night 2022
+Type=Multiplayer
+ScryfallCode=GN3
+
+[cards]
+1 M Zamriel, Seraph of Steel @Chris Rallis
+2 M Maeve, Insidious Singer @Jason Rainville
+3 M Vogar, Necropolis Tyrant @Jason A. Engle
+4 M Nogi, Draco-Zealot @Dmitry Burmak
+6 M Imaryll, Elfhame Elite @Ryan Pancoast
