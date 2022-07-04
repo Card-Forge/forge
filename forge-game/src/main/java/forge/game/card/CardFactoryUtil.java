@@ -3448,9 +3448,21 @@ public class CardFactoryUtil {
             st.setSVar("AffinityX", "Count$Valid " + t + ".YouCtrl");
             inst.addStaticAbility(st);
         } else if (keyword.startsWith("Blitz")) {
-            String effect = "Mode$ Continuous | Affected$ Card.Self+blitzed | AddKeyword$ Haste | AddTrigger$ Dies";
-            String trig = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | " +
-                    "Execute$ TrigDraw | TriggerDescription$ When this creature dies, draw a card.";
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+            final Cost cost = new Cost(manacost, false);
+
+            StringBuilder sb = new StringBuilder("Blitz");
+            if (!cost.isOnlyManaCost()) {
+                sb.append("—");
+            } else {
+                sb.append(" ");
+            }
+            sb.append(cost.toSimpleString());
+            String effect = "Mode$ Continuous | Affected$ Card.Self+blitzed+castKeyword | AddKeyword$ Haste | AddTrigger$ Dies"
+                    + " | Secondary$ True | Description$ " + sb.toString() + " (" + inst.getReminderText() + ")";
+            String trig = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self" +
+                    " | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ When this creature dies, draw a card.";
             String ab = "DB$ Draw | NumCards$ 1";
 
             StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
@@ -3524,7 +3536,7 @@ public class CardFactoryUtil {
 
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Dash")) {
-            String effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
+            String effect = "Mode$ Continuous | Affected$ Card.Self+dashed+castKeyword | AddKeyword$ Haste";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Daybound")) {
             String effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Daybound | Secondary$ True | Description$ This permanent can't be transformed except by its daybound ability.";
