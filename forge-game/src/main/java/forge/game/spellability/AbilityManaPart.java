@@ -42,6 +42,8 @@ import forge.game.replacement.ReplacementType;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
+import forge.game.zone.Zone;
 import forge.util.TextUtil;
 
 /**
@@ -339,8 +341,24 @@ public class AbilityManaPart implements java.io.Serializable {
                 continue;
             }
 
+            //handled in meetsManaShardRestrictions
             if (restriction.equals("CantPayGenericCosts")) {
                 return true;
+            }
+
+            // "can't" zone restriction – shouldn't be mixed with other restrictions
+            if (restriction.startsWith("CantCastSpellFrom")) {
+                if (!sa.isSpell()) { //
+                    return true;
+                }
+                final ZoneType badZone = ZoneType.smartValueOf(restriction.substring(17));
+                final Card host = sa.getHostCard();
+                final Zone castFrom = host.getCastFrom();
+                //ComputerUtilMana looks at this to see if AI can cast things, so need a fallback zone
+                final ZoneType zone = castFrom == null ? host.getZone().getZoneType() : castFrom.getZoneType();
+                if (!badZone.equals(zone)) {
+                    return true;
+                }
             }
 
             // the payment is for a resolving SA, currently no other restrictions would allow that
