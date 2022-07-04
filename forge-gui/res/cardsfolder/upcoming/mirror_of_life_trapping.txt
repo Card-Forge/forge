@@ -2,7 +2,7 @@ Name:Mirror of Life Trapping
 ManaCost:4
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.wasCast | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature enters the battlefield, if it was cast, exile it, then return all other permanent cards exiled with CARDNAME to the battlefield under their owners’ control.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ TriggeredCardLKICopy | Imprint$ True | SubAbility$ TrigReturn
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ TriggeredCard | Imprint$ True | SubAbility$ TrigReturn
 SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Permanent.ExiledWithSource+IsNotImprinted | SubAbility$ DBCleanup
 T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
