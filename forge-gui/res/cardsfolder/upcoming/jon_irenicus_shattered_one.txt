@@ -2,13 +2,6 @@ Name:Jon Irenicus, Shattered One
 ManaCost:2 U B
 Types:Legendary Creature Elf Wizard
 PT:3/3
-Oracle:At the beginning of your end step, target opponent gains control of up to one target creature you control. Put two +1/+1 counters on it and tap it. It's goaded for the rest of the game and it gains "This creature can't be sacrificed." (It attacks each combat if able and attacks a player other than you if able.)\nWhenever a creature you own but don't control attacks, you draw a card.
-#
-#########################################################################################################
-# At the beginning of your end step, target opponent gains control of up to one target creature you	#
-# control. Put two +1/+1 counters on it and tap it. It's goaded for the rest of the game and it gains	#
-# "This creature can't be sacrificed." 									#
-#########################################################################################################
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBSelectRecipient | TriggerDescription$ At the beginning of your end step, target opponent gains control of up to one target creature you control (This is a test #29).
 SVar:DBSelectRecipient:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDonate
 SVar:DBDonate:DB$ GainControl | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you control | NewController$ ParentTarget | SubAbility$ DBPutCounters | StackDescription$ Test {p:Targeted}
@@ -18,9 +11,6 @@ SVar:DBGoad:DB$ Goad | Defined$ Targeted | SubAbility$ DBDisableSacing
 SVar:DBDisableSacing:DB$ Animate | Defined$ Targeted | staticAbilities$ SCantSac | Duration$ Permanent | SubAbility$ DBCleanUp
 SVar:SCantSac:Mode$ CantSacrifice | ValidCard$ Card.Self | Description$ This creature cannot be sacrificed.
 SVar:DBCleanUp:DB$ CleanUp | ClearRemembered$ True
-#
-#########################################################################################################
-# Whenever a creature you own but don't control attacks, you draw a card.				# 
-#########################################################################################################
 T:Mode$ Attacks | ValidCard$ Creature.OppCtrl | ValidCard$ Creature.YouOwn | TriggerZones$ Battlefield | Execute$ DrawACard | TriggerDescription$ Whenever a creature you own but don't control attacks, you draw a card.
 SVar:DrawACard:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:At the beginning of your end step, target opponent gains control of up to one target creature you control. Put two +1/+1 counters on it and tap it. It's goaded for the rest of the game and it gains "This creature can't be sacrificed." (It attacks each combat if able and attacks a player other than you if able.)\nWhenever a creature you own but don't control attacks, you draw a card.
