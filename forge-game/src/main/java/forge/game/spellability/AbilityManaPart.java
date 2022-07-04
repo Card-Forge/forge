@@ -20,7 +20,6 @@ package forge.game.spellability;
 import java.util.List;
 import java.util.Map;
 
-import forge.game.zone.ZoneType;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -43,6 +42,8 @@ import forge.game.replacement.ReplacementType;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
+import forge.game.zone.Zone;
 import forge.util.TextUtil;
 
 /**
@@ -351,8 +352,11 @@ public class AbilityManaPart implements java.io.Serializable {
                     return true;
                 }
                 final ZoneType badZone = ZoneType.smartValueOf(restriction.substring(17));
-                final ZoneType castFrom = sa.getHostCard().getCastFrom().getZoneType();
-                if (!badZone.equals(castFrom)) {
+                final Card host = sa.getHostCard();
+                final Zone castFrom = host.getCastFrom();
+                //ComputerUtilMana looks at this to see if AI can cast things, so need a fallback zone
+                final ZoneType zone = castFrom == null ? host.getZone().getZoneType() : castFrom.getZoneType();
+                if (!badZone.equals(zone)) {
                     return true;
                 }
             }
