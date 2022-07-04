@@ -1,0 +1,9 @@
+Name:Nogi, Draco-Zealot
+ManaCost:1 R R
+Types:Legendary Creature Kobold Shaman
+PT:3/3
+S:Mode$ ReduceCost | ValidCard$ Dragon | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Dragon spells you cast cost {1} less to cast.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigAnimate | IsPresent$ Permanent.dragon+YouCtrl | PresentCompare$ GE3 | TriggerDescription$ Whenever CARDNAME attacks, if you control three or more Dragons until end of turn, NICKNAME becomes a Dragon with base power and toughness 5/5 and gains flying.
+SVar:TrigAnimate:DB$ Animate | Defined$ Self | Power$ 5 | Toughness$ 5 | Types$ Dragon | RemoveCreatureTypes$ True | Keywords$ Flying  | SpellDescription$ Until end of turn, CARDNAME becomes a Dragon with base power and toughness 5/5 and gains flying.
+DeckHints:Type$Dragon
+Oracle:Dragon spells you cast cost {1} less to cast.\nWhenever Nogi, Draco-Zealot attacks, if you control three or more Dragons, until end of turn, Nogi becomes a Dragon with base power and toughness 5/5 and gains flying.
