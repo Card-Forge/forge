@@ -1,27 +1,13 @@
-Name: Bane, Lord of Darkness
-ManaCost: 1 W U B
-Types: Legendary Creature God
-PT: 5/2
-Oracle: As long as your life total is less than or equal to half your starting life total, Bane, Lord of Darkness has indestructible.\nWhenever another nontoken creature you control dies, target opponent may have you draw a card. If they don’t, you may put a creature card with equal or lesser toughness from your hand onto the battlefield.
-#
-#####################################################
-# As long as your life total is less than or equal  #
-# to half your starting life total,                 #
-# Bane, Lord of Darkness has indestructible.        #
-#####################################################
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | CheckSVar$ CurrentLife | SVarCompare$ LEX
+Name:Bane, Lord of Darkness
+ManaCost:1 W U B
+Types:Legendary Creature God
+PT:5/2
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Indestructible | CheckSVar$ CurrentLife | SVarCompare$ LEX | Description$ As long as your life total is less than or equal to half your starting life total, CARDNAME has indestructible.
 SVar:CurrentLife:Count$YourLifeTotal
 SVar:X:Count$YourStartingLife/HalfDown
-#
-#####################################################
-# Whenever another nontoken creature you control    #
-# dies, target opponent may have you draw a card.   #
-# If they don’t, you may put a creature card with   #
-# equal or lesser toughness from your hand onto the #
-# battlefield.                                      #
-#####################################################
 T:Mode$ ChangesZone | ValidCard$ Creature.nonToken+Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ DBAskOpponentDrawOrPlay | TriggerZones$ Battlefield | TriggerDescription$ Whenever another nontoken creature you control dies, target opponent may have you draw a card. If they don't, you may put a creature card with equal or lesser toughness from your hand onto the battlefield.
 SVar:DBAskOpponentDrawOrPlay:DB$ GenericChoice | ValidTgts$ Opponent | Choices$ DBDrawCard,DBCheatCreature
 SVar:DBDrawCard:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ Controller draws a card
-SVar:DBCheatCreature:DB$ Play | Valid$ Creature.YouOwn+toughnessLEY | ValiZone$ Hand | ValidSA$ Spell | Destination$ BattleField | WithoutManaCost$ True | Amount$ 1 | Optional$ True | StackDescription$ None | SpellDescription $ Controller may put a creature card with equal or lesser toughness from their hand onto the battlefield.
+SVar:DBCheatCreature:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.toughnessLEY | ChangeNum$ 1 | SpellDescription$ You may put a creature card with equal or lesser toughness from your hand onto the battlefield.
 SVar:Y:TriggeredCard$CardToughness
+Oracle: As long as your life total is less than or equal to half your starting life total, Bane, Lord of Darkness has indestructible.\nWhenever another nontoken creature you control dies, target opponent may have you draw a card. If they don't, you may put a creature card with equal or lesser toughness from your hand onto the battlefield.
