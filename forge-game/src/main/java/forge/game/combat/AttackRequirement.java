@@ -133,28 +133,23 @@ public class AttackRequirement {
         int violations = 0;
 
         // first. check to see if "must attack X or Y with at least one creature" requirements are satisfied
-        if (!defenderOrPWSpecific.isEmpty()) {
-            for (GameEntity def : defenderOrPWSpecific.keySet()) {
-                boolean isAttackingDefender = false;
-                boolean couldAttackDefender = false;
-                outer: for (Card atk : attackers.keySet()) {
-                    // is anyone attacking this defender or any of the alternative defenders?
-                    if (attackers.get(atk).equals(def)) {
+        for (GameEntity def : defenderOrPWSpecific.keySet()) {
+            boolean isAttackingDefender = false;
+            outer: for (Card atk : attackers.keySet()) {
+                // is anyone attacking this defender or any of the alternative defenders?
+                if (attackers.get(atk).equals(def)) {
+                    isAttackingDefender = true;
+                    break;
+                }
+                for (GameEntity altDef : defenderSpecificAlternatives.get(def)) {
+                    if (attackers.get(atk).equals(altDef)) {
                         isAttackingDefender = true;
-                        break;
-                    }
-                    couldAttackDefender = couldAttackDefender || (CombatUtil.canAttack(atk, def) && CombatUtil.getAttackCost(attacker.getGame(), attacker, def) == null);
-                    for (GameEntity altDef : defenderSpecificAlternatives.get(def)) {
-                        if (attackers.get(atk).equals(altDef)) {
-                            isAttackingDefender = true;
-                            break outer;
-                        }
-                        couldAttackDefender = couldAttackDefender || (CombatUtil.canAttack(atk, altDef) && CombatUtil.getAttackCost(attacker.getGame(), attacker, altDef) == null);
+                        break outer;
                     }
                 }
-                if (!isAttackingDefender && couldAttackDefender) {
-                    violations++; // no one is attacking that defender or any of his PWs
-                }
+            }
+            if (!isAttackingDefender) {
+                violations++; // no one is attacking that defender or any of his PWs
             }
         }
 
