@@ -411,6 +411,9 @@ ScryfallCode=IKO
 386 R Dirge Bat @羽山晃平
 387 R Crystalline Giant @Kotakan
 
+[rebalanced]
+A216 M A-Winota, Joiner of Forces @Magali Villeneuve
+
 [Lands]
 10 Bloodfell Caves|IKO
 10 Blossoming Sands|IKO

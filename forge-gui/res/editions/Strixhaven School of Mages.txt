@@ -409,8 +409,16 @@ ScryfallCode=STX
 382 U Decisive Denial @Lorenzo Mastroianni
 
 [rebalanced]
+A15 U A-Dueling Coach @Caio Monteiro
 A41 U A-Divide by Zero @Liiga Smilshkalne
+A46 U A-Mentor's Guidance @Brian Valeza
 A56 U A-Symmetry Sage @Jehan Choo
+A88 U A-Tenured Inkcaster @Jake Murray
+A92 U A-Ardent Dustspeaker @Mads Ahm
+A117 C A-Tome Shredder @Sam Rowan
+A156 M A-Rowan, Scholar of Sparks @Magali Villeneuve
+A202 U A-Maelstrom Muse @Michele Parisi
+A240 M A-Tanazir Quandrix @Raymond Swanland
 A258 U A-Spell Satchel @YW Tang
 
 [lesson]
