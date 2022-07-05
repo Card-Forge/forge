@@ -1,7 +1,9 @@
-Name: Aboleth Spawn
-ManaCost: 2 U
-Types: Creature — Fish Horror
-PT: 2/3
-T:Mode$ AbilityTriggered | TriggerZones$ Battlefield | ValidDestination$ Battlefield | ValidMode$ ChangesZone,ChangesZoneAll | Execute$ DBProbingTelepathy | TriggerDescription$ 6 | ValidSource$ Creature.OppCtrl | TriggeredOwnAbility$ True
-SVar:DBProbingTelepathy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | SpellDescription$ Probing Telepathy — Whenever a creature entering the battlefield under an opponent's control causes a triggered ability of that creature to trigger, you may copy that ability. You may choose new targets for the copy.
-Oracle: Flash\nWard {2}\nProbing Telepathy — Whenever a creature entering the battlefield under an opponent's control causes a triggered ability of that creature to trigger, you may copy that ability. You may choose new targets for the copy.
+Name:Aboleth Spawn
+ManaCost:2 U
+Types:Creature Fish Horror
+PT:2/3
+K:Flash
+K:Ward:2
+T:Mode$ AbilityTriggered | TriggerZones$ Battlefield | ValidDestination$ Battlefield | ValidMode$ ChangesZone,ChangesZoneAll | Execute$ DBProbingTelepathy | ValidSource$ Creature.OppCtrl | TriggeredOwnAbility$ True | TriggerDescription$ Probing Telepathy — Whenever a creature entering the battlefield under an opponent's control causes a triggered ability of that creature to trigger, you may copy that ability. You may choose new targets for the copy.
+SVar:DBProbingTelepathy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Optional$ True | MayChooseTarget$ True
+Oracle:Flash\nWard {2}\nProbing Telepathy — Whenever a creature entering the battlefield under an opponent's control causes a triggered ability of that creature to trigger, you may copy that ability. You may choose new targets for the copy.

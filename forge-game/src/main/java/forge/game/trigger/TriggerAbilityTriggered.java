@@ -18,6 +18,7 @@
 package forge.game.trigger;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
@@ -76,30 +77,14 @@ public class TriggerAbilityTriggered extends Trigger {
             return false;
         }
 
-        if (hasParam("ValidCause")) {
-            boolean match = false;
-            for (Card cause : causes) {
-                if (matchesValidParam("ValidCause", cause)) {
-                    match = true;
-                }
-            }
-            if (!match) {
-                return false;
-            }
+        if (!matchesValidParam("ValidCause", causes))
+        {
+            return false;
         }
         
-        if (hasParam("TriggeredOwnAbility") && "True".equals(getParam("TriggeredOwnAbility")))
+        if (hasParam("TriggeredOwnAbility") && "True".equals(getParam("TriggeredOwnAbility")) && !Iterables.contains(causes, source))
         {
-            boolean match = false;
-            for (Card cause : causes) {
-                if (source == cause) {
-                    match = true;
-                    break;
-                }
-            }
-            if (!match) {
-                return false;
-            }
+            return false;
         }
 
         return true;
