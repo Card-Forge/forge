@@ -42,6 +42,7 @@ import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -204,7 +205,7 @@ public class AiBlockController {
                     }
                     blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
                 // 2.Blockers that won't get destroyed
-                } else if (!attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
+                } else if (!StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)
                     && !ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
                     blocker = ComputerUtilCard.getWorstCreatureAI(safeBlockers);
                     // check whether it's better to block a creature without trample to absorb more damage
@@ -215,7 +216,7 @@ public class AiBlockController {
                                     || other.hasKeyword(Keyword.TRAMPLE)
                                     || ComputerUtilCombat.attackerHasThreateningAfflict(other, ai)
                                     || ComputerUtilCombat.canDestroyBlocker(ai, blocker, other, combat, false)
-                                    || other.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
+                                    || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(other)) {
                                 continue;
                             }
 
@@ -668,7 +669,7 @@ public class AiBlockController {
         Card attacker = attackers.get(0);
 
         if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > 1
-            || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
+            || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)
             || ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
             attackers.remove(0);
             makeChumpBlocks(combat, attackers);
@@ -689,7 +690,7 @@ public class AiBlockController {
                         }
                         if (other.getNetCombatDamage() >= damageAbsorbed
                                 && !other.hasKeyword(Keyword.TRAMPLE)
-                                && !other.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
+                                && !StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(other)
                                 && !ComputerUtilCombat.attackerHasThreateningAfflict(other, ai)
                                 && CombatUtil.canBlock(other, blocker, combat)) {
                             combat.addBlocker(other, blocker);
@@ -756,7 +757,7 @@ public class AiBlockController {
 
         for (final Card attacker : tramplingAttackers) {
             if (CombatUtil.getMinNumBlockersForAttacker(attacker, combat.getDefenderPlayerByAttacker(attacker)) > combat.getBlockers(attacker).size()
-                    || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
+                    || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)
                     || attacker.hasKeyword("CARDNAME can't be blocked unless all creatures defending player controls block it.")) {
                 continue;
             }
