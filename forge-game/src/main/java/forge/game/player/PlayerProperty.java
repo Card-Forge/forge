@@ -3,6 +3,8 @@ package forge.game.player;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -221,10 +223,16 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.startsWith("controls")) {
-            final String[] type = property.substring(8).split("_");
-            final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type[0], sourceController, source, spellAbility);
-            String comparator = type.length > 1 ? type[1] : "GE";
-            int y = type.length > 1 ? AbilityUtils.calculateAmount(source, comparator.substring(2), spellAbility) : 1;
+            // this allows escaping _ with \ in case of complex restrictions (used on Turf War)
+            List<String> type = new ArrayList<>();
+            Pattern regex = Pattern.compile("(?:\\\\.|[^_\\\\]++)+");
+            Matcher regexMatcher = regex.matcher(property.substring(8));
+            while (regexMatcher.find()) {
+                type.add(regexMatcher.group());
+            } 
+            final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.get(0).replace("\\_", "_"), sourceController, source, spellAbility);
+            String comparator = type.size() > 1 ? type.get(1) : "GE";
+            int y = type.size() > 1 ? AbilityUtils.calculateAmount(source, comparator.substring(2), spellAbility) : 1;
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }
