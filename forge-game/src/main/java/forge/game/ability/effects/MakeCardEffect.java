@@ -63,13 +63,13 @@ public class MakeCardEffect extends SpellAbilityEffect {
 
                 final CardZoneTable triggerList = new CardZoneTable();
                 for (final Card c : cards) {
-                    game.getAction().moveTo(zone, c, sa, moveParams);
-                    triggerList.put(ZoneType.None, c.getZone().getZoneType(), c);
+                    Card made = game.getAction().moveTo(zone, c, sa, moveParams);
+                    triggerList.put(ZoneType.None, made.getZone().getZoneType(), made);
                     if (sa.hasParam("RememberMade")) {
-                        sa.getHostCard().addRemembered(c);
+                        sa.getHostCard().addRemembered(made);
                     }
                     if (sa.hasParam("ImprintMade")) {
-                        sa.getHostCard().addImprintedCard(c);
+                        sa.getHostCard().addImprintedCard(made);
                     }
                 }
                 triggerList.triggerChangesZoneAll(game, sa);
