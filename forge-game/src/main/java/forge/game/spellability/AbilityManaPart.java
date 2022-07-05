@@ -93,7 +93,7 @@ public class AbilityManaPart implements java.io.Serializable {
         this.manaRestrictions = params.getOrDefault("RestrictValid", "");
         this.cannotCounterSpell = params.get("AddsNoCounter");
         this.addsKeywords = params.get("AddsKeywords");
-        this.addsKeywordsType = params.get("AddsKeywordsType");
+        this.addsKeywordsType = params.get("AddsKeywordsValid");
         this.addsKeywordsUntil = params.get("AddsKeywordsUntil");
         this.addsCounters = params.get("AddsCounters");
         this.triggersWhenSpent = params.get("TriggersWhenSpent");
