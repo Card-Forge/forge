@@ -160,7 +160,7 @@ public class AttackConstraints {
                 }
             }
         }
-        myPossibleAttackers.removeAll((Iterable<Card>) attackersToRemove);
+        myPossibleAttackers.removeAll(attackersToRemove);
         for (final Card toRemove : attackersToRemove) {
             reqs.removeAll(findAll(reqs, toRemove));
         }
@@ -186,8 +186,9 @@ public class AttackConstraints {
         // Now try all others (plus empty attack) and count their violations
         final FCollection<Map<Card, GameEntity>> legalAttackers = collectLegalAttackers(reqs, myMax);
         possible.putAll(Maps.asMap(legalAttackers.asSet(), FN_COUNT_VIOLATIONS));
-        if (countViolations(Collections.emptyMap()) != -1) {
-            possible.put(Collections.emptyMap(), countViolations(Collections.emptyMap()));
+        int empty = countViolations(Collections.emptyMap());
+        if (empty != -1) {
+            possible.put(Collections.emptyMap(), empty);
         }
  
         // take the case with the fewest violations
@@ -392,7 +393,7 @@ public class AttackConstraints {
      *         restriction is violated.
      */
     public final int countViolations(final Map<Card, GameEntity> attackers) {
-        if (!globalRestrictions.isLegal(attackers, possibleAttackers)) {
+        if (!globalRestrictions.isLegal(attackers)) {
             return -1;
         }
         for (final Entry<Card, GameEntity> attacker : attackers.entrySet()) {

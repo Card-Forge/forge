@@ -147,7 +147,7 @@ public class AbilityUtils {
         } else if (defined.equals("TopOfGraveyard")) {
             final CardCollectionView grave = hostCard.getController().getCardsIn(ZoneType.Graveyard);
 
-            if (grave.size() > 0) { // TopOfLibrary or BottomOfLibrary
+            if (grave.size() > 0) {
                 c = grave.getLast();
             } else {
                 // we don't want this to fall through and return the "Self"

@@ -13,6 +13,7 @@ import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.CardPredicates.Presets;
+import forge.game.combat.AttackRequirement;
 import forge.game.combat.AttackingBand;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -1687,6 +1688,11 @@ public class CardProperty {
             }
             AttackingBand band = combat == null ? null : combat.getBandOfAttacker(source);
             if (band == null || !band.getAttackers().contains(card)) {
+                return false;
+            }
+        } else if (property.equals("hadToAttackThisCombat")) {
+            AttackRequirement e = game.getCombat().getAttackConstraints().getRequirements().get(card);
+            if (e == null || !e.hasCreatureRequirement() || !e.getAttacker().equalsWithTimestamp(card)) {
                 return false;
             }
         } else if (property.equals("couldAttackButNotAttacking")) {
