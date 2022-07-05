@@ -231,7 +231,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
 
             Map<String, Object> params = Maps.newHashMap();
-            params.put("CounterType", counterType);
+            if (counterType != null) {
+                params.put("CounterType", counterType);
+            }
             if (sa.hasParam("DividedRandomly")) {
                 tgtObjects.addAll(choices);
             } else {
