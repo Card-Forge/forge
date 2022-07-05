@@ -72,12 +72,12 @@ import java.util.*;
 
          final CardZoneTable triggerList = new CardZoneTable();
          for (final Card c : drafted) {
-             game.getAction().moveTo(zone, c, sa, moveParams);
+             Card made = game.getAction().moveTo(zone, c, sa, moveParams);
              if (c != null) {
-                 triggerList.put(ZoneType.None, c.getZone().getZoneType(), c);
+                 triggerList.put(ZoneType.None, made.getZone().getZoneType(), made);
              }
              if (sa.hasParam("RememberDrafted")) {
-                 source.addRemembered(c);
+                 source.addRemembered(made);
              }
          }
          triggerList.triggerChangesZoneAll(game, sa);
