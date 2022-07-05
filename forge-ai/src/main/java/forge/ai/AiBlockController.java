@@ -205,7 +205,7 @@ public class AiBlockController {
                     }
                     blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
                 // 2.Blockers that won't get destroyed
-                } else if (StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)
+                } else if (!StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)
                     && !ComputerUtilCombat.attackerHasThreateningAfflict(attacker, ai)) {
                     blocker = ComputerUtilCard.getWorstCreatureAI(safeBlockers);
                     // check whether it's better to block a creature without trample to absorb more damage
