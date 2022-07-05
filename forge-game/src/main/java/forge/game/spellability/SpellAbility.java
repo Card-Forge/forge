@@ -638,7 +638,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             if (isSpell() && host != null) {
                 if (mana.addsKeywords(this) && mana.addsKeywordsType()
-                        && host.getType().hasStringType(mana.getManaAbility().getAddsKeywordsType())) {
+                        && this.isValid(mana.getManaAbility().getAddsKeywordsType(),
+                        mana.getSourceCard().getController(), mana.getSourceCard(), null)) {
                     final long timestamp = host.getGame().getNextTimestamp();
                     final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
                     host.addChangedCardKeywords(kws, null, false, timestamp, 0);
