@@ -87,6 +87,20 @@ public class TriggerAbilityTriggered extends Trigger {
                 return false;
             }
         }
+        
+        if (hasParam("TriggeredOwnAbility") && "True".equals(getParam("TriggeredOwnAbility")))
+        {
+            boolean match = false;
+            for (Card cause : causes) {
+                if (source == cause) {
+                    match = true;
+                    break;
+                }
+            }
+            if (!match) {
+                return false;
+            }
+        }
 
         return true;
     }
