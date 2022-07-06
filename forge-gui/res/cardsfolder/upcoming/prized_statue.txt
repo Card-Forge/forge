@@ -2,7 +2,7 @@ Name:Prized Statue
 ManaCost:2
 Types:Artifact
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield or is put into a graveyard from the battlefield, create a Treasure token.(It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or is put into a graveyard from the battlefield, create a Treasure token.(It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or is put into a graveyard from the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color. ")
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac
 DeckHas:Ability$Token
-Oracle:When Prized Statue enters the battlefield or is put into a graveyard from the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+Oracle:When Prized Statue enters the battlefield or is put into a graveyard from the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color. ")
