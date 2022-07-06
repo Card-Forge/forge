@@ -1,0 +1,12 @@
+Name:Thrakkus the Butcher
+ManaCost:3 R G
+Types:Legendary Creature Dragon Peasant
+PT:3/4
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDoublePower | TriggerDescription$ Whenever CARDNAME attacks, double the power of each Dragon you control until end of turn.
+SVar:TrigDoublePower:DB$ RepeatEach | RepeatCards$ Dragon.YouCtrl | RepeatSubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Remembered | NumAtt$ X | Double$ True
+SVar:X:Remembered$CardPower
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Dragon
+Oracle:Trample\nWhenever Thrakkus the Butcher attacks, double the power of each Dragon you control until end of turn.
