@@ -23,6 +23,7 @@ import forge.adventure.scene.SceneType;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.animation.ForgeAnimation;
+import forge.assets.Assets;
 import forge.assets.AssetsDownloader;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
@@ -103,6 +104,8 @@ public class Forge implements ApplicationListener {
     public static boolean enablePreloadExtendedArt = false;
     public static boolean isTabletDevice = false;
     public static String locale = "en-US";
+    public Assets cardAssets = new Assets();
+    public Assets otherAssets = new Assets();
     public static boolean hdbuttons = false;
     public static boolean hdstart = false;
     public static boolean isPortraitMode = false;
