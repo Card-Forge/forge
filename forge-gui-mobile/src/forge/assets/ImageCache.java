@@ -71,8 +71,6 @@ public class ImageCache {
     private static final ObjectSet<String> missingIconKeys = new ObjectSet<>();
     private static List<String> borderlessCardlistKey = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
     static int maxCardCapacity = 400; //default card capacity
-    static Assets cardAssets = new Assets();
-    static Assets otherAssets = new Assets();
     static TextureParameter defaultParameter = new TextureParameter();
     static TextureParameter filtered = new TextureParameter();
     public static void initCache(int capacity) {
@@ -115,11 +113,11 @@ public class ImageCache {
     }
     public static void disposeTextures(){
         CardRenderer.clearcardArtCache();
-        cardAssets.manager().clear();
+        ((Forge)Gdx.app.getApplicationListener()).cardAssets.manager().clear();
     }
     public static void disposeTextureManager() {
-        cardAssets.dispose();
-        otherAssets.dispose();
+        ((Forge)Gdx.app.getApplicationListener()).cardAssets.dispose();
+        ((Forge)Gdx.app.getApplicationListener()).otherAssets.dispose();
     }
 
     public static Texture getImage(InventoryItem ii) {
@@ -260,26 +258,27 @@ public class ImageCache {
             return null;
         if (!otherCache && Forge.enableUIMask.equals("Full") && isBorderless(imageKey))
             return generatedCards.get(imageKey);
-        return otherCache ? otherAssets.manager().get(file.getPath(), Texture.class, false) : cardAssets.manager().get(file.getPath(), Texture.class, false);
+        return otherCache ? ((Forge)Gdx.app.getApplicationListener()).otherAssets.manager().get(file.getPath(), Texture.class, false)
+                : ((Forge)Gdx.app.getApplicationListener()).cardAssets.manager().get(file.getPath(), Texture.class, false);
     }
     static Texture loadAsset(String imageKey, File file, boolean otherCache) {
         if (file == null)
             return null;
-        if (!otherCache && cardAssets.manager().getLoadedAssets() > maxCardCapacity) {
+        if (!otherCache && ((Forge)Gdx.app.getApplicationListener()).cardAssets.manager().getLoadedAssets() > maxCardCapacity) {
             //when maxCardCapacity is reached, clear to refresh
-            cardAssets.manager().clear();
+            ((Forge)Gdx.app.getApplicationListener()).cardAssets.manager().clear();
             CardRenderer.clearcardArtCache();
             return null;
         }
         String fileName = file.getPath();
         if (otherCache) {
-            otherAssets.manager().load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
-            otherAssets.manager().finishLoadingAsset(fileName);
-            return otherAssets.manager().get(fileName, Texture.class, false);
+            ((Forge)Gdx.app.getApplicationListener()).otherAssets.manager().load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
+            ((Forge)Gdx.app.getApplicationListener()).otherAssets.manager().finishLoadingAsset(fileName);
+            return ((Forge)Gdx.app.getApplicationListener()).otherAssets.manager().get(fileName, Texture.class, false);
         } else {
-            cardAssets.manager().load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
-            cardAssets.manager().finishLoadingAsset(fileName);
-            Texture t = cardAssets.manager().get(fileName, Texture.class, false);
+            ((Forge)Gdx.app.getApplicationListener()).cardAssets.manager().load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
+            ((Forge)Gdx.app.getApplicationListener()).cardAssets.manager().finishLoadingAsset(fileName);
+            Texture t = ((Forge)Gdx.app.getApplicationListener()).cardAssets.manager().get(fileName, Texture.class, false);
             if (Forge.enableUIMask.equals("Full")) {
                 boolean borderless = isBorderless(imageKey);
                 updateBorders(t.toString(), borderless ? Pair.of(Color.valueOf("#171717").toString(), false): isCloserToWhite(getpixelColor(t)));
