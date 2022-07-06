@@ -3,6 +3,7 @@ ManaCost:3 B
 Types:Creature Devil
 PT:4/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Animate Chains — When CARDNAME enters the battlefield, each player sacrifices a nontoken creature.
-SVar:TrigSac:DB$ Sacrifice |  Defined$ Player | SacValid$ Creature.nonToken
+SVar:TrigSac:DB$ Sacrifice | Defined$ Player | SacValid$ Creature.nonToken
+DeckHas:Ability$Sacrifice
 SVar:NeedsToPlay:Creature.YouDontCtrl
 Oracle:Animate Chains — When Chain Devil enters the battlefield, each player sacrifices a nontoken creature.
