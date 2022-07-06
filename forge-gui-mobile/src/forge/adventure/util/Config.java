@@ -1,13 +1,12 @@
 package forge.adventure.util;
 
-import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
 import forge.adventure.data.ConfigData;
 import forge.adventure.data.SettingData;
+import forge.assets.Assets;
 import forge.deck.Deck;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
@@ -27,7 +26,7 @@ public class Config {
     private static Config currentConfig;
     private final String prefix;
     private final HashMap<String, FileHandle> Cache = new HashMap<String, FileHandle>();
-    private final AssetManager textureAtlasManager = new AssetManager(new AbsoluteFileHandleResolver());
+    private final Assets atlasAssets = new Assets();
     private final ConfigData configData;
     private final String[] adventures;
     private SettingData settingsData;
@@ -122,11 +121,11 @@ public class Config {
 
     public TextureAtlas getAtlas(String spriteAtlas) {
         String fileName = getFile(spriteAtlas).path();
-        if (!textureAtlasManager.contains(fileName, TextureAtlas.class)) {
-            textureAtlasManager.load(fileName, TextureAtlas.class);
-            textureAtlasManager.finishLoadingAsset(fileName);
+        if (!atlasAssets.manager().contains(fileName, TextureAtlas.class)) {
+            atlasAssets.manager().load(fileName, TextureAtlas.class);
+            atlasAssets.manager().finishLoadingAsset(fileName);
         }
-        return textureAtlasManager.get(fileName);
+        return atlasAssets.manager().get(fileName);
     }
     public SettingData getSettingData()
     {
@@ -145,6 +144,6 @@ public class Config {
 
     }
     public void disposeTextureAtlasManager() {
-        textureAtlasManager.dispose();
+        atlasAssets.dispose();
     }
 }
