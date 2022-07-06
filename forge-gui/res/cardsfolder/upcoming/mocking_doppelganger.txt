@@ -5,5 +5,5 @@ PT:0/0
 K:ETBReplacement:Copy:DBCopy:Optional
 K:Flash
 SVar:DBCopy:DB$ Clone | Choices$ Creature.OppCtrl | AddStaticAbilities$ FamilyTease | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of a creature an opponent controls, except it has "Other creatures with the same name as this creature are goaded."
-SVar:FamilyTease:Mode$ Continuous | Affected$ Creature.sameName+Other | Goad$ True | Description$ You may have CARDNAME enter the battlefield as a copy of a creature an opponent controls, except it has "Other creatures with the same name as this creature are goaded."
+SVar:FamilyTease:Mode$ Continuous | Affected$ Creature.sameName+Other | Goad$ True | Description$ Other creatures with the same name as this creature are goaded.
 Oracle:Flash\nYou may have Mocking Doppelganger enter the battlefield as a copy of a creature an opponent controls, except it has "Other creatures with the same name as this creature are goaded." (They attack each combat if able and attack a player other than you if able.)
