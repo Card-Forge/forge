@@ -483,7 +483,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     @Override
                     public void select() {
                         super.select();
-                        ImageCache.disposeTexture();
+                        ImageCache.disposeTextures();
                     }
                 },
                 4);
