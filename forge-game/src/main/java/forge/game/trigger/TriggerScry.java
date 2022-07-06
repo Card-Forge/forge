@@ -65,12 +65,15 @@ public class TriggerScry extends Trigger {
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
         sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.ScryNum);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblScryer")).append(": ").append(sa.getTriggeringObject(AbilityKey.Player));
+        sb.append(Localizer.getInstance().getMessage("lblScryer")).append(": ");
+        sb.append(sa.getTriggeringObject(AbilityKey.Player)).append(", ");
+        sb.append(sa.getTriggeringObject(AbilityKey.ScryNum));
         return sb.toString();
     }
 }
