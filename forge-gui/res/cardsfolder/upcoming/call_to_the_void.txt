@@ -7,4 +7,4 @@ SVar:DBChooseCreatureYouDontCtrl:DB$ ChooseCard | Defined$ Remembered | Amount$ 
 SVar:DBRevealChosen:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBRevealToEachPlayer | SubAbility$ DBDestroyChosen
 SVar:DBRevealToEachPlayer:DB$ Reveal | Defined$ RememberedPlayer | RevealDefined$ ChosenCard
 SVar:DBDestroyChosen:DB$ DestroyAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBCleanUp
-SVar:DBCleanUp:DB$ CleanUp | ClearRemembered$ True 
+SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True 
