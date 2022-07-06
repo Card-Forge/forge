@@ -112,7 +112,9 @@ public class ImageCache {
         missingIconKeys.clear();
         ImageKeys.clearMissingCards();
     }
-
+    public static void clearGeneratedCards() {
+        generatedCards.clear();
+    }
     public static void disposeTextures(){
         CardRenderer.clearcardArtCache();
         cardTextureManager.clear();
@@ -284,8 +286,7 @@ public class ImageCache {
                 boolean borderless = isBorderless(imageKey);
                 updateBorders(t.toString(), borderless ? Pair.of(Color.valueOf("#171717").toString(), false): isCloserToWhite(getpixelColor(t)));
                 if (borderless) {
-                    t = generateTexture(new FileHandle(file), t, Forge.isTextureFilteringEnabled());
-                    generatedCards.put(imageKey, t);
+                    generatedCards.put(imageKey, generateTexture(new FileHandle(file), t, Forge.isTextureFilteringEnabled()));
                 }
             }
             return t;
