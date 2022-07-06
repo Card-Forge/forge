@@ -44,11 +44,11 @@ public class DigEffect extends SpellAbilityEffect {
             final int numToChange = toChange.startsWith("All") ? numToDig : AbilityUtils.calculateAmount(host, sa.getParam("ChangeNum"), sa);
 
             String verb = " looks at ";
-            if (sa.hasParam("Reveal") && sa.getParam("Reveal").equals("True")) {
-                verb = " reveals ";
-            } else if (sa.hasParam("DestinationZone") && sa.getParam("DestinationZone").equals("Exile") &&
-                    numToDig == numToChange) {
+            if (sa.hasParam("DestinationZone") && sa.getParam("DestinationZone").equals("Exile") &&
+                numToDig == numToChange) {
                 verb = " exiles ";
+            } else if (sa.hasParam("Reveal") && sa.getParam("Reveal").equals("True")) {
+                verb = " reveals ";
             }
             sb.append(host.getController()).append(verb).append("the top ");
             sb.append(numToDig == 1 ? "card" : Lang.getNumeral(numToDig) + " cards").append(" of ");
