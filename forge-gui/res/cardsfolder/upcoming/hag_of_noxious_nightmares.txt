@@ -1,0 +1,8 @@
+Name:Hag of Noxious Nightmares
+ManaCost:2 B
+Types:Creature Hag Warlock
+PT:2/2
+S:Mode$ Continuous | Affected$ Warlock.YouCtrl | AddKeyword$ Menace | Description$ Warlocks you control have menace.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Warlock
+Oracle:Warlocks you control have menace.

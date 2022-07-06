@@ -1,0 +1,7 @@
+Name:Hag of Inner Weakness
+ManaCost:2 B
+Types:Creature Hag Warlock
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of your upkeep, target creature an opponent controls gets -2/-1 until your next turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | NumAtt$ -2 | NumDef$ -1 | Duration$ UntilYourNextTurn
+Oracle:At the beginning of your upkeep, target creature an opponent controls gets -2/-1 until your next turn.
