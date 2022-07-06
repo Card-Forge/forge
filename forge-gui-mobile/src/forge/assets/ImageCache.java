@@ -322,7 +322,11 @@ public class ImageCache {
     public static Color borderColor(Texture t) {
         if (t == null)
             return Color.valueOf("#171717");
-        return Color.valueOf(imageBorder.get(t.toString()).getLeft());
+        try {
+            return Color.valueOf(imageBorder.get(t.toString()).getLeft());
+        } catch (Exception e) {
+            return Color.valueOf("#171717");
+        }
     }
     public static int getFSkinBorders(CardView c) {
         if (c == null)
