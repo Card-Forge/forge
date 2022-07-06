@@ -984,6 +984,8 @@ public class Forge implements ApplicationListener {
             currentScreen.onClose(null);
             currentScreen = null;
         }
+        ImageCache.disposeCardTextureManager();
+        Config.instance().disposeTextureAtlasManager();
         Dscreens.clear();
         graphics.dispose();
         SoundSystem.instance.dispose();
