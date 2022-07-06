@@ -57,8 +57,8 @@ import java.util.*;
              List<ICardFace> faces = new ArrayList<>();
              for (String name : spellbook.subList(0, 3)) {
                  // Cardnames that include "," must use ";" instead in Spellbook$ (i.e. Tovolar; Dire Overlord)
-                 // name = name.replace(";", ",");
-                 // faces.add(StaticData.instance().getCommonCards().getFaceByName(name));
+                 name = name.replace(";", ",");
+                 faces.add(StaticData.instance().getCommonCards().getFaceByName(name));
              }
              chosen = player.getController().chooseCardName(sa, faces,
                      Localizer.getInstance().getMessage("lblChooseCardDraft"));
