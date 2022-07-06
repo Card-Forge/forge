@@ -4,6 +4,6 @@ Types:Creature Human Monk
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
-A:AB$ PutCounterAll | Cost$ 4 W T | ValidCards$ Creature.YouCtrl+counters_GE1_P1P1 | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control with a +1/+1 counter on it.
+A:AB$ PutCounterAll | Cost$ 4 W T | ValidCards$ Creature.YouCtrl+counters_GE1_P1P1 | CounterType$ P1P1 | CounterNum$ 1 | ValidCardsDesc$ creature you control with a +1/+1 counter on it. | SpellDescription$ Put a +1/+1 counter on each creature you control with a +1/+1 counter on it.
 DeckHas:Ability$Counters
 Oracle:When Dueling Coach enters the battlefield, put a +1/+1 counter on target creature.\n{4}{W}, {T}: Put a +1/+1 counter on each creature you control with a +1/+1 counter on it.
