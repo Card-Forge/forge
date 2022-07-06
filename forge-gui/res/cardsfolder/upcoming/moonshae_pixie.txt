@@ -1,0 +1,18 @@
+Name:Moonshae Pixie
+ManaCost:3 U
+Types:Creature Faerie
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw cards equal to the number of opponents who were dealt combat damage this turn.
+SVar:TrigDraw:AB$ Draw | NumCards$ X
+SVar:X:PlayerCountRegisteredOpponents$HasPropertywasDealtCombatDamageThisTurn
+Oracle:Flying\nWhen Moonshae Pixie enters the battlefield, draw cards equal to the number of opponents who were dealt combat damage this turn.
+
+ALTERNATE
+
+Name:Pixie Dust
+ManaCost:1 U
+Types:Instant Adventure
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 3 | KW$ Flying | ValidTgts$ Creature | TgtPrompt$ Select up to three target creatures | SpellDescription$ Up to three target creatures gain flying until end of turn.
+SVar:PlayMain1:TRUE
+Oracle:Up to three target creatures gain flying until end of turn. (Then exile this card. You may cast the creature later from exile.)
