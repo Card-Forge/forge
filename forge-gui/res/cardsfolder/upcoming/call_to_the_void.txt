@@ -1,0 +1,10 @@
+Name:Call to the Void
+ManaCost:4 B
+Types:Sorcery
+A:SP$ RepeatEach | Cost$ 4 B | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseCreatureYouCtrl | SubAbility$ DBRevealChosen
+SVar:DBChooseCreatureYouCtrl:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ Secretly choose a creature you control | SubAbility$ DBChooseCreatureYouDontCtrl | RememberChosen$ True | Mandatory$ True
+SVar:DBChooseCreatureYouDontCtrl:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.nonRememberedPlayerCtrl | ChoiceTitle$ Secretly choose a creature you don't control | RememberChosen$ True | Mandatory$ True
+SVar:DBRevealChosen:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBRevealToEachPlayer | SubAbility$ DBDestroyChosen
+SVar:DBRevealToEachPlayer:DB$ Reveal | Defined$ RememberedPlayer | RevealDefined$ ChosenCard
+SVar:DBDestroyChosen:DB$ DestroyAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBCleanUp
+SVar:DBCleanUp:DB$ CleanUp | ClearRemembered$ True 
