@@ -36,7 +36,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;
 import com.google.common.cache.RemovalListener;
-import com.google.common.cache.RemovalNotification;
 
 import forge.Forge;
 import forge.ImageKeys;
@@ -71,28 +70,33 @@ public class ImageCache {
 
     private static final ObjectSet<String> missingIconKeys = new ObjectSet<>();
     private static LoadingCache<String, Texture> cache;
-    static int maxCardCapacity = 400; //default cap
+    static int maxCardCapacity = 400; //default card capacity
     static AssetManager cardTextureManager = new AssetManager(new AbsoluteFileHandleResolver());
+    static AssetManager otherTextureManager = new AssetManager(new AbsoluteFileHandleResolver());
+    static TextureLoader.TextureParameter defaultParameter = new TextureLoader.TextureParameter();
+    static TextureLoader.TextureParameter filtered = new TextureLoader.TextureParameter();
     public static void initCache(int capacity) {
+        //init filter
+        filtered.genMipMaps = true;
+        filtered.minFilter = Texture.TextureFilter.MipMapLinearLinear;
+        filtered.magFilter = Texture.TextureFilter.Linear;
+        //override maxCardCapacity
         maxCardCapacity = capacity;
+        //this cache is used exclusively for full bordermasking.
         cache = CacheBuilder.newBuilder()
                 .maximumSize(capacity)
                 .expireAfterAccess(15, TimeUnit.MINUTES)
-                .removalListener(new RemovalListener<String, Texture>() {
-                    @Override
-                    public void onRemoval(RemovalNotification<String, Texture> removalNotification) {
-                        if (removalNotification.wasEvicted()) {
-                            if (removalNotification.getValue() != ImageCache.defaultImage)
-                                removalNotification.getValue().dispose();
+                .removalListener((RemovalListener<String, Texture>) removalNotification -> {
+                    if (removalNotification.wasEvicted()) {
+                        if (removalNotification.getValue() != ImageCache.defaultImage)
+                            removalNotification.getValue().dispose();
 
-                            CardRenderer.clearcardArtCache();
-                        }
+                        CardRenderer.clearcardArtCache();
                     }
                 })
                 .build(new ImageLoader());
         System.out.println("Card Texture Cache Size: "+capacity);
     }
-    private static final LoadingCache<String, Texture> otherCache = CacheBuilder.newBuilder().build(new OtherImageLoader());
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
@@ -120,12 +124,13 @@ public class ImageCache {
         ImageKeys.clearMissingCards();
     }
 
-    public static void disposeTexture(){
+    public static void disposeTextures(){
         CardRenderer.clearcardArtCache();
         cardTextureManager.clear();
     }
-    public static void disposeCardTextureManager() {
+    public static void disposeTextureManager() {
         cardTextureManager.dispose();
+        otherTextureManager.dispose();
     }
 
     public static Texture getImage(InventoryItem ii) {
@@ -227,7 +232,7 @@ public class ImageCache {
         if (useDefaultIfNotFound) {
             // Load from file and add to cache if not found in cache initially.
             // Except for full bordermask, use assetmanager for card textures. This should make dispose texture options work effectively.
-            image = useOtherCache ? otherCache.getIfPresent(imageKey) : Forge.enableUIMask.equals("Full") ? cache.getIfPresent(imageKey) : getAsset(imageFile);
+            image = Forge.enableUIMask.equals("Full") && !useOtherCache ? cache.getIfPresent(imageKey) : getAsset(imageFile, useOtherCache);
 
             if (image != null) { return image; }
 
@@ -243,7 +248,7 @@ public class ImageCache {
         }
 
         try {
-            image = useOtherCache ? otherCache.get(imageKey) : Forge.enableUIMask.equals("Full") ? cache.get(imageKey) : loadAsset(imageFile);
+            image = Forge.enableUIMask.equals("Full") && !useOtherCache ? cache.get(imageKey) : loadAsset(imageFile, useOtherCache);
         } catch (final Exception ex) {
             image = null;
         }
@@ -262,28 +267,30 @@ public class ImageCache {
         }
         return image;
     }
-    static Texture getAsset(File file) {
-        return file == null ? null : cardTextureManager.get(file.getPath(), Texture.class, false);
-    }
-    static Texture loadAsset(File file) {
+    static Texture getAsset(File file, boolean otherCache) {
         if (file == null)
             return null;
-        if (cardTextureManager.getLoadedAssets() > maxCardCapacity) {
+        return otherCache ? otherTextureManager.get(file.getPath(), Texture.class, false) : cardTextureManager.get(file.getPath(), Texture.class, false);
+    }
+    static Texture loadAsset(File file, boolean otherCache) {
+        if (file == null)
+            return null;
+        if (!otherCache && cardTextureManager.getLoadedAssets() > maxCardCapacity) {
             //when maxCardCapacity is reached, clear to refresh
             cardTextureManager.clear();
             CardRenderer.clearcardArtCache();
             return null;
         }
         String fileName = file.getPath();
-        TextureLoader.TextureParameter parameter = new TextureLoader.TextureParameter();
-        if (Forge.isTextureFilteringEnabled()) {
-            parameter.minFilter = Texture.TextureFilter.MipMapLinearLinear;
-            parameter.magFilter = Texture.TextureFilter.Linear;
-            parameter.genMipMaps = true;
+        if (otherCache) {
+            otherTextureManager.load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
+            otherTextureManager.finishLoadingAsset(fileName);
+            return otherTextureManager.get(fileName, Texture.class, false);
+        } else {
+            cardTextureManager.load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
+            cardTextureManager.finishLoadingAsset(fileName);
+            return cardTextureManager.get(fileName, Texture.class, false);
         }
-        cardTextureManager.load(fileName, Texture.class, parameter);
-        cardTextureManager.finishLoadingAsset(fileName);
-        return cardTextureManager.get(fileName, Texture.class, false);
     }
     public static void preloadCache(Iterable<String> keys) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))

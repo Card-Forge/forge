@@ -757,6 +757,7 @@ public class Forge implements ApplicationListener {
         setTransitionScreen(new TransitionScreen(new Runnable() {
             @Override
             public void run() {
+                ImageCache.disposeTextures();
                 isMobileAdventureMode = false;
                 GuiBase.setIsAdventureMode(false);
                 setCursor(FSkin.getCursor().get(0), "0");
@@ -773,6 +774,7 @@ public class Forge implements ApplicationListener {
         setTransitionScreen(new TransitionScreen(new Runnable() {
             @Override
             public void run() {
+                ImageCache.disposeTextures();
                 clearCurrentScreen();
                 clearTransitionScreen();
                 openAdventure();
@@ -800,8 +802,9 @@ public class Forge implements ApplicationListener {
     private static void setCurrentScreen(FScreen screen0) {
         String toNewScreen = screen0 != null ? screen0.toString() : "";
         String previousScreen = currentScreen != null ? currentScreen.toString() : "";
-
+        //update gameInProgress for preload decks
         gameInProgress = toNewScreen.toLowerCase().contains("match") || previousScreen.toLowerCase().contains("match");
+        //dispose card textures handled by assetmanager
         boolean dispose = toNewScreen.toLowerCase().contains("homescreen") && disposeTextures;
         try {
             endKeyInput(); //end key input before switching screens
@@ -816,7 +819,7 @@ public class Forge implements ApplicationListener {
                 BugReporter.reportException(ex);
         } finally {
             if (dispose)
-                ImageCache.disposeTexture();
+                ImageCache.disposeTextures();
         }
     }
 
@@ -984,7 +987,7 @@ public class Forge implements ApplicationListener {
             currentScreen.onClose(null);
             currentScreen = null;
         }
-        ImageCache.disposeCardTextureManager();
+        ImageCache.disposeTextureManager();
         Config.instance().disposeTextureAtlasManager();
         Dscreens.clear();
         graphics.dispose();

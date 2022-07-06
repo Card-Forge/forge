@@ -524,6 +524,8 @@ public class MatchController extends AbstractGuiGame {
     public void afterGameEnd() {
         super.afterGameEnd();
         Forge.back(true);
+        if (Forge.disposeTextures)
+            ImageCache.disposeTextures();
         //view = null;
     }
 
