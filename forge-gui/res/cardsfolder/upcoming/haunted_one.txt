@@ -2,7 +2,7 @@ Name:Haunted One
 ManaCost:2 B
 Types:Legendary Enchantment Background
 S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ BecomesTapped | Description$ Commander creatures you own have ''Whenever this creature becomes tapped, it and other creatures you control that share a creature type with it each get +2/+0 and gain undying until end of turn.''
-SVar:BecomesTapped:Mode$ Taps | ValidCards$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature becomes tapped, it and other creatures you control that share a creature type with it each get +2/+0 and gain undying until end of turn.
+SVar:BecomesTapped:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature becomes tapped, it and other creatures you control that share a creature type with it each get +2/+0 and gain undying until end of turn.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Card.sharesCreatureTypeWith+YouCtrl | KW$ Undying | NumAtt$ 2
 DeckHas:Ability$Counters
 Oracle:Commander creatures you own have ''Whenever this creature becomes tapped, it and other creatures you control that share a creature type with it each get +2/+0 and gain undying until end of turn.'' (When a creature with undying dies, if it had no +1/+1 counters on it, return it to the battlefield under its owner's control with a +1/+1 counter on it.)
