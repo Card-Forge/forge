@@ -1064,7 +1064,7 @@ public class PhaseHandler implements java.io.Serializable {
                             // currently there can be only one Spell put on the Stack at once, or Land Abilities be played
                             final CardZoneTable triggerList = new CardZoneTable();
                             triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), saHost);
-                            triggerList.triggerChangesZoneAll(game, null);
+                            triggerList.triggerChangesZoneAll(game, sa);
                         }
 
                     }
