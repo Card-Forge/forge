@@ -1,0 +1,14 @@
+Name:Myrkul's Edict
+ManaCost:1 B
+Types:Sorcery
+A:SP$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:OneOppSac,10-19:EachOppSac,20:SacTopPower | SpellDescription$ Roll a d20.
+SVar:OneOppSac:ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SubAbility$ DBSac | StackDescription$ SpellDescription | SpellDescription$ 1—9 VERT Choose an opponent. That player sacrifices a creature.
+SVar:DBSac:DB$ Sacrifice | Defined$ Chosen | SacValid$ Creature | SubAbility$ DBCleanupChosen
+SVar:EachOppSac:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature | StackDescription$ SpellDescription | SpellDescription$ 10—19 VERT Each opponent sacrifices a creature.
+SVar:SacTopPower:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChooseCard | SubAbility$ DBSacAll | StackDescription$ SpellDescription | SpellDescription$ 20 VERT Each opponent sacrifices a creature with the greatest power among creatures that player controls.
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestPowerControlledByRemembered | ChoiceTitle$ Choose a creature you control with the greatest power | Mandatory$ True | RememberChosen$ True
+SVar:DBSacAll:DB$ SacrificeAll | ValidCards$ Card.IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanupChosen:DB$ Cleanup | ClearChosenPlayer$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosen$ True
+SVar:NeedsToPlay:Creature.OppCtrl
+Oracle:Roll a d20.\n1—9 | Choose an opponent. That player sacrifices a creature.\n10—19 | Each opponent sacrifices a creature.\n20 | Each opponent sacrifices a creature with the greatest power among creatures that player controls.
