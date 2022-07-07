@@ -1,0 +1,11 @@
+Name:Wilson, Refined Grizzly
+ManaCost:1 G
+Types:Legendary Creature Bear Warrior
+PT:2/2
+K:This spell can't be countered.
+K:Vigilance
+K:Reach
+K:Trample
+K:Ward:2
+K:Choose a Background
+Oracle:This spell can't be countered.\nVigilance, reach, trample\nWard {2}\nChoose a Background
