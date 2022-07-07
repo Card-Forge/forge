@@ -11,4 +11,5 @@ SVar:DBCastWithoutPayingManaCost:DB$ Play | Valid$ Card.Self | ValidSA$ Spell | 
 SVar:DBGiveHaste:DB$ Pump | Defined$ Self | KW$ Haste | ConditionDefined$ Self | ConditionPresent$ Card.Creature | PumpZone$ Stack
 SVar:DBRemoveTimeCounterOtherCardsInExile:DB$ RemoveCounterAll | ValidCards$ Card.YouOwn+IsNotRemembered | ValidZone$ Exile | CounterType$ TIME | CounterNum$ 1 | SubAbility$ DBCleanUp
 SVar:DBCleanUp:DB$ CleanUp | ClearRemembered$ True
+DeckHints:Keyword$Suspend
 Oracle:{T}:Draw a card, then exile a card from your hand and put a number of time counters on it equal to its mana value. It gains "When the last time counter is removed from this card, if it's exiled, you may cast it without paying its mana cost. If you cast a creature spell this way, it gains haste until end of turn." Then remove a time counter from each other card you own in exile.
