@@ -59,9 +59,15 @@ public class LoadingOverlay extends FOverlay {
     }
 
     private String caption;
+    private boolean textMode = false;
 
     public LoadingOverlay(String caption0) {
         caption = caption0;
+    }
+
+    public LoadingOverlay(String caption0, boolean textOnly) {
+        caption = caption0;
+        textMode = textOnly;
     }
 
     public void setCaption(String caption0) {
@@ -79,34 +85,38 @@ public class LoadingOverlay extends FOverlay {
 
     @Override
     public void drawOverlay(Graphics g) {
-        float x = INSETS;
-        float panelWidth = getWidth() - 2 * INSETS;
+        if (!textMode) {
+            float x = INSETS;
+            float panelWidth = getWidth() - 2 * INSETS;
 
-        if (Forge.isLandscapeMode()) {
-            panelWidth = getHeight() - 2 * INSETS;
-            x = (getWidth() - panelWidth) / 2;
+            if (Forge.isLandscapeMode()) {
+                panelWidth = getHeight() - 2 * INSETS;
+                x = (getWidth() - panelWidth) / 2;
+            }
+
+            float padding = panelWidth * INSETS_FACTOR;
+            float logoSize = panelWidth * LOGO_SIZE_FACTOR;
+            float fontHeight = FONT.getCapHeight();
+            float panelHeight = logoSize + fontHeight + 4 * padding;
+
+            float y = (getHeight() - panelHeight) / 2;
+            float oldAlpha = g.getfloatAlphaComposite();
+            //dark translucent back..
+            g.setAlphaComposite(0.6f);
+            g.fillRect(Color.BLACK, 0, 0, getWidth(), getHeight());
+            g.setAlphaComposite(oldAlpha);
+            //overlay
+            g.fillRect(BACK_COLOR, x, y, panelWidth, panelHeight);
+            g.drawRect(Utils.scale(2), FORE_COLOR, x, y, panelWidth, panelHeight);
+            y += padding;
+            if (FSkin.hdLogo == null)
+                g.drawImage(FSkinImage.LOGO, (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
+            else
+                g.drawImage(FSkin.hdLogo, (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
+            y += logoSize + padding;
+            g.drawText(caption, FONT, FORE_COLOR, x, y, panelWidth, getHeight(), false, Align.center, false);
+        } else {
+            g.drawText(caption, FONT, FORE_COLOR, 0, 0, getWidth(), getHeight(), true, Align.center, true);
         }
-
-        float padding = panelWidth * INSETS_FACTOR;
-        float logoSize = panelWidth * LOGO_SIZE_FACTOR;
-        float fontHeight = FONT.getCapHeight();
-        float panelHeight = logoSize + fontHeight + 4 * padding;
-
-        float y = (getHeight() - panelHeight) / 2;
-        float oldAlpha = g.getfloatAlphaComposite();
-        //dark translucent back..
-        g.setAlphaComposite(0.6f);
-        g.fillRect(Color.BLACK, 0, 0, getWidth(), getHeight());
-        g.setAlphaComposite(oldAlpha);
-        //overlay
-        g.fillRect(BACK_COLOR, x, y, panelWidth, panelHeight);
-        g.drawRect(Utils.scale(2), FORE_COLOR, x, y, panelWidth, panelHeight);
-        y += padding;
-        if (FSkin.hdLogo == null)
-            g.drawImage(FSkinImage.LOGO, (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
-        else
-            g.drawImage(FSkin.hdLogo, (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
-        y += logoSize + padding;
-        g.drawText(caption, FONT, FORE_COLOR, x, y, panelWidth, getHeight(), false, Align.center, false);
     }
 }

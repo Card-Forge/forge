@@ -8,6 +8,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.localinstance.properties.ForgeConstants;
 
@@ -127,7 +128,9 @@ public enum FSkinTexture implements FImage {
         FileHandle preferredFile = isPlane ? FSkin.getCachePlanechaseFile(filename) : FSkin.getSkinFile(filename);
         if (preferredFile.exists()) {
             try {
-                texture = new Texture(preferredFile);
+                Forge.getAssets(true).manager.load(preferredFile.path(), Texture.class);
+                Forge.getAssets(true).manager.finishLoadingAsset(preferredFile.path());
+                texture = Forge.getAssets(true).manager.get(preferredFile.path(), Texture.class);
             }
             catch (final Exception e) {
                 System.err.println("Failed to load skin file: " + preferredFile);
@@ -145,7 +148,9 @@ public enum FSkinTexture implements FImage {
 
             if (defaultFile.exists()) {
                 try {
-                    texture = new Texture(defaultFile);
+                    Forge.getAssets(true).manager.load(defaultFile.path(), Texture.class);
+                    Forge.getAssets(true).manager.finishLoadingAsset(defaultFile.path());
+                    texture = Forge.getAssets(true).manager.get(defaultFile.path(), Texture.class);
                 }
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + defaultFile);
