@@ -1,6 +1,0 @@
-Name:Horror Token
-ManaCost:no cost
-Types:Creature Horror
-Colors:black
-PT:1/1
-Oracle:
