@@ -113,7 +113,7 @@ public class ImageCache {
     }
     public static void disposeTextures(){
         CardRenderer.clearcardArtCache();
-        ((Forge)Gdx.app.getApplicationListener()).cardAssets.manager().clear();
+        Forge.getAssets(false).manager.clear();
     }
 
     public static Texture getImage(InventoryItem ii) {
@@ -254,15 +254,14 @@ public class ImageCache {
             return null;
         if (!otherCache && Forge.enableUIMask.equals("Full") && isBorderless(imageKey))
             return generatedCards.get(imageKey);
-        return otherCache ? ((Forge)Gdx.app.getApplicationListener()).otherAssets.manager().get(file.getPath(), Texture.class, false)
-                : ((Forge)Gdx.app.getApplicationListener()).cardAssets.manager().get(file.getPath(), Texture.class, false);
+        return Forge.getAssets(otherCache).manager.get(file.getPath(), Texture.class, false);
     }
     static Texture loadAsset(String imageKey, File file, boolean otherCache) {
         if (file == null)
             return null;
-        if (!otherCache && ((Forge)Gdx.app.getApplicationListener()).cardAssets.manager().getLoadedAssets() > maxCardCapacity) {
+        if (!otherCache && Forge.getAssets(false).manager.getLoadedAssets() > maxCardCapacity) {
             //when maxCardCapacity is reached, clear to refresh
-            ((Forge)Gdx.app.getApplicationListener()).cardAssets.manager().clear();
+            Forge.getAssets(false).manager.clear();
             CardRenderer.clearcardArtCache();
             return null;
         }
