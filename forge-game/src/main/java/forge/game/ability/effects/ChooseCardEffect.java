@@ -1,9 +1,8 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
+import com.google.common.collect.Sets;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.util.CardTranslation;
@@ -114,6 +113,23 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     if (!cl.isEmpty()) {
                         final String prompt = Localizer.getInstance().getMessage("lblChoose") + " " + Lang.nounWithAmount(1, type);
                         Card c = p.getController().chooseSingleEntityForEffect(cl, sa, prompt, false, null);
+                        if (c != null) {
+                            chosen.add(c);
+                        }
+                    }
+                }
+            } else if (sa.hasParam("ChooseParty")) {
+                Set<String> partyTypes = Sets.newHashSet("Cleric", "Rogue", "Warrior", "Wizard");
+                for (final String type : partyTypes) {
+                    CardCollection valids = CardLists.filter(p.getCardsIn(ZoneType.Battlefield),
+                            CardPredicates.isType(type));
+                    for (Card alreadyChosen : chosen) {
+                        valids.remove(alreadyChosen);
+                    }
+                    if (!valids.isEmpty()) {
+                        final String prompt = Localizer.getInstance().getMessage("lblChoose") + " " +
+                                Lang.nounWithNumeralExceptOne(1, type);
+                        Card c = p.getController().chooseSingleEntityForEffect(valids, sa, prompt, true, null);
                         if (c != null) {
                             chosen.add(c);
                         }
