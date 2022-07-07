@@ -222,7 +222,7 @@ public class Forge implements ApplicationListener {
         //load model on background thread (using progress bar to report progress)
         FThreads.invokeInBackgroundThread(() -> {
             //see if app or assets need updating
-            AssetsDownloader.checkForUpdates(splashScreen, enableSentry, locale);
+            AssetsDownloader.checkForUpdates(splashScreen);
             if (exited) {
                 return;
             } //don't continue if user chose to exit or couldn't download required assets
