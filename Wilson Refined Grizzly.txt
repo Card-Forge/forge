@@ -8,4 +8,4 @@ K:Reach
 K:Trample
 K:Ward:2
 K:Choose a Background
-Oracle:This spell can't be countered.\nVigilance, reach, trample\nWard {2}\nChoose a Background
+Oracle:This spell can't be countered.\nVigilance, reach, trample\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.\nChoose a Background (You can have a Background as a second commander.)
