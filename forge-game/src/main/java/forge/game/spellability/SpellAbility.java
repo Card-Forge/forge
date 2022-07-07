@@ -2045,41 +2045,52 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         final String[] incR = restriction.split("\\.", 2);
         SpellAbility root = getRootAbility();
 
+        boolean testFailed = false;
+        if (incR[0].startsWith("!")) {
+            testFailed = true; // a bit counterintuitive
+            incR[0] = incR[0].substring(1); // consume negation sign
+        }
+
         if (incR[0].equals("Spell")) {
             if (!root.isSpell()) {
-                return false;
+                return testFailed;
             }
         }
         else if (incR[0].equals("Instant")) {
             if (!root.getCardState().getType().isInstant()) {
-                return false;
+                return testFailed;
             }
         }
         else if (incR[0].equals("Sorcery")) {
             if (!root.getCardState().getType().isSorcery()) {
-                return false;
+                return testFailed;
             }
         }
         else if (incR[0].equals("Triggered")) {
             if (!root.isTrigger()) {
-                return false;
+                return testFailed;
             }
         }
         else if (incR[0].equals("Activated")) {
             if (!root.isActivatedAbility()) {
-                return false;
+                return testFailed;
             }
         }
         else if (incR[0].equals("Static")) {
             if (!(root instanceof AbilityStatic)) {
-                return false;
+                return testFailed;
+            }
+        }
+        else if (incR[0].contains("LandAbility")) {
+            if (!(root instanceof LandAbility)) {
+                return testFailed;
             }
         }
         else if (incR[0].equals("SpellAbility")) {
             // Match anything
         }
         else { //not a spell/ability type
-            return false;
+            return testFailed;
         }
 
         if (incR.length > 1) {
@@ -2087,11 +2098,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             final String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
             for (int j = 0; j < exR.length; j++) {
                 if (!hasProperty(exR[j], sourceController, source, spellAbility)) {
-                    return false;
+                    return testFailed;
                 }
             }
         }
-        return true;
+        return !testFailed;
     }
 
     // Takes arguments like Blue or withFlying
