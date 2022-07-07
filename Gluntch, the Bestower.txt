@@ -1,0 +1,15 @@
+Name:Gluntch, the Bestower
+ManaCost:1 G W
+Types:Creature Jellyfish
+PT:0/5
+K:Flying
+SVar:X:PlayerCountPlayers$Amount
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoosePlayer1 | TriggerDescription$ At the beginning of your end step, choose a player. They put two +1/+1 counters on a creature they control. Choose a second player to draw a card. Then choose a third player to create two Treasure tokens.
+SVar:TrigChoosePlayer1:DB$ ChoosePlayer | Defined$ You | Choices$ Player | RememberChosen$ True | ChoiceTitle$ Choose a player to put two +1/+1 counters on a creature they control | SubAbility$Counters
+SVar:Counters:DB$ PutCounter | Defined$ ChosenPlayer | Choices$ Creature.ControlledBy ChosenPlayer | ChoiceTitle$ Choose a creature you control | Chooser$ ChosenPlayer | Placer$ ChosenPlayer | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$TrigChoosePlayer2
+SVar:TrigChoosePlayer2:DB$ ChoosePlayer | Defined$ You | Choices$ Player.IsNotRemembered | RememberChosen$ True | ChoiceTitle$ Choose a player to draw a card | SubAbility$Card
+SVar:Card:DB$ Draw | Defined$ ChosenPlayer | SubAbility$TrigChoosePlayer3
+SVar:TrigChoosePlayer3:DB$ ChoosePlayer | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | Defined$ You | Choices$ Player.IsNotRemembered | RememberChosen$ True | ChoiceTitle$ Choose a player to create two Treasure tokens | SubAbility$Tokens
+SVar:Tokens:DB$ Token | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | Defined$ChosenPlayer | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ ChosenPlayer | SubAbility$CleanupFinal
+SVar:CleanupFinal:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying\nAt the beginning of your end step, choose a player. They put two +1/+1 counters on a creature they control. Choose a second player to draw a card. Then choose a third player to create two Treasure tokens.
