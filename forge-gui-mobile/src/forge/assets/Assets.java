@@ -6,9 +6,6 @@ import com.badlogic.gdx.utils.Disposable;
 
 public class Assets implements Disposable {
     public AssetManager manager = new AssetManager(new AbsoluteFileHandleResolver());
-    public AssetManager manager() {
-        return manager;
-    }
     @Override
     public void dispose() {
         manager.dispose();

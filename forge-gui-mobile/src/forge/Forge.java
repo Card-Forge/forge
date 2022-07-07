@@ -104,8 +104,8 @@ public class Forge implements ApplicationListener {
     public static boolean enablePreloadExtendedArt = false;
     public static boolean isTabletDevice = false;
     public static String locale = "en-US";
-    public Assets cardAssets = new Assets();
-    public Assets otherAssets = new Assets();
+    public Assets cardAssets;
+    public Assets otherAssets;
     public static boolean hdbuttons = false;
     public static boolean hdstart = false;
     public static boolean isPortraitMode = false;
@@ -166,7 +166,8 @@ public class Forge implements ApplicationListener {
             // don't allow to read and process
             ForgeConstants.SPRITE_CARDBG_FILE = "";
         }
-
+        cardAssets = new Assets();
+        otherAssets = new Assets();
         graphics = new Graphics();
         splashScreen = new SplashScreen();
         frameRate = new FrameRate();
@@ -219,50 +220,44 @@ public class Forge implements ApplicationListener {
         ImageCache.initCache(cacheSize);
 
         //load model on background thread (using progress bar to report progress)
-        FThreads.invokeInBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                //see if app or assets need updating
-                AssetsDownloader.checkForUpdates(splashScreen);
-                if (exited) {
-                    return;
-                } //don't continue if user chose to exit or couldn't download required assets
+        FThreads.invokeInBackgroundThread(() -> {
+            //see if app or assets need updating
+            AssetsDownloader.checkForUpdates(splashScreen);
+            if (exited) {
+                return;
+            } //don't continue if user chose to exit or couldn't download required assets
 
-                safeToClose = false;
-                ImageKeys.setIsLibGDXPort(GuiBase.getInterface().isLibgdxPort());
-                FModel.initialize(splashScreen.getProgressBar(), null);
+            safeToClose = false;
+            ImageKeys.setIsLibGDXPort(GuiBase.getInterface().isLibgdxPort());
+            FModel.initialize(splashScreen.getProgressBar(), null);
 
-                splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingFonts"));
-                FSkinFont.preloadAll(locale);
+            splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingFonts"));
+            FSkinFont.preloadAll(locale);
 
-                splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingCardTranslations"));
-                CardTranslation.preloadTranslation(locale, ForgeConstants.LANG_DIR);
+            splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblLoadingCardTranslations"));
+            CardTranslation.preloadTranslation(locale, ForgeConstants.LANG_DIR);
 
-                splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
+            splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
 
-                //add reminder to preload
-                if (enablePreloadExtendedArt) {
-                    if (autoCache)
-                        splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblPreloadExtendedArt") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
-                    else
-                        splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblPreloadExtendedArt"));
-                } else {
-                    if (autoCache)
-                        splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
-                    else
-                        splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
-                }
-
-                Gdx.app.postRunnable(new Runnable() {
-                    @Override
-                    public void run() {
-                        afterDbLoaded();
-                        /*  call preloadExtendedArt here, if we put it above we will  *
-                         *  get error: No OpenGL context found in the current thread. */
-                        preloadExtendedArt();
-                    }
-                });
+            //add reminder to preload
+            if (enablePreloadExtendedArt) {
+                if (autoCache)
+                    splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblPreloadExtendedArt") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
+                else
+                    splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblPreloadExtendedArt"));
+            } else {
+                if (autoCache)
+                    splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup") + "\nDetected RAM: " + totalDeviceRAM + "MB. Cache size: " + cacheSize);
+                else
+                    splashScreen.getProgressBar().setDescription(getLocalizer().getMessage("lblFinishingStartup"));
             }
+
+            Gdx.app.postRunnable(() -> {
+                afterDbLoaded();
+                /*  call preloadExtendedArt here, if we put it above we will  *
+                 *  get error: No OpenGL context found in the current thread. */
+                preloadExtendedArt();
+            });
         });
     }
 
@@ -380,52 +375,35 @@ public class Forge implements ApplicationListener {
             FModel.getPreferences().save();
         }
 
-        FThreads.invokeInBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        //load skin full
-                        FSkin.loadFull(splashScreen);
-                        FThreads.invokeInBackgroundThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                //load Drafts
-                                preloadBoosterDrafts();
-                                FThreads.invokeInEdtLater(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        //selection transition
-                                        setTransitionScreen(new TransitionScreen(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                if (selector.equals("Classic")) {
-                                                    openHomeDefault();
-                                                    clearSplashScreen();
-                                                } else if (selector.equals("Adventure")) {
-                                                    openAdventure();
-                                                    clearSplashScreen();
-                                                } else if (splashScreen != null) {
-                                                    splashScreen.setShowModeSelector(true);
-                                                } else {//default mode in case splashscreen is null at some point as seen on resume..
-                                                    openHomeDefault();
-                                                    clearSplashScreen();
-                                                }
-                                                //start background music
-                                                SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
-                                                safeToClose = true;
-                                                clearTransitionScreen();
-                                            }
-                                        }, Forge.takeScreenshot(), false, false, true, false));
-                                    }
-                                });
-                            }
-                        });
-                    }
+        FThreads.invokeInBackgroundThread(() -> FThreads.invokeInEdtLater(() -> {
+            //load skin full
+            FSkin.loadFull(splashScreen);
+            FThreads.invokeInBackgroundThread(() -> {
+                //load Drafts
+                preloadBoosterDrafts();
+                FThreads.invokeInEdtLater(() -> {
+                    //selection transition
+                    setTransitionScreen(new TransitionScreen(() -> {
+                        if (selector.equals("Classic")) {
+                            openHomeDefault();
+                            clearSplashScreen();
+                        } else if (selector.equals("Adventure")) {
+                            openAdventure();
+                            clearSplashScreen();
+                        } else if (splashScreen != null) {
+                            splashScreen.setShowModeSelector(true);
+                        } else {//default mode in case splashscreen is null at some point as seen on resume..
+                            openHomeDefault();
+                            clearSplashScreen();
+                        }
+                        //start background music
+                        SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
+                        safeToClose = true;
+                        clearTransitionScreen();
+                    }, Forge.takeScreenshot(), false, false, true, false));
                 });
-            }
-        });
+            });
+        }));
     }
 
     public static void setCursor(TextureRegion textureRegion, String name) {
@@ -757,32 +735,26 @@ public class Forge implements ApplicationListener {
     }
 
     public static void switchToClassic() {
-        setTransitionScreen(new TransitionScreen(new Runnable() {
-            @Override
-            public void run() {
-                ImageCache.disposeTextures();
-                isMobileAdventureMode = false;
-                GuiBase.setIsAdventureMode(false);
-                setCursor(FSkin.getCursor().get(0), "0");
-                altZoneTabs = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
-                Gdx.input.setInputProcessor(getInputProcessor());
-                clearTransitionScreen();
-                openHomeDefault();
-                exited = false;
-            }
+        setTransitionScreen(new TransitionScreen(() -> {
+            ImageCache.disposeTextures();
+            isMobileAdventureMode = false;
+            GuiBase.setIsAdventureMode(false);
+            setCursor(FSkin.getCursor().get(0), "0");
+            altZoneTabs = FModel.getPreferences().getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
+            Gdx.input.setInputProcessor(getInputProcessor());
+            clearTransitionScreen();
+            openHomeDefault();
+            exited = false;
         }, Forge.takeScreenshot(), false, false));
     }
 
     public static void switchToAdventure() {
-        setTransitionScreen(new TransitionScreen(new Runnable() {
-            @Override
-            public void run() {
-                ImageCache.disposeTextures();
-                clearCurrentScreen();
-                clearTransitionScreen();
-                openAdventure();
-                exited = false;
-            }
+        setTransitionScreen(new TransitionScreen(() -> {
+            ImageCache.disposeTextures();
+            clearCurrentScreen();
+            clearTransitionScreen();
+            openAdventure();
+            exited = false;
         }, null, false, true));
     }
 
@@ -936,19 +908,11 @@ public class Forge implements ApplicationListener {
     }
 
     public static void delayedSwitchBack() {
-        FThreads.invokeInBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        clearTransitionScreen();
-                        clearCurrentScreen();
-                        switchToLast();
-                    }
-                });
-            }
-        });
+        FThreads.invokeInBackgroundThread(() -> FThreads.invokeInEdtLater(() -> {
+            clearTransitionScreen();
+            clearCurrentScreen();
+            switchToLast();
+        }));
     }
 
     @Override
@@ -990,8 +954,8 @@ public class Forge implements ApplicationListener {
             currentScreen.onClose(null);
             currentScreen = null;
         }
-        ImageCache.disposeTextureManager();
-        Config.instance().disposeTextureAtlasManager();
+        cardAssets.dispose();
+        otherAssets.dispose();
         Dscreens.clear();
         graphics.dispose();
         SoundSystem.instance.dispose();
@@ -1000,7 +964,15 @@ public class Forge implements ApplicationListener {
         } catch (Exception e) {
         }
     }
-
+    /** Retrieve assets.
+     * @param other if set to true returns otherAssets otherwise returns cardAssets
+     */
+    public static Assets getAssets(boolean other) {
+        if (other)
+            return ((Forge)Gdx.app.getApplicationListener()).otherAssets;
+        else
+            return ((Forge)Gdx.app.getApplicationListener()).cardAssets;
+    }
     public static boolean switchScene(Scene newScene) {
         if (currentScene != null) {
             if (!currentScene.leave())

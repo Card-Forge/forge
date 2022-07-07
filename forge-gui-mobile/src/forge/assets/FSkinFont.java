@@ -3,6 +3,7 @@ package forge.assets;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -38,7 +39,7 @@ public class FSkinFont {
     private static final int MAX_FONT_SIZE_MANY_GLYPHS = 36;
 
     private static final String TTF_FILE = "font1.ttf";
-    private static final ObjectMap<Integer, FSkinFont> fonts = new ObjectMap<>();
+    private static final HashMap<Integer, FSkinFont> fonts = new HashMap<>();
 
     private static final String commonCharacterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklm"
             + "nopqrstuvwxyz1234567890\"!?'.,;:()[]{}<>|/@\\^$-%+=#_&*\u2014"
@@ -395,24 +396,34 @@ public class FSkinFont {
             fontName += Forge.locale;
         }
         FileHandle fontFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + fontName + ".fnt");
+        final boolean[] found = {false};
         if (fontFile != null && fontFile.exists()) {
             final BitmapFontData data = new BitmapFontData(fontFile, false);
+            String finalFontName = fontName;
             FThreads.invokeInEdtNowOrLater(new Runnable() {
                 @Override
                 public void run() { //font must be initialized on UI thread
-                    font = new BitmapFont(data, (TextureRegion)null, true);
+                    try {
+                        font = new BitmapFont(data, (TextureRegion) null, true);
+                        found[0] = true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        found[0] = false;
+                    }
                 }
             });
-        } else {
-            if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
-                String ttfName = Forge.CJK_Font;
-                FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
-                if (ttfFile != null && ttfFile.exists()) {
-                    generateFont(ttfFile, fontName, fontSize);
-                }
-            } else {
-                generateFont(FSkin.getSkinFile(TTF_FILE), fontName, fontSize);
+        }
+        if (found[0])
+            return;
+        //not found generate
+        if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
+            String ttfName = Forge.CJK_Font;
+            FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
+            if (ttfFile != null && ttfFile.exists()) {
+                generateFont(ttfFile, fontName, fontSize);
             }
+        } else {
+            generateFont(FSkin.getSkinFile(TTF_FILE), fontName, fontSize);
         }
     }
 
