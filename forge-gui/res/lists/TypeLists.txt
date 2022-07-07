@@ -337,6 +337,7 @@ Dovin
 Duck
 Dungeon Master
 Ellywick
+Elminster
 Elspeth
 Estrid
 Freyalise

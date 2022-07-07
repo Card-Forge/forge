@@ -113,6 +113,7 @@ public enum AbilityKey {
     Result("Result"),
     RoomName("RoomName"),
     Scheme("Scheme"),
+    ScryNum("ScryNum"),
     Sides("Sides"),
     Source("Source"),
     Sources("Sources"),

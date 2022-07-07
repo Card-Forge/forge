@@ -2315,6 +2315,7 @@ public class GameAction {
             final Player p = e.getKey();
             final CardCollection toTop = e.getValue().getLeft();
             final CardCollection toBottom = e.getValue().getRight();
+            final int numLookedAt = toTop.size() + toBottom.size();
             if (toTop != null) {
                 Collections.reverse(toTop); // reverse to get the correct order
                 for (Card c : toTop) {
@@ -2331,6 +2332,7 @@ public class GameAction {
                 // set up triggers (but not actually do them until later)
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Player, p);
+                runParams.put(AbilityKey.ScryNum, numLookedAt);
                 game.getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
             }
         }
