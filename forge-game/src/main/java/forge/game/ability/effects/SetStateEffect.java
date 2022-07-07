@@ -1,6 +1,8 @@
 package forge.game.ability.effects;
 
+import forge.GameCommand;
 import forge.card.CardStateName;
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
@@ -16,6 +18,8 @@ import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
 
 public class SetStateEffect extends SpellAbilityEffect {
 
@@ -162,6 +166,10 @@ public class SetStateEffect extends SpellAbilityEffect {
                 hasTransformed = gameCard.turnFaceUp(true, true, sa);
             } else {
                 hasTransformed = gameCard.changeCardState(mode, sa.getParam("NewState"), sa);
+                if (gameCard.isFaceDown() && (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
+                        || sa.hasParam("FaceDownSetType"))) {
+                    setFaceDownState(gameCard, sa);
+                }
             }
             if (hasTransformed) {
                 if (sa.isMorphUp()) {
@@ -195,5 +203,35 @@ public class SetStateEffect extends SpellAbilityEffect {
         if (!transformedCards.isEmpty()) {
             game.getAction().reveal(transformedCards, p, true, "Transformed cards in ");
         }
+    }
+
+    private static void setFaceDownState(Card c, SpellAbility sa) {
+        final Card source = sa.getHostCard();
+        CardState faceDown = c.getFaceDownState();
+
+        // set New Pt doesn't work because this values need to be copyable for clone effects
+        if (sa.hasParam("FaceDownPower")) {
+            faceDown.setBasePower(AbilityUtils.calculateAmount(
+                    source, sa.getParam("FaceDownPower"), sa));
+        }
+        if (sa.hasParam("FaceDownToughness")) {
+            faceDown.setBaseToughness(AbilityUtils.calculateAmount(
+                    source, sa.getParam("FaceDownToughness"), sa));
+        }
+
+        if (sa.hasParam("FaceDownSetType")) {
+            faceDown.setType(new CardType(Arrays.asList(sa.getParam("FaceDownSetType").split(" & ")), false));
+        }
+
+        final GameCommand revert = new GameCommand() {
+            private static final long serialVersionUID = 8853789549297846163L;
+
+            @Override
+            public void run() {
+                c.clearStates(CardStateName.FaceDown, true);
+            }
+        };
+
+        c.addFaceupCommand(revert);
     }
 }
