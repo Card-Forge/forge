@@ -486,11 +486,7 @@ public class ImageCache {
         //generated texture/pixmap?
         if (t.toString().contains("com.badlogic.gdx.graphics.Texture@"))
             return true;
-        for (String key : borderlessCardlistKey) {
-            if (t.toString().contains(key))
-                return true;
-        }
-        return false;
+        return borderlessCardlistKey.stream().anyMatch(key -> t.toString().contains(key));
     }
 
     public static String getpixelColor(Texture i) {

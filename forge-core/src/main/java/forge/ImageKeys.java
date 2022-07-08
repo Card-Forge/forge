@@ -3,6 +3,7 @@ package forge;
 import forge.item.PaperCard;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
+import forge.util.ThreadUtil;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -171,10 +172,18 @@ public final class ImageKeys {
                     return file;
                 }
                 //setlookup
-                file = setLookUpFile(filename, fullborderFile);
-                if (file != null) {
-                    cachedCards.put(filename, file);
-                    return file;
+                if (hasSetLookup(filename)) {
+                    //delay processing so gui is responsive
+                    ThreadUtil.delay(60, new Runnable() {
+                        @Override
+                        public void run() {
+                            File f = setLookUpFile(filename, fullborderFile);
+                            if (f != null)
+                                cachedCards.put(filename, f);
+                            else //is null
+                                missingCards.add(filename);
+                        }
+                    });
                 }
             }
             //if an image, like phenomenon or planes is missing .full in their filenames but you have an existing images that have .full/.fullborder
@@ -250,7 +259,7 @@ public final class ImageKeys {
 
         // System.out.println("File not found, no image created: " + key);
         //add missing cards - disable for desktop version for compatibility reasons with autodownloader
-        if (isLibGDXPort)
+        if (isLibGDXPort && !hasSetLookup(filename)) //missing cards with setlookup is handled differently
             missingCards.add(filename);
         return null;
     }
@@ -259,6 +268,13 @@ public final class ImageKeys {
         return  !CACHE_CARD_PICS_SUBDIR.containsKey(edition)
                 ? StaticData.instance().getEditions().getCode2ByCode(edition) // by default 2-letter codes from MWS are used
                 : CACHE_CARD_PICS_SUBDIR.get(edition); // may use custom paths though
+    }
+    static boolean hasSetLookup(String filename) {
+        if (!StaticData.instance().getSetLookup().isEmpty()) {
+            return StaticData.instance().getSetLookup().keySet().stream().anyMatch(setKey -> filename.startsWith(setKey));
+        }
+
+        return false;
     }
     private static File setLookUpFile(String filename, String fullborderFile) {
         if (!StaticData.instance().getSetLookup().isEmpty()) {
