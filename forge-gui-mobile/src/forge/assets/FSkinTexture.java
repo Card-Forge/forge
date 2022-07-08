@@ -128,9 +128,13 @@ public enum FSkinTexture implements FImage {
         FileHandle preferredFile = isPlane ? FSkin.getCachePlanechaseFile(filename) : FSkin.getSkinFile(filename);
         if (preferredFile.exists()) {
             try {
-                Forge.getAssets(true).manager.load(preferredFile.path(), Texture.class);
-                Forge.getAssets(true).manager.finishLoadingAsset(preferredFile.path());
-                texture = Forge.getAssets(true).manager.get(preferredFile.path(), Texture.class);
+                if (preferredFile.path().contains("fallback_skin")) {
+                    texture = new Texture(preferredFile);
+                } else {
+                    Forge.getAssets(true).manager.load(preferredFile.path(), Texture.class);
+                    Forge.getAssets(true).manager.finishLoadingAsset(preferredFile.path());
+                    texture = Forge.getAssets(true).manager.get(preferredFile.path(), Texture.class);
+                }
             }
             catch (final Exception e) {
                 System.err.println("Failed to load skin file: " + preferredFile);
@@ -148,9 +152,13 @@ public enum FSkinTexture implements FImage {
 
             if (defaultFile.exists()) {
                 try {
-                    Forge.getAssets(true).manager.load(defaultFile.path(), Texture.class);
-                    Forge.getAssets(true).manager.finishLoadingAsset(defaultFile.path());
-                    texture = Forge.getAssets(true).manager.get(defaultFile.path(), Texture.class);
+                    if (defaultFile.path().contains("fallback_skin")) {
+                        texture = new Texture(defaultFile);
+                    } else {
+                        Forge.getAssets(true).manager.load(defaultFile.path(), Texture.class);
+                        Forge.getAssets(true).manager.finishLoadingAsset(defaultFile.path());
+                        texture = Forge.getAssets(true).manager.get(defaultFile.path(), Texture.class);
+                    }
                 }
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + defaultFile);

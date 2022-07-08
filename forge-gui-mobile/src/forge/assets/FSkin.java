@@ -165,17 +165,26 @@ public class FSkin {
             }
 
             try {
-                manager.load(f.path(), Texture.class);
-                manager.finishLoadingAsset(f.path());
-                final int w = manager.get(f.path(), Texture.class).getWidth();
-                final int h = manager.get(f.path(), Texture.class).getHeight();
-
-                if (f2.exists()) {
-                    manager.load(f2.path(), Texture.class, new TextureLoader.TextureParameter(){{genMipMaps = true; minFilter = Texture.TextureFilter.MipMapLinearLinear; magFilter = Texture.TextureFilter.Linear;}});
-                    manager.finishLoadingAsset(f2.path());
-                    splashScreen.setBackground(new TextureRegion(manager.get(f2.path(), Texture.class)));
+                int w, h;
+                if (f.path().contains("fallback_skin")) {
+                    //the file is not accesible by the manager since it not on absolute path...
+                    Texture txSplash = new Texture(f);
+                    w = txSplash.getWidth();
+                    h = txSplash.getHeight();
+                    splashScreen.setBackground(new TextureRegion(txSplash, 0, 0, w, h - 100));
                 } else {
-                    splashScreen.setBackground(new TextureRegion(manager.get(f.path(), Texture.class), 0, 0, w, h - 100));
+                    manager.load(f.path(), Texture.class);
+                    manager.finishLoadingAsset(f.path());
+                    w = manager.get(f.path(), Texture.class).getWidth();
+                    h = manager.get(f.path(), Texture.class).getHeight();
+
+                    if (f2.exists()) {
+                        manager.load(f2.path(), Texture.class, new TextureLoader.TextureParameter(){{genMipMaps = true; minFilter = Texture.TextureFilter.MipMapLinearLinear; magFilter = Texture.TextureFilter.Linear;}});
+                        manager.finishLoadingAsset(f2.path());
+                        splashScreen.setBackground(new TextureRegion(manager.get(f2.path(), Texture.class)));
+                    } else {
+                        splashScreen.setBackground(new TextureRegion(manager.get(f.path(), Texture.class), 0, 0, w, h - 100));
+                    }
                 }
 
                 Pixmap pxSplash = new Pixmap(f);
