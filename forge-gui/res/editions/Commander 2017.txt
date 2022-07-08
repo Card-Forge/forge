@@ -325,7 +325,7 @@ b_1_1_vampire
 b_2_2_zombie
 brg_3_3_cat_dragon_flying
 c_0_1_eldrazi_spawn_sac
-c_a_gold_draw
+c_a_gold_sac
 g_2_2_cat_warrior_forestwalk
 r_4_4_dragon_flying
 r_6_6_dragon_flying

@@ -3,12 +3,7 @@ package forge.assets;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -26,6 +21,8 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 
+import com.badlogic.gdx.utils.IntSet;
+import com.badlogic.gdx.utils.ObjectMap;
 import forge.Forge;
 import forge.gui.FThreads;
 import forge.localinstance.properties.ForgeConstants;
@@ -42,12 +39,12 @@ public class FSkinFont {
     private static final int MAX_FONT_SIZE_MANY_GLYPHS = 36;
 
     private static final String TTF_FILE = "font1.ttf";
-    private static final Map<Integer, FSkinFont> fonts = new HashMap<>();
+    private static final HashMap<Integer, FSkinFont> fonts = new HashMap<>();
 
     private static final String commonCharacterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklm"
             + "nopqrstuvwxyz1234567890\"!?'.,;:()[]{}<>|/@\\^$-%+=#_&*\u2014"
             + "\u2022ÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÑñÄËÏÖÜäëïöüẞß¿¡";
-    private static Map<String, String> langUniqueCharacterSet = new HashMap<>();
+    private static ObjectMap<String, String> langUniqueCharacterSet = new ObjectMap<>();
 
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.FONTS_DIR);
@@ -352,7 +349,7 @@ public class FSkinFont {
             return langUniqueCharacterSet.get(langCode);
         }
         StringBuilder characters = new StringBuilder(commonCharacterSet);
-        Set<Integer> characterSet = new HashSet<>();
+        IntSet characterSet = new IntSet();
         for (int offset = 0; offset < commonCharacterSet.length();) {
             final int codePoint = commonCharacterSet.codePointAt(offset);
             characterSet.add(codePoint);
@@ -399,24 +396,34 @@ public class FSkinFont {
             fontName += Forge.locale;
         }
         FileHandle fontFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + fontName + ".fnt");
+        final boolean[] found = {false};
         if (fontFile != null && fontFile.exists()) {
             final BitmapFontData data = new BitmapFontData(fontFile, false);
+            String finalFontName = fontName;
             FThreads.invokeInEdtNowOrLater(new Runnable() {
                 @Override
                 public void run() { //font must be initialized on UI thread
-                    font = new BitmapFont(data, (TextureRegion)null, true);
+                    try {
+                        font = new BitmapFont(data, (TextureRegion) null, true);
+                        found[0] = true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        found[0] = false;
+                    }
                 }
             });
-        } else {
-            if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
-                String ttfName = Forge.CJK_Font;
-                FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
-                if (ttfFile != null && ttfFile.exists()) {
-                    generateFont(ttfFile, fontName, fontSize);
-                }
-            } else {
-                generateFont(FSkin.getSkinFile(TTF_FILE), fontName, fontSize);
+        }
+        if (found[0])
+            return;
+        //not found generate
+        if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
+            String ttfName = Forge.CJK_Font;
+            FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
+            if (ttfFile != null && ttfFile.exists()) {
+                generateFont(ttfFile, fontName, fontSize);
             }
+        } else {
+            generateFont(FSkin.getSkinFile(TTF_FILE), fontName, fontSize);
         }
     }
 
@@ -479,7 +486,7 @@ public class FSkinFont {
     }
 
     public static Iterable<String> getAllCJKFonts() {
-        final List<String> allCJKFonts = new ArrayList<>();
+        final Array<String> allCJKFonts = new Array<>();
 
         allCJKFonts.add("None");
         final FileHandle dir = Gdx.files.absolute(ForgeConstants.FONTS_DIR);

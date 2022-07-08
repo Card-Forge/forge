@@ -69,6 +69,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         BRAWL_P8_DECK_STATE(""),
         UI_LANDSCAPE_MODE ("false"),
         UI_MATCHES_PER_GAME("3"),
+        UI_APPLIED_VARIANTS(""),
         UI_COMPACT_MAIN_MENU ("false"),
         UI_USE_OLD ("false"),
         UI_RANDOM_FOIL ("false"),
@@ -151,6 +152,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         UI_CARD_COUNTER_DISPLAY_LOCATION(ForgeConstants.CounterDisplayLocation.TOP.getName()),
         UI_FULLSCREEN_MODE ("false"),
         UI_VIDEO_MODE ("720p"),
+        UI_SELECTOR_MODE ("Default"),
         UI_ANDROID_MINIMIZE_ON_SCRLOCK("false"),
         UI_ROTATE_PLANE_OR_PHENOMENON("false"),
         UI_ROTATE_SPLIT_CARDS("true"),
@@ -215,7 +217,7 @@ public class ForgePreferences extends PreferencesStore<ForgePreferences.FPref> {
         DEV_LOG_ENTRY_TYPE (GameLogEntryType.DAMAGE.toString()),
 
         LOAD_CARD_SCRIPTS_LAZILY ("false"),
-        LOAD_HISTORIC_FORMATS ("false"),
+        LOAD_ARCHIVED_FORMATS ("false"),
 
         DECK_DEFAULT_CARD_LIMIT ("4"),
         DECKGEN_SINGLETONS ("false"),

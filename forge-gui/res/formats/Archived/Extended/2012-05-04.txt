@@ -1,0 +1,7 @@
+[format]
+Name:Extended (AVR)
+Type:Archived
+Subtype:Extended
+Effective:2012-05-04
+Sets:ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12, ISD, DKA, AVR
+Banned:Jace, the Mind Sculptor; Mental Misstep; Ponder; Preordain; Stoneforge Mystic

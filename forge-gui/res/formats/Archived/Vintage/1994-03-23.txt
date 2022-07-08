@@ -1,0 +1,8 @@
+[format]
+Name:Constructed (1994-03-23)
+Type:Archived
+Subtype:Vintage
+Effective:1994-03-23
+Sets:LEA, LEB, 2ED, ARN, ATQ
+Restricted:Ali from Cairo; Ancestral Recall; Berserk; Black Lotus; Braingeyser; Channel; Copy Artifact; Demonic Tutor; Dingus Egg; Gauntlet of Might; Mox Emerald; Mox Jet; Mox Pearl; Mox Ruby; Mox Sapphire; Regrowth; Sol Ring; Time Walk; Timetwister; Wheel of Fortune
+Banned:Bronze Tablet; Contract from Below; Darkpact; Demonic Attorney; Jeweled Bird; Shahrazad; Time Vault

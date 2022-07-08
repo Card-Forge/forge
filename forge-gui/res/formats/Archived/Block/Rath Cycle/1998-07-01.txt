@@ -1,0 +1,7 @@
+[format]
+Name:Block: Tempest;Stronghold;Exodus (EXO)
+Type:Archived
+Subtype:Block
+Effective:1998-07-01
+Sets:TMP, STH, EXO
+Banned:Cursed Scroll

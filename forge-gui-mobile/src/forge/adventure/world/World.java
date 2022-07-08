@@ -22,7 +22,6 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
-//import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
@@ -34,8 +33,6 @@ import java.util.Random;
  * Class that will create the world from the configuration
  */
 public class World implements  Disposable, SaveFileContent {
-
-
     private WorldData data;
     private Pixmap biomeImage;
     private long[][] biomeMap;
@@ -58,8 +55,7 @@ public class World implements  Disposable, SaveFileContent {
         return (int) (Math.log(Long.highestOneBit(biome)) / Math.log(2));
     }
 
-    public void loadWorldData()
-    {
+    public void loadWorldData() {
         if(worldDataLoaded)
             return;
 
@@ -230,12 +226,8 @@ public class World implements  Disposable, SaveFileContent {
     }
 
     public World generateNew(long seed) {
-
         loadWorldData();
-        if(seed==0)
-        {
-            seed=random.nextLong();
-        }
+        if(seed==0) { seed=random.nextLong(); }
         this.seed=seed;
         random.setSeed(seed);
         OpenSimplexNoise noise = new OpenSimplexNoise(seed);

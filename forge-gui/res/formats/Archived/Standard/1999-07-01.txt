@@ -1,0 +1,7 @@
+[format]
+Name:Standard (UDS)
+Type:Archived
+Subtype:Standard
+Effective:1999-07-01
+Sets:TMP, STH, EXO, USG, ULG, 6ED, UDS
+Banned:Dream Halls; Earthcraft; Fluctuator; Lotus Petal; Memory Jar; Mind Over Matter; Recurring Nightmare; Time Spiral; Tolarian Academy; Windfall

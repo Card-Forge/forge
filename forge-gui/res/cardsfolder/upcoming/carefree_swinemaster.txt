@@ -1,0 +1,8 @@
+Name:Carefree Swinemaster
+ManaCost:2 G
+Types:Creature Gnome Ranger
+PT:1/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, you may pay {1}{G}. If you do, create a 2/2 green Boar creature token that's tapped and attacking.
+SVar:TrigToken:AB$ Token | Cost$ 1 G | TokenAmount$ 1 | TokenScript$ g_2_2_boar | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
+DeckHas:Ability$Token & Type$Boar
+Oracle:Whenever Carefree Swinemaster attacks, you may pay {1}{G}. If you do, create a 2/2 green Boar creature token that's tapped and attacking.

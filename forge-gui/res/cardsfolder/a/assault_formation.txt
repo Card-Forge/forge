@@ -1,7 +1,7 @@
 Name:Assault Formation
 ManaCost:1 G
 Types:Enchantment
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME assigns combat damage equal to its toughness rather than its power | Description$ Each creature you control assigns combat damage equal to its toughness rather than its power.
+S:Mode$ CombatDamageToughness | ValidCard$ Creature.YouCtrl | Description$ Each creature you control assigns combat damage equal to its toughness rather than its power.
 A:AB$ Effect | Cost$ G | ValidTgts$ Creature.withDefender | RememberObjects$ Targeted | TgtPrompt$ Select target creature with defender | StaticAbilities$ CanAttack | SpellDescription$ Target creature with defender can attack this turn as though it didn't have defender.
 SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Creature.IsRemembered | Description$ This creature can attack this turn as though it didn't have defender.
 A:AB$ PumpAll | Cost$ 2 G | ValidCards$ Creature.YouCtrl | NumDef$ +1 | SpellDescription$ Creatures you control get +0/+1 until end of turn.

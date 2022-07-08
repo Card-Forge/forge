@@ -37,13 +37,15 @@ public class PumpEffect extends SpellAbilityEffect {
             final long timestamp) {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
+        final String duration = sa.getParam("Duration");
+
         //if host is not on the battlefield don't apply
         // Suspend should does Affect the Stack
-        if (("UntilHostLeavesPlay".equals(sa.getParam("Duration")) || "UntilLoseControlOfHost".equals(sa.getParam("Duration")))
+        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration))
                 && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
             return;
         }
-        if ("UntilLoseControlOfHost".equals(sa.getParam("Duration")) && host.getController() != sa.getActivatingPlayer()) {
+        if ("UntilLoseControlOfHost".equals(duration) && host.getController() != sa.getActivatingPlayer()) {
             return;
         }
 
@@ -92,7 +94,7 @@ public class PumpEffect extends SpellAbilityEffect {
             addLeaveBattlefieldReplacement(gameCard, sa, sa.getParam("LeaveBattlefield"));
         }
 
-        if (!"Permanent".equals(sa.getParam("Duration"))) {
+        if (!"Permanent".equals(duration)) {
             // If not Permanent, remove Pumped at EOT
             final GameCommand untilEOT = new GameCommand() {
                 private static final long serialVersionUID = -42244224L;
@@ -123,9 +125,11 @@ public class PumpEffect extends SpellAbilityEffect {
     private static void applyPump(final SpellAbility sa, final Player p,
             final List<String> keywords, final long timestamp) {
         final Card host = sa.getHostCard();
+        final String duration = sa.getParam("Duration");
+        
         //if host is not on the battlefield don't apply
         // Suspend should does Affect the Stack
-        if (("UntilHostLeavesPlay".equals(sa.getParam("Duration")) || "UntilLoseControlOfHost".equals(sa.getParam("Duration")))
+        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration))
                 && !(host.isInPlay() || host.isInZone(ZoneType.Stack))) {
             return;
         }
@@ -134,7 +138,7 @@ public class PumpEffect extends SpellAbilityEffect {
             p.addChangedKeywords(keywords, ImmutableList.of(), timestamp, 0);
         }
 
-        if (!"Permanent".equals(sa.getParam("Duration"))) {
+        if (!"Permanent".equals(duration)) {
             // If not Permanent, remove Pumped at EOT
             final GameCommand untilEOT = new GameCommand() {
                 private static final long serialVersionUID = -32453460L;
@@ -348,7 +352,7 @@ public class PumpEffect extends SpellAbilityEffect {
                     ? TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets)
                     : Localizer.getInstance().getMessage("lblApplyPumpToTarget", targets);
 
-            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message)) {
+            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message, null)) {
                 return;
             }
         }

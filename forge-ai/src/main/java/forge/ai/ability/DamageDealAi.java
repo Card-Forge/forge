@@ -53,6 +53,7 @@ import forge.util.MyRandom;
 public class DamageDealAi extends DamageAiBase {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+        final SpellAbility root = sa.getRootAbility();
         final String damage = sa.getParam("NumDmg");
         Card source = sa.getHostCard();
         int dmg = AbilityUtils.calculateAmount(source, damage, sa);
@@ -76,7 +77,7 @@ public class DamageDealAi extends DamageAiBase {
                     if (dmg > energy || dmg < 1) {
                         continue; // in case the calculation gets messed up somewhere
                     }
-                    source.setSVar("EnergyToPay", "Number$" + dmg);
+                    root.setSVar("EnergyToPay", "Number$" + dmg);
                     return true;
                 }
             }
@@ -1072,6 +1073,11 @@ public class DamageDealAi extends DamageAiBase {
 
         if (sa.getSubAbility() != null || sa.getParent() != null) {
             // Doesn't work yet for complex decisions where damage is only a part of the decision process
+            return null;
+        }
+
+        // chaining to this could miscalculate
+        if (sa.isDividedAsYouChoose()) {
             return null;
         }
 

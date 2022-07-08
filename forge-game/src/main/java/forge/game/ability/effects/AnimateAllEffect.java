@@ -1,10 +1,11 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.card.CardType;
@@ -64,17 +65,17 @@ public class AnimateAllEffect extends AnimateEffectBase {
             types.add(host.getChosenType2());
         }
 
-        final List<String> keywords = new ArrayList<>();
+        final List<String> keywords = Lists.newArrayList();
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
         }
 
-        final List<String> removeKeywords = new ArrayList<>();
+        final List<String> removeKeywords = Lists.newArrayList();
         if (sa.hasParam("RemoveKeywords")) {
             removeKeywords.addAll(Arrays.asList(sa.getParam("RemoveKeywords").split(" & ")));
         }
 
-        final List<String> hiddenKeywords = new ArrayList<>();
+        final List<String> hiddenKeywords = Lists.newArrayList();
         if (sa.hasParam("HiddenKeywords")) {
             hiddenKeywords.addAll(Arrays.asList(sa.getParam("HiddenKeywords").split(" & ")));
         }
@@ -99,25 +100,36 @@ public class AnimateAllEffect extends AnimateEffectBase {
         }
 
         // abilities to add to the animated being
-        final List<String> abilities = new ArrayList<>();
+        final List<String> abilities = Lists.newArrayList();
         if (sa.hasParam("Abilities")) {
             abilities.addAll(Arrays.asList(sa.getParam("Abilities").split(",")));
         }
         // replacement effects to add to the animated being
-        final List<String> replacements = new ArrayList<>();
+        final List<String> replacements = Lists.newArrayList();
         if (sa.hasParam("Replacements")) {
             replacements.addAll(Arrays.asList(sa.getParam("Replacements").split(",")));
         }
         // triggers to add to the animated being
-        final List<String> triggers = new ArrayList<>();
+        final List<String> triggers = Lists.newArrayList();
         if (sa.hasParam("Triggers")) {
             triggers.addAll(Arrays.asList(sa.getParam("Triggers").split(",")));
         }
 
         // sVars to add to the animated being
-        final List<String> sVars = new ArrayList<>();
+        final List<String> sVars = Lists.newArrayList();
         if (sa.hasParam("sVars")) {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
+        }
+
+        // static abilities to add to the animated being
+        final List<String> stAbs = Lists.newArrayList();
+        if (sa.hasParam("staticAbilities")) {
+            stAbs.addAll(Arrays.asList(sa.getParam("staticAbilities").split(",")));
+        }
+
+        Map<String, String> sVarsMap = Maps.newHashMap();
+        for (final String s : sVars) {
+            sVarsMap.put(s, AbilityUtils.getSVar(sa, s));
         }
 
         final String valid = sa.getParamOrDefault("ValidCards", "");
@@ -133,15 +145,14 @@ public class AnimateAllEffect extends AnimateEffectBase {
         list = CardLists.getValidCards(list, valid, host.getController(), host, sa);
 
         for (final Card c : list) {
-            doAnimate(c, sa, power, toughness, types, removeTypes, finalColors,
-                    keywords, removeKeywords, hiddenKeywords,
-                    abilities, triggers, replacements, ImmutableList.of(),
-                    timestamp);
+            doAnimate(c, sa, power, toughness, types, removeTypes, finalColors, keywords, removeKeywords,
+                    hiddenKeywords, abilities, triggers, replacements, stAbs, timestamp);
 
             // give sVars
-            for (final String s : sVars) {
-                c.setSVar(s, AbilityUtils.getSVar(sa, s));
+            if (!sVarsMap.isEmpty() ) {
+                c.addChangedSVars(sVarsMap, timestamp, 0);
             }
+
             game.fireEvent(new GameEventCardStatsChanged(c));
 
             final GameCommand unanimate = new GameCommand() {

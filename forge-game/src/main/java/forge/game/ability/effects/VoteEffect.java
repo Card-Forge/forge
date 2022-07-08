@@ -126,7 +126,7 @@ public class VoteEffect extends SpellAbilityEffect {
             }
             if (sa.hasParam("StoreVoteNum")) {
                 for (final Object type : voteType) {
-                    host.setSVar("VoteNum" + type, "Number$" + votes.get(type).size());
+                    sa.setSVar("VoteNum" + type, "Number$" + votes.get(type).size());
                 }
             } else {
                 for (final String subAb : subAbs) {

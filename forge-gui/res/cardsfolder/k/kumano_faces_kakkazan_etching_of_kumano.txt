@@ -25,6 +25,6 @@ Colors:red
 Types:Enchantment Creature Human Shaman
 PT:2/2
 K:Haste
-R:Event$ Moved | ValidLKI$ Creature.DamagedByCard.YouCtrl,Creature.DamagedByEmblem.YouCtrl | Destination$ Graveyard | ReplaceWith$ DBExile | ActiveZones$ Battlefield | Description$ If a creature dealt damage this turn by a source you controlled would die, exile it instead.
+R:Event$ Moved | ValidLKI$ Creature.DamagedByCard.YouCtrl,Emblem.YouCtrl | Destination$ Graveyard | ReplaceWith$ DBExile | ActiveZones$ Battlefield | Description$ If a creature dealt damage this turn by a source you controlled would die, exile it instead.
 SVar:DBExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
 Oracle:Haste\nIf a creature dealt damage this turn by a source you controlled would die, exile it instead.

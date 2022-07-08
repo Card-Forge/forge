@@ -3,12 +3,10 @@ ManaCost:1 W
 Types:Creature Human Cleric
 PT:1/3
 A:AB$ ChooseSource | Cost$ T | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to CARDNAME instead.
-SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessDamage | Triggers$ OutOfSight | Duration$ UntilHostLeavesPlayOrEOT | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem | ConditionCompare$ GE1
-SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.ChosenCard,Emblem.ChosenCard | ReplaceWith$ SelflessDmg | DamageTarget$ EffectSource | Description$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to EFFECTSOURCE instead.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessDamage | Duration$ UntilHostLeavesPlayOrEOT | SubAbility$ DBCleanup | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem
+SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ReplaceWith$ SelflessDmg | DamageTarget$ EffectSource | Description$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to EFFECTSOURCE instead.
 SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ EffectSource | VarType$ Card | SubAbility$ ExileEffect
-#Zone Change for the source of your choice
-SVar:OutOfSight:Mode$ ChangesZone | Origin$ Any | Destination$ Any | ValidCard$ Card.ChosenCard | Execute$ ExileEffect | Static$ True
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 AI:RemoveDeck:All
 Oracle:{T}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to Beacon of Destiny instead.

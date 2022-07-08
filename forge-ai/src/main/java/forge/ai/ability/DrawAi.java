@@ -18,6 +18,8 @@
  */
 package forge.ai.ability;
 
+import java.util.Map;
+
 import forge.ai.AiCostDecision;
 import forge.ai.AiProps;
 import forge.ai.ComputerUtil;
@@ -102,7 +104,7 @@ public class DrawAi extends SpellAbilityAi {
             return false;
         }
 
-        if (!ComputerUtilCost.checkDiscardCost(ai, cost, source,sa)) {
+        if (!ComputerUtilCost.checkDiscardCost(ai, cost, source, sa)) {
             AiCostDecision aiDecisions = new AiCostDecision(ai, sa, false);
             for (final CostPart part : cost.getCostParts()) {
                 if (part instanceof CostDiscard) {
@@ -541,7 +543,7 @@ public class DrawAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
      */
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         int numCards = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumCards"), sa) : 1;
         // AI shouldn't mill itself
         if (numCards < player.getZone(ZoneType.Library).size())

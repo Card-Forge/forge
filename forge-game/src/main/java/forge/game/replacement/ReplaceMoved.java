@@ -96,7 +96,7 @@ public class ReplaceMoved extends ReplacementEffect {
     @Override
     public void setReplacingObjects(Map<AbilityKey, Object> runParams, SpellAbility sa) {
         sa.setReplacingObject(AbilityKey.Card, runParams.get(AbilityKey.Affected));
-        sa.setReplacingObjectsFrom(runParams, AbilityKey.CardLKI, AbilityKey.Cause, AbilityKey.LastStateBattlefield, AbilityKey.LastStateGraveyard);
+        sa.setReplacingObjectsFrom(runParams, AbilityKey.NewCard, AbilityKey.CardLKI, AbilityKey.Cause, AbilityKey.LastStateBattlefield, AbilityKey.LastStateGraveyard);
     }
 
 }

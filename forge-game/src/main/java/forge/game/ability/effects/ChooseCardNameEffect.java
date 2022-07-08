@@ -54,7 +54,6 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
         }
 
         boolean randomChoice = sa.hasParam("AtRandom");
-        boolean draft = sa.hasParam("Draft"); //for digital "draft from spellbook" mechanic
         boolean chooseFromDefined = sa.hasParam("ChooseFromDefinedCards");
         boolean chooseFromList = sa.hasParam("ChooseFromList");
         boolean chooseFromOneTimeList = sa.hasParam("ChooseFromOneTimeList");
@@ -62,8 +61,6 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
         if (!randomChoice) {
             if (sa.hasParam("SelectPrompt")) {
                 message = sa.getParam("SelectPrompt");
-            } else if (draft) {
-                message = Localizer.getInstance().getMessage("lblChooseCardDraft");
             } else if (null == validDesc) {
                 message = Localizer.getInstance().getMessage("lblChooseACardName");
             } else {
@@ -108,12 +105,6 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                     chosen = p.getController().chooseCardName(sa, faces, message);
                 } else if (chooseFromList) {
                     String [] names = sa.getParam("ChooseFromList").split(",");
-                    if (sa.hasParam("Draft")) {
-                        List<String> options = Arrays.asList(names);
-                        Collections.shuffle(options);
-                        List<String> draftChoices = options.subList(0,3);
-                        names = draftChoices.toArray(new String[0]);
-                    }
                     List<ICardFace> faces = new ArrayList<>();
                     for (String name : names) {
                         // Cardnames that include "," must use ";" instead in ChooseFromList$ (i.e. Tovolar; Dire Overlord)
@@ -169,9 +160,6 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
                 host.setNamedCard(chosen);
                 if (!randomChoice) {
                     p.setNamedCard(chosen);
-                    if (!draft) { //drafting is secret
-                        p.getGame().getAction().notifyOfValue(sa, host, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
-                    }
                 }
                 if (sa.hasParam("NoteFor")) {
                     p.addNoteForName(sa.getParam("NoteFor"), "Name:" + chosen);

@@ -1,0 +1,10 @@
+Name:Displacer Kitten
+ManaCost:3 U
+Types:Creature Cat Beast
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ DBBlink | TriggerZones$ Battlefield | TriggerDescription$ Avoidance — Whenever you cast a noncreature spell, exile up to one target nonland permanent you control, then return it to the battlefield under its owner's control.
+SVar:DBBlink:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Permanent.nonLand+YouCtrl | TgtPrompt$ Select up to one target nonland permanent you control | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBReturn | RememberChanged$ True | SpellDescription$ Exile up to one target nonland permanent you control, then return it to the battlefield under its owner's control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:BuffedBy:Card.nonCreature
+Oracle:Avoidance — Whenever you cast a noncreature spell, exile up to one target nonland permanent you control, then return it to the battlefield under its owner's control.

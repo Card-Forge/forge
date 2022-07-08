@@ -1,0 +1,87 @@
+[metadata]
+Name=Political Puppets
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+Description=Make allies early by giving gifts that grant life and knowledge! With Zedruu the Greathearted as your commander, your foes will curse you as your friends grow stronger. Explore your inner puppeteer with a game-twisting masterwork of maniacal manipulation.
+Set=CMD
+Image=political_puppets.png
+[commander]
+1 Zedruu the Greathearted+|CMD
+[main]
+1 Crescendo of War|CMD
+1 Flusterstorm|CMD
+1 Death by Dragons|CMD
+1 Champion's Helm|CMD
+1 Chaos Warp|CMD
+1 Nin, the Pain Artist|CMD
+1 Ruhan of the Fomori|CMD
+1 Martyr's Bond|CMD
+1 Vow of Duty|CMD
+1 Vow of Lightning|CMD
+1 Command Tower|CMD
+1 Spell Crumple|CMD
+1 Soul Snare|CMD
+1 Vow of Flight|CMD
+1 Windborn Muse|CMD
+1 Fellwar Stone|CMD
+1 Wall of Denial|CMD
+1 Ghostly Prison|CMD
+1 Armillary Sphere|CMD
+1 Jotun Grunt|CMD
+1 Perilous Research|CMD
+1 Breath of Darigaaz|CMD
+1 Repulse|CMD
+1 Azorius Chancery|CMD
+1 Azorius Guildmage|CMD
+1 Court Hussar|CMD
+1 Skyscribing|CMD
+1 Vision Skeins|CMD
+1 Darksteel Ingot|CMD
+1 Dominus of Fealty|CMD
+1 Izzet Boilerworks|CMD
+1 Izzet Chronarch|CMD
+1 Vedalken Plotter|CMD
+1 Spurnmage Advocate|CMD
+1 Chromeshell Crab|CMD
+1 Arbiter of Knollridge|CMD
+1 Austere Command|CMD
+1 Brion Stoutarm|CMD
+1 Lash Out|CMD
+1 Pollen Lullaby|CMD
+1 Scattering Stroke|CMD
+1 Whirlpool Whelm|CMD
+1 Wild Ricochet|CMD
+1 Howling Mine|CMD
+1 Terramorphic Expanse|CMD
+1 Brainstorm|CMD
+1 Lightning Greaves|CMD
+1 Insurrection|CMD
+1 Oblation|CMD
+1 Trade Secrets|CMD
+1 Numot, the Devastator|CMD
+1 Flametongue Kavu|CMD
+1 Boros Garrison|CMD
+1 Dreamstone Hedron|CMD
+1 Evolving Wilds|CMD
+1 Guard Gomazoa|CMD
+1 Prophetic Prism|CMD
+1 Rapacious One|CMD
+1 Wall of Omens|CMD
+1 Plumeveil|CMD
+1 Prison Term|CMD
+1 Murmurs from Beyond|CMD
+1 Reins of Power|CMD
+1 Propaganda|CMD
+1 False Prophet|CMD
+1 Fog Bank|CMD
+1 Goblin Cadets|CMD
+1 Sol Ring|CMD
+1 Gomazoa|CMD
+1 Journey to Nowhere|CMD
+1 Punishing Fire|CMD
+12 Island|CMD
+8 Mountain|CMD
+8 Plains|CMD

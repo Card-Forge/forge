@@ -1,0 +1,32 @@
+[metadata]
+Name=GAS_3_3_White Aggro Azorius Generated Deck_527_11
+[Main]
+4 Benalish Marshal|GNT
+4 Dauntless Bodyguard|DOM
+4 Gideon Blackblade|WAR
+4 History of Benalia|DOM
+2 Law-Rune Enforcer|WAR
+4 Legion's Landing|XLN
+2 Plains|DOM|1
+2 Plains|DOM|2
+3 Plains|GRN
+1 Plains|M19|1
+2 Plains|M19|3
+2 Plains|RIX
+2 Plains|RNA
+1 Plains|WAR|1
+2 Plains|WAR|2
+1 Plains|WAR|3
+3 Plains|XLN|3
+2 Plains|XLN|4
+4 Skymarcher Aspirant|RIX
+2 Snubhorn Sentry|RIX
+4 Tithe Taker|RNA
+1 Tomik, Distinguished Advokist|WAR
+4 Venerated Loxodon|GRN
+[Sideboard]
+3 Hieromancer's Cage|M19
+3 Hunted Witness|GRN
+1 Ministrant of Obligation|RNA
+4 Rustwing Falcon|M19
+4 Zetalpa, Primal Dawn|RIX

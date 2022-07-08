@@ -1,0 +1,6 @@
+[format]
+Name:Standard (RAV)
+Type:Archived
+Subtype:Standard
+Effective:2005-10-20
+Sets:CHK, BOK, SOK, 9ED, RAV

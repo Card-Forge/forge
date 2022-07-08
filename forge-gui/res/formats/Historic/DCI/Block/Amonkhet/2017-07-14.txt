@@ -1,6 +1,0 @@
-[format]
-Name:Block: Amonkhet (HOU)
-Type:Historic
-Subtype:Block
-Effective:2017-07-14
-Sets:AKH, HOU

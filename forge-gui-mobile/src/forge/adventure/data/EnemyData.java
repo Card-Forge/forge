@@ -14,6 +14,7 @@ public class EnemyData {
     public String deck;
     public boolean copyPlayerDeck = false;
     public String ai;
+    public boolean boss = false;
     public float spawnRate;
     public float difficulty;
     public float speed;
@@ -28,6 +29,7 @@ public class EnemyData {
         sprite         = enemyData.sprite;
         deck           = enemyData.deck;
         ai             = enemyData.ai;
+        boss           = enemyData.boss;
         spawnRate      = enemyData.spawnRate;
         copyPlayerDeck = enemyData.copyPlayerDeck;
         difficulty     = enemyData.difficulty;
@@ -44,7 +46,7 @@ public class EnemyData {
         }
     }
 
-    public Deck generateDeck(boolean isFantasyMode) {
-        return CardUtil.getDeck(deck, true, isFantasyMode, colors, life > 15);
+    public Deck generateDeck(boolean isFantasyMode, boolean useGeneticAI) {
+        return CardUtil.getDeck(deck, true, isFantasyMode, colors, life > 13, life > 16 && useGeneticAI);
     }
 }

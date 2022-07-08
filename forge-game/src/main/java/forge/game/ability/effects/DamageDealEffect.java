@@ -156,7 +156,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         List<GameObject> tgts = getTargets(sa);
         if (sa.hasParam("OptionalDecider")) {
             Player decider = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("OptionalDecider"), sa), null);
-            if (decider != null && !decider.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantDealTargetDamageToTarget", String.valueOf(dmg), tgts.toString()))) {
+            if (decider != null && !decider.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantDealTargetDamageToTarget", String.valueOf(dmg), tgts.toString()), null)) {
                 return;
             }
         }
@@ -299,7 +299,7 @@ public class DamageDealEffect extends DamageBaseEffect {
             } else {
                 damageMap.put(sourceLKI, c, dmg);
                 if (sa.hasParam("ExcessSVar")) {
-                    hostCard.setSVar(sa.getParam("ExcessSVar"), Integer.toString(excess));
+                    sa.setSVar(sa.getParam("ExcessSVar"), Integer.toString(excess));
                 }
             }
         }

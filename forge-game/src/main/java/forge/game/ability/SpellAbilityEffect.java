@@ -300,13 +300,12 @@ public abstract class SpellAbilityEffect {
         delTrig.append("| TriggerDescription$ ").append(desc);
 
         final Trigger trig = TriggerHandler.parseTrigger(delTrig.toString(), CardUtil.getLKICopy(sa.getHostCard()), intrinsic);
+        long ts = sa.getHostCard().getGame().getNextTimestamp();
         for (final Card c : crds) {
             trig.addRemembered(c);
 
             // Svar for AI
-            if (!c.hasSVar("EndOfTurnLeavePlay")) {
-                c.setSVar("EndOfTurnLeavePlay", "AtEOT");
-            }
+            c.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "AtEOT"), ts, 0);
         }
         String trigSA = "";
         if (location.equals("Hand")) {
@@ -346,9 +345,7 @@ public abstract class SpellAbilityEffect {
         card.addTrigger(trig);
 
         // Svar for AI
-        if (!card.hasSVar("EndOfTurnLeavePlay")) {
-            card.setSVar("EndOfTurnLeavePlay", "AtEOT");
-        }
+        card.addChangedSVars(Collections.singletonMap("EndOfTurnLeavePlay", "AtEOT"), card.getGame().getNextTimestamp(), 0);
     }
 
     protected static SpellAbility getForgetSpellAbility(final Card card) {

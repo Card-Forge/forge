@@ -52,7 +52,6 @@ import forge.game.GameLogEntryType;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
-import forge.game.ability.ApiType;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
@@ -651,14 +650,13 @@ public class CardFactoryUtil {
             final boolean intrinsic, final String valid, final String zone) {
         Card host = card.getCard();
         String desc = repAb.getDescription();
-        setupETBReplacementAbility(repAb);
         if (!intrinsic) {
             repAb.setIntrinsic(false);
         }
 
         StringBuilder repEffsb = new StringBuilder();
         repEffsb.append("Event$ Moved | ValidCard$ ").append(valid);
-        repEffsb.append(" | Destination$ Battlefield | Description$ ").append(desc);
+        repEffsb.append(" | Destination$ Battlefield | ReplacementResult$ Updated | Description$ ").append(desc);
         if (optional) {
             repEffsb.append(" | Optional$ True");
         }
@@ -751,13 +749,12 @@ public class CardFactoryUtil {
         }
 
         SpellAbility sa = AbilityFactory.getAbility(abStr, card);
-        setupETBReplacementAbility(sa);
         if (!intrinsic) {
             sa.setIntrinsic(false);
         }
 
         String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
-                + "| Secondary$ True | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
+                + "| Secondary$ True | ReplacementResult$ Updated | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
 
         ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card.getCard(), intrinsic, card);
 
@@ -866,7 +863,7 @@ public class CardFactoryUtil {
             inst.addTrigger(bushidoTrigger1);
             inst.addTrigger(bushidoTrigger2);
         } else if (keyword.equals("Cascade")) {
-            final StringBuilder trigScript = new StringBuilder("Mode$ SpellCast | ValidCard$ Card.Self" +
+            final StringBuilder trigScript = new StringBuilder("Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack" +
                     " | Secondary$ True | TriggerDescription$ Cascade - CARDNAME");
 
             final String abString = "DB$ DigUntil | Defined$ You | Amount$ 1 | Valid$ Card.nonLand+cmcLTCascadeX" +
@@ -959,7 +956,7 @@ public class CardFactoryUtil {
             inst.addTrigger(parsedTrigger);
             inst.addTrigger(parsedTrigReturn);
         } else if (keyword.startsWith("Casualty")) {
-            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ Casualty | Secondary$ True";
+            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ Casualty | TriggerZones$ Stack | Secondary$ True";
             String abString = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 1 | MayChooseTarget$ True";
             String[] k = keyword.split(":");
             if (k.length > 2) {
@@ -972,7 +969,7 @@ public class CardFactoryUtil {
 
             inst.addTrigger(casualtyTrigger);
         } else if (keyword.equals("Conspire")) {
-            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid";
+            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | CheckSVar$ Conspire | TriggerZones$ Stack | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid";
             final String abString = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 1 | MayChooseTarget$ True";
 
             final Trigger conspireTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
@@ -1037,7 +1034,7 @@ public class CardFactoryUtil {
             parsedTrigger.setOverridingAbility(delayTrigSA);
             inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Demonstrate")) {
-            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerDescription$ Demonstrate (" + inst.getReminderText() + ")";
+            final String trigScript = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | TriggerDescription$ Demonstrate (" + inst.getReminderText() + ")";
             final String youCopyStr = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | Optional$ True | RememberCopies$ True | IgnoreFreeze$ True";
             final String chooseOppStr = "DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ConditionDefined$ Remembered | ConditionPresent$ Spell";
             final String oppCopyStr = "DB$ CopySpellAbility | Controller$ ChosenPlayer | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | ConditionDefined$ Remembered | ConditionPresent$ Spell";
@@ -1226,7 +1223,7 @@ public class CardFactoryUtil {
 
             inst.addTrigger(trigger);
         } else if (keyword.startsWith("Gravestorm")) {
-            String trigStr = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerDescription$ Gravestorm (" + inst.getReminderText() + ")";
+            String trigStr = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | TriggerDescription$ Gravestorm (" + inst.getReminderText() + ")";
             String copyStr = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ GravestormCount | MayChooseTarget$ True";
 
             SpellAbility copySa = AbilityFactory.getAbility(copyStr, card);
@@ -1683,7 +1680,7 @@ public class CardFactoryUtil {
 
             final String abString = "DB$ PeekAndReveal | PeekAmount$ " + num + " | RememberRevealed$ True";
 
-            final String dbCast = "DB$ Play | Valid$ Card.IsRemembered+sameName | " +
+            final String dbCast = "DB$ Play | Valid$ Card.IsRemembered+sameName | ValidSA$ Spell | " +
                     "ValidZone$ Library | WithoutManaCost$ True | Optional$ True | " +
                     "Amount$ All";
 
@@ -1784,7 +1781,7 @@ public class CardFactoryUtil {
 
             inst.addTrigger(parsedTrigger);
         } else if (keyword.equals("Storm")) {
-            final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | Secondary$ True"
+            final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | Secondary$ True"
                     + "| TriggerDescription$ Storm (" + inst.getReminderText() + ")";
 
             String effect = "DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ StormCount | MayChooseTarget$ True";
@@ -1896,7 +1893,7 @@ public class CardFactoryUtil {
             String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | " +
                     "TriggerDescription$ " + sb.toString();
 
-            String effect = "DB$ Sacrifice | SacValid$ Self | UnlessPayer$ You | UnlessCost$ " + k[1];
+            String effect = "DB$ SacrificeAll | Defined$ Self | Controller$ You | UnlessPayer$ You | UnlessCost$ " + k[1];
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
@@ -2055,7 +2052,7 @@ public class CardFactoryUtil {
 
             // Setup ETB replacement effects
             final String actualRep = "Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self |"
-                    + " | Description$ Amplify " + amplifyMagnitude + " ("
+                    + " | ReplacementResult$ Updated | Description$ Amplify " + amplifyMagnitude + " ("
                     + inst.getReminderText() + ")";
 
             final String abString = "DB$ Reveal | AnyNumber$ True | RevealValid$ "
@@ -2075,7 +2072,6 @@ public class CardFactoryUtil {
             AbilitySub saCleanup = (AbilitySub) AbilityFactory.getAbility(dbClean, card);
 
             saPut.setSubAbility(saCleanup);
-            setupETBReplacementAbility(saCleanup);
 
             saReveal.setSubAbility(saPut);
 
@@ -2168,13 +2164,12 @@ public class CardFactoryUtil {
 
             inst.addReplacement(re);
         } else if (keyword.equals("Daybound")) {
-            final String actualRep = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Night | Secondary$ True | Layer$ Transform | Description$ If it is night, this permanent enters the battlefield transformed.";
+            final String actualRep = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Night | Secondary$ True | Layer$ Transform | ReplacementResult$ Updated | Description$ If it is night, this permanent enters the battlefield transformed.";
             final String abTransform = "DB$ SetState | Defined$ ReplacedCard | Mode$ Transform | ETB$ True | Daybound$ True";
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(actualRep, host, intrinsic, card);
 
             SpellAbility saTransform = AbilityFactory.getAbility(abTransform, card);
-            setupETBReplacementAbility(saTransform);
             re.setOverridingAbility(saTransform);
 
             inst.addReplacement(re);
@@ -2206,11 +2201,10 @@ public class CardFactoryUtil {
             AbilitySub cleanupSA = (AbilitySub) AbilityFactory.getAbility(cleanupStr, card);
             counterSA.setSubAbility(cleanupSA);
 
-            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Secondary$ True | Description$ Devour " + magnitude + " ("+ inst.getReminderText() + ")";
+            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Secondary$ True | ReplacementResult$ Updated | Description$ Devour " + magnitude + " ("+ inst.getReminderText() + ")";
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
 
-            setupETBReplacementAbility(cleanupSA);
             re.setOverridingAbility(sacrificeSA);
 
             inst.addReplacement(re);
@@ -2329,12 +2323,11 @@ public class CardFactoryUtil {
             + " | Origin$ Stack | Destination$ Graveyard | Fizzle$ False "
             + " | Description$ Rebound (" + inst.getReminderText() + ")";
 
-            String abExile = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile";
+            String abExile = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile | RememberChanged$ True";
             String delTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You " +
-            " | OptionalDecider$ You | RememberObjects$ ReplacedCard | TriggerDescription$"
+            " | OptionalDecider$ You | RememberObjects$ Remembered | TriggerDescription$"
             + " At the beginning of your next upkeep, you may cast " + card.toString() + " without paying its mana cost.";
-            // TODO add check for still in exile
-            String abPlay = "DB$ Play | Defined$ DelayTriggerRemembered | WithoutManaCost$ True | Optional$ True";
+            String abPlay = "DB$ Play | Defined$ DelayTriggerRememberedLKI | WithoutManaCost$ True | Optional$ True";
 
             SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
 
@@ -2686,7 +2679,11 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final Cost blitzCost = new Cost(k[1], false);
 
-            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(blitzCost);
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithManaCostReplaced(host.getController(), blitzCost);
+
+            if (k.length > 2) {
+                newSA.getMapParams().put("ValidAfterStack", k[2]);
+            }
 
             final StringBuilder desc = new StringBuilder();
             desc.append("Blitz ").append(blitzCost.toSimpleString()).append(" (");
@@ -2797,7 +2794,18 @@ public class CardFactoryUtil {
             abilityStr.append(equipCost);
             abilityStr.append("| ValidTgts$ ").append(valid);
             abilityStr.append(" | TgtPrompt$ Select target ").append(vstr).append(" you control ");
-            abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Equipment.Self+nonCreature ");
+            if (card.hasKeyword(Keyword.RECONFIGURE)) {
+                /*
+                * 301.5c An Equipment that’s also a creature can’t equip a creature unless that Equipment has reconfigure (see rule 702.151, “Reconfigure”).
+                * An Equipment that loses the subtype “Equipment” can’t equip a creature. An Equipment can’t equip itself. An Equipment that equips an illegal
+                * or nonexistent permanent becomes unattached from that permanent but remains on the battlefield. (This is a state-based action. See rule 704.)
+                * An Equipment can’t equip more than one creature. If a spell or ability would cause an Equipment to equip more than one creature,
+                * the Equipment’s controller chooses which creature it equips.
+                */
+                abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Equipment.Self ");
+            } else {
+                abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Equipment.Self+nonCreature ");
+            }
             // add AttachAi for some special cards
             if (card.hasSVar("AttachAi")) {
                 abilityStr.append("| ").append(card.getSVar("AttachAi"));
@@ -3440,9 +3448,21 @@ public class CardFactoryUtil {
             st.setSVar("AffinityX", "Count$Valid " + t + ".YouCtrl");
             inst.addStaticAbility(st);
         } else if (keyword.startsWith("Blitz")) {
-            String effect = "Mode$ Continuous | Affected$ Card.Self+blitzed | AddKeyword$ Haste | AddTrigger$ Dies";
-            String trig = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | " +
-                    "Execute$ TrigDraw | TriggerDescription$ When this creature dies, draw a card.";
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+            final Cost cost = new Cost(manacost, false);
+
+            StringBuilder sb = new StringBuilder("Blitz");
+            if (!cost.isOnlyManaCost()) {
+                sb.append("—");
+            } else {
+                sb.append(" ");
+            }
+            sb.append(cost.toSimpleString());
+            String effect = "Mode$ Continuous | Affected$ Card.Self+blitzed+castKeyword | AddKeyword$ Haste | AddTrigger$ Dies"
+                    + " | Secondary$ True | Description$ " + sb.toString() + " (" + inst.getReminderText() + ")";
+            String trig = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self" +
+                    " | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ When this creature dies, draw a card.";
             String ab = "DB$ Draw | NumCards$ 1";
 
             StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
@@ -3516,7 +3536,7 @@ public class CardFactoryUtil {
 
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Dash")) {
-            String effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
+            String effect = "Mode$ Continuous | Affected$ Card.Self+dashed+castKeyword | AddKeyword$ Haste";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Daybound")) {
             String effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Daybound | Secondary$ True | Description$ This permanent can't be transformed except by its daybound ability.";
@@ -3691,14 +3711,6 @@ public class CardFactoryUtil {
         }
 
         return altCostSA;
-    }
-
-    private static final Map<String,String> emptyMap = Maps.newTreeMap();
-    public static SpellAbility setupETBReplacementAbility(SpellAbility sa) {
-        AbilitySub as = new AbilitySub(ApiType.InternalEtbReplacement, sa.getHostCard(), null, emptyMap);
-        sa.appendSubAbility(as);
-        return as;
-        // ETBReplacementMove(sa.getHostCard(), null));
     }
 
     public static void setupAdventureAbility(Card card) {

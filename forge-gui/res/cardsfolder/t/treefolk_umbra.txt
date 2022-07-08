@@ -3,6 +3,7 @@ ManaCost:2 G
 Types:Enchantment Aura
 K:Enchant creature
 K:Totem armor
-A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME assigns combat damage equal to its toughness rather than its power | Description$ Enchanted creature gets +0/+2 and assigns combat damage equal to its toughness rather than its power.
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Description$ Enchanted creature gets +0/+2 and assigns combat damage equal to its toughness rather than its power.
+S:Mode$ CombatDamageToughness | ValidCard$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted creature gets +0/+2 and assigns combat damage equal to its toughness rather than its power.
 Oracle:Enchant creature\nEnchanted creature gets +0/+2 and assigns combat damage equal to its toughness rather than its power.\nTotem armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)

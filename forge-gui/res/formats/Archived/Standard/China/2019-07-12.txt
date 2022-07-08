@@ -1,0 +1,7 @@
+[format]
+Name:China Standard (M20)
+Type:Archived
+Subtype:Standard
+Effective:2019-07-12
+Sets:XLN, RIX, DOM, GS1, M19, GRN, G18, RNA, WAR, M20
+Banned:Rampaging Ferocidon

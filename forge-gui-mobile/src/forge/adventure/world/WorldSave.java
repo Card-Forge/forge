@@ -122,7 +122,7 @@ public class WorldSave   {
     public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, int startingColorIdentity, DifficultyData diff, boolean isFantasy, long seed) {
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
-        Deck starterDeck = isFantasy ? DeckgenUtil.getRandomOrPreconOrThemeDeck("", false, false) : Config.instance().starterDecks()[startingColorIdentity];
+        Deck starterDeck = isFantasy ? DeckgenUtil.getRandomOrPreconOrThemeDeck("", false, false, false) : Config.instance().starterDecks()[startingColorIdentity];
         currentSave.player.create(name, startingColorIdentity, starterDeck, male, race, avatarIndex, isFantasy, diff);
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
         currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));
@@ -166,6 +166,9 @@ public class WorldSave   {
             e.printStackTrace();
             return false;
         }
+
+        Config.instance().getSettingData().lastActiveSave = WorldSave.filename(currentSlot);
+        Config.instance().saveSettings();
         return true;
     }
 

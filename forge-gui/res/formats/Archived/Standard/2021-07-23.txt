@@ -1,0 +1,7 @@
+[format]
+Name:Standard (AFR)
+Type:Archived
+Subtype:Standard
+Effective:2021-07-23
+Sets:ELD, THB, IKO, M21, ZNR, KHM, STX, AFR
+Banned:Cauldron Familiar; Escape to the Wilds; Fires of Invention; Lucky Clover; Oko, Thief of Crowns; Omnath, Locus of Creation; Once Upon a Time; Uro, Titan of Nature's Wrath

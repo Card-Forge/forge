@@ -1,0 +1,10 @@
+Name:Cadira, Caller of the Small
+ManaCost:1 G W
+Types:Legendary Creature Orc Ranger
+PT:3/3
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, for each token you control, create a 1/1 white Rabbit creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_rabbit | TokenOwner$ You | TokenAmount$ X
+SVar:X:Count$Valid Permanent.token+YouCtrl
+DeckHas:Ability$Token & Type$Rabbit
+Oracle:Trample\nWhenever Cadira, Caller of the Small deals combat damage to a player, for each token you control, create a 1/1 white Rabbit creature token.

@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Flash
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
-R:Event$ Moved | ValidLKI$ Creature.DamagedByEnchanted | Destination$ Graveyard | ActiveZones$ Battlefield | ReplaceWith$ DBExile | Description$ If a creature dealt damage by enchanted creature this turn would die, exile it instead.
+R:Event$ Moved | ValidLKI$ Creature.DamagedBy Enchanted | Destination$ Graveyard | ActiveZones$ Battlefield | ReplaceWith$ DBExile | Description$ If a creature dealt damage by enchanted creature this turn would die, exile it instead.
 SVar:DBExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
 AI:RemoveDeck:Random
 SVar:NonStackingAttachEffect:True

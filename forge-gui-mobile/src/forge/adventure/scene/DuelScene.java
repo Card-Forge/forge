@@ -35,6 +35,7 @@ import forge.sound.SoundSystem;
 import forge.toolbox.FOptionPane;
 import forge.trackable.TrackableCollection;
 import forge.util.Aggregates;
+import forge.util.Callback;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -44,7 +45,6 @@ import java.util.*;
  * Forge screen scene that contains the duel screen
  */
 public class DuelScene extends ForgeScene {
-
     //GameLobby lobby;
     HostedMatch hostedMatch;
     EnemySprite enemy;
@@ -53,28 +53,66 @@ public class DuelScene extends ForgeScene {
     private EffectData dungeonEffect;
     Deck playerDeck, enemyDeck;
     boolean chaosBattle = false;
+    boolean callbackExit = false;
     List<IPaperCard> playerExtras = new ArrayList<>();
     List<IPaperCard> AIExtras = new ArrayList<>();
 
 
-    public DuelScene() {
-
-    }
+    public DuelScene() {}
 
     @Override
-    public void dispose() {
-    }
+    public void dispose() {}
 
+    public boolean hasCallbackExit() {
+        return callbackExit;
+    }
 
     public void GameEnd() {
         boolean winner=humanPlayer == hostedMatch.getGame().getMatch().getWinner();
         String enemyName=(enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride);
         Current.player().clearBlessing();
+        if (chaosBattle && !winner) {
+            callbackExit = true;
+            List<String> insult = Lists.newArrayList("I'm sorry...","... ...." ,"Learn from your defeat.",
+                    "I haven't begun to use my full power.","No matter how much you try, you still won't beat me.",
+                    "Your technique need work.","Rookie.","That's your best?","Hah ha ha ha ha ha ha!","?!......... (Seriously?!)",
+                    "Forget about a rematch. Practice more instead." ,"That was a 100% effort on my part! Well, actually, no... That was more like 50%.",
+                    "If you expected me to lose out of generosity, I'm truly sorry!" ,"You'll appreciate that I held back during the match!",
+                    "That's the best you can do?","Don't waste my time with your skills!","Ha-ha-ha! What's the matter?",
+                    "I hope I didn't hurt your ego too badly... Oops!","This match... I think I've learned something from this.",
+                    "Hey! Don't worry about it!","You are not worthy!","Hm! You should go back to playing puzzle games!",
+                    "Thought you could beat me?  Whew, talk about conceited.","*Yawn* ... Huh? It's over already? But I just woke up!",
+                    "Next time bring an army. It might give you a chance." ,"The reason you lost is quite simple...",
+                    "Is that all you can do?","You need to learn more to stand a chance.","You weren't that bad.","You made an effort at least.",
+                    "From today, you can call me teacher.", "Hmph, predictable!", "I haven't used a fraction of my REAL power!" );
+            String message = Aggregates.random(insult);
+            FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, enemyName, new FBufferedImage(120, 120) {
+                @Override
+                protected void draw(Graphics g, float w, float h) {
+                    if (FSkin.getAvatars().get(90000) != null)
+                        g.drawImage(FSkin.getAvatars().get(90000), 0, 0, w, h);
+                }
+            }, new Callback<Integer>() {
+                @Override
+                public void run(Integer result) {
+                    if (result == 0) {
+                        afterGameEnd(enemyName, winner);
+                    }
+                }
+            }));
+        } else {
+            afterGameEnd(enemyName, winner);
+        }
+    }
+    void afterGameEnd(String enemyName, boolean winner) {
         Gdx.app.postRunnable(new Runnable() {
             @Override
             public void run() {
                 SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
                 dungeonEffect = null;
+                callbackExit = false;
+                Forge.clearTransitionScreen();
+                Forge.clearCurrentScreen();
                 Scene last = Forge.switchToLast();
 
                 if (last instanceof HudScene) {
@@ -83,12 +121,10 @@ public class DuelScene extends ForgeScene {
                 }
             }
         });
-
-
     }
     void addEffects(RegisteredPlayer player,Array<EffectData> effects) {
         if( effects == null ) return;
-        //Apply various effects.
+        //Apply various combat effects.
         int lifeMod=0;
         int changeStartCards=0;
         Array<IPaperCard> startCards=new Array<>();
@@ -140,8 +176,12 @@ public class DuelScene extends ForgeScene {
         //Collect and add items effects first.
         for(String playerItem:advPlayer.getEquippedItems()) {
             ItemData item=ItemData.getItem(playerItem);
-            playerEffects.add(item.effect);
-            if(item.effect.opponent != null) oppEffects.add(item.effect.opponent);
+            if(item != null) {
+                playerEffects.add(item.effect);
+                if (item.effect.opponent != null) oppEffects.add(item.effect.opponent);
+            } else {
+                System.err.printf("Item %s not found.", playerItem);
+            }
         }
         if(enemy.getData().equipment!=null) {
             for(String oppItem:enemy.getData().equipment) {
@@ -213,10 +253,11 @@ public class DuelScene extends ForgeScene {
                     "It's all or nothing!","It's all on the line!","You can't back down now!","Do you have what it takes?","What will happen next?",
                     "Don't blink!","You can't lose here!","There's no turning back!","It's all or nothing now!");
             String message = Aggregates.random(list);
-            FThreads.delayInEDT(1000, () -> FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, aiPlayer.getPlayer().getName(), new FBufferedImage(120, 120) {
+            FThreads.delayInEDT(600, () -> FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, aiPlayer.getPlayer().getName(), new FBufferedImage(120, 120) {
                 @Override
                 protected void draw(Graphics g, float w, float h) {
-                    g.drawImage(FSkin.getAvatars().get(90000), 0, 0, w, h);
+                    if (FSkin.getAvatars().get(90000) != null)
+                        g.drawImage(FSkin.getAvatars().get(90000), 0, 0, w, h);
                 }
             })));
         }
@@ -264,7 +305,7 @@ public class DuelScene extends ForgeScene {
         } else {
             this.AIExtras.clear();
             this.playerExtras.clear();
-            this.enemyDeck = this.enemy.getData().copyPlayerDeck ? this.playerDeck : this.enemy.getData().generateDeck(Current.player().isFantasyMode());
+            this.enemyDeck = this.enemy.getData().copyPlayerDeck ? this.playerDeck : this.enemy.getData().generateDeck(Current.player().isFantasyMode(), Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
         }
     }
     public Deck getPlayerDeck() {

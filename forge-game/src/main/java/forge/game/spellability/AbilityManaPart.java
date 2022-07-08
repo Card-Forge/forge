@@ -42,6 +42,8 @@ import forge.game.replacement.ReplacementType;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
+import forge.game.zone.ZoneType;
+import forge.game.zone.Zone;
 import forge.util.TextUtil;
 
 /**
@@ -87,11 +89,11 @@ public class AbilityManaPart implements java.io.Serializable {
     public AbilityManaPart(final Card sourceCard, final Map<String, String> params) {
         this.sourceCard = sourceCard;
 
-        origProduced = params.containsKey("Produced") ? params.get("Produced") : "1";
-        this.manaRestrictions = params.containsKey("RestrictValid") ? params.get("RestrictValid") : "";
+        origProduced = params.getOrDefault("Produced", "1");
+        this.manaRestrictions = params.getOrDefault("RestrictValid", "");
         this.cannotCounterSpell = params.get("AddsNoCounter");
         this.addsKeywords = params.get("AddsKeywords");
-        this.addsKeywordsType = params.get("AddsKeywordsType");
+        this.addsKeywordsType = params.get("AddsKeywordsValid");
         this.addsKeywordsUntil = params.get("AddsKeywordsUntil");
         this.addsCounters = params.get("AddsCounters");
         this.triggersWhenSpent = params.get("TriggersWhenSpent");
@@ -126,20 +128,22 @@ public class AbilityManaPart implements java.io.Serializable {
 
         SpellAbility root = sa == null ? null : sa.getRootAbility();
 
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(source);
-        repParams.put(AbilityKey.Mana, afterReplace);
-        repParams.put(AbilityKey.Player, player);
-        repParams.put(AbilityKey.AbilityMana, root);
-        repParams.put(AbilityKey.Activator, root == null ? null : root.getActivatingPlayer());
+        if (root != null && root.isManaAbility()) {
+            final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(source);
+            repParams.put(AbilityKey.Mana, afterReplace);
+            repParams.put(AbilityKey.Player, player);
+            repParams.put(AbilityKey.AbilityMana, root);
+            repParams.put(AbilityKey.Activator, root.getActivatingPlayer());
 
-        switch (player.getGame().getReplacementHandler().run(ReplacementType.ProduceMana, repParams)) {
-        case NotReplaced:
-            break;
-        case Updated:
-            afterReplace = (String) repParams.get(AbilityKey.Mana);
-            break;
-        default:
-            return;
+            switch (player.getGame().getReplacementHandler().run(ReplacementType.ProduceMana, repParams)) {
+            case NotReplaced:
+                break;
+            case Updated:
+                afterReplace = (String) repParams.get(AbilityKey.Mana);
+                break;
+            default:
+                return;
+            }
         }
 
         //clear lastProduced
@@ -172,7 +176,7 @@ public class AbilityManaPart implements java.io.Serializable {
         runParams.put(AbilityKey.Activator, root == null ? null : root.getActivatingPlayer());
 
         player.getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
-        if (source.isLand() && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()) {
+        if (source.isLand() && root.isManaAbility() && root.getPayCosts() != null && root.getPayCosts().hasTapCost()) {
             player.setTappedLandForManaThisTurn(true);
         }
     } // end produceMana(String)
@@ -337,8 +341,24 @@ public class AbilityManaPart implements java.io.Serializable {
                 continue;
             }
 
+            //handled in meetsManaShardRestrictions
             if (restriction.equals("CantPayGenericCosts")) {
                 return true;
+            }
+
+            // "can't" zone restriction – shouldn't be mixed with other restrictions
+            if (restriction.startsWith("CantCastSpellFrom")) {
+                if (!sa.isSpell()) { //
+                    return true;
+                }
+                final ZoneType badZone = ZoneType.smartValueOf(restriction.substring(17));
+                final Card host = sa.getHostCard();
+                final Zone castFrom = host.getCastFrom();
+                //ComputerUtilMana looks at this to see if AI can cast things, so need a fallback zone
+                final ZoneType zone = castFrom == null ? host.getZone().getZoneType() : castFrom.getZoneType();
+                if (!badZone.equals(zone)) {
+                    return true;
+                }
             }
 
             // the payment is for a resolving SA, currently no other restrictions would allow that

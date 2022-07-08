@@ -20,7 +20,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         final StringBuilder sb = new StringBuilder();
 
         final CounterType cType = CounterType.getType(sa.getParam("CounterType"));
-        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("CounterNum"), sa);
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParamOrDefault("CounterNum", "1"), sa);
         final String zone = sa.getParamOrDefault("ValidZone", "Battlefield");
 
         sb.append("Put ");
@@ -45,7 +45,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final CounterType type = CounterType.getType(sa.getParam("CounterType"));
-        final int counterAmount = AbilityUtils.calculateAmount(host, sa.getParam("CounterNum"), sa);
+        final int counterAmount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("CounterNum", "1"), sa);
         final String valid = sa.getParam("ValidCards");
         final ZoneType zone = sa.hasParam("ValidZone") ? ZoneType.smartValueOf(sa.getParam("ValidZone")) : ZoneType.Battlefield;
         final Game game = activator.getGame();

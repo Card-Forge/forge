@@ -23,8 +23,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.ScreenUtils;
 import forge.Forge;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
@@ -42,7 +42,8 @@ import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
-import java.util.*;
+
+import java.util.Map;
 
 import static forge.adventure.util.Paths.MANA_ATLAS;
 
@@ -54,7 +55,7 @@ public class MapStage extends GameStage {
     Array<MapActor> actors = new Array<>();
 
     TiledMap map;
-    ArrayList<Rectangle>[][] collision;
+    Array<Rectangle>[][] collision;
     private float tileHeight;
     private float tileWidth;
     private float width;
@@ -68,12 +69,11 @@ public class MapStage extends GameStage {
     private final Vector2 oldPosition3 = new Vector2();
     private final Vector2 oldPosition4 = new Vector2();
     private boolean isLoadingMatch = false;
-    private Map<String, Byte> mapFlags = new HashMap<>(); //Stores local map flags. These aren't available outside this map.
+    private ObjectMap<String, Byte> mapFlags = new ObjectMap<>(); //Stores local map flags. These aren't available outside this map.
 
     private Dialog dialog;
     private Stage dialogStage;
     private boolean dialogOnlyInput;
-
 
     //Map properties.
     //These maps are defined as embedded properties within the Tiled maps.
@@ -144,7 +144,7 @@ public class MapStage extends GameStage {
         return false;
     }
 
-    final ArrayList<Rectangle> currentCollidingRectangles = new ArrayList<>();
+    final Array<Rectangle> currentCollidingRectangles = new Array<>();
 
     @Override
     public void prepareCollision(Vector2 pos, Vector2 direction, Rectangle boundingRect) {
@@ -327,7 +327,7 @@ public class MapStage extends GameStage {
         tileHeight = Float.parseFloat(map.getProperties().get("tileheight").toString());
         tileWidth = Float.parseFloat(map.getProperties().get("tilewidth").toString());
         setBounds(width * tileWidth, height * tileHeight);
-        collision = new ArrayList[(int) width][(int) height];
+        collision = new Array[(int) width][(int) height];
 
         //Load dungeon effects.
         MapProperties MP = map.getProperties();
@@ -362,8 +362,8 @@ public class MapStage extends GameStage {
         for (int x = 0; x < layer.getWidth(); x++) {
             for (int y = 0; y < layer.getHeight(); y++) {
                 if (collision[x][y] == null)
-                    collision[x][y] = new ArrayList<>();
-                ArrayList<Rectangle> map = collision[x][y];
+                    collision[x][y] = new Array<>();
+                Array<Rectangle> map = collision[x][y];
                 TiledMapTileLayer.Cell cell = layer.getCell(x, y);
                 if (cell == null)
                     continue;
@@ -470,6 +470,12 @@ public class MapStage extends GameStage {
                             }
                         }));
                         break;
+                    case "spellsmith":
+                        addMapActor(obj, new OnCollide(new Runnable() {
+                            @Override
+                            public void run() { Forge.switchScene(SceneType.SpellSmithScene.instance); }
+                        }));
+                        break;
                     case "exit":
                         addMapActor(obj, new OnCollide(new Runnable() {
                             @Override
@@ -488,14 +494,14 @@ public class MapStage extends GameStage {
                     case "shop":
                         String shopList = prop.get("shopList").toString();
                         shopList=shopList.replaceAll("\\s","");
-                        List<String> possibleShops = Arrays.asList(shopList.split(","));
+                        Array<String> possibleShops = new Array<>(shopList.split(","));
                         Array<ShopData> shops;
-                        if (possibleShops.size() == 0 || shopList.equals(""))
+                        if (possibleShops.size == 0 || shopList.equals(""))
                             shops = WorldData.getShopList();
                         else {
                             shops = new Array<>();
                             for (ShopData data : new Array.ArrayIterator<>(WorldData.getShopList())) {
-                                if (possibleShops.contains(data.name)) {
+                                if (possibleShops.contains(data.name, false)) {
                                     shops.add(data);
                                 }
                             }
@@ -611,7 +617,7 @@ public class MapStage extends GameStage {
         currentMob = null;
     }
     public void removeAllEnemies() {
-        List<Integer> idsToRemove=new ArrayList<>();
+        Array<Integer> idsToRemove=new Array<>();
         for (MapActor actor : new Array.ArrayIterator<>(actors)) {
             if (actor instanceof EnemySprite) {
                 idsToRemove.add(actor.getObjectId());
@@ -662,22 +668,25 @@ public class MapStage extends GameStage {
         currentMob = mob;
         player.setAnimation(CharacterSprite.AnimationTypes.Attack);
         mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
+        SoundSystem.instance.play(SoundEffectType.Block, false);
         Gdx.input.vibrate(50);
-        Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
-        SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
-        DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
-        FThreads.invokeInEdtNowOrLater(() -> {
-            if (!isLoadingMatch) {
-                isLoadingMatch = true;
-                Forge.setTransitionScreen(new TransitionScreen(() -> {
-                    duelScene.initDuels(player, mob);
-                    Forge.clearTransitionScreen();
-                    startPause(0.3f, () -> {
-                        if(isInMap && effect != null) duelScene.setDungeonEffect(effect);
-                        Forge.switchScene(SceneType.DuelScene.instance);
-                    });
-                }, ScreenUtils.getFrameBufferTexture(), true, false));
-            }
+        startPause(0.8f, () -> {
+            Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
+            SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
+            DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
+            FThreads.invokeInEdtNowOrLater(() -> {
+                if (!isLoadingMatch) {
+                    isLoadingMatch = true;
+                    Forge.setTransitionScreen(new TransitionScreen(() -> {
+                        duelScene.initDuels(player, mob);
+                        Forge.clearTransitionScreen();
+                        startPause(0.3f, () -> {
+                            if(isInMap && effect != null) duelScene.setDungeonEffect(effect);
+                            Forge.switchScene(SceneType.DuelScene.instance);
+                        });
+                    }, Forge.takeScreenshot(), true, false));
+                }
+            });
         });
     }
 

@@ -20,6 +20,7 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardState;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -34,6 +35,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     /** The host card. */
     protected Card hostCard;
     protected CardState cardState = null;
+    protected KeywordInterface keyword = null;
 
     /** The map params. */
     protected Map<String, String> originalMapParams = Maps.newHashMap(),
@@ -55,15 +57,13 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     /** Keys of descriptive (text) parameters. */
     private static final ImmutableList<String> descriptiveKeys = ImmutableList.<String>builder()
             .add("Description", "SpellDescription", "StackDescription", "TriggerDescription").build();
-    /** Keys to be followed as SVar names when changing text. */
-    private static final ImmutableList<String> mutableKeys = ImmutableList.<String>builder()
-            .add("AddAbility").build();
 
     /**
      * Keys that should not changed
      */
     private static final ImmutableList<String> noChangeKeys = ImmutableList.<String>builder()
-            .add("TokenScript", "LegacyImage", "TokenImage", "NewName", "ChooseFromList").build();
+            .add("TokenScript", "LegacyImage", "TokenImage", "NewName", "ChooseFromList")
+            .add("AddAbility").build();
 
     /**
      * <p>
@@ -140,6 +140,14 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         this.hostCard = c;
     }
 
+    public KeywordInterface getKeyword() {
+        return this.keyword;
+    }
+    
+    public void setKeyword(final KeywordInterface kw) {
+        this.keyword = kw;
+    }
+    
     /**
      * <p>
      * isSecondary.
@@ -259,6 +267,18 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         }
         if (params.containsKey("Revolt")) {
             if ("True".equalsIgnoreCase(params.get("Revolt")) != hostController.hasRevolt()) return false;
+            else if ("None".equalsIgnoreCase(params.get("Revolt"))) {
+                boolean none = true;
+                for (Player p : game.getRegisteredPlayers()) {
+                    if (p.hasRevolt()) {
+                        none = false;
+                        break;
+                    }
+                }
+                if (!none) {
+                    return false;
+                }
+            }
         }
         if (params.containsKey("Desert")) {
             if ("True".equalsIgnoreCase(params.get("Desert")) != hostController.hasDesert()) return false;
@@ -422,6 +442,16 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
+            if (hasParam("CheckSecondSVar")) {
+                final int sVar2 = AbilityUtils.calculateAmount(this.hostCard, getParam("CheckSecondSVar"), this);
+                final String comparator2 = getParamOrDefault("SecondSVarCompare", "GE1");
+                final String svarOperator2 = comparator2.substring(0, 2);
+                final String svarOperand2 = comparator2.substring(2);
+                final int operandValue2 = AbilityUtils.calculateAmount(this.hostCard, svarOperand2, this);
+                if (!Expressions.compare(sVar2, svarOperator2, operandValue2)) {
+                    return false;
+                }
+            }
         }
 
         if (params.containsKey("ManaSpent")) {
@@ -489,11 +519,6 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
             } else if (descriptiveKeys.contains(key)) {
                 // change descriptions differently
                 newValue = AbilityUtils.applyDescriptionTextChangeEffects(value, this);
-            } else if (mutableKeys.contains(key)) {
-                // follow SVar and change it
-                final String originalSVarValue = hostCard.getSVar(value);
-                hostCard.changeSVar(value, AbilityUtils.applyAbilityTextChangeEffects(originalSVarValue, this));
-                newValue = null;
             } else if (this.getHostCard().hasSVar(value)) {
                 // don't change literal SVar names!
                 newValue = null;
@@ -652,6 +677,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         copy.setCardState(cardState);
         // dont use setHostCard to not trigger the not copied parts yet
         copy.hostCard = host;
+        copy.keyword = this.keyword;
     }
 
     abstract public List<Object> getTriggerRemembered();

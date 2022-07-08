@@ -7,8 +7,24 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
+
+import java.util.List;
 
 public class GoadEffect extends SpellAbilityEffect {
+
+    @Override
+    protected String getStackDescription(SpellAbility sa) {
+        final Player player = sa.getActivatingPlayer();
+        List<Card> tgt = getTargetCards(sa);
+        if (tgt.size() <= 0) {
+            return "";
+        } else {
+            final StringBuilder sb = new StringBuilder();
+            sb.append(player).append(" goads ").append(Lang.joinHomogenous(tgt)).append(".");
+            return sb.toString();
+        }
+    }
 
     @Override
     public void resolve(SpellAbility sa) {

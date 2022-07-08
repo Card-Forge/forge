@@ -202,6 +202,11 @@ public class ForgeScript {
             return sa.hasParam("Nightbound");
         } else if (property.equals("paidPhyrexianMana")) {
             return sa.getSpendPhyrexianMana();
+        } else if (property.startsWith("ManaSpent")) {
+            String[] k = property.split(" ", 2);
+            String comparator = k[1].substring(0, 2);
+            int y = AbilityUtils.calculateAmount(sa.getHostCard(), k[1].substring(2), sa);
+            return Expressions.compare(sa.getPayingMana().size(), comparator, y);
         } else if (property.startsWith("ManaFrom")) {
             final String fromWhat = property.substring(8);
             boolean found = false;
@@ -247,7 +252,7 @@ public class ForgeScript {
         } else if (property.startsWith("cmc")) {
             int y = 0;
             // spell was on the stack
-            if (sa.getCardState().getCard().isInZone(ZoneType.Stack)) {
+            if (sa.getHostCard().isInZone(ZoneType.Stack)) {
                 y = sa.getHostCard().getCMC();
             } else {
                 y = sa.getPayCosts().getTotalMana().getCMC();

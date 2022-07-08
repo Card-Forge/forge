@@ -1,0 +1,8 @@
+Name:Banishment
+ManaCost:3 W
+Types:Enchantment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls and all other nonland permanents that player controls with the same name as that permanent until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ Pump | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | SubAbility$ DBChangeZoneAll
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ TargetedCard.Self,Permanent.nonLand+NotDefinedTargeted+sharesNameWith Targeted+ControlledBy TargetedController | Duration$ UntilHostLeavesPlay
+Oracle:When Banishment enters the battlefield, exile target nonland permanent an opponent controls and all other nonland permanents your opponents control with the same name as that permanent until Banishment leaves the battlefield.

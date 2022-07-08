@@ -208,7 +208,7 @@ public class NetGuiGame extends AbstractGuiGame {
 
     @Override
     public Map<Object, Integer> assignGenericAmount(final CardView effectSource, final Map<Object, Integer> targets, final int amount, final boolean atLeastOne, final String amountLabel) {
-        return sendAndWait(ProtocolMethod.divideShield, effectSource, targets, amount, atLeastOne, amountLabel);
+        return sendAndWait(ProtocolMethod.assignGenericAmount, effectSource, targets, amount, atLeastOne, amountLabel);
     }
 
     @Override

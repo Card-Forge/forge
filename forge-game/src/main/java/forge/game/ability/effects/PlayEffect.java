@@ -259,7 +259,7 @@ public class PlayEffect extends SpellAbilityEffect {
             }
             if (singleOption && sa.getTargetCard() == null)
                 sa.setPlayEffectCard(tgtCard);// show card to play rather than showing the source card
-            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
+            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())), null)) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
                     tgtCard.updateStateForView();
@@ -285,6 +285,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
             }
 
+            // TODO if cost isn't replaced should include alternative ones
             // get basic spells (no flashback, etc.)
             List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller);
             if (sa.hasParam("ValidSA")) {
@@ -435,8 +436,9 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
 
                 final Zone currentZone = game.getCardState(tgtCard).getZone();
-                if (!originZone.equals(currentZone)) {
-                    triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), game.getCardState(tgtCard));
+                if (!currentZone.equals(originZone)) {
+                    //fix Garth One-Eye activated ability and the likes..
+                    triggerList.put(originZone == null ? null : originZone.getZoneType(), currentZone.getZoneType(), game.getCardState(tgtCard));
                 }
                 triggerList.triggerChangesZoneAll(game, sa);
             }

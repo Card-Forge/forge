@@ -3,7 +3,7 @@ ManaCost:U R
 Types:Instant
 A:SP$ Pump | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | NumAtt$ -2 | RememberTargets$ True | SubAbility$ DBAnimate | StackDescription$ {c:Targeted} gets -2/-0 until end of turn and attacks this turn if able. | SpellDescription$ Target creature you don't control gets -2/-0 until end of turn and attacks this turn if able.
 A:SP$ PumpAll | Cost$ 3 U R | ValidCards$ Creature.YouDontCtrl | ValidDescription$ each creature you don't control. | NumAtt$ -2 | RememberAllPumped$ True | SubAbility$ DBAnimate | PrecostDesc$ Overload | CostDesc$ {3}{U}{R} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.") | StackDescription$ Each creature you don't control gets -2/-0 until end of turn and attacks this turn if able.
-SVar:DBAnimate:DB$ Animate | Defined$ Remembered | staticAbilities$ MustAttack | SubAbility$ DBCleanup | StackDescription$ None
-SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks this turn if able.
+SVar:DBAnimate:DB$ Effect | Defined$ Remembered | StaticAbilities$ MustAttack | SubAbility$ DBCleanup | StackDescription$ None| RememberObjects$ Remembered | ExileOnMoved$ Battlefield
+SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.IsRemembered | Description$ This creature attacks this turn if able.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Target creature you don't control gets -2/-0 until end of turn and attacks this turn if able.\nOverload {3}{U}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

@@ -1,6 +1,0 @@
-[format]
-Name:Standard (KTK)
-Type:Historic
-Subtype:Standard
-Effective:2014-09-26
-Sets:THS, BNG, JOU, M15, KTK

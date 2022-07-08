@@ -1,0 +1,10 @@
+Name:Gorion, Wise Mentor
+ManaCost:G W U
+Types:Legendary Creature Human Wizard
+PT:3/4
+K:Vigilance
+T:Mode$ SpellCast | ValidCard$ Card.Adventure | ValidActivatingPlayer$ You | Execute$ TrigCopySpell | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast an Adventure spell, you may copy it. You may choose new targets for the copy.
+SVar:TrigCopySpell:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+SVar:BuffedBy:Creature.AdventureCard
+DeckNeeds:Type$Adventure
+Oracle:Vigilance\nWhenever you cast an Adventure spell, you may copy it. You may choose new targets for the copy.

@@ -1,0 +1,6 @@
+[format]
+Name:Block: Khans of Tarkir (KTK)
+Type:Archived
+Subtype:Block
+Effective:2014-09-26
+Sets:KTK

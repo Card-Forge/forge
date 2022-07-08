@@ -30,6 +30,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.card.CardStateName;
@@ -779,6 +780,7 @@ public final class StaticAbilityContinuous {
 
             // add SVars
             if (addSVars != null) {
+                Map<String, String> map = Maps.newHashMap();
                 for (final String sVar : addSVars) {
                     String actualSVar = AbilityUtils.getSVar(stAb, sVar);
                     String name = sVar;
@@ -787,8 +789,9 @@ public final class StaticAbilityContinuous {
                         name = actualSVar.split(":")[0];
                         actualSVar = actualSVar.split(":")[1];
                     }
-                    affectedCard.setSVar(name, actualSVar);
+                    map.put(name, actualSVar);
                 }
+                affectedCard.addChangedSVars(map, se.getTimestamp(), stAb.getId());
             }
 
             if (layer == StaticAbilityLayer.ABILITIES) {
@@ -840,7 +843,7 @@ public final class StaticAbilityContinuous {
                                     newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
                                 }
                                 if (params.containsKey("GainsAbilitiesActivateIgnoreColor")) {
-                                    newSA.putParam("ActivateIgnoreColor","True");
+                                    newSA.putParam("ActivateIgnoreColor", params.get("GainsAbilitiesActivateIgnoreColor"));
                                 }
                                 newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
                                 newSA.setGrantorStatic(stAb);

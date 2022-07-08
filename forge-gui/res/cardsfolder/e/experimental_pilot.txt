@@ -3,9 +3,7 @@ ManaCost:U
 Types:Creature Human Pilot
 PT:1/2
 K:Ward:2
-A:AB$ NameCard | Cost$ U Discard<2/Card> | Draft$ True | Defined$ You | ChooseFromList$ Cultivator's Caravan,Bomat Bazaar Barge,Raiders' Karve,Demolition Stomper,Futurist Sentinel,Mechtitan Core,Reckoner Bankbuster,High-Speed Hoverbike,Mindlink Mech,Silent Submersible,Mobile Garrison,Untethered Express,Ovalchase Dragster,Daredevil Dragster,Thundering Chariot | SubAbility$ DBMakeCard | SpellDescription$ Draft a card from CARDNAME's spellbook.
-SVar:DBMakeCard:DB$ MakeCard | Name$ ChosenName | Zone$ Hand | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearNamedCard$ True
+A:AB$ Draft | Cost$ U Discard<2/Card> | Spellbook$ Cultivator's Caravan,Bomat Bazaar Barge,Raiders' Karve,Demolition Stomper,Futurist Sentinel,Mechtitan Core,Reckoner Bankbuster,High-Speed Hoverbike,Mindlink Mech,Silent Submersible,Mobile Garrison,Untethered Express,Ovalchase Dragster,Daredevil Dragster,Thundering Chariot | SpellDescription$ Draft a card from CARDNAME's spellbook.
 S:Mode$ CrewValue | ValidCard$ Card.Self | Value$ 2 | Description$ CARDNAME crews Vehicles as though its power were 2 greater.
 DeckHints:Type$Vehicle
 Oracle:Ward {2}\n{U}, Discard two cards: Draft a card from Experimental Pilot's spellbook.\nExperimental Pilot crews Vehicles as though its power were 2 greater.

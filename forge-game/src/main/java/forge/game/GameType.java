@@ -76,7 +76,7 @@ public enum GameType {
 
     private final DeckFormat deckFormat;
     private final boolean isCardPoolLimited, canSideboard, addWonCardsMidGame;
-    private final String name, description;
+    private final String name, englishName, description;
     private final Function<RegisteredPlayer, Deck> deckAutoGenerator;
 
     GameType(DeckFormat deckFormat0, boolean isCardPoolLimited0, boolean canSideboard0, boolean addWonCardsMidgame0, String name0, String description0) {
@@ -90,6 +90,7 @@ public enum GameType {
         canSideboard = canSideboard0;
         addWonCardsMidGame = addWonCardsMidgame0;
         name = localizer.getMessage(name0);
+        englishName = localizer.getEnglishMessage(name0);
         if (description0.length()>0) {
             description0 = localizer.getMessage(description0);
         }
@@ -147,6 +148,9 @@ public enum GameType {
 
     public String toString() {
         return name;
+    }
+    public String getEnglishName() {
+        return englishName;
     }
 
     public String getDescription() {

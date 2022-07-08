@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import forge.Forge;
 import forge.adventure.character.CharacterSprite;
@@ -84,18 +83,21 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 if (player.collideWith(mob)) {
                     player.setAnimation(CharacterSprite.AnimationTypes.Attack);
                     mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
+                    SoundSystem.instance.play(SoundEffectType.Block, false);
                     Gdx.input.vibrate(50);
-                    Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
-                    SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
-                    DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
-                    FThreads.invokeInEdtNowOrLater(() -> {
-                        Forge.setTransitionScreen(new TransitionScreen(() -> {
-                            duelScene.initDuels(player, mob);
-                            Forge.clearTransitionScreen();
-                            startPause(0.3f, () -> Forge.switchScene(SceneType.DuelScene.instance));
-                        }, ScreenUtils.getFrameBufferTexture(), true, false));
-                        currentMob = mob;
-                        WorldSave.getCurrentSave().autoSave();
+                    startPause(0.8f, () -> {
+                        Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
+                        SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
+                        DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
+                        FThreads.invokeInEdtNowOrLater(() -> {
+                            Forge.setTransitionScreen(new TransitionScreen(() -> {
+                                duelScene.initDuels(player, mob);
+                                Forge.clearTransitionScreen();
+                                startPause(0.3f, () -> Forge.switchScene(SceneType.DuelScene.instance));
+                            }, Forge.takeScreenshot(), true, false));
+                            currentMob = mob;
+                            WorldSave.getCurrentSave().autoSave();
+                        });
                     });
                     break;
                 }
@@ -247,7 +249,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
             MapStage.getInstance().showDeckAwardDialog("Chaos Mode!\n"+ WorldSave.getCurrentSave().getPlayer().getName()+ "'s Deck: "+
                     WorldSave.getCurrentSave().getPlayer().getSelectedDeck().getName()+
-                    "\nEnemy will use Preconstructed, Theme or Random Generated Decks.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
+                    "\nEnemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
             WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
         }
     }

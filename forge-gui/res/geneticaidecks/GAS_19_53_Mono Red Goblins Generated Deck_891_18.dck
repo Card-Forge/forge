@@ -1,0 +1,34 @@
+[metadata]
+Name=GAS_19_53_Mono Red Goblins Generated Deck_891_18
+[Main]
+1 Banefire|M19
+3 Cryptic Caves|M20
+4 Goblin Cratermaker|GRN
+4 Goblin Instigator|M19
+4 Goblin Ringleader|M20
+2 Goblin Trashmaster|M19
+4 Goblin Warchief|DOM
+1 Heartfire|WAR
+4 Krenko, Tin Street Kingpin|WAR
+1 Legion Warboss|GRN
+2 Mountain|DOM|3
+2 Mountain|DOM|4
+3 Mountain|GRN
+2 Mountain|M19|1
+2 Mountain|M19|2
+1 Mountain|M19|4
+1 Mountain|M20|1
+1 Mountain|M20|2
+2 Mountain|RIX
+2 Mountain|WAR|1
+2 Mountain|WAR|2
+1 Mountain|WAR|3
+1 Samut's Sprint|WAR
+3 Siege-Gang Commander|GNT
+3 Skirk Prospector|DOM
+4 Volley Veteran|M19
+[Sideboard]
+4 Dark-Dweller Oracle|M19
+4 Fight with Fire|DOM
+4 Icon of Ancestry|M20
+3 Samut's Sprint|WAR

@@ -1,7 +1,10 @@
 package forge.game.player;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import forge.game.CardTraitBase;
 import forge.game.Game;
@@ -78,85 +81,74 @@ public class PlayerProperty {
             if (player.isMonarch()) {
                 return false;
             }
+        } else if (property.equals("hasInitiative")) {
+            if (!player.hasInitiative()) {
+                return false;
+            }
         } else if (property.equals("hasBlessing")) {
             if (!player.hasBlessing()) {
                 return false;
             }
+        } else if (property.startsWith("damageDoneSingleSource")) {
+            String props = property.split(" ")[1];
+            List<Integer> sourceDmg = game.getDamageDoneThisTurn(null, false, "Card.YouCtrl", null, source, sourceController, spellAbility);
+            int maxDmg = sourceDmg.isEmpty() ? 0 : Collections.max(sourceDmg);
+            if (!Expressions.compare(maxDmg, props.substring(0, 2), AbilityUtils.calculateAmount(source, props.substring(2), spellAbility))) {
+                return false;
+            }
         } else if (property.startsWith("wasDealtCombatDamageThisCombatBy ")) {
             String v = property.split(" ")[1];
-
-            int count = 1;
-            if (v.contains("_AtLeast")) {
-                count = Integer.parseInt(v.substring(v.indexOf("_AtLeast") + 8));
-                v = v.substring(0, v.indexOf("_AtLeast")).replace("Valid:", "Valid ");
-            }
+            boolean found = true;
 
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
-            int found = 0;
             for (final Card card : cards) {
-                if (card.getDamageHistory().getThisCombatDamaged().containsKey(player)) {
-                    found++;
+                if (card.getDamageHistory().getThisCombatDamaged().contains(player)) {
+                    found = true;
                 }
             }
-            if (found < count) {
+            if (!found) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisGameBy ")) {
             String v = property.split(" ")[1];
-
-            int count = 1;
-            if (v.contains("_AtLeast")) {
-                count = Integer.parseInt(v.substring(v.indexOf("_AtLeast") + 8));
-                v = TextUtil.fastReplace(v.substring(0, v.indexOf("_AtLeast")), "Valid:", "Valid ");
-            }
+            boolean found = true;
 
             final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
-            int found = 0;
             for (final Card card : cards) {
-                if (card.getDamageHistory().getThisGameDamaged().containsKey(player)) {
-                    found++;
+                if (card.getDamageHistory().getThisGameDamaged().contains(player)) {
+                    found = true;
                 }
             }
-            if (found < count) {
+            if (!found) {
                 return false;
             }
-        } else if (property.startsWith("wasDealtDamageThisTurnBy ")) {
-            String v = property.split(" ")[1];
-            int count = 1;
-
-            if (v.contains("_AtLeast")) {
-                count = Integer.parseInt(v.substring(v.indexOf("_AtLeast") + 8));
-                v = TextUtil.fastReplace(v.substring(0, v.indexOf("_AtLeast")), "Valid:", "Valid ");
+        } else if (property.startsWith("wasDealt")) {
+            boolean found = false;
+            String validCard = null;
+            Boolean combat = null;
+            if (property.contains("CombatDamage")) {
+                combat = true;
             }
+            if (property.contains("ThisTurnBySource")) {
+                found = source.getDamageHistory().getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility) > 0;
+            } else {
+                String comp = "GE";
+                int right = 1;
+                int numValid = 0;
 
-            final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
-            int found = 0;
-            for (final Card card : cards) {
-                if (card.getDamageHistory().getThisTurnDamaged().containsKey(player)) {
-                    found++;
+                if (property.contains("ThisTurnBy")) {
+                    String[] props = property.split(" ");
+                    validCard = props[1];
+                    if (props.length > 2) {
+                        comp = props[2].substring(0, 2);
+                        right = AbilityUtils.calculateAmount(source, props[2].substring(2), spellAbility);
+                    }
                 }
-            }
-            if (found < count) {
-                return false;
-            }
-        } else if (property.startsWith("wasDealtCombatDamageThisTurnBy ")) {
-            String v = property.split(" ")[1];
 
-            int count = 1;
-            if (v.contains("_AtLeast")) {
-                count = Integer.parseInt(v.substring(v.indexOf("_AtLeast") + 8));
-                v = TextUtil.fastReplace(v.substring(0, v.indexOf("_AtLeast")), "Valid:", "Valid ");
+                numValid = game.getDamageDoneThisTurn(combat, validCard == null, validCard, "You", source, player, spellAbility).size();
+                found = Expressions.compare(numValid, comp, right);
             }
-
-            final List<Card> cards = AbilityUtils.getDefinedCards(source, v, spellAbility);
-
-            int found = 0;
-            for (final Card card : cards) {
-                if (card.getDamageHistory().getThisTurnCombatDamaged().containsKey(player)) {
-                    found++;
-                }
-            }
-            if (found < count) {
+            if (!found) {
                 return false;
             }
         } else if (property.equals("attackedBySourceThisCombat")) {
@@ -167,16 +159,8 @@ public class PlayerProperty {
             if (!source.getDamageHistory().hasAttackedThisTurn(player)) {
                 return false;
             }
-        } else if (property.equals("wasDealtDamageThisTurn")) {
-            if (player.getAssignedDamage() == 0) {
-                return false;
-            }
-        }  else if (property.equals("Defending")) {
+        } else if (property.equals("Defending")) {
             if (!game.getCombat().getAttackersAndDefenders().values().contains(player)) {
-                return false;
-            }
-        } else if (property.equals("wasDealtCombatDamageThisTurn")) {
-            if (player.getAssignedCombatDamage() == 0) {
                 return false;
             }
         } else if (property.equals("LostLifeThisTurn")) {
@@ -239,10 +223,16 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.startsWith("controls")) {
-            final String[] type = property.substring(8).split("_");
-            final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type[0], sourceController, source, spellAbility);
-            String comparator = type.length > 1 ? type[1] : "GE";
-            int y = type.length > 1 ? AbilityUtils.calculateAmount(source, comparator.substring(2), spellAbility) : 1;
+            // this allows escaping _ with \ in case of complex restrictions (used on Turf War)
+            List<String> type = new ArrayList<>();
+            Pattern regex = Pattern.compile("(?:\\\\.|[^_\\\\]++)+");
+            Matcher regexMatcher = regex.matcher(property.substring(8));
+            while (regexMatcher.find()) {
+                type.add(regexMatcher.group());
+            } 
+            final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.get(0).replace("\\_", "_"), sourceController, source, spellAbility);
+            String comparator = type.size() > 1 ? type.get(1) : "GE";
+            int y = type.size() > 1 ? AbilityUtils.calculateAmount(source, comparator.substring(2), spellAbility) : 1;
             if (!Expressions.compare(list.size(), comparator, y)) {
                 return false;
             }
@@ -395,6 +385,13 @@ public class PlayerProperty {
             if (!player.getAttackedPlayersMyLastTurn().contains(sourceController)) {
                 return false;
             }
+        } else if (property.equals("BeenAttackedThisCombat")) {
+            for (Player p : game.getRegisteredPlayers()) {
+                if (p.getAttackedPlayersMyCombat().contains(sourceController)) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.equals("VenturedThisTurn")) {
             if (player.getVenturedThisTurn() < 1) {
                 return false;

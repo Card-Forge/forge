@@ -1,0 +1,11 @@
+Name:Erinis, Gloom Stalker
+ManaCost:2 G
+Types:Legendary Creature Halfling Ranger
+PT:3/3
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME attacks, return target land card from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Land.YouOwn | TgtPrompt$ Select target land card
+K:Choose a Background
+DeckHas:Ability$Graveyard
+SVar:HasAttackEffect:TRUE
+Oracle:Deathtouch\nWhenever Erinis, Gloom Stalker attacks, return target land card from your graveyard to the battlefield.\nChoose a Background (You can have a Background as a second commander.)
