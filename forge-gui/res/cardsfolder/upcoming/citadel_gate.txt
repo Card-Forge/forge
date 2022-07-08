@@ -5,4 +5,5 @@ K:CARDNAME enters the battlefield tapped.
 K:ETBReplacement:Other:ChooseColor
 SVar:ChooseColor:DB$ ChooseColor | Defined$ You | Exclude$ white | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color other than white.
 A:AB$ Mana | Cost$ T | Produced$ Combo W Chosen | SpellDescription$ Add {W} or one mana of the chosen color.
+DeckHints:Type$Gate
 Oracle:Citadel Gate enters the battlefield tapped.\nAs Citadel Gate enters the battlefield, choose a color other than white.\n{T}: Add {W} or one mana of the chosen color.
