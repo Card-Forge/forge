@@ -19,7 +19,10 @@ package forge.assets;
 
 import java.io.File;
 import java.util.List;
+import java.util.Queue;
+import java.util.Set;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -27,6 +30,9 @@ import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.ObjectSet;
+import com.google.common.collect.EvictingQueue;
+import com.google.common.collect.Queues;
+import com.google.common.collect.Sets;
 import forge.gui.FThreads;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
@@ -71,6 +77,8 @@ public class ImageCache {
     private static final ObjectSet<String> missingIconKeys = new ObjectSet<>();
     private static List<String> borderlessCardlistKey = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
     static int maxCardCapacity = 400; //default card capacity
+    static EvictingQueue<String> q;
+    static Queue<String> syncQ;
     static TextureParameter defaultParameter = new TextureParameter();
     static TextureParameter filtered = new TextureParameter();
     public static void initCache(int capacity) {
@@ -80,6 +88,10 @@ public class ImageCache {
         filtered.magFilter = Texture.TextureFilter.Linear;
         //override maxCardCapacity
         maxCardCapacity = capacity;
+        //init q
+        q = EvictingQueue.create(capacity);
+        //init syncQ for threadsafe use
+        syncQ = Queues.synchronizedQueue(q);
     }
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
@@ -259,10 +271,9 @@ public class ImageCache {
     static Texture loadAsset(String imageKey, File file, boolean otherCache) {
         if (file == null)
             return null;
+        syncQ.add(file.getPath());
         if (!otherCache && Forge.getAssets(false).manager.getLoadedAssets() > maxCardCapacity) {
-            //when maxCardCapacity is reached, clear to refresh
-            Forge.getAssets(false).manager.clear();
-            CardRenderer.clearcardArtCache();
+            unloadCardTextures(Forge.getAssets(false).manager);
             return null;
         }
         String fileName = file.getPath();
@@ -285,6 +296,20 @@ public class ImageCache {
             }
             return t;
         }
+    }
+    static void unloadCardTextures(AssetManager manager) {
+        //get latest images from syncQ
+        Set<String> newQ = Sets.newHashSet(syncQ);
+        //get loaded images from assetmanager
+        Set<String> old = Sets.newHashSet(manager.getAssetNames());
+        //get all images not in newQ (old images to unload)
+        Set<String> toUnload = Sets.difference(old, newQ);
+        //unload from assetmanager to save RAM
+        for (String asset : toUnload) {
+            manager.unload(asset);
+        }
+        //clear cachedArt since this is dependant to the loaded texture
+        CardRenderer.clearcardArtCache();
     }
     public static void preloadCache(Iterable<String> keys) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))

@@ -304,7 +304,8 @@ public class CardRenderer {
                     }
                     cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
                 }
-                cardArtCache.put(imageKey, cardArt);
+                if (!CardImageRenderer.forgeArt.equals(cardArt))
+                    cardArtCache.put(imageKey, cardArt);
             }
         }
         //fix display for effect
@@ -339,7 +340,8 @@ public class CardRenderer {
                     cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
 
                 }
-                cardArtCache.put("Aftermath_second_"+imageKey, cardArt);
+                if (!CardImageRenderer.forgeArt.equals(cardArt))
+                    cardArtCache.put("Aftermath_second_"+imageKey, cardArt);
             }
         }
         return cardArt;
@@ -385,7 +387,8 @@ public class CardRenderer {
                     }
                     cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
                 }
-                cardArtCache.put("Alternate_"+imageKey, cardArt);
+                if (!CardImageRenderer.forgeArt.equals(cardArt))
+                    cardArtCache.put("Alternate_"+imageKey, cardArt);
             }
         }
         return cardArt;
@@ -419,9 +422,9 @@ public class CardRenderer {
                     cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
 
                 }
-                if (!bottom)
+                if (!bottom && !CardImageRenderer.forgeArt.equals(cardArt))
                     cardArtCache.put("Meld_primary_"+imageKey, cardArt);
-                else
+                else if (!CardImageRenderer.forgeArt.equals(cardArt))
                     cardArtCache.put("Meld_secondary_"+imageKey, cardArt);
             }
         }
