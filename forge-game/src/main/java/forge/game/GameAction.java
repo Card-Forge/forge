@@ -162,14 +162,32 @@ public class GameAction {
         // need to check before it enters
         if (c.isAura() && !c.isAttachedToEntity() && toBattlefield && (zoneFrom == null || !zoneFrom.is(ZoneType.Stack))) {
             boolean found = false;
-            if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(c, null))) {
-                found = true;
+            try {
+                if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(c, null))) {
+                    found = true;
+                }
+            } catch (Exception e1) {
+                found = false;
             }
-            else if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(c, null))) {
-                found = true;
+
+            if (!found) {
+                try {
+                    if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(c, null))) {
+                        found = true;
+                    }
+                } catch (Exception e2) {
+                    found = false;
+                }
             }
-            else if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateGraveyard), CardPredicates.canBeAttached(c, null))) {
-                found = true;
+
+            if (!found) {
+                try {
+                    if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateGraveyard), CardPredicates.canBeAttached(c, null))) {
+                        found = true;
+                    }
+                } catch (Exception e3) {
+                    found = false;
+                }
             }
             if (!found) {
                 c.clearControllers();
@@ -341,8 +359,10 @@ public class GameAction {
                     if (commanderEffect != null) break;
                 }
                 // Disable the commander replacement effect
-                for (final ReplacementEffect re : commanderEffect.getReplacementEffects()) {
-                    re.setSuppressed(true);
+                if (commanderEffect != null) {
+                    for (final ReplacementEffect re : commanderEffect.getReplacementEffects()) {
+                        re.setSuppressed(true);
+                    }
                 }
             }
 
@@ -2315,14 +2335,16 @@ public class GameAction {
             final Player p = e.getKey();
             final CardCollection toTop = e.getValue().getLeft();
             final CardCollection toBottom = e.getValue().getRight();
-            final int numLookedAt = toTop.size() + toBottom.size();
+            int numLookedAt = 0;
             if (toTop != null) {
+                numLookedAt += toTop.size();
                 Collections.reverse(toTop); // reverse to get the correct order
                 for (Card c : toTop) {
                     moveToLibrary(c, cause, null);
                 }
             }
             if (toBottom != null) {
+                numLookedAt += toBottom.size();
                 for (Card c : toBottom) {
                     moveToBottomOfLibrary(c, cause, null);
                 }
