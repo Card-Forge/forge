@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Instant
 A:SP$ GainLife | Cost$ 1 B | Defined$ You | LifeAmount$ X | SubAbility$ Dmg | SpellDescription$ You gain life equal to the damage dealt to you this turn. CARDNAME deals damage to target creature you control equal to the damage dealt to you this turn.
 SVar:Dmg:DB$ DealDamage | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumDmg$ X
-SVar:X:Count$YourDamageThisTurn
+SVar:X:PlayerCountPropertyYou$DamageThisTurn
 AI:RemoveDeck:All
 Oracle:You gain life equal to the damage dealt to you this turn. Simulacrum deals damage to target creature you control equal to the damage dealt to you this turn.

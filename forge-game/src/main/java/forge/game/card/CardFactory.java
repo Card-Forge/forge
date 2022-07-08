@@ -29,6 +29,7 @@ import forge.game.Game;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityUtils;
 import forge.game.cost.Cost;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementHandler;
 import forge.game.spellability.*;
@@ -203,11 +204,24 @@ public class CardFactory {
         } else {
             copySA = targetSA.copy(c, controller, false);
             c.setCastSA(copySA);
+            // need to copy keyword
+            if (targetSA.getKeyword() != null) {
+                KeywordInterface kw = targetSA.getKeyword().copy(c, false);
+                copySA.setKeyword(kw);
+                // need to add the keyword to so static doesn't make new keyword
+                c.addKeywordForStaticAbility(kw);
+            }
         }
 
         copySA.setCopied(true);
         // 707.10b
         copySA.setOriginalAbility(targetSA);
+
+        // Copied spell is not cast face down
+        if (copySA instanceof Spell) {
+            Spell spell = (Spell) copySA;
+            spell.setCastFaceDown(false);
+        }
 
         if (targetSA.usesTargeting()) {
             // do for SubAbilities too?

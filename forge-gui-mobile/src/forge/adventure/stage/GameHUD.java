@@ -273,14 +273,8 @@ public class GameHUD extends Stage {
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.F10) {
+        if (keycode == Input.Keys.F9 || keycode == Input.Keys.F10) {
             console.toggle();
-
-            return true;
-        }
-        if (keycode == Input.Keys.F9) {
-            console.toggle();
-
             return true;
         }
         if (keycode == Input.Keys.BACK) {

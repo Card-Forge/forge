@@ -250,9 +250,8 @@ public final class CardUtil {
         newCopy.setColor(in.getColor().getColor());
         newCopy.setPhasedOut(in.isPhasedOut());
 
-        newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
-        newCopy.setReceivedDamageFromPlayerThisTurn(in.getReceivedDamageFromPlayerThisTurn());
         newCopy.setDamageHistory(in.getDamageHistory());
+        newCopy.setDamageReceivedThisTurn(in.getDamageReceivedThisTurn());
         for (Card c : in.getBlockedThisTurn()) {
             newCopy.addBlockedThisTurn(c);
         }

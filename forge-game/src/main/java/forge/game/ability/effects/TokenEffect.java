@@ -64,7 +64,8 @@ public class TokenEffect extends TokenEffectBase {
                     if (numTokens != 0) { //0 probably means calculation isn't ready in time for stack
                         if (numTokens != 1) { //if we are making more than one, substitute the numeral for a/an
                             String numeral = " " + Lang.getNumeral(numTokens) + " ";
-                            String target = " " + words.get(words.indexOf(verb) + 1) + " ";
+                            List<String> words2 = Arrays.asList(desc.split(" "));
+                            String target = " " + words2.get(words2.indexOf(verb) + 1) + " ";
                             desc = desc.replaceFirst(target, numeral);
                         }
                         //try to cut out unneeded description, which would now be confusing

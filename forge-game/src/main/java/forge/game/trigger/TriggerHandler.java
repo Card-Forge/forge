@@ -243,7 +243,8 @@ public class TriggerHandler {
                     TriggerType.Exploited.equals(t.getMode()) ||
                     TriggerType.Sacrificed.equals(t.getMode()) ||
                     TriggerType.Destroyed.equals(t.getMode()) ||
-                    (TriggerType.ChangesZone.equals(t.getMode()) && "Battlefield".equals(t.getParam("Origin")))) { // TODO needs additional logic in case origin=Any
+                    ((TriggerType.ChangesZone.equals(t.getMode()) || TriggerType.ChangesZoneAll.equals(t.getMode()))
+                            && "Battlefield".equals(t.getParam("Origin")))) { // TODO needs additional logic in case origin=Any
                 registerOneTrigger(t);
             }
         }
@@ -578,6 +579,11 @@ public class TriggerHandler {
 
         if (regtrig.hasParam("RememberKey")) {
             host.addRemembered(runParams.get(AbilityKey.fromString(regtrig.getParam("RememberKey"))));
+        }
+
+        if (regtrig.hasParam("RememberAmount")) {
+            Integer amount = (Integer) sa.getTriggeringObject(AbilityKey.fromString(regtrig.getParam("RememberAmount")));
+            host.addRemembered(amount);
         }
 
         sa.setStackDescription(sa.toString());

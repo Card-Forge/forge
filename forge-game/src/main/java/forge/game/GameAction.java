@@ -27,7 +27,6 @@ import java.util.Set;
 import forge.util.*;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ComparisonChain;
@@ -297,6 +296,14 @@ public class GameAction {
 
                 // copy bestow timestamp
                 copied.setBestowTimestamp(c.getBestowTimestamp());
+
+                if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
+                    copied.setCastSA(cause);
+                    KeywordInterface kw = cause.getKeyword();
+                    if (kw != null) {
+                        copied.addKeywordForStaticAbility(kw);
+                    }
+                }
             } else {
                 // when a card leaves the battlefield, ensure it's in its original state
                 // (we need to do this on the object before copying it, or it won't work correctly e.g.
@@ -505,6 +512,7 @@ public class GameAction {
                             }
                         }
                         if (keepKeyword) {
+                            ki.setHostCard(copied);
                             newKw.add(ki);
                         }
                     }
@@ -1323,33 +1331,13 @@ public class GameAction {
                         noRegCreats.add(c);
                         checkAgain = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
-                        // merge entries with same source
-                        List<Integer> dmgList = Lists.newArrayList();
-                        List<Pair<Card, Integer>> remainingDamaged = Lists.newArrayList(c.getReceivedDamageFromThisTurn());
-                        while (!remainingDamaged.isEmpty()) {
-                            Pair <Card, Integer> damaged = remainingDamaged.get(0);
-                            int sum = damaged.getRight();
-                            remainingDamaged.remove(damaged);
-                            for (Pair<Card, Integer> other : Lists.newArrayList(remainingDamaged)) {
-                                if (other.getLeft().equalsWithTimestamp(damaged.getLeft())) {
-                                    sum += other.getRight();
-                                    // once it got counted keep it out
-                                    remainingDamaged.remove(other);
-                                }
+                        if (c.getLethal() <= c.getMaxDamageFromSource() || c.hasBeenDealtDeathtouchDamage()) {
+                            if (desCreats == null) {
+                                desCreats = new CardCollection();
                             }
-                            dmgList.add(sum);
-                        }
-
-                        for (final Integer dmg : dmgList) {
-                            if (c.getLethal() <= dmg.intValue() || c.hasBeenDealtDeathtouchDamage()) {
-                                if (desCreats == null) {
-                                    desCreats = new CardCollection();
-                                }
-                                desCreats.add(c);
-                                c.setHasBeenDealtDeathtouchDamage(false);
-                                checkAgain = true;
-                                break;
-                            }
+                            desCreats.add(c);
+                            c.setHasBeenDealtDeathtouchDamage(false);
+                            checkAgain = true;
                         }
                     }
                     // Rule 704.5g - Destroy due to lethal damage
@@ -2327,6 +2315,7 @@ public class GameAction {
             final Player p = e.getKey();
             final CardCollection toTop = e.getValue().getLeft();
             final CardCollection toBottom = e.getValue().getRight();
+            final int numLookedAt = toTop.size() + toBottom.size();
             if (toTop != null) {
                 Collections.reverse(toTop); // reverse to get the correct order
                 for (Card c : toTop) {
@@ -2343,6 +2332,7 @@ public class GameAction {
                 // set up triggers (but not actually do them until later)
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Player, p);
+                runParams.put(AbilityKey.ScryNum, numLookedAt);
                 game.getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
             }
         }
@@ -2364,6 +2354,7 @@ public class GameAction {
         game.getReplacementHandler().runReplaceDamage(isCombat, damageMap, preventMap, counterTable, cause);
 
         Map<Card, Integer> lethalDamage = Maps.newHashMap();
+        Map<Integer, Card> lkiCache = Maps.newHashMap();
 
         // Actually deal damage according to replaced damage map
         for (Map.Entry<Card, Map<GameEntity, Integer>> et : damageMap.rowMap().entrySet()) {
@@ -2390,6 +2381,8 @@ public class GameAction {
 
                 e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));
                 sum += e.getValue();
+
+                sourceLKI.getDamageHistory().registerDamage(e.getValue(), isCombat, sourceLKI, e.getKey(), lkiCache);
             }
 
             if (sum > 0 && sourceLKI.hasKeyword(Keyword.LIFELINK)) {

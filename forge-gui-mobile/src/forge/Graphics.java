@@ -1132,6 +1132,7 @@ public class Graphics {
             P.setColor(1f,1f,1f,1f);
             P.drawPixel(0, 0);
             dummyTexture = new Texture(P);
+            P.dispose();
         }
         return dummyTexture;
     }

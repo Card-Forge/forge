@@ -20,4 +20,5 @@ public class ConfigData {
     public DifficultyData[] difficulties;
     public RewardData legalCards;
     public List<String> restrictedCards;
+    public List<String> restrictedEditions;
 }

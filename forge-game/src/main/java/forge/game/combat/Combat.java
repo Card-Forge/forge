@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -797,10 +798,11 @@ public class Combat {
             final SpellAbility emptySA = new SpellAbility.EmptySa(attacker);
 
             boolean assignToPlayer = false;
-            if (attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")) {
+            if (StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker, false)) {
                 assignToPlayer = true;
             }
-            if (!assignToPlayer && attacker.getGame().getCombat().isBlocked(attacker) && attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
+            if (!assignToPlayer && attacker.getGame().getCombat().isBlocked(attacker)
+                    && StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
                 assignToPlayer = assigningPlayer.getController().confirmAction(emptySA, PlayerActionConfirmMode.AlternativeDamageAssignment,
                         Localizer.getInstance().getMessage("lblAssignCombatDamageWerentBlocked",
                                 CardTranslation.getTranslatedName(attacker.getName())), null);

@@ -48,6 +48,7 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.staticability.StaticAbilityMustAttack;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -325,8 +326,7 @@ public class ComputerUtilCombat {
                 final List<Card> blockers = combat.getBlockers(attacker);
 
                 if (blockers.size() == 0
-                        || attacker.hasKeyword("You may have CARDNAME assign its combat damage "
-                                + "as though it weren't blocked.")) {
+                        || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
                     unblocked.add(attacker);
                 } else if (attacker.hasKeyword(Keyword.TRAMPLE)
                         && getAttack(attacker) > totalShieldDamage(attacker, blockers)) {
@@ -367,8 +367,7 @@ public class ComputerUtilCombat {
             final List<Card> blockers = combat.getBlockers(attacker);
 
             if (blockers.size() == 0
-                    || attacker.hasKeyword("You may have CARDNAME assign its combat damage"
-                            + " as though it weren't blocked.")) {
+                    || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
                 unblocked.add(attacker);
             } else if (attacker.hasKeyword(Keyword.TRAMPLE)
                     && getAttack(attacker) > totalShieldDamage(attacker, blockers)) {

@@ -22,6 +22,7 @@ import io.sentry.Sentry;
 public abstract class KeywordInstance<T extends KeywordInstance<?>> implements KeywordInterface {
     private Keyword keyword;
     private String original;
+    private long staticId = 0;
 
     private List<Trigger> triggers = Lists.newArrayList();
     private List<ReplacementEffect> replacements = Lists.newArrayList();
@@ -181,6 +182,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
      * @see forge.game.keyword.KeywordInterface#addTrigger(forge.game.trigger.Trigger)
      */
     public final void addTrigger(final Trigger trg) {
+        trg.setKeyword(this);
         triggers.add(trg);
     }
 
@@ -189,6 +191,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
      * @see forge.game.keyword.KeywordInterface#addReplacement(forge.game.replacement.ReplacementEffect)
      */
     public final void addReplacement(final ReplacementEffect trg) {
+        trg.setKeyword(this);
         replacements.add(trg);
     }
 
@@ -197,6 +200,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
      * @see forge.game.keyword.KeywordInterface#addSpellAbility(forge.game.spellability.SpellAbility)
      */
     public final void addSpellAbility(final SpellAbility s) {
+        s.setKeyword(this);
         abilities.add(s);
     }
 
@@ -205,6 +209,7 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
      * @see forge.game.keyword.KeywordInterface#addStaticAbility(forge.game.staticability.StaticAbility)
      */
     public final void addStaticAbility(final StaticAbility st) {
+        st.setKeyword(this);
         staticAbilities.add(st);
     }
 
@@ -247,22 +252,30 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
 
             result.abilities = Lists.newArrayList();
             for (SpellAbility sa : this.abilities) {
-                result.abilities.add(sa.copy(host, lki));
+                SpellAbility copy = sa.copy(host, lki);
+                copy.setKeyword(result);
+                result.abilities.add(copy);
             }
 
             result.triggers = Lists.newArrayList();
             for (Trigger tr : this.triggers) {
-                result.triggers.add(tr.copy(host, lki));
+                Trigger copy = tr.copy(host, lki);
+                copy.setKeyword(result);
+                result.triggers.add(copy);
             }
 
             result.replacements = Lists.newArrayList();
             for (ReplacementEffect re : this.replacements) {
-                result.replacements.add(re.copy(host, lki));
+                ReplacementEffect copy = re.copy(host, lki);
+                copy.setKeyword(result);
+                result.replacements.add(copy);
             }
 
             result.staticAbilities = Lists.newArrayList();
             for (StaticAbility sa : this.staticAbilities) {
-                result.staticAbilities.add(sa.copy(host, lki));
+                StaticAbility copy = sa.copy(host, lki);
+                copy.setKeyword(result);
+                result.staticAbilities.add(copy);
             }
 
             return result;
@@ -326,5 +339,12 @@ public abstract class KeywordInstance<T extends KeywordInstance<?>> implements K
         for (StaticAbility sa : this.staticAbilities) {
             sa.setIntrinsic(value);
         }
+    }
+    
+    public long getStaticId() {
+        return this.staticId;
+    }
+    public void setStaticId(long v) {
+        this.staticId = v;
     }
 }

@@ -20,6 +20,7 @@ package forge.ai;
 import java.util.ArrayList;
 import java.util.List;
 
+import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
@@ -540,7 +541,7 @@ public class AiAttackController {
 
         for (Card attacker : categorizedAttackers) {
             if (!CombatUtil.canBeBlocked(attacker, accountedBlockers, null)
-                    || attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
+                    || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(attacker)) {
                 unblockedAttackers.add(attacker);
             } else {
                 if (predictEvasion) {

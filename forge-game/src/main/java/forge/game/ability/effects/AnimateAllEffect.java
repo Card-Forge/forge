@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -122,6 +121,12 @@ public class AnimateAllEffect extends AnimateEffectBase {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
         }
 
+        // static abilities to add to the animated being
+        final List<String> stAbs = Lists.newArrayList();
+        if (sa.hasParam("staticAbilities")) {
+            stAbs.addAll(Arrays.asList(sa.getParam("staticAbilities").split(",")));
+        }
+
         Map<String, String> sVarsMap = Maps.newHashMap();
         for (final String s : sVars) {
             sVarsMap.put(s, AbilityUtils.getSVar(sa, s));
@@ -140,10 +145,8 @@ public class AnimateAllEffect extends AnimateEffectBase {
         list = CardLists.getValidCards(list, valid, host.getController(), host, sa);
 
         for (final Card c : list) {
-            doAnimate(c, sa, power, toughness, types, removeTypes, finalColors,
-                    keywords, removeKeywords, hiddenKeywords,
-                    abilities, triggers, replacements, ImmutableList.of(),
-                    timestamp);
+            doAnimate(c, sa, power, toughness, types, removeTypes, finalColors, keywords, removeKeywords,
+                    hiddenKeywords, abilities, triggers, replacements, stAbs, timestamp);
 
             // give sVars
             if (!sVarsMap.isEmpty() ) {
