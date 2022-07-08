@@ -256,6 +256,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private Map<Integer, Integer> damage = Maps.newHashMap();
     private boolean hasBeenDealtDeathtouchDamage;
+    private boolean hasBeenDealtExcessDamageThisTurn;
 
     // regeneration
     private FCollection<Card> shields = new FCollection<>();
@@ -5361,6 +5362,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         this.hasBeenDealtDeathtouchDamage = hasBeenDealtDeatchtouchDamage;
     }
 
+    public final boolean hasBeenDealtExcessDamageThisTurn() {
+        return hasBeenDealtExcessDamageThisTurn;
+    }
+    public final void setHasBeenDealtExcessDamageThisTurn(final boolean bool) {
+        this.hasBeenDealtExcessDamageThisTurn = bool;
+    }
+
     public final Map<Card, Integer> getAssignedDamageMap() {
         return assignedDamageMap;
     }
@@ -5515,7 +5523,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         // Defending player at the time the damage was dealt
         runParams.put(AbilityKey.DefendingPlayer, game.getCombat() != null ? game.getCombat().getDefendingPlayerRelatedTo(source) : null);
-        getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
+        getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, true);
 
         DamageType damageType = DamageType.Normal;
         if (isPlaneswalker()) { // 120.3c
@@ -6158,6 +6166,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             setDamage(0);
         }
         setHasBeenDealtDeathtouchDamage(false);
+        setHasBeenDealtExcessDamageThisTurn(false);
         setRegeneratedThisTurn(0);
         resetShield();
         setBecameTargetThisTurn(false);
