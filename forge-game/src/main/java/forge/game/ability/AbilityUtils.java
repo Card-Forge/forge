@@ -162,17 +162,15 @@ public class AbilityUtils {
                 return cards;
             }
         }
-        else if (defined.equals("Targeted") && sa instanceof SpellAbility) {
+        else if ((defined.equals("Targeted") || defined.equals("TargetedCard")) && sa instanceof SpellAbility) {
             for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
                 Iterables.addAll(cards, tc.getTargetCards());
             }
         }
         else if (defined.equals("TargetedSource") && sa instanceof SpellAbility) {
-            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) {
-                for (SpellAbility s : tc.getTargetSpells()) {
+            for (TargetChoices tc : ((SpellAbility)sa).getAllTargetChoices()) for (SpellAbility s : tc.getTargetSpells()) {
                     cards.add(s.getHostCard());
                 }
-            }
         }
         else if (defined.equals("ThisTargetedCard") && sa instanceof SpellAbility) { // do not add parent targeted
             if (((SpellAbility)sa).getTargets() != null) {
@@ -972,7 +970,7 @@ public class AbilityUtils {
 
         final Player player = sa instanceof SpellAbility ? ((SpellAbility)sa).getActivatingPlayer() : card.getController();
 
-        if (defined.equals("Self") || defined.equals("ThisTargetedCard") || defined.startsWith("Valid") || getPaidCards(sa, defined) != null) {
+        if (defined.equals("Self") || defined.equals("TargetedCard") || defined.equals("ThisTargetedCard") || defined.startsWith("Valid") || getPaidCards(sa, defined) != null) {
             // do nothing, Self is for Cards, not Players
         } else if (defined.equals("TargetedOrController")) {
             players.addAll(getDefinedPlayers(card, "Targeted", sa));
