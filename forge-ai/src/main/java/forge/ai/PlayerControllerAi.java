@@ -1065,9 +1065,8 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     private boolean prepareSingleSa(final Card host, final SpellAbility sa, boolean isMandatory) {
-        if (sa.getApi() == ApiType.Charm && !sa.isCopied() && !CharmEffect.makeChoices(sa)) {
-            // 603.3c If no mode is chosen, the ability is removed from the stack.
-            return false;
+        if (sa.getApi() == ApiType.Charm) {
+            return CharmEffect.makeChoices(sa);
         }
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);

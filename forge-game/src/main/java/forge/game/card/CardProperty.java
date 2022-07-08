@@ -607,7 +607,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("Cloned")) {
-            if ((card.getCloneOrigin() == null) || !card.getCloneOrigin().equals(source)) {
+            if (card.getCloneOrigin() == null || !card.getCloneOrigin().equals(source)) {
                 return false;
             }
         } else if (property.startsWith("SharesCMCWith")) {

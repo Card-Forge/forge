@@ -131,7 +131,7 @@ public class ComputerUtil {
 
         sa = GameActionUtil.addExtraKeywordCost(sa);
 
-        if (sa.getApi() == ApiType.Charm && !sa.isCopied() && !CharmEffect.makeChoices(sa)) {
+        if (sa.getApi() == ApiType.Charm && !CharmEffect.makeChoices(sa)) {
             // 603.3c If no mode is chosen, the ability is removed from the stack.
             return false;
         }
@@ -294,7 +294,7 @@ public class ComputerUtil {
         if (newSA.isSpell() && !source.isCopiedSpell()) {
             newSA.setHostCard(game.getAction().moveToStack(source, newSA));
 
-            if (newSA.getApi() == ApiType.Charm && !sa.isCopied() && !CharmEffect.makeChoices(newSA)) {
+            if (newSA.getApi() == ApiType.Charm && !CharmEffect.makeChoices(newSA)) {
                 // 603.3c If no mode is chosen, the ability is removed from the stack.
                 return false;
             }
