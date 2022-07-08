@@ -581,11 +581,6 @@ public class TriggerHandler {
             host.addRemembered(runParams.get(AbilityKey.fromString(regtrig.getParam("RememberKey"))));
         }
 
-        if (regtrig.hasParam("RememberAmount")) {
-            Integer amount = (Integer) sa.getTriggeringObject(AbilityKey.fromString(regtrig.getParam("RememberAmount")));
-            host.addRemembered(amount);
-        }
-
         sa.setStackDescription(sa.toString());
 
         Player decider = null;
