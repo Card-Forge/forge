@@ -2,15 +2,14 @@ Name:Elminster
 ManaCost:3 W U
 Types:Legendary Planeswalker Elminster
 Loyalty:5
-T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigStore | RememberAmount$ ScryNum | TriggerDescription$ Whenever you scry, the next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of cards looked at while scrying this way.
-SVar:TrigStore:DB$ StoreSVar | SVar$ X | Type$ CountSVar | Expression$ Y | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell | SubAbility$ DBCleanup
+T:Mode$ Scry | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigStore | TriggerDescription$ Whenever you scry, the next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of cards looked at while scrying this way.
+SVar:TrigStore:DB$ StoreSVar | SVar$ X | Type$ Calculate | Expression$ Y | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ ReduceCost | Triggers$ TrigCastSpell
 SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | ValidCard$ Instant,Sorcery | Activator$ You | Amount$ X | Insert$ X | Description$ The next instant or sorcery spell you cast this turn costs {X} less to cast, where X is the number of cards looked at while scrying. (INSERT)
 SVar:TrigCastSpell:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Number$0
-SVar:Y:Count$RememberedNumber
+SVar:Y:TriggerCount$ScryNum
 A:AB$ Draw | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | SubAbility$ DBScry | SpellDescription$ Draw a card, then scry 2.
 SVar:DBScry:DB$ Scry | ScryNum$ 2
 A:AB$ Dig | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | Reveal$ True | SubAbility$ DBToken | SpellDescription$ Exile the top card of your library.

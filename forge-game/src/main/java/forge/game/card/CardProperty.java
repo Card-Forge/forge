@@ -1180,6 +1180,10 @@ public class CardProperty {
             if (card.getAssignedDamage(false, null) == 0) {
                 return false;
             }
+        } else if (property.startsWith("wasDealtExcessDamageThisTurn")) {
+            if (!card.hasBeenDealtExcessDamageThisTurn()) {
+                return false;
+            }
         } else if (property.startsWith("wasDealtDamageByThisGame")) {
             int idx = source.getDamageHistory().getThisGameDamaged().indexOf(card);
             if (idx == -1) {

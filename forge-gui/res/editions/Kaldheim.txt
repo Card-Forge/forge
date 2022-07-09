@@ -442,11 +442,13 @@ A165 C A-Elderleaf Mentor @Zoltan Boros
 A166 U A-Elven Bow @Dallas Williams
 A169 R A-Esika's Chariot @Raoul Vitale
 A198 M A-Tyvar Kell @Chris Rallis
+A208 U A-Fall of the Impostor @Eric Deschamps
 A224 U A-Narfi, Betrayer King @Daarken
 A212 U A-Harald, King of Skemfar @Grzegorz Rutkowski
 A213 R A-Harald Unites the Elves @Ryan Pancoast
 A233 U A-Vega, the Watcher @Paul Scott Canavan
 A237 R A-Cosmos Elixir @Volkan Baǵa
+A253 U A-Bretagard Stronghold @Jung Park
 A255 R A-Faceless Haven @Titus Lunter
 A268 U A-Skemfar Elderhall @Johannes Voss
 A378 R A-Canopy Tactician @Ekaterina Burmak
