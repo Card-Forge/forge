@@ -67,8 +67,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
         stringBuilder.append(pronoun ? "they" : who).append(" ");
 
+        String desc = sa.getDescription();
+        boolean forEach = desc.contains("for each");
         if (sa.hasParam("CounterTypes")) {
-            String desc = sa.getDescription();
             if (desc.contains("Put ") && desc.contains(" on ")) {
                 desc = desc.substring(desc.indexOf("Put "), desc.indexOf(" on ") + 4)
                         .replaceFirst("Put ", "puts ");
@@ -84,8 +85,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         }
 
-        final int amount = AbilityUtils.calculateAmount(card,
-                sa.getParamOrDefault("CounterNum", "1"), sa);
+        final String key = forEach ? "ForEachNum" : "CounterNum";
+        final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault(key, "1"), sa);
 
         if (sa.hasParam("Bolster")) {
             stringBuilder.append("bolsters ").append(amount).append(".");
@@ -155,7 +156,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 }
             }
         }
-        stringBuilder.append(".");
+        stringBuilder.append(forEach ? desc.substring(desc.indexOf(" for each")) : ".");
         return stringBuilder.toString();
     }
 
