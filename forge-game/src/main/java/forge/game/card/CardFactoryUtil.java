@@ -1149,7 +1149,7 @@ public class CardFactoryUtil {
 
             final String choose = "DB$ GenericChoice | AILogic$ " + name;
             final String counter = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ " + n +
-                    " | IsPresent$ Card.StrictlySelf | SpellDescription$ Put "
+                    " | SpellDescription$ Put "
                     + Lang.nounWithNumeral(n, "+1/+1 counter") + " on it.";
             final String token = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ c_1_1_a_servo | TokenOwner$ You "
                     + " | SpellDescription$ Create "
@@ -1160,7 +1160,11 @@ public class CardFactoryUtil {
             SpellAbility saChoose = AbilityFactory.getAbility(choose, card);
 
             List<AbilitySub> list = Lists.newArrayList();
-            list.add((AbilitySub)AbilityFactory.getAbility(counter, card));
+            AbilitySub putCounter = (AbilitySub)AbilityFactory.getAbility(counter, card);
+            SpellAbilityRestriction restriction = new SpellAbilityRestriction();
+            restriction.setIsPresent("Card.StrictlySelf");
+            putCounter.setRestrictions(restriction);
+            list.add(putCounter);
             list.add((AbilitySub)AbilityFactory.getAbility(token, card));
             saChoose.setAdditionalAbilityList("Choices", list);
             saChoose.setIntrinsic(intrinsic);

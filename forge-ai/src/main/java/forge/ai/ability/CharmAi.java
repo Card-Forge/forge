@@ -89,9 +89,6 @@ public class CharmAi extends SpellAbilityAi {
         // First pass using standard canPlayAi() for good choices
         for (AbilitySub sub : choices) {
             sub.setActivatingPlayer(ai);
-            sub.getRestrictions().setZone(sub.getParent().getRestrictions().getZone());
-
-            // TODO checks from MayPlay fail for subs currently
             if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                 chosenList.add(sub);
                 if (chosenList.size() == num) {
@@ -229,7 +226,6 @@ public class CharmAi extends SpellAbilityAi {
             } else {
                 // Standard canPlayAi()
                 sub.setActivatingPlayer(ai);
-                sub.getRestrictions().setZone(sub.getParent().getRestrictions().getZone());
                 if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                     chosenList.add(sub);
                     if (chosenList.size() == min) {
