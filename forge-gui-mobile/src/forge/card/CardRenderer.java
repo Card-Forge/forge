@@ -104,8 +104,6 @@ public class CardRenderer {
     private static final float BORDER_THICKNESS = Utils.scale(1);
     public static final float PADDING_MULTIPLIER = 0.021f;
     public static final float CROP_MULTIPLIER = 0.96f;
-
-    private static Map<Integer, BitmapFont> counterFonts = new HashMap<>();
     private static final Color counterBackgroundColor = new Color(0f, 0f, 0f, 0.9f);
     private static final Map<CounterType, Color> counterColorCache = new HashMap<>();
     private static final GlyphLayout layout = new GlyphLayout();
@@ -1101,7 +1099,7 @@ public class CardRenderer {
     private static void drawCounterTabs(final CardView card, final Graphics g, final float x, final float y, final float w, final float h) {
 
         int fontSize = Math.max(11, Math.min(22, (int) (h * 0.08)));
-        BitmapFont font = counterFonts.get(fontSize);
+        BitmapFont font = Forge.getAssets().counterFonts.get(fontSize);
 
         final float additionalXOffset = 3f * ((fontSize - 11) / 11f);
         final float variableWidth = ((fontSize - 11) / 11f) * 44f;
@@ -1218,7 +1216,7 @@ public class CardRenderer {
     private static void drawMarkersTabs(final List<String> markers, final Graphics g, final float x, final float y, final float w, final float h, boolean larger) {
 
         int fontSize = larger ? Math.max(9, Math.min(22, (int) (h * 0.08))) : Math.max(8, Math.min(22, (int) (h * 0.05)));
-        BitmapFont font = counterFonts.get(fontSize);
+        BitmapFont font = Forge.getAssets().counterFonts.get(fontSize);
 
         final float additionalXOffset = 3f * ((fontSize - 8) / 8f);
 
@@ -1410,7 +1408,7 @@ public class CardRenderer {
                     textureRegions.add(new TextureRegion(texture));
                 }
 
-                counterFonts.put(fontSize, new BitmapFont(fontData, textureRegions, true));
+                Forge.getAssets().counterFonts.put(fontSize, new BitmapFont(fontData, textureRegions, true));
 
                 generator.dispose();
                 packer.dispose();
