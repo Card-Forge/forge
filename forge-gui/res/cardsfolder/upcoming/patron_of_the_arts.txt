@@ -1,0 +1,9 @@
+Name:Patron of the Arts
+ManaCost:2 R
+Types:Creature Dragon Noble
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield or dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ TriggeredCardController
+DeckHas:Ability$Token
+Oracle:When Patron of the Arts enters the battlefield or dies, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
