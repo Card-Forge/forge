@@ -167,7 +167,7 @@ public class FSkin {
             try {
                 int w, h;
                 if (f.path().contains("fallback_skin")) {
-                    //the file is not accesible by the manager since it not on absolute path...
+                    //the file is not accesible by the assetmanager using absolute fileresolver since it resides on internal path or classpath
                     Texture txSplash = new Texture(f);
                     w = txSplash.getWidth();
                     h = txSplash.getHeight();

@@ -169,7 +169,7 @@ public class SplashScreen extends FContainer {
     }
 
     void drawTransition(Graphics g, boolean openAdventure, float percentage) {
-        TextureRegion tr = new TextureRegion(Forge.getTitleBG());
+        TextureRegion tr = new TextureRegion(Forge.getAssets().fallback_skins.get(0));
         if (!Forge.isLandscapeMode() && tr != null) {
             float ar = 1.78f;
             int w = (int) (tr.getRegionHeight() / ar);
