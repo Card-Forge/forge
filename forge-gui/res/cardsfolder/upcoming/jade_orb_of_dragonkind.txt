@@ -1,0 +1,10 @@
+Name:Jade Orb of Dragonkind
+ManaCost:2 G
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ G | TriggersWhenSpent$ TrigSpent | SpellDescription$ Add {G}. When you spend this mana to cast a Dragon creature spell, it enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn. (It can't be the target of spells or abilities your opponents control.)
+SVar:TrigSpent:Mode$ SpellCast | ValidCard$ Creature.Dragon | ValidActivatingPlayer$ You | Execute$ TrigETBReplacement | TriggerDescription$ When you spend this mana to cast a Dragon creature spell, it enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn. (It can't be the target of spells or abilities your opponents control.)
+SVar:TrigETBReplacement:DB$ Pump | Defined$ TriggeredCard | KW$ etbCounter:P1P1:1:no Condition:no desc | PumpZone$ Stack | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ TriggeredCard | Duration$ UntilYourNextTurn | KW$ Hexproof | PumpZone$ Stack
+DeckHas:Ability$Counters
+DeckHints:Type$Dragon
+Oracle:{T}: Add {G}. When you spend this mana to cast a Dragon creature spell, it enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn. (It can't be the target of spells or abilities your opponents control.)
