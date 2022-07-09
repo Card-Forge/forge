@@ -2412,6 +2412,9 @@ public class GameAction {
             }
         }
 
+        // for Zangief do this before runWaitingTriggers DamageDone
+        damageMap.triggerExcessDamage(isCombat, lethalDamage, game);
+
         // lose life simultaneously
         if (isCombat) {
             for (Player p : game.getPlayers()) {
@@ -2440,7 +2443,6 @@ public class GameAction {
         preventMap.clear();
 
         damageMap.triggerDamageDoneOnce(isCombat, game);
-        damageMap.triggerExcessDamage(isCombat, lethalDamage, game);
         damageMap.clear();
 
         counterTable.replaceCounterEffect(game, cause, !isCombat);
