@@ -55,9 +55,7 @@ import java.io.File;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Forge implements ApplicationListener {
     public static final String CURRENT_VERSION = "1.6.53.001";
@@ -125,7 +123,6 @@ public class Forge implements ApplicationListener {
     public static boolean forcedEnglishonCJKMissing = false;
     public static boolean adventureLoaded = false;
     private static Localizer localizer;
-    static Map<Integer, Texture> misc = new HashMap<>();
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         app = new Forge();
@@ -344,20 +341,20 @@ public class Forge implements ApplicationListener {
         }
     }
     public static Texture getTitleBG() {
-        if (misc.get(0) == null) {
-            misc.put(0, new Texture(GuiBase.isAndroid()
+        if (getAssets().misc.get(0) == null) {
+            getAssets().misc.put(0, new Texture(GuiBase.isAndroid()
                     ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png")
                     : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png")));
         }
-        return misc.get(0);
+        return getAssets().misc.get(0);
     }
     public static Texture getTransitionBG() {
-        if (misc.get(1) == null) {
-            misc.put(1, new Texture(GuiBase.isAndroid()
+        if (getAssets().misc.get(1) == null) {
+            getAssets().misc.put(1, new Texture(GuiBase.isAndroid()
                     ? Gdx.files.internal("fallback_skin").child("transition.png")
                     : Gdx.files.classpath("fallback_skin").child("transition.png")));
         }
-        return misc.get(1);
+        return getAssets().misc.get(1);
     }
     protected void afterDbLoaded() {
         destroyThis = false; //Allow back()
