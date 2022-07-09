@@ -173,7 +173,8 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     @Override
     protected void updateHeaderCaption() {
         if (mode == Mode.PREPARE_DECK) {
-            setHeaderCaption(FModel.getQuest().getName() + " - " + getGameType() + "\n" + Forge.getLocalizer().getMessage("lblDraft") + " - " + FModel.getQuest().getAchievements().getCurrentDraft().getTitle());
+            String title = FModel.getQuest().getAchievements().getCurrentDraft() == null ? "" : FModel.getQuest().getAchievements().getCurrentDraft().getTitle();
+            setHeaderCaption(FModel.getQuest().getName() + " - " + getGameType() + "\n" + Forge.getLocalizer().getMessage("lblDraft") + " - " + title);
         }
         else {
             super.updateHeaderCaption();

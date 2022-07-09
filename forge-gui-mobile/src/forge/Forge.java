@@ -8,7 +8,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -339,22 +338,6 @@ public class Forge implements ApplicationListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-    public static Texture getTitleBG() {
-        if (getAssets().misc.get(0) == null) {
-            getAssets().misc.put(0, new Texture(GuiBase.isAndroid()
-                    ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png")
-                    : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png")));
-        }
-        return getAssets().misc.get(0);
-    }
-    public static Texture getTransitionBG() {
-        if (getAssets().misc.get(1) == null) {
-            getAssets().misc.put(1, new Texture(GuiBase.isAndroid()
-                    ? Gdx.files.internal("fallback_skin").child("transition.png")
-                    : Gdx.files.classpath("fallback_skin").child("transition.png")));
-        }
-        return getAssets().misc.get(1);
     }
     protected void afterDbLoaded() {
         destroyThis = false; //Allow back()
@@ -832,8 +815,8 @@ public class Forge implements ApplicationListener {
                                 animationBatch.setColor(1, 1, 1, 1);
                                 animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.setColor(1, 1, 1, 1 - (1 / transitionTime) * animationTimeout);
-                                animationBatch.draw(getTransitionBG(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.draw(getTransitionBG(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins.get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins.get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.end();
                                 if (animationTimeout < 0) {
                                     currentScene.render();
@@ -852,8 +835,8 @@ public class Forge implements ApplicationListener {
                                 animationBatch.setColor(1, 1, 1, 1);
                                 animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.setColor(1, 1, 1, (1 / transitionTime) * (animationTimeout + transitionTime));
-                                animationBatch.draw(getTransitionBG(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.draw(getTransitionBG(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins.get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins.get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.end();
                                 return;
                             }
