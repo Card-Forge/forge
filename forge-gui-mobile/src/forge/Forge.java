@@ -343,20 +343,20 @@ public class Forge implements ApplicationListener {
         }
     }
     public static Texture getTitleBG() {
-        if (misc.get(0) == null) {
-            misc.put(0, new Texture(GuiBase.isAndroid()
+        if (getAssets().misc.get(0) == null) {
+            getAssets().misc.put(0, new Texture(GuiBase.isAndroid()
                     ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png")
                     : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png")));
         }
-        return misc.get(0);
+        return getAssets().misc.get(0);
     }
     public static Texture getTransitionBG() {
-        if (misc.get(1) == null) {
-            misc.put(1, new Texture(GuiBase.isAndroid()
+        if (getAssets().misc.get(1) == null) {
+            getAssets().misc.put(1, new Texture(GuiBase.isAndroid()
                     ? Gdx.files.internal("fallback_skin").child("transition.png")
                     : Gdx.files.classpath("fallback_skin").child("transition.png")));
         }
-        return misc.get(1);
+        return getAssets().misc.get(1);
     }
     protected void afterDbLoaded() {
         destroyThis = false; //Allow back()

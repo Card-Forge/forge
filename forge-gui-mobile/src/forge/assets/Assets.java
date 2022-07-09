@@ -15,6 +15,7 @@ public class Assets implements Disposable {
     public HashMap<Integer, FSkinFont> fonts = new HashMap<>();
     public ObjectMap<Integer, BitmapFont> counterFonts = new ObjectMap<>();
     public ObjectMap<String, Texture> generatedCards = new ObjectMap<>(512);
+    public ObjectMap<Integer, Texture> misc = new ObjectMap<>();
     @Override
     public void dispose() {
         cards.dispose();
@@ -25,5 +26,7 @@ public class Assets implements Disposable {
             texture.dispose();
         for (FSkinFont fSkinFont : fonts.values())
             fSkinFont.font.dispose();
+        for (Texture texture : misc.values())
+            texture.dispose();
     }
 }
