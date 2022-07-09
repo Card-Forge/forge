@@ -97,7 +97,6 @@ public class ImageCache {
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
     private static final ObjectMap<String, Pair<String, Boolean>> imageBorder = new ObjectMap<>(1024);
-    private static final ObjectMap<String, Texture> generatedCards = new ObjectMap<>(512);
 
     private static boolean imageLoaded, delayLoadRequested;
     public static void allowSingleLoad() {
@@ -121,11 +120,11 @@ public class ImageCache {
         ImageKeys.clearMissingCards();
     }
     public static void clearGeneratedCards() {
-        generatedCards.clear();
+        Forge.getAssets().generatedCards.clear();
     }
     public static void disposeTextures(){
         CardRenderer.clearcardArtCache();
-        Forge.getAssets(false).manager.clear();
+        Forge.getAssets().cards.clear();
     }
 
     public static Texture getImage(InventoryItem ii) {
@@ -134,7 +133,9 @@ public class ImageCache {
             if(imageKey.startsWith(ImageKeys.CARD_PREFIX) || imageKey.startsWith(ImageKeys.TOKEN_PREFIX))
                 return getImage(ii.getImageKey(false), true, false);
         }
-        return getImage(ii.getImageKey(false), true, true);
+        boolean useDefaultNotFound = imageKey != null && !(imageKey.startsWith(ImageKeys.PRECON_PREFIX) || imageKey.startsWith(ImageKeys.FATPACK_PREFIX)
+                || imageKey.startsWith(ImageKeys.BOOSTERBOX_PREFIX) || imageKey.startsWith(ImageKeys.BOOSTER_PREFIX) || imageKey.startsWith(ImageKeys.TOURNAMENTPACK_PREFIX));
+        return getImage(ii.getImageKey(false), useDefaultNotFound, true);
     }
 
     /**
@@ -265,33 +266,40 @@ public class ImageCache {
         if (file == null)
             return null;
         if (!otherCache && Forge.enableUIMask.equals("Full") && isBorderless(imageKey))
-            return generatedCards.get(imageKey);
-        return Forge.getAssets(otherCache).manager.get(file.getPath(), Texture.class, false);
+            return Forge.getAssets().generatedCards.get(imageKey);
+        if (otherCache)
+            return Forge.getAssets().others.get(file.getPath(), Texture.class, false);
+        return Forge.getAssets().cards.get(file.getPath(), Texture.class, false);
     }
     static Texture loadAsset(String imageKey, File file, boolean otherCache) {
         if (file == null)
             return null;
         syncQ.add(file.getPath());
-        if (!otherCache && Forge.getAssets(false).manager.getLoadedAssets() > maxCardCapacity) {
-            unloadCardTextures(Forge.getAssets(false).manager);
+        if (!otherCache && Forge.getAssets().cards.getLoadedAssets() > maxCardCapacity) {
+            unloadCardTextures(Forge.getAssets().cards);
             return null;
         }
         String fileName = file.getPath();
         //load to assetmanager
-        Forge.getAssets(otherCache).manager.load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
-        Forge.getAssets(otherCache).manager.finishLoadingAsset(fileName);
+        if (otherCache) {
+            Forge.getAssets().others.load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
+            Forge.getAssets().others.finishLoadingAsset(fileName);
+        } else {
+            Forge.getAssets().cards.load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
+            Forge.getAssets().cards.finishLoadingAsset(fileName);
+        }
         //return loaded assets
         if (otherCache) {
-            return Forge.getAssets(true).manager.get(fileName, Texture.class, false);
+            return Forge.getAssets().others.get(fileName, Texture.class, false);
         } else {
-            Texture t = Forge.getAssets(false).manager.get(fileName, Texture.class, false);
+            Texture t = Forge.getAssets().cards.get(fileName, Texture.class, false);
             //if full bordermasking is enabled, update the border color
             if (Forge.enableUIMask.equals("Full")) {
                 boolean borderless = isBorderless(imageKey);
                 updateBorders(t.toString(), borderless ? Pair.of(Color.valueOf("#171717").toString(), false): isCloserToWhite(getpixelColor(t)));
                 //if borderless, generate new texture from the asset and store
                 if (borderless) {
-                    generatedCards.put(imageKey, generateTexture(new FileHandle(file), t, Forge.isTextureFilteringEnabled()));
+                    Forge.getAssets().generatedCards.put(imageKey, generateTexture(new FileHandle(file), t, Forge.isTextureFilteringEnabled()));
                 }
             }
             return t;

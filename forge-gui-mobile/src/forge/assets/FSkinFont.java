@@ -3,7 +3,6 @@ package forge.assets;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -39,7 +38,6 @@ public class FSkinFont {
     private static final int MAX_FONT_SIZE_MANY_GLYPHS = 36;
 
     private static final String TTF_FILE = "font1.ttf";
-    private static final HashMap<Integer, FSkinFont> fonts = new HashMap<>();
 
     private static final String commonCharacterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklm"
             + "nopqrstuvwxyz1234567890\"!?'.,;:()[]{}<>|/@\\^$-%+=#_&*\u2014"
@@ -58,10 +56,10 @@ public class FSkinFont {
         return _get((int)Utils.scale(unscaledSize));
     }
     public static FSkinFont _get(final int scaledSize) {
-        FSkinFont skinFont = fonts.get(scaledSize);
+        FSkinFont skinFont = Forge.getAssets().fonts.get(scaledSize);
         if (skinFont == null) {
             skinFont = new FSkinFont(scaledSize);
-            fonts.put(scaledSize, skinFont);
+            Forge.getAssets().fonts.put(scaledSize, skinFont);
         }
         return skinFont;
     }
@@ -97,14 +95,14 @@ public class FSkinFont {
     }
 
     public static void updateAll() {
-        for (FSkinFont skinFont : fonts.values()) {
+        for (FSkinFont skinFont : Forge.getAssets().fonts.values()) {
             skinFont.updateFont();
         }
     }
 
     private final int fontSize;
     private final float scale;
-    private BitmapFont font;
+    BitmapFont font;
 
     private FSkinFont(int fontSize0) {
         if (fontSize0 > MAX_FONT_SIZE) {
@@ -400,16 +398,13 @@ public class FSkinFont {
         if (fontFile != null && fontFile.exists()) {
             final BitmapFontData data = new BitmapFontData(fontFile, false);
             String finalFontName = fontName;
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override
-                public void run() { //font must be initialized on UI thread
-                    try {
-                        font = new BitmapFont(data, (TextureRegion) null, true);
-                        found[0] = true;
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        found[0] = false;
-                    }
+            FThreads.invokeInEdtNowOrLater(() -> { //font must be initialized on UI thread
+                try {
+                    font = new BitmapFont(data, (TextureRegion) null, true);
+                    found[0] = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    found[0] = false;
                 }
             });
         }

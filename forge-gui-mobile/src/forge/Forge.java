@@ -55,7 +55,6 @@ import java.io.File;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -104,8 +103,7 @@ public class Forge implements ApplicationListener {
     public static boolean enablePreloadExtendedArt = false;
     public static boolean isTabletDevice = false;
     public static String locale = "en-US";
-    public Assets cardAssets;
-    public Assets otherAssets;
+    public Assets assets;
     public static boolean hdbuttons = false;
     public static boolean hdstart = false;
     public static boolean isPortraitMode = false;
@@ -166,8 +164,7 @@ public class Forge implements ApplicationListener {
             // don't allow to read and process
             ForgeConstants.SPRITE_CARDBG_FILE = "";
         }
-        cardAssets = new Assets();
-        otherAssets = new Assets();
+        assets = new Assets();
         graphics = new Graphics();
         splashScreen = new SplashScreen();
         frameRate = new FrameRate();
@@ -954,8 +951,7 @@ public class Forge implements ApplicationListener {
             currentScreen.onClose(null);
             currentScreen = null;
         }
-        cardAssets.dispose();
-        otherAssets.dispose();
+        assets.dispose();
         Dscreens.clear();
         graphics.dispose();
         SoundSystem.instance.dispose();
@@ -967,11 +963,8 @@ public class Forge implements ApplicationListener {
     /** Retrieve assets.
      * @param other if set to true returns otherAssets otherwise returns cardAssets
      */
-    public static Assets getAssets(boolean other) {
-        if (other)
-            return ((Forge)Gdx.app.getApplicationListener()).otherAssets;
-        else
-            return ((Forge)Gdx.app.getApplicationListener()).cardAssets;
+    public static Assets getAssets() {
+        return ((Forge)Gdx.app.getApplicationListener()).assets;
     }
     public static boolean switchScene(Scene newScene) {
         if (currentScene != null) {
