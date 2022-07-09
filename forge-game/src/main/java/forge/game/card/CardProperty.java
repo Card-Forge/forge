@@ -1475,6 +1475,18 @@ public class CardProperty {
             if (!card.getManaCost().getShortString().equals(property.substring(8))) {
                 return false;
             }
+        } else if (property.startsWith("canReceiveCounters")) {
+            if (!card.canReceiveCounters(CounterType.getType(property.split(" ")[1]))) {
+                return false;
+            }
+        } else if (property.equals("HasCounters")) {
+            if (!card.hasCounters()) {
+                return false;
+            }
+        } else if (property.equals("NoCounters")) {
+            if (card.hasCounters()) {
+                return false;
+            }
         }
 
         // syntax example: countersGE9 P1P1 or countersLT12TIME (greater number
@@ -1805,14 +1817,6 @@ public class CardProperty {
             }
         } else if (property.equals("NoAbilities")) {
             if (!card.hasNoAbilities()) {
-                return false;
-            }
-        } else if (property.equals("HasCounters")) {
-            if (!card.hasCounters()) {
-                return false;
-            }
-        } else if (property.equals("NoCounters")) {
-            if (card.hasCounters()) {
                 return false;
             }
         } else if (property.equals("castKeyword")) {

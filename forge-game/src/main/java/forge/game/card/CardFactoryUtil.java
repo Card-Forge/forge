@@ -1162,7 +1162,7 @@ public class CardFactoryUtil {
             List<AbilitySub> list = Lists.newArrayList();
             AbilitySub putCounter = (AbilitySub)AbilityFactory.getAbility(counter, card);
             SpellAbilityRestriction restriction = new SpellAbilityRestriction();
-            restriction.setIsPresent("Card.StrictlySelf");
+            restriction.setIsPresent("Card.StrictlySelf+canReceiveCounters P1P1");
             putCounter.setRestrictions(restriction);
             list.add(putCounter);
             list.add((AbilitySub)AbilityFactory.getAbility(token, card));
