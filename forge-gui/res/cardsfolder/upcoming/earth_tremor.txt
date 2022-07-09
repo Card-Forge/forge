@@ -1,6 +1,6 @@
 Name:Earth Tremor
 ManaCost:3 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | ReplaceDyingDefined$ Targeted | SpellDescription$ CARDNAME deals damage to target creature or planeswalker equal to the number of lands you control.
+A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature or planeswalker equal to the number of lands you control.
 SVar:X:Count$Valid Land.YouCtrl
 Oracle:Earth Tremor deals damage to target creature or planeswalker equal to the number of lands you control.
