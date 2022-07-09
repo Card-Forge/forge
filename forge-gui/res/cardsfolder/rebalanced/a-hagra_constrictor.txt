@@ -1,0 +1,8 @@
+Name:A-Hagra Constrictor
+ManaCost:1 B
+Types:Creature Snake
+PT:0/0
+K:etbCounter:P1P1:2
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Menace | Description$ Each creature you control with a +1/+1 counter on it has menace.
+DeckHas:Ability$Counters
+Oracle:Hagra Constrictor enters the battlefield with two +1/+1 counters on it.\nEach creature you control with a +1/+1 counter on it has menace.

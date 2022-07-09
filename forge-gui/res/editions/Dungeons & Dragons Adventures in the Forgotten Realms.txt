@@ -440,8 +440,10 @@ A130 C A-Armory Veteran @Caio Monteiro
 A180 U A-Druid Class @Svetlin Velinov
 A181 M A-Ellywick Tumblestrum @Anna Steinbauer
 A183 C A-Find the Path @Lindsey Look
+A196 R A-Ochre Jelly @Daarken
 A219 U A-Bruenor Battlehammer @Wayne Reynolds
 A231 U A-Shessra, Death's Whisper @Marie Magny
+A233 R A-Sorcerer Class @Alexander Mokhov
 A237 R A-Triumphant Adventurer @Alexander Mokhov
 A255 R A-Dungeon Descent @Kasia 'Kafis' Zielińska
 
