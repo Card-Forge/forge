@@ -90,6 +90,8 @@ public class CharmAi extends SpellAbilityAi {
         for (AbilitySub sub : choices) {
             sub.setActivatingPlayer(ai);
             sub.getRestrictions().setZone(sub.getParent().getRestrictions().getZone());
+
+            // TODO checks from MayPlay fail for subs currently
             if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                 chosenList.add(sub);
                 if (chosenList.size() == num) {
@@ -101,8 +103,6 @@ public class CharmAi extends SpellAbilityAi {
             // Second pass using doTrigger(false) to fulfill minimum choice
             choices.removeAll(chosenList);
             for (AbilitySub sub : choices) {
-                sub.setActivatingPlayer(ai);
-                sub.getRestrictions().setZone(sub.getParent().getRestrictions().getZone());
                 if (aic.doTrigger(sub, false)) {
                     chosenList.add(sub);
                     if (chosenList.size() == min) {
@@ -114,8 +114,6 @@ public class CharmAi extends SpellAbilityAi {
             if (chosenList.size() < min) {
                 choices.removeAll(chosenList);
                 for (AbilitySub sub : choices) {
-                    sub.setActivatingPlayer(ai);
-                    sub.getRestrictions().setZone(sub.getParent().getRestrictions().getZone());
                     if (aic.doTrigger(sub, true)) {
                         chosenList.add(sub);
                         if (chosenList.size() == min) {
