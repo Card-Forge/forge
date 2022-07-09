@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import forge.gui.GuiBase;
@@ -19,6 +20,8 @@ public class Assets implements Disposable {
     public ObjectMap<String, Texture> generatedCards = new ObjectMap<>(512);
     public ObjectMap<Integer, Texture> fallback_skins = new ObjectMap<>();
     public ObjectMap<String, Texture> tmxMap = new ObjectMap<String, Texture>();
+    public Skin skin;
+    public BitmapFont advDefaultFont, advBigFont;
     public Assets() {
         //init titlebg fallback
         fallback_skins.put(0, new Texture(GuiBase.isAndroid()
@@ -43,5 +46,11 @@ public class Assets implements Disposable {
             texture.dispose();
         for (Texture texture : tmxMap.values())
             texture.dispose();
+        if (advDefaultFont != null)
+            advDefaultFont.dispose();
+        if (advBigFont != null)
+            advBigFont.dispose();
+        if (skin != null)
+            skin.dispose();
     }
 }
