@@ -124,7 +124,6 @@ public class Forge implements ApplicationListener {
     public static boolean forcedEnglishonCJKMissing = false;
     public static boolean adventureLoaded = false;
     private static Localizer localizer;
-    static Map<Integer, Texture> misc = new HashMap<>();
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         app = new Forge();
