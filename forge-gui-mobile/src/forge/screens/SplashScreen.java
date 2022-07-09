@@ -307,7 +307,7 @@ public class SplashScreen extends FContainer {
                 + "Forge is open source software, released under the GNU General Public License.";
         if (Forge.forcedEnglishonCJKMissing && !clear) {
             clear = true;
-            FSkinFont.clear();
+            FSkinFont.preloadAll("");
             disclaimerFont = FSkinFont.get(9);
         }
         g.drawText(disclaimer, disclaimerFont, FProgressBar.SEL_FORE_COLOR,

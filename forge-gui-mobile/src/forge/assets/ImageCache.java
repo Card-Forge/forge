@@ -133,9 +133,7 @@ public class ImageCache {
             if(imageKey.startsWith(ImageKeys.CARD_PREFIX) || imageKey.startsWith(ImageKeys.TOKEN_PREFIX))
                 return getImage(ii.getImageKey(false), true, false);
         }
-        boolean useDefaultNotFound = imageKey != null && !(imageKey.startsWith(ImageKeys.PRECON_PREFIX) || imageKey.startsWith(ImageKeys.FATPACK_PREFIX)
-                || imageKey.startsWith(ImageKeys.BOOSTERBOX_PREFIX) || imageKey.startsWith(ImageKeys.BOOSTER_PREFIX) || imageKey.startsWith(ImageKeys.TOURNAMENTPACK_PREFIX));
-        return getImage(ii.getImageKey(false), useDefaultNotFound, true);
+        return getImage(ii.getImageKey(false), true, true);
     }
 
     /**

@@ -47,11 +47,6 @@ public class FSkinFont {
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.FONTS_DIR);
     }
-    public static void clear() {
-        fonts.clear();
-        //reset maxFontSize and Preload
-        preloadAll("");
-    }
     public static FSkinFont get(final int unscaledSize) {
         return _get((int)Utils.scale(unscaledSize));
     }
