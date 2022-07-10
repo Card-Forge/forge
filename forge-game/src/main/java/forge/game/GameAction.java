@@ -17,53 +17,19 @@
  */
 package forge.game;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import forge.util.*;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import com.google.common.base.Predicate;
-import com.google.common.collect.ComparisonChain;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
-import com.google.common.collect.Sets;
-import com.google.common.collect.Table;
-
+import com.google.common.collect.*;
 import forge.GameCommand;
 import forge.StaticData;
 import forge.card.CardStateName;
+import forge.card.MagicColor;
 import forge.deck.DeckSection;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
-import forge.game.card.CardFactory;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CardZoneTable;
-import forge.game.card.CounterEnumType;
-import forge.game.card.CounterType;
-import forge.game.event.GameEventCardChangeZone;
-import forge.game.event.GameEventCardDestroyed;
-import forge.game.event.GameEventCardStatsChanged;
-import forge.game.event.GameEventCardTapped;
-import forge.game.event.GameEventFlipCoin;
-import forge.game.event.GameEventGameStarted;
-import forge.game.event.GameEventScry;
+import forge.game.card.*;
+import forge.game.event.*;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.keyword.KeywordsChange;
@@ -87,8 +53,12 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.item.PaperCard;
+import forge.util.*;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import java.util.*;
 
 /**
  * Methods for common actions performed during a game.
@@ -2146,6 +2116,13 @@ public class GameAction {
                     return input.getName().equals("Emissary's Ploy");
                 }
             });
+            CardCollectionView all = CardLists.filterControlledBy(game.getCardsInGame(), takesAction);
+            List<Card> spires = CardLists.filter(all, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(Card input) {
+                        return input.getName().equals("Cryptic Spires");
+                    }
+            });
 
             int chosen = 1;
             List<Integer> cmc = Lists.newArrayList(1, 2, 3);
@@ -2157,6 +2134,15 @@ public class GameAction {
                 }
 
                 c.setChosenNumber(chosen);
+            }
+            for (Card c : spires) {
+                if (!c.hasChosenColor()) {
+                    List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
+                    String prompt = CardTranslation.getTranslatedName(c.getName()) + ": " +
+                            Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(2));
+                    List<String> chosenColors = takesAction.getController().chooseColors(prompt, null, 2, 2, colorChoices);
+                    c.setChosenColors(chosenColors);
+                }
             }
             takesAction = game.getNextPlayerAfter(takesAction);
         } while (takesAction != first);
