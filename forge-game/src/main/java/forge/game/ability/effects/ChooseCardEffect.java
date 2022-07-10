@@ -83,7 +83,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             combined.addAll(choices);
             choices = combined;
         }
-        
+
         final String amountValue = sa.getParamOrDefault("Amount", "1");
         int validAmount;
         if (StringUtils.isNumeric(amountValue)) {
