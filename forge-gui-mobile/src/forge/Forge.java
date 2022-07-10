@@ -786,10 +786,6 @@ public class Forge implements ApplicationListener {
         try {
             ImageCache.allowSingleLoad();
             ForgeAnimation.advanceAll();
-            if (needsUpdate) {
-                if (getAssets().manager.update())
-                    needsUpdate = false;
-            }
 
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
 
@@ -879,6 +875,11 @@ public class Forge implements ApplicationListener {
                         graphics.endTransform();
                     }
                 }
+            }
+            //update here
+            if (needsUpdate) {
+                if (getAssets().manager.update())
+                    needsUpdate = false;
             }
             graphics.end();
         } catch (Exception ex) {
