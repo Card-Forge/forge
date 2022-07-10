@@ -17,4 +17,4 @@ Types:Instant Adventure
 A:SP$ ChangeZone | ValidTgts$ Creature.YouCtrl | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target creature you control | RememberTargets$ True | SubAbility$ DBReturn | StackDescription$ Exile {c:Targeted}, | SpellDescription$ Exile target creature you control, then return that card to the battlefield under its owner's control.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup | StackDescription$ then return it to the battlefield under its owner's control.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Exile target creature you control, then return that card to the battlefield under its owner's control. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Exile target creature you control, then return that card to the battlefield under its owner's control. (Then exile this card. You may cast the creature later from exile.)

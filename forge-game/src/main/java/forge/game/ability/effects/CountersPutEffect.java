@@ -496,7 +496,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             // need to unfreeze tracker
                             game.getTracker().unfreeze();
 
-                            // check if it can recive the Tribute
+                            // check if it can receive the Tribute
                             if (abort) {
                                 continue;
                             }
