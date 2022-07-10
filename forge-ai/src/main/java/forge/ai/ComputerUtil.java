@@ -250,6 +250,13 @@ public class ComputerUtil {
             return false;
 
         final Card source = sa.getHostCard();
+
+        Zone fromZone = game.getZoneOf(source);
+        int zonePosition = 0;
+        if (fromZone != null) {
+            zonePosition = fromZone.getCards().indexOf(source);
+        }
+
         if (sa.isSpell() && !source.isCopiedSpell()) {
             sa.setHostCard(game.getAction().moveToStack(source, sa));
         }
@@ -257,11 +264,18 @@ public class ComputerUtil {
         sa = GameActionUtil.addExtraKeywordCost(sa);
 
         final Cost cost = sa.getPayCosts();
+        final CostPayment pay = new CostPayment(cost, sa);
+
+        // do this after card got added to stack
+        if (!sa.checkRestrictions(ai)) {
+            GameActionUtil.rollbackAbility(sa, fromZone, zonePosition, pay, source);
+            return false;
+        }
+
         if (cost == null) {
             ComputerUtilMana.payManaCost(ai, sa, false);
             game.getStack().add(sa);
         } else {
-            final CostPayment pay = new CostPayment(cost, sa);
             if (pay.payComputerCosts(new AiCostDecision(ai, sa, false))) {
                 game.getStack().add(sa);
             }
@@ -292,6 +306,13 @@ public class ComputerUtil {
         newSA = GameActionUtil.addExtraKeywordCost(newSA);
 
         final Card source = newSA.getHostCard();
+
+        Zone fromZone = game.getZoneOf(source);
+        int zonePosition = 0;
+        if (fromZone != null) {
+            zonePosition = fromZone.getCards().indexOf(source);
+        }
+
         if (newSA.isSpell() && !source.isCopiedSpell()) {
             newSA.setHostCard(game.getAction().moveToStack(source, newSA));
 
@@ -303,6 +324,13 @@ public class ComputerUtil {
         }
 
         final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
+
+        // do this after card got added to stack
+        if (!sa.checkRestrictions(ai)) {
+            GameActionUtil.rollbackAbility(sa, fromZone, zonePosition, pay, source);
+            return false;
+        }
+        
         pay.payComputerCosts(new AiCostDecision(ai, newSA, false));
 
         game.getStack().add(newSA);
