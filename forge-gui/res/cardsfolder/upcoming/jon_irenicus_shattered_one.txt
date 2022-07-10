@@ -5,7 +5,7 @@ PT:3/3
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBSelectRecipient | TriggerDescription$ At the beginning of your end step, target opponent gains control of up to one target creature you control.
 SVar:DBSelectRecipient:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBDonate
 SVar:DBDonate:DB$ GainControl | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you control | NewController$ ParentTarget | SubAbility$ DBPutCounters
-SVar:DBPutCounters:DB$ PutCounter | Defined$ TargetedCard | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBTap | Description$ Test
+SVar:DBPutCounters:DB$ PutCounter | Defined$ TargetedCard | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBTap
 SVar:DBTap:DB$ Tap | Defined$ Targeted | SubAbility$ DBGoad
 SVar:DBGoad:DB$ Goad | Defined$ Targeted | Duration$ Permanent | SubAbility$ DBDisableSacing
 SVar:DBDisableSacing:DB$ Animate | Defined$ Targeted | staticAbilities$ SCantSac | Duration$ Permanent
