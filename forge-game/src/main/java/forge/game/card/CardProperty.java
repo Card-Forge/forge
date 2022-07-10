@@ -1475,10 +1475,6 @@ public class CardProperty {
             if (!card.getManaCost().getShortString().equals(property.substring(8))) {
                 return false;
             }
-        } else if (property.startsWith("canReceiveCounters")) {
-            if (!card.canReceiveCounters(CounterType.getType(property.split(" ")[1]))) {
-                return false;
-            }
         } else if (property.equals("HasCounters")) {
             if (!card.hasCounters()) {
                 return false;

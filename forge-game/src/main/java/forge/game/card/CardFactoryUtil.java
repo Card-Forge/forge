@@ -1147,33 +1147,25 @@ public class CardFactoryUtil {
                     + " | ValidCard$ Card.Self | Secondary$ True"
                     + " | TriggerDescription$ Fabricate " + n + " (" + inst.getReminderText() + ")";
 
-            final String choose = "DB$ GenericChoice | AILogic$ " + name;
-            final String counter = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ " + n +
-                    " | SpellDescription$ Put "
-                    + Lang.nounWithNumeral(n, "+1/+1 counter") + " on it.";
-            final String token = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ c_1_1_a_servo | TokenOwner$ You "
-                    + " | SpellDescription$ Create "
+            final String token = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ c_1_1_a_servo | ConditionPresent$ Card.StrictlySelf | ConditionCompare$ EQ1"
+                    + " | UnlessCost$ AddCounter<" + n + "/P1P1> | UnlessPayer$ You | UnlessResolveSubs$ WhenNotPaid | UnlessAI$ " + name
+                    + " | SpellDescription$ Fabricate - Create "
                     + Lang.nounWithNumeral(n, "1/1 colorless Servo artifact creature token") + ".";
+            final String token2 = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ c_1_1_a_servo | ConditionPresent$ Card.StrictlySelf | ConditionCompare$ EQ0";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
-            SpellAbility saChoose = AbilityFactory.getAbility(choose, card);
-
-            List<AbilitySub> list = Lists.newArrayList();
-            AbilitySub putCounter = (AbilitySub)AbilityFactory.getAbility(counter, card);
-            SpellAbilityRestriction restriction = new SpellAbilityRestriction();
-            restriction.setIsPresent("Card.StrictlySelf+canReceiveCounters P1P1");
-            putCounter.setRestrictions(restriction);
-            list.add(putCounter);
-            list.add((AbilitySub)AbilityFactory.getAbility(token, card));
-            saChoose.setAdditionalAbilityList("Choices", list);
+            SpellAbility saChoose = AbilityFactory.getAbility(token, card);
             saChoose.setIntrinsic(intrinsic);
+
+            AbilitySub saNoChoose = (AbilitySub) AbilityFactory.getAbility(token2, card);
+            saChoose.setSubAbility(saNoChoose);
 
             trigger.setOverridingAbility(saChoose);
 
             inst.addTrigger(trigger);
         } else if (keyword.startsWith("Fading")) {
-            String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Secondary$ True " +
+            String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Secondary$ True" +
                     " | TriggerDescription$ At the beginning of your upkeep, remove a fade counter from CARDNAME. If you can't, sacrifice CARDNAME.";
 
             final String removeCounterStr = "DB$ RemoveCounter | Defined$ Self | CounterType$ FADE | CounterNum$ 1 | RememberRemoved$ True";
