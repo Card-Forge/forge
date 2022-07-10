@@ -54,12 +54,7 @@ public class LoadDraftScreen extends LaunchScreen {
         cbMode.addItem(Forge.getLocalizer().getMessage("lblSingleMatch"));
 
         lstDecks.setup(ItemManagerConfig.DRAFT_DECKS);
-        lstDecks.setItemActivateHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                editSelectedDeck();
-            }
-        });
+        lstDecks.setItemActivateHandler(event -> editSelectedDeck());
     }
 
     @Override
@@ -96,80 +91,63 @@ public class LoadDraftScreen extends LaunchScreen {
 
     @Override
     protected void startMatch() {
-        FThreads.invokeInBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                final DeckProxy humanDeck = lstDecks.getSelectedItem();
-                if (humanDeck == null) {
-                    FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblYouMustSelectExistingDeck"), Forge.getLocalizer().getMessage("lblNoDeck"));
+        FThreads.invokeInBackgroundThread(() -> {
+            final DeckProxy humanDeck = lstDecks.getSelectedItem();
+            if (humanDeck == null) {
+                FOptionPane.showErrorDialog(Forge.getLocalizer().getMessage("lblYouMustSelectExistingDeck"), Forge.getLocalizer().getMessage("lblNoDeck"));
+                return;
+            }
+
+            // TODO: if booster draft tournaments are supported in the future, add the possibility to choose them here
+            final boolean gauntlet = cbMode.getSelectedItem().equals(Forge.getLocalizer().getMessage("lblGauntlet"));
+
+            if (gauntlet) {
+                final Integer rounds = SGuiChoose.getInteger(Forge.getLocalizer().getMessage("lblHowManyOpponents"),
+                        1, FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size());
+                if (rounds == null) {
                     return;
                 }
 
-                // TODO: if booster draft tournaments are supported in the future, add the possibility to choose them here
-                final boolean gauntlet = cbMode.getSelectedItem().equals(Forge.getLocalizer().getMessage("lblGauntlet"));
-
-                if (gauntlet) {
-                    final Integer rounds = SGuiChoose.getInteger(Forge.getLocalizer().getMessage("lblHowManyOpponents"),
-                            1, FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size());
-                    if (rounds == null) {
+                FThreads.invokeInEdtLater(() -> {
+                    if (!checkDeckLegality(humanDeck)) {
                         return;
                     }
 
-                    FThreads.invokeInEdtLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (!checkDeckLegality(humanDeck)) {
-                                return;
-                            }
-
-                            LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), new Runnable() {
-                                @Override
-                                public void run() {
-                                    FModel.getGauntletMini().resetGauntletDraft();
-                                    FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), GameType.Draft);
-                                }
-                            });
-                        }
+                    LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, () -> {
+                        FModel.getGauntletMini().resetGauntletDraft();
+                        FModel.getGauntletMini().launch(rounds, humanDeck.getDeck(), GameType.Draft);
                     });
-                } else {
-                    final Integer aiIndex = SGuiChoose.getInteger(Forge.getLocalizer().getMessage("lblWhichOpponentWouldYouLikeToFace"),
-                            1, FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size());
-                    if (aiIndex == null) {
-                        return; // Cancel was pressed
-                    }
-
-                    final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
-                    final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex - 1);
-                    if (aiDeck == null) {
-                        throw new IllegalStateException("Draft: Computer deck is null!");
-                    }
-
-                    FThreads.invokeInEdtLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (!checkDeckLegality(humanDeck)) {
-                                        return;
-                                    }
-
-                                    final List<RegisteredPlayer> starter = new ArrayList<>();
-                                    final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
-                                    starter.add(human);
-                                    starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
-                                    for (final RegisteredPlayer pl : starter) {
-                                        pl.assignConspiracies();
-                                    }
-
-                                    FModel.getGauntletMini().resetGauntletDraft();
-                                    final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
-                                    hostedMatch.startMatch(GameType.Draft, null, starter, human, GuiBase.getInterface().getNewGuiGame());
-                                }
-                            });
-                        }
-                    });
+                });
+            } else {
+                final Integer aiIndex = SGuiChoose.getInteger(Forge.getLocalizer().getMessage("lblWhichOpponentWouldYouLikeToFace"),
+                        1, FModel.getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size());
+                if (aiIndex == null) {
+                    return; // Cancel was pressed
                 }
+
+                final DeckGroup opponentDecks = FModel.getDecks().getDraft().get(humanDeck.getName());
+                final Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex - 1);
+                if (aiDeck == null) {
+                    throw new IllegalStateException("Draft: Computer deck is null!");
+                }
+
+                FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, () -> {
+                    if (!checkDeckLegality(humanDeck)) {
+                        return;
+                    }
+
+                    final List<RegisteredPlayer> starter = new ArrayList<>();
+                    final RegisteredPlayer human = new RegisteredPlayer(humanDeck.getDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
+                    starter.add(human);
+                    starter.add(new RegisteredPlayer(aiDeck).setPlayer(GamePlayerUtil.createAiPlayer()));
+                    for (final RegisteredPlayer pl : starter) {
+                        pl.assignConspiracies();
+                    }
+
+                    FModel.getGauntletMini().resetGauntletDraft();
+                    final HostedMatch hostedMatch = GuiBase.getInterface().hostMatch();
+                    hostedMatch.startMatch(GameType.Draft, null, starter, human, GuiBase.getInterface().getNewGuiGame());
+                }));
             }
         });
     }

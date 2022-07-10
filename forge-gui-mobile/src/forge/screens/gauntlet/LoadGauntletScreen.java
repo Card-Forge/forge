@@ -53,26 +53,11 @@ public class LoadGauntletScreen extends LaunchScreen {
         super(null, LoadGameMenu.getMenu());
 
         btnNewGauntlet.setFont(FSkinFont.get(16));
-        btnNewGauntlet.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                NewGameScreen.Gauntlet.open();
-            }
-        });
+        btnNewGauntlet.setCommand(event -> NewGameScreen.Gauntlet.open());
         btnRenameGauntlet.setFont(btnNewGauntlet.getFont());
-        btnRenameGauntlet.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                renameGauntlet(lstGauntlets.getSelectedGauntlet());
-            }
-        });
+        btnRenameGauntlet.setCommand(event -> renameGauntlet(lstGauntlets.getSelectedGauntlet()));
         btnDeleteGauntlet.setFont(btnNewGauntlet.getFont());
-        btnDeleteGauntlet.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                deleteGauntlet(lstGauntlets.getSelectedGauntlet());
-            }
-        });
+        btnDeleteGauntlet.setCommand(event -> deleteGauntlet(lstGauntlets.getSelectedGauntlet()));
     }
 
     public void onActivate() {
@@ -136,81 +121,69 @@ public class LoadGauntletScreen extends LaunchScreen {
             return;
         }
 
-        LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), new Runnable() {
-            @Override
-            public void run() {
-                final GauntletData gauntlet = FModel.getGauntletData();
-                List<RegisteredPlayer> players = new ArrayList<>();
-                RegisteredPlayer humanPlayer = new RegisteredPlayer(gauntlet.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
-                players.add(humanPlayer);
-                players.add(new RegisteredPlayer(gauntlet.getDecks().get(gauntlet.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
-                gauntlet.startRound(players, humanPlayer);
-            }
+        LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, () -> {
+            final GauntletData gauntlet1 = FModel.getGauntletData();
+            List<RegisteredPlayer> players = new ArrayList<>();
+            RegisteredPlayer humanPlayer = new RegisteredPlayer(gauntlet1.getUserDeck()).setPlayer(GamePlayerUtil.getGuiPlayer());
+            players.add(humanPlayer);
+            players.add(new RegisteredPlayer(gauntlet1.getDecks().get(gauntlet1.getCompleted())).setPlayer(GamePlayerUtil.createAiPlayer()));
+            gauntlet1.startRound(players, humanPlayer);
         });
     }
 
     private void renameGauntlet(final GauntletData gauntlet) {
         if (gauntlet == null) { return; }
 
-        ThreadUtil.invokeInGameThread(new Runnable() {
-            @Override
-            public void run() {
-                String gauntletName;
-                String oldGauntletName = gauntlet.getName();
-                while (true) {
-                    gauntletName = SOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblEnterNewGauntletGameName"), Forge.getLocalizer().getMessage("lblRenameGauntlet"), null, oldGauntletName);
-                    if (gauntletName == null) { return; }
+        ThreadUtil.invokeInGameThread(() -> {
+            String gauntletName;
+            String oldGauntletName = gauntlet.getName();
+            while (true) {
+                gauntletName = SOptionPane.showInputDialog(Forge.getLocalizer().getMessage("lblEnterNewGauntletGameName"), Forge.getLocalizer().getMessage("lblRenameGauntlet"), null, oldGauntletName);
+                if (gauntletName == null) { return; }
 
-                    gauntletName = QuestUtil.cleanString(gauntletName);
-                    if (gauntletName.equals(oldGauntletName)) { return; } //quit if chose same name
+                gauntletName = QuestUtil.cleanString(gauntletName);
+                if (gauntletName.equals(oldGauntletName)) { return; } //quit if chose same name
 
-                    if (gauntletName.isEmpty()) {
-                        SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblPleaseSpecifyGauntletName"));
-                        continue;
-                    }
-
-                    boolean exists = false;
-                    for (GauntletData gauntletData : lstGauntlets) {
-                        if (gauntletData.getName().equalsIgnoreCase(gauntletName)) {
-                            exists = true;
-                            break;
-                        }
-                    }
-                    if (exists) {
-                        SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblGauntletNameExistsPleasePickAnotherName"));
-                        continue;
-                    }
-                    break;
+                if (gauntletName.isEmpty()) {
+                    SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblPleaseSpecifyGauntletName"));
+                    continue;
                 }
-                final String newGauntletName = gauntletName;
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        gauntlet.rename(newGauntletName);
-                        lstGauntlets.refresh();
-                        lstGauntlets.setSelectedGauntlet(gauntlet);
+
+                boolean exists = false;
+                for (GauntletData gauntletData : lstGauntlets) {
+                    if (gauntletData.getName().equalsIgnoreCase(gauntletName)) {
+                        exists = true;
+                        break;
                     }
-                });
+                }
+                if (exists) {
+                    SOptionPane.showMessageDialog(Forge.getLocalizer().getMessage("lblGauntletNameExistsPleasePickAnotherName"));
+                    continue;
+                }
+                break;
             }
+            final String newGauntletName = gauntletName;
+            FThreads.invokeInEdtLater(() -> {
+                gauntlet.rename(newGauntletName);
+                lstGauntlets.refresh();
+                lstGauntlets.setSelectedGauntlet(gauntlet);
+            });
         });
     }
 
     private void deleteGauntlet(final GauntletData gauntlet) {
         if (gauntlet == null) { return; }
 
-        ThreadUtil.invokeInGameThread(new Runnable() {
-            @Override
-            public void run() {
-                if (!SOptionPane.showConfirmDialog(
-                        Forge.getLocalizer().getMessage("lblAreYouSuerDeleteGauntlet", gauntlet.getName()),
-                        Forge.getLocalizer().getMessage("lblDeleteGauntlet"), Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblCancel"))) {
-                    return;
-                }
-
-                GauntletIO.getGauntletFile(gauntlet).delete();
-
-                lstGauntlets.removeGauntlet(gauntlet);
+        ThreadUtil.invokeInGameThread(() -> {
+            if (!SOptionPane.showConfirmDialog(
+                    Forge.getLocalizer().getMessage("lblAreYouSuerDeleteGauntlet", gauntlet.getName()),
+                    Forge.getLocalizer().getMessage("lblDeleteGauntlet"), Forge.getLocalizer().getMessage("lblDelete"), Forge.getLocalizer().getMessage("lblCancel"))) {
+                return;
             }
+
+            GauntletIO.getGauntletFile(gauntlet).delete();
+
+            lstGauntlets.removeGauntlet(gauntlet);
         });
     }
 
@@ -299,12 +272,7 @@ public class LoadGauntletScreen extends LaunchScreen {
         public void refresh() {
             List<GauntletData> sorted = new ArrayList<>();
             sorted.addAll(gauntlets);
-            Collections.sort(sorted, new Comparator<GauntletData>() {
-                @Override
-                public int compare(final GauntletData x, final GauntletData y) {
-                    return x.getName().toLowerCase().compareTo(y.getName().toLowerCase());
-                }
-            });
+            Collections.sort(sorted, (x, y) -> x.getName().toLowerCase().compareTo(y.getName().toLowerCase()));
             setListData(sorted);
         }
 

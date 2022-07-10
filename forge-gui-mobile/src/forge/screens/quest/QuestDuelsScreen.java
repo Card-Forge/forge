@@ -33,12 +33,7 @@ public class QuestDuelsScreen extends QuestLaunchScreen {
 
     public QuestDuelsScreen() {
         super();
-        pnlDuels.setActivateHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                startMatch();
-            }
-        });
+        pnlDuels.setActivateHandler(event -> startMatch());
     }
 
     @Override
@@ -74,23 +69,15 @@ public class QuestDuelsScreen extends QuestLaunchScreen {
     }
 
     private void generateDuels() {
-        FThreads.invokeInEdtLater(new Runnable() {
-            @Override
-            public void run() {
-                LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingCurrentQuest"), new Runnable() {
-                    @Override
-                    public void run() {
-                        pnlDuels.clear();
-                        List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();
-                        if (duels != null) {
-                            for (QuestEventDuel duel : duels) {
-                                pnlDuels.add(new QuestEventPanel(duel, pnlDuels));
-                            }
-                        }
-                        pnlDuels.revalidate();
-                    }
-                });
+        FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingCurrentQuest"), true, () -> {
+            pnlDuels.clear();
+            List<QuestEventDuel> duels = FModel.getQuest().getDuelsManager().generateDuels();
+            if (duels != null) {
+                for (QuestEventDuel duel : duels) {
+                    pnlDuels.add(new QuestEventPanel(duel, pnlDuels));
+                }
             }
-        });
+            pnlDuels.revalidate();
+        }));
     }
 }

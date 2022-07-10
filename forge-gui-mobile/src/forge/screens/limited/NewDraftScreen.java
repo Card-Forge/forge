@@ -41,27 +41,15 @@ public class NewDraftScreen extends LaunchScreen {
 
     @Override
     protected void startMatch() {
-        ThreadUtil.invokeInGameThread(new Runnable() { //must run in game thread to prevent blocking UI thread
-            @Override
-            public void run() {
-                final LimitedPoolType poolType = SGuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblChooseDraftFormat"), LimitedPoolType.values());
-                if (poolType == null) { return; }
+        //must run in game thread to prevent blocking UI thread
+        ThreadUtil.invokeInGameThread(() -> {
+            final LimitedPoolType poolType = SGuiChoose.oneOrNone(Forge.getLocalizer().getMessage("lblChooseDraftFormat"), LimitedPoolType.values());
+            if (poolType == null) { return; }
 
-                final BoosterDraft draft = BoosterDraft.createDraft(poolType);
-                if (draft == null) { return; }
+            final BoosterDraft draft = BoosterDraft.createDraft(poolType);
+            if (draft == null) { return; }
 
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewDraft"), new Runnable() {
-                            @Override
-                            public void run() {
-                                Forge.openScreen(new DraftingProcessScreen(draft, EditorType.Draft, null));
-                            }
-                        });
-                    }
-                });
-            }
+            FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewDraft"), true, () -> Forge.openScreen(new DraftingProcessScreen(draft, EditorType.Draft, null))));
         });
     }
 }

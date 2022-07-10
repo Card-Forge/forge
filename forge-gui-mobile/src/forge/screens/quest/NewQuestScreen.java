@@ -186,17 +186,9 @@ public class NewQuestScreen extends FScreen {
     private final FCheckBox cbCommander = scroller.add(new FCheckBox(Forge.getLocalizer().getMessage("rbCommanderSubformat")));
 
     private final FLabel btnEmbark = add(new FLabel.ButtonBuilder()
-            .font(FSkinFont.get(22)).text(Forge.getLocalizer().getMessage("lblEmbark")).icon(FSkinImage.QUEST_ZEP).command(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    //create new quest in game thread so option panes can wait for input
-                    ThreadUtil.invokeInGameThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            newQuest();
-                        }
-                    });
-                }
+            .font(FSkinFont.get(22)).text(Forge.getLocalizer().getMessage("lblEmbark")).icon(FSkinImage.QUEST_ZEP).command(event -> {
+                //create new quest in game thread so option panes can wait for input
+                ThreadUtil.invokeInGameThread(() -> newQuest());
             }).build());
 
     public NewQuestScreen() {
@@ -209,24 +201,18 @@ public class NewQuestScreen extends FScreen {
         cbxStartingPool.addItem(StartingPoolType.DraftDeck);
         cbxStartingPool.addItem(StartingPoolType.SealedDeck);
         cbxStartingPool.addItem(StartingPoolType.Cube);
-        cbxStartingPool.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                updateStartingPoolOptions();
-                scroller.revalidate();
-            }
+        cbxStartingPool.setChangedHandler(event -> {
+            updateStartingPoolOptions();
+            scroller.revalidate();
         });
 
         cbxPrizedCards.addItem(Forge.getLocalizer().getMessage("lblSameAsStartingPool"));
         cbxPrizedCards.addItem(StartingPoolType.Complete);
         cbxPrizedCards.addItem(StartingPoolType.Sanctioned);
         cbxPrizedCards.addItem(StartingPoolType.Casual);
-        cbxPrizedCards.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                updatePrizeOptions();
-                scroller.revalidate();
-            }
+        cbxPrizedCards.setChangedHandler(event -> {
+            updatePrizeOptions();
+            scroller.revalidate();
         });
 
         for (GameFormat gf : FModel.getFormats().getSanctionedList()) {
@@ -243,18 +229,15 @@ public class NewQuestScreen extends FScreen {
         numberOfBoostersField.setEnabled(false);
 
         @SuppressWarnings("serial")
-        UiCommand colorBoxEnabler = new UiCommand() {
-            @Override
-            public void run() {
-                cbBlack.setEnabled(radBalanced.isSelected());
-                cbBlue.setEnabled(radBalanced.isSelected());
-                cbGreen.setEnabled(radBalanced.isSelected());
-                cbRed.setEnabled(radBalanced.isSelected());
-                cbWhite.setEnabled(radBalanced.isSelected());
-                cbColorless.setEnabled(radBalanced.isSelected());
-                cbIncludeArtifacts.setEnabled(!radSurpriseMe.isSelected());
-                numberOfBoostersField.setEnabled(radBoosters.isSelected());
-            }
+        UiCommand colorBoxEnabler = () -> {
+            cbBlack.setEnabled(radBalanced.isSelected());
+            cbBlue.setEnabled(radBalanced.isSelected());
+            cbGreen.setEnabled(radBalanced.isSelected());
+            cbRed.setEnabled(radBalanced.isSelected());
+            cbWhite.setEnabled(radBalanced.isSelected());
+            cbColorless.setEnabled(radBalanced.isSelected());
+            cbIncludeArtifacts.setEnabled(!radSurpriseMe.isSelected());
+            numberOfBoostersField.setEnabled(radBoosters.isSelected());
         };
 
         radBalanced.setCommand(colorBoxEnabler);
@@ -268,12 +251,7 @@ public class NewQuestScreen extends FScreen {
         // Default to 'Main world'
         cbxStartingWorld.setSelectedItem(FModel.getWorlds().get("Main world"));
 
-        cbxStartingWorld.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                updateEnabledFormats();
-            }
-        });
+        cbxStartingWorld.setChangedHandler(event -> updateEnabledFormats());
 
         updateStartingPoolOptions();
         updatePrizeOptions();
@@ -298,59 +276,44 @@ public class NewQuestScreen extends FScreen {
         unselectableSets.add("ARC");
         unselectableSets.add("PC2");
 
-        btnSelectFormat.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                ArchivedFormatSelect archivedFormatSelect = new ArchivedFormatSelect();
-                archivedFormatSelect.setOnCloseCallBack(new Runnable() {
-                    @Override
-                    public void run() {
-                        customFormatCodes.clear();
-                        btnSelectFormat.setText(archivedFormatSelect.getSelectedFormat().getName());
-                        List<String> setsToAdd = archivedFormatSelect.getSelectedFormat().getAllowedSetCodes();
-                        for (String setName:setsToAdd){
-                            if(!unselectableSets.contains(setName)){
-                                customFormatCodes.add(setName);
-                            }
-                        }
+        btnSelectFormat.setCommand(event -> {
+            ArchivedFormatSelect archivedFormatSelect = new ArchivedFormatSelect();
+            archivedFormatSelect.setOnCloseCallBack(() -> {
+                customFormatCodes.clear();
+                btnSelectFormat.setText(archivedFormatSelect.getSelectedFormat().getName());
+                List<String> setsToAdd = archivedFormatSelect.getSelectedFormat().getAllowedSetCodes();
+                for (String setName:setsToAdd){
+                    if(!unselectableSets.contains(setName)){
+                        customFormatCodes.add(setName);
                     }
-                });
-                Forge.openScreen(archivedFormatSelect);
-            }
+                }
+            });
+            Forge.openScreen(archivedFormatSelect);
         });
 
-        btnPrizeSelectFormat.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                ArchivedFormatSelect archivedFormatSelect = new ArchivedFormatSelect();
-                archivedFormatSelect.setOnCloseCallBack(new Runnable() {
-                    @Override
-                    public void run() {
-                        customPrizeFormatCodes.clear();
-                        btnPrizeSelectFormat.setText(archivedFormatSelect.getSelectedFormat().getName());
-                        List<String> setsToAdd = archivedFormatSelect.getSelectedFormat().getAllowedSetCodes();
-                        for (String setName:setsToAdd){
-                            if(!unselectableSets.contains(setName)){
-                                customPrizeFormatCodes.add(setName);
-                            }
-                        }
+        btnPrizeSelectFormat.setCommand(event -> {
+            ArchivedFormatSelect archivedFormatSelect = new ArchivedFormatSelect();
+            archivedFormatSelect.setOnCloseCallBack(() -> {
+                customPrizeFormatCodes.clear();
+                btnPrizeSelectFormat.setText(archivedFormatSelect.getSelectedFormat().getName());
+                List<String> setsToAdd = archivedFormatSelect.getSelectedFormat().getAllowedSetCodes();
+                for (String setName:setsToAdd){
+                    if(!unselectableSets.contains(setName)){
+                        customPrizeFormatCodes.add(setName);
                     }
-                });
-                Forge.openScreen(archivedFormatSelect);
-            }
+                }
+            });
+            Forge.openScreen(archivedFormatSelect);
         });
 
         // Fantasy box enabled by Default
         cbFantasy.setSelected(true);
         cbFantasy.setEnabled(true);
         cbCommander.setSelected(false);
-        cbCommander.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                if (!isCommander())
-                    return;
-                cbxStartingWorld.setSelectedItem(FModel.getWorlds().get("Random Commander"));
-            }
+        cbCommander.setCommand(event -> {
+            if (!isCommander())
+                return;
+            cbxStartingWorld.setSelectedItem(FModel.getWorlds().get("Random Commander"));
         });
 
     }
@@ -644,30 +607,22 @@ public class NewQuestScreen extends FScreen {
     }
 
     private void startNewQuest(final String questName, final GameFormat fmtPrizes, final Deck dckStartPool, final GameFormat fmtStartPool) {
-        FThreads.invokeInEdtLater(new Runnable() {
-            @Override
-            public void run() {
-                LoadingOverlay.show(Forge.getLocalizer().getMessage("lblCreatingNewQuest"), new Runnable() {
-                    @Override
-                    public void run() {
-                        final QuestMode mode = isFantasy() ? QuestMode.Fantasy : QuestMode.Classic;
-                        final StartingPoolPreferences userPrefs =
-                                new StartingPoolPreferences(getPoolType(), getPreferredColors(), cbIncludeArtifacts.isSelected(), startWithCompleteSet(), allowDuplicateCards(), numberOfBoostersField.getValue());
-                        QuestController qc = FModel.getQuest();
+        FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblCreatingNewQuest"), true, () -> {
+            final QuestMode mode = isFantasy() ? QuestMode.Fantasy : QuestMode.Classic;
+            final StartingPoolPreferences userPrefs =
+                    new StartingPoolPreferences(getPoolType(), getPreferredColors(), cbIncludeArtifacts.isSelected(), startWithCompleteSet(), allowDuplicateCards(), numberOfBoostersField.getValue());
+            QuestController qc = FModel.getQuest();
 
-                        DeckConstructionRules dcr = isCommander() ?  DeckConstructionRules.Commander: DeckConstructionRules.Default;
+            DeckConstructionRules dcr = isCommander() ?  DeckConstructionRules.Commander: DeckConstructionRules.Default;
 
-                        qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs, dcr);
-                        qc.save();
+            qc.newGame(questName, getSelectedDifficulty(), mode, fmtPrizes, isUnlockSetsAllowed(), dckStartPool, fmtStartPool, getStartingWorldName(), userPrefs, dcr);
+            qc.save();
 
-                        // Save in preferences.
-                        FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST, questName + ".dat");
-                        FModel.getQuestPreferences().save();
+            // Save in preferences.
+            FModel.getQuestPreferences().setPref(QPref.CURRENT_QUEST, questName + ".dat");
+            FModel.getQuestPreferences().save();
 
-                        QuestMenu.launchQuestMode(LaunchReason.NewQuest, isCommander()); //launch quest mode for new quest
-                    }
-                });
-            }
-        });
+            QuestMenu.launchQuestMode(LaunchReason.NewQuest, isCommander()); //launch quest mode for new quest
+        }));
     }
 }

@@ -79,6 +79,7 @@ public class Forge implements ApplicationListener {
     protected static TransitionScreen transitionScreen;
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
+    private boolean needsUpdate = false;
     public static boolean safeToClose = true;
     public static boolean magnify = false;
     public static boolean magnifyToggle = true;
@@ -785,6 +786,10 @@ public class Forge implements ApplicationListener {
         try {
             ImageCache.allowSingleLoad();
             ForgeAnimation.advanceAll();
+            if (needsUpdate) {
+                if (getAssets().manager.update())
+                    needsUpdate = false;
+            }
 
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
 
@@ -922,6 +927,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void resume() {
         Texture.setAssetManager(getAssets().manager);
+        needsUpdate = true;
         if (MatchController.getHostedMatch() != null) {
             MatchController.getHostedMatch().resume();
         }
