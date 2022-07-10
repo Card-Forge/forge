@@ -1,0 +1,12 @@
+Name:Iron Mastiff
+ManaCost:4
+Types:Artifact Creature Dog
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBTrigRollDice | TriggerDescription$ Whenever CARDNAME attacks, roll a d20 for each player being attacked and ignore all but the highest roll.
+SVar:DBTrigRollDice:DB$ RollDice | Sides$ 20 | Amount$ NbAttackedPlayers | UseHighestRoll$ True | ResultSubAbilities$ 1-9:DBDamageToController,10-19:DBDamageToDefending,20:DBDamageToOpponents
+SVar:NbAttackedPlayers:PlayerCountOpponents$HasPropertyDefending
+SVar:DBDamageToController:DB$ DealDamage | Defined$ You | NumDmg$ X | DamageDesc$ damage equal to its power | SpellDescription$ 1—9 VERT CARDNAME deals damage equal to its power to you.
+SVar:DBDamageToDefending:DB$ DealDamage | Defined$ Player.attackedBySourceThisCombat | NumDmg$ X | DamageDesc$ damage equal to its power | SpellDescription$ 10—19 VERT CARDNAME deals damage equal to its power to defending player.
+SVar:DBDamageToOpponents:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ X | DamageDesc$ damage equal to its power | SpellDescription$ 20 VERT CARDNAME deals damage equal to its power to each opponent.
+SVar:X:Count$CardPower
+Oracle:Whenever Iron Mastiff attacks, roll a d20 for each player being attacked and ignore all but the highest roll.\n1—9 VERT Iron Mastiff deals damage equal to its power to you.\n10—19 VERT Iron Mastiff deals damage equal to its power to defending player.\n20 VERT Iron Mastiff deals damage equal to its power to each opponent.
