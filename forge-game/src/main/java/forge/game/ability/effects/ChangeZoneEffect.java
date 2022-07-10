@@ -1322,7 +1322,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
                     if (sa.hasParam("FaceDown")) {
                         c.turnFaceDown(true);
-                        setFaceDownState(c, sa);
+                        CardFactoryUtil.setFaceDownState(c, sa);
                     }
                     movedCard = game.getAction().moveToPlay(c, c.getController(), sa, moveParams);
 
