@@ -9,7 +9,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 import forge.ai.ComputerUtilAbility;
-import forge.ai.ComputerUtilCard;
 import forge.ai.ComputerUtilCost;
 import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
@@ -19,12 +18,9 @@ import forge.game.Game;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates.Presets;
 import forge.game.card.CardUtil;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
-import forge.game.combat.CombatUtil;
 import forge.game.cost.Cost;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseHandler;
@@ -43,7 +39,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if ("Khans".equals(aiLogic) || "Dragons".equals(aiLogic)) {
             return true;
-        } else if (aiLogic.startsWith("Fabricate") || "Riot".equals(aiLogic)) {
+        } else if ("Riot".equals(aiLogic)) {
             return true;
         } else if ("Pump".equals(aiLogic) || "BestOption".equals(aiLogic)) {
             for (AbilitySub sb : sa.getAdditionalAbilityList("Choices")) {
@@ -265,83 +261,6 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
             }
             // if unsure, random?
             return Aggregates.random(spells);
-        } else if (logic.startsWith("Fabricate")) {
-            final int n = Integer.valueOf(logic.substring("Fabricate".length()));
-            if(spells.size() < 2) {
-				// If the creature is no longer on the battlefield, the option
-				// to add counters is already removed at this point. Return the
-				// only available option: create servo tokens.
-            	return spells.get(0);
-            }
-            SpellAbility counterSA = spells.get(0), tokenSA = spells.get(1);
-
-            // check for something which might prevent the counters to be placed on host
-            if (!host.canReceiveCounters(CounterEnumType.P1P1)) {
-                return tokenSA;
-            }
-
-            // if host would leave the play or if host is useless, create tokens
-            if (host.hasSVar("EndOfTurnLeavePlay") || ComputerUtilCard.isUselessCreature(player, host)) {
-                return tokenSA;
-            }
-
-            // need a copy for one with extra +1/+1 counter boost,
-            // without causing triggers to run
-            final Card copy = CardUtil.getLKICopy(host);
-            copy.setCounters(CounterEnumType.P1P1, copy.getCounters(CounterEnumType.P1P1) + n);
-            copy.setZone(host.getZone());
-
-            // if host would put into the battlefield attacking
-            if (combat != null && combat.isAttacking(host)) {
-                final Player defender = combat.getDefenderPlayerByAttacker(host);
-                if (defender.canLoseLife() && !ComputerUtilCard.canBeBlockedProfitably(defender, copy, true)) {
-                    return counterSA;
-                }
-                return tokenSA;
-            }
-
-            // if the host has haste and can attack
-            if (CombatUtil.canAttack(copy)) {
-                for (final Player opp : player.getOpponents()) {
-                    if (CombatUtil.canAttack(copy, opp) &&
-                            opp.canLoseLife() &&
-                            !ComputerUtilCard.canBeBlockedProfitably(opp, copy, true))
-                        return counterSA;
-                }
-            }
-
-            // TODO check for trigger to turn token ETB into +1/+1 counter for host
-            // TODO check for trigger to turn token ETB into damage or life loss for opponent
-            // in this cases Token might be prefered even if they would not survive
-            final Card tokenCard = TokenAi.spawnToken(player, tokenSA);
-
-            // Token would not survive
-            if (!tokenCard.isCreature() || tokenCard.getNetToughness() < 1) {
-                return counterSA;
-            }
-
-            // Special Card logic, this one try to median its power with the number of artifacts
-            if ("Marionette Master".equals(sourceName)) {
-                CardCollection list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
-                return list.size() >= copy.getNetPower() ? counterSA : tokenSA;
-            } else if ("Cultivator of Blades".equals(sourceName)) {
-                // Cultivator does try to median with number of Creatures
-                CardCollection list = player.getCreaturesInPlay();
-                return list.size() >= copy.getNetPower() ? counterSA : tokenSA;
-            }
-
-            // evaluate Creature with +1/+1
-            int evalCounter = ComputerUtilCard.evaluateCreature(copy);
-
-            final CardCollection tokenList = new CardCollection(host);
-            for (int i = 0; i < n; ++i) {
-                tokenList.add(TokenAi.spawnToken(player, tokenSA));
-            }
-
-            // evaluate Host with Tokens
-            int evalToken = ComputerUtilCard.evaluateCreatureList(tokenList);
-
-            return evalToken >= evalCounter ? tokenSA : counterSA;
         } else if ("CombustibleGearhulk".equals(logic)) {
             Player controller = sa.getActivatingPlayer();
             List<ZoneType> zones = ZoneType.listValueOf("Graveyard, Battlefield, Exile");
