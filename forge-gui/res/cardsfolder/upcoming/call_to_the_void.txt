@@ -1,9 +1,6 @@
 Name:Call to the Void
 ManaCost:4 B
 Types:Sorcery
-A:SP$ RepeatEach | Cost$ 4 B | RepeatPlayers$ Player | RepeatSubAbility$ DBChooseCreatureYouCtrl | SubAbility$ DBRevealChosenToAll
-SVar:DBChooseCreatureYouCtrl:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ Secretly choose a creature you control | SubAbility$ DBChooseCreatureYouDontCtrl | RememberChosen$ True | Mandatory$ True
-SVar:DBChooseCreatureYouDontCtrl:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Choices$ Creature.nonRememberedPlayerCtrl | ChoiceTitle$ Secretly choose a creature you don't control | RememberChosen$ True | Mandatory$ True
-SVar:DBRevealChosenToAll:DB$ Reveal | Defined$ CardOwner | RevealDefined$ RememberedCard | RevealToAll$ True | RevealTitle$ OVERRIDE Creatures chosen. They will be destroyed. | Description$ Test | SubAbility$ DBDestroyChosen
+A:SP$ ChooseCard | Defined$ Player | Choices$ Creature | SecretlyChoose$ True | Amount$ 1 | ControlAndNot$ True | ChoiceTitle$ Secretly choose a creature | Reveal$ True | RevealTitle$ OVERRIDE Chosen creatures. They will be destroyed. | SubAbility$ DBDestroyChosen | RememberChosen$ True | Mandatory$ True
 SVar:DBDestroyChosen:DB$ DestroyAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBCleanUp
-SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True 
+SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True
