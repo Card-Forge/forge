@@ -23,7 +23,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Scaling;
 import forge.Forge;
 import forge.adventure.character.*;
@@ -43,6 +42,7 @@ import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static forge.adventure.util.Paths.MANA_ATLAS;
@@ -69,7 +69,7 @@ public class MapStage extends GameStage {
     private final Vector2 oldPosition3 = new Vector2();
     private final Vector2 oldPosition4 = new Vector2();
     private boolean isLoadingMatch = false;
-    private ObjectMap<String, Byte> mapFlags = new ObjectMap<>(); //Stores local map flags. These aren't available outside this map.
+    private HashMap<String, Byte> mapFlags = new HashMap<>(); //Stores local map flags. These aren't available outside this map.
 
     private Dialog dialog;
     private Stage dialogStage;
