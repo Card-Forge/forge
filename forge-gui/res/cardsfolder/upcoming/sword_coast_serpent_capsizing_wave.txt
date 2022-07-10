@@ -3,7 +3,7 @@ ManaCost:5 U U
 Types:Creature Serpent Dragon
 PT:6/6
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ Unblockable | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME can't be blocked as long as you've cast a noncreature spell this turn.
-SVar:X:Count$ThisTurnCast_Card.nonCreature+YouOwn
+SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
 AlternateMode:Adventure
 SVar:BuffedBy:Card.nonCreature+nonLand
 Oracle:Sword Coast Serpent can't be blocked as long as you've cast a noncreature spell this turn.
