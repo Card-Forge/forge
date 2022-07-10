@@ -22,39 +22,25 @@ public class LoadingOverlay extends FOverlay {
     private static final FSkinFont FONT = FSkinFont.get(22);
     private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.75f);
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-
     public static void show(String caption0, final Runnable runnable) {
-        final LoadingOverlay loader = new LoadingOverlay(caption0);
+        show(caption0, false, runnable);
+    }
+    public static void show(String caption0, boolean textMode, final Runnable runnable) {
+        final LoadingOverlay loader = new LoadingOverlay(caption0, textMode);
         loader.show(); //show loading overlay then delay running remaining logic so UI can respond
-        ThreadUtil.invokeInGameThread(new Runnable() {
-            @Override
-            public void run() {
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        runnable.run();
-                        loader.hide();
-                        loader.finishedloading(); //setLoadingaMatch to false
-                    }
-                });
-            }
-        });
+        ThreadUtil.invokeInGameThread(() -> FThreads.invokeInEdtLater(() -> {
+            runnable.run();
+            loader.hide();
+            loader.finishedloading(); //setLoadingaMatch to false
+        }));
     }
 
     public static void runBackgroundTask(String caption0, final Runnable task) {
-        final LoadingOverlay loader = new LoadingOverlay(caption0);
+        final LoadingOverlay loader = new LoadingOverlay(caption0, true);
         loader.show();
-        FThreads.invokeInBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                task.run();
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        loader.hide();
-                    }
-                });
-            }
+        FThreads.invokeInBackgroundThread(() -> {
+            task.run();
+            FThreads.invokeInEdtLater(() -> loader.hide());
         });
     }
 
@@ -63,6 +49,7 @@ public class LoadingOverlay extends FOverlay {
 
     public LoadingOverlay(String caption0) {
         caption = caption0;
+        textMode = false;
     }
 
     public LoadingOverlay(String caption0, boolean textOnly) {

@@ -88,7 +88,7 @@ public class FSkin {
      *            the skin name
      */
     public static void loadLight(String skinName, final SplashScreen splashScreen) {
-        AssetManager manager = Forge.getAssets().others;
+        AssetManager manager = Forge.getAssets().manager;
         preferredName = skinName.toLowerCase().replace(' ', '_');
 
         //reset hd buttons/icons
@@ -236,7 +236,7 @@ public class FSkin {
             parameter.magFilter = Texture.TextureFilter.Linear;
         }
 
-        AssetManager manager = Forge.getAssets().others;
+        AssetManager manager = Forge.getAssets().manager;
 
         // Grab and test various sprite files.
         final FileHandle f1 = getDefaultSkinFile(SourceFile.ICONS.getFilename());

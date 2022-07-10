@@ -22,23 +22,10 @@ public abstract class QuestLaunchScreen extends LaunchScreen {
 
     @Override
     protected void startMatch() {
-        FThreads.invokeInBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                if (QuestUtil.canStartGame()) {
-                    FThreads.invokeInEdtLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), new Runnable() {
-                                @Override
-                                public void run() {
-                                    QuestUtil.finishStartingGame();
-                                }
-                            });
-                        }
-                    });
-                    return;
-                }
+        FThreads.invokeInBackgroundThread(() -> {
+            if (QuestUtil.canStartGame()) {
+                FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, () -> QuestUtil.finishStartingGame()));
+                return;
             }
         });
     }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -78,6 +79,7 @@ public class Forge implements ApplicationListener {
     protected static TransitionScreen transitionScreen;
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
+    private boolean needsUpdate = false;
     public static boolean safeToClose = true;
     public static boolean magnify = false;
     public static boolean magnifyToggle = true;
@@ -784,6 +786,10 @@ public class Forge implements ApplicationListener {
         try {
             ImageCache.allowSingleLoad();
             ForgeAnimation.advanceAll();
+            if (needsUpdate) {
+                if (getAssets().manager.update())
+                    needsUpdate = false;
+            }
 
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
 
@@ -920,6 +926,8 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void resume() {
+        Texture.setAssetManager(getAssets().manager);
+        needsUpdate = true;
         if (MatchController.getHostedMatch() != null) {
             MatchController.getHostedMatch().resume();
         }
