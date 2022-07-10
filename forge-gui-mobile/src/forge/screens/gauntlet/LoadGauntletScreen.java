@@ -4,7 +4,6 @@ import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import com.badlogic.gdx.utils.Align;
@@ -31,8 +30,6 @@ import forge.screens.home.LoadGameMenu;
 import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FButton;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;

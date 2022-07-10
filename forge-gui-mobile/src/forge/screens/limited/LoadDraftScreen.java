@@ -30,8 +30,6 @@ import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.LoadGameMenu;
 import forge.toolbox.FComboBox;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
 

@@ -12,8 +12,6 @@ import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 
 public class ConquestMenu extends FPopupMenu {
     private static final ConquestMenu conquestMenu = new ConquestMenu();

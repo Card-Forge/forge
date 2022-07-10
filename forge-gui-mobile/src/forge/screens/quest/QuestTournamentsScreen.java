@@ -34,8 +34,6 @@ import forge.screens.LoadingOverlay;
 import forge.screens.limited.DraftingProcessScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextField;
 import forge.util.Utils;

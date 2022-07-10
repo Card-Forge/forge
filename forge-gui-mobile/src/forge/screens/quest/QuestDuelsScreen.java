@@ -12,8 +12,6 @@ import forge.gui.FThreads;
 import forge.gui.interfaces.IButton;
 import forge.model.FModel;
 import forge.screens.LoadingOverlay;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 
 public class QuestDuelsScreen extends QuestLaunchScreen {

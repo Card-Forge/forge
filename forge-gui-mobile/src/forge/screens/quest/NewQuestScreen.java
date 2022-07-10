@@ -42,8 +42,6 @@ import forge.screens.quest.QuestMenu.LaunchReason;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FNumericTextField;
 import forge.toolbox.FOptionPane;
