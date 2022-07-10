@@ -203,6 +203,18 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     chosenPool.add(choice);
                 }
                 chosen.addAll(chosenPool);
+            } else if (sa.hasParam("ControlAndNot")) {
+                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseCreature");
+                // Targeted player (p) chooses N creatures that belongs to them
+                CardCollection tgtPlayerCtrl = CardLists.filterControlledBy(choices, p);
+                chosen.addAll(p.getController().chooseCardsForEffect(tgtPlayerCtrl, sa, title + " " + "you control", minAmount, validAmount,
+                    !sa.hasParam("Mandatory"), null));
+                // Targeted player (p) chooses N creatures that don't belong to them
+                CardCollection notTgtPlayerCtrl = new CardCollection(choices);
+                notTgtPlayerCtrl.removeAll(tgtPlayerCtrl);
+                chosen.addAll(p.getController().chooseCardsForEffect(notTgtPlayerCtrl, sa, title + " " + "you don't control", minAmount, validAmount,
+                    !sa.hasParam("Mandatory"), null));
+
             } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("AtRandom") && !choices.isEmpty()) {
                     Aggregates.random(choices, validAmount, chosen);
@@ -233,8 +245,13 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     }
                 }
             }
-            if (sa.hasParam("Reveal")) {
-                game.getAction().reveal(chosen, p, true, Localizer.getInstance().getMessage("lblChosenCards") + " ");
+            if (sa.hasParam("Reveal") && !sa.hasParam("SecretlyChoose")) {
+                game.getAction().reveal(chosen, p, true, sa.hasParam("RevealTitle") ? sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ");
+            }
+        }
+        if(sa.hasParam("Reveal") && sa.hasParam("SecretlyChoose")) {
+            for (final Player p : tgtPlayers) {
+                game.getAction().reveal(chosen, p, true, sa.hasParam("RevealTitle") ? sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ");
             }
         }
         host.setChosenCards(chosen);
