@@ -18,6 +18,7 @@
 package forge.assets;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
@@ -78,6 +79,7 @@ public class ImageCache {
     private static List<String> borderlessCardlistKey = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
     static int maxCardCapacity = 400; //default card capacity
     static EvictingQueue<String> q;
+    static Set<String> cardsLoaded = new HashSet<>(800);
     static Queue<String> syncQ;
     static TextureParameter defaultParameter = new TextureParameter();
     static TextureParameter filtered = new TextureParameter();
@@ -124,7 +126,12 @@ public class ImageCache {
     }
     public static void disposeTextures(){
         CardRenderer.clearcardArtCache();
-        Forge.getAssets().cards.clear();
+        //unload all cardsLoaded
+        for (String fileName : cardsLoaded) {
+            if (Forge.getAssets().manager.contains(fileName))
+                Forge.getAssets().manager.unload(fileName);
+        }
+        cardsLoaded.clear();
     }
 
     public static Texture getImage(InventoryItem ii) {
@@ -200,7 +207,7 @@ public class ImageCache {
     public static Texture getImage(String imageKey, boolean useDefaultIfNotFound) {
         return getImage(imageKey, useDefaultIfNotFound, false);
     }
-    public static Texture getImage(String imageKey, boolean useDefaultIfNotFound, boolean useOtherCache) {
+    public static Texture getImage(String imageKey, boolean useDefaultIfNotFound, boolean others) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
             return null;
 
@@ -225,7 +232,7 @@ public class ImageCache {
         File imageFile = ImageKeys.getImageFile(imageKey);
         if (useDefaultIfNotFound) {
             // Load from file and add to cache if not found in cache initially.
-            image = getAsset(imageKey, imageFile, useOtherCache);
+            image = getAsset(imageKey, imageFile, others);
 
             if (image != null) { return image; }
 
@@ -241,7 +248,7 @@ public class ImageCache {
         }
 
         try {
-            image = loadAsset(imageKey, imageFile, useOtherCache);
+            image = loadAsset(imageKey, imageFile, others);
         } catch (final Exception ex) {
             image = null;
         }
@@ -260,37 +267,34 @@ public class ImageCache {
         }
         return image;
     }
-    static Texture getAsset(String imageKey, File file, boolean otherCache) {
+    static Texture getAsset(String imageKey, File file, boolean others) {
         if (file == null)
             return null;
-        if (!otherCache && Forge.enableUIMask.equals("Full") && isBorderless(imageKey))
+        if (!others && Forge.enableUIMask.equals("Full") && isBorderless(imageKey))
             return Forge.getAssets().generatedCards.get(imageKey);
-        if (otherCache)
-            return Forge.getAssets().others.get(file.getPath(), Texture.class, false);
-        return Forge.getAssets().cards.get(file.getPath(), Texture.class, false);
+        return Forge.getAssets().manager.get(file.getPath(), Texture.class, false);
     }
-    static Texture loadAsset(String imageKey, File file, boolean otherCache) {
+    static Texture loadAsset(String imageKey, File file, boolean others) {
         if (file == null)
             return null;
-        syncQ.add(file.getPath());
-        if (!otherCache && Forge.getAssets().cards.getLoadedAssets() > maxCardCapacity) {
-            unloadCardTextures(Forge.getAssets().cards);
+        if (!others) {
+            syncQ.add(file.getPath());
+            cardsLoaded.add(file.getPath());
+        }
+        if (!others && cardsLoaded.size() > maxCardCapacity) {
+            unloadCardTextures(Forge.getAssets().manager);
             return null;
         }
         String fileName = file.getPath();
         //load to assetmanager
-        if (otherCache) {
-            Forge.getAssets().others.load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
-            Forge.getAssets().others.finishLoadingAsset(fileName);
-        } else {
-            Forge.getAssets().cards.load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
-            Forge.getAssets().cards.finishLoadingAsset(fileName);
-        }
+        Forge.getAssets().manager.load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
+        Forge.getAssets().manager.finishLoadingAsset(fileName);
+
         //return loaded assets
-        if (otherCache) {
-            return Forge.getAssets().others.get(fileName, Texture.class, false);
+        if (others) {
+            return Forge.getAssets().manager.get(fileName, Texture.class, false);
         } else {
-            Texture t = Forge.getAssets().cards.get(fileName, Texture.class, false);
+            Texture t = Forge.getAssets().manager.get(fileName, Texture.class, false);
             //if full bordermasking is enabled, update the border color
             if (Forge.enableUIMask.equals("Full")) {
                 boolean borderless = isBorderless(imageKey);
@@ -306,16 +310,18 @@ public class ImageCache {
     static void unloadCardTextures(AssetManager manager) {
         //get latest images from syncQ
         Set<String> newQ = Sets.newHashSet(syncQ);
-        //get loaded images from assetmanager
-        Set<String> old = Sets.newHashSet(manager.getAssetNames());
-        //get all images not in newQ (old images to unload)
-        Set<String> toUnload = Sets.difference(old, newQ);
+        //get all images not in newQ (cardLists to unload)
+        Set<String> toUnload = Sets.difference(cardsLoaded, newQ);
         //unload from assetmanager to save RAM
         for (String asset : toUnload) {
-            manager.unload(asset);
+            if(manager.contains(asset))
+                manager.unload(asset);
         }
         //clear cachedArt since this is dependant to the loaded texture
         CardRenderer.clearcardArtCache();
+        cardsLoaded.clear();
+        //update with recent
+        cardsLoaded.addAll(newQ);
     }
     public static void preloadCache(Iterable<String> keys) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))

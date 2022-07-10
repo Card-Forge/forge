@@ -131,9 +131,9 @@ public enum FSkinTexture implements FImage {
                 if (preferredFile.path().contains("fallback_skin")) {
                     texture = new Texture(preferredFile);
                 } else {
-                    Forge.getAssets().others.load(preferredFile.path(), Texture.class);
-                    Forge.getAssets().others.finishLoadingAsset(preferredFile.path());
-                    texture = Forge.getAssets().others.get(preferredFile.path(), Texture.class);
+                    Forge.getAssets().manager.load(preferredFile.path(), Texture.class);
+                    Forge.getAssets().manager.finishLoadingAsset(preferredFile.path());
+                    texture = Forge.getAssets().manager.get(preferredFile.path(), Texture.class);
                 }
             }
             catch (final Exception e) {
@@ -155,9 +155,9 @@ public enum FSkinTexture implements FImage {
                     if (defaultFile.path().contains("fallback_skin")) {
                         texture = new Texture(defaultFile);
                     } else {
-                        Forge.getAssets().others.load(defaultFile.path(), Texture.class);
-                        Forge.getAssets().others.finishLoadingAsset(defaultFile.path());
-                        texture = Forge.getAssets().others.get(defaultFile.path(), Texture.class);
+                        Forge.getAssets().manager.load(defaultFile.path(), Texture.class);
+                        Forge.getAssets().manager.finishLoadingAsset(defaultFile.path());
+                        texture = Forge.getAssets().manager.get(defaultFile.path(), Texture.class);
                     }
                 }
                 catch (final Exception e) {

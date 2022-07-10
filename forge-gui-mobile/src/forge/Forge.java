@@ -8,6 +8,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -920,6 +921,7 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void resume() {
+        Texture.setAssetManager(getAssets().manager);
         if (MatchController.getHostedMatch() != null) {
             MatchController.getHostedMatch().resume();
         }
