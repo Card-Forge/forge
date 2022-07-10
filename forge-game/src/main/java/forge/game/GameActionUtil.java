@@ -34,6 +34,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
+import forge.game.cost.CostPayment;
 import forge.game.keyword.Keyword;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
@@ -840,6 +841,48 @@ public final class GameActionUtil {
         c.updateKeywords();
 
         c.getGame().getTriggerHandler().resetActiveTriggers();
+    }
+
+    public static void rollbackAbility(SpellAbility ability, final Zone fromZone, final int zonePosition, CostPayment payment, Card oldCard) {
+        // cancel ability during target choosing
+        final Game game = ability.getActivatingPlayer().getGame();
+
+        if (fromZone != null) { // and not a copy
+            oldCard.setCastSA(null);
+            oldCard.setCastFrom(null);
+            // add back to where it came from, hopefully old state
+            // skip GameAction
+            oldCard.getZone().remove(oldCard);
+            fromZone.add(oldCard, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
+            ability.setHostCard(oldCard);
+            ability.setXManaCostPaid(null);
+            ability.setSpendPhyrexianMana(false);
+            if (ability.hasParam("Announce")) {
+                for (final String aVar : ability.getParam("Announce").split(",")) {
+                    final String varName = aVar.trim();
+                    if (!varName.equals("X")) {
+                        ability.setSVar(varName, "0");
+                    }
+                }
+            }
+            // better safe than sorry approach in case rolled back ability was copy (from addExtraKeywordCost)
+            for (SpellAbility sa : oldCard.getSpells()) {
+                sa.setHostCard(oldCard);
+            }
+            //for Chorus of the Conclave
+            ability.rollback();
+
+            oldCard.setBackSide(false);
+            oldCard.setState(oldCard.getFaceupCardStateName(), true);
+            oldCard.unanimateBestow();
+        }
+
+        ability.clearTargets();
+
+        ability.resetOnceResolved();
+        payment.refundPayment();
+        game.getStack().clearFrozen();
+        game.getTriggerHandler().clearWaitingTriggers();
     }
 
 }
