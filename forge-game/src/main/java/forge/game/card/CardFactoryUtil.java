@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import forge.GameCommand;
 import forge.game.event.GameEventCardForetold;
 import forge.game.trigger.TriggerType;
 import org.apache.commons.lang3.StringUtils;
@@ -3747,5 +3748,38 @@ public class CardFactoryUtil {
 
         re.setOverridingAbility(saExile);
         card.addReplacementEffect(re);
+    }
+
+    public static void setFaceDownState(Card c, SpellAbility sa) {
+        final Card source = sa.getHostCard();
+        CardState faceDown = c.getFaceDownState();
+
+        // set New Pt doesn't work because this values need to be copyable for clone effects
+        if (sa.hasParam("FaceDownPower")) {
+            faceDown.setBasePower(AbilityUtils.calculateAmount(
+                    source, sa.getParam("FaceDownPower"), sa));
+        }
+        if (sa.hasParam("FaceDownToughness")) {
+            faceDown.setBaseToughness(AbilityUtils.calculateAmount(
+                    source, sa.getParam("FaceDownToughness"), sa));
+        }
+
+        if (sa.hasParam("FaceDownSetType")) {
+            faceDown.setType(new CardType(Arrays.asList(sa.getParam("FaceDownSetType").split(" & ")), false));
+        }
+
+        if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
+                || sa.hasParam("FaceDownSetType")) {
+            final GameCommand unanimate = new GameCommand() {
+                private static final long serialVersionUID = 8853789549297846163L;
+
+                @Override
+                public void run() {
+                    c.clearStates(CardStateName.FaceDown, true);
+                }
+            };
+
+            c.addFaceupCommand(unanimate);
+        }
     }
 }

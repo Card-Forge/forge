@@ -1,41 +1,18 @@
 package forge.game.ability.effects;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-import forge.game.*;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
-import forge.GameCommand;
-import forge.card.CardStateName;
 import forge.card.CardType;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardState;
-import forge.game.card.CardUtil;
-import forge.game.card.CardView;
-import forge.game.card.CardZoneTable;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.event.GameEventCombatChanged;
-import forge.game.player.DelayedReveal;
-import forge.game.player.Player;
-import forge.game.player.PlayerActionConfirmMode;
-import forge.game.player.PlayerCollection;
-import forge.game.player.PlayerView;
+import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
@@ -43,13 +20,13 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
-import forge.util.CardTranslation;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.MessageUtil;
-import forge.util.TextUtil;
+import forge.util.*;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
 
@@ -689,7 +666,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
                     if (sa.hasParam("FaceDown")) {
                         gameCard.turnFaceDown(true);
-                        setFaceDownState(gameCard, sa);
+                        CardFactoryUtil.setFaceDownState(gameCard, sa);
                     }
 
                     movedCard = game.getAction().moveTo(gameCard.getController().getZone(destination), gameCard, sa, moveParams);
@@ -1345,7 +1322,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
                     if (sa.hasParam("FaceDown")) {
                         c.turnFaceDown(true);
-                        setFaceDownState(c, sa);
+                        CardFactoryUtil.setFaceDownState(c, sa);
                     }
                     movedCard = game.getAction().moveToPlay(c, c.getController(), sa, moveParams);
 
@@ -1501,39 +1478,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 && !sa.hasParam("AtRandom")
                 && (!sa.hasParam("Defined") || sa.hasParam("ChooseFromDefined"))
                 && sa.getParam("WithTotalCMC") == null;
-    }
-
-    private static void setFaceDownState(Card c, SpellAbility sa) {
-        final Card source = sa.getHostCard();
-        CardState faceDown = c.getFaceDownState();
-
-        // set New Pt doesn't work because this values need to be copyable for clone effects
-        if (sa.hasParam("FaceDownPower")) {
-            faceDown.setBasePower(AbilityUtils.calculateAmount(
-                    source, sa.getParam("FaceDownPower"), sa));
-        }
-        if (sa.hasParam("FaceDownToughness")) {
-            faceDown.setBaseToughness(AbilityUtils.calculateAmount(
-                    source, sa.getParam("FaceDownToughness"), sa));
-        }
-
-        if (sa.hasParam("FaceDownSetType")) {
-            faceDown.setType(new CardType(Arrays.asList(sa.getParam("FaceDownSetType").split(" & ")), false));
-        }
-
-        if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
-                || sa.hasParam("FaceDownSetType")) {
-            final GameCommand unanimate = new GameCommand() {
-                private static final long serialVersionUID = 8853789549297846163L;
-
-                @Override
-                public void run() {
-                    c.clearStates(CardStateName.FaceDown, true);
-                }
-            };
-
-            c.addFaceupCommand(unanimate);
-        }
     }
 
     /**

@@ -162,6 +162,10 @@ public class SetStateEffect extends SpellAbilityEffect {
                 hasTransformed = gameCard.turnFaceUp(true, true, sa);
             } else {
                 hasTransformed = gameCard.changeCardState(mode, sa.getParam("NewState"), sa);
+                if (gameCard.isFaceDown() && (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
+                        || sa.hasParam("FaceDownSetType"))) {
+                    CardFactoryUtil.setFaceDownState(gameCard, sa);
+                }
             }
             if (hasTransformed) {
                 if (sa.isMorphUp()) {
