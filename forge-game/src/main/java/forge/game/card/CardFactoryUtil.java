@@ -1147,19 +1147,15 @@ public class CardFactoryUtil {
                     + " | ValidCard$ Card.Self | Secondary$ True"
                     + " | TriggerDescription$ Fabricate " + n + " (" + inst.getReminderText() + ")";
 
-            final String token = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ c_1_1_a_servo | ConditionPresent$ Card.StrictlySelf | ConditionCompare$ EQ1"
-                    + " | UnlessCost$ AddCounter<" + n + "/P1P1> | UnlessPayer$ You | UnlessResolveSubs$ WhenNotPaid | UnlessAI$ " + name
+            final String token = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ c_1_1_a_servo"
+                    + " | UnlessCost$ AddCounter<" + n + "/P1P1> | UnlessPayer$ You | UnlessAI$ " + name
                     + " | SpellDescription$ Fabricate - Create "
                     + Lang.nounWithNumeral(n, "1/1 colorless Servo artifact creature token") + ".";
-            final String token2 = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ c_1_1_a_servo | ConditionPresent$ Card.StrictlySelf | ConditionCompare$ EQ0";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
             SpellAbility saChoose = AbilityFactory.getAbility(token, card);
             saChoose.setIntrinsic(intrinsic);
-
-            AbilitySub saNoChoose = (AbilitySub) AbilityFactory.getAbility(token2, card);
-            saChoose.setSubAbility(saNoChoose);
 
             trigger.setOverridingAbility(saChoose);
 
