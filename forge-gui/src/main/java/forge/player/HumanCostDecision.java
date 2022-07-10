@@ -667,7 +667,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final int c = cost.getAbilityAmount(ability);
 
         if (cost.payCostFromSource()) {
-            if (ability.getDescription().contains("Fabricate") && !controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblPutNTypeCounterOnTarget", String.valueOf(c), cost.getCounter().getName(), ability.getHostCard().getName()), ability)) {
+            // UnlessCost so player might not want to pay (Fabricate)
+            if (ability.hasParam("UnlessCost") && !controller.confirmPayment(cost, Localizer.getInstance().getMessage("lblPutNTypeCounterOnTarget", String.valueOf(c), cost.getCounter().getName(), ability.getHostCard().getName()), ability)) {
                 return null;
             }
             cost.setLastPaidAmount(c);
