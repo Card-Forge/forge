@@ -25,18 +25,9 @@ import forge.screens.TransitionScreen;
 import forge.toolbox.FProgressBar;
 import forge.util.WordUtil;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class FSkin {
-    private static final Map<FSkinProp, FSkinImage> images = new HashMap<>(512);
-    private static final Map<Integer, TextureRegion> avatars = new HashMap<>(150);
-    private static final Map<Integer, TextureRegion> sleeves = new HashMap<>(64);
-    private static final Map<Integer, TextureRegion> cracks = new HashMap<>(16);
-    private static final Map<Integer, TextureRegion> borders = new HashMap<>();
-    private static final Map<Integer, TextureRegion> deckbox = new HashMap<>();
-    private static final Map<Integer, TextureRegion> cursor = new HashMap<>();
-
     private static Array<String> allSkins;
     private static FileHandle preferredDir;
     private static String preferredName;
@@ -53,27 +44,19 @@ public class FSkin {
         prefs.setPref(FPref.UI_SKIN, skinName);
         prefs.save();
 
-        Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
-            @Override
-            public void run() {
-                FThreads.invokeInBackgroundThread(() -> FThreads.invokeInEdtLater(() -> {
-                    final LoadingOverlay loader = new LoadingOverlay(Forge.getLocalizer().getMessageorUseDefault("lblRestartInFewSeconds", "Forge will restart after a few seconds..."), true);
-                    loader.show();
-                    FThreads.invokeInBackgroundThread(() -> {
-                        FSkinFont.deleteCachedFiles(); //delete cached font files so font can be update for new skin
-                        FThreads.delayInEDT(2000, new Runnable() {
-                            @Override
-                            public void run() {
-                                Forge.clearTransitionScreen();
-                                FThreads.invokeInEdtLater(() -> {
-                                    Forge.restart(true);
-                                });
-                            }
-                        });
+        Forge.setTransitionScreen(new TransitionScreen(() -> FThreads.invokeInBackgroundThread(() -> FThreads.invokeInEdtLater(() -> {
+            final LoadingOverlay loader = new LoadingOverlay(Forge.getLocalizer().getMessageorUseDefault("lblRestartInFewSeconds", "Forge will restart after a few seconds..."), true);
+            loader.show();
+            FThreads.invokeInBackgroundThread(() -> {
+                FSkinFont.deleteCachedFiles(); //delete cached font files so font can be update for new skin
+                FThreads.delayInEDT(2000, () -> {
+                    Forge.clearTransitionScreen();
+                    FThreads.invokeInEdtLater(() -> {
+                        Forge.restart(true);
                     });
-                }));
-            }
-        }, null, false, true));
+                });
+            });
+        })), null, false, true));
     }
     public static void loadLight(String skinName, final SplashScreen splashScreen,FileHandle prefDir) {
         preferredDir = prefDir;
@@ -226,8 +209,8 @@ public class FSkin {
             if (FSkin.preferredName.isEmpty()) { FSkin.loadLight("default", splashScreen); }
         }
 
-        avatars.clear();
-        sleeves.clear();
+        Forge.getAssets().avatars.clear();
+        Forge.getAssets().sleeves.clear();
 
         TextureLoader.TextureParameter parameter = new TextureLoader.TextureParameter();
         if (Forge.isTextureFilteringEnabled()) {
@@ -354,7 +337,7 @@ public class FSkin {
                         if (i == 0 && j == 0) { continue; }
                         pxTest = new Color(pxPreferredAvatars.getPixel(i + 50, j + 50));
                         if (pxTest.a == 0) { continue; }
-                        FSkin.avatars.put(counter++, new TextureRegion(manager.get(f5.path(), Texture.class), i, j, 100, 100));
+                        Forge.getAssets().avatars.put(counter++, new TextureRegion(manager.get(f5.path(), Texture.class), i, j, 100, 100));
                     }
                 }
                 pxPreferredAvatars.dispose();
@@ -369,7 +352,7 @@ public class FSkin {
                         if (i == 0 && j == 0) { continue; }
                         pxTest = new Color(pxDefaultAvatars.getPixel(i + 50, j + 50));
                         if (pxTest.a == 0) { continue; }
-                        FSkin.avatars.put(counter++, new TextureRegion(manager.get(f4.path(), Texture.class), i, j, 100, 100));
+                        Forge.getAssets().avatars.put(counter++, new TextureRegion(manager.get(f4.path(), Texture.class), i, j, 100, 100));
                     }
                 }
             }
@@ -381,7 +364,7 @@ public class FSkin {
                 for (int i = 0; i < sw; i += 360) {
                     pxTest = new Color(pxDefaultSleeves.getPixel(i + 180, j + 250));
                     if (pxTest.a == 0) { continue; }
-                    FSkin.sleeves.put(scount++, new TextureRegion(manager.get(f8.path(), Texture.class), i, j, 360, 500));
+                    Forge.getAssets().sleeves.put(scount++, new TextureRegion(manager.get(f8.path(), Texture.class), i, j, 360, 500));
                 }
             }
 
@@ -397,7 +380,7 @@ public class FSkin {
                 for (int i = 0; i < sw2; i += 360) {
                     pxTest = new Color(pxDefaultSleeves.getPixel(i + 180, j + 250));
                     if (pxTest.a == 0) { continue; }
-                    FSkin.sleeves.put(scount++, new TextureRegion(manager.get(f9.path(), Texture.class), i, j, 360, 500));
+                    Forge.getAssets().sleeves.put(scount++, new TextureRegion(manager.get(f9.path(), Texture.class), i, j, 360, 500));
                 }
             }
             //cracks
@@ -408,32 +391,32 @@ public class FSkin {
                 int x = j * 200;
                 for(int i = 0; i < 4; i++) {
                     int y = i * 279;
-                    FSkin.cracks.put(crackCount++, new TextureRegion(manager.get(f17.path(), Texture.class), x, y, 200, 279));
+                    Forge.getAssets().cracks.put(crackCount++, new TextureRegion(manager.get(f17.path(), Texture.class), x, y, 200, 279));
                 }
             }
 
             //borders
             manager.load(f10.path(), Texture.class);
             manager.finishLoadingAsset(f10.path());
-            FSkin.borders.put(0, new TextureRegion(manager.get(f10.path(), Texture.class), 2, 2, 672, 936));
-            FSkin.borders.put(1, new TextureRegion(manager.get(f10.path(), Texture.class), 676, 2, 672, 936));
+            Forge.getAssets().borders.put(0, new TextureRegion(manager.get(f10.path(), Texture.class), 2, 2, 672, 936));
+            Forge.getAssets().borders.put(1, new TextureRegion(manager.get(f10.path(), Texture.class), 676, 2, 672, 936));
             //deckboxes
             manager.load(f13.path(), Texture.class, parameter);
             manager.finishLoadingAsset(f13.path());
             //gold bg
-            FSkin.deckbox.put(0, new TextureRegion(manager.get(f13.path(), Texture.class), 2, 2, 488, 680));
+            Forge.getAssets().deckbox.put(0, new TextureRegion(manager.get(f13.path(), Texture.class), 2, 2, 488, 680));
             //deck box for card art
-            FSkin.deckbox.put(1, new TextureRegion(manager.get(f13.path(), Texture.class), 492, 2, 488, 680));
+            Forge.getAssets().deckbox.put(1, new TextureRegion(manager.get(f13.path(), Texture.class), 492, 2, 488, 680));
             //generic deck box
-            FSkin.deckbox.put(2, new TextureRegion(manager.get(f13.path(), Texture.class), 982, 2, 488, 680));
+            Forge.getAssets().deckbox.put(2, new TextureRegion(manager.get(f13.path(), Texture.class), 982, 2, 488, 680));
             //cursor
             manager.load(f19.path(), Texture.class);
             manager.finishLoadingAsset(f19.path());
-            FSkin.cursor.put(0, new TextureRegion(manager.get(f19.path(), Texture.class), 0, 0, 32, 32)); //default
-            FSkin.cursor.put(1, new TextureRegion(manager.get(f19.path(), Texture.class), 32, 0, 32, 32)); //magnify on
-            FSkin.cursor.put(2, new TextureRegion(manager.get(f19.path(), Texture.class), 64, 0, 32, 32)); // magnify off
+            Forge.getAssets().cursor.put(0, new TextureRegion(manager.get(f19.path(), Texture.class), 0, 0, 32, 32)); //default
+            Forge.getAssets().cursor.put(1, new TextureRegion(manager.get(f19.path(), Texture.class), 32, 0, 32, 32)); //magnify on
+            Forge.getAssets().cursor.put(2, new TextureRegion(manager.get(f19.path(), Texture.class), 64, 0, 32, 32)); // magnify off
 
-            Forge.setCursor(cursor.get(0), "0");
+            Forge.setCursor(Forge.getAssets().cursor.get(0), "0");
 
             preferredIcons.dispose();
             pxDefaultAvatars.dispose();
@@ -523,31 +506,31 @@ public class FSkin {
     }
 
     public static Map<FSkinProp, FSkinImage> getImages() {
-        return images;
+        return Forge.getAssets().images;
     }
 
     public static Map<Integer, TextureRegion> getAvatars() {
-        return avatars;
+        return Forge.getAssets().avatars;
     }
 
     public static Map<Integer, TextureRegion> getSleeves() {
-        return sleeves;
+        return Forge.getAssets().sleeves;
     }
 
     public static Map<Integer, TextureRegion> getCracks() {
-        return cracks;
+        return Forge.getAssets().cracks;
     }
 
     public static Map<Integer, TextureRegion> getBorders() {
-        return borders;
+        return Forge.getAssets().borders;
     }
 
     public static Map<Integer, TextureRegion> getDeckbox() {
-        return deckbox;
+        return Forge.getAssets().deckbox;
     }
 
     public static Map<Integer, TextureRegion> getCursor() {
-        return cursor;
+        return Forge.getAssets().cursor;
     }
 
     public static boolean isLoaded() { return loaded; }
