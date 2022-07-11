@@ -522,10 +522,6 @@ ScryfallCode=MH2
 [bundle]
 492 R Yusri, Fortune's Flame @Evyn Fong
 
-[rebalanced]
-A121 U A-Dragon's Rage Channeler @Martina Fackova
-A145 C A-Unholy Heat @Kari Christensen
-
 [Lands]
 19 Arid Mesa|MH2|1
 1 Arid Mesa|MH2|2
