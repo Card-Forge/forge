@@ -44,6 +44,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardState;
 import forge.game.card.CardTraitChanges;
@@ -351,8 +352,8 @@ public class ReplacementHandler {
                 tailend = tailend.getSubAbility();
             } while(tailend != null);
 
-            effectSA.setLastStateBattlefield(game.getLastStateBattlefield());
-            effectSA.setLastStateGraveyard(game.getLastStateGraveyard());
+            effectSA.setLastStateBattlefield((CardCollectionView) runParams.getOrDefault(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield()));
+            effectSA.setLastStateGraveyard((CardCollectionView) runParams.getOrDefault(AbilityKey.LastStateBattlefield, game.getLastStateGraveyard()));
             if (replacementEffect.isIntrinsic()) {
                 effectSA.setIntrinsic(true);
                 effectSA.changeText();
