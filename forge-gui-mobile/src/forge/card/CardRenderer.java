@@ -88,7 +88,7 @@ public class CardRenderer {
         public void onImageFetched() {
             ImageCache.clear();
             if (clearCardArtCache) {
-                cardArtCache.remove(key);
+                Forge.getAssets().cardArtCache.remove(key);
             }
         }
     }
@@ -189,13 +189,12 @@ public class CardRenderer {
         return Math.round(MANA_SYMBOL_SIZE + FSkinFont.get(12).getLineHeight() + 3 * FList.PADDING + 1);
     }
 
-    private static final Map<String, FImageComplex> cardArtCache = new HashMap<>(1024);
     public static final float CARD_ART_RATIO = 1.302f;
     public static final float CARD_ART_HEIGHT_PERCENTAGE = 0.43f;
     private static List<String> classicModuleCardtoCrop = FileUtil.readFile(ForgeConstants.CLASSIC_MODULE_CARD_TO_CROP_FILE);
 
     public static void clearcardArtCache(){
-        cardArtCache.clear();
+        Forge.getAssets().cardArtCache.clear();
     }
 
     //extract card art from the given card
@@ -219,7 +218,7 @@ public class CardRenderer {
     }
 
     public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard, boolean isSaga, boolean isClass, boolean isDungeon, boolean isFlipCard, boolean isPlanesWalker, boolean isModernFrame) {
-        FImageComplex cardArt = cardArtCache.get(imageKey);
+        FImageComplex cardArt = Forge.getAssets().cardArtCache.get(imageKey);
         boolean isClassicModule = imageKey != null && imageKey.length() > 2 && classicModuleCardtoCrop.contains(imageKey.substring(ImageKeys.CARD_PREFIX.length()).replace(".jpg", "").replace(".png", ""));
         if (cardArt == null) {
             Texture image = new RendererCachedCardImage(imageKey, true).getImage();
@@ -280,7 +279,7 @@ public class CardRenderer {
                             w *= artH / srcH;
                             h *= artW / srcW;
                             cardArt = new FRotatedImage(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h), true);
-                            cardArtCache.put(imageKey, cardArt);
+                            Forge.getAssets().cardArtCache.put(imageKey, cardArt);
                             return cardArt;
                         }
                     } else {
@@ -303,7 +302,7 @@ public class CardRenderer {
                     cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
                 }
                 if (!CardImageRenderer.forgeArt.equals(cardArt))
-                    cardArtCache.put(imageKey, cardArt);
+                    Forge.getAssets().cardArtCache.put(imageKey, cardArt);
             }
         }
         //fix display for effect
@@ -313,13 +312,13 @@ public class CardRenderer {
     }
 
     public static FImageComplex getAftermathSecondCardArt(final String imageKey) {
-        FImageComplex cardArt = cardArtCache.get("Aftermath_second_"+imageKey);
+        FImageComplex cardArt = Forge.getAssets().cardArtCache.get("Aftermath_second_"+imageKey);
         if (cardArt == null) {
             Texture image = new CachedCardImage(imageKey) {
                 @Override
                 public void onImageFetched() {
                     ImageCache.clear();
-                    cardArtCache.remove("Aftermath_second_" + imageKey);
+                    Forge.getAssets().cardArtCache.remove("Aftermath_second_" + imageKey);
                 }
             }.getImage();
             if (image != null) {
@@ -339,20 +338,20 @@ public class CardRenderer {
 
                 }
                 if (!CardImageRenderer.forgeArt.equals(cardArt))
-                    cardArtCache.put("Aftermath_second_"+imageKey, cardArt);
+                    Forge.getAssets().cardArtCache.put("Aftermath_second_"+imageKey, cardArt);
             }
         }
         return cardArt;
     }
 
     public static FImageComplex getAlternateCardArt(final String imageKey, boolean isPlanesWalker) {
-        FImageComplex cardArt = cardArtCache.get("Alternate_"+imageKey);
+        FImageComplex cardArt = Forge.getAssets().cardArtCache.get("Alternate_"+imageKey);
         if (cardArt == null) {
             Texture image = new CachedCardImage(imageKey) {
                 @Override
                 public void onImageFetched() {
                     ImageCache.clear();
-                    cardArtCache.remove("Alternate_" + imageKey);
+                    Forge.getAssets().cardArtCache.remove("Alternate_" + imageKey);
                 }
             }.getImage();
             if (image != null) {
@@ -386,7 +385,7 @@ public class CardRenderer {
                     cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
                 }
                 if (!CardImageRenderer.forgeArt.equals(cardArt))
-                    cardArtCache.put("Alternate_"+imageKey, cardArt);
+                    Forge.getAssets().cardArtCache.put("Alternate_"+imageKey, cardArt);
             }
         }
         return cardArt;
@@ -395,9 +394,9 @@ public class CardRenderer {
     public static FImageComplex getMeldCardParts(final String imageKey, boolean bottom) {
         FImageComplex cardArt;
         if (!bottom) {
-            cardArt = cardArtCache.get("Meld_primary_"+imageKey);
+            cardArt = Forge.getAssets().cardArtCache.get("Meld_primary_"+imageKey);
         } else {
-            cardArt = cardArtCache.get("Meld_secondary_"+imageKey);
+            cardArt = Forge.getAssets().cardArtCache.get("Meld_secondary_"+imageKey);
         }
 
         if (cardArt == null) {
@@ -405,8 +404,8 @@ public class CardRenderer {
                 @Override
                 public void onImageFetched() {
                     ImageCache.clear();
-                    cardArtCache.remove("Meld_primary_" + imageKey);
-                    cardArtCache.remove("Meld_secondary_" + imageKey);
+                    Forge.getAssets().cardArtCache.remove("Meld_primary_" + imageKey);
+                    Forge.getAssets().cardArtCache.remove("Meld_secondary_" + imageKey);
                 }
             }.getImage();
             if (image != null) {
@@ -421,9 +420,9 @@ public class CardRenderer {
 
                 }
                 if (!bottom && !CardImageRenderer.forgeArt.equals(cardArt))
-                    cardArtCache.put("Meld_primary_"+imageKey, cardArt);
+                    Forge.getAssets().cardArtCache.put("Meld_primary_"+imageKey, cardArt);
                 else if (!CardImageRenderer.forgeArt.equals(cardArt))
-                    cardArtCache.put("Meld_secondary_"+imageKey, cardArt);
+                    Forge.getAssets().cardArtCache.put("Meld_secondary_"+imageKey, cardArt);
             }
         }
         return cardArt;
