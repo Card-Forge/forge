@@ -794,5 +794,9 @@ ScryfallCode=J21
 786 L Mountain
 787 L Forest
 
+[rebalanced]
+A438 U A-Dragon's Rage Channeler @Martina Fackova
+A529 C A-Unholy Heat @Kari Christensen
+
 [tokens]
 u_8_8_kraken
