@@ -2140,7 +2140,9 @@ public class GameAction {
                     List<String> colorChoices = new ArrayList<>(MagicColor.Constant.ONLY_COLORS);
                     String prompt = CardTranslation.getTranslatedName(c.getName()) + ": " +
                             Localizer.getInstance().getMessage("lblChooseNColors", Lang.getNumeral(2));
-                    List<String> chosenColors = takesAction.getController().chooseColors(prompt, null, 2, 2, colorChoices);
+                    SpellAbility sa = new SpellAbility.EmptySa(ApiType.ChooseColor, c, takesAction);
+                    sa.putParam("AILogic", "MostProminentInComputerDeck");
+                    List<String> chosenColors = takesAction.getController().chooseColors(prompt, sa, 2, 2, colorChoices);
                     c.setChosenColors(chosenColors);
                 }
             }
