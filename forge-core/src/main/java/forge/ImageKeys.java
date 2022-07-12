@@ -31,6 +31,7 @@ public final class ImageKeys {
     private static Map<String, String> CACHE_CARD_PICS_SUBDIR;
 
     private static Map<String, Boolean> editionImageLookup = new HashMap<>();
+    private static Set<String> toFind = new HashSet<>();
 
     private static boolean isLibGDXPort = false;
 
@@ -110,7 +111,8 @@ public final class ImageKeys {
             filename = key;
             dir = CACHE_CARD_PICS_DIR;
         }
-
+        if (toFind.contains(filename))
+            return null;
         if (missingCards.contains(filename))
             return null;
 
@@ -173,12 +175,14 @@ public final class ImageKeys {
                 }
                 //setlookup
                 if (hasSetLookup(filename)) {
+                    toFind.add(filename);
                     ThreadUtil.getServicePool().submit(() -> {
                         File f = setLookUpFile(filename, fullborderFile);
                         if (f != null)
                             cachedCards.put(filename, f);
                         else //is null
                             missingCards.add(filename);
+                        toFind.remove(filename);
                     });
                 }
             }
