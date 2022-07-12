@@ -8,9 +8,11 @@ import forge.card.PrintSheet;
 import forge.item.*;
 import forge.token.TokenDb;
 import forge.util.FileUtil;
+import forge.util.ImageUtil;
 import forge.util.TextUtil;
 import forge.util.storage.IStorage;
 import forge.util.storage.StorageBase;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.io.File;
 import java.util.*;
@@ -751,6 +753,126 @@ public class StaticData {
         for (int i = 0; i < preferences.length; i++)
             preferences_avails[i] = prettifyCardArtPreferenceName(preferences[i]);
         return preferences_avails;
+    }
+    public void audit(StringBuffer nifSB, StringBuffer cniSB, int missingCount, int notImplementedCount) {
+        for (CardEdition e : editions) {
+            if (CardEdition.Type.FUNNY.equals(e.getType()))
+                continue;
+            boolean nifHeader = false;
+            boolean cniHeader = false;
+            boolean tokenHeader = false;
+
+            String imagePath;
+            int artIndex = 1;
+
+            HashMap<String, Pair<Boolean, Integer>> cardCount = new HashMap<>();
+            for (CardEdition.CardInSet c : e.getAllCardsInSet()) {
+                if (cardCount.containsKey(c.name)) {
+                    cardCount.put(c.name, Pair.of(c.collectorNumber.startsWith("F"), cardCount.get(c.name).getRight() + 1));
+                } else {
+                    cardCount.put(c.name, Pair.of(c.collectorNumber.startsWith("F"), 1));
+                }
+            }
+
+            // loop through the cards in this edition, considering art variations...
+            for (Map.Entry<String, Pair<Boolean, Integer>> entry : cardCount.entrySet()) {
+                String c = entry.getKey();
+                artIndex = entry.getValue().getRight();
+
+                PaperCard cp = getCommonCards().getCard(c, e.getCode(), artIndex);
+                if (cp == null) {
+                    cp = getVariantCards().getCard(c, e.getCode(), artIndex);
+                }
+
+                if (cp == null) {
+                    if (entry.getValue().getLeft()) //skip funny cards
+                        continue;
+                    if (CardEdition.Type.FUNNY.equals(e.getType()) && !StaticData.instance().getFunnySetCode().isEmpty())
+                        continue;
+                    if (!cniHeader) {
+                        cniSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                        cniHeader = true;
+                    }
+                    cniSB.append(" ").append(c).append("\n");
+                    notImplementedCount++;
+                    continue;
+                }
+
+                // check the front image
+                imagePath = ImageUtil.getImageRelativePath(cp, false, true, false);
+                if (imagePath != null) {
+                    File file = ImageKeys.getImageFile(imagePath);
+                    if (file == null && ImageKeys.hasSetLookup(imagePath))
+                        file = ImageKeys.setLookUpFile(imagePath, imagePath+"border");
+                    if (file == null) {
+                        if (!nifHeader) {
+                            nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                            nifHeader = true;
+                        }
+                        nifSB.append(" ").append(imagePath).append("\n");
+                        missingCount++;
+                    }
+                }
+
+                // check the back face
+                if (cp.hasBackFace()) {
+                    imagePath = ImageUtil.getImageRelativePath(cp, true, true, false);
+                    if (imagePath != null) {
+                        File file = ImageKeys.getImageFile(imagePath);
+                        if (file == null && ImageKeys.hasSetLookup(imagePath))
+                            file = ImageKeys.setLookUpFile(imagePath, imagePath+"border");
+                        if (file == null) {
+                            if (!nifHeader) {
+                                nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                                nifHeader = true;
+                            }
+                            nifSB.append(" ").append(imagePath).append("\n");
+                            missingCount++;
+                        }
+                    }
+                }
+            }
+
+            // TODO: Audit token images here...
+            for(Map.Entry<String, Integer> tokenEntry : e.getTokens().entrySet()) {
+                String name = tokenEntry.getKey();
+                artIndex = tokenEntry.getValue();
+                try {
+                    PaperToken token = getAllTokens().getToken(name, e.getCode());
+                    if (token == null) {
+                        continue;
+                    }
+
+                    for(int i = 0; i < artIndex; i++) {
+                        String imgKey = token.getImageKey(i);
+                        File file = ImageKeys.getImageFile(imgKey);
+                        if (file == null) {
+                            if (!nifHeader) {
+                                nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                                nifHeader = true;
+                            }
+                            if (!tokenHeader) {
+                                nifSB.append("\nTOKENS\n");
+                                tokenHeader = true;
+                            }
+                            nifSB.append(" ").append(token.getImageFilename(i + 1)).append("\n");
+                            missingCount++;
+                        }
+                    }
+                } catch(Exception ex) {
+                    System.out.println("No Token found: " + name + " in " + e.getName());
+                }
+            }
+            if (nifHeader)
+                nifSB.append("\n");
+        }
+
+        String totalStats = "Missing images: " + missingCount + "\nUnimplemented cards: " + notImplementedCount + "\n";
+        cniSB.append("\n-----------\n");
+        cniSB.append(totalStats);
+        cniSB.append("-----------\n\n");
+
+        nifSB.append(cniSB); // combine things together...
     }
 
     private String prettifyCardArtPreferenceName(CardDb.CardArtPreference preference) {

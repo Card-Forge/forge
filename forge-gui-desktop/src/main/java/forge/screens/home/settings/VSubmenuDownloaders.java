@@ -7,9 +7,6 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -17,24 +14,17 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-import forge.ImageKeys;
 import forge.StaticData;
-import forge.card.CardDb;
-import forge.card.CardEdition;
-import forge.card.CardEdition.CardInSet;
 import forge.gui.SOverlayUtils;
 import forge.gui.UiCommand;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.item.PaperCard;
-import forge.item.PaperToken;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.skin.FSkinProp;
 import forge.screens.home.EMenuGroup;
 import forge.screens.home.IVSubmenu;
 import forge.screens.home.VHomeUI;
-import forge.token.TokenDb;
 import forge.toolbox.FButton;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOverlay;
@@ -43,11 +33,9 @@ import forge.toolbox.FScrollPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FTextArea;
 import forge.util.FileUtil;
-import forge.util.ImageUtil;
 import forge.util.Localizer;
 import forge.util.RuntimeVersion;
 import net.miginfocom.swing.MigLayout;
-import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Assembles Swing components of utilities submenu singleton.
@@ -232,17 +220,11 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
      * @param scr
      */
     public void auditUpdate(FTextArea tar, FScrollPane scr) {
-        // Get top-level Forge objects
-        CardDb cardDb = StaticData.instance().getCommonCards();
-        CardDb variantDb = StaticData.instance().getVariantCards();
-        TokenDb tokenDb = StaticData.instance().getAllTokens();
-        CardEdition.Collection editions = StaticData.instance().getEditions();
-
         int missingCount = 0;
         int notImplementedCount = 0;
 
-        final StringBuffer nifSB = new StringBuffer(); // NO IMAGE FOUND BUFFER
-        final StringBuffer cniSB = new StringBuffer(); // CARD NOT IMPLEMENTED BUFFER
+        StringBuffer nifSB = new StringBuffer(); // NO IMAGE FOUND BUFFER
+        StringBuffer cniSB = new StringBuffer(); // CARD NOT IMPLEMENTED BUFFER
         
         nifSB.append("\n\n-------------------\n");
         nifSB.append("NO IMAGE FOUND LIST\n");
@@ -252,122 +234,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         cniSB.append("UNIMPLEMENTED CARD LIST\n");
         cniSB.append("-------------------\n\n");
 
-        for (CardEdition e : editions) {
-            if (CardEdition.Type.FUNNY.equals(e.getType()))
-                continue;
-            boolean nifHeader = false;
-            boolean cniHeader = false;
-            boolean tokenHeader = false;
-
-            String imagePath;
-            int artIndex = 1;
-
-            HashMap<String, Pair<Boolean, Integer>> cardCount = new HashMap<>();
-            for (CardInSet c : e.getAllCardsInSet()) {
-                if (cardCount.containsKey(c.name)) {
-                    cardCount.put(c.name, Pair.of(c.collectorNumber.startsWith("F"), cardCount.get(c.name).getRight() + 1));
-                } else {
-                    cardCount.put(c.name, Pair.of(c.collectorNumber.startsWith("F"), 1));
-                }
-            }
-            
-            // loop through the cards in this edition, considering art variations...
-            for (Entry<String, Pair<Boolean, Integer>> entry : cardCount.entrySet()) {
-                String c = entry.getKey();
-                artIndex = entry.getValue().getRight();
-
-                PaperCard cp = cardDb.getCard(c, e.getCode(), artIndex);
-                if (cp == null) {
-                    cp = variantDb.getCard(c, e.getCode(), artIndex);
-                }
-
-                if (cp == null) {
-                    if (entry.getValue().getLeft()) //skip funny cards
-                        continue;
-                    if (!cniHeader) {
-                        cniSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
-                        cniHeader = true;
-                    }
-                    cniSB.append(" ").append(c).append("\n");
-                    notImplementedCount++;
-                    continue;
-                }
-
-                // check the front image
-                imagePath = ImageUtil.getImageRelativePath(cp, false, true, false);
-                if (imagePath != null) {
-                    File file = ImageKeys.getImageFile(imagePath);
-                    if (file == null && ImageKeys.hasSetLookup(imagePath))
-                        file = ImageKeys.setLookUpFile(imagePath, imagePath+"border");
-                    if (file == null) {
-                        if (!nifHeader) {
-                            nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
-                            nifHeader = true;
-                        }
-                        nifSB.append(" ").append(imagePath).append("\n");
-                        missingCount++;
-                    }
-                } 
-
-                // check the back face
-                if (cp.hasBackFace()) {
-                    imagePath = ImageUtil.getImageRelativePath(cp, true, true, false);
-                    if (imagePath != null) {
-                        File file = ImageKeys.getImageFile(imagePath);
-                        if (file == null && ImageKeys.hasSetLookup(imagePath))
-                            file = ImageKeys.setLookUpFile(imagePath, imagePath+"border");
-                        if (file == null) {
-                            if (!nifHeader) {
-                                nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
-                                nifHeader = true;
-                            }
-                            nifSB.append(" ").append(imagePath).append("\n");
-                            missingCount++;
-                        }
-                    } 
-                }
-            }
-
-            // TODO: Audit token images here...
-            for(Entry<String, Integer> tokenEntry : e.getTokens().entrySet()) {
-                String name = tokenEntry.getKey();
-                artIndex = tokenEntry.getValue();
-                try {
-                    PaperToken token = tokenDb.getToken(name, e.getCode());
-                    if (token == null) {
-                        continue;
-                    }
-
-                    for(int i = 0; i < artIndex; i++) {
-                        String imgKey = token.getImageKey(i);
-                        File file = ImageKeys.getImageFile(imgKey);
-                        if (file == null) {
-                            if (!nifHeader) {
-                                nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
-                                nifHeader = true;
-                            }
-                            if (!tokenHeader) {
-                                nifSB.append("\nTOKENS\n");
-                                tokenHeader = true;
-                            }
-                            nifSB.append(" ").append(token.getImageFilename(i + 1)).append("\n");
-                            missingCount++;
-                        }
-                    }
-                } catch(Exception ex) {
-                    System.out.println("No Token found: " + name + " in " + e.getName());
-                }
-            }
-            if (nifHeader)
-                nifSB.append("\n");
-        }
-
-        String totalStats = "Missing images: " + missingCount + "\nUnimplemented cards: " + notImplementedCount + "\n";
-        cniSB.append("\n-----------\n");
-        cniSB.append(totalStats);
-        cniSB.append("-----------\n\n");
-        
-        nifSB.append(cniSB); // combine things together...
+        StaticData.instance().audit(nifSB, cniSB, missingCount, notImplementedCount);
 
         tar.setText(nifSB.toString());
         tar.setCaretPosition(0); // this will move scroll view to the top...
