@@ -756,7 +756,9 @@ public class StaticData {
             preferences_avails[i] = prettifyCardArtPreferenceName(preferences[i]);
         return preferences_avails;
     }
-    public void audit(StringBuffer nifSB, StringBuffer cniSB, int missingCount, int notImplementedCount) {
+    public Pair<Integer, Integer> audit(StringBuffer noImageFound, StringBuffer cardNotImplemented) {
+        int missingCount = 0;
+        int notImplementedCount = 0;
         for (CardEdition e : editions) {
             if (CardEdition.Type.FUNNY.equals(e.getType()))
                 continue;
@@ -792,10 +794,10 @@ public class StaticData {
                     if (!loadNonLegalCards && CardEdition.Type.FUNNY.equals(e.getType()))
                         continue;
                     if (!cniHeader) {
-                        cniSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                        cardNotImplemented.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
                         cniHeader = true;
                     }
-                    cniSB.append(" ").append(c).append("\n");
+                    cardNotImplemented.append(" ").append(c).append("\n");
                     notImplementedCount++;
                     continue;
                 }
@@ -808,10 +810,10 @@ public class StaticData {
                         file = ImageKeys.setLookUpFile(imagePath, imagePath+"border");
                     if (file == null) {
                         if (!nifHeader) {
-                            nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                            noImageFound.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
                             nifHeader = true;
                         }
-                        nifSB.append(" ").append(imagePath).append("\n");
+                        noImageFound.append(" ").append(imagePath).append("\n");
                         missingCount++;
                     }
                 }
@@ -825,10 +827,10 @@ public class StaticData {
                             file = ImageKeys.setLookUpFile(imagePath, imagePath+"border");
                         if (file == null) {
                             if (!nifHeader) {
-                                nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                                noImageFound.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
                                 nifHeader = true;
                             }
-                            nifSB.append(" ").append(imagePath).append("\n");
+                            noImageFound.append(" ").append(imagePath).append("\n");
                             missingCount++;
                         }
                     }
@@ -850,14 +852,14 @@ public class StaticData {
                         File file = ImageKeys.getImageFile(imgKey);
                         if (file == null) {
                             if (!nifHeader) {
-                                nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
+                                noImageFound.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
                                 nifHeader = true;
                             }
                             if (!tokenHeader) {
-                                nifSB.append("\nTOKENS\n");
+                                noImageFound.append("\nTOKENS\n");
                                 tokenHeader = true;
                             }
-                            nifSB.append(" ").append(token.getImageFilename(i + 1)).append("\n");
+                            noImageFound.append(" ").append(token.getImageFilename(i + 1)).append("\n");
                             missingCount++;
                         }
                     }
@@ -866,15 +868,16 @@ public class StaticData {
                 }
             }
             if (nifHeader)
-                nifSB.append("\n");
+                noImageFound.append("\n");
         }
 
         String totalStats = "Missing images: " + missingCount + "\nUnimplemented cards: " + notImplementedCount + "\n";
-        cniSB.append("\n-----------\n");
-        cniSB.append(totalStats);
-        cniSB.append("-----------\n\n");
+        cardNotImplemented.append("\n-----------\n");
+        cardNotImplemented.append(totalStats);
+        cardNotImplemented.append("-----------\n\n");
 
-        nifSB.append(cniSB); // combine things together...
+        noImageFound.append(cardNotImplemented); // combine things together...
+        return Pair.of(missingCount, notImplementedCount);
     }
 
     private String prettifyCardArtPreferenceName(CardDb.CardArtPreference preference) {

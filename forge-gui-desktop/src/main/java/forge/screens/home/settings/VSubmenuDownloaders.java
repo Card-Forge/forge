@@ -36,6 +36,7 @@ import forge.util.FileUtil;
 import forge.util.Localizer;
 import forge.util.RuntimeVersion;
 import net.miginfocom.swing.MigLayout;
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Assembles Swing components of utilities submenu singleton.
@@ -220,9 +221,6 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
      * @param scr
      */
     public void auditUpdate(FTextArea tar, FScrollPane scr) {
-        int missingCount = 0;
-        int notImplementedCount = 0;
-
         StringBuffer nifSB = new StringBuffer(); // NO IMAGE FOUND BUFFER
         StringBuffer cniSB = new StringBuffer(); // CARD NOT IMPLEMENTED BUFFER
         
@@ -234,7 +232,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         cniSB.append("UNIMPLEMENTED CARD LIST\n");
         cniSB.append("-------------------\n\n");
 
-        StaticData.instance().audit(nifSB, cniSB, missingCount, notImplementedCount);
+        Pair<Integer, Integer> totalAudit = StaticData.instance().audit(nifSB, cniSB);
 
         tar.setText(nifSB.toString());
         tar.setCaretPosition(0); // this will move scroll view to the top...
@@ -249,7 +247,7 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         });
         scr.getParent().add(btnClipboardCopy, "w 200!, h pref+12!, center, gaptop 10");
         
-        String labelText = "<html>Missing images: " + missingCount + "<br>Unimplemented cards: " + notImplementedCount + "<br>";
+        String labelText = "<html>Missing images: " + totalAudit.getLeft() + "<br>Unimplemented cards: " + totalAudit.getRight() + "<br>";
         final FLabel statsLabel = new FLabel.Builder().text(labelText).fontSize(15).build();
         scr.getParent().add(statsLabel);
 
