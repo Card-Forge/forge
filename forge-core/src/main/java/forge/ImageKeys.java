@@ -173,16 +173,12 @@ public final class ImageKeys {
                 }
                 //setlookup
                 if (hasSetLookup(filename)) {
-                    //delay processing so gui is responsive
-                    ThreadUtil.delay(60, new Runnable() {
-                        @Override
-                        public void run() {
-                            File f = setLookUpFile(filename, fullborderFile);
-                            if (f != null)
-                                cachedCards.put(filename, f);
-                            else //is null
-                                missingCards.add(filename);
-                        }
+                    ThreadUtil.getServicePool().submit(() -> {
+                        File f = setLookUpFile(filename, fullborderFile);
+                        if (f != null)
+                            cachedCards.put(filename, f);
+                        else //is null
+                            missingCards.add(filename);
                     });
                 }
             }
@@ -283,27 +279,30 @@ public final class ImageKeys {
                     for (String setLookup : StaticData.instance().getSetLookup().get(setKey)) {
                         String lookupDirectory = CACHE_CARD_PICS_DIR + setLookup;
                         File f = new File(lookupDirectory);
-                        String[] cardNames = f.list();
-                        if (cardNames != null) {
-                            Set<String> cardList = new HashSet<>(Arrays.asList(cardNames));
+                        if (f.exists() && f.isDirectory()) {
                             for (String ext : FILE_EXTENSIONS) {
                                 if (ext.equals(""))
                                     continue;
+                                File placeholder;
                                 String fb1 = fullborderFile.replace(setKey+"/","")+ext;
-                                if (cardList.contains(fb1)) {
-                                    return new File(lookupDirectory+"/"+fb1);
+                                placeholder = new File(lookupDirectory+"/"+fb1);
+                                if (placeholder.exists()) {
+                                    return placeholder;
                                 }
                                 String fb2 = fullborderFile.replace(setKey+"/","").replaceAll("[0-9]*.fullborder", "1.fullborder")+ext;
-                                if (cardList.contains(fb2)) {
-                                    return new File(lookupDirectory+"/"+fb2);
+                                placeholder = new File(lookupDirectory+"/"+fb2);
+                                if (placeholder.exists()) {
+                                    return placeholder;
                                 }
                                 String f1 = filename.replace(setKey+"/","")+ext;
-                                if (cardList.contains(f1)) {
-                                    return new File(lookupDirectory+"/"+f1);
+                                placeholder = new File(lookupDirectory+"/"+f1);
+                                if (placeholder.exists()) {
+                                    return placeholder;
                                 }
                                 String f2 = filename.replace(setKey+"/","").replaceAll("[0-9]*.full", "1.full")+ext;
-                                if (cardList.contains(f2)) {
-                                    return new File(lookupDirectory+"/"+f2);
+                                placeholder = new File(lookupDirectory+"/"+f2);
+                                if (placeholder.exists()) {
+                                    return placeholder;
                                 }
                             }
                         }
