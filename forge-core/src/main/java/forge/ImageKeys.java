@@ -176,14 +176,18 @@ public final class ImageKeys {
                 //setlookup
                 if (hasSetLookup(filename)) {
                     toFind.add(filename);
-                    ThreadUtil.getServicePool().submit(() -> {
-                        File f = setLookUpFile(filename, fullborderFile);
-                        if (f != null)
-                            cachedCards.put(filename, f);
-                        else //is null
-                            missingCards.add(filename);
+                    try {
+                        ThreadUtil.getServicePool().submit(() -> {
+                            File f = setLookUpFile(filename, fullborderFile);
+                            if (f != null)
+                                cachedCards.put(filename, f);
+                            else //is null
+                                missingCards.add(filename);
+                            toFind.remove(filename);
+                        });
+                    } catch (Exception e) {
                         toFind.remove(filename);
-                    });
+                    }
                 }
             }
             //if an image, like phenomenon or planes is missing .full in their filenames but you have an existing images that have .full/.fullborder
