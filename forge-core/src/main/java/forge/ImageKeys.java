@@ -273,14 +273,14 @@ public final class ImageKeys {
                 ? StaticData.instance().getEditions().getCode2ByCode(edition) // by default 2-letter codes from MWS are used
                 : CACHE_CARD_PICS_SUBDIR.get(edition); // may use custom paths though
     }
-    static boolean hasSetLookup(String filename) {
+    public static boolean hasSetLookup(String filename) {
         if (!StaticData.instance().getSetLookup().isEmpty()) {
             return StaticData.instance().getSetLookup().keySet().stream().anyMatch(setKey -> filename.startsWith(setKey));
         }
 
         return false;
     }
-    private static File setLookUpFile(String filename, String fullborderFile) {
+    public static File setLookUpFile(String filename, String fullborderFile) {
         if (!StaticData.instance().getSetLookup().isEmpty()) {
             for (String setKey : StaticData.instance().getSetLookup().keySet()) {
                 if (filename.startsWith(setKey)) {

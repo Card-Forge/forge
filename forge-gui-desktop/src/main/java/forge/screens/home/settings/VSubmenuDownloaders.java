@@ -297,6 +297,8 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                 imagePath = ImageUtil.getImageRelativePath(cp, false, true, false);
                 if (imagePath != null) {
                     File file = ImageKeys.getImageFile(imagePath);
+                    if (file == null && ImageKeys.hasSetLookup(imagePath))
+                        file = ImageKeys.setLookUpFile(imagePath, imagePath+"border");
                     if (file == null) {
                         if (!nifHeader) {
                             nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
@@ -312,6 +314,8 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
                     imagePath = ImageUtil.getImageRelativePath(cp, true, true, false);
                     if (imagePath != null) {
                         File file = ImageKeys.getImageFile(imagePath);
+                        if (file == null && ImageKeys.hasSetLookup(imagePath))
+                            file = ImageKeys.setLookUpFile(imagePath, imagePath+"border");
                         if (file == null) {
                             if (!nifHeader) {
                                 nifSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
