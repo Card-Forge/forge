@@ -40,8 +40,6 @@ import forge.util.Callback;
 import forge.util.FileUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
-import static forge.StaticData.instance;
-
 public class FilesPage extends TabPage<SettingsScreen> {
     private final FGroupList<FilesItem> lstItems = add(new FGroupList<>());
 
