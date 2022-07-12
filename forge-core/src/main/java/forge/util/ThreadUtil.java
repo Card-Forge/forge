@@ -53,6 +53,27 @@ public class ThreadUtil {
         return Thread.currentThread().getName().startsWith("Game");
     }
 
+    private static ExecutorService service = Executors.newWorkStealingPool();
+    public static ExecutorService getServicePool() {
+        return service;
+    }
+    public static void refreshServicePool() {
+        service = Executors.newWorkStealingPool();
+    }
+    public static <T> T limit(Callable<T> task, long millis){
+        Future<T> future = null;
+        T result;
+        try {
+            future = service.submit(task);
+            result = future.get(millis, TimeUnit.MILLISECONDS);
+        } catch (Exception e) {
+            result = null;
+        } finally {
+            if (future != null)
+                future.cancel(true);
+        }
+        return result;
+    }
     public static <T> T executeWithTimeout(Callable<T> task, int milliseconds) {
         ExecutorService executor = Executors.newCachedThreadPool();
         Future<T> future = executor.submit(task);

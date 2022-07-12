@@ -927,8 +927,15 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void resume() {
-        Texture.setAssetManager(getAssets().manager);
-        needsUpdate = true;
+        try {
+            Texture.setAssetManager(getAssets().manager);
+            needsUpdate = true;
+        } catch (Exception e) {
+            //the application context must have been recreated from its last state.
+            //it could be triggered by the low memory on heap on android.
+            needsUpdate = false;
+            e.printStackTrace();
+        }
         if (MatchController.getHostedMatch() != null) {
             MatchController.getHostedMatch().resume();
         }
