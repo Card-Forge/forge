@@ -31,6 +31,7 @@ public final class ImageKeys {
     private static Map<String, String> CACHE_CARD_PICS_SUBDIR;
 
     private static Map<String, Boolean> editionImageLookup = new HashMap<>();
+    private static Set<String> toFind = new HashSet<>();
 
     private static boolean isLibGDXPort = false;
 
@@ -110,7 +111,8 @@ public final class ImageKeys {
             filename = key;
             dir = CACHE_CARD_PICS_DIR;
         }
-
+        if (toFind.contains(filename))
+            return null;
         if (missingCards.contains(filename))
             return null;
 
@@ -173,17 +175,19 @@ public final class ImageKeys {
                 }
                 //setlookup
                 if (hasSetLookup(filename)) {
-                    //delay processing so gui is responsive
-                    ThreadUtil.delay(60, new Runnable() {
-                        @Override
-                        public void run() {
+                    toFind.add(filename);
+                    try {
+                        ThreadUtil.getServicePool().submit(() -> {
                             File f = setLookUpFile(filename, fullborderFile);
                             if (f != null)
                                 cachedCards.put(filename, f);
                             else //is null
                                 missingCards.add(filename);
-                        }
-                    });
+                            toFind.remove(filename);
+                        });
+                    } catch (Exception e) {
+                        toFind.remove(filename);
+                    }
                 }
             }
             //if an image, like phenomenon or planes is missing .full in their filenames but you have an existing images that have .full/.fullborder
@@ -269,41 +273,44 @@ public final class ImageKeys {
                 ? StaticData.instance().getEditions().getCode2ByCode(edition) // by default 2-letter codes from MWS are used
                 : CACHE_CARD_PICS_SUBDIR.get(edition); // may use custom paths though
     }
-    static boolean hasSetLookup(String filename) {
+    public static boolean hasSetLookup(String filename) {
         if (!StaticData.instance().getSetLookup().isEmpty()) {
             return StaticData.instance().getSetLookup().keySet().stream().anyMatch(setKey -> filename.startsWith(setKey));
         }
 
         return false;
     }
-    private static File setLookUpFile(String filename, String fullborderFile) {
+    public static File setLookUpFile(String filename, String fullborderFile) {
         if (!StaticData.instance().getSetLookup().isEmpty()) {
             for (String setKey : StaticData.instance().getSetLookup().keySet()) {
                 if (filename.startsWith(setKey)) {
                     for (String setLookup : StaticData.instance().getSetLookup().get(setKey)) {
                         String lookupDirectory = CACHE_CARD_PICS_DIR + setLookup;
                         File f = new File(lookupDirectory);
-                        String[] cardNames = f.list();
-                        if (cardNames != null) {
-                            Set<String> cardList = new HashSet<>(Arrays.asList(cardNames));
+                        if (f.exists() && f.isDirectory()) {
                             for (String ext : FILE_EXTENSIONS) {
                                 if (ext.equals(""))
                                     continue;
+                                File placeholder;
                                 String fb1 = fullborderFile.replace(setKey+"/","")+ext;
-                                if (cardList.contains(fb1)) {
-                                    return new File(lookupDirectory+"/"+fb1);
+                                placeholder = new File(lookupDirectory+"/"+fb1);
+                                if (placeholder.exists()) {
+                                    return placeholder;
                                 }
                                 String fb2 = fullborderFile.replace(setKey+"/","").replaceAll("[0-9]*.fullborder", "1.fullborder")+ext;
-                                if (cardList.contains(fb2)) {
-                                    return new File(lookupDirectory+"/"+fb2);
+                                placeholder = new File(lookupDirectory+"/"+fb2);
+                                if (placeholder.exists()) {
+                                    return placeholder;
                                 }
                                 String f1 = filename.replace(setKey+"/","")+ext;
-                                if (cardList.contains(f1)) {
-                                    return new File(lookupDirectory+"/"+f1);
+                                placeholder = new File(lookupDirectory+"/"+f1);
+                                if (placeholder.exists()) {
+                                    return placeholder;
                                 }
                                 String f2 = filename.replace(setKey+"/","").replaceAll("[0-9]*.full", "1.full")+ext;
-                                if (cardList.contains(f2)) {
-                                    return new File(lookupDirectory+"/"+f2);
+                                placeholder = new File(lookupDirectory+"/"+f2);
+                                if (placeholder.exists()) {
+                                    return placeholder;
                                 }
                             }
                         }
