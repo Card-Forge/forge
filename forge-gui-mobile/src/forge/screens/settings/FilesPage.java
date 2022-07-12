@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.google.common.collect.ImmutableList;
+import forge.StaticData;
+import forge.gui.FThreads;
 import forge.gui.GuiBase;
+import forge.screens.LoadingOverlay;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
@@ -34,6 +38,9 @@ import forge.toolbox.FOptionPane;
 import forge.toolbox.GuiChoose;
 import forge.util.Callback;
 import forge.util.FileUtil;
+import org.apache.commons.lang3.tuple.Pair;
+
+import static forge.StaticData.instance;
 
 public class FilesPage extends TabPage<SettingsScreen> {
     private final FGroupList<FilesItem> lstItems = add(new FGroupList<>());
@@ -43,10 +50,45 @@ public class FilesPage extends TabPage<SettingsScreen> {
 
         lstItems.setListItemRenderer(new FilesItemRenderer());
 
+        lstItems.addGroup(Forge.getLocalizer().getMessage("lblCardAudit"));
         lstItems.addGroup(Forge.getLocalizer().getMessage("ContentDownloaders"));
         lstItems.addGroup(Forge.getLocalizer().getMessage("lblStorageLocations"));
         //lstItems.addGroup("Data Import");
 
+        //Auditer
+        lstItems.addItem(new Extra(Forge.getLocalizer().getMessage("btnListImageData"), Forge.getLocalizer().getMessage("lblListImageData")) {
+            @Override
+            public void select() {
+                FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblProcessingCards"), true, () -> {
+                    StringBuffer nifSB = new StringBuffer(); // NO IMAGE FOUND BUFFER
+                    StringBuffer cniSB = new StringBuffer(); // CARD NOT IMPLEMENTED BUFFER
+
+                    nifSB.append("\n\n-------------------\n");
+                    nifSB.append("NO IMAGE FOUND LIST\n");
+                    nifSB.append("-------------------\n\n");
+
+                    cniSB.append("\n\n-------------------\n");
+                    cniSB.append("UNIMPLEMENTED CARD LIST\n");
+                    cniSB.append("-------------------\n\n");
+
+                    Pair<Integer, Integer> totalAudit = StaticData.instance().audit(nifSB, cniSB);
+                    String msg = nifSB.toString();
+                    String title = "Missing images: " + totalAudit.getLeft() + "\nUnimplemented cards: " + totalAudit.getRight();
+                    FOptionPane.showOptionDialog(msg, title, FOptionPane.INFORMATION_ICON, ImmutableList.of(Forge.getLocalizer().getMessage("lblCopy"), Forge.getLocalizer().getMessage("lblClose")), -1, new Callback<Integer>() {
+                        @Override
+                        public void run(Integer result) {
+                            switch (result) {
+                                case 0:
+                                    Forge.getClipboard().setContents(msg);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    });
+                }));
+            }
+        }, 0);
         //content downloaders
         lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadPics"),
                 Forge.getLocalizer().getMessage("lblDownloadPics")) {
@@ -54,35 +96,35 @@ public class FilesPage extends TabPage<SettingsScreen> {
             protected GuiDownloadService createService() {
                 return new GuiDownloadPicturesLQ();
             }
-        }, 0);
+        }, 1);
         lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadSetPics"),
                 Forge.getLocalizer().getMessage("lblDownloadSetPics")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadSetPicturesLQ();
             }
-        }, 0);
+        }, 1);
         lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadQuestImages"),
                 Forge.getLocalizer().getMessage("lblDownloadQuestImages")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadQuestImages();
             }
-        }, 0);
+        }, 1);
         lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadAchievementImages"),
                 Forge.getLocalizer().getMessage("lblDownloadAchievementImages")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadAchievementImages();
             }
-        }, 0);
+        }, 1);
         lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadPrices"),
                 Forge.getLocalizer().getMessage("lblDownloadPrices")) {
             @Override
             protected GuiDownloadService createService() {
                 return new GuiDownloadPrices();
             }
-        }, 0);
+        }, 1);
         lstItems.addItem(new ContentDownloader(Forge.getLocalizer().getMessage("btnDownloadSkins"),
                 Forge.getLocalizer().getMessage("lblDownloadSkins")) {
             @Override
@@ -93,7 +135,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
             protected void finishCallback() {
                 SettingsScreen.getSettingsScreen().getSettingsPage().refreshSkinsList();
             }
-        }, 0);
+        }, 1);
         lstItems.addItem(new OptionContentDownloader(Forge.getLocalizer().getMessage("btnDownloadCJKFonts"),
                 Forge.getLocalizer().getMessage("lblDownloadCJKFonts"),
                 Forge.getLocalizer().getMessage("lblDownloadCJKFontPrompt")) {
@@ -118,7 +160,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
             protected void finishCallback() {
                 SettingsScreen.getSettingsScreen().getSettingsPage().refreshCJKFontsList();
             }
-        }, 0);
+        }, 1);
         //storage locations
         final StorageOption cardPicsOption = new StorageOption(Forge.getLocalizer().getMessage("lblCardPicsLocation"), ForgeProfileProperties.getCardPicsDir()) {
             @Override
@@ -141,7 +183,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
                     //ensure decks option is updated if needed
                     decksOption.updateDir(ForgeProfileProperties.getDecksDir());
                 }
-            }, 1);
+            }, 2);
             lstItems.addItem(new StorageOption(Forge.getLocalizer().getMessage("lblImageCacheLocation"), ForgeProfileProperties.getCacheDir()) {
                 @Override
                 protected void onDirectoryChanged(String newDir) {
@@ -150,9 +192,9 @@ public class FilesPage extends TabPage<SettingsScreen> {
                     //ensure card pics option is updated if needed
                     cardPicsOption.updateDir(ForgeProfileProperties.getCardPicsDir());
                 }
-            }, 1);
-            lstItems.addItem(cardPicsOption, 1);
-            lstItems.addItem(decksOption, 1);
+            }, 2);
+            lstItems.addItem(cardPicsOption, 2);
+            lstItems.addItem(decksOption, 2);
         }
     }
 
@@ -201,7 +243,19 @@ public class FilesPage extends TabPage<SettingsScreen> {
             g.drawText(value.description, SettingsScreen.DESC_FONT, SettingsScreen.DESC_COLOR, x, y + h, w, totalHeight - h + SettingsScreen.getInsets(w), true, Align.left, false);
         }
     }
+    private abstract class Extra extends FilesItem {
+        Extra(String label0, String description0) {
+            super(label0, description0);
+        }
 
+        @Override
+        public void select() {
+
+        }
+
+        protected void finishCallback() {
+        }
+    }
     private abstract class ContentDownloader extends FilesItem {
         ContentDownloader(String label0, String description0) {
             super(label0, description0);
@@ -239,7 +293,7 @@ public class FilesPage extends TabPage<SettingsScreen> {
                 @Override
                 public void run(String result) {
                     final String url = categories.get(result);
-                    final String name = url.substring(url.lastIndexOf("/") + 1);
+                    final String name = url.substring(url.lastIndexOf("/") + 2);
                     new GuiDownloader(new GuiDownloadZipService(name, name, url, ForgeConstants.FONTS_DIR, null, null), new Callback<Boolean>() {
                         @Override
                         public void run(Boolean finished) {
