@@ -47,6 +47,7 @@ public class StaticData {
 
     private boolean allowCustomCardsInDecksConformance;
     private boolean enableSmartCardArtSelection;
+    private boolean loadNonLegalCards;
 
     // Loaded lazily:
     private IStorage<SealedProduct.Template> boosters;
@@ -76,6 +77,7 @@ public class StaticData {
         this.customCardReader = customCardReader;
         this.allowCustomCardsInDecksConformance = allowCustomCardsInDecksConformance;
         this.enableSmartCardArtSelection = enableSmartCardArtSelection;
+        this.loadNonLegalCards = loadNonLegalCards;
         lastInstance = this;
         List<String> funnyCards = new ArrayList<>();
         List<String> filtered = new ArrayList<>();
@@ -787,7 +789,7 @@ public class StaticData {
                 if (cp == null) {
                     if (entry.getValue().getLeft()) //skip funny cards
                         continue;
-                    if (CardEdition.Type.FUNNY.equals(e.getType()) && !StaticData.instance().getFunnySetCode().isEmpty())
+                    if (!loadNonLegalCards && CardEdition.Type.FUNNY.equals(e.getType()))
                         continue;
                     if (!cniHeader) {
                         cniSB.append("Edition: ").append(e.getName()).append(" ").append("(").append(e.getCode()).append("/").append(e.getCode2()).append(")\n");
