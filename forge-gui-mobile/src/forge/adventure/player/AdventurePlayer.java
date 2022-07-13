@@ -457,7 +457,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         onLifeTotalChangeList.emit();
     }
     public void defeated() {
-        gold=gold/2;
+        percentLoss = 10
+        gold=gold-(gold*percentLoss/100);
         life=Math.max(1,(int)(life-(maxLife*0.2f)));
         onLifeTotalChangeList.emit();
         onGoldChangeList.emit();
