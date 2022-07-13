@@ -1045,16 +1045,14 @@ public class PlayerControllerAi extends PlayerController {
                         }
                     }
 
-                    /* FIXME: the new implementation (below) requires implementing setupNewTargets in the AI controller, among other possible changes, otherwise breaks AI
                     if (sa.isMayChooseNewTargets()) {
-                        sa.setupNewTargets(player);
-                    }
-                    */
-                    if (sa.isMayChooseNewTargets() && !sa.setupTargets()) {
-                        if (sa.isSpell()) {
-                            getGame().getAction().ceaseToExist(sa.getHostCard(), false);
+                        TargetChoices tc = sa.getTargets();
+                        if (!sa.setupTargets()) {
+                            // if AI can't choose targets need to keep old one even if illegal
+                            sa.setTargets(tc);
                         }
-                        continue;
+                        // FIXME: the new implementation (below) requires implementing setupNewTargets in the AI controller, among other possible changes, otherwise breaks AI
+                        // sa.setupNewTargets(player);
                     }
                 }
                 // need finally add the new spell to the stack

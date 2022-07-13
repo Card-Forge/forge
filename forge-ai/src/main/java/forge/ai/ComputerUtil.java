@@ -2826,7 +2826,7 @@ public class ComputerUtil {
         }
 
         return type.is(CounterEnumType.AWAKENING) || type.is(CounterEnumType.MANIFESTATION) || type.is(CounterEnumType.PETRIFICATION)
-                || type.is(CounterEnumType.TRAINING);
+                || type.is(CounterEnumType.TRAINING) || type.is(CounterEnumType.GHOSTFORM);
     }
 
     public static Player evaluateBoardPosition(final List<Player> listToEvaluate) {
