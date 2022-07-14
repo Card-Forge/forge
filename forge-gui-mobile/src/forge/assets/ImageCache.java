@@ -318,12 +318,10 @@ public class ImageCache {
         for (String asset : toUnload) {
             if(manager.contains(asset))
                 manager.unload(asset);
+            cardsLoaded.remove(asset);
         }
         //clear cachedArt since this is dependant to the loaded texture
         CardRenderer.clearcardArtCache();
-        cardsLoaded.clear();
-        //update with recent
-        cardsLoaded.addAll(newQ);
     }
     public static void preloadCache(Iterable<String> keys) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
