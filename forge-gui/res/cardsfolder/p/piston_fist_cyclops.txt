@@ -4,7 +4,7 @@ Types:Creature Cyclops
 PT:4/3
 K:Defender
 S:Mode$ CanAttackDefender | ValidCard$ Card.Self | CheckSVar$ X | Description$ As long as you've cast an instant or sorcery spell this turn, CARDNAME can attack as though it didn't have defender.
-SVar:X:Count$ThisTurnCast_Instant.YouOwn,Sorcery.YouOwn
+SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
 SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant|Sorcery
 Oracle:Defender\nAs long as you've cast an instant or sorcery spell this turn, Piston-Fist Cyclops can attack as though it didn't have defender.

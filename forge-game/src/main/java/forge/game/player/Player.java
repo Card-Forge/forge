@@ -147,8 +147,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private int life = 20;
     private int startingLife = 20;
     private int lifeStartedThisTurnWith = startingLife;
-    private final Map<Card, Integer> assignedDamage = Maps.newHashMap();
-    private final Map<Card, Integer> assignedCombatDamage = Maps.newHashMap();
     private int spellsCastThisTurn;
     private int spellsCastThisGame;
     private int spellsCastLastTurn;
@@ -219,7 +217,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     private Map<Card, Card> maingameCardsMap = Maps.newHashMap();
 
     private CardCollection currentPlanes = new CardCollection();
-    private Set<String> prowl = Sets.newHashSet();
 
     private PlayerStatistics stats = new PlayerStatistics();
     private PlayerController controller;
@@ -704,19 +701,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        int old = assignedDamage.containsKey(source) ? assignedDamage.get(source) : 0;
-        assignedDamage.put(source, old + amount);
-        source.getDamageHistory().registerDamage(this, amount);
-
-        if (isCombat) {
-            old = assignedCombatDamage.containsKey(source) ? assignedCombatDamage.get(source) : 0;
-            assignedCombatDamage.put(source, old + amount);
-            for (final String type : source.getType().getCreatureTypes()) {
-                source.getController().addProwlType(type);
-            }
-            source.getDamageHistory().registerCombatDamage(this, amount);
-        }
-
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
         runParams.put(AbilityKey.DamageSource, source);
@@ -828,49 +812,6 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void dealCombatDamage() {
         loseLife(simultaneousDamage, true, false);
         simultaneousDamage = 0;
-    }
-
-    public final void clearAssignedDamage() {
-        assignedDamage.clear();
-        assignedCombatDamage.clear();
-    }
-
-    public final int getAssignedDamage() {
-        int num = 0;
-        for (final Integer value : assignedDamage.values()) {
-            num += value;
-        }
-        return num;
-    }
-
-    public final int getAssignedCombatDamage() {
-        int num = 0;
-        for (final Integer value : assignedCombatDamage.values()) {
-            num += value;
-        }
-        return num;
-    }
-
-    public final Iterable<Card> getAssignedDamageSources() {
-        return assignedDamage.keySet();
-    }
-
-    public final int getAssignedDamage(final Card c) {
-        return assignedDamage.get(c);
-    }
-
-    public final int getAssignedDamage(final String type) {
-        final Map<Card, Integer> valueMap = Maps.newHashMap();
-        for (final Card c : assignedDamage.keySet()) {
-            if (c.getType().hasStringType(type)) {
-                valueMap.put(c, assignedDamage.get(c));
-            }
-        }
-        int num = 0;
-        for (final Integer value : valueMap.values()) {
-            num += value;
-        }
-        return num;
     }
 
     /**
@@ -1662,6 +1603,12 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
+        // MilledAll trigger
+        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        runParams.put(AbilityKey.Cards, milled);
+        runParams.put(AbilityKey.Player, this);
+        game.getTriggerHandler().runTrigger(TriggerType.MilledAll, runParams, false);
+
         return milled;
     }
 
@@ -2082,8 +2029,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean hasBloodthirst() {
-        for (Player p : game.getRegisteredPlayers()) {
-            if (p.isOpponentOf(this) && p.getAssignedDamage() > 0) {
+        for (Player p : getRegisteredOpponents()) {
+            if (p.getAssignedDamage() > 0) {
                 return true;
             }
         }
@@ -2102,14 +2049,12 @@ public class Player extends GameEntity implements Comparable<Player> {
         return lost;
     }
 
-    public final boolean hasProwl(final String type) {
-        return prowl.contains(type);
-    }
-    public final void addProwlType(final String type) {
-        prowl.add(type);
-    }
-    public final void resetProwl() {
-        prowl.clear();
+    public final boolean hasProwl(final Set<String> types) {
+        StringBuilder sb = new StringBuilder();
+        for (String type : types) {
+            sb.append("Card.YouCtrl+").append(type).append(",");
+        }
+        return !game.getDamageDoneThisTurn(true, true, sb.toString(), "Player", null, this, null).isEmpty();
     }
 
     public final void setLibrarySearched(final int l) {
@@ -2150,7 +2095,7 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         } else if (incR[0].equals("EnchantedController")) {
             final GameEntity enchanted = source.getEntityAttachedTo();
-            if ((enchanted == null) || !(enchanted instanceof Card)) {
+            if (enchanted == null || !(enchanted instanceof Card)) {
                 return false;
             }
             final Card enchantedCard = (Card) enchanted;
@@ -2239,10 +2184,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         investigatedThisTurn = 0;
     }
 
-    public final List<Card> getSacrificedThisTurn() {
-        return sacrificedThisTurn;
-    }
-
     public final void addSacrificedThisTurn(final Card c, final SpellAbility source) {
         // Play the Sacrifice sound
         game.fireEvent(new GameEventCardSacrificed());
@@ -2260,6 +2201,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams, false);
     }
 
+    public final List<Card> getSacrificedThisTurn() {
+        return sacrificedThisTurn;
+    }
     public final void resetSacrificedThisTurn() {
         sacrificedThisTurn.clear();
     }
@@ -2452,10 +2396,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetCycledThisTurn();
         resetEquippedThisTurn();
         resetSacrificedThisTurn();
-        clearAssignedDamage();
         resetVenturedThisTurn();
         setRevolt(false);
-        resetProwl();
         setSpellsCastLastTurn(getSpellsCastThisTurn());
         resetSpellsCastThisTurn();
         setLifeLostLastTurn(getLifeLostThisTurn());
@@ -2466,6 +2408,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         setLifeStartedThisTurnWith(getLife());
         setLibrarySearched(0);
         setNumManaConversion(0);
+
+        damageReceivedThisTurn.clear();
 
         // set last turn nr
         if (game.getPhaseHandler().isPlayerTurn(this)) {

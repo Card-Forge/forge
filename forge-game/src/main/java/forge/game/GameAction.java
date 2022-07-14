@@ -27,7 +27,6 @@ import java.util.Set;
 import forge.util.*;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.ComparisonChain;
@@ -163,14 +162,32 @@ public class GameAction {
         // need to check before it enters
         if (c.isAura() && !c.isAttachedToEntity() && toBattlefield && (zoneFrom == null || !zoneFrom.is(ZoneType.Stack))) {
             boolean found = false;
-            if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(c, null))) {
-                found = true;
+            try {
+                if (Iterables.any(game.getPlayers(), PlayerPredicates.canBeAttached(c, null))) {
+                    found = true;
+                }
+            } catch (Exception e1) {
+                found = false;
             }
-            else if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(c, null))) {
-                found = true;
+
+            if (!found) {
+                try {
+                    if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateBattlefield), CardPredicates.canBeAttached(c, null))) {
+                        found = true;
+                    }
+                } catch (Exception e2) {
+                    found = false;
+                }
             }
-            else if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateGraveyard), CardPredicates.canBeAttached(c, null))) {
-                found = true;
+
+            if (!found) {
+                try {
+                    if (Iterables.any((CardCollectionView) params.get(AbilityKey.LastStateGraveyard), CardPredicates.canBeAttached(c, null))) {
+                        found = true;
+                    }
+                } catch (Exception e3) {
+                    found = false;
+                }
             }
             if (!found) {
                 c.clearControllers();
@@ -297,6 +314,14 @@ public class GameAction {
 
                 // copy bestow timestamp
                 copied.setBestowTimestamp(c.getBestowTimestamp());
+
+                if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
+                    copied.setCastSA(cause);
+                    KeywordInterface kw = cause.getKeyword();
+                    if (kw != null) {
+                        copied.addKeywordForStaticAbility(kw);
+                    }
+                }
             } else {
                 // when a card leaves the battlefield, ensure it's in its original state
                 // (we need to do this on the object before copying it, or it won't work correctly e.g.
@@ -334,8 +359,10 @@ public class GameAction {
                     if (commanderEffect != null) break;
                 }
                 // Disable the commander replacement effect
-                for (final ReplacementEffect re : commanderEffect.getReplacementEffects()) {
-                    re.setSuppressed(true);
+                if (commanderEffect != null) {
+                    for (final ReplacementEffect re : commanderEffect.getReplacementEffects()) {
+                        re.setSuppressed(true);
+                    }
                 }
             }
 
@@ -505,6 +532,7 @@ public class GameAction {
                             }
                         }
                         if (keepKeyword) {
+                            ki.setHostCard(copied);
                             newKw.add(ki);
                         }
                     }
@@ -591,7 +619,7 @@ public class GameAction {
             }
         }
 
-        table.replaceCounterEffect(game, null, true);
+        table.replaceCounterEffect(game, null, true, true, params);
 
         // Need to apply any static effects to produce correct triggers
         checkStaticAbilities();
@@ -1323,33 +1351,13 @@ public class GameAction {
                         noRegCreats.add(c);
                         checkAgain = true;
                     } else if (c.hasKeyword("CARDNAME can't be destroyed by lethal damage unless lethal damage dealt by a single source is marked on it.")) {
-                        // merge entries with same source
-                        List<Integer> dmgList = Lists.newArrayList();
-                        List<Pair<Card, Integer>> remainingDamaged = Lists.newArrayList(c.getReceivedDamageFromThisTurn());
-                        while (!remainingDamaged.isEmpty()) {
-                            Pair <Card, Integer> damaged = remainingDamaged.get(0);
-                            int sum = damaged.getRight();
-                            remainingDamaged.remove(damaged);
-                            for (Pair<Card, Integer> other : Lists.newArrayList(remainingDamaged)) {
-                                if (other.getLeft().equalsWithTimestamp(damaged.getLeft())) {
-                                    sum += other.getRight();
-                                    // once it got counted keep it out
-                                    remainingDamaged.remove(other);
-                                }
+                        if (c.getLethal() <= c.getMaxDamageFromSource() || c.hasBeenDealtDeathtouchDamage()) {
+                            if (desCreats == null) {
+                                desCreats = new CardCollection();
                             }
-                            dmgList.add(sum);
-                        }
-
-                        for (final Integer dmg : dmgList) {
-                            if (c.getLethal() <= dmg.intValue() || c.hasBeenDealtDeathtouchDamage()) {
-                                if (desCreats == null) {
-                                    desCreats = new CardCollection();
-                                }
-                                desCreats.add(c);
-                                c.setHasBeenDealtDeathtouchDamage(false);
-                                checkAgain = true;
-                                break;
-                            }
+                            desCreats.add(c);
+                            c.setHasBeenDealtDeathtouchDamage(false);
+                            checkAgain = true;
                         }
                     }
                     // Rule 704.5g - Destroy due to lethal damage
@@ -1576,7 +1584,7 @@ public class GameAction {
             c.getGame().getTracker().flush();
 
             c.setMoveToCommandZone(false);
-            if (c.getOwner().getController().confirmAction(c.getFirstSpellAbility(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.")) {
+            if (c.getOwner().getController().confirmAction(c.getFirstSpellAbility(), PlayerActionConfirmMode.ChangeZoneToAltDestination, c.getName() + ": If a commander is in a graveyard or in exile and that card was put into that zone since the last time state-based actions were checked, its owner may put it into the command zone.", null)) {
                 moveTo(c.getOwner().getZone(ZoneType.Command), c, null);
                 return true;
             }
@@ -2327,13 +2335,16 @@ public class GameAction {
             final Player p = e.getKey();
             final CardCollection toTop = e.getValue().getLeft();
             final CardCollection toBottom = e.getValue().getRight();
+            int numLookedAt = 0;
             if (toTop != null) {
+                numLookedAt += toTop.size();
                 Collections.reverse(toTop); // reverse to get the correct order
                 for (Card c : toTop) {
                     moveToLibrary(c, cause, null);
                 }
             }
             if (toBottom != null) {
+                numLookedAt += toBottom.size();
                 for (Card c : toBottom) {
                     moveToBottomOfLibrary(c, cause, null);
                 }
@@ -2343,6 +2354,7 @@ public class GameAction {
                 // set up triggers (but not actually do them until later)
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Player, p);
+                runParams.put(AbilityKey.ScryNum, numLookedAt);
                 game.getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
             }
         }
@@ -2364,6 +2376,7 @@ public class GameAction {
         game.getReplacementHandler().runReplaceDamage(isCombat, damageMap, preventMap, counterTable, cause);
 
         Map<Card, Integer> lethalDamage = Maps.newHashMap();
+        Map<Integer, Card> lkiCache = Maps.newHashMap();
 
         // Actually deal damage according to replaced damage map
         for (Map.Entry<Card, Map<GameEntity, Integer>> et : damageMap.rowMap().entrySet()) {
@@ -2390,12 +2403,17 @@ public class GameAction {
 
                 e.setValue(Integer.valueOf(e.getKey().addDamageAfterPrevention(e.getValue(), sourceLKI, isCombat, counterTable)));
                 sum += e.getValue();
+
+                sourceLKI.getDamageHistory().registerDamage(e.getValue(), isCombat, sourceLKI, e.getKey(), lkiCache);
             }
 
             if (sum > 0 && sourceLKI.hasKeyword(Keyword.LIFELINK)) {
                 sourceLKI.getController().gainLife(sum, sourceLKI, cause);
             }
         }
+
+        // for Zangief do this before runWaitingTriggers DamageDone
+        damageMap.triggerExcessDamage(isCombat, lethalDamage, game);
 
         // lose life simultaneously
         if (isCombat) {
@@ -2425,7 +2443,6 @@ public class GameAction {
         preventMap.clear();
 
         damageMap.triggerDamageDoneOnce(isCombat, game);
-        damageMap.triggerExcessDamage(isCombat, lethalDamage, game);
         damageMap.clear();
 
         counterTable.replaceCounterEffect(game, cause, !isCombat);

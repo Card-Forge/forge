@@ -1,0 +1,7 @@
+[format]
+Name:Block: Masques (PCY)
+Type:Archived
+Subtype:Block
+Effective:2000-07-01
+Sets:MMQ, NMS, PCY
+Banned:Lin Sivvi, Defiant Hero; Rishadan Port

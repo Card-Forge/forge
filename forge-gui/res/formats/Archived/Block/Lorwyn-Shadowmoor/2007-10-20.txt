@@ -1,0 +1,6 @@
+[format]
+Name:Block: Lorwyn (LRW)
+Type:Archived
+Subtype:Block
+Effective:2007-10-20
+Sets:LRW

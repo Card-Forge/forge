@@ -1,41 +1,18 @@
 package forge.game.ability.effects;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-import forge.game.*;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
-import forge.GameCommand;
-import forge.card.CardStateName;
 import forge.card.CardType;
+import forge.game.*;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardState;
-import forge.game.card.CardUtil;
-import forge.game.card.CardView;
-import forge.game.card.CardZoneTable;
-import forge.game.card.CounterType;
+import forge.game.card.*;
 import forge.game.event.GameEventCombatChanged;
-import forge.game.player.DelayedReveal;
-import forge.game.player.Player;
-import forge.game.player.PlayerActionConfirmMode;
-import forge.game.player.PlayerCollection;
-import forge.game.player.PlayerView;
+import forge.game.player.*;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
@@ -43,13 +20,13 @@ import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.util.Aggregates;
-import forge.util.CardTranslation;
-import forge.util.Lang;
-import forge.util.Localizer;
-import forge.util.MessageUtil;
-import forge.util.TextUtil;
+import forge.util.*;
 import forge.util.collect.FCollectionView;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Map;
 
 public class ChangeZoneEffect extends SpellAbilityEffect {
 
@@ -492,7 +469,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 PlayerCollection deciders = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("AlternativeDecider"), sa);
                 alterDecider = deciders.isEmpty() ? null : deciders.get(0);
             }
-            if (alterDecider != null && !alterDecider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString())) {
+            if (alterDecider != null && !alterDecider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString(), null)) {
                 destination = ZoneType.smartValueOf(sa.getParam("DestinationAlternative"));
                 altDest = true;
             }
@@ -511,7 +488,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            removeFromStack(tgtSA, sa, si, game, triggerList);
+            removeFromStack(tgtSA, sa, si, game, triggerList, counterTable);
         } // End of change from stack
 
         final String remember = sa.getParam("RememberChanged");
@@ -564,7 +541,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
 
             final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantMoveTargetFromOriToDest", CardTranslation.getTranslatedName(gameCard.getName()), Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME), destination.getTranslatedName()));
-            if (optional && !chooser.getController().confirmAction(sa, null, prompt) )
+            if (optional && !chooser.getController().confirmAction(sa, null, prompt, null) )
                 continue;
 
             final Zone originZone = game.getZoneOf(gameCard);
@@ -689,7 +666,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
                     if (sa.hasParam("FaceDown")) {
                         gameCard.turnFaceDown(true);
-                        setFaceDownState(gameCard, sa);
+                        CardFactoryUtil.setFaceDownState(gameCard, sa);
                     }
 
                     movedCard = game.getAction().moveTo(gameCard.getController().getZone(destination), gameCard, sa, moveParams);
@@ -956,7 +933,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sb.append(sa.getParam("AlternativeMessage")).append(" ");
                 sb.append(altFetchList.size()).append(" " + Localizer.getInstance().getMessage("lblCardMatchSearchingTypeInAlternateZones"));
 
-                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneFromAltSource, sb.toString())) {
+                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneFromAltSource, sb.toString(), null)) {
                     origin = alt;
                 }
             }
@@ -968,7 +945,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(sa.getParam("AlternativeDestinationMessage"));
 
-                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString())) {
+                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneToAltDestination, sb.toString(), null)) {
                     destination = ZoneType.smartValueOf(sa.getParam("DestinationAlternative"));
                     libraryPos = sa.hasParam("LibraryPositionAlternative") ? Integer.parseInt(sa.getParam("LibraryPositionAlternative")) : 0;
                 }
@@ -985,7 +962,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     prompt = Localizer.getInstance().getMessage("lblSearchPlayerZoneConfirm", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase());
                 }
                 String message = MessageUtil.formatMessage(prompt , decider, player);
-                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
+                if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message, null)) {
                     return;
                 }
             }
@@ -1071,7 +1048,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             continue;
                         }
                         SpellAbility tgtSA = decider.getController().getAbilityToPlay(tgtCard, sas);
-                        if (!decider.getController().confirmAction(tgtSA, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
+                        if (!decider.getController().confirmAction(tgtSA, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())), null)) {
                             continue;
                         }
                         tgtSA.setSVar("IsCastFromPlayEffect", "True");
@@ -1187,7 +1164,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         String message = Localizer.getInstance().getMessage("lblCancelSearchUpToSelectNumCards", String.valueOf(num));
 
                         if (fetchList.isEmpty() || sa.hasParam("SkipCancelPrompt") ||
-                                decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message)) {
+                                decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneGeneral, message, null)) {
                             break;
                         }
                         i--;
@@ -1345,7 +1322,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
                     if (sa.hasParam("FaceDown")) {
                         c.turnFaceDown(true);
-                        setFaceDownState(c, sa);
+                        CardFactoryUtil.setFaceDownState(c, sa);
                     }
                     movedCard = game.getAction().moveToPlay(c, c.getController(), sa, moveParams);
 
@@ -1448,6 +1425,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
                 }
+                if (ZoneType.Exile.equals(destination) && sa.hasParam("WithCountersType")) {
+                    CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                    int cAmount = AbilityUtils.calculateAmount(sa.getOriginalHost(), sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                    GameEntityCounterTable table = new GameEntityCounterTable();
+                    movedCard.addCounter(cType, cAmount, player, table);
+                    table.replaceCounterEffect(game, sa, true);
+                }
             }
 
             if (((!ZoneType.Battlefield.equals(destination) && changeType != null && !defined && !changeType.equals("Card"))
@@ -1496,39 +1480,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 && sa.getParam("WithTotalCMC") == null;
     }
 
-    private static void setFaceDownState(Card c, SpellAbility sa) {
-        final Card source = sa.getHostCard();
-        CardState faceDown = c.getFaceDownState();
-
-        // set New Pt doesn't work because this values need to be copyable for clone effects
-        if (sa.hasParam("FaceDownPower")) {
-            faceDown.setBasePower(AbilityUtils.calculateAmount(
-                    source, sa.getParam("FaceDownPower"), sa));
-        }
-        if (sa.hasParam("FaceDownToughness")) {
-            faceDown.setBaseToughness(AbilityUtils.calculateAmount(
-                    source, sa.getParam("FaceDownToughness"), sa));
-        }
-
-        if (sa.hasParam("FaceDownSetType")) {
-            faceDown.setType(new CardType(Arrays.asList(sa.getParam("FaceDownSetType").split(" & ")), false));
-        }
-
-        if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
-                || sa.hasParam("FaceDownSetType")) {
-            final GameCommand unanimate = new GameCommand() {
-                private static final long serialVersionUID = 8853789549297846163L;
-
-                @Override
-                public void run() {
-                    c.clearStates(CardStateName.FaceDown, true);
-                }
-            };
-
-            c.addFaceupCommand(unanimate);
-        }
-    }
-
     /**
      * <p>
      * removeFromStack.
@@ -1543,7 +1494,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
      *            object.
      * @param game
      */
-    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Game game, CardZoneTable triggerList) {
+    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Game game, CardZoneTable triggerList, GameEntityCounterTable counterTable) {
         final Card tgtHost = tgtSA.getHostCard();
         final Zone originZone = tgtHost.getZone();
         game.getStack().remove(si);
@@ -1555,7 +1506,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         Card movedCard = null;
         if (srcSA.hasParam("Destination")) {
             final boolean remember = srcSA.hasParam("RememberChanged");
-            final boolean rememberSpell = srcSA.hasParam("RememberSpell");
             final boolean imprint = srcSA.hasParam("Imprint");
             if (tgtSA.isAbility()) {
                 // Shouldn't be able to target Abilities but leaving this in for now
@@ -1587,12 +1537,19 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         + srcSA.getHostCard().getName());
             }
 
+            if (srcSA.hasParam("WithCountersType")) {
+                Player placer = srcSA.getActivatingPlayer();
+                if (srcSA.hasParam("WithCountersPlacer")) {
+                    placer = AbilityUtils.getDefinedPlayers(srcSA.getHostCard(), srcSA.getParam("WithCountersPlacer"), srcSA).get(0);
+                }
+                CounterType cType = CounterType.getType(srcSA.getParam("WithCountersType"));
+                int cAmount = AbilityUtils.calculateAmount(srcSA.getHostCard(), srcSA.getParamOrDefault("WithCountersAmount", "1"), srcSA);
+                movedCard.addCounter(cType, cAmount, placer, counterTable);
+            }
+
             if (remember) {
                 srcSA.getHostCard().addRemembered(tgtHost);
                 // TODO or remember moved?
-            }
-            if (rememberSpell) {
-                srcSA.getHostCard().addRemembered(tgtSA);
             }
             if (imprint) {
                 srcSA.getHostCard().addImprintedCard(tgtHost);

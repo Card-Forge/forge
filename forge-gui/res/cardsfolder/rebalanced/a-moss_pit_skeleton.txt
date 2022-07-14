@@ -1,0 +1,12 @@
+Name:A-Moss-Pit Skeleton
+ManaCost:B G
+Types:Creature Plant Skeleton
+PT:2/2
+K:Kicker:3
+K:etbCounter:P1P1:3:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with three +1/+1 counters on it.
+SVar:WasKicked:Count$Kicked.1.0
+T:Mode$ CounterAddedOnce | ValidCard$ Creature.YouCtrl | CounterType$ P1P1 | TriggerZones$ Graveyard | IsPresent$ Card.StrictlySelf | PresentZone$ Graveyard | Execute$ TrigDelayedTrigger | TriggerDescription$ Whenever one or more +1/+1 counters are put on a creature you control, return CARDNAME from your graveyard to your hand at the beginning of the next end step.
+SVar:TrigDelayedTrigger:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigChange | TriggerDescription$ Return CARDNAME from your graveyard to your hand at the beginning of the next end step.
+SVar:TrigChange:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+DeckHints:Ability$Counters|Graveyard
+Oracle:Kicker {3}\nIf Moss-Pit Skeleton was kicked, it enters the battlefield with three +1/+1 counters on it.\nWhenever one or more +1/+1 counters are put on a creature you control, return Moss-Pit Skeleton from your graveyard to your hand at the beginning of the next end step.

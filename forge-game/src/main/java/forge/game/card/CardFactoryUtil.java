@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import forge.GameCommand;
 import forge.game.event.GameEventCardForetold;
 import forge.game.trigger.TriggerType;
 import org.apache.commons.lang3.StringUtils;
@@ -1147,29 +1148,21 @@ public class CardFactoryUtil {
                     + " | ValidCard$ Card.Self | Secondary$ True"
                     + " | TriggerDescription$ Fabricate " + n + " (" + inst.getReminderText() + ")";
 
-            final String choose = "DB$ GenericChoice | AILogic$ " + name;
-            final String counter = "DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ " + n +
-                    " | IsPresent$ Card.StrictlySelf | SpellDescription$ Put "
-                    + Lang.nounWithNumeral(n, "+1/+1 counter") + " on it.";
-            final String token = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ c_1_1_a_servo | TokenOwner$ You "
-                    + " | SpellDescription$ Create "
+            final String token = "DB$ Token | TokenAmount$ " + n + " | TokenScript$ c_1_1_a_servo"
+                    + " | UnlessCost$ AddCounter<" + n + "/P1P1> | UnlessPayer$ You | UnlessAI$ " + name
+                    + " | SpellDescription$ Fabricate - Create "
                     + Lang.nounWithNumeral(n, "1/1 colorless Servo artifact creature token") + ".";
 
             final Trigger trigger = TriggerHandler.parseTrigger(trigStr, card, intrinsic);
 
-            SpellAbility saChoose = AbilityFactory.getAbility(choose, card);
-
-            List<AbilitySub> list = Lists.newArrayList();
-            list.add((AbilitySub)AbilityFactory.getAbility(counter, card));
-            list.add((AbilitySub)AbilityFactory.getAbility(token, card));
-            saChoose.setAdditionalAbilityList("Choices", list);
+            SpellAbility saChoose = AbilityFactory.getAbility(token, card);
             saChoose.setIntrinsic(intrinsic);
 
             trigger.setOverridingAbility(saChoose);
 
             inst.addTrigger(trigger);
         } else if (keyword.startsWith("Fading")) {
-            String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Secondary$ True " +
+            String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Secondary$ True" +
                     " | TriggerDescription$ At the beginning of your upkeep, remove a fade counter from CARDNAME. If you can't, sacrifice CARDNAME.";
 
             final String removeCounterStr = "DB$ RemoveCounter | Defined$ Self | CounterType$ FADE | CounterNum$ 1 | RememberRemoved$ True";
@@ -1680,7 +1673,7 @@ public class CardFactoryUtil {
 
             final String abString = "DB$ PeekAndReveal | PeekAmount$ " + num + " | RememberRevealed$ True";
 
-            final String dbCast = "DB$ Play | Valid$ Card.IsRemembered+sameName | " +
+            final String dbCast = "DB$ Play | Valid$ Card.IsRemembered+sameName | ValidSA$ Spell | " +
                     "ValidZone$ Library | WithoutManaCost$ True | Optional$ True | " +
                     "Amount$ All";
 
@@ -1893,7 +1886,7 @@ public class CardFactoryUtil {
             String upkeepTrig = "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | " +
                     "TriggerDescription$ " + sb.toString();
 
-            String effect = "DB$ Sacrifice | SacValid$ Self | UnlessPayer$ You | UnlessCost$ " + k[1];
+            String effect = "DB$ SacrificeAll | Defined$ Self | Controller$ You | UnlessPayer$ You | UnlessCost$ " + k[1];
 
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(upkeepTrig, card, intrinsic);
             parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
@@ -2323,12 +2316,11 @@ public class CardFactoryUtil {
             + " | Origin$ Stack | Destination$ Graveyard | Fizzle$ False "
             + " | Description$ Rebound (" + inst.getReminderText() + ")";
 
-            String abExile = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile";
+            String abExile = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile | RememberChanged$ True";
             String delTrig = "DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You " +
-            " | OptionalDecider$ You | RememberObjects$ ReplacedCard | TriggerDescription$"
+            " | OptionalDecider$ You | RememberObjects$ Remembered | TriggerDescription$"
             + " At the beginning of your next upkeep, you may cast " + card.toString() + " without paying its mana cost.";
-            // TODO add check for still in exile
-            String abPlay = "DB$ Play | Defined$ DelayTriggerRemembered | WithoutManaCost$ True | Optional$ True";
+            String abPlay = "DB$ Play | Defined$ DelayTriggerRememberedLKI | WithoutManaCost$ True | Optional$ True";
 
             SpellAbility saExile = AbilityFactory.getAbility(abExile, card);
 
@@ -2795,7 +2787,18 @@ public class CardFactoryUtil {
             abilityStr.append(equipCost);
             abilityStr.append("| ValidTgts$ ").append(valid);
             abilityStr.append(" | TgtPrompt$ Select target ").append(vstr).append(" you control ");
-            abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Equipment.Self+nonCreature ");
+            if (card.hasKeyword(Keyword.RECONFIGURE)) {
+                /*
+                * 301.5c An Equipment that’s also a creature can’t equip a creature unless that Equipment has reconfigure (see rule 702.151, “Reconfigure”).
+                * An Equipment that loses the subtype “Equipment” can’t equip a creature. An Equipment can’t equip itself. An Equipment that equips an illegal
+                * or nonexistent permanent becomes unattached from that permanent but remains on the battlefield. (This is a state-based action. See rule 704.)
+                * An Equipment can’t equip more than one creature. If a spell or ability would cause an Equipment to equip more than one creature,
+                * the Equipment’s controller chooses which creature it equips.
+                */
+                abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Equipment.Self ");
+            } else {
+                abilityStr.append("| SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Equipment.Self+nonCreature ");
+            }
             // add AttachAi for some special cards
             if (card.hasSVar("AttachAi")) {
                 abilityStr.append("| ").append(card.getSVar("AttachAi"));
@@ -3438,9 +3441,21 @@ public class CardFactoryUtil {
             st.setSVar("AffinityX", "Count$Valid " + t + ".YouCtrl");
             inst.addStaticAbility(st);
         } else if (keyword.startsWith("Blitz")) {
-            String effect = "Mode$ Continuous | Affected$ Card.Self+blitzed | AddKeyword$ Haste | AddTrigger$ Dies";
-            String trig = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | " +
-                    "Execute$ TrigDraw | TriggerDescription$ When this creature dies, draw a card.";
+            final String[] k = keyword.split(":");
+            final String manacost = k[1];
+            final Cost cost = new Cost(manacost, false);
+
+            StringBuilder sb = new StringBuilder("Blitz");
+            if (!cost.isOnlyManaCost()) {
+                sb.append("—");
+            } else {
+                sb.append(" ");
+            }
+            sb.append(cost.toSimpleString());
+            String effect = "Mode$ Continuous | Affected$ Card.Self+blitzed+castKeyword | AddKeyword$ Haste | AddTrigger$ Dies"
+                    + " | Secondary$ True | Description$ " + sb.toString() + " (" + inst.getReminderText() + ")";
+            String trig = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self" +
+                    " | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ When this creature dies, draw a card.";
             String ab = "DB$ Draw | NumCards$ 1";
 
             StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
@@ -3514,7 +3529,7 @@ public class CardFactoryUtil {
 
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.startsWith("Dash")) {
-            String effect = "Mode$ Continuous | Affected$ Card.Self+dashed | AddKeyword$ Haste";
+            String effect = "Mode$ Continuous | Affected$ Card.Self+dashed+castKeyword | AddKeyword$ Haste";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Daybound")) {
             String effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Daybound | Secondary$ True | Description$ This permanent can't be transformed except by its daybound ability.";
@@ -3725,5 +3740,38 @@ public class CardFactoryUtil {
 
         re.setOverridingAbility(saExile);
         card.addReplacementEffect(re);
+    }
+
+    public static void setFaceDownState(Card c, SpellAbility sa) {
+        final Card source = sa.getHostCard();
+        CardState faceDown = c.getFaceDownState();
+
+        // set New Pt doesn't work because this values need to be copyable for clone effects
+        if (sa.hasParam("FaceDownPower")) {
+            faceDown.setBasePower(AbilityUtils.calculateAmount(
+                    source, sa.getParam("FaceDownPower"), sa));
+        }
+        if (sa.hasParam("FaceDownToughness")) {
+            faceDown.setBaseToughness(AbilityUtils.calculateAmount(
+                    source, sa.getParam("FaceDownToughness"), sa));
+        }
+
+        if (sa.hasParam("FaceDownSetType")) {
+            faceDown.setType(new CardType(Arrays.asList(sa.getParam("FaceDownSetType").split(" & ")), false));
+        }
+
+        if (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
+                || sa.hasParam("FaceDownSetType")) {
+            final GameCommand unanimate = new GameCommand() {
+                private static final long serialVersionUID = 8853789549297846163L;
+
+                @Override
+                public void run() {
+                    c.clearStates(CardStateName.FaceDown, true);
+                }
+            };
+
+            c.addFaceupCommand(unanimate);
+        }
     }
 }

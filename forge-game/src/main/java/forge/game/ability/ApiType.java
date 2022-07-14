@@ -71,6 +71,7 @@ public enum ApiType {
     DigUntil (DigUntilEffect.class),
     Discard (DiscardEffect.class),
     DrainMana (DrainManaEffect.class),
+    Draft (DraftEffect.class),
     Draw (DrawEffect.class),
     EachDamage (DamageEachEffect.class),
     Effect (EffectEffect.class),

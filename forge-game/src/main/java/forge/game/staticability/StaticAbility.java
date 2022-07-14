@@ -211,7 +211,10 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
             }
             String desc = CardTranslation.translateSingleDescriptionText(getParam("Description"), currentName);
             desc = TextUtil.fastReplace(desc, "CARDNAME", CardTranslation.getTranslatedName(currentName));
-            desc = TextUtil.fastReplace(desc, "NICKNAME", Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
+            desc = TextUtil.fastReplace(desc, "NICKNAME",
+                    Lang.getInstance().getNickName(CardTranslation.getTranslatedName(currentName)));
+            desc = TextUtil.fastReplace(desc, "INSERT",
+                    Integer.toString(AbilityUtils.calculateAmount(getHostCard(), getParam("Insert"), this)));
 
             return desc;
         } else {

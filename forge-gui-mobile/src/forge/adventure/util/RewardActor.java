@@ -67,10 +67,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     @Override
     public void dispose() {
-        if (needsToBeDisposed)
+        if (needsToBeDisposed) {
+            needsToBeDisposed = false;
             image.dispose();
-          if (generatedTooltip != null)
-             generatedTooltip.dispose();
+            if (generatedTooltip != null)
+                generatedTooltip.dispose();
+        }
     }
 
     public Reward getReward() {

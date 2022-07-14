@@ -277,7 +277,7 @@ public final class AbilityFactory {
             }
         }
 
-        if (api == ApiType.Charm  || api == ApiType.GenericChoice || api == ApiType.AssignGroup) {
+        if (api == ApiType.Charm || api == ApiType.GenericChoice || api == ApiType.AssignGroup) {
             final String key = "Choices";
             if (mapParams.containsKey(key)) {
                 List<String> names = Lists.newArrayList(mapParams.get(key).split(","));
@@ -327,8 +327,8 @@ public final class AbilityFactory {
     }
 
     private static final TargetRestrictions readTarget(Map<String, String> mapParams) {
-        final String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
-        final String max = mapParams.containsKey("TargetMax") ? mapParams.get("TargetMax") : "1";
+        final String min = mapParams.getOrDefault("TargetMin", "1");
+        final String max = mapParams.getOrDefault("TargetMax", "1");
 
         // TgtPrompt should only be needed for more complicated ValidTgts
         String tgtWhat = mapParams.get("ValidTgts");
@@ -426,7 +426,9 @@ public final class AbilityFactory {
     private static final void makeRestrictions(final SpellAbility sa) {
         // SpellAbilityRestrictions should be added in here
         final SpellAbilityRestriction restrict = sa.getRestrictions();
-        restrict.setRestrictions(sa.getMapParams());
+        if (restrict != null) {
+            restrict.setRestrictions(sa.getMapParams());
+        }
     }
 
     /**
@@ -438,7 +440,7 @@ public final class AbilityFactory {
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     private static final void makeConditions(final SpellAbility sa) {
-        // SpellAbilityRestrictions should be added in here
+        // SpellAbilityConditions should be added in here
         final SpellAbilityCondition condition = sa.getConditions();
         condition.setConditions(sa.getMapParams());
     }

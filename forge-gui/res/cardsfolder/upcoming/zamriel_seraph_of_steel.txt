@@ -1,0 +1,8 @@
+Name:Zamriel, Seraph of Steel
+ManaCost:2 W W
+Types:Legendary Creature Angel
+K:Flying
+PT:3/4
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+equipped | AddKeyword$ Indestructible | Condition$ PlayerTurn | Description$ As long as it's your turn, equipped creatures you control have indestructible.
+DeckHints:Type$Equipment
+Oracle:Flying.\nAs long as it's your turn, equipped creatures you control have indestructible.

@@ -1,0 +1,7 @@
+Name:Patriar's Seal
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Untap | Cost$ 1 T | ValidTgts$ Creature.Legendary+YouCtrl | SpellDescription$ Untap target legendary creature you control.
+DeckHints:Type$Legendary
+Oracle:{T}: Add one mana of any color.\n{1}, {T}: Untap target legendary creature you control.

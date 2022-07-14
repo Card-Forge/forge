@@ -1,0 +1,7 @@
+[format]
+Name:Alchemy (HBG)
+Type:Archived
+Subtype:Arena
+Effective:2022-07-07
+Sets:ANA, ANB, ZNR, KHM, STX, AFR, MID, VOW, YMID, NEO, YNEO, SNC, YSNC, HBG
+Banned:Grinning Ignus

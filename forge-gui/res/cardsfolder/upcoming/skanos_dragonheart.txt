@@ -1,0 +1,12 @@
+Name:Skanos Dragonheart
+ManaCost:4 G
+Types:Legendary Creature Dragon Ranger
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+X until end of turn, where X is the greatest power among other Dragons you control and Dragon cards in your graveyard.
+SVar:TrigPump:DB$ Pump | NumAtt$ X | NumDef$ X
+SVar:X:Count$ValidGraveyard,Battlefield Dragon.YouCtrl+Other$GreatestPower
+K:Choose a Background
+SVar:HasAttackEffect:TRUE
+DeckNeeds:Type$Dragon
+DeckHas:Ability$Graveyard|Counters
+Oracle:Whenever Skanos Dragonheart attacks, it gets +X/+X until end of turn, where X is the greatest power among other Dragons you control and Dragon cards in your graveyard.\nChoose a Background (You can have a Background as a second commander.)

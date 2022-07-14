@@ -1,0 +1,6 @@
+[format]
+Name:Standard (DTK)
+Type:Archived
+Subtype:Standard
+Effective:2015-03-27
+Sets:THS, BNG, JOU, M15, KTK, FRF, UGF, DTK

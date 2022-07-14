@@ -88,6 +88,13 @@ public class EffectEffect extends SpellAbilityEffect {
             effectKeywords = sa.getParam("Keywords").split(",");
         }
 
+        if (sa.hasParam("RememberSpell")) {
+            rememberList = new FCollection<>();
+            for (final String rem : sa.getParam("RememberSpell").split(",")) {
+                rememberList.addAll(AbilityUtils.getDefinedSpellAbilities(hostCard, rem, sa));
+            }
+        }
+
         if (sa.hasParam("RememberObjects")) {
             rememberList = new FCollection<>();
             for (final String rem : sa.getParam("RememberObjects").split(",")) {

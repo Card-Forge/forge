@@ -67,7 +67,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
             if (revealed.equals(ZoneType.Exile)) {
                 sb.append("and exile all other cards revealed this way.");
             }
-        } else {
+        } else if (revealed != null) {
             if (revealed.equals(ZoneType.Hand)) {
                 sb.append("all cards revealed this way into their hand");
             }
@@ -120,7 +120,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 continue;
             }
             if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDigYourLibrary"))) {
+                if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDigYourLibrary"), null)) {
                     continue;
                 }
                 CardCollection found = new CardCollection();
@@ -171,7 +171,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
                         final Card c = itr.next();
                         final ZoneType origin = c.getZone().getZoneType();
                         if (optionalFound && !p.getController().confirmAction(sa, null,
-                                Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()))) {
+                                Localizer.getInstance().getMessage("lblDoYouWantPutCardToZone", foundDest.getTranslatedName()), null)) {
                             continue;
                         }
                         Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
@@ -209,7 +209,9 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     Collections.shuffle(revealed, MyRandom.getRandom());
                 }
 
-                if (sa.hasParam("NoneFoundDestination") && found.size() < untilAmount) {
+                if (sa.hasParam("NoMoveRevealed")) {
+                    //don't do anything
+                } else if (sa.hasParam("NoneFoundDestination") && found.size() < untilAmount) {
                     // Allow ordering the revealed cards
                     if (noneFoundDest.isKnown() && revealed.size() >= 2) {
                         revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, noneFoundDest, sa);

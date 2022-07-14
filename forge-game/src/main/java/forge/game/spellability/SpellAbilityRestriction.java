@@ -434,13 +434,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
         if (sa.isProwl()) {
-            boolean prowlFlag = false;
-            for (final String type : c.getType().getCreatureTypes()) {
-                if (activator.hasProwl(type)) {
-                    prowlFlag = true;
-                }
-            }
-            if (!prowlFlag) {
+            if (!activator.hasProwl(c.getType().getCreatureTypes())) {
                 return false;
             }
         }
@@ -449,7 +443,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (getPresentDefined() != null) {
                 list = AbilityUtils.getDefinedObjects(sa.getHostCard(), getPresentDefined(), sa);
             } else {
-                list = new FCollection<GameObject>(game.getCardsIn(getPresentZone()));
+                list = new FCollection<>(game.getCardsIn(getPresentZone()));
             }
 
             final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent().split(","), activator, c, sa)));
@@ -499,6 +493,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
             // check static abilities
             game.getTracker().freeze();
+            cp.clearStaticChangedCardKeywords(false);
             CardCollection preList = new CardCollection(cp);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(cp), preList);
 

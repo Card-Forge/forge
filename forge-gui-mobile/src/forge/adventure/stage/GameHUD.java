@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -192,7 +193,8 @@ public class GameHUD extends Stage {
         }
         //auto follow touchpad
         if (GuiBase.isAndroid() && !MapStage.getInstance().getDialogOnlyInput() && !console.isVisible()) {
-            if (!(Controls.actorContainsVector(miniMap,touch)) // not inside map bounds
+            if (!(Controls.actorContainsVector(avatar,touch)) // not inside avatar bounds
+                    && !(Controls.actorContainsVector(miniMap,touch)) // not inside map bounds
                     && !(Controls.actorContainsVector(gamehud,touch)) //not inside gamehud bounds
                     && !(Controls.actorContainsVector(menuActor,touch)) //not inside menu button
                     && !(Controls.actorContainsVector(deckActor,touch)) //not inside deck button
@@ -251,36 +253,32 @@ public class GameHUD extends Stage {
         mapborder.setVisible(visible);
         miniMapPlayer.setVisible(visible);
         gamehud.setVisible(visible);
-        avatarborder.setVisible(visible);
-        avatar.setVisible(visible);
         lifePoints.setVisible(visible);
         money.setVisible(visible);
         blank.setVisible(visible);
         if (visible) {
+            avatarborder.getColor().a = 1f;
+            avatar.getColor().a = 1f;
             deckActor.getColor().a = 1f;
             menuActor.getColor().a = 1f;
             statsActor.getColor().a = 1f;
             inventoryActor.getColor().a = 1f;
             opacity = 1f;
         } else {
-            deckActor.getColor().a = 0.5f;
-            menuActor.getColor().a = 0.5f;
-            statsActor.getColor().a = 0.5f;
-            inventoryActor.getColor().a = 0.5f;
-            opacity = 0.5f;
+            avatarborder.getColor().a = 0.4f;
+            avatar.getColor().a = 0.4f;
+            deckActor.getColor().a = 0.4f;
+            menuActor.getColor().a = 0.4f;
+            statsActor.getColor().a = 0.4f;
+            inventoryActor.getColor().a = 0.4f;
+            opacity = 0.4f;
         }
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.F10) {
+        if (keycode == Input.Keys.F9 || keycode == Input.Keys.F10) {
             console.toggle();
-
-            return true;
-        }
-        if (keycode == Input.Keys.F9) {
-            console.toggle();
-
             return true;
         }
         if (keycode == Input.Keys.BACK) {
@@ -323,13 +321,20 @@ public class GameHUD extends Stage {
     }
     class ConsoleToggleListener extends ActorGestureListener {
         public ConsoleToggleListener() {
-            getGestureDetector().setLongPressSeconds(0.5f);
+            getGestureDetector().setLongPressSeconds(0.6f);
         }
         @Override
         public boolean longPress(Actor actor, float x, float y) {
             hideButtons();
             console.toggle();
             return super.longPress(actor, x, y);
+        }
+        @Override
+        public void tap(InputEvent event, float x, float y, int count, int button) {
+            super.tap(event, x, y, count, button);
+            //show menu buttons if double tapping the avatar, for android devices without visible navigation buttons
+            if (count > 1)
+                showButtons();
         }
     }
 }

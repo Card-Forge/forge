@@ -362,9 +362,9 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("cbLoadCardsLazily"),
                 Forge.getLocalizer().getMessage("nlLoadCardsLazily")),
                 3);
-        lstSettings.addItem(new BooleanSetting(FPref.LOAD_HISTORIC_FORMATS,
-                Forge.getLocalizer().getMessage("cbLoadHistoricFormats"),
-                Forge.getLocalizer().getMessage("nlLoadHistoricFormats")),
+        lstSettings.addItem(new BooleanSetting(FPref.LOAD_ARCHIVED_FORMATS,
+                Forge.getLocalizer().getMessage("cbLoadArchivedFormats"),
+                Forge.getLocalizer().getMessage("nlLoadArchivedFormats")),
                 3);
         lstSettings.addItem(new BooleanSetting(FPref.UI_LOAD_UNKNOWN_CARDS,
                 Forge.getLocalizer().getMessage("lblEnableUnknownCards"),
@@ -483,7 +483,7 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                     @Override
                     public void select() {
                         super.select();
-                        ImageCache.disposeTexture();
+                        ImageCache.disposeTextures();
                     }
                 },
                 4);
@@ -590,6 +590,8 @@ public class SettingsPage extends TabPage<SettingsScreen> {
             public void valueChanged(String newValue) {
                 super.valueChanged(newValue);
                 Forge.enableUIMask = FModel.getPreferences().getPref(FPref.UI_ENABLE_BORDER_MASKING);
+                ImageCache.clearGeneratedCards();
+                ImageCache.disposeTextures();
             }
         }, 4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_ENABLE_PRELOAD_EXTENDED_ART,

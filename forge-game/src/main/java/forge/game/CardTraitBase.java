@@ -20,6 +20,7 @@ import forge.game.card.CardPredicates;
 import forge.game.card.CardState;
 import forge.game.card.CardView;
 import forge.game.card.IHasCardView;
+import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -34,6 +35,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     /** The host card. */
     protected Card hostCard;
     protected CardState cardState = null;
+    protected KeywordInterface keyword = null;
 
     /** The map params. */
     protected Map<String, String> originalMapParams = Maps.newHashMap(),
@@ -138,6 +140,14 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         this.hostCard = c;
     }
 
+    public KeywordInterface getKeyword() {
+        return this.keyword;
+    }
+    
+    public void setKeyword(final KeywordInterface kw) {
+        this.keyword = kw;
+    }
+    
     /**
      * <p>
      * isSecondary.
@@ -667,6 +677,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         copy.setCardState(cardState);
         // dont use setHostCard to not trigger the not copied parts yet
         copy.hostCard = host;
+        copy.keyword = this.keyword;
     }
 
     abstract public List<Object> getTriggerRemembered();

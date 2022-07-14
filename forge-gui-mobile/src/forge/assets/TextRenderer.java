@@ -2,10 +2,8 @@ package forge.assets;
 
 import java.text.BreakIterator;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
@@ -20,64 +18,63 @@ import forge.util.TextBounds;
 
 //Encodes text for drawing with symbols and reminder text
 public class TextRenderer {
-    private static final Map<String, FSkinImage> symbolLookup = new HashMap<>(64);
     static {
-        symbolLookup.put("C", FSkinImage.MANA_COLORLESS);
-        symbolLookup.put("W", FSkinImage.MANA_W);
-        symbolLookup.put("U", FSkinImage.MANA_U);
-        symbolLookup.put("B", FSkinImage.MANA_B);
-        symbolLookup.put("R", FSkinImage.MANA_R);
-        symbolLookup.put("G", FSkinImage.MANA_G);
-        symbolLookup.put("W/U", FSkinImage.MANA_HYBRID_WU);
-        symbolLookup.put("U/B", FSkinImage.MANA_HYBRID_UB);
-        symbolLookup.put("B/R", FSkinImage.MANA_HYBRID_BR);
-        symbolLookup.put("R/G", FSkinImage.MANA_HYBRID_RG);
-        symbolLookup.put("G/W", FSkinImage.MANA_HYBRID_GW);
-        symbolLookup.put("W/B", FSkinImage.MANA_HYBRID_WB);
-        symbolLookup.put("U/R", FSkinImage.MANA_HYBRID_UR);
-        symbolLookup.put("B/G", FSkinImage.MANA_HYBRID_BG);
-        symbolLookup.put("R/W", FSkinImage.MANA_HYBRID_RW);
-        symbolLookup.put("G/U", FSkinImage.MANA_HYBRID_GU);
-        symbolLookup.put("2/W", FSkinImage.MANA_2W);
-        symbolLookup.put("2/U", FSkinImage.MANA_2U);
-        symbolLookup.put("2/B", FSkinImage.MANA_2B);
-        symbolLookup.put("2/R", FSkinImage.MANA_2R);
-        symbolLookup.put("2/G", FSkinImage.MANA_2G);
-        symbolLookup.put("P", FSkinImage.MANA_PHRYX);
-        symbolLookup.put("P/W", FSkinImage.MANA_PHRYX_W);
-        symbolLookup.put("P/U", FSkinImage.MANA_PHRYX_U);
-        symbolLookup.put("P/B", FSkinImage.MANA_PHRYX_B);
-        symbolLookup.put("P/R", FSkinImage.MANA_PHRYX_R);
-        symbolLookup.put("P/G", FSkinImage.MANA_PHRYX_G);
-        symbolLookup.put("W/P", FSkinImage.MANA_PHRYX_W);
-        symbolLookup.put("U/P", FSkinImage.MANA_PHRYX_U);
-        symbolLookup.put("B/P", FSkinImage.MANA_PHRYX_B);
-        symbolLookup.put("R/P", FSkinImage.MANA_PHRYX_R);
-        symbolLookup.put("G/P", FSkinImage.MANA_PHRYX_G);
-        symbolLookup.put("P/B/G", FSkinImage.MANA_PHRYX_BG);
-        symbolLookup.put("P/B/R", FSkinImage.MANA_PHRYX_BR);
-        symbolLookup.put("P/G/U", FSkinImage.MANA_PHRYX_GU);
-        symbolLookup.put("P/G/W", FSkinImage.MANA_PHRYX_GW);
-        symbolLookup.put("P/R/G", FSkinImage.MANA_PHRYX_RG);
-        symbolLookup.put("P/R/W", FSkinImage.MANA_PHRYX_RW);
-        symbolLookup.put("P/U/B", FSkinImage.MANA_PHRYX_UB);
-        symbolLookup.put("P/U/R", FSkinImage.MANA_PHRYX_UR);
-        symbolLookup.put("P/W/B", FSkinImage.MANA_PHRYX_WB);
-        symbolLookup.put("P/W/U", FSkinImage.MANA_PHRYX_WU);
+        Forge.getAssets().symbolLookup.put("C", FSkinImage.MANA_COLORLESS);
+        Forge.getAssets().symbolLookup.put("W", FSkinImage.MANA_W);
+        Forge.getAssets().symbolLookup.put("U", FSkinImage.MANA_U);
+        Forge.getAssets().symbolLookup.put("B", FSkinImage.MANA_B);
+        Forge.getAssets().symbolLookup.put("R", FSkinImage.MANA_R);
+        Forge.getAssets().symbolLookup.put("G", FSkinImage.MANA_G);
+        Forge.getAssets().symbolLookup.put("W/U", FSkinImage.MANA_HYBRID_WU);
+        Forge.getAssets().symbolLookup.put("U/B", FSkinImage.MANA_HYBRID_UB);
+        Forge.getAssets().symbolLookup.put("B/R", FSkinImage.MANA_HYBRID_BR);
+        Forge.getAssets().symbolLookup.put("R/G", FSkinImage.MANA_HYBRID_RG);
+        Forge.getAssets().symbolLookup.put("G/W", FSkinImage.MANA_HYBRID_GW);
+        Forge.getAssets().symbolLookup.put("W/B", FSkinImage.MANA_HYBRID_WB);
+        Forge.getAssets().symbolLookup.put("U/R", FSkinImage.MANA_HYBRID_UR);
+        Forge.getAssets().symbolLookup.put("B/G", FSkinImage.MANA_HYBRID_BG);
+        Forge.getAssets().symbolLookup.put("R/W", FSkinImage.MANA_HYBRID_RW);
+        Forge.getAssets().symbolLookup.put("G/U", FSkinImage.MANA_HYBRID_GU);
+        Forge.getAssets().symbolLookup.put("2/W", FSkinImage.MANA_2W);
+        Forge.getAssets().symbolLookup.put("2/U", FSkinImage.MANA_2U);
+        Forge.getAssets().symbolLookup.put("2/B", FSkinImage.MANA_2B);
+        Forge.getAssets().symbolLookup.put("2/R", FSkinImage.MANA_2R);
+        Forge.getAssets().symbolLookup.put("2/G", FSkinImage.MANA_2G);
+        Forge.getAssets().symbolLookup.put("P", FSkinImage.MANA_PHRYX);
+        Forge.getAssets().symbolLookup.put("P/W", FSkinImage.MANA_PHRYX_W);
+        Forge.getAssets().symbolLookup.put("P/U", FSkinImage.MANA_PHRYX_U);
+        Forge.getAssets().symbolLookup.put("P/B", FSkinImage.MANA_PHRYX_B);
+        Forge.getAssets().symbolLookup.put("P/R", FSkinImage.MANA_PHRYX_R);
+        Forge.getAssets().symbolLookup.put("P/G", FSkinImage.MANA_PHRYX_G);
+        Forge.getAssets().symbolLookup.put("W/P", FSkinImage.MANA_PHRYX_W);
+        Forge.getAssets().symbolLookup.put("U/P", FSkinImage.MANA_PHRYX_U);
+        Forge.getAssets().symbolLookup.put("B/P", FSkinImage.MANA_PHRYX_B);
+        Forge.getAssets().symbolLookup.put("R/P", FSkinImage.MANA_PHRYX_R);
+        Forge.getAssets().symbolLookup.put("G/P", FSkinImage.MANA_PHRYX_G);
+        Forge.getAssets().symbolLookup.put("P/B/G", FSkinImage.MANA_PHRYX_BG);
+        Forge.getAssets().symbolLookup.put("P/B/R", FSkinImage.MANA_PHRYX_BR);
+        Forge.getAssets().symbolLookup.put("P/G/U", FSkinImage.MANA_PHRYX_GU);
+        Forge.getAssets().symbolLookup.put("P/G/W", FSkinImage.MANA_PHRYX_GW);
+        Forge.getAssets().symbolLookup.put("P/R/G", FSkinImage.MANA_PHRYX_RG);
+        Forge.getAssets().symbolLookup.put("P/R/W", FSkinImage.MANA_PHRYX_RW);
+        Forge.getAssets().symbolLookup.put("P/U/B", FSkinImage.MANA_PHRYX_UB);
+        Forge.getAssets().symbolLookup.put("P/U/R", FSkinImage.MANA_PHRYX_UR);
+        Forge.getAssets().symbolLookup.put("P/W/B", FSkinImage.MANA_PHRYX_WB);
+        Forge.getAssets().symbolLookup.put("P/W/U", FSkinImage.MANA_PHRYX_WU);
         for (int i = 0; i <= 20; i++) {
-            symbolLookup.put(String.valueOf(i), FSkinImage.valueOf("MANA_" + i));
+            Forge.getAssets().symbolLookup.put(String.valueOf(i), FSkinImage.valueOf("MANA_" + i));
         }
-        symbolLookup.put("X", FSkinImage.MANA_X);
-        symbolLookup.put("Y", FSkinImage.MANA_Y);
-        symbolLookup.put("Z", FSkinImage.MANA_Z);
-        symbolLookup.put("CHAOS", FSkinImage.CHAOS);
-        symbolLookup.put("Q", FSkinImage.UNTAP);
-        symbolLookup.put("S", FSkinImage.MANA_SNOW);
-        symbolLookup.put("T", FSkinImage.TAP);
-        symbolLookup.put("E", FSkinImage.ENERGY);
-        symbolLookup.put("AE", FSkinImage.AETHER_SHARD);
-        symbolLookup.put("PW", FSkinImage.PW_BADGE_COMMON);
-        symbolLookup.put("CR", FSkinImage.QUEST_COINSTACK);
+        Forge.getAssets().symbolLookup.put("X", FSkinImage.MANA_X);
+        Forge.getAssets().symbolLookup.put("Y", FSkinImage.MANA_Y);
+        Forge.getAssets().symbolLookup.put("Z", FSkinImage.MANA_Z);
+        Forge.getAssets().symbolLookup.put("CHAOS", FSkinImage.CHAOS);
+        Forge.getAssets().symbolLookup.put("Q", FSkinImage.UNTAP);
+        Forge.getAssets().symbolLookup.put("S", FSkinImage.MANA_SNOW);
+        Forge.getAssets().symbolLookup.put("T", FSkinImage.TAP);
+        Forge.getAssets().symbolLookup.put("E", FSkinImage.ENERGY);
+        Forge.getAssets().symbolLookup.put("AE", FSkinImage.AETHER_SHARD);
+        Forge.getAssets().symbolLookup.put("PW", FSkinImage.PW_BADGE_COMMON);
+        Forge.getAssets().symbolLookup.put("CR", FSkinImage.QUEST_COINSTACK);
     }
 
     public static String startColor(Color color) {
@@ -192,7 +189,7 @@ public class TextRenderer {
                 if (inSymbolCount > 0) {
                     inSymbolCount--;
                     if (text.length() > 0) {
-                        FSkinImage symbol = symbolLookup.get(text.toString());
+                        FSkinImage symbol = Forge.getAssets().symbolLookup.get(text.toString());
                         if (symbol != null) {
                             pieceWidth = lineHeight * CardFaceSymbols.FONT_SIZE_FACTOR;
                             if (x + pieceWidth > width) {

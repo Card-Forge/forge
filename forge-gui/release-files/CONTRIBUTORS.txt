@@ -28,6 +28,7 @@ Magpie
 Marek14
 Marvel
 mcrawford
+mctubbies
 medusa
 Meerkov
 Monkey Gland Sauce
@@ -60,5 +61,6 @@ twosat
 Xyx
 Zimtente
 Zuchinni
+XavierMD
 
 (If you think your name should be on this list, add it with your next contribution)

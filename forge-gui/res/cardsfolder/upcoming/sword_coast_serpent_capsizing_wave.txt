@@ -1,0 +1,17 @@
+Name:Sword Coast Serpent
+ManaCost:5 U U
+Types:Creature Serpent Dragon
+PT:6/6
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ Unblockable | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME can't be blocked as long as you've cast a noncreature spell this turn.
+SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
+AlternateMode:Adventure
+SVar:BuffedBy:Card.nonCreature+nonLand
+Oracle:Sword Coast Serpent can't be blocked as long as you've cast a noncreature spell this turn.
+
+ALTERNATE
+
+Name:Capsizing Wave
+ManaCost:1 U
+Types:Instant Adventure
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target creature to its owner's hand.
+Oracle:Return target creature to its owner's hand. (Then exile this card. You may cast the creature later from exile.)

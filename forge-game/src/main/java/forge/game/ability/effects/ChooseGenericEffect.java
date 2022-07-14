@@ -50,7 +50,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             List<SpellAbility> saToRemove = Lists.newArrayList();
             
             for (SpellAbility saChoice : abilities) {
-                if (!saChoice.getRestrictions().checkOtherRestrictions(host, saChoice, sa.getActivatingPlayer()) ) {
+                if (saChoice.getRestrictions() != null && !saChoice.getRestrictions().checkOtherRestrictions(host, saChoice, sa.getActivatingPlayer())) {
                     saToRemove.add(saChoice);
                 } else if (saChoice.hasParam("UnlessCost")) {
                     // generic check for if the cost can be paid

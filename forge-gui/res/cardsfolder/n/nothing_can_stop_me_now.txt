@@ -6,5 +6,5 @@ R:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.OppCtrl,Emblem.Op
 SVar:DBReplace:DB$ ReplaceDamage | Amount$ 1
 T:Mode$ Phase | Phase$ End of Turn | CheckSVar$ X | SVarCompare$ GE5 | TriggerZones$ Command | Execute$ Abandon | TriggerDescription$ At the beginning of each end step, if you've been dealt 5 or more damage this turn, abandon this scheme.
 SVar:Abandon:AB$ Abandon | Cost$ 0
-SVar:X:Count$YourDamageThisTurn
+SVar:X:PlayerCountPropertyYou$DamageThisTurn
 Oracle:(An ongoing scheme remains face up until it's abandoned.)\nIf a source an opponent controls would deal damage to you, prevent 1 of that damage.\nAt the beginning of each end step, if you've been dealt 5 or more damage this turn, abandon this scheme.

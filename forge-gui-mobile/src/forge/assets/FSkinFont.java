@@ -3,6 +3,7 @@ package forge.assets;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -21,7 +22,6 @@ import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Array;
 
 import com.badlogic.gdx.utils.IntSet;
-import com.badlogic.gdx.utils.ObjectMap;
 import forge.Forge;
 import forge.gui.FThreads;
 import forge.localinstance.properties.ForgeConstants;
@@ -38,29 +38,19 @@ public class FSkinFont {
     private static final int MAX_FONT_SIZE_MANY_GLYPHS = 36;
 
     private static final String TTF_FILE = "font1.ttf";
-    private static final ObjectMap<Integer, FSkinFont> fonts = new ObjectMap<>();
-
-    private static final String commonCharacterSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklm"
-            + "nopqrstuvwxyz1234567890\"!?'.,;:()[]{}<>|/@\\^$-%+=#_&*\u2014"
-            + "\u2022ÁÉÍÓÚáéíóúÀÈÌÒÙàèìòùÑñÄËÏÖÜäëïöüẞß¿¡";
-    private static ObjectMap<String, String> langUniqueCharacterSet = new ObjectMap<>();
+    private static HashMap<String, String> langUniqueCharacterSet = new HashMap<>();
 
     static {
         FileUtil.ensureDirectoryExists(ForgeConstants.FONTS_DIR);
-    }
-    public static void clear() {
-        fonts.clear();
-        //reset maxFontSize and Preload
-        preloadAll("");
     }
     public static FSkinFont get(final int unscaledSize) {
         return _get((int)Utils.scale(unscaledSize));
     }
     public static FSkinFont _get(final int scaledSize) {
-        FSkinFont skinFont = fonts.get(scaledSize);
+        FSkinFont skinFont = Forge.getAssets().fonts.get(scaledSize);
         if (skinFont == null) {
             skinFont = new FSkinFont(scaledSize);
-            fonts.put(scaledSize, skinFont);
+            Forge.getAssets().fonts.put(scaledSize, skinFont);
         }
         return skinFont;
     }
@@ -68,7 +58,8 @@ public class FSkinFont {
     public static FSkinFont forHeight(final float height) {
         int size = MIN_FONT_SIZE + 1;
         while (true) {
-            if (_get(size).getLineHeight() > height) {
+            FSkinFont f = _get(size);
+            if (f != null && f.getLineHeight() > height) {
                 return _get(size - 1);
             }
             size++;
@@ -96,14 +87,14 @@ public class FSkinFont {
     }
 
     public static void updateAll() {
-        for (FSkinFont skinFont : fonts.values()) {
+        for (FSkinFont skinFont : Forge.getAssets().fonts.values()) {
             skinFont.updateFont();
         }
     }
 
     private final int fontSize;
     private final float scale;
-    private BitmapFont font;
+    BitmapFont font;
 
     private FSkinFont(int fontSize0) {
         if (fontSize0 > MAX_FONT_SIZE) {
@@ -126,6 +117,8 @@ public class FSkinFont {
 
     }
     public int computeVisibleGlyphs (CharSequence str, int start, int end, float availableWidth) {
+        if (font == null)
+            return 0;
         BitmapFontData data = font.getData();
         int index = start;
         float width = 0;
@@ -179,6 +172,9 @@ public class FSkinFont {
         return getBounds(str, 0, str.length());
     }
     public TextBounds getBounds(CharSequence str, int start, int end) {
+        if (font == null) {
+            return new TextBounds(0f, 0f);
+        }
         BitmapFontData data = font.getData();
         //int start = 0;
         //int end = str.length();
@@ -227,6 +223,9 @@ public class FSkinFont {
     }
     public TextBounds getMultiLineBounds(CharSequence str) {
         updateScale();
+        if (font == null) {
+            return new TextBounds(0f, 0f);
+        }
         BitmapFontData data = font.getData();
         int start = 0;
         float maxWidth = 0;
@@ -246,6 +245,9 @@ public class FSkinFont {
     }
     public TextBounds getWrappedBounds(CharSequence str, float wrapWidth) {
         updateScale();
+        if (font == null) {
+            return new TextBounds(0f, 0f);
+        }
         BitmapFontData data = font.getData();
         if (wrapWidth <= 0) wrapWidth = Integer.MAX_VALUE;
         int start = 0;
@@ -302,14 +304,20 @@ public class FSkinFont {
         return new TextBounds(maxWidth, data.capHeight + (numLines - 1) * data.lineHeight);
     }
     public float getAscent() {
+        if (font == null)
+            return 0f;
         updateScale();
         return font.getAscent();
     }
     public float getCapHeight() {
+        if (font == null)
+            return 0f;
         updateScale();
         return font.getCapHeight();
     }
     public float getLineHeight() {
+        if (font == null)
+            return 0f;
         updateScale();
         return font.getLineHeight();
     }
@@ -322,8 +330,12 @@ public class FSkinFont {
 
     //update scale of font if needed
     private void updateScale() {
-        if (font.getScaleX() != scale) {
-            font.getData().setScale(scale);
+        try {
+            if (font.getScaleX() != scale) {
+                font.getData().setScale(scale);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -347,10 +359,10 @@ public class FSkinFont {
         if (langUniqueCharacterSet.containsKey(langCode)) {
             return langUniqueCharacterSet.get(langCode);
         }
-        StringBuilder characters = new StringBuilder(commonCharacterSet);
+        StringBuilder characters = new StringBuilder(FreeTypeFontGenerator.DEFAULT_CHARS);
         IntSet characterSet = new IntSet();
-        for (int offset = 0; offset < commonCharacterSet.length();) {
-            final int codePoint = commonCharacterSet.codePointAt(offset);
+        for (int offset = 0; offset < FreeTypeFontGenerator.DEFAULT_CHARS.length();) {
+            final int codePoint = FreeTypeFontGenerator.DEFAULT_CHARS.codePointAt(offset);
             characterSet.add(codePoint);
             offset += Character.charCount(codePoint);
         }
@@ -395,24 +407,31 @@ public class FSkinFont {
             fontName += Forge.locale;
         }
         FileHandle fontFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + fontName + ".fnt");
+        final boolean[] found = {false};
         if (fontFile != null && fontFile.exists()) {
             final BitmapFontData data = new BitmapFontData(fontFile, false);
-            FThreads.invokeInEdtNowOrLater(new Runnable() {
-                @Override
-                public void run() { //font must be initialized on UI thread
-                    font = new BitmapFont(data, (TextureRegion)null, true);
+            String finalFontName = fontName;
+            FThreads.invokeInEdtNowOrLater(() -> { //font must be initialized on UI thread
+                try {
+                    font = new BitmapFont(data, (TextureRegion) null, true);
+                    found[0] = true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    found[0] = false;
                 }
             });
-        } else {
-            if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
-                String ttfName = Forge.CJK_Font;
-                FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
-                if (ttfFile != null && ttfFile.exists()) {
-                    generateFont(ttfFile, fontName, fontSize);
-                }
-            } else {
-                generateFont(FSkin.getSkinFile(TTF_FILE), fontName, fontSize);
+        }
+        if (found[0])
+            return;
+        //not found generate
+        if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
+            String ttfName = Forge.CJK_Font;
+            FileHandle ttfFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + ttfName + ".ttf");
+            if (ttfFile != null && ttfFile.exists()) {
+                generateFont(ttfFile, fontName, fontSize);
             }
+        } else {
+            generateFont(FSkin.getSkinFile(TTF_FILE), fontName, fontSize);
         }
     }
 

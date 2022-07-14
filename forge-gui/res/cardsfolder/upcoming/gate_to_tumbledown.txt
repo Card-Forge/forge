@@ -1,0 +1,8 @@
+Name:Gate to Tumbledown
+ManaCost:no cost
+Types:Land Mountain Gate
+K:CARDNAME enters the battlefield tapped.
+A:AB$ ChangeZone | Cost$ 3 R T | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 1 | ChangeType$ Card.nonLand | GameActivationLimit$ 1 | StackDescription$ SpellDescription | SpellDescription$ Seek a nonland card. Activate only once.
+Text:{T}: Add {R}.
+DeckHints:Type$Gate
+Oracle:Gate to Tumbledown enters the battlefield tapped.\n{3}{R}, {T}: Seek a nonland card. Activate only once.\n{T}: Add {R}.

@@ -25,9 +25,12 @@ public class PlayerSprite extends CharacterSprite {
                 PlayerSprite.this.updatePlayer();
             }
         });
+
         playerSpeed = Config.instance().getConfigData().playerBaseSpeed;
-        Current.player().onBlessing( () -> playerSpeedEquipmentModifier = Current.player().equipmentSpeed() );
-        Current.player().onEquipmentChanged( () -> playerSpeedEquipmentModifier=Current.player().equipmentSpeed() );
+
+        //Attach signals here.
+        Current.player().onBlessing(         () -> playerSpeedEquipmentModifier = Current.player().equipmentSpeed() );
+        Current.player().onEquipmentChanged( () -> playerSpeedEquipmentModifier = Current.player().equipmentSpeed() );
     }
 
     private void updatePlayer() {
@@ -60,13 +63,11 @@ public class PlayerSprite extends CharacterSprite {
         super.act(delta);
         direction.setLength(playerSpeed * delta * playerSpeedModifier*playerSpeedEquipmentModifier);
 
-        if(!direction.isZero())
-        {
+        if(!direction.isZero()) {
             gameStage.prepareCollision(pos(),direction,boundingRect);
             direction.set(gameStage.adjustMovement(direction,boundingRect));
             moveBy(direction.x, direction.y);
         }
-
     }
 
     public boolean isMoving() {

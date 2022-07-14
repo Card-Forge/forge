@@ -206,7 +206,7 @@ public abstract class GameState {
                     cardsReferencedByID.add(card.getExiledWith());
                 }
                 if (zone == ZoneType.Battlefield) {
-                    if (!card.getAttachedCards().isEmpty()) {
+                    if (card.hasCardAttachments()) {
                         // Remember the ID of cards that have attachments
                         cardsReferencedByID.add(card);
                     }
@@ -375,7 +375,7 @@ public abstract class GameState {
                 newText.append("|Imprinting:").append(TextUtil.join(imprintedCardIds, ","));
             }
 
-            if (!c.getMergedCards().isEmpty()) {
+            if (c.hasMergedCard()) {
                 List<String> mergedCardNames = new ArrayList<>();
                 for (Card merged : c.getMergedCards()) {
                     if (c.getTopMergedCard() == merged) {

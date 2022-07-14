@@ -661,8 +661,10 @@ public class Graphics {
             drawRoundRect(2f, borderLining(borderColor.toString()), x, y, w, h, (h-w)/12);
             fillRoundRect(tintColor, x, y, w, h, (h-w)/12);
         } else {
-            image.draw(this, x, y, w, h);
-            fillRoundRect(borderColor, x, y, w, h, (h-w)/10);//show corners edges
+            if (image != null) {
+                image.draw(this, x, y, w, h);
+                fillRoundRect(borderColor, x, y, w, h, (h - w) / 10);//show corners edges
+            }
         }
         setAlphaComposite(oldalpha);
     }
@@ -672,10 +674,14 @@ public class Graphics {
         setAlphaComposite(oldalpha);
     }
     public void drawImage(FImage image, Color borderColor, float x, float y, float w, float h) {
+        if (image == null)
+            return;
         image.draw(this, x, y, w, h);
         fillRoundRect(borderColor, x+1, y+1, w-1.5f, h-1.5f, (h-w)/10);//used by zoom let some edges show...
     }
     public void drawAvatarImage(FImage image, float x, float y, float w, float h, boolean drawGrayscale) {
+        if (image == null)
+            return;
         if (!drawGrayscale) {
             image.draw(this, x, y, w, h);
         } else {
@@ -693,6 +699,8 @@ public class Graphics {
         }
     }
     public void drawCardImage(FImage image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGrayscale, boolean damaged) {
+        if (image == null)
+            return;
         if (!drawGrayscale) {
             image.draw(this, x, y, w, h);
             if (damage_overlay != null && damaged)
@@ -752,6 +760,8 @@ public class Graphics {
         }
     }
     public void drawGrayTransitionImage(FImage image, float x, float y, float w, float h, boolean withDarkOverlay, float percentage) {
+        if (image == null)
+            return;
         batch.end();
         shaderGrayscale.bind();
         shaderGrayscale.setUniformf("u_grayness", percentage);
@@ -839,6 +849,8 @@ public class Graphics {
         batch.begin();
     }
     public void drawWarpImage(FImage image, float x, float y, float w, float h, float time) {
+        if (image == null)
+            return;
         batch.end();
         shaderWarp.bind();
         shaderWarp.setUniformf("u_amount", 0.2f);
@@ -854,6 +866,8 @@ public class Graphics {
         batch.begin();
     }
     public void drawUnderWaterImage(FImage image, float x, float y, float w, float h, float time, boolean withDarkOverlay) {
+        if (image == null)
+            return;
         batch.end();
         shaderUnderwater.bind();
         shaderUnderwater.setUniformf("u_amount", 10f*time);
@@ -893,6 +907,8 @@ public class Graphics {
         drawImage(image, x, y, w, h, false);
     }
     public void drawImage(FImage image, float x, float y, float w, float h, boolean withDarkOverlay) {
+        if (image == null)
+            return;
         image.draw(this, x, y, w, h);
         if(withDarkOverlay){
             float oldalpha = alphaComposite;
@@ -1132,6 +1148,7 @@ public class Graphics {
             P.setColor(1f,1f,1f,1f);
             P.drawPixel(0, 0);
             dummyTexture = new Texture(P);
+            P.dispose();
         }
         return dummyTexture;
     }

@@ -138,7 +138,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     /** The pay costs. */
     private Cost payCosts;
-    private SpellAbilityRestriction restrictions = new SpellAbilityRestriction();
+    private SpellAbilityRestriction restrictions;
     private SpellAbilityCondition conditions = new SpellAbilityCondition();
     private AbilitySub subAbility;
 
@@ -214,6 +214,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             view0 = new SpellAbilityView(this);
         }
         view = view0;
+        if (!(this instanceof AbilitySub)) {
+            restrictions = new SpellAbilityRestriction();
+        }
     }
 
     @Override
@@ -638,7 +641,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             if (isSpell() && host != null) {
                 if (mana.addsKeywords(this) && mana.addsKeywordsType()
-                        && host.getType().hasStringType(mana.getManaAbility().getAddsKeywordsType())) {
+                        && this.isValid(mana.getManaAbility().getAddsKeywordsType(),
+                        mana.getSourceCard().getController(), mana.getSourceCard(), null)) {
                     final long timestamp = host.getGame().getNextTimestamp();
                     final List<String> kws = Arrays.asList(mana.getAddedKeywords().split(" & "));
                     host.addChangedCardKeywords(kws, null, false, timestamp, 0);
@@ -1096,12 +1100,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             // always set this to false, it is only set in CopyEffect
             clone.mayChooseNewTargets = false;
 
-            // Copied spell is not cast face down
-            if (clone instanceof Spell) {
-                Spell spell = (Spell) clone;
-                spell.setCastFaceDown(false);
-            }
-
             clone.triggeringObjects = AbilityKey.newMap(this.triggeringObjects);
 
             clone.setPayCosts(getPayCosts().copy());
@@ -1160,14 +1158,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             newSA.mapParams.put("WithoutManaCost", "True");
         }
         newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
-
-        //Normal copied spell will not copy castFaceDown flag
-        //But copyWithNoManaCost is used to get SA without mana cost
-        //So it need to copy the castFaceDown flag too
-        if (newSA instanceof Spell) {
-            Spell spell = (Spell) newSA;
-            spell.setCastFaceDown(this.isCastFaceDown());
-        }
 
         return newSA;
     }
@@ -2058,41 +2048,52 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         final String[] incR = restriction.split("\\.", 2);
         SpellAbility root = getRootAbility();
 
+        boolean testFailed = false;
+        if (incR[0].startsWith("!")) {
+            testFailed = true; // a bit counterintuitive
+            incR[0] = incR[0].substring(1); // consume negation sign
+        }
+
         if (incR[0].equals("Spell")) {
             if (!root.isSpell()) {
-                return false;
+                return testFailed;
             }
         }
         else if (incR[0].equals("Instant")) {
             if (!root.getCardState().getType().isInstant()) {
-                return false;
+                return testFailed;
             }
         }
         else if (incR[0].equals("Sorcery")) {
             if (!root.getCardState().getType().isSorcery()) {
-                return false;
+                return testFailed;
             }
         }
         else if (incR[0].equals("Triggered")) {
             if (!root.isTrigger()) {
-                return false;
+                return testFailed;
             }
         }
         else if (incR[0].equals("Activated")) {
             if (!root.isActivatedAbility()) {
-                return false;
+                return testFailed;
             }
         }
         else if (incR[0].equals("Static")) {
             if (!(root instanceof AbilityStatic)) {
-                return false;
+                return testFailed;
+            }
+        }
+        else if (incR[0].contains("LandAbility")) {
+            if (!(root instanceof LandAbility)) {
+                return testFailed;
             }
         }
         else if (incR[0].equals("SpellAbility")) {
             // Match anything
         }
         else { //not a spell/ability type
-            return false;
+            return testFailed;
         }
 
         if (incR.length > 1) {
@@ -2100,11 +2101,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             final String[] exR = excR.split("\\+"); // Exclusive Restrictions are ...
             for (int j = 0; j < exR.length; j++) {
                 if (!hasProperty(exR[j], sourceController, source, spellAbility)) {
-                    return false;
+                    return testFailed;
                 }
             }
         }
-        return true;
+        return !testFailed;
     }
 
     // Takes arguments like Blue or withFlying

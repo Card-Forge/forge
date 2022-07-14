@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import forge.Forge;
 
 import java.util.function.Function;
 
@@ -18,15 +19,10 @@ import java.util.function.Function;
  * Class to create ui elements in the correct style
  */
 public class Controls {
-    private static Skin SelectedSkin = null;
-    private static BitmapFont defaultfont, bigfont;
-
     static public TextButton newTextButton(String text) {
-
         return new TextButton(text, GetSkin());
     }
     static public Rectangle getBoundingRect(Actor actor) {
-
         return new Rectangle(actor.getX(),actor.getY(),actor.getWidth(),actor.getHeight());
     }
     static public boolean actorContainsVector (Actor actor, Vector2 point) {
@@ -55,8 +51,6 @@ public class Controls {
         ret.setAlignment(Align.right);
         return ret;
     }
-
-
 
     static public TextField newTextField(String text) {
         return new TextField(text, GetSkin());
@@ -108,32 +102,28 @@ public class Controls {
         switch (fontName) {
             case "blackbig":
             case "big":
-                return bigfont;
+                return Forge.getAssets().advBigFont;
             default:
-                return defaultfont;
+                return Forge.getAssets().advDefaultFont;
         }
     }
 
-
     static public Skin GetSkin() {
-
-        if (SelectedSkin == null) {
-            SelectedSkin = new Skin();
-
+        if (Forge.getAssets().skin == null) {
+            Forge.getAssets().skin = new Skin();
             FileHandle skinFile = Config.instance().getFile(Paths.SKIN);
             FileHandle atlasFile = skinFile.sibling(skinFile.nameWithoutExtension() + ".atlas");
             TextureAtlas atlas = new TextureAtlas(atlasFile);
             //font
-            defaultfont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixel.fnt"));
-            bigfont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixel.fnt"));
-            bigfont.getData().setScale(2, 2);
-            SelectedSkin.add("default", defaultfont);
-            SelectedSkin.add("big", bigfont);
-            SelectedSkin.addRegions(atlas);
-            SelectedSkin.load(skinFile);
-
+            Forge.getAssets().advDefaultFont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixel.fnt"));
+            Forge.getAssets().advBigFont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixel.fnt"));
+            Forge.getAssets().advBigFont.getData().setScale(2, 2);
+            Forge.getAssets().skin.add("default", Forge.getAssets().advDefaultFont);
+            Forge.getAssets().skin.add("big", Forge.getAssets().advBigFont);
+            Forge.getAssets().skin.addRegions(atlas);
+            Forge.getAssets().skin.load(skinFile);
         }
-        return SelectedSkin;
+        return Forge.getAssets().skin;
     }
 
     public static Label newLabel(String name) {

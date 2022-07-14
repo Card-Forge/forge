@@ -156,6 +156,11 @@ public class CharmEffect extends SpellAbilityEffect {
     }
 
     public static boolean makeChoices(SpellAbility sa) {
+        // CR 700.2g
+        if (sa.isCopied()) {
+            return true;
+        }
+
         //this resets all previous choices
         sa.setSubAbility(null);
 
@@ -180,7 +185,7 @@ public class CharmEffect extends SpellAbilityEffect {
         num = Math.min(num, choices.size());
 
         boolean isOptional = sa.hasParam("Optional");
-        if (isOptional && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeCharm", CardTranslation.getTranslatedName(source.getName())))) {
+        if (isOptional && !activator.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeCharm", CardTranslation.getTranslatedName(source.getName())), null)) {
             return false;
         }
 

@@ -107,8 +107,17 @@ public class AttackRequirement {
         }
     }
 
+    public Card getAttacker() {
+        return attacker;
+    }
+
     public boolean hasRequirement() {
-        return !defenderSpecific.isEmpty() || !causesToAttack.isEmpty() || !defenderOrPWSpecific.isEmpty();
+        return defenderSpecific.countAll() > 0 || causesToAttack.countAll() > 0 || defenderOrPWSpecific.countAll() > 0;
+    }
+
+    //  according to Firkraag ruling Trove of Temptation applies to players, not creatures
+    public boolean hasCreatureRequirement() {
+        return defenderSpecific.countAll() > 0 || causesToAttack.countAll() > 0;
     }
 
     public final MapToAmount<Card> getCausesToAttack() {
@@ -124,28 +133,23 @@ public class AttackRequirement {
         int violations = 0;
 
         // first. check to see if "must attack X or Y with at least one creature" requirements are satisfied
-        //List<GameEntity> toRemoveFromDefSpecific = Lists.newArrayList();
-        if (!defenderOrPWSpecific.isEmpty()) {
-            for (GameEntity def : defenderOrPWSpecific.keySet()) {
-                if (defenderSpecificAlternatives.containsKey(def)) {
-                    boolean isAttackingDefender = false;
-                    outer: for (Card atk : attackers.keySet()) {
-                        // is anyone attacking this defender or any of the alternative defenders?
-                        if (attackers.get(atk).equals(def)) {
-                            isAttackingDefender = true;
-                            break;
-                        }
-                        for (GameEntity altDef : defenderSpecificAlternatives.get(def)) {
-                            if (attackers.get(atk).equals(altDef)) {
-                                isAttackingDefender = true;
-                                break outer;
-                            }
-                        }
-                    }
-                    if (!isAttackingDefender && CombatUtil.getAttackCost(attacker.getGame(), attacker, def) == null) {
-                        violations++; // no one is attacking that defender or any of his PWs
+        for (GameEntity def : defenderOrPWSpecific.keySet()) {
+            boolean isAttackingDefender = false;
+            outer: for (Card atk : attackers.keySet()) {
+                // is anyone attacking this defender or any of the alternative defenders?
+                if (attackers.get(atk).equals(def)) {
+                    isAttackingDefender = true;
+                    break;
+                }
+                for (GameEntity altDef : defenderSpecificAlternatives.get(def)) {
+                    if (attackers.get(atk).equals(altDef)) {
+                        isAttackingDefender = true;
+                        break outer;
                     }
                 }
+            }
+            if (!isAttackingDefender) {
+                violations++; // no one is attacking that defender or any of his PWs
             }
         }
 

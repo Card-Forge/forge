@@ -3,7 +3,8 @@ ManaCost:3 G G
 Types:Creature Beast
 PT:6/8
 K:UpkeepCost:PutCardToLibFromGrave<2/-1/Card>
-A:AB$ Pump | Cost$ G G Discard<1/Card> | Defined$ Self | KW$ HIDDEN You may have CARDNAME assign its combat damage as though it weren't blocked. | SpellDescription$ You may have CARDNAME assign its combat damage this turn as though it weren't blocked.
+A:AB$ Effect | Cost$ G G Discard<1/Card> | StaticAbilities$ Static | SpellDescription$ You may have CARDNAME assign its combat damage this turn as though it weren't blocked.
+SVar:Static:Mode$ AssignCombatDamageAsUnblocked | EffectZone$ Command | ValidCard$ Card.EffectSource | Optional$ True | Description$ You may have EFFECTSOURCE assign its combat damage this turn as though it weren't blocked.
 AI:RemoveDeck:All
 DeckHas:Ability$Discard
 Oracle:At the beginning of your upkeep, sacrifice Gurzigost unless you put two cards from your graveyard on the bottom of your library.\n{G}{G}, Discard a card: You may have Gurzigost assign its combat damage this turn as though it weren't blocked.

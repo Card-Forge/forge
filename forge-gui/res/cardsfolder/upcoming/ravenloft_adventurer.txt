@@ -5,8 +5,9 @@ PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters the battlefield, you take the initiative.
 SVar:TrigInitiative:DB$ TakeInitiative
 R:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidLKI$ Creature.OppCtrl | ReplaceWith$ Exile | Description$ If a creature an opponent controls would die, instead exile it and put a hit counter on it.
-SVar:Exile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBPutCounter
-SVar:DBPutCounter:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ HIT
+SVar:Exile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ HIT | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | CheckSVar$ X | TriggerDescription$ Whenever CARDNAME attacks, if you've completed a dungeon, defending player loses 1 life for each card they own in exile with a hit counter on it.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ Y
 SVar:X:PlayerCountPropertyYou$DungeonsCompleted

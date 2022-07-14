@@ -1,7 +1,8 @@
 Name:Outmaneuver
 ManaCost:X R
 Types:Instant
-A:SP$ Pump | Cost$ X R | KW$ HIDDEN CARDNAME assigns its combat damage as though it weren't blocked. | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature.blocked | TgtPrompt$ Select X target blocked creatures | StackDescription$ X target blocked creatures [{c:Targeted}] assign their combat damage this turn as though they weren't blocked. | SpellDescription$ X target blocked creatures assign their combat damage this turn as though they weren't blocked.
+A:SP$ Effect | StaticAbilities$ Static | TargetMin$ X | TargetMax$ X | ValidTgts$ Creature.blocked | TgtPrompt$ Select X target blocked creatures | RememberObjects$ Targeted | SpellDescription$ X target blocked creatures assign their combat damage this turn as though they weren't blocked.
+SVar:Static:Mode$ AssignCombatDamageAsUnblocked | EffectZone$ Command | ValidCard$ Card.IsRemembered | Description$ These creatures assign their combat damage this turn as though they weren't blocked.
 SVar:X:Count$xPaid
 AI:RemoveDeck:All
 Oracle:X target blocked creatures assign their combat damage this turn as though they weren't blocked.

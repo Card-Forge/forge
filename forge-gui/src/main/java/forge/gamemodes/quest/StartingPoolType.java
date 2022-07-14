@@ -5,7 +5,7 @@ import forge.util.Localizer;
 public enum StartingPoolType {
     Complete("lblUnrestricted"),
     Sanctioned("lblSanctionedFormat"),
-    Casual("lblCasualOrHistoricFormat"),
+    Casual("lblCasualOrArchivedFormat"),
     CustomFormat("lblCustomFormat"),
     Precon("lblEventOrStartDeck"),
     SealedDeck("lblMySealedDeck"),

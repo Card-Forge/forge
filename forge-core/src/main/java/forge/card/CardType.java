@@ -51,6 +51,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     private static final long serialVersionUID = 4629853583167022151L;
 
     public static final CardTypeView EMPTY = new CardType(false);
+    private static final Set<String> multiWordTypes = ImmutableSet.of("Serra's Realm", "Bolas's Meditation Realm", "Dungeon Master");
 
     public enum CoreType {
         Artifact(true, "artifacts"),
@@ -752,12 +753,14 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         while (hasMoreTypes) {
             final String type = typeText.substring(iTypeStart, iSpace == -1 ? typeText.length() : iSpace);
             hasMoreTypes = iSpace != -1;
-            if (!isMultiwordType(type) || !hasMoreTypes) {
-                iTypeStart = iSpace + 1;
-                if (!"-".equals(type)) {
-                    result.add(type);
-                }
+            final String rest = typeText.substring(iTypeStart);
+            if (isMultiwordType(rest)) {
+                result.add(rest);
+                break;
             }
+
+            iTypeStart = iSpace + 1;
+            result.add(type);
             iSpace = typeText.indexOf(space, iSpace + 1);
         }
         return result;
@@ -775,13 +778,7 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
     }
 
     private static boolean isMultiwordType(final String type) {
-        final String[] multiWordTypes = { "Serra's Realm", "Bolas's Meditation Realm", "Dungeon Master" };
-        for (int i = 0; i < multiWordTypes.length; ++i) {
-            if (multiWordTypes[i].startsWith(type) && !multiWordTypes[i].equals(type)) {
-                return true;
-            }
-        }
-        return false;
+        return multiWordTypes.contains(type);
     }
 
     public static class Constant {

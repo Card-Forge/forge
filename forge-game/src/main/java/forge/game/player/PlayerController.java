@@ -134,7 +134,7 @@ public abstract class PlayerController {
 
     public abstract <T extends GameEntity> List<T> chooseEntitiesForEffect(FCollectionView<T> optionList, int min, int max, DelayedReveal delayedReveal, SpellAbility sa, String title, Player relatedPlayer, Map<String, Object> params);
 
-    public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message);
+    public abstract boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params);
     public abstract boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode bidlife, String string, int bid, Player winner);
     public abstract boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, GameEntity affected, String question);
     public abstract boolean confirmStaticApplication(Card hostCard, GameEntity affected, String logic, String message);

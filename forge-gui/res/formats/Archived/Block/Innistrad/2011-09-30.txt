@@ -1,0 +1,6 @@
+[format]
+Name:Block: Innistrad (ISD)
+Type:Archived
+Subtype:Block
+Effective:2011-09-30
+Sets:ISD

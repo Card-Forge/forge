@@ -45,7 +45,6 @@ import java.util.*;
  * Forge screen scene that contains the duel screen
  */
 public class DuelScene extends ForgeScene {
-
     //GameLobby lobby;
     HostedMatch hostedMatch;
     EnemySprite enemy;
@@ -59,13 +58,10 @@ public class DuelScene extends ForgeScene {
     List<IPaperCard> AIExtras = new ArrayList<>();
 
 
-    public DuelScene() {
-
-    }
+    public DuelScene() {}
 
     @Override
-    public void dispose() {
-    }
+    public void dispose() {}
 
     public boolean hasCallbackExit() {
         return callbackExit;
@@ -88,7 +84,7 @@ public class DuelScene extends ForgeScene {
                     "Thought you could beat me?  Whew, talk about conceited.","*Yawn* ... Huh? It's over already? But I just woke up!",
                     "Next time bring an army. It might give you a chance." ,"The reason you lost is quite simple...",
                     "Is that all you can do?","You need to learn more to stand a chance.","You weren't that bad.","You made an effort at least.",
-                    "From today, you can call me teacher.");
+                    "From today, you can call me teacher.", "Hmph, predictable!", "I haven't used a fraction of my REAL power!" );
             String message = Aggregates.random(insult);
             FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, enemyName, new FBufferedImage(120, 120) {
                 @Override
@@ -128,7 +124,7 @@ public class DuelScene extends ForgeScene {
     }
     void addEffects(RegisteredPlayer player,Array<EffectData> effects) {
         if( effects == null ) return;
-        //Apply various effects.
+        //Apply various combat effects.
         int lifeMod=0;
         int changeStartCards=0;
         Array<IPaperCard> startCards=new Array<>();
@@ -180,8 +176,12 @@ public class DuelScene extends ForgeScene {
         //Collect and add items effects first.
         for(String playerItem:advPlayer.getEquippedItems()) {
             ItemData item=ItemData.getItem(playerItem);
-            playerEffects.add(item.effect);
-            if(item.effect.opponent != null) oppEffects.add(item.effect.opponent);
+            if(item != null) {
+                playerEffects.add(item.effect);
+                if (item.effect.opponent != null) oppEffects.add(item.effect.opponent);
+            } else {
+                System.err.printf("Item %s not found.", playerItem);
+            }
         }
         if(enemy.getData().equipment!=null) {
             for(String oppItem:enemy.getData().equipment) {

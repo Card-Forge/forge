@@ -5,6 +5,6 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddTrigger$ TrigTap | AddSVar$ HieroTap & HasAttackEffect | Description$ Enchanted creature gets +1/+1 and has "Whenever this creature attacks, tap target creature defending player controls."
 SVar:TrigTap:Mode$ Attacks | ValidCard$ Card.Self | Execute$ HieroTap | TriggerDescription$ Whenever this creature attacks, tap target creature defending player controls.
-SVar:HieroTap:DB$ Tap | ValidTgts$ Creature.DefendingPlayerCtrl | TgtPrompt$ Select target creature defending player controls
+SVar:HieroTap:DB$ Tap | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls
 SVar:HasAttackEffect:TRUE
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has "Whenever this creature attacks, tap target creature defending player controls."

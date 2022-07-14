@@ -67,8 +67,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
 
         stringBuilder.append(pronoun ? "they" : who).append(" ");
 
+        String desc = sa.getDescription();
+        boolean forEach = desc.contains("for each");
         if (sa.hasParam("CounterTypes")) {
-            String desc = sa.getDescription();
             if (desc.contains("Put ") && desc.contains(" on ")) {
                 desc = desc.substring(desc.indexOf("Put "), desc.indexOf(" on ") + 4)
                         .replaceFirst("Put ", "puts ");
@@ -84,8 +85,8 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
         }
 
-        final int amount = AbilityUtils.calculateAmount(card,
-                sa.getParamOrDefault("CounterNum", "1"), sa);
+        final String key = forEach ? "ForEachNum" : "CounterNum";
+        final int amount = AbilityUtils.calculateAmount(card, sa.getParamOrDefault(key, "1"), sa);
 
         if (sa.hasParam("Bolster")) {
             stringBuilder.append("bolsters ").append(amount).append(".");
@@ -155,7 +156,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 }
             }
         }
-        stringBuilder.append(".");
+        stringBuilder.append(forEach ? desc.substring(desc.indexOf(" for each")) : ".");
         return stringBuilder.toString();
     }
 
@@ -174,7 +175,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         boolean putOnDefined = sa.hasParam("PutOnDefined");
 
         if (sa.hasParam("Optional") && !pc.confirmAction
-                (sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCounter"))) {
+                (sa, null, Localizer.getInstance().getMessage("lblDoYouWantPutCounter"), null)) {
             return;
         }
 
@@ -231,7 +232,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
             }
 
             Map<String, Object> params = Maps.newHashMap();
-            params.put("CounterType", counterType);
+            if (counterType != null) {
+                params.put("CounterType", counterType);
+            }
             if (sa.hasParam("DividedRandomly")) {
                 tgtObjects.addAll(choices);
             } else {
@@ -493,7 +496,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             // need to unfreeze tracker
                             game.getTracker().unfreeze();
 
-                            // check if it can recive the Tribute
+                            // check if it can receive the Tribute
                             if (abort) {
                                 continue;
                             }
@@ -509,7 +512,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                             Player chooser = pc.chooseSingleEntityForEffect(activator.getOpponents(), sa,
                                     Localizer.getInstance().getMessage("lblChooseAnOpponent"), params);
 
-                            if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message)) {
+                            if (chooser.getController().confirmAction(sa, PlayerActionConfirmMode.Tribute, message, null)) {
                                 gameCard.setTributed(true);
                             } else {
                                 continue;

@@ -80,6 +80,7 @@ public enum TriggerType {
     LifeGained(TriggerLifeGained.class),
     LifeLost(TriggerLifeLost.class),
     LosesGame(TriggerLosesGame.class),
+    MilledAll(TriggerMilledAll.class),
     Mutates(TriggerMutates.class),
     NewGame(TriggerNewGame.class),
     PayCumulativeUpkeep(TriggerPayCumulativeUpkeep.class),

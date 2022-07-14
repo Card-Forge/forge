@@ -88,7 +88,7 @@ public class CardRenderer {
         public void onImageFetched() {
             ImageCache.clear();
             if (clearCardArtCache) {
-                cardArtCache.remove(key);
+                Forge.getAssets().cardArtCache.remove(key);
             }
         }
     }
@@ -104,8 +104,6 @@ public class CardRenderer {
     private static final float BORDER_THICKNESS = Utils.scale(1);
     public static final float PADDING_MULTIPLIER = 0.021f;
     public static final float CROP_MULTIPLIER = 0.96f;
-
-    private static Map<Integer, BitmapFont> counterFonts = new HashMap<>();
     private static final Color counterBackgroundColor = new Color(0f, 0f, 0f, 0.9f);
     private static final Map<CounterType, Color> counterColorCache = new HashMap<>();
     private static final GlyphLayout layout = new GlyphLayout();
@@ -191,13 +189,12 @@ public class CardRenderer {
         return Math.round(MANA_SYMBOL_SIZE + FSkinFont.get(12).getLineHeight() + 3 * FList.PADDING + 1);
     }
 
-    private static final Map<String, FImageComplex> cardArtCache = new HashMap<>(1024);
     public static final float CARD_ART_RATIO = 1.302f;
     public static final float CARD_ART_HEIGHT_PERCENTAGE = 0.43f;
     private static List<String> classicModuleCardtoCrop = FileUtil.readFile(ForgeConstants.CLASSIC_MODULE_CARD_TO_CROP_FILE);
 
     public static void clearcardArtCache(){
-        cardArtCache.clear();
+        Forge.getAssets().cardArtCache.clear();
     }
 
     //extract card art from the given card
@@ -221,7 +218,7 @@ public class CardRenderer {
     }
 
     public static FImageComplex getCardArt(String imageKey, boolean isSplitCard, boolean isHorizontalCard, boolean isAftermathCard, boolean isSaga, boolean isClass, boolean isDungeon, boolean isFlipCard, boolean isPlanesWalker, boolean isModernFrame) {
-        FImageComplex cardArt = cardArtCache.get(imageKey);
+        FImageComplex cardArt = Forge.getAssets().cardArtCache.get(imageKey);
         boolean isClassicModule = imageKey != null && imageKey.length() > 2 && classicModuleCardtoCrop.contains(imageKey.substring(ImageKeys.CARD_PREFIX.length()).replace(".jpg", "").replace(".png", ""));
         if (cardArt == null) {
             Texture image = new RendererCachedCardImage(imageKey, true).getImage();
@@ -282,7 +279,7 @@ public class CardRenderer {
                             w *= artH / srcH;
                             h *= artW / srcW;
                             cardArt = new FRotatedImage(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h), true);
-                            cardArtCache.put(imageKey, cardArt);
+                            Forge.getAssets().cardArtCache.put(imageKey, cardArt);
                             return cardArt;
                         }
                     } else {
@@ -304,7 +301,8 @@ public class CardRenderer {
                     }
                     cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
                 }
-                cardArtCache.put(imageKey, cardArt);
+                if (!CardImageRenderer.forgeArt.equals(cardArt))
+                    Forge.getAssets().cardArtCache.put(imageKey, cardArt);
             }
         }
         //fix display for effect
@@ -314,13 +312,13 @@ public class CardRenderer {
     }
 
     public static FImageComplex getAftermathSecondCardArt(final String imageKey) {
-        FImageComplex cardArt = cardArtCache.get("Aftermath_second_"+imageKey);
+        FImageComplex cardArt = Forge.getAssets().cardArtCache.get("Aftermath_second_"+imageKey);
         if (cardArt == null) {
             Texture image = new CachedCardImage(imageKey) {
                 @Override
                 public void onImageFetched() {
                     ImageCache.clear();
-                    cardArtCache.remove("Aftermath_second_" + imageKey);
+                    Forge.getAssets().cardArtCache.remove("Aftermath_second_" + imageKey);
                 }
             }.getImage();
             if (image != null) {
@@ -339,20 +337,21 @@ public class CardRenderer {
                     cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
 
                 }
-                cardArtCache.put("Aftermath_second_"+imageKey, cardArt);
+                if (!CardImageRenderer.forgeArt.equals(cardArt))
+                    Forge.getAssets().cardArtCache.put("Aftermath_second_"+imageKey, cardArt);
             }
         }
         return cardArt;
     }
 
     public static FImageComplex getAlternateCardArt(final String imageKey, boolean isPlanesWalker) {
-        FImageComplex cardArt = cardArtCache.get("Alternate_"+imageKey);
+        FImageComplex cardArt = Forge.getAssets().cardArtCache.get("Alternate_"+imageKey);
         if (cardArt == null) {
             Texture image = new CachedCardImage(imageKey) {
                 @Override
                 public void onImageFetched() {
                     ImageCache.clear();
-                    cardArtCache.remove("Alternate_" + imageKey);
+                    Forge.getAssets().cardArtCache.remove("Alternate_" + imageKey);
                 }
             }.getImage();
             if (image != null) {
@@ -385,7 +384,8 @@ public class CardRenderer {
                     }
                     cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
                 }
-                cardArtCache.put("Alternate_"+imageKey, cardArt);
+                if (!CardImageRenderer.forgeArt.equals(cardArt))
+                    Forge.getAssets().cardArtCache.put("Alternate_"+imageKey, cardArt);
             }
         }
         return cardArt;
@@ -394,9 +394,9 @@ public class CardRenderer {
     public static FImageComplex getMeldCardParts(final String imageKey, boolean bottom) {
         FImageComplex cardArt;
         if (!bottom) {
-            cardArt = cardArtCache.get("Meld_primary_"+imageKey);
+            cardArt = Forge.getAssets().cardArtCache.get("Meld_primary_"+imageKey);
         } else {
-            cardArt = cardArtCache.get("Meld_secondary_"+imageKey);
+            cardArt = Forge.getAssets().cardArtCache.get("Meld_secondary_"+imageKey);
         }
 
         if (cardArt == null) {
@@ -404,8 +404,8 @@ public class CardRenderer {
                 @Override
                 public void onImageFetched() {
                     ImageCache.clear();
-                    cardArtCache.remove("Meld_primary_" + imageKey);
-                    cardArtCache.remove("Meld_secondary_" + imageKey);
+                    Forge.getAssets().cardArtCache.remove("Meld_primary_" + imageKey);
+                    Forge.getAssets().cardArtCache.remove("Meld_secondary_" + imageKey);
                 }
             }.getImage();
             if (image != null) {
@@ -419,10 +419,10 @@ public class CardRenderer {
                     cardArt = new FTextureRegionImage(new TextureRegion(image, Math.round(x), Math.round(y), Math.round(w), Math.round(h)));
 
                 }
-                if (!bottom)
-                    cardArtCache.put("Meld_primary_"+imageKey, cardArt);
-                else
-                    cardArtCache.put("Meld_secondary_"+imageKey, cardArt);
+                if (!bottom && !CardImageRenderer.forgeArt.equals(cardArt))
+                    Forge.getAssets().cardArtCache.put("Meld_primary_"+imageKey, cardArt);
+                else if (!CardImageRenderer.forgeArt.equals(cardArt))
+                    Forge.getAssets().cardArtCache.put("Meld_secondary_"+imageKey, cardArt);
             }
         }
         return cardArt;
@@ -1098,7 +1098,7 @@ public class CardRenderer {
     private static void drawCounterTabs(final CardView card, final Graphics g, final float x, final float y, final float w, final float h) {
 
         int fontSize = Math.max(11, Math.min(22, (int) (h * 0.08)));
-        BitmapFont font = counterFonts.get(fontSize);
+        BitmapFont font = Forge.getAssets().counterFonts.get(fontSize);
 
         final float additionalXOffset = 3f * ((fontSize - 11) / 11f);
         final float variableWidth = ((fontSize - 11) / 11f) * 44f;
@@ -1215,7 +1215,7 @@ public class CardRenderer {
     private static void drawMarkersTabs(final List<String> markers, final Graphics g, final float x, final float y, final float w, final float h, boolean larger) {
 
         int fontSize = larger ? Math.max(9, Math.min(22, (int) (h * 0.08))) : Math.max(8, Math.min(22, (int) (h * 0.05)));
-        BitmapFont font = counterFonts.get(fontSize);
+        BitmapFont font = Forge.getAssets().counterFonts.get(fontSize);
 
         final float additionalXOffset = 3f * ((fontSize - 8) / 8f);
 
@@ -1407,7 +1407,7 @@ public class CardRenderer {
                     textureRegions.add(new TextureRegion(texture));
                 }
 
-                counterFonts.put(fontSize, new BitmapFont(fontData, textureRegions, true));
+                Forge.getAssets().counterFonts.put(fontSize, new BitmapFont(fontData, textureRegions, true));
 
                 generator.dispose();
                 packer.dispose();

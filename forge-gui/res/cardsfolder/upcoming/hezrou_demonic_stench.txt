@@ -1,0 +1,16 @@
+Name:Hezrou
+ManaCost:5 B B
+Types:Creature Frog Demon
+PT:6/6
+T:Mode$ AttackerBlockedOnce | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever one or more creatures you control become blocked, each blocking creature gets -1/-1 until end of turn.
+SVar:TrigPump:DB$ PumpAll | NumAtt$ -1 | NumDef$ -1 | ValidCards$ Creature.blocking
+AlternateMode:Adventure
+Oracle:Whenever one or more creatures you control become blocked, each blocking creature gets -1/-1 until end of turn.
+
+ALTERNATE
+
+Name:Demonic Stench
+ManaCost:B
+Types:Instant Adventure
+A:SP$ PumpAll | NumAtt$ -1 | NumDef$ -1 | ValidCards$ Creature.blockedThisTurn | SpellDescription$ Each creature that blocked this turn gets -1/-1 until end of turn.
+Oracle:Each creature that blocked this turn gets -1/-1 until end of turn. (Then exile this card. You may cast the creature later from exile.)

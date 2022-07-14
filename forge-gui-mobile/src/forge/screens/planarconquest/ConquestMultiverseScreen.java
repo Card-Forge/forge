@@ -47,8 +47,6 @@ import forge.screens.LoadingOverlay;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FScrollPane;
@@ -260,29 +258,18 @@ public class ConquestMultiverseScreen extends FScreen {
     }
 
     private void launchEvent() {
-        LoadingOverlay.show(Forge.getLocalizer().getMessage("lblStartingBattle"), new Runnable() {
-            @Override
-            public void run() {
-                ConquestLocation loc = model.getCurrentLocation();
-                activeBattle = loc.getEvent().createBattle(loc, 0);
-                FModel.getConquest().startBattle(activeBattle);
-            }
+        LoadingOverlay.show(Forge.getLocalizer().getMessage("lblStartingBattle"), true, () -> {
+            ConquestLocation loc = model.getCurrentLocation();
+            activeBattle = loc.getEvent().createBattle(loc, 0);
+            FModel.getConquest().startBattle(activeBattle);
         });
     }
 
     private void launchChaosBattle() {
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override
-            public void run() {
-                LoadingOverlay.show(Forge.getLocalizer().getMessage("lblChaosApproaching"), new Runnable() {
-                    @Override
-                    public void run() {
-                        activeBattle = new ConquestChaosBattle();
-                        FModel.getConquest().startBattle(activeBattle);
-                    }
-                });
-            }
-        });
+        FThreads.invokeInEdtNowOrLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblChaosApproaching"), true, () -> {
+            activeBattle = new ConquestChaosBattle();
+            FModel.getConquest().startBattle(activeBattle);
+        }));
     }
 
     @Override
@@ -678,12 +665,7 @@ public class ConquestMultiverseScreen extends FScreen {
         private BattleBar() {
             playerAvatar = add(new AvatarDisplay(false));
             opponentAvatar = add(new AvatarDisplay(true));
-            btnBattle = add(new FButton(Forge.getLocalizer().getMessage("lblBattle"), new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    launchEvent();
-                }
-            }));
+            btnBattle = add(new FButton(Forge.getLocalizer().getMessage("lblBattle"), event -> launchEvent()));
             btnBattle.setFont(FSkinFont.get(20));
         }
 

@@ -1,6 +1,0 @@
-[format]
-Name:Standard (2019-08-30)
-Type:Historic
-Subtype:Standard
-Effective:2019-08-30
-Sets:XLN, RIX, DOM, M19, GRN, G18, RNA, WAR, M20

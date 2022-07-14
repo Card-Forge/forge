@@ -1,0 +1,6 @@
+[format]
+Name:Standard (RTR)
+Type:Archived
+Subtype:Standard
+Effective:2012-10-05
+Sets:ISD, DKA, AVR, M13, RTR

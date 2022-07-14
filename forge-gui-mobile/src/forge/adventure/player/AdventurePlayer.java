@@ -14,6 +14,7 @@ import forge.deck.DeckSection;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
+import forge.util.MyRandom;
 
 import java.io.Serializable;
 import java.util.*;
@@ -22,86 +23,120 @@ import java.util.*;
  * Class that represents the player (not the player sprite)
  */
 public class AdventurePlayer implements Serializable, SaveFileContent {
-    private enum ColorID { COLORLESS, WHITE, BLACK, BLUE, RED, GREEN }
     public static final int NUMBER_OF_DECKS=10;
+    private enum ColorID { COLORLESS, WHITE, BLACK, BLUE, RED, GREEN }
 
-    private Deck deck;
-    private int avatarIndex;
+    // Player profile data.
+    private String name;
     private int heroRace;
+    private int avatarIndex;
     private boolean isFemale;
+    private ColorID colorIdentity = ColorID.COLORLESS;
+
+    // Deck data
+    private Deck deck;
+    private final Deck[] decks = new Deck[NUMBER_OF_DECKS];
+    private int selectedDeckIndex = 0;
+    private final DifficultyData difficultyData = new DifficultyData();
+
+    // Game data.
     private float worldPosX;
     private float worldPosY;
-    private String name;
-    private ColorID colorIdentity = ColorID.COLORLESS;
-    private int gold=0;
-    private int maxLife=20;
-    private int life=20;
-    private int selectedDeckIndex=0;
-    private Map<String, Byte> questFlags = new HashMap<>();
+    private int gold   =  0;
+    private int maxLife= 20;
+    private int life   = 20;
     private EffectData blessing; //Blessing to apply for next battle.
-    private PlayerStatistic statistic = new PlayerStatistic();
-    private Deck[] decks=new Deck[NUMBER_OF_DECKS];
-    private final DifficultyData difficultyData=new DifficultyData();
+    private final PlayerStatistic statistic    = new PlayerStatistic();
+    private final Map<String, Byte> questFlags = new HashMap<>();
 
     private final Array<String> inventoryItems=new Array<>();
     private final HashMap<String,String> equippedItems=new HashMap<>();
-    private boolean fantasyMode = false;
+
+    // Fantasy/Chaos mode settings.
+    private boolean fantasyMode     = false;
     private boolean announceFantasy = false;
 
-    public AdventurePlayer() {
-        for(int i=0;i<NUMBER_OF_DECKS;i++) {
-            decks[i]=new Deck("Empty Deck");
-        }
+    // Signals
+    SignalList onLifeTotalChangeList = new SignalList();
+    SignalList onGoldChangeList      = new SignalList();
+    SignalList onPlayerChangeList    = new SignalList();
+    SignalList onEquipmentChange     = new SignalList();
+    SignalList onBlessing            = new SignalList();
+
+    public AdventurePlayer() { clear(); }
+
+    public PlayerStatistic getStatistic(){ return statistic; }
+
+    private void clearDecks() {
+        for(int i=0; i < NUMBER_OF_DECKS; i++) decks[i] = new Deck("Empty Deck");
+        deck              = decks[0];
+        selectedDeckIndex = 0;
     }
 
-    public PlayerStatistic getStatistic(){return statistic;}
+    private void clear() {
+        //Ensure sensitive gameplay data is properly reset between games.
+        //Reset all properties HERE.
+        fantasyMode       = false;
+        announceFantasy   = false;
+        blessing          = null;
+        gold              = 0;
+        maxLife           = 20;
+        life              = 20;
+        clearDecks();
+        inventoryItems.clear();
+        equippedItems.clear();
+        questFlags.clear();
+        cards.clear();
+        statistic.clear();
+        newCards.clear();
+    }
 
-    static public AdventurePlayer current()
-    {
+
+    static public AdventurePlayer current() {
         return WorldSave.getCurrentSave().getPlayer();
     }
+
     private final CardPool cards=new CardPool();
     private final ItemPool<InventoryItem> newCards=new ItemPool<>(InventoryItem.class);
 
     public void create(String n, int startingColorIdentity, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy, DifficultyData difficultyData) {
-        inventoryItems.clear();
-        equippedItems.clear();
-        deck = startingDeck;
-        decks[0]=deck;
-        fantasyMode = isFantasy;
-        announceFantasy = fantasyMode;
-        gold =difficultyData.staringMoney;
-        cards.clear();
+        clear();
+        announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
+
+        deck     = startingDeck;
+        decks[0] = deck;
+
         cards.addAllFlat(deck.getAllCardsInASinglePool().toFlatList());
-        maxLife=difficultyData.startingLife;
-        this.difficultyData.startingLife=difficultyData.startingLife;
-        this.difficultyData.staringMoney=difficultyData.staringMoney;
-        this.difficultyData.startingDifficulty=difficultyData.startingDifficulty;
-        this.difficultyData.name=difficultyData.name;
-        this.difficultyData.spawnRank = difficultyData.spawnRank;
-        this.difficultyData.enemyLifeFactor=difficultyData.enemyLifeFactor;
-        this.difficultyData.sellFactor=difficultyData.sellFactor;
-        life=maxLife;
+
+        this.difficultyData.startingLife       = difficultyData.startingLife;
+        this.difficultyData.staringMoney       = difficultyData.staringMoney;
+        this.difficultyData.startingDifficulty = difficultyData.startingDifficulty;
+        this.difficultyData.name               = difficultyData.name;
+        this.difficultyData.spawnRank          = difficultyData.spawnRank;
+        this.difficultyData.enemyLifeFactor    = difficultyData.enemyLifeFactor;
+        this.difficultyData.sellFactor         = difficultyData.sellFactor;
+
+        gold        = difficultyData.staringMoney;
+        name        = n;
+        heroRace    = race;
         avatarIndex = avatar;
-        heroRace = race;
-        isFemale = !male;
-        name = n;
-        //todo make coloridentity as colorset so if player is using multi color deck, get rewards based on the current selected deck color
-        setColorIdentity(fantasyMode ? 0 : startingColorIdentity + 1); //+1 because index 0 is colorless.
-        statistic.clear();
-        newCards.clear();
+        isFemale    = !male;
+
+        if(fantasyMode){ //Set a random ColorID in fantasy mode.
+           setColorIdentity(MyRandom.getRandom().nextInt(5)); // MyRandom to not interfere with the unstable RNG.
+        } else setColorIdentity(startingColorIdentity + 1); // +1 because index 0 is colorless.
+
+        life = maxLife = difficultyData.startingLife;
+
+        inventoryItems.addAll(difficultyData.startItems);
         onGoldChangeList.emit();
         onLifeTotalChangeList.emit();
-        blessing = null;
-        inventoryItems.addAll(difficultyData.startItems);
-        questFlags.clear();
     }
 
     public void setSelectedDeckSlot(int slot) {
-        if(slot>=0&&slot<NUMBER_OF_DECKS)
-        {
-            selectedDeckIndex=slot;
-            deck=decks[selectedDeckIndex];
+        if(slot>=0&&slot<NUMBER_OF_DECKS) {
+            selectedDeckIndex = slot;
+            deck = decks[selectedDeckIndex];
         }
     }
     public void updateDifficulty(DifficultyData diff) {
@@ -115,39 +150,51 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         this.difficultyData.sellFactor = diff.sellFactor;
         fullHeal();
     }
-    public int getSelectedDeckIndex() {
-        return selectedDeckIndex;
+
+    //Getters
+    public int getSelectedDeckIndex()     { return selectedDeckIndex; }
+    public Deck getSelectedDeck()         { return deck;              }
+    public Array<String> getItems()       { return inventoryItems;    }
+    public Deck getDeck(int index)        { return decks[index];      }
+    public CardPool getCards()            { return cards;             }
+    public String getName()               { return name;              }
+    public float getWorldPosX()           { return worldPosX;         }
+    public float getWorldPosY()           { return worldPosY;         }
+    public int getGold()                  { return gold;              }
+    public int getLife()                  { return life;              }
+    public int getMaxLife()               { return maxLife;           }
+    public @Null EffectData getBlessing() { return blessing;          }
+
+    public Collection<String> getEquippedItems() { return equippedItems.values(); }
+    public ItemPool<InventoryItem> getNewCards() { return newCards;               }
+
+    public String getColorIdentity(){
+        switch (colorIdentity){
+            case BLUE     : return "U";
+            case GREEN    : return "G";
+            case RED      : return "R";
+            case BLACK    : return "B";
+            case WHITE    : return "W";
+            case COLORLESS: default: return "C"; //You are either Ugin or an Eldrazi. Nice.
+        }
     }
-    public Deck getSelectedDeck() {
-        return deck;
-    }
-    public Array<String> getItems() {
-        return inventoryItems;
-    }
-    public Deck getDeck(int index) {
-        return decks[index];
-    }
-    public CardPool getCards() {
-        return cards;
+
+    public String getColorIdentityLong(){
+        switch (colorIdentity){
+            case BLUE     : return "blue";
+            case GREEN    : return "green";
+            case RED      : return "red";
+            case BLACK    : return "black";
+            case WHITE    : return "white";
+            case COLORLESS: default: return "colorless";
+        }
     }
 
 
-    public String getName() {
-        return name;
-    }
-
-    public float getWorldPosX() {
-        return worldPosX;
-    }
-
+    //Setters
     public void setWorldPosX(float worldPosX) {
         this.worldPosX = worldPosX;
     }
-
-    public float getWorldPosY() {
-        return worldPosY;
-    }
-
     public void setWorldPosY(float worldPosY) {
         this.worldPosY = worldPosY;
     }
@@ -174,30 +221,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
     }
 
-    public String getColorIdentity(){
-        switch (colorIdentity){
-            case BLUE     : return "U";
-            case GREEN    : return "G";
-            case RED      : return "R";
-            case BLACK    : return "B";
-            case WHITE    : return "W";
-            case COLORLESS: default: return "C"; //You are either Ugin or an Eldrazi. Nice.
-        }
-    }
 
-    public String getColorIdentityLong(){
-        switch (colorIdentity){
-            case BLUE     : return "blue";
-            case GREEN    : return "green";
-            case RED      : return "red";
-            case BLACK    : return "black";
-            case WHITE    : return "white";
-            case COLORLESS: default: return "colorless";
-        }
-    }
+
 
     @Override
     public void load(SaveFileData data) {
+        clear(); //Reset player data.
         this.statistic.load(data.readSubData("statistic"));
         this.difficultyData.startingLife=data.readInt("startingLife");
         this.difficultyData.staringMoney=data.readInt("staringMoney");
@@ -208,44 +237,55 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if(this.difficultyData.sellFactor==0)
             this.difficultyData.sellFactor=0.2f;
 
-        name = data.readString("name");
-        worldPosX = data.readFloat("worldPosX");
-        worldPosY = data.readFloat("worldPosY");
-
+        name        = data.readString("name");
+        heroRace    = data.readInt("heroRace");
         avatarIndex = data.readInt("avatarIndex");
-        heroRace = data.readInt("heroRace");
-        isFemale = data.readBool("isFemale");
-        fantasyMode = data.containsKey("fantasyMode") ? data.readBool("fantasyMode") : false;
-        announceFantasy = data.containsKey("announceFantasy") ? data.readBool("announceFantasy") : false;
-        colorIdentity = ColorID.COLORLESS;
-        if(data.containsKey("colorIdentity"))
-            setColorIdentity(data.readString("colorIdentity"));
-        gold = data.readInt("gold");
-        life = data.readInt("life");
-        maxLife = data.readInt("maxLife");
-        blessing = null;
+        isFemale    = data.readBool("isFemale");
+        if(data.containsKey("colorIdentity")) setColorIdentity(data.readString("colorIdentity"));
+        else colorIdentity = ColorID.COLORLESS;
+
+        gold        = data.readInt("gold");
+        maxLife     = data.readInt("maxLife");
+        life        = data.readInt("life");
+        worldPosX   = data.readFloat("worldPosX");
+        worldPosY   = data.readFloat("worldPosY");
+
         if(data.containsKey("blessing")) blessing = (EffectData)data.readObject("blessing");
-        inventoryItems.clear();
-        equippedItems.clear();
+
         if(data.containsKey("inventory")) {
             String[] inv=(String[])data.readObject("inventory");
-            inventoryItems.addAll(inv);
+            //Prevent items with wrong names from getting through. Hell breaks loose if it causes null pointers.
+            //This only needs to be done on load.
+            for(String i : inv){
+                if(ItemData.getItem(i) != null) inventoryItems.add(i);
+                else {
+                    System.err.printf("Cannot find item name %s\n", i);
+                    //Allow official© permission for the player to get a refund. We will allow it this time.
+                    //TODoooo: Divine retribution if the player refunds too much. Use the orbital laser cannon.
+                    System.out.println("Developers have blessed you! You are allowed to cheat the cost of the item back!");
+                }
+            }
         }
         if(data.containsKey("equippedSlots") && data.containsKey("equippedItems")) {
             String[] slots=(String[])data.readObject("equippedSlots");
             String[] items=(String[])data.readObject("equippedItems");
 
             assert(slots.length==items.length);
+            //Like above, prevent items with wrong names. If it triggered in inventory it'll trigger here as well.
             for(int i=0;i<slots.length;i++) {
-                equippedItems.put(slots[i],items[i]);
+                if(ItemData.getItem(items[i]) != null)
+                    equippedItems.put(slots[i],items[i]);
+                else {
+                    System.err.printf("Cannot find equip name %s\n", items[i]);
+                }
             }
         }
+
         deck = new Deck(data.readString("deckName"));
         deck.getMain().addAll(CardPool.fromCardList(Lists.newArrayList((String[])data.readObject("deckCards"))));
         if(data.containsKey("sideBoardCards"))
             deck.getOrCreate(DeckSection.Sideboard).addAll(CardPool.fromCardList(Lists.newArrayList((String[])data.readObject("sideBoardCards"))));
 
-        questFlags.clear();
         if(data.containsKey("questFlagsKey") && data.containsKey("questFlagsValue")){
             String[] keys = (String[]) data.readObject("questFlagsKey");
             Byte[] values = (Byte[]) data.readObject("questFlagsValue");
@@ -256,11 +296,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
 
         for(int i=0;i<NUMBER_OF_DECKS;i++) {
-            if(!data.containsKey("deck_name_"+i)) {
-                if(i==0)
-                    decks[i]=deck;
-                else
-                    decks[i]=new Deck("Empty Deck");
+            if(!data.containsKey("deck_name_" + i)) {
+                if(i==0) decks[i] = deck;
+                else     decks[i] = new Deck("Empty Deck");
                 continue;
             }
             decks[i] = new Deck(data.readString("deck_name_"+i));
@@ -269,19 +307,19 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 decks[i].getOrCreate(DeckSection.Sideboard).addAll(CardPool.fromCardList(Lists.newArrayList((String[])data.readObject("sideBoardCards_"+i))));
         }
         setSelectedDeckSlot(data.readInt("selectedDeckIndex"));
-
-        cards.clear();
         cards.addAll(CardPool.fromCardList(Lists.newArrayList((String[])data.readObject("cards"))));
 
-        newCards.clear();
+        fantasyMode     = data.containsKey("fantasyMode")     ? data.readBool("fantasyMode")     : false;
+        announceFantasy = data.containsKey("announceFantasy") ? data.readBool("announceFantasy") : false;
+
         onLifeTotalChangeList.emit();
         onGoldChangeList.emit();
+        onBlessing.emit();
     }
 
     @Override
     public SaveFileData save() {
         SaveFileData data= new SaveFileData();
-
 
         data.store("statistic",this.statistic.save());
         data.store("startingLife",this.difficultyData.startingLife);
@@ -291,23 +329,23 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("enemyLifeFactor",this.difficultyData.enemyLifeFactor);
         data.store("sellFactor",this.difficultyData.sellFactor);
 
-
         data.store("name",name);
-        data.store("worldPosX",worldPosX);
-        data.store("worldPosY",worldPosY);
-        data.store("avatarIndex",avatarIndex);
         data.store("heroRace",heroRace);
+        data.store("avatarIndex",avatarIndex);
         data.store("isFemale",isFemale);
+        data.store("colorIdentity", getColorIdentity());
+
         data.store("fantasyMode",fantasyMode);
         data.store("announceFantasy",announceFantasy);
-        data.store("colorIdentity", getColorIdentity());
+
+        data.store("worldPosX",worldPosX);
+        data.store("worldPosY",worldPosY);
         data.store("gold",gold);
         data.store("life",life);
         data.store("maxLife",maxLife);
         data.store("deckName",deck.getName());
 
         data.storeObject("inventory",inventoryItems.toArray(String.class));
-        data.storeObject("blessing", blessing);
 
         ArrayList<String> slots=new ArrayList<>();
         ArrayList<String> items=new ArrayList<>();
@@ -317,6 +355,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
         data.storeObject("equippedSlots",slots.toArray(new String[0]));
         data.storeObject("equippedItems",items.toArray(new String[0]));
+
+        data.storeObject("blessing", blessing);
 
         //Save quest flags.
         ArrayList<String> questFlagsKey = new ArrayList<>();
@@ -331,9 +371,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.storeObject("deckCards",deck.getMain().toCardList("\n").split("\n"));
         if(deck.get(DeckSection.Sideboard)!=null)
             data.storeObject("sideBoardCards",deck.get(DeckSection.Sideboard).toCardList("\n").split("\n"));
-        for(int i=0;i<NUMBER_OF_DECKS;i++)
-        {
-
+        for(int i=0;i<NUMBER_OF_DECKS;i++) {
             data.store("deck_name_"+i,decks[i].getName());
             data.storeObject("deck_"+i,decks[i].getMain().toCardList("\n").split("\n"));
             if(decks[i].get(DeckSection.Sideboard)!=null)
@@ -380,19 +418,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         }
     }
 
-    SignalList onLifeTotalChangeList=new SignalList();
-    SignalList onGoldChangeList=new SignalList();
-    SignalList onPlayerChangeList=new SignalList();
-    SignalList onEquipmentChange=new SignalList();
-    SignalList onBlessing=new SignalList();
-
     private void addGold(int goldCount) {
         gold+=goldCount;
         onGoldChangeList.emit();
-    }
-
-    public int getGold() {
-        return gold;
     }
 
     public void onLifeChange(Runnable  o) {
@@ -419,14 +447,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         o.run();
     }
 
-    public int getLife() {
-        return life;
-    }
-
-    public int getMaxLife() {
-        return maxLife;
-    }
-
     public void heal(int amount) {
         life = Math.min(life + amount, maxLife);
         onLifeTotalChangeList.emit();
@@ -437,21 +457,22 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         onLifeTotalChangeList.emit();
     }
     public void defeated() {
-        gold=gold/2;
+        int percentLoss = 10;
+        gold=gold-(gold*percentLoss/100);
         life=Math.max(1,(int)(life-(maxLife*0.2f)));
         onLifeTotalChangeList.emit();
         onGoldChangeList.emit();
     }
     public void addMaxLife(int count) {
-        maxLife+=count;
-        life+=count;
+        maxLife += count;
+        life    += count;
         onLifeTotalChangeList.emit();
     }
     public void giveGold(int price) {
         takeGold(-price);
     }
     public void takeGold(int price) {
-        gold-=price;
+        gold -= price;
         onGoldChangeList.emit();
     }
 
@@ -464,8 +485,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         blessing = null;
         onBlessing.emit();
     }
-
-    public @Null EffectData getBlessing(){ return blessing; }
 
     public boolean hasBlessing(String name){ //Checks for a named blessing.
         //It is not necessary to name all blessings, only the ones you'd want to check for.
@@ -497,60 +516,56 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return false;
     }
 
+    public int bonusDeckCards() {
+        int result = 0;
+        for(String name:equippedItems.values()) {
+            ItemData data=ItemData.getItem(name);
+            if(data != null && data.effect.cardRewardBonus > 0) result += data.effect.cardRewardBonus;
+        }
+        if(blessing != null) {
+            if(blessing.cardRewardBonus > 0) result += blessing.cardRewardBonus;
+        }
+        return Math.max(result, 3);
+    }
 
     public DifficultyData getDifficulty() {
         return difficultyData;
     }
 
     public void renameDeck( String text) {
-
         deck = (Deck)deck.copyTo(text);
         decks[selectedDeckIndex]=deck;
     }
 
-    public ItemPool<InventoryItem> getNewCards() {
-        return newCards;
-    }
-    public int cardSellPrice(PaperCard card)
-    {
-        return (int) (CardUtil.getCardPrice(card)*difficultyData.sellFactor);
+    public int cardSellPrice(PaperCard card) {
+        return (int)(CardUtil.getCardPrice(card)*difficultyData.sellFactor);
     }
 
     public void sellCard(PaperCard card, Integer result) {
-        float price= CardUtil.getCardPrice(card)*result;
-        price=difficultyData.sellFactor*price;
-        cards.remove(card,  result);
-        addGold((int) price);
+        float price = CardUtil.getCardPrice(card) * result;
+        price *= difficultyData.sellFactor;
+        cards.remove(card, result);
+        addGold((int)price);
     }
 
     public void removeItem(String name) {
-        if(name==null||name.equals(""))return;
+        if(name == null || name.equals("")) return;
         inventoryItems.removeValue(name,false);
-        if(equippedItems.values().contains(name)&&!inventoryItems.contains(name,false))
-        {
+        if(equippedItems.values().contains(name) && !inventoryItems.contains(name,false)) {
             equippedItems.values().remove(name);
         }
     }
 
     public void equip(ItemData item) {
-        if(equippedItems.get(item.equipmentSlot)!=null&&equippedItems.get(item.equipmentSlot).equals(item.name))
-        {
+        if(equippedItems.get(item.equipmentSlot) != null && equippedItems.get(item.equipmentSlot).equals(item.name)) {
             equippedItems.remove(item.equipmentSlot);
-        }
-        else
-        {
+        } else {
             equippedItems.put(item.equipmentSlot,item.name);
         }
         onEquipmentChange.emit();
     }
 
-    public String itemInSlot(String key) {
-        return equippedItems.get(key);
-    }
-
-    public Collection<String> getEquippedItems() {
-        return  equippedItems.values();
-    }
+    public String itemInSlot(String key) { return equippedItems.get(key); }
 
     public float equipmentSpeed() {
         float factor=1.0f;
@@ -566,6 +581,24 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return factor;
     }
 
+    public float goldModifier(boolean sale) {
+        float factor = 1.0f;
+        for(String name:equippedItems.values()) {
+            ItemData data=ItemData.getItem(name);
+            if(data != null && data.effect.goldModifier > 0.0)  //Avoid negative modifiers.
+                factor *= data.effect.goldModifier;
+        }
+        if(blessing != null) { //If a blessing gives speed, take it into account.
+            if(blessing.goldModifier > 0.0)
+                factor *= blessing.goldModifier;
+        }
+        if(sale) return Math.max(1.0f + (1.0f - factor), 2.5f);
+        return Math.max(factor, 0.25f);
+    }
+    public float goldModifier(){
+        return goldModifier(false);
+    }
+
     public boolean hasItem(String name) {
         return inventoryItems.contains(name, false);
     }
@@ -578,6 +611,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return true;
     }
 
+
+    // Quest functions.
     public void setQuestFlag(String key, int value){
         questFlags.put(key, (byte) value);
     }
