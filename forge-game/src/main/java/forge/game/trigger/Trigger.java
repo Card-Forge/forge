@@ -77,10 +77,6 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     private List<Object> triggerRemembered = Lists.newArrayList();
 
-    // number of times this trigger was activated this this turn
-    // used to handle once-per-turn triggers like Crawling Sensation
-    private int numberTurnActivations = 0;
-
     private Set<PhaseType> validPhases;
 
     private SpellAbility spawningAbility;
@@ -507,7 +503,6 @@ public abstract class Trigger extends TriggerReplacementBase {
 
         if (!lki) {
             copy.setId(nextId());
-            copy.numberTurnActivations = 0;
         }
 
         if (validPhases != null) {
@@ -537,16 +532,13 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     public int getActivationsThisTurn() {
-        return this.numberTurnActivations;
+        return hostCard.getAbilityActivatedThisTurn(this.getOverridingAbility());
     }
 
     public void triggerRun() {
-        this.numberTurnActivations++;
-    }
-
-    // Resets the state stored each turn for per-turn and per-instance restriction
-    public void resetTurnState() {
-        this.numberTurnActivations = 0;
+        if (this.getOverridingAbility() != null) {
+            hostCard.addAbilityActivated(this.getOverridingAbility());
+        }
     }
 
     /** {@inheritDoc} */
