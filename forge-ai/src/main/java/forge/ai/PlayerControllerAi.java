@@ -34,6 +34,7 @@ import forge.game.GameObject;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
+import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
@@ -1062,6 +1063,9 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     private boolean prepareSingleSa(final Card host, final SpellAbility sa, boolean isMandatory) {
+        if (sa.getApi() == ApiType.Charm) {
+            return CharmEffect.makeChoices(sa);
+        }
         if (sa.hasParam("TargetingPlayer")) {
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(host, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);

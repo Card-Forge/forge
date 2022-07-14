@@ -277,7 +277,7 @@ public final class AbilityFactory {
             }
         }
 
-        if (api == ApiType.Charm  || api == ApiType.GenericChoice || api == ApiType.AssignGroup) {
+        if (api == ApiType.Charm || api == ApiType.GenericChoice || api == ApiType.AssignGroup) {
             final String key = "Choices";
             if (mapParams.containsKey(key)) {
                 List<String> names = Lists.newArrayList(mapParams.get(key).split(","));
@@ -426,7 +426,9 @@ public final class AbilityFactory {
     private static final void makeRestrictions(final SpellAbility sa) {
         // SpellAbilityRestrictions should be added in here
         final SpellAbilityRestriction restrict = sa.getRestrictions();
-        restrict.setRestrictions(sa.getMapParams());
+        if (restrict != null) {
+            restrict.setRestrictions(sa.getMapParams());
+        }
     }
 
     /**
@@ -438,7 +440,7 @@ public final class AbilityFactory {
      *            a {@link forge.game.spellability.SpellAbility} object.
      */
     private static final void makeConditions(final SpellAbility sa) {
-        // SpellAbilityRestrictions should be added in here
+        // SpellAbilityConditions should be added in here
         final SpellAbilityCondition condition = sa.getConditions();
         condition.setConditions(sa.getMapParams());
     }

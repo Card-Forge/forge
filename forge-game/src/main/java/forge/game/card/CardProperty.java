@@ -607,7 +607,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("Cloned")) {
-            if ((card.getCloneOrigin() == null) || !card.getCloneOrigin().equals(source)) {
+            if (card.getCloneOrigin() == null || !card.getCloneOrigin().equals(source)) {
                 return false;
             }
         } else if (property.startsWith("SharesCMCWith")) {
@@ -1479,6 +1479,14 @@ public class CardProperty {
             if (!card.getManaCost().getShortString().equals(property.substring(8))) {
                 return false;
             }
+        } else if (property.equals("HasCounters")) {
+            if (!card.hasCounters()) {
+                return false;
+            }
+        } else if (property.equals("NoCounters")) {
+            if (card.hasCounters()) {
+                return false;
+            }
         }
 
         // syntax example: countersGE9 P1P1 or countersLT12TIME (greater number
@@ -1809,14 +1817,6 @@ public class CardProperty {
             }
         } else if (property.equals("NoAbilities")) {
             if (!card.hasNoAbilities()) {
-                return false;
-            }
-        } else if (property.equals("HasCounters")) {
-            if (!card.hasCounters()) {
-                return false;
-            }
-        } else if (property.equals("NoCounters")) {
-            if (card.hasCounters()) {
                 return false;
             }
         } else if (property.equals("castKeyword")) {
