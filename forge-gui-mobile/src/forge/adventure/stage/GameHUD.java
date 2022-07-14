@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -317,13 +318,20 @@ public class GameHUD extends Stage {
     }
     class ConsoleToggleListener extends ActorGestureListener {
         public ConsoleToggleListener() {
-            getGestureDetector().setLongPressSeconds(0.5f);
+            getGestureDetector().setLongPressSeconds(0.6f);
         }
         @Override
         public boolean longPress(Actor actor, float x, float y) {
             hideButtons();
             console.toggle();
             return super.longPress(actor, x, y);
+        }
+        @Override
+        public void tap(InputEvent event, float x, float y, int count, int button) {
+            super.tap(event, x, y, count, button);
+            //show menu buttons if double tapping the avatar, for android devices without visible navigation buttons
+            if (count > 1)
+                showButtons();
         }
     }
 }
