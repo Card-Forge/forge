@@ -252,23 +252,25 @@ public class GameHUD extends Stage {
         mapborder.setVisible(visible);
         miniMapPlayer.setVisible(visible);
         gamehud.setVisible(visible);
-        avatarborder.setVisible(visible);
-        avatar.setVisible(visible);
         lifePoints.setVisible(visible);
         money.setVisible(visible);
         blank.setVisible(visible);
         if (visible) {
+            avatarborder.getColor().a = 1f;
+            avatar.getColor().a = 1f;
             deckActor.getColor().a = 1f;
             menuActor.getColor().a = 1f;
             statsActor.getColor().a = 1f;
             inventoryActor.getColor().a = 1f;
             opacity = 1f;
         } else {
-            deckActor.getColor().a = 0.5f;
-            menuActor.getColor().a = 0.5f;
-            statsActor.getColor().a = 0.5f;
-            inventoryActor.getColor().a = 0.5f;
-            opacity = 0.5f;
+            avatarborder.getColor().a = 0.4f;
+            avatar.getColor().a = 0.4f;
+            deckActor.getColor().a = 0.4f;
+            menuActor.getColor().a = 0.4f;
+            statsActor.getColor().a = 0.4f;
+            inventoryActor.getColor().a = 0.4f;
+            opacity = 0.4f;
         }
     }
 
