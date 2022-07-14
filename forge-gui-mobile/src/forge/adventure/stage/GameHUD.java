@@ -193,7 +193,8 @@ public class GameHUD extends Stage {
         }
         //auto follow touchpad
         if (GuiBase.isAndroid() && !MapStage.getInstance().getDialogOnlyInput() && !console.isVisible()) {
-            if (!(Controls.actorContainsVector(miniMap,touch)) // not inside map bounds
+            if (!(Controls.actorContainsVector(avatar,touch)) // not inside avatar bounds
+                    && !(Controls.actorContainsVector(miniMap,touch)) // not inside map bounds
                     && !(Controls.actorContainsVector(gamehud,touch)) //not inside gamehud bounds
                     && !(Controls.actorContainsVector(menuActor,touch)) //not inside menu button
                     && !(Controls.actorContainsVector(deckActor,touch)) //not inside deck button
