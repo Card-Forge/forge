@@ -238,6 +238,8 @@ public class FSkin {
         final FileHandle f17 = getDefaultSkinFile(ForgeConstants.SPRITE_CRACKS_FILE);
         final FileHandle f18 = getDefaultSkinFile(ForgeConstants.SPRITE_PHYREXIAN_FILE);
         final FileHandle f19 = getDefaultSkinFile(ForgeConstants.SPRITE_CURSOR_FILE);
+        final FileHandle f20 = getSkinFile(ForgeConstants.SPRITE_SLEEVES_FILE);
+        final FileHandle f21 = getSkinFile(ForgeConstants.SPRITE_SLEEVES2_FILE);
 
         /*TODO Themeable
         final FileHandle f14 = getDefaultSkinFile(ForgeConstants.SPRITE_SETLOGO_FILE);
@@ -313,7 +315,7 @@ public class FSkin {
             int counter = 0;
             int scount = 0;
             Color pxTest;
-            Pixmap pxDefaultAvatars, pxPreferredAvatars, pxDefaultSleeves;
+            Pixmap pxDefaultAvatars, pxPreferredAvatars, pxDefaultSleeves, pxPreferredSleeves;
 
             pxDefaultAvatars = new Pixmap(f4);
             pxDefaultSleeves = new Pixmap(f8);
@@ -356,33 +358,68 @@ public class FSkin {
                     }
                 }
             }
+            if (f20.exists()) {
+                pxPreferredSleeves = new Pixmap(f20);
+                manager.load(f20.path(), Texture.class, parameter);
+                manager.finishLoadingAsset(f20.path());
 
-            final int sw = pxDefaultSleeves.getWidth();
-            final int sh = pxDefaultSleeves.getHeight();
+                final int sw = pxPreferredSleeves.getWidth();
+                final int sh = pxPreferredSleeves.getHeight();
 
-            for (int j = 0; j < sh; j += 500) {
-                for (int i = 0; i < sw; i += 360) {
-                    pxTest = new Color(pxDefaultSleeves.getPixel(i + 180, j + 250));
-                    if (pxTest.a == 0) { continue; }
-                    Forge.getAssets().sleeves.put(scount++, new TextureRegion(manager.get(f8.path(), Texture.class), i, j, 360, 500));
+                for (int j = 0; j < sh; j += 500) {
+                    for (int i = 0; i < sw; i += 360) {
+                        pxTest = new Color(pxPreferredSleeves.getPixel(i + 180, j + 250));
+                        if (pxTest.a == 0) { continue; }
+                        Forge.getAssets().sleeves.put(scount++, new TextureRegion(manager.get(f20.path(), Texture.class), i, j, 360, 500));
+                    }
+                }
+                pxPreferredSleeves.dispose();
+            } else {
+                final int sw = pxDefaultSleeves.getWidth();
+                final int sh = pxDefaultSleeves.getHeight();
+
+                for (int j = 0; j < sh; j += 500) {
+                    for (int i = 0; i < sw; i += 360) {
+                        pxTest = new Color(pxDefaultSleeves.getPixel(i + 180, j + 250));
+                        if (pxTest.a == 0) { continue; }
+                        Forge.getAssets().sleeves.put(scount++, new TextureRegion(manager.get(f8.path(), Texture.class), i, j, 360, 500));
+                    }
+                }
+            }
+            if (f21.exists()) {
+                pxPreferredSleeves = new Pixmap(f21);
+                manager.load(f21.path(), Texture.class, parameter);
+                manager.finishLoadingAsset(f21.path());
+
+                final int sw = pxPreferredSleeves.getWidth();
+                final int sh = pxPreferredSleeves.getHeight();
+
+                for (int j = 0; j < sh; j += 500) {
+                    for (int i = 0; i < sw; i += 360) {
+                        pxTest = new Color(pxPreferredSleeves.getPixel(i + 180, j + 250));
+                        if (pxTest.a == 0) { continue; }
+                        Forge.getAssets().sleeves.put(scount++, new TextureRegion(manager.get(f21.path(), Texture.class), i, j, 360, 500));
+                    }
+                }
+                pxPreferredSleeves.dispose();
+            } else {
+                //re init second set of sleeves
+                pxDefaultSleeves = new Pixmap(f9);
+                manager.load(f9.path(), Texture.class, parameter);
+                manager.finishLoadingAsset(f9.path());
+
+                final int sw2 = pxDefaultSleeves.getWidth();
+                final int sh2 = pxDefaultSleeves.getHeight();
+
+                for (int j = 0; j < sh2; j += 500) {
+                    for (int i = 0; i < sw2; i += 360) {
+                        pxTest = new Color(pxDefaultSleeves.getPixel(i + 180, j + 250));
+                        if (pxTest.a == 0) { continue; }
+                        Forge.getAssets().sleeves.put(scount++, new TextureRegion(manager.get(f9.path(), Texture.class), i, j, 360, 500));
+                    }
                 }
             }
 
-            //re init second set of sleeves
-            pxDefaultSleeves = new Pixmap(f9);
-            manager.load(f9.path(), Texture.class, parameter);
-            manager.finishLoadingAsset(f9.path());
-
-            final int sw2 = pxDefaultSleeves.getWidth();
-            final int sh2 = pxDefaultSleeves.getHeight();
-
-            for (int j = 0; j < sh2; j += 500) {
-                for (int i = 0; i < sw2; i += 360) {
-                    pxTest = new Color(pxDefaultSleeves.getPixel(i + 180, j + 250));
-                    if (pxTest.a == 0) { continue; }
-                    Forge.getAssets().sleeves.put(scount++, new TextureRegion(manager.get(f9.path(), Texture.class), i, j, 360, 500));
-                }
-            }
             //cracks
             manager.load(f17.path(), Texture.class, parameter);
             manager.finishLoadingAsset(f17.path());
