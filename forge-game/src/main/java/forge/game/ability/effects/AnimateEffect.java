@@ -154,8 +154,6 @@ public class AnimateEffect extends AnimateEffectBase {
             }
         }
 
-
-
         List<Card> tgts = getCardsfromTargets(sa);
 
         if (sa.hasParam("Optional")) {
