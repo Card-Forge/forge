@@ -507,6 +507,7 @@ public abstract class Trigger extends TriggerReplacementBase {
 
         if (!lki) {
             copy.setId(nextId());
+            copy.numberTurnActivations = 0;
         }
 
         if (validPhases != null) {
