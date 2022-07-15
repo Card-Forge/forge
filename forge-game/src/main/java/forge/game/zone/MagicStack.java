@@ -71,6 +71,7 @@ import forge.util.TextUtil;
  */
 public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbilityStackInstance> {
     private final List<SpellAbility> simultaneousStackEntryList = Lists.newArrayList();
+    private final List<SpellAbility> activePlayerSAs = Lists.newArrayList();
 
     // They don't provide a LIFO queue, so had to use a deque
     private final Deque<SpellAbilityStackInstance> stack = new LinkedBlockingDeque<>();
@@ -824,7 +825,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return false;
         }
 
-        final List<SpellAbility> activePlayerSAs = Lists.newArrayList();
+        activePlayerSAs.clear();
         for (int i = 0; i < simultaneousStackEntryList.size(); i++) {
             SpellAbility sa = simultaneousStackEntryList.get(i);
             Player activator = sa.getActivatingPlayer();
@@ -843,6 +844,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         activePlayer.getController().orderAndPlaySimultaneousSa(activePlayerSAs);
+        activePlayerSAs.clear();
         return true;
     }
 
@@ -860,6 +862,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         for (final SpellAbility sa : simultaneousStackEntryList) {
+            if (sa.getSourceTrigger() == triggerID) {
+                return true;
+            }
+        }
+
+        for (final SpellAbility sa : activePlayerSAs) {
             if (sa.getSourceTrigger() == triggerID) {
                 return true;
             }
