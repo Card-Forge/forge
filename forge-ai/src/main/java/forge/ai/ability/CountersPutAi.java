@@ -571,6 +571,9 @@ public class CountersPutAi extends CountersAi {
                                     Lists.newArrayList())) {
                                 choice = c;
                                 break;
+                            } else if (!sa.getRestrictions().isSorcerySpeed() && !ComputerUtilCard.isUselessCreature(ai, c)) {
+                                choice = c;
+                                break;
                             }
                         }
                         if (!source.isSpell()) {    // does not cost a card
