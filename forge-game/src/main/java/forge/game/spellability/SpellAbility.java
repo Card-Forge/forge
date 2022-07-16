@@ -179,8 +179,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private StaticAbility mayPlay;
 
-    private CardCollection lastStateBattlefield = null;
-    private CardCollection lastStateGraveyard = null;
+    private CardCollection lastStateBattlefield;
+    private CardCollection lastStateGraveyard;
 
     private CardCollection rollbackEffects = new CardCollection();
 

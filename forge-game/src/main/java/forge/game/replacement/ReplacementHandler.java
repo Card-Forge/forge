@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -181,7 +182,7 @@ public class ReplacementHandler {
                     // getting hit by mass removal should still produce tokens).
                     if ("True".equals(replacementEffect.getParam("CheckSelfLKIZone"))) {
                         cardZone = game.getChangeZoneLKIInfo(c).getLastKnownZone();
-                        if (cardZone.is(ZoneType.Battlefield) && runParams.containsKey(AbilityKey.LastStateBattlefield) && !((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).contains(crd)) {
+                        if (cardZone.is(ZoneType.Battlefield) && runParams.containsKey(AbilityKey.LastStateBattlefield) && runParams.get(AbilityKey.LastStateBattlefield) != null && !((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).contains(crd)) {
                             continue;
                         }
                     } else {
@@ -360,8 +361,8 @@ public class ReplacementHandler {
                 tailend = tailend.getSubAbility();
             } while(tailend != null);
 
-            effectSA.setLastStateBattlefield((CardCollectionView) runParams.getOrDefault(AbilityKey.LastStateBattlefield, game.getLastStateBattlefield()));
-            effectSA.setLastStateGraveyard((CardCollectionView) runParams.getOrDefault(AbilityKey.LastStateBattlefield, game.getLastStateGraveyard()));
+            effectSA.setLastStateBattlefield((CardCollectionView) ObjectUtils.firstNonNull(runParams.get(AbilityKey.LastStateBattlefield), game.getLastStateBattlefield()));
+            effectSA.setLastStateGraveyard((CardCollectionView) ObjectUtils.firstNonNull(runParams.get(AbilityKey.LastStateGraveyard), game.getLastStateGraveyard()));
             if (replacementEffect.isIntrinsic()) {
                 effectSA.setIntrinsic(true);
                 effectSA.changeText();
