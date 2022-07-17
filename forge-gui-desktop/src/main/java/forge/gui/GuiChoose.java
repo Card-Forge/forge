@@ -212,8 +212,7 @@ public class GuiChoose {
 
                 if (selected != null) {
                     c.show(selected);
-                }
-                else {
+                } else {
                     c.show();
                 }
 
