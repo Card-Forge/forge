@@ -690,7 +690,7 @@ public class AbilityUtils {
             }
             else if (calcX[0].equals("TriggeredSpellAbility") || calcX[0].equals("TriggeredStackInstance")) {
                 final SpellAbility sat = getDefinedSpellAbilities(card, calcX[0], sa).get(0);
-                val = calculateAmount(sat.getHostCard(), calcX[1], sat);
+                val = xCount(sat.getHostCard(), calcX[1], sat);
             }
             else if (calcX[0].startsWith("TriggerCount")) {
                 // TriggerCount is similar to a regular Count, but just
@@ -730,7 +730,7 @@ public class AbilityUtils {
                 else if (calcX[0].startsWith("Discarded")) {
                     final SpellAbility root = sa.getRootAbility();
                     list = root.getPaidList("Discarded");
-                    if ((null == list) && root.isTrigger()) {
+                    if (null == list && root.isTrigger()) {
                         list = root.getHostCard().getSpellPermanent().getPaidList("Discarded");
                     }
                 }

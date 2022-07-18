@@ -4,6 +4,6 @@ Types:Legendary Creature Dragon Shaman
 PT:1/3
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, target creature gets +X/+0 until end of turn, where X is that spell's mana value.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ +X
-SVar:X:TriggerCount$CastSACMC
+SVar:X:TriggeredStackInstance$CardManaCostLKI
 K:Choose a Background
 Oracle:Whenever you cast a noncreature spell, target creature gets +X/+0 until end of turn, where X is that spell's mana value.\nChoose a Background (You can have a Background as a second commander.)
