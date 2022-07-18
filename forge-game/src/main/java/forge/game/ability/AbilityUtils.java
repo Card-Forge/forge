@@ -283,7 +283,7 @@ public class AbilityUtils {
                 System.err.println("Warning: couldn't find trigger SA in the chain of SpellAbility " + sa);
             }
         } else if (defined.equals("FirstRemembered")) {
-            Object o = Iterables.getFirst(hostCard.getRemembered(), null);
+            Object o = hostCard.getFirstRemembered();
             if (o != null && o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
             }
@@ -688,7 +688,7 @@ public class AbilityUtils {
                 Object o = root.getTriggeringObject(AbilityKey.fromString(calcX[0].substring(9)));
                 val = o instanceof Player ? playerXProperty((Player) o, calcX[1], card, ability) : 0;
             }
-            else if (calcX[0].equals("TriggeredSpellAbility") || calcX[0].equals("TriggeredStackInstance")) {
+            else if (calcX[0].equals("TriggeredSpellAbility") || calcX[0].equals("TriggeredStackInstance") || calcX[0].equals("SpellTargeted")) {
                 final SpellAbility sat = getDefinedSpellAbilities(card, calcX[0], sa).get(0);
                 val = xCount(sat.getHostCard(), calcX[1], sat);
             }
@@ -2167,10 +2167,7 @@ public class AbilityUtils {
         // Count$CardManaCost
         if (sq[0].contains("CardManaCost")) {
             Card ce;
-            if (sq[0].contains("Equipped") && c.isEquipping()) {
-                ce = c.getEquipping();
-            }
-            else if (sq[0].contains("Remembered")) {
+            if (sq[0].contains("Remembered")) {
                 ce = (Card) c.getFirstRemembered();
             }
             else {
