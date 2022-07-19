@@ -6,4 +6,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You | Optional$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Natural Recovery — When CARDNAME dies, return target land card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Land.YouCtrl
+DeckHas:Ability$Mill|Graveyard
 Oracle:When Circle of the Land Druid enters the battlefield, you may mill four cards. (You may put the top four cards of your library into your graveyard.)\nNatural Recovery — When Circle of the Land Druid dies, return target land card from your graveyard to your hand.
