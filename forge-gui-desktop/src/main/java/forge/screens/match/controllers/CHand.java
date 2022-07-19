@@ -34,6 +34,8 @@ import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
 import forge.gui.framework.ICDoc;
+import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.model.FModel;
 import forge.screens.match.CMatchUI;
 import forge.screens.match.views.VField;
 import forge.screens.match.views.VHand;
@@ -108,6 +110,9 @@ public class CHand implements ICDoc {
             cards = ImmutableList.of();
         } else {
             synchronized (player) {
+                if (!player.isAI() && FModel.getPreferences().getPrefBoolean(FPref.UI_ORDER_HAND)) {
+                    matchUI.getGameController(player).orderHand();
+                }
                 cards = ImmutableList.copyOf(player.getHand());
             }
         }
