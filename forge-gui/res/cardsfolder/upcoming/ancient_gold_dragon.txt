@@ -4,9 +4,7 @@ Types:Creature Elder Dragon
 PT:7/10
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigRoll | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, roll a d20. You create a number of 1/1 blue Faerie Dragon creature tokens with flying equal to the result.
-SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | Sides$ 20 | SubAbility$ DBImmediateTrigger
-SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigToken | RememberSVarAmount$ Result | TriggerDescription$ You create a number of 1/1 blue Faerie Dragon creature tokens with flying equal to the result.
-SVar:TrigToken:DB$ Token | TokenScript$ u_1_1_faerie_dragon_flying | TokenAmount$ X | TokenOwner$ You
-SVar:X:Count$TriggerRememberAmount
+SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | Sides$ 20 | SubAbility$ DBToken | TriggerDescription$ You create a number of 1/1 blue Faerie Dragon creature tokens with flying equal to the result.
+SVar:DBToken:DB$ Token | TokenScript$ u_1_1_faerie_dragon_flying | TokenAmount$ Result | TokenOwner$ You
 DeckHas:Ability$Token & Type$Faerie|Dragon
 Oracle:Flying\nWhenever Ancient Gold Dragon deals combat damage to a player, roll a d20. You create a number of 1/1 blue Faerie Dragon creature tokens with flying equal to the result.
