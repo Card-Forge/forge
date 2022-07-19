@@ -295,8 +295,11 @@ public class ImageCache {
         }
         String fileName = file.getPath();
         //load to assetmanager
-        Forge.getAssets().manager.load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
-        Forge.getAssets().manager.finishLoadingAsset(fileName);
+        if (!Forge.getAssets().manager().contains(fileName, Texture.class)) {
+            Forge.getAssets().manager().load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
+            Forge.getAssets().manager().finishLoadingAsset(fileName);
+            counter+=1;
+        }
 
         //return loaded assets
         if (others) {
