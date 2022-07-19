@@ -10,4 +10,7 @@ ScryfallCode=P22
 2 R Omniscience @Alayna Danner
 3 R Parallel Lives @Greg Staples
 4 R Stranglehold @Ralph Horsley
+5 R Smothering Tithe @Aurore Folny
+6 R Training Grounds @Caroline Gariba
 9 R No Mercy @John Stanko
+10 R R Growing Rites of Itlimoc @Dmitry Burmak
