@@ -120,11 +120,11 @@ public class Config {
 
     public TextureAtlas getAtlas(String spriteAtlas) {
         String fileName = getFile(spriteAtlas).path();
-        if (!Forge.getAssets().manager.contains(fileName, TextureAtlas.class)) {
-            Forge.getAssets().manager.load(fileName, TextureAtlas.class);
-            Forge.getAssets().manager.finishLoadingAsset(fileName);
+        if (!Forge.getAssets().manager().contains(fileName, TextureAtlas.class)) {
+            Forge.getAssets().manager().load(fileName, TextureAtlas.class);
+            Forge.getAssets().manager().finishLoadingAsset(fileName);
         }
-        return Forge.getAssets().manager.get(fileName);
+        return Forge.getAssets().manager().get(fileName);
     }
     public SettingData getSettingData()
     {

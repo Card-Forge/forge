@@ -106,10 +106,11 @@ public class EnemySprite extends CharacterSprite {
             ret.add(new Reward(Reward.Type.Life, 1));
         } else {
             if(data.rewards != null) { //Collect standard rewards.
-                Deck enemyDeck = Current.latestDeck(); // By popular demand, remove basic lands from the reward pool.
-                CardPool deckNoBasicLands = enemyDeck.getMain().getFilteredPool(Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), PaperCard.FN_GET_RULES));
+                Deck enemyDeck = Current.latestDeck();
+                /*// By popular demand, remove basic lands from the reward pool.
+                CardPool deckNoBasicLands = enemyDeck.getMain().getFilteredPool(Predicates.compose(Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND), PaperCard.FN_GET_RULES));*/
                 for (RewardData rdata : data.rewards) {
-                    ret.addAll(rdata.generate(false, deckNoBasicLands.toFlatList() ));
+                    ret.addAll(rdata.generate(false,  enemyDeck == null ? null : enemyDeck.getMain().toFlatList() ));
                 }
             }
             if(rewards != null) { //Collect additional rewards.

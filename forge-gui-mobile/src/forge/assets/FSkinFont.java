@@ -47,10 +47,10 @@ public class FSkinFont {
         return _get((int)Utils.scale(unscaledSize));
     }
     public static FSkinFont _get(final int scaledSize) {
-        FSkinFont skinFont = Forge.getAssets().fonts.get(scaledSize);
+        FSkinFont skinFont = Forge.getAssets().fonts().get(scaledSize);
         if (skinFont == null) {
             skinFont = new FSkinFont(scaledSize);
-            Forge.getAssets().fonts.put(scaledSize, skinFont);
+            Forge.getAssets().fonts().put(scaledSize, skinFont);
         }
         return skinFont;
     }
@@ -87,7 +87,7 @@ public class FSkinFont {
     }
 
     public static void updateAll() {
-        for (FSkinFont skinFont : Forge.getAssets().fonts.values()) {
+        for (FSkinFont skinFont : Forge.getAssets().fonts().values()) {
             skinFont.updateFont();
         }
     }
