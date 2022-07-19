@@ -79,7 +79,7 @@ public class Forge implements ApplicationListener {
     protected static TransitionScreen transitionScreen;
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
-    private boolean needsUpdate = false;
+    public boolean needsUpdate = false;
     public static boolean safeToClose = true;
     public static boolean magnify = false;
     public static boolean magnifyToggle = true;
@@ -110,7 +110,7 @@ public class Forge implements ApplicationListener {
     public static boolean gameInProgress = false;
     public static boolean disposeTextures = false;
     public static boolean isMobileAdventureMode = false;
-    public static int cacheSize = 400;
+    public static int cacheSize = 300;
     public static int totalDeviceRAM = 0;
     public static int androidVersion = 0;
     public static boolean autoCache = false;
@@ -208,9 +208,9 @@ public class Forge implements ApplicationListener {
         CJK_Font = prefs.getPref(FPref.UI_CJK_FONT);
 
         if (autoCache) {
-            //increase cacheSize for devices with RAM more than 5GB, default is 400. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
-            if (totalDeviceRAM > 5000) //devices with more than 10GB RAM will have 800 Cache size, 600 Cache size for morethan 5GB RAM
-                cacheSize = totalDeviceRAM > 10000 ? 800 : 600;
+            //increase cacheSize for devices with RAM more than 5GB, default is 300. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
+            if (totalDeviceRAM > 5000) //devices with more than 10GB RAM will have 600 Cache size, 400 Cache size for morethan 5GB RAM
+                cacheSize = totalDeviceRAM > 10000 ? 600 : 400;
         }
         //init cache
         ImageCache.initCache(cacheSize);
@@ -781,7 +781,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void render() {
         if (showFPS)
-            frameRate.update();
+            frameRate.update(ImageCache.counter, Forge.getAssets().manager().getMemoryInMegabytes());
 
         try {
             ImageCache.allowSingleLoad();
@@ -817,8 +817,8 @@ public class Forge implements ApplicationListener {
                                 animationBatch.setColor(1, 1, 1, 1);
                                 animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.setColor(1, 1, 1, 1 - (1 / transitionTime) * animationTimeout);
-                                animationBatch.draw(getAssets().fallback_skins.get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.draw(getAssets().fallback_skins.get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.end();
                                 if (animationTimeout < 0) {
                                     currentScene.render();
@@ -837,8 +837,8 @@ public class Forge implements ApplicationListener {
                                 animationBatch.setColor(1, 1, 1, 1);
                                 animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.setColor(1, 1, 1, (1 / transitionTime) * (animationTimeout + transitionTime));
-                                animationBatch.draw(getAssets().fallback_skins.get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.draw(getAssets().fallback_skins.get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.end();
                                 return;
                             }
@@ -878,7 +878,7 @@ public class Forge implements ApplicationListener {
             }
             //update here
             if (needsUpdate) {
-                if (getAssets().manager.update())
+                if (getAssets().manager().update())
                     needsUpdate = false;
             }
             graphics.end();
@@ -928,7 +928,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void resume() {
         try {
-            Texture.setAssetManager(getAssets().manager);
+            Texture.setAssetManager(getAssets().manager());
             needsUpdate = true;
         } catch (Exception e) {
             //the application context must have been recreated from its last state.
