@@ -376,6 +376,26 @@ ScryfallCode=HBG
 264 C Prophetic Prism @Diego Gisbert
 265 C Spiked Pit Trap @Deruchenko Alexander
 266 R Baldur's Gate @Titus Lunter
+289 L Plains @Bruce Brenneise
+290 L Plains @Leanna Crossan
+291 L Plains @Titus Lunter
+292 L Plains @Emmanuel Shiu
+293 L Island @Bruce Brenneise
+294 L Island @Piotr Dura
+295 L Island @James Paick
+296 L Island @Sam White
+297 L Swamp @Piotr Dura
+298 L Swamp @Logan Feliciano
+299 L Swamp @Grady Frederick
+300 L Swamp @Sam White
+301 L Mountain @Matt Gaser
+302 L Mountain @Lucas Graciano
+303 L Mountain @Muhammad Firdaus
+304 L Mountain @Sam White
+305 L Forest @Bruce Brenneise
+306 L Forest @Muhammad Firdaus
+307 L Forest @Lucas Graciano
+308 L Forest @Julian Kok Joon Wen
 
 [rebalanced]
 A166 C A-Sepulcher Ghoul @Jason A. Engle
