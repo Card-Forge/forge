@@ -5,6 +5,6 @@ PT:3/3
 K:Flying
 T:Mode$ SpellCast | ValidCard$ Spirit,Arcane | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigChange | TriggerDescription$ Whenever you cast a Spirit or Arcane spell, you may gain control of target creature with that spell's mana value until end of turn.
 SVar:TrigChange:DB$ GainControl | ValidTgts$ Creature.cmcEQX | TgtPrompt$ Select target creature | LoseControl$ EOT | NewController$ You
-SVar:X:TriggerCount$CastSACMC
+SVar:X:TriggeredStackInstance$CardManaCostLKI
 DeckHints:Type$Spirit|Arcane
 Oracle:Flying\nWhenever you cast a Spirit or Arcane spell, you may gain control of target creature with that spell's mana value until end of turn.

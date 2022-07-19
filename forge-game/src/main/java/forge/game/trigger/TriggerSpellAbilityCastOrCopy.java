@@ -313,8 +313,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             AbilityKey.Player,
             AbilityKey.Activator,
             AbilityKey.CurrentStormCount,
-            AbilityKey.CurrentCastSpells,
-            AbilityKey.CastSACMC
+            AbilityKey.CurrentCastSpells
         );
     }
 
