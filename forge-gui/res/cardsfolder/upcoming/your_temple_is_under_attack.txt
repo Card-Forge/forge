@@ -1,0 +1,7 @@
+Name:Your Temple Is Under Attack
+ManaCost:2 W
+Types:Instant
+A:SP$ Charm | Choices$ DBPump,DBDraw
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SpellDescription$ Pray for Protection — Creatures you control gain indestructible until end of turn.
+SVar:DBDraw:DB$ Draw | Defined$ TargetedAndYou | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SpellDescription$ Strike a Deal — You and target opponent each draw two cards.
+Oracle:Choose one —\n• Pray for Protection — Creatures you control gain indestructible until end of turn.\n• Strike a Deal — You and target opponent each draw two cards.
