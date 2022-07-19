@@ -1,12 +1,10 @@
 Name:Bane's Contingency
 ManaCost:1 U U
 Types:Instant
-A:SP$ Pump | IsCurse$ True | TargetType$ Spell | TgtZone$ Stack | TgtPrompt$ Select target spell | ValidTgts$ Card | SubAbility$ DBBranch | StackDescription$ SpellDescription | SpellDescription$ Counter target spell. If that spell targets a commander you control, instead counter that spell, scry 2, then draw a card.
-SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ1 | TrueSubAbility$ DBCounterScry | FalseSubAbility$ DBCounter | StackDescription$ None
-SVar:DBCounterScry:DB$ Counter | Defined$ Targeted | SubAbility$ DBScry
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | StackDescription$ SpellDescription | SubAbility$ DBCounter | Counter target spell. If that spell targets a commander you control, instead counter that spell, scry 2, then draw a card.
+SVar:DBCounter:DB$ Counter | Defined$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBScry | StackDescription$ None
 SVar:DBScry:DB$ Scry | ScryNum$ 2 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1
-SVar:DBCounter:DB$ Counter | Defined$ Targeted
 SVar:X:Count$Compare CheckTgt GE1.1.0
-SVar:CheckTgt:TargetedByTarget$Valid Card.IsCommander+YouCtrl
+SVar:CheckTgt:TargetedByTarget$Valid Card.IsCommander+YouCtrl+inZoneBattlefield
 Oracle:Counter target spell. If that spell targets a commander you control, instead counter that spell, scry 2, then draw a card.
