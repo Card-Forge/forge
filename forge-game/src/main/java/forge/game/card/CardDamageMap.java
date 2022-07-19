@@ -113,6 +113,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
 
             int excess = sum - (damaged.getKey().hasBeenDealtDeathtouchDamage() ? 1 : damaged.getValue());
             if (excess > 0) {
+                damaged.getKey().setHasBeenDealtExcessDamageThisTurn(true);
                 // Run triggers
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.DamageTarget, damaged.getKey());

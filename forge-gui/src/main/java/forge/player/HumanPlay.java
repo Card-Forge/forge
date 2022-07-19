@@ -105,10 +105,9 @@ public class HumanPlay {
             source.forceTurnFaceUp();
         }
 
-        if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-            if (!CharmEffect.makeChoices(sa)) {
-                return false;
-            }
+        if (sa.getApi() == ApiType.Charm && !CharmEffect.makeChoices(sa)) {
+            // 603.3c If no mode is chosen, the ability is removed from the stack.
+            return false;
         }
 
         sa = AbilityUtils.addSpliceEffects(sa);
@@ -168,12 +167,12 @@ public class HumanPlay {
 
         source.setSplitStateToPlayAbility(sa);
 
+        if (sa.getApi() == ApiType.Charm && !CharmEffect.makeChoices(sa)) {
+            // 603.3c If no mode is chosen, the ability is removed from the stack.
+            return;
+        }
+
         if (!sa.isCopied()) {
-            if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-                if (!CharmEffect.makeChoices(sa)) {
-                    return;
-                }
-            }
             sa = AbilityUtils.addSpliceEffects(sa);
         }
 

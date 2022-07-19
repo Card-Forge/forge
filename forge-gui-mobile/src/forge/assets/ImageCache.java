@@ -18,22 +18,22 @@
 package forge.assets;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
-import com.badlogic.gdx.utils.ObjectMap;
-import com.badlogic.gdx.utils.ObjectSet;
 import com.google.common.collect.EvictingQueue;
 import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.util.FileUtil;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -74,10 +74,12 @@ import forge.util.ImageUtil;
  * @version $Id: ImageCache.java 24769 2014-02-09 13:56:04Z Hellfish $
  */
 public class ImageCache {
-    private static final ObjectSet<String> missingIconKeys = new ObjectSet<>();
+    private static final HashSet<String> missingIconKeys = new HashSet<>();
     private static List<String> borderlessCardlistKey = FileUtil.readFile(ForgeConstants.BORDERLESS_CARD_LIST_FILE);
-    static int maxCardCapacity = 400; //default card capacity
+    public static int counter = 0;
+    static int maxCardCapacity = 300; //default card capacity
     static EvictingQueue<String> q;
+    static Set<String> cardsLoaded;
     static Queue<String> syncQ;
     static TextureParameter defaultParameter = new TextureParameter();
     static TextureParameter filtered = new TextureParameter();
@@ -92,12 +94,14 @@ public class ImageCache {
         q = EvictingQueue.create(capacity);
         //init syncQ for threadsafe use
         syncQ = Queues.synchronizedQueue(q);
+        //cap
+        int cl = GuiBase.isAndroid() ? maxCardCapacity+(capacity/3) : 400;
+        cardsLoaded = new HashSet<>(cl);
     }
     public static final Texture defaultImage;
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
-    private static final ObjectMap<String, Pair<String, Boolean>> imageBorder = new ObjectMap<>(1024);
-    private static final ObjectMap<String, Texture> generatedCards = new ObjectMap<>(512);
+    private static final HashMap<String, Pair<String, Boolean>> imageBorder = new HashMap<>(1024);
 
     private static boolean imageLoaded, delayLoadRequested;
     public static void allowSingleLoad() {
@@ -112,7 +116,7 @@ public class ImageCache {
         } catch (Exception ex) {
             System.err.println("could not load default card image");
         } finally {
-            defaultImage = (null == defImage) ? new Texture(10, 10, Format.RGBA8888) : defImage;
+            defaultImage = (null == defImage) ? new Texture(10, 10, Format.RGBA4444) : defImage;
         }
     }
 
@@ -121,11 +125,18 @@ public class ImageCache {
         ImageKeys.clearMissingCards();
     }
     public static void clearGeneratedCards() {
-        generatedCards.clear();
+        Forge.getAssets().generatedCards().clear();
     }
     public static void disposeTextures(){
         CardRenderer.clearcardArtCache();
-        Forge.getAssets(false).manager.clear();
+        //unload all cardsLoaded
+        for (String fileName : cardsLoaded) {
+            if (Forge.getAssets().manager().contains(fileName)) {
+                Forge.getAssets().manager().unload(fileName);
+            }
+        }
+        cardsLoaded.clear();
+        ((Forge)Gdx.app.getApplicationListener()).needsUpdate = true;
     }
 
     public static Texture getImage(InventoryItem ii) {
@@ -201,7 +212,7 @@ public class ImageCache {
     public static Texture getImage(String imageKey, boolean useDefaultIfNotFound) {
         return getImage(imageKey, useDefaultIfNotFound, false);
     }
-    public static Texture getImage(String imageKey, boolean useDefaultIfNotFound, boolean useOtherCache) {
+    public static Texture getImage(String imageKey, boolean useDefaultIfNotFound, boolean others) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
             return null;
 
@@ -226,7 +237,7 @@ public class ImageCache {
         File imageFile = ImageKeys.getImageFile(imageKey);
         if (useDefaultIfNotFound) {
             // Load from file and add to cache if not found in cache initially.
-            image = getAsset(imageKey, imageFile, useOtherCache);
+            image = getAsset(imageKey, imageFile, others);
 
             if (image != null) { return image; }
 
@@ -242,7 +253,7 @@ public class ImageCache {
         }
 
         try {
-            image = loadAsset(imageKey, imageFile, useOtherCache);
+            image = loadAsset(imageKey, imageFile, others);
         } catch (final Exception ex) {
             image = null;
         }
@@ -261,55 +272,67 @@ public class ImageCache {
         }
         return image;
     }
-    static Texture getAsset(String imageKey, File file, boolean otherCache) {
+    static Texture getAsset(String imageKey, File file, boolean others) {
         if (file == null)
             return null;
-        if (!otherCache && Forge.enableUIMask.equals("Full") && isBorderless(imageKey))
-            return generatedCards.get(imageKey);
-        return Forge.getAssets(otherCache).manager.get(file.getPath(), Texture.class, false);
+        if (!others && Forge.enableUIMask.equals("Full") && isBorderless(imageKey))
+            return Forge.getAssets().generatedCards().get(imageKey);
+        return Forge.getAssets().manager().get(file.getPath(), Texture.class, false);
     }
-    static Texture loadAsset(String imageKey, File file, boolean otherCache) {
+    static Texture loadAsset(String imageKey, File file, boolean others) {
         if (file == null)
             return null;
-        syncQ.add(file.getPath());
-        if (!otherCache && Forge.getAssets(false).manager.getLoadedAssets() > maxCardCapacity) {
-            unloadCardTextures(Forge.getAssets(false).manager);
+        Texture check = getAsset(imageKey, file, others);
+        if (check != null)
+            return check;
+        if (!others) {
+            syncQ.add(file.getPath());
+            cardsLoaded.add(file.getPath());
+        }
+        if (!others && cardsLoaded.size() > maxCardCapacity) {
+            unloadCardTextures(Forge.getAssets().manager());
             return null;
         }
         String fileName = file.getPath();
         //load to assetmanager
-        Forge.getAssets(otherCache).manager.load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
-        Forge.getAssets(otherCache).manager.finishLoadingAsset(fileName);
+        if (!Forge.getAssets().manager().contains(fileName, Texture.class)) {
+            Forge.getAssets().manager().load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
+            Forge.getAssets().manager().finishLoadingAsset(fileName);
+            counter+=1;
+        }
+
         //return loaded assets
-        if (otherCache) {
-            return Forge.getAssets(true).manager.get(fileName, Texture.class, false);
+        if (others) {
+            return Forge.getAssets().manager().get(fileName, Texture.class, false);
         } else {
-            Texture t = Forge.getAssets(false).manager.get(fileName, Texture.class, false);
+            Texture cardTexture = Forge.getAssets().manager().get(fileName, Texture.class, false);
             //if full bordermasking is enabled, update the border color
             if (Forge.enableUIMask.equals("Full")) {
                 boolean borderless = isBorderless(imageKey);
-                updateBorders(t.toString(), borderless ? Pair.of(Color.valueOf("#171717").toString(), false): isCloserToWhite(getpixelColor(t)));
+                updateBorders(cardTexture.toString(), borderless ? Pair.of(Color.valueOf("#171717").toString(), false): isCloserToWhite(getpixelColor(cardTexture)));
                 //if borderless, generate new texture from the asset and store
                 if (borderless) {
-                    generatedCards.put(imageKey, generateTexture(new FileHandle(file), t, Forge.isTextureFilteringEnabled()));
+                    Forge.getAssets().generatedCards().put(imageKey, generateTexture(new FileHandle(file), cardTexture, Forge.isTextureFilteringEnabled()));
                 }
             }
-            return t;
+            return cardTexture;
         }
     }
-    static void unloadCardTextures(AssetManager manager) {
+    static void unloadCardTextures(Assets.MemoryTrackingAssetManager manager) {
         //get latest images from syncQ
         Set<String> newQ = Sets.newHashSet(syncQ);
-        //get loaded images from assetmanager
-        Set<String> old = Sets.newHashSet(manager.getAssetNames());
-        //get all images not in newQ (old images to unload)
-        Set<String> toUnload = Sets.difference(old, newQ);
+        //get all images not in newQ (cardLists to unload)
+        Set<String> toUnload = Sets.difference(cardsLoaded, newQ);
         //unload from assetmanager to save RAM
         for (String asset : toUnload) {
-            manager.unload(asset);
+            if(manager.contains(asset)) {
+                manager.unload(asset);
+            }
+            cardsLoaded.remove(asset);
         }
         //clear cachedArt since this is dependant to the loaded texture
         CardRenderer.clearcardArtCache();
+        ((Forge)Gdx.app.getApplicationListener()).needsUpdate = true;
     }
     public static void preloadCache(Iterable<String> keys) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
@@ -409,10 +432,10 @@ public class ImageCache {
 
         return borderColor(t);
     }
-    public static Texture generateTexture(FileHandle fh, Texture t, boolean textureFilter) {
-        if (t == null || fh == null)
-            return t;
-        final Texture[] n = new Texture[1];
+    public static Texture generateTexture(FileHandle fh, Texture cardTexture, boolean textureFilter) {
+        if (cardTexture == null || fh == null)
+            return cardTexture;
+        final Texture[] placeholder = new Texture[1];
         FThreads.invokeInEdtNowOrLater(() -> {
             Pixmap pImage = new Pixmap(fh);
             int w = pImage.getWidth();
@@ -422,20 +445,20 @@ public class ImageCache {
             drawPixelstoMask(pImage, pMask);
             TextureData textureData = new PixmapTextureData(
                     pMask, //pixmap to use
-                    Format.RGBA8888,
+                    Format.RGBA4444,
                     textureFilter, //use mipmaps
                     false, true);
-            n[0] = new Texture(textureData);
+            placeholder[0] = new Texture(textureData);
             if (textureFilter)
-                n[0].setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+                placeholder[0].setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
             pImage.dispose();
             pMask.dispose();
         });
-        return n[0];
+        return placeholder[0];
     }
     public static Pixmap createRoundedRectangle(int width, int height, int cornerRadius, Color color) {
-        Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
-        Pixmap ret = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+        Pixmap pixmap = new Pixmap(width, height, Format.RGBA4444);
+        Pixmap ret = new Pixmap(width, height, Format.RGBA4444);
         pixmap.setColor(color);
         //round corners
         pixmap.fillCircle(cornerRadius, cornerRadius, cornerRadius);
@@ -486,11 +509,7 @@ public class ImageCache {
         //generated texture/pixmap?
         if (t.toString().contains("com.badlogic.gdx.graphics.Texture@"))
             return true;
-        for (String key : borderlessCardlistKey) {
-            if (t.toString().contains(key))
-                return true;
-        }
-        return false;
+        return borderlessCardlistKey.stream().anyMatch(key -> t.toString().contains(key));
     }
 
     public static String getpixelColor(Texture i) {

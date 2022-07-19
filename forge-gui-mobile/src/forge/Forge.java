@@ -55,9 +55,7 @@ import java.io.File;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Forge implements ApplicationListener {
     public static final String CURRENT_VERSION = "1.6.53.001";
@@ -81,6 +79,7 @@ public class Forge implements ApplicationListener {
     protected static TransitionScreen transitionScreen;
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
+    public boolean needsUpdate = false;
     public static boolean safeToClose = true;
     public static boolean magnify = false;
     public static boolean magnifyToggle = true;
@@ -104,15 +103,14 @@ public class Forge implements ApplicationListener {
     public static boolean enablePreloadExtendedArt = false;
     public static boolean isTabletDevice = false;
     public static String locale = "en-US";
-    public Assets cardAssets;
-    public Assets otherAssets;
+    public Assets assets;
     public static boolean hdbuttons = false;
     public static boolean hdstart = false;
     public static boolean isPortraitMode = false;
     public static boolean gameInProgress = false;
     public static boolean disposeTextures = false;
     public static boolean isMobileAdventureMode = false;
-    public static int cacheSize = 400;
+    public static int cacheSize = 300;
     public static int totalDeviceRAM = 0;
     public static int androidVersion = 0;
     public static boolean autoCache = false;
@@ -126,7 +124,6 @@ public class Forge implements ApplicationListener {
     public static boolean forcedEnglishonCJKMissing = false;
     public static boolean adventureLoaded = false;
     private static Localizer localizer;
-    static Map<Integer, Texture> misc = new HashMap<>();
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
         app = new Forge();
@@ -166,8 +163,7 @@ public class Forge implements ApplicationListener {
             // don't allow to read and process
             ForgeConstants.SPRITE_CARDBG_FILE = "";
         }
-        cardAssets = new Assets();
-        otherAssets = new Assets();
+        assets = new Assets();
         graphics = new Graphics();
         splashScreen = new SplashScreen();
         frameRate = new FrameRate();
@@ -212,9 +208,9 @@ public class Forge implements ApplicationListener {
         CJK_Font = prefs.getPref(FPref.UI_CJK_FONT);
 
         if (autoCache) {
-            //increase cacheSize for devices with RAM more than 5GB, default is 400. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
-            if (totalDeviceRAM > 5000) //devices with more than 10GB RAM will have 800 Cache size, 600 Cache size for morethan 5GB RAM
-                cacheSize = totalDeviceRAM > 10000 ? 800 : 600;
+            //increase cacheSize for devices with RAM more than 5GB, default is 300. Some phones have more than 10GB RAM (Mi 10, OnePlus 8, S20, etc..)
+            if (totalDeviceRAM > 5000) //devices with more than 10GB RAM will have 600 Cache size, 400 Cache size for morethan 5GB RAM
+                cacheSize = totalDeviceRAM > 10000 ? 600 : 400;
         }
         //init cache
         ImageCache.initCache(cacheSize);
@@ -344,22 +340,6 @@ public class Forge implements ApplicationListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-    public static Texture getTitleBG() {
-        if (misc.get(0) == null) {
-            misc.put(0, new Texture(GuiBase.isAndroid()
-                    ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png")
-                    : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png")));
-        }
-        return misc.get(0);
-    }
-    public static Texture getTransitionBG() {
-        if (misc.get(1) == null) {
-            misc.put(1, new Texture(GuiBase.isAndroid()
-                    ? Gdx.files.internal("fallback_skin").child("transition.png")
-                    : Gdx.files.classpath("fallback_skin").child("transition.png")));
-        }
-        return misc.get(1);
     }
     protected void afterDbLoaded() {
         destroyThis = false; //Allow back()
@@ -801,7 +781,7 @@ public class Forge implements ApplicationListener {
     @Override
     public void render() {
         if (showFPS)
-            frameRate.update();
+            frameRate.update(ImageCache.counter, Forge.getAssets().manager().getMemoryInMegabytes());
 
         try {
             ImageCache.allowSingleLoad();
@@ -837,8 +817,8 @@ public class Forge implements ApplicationListener {
                                 animationBatch.setColor(1, 1, 1, 1);
                                 animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.setColor(1, 1, 1, 1 - (1 / transitionTime) * animationTimeout);
-                                animationBatch.draw(getTransitionBG(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.draw(getTransitionBG(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.end();
                                 if (animationTimeout < 0) {
                                     currentScene.render();
@@ -857,8 +837,8 @@ public class Forge implements ApplicationListener {
                                 animationBatch.setColor(1, 1, 1, 1);
                                 animationBatch.draw(lastScreenTexture, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.setColor(1, 1, 1, (1 / transitionTime) * (animationTimeout + transitionTime));
-                                animationBatch.draw(getTransitionBG(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                                animationBatch.draw(getTransitionBG(), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                                animationBatch.draw(getAssets().fallback_skins().get(1), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                                 animationBatch.end();
                                 return;
                             }
@@ -895,6 +875,11 @@ public class Forge implements ApplicationListener {
                         graphics.endTransform();
                     }
                 }
+            }
+            //update here
+            if (needsUpdate) {
+                if (getAssets().manager().update())
+                    needsUpdate = false;
             }
             graphics.end();
         } catch (Exception ex) {
@@ -942,6 +927,15 @@ public class Forge implements ApplicationListener {
 
     @Override
     public void resume() {
+        try {
+            Texture.setAssetManager(getAssets().manager());
+            needsUpdate = true;
+        } catch (Exception e) {
+            //the application context must have been recreated from its last state.
+            //it could be triggered by the low memory on heap on android.
+            needsUpdate = false;
+            e.printStackTrace();
+        }
         if (MatchController.getHostedMatch() != null) {
             MatchController.getHostedMatch().resume();
         }
@@ -954,8 +948,7 @@ public class Forge implements ApplicationListener {
             currentScreen.onClose(null);
             currentScreen = null;
         }
-        cardAssets.dispose();
-        otherAssets.dispose();
+        assets.dispose();
         Dscreens.clear();
         graphics.dispose();
         SoundSystem.instance.dispose();
@@ -967,11 +960,8 @@ public class Forge implements ApplicationListener {
     /** Retrieve assets.
      * @param other if set to true returns otherAssets otherwise returns cardAssets
      */
-    public static Assets getAssets(boolean other) {
-        if (other)
-            return ((Forge)Gdx.app.getApplicationListener()).otherAssets;
-        else
-            return ((Forge)Gdx.app.getApplicationListener()).cardAssets;
+    public static Assets getAssets() {
+        return ((Forge)Gdx.app.getApplicationListener()).assets;
     }
     public static boolean switchScene(Scene newScene) {
         if (currentScene != null) {

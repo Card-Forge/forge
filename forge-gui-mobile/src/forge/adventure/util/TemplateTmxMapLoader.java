@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.SerializationException;
 import com.badlogic.gdx.utils.XmlReader;
+import forge.Forge;
 
 import java.io.File;
 
@@ -34,17 +35,15 @@ public class TemplateTmxMapLoader extends TmxMapLoader {
 
         this.root = xml.parse(tmxFile);
 
-        ObjectMap<String, Texture> textures = new ObjectMap<String, Texture>();
-
         final Array<FileHandle> textureFiles = getDependencyFileHandles(tmxFile);
         for (FileHandle textureFile : textureFiles) {
             Texture texture = new Texture(textureFile, parameter.generateMipMaps);
             texture.setFilter(parameter.textureMinFilter, parameter.textureMagFilter);
-            textures.put(textureFile.path(), texture);
+            Forge.getAssets().tmxMap().put(textureFile.path(), texture);
         }
 
-        TiledMap map = loadTiledMap(tmxFile, parameter, new ImageResolver.DirectImageResolver(textures));
-        map.setOwnedResources(textures.values().toArray());
+        TiledMap map = loadTiledMap(tmxFile, parameter, new ImageResolver.DirectImageResolver(Forge.getAssets().tmxMap()));
+        map.setOwnedResources(Forge.getAssets().tmxMap().values().toArray());
         return map;
     }
 

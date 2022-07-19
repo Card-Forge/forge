@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.Lists;
@@ -44,6 +45,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardCollectionView;
 import forge.game.card.CardDamageMap;
 import forge.game.card.CardState;
 import forge.game.card.CardTraitChanges;
@@ -175,9 +177,17 @@ public class ReplacementHandler {
                 final Card c = preList.get(crd);
 
                 for (final ReplacementEffect replacementEffect : c.getReplacementEffects()) {
-                    // Use "CheckLKIZone" parameter to test for effects that care abut where the card was last (e.g. Kalitas, Traitor of Ghet
+                    Zone cardZone;
+                    // Use "CheckLKIZone" parameter to test for effects that care about where the card was last (e.g. Kalitas, Traitor of Ghet
                     // getting hit by mass removal should still produce tokens).
-                    Zone cardZone = "True".equals(replacementEffect.getParam("CheckSelfLKIZone")) ? game.getChangeZoneLKIInfo(c).getLastKnownZone() : game.getZoneOf(c);
+                    if ("True".equals(replacementEffect.getParam("CheckSelfLKIZone"))) {
+                        cardZone = game.getChangeZoneLKIInfo(c).getLastKnownZone();
+                        if (cardZone.is(ZoneType.Battlefield) && runParams.containsKey(AbilityKey.LastStateBattlefield) && runParams.get(AbilityKey.LastStateBattlefield) != null && !((CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield)).contains(crd)) {
+                            continue;
+                        }
+                    } else {
+                        cardZone = game.getZoneOf(c);
+                    }
 
                     // Replacement effects that are tied to keywords (e.g. damage prevention effects - if the keyword is removed, the replacement
                     // effect should be inactive)
@@ -351,8 +361,8 @@ public class ReplacementHandler {
                 tailend = tailend.getSubAbility();
             } while(tailend != null);
 
-            effectSA.setLastStateBattlefield(game.getLastStateBattlefield());
-            effectSA.setLastStateGraveyard(game.getLastStateGraveyard());
+            effectSA.setLastStateBattlefield((CardCollectionView) ObjectUtils.firstNonNull(runParams.get(AbilityKey.LastStateBattlefield), game.getLastStateBattlefield()));
+            effectSA.setLastStateGraveyard((CardCollectionView) ObjectUtils.firstNonNull(runParams.get(AbilityKey.LastStateGraveyard), game.getLastStateGraveyard()));
             if (replacementEffect.isIntrinsic()) {
                 effectSA.setIntrinsic(true);
                 effectSA.changeText();

@@ -169,7 +169,7 @@ public class SplashScreen extends FContainer {
     }
 
     void drawTransition(Graphics g, boolean openAdventure, float percentage) {
-        TextureRegion tr = new TextureRegion(Forge.getTitleBG());
+        TextureRegion tr = new TextureRegion(Forge.getAssets().fallback_skins().get(0));
         if (!Forge.isLandscapeMode() && tr != null) {
             float ar = 1.78f;
             int w = (int) (tr.getRegionHeight() / ar);
@@ -307,7 +307,7 @@ public class SplashScreen extends FContainer {
                 + "Forge is open source software, released under the GNU General Public License.";
         if (Forge.forcedEnglishonCJKMissing && !clear) {
             clear = true;
-            FSkinFont.clear();
+            FSkinFont.preloadAll("");
             disclaimerFont = FSkinFont.get(9);
         }
         g.drawText(disclaimer, disclaimerFont, FProgressBar.SEL_FORE_COLOR,

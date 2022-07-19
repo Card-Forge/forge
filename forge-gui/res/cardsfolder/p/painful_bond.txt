@@ -1,11 +1,11 @@
 Name:Painful Bond
 ManaCost:1 B
 Types:Instant
-A:SP$ Draw | Cost$ 1 B | NumCards$ 2 | SubAbility$ DBEffect | SpellDescription$ Draw two cards, then cards in your hand with mana value 3 or greater perpetually gain "When you cast this spell, you lose 1 life."
-SVar:DBEffect:DB$ Effect | RememberObjects$ ValidHand Card.cmcLE3+YouOwn | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Painful Bond's Perpetual Effect | StackDescription$ Then cards in {p:You}'s hand with mana value 3 or less perpetually gain "When you cast this spell, you lose 1 life."
-SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddTrigger$ CastSpellLoseLife | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Cards in your hand with mana value 3 or less perpetually gain "When you cast this spell, you lose 1 life."
+A:SP$ Draw | Cost$ 1 B | NumCards$ 2 | SubAbility$ DBEffect | SpellDescription$ Draw two cards, then nonland cards in your hand with mana value 3 or less perpetually gain "When you cast this spell, you lose 1 life."
+SVar:DBEffect:DB$ Effect | RememberObjects$ ValidHand Card.nonLand+cmcLE3+YouOwn | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Painful Bond's Perpetual Effect | StackDescription$ Then nonland cards in {p:You}'s hand with mana value 3 or less perpetually gain "When you cast this spell, you lose 1 life."
+SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddTrigger$ CastSpellLoseLife | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Nonland cards in your hand with mana value 3 or less perpetually gain "When you cast this spell, you lose 1 life."
 SVar:CastSpellLoseLife:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When you cast this spell, you lose 1 life.
 SVar:TrigDrain:DB$ LoseLife | LifeAmount$ 1
 SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
 SVar:DBUpdate:DB$ UpdateRemember
-Oracle:Draw two cards, then cards in your hand with mana value 3 or less perpetually gain "When you cast this spell, you lose 1 life."
+Oracle:Draw two cards, then nonland cards in your hand with mana value 3 or less perpetually gain "When you cast this spell, you lose 1 life."

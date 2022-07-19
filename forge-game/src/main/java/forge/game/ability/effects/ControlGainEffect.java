@@ -124,11 +124,12 @@ public class ControlGainEffect extends SpellAbilityEffect {
                     sa.getParam("Chooser"), sa).get(0) : activator;
             CardCollectionView choices = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
                     sa.getParam("Choices"), activator, source, sa);
-            if (!choices.isEmpty()) {
-                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") :
-                    Localizer.getInstance().getMessage("lblChooseaCard") +" ";
-                tgtCards = chooser.getController().chooseCardsForEffect(choices, sa, title, 1, 1, false, null);
+            if (choices.isEmpty()) {
+                return;
             }
+            String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") :
+                Localizer.getInstance().getMessage("lblChooseaCard") +" ";
+            tgtCards = chooser.getController().chooseCardsForEffect(choices, sa, title, 1, 1, false, null);
         } else {
             tgtCards = getDefinedCards(sa);
         }

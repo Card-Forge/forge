@@ -177,7 +177,17 @@ public class SaveLoadScene extends UIScene {
             updateFiles();
             //ensure the dialog is hidden before switching
             dialog.getColor().a = 0f;
-            Forge.switchScene(SceneType.GameScene.instance);
+
+            Scene restoreScene = Forge.switchToLast();
+            if (restoreScene != null) {
+                restoreScene = Forge.switchToLast();
+            }
+
+            if (restoreScene == null) {
+                restoreScene = SceneType.GameScene.instance;
+            }
+
+            Forge.switchScene(restoreScene);
         }
     }
 

@@ -64,8 +64,7 @@ public class TriggerScry extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player);
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.ScryNum);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player, AbilityKey.ScryNum);
     }
 
     @Override

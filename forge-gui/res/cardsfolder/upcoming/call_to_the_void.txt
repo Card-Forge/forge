@@ -1,0 +1,6 @@
+Name:Call to the Void
+ManaCost:4 B
+Types:Sorcery
+A:SP$ ChooseCard | Defined$ Player | Choices$ Creature | SecretlyChoose$ True | Amount$ 1 | ControlAndNot$ True | ChoiceTitle$ Secretly choose a creature | Reveal$ True | RevealTitle$ OVERRIDE Chosen creatures. They will be destroyed. | SubAbility$ DBDestroyChosen | Mandatory$ True
+SVar:DBDestroyChosen:DB$ DestroyAll | ValidCards$ Creature.ChosenCard
+Oracle:Each player secretly chooses a creature they control and a creature they don't control. Then those choices are revealed. Destroy each creature chosen this way.

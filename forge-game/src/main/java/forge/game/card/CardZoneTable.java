@@ -56,7 +56,12 @@ public class CardZoneTable extends ForwardingTable<ZoneType, ZoneType, CardColle
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Cards, new CardZoneTable(this));
             runParams.put(AbilityKey.Cause, cause);
-            game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, AbilityKey.newMap(runParams), false);
+            game.getTriggerHandler().runTrigger(TriggerType.ChangesZoneAll, runParams, false);
+        }
+        final CardZoneTable untilTable = game.getUntilHostLeavesPlayTriggerList();
+        if (this != untilTable) {
+            untilTable.triggerChangesZoneAll(game, null);
+            untilTable.clear();
         }
     }
 

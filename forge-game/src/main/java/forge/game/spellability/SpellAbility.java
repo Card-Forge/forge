@@ -138,7 +138,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     /** The pay costs. */
     private Cost payCosts;
-    private SpellAbilityRestriction restrictions = new SpellAbilityRestriction();
+    private SpellAbilityRestriction restrictions;
     private SpellAbilityCondition conditions = new SpellAbilityCondition();
     private AbilitySub subAbility;
 
@@ -179,8 +179,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     private StaticAbility mayPlay;
 
-    private CardCollection lastStateBattlefield = null;
-    private CardCollection lastStateGraveyard = null;
+    private CardCollection lastStateBattlefield;
+    private CardCollection lastStateGraveyard;
 
     private CardCollection rollbackEffects = new CardCollection();
 
@@ -214,6 +214,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             view0 = new SpellAbilityView(this);
         }
         view = view0;
+        if (!(this instanceof AbilitySub)) {
+            restrictions = new SpellAbilityRestriction();
+        }
     }
 
     @Override

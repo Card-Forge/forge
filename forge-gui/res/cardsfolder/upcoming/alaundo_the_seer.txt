@@ -1,0 +1,15 @@
+Name:Alaundo the Seer
+ManaCost:2 G U
+Types:Legendary Creature Human Shaman
+PT:3/5
+A:AB$ Draw | Cost$ T | SubAbility$ DBExile | StackDescription$ SpellDescription | SpellDescription$ Draw a card, then exile a card from your hand and put a number of time counters on it equal to its mana value. It gains "When the last time counter is removed from this card, if it's exiled, you may cast it without paying its mana cost. If you cast a creature spell this way, it gains haste until end of turn." Then remove a time counter from each other card you own in exile.
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | TgtPrompt$ Select a card to exile with a number of time counters equal to its mana value | WithCountersType$ TIME | WithCountersAmount$ X | SubAbility$ DBAddTrigger | RememberChanged$ True | Mandatory$ True
+SVar:X:Remembered$CardManaCost
+SVar:DBAddTrigger:DB$ Animate | Defined$ Remembered | Triggers$ TWhenLastTimeCounterRemoved | Duration$ Permanent | SubAbility$ DBRemoveTimeCounterOtherCardsInExile
+SVar:TWhenLastTimeCounterRemoved:Mode$ CounterRemoved | ValidCard$ Card.Self+counters_EQ0_TIME | TriggerZones$ Exile | CounterType$ TIME | Execute$ DBCastWithoutPayingManaCost | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, you may cast it without paying its mana cost. If you cast a creature spell this way, it gains haste until end of turn.
+SVar:DBCastWithoutPayingManaCost:DB$ Play | Valid$ Card.Self | ValidSA$ Spell | ValidZone$ Exile | Destination$ Battlefield | WithoutManaCost$ True | Optional$ True | SubAbility$ DBGiveHaste
+SVar:DBGiveHaste:DB$ Pump | Defined$ Self | KW$ Haste | ConditionDefined$ Self | ConditionPresent$ Card.Creature | PumpZone$ Stack
+SVar:DBRemoveTimeCounterOtherCardsInExile:DB$ RemoveCounterAll | ValidCards$ Card.YouOwn+IsNotRemembered | ValidZone$ Exile | CounterType$ TIME | CounterNum$ 1 | SubAbility$ DBCleanUp
+SVar:DBCleanUp:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Keyword$Suspend
+Oracle:{T}:Draw a card, then exile a card from your hand and put a number of time counters on it equal to its mana value. It gains "When the last time counter is removed from this card, if it's exiled, you may cast it without paying its mana cost. If you cast a creature spell this way, it gains haste until end of turn." Then remove a time counter from each other card you own in exile.

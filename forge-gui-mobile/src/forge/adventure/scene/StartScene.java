@@ -83,8 +83,10 @@ public class StartScene extends UIScene {
     @Override
     public void enter() {
         boolean hasSaveButton = WorldSave.getCurrentSave().getWorld().getData() != null;
-        if (hasSaveButton)
-            hasSaveButton = !((TileMapScene) SceneType.TileMapScene.instance).currentMap().isInMap();
+        if (hasSaveButton) {
+            TileMapScene scene = (TileMapScene) SceneType.TileMapScene.instance;
+            hasSaveButton = !scene.currentMap().isInMap() || scene.inTown();
+        }
         saveButton.setVisible(hasSaveButton);
 
         boolean hasResumeButton = WorldSave.getCurrentSave().getWorld().getData() != null;

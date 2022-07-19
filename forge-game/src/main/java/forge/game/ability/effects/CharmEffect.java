@@ -156,6 +156,11 @@ public class CharmEffect extends SpellAbilityEffect {
     }
 
     public static boolean makeChoices(SpellAbility sa) {
+        // CR 700.2g
+        if (sa.isCopied()) {
+            return true;
+        }
+
         //this resets all previous choices
         sa.setSubAbility(null);
 

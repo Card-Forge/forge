@@ -45,6 +45,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
 import forge.util.Expressions;
+import forge.util.FileSection;
 import forge.util.Lang;
 import forge.util.TextUtil;
 
@@ -89,41 +90,12 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
      * @return a {@link java.util.HashMap} object.
      */
     private static Map<String, String> parseParams(final String abString, final Card hostCard) {
-        final Map<String, String> mapParameters = Maps.newHashMap();
-
         if (!(abString.length() > 0)) {
             throw new RuntimeException("StaticEffectFactory : getAbility -- abString too short in "
                     + hostCard.getName() + ": [" + abString + "]");
         }
 
-        final String[] a = abString.split("\\|");
-
-        for (int aCnt = 0; aCnt < a.length; aCnt++) {
-            a[aCnt] = a[aCnt].trim();
-        }
-
-        if (!(a.length > 0)) {
-            throw new RuntimeException("StaticEffectFactory : getAbility -- a[] too short in " + hostCard.getName());
-        }
-
-        for (final String element : a) {
-            final String[] aa = element.split("\\$");
-
-            for (int aaCnt = 0; aaCnt < aa.length; aaCnt++) {
-                aa[aaCnt] = aa[aaCnt].trim();
-            }
-
-            if (aa.length != 2) {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("StaticEffectFactory Parsing Error: Split length of ");
-                sb.append(element).append(" in ").append(hostCard.getName()).append(" is not 2.");
-                throw new RuntimeException(sb.toString());
-            }
-
-            mapParameters.put(aa[0], aa[1]);
-        }
-
-        return mapParameters;
+        return FileSection.parseToMap(abString, FileSection.DOLLAR_SIGN_KV_SEPARATOR);
     }
 
     /**

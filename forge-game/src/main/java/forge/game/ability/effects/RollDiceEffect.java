@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -143,6 +144,9 @@ public class RollDiceEffect extends SpellAbilityEffect {
                 }
                 sa.setSVar(sa.getParam("OtherSVar"), Integer.toString(other));
             }
+        }
+        if (sa.hasParam("UseHighestRoll")) {
+            total = Collections.max(rolls);
         }
 
         Map<String, SpellAbility> diceAbilities = sa.getAdditionalAbilities();

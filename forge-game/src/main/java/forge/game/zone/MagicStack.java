@@ -41,7 +41,6 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
@@ -72,6 +71,7 @@ import forge.util.TextUtil;
  */
 public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbilityStackInstance> {
     private final List<SpellAbility> simultaneousStackEntryList = Lists.newArrayList();
+    private final List<SpellAbility> activePlayerSAs = Lists.newArrayList();
 
     // They don't provide a LIFO queue, so had to use a deque
     private final Deque<SpellAbilityStackInstance> stack = new LinkedBlockingDeque<>();
@@ -308,7 +308,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         runParams.put(AbilityKey.Cost, sp.getPayCosts());
         runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
         runParams.put(AbilityKey.CastSA, si.getSpellAbility(true));
-        runParams.put(AbilityKey.CastSACMC, si.getSpellAbility(true).getHostCard().getCMC());
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
         runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
 
@@ -825,38 +824,26 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return false;
         }
 
-        final List<SpellAbility> activePlayerSAs = Lists.newArrayList();
-        final List<SpellAbility> failedSAs = Lists.newArrayList();
+        activePlayerSAs.clear();
         for (int i = 0; i < simultaneousStackEntryList.size(); i++) {
             SpellAbility sa = simultaneousStackEntryList.get(i);
             Player activator = sa.getActivatingPlayer();
 
-            if (sa.getApi() == ApiType.Charm) {
-                if (!CharmEffect.makeChoices(sa)) {
-                    // 603.3c If no mode is chosen, the ability is removed from the stack.
-                    failedSAs.add(sa);
-                    continue;
-                }
-            }
-
             if (activator == null) {
-                if (sa.getHostCard().getController().equals(activePlayer)) {
-                    activePlayerSAs.add(sa);
-                }
-            } else {
-                if (activator.equals(activePlayer)) {
-                    activePlayerSAs.add(sa);
-                }
+                activator = sa.getHostCard().getController();
+            }
+            if (activator.equals(activePlayer)) {
+                activePlayerSAs.add(sa);
             }
         }
         simultaneousStackEntryList.removeAll(activePlayerSAs);
-        simultaneousStackEntryList.removeAll(failedSAs);
 
         if (activePlayerSAs.isEmpty()) {
             return false;
         }
 
         activePlayer.getController().orderAndPlaySimultaneousSa(activePlayerSAs);
+        activePlayerSAs.clear();
         return true;
     }
 
@@ -874,6 +861,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         for (final SpellAbility sa : simultaneousStackEntryList) {
+            if (sa.getSourceTrigger() == triggerID) {
+                return true;
+            }
+        }
+
+        for (final SpellAbility sa : activePlayerSAs) {
             if (sa.getSourceTrigger() == triggerID) {
                 return true;
             }

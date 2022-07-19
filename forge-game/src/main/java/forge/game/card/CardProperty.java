@@ -607,7 +607,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("Cloned")) {
-            if ((card.getCloneOrigin() == null) || !card.getCloneOrigin().equals(source)) {
+            if (card.getCloneOrigin() == null || !card.getCloneOrigin().equals(source)) {
                 return false;
             }
         } else if (property.startsWith("SharesCMCWith")) {
@@ -1180,6 +1180,10 @@ public class CardProperty {
             if (card.getAssignedDamage(false, null) == 0) {
                 return false;
             }
+        } else if (property.startsWith("wasDealtExcessDamageThisTurn")) {
+            if (!card.hasBeenDealtExcessDamageThisTurn()) {
+                return false;
+            }
         } else if (property.startsWith("wasDealtDamageByThisGame")) {
             int idx = source.getDamageHistory().getThisGameDamaged().indexOf(card);
             if (idx == -1) {
@@ -1475,6 +1479,14 @@ public class CardProperty {
             if (!card.getManaCost().getShortString().equals(property.substring(8))) {
                 return false;
             }
+        } else if (property.equals("HasCounters")) {
+            if (!card.hasCounters()) {
+                return false;
+            }
+        } else if (property.equals("NoCounters")) {
+            if (card.hasCounters()) {
+                return false;
+            }
         }
 
         // syntax example: countersGE9 P1P1 or countersLT12TIME (greater number
@@ -1691,7 +1703,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("hadToAttackThisCombat")) {
-            AttackRequirement e = game.getCombat().getAttackConstraints().getRequirements().get(card);
+            AttackRequirement e = combat.getAttackConstraints().getRequirements().get(card);
             if (e == null || !e.hasCreatureRequirement() || !e.getAttacker().equalsWithTimestamp(card)) {
                 return false;
             }
@@ -1805,14 +1817,6 @@ public class CardProperty {
             }
         } else if (property.equals("NoAbilities")) {
             if (!card.hasNoAbilities()) {
-                return false;
-            }
-        } else if (property.equals("HasCounters")) {
-            if (!card.hasCounters()) {
-                return false;
-            }
-        } else if (property.equals("NoCounters")) {
-            if (card.hasCounters()) {
                 return false;
             }
         } else if (property.equals("castKeyword")) {
@@ -1937,8 +1941,16 @@ public class CardProperty {
         } else if (property.startsWith("Triggered")) {
             if (spellAbility instanceof SpellAbility) {
                 final String key = property.substring(9);
-                CardCollection cc = (CardCollection) ((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key));
-                if (cc == null || !cc.contains(card)) {
+                Object o = ((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key));
+                boolean found = false;
+                if (o != null) {
+                    if (o instanceof CardCollection) {
+                        found = ((CardCollection) o).contains(card);
+                    } else {
+                        found = card.equals(o);
+                    }
+                }
+                if (!found) {
                     return false;
                 }
             } else {
