@@ -29,8 +29,6 @@ import forge.model.FModel;
 import forge.screens.LoadingOverlay;
 import forge.screens.TabPageScreen;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextArea;
 import forge.toolbox.GuiChoose;
@@ -49,36 +47,25 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
         inventoryPage = ((InventoryPage)tabPages[1]);
 
         btnBuySellMultiple.setVisible(false); //hide unless in multi-select mode
-        btnBuySellMultiple.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                final SpellShopManager itemManager = ((SpellShopBasePage)getSelectedPage()).itemManager;
-                final ItemPool<InventoryItem> items = itemManager.getSelectedItemPool();
+        btnBuySellMultiple.setCommand(event -> {
+            final SpellShopManager itemManager = ((SpellShopBasePage)getSelectedPage()).itemManager;
+            final ItemPool<InventoryItem> items = itemManager.getSelectedItemPool();
 
-                if (items.isEmpty()) {
-                    //toggle off multi-select mode if no items selected
-                    itemManager.toggleMultiSelectMode(-1);
-                    return;
-                }
-
-                FThreads.invokeInBackgroundThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (getSelectedPage() == spellShopPage) {
-                            spellShopPage.activateItems(items);
-                        }
-                        else {
-                            inventoryPage.activateItems(items);
-                        }
-                        FThreads.invokeInEdtLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                updateCreditsLabel();
-                            }
-                        });
-                    }
-                });
+            if (items.isEmpty()) {
+                //toggle off multi-select mode if no items selected
+                itemManager.toggleMultiSelectMode(-1);
+                return;
             }
+
+            FThreads.invokeInBackgroundThread(() -> {
+                if (getSelectedPage() == spellShopPage) {
+                    spellShopPage.activateItems(items);
+                }
+                else {
+                    inventoryPage.activateItems(items);
+                }
+                FThreads.invokeInEdtLater(() -> updateCreditsLabel());
+            });
         });
     }
 
@@ -190,28 +177,17 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                     parentScreen.tabHeader.setVisible(!multiSelectMode);
                 }
             });
-            itemManager.setItemActivateHandler(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                }
+            itemManager.setItemActivateHandler(event -> {
             });
             itemManager.setContextMenuBuilder(new ContextMenuBuilder<InventoryItem>() {
                 @Override
                 public void buildMenu(final FDropDownMenu menu, final InventoryItem item) {
-                    menu.addItem(new FMenuItem(getVerb(), getVerbIcon(), new FEventHandler() {
-                        @Override
-                        public void handleEvent(FEvent e) {
-                            activateSelectedItem();
-                        }
-                    }));
+                    menu.addItem(new FMenuItem(getVerb(), getVerbIcon(), event -> activateSelectedItem()));
                 }
             });
-            itemManager.setSelectionChangedHandler(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    if (itemManager.getMultiSelectMode()) {
-                        parentScreen.updateBuySellButtonCaption();
-                    }
+            itemManager.setSelectionChangedHandler(event -> {
+                if (itemManager.getMultiSelectMode()) {
+                    parentScreen.updateBuySellButtonCaption();
                 }
             });
             add(lblCredits);
@@ -235,19 +211,11 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
                     if (result == null || result <= 0) { return; }
 
                     //invoke in background thread so other dialogs can be shown properly
-                    FThreads.invokeInBackgroundThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ItemPool<InventoryItem> items = new ItemPool<>(InventoryItem.class);
-                            items.add(item, result);
-                            activateItems(items);
-                            FThreads.invokeInEdtLater(new Runnable() {
-                                @Override
-                                public void run() {
-                                    parentScreen.updateCreditsLabel();
-                                }
-                            });
-                        }
+                    FThreads.invokeInBackgroundThread(() -> {
+                        ItemPool<InventoryItem> items = new ItemPool<>(InventoryItem.class);
+                        items.add(item, result);
+                        activateItems(items);
+                        FThreads.invokeInEdtLater(() -> parentScreen.updateCreditsLabel());
                     });
                 }
             };
@@ -290,22 +258,14 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
 
         @Override
         protected void refresh() {
-            FThreads.invokeInEdtLater(new Runnable() {
-                @Override
-                public void run() {
-                    LoadingOverlay.show(Forge.getLocalizer().getInstance().getMessage("lblLoading"), new Runnable() {
-                        @Override
-                        public void run() {
-                            Map<ColumnDef, ItemColumn> colOverrides = new HashMap<>();
-                            ItemColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverrides, ColumnDef.PRICE, QuestSpellShop.fnPriceCompare, QuestSpellShop.fnPriceGet);
-                            ItemColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverrides, ColumnDef.OWNED, FModel.getQuest().getCards().getFnOwnedCompare(), FModel.getQuest().getCards().getFnOwnedGet());
-                            itemManager.setup(ItemManagerConfig.SPELL_SHOP, colOverrides);
+            FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getInstance().getMessage("lblLoading"), true, () -> {
+                Map<ColumnDef, ItemColumn> colOverrides = new HashMap<>();
+                ItemColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverrides, ColumnDef.PRICE, QuestSpellShop.fnPriceCompare, QuestSpellShop.fnPriceGet);
+                ItemColumn.addColOverride(ItemManagerConfig.SPELL_SHOP, colOverrides, ColumnDef.OWNED, FModel.getQuest().getCards().getFnOwnedCompare(), FModel.getQuest().getCards().getFnOwnedGet());
+                itemManager.setup(ItemManagerConfig.SPELL_SHOP, colOverrides);
 
-                            itemManager.setPool(FModel.getQuest().getCards().getShopList());
-                        }
-                    });
-                }
-            });
+                itemManager.setPool(FModel.getQuest().getCards().getShopList());
+            }));
         }
 
         @Override
@@ -337,47 +297,25 @@ public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
     private static class InventoryPage extends SpellShopBasePage {
         protected FLabel lblSellExtras = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblSellAllExtras"))
                 .icon(Forge.hdbuttons ? FSkinImage.HDMINUS : FSkinImage.MINUS).iconScaleFactor(1f).align(Align.right).font(FSkinFont.get(16))
-                .command(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                //invoke in background thread so other dialogs can be shown properly
-                FThreads.invokeInBackgroundThread(new Runnable() {
-                    @Override
-                    public void run() {
+                .command(event -> {
+                    //invoke in background thread so other dialogs can be shown properly
+                    FThreads.invokeInBackgroundThread(() -> {
                         QuestSpellShop.sellExtras(parentScreen.spellShopPage.itemManager, itemManager);
-                        FThreads.invokeInEdtLater(new Runnable() {
-                            @Override
-                            public void run() {
-                                parentScreen.updateCreditsLabel();
-                            }
-                        });
-                    }
-                });
-            }
-        }).build());
+                        FThreads.invokeInEdtLater(() -> parentScreen.updateCreditsLabel());
+                    });
+                }).build());
 
         protected FLabel lblSelectAll = add(new FLabel.Builder().text(Forge.getLocalizer().getMessage("lblSelectAllCards"))
                 .icon(Forge.hdbuttons ? FSkinImage.HDSTAR_FILLED : FSkinImage.STAR_FILLED).iconScaleFactor(1f).align(Align.right).font(FSkinFont.get(16))
-                .command(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        //invoke in background thread so other dialogs can be shown properly
-                        FThreads.invokeInBackgroundThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (!itemManager.getMultiSelectMode()) {
-                                    itemManager.toggleMultiSelectMode(0);
-                                }
-                                itemManager.selectAll();
-                                FThreads.invokeInEdtLater(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        parentScreen.updateCreditsLabel();
-                                    }
-                                });
-                            }
-                        });
-                    }
+                .command(event -> {
+                    //invoke in background thread so other dialogs can be shown properly
+                    FThreads.invokeInBackgroundThread(() -> {
+                        if (!itemManager.getMultiSelectMode()) {
+                            itemManager.toggleMultiSelectMode(0);
+                        }
+                        itemManager.selectAll();
+                        FThreads.invokeInEdtLater(() -> parentScreen.updateCreditsLabel());
+                    });
                 }).build());
 
         private InventoryPage() {

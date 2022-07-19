@@ -346,15 +346,6 @@ public class TriggerHandler {
         waitingTriggers.clear();
     }
 
-    public void resetTurnTriggerState() {
-        for (final Trigger t : activeTriggers) {
-            t.resetTurnState();
-        }
-        for (final Trigger t : delayedTriggers) {
-            t.resetTurnState();
-        }
-    }
-
     private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerWaiting wt, final List<Trigger> delayedTriggersWorkingCopy) {
         final TriggerType mode = wt.getMode();
         final Map<AbilityKey, Object> runParams = wt.getParams();
@@ -568,22 +559,9 @@ public class TriggerHandler {
             sa.setActivatingPlayer(p);
         }
 
-        if (regtrig.hasParam("RememberController")) {
-            host.addRemembered(sa.getActivatingPlayer());
-        }
-
         if (regtrig.hasParam("RememberTriggeringCard")) {
             Card triggeredCard = ((Card) sa.getTriggeringObject(AbilityKey.Card));
             host.addRemembered(triggeredCard);
-        }
-
-        if (regtrig.hasParam("RememberKey")) {
-            host.addRemembered(runParams.get(AbilityKey.fromString(regtrig.getParam("RememberKey"))));
-        }
-
-        if (regtrig.hasParam("RememberAmount")) {
-            Integer amount = (Integer) sa.getTriggeringObject(AbilityKey.fromString(regtrig.getParam("RememberAmount")));
-            host.addRemembered(amount);
         }
 
         sa.setStackDescription(sa.toString());

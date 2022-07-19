@@ -53,6 +53,7 @@ import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
+import forge.game.card.CardZoneTable;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.event.Event;
@@ -120,6 +121,8 @@ public class Game {
     private CardCollection lastStateBattlefield = new CardCollection();
     private CardCollection lastStateGraveyard = new CardCollection();
 
+    private CardZoneTable untilHostLeavesPlayTriggerList = new CardZoneTable();
+
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
 
     private FCollection<CardDamageHistory> globalDamageHistory = new FCollection<>();
@@ -185,6 +188,10 @@ public class Game {
     }
     public void setHasInitiative(final Player p ) {
         initiative = p;
+    }
+
+    public CardZoneTable getUntilHostLeavesPlayTriggerList() {
+        return untilHostLeavesPlayTriggerList;
     }
 
     public CardCollectionView getLastStateBattlefield() {

@@ -1,0 +1,11 @@
+Name:A-Gnarlid Colony
+ManaCost:1 G
+Types:Creature Beast
+PT:2/2
+K:Kicker:2 G
+K:etbCounter:P1P1:4:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with four +1/+1 counters on it.
+SVar:WasKicked:Count$Kicked.1.0
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Trample | Description$ Each creature you control with a +1/+1 counter on it has trample.
+DeckHints:Ability$Counters
+DeckHas:Ability$Counters
+Oracle:Kicker {2}{G}\nIf Gnarlid Colony was kicked, it enters the battlefield with four +1/+1 counters on it.\nEach creature you control with a +1/+1 counter on it has trample.

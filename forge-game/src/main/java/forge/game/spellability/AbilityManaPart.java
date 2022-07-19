@@ -179,7 +179,7 @@ public class AbilityManaPart implements java.io.Serializable {
         if (source.isLand() && root.isManaAbility() && root.getPayCosts() != null && root.getPayCosts().hasTapCost()) {
             player.setTappedLandForManaThisTurn(true);
         }
-    } // end produceMana(String)
+    }
 
     /**
      * <p>
@@ -348,7 +348,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
             // "can't" zone restriction – shouldn't be mixed with other restrictions
             if (restriction.startsWith("CantCastSpellFrom")) {
-                if (!sa.isSpell()) { //
+                if (!sa.isSpell()) {
                     return true;
                 }
                 final ZoneType badZone = ZoneType.smartValueOf(restriction.substring(17));

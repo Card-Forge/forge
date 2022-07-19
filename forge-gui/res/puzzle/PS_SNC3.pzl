@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Streets of New Capenna #03
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/05/200.-SNC3-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Mythic
+Description:Win this turn. Can you deal 200 damage in this 200th Possibility Storm puzzle? Assume graveyards start empty. Remember that your solution must satisfy all blocking possibilities. Good luck!
+[state]
+humanlife=20
+ailife=200
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Exponential Growth;Wayward Guide-Beast;Ognis, the Dragon's Lash;Stimulus Package;Exhibition Magician;Prizefight
+humanbattlefield=Ill-Tempered Loner|Transformed;Pyre-Sledge Arsonist;Jaxis, the Troublemaker;Xorn;Treasure Vault;Treasure Vault;Ziatora's Proving Ground;Ziatora's Proving Ground;Ziatora's Proving Ground;Rockfall Vale;Rockfall Vale;Rockfall Vale
+aibattlefield=Wingshield Agent;Pugnacious Pugilist
+aiprecast=Exhibition Magician:DBToken;Exhibition Magician:DBToken;Exhibition Magician:DBToken;Exhibition Magician:DBToken
+removesummoningsickness=true

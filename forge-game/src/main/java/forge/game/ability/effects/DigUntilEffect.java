@@ -67,7 +67,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
             if (revealed.equals(ZoneType.Exile)) {
                 sb.append("and exile all other cards revealed this way.");
             }
-        } else {
+        } else if (revealed != null) {
             if (revealed.equals(ZoneType.Hand)) {
                 sb.append("all cards revealed this way into their hand");
             }
@@ -209,7 +209,9 @@ public class DigUntilEffect extends SpellAbilityEffect {
                     Collections.shuffle(revealed, MyRandom.getRandom());
                 }
 
-                if (sa.hasParam("NoneFoundDestination") && found.size() < untilAmount) {
+                if (sa.hasParam("NoMoveRevealed")) {
+                    //don't do anything
+                } else if (sa.hasParam("NoneFoundDestination") && found.size() < untilAmount) {
                     // Allow ordering the revealed cards
                     if (noneFoundDest.isKnown() && revealed.size() >= 2) {
                         revealed = (CardCollection)p.getController().orderMoveToZoneList(revealed, noneFoundDest, sa);

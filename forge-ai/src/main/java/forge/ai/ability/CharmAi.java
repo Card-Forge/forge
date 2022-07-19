@@ -89,7 +89,6 @@ public class CharmAi extends SpellAbilityAi {
         // First pass using standard canPlayAi() for good choices
         for (AbilitySub sub : choices) {
             sub.setActivatingPlayer(ai);
-            sub.getRestrictions().setZone(sub.getParent().getRestrictions().getZone());
             if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                 chosenList.add(sub);
                 if (chosenList.size() == num) {
@@ -101,8 +100,6 @@ public class CharmAi extends SpellAbilityAi {
             // Second pass using doTrigger(false) to fulfill minimum choice
             choices.removeAll(chosenList);
             for (AbilitySub sub : choices) {
-                sub.setActivatingPlayer(ai);
-                sub.getRestrictions().setZone(sub.getParent().getRestrictions().getZone());
                 if (aic.doTrigger(sub, false)) {
                     chosenList.add(sub);
                     if (chosenList.size() == min) {
@@ -114,8 +111,6 @@ public class CharmAi extends SpellAbilityAi {
             if (chosenList.size() < min) {
                 choices.removeAll(chosenList);
                 for (AbilitySub sub : choices) {
-                    sub.setActivatingPlayer(ai);
-                    sub.getRestrictions().setZone(sub.getParent().getRestrictions().getZone());
                     if (aic.doTrigger(sub, true)) {
                         chosenList.add(sub);
                         if (chosenList.size() == min) {
@@ -231,7 +226,6 @@ public class CharmAi extends SpellAbilityAi {
             } else {
                 // Standard canPlayAi()
                 sub.setActivatingPlayer(ai);
-                sub.getRestrictions().setZone(sub.getParent().getRestrictions().getZone());
                 if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                     chosenList.add(sub);
                     if (chosenList.size() == min) {
@@ -253,15 +247,6 @@ public class CharmAi extends SpellAbilityAi {
     @Override
     public Player chooseSinglePlayer(Player ai, SpellAbility sa, Iterable<Player> opponents, Map<String, Object> params) {
         return Aggregates.random(opponents);
-    }
-
-    @Override
-    protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        // already done by chooseOrderOfSimultaneousStackEntry
-        if (sa.getChosenList() != null) {
-            return true;
-        }
-        return super.doTriggerAINoCost(aiPlayer, sa, mandatory);
     }
 
     @Override

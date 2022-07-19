@@ -133,7 +133,8 @@ public class SettingsScene extends UIScene {
         Label label = Controls.newLabel(name);
         label.setWrap(true);
         settingGroup.row().space(5);
-        settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5).width(100).expand();
+        int w = Forge.isLandscapeMode() ? 160 : 80;
+        settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5).width(w).expand();
     }
 
     @Override

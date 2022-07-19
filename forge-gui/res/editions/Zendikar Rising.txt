@@ -419,12 +419,21 @@ ScryfallCode=ZNR
 
 [rebalanced]
 A24 R A-Luminarch Aspirant @Mads Ahm
+A68 R A-Master of Winds @Yigit Koroglu
+A105 C A-Hagra Constrictor @Simon Dominic
+A126 U A-Skyclave Shadowcat @Simon Dominic
 A141 U A-Goma Fada Vanguard @Sean Sevestre
 A145 R A-Kargan Intimidator @Kieran Yanner
+A154 U A-Rockslide Sorcerer @Daarken
+A185 C A-Gnarlid Colony @Izzy
+A187 U A-Iridescent Hornbeetle @Simon Dominic
+A198 R A-Oran-Rief Ooze @Daarken
 A224 U A-Kargan Warleader @Colin Boyer
+A228 U A-Moss-Pit Skeleton @Bryan Sola
 A230 M A-Nahiri, Heir of the Ancients @Anna Steinbauer
 A232 M A-Omnath, Locus of Creation @Chris Rahn
 A234 R A-Phylath, World Sculptor @Victor Adame Minguez
+A238 U A-Umara Mystic @Bryan Sola
 A257 U A-Base Camp @Jokubas Uogintas
 
 [ModalDoubleFaceCards]

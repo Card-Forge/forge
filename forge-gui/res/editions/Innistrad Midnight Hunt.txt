@@ -417,6 +417,7 @@ Prerelease=6 Boosters, 1 RareMythic+
 A52 C A-Falcon Abomination @Brent Hollowell
 A59 M A-Lier, Disciple of the Drowned @Ekaterina Burmak
 A106 C A-Hobbling Zombie @Josh Hass
+A112 M A-The Meathook Massacre @Chris Seaman
 
 [tokens]
 b_1_1_bat_flying

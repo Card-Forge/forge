@@ -1,0 +1,16 @@
+Name:Guardian Naga
+ManaCost:5 W W
+Types:Creature Naga
+PT:5/6
+K:Vigilance
+R:Event$ DamageDone | Prevent$ True | ValidTarget$ Card.Self | PlayerTurn$ True | Description$ As long as it's your turn, prevent all damage that would be dealt to CARDNAME.
+AlternateMode:Adventure
+Oracle:Vigilance\nAs long as it's your turn, prevent all damage that would be dealt to Guardian Naga.
+
+ALTERNATE
+
+Name:Banishing Coils
+ManaCost:2 W
+Types:Instant Adventure
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Choose target artifact or enchantment | ValidTgts$ Artifact,Enchantment | SpellDescription$ Exile target artifact or enchantment.
+Oracle:Exile target artifact or enchantment. (Then exile this card. You may cast the creature later from exile.)
