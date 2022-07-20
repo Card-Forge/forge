@@ -1,0 +1,8 @@
+Name:Campfire
+ManaCost:1
+Types:Artifact
+A:AB$ GainLife | Cost$ 1 T | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+A:AB$ ChangeZoneAll | Cost$ 2 T Exile<1/CARDNAME> | ChangeType$ Card.IsCommander+YouOwn | Origin$ Command,Graveyard | Destination$ Hand | SubAbility$ DBGraveShuffle | SpellDescription$ Put all commanders you own from the command zone and from your graveyard into your hand. Then shuffle your graveyard into your library.
+SVar:DBGraveShuffle:DB$ ChangeZoneAll | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True
+DeckHas:Ability$LifeGain
+Oracle:{1}, {T}: You gain 2 life.\n{2}, {T}, Exile Campfire: Put all commanders you own from the command zone and from your graveyard into your hand. Then shuffle your graveyard into your library.

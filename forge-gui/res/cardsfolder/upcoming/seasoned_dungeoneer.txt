@@ -1,0 +1,13 @@
+Name:Seasoned Dungeoneer
+ManaCost:3 W
+Types:Creature Human Warrior
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters the battlefield, you take the initiative.
+SVar:TrigInitiative:DB$ TakeInitiative
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, target attacking Cleric, Rogue, Warrior, or Wizard gains protection from creatures until end of turn. It explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on the creature, then put the card back or put it into your graveyard.)
+SVar:TrigPump:DB$ Pump | KW$ Protection from creatures | TgtPrompt$ Select target attacking Cleric, Rogue, Warrior, or Wizard | ValidTgts$ Creature.attacking+Cleric,Creature.attacking+Rogue,Creature.attacking+Warrior,Creature.attacking+Wizard | SubAbility$ DBExplore
+SVar:DBExplore:DB$ Explore | Defined$ Targeted
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Party
+DeckHints:Type$Cleric|Rogue|Warrior|Wizard
+Oracle:When Seasoned Dungeoneer enters the battlefield, you take the initiative.\nWhenever you attack, target attacking Cleric, Rogue, Warrior, or Wizard gains protection from creatures until end of turn. It explores. (Reveal the top card of your library. Put that card into your hand if it's a land. Otherwise, put a +1/+1 counter on the creature, then put the card back or put it into your graveyard.)

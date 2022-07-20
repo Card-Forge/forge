@@ -1,0 +1,8 @@
+Name:Folk Hero
+ManaCost:1 W
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ SacTypeDraw | Description$ Commander creatures you own have "Whenever you cast a spell that shares a creature type with this creature, draw a card. This ability triggers only once each turn."
+SVar:SacTypeDraw:Mode$ SpellCast | ValidCard$ Card.sharesCreatureTypeWith | ValidActivatingPlayer$ You | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever you cast a spell that shares a creature type with this creature, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+AI:RemoveDeck:NonCommander
+Oracle:Commander creatures you own have "Whenever you cast a spell that shares a creature type with this creature, draw a card. This ability triggers only once each turn."
