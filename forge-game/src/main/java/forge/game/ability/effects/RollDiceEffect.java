@@ -8,6 +8,8 @@ import java.util.Map;
 import forge.game.event.GameEventRollDie;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Lists;
+
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -66,45 +68,51 @@ public class RollDiceEffect extends SpellAbilityEffect {
     }
 
     public static int rollDiceForPlayer(SpellAbility sa, Player player, int amount, int sides) {
-        return rollDiceForPlayer(sa, player, amount, sides, 0, null);
+        return rollDiceForPlayer(sa, player, amount, sides, 0, 0, null);
     }
-
-    private static int rollDiceForPlayer(SpellAbility sa, Player player, int amount, int sides, int ignore, List<Integer> rollsResult) {
+    private static int rollDiceForPlayer(SpellAbility sa, Player player, int amount, int sides, int ignore, int modifier, List<Integer> rollsResult) {
         int advantage = getRollAdvange(player);
         amount += advantage;
         int total = 0;
-        List<Integer> rolls = (rollsResult == null ? new ArrayList<>() : rollsResult);
+        List<Integer> naturalRolls = (rollsResult == null ? new ArrayList<>() : rollsResult);
 
         for (int i = 0; i < amount; i++) {
             int roll = MyRandom.getRandom().nextInt(sides) + 1;
             // Play the die roll sound
             player.getGame().fireEvent(new GameEventRollDie());
             player.roll();
-            rolls.add(roll);
+            naturalRolls.add(roll);
             total += roll;
         }
 
         if (amount > 0) {
-            String message = Localizer.getInstance().getMessage("lblPlayerRolledResult", player, StringUtils.join(rolls, ", "));
+            String message = Localizer.getInstance().getMessage("lblPlayerRolledResult", player, StringUtils.join(naturalRolls, ", "));
             player.getGame().getAction().notifyOfValue(sa, player, message, null);
         }
 
-        rolls.sort(null);
+        naturalRolls.sort(null);
 
         // Ignore lowest rolls
         advantage += ignore;
         if (advantage > 0) {
             for (int i = advantage - 1; i >= 0; --i) {
-                total -= rolls.get(i);
-                rolls.remove(i);
+                total -= naturalRolls.get(i);
+                naturalRolls.remove(i);
             }
         }
+
+        List<Integer> rolls = Lists.newArrayList();
+        for (Integer i : naturalRolls) {
+            rolls.add(i + modifier);
+        }
+        total += modifier;
 
         // Run triggers
         for (Integer roll : rolls) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Player, player);
             runParams.put(AbilityKey.Sides, sides);
+            runParams.put(AbilityKey.Modifier, modifier);
             runParams.put(AbilityKey.Result, roll);
             player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDie, runParams, false);
         }
@@ -123,9 +131,8 @@ public class RollDiceEffect extends SpellAbilityEffect {
         final int ignore = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("IgnoreLower", "0"), sa);
 
         List<Integer> rolls = new ArrayList<>();
-        int total = rollDiceForPlayer(sa, player, amount, sides, ignore, rolls);
+        int total = rollDiceForPlayer(sa, player, amount, sides, ignore, modifier, rolls);
 
-        total += modifier;
         if (sa.hasParam("ResultSVar")) {
             sa.setSVar(sa.getParam("ResultSVar"), Integer.toString(total));
         }
