@@ -1,0 +1,8 @@
+Name:You Look Upon the Tarrasque
+ManaCost:4 G
+Types:Instant
+A:SP$ Charm | Choices$ DBEffect,DBPump
+SVar:DBEffect:DB$ Effect | Name$ You Look Upon the Tarrasque Effect | ReplacementEffects$ RPrevent | AILogic$ Fog | SpellDescription$ Run and Hide — Prevent all combat damage that would be dealt to you and creatures you control this turn.
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | ActiveZones$ Command | ValidTarget$ You,Creature.YouCtrl | Description$ Run and Hide — Prevent all combat damage that would be dealt to you and creatures you control this turn.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature. | NumAtt$ 5 | NumDef$ 5 | KW$ Indestructible & HIDDEN All creatures able to block CARDNAME do so. | SpellDescription$ Gather Your Courage — Target creature gets +5/+5 and gains indestructible until end of turn. All creatures your opponents control able to block that creature this turn do so.
+Oracle:Choose one —\n• Run and Hide — Prevent all combat damage that would be dealt to you and creatures you control this turn.\n• Gather Your Courage — Target creature gets +5/+5 and gains indestructible until end of turn. All creatures your opponents control able to block that creature this turn do so.
