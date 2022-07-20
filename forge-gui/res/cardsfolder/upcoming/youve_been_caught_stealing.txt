@@ -2,8 +2,9 @@ Name:You've Been Caught Stealing
 ManaCost:1 R
 Types:Sorcery
 A:SP$ Charm | Choices$ DBPump,DBToken
-SVar:DBPump:DB$ PumpAll | ValidCards$ Creature | KW$ HIDDEN CARDNAME blocks each combat if able. | SpellDescription$ Threaten the Merchant — Each creature blocks this turn if able.
-SVar:NonStackingEffect:True
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature | SubAbility$ OppBlock | SpellDescription$ Threaten the Merchant — Each creature blocks this turn if able.
+SVar:OppBlock:DB$ Effect | Name$ You've Been Caught Stealing Effect | StaticAbilities$ KWPump
+SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddHiddenKeyword$ CARDNAME blocks each combat if able. | Description$ Threaten the Merchant — Each creature blocks this turn if able.
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | SpellDescription$ Bribe the Guards — You create a Treasure token for each opponent who was dealt damage this turn. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
 SVar:X:PlayerCountOpponents$HasPropertywasDealtDamageThisTurn
 DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
