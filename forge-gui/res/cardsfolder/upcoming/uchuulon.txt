@@ -12,4 +12,5 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.OppOwn | TgtPrompt$ Select up to one target creature card from an opponent's graveyard | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBCopy
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
 DeckHas:Ability$Token
+DeckHints:Type$Crab|Ooze|Horror
 Oracle:Uchuulon's power is equal to the number of Crabs, Oozes, and/or Horrors you control.\nHorrific Symbiosis — At the beginning of your end step, exile up to one target creature card from an opponent's graveyard. If you do, create a token that's a copy of Uchuulon.
