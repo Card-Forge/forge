@@ -6,6 +6,6 @@ SVar:SacArt:AB$ PutCounter | Cost$ 2 Sac<1/Artifact> | Defined$ Self | CounterTy
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:BuffedBy:Artifact
 DeckHints:Type$Artifact
-DeckHas:Ability$Counters
+DeckHas:Ability$Sacrifice|Counters
 AI:RemoveDeck:NonCommander
 Oracle:Commander creatures you own have "{2}, Sacrifice an artifact: Put a +1/+1 counter on this creature and draw a card."
