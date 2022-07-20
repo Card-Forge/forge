@@ -8,4 +8,5 @@ A:AB$ Mana | Cost$ T | Produced$ Any | SubAbility$ DBRollDice | SpellDescription
 SVar:DBRollDice:DB$ RollDice | Sides$ 20
 A:AB$ ChangeZone | Cost$ T SubCounter<100/CHARGE> | Origin$ Library | Destination$ Battlefield | ChangeType$ Artifact | ChangeNum$ 1 | SpellDescription$ Search your library for an artifact card, put that card onto the battlefield, then shuffle.
 AI:RemoveDeck:Random
+DeckHints:Type$Artifact
 Oracle:Whenever you roll one or more dice, put a number of charge counters on Vexing Puzzlebox equal to the result.\n{T}: Add one mana of any color. Roll a d20.\n{T}, Remove 100 charge counters from Vexing Puzzlebox: Search your library for an artifact card, put that card onto the battlefield, then shuffle.
