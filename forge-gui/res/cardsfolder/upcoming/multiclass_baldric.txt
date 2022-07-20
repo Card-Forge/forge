@@ -1,0 +1,13 @@
+Name:Multiclass Baldric
+ManaCost:1
+Types:Artifact Equipment
+K:Equip:2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Lifelink | IsPresent$ Cleric.YouCtrl | PresentCompare$ GE1 | Description$ Equipped creature has lifelink if you control a Cleric, deathtouch if you control a Rogue, haste if you control a Warrior, and flying if you control a Wizard.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Deathtouch | IsPresent$ Rogue.YouCtrl | PresentCompare$ GE1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Haste | IsPresent$ Warrior.YouCtrl | PresentCompare$ GE1
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | IsPresent$ Wizard.YouCtrl | PresentCompare$ GE1
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Creature.EquippedBy | CheckSVar$ X | SVarCompare$ EQ4 | Description$ As long as you have a full party, prevent all damage that would be dealt to equipped creature.
+SVar:X:Count$Party
+DeckHas:Ability$Party
+DeckHints:Type$Cleric|Rogue|Warrior|Wizard
+Oracle:Equipped creature has lifelink if you control a Cleric, deathtouch if you control a Rogue, haste if you control a Warrior, and flying if you control a Wizard.\nAs long as you have a full party, prevent all damage that would be dealt to equipped creature.\nEquip {2}

@@ -1,0 +1,15 @@
+Name:Uchuulon
+ManaCost:3 B
+Types:Creature Crab Ooze Horror
+PT:*/4
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of Crabs, Oozes, and/or Horrors you control.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ Horrific Symbiosis — At the beginning of your end step, exile up to one target creature card from an opponent's graveyard. If you do, create a token that's a copy of Uchuulon.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.OppOwn | TgtPrompt$ Select up to one target creature card from an opponent's graveyard | TargetMin$ 0 | TargetMax$ 1 | RememberChanged$ True | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ Y | SubAbility$ DBCleanup
+SVar:X:Count$Valid Crab.YouCtrl,Ooze.YouCtrl,Horror.YouCtrl
+SVar:Y:Remembered$Amount
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:BuffedBy:Crab,Ooze,Horror
+DeckHints:Type$Crab|Ooze|Horror
+DeckHas:Ability$Token
+Oracle:Uchuulon's power is equal to the number of Crabs, Oozes, and/or Horrors you control.\nHorrific Symbiosis — At the beginning of your end step, exile up to one target creature card from an opponent's graveyard. If you do, create a token that's a copy of Uchuulon.
