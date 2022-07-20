@@ -13,4 +13,4 @@ ScryfallCode=P22
 5 R Smothering Tithe @Aurore Folny
 6 R Training Grounds @Caroline Gariba
 9 R No Mercy @John Stanko
-10 R R Growing Rites of Itlimoc @Dmitry Burmak
+10 R Growing Rites of Itlimoc @Dmitry Burmak
