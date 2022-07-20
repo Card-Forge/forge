@@ -1,8 +1,7 @@
 Name:Psychic Trance
 ManaCost:2 U U
 Types:Instant
-A:SP$ Effect | Cost$ 2 U U | Name$ Psychic Trance Effect | StaticAbilities$ Static | SpellDescription$ Until end of turn, Wizards you control gain "{T}: Counter target spell."
-SVar:Static:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.Wizard+YouCtrl | AddAbility$ Counter | Description$ All Wizards you control have Tap: Counter target spell.
+A:SP$ AnimateAll | Abilities$ Counter | ValidCards$ Card.Wizard+YouCtrl | SpellDescription$ Until end of turn, Wizards you control gain "{T}: Counter target spell."
 SVar:Counter:AB$ Counter | Cost$ T | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell
 AI:RemoveDeck:Random
 AI:RemoveDeck:All

@@ -1,7 +1,7 @@
 Name:Yawgmoth's Testament
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Effect | Cost$ 2 B | Name$ Yawgmoth's Testament Effect | ReplacementEffects$ GraveExileToLibrary | StaticAbilities$ STPlay | AINoRecursiveCheck$ True | SpellDescription$ Until end of turn, you may play face-up cards you own from exile. If a card would be put into your graveyard or exile from anywhere this turn, put it on the bottom of your library instead.
+A:SP$ Effect | ReplacementEffects$ GraveExileToLibrary | StaticAbilities$ STPlay | AINoRecursiveCheck$ True | SpellDescription$ Until end of turn, you may play face-up cards you own from exile. If a card would be put into your graveyard or exile from anywhere this turn, put it on the bottom of your library instead.
 SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouOwn+faceUp | AffectedZone$ Exile | MayPlay$ True | Description$ You may play face-up cards you own from exile.
 SVar:GraveExileToLibrary:Event$ Moved | ActiveZones$ Command | Destination$ Graveyard,Exile | ValidCard$ Card.nonToken+YouOwn | ReplaceWith$ PutLibrary | Description$ If a card would be put into your graveyard or exile from anywhere this turn, put it on the bottom of your library instead.
 SVar:PutLibrary:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Library | Defined$ ReplacedCard | LibraryPosition$ -1 | Reveal$ True
