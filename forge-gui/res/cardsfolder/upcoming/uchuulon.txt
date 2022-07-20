@@ -3,14 +3,13 @@ ManaCost:3 B
 Types:Creature Crab Ooze Horror
 PT:*/4
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of Crabs, Oozes, and/or Horrors you control.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Creature+OppOwn | PresentZone$ Graveyard | PresentCompare$ GE1 | Execute$ TrigExile | TriggerDescription$ nHorrific Symbiosis — At the beginning of your end step, exile up to one target creature card from an opponent's graveyard. If you do, create a token that's a copy of Uchuulon.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.OppOwn | TgtPrompt$ Select up to one target creature card from an opponent's graveyard | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
 SVar:X:Count$Valid Crab.YouCtrl/Plus.Y
 SVar:Y:Count$Valid Ooze.YouCtrl/Plus.Z
 SVar:Z:Count$Valid Horror.YouCtrl
 SVar:BuffedBy:Crab,Ooze,Horror
 DeckHints:Type$Crab|Ooze|Horror
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Creature+OppOwn | PresentZone$ Graveyard | PresentCompare$ GE1 | Execute$ TrigExile | TriggerDescription$ nHorrific Symbiosis — At the beginning of your end step, exile up to one target creature card from an opponent's graveyard. If you do, create a token that's a copy of Uchuulon.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.OppOwn | TgtPrompt$ Select up to one target creature card from an opponent's graveyard | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBCopy
-SVar:DBCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
 DeckHas:Ability$Token
-DeckHints:Type$Crab|Ooze|Horror
 Oracle:Uchuulon's power is equal to the number of Crabs, Oozes, and/or Horrors you control.\nHorrific Symbiosis — At the beginning of your end step, exile up to one target creature card from an opponent's graveyard. If you do, create a token that's a copy of Uchuulon.
