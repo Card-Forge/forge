@@ -953,7 +953,6 @@ public final class StaticAbilityContinuous {
                     } else if (additional) {
                         final String regCost = affectedCard.getManaCost().getShortString();
                         mayPlayAltCost = mayPlayAltManaCost.replace("RegularCost", regCost);
-
                     }
                 }
 
