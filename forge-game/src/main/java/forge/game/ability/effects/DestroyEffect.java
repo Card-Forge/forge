@@ -122,7 +122,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         final boolean alwaysRem = sa.hasParam("AlwaysRemember");
 
         boolean destroyed = false;
-        final Card lki = CardUtil.getLKICopy(gameCard, cachedMap);
+        final Card lki = sa.hasParam("RememberLKI") ? CardUtil.getLKICopy(gameCard, cachedMap) : null;
         if (remAttached) {
             card.addRemembered(gameCard.getAttachedCards());
         }
