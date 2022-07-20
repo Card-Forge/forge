@@ -1,7 +1,7 @@
 Name:Illusion of Choice
 ManaCost:U
 Types:Instant
-A:SP$ Effect | Cost$ U | Name$ Illusion of Choice Effect | StaticAbilities$ STVoter | SubAbility$ DBDraw | SpellDescription$ You choose how each player votes this turn. Draw a card.
+A:SP$ Effect | StaticAbilities$ STVoter | SubAbility$ DBDraw | SpellDescription$ You choose how each player votes this turn. Draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 SVar:STVoter:Mode$ Continuous | EffectZone$ Command | Affected$ You | ControlVote$ True | Description$ You choose how each player votes this turn.
 AI:RemoveDeck:All

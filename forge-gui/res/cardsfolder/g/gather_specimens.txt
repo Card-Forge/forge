@@ -1,7 +1,7 @@
 Name:Gather Specimens
 ManaCost:3 U U U
 Types:Instant
-A:SP$ Effect | Cost$ 3 U U U | Name$ Gather Specimens Effect | ReplacementEffects$ OppCreatEnters | SpellDescription$ If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
+A:SP$ Effect | ReplacementEffects$ OppCreatEnters | SpellDescription$ If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
 SVar:OppCreatEnters:Event$ Moved | Destination$ Battlefield | ValidCard$ Creature.OppCtrl | ReplaceWith$ ETBYourCtrl | Layer$ Control | Description$ If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
 SVar:ETBYourCtrl:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | GainControl$ True
 AI:RemoveDeck:All
