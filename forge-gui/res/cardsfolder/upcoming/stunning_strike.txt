@@ -1,0 +1,11 @@
+Name:Stunning Strike
+ManaCost:2 U
+Types:Enchantment Aura
+K:Flash
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature and remove it from combat.
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ RemCombat
+SVar:RemCombat:DB$ RemoveFromCombat | Defined$ Enchanted
+S:Mode$ Continuous | Affected$ Creature.nonlegendary+EnchantedBy | AddHiddenKeyword$ This card doesn't untap during your next untap step. | Description$ As long as enchanted creature isn't legendary, it doesn't untap during its controller's untap step.
+DeckHints:Type$Creature
+Oracle:Flash\nEnchant creature\nWhen Stunning Strike enters the battlefield, tap enchanted creature and remove it from combat.\nAs long as enchanted creature isn't legendary, it doesn't untap during its controller's untap step.

@@ -3460,6 +3460,10 @@ public class AbilityUtils {
             return doXMath(player.getLandsPlayedThisTurn(), m, source, ctb);
         }
 
+        if (value.contains("SpellsCastThisTurn")) {
+            return doXMath(player.getSpellsCastThisTurn(), m, source, ctb);
+        }
+
         if (value.contains("CardsDrawn")) {
             return doXMath(player.getNumDrawnThisTurn(), m, source, ctb);
         }
