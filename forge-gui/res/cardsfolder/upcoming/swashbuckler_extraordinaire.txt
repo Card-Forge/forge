@@ -4,10 +4,10 @@ Types:Creature Dragon Rogue Warrior
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTreasure | TriggerDescription$ When CARDNAME enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
 SVar:TrigTreasure:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you may sacrifice one or more Treasures. When you do, up to that many target creatures gain double strike until end of turn.
-SVar:TrigSac:DB$ Sacrifice | Defined$ You | Amount$ X | SacValid$ Treasure | SacMessage$ treasure | RememberSacrificed$ True | Optional$ True | SubAbility$ TrigChoose
-SVar:TrigChoose:DB$ ChooseCard | MinAmount$ 0 | Amount$ DBSize | Choices$ Creature | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ ChosenCard | KW$ Double Strike | SubAbility$ DBCleanup
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigSac | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, you may sacrifice one or more Treasures. When you do, up to that many target creatures gain double strike until end of turn.
+SVar:TrigSac:DB$ Sacrifice | Defined$ You | Amount$ X | SacValid$ Treasure | SacMessage$ treasure | RememberSacrificed$ True | SubAbility$ TrigImmediateTrig
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | Execute$ DBPump | TriggerDescription$ When you do, up to that many target creatures gain double strike until end of turn.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ Double Strike | TargetMin$ 0 | TargetMax$ DBSize | SubAbility$ DBCleanup | TgtPrompt$ Select target creatures | StackDescription$ {c:Targeted} gain double strike until end of turn. | SpellDescription$ Up to that many target creatures gain double strike until end of turn.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
 SVar:DBSize:Count$RememberedSize
 SVar:X:Count$Valid Treasure.YouCtrl
