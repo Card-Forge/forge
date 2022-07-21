@@ -5,7 +5,7 @@ K:Equip:Discard<1/Card>
 S:Mode$ Continuous | Affected$ You | IsPresent$ Card.Self+AttachedTo Creature | AddKeyword$ You don't lose the game for having 0 or less life. | Description$ As long as CARDNAME is attached to a creature, you don't lose the game for having 0 or less life.
 T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigDraw | TriggerDescription$ Whenever equipped creature attacks, draw a card and reveal it. The creature gets +X/+X until end of turn and you lose X life, where X is that card's mana value.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Reveal$ True | RememberDrawn$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | Defined$ TriggeredCard | NumAtt$ +X | NumDef$ +X | SubAbility$ DBLoseLife
+SVar:DBPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +X | NumDef$ +X | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ You | SubAbility$ DBClean
 SVar:DBClean:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardManaCost
