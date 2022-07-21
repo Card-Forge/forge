@@ -8,7 +8,7 @@ T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigSac | TriggerZon
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | Amount$ X | SacValid$ Treasure | SacMessage$ treasure | Optional$ True | RememberSacrificed$ True | SubAbility$ TrigImmediateTrig
 SVar:TrigImmediateTrig:DB$ ImmediateTrigger | Execute$ DBPump | TriggerDescription$ When you do, up to that many target creatures gain double strike until end of turn.
 SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ Double Strike | TargetMin$ 0 | TargetMax$ DBSize | SubAbility$ DBCleanup | TgtPrompt$ Select target creatures | StackDescription$ {c:Targeted} gain double strike until end of turn. | SpellDescription$ Up to that many target creatures gain double strike until end of turn.
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBSize:Count$RememberedSize
 SVar:X:Count$Valid Treasure.YouCtrl
 DeckHas:Ability$Token|Sacrifice & Type$Treasure
