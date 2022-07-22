@@ -1,0 +1,10 @@
+Name:Inspired Tinkering
+ManaCost:4 R
+Types:Sorcery
+A:SP$ Dig | Defined$ You | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBMayPlay | SpellDescription$ Exile the top three cards of your library. Until the end of your next turn, you may play those cards.
+SVar:DBMayPlay:DB$ Effect | StaticAbilities$ STMayPlay | Duration$ UntilTheEndOfYourNextTurn | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBToken
+SVar:STMayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Exile | MayPlay$ True | Description$ Until the end of your next turn, you may play those cards.
+SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | SpellDescription$ Create three Treasure tokens.
+DeckHas:Ability$Token|Sacrifice & Type$Treasure
+Oracle:Exile the top three cards of your library. Until the end of your next turn, you may play those cards.\nCreate three Treasure tokens. (They're artifacts with "{T}, Sacrifice this artifact: Add one mana of any color.")
