@@ -11,5 +11,5 @@ SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ ST
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play the exiled cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:CreateTreasure:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_treasure_sac | SpellDescription$ Create three Treasure tokens.
-DeckHas:Ability$Token|Sacrifice & Type$Treasure
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
 Oracle:Flying, trample\nWhen Atsushi, the Blazing Sky dies, choose one —\n• Exile the top two cards of your library. Until the end of your next turn, you may play those cards.\n• Create three Treasure tokens.
