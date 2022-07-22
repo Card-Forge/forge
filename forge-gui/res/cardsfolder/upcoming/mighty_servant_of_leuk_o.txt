@@ -1,0 +1,12 @@
+Name:Mighty Servant of Leuk-o
+ManaCost:3
+Types:Artifact Vehicle
+PT:6/6
+K:Trample
+K:Ward:Discard<1/Card>
+T:Mode$ BecomesCrewed | ValidVehicle$ Card.Self | FirstTimeCrewed$ True | ValidCrewAmount$ 2 | Execute$ DBAnimate | TriggerDescription$ Whenever CARDNAME becomes crewed for the first time each turn, if it was crewed by exactly two creatures, it gains "Whenever this creature deals combat damage to a player, draw two cards" until end of turn.
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Duration$ UntilEndOfTurn | Triggers$ TrigCDPlayer | StackDescription$ None
+SVar:TrigCDPlayer:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ DBDraw | CombatDamage$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player, draw two cards.
+SVar:DBDraw:DB$ Draw | NumCards$ 2
+K:Crew:4
+Oracle:Trample\nWard—Discard a card.\nWhenever Mighty Servant of Leuk-o becomes crewed for the first time each turn, if it was crewed by exactly two creatures, it gains "Whenever this creature deals combat damage to a player, draw two cards" until end of turn.\nCrew 4
