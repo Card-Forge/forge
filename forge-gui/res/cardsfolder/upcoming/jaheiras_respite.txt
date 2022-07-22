@@ -1,0 +1,8 @@
+Name:Jaheira's Respite
+ManaCost:4 G
+Types:Instant
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ X | AILogic$ Fog | Tapped$ True | SubAbility$ DBEffect | SpellDescription$ Search your library for up to X basic land cards, where X is the number of creatures attacking you, put those cards onto the battlefield tapped, then shuffle. Prevent all combat damage that would be dealt to players this turn.
+SVar:X:Count$Valid Creature.attackingYou
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPrevent
+SVar:RPrevent:Event$ DamageDone | Prevent$ True | IsCombat$ True | ActiveZones$ Command | ValidTarget$ Player | Description$ Prevent all combat damage that would be dealt to players this turn.
+Oracle:Search your library for up to X basic land cards, where X is the number of creatures attacking you, put those cards onto the battlefield tapped, then shuffle.\nPrevent all combat damage that would be dealt this turn.
