@@ -1,0 +1,7 @@
+Name:Font of Magic
+ManaCost:3 U
+Types:Enchantment
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ X | Description$ Instant and sorcery spells you cast cost {1} less to cast for each time you've cast a commander from the command zone this game.
+SVar:X:Count$TotalCommanderCastFromCommandZone
+DeckHints:Type$Instant|Sorcery
+Oracle:Instant and sorcery spells you cast cost {1} less to cast for each time you've cast a commander from the command zone this game.
