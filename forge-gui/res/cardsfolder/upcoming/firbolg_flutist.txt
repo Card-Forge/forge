@@ -3,7 +3,7 @@ ManaCost:4 R R
 Types:Creature Giant Bard
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Enthralling Performance — When CARDNAME enters the battlefield, gain control of target creature you don't control until end of turn. Untap it. It gains haste and myriad until end of turn. (Whenever it attacks, for each opponent other than defending player, you may create a token that's a copy of that creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
-SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose target creature you don't control | ValidTgts$ Creature.OppCtrl | LoseControl$ EOT | Untap$ True | AddKWs$ Haste & Myriad 
+SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose target creature you don't control | ValidTgts$ Creature.YouDontCtrl | LoseControl$ EOT | Untap$ True | AddKWs$ Haste & Myriad 
 SVar:PlayMain1:OPPONENTCREATURES
 DeckHas:Ability$Token
 Oracle:Enthralling Performance — When Firbolg Flutist enters the battlefield, gain control of target creature you don't control until end of turn. Untap it. It gains haste and myriad until end of turn. (Whenever it attacks, for each opponent other than defending player, you may create a token that's a copy of that creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)
