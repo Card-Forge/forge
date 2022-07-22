@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 
 import forge.game.Game;
 import forge.game.GameEntity;
+import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
@@ -194,6 +195,15 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                         }
                         if (sub != null) {
                             sub.getParent().setSubAbility(sub.getSubAbility());
+                        }
+                    }
+
+                    if (sa.hasParam("UnearthEffect")) {
+                        if (copy.getCardState().getType().isPermanent()) {
+                            String unearthEffect = "DB$ Animate | Keywords$ Haste | Duration$ Permanent | AtEOT$ Sacrifice | Defined$ Self";
+                            AbilitySub effectSub = (AbilitySub) AbilityFactory.getAbility(unearthEffect, copy.getHostCard());
+                            effectSub.setActivatingPlayer(sa.getActivatingPlayer());
+                            copy.setSubAbility(effectSub);
                         }
                     }
 
