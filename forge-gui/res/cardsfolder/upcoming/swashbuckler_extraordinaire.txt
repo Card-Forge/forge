@@ -11,6 +11,6 @@ SVar:DBPump:DB$ Pump | ValidTgts$ Creature | KW$ Double Strike | TargetMin$ 0 | 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBSize:Count$RememberedSize
 SVar:X:Count$Valid Treasure.YouCtrl
-DeckHas:Ability$Token|Sacrifice & Type$Treasure
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
 AI:RemoveDeck:All
 Oracle:When Swashbuckler Extraordinaire enters the battlefield, create a Treasure token. (It's an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")\nWhenever you attack, you may sacrifice one or more Treasures. When you do, up to that many target creatures gain double strike until end of turn.
