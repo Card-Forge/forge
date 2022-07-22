@@ -3,7 +3,9 @@ package forge.game.trigger;
 import java.util.Map;
 
 import forge.game.ability.AbilityKey;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.card.CardCollection;
 import forge.game.spellability.SpellAbility;
 import forge.util.Localizer;
 
@@ -24,6 +26,17 @@ public class TriggerBecomesCrewed extends Trigger {
         if (hasParam("FirstTimeCrewed")) {
             Card v = (Card) runParams.get(AbilityKey.Vehicle);
             if (v.getTimesCrewedThisTurn() != 1) {
+                return false;
+            }
+        }
+        if (hasParam("ValidCrewAmount")) {
+            Card v = (Card) runParams.get(AbilityKey.Vehicle);
+            CardCollection crews = (CardCollection) runParams.get(AbilityKey.Crew);
+            if (crews == null) {
+                return false;
+            }
+            int amount = AbilityUtils.calculateAmount(v, getParam("ValidCrewAmount"), null);
+            if (amount != crews.size()) {
                 return false;
             }
         }
