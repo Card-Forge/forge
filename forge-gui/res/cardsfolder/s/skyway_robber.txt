@@ -6,7 +6,6 @@ K:Flying
 K:Escape:3 U ExileFromGrave<5/Card.Other/other>
 A:SP$ PermanentCreature | RememberCostCards$ True
 SVar:AIPreference:ExileFromGraveCost$Artifact.YouOwn+Other+inZoneGraveyard,Instant.YouOwn+Other+inZoneGraveyard,Sorcery.YouOwn+Other+inZoneGraveyard
-#R:Event$ Moved | ValidCard$ Card.Self+escaped | Destination$ Battlefield | ReplaceWith$ DBAnimate | Description$ CARDNAME escapes with "Whenever CARDNAME deals combat damage to a player, you may cast an artifact, instant, or sorcery spell from among cards exiled with CARDNAME without paying its mana cost."
 K:ETBReplacement:Other:DBAnimate:Mandatory::Card.Self+escaped
 SVar:DBAnimate:DB$ Animate | Triggers$ DamageTrig | Duration$ Permanent | SpellDescription$ CARDNAME escapes with "Whenever CARDNAME deals combat damage to a player, you may cast an artifact, instant, or sorcery spell from among cards exiled with CARDNAME without paying its mana cost."
 SVar:DamageTrig:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigCast | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may cast an artifact, instant, or sorcery spell from among cards exiled with CARDNAME without paying its mana cost.
