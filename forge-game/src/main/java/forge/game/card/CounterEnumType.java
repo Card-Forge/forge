@@ -287,6 +287,8 @@ public enum CounterEnumType {
 
     RITUAL("RITUAL", 155, 17, 30),
 
+    ROPE("ROPE", 239, 223, 187),
+
     RUST("RUST", 255, 181, 116),
 
     SCREAM("SCREM", 0, 220, 255),
