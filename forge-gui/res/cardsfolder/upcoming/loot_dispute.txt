@@ -7,5 +7,5 @@ SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
 T:Mode$ AttackersDeclaredOneTarget | ValidAttackers$ Creature.YouCtrl | AttackedTarget$ Player.hasInitiative | Execute$ DBTreasure | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack the player who has the initiative, create a Treasure token.
 T:Mode$ DungeonCompleted | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you complete a dungeon, create a 5/5 red Dragon creature token with flying.
 SVar:TrigToken:DB$ Token | TokenScript$ r_5_5_dragon_flying
-DeckHas:Ability$LifeGain|Token|Sacrifice & Type$Artifact|Treasure|Dragon
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure|Dragon
 Oracle:When Loot Dispute enters the battlefield, you take the initiative and create a Treasure token.\nWhenever you attack the player who has the initiative, create a Treasure token.\nLoud Ruckus — Whenever you complete a dungeon, create a 5/5 red Dragon creature token with flying.
