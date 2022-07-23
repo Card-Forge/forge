@@ -20,12 +20,21 @@
     },
     {
       "type": "TextButton",
-      "name": "heal",
-      "text": "Heal",
+      "name": "tempHitPointCost",
+      "text": "Cost",
       "width": 100,
       "height": 30,
       "x": 60,
       "y": 200
+    },
+    {
+      "type": "Label",
+      "name": "tempHitPoints",
+      "font": "default",
+      "width": 100,
+      "height": 30,
+      "x": 60,
+      "y": 180
     },
     {
       "type": "Image",

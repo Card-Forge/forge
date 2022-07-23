@@ -452,8 +452,26 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         onLifeTotalChangeList.emit();
     }
 
+    public void potionOfFalseLife() {
+        System.out.println(getStatistic().winLossRatio());
+        if (gold >= falseLifeCost() && life == maxLife) {
+            life = maxLife + 2;
+            gold -= falseLifeCost();
+            onLifeTotalChangeList.emit();
+            onGoldChangeList.emit();
+        } else {
+
+            System.out.println("Can't afford cost of false life " + falseLifeCost());
+            System.out.println("Only has this much gold " + gold);
+        }
+    }
+
+    public int falseLifeCost() {
+        return 200 + (int)(50 * getStatistic().winLossRatio());
+    }
+
     public void fullHeal() {
-        life = maxLife;
+        life = Math.max(maxLife, life);
         onLifeTotalChangeList.emit();
     }
     public void defeated() {

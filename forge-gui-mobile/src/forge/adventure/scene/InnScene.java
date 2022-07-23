@@ -2,6 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
@@ -11,7 +12,8 @@ import forge.adventure.util.Current;
  * Scene for the Inn in towns
  */
 public class InnScene extends UIScene {
-    TextButton heal, sell, leave;
+    TextButton tempHitPointCost, sell, leave;
+    Label tempHitPoints;
     Image healIcon, sellIcon, leaveIcon;
 
     public InnScene() {
@@ -23,8 +25,9 @@ public class InnScene extends UIScene {
         Forge.switchToLast();
     }
 
-    public void heal() {
-        Current.player().fullHeal();
+    public void potionOfFalseLife() {
+        // TODO Pay a bit of money to gain a temporary +2 HP.
+        Current.player().potionOfFalseLife();
     }
 
     @Override
@@ -41,10 +44,11 @@ public class InnScene extends UIScene {
                     InnScene.this.done();
                 }
             });
-            ui.onButtonPress("heal", new Runnable() {
+            ui.onButtonPress("tempHitPointCost", new Runnable() {
                 @Override
                 public void run() {
-                    InnScene.this.heal();
+                    // Pay 200 gp to gain temporary 2 hp.
+                    InnScene.this.potionOfFalseLife();
                 }
             });
             ui.onButtonPress("sell", new Runnable() {
@@ -57,8 +61,13 @@ public class InnScene extends UIScene {
             leave.getLabel().setText(Forge.getLocalizer().getMessage("lblLeave"));
             sell = ui.findActor("sell");
             sell.getLabel().setText(Forge.getLocalizer().getMessage("lblSell"));
-            heal = ui.findActor("heal");
-            heal.getLabel().setText(Forge.getLocalizer().getMessage("lblHeal"));
+            // TODO This call doesn't return an accurate amount at the time its called?
+            int tempHealthCost = Current.player().falseLifeCost();
+            tempHitPointCost = ui.findActor("tempHitPointCost");
+            tempHitPointCost.getLabel().setText("$" + tempHealthCost);
+
+            tempHitPoints = ui.findActor("tempHitPoints");
+            tempHitPoints.setText(Forge.getLocalizer().getMessage("lblTempHitPoints"));
 
             leaveIcon = ui.findActor("leaveIcon");
             healIcon = ui.findActor("healIcon");
