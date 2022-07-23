@@ -1,0 +1,9 @@
+Name:Rescuer Chwinga
+ManaCost:1 W
+Types:Creature Elemental Spirit
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ Natural Shelter — When CARDNAME enters the battlefield, you may return another permanent you control to its owner's hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | AILogic$ Never | Mandatory$ True | ChangeType$ Permanent.Other+YouCtrl
+AI:RemoveDeck:Random
+Oracle:Flash\nNatural Shelter — When Rescuer Chwinga enters the battlefield, you may return another permanent you control to its owner's hand.

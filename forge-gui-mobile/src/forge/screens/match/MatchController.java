@@ -111,7 +111,7 @@ public class MatchController extends AbstractGuiGame {
 
     public static FImage getPlayerAvatar(final PlayerView p) {
         final String lp = p.getLobbyPlayerName();
-        FImage avatar = Forge.getAssets().avatarImages.get(lp);
+        FImage avatar = Forge.getAssets().avatarImages().get(lp);
         if (avatar == null) {
             if (StringUtils.isEmpty(p.getAvatarCardImageKey())) {
                 avatar = new FTextureRegionImage(FSkin.getAvatars().get(p.getAvatarIndex()));
@@ -696,7 +696,7 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void setPlayerAvatar(final LobbyPlayer player, final IHasIcon ihi) {
-        Forge.getAssets().avatarImages.put(player.getName(), ImageCache.getIcon(ihi));
+        Forge.getAssets().avatarImages().put(player.getName(), ImageCache.getIcon(ihi));
     }
 
     @Override

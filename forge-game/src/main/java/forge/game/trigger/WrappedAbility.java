@@ -176,21 +176,6 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public Player getActivatingPlayer() {
-        return sa.getActivatingPlayer();
-    }
-
-    @Override
-    public String getDescription() {
-        return sa.getDescription();
-    }
-
-    @Override
-    public ManaCost getMultiKickerManaCost() {
-        return sa.getMultiKickerManaCost();
-    }
-
-    @Override
     public SpellAbilityRestriction getRestrictions() {
         return sa.getRestrictions();
     }
@@ -249,13 +234,17 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public AbilitySub getSubAbility() {
-        return sa.getSubAbility();
+    public void setStackDescription(final String s) {
+        sa.setStackDescription(s);
     }
 
     @Override
     public TargetRestrictions getTargetRestrictions() {
         return sa.getTargetRestrictions();
+    }
+    @Override
+    public void setTargetRestrictions(final TargetRestrictions tgt) {
+        sa.setTargetRestrictions(tgt);
     }
 
     @Override
@@ -266,6 +255,10 @@ public class WrappedAbility extends Ability {
     @Override
     public TargetChoices getTargets() {
         return sa.getTargets();
+    }
+    @Override
+    public void setTargets(TargetChoices targets) {
+        sa.setTargets(targets);
     }
 
     @Override
@@ -328,15 +321,27 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
+    public Player getActivatingPlayer() {
+        return sa.getActivatingPlayer();
+    }
+    @Override
     public void setActivatingPlayer(final Player player) {
         sa.setActivatingPlayer(player);
     }
 
     @Override
+    public String getDescription() {
+        return sa.getDescription();
+    }
+    @Override
     public void setDescription(final String s) {
         sa.setDescription(s);
     }
 
+    @Override
+    public ManaCost getMultiKickerManaCost() {
+        return sa.getMultiKickerManaCost();
+    }
     @Override
     public void setMultiKickerManaCost(final ManaCost cost) {
         sa.setMultiKickerManaCost(cost);
@@ -358,23 +363,12 @@ public class WrappedAbility extends Ability {
     }
 
     @Override
-    public void setStackDescription(final String s) {
-        sa.setStackDescription(s);
+    public AbilitySub getSubAbility() {
+        return sa.getSubAbility();
     }
-
     @Override
     public void setSubAbility(final AbilitySub subAbility) {
         sa.setSubAbility(subAbility);
-    }
-
-    @Override
-    public void setTargetRestrictions(final TargetRestrictions tgt) {
-        sa.setTargetRestrictions(tgt);
-    }
-
-    @Override
-    public void setTargets(TargetChoices targets) {
-        sa.setTargets(targets);
     }
 
     @Override

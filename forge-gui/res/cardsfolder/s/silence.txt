@@ -1,6 +1,6 @@
 Name:Silence
 ManaCost:W
 Types:Instant
-A:SP$ Effect | Cost$ W | Name$ Silence Effect | StaticAbilities$ STCantBeCast | AILogic$ BeginningOfOppTurn | SpellDescription$ Your opponents can't cast spells this turn.
+A:SP$ Effect | StaticAbilities$ STCantBeCast | AILogic$ BeginningOfOppTurn | SpellDescription$ Your opponents can't cast spells this turn.
 SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Opponent | Description$ Your opponents can't cast spells.
 Oracle:Your opponents can't cast spells this turn.

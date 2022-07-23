@@ -119,9 +119,10 @@ public class DestroyEffect extends SpellAbilityEffect {
         final boolean remAttached = sa.hasParam("RememberAttached");
         final boolean noRegen = sa.hasParam("NoRegen");
         final boolean sac = sa.hasParam("Sacrifice");
+        final boolean alwaysRem = sa.hasParam("AlwaysRemember");
 
         boolean destroyed = false;
-        final Card lki = CardUtil.getLKICopy(gameCard, cachedMap);
+        final Card lki = sa.hasParam("RememberLKI") ? CardUtil.getLKICopy(gameCard, cachedMap) : null;
         if (remAttached) {
             card.addRemembered(gameCard.getAttachedCards());
         }
@@ -133,7 +134,7 @@ public class DestroyEffect extends SpellAbilityEffect {
         if (destroyed && remDestroyed) {
             card.addRemembered(gameCard);
         }
-        if (destroyed && sa.hasParam("RememberLKI")) {
+        if ((destroyed || alwaysRem) && sa.hasParam("RememberLKI")) {
             card.addRemembered(lki);
         }
     }

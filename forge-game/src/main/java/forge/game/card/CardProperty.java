@@ -1703,7 +1703,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.equals("hadToAttackThisCombat")) {
-            AttackRequirement e = game.getCombat().getAttackConstraints().getRequirements().get(card);
+            AttackRequirement e = combat.getAttackConstraints().getRequirements().get(card);
             if (e == null || !e.hasCreatureRequirement() || !e.getAttacker().equalsWithTimestamp(card)) {
                 return false;
             }
@@ -1941,8 +1941,16 @@ public class CardProperty {
         } else if (property.startsWith("Triggered")) {
             if (spellAbility instanceof SpellAbility) {
                 final String key = property.substring(9);
-                CardCollection cc = (CardCollection) ((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key));
-                if (cc == null || !cc.contains(card)) {
+                Object o = ((SpellAbility)spellAbility).getTriggeringObject(AbilityKey.fromString(key));
+                boolean found = false;
+                if (o != null) {
+                    if (o instanceof CardCollection) {
+                        found = ((CardCollection) o).contains(card);
+                    } else {
+                        found = card.equals(o);
+                    }
+                }
+                if (!found) {
                     return false;
                 }
             } else {

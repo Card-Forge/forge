@@ -1,0 +1,9 @@
+Name:Black Dragon Gate
+ManaCost:no cost
+Types:Land Gate
+K:CARDNAME enters the battlefield tapped.
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | Exclude$ black | AILogic$ MostProminentInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color other than black.
+A:AB$ Mana | Cost$ T | Produced$ Combo B Chosen | SpellDescription$ Add {B} or one mana of the chosen color.
+DeckHints:Type$Gate
+Oracle:Black Dragon Gate enters the battlefield tapped.\nAs Black Dragon Gate enters the battlefield, choose a color other than black.\n{T}: Add {B} or one mana of the chosen color.

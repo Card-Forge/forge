@@ -1,7 +1,7 @@
 Name:Peace Talks
 ManaCost:1 W
 Types:Sorcery
-A:SP$ Effect | Cost$ 1 W | Name$ Peace Talks Effect | StaticAbilities$ STCantAttack,STCantTarget,STCantTargetPlayer | Duration$ ThisTurnAndNextTurn | SpellDescription$ This turn and next turn, creatures can't attack, and players and permanents can't be the targets of spells or activated abilities.
+A:SP$ Effect | StaticAbilities$ STCantAttack,STCantTarget,STCantTargetPlayer | Duration$ ThisTurnAndNextTurn | SpellDescription$ This turn and next turn, creatures can't attack, and players and permanents can't be the targets of spells or activated abilities.
 SVar:STCantAttack:Mode$ CantAttack | EffectZone$ Command | ValidCard$ Creature | Description$ Creatures can't attack.
 SVar:STCantTarget:Mode$ CantTarget | ValidCard$ Permanent | EffectZone$ Command | ValidSA$ Spell,Activated | Description$ Permanents can't be the targets of spells or activated abilities.
 SVar:STCantTargetPlayer:Mode$ CantTarget | ValidPlayer$ Player | EffectZone$ Command | ValidSA$ Spell,Activated | Description$ Players can't be the targets of spells or activated abilities.

@@ -1,0 +1,11 @@
+Name:Harper Recruiter
+ManaCost:2 W
+Types:Creature Human Warrior
+PT:3/1
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDigMulti | TriggerDescription$ Whenever CARDNAME attacks, look at the top four cards of your library. You may reveal a Cleric card, a Rogue card, a Warrior card, and/or a Wizard card from among them and put those cards into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDigMulti:DB$ DigMultiple | DigNum$ 4 | ChangeValid$ Card.Cleric,Card.Rogue,Card.Warrior,Card.Wizard | SourceZone$ Library | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | Optional$ True
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Party
+DeckHints:Type$Cleric|Rogue|Warrior|Wizard
+Oracle:Whenever Harper Recruiter attacks, look at the top four cards of your library. You may reveal a Cleric card, a Rogue card, a Warrior card, and/or a Wizard card from among them and put those cards into your hand. Put the rest on the bottom of your library in a random order.

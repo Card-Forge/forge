@@ -1,0 +1,17 @@
+Name:Nine-Fingers Keene
+ManaCost:1 B G U
+Types:Legendary Creature Human Rogue
+PT:4/4
+K:Menace
+K:Ward:PayLife<9>
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigPeek | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, look at the top nine cards of your library. You may put a Gate card from among them onto the battlefield. Then if you control nine or more Gates, put the rest into your hand. Otherwise, put the rest on the bottom of your library in a random order.
+SVar:TrigPeek:DB$ PeekAndReveal | PeekAmount$ 9 | NoReveal$ True | RememberPeeked$ True | SubAbility$ PickOne
+SVar:PickOne:DB$ ChooseCard | Defined$ You | Amount$ 1 | ChoiceTitle$ Choose a Gate card to put onto the battlefield | Choices$ Card.Gate+IsRemembered | ChoiceZone$ Library | SubAbility$ MoveChosen
+SVar:MoveChosen:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Defined$ ChosenCard | SubAbility$ DBBranch
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GE9 | TrueSubAbility$ DBHand | FalseSubAbility$ DBBottom | SubAbility$ DBCleanup
+SVar:DBBottom:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True
+SVar:DBHand:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Hand
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:X:Count$Valid Gate.YouCtrl
+DeckNeeds:Type$Gate
+Oracle:Menace\nWard—Pay 9 life.\nWhenever Nine-Fingers Keene deals combat damage to a player, look at the top nine cards of your library. You may put a Gate card from among them onto the battlefield. Then if you control nine or more Gates, put the rest into your hand. Otherwise, put the rest on the bottom of your library in a random order.

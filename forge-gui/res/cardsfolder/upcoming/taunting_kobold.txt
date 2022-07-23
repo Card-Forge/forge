@@ -1,0 +1,9 @@
+Name:Taunting Kobold
+ManaCost:R
+Types:Creature Kobold
+PT:0/1
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigGoad | TriggerDescription$ Whenever CARDNAME attacks, goad target creature an opponent controls. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+SVar:TrigGoad:DB$ Goad | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+SVar:HasAttackEffect:TRUE
+Oracle:Haste\nWhenever Taunting Kobold attacks, goad target creature an opponent controls. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)

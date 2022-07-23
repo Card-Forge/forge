@@ -1,0 +1,8 @@
+Name:You're Confronted by Robbers
+ManaCost:3 W
+Types:Instant
+A:SP$ Charm | Choices$ DBTap,DBToken
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature | TgtPrompt$ Select up to three target creatures | TargetMin$ 0 | TargetMax$ 3 | SpellDescription$ Stall for Time — Tap up to three target creatures.
+SVar:DBToken:DB$ Token | TokenAmount$ 3 | TokenScript$ w_1_1_soldier | TokenOwner$ You | SpellDescription$ Call for Aid — Create three 1/1 white Soldier creature tokens.
+DeckHas:Ability$Token
+Oracle:Choose one —\n• Stall for Time — Tap up to three target creatures.\n• Call for Aid — Create three 1/1 white Soldier creature tokens.

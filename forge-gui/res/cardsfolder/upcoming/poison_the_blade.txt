@@ -1,0 +1,6 @@
+Name:Poison the Blade
+ManaCost:1 G
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Deathtouch | SubAbility$ DBDraw | SpellDescription$ Target creature gains deathtouch until end of turn.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+Oracle:Target creature gains deathtouch until end of turn.\nDraw a card.

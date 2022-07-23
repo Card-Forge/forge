@@ -384,7 +384,8 @@ public abstract class Trigger extends TriggerReplacementBase {
             for (Player opp : this.getHostCard().getController().getOpponents()) {
                 if (opp.equals(attackedP)) {
                     continue;
-                } else if (opp.getLife() > life) {
+                }
+                if (opp.getLife() > life) {
                     found = true;
                     break;
                 }

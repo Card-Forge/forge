@@ -4,13 +4,9 @@ Types:Legendary Creature God
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When NICKNAME enters the battlefield, each opponent reveals their hand. For each opponent, exile a creature card they revealed this way until NICKNAME leaves the battlefield.
 SVar:TrigReveal:DB$ RevealHand | Defined$ Player.Opponent | ImprintRevealed$ True | SubAbility$ DBRepeatEach
-SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBExile | SubAbility$ DBEffect
-SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Remembered | ChangeType$ Creature.IsImprinted | ChangeNum$ 1 | AlreadyRevealed$ True | Chooser$ You | RememberChanged$ True
-SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ Remembered | ImprintCards$ Self | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
-SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | Static$ True | TriggerDescription$ These creature cards are exiled until EFFECTSOURCE leaves the battlefield.
-SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Hand | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf
-SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
-SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearRemembered$ True
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBExile | SubAbility$ DBCleanup
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Remembered | ChangeType$ Creature.IsImprinted | ChangeNum$ 1 | AlreadyRevealed$ True | Chooser$ You | Duration$ UntilHostLeavesPlay
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 A:AB$ ChooseCard | Cost$ X | ChoiceZone$ Exile | Choices$ Card.Creature+ExiledWithSource+cmcEQX | Amount$ 1 | ChoiceTitle$ Choose a card exiled with Valki with mana value X | SubAbility$ DBClone | AILogic$ Never | StackDescription$ {p:You} chooses a card exiled with NICKNAME with mana value X. NICKNAME becomes a copy of that card. | SpellDescription$ Choose a card exiled with NICKNAME with mana value X. NICKNAME becomes a copy of that card.
 SVar:DBClone:DB$ Clone | Defined$ ChosenCard | SubAbility$ DBClearChosen
 SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True

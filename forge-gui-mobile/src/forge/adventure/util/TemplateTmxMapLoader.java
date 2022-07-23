@@ -39,11 +39,11 @@ public class TemplateTmxMapLoader extends TmxMapLoader {
         for (FileHandle textureFile : textureFiles) {
             Texture texture = new Texture(textureFile, parameter.generateMipMaps);
             texture.setFilter(parameter.textureMinFilter, parameter.textureMagFilter);
-            Forge.getAssets().tmxMap.put(textureFile.path(), texture);
+            Forge.getAssets().tmxMap().put(textureFile.path(), texture);
         }
 
-        TiledMap map = loadTiledMap(tmxFile, parameter, new ImageResolver.DirectImageResolver(Forge.getAssets().tmxMap));
-        map.setOwnedResources(Forge.getAssets().tmxMap.values().toArray());
+        TiledMap map = loadTiledMap(tmxFile, parameter, new ImageResolver.DirectImageResolver(Forge.getAssets().tmxMap()));
+        map.setOwnedResources(Forge.getAssets().tmxMap().values().toArray());
         return map;
     }
 

@@ -1,0 +1,9 @@
+Name:Gond Gate
+ManaCost:no cost
+Types:Land Gate
+R:Event$ Moved | ValidCard$ Gate.YouCtrl | Destination$ Battlefield | ReplaceWith$ ETBUntapped | ActiveZones$ Battlefield | Description$ Gates you control enter the battlefield untapped.
+SVar:ETBUntapped:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Untapped$ True | Defined$ ReplacedCard
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 1 | SpellDescription$ Add {C}.
+A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Gate.YouCtrl | ReflectProperty$ Produce | SpellDescription$ Add one mana of any color that a Gate you control could produce.
+DeckNeeds:Type$Gate
+Oracle:Gates you control enter the battlefield untapped.\n{T}: Add {C}.\n{T}: Add one mana of any color that a Gate you control could produce.
