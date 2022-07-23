@@ -280,12 +280,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else {
                 changed = Lang.nounWithNumeralExceptOne(num, type + cardTag);
             }
-            final boolean battlefield = destination.equals("Battlefield");
+            final boolean toField = destination.equals("Battlefield");
+            final boolean toHand = destination.equals("Hand");
             sb.append(chooserNames).append(" returns ").append(mandatory || changeNumDesc ? "" : "up to ");
             sb.append(changed);
             // so far, it seems non-targeted only lets you return from your own graveyard
             sb.append(" from their graveyard").append(choosers.size() > 1 ? "s" : "");
-            sb.append(battlefield ? " to the " : " into their ").append(destination.toLowerCase());
+            sb.append(toField ? " to the " : toHand ? " to their " : " into their ").append(destination.toLowerCase());
             if (sa.hasParam("WithCountersType")) {
                 final CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                 if (cType != null) {
