@@ -11,4 +11,5 @@ T:Mode$ BecomeMonstrous | ValidCard$ Card.Self | TriggerZones$ Battlefield | Exe
 SVar:TrigGoad:DB$ Goad | TargetMin$ 0 | TargetMax$ MonstrosityX | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select up to X target creatures your opponents control
 SVar:MonstrosityX:TriggerCount$MonstrosityAmount
 AI:RemoveDeck:Random
+DeckHas:Ability$Counters
 Oracle:Whenever a creature an opponent controls attacks one of your opponents, double its power until end of turn.\n{X}{X}{R}: Monstrosity X. (If this creature isn't monstrous, put X +1/+1 counters on it and it becomes monstrous.)\nWhen Death Kiss becomes monstrous, goad up to X target creatures your opponents control.
