@@ -1,0 +1,10 @@
+Name:Javelin of Lightning
+ManaCost:1 R
+Types:Artifact Equipment
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters the battlefield, attach it to target creature you control.
+SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
+SVar:NeedsToPlay:Creature.YouCtrl+inZoneBattlefield
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, equipped creature gets +2/+0 and has first strike.
+K:Equip:4
+Oracle:Flash\nWhen Javelin of Lightning enters the battlefield, attach it to target creature you control.\nAs long as it's your turn, equipped creature gets +2/+0 and has first strike.\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)

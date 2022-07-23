@@ -95,6 +95,8 @@ public enum CounterEnumType {
 
     DEPLETION("DPLT", 185, 201, 208),
 
+    DESCENT("DESCT", 175, 35, 40),
+
     DESPAIR("DESPR", 238, 186, 187),
 
     DEVOTION("DEVOT", 255, 111, 255),

@@ -1,0 +1,8 @@
+Name:Dire Mimic
+ManaCost:2
+Types:Artifact Treasure
+K:Flash
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME> | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Animate | Cost$ 3 | Types$ Shapeshifter,Artifact,Creature | Power$ 5 | Toughness$ 5 | StackDescription$ SpellDescription | SpellDescription$ CARDNAME becomes a Shapeshifter artifact creature with base power and toughness 5/5 until end of turn.
+DeckHas:Ability$Sacrifice & Type$Shapeshifter
+Oracle:Flash\n{T}, Sacrifice Dire Mimic: Add one mana of any color.\n{3}: Dire Mimic becomes a Shapeshifter artifact creature with base power and toughness 5/5 until end of turn.
