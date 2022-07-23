@@ -1,0 +1,10 @@
+Name:Recruitment Drive
+ManaCost:2 W
+Types:Sorcery
+A:SP$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBSToken,10-19:DBKToken,20:DBTokens | SpellDescription$ Roll a d20.
+SVar:DBSToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | TokenOwner$ You | SpellDescription$ 1—9 VERT Create two 1/1 white Soldier creature tokens.
+SVar:DBKToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_2_2_knight | TokenOwner$ You | SpellDescription$ 10—19 VERT Create two 2/2 white Knight creature tokens.
+SVar:DBTokens:DB$ Token | TokenAmount$ 3 | TokenScript$ w_2_2_knight | TokenOwner$ You | SpellDescription$ 20 VERT Create three 2/2 white Knight creature tokens.
+DeckHas:Ability$Token
+DeckHas:Ability$Token & Type$Soldier|Knight
+Oracle:Roll a d20.\n1—9 | Create two 1/1 white Soldier creature tokens.\n10—19 | Create two 2/2 white Knight creature tokens.\n20 | Create three 2/2 white Knight creature tokens.
