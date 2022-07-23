@@ -2,7 +2,7 @@ Name:Overwhelming Encounter
 ManaCost:3 G G
 Types:Sorcery
 A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance & Trample | SubAbility$ DBRollDice | SpellDescription$ Creatures you control gain vigilance and trample until end of turn. Roll a d20.
-SVar:RollD20:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBPump,10-19:DBPutCounter,20:DBMaxCounter | SpellDescription$ Roll a d20.
+SVar:DBRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBPump,10-19:DBPutCounter,20:DBMaxCounter | SpellDescription$ Roll a d20.
 SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ 1—9 VERT Creatures you control get +2/+2 until end of turn.
 SVar:DBPutCounter:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ 10—19 VERT Creatures you control get +2/+2 until end of turn.
 SVar:DBMaxCounter:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 4 | SpellDescription$ 20 VERT Creatures you control get +2/+2 until end of turn.
