@@ -2,6 +2,6 @@ Name:Modify Memory
 ManaCost:4 U
 Types:Sorcery
 A:SP$ ExchangeControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 2 | TargetMax$ 2 | TargetsWithDifferentControllers$ True | RememberExchanged$ True | SubAbility$ DBDraw | SpellDescription$ Exchange control of two target creatures controlled by different players.
-SVar:DBDraw:DB$ Draw | NumCards$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Creature.YouCtrl | ConditionCompare$ EQ0 | SubAbility$ DBCleanup | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ If you control neither creature, draw three cards.
+SVar:DBDraw:DB$ Draw | NumCards$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Creature.YouDontCtrl | ConditionCompare$ EQ2 | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ If you control neither creature, draw three cards.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Exchange control of two target creatures controlled by different players. If you control neither creature, draw three cards.
