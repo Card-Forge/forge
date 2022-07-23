@@ -2,10 +2,12 @@ Name:Psionic Ritual
 ManaCost:4 U U
 Types:Sorcery
 K:Replicate:tapXType<1/Horror>
-A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | RememberChanged$ True | SubAbility$ DBCopy | SpellDescription$ Exile target instant or sorcery card from a graveyard and copy it. You may cast the copy without paying its mana cost.
-SVar:DBCopy:DB$ Play | Defined$ Remembered | Amount$ All | CopyCard$ True | WithoutManaCost$ True | SubAbility$ ExileSelf
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | RememberChanged$ True | SubAbility$ DBCopy | SpellDescription$ Exile target instant or sorcery card from a graveyard and copy it. You may cast the copy without paying its mana cost. Exile CARDNAME
+SVar:DBCopy:DB$ Play | Defined$ Remembered | Amount$ All | CopyCard$ True | WithoutManaCost$ True | Optional$ True | SubAbility$ ExileSelf
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | Defined$ Self | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckNeeds:Type$Horror
+DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Graveyard
 AI:RemoveDeck:All
 Oracle:Replicate—Tap an untapped Horror you control. (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nExile target instant or sorcery card from a graveyard and copy it. You may cast the copy without paying its mana cost.\nExile Psionic Ritual.
