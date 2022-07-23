@@ -1068,7 +1068,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 searchedLibrary = false;
             }
 
-            if (!defined && changeType != null) {
+            if (!defined && changeType != null && !changeType.startsWith("EACH")) {
                 fetchList = (CardCollection)AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
             }
 
@@ -1090,8 +1090,21 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             fetchList.sort();
 
             CardCollection chosenCards = new CardCollection();
-            // only multi-select if player can select more than one
-            if (changeNum > 1 && allowMultiSelect(decider, sa)) {
+            if (changeType.startsWith("EACH")) {
+                String[] eachTypes = changeType.substring(5).split(" & ");
+                for (String thisType : eachTypes) {
+                    for (int i = 0; i < changeNum && destination != null; i++) {
+                        CardCollection thisList = (CardCollection) AbilityUtils.filterListByType(fetchList, thisType, sa);
+                        if (!chosenCards.isEmpty()) {
+                            thisList.removeAll(chosenCards);
+                        }
+                        Card c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa,
+                                thisList, delayedReveal, selectPrompt, !sa.hasParam("Mandatory"), decider);
+                        chosenCards.add(c);
+                    }
+                }
+            } else if (changeNum > 1 && allowMultiSelect(decider, sa)) {
+                // only multi-select if player can select more than one
                 List<Card> selectedCards;
                 if (!sa.hasParam("SelectPrompt")) {
                     // new default messaging for multi select
