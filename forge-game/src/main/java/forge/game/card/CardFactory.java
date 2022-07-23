@@ -173,6 +173,10 @@ public class CardFactory {
         if (targetSA.isBestow()) {
             c.animateBestow();
         }
+
+        if (sourceSA.hasParam("RememberNewCard")) {
+            source.addRemembered(c);
+        }
         
         return c;
     }
