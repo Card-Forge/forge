@@ -44,7 +44,6 @@ public class StaticAbilityActivateAbilityAsIfHaste {
     }
 
     public static boolean applyCanActivateAbility(final StaticAbility stAb, final Card card) {
-
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }

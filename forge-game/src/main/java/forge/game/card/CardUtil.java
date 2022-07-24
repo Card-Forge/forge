@@ -321,6 +321,8 @@ public final class CardUtil {
             newCopy.setCombatLKI(in.getGame().getCombat().saveLKI(newCopy)); 
         }
 
+        newCopy.getGoadMap().putAll(in.getGoadMap());
+
         return newCopy;
     }
 
