@@ -1,0 +1,10 @@
+Name:From the Catacombs
+ManaCost:3 B B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | RememberChanged$ True | GainControl$ True | TgtPrompt$ Select target creature card in a graveyard | ValidTgts$ Creature | WithCountersType$ CORPSE | LeaveBattlefield$ Exile | SubAbility$ DBInitiative | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control with a corpse counter on it. If that creature would leave the battlefield, exile it instead of putting it anywhere else.
+SVar:DBInitiative:DB$ TakeInitiative | SpellDescription$ You take the initiative.
+K:Escape:3 B B ExileFromGrave<5/Card.Other/other>
+SVar:AIPreference:ExileFromGraveCost$Card.YouOwn+Other+inZoneGraveyard
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Discard
+Oracle:Put target creature card from a graveyard onto the battlefield under your control with a corpse counter on it. If that creature would leave the battlefield, exile it instead of putting it anywhere else.\nYou take the initiative.\nEscape—{3}{B}{B}, Exile five other cards from your graveyard. (You may cast this card from your graveyard for its escape cost.)
