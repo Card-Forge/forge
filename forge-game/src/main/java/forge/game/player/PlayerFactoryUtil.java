@@ -53,7 +53,7 @@ public class PlayerFactoryUtil {
             if (keyword.startsWith("Protection:")) {
                 final String[] kws = keyword.split(":");
                 if (kws.length > 3) {
-                    effect += "| Exceptions$ " + kws[3];
+                    effect += " | Exceptions$ " + kws[3];
                 }
             }
             inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
