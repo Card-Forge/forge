@@ -1,0 +1,17 @@
+Name:Nautiloid Ship
+ManaCost:4
+Types:Artifact Vehicle
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExileGrave | TriggerDescription$ When CARDNAME enters the battlefield, exile target player's graveyard.
+SVar:TrigExileGrave:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | RememberChanged$ True
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigPut | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may put a creature card exiled with CARDNAME onto the battlefield under your control.
+SVar:TrigPut:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Hidden$ True | ChooseType$ Creature.IsRemembered | SelectPrompt$ Select a creature card exiled with this | GainControl$ True
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+K:Crew:3
+SVar:NeedsToPlayVar:X GE2
+SVar:X:PlayerCountOpponents$HighestValidGraveyard Creature.YouOwn
+Oracle:Flying\nWhen Nautiloid Ship enters the battlefield, exile target player's graveyard.\nWhenever Nautiloid Ship deals combat damage to a player, you may put a creature card exiled with Nautiloid Ship onto the battlefield under your control.\nCrew 3

@@ -1,0 +1,8 @@
+Name:Mystery Key
+ManaCost:1 U
+Types:Artifact Equipment
+T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ When equipped creature deals combat damage to a player, sacrifice CARDNAME. If you do, draw three cards.
+SVar:TrigSacrifice:AB$ Draw | NumCards$ 3 | Cost$ Mandatory Sac<1/CARDNAME>
+SVar:NonStackingAttachEffect:True
+K:Equip:1
+Oracle:When equipped creature deals combat damage to a player, sacrifice Mystery Key. If you do, draw three cards.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

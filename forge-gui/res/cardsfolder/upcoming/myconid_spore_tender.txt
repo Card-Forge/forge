@@ -1,0 +1,7 @@
+Name:Myconid Spore Tender
+ManaCost:3 G
+Types:Creature Fungus
+PT:4/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Infesting Spores — When CARDNAME enters the battlefield, destroy up to one target artifact or enchantment.
+SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment
+Oracle:Infesting Spores — When Myconid Spore Tender enters the battlefield, destroy up to one target artifact or enchantment.
