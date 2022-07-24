@@ -3630,6 +3630,9 @@ public class CardFactoryUtil {
                 if (kws.length > 3) {
                     effect += "| Exceptions$ " + kws[3];
                 }
+                if (kws.length > 4) {
+                    effect += " | ExceptionSBA$ True";
+                }
             }
             effect += " | Description$ " + desc;
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
