@@ -1,0 +1,11 @@
+Name:Bothersome Quasit
+ManaCost:2 R
+Types:Creature Demon
+PT:3/2
+K:Menace
+S:Mode$ Continuous | Affected$ Creature.IsGoaded+OppCtrl | AddHiddenKeyword$ CARDNAME can't block. | Description$ Goaded creatures your opponents control can't block.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ DBGoad | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, goad target creature an opponent controls.
+SVar:DBGoad:DB$ Goad | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+SVar:BuffedBy:Card.nonCreature
+SVar:HasAttackEffect:TRUE
+Oracle:Menace\nGoaded creatures your opponents control can't block.\nWhenever you cast a noncreature spell, goad target creature an opponent controls. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)

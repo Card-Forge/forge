@@ -1,7 +1,7 @@
 Name:Sword-Point Diplomacy
 ManaCost:2 B
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 B | DigNum$ 3 | NoMove$ True | Reveal$ True | RememberRevealed$ True | SubAbility$ DBRepeat | SpellDescription$ Reveal the top three cards of your library. For each of those cards, put that card into your hand unless any opponent pays 3 life. Then exile the rest.
+A:SP$ PeekAndReveal | PeekAmount$ 3 | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBRepeat | SpellDescription$ Reveal the top three cards of your library. For each of those cards, put that card into your hand unless any opponent pays 3 life. Then exile the rest.
 SVar:DBRepeat:DB$ RepeatEach | RepeatSubAbility$ DBChangeZone | RepeatCards$ Card.IsRemembered | Zone$ Library | UseImprinted$ True | SubAbility$ PutIntoHand
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Imprinted | Origin$ Library | Destination$ Hand | UnlessCost$ PayLife<3> | UnlessPayer$ Opponent | ForgetChanged$ True | StackDescription$ Put [{c:Imprinted}] into the hand
 SVar:PutIntoHand:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Exile | SubAbility$ DBCleanup

@@ -1,0 +1,10 @@
+Name:Scouting Hawk
+ManaCost:2 W
+Types:Creature Bird
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | CheckSVar$ Y | SVarCompare$ GTX | TriggerDescription$ Keen Sight — When CARDNAME enters the battlefield, if an opponent controls more lands than you, search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Plains.Basic | ChangeNum$ 1
+SVar:X:Count$Valid Land.YouCtrl
+SVar:Y:PlayerCountOpponents$HighestValid Land.YouCtrl
+Oracle:Flying\nKeen Sight — When Scouting Hawk enters the battlefield, if an opponent controls more lands than you, search your library for a basic Plains card, put it onto the battlefield tapped, then shuffle.

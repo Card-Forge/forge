@@ -2,6 +2,6 @@ Name:Weight of Spires
 ManaCost:R
 Types:Instant
 A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | SpellDescription$ CARDNAME deals damage to target creature equal to the number of nonbasic lands that creature's controller controls.
-SVar:X:Count$Valid Land.nonBasic+TargetedControllerCtrl
+SVar:X:Count$Valid Land.nonBasic+ControlledBy TargetedController
 AI:RemoveDeck:All
 Oracle:Weight of Spires deals damage to target creature equal to the number of nonbasic lands that creature's controller controls.

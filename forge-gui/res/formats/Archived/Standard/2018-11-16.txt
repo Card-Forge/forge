@@ -1,0 +1,7 @@
+[format]
+Name:Standard (G18)
+Type:Archived
+Subtype:Standard
+Effective:2018-11-16
+Sets:XLN, RIX, DOM, M19, GRN, G18
+Banned:Rampaging Ferocidon

@@ -25,6 +25,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardFactoryUtil;
+import forge.game.card.CardZoneTable;
 import forge.game.cost.Cost;
 import forge.game.cost.CostDiscard;
 import forge.game.cost.CostPart;
@@ -86,9 +87,11 @@ public class PlayEffect extends SpellAbilityEffect {
         long controlledByTimeStamp = -1;
         final Game game = activator.getGame();
         boolean optional = sa.hasParam("Optional");
-        boolean remember = sa.hasParam("RememberPlayed");
+        final boolean remember = sa.hasParam("RememberPlayed");
+        final boolean imprint = sa.hasParam("ImprintPlayed");
+        final boolean forget = sa.hasParam("ForgetPlayed");
+        final boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
         int amount = 1;
-        boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
         int totalCMCLimit = Integer.MAX_VALUE;
         if (sa.hasParam("Amount") && !sa.getParam("Amount").equals("All")) {
             amount = AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa);
@@ -256,7 +259,7 @@ public class PlayEffect extends SpellAbilityEffect {
             }
             if (singleOption && sa.getTargetCard() == null)
                 sa.setPlayEffectCard(tgtCard);// show card to play rather than showing the source card
-            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())))) {
+            if (singleOption && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantPlayCard", CardTranslation.getTranslatedName(tgtCard.getName())), null)) {
                 if (wasFaceDown) {
                     tgtCard.turnFaceDownNoUpdate();
                     tgtCard.updateStateForView();
@@ -282,6 +285,7 @@ public class PlayEffect extends SpellAbilityEffect {
                 }
             }
 
+            // TODO if cost isn't replaced should include alternative ones
             // get basic spells (no flashback, etc.)
             List<SpellAbility> sas = AbilityUtils.getBasicSpellsFromPlayEffect(tgtCard, controller);
             if (sa.hasParam("ValidSA")) {
@@ -319,6 +323,9 @@ public class PlayEffect extends SpellAbilityEffect {
                 continue;
             }
 
+            final CardZoneTable triggerList = new CardZoneTable();
+            final Zone originZone = tgtCard.getZone();
+
             // lands will be played
             if (tgtSA instanceof LandAbility) {
                 tgtSA.resolve();
@@ -326,10 +333,20 @@ public class PlayEffect extends SpellAbilityEffect {
                 if (remember) {
                     source.addRemembered(tgtCard);
                 }
+                if (imprint) {
+                    source.addImprintedCard(tgtCard);
+                }
                 //Forget only if playing was successful
-                if (sa.hasParam("ForgetPlayed")) {
+                if (forget) {
                     source.removeRemembered(tgtCard);
                 }
+
+                final Zone currentZone = game.getCardState(tgtCard).getZone();
+                if (!originZone.equals(currentZone)) {
+                    triggerList.put(originZone.getZoneType(), currentZone.getZoneType(), game.getCardState(tgtCard));
+                }
+                triggerList.triggerChangesZoneAll(game, sa);
+
                 continue;
             }
 
@@ -403,18 +420,27 @@ public class PlayEffect extends SpellAbilityEffect {
             }
 
             if (controller.getController().playSaFromPlayEffect(tgtSA)) {
+                final Card played = tgtSA.getHostCard();
                 if (remember) {
-                    source.addRemembered(tgtSA.getHostCard());
+                    source.addRemembered(played);
                 }
-
+                if (imprint) {
+                    source.addImprintedCard(played);
+                }
                 //Forgot only if playing was successful
                 if (sa.hasParam("ForgetRemembered")) {
                     source.clearRemembered();
                 }
-
-                if (sa.hasParam("ForgetPlayed")) {
+                if (forget) {
                     source.removeRemembered(tgtCard);
                 }
+
+                final Zone currentZone = game.getCardState(tgtCard).getZone();
+                if (!currentZone.equals(originZone)) {
+                    //fix Garth One-Eye activated ability and the likes..
+                    triggerList.put(originZone == null ? null : originZone.getZoneType(), currentZone.getZoneType(), game.getCardState(tgtCard));
+                }
+                triggerList.triggerChangesZoneAll(game, sa);
             }
 
             amount--;

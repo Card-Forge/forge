@@ -1,8 +1,8 @@
 Name:Blood for Bones
 ManaCost:3 B
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 3 B Sac<1/Creature> | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouOwn | RememberChanged$ True | SubAbility$ DBChangeZone | SpellDescription$ Return a creature card from your graveyard to the battlefield, then return another creature card from your graveyard to your hand.
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouOwn+IsNotRemembered | SubAbility$ DBCleanup
+A:SP$ ChangeZone | Cost$ 3 B Sac<1/Creature> | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouOwn | PrimaryPrompt$ Choose a creature card to return to the battlefield | ChangeTypeDesc$ creature | RememberChanged$ True | SubAbility$ DBChangeZone | SpellDescription$ Return a creature card from your graveyard to the battlefield, then return another creature card from your graveyard to your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouOwn+IsNotRemembered | PrimaryPrompt$ Choose another creature card to return to your hand | ChangeNumDesc$ another | ChangeTypeDesc$ creature | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nReturn a creature card from your graveyard to the battlefield, then return another creature card from your graveyard to your hand.

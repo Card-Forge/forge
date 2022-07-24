@@ -4,7 +4,7 @@ Types:Creature Goat Hydra
 PT:0/0
 K:etbCounter:P1P1:X
 SVar:X:Count$xPaid
-A:AB$ PutCounter | Cost$ 2 | Activator$ Player.attackedBySourceThisCombat | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBReselect | ActivationPhases$ Declare Attackers | AILogic$ AlwaysWithNoTgt | SpellDescription$ Put a +1/+1 counter on CARDNAME, then you may reselect which player CARDNAME is attacking. Only the player CARDNAME is attacking may activate this ability and only during the declare attackers step. (It can't attack its controller.)
-SVar:DBReselect:DB$ ChangeCombatants | Defined$ Self | AILogic$ WeakestOppExceptCtrl
+A:AB$ PutCounter | Cost$ 2 | Activator$ Player | IsPresent$ Card.Self+attackingYou | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBReselect | ActivationPhases$ Declare Attackers | AILogic$ AlwaysWithNoTgt | SpellDescription$ Put a +1/+1 counter on CARDNAME, then you may reselect which player CARDNAME is attacking. Only the player CARDNAME is attacking may activate this ability and only during the declare attackers step. (It can't attack its controller.)
+SVar:DBReselect:DB$ ChangeCombatants | Defined$ Self | AILogic$ WeakestOppExceptCtrl | PlayerOnly$ True
 DeckHas:Ability$Counters
 Oracle:Capricopian enters the battlefield with X +1/+1 counters on it.\n{2}: Put a +1/+1 counter on Capricopian, then you may reselect which player Capricopian is attacking. Only the player Capricopian is attacking may activate this ability and only during the declare attackers step. (It can't attack its controller.)

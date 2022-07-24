@@ -1,0 +1,13 @@
+Name:Raggadragga, Goreguts Boss
+ManaCost:2 R G
+Types:Legendary Creature Human Boar
+PT:4/4
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+hasManaAbility | AddPower$ 2 | AddToughness$ 2 | Description$ Each creature you control with a mana ability gets +2/+2.
+T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+hasManaAbility | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ Whenever a creature you control with a mana ability attacks, untap it.
+SVar:TrigUntap:DB$ Untap | Defined$ TriggeredAttacker
+T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | AmountManaSpent$ GE7 | Execute$ TrigUntap2 | TriggerDescription$ Whenever you cast a spell, if at least seven mana was spent to cast it, untap target creature. It gets +7/+7 and gains trample until end of turn.
+SVar:TrigUntap2:DB$ Untap | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +7 | NumDef$ +7 | KW$ Trample
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Creature.hasManaAbility
+Oracle:Each creature you control with a mana ability gets +2/+2.\nWhenever a creature you control with a mana ability attacks, untap it.\nWhenever you cast a spell, if at least seven mana was spent to cast it, untap target creature. It gets +7/+7 and gains trample until end of turn.

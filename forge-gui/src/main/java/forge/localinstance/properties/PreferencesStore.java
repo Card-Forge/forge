@@ -21,10 +21,14 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.EnumMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import forge.game.GameType;
 import forge.util.FileUtil;
+import forge.util.TextUtil;
 
 /**
  * Holds default preference values in an enum.
@@ -122,5 +126,52 @@ public abstract class PreferencesStore<T extends Enum<T>> {
     
     public final double getPrefDouble(final T fp0) {
         return Double.parseDouble(getPref(fp0));        
+    }
+    public void setGameType(final T q0, final Set<GameType> gameTypes) {
+        String s0 = "";
+        Set<String> e = new HashSet<>();
+        for (GameType g : gameTypes)
+            e.add(g.getEnglishName());
+        if (!e.isEmpty())
+            s0 += String.join(",", e);
+        setPref(q0, s0);
+    }
+    public final Set<GameType> getGameType(final T fp0) {
+        Set<GameType> gameTypes = new HashSet<>();
+        String value;
+        value = preferenceValues.get(fp0);
+        if (value != null) {
+            if (value.contains(",")) {
+                String[] values = TextUtil.split(value, ',');
+                for (String gameType : values) {
+                    addGameType(gameTypes, gameType);
+                }
+            } else {
+                addGameType(gameTypes, value);
+            }
+        }
+        return gameTypes;
+    }
+    void addGameType(Set<GameType> result, String gameType) {
+        if (gameType.equals("Vanguard"))
+            result.add(GameType.Vanguard);
+        else if (gameType.equals("Momir Basic"))
+            result.add(GameType.MomirBasic);
+        else if (gameType.equals("MoJhoSto"))
+            result.add(GameType.MoJhoSto);
+        else if (gameType.equals("Commander"))
+            result.add(GameType.Commander);
+        else if (gameType.equals("Oathbreaker"))
+            result.add(GameType.Oathbreaker);
+        else if (gameType.equals("Tiny Leaders"))
+            result.add(GameType.TinyLeaders);
+        else if (gameType.equals("Brawl"))
+            result.add(GameType.Brawl);
+        else if (gameType.equals("Planechase"))
+            result.add(GameType.Planechase);
+        else if (gameType.equals("Archenemy"))
+            result.add(GameType.Archenemy);
+        else if (gameType.equals("Archenemy Rumble"))
+            result.add(GameType.ArchenemyRumble);
     }
 }

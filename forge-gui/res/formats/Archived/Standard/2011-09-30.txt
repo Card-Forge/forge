@@ -1,0 +1,6 @@
+[format]
+Name:Standard (ISD)
+Type:Archived
+Subtype:Standard
+Effective:2011-09-30
+Sets:SOM, MBS, NPH, M12, ISD

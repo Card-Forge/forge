@@ -17,8 +17,8 @@ public enum SceneType {
     DeckSelectScene(new DeckSelectScene()),
     ShopScene(new ShopScene()),
     PlayerStatisticScene(new PlayerStatisticScene()),
-    InventoryScene(new InventoryScene());
-
+    InventoryScene(new InventoryScene()),
+    SpellSmithScene(new SpellSmithScene());
 
     public final Scene instance;
     SceneType(Scene scene) {

@@ -1,0 +1,6 @@
+[format]
+Name:Extended (ISD)
+Type:Archived
+Subtype:Extended
+Effective:2011-09-30
+Sets:ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12, ISD

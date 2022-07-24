@@ -4,7 +4,7 @@ Types:Sorcery
 A:SP$ ChangeZoneAll | Cost$ X U U | ChangeType$ Card.YouOwn | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Random$ True | SubAbility$ DBDraw | UseAllOriginZones$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | SpellDescription$ Draw X cards. If X is 10 or more, instead shuffle your graveyard into your library, draw X cards, untap up to five lands, and you have no maximum hand size for the rest of the game.
 SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBUntap | AILogic$ ConsiderPrimary
 SVar:DBUntap:DB$ Untap | UntapUpTo$ True | UntapType$ Land | Amount$ 5 | SubAbility$ DBEffect | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10
-SVar:DBEffect:DB$ Effect | Name$ Finale of Revelation Effect | StaticAbilities$ STHandSize | Duration$ Permanent | SubAbility$ DBChange | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ Permanent | SubAbility$ DBChange | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10
 SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ Exile CARDNAME
 SVar:X:Count$xPaid

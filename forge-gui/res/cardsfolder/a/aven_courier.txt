@@ -1,0 +1,10 @@
+Name:Aven Courier
+ManaCost:1 U
+Types:Creature Bird Advisor
+PT:1/1
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME attacks, choose a counter on a permanent you control. Put a counter of that kind on target permanent you control if it doesn't have a counter of that kind on it.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | CounterType$ ExistingCounter | Choices$ Permanent.YouCtrl+HasCounters | PutOnDefined$ Targeted | OnlyNewKind$ True
+DeckNeeds:Ability$Counters
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Aven Courier attacks, choose a counter on a permanent you control. Put a counter of that kind on target permanent you control if it doesn't have a counter of that kind on it.

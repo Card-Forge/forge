@@ -6,7 +6,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Bat
 T:Mode$ Attacks | ValidCard$ Card.IsCommander+YouOwn | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Secondary$ True | TriggerDescription$ Whenever your commander enters the battlefield or attacks, put a page counter on CARDNAME.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ PAGE | CounterNum$ 1
 SVar:HasAttackEffect:TRUE
-DeckHints:Type$IsCommander
 DeckHas:Ability$Counters
 AI:RemoveDeck:NonCommander
 A:AB$ Draw | Cost$ 1 T SubCounter<1/PAGE> | NumCards$ 1 | SpellDescription$ Draw a card.

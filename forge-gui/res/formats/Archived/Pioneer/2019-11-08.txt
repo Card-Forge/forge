@@ -1,0 +1,7 @@
+[format]
+Name:Pioneer (2019-11-08)
+Type:Archived
+Subtype:Pioneer
+Effective:2019-11-08
+Sets:RTR, GTC, DGM, M14, THS, BNG, JOU, M15, KTK, FRF, DTK, ORI, BFZ, OGW, SOI, W16, EMN, KLD, AER, W17, AKH, HOU, XLN, RIX, DOM, M19, GRN, G18, RNA, WAR, M20, ELD
+Banned:Bloodstained Mire; Felidar Guardian; Flooded Strand; Leyline of Abundance; Oath of Nissa; Polluted Delta; Windswept Heath; Wooded Foothills

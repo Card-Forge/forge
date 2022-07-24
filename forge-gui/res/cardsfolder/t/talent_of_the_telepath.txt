@@ -1,7 +1,7 @@
 Name:Talent of the Telepath
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ Dig | Cost$ 2 U U | ValidTgts$ Player.Opponent | TgtPrompt$ Select target opponent | Reveal$ True | NoMove$ True | DigNum$ 7 | RememberRevealed$ True | SubAbility$ TelepathCast | SpellDescription$ Target opponent reveals the top seven cards of their library. You may cast an instant or sorcery spell from among them without paying its mana cost. Then that player puts the rest into their graveyard. Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, you may cast up to two instant and/or sorcery spells from among the revealed cards instead of one.
+A:SP$ PeekAndReveal | ValidTgts$ Opponent | Reveal$ True | NoPeek$ True | PeekAmount$ 7 | RememberRevealed$ True | SubAbility$ TelepathCast | SpellDescription$ Target opponent reveals the top seven cards of their library. You may cast an instant or sorcery spell from among them without paying its mana cost. Then that player puts the rest into their graveyard. Spell mastery — If there are two or more instant and/or sorcery cards in your graveyard, you may cast up to two instant and/or sorcery spells from among the revealed cards instead of one.
 SVar:TelepathCast:DB$ Play | ValidZone$ Library | Valid$ Card.IsRemembered | ValidSA$ Instant,Sorcery | Controller$ You | WithoutManaCost$ True | Optional$ True | Amount$ X | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | Defined$ Remembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

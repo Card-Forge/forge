@@ -1,0 +1,9 @@
+Name:Caldaia Guardian
+ManaCost:3 G
+Types:Creature Human Soldier
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Creature.Other+cmcGE4+YouCtrl | Execute$ TrigToken | TriggerDescription$ When CARDNAME or another creature you control with mana value 4 or greater dies, create two 1/1 green and white Citizen creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ gw_1_1_citizen
+K:Blitz:2 G
+DeckHas:Ability$Token|Sacrifice & Type$Citizen
+Oracle:Whenever Caldaia Guardian or another creature you control with mana value 4 or greater dies, create two 1/1 green and white Citizen creature tokens.\nBlitz {2}{G} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)

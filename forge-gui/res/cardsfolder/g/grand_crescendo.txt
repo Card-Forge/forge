@@ -1,0 +1,8 @@
+Name:Grand Crescendo
+ManaCost:X W W
+Types:Instant
+A:SP$ Token | TokenAmount$ X | TokenScript$ gw_1_1_citizen | SubAbility$ DBPumpAll | SpellDescription$ Create X 1/1 green and white Citizen creature tokens.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Indestructible | SpellDescription$ Creatures you control gain indestructible until end of turn.
+SVar:X:Count$xPaid
+DeckHas:Ability$Token & Type$Citizen
+Oracle:Create X 1/1 green and white Citizen creature tokens. Creatures you control gain indestructible until end of turn.

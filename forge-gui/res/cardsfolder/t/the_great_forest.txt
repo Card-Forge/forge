@@ -1,7 +1,7 @@
 Name:The Great Forest
 ManaCost:no cost
 Types:Plane Lorwyn
-S:Mode$ Continuous | EffectZone$ Command | GlobalRule$ Each creature assigns combat damage equal to its toughness rather than its power. | Description$ Each creature assigns combat damage equal to its toughness rather than its power.
+S:Mode$ CombatDamageToughness | ValidCard$ Creature | Description$ Each creature assigns combat damage equal to its toughness rather than its power.
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, creatures you control get +0/+2 and gain trample until end of turn.
 SVar:RolledChaos:DB$ PumpAll | ValidCards$ Creature.ActivePlayerCtrl | NumDef$ 2 | KW$ Trample
 SVar:AIRollPlanarDieParams:Mode$ Always | MinTurn$ 3 | RollInMain1$ True

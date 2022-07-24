@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.ai.AiCardMemory.MemorySet;
 import forge.ai.ability.AnimateAi;
+import forge.ai.ability.TokenAi;
 import forge.card.ColorSet;
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
@@ -14,6 +15,7 @@ import forge.game.ability.ApiType;
 import forge.game.card.*;
 import forge.game.card.CardPredicates.Presets;
 import forge.game.combat.Combat;
+import forge.game.combat.CombatUtil;
 import forge.game.cost.*;
 import forge.game.keyword.Keyword;
 import forge.game.phase.PhaseType;
@@ -692,6 +694,72 @@ public class ComputerUtilCost {
             return false;
         } else if ("LowPriority".equals(aiLogic) && MyRandom.getRandom().nextInt(100) < 67) {
             return false;
+        } else if (aiLogic != null && aiLogic.startsWith("Fabricate")) {
+            final int n = Integer.valueOf(aiLogic.substring("Fabricate".length()));
+
+            // if host would leave the play or if host is useless, create tokens
+            if (source.hasSVar("EndOfTurnLeavePlay") || ComputerUtilCard.isUselessCreature(payer, source)) {
+                return false;
+            }
+
+            // need a copy for one with extra +1/+1 counter boost,
+            // without causing triggers to run
+            final Card copy = CardUtil.getLKICopy(source);
+            copy.setCounters(CounterEnumType.P1P1, copy.getCounters(CounterEnumType.P1P1) + n);
+            copy.setZone(source.getZone());
+
+            // if host would put into the battlefield attacking
+            Combat combat = source.getGame().getCombat();
+            if (combat != null && combat.isAttacking(source)) {
+                final Player defender = combat.getDefenderPlayerByAttacker(source);
+                if (defender.canLoseLife() && !ComputerUtilCard.canBeBlockedProfitably(defender, copy, true)) {
+                    return true;
+                }
+                return false;
+            }
+
+            // if the host has haste and can attack
+            if (CombatUtil.canAttack(copy)) {
+                for (final Player opp : payer.getOpponents()) {
+                    if (CombatUtil.canAttack(copy, opp) &&
+                            opp.canLoseLife() &&
+                            !ComputerUtilCard.canBeBlockedProfitably(opp, copy, true))
+                        return true;
+                }
+            }
+
+            // TODO check for trigger to turn token ETB into +1/+1 counter for host
+            // TODO check for trigger to turn token ETB into damage or life loss for opponent
+            // in this cases Token might be prefered even if they would not survive
+            final Card tokenCard = TokenAi.spawnToken(payer, sa);
+
+            // Token would not survive
+            if (!tokenCard.isCreature() || tokenCard.getNetToughness() < 1) {
+                return true;
+            }
+
+            // Special Card logic, this one try to median its power with the number of artifacts
+            if ("Marionette Master".equals(source.getName())) {
+                CardCollection list = CardLists.filter(payer.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
+                return list.size() >= copy.getNetPower();
+            } else if ("Cultivator of Blades".equals(source.getName())) {
+                // Cultivator does try to median with number of Creatures
+                CardCollection list = payer.getCreaturesInPlay();
+                return list.size() >= copy.getNetPower();
+            }
+
+            // evaluate Creature with +1/+1
+            int evalCounter = ComputerUtilCard.evaluateCreature(copy);
+
+            final CardCollection tokenList = new CardCollection(source);
+            for (int i = 0; i < n; ++i) {
+                tokenList.add(TokenAi.spawnToken(payer, sa));
+            }
+
+            // evaluate Host with Tokens
+            int evalToken = ComputerUtilCard.evaluateCreatureList(tokenList);
+
+            return evalToken < evalCounter;
         }
 
         // Check for shocklands and similar ETB replacement effects

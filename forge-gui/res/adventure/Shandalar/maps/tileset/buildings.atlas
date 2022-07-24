@@ -62,7 +62,7 @@ RedShop
   xy: 352, 704
   size: 16, 16    
 WhiteShop
-  xy: 369, 704
+  xy: 368, 704
   size: 16, 16  
 LandShop
   xy: 304, 720
@@ -77,7 +77,7 @@ BlueShop
   xy: 352, 720
   size: 16, 16    
 MultiColorShop
-  xy: 369, 720
+  xy: 368, 720
   size: 16, 16
 SelesnyaShop
   xy: 304, 736
@@ -92,7 +92,7 @@ RakdosShop
   xy: 352, 736
   size: 16, 16    
 GruulShop
-  xy: 369, 736
+  xy: 368, 736
   size: 16, 16 
 SimicShop
   xy: 304, 752
@@ -107,7 +107,7 @@ GolgariShop
   xy: 352, 752
   size: 16, 16    
 BorosShop
-  xy: 369, 752
+  xy: 368, 752
   size: 16, 16
 GoblinShop
   xy: 304, 768
@@ -122,14 +122,23 @@ ElfShop
   xy: 352, 768
   size: 16, 16    
 MerfolkShop
-  xy: 369, 768
+  xy: 368, 768
   size: 16, 16
 EquipmentShop
-  xy: 304, 786   
+  xy: 304, 784   
   size: 16, 16   
-ArtefactShop
-  xy: 320, 786   
-  size: 16, 16  
+ArtifactShop
+  xy: 320, 784   
+  size: 16, 16
+AngelShop
+  xy: 336, 784
+  size: 16, 16
+GolemShop
+  xy: 352, 784
+  size: 16, 16
+SliverShop
+  xy: 368, 784
+  size: 16, 16
 Test
   xy: 128, 48
   size: 32, 32 

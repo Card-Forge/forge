@@ -1,0 +1,11 @@
+Name:Miirym, Sentinel Wyrm
+ManaCost:3 G U R
+Types:Legendary Creature Dragon Spirit
+PT:6/6
+K:Flying
+K:Ward:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Dragon.YouCtrl+nonToken+Other | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever another nontoken Dragon enters the battlefield under your control, create a token that's a copy of it, except the token isn't legendary if that Dragon is legendary.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredCard | NonLegendary$ True
+DeckNeeds:Type$Dragon
+DeckHas:Ability$Token
+Oracle:Flying, ward {2}\nWhenever another nontoken Dragon enters the battlefield under your control, create a token that's a copy of it, except the token isn't legendary if that Dragon is legendary.

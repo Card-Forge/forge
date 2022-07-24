@@ -1,0 +1,7 @@
+[format]
+Name:Block: Ice Age (CSP)
+Type:Archived
+Subtype:Block
+Effective:2006-08-20
+Sets:ICE, ALL, CSP
+Banned:Amulet of Quoz, Thawing Glaciers, Zuran Orb

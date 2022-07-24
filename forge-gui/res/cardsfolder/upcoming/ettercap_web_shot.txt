@@ -1,0 +1,15 @@
+Name:Ettercap
+ManaCost:4 G
+Types:Creature Spider Beast
+PT:2/5
+K:Reach
+AlternateMode:Adventure
+Oracle:Reach
+
+ALTERNATE
+
+Name:Web Shot
+ManaCost:2 G
+Types:Instant Adventure
+A:SP$ Destroy | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with flying | SpellDescription$ Destroy target creature with flying.
+Oracle:Destroy target creature with flying. (Then exile this card. You may cast the creature later from exile.)

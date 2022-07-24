@@ -5,7 +5,7 @@ T:Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ Player | TriggerZon
 SVar:TrigFlip:DB$ FlipACoin | Caller$ TriggeredActivator | LoseSubAbility$ DBCounter
 SVar:DBCounter:DB$ Counter | Defined$ TriggeredSpellAbility
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, target player reveals the top card of their library. If it's a nonland card, you may cast it without paying its mana cost.
-SVar:RolledChaos:DB$ Dig | DigNum$ 1 | ValidTgts$ Player | NoMove$ True | Reveal$ True | RememberRevealed$ True | SubAbility$ DBPlay
+SVar:RolledChaos:DB$ PeekAndReveal | ValidTgts$ Player | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:AIRollPlanarDieParams:Mode$ Always

@@ -1,0 +1,8 @@
+Name:Sword Coast Sailor
+ManaCost:1 U
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ AttacksPlayer | Description$ Commander creatures you own have "Whenever this creature attacks a player, if no opponent has more life than that player, this creature can't be blocked this turn."
+SVar:AttacksPlayer:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player | Condition$ NoOpponentHasMoreLifeThanAttacked | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks a player, if no opponent has more life than that player, this creature can't be blocked this turn.
+SVar:TrigPump:DB$ Pump | KW$ HIDDEN Unblockable
+AI:RemoveDeck:NonCommander
+Oracle:Commander creatures you own have "Whenever this creature attacks a player, if no opponent has more life than that player, this creature can't be blocked this turn."

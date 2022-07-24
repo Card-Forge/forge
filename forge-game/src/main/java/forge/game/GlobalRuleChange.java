@@ -28,13 +28,11 @@ public enum GlobalRuleChange {
     noCreatureETBTriggers ("Creatures entering the battlefield don't cause abilities to trigger."),
     noCreatureDyingTriggers ("Creatures dying don't cause abilities to trigger."),
     noNight ("It can't become night."),
-    noLegendRule ("The legend rule doesn't apply."),
     /* onlyOneAttackerATurn ("No more than one creature can attack each turn."), */
     onlyOneAttackerACombat ("No more than one creature can attack each combat."),
     onlyOneBlocker ("No more than one creature can block each combat."),
     onlyOneBlockerPerOpponent ("Each opponent can't block with more than one creature."),
     onlyTwoBlockers ("No more than two creatures can block each combat."),
-    toughnessAssignsDamage ("Each creature assigns combat damage equal to its toughness rather than its power."),
     blankIsChaos("Each blank roll of the planar dice is a {CHAOS} roll.");
     
     private final String ruleText;

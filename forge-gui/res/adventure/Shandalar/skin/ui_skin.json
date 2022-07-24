@@ -379,7 +379,8 @@
 		"overFontColor": "RGBA_0_216_255_255",
 		"disabledFontColor": "RGBA_255_255_255_255",
 		"scrollStyle": "default",
-		"listStyle": "default"
+		"listStyle": "default",
+		"background": "unpressed10patch"
 	}
 },
 "com.badlogic.gdx.scenes.scene2d.ui.Slider$SliderStyle": {

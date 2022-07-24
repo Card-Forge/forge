@@ -1,0 +1,9 @@
+Name:Ingenious Artillerist
+ManaCost:2 R
+Types:Creature Human Artificer
+PT:3/1
+T:Mode$ ChangesZoneAll | ValidCards$ Artifact.YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever one or more artifacts enter the battlefield under your control, CARDNAME deals that much damage to each opponent.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ X
+SVar:X:TriggerCount$Amount
+DeckNeeds:Type$Artifact
+Oracle:Whenever one or more artifacts enter the battlefield under your control, Ingenious Artillerist deals that much damage to each opponent.

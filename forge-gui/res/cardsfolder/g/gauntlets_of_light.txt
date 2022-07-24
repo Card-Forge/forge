@@ -2,8 +2,9 @@ Name:Gauntlets of Light
 ManaCost:2 W
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | AddHiddenKeyword$ CARDNAME assigns combat damage equal to its toughness rather than its power | Description$ Enchanted creature gets +0/+2 and assigns combat damage equal to its toughness rather than its power.
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 2 | Description$ Enchanted creature gets +0/+2 and assigns combat damage equal to its toughness rather than its power.
+S:Mode$ CombatDamageToughness | ValidCard$ Creature.EnchantedBy | Secondary$ True | Description$ Enchanted creature gets +0/+2 and assigns combat damage equal to its toughness rather than its power.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ GauntletsUntap | Description$ Enchanted creature has "{2}{W}: Untap this creature."
 SVar:GauntletsUntap:AB$ Untap | Cost$ 2 W | Defined$ Self | SpellDescription$ Untap this creature.
 Oracle:Enchant creature\nEnchanted creature gets +0/+2 and assigns combat damage equal to its toughness rather than its power.\nEnchanted creature has "{2}{W}: Untap this creature."

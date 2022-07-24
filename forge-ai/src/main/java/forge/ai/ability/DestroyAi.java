@@ -353,12 +353,10 @@ public class DestroyAi extends SpellAbilityAi {
             // Filter AI-specific targets if provided
             preferred = ComputerUtil.filterAITgts(sa, ai, preferred, true);
 
-            for (final Card c : preferred) {
-                list.remove(c);
-            }
+            list.removeAll(preferred);
 
             if (preferred.isEmpty() && !mandatory) {
-            	return false;
+                return false;
             }
 
             while (sa.canAddMoreTarget()) {

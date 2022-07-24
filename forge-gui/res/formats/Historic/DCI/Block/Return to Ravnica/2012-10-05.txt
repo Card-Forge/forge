@@ -1,6 +1,0 @@
-[format]
-Name:Block: Return to Ravnica (RTR)
-Type:Historic
-Subtype:Block
-Effective:2012-10-05
-Sets:RTR

@@ -1,0 +1,9 @@
+Name:Oceanus Dragon
+ManaCost:4 U U
+Types:Creature Dragon
+PT:3/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap target creature an opponent controls. Goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls. | SubAbility$ DBGoad
+SVar:DBGoad:DB$ Goad | Defined$ Targeted
+Oracle:Flying\nWhen Oceanus Dragon enters the battlefield, tap target creature an opponent controls. Goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)

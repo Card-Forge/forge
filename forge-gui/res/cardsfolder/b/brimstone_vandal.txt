@@ -3,9 +3,8 @@ ManaCost:2 R
 Types:Creature Devil
 PT:2/3
 K:Menace
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Neither | ReplaceWith$ DoDay | Description$ If it's neither day nor night, it becomes day as CARDNAME enters the battlefield.
-SVar:DoDay:DB$ DayTime | Value$ Day | SubAbility$ ETB
-SVar:ETB:DB$ InternalEtbReplacement
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | DayTime$ Neither | ReplaceWith$ DoDay | ReplacementResult$ Updated | Description$ If it's neither day nor night, it becomes day as CARDNAME enters the battlefield.
+SVar:DoDay:DB$ DayTime | Value$ Day
 T:Mode$ DayTimeChanges | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever day becomes night or night becomes day, CARDNAME deals 1 damage to each opponent.
 SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 1
 Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nIf it's neither day nor night, it becomes day as Brimstone Vandal enters the battlefield.\nWhenever day becomes night or night becomes day, Brimstone Vandal deals 1 damage to each opponent.

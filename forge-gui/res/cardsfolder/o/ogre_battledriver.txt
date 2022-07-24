@@ -3,6 +3,6 @@ ManaCost:2 R R
 Types:Creature Ogre Warrior
 PT:3/3
 T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever another creature enters the battlefield under your control, that creature gets +2/+0 and haste until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredCard | NumAtt$ +2 | NumDef$ +0 | KW$ Haste
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredCardLKICopy | NumAtt$ +2 | NumDef$ +0 | KW$ Haste
 SVar:BuffedBy:Creature
 Oracle:Whenever another creature enters the battlefield under your control, that creature gets +2/+0 and gains haste until end of turn. (It can attack and {T} this turn.)

@@ -397,10 +397,12 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         final Map<Object, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, shieldAmount, false,
             localizer.getMessage("lblShield"));
-        Map<GameEntity, Integer> result = new HashMap<>(vResult.size());
-        for (Map.Entry<GameEntity, Integer> e : affected.entrySet()) {
-            if (vResult.containsKey(GameEntityView.get(e.getKey()))) {
-                result.put(e.getKey(), vResult.get(GameEntityView.get(e.getKey())));
+        Map<GameEntity, Integer> result = new HashMap<>();
+        if (vResult != null) { //fix for netplay
+            for (Map.Entry<GameEntity, Integer> e : affected.entrySet()) {
+                if (vResult.containsKey(GameEntityView.get(e.getKey()))) {
+                    result.put(e.getKey(), vResult.get(GameEntityView.get(e.getKey())));
+                }
             }
         }
         return result;
@@ -417,12 +419,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         }
         final Map<Object, Integer> vResult = getGui().assignGenericAmount(vSource, vAffected, manaAmount, false,
             localizer.getMessage("lblMana").toLowerCase());
-        Map<Byte, Integer> result = new HashMap<>(vResult.size());
-        it = colorSet.iterator();
-        while (it.hasNext()) {
-            Byte color = it.next();
-            if (vResult.containsKey(color)) {
-                result.put(color, vResult.get(color));
+        Map<Byte, Integer> result = new HashMap<>();
+        if (vResult != null) { //fix for netplay
+            it = colorSet.iterator();
+            while (it.hasNext()) {
+                Byte color = it.next();
+                if (vResult.containsKey(color)) {
+                    result.put(color, vResult.get(color));
+                }
             }
         }
         return result;
@@ -729,7 +733,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
      * SpellAbility, java.lang.String, java.lang.String)
      */
     @Override
-    public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message) {
+    public boolean confirmAction(final SpellAbility sa, final PlayerActionConfirmMode mode, final String message, Map<String, Object> params) {
         if (sa != null && sa.getHostCard() != null && sa.hasParam("ShowCardInPrompt")) {
             // The card wants another thing displayed in the prompt on mouse over rather than itself
             Card show = null;
@@ -1114,23 +1118,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public CardCollectionView chooseCardsToDiscardFrom(final Player p, final SpellAbility sa,
             final CardCollection valid, final int min, final int max) {
-        if (GuiBase.getInterface().isLibgdxPort()) {
-            boolean optional = min == 0;
-            tempShowCards(valid);
-            GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(valid);
-            List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min),
-                    localizer.getMessage("lblDiscarded"), min, max, gameCacheDiscard.getTrackableKeys(), null);
-            endTempShowCards();
-            final CardCollection choices = new CardCollection();
-            gameCacheDiscard.addToList(views, choices);
-            return choices;
-        }
+        boolean optional = min == 0;
 
         if (p != player) {
             tempShowCards(valid);
             GameEntityViewMap<Card, CardView> gameCacheDiscard = GameEntityView.getMap(valid);
-            List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), min),
-                            localizer.getMessage("lblDiscarded"), min, min, gameCacheDiscard.getTrackableKeys(), null);
+            List<CardView> views = getGui().many(String.format(localizer.getMessage("lblChooseMinCardToDiscard"), optional ? max : min),
+                    localizer.getMessage("lblDiscarded"), min, max, gameCacheDiscard.getTrackableKeys(), null);
             endTempShowCards();
             final CardCollection choices = new CardCollection();
             gameCacheDiscard.addToList(views, choices);
@@ -1344,6 +1338,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 typesInDeck.put("Servo", count + 1);
             }
         }
+
+        // pre sort
+        Collections.sort(types);
 
         // create sorted list from map from least to most frequent
         List<Entry<String, Integer>> sortedList = Lists.newArrayList(typesInDeck.entrySet());

@@ -1,0 +1,6 @@
+[format]
+Name:Standard (LRW)
+Type:Archived
+Subtype:Standard
+Effective:2007-10-20
+Sets:CSP, TSP, TSB, PLC, FUT, 10E, LRW

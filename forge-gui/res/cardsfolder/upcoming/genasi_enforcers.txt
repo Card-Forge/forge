@@ -1,0 +1,8 @@
+Name:Genasi Enforcers
+ManaCost:1 R
+Types:Creature Elemental Shaman
+PT:1/3
+K:Myriad
+A:AB$ PumpAll | Cost$ 1 R | ValidCards$ Creature.YouCtrl+namedGenasi Enforcers | NumAtt$ +1 | SpellDescription$ Creatures you control named Genasi Enforcers get +1/+0 until end of turn.
+DeckHas:Ability$Token
+Oracle:Myriad (Whenever this creature attacks, for each opponent other than defending player, you may create a token that's a copy of this creature that's tapped and attacking that player or a planeswalker they control. Exile the tokens at end of combat.)\n{1}{R}: Creatures you control named Genasi Enforcers get +1/+0 until end of turn.

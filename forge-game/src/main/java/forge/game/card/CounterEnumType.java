@@ -73,6 +73,8 @@ public enum CounterEnumType {
 
     COMPONENT("COMPN", 224, 160, 48),
 
+    CONTESTED("CONTES", 255, 76, 2),
+
     CORPSE("CRPSE", 230, 186, 209),
 
     CORRUPTION("CRPTN", 210, 121, 210),
@@ -92,6 +94,8 @@ public enum CounterEnumType {
     DELAY("DELAY", 102, 206, 255),
 
     DEPLETION("DPLT", 185, 201, 208),
+
+    DESCENT("DESCT", 175, 35, 40),
 
     DESPAIR("DESPR", 238, 186, 187),
 

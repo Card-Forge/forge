@@ -1,0 +1,9 @@
+Name:Bellowing Mauler
+ManaCost:4 B
+Types:Creature Ogre Warrior
+PT:4/6
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRepeatEach | TriggerDescription$ At the beginning of your end step, each player loses 4 life unless they sacrifice a nontoken creature.
+SVar:TrigRepeatEach:DB$ RepeatEach | RepeatSubAbility$ DBLoseLife | RepeatPlayers$ Player
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ 4 | UnlessCost$ Sac<1/Creature.nonToken/a nontoken creature> | UnlessPayer$ Remembered
+DeckHas:Ability$Sacrifice
+Oracle:At the beginning of your end step, each player loses 4 life unless they sacrifice a nontoken creature.

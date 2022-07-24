@@ -1,0 +1,10 @@
+Name:The Hourglass Coven
+ManaCost:4 B B
+Types:Legendary Creature Hag Warlock
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerDescription$ When CARDNAME enters the battlefield, draft a card from CARDNAME's spellbook twice, then put those cards onto the battlefield.
+SVar:TrigDraft:DB$ Draft | DraftNum$ 2 | Spellbook$ Hag of Syphoned Breath,Hag of Dark Duress,Hag of Ceaseless Torment,Hag of Inner Weakness,Hag of Death's Legion,Hag of Scoured Thoughts,Hag of Twisted Visions,Hag of Mage's Doom,Hag of Noxious Nightmares | Zone$ Battlefield
+S:Mode$ Continuous | Affected$ Warlock.Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Warlocks you control get +1/+1.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Warlock
+Oracle:When The Hourglass Coven enters the battlefield, draft a card from The Hourglass Coven's spellbook twice, then put those cards onto the battlefield.\nOther Warlocks you control get +1/+1.

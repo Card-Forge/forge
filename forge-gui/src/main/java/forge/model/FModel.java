@@ -208,7 +208,7 @@ public final class FModel {
         ForgePreferences.UPLOAD_DRAFT = ForgePreferences.NET_CONN;
 
         formats = new GameFormat.Collection(new GameFormat.Reader( new File(ForgeConstants.FORMATS_DATA_DIR),
-                new File(ForgeConstants.USER_FORMATS_DIR), preferences.getPrefBoolean(FPref.LOAD_HISTORIC_FORMATS)));
+                new File(ForgeConstants.USER_FORMATS_DIR), preferences.getPrefBoolean(FPref.LOAD_ARCHIVED_FORMATS)));
 
         magicDb.setStandardPredicate(formats.getStandard().getFilterRules());
         magicDb.setPioneerPredicate(formats.getPioneer().getFilterRules());
@@ -409,6 +409,8 @@ public final class FModel {
                     addTo = CardType.Constant.ARTIFACT_TYPES;
                 } else if (s.equals("[WalkerTypes]")) {
                     addTo = CardType.Constant.WALKER_TYPES;
+                } else if (s.equals("[DungeonTypes]")) {
+                    addTo = CardType.Constant.DUNGEON_TYPES;
                 } else if (s.length() > 1) {
                     if (addTo != null) {
                         if (s.contains(":")) {

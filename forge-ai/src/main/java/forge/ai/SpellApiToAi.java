@@ -71,6 +71,7 @@ public enum SpellApiToAi {
             .put(ApiType.DigMultiple, DigMultipleAi.class)
             .put(ApiType.DigUntil, DigUntilAi.class)
             .put(ApiType.Discard, DiscardAi.class)
+            .put(ApiType.Draft, ChooseCardNameAi.class)
             .put(ApiType.DrainMana, DrainManaAi.class)
             .put(ApiType.Draw, DrawAi.class)
             .put(ApiType.EachDamage, DamageEachAi.class)
@@ -169,6 +170,7 @@ public enum SpellApiToAi {
             .put(ApiType.StoreSVar, StoreSVarAi.class)
             .put(ApiType.Subgame, AlwaysPlayAi.class)
             .put(ApiType.Surveil, SurveilAi.class)
+            .put(ApiType.TakeInitiative, AlwaysPlayAi.class)
             .put(ApiType.Tap, TapAi.class)
             .put(ApiType.TapAll, TapAllAi.class)
             .put(ApiType.TapOrUntap, TapOrUntapAi.class)
@@ -184,7 +186,6 @@ public enum SpellApiToAi {
             .put(ApiType.WinsGame, GameWinAi.class)
 
             .put(ApiType.DamageResolve, AlwaysPlayAi.class)
-            .put(ApiType.InternalEtbReplacement, CanPlayAsDrawbackAi.class)
             .put(ApiType.InternalLegendaryRule, LegendaryRuleAi.class)
             .put(ApiType.InternalIgnoreEffect, CannotPlayAi.class)
             .build());

@@ -115,7 +115,7 @@ public class ComputerUtilAbility {
             newAbilities.add(sa);
             newAbilities.addAll(otherAltSa);
         }
-    
+
         final List<SpellAbility> result = Lists.newArrayList();
         for (SpellAbility sa : newAbilities) {
             sa.setActivatingPlayer(player);

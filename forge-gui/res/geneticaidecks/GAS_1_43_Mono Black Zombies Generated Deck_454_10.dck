@@ -1,0 +1,33 @@
+[metadata]
+Name=GAS_1_43_Mono Black Zombies Generated Deck_454_10
+[Main]
+4 Death Baron|M19
+3 Diregraf Ghoul|M19
+3 Eternal Taskmaster|WAR
+4 Graveyard Marshal|M19
+1 Gutterbones|RNA
+4 Josu Vess, Lich Knight|DOM
+4 Lazotep Reaver|WAR
+4 Liliana, Untouched by Death|M19
+2 Memorial to Folly|DOM
+4 Midnight Reaper|GRN
+3 Plague Wight|RNA
+2 Stitcher's Supplier|M19
+1 Swamp|C18|1
+2 Swamp|C18|3
+1 Swamp|DOM|4
+2 Swamp|GRN
+1 Swamp|M19|1
+2 Swamp|M19|2
+1 Swamp|M19|3
+4 Swamp|RIX
+4 Swamp|RNA
+2 Swamp|WAR|1
+1 Swamp|WAR|3
+1 Tattered Mummy|GNT
+[Sideboard]
+4 Barrier of Bones|GRN
+4 Gravedigger|M19
+1 Skeleton Archer|M19
+2 Stitcher's Supplier|M19
+4 Walking Corpse|M19

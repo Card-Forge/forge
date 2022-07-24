@@ -1,0 +1,7 @@
+Name:Owlbear Cub
+ManaCost:2 G
+Types:Creature Bird Bear
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Attacked$ Player.controlsLand_GE8 | Execute$ TrigDig | TriggerDescription$ Mama's Coming — Whenever CARDNAME attacks a player who controls eight or more lands, look at the top eight cards of your library. You may put a creature card from among them onto the battlefield tapped and attacking that player. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 8 | ChangeNum$ 1 | Optional$ True | Reveal$ True | ChangeValid$ Creature | DestinationZone$ Battlefield | Tapped$ True | Attacking$ DefendingPlayer | RestRandomOrder$ True
+Oracle:Mama's Coming — Whenever Owlbear Cub attacks a player who controls eight or more lands, look at the top eight cards of your library. You may put a creature card from among them onto the battlefield tapped and attacking that player. Put the rest on the bottom of your library in a random order.

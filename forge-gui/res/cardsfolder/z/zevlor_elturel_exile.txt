@@ -1,0 +1,13 @@
+Name:Zevlor, Elturel Exile
+ManaCost:1 U B R
+Types:Legendary Creature Tiefling Warrior
+PT:4/2
+K:Haste
+A:AB$ Effect | Cost$ 2 T | Triggers$ SpellCast | SpellDescription$ When you next cast an instant or sorcery spell that targets only a single opponent or a single permanent an opponent controls this turn, for each other opponent, choose that player or a permanent they control, copy that spell, and the copy targets the chosen player or permanent.
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | IsSingleTarget$ True | TargetsValid$ Opponent,Permanent.OppCtrl | Execute$ TrigRepeat | TriggerZones$ Battlefield | TriggerDescription$ When you next cast an instant or sorcery spell that targets only a single opponent or a single permanent an opponent controls this turn, for each other opponent, choose that player or a permanent they control, copy that spell, and the copy targets the chosen player or permanent.
+SVar:TrigRepeat:DB$ RepeatEach | RepeatPlayers$ OppNonTriggeredSpellAbilityTargetOrController | RepeatSubAbility$ DBCopy | SubAbility$ ExileSelf
+SVar:DBCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Controller$ You | CopyForEachCanTarget$ Player.IsRemembered,Permanent.RememberedPlayerCtrl | ChooseOnlyOne$ True
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+DeckNeeds:Type$Instant|Sorcery
+AI:RemoveDeck:Random
+Oracle:Haste\n{2}, {T}: When you next cast an instant or sorcery spell that targets only a single opponent or a single permanent an opponent controls this turn, for each other opponent, choose that player or a permanent they control, copy that spell, and the copy targets the chosen player or permanent.

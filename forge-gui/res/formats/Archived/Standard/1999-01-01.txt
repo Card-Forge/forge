@@ -1,0 +1,7 @@
+[format]
+Name:Standard (1999-01-01)
+Type:Archived
+Subtype:Standard
+Effective:1999-01-01
+Sets:5ED, TMP, STH, EXO, USG
+Banned:Tolarian Academy; Windfall

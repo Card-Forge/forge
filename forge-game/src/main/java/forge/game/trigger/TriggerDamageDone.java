@@ -101,7 +101,7 @@ public class TriggerDamageDone extends Trigger {
 
             if (target instanceof Player) {
                 final Player trigTgt = (Player) target;
-                if (!Expressions.compare(trigTgt.getAssignedDamage(source), operator, operand)) {
+                if (!Expressions.compare(trigTgt.getAssignedDamage(null, source), operator, operand)) {
                     return false;
                 }
             } else {

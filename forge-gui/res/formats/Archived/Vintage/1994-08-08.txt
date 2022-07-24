@@ -1,0 +1,9 @@
+[format]
+Name:Constructed (DRK)
+Type:Archived
+Subtype:Vintage
+Effective:1994-08-08
+Sets:LEA, LEB, 2ED, ARN, ATQ, 3ED, LEG, DRC94, DRK
+RestrictedLegendary:true
+Restricted:Ali from Cairo; Ancestral Recall; Berserk; Black Lotus; Braingeyser; Candelabra of Tawnos; Channel; Chaos Orb; Copy Artifact; Demonic Tutor; Falling Star; Feldon's Cane; Ivory Tower; Library of Alexandria; Mind Twist; Mirror Universe; Mishra's Workshop; Mox Emerald; Mox Jet; Mox Pearl; Mox Ruby; Mox Sapphire; Recall; Regrowth; Sol Ring; Sword of the Ages; Time Walk; Timetwister; Underworld Dreams; Wheel of Fortune
+Banned:Bronze Tablet; Contract from Below; Darkpact; Demonic Attorney; Divine Intervention; Jeweled Bird; Rebirth; Shahrazad; Tempest Efreet; Time Vault

@@ -1,6 +1,6 @@
 Name:Divert
 ManaCost:U
 Types:Instant
-A:SP$ ChangeTargets | Cost$ U | TargetType$ Spell | ValidTgts$ Card | TargetsSingleTarget$ True | RememberTargets$ True | ForgetOtherRemembered$ True | UnlessCost$ 2 | SpellDescription$ Change the target of target spell with a single target unless that spell's controller pays {2}.
+A:SP$ ChangeTargets | TargetType$ Spell.numTargets EQ1 | ValidTgts$ Card | TgtPrompt$ Select target spell with a single target | UnlessCost$ 2 | SpellDescription$ Change the target of target spell with a single target unless that spell's controller pays {2}.
 AI:RemoveDeck:All
 Oracle:Change the target of target spell with a single target unless that spell's controller pays {2}.

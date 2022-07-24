@@ -56,18 +56,15 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
         clearGameLobby();
         Forge.back();
         if (msg.length() > 0) {
-            FThreads.invokeInBackgroundThread(new Runnable() {
-                @Override
-                public void run() {
-                    final boolean callBackAlwaysTrue = SOptionPane.showOptionDialog(msg, Forge.getLocalizer().getMessage("lblError"), FSkinProp.ICO_WARNING, ImmutableList.of(Forge.getLocalizer().getMessage("lblOk")), 1) == 0;
-                    if (callBackAlwaysTrue) { //to activate online menu popup when player press play online
-                        GuiBase.setInterrupted(false);
+            FThreads.invokeInBackgroundThread(() -> {
+                final boolean callBackAlwaysTrue = SOptionPane.showOptionDialog(msg, Forge.getLocalizer().getMessage("lblError"), FSkinProp.ICO_WARNING, ImmutableList.of(Forge.getLocalizer().getMessage("lblOk")), 1) == 0;
+                if (callBackAlwaysTrue) { //to activate online menu popup when player press play online
+                    GuiBase.setInterrupted(false);
 
-                        if(FServerManager.getInstance() != null)
-                            FServerManager.getInstance().stopServer();
-                        if(getfGameClient() != null)
-                            closeClient();
-                    }
+                    if(FServerManager.getInstance() != null)
+                        FServerManager.getInstance().stopServer();
+                    if(getfGameClient() != null)
+                        closeClient();
                 }
             });
         }
@@ -93,51 +90,37 @@ public class OnlineLobbyScreen extends LobbyScreen implements IOnlineLobby {
         if (getGameLobby() == null) {
             setGameLobby(getLobby());
             //prompt to connect to server when offline lobby activated
-            FThreads.invokeInBackgroundThread(new Runnable() {
-                @Override
-                public void run() {
-                    final String url = NetConnectUtil.getServerUrl();
-                    FThreads.invokeInEdtLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (url == null) {
-                                closeConn(""); //go back to previous screen if user cancels connection
+            FThreads.invokeInBackgroundThread(() -> {
+                final String url = NetConnectUtil.getServerUrl();
+                FThreads.invokeInEdtLater(() -> {
+                    if (url == null) {
+                        closeConn(""); //go back to previous screen if user cancels connection
+                        return;
+                    }
+
+                    final boolean joinServer = url.length() > 0;
+                    final String caption = joinServer ?  Forge.getLocalizer().getMessage("lblConnectingToServer") : Forge.getLocalizer().getMessage("lblStartingServer");
+                    LoadingOverlay.show(caption, true, () -> {
+                        final ChatMessage result;
+                        final IOnlineChatInterface chatInterface = (IOnlineChatInterface)OnlineScreen.Chat.getScreen();
+                        if (joinServer) {
+                            result = NetConnectUtil.join(url, OnlineLobbyScreen.this, chatInterface);
+                            if (result.getMessage() == ForgeConstants.CLOSE_CONN_COMMAND) { //this message is returned via netconnectutil on exception
+                                closeConn(Forge.getLocalizer().getMessage("lblDetectedInvalidHostAddress", url));
                                 return;
                             }
-
-                            final boolean joinServer = url.length() > 0;
-                            final String caption = joinServer ?  Forge.getLocalizer().getMessage("lblConnectingToServer") : Forge.getLocalizer().getMessage("lblStartingServer");
-                            LoadingOverlay.show(caption, new Runnable() {
-                                @Override
-                                public void run() {
-                                    final ChatMessage result;
-                                    final IOnlineChatInterface chatInterface = (IOnlineChatInterface)OnlineScreen.Chat.getScreen();
-                                    if (joinServer) {
-                                        result = NetConnectUtil.join(url, OnlineLobbyScreen.this, chatInterface);
-                                        if (result.getMessage() == ForgeConstants.CLOSE_CONN_COMMAND) { //this message is returned via netconnectutil on exception
-                                            closeConn(Forge.getLocalizer().getMessage("lblDetectedInvalidHostAddress", url));
-                                            return;
-                                        }
-                                    }
-                                    else {
-                                        result = NetConnectUtil.host(OnlineLobbyScreen.this, chatInterface);
-                                    }
-                                    chatInterface.addMessage(result);
-                                    if (!joinServer) {
-                                        FThreads.invokeInBackgroundThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                NetConnectUtil.copyHostedServerUrl();
-                                            }
-                                        });
-                                    }
-                                    //update menu buttons
-                                    OnlineScreen.Lobby.update();
-                                }
-                            });
                         }
+                        else {
+                            result = NetConnectUtil.host(OnlineLobbyScreen.this, chatInterface);
+                        }
+                        chatInterface.addMessage(result);
+                        if (!joinServer) {
+                            FThreads.invokeInBackgroundThread(() -> NetConnectUtil.copyHostedServerUrl());
+                        }
+                        //update menu buttons
+                        OnlineScreen.Lobby.update();
                     });
-                }
+                });
             });
         }
     }

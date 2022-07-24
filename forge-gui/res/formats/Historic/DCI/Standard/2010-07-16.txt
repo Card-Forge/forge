@@ -1,6 +1,0 @@
-[format]
-Name:Standard (M11)
-Type:Historic
-Subtype:Standard
-Effective:2010-07-16
-Sets:ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11

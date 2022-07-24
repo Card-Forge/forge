@@ -1,9 +1,8 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
+import com.google.common.collect.Sets;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
 import forge.util.CardTranslation;
@@ -119,6 +118,23 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                         }
                     }
                 }
+            } else if (sa.hasParam("ChooseParty")) {
+                Set<String> partyTypes = Sets.newHashSet("Cleric", "Rogue", "Warrior", "Wizard");
+                for (final String type : partyTypes) {
+                    CardCollection valids = CardLists.filter(p.getCardsIn(ZoneType.Battlefield),
+                            CardPredicates.isType(type));
+                    for (Card alreadyChosen : chosen) {
+                        valids.remove(alreadyChosen);
+                    }
+                    if (!valids.isEmpty()) {
+                        final String prompt = Localizer.getInstance().getMessage("lblChoose") + " " +
+                                Lang.nounWithNumeralExceptOne(1, type);
+                        Card c = p.getController().chooseSingleEntityForEffect(valids, sa, prompt, true, null);
+                        if (c != null) {
+                            chosen.add(c);
+                        }
+                    }
+                }
             } else if (sa.hasParam("WithTotalPower")) {
                 final int totP = AbilityUtils.calculateAmount(host, sa.getParam("WithTotalPower"), sa);
                 CardCollection negativeCreats = CardLists.filterLEPower(p.getCreaturesInPlay(), -1);
@@ -131,7 +147,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                             Localizer.getInstance().getMessage("lblSelectCreatureWithTotalPowerLessOrEqualTo", (totP - chosenP - negativeNum))
                                     + "\r\n(" + Localizer.getInstance().getMessage("lblSelected") + ":" + chosenPool + ")\r\n(" + Localizer.getInstance().getMessage("lblTotalPowerNum", chosenP) + ")", chosenP <= totP, null);
                     if (c == null) {
-                        if (p.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"))) {
+                        if (p.getController().confirmAction(sa, PlayerActionConfirmMode.OptionalChoose, Localizer.getInstance().getMessage("lblCancelChooseConfirm"), null)) {
                             break;
                         }
                     } else {
@@ -187,6 +203,18 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     chosenPool.add(choice);
                 }
                 chosen.addAll(chosenPool);
+            } else if (sa.hasParam("ControlAndNot")) {
+                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseCreature");
+                // Targeted player (p) chooses N creatures that belongs to them
+                CardCollection tgtPlayerCtrl = CardLists.filterControlledBy(choices, p);
+                chosen.addAll(p.getController().chooseCardsForEffect(tgtPlayerCtrl, sa, title + " " + "you control", minAmount, validAmount,
+                    !sa.hasParam("Mandatory"), null));
+                // Targeted player (p) chooses N creatures that don't belong to them
+                CardCollection notTgtPlayerCtrl = new CardCollection(choices);
+                notTgtPlayerCtrl.removeAll(tgtPlayerCtrl);
+                chosen.addAll(p.getController().chooseCardsForEffect(notTgtPlayerCtrl, sa, title + " " + "you don't control", minAmount, validAmount,
+                    !sa.hasParam("Mandatory"), null));
+
             } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("AtRandom") && !choices.isEmpty()) {
                     Aggregates.random(choices, validAmount, chosen);
@@ -217,8 +245,13 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     }
                 }
             }
-            if (sa.hasParam("Reveal")) {
-                game.getAction().reveal(chosen, p, true, Localizer.getInstance().getMessage("lblChosenCards") + " ");
+            if (sa.hasParam("Reveal") && !sa.hasParam("SecretlyChoose")) {
+                game.getAction().reveal(chosen, p, true, sa.hasParam("RevealTitle") ? sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ");
+            }
+        }
+        if(sa.hasParam("Reveal") && sa.hasParam("SecretlyChoose")) {
+            for (final Player p : tgtPlayers) {
+                game.getAction().reveal(chosen, p, true, sa.hasParam("RevealTitle") ? sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ");
             }
         }
         host.setChosenCards(chosen);

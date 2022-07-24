@@ -1,0 +1,16 @@
+Name:Mari, the Killing Quill
+ManaCost:1 B B
+Types:Legendary Creature Vampire Assassin
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever a creature an opponent controls dies, exile it with a hit counter on it.
+SVar:TrigChange:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | WithCountersType$ HIT
+S:Mode$ Continuous | Affected$ Assassin.YouCtrl,Mercenary.YouCtrl,Rogue.YouCtrl | AddKeyword$ Deathtouch | AddTrigger$ TrigCombatDamagePlayer | Description$ Assassins, Mercenaries, and Rogues you control have deathtouch and "Whenever this creature deals combat damage to a player, you may remove a hit counter from a card that player owns in exile. If you do, draw a card and create two Treasure tokens."
+SVar:TrigCombatDamagePlayer:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigRemove | TriggerDescription$ Whenever this creature deals combat damage to a player, you may remove a hit counter from a card that player owns in exile. If you do, draw a card and create two Treasure tokens.
+SVar:TrigRemove:DB$ RemoveCounter | CounterType$ HIT | RememberRemoved$ True | Choices$ Card.counters_GE1_HIT+OwnedBy TriggeredTarget | ChoiceZone$ Exile | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | SubAbility$ DBTreasure | ConditionCheckSVar$ X
+SVar:DBTreasure:DB$ Token | ConditionCheckSVar$ X | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize
+DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
+DeckHints:Name$Etrata, the Silencer|Ravenloft Adventurer & Type$Assassin|Mercenary|Rogue
+Oracle:Whenever a creature an opponent controls dies, exile it with a hit counter on it.\nAssassins, Mercenaries, and Rogues you control have deathtouch and "Whenever this creature deals combat damage to a player, you may remove a hit counter from a card that player owns in exile. If you do, draw a card and create two Treasure tokens."

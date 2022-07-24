@@ -1,0 +1,10 @@
+Name:Dungeoneer's Pack
+ManaCost:3
+Types:Artifact
+K:CARDNAME enters the battlefield tapped.
+A:AB$ TakeInitiative | Cost$ 2 T Sac<1/CARDNAME> | SubAbility$ DBGainLife | SpellDescription$ You take the intiative,
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | SubAbility$ DBDraw | SpellDescription$ gain 3 life,
+SVar:DBDraw:DB$ Draw | SubAbility$ DBTreasure | SpellDescription$ draw a card, and
+SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ create a Treasure token. Activate only as a sorcery. (A Treasure token is an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")
+DeckHas:Ability$Sacrifice|LifeGain|Token & Type$Treasure
+Oracle:Dungeoneer's Pack enters the battlefield tapped.\n{2}, {T}, Sacrifice Dungeoneer's Pack: You take the initiative, gain 3 life, draw a card, and create a Treasure token. Activate only as a sorcery. (A Treasure token is an artifact with "{T}, Sacrifice this artifact: Add one mana of any color.")

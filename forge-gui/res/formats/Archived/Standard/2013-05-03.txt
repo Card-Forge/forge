@@ -1,0 +1,6 @@
+[format]
+Name:Standard (DGM)
+Type:Archived
+Subtype:Standard
+Effective:2013-05-03
+Sets:ISD, DKA, AVR, M13, RTR, GTC, DGM

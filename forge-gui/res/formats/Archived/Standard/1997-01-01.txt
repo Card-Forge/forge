@@ -1,0 +1,7 @@
+[format]
+Name:Standard (1997-01-01)
+Type:Archived
+Subtype:Standard
+Effective:1997-01-01
+Sets:4ED, CHR, HML, ALL, MIR
+Banned:Balance; Black Vise; Bronze Tablet; Channel; Ivory Tower; Jeweled Bird; Land Tax; Mind Twist; Rebirth; Strip Mine; Tempest Efreet; Timmerian Fiends

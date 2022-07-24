@@ -1,0 +1,7 @@
+[format]
+Name:Extended (2011-10-01)
+Type:Archived
+Subtype:Extended
+Effective:2011-10-01
+Sets:ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12, ISD
+Banned:Jace, the Mind Sculptor; Mental Misstep; Ponder; Preordain; Stoneforge Mystic

@@ -1,0 +1,6 @@
+[format]
+Name:Block: Shadows over Innistrad (EMN)
+Type:Archived
+Subtype:Block
+Effective:2016-07-22
+Sets:SOI, EMN

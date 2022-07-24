@@ -1,0 +1,12 @@
+Name:Jaxis, the Troublemaker
+ManaCost:3 R
+Types:Legendary Creature Human Warrior
+PT:2/3
+A:AB$ CopyPermanent | Cost$ R T Discard<1/Card> | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | PumpKeywords$ Haste | AtEOT$ Sacrifice | SorcerySpeed$ True | RememberTokens$ True | SubAbility$ DBAnimate | SpellDescription$ Create a token that's a copy of another target creature you control. It gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step. Activate only as a sorcery.
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Triggers$ Dies | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Dies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature dies, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+K:Blitz:1 R
+DeckHas:Ability$Discard|Token|Sacrifice
+Oracle:{R}, {T}, Discard a card: Create a token that's a copy of another target creature you control. It gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step. Activate only as a sorcery.\nBlitz {1}{R} (If you cast this spell for its blitz cost, it gains haste and "When this creature dies, draw a card." Sacrifice it at the beginning of the next end step.)

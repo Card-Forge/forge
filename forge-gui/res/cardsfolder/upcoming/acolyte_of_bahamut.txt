@@ -1,0 +1,8 @@
+Name:Acolyte of Bahamut
+ManaCost:1 G
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddStaticAbility$ DragonReduce | Description$ Commander creatures you own have "The first Dragon spell you cast each turn costs {2} less to cast."
+SVar:DragonReduce:Mode$ ReduceCost | EffectZone$ Battlefield | ValidCard$ Card.Dragon | Activator$ You | Type$ Spell | OnlyFirstSpell$ True | Amount$ 2 | Description$ The first Dragon spell you cast each turn costs {2} less to cast.
+DeckNeeds:Type$Dragon
+AI:RemoveDeck:NonCommander
+Oracle:Commander creatures you own have "The first Dragon spell you cast each turn costs {2} less to cast."

@@ -1,0 +1,8 @@
+Name:Astarion's Thirst
+ManaCost:3 B
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBPutCounter | SpellDescription$ Exile target creature.
+SVar:DBPutCounter:DB$ PutCounter | Choices$ Creature.YouCtrl+IsCommander | CounterType$ P1P1 | CounterNum$ X | StackDescription$ SpellDescription | SpellDescription$ Put X +1/+1 counters on a commander creature you control, where X is the power of the creature exiled this way.
+SVar:X:TargetedLKI$CardPower
+DeckHas:Ability$Counters
+Oracle:Exile target creature. Put X +1/+1 counters on a commander creature you control, where X is the power of the creature exiled this way.

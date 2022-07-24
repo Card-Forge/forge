@@ -1,0 +1,6 @@
+Name:Nimbleclaw Adept
+ManaCost:3 U
+Types:Creature Dragon Wizard
+PT:2/3
+A:AB$ Untap | PrecostDesc$ Bigby's Hand — | Cost$ T | ValidTgts$ Permanent.Other | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select two other target permanents | SorcerySpeed$ True | ActivationLimit$ 1 | SpellDescription$ Untap two other target permanents. Activate only as a sorcery and only once each turn.
+Oracle:Bigby's Hand — {T}: Untap two other target permanents. Activate only as a sorcery and only once each turn.

@@ -1,0 +1,6 @@
+[format]
+Name:Standard (TSP)
+Type:Archived
+Subtype:Standard
+Effective:2006-10-20
+Sets:9ED, RAV, GPT, DIS, CSP, TSP, TSB

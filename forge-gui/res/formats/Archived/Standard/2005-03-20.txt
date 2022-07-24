@@ -1,0 +1,7 @@
+[format]
+Name:Standard (2005-03-20)
+Type:Archived
+Subtype:Standard
+Effective:2005-03-20
+Sets:8ED, MRD, DST, 5DN, CHK, BOK
+Banned:Ancient Den; Arcbound Ravager; Darksteel Citadel; Disciple of the Vault; Great Furnace; Seat of the Synod; Skullclamp; Tree of Tales; Vault of Whispers

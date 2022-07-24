@@ -1,0 +1,6 @@
+[format]
+Name:Extended (M12)
+Type:Archived
+Subtype:Extended
+Effective:2011-07-15
+Sets:LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12

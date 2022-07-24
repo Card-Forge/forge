@@ -109,7 +109,7 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
-        if (stAb.hasParam("OnlySorcerySpeed") && (activator != null) && activator.canCastSorcery()) {
+        if (stAb.hasParam("OnlySorcerySpeed") && activator != null && activator.canCastSorcery()) {
             return false;
         }
 
@@ -120,12 +120,12 @@ public class StaticAbilityCantBeCast {
             }
         }
 
-        if (stAb.hasParam("NonCasterTurn") && (activator != null)
+        if (stAb.hasParam("NonCasterTurn") && activator != null
                 && activator.getGame().getPhaseHandler().isPlayerTurn(activator)) {
             return false;
         }
 
-        if (stAb.hasParam("cmcGT") && (activator != null)) {
+        if (stAb.hasParam("cmcGT") && activator != null) {
             if (stAb.getParam("cmcGT").equals("Turns")) {
                 if (card.getCMC() <= activator.getTurn()) {
                     return false;
@@ -176,7 +176,7 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
-        if (stAb.hasParam("NonActivatorTurn") && (activator != null)
+        if (stAb.hasParam("NonActivatorTurn") && activator != null
                 && activator.getGame().getPhaseHandler().isPlayerTurn(activator)) {
             return false;
         }

@@ -1,0 +1,7 @@
+[format]
+Name:Standard (M19)
+Type:Archived
+Subtype:Standard
+Effective:2018-07-13
+Sets:KLD, AER, AKH, W17, HOU, XLN, RIX, DOM, M19
+Banned:Aetherworks Marvel; Attune with Aether; Felidar Guardian; Rampaging Ferocidon; Ramunap Ruins; Rogue Refiner; Smuggler's Copter

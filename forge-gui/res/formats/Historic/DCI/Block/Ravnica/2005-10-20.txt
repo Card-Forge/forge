@@ -1,6 +1,0 @@
-[format]
-Name:Block: Ravnica (RAV)
-Type:Historic
-Subtype:Block
-Effective:2005-10-20
-Sets:RAV

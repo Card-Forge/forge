@@ -1,0 +1,9 @@
+Name:Candlekeep Sage
+ManaCost:2 U
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ ETB & LTB | Description$ Commander creatures you own have "When this creature enters or leaves the battlefield, draw a card."
+SVar:ETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When this creature enters or leaves the battlefield, draw a card.
+SVar:LTB:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDraw | Secondary$ True | TriggerDescription$ When this creature enters or leaves the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw
+AI:RemoveDeck:NonCommander
+Oracle:Commander creatures you own have "When this creature enters or leaves the battlefield, draw a card."

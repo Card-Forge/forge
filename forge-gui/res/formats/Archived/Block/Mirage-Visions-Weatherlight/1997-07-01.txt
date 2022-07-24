@@ -1,0 +1,7 @@
+[format]
+Name:Block: Mirage;Visions;Weatherlight (WTH)
+Type:Archived
+Subtype:Block
+Effective:1997-07-01
+Sets:MIR, VIS, WTH
+Banned:Squandered Resources

@@ -88,6 +88,13 @@ public class AiController {
     private SpellAbilityPicker simPicker;
     private int lastAttackAggression;
 
+    public AiController(final Player computerPlayer, final Game game0) {
+        player = computerPlayer;
+        game = game0;
+        memory = new AiCardMemory();
+        simPicker = new SpellAbilityPicker(game, player);
+    }
+
     public boolean canCheatShuffle() {
         return cheatShuffle;
     }
@@ -139,13 +146,6 @@ public class AiController {
             aiAtk.declareAttackers(predictedCombatNextTurn);
         }
         return predictedCombatNextTurn;
-    }
-
-    public AiController(final Player computerPlayer, final Game game0) {
-        player = computerPlayer;
-        game = game0;
-        memory = new AiCardMemory();
-        simPicker = new SpellAbilityPicker(game, player);
     }
 
     private List<SpellAbility> getPossibleETBCounters() {
@@ -889,6 +889,10 @@ public class AiController {
             spellHost.setLastKnownZone(game.getStackZone()); // need to add to stack to make check Restrictions respect stack cmc
             spellHost.setCastFrom(card.getZone());
         }
+        // TODO maybe other location for this?
+        if (!sa.isLegalAfterStack()) {
+            return AiPlayDecision.AnotherTime;
+        }
         if (!sa.checkRestrictions(spellHost, player)) {
             return AiPlayDecision.AnotherTime;
         }
@@ -1322,7 +1326,7 @@ public class AiController {
         return discardList;
     }
 
-    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         if (mode == PlayerActionConfirmMode.AlternativeDamageAssignment) {
             return true;
         }
@@ -1335,7 +1339,7 @@ public class AiController {
                     mode);
             throw new IllegalArgumentException(exMsg);
         }
-        return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message);
+        return SpellApiToAi.Converter.get(api).confirmAction(player, sa, mode, message, params);
     }
 
     public boolean confirmBidAction(SpellAbility sa, PlayerActionConfirmMode mode, String message, int bid, Player winner) {
@@ -1773,7 +1777,7 @@ public class AiController {
         }
         return toExile;
     }
-    
+
     public boolean doTrigger(SpellAbility spell, boolean mandatory) {
         if (spell instanceof WrappedAbility)
             return doTrigger(((WrappedAbility)spell).getWrappedAbility(), mandatory);
@@ -1785,7 +1789,7 @@ public class AiController {
         }
         return false;
     }
-    
+
     /**
      * Ai should run.
      *
@@ -1840,12 +1844,11 @@ public class AiController {
         } else if (effect.hasParam("AICheckDredge")) {
             return player.getCardsIn(ZoneType.Library).size() > 8 || player.isCardInPlay("Laboratory Maniac");
         } else return sa != null && doTrigger(sa, false);
-
     }
 
     public List<SpellAbility> chooseSaToActivateFromOpeningHand(List<SpellAbility> usableFromOpeningHand) {
         // AI would play everything. But limits to one copy of (Leyline of Singularity) and (Gemstone Caverns)
-        
+
         List<SpellAbility> result = Lists.newArrayList();
         for (SpellAbility sa : usableFromOpeningHand) {
             // Is there a better way for the AI to decide this?
@@ -1853,7 +1856,7 @@ public class AiController {
                 result.add(sa);
             }
         }
-        
+
         boolean hasLeyline1 = false;
         SpellAbility saGemstones = null;
 
@@ -1879,7 +1882,7 @@ public class AiController {
             result.remove(saGemstones);
             result.add(saGemstones);
         }
-        
+
         return result;
     }
 
@@ -1926,8 +1929,8 @@ public class AiController {
             return Math.min(player.getLife() -1,MyRandom.getRandom().nextInt(Math.max(player.getLife() / 3, player.getWeakestOpponent().getLife())) + 1);
         } else if ("HighestGetCounter".equals(logic)) {
             return MyRandom.getRandom().nextInt(3);
-        } else if (source.hasSVar("EnergyToPay")) {
-            return AbilityUtils.calculateAmount(source, source.getSVar("EnergyToPay"), sa);
+        } else if (sa.hasSVar("EnergyToPay")) {
+            return AbilityUtils.calculateAmount(source, sa.getSVar("EnergyToPay"), sa);
         } else if ("Vermin".equals(logic)) {
             return MyRandom.getRandom().nextInt(Math.max(player.getLife() - 5, 0));
         } else if ("SweepCreatures".equals(logic)) {

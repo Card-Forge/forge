@@ -1,0 +1,9 @@
+[format]
+Name:Type 2 (4ED)
+Type:Archived
+Subtype:Standard
+Effective:1995-04-19
+Sets:DRK, FEM, 4ED
+RestrictedLegendary:true
+Restricted:Balance; Channel; Ivory Tower; Maze of Ith; Mind Twist
+Banned:Bronze Tablet; Rebirth; Tempest Efreet

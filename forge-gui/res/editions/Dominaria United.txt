@@ -1,0 +1,26 @@
+[metadata]
+Code=DMU
+Date=2022-09-09
+Name=Dominaria United
+Code2=DMU
+MciCode=dmu
+Type=Expansion
+ScryfallCode=DMU
+
+[cards]
+93 R Evolved Sleeper @Jason A. Engle
+133 M Jaya, Fiery Negotiator @Marta Nael
+143 M Shivan Devastator @Brent Hollowell
+147 R Temporal Firestorm @Nestor Ossandon Leal
+170 R Llanowar Loamspeaker @Zara Alfonso
+277 L Plains @Magali Villeneuve
+278 L Island @Magali Villeneuve
+279 L Swamp @Magali Villeneuve
+280 L Mountain @Magali Villeneuve
+281 L Forest @Magali Villeneuve
+374 M Jaya, Fiery Negotiator @Scott M. Fischer
+402 R Evolved Sleeper @Jason A. Engle
+410 M Shivan Devastator @Brent Hollowell
+411 R Temporal Firestorm @Nestor Ossandon Leal
+416 R Llanowar Loamspeaker @Zara Alfonso
+428 R Llanowar Loamspeaker @Volkan Baǵa

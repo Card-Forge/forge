@@ -103,3 +103,4 @@ Innistrad: Crimson Vow, 3/6/VOW, VOW
 Innistrad: Double Feature, 3/6/MID, DBL
 Kamigawa: Neon Dynasty, 3/6/NEO, NEO
 Streets of New Capenna, 3/6/SNC, SNC
+Double Masters 2022, 3/6/2X2, 2X2

@@ -1,0 +1,34 @@
+[metadata]
+Name=GAP_18_12_Red Aggro Pioneer Generated Deck_3_8
+[Main]
+4 Bonecrusher Giant|ELD
+3 Castle Embereth|ELD
+4 Chandra, Torch of Defiance|KLD
+4 Foundry Street Denizen|DDT
+4 Glorybringer|AKH
+4 Goblin Rabblemaster|DDT
+4 Legion Loyalist|GK1
+3 Legion Warboss|GRN
+4 Lightning Strike|M19
+3 Mizzium Mortars|GK1
+1 Mountain|DOM|4
+1 Mountain|ELD|1
+1 Mountain|FRF|2
+1 Mountain|HOU|2
+1 Mountain|KLD|2
+1 Mountain|M14|2
+2 Mountain|M19|4
+1 Mountain|M20|3
+1 Mountain|WAR|1
+1 Mountain|WAR|3
+1 Mountain|XLN|2
+1 Mountain|XLN|4
+2 Mutavault|M14
+4 Ramunap Ruins|HOU
+4 Wild Slash|FRF
+[Sideboard]
+2 Fanatical Firebrand|RIX
+4 Goblin Instigator|M19
+4 Hanweir Garrison|EMN
+1 Legion Warboss|GRN
+4 Torbran, Thane of Red Fell|ELD

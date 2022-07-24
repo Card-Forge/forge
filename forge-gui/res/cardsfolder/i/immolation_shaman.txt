@@ -2,7 +2,7 @@ Name:Immolation Shaman
 ManaCost:1 R
 Types:Creature Viashino Shaman
 PT:1/3
-T:Mode$ AbilityCast | ValidActivatingPlayer$ Opponent | ValidCard$ Artifact.inZoneBattlefield,Creature.inZoneBattlefield,Land.inZoneBattlefield | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever an opponent activates an ability of an artifact, creature, or land that isn't a mana ability, CARDNAME deals 1 damage to that player.
+T:Mode$ AbilityCast | ValidActivatingPlayer$ Opponent | ValidCard$ Artifact.inZoneBattlefield,Creature.inZoneBattlefield,Land.inZoneBattlefield | ValidSA$ SpellAbility.nonManaAbility | TriggerZones$ Battlefield | Execute$ TrigDmg | TriggerDescription$ Whenever an opponent activates an ability of an artifact, creature, or land that isn't a mana ability, CARDNAME deals 1 damage to that player.
 SVar:TrigDmg:DB$ DealDamage | NumDmg$ 1 | Defined$ TriggeredActivator
 A:AB$ Pump | Cost$ 3 R R | Defined$ Self | NumAtt$ +3 | NumDef$ +3 | KW$ Menace | SpellDescription$ CARDNAME gets +3/+3 and gains menace until end of turn.
 Oracle:Whenever an opponent activates an ability of an artifact, creature, or land that isn't a mana ability, Immolation Shaman deals 1 damage to that player.\n{3}{R}{R}: Immolation Shaman gets +3/+3 and gains menace until end of turn.

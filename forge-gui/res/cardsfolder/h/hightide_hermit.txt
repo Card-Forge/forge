@@ -5,5 +5,6 @@ PT:4/4
 K:Defender
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E}{E}{E} (four energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 4
-A:AB$ Pump | Cost$ PayEnergy<2> | Defined$ Self | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender.
+A:AB$ Effect | Cost$ PayEnergy<2> | StaticAbilities$ CanAttack | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender.
+SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE can attack this turn as though it didn't have defender.
 Oracle:Defender\nWhen Hightide Hermit enters the battlefield, you get {E}{E}{E}{E} (four energy counters).\nPay {E}{E}: Hightide Hermit can attack this turn as though it didn't have defender.

@@ -6,7 +6,7 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessDamage | ImprintCards$ Se
 SVar:SelflessDamage:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.ChosenCard,Emblem.ChosenCard | ReplaceWith$ SelflessDmg | Description$ The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and this card deals that much damage to that source's controller.
 SVar:SelflessDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ You | VarType$ Player | SubAbility$ EyeforEye
 SVar:EyeforEye:DB$ DealDamage | Defined$ ReplacedSourceController | DamageSource$ EffectSource | NumDmg$ X | SubAbility$ ExileEffect
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:X:ReplaceCount$DamageAmount
 Oracle:The next time a source of your choice would deal damage to you this turn, instead that source deals that much damage to you and Eye for an Eye deals that much damage to that source's controller.

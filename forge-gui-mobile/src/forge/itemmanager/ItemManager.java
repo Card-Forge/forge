@@ -129,6 +129,8 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         //build display
         add(searchFilter.getWidget());
         add(btnSearch);
+        //fixme - AdvanceSearch for Adventure mode needs GUI update on landscape mode, needs onclose override to close internal EditScreen
+        btnSearch.setEnabled(!Forge.isMobileAdventureMode);
         add(btnView);
         add(btnAdvancedSearchOptions);
         btnAdvancedSearchOptions.setSelected(!hideFilters);

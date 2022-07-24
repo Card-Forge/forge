@@ -131,7 +131,7 @@ public class PlayAi extends SpellAbilityAi {
     }
 
     @Override
-    public boolean confirmAction(Player ai, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(Player ai, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         return true;
     }
 

@@ -37,12 +37,7 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
     @Override
     protected void finish() {
         //create new quest in game thread so option panes can wait for input
-        ThreadUtil.invokeInGameThread(new Runnable() {
-            @Override
-            public void run() {
-                newConquest();
-            }
-        });
+        ThreadUtil.invokeInGameThread(() -> newConquest());
     }
 
     private void newConquest() {
@@ -52,26 +47,18 @@ public class NewConquestScreen extends MultiStepWizardScreen<NewConquestScreenMo
     }
 
     private void startNewConquest(final String conquestName) {
-        FThreads.invokeInEdtLater(new Runnable() {
-            @Override
-            public void run() {
-                LoadingOverlay.show(Forge.getLocalizer().getMessage("lblStartingNewConquest"), new Runnable() {
-                    @Override
-                    public void run() {
-                        ConquestController qc = FModel.getConquest();
-                        qc.setModel(new ConquestData(conquestName, model.startingPlane, model.startingPlaneswalker, model.startingCommander));
-                        qc.getDecks().add(Iterables.getFirst(qc.getModel().getCommanders(), null).getDeck()); //ensure starting deck is saved
-                        qc.getModel().saveData();
+        FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblStartingNewConquest"), true, () -> {
+            ConquestController qc = FModel.getConquest();
+            qc.setModel(new ConquestData(conquestName, model.startingPlane, model.startingPlaneswalker, model.startingCommander));
+            qc.getDecks().add(Iterables.getFirst(qc.getModel().getCommanders(), null).getDeck()); //ensure starting deck is saved
+            qc.getModel().saveData();
 
-                        // Save in preferences.
-                        FModel.getConquestPreferences().setPref(CQPref.CURRENT_CONQUEST, conquestName);
-                        FModel.getConquestPreferences().save();
+            // Save in preferences.
+            FModel.getConquestPreferences().setPref(CQPref.CURRENT_CONQUEST, conquestName);
+            FModel.getConquestPreferences().save();
 
-                        ConquestMenu.launchPlanarConquest(LaunchReason.NewConquest);
-                    }
-                });
-            }
-        });
+            ConquestMenu.launchPlanarConquest(LaunchReason.NewConquest);
+        }));
     }
 
     private static class SelectStartingPlaneStep extends WizardStep<NewConquestScreenModel> {

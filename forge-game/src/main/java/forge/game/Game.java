@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -47,10 +48,12 @@ import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
+import forge.game.card.CardDamageHistory;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
 import forge.game.card.CardUtil;
 import forge.game.card.CardView;
+import forge.game.card.CardZoneTable;
 import forge.game.card.CounterType;
 import forge.game.combat.Combat;
 import forge.game.event.Event;
@@ -78,6 +81,7 @@ import forge.trackable.Tracker;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 import forge.util.Visitor;
+import forge.util.collect.FCollection;
 
 /**
  * Represents the state of a <i>single game</i>, a new instance is created for each game.
@@ -117,15 +121,18 @@ public class Game {
     private CardCollection lastStateBattlefield = new CardCollection();
     private CardCollection lastStateGraveyard = new CardCollection();
 
-    private Map<Player, PlayerCollection> attackedThisTurn = Maps.newHashMap();
-    private Map<Player, PlayerCollection> attackedLastTurn = Maps.newHashMap();
+    private CardZoneTable untilHostLeavesPlayTriggerList = new CardZoneTable();
 
     private Table<CounterType, Player, List<Pair<Card, Integer>>> countersAddedThisTurn = HashBasedTable.create();
+
+    private FCollection<CardDamageHistory> globalDamageHistory = new FCollection<>();
+    private IdentityHashMap<Pair<Integer, Boolean>, Pair<Card, GameEntity>> damageThisTurnLKI = new IdentityHashMap<>();
 
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
     private Map<Card, Integer> facedownWhileCasting = Maps.newHashMap();
 
     private Player monarch;
+    private Player initiative;
     private Player monarchBeginTurn;
     private Player startingPlayer;
 
@@ -176,26 +183,15 @@ public class Game {
         this.monarchBeginTurn = monarchBeginTurn;
     }
 
-    public Map<Player, PlayerCollection> getPlayersAttackedThisTurn() {
-        return attackedThisTurn;
+    public Player getHasInitiative() {
+        return initiative;
+    }
+    public void setHasInitiative(final Player p ) {
+        initiative = p;
     }
 
-    public Map<Player, PlayerCollection> getPlayersAttackedLastTurn() {
-        return attackedLastTurn;
-    }
-
-    public void addPlayerAttackedThisTurn(Player attacker, Player defender) {
-        PlayerCollection atk = attackedThisTurn.get(attacker);
-        if (atk == null) {
-            attackedThisTurn.put(attacker, new PlayerCollection());
-        }
-        attackedThisTurn.get(attacker).add(defender);
-    }
-
-    public void resetPlayersAttackedOnNextTurn() {
-        attackedLastTurn.clear();
-        attackedLastTurn.putAll(attackedThisTurn);
-        attackedThisTurn.clear();
+    public CardZoneTable getUntilHostLeavesPlayTriggerList() {
+        return untilHostLeavesPlayTriggerList;
     }
 
     public CardCollectionView getLastStateBattlefield() {
@@ -268,7 +264,7 @@ public class Game {
         if (c == null) {
             return null;
         }
-        return changeZoneLKIInfo.containsKey(c.getId()) ? changeZoneLKIInfo.get(c.getId()) : c;
+        return changeZoneLKIInfo.getOrDefault(c.getId(), c);
     }
     public final void clearChangeZoneLKIInfo() {
         changeZoneLKIInfo.clear();
@@ -872,6 +868,18 @@ public class Game {
             }
         }
 
+        if (p.hasInitiative()) {
+            // The third way to take the initiative is if the player who currently has the initiative leaves the game.
+            // When that happens, the player whose turn it is takes the initiative.
+            // If the player who has the initiative leaves the game on their own turn,
+            // or the active player left the game at the same time, the next player in turn order takes the initiative.
+            if (p.equals(getPhaseHandler().getPlayerTurn())) {
+                getAction().takeInitiative(getNextPlayerAfter(p), null);
+            } else {
+                getAction().takeInitiative(getPhaseHandler().getPlayerTurn(), null);
+            }
+        }
+
         // Remove leftover items from
         getStack().removeInstancesControlledBy(p);
 
@@ -1094,8 +1102,7 @@ public class Game {
 
     public void onCleanupPhase() {
         clearCounterAddedThisTurn();
-        // Reset the attackers this turn/last turn
-        resetPlayersAttackedOnNextTurn();
+        clearGlobalDamageHistory();
         // some cards need this info updated even after a player lost, so don't skip them
         for (Player player : getRegisteredPlayers()) {
             player.onCleanupPhase();
@@ -1135,6 +1142,48 @@ public class Game {
 
     public void clearCounterAddedThisTurn() {
         countersAddedThisTurn.clear();
+    }
+
+    /**
+     * Gets the damage instances done this turn.
+     * @param isCombat if true only combat damage matters, pass null for both
+     * @param anyIsEnough if true returns early once result has an entry
+     * @param validSourceCard
+     * @param validTargetEntity
+     * @param source
+     * @param sourceController
+     * @param ctb
+     * @return List<Integer> for each source
+     */
+    public List<Integer> getDamageDoneThisTurn(Boolean isCombat, boolean anyIsEnough, String validSourceCard, String validTargetEntity, Card source, Player sourceController, CardTraitBase ctb) {
+        final List<Integer> dmgList = Lists.newArrayList();
+        for (CardDamageHistory cdh : globalDamageHistory) {
+            int dmg = cdh.getDamageDoneThisTurn(isCombat, anyIsEnough, validSourceCard, validTargetEntity, source, sourceController, ctb);
+            if (dmg == 0) {
+                continue;
+            }
+
+            dmgList.add(dmg);
+
+            if (anyIsEnough) {
+                break;
+            }
+        }
+
+        return dmgList;
+    }
+
+    public void addGlobalDamageHistory(CardDamageHistory cdh, Pair<Integer, Boolean> dmg, Card source, GameEntity target) {
+        globalDamageHistory.add(cdh);
+        damageThisTurnLKI.put(dmg, Pair.of(source, target));
+    }
+    public void clearGlobalDamageHistory() {
+        globalDamageHistory.clear();
+        damageThisTurnLKI.clear();
+    }
+
+    public Pair<Card, GameEntity> getDamageLKI(Pair<Integer, Boolean> dmg) {
+        return damageThisTurnLKI.get(dmg);
     }
 
     public Card getTopLibForPlayer(Player P) {

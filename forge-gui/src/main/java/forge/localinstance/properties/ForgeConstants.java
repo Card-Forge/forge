@@ -88,6 +88,7 @@ public final class ForgeConstants {
     public static final String PUZZLE_DIR          = RES_DIR + "puzzle" + PATH_SEPARATOR;
     public static final String TUTORIAL_DIR        = RES_DIR + "tutorial" + PATH_SEPARATOR;
     public static final String DECK_GEN_DIR        = RES_DIR + "deckgendecks" + PATH_SEPARATOR;
+    public static final String GENETIC_AI_DECK_DIR = RES_DIR + "geneticaidecks" + PATH_SEPARATOR;
 
 
     private static final String QUEST_DIR             = RES_DIR + "quest" + PATH_SEPARATOR;

@@ -2,7 +2,7 @@ Name:Interpret the Signs
 ManaCost:5 U
 Types:Sorcery
 A:SP$ Scry | Cost$ 5 U | ScryNum$ 3 | SubAbility$ DBReveal | SpellDescription$ Scry 3, then reveal the top card of your library. Draw cards equal to that card's mana value.
-SVar:DBReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | NoMove$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:DBReveal:DB$ PeekAndReveal | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | NumCardsDesc$ cards equal to that card's mana value
 SVar:X:Count$TopOfLibraryCMC
 Oracle:Scry 3, then reveal the top card of your library. Draw cards equal to that card's mana value. (To scry 3, look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

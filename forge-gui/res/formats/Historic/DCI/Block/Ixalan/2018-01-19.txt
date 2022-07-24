@@ -1,6 +1,0 @@
-[format]
-Name:Block: Ixalan (RIX)
-Type:Historic
-Subtype:Block
-Effective:2018-01-19
-Sets:XLN, RIX

@@ -1,0 +1,24 @@
+Name:Master of Ceremonies
+ManaCost:3 W
+Types:Creature Rhino Druid
+PT:3/4
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ At the beginning of your upkeep, each opponent chooses money, friends, or secrets. For each player who chose money, you and that player each create a Treasure token. For each player who chose friends, you and that player each create a 1/1 green and white Citizen creature token. For each player who chose secrets, you and that player each draw a card.
+SVar:TrigChoose:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChoice | SubAbility$ DBMoney | ClearRememberedBeforeLoop$ True
+SVar:DBChoice:DB$ GenericChoice | Defined$ Player.IsRemembered | Choices$ Money,Friends,Secrets | ShowChoice$ True
+SVar:Money:DB$ Pump | Defined$ Player.IsRemembered | NoteCards$ Self | NoteCardsFor$ Money | SpellDescription$ Money
+SVar:Friends:DB$ Pump | Defined$ Player.IsRemembered | NoteCards$ Self | NoteCardsFor$ Friends | SpellDescription$ Friends
+SVar:Secrets:DB$ Pump | Defined$ Player.IsRemembered | NoteCards$ Self | NoteCardsFor$ Secrets | SpellDescription$ Secrets
+SVar:DBMoney:DB$ RepeatEach | RepeatPlayers$ Player.NotedForMoney | RepeatSubAbility$ DBMoneyPump | SubAbility$ DBFriends | ClearRememberedBeforeLoop$ True
+SVar:DBMoneyPump:DB$ Pump | RememberObjects$ You | SubAbility$ DBTreasure
+SVar:DBTreasure:DB$ Token | TokenOwner$ Remembered | TokenScript$ c_a_treasure_sac
+SVar:DBFriends:DB$ RepeatEach | RepeatPlayers$ Player.NotedForFriends | RepeatSubAbility$ DBFriendsPump | SubAbility$ DBSecrets | ClearRememberedBeforeLoop$ True
+SVar:DBFriendsPump:DB$ Pump | RememberObjects$ You | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenOwner$ Remembered | TokenScript$ gw_1_1_citizen
+SVar:DBSecrets:DB$ RepeatEach | RepeatPlayers$ Player.NotedForSecrets | RepeatSubAbility$ DBSecretsPump | SubAbility$ DBCleanup | ClearRememberedBeforeLoop$ True
+SVar:DBSecretsPump:DB$ Pump | RememberObjects$ You | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ Remembered
+SVar:DBCleanup:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Money | SubAbility$ DBCleanup2
+SVar:DBCleanup2:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Friends | SubAbility$ DBCleanup3
+SVar:DBCleanup3:DB$ Pump | Defined$ Player | ClearNotedCardsFor$ Secrets
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Citizen|Treasure
+Oracle:At the beginning of your upkeep, each opponent chooses money, friends, or secrets. For each player who chose money, you and that player each create a Treasure token. For each player who chose friends, you and that player each create a 1/1 green and white Citizen creature token. For each player who chose secrets, you and that player each draw a card.

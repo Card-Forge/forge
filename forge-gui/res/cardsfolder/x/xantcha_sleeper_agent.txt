@@ -5,7 +5,7 @@ PT:5/5
 S:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ CARDNAME attacks each combat if able.
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ DBChooseOpp | Layer$ Control | Description$ CARDNAME enters the battlefield under the control of an opponent of your choice.
 SVar:DBChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to give control to: | AILogic$ Curse | SubAbility$ MoveToPlay
-SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | GainControl$ True | NewController$ ChosenPlayer | SubAbility$ DBCleanup
+SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | GainControl$ ChosenPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenPlayer$ True
 S:Mode$ CantAttack | ValidCard$ Card.Self | Target$ Player.CardOwner,Planeswalker.ControlledBy Player.CardOwner | Description$ CARDNAME can't attack its owner or planeswalkers its owner controls.
 A:AB$ Draw | Cost$ 3 | NumCards$ 1 | Activator$ Player | SubAbility$ DBLoseLife | SpellDescription$ Xantcha's controller loses 2 life and you draw a card. Any player may activate this ability.

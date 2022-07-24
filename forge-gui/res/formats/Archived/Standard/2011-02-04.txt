@@ -1,0 +1,6 @@
+[format]
+Name:Standard (MBS)
+Type:Archived
+Subtype:Standard
+Effective:2011-02-04
+Sets:ZEN, WWK, ROE, M11, SOM, MBS

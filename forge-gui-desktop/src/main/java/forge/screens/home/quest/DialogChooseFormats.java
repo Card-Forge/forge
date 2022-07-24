@@ -42,7 +42,7 @@ public class DialogChooseFormats {
 
 		List<FCheckBox> sanctioned = new ArrayList<>();
 		List<FCheckBox> casual = new ArrayList<>();
-		List<FCheckBox> historic = new ArrayList<>();
+		List<FCheckBox> archived = new ArrayList<>();
 
 		for (GameFormat format : FModel.getFormats().getOrderedList()){
 			FCheckBox box = new FCheckBox(format.getName());
@@ -51,8 +51,8 @@ public class DialogChooseFormats {
 				case SANCTIONED:
 					sanctioned.add(box);
 					break;
-				case HISTORIC:
-					historic.add(box);
+				case ARCHIVED:
+					archived.add(box);
 					break;
 				case CUSTOM:
 				case CASUAL:
@@ -74,7 +74,7 @@ public class DialogChooseFormats {
 		String constraints = "aligny top";
 		panel.add(makeCheckBoxList(sanctioned, localizer.getMessage("lblSanctioned"), true), constraints);
 		panel.add(makeCheckBoxList(casual, localizer.getMessage("lblOther"), false), constraints);
-		panel.add(makeCheckBoxList(historic, localizer.getMessage("lblHistoric"), false), constraints);
+		panel.add(makeCheckBoxList(archived, localizer.getMessage("lblArchived"), false), constraints);
 
 		final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
 		overlay.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center, ay center"));

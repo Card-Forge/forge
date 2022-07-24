@@ -1,6 +1,6 @@
 Name:Rings of Brighthearth
 ManaCost:3
 Types:Artifact
-T:Mode$ AbilityCast | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopySpell | OptionalDecider$ You | TriggerDescription$ Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. If you do, copy that ability. You may choose new targets for the copy.
+T:Mode$ AbilityCast | ValidActivatingPlayer$ You | ValidSA$ SpellAbility.nonManaAbility | TriggerZones$ Battlefield | Execute$ TrigCopySpell | OptionalDecider$ You | TriggerDescription$ Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. If you do, copy that ability. You may choose new targets for the copy.
 SVar:TrigCopySpell:AB$ CopySpellAbility | Cost$ 2 | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 Oracle:Whenever you activate an ability, if it isn't a mana ability, you may pay {2}. If you do, copy that ability. You may choose new targets for the copy.

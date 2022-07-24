@@ -8,6 +8,6 @@ SVar:RuneswordSac:DB$ SacrificeAll | Defined$ Imprinted | SubAbility$ ExileEffec
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:TrigNoregen:Mode$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ Creature | Execute$ PumpNogen | Static$ True | TriggerDescription$ If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn.
 SVar:PumpNogen:DB$ Pump | KW$ HIDDEN CARDNAME can't be regenerated. | Defined$ TriggeredTarget
-SVar:RuneswordRep:Event$ Moved | ValidLKI$ Creature.DamagedByRemembered | Destination$ Graveyard | ReplaceWith$ RuneswordExile | Description$ If a creature dealt damage by CARDNAME this turn would die, exile it instead.
+SVar:RuneswordRep:Event$ Moved | ValidLKI$ Creature.DamagedBy Remembered | Destination$ Graveyard | ReplaceWith$ RuneswordExile | Description$ If a creature dealt damage by CARDNAME this turn would die, exile it instead.
 SVar:RuneswordExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ Exile
 Oracle:{3}, {T}: Target attacking creature gets +2/+0 until end of turn. When that creature leaves the battlefield this turn, sacrifice Runesword. If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn. If a creature dealt damage by the targeted creature would die this turn, exile that creature instead.

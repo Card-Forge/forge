@@ -1,0 +1,9 @@
+Name:Lagrella, the Magpie
+ManaCost:G W U
+Types:Legendary Creature Human Soldier
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile any number of other target creatures controlled by different players until NICKNAME leaves the battlefield. When an exiled card enters the battlefield under your control this way, put two +1/+1 counters on it.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.Other | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ MaxTgt | TargetsWithDifferentControllers$ True | Duration$ UntilHostLeavesPlay | ReturnAbility$ DBReturn | ReturnValid$ Card.IsTriggerRemembered+YouCtrl
+SVar:DBReturn:DB$ PutCounter | Defined$ TriggeredCardLKICopy | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ When an exiled card enters the battlefield under your control this way, put two +1/+1 counters on it.
+SVar:MaxTgt:PlayerCountPlayers$Amount
+Oracle:When Lagrella, the Magpie enters the battlefield, exile any number of other target creatures controlled by different players until Lagrella leaves the battlefield. When an exiled card enters the battlefield under your control this way, put two +1/+1 counters on it.

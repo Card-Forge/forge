@@ -1,0 +1,6 @@
+[format]
+Name:Block: Battle for Zendikar (OGW)
+Type:Archived
+Subtype:Block
+Effective:2016-01-22
+Sets:BFZ, OGW

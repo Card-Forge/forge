@@ -42,7 +42,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
         }
         final SpellAbility fallback = sa.getAdditionalAbility("FallbackAbility");
         final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("ChoiceAmount", "1"), sa);
-        
+
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
         for (final Player p : tgtPlayers) {
@@ -50,7 +50,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             List<SpellAbility> saToRemove = Lists.newArrayList();
             
             for (SpellAbility saChoice : abilities) {
-                if (!saChoice.getRestrictions().checkOtherRestrictions(host, saChoice, sa.getActivatingPlayer()) ) {
+                if (saChoice.getRestrictions() != null && !saChoice.getRestrictions().checkOtherRestrictions(host, saChoice, sa.getActivatingPlayer())) {
                     saToRemove.add(saChoice);
                 } else if (saChoice.hasParam("UnlessCost")) {
                     // generic check for if the cost can be paid
@@ -61,7 +61,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
                 }
             }
             abilities.removeAll(saToRemove);
-        
+
             if (sa.usesTargeting() && sa.getTargets().contains(p) && !p.canBeTargetedBy(sa)) {
                 continue;
             }

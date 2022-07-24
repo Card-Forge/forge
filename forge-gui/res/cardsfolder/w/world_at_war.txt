@@ -2,7 +2,7 @@ Name:World at War
 ManaCost:3 R R
 Types:Sorcery
 A:SP$ AddPhase | Cost$ 3 R R | ExtraPhase$ Combat | AfterPhase$ Main2 | FollowedBy$ Main2 | BeforeFirstPostCombatMainEnd$ True | ExtraPhaseDelayedTrigger$ DelTrigUntap | ExtraPhaseDelayedTriggerExcute$ TrigUntapAll | SpellDescription$ After the first postcombat main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn.
-SVar:DelTrigUntap:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerDescription$ At the beginning of that combat, untap all creatures that attacked this turn.
+SVar:DelTrigUntap:Mode$ Phase | Phase$ BeginCombat | TriggerDescription$ At the beginning of that combat, untap all creatures that attacked this turn.
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.attackedThisTurn
 K:Rebound
 Oracle:After the first postcombat main phase this turn, there's an additional combat phase followed by an additional main phase. At the beginning of that combat, untap all creatures that attacked this turn.\nRebound (If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost.)

@@ -1,5 +1,5 @@
 items.png
-size: 128,64
+size: 480,1008
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none          
@@ -57,13 +57,13 @@ StrangeKey
 WhiteKey
   xy: 272, 992
   size: 16, 16
-SteelArmor
+IronArmor
   xy: 224, 0
   size: 16, 16     
-SteelShield
+IronShield
   xy: 256, 144
   size: 16, 16
-SteelBoots
+IronBoots
   xy: 48, 160
   size: 16, 16
 SteelSword
@@ -87,13 +87,13 @@ Goose
 SpellBook
   xy: 144, 688
   size: 16, 16  
-MithrilShield
+SteelShield
   xy: 224, 176
   size: 16, 16    
-MithrilArmor
+SteelArmor
   xy: 224, 64
   size: 16, 16       
-MithrilBoots
+SteelBoots
   xy: 96, 176
   size: 16, 16      
 AladdinsRing
@@ -210,8 +210,8 @@ JandorsRing
 JinxedRing
   xy: 48, 976
   size: 16, 16
-Nine-RingedBo
-  xy: 272, 608
+ShellWand
+  xy: 224, 624
   size: 16, 16
 RingofImmortals
   xy: 48, 992
@@ -227,4 +227,10 @@ KiteShield
   size: 16, 16      
 DungeonMap
   xy: 176, 848
+  size: 16, 16
+FortuneCoin
+  xy: 336,64
+  size: 16, 16
+SpiritGuard
+  xy: 192,160
   size: 16, 16

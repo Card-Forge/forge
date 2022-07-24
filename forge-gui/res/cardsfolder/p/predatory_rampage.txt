@@ -2,6 +2,6 @@ Name:Predatory Rampage
 ManaCost:3 G G
 Types:Sorcery
 A:SP$ PumpAll | Cost$ 3 G G | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | SubAbility$ OppBlock | SpellDescription$ Creatures you control get +3/+3 until end of turn. Each creature your opponents control blocks this turn if able.
-SVar:OppBlock:DB$ Effect | Name$ Predatory Rampage Effect | StaticAbilities$ KWPump
+SVar:OppBlock:DB$ Effect | StaticAbilities$ KWPump
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME blocks each combat if able. | Description$ Each creature your opponents control blocks this turn if able.
 Oracle:Creatures you control get +3/+3 until end of turn. Each creature your opponents control blocks this turn if able.

@@ -1,0 +1,6 @@
+[format]
+Name:Extended (NPH)
+Type:Archived
+Subtype:Extended
+Effective:2011-05-13
+Sets:LRW, MOR, SHM, EVE, ALA, CFX, ARB, M10, ZEN, WWK, ROE, M11, SOM, MBS, NPH

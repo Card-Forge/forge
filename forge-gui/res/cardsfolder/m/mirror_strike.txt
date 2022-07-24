@@ -1,7 +1,7 @@
 Name:Mirror Strike
 ManaCost:3 W
 Types:Instant
-A:SP$ Effect | Cost$ 3 W | Name$ Mirror Strike Effect | ReplacementEffects$ DamageEvent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | ValidTgts$ Creature.attacking+unblocked | TgtPrompt$ Select target unblocked creature | IsCurse$ True | SpellDescription$ All combat damage that would be dealt to you this turn by target unblocked creature is dealt to its controller instead.
+A:SP$ Effect | ReplacementEffects$ DamageEvent | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | ValidTgts$ Creature.attacking+unblocked | TgtPrompt$ Select target unblocked creature | IsCurse$ True | SpellDescription$ All combat damage that would be dealt to you this turn by target unblocked creature is dealt to its controller instead.
 SVar:DamageEvent:Event$ DamageDone | ValidSource$ Creature.IsRemembered | ValidTarget$ You | ReplaceWith$ MirrorStrikeDmg | IsCombat$ True | DamageTarget$ ReplacedSourceController | Description$ All combat damage that would be dealt to you this turn by target unblocked creature is dealt to its controller instead.
 SVar:MirrorStrikeDmg:DB$ ReplaceEffect | VarName$ Affected | VarValue$ ReplacedSourceController | VarType$ Player
 AI:RemoveDeck:All

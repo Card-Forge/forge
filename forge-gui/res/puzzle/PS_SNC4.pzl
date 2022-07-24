@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Streets of New Capenna #04
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/06/201.-SNC4NoOverkill-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Your opponent has one card in hand, but assume they can't cast it. Remember that your solution must satisfy all blocking possibilities. Good luck!
+[state]
+humanlife=20
+ailife=9
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Bloodline Culling;Luxior, Giada's Gift;Ob Nixilis, the Adversary;Pugnacious Pugilist;Bloodchief's Thirst
+humanbattlefield=Lolth, Spider Queen|Counters:LOYALTY=6;Sepulcher Ghoul;Sepulcher Ghoul;Swamp;Swamp;Swamp;Swamp;Mountain;Mountain
+aihand=Opt
+aibattlefield=Beledros Witherbloom
+aiprecast=Beledros Witherbloom:TrigToken;Beledros Witherbloom:TrigToken
+removesummoningsickness=true

@@ -141,16 +141,16 @@ public class CostPutCounter extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Player payer, final boolean effect) {
         final Card source = ability.getHostCard();
         if (this.payCostFromSource()) {
-            return source.canReceiveCounters(this.counter);
-        } else {
-            // 3 Cards have Put a -1/-1 Counter on a Creature you control.
-            List<Card> typeList = CardLists.getValidCards(source.getGame().getCardsIn(ZoneType.Battlefield),
-                    this.getType().split(";"), payer, source, ability);
-
-            typeList = CardLists.filter(typeList, CardPredicates.canReceiveCounters(this.counter));
-
-            return !typeList.isEmpty();
+            return source.isInPlay() && source.canReceiveCounters(this.counter);
         }
+
+        // 3 Cards have Put a -1/-1 Counter on a Creature you control.
+        List<Card> typeList = CardLists.getValidCards(source.getGame().getCardsIn(ZoneType.Battlefield),
+                this.getType().split(";"), payer, source, ability);
+
+        typeList = CardLists.filter(typeList, CardPredicates.canReceiveCounters(this.counter));
+
+        return !typeList.isEmpty();
     }
 
     /*

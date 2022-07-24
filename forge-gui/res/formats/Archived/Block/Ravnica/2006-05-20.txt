@@ -1,0 +1,6 @@
+[format]
+Name:Block: Ravnica (DIS)
+Type:Archived
+Subtype:Block
+Effective:2006-05-20
+Sets:RAV, GPT, DIS

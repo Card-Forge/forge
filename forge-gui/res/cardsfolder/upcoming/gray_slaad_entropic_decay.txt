@@ -1,0 +1,18 @@
+Name:Gray Slaad
+ManaCost:2 B
+Types:Creature Frog Horror
+PT:4/1
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace & Deathtouch | IsPresent$ Creature.YouOwn | PresentCompare$ GE4 | PresentZone$ Graveyard | Description$ As long as there are four or more creature cards in your graveyard, CARDNAME has menace and deathtouch.
+DeckHints:Ability$Sacrifice|Discard|Mill
+DeckHas:Ability$Graveyard
+AlternateMode:Adventure
+Oracle:As long as there are four or more creature cards in your graveyard, Gray Slaad has menace and deathtouch.
+
+ALTERNATE
+
+Name:Entropic Decay
+ManaCost:1 B
+Types:Sorcery Adventure
+A:SP$ Mill | NumCards$ 4 | SpellDescription$ Mill four cards. (Then exile this card. You may cast the creature later from exile.)
+DeckHas:Ability$Mill
+Oracle:Mill four cards. (Then exile this card. You may cast the creature later from exile.)

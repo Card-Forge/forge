@@ -1,0 +1,6 @@
+Name:Guiding Bolt
+ManaCost:2 W
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.powerGE4 | SubAbility$ DBScry | TgtPrompt$ Select target creature with power 4 or greater | SpellDescription$ Destroy target creature with power 4 or greater.
+SVar:DBScry:DB$ Scry | ScryNum$ 2 | SpellDescription$ Scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+Oracle:Destroy target creature with power 4 or greater.\nScry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

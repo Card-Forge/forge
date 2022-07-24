@@ -1,0 +1,6 @@
+[format]
+Name:Standard (M15)
+Type:Archived
+Subtype:Standard
+Effective:2014-07-18
+Sets:RTR, GTC, DGM, M14, THS, BNG, JOU, M15

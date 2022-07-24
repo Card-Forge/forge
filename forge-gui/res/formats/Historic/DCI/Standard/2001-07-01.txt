@@ -1,6 +1,0 @@
-[format]
-Name:Standard (APC)
-Type:Historic
-Subtype:Standard
-Effective:2001-07-01
-Sets:MMQ, NMS, PCY, INV, PLS, 7ED, APC

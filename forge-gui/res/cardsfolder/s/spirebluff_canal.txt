@@ -3,6 +3,6 @@ ManaCost:no cost
 Types:Land
 K:ETBReplacement:Other:LandTapped
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ GT2 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control two or fewer other lands.
-SVar:ETBCheckSVar2:Count$LastStateBattlefield Land.YouCtrl
+SVar:ETBCheckSVar2:Count$Valid Land.YouCtrl
 A:AB$ Mana | Cost$ T | Produced$ Combo U R | SpellDescription$ Add {U} or {R}.
 Oracle:Spirebluff Canal enters the battlefield tapped unless you control two or fewer other lands.\n{T}: Add {U} or {R}.

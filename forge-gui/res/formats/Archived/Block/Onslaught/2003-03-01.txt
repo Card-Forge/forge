@@ -1,0 +1,6 @@
+[format]
+Name:Block: Onslaught (LGN)
+Type:Archived
+Subtype:Block
+Effective:2003-03-01
+Sets:ONS, LGN

@@ -3,5 +3,7 @@ ManaCost:2 U U
 Types:Creature Wall
 PT:1/5
 K:Defender
-A:AB$ Pump | Cost$ 2 U U | Defined$ Self | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | NumAtt$ +4 | NumDef$ -4 | SpellDescription$ CARDNAME gets +4/-4 until end of turn and can attack this turn as though it didn't have defender.
+A:AB$ Pump | Cost$ 2 U U | NumAtt$ +4 | NumDef$ -4 | SubAbility$ DBEffect | SpellDescription$ CARDNAME gets +4/-4 until end of turn and can attack this turn as though it didn't have defender.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ CanAttack | StackDescription$ It can attack this turn as though it didn't have defender.
+SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE can attack this turn as though it didn't have defender.
 Oracle:Defender (This creature can't attack.)\n{2}{U}{U}: Wall of Wonder gets +4/-4 until end of turn and can attack this turn as though it didn't have defender.

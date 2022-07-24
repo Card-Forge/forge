@@ -47,7 +47,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
         if (sa.hasParam("Optional") && sa.hasParam("OptionPrompt") && //for now, OptionPrompt is needed
-                !player.getController().confirmAction(sa, null, sa.getParam("OptionPrompt"))) {
+                !player.getController().confirmAction(sa, null, sa.getParam("OptionPrompt"), null)) {
             return;
         }
 
@@ -151,7 +151,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                 }
             }
             for (final Player p : repeatPlayers) {
-                if (optional && !p.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"))) {
+                if (optional && !p.getController().confirmAction(repeat, null, sa.getParam("RepeatOptionalMessage"), null)) {
                     continue;
                 }
                 if (nextTurn) {

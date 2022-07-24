@@ -3,7 +3,7 @@ ManaCost:B
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
-T:Mode$ AbilityCast | ValidCard$ Creature.EnchantedBy | HasTapCost$ True | TriggerZones$ Battlefield | Execute$ TrigDestroy1 | TriggerDescription$ Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, you may pay {1}. If you do, counter that ability. If you don't, destroy CARDNAME.
+T:Mode$ AbilityCast | ValidCard$ Creature.EnchantedBy | ValidSA$ SpellAbility.nonManaAbility | HasTapCost$ True | TriggerZones$ Battlefield | Execute$ TrigDestroy1 | TriggerDescription$ Whenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, you may pay {1}. If you do, counter that ability. If you don't, destroy CARDNAME.
 SVar:TrigDestroy1:DB$ Destroy | Defined$ Self | UnlessCost$ 1 | UnlessPayer$ You | UnlessResolveSubs$ WhenPaid | SubAbility$ DBCounter
 SVar:DBCounter:DB$ Counter | Defined$ TriggeredSpellAbility
 T:Mode$ Attacks | ValidCard$ Card.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDestroy2 | TriggerDescription$ Whenever enchanted creature attacks or blocks, you may pay {1}. If you do, tap the creature, remove it from combat, and creatures it was blocking that had become blocked by only that creature this combat become unblocked. If you don't, destroy CARDNAME.

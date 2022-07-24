@@ -1,0 +1,12 @@
+Name:Gavel of the Righteous
+ManaCost:2
+Types:Artifact Equipment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, put a charge counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ CHARGE
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each counter on CARDNAME.
+SVar:X:Count$CardCounters.ALL
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Double Strike | CheckSVar$ X | SVarCompare$ GE4 | Description$ As long as CARDNAME has four or more counters on it, equipped creature has double strike.
+K:Equip:3:::AlternateCost$ RemoveAnyCounter<1/Any/Card.Self/CARDNAME>
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:At the beginning of combat on your turn, put a charge counter on Gavel of the Righteous.\nEquipped creature gets +1/+1 for each counter on Gavel of the Righteous.\nAs long as Gavel of the Righteous has four or more counters on it, equipped creature has double strike.\nEquip—Pay {3} or remove a counter from Gavel of the Righteous.

@@ -1,6 +1,7 @@
 package forge.ai.ability;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Predicate;
 
@@ -9,7 +10,6 @@ import forge.ai.ComputerUtilCost;
 import forge.ai.SpellAbilityAi;
 import forge.card.CardStateName;
 
-import forge.game.GlobalRuleChange;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
@@ -238,7 +238,7 @@ public class SetStateAi extends SpellAbilityAi {
     private boolean isSafeToTransformIntoLegendary(Player aiPlayer, Card source) {
         // Prevent transform into legendary creature if copy already exists
         // Check first if Legend Rule does still apply
-        if (!aiPlayer.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
+        if (!source.ignoreLegendRule()) {
             if (!source.hasAlternateState()) {
                 System.err.println("Warning: SetState without ALTERNATE on " + source.getName() + ".");
                 return false;
@@ -265,7 +265,7 @@ public class SetStateAi extends SpellAbilityAi {
         return true;
     }
 
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         // TODO: improve the AI for when it may want to transform something that's optional to transform
         return isSafeToTransformIntoLegendary(player, sa.getHostCard());
     }

@@ -433,8 +433,8 @@ public class CostAdjustment {
         if (!st.matchesValidParam("Activator", activator)) {
             return false;
         }
-        if (st.hasParam("NonActivatorTurn") && ((activator == null)
-                || hostCard.getGame().getPhaseHandler().isPlayerTurn(activator))) {
+        if (st.hasParam("NonActivatorTurn") && (activator == null
+                || game.getPhaseHandler().isPlayerTurn(activator))) {
             return false;
         }
 
@@ -469,6 +469,18 @@ public class CostAdjustment {
                 if (!sa.isActivatedAbility() || sa.isReplacementAbility()) {
                     return false;
                 }
+                if (st.hasParam("OnlyFirstActivation")) {
+                    int times = 0;
+                    for (IndividualCostPaymentInstance i : game.costPaymentStack) {
+                        SpellAbility paymentSa = i.getPayment().getAbility();
+                        if (paymentSa.isActivatedAbility() && st.matchesValidParam("ValidCard", paymentSa.getHostCard())) {
+                            times++;
+                            if (times > 1) {
+                                return false;
+                            }
+                        }
+                    }
+                }
             } else if (type.equals("NonManaAbility")) {
                 if (!sa.isActivatedAbility() || sa.isManaAbility() || sa.isReplacementAbility()) {
                     return false;
@@ -488,7 +500,7 @@ public class CostAdjustment {
         }
         if (st.hasParam("AffectedZone")) {
             List<ZoneType> zones = ZoneType.listValueOf(st.getParam("AffectedZone"));
-            if (sa.isSpell() && sa.getHostCard().wasCast()) {
+            if (sa.isSpell() && card.wasCast()) {
                 if (!zones.contains(card.getCastFrom().getZoneType())) {
                     return false;
                 }
@@ -508,7 +520,7 @@ public class CostAdjustment {
                     continue;
                 }
                 for (GameObject target : curSa.getTargets()) {
-                    if (target.isValid(st.getParam("ValidTarget").split(","), hostCard.getController(), hostCard, curSa)) {
+                    if (target.isValid(st.getParam("ValidTarget").split(","), controller, hostCard, curSa)) {
                         targetValid = true;
                         break outer;
                     }
@@ -533,7 +545,7 @@ public class CostAdjustment {
                 }
                 for (SpellAbility target : curSa.getTargets().getTargetSpells()) {
                     Card targetCard = target.getHostCard();
-                    if (targetCard.isValid(st.getParam("ValidSpellTarget").split(","), hostCard.getController(), hostCard, curSa)) {
+                    if (targetCard.isValid(st.getParam("ValidSpellTarget").split(","), controller, hostCard, curSa)) {
                         targetValid = true;
                         break outer;
                     }

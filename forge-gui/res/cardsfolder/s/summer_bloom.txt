@@ -1,7 +1,7 @@
 Name:Summer Bloom
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Effect | Cost$ 1 G | Name$ Bloom Effect | StaticAbilities$ BloomingLand | AILogic$ Always | SpellDescription$ You may play up to three additional lands this turn.
+A:SP$ Effect | StaticAbilities$ BloomingLand | AILogic$ Always | SpellDescription$ You may play up to three additional lands this turn.
 SVar:BloomingLand:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 3 | EffectZone$ Command | Description$ You may play up to three additional lands this turn.
 SVar:NeedsToPlayVar:LandInHand GE1
 SVar:LandInHand:Count$InYourHand.Land

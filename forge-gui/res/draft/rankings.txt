@@ -1,265 +1,597 @@
 //Rank|Name|Rarity|Set
-#1|Elspeth Resplendent|M|SNC
-#2|Vivien on the Hunt|M|SNC
-#3|Sanctuary Warden|M|SNC
-#4|All-Seeing Arbiter|M|SNC
-#5|Falco Spara, Pactweaver|M|SNC
-#6|Titan of Industry|M|SNC
-#7|Workshop Warchief|R|SNC
-#8|Ob Nixilis, the Adversary|M|SNC
-#9|Depopulate|R|SNC
-#10|Urabrask, Heretic Praetor|M|SNC
-#11|Evelyn, the Covetous|R|SNC
-#12|Fleetfoot Dancer|R|SNC
-#13|Jetmir, Nexus of Revels|M|SNC
-#14|Lord Xander, the Collector|M|SNC
-#15|Ziatora, the Incinerator|M|SNC
-#16|Raffine, Scheming Seer|M|SNC
-#17|Hostile Takeover|R|SNC
-#18|Ziatora's Envoy|R|SNC
-#19|Body Launderer|M|SNC
-#20|Tenacious Underdog|R|SNC
-#21|Jaxis, the Troublemaker|R|SNC
-#22|Professional Face-Breaker|R|SNC
-#23|Fight Rigging|R|SNC
-#24|Brokers Ascendancy|R|SNC
-#25|Jinnie Fay, Jetmir's Second|R|SNC
-#26|Toluz, Clever Conductor|R|SNC
-#27|Shakedown Heavy|R|SNC
-#28|Soul of Emancipation|R|SNC
-#29|Rabble Rousing|R|SNC
-#30|Reservoir Kraken|R|SNC
-#31|Gala Greeters|R|SNC
-#32|Corpse Explosion|R|SNC
-#33|Endless Detour|R|SNC
-#34|Maestros Diabolist|R|SNC
-#35|Obscura Interceptor|R|SNC
-#36|Void Rend|R|SNC
-#37|Getaway Car|R|SNC
+#1|Consecrated Sphinx|M|2X2
+#2|Hydroid Krasis|R|2X2
+#3|Mana Drain|M|2X2
+#4|Liliana, the Last Hope|M|2X2
+#5|Dragonlord Dromoka|M|2X2
+#6|Dragonlord Silumgar|M|2X2
+#7|Emiel the Blessed|M|2X2
+#8|Restoration Angel|R|2X2
+#9|Hostage Taker|R|2X2
+#10|Bitterblossom|M|2X2
+#11|Supreme Verdict|R|2X2
+#12|Monastery Mentor|M|2X2
+#13|Mulldrifter|U|2X2
+#14|Damnation|R|2X2
+#15|Backdraft Hellkite|R|2X2
+#16|Seasoned Pyromancer|M|2X2
+#17|Oracle of Mul Daya|R|2X2
+#18|Ruric Thar, the Unbowed|R|2X2
+#19|Wasitora, Nekoru Queen|R|2X2
+#20|Mikaeus, the Lunarch|R|2X2
+#21|Unburial Rites|U|2X2
+#22|Lightning Bolt|U|2X2
+#23|Drogskol Reaver|R|2X2
+#24|Marchesa, the Black Rose|R|2X2
+#25|Mathas, Fiend Seeker|R|2X2
+#26|Rafiq of the Many|R|2X2
+#27|Roon of the Hidden Realm|R|2X2
+#28|Sidisi, Brood Tyrant|R|2X2
+#29|Intet, the Dreamer|R|2X2
+#30|Domestication|U|2X2
+#31|Talrand, Sky Summoner|R|2X2
+#32|Skinrender|U|2X2
+#33|Eternal Witness|U|2X2
+#34|Aminatou, the Fateshifter|M|2X2
+#35|Elsha of the Infinite|R|2X2
+#36|Lightning Helix|U|2X2
+#37|Varina, Lich Queen|R|2X2
+#38|Wilt-Leaf Liege|R|2X2
+#39|Mentor of the Meek|U|2X2
+#40|Disciple of the Ring|R|2X2
+#41|Rancor|U|2X2
+#42|Rishkar, Peema Renegade|R|2X2
+#43|Crackling Doom|U|2X2
+#44|Elenda, the Dusk Rose|M|2X2
+#45|Kolaghan's Command|R|2X2
+#46|Master Biomancer|R|2X2
+#47|Prophetic Bolt|U|2X2
+#48|Sedris, the Traitor King|M|2X2
+#49|Venser, Shaper Savant|R|2X2
+#50|Vampire Sovereign|C|2X2
+#51|Abbot of Keral Keep|R|2X2
+#52|Abzan Charm|U|2X2
+#53|Bloodbraid Elf|U|2X2
+#54|Fiery Justice|R|2X2
+#55|Grim Flayer|R|2X2
+#56|Judith, the Scourge Diva|R|2X2
+#57|Muldrotha, the Gravetide|M|2X2
+#58|Sedraxis Specter|U|2X2
+#59|Sprouting Thrinax|U|2X2
+#60|Teneb, the Harvester|R|2X2
+#61|Terminate|U|2X2
+#62|Militia Bugler|C|2X2
+#63|Reveillark|R|2X2
+#64|Go for the Throat|U|2X2
+#65|Bedlam Reveler|R|2X2
+#66|Young Pyromancer|U|2X2
+#67|Travel Preparations|U|2X2
+#68|Anguished Unmaking|R|2X2
+#69|Ashen Rider|R|2X2
+#70|Aurelia, the Warleader|M|2X2
+#71|Conclave Mentor|U|2X2
+#72|Creakwood Liege|R|2X2
+#73|Dromoka's Command|R|2X2
+#74|Figure of Destiny|R|2X2
+#75|Grand Arbiter Augustin IV|R|2X2
+#76|Heroic Reinforcements|U|2X2
+#77|Kaervek the Merciless|R|2X2
+#78|Kambal, Consul of Allocation|R|2X2
+#79|Lotleth Troll|U|2X2
+#80|Nicol Bolas, God-Pharaoh|M|2X2
+#81|Psychic Symbiont|U|2X2
+#82|Scab-Clan Giant|U|2X2
+#83|Uril, the Miststalker|M|2X2
+#84|Panharmonicon|R|2X2
+#85|Lava Coil|C|2X2
+#86|Coiling Oracle|C|2X2
+#87|Sultai Soothsayer|U|2X2
+#88|Flickerwisp|U|2X2
+#89|Path to Exile|U|2X2
+#90|Seeker of the Way|C|2X2
+#91|Wall of Omens|U|2X2
+#92|Graveblade Marauder|U|2X2
+#93|Yahenni, Undying Partisan|R|2X2
+#94|Alesha, Who Smiles at Death|R|2X2
+#95|Anger of the Gods|R|2X2
+#96|Bear's Companion|U|2X2
+#97|Bounty of the Luxa|U|2X2
+#98|Dack's Duplicate|R|2X2
+#99|Deathbringer Liege|R|2X2
+#100|Doran, the Siege Tower|R|2X2
+#101|Ezuri, Claw of Progress|M|2X2
+#102|Ghave, Guru of Spores|M|2X2
+#103|Jeskai Ascendancy|R|2X2
+#104|Lord of Extinction|M|2X2
+#105|Master of Cruelties|M|2X2
+#106|Tariel, Reckoner of Souls|R|2X2
+#107|Thraximundar|R|2X2
+#108|Tower Gargoyle|U|2X2
+#109|Mana Vault|M|2X2
+#110|Azorius Chancery|U|2X2
+#111|Boros Garrison|U|2X2
+#112|Dimir Aqueduct|U|2X2
+#113|Golgari Rot Farm|U|2X2
+#114|Gruul Turf|U|2X2
+#115|Izzet Boilerworks|U|2X2
+#116|Orzhov Basilica|U|2X2
+#117|Rakdos Carnarium|U|2X2
+#118|Selesnya Sanctuary|U|2X2
+#119|Simic Growth Chamber|U|2X2
+#120|Ground Assault|C|2X2
+#121|Abzan Falconer|U|2X2
+#122|Mana Leak|C|2X2
+#123|Mistfire Adept|U|2X2
+#124|Pull from Tomorrow|R|2X2
+#125|Oona's Prowler|R|2X2
+#126|Bloom Tender|R|2X2
+#127|Devoted Druid|U|2X2
+#128|Experiment One|C|2X2
+#129|Assassin's Trophy|R|2X2
+#130|Boartusk Liege|R|2X2
+#131|Dauntless Escort|R|2X2
+#132|Jeskai Charm|U|2X2
+#133|Lavalanche|R|2X2
+#134|Mistmeadow Witch|U|2X2
+#135|River Hoopoe|U|2X2
+#136|Shattergang Brothers|R|2X2
+#137|Wrenn and Six|M|2X2
+#138|Qasali Pridemage|C|2X2
+#139|Agony Warp|C|2X2
+#140|Settle Beyond Reality|C|2X2
+#141|Deep Analysis|C|2X2
+#142|Gifts Ungiven|R|2X2
+#143|Jeskai Elder|C|2X2
+#144|Eyeblight's Ending|C|2X2
+#145|Seekers' Squire|C|2X2
+#146|Dark-Dweller Oracle|C|2X2
+#147|Rift Bolt|C|2X2
+#148|Rampant Growth|C|2X2
+#149|Arjun, the Shifting Flame|R|2X2
+#150|Ashenmoor Liege|R|2X2
+#151|Atla Palani, Nest Tender|R|2X2
+#152|Blazing Hellhound|U|2X2
+#153|Bloodwater Entity|C|2X2
+#154|Chronicler of Heroes|C|2X2
+#155|Dreg Mangler|C|2X2
+#156|Extract from Darkness|U|2X2
+#157|Fireblade Artist|C|2X2
+#158|Glen Elendra Liege|R|2X2
+#159|Karador, Ghost Chieftain|M|2X2
+#160|Legion's Initiative|R|2X2
+#161|Murkfiend Liege|R|2X2
+#162|Skullbriar, the Walking Grave|R|2X2
+#163|Tenth District Legionnaire|C|2X2
+#164|Ulasht, the Hate Seed|R|2X2
+#165|Coldsteel Heart|U|2X2
+#166|Sensei's Divining Top|R|2X2
+#167|League Guildmage|U|2X2
+#168|Fiery Fall|C|2X2
+#169|Ambuscade|C|2X2
+#170|Lyev Skyknight|C|2X2
+#171|Relief Captain|C|2X2
+#172|Staggershock|U|2X2
+#173|Auger Spree|C|2X2
+#174|Kozilek, Butcher of Truth|M|2X2
+#175|Smothering Tithe|R|2X2
+#176|Advanced Stitchwing|C|2X2
+#177|Aethersnipe|C|2X2
+#178|Kederekt Leviathan|R|2X2
+#179|Thought Scour|C|2X2
+#180|Ob Nixilis, Unshackled|R|2X2
+#181|Scion of Darkness|U|2X2
+#182|Goblin Banneret|U|2X2
+#183|Labyrinth Champion|U|2X2
+#184|Annoyed Altisaur|C|2X2
+#185|Elvish Rejuvenator|C|2X2
+#186|Gnarlback Rhino|C|2X2
+#187|Impervious Greatwurm|R|2X2
+#188|Splinterfright|R|2X2
+#189|Tuskguard Captain|C|2X2
+#190|Webweaver Changeling|C|2X2
+#191|Animar, Soul of Elements|M|2X2
+#192|Balefire Liege|R|2X2
+#193|Bant Charm|U|2X2
+#194|Burning-Tree Emissary|C|2X2
+#195|Cartel Aristocrat|C|2X2
+#196|Gloryscale Viashino|U|2X2
+#197|Guided Passage|R|2X2
+#198|Izzet Charm|C|2X2
+#199|Magister Sphinx|R|2X2
+#200|Villainous Wealth|R|2X2
+#201|Bloodforged Battle-Axe|R|2X2
+#202|Knightly Valor|C|2X2
+#203|Glowspore Shaman|C|2X2
+#204|Call to the Feast|C|2X2
+#205|Disfigure|C|2X2
+#206|Ulamog, the Infinite Gyre|M|2X2
+#207|Ainok Bond-Kin|C|2X2
+#208|Gods Willing|C|2X2
+#209|Momentary Blink|C|2X2
+#210|Myth Realized|U|2X2
+#211|Wingsteed Rider|C|2X2
+#212|Ingenious Skaab|C|2X2
+#213|Blood Artist|U|2X2
+#214|Unearth|C|2X2
+#215|Greater Gargadon|R|2X2
+#216|Allosaurus Shepherd|M|2X2
+#217|Arachnus Spinner|U|2X2
+#218|Arachnus Web|C|2X2
+#219|Brindle Shoat|C|2X2
+#220|Centaur Battlemaster|U|2X2
+#221|Green Sun's Zenith|R|2X2
+#222|Hardened Scales|R|2X2
+#223|Spider Spawning|U|2X2
+#224|Aethermage's Touch|U|2X2
+#225|Empyrial Archangel|R|2X2
+#226|Firesong and Sunspeaker|R|2X2
+#227|Glimpse the Unthinkable|R|2X2
+#228|Hellkite Overlord|M|2X2
+#229|Jodah, Archmage Eternal|R|2X2
+#230|The Mimeoplasm|R|2X2
+#231|Mindwrack Liege|R|2X2
+#232|Mizzix of the Izmagnus|M|2X2
+#233|Orzhov Pontiff|U|2X2
+#234|Prized Amalgam|R|2X2
+#235|Thistledown Liege|R|2X2
+#236|Aether Vial|R|2X2
+#237|Civic Saber|U|2X2
+#238|Nim Deathmantle|R|2X2
+#239|Bloodflow Connoisseur|C|2X2
+#240|Forbidden Alchemy|C|2X2
+#241|Carrier Thrall|C|2X2
+#242|Capture Sphere|C|2X2
+#243|Deranged Assistant|C|2X2
+#244|Biogenic Upgrade|U|2X2
+#245|Mayael's Aria|R|2X2
+#246|Privileged Position|R|2X2
+#247|Emrakul, the Aeons Torn|M|2X2
+#248|Leonin Arbiter|R|2X2
+#249|Body Double|U|2X2
+#250|Spell Pierce|C|2X2
+#251|Wash Out|U|2X2
+#252|Gravecrawler|R|2X2
+#253|Imperial Seal|M|2X2
+#254|Inquisition of Kozilek|U|2X2
+#255|Necrotic Ooze|R|2X2
+#256|Vampiric Rites|U|2X2
+#257|Chaos Warp|R|2X2
+#258|Dreamshaper Shaman|U|2X2
+#259|Hero of the Games|C|2X2
+#260|Pirate's Pillage|C|2X2
+#261|Storm Fleet Pyromancer|C|2X2
+#262|Twinflame|R|2X2
+#263|Abzan Ascendancy|R|2X2
+#264|Atarka's Command|R|2X2
+#265|Kaalia of the Vast|M|2X2
+#266|Martial Glory|C|2X2
+#267|Thousand-Year Storm|R|2X2
+#268|Conqueror's Flail|R|2X2
+#269|Firemind Vessel|U|2X2
+#270|Phyrexian Altar|R|2X2
+#271|Hissing Iguanar|C|2X2
+#272|Anointer of Valor|C|2X2
+#273|Last Breath|C|2X2
+#274|Purphoros's Emissary|C|2X2
+#275|Scale Blessing|U|2X2
+#276|Sensor Splicer|C|2X2
+#277|Winged Coatl|C|2X2
+#278|Severed Strands|C|2X2
+#279|Kruin Striker|C|2X2
+#280|Nephalia Smuggler|U|2X2
+#281|Doomed Traveler|C|2X2
+#282|Teferi's Protection|R|2X2
+#283|Weathered Wayfarer|R|2X2
+#284|Force of Negation|R|2X2
+#285|Balustrade Spy|C|2X2
+#286|Monastery Swiftspear|C|2X2
+#287|Surreal Memoir|U|2X2
+#288|Thrive|C|2X2
+#289|Bring to Light|R|2X2
+#290|Child of Alara|R|2X2
+#291|Phyrexian Tyranny|R|2X2
+#292|Zur the Enchanter|R|2X2
+#293|Crucible of Worlds|M|2X2
+#294|Darksteel Plate|R|2X2
+#295|Cavern of Souls|M|2X2
+#296|City of Brass|R|2X2
+#297|Pillar of the Paruns|R|2X2
+#298|Eel Umbra|C|2X2
+#299|Grapple with the Past|C|2X2
+#300|Hyena Umbra|C|2X2
+#301|Aven Initiate|C|2X2
+#302|Battlefield Promotion|C|2X2
+#303|Liliana's Elite|C|2X2
+#304|Living Lightning|C|2X2
+#305|Skeleton Archer|C|2X2
+#306|Livewire Lash|U|2X2
+#307|Breakthrough|U|2X2
+#308|Warrior's Oath|M|2X2
+#309|Concordant Crossroads|M|2X2
+#310|Dragon Arch|U|2X2
+#311|Planar Bridge|R|2X2
+#312|Vedalken Orrery|R|2X2
+#313|Makeshift Mauler|C|2X2
+#314|Might of Old Krosa|C|2X2
+#315|Traveler's Amulet|C|2X2
+#316|Sparkmage's Gambit|C|2X2
+#317|Supernatural Stamina|C|2X2
+#318|Deadly Recluse|C|2X2
+#319|Strands of Undeath|C|2X2
+#320|Divine Visitation|M|2X2
+#321|As Foretold|M|2X2
+#322|Dockside Extortionist|M|2X2
+#323|Pithing Needle|R|2X2
+#324|Titan's Strength|C|2X2
+#325|Surgical Extraction|R|2X2
+#326|Food Chain|M|2X2
+#327|Thrumming Stone|R|2X2
+#328|Kasmina's Transmutation|C|2X2
+#329|Forbidden Orchard|R|2X2
+#330|Summer Bloom|U|2X2
+#331|Shadowborn Apostle|C|2X2
+//Rank|Name|Rarity|Set
+#1|Sanctuary Warden|M|SNC
+#2|All-Seeing Arbiter|M|SNC
+#3|Ziatora, the Incinerator|M|SNC
+#4|Elspeth Resplendent|M|SNC
+#5|Brokers Ascendancy|R|SNC
+#6|Ob Nixilis, the Adversary|M|SNC
+#7|Hostile Takeover|R|SNC
+#8|Raffine, Scheming Seer|M|SNC
+#9|Vivien on the Hunt|M|SNC
+#10|Titan of Industry|M|SNC
+#11|Rabble Rousing|R|SNC
+#12|Fight Rigging|R|SNC
+#13|Evelyn, the Covetous|R|SNC
+#14|Falco Spara, Pactweaver|M|SNC
+#15|Ziatora's Envoy|R|SNC
+#16|Workshop Warchief|R|SNC
+#17|Urabrask, Heretic Praetor|M|SNC
+#18|Shakedown Heavy|R|SNC
+#19|Fleetfoot Dancer|R|SNC
+#20|Jetmir, Nexus of Revels|M|SNC
+#21|Reservoir Kraken|R|SNC
+#22|Body Launderer|M|SNC
+#23|Professional Face-Breaker|R|SNC
+#24|Maestros Diabolist|R|SNC
+#25|Mysterious Limousine|R|SNC
+#26|Sanguine Spy|R|SNC
+#27|Tenacious Underdog|R|SNC
+#28|Jaxis, the Troublemaker|R|SNC
+#29|Corpse Appraiser|U|SNC
+#30|Lord Xander, the Collector|M|SNC
+#31|Toluz, Clever Conductor|R|SNC
+#32|Depopulate|R|SNC
+#33|Jinnie Fay, Jetmir's Second|R|SNC
+#34|Soul of Emancipation|R|SNC
+#35|Giada, Font of Hope|R|SNC
+#36|Disciplined Duelist|U|SNC
+#37|Queza, Augur of Agonies|U|SNC
 #38|Lagrella, the Magpie|U|SNC
-#39|Black Market Tycoon|R|SNC
-#40|Disciplined Duelist|U|SNC
-#41|Queza, Augur of Agonies|U|SNC
-#42|Inspiring Overseer|C|SNC
-#43|Brokers Charm|U|SNC
-#44|Corpse Appraiser|U|SNC
-#45|Darling of the Masses|U|SNC
-#46|Riveteers Charm|U|SNC
-#47|Mysterious Limousine|R|SNC
-#48|Rumor Gatherer|U|SNC
-#49|Ledger Shredder|R|SNC
+#39|Inspiring Overseer|C|SNC
+#40|Psychic Pickpocket|U|SNC
+#41|Night Clubber|U|SNC
+#42|Brokers Charm|U|SNC
+#43|Nimble Larcenist|U|SNC
+#44|Obscura Interceptor|R|SNC
+#45|Void Rend|R|SNC
+#46|Extraction Specialist|R|SNC
+#47|Faerie Vandal|U|SNC
+#48|Ledger Shredder|R|SNC
+#49|Dusk Mangler|U|SNC
 #50|Murder|C|SNC
-#51|Jewel Thief|C|SNC
-#52|Aven Heartstabber|R|SNC
-#53|Brazen Upstart|U|SNC
-#54|Cabaretti Ascendancy|R|SNC
-#55|Cormela, Glamour Thief|U|SNC
-#56|Incandescent Aria|R|SNC
-#57|Maestros Charm|U|SNC
+#51|Pugnacious Pugilist|U|SNC
+#52|Jewel Thief|C|SNC
+#53|Topiary Stomper|R|SNC
+#54|Aven Heartstabber|R|SNC
+#55|Black Market Tycoon|R|SNC
+#56|Cormela, Glamour Thief|U|SNC
+#57|Darling of the Masses|U|SNC
 #58|Mr. Orfeo, the Boulder|U|SNC
-#59|Nimble Larcenist|U|SNC
-#60|Ognis, the Dragon's Lash|R|SNC
-#61|Rocco, Cabaretti Caterer|U|SNC
-#62|Unleash the Inferno|R|SNC
-#63|Giada, Font of Hope|R|SNC
-#64|Halo Fountain|M|SNC
-#65|Faerie Vandal|U|SNC
-#66|Undercover Operative|R|SNC
-#67|Angel of Suffering|M|SNC
-#68|Night Clubber|U|SNC
-#69|Sanguine Spy|R|SNC
-#70|Whack|U|SNC
-#71|Strangle|C|SNC
-#72|Bootleggers' Stash|M|SNC
-#73|Cleanup Crew|U|SNC
-#74|Cabaretti Charm|U|SNC
-#75|Crew Captain|U|SNC
-#76|Metropolis Angel|U|SNC
-#77|Park Heights Pegasus|R|SNC
-#78|Rigo, Streetwise Mentor|R|SNC
-#79|Citizen's Crowbar|U|SNC
-#80|Extraction Specialist|R|SNC
-#81|Even the Score|M|SNC
-#82|Psychic Pickpocket|U|SNC
-#83|Wingshield Agent|U|SNC
-#84|Call In a Professional|U|SNC
-#85|Devilish Valet|R|SNC
-#86|Pyre-Sledge Arsonist|U|SNC
-#87|Rob the Archives|U|SNC
-#88|Torch Breath|U|SNC
-#89|Elegant Entourage|U|SNC
-#90|Topiary Stomper|R|SNC
-#91|Celestial Regulator|C|SNC
-#92|Ceremonial Groundbreaker|U|SNC
-#93|Civil Servant|C|SNC
-#94|Security Rhox|U|SNC
-#95|Syndicate Infiltrator|U|SNC
-#96|Tainted Indulgence|U|SNC
-#97|Jetmir's Garden|R|SNC
-#98|Raffine's Tower|R|SNC
-#99|Spara's Headquarters|R|SNC
-#100|Xander's Lounge|R|SNC
-#101|Ziatora's Proving Ground|R|SNC
-#102|Bouncer's Beatdown|U|SNC
-#103|Angelic Observer|U|SNC
-#104|Out of the Way|U|SNC
-#105|Raffine's Silencer|U|SNC
-#106|Riveteers Requisitioner|U|SNC
-#107|Courier's Briefcase|U|SNC
-#108|Take to the Streets|U|SNC
-#109|Forge Boss|U|SNC
-#110|Mage's Attendant|U|SNC
-#111|Echo Inspector|C|SNC
-#112|Sleep with the Fishes|U|SNC
-#113|Slip Out the Back|U|SNC
-#114|Deal Gone Bad|C|SNC
-#115|Vampire Scrivener|U|SNC
-#116|Unlucky Witness|U|SNC
-#117|Exotic Pets|U|SNC
-#118|Snooping Newsie|C|SNC
-#119|Stimulus Package|U|SNC
-#120|Botanical Plaza|C|SNC
-#121|Racers' Ring|C|SNC
-#122|Skybridge Towers|C|SNC
-#123|Tramway Station|C|SNC
-#124|Waterfront District|C|SNC
-#125|Spara's Adjudicators|C|SNC
-#126|Corrupt Court Official|C|SNC
-#127|Prizefight|C|SNC
-#128|Riveteers Decoy|U|SNC
-#129|Ballroom Brawlers|U|SNC
-#130|Hold for Ransom|C|SNC
-#131|Knockout Blow|U|SNC
-#132|Raffine's Informant|C|SNC
-#133|Disdainful Stroke|C|SNC
-#134|Hypnotic Grifter|U|SNC
-#135|Obscura Initiate|C|SNC
-#136|Wiretapping|R|SNC
-#137|Grisly Sigil|U|SNC
-#138|Maestros Initiate|C|SNC
-#139|Light 'Em Up|C|SNC
-#140|Mayhem Patrol|C|SNC
-#141|Riveteers Initiate|C|SNC
-#142|Sizzling Soloist|U|SNC
-#143|Freelance Muscle|U|SNC
-#144|Voice of the Vermin|U|SNC
-#145|Body Dropper|C|SNC
-#146|Glamorous Outlaw|C|SNC
-#147|Jetmir's Fixer|C|SNC
-#148|Masked Bandits|C|SNC
-#149|Obscura Charm|U|SNC
-#150|Rakish Revelers|C|SNC
-#151|Scheming Fence|R|SNC
-#152|Shattered Seraph|C|SNC
-#153|Cabaretti Courtyard|C|SNC
-#154|Maestros Theater|C|SNC
-#155|Obscura Storefront|C|SNC
-#156|Swooping Protector|U|SNC
-#157|Exhibition Magician|C|SNC
-#158|Brokers Hideout|C|SNC
-#159|Riveteers Overlook|C|SNC
-#160|Warm Welcome|C|SNC
-#161|Civic Gardener|C|SNC
-#162|Celebrity Fencer|C|SNC
-#163|Illuminator Virtuoso|U|SNC
-#164|Speakeasy Server|C|SNC
-#165|Brokers Veteran|C|SNC
-#166|A Little Chat|U|SNC
-#167|Rooftop Nuisance|C|SNC
-#168|Witness Protection|C|SNC
-#169|Dusk Mangler|U|SNC
-#170|Rogues' Gallery|U|SNC
-#171|Big Score|C|SNC
-#172|Involuntary Employment|U|SNC
-#173|Plasma Jockey|C|SNC
-#174|Pugnacious Pugilist|U|SNC
-#175|Witty Roastmaster|C|SNC
-#176|Caldaia Strongarm|C|SNC
-#177|Luxurious Libation|U|SNC
-#178|Venom Connoisseur|U|SNC
-#179|Fatal Grudge|U|SNC
-#180|Maestros Ascendancy|R|SNC
-#181|Riveteers Ascendancy|R|SNC
-#182|Brass Knuckles|U|SNC
-#183|Unlicensed Hearse|R|SNC
-#184|Brokers Initiate|C|SNC
-#185|Expendable Lackey|C|SNC
-#186|Gathering Throng|C|SNC
-#187|Capenna Express|C|SNC
-#188|Sky Crier|C|SNC
-#189|Glittermonger|C|SNC
+#59|Riveteers Charm|U|SNC
+#60|Unleash the Inferno|R|SNC
+#61|Illuminator Virtuoso|U|SNC
+#62|Sleep with the Fishes|U|SNC
+#63|Undercover Operative|R|SNC
+#64|Grisly Sigil|U|SNC
+#65|Call In a Professional|U|SNC
+#66|Strangle|C|SNC
+#67|Gala Greeters|R|SNC
+#68|Brazen Upstart|U|SNC
+#69|Corpse Explosion|R|SNC
+#70|Endless Detour|R|SNC
+#71|Exotic Pets|U|SNC
+#72|Maestros Charm|U|SNC
+#73|Metropolis Angel|U|SNC
+#74|Rigo, Streetwise Mentor|R|SNC
+#75|Syndicate Infiltrator|U|SNC
+#76|Citizen's Crowbar|U|SNC
+#77|Halo Fountain|M|SNC
+#78|Echo Inspector|C|SNC
+#79|Out of the Way|U|SNC
+#80|Angel of Suffering|M|SNC
+#81|Rogues' Gallery|U|SNC
+#82|Whack|U|SNC
+#83|Riveteers Requisitioner|U|SNC
+#84|Torch Breath|U|SNC
+#85|Cleanup Crew|U|SNC
+#86|Elegant Entourage|U|SNC
+#87|Freelance Muscle|U|SNC
+#88|Voice of the Vermin|U|SNC
+#89|Rocco, Cabaretti Caterer|U|SNC
+#90|Unlicensed Hearse|R|SNC
+#91|Corrupt Court Official|C|SNC
+#92|Riveteers Decoy|U|SNC
+#93|Knockout Blow|U|SNC
+#94|Mage's Attendant|U|SNC
+#95|Wingshield Agent|U|SNC
+#96|Girder Goons|C|SNC
+#97|Raffine's Silencer|U|SNC
+#98|Arcane Bombardment|M|SNC
+#99|Ceremonial Groundbreaker|U|SNC
+#100|Crew Captain|U|SNC
+#101|Park Heights Pegasus|R|SNC
+#102|Jetmir's Garden|R|SNC
+#103|Raffine's Tower|R|SNC
+#104|Spara's Headquarters|R|SNC
+#105|Xander's Lounge|R|SNC
+#106|Ziatora's Proving Ground|R|SNC
+#107|Raffine's Informant|C|SNC
+#108|Even the Score|M|SNC
+#109|Hypnotic Grifter|U|SNC
+#110|A Little Chat|U|SNC
+#111|Rooftop Nuisance|C|SNC
+#112|Witness Protection|C|SNC
+#113|Light 'Em Up|C|SNC
+#114|Pyre-Sledge Arsonist|U|SNC
+#115|Unlucky Witness|U|SNC
+#116|Luxurious Libation|U|SNC
+#117|Body Dropper|C|SNC
+#118|Cabaretti Charm|U|SNC
+#119|Ognis, the Dragon's Lash|R|SNC
+#120|Security Rhox|U|SNC
+#121|Tainted Indulgence|U|SNC
+#122|Bouncer's Beatdown|U|SNC
+#123|Gathering Throng|C|SNC
+#124|Ballroom Brawlers|U|SNC
+#125|Hold for Ransom|C|SNC
+#126|Rumor Gatherer|U|SNC
+#127|Make Disappear|C|SNC
+#128|Wiretapping|R|SNC
+#129|Deal Gone Bad|C|SNC
+#130|Maestros Initiate|C|SNC
+#131|Big Score|C|SNC
+#132|Involuntary Employment|U|SNC
+#133|Mayhem Patrol|C|SNC
+#134|Witty Roastmaster|C|SNC
+#135|Celestial Regulator|C|SNC
+#136|Civil Servant|C|SNC
+#137|Glamorous Outlaw|C|SNC
+#138|Jetmir's Fixer|C|SNC
+#139|Maestros Ascendancy|R|SNC
+#140|Obscura Charm|U|SNC
+#141|Rakish Revelers|C|SNC
+#142|Scheming Fence|R|SNC
+#143|Snooping Newsie|C|SNC
+#144|Getaway Car|R|SNC
+#145|Spara's Adjudicators|C|SNC
+#146|Expendable Lackey|C|SNC
+#147|Prizefight|C|SNC
+#148|Exhibition Magician|C|SNC
+#149|Fake Your Own Death|C|SNC
+#150|Warm Welcome|C|SNC
+#151|For the Family|C|SNC
+#152|Midnight Assassin|C|SNC
+#153|Run Out of Town|C|SNC
+#154|Majestic Metamorphosis|C|SNC
+#155|Backup Agent|C|SNC
+#156|Boon of Safety|C|SNC
+#157|Dapper Shieldmate|C|SNC
+#158|Disdainful Stroke|C|SNC
+#159|Obscura Initiate|C|SNC
+#160|Slip Out the Back|U|SNC
+#161|Dig Up the Body|C|SNC
+#162|Revel Ruiner|C|SNC
+#163|Shadow of Mortality|R|SNC
+#164|Plasma Jockey|C|SNC
+#165|Riveteers Initiate|C|SNC
+#166|Sizzling Soloist|U|SNC
+#167|Caldaia Strongarm|C|SNC
+#168|Courier's Briefcase|U|SNC
+#169|Venom Connoisseur|U|SNC
+#170|Cabaretti Ascendancy|R|SNC
+#171|Fatal Grudge|U|SNC
+#172|Forge Boss|U|SNC
+#173|Incandescent Aria|R|SNC
+#174|Masked Bandits|C|SNC
+#175|Shattered Seraph|C|SNC
+#176|Stimulus Package|U|SNC
+#177|Botanical Plaza|C|SNC
+#178|Cabaretti Courtyard|C|SNC
+#179|Maestros Theater|C|SNC
+#180|Obscura Storefront|C|SNC
+#181|Racers' Ring|C|SNC
+#182|Skybridge Towers|C|SNC
+#183|Tramway Station|C|SNC
+#184|Waterfront District|C|SNC
+#185|Swooping Protector|U|SNC
+#186|Brokers Initiate|C|SNC
+#187|Sky Crier|C|SNC
+#188|Brokers Hideout|C|SNC
+#189|Riveteers Overlook|C|SNC
 #190|High-Rise Sawjack|C|SNC
-#191|Ready to Rumble|C|SNC
-#192|Wrecking Crew|C|SNC
-#193|Run Out of Town|C|SNC
-#194|Majestic Metamorphosis|C|SNC
-#195|Kill Shot|C|SNC
-#196|Boon of Safety|C|SNC
-#197|Buy Your Silence|C|SNC
-#198|Dapper Shieldmate|C|SNC
-#199|Refuse to Yield|U|SNC
-#200|Case the Joint|C|SNC
-#201|Make Disappear|C|SNC
-#202|Girder Goons|C|SNC
-#203|Join the Maestros|C|SNC
-#204|Revel Ruiner|C|SNC
-#205|Attended Socialite|C|SNC
-#206|Cabaretti Initiate|C|SNC
-#207|Rhox Pummeler|C|SNC
-#208|Social Climber|C|SNC
-#209|Suspicious Bookcase|U|SNC
-#210|Goldhound|C|SNC
-#211|Midnight Assassin|C|SNC
-#212|Demon's Due|C|SNC
-#213|Backup Agent|C|SNC
-#214|Raffine's Guidance|C|SNC
-#215|Errant, Street Artist|R|SNC
-#216|Psionic Snoop|C|SNC
-#217|Public Enemy|U|SNC
-#218|Cut of the Profits|R|SNC
-#219|Dig Up the Body|C|SNC
-#220|Graveyard Shift|U|SNC
-#221|Incriminate|C|SNC
-#222|Tavern Swindler|U|SNC
-#223|Arcane Bombardment|M|SNC
-#224|Hoard Hauler|R|SNC
-#225|Widespread Thieving|R|SNC
-#226|Evolving Door|R|SNC
-#227|Arc Spitter|U|SNC
-#228|Halo Scarab|C|SNC
-#229|Luxior, Giada's Gift|M|SNC
-#230|Scuttling Butler|U|SNC
-#231|Ominous Parcel|C|SNC
-#232|Sticky Fingers|C|SNC
-#233|Quick-Draw Dagger|C|SNC
-#234|Fake Your Own Death|C|SNC
-#235|Gilded Pinions|C|SNC
-#236|For the Family|C|SNC
-#237|Antagonize|C|SNC
-#238|Daring Escape|C|SNC
-#239|Crooked Custodian|C|SNC
-#240|Sewer Crocodile|C|SNC
-#241|Backstreet Bruiser|C|SNC
-#242|Patch Up|U|SNC
-#243|Glittering Stockpile|U|SNC
-#244|Obscura Ascendancy|R|SNC
-#245|Cement Shoes|U|SNC
-#246|Chrome Cat|C|SNC
-#247|Extract the Truth|C|SNC
-#248|Cutthroat Contender|C|SNC
-#249|Paragon of Modernity|C|SNC
-#250|Revelation of Power|C|SNC
-#251|Broken Wings|C|SNC
-#252|An Offer You Can't Refuse|U|SNC
-#253|Security Bypass|C|SNC
-#254|Cemetery Tampering|R|SNC
-#255|Illicit Shipment|U|SNC
-#256|Shadow of Mortality|R|SNC
-#257|Structural Assault|R|SNC
-#258|Most Wanted|C|SNC
-#259|Jackhammer|C|SNC
-#260|Cut Your Losses|R|SNC
-#261|Meeting of the Five|M|SNC
+#191|Civic Gardener|C|SNC
+#192|Crooked Custodian|C|SNC
+#193|Sewer Crocodile|C|SNC
+#194|Kill Shot|C|SNC
+#195|Buy Your Silence|C|SNC
+#196|Celebrity Fencer|C|SNC
+#197|Brokers Veteran|C|SNC
+#198|Case the Joint|C|SNC
+#199|Graveyard Shift|U|SNC
+#200|Incriminate|C|SNC
+#201|Devilish Valet|R|SNC
+#202|Attended Socialite|C|SNC
+#203|Rhox Pummeler|C|SNC
+#204|Social Climber|C|SNC
+#205|Scuttling Butler|U|SNC
+#206|Suspicious Bookcase|U|SNC
+#207|Quick-Draw Dagger|C|SNC
+#208|Gilded Pinions|C|SNC
+#209|Ready to Rumble|C|SNC
+#210|Wrecking Crew|C|SNC
+#211|Backstreet Bruiser|C|SNC
+#212|Angelic Observer|U|SNC
+#213|Speakeasy Server|C|SNC
+#214|Psionic Snoop|C|SNC
+#215|Security Bypass|C|SNC
+#216|Join the Maestros|C|SNC
+#217|Tavern Swindler|U|SNC
+#218|Hoard Hauler|R|SNC
+#219|Bootleggers' Stash|M|SNC
+#220|Take to the Streets|U|SNC
+#221|Chrome Cat|C|SNC
+#222|Halo Scarab|C|SNC
+#223|Ominous Parcel|C|SNC
+#224|Extract the Truth|C|SNC
+#225|Goldhound|C|SNC
+#226|Sticky Fingers|C|SNC
+#227|Cutthroat Contender|C|SNC
+#228|Capenna Express|C|SNC
+#229|Revelation of Power|C|SNC
+#230|Glittermonger|C|SNC
+#231|Broken Wings|C|SNC
+#232|Antagonize|C|SNC
+#233|Demon's Due|C|SNC
+#234|Patch Up|U|SNC
+#235|Refuse to Yield|U|SNC
+#236|An Offer You Can't Refuse|U|SNC
+#237|Cut of the Profits|R|SNC
+#238|Vampire Scrivener|U|SNC
+#239|Rob the Archives|U|SNC
+#240|Cabaretti Initiate|C|SNC
+#241|Obscura Ascendancy|R|SNC
+#242|Riveteers Ascendancy|R|SNC
+#243|Brass Knuckles|U|SNC
+#244|Paragon of Modernity|C|SNC
+#245|Daring Escape|C|SNC
+#246|Raffine's Guidance|C|SNC
+#247|Errant, Street Artist|R|SNC
+#248|Public Enemy|U|SNC
+#249|Illicit Shipment|U|SNC
+#250|Glittering Stockpile|U|SNC
+#251|Structural Assault|R|SNC
+#252|Evolving Door|R|SNC
+#253|Arc Spitter|U|SNC
+#254|Cement Shoes|U|SNC
+#255|Luxior, Giada's Gift|M|SNC
+#256|Jackhammer|C|SNC
+#257|Cut Your Losses|R|SNC
+#258|Cemetery Tampering|R|SNC
+#259|Widespread Thieving|R|SNC
+#260|Meeting of the Five|M|SNC
+#261|Most Wanted|C|SNC
 #262|Plains 1|C|SNC
 #263|Plains 2|C|SNC
 #264|Island 1|C|SNC

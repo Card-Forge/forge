@@ -4,9 +4,9 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | AILogic$ Pump | ValidTgts$ Creature
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ ChooseSource | AddSVar$ DBEffectSB & RPreventNextFromSourceSB & ExileEffectSB & DBCleanupSB | Description$ Enchanted creature has "{T}: The next time a source of your choice would deal damage to target creature this turn, prevent that damage."
-SVar:ChooseSource:AB$ ChooseSource | Cost$ T | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffectSB | SpellDescription$ The next time a source of your choice would deal damage to target creature this turn, prevent that damage.
-SVar:DBEffectSB:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to prevent damage to | ReplacementEffects$ RPreventNextFromSourceSB | RememberObjects$ Remembered | ImprintCards$ Targeted | SubAbility$ DBCleanupSB | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
-SVar:RPreventNextFromSourceSB:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ Card.IsImprinted | ReplaceWith$ ExileEffectSB | PreventionEffect$ True | Description$ The next time the chosen source deals damage to the targeted creature, prevent that damage.
+SVar:ChooseSource:AB$ ChooseSource | Cost$ T | Choices$ Card,Emblem | AILogic$ NeedsPrevention | SubAbility$ DBEffectSB | SpellDescription$ The next time a source of your choice would deal damage to target creature this turn, prevent that damage.
+SVar:DBEffectSB:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to prevent damage to | ReplacementEffects$ RPreventNextFromSourceSB | ImprintCards$ Targeted | SubAbility$ DBCleanupSB | ConditionDefined$ ChosenCard | ConditionPresent$ Card,Emblem
+SVar:RPreventNextFromSourceSB:Event$ DamageDone | ValidSource$ Card.ChosenCardStrict,Emblem.ChosenCard | ValidTarget$ Card.IsImprinted | ReplaceWith$ ExileEffectSB | PreventionEffect$ True | Description$ The next time the chosen source deals damage to the targeted creature, prevent that damage.
 SVar:ExileEffectSB:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:DBCleanupSB:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanupSB:DB$ Cleanup | ClearChosenCard$ True
 Oracle:Enchant creature\nEnchanted creature has "{T}: The next time a source of your choice would deal damage to target creature this turn, prevent that damage."

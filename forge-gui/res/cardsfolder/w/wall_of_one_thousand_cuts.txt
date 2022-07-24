@@ -4,5 +4,6 @@ Types:Creature Wall
 PT:3/5
 K:Flying
 K:Defender
-A:AB$ Pump | Cost$ W | Defined$ Self | KW$ HIDDEN CARDNAME can attack as though it didn't have defender. | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender.
+A:AB$ Effect | Cost$ W | StaticAbilities$ CanAttack | SpellDescription$ CARDNAME can attack this turn as though it didn't have defender.
+SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE can attack this turn as though it didn't have defender.
 Oracle:Defender, flying\n{W}: Wall of One Thousand Cuts can attack this turn as though it didn't have defender.

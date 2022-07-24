@@ -34,8 +34,6 @@ import forge.screens.LoadingOverlay;
 import forge.screens.limited.DraftingProcessScreen;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextField;
 import forge.util.Utils;
@@ -84,52 +82,21 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     public QuestTournamentsScreen() {
         super();
         controller = new QuestTournamentController(this);
-        btnSpendToken.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                FThreads.invokeInBackgroundThread(new Runnable() { //must run in background thread to handle alerts
-                    @Override
-                    public void run() {
-                        controller.spendToken();
-                    }
-                });
-            }
+        btnSpendToken.setCommand(event -> {
+            //must run in background thread to handle alerts
+            FThreads.invokeInBackgroundThread(() -> controller.spendToken());
         });
-        btnEditDeck.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                editDeck(true);
-            }
-        });
-        btnLeaveTournament.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                FThreads.invokeInBackgroundThread(new Runnable() { //must run in background thread to handle alerts
-                    @Override
-                    public void run() {
-                        controller.endTournamentAndAwardPrizes();
-                    }
-                });
-            }
+        btnEditDeck.setCommand(event -> editDeck(true));
+        btnLeaveTournament.setCommand(event -> {
+            //must run in background thread to handle alerts
+            FThreads.invokeInBackgroundThread(() -> controller.endTournamentAndAwardPrizes());
         });
 
         // TODO: is it possible to somehow reuse the original btnEditDeck/btnLeaveTournament
-        btnEditDeckInTourn.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                editDeck(true);
-            }
-        });
-        btnLeaveTournamentInTourn.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                FThreads.invokeInBackgroundThread(new Runnable() { //must run in background thread to handle alerts
-                    @Override
-                    public void run() {
-                        controller.endTournamentAndAwardPrizes();
-                    }
-                });
-            }
+        btnEditDeckInTourn.setCommand(event -> editDeck(true));
+        btnLeaveTournamentInTourn.setCommand(event -> {
+            //must run in background thread to handle alerts
+            FThreads.invokeInBackgroundThread(() -> controller.endTournamentAndAwardPrizes());
         });
 
         pnlPrepareDeck.add(btnEditDeck);
@@ -173,7 +140,8 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
     @Override
     protected void updateHeaderCaption() {
         if (mode == Mode.PREPARE_DECK) {
-            setHeaderCaption(FModel.getQuest().getName() + " - " + getGameType() + "\n" + Forge.getLocalizer().getMessage("lblDraft") + " - " + FModel.getQuest().getAchievements().getCurrentDraft().getTitle());
+            String title = FModel.getQuest().getAchievements().getCurrentDraft() == null ? "" : FModel.getQuest().getAchievements().getCurrentDraft().getTitle();
+            setHeaderCaption(FModel.getQuest().getName() + " - " + getGameType() + "\n" + Forge.getLocalizer().getMessage("lblDraft") + " - " + title);
         }
         else {
             super.updateHeaderCaption();
@@ -230,17 +198,7 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
 
     @Override
     public void startDraft(BoosterDraft draft) {
-        FThreads.invokeInEdtLater(new Runnable() {
-            @Override
-            public void run() {
-                LoadingOverlay.show("Loading Quest Tournament", new Runnable() {
-                    @Override
-                    public void run() {
-                        Forge.openScreen(new DraftingProcessScreen(draft, EditorType.QuestDraft, controller));
-                    }
-                });
-            }
-        });
+        FThreads.invokeInEdtLater(() -> LoadingOverlay.show("Loading Quest Tournament", true, () -> Forge.openScreen(new DraftingProcessScreen(draft, EditorType.QuestDraft, controller))));
     }
     
     private Deck getDeck() {
@@ -275,22 +233,20 @@ public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestT
             return;
         }
 
-        FThreads.invokeInBackgroundThread(new Runnable() { //must run in background thread to handle alerts
-            @Override
-            public void run() {
-                switch (mode) {
-                case SELECT_TOURNAMENT:
-                    controller.startDraft();
-                    break;
-                case PREPARE_DECK:
-                    controller.startTournament();
-                    break;
-                case TOURNAMENT_ACTIVE:
-                    controller.startNextMatch();
-                    break;
-                default:
-                    break;
-                }
+        //must run in background thread to handle alerts
+        FThreads.invokeInBackgroundThread(() -> {
+            switch (mode) {
+            case SELECT_TOURNAMENT:
+                controller.startDraft();
+                break;
+            case PREPARE_DECK:
+                controller.startTournament();
+                break;
+            case TOURNAMENT_ACTIVE:
+                controller.startNextMatch();
+                break;
+            default:
+                break;
             }
         });
     }

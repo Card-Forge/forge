@@ -3,5 +3,5 @@ ManaCost:1 G
 Types:Creature Elf Scout
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, look at the top four cards of your library. You may reveal a creature or land card from among them and put it on top of your library. Put the rest on the bottom of your library in a random order.
-SVar:TrigDig:DB$ Dig | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature,Land | ForceRevealToController$ True | DestinationZone$ Library | LibraryPosition$ 0 | RestRandomOrder$ True | ForceRevealToController$ True
+SVar:TrigDig:DB$ Dig | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature,Land | ForceRevealToController$ True | DestinationZone$ Library | LibraryPosition$ 0 | RestRandomOrder$ True
 Oracle:When Silhana Wayfinder enters the battlefield, look at the top four cards of your library. You may reveal a creature or land card from among them and put it on top of your library. Put the rest on the bottom of your library in a random order.

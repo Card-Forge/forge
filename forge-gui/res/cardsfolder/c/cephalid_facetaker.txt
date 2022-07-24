@@ -1,0 +1,8 @@
+Name:Cephalid Facetaker
+ManaCost:2 U
+Types:Creature Cephalid Rogue
+PT:1/4
+K:Unblockable
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigClone | TriggerDescription$ At the beginning of combat on your turn, you may have CARDNAME become a copy of another target creature until end of turn, except it's 1/4 and has "This creature can't be blocked."
+SVar:TrigClone:DB$ Clone | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | SetPower$ 1 | SetToughness$ 4 | AddKeywords$ Unblockable | AILogic$ CloneBestCreature | Duration$ UntilEndOfTurn
+Oracle:Cephalid Facetaker can't be blocked.\nAt the beginning of combat on your turn, you may have Cephalid Facetaker become a copy of another target creature until end of turn, except it's 1/4 and has "This creature can't be blocked."

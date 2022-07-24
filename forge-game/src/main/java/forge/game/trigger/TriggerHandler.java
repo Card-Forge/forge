@@ -243,7 +243,8 @@ public class TriggerHandler {
                     TriggerType.Exploited.equals(t.getMode()) ||
                     TriggerType.Sacrificed.equals(t.getMode()) ||
                     TriggerType.Destroyed.equals(t.getMode()) ||
-                    (TriggerType.ChangesZone.equals(t.getMode()) && "Battlefield".equals(t.getParam("Origin")))) { // TODO needs additional logic in case origin=Any
+                    ((TriggerType.ChangesZone.equals(t.getMode()) || TriggerType.ChangesZoneAll.equals(t.getMode()))
+                            && "Battlefield".equals(t.getParam("Origin")))) { // TODO needs additional logic in case origin=Any
                 registerOneTrigger(t);
             }
         }
@@ -343,15 +344,6 @@ public class TriggerHandler {
 
     public void clearWaitingTriggers() {
         waitingTriggers.clear();
-    }
-
-    public void resetTurnTriggerState() {
-        for (final Trigger t : activeTriggers) {
-            t.resetTurnState();
-        }
-        for (final Trigger t : delayedTriggers) {
-            t.resetTurnState();
-        }
     }
 
     private boolean runNonStaticTriggersForPlayer(final Player player, final TriggerWaiting wt, final List<Trigger> delayedTriggersWorkingCopy) {
@@ -517,6 +509,12 @@ public class TriggerHandler {
                 abMana.setUndoable(false);
             }
         }
+        if (regtrig instanceof TriggerSpellAbilityCastOrCopy) {
+            final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.CastSA);
+            if (null != abMana && null != abMana.getManaPart()) {
+                abMana.setUndoable(false);
+            }
+        }
 
         SpellAbility sa = null;
         Card host = regtrig.getHostCard();
@@ -561,17 +559,9 @@ public class TriggerHandler {
             sa.setActivatingPlayer(p);
         }
 
-        if (regtrig.hasParam("RememberController")) {
-            host.addRemembered(sa.getActivatingPlayer());
-        }
-
         if (regtrig.hasParam("RememberTriggeringCard")) {
             Card triggeredCard = ((Card) sa.getTriggeringObject(AbilityKey.Card));
             host.addRemembered(triggeredCard);
-        }
-
-        if (regtrig.hasParam("RememberKey")) {
-            host.addRemembered(runParams.get(AbilityKey.fromString(regtrig.getParam("RememberKey"))));
         }
 
         sa.setStackDescription(sa.toString());

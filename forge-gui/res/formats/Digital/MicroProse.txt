@@ -1,8 +1,0 @@
-[format]
-Name:MicroProse
-Type:Digital
-Subtype:Videogame
-Order:110
-Sets:MTG, STA, AST, DOTP, MTG_R, STA_R, DOTP_R
-Banned:Channel; Mind Twist; Bronze Tablet; Contract from Below; Darkpact; Demonic Attorney; Jeweled Bird; Rebirth; Tempest Efreet
-Restricted:Ancestral Recall; Balance; Berserk; Black Lotus; Black Vise; Braingeyser; Demonic Tutor; Fastbond; Fork; Ivory Tower; Library of Alexandria; Mox Emerald; Mox Jet; Mox Pearl; Mox Ruby; Mox Sapphire; Regrowth; Sol Ring; Time Walk; Timetwister; Wheel of Fortune

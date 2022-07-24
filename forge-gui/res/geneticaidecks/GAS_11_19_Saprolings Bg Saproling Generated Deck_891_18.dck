@@ -1,0 +1,35 @@
+[metadata]
+Name=GAS_11_19_Saprolings Bg Saproling Generated Deck_891_18
+[Main]
+4 Deathbloom Thallid|DOM
+4 Forest|DOM|1
+2 Forest|DOM|2
+1 Forest|DOM|3
+1 Forest|DOM|4
+3 Forest|M19|2
+3 Forest|RIX
+4 Fungal Infection|DOM
+1 Fungal Plots|DOM
+3 Poison-Tip Archer|M19
+4 Saproling Migration|DOM
+4 Song of Freyalise|DOM
+4 Spore Swarm|DOM
+3 Sporecrown Thallid|DOM
+1 Swamp|DOM|3
+1 Swamp|DOM|4
+1 Swamp|GRN
+1 Swamp|M19|1
+1 Swamp|M19|3
+3 Swamp|RIX
+2 Tendershoot Dryad|RIX
+1 Thallid Omnivore|DOM
+1 Verdant Force|DOM
+2 Vicious Offering|DOM
+2 Woodland Cemetery|DOM
+3 Yavimaya Sapherd|DOM
+[Sideboard]
+3 Fungal Plots|DOM
+4 Gruesome Fate|RIX
+4 Thallid Soothsayer|DOM
+1 Undercity Uprising|GRN
+3 Vraska, Golgari Queen|GRN

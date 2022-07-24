@@ -59,7 +59,7 @@ public class FightEffect extends DamageBaseEffect {
         Player controller = host.getController();
         boolean isOptional = sa.hasParam("Optional");
 
-        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeFight", CardTranslation.getTranslatedName(fighters.get(0).getName()), CardTranslation.getTranslatedName(fighters.get(1).getName())))) {
+        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeFight", CardTranslation.getTranslatedName(fighters.get(0).getName()), CardTranslation.getTranslatedName(fighters.get(1).getName())), null)) {
             return;
         }
 
@@ -165,7 +165,9 @@ public class FightEffect extends DamageBaseEffect {
 
             damageMap.put(fighterA, fighterB, dmg1);
             damageMap.put(fighterB, fighterA, dmg2);
+            fighterB.setFoughtThisTurn(true);
         }
+        fighterA.setFoughtThisTurn(true);
 
         if (!usedDamageMap) {
             sa.getHostCard().getGame().getAction().dealDamage(false, damageMap, preventMap, counterTable, sa);

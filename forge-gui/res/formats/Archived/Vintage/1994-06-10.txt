@@ -1,0 +1,8 @@
+[format]
+Name:Constructed (LEG)
+Type:Archived
+Subtype:Vintage
+Effective:1994-06-10
+Sets:LEA, LEB, 2ED, ARN, ATQ, 3ED, LEG
+Restricted:Ali from Cairo; Ancestral Recall; Berserk; Black Lotus; Braingeyser; Candelabra of Tawnos; Channel; Copy Artifact; Demonic Tutor; Feldon's Cane; Ivory Tower; Library of Alexandria; Mox Emerald; Mox Jet; Mox Pearl; Mox Ruby; Mox Sapphire; Regrowth; Sol Ring; Time Walk; Timetwister; Wheel of Fortune
+Banned:Bronze Tablet; Contract from Below; Darkpact; Demonic Attorney; Jeweled Bird; Rebirth; Shahrazad; Tempest Efreet; Time Vault

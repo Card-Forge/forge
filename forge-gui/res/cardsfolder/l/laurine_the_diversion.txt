@@ -4,7 +4,7 @@ Types:Legendary Creature Human Rogue
 PT:3/3
 K:Partner:Kamber, the Plunderer
 K:First Strike
-A:AB$ Goad | Cost$ 2 Sac<1/Artifact;Creature/artifact or creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature SpellDescription$ Goad target creature.
+A:AB$ Goad | Cost$ 2 Sac<1/Artifact;Creature/artifact or creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Goad target creature.
 SVar:AIPreference:SacCost$Artifact.token+nonCreature,Creature.token+powerLE1,Creature.cmcLE1+powerLE1
 DeckHints:Name$Kamber, the Plunderer
 DeckHas:Ability$Sacrifice

@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>forge</artifactId>
 		<groupId>forge</groupId>
-		<version>1.6.50-SNAPSHOT</version>
+		<version>1.6.54-SNAPSHOT</version>
 	</parent>
 
     <artifactId>forge-gui-desktop</artifactId>
@@ -474,10 +474,26 @@
                                         <opts>
                                             <opt>-Dfile.encoding=UTF-8</opt>
                                             <opt>--add-opens java.base/java.lang=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.base/java.math=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.base/jdk.internal.misc=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.base/java.nio=ALL-UNNAMED</opt>
+                                            <opt>--add-opens=java.base/sun.nio.ch=ALL-UNNAMED</opt>
                                             <opt>--add-opens java.base/java.util=ALL-UNNAMED</opt>
                                             <opt>--add-opens java.base/java.lang.reflect=ALL-UNNAMED</opt>
                                             <opt>--add-opens java.base/java.text=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.desktop/java.awt=ALL-UNNAMED</opt>
                                             <opt>--add-opens java.desktop/java.awt.font=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.desktop/java.awt.image=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.desktop/java.awt.color=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.desktop/sun.awt.image=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.desktop/javax.swing=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.desktop/javax.swing.border=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.desktop/javax.swing.event=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.desktop/sun.swing=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.desktop/java.beans=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.base/java.util.concurrent=ALL-UNNAMED</opt>
+                                            <opt>--add-opens java.base/java.net=ALL-UNNAMED</opt>
+                                            <opt>-Dio.netty.tryReflectionSetAccessible=true</opt>
                                         </opts>
                                     </jre>
                                     <versionInfo>

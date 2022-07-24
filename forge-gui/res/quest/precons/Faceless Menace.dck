@@ -1,0 +1,100 @@
+[metadata]
+Name=Faceless Menace
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+Description=Nothing is as it seems for your opponents. Fill the board with face-down creatures using Kadena, Slinking Sorcerer and the morph mechanic.
+Set=C19
+Image=faceless_menace.png
+[commander]
+1 Kadena, Slinking Sorcerer+|C19
+[main]
+1 Ainok Survivalist|C19
+1 Apex Altisaur|C19
+1 Ash Barrens|C19
+1 Bane of the Living|C19
+1 Biomass Mutation|C19
+1 Bojuka Bog|C19
+1 Bounty of the Luxa|C19
+1 Chromeshell Crab|C19
+1 Command Tower|C19
+1 Cultivate|C19
+1 Darkwater Catacombs|C19
+1 Deathmist Raptor|C19
+1 Den Protector|C19
+1 Dimir Aqueduct|C19
+1 Echoing Truth|C19
+1 Evolving Wilds|C19
+1 Exotic Orchard|C19
+1 Explore|C19
+1 Farseek|C19
+7 Forest|C19
+1 Foul Orchard|C19
+1 Ghastly Conscription|C19
+1 Gift of Doom|C19
+1 Golgari Guildgate|C19
+1 Golgari Rot Farm|C19
+1 Great Oak Guardian|C19
+1 Grim Haruspex|C19
+1 Grismold, the Dreadsower|C19
+1 Hex|C19
+1 Hooded Hydra|C19
+1 Icefeather Aven|C19
+5 Island|C19
+1 Ixidron|C19
+1 Jungle Hollow|C19
+1 Kadena's Silencer|C19
+1 Kheru Spellsnatcher|C19
+1 Leadership Vacuum|C19
+1 Llanowar Wastes|C19
+1 Mire in Misery|C19
+1 Myriad Landscape|C19
+1 Nantuko Vigilante|C19
+1 Opulent Palace|C19
+1 Overwhelming Stampede|C19
+1 Pendant of Prosperity|C19
+1 Putrefy|C19
+1 Rayami, First of the Fallen|C19
+1 Reality Shift|C19
+1 Reliquary Tower|C19
+1 Road of Return|C19
+1 Sagu Mauler|C19
+1 Sakura-Tribe Elder|C19
+1 Scaretiller|C19
+1 Scroll of Fate|C19
+1 Secret Plans|C19
+1 Seedborn Muse|C19
+1 Shrine of the Forsaken Gods|C19
+1 Silumgar Assassin|C19
+1 Simic Growth Chamber|C19
+1 Simic Guildgate|C19
+1 Skinthinner|C19
+1 Sol Ring|C19
+1 Stratus Dancer|C19
+1 Strionic Resonator|C19
+1 Sudden Substitution|C19
+1 Sultai Charm|C19
+1 Sunken Hollow|C19
+3 Swamp|C19
+1 Temple of the False God|C19
+1 Tempt with Discovery|C19
+1 Terramorphic Expanse|C19
+1 Tezzeret's Gambit|C19
+1 Thelonite Hermit|C19
+1 Thespian's Stage|C19
+1 Thieving Amalgam|C19
+1 Thornwood Falls|C19
+1 Thought Sponge|C19
+1 Thousand Winds|C19
+1 Thran Dynamo|C19
+1 Trail of Mystery|C19
+1 Urban Evolution|C19
+1 Vesuvan Shapeshifter|C19
+1 Voice of Many|C19
+1 Volrath, the Shapestealer|C19
+1 Vraska the Unseen|C19
+1 Willbender|C19
+1 Woodland Stream|C19
+1 Yavimaya Coast|C19

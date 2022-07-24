@@ -1,0 +1,99 @@
+[metadata]
+Name=Heads I Win, Tails You Lose
+[shop]
+WinsToUnlock=0
+Credits=10000
+MinDifficulty=0
+MaxDifficulty=5
+Description=You'll want to spend the early turns building up your mana rocks and equipment, and playing some silly coin flip cards. Then, start deploying your Commanders! Usually, I suggest starting with Zndrsplt so you can start flipping coins and drawing cards. Your opponents will think it's so cute and laugh. 'Look at the funny coin-flip deck! Haha.' And that's when you know you've got them. Deploy Okaun—the way this deck normally kills. If you have some equipment, suit him up! You just need to win three coin flips to kill with Okaun using Commander damage—and maybe less with the right equipment. I've attacked for over 10,000 damage with a single Okaun before! They'll try to remove it, but that's what your counterspells are for. If there are creatures in the way, you can sneak it through with cards that grant unblockability. Or if you really want the table to flip out, use Chandra's Ignition so your 10,000 power (or similar) Okaun kills the table at once!
+Set=SLD
+Image=heads_i_win_tails_you_lose.png
+[commander]
+1 Okaun, Eye of Chaos+|SLD
+1 Zndrsplt, Eye of Wisdom+|SLD
+[main]
+1 Academy Ruins|SLD
+1 Arcane Signet|SLD
+1 Blasphemous Act|SLD
+1 Bloodsworn Steward|SLD
+1 Boompile|SLD
+1 Buried Ruin|SLD
+1 Cascade Bluffs|SLD
+1 Chance Encounter|SLD
+1 Chandra's Ignition|SLD
+1 Chaos Warp|SLD
+1 Command Tower|SLD
+1 Commander's Plate|SLD
+1 Counterspell|SLD
+1 Crooked Scales|SLD
+1 Daretti, Scrap Savant|SLD
+1 Desolate Lighthouse|SLD
+1 Embercleave|SLD
+1 Exotic Orchard|SLD
+1 Fabricate|SLD
+1 Fiery Gambit|SLD
+1 Flamekin Village|SLD
+1 Footfall Crater|SLD
+1 Frenetic Sliver|SLD
+1 Gamble|SLD
+1 Goblin Archaeologist|SLD
+1 Goblin Engineer|SLD
+1 Goblin Kaboomist|SLD
+1 Great Furnace|SLD
+1 Impulsive Maneuvers|SLD
+1 Inventors' Fair|SLD
+7 Island|SLD
+1 Izzet Boilerworks|SLD
+1 Izzet Signet|SLD
+1 Karplusan Minotaur|SLD
+1 Krark's Thumb|SLD
+1 Krark, the Thumbless|SLD
+1 Lightning Greaves|SLD
+1 Long-Term Plans|SLD
+1 Mind Stone|SLD
+1 Mirror March|SLD
+1 Mogg Assassin|SLD
+8 Mountain|SLD
+1 Muddle the Mixture|SLD
+1 Myriad Landscape|SLD
+1 Negate|SLD
+1 Niv-Mizzet, Parun|SLD
+1 Path of Ancestry|SLD
+1 Planar Chaos|SLD
+1 Ponder|SLD
+1 Preordain|SLD
+1 Propaganda|SLD
+1 Ral Zarek|SLD
+1 Reliquary Tower|SLD
+1 Reshape|SLD
+1 Risky Move|SLD
+1 Rogue's Passage|SLD
+1 Sakashima the Impostor|SLD
+1 Seize the Day|SLD
+1 Serum Visions|SLD
+1 Shadowspear|SLD
+1 Shivan Reef|SLD
+1 Slip Through Space|SLD
+1 Sol Ring|SLD
+1 Spark Double|SLD
+1 Spinerock Knoll|SLD
+1 Squee's Revenge|SLD
+1 Stitch in Time|SLD
+1 Sulfur Falls|SLD
+1 Swiftfoot Boots|SLD
+1 Sword of Vengeance|SLD
+1 Talisman of Creativity|SLD
+1 Tavern Scoundrel|SLD
+1 Temple of Epiphany|SLD
+1 Temple of the False God|SLD
+1 Temur Battle Rage|SLD
+1 The Locust God|SLD
+1 Thought Vessel|SLD
+1 Tolaria West|SLD
+1 Training Center|SLD
+1 Tribute Mage|SLD
+1 Vandalblast|SLD
+1 Wandering Fumarole|SLD
+1 Whir of Invention|SLD
+1 Whispersilk Cloak|SLD
+1 Yusri, Fortune's Flame|SLD

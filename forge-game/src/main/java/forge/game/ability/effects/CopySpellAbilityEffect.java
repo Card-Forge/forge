@@ -26,6 +26,7 @@ import forge.util.Aggregates;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.Lang;
+import forge.util.collect.FCollection;
 
 
 public class CopySpellAbilityEffect extends SpellAbilityEffect {
@@ -88,7 +89,7 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
             SpellAbility chosenSA = controller.getController().chooseSingleSpellForEffect(tgtSpells, sa,
                     Localizer.getInstance().getMessage("lblSelectASpellCopy"), ImmutableMap.of());
 
-            if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", CardTranslation.getTranslatedName(chosenSA.getHostCard().getName())))) {
+            if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantCopyTheSpell", CardTranslation.getTranslatedName(chosenSA.getHostCard().getName())), null)) {
                 continue;
             }
 
@@ -128,32 +129,38 @@ public class CopySpellAbilityEffect extends SpellAbilityEffect {
                             final Player p = (Player) o;
                             if (p.equals(originalTargetPlayer))
                                 continue;
-                            if (p.isValid(type.split(","), chosenSA.getActivatingPlayer(), chosenSA.getHostCard(), sa)) {
+                            if (p.isValid(type.split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                                 players.add(p);
                             }
                         }
                     }
-                    valid = CardLists.getValidCards(valid, type, chosenSA.getActivatingPlayer(), chosenSA.getHostCard(), sa);
+                    valid = CardLists.getValidCards(valid, type, sa.getActivatingPlayer(), sa.getHostCard(), sa);
                     Card originalTarget = Iterables.getFirst(getTargetCards(chosenSA), null);
                     valid.remove(originalTarget);
 
                     if (sa.hasParam("ChooseOnlyOne")) {
-                        Card choice = controller.getController().chooseSingleEntityForEffect(valid, sa, Localizer.getInstance().getMessage("lblChooseOne"), null);
+                        FCollection<GameEntity> all = new FCollection<>(valid);
+                        all.addAll(players);
+                        GameEntity choice = controller.getController().chooseSingleEntityForEffect(all, sa,
+                                Localizer.getInstance().getMessage("lblChooseOne"), null);
                         if (choice != null) {
-                            valid = new CardCollection(choice);
+                            SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                            resetFirstTargetOnCopy(copy, choice, targetedSA);
+                            copies.add(copy);
+                        }
+                    } else {
+                        for (final Card c : valid) {
+                            SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                            resetFirstTargetOnCopy(copy, c, targetedSA);
+                            copies.add(copy);
+                        }
+                        for (final Player p : players) {
+                            SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
+                            resetFirstTargetOnCopy(copy, p, targetedSA);
+                            copies.add(copy);
                         }
                     }
 
-                    for (final Card c : valid) {
-                        SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
-                        resetFirstTargetOnCopy(copy, c, targetedSA);
-                        copies.add(copy);
-                    }
-                    for (final Player p : players) {
-                        SpellAbility copy = CardFactory.copySpellAbilityAndPossiblyHost(sa, chosenSA, controller);
-                        resetFirstTargetOnCopy(copy, p, targetedSA);
-                        copies.add(copy);
-                    }
                 }
             } else {
                 for (int i = 0; i < amount; i++) {

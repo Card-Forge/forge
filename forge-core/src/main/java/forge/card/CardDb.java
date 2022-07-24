@@ -20,6 +20,8 @@ package forge.card;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.*;
+
+import forge.StaticData;
 import forge.card.CardEdition.CardInSet;
 import forge.card.CardEdition.Type;
 import forge.deck.generation.IDeckGenPool;
@@ -45,13 +47,15 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
     private final Map<String, PaperCard> uniqueCardsByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, CardRules> rulesByName;
     private final Map<String, ICardFace> facesByName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
-    private static Map<String, String> artPrefs = new HashMap<>();
+    private static Map<String, String> artPrefs = Maps.newHashMap();
 
     private final Map<String, String> alternateName = Maps.newTreeMap(String.CASE_INSENSITIVE_ORDER);
-    private final Map<String, Integer> artIds = new HashMap<>();
+    private final Map<String, Integer> artIds = Maps.newHashMap();
 
     private final CardEdition.Collection editions;
     private List<String> filtered;
+
+    private Map<String, Boolean> nonLegendaryCreatureNames = Maps.newHashMap();
 
     public enum CardArtPreference {
         LATEST_ART_ALL_EDITIONS(false, true),
@@ -489,7 +493,6 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
             return null;
         // 1. First off, try using all possible search parameters, to narrow down the actual cards looked for.
         String reqEditionCode = request.edition;
-        PaperCard result = null;
         if (reqEditionCode != null && reqEditionCode.length() > 0) {
             // This get is robust even against expansion aliases (e.g. TE and TMP both valid for Tempest) -
             // MOST of the extensions have two short codes, 141 out of 221 (so far)
@@ -841,6 +844,26 @@ public final class CardDb implements ICardDatabase, IDeckGenPool {
 
     public ICardFace getFaceByName(final String name) {
         return facesByName.get(getName(name));
+    }
+
+    public boolean isNonLegendaryCreatureName(final String name) {
+        Boolean bool = nonLegendaryCreatureNames.get(name);
+        if (bool != null) {
+            return bool;
+        }
+        // check if the name is from a face
+        // in general token creatures does not have this
+        final ICardFace face = StaticData.instance().getCommonCards().getFaceByName(name);
+        if (face == null) {
+            nonLegendaryCreatureNames.put(name, false);
+            return false;
+        }
+        // TODO add check if face is legal in the format of the game
+        // name does need to be a non-legendary creature
+        final CardType type = face.getType();
+        bool = type.isCreature() && !type.isLegendary();
+        nonLegendaryCreatureNames.put(name, bool);
+        return bool;
     }
 
     @Override

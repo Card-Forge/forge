@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Array;
 import forge.adventure.world.WorldSave;
 
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ public class WorldBackground extends Actor {
 
     Texture[][] chunks;
     Texture loadingTexture,t;
-    ArrayList<Actor>[][] chunksSprites;
-    ArrayList<Actor>[][] chunksSpritesBackground;
+    Array<Actor>[][] chunksSprites;
+    Array<Actor>[][] chunksSpritesBackground;
     int currentChunkX;
     int currentChunkY;
 
@@ -95,7 +96,7 @@ public class WorldBackground extends Actor {
     }
 
     private void unLoadChunk(int x, int y) {
-        ArrayList<Actor> sprites = chunksSprites[x][y];
+        Array<Actor> sprites = chunksSprites[x][y];
         if (sprites != null) {
             for (Actor sprite : sprites) {
                 stage.GetSpriteGroup().removeActor(sprite);
@@ -135,9 +136,9 @@ public class WorldBackground extends Actor {
                         chunks[i][j].dispose();
         }
         chunks = new Texture[WorldSave.getCurrentSave().getWorld().getWidthInTiles()][WorldSave.getCurrentSave().getWorld().getHeightInTiles()];
-        ArrayList[][] createChunks = new ArrayList[WorldSave.getCurrentSave().getWorld().getWidthInTiles()][WorldSave.getCurrentSave().getWorld().getHeightInTiles()];
+        Array[][] createChunks = new Array[WorldSave.getCurrentSave().getWorld().getWidthInTiles()][WorldSave.getCurrentSave().getWorld().getHeightInTiles()];
         chunksSprites = createChunks;
-        ArrayList[][] createSprites = new ArrayList[WorldSave.getCurrentSave().getWorld().getWidthInTiles()][WorldSave.getCurrentSave().getWorld().getHeightInTiles()];
+        Array[][] createSprites = new Array[WorldSave.getCurrentSave().getWorld().getWidthInTiles()][WorldSave.getCurrentSave().getWorld().getHeightInTiles()];
         chunksSpritesBackground = createSprites;
 
 

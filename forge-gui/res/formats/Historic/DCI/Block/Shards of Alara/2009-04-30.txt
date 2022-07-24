@@ -1,6 +1,0 @@
-[format]
-Name:Block: Shards of Alara (ARB)
-Type:Historic
-Subtype:Block
-Effective:2009-04-30
-Sets:ALA, CFX, ARB

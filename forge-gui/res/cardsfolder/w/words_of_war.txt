@@ -1,7 +1,7 @@
 Name:Words of War
 ManaCost:2 R
 Types:Enchantment
-A:AB$ Effect | Cost$ 1 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | Name$ Words of War Effect | RememberObjects$ Targeted | ImprintCards$ Self | ReplacementEffects$ DrawReplace | SpellDescription$ The next time you would draw a card this turn, CARDNAME deals 2 damage to any target instead.
+A:AB$ Effect | Cost$ 1 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | RememberObjects$ Targeted | ImprintCards$ Self | ReplacementEffects$ DrawReplace | SpellDescription$ The next time you would draw a card this turn, CARDNAME deals 2 damage to any target instead.
 SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ WarDamage | Description$ The next time you would draw a card this turn, Words of War deals 2 damage to any target instead.
 SVar:WarDamage:DB$ DealDamage | Defined$ Remembered | DamageSource$ Imprinted | NumDmg$ 2 | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

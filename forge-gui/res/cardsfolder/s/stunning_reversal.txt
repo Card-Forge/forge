@@ -1,7 +1,7 @@
 Name:Stunning Reversal
 ManaCost:3 B
 Types:Instant
-A:SP$ Effect | Cost$ 3 B | Name$ Stunning Reversal Effect | ReplacementEffects$ LoseReplace | SubAbility$ DBExile | SpellDescription$ The next time you would lose the game this turn, instead draw seven cards and your life total becomes 1. Exile CARDNAME.
+A:SP$ Effect | ReplacementEffects$ LoseReplace | SubAbility$ DBExile | SpellDescription$ The next time you would lose the game this turn, instead draw seven cards and your life total becomes 1. Exile CARDNAME.
 SVar:LoseReplace:Event$ GameLoss | ActiveZones$ Command | ValidPlayer$ You | ReplaceWith$ DrawSeven | Description$ The next time you would lose the game this turn, instead draw seven cards and your life total becomes 1.
 SVar:DrawSeven:DB$ Draw | NumCards$ 7 | SubAbility$ DBSetLife
 SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ 1 | SubAbility$ ExileEffect

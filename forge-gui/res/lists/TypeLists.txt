@@ -26,6 +26,7 @@ Artificer:Artificers
 Army:Armies
 Assassin:Assassins
 Assembly-Worker:Assembly-Workers
+Astartes:Astartes
 Atog:Atogs
 Aurochs:Aurochs
 Avatar:Avatars
@@ -102,6 +103,7 @@ Gamer:Gamers
 Gargoyle:Gargoyles
 Germ:Germs
 Giant:Giants
+Gith:Gith
 Gnoll:Gnolls
 Gnome:Gnomes
 Goat:Goats
@@ -294,6 +296,7 @@ Lesson
 Trap
 [EnchantmentTypes]
 Aura
+Background
 Cartouche
 Class
 Curse
@@ -334,6 +337,7 @@ Dovin
 Duck
 Dungeon Master
 Ellywick
+Elminster
 Elspeth
 Estrid
 Freyalise
@@ -389,3 +393,5 @@ Xenagos
 Yanggu
 Yanling
 Zariel
+[DungeonTypes]
+Undercity

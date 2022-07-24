@@ -1,0 +1,7 @@
+[format]
+Name:Block: Innistrad (AVR)
+Type:Archived
+Subtype:Block
+Effective:2012-05-04
+Sets:ISD, DKA, AVR
+Banned:Intangible Virtue; Lingering Souls

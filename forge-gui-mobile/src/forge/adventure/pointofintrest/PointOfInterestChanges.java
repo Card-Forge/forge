@@ -11,19 +11,18 @@ import java.util.HashSet;
  * Class to save point of interest changes, like sold cards and dead enemies
  */
 public class PointOfInterestChanges implements SaveFileContent  {
+    private final HashSet<Integer> deletedObjects=new HashSet<>();
+    private final HashMap<Integer, HashSet<Integer>> cardsBought = new HashMap<>();
+    private java.util.Map<String, Byte> mapFlags = new HashMap<>();
 
-    public static class Map extends HashMap<String,PointOfInterestChanges> implements SaveFileContent
-    {
-
+    public static class Map extends HashMap<String,PointOfInterestChanges> implements SaveFileContent {
         @Override
         public void load(SaveFileData data) {
-
             this.clear();
-            if(data==null||!data.containsKey("keys"))
-                return;
+            if(data==null || !data.containsKey("keys")) return;
+
             String[] keys= (String[]) data.readObject("keys");
-            for(int i=0;i<keys.length;i++)
-            {
+            for(int i=0;i<keys.length;i++) {
                 SaveFileData elementData = data.readSubData("value_"+i);
                 PointOfInterestChanges newChanges=new PointOfInterestChanges();
                 newChanges.load(elementData);
@@ -66,35 +65,21 @@ public class PointOfInterestChanges implements SaveFileContent  {
         return data;
     }
 
-    private final HashSet<Integer> deletedObjects=new HashSet<>();
-    private final HashMap<Integer, HashSet<Integer>> cardsBought=new HashMap<>();
-    private java.util.Map<String, Byte> mapFlags = new HashMap<>();
-
-    public boolean isObjectDeleted(int objectID)
-    {
-        return deletedObjects.contains(objectID);
-    }
-    public boolean deleteObject(int objectID)
-    {
-        return deletedObjects.add(objectID);
-    }
+    public boolean isObjectDeleted(int objectID) { return deletedObjects.contains(objectID); }
+    public boolean deleteObject(int objectID)    { return deletedObjects.add(objectID); }
 
     public java.util.Map<String, Byte> getMapFlags() {
         return mapFlags;
     }
 
-    public void buyCard(int objectID, int cardIndex)
-    {
-        if( !cardsBought.containsKey(objectID))
-        {
+    public void buyCard(int objectID, int cardIndex) {
+        if( !cardsBought.containsKey(objectID)) {
             cardsBought.put(objectID,new HashSet<>());
         }
         cardsBought.get(objectID).add(cardIndex);
     }
-    public boolean wasCardBought(int objectID, int cardIndex)
-    {
-        if( !cardsBought.containsKey(objectID))
-        {
+    public boolean wasCardBought(int objectID, int cardIndex) {
+        if( !cardsBought.containsKey(objectID)) {
             return false;
         }
         return cardsBought.get(objectID).contains(cardIndex);

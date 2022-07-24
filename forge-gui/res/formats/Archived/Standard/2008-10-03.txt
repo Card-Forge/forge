@@ -1,0 +1,6 @@
+[format]
+Name:Standard (ALA)
+Type:Archived
+Subtype:Standard
+Effective:2008-10-03
+Sets:10E, LRW, MOR, SHM, EVE, ALA

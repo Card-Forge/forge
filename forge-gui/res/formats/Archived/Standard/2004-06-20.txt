@@ -1,0 +1,7 @@
+[format]
+Name:Standard (5DN)
+Type:Archived
+Subtype:Standard
+Effective:2004-06-20
+Sets:ONS, LGN, SCG, 8ED, MRD, DST, 5DN
+Banned:Skullclamp

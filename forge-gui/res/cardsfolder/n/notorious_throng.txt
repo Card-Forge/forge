@@ -4,6 +4,6 @@ Types:Tribal Sorcery Rogue
 K:Prowl:5 U
 A:SP$ Token | Cost$ 3 U | TokenAmount$ X | TokenScript$ b_1_1_faerie_rogue_flying | TokenOwner$ You | SubAbility$ DBTakeTurn | SpellDescription$ Create X 1/1 black Faerie Rogue creature tokens with flying, where X is the damage dealt to your opponents this turn. If CARDNAME's prowl cost was paid, take an extra turn after this one.
 SVar:DBTakeTurn:DB$ AddTurn | NumTurns$ 1 | ConditionDefined$ Self | ConditionPresent$ Card.prowled
-SVar:X:Count$TotalOppDamageThisTurn
+SVar:X:PlayerCountPropertyYou$DamageToOppsThisTurn
 DeckNeeds:Type$Rogue
 Oracle:Prowl {5}{U} (You may cast this for its prowl cost if you dealt combat damage to a player this turn with a Rogue.)\nCreate X 1/1 black Faerie Rogue creature tokens with flying, where X is the damage dealt to your opponents this turn. If this spell's prowl cost was paid, take an extra turn after this one.

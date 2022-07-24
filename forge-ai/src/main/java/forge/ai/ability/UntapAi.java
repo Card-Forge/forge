@@ -53,7 +53,7 @@ public class UntapAi extends SpellAbilityAi {
             return false;
         }
 
-        return ComputerUtilCost.checkDiscardCost(ai, cost, sa.getHostCard(), sa);
+        return ComputerUtilCost.checkDiscardCost(ai, cost, source, sa);
     }
 
     @Override
@@ -133,6 +133,10 @@ public class UntapAi extends SpellAbilityAi {
 
         CardCollection list = CardLists.getTargetableCards(targetController.getCardsIn(ZoneType.Battlefield), sa);
 
+        if (!sa.isCurse()) {
+            list = ComputerUtil.getSafeTargets(ai, sa, list);
+        }
+
         if (list.isEmpty()) {
             return false;
         }
@@ -170,8 +174,10 @@ public class UntapAi extends SpellAbilityAi {
 
         //try to exclude things that will already be untapped due to something on stack or because something is
         //already targeted in a parent or sub SA
-        CardCollection toExclude = ComputerUtilAbility.getCardsTargetedWithApi(ai, untapList, sa, ApiType.Untap);
-        untapList.removeAll(toExclude);
+        if (!sa.isTrigger() || mandatory) { // but if just confirming trigger no need to look for other targets and might still help anyway
+            CardCollection toExclude = ComputerUtilAbility.getCardsTargetedWithApi(ai, untapList, sa, ApiType.Untap);
+            untapList.removeAll(toExclude);
+        }
 
         sa.resetTargets();
         while (sa.canAddMoreTarget()) {
@@ -195,7 +201,7 @@ public class UntapAi extends SpellAbilityAi {
                 if (choice == null) {
                     if (CardLists.getNotType(untapList, "Creature").isEmpty()) {
                         choice = ComputerUtilCard.getBestCreatureAI(untapList); // if only creatures take the best
-                    } else if (!sa.getPayCosts().hasManaCost() || sa.getRootAbility().isTrigger()
+                    } else if (!sa.getPayCosts().hasManaCost() || sa.isTrigger()
                             || "Always".equals(sa.getParam("AILogic"))) {
                         choice = ComputerUtilCard.getMostExpensivePermanentAI(untapList);
                     }
@@ -261,10 +267,8 @@ public class UntapAi extends SpellAbilityAi {
     }
 
     private boolean untapTargetList(final Card source, final TargetRestrictions tgt, final SpellAbility sa, final boolean mandatory, 
-    		final CardCollection tapList) {
-        for (final Card c : sa.getTargets().getTargetCards()) {
-            tapList.remove(c);
-        }
+            final CardCollection tapList) {
+        tapList.removeAll(sa.getTargets().getTargetCards());
 
         if (tapList.isEmpty()) {
             return false;
@@ -288,7 +292,7 @@ public class UntapAi extends SpellAbilityAi {
             choice = ComputerUtilCard.getBestAI(tapList);
 
             if (choice == null) { // can't find anything left
-                if (sa.getTargets().size() < tgt.getMinTargets(sa.getHostCard(), sa) || sa.getTargets().size() == 0) {
+                if (sa.getTargets().size() < tgt.getMinTargets(source, sa) || sa.getTargets().size() == 0) {
                     if (!mandatory) {
                         sa.resetTargets();
                     }
@@ -308,9 +312,7 @@ public class UntapAi extends SpellAbilityAi {
     
     @Override
     public Card chooseSingleCard(Player ai, SpellAbility sa, Iterable<Card> list, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
-        PlayerCollection pl = new PlayerCollection();
-        pl.add(ai);
-        pl.addAll(ai.getAllies());
+        PlayerCollection pl = ai.getYourTeam();
         return ComputerUtilCard.getBestAI(CardLists.filterControlledBy(list, pl));
     }
 

@@ -4,12 +4,14 @@ import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.google.common.base.Function;
+import forge.adventure.stage.MapStage;
 import forge.assets.*;
 import forge.card.CardRenderer;
 import forge.deck.Deck;
 import forge.deck.FDeckViewer;
 import forge.error.BugReportDialog;
 import forge.gamemodes.match.HostedMatch;
+import forge.gui.FThreads;
 import forge.gui.download.GuiDownloadService;
 import forge.gui.interfaces.IGuiBase;
 import forge.gui.interfaces.IGuiGame;
@@ -142,6 +144,15 @@ public class GuiMobile implements IGuiBase {
 
     @Override
     public void showImageDialog(final ISkinImage image, final String message, final String title) {
+        if (Forge.isMobileAdventureMode) {
+            FThreads.invokeInEdtNowOrLater(new Runnable() {
+                @Override
+                public void run() {
+                    MapStage.getInstance().showImageDialog("Achievement Earned\n"+message, ((FBufferedImage)image).getTexture());
+                }
+            });
+            return;
+        }
         new WaitCallback<Integer>() {
             @Override
             public void run() {

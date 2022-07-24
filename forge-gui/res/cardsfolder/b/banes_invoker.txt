@@ -1,0 +1,6 @@
+Name:Bane's Invoker
+ManaCost:1 W
+Types:Creature Human Cleric
+PT:2/2
+A:AB$ Pump | Cost$ 8 | TargetMin$ 0 | TargetMax$ 2 | NumAtt$ +2 | NumDef$ +2 | KW$ Flying | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | PrecostDesc$ Wind Walk - | SpellDescription$ Up to two target creatures each get +2/+2 and gain flying until end of turn. 
+Oracle:Wind Walk - {8}: Up to two target creatures each get +2/+2 and gain flying until end of turn.

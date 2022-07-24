@@ -1,0 +1,6 @@
+[format]
+Name:Block: Scars of Mirrodin (MBS)
+Type:Archived
+Subtype:Block
+Effective:2011-02-04
+Sets:SOM, MBS

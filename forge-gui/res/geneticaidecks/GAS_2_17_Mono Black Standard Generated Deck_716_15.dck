@@ -1,0 +1,29 @@
+[metadata]
+Name=GAS_2_17_Mono Black Standard Generated Deck_716_15
+[Main]
+4 Ayara, First of Locthwain|ELD
+2 Bloodthirsty Aerialist|M20
+3 Cauldron Familiar|ELD
+2 Disfigure|M20
+4 Gutterbones|RNA
+3 Knight of the Ebon Legion|M20
+4 Midnight Reaper|GRN
+3 Murder|M20
+4 Murderous Rider|ELD
+4 Orzhov Enforcer|RNA
+2 Swamp|C19|1
+1 Swamp|C19|2
+4 Swamp|GRN
+4 Swamp|M20|1
+1 Swamp|M20|3
+3 Swamp|RNA
+4 Swamp|WAR|1
+1 Swamp|WAR|3
+4 Witch's Oven|ELD
+3 Yarok's Fenlurker|M20
+[Sideboard]
+2 Bloodthirsty Aerialist|M20
+3 Dread Presence|M20
+3 Drill Bit|RNA
+3 Order of Midnight|ELD
+4 Sorin's Thirst|WAR

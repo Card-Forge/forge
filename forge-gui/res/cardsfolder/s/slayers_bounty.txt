@@ -3,10 +3,8 @@ ManaCost:W
 Types:Legendary Artifact Clue
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPeek | TriggerDescription$ When CARDNAME enters the battlefield, look at the creature cards in target opponent's hand.
 SVar:TrigPeek:DB$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Look$ True | RevealType$ Creature
-T:Mode$ Sacrificed | ValidCard$ Clue.YouCtrl | Execute$ TrigDraft | TriggerZones$ Battlefield | TriggerDescription$ Whenever you CARDNAME or another Clue, draft a card from CARDNAME's spellbook.
-SVar:TrigDraft:DB$ NameCard | Draft$ True | Defined$ You | ChooseFromList$ Bounty Agent,Outflank,Bound in Gold,Bring to Trial,Glass Casket,Reprobation,Collar the Culprit,Compulsory Rest,Expel,Fairgrounds Warden,Iron Verdict,Luminous Bonds,Raise the Alarm,Seal Away,Summary Judgment | SubAbility$ DBMakeCard
-SVar:DBMakeCard:DB$ MakeCard | Name$ ChosenName | Zone$ Hand | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearNamedCard$ True
+T:Mode$ Sacrificed | ValidCard$ Card.Self,Clue.Other+YouCtrl | Execute$ TrigDraft | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice CARDNAME or another Clue, draft a card from CARDNAME's spellbook.
+SVar:TrigDraft:DB$ Draft | Spellbook$ Bounty Agent,Outflank,Bound in Gold,Bring to Trial,Glass Casket,Reprobation,Collar the Culprit,Compulsory Rest,Expel,Fairgrounds Warden,Iron Verdict,Luminous Bonds,Raise the Alarm,Seal Away,Summary Judgment
 A:AB$ Draw | Cost$ 2 Sac<1/CARDNAME> | NumCards$ 1 | SpellDescription$ Draw a card.
 DeckHas:Ability$Sacrifice
 DeckHints:Ability$Investigate & Type$Clue

@@ -3,7 +3,7 @@ ManaCost:3 B B
 Types:Enchantment
 K:ETBReplacement:Other:ChooseCT
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentInComputerDeck
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library | AddType$ ChosenType | RemoveCreatureTypes$ True | Description$ Creatures you control are the chosen type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | AddType$ ChosenType | RemoveCreatureTypes$ True | Description$ Creatures you control are the chosen type. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
 SVar:NonStackingEffect:True

@@ -1,0 +1,6 @@
+[format]
+Name:Standard (FUT)
+Type:Archived
+Subtype:Standard
+Effective:2007-05-20
+Sets:9ED, RAV, GPT, DIS, CSP, TSP, TSB, PLC, FUT

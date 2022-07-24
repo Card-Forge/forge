@@ -40,7 +40,10 @@ public class DrawEffect extends SpellAbilityEffect {
                 sb.append(" each");
             }
             sb.append(Lang.joinVerb(tgtPlayers, " draw")).append(" ");
-            sb.append(numCards == 1 ? "a card" : (Lang.getNumeral(numCards) + " cards"));
+            //if NumCards calculation could change between getStackDescription and resolve, use NumCardsDesc to avoid
+            //a "wrong" stack description
+            sb.append(sa.hasParam("NumCardsDesc") ? sa.getParam("NumCardsDesc") : numCards == 1 ? "a card" :
+                    (Lang.getNumeral(numCards) + " cards"));
             sb.append(".");
         }
 
@@ -69,7 +72,7 @@ public class DrawEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDrawCards", Lang.nounWithAmount(numCards, " card")))) {
+            if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantDrawCards", Lang.nounWithAmount(numCards, " card")), null)) {
                 continue;
             }
 

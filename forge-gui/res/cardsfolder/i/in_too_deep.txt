@@ -1,0 +1,9 @@
+Name:In Too Deep
+ManaCost:U U
+Types:Enchantment Aura
+K:Split second
+K:Enchant creature, planeswalker, or Clue
+A:SP$ Attach | ValidTgts$ Creature,Planeswalker,Clue | TgtPrompt$ Select target creature, planeswalker, or Clue | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | SetColor$ Colorless | AddType$ Clue & Artifact | RemoveCardTypes$ True | RemoveAllAbilities$ True | AddAbility$ Clue | Description$ Enchanted permanent is a colorless Clue artifact with "{2}, Sacrifice this artifact: Draw a card" and loses all other abilities. (It's no longer a creature or planeswalker.)
+SVar:Clue:AB$ Draw | Cost$ 2 Sac<1/CARDNAME/this artifact> | NumCards$ 1 | SpellDescription$ Draw a card.
+Oracle:Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\nEnchant creature, planeswalker, or Clue\nEnchanted permanent is a colorless Clue artifact with "{2}, Sacrifice this artifact: Draw a card" and loses all other abilities. (It's no longer a creature or planeswalker.)

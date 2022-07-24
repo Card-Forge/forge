@@ -1,0 +1,7 @@
+[format]
+Name:Historic (2021-10-13)
+Type:Archived
+Subtype:Arena
+Effective:2021-10-13
+Sets:XLN, RIX, DOM, M19, ANA, PANA, GRN, G18, RNA, WAR, M20, ELD, HA1, THB, HA2, IKO, HA3, M21, JMP, AJMP, AKR, ANB, ZNR, KLR, KHM, HA4, STX, STA, HA5, AFR, J21, MID
+Banned:Agent of Treachery; Brainstorm; Channel; Counterspell; Dark Ritual; Demonic Tutor; Field of the Dead; Fires of Invention; Lightning Bolt; Natural Order; Nexus of Fate; Oko, Thief of Crowns; Omnath, Locus of Creation; Once Upon a Time; Swords to Plowshares; Teferi, Time Raveler; Thassa's Oracle; Tibalt's Trickery; Time Warp; Uro, Titan of Nature's Wrath; Veil of Summer; Wilderness Reclamation; Winota, Joiner of Forces

@@ -1,0 +1,11 @@
+[metadata]
+Code=P30A
+Date=2022-09-02
+Name=30th Anniversary Promos
+Type=Promo
+ScryfallCode=P30A
+
+[cards]
+1 U Serra Angel @Kev Walker
+2 R Ball Lightning @Trevor Claxton
+3 R Fyndhorn Elves @Igor Kieryluk

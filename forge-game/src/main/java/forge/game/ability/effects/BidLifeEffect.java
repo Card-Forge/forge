@@ -33,7 +33,7 @@ public class BidLifeEffect extends SpellAbilityEffect {
         } else {
             startBidding = 0;
         }
-        
+
         if (sa.hasParam("OtherBidder")) {
             bidPlayers.add(activator);
             bidPlayers.addAll(AbilityUtils.getDefinedPlayers(host, sa.getParam("OtherBidder"), sa));
@@ -62,7 +62,7 @@ public class BidLifeEffect extends SpellAbilityEffect {
                 }
             }
         }
-        
+
         host.setChosenNumber(bid);
         host.addRemembered(winner);
         final SpellAbility action = sa.getAdditionalAbility("BidSubAbility");

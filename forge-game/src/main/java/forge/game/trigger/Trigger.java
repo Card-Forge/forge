@@ -77,10 +77,6 @@ public abstract class Trigger extends TriggerReplacementBase {
 
     private List<Object> triggerRemembered = Lists.newArrayList();
 
-    // number of times this trigger was activated this this turn
-    // used to handle once-per-turn triggers like Crawling Sensation
-    private int numberTurnActivations = 0;
-
     private Set<PhaseType> validPhases;
 
     private SpellAbility spawningAbility;
@@ -371,8 +367,32 @@ public abstract class Trigger extends TriggerReplacementBase {
         String condition = getParam("Condition");
         if ("AltCost".equals(condition)) {
             final Card moved = (Card) runParams.get(AbilityKey.Card);
-            if( null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
+            if (null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
                 return false;
+        } else if ("NoOpponentHasMoreLifeThanAttacked".equals(condition)) {
+            GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
+            if (attacked == null) {
+                attacked = (GameEntity) runParams.get(AbilityKey.Defender);
+            }
+            // we should not have gotten this far if planeswalker was attacked, but just to be safe
+            if (!(attacked instanceof Player)) {
+                return false;
+            }
+            final Player attackedP = (Player) attacked;
+            int life = attackedP.getLife();
+            boolean found = false;
+            for (Player opp : this.getHostCard().getController().getOpponents()) {
+                if (opp.equals(attackedP)) {
+                    continue;
+                }
+                if (opp.getLife() > life) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                return false;
+            }
         } else if ("AttackedPlayerWithMostLife".equals(condition)) {
             GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
             if (attacked == null) {
@@ -382,25 +402,6 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
             if (attacked == null || !attacked.isValid("Player.withMostLife",
                     this.getHostCard().getController(), this.getHostCard(), null)) {
-                return false;
-            }
-        } else if ("AttackedPlayerWhoAttackedYouLastTurn".equals(condition)) {
-            GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
-            if (attacked == null) {
-                // Check "Defender" too because once triggering objects are set on TriggerAttacks, the value of Attacked
-                // ends up being in Defender at that point.
-                attacked = (GameEntity) runParams.get(AbilityKey.DefendingPlayer);
-            }
-            Player attacker = this.getHostCard().getController();
-
-            boolean valid = false;
-            if (game.getPlayersAttackedLastTurn().containsKey(attacked)) {
-                if (game.getPlayersAttackedLastTurn().get(attacked).contains(attacker)) {
-                    valid = true;
-                }
-            }
-
-            if (attacked == null || !valid) {
                 return false;
             }
         }
@@ -532,16 +533,13 @@ public abstract class Trigger extends TriggerReplacementBase {
     }
 
     public int getActivationsThisTurn() {
-        return this.numberTurnActivations;
+        return hostCard.getAbilityActivatedThisTurn(this.getOverridingAbility());
     }
 
     public void triggerRun() {
-        this.numberTurnActivations++;
-    }
-
-    // Resets the state stored each turn for per-turn and per-instance restriction
-    public void resetTurnState() {
-        this.numberTurnActivations = 0;
+        if (this.getOverridingAbility() != null) {
+            hostCard.addAbilityActivated(this.getOverridingAbility());
+        }
     }
 
     /** {@inheritDoc} */

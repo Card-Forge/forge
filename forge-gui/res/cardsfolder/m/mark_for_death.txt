@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Sorcery
 A:SP$ Pump | Cost$ 3 R | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | KW$ HIDDEN CARDNAME blocks each combat if able. | IsCurse$ True | SubAbility$ DBUntap | SpellDescription$ Target creature an opponent controls blocks this turn if able. Untap that creature. Other creatures that player controls can't block this turn.
 SVar:DBUntap:DB$ Untap | Defined$ Targeted | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Name$ Mark for Death Effect | StaticAbilities$ KWPump | AILogic$ Evasion | RememberObjects$ TargetedController | ImprintCards$ Targeted
+SVar:DBEffect:DB$ Effect | StaticAbilities$ KWPump | AILogic$ Evasion | RememberObjects$ TargetedController | ImprintCards$ Targeted
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.IsNotImprinted+RememberedPlayerCtrl | AddHiddenKeyword$ CARDNAME can't block. | Description$ Other creatures that player controls can't block this turn.
 AI:RemoveDeck:All
 Oracle:Target creature an opponent controls blocks this turn if able. Untap that creature. Other creatures that player controls can't block this turn.

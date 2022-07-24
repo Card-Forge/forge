@@ -1,0 +1,11 @@
+Name:Evelyn, the Covetous
+ManaCost:2 UB B BR
+Types:Legendary Creature Vampire Rogue
+PT:2/5
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Vampire.Other+YouCtrl | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME or another Vampire enters the battlefield under your control, exile the top card of each player's library with a collection counter on it.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ Player | DestinationZone$ Exile | ExileWithCounter$ COLLECTION
+S:Mode$ Continuous | MayPlayLimit$ 1 | Affected$ Card.ExiledByYou+counters_GE1_COLLECTION | AffectedZone$ Exile | MayPlay$ True | MayPlayIgnoreColor$ True | Description$ Once each turn, you may play a card from exile with a collection counter on it if it was exiled by an ability you controlled, and you may spend mana as though it were any color to cast it.
+DeckHints:Type$Vampire
+Oracle:Flash\nWhenever Evelyn, the Covetous or another Vampire enters the battlefield under your control, exile the top card of each player's library with a collection counter on it.
+\nOnce each turn, you may play a card from exile with a collection counter on it if it was exiled by an ability you controlled, and you may spend mana as though it were mana of any color to cast it.

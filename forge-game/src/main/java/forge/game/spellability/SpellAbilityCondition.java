@@ -421,14 +421,20 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
 
             boolean result = false;
-    
-            for (final GameObject o : matchTgt.getFirstTargetedSpell().getTargets()) {
-                if (o.isValid(this.getTargetValidTargeting().split(","), sa.getActivatingPlayer(), host, sa)) {
-                    result = true;
-                    break;
+
+            SpellAbility abSub = matchTgt.getFirstTargetedSpell();
+
+            while (abSub != null && !result) {
+                for (final GameObject o : abSub.getTargets()) {
+                    if (o.isValid(this.getTargetValidTargeting().split(","), sa.getActivatingPlayer(), host, sa)) {
+                        result = true;
+                        break;
+                    }
                 }
+
+                abSub = sa.getSubAbility();
             }
-    
+
             if (!result) {
                 return false;
             }

@@ -1,0 +1,13 @@
+Name:Aerial Extortionist
+ManaCost:3 W W
+Types:Creature Bird Soldier
+PT:4/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME enters the battlefield or deals combat damage to a player, exile up to one target nonland permanent. For as long as that card remains exiled, its owner may cast it.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigExile | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or deals combat damage to a player, exile up to one target nonland permanent. For as long as that card remains exiled, its owner may cast it.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target nonland permanent | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ Play | ForgetOnMoved$ Exile | EffectOwner$ TargetedOwner | Duration$ Permanent
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ For as long as that card remains exiled, its owner may cast it.
+T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromTheirHand | ValidActivatingPlayer$ Player.Other | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever another player casts a spell from anywhere other than their hand, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Flying\nWhenever Aerial Extortionist enters the battlefield or deals combat damage to a player, exile up to one target nonland permanent. For as long as that card remains exiled, its owner may cast it.\nWhenever another player casts a spell from anywhere other than their hand, draw a card.

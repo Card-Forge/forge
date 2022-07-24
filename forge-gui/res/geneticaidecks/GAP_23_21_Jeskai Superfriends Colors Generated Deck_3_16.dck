@@ -1,0 +1,33 @@
+[metadata]
+Name=GAP_23_21_Jeskai Superfriends Colors Generated Deck_3_16
+[Main]
+3 Abrade|HOU
+2 Anger of the Gods|IMA
+3 Chandra, Torch of Defiance|KLD
+1 Clifftop Retreat|DOM
+2 Detention Sphere|GK2
+4 Elspeth, Sun's Champion|THS
+3 Fae of Wishes|ELD
+4 Fires of Invention|ELD
+2 Hallowed Fountain|RNA
+1 Island|ELD|1
+1 Island|GK2|2
+1 Island|M20|4
+2 Magma Spray|AKH
+1 Mountain|ELD|4
+1 Mountain|GRN
+4 Narset, Parter of Veils|WAR
+1 Plains|GK2|2
+1 Plains|KLD|3
+1 Plains|WAR|3
+4 Sacred Foundry|GRN
+4 Steam Vents|GRN
+4 Supreme Verdict|IMA
+4 Teferi, Time Raveler|WAR
+3 Temple of Epiphany|M20
+3 Temple of Triumph|M20
+[Sideboard]
+4 Deafening Clarion|GRN
+4 Heart of Kiran|AER
+4 Sarkhan the Masterless|WAR
+3 Scorching Dragonfire|ELD

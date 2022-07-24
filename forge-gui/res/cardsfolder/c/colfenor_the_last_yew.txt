@@ -4,10 +4,9 @@ Types:Legendary Creature Treefolk Shaman
 PT:3/7
 K:Vigilance
 K:Reach
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | RememberTriggeringCard$ True | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever CARDNAME or another creature you control dies, return up to one other target creature card with lesser toughness from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever CARDNAME or another creature you control dies, return up to one other target creature card with lesser toughness from your graveyard to your hand.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChange | Secondary$ True | TriggerDescription$ Whenever CARDNAME or another creature you control dies, return up to one other target creature card with lesser toughness from your graveyard to your hand.
-SVar:TrigChange:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.Other+IsNotRemembered+toughnessLTX+YouOwn | TgtPrompt$ Select up to one other target creature card with lesser toughness from your graveyard to return to your hand | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:TrigChange:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.Other+NotTriggeredNewCard+toughnessLTX+YouOwn | TgtPrompt$ Select up to one other target creature card with lesser toughness from your graveyard to return to your hand
 SVar:X:TriggeredCard$CardToughness
 DeckHas:Ability$Graveyard
 Oracle:Vigilance, reach\nWhenever Colfenor, the Last Yew or another creature you control dies, return up to one other target creature card with lesser toughness from your graveyard to your hand.

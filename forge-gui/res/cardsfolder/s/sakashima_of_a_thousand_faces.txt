@@ -4,7 +4,7 @@ Types:Legendary Creature Human Rogue
 PT:3/1
 K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Creature.YouCtrl+Other | AddKeywords$ Partner | AddStaticAbilities$ NoLegendRule | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of another creature you control, except it has CARDNAME's other abilities.
-SVar:NoLegendRule:Mode$ Continuous | Affected$ Permanent.YouCtrl | AddHiddenKeyword$ Legend rule doesn't apply to CARDNAME. | Description$ The "legend rule" doesn't apply to permanents you control.
-S:Mode$ Continuous | Affected$ Permanent.YouCtrl | AddHiddenKeyword$ Legend rule doesn't apply to CARDNAME. | Description$ The "legend rule" doesn't apply to permanents you control.
+SVar:NoLegendRule:Mode$ IgnoreLegendRule | ValidCard$ Permanent.YouCtrl | Description$ The "legend rule" doesn't apply to permanents you control.
+S:Mode$ IgnoreLegendRule | ValidCard$ Permanent.YouCtrl | Description$ The "legend rule" doesn't apply to permanents you control.
 K:Partner
 Oracle:You may have Sakashima of a Thousand Faces enter the battlefield as a copy of another creature you control, except it has Sakashima of a Thousand Faces's other abilities.\nThe "legend rule" doesn't apply to permanents you control.\nPartner (You can have two commanders if both have partner.)

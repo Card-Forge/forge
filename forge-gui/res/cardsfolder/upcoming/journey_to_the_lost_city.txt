@@ -1,0 +1,15 @@
+Name:Journey to the Lost City
+ManaCost:3 G
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigExile | TriggerDescription$ At the beginning of your upkeep, exile the top four cards of your library, then ABILITY
+SVar:TrigExile:DB$ Dig | DigNum$ 4 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBRollDice
+SVar:DBRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBPutLand,10-19:DBToken,20:DBPutAll | SpellDescription$ roll a d20.
+SVar:DBPutLand:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Hidden$ True | ChangeType$ Land.IsRemembered | SubAbility$ DBCleanup | SpellDescription$ 1—9 VERT You may put a land card from among those cards onto the battlefield.
+SVar:DBToken:DB$ Token | TokenScript$ g_2_2_wolf | ImprintTokens$ True | SubAbility$ DBPutCounters | SpellDescription$ 10-19 VERT Create a 2/2 green Wolf creature token, then put a +1/+1 counter on it for each creature card among those cards.
+SVar:DBPutCounters:DB$ PutCounter | Defined$ Imprinted | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:X:Remembered$Valid Creature
+SVar:DBPutAll:DB$ ChangeZoneAll | ChangeType$ Card.ExiledWithSource | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBSacrifice | SpellDescription$ 20 VERT Put all permanent cards exiled with CARDNAME onto the battlefield, then sacrifice it.
+SVar:DBSacrifice:DB$ Sacrifice | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+DeckHas:Ability$Token|Counters|Sacrifice & Type$Wolf
+Oracle:At the beginning of your upkeep, exile the top four cards of your library, then roll a d20.\n1—9 | You may put a land card from among those cards onto the battlefield.\n10—19 | Create a 2/2 green Wolf creature token, then put a +1/+1 counter on it for each creature card among those cards.\n20 | Put all permanent cards exiled with Journey to the Lost City onto the battlefield, then sacrifice it.

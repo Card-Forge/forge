@@ -1,0 +1,30 @@
+[metadata]
+Name=GAS_1_12_Azorius Aggro W Generated Deck_794_16
+[Main]
+3 Benalish Marshal|GNT
+2 Conclave Tribunal|GRN
+3 Dauntless Bodyguard|DOM
+4 Gideon Blackblade|WAR
+4 History of Benalia|DOM
+4 Law-Rune Enforcer|WAR
+4 Legion's Landing|XLN
+2 Mobilized District|WAR
+1 Plains|DOM|4
+5 Plains|GRN
+1 Plains|M19|3
+1 Plains|M20|2
+1 Plains|M20|3
+2 Plains|M20|4
+2 Plains|RIX
+2 Plains|RNA
+2 Plains|WAR|1
+1 Plains|WAR|2
+1 Plains|XLN|1
+1 Plains|XLN|4
+3 Rustwing Falcon|M19
+4 Skymarcher Aspirant|RIX
+3 Tomik, Distinguished Advokist|WAR
+4 Venerated Loxodon|GRN
+[Sideboard]
+4 Baffling End|RIX
+3 Raise the Alarm|M20

@@ -1,0 +1,6 @@
+[format]
+Name:Block: Odyssey (JUD)
+Type:Archived
+Subtype:Block
+Effective:2002-07-01
+Sets:ODY, TOR, JUD

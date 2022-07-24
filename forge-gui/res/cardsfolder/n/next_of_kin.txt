@@ -1,0 +1,12 @@
+Name:Next of Kin
+ManaCost:2 G
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When enchanted creature dies, you may put a creature card you own with lesser mana value from your hand or from the command zone onto the battlefield. If you do, return CARDNAME to the battlefield attached to that creature at the beginning of the next end step.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand,Command | Destination$ Battlefield | ChangeType$ Creature.cmcLTX+YouOwn | RememberChanged$ True | SubAbility$ DBDelayedTrigger
+SVar:X:TriggeredCard$CardManaCost
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ Phase | Phase$ End Of Turn | Execute$ TrigReturn | RememberObjects$ Remembered | TriggerDescription$ If you do, return CARDNAME to the battlefield attached to that creature at the beginning of the next end step.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | AttachedTo$ DelayTriggerRemembered
+DeckHas:Ability$Graveyard
+Oracle:Enchant creature\nWhen enchanted creature dies, you may put a creature card you own with lesser mana value from your hand or from the command zone onto the battlefield. If you do, return Next of Kin to the battlefield attached to that creature at the beginning of the next end step.

@@ -76,7 +76,7 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
             }
             if (!eachExisting && sa.hasParam("Optional") && !pl.getController().confirmAction(sa, null,
                     Localizer.getInstance().getMessage("lblWouldYouLikePutRemoveCounters", ctype.getName(),
-                            CardTranslation.getTranslatedName(gameCard.getName())))) {
+                            CardTranslation.getTranslatedName(gameCard.getName())), null)) {
                 continue;
             }
             if (!sa.usesTargeting() || gameCard.canBeTargetedBy(sa)) {

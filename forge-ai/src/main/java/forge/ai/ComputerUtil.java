@@ -131,10 +131,9 @@ public class ComputerUtil {
 
         sa = GameActionUtil.addExtraKeywordCost(sa);
 
-        if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
-            if (!CharmEffect.makeChoices(sa)) {
-                return false;
-            }
+        if (sa.getApi() == ApiType.Charm && !CharmEffect.makeChoices(sa)) {
+            // 603.3c If no mode is chosen, the ability is removed from the stack.
+            return false;
         }
         if (chooseTargets != null) {
             chooseTargets.run();
@@ -250,6 +249,13 @@ public class ComputerUtil {
             return false;
 
         final Card source = sa.getHostCard();
+
+        Zone fromZone = game.getZoneOf(source);
+        int zonePosition = 0;
+        if (fromZone != null) {
+            zonePosition = fromZone.getCards().indexOf(source);
+        }
+
         if (sa.isSpell() && !source.isCopiedSpell()) {
             sa.setHostCard(game.getAction().moveToStack(source, sa));
         }
@@ -257,11 +263,18 @@ public class ComputerUtil {
         sa = GameActionUtil.addExtraKeywordCost(sa);
 
         final Cost cost = sa.getPayCosts();
+        final CostPayment pay = new CostPayment(cost, sa);
+
+        // do this after card got added to stack
+        if (!sa.checkRestrictions(ai)) {
+            GameActionUtil.rollbackAbility(sa, fromZone, zonePosition, pay, source);
+            return false;
+        }
+
         if (cost == null) {
             ComputerUtilMana.payManaCost(ai, sa, false);
             game.getStack().add(sa);
         } else {
-            final CostPayment pay = new CostPayment(cost, sa);
             if (pay.payComputerCosts(new AiCostDecision(ai, sa, false))) {
                 game.getStack().add(sa);
             }
@@ -292,17 +305,30 @@ public class ComputerUtil {
         newSA = GameActionUtil.addExtraKeywordCost(newSA);
 
         final Card source = newSA.getHostCard();
+
+        Zone fromZone = game.getZoneOf(source);
+        int zonePosition = 0;
+        if (fromZone != null) {
+            zonePosition = fromZone.getCards().indexOf(source);
+        }
+
         if (newSA.isSpell() && !source.isCopiedSpell()) {
             newSA.setHostCard(game.getAction().moveToStack(source, newSA));
 
-            if (newSA.getApi() == ApiType.Charm && !newSA.isWrapper()) {
-                if (!CharmEffect.makeChoices(newSA)) {
-                    return false;
-                }
+            if (newSA.getApi() == ApiType.Charm && !CharmEffect.makeChoices(newSA)) {
+                // 603.3c If no mode is chosen, the ability is removed from the stack.
+                return false;
             }
         }
 
         final CostPayment pay = new CostPayment(newSA.getPayCosts(), newSA);
+
+        // do this after card got added to stack
+        if (!sa.checkRestrictions(ai)) {
+            GameActionUtil.rollbackAbility(sa, fromZone, zonePosition, pay, source);
+            return false;
+        }
+        
         pay.payComputerCosts(new AiCostDecision(ai, newSA, false));
 
         game.getStack().add(newSA);
@@ -329,9 +355,6 @@ public class ComputerUtil {
             }
 
             AbilityUtils.resolve(sa);
-
-            // destroys creatures if they have lethal damage, etc..
-            //game.getAction().checkStateEffects();
         }
     }
 
@@ -827,7 +850,7 @@ public class ComputerUtil {
                         }
                     }
 
-                    if ("DesecrationDemon".equals(source.getParam("AILogic"))) {
+                    if ("DesecrationDemon".equals(logic)) {
                         sacThreshold = SpecialCardAi.DesecrationDemon.getSacThreshold();
                     } else if (considerSacThreshold != -1) {
                         sacThreshold = considerSacThreshold;
@@ -1227,12 +1250,12 @@ public class ComputerUtil {
         final Game game = sa.getActivatingPlayer().getGame();
         final PhaseHandler ph = game.getPhaseHandler();
 
-        return (sa.getHostCard().isCreature()
+        return sa.getHostCard().isCreature()
                 && sa.getPayCosts().hasTapCost()
                 && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
                         && !ph.getNextTurn().equals(sa.getActivatingPlayer()))
                 && !sa.getHostCard().hasSVar("EndOfTurnLeavePlay")
-                && !sa.hasParam("ActivationPhases"));
+                && !sa.hasParam("ActivationPhases");
     }
 
     //returns true if it's better to wait until blockers are declared).
@@ -2601,8 +2624,7 @@ public class ComputerUtil {
     }
 
     public static CardCollection getSafeTargets(final Player ai, SpellAbility sa, CardCollectionView validCards) {
-        CardCollection safeCards = new CardCollection(validCards);
-        safeCards = CardLists.filter(safeCards, new Predicate<Card>() {
+        CardCollection safeCards = CardLists.filter(validCards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 if (c.getController() == ai) {
@@ -2615,8 +2637,7 @@ public class ComputerUtil {
     }
 
     public static Card getKilledByTargeting(final SpellAbility sa, CardCollectionView validCards) {
-        CardCollection killables = new CardCollection(validCards);
-        killables = CardLists.filter(killables, new Predicate<Card>() {
+        CardCollection killables = CardLists.filter(validCards, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.getController() != sa.getActivatingPlayer() && c.getSVar("Targeting").equals("Dies");
@@ -2803,7 +2824,7 @@ public class ComputerUtil {
         }
 
         return type.is(CounterEnumType.AWAKENING) || type.is(CounterEnumType.MANIFESTATION) || type.is(CounterEnumType.PETRIFICATION)
-                || type.is(CounterEnumType.TRAINING);
+                || type.is(CounterEnumType.TRAINING) || type.is(CounterEnumType.GHOSTFORM);
     }
 
     public static Player evaluateBoardPosition(final List<Player> listToEvaluate) {

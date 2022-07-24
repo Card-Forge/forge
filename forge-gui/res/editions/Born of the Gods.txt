@@ -179,7 +179,7 @@ ScryfallCode=BNG
 
 [tokens]
 b_2_2_e_zombie
-c_a_gold_draw
+c_a_gold_sac
 g_2_2_wolf
 g_3_3_e_centaur
 r_3_1_e_elemental_haste

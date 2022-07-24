@@ -65,7 +65,6 @@ public class TargetRestrictions {
     private boolean withoutSameCreatureType = false;
     private boolean withSameCreatureType = false;
     private boolean withSameCardType = false;
-    private boolean singleTarget = false;
     private boolean randomTarget = false;
     private boolean randomNumTargets = false;
 
@@ -108,7 +107,6 @@ public class TargetRestrictions {
         this.withoutSameCreatureType = target.isWithoutSameCreatureType();
         this.withSameCreatureType = target.isWithSameCreatureType();
         this.withSameCardType = target.isWithSameCardType();
-        this.singleTarget = target.isSingleTarget();
         this.randomTarget = target.isRandomTarget();
         this.randomNumTargets = target.isRandomNumTargets();
     }
@@ -765,20 +763,6 @@ public class TargetRestrictions {
      */
     public final void setSameController(final boolean same) {
         this.sameController = same;
-    }
-
-    /**
-     * @return the singleTarget
-     */
-    public boolean isSingleTarget() {
-        return singleTarget;
-    }
-
-    /**
-     * @param singleTarget the singleTarget to set
-     */
-    public void setSingleTarget(boolean singleTarget) {
-        this.singleTarget = singleTarget;
     }
 
     public final void applyTargetTextChanges(final SpellAbility sa) {

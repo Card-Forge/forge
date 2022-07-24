@@ -8,7 +8,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigPlay | TriggerDescription$ When Spell Queller leaves the battlefield, the exiled card's owner may cast that card without paying its mana cost.
 SVar:TrigExile:DB$ ChangeZone | TargetType$ Spell | ValidTgts$ Card.cmcLE4 | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Mandatory$ True | Destination$ Exile | IsCurse$ True | TgtPrompt$ Choose target spell with mana value 4 or less | RememberChanged$ True
 SVar:TrigPlay:DB$ Play | Defined$ Remembered.ExiledWithSource | Controller$ RememberedOwner | WithoutManaCost$ True | Optional$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
-T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | ValidSA$ Spell | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount

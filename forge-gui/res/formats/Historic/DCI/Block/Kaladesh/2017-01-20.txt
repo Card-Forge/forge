@@ -1,6 +1,0 @@
-[format]
-Name:Block: Kaladesh (AER)
-Type:Historic
-Subtype:Block
-Effective:2017-01-20
-Sets:KLD, AER

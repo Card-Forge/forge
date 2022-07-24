@@ -1,0 +1,6 @@
+[format]
+Name:Block: Masques (NMS)
+Type:Archived
+Subtype:Block
+Effective:2000-03-01
+Sets:MMQ, NMS

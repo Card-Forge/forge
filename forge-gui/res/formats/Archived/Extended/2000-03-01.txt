@@ -1,0 +1,8 @@
+[format]
+Name:Extended (NMS)
+Type:Archived
+Subtype:Extended
+Effective:2000-03-01
+Sets:ICE, HML, ALL, MIR, VIS, 5ED, WTH, TMP, STH, EXO, USG, ULG, 6ED, UDS, MMQ, NMS
+Banned:Amulet of Quoz; Dream Halls; Earthcraft; Lotus Petal; Memory Jar; Mind Over Matter; Time Spiral; Timmerian Fiends; Tolarian Academy; Windfall; Yawgmoth's Bargain; Yawgmoth's Will; Zuran Orb
+Additional:Badlands; Bayou; Plateau; Savannah; Scrubland; Taiga; Tropical Island; Tundra; Underground Sea; Volcanic Island

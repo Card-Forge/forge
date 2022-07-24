@@ -2,7 +2,7 @@ Name:Skeletonize
 ManaCost:4 R
 Types:Instant
 A:SP$ DealDamage | NumDmg$ 3 | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberDamaged$ True | SubAbility$ DBDelayedTrigger | SpellDescription$ CARDNAME deals 3 damage to target creature. When a creature dealt damage this way dies this turn, create a 1/1 black Skeleton creature token with "{B}: Regenerate this creature."
-SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigToken | TriggerDescription$ When a creature dealt damage this way dies this turn, create a 1/1 black Skeleton creature token with "{B}: Regenerate this creature."
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Remembered | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigToken | TriggerDescription$ When a creature dealt damage this way dies this turn, create a 1/1 black Skeleton creature token with "{B}: Regenerate this creature."
 SVar:TrigToken:DB$ Token | TokenScript$ b_1_1_skeleton_regenerate
 DeckHas:Ability$Token
 Oracle:Skeletonize deals 3 damage to target creature. When a creature dealt damage this way dies this turn, create a 1/1 black Skeleton creature token with "{B}: Regenerate this creature."

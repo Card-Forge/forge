@@ -1,0 +1,21 @@
+Name:Colossal Badger
+ManaCost:5 G
+Types:Creature Badger
+PT:6/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 3
+DeckHas:Ability$LifeGain
+AlternateMode:Adventure
+Oracle:When Colossal Badger enters the battlefield, you gain 3 life.
+
+ALTERNATE
+
+Name:Dig Deep
+ManaCost:1 G
+Types:Sorcery Adventure
+A:SP$ Mill | NumCards$ 4 | RememberMilled$ True | SubAbility$ DBPutCounter | AILogic$ Main1 | SpellDescription$ Choose target creature. Mill four cards,
+SVar:DBPutCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup | SpellDescription$ then put a +1/+1 counter on that creature for each creature card milled this way.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Creature
+DeckHas:Ability$Counters
+Oracle:Choose target creature. Mill four cards, then put a +1/+1 counter on that creature for each creature card milled this way.

@@ -1,0 +1,11 @@
+Name:Cloakwood Hermit
+ManaCost:2 G
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ EndStep | Description$ Commander creatures you own have "At the beginning of your end step, if a creature card was put into your graveyard from anywhere this turn, create two tapped 1/1 green Squirrel creature tokens."
+SVar:EndStep:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if a creature card was put into your graveyard from anywhere this turn, create two tapped 1/1 green Squirrel creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_squirrel | TokenTapped$ True
+SVar:X:Count$ThisTurnEntered_Graveyard_Creature.YouOwn+nonToken
+DeckHas:Ability$Token & Type$Squirrel
+DeckHints:Ability$Discard|Sacrifice
+AI:RemoveDeck:NonCommander
+Oracle:Commander creatures you own have "At the beginning of your end step, if a creature card was put into your graveyard from anywhere this turn, create two tapped 1/1 green Squirrel creature tokens."

@@ -26,8 +26,6 @@ import forge.screens.LoadingOverlay;
 import forge.screens.home.HomeScreen;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.screens.home.NewGameMenu.NewGameScreen;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.util.ThreadUtil;
 
 public class QuestMenu extends FPopupMenu implements IVQuestStats {
@@ -42,88 +40,28 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     private static final QuestStatsScreen statsScreen = new QuestStatsScreen();
     private static final QuestTournamentsScreen tournamentsScreen = new QuestTournamentsScreen();
 
-    private static final FMenuItem duelsItem = new FMenuItem(Forge.getLocalizer().getMessage("lblDuels"), FSkinImage.QUEST_BIG_SWORD, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            setCurrentScreen(duelsScreen);
-        }
+    private static final FMenuItem duelsItem = new FMenuItem(Forge.getLocalizer().getMessage("lblDuels"), FSkinImage.QUEST_BIG_SWORD, event -> setCurrentScreen(duelsScreen));
+    private static final FMenuItem challengesItem = new FMenuItem(Forge.getLocalizer().getMessage("lblChallenges"), FSkinImage.QUEST_HEART, event -> setCurrentScreen(challengesScreen));
+    private static final FMenuItem tournamentsItem = new FMenuItem(Forge.getLocalizer().getMessage("lblTournaments"), FSkinImage.QUEST_BIG_SHIELD, event -> setCurrentScreen(tournamentsScreen));
+    private static final FMenuItem decksItem = new FMenuItem(Forge.getLocalizer().getMessage("lblQuestDecks"), FSkinImage.QUEST_BIG_BAG, event -> setCurrentScreen(decksScreen));
+    private static final FMenuItem spellShopItem = new FMenuItem(Forge.getLocalizer().getMessage("lblSpellShop"), FSkinImage.QUEST_BOOK, event -> setCurrentScreen(spellShopScreen));
+    private static final FMenuItem bazaarItem = new FMenuItem(Forge.getLocalizer().getMessage("lblBazaar"), FSkinImage.QUEST_BOTTLES, event -> setCurrentScreen(bazaarScreen));
+    private static final FMenuItem statsItem = new FMenuItem(Forge.getLocalizer().getMessage("lblStatistics"), FSkinImage.MENU_STATS, event -> setCurrentScreen(statsScreen));
+    private static final FMenuItem unlockSetsItem = new FMenuItem(Forge.getLocalizer().getMessage("btnUnlockSets"), FSkinImage.QUEST_MAP, event -> {
+        //invoke in background thread so prompts can work
+        ThreadUtil.invokeInGameThread(() -> {
+            QuestUtil.chooseAndUnlockEdition();
+            FThreads.invokeInEdtLater(() -> updateCurrentQuestScreen());
+        });
     });
-    private static final FMenuItem challengesItem = new FMenuItem(Forge.getLocalizer().getMessage("lblChallenges"), FSkinImage.QUEST_HEART, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            setCurrentScreen(challengesScreen);
-        }
+    private static final FMenuItem travelItem = new FMenuItem(Forge.getLocalizer().getMessage("btnTravel"), FSkinImage.QUEST_MAP, event -> {
+        //invoke in background thread so prompts can work
+        ThreadUtil.invokeInGameThread(() -> {
+            QuestUtil.travelWorld();
+            FThreads.invokeInEdtLater(() -> updateCurrentQuestScreen());
+        });
     });
-    private static final FMenuItem tournamentsItem = new FMenuItem(Forge.getLocalizer().getMessage("lblTournaments"), FSkinImage.QUEST_BIG_SHIELD, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            setCurrentScreen(tournamentsScreen);
-        }
-    });
-    private static final FMenuItem decksItem = new FMenuItem(Forge.getLocalizer().getMessage("lblQuestDecks"), FSkinImage.QUEST_BIG_BAG, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            setCurrentScreen(decksScreen);
-        }
-    });
-    private static final FMenuItem spellShopItem = new FMenuItem(Forge.getLocalizer().getMessage("lblSpellShop"), FSkinImage.QUEST_BOOK, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            setCurrentScreen(spellShopScreen);
-        }
-    });
-    private static final FMenuItem bazaarItem = new FMenuItem(Forge.getLocalizer().getMessage("lblBazaar"), FSkinImage.QUEST_BOTTLES, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            setCurrentScreen(bazaarScreen);
-        }
-    });
-    private static final FMenuItem statsItem = new FMenuItem(Forge.getLocalizer().getMessage("lblStatistics"), FSkinImage.MENU_STATS, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            setCurrentScreen(statsScreen);
-        }
-    });
-    private static final FMenuItem unlockSetsItem = new FMenuItem(Forge.getLocalizer().getMessage("btnUnlockSets"), FSkinImage.QUEST_MAP, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            ThreadUtil.invokeInGameThread(new Runnable() { //invoke in background thread so prompts can work
-                @Override
-                public void run() {
-                    QuestUtil.chooseAndUnlockEdition();
-                    FThreads.invokeInEdtLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            updateCurrentQuestScreen();
-                        }
-                    });
-                }
-            });
-        }
-    });
-    private static final FMenuItem travelItem = new FMenuItem(Forge.getLocalizer().getMessage("btnTravel"), FSkinImage.QUEST_MAP, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            ThreadUtil.invokeInGameThread(new Runnable() { //invoke in background thread so prompts can work
-                @Override
-                public void run() {
-                    QuestUtil.travelWorld();
-                    FThreads.invokeInEdtLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            updateCurrentQuestScreen();
-                        }
-                    });
-                }
-            });
-        }
-    });
-    private static final FMenuItem prefsItem = new FMenuItem(Forge.getLocalizer().getMessage("Preferences"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, new FEventHandler() {
-        @Override
-        public void handleEvent(FEvent e) {
-            setCurrentScreen(prefsScreen);
-        }
-    });
+    private static final FMenuItem prefsItem = new FMenuItem(Forge.getLocalizer().getMessage("Preferences"), Forge.hdbuttons ? FSkinImage.HDPREFERENCE : FSkinImage.SETTINGS, event -> setCurrentScreen(prefsScreen));
 
     static {
         statsScreen.addTournamentResultsLabels(tournamentsScreen);
@@ -159,12 +97,7 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
     static {
         //the first time quest mode is launched, add button for it if in Landscape mode
         if (Forge.isLandscapeMode()) {
-            HomeScreen.instance.addButtonForMode("-"+Forge.getLocalizer().getMessage("lblQuestMode"), new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    launchQuestMode(LaunchReason.StartQuestMode, HomeScreen.instance.getQuestCommanderMode());
-                }
-            });
+            HomeScreen.instance.addButtonForMode("-"+Forge.getLocalizer().getMessage("lblQuestMode"), event -> launchQuestMode(LaunchReason.StartQuestMode, HomeScreen.instance.getQuestCommanderMode()));
         }
     }
 
@@ -190,40 +123,36 @@ public class QuestMenu extends FPopupMenu implements IVQuestStats {
         final String questname = FModel.getQuestPreferences().getPref(QPref.CURRENT_QUEST);
         final File data = new File(dirQuests.getPath(), questname);
         if (data.exists()) {
-            LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingCurrentQuest"), new Runnable() {
-                @Override
-                @SuppressWarnings("unchecked")
-                public void run() {
-                    try {
-                        FModel.getQuest().load(QuestDataIO.loadData(data));
-                    } catch (IOException e) {
-                        System.err.println(String.format("Failed to load quest '%s'", questname));
-                        // Failed to load last quest, don't continue with quest loading stuff
-                        return;
-                    }
+            LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingCurrentQuest"), true, () -> {
+                try {
+                    FModel.getQuest().load(QuestDataIO.loadData(data));
+                } catch (IOException e) {
+                    System.err.println(String.format("Failed to load quest '%s'", questname));
+                    // Failed to load last quest, don't continue with quest loading stuff
+                    return;
+                }
 
-                    ((DeckController<Deck>)EditorType.Quest.getController()).setRootFolder(FModel.getQuest().getMyDecks());
-                    ((DeckController<DeckGroup>)EditorType.QuestDraft.getController()).setRootFolder(FModel.getQuest().getDraftDecks());
-                    if (reason == LaunchReason.StartQuestMode) {
-                        if (QuestUtil.getCurrentDeck() == null) {
-                            Forge.openScreen(decksScreen); //if quest doesn't have a deck specified, open decks screen by default
-                        }
-                        else {
-                            Forge.openScreen(duelsScreen); //TODO: Consider opening most recent quest view
-                        }
+                ((DeckController<Deck>)EditorType.Quest.getController()).setRootFolder(FModel.getQuest().getMyDecks());
+                ((DeckController<DeckGroup>)EditorType.QuestDraft.getController()).setRootFolder(FModel.getQuest().getDraftDecks());
+                if (reason == LaunchReason.StartQuestMode) {
+                    if (QuestUtil.getCurrentDeck() == null) {
+                        Forge.openScreen(decksScreen); //if quest doesn't have a deck specified, open decks screen by default
                     }
                     else {
-                        duelsScreen.update();
-                        challengesScreen.update();
-                        tournamentsScreen.update();
-                        decksScreen.refreshDecks();
-                        Forge.openScreen(duelsScreen);
-                        if (reason == LaunchReason.NewQuest) {
-                            LoadGameScreen.QuestMode.setAsBackScreen(true);
-                        }
+                        Forge.openScreen(duelsScreen); //TODO: Consider opening most recent quest view
                     }
-                    HomeScreen.instance.updateQuestWorld(FModel.getQuest().getWorld() == null ? "" : FModel.getQuest().getWorld().toString());
                 }
+                else {
+                    duelsScreen.update();
+                    challengesScreen.update();
+                    tournamentsScreen.update();
+                    decksScreen.refreshDecks();
+                    Forge.openScreen(duelsScreen);
+                    if (reason == LaunchReason.NewQuest) {
+                        LoadGameScreen.QuestMode.setAsBackScreen(true);
+                    }
+                }
+                HomeScreen.instance.updateQuestWorld(FModel.getQuest().getWorld() == null ? "" : FModel.getQuest().getWorld().toString());
             });
             return;
         }

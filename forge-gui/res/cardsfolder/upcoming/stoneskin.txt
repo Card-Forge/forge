@@ -1,0 +1,7 @@
+Name:Stoneskin
+ManaCost:2 W
+Types:Enchantment Aura
+K:Flash
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddToughness$ 10 | Description$ Enchanted creature gets +0/+10.
+Oracle:Flash\nEnchant creature\nEnchanted creature gets +0/+10.

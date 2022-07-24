@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Instant
 K:Entwine:2
 A:SP$ Charm | Choices$ DBEffect,DBPumpAll
-SVar:DBEffect:DB$ Effect | Name$ Incite War Effect | ValidTgts$ Player | StaticAbilities$ MustAttack | RememberObjects$ Targeted | SpellDescription$ Creatures target player controls attack this turn if able.
+SVar:DBEffect:DB$ Effect | ValidTgts$ Player | StaticAbilities$ MustAttack | RememberObjects$ Targeted | SpellDescription$ Creatures target player controls attack this turn if able.
 SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.RememberedPlayerCtrl | Description$ Creatures target player controls attack this turn if able.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ First Strike | SpellDescription$ Creatures you control gain first strike until end of turn.
 AI:RemoveDeck:All

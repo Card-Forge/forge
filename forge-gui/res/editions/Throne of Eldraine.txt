@@ -425,6 +425,7 @@ ScryfallCode=ELD
 397 U Inspiring Veteran @Scott Murphy
 
 [rebalanced]
+A81 U A-Cauldron Familiar @Milivoj Ćeran
 A125 R A-Fires of Invention @Stanton Feng
 
 [tokens]

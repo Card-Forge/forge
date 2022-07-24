@@ -1,0 +1,91 @@
+[metadata]
+Name=Heavenly Inferno
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+Description=Kaalia of the Vast alone holds the forces of Angels, Dragons, and Demons within the palm of her hand. Watch her toss each bone-crushing creature onto the battlefield with merciless glee while your horrified enemies are sliced, diced, and then deep-fried.
+Set=CMD
+Image=heavenly_inferno.png
+[commander]
+1 Kaalia of the Vast+|CMD
+[main]
+1 Dread Cacodemon|CMD
+1 Archangel of Strife|CMD
+1 Death by Dragons|CMD
+1 Stranglehold|CMD
+1 Syphon Flesh|CMD
+1 Mana-Charged Dragon|CMD
+1 Basandra, Battle Seraph|CMD
+1 Avatar of Slaughter|CMD
+1 Vow of Duty|CMD
+1 Tariel, Reckoner of Souls|CMD
+1 Vow of Lightning|CMD
+1 Command Tower|CMD
+1 Soul Snare|CMD
+1 Vow of Malice|CMD
+1 Furnace Whelp|CMD
+1 Voice of All|CMD
+1 Fallen Angel|CMD
+1 Orim's Thunder|CMD
+1 Terminate|CMD
+1 Armillary Sphere|CMD
+1 Malfegor|CMD
+1 Path to Exile|CMD
+1 Rupture Spire|CMD
+1 Rakdos Carnarium|CMD
+1 Rakdos Signet|CMD
+1 Wrecking Ball|CMD
+1 Darksteel Ingot|CMD
+1 Duergar Hedge-Mage|CMD
+1 Gwyllion Hedge-Mage|CMD
+1 Zoetic Cavern|CMD
+1 Angel of Despair|CMD
+1 Mortify|CMD
+1 Orzhov Basilica|CMD
+1 Orzhov Guildmage|CMD
+1 Orzhov Signet|CMD
+1 Anger|CMD
+1 Vivid Meadow|CMD
+1 Dragon Whelp|CMD
+1 Earthquake|CMD
+1 Angelic Arbiter|CMD
+1 Diabolic Tutor|CMD
+1 Serra Angel|CMD
+1 Lightning Greaves|CMD
+1 Reiver Demon|CMD
+1 Shattered Angel|CMD
+1 Akroma's Vengeance|CMD
+1 Barren Moor|CMD
+1 Forgotten Cave|CMD
+1 Righteous Cause|CMD
+1 Secluded Steppe|CMD
+1 Syphon Mind|CMD
+1 Akroma, Angel of Fury|CMD
+1 Oros, the Avenger|CMD
+1 Pyrohemia|CMD
+1 Bathe in Light|CMD
+1 Boros Garrison|CMD
+1 Boros Guildmage|CMD
+1 Boros Signet|CMD
+1 Cleansing Beam|CMD
+1 Master Warcraft|CMD
+1 Evolving Wilds|CMD
+1 Bladewing the Risen|CMD
+1 Oni of Wild Places|CMD
+1 Razorjaw Oni|CMD
+1 Evincar's Justice|CMD
+1 Molten Slagheap|CMD
+1 Return to Dust|CMD
+1 Sulfurous Blast|CMD
+1 Mother of Runes|CMD
+1 Congregate|CMD
+1 Sol Ring|CMD
+1 Bojuka Bog|CMD
+1 Comet Storm|CMD
+1 Lightkeeper of Emeria|CMD
+1 Akoum Refuge|CMD
+8 Mountain|CMD
+8 Plains|CMD
+8 Swamp|CMD

@@ -1,0 +1,6 @@
+[format]
+Name:Standard (GPT)
+Type:Archived
+Subtype:Standard
+Effective:2006-02-20
+Sets:CHK, BOK, SOK, 9ED, RAV, GPT

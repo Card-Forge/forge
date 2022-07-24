@@ -1,0 +1,13 @@
+Name:Druid of the Emerald Grove
+ManaCost:3 G
+Types:Creature Dwarf Druid
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, search your library for up to two basic land cards and reveal them,
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Hidden$ True | ChangeNum$ 2 | ChangeType$ Land.Basic | Destination$ Library | RememberChanged$ True | Reveal$ True | Shuffle$ False | SubAbility$ DBRollDice
+SVar:DBRollDice:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:TutuDaDome,10-19:WonTwoField,20:ToFourField | SpellDescription$ then roll a d20.
+SVar:TutuDaDome:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.IsRemembered | ChangeNum$ 2 | SubAbility$ DBCleanup | SpellDescription$ 1-9 VERT Put those cards into your hand, then shuffle.
+SVar:WonTwoField:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Card.IsRemembered | ChangeNum$ 1 | ForgetChanged$ True | NoShuffle$ True | SubAbility$ WonTwoDome | SpellDescription$ 10-19 VERT Put one of those cards onto the battlefield tapped and the other into your hand, then shuffle.
+SVar:WonTwoDome:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.IsRemembered | ChangeNum$ 1 | SubAbility$ DBCleanup
+SVar:ToFourField:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Card.IsRemembered | ChangeNum$ 2 | SubAbility$ DBCleanup | SpellDescription$ 20 VERT Put those cards onto the battlefield tapped, then shuffle.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When Druid of the Emerald Grove enters the battlefield, search your library for up to two basic land cards and reveal them, then roll a d20.\n1-9 | Put those cards into your hand, then shuffle.\n10-19 | Put one of those cards onto the battlefield tapped and the other into your hand, then shuffle.\n20 | Put those cards onto the battlefield tapped, then shuffle.

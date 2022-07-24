@@ -18,6 +18,8 @@ public interface KeywordInterface extends Cloneable {
     String getReminderText();
 
     int getAmount();
+    long getStaticId();
+    void setStaticId(long v);
 
     void createTraits(final Card host, final boolean intrinsic);
     void createTraits(final Card host, final boolean intrinsic, final boolean clear);

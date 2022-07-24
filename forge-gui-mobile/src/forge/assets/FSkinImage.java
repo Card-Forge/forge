@@ -1,7 +1,7 @@
 package forge.assets;
 
-import java.util.Map;
-
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -536,19 +536,22 @@ public enum FSkinImage implements FImage {
         FSkin.getImages().put(skinProp, this);
     }
 
-    public void load(Map<String, Texture> textures, Pixmap preferredIcons) {
+    public void load(AssetManager manager, Pixmap preferredIcons) {
         String filename = sourceFile.getFilename();
         FileHandle preferredFile = FSkin.getSkinFile(filename);
-        Texture texture = textures.get(preferredFile.path());
+        Texture texture = manager.get(preferredFile.path(), Texture.class, false);
         if (texture == null) {
             if (preferredFile.exists()) {
                 try {
-                    if (Forge.isTextureFilteringEnabled()){
-                        texture = new Texture(preferredFile, true);
-                        texture.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-                    } else {
-                        texture = new Texture(preferredFile);
+                    TextureParameter parameter = new TextureParameter();
+                    if (Forge.isTextureFilteringEnabled()) {
+                        parameter.genMipMaps = true;
+                        parameter.minFilter = Texture.TextureFilter.MipMapLinearLinear;
+                        parameter.magFilter = Texture.TextureFilter.Linear;
                     }
+                    manager.load(preferredFile.path(), Texture.class, parameter);
+                    manager.finishLoadingAsset(preferredFile.path());
+                    texture = manager.get(preferredFile.path(), Texture.class);
                 }
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + preferredFile);
@@ -615,16 +618,19 @@ public enum FSkinImage implements FImage {
 
         //use default file if can't use preferred file
         FileHandle defaultFile = FSkin.getDefaultSkinFile(filename);
-        texture = textures.get(defaultFile.path());
+        texture = manager.get(defaultFile.path(), Texture.class, false);
         if (texture == null) {
             if (defaultFile.exists()) {
                 try {
-                    if (Forge.isTextureFilteringEnabled()){
-                        texture = new Texture(defaultFile, true);
-                        texture.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-                    } else {
-                        texture = new Texture(defaultFile);
+                    TextureParameter parameter = new TextureParameter();
+                    if (Forge.isTextureFilteringEnabled()) {
+                        parameter.genMipMaps = true;
+                        parameter.minFilter = Texture.TextureFilter.MipMapLinearLinear;
+                        parameter.magFilter = Texture.TextureFilter.Linear;
                     }
+                    manager.load(defaultFile.path(), Texture.class, parameter);
+                    manager.finishLoadingAsset(defaultFile.path());
+                    texture = manager.get(defaultFile.path(), Texture.class);
                 }
                 catch (final Exception e) {
                     System.err.println("Failed to load skin file: " + defaultFile);

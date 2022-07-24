@@ -30,6 +30,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 import forge.GameCommand;
 import forge.card.CardStateName;
@@ -110,11 +111,17 @@ public final class StaticAbilityContinuous {
         final List<Player> affectedPlayers = StaticAbilityContinuous.getAffectedPlayers(stAb);
         final Game game = hostCard.getGame();
 
-        final StaticEffect se = game.getStaticEffects().getStaticEffect(stAb);
+        final StaticEffects effects = game.getStaticEffects();
+        final StaticEffect se = effects.getStaticEffect(stAb);
         se.setAffectedCards(affectedCards);
         se.setAffectedPlayers(affectedPlayers);
         se.setParams(params);
         se.setTimestamp(hostCard.getTimestamp());
+
+        // nothing more to do
+        if (stAb.hasParam("Affected") && affectedPlayers.isEmpty() && affectedCards.isEmpty()) {
+            return affectedCards;
+        }
 
         String addP = "";
         int powerBonus = 0;
@@ -160,7 +167,6 @@ public final class StaticAbilityContinuous {
 
         //Global rules changes
         if (layer == StaticAbilityLayer.RULES && params.containsKey("GlobalRule")) {
-            final StaticEffects effects = game.getStaticEffects();
             effects.setGlobalRuleChange(GlobalRuleChange.fromString(params.get("GlobalRule")));
         }
 
@@ -195,8 +201,6 @@ public final class StaticAbilityContinuous {
 
                 // update keywords with Chosen parts
                 final String hostCardUID = Integer.toString(hostCard.getId()); // Protection with "doesn't remove" effect
-
-                final ColorSet colorsYouCtrl = CardUtil.getColorsYouCtrl(controller);
 
                 Iterables.removeIf(addKeywords, new Predicate<String>() {
                     @Override
@@ -245,6 +249,8 @@ public final class StaticAbilityContinuous {
                         }
                         // two variants for Red vs. red in keyword
                         if (input.contains("ColorsYouCtrl") || input.contains("colorsYouCtrl")) {
+                            final ColorSet colorsYouCtrl = CardUtil.getColorsYouCtrl(controller);
+
                             for (byte color : colorsYouCtrl) {
                                 final String colorWord = MagicColor.toLongString(color);
                                 String y = input.replaceAll("ColorsYouCtrl", StringUtils.capitalize(colorWord));
@@ -717,6 +723,7 @@ public final class StaticAbilityContinuous {
             // add P/T bonus
             if (layer == StaticAbilityLayer.MODIFYPT) {
                 if (addP.contains("Affected")) {
+                    // TODO don't calculate these above if this gets used instead
                     powerBonus = AbilityUtils.calculateAmount(affectedCard, addP, stAb, true);
                 }
                 if (addT.contains("Affected")) {
@@ -779,6 +786,7 @@ public final class StaticAbilityContinuous {
 
             // add SVars
             if (addSVars != null) {
+                Map<String, String> map = Maps.newHashMap();
                 for (final String sVar : addSVars) {
                     String actualSVar = AbilityUtils.getSVar(stAb, sVar);
                     String name = sVar;
@@ -787,8 +795,9 @@ public final class StaticAbilityContinuous {
                         name = actualSVar.split(":")[0];
                         actualSVar = actualSVar.split(":")[1];
                     }
-                    affectedCard.setSVar(name, actualSVar);
+                    map.put(name, actualSVar);
                 }
+                affectedCard.addChangedSVars(map, se.getTimestamp(), stAb.getId());
             }
 
             if (layer == StaticAbilityLayer.ABILITIES) {
@@ -840,7 +849,7 @@ public final class StaticAbilityContinuous {
                                     newSA.getRestrictions().setLimitToCheck(params.get("GainsAbilitiesLimitPerTurn"));
                                 }
                                 if (params.containsKey("GainsAbilitiesActivateIgnoreColor")) {
-                                    newSA.putParam("ActivateIgnoreColor","True");
+                                    newSA.putParam("ActivateIgnoreColor", params.get("GainsAbilitiesActivateIgnoreColor"));
                                 }
                                 newSA.setOriginalAbility(sa); // need to be set to get the Once Per turn Clause correct
                                 newSA.setGrantorStatic(stAb);
@@ -944,7 +953,6 @@ public final class StaticAbilityContinuous {
                     } else if (additional) {
                         final String regCost = affectedCard.getManaCost().getShortString();
                         mayPlayAltCost = mayPlayAltManaCost.replace("RegularCost", regCost);
-
                     }
                 }
 

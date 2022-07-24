@@ -1,0 +1,89 @@
+[metadata]
+Name=Swell the Host
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+Description=Ezuri, Claw of Progress once led a resistance against the Phyrexians but now he seeks to extend their gift of perfection to his former allies. As more creatures join his mighty host, he fuses them with even greater power.
+Set=C15
+Image=swell_the_host.png
+[Commander]
+1 Ezuri, Claw of Progress+|C15
+[main]
+1 Arbor Colossus|C15
+1 Bane of Progress|C15
+1 Broodbirth Viper|C15
+1 Caller of the Claw|C15
+1 Caller of the Pack|C15
+1 Chameleon Colossus|C15
+1 Coiling Oracle|C15
+1 Cold-Eyed Selkie|C15
+1 Elvish Visionary|C15
+1 Eternal Witness|C15
+1 Experiment One|C15
+1 Forgotten Ancient|C15
+1 Great Oak Guardian|C15
+1 Illusory Ambusher|C15
+1 Kaseto, Orochi Archmage|C15
+1 Loaming Shaman|C15
+1 Lorescale Coatl|C15
+1 Mulldrifter|C15
+1 Mystic Snake|C15
+1 Ninja of the Deep Hours|C15
+1 Noble Quarry|C15
+1 Ohran Viper|C15
+1 Patagia Viper|C15
+1 Plaxmanta|C15
+1 Prime Speaker Zegana|C15
+1 Sakura-Tribe Elder|C15
+1 Skullwinder|C15
+1 Solemn Simulacrum|C15
+1 Stingerfling Spider|C15
+1 Thelonite Hermit|C15
+1 Trygon Predator|C15
+1 Viridian Shaman|C15
+1 Wistful Selkie|C15
+1 Beastmaster Ascension|C15
+1 Day of the Dragons|C15
+1 Biomantic Mastery|C15
+1 Desert Twister|C15
+1 Ezuri's Predation|C15
+1 Kodama's Reach|C15
+1 Overrun|C15
+1 Rampant Growth|C15
+1 Verdant Confluence|C15
+1 Arachnogenesis|C15
+1 Cobra Trap|C15
+1 Krosan Grip|C15
+1 Mirror Match|C15
+1 Rapid Hybridization|C15
+1 Snakeform|C15
+1 Synthetic Destiny|C15
+1 Bident of Thassa|C15
+1 Orochi Hatchery|C15
+1 Scytheclaw|C15
+1 Simic Keyrune|C15
+1 Simic Signet|C15
+1 Sol Ring|C15
+1 Swiftfoot Boots|C15
+1 Sword of Vengeance|C15
+1 Thought Vessel|C15
+14 Forest|C15
+11 Island|C15
+1 Command Beacon|C15
+1 Command Tower|C15
+1 Evolving Wilds|C15
+1 High Market|C15
+1 Llanowar Reborn|C15
+1 Mosswort Bridge|C15
+1 Novijen, Heart of Progress|C15
+1 Oran-Rief, the Vastwood|C15
+1 Reliquary Tower|C15
+1 Simic Growth Chamber|C15
+1 Simic Guildgate|C15
+1 Terramorphic Expanse|C15
+1 Thornwood Falls|C15
+1 Vivid Creek|C15
+1 Vivid Grove|C15
+1 Zoetic Cavern|C15

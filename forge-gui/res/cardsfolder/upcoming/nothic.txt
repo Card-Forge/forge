@@ -1,0 +1,13 @@
+Name:Nothic
+ManaCost:4 B
+Types:Creature Horror
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ RollD20 | TriggerDescription$ Weird Insight — When CARDNAME dies, roll a d20.
+SVar:RollD20:DB$ RollDice | Sides$ 20 | ResultSubAbilities$ 1-9:DBSDraw,10-19:DBMDraw,20:DBLDraw | SpellDescription$ Roll a d20.
+SVar:DBSDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBSLoseLife | SpellDescription$ 1—9 VERT You draw a card and you lose 1 life.
+SVar:DBSLoseLife:DB$ LoseLife | LifeAmount$ 1
+SVar:DBMDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBMLoseLife | SpellDescription$ 10—19 VERT You draw two cards and you lose 2 life.
+SVar:DBMLoseLife:DB$ LoseLife | LifeAmount$ 2
+SVar:DBLDraw:DB$ Draw | NumCards$ 7 | SubAbility$ DBLLoseLife | SpellDescription$ 20 VERT You draw seven cards and you lose 7 life.
+SVar:DBLLoseLife:DB$ LoseLife | LifeAmount$ 7
+Oracle:Weird Insight — When Nothic dies, roll a d20.\n1—9 | You draw a card and you lose 1 life.\n10—19 | You draw two cards and you lose 2 life.\n20 | You draw seven cards and you lose 7 life.

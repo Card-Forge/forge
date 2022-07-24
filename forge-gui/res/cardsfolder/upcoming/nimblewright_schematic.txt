@@ -1,0 +1,8 @@
+Name:Nimblewright Schematic
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield or is put into a graveyard from the battlefield, create a 1/1 colorless Construct artifact creature token.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Secondary$ True | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or is put into a graveyard from the battlefield, create a 1/1 colorless Construct artifact creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_construct | TokenOwner$ You
+DeckHas:Ability$Token
+Oracle:When Nimblewright Schematic enters the battlefield or is put into a graveyard from the battlefield, create a 1/1 colorless Construct artifact creature token.

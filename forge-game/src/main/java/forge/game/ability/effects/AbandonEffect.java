@@ -25,7 +25,7 @@ public class AbandonEffect extends SpellAbilityEffect {
         Player controller = source.getController();
 
         boolean isOptional = sa.hasParam("Optional");
-        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeAbandonSource", CardTranslation.getTranslatedName(source.getName())))) {
+        if (isOptional && !controller.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblWouldYouLikeAbandonSource", CardTranslation.getTranslatedName(source.getName())), null)) {
             return;
         }
 
@@ -34,7 +34,7 @@ public class AbandonEffect extends SpellAbilityEffect {
         if (sa.hasParam("RememberAbandoned")) {
             source.addRemembered(source);
         }
-        
+
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         controller.getZone(ZoneType.Command).remove(source);
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);

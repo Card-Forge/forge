@@ -330,7 +330,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (this.getFirstCombatOnly()) {
-            if (game.getPhaseHandler().getNumCombat() > 1) {
+            if (game.getPhaseHandler().getNumCombat() > (game.getPhaseHandler().inCombat() ? 1 : 0)) {
                 return false;
             }
         }
@@ -434,13 +434,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
         if (sa.isProwl()) {
-            boolean prowlFlag = false;
-            for (final String type : c.getType().getCreatureTypes()) {
-                if (activator.hasProwl(type)) {
-                    prowlFlag = true;
-                }
-            }
-            if (!prowlFlag) {
+            if (!activator.hasProwl(c.getType().getCreatureTypes())) {
                 return false;
             }
         }
@@ -449,7 +443,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             if (getPresentDefined() != null) {
                 list = AbilityUtils.getDefinedObjects(sa.getHostCard(), getPresentDefined(), sa);
             } else {
-                list = new FCollection<GameObject>(game.getCardsIn(getPresentZone()));
+                list = new FCollection<>(game.getCardsIn(getPresentZone()));
             }
 
             final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent().split(","), activator, c, sa)));
@@ -499,6 +493,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
             // check static abilities
             game.getTracker().freeze();
+            cp.clearStaticChangedCardKeywords(false);
             CardCollection preList = new CardCollection(cp);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(cp), preList);
 
@@ -581,6 +576,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
 
+        // Special check for Lion's Eye Diamond
+        if (sa.isManaAbility() && c.getGame().getStack().isFrozen() && isInstantSpeed()) {
+            return false;
+        }
+
         if (!sa.hasSVar("IsCastFromPlayEffect")) {
             if (!checkTimingRestrictions(c, sa)) {
                 return false;
@@ -620,6 +620,6 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         return true;
-    } // canPlay()
+    }
 
 }

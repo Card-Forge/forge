@@ -2,7 +2,9 @@ package forge.screens.constructed;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import forge.player.GamePlayerUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -42,8 +44,6 @@ import forge.screens.LoadingOverlay;
 import forge.screens.settings.SettingsScreen;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FComboBox;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.toolbox.FOptionPane;
@@ -109,23 +109,20 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
             cbPlayerCount.addItem(i);
         }
         cbPlayerCount.setSelectedItem(2);
-        cbPlayerCount.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                int numPlayers = getNumPlayers();
-                while(lobby.getNumberOfSlots() < getNumPlayers()){
-                    lobby.addSlot();
-                }
-                while(lobby.getNumberOfSlots() > getNumPlayers()){
-                    lobby.removeSlot(lobby.getNumberOfSlots()-1);
-                }
-                for (int i = 0; i < MAX_PLAYERS; i++) {
-                    if(i<playerPanels.size()) {
-                        playerPanels.get(i).setVisible(i < numPlayers);
-                    }
-                }
-                playersScroll.revalidate();
+        cbPlayerCount.setChangedHandler(event -> {
+            int numPlayers = getNumPlayers();
+            while(lobby.getNumberOfSlots() < getNumPlayers()){
+                lobby.addSlot();
             }
+            while(lobby.getNumberOfSlots() > getNumPlayers()){
+                lobby.removeSlot(lobby.getNumberOfSlots()-1);
+            }
+            for (int i = 0; i < MAX_PLAYERS; i++) {
+                if(i<playerPanels.size()) {
+                    playerPanels.get(i).setVisible(i < numPlayers);
+                }
+            }
+            playersScroll.revalidate();
         });
 
         initLobby(lobby0);
@@ -137,12 +134,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbGamesInMatch.addItem("3");
         cbGamesInMatch.addItem("5");
         cbGamesInMatch.setSelectedItem(FModel.getPreferences().getPref((FPref.UI_MATCHES_PER_GAME)));
-        cbGamesInMatch.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                FModel.getPreferences().setPref(FPref.UI_MATCHES_PER_GAME, cbGamesInMatch.getSelectedItem());
-            }
-        });
+        cbGamesInMatch.setChangedHandler(event -> FModel.getPreferences().setPref(FPref.UI_MATCHES_PER_GAME, cbGamesInMatch.getSelectedItem()));
 
         add(lblVariants);
         add(cbVariants);
@@ -159,22 +151,28 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         cbVariants.addItem(GameType.Archenemy);
         cbVariants.addItem(GameType.ArchenemyRumble);
         cbVariants.addItem(Forge.getLocalizer().getMessage("lblMore"));
-        cbVariants.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                if (cbVariants.getSelectedIndex() <= 0) {
-                    lobby.clearVariants();
-                    updateLayoutForVariants();
+        cbVariants.setChangedHandler(event -> {
+            if (cbVariants.getSelectedIndex() <= 0) {
+                lobby.clearVariants();
+                updateLayoutForVariants();
+                Set<GameType> gameTypes = new HashSet<>();
+                FModel.getPreferences().setGameType(FPref.UI_APPLIED_VARIANTS, gameTypes);
+                FModel.getPreferences().save();
+            }
+            else if (cbVariants.getSelectedIndex() == cbVariants.getItemCount() - 1) {
+                Forge.openScreen(new MultiVariantSelect());
+                updateVariantSelection();
+            }
+            else {
+                lobby.clearVariants();
+                lobby.applyVariant((GameType)cbVariants.getSelectedItem());
+                updateLayoutForVariants();
+                Set<GameType> gameTypes = new HashSet<>();
+                for (GameType variant: lobby.getAppliedVariants()) {
+                    gameTypes.add(variant);
                 }
-                else if (cbVariants.getSelectedIndex() == cbVariants.getItemCount() - 1) {
-                    Forge.openScreen(new MultiVariantSelect());
-                    updateVariantSelection();
-                }
-                else {
-                    lobby.clearVariants();
-                    lobby.applyVariant((GameType)cbVariants.getSelectedItem());
-                    updateLayoutForVariants();
-                }
+                FModel.getPreferences().setGameType(FPref.UI_APPLIED_VARIANTS, gameTypes);
+                FModel.getPreferences().save();
             }
         });
 
@@ -184,31 +182,34 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
 
         updatePlayersFromPrefs();
 
-        FThreads.invokeInBackgroundThread(new Runnable() {
-            @Override
-            public void run() {
-                playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, FPref.COMMANDER_P1_DECK_STATE, FPref.OATHBREAKER_P1_DECK_STATE, FPref.TINY_LEADER_P1_DECK_STATE, FPref.BRAWL_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
-                playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, FPref.COMMANDER_P2_DECK_STATE, FPref.OATHBREAKER_P2_DECK_STATE, FPref.TINY_LEADER_P2_DECK_STATE, FPref.BRAWL_P2_DECK_STATE, DeckType.COLOR_DECK);
-                try {
-                    if (getNumPlayers() > 2) {
-                        playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
-                    }
-                    if (getNumPlayers() > 3) {
-                        playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
-                    }
-                } catch (Exception e) {}
-                /*playerPanels.get(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
-                playerPanels.get(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
-                playerPanels.get(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
-                playerPanels.get(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);*/ //TODO: Improve performance of loading this screen by using background thread
+        FThreads.invokeInBackgroundThread(() -> {
+            playerPanels.get(0).initialize(FPref.CONSTRUCTED_P1_DECK_STATE, FPref.COMMANDER_P1_DECK_STATE, FPref.OATHBREAKER_P1_DECK_STATE, FPref.TINY_LEADER_P1_DECK_STATE, FPref.BRAWL_P1_DECK_STATE, DeckType.PRECONSTRUCTED_DECK);
+            playerPanels.get(1).initialize(FPref.CONSTRUCTED_P2_DECK_STATE, FPref.COMMANDER_P2_DECK_STATE, FPref.OATHBREAKER_P2_DECK_STATE, FPref.TINY_LEADER_P2_DECK_STATE, FPref.BRAWL_P2_DECK_STATE, DeckType.COLOR_DECK);
+            try {
+                if (getNumPlayers() > 2) {
+                    playerPanels.get(2).initialize(FPref.CONSTRUCTED_P3_DECK_STATE, FPref.COMMANDER_P3_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P3_DECK_STATE, FPref.BRAWL_P3_DECK_STATE, DeckType.COLOR_DECK);
+                }
+                if (getNumPlayers() > 3) {
+                    playerPanels.get(3).initialize(FPref.CONSTRUCTED_P4_DECK_STATE, FPref.COMMANDER_P4_DECK_STATE, FPref.OATHBREAKER_P3_DECK_STATE, FPref.TINY_LEADER_P4_DECK_STATE, FPref.BRAWL_P4_DECK_STATE, DeckType.COLOR_DECK);
+                }
+            } catch (Exception e) {}
+            /*playerPanels.get(4).initialize(FPref.CONSTRUCTED_P5_DECK_STATE, DeckType.COLOR_DECK);
+            playerPanels.get(5).initialize(FPref.CONSTRUCTED_P6_DECK_STATE, DeckType.COLOR_DECK);
+            playerPanels.get(6).initialize(FPref.CONSTRUCTED_P7_DECK_STATE, DeckType.COLOR_DECK);
+            playerPanels.get(7).initialize(FPref.CONSTRUCTED_P8_DECK_STATE, DeckType.COLOR_DECK);*/ //TODO: Improve performance of loading this screen by using background thread
 
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        btnStart.setEnabled(lobby.hasControl());
+            FThreads.invokeInEdtLater(() -> {
+                btnStart.setEnabled(lobby.hasControl());
+
+                Set<GameType> gameTypes = FModel.getPreferences().getGameType(FPref.UI_APPLIED_VARIANTS);
+                if (!gameTypes.isEmpty()) {
+                    for (GameType gameType : gameTypes) {
+                        lobby.applyVariant(gameType);
                     }
-                });
-            }
+                    updateVariantSelection();
+                    updateLayoutForVariants();
+                }
+            });
         });
 
         lblPlayers.setEnabled(true);
@@ -331,20 +332,13 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 updateName(0, GamePlayerUtil.getGuiPlayer().getName());
             }
         }
-        FThreads.invokeInBackgroundThread(new Runnable() { //must call startGame in background thread in case there are alerts
-            @Override
-            public void run() {
-                final Runnable startGame = lobby.startGame();
-                if (startGame != null) {
-                    //set this so we cant get any multi/rapid tap on start button
-                    Forge.setLoadingaMatch(true);
-                    FThreads.invokeInEdtLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), startGame);
-                        }
-                    });
-                }
+        //must call startGame in background thread in case there are alerts
+        FThreads.invokeInBackgroundThread(() -> {
+            final Runnable startGame = lobby.startGame();
+            if (startGame != null) {
+                //set this so we cant get any multi/rapid tap on start button
+                Forge.setLoadingaMatch(true);
+                FThreads.invokeInEdtLater(() -> LoadingOverlay.show(Forge.getLocalizer().getMessage("lblLoadingNewGame"), true, startGame));
             }
         });
     }
@@ -493,6 +487,12 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
                 }
                 updateVariantSelection();
                 updateLayoutForVariants();
+                Set<GameType> gameTypes = new HashSet<>();
+                for (GameType variant: lobby.getAppliedVariants()) {
+                    gameTypes.add(variant);
+                }
+                FModel.getPreferences().setGameType(FPref.UI_APPLIED_VARIANTS, gameTypes);
+                FModel.getPreferences().save();
             }
         }
 

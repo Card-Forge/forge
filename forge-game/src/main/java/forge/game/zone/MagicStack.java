@@ -41,7 +41,6 @@ import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardUtil;
@@ -72,6 +71,7 @@ import forge.util.TextUtil;
  */
 public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbilityStackInstance> {
     private final List<SpellAbility> simultaneousStackEntryList = Lists.newArrayList();
+    private final List<SpellAbility> activePlayerSAs = Lists.newArrayList();
 
     // They don't provide a LIFO queue, so had to use a deque
     private final Deque<SpellAbilityStackInstance> stack = new LinkedBlockingDeque<>();
@@ -231,6 +231,18 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
+            Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sp.getHostCard().getController());
+            runParams.put(AbilityKey.Cost, sp.getPayCosts());
+            runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
+            runParams.put(AbilityKey.CastSA, sp);
+            game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
+            if (sp.isActivatedAbility()) {
+                game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams, true);
+            }
+
+            // reset in case a trigger stopped it on a previous activation
+            sp.setUndoable(true);
+
             AbilityUtils.resolve(sp);
             game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp.getDescription());
             sp.resetOnceResolved();
@@ -292,21 +304,19 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         si = push(sp);
 
         // Copied spells aren't cast per se so triggers shouldn't run for them.
-        Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sp.getHostCard().getController());
         runParams.put(AbilityKey.Cost, sp.getPayCosts());
-        runParams.put(AbilityKey.Player, sp.getHostCard().getController());
         runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
         runParams.put(AbilityKey.CastSA, si.getSpellAbility(true));
-        runParams.put(AbilityKey.CastSACMC, si.getSpellAbility(true).getHostCard().getCMC());
         runParams.put(AbilityKey.CurrentStormCount, thisTurnCast.size());
         runParams.put(AbilityKey.CurrentCastSpells, Lists.newArrayList(thisTurnCast));
 
         if (!sp.isCopied()) {
             // Run SpellAbilityCast triggers
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
-            
+
             sp.applyPayingManaEffects();
-            
+
             // Run SpellCast triggers
             if (sp.isSpell()) {
                 if (source.isCommander() && source.getCastFrom() != null && ZoneType.Command == source.getCastFrom().getZoneType()
@@ -539,8 +549,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         game.fireEvent(new GameEventSpellResolved(sa, thisHasFizzled));
         finishResolving(sa, thisHasFizzled);
 
+        game.copyLastState();
         if (isEmpty()) {
-            game.copyLastState();
             // FIXME: assuming that if the stack is empty, no reason to hold on to old LKI data (everything is a new object). Is this correct?
             game.clearChangeZoneLKIInfo();
         }
@@ -814,38 +824,26 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return false;
         }
 
-        final List<SpellAbility> activePlayerSAs = Lists.newArrayList();
-        final List<SpellAbility> failedSAs = Lists.newArrayList();
+        activePlayerSAs.clear();
         for (int i = 0; i < simultaneousStackEntryList.size(); i++) {
             SpellAbility sa = simultaneousStackEntryList.get(i);
             Player activator = sa.getActivatingPlayer();
 
-            if (sa.getApi() == ApiType.Charm) {
-                if (!CharmEffect.makeChoices(sa)) {
-                    // 603.3c If no mode is chosen, the ability is removed from the stack.
-                    failedSAs.add(sa);
-                    continue;
-                }
-            }
-
             if (activator == null) {
-                if (sa.getHostCard().getController().equals(activePlayer)) {
-                    activePlayerSAs.add(sa);
-                }
-            } else {
-                if (activator.equals(activePlayer)) {
-                    activePlayerSAs.add(sa);
-                }
+                activator = sa.getHostCard().getController();
+            }
+            if (activator.equals(activePlayer)) {
+                activePlayerSAs.add(sa);
             }
         }
         simultaneousStackEntryList.removeAll(activePlayerSAs);
-        simultaneousStackEntryList.removeAll(failedSAs);
 
         if (activePlayerSAs.isEmpty()) {
             return false;
         }
 
         activePlayer.getController().orderAndPlaySimultaneousSa(activePlayerSAs);
+        activePlayerSAs.clear();
         return true;
     }
 
@@ -863,6 +861,12 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         for (final SpellAbility sa : simultaneousStackEntryList) {
+            if (sa.getSourceTrigger() == triggerID) {
+                return true;
+            }
+        }
+
+        for (final SpellAbility sa : activePlayerSAs) {
             if (sa.getSourceTrigger() == triggerID) {
                 return true;
             }

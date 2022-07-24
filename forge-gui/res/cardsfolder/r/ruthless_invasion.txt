@@ -1,7 +1,7 @@
 Name:Ruthless Invasion
 ManaCost:3 PR
 Types:Sorcery
-A:SP$ Effect | Cost$ 3 PR | Name$ Ruthless Invasion Effect | StaticAbilities$ KWPump | AILogic$ Evasion | SpellDescription$ Nonartifact creatures can't block this turn.
+A:SP$ Effect | StaticAbilities$ KWPump | AILogic$ Evasion | SpellDescription$ Nonartifact creatures can't block this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.nonArtifact | AddHiddenKeyword$ CARDNAME can't block. | Description$ Nonartifact creatures can't block this turn.
 AI:RemoveDeck:All
 Oracle:({R/P} can be paid with either {R} or 2 life.)\nNonartifact creatures can't block this turn.

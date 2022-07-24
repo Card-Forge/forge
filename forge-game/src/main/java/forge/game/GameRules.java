@@ -81,7 +81,8 @@ public class GameRules {
     }
 
     public void setAppliedVariants(final Set<GameType> appliedVariants) {
-        this.appliedVariants.addAll(appliedVariants);
+        if (appliedVariants != null && !appliedVariants.isEmpty())
+            this.appliedVariants.addAll(appliedVariants);
     }
 
     public boolean hasAppliedVariant(final GameType variant) {

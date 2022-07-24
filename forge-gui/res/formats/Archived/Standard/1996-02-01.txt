@@ -1,0 +1,8 @@
+[format]
+Name:Type 2 (1996-02-01)
+Type:Archived
+Subtype:Standard
+Effective:1996-02-01
+Sets:FEM, 4ED, ICE, CHR, HML
+Restricted:Balance; Black Vise; Feldon's Cane; Ivory Tower; Recall; Zuran Orb
+Banned:Amulet of Quoz; Bronze Tablet; Channel; Jeweled Bird; Mind Twist; Rebirth; Tempest Efreet; Timmerian Fiends

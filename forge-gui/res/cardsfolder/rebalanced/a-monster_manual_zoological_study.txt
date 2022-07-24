@@ -1,0 +1,17 @@
+Name:A-Monster Manual
+ManaCost:3 G
+Types:Artifact
+A:AB$ ChangeZone | Cost$ 1 G T | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1 | SorcerySpeed$ True | SpellDescription$ You may put a creature card from your hand onto the battlefield. Activate only as a sorcery.
+AlternateMode:Adventure
+Oracle:{1}{G}, {T}: You may put a creature card from your hand onto the battlefield. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:A-Zoological Study
+ManaCost:2 G
+Types:Sorcery Adventure
+A:SP$ Mill | NumCards$ 5 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill five cards, then return a creature card milled this way to your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.IsRemembered | ChangeTypeDesc$ creature cards milled this way | ChangeNum$ 1 | SelectPrompt$ Choose a creature card milled this way | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill|Graveyard
+Oracle:Mill five cards, then return a creature card milled this way to your hand.

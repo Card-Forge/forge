@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="97">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="98">
  <editorsettings>
   <export format="tmx"/>
  </editorsettings>
@@ -150,7 +150,7 @@
           {
             &quot;name&quot;: &quot;I'll take it&quot;,
             &quot;action&quot;: [
-              { &quot;removeItem&quot;: &quot;Treasure&quot;, &quot;giveBlessing&quot;: { &quot;name&quot;: &quot;Debug Elf&quot; ,&quot;lifeModifier&quot;: 2, &quot;startBattleWithCard&quot;: [ &quot;Llanowar Elves&quot; ] } }
+              { &quot;removeItem&quot;: &quot;Treasure&quot;, &quot;giveBlessing&quot;: { &quot;name&quot;: &quot;Debug Elf&quot; ,&quot;goldModifier&quot;:0.2, &quot;lifeModifier&quot;: 2, &quot;startBattleWithCard&quot;: [ &quot;Llanowar Elves&quot; ] } }
             ]
           }
         ]
@@ -407,5 +407,6 @@
     <property name="enemy" value="Doppelganger"/>
    </properties>
   </object>
+  <object id="97" template="../obj/inn.tx" type="spellsmith" gid="6707" x="224" y="368" width="16" height="16"/>
  </objectgroup>
 </map>

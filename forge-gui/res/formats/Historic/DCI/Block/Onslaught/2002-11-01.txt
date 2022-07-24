@@ -1,6 +1,0 @@
-[format]
-Name:Block: Onslaught (ONS)
-Type:Historic
-Subtype:Block
-Effective:2002-11-01
-Sets:ONS

@@ -1,0 +1,7 @@
+Name:Reckless Barbarian
+ManaCost:1 R
+Types:Creature Dragon Barbarian
+PT:2/2
+A:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ R | Amount$ 2 | SpellDescription$ Add {R}{R}.
+AI:RemoveDeck:All
+Oracle:Sacrifice Reckless Barbarian: Add {R}{R}.

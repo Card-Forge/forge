@@ -5,6 +5,6 @@ PT:0/0
 K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.
 A:AB$ Regenerate | Cost$ 1 SubCounter<1/P1P1> | SpellDescription$ Regenerate CARDNAME.
 K:Dredge:6
-SVar:X:Count$LastStateGraveyard Creature.YouCtrl
+SVar:X:Count$ValidGraveyard Creature.YouCtrl
 SVar:NeedsToPlayVar:X GE3
 Oracle:Golgari Grave-Troll enters the battlefield with a +1/+1 counter on it for each creature card in your graveyard.\n{1}, Remove a +1/+1 counter from Golgari Grave-Troll: Regenerate Golgari Grave-Troll.\nDredge 6 (If you would draw a card, you may mill six cards instead. If you do, return this card from your graveyard to your hand.)

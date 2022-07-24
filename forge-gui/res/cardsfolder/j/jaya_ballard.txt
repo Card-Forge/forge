@@ -2,7 +2,7 @@ Name:Jaya Ballard
 ManaCost:2 R R R
 Types:Legendary Planeswalker Jaya
 Loyalty:5
-A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ R | Amount$ 3 | RestrictValid$ Instant,Sorcery | AILogic$ ManaRitual | SpellDescription$ Add {R}{R}{R}. Spend this mana only to cast instant or sorcery spells.
+A:AB$ Mana | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Produced$ R | Amount$ 3 | RestrictValid$ Spell.Instant,Spell.Sorcery | AILogic$ ManaRitual | SpellDescription$ Add {R}{R}{R}. Spend this mana only to cast instant or sorcery spells.
 A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 3 | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | SpellDescription$ Discard up to three cards, then draw that many cards.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

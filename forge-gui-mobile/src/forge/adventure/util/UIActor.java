@@ -72,6 +72,13 @@ public class UIActor extends Group {
                         newActor = new ScrollPane(null, Controls.GetSkin());
                         readScrollPaneProperties((ScrollPane) newActor, new OrderedMap.OrderedMapEntries<>(element));
                         break;
+                    case "CheckBox":
+                        newActor = new CheckBox("", Controls.GetSkin());
+                        readCheckBoxProperties((CheckBox) newActor, new OrderedMap.OrderedMapEntries<>(element));
+                        break;
+                    case "SelectBox":
+                        newActor = new SelectBox<>(Controls.GetSkin());
+                        break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + type);
                 }
@@ -209,6 +216,16 @@ public class UIActor extends Group {
     }
 
     private void readSelectorProperties(Selector newActor, ObjectMap.Entries<String, String> entries) {
+    }
+
+    private void readCheckBoxProperties(CheckBox newActor, ObjectMap.Entries<String, String> entries) {
+        for (ObjectMap.Entry property : entries) {
+            switch (property.key.toString()) {
+                case "text":
+                    newActor.setText(property.value.toString());
+                    break;
+            }
+        }
     }
 
     private void readButtonProperties(TextButton newActor, ObjectMap.Entries<String, String> entries) {

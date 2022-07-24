@@ -1,0 +1,6 @@
+[format]
+Name:Block: Time Spiral (TSP)
+Type:Archived
+Subtype:Block
+Effective:2006-10-20
+Sets:TSP, TSB

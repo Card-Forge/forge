@@ -1,0 +1,9 @@
+Name:Vivien's Stampede
+ManaCost:4 G G
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Vigilance & Trample & Melee | SubAbility$ DBDelTrig | SpellDescription$ Each creature you control gains vigilance, trample, and melee until end of turn. (Whenever a creature with melee attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)
+SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Main1,Main2 | ThisTurn$ True | Execute$ TrigDraw | TriggerDescription$ At the beginning of the next main phase this turn, draw a card for each player who was dealt combat damage this turn.
+SVar:TrigDraw:DB$ Draw | NumCards$ X
+SVar:X:PlayerCountPlayers$HasPropertywasDealtCombatDamageThisTurn
+SVar:PlayMain1:TRUE
+Oracle:Each creature you control gains vigilance, trample, and melee until end of turn. (Whenever a creature with melee attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat.)\nAt the beginning of the next main phase this turn, draw a card for each player who was dealt combat damage this turn.

@@ -1,0 +1,32 @@
+[metadata]
+Name=GAS_8_39_Aggro Midrange Gw Generated Deck_927_19
+[Main]
+4 Ajani Unyielding|AER
+1 Cast Out|AKH
+1 Forest|BBD
+1 Forest|DOM|2
+2 Forest|DOM|4
+1 Forest|XLN|1
+1 Forest|XLN|4
+4 Huatli, Radiant Champion|RIX
+4 Llanowar Elves|DOM
+3 Lyra Dawnbringer|DOM
+4 Nissa, Vital Force|KLD
+3 Oviya Pashiri, Sage Lifecrafter|KLD
+2 Plains|AKH|1
+1 Plains|AKH|4
+1 Plains|BBD
+1 Plains|KLD|2
+1 Plains|RIX
+4 Scattered Groves|AKH
+4 Seal Away|DOM
+4 Shalai, Voice of Plenty|DOM
+4 Shanna, Sisay's Legacy|DOM
+4 Shefet Dunes|HOU
+1 Song of Freyalise|DOM
+4 Sunpetal Grove|XLN
+[Sideboard]
+4 Oracle's Vault|AKH
+4 Sentinel Totem|XLN
+3 Song of Freyalise|DOM
+4 Urza's Ruinous Blast|DOM

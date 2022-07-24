@@ -1,0 +1,6 @@
+[format]
+Name:Block: Khans of Tarkir (FRF)
+Type:Archived
+Subtype:Block
+Effective:2015-01-23
+Sets:KTK, FRF

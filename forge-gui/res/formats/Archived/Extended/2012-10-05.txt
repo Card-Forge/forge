@@ -1,0 +1,7 @@
+[format]
+Name:Extended (RTR)
+Type:Archived
+Subtype:Extended
+Effective:2012-10-05
+Sets:ZEN, WWK, ROE, M11, SOM, MBS, NPH, M12, ISD, DKA, AVR, M13, RTR
+Banned:Jace, the Mind Sculptor; Mental Misstep; Ponder; Preordain; Stoneforge Mystic

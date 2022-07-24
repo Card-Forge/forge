@@ -1,0 +1,6 @@
+[format]
+Name:Pre-format (ARN)
+Type:Archived
+Subtype:Vintage
+Effective:1993-12-17
+Sets:LEA, LEB, 2ED, ARN

@@ -1,0 +1,9 @@
+Name:Turf War
+ManaCost:4 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, for each player, put a contested counter on target land that player controls.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ CONTESTED | ValidTgts$ Land | TgtPrompt$ For each player, select a target land | TargetMin$ OneEach | TargetMax$ OneEach | TargetsWithDifferentControllers$ True
+SVar:OneEach:PlayerCountPlayers$Amount
+T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Player.controlsLand.counters\_GE1\_CONTESTED | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ Whenever a creature deals combat damage to a player, if that player controls one or more lands with contested counters on them, that creature's controller gains control of one of those lands of their choice and untaps it.
+SVar:TrigGainControl:DB$ GainControl | Choices$ Land.ControlledBy TriggeredTarget+counters_GE1_CONTESTED | Untap$ True | NewController$ TriggeredSourceController
+Oracle:When Turf War enters the battlefield, for each player, put a contested counter on target land that player controls.\nWhenever a creature deals combat damage to a player, if that player controls one or more lands with contested counters on them, that creature's controller gains control of one of those lands of their choice and untaps it.

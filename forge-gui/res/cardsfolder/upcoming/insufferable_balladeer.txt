@@ -1,0 +1,8 @@
+Name:Insufferable Balladeer
+ManaCost:1 R
+Types:Creature Dwarf Bard
+PT:2/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCanNotBlock | TriggerDescription$ Vicious Mockery — When CARDNAME enters the battlefield, target creature an opponent controls can't block this turn. Goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)
+SVar:TrigCanNotBlock:DB$ Pump | ValidTgts$ Creature.OppCtrl | KW$ HIDDEN CARDNAME can't block. | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | SubAbility$ DBGoad
+SVar:DBGoad:DB$ Goad | Defined$ Targeted
+Oracle:Vicious Mockery — When Insufferable Balladeer enters the battlefield, target creature an opponent controls can't block this turn. Goad it. (Until your next turn, that creature attacks each combat if able and attacks a player other than you if able.)

@@ -1,6 +1,7 @@
 package forge.game.ability.effects;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -17,6 +18,7 @@ import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Localizer;
 
 public class ControlGainEffect extends SpellAbilityEffect {
 
@@ -102,6 +104,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Card source = sa.getHostCard();
+        final Player activator = sa.getActivatingPlayer();
 
         final boolean bUntap = sa.hasParam("Untap");
         final boolean bTapOnLose = sa.hasParam("TapOnLose");
@@ -112,13 +115,27 @@ public class ControlGainEffect extends SpellAbilityEffect {
 
         final List<Player> controllers = getDefinedPlayersOrTargeted(sa, "NewController");
 
-        final Player newController = controllers.isEmpty() ? sa.getActivatingPlayer() : controllers.get(0);
+        final Player newController = controllers.isEmpty() ? activator : controllers.get(0);
         final Game game = newController.getGame();
 
-        CardCollectionView tgtCards = getDefinedCards(sa);
+        CardCollectionView tgtCards = null;
+        if (sa.hasParam("Choices")) {
+            Player chooser = sa.hasParam("Chooser") ? AbilityUtils.getDefinedPlayers(source,
+                    sa.getParam("Chooser"), sa).get(0) : activator;
+            CardCollectionView choices = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
+                    sa.getParam("Choices"), activator, source, sa);
+            if (choices.isEmpty()) {
+                return;
+            }
+            String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") :
+                Localizer.getInstance().getMessage("lblChooseaCard") +" ";
+            tgtCards = chooser.getController().chooseCardsForEffect(choices, sa, title, 1, 1, false, null);
+        } else {
+            tgtCards = getDefinedCards(sa);
+        }
 
-        if (sa.hasParam("ControlledByTarget")) {
-        	tgtCards = CardLists.filterControlledBy(tgtCards, getTargetPlayers(sa));
+        if (tgtCards != null & sa.hasParam("ControlledByTarget")) {
+            tgtCards = CardLists.filterControlledBy(tgtCards, getTargetPlayers(sa));
         }
 
         // in case source was LKI or still resolving
@@ -195,11 +212,11 @@ public class ControlGainEffect extends SpellAbilityEffect {
                 }
                 if (lose.contains("EOT")) {
                     game.getEndOfTurn().addUntil(loseControl);
-                    tgtC.setSVar("SacMe", "6");
+                    tgtC.addChangedSVars(Collections.singletonMap("SacMe", "6"), tStamp, 0);
                 }
                 if (lose.contains("EndOfCombat")) {
                     game.getEndOfCombat().addUntil(loseControl);
-                    tgtC.setSVar("SacMe", "6");
+                    tgtC.addChangedSVars(Collections.singletonMap("SacMe", "6"), tStamp, 0);
                 }
                 if (lose.contains("StaticCommandCheck")) {
                     String leftVar = sa.getSVar(sa.getParam("StaticCommandCheckSVar"));
@@ -261,7 +278,7 @@ public class ControlGainEffect extends SpellAbilityEffect {
             @Override
             public void run() { 
                 doLoseControl(c, hostCard, bTapOnLose, tStamp);
-                c.removeSVar("SacMe");
+                c.removeChangedSVars(tStamp, 0);
             }
         };
 

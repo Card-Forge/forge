@@ -1,0 +1,6 @@
+[format]
+Name:Standard (JOU)
+Type:Archived
+Subtype:Standard
+Effective:2014-05-02
+Sets:RTR, GTC, DGM, M14, THS, BNG, JOU

@@ -3,8 +3,7 @@ ManaCost:2 R
 Types:Legendary Creature Human Samurai
 PT:2/1
 K:Bushido:1
-S:Mode$ Continuous | Affected$ Permanent.namedBrothers Yamazaki | CheckSVar$ X | SVarCompare$ EQ2 | AddHiddenKeyword$ Legend rule doesn't apply to CARDNAME. | Description$ If there are exactly two permanents named Brothers Yamazaki on the battlefield, the "legend rule" doesn't apply to them.
-SVar:X:Count$Valid Permanent.namedBrothers Yamazaki
+S:Mode$ IgnoreLegendRule | ValidCard$ Permanent.namedBrothers Yamazaki | IsPresent$ Permanent.namedBrothers Yamazaki | PresentCompare$ EQ2 | Description$ If there are exactly two permanents named Brothers Yamazaki on the battlefield, the "legend rule" doesn't apply to them.
 S:Mode$ Continuous | Affected$ Creature.Other+namedBrothers Yamazaki | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Haste | Description$ Each other creature named CARDNAME gets +2/+2 and has haste.
 DeckHints:Name$Brothers Yamazaki
 SVar:AILegendaryException:TwoCopiesAllowed

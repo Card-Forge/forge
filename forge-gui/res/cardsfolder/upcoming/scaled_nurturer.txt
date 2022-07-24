@@ -1,0 +1,10 @@
+Name:Scaled Nurturer
+ManaCost:1 G
+Types:Creature Dragon Druid
+PT:0/2
+A:AB$ Mana | Cost$ T | Produced$ G | TriggersWhenSpent$ TrigSpent | SpellDescription$ Add {G}. When you spend this mana to cast a Dragon creature spell, you gain 2 life.
+SVar:TrigSpent:Mode$ SpellCast | ValidCard$ Creature.Dragon | ValidActivatingPlayer$ You | Execute$ TrigGainLife | TriggerDescription$ When you spend this mana to cast a Dragon creature spell, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+DeckHints:Type$Dragon
+Oracle:{T}: Add {G}. When you spend this mana to cast a Dragon creature spell, you gain 2 life.

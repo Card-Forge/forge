@@ -1,0 +1,7 @@
+[format]
+Name:Extended (DST)
+Type:Archived
+Subtype:Extended
+Effective:2004-02-20
+Sets:TMP, STH, EXO, USG, ULG, 6ED, UDS, MMQ, NMS, PCY, INV, PLS, 7ED, APC, ODY, TOR, JUD, ONS, LGN, SCG, 8ED, MRD, DST
+Banned:Ancient Tomb; Dark Ritual; Dream Halls; Earthcraft; Entomb; Frantic Search; Goblin Lackey; Goblin Recruiter; Grim Monolith; Hermit Druid; Lotus Petal; Memory Jar; Mind Over Matter; Oath of Druids; Replenish; Survival of the Fittest; Time Spiral; Tinker; Tolarian Academy; Windfall; Yawgmoth's Bargain; Yawgmoth's Will

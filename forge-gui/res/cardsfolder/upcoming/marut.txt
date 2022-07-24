@@ -1,0 +1,11 @@
+Name:Marut
+ManaCost:8
+Types:Artifact Creature Construct
+PT:7/7
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | CheckSVar$ X | Execute$ TrigTreasure | TriggerDescription$ When CARDNAME enters the battlefield, if mana from a Treasure was spent to cast it, create a Treasure token for each mana from a Treasure spent to cast it.
+SVar:TrigTreasure:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac
+SVar:X:Count$CastTotalManaSpent Treasure
+SVar:AIPreference:ManaFrom$Treasure
+DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
+Oracle:Trample\nWhen Marut enters the battlefield, if mana from a Treasure was spent to cast it, create a Treasure token for each mana from a Treasure spent to cast it.

@@ -1,0 +1,7 @@
+[format]
+Name:Standard (THB)
+Type:Archived
+Subtype:Standard
+Effective:2020-01-24
+Sets:GRN, RNA, WAR, M20, ELD, THB
+Banned:Field of the Dead; Oko, Thief of Crowns; Once Upon a Time; Veil of Summer

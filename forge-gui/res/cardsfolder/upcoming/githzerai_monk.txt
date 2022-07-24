@@ -1,0 +1,10 @@
+Name:Githzerai Monk
+ManaCost:4 W
+Types:Creature Gith Monk
+PT:3/2
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTapAll | TriggerDescription$ Psychic Defense — When CARDNAME enters the battlefield, tap all creatures you don't control.
+SVar:TrigTapAll:DB$ TapAll | ValidCards$ Creature.YouDontCtrl
+SVar:PlayMain1:TRUE
+Oracle:Flash\nFlying\nPsychic Defense — When Githzerai Monk enters the battlefield, tap all creatures you don't control.

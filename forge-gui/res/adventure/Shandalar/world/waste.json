@@ -27,11 +27,11 @@
     "pointsOfInterest":[
       "Final Castle",
       "Colorless Castle",
-      "Waste Town", "Waste Town2", "Waste Town3",
-      "Portal", "Portal1",
+      "Skep",
+      "Waste Town", 
       "Fort", "Fort1", "Fort2", "Fort3", "Fort4", "Fort5", "Fort6",
       "Factory", "Factory1", "Factory2", "Factory3",
       "MageTowerC", "MageTowerC1", "MageTowerC2", "MageTowerC3", "MageTowerC4", "MageTowerC5",
-      "CaveC", "CaveC1", "CaveC2", "CaveC3", "CaveC4", "CaveC5", "CaveC6", "CaveC7", "CaveC8", "CaveC9", "CaveCA", "CaveCB", "CaveCC", "CaveCD", "CaveCE", "CaveCF"
+      "CaveC", "CaveC1", "CaveC2", "CaveC3", "CaveC4", "CaveC5", "CaveC6", "CaveC7", "CaveC8", "CaveC9", "CaveCA", "CaveCB", "CaveCD"
     ]
 }

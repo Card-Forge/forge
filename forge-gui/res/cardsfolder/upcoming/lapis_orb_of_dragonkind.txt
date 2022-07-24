@@ -1,0 +1,8 @@
+Name:Lapis Orb of Dragonkind
+ManaCost:2 U
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ U | TriggersWhenSpent$ TrigSpent | SpellDescription$ Add {U}. When you spend this mana to cast a Dragon creature spell, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+SVar:TrigSpent:Mode$ SpellCast | ValidCard$ Creature.Dragon | ValidActivatingPlayer$ You | Execute$ TrigScry | TriggerDescription$ When you spend this mana to cast a Dragon creature spell, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+DeckHints:Type$Dragon
+Oracle:{T}: Add {U}. When you spend this mana to cast a Dragon creature spell, scry 2. (Look at the top two cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)

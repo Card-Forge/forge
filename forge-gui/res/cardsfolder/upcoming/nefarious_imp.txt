@@ -1,0 +1,8 @@
+Name:Nefarious Imp
+ManaCost:2 B
+Types:Creature Imp
+PT:2/1
+K:Flying
+T:Mode$ ChangesZoneAll | ValidCards$ Permanent.YouCtrl | Origin$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever one or more permanents you control leave the battlefield, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+SVar:TrigScry:DB$ Scry
+Oracle:Flying\nWhenever one or more permanents you control leave the battlefield, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

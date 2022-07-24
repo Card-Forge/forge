@@ -1,0 +1,11 @@
+[metadata]
+Code=HA6
+Date=2022-07-28
+Name=Historic Anthology 6
+Type=Online
+ScryfallCode=HA6
+
+[cards]
+0 M Avacyn, Angel of Hope @Jason Chan
+0 M Go-Shintai of Life's Origin @Alexander Mokhov
+0 M Tarmogoyf @Filip Burburan

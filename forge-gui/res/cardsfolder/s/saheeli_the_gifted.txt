@@ -8,6 +8,6 @@ SVar:HBReduceCost:Mode$ ReduceCost | EffectZone$ Command | Type$ Spell | ValidCa
 SVar:TrigCastSpell:Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Command | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile
 SVar:X:Count$Valid Artifact.YouCtrl
-A:AB$ CopyPermanent | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ Valid Artifact.YouCtrl | AddKeywords$ Haste | AtEOT$ Exile | AILogic$ DuplicatePerms | SpellDescription$ For each artifact you control, create a token that's a copy of it. Those tokens gain haste. Exile those tokens at the beginning of the next end step.
+A:AB$ CopyPermanent | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | Defined$ Valid Artifact.YouCtrl | PumpKeywords$ Haste | AtEOT$ Exile | AILogic$ DuplicatePerms | SpellDescription$ For each artifact you control, create a token that's a copy of it. Those tokens gain haste. Exile those tokens at the beginning of the next end step.
 K:CARDNAME can be your commander.
 Oracle:[+1]: Create a 1/1 colorless Servo artifact creature token.\n[+1]: The next spell you cast this turn costs {1} less to cast for each artifact you control as you cast it.\n[-7]: For each artifact you control, create a token that's a copy of it. Those tokens gain haste. Exile those tokens at the beginning of the next end step.\nSaheeli, the Gifted can be your commander.

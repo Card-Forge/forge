@@ -1,0 +1,9 @@
+Name:Giant Ankheg
+ManaCost:6 G G
+Types:Creature Insect
+PT:8/8
+K:Trample
+K:Ward:2
+S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Trample & Ward:2 | Description$ Other creatures you control have trample and ward {2}.
+SVar:PlayMain1:TRUE
+Oracle:Trample\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nOther creatures you control have trample and ward {2}.

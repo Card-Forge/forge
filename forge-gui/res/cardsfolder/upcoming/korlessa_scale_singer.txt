@@ -1,0 +1,8 @@
+Name:Korlessa, Scale Singer
+ManaCost:G U
+Types:Legendary Creature Dragon Bard
+PT:1/4
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Dragon.TopLibrary+YouCtrl+nonLand | AffectedZone$ Library | MayPlay$ True | Description$ You may cast Dragon spells from the top of your library.
+DeckHints:Type$Dragon
+Oracle:You may look at the top card of your library any time.\nYou may cast Dragon spells from the top of your library.

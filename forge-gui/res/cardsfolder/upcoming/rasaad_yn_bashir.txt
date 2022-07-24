@@ -1,0 +1,12 @@
+Name:Rasaad yn Bashir
+ManaCost:2 W
+Types:Legendary Creature Human Monk
+PT:0/3
+S:Mode$ CombatDamageToughness | ValidCard$ Creature.YouCtrl | Description$ Each creature you control assigns combat damage equal to its toughness rather than its power.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDoubleToughness | CheckDefinedPlayer$ You.hasInitiative | TriggerDescription$ Whenever CARDNAME attacks, if you have the initiative, double the toughness of each creature you control until end of turn.
+SVar:TrigDoubleToughness:DB$ RepeatEach | RepeatCards$ Creature.YouCtrl | RepeatSubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Remembered | NumDef$ X | Double$ True
+SVar:X:Remembered$CardToughness
+K:Choose a Background
+SVar:HasAttackEffect:TRUE
+Oracle:Each creature you control assigns combat damage equal to its toughness rather than its power.\nWhenever Rasaad yn Bashir attacks, if you have the initiative, double the toughness of each creature you control until end of turn.\nChoose a Background (You can have a Background as a second commander.)

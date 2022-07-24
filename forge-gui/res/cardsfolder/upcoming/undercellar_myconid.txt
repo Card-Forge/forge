@@ -1,0 +1,10 @@
+Name:Undercellar Myconid
+ManaCost:2 G
+Types:Creature Fungus
+PT:1/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield or dies, create a 1/1 green Saproling creature token.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When CARDNAME enters the battlefield or dies, create a 1/1 green Saproling creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_1_1_saproling | TokenOwner$ TriggeredCardController
+DeckHas:Ability$Token & Type$Saproling
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ {T}: Add one mana of any color.
+Oracle:Whenever Undercellar Myconid enters the battlefield or dies, create a 1/1 green Saproling creature token.\n{T}: Add one mana of any color.

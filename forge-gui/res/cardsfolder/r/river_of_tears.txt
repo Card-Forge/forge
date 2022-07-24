@@ -5,5 +5,5 @@ A:AB$ Mana | Cost$ T | Produced$ U | ConditionCheckSVar$ X | ConditionSVarCompar
 SVar:ManaB:DB$ Mana | Produced$ B | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
 AI:RemoveDeck:Random
 DeckHints:Color$Blue|Black
-SVar:X:Count$YourLandsPlayed
+SVar:X:PlayerCountPropertyYou$LandsPlayed
 Oracle:{T}: Add {U}. If you played a land this turn, add {B} instead.

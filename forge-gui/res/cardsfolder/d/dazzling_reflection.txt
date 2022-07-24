@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBGainLife | SpellDescription$ You gain life equal to target creature's power.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | SubAbility$ DBEffect | LifeAmount$ X
 SVar:X:Targeted$CardPower
-SVar:DBEffect:DB$ Effect | Name$ Dazzling Reflection Effect | ReplacementEffects$ Dazzle | ImprintCards$ Targeted | Triggers$ OutOfSight
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ Dazzle | ImprintCards$ Targeted | Triggers$ OutOfSight
 SVar:Dazzle:Event$ DamageDone | ValidSource$ Card.IsImprinted | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the targeted creature would deal damage this turn, prevent that damage.
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsImprinted | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile

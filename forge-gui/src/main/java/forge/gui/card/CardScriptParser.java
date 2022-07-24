@@ -14,6 +14,8 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.card.CardType;
+import forge.game.ability.AbilityFactory;
+import forge.game.ability.AbilityFactory.AbilityRecordType;
 import forge.game.ability.ApiType;
 import forge.game.replacement.ReplacementType;
 import forge.game.trigger.TriggerType;
@@ -74,6 +76,7 @@ public final class CardScriptParser {
                     bad = true;
                 }
             } else if (trimLine.startsWith("A:")) {
+                // TODO check if it's non-permanent, then Cost$ isn't mandatory
                 result.putAll(getActivatedAbilityErrors(trimLine.substring("A:".length()), index + "A:".length()));
             } else if (trimLine.startsWith("R:")) {
                 result.putAll(getReplacementErrors(trimLine.substring("R:".length()), index + "R:".length()));
@@ -221,7 +224,7 @@ public final class CardScriptParser {
                 if (trimValue.isEmpty()) {
                     isBadValue = true;
                 }
-            } else if (trimKey.equals("SubAbility")) {
+            } else if (trimKey.equals("SubAbility") || AbilityFactory.additionalAbilityKeys.contains(trimKey)) {
                 if (sVars.contains(trimValue)) {
                     sVarAbilities.add(trimValue);
                 } else {
@@ -315,7 +318,10 @@ public final class CardScriptParser {
 
     private static boolean isAbilityApiDeclarerLegal(final String declarer) {
         final String tDeclarer = declarer.trim();
-        return tDeclarer.equals("AB") || tDeclarer.equals("DB") || tDeclarer.equals("SP");
+        for (AbilityRecordType type : AbilityRecordType.values()) {
+            if (type.getPrefix().equals(tDeclarer)) return true;
+        }
+        return false;
     }
     private static boolean isAbilityApiLegal(final String api) {
         try {
@@ -506,7 +512,10 @@ public final class CardScriptParser {
                     "RememberMap", "wasCastFrom", "wasNotCastFrom", "set",
                     "inZone", "HasSVar");
 
-    private static boolean isValidExclusive(final String valid) {
+    private static boolean isValidExclusive(String valid) {
+        if (valid.charAt(0) == '!') {
+            valid = valid.substring(1);
+        }
         if (VALID_EXCLUSIVE.contains(valid)) {
             return true;
         }

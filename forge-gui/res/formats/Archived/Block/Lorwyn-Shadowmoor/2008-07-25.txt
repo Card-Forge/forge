@@ -1,0 +1,6 @@
+[format]
+Name:Block: Lorwyn;Shadowmoor (EVE)
+Type:Archived
+Subtype:Block
+Effective:2008-07-25
+Sets:LRW, MOR, SHM, EVE

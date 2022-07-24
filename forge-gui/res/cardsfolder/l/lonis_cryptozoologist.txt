@@ -4,11 +4,11 @@ Types:Legendary Creature Snake Elf Scout
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+nonToken+Other | TriggerZones$ Battlefield | Execute$ TrigInvestigate | TriggerDescription$ Whenever another nontoken creature enters the battlefield under your control, investigate.
 SVar:TrigInvestigate:DB$ Investigate
-A:AB$ Dig | Cost$ T Sac<X/Clue> | ValidTgts$ Player.Opponent | TgtPrompt$ Select target opponent | Reveal$ True | NoMove$ True | DigNum$ X | RememberRevealed$ True | DestinationZone$ Library | SubAbility$ PickOne | SpellDescription$ Target opponent reveals the top X cards of their library. You may put a nonland permanent card with mana value X or less from among them onto the battlefield under your control. That player puts the rest on the bottom of their library in a random order.
-SVar:PickOne:DB$ ChooseCard | Defined$ You | Amount$ 1 | Mandatory$ True | ChoiceTitle$ Choose a nonland permanent to put on the battlefield under your control | Choices$ Permanent.nonLand+cmcLEX+IsRemembered | ChoiceZone$ Library | SubAbility$ MoveChosen
+A:AB$ PeekAndReveal | Cost$ T Sac<X/Clue> | ValidTgts$ Opponent | PeekAmount$ X | NoPeek$ True | RememberRevealed$ True | SubAbility$ PickOne | SpellDescription$ Target opponent reveals the top X cards of their library. You may put a nonland permanent card with mana value X or less from among them onto the battlefield under your control. That player puts the rest on the bottom of their library in a random order.
+SVar:PickOne:DB$ ChooseCard | Defined$ You | Amount$ 1 | ChoiceTitle$ Choose a nonland permanent to put on the battlefield under your control | Choices$ Permanent.nonLand+cmcLEX+IsRemembered | ChoiceZone$ Library | SubAbility$ MoveChosen
 SVar:MoveChosen:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | GainControl$ True | Defined$ ChosenCard | SubAbility$ DBBottom
 SVar:DBBottom:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:X:Count$xPaid
 DeckHints:Ability$Investigate
 DeckHas:Ability$Investigate|Token

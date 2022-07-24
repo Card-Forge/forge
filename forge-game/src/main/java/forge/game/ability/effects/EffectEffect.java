@@ -60,7 +60,7 @@ public class EffectEffect extends SpellAbilityEffect {
         boolean imprintOnHost = false;
         final String duration = sa.getParam("Duration");
 
-        if (("UntilHostLeavesPlay".equals(duration) || "UntilLoseControlOfHost".equals(duration))
+        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration))
                 && !(hostCard.isInPlay() || hostCard.isInZone(ZoneType.Stack))) {
             return;
         }
@@ -86,6 +86,13 @@ public class EffectEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("Keywords")) {
             effectKeywords = sa.getParam("Keywords").split(",");
+        }
+
+        if (sa.hasParam("RememberSpell")) {
+            rememberList = new FCollection<>();
+            for (final String rem : sa.getParam("RememberSpell").split(",")) {
+                rememberList.addAll(AbilityUtils.getDefinedSpellAbilities(hostCard, rem, sa));
+            }
         }
 
         if (sa.hasParam("RememberObjects")) {
@@ -271,7 +278,7 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("CopySVar")) {
-                eff.setSVar(sa.getParam("CopySVar"), sa.getHostCard().getSVar(sa.getParam("CopySVar")));
+                eff.setSVar(sa.getParam("CopySVar"), hostCard.getSVar(sa.getParam("CopySVar")));
             }
 
             // Copy text changes

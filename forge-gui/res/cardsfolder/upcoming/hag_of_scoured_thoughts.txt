@@ -1,0 +1,9 @@
+Name:Hag of Scoured Thoughts
+ManaCost:2 B
+Types:Creature Hag Warlock
+PT:2/2
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigMill | TriggerDescription$ At the beginning of your upkeep, each opponent mills five cards. Then exile each opponent's graveyard.
+SVar:TrigMill:DB$ Mill | NumCards$ 5 | Defined$ Opponent | SubAbility$ DBExileGrave
+SVar:DBExileGrave:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | Defined$ Opponent | ChangeType$ Card
+DeckHas:Ability$Mill|Graveyard
+Oracle:At the beginning of your upkeep, each opponent mills five cards. Then exile each opponent's graveyard.

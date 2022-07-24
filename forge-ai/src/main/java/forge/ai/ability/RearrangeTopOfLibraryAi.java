@@ -1,6 +1,8 @@
 package forge.ai.ability;
 
 
+import java.util.Map;
+
 import forge.ai.AiCardMemory;
 import forge.ai.AiController;
 import forge.ai.AiProps;
@@ -92,7 +94,7 @@ public class RearrangeTopOfLibraryAi extends SpellAbilityAi {
      * @see forge.card.ability.SpellAbilityAi#confirmAction(forge.game.player.Player, forge.card.spellability.SpellAbility, forge.game.player.PlayerActionConfirmMode, java.lang.String)
      */
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
         // Confirming this action means shuffling the library if asked.
 
         // First, let's check if we can play the top card of the library

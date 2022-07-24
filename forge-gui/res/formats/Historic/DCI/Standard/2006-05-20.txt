@@ -1,6 +1,0 @@
-[format]
-Name:Standard (DIS)
-Type:Historic
-Subtype:Standard
-Effective:2006-05-20
-Sets:CHK, BOK, SOK, 9ED, RAV, GPT, DIS

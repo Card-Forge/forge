@@ -1,0 +1,106 @@
+[metadata]
+Name=Nature of the Beast
+[shop]
+WinsToUnlock=0
+Credits=5000
+MinDifficulty=0
+MaxDifficulty=5
+Description=Marath, Will of the Wild is the master of aggressive beasts. This commander focuses on large creatures and impressive spells paired with the mana accerleration to cast them quickly.
+Set=C13
+Image=nature_of_the_beast.png
+[commander]
+1 Marath, Will of the Wild+|C13
+[main]
+1 Archangel|C13
+1 Avenger of Zendikar|C13
+1 Baloth Woodcrasher|C13
+1 Behemoth Sledge|C13
+1 Boros Charm|C13
+1 Boros Garrison|C13
+1 Boros Guildgate|C13
+1 Command Tower|C13
+1 Contested Cliffs|C13
+1 Crater Hellion|C13
+1 Cultivate|C13
+1 Curse of Chaos|C13
+1 Curse of Predation|C13
+1 Curse of the Forsaken|C13
+1 Darksteel Mutation|C13
+1 Deadwood Treefolk|C13
+1 Drifting Meadow|C13
+1 Druidic Satchel|C13
+1 Drumhunter|C13
+1 Eternal Dragon|C13
+1 Evolving Wilds|C13
+1 Fiery Justice|C13
+1 Fireball|C13
+1 Fires of Yavimaya|C13
+2 Forest|C13
+2 Forest|C13
+4 Forest|C13
+1 Forgotten Cave|C13
+1 From the Ashes|C13
+1 Gahiji, Honored One|C13
+1 Grazing Gladehart|C13
+1 Gruul Guildgate|C13
+1 Harmonize|C13
+1 Homeward Path|C13
+1 Hull Breach|C13
+1 Jungle Shrine|C13
+1 Khalni Garden|C13
+1 Krosan Tusker|C13
+1 Krosan Warchief|C13
+1 Magus of the Arena|C13
+1 Mayael the Anima|C13
+1 Mold Shambler|C13
+1 Mosswort Bridge|C13
+1 Mountain|C13
+1 Mountain|C13
+2 Mountain|C13
+1 Mountain|C13
+1 Mystic Barrier|C13
+1 Naya Charm|C13
+1 Naya Panorama|C13
+1 Naya Soulbeast|C13
+1 New Benalia|C13
+1 One Dozen Eyes|C13
+1 Opal Palace|C13
+1 Plains|C13
+1 Plains|C13
+1 Plains|C13
+1 Plains|C13
+1 Rain of Thorns|C13
+1 Rakeclaw Gargantuan|C13
+1 Rampaging Baloths|C13
+1 Ravenous Baloth|C13
+1 Restore|C13
+1 Rupture Spire|C13
+1 Savage Twister|C13
+1 Secluded Steppe|C13
+1 Seer's Sundial|C13
+1 Selesnya Guildgate|C13
+1 Selesnya Sanctuary|C13
+1 Slice and Dice|C13
+1 Slice in Twain|C13
+1 Slippery Karst|C13
+1 Smoldering Crater|C13
+1 Sol Ring|C13
+1 Spawning Grounds|C13
+1 Spellbreaker Behemoth|C13
+1 Spitebellows|C13
+1 Sprouting Vines|C13
+1 Street Spasm|C13
+1 Swiftfoot Boots|C13
+1 Temple of the False God|C13
+1 Tempt with Discovery|C13
+1 Terra Ravager|C13
+1 Tower of Fortunes|C13
+1 Tranquil Thicket|C13
+1 Valley Rannet|C13
+1 Vitu-Ghazi, the City-Tree|C13
+1 Vivid Crag|C13
+1 War Cadence|C13
+1 Warstorm Surge|C13
+1 Where Ancients Tread|C13
+1 Witch Hunt|C13
+1 Wrath of God|C13

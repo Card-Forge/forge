@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Streets of New Capenna #01
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/04/latest-2-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Welcome to the Streets of New Capenna! Assume your opponent has nothing to cast, but can activate on-board abilities. Remember that your solution must satisfy all blocking possibilities.
+[state]
+humanlife=20
+ailife=16
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Cabaretti Charm;Eiganjo Uprising;Jetmir, Nexus of Revels
+humanbattlefield=Devilish Valet;Targ Nar, Demon-Fang Gnoll;Hall of Oracles;Furycalm Snarl;Furycalm Snarl;Furycalm Snarl;Furycalm Snarl;Jetmir's Garden;Jetmir's Garden;Jetmir's Garden
+aibattlefield=Skaab Wrangler;Geralf, Visionary Stitcher
+aipersistentmana=U

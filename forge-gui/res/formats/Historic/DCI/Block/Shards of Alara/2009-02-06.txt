@@ -1,6 +1,0 @@
-[format]
-Name:Block: Shards of Alara (CFX)
-Type:Historic
-Subtype:Block
-Effective:2009-02-06
-Sets:ALA, CFX

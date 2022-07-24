@@ -1,0 +1,8 @@
+Name:Owlbear Shepherd
+ManaCost:2 G
+Types:Creature Goblin Druid
+PT:1/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE8 | TriggerDescription$ At the beginning of your end step, if creatures you control have total power 8 or greater, draw a card.
+SVar:X:Count$SumPower_Creature.YouCtrl
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+Oracle:At the beginning of your end step, if creatures you control have total power 8 or greater, draw a card.

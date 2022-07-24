@@ -1,0 +1,13 @@
+Name:Mazzy, Truesword Paladin
+ManaCost:1 R G W
+Types:Legendary Creature Halfling Knight
+PT:3/4
+T:Mode$ Attacks | ValidCard$ Creature.enchanted | Attacked$ Player.Opponent | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever an enchanted creature attacks one of your opponents, it gets +2/+0 and gains trample until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ 2 | KW$ Trample
+T:Mode$ ChangesZone | TriggerZones$ Battlefield | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Aura.YouCtrl+YouOwn | Execute$ TrigExile | TriggerDescription$ Whenever an Aura you control is put into your graveyard from the battlefield, exile it. Until the end of your next turn, you may cast that card.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | Affected$ Card.nonLand+IsRemembered | AffectedZone$ Exile | EffectZone$ Command | MayPlay$ True | Description$ Until the end of your next turn, you may cast that card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckNeeds:Type$Aura
+Oracle:Whenever an enchanted creature attacks one of your opponents, it gets +2/+0 and gains trample until end of turn.\nWhenever an Aura you control is put into your graveyard from the battlefield, exile it. Until the end of your next turn, you may cast that card.

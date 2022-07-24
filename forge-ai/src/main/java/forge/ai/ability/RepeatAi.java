@@ -1,11 +1,11 @@
 package forge.ai.ability;
 
 
+import java.util.Map;
+
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import forge.ai.*;
-import forge.game.GlobalRuleChange;
 import forge.game.card.Card;
 import forge.game.card.CardPredicates;
 import forge.game.phase.PhaseType;
@@ -42,7 +42,7 @@ public class RepeatAi extends SpellAbilityAi {
     }
     
     @Override
-    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message) {
+    public boolean confirmAction(Player player, SpellAbility sa, PlayerActionConfirmMode mode, String message, Map<String, Object> params) {
       //TODO add logic to have computer make better choice (ArsenalNut)
         return false;
     }
@@ -54,16 +54,16 @@ public class RepeatAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             if (logic.startsWith("CopyBestCreature")) {
                 Card best = null;
-                if (!ai.getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule) || logic.endsWith("IgnoreLegendary")) {
-                    best = ComputerUtilCard.getBestAI(Iterables.filter(ai.getCreaturesInPlay(), Predicates.and(
-                            CardPredicates.isTargetableBy(sa), new Predicate<Card>() {
-                                @Override
-                                public boolean apply(Card card) {
-                                    return !card.getType().isLegendary();
-                                }
-                            })));
+                Iterable<Card> targetableAi = Iterables.filter(ai.getCreaturesInPlay(), CardPredicates.isTargetableBy(sa));
+                if (!logic.endsWith("IgnoreLegendary")) {
+                    best = ComputerUtilCard.getBestAI(Iterables.filter(targetableAi, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(Card card) {
+                            return card.ignoreLegendRule();
+                        }
+                    }));
                 } else {
-                    best = ComputerUtilCard.getBestAI(Iterables.filter(ai.getCreaturesInPlay(), CardPredicates.isTargetableBy(sa)));
+                    best = ComputerUtilCard.getBestAI(targetableAi);
                 }
                 if (best == null && mandatory && sa.canTarget(sa.getHostCard())) {
                     best = sa.getHostCard();

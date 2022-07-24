@@ -112,6 +112,9 @@ public final class CardUtil {
      * @return a CardCollection that matches the given criteria
      */
     public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb) {
+        return getThisTurnEntered(to, from, valid, src, ctb, src.getController());
+    }
+    public static List<Card> getThisTurnEntered(final ZoneType to, final ZoneType from, final String valid, final Card src, final CardTraitBase ctb, final Player controller) {
         List<Card> res = Lists.newArrayList();
         final Game game = src.getGame();
         if (to != ZoneType.Stack) {
@@ -121,7 +124,7 @@ public final class CardUtil {
         } else {
             res.addAll(game.getStackZone().getCardsAddedThisTurn(from));
         }
-        return CardLists.getValidCardsAsList(res, valid, src.getController(), src, ctb);
+        return CardLists.getValidCardsAsList(res, valid, controller, src, ctb);
     }
 
     /**
@@ -247,9 +250,8 @@ public final class CardUtil {
         newCopy.setColor(in.getColor().getColor());
         newCopy.setPhasedOut(in.isPhasedOut());
 
-        newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
-        newCopy.setReceivedDamageFromPlayerThisTurn(in.getReceivedDamageFromPlayerThisTurn());
         newCopy.setDamageHistory(in.getDamageHistory());
+        newCopy.setDamageReceivedThisTurn(in.getDamageReceivedThisTurn());
         for (Card c : in.getBlockedThisTurn()) {
             newCopy.addBlockedThisTurn(c);
         }
@@ -318,6 +320,8 @@ public final class CardUtil {
         if (in.getGame().getCombat() != null && in.isPermanent()) {
             newCopy.setCombatLKI(in.getGame().getCombat().saveLKI(newCopy)); 
         }
+
+        newCopy.getGoadMap().putAll(in.getGoadMap());
 
         return newCopy;
     }

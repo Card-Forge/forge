@@ -1,0 +1,31 @@
+[metadata]
+Name=GAS_23_25_Control Mono Black Generated Deck_810_17
+[Main]
+4 Cast Down|DOM
+4 Divest|DOM
+4 Dread Shade|DOM
+3 Fatal Push|AER
+4 Gifted Aetherborn|AER
+2 Liliana, Death's Majesty|AKH
+3 Memorial to Folly|DOM
+3 Never // Return|AKH
+1 Phyrexian Scriptures|DOM
+3 Rite of Belzenlok|DOM
+1 Swamp|AKH|2
+1 Swamp|AKH|3
+3 Swamp|AKH|4
+1 Swamp|BBD
+1 Swamp|DOM|4
+1 Swamp|KLD|2
+1 Swamp|KLD|3
+5 Swamp|RIX
+4 Swamp|XLN|1
+3 Swamp|XLN|4
+4 Torment of Hailfire|HOU
+4 Vraska's Contempt|XLN
+[Sideboard]
+4 Dark Bargain|DOM
+3 Gonti, Lord of Luxury|KLD
+3 Phyrexian Scriptures|DOM
+4 Ravenous Chupacabra|A25
+1 Tetzimoc, Primal Death|RIX

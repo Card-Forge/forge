@@ -8,23 +8,22 @@ import forge.adventure.util.Controls;
 
 public class Console extends Window {
     private final ScrollPane scroll;
+    private String last = "";
+    private final InputLine input;
+    private final Table content;
+    private final ConsoleCommandInterpreter interpreter = new ConsoleCommandInterpreter();
 
     public void toggle() {
-        if(isVisible())
-        {
+        if(isVisible()) {
             setVisible(false);
             getStage().unfocus(input);
-        }
-        else
-        {
+        } else {
             setVisible(true);
             getStage().setKeyboardFocus(input);
         }
     }
 
-    class InputLine extends TextField
-    {
-
+    class InputLine extends TextField {
         private Console console;
 
         public InputLine(Console console) {
@@ -32,36 +31,34 @@ public class Console extends Window {
             this.console = console;
             writeEnters=true;
         }
+
         @Override
         protected InputListener createInputListener () {
-            TextField self=this;
+            TextField self = this;
             return new TextFieldClickListener()
             {
                 @Override
                 public boolean keyTyped (InputEvent event, char character) {
-
-
-                    // Disallow "typing" most ASCII control characters, which would show up as a space when onlyFontChars is true.
-                    switch (character) {
-                        case BACKSPACE:
-                            break;
-                        case TAB:
-                            self.setText(console.complete(self.getText()));
-                            self.setCursorPosition(Integer.MAX_VALUE);
-                            break;
-                        case NEWLINE:
-                        case CARRIAGE_RETURN:
-                            console.command(self.getText());
-                            self.setText("");
-                            return false;
-                        default:
-                            if (character < 32) return false;
-                    }
-                    return super.keyTyped(event,character);
+                // Disallow "typing" most ASCII control characters, which would show up as a space when onlyFontChars is true.
+                switch (character) {
+                    case BACKSPACE:
+                        break;
+                    case TAB:
+                        self.setText(console.complete(self.getText()));
+                        self.setCursorPosition(Integer.MAX_VALUE);
+                        break;
+                    case NEWLINE:
+                    case CARRIAGE_RETURN:
+                        console.command(self.getText());
+                        self.setText("");
+                        return false;
+                    default:
+                        if (character < 32) return false;
+                }
+                return super.keyTyped(event,character);
                 }
             };
         }
-
     }
 
     private String complete(String text) {
@@ -72,6 +69,7 @@ public class Console extends Window {
         Cell<Label> newLine=content.add(text);
         newLine.getActor().setColor(1,1,1,1);
         newLine.growX().align(Align.left|Align.bottom).row();
+        last = text; //Preserve last command.
         newLine=content.add(interpreter.command(text));
         newLine.getActor().setColor(0.6f,0.6f,0.6f,1);
         newLine.growX().align(Align.left|Align.bottom).row();
@@ -79,14 +77,11 @@ public class Console extends Window {
         scroll.scrollTo(0, 0, 0, 0);
     }
 
-    private InputLine input;
-    private Table content;
-    private ConsoleCommandInterpreter interpreter=new ConsoleCommandInterpreter();
     public Console() {
         super("", Controls.GetSkin());
-        content=new Table(Controls.GetSkin());
-        input=new InputLine(this);
-         scroll=new ScrollPane(content,new ScrollPane.ScrollPaneStyle());
+        content = new Table(Controls.GetSkin());
+        input   = new InputLine(this);
+        scroll  = new ScrollPane(content,new ScrollPane.ScrollPaneStyle());
 
         add(scroll).grow().row();
         add(input).growX();

@@ -1,7 +1,7 @@
 Name:Geist of Regret
 ManaCost:4 U
 Types:Creature Spirit
-PT:4/5
+PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeInstant | TriggerDescription$ When CARDNAME enters the battlefield, put a random instant card from your library into your graveyard. Then put a random sorcery card from your library into your graveyard.
 SVar:TrigChangeInstant:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Instant.YouOwn | ChangeNum$ 1 | Hidden$ True | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | SubAbility$ DBChangeSorcery

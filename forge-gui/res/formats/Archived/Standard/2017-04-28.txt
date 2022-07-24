@@ -1,0 +1,7 @@
+[format]
+Name:Standard (AKH)
+Type:Archived
+Subtype:Standard
+Effective:2017-04-28
+Sets:BFZ, OGW, SOI, W16, EMN, KLD, AER, AKH, W17
+Banned:Emrakul, the Promised End; Felidar Guardian; Reflector Mage; Smuggler's Copter

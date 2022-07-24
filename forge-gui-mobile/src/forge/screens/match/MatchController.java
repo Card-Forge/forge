@@ -2,11 +2,11 @@ package forge.screens.match;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.badlogic.gdx.utils.ScreenUtils;
+import forge.adventure.scene.DuelScene;
+import forge.adventure.scene.SceneType;
 import forge.ai.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
@@ -73,8 +73,6 @@ public class MatchController extends AbstractGuiGame {
     private MatchController() { }
     public static final MatchController instance = new MatchController();
 
-    private static final Map<String, FImage> avatarImages = new HashMap<>();
-
     private static HostedMatch hostedMatch;
     private static MatchScreen view;
     private static GameState phaseGameState;
@@ -113,7 +111,7 @@ public class MatchController extends AbstractGuiGame {
 
     public static FImage getPlayerAvatar(final PlayerView p) {
         final String lp = p.getLobbyPlayerName();
-        FImage avatar = avatarImages.get(lp);
+        FImage avatar = Forge.getAssets().avatarImages().get(lp);
         if (avatar == null) {
             if (StringUtils.isEmpty(p.getAvatarCardImageKey())) {
                 avatar = new FTextureRegionImage(FSkin.getAvatars().get(p.getAvatarIndex()));
@@ -312,15 +310,13 @@ public class MatchController extends AbstractGuiGame {
     @Override
     public void finishGame() {
         if (Forge.isMobileAdventureMode) {
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    Forge.clearTransitionScreen();
-                    Forge.clearCurrentScreen();
-                }
-            };
-            Forge.setTransitionScreen(new TransitionScreen(runnable, ScreenUtils.getFrameBufferTexture(), false, false));
             Forge.setCursor(null, "0");
+            if (((DuelScene) SceneType.DuelScene.instance).hasCallbackExit())
+                return;
+            Forge.setTransitionScreen(new TransitionScreen(() -> {
+                Forge.clearTransitionScreen();
+                Forge.clearCurrentScreen();
+            }, Forge.takeScreenshot(), false, false));
             return;
         }
         if (hasLocalPlayers() || getGameView().isMatchOver()) {
@@ -489,15 +485,13 @@ public class MatchController extends AbstractGuiGame {
     public void setSelectables(final Iterable<CardView> cards) {
         super.setSelectables(cards);
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override public final void run() {
-                for (final PlayerView p : getGameView().getPlayers()) {
-                    if ( p.getCards(ZoneType.Battlefield) != null ) {
-                        updateCards(p.getCards(ZoneType.Battlefield));
-                    }
-                    if ( p.getCards(ZoneType.Hand) != null ) {
-                        updateCards(p.getCards(ZoneType.Hand));
-                    }
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                if ( p.getCards(ZoneType.Battlefield) != null ) {
+                    updateCards(p.getCards(ZoneType.Battlefield));
+                }
+                if ( p.getCards(ZoneType.Hand) != null ) {
+                    updateCards(p.getCards(ZoneType.Hand));
                 }
             }
         });
@@ -507,15 +501,13 @@ public class MatchController extends AbstractGuiGame {
     public void clearSelectables() {
         super.clearSelectables();
         // update zones on tabletop and floating zones - non-selectable cards may be rendered differently
-        FThreads.invokeInEdtNowOrLater(new Runnable() {
-            @Override public final void run() {
-                for (final PlayerView p : getGameView().getPlayers()) {
-                    if ( p.getCards(ZoneType.Battlefield) != null ) {
-                        updateCards(p.getCards(ZoneType.Battlefield));
-                    }
-                    if ( p.getCards(ZoneType.Hand) != null ) {
-                        updateCards(p.getCards(ZoneType.Hand));
-                    }
+        FThreads.invokeInEdtNowOrLater(() -> {
+            for (final PlayerView p : getGameView().getPlayers()) {
+                if ( p.getCards(ZoneType.Battlefield) != null ) {
+                    updateCards(p.getCards(ZoneType.Battlefield));
+                }
+                if ( p.getCards(ZoneType.Hand) != null ) {
+                    updateCards(p.getCards(ZoneType.Hand));
                 }
             }
         });
@@ -525,6 +517,8 @@ public class MatchController extends AbstractGuiGame {
     public void afterGameEnd() {
         super.afterGameEnd();
         Forge.back(true);
+        if (Forge.disposeTextures)
+            ImageCache.disposeTextures();
         //view = null;
     }
 
@@ -702,7 +696,7 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void setPlayerAvatar(final LobbyPlayer player, final IHasIcon ihi) {
-        avatarImages.put(player.getName(), ImageCache.getIcon(ihi));
+        Forge.getAssets().avatarImages().put(player.getName(), ImageCache.getIcon(ihi));
     }
 
     @Override

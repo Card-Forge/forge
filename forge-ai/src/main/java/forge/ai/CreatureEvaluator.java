@@ -10,6 +10,7 @@ import forge.game.card.CounterEnumType;
 import forge.game.cost.CostPayEnergy;
 import forge.game.keyword.Keyword;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.staticability.StaticAbilityMustAttack;
 
 import java.util.List;
@@ -44,7 +45,7 @@ public class CreatureEvaluator implements Function<Card, Integer> {
             value += addValue(toughness * 10, "toughness: " + toughness);
 
             // because backside is always stronger the potential makes it better than a single faced card
-            if (c.hasKeyword(Keyword.DAYBOUND)) {
+            if (c.hasKeyword(Keyword.DAYBOUND) && c.hasBackSide()) {
                 value += addValue(power * 10, "transforming");
             }
         }
@@ -62,7 +63,8 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         if (c.hasKeyword("Unblockable")) {
             value += addValue(power * 10, "unblockable");
         } else {
-            if (c.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
+            if (StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(c)
+                    || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(c, false)) {
                 value += addValue(power * 6, "thorns");
             }
             if (c.hasKeyword(Keyword.FEAR)) {

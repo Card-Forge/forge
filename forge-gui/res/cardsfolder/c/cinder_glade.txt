@@ -4,5 +4,5 @@ Types:Land Mountain Forest
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | Description$ CARDNAME enters the battlefield tapped unless you control two or more basic lands.
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar | ConditionSVarCompare$ LE1 | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
-SVar:ETBCheckSVar:Count$LastStateBattlefield Land.Basic+YouCtrl
+SVar:ETBCheckSVar:Count$Valid Land.Basic+YouCtrl
 Oracle:({T}: Add {R} or {G}.)\nCinder Glade enters the battlefield tapped unless you control two or more basic lands.

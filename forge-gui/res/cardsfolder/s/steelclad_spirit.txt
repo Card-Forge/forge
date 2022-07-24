@@ -3,8 +3,9 @@ ManaCost:1 U
 Types:Creature Spirit
 PT:3/3
 K:Defender
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever an enchantment enters the battlefield under your control, CARDNAME can attack this turn as though it didn't have defender.
-SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME can attack as though it didn't have defender.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Enchantment.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever an enchantment enters the battlefield under your control, CARDNAME can attack this turn as though it didn't have defender.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ CanAttack
+SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.EffectSource | Description$ EFFECTSOURCE can attack this turn as though it didn't have defender.
 SVar:BuffedBy:Enchantment
 DeckHints:Type$Enchantment
 Oracle:Defender\nWhenever an enchantment enters the battlefield under your control, Steelclad Spirit can attack this turn as though it didn't have defender.

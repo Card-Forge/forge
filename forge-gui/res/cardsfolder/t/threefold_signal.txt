@@ -1,0 +1,8 @@
+Name:Threefold Signal
+ManaCost:3
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 3.
+SVar:TrigScry:DB$ Scry | ScryNum$ 3
+S:Mode$ Continuous | Affected$ Card.YouCtrl+numColorsEQ3 | AffectedZone$ Stack | AddKeyword$ Replicate:3 | Description$ Each spell you cast that's exactly three colors has replicate {3}. (When you cast it, copy it for each time you paid its replicate cost. You may choose new targets for the copies. A copy of a permanent spell becomes a token.)
+AI:RemoveDeck:Random
+Oracle:When Threefold Signal enters the battlefield, scry 3.\nEach spell you cast that's exactly three colors has replicate {3}. (When you cast it, copy it for each time you paid its replicate cost. You may choose new targets for the copies. A copy of a permanent spell becomes a token.)

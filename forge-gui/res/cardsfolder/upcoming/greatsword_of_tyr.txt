@@ -1,0 +1,10 @@
+Name:Greatsword of Tyr
+ManaCost:1 W
+Types:Artifact Equipment
+T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigPut | TriggerDescription$ Whenever equipped creature attacks, put a +1/+1 counter on it and tap up to one target creature defending player controls.
+SVar:TrigPut:DB$ PutCounter | Defined$ Equipped | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | ValidTgts$ Creature | TargetsWithDefinedController$ TriggeredDefendingPlayer | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature defending player controls
+SVar:HasAttackEffect:TRUE
+DeckHints:Ability$Counters
+K:Equip:W
+Oracle:Whenever equipped creature attacks, put a +1/+1 counter on it and tap up to one target creature defending player controls.\nEquip {W} ({W}: Attach to target creature you control. Equip only as a sorcery.)

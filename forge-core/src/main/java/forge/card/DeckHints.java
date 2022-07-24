@@ -14,6 +14,7 @@ import com.google.common.collect.Iterables;
 
 import forge.item.PaperCard;
 import forge.util.PredicateString.StringOp;
+import forge.util.collect.FCollection;
 
 /**
  * DeckHints provides the ability for a Card to "want" another Card or type of
@@ -73,11 +74,25 @@ public class DeckHints {
             return false;
         }
         for (Pair<Type, String> filter : filters) {
-            if (filter.getLeft() == type && filter.getRight().equals(hint)) {
+            if (filter.getLeft() == type && filter.getRight().contains(hint)) {
                 return true;
             }
         }
         return false;
+    }
+    public boolean is(Type type, String hints[]) {
+        if (filters == null) {
+            return false;
+        }
+        for (String hint : hints) {
+            for (Pair<Type, String> filter : filters) {
+                if (filter.getLeft() == type && filter.getRight().equals(hint)) {
+                    continue;
+                }
+            }
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -95,6 +110,10 @@ public class DeckHints {
             String param = pair.getRight();
             Iterable<PaperCard> cards = getCardsForFilter(cardList, type, param);
             if (cards != null) {
+                // if a type is used more than once intersect respective matches
+                if (ret.get(type) != null) {
+                    Iterables.retainAll(cards, new FCollection<>(ret.get(type)));
+                }
                 ret.put(type, cards);
             }
         }
@@ -143,13 +162,16 @@ public class DeckHints {
 
     private Iterable<PaperCard> getCardsForFilter(Iterable<PaperCard> cardList, Type type, String param) {
         List<PaperCard> cards = new ArrayList<>();
+
+        // this is case ABILITY, but other types can also use this when the implicit parsing would miss
+        String[] abilities = param.split("\\|");
+        for (String ability : abilities) {
+            Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHas(type, ability), PaperCard.FN_GET_RULES));
+        }
+        // bonus if a DeckHas can satisfy the type with multiple ones
+        Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHasExactly(type, abilities), PaperCard.FN_GET_RULES));
+
         switch (type) {
-            case ABILITY:
-                String[] abilities = param.split("\\|");
-                for (String ability : abilities) {
-                    Iterables.addAll(cards, getMatchingItems(cardList, CardRulesPredicates.deckHas(Type.ABILITY, ability), PaperCard.FN_GET_RULES));
-                }
-                break;
             case COLOR:
                 String[] colors = param.split("\\|");
                 for (String color : colors) {
@@ -187,6 +209,7 @@ public class DeckHints {
                 }
                 break;
             case NONE:
+            case ABILITY: // already done above
                 break;
         }
         return cards;

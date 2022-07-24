@@ -656,7 +656,7 @@ public class ComputerUtilMana {
         ManaPool.refundMana(manaSpentToPay, ai, sa);
 
         return manaSources;
-    } // getManaSourcesToPayCost()
+    }
 
     private static boolean payManaCost(final ManaCostBeingPaid cost, final SpellAbility sa, final Player ai, final boolean test, boolean checkPlayable, boolean effect) {
         AiCardMemory.clearMemorySet(ai, MemorySet.PAYS_TAP_COST);
@@ -710,7 +710,7 @@ public class ComputerUtilMana {
                 }
                 manapool.applyCardMatrix(pay);
 
-                for (byte color : MagicColor.WUBRGC) {
+                for (byte color : ManaAtom.MANATYPES) {
                     if (manapool.tryPayCostWithColor(color, sa, cost)) {
                         found = true;
                         break;
@@ -886,7 +886,7 @@ public class ComputerUtilMana {
         }
 
         return true;
-    } // payManaCost()
+    }
 
     private static void resetPayment(List<SpellAbility> payments) {
         for (SpellAbility sa : payments) {
@@ -960,7 +960,6 @@ public class ComputerUtilMana {
 
     private static void setExpressColorChoice(final SpellAbility sa, final Player ai, ManaCostBeingPaid cost,
             ManaCostShard toPay, SpellAbility saPayment) {
-
         AbilityManaPart m = saPayment.getManaPart();
         if (m.isComboMana()) {
             getComboManaChoice(ai, saPayment, sa, cost);
@@ -968,7 +967,7 @@ public class ComputerUtilMana {
         else if (saPayment.getApi() == ApiType.ManaReflected) {
             Set<String> reflected = CardUtil.getReflectableManaColors(saPayment);
 
-            for (byte c : MagicColor.WUBRG) {
+            for (byte c : MagicColor.WUBRGC) {
                 if (ai.getManaPool().canPayForShardWithColor(toPay, c) && reflected.contains(MagicColor.toLongString(c))) {
                     m.setExpressChoice(MagicColor.toShortString(c));
                     return;
@@ -1041,7 +1040,7 @@ public class ComputerUtilMana {
         if (ma.getApi() == ApiType.ManaReflected) {
             Set<String> reflected = CardUtil.getReflectableManaColors(ma);
 
-            for (byte c : MagicColor.WUBRG) {
+            for (byte c : MagicColor.WUBRGC) {
                 if (toPay == ManaCostShard.COLORED_X && !ManaCostBeingPaid.canColoredXShardBePaidByColor(MagicColor.toShortString(c), xManaCostPaidByColor)) {
                     continue;
                 }

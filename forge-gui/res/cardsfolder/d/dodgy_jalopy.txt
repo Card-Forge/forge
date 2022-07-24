@@ -1,0 +1,11 @@
+Name:Dodgy Jalopy
+ManaCost:2 G
+Types:Artifact Vehicle
+PT:*/5
+K:Trample
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the highest mana value among creatures you control.
+SVar:X:Count$HighestCMC_Creature.YouCtrl+inZoneBattlefield
+K:Crew:3
+K:Scavenge:2 G
+DeckHas:Ability$Graveyard|Counters
+Oracle:Trample\nDodgy Jalopy's power is equal to the highest mana value among creatures you control.\nCrew 3\nScavenge {2}{G} ({2}{G}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)

@@ -1,0 +1,14 @@
+[metadata]
+Code=SCH
+Date=2022-07-09
+Name=Store Championships 2022
+Type=Promo
+ScryfallCode=SCH
+
+[cards]
+1 R Flame Slash @Antonio José Manzanedo
+2 R Archmage's Charm @Hector Ortiz
+3 R Dark Confidant @Livia Prima
+4 R Spell Pierce @Andrew Mar
+5 R Gilded Goose @Chris Seaman
+6 C Omnath, Locus of Creation @John Tedrick

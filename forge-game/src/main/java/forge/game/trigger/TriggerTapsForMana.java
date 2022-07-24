@@ -56,11 +56,12 @@ public class TriggerTapsForMana extends Trigger {
     /** {@inheritDoc}
      * @param runParams*/
     @Override
-    public final boolean performTest(final Map<AbilityKey, Object> runParams) {        
-        //Check for tapping
+    public final boolean performTest(final Map<AbilityKey, Object> runParams) {
+        SpellAbility manaAbility = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
+
+        // Caged Sun special case
         if (!hasParam("NoTapCheck")) {
-            final SpellAbility manaAbility = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-            if (manaAbility == null || !manaAbility.getRootAbility().getPayCosts().hasTapCost()) {
+            if (manaAbility == null || !manaAbility.isManaAbility() || !manaAbility.getPayCosts().hasTapCost()) {
                 return false;
             }
         }

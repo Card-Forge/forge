@@ -40,7 +40,7 @@ public class InvestigateEffect extends TokenEffectBase {
         for (final Player p : getTargetPlayers(sa)) {
             for (int i = 0; i < amount; i++) {
                 if (sa.hasParam("Optional") && !p.getController().confirmAction(sa, null,
-                        Localizer.getInstance().getMessage("lblWouldYouLikeInvestigate"))) {
+                        Localizer.getInstance().getMessage("lblWouldYouLikeInvestigate"), null)) {
                     return;
                 }
 

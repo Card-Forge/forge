@@ -1,0 +1,11 @@
+Name:Juvenile Mist Dragon
+ManaCost:3 U U
+Types:Creature Dragon
+PT:4/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Confounding Clouds — When CARDNAME enters the battlefield, for each opponent, tap up to one target creature that player controls. Each of those creatures doesn't untap during its controller's next untap step.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose one target creature that each opponent controls | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Duration$ Permanent
+SVar:OneEach:PlayerCountOpponents$Amount
+SVar:PlayMain1:TRUE
+Oracle:Flying\nConfounding Clouds — When Juvenile Mist Dragon enters the battlefield, for each opponent, tap up to one target creature that player controls. Each of those creatures doesn't untap during its controller's next untap step.

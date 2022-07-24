@@ -1,0 +1,6 @@
+[format]
+Name:Standard (ORI)
+Type:Archived
+Subtype:Standard
+Effective:2015-07-17
+Sets:THS, BNG, JOU, M15, KTK, FRF, UGF, DTK, ORI

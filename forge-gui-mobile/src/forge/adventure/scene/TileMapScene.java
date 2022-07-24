@@ -92,6 +92,10 @@ public class TileMapScene extends HudScene {
         tiledMapRenderer.loadMap(map, "");
     }
 
+    public boolean inTown() {
+        return "town".equalsIgnoreCase(rootPoint.getData().type);
+    }
+
     PointOfInterest rootPoint;
     String oldMap;
 

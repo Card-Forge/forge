@@ -9,9 +9,7 @@ import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GlobalRuleChange;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.player.Player;
-import forge.game.player.PlayerCollection;
 import forge.game.zone.ZoneType;
 import forge.util.collect.FCollectionView;
 import forge.util.maps.LinkedHashMapToAmount;
@@ -22,11 +20,9 @@ public class GlobalAttackRestrictions {
 
     private final int max;
     private final MapToAmount<GameEntity> defenderMax;
-    private final PlayerCollection mustBeAttackedByEachOpp;
-    private GlobalAttackRestrictions(final int max, final MapToAmount<GameEntity> defenderMax, PlayerCollection mustBeAttackedByEachOpp) {
+    private GlobalAttackRestrictions(final int max, final MapToAmount<GameEntity> defenderMax) {
         this.max = max;
         this.defenderMax = defenderMax;
-        this.mustBeAttackedByEachOpp = mustBeAttackedByEachOpp;
     }
 
     public int getMax() {
@@ -36,17 +32,17 @@ public class GlobalAttackRestrictions {
         return defenderMax;
     }
 
-    public boolean isLegal(final Map<Card, GameEntity> attackers, final CardCollection possibleAttackers) {
-        return !getViolations(attackers, possibleAttackers, true).isViolated();
+    public boolean isLegal(final Map<Card, GameEntity> attackers) {
+        return !getViolations(attackers, true).isViolated();
     }
 
-    public GlobalAttackRestrictionViolations getViolations(final Map<Card, GameEntity> attackers, final CardCollection possibleAttackers) {
-        return getViolations(attackers, possibleAttackers, false);
+    public GlobalAttackRestrictionViolations getViolations(final Map<Card, GameEntity> attackers) {
+        return getViolations(attackers, false);
     }
-    private GlobalAttackRestrictionViolations getViolations(final Map<Card, GameEntity> attackers, final CardCollection possibleAttackers, final boolean returnQuickly) {
+    private GlobalAttackRestrictionViolations getViolations(final Map<Card, GameEntity> attackers, final boolean returnQuickly) {
         final int nTooMany = max < 0 ? 0 : attackers.size() - max;
         if (returnQuickly && nTooMany > 0) {
-            return new GlobalAttackRestrictionViolations(nTooMany, MapToAmountUtil.emptyMap(), MapToAmountUtil.emptyMap());
+            return new GlobalAttackRestrictionViolations(nTooMany, MapToAmountUtil.emptyMap());
         }
 
         final MapToAmount<GameEntity> defenderTooMany = new LinkedHashMapToAmount<>(defenderMax.size());
@@ -77,58 +73,24 @@ public class GlobalAttackRestrictions {
             }
         }
 
-        final MapToAmount<GameEntity> defenderTooFew = new LinkedHashMapToAmount<>(defenderMax.size());
-        for (final GameEntity mandatoryDef : mustBeAttackedByEachOpp) {
-            // check to ensure that this defender can even legally be attacked in the first place
-            boolean canAttackThisDef = false;
-            for (Card c : possibleAttackers) {
-                if (CombatUtil.canAttack(c, mandatoryDef) && null == CombatUtil.getAttackCost(c.getGame(), c, mandatoryDef)) {
-                    canAttackThisDef = true;
-                    break;
-                }
-            }
-            if (!canAttackThisDef) {
-                continue;
-            }
-
-            boolean isAttacked = false;
-            for (final GameEntity defender : attackers.values()) {
-                if (defender.equals(mandatoryDef)) {
-                    isAttacked = true;
-                    break;
-                } else if (defender instanceof Card && ((Card)defender).getController().equals(mandatoryDef)) {
-                    isAttacked = true;
-                    break;
-                }
-            }
-            if (!isAttacked) {
-                defenderTooFew.add(mandatoryDef);
-            }
-        }
-
-        return new GlobalAttackRestrictionViolations(nTooMany, defenderTooMany, defenderTooFew);
+        return new GlobalAttackRestrictionViolations(nTooMany, defenderTooMany);
     }
 
     final class GlobalAttackRestrictionViolations {
         private final boolean isViolated;
         private final int globalTooMany;
         private final MapToAmount<GameEntity> defenderTooMany;
-        private final MapToAmount<GameEntity> defenderTooFew;
 
-        public GlobalAttackRestrictionViolations(final int globalTooMany, final MapToAmount<GameEntity> defenderTooMany, final MapToAmount<GameEntity> defenderTooFew) {
-            this.isViolated = globalTooMany > 0 || !defenderTooMany.isEmpty() || !defenderTooFew.isEmpty();
+        public GlobalAttackRestrictionViolations(final int globalTooMany, final MapToAmount<GameEntity> defenderTooMany) {
+            this.isViolated = globalTooMany > 0 || !defenderTooMany.isEmpty();
             this.globalTooMany = globalTooMany;
             this.defenderTooMany = defenderTooMany;
-            this.defenderTooFew = defenderTooFew;
         }
         public boolean isViolated() {
             return isViolated;
         }
         public int getGlobalTooMany() {
             return globalTooMany;
-        }
-        public MapToAmount<GameEntity> getDefenderTooFew() {
-            return defenderTooFew;
         }
         public MapToAmount<GameEntity> getDefenderTooMany() {
             return defenderTooMany;
@@ -147,7 +109,6 @@ public class GlobalAttackRestrictions {
     public static GlobalAttackRestrictions getGlobalRestrictions(final Player attackingPlayer, final FCollectionView<GameEntity> possibleDefenders) {
         int max = -1;
         final MapToAmount<GameEntity> defenderMax = new LinkedHashMapToAmount<>(possibleDefenders.size());
-        final PlayerCollection mustBeAttacked = new PlayerCollection();
         final Game game = attackingPlayer.getGame();
 
         /* if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerATurn)) {
@@ -171,14 +132,6 @@ public class GlobalAttackRestrictions {
             }
         }
 
-        for (final Card card : game.getCardsIn(ZoneType.Battlefield)) {
-            if (card.hasKeyword("Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.")) {
-                if (attackingPlayer.isOpponentOf(card.getController())) {
-                    mustBeAttacked.add(card.getController());
-                }
-            }
-        }
-
         for (final GameEntity defender : possibleDefenders) {
             final int defMax = getMaxAttackTo(defender);
             if (defMax != -1) {
@@ -190,7 +143,7 @@ public class GlobalAttackRestrictions {
             max = Ints.min(max, defenderMax.countAll());
         }
 
-        return new GlobalAttackRestrictions(max, defenderMax, mustBeAttacked);
+        return new GlobalAttackRestrictions(max, defenderMax);
     }
 
     /**

@@ -209,6 +209,16 @@ public final class CardRulesPredicates {
         };
     }
 
+    public static Predicate<CardRules> deckHasExactly(final DeckHints.Type type, final String has[]) {
+        return new Predicate<CardRules>() {
+            @Override
+            public boolean apply(final CardRules card) {
+                DeckHints deckHas = card.getAiHints().getDeckHas();
+                return deckHas != null && deckHas.isValid() && deckHas.is(type, has);
+            }
+        };
+    }
+
     /**
      * Core type.
      *

@@ -3,7 +3,7 @@ ManaCost:W
 Types:Enchantment Aura
 K:Enchant Plains
 A:SP$ Attach | Cost$ W | ValidTgts$ Plains | AILogic$ Pump
-A:AB$ Animate | Cost$ 2 | Defined$ Enchanted | Power$ 2 | Toughness$ 5 | Types$ Creature,Spirit | Colors$ White | Triggers$ PseudoLifelink | sVars$ GenjuTrigGain,GenjuX | SpellDescription$ Until end of turn, enchanted Plains becomes a 2/5 white Spirit creature with "Whenever this creature deals damage, its controller gains that much life." It's still a land.
+A:AB$ Animate | Cost$ 2 | Defined$ Enchanted | Power$ 2 | Toughness$ 5 | Types$ Creature,Spirit | Colors$ White | Triggers$ PseudoLifelink | SpellDescription$ Until end of turn, enchanted Plains becomes a 2/5 white Spirit creature with "Whenever this creature deals damage, its controller gains that much life." It's still a land.
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigReturnOwner | OptionalDecider$ You | TriggerDescription$ When enchanted Plains is put into a graveyard, you may return CARDNAME from your graveyard to your hand.
 SVar:TrigReturnOwner:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:PseudoLifelink:Mode$ DamageDealtOnce | ValidSource$ Card.Self | Execute$ GenjuTrigGain | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage, you gain that much life.

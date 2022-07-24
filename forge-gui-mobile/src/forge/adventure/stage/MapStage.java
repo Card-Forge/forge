@@ -2,7 +2,10 @@ package forge.adventure.stage;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;
@@ -14,10 +17,13 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.Scaling;
 import forge.Forge;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
@@ -27,11 +33,19 @@ import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
+import forge.card.ColorSet;
+import forge.deck.Deck;
+import forge.deck.DeckProxy;
+import forge.gui.FThreads;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
-import java.util.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static forge.adventure.util.Paths.MANA_ATLAS;
 
 /**
  * Stage to handle tiled maps for points of interests
@@ -41,7 +55,7 @@ public class MapStage extends GameStage {
     Array<MapActor> actors = new Array<>();
 
     TiledMap map;
-    ArrayList<Rectangle>[][] collision;
+    Array<Rectangle>[][] collision;
     private float tileHeight;
     private float tileWidth;
     private float width;
@@ -55,12 +69,11 @@ public class MapStage extends GameStage {
     private final Vector2 oldPosition3 = new Vector2();
     private final Vector2 oldPosition4 = new Vector2();
     private boolean isLoadingMatch = false;
-    private Map<String, Byte> mapFlags = new HashMap<>(); //Stores local map flags. These aren't available outside this map.
+    private HashMap<String, Byte> mapFlags = new HashMap<>(); //Stores local map flags. These aren't available outside this map.
 
     private Dialog dialog;
     private Stage dialogStage;
     private boolean dialogOnlyInput;
-
 
     //Map properties.
     //These maps are defined as embedded properties within the Tiled maps.
@@ -131,7 +144,7 @@ public class MapStage extends GameStage {
         return false;
     }
 
-    final ArrayList<Rectangle> currentCollidingRectangles = new ArrayList<>();
+    final Array<Rectangle> currentCollidingRectangles = new Array<>();
 
     @Override
     public void prepareCollision(Vector2 pos, Vector2 direction, Rectangle boundingRect) {
@@ -190,9 +203,111 @@ public class MapStage extends GameStage {
         text += E.getDescription();
         Label L = Controls.newLabel(text);
         L.setWrap(true);
-        dialog.getContentTable().add(L).width(260f);
-        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(260f);
+        dialog.getContentTable().add(L).width(250f);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(250f);
         dialog.setKeepWithinStage(true);
+        showDialog();
+    }
+    public void showImageDialog(String message, Texture texture) {
+        dialog.getContentTable().clear();
+        dialog.getButtonTable().clear();
+        if (texture != null) {
+            TextureRegion tr = new TextureRegion(texture);
+            tr.flip(true, true);
+            Image image = new Image(tr);
+            image.setScaling(Scaling.fit);
+            dialog.getContentTable().add(image).height(100);
+            dialog.getContentTable().add().row();
+        }
+        Label L = Controls.newLabel(message);
+        L.setWrap(true);
+        dialog.getContentTable().add(L).width(250f);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(250f);
+        dialog.setKeepWithinStage(true);
+        setDialogStage(GameHUD.getInstance());
+        showDialog();
+    }
+    public void showDeckAwardDialog(String message, Deck deck) {
+        dialog.getContentTable().clear();
+        dialog.getButtonTable().clear();
+        if (deck != null) {
+            TextureAtlas atlas = Config.instance().getAtlas(MANA_ATLAS);
+            ColorSet deckColor = DeckProxy.getColorIdentity(deck);
+            if (deckColor.isColorless()) {
+                Image pixC = new Image(atlas.createSprite("pixC"));
+                pixC.setScaling(Scaling.fit);
+                dialog.getContentTable().add(pixC).height(20).width(20);
+                dialog.getContentTable().add().row();
+            } else if (deckColor.isMonoColor()) {
+                Image pix = new Image(atlas.createSprite("pixC"));
+                if (deckColor.hasWhite())
+                    pix = new Image(atlas.createSprite("pixW"));
+                else if (deckColor.hasBlue())
+                    pix = new Image(atlas.createSprite("pixU"));
+                else if (deckColor.hasBlack())
+                    pix = new Image(atlas.createSprite("pixB"));
+                else if (deckColor.hasRed())
+                    pix = new Image(atlas.createSprite("pixR"));
+                else if (deckColor.hasGreen())
+                    pix = new Image(atlas.createSprite("pixG"));
+                pix.setScaling(Scaling.fit);
+                dialog.getContentTable().add(pix).height(20).width(20);
+                dialog.getContentTable().add().row();
+            } else if (deckColor.isMulticolor()) {
+                Group group = new Group();
+                int mul = 0;
+                if (deckColor.hasWhite()) {
+                    Image pix = new Image(atlas.createSprite("pixW"));
+                    pix.setScaling(Scaling.fit);
+                    pix.setSize(20,20);
+                    pix.setPosition(0, 0);
+                    group.addActor(pix);
+                    mul++;
+                }
+                if (deckColor.hasBlue()) {
+                    Image pix = new Image(atlas.createSprite("pixU"));
+                    pix.setScaling(Scaling.fit);
+                    pix.setSize(20,20);
+                    pix.setPosition(20*mul, 0);
+                    mul++;
+                    group.addActor(pix);
+                }
+                if (deckColor.hasBlack()) {
+                    Image pix = new Image(atlas.createSprite("pixB"));
+                    pix.setScaling(Scaling.fit);
+                    pix.setSize(20,20);
+                    pix.setPosition(20*mul, 0);
+                    mul++;
+                    group.addActor(pix);
+                }
+                if (deckColor.hasRed()) {
+                    Image pix = new Image(atlas.createSprite("pixR"));
+                    pix.setScaling(Scaling.fit);
+                    pix.setSize(20,20);
+                    pix.setPosition(20*mul, 0);
+                    mul++;
+                    group.addActor(pix);
+                }
+                if (deckColor.hasGreen()) {
+                    Image pix = new Image(atlas.createSprite("pixG"));
+                    pix.setScaling(Scaling.fit);
+                    pix.setSize(20,20);
+                    pix.setPosition(20*mul, 0);
+                    mul++;
+                    group.addActor(pix);
+                }
+                group.setHeight(20);
+                group.setWidth(20*mul);
+                dialog.getContentTable().add(group).align(Align.center);
+                dialog.getContentTable().add().row();
+            }
+        }
+        Label L = Controls.newLabel(message);
+        L.setWrap(true);
+        dialog.getContentTable().add(L).width(240);
+        dialog.getButtonTable().add(Controls.newTextButton("OK", this::hideDialog)).width(240);
+        dialog.setKeepWithinStage(true);
+        setDialogStage(GameHUD.getInstance());
         showDialog();
     }
 
@@ -212,7 +327,7 @@ public class MapStage extends GameStage {
         tileHeight = Float.parseFloat(map.getProperties().get("tileheight").toString());
         tileWidth = Float.parseFloat(map.getProperties().get("tilewidth").toString());
         setBounds(width * tileWidth, height * tileHeight);
-        collision = new ArrayList[(int) width][(int) height];
+        collision = new Array[(int) width][(int) height];
 
         //Load dungeon effects.
         MapProperties MP = map.getProperties();
@@ -247,8 +362,8 @@ public class MapStage extends GameStage {
         for (int x = 0; x < layer.getWidth(); x++) {
             for (int y = 0; y < layer.getHeight(); y++) {
                 if (collision[x][y] == null)
-                    collision[x][y] = new ArrayList<>();
-                ArrayList<Rectangle> map = collision[x][y];
+                    collision[x][y] = new Array<>();
+                Array<Rectangle> map = collision[x][y];
                 TiledMapTileLayer.Cell cell = layer.getCell(x, y);
                 if (cell == null)
                     continue;
@@ -355,6 +470,12 @@ public class MapStage extends GameStage {
                             }
                         }));
                         break;
+                    case "spellsmith":
+                        addMapActor(obj, new OnCollide(new Runnable() {
+                            @Override
+                            public void run() { Forge.switchScene(SceneType.SpellSmithScene.instance); }
+                        }));
+                        break;
                     case "exit":
                         addMapActor(obj, new OnCollide(new Runnable() {
                             @Override
@@ -373,20 +494,19 @@ public class MapStage extends GameStage {
                     case "shop":
                         String shopList = prop.get("shopList").toString();
                         shopList=shopList.replaceAll("\\s","");
-                        List possibleShops = Arrays.asList(shopList.split(","));
+                        Array<String> possibleShops = new Array<>(shopList.split(","));
                         Array<ShopData> shops;
-                        if (possibleShops.size() == 0 || shopList.equals(""))
+                        if (possibleShops.size == 0 || shopList.equals(""))
                             shops = WorldData.getShopList();
                         else {
                             shops = new Array<>();
                             for (ShopData data : new Array.ArrayIterator<>(WorldData.getShopList())) {
-                                if (possibleShops.contains(data.name)) {
+                                if (possibleShops.contains(data.name, false)) {
                                     shops.add(data);
                                 }
                             }
                         }
-                        if (shops.size == 0)
-                            continue;
+                        if(shops.size == 0) continue;
 
                         ShopData data = shops.get(WorldSave.getCurrentSave().getWorld().getRandom().nextInt(shops.size));
                         Array<Reward> ret = new Array<>();
@@ -406,6 +526,8 @@ public class MapStage extends GameStage {
                             }
                         }
                         break;
+                    default:
+                        System.err.println("Unexpected value: " + type);
                 }
             }
         }
@@ -494,16 +616,14 @@ public class MapStage extends GameStage {
         }
         currentMob = null;
     }
-    public void removeAllEnemies()
-    {
-        List<Integer> idsToRemove=new ArrayList<>();
+    public void removeAllEnemies() {
+        Array<Integer> idsToRemove=new Array<>();
         for (MapActor actor : new Array.ArrayIterator<>(actors)) {
-                if (actor instanceof EnemySprite) {
-                    idsToRemove.add(actor.getObjectId());
-                }
+            if (actor instanceof EnemySprite) {
+                idsToRemove.add(actor.getObjectId());
+            }
         }
-        for(Integer i:idsToRemove)
-            deleteObject(i);
+        for(Integer i:idsToRemove) deleteObject(i);
     }
 
     @Override
@@ -548,27 +668,25 @@ public class MapStage extends GameStage {
         currentMob = mob;
         player.setAnimation(CharacterSprite.AnimationTypes.Attack);
         mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
+        SoundSystem.instance.play(SoundEffectType.Block, false);
         Gdx.input.vibrate(50);
-        Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
-        SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
-        if (!isLoadingMatch) {
-            isLoadingMatch = true;
-            Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
-                @Override
-                public void run() {
-                    Forge.clearTransitionScreen();
+        startPause(0.8f, () -> {
+            Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
+            SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
+            DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
+            FThreads.invokeInEdtNowOrLater(() -> {
+                if (!isLoadingMatch) {
+                    isLoadingMatch = true;
+                    Forge.setTransitionScreen(new TransitionScreen(() -> {
+                        duelScene.initDuels(player, mob);
+                        Forge.clearTransitionScreen();
+                        startPause(0.3f, () -> {
+                            if(isInMap && effect != null) duelScene.setDungeonEffect(effect);
+                            Forge.switchScene(SceneType.DuelScene.instance);
+                        });
+                    }, Forge.takeScreenshot(), true, false));
                 }
-            }, ScreenUtils.getFrameBufferTexture(), true, false));
-        }
-        startPause(0.3f, new Runnable() {
-            @Override
-            public void run() {
-                DuelScene S = ((DuelScene) SceneType.DuelScene.instance);
-                S.setEnemy(mob);
-                S.setPlayer(player);
-                if(isInMap && effect != null) S.setDungeonEffect(effect);
-                Forge.switchScene(SceneType.DuelScene.instance);
-            }
+            });
         });
     }
 
@@ -581,11 +699,12 @@ public class MapStage extends GameStage {
     }
 
     public void showDialog() {
-        dialog.show(dialogStage);
+        dialog.show(dialogStage, Actions.show());
+        dialog.setPosition((dialogStage.getWidth() - dialog.getWidth()) / 2, (dialogStage.getHeight() - dialog.getHeight()) / 2);
         dialogOnlyInput=true;
     }
     public void hideDialog() {
-        dialog.hide();
+        dialog.hide(Actions.sequence(Actions.sizeTo(dialog.getOriginX(), dialog.getOriginY(), 0.3f), Actions.hide()));
         dialogOnlyInput=false;
     }
 

@@ -2,11 +2,10 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.util.Lang;
 
 public class BecomeMonarchEffect extends SpellAbilityEffect {
 
@@ -16,8 +15,8 @@ public class BecomeMonarchEffect extends SpellAbilityEffect {
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        sb.append(StringUtils.join(tgtPlayers, ", "));
-        sb.append(" becomes the Monarch.");
+        sb.append(Lang.joinHomogenous(tgtPlayers)).append(tgtPlayers.size() == 1 ? " becomes" : " become");
+        sb.append(" the monarch.");
 
         return sb.toString();
     }

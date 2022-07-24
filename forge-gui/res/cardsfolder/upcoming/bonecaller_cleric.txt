@@ -1,0 +1,7 @@
+Name:Bonecaller Cleric
+ManaCost:1 B
+Types:Creature Human Cleric
+PT:2/1
+A:AB$ ChangeZone | Cost$ 3 B Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SorcerySpeed$ True | SpellDescription$ Return target creature card from your graveyard to the battlefield.
+DeckHas:Ability$Sacrifice|Graveyard
+Oracle:{3}{B}, Sacrifice Bonecaller Cleric: Return target creature card from your graveyard to the battlefield. Activate only as a sorcery.

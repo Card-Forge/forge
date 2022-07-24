@@ -319,11 +319,39 @@ public class PlayerPanel extends FContainer {
     }
 
     public void initialize(FPref savedStateSetting, FPref savedStateSettingCommander, FPref savedStateSettingOathbreaker, FPref savedStateSettingTinyLeader, FPref savedStateSettingBrawl, DeckType defaultDeckType) {
-        deckChooser.initialize(savedStateSetting, defaultDeckType);
-        lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
-        lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
-        lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
-        lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
+        //order by last variant..
+        Set<GameType> gameTypes = FModel.getPreferences().getGameType(FPref.UI_APPLIED_VARIANTS);
+        if (gameTypes.contains(GameType.Commander)) {
+            lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
+            lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
+            lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
+            lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
+            deckChooser.initialize(savedStateSetting, defaultDeckType);
+        } else if (gameTypes.contains(GameType.Oathbreaker)) {
+            lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
+            lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
+            lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
+            lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
+            deckChooser.initialize(savedStateSetting, defaultDeckType);
+        } else if (gameTypes.contains(GameType.TinyLeaders)) {
+            lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
+            lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
+            lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
+            lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
+            deckChooser.initialize(savedStateSetting, defaultDeckType);
+        } else if (gameTypes.contains(GameType.Brawl)) {
+            lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
+            lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
+            lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
+            lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
+            deckChooser.initialize(savedStateSetting, defaultDeckType);
+        } else {
+            deckChooser.initialize(savedStateSetting, defaultDeckType);
+            lstCommanderDecks.initialize(savedStateSettingCommander, DeckType.COMMANDER_DECK);
+            lstOathbreakerDecks.initialize(savedStateSettingOathbreaker, DeckType.OATHBREAKER_DECK);
+            lstTinyLeadersDecks.initialize(savedStateSettingTinyLeader, DeckType.TINY_LEADERS_DECK);
+            lstBrawlDecks.initialize(savedStateSettingBrawl, DeckType.BRAWL_DECK);
+        }
         lstPlanarDecks.initialize(null, DeckType.RANDOM_DECK);
         lstSchemeDecks.initialize(null, DeckType.RANDOM_DECK);
     }

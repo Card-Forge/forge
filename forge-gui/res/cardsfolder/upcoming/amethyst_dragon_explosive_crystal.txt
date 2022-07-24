@@ -1,0 +1,16 @@
+Name:Amethyst Dragon
+ManaCost:4 R R
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Haste
+AlternateMode:Adventure
+Oracle:Flying, haste
+
+ALTERNATE
+
+Name:Explosive Crystal
+ManaCost:4 R
+Types:Sorcery Adventure
+A:SP$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to distribute damage to | NumDmg$ 4 | TargetMin$ 1 | TargetMax$ 4 | DividedAsYouChoose$ 4 | SpellDescription$ CARDNAME deals 4 damage divided as you choose among any number of targets.
+Oracle:Explosive Crystal deals 4 damage divided as you choose among any number of targets.

@@ -45,6 +45,7 @@ public class CardCollections {
     private IStorage<Deck> oathbreaker;
     private IStorage<Deck> tinyLeaders;
     private IStorage<Deck> brawl;
+    private IStorage<Deck> genetic;
 
     public CardCollections() {
     }
@@ -144,5 +145,13 @@ public class CardCollections {
                     new DeckStorage(new File(ForgeConstants.DECK_BRAWL_DIR), ForgeConstants.DECK_BASE_DIR));
         }
         return brawl;
+    }
+
+    public final IStorage<Deck> getGeneticAIDecks() {
+        if (genetic == null) {
+            genetic = new StorageImmediatelySerialized<>("Genetic AI decks",
+                    new DeckStorage(new File(ForgeConstants.GENETIC_AI_DECK_DIR), ForgeConstants.RES_DIR));
+        }
+        return genetic;
     }
 }

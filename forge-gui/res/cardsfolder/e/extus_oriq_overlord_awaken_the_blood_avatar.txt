@@ -4,7 +4,7 @@ Types:Legendary Creature Human Warlock
 PT:2/4
 K:Double Strike
 T:Mode$ SpellCastOrCopy | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Magecraft — Whenever you cast or copy an instant or sorcery spell, return target nonlegendary creature card from your graveyard to your hand.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target nonlegendary creature in your graveyard | ValidTgts$ Creature.YouOwn+nonLegendary
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target nonlegendary creature card in your graveyard | ValidTgts$ Creature.YouOwn+nonLegendary
 DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$Graveyard|Sacrifice|Token
 AlternateMode:Modal

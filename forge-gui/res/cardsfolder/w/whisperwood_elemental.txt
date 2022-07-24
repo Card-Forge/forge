@@ -4,7 +4,7 @@ Types:Creature Elemental
 PT:4/4
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigManifest | TriggerDescription$ At the beginning of your end step, manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card)
 SVar:TrigManifest:DB$ Manifest | Amount$ 1 | Defined$ TopOfLibrary
-A:AB$ AnimateAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl+nonToken+faceUp | Triggers$ Trig | sVars$ WhisperwoodElementalEff | SpellDescription$ Until end of turn, face-up, nontoken creatures you control gain "When this creature dies, manifest the top card of your library."
+A:AB$ AnimateAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl+nonToken+faceUp | Triggers$ Trig | SpellDescription$ Until end of turn, face-up, nontoken creatures you control gain "When this creature dies, manifest the top card of your library."
 SVar:Trig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ WhisperwoodElementalEff | TriggerDescription$ When this creature dies, manifest the top card of your library.
 SVar:WhisperwoodElementalEff:DB$ Manifest | Amount$ 1 | Defined$ TopOfLibrary
 Oracle:At the beginning of your end step, manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nSacrifice Whisperwood Elemental: Until end of turn, face-up nontoken creatures you control gain "When this creature dies, manifest the top card of your library."

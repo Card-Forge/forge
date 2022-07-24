@@ -1,0 +1,9 @@
+Name:Ascend from Avernus
+ManaCost:X W W W
+Types:Sorcery
+A:SP$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouOwn+cmcLEX,Planeswalker.YouOwn+cmcLEX | SubAbility$ DBChange | SpellDescription$ Return all creature and planeswalker cards with mana value X or less from your graveyard to the battlefield.
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
+SVar:X:Count$xPaid
+DeckHas:Ability$Graveyard
+DeckHints:Type$Planeswalker & Ability$Discard|Sacrifice
+Oracle:Return all creature and planeswalker cards with mana value X or less from your graveyard to the battlefield. Exile Ascend from Avernus.

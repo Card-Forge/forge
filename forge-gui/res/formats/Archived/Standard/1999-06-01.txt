@@ -1,0 +1,7 @@
+[format]
+Name:Standard (6ED)
+Type:Archived
+Subtype:Standard
+Effective:1999-06-01
+Sets:TMP, STH, EXO, USG, ULG, 6ED
+Banned:Dream Halls; Earthcraft; Fluctuator; Lotus Petal; Memory Jar; Recurring Nightmare; Time Spiral; Tolarian Academy; Windfall

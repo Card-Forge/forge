@@ -6,7 +6,7 @@
         <packaging.type>jar</packaging.type>
         <build.min.memory>-Xms1024m</build.min.memory>
         <build.max.memory>-Xmx1536m</build.max.memory>
-        <alpha-version>1.6.49.001</alpha-version>
+        <alpha-version>1.6.53.001</alpha-version>
         <sign.keystore>keystore</sign.keystore>
         <sign.alias>alias</sign.alias>
         <sign.storepass>storepass</sign.storepass>
@@ -19,7 +19,7 @@
     <parent>
         <artifactId>forge</artifactId>
         <groupId>forge</groupId>
-        <version>1.6.50-SNAPSHOT</version>
+        <version>1.6.54-SNAPSHOT</version>
     </parent>
 
     <artifactId>forge-gui-android</artifactId>
@@ -98,7 +98,7 @@
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx-backend-android</artifactId>
-            <version>1.10.0</version>
+            <version>1.11.0</version>
         </dependency>
         <dependency>
             <groupId>io.sentry</groupId>
@@ -165,7 +165,7 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.8.5</version>
+            <version>2.9.0</version>
         </dependency>
     </dependencies>
 

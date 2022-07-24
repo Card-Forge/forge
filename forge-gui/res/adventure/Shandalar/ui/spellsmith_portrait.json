@@ -1,0 +1,280 @@
+{
+  "width": 270,
+  "height": 480,
+  "yDown": true,
+  "elements": [
+    {
+      "type": "Image",
+      "name": "lastScreen",
+      "width": 270,
+      "height": 480
+    },
+    {
+      "type": "Scroll",
+      "name": "xkUkiUhwoi2ll5rrSpk6-6",
+      "text": "Scroll",
+      "style": "paper",
+      "x": 0,
+      "y": 0,
+      "width": 130,
+      "height": 180
+    },
+    {
+      "type": "Scroll",
+      "name": "xkUkiUhwoi2ll5rrSpk6-3",
+      "text": "Scroll",
+      "style": "paper",
+      "x": 0,
+      "y": 260,
+      "width": 270,
+      "height": 83
+    },
+    {
+      "type": "Scroll",
+      "name": "xkUkiUhwoi2ll5rrSpk6-4",
+      "text": "Scroll",
+      "style": "paper",
+      "x": 0,
+      "y": 360,
+      "width": 270,
+      "height": 53
+    },
+    {
+      "type": "Scroll",
+      "name": "xkUkiUhwoi2ll5rrSpk6-5",
+      "text": "Scroll",
+      "style": "paper",
+      "x": 0,
+      "y": 427,
+      "width": 270,
+      "height": 53
+    },
+    {
+      "type": "Scroll",
+      "name": "xkUkiUhwoi2ll5rrSpk6-2",
+      "text": "Scroll",
+      "style": "paper",
+      "x": 0,
+      "y": 190,
+      "width": 270,
+      "height": 53
+    },
+    {
+      "type": "TextButton",
+      "name": "done",
+      "text": "Done",
+      "x": 175,
+      "y": 150,
+      "width": 70,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "BBlack",
+      "text": "Black",
+      "x": 58,
+      "y": 290,
+      "width": 45,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "BBlue",
+      "text": "Blue",
+      "x": 113,
+      "y": 290,
+      "width": 45,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "BGreen",
+      "text": "Green",
+      "x": 168,
+      "y": 290,
+      "width": 45,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "BRed",
+      "text": "Red",
+      "x": 58,
+      "y": 320,
+      "width": 45,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "BWhite",
+      "text": "White",
+      "x": 113,
+      "y": 320,
+      "width": 45,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "BColorless",
+      "text": "Colorless",
+      "x": 168,
+      "y": 320,
+      "width": 45,
+      "height": 20
+    },
+    {
+      "type": "Label",
+      "name": "gold",
+      "text": "$",
+      "x": 150,
+      "y": 0,
+      "width": 120,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "pull",
+      "text": "Pull",
+      "x": 16,
+      "y": 150,
+      "width": 97,
+      "height": 20
+    },
+    {
+      "type": "Label",
+      "name": "colorLabel",
+      "text": "Colors",
+      "x": 10,
+      "y": 260,
+      "width": 100,
+      "height": 20
+    },
+    {
+      "type": "Label",
+      "name": "vnXYKZJw_P5wMnHa1tH7-3",
+      "text": "Plane",
+      "x": 10,
+      "y": 190,
+      "width": 100,
+      "height": 20
+    },
+    {
+      "type": "SelectBox",
+      "name": "BSelectPlane",
+      "text": "Select Plane",
+      "x": 0,
+      "y": 220,
+      "width": 190,
+      "height": 20
+    },
+    {
+      "type": "Label",
+      "name": "vnXYKZJw_P5wMnHa1tH7-5",
+      "text": "Mana Cost",
+      "x": 10,
+      "y": 360,
+      "width": 100,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "B02",
+      "text": "0-2",
+      "x": 20,
+      "y": 390,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "B35",
+      "text": "3-5",
+      "x": 80,
+      "y": 390,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "B68",
+      "text": "6-8",
+      "x": 140,
+      "y": 390,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "B9X",
+      "text": "9+",
+      "x": 200,
+      "y": 390,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "Label",
+      "name": "vnXYKZJw_P5wMnHa1tH7-10",
+      "text": "Rarity",
+      "x": 10,
+      "y": 427,
+      "width": 100,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "BCommon",
+      "text": "Common",
+      "x": 20,
+      "y": 450,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "BUncommon",
+      "text": "Uncommon",
+      "x": 80,
+      "y": 450,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "BRare",
+      "text": "Rare",
+      "x": 140,
+      "y": 450,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "BMythic",
+      "text": "Mythic",
+      "x": 200,
+      "y": 450,
+      "width": 50,
+      "height": 20
+    },
+    {
+      "type": "TextButton",
+      "name": "BResetEdition",
+      "text": "Reset",
+      "x": 195,
+      "y": 220,
+      "width": 70,
+      "height": 20
+    },
+    {
+      "type": "Scroll",
+      "name": "RewardDummy",
+      "text": "Image",
+      "style": "nobg",
+      "x": 10,
+      "y": 10,
+      "width": 110,
+      "height": 130
+    }
+  ]
+}

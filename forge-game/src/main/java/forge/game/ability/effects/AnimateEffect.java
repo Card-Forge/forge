@@ -2,7 +2,9 @@ package forge.game.ability.effects;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
+import com.google.common.collect.Maps;
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
@@ -138,9 +140,18 @@ public class AnimateEffect extends AnimateEffectBase {
         }
 
         // sVars to add to the animated being
-        final List<String> sVars = Lists.newArrayList();
+        Map<String, String> sVarsMap = Maps.newHashMap();
         if (sa.hasParam("sVars")) {
-            sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
+            for (final String s : sa.getParam("sVars").split(",")) {
+                String actualsVar = AbilityUtils.getSVar(sa, s);
+                String name = s;
+                if (actualsVar.startsWith("SVar:")) {
+                    actualsVar = actualsVar.split("SVar:")[1];
+                    name = actualsVar.split(":")[0];
+                    actualsVar = actualsVar.split(":")[1];
+                }
+                sVarsMap.put(name, actualsVar);
+            }
         }
 
         List<Card> tgts = getCardsfromTargets(sa);
@@ -151,7 +162,7 @@ public class AnimateEffect extends AnimateEffectBase {
                     ? TextUtil.fastReplace(sa.getParam("OptionQuestion"), "TARGETS", targets)
                     : getStackDescription(sa);
 
-            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message)) {
+            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, message, null)) {
                 return;
             }
         }
@@ -166,15 +177,8 @@ public class AnimateEffect extends AnimateEffectBase {
             }
 
             // give sVars
-            for (final String s : sVars) {
-                String actualsVar = AbilityUtils.getSVar(sa, s);
-                String name = s;
-                if (actualsVar.startsWith("SVar:")) {
-                    actualsVar = actualsVar.split("SVar:")[1];
-                    name = actualsVar.split(":")[0];
-                    actualsVar = actualsVar.split(":")[1];
-                }
-                c.setSVar(name, actualsVar);
+            if (!sVarsMap.isEmpty()) {
+                c.addChangedSVars(sVarsMap, timestamp, 0);
             }
 
             // give Remembered
@@ -206,8 +210,9 @@ public class AnimateEffect extends AnimateEffectBase {
     protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
-        final List<Card> tgts = getCardsfromTargets(sa);
-        final boolean justOne = tgts.size() == 1;
+        final List<Card> tgts = getDefinedCardsOrTargeted(sa);
+        //possible to be building stack desc before Defined is populated... for now, 0 will default to singular
+        final boolean justOne = tgts.size() <= 1;
 
         if (sa.hasParam("IfDesc")) {
             if (sa.getParam("IfDesc").equals("True") && sa.hasParam("SpellDescription")) {
@@ -264,7 +269,7 @@ public class AnimateEffect extends AnimateEffectBase {
             } else {
                 sb.append("toughness ").append(toughness).append(" ");
             }
-        } else {
+        } else if (sb.length() > initial) {
             sb.append(justOne ? "becomes " : "become ");
         }
 
@@ -291,7 +296,8 @@ public class AnimateEffect extends AnimateEffectBase {
             }
         }
         if (keywords.size() > 0) {
-            sb.append("and gains ").append(Lang.joinHomogenous(keywords).toLowerCase()).append(" ");
+            sb.append(sb.length() > initial ? "and " : "").append(" gains ");
+            sb.append(Lang.joinHomogenous(keywords).toLowerCase()).append(" ");
         }
         // sb.append(abilities)
         // sb.append(triggers)
@@ -316,6 +322,20 @@ public class AnimateEffect extends AnimateEffectBase {
             sb.append(justOne ? "attacks" : "attack").append(" this turn if able");
         }
         sb.append(".");
+
+        if (sa.hasParam("AtEOT")) {
+            sb.append(" ");
+            final String eot = sa.getParam("AtEOT");
+            final String pronoun = justOne ? "it" : "them";
+            if (eot.equals("Hand")) {
+                sb.append("Return ").append(pronoun).append(" to your hand");
+            } else if (eot.equals("SacrificeCtrl")) {
+                sb.append(justOne ? "Its controller sacrifices it" : "Their controllers sacrifice them");
+            } else { //Sacrifice,Exile
+                sb.append(eot).append(" ").append(pronoun);
+            }
+            sb.append(" at the beginning of the next end step.");
+        }
 
         return sb.toString();
     }

@@ -141,7 +141,7 @@ public class MapDialog {
         return false;
     }
 
-    boolean isConditionOk(DialogData.ConditionData[] data) {
+    public boolean isConditionOk(DialogData.ConditionData[] data) {
         if( data==null ) return true;
         AdventurePlayer player = Current.player();
         for(DialogData.ConditionData condition:data) {

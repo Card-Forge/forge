@@ -1,0 +1,8 @@
+Name:Silvanus's Invoker
+ManaCost:2 G
+Types:Creature Dragon Druid
+PT:3/2
+A:AB$ Untap | Cost$ 8 | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | SubAbility$ DBAnimate | PrecostDesc$ Conjure Elemental - | SpellDescription$ Untap target land you control. It becomes an 8/8 Elemental creature with trample and haste until end of turn. It's still a land.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Power$ 8 | Toughness$ 8 | Keywords$ Trample & Haste | Types$ Creature,Elemental |
+DeckHas:Type$Elemental
+Oracle:Conjure Elemental - {8}: Untap target land you control. It becomes an 8/8 Elemental creature with trample and haste until end of turn. It's still a land. 

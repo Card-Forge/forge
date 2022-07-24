@@ -1,5 +1,5 @@
 #Add one announcement per line
 Get in the discord if you aren't yet. https://discord.gg/3v9JCVr
-Kamigawa: Neon Dynasty (NEO) and Kamigawa: Neon Dynasty Commander (NEC) are fully implemented.
-Mobile Forge and Mobile backports now integrate Adventure Mode, an overworld adventure in the spirit of Shandalar.
+The SNC set is fully integrated, as well as most of the NCC cards (several cards are still missing from the latter).
+Historic-type formats have been renamed to Archived to reduce confusion between them and the official sanctioned format. You will need to re-enable them in your preferences.
 *** Android 7 & 8 support is now deprecated. Support will be dropped in an upcoming release. ***

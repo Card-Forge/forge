@@ -122,7 +122,9 @@ public class CounterEffect extends SpellAbilityEffect {
         CardZoneTable table = new CardZoneTable();
         for (final SpellAbility tgtSA : sas) {
             final Card tgtSACard = tgtSA.getHostCard();
-            // should remember even that spell cannot be countered, e.g. Dovescape
+            // should remember even that spell cannot be countered
+            // currently all effects using this are targeted in case the spell gets countered before
+            // so don't need to worry about LKI (else X amounts would be missing)
             if (sa.hasParam("RememberCounteredCMC")) {
                 sa.getHostCard().addRemembered(Integer.valueOf(tgtSACard.getCMC()));
             }
@@ -152,9 +154,7 @@ public class CounterEffect extends SpellAbilityEffect {
             }
 
             if (sa.hasParam("RememberCountered")) {
-                if (sa.getParam("RememberCountered").equals("True")) {
-                    sa.getHostCard().addRemembered(tgtSACard);
-                }
+                sa.getHostCard().addRemembered(tgtSACard);
             }
 
             if (sa.hasParam("RememberSplicedOntoCounteredSpell")) {

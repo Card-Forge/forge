@@ -1,6 +1,0 @@
-[format]
-Name:Block: Zendikar (ZEN)
-Type:Historic
-Subtype:Block
-Effective:2009-10-02
-Sets:ZEN

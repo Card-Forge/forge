@@ -1,0 +1,6 @@
+[format]
+Name:Block: Invasion (INV)
+Type:Archived
+Subtype:Block
+Effective:2000-11-01
+Sets:INV

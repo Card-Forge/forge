@@ -1,0 +1,11 @@
+Name:Parnesse, the Subtle Brush
+ManaCost:2 U B R
+Types:Legendary Creature Vampire Wizard
+PT:4/4
+T:Mode$ BecomesTarget | ValidTarget$ You,Permanent.YouCtrl+inZoneBattlefield | ValidSource$ Card.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless that player pays 4 life.
+SVar:TrigCounter:DB$ Counter | Defined$ TriggeredSourceSA | UnlessCost$ PayLife<4> | UnlessPayer$ TriggeredSourceSAController
+T:Mode$ SpellCopy | ValidActivatingPlayer$ You | NoResolvingCheck$ True | TriggerZones$ Battlefield | Execute$ TrigTarget | TriggerDescription$ Whenever you copy a spell, up to one target opponent may also copy that spell. They may choose new targets for that copy.
+SVar:TrigTarget:DB$ Pump | ValidTgts$ Opponent | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopySpellAbility | TargetMin$ 0 | TargetMax$ 1 | Defined$ TriggeredSpellAbility | AILogic$ Always | Controller$ Targeted | Optional$ True | MayChooseTarget$ True
+AI:RemoveDeck:Random
+Oracle:Whenever you or a permanent you control becomes the target of a spell or ability an opponent controls, counter that spell or ability unless that player pays 4 life.\nWhenever you copy a spell, up to one target opponent may also copy that spell. They may choose new targets for that copy.

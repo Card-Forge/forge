@@ -1,0 +1,10 @@
+Name:Descent into Avernus
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put two descent counters on CARDNAME. Then each player creates X Treasure tokens and CARDNAME deals X damage to each player, where X is the number of descent counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ DESCENT | CounterNum$ 2 | SubAbility$ DBTreasure
+SVar:DBTreasure:DB$ Token | TokenOwner$ Player | TokenAmount$ X | TokenScript$ c_a_treasure_sac | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | Defined$ Player | NumDmg$ X
+SVar:X:Count$CardCounters.DESCENT
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+Oracle:At the beginning of your upkeep, put two descent counters on Descent into Avernus. Then each player creates X Treasure tokens and Descent into Avernus deals X damage to each player, where X is the number of descent counters on Descent into Avernus.
