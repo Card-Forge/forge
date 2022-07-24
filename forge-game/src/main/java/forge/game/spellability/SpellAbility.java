@@ -1919,39 +1919,22 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         if (splitTargetRestrictions != null) {
             // TODO Ensure that spells with subabilities are processed correctly
 
-            TargetChoices matchTgt = topSA.getTargets();
-
-            if (matchTgt == null) {
-                return false;
-            }
-
             boolean result = false;
-
-            for (final GameObject o : matchTgt) {
-                if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard(), this)) {
-                    result = true;
-                    break;
-                }
-            }
-
-            // spells with subabilities
-            if (!result) {
-                AbilitySub subAb = topSA.getSubAbility();
-                while (subAb != null) {
-                    if (subAb.getTargetRestrictions() != null) {
-                        matchTgt = subAb.getTargets();
-                        if (matchTgt == null) {
-                            continue;
-                        }
-                        for (final GameObject o : matchTgt) {
-                            if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard(), this)) {
-                                result = true;
-                                break;
-                            }
+            SpellAbility subAb = topSA;
+            while (subAb != null && !result) {
+                if (subAb.usesTargeting()) {
+                    TargetChoices matchTgt = subAb.getTargets();
+                    if (matchTgt == null) {
+                        continue;
+                    }
+                    for (final GameObject o : matchTgt) {
+                        if (o.isValid(splitTargetRestrictions.split(","), getActivatingPlayer(), getHostCard(), this)) {
+                            result = true;
+                            break;
                         }
                     }
-                    subAb = subAb.getSubAbility();
                 }
+                subAb = subAb.getSubAbility();
             }
 
             if (!result) {
