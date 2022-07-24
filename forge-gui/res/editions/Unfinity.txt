@@ -8,9 +8,15 @@ ScryfallCode=UNF
 
 [cards]
 3 U Assembled Ensemble @Jakub Kasper
+8 M Far Out @Bram Sels
+33 U Animate Object @Greg Staples
+68 C Carnival Carnivore @Carl Critchlow
 88 R Saw in Half @Sebastian Giacobino
-143 M Killer Cosplay @Leonardo Santanna
+145 M Killer Cosplay @Leonardo Santanna
+162 U Angelic Harold @Aaron J. Riley
+171 M Magar of the Magic Strings @Tomek Larek
 179 U The Space Family Goblinson @Armand Baltazar
+196 U Wicker Picker @Igor Grechanyi
 235 L Plains @Adam Paquette
 236 L Island @Adam Paquette
 237 L Swamp @Adam Paquette
@@ -21,6 +27,8 @@ ScryfallCode=UNF
 242 L Swamp @Adam Paquette
 243 L Mountain @Adam Paquette
 244 L Forest @Adam Paquette
+258 U Angelic Harold
+263 M Magar of the Magic Strings @David Semple
 270 U The Space Family Goblinson @David Semple
 277 R Hallowed Fountain @Piotr Dura
 278 R Watery Grave @Chris Ostrowski
