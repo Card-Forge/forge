@@ -3232,6 +3232,17 @@ public class Player extends GameEntity implements Comparable<Player> {
         this.updateZoneForView(com);
     }
     public String trimKeywords(String keywordTexts) {
+        if (keywordTexts.contains("Protection:")) {
+            List <String> lines = Arrays.asList(keywordTexts.split("\n"));
+            for (int i = 0; i < lines.size(); i++) {
+                if (lines.get(i).startsWith("Protection:")) {
+                    List<String> parts = Arrays.asList(lines.get(i).split(":"));
+                    if (parts.size() > 2) {
+                        keywordTexts = TextUtil.fastReplace(keywordTexts, lines.get(i), parts.get(2));
+                    }
+                }
+            }
+        }
         keywordTexts = TextUtil.fastReplace(keywordTexts,":Card.named", " from ");
         keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.Black:", " from ");
         keywordTexts = TextUtil.fastReplace(keywordTexts, ":Card.Blue:", " from ");

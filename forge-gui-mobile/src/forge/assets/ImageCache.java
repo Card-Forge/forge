@@ -229,7 +229,10 @@ public class ImageCache {
             if (card != null)
                 imageKey = altState ? card.getCardAltImageKey() : card.getCardImageKey();
             if (StringUtils.isBlank(imageKey)) {
-                return defaultImage;
+                if (useDefaultIfNotFound)
+                    return defaultImage;
+                else
+                    return null;
             }
         }
 

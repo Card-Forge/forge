@@ -297,6 +297,7 @@ public class PumpEffect extends SpellAbilityEffect {
         if (sa.hasParam("DefinedKW")) {
             String defined = sa.getParam("DefinedKW");
             String replaced = "";
+            String name = "";
             if (defined.equals("ChosenType")) {
                 replaced = host.getChosenType();
             } else if (defined.equals("ActivatorName")) {
@@ -307,12 +308,28 @@ public class PumpEffect extends SpellAbilityEffect {
                 PlayerCollection players = AbilityUtils.getDefinedPlayers(host, defined, sa);
                 if (players.isEmpty()) return;
                 replaced = "PlayerUID_" + players.get(0).getId();
+                name = players.get(0).getName();
             } else if (defined.equals("ChosenColor")) {
                 String color = host.getChosenColor();
                 replaced = color.substring(0, 1).toUpperCase() + color.substring(1);
             }
             for (int i = 0; i < keywords.size(); i++) {
                 keywords.set(i, TextUtil.fastReplace(keywords.get(i), defined, replaced));
+                if (keywords.get(i).startsWith("Protection:") && !name.equals("")) {
+                    List<String> parts = Arrays.asList(keywords.get(i).split(":"));
+                    String desc = parts.get(2);
+                    if (desc.contains("PlayerUID")) {
+                        parts.set(2, TextUtil.fastReplace(desc, replaced, name));
+                        StringBuilder mod = new StringBuilder();
+                        for (int n = 0; n < parts.size(); n++) {
+                            mod.append(parts.get(n));
+                            if (n + 1 < parts.size()) {
+                                mod.append(":");
+                            }
+                        }
+                        keywords.set(i, mod.toString());
+                    }
+                }
             }
         }
         if (sa.hasParam("DefinedLandwalk")) {
