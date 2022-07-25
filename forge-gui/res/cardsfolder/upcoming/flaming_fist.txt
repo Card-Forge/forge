@@ -1,0 +1,9 @@
+Name:Flaming Fist
+ManaCost:2 W
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ Attacks | AddSVar$ AE | Description$ Commander creatures you own have "Whenever this creature attacks, it gains double strike until end of turn."
+SVar:Attacks:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever this creature attacks, it gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | KW$ Double Strike
+SVar:AE:SVar:HasAttackEffect:TRUE
+AI:RemoveDeck:NonCommander
+Oracle:Commander creatures you own have "Whenever this creature attacks, it gains double strike until end of turn."

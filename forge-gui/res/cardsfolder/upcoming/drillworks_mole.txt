@@ -1,0 +1,7 @@
+Name:Drillworks Mole
+ManaCost:1
+Types:Artifact Creature Mole
+PT:1/1
+A:AB$ PutCounter | Cost$ 2 T | Defined$ Self & Targeted | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.IsCommander+YouCtrl | TgtPrompt$ Select up to one target commander creature you control | CounterType$ P1P1 | SpellDescription$ Put a +1/+1 counter on CARDNAME and a +1/+1 counter on up to one target commander creature you control.
+DeckHas:Ability$Counters
+Oracle:{2}, {T}: Put a +1/+1 counter on Drillworks Mole and a +1/+1 counter on up to one target commander creature you control.
