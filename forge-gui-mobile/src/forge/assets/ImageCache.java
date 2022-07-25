@@ -143,7 +143,7 @@ public class ImageCache {
         String imageKey = ii.getImageKey(false);
         if (imageKey != null) {
             if(imageKey.startsWith(ImageKeys.CARD_PREFIX) || imageKey.startsWith(ImageKeys.TOKEN_PREFIX))
-                return getImage(ii.getImageKey(false), true, false);
+                return getImage(ii.getImageKey(false), false, false);
         }
         return getImage(ii.getImageKey(false), true, true);
     }
