@@ -1091,7 +1091,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             fetchList.sort();
 
             CardCollection chosenCards = new CardCollection();
-            if (changeType.startsWith("EACH")) {
+            if (changeType != null && changeType.startsWith("EACH")) {
                 String[] eachTypes = changeType.substring(5).split(" & ");
                 for (String thisType : eachTypes) {
                     for (int i = 0; i < changeNum && destination != null; i++) {
