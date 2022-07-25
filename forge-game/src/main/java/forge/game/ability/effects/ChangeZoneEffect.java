@@ -149,7 +149,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sb.append(" for ");
             }
             sb.append(Lang.nounWithNumeralExceptOne(num, type + cardTag)).append(", ");
-            if (!sa.hasParam("NoReveal") && ZoneType.smartValueOf(destination).isHidden()) {
+            if (!sa.hasParam("NoReveal") && ZoneType.smartValueOf(destination) != null && ZoneType.smartValueOf(destination).isHidden()) {
                 if (choosers.size() == 1) {
                     sb.append(num > 1 ? "reveals them, " : "reveals it, ");
                 } else {
@@ -901,7 +901,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         final boolean defined = sa.hasParam("Defined");
-        final String changeType = sa.getParam("ChangeType");
+        final String changeType = sa.hasParam("ChangeType") ? sa.getParam("ChangeType") : "";
         Map<Player, HiddenOriginChoices> HiddenOriginChoicesMap = Maps.newHashMap();
 
         for (Player player : fetchers) {
@@ -1069,7 +1069,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 searchedLibrary = false;
             }
 
-            if (!defined && changeType != null && !changeType.startsWith("EACH")) {
+            if (!defined && !changeType.equals("") && !changeType.startsWith("EACH")) {
                 fetchList = (CardCollection)AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
             }
 
@@ -1448,7 +1448,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
 
-            if (((!ZoneType.Battlefield.equals(destination) && changeType != null && !defined && !changeType.equals("Card"))
+            if (((!ZoneType.Battlefield.equals(destination) && !changeType.equals("") && !defined && !changeType.equals("Card"))
                     || (sa.hasParam("Reveal") && !movedCards.isEmpty())) && !sa.hasParam("NoReveal")) {
                 game.getAction().reveal(movedCards, player);
             }
