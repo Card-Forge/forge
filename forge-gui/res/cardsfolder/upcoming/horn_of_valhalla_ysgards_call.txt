@@ -1,0 +1,19 @@
+Name:Horn of Valhalla
+ManaCost:1 W
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ X | AddToughness$ X | Description$ Equipped creature gets +1/+1 for each creature you control.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:BuffedBy:Creature
+K:Equip:3
+AlternateMode:Adventure
+Oracle:Equipped creature gets +1/+1 for each creature you control.\nEquip {3}
+
+ALTERNATE
+
+Name:Ysgard's Call
+ManaCost:X W W
+Types:Sorcery Adventure
+A:SP$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | SpellDescription$ Create X 1/1 white Soldier creature tokens. (Then exile this card. You may cast the artifact later from exile.)
+SVar:X:Count$xPaid
+DeckHas:Ability$Token & Type$Soldier
+Oracle:Create X 1/1 white Soldier creature tokens. (Then exile this card. You may cast the artifact later from exile.)

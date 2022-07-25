@@ -24,7 +24,7 @@ User data files, like decks, saved gauntlets, and card pictures, are now stored 
         userDir=$HOME/.forge/
         cacheDir=$HOME/.cache/forge/
 
-The appdata directory is hidden by default in Win7. Open a Windows Explorer window (or double-click on My Computer] and in the address field type "%appdata%/forge/" (without the quotes). If that doesn't work, type "%appdata"/roaming/forge".
+The appdata directory is hidden by default in Windows 7 and above versions. Open a Windows Explorer window (or double-click on My Computer] and in the address field type "%appdata%/forge/" (without the quotes). If that doesn't work, type "%appdata"/roaming/forge".
 
 cardPicsDir is defined as <cacheDir>/pics/cards/ by default.  If you wish to use a non-default directory, please see the forge.profile.preferences.example file located in the Forge installation directory root.  You can use this file to, for example, share the card pics directory with another program, such as Magic Workstation.
 
@@ -108,8 +108,9 @@ If you're trying to run Forge for the first time, but it doesn't open up, you ca
 - Current versions of Forge no longer include a launcher script for Mac OS, proceed to step three.
 
 3) Run Forge
-- On Windows, just type "forge.exe", Enter
-- On Linux, just type "forge.sh", Enter
+- On Windows, just type "forge.exe", Enter (If you have Java 8 installed, use forge-java8.exe)
+  if you want to run mobile/adventure instead of the desktop interface, type "forge-adventure.exe", Enter (If you have Java 8 installed, use forge-adventure-java8.exe)
+- On Linux, just type "forge.sh", Enter (if you want to run mobile/adventure interface use forge-adventure.sh)
 - Launch the Forge application bundle by double clicking on the program named "Forge.app".
 
 Now you will probably see some sort of Error in the console. the first few lines contain a message that might help you. If you can't fix the problem yourself, please take the complete output and report your problem on the Forum.
@@ -124,9 +125,7 @@ if you're running Windows 7, make sure you're running the program as an admin, o
 Java Issues:
 ------------
 
-Forge is likely to be compatible with Java 7 at this time. Some people have used forge with Java 7 and have not reported any problems that are related to Java 7. If you would like to upgrade to Java 7 and have held off because of Forge then you may upgrade as we do not think that it will cause an incompatibility type of problem. We will continue to try to maintain compatibility with Java 6 for the foreseeable future.
-
-Forge requires Java 6 and will not run if you have an earlier version of Java. You will need to update to Java 6.
+Forge requires Java 8 as minimum installed and will not run if you have an earlier version of Java. You will need to update to Java 8. (Java 11 is recommended)
 
 
 Card Picture Issues:
@@ -148,11 +147,7 @@ This should save enough bandwidth that everyone will be able to download the new
 Reporting Bugs:
 ---------------
 
-To report a bug with an official beta release, please follow the instructions at http://www.slightlymagic.net/wiki/Forge#I_think_I_found_a_bug_in_Forge._What_do_I_do.3F .
-
-To report a bug (1) with an alpha test, (2) with a nightly build, (3) with something compiled from the official Forge software repository, or (4) with the leading edge (formerly "SVN Bug Reports"), please do not submit your bugs to the forum. Instead, please follow the instructions at http://www.slightlymagic.net/wiki/How_to_File_a_Bug_Report_with_Mantis.
-
-Forge will now allow you to upload a crash report to the Forge forum at CCGH.
+If you haven't join Forge discord server, you can join at https://discord.gg/3v9JCVr, to report bugs in the help channel.
 
 
 A new very hard tier category in Quest mode:
@@ -510,6 +505,10 @@ You should note that sound files can be large and we would like to avoid this if
 We have a forge forum topic at the Collectible Card Games Headquarters web site that is devoted to finding sounds for this new sound system. Please visit this topic and contribute a sound or two. We can use your help and assistance. :)
 
 http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8570
+
+Much better to join Forge discord server as most Devs are active here:
+
+https://discord.gg/3v9JCVr
 
 
 Notes about the second Quest World, Jamuraa:
@@ -1551,7 +1550,7 @@ Desktop Forge UI has been updated a little bit. In the deck editor, the +/- butt
 
 - Android Updates -
 Some work went into porting the remaining features from desktop version of the game to mobile Forge. In particular, it is now possible to start a match against a particular opponent in Sealed Deck and Booster Draft modes in addition to the gauntlet mode which is still default. The work to enable quest draft tournaments in mobile Forge is ongoing and should not be considered complete at the moment, draft tournaments in quest mode are still not fully functional in mobile Forge and you will not be able to complete a draft tournament yet.
-The mobile port of Forge now features an option "Battlefield Texture Filtering" which smoothes out card art on the battlefield. This can help make the graphics smoother on larger tablet screens (e.g. 12") or when connected to an external monitor. This option, however, comes with a performance penalty and may blur the card art too much on smaller screens. It is disabled by default.
+The mobile port of Forge now features an option "Battlefield Texture Filtering" which smoothes out card art on the battlefield. This can help make the graphics smoother on larger tablet screens (e.g. 12") or when connected to an external monitor. This option, however, comes with a performance penalty and may blur the card art too much on smaller screens. If you have 3GB RAM or less, disabling this option is recommended (as of Forge 1.6.53 and above versions).
 
 v1.5.59 Changes
 ===============

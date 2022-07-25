@@ -1,0 +1,10 @@
+Name:Fraying Line
+ManaCost:4
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a rope counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ ROPE
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigRope | TriggerDescription$ At the beginning of each player's upkeep, that player may pay {2}. If they do, they put a rope counter on a creature they control. Otherwise, exile CARDNAME and each creature without a rope counter on it, then remove all rope counters from all creatures.
+SVar:TrigRope:DB$ PutCounter | UnlessCost$ 2 | UnlessPayer$ TriggeredPlayer | UnlessSwitched$ True | Chooser$ TriggeredPlayer | Choices$ Creature.ControlledBy TriggeredPlayer | CounterType$ ROPE | UnlessResolveSubs$ WhenNotPaid | SubAbility$ CostNotPaid
+SVar:CostNotPaid:DB$ ChangeZoneAll | ChangeType$ Card.Self,Creature.counters_EQ0_ROPE | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBRemoveRope
+SVar:DBRemoveRope:DB$ RemoveCounterAll | ValidCards$ Creature | CounterType$ ROPE | AllCounters$ True
+Oracle:When Fraying Line enters the battlefield, put a rope counter on target creature you control.\nAt the beginning of each player's upkeep, that player may pay {2}. If they do, they put a rope counter on a creature they control. Otherwise, exile Fraying Line and each creature without a rope counter on it, then remove all rope counters from all creatures.

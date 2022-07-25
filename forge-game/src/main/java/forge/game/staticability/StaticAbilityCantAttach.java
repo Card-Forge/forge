@@ -44,7 +44,7 @@ public class StaticAbilityCantAttach {
             }
         }
 
-        if (checkSBA && stAb.hasParam("Exceptions") && stAb.matchesValidParam("Exceptions", card)) {
+        if ((checkSBA || !stAb.hasParam("ExceptionSBA")) && stAb.hasParam("Exceptions") && stAb.matchesValidParam("Exceptions", card)) {
             return false;
         }
 
