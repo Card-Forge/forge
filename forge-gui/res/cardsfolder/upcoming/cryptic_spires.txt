@@ -1,0 +1,7 @@
+Name:Cryptic Spires
+ManaCost:no cost
+Types:Land
+Text:As you create your deck, circle two of the colors below.
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ Combo Chosen | SpellDescription$ Add mana of either of the circled colors.
+Oracle:As you create your deck, circle two of the colors below.\nCryptic Spires enters the battlefield tapped.\n{T}: Add one mana of either of the circled colors.
