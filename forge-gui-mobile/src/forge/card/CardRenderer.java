@@ -88,7 +88,7 @@ public class CardRenderer {
         public void onImageFetched() {
             ImageCache.clear();
             if (clearcardArtCache) {
-                Forge.getAssets().cardArtCache().remove(key);
+                clearcardArtCache();
             }
         }
     }
