@@ -724,7 +724,7 @@ public class CardImageRenderer {
             return;
         }
 
-        if (image == ImageCache.defaultImage || Forge.enableUIMask.equals("Art")) { //support drawing card image manually if card image not found
+        if (image == ImageCache.getDefaultImage() || Forge.enableUIMask.equals("Art")) { //support drawing card image manually if card image not found
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top, true, true);
         } else {
             float radius = (h - w)/8;
