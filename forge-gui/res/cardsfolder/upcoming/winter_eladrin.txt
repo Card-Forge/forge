@@ -1,0 +1,7 @@
+Name:Winter Eladrin
+ManaCost:2 U
+Types:Creature Faerie Elf Wizard
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ Gust of Wind — When CARDNAME enters the battlefield, return up to one other target creature to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.Other | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to one other target creature
+Oracle:Gust of Wind — When Winter Eladrin enters the battlefield, return up to one other target creature to its owner's hand.

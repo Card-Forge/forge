@@ -95,6 +95,8 @@ public enum CounterEnumType {
 
     DEPLETION("DPLT", 185, 201, 208),
 
+    DESCENT("DESCT", 175, 35, 40),
+
     DESPAIR("DESPR", 238, 186, 187),
 
     DEVOTION("DEVOT", 255, 111, 255),
@@ -286,6 +288,8 @@ public enum CounterEnumType {
     QUEST("QUEST", 251, 189, 0),
 
     RITUAL("RITUAL", 155, 17, 30),
+
+    ROPE("ROPE", 239, 223, 187),
 
     RUST("RUST", 255, 181, 116),
 

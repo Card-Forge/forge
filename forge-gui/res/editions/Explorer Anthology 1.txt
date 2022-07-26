@@ -1,0 +1,11 @@
+[metadata]
+Code=EA1
+Date=2022-07-28
+Name=Explorer Anthology 1
+Type=Online
+ScryfallCode=EA1
+
+[cards]
+0 M Kalitas, Traitor of Ghet @Todd Lockwood
+0 U Favored Hoplite @Winona Nelson
+0 R Supreme Verdict @Sam Burley

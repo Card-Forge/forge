@@ -6744,6 +6744,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return new PlayerCollection(goad.values()); // 701.38d
     }
 
+    public final Map<Long, Player> getGoadMap() {
+        return goad;
+    }
+
     /**
      * Returns the last known zone information for the card. If the card is a LKI copy of another card,
      * then it stores the relevant information in savedLastKnownZone, which is returned. If the card is

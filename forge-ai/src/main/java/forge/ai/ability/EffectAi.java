@@ -285,12 +285,10 @@ public class EffectAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        String aiLogic = sa.getParamOrDefault("AILogic", "");
-
         // E.g. Nova Pentacle
-        if (aiLogic.equals("RedirectFromOppToCreature")) {
+        if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer()) {
             // try to target the opponent's best targetable permanent, if able
-            CardCollection oppPerms = CardLists.getValidCards(aiPlayer.getOpponents().getCardsIn(ZoneType.Battlefield), sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
+            CardCollection oppPerms = CardLists.getValidCards(aiPlayer.getOpponents().getCardsIn(sa.getTargetRestrictions().getZone()), sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
             if (!oppPerms.isEmpty()) {
                 sa.resetTargets();
                 sa.getTargets().add(ComputerUtilCard.getBestAI(oppPerms));
@@ -299,7 +297,7 @@ public class EffectAi extends SpellAbilityAi {
 
             if (mandatory) {
                 // try to target the AI's worst targetable permanent, if able
-                CardCollection aiPerms = CardLists.getValidCards(aiPlayer.getCardsIn(ZoneType.Battlefield), sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
+                CardCollection aiPerms = CardLists.getValidCards(aiPlayer.getCardsIn(sa.getTargetRestrictions().getZone()), sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
                 if (!aiPerms.isEmpty()) {
                     sa.resetTargets();
                     sa.getTargets().add(ComputerUtilCard.getWorstAI(aiPerms));

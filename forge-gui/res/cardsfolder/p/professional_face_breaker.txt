@@ -9,5 +9,5 @@ A:AB$ Dig | Cost$ Sac<1/Treasure> | Defined$ You | DigNum$ 1 | ChangeNum$ All | 
 SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:STPlay:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Exile | Affected$ Card.IsRemembered | MayPlay$ True | Description$ You may play that card this turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Token|Sacrifice & Type$Treasure
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
 Oracle:Menace\nWhenever one or more creatures you control deal combat damage to a player, create a Treasure token.\nSacrifice a Treasure: Exile the top card of your library. You may play that card this turn.

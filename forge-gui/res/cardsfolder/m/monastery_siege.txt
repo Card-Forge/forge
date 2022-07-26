@@ -8,5 +8,5 @@ SVar:KhansTrigger:Mode$ Phase | Phase$ Draw | TriggerZones$ Battlefield | ValidP
 SVar:Filter:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:Dragons:DB$ Animate | Defined$ Self | staticAbilities$ DragonsST | Duration$ Permanent | SpellDescription$ Dragons
-SVar:DragonsST:Mode$ RaiseCost | ValidTarget$ You,Card.YouCtrl | Activator$ Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target you or a permanent you control cost {2} more to cast.
+SVar:DragonsST:Mode$ RaiseCost | ValidTarget$ You,Card.YouCtrl+inZoneBattlefield | Activator$ Opponent | Type$ Spell | Amount$ 2 | Description$ Spells your opponents cast that target you or a permanent you control cost {2} more to cast.
 Oracle:As Monastery Siege enters the battlefield, choose Khans or Dragons.\n• Khans — At the beginning of your draw step, draw an additional card, then discard a card.\n• Dragons — Spells your opponents cast that target you or a permanent you control cost {2} more to cast.

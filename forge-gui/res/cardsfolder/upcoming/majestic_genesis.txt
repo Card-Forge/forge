@@ -1,0 +1,7 @@
+Name:Majestic Genesis
+ManaCost:6 G G
+Types:Sorcery
+A:SP$ Dig | DigNum$ X | Reveal$ True | AnyNumber$ True | ChangeValid$ Permanent | DestinationZone$ Battlefield | Optional$ True | RestRandomOrder$ True | SpellDescription$ Reveal the top X cards of your library, where X is the greatest mana value of a commander you own on the battlefield or in the command zone. You may put any number of permanent cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+SVar:X:Count$HighestCMC_Card.IsCommander+YouOwn+inZoneBattlefield,Card.IsCommander+YouOwn+inZoneCommand
+AI:RemoveDeck:NonCommander
+Oracle:Reveal the top X cards of your library, where X is the greatest mana value of a commander you own on the battlefield or in the command zone. You may put any number of permanent cards from among them onto the battlefield. Put the rest on the bottom of your library in a random order.

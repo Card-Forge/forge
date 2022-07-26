@@ -1,7 +1,7 @@
 Name:Hunter's Ambush
 ManaCost:2 G
 Types:Instant
-A:SP$ Effect | Cost$ 2 G | Name$ Hunter's Ambush Effect | StaticAbilities$ KWPump | SpellDescription$ Prevent all combat damage that would be dealt by nongreen creatures this turn.
+A:SP$ Effect | StaticAbilities$ KWPump | SpellDescription$ Prevent all combat damage that would be dealt by nongreen creatures this turn.
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.nonGreen | AddKeyword$ Prevent all combat damage that would be dealt by CARDNAME. | Description$ Prevent all combat damage that would be dealt by nongreen creatures this turn.
 AI:RemoveDeck:All
 Oracle:Prevent all combat damage that would be dealt by nongreen creatures this turn.

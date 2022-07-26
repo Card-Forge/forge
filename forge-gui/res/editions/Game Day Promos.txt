@@ -9,3 +9,6 @@ ScryfallCode=GDY
 1 R Power Word Kill @Andreas Zafiratos
 2 R Skyclave Apparition @Mila Pesic
 3 M All-Seeing Arbiter @Nicholas Gregory
+4 R Touch the Spirit Realm @Mila Pesic
+5 R Workshop Warchief @Minard Maxime
+6 M Shivan Devastator @Aldo Domínguez

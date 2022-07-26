@@ -192,10 +192,8 @@ public class SacrificeEffect extends SpellAbilityEffect {
                         runParams.put(AbilityKey.Exploited, lKICopy);
                         game.getTriggerHandler().runTrigger(TriggerType.Exploited, runParams, false);
                     }
-                    if (wasDestroyed || wasSacrificed) {
-                        if (remSacrificed) {
-                            card.addRemembered(lKICopy);
-                        }
+                    if ((wasDestroyed || wasSacrificed) && remSacrificed) {
+                        card.addRemembered(lKICopy);
                     }
                 }
             }

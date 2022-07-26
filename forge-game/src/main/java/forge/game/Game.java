@@ -129,11 +129,11 @@ public class Game {
     private IdentityHashMap<Pair<Integer, Boolean>, Pair<Card, GameEntity>> damageThisTurnLKI = new IdentityHashMap<>();
 
     private Map<Player, Card> topLibsCast = Maps.newHashMap();
-    private Map<Card, Integer>  facedownWhileCasting = Maps.newHashMap();
+    private Map<Card, Integer> facedownWhileCasting = Maps.newHashMap();
 
-    private Player monarch = null;
-    private Player initiative = null;
-    private Player monarchBeginTurn = null;
+    private Player monarch;
+    private Player initiative;
+    private Player monarchBeginTurn;
     private Player startingPlayer;
 
     private Direction turnOrder = Direction.getDefaultDirection();

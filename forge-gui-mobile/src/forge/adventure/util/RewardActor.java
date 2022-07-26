@@ -52,7 +52,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     final int preview_h = 680;
 
     static TextureRegion backTexture;
-    Texture image;
+    Texture image, T;
     Texture generatedTooltip = null; //Storage for a generated tooltip. To dispose of on exit.
     boolean needsToBeDisposed;
     float flipProcess = 0;
@@ -104,8 +104,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                             CardImageRenderer.drawCardImage(G, CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.enableUIMask.equals("Art"), true);
                             G.end();
                         }
-                        Texture T = renderPlaceholder(G, reward.getCard()); //Now we can render the card.
+                        T = renderPlaceholder(G, reward.getCard()); //Now we can render the card.
                         setCardImage(T);
+                        if (image == null) {
+                            if (T == null)
+                                System.err.println("Error generating placeholder image for card: "+reward.getCard().getName());
+                            else
+                                image = T;
+                        }
                         //Set the fetcher regardless. It'll replace the preview once it lands.
                         fetcher.fetchImage(reward.getCard().getImageKey(false), this);
                     }
@@ -202,23 +208,27 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     private void setCardImage(Texture img) {
-        image = img;
-        if (Forge.isTextureFilteringEnabled())
-            image.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
-        TextureRegionDrawable drawable = new TextureRegionDrawable(ImageCache.croppedBorderImage(image));
-        if(Forge.isLandscapeMode())
-            drawable.setMinSize((Scene.getIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.getIntendedHeight() * 0.95f);
-        else
-            drawable.setMinSize(Scene.getIntendedWidth()  * 0.95f, Scene.getIntendedWidth()* RewardScene.CARD_WIDTH_TO_HEIGHT * 0.95f);
-        toolTipImage = new Image(drawable);
-        tooltip = new Tooltip<Image>(toolTipImage);
-        holdTooltip = new HoldTooltip(new Image(drawable));
-        tooltip.setInstant(true);
-        if (frontSideUp()) {
-            if (GuiBase.isAndroid())
-                addListener(holdTooltip);
+        try {
+            image = img;
+            if (Forge.isTextureFilteringEnabled())
+                image.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
+            TextureRegionDrawable drawable = new TextureRegionDrawable(ImageCache.croppedBorderImage(image));
+            if(Forge.isLandscapeMode())
+                drawable.setMinSize((Scene.getIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.getIntendedHeight() * 0.95f);
             else
-                addListener(tooltip);
+                drawable.setMinSize(Scene.getIntendedWidth()  * 0.95f, Scene.getIntendedWidth()* RewardScene.CARD_WIDTH_TO_HEIGHT * 0.95f);
+            toolTipImage = new Image(drawable);
+            tooltip = new Tooltip<Image>(toolTipImage);
+            holdTooltip = new HoldTooltip(new Image(drawable));
+            tooltip.setInstant(true);
+            if (frontSideUp()) {
+                if (GuiBase.isAndroid())
+                    addListener(holdTooltip);
+                else
+                    addListener(tooltip);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -388,9 +398,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 batch.setShader(null);
                 batch.begin();
             }
+        } else {
+            if (Reward.Type.Card.equals(reward.getType())) {
+                if (T == null) {
+                    T = renderPlaceholder(new Graphics(), reward.getCard());
+                }
+                batch.draw(T, x, -getHeight() / 2, width, getHeight());
+            }
         }
-        else
-            batch.draw(ImageCache.defaultImage, x, -getHeight() / 2, width, getHeight());
         switch (reward.getType()) {
             case Card:
                 break;

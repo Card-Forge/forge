@@ -32,6 +32,7 @@ import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.google.common.collect.EvictingQueue;
 import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
+import forge.deck.DeckProxy;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.util.FileUtil;
@@ -98,7 +99,9 @@ public class ImageCache {
         int cl = GuiBase.isAndroid() ? maxCardCapacity+(capacity/3) : 400;
         cardsLoaded = new HashSet<>(cl);
     }
-    public static final Texture defaultImage;
+    public static Texture getDefaultImage() {
+        return Forge.getAssets().getDefaultImage();
+    }
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
     private static final HashMap<String, Pair<String, Boolean>> imageBorder = new HashMap<>(1024);
@@ -107,17 +110,6 @@ public class ImageCache {
     public static void allowSingleLoad() {
         imageLoaded = false; //reset at the beginning of each render
         delayLoadRequested = false;
-    }
-
-    static {
-        Texture defImage = null;
-        try {
-            defImage = new Texture(Gdx.files.absolute(ForgeConstants.NO_CARD_FILE));
-        } catch (Exception ex) {
-            System.err.println("could not load default card image");
-        } finally {
-            defaultImage = (null == defImage) ? new Texture(10, 10, Format.RGBA4444) : defImage;
-        }
     }
 
     public static void clear() {
@@ -140,10 +132,11 @@ public class ImageCache {
     }
 
     public static Texture getImage(InventoryItem ii) {
+        boolean useDefault = ii instanceof DeckProxy;
         String imageKey = ii.getImageKey(false);
         if (imageKey != null) {
             if(imageKey.startsWith(ImageKeys.CARD_PREFIX) || imageKey.startsWith(ImageKeys.TOKEN_PREFIX))
-                return getImage(ii.getImageKey(false), true, false);
+                return getImage(ii.getImageKey(false), useDefault, false);
         }
         return getImage(ii.getImageKey(false), true, true);
     }
@@ -229,7 +222,10 @@ public class ImageCache {
             if (card != null)
                 imageKey = altState ? card.getCardAltImageKey() : card.getCardImageKey();
             if (StringUtils.isBlank(imageKey)) {
-                return defaultImage;
+                if (useDefaultIfNotFound)
+                    return getDefaultImage();
+                else
+                    return null;
             }
         }
 
@@ -262,7 +258,7 @@ public class ImageCache {
         // a default "not available" image.
         if (image == null) {
             if (useDefaultIfNotFound) {
-                image = defaultImage;
+                image = getDefaultImage();
                 /*fix not loading image file since we intentionally not to update the cache in order for the
                   image fetcher to update automatically after the card image/s are downloaded*/
                 imageLoaded = false;

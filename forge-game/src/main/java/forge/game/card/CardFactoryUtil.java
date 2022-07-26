@@ -1792,7 +1792,7 @@ public class CardFactoryUtil {
             //upkeep trigger
             StringBuilder upkeepTrig = new StringBuilder();
 
-            upkeepTrig.append("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Exile ");
+            upkeepTrig.append("Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Exile");
             upkeepTrig.append(" | IsPresent$ Card.Self+suspended | PresentZone$ Exile");
             // Mark this trigger as Secondary, so it's not displayed twice
             upkeepTrig.append(" | Secondary$ True | TriggerDescription$ At the beginning of your upkeep, if this card is suspended, remove a time counter from it");
@@ -1805,7 +1805,7 @@ public class CardFactoryUtil {
             //play trigger
             StringBuilder playTrig = new StringBuilder();
 
-            playTrig.append("Mode$ CounterRemoved | TriggerZones$ Exile | ValidCard$ Card.Self | CounterType$ TIME | NewCounterAmount$ 0 | Secondary$ True ");
+            playTrig.append("Mode$ CounterRemoved | TriggerZones$ Exile | ValidCard$ Card.Self | CounterType$ TIME | NewCounterAmount$ 0 | Secondary$ True");
             playTrig.append(" | TriggerDescription$ When the last time counter is removed from this card, if it's exiled, play it without paying its mana cost if able.  ");
             playTrig.append("If you can't, it remains exiled. If you cast a creature spell this way, it gains haste until you lose control of the spell or the permanent it becomes.");
 
@@ -3629,6 +3629,9 @@ public class CardFactoryUtil {
                 final String[] kws = keyword.split(":");
                 if (kws.length > 3) {
                     effect += "| Exceptions$ " + kws[3];
+                }
+                if (kws.length > 4) {
+                    effect += " | ExceptionSBA$ True";
                 }
             }
             effect += " | Description$ " + desc;

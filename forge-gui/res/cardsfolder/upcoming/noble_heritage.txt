@@ -1,0 +1,14 @@
+Name:Noble Heritage
+ManaCost:1 W
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddTrigger$ ETB & Upkeep | Description$ Commander creatures you own have "When this creature enters the battlefield and at the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. For each opponent who does, you gain protection from that player until your next turn." (You can't be targeted, dealt damage, or enchanted by anything controlled by that player.)
+SVar:ETB:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When this creature enters the battlefield and at the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. For each opponent who does, you gain protection from that player until your next turn.
+SVar:Upkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChoose | Secondary$ True | TriggerDescription$ When this creature enters the battlefield and at the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. For each opponent who does, you gain protection from that player until your next turn.
+SVar:TrigChoose:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoice | SubAbility$ DBPutCounter
+SVar:DBChoice:DB$ ChooseCard | Defined$ Player.IsRemembered | Amount$ 1 | MinAmount$ 0 | Choices$ Creature.RememberedPlayerCtrl | RememberChosen$ True
+SVar:DBPutCounter:DB$ PutCounterAll | ValidCards$ Creature.IsRemembered | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBRememberPlayer
+SVar:DBRememberPlayer:DB$ Pump | RememberObjects$ RememberedController | SubAbility$ DBRepeatEach
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Opponent.IsRemembered | RepeatSubAbility$ DBPump | SubAbility$ DBCleanup
+SVar:DBPump:DB$ Pump | Defined$ You | KW$ Protection:Player.RememberedPlayer:Protection from RememberedPlayer | DefinedKW$ RememberedPlayer | Duration$ UntilYourNextTurn
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
+Oracle:Commander creatures you own have "When this creature enters the battlefield and at the beginning of your upkeep, each player may put two +1/+1 counters on a creature they control. For each opponent who does, you gain protection from that player until your next turn." (You can't be targeted, dealt damage, or enchanted by anything controlled by that player.)
