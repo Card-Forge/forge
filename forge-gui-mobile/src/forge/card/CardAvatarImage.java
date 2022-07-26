@@ -26,7 +26,7 @@ public class CardAvatarImage implements FImage {
         if (image != null) {
             return image.getHeight();
         }
-        return ImageCache.defaultImage.getHeight() * CardRenderer.CARD_ART_HEIGHT_PERCENTAGE;
+        return ImageCache.getDefaultImage().getHeight() * CardRenderer.CARD_ART_HEIGHT_PERCENTAGE;
     }
 
     @Override

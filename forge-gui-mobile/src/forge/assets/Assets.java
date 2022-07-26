@@ -6,6 +6,8 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,6 +17,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import forge.Forge;
 import forge.gui.GuiBase;
+import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.skin.FSkinProp;
 
 import java.util.HashMap;
@@ -40,6 +43,7 @@ public class Assets implements Disposable {
     private ObjectMap<String, Texture> tmxMap = new ObjectMap<>();
     public Skin skin;
     public BitmapFont advDefaultFont, advBigFont;
+    private Texture defaultImage, dummy;
     public Assets() {
         //init titlebg fallback
         fallback_skins.put(0, new Texture(GuiBase.isAndroid()
@@ -69,6 +73,10 @@ public class Assets implements Disposable {
             advBigFont.dispose();
         if (skin != null)
             skin.dispose();
+        if (defaultImage != null)
+            defaultImage.dispose();
+        if (dummy != null)
+            dummy.dispose();
     }
     public MemoryTrackingAssetManager manager() {
         if (manager == null)
@@ -154,6 +162,28 @@ public class Assets implements Disposable {
         if (tmxMap == null)
             tmxMap = new ObjectMap<>();
         return tmxMap;
+    }
+    public Texture getDefaultImage() {
+        if (defaultImage == null) {
+            FileHandle blankImage = Gdx.files.absolute(ForgeConstants.NO_CARD_FILE);
+            if (blankImage.exists()) {
+                defaultImage = manager.get(blankImage.path(), Texture.class, false);
+                if (defaultImage != null)
+                    return defaultImage;
+                //if not loaded yet, load to assetmanager
+                manager.load(blankImage.path(), Texture.class, new TextureLoader.TextureParameter(){{genMipMaps = true; minFilter = Texture.TextureFilter.MipMapLinearLinear; magFilter = Texture.TextureFilter.Linear;}});
+                manager.finishLoadingAsset(blankImage.path());
+                defaultImage = manager.get(blankImage.path());
+            } else {
+                defaultImage = getDummy();
+            }
+        }
+        return defaultImage;
+    }
+    private Texture getDummy() {
+        if (dummy == null)
+            dummy =  new Texture(10, 10, Pixmap.Format.RGBA4444);
+        return dummy;
     }
     public class MemoryTrackingAssetManager extends AssetManager {
         private int currentMemory;
