@@ -223,7 +223,7 @@ public class CardRenderer {
         if (cardArt == null) {
             Texture image = new RendererCachedCardImage(imageKey, true).getImage();
             if (image != null) {
-                if (image == ImageCache.defaultImage) {
+                if (image == ImageCache.getDefaultImage()) {
                     cardArt = CardImageRenderer.forgeArt;
                 }
                 else {
@@ -322,7 +322,7 @@ public class CardRenderer {
                 }
             }.getImage();
             if (image != null) {
-                if (image == ImageCache.defaultImage) {
+                if (image == ImageCache.getDefaultImage()) {
                     cardArt = CardImageRenderer.forgeArt;
                 } else {
                     float x, y;
@@ -355,7 +355,7 @@ public class CardRenderer {
                 }
             }.getImage();
             if (image != null) {
-                if (image == ImageCache.defaultImage) {
+                if (image == ImageCache.getDefaultImage()) {
                     cardArt = CardImageRenderer.forgeArt;
                 } else {
                     float x, y;
@@ -409,7 +409,7 @@ public class CardRenderer {
                 }
             }.getImage();
             if (image != null) {
-                if (image == ImageCache.defaultImage) {
+                if (image == ImageCache.getDefaultImage()) {
                     cardArt = CardImageRenderer.forgeArt;
                 } else {
                     float x = 0;
@@ -575,7 +575,7 @@ public class CardRenderer {
             minusxy = 0.135f*radius;
         }
         if (image != null) {
-            if (image == ImageCache.defaultImage || Forge.enableUIMask.equals("Art")) {
+            if (image == ImageCache.getDefaultImage() || Forge.enableUIMask.equals("Art")) {
                 CardImageRenderer.drawCardImage(g, CardView.getCardForUi(pc), false, x, y, w, h, pos, true, true);
             } else {
                 if (Forge.enableUIMask.equals("Full")) {
@@ -623,7 +623,7 @@ public class CardRenderer {
         if (card.isPhasedOut() && !magnify)
             g.setAlphaComposite(0.2f);
         if (image != null) {
-            if (image == ImageCache.defaultImage || Forge.enableUIMask.equals("Art")) {
+            if (image == ImageCache.getDefaultImage() || Forge.enableUIMask.equals("Art")) {
                 CardImageRenderer.drawCardImage(g, card, showAltState, x, y, w, h, pos, true, false, isChoiceList, !showCardIdOverlay(card));
             } else if (showsleeves) {
                 if (!card.isForeTold())
