@@ -1,0 +1,9 @@
+Name:Criminal Past
+ManaCost:2 B
+Types:Legendary Enchantment Background
+S:Mode$ Continuous | Affected$ Creature.IsCommander+YouOwn | AddKeyword$ Menace | AddStaticAbility$ PowerGrave | Description$ Commander creatures you own have menace and "This creature gets +X/+0, where X is the number of creature cards in your graveyard." (A creature with menace can't be blocked except by two or more creatures.)
+SVar:PowerGrave:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | This creature gets +X/+0, where X is the number of creature cards in your graveyard.
+SVar:X:Count$TypeInYourYard.Creature
+DeckHas:Ability$Mill
+AI:RemoveDeck:NonCommander
+Oracle:Commander creatures you own have menace and "This creature gets +X/+0, where X is the number of creature cards in your graveyard." (A creature with menace can't be blocked except by two or more creatures.)
