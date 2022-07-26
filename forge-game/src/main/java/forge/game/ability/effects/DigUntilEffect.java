@@ -44,7 +44,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
         final ZoneType revealed = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
         sb.append(revealed.equals(ZoneType.Exile) ? "exiles cards from their library until they exile " :
                 "reveals cards from their library until revealing ");
-        sb.append(Lang.nounWithNumeralExceptOne(untilAmount, desc + " card");
+        sb.append(Lang.nounWithNumeralExceptOne(untilAmount, desc + " card"));
         if (untilAmount != 1) {
             sb.append("s");
         }
