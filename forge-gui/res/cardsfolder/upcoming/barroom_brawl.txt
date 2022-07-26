@@ -1,7 +1,7 @@
 Name:Barroom Brawl
 ManaCost:1 G
 Types:Sorcery
-A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | SpellDescription$ Target creature you control fights target creature you don't control. (Each deals damage equal to its power to the other.)
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Choose target creature you control | SubAbility$ DBFight | SpellDescription$ SpellDescription$ Target creature you control fights target creature the opponent to your left controls. Then that player may copy this spell and may choose new targets for the copy.
 SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.ControlledBy NextPlayerToYourLeft | TgtPrompt$ Choose target creature controlled by the opponent to your left | SubAbility$ DBCopy
 SVar:DBCopy:DB$ CopySpellAbility | Defined$ Parent | Controller$ NextPlayerToYourLeft | Optional$ True | AILogic$ ChainOfAcid | StackDescription$ None | MayChooseTarget$ True
 Oracle:Target creature you control fights target creature the opponent to your left controls. Then that player may copy this spell and may choose new targets for the copy.
