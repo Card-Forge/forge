@@ -1,0 +1,10 @@
+Name:Viconia, Drow Apostate
+ManaCost:2 B
+Types:Legendary Creature Elf Cleric
+PT:2/3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Creature.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE4 | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, if there are four or more creature cards in your graveyard, return a creature card at random from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | ChangeType$ Creature.YouOwn | Origin$ Graveyard | Destination$ Hand | Hidden$ True | AtRandom$ True
+K:Choose a Background
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Mill|Discard|Graveyard
+Oracle:At the beginning of your upkeep, if there are four or more creature cards in your graveyard, return a creature card at random from your graveyard to your hand.\nChoose a Background (You can have a Background as a second commander.)
