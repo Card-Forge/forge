@@ -17,6 +17,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 
@@ -40,8 +41,10 @@ public class DigUntilEffect extends SpellAbilityEffect {
             sb.append(pl).append(" ");
         }
 
-        sb.append("reveals cards from their library until revealing ");
-        sb.append(untilAmount).append(" ").append(desc).append(" card");
+        final ZoneType revealed = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
+        sb.append(revealed.equals(ZoneType.Exile) ? "exiles cards from their library until they exile " :
+                "reveals cards from their library until revealing ");
+        sb.append(Lang.nounWithNumeralExceptOne(untilAmount, desc + " card");
         if (untilAmount != 1) {
             sb.append("s");
         }
