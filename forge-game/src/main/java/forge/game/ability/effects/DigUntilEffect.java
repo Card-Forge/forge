@@ -52,27 +52,30 @@ public class DigUntilEffect extends SpellAbilityEffect {
             untilAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("MaxRevealed"), sa);
             sb.append(" or ").append(untilAmount).append(" card/s");
         }
-        sb.append(". Put ");
+        sb.append(".");
 
-        final ZoneType found = ZoneType.smartValueOf(sa.getParam("FoundDestination"));
-        final ZoneType revealed = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
-        if (found != null) {
-            sb.append(untilAmount > 1 ? "those cards" : "that card");
-            sb.append(" ");
+        if (!sa.hasParam("NoPutDesc")) {
+            sb.append(" Put ");
 
-            if (found.equals(ZoneType.Hand)) {
-                sb.append("into their hand ");
-            }
+            final ZoneType found = ZoneType.smartValueOf(sa.getParam("FoundDestination"));
+            if (found != null) {
+                sb.append(untilAmount > 1 ? "those cards" : "that card");
+                sb.append(" ");
 
-            if (revealed.equals(ZoneType.Graveyard)) {
-                sb.append("and all other cards into their graveyard.");
-            }
-            if (revealed.equals(ZoneType.Exile)) {
-                sb.append("and exile all other cards revealed this way.");
-            }
-        } else if (revealed != null) {
-            if (revealed.equals(ZoneType.Hand)) {
-                sb.append("all cards revealed this way into their hand");
+                if (found.equals(ZoneType.Hand)) {
+                    sb.append("into their hand ");
+                }
+
+                if (revealed.equals(ZoneType.Graveyard)) {
+                    sb.append("and all other cards into their graveyard.");
+                }
+                if (revealed.equals(ZoneType.Exile)) {
+                    sb.append("and exile all other cards revealed this way.");
+                }
+            } else if (revealed != null) {
+                if (revealed.equals(ZoneType.Hand)) {
+                    sb.append("all cards revealed this way into their hand");
+                }
             }
         }
         return sb.toString();
