@@ -37,7 +37,7 @@ public class PlayerFactoryUtil {
             inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
         } else if (keyword.startsWith("Protection")) {
             String valid = CardFactoryUtil.getProtectionValid(keyword, false);
-            String effect = "Mode$ CantTarget | Protection$ True | ValidCard$ Player.You | Secondary$ True ";
+            String effect = "Mode$ CantTarget | Protection$ True | ValidPlayer$ Player.You | EffectZone$ Command | Secondary$ True ";
             if (!valid.isEmpty()) {
                 effect += "| ValidSource$ " + valid;
             }
@@ -45,7 +45,7 @@ public class PlayerFactoryUtil {
             inst.addStaticAbility(StaticAbility.create(effect, card, card.getCurrentState(), false));
 
             // Attach
-            effect = "Mode$ CantAttach | Protection$ True | Target$ Player.You | Secondary$ True ";
+            effect = "Mode$ CantAttach | Protection$ True | Target$ Player.You| EffectZone$ Command | Secondary$ True ";
             if (!valid.isEmpty()) {
                 effect += "| ValidCard$ " + valid;
             }

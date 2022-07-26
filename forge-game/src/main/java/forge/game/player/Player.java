@@ -940,7 +940,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     public final void addChangedKeywords(final List<String> addKeywords, final List<String> removeKeywords, final Long timestamp, final long staticId) {
         List<KeywordInterface> kws = Lists.newArrayList();
         if (addKeywords != null) {
-            for(String kw : addKeywords) {
+            for (String kw : addKeywords) {
                 kws.add(getKeywordForStaticAbility(kw, staticId));
             }
         }
