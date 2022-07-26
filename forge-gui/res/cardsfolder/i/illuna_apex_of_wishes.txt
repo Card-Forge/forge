@@ -6,7 +6,7 @@ K:Mutate:3 RG U U
 K:Flying
 K:Trample
 T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigDigUntil | TriggerDescription$ Whenever this creature mutates, exile cards from the top of your library until you exile a nonland permanent card. Put that card onto the battlefield or into your hand.
-SVar:TrigDigUntil:DB$ DigUntil | ValidPlayer$ You | Valid$ Permanent.nonLand | ValidDescription$ nonland permanent | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBChoose
+SVar:TrigDigUntil:DB$ DigUntil | Valid$ Permanent.nonLand | ValidDescription$ nonland permanent | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBChoose
 SVar:DBChoose:DB$ GenericChoice | Choices$ Battlefield,Hand | Defined$ You
 SVar:Battlefield:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup | SpellDescription$ Put the nonland permanent onto the battlefield
 SVar:Hand:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup | SpellDescription$ Put the nonland permanent into your hand
