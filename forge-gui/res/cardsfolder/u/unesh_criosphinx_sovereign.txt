@@ -8,7 +8,6 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self,Card.Sphinx+Other+YouCtrl | Origin$ A
 SVar:TrigChangeZone:DB$ PeekAndReveal | PeekAmount$ 4 | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBTwoPiles | SpellDescription$ Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.
 SVar:DBTwoPiles:DB$ TwoPiles | Defined$ You | DefinedCards$ Remembered | Separator$ Opponent | ChosenPile$ DBHand | UnchosenPile$ DBGrave
 SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand
-SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Graveyard
 SVar:BuffedBy:Sphinx
 Oracle:Flying\nSphinx spells you cast cost {2} less to cast.\nWhenever Unesh, Criosphinx Sovereign or another Sphinx enters the battlefield under your control, reveal the top four cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.

@@ -6,6 +6,6 @@ SVar:RepeatPlayer:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ D
 SVar:DBTwoPiles:DB$ TwoPiles | Defined$ Player.IsRemembered | Chooser$ Player.IsRemembered | Zone$ Battlefield | ValidCards$ Creature.RememberedPlayerCtrl | Separator$ You | ChosenPile$ DBRemember | AILogic$ Best
 SVar:DBRemember:DB$ Pump | ImprintCards$ Remembered
 SVar:DBOnlyBlock:DB$ PumpAll | KW$ HIDDEN CARDNAME can't block. | ValidCards$ Creature.OppCtrl+IsNotImprinted | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:PlayMain1:TRUE
 Oracle:At the beginning of combat on your turn, for each defending player, separate all creatures that player controls into two piles and that player chooses one. Only creatures in the chosen piles can block this turn.

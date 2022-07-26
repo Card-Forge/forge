@@ -5,5 +5,5 @@ A:SP$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBTwoPiles | SubA
 SVar:DBTwoPiles:DB$ TwoPiles | Defined$ Remembered | Separator$ Remembered | Chooser$ You | ChosenPile$ DBImprint | ValidCards$ Creature.RememberedPlayerCtrl | Zone$ Battlefield
 SVar:DBImprint:DB$ Pump | ImprintCards$ Remembered
 SVar:DBSac:DB$ SacrificeAll | Defined$ Imprinted | SubAbility$ DBCleanup | StackDescription$ Each opponent sacrifices the creatures in their chosen pile. | SpellDescription$ Each opponent sacrifices the creatures in their chosen pile. (Piles can be empty.)
-SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 Oracle:Each opponent separates the creatures they control into two piles. For each opponent, you choose one of their piles. Each opponent sacrifices the creatures in their chosen pile. (Piles can be empty.)

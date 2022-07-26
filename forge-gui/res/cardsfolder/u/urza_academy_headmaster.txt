@@ -50,7 +50,7 @@ SVar:Mill8M:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | Num
 SVar:Dig9M:DB$ PeekAndReveal | PeekAmount$ 5 | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBTwoPiles9M | SpellDescription$ Reveal the top five cards of your library. An opponent separates them into two piles. Put one pile into your hand and the other on the bottom of your library in any order.
 SVar:DBTwoPiles9M:DB$ TwoPiles | Defined$ You | DefinedCards$ Remembered | Separator$ Opponent | ChosenPile$ DBHand9M | UnchosenPile$ DBLibraryBottom9M
 SVar:DBHand9M:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand
-SVar:DBLibraryBottom9M:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | SubAbility$ DBCleanup
+SVar:DBLibraryBottom9M:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1
 SVar:Exile10M:DB$ ChangeZone | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target permanent.
 SVar:Reveal11M:DB$ PeekAndReveal | PeekAmount$ 5 | NoPeek$ True | RememberRevealed$ True | SubAbility$ DBChangeCreatures11M | SpellDescription$ Reveal the top five cards of your library. You may put all creature cards and/or land cards from among them into your hand. Put the rest into your graveyard.
 SVar:DBChangeCreatures11M:DB$ ChangeZoneAll | ChangeType$ Card.Creature+IsRemembered | Origin$ Library | Destination$ Hand | Optional$ True | OptionQuestion$ Put all creature cards into your hand? | ForgetChanged$ True | SubAbility$ DBChangeLands11M
