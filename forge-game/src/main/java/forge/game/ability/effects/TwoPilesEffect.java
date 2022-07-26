@@ -148,17 +148,18 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                     if (sub != null) {
                         AbilityUtils.resolve(sub);
                     }
+                    card.clearRemembered();
                 }
 
                 // take action on the unchosen pile
                 if (sa.hasParam("UnchosenPile")) {
-                    card.clearRemembered();
                     card.addRemembered(unchosenPile);
 
                     SpellAbility sub = sa.getAdditionalAbility("UnchosenPile");
                     if (sub != null) {
                         AbilityUtils.resolve(sub);
                     }
+                    card.clearRemembered();
                 }
             }
         }
