@@ -71,6 +71,9 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         GameEntityCounterTable table = new GameEntityCounterTable();
         for (final Card tgtCard : cards) {
             tgtCard.addCounter(type, counterAmount, placer, table);
+            if (sa.hasParam("RememberCards")) {
+                host.addRemembered(tgtCard);
+            }
         }
 
         if (sa.hasParam("ValidCards2") || sa.hasParam("CounterType2") || sa.hasParam("CounterNum2")) {
