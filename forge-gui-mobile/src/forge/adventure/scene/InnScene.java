@@ -61,10 +61,6 @@ public class InnScene extends UIScene {
             leave.getLabel().setText(Forge.getLocalizer().getMessage("lblLeave"));
             sell = ui.findActor("sell");
             sell.getLabel().setText(Forge.getLocalizer().getMessage("lblSell"));
-            // TODO This call doesn't return an accurate amount at the time its called?
-            int tempHealthCost = Current.player().falseLifeCost();
-            tempHitPointCost = ui.findActor("tempHitPointCost");
-            tempHitPointCost.getLabel().setText("$" + tempHealthCost);
 
             tempHitPoints = ui.findActor("tempHitPoints");
             tempHitPoints.setText(Forge.getLocalizer().getMessage("lblTempHitPoints"));
@@ -72,7 +68,19 @@ public class InnScene extends UIScene {
             leaveIcon = ui.findActor("leaveIcon");
             healIcon = ui.findActor("healIcon");
             sellIcon = ui.findActor("sellIcon");
+    }
 
+    @Override
+    public void render() {
+        super.render();
+
+        int tempHealthCost = Current.player().falseLifeCost();
+        boolean purchaseable = Current.player().getMaxLife() == Current.player().getLife() &&
+                tempHealthCost <= Current.player().getGold();
+
+        tempHitPointCost = ui.findActor("tempHitPointCost");
+        tempHitPointCost.setDisabled(!purchaseable);
+        tempHitPointCost.getLabel().setText("$" + tempHealthCost);
     }
 
     private void sell() {
