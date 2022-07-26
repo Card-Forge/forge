@@ -890,7 +890,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (choose.equals("Targeted") && sa.getTargets().isTargetingAnyPlayer()) {
                 chooser = sa.getTargets().getFirstTargetedPlayer();
             } else {
-                chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), choose, sa).get(0);
+                final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
+                if (!choosers.isEmpty()) {
+                    chooser = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, null, null);
+                }
             }
         }
 
@@ -901,7 +904,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         final boolean defined = sa.hasParam("Defined");
-        final String changeType = sa.hasParam("ChangeType") ? sa.getParam("ChangeType") : "";
+        final String changeType = sa.getParamOrDefault("ChangeType", "");
         Map<Player, HiddenOriginChoices> HiddenOriginChoicesMap = Maps.newHashMap();
 
         for (Player player : fetchers) {
@@ -1101,6 +1104,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                         Card c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa,
                                 thisList, delayedReveal, selectPrompt, !sa.hasParam("Mandatory"), decider);
+                        if (c == null) {
+                            continue;
+                        }
                         chosenCards.add(c);
                     }
                 }

@@ -14,6 +14,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
+import forge.util.collect.FCollectionView;
 
 public class TwoPilesEffect extends SpellAbilityEffect {
 
@@ -58,12 +59,18 @@ public class TwoPilesEffect extends SpellAbilityEffect {
 
         Player separator = card.getController();
         if (sa.hasParam("Separator")) {
-            separator = AbilityUtils.getDefinedPlayers(card, sa.getParam("Separator"), sa).get(0);
+            final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Separator"), sa);
+            if (!choosers.isEmpty()) {
+                separator = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, null, null);
+            }
         }
 
         Player chooser = tgtPlayers.get(0);
         if (sa.hasParam("Chooser")) {
-            chooser = AbilityUtils.getDefinedPlayers(card, sa.getParam("Chooser"), sa).get(0);
+            final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
+            if (!choosers.isEmpty()) {
+                chooser = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, null, null);
+            }
         }
 
         for (final Player p : tgtPlayers) {
