@@ -17,6 +17,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 
@@ -40,8 +41,10 @@ public class DigUntilEffect extends SpellAbilityEffect {
             sb.append(pl).append(" ");
         }
 
-        sb.append("reveals cards from their library until revealing ");
-        sb.append(untilAmount).append(" ").append(desc).append(" card");
+        final ZoneType revealed = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
+        sb.append(revealed.equals(ZoneType.Exile) ? "exiles cards from their library until they exile " :
+                "reveals cards from their library until revealing ");
+        sb.append(Lang.nounWithNumeralExceptOne(untilAmount, desc + " card"));
         if (untilAmount != 1) {
             sb.append("s");
         }
@@ -49,27 +52,30 @@ public class DigUntilEffect extends SpellAbilityEffect {
             untilAmount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("MaxRevealed"), sa);
             sb.append(" or ").append(untilAmount).append(" card/s");
         }
-        sb.append(". Put ");
+        sb.append(".");
 
-        final ZoneType found = ZoneType.smartValueOf(sa.getParam("FoundDestination"));
-        final ZoneType revealed = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
-        if (found != null) {
-            sb.append(untilAmount > 1 ? "those cards" : "that card");
-            sb.append(" ");
+        if (!sa.hasParam("NoPutDesc")) {
+            sb.append(" Put ");
 
-            if (found.equals(ZoneType.Hand)) {
-                sb.append("into their hand ");
-            }
+            final ZoneType found = ZoneType.smartValueOf(sa.getParam("FoundDestination"));
+            if (found != null) {
+                sb.append(untilAmount > 1 ? "those cards" : "that card");
+                sb.append(" ");
 
-            if (revealed.equals(ZoneType.Graveyard)) {
-                sb.append("and all other cards into their graveyard.");
-            }
-            if (revealed.equals(ZoneType.Exile)) {
-                sb.append("and exile all other cards revealed this way.");
-            }
-        } else if (revealed != null) {
-            if (revealed.equals(ZoneType.Hand)) {
-                sb.append("all cards revealed this way into their hand");
+                if (found.equals(ZoneType.Hand)) {
+                    sb.append("into their hand ");
+                }
+
+                if (revealed.equals(ZoneType.Graveyard)) {
+                    sb.append("and all other cards into their graveyard.");
+                }
+                if (revealed.equals(ZoneType.Exile)) {
+                    sb.append("and exile all other cards revealed this way.");
+                }
+            } else if (revealed != null) {
+                if (revealed.equals(ZoneType.Hand)) {
+                    sb.append("all cards revealed this way into their hand");
+                }
             }
         }
         return sb.toString();

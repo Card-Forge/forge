@@ -73,6 +73,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (generatedTooltip != null)
                 generatedTooltip.dispose();
         }
+        if (T != null)
+            T.dispose();
     }
 
     public Reward getReward() {
@@ -81,7 +83,45 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     @Override
     public void onImageFetched() {
-        setCardImage(ImageCache.getImage(reward.getCard().getImageKey(false), false));
+        image = ImageCache.getImage(reward.getCard().getImageKey(false), false);
+        if (image != null) {
+            try {
+                TextureRegionDrawable drawable = new TextureRegionDrawable(ImageCache.croppedBorderImage(image));
+                if(Forge.isLandscapeMode())
+                    drawable.setMinSize((Scene.getIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.getIntendedHeight() * 0.95f);
+                else
+                    drawable.setMinSize(Scene.getIntendedWidth()  * 0.95f, Scene.getIntendedWidth()* RewardScene.CARD_WIDTH_TO_HEIGHT * 0.95f);
+                if (toolTipImage != null) {
+                    if (toolTipImage.getDrawable() instanceof Texture) {
+                        ((Texture) toolTipImage.getDrawable()).dispose();
+                    }
+                }
+                toolTipImage.remove();
+                toolTipImage = new Image(drawable);
+                if (GuiBase.isAndroid()) {
+                    if (holdTooltip.tooltip_image.getDrawable() instanceof Texture) {
+                        ((Texture) holdTooltip.tooltip_image.getDrawable()).dispose();
+                    }
+                    Actor ht = holdTooltip.tooltip_actor.getCells().get(0).getActor();
+                    if (ht != null && ht instanceof Image) {
+                        if (((Image) ht).getDrawable() instanceof Texture) {
+                            ((Texture) ((Image) ht).getDrawable()).dispose();
+                        }
+                    }
+                    holdTooltip.tooltip_actor.add(toolTipImage);
+                } else {
+                    Image renderedImage = tooltip.getActor();
+                    if (renderedImage != null &&  renderedImage.getDrawable() instanceof Texture) {
+                        ((Texture) tooltip.getActor().getDrawable()).dispose();
+                    }
+                    tooltip.setActor(toolTipImage);
+                }
+                if (T != null)
+                    T.dispose();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public RewardActor(Reward reward, boolean flippable) {
@@ -106,13 +146,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         }
                         T = renderPlaceholder(G, reward.getCard()); //Now we can render the card.
                         setCardImage(T);
-                        if (image == null) {
-                            if (T == null)
-                                System.err.println("Error generating placeholder image for card: "+reward.getCard().getName());
-                            else
-                                image = T;
-                        }
-                        //Set the fetcher regardless. It'll replace the preview once it lands.
                         fetcher.fetchImage(reward.getCard().getImageKey(false), this);
                     }
                 }
@@ -217,14 +250,19 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 drawable.setMinSize((Scene.getIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.getIntendedHeight() * 0.95f);
             else
                 drawable.setMinSize(Scene.getIntendedWidth()  * 0.95f, Scene.getIntendedWidth()* RewardScene.CARD_WIDTH_TO_HEIGHT * 0.95f);
-            toolTipImage = new Image(drawable);
-            tooltip = new Tooltip<Image>(toolTipImage);
-            holdTooltip = new HoldTooltip(new Image(drawable));
-            tooltip.setInstant(true);
-            if (frontSideUp()) {
-                if (GuiBase.isAndroid())
+            if (toolTipImage == null)
+                toolTipImage = new Image(drawable);
+            if (GuiBase.isAndroid()) {
+                if (holdTooltip == null)
+                    holdTooltip = new HoldTooltip(toolTipImage);
+                if (frontSideUp())
                     addListener(holdTooltip);
-                else
+
+            } else {
+                if (tooltip == null)
+                    tooltip = new Tooltip<Image>(toolTipImage);
+                tooltip.setInstant(true);
+                if (frontSideUp())
                     addListener(tooltip);
             }
         } catch (Exception e) {
@@ -253,45 +291,56 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     private void setItemTooltips(Sprite icon) {
-        float icon_w = 64f; float icon_h = 64f; //Sizes for the embedded icon. Could be made smaller on smaller resolutions.
-        Matrix4 m  = new Matrix4();
-        ItemData item = getReward().getItem();
-        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, preview_w, preview_h, false);
-        frameBuffer.begin();
-        m.setToOrtho2D(0,preview_h, preview_w, -preview_h); //So it renders flipped directly.
-        Graphics G = new Graphics();
-        G.begin(preview_w, preview_h);
-        G.setProjectionMatrix(m);
-        G.startClip();
-        //Draw item description panel.
-        G.fillRect(new Color(0f, 0f, 0f, 0.96f), 0, 0, preview_w, preview_h); //Translucent background.
-        G.drawRectLines(2, Color.WHITE, 0, 0, preview_w, preview_h); //Add a border.
-        G.drawImage(icon, 2, 2, icon_w, icon_h); //Draw the item's icon.
-        G.drawText(item.name, FSkinFont.get(24), Color.WHITE, icon_w + 2, 2, preview_w - (icon_w + 2), icon_h, false, 1, true); //Item name.
-        G.drawRectLines(1, Color.WHITE, 6, icon_h + 2, preview_w - 12, preview_h - (icon_h + 6)); //Description border.
-        G.drawText(item.getDescription(), FSkinFont.get(18), Color.WHITE, 10, icon_h + 8, preview_w - 10, preview_h - 4, true, Align.left, false); //Description.
-        G.end();
-        G.endClip();
-        Texture result = new Texture(Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h), Forge.isTextureFilteringEnabled());
-        frameBuffer.end();
-        G.dispose();
-        frameBuffer.dispose();
+        if (generatedTooltip == null) {
+            float icon_w = 64f; float icon_h = 64f; //Sizes for the embedded icon. Could be made smaller on smaller resolutions.
+            Matrix4 m  = new Matrix4();
+            ItemData item = getReward().getItem();
+            FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, preview_w, preview_h, false);
+            frameBuffer.begin();
+            m.setToOrtho2D(0,preview_h, preview_w, -preview_h); //So it renders flipped directly.
+            Graphics G = new Graphics();
+            G.begin(preview_w, preview_h);
+            G.setProjectionMatrix(m);
+            G.startClip();
+            //Draw item description panel.
+            G.fillRect(new Color(0f, 0f, 0f, 0.96f), 0, 0, preview_w, preview_h); //Translucent background.
+            G.drawRectLines(2, Color.WHITE, 0, 0, preview_w, preview_h); //Add a border.
+            G.drawImage(icon, 2, 2, icon_w, icon_h); //Draw the item's icon.
+            G.drawText(item.name, FSkinFont.get(24), Color.WHITE, icon_w + 2, 2, preview_w - (icon_w + 2), icon_h, false, 1, true); //Item name.
+            G.drawRectLines(1, Color.WHITE, 6, icon_h + 2, preview_w - 12, preview_h - (icon_h + 6)); //Description border.
+            G.drawText(item.getDescription(), FSkinFont.get(18), Color.WHITE, 10, icon_h + 8, preview_w - 10, preview_h - 4, true, Align.left, false); //Description.
+            G.end();
+            G.endClip();
+            generatedTooltip = new Texture(Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h), Forge.isTextureFilteringEnabled());
+            frameBuffer.end();
+            G.dispose();
+            frameBuffer.dispose();
+        }
+
         //Rendering code ends here.
 
-        TextureRegionDrawable drawable = new TextureRegionDrawable(result);
+        TextureRegionDrawable drawable = new TextureRegionDrawable(generatedTooltip);
         if(Forge.isLandscapeMode())
             drawable.setMinSize((Scene.getIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.getIntendedHeight() * 0.95f);
         else
             drawable.setMinSize(Scene.getIntendedWidth()  * 0.95f, Scene.getIntendedWidth()* RewardScene.CARD_WIDTH_TO_HEIGHT * 0.95f);
-        toolTipImage = new Image(drawable);
-        tooltip = new Tooltip<>(toolTipImage);
-        holdTooltip = new HoldTooltip(new Image(drawable));
-        tooltip.setInstant(true);
+
+        if (toolTipImage == null)
+            toolTipImage = new Image(drawable);
+
         if (frontSideUp()) {
-            if (GuiBase.isAndroid()) addListener(holdTooltip);
-            else addListener(tooltip);
+            if (GuiBase.isAndroid()) {
+                if (holdTooltip == null)
+                    holdTooltip = new HoldTooltip(toolTipImage);
+                addListener(holdTooltip);
+            } else {
+                if (tooltip == null) {
+                    tooltip = new Tooltip<>(toolTipImage);
+                    tooltip.setInstant(true);
+                }
+                addListener(tooltip);
+            }
         }
-        generatedTooltip = result; //Dispose of this later.
     }
 
     private boolean frontSideUp() {

@@ -426,7 +426,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 if (sa.hasParam("EachFromSource")) {
                     for (Card c : AbilityUtils.getDefinedCards(card, sa.getParam("EachFromSource"), sa)) {
                         for (Entry<CounterType, Integer> cti : c.getCounters().entrySet()) {
-                            if (gameCard != null && gameCard.canReceiveCounters(cti.getKey())) {
+                            if (gameCard != null) {
                                 gameCard.addCounter(cti.getKey(), cti.getValue(), placer, table);
                             }
                         }
