@@ -86,10 +86,17 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
         for (final String s : invalidTypes) {
             validTypes.remove(s);
         }
+        if (sa.hasParam("Note") && card.hasAnyNotedType()) {
+            for (String noted : card.getNotedTypes()) {
+                validTypes.remove(noted);
+            }
+        }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        if (!validTypes.isEmpty()) {
+        if (validTypes.isEmpty() && sa.hasParam("Note")) {
+            // OK to end up with no choices/have nothing new to note
+        } else if (!validTypes.isEmpty()) {
             for (final Player p : tgtPlayers) {
                 String choice;
                 if ((tgt == null) || p.canBeTargetedBy(sa)) {
@@ -100,7 +107,9 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                     } else {
                         choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
                     }
-                    if (!sa.hasParam("ChooseType2")) {
+                    if (sa.hasParam("Note")) {
+                        card.addNotedType(choice);
+                    } else if (!sa.hasParam("ChooseType2")) {
                         card.setChosenType(choice);
                     } else {
                         card.setChosenType2(choice);
