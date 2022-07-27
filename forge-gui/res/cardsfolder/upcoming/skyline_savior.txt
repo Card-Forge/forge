@@ -1,0 +1,15 @@
+Name:Skyline Savior
+ManaCost:1 W W
+Types:Creature Angel
+PT:3/4
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a permanent you control to its owner's hand. If it's a non-Angel creature card, it perpetually gets +1/+1, gains flying, and becomes an Angel in addition to its other types.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Return a permanent you control to its owner's hand | ValidTgts$ Permanent.YouCtrl | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualP1P1Fly,PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Skyline Savior's Perpetual Effect | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SubAbility$ DBCleanup
+SVar:PerpetualP1P1Fly:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command
+SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Angel & Creature | EffectZone$ Command | AffectedZon$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Targeted$Valid Creature.nonAngel
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+Oracle:Flying\nWhen Skyline Savior enters the battlefield, return a permanent you control to its owner's hand. If it's a non-Angel creature card, it perpetually gets +1/+1, gains flying, and becomes an Angel in addition to its other types.
