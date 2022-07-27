@@ -96,8 +96,6 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                     title = Localizer.getInstance().getMessage("lblDivideCardIntoTwoPiles");
                 }
 
-                card.clearRemembered();
-
                 // first, separate the cards into piles
                 final CardCollectionView pile1 = separator.getController().chooseCardsForEffect(pool, sa, title, 0, size, false, null);
                 final CardCollection pile2 = new CardCollection(pool);
@@ -147,25 +145,36 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                 }
 
 
+                if (sa.hasParam("RememberChosen")) {
+                    card.addRemembered(chosenPile);
+                }
+
                 // take action on the chosen pile
                 if (sa.hasParam("ChosenPile")) {
+                    if (card.hasRemembered()) {
+                        card.clearRemembered();
+                    }
                     card.addRemembered(chosenPile);
 
                     SpellAbility sub = sa.getAdditionalAbility("ChosenPile");
                     if (sub != null) {
                         AbilityUtils.resolve(sub);
                     }
+                    card.clearRemembered();
                 }
 
                 // take action on the unchosen pile
                 if (sa.hasParam("UnchosenPile")) {
-                    card.clearRemembered();
+                    if (card.hasRemembered()) {
+                        card.clearRemembered();
+                    }
                     card.addRemembered(unchosenPile);
 
                     SpellAbility sub = sa.getAdditionalAbility("UnchosenPile");
                     if (sub != null) {
                         AbilityUtils.resolve(sub);
                     }
+                    card.clearRemembered();
                 }
             }
         }
