@@ -1,11 +1,13 @@
 Name:Arcane Archery
 ManaCost:2 G
 Types:Instant
-A:SP$ Pump | ValidTgts$ Creature | NumAtt$ 3 | NumDef$ 3 | KW$ Reach,Trample | SubAbility$ DBDelayedTrigger | SpellDescription$ Target creature gets +3/+3 and gains reach and trample until end of turn. You get a boon with "When you cast your next creature spell, that creature enters the battlefield with an additional +1/+1 counter, reach counter, and trample counter on it."
-SVar:DBDelayedTrigger:DB$ DelayedTrigger | Execute$ TrigAddAPI | Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You
-SVar:TrigAddAPI:DB$ Effect | RememberObjects$ TriggeredCard | ForgetOnMoved$ Stack | ReplacementEffects$ ReplaceEnter
-SVar:ReplaceEnter:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ AddExtraCounter | ReplacementResult$ Updated | Description$ This creature enters the battlefield with an additional +1/+1 counter, reach counter, and trample counter on it.
-SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterTypes$ P1P1,Trample,Reach | CounterNum$ 1 | SubAbility$ DBExile
-SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ 3 | NumDef$ 3 | KW$ Reach & Trample | SubAbility$ DBBoon | SpellDescription$ Target creature gets +3/+3 and gains reach and trample until end of turn.
+SVar:DBBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast | SpellDescription$ You get a boon with "When you cast your next creature spell, that creature enters the battlefield with an additional +1/+1 counter, reach counter, and trample counter on it."
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | OneOff$ True | ActivationLimit$ 1 | TriggerZones$ Command | Execute$ ReplEffAddCounter | TriggerDescription$ When you cast your next creature spell, that creature enters the battlefield with an additional +1/+1 counter, reach counter, and trample counter on it.
+SVar:ReplEffAddCounter:DB$ Effect | ReplacementEffects$ ETBAddCounter | RememberObjects$ TriggeredCard
+SVar:ETBAddCounter:Event$ Moved | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ ETBAddExtraCounter
+SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterTypes$ P1P1,Reach,Trample | CounterNum$ 1 | SubAbility$ MoveToBattlefield
+SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | SubAbility$ TrigRemoveSelf
+SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 DeckHas:Ability$Counters
 Oracle:Target creature gets +3/+3 and gains reach and trample until end of turn.\nYou get a boon with "When you cast your next creature spell, that creature enters the battlefield with an additional +1/+1 counter, reach counter, and trample counter on it."
