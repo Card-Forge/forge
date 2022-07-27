@@ -12,5 +12,5 @@ ALTERNATE
 Name:Rob the Hoard
 ManaCost:1 W
 Types:Sorcery Adventure
-A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target artifact, enchantment, or legendary card in your graveyard | ValidTgts$ Artifact.YouCtrl,Enchantment.YouCtrl,Card.Legendary+YouCtrl | SpellDescription$ Return target artifact enchantment, or legendary card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)
-Oracle:Return target artifact or enchantment card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target artifact, enchantment, or legendary card in your graveyard | ValidTgts$ Artifact.YouOwn,Enchantment.YouOwn,Card.Legendary+YouOwn | SpellDescription$ Return target artifact, enchantment, or legendary card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Return target artifact, enchantment, or legendary card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)
