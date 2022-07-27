@@ -246,6 +246,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.IsEmblem, c.isEmblem());
     }
 
+    public boolean isBoon() {
+        return get(TrackableProperty.IsBoon);
+    }
+    public void updateBoon(Card c) {
+        set(TrackableProperty.IsBoon, c.isBoon());
+    }
+
     public boolean isTokenCard() { return get(TrackableProperty.TokenCard); }
     void updateTokenCard(Card c) { set(TrackableProperty.TokenCard, c.isTokenCard()); }
 
