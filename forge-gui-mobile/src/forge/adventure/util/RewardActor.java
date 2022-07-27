@@ -83,48 +83,44 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     @Override
     public void onImageFetched() {
-        for (Actor a : getStage().getActors()) {
-            if (a instanceof RewardActor && a == this) {
-                ((RewardActor) a).image = ImageCache.getImage(reward.getCard().getImageKey(false), false);
-                if (((RewardActor) a).image != null) {
-                    try {
-                        TextureRegionDrawable drawable = new TextureRegionDrawable(ImageCache.croppedBorderImage(((RewardActor) a).image));
-                        if(Forge.isLandscapeMode())
-                            drawable.setMinSize((Scene.getIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.getIntendedHeight() * 0.95f);
-                        else
-                            drawable.setMinSize(Scene.getIntendedWidth()  * 0.95f, Scene.getIntendedWidth()* RewardScene.CARD_WIDTH_TO_HEIGHT * 0.95f);
-                        if (toolTipImage != null) {
-                            if (toolTipImage.getDrawable() instanceof Texture) {
-                                ((Texture) toolTipImage.getDrawable()).dispose();
-                            }
-                        }
-                        toolTipImage.remove();
-                        toolTipImage = new Image(drawable);
-                        if (GuiBase.isAndroid()) {
-                            if (((RewardActor) a).holdTooltip.tooltip_image.getDrawable() instanceof Texture) {
-                                ((Texture) ((RewardActor) a).holdTooltip.tooltip_image.getDrawable()).dispose();
-                            }
-                            Actor ht = ((RewardActor) a).holdTooltip.tooltip_actor.getCells().get(0).getActor();
-                            if (ht != null && ht instanceof Image) {
-                                if (((Image) ht).getDrawable() instanceof Texture) {
-                                    ((Texture) ((Image) ht).getDrawable()).dispose();
-                                }
-                            }
-                            ((RewardActor) a).holdTooltip.tooltip_actor.removeActorAt(0, false);
-                            ((RewardActor) a).holdTooltip.tooltip_actor.add(toolTipImage);
-                        } else {
-                            Image renderedImage = ((RewardActor) a).tooltip.getActor();
-                            if (renderedImage != null &&  renderedImage.getDrawable() instanceof Texture) {
-                                ((Texture) ((RewardActor) a).tooltip.getActor().getDrawable()).dispose();
-                            }
-                            ((RewardActor) a).tooltip.setActor(toolTipImage);
-                        }
-                        if (T != null)
-                            T.dispose();
-                    } catch (Exception e) {
-                        e.printStackTrace();
+        image = ImageCache.getImage(reward.getCard().getImageKey(false), false);
+        if (image != null) {
+            try {
+                TextureRegionDrawable drawable = new TextureRegionDrawable(ImageCache.croppedBorderImage(image));
+                if(Forge.isLandscapeMode())
+                    drawable.setMinSize((Scene.getIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.getIntendedHeight() * 0.95f);
+                else
+                    drawable.setMinSize(Scene.getIntendedWidth()  * 0.95f, Scene.getIntendedWidth()* RewardScene.CARD_WIDTH_TO_HEIGHT * 0.95f);
+                if (toolTipImage != null) {
+                    if (toolTipImage.getDrawable() instanceof Texture) {
+                        ((Texture) toolTipImage.getDrawable()).dispose();
                     }
                 }
+                toolTipImage.remove();
+                toolTipImage = new Image(drawable);
+                if (GuiBase.isAndroid()) {
+                    if (holdTooltip.tooltip_image.getDrawable() instanceof Texture) {
+                        ((Texture) holdTooltip.tooltip_image.getDrawable()).dispose();
+                    }
+                    Actor ht = holdTooltip.tooltip_actor.getCells().get(0).getActor();
+                    if (ht != null && ht instanceof Image) {
+                        if (((Image) ht).getDrawable() instanceof Texture) {
+                            ((Texture) ((Image) ht).getDrawable()).dispose();
+                        }
+                    }
+                    holdTooltip.tooltip_actor.removeActorAt(0, false);
+                    holdTooltip.tooltip_actor.add(toolTipImage);
+                } else {
+                    Image renderedImage = tooltip.getActor();
+                    if (renderedImage != null &&  renderedImage.getDrawable() instanceof Texture) {
+                        ((Texture) tooltip.getActor().getDrawable()).dispose();
+                    }
+                    tooltip.setActor(toolTipImage);
+                }
+                if (T != null)
+                    T.dispose();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
