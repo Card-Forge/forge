@@ -108,7 +108,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                             ((Texture) ((Image) ht).getDrawable()).dispose();
                         }
                     }
-                    holdTooltip.tooltip_actor.removeActorAt(0, false);
                     holdTooltip.tooltip_actor.add(toolTipImage);
                 } else {
                     Image renderedImage = tooltip.getActor();
