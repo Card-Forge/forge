@@ -459,7 +459,6 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             onLifeTotalChangeList.emit();
             onGoldChangeList.emit();
         } else {
-
             System.out.println("Can't afford cost of false life " + falseLifeCost());
             System.out.println("Only has this much gold " + gold);
         }
