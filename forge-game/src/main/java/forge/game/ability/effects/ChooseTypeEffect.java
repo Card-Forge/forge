@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import forge.card.CardType;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -49,7 +50,17 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                 validTypes.addAll(CardType.getAllCardTypes());
                 break;
             case "Creature":
-                validTypes.addAll(CardType.getAllCreatureTypes());
+                if (sa.hasParam("TypesFromDefined")) {
+                    for (final Card c : AbilityUtils.getDefinedCards(card, sa.getParam("TypesFromDefined"), sa)) {
+                        for (String t : c.getType()) {
+                            if (CardType.isACreatureType(t)) {
+                                validTypes.add(t);
+                            }
+                        }
+                    }
+                } else {
+                    validTypes.addAll(CardType.getAllCreatureTypes());
+                }
                 break;
             case "Basic Land":
                 validTypes.addAll(CardType.getBasicTypes());
