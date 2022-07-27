@@ -1,0 +1,10 @@
+Name:Flaming Fist Duskguard
+ManaCost:1 W
+Types:Creature Dwarf Soldier
+PT:3/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBoon | TriggerDescription$ When CARDNAME enters the battlefield, you get a boon with "When you cast your next creature spell, it perpetually gets +1/+0."
+SVar:TrigBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | OneOff$ True | ActivationLimit$ 1 | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ When you cast your next creature spell, it perpetually gets +1/+0.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualPump | Duration$ Permanent | Name$ Flaming Fist Duskguard's Boon's Perpetual Effect
+SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$
+Oracle:When Flaming Fist Duskguard enters the battlefield, you get a boon with "When you cast your next creature spell, it perpetually gets +1/+0."
