@@ -631,7 +631,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 }
             }
         }
-        if (sa.hasParam("RememberCards")) {
+        //for cards like Agitator Ant/Spectacular Showdown that care if counters were actually put on,
+        // instead use "RememberPut" – this checks after replacement
+        if (sa.hasParam("RememberCards")) { // remembers whether counters actually placed or not
             card.addRemembered(table.columnKeySet());
         }
     }
