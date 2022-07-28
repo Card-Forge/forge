@@ -176,19 +176,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     public boolean isColliding(Rectangle boundingRect)
     {
 
-        World world = WorldSave.getCurrentSave().getWorld();
-        int currentBiome = World.highestBiome(world.getBiome((int) boundingRect.getX() / world.getTileSize(), (int) boundingRect.getY() / world.getTileSize()));
-        if(currentBiome==0)
-            return true;
-         currentBiome = World.highestBiome(world.getBiome((int) (boundingRect.getX()+boundingRect.getWidth()) / world.getTileSize(), (int) boundingRect.getY() / world.getTileSize()));
-        if(currentBiome==0)
-            return true;
-         currentBiome = World.highestBiome(world.getBiome((int) (boundingRect.getX()+boundingRect.getWidth())/ world.getTileSize(), (int) (boundingRect.getY()+boundingRect.getHeight()) / world.getTileSize()));
-        if(currentBiome==0)
-            return true;
-         currentBiome = World.highestBiome(world.getBiome((int) boundingRect.getX() / world.getTileSize(), (int) (boundingRect.getY()+boundingRect.getHeight()) / world.getTileSize()));
-
-        return (currentBiome==0);
+        return WorldSave.getCurrentSave().getWorld().collidingTile(boundingRect);
     }
 
     private void HandleMonsterSpawn(float delta) {

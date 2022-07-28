@@ -57,6 +57,8 @@ public class WorldSave   {
     static public boolean load(int currentSlot) {
 
         String fileName = WorldSave.getSaveFile(currentSlot);
+        if(!new File(fileName).exists())
+            return false;
         new File(getSaveDir()).mkdirs();
         try {
             try(FileInputStream fos  = new FileInputStream(fileName);

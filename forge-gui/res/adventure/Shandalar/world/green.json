@@ -19,6 +19,14 @@
       "resolution": 10
     }
   ],
+  "structures":[
+    {
+      "structureAtlasPath":"world/tilesets/forest.atlas",
+      "x": 0.5,
+      "y": 0.5,
+      "size": 0.3
+    } 
+  ],
   "width": 0.7,
   "height": 0.7,
   "color": "59a650",
