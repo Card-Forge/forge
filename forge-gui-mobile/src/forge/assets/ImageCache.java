@@ -281,7 +281,6 @@ public class ImageCache {
         }
         if (!others && cardsLoaded.size() > maxCardCapacity) {
             unloadCardTextures(Forge.getAssets().manager());
-            return null;
         }
         String fileName = file.getPath();
         //load to assetmanager
