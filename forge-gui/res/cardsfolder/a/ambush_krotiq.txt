@@ -3,7 +3,7 @@ ManaCost:5 G
 Types:Creature Insect
 PT:5/5
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return another creature you control to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return another creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.Other+YouCtrl
 SVar:NeedsToPlay:Creature.YouCtrl+cmcLE5+inZoneBattlefield
 Oracle:Trample\nWhen Ambush Krotiq enters the battlefield, return another creature you control to its owner's hand.

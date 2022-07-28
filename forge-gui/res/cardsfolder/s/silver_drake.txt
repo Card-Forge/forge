@@ -3,7 +3,7 @@ ManaCost:1 W U
 Types:Creature Drake
 PT:3/3
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a white or blue creature you control to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a white or blue creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.White+YouCtrl,Creature.Blue+YouCtrl | AILogic$ NeverBounceItself
 SVar:NeedsToPlay:Creature.White+YouCtrl+cmcLE3+inZoneBattlefield,Creature.Blue+YouCtrl+cmcLE3+inZoneBattlefield
 Oracle:Flying\nWhen Silver Drake enters the battlefield, return a white or blue creature you control to its owner's hand.
