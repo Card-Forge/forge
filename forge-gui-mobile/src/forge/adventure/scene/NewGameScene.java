@@ -228,6 +228,11 @@ public class NewGameScene extends UIScene {
     public void enter() {
         updateAvatar();
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
+
+        if(Forge.createNewAdventureMap)
+        {
+            start();
+        }
     }
 
     @Override

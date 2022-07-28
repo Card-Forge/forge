@@ -265,6 +265,14 @@ public class SplashScreen extends FContainer {
             add(btnHome);
             btnAdventure.setBounds(btn_x, btn_y + height + padding / 2, btn_w, height);
             add(btnAdventure);
+
+            if(Forge.createNewAdventureMap)
+            {
+                bgAnimation.progress = 1;
+                bgAnimation.openAdventure = true;
+                Forge.openAdventure();
+                Forge.clearSplashScreen();
+            }
         }
     }
 

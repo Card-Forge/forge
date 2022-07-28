@@ -10,7 +10,12 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class WorldEditor extends JComponent {
@@ -63,8 +68,26 @@ public class WorldEditor extends JComponent {
             return label;
         }
     }
+
+    /**
+     *
+     */
+    private void updateBiome() {
+
+        int selected=list.getSelectedIndex();
+        if(selected<0)
+            return;
+        edit.setCurrentBiome(model.get(selected));
+    }
+
     public WorldEditor() {
         list.setCellRenderer(new BiomeDataRenderer());
+        list.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                WorldEditor.this.updateBiome();
+            }
+        });
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
         add(tabs);
@@ -103,9 +126,42 @@ public class WorldEditor extends JComponent {
         JButton newButton=new JButton("save");
         newButton.addActionListener(e -> WorldEditor.this.save());
         toolBar.add(newButton);
+
         newButton=new JButton("load");
         newButton.addActionListener(e -> WorldEditor.this.load());
         toolBar.add(newButton);
+
+        toolBar.addSeparator();
+
+        newButton=new JButton("test map");
+        newButton.addActionListener(e -> WorldEditor.this.test());
+        toolBar.add(newButton);
+    }
+
+    private void test() {
+
+        String javaHome = System.getProperty("java.home");
+        String javaBin = javaHome + File.separator + "bin" + File.separator + "java";
+        String classpath = System.getProperty("java.class.path");
+        String className = forge.adventure.Main.class.getName();
+
+        ArrayList<String> command = new ArrayList<>();
+        command.add(javaBin);
+        command.add("-cp");
+        command.add(classpath);
+        command.add(className);
+
+        command.add("testMap");
+
+        ProcessBuilder build=  new ProcessBuilder(command);
+        build .redirectInput(ProcessBuilder.Redirect.INHERIT)
+                .redirectOutput(ProcessBuilder.Redirect.INHERIT)
+                .redirectError(ProcessBuilder.Redirect.INHERIT);
+        try {
+           Process process=  build.start();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     void save()

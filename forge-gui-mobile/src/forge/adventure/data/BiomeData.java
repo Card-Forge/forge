@@ -30,6 +30,7 @@ public class BiomeData implements Serializable {
     public String[] spriteNames;
     public List<String> enemies;
     public List<String> pointsOfInterest;
+    public BiomeStructureData[] structures;
 
     private ArrayList<EnemyData> enemyList;
     private ArrayList<PointOfInterestData> pointOfInterestList;

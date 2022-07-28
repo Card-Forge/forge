@@ -1,6 +1,7 @@
 package forge.adventure.editor;
 
 import forge.adventure.data.BiomeData;
+import forge.adventure.data.BiomeStructureData;
 import forge.adventure.data.BiomeTerrainData;
 
 import javax.swing.*;
@@ -12,15 +13,15 @@ import java.awt.event.ActionListener;
 /**
  * Editor class to edit configuration, maybe moved or removed
  */
-public class TerrainsEditor extends JComponent{
-    DefaultListModel<BiomeTerrainData> model = new DefaultListModel<>();
-    JList<BiomeTerrainData> list = new JList<>(model);
+public class StructureEditor extends JComponent{
+    DefaultListModel<BiomeStructureData> model = new DefaultListModel<>();
+    JList<BiomeStructureData> list = new JList<>(model);
     JToolBar toolBar = new JToolBar("toolbar");
-    BiomeTerrainEdit edit=new BiomeTerrainEdit();
+    BiomeStructureEdit edit=new BiomeStructureEdit();
 
     BiomeData currentData;
 
-    public class TerrainDataRenderer extends DefaultListCellRenderer {
+    public class StructureDataRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(
                 JList list, Object value, int index,
@@ -28,11 +29,11 @@ public class TerrainsEditor extends JComponent{
             JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
             if(!(value instanceof BiomeTerrainData))
                 return label;
-            BiomeTerrainData terrainData=(BiomeTerrainData) value;
+            BiomeTerrainData structureData=(BiomeTerrainData) value;
             StringBuilder builder=new StringBuilder();
-            builder.append("Terrain");
+            builder.append("Structure");
             builder.append(" ");
-            builder.append(terrainData.spriteName);
+            builder.append(structureData.spriteName);
             label.setText(builder.toString());
             return label;
         }
@@ -45,14 +46,14 @@ public class TerrainsEditor extends JComponent{
 
     }
 
-    public TerrainsEditor()
+    public StructureEditor()
     {
 
-        list.setCellRenderer(new TerrainDataRenderer());
-        list.addListSelectionListener(e -> TerrainsEditor.this.updateEdit());
-        addButton("add", e -> TerrainsEditor.this.addTerrain());
-        addButton("remove", e -> TerrainsEditor.this.remove());
-        addButton("copy", e -> TerrainsEditor.this.copy());
+        list.setCellRenderer(new StructureDataRenderer());
+        list.addListSelectionListener(e -> StructureEditor.this.updateEdit());
+        addButton("add", e -> StructureEditor.this.addStructure());
+        addButton("remove", e -> StructureEditor.this.remove());
+        addButton("copy", e -> StructureEditor.this.copy());
         BorderLayout layout=new BorderLayout();
         setLayout(layout);
         add(list, BorderLayout.LINE_START);
@@ -81,7 +82,7 @@ public class TerrainsEditor extends JComponent{
         int selected=list.getSelectedIndex();
         if(selected<0)
             return;
-        BiomeTerrainData data=new BiomeTerrainData(model.get(selected));
+        BiomeStructureData data=new BiomeStructureData(model.get(selected));
         model.add(model.size(),data);
     }
 
@@ -90,12 +91,12 @@ public class TerrainsEditor extends JComponent{
         int selected=list.getSelectedIndex();
         if(selected<0)
             return;
-        edit.setCurrentTerrain(model.get(selected),currentData);
+        edit.setCurrentStructure(model.get(selected),currentData);
     }
 
-    void addTerrain()
+    void addStructure()
     {
-        BiomeTerrainData data=new BiomeTerrainData();
+        BiomeStructureData data=new BiomeStructureData();
         model.add(model.size(),data);
     }
     void remove()
@@ -105,21 +106,21 @@ public class TerrainsEditor extends JComponent{
             return;
         model.remove(selected);
     }
-    public void setTerrains(BiomeData data) {
+    public void setStructures(BiomeData data) {
 
         currentData=data;
         model.clear();
-        if(data==null||data.terrain==null)
+        if(data==null||data.structures==null)
             return;
-        for (int i=0;i<data.terrain.length;i++) {
-            model.add(i,data.terrain[i]);
+        for (int i=0;i<data.structures.length;i++) {
+            model.add(i,data.structures[i]);
         }
         list.setSelectedIndex(0);
     }
 
-    public BiomeTerrainData[] getBiomeTerrainData() {
+    public BiomeStructureData[] getBiomeStructureData() {
 
-        BiomeTerrainData[] rewards= new BiomeTerrainData[model.getSize()];
+        BiomeStructureData[] rewards= new BiomeStructureData[model.getSize()];
         for(int i=0;i<model.getSize();i++)
         {
             rewards[i]=model.get(i);

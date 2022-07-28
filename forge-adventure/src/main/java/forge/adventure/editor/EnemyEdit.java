@@ -10,8 +10,6 @@ import java.awt.*;
  */
 public class EnemyEdit extends JComponent {
     EnemyData currentData;
-
-
     JTextField nameField=new JTextField();
     JTextField colorField=new JTextField();
     JSpinner lifeFiled= new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));

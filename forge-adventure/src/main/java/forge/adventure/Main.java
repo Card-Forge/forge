@@ -107,7 +107,13 @@ public class Main {
             }
         });
 
-
+        for(int i=0;i<args.length;i++)
+        {
+            if(args[i].equals("testMap"))
+            {
+                Forge.createNewAdventureMap=true;
+            }
+        }
         new Lwjgl3Application(start, config);
 
     }
