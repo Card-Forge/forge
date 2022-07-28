@@ -823,7 +823,9 @@ public class Game {
                         cc.removeRemembered(c);
                         cc.removeAttachedTo(c);
                     }
-                    // TODO by default this should skip effect cards
+                    // TODO skip effect cards by default
+                    // (might be nice to only keep those that will still affect the game, but could be tricky to automate)
+                    // will also require other changes because currently only zones of ingame players are checked
                     getAction().ceaseToExist(c, false);
                     // CR 603.2f owner of trigger source lost game
                     getTriggerHandler().clearDelayedTrigger(c);
