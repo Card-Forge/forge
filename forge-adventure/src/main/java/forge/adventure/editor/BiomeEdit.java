@@ -24,7 +24,7 @@ public class BiomeEdit extends JComponent {
     public TextListEdit pointsOfInterest =new TextListEdit();
 
     public TerrainsEditor terrain =new TerrainsEditor();
-
+    public StructureEditor structures =new StructureEditor();
     private boolean updating=false;
 
     public BiomeEdit()
@@ -46,11 +46,12 @@ public class BiomeEdit extends JComponent {
         center.add(new JLabel("enemies:")); center.add(enemies);
         center.add(new JLabel("pointsOfInterest:")); center.add(pointsOfInterest);
         center.add(new JLabel("color:")); center.add(color);
-        center.add(new JLabel("terrain:")); center.add(terrain);
+        center.add(new JLabel("terrain/structures:"));
         BorderLayout layout=new BorderLayout();
         setLayout(layout);
-        add(center,BorderLayout.PAGE_START);
+        add(center,BorderLayout.NORTH);
         add(terrain,BorderLayout.CENTER);
+        add(structures,BorderLayout.SOUTH);
 
         name.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeEdit.this.updateTerrain()));
         tilesetName.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeEdit.this.updateTerrain()));
@@ -81,6 +82,7 @@ public class BiomeEdit extends JComponent {
         currentData.tilesetAtlas    = tilesetAtlas.edit.getText();
         currentData.tilesetName    = tilesetName.getName();
         currentData.terrain    = terrain.getBiomeTerrainData();
+        currentData.structures    = structures.getBiomeStructureData();
         currentData.width    = (Float) width.getValue();
         currentData.height    = (Float) height.getValue();
         currentData.color    = color.getText();
@@ -109,7 +111,8 @@ public class BiomeEdit extends JComponent {
         name.setText(currentData.name);
         tilesetAtlas.edit.setText( currentData.tilesetAtlas);
         tilesetName.setText(currentData.tilesetName);
-        terrain.setTerrains(currentData.terrain);
+        terrain.setTerrains(currentData);
+        structures.setStructures(currentData);
         width.setValue(currentData.width);
         height.setValue(currentData.height);
         color.setText(currentData.color);
