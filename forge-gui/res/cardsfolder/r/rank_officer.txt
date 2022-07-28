@@ -2,7 +2,7 @@ Name:Rank Officer
 ManaCost:3 B
 Types:Creature Zombie Soldier
 PT:3/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ DBToken | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, create a 2/2 black Zombie creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBToken | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, create a 2/2 black Zombie creature token.
 SVar:DBToken:AB$ Token | Cost$ Discard<1/Card> | TokenAmount$ 1 | TokenScript$ b_2_2_zombie | TokenOwner$ You
 A:AB$ LoseLife | Cost$ 1 B T ExileFromGrave<1/Creature> | Defined$ Player.Opponent | LifeAmount$ 2 | SpellDescription$ Each opponent loses 2 life.
 DeckHas:Ability$Token

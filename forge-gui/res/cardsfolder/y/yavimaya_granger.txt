@@ -3,6 +3,6 @@ ManaCost:2 G
 Types:Creature Elf
 PT:2/2
 K:Echo:2 G
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | ShuffleNonMandatory$ True
 Oracle:Echo {2}{G} (At the beginning of your upkeep, if this came under your control since the beginning of your last upkeep, sacrifice it unless you pay its echo cost.)\nWhen Yavimaya Granger enters the battlefield, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
