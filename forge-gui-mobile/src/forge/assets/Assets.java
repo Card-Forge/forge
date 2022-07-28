@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.FileHandleResolver;
-import com.badlogic.gdx.assets.loaders.TextureLoader;
+import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -44,6 +44,7 @@ public class Assets implements Disposable {
     public Skin skin;
     public BitmapFont advDefaultFont, advBigFont;
     private Texture defaultImage, dummy;
+    private TextureParameter parameter;
     public Assets() {
         //init titlebg fallback
         fallback_skins.put(0, new Texture(GuiBase.isAndroid()
@@ -163,6 +164,20 @@ public class Assets implements Disposable {
             tmxMap = new ObjectMap<>();
         return tmxMap;
     }
+    public TextureParameter getTextureFilter() {
+        if (parameter == null)
+            parameter = new TextureParameter();
+        if (Forge.isTextureFilteringEnabled()) {
+            parameter.genMipMaps = true;
+            parameter.minFilter = Texture.TextureFilter.MipMapLinearLinear;
+            parameter.magFilter = Texture.TextureFilter.Linear;
+        } else {
+            parameter.genMipMaps = false;
+            parameter.minFilter = Texture.TextureFilter.Nearest;
+            parameter.magFilter = Texture.TextureFilter.Nearest;
+        }
+        return parameter;
+    }
     public Texture getDefaultImage() {
         if (defaultImage == null) {
             FileHandle blankImage = Gdx.files.absolute(ForgeConstants.NO_CARD_FILE);
@@ -171,7 +186,7 @@ public class Assets implements Disposable {
                 if (defaultImage != null)
                     return defaultImage;
                 //if not loaded yet, load to assetmanager
-                manager.load(blankImage.path(), Texture.class, new TextureLoader.TextureParameter(){{genMipMaps = true; minFilter = Texture.TextureFilter.MipMapLinearLinear; magFilter = Texture.TextureFilter.Linear;}});
+                manager.load(blankImage.path(), Texture.class, getTextureFilter());
                 manager.finishLoadingAsset(blankImage.path());
                 defaultImage = manager.get(blankImage.path());
             } else {
@@ -232,7 +247,7 @@ public class Assets implements Disposable {
         public synchronized <T> void load(String fileName, Class<T> type, AssetLoaderParameters<T> parameter) {
             if (type.equals(Texture.class)) {
                 if (parameter == null) {
-                    parameter = (AssetLoaderParameters<T>) new TextureLoader.TextureParameter();
+                    parameter = (AssetLoaderParameters<T>) new TextureParameter();
                 }
 
                 final AssetLoaderParameters.LoadedCallback prevCallback = parameter.loadedCallback;
