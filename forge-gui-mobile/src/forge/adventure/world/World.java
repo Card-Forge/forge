@@ -9,11 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
-import forge.adventure.data.BiomeData;
-import forge.adventure.data.BiomeSpriteData;
-import forge.adventure.data.BiomeTerrainData;
-import forge.adventure.data.PointOfInterestData;
-import forge.adventure.data.WorldData;
+import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.pointofintrest.PointOfInterestMap;
 import forge.adventure.scene.Scene;
@@ -24,10 +20,7 @@ import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Class that will create the world from the configuration
@@ -55,6 +48,26 @@ public class World implements  Disposable, SaveFileContent {
         return (int) (Math.log(Long.highestOneBit(biome)) / Math.log(2));
     }
 
+    public boolean collidingTile(Rectangle boundingRect)
+    {
+        Set<Pair<Integer,Integer>> points=new HashSet<>();
+
+        int xLeft=(int) boundingRect.getX() / getTileSize();
+        int yTop=(int) boundingRect.getY() / getTileSize();
+        int xRight=(int) (boundingRect.getX()+boundingRect.getWidth()) / getTileSize();
+        int yBottom= (int) (boundingRect.getY()+boundingRect.getHeight()) / getTileSize();
+
+        if(getBiome(xLeft,yTop)==0)
+            return true;
+        if(getBiome(xLeft,yBottom)==0)
+            return true;
+        if(getBiome(xRight,yBottom)==0)
+            return true;
+        if(getBiome(xRight,yTop)==0)
+            return true;
+
+        return false;
+    }
     public void loadWorldData() {
         if(worldDataLoaded)
             return;
@@ -85,6 +98,9 @@ public class World implements  Disposable, SaveFileContent {
         biomeImage=saveFileData.readPixmap("biomeImage");
         biomeMap=(long[][])saveFileData.readObject("biomeMap");
         terrainMap=(int[][])saveFileData.readObject("terrainMap");
+
+
+
         width=saveFileData.readInt("width");
         height=saveFileData.readInt("height");
         mapObjectIds = new SpritesDataMap(getChunkSize(), this.data.tileSize, this.data.width / getChunkSize());
@@ -269,6 +285,7 @@ public class World implements  Disposable, SaveFileContent {
                 endX = width;
                 endY = height;
             }
+            HashMap<BiomeStructureData,BiomeStructure> structureDataMap=new HashMap<>();
             for (int x = beginX; x < endX; x++) {
                 for (int y = beginY; y < endY; y++) {
                     //value 0-1 based on noise
@@ -288,16 +305,34 @@ public class World implements  Disposable, SaveFileContent {
                         pix.drawPixel(x, y);
                         biomeMap[x][y] |= (1L << biomeIndex);
                         int terrainCounter=1;
-                        if(biome.terrain==null)
-                            continue;
-                        for(BiomeTerrainData terrain:biome.terrain)
+                        if(biome.terrain!=null)
                         {
-                            float terrainNoise = ((float)noise.eval(x / (float) width * (noiseZoom*terrain.resolution), y / (float) height * (noiseZoom*terrain.resolution)) + 1) / 2;
-                            if(terrainNoise>=terrain.min&&terrainNoise<=terrain.max)
+                            for(BiomeTerrainData terrain:biome.terrain)
                             {
-                                terrainMap[x][y]=terrainCounter;
+                                float terrainNoise = ((float)noise.eval(x / (float) width * (noiseZoom*terrain.resolution), y / (float) height * (noiseZoom*terrain.resolution)) + 1) / 2;
+                                if(terrainNoise>=terrain.min&&terrainNoise<=terrain.max)
+                                {
+                                    terrainMap[x][y]=terrainCounter;
+                                }
+                                terrainCounter++;
                             }
-                            terrainCounter++;
+                        }
+                        if(biome.structures!=null)
+                        {
+                            for(BiomeStructureData data:biome.structures)
+                            {
+                                BiomeStructure structure;
+                                if(!structureDataMap.containsKey(data))
+                                {
+                                    structureDataMap.put(data,new BiomeStructure(data,seed,biomeWidth,biomeHeight));
+                                }
+                                structure=structureDataMap.get(data);
+                                int structureIndex=structure.objectID(x-biomeXStart,y-biomeYStart);
+                                if(structureIndex>=0)
+                                    terrainMap[x][y]=terrainCounter+structureIndex;
+
+                                terrainCounter+=structure.structureObjectCount();
+                            }
                         }
                     }
 
@@ -432,6 +467,9 @@ public class World implements  Disposable, SaveFileContent {
                 for (int y = (int) currentPoint.y - 1; y < currentPoint.y + 2; y++) {
                     if(x<0||y<=0||x>=width||y>height)continue;
                     biomeMap[x][height - y] |= (1L << biomeIndex);
+                    terrainMap[x][height-y]=0;
+
+
                     pix.drawPixel(x, height-y);
                 }
             }
@@ -465,7 +503,9 @@ public class World implements  Disposable, SaveFileContent {
 
                 if( (int)currentPoint.x<0|| (int)currentPoint.y<=0|| (int)currentPoint.x>=width|| (int)currentPoint.y>height)continue;
                 biomeMap[(int) currentPoint.x][height - (int) currentPoint.y] |= (1L << biomeIndex);
+                terrainMap[(int) currentPoint.x][height - (int) currentPoint.y]=0;
                 pix.drawPixel((int) currentPoint.x, height - (int) currentPoint.y);
+
             }
 
         }
@@ -482,6 +522,8 @@ public class World implements  Disposable, SaveFileContent {
                     BiomeSpriteData sprite = data.GetBiomeSprites().getSpriteData(name);
                     double spriteNoise = (noise.eval(x / (double) width * noiseZoom*sprite.resolution, y / (double) invertedHeight * noiseZoom*sprite.resolution) + 1) / 2;
                     if (spriteNoise >= sprite.startArea && spriteNoise <= sprite.endArea) {
+                        if(terrainMap[x][invertedHeight]>biome.terrain.length)
+                            continue;
                         if (random.nextFloat() <= sprite.density) {
                             String spriteKey = sprite.key();
                             int key;

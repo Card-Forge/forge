@@ -202,6 +202,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     private void setCardImage(Texture img) {
+        if(img==null)
+        {
+            System.err.print("Null texture loaded for " +reward);
+            return;
+        }
         image = img;
         if (Forge.isTextureFilteringEnabled())
             image.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);

@@ -36,6 +36,8 @@ public abstract class GameStage extends Stage {
     private float touchY = -1;
     private final float timer = 0;
     private float animationTimeout = 0;
+    public static float maximumScrollDistance=1.5f;
+    public static float minimumScrollDistance=0.3f;
 
     public void startPause(float i) {
         startPause(i, null);
@@ -222,10 +224,10 @@ public abstract class GameStage extends Stage {
         if (isPaused())
             return true;
         camera.zoom += (amountY * 0.03);
-        if (camera.zoom < 0.3f)
-            camera.zoom = 0.3f;
-        if (camera.zoom > 1.5f)
-            camera.zoom = 1.5f;
+        if (camera.zoom < minimumScrollDistance)
+            camera.zoom = minimumScrollDistance;
+        if (camera.zoom > maximumScrollDistance)
+            camera.zoom = maximumScrollDistance;
         return super.scrolled(amountX, amountY);
     }
 

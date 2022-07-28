@@ -123,6 +123,7 @@ public class Forge implements ApplicationListener {
     private static Cursor cursor0, cursor1, cursor2, cursorA0, cursorA1, cursorA2;
     public static boolean forcedEnglishonCJKMissing = false;
     public static boolean adventureLoaded = false;
+    public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
