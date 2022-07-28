@@ -73,6 +73,14 @@ import java.util.*;
          final CardZoneTable triggerList = new CardZoneTable();
          for (final Card c : drafted) {
              Card made = game.getAction().moveTo(zone, c, sa, moveParams);
+             if (zone.equals(ZoneType.Exile)) {
+                 source.addExiledCard(made);
+                 made.setExiledWith(source);
+                 made.setExiledBy(source.getController());
+                 if (sa.hasParam("ExileFaceDown")) {
+                     made.turnFaceDown(true);
+                 }
+             }
              if (c != null) {
                  triggerList.put(ZoneType.None, made.getZone().getZoneType(), made);
              }
