@@ -1,0 +1,8 @@
+Name:Back-Alley Gardener
+ManaCost:R G W
+Types:Creature Elf Druid
+PT:3/4
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.Other+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigSeek | TriggerDescription$ Alliance — Whenever one or more other creatures enter the battlefield under your control, seek a land card, then put it onto the battlefield tapped. This ability triggers only once each turn.
+SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Land | ChangeNum$ 1 | Tapped$ True
+SVar:BuffedBy:Creature
+Oracle:Alliance — Whenever one or more other creatures enter the battlefield under your control, seek a land card, then put it onto the battlefield tapped. This ability triggers only once each turn.
