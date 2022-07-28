@@ -244,10 +244,10 @@ public class Assets implements Disposable {
 
         @SuppressWarnings("unchecked")
         @Override
-        public synchronized <T> void load(String fileName, Class<T> type, AssetLoaderParameters<T> parameter) {
+        public synchronized <T> void load(String fileName, Class<T> type) {
             if (type.equals(Texture.class)) {
                 if (parameter == null) {
-                    parameter = (AssetLoaderParameters<T>) new TextureParameter();
+                    parameter = getTextureFilter();
                 }
 
                 final AssetLoaderParameters.LoadedCallback prevCallback = parameter.loadedCallback;
@@ -261,7 +261,7 @@ public class Assets implements Disposable {
 
             }
 
-            super.load(fileName, type, parameter);
+            super.load(fileName, type);
         }
 
         @Override
