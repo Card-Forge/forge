@@ -26,12 +26,12 @@ import java.util.*;
          final StringBuilder sb = new StringBuilder();
 
          sb.append(player).append(" drafts a card from ").append(source.getName()).append("'s spellbook");
-         if (zone.equals("Hand")) {
+         if (zone.equals(ZoneType.Hand)) {
              sb.append(".");
-         } else if (zone.equals("Battlefield")) {
+         } else if (zone.equals(ZoneType.Battlefield)) {
              sb.append(" and puts it onto the battlefield.");
-         } else if (zone.equals("Exile")) {
-             sb.append(", then exiles it.");
+         } else if (zone.equals(ZoneType.Exile)) {
+             sb.append(sa.hasParam("ExileFaceDown") ? " and exiles it face down." : ", then exiles it.");
          }
 
          return sb.toString();
