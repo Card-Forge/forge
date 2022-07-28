@@ -235,7 +235,52 @@ public class DeckProxy implements InventoryItem {
         }
         return deckIdentity;
     }
-
+    public int setStarterDeckColorIdentity() {
+        int adventureColorIdentity = 0;
+        int w = 0, u = 0, b = 0, g = 0, r = 0, highest = -1;
+        for (final Entry<DeckSection, CardPool> deckEntry : getDeck()) {
+            switch (deckEntry.getKey()) {
+                case Main:
+                case Sideboard:
+                case Commander:
+                    for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                        if (poolEntry.getKey().getRules().getType().isLand())
+                            continue;
+                        w += poolEntry.getKey().getRules().getManaCost().getShardCount(ManaCostShard.WHITE);
+                        u += poolEntry.getKey().getRules().getManaCost().getShardCount(ManaCostShard.BLUE);
+                        b += poolEntry.getKey().getRules().getManaCost().getShardCount(ManaCostShard.BLACK);
+                        g += poolEntry.getKey().getRules().getManaCost().getShardCount(ManaCostShard.GREEN);
+                        r += poolEntry.getKey().getRules().getManaCost().getShardCount(ManaCostShard.RED);
+                    }
+                    break;
+                default:
+                    break; //ignore other sections
+            }
+        }
+        if (w > highest) {
+            highest = w;
+            adventureColorIdentity = 1;
+        }
+        if (u > highest) {
+            highest = u;
+            adventureColorIdentity = 3;
+        }
+        if (b > highest) {
+            highest = b;
+            adventureColorIdentity = 2;
+        }
+        if (g > highest) {
+            highest = g;
+            adventureColorIdentity = 5;
+        }
+        if (r > highest) {
+            highest = r;
+            adventureColorIdentity = 4;
+        }
+        if (highest == 0)
+            adventureColorIdentity = 0;
+        return adventureColorIdentity;
+    }
     public Deck.UnplayableAICards getAI() {
         return getDeck().getUnplayableAICards();
     }
@@ -616,6 +661,13 @@ public class DeckProxy implements InventoryItem {
         final List<DeckProxy> decks = new ArrayList<>();
         final IStorage<Deck> genetic = FModel.getDecks().getGeneticAIDecks();
         addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", genetic, null);
+        return decks;
+    }
+
+    public static List<DeckProxy> getAllEasyStarterDecks() {
+        final List<DeckProxy> decks = new ArrayList<>();
+        final IStorage<Deck> easy = FModel.getDecks().getEasyStarterDecks();
+        addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", easy, null);
         return decks;
     }
 

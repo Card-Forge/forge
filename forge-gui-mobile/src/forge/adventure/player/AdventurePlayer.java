@@ -122,7 +122,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         avatarIndex = avatar;
         isFemale    = !male;
 
-        if(fantasyMode){ //Set a random ColorID in fantasy mode.
+        if (fantasyMode){ //Set a random ColorID in fantasy mode.
            setColorIdentity(MyRandom.getRandom().nextInt(5)); // MyRandom to not interfere with the unstable RNG.
         } else setColorIdentity(startingColorIdentity + 1); // +1 because index 0 is colorless.
 
