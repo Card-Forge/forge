@@ -1,18 +1,11 @@
 Name:Psychic Theft
 ManaCost:1 U
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Player | Origin$ Hand | Destination$ Exile | ChangeType$ Instant,Sorcery | IsCurse$ True | Chooser$ You | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ TheftEffect | SpellDescription$ Target player reveals their hand. You choose an instant or sorcery card from it and exile that card. You may cast that card for as long as it remains exiled. At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand. | StackDescription$ SpellDescription
-SVar:TheftEffect:DB$ Effect | StaticAbilities$ STThieving | Duration$ Permanent | RememberObjects$ Remembered | Triggers$ TrigReturn,TrigCast | SubAbility$ DBResetSVar
-# Even though the Effect is "Permanent", it's not really permanent
-SVar:DBResetSVar:DB$ StoreSVar | SVar$ ActivePsychic | Type$ Number | Expression$ 1 | SubAbility$ DBCleanup
+A:SP$ ChangeZone | ValidTgts$ Player | Origin$ Hand | Destination$ Exile | ChangeType$ Instant,Sorcery | Mandatory$ True | IsCurse$ True | Chooser$ You | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ TheftEffect | SpellDescription$ Target player reveals their hand. You choose an instant or sorcery card from it and exile that card. | StackDescription$ SpellDescription
+SVar:TheftEffect:DB$ Effect | StaticAbilities$ STThieving | Duration$ Permanent | RememberObjects$ Remembered | Triggers$ TrigReturn | ExileOnMoved$ Exile | SubAbility$ DBCleanup | SpellDescription$ You may cast that card for as long as it remains exiled. At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:ActivePsychic:Number$1
-SVar:STThieving:Mode$ Continuous | Affected$ Card.IsRemembered+OppOwn | MayPlay$ True | EffectZone$ Command | AffectedZone$ Exile | CheckSVar$ ActivePsychic | Description$ You may cast that card for as long as it remains exiled.
-# Return the card as a normal trigger
+SVar:STThieving:Mode$ Continuous | Affected$ Card.IsRemembered+OppOwn | MayPlay$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ You may cast that card for as long as it remains exiled.
 SVar:TrigReturn:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Command | Execute$ DBReturn | TriggerDescription$ At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand.
-SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ RemoveEffect
-SVar:RemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-# Remove Effect when the card is played
-SVar:TrigCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Static$ True | TriggerZones$ Command | Execute$ RemoveEffect
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand
 AI:RemoveDeck:All
 Oracle:Target player reveals their hand. You choose an instant or sorcery card from it and exile that card. You may cast that card for as long as it remains exiled. At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand.
