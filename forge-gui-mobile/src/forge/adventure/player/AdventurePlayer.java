@@ -10,6 +10,7 @@ import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -137,6 +138,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if(slot>=0&&slot<NUMBER_OF_DECKS) {
             selectedDeckIndex = slot;
             deck = decks[selectedDeckIndex];
+            if (!fantasyMode)
+                setColorIdentity(DeckProxy.getColorIdentityforAdventure(deck));
         }
     }
     public void updateDifficulty(DifficultyData diff) {
