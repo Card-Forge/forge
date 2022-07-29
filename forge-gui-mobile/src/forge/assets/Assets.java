@@ -44,7 +44,8 @@ public class Assets implements Disposable {
     public Skin skin;
     public BitmapFont advDefaultFont, advBigFont;
     private Texture defaultImage, dummy;
-    private TextureParameter parameter;
+    private TextureParameter textureParameter;
+    private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM, cTMVal = 0;
     public Assets() {
         //init titlebg fallback
         fallback_skins.put(0, new Texture(GuiBase.isAndroid()
@@ -165,18 +166,18 @@ public class Assets implements Disposable {
         return tmxMap;
     }
     public TextureParameter getTextureFilter() {
-        if (parameter == null)
-            parameter = new TextureParameter();
+        if (textureParameter == null)
+            textureParameter = new TextureParameter();
         if (Forge.isTextureFilteringEnabled()) {
-            parameter.genMipMaps = true;
-            parameter.minFilter = Texture.TextureFilter.MipMapLinearLinear;
-            parameter.magFilter = Texture.TextureFilter.Linear;
+            textureParameter.genMipMaps = true;
+            textureParameter.minFilter = Texture.TextureFilter.MipMapLinearLinear;
+            textureParameter.magFilter = Texture.TextureFilter.Linear;
         } else {
-            parameter.genMipMaps = false;
-            parameter.minFilter = Texture.TextureFilter.Nearest;
-            parameter.magFilter = Texture.TextureFilter.Nearest;
+            textureParameter.genMipMaps = false;
+            textureParameter.minFilter = Texture.TextureFilter.Nearest;
+            textureParameter.magFilter = Texture.TextureFilter.Nearest;
         }
-        return parameter;
+        return textureParameter;
     }
     public Texture getDefaultImage() {
         if (defaultImage == null) {
@@ -213,10 +214,8 @@ public class Assets implements Disposable {
 
         @SuppressWarnings("unchecked")
         private int calculateTextureSize(AssetManager assetManager, String fileName, Class type) {
-            if (memoryPerFile.containsKey(fileName)) {
-                return memoryPerFile.get(fileName);
-            }
-
+            if (!Forge.showFPS)
+                return 0;
             Texture texture = (Texture) assetManager.get(fileName, type);
             TextureData textureData = texture.getTextureData();
             int textureSize = textureData.getWidth() * textureData.getHeight();
@@ -236,18 +235,73 @@ public class Assets implements Disposable {
                     textureSize *= 4;
                     break;
             }
-
             memoryPerFile.put(fileName, textureSize);
 
-            return textureSize;
+            int sum = memoryPerFile.values().stream().mapToInt(Integer::intValue).sum()
+                    + calculateObjectMaps(generatedCards()) + calculateObjectMaps(fallback_skins()) + calculateObjectMaps(tmxMap());
+            return sum;
+        }
+        @SuppressWarnings("unchecked")
+        private int calculateObjectMaps(ObjectMap<?, Texture> objectMap) {
+            if (!Forge.showFPS)
+                return 0;
+            if (objectMap == null || objectMap.isEmpty())
+                return 0;
+            if (objectMap == generatedCards) {
+                if (cGen == objectMap.size)
+                    return cGenVal;
+                else
+                    cGen = objectMap.size;
+            }
+            if (objectMap == tmxMap) {
+                if (cTM == objectMap.size)
+                    return cTMVal;
+                else
+                    cTM = objectMap.size;
+            }
+            if (objectMap == fallback_skins) {
+                if (cFB == objectMap.size)
+                    return cFBVal;
+                else
+                    cFB = objectMap.size;
+            }
+            int sum = 0;
+            for (Texture texture : objectMap.values()) {
+                TextureData textureData = texture.getTextureData();
+                int textureSize = textureData.getWidth() * textureData.getHeight();
+                if (Forge.isTextureFilteringEnabled())
+                    textureSize = textureSize + (textureSize/3);
+                switch (textureData.getFormat()) {
+                    case RGB565:
+                        textureSize *= 2;
+                        break;
+                    case RGB888:
+                        textureSize *= 3;
+                        break;
+                    case RGBA4444:
+                        textureSize *= 2;
+                        break;
+                    case RGBA8888:
+                        textureSize *= 4;
+                        break;
+                }
+                sum += textureSize;
+            }
+            if (objectMap == generatedCards)
+                cGenVal = sum;
+            if (objectMap == tmxMap)
+                cTMVal = sum;
+            if (objectMap == fallback_skins)
+                cFBVal = sum;
+            return sum;
         }
 
         @SuppressWarnings("unchecked")
         @Override
-        public synchronized <T> void load(String fileName, Class<T> type) {
+        public synchronized <T> void load(String fileName, Class<T> type, AssetLoaderParameters<T> parameter) {
             if (type.equals(Texture.class)) {
                 if (parameter == null) {
-                    parameter = getTextureFilter();
+                    parameter = (AssetLoaderParameters<T>) getTextureFilter();
                 }
 
                 final AssetLoaderParameters.LoadedCallback prevCallback = parameter.loadedCallback;
@@ -256,19 +310,19 @@ public class Assets implements Disposable {
                         prevCallback.finishedLoading(assetManager, fileName1, type1);
                     }
 
-                    currentMemory += calculateTextureSize(assetManager, fileName1, type1);
+                    currentMemory = calculateTextureSize(assetManager, fileName1, type1);
                 };
 
             }
 
-            super.load(fileName, type);
+            super.load(fileName, type, parameter);
         }
 
         @Override
         public synchronized void unload(String fileName) {
             super.unload(fileName);
             if (memoryPerFile.containsKey(fileName)) {
-                currentMemory -= memoryPerFile.get(fileName);
+                memoryPerFile.remove(fileName);
             }
         }
 
