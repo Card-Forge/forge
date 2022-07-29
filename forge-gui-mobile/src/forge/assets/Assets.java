@@ -45,7 +45,7 @@ public class Assets implements Disposable {
     public BitmapFont advDefaultFont, advBigFont;
     private Texture defaultImage, dummy;
     private TextureParameter textureParameter;
-    private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM, cTMVal = 0;
+    private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM, cTMVal = 0, cSF = 0, cSFVal = 0;
     public Assets() {
         //init titlebg fallback
         fallback_skins.put(0, new Texture(GuiBase.isAndroid()
@@ -237,7 +237,7 @@ public class Assets implements Disposable {
             }
             memoryPerFile.put(fileName, textureSize);
 
-            int sum = memoryPerFile.values().stream().mapToInt(Integer::intValue).sum()
+            int sum = memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts()
                     + calculateObjectMaps(generatedCards()) + calculateObjectMaps(fallback_skins()) + calculateObjectMaps(tmxMap());
             return sum;
         }
@@ -294,6 +294,24 @@ public class Assets implements Disposable {
             if (objectMap == fallback_skins)
                 cFBVal = sum;
             return sum;
+        }
+        private int calcFonts() {
+            if (!Forge.showFPS)
+                return 0;
+            if (fonts == null || fonts.isEmpty())
+                return 0;
+            if (cSF == fonts.size())
+                return cSFVal;
+            cSF = fonts.size();
+            int val = 0;
+            for (FSkinFont sf : fonts.values()) {
+                for (TextureRegion tr : sf.font.getRegions()) {
+                    Texture t = tr.getTexture();
+                    val += (t.getWidth()*t.getHeight())*4;
+                }
+            }
+            cSFVal = val;
+            return cSFVal;
         }
 
         @SuppressWarnings("unchecked")
