@@ -26,7 +26,6 @@ public class InnScene extends UIScene {
     }
 
     public void potionOfFalseLife() {
-        // TODO Pay a bit of money to gain a temporary +2 HP.
         Current.player().potionOfFalseLife();
     }
 
@@ -47,7 +46,6 @@ public class InnScene extends UIScene {
             ui.onButtonPress("tempHitPointCost", new Runnable() {
                 @Override
                 public void run() {
-                    // Pay 200 gp to gain temporary 2 hp.
                     InnScene.this.potionOfFalseLife();
                 }
             });
