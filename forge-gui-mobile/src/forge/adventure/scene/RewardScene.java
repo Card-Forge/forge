@@ -128,12 +128,7 @@ public class RewardScene extends UIScene {
     public void resLoaded() {
         super.resLoaded();
             goldLabel=ui.findActor("gold");
-            ui.onButtonPress("done", new Runnable() {
-                @Override
-                public void run() {
-                    RewardScene.this.done();
-                }
-            });
+            ui.onButtonPress("done", () -> RewardScene.this.done());
             doneButton = ui.findActor("done");
     }
 

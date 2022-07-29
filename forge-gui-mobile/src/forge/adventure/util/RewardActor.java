@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -571,6 +572,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         Image tooltip_image;
         Table tooltip_actor;
         float height;
+        TextButton switchButton;
         //Vector2 tmp = new Vector2();
 
         public HoldTooltip(Image tooltip_image) {
@@ -580,12 +582,26 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             tooltip_actor.align(Align.center);
             tooltip_actor.setSize(this.tooltip_image.getPrefWidth(), this.tooltip_image.getPrefHeight());
             this.height = tooltip_actor.getHeight();
-
+            switchButton = Controls.newTextButton("Flip");
+            switchButton.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    alternate = !alternate;
+                    switchTooltip();
+                    super.clicked(event, x, y);
+                }
+            });
             getGestureDetector().setLongPressSeconds(0.1f);
         }
 
         @Override
         public boolean longPress(Actor actor, float x, float y) {
+            TextButton done = actor.getStage().getRoot().findActor("done");
+            if (done != null && Reward.Type.Card.equals(reward.type)) {
+                switchButton.setBounds(done.getX(), done.getY(), done.getWidth(), done.getHeight());
+                if (reward.getCard().hasBackFace())
+                    actor.getStage().addActor(switchButton);
+            }
             //Vector2 point = actor.localToStageCoordinates(tmp.set(x, y));
             tooltip_actor.setX(actor.getRight());
             if (tooltip_actor.getX() + tooltip_actor.getWidth() > Scene.getIntendedWidth())
@@ -600,14 +616,16 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         @Override
         public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
             tooltip_actor.remove();
+            switchButton.remove();
             super.touchUp(event, x, y, pointer, button);
         }
 
         @Override
         public void tap(InputEvent event, float x, float y, int count, int button) {
-            if (count > 1)
+            if (count > 1) {
                 alternate = !alternate;
-            switchTooltip();
+                switchTooltip();
+            }
             super.tap(event, x, y, count, button);
         }
     }

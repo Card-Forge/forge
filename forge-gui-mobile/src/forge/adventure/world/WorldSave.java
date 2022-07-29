@@ -128,7 +128,7 @@ public class WorldSave   {
         if (isEasy) {
             DeckProxy dp = DeckProxy.getAllEasyStarterDecks().get(startingColorIdentity);
             starterDeck = dp.getDeck();
-            identity = dp.setStarterDeckColorIdentity();
+            identity = dp.getColorIdentityforAdventure();
         } else {
             starterDeck = isFantasy ? DeckgenUtil.getRandomOrPreconOrThemeDeck("", false, false, false) : Config.instance().starterDecks()[startingColorIdentity];
         }
