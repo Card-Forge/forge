@@ -943,7 +943,8 @@ public class CardProperty {
             final List<Card> cards = CardUtil.getThisTurnCast("Card", source, spellAbility);
             if (cards.size() < 2) {
                 return false;
-            } else if (cards.get(1) != card) {
+            }
+            if (!cards.get(1).equalsWithTimestamp(card)) {
                 return false;
             }
         } else if (property.equals("ThisTurnCast")) {

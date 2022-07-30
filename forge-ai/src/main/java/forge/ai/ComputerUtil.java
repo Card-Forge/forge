@@ -229,7 +229,7 @@ public class ComputerUtil {
 
         // Then base on Targeting Restriction
         final String[] validTgts = tgt.getValidTgts();
-        if ((validTgts.length != 1) || !validTgts[0].equals("Card")) {
+        if (validTgts.length != 1 || !validTgts[0].equals("Card")) {
             restrict += 10;
         }
 
