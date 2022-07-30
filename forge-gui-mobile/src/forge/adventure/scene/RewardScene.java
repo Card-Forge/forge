@@ -51,10 +51,12 @@ public class RewardScene extends UIScene {
         //There were reports of memory leaks after using the shop many times, so remove() everything on exit to be sure.
         for(Actor A: new Array.ArrayIterator<>(generated)) {
             if(A instanceof RewardActor){
+                ((RewardActor) A).removeTooltip();
                 ((RewardActor) A).dispose();
                 A.remove();
             }
         }
+        ImageCache.unloadCardTextures(true);
         Forge.switchToLast();
     }
 
@@ -63,7 +65,7 @@ public class RewardScene extends UIScene {
         if (doneClicked) {
             if(exitCountDown > 0.2f) {
                 clearGenerated();
-                Forge.switchToLast();
+                quitScene();
             }
             return true;
         }
@@ -119,7 +121,7 @@ public class RewardScene extends UIScene {
             }
             if (flipCountDown <= 0) {
                 clearGenerated();
-                Forge.switchToLast();
+                quitScene();
             }
         }
     }
