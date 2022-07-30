@@ -337,7 +337,7 @@ public class ImageCache {
             return;
         //get latest images from syncQ
         Set<String> newQ = Sets.newHashSet(syncQ);
-        //get removeAll images not in newQ (cardLists to unload)
+        //get all images not in newQ (cards to unload)
         Set<String> toUnload = Sets.difference(cardsLoaded, newQ);
         //unload from assetmanager to save RAM
         try {

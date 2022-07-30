@@ -56,6 +56,7 @@ public class RewardScene extends UIScene {
                 A.remove();
             }
         }
+        //save RAM
         ImageCache.unloadCardTextures(true);
         Forge.switchToLast();
     }
