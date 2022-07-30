@@ -79,7 +79,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     public void dispose() {
         if (needsToBeDisposed) {
             needsToBeDisposed = false;
-            image.dispose();
+            if (!Reward.Type.Card.equals(reward.type))
+                image.dispose(); //clear only generated images and let assetmanager handle the disposal of actual card texture
             if (generatedTooltip != null)
                 generatedTooltip.dispose();
         }
@@ -95,6 +96,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         String imageKey = reward.getCard().getImageKey(false);
         PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
         imageKey = card.getCardImageKey();
+        int count = 0;
         if (StringUtils.isBlank(imageKey))
             return;
         File imageFile = ImageKeys.getImageFile(imageKey);
@@ -103,6 +105,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (!Forge.getAssets().manager().contains(imageFile.getPath())) {
             Forge.getAssets().manager().load(imageFile.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
             Forge.getAssets().manager().finishLoadingAsset(imageFile.getPath());
+            count+=1;
         }
         Texture replacement = Forge.getAssets().manager().get(imageFile.getPath(), Texture.class, false);
         if (replacement == null)
@@ -127,6 +130,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
         if (T != null)
             T.dispose();
+        ImageCache.updateSynqCount(imageFile, count);
         Gdx.graphics.requestRendering();
     }
 
@@ -139,10 +143,36 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         switch (reward.type) {
             case Card: {
                 if (ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
-                    setCardImage(ImageCache.getImage(reward.getCard().getImageKey(false), false));
+                    int count = 0;
+                    PaperCard card = ImageUtil.getPaperCardFromImageKey(reward.getCard().getImageKey(false));
+                    File frontFace = ImageKeys.getImageFile(card.getCardImageKey());
+                    if (frontFace != null) {
+                        if (!Forge.getAssets().manager().contains(frontFace.getPath())) {
+                            Forge.getAssets().manager().load(frontFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
+                            Forge.getAssets().manager().finishLoadingAsset(frontFace.getPath());
+                            count+=1;
+                        }
+                        Texture front = Forge.getAssets().manager().get(frontFace.getPath(), Texture.class, false);
+                        if (front != null) {
+                            setCardImage(front);
+                        } else {
+                            loaded = false;
+                        }
+                    } else {
+                        loaded = false;
+                    }
+                    ImageCache.updateSynqCount(frontFace, count);
                     //preload card back for performance
-                    if (reward.getCard().hasBackFace()) {
-                        ImageCache.getImage(reward.getCard().getImageKey(true), false);
+                    if (reward.getCard().hasBackFace() && ImageCache.imageKeyFileExists(reward.getCard().getImageKey(true))) {
+                        PaperCard cardBack = ImageUtil.getPaperCardFromImageKey(reward.getCard().getImageKey(true));
+                        File backFace = ImageKeys.getImageFile(cardBack.getCardAltImageKey());
+                        if (backFace != null) {
+                            if (!Forge.getAssets().manager().contains(backFace.getPath())) {
+                                Forge.getAssets().manager().load(backFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
+                                Forge.getAssets().manager().finishLoadingAsset(backFace.getPath());
+                                ImageCache.updateSynqCount(backFace, 1);
+                            }
+                        }
                     }
                 } else {
                     if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
@@ -395,6 +425,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     public boolean isFlipped() {
         return (clicked && flipProcess >= 1);
+    }
+    public void removeTooltip() {
+        if (tooltip != null) {
+            tooltip.getActor().remove();
+        }
     }
     public void clearHoldToolTip() {
         if (holdTooltip != null) {

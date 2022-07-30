@@ -124,6 +124,16 @@ public class ImageCache {
         cardsLoaded.clear();
         ((Forge)Gdx.app.getApplicationListener()).needsUpdate = true;
     }
+    /**
+     * Update counter for use with adventure mode since it uses direct loading for assetmanager for loot and shops
+     */
+    public static void updateSynqCount(File file, int count) {
+        if (file == null)
+            return;
+        syncQ.add(file.getPath());
+        cardsLoaded.add(file.getPath());
+        counter+=count;
+    }
 
     public static Texture getImage(InventoryItem ii) {
         boolean useDefault = ii instanceof DeckProxy;
@@ -276,11 +286,10 @@ public class ImageCache {
         if (check != null)
             return check;
         if (!others) {
+            //update first before clearing
             syncQ.add(file.getPath());
             cardsLoaded.add(file.getPath());
-        }
-        if (!others && cardsLoaded.size() > maxCardCapacity) {
-            unloadCardTextures(Forge.getAssets().manager());
+            unloadCardTextures(false);
         }
         String fileName = file.getPath();
         //load to assetmanager
@@ -307,16 +316,34 @@ public class ImageCache {
             return cardTexture;
         }
     }
-    static void unloadCardTextures(Assets.MemoryTrackingAssetManager manager) {
+    public static void unloadCardTextures(boolean removeAll) {
+        if (removeAll) {
+            try {
+                for (String asset : Forge.getAssets().manager().getAssetNames()) {
+                    if (asset.contains(".full")) {
+                        Forge.getAssets().manager().unload(asset);
+                    }
+                }
+                syncQ.clear();
+                cardsLoaded.clear();
+                counter = 0;
+            } catch (Exception e) {
+                //e.printStackTrace();
+            } finally {
+                return;
+            }
+        }
+        if (cardsLoaded.size() <= maxCardCapacity)
+            return;
         //get latest images from syncQ
         Set<String> newQ = Sets.newHashSet(syncQ);
-        //get all images not in newQ (cardLists to unload)
+        //get all images not in newQ (cards to unload)
         Set<String> toUnload = Sets.difference(cardsLoaded, newQ);
         //unload from assetmanager to save RAM
         try {
             for (String asset : toUnload) {
-                if (manager.contains(asset)) {
-                    manager.unload(asset);
+                if (Forge.getAssets().manager().contains(asset)) {
+                    Forge.getAssets().manager().unload(asset);
                 }
                 cardsLoaded.remove(asset);
             }
