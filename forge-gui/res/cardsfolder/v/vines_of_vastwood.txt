@@ -3,9 +3,7 @@ ManaCost:G
 Types:Instant
 K:Kicker:G
 A:SP$ Pump | Cost$ G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ X | NumDef$ X | SubAbility$ DBEffect | SpellDescription$ Target creature can't be the target of spells or abilities your opponents control this turn. If this spell was kicked, that creature gets +4/+4 until end of turn.
-SVar:DBEffect:DB$ Effect | Defined$ Targeted | AILogic$ Always | StaticAbilities$ STCantTarget | RememberObjects$ Targeted | Triggers$ TrigCleanup
+SVar:DBEffect:DB$ Effect | Defined$ Targeted | AILogic$ Always | StaticAbilities$ STCantTarget | RememberObjects$ Targeted | ExileOnMoved$ Battlefield
 SVar:STCantTarget:Mode$ CantTarget | EffectZone$ Command | ValidCard$ Card.IsRemembered | Activator$ Player.Opponent | Description$ Target creature can't be the target of spells or abilities your opponents control this turn.
-SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True
-SVar:DBCleanup:DB$ ChangeZone | Origin$ Command | Destination$ Exile
 SVar:X:Count$Kicked.4.0
 Oracle:Kicker {G} (You may pay an additional {G} as you cast this spell.)\nTarget creature can't be the target of spells or abilities your opponents control this turn. If this spell was kicked, that creature gets +4/+4 until end of turn.
