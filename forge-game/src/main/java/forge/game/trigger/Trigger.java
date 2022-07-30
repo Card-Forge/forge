@@ -358,6 +358,10 @@ public abstract class Trigger extends TriggerReplacementBase {
                 // sb.append(this.getHostCard().getName());
                 // throw new RuntimeException(sb.toString());
             }
+            // CR 702.100c
+            if (!moved.isCreature() || !this.getHostCard().isCreature()) {
+                return false;
+            }
             if (moved.getNetPower() <= this.getHostCard().getNetPower()
                     && moved.getNetToughness() <= this.getHostCard().getNetToughness()) {
                 return false;

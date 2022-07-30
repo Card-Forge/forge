@@ -2,7 +2,7 @@ Name:Keldon Firebombers
 ManaCost:3 R R
 Types:Creature Human Soldier
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChooseThree | TriggerDescription$ When CARDNAME enters the battlefield, each player sacrifices all lands they control except for three.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChooseThree | TriggerDescription$ When CARDNAME enters the battlefield, each player sacrifices all lands they control except for three.
 SVar:TrigChooseThree:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBChoose | SubAbility$ DBSacrificeAll
 SVar:DBChoose:DB$ ChooseCard | Amount$ 3 | Defined$ Remembered | Choices$ Land.RememberedPlayerCtrl | ChoiceZone$ Battlefield | RememberChosen$ True | ChoiceTitle$ Choose three lands that would not be sacrificed
 SVar:DBSacrificeAll:DB$ SacrificeAll | ValidCards$ Land.IsNotRemembered | SubAbility$ DBCleanup

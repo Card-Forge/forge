@@ -1,0 +1,17 @@
+Name:Crystal Dragon
+ManaCost:4 W W
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Vigilance
+AlternateMode:Adventure
+Oracle:Flying, vigilance
+
+ALTERNATE
+
+Name:Rob the Hoard
+ManaCost:1 W
+Types:Sorcery Adventure
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target artifact, enchantment, or legendary card in your graveyard | ValidTgts$ Artifact.YouOwn,Enchantment.YouOwn,Card.Legendary+YouOwn | SpellDescription$ Return target artifact, enchantment, or legendary card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)
+DeckHints:Type$Artifact|Enchantment|Legendary
+Oracle:Return target artifact, enchantment, or legendary card from your graveyard to your hand. (Then exile this card. You may cast the creature later from exile.)

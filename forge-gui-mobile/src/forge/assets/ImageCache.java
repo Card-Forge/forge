@@ -18,13 +18,13 @@
 package forge.assets;
 
 import java.io.File;
+import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
-import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.TextureData;
@@ -32,6 +32,7 @@ import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.google.common.collect.EvictingQueue;
 import com.google.common.collect.Queues;
 import com.google.common.collect.Sets;
+import forge.deck.DeckProxy;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.util.FileUtil;
@@ -81,13 +82,7 @@ public class ImageCache {
     static EvictingQueue<String> q;
     static Set<String> cardsLoaded;
     static Queue<String> syncQ;
-    static TextureParameter defaultParameter = new TextureParameter();
-    static TextureParameter filtered = new TextureParameter();
     public static void initCache(int capacity) {
-        //init filter
-        filtered.genMipMaps = true;
-        filtered.minFilter = Texture.TextureFilter.MipMapLinearLinear;
-        filtered.magFilter = Texture.TextureFilter.Linear;
         //override maxCardCapacity
         maxCardCapacity = capacity;
         //init q
@@ -98,7 +93,9 @@ public class ImageCache {
         int cl = GuiBase.isAndroid() ? maxCardCapacity+(capacity/3) : 400;
         cardsLoaded = new HashSet<>(cl);
     }
-    public static final Texture defaultImage;
+    public static Texture getDefaultImage() {
+        return Forge.getAssets().getDefaultImage();
+    }
     public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
     public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
     private static final HashMap<String, Pair<String, Boolean>> imageBorder = new HashMap<>(1024);
@@ -107,17 +104,6 @@ public class ImageCache {
     public static void allowSingleLoad() {
         imageLoaded = false; //reset at the beginning of each render
         delayLoadRequested = false;
-    }
-
-    static {
-        Texture defImage = null;
-        try {
-            defImage = new Texture(Gdx.files.absolute(ForgeConstants.NO_CARD_FILE));
-        } catch (Exception ex) {
-            System.err.println("could not load default card image");
-        } finally {
-            defaultImage = (null == defImage) ? new Texture(10, 10, Format.RGBA4444) : defImage;
-        }
     }
 
     public static void clear() {
@@ -138,12 +124,23 @@ public class ImageCache {
         cardsLoaded.clear();
         ((Forge)Gdx.app.getApplicationListener()).needsUpdate = true;
     }
+    /**
+     * Update counter for use with adventure mode since it uses direct loading for assetmanager for loot and shops
+     */
+    public static void updateSynqCount(File file, int count) {
+        if (file == null)
+            return;
+        syncQ.add(file.getPath());
+        cardsLoaded.add(file.getPath());
+        counter+=count;
+    }
 
     public static Texture getImage(InventoryItem ii) {
+        boolean useDefault = ii instanceof DeckProxy;
         String imageKey = ii.getImageKey(false);
         if (imageKey != null) {
             if(imageKey.startsWith(ImageKeys.CARD_PREFIX) || imageKey.startsWith(ImageKeys.TOKEN_PREFIX))
-                return getImage(ii.getImageKey(false), true, false);
+                return getImage(ii.getImageKey(false), useDefault, false);
         }
         return getImage(ii.getImageKey(false), true, true);
     }
@@ -229,7 +226,10 @@ public class ImageCache {
             if (card != null)
                 imageKey = altState ? card.getCardAltImageKey() : card.getCardImageKey();
             if (StringUtils.isBlank(imageKey)) {
-                return defaultImage;
+                if (useDefaultIfNotFound)
+                    return getDefaultImage();
+                else
+                    return null;
             }
         }
 
@@ -262,7 +262,7 @@ public class ImageCache {
         // a default "not available" image.
         if (image == null) {
             if (useDefaultIfNotFound) {
-                image = defaultImage;
+                image = getDefaultImage();
                 /*fix not loading image file since we intentionally not to update the cache in order for the
                   image fetcher to update automatically after the card image/s are downloaded*/
                 imageLoaded = false;
@@ -286,17 +286,15 @@ public class ImageCache {
         if (check != null)
             return check;
         if (!others) {
+            //update first before clearing
             syncQ.add(file.getPath());
             cardsLoaded.add(file.getPath());
-        }
-        if (!others && cardsLoaded.size() > maxCardCapacity) {
-            unloadCardTextures(Forge.getAssets().manager());
-            return null;
+            unloadCardTextures(false);
         }
         String fileName = file.getPath();
         //load to assetmanager
         if (!Forge.getAssets().manager().contains(fileName, Texture.class)) {
-            Forge.getAssets().manager().load(fileName, Texture.class, Forge.isTextureFilteringEnabled() ? filtered : defaultParameter);
+            Forge.getAssets().manager().load(fileName, Texture.class, Forge.getAssets().getTextureFilter());
             Forge.getAssets().manager().finishLoadingAsset(fileName);
             counter+=1;
         }
@@ -318,21 +316,43 @@ public class ImageCache {
             return cardTexture;
         }
     }
-    static void unloadCardTextures(Assets.MemoryTrackingAssetManager manager) {
+    public static void unloadCardTextures(boolean removeAll) {
+        if (removeAll) {
+            try {
+                for (String asset : Forge.getAssets().manager().getAssetNames()) {
+                    if (asset.contains(".full")) {
+                        Forge.getAssets().manager().unload(asset);
+                    }
+                }
+                syncQ.clear();
+                cardsLoaded.clear();
+                counter = 0;
+            } catch (Exception e) {
+                //e.printStackTrace();
+            } finally {
+                return;
+            }
+        }
+        if (cardsLoaded.size() <= maxCardCapacity)
+            return;
         //get latest images from syncQ
         Set<String> newQ = Sets.newHashSet(syncQ);
-        //get all images not in newQ (cardLists to unload)
+        //get all images not in newQ (cards to unload)
         Set<String> toUnload = Sets.difference(cardsLoaded, newQ);
         //unload from assetmanager to save RAM
-        for (String asset : toUnload) {
-            if(manager.contains(asset)) {
-                manager.unload(asset);
+        try {
+            for (String asset : toUnload) {
+                if (Forge.getAssets().manager().contains(asset)) {
+                    Forge.getAssets().manager().unload(asset);
+                }
+                cardsLoaded.remove(asset);
             }
-            cardsLoaded.remove(asset);
+            //clear cachedArt since this is dependant to the loaded texture
+            CardRenderer.clearcardArtCache();
+            ((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
+        } catch (ConcurrentModificationException e) {
+            //e.printstacktrace
         }
-        //clear cachedArt since this is dependant to the loaded texture
-        CardRenderer.clearcardArtCache();
-        ((Forge)Gdx.app.getApplicationListener()).needsUpdate = true;
     }
     public static void preloadCache(Iterable<String> keys) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))

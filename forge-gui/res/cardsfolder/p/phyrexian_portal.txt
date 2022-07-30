@@ -1,11 +1,10 @@
 Name:Phyrexian Portal
 ManaCost:3
 Types:Artifact
-A:AB$ Dig | Cost$ 3 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Defined$ You | DigNum$ 10 | RememberRevealed$ True | NoLooking$ True | NoMove$ True | Choser$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | SubAbility$ DBTwoPiles | SpellDescription$ If your library has ten or more cards in it, target opponent looks at the top ten cards of your library and separates them into two face-down piles. Exile one of those piles. Search the other pile for a card, put it into your hand, then shuffle the rest of that pile into your library. | StackDescription$ SpellDescription
-SVar:DBTwoPiles:DB$ TwoPiles | Defined$ You | DefinedCards$ Remembered | Separator$ Targeted | FaceDown$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | ChosenPile$ DBHand | UnchosenPile$ DBExile | SubAbility$ DBCleanup
+A:AB$ Dig | Cost$ 3 | ValidTgts$ Opponent | DigNum$ 10 | RememberRevealed$ True | NoLooking$ True | NoMove$ True | Choser$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | SubAbility$ DBTwoPiles | SpellDescription$ If your library has ten or more cards in it, target opponent looks at the top ten cards of your library and separates them into two face-down piles. Exile one of those piles. Search the other pile for a card, put it into your hand, then shuffle the rest of that pile into your library. | StackDescription$ SpellDescription
+SVar:DBTwoPiles:DB$ TwoPiles | Defined$ You | DefinedCards$ Remembered | Separator$ Targeted | FaceDown$ True | ConditionCheckSVar$ X | ConditionSVarCompare$ GE10 | ChosenPile$ DBHand | UnchosenPile$ DBExile
 SVar:DBHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | ChooseFromDefined$ True | Mandatory$ True | Shuffle$ True
 SVar:DBExile:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 # This variable may be incorrect if the controller changes while the ability is on the stack
 SVar:X:Count$InYourLibrary
 AI:RemoveDeck:All

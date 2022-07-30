@@ -474,11 +474,10 @@ public final class AbilityFactory {
             final TargetRestrictions tgt = sa.getTargetRestrictions();
 
             // Don't set the zone if it targets a player
-            if ((tgt != null) && !tgt.canTgtPlayer()) {
-                sa.getTargetRestrictions().setZone(origin);
+            if (tgt != null && !tgt.canTgtPlayer()) {
+                tgt.setZone(origin);
             }
         }
-
     }
 
     public static final SpellAbility buildFusedAbility(final Card card) {

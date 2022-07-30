@@ -8,8 +8,7 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ At the beginning of your end step you may exile NICKNAME. If you do, return it to the battlefield under it's owner's control at the beginning of your next upkeep. It gains haste.
 SVar:TrigExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDelaytrig
 SVar:DBDelaytrig:DB$ Effect | Name$ Obzedat Effect | Triggers$ TrigEOT | RememberObjects$ Self | Duration$ Permanent
-SVar:TrigEOT:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ ObzedatReturn | TriggerDescription$ Return CARDNAME to the battlefield under it's owner's control. It gains haste.
+SVar:TrigEOT:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ ObzedatReturn | OneOff$ True | TriggerDescription$ Return CARDNAME to the battlefield under it's owner's control. It gains haste.
 SVar:ObzedatReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ ObzedatPump
-SVar:ObzedatPump:DB$ Pump | Defined$ Remembered | KW$ Haste | Duration$ Permanent | SubAbility$ ObzedatCleanup
-SVar:ObzedatCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:ObzedatPump:DB$ Pump | Defined$ Remembered | KW$ Haste | Duration$ Permanent
 Oracle:When Obzedat, Ghost Council enters the battlefield, target opponent loses 2 life and you gain 2 life.\nAt the beginning of your end step, you may exile Obzedat. If you do, return it to the battlefield under its owner's control at the beginning of your next upkeep. It gains haste.

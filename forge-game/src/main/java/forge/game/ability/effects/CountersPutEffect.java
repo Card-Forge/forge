@@ -426,7 +426,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 if (sa.hasParam("EachFromSource")) {
                     for (Card c : AbilityUtils.getDefinedCards(card, sa.getParam("EachFromSource"), sa)) {
                         for (Entry<CounterType, Integer> cti : c.getCounters().entrySet()) {
-                            if (gameCard != null && gameCard.canReceiveCounters(cti.getKey())) {
+                            if (gameCard != null) {
                                 gameCard.addCounter(cti.getKey(), cti.getValue(), placer, table);
                             }
                         }
@@ -631,7 +631,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 }
             }
         }
-        if (sa.hasParam("RememberCards")) {
+        //for cards like Agitator Ant/Spectacular Showdown that care if counters were actually put on,
+        // instead use "RememberPut" – this checks after replacement
+        if (sa.hasParam("RememberCards")) { // remembers whether counters actually placed or not
             card.addRemembered(table.columnKeySet());
         }
     }

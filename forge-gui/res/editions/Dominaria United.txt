@@ -24,3 +24,6 @@ ScryfallCode=DMU
 411 R Temporal Firestorm @Nestor Ossandon Leal
 416 R Llanowar Loamspeaker @Zara Alfonso
 428 R Llanowar Loamspeaker @Volkan Baǵa
+
+[tokens]
+r_1_1_monk_prowess

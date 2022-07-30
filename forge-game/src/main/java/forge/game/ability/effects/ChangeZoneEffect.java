@@ -149,7 +149,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sb.append(" for ");
             }
             sb.append(Lang.nounWithNumeralExceptOne(num, type + cardTag)).append(", ");
-            if (!sa.hasParam("NoReveal") && ZoneType.smartValueOf(destination).isHidden()) {
+            if (!sa.hasParam("NoReveal") && ZoneType.smartValueOf(destination) != null && ZoneType.smartValueOf(destination).isHidden()) {
                 if (choosers.size() == 1) {
                     sb.append(num > 1 ? "reveals them, " : "reveals it, ");
                 } else {
@@ -280,12 +280,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             } else {
                 changed = Lang.nounWithNumeralExceptOne(num, type + cardTag);
             }
-            final boolean battlefield = destination.equals("Battlefield");
+            final boolean toField = destination.equals("Battlefield");
+            final boolean toHand = destination.equals("Hand");
             sb.append(chooserNames).append(" returns ").append(mandatory || changeNumDesc ? "" : "up to ");
             sb.append(changed);
             // so far, it seems non-targeted only lets you return from your own graveyard
             sb.append(" from their graveyard").append(choosers.size() > 1 ? "s" : "");
-            sb.append(battlefield ? " to the " : " into their ").append(destination.toLowerCase());
+            sb.append(toField ? " to the " : toHand ? " to their " : " into their ").append(destination.toLowerCase());
             if (sa.hasParam("WithCountersType")) {
                 final CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
                 if (cType != null) {
@@ -889,7 +890,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (choose.equals("Targeted") && sa.getTargets().isTargetingAnyPlayer()) {
                 chooser = sa.getTargets().getFirstTargetedPlayer();
             } else {
-                chooser = AbilityUtils.getDefinedPlayers(sa.getHostCard(), choose, sa).get(0);
+                final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
+                if (!choosers.isEmpty()) {
+                    chooser = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, null, null);
+                }
             }
         }
 
@@ -900,7 +904,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Card source = sa.getHostCard();
         final Game game = source.getGame();
         final boolean defined = sa.hasParam("Defined");
-        final String changeType = sa.getParam("ChangeType");
+        final String changeType = sa.getParamOrDefault("ChangeType", "");
         Map<Player, HiddenOriginChoices> HiddenOriginChoicesMap = Maps.newHashMap();
 
         for (Player player : fetchers) {
@@ -1068,7 +1072,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 searchedLibrary = false;
             }
 
-            if (!defined && changeType != null) {
+            if (!defined && !changeType.equals("") && !changeType.startsWith("EACH")) {
                 fetchList = (CardCollection)AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
             }
 
@@ -1090,8 +1094,24 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             fetchList.sort();
 
             CardCollection chosenCards = new CardCollection();
-            // only multi-select if player can select more than one
-            if (changeNum > 1 && allowMultiSelect(decider, sa)) {
+            if (changeType.startsWith("EACH")) {
+                String[] eachTypes = changeType.substring(5).split(" & ");
+                for (String thisType : eachTypes) {
+                    for (int i = 0; i < changeNum && destination != null; i++) {
+                        CardCollection thisList = (CardCollection) AbilityUtils.filterListByType(fetchList, thisType, sa);
+                        if (!chosenCards.isEmpty()) {
+                            thisList.removeAll(chosenCards);
+                        }
+                        Card c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa,
+                                thisList, delayedReveal, selectPrompt, !sa.hasParam("Mandatory"), decider);
+                        if (c == null) {
+                            continue;
+                        }
+                        chosenCards.add(c);
+                    }
+                }
+            } else if (changeNum > 1 && allowMultiSelect(decider, sa)) {
+                // only multi-select if player can select more than one
                 List<Card> selectedCards;
                 if (!sa.hasParam("SelectPrompt")) {
                     // new default messaging for multi select
@@ -1434,7 +1454,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 }
             }
 
-            if (((!ZoneType.Battlefield.equals(destination) && changeType != null && !defined && !changeType.equals("Card"))
+            if (((!ZoneType.Battlefield.equals(destination) && !changeType.equals("") && !defined && !changeType.equals("Card"))
                     || (sa.hasParam("Reveal") && !movedCards.isEmpty())) && !sa.hasParam("NoReveal")) {
                 game.getAction().reveal(movedCards, player);
             }

@@ -10,6 +10,7 @@ import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.deck.CardPool;
 import forge.deck.Deck;
+import forge.deck.DeckProxy;
 import forge.deck.DeckSection;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
@@ -122,7 +123,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         avatarIndex = avatar;
         isFemale    = !male;
 
-        if(fantasyMode){ //Set a random ColorID in fantasy mode.
+        if (fantasyMode){ //Set a random ColorID in fantasy mode.
            setColorIdentity(MyRandom.getRandom().nextInt(5)); // MyRandom to not interfere with the unstable RNG.
         } else setColorIdentity(startingColorIdentity + 1); // +1 because index 0 is colorless.
 
@@ -137,6 +138,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if(slot>=0&&slot<NUMBER_OF_DECKS) {
             selectedDeckIndex = slot;
             deck = decks[selectedDeckIndex];
+            if (!fantasyMode)
+                setColorIdentity(DeckProxy.getColorIdentityforAdventure(deck));
         }
     }
     public void updateDifficulty(DifficultyData diff) {
