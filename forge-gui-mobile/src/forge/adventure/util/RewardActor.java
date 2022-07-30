@@ -175,7 +175,23 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         }
                     }
                 } else {
-                    if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
+                    String imagePath = ImageUtil.getImageRelativePath(reward.getCard(), false, true, false);
+                    File lookup = ImageKeys.hasSetLookup(imagePath) ? ImageKeys.setLookUpFile(imagePath, imagePath+"border") : null;
+                    int count = 0;
+                    if (lookup != null) {
+                        if (!Forge.getAssets().manager().contains(lookup.getPath())) {
+                            Forge.getAssets().manager().load(lookup.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
+                            Forge.getAssets().manager().finishLoadingAsset(lookup.getPath());
+                            count+=1;
+                        }
+                        Texture replacement = Forge.getAssets().manager().get(lookup.getPath(), Texture.class, false);
+                        if (replacement != null) {
+                            setCardImage(replacement);
+                        } else {
+                            loaded = false;
+                        }
+                        ImageCache.updateSynqCount(lookup, count);
+                    } else if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
                         //Cannot find an image file, set up a rendered card until (if) a file is downloaded.
                         T = renderPlaceholder(getGraphics(), reward.getCard()); //Now we can render the card.
                         setCardImage(T);
