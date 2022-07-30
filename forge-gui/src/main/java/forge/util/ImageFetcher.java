@@ -81,7 +81,8 @@ public abstract class ImageFetcher {
             // Skip fetching if artist info is not available for art crop
             if (useArtCrop && paperCard.getArtist().isEmpty())
                 return;
-
+            String imagePath = ImageUtil.getImageRelativePath(paperCard, false, true, false);
+            final boolean hasSetLookup = ImageKeys.hasSetLookup(imagePath);
             final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
             String filename = backFace ? paperCard.getCardAltImageKey() : paperCard.getCardImageKey();
             if (useArtCrop) {
@@ -93,14 +94,31 @@ public abstract class ImageFetcher {
             if (!useArtCrop) {
                 //move priority of ftp image here
                 StringBuilder setDownload = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
-                setDownload.append(ImageUtil.getDownloadUrl(paperCard, backFace));
-                downloadUrls.add(setDownload.toString());
+                if (!hasSetLookup) {
+                    setDownload.append(ImageUtil.getDownloadUrl(paperCard, backFace));
+                    downloadUrls.add(setDownload.toString());
+                } else {
+                    List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(paperCard.getName());
+                    for (PaperCard pc : clones) {
+                        if (clones.size() > 1) {//clones only
+                            if (!paperCard.getEdition().equalsIgnoreCase(pc.getEdition())) {
+                                StringBuilder set = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
+                                set.append(ImageUtil.getDownloadUrl(pc, backFace));
+                                downloadUrls.add(set.toString());
+                            }
+                        } else {// original from set
+                            StringBuilder set = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
+                            set.append(ImageUtil.getDownloadUrl(pc, backFace));
+                            downloadUrls.add(set.toString());
+                        }
+                    }
+                }
             }
-
+            //setlookup don't support scryfall collector number
             final String cardCollectorNumber = paperCard.getCollectorNumber();
             if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
                 final String scryfallURL = this.getScryfallDownloadURL(paperCard, backFace, useArtCrop);
-                if (scryfallURL != null)
+                if (scryfallURL != null && !hasSetLookup)
                     downloadUrls.add(scryfallURL);
             }
         } else if (prefix.equals(ImageKeys.TOKEN_PREFIX)) {
