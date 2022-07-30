@@ -45,7 +45,7 @@ public class Assets implements Disposable {
     public BitmapFont advDefaultFont, advBigFont;
     private Texture defaultImage, dummy;
     private TextureParameter textureParameter;
-    private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM, cTMVal = 0, cSF = 0, cSFVal = 0;
+    private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0, aDF = 0, cDFVal = 0;
     public Assets() {
         //init titlebg fallback
         fallback_skins.put(0, new Texture(GuiBase.isAndroid()
@@ -237,7 +237,7 @@ public class Assets implements Disposable {
             }
             memoryPerFile.put(fileName, textureSize);
 
-            int sum = memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts()
+            int sum = memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts() + calcCounterFonts() + calcAdvFonts()
                     + calculateObjectMaps(generatedCards()) + calculateObjectMaps(fallback_skins()) + calculateObjectMaps(tmxMap());
             return sum;
         }
@@ -305,13 +305,48 @@ public class Assets implements Disposable {
             cSF = fonts.size();
             int val = 0;
             for (FSkinFont sf : fonts.values()) {
-                for (TextureRegion tr : sf.font.getRegions()) {
-                    Texture t = tr.getTexture();
-                    val += (t.getWidth()*t.getHeight())*4;
-                }
+                val += calcBitmapFont(sf.font);
             }
             cSFVal = val;
             return cSFVal;
+        }
+        private int calcCounterFonts() {
+            if (!Forge.showFPS)
+                return 0;
+            if (counterFonts == null || counterFonts.isEmpty())
+                return 0;
+            if (cCF == counterFonts.size)
+                return cCFVal;
+            int val = 0;
+            for (BitmapFont cf : counterFonts.values()) {
+                val += calcBitmapFont(cf);
+            }
+            cCFVal = val;
+            return cCFVal;
+        }
+        private int calcAdvFonts() {
+            if (!Forge.showFPS)
+                return 0;
+            if (advDefaultFont == null || advBigFont == null)
+                return 0;
+            if (aDF == -1)
+                return cDFVal;
+            int val = 0;
+            val += calcBitmapFont(advDefaultFont);
+            val += calcBitmapFont(advBigFont);
+            cDFVal = val;
+            aDF = -1;
+            return cDFVal;
+        }
+        private int calcBitmapFont(BitmapFont bitmapFont) {
+            if (bitmapFont == null)
+                return 0;
+            int val = 0;
+            for (TextureRegion tr : bitmapFont.getRegions()) {
+                Texture t = tr.getTexture();
+                val += (t.getWidth()*t.getHeight())*4;
+            }
+            return val;
         }
 
         @SuppressWarnings("unchecked")
