@@ -678,9 +678,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     actor.getStage().addActor(switchButton);
             }
             //Vector2 point = actor.localToStageCoordinates(tmp.set(x, y));
-            tooltip_actor.setX(actor.getRight());
-            if (tooltip_actor.getX() + tooltip_actor.getWidth() > Scene.getIntendedWidth())
-                tooltip_actor.setX(Math.max(0,actor.getX() - tooltip_actor.getWidth()));
+            tooltip_actor.setX(Scene.getIntendedWidth() / 2 - tooltip_actor.getWidth() / 2);
+            //if (tooltip_actor.getX() + tooltip_actor.getWidth() > Scene.getIntendedWidth())
+                //tooltip_actor.setX(Math.max(0,actor.getX() - tooltip_actor.getWidth()));
             tooltip_actor.setY(Scene.getIntendedHeight() / 2 - tooltip_actor.getHeight() / 2);
             //tooltip_actor.setX(480/2 - tooltip_actor.getWidth()/2); //480 hud width
             //tooltip_actor.setY(270/2-tooltip_actor.getHeight()/2); //270 hud height
