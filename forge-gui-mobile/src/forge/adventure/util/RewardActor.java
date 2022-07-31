@@ -28,7 +28,6 @@ import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
 import forge.adventure.data.ItemData;
-import forge.adventure.scene.RewardScene;
 import forge.adventure.scene.Scene;
 import forge.assets.FSkin;
 import forge.assets.FSkinFont;
