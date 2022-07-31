@@ -3,6 +3,7 @@ package forge.util;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -42,9 +43,11 @@ public class LibGDXImageFetcher extends ImageFetcher {
             FileHandle destFile = new FileHandle(newdespath + ".tmp");
             System.out.println(newdespath);
             destFile.parent().mkdirs();
-
+            OutputStream out = new FileOutputStream(destFile.file());
             // Conversion to JPEG will be handled differently depending on the platform
-            Forge.getDeviceAdapter().convertToJPEG(is, new FileOutputStream(destFile.file()));
+            Forge.getDeviceAdapter().convertToJPEG(is, out);
+            is.close();
+            out.close(); //close outputstream before destfile.moveto so it can delete the tmp file internally
             destFile.moveTo(new FileHandle(newdespath));
 
             System.out.println("Saved image to " + newdespath);
