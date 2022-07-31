@@ -155,20 +155,8 @@ public final class ImageKeys {
                     cachedCards.put(filename, file);
                     return file;
                 }
-                // if there's a 1st art variant try with it for .fullborder images
-                file = findFile(dir, fullborderFile.replaceAll("[0-9]*.fullborder", "1.fullborder"));
-                if (file != null) {
-                    cachedCards.put(filename, file);
-                    return file;
-                }
                 // if there's an art variant try without it for .full images
                 file = findFile(dir, filename.replaceAll("[0-9].full",".full"));
-                if (file != null) {
-                    cachedCards.put(filename, file);
-                    return file;
-                }
-                // if there's a 1st art variant try with it for .full images
-                file = findFile(dir, filename.replaceAll("[0-9]*.full", "1.full"));
                 if (file != null) {
                     cachedCards.put(filename, file);
                     return file;
