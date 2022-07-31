@@ -639,18 +639,12 @@ public class CardProperty {
                 }
 
                 final String restriction = property.split("SharesColorWith ")[1];
-                if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
+                if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted") || restriction.startsWith("TopOfLibrary")) {
                     CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
                     return Iterables.any(list, CardPredicates.sharesColorWith(card));
                 }
 
                 switch (restriction) {
-                    case "TopCardOfLibrary":
-                        final CardCollectionView cards = sourceController.getCardsIn(ZoneType.Library);
-                        if (cards.isEmpty() || !card.sharesColorWith(cards.get(0))) {
-                            return false;
-                        }
-                        break;
                     case "Equipped":
                         if (!source.isEquipment() || !source.isEquipping()
                                 || !card.sharesColorWith(source.getEquipping())) {
@@ -778,16 +772,6 @@ public class CardProperty {
                             return false;
                         }
                         break;
-                    case "Remembered":
-                        for (final Object rem : source.getRemembered()) {
-                            if (rem instanceof Card) {
-                                final Card c = (Card) rem;
-                                if (card.sharesCardTypeWith(c)) {
-                                    return true;
-                                }
-                            }
-                        }
-                        return false;
                     case "EachTopLibrary":
                         final CardCollection cards = new CardCollection();
                         for (Player p : game.getPlayers()) {
@@ -930,13 +914,8 @@ public class CardProperty {
             } else {
                 final String restriction = property.split("sharesOwnerWith ")[1];
                 CardCollection def = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                for (final Object rem : def) {
-                    if (rem instanceof Card) {
-                        final Card c = (Card) rem;
-                        if (!card.getOwner().equals(c.getOwner())) {
-                            return false;
-                        }
-                    }
+                if (!Iterables.all(def, CardPredicates.isOwner(card.getOwner()))) {
+                    return false;
                 }
             }
         } else if (property.startsWith("SecondSpellCastThisTurn")) {
