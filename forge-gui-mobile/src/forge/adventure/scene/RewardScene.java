@@ -216,9 +216,11 @@ public class RewardScene extends UIScene {
         float fW = Forge.isLandscapeMode() ? Forge.getScreenWidth() : Forge.getScreenHeight();
         float fH = Forge.isLandscapeMode() ? Forge.getScreenHeight() : Forge.getScreenWidth();
         float mul = fW/fH < AR ? AR/(fW/fH) : (fW/fH)/AR;
-        if (fW/fH >= 2) {//tall display
+        if (fW/fH >= 2f) {//tall display
             mul = (fW/fH) - ((fW/fH)/AR);
-            if ((fW/fH) > 2.3) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
+            if ((fW/fH) >= 2.1f && (fW/fH) < 2.3f)
+                mul *= 0.9f;
+            else if ((fW/fH) > 2.3) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
                 mul *= 0.8f;
         }
         cardHeight = bestCardHeight * 0.90f ;
