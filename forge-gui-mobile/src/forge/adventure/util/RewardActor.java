@@ -335,10 +335,33 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
     private TextureRegionDrawable processDrawable(Texture texture) {
         TextureRegionDrawable drawable = new TextureRegionDrawable(ImageCache.croppedBorderImage(texture));
-        if(Forge.isLandscapeMode())
-            drawable.setMinSize((Scene.getIntendedHeight() / RewardScene.CARD_WIDTH_TO_HEIGHT) * 0.95f, Scene.getIntendedHeight() * 0.95f);
+        float origW = texture.getWidth();
+        float origH = texture.getHeight();
+        float boundW = Scene.getIntendedWidth() * 0.95f;
+        float boundH = Scene.getIntendedHeight() * 0.95f;
+        float newW = origW;
+        float newH = origH;
+        if (origW > boundW) {
+            newW = boundW;
+            newH = (newW * origH) / origW;
+        }
+        if (newH > boundH) {
+            newH = boundH;
+            newW = (newH * origW) / origH;
+        }
+        float AR = 480f/270f;
+        float fW = Forge.isLandscapeMode() ? Forge.getScreenWidth() : Forge.getScreenHeight();
+        float fH = Forge.isLandscapeMode() ? Forge.getScreenHeight() : Forge.getScreenWidth();
+        float mul = fW/fH < AR ? AR/(fW/fH) : (fW/fH)/AR;
+        if (fW/fH >= 2) {//tall display
+            mul = (fW/fH) - ((fW/fH)/AR);
+            if ((fW/fH) > 2.3) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
+                mul *= 0.8f;
+        }
+        if (Forge.isLandscapeMode())
+            drawable.setMinSize(newW*mul, newH);
         else
-            drawable.setMinSize(Scene.getIntendedWidth()  * 0.95f, Scene.getIntendedWidth()* RewardScene.CARD_WIDTH_TO_HEIGHT * 0.95f);
+            drawable.setMinSize(newW, newH*mul);
         return drawable;
     }
     private void setCardImage(Texture img) {
