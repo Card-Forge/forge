@@ -213,8 +213,12 @@ public class RewardScene extends UIScene {
             }
         }
         float AR = 480f/270f;
-        float fW = Forge.isLandscapeMode() ? Forge.getScreenWidth() : Forge.getScreenHeight();
-        float fH = Forge.isLandscapeMode() ? Forge.getScreenHeight() : Forge.getScreenWidth();
+        int x = Forge.getDeviceAdapter().getRealScreenSize(false).getLeft();
+        int y = Forge.getDeviceAdapter().getRealScreenSize(false).getRight();
+        int realX = Forge.getDeviceAdapter().getRealScreenSize(true).getLeft();
+        int realY = Forge.getDeviceAdapter().getRealScreenSize(true).getRight();
+        float fW = x > y ? x : y;
+        float fH = x > y ? y : x;
         float mul = fW/fH < AR ? AR/(fW/fH) : (fW/fH)/AR;
         if (fW/fH >= 2f) {//tall display
             mul = (fW/fH) - ((fW/fH)/AR);
@@ -224,6 +228,9 @@ public class RewardScene extends UIScene {
                 mul *= 0.8f;
         }
         cardHeight = bestCardHeight * 0.90f ;
+        if (realX > x || realY > y) {
+            mul *= Forge.isLandscapeMode() ? 0.95f : 1.05f;
+        }
         cardWidth = (cardHeight / CARD_WIDTH_TO_HEIGHT)*mul;
 
         yOff += (targetHeight - (cardHeight * numberOfRows)) / 2f;

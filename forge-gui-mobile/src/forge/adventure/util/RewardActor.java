@@ -349,8 +349,17 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             newW = (newH * origW) / origH;
         }
         float AR = 480f/270f;
-        float fW = Forge.isLandscapeMode() ? Forge.getScreenWidth() : Forge.getScreenHeight();
-        float fH = Forge.isLandscapeMode() ? Forge.getScreenHeight() : Forge.getScreenWidth();
+        int x = Forge.getDeviceAdapter().getRealScreenSize(false).getLeft();
+        int y = Forge.getDeviceAdapter().getRealScreenSize(false).getRight();
+        int realX = Forge.getDeviceAdapter().getRealScreenSize(true).getLeft();
+        int realY = Forge.getDeviceAdapter().getRealScreenSize(true).getRight();
+        if (realX > x) {
+            x *= 1.1f;
+        } else if (realY > y) {
+            y *= 1.1f;
+        }
+        float fW = x > y ? x : y;
+        float fH = x > y ? y : x;
         float mul = fW/fH < AR ? AR/(fW/fH) : (fW/fH)/AR;
         if (fW/fH >= 2f) {//tall display
             mul = (fW/fH) - ((fW/fH)/AR);
@@ -678,9 +687,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     actor.getStage().addActor(switchButton);
             }
             //Vector2 point = actor.localToStageCoordinates(tmp.set(x, y));
-            tooltip_actor.setX(Scene.getIntendedWidth() / 2 - tooltip_actor.getWidth() / 2);
-            //if (tooltip_actor.getX() + tooltip_actor.getWidth() > Scene.getIntendedWidth())
-                //tooltip_actor.setX(Math.max(0,actor.getX() - tooltip_actor.getWidth()));
+            if (Forge.isLandscapeMode()) {
+                //right if poosible, if exceeds width, draw left
+                tooltip_actor.setX(actor.getRight());
+                if (tooltip_actor.getX() + tooltip_actor.getWidth() > Scene.getIntendedWidth())
+                    tooltip_actor.setX(Math.max(0,actor.getX() - tooltip_actor.getWidth()));
+            } else {
+                //middle
+                tooltip_actor.setX(Scene.getIntendedWidth() / 2 - tooltip_actor.getWidth() / 2);
+            }
             tooltip_actor.setY(Scene.getIntendedHeight() / 2 - tooltip_actor.getHeight() / 2);
             //tooltip_actor.setX(480/2 - tooltip_actor.getWidth()/2); //480 hud width
             //tooltip_actor.setY(270/2-tooltip_actor.getHeight()/2); //270 hud height
