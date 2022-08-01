@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import android.graphics.Point;
 import com.badlogic.gdx.Version;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 
