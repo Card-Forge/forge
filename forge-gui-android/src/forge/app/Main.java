@@ -450,10 +450,13 @@ public class Main extends AndroidApplication {
             Display display = windowManager.getDefaultDisplay();
             Point size = new Point();
             if (Build.VERSION.SDK_INT >= 17) {
-                if (real)
+                // Seems it doesn't compile if using 4.1.1.4 since it's missing this method
+                /*if (real)
                     display.getRealSize(size);
                 else
-                    display.getSize(size);
+                    display.getSize(size);*/
+                //remove this line below and use the method above if using Android libs higher than 4.1.1.4
+                return Pair.of(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // this method don't take account the soft navigation bars taken in rendered screen
             } else if (Build.VERSION.SDK_INT >= 14) {
                 try {
                     size.x = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
