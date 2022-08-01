@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import android.graphics.Point;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Version;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 
@@ -448,12 +449,13 @@ public class Main extends AndroidApplication {
             WindowManager windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
             Display display = windowManager.getDefaultDisplay();
             Point size = new Point();
-            if (real)
+            /*if (real)
                 display.getRealSize(size);
             else
                 display.getSize(size);
             //real size
-            return Pair.of(size.x, size.y);
+            return Pair.of(size.x, size.y);*/ //method works only on Build.VERSION.SDK_INT >= 17 (4.2), need to update android dependency from 4.1.1.4 to at least 8.0
+            return Pair.of(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }
     }
 
