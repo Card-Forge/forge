@@ -809,7 +809,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                 buildQuestion.append("\n").append(localizer.getMessage("lblTriggeredby")).append(": ").append(tos.get(AbilityKey.Card));
             }
         }
-        return this.getGui().confirm(wrapper.getView().getHostCard(), buildQuestion.toString().replaceAll("\n", " "));
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            return this.getGui().confirm(wrapper.getView().getHostCard(), buildQuestion.toString().replaceAll("\n", " "));
+        } else {
+            final InputConfirm inp = new InputConfirm(this, buildQuestion.toString(), wrapper);
+            inp.showAndWait();
+            return inp.getResult();
+        }
     }
 
     @Override
@@ -1369,7 +1375,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmReplacementEffect(final ReplacementEffect replacementEffect, final SpellAbility effectSA,
         GameEntity affected, final String question) {
-        return this.getGui().confirm(effectSA.getView().getHostCard(), question.replaceAll("\n", " "));
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            return this.getGui().confirm(effectSA.getView().getHostCard(), question.replaceAll("\n", " "));
+        } else {
+            final InputConfirm inp = new InputConfirm(this, question, effectSA);
+            inp.showAndWait();
+            return inp.getResult();
+        }
     }
 
     @Override
@@ -1771,7 +1783,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
 
     @Override
     public boolean confirmPayment(final CostPart costPart, final String question, SpellAbility sa) {
-        return this.getGui().confirm(sa.getView().getHostCard(), question.replaceAll("\n", " "));
+        if (GuiBase.getInterface().isLibgdxPort()) {
+            return this.getGui().confirm(sa.getView().getHostCard(), question.replaceAll("\n", " "));
+        } else {
+            final InputConfirm inp = new InputConfirm(this, question, sa);
+            inp.showAndWait();
+            return inp.getResult();
+        }
     }
 
     @Override
