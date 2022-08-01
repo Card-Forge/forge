@@ -13,6 +13,7 @@ import forge.util.OperatingSystem;
 import forge.util.RestartUtil;
 import forge.util.Utils;
 import org.apache.commons.cli.*;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
