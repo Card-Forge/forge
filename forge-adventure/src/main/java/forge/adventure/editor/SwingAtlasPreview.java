@@ -4,6 +4,7 @@ import forge.adventure.util.Config;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,6 @@ public class SwingAtlasPreview extends Box {
         setSpritePath(sprite,null);
     }
     public void setSpritePath(String sprite,String name) {
-
         if(this.sprite==null||name==null||sprite==null||(this.sprite.equals(sprite)&&(spriteName==null&&spriteName.equals(name))))
             return;
         removeAll();

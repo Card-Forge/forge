@@ -16,6 +16,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class WorldEditor extends JComponent {
@@ -23,15 +24,15 @@ public class WorldEditor extends JComponent {
     WorldData  currentData;
 
 
-    JSpinner width= new JSpinner(new SpinnerNumberModel(0, 0, 100000, 1));
-    JSpinner height= new JSpinner(new SpinnerNumberModel(0, 0, 100000, 1));
-    JSpinner playerStartPosX= new JSpinner(new SpinnerNumberModel(0, 0, 1, .1));
-    JSpinner playerStartPosY= new JSpinner(new SpinnerNumberModel(0, 0, 1, .1));
-    JSpinner noiseZoomBiome= new JSpinner(new SpinnerNumberModel(0, 0, 1000f, 1f));
-    JSpinner tileSize= new JSpinner(new SpinnerNumberModel(0, 0, 100000, 1));
+    IntSpinner width= new IntSpinner( 0, 100000, 1);
+    IntSpinner height= new IntSpinner( 0, 100000, 1);
+    FloatSpinner playerStartPosX= new FloatSpinner( 0, 1, .1f);
+    FloatSpinner playerStartPosY= new FloatSpinner(0, 1, .1f);
+    FloatSpinner noiseZoomBiome= new FloatSpinner( 0, 1000f, 1f);
+    IntSpinner tileSize= new IntSpinner( 0, 100000, 1);
 
     JTextField  biomesSprites       =   new JTextField();
-    JSpinner maxRoadDistance        =   new JSpinner(new SpinnerNumberModel(0, 0, 100000f, 1f));
+    FloatSpinner maxRoadDistance        =   new FloatSpinner( 0, 100000f, 1f);
     TextListEdit biomesNames        =   new TextListEdit();
 
     DefaultListModel<BiomeData> model = new DefaultListModel<>();
@@ -92,7 +93,7 @@ public class WorldEditor extends JComponent {
         setLayout(layout);
         add(tabs);
         JPanel worldPanel=new JPanel();
-        JPanel biomeData=new JPanel();
+        JSplitPane biomeData=new JSplitPane();
         tabs.addTab("BiomeData", biomeData);
         tabs.addTab("WorldData", worldPanel);
 
@@ -116,8 +117,8 @@ public class WorldEditor extends JComponent {
         worldPanel.add(new Box.Filler(new Dimension(0,0),new Dimension(0,Integer.MAX_VALUE),new Dimension(0,Integer.MAX_VALUE)));
 
 
-        biomeData.setLayout(new GridLayout(1,2)) ;
-        biomeData.add(list);    biomeData.add(edit);
+        JScrollPane pane = new JScrollPane(edit);
+        biomeData.setLeftComponent(list);    biomeData.setRightComponent(pane);
 
         load();
 
@@ -166,6 +167,16 @@ public class WorldEditor extends JComponent {
 
     void save()
     {
+        currentData.width=width.intValue();
+        currentData.height=height.intValue();
+        currentData.playerStartPosX=playerStartPosX.floatValue();
+        currentData.playerStartPosY=playerStartPosY.floatValue();
+        currentData.noiseZoomBiome=noiseZoomBiome.floatValue();
+        currentData.tileSize=tileSize.intValue();
+        currentData.biomesSprites=biomesSprites.getText();
+        currentData.maxRoadDistance=maxRoadDistance.floatValue();
+        currentData.biomesNames= Arrays.asList(biomesNames.getList());
+
         Json json = new Json(JsonWriter.OutputType.json);
         FileHandle handle = Config.instance().getFile(Paths.WORLD);
         handle.writeString(json.prettyPrint(json.toJson(currentData,Array.class, WorldData.class)),false);
@@ -173,6 +184,9 @@ public class WorldEditor extends JComponent {
     }
     void load()
     {
+
+
+
         model.clear();
         Json json = new Json();
         FileHandle handle = Config.instance().getFile(Paths.WORLD);

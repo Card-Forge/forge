@@ -29,7 +29,7 @@ public class BiomeTerrainEdit extends JComponent {
         center.add(new JLabel("resolution:")); center.add(resolution);
         BorderLayout layout=new BorderLayout();
         setLayout(layout);
-        add(preview,BorderLayout.LINE_START);
+        add(preview,BorderLayout.WEST);
         add(center,BorderLayout.CENTER);
 
         spriteName.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeTerrainEdit.this.updateTerrain()));
@@ -52,7 +52,8 @@ public class BiomeTerrainEdit extends JComponent {
         min.setValue(currentData.min);
         max.setValue(currentData.max);
         resolution.setValue(currentData.resolution);
-        preview.setSpritePath(currentBiomeData.tilesetAtlas,currentData.spriteName);
+        if(currentBiomeData!=null&&currentData!= null)
+            preview.setSpritePath(currentBiomeData.tilesetAtlas,currentData.spriteName);
         updating=false;
     }
     public void updateTerrain()

@@ -21,10 +21,18 @@
   ],
   "structures":[
     {
-      "structureAtlasPath":"world/tilesets/forest.atlas",
+      "sourcePath"  :   "world/tilesets/forestSource.png",
+      "structureAtlasPath":"world/tilesets/structures.atlas",
+      "mappingInfo":[
+      {
+        "name":"Forest",
+        "color":"007000"
+      }
+      ],
       "x": 0.5,
       "y": 0.5,
-      "size": 0.3
+      "width": 0.3   ,
+      "height": 0.3
     } 
   ],
   "width": 0.7,

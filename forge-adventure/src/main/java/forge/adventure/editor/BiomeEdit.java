@@ -46,8 +46,8 @@ public class BiomeEdit extends JComponent {
         center.add(new JLabel("enemies:")); center.add(enemies);
         center.add(new JLabel("pointsOfInterest:")); center.add(pointsOfInterest);
         center.add(new JLabel("color:")); center.add(color);
-        center.add(new JLabel("terrain/structures:"));
-        BorderLayout layout=new BorderLayout();
+        center.add(new JLabel("terrain/structures:"));center.add(new JLabel(""));
+        BoxLayout layout=new BoxLayout(this, BoxLayout.Y_AXIS);
         setLayout(layout);
         add(center,BorderLayout.NORTH);
         add(terrain,BorderLayout.CENTER);

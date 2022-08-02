@@ -20,6 +20,8 @@ public class BiomeStructure {
     private int dataMap[][];
     boolean init=false;
     private TextureAtlas structureAtlas;
+    public BufferedImage image;
+
     public BiomeStructure(BiomeStructureData data,long seed,int width,int height)
     {
         this.data=data;
@@ -35,59 +37,42 @@ public class BiomeStructure {
         return structureAtlas;
     }
     public int structureObjectCount() {
-        int count=0;
-        for(TextureAtlas.AtlasRegion region:atlas ().getRegions())
-        {
-            if(region.name.startsWith("structure"))
-            {
-                count++;
-            }
-        }
-        return count;
+        return data.mappingInfo.length;
     }
 
     public int objectID(int x, int y) {
 
         if(!init)
         {
-            init=true;
             initialize();
         }
-        if(x>biomeWidth*data.width)
-            return -1;
-        if(y>biomeHeight*data.height)
-            return -1;
-        if(x<biomeWidth*data.x)
-            return -1;
-        if(y<biomeHeight*data.y)
+        if(x>=dataMap.length||x<0||y<0||y>=dataMap[0].length)
             return -1;
         return dataMap[x][y]; 
     }
 
-    private void initialize() {
+    public void initialize() {
+        init=true;
         OverlappingModel model= new OverlappingModel(sourceImage(),data.N, (int) (data.width* biomeWidth), (int) (data.height*biomeHeight),data.periodicInput,data.periodicOutput,data.symmetry,data.ground);
         HashMap<Integer,Integer> colorIdMap=new HashMap<>();
-        int counter=0;
-        for(TextureAtlas.AtlasRegion region:atlas ().getRegions())
+        for(int i=0;i<data.mappingInfo.length;i++)
         {
-            if(region.name.startsWith("structure"))
-            {
-               String[] split= region.name.split("_");
-               if(split.length<2)
-                   continue;
-               int rgb=Integer.parseInt(split[1],16);
-                colorIdMap.put(rgb,counter);
-                counter++;
-            }
+                colorIdMap.put(Integer.parseInt(data.mappingInfo[i].color,16),i);
         }
-        BufferedImage image=model.graphics();
+        boolean suc=model.run((int) seed,0);
+        if(!suc)
+        {
+            dataMap=new int[(int) (data.width* biomeWidth)][ (int) (data.height*biomeHeight)];
+            return;
+        }
+        image=model.graphics();
         dataMap=new int[image.getWidth()][image.getHeight()];
         for(int x=0;x<image.getWidth();x++)
         {
 
             for(int y=0;y<image.getHeight();y++)
             {
-                int rgb=image.getRGB(x,y);
+                int rgb=image.getRGB(x,y) & 0xffffff;
                 if(!colorIdMap.containsKey(rgb))
                 {
                     dataMap[x][y]=-1;
@@ -101,14 +86,24 @@ public class BiomeStructure {
     }
 
     private BufferedImage sourceImage() {
-        TextureAtlas.AtlasRegion region=atlas().findRegion("Source");
-        if(region==null)
-            return null;
         try {
-            return ImageIO.read(new File(Config.instance().getFilePath(data.structureAtlasPath))).getSubimage((int) region.offsetX, (int) region.offsetY,region.originalWidth,region.originalHeight);
+            return ImageIO.read(new File(Config.instance().getFilePath(data.sourcePath)));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
     }
+
+    public int x() {
+        return (int) ((data.x*biomeWidth)-(data.width*biomeWidth)/2);
+    }
+    public int y() {
+        return (int) ((data.y*biomeHeight)-(data.height*biomeHeight)/2);
+    }
+
+    public BiomeStructureData.BiomeStructureDataMapping[] mapping() {
+        return data.mappingInfo;
+    }
+
+
 }

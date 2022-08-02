@@ -95,13 +95,12 @@ public class BiomeTexture implements Serializable {
                     for(BiomeStructureData structureData:data.structures)
                     {
                         BiomeStructure structure=new BiomeStructure(structureData,0,0,0);
-                        for(TextureAtlas.AtlasRegion region:structure.atlas ().getRegions())
+                        TextureAtlas atlas=structure.atlas ();
+                        for(BiomeStructureData.BiomeStructureDataMapping mapping:structure.mapping())
                         {
-                            if(region.name.startsWith("structure"))
-                            {
-                                regions.add(region);
-                                source.add(structure.atlas());
-                            }
+
+                            regions.add(atlas.findRegion(mapping.name));
+                            source.add(atlas);
                         }
                     }
                 }

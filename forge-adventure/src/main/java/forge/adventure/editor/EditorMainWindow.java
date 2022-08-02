@@ -7,6 +7,7 @@ import java.awt.*;
  * Editor class to edit configuration, maybe moved or removed
  */
 public class EditorMainWindow extends JFrame {
+    public final static WorldEditor worldEditor = new WorldEditor();
     JTabbedPane tabs =new JTabbedPane();
 
     public EditorMainWindow()
@@ -14,7 +15,7 @@ public class EditorMainWindow extends JFrame {
         BorderLayout layout=new BorderLayout();
         setLayout(layout);
         add(tabs);
-        tabs.addTab("World",new WorldEditor());
+        tabs.addTab("World",worldEditor);
         tabs.addTab("POI",new PointOfInterestEditor());
         tabs.addTab("Items",new ItemsEditor());
         tabs.addTab("Enemies",new EnemyEditor());

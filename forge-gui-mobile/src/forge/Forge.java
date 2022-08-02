@@ -888,6 +888,8 @@ public class Forge implements ApplicationListener {
             //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
             if (BugReporter.isSentryEnabled())
                 BugReporter.reportException(ex);
+            else
+                ex.printStackTrace();
         }
         if (showFPS)
             frameRate.render();

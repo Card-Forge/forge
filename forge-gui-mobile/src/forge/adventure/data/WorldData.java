@@ -3,6 +3,7 @@ package forge.adventure.data;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.SerializationException;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 import forge.adventure.world.BiomeSprites;
@@ -80,10 +81,16 @@ public class WorldData implements Serializable {
 
     public List<BiomeData> GetBiomes() {
         if (biomes == null) {
-            biomes = new ArrayList<BiomeData>();
-            Json json = new Json();
-            for (String name : biomesNames) {
-                biomes.add(json.fromJson(BiomeData.class, Config.instance().getFile(name)));
+            try
+            {
+                biomes = new ArrayList<BiomeData>();
+                Json json = new Json();
+                for (String name : biomesNames) {
+                    biomes.add(json.fromJson(BiomeData.class, Config.instance().getFile(name)));
+                }
+            }
+            catch (SerializationException ex) {
+                ex.printStackTrace();
             }
         }
         return biomes;

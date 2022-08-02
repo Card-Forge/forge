@@ -327,9 +327,15 @@ public class World implements  Disposable, SaveFileContent {
                                     structureDataMap.put(data,new BiomeStructure(data,seed,biomeWidth,biomeHeight));
                                 }
                                 structure=structureDataMap.get(data);
-                                int structureIndex=structure.objectID(x-biomeXStart,y-biomeYStart);
+                                int structureXStart= structure.x()+beginX;
+                                int structureYStart= structure.y()+beginY;
+                                int structureIndex=structure.objectID(x-structureXStart,y-structureYStart);
                                 if(structureIndex>=0)
+                                {
+                                    pix.setColor(data.mappingInfo[structureIndex].getColor());
+                                    pix.drawPixel(x, y);
                                     terrainMap[x][y]=terrainCounter+structureIndex;
+                                }
 
                                 terrainCounter+=structure.structureObjectCount();
                             }
@@ -395,6 +401,9 @@ public class World implements  Disposable, SaveFileContent {
                                         foundSolution=true;
                                         x=x+xi*data.tileSize;
                                         y=y+yi*data.tileSize;
+
+
+
                                     }
                                 }
                             }
