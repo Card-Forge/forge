@@ -65,10 +65,6 @@ public class CardProperty {
             if (card.sharesNameWith(name)) {
                 return false;
             }
-        } else if (property.startsWith("sameName")) {
-            if (!card.sharesNameWith(source)) {
-                return false;
-            }
         } else if (property.equals("NamedCard")) {
             if (!card.sharesNameWith(source.getNamedCard())) {
                 return false;
@@ -813,6 +809,10 @@ public class CardProperty {
             return false;
         } else if (property.equals("canProduceMana")) {
             return !card.getManaAbilities().isEmpty();
+        } else if (property.startsWith("sameName")) {
+            if (!card.sharesNameWith(source)) {
+                return false;
+            }
         } else if (property.startsWith("sharesNameWith")) {
             if (property.equals("sharesNameWith")) {
                 if (!card.sharesNameWith(source)) {
