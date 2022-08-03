@@ -5,7 +5,7 @@ PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield| ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ Whenever CARDNAME enters the battlefield, choose an instant or sorcery card in your hand. It perpetually gains casualty 2.
 SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Sorcery.YouOwn,Instant.YouOwn | ChoiceTitle$ Choose an instant or sorcery card in your hand | Amount$ 1 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualCasualty | Name$ Spelldrain Assassin's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
-SVar:PerpetualCasualty:Mode$ Continuous | Affected$ Card.ChosenCard | AddKeyword$ Casualty:2 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually gains lifelink.
+SVar:PerpetualCasualty:Mode$ Continuous | Affected$ Card.ChosenCard | AddKeyword$ Casualty:2 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually gains casualty 2.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 Oracle:When Spelldrain Assassin enters the battlefield, choose an instant or sorcery card in your hand. It perpetually gains casualty 2.
 
