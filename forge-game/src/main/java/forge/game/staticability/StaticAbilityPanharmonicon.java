@@ -29,6 +29,12 @@ public class StaticAbilityPanharmonicon {
             return n;
         }
 
+        // "triggers only once" means it can't happen
+        if (t.hasParam("ActivationLimit")) {
+            // currently no other limits, so no further calculation needed
+            return n;
+        }
+
         CardCollectionView cardList = null;
         // if LTB look back
         if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Origin"))) {
