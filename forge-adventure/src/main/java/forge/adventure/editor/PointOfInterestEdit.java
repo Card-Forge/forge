@@ -25,20 +25,18 @@ public class PointOfInterestEdit extends JComponent {
     {
 
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        JPanel parameters=new JPanel();
+        FormPanel parameters=new FormPanel();
         parameters.setBorder(BorderFactory.createTitledBorder("Parameter"));
-        parameters.setLayout(new GridLayout(7,2)) ;
 
-        parameters.add(new JLabel("Name:")); parameters.add(name);
-        parameters.add(new JLabel("Type:")); parameters.add(type);
-        parameters.add(new JLabel("Count:")); parameters.add(count);
-        parameters.add(new JLabel("Sprite atlas:")); parameters.add(spriteAtlas);
-        parameters.add(new JLabel("Sprite:")); parameters.add(sprite);
-        parameters.add(new JLabel("Map:")); parameters.add(map);
-        parameters.add(new JLabel("Radius factor:")); parameters.add(radiusFactor);
+        parameters.add("Name:",name);
+        parameters.add("Type:",type);
+        parameters.add("Count:",count);
+        parameters.add("Sprite atlas:",spriteAtlas);
+        parameters.add("Sprite:",sprite);
+        parameters.add("Map:",map);
+        parameters.add("Radius factor:",radiusFactor);
 
         add(parameters);
-        add(new Box.Filler(new Dimension(0,0),new Dimension(0,Integer.MAX_VALUE),new Dimension(0,Integer.MAX_VALUE)));
 
         name.getDocument().addDocumentListener(new DocumentChangeListener(() -> PointOfInterestEdit.this.updateItem()));
         type.getDocument().addDocumentListener(new DocumentChangeListener(() -> PointOfInterestEdit.this.updateItem()));

@@ -27,7 +27,7 @@ public class WorldData implements Serializable {
     public BiomeData roadTileset;
     public String biomesSprites;
     public float maxRoadDistance;
-    public List<String> biomesNames;
+    public String[] biomesNames;
 
 
     private BiomeSprites sprites;

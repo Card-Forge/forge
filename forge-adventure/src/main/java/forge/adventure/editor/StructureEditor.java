@@ -153,7 +153,10 @@ public class StructureEditor extends JComponent{
         currentData=data;
         model.clear();
         if(data==null||data.structures==null)
+        {
+            edit.setCurrentStructure(null,null);
             return;
+        }
         for (int i=0;i<data.structures.length;i++) {
             model.add(i,data.structures[i]);
         }

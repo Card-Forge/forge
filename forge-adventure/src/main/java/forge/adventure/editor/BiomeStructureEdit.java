@@ -9,7 +9,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class BiomeStructureEdit extends JComponent {
+public class BiomeStructureEdit extends FormPanel {
     private boolean updating=false;
     BiomeStructureData currentData;
     BiomeData currentBiomeData;
@@ -28,24 +28,22 @@ public class BiomeStructureEdit extends JComponent {
     public BiomeStructureDataMappingEditor data=new BiomeStructureDataMappingEditor();
     public BiomeStructureEdit()
     {
-        JComponent center=new JComponent() {  };
-        center.setLayout(new GridLayout(11,2));
+        FormPanel center=new FormPanel();
 
-        center.add(new JLabel("structureAtlasPath:")); center.add(structureAtlasPath);
-        center.add(new JLabel("x:")); center.add(x);
-        center.add(new JLabel("y:")); center.add(y);
-        center.add(new JLabel("width:")); center.add(width);
-        center.add(new JLabel("height:")); center.add(height);
-        center.add(new JLabel("N:")); center.add(N);
-        center.add(new JLabel("sourcePath:")); center.add(sourcePath);
-        center.add(new JLabel("periodicInput:")); center.add(periodicInput);
-        center.add(new JLabel("ground:")); center.add(ground);
-        center.add(new JLabel("symmetry:")); center.add(symmetry);
-        center.add(new JLabel("periodicOutput:")); center.add(periodicOutput);
-        BorderLayout layout=new BorderLayout();
-        setLayout(layout);
-        add(center,BorderLayout.CENTER);
-        add(data,BorderLayout.SOUTH);
+        center.add("structureAtlasPath:",structureAtlasPath);
+        center.add("x:",x);
+        center.add("y:",y);
+        center.add("width:",width);
+        center.add("height:",height);
+        center.add("N:",N);
+        center.add("sourcePath:",sourcePath);
+        center.add("periodicInput:",periodicInput);
+        center.add("ground:",ground);
+        center.add("symmetry:",symmetry);
+        center.add("periodicOutput:",periodicOutput);
+
+        add(center);
+        add(data);
 
         structureAtlasPath.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeStructureEdit.this.updateStructure()));
 
@@ -68,6 +66,7 @@ public class BiomeStructureEdit extends JComponent {
         setEnabled(currentData!=null);
         if(currentData==null)
         {
+            data.setCurrent(null);
             return;
         }
         updating=true;
@@ -85,6 +84,9 @@ public class BiomeStructureEdit extends JComponent {
         periodicOutput.setSelected(currentData.periodicOutput);
 
         data.setCurrent(currentData);
+
+
+
         updating=false;
     }
     public void updateStructure()

@@ -18,8 +18,12 @@ public class BiomeStructureDataMappingEditor extends JComponent {
     public void setCurrent(BiomeStructureData data) {
         this.data=data;
         model.clear();
-        for(int i=0;data.mappingInfo!=null&&i<data.mappingInfo.length;i++)
+        if(data==null||data.mappingInfo==null)
+            return;
+        for(int i=0;i<data.mappingInfo.length;i++)
             model.addElement(data.mappingInfo[i]);
+
+        list.setSelectedIndex(0);
     }
 
     public BiomeStructureData.BiomeStructureDataMapping[] getCurrent()
@@ -115,7 +119,7 @@ public class BiomeStructureDataMappingEditor extends JComponent {
         model.remove(selected);
     }
 
-    private class BiomeStructureDataMappingEdit extends JComponent{
+    private class BiomeStructureDataMappingEdit extends FormPanel{
         BiomeStructureData.BiomeStructureDataMapping currentData;
 
 
@@ -127,11 +131,10 @@ public class BiomeStructureDataMappingEditor extends JComponent {
         public BiomeStructureDataMappingEdit()
         {
 
-            setLayout(new GridLayout(3,2));
 
-            add(new JLabel("name:"));       add(name);
-            add(new JLabel("color:"));      add(color);
-            add(new JLabel("collision:"));  add(collision);
+            add("name:",name);
+            add("color:",color);
+            add("collision:",collision);
 
             name.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeStructureDataMappingEdit.this.update()));
             color.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeStructureDataMappingEdit.this.update()));

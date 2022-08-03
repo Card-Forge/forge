@@ -92,29 +92,21 @@ public class WorldEditor extends JComponent {
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
         add(tabs);
-        JPanel worldPanel=new JPanel();
         JSplitPane biomeData=new JSplitPane();
         tabs.addTab("BiomeData", biomeData);
+
+
+        FormPanel worldPanel=new FormPanel();
+        worldPanel.add("width:",width);
+        worldPanel.add("height:",height);
+        worldPanel.add("playerStartPosX:",playerStartPosX);
+        worldPanel.add("playerStartPosY:",playerStartPosY);
+        worldPanel.add("noiseZoomBiome:",noiseZoomBiome);
+        worldPanel.add("tileSize:",tileSize);
+        worldPanel.add("biomesSprites:",biomesSprites);
+        worldPanel.add("maxRoadDistance:",maxRoadDistance);
+        worldPanel.add("biomesNames:",biomesNames);
         tabs.addTab("WorldData", worldPanel);
-
-
-        JPanel worldData=new JPanel();
-        worldData.setLayout(new GridLayout(9,2)) ;
-
-        worldData.add(new JLabel("width:"));            worldData.add(width);
-        worldData.add(new JLabel("height:"));           worldData.add(height);
-        worldData.add(new JLabel("playerStartPosX:"));  worldData.add(playerStartPosX);
-        worldData.add(new JLabel("playerStartPosY:"));  worldData.add(playerStartPosY);
-        worldData.add(new JLabel("noiseZoomBiome:"));   worldData.add(noiseZoomBiome);
-        worldData.add(new JLabel("tileSize:"));         worldData.add(tileSize);
-        worldData.add(new JLabel("biomesSprites:"));    worldData.add(biomesSprites);
-        worldData.add(new JLabel("maxRoadDistance:"));  worldData.add(maxRoadDistance);
-        worldData.add(new JLabel("biomesNames:"));      worldData.add(biomesNames);
-
-
-        worldPanel.setLayout(new BoxLayout(worldPanel,BoxLayout.Y_AXIS));
-        worldPanel.add(worldData);
-        worldPanel.add(new Box.Filler(new Dimension(0,0),new Dimension(0,Integer.MAX_VALUE),new Dimension(0,Integer.MAX_VALUE)));
 
 
         JScrollPane pane = new JScrollPane(edit);
@@ -126,6 +118,10 @@ public class WorldEditor extends JComponent {
         add(toolBar, BorderLayout.PAGE_START);
         JButton newButton=new JButton("save");
         newButton.addActionListener(e -> WorldEditor.this.save());
+        toolBar.add(newButton);
+
+         newButton=new JButton("save selected biome");
+        newButton.addActionListener(e -> WorldEditor.this.saveBiome());
         toolBar.add(newButton);
 
         newButton=new JButton("load");
@@ -165,6 +161,15 @@ public class WorldEditor extends JComponent {
         }
     }
 
+    void saveBiome()
+    {
+
+        edit.updateTerrain();
+        Json json = new Json(JsonWriter.OutputType.json);
+        FileHandle handle =  Config.instance().getFile(currentData.biomesNames[list.getSelectedIndex()]);
+        handle.writeString(json.prettyPrint(json.toJson(edit.currentData,  BiomeData.class)),false);
+
+    }
     void save()
     {
         currentData.width=width.intValue();
@@ -175,11 +180,11 @@ public class WorldEditor extends JComponent {
         currentData.tileSize=tileSize.intValue();
         currentData.biomesSprites=biomesSprites.getText();
         currentData.maxRoadDistance=maxRoadDistance.floatValue();
-        currentData.biomesNames= Arrays.asList(biomesNames.getList());
+        currentData.biomesNames=  (biomesNames.getList());
 
         Json json = new Json(JsonWriter.OutputType.json);
         FileHandle handle = Config.instance().getFile(Paths.WORLD);
-        handle.writeString(json.prettyPrint(json.toJson(currentData,Array.class, WorldData.class)),false);
+        handle.writeString(json.prettyPrint(json.toJson(currentData,  WorldData.class)),false);
 
     }
     void load()

@@ -8,7 +8,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 
-public class BiomeTerrainEdit extends JComponent {
+public class BiomeTerrainEdit extends FormPanel {
     SwingAtlasPreview preview=new SwingAtlasPreview(128);
     private boolean updating=false;
     BiomeTerrainData currentData;
@@ -20,17 +20,13 @@ public class BiomeTerrainEdit extends JComponent {
 
     public BiomeTerrainEdit()
     {
-        JComponent center=new JComponent() {  };
-        center.setLayout(new GridLayout(4,2));
+        FormPanel center=new FormPanel() {  };
 
-        center.add(new JLabel("spriteName:")); center.add(spriteName);
-        center.add(new JLabel("min:")); center.add(min);
-        center.add(new JLabel("max:")); center.add(max);
-        center.add(new JLabel("resolution:")); center.add(resolution);
-        BorderLayout layout=new BorderLayout();
-        setLayout(layout);
-        add(preview,BorderLayout.WEST);
-        add(center,BorderLayout.CENTER);
+        center.add("spriteName:",spriteName);
+        center.add("min:",min);
+        center.add("max:",max);
+        center.add("resolution:",resolution);
+        add(center,preview);
 
         spriteName.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeTerrainEdit.this.updateTerrain()));
 

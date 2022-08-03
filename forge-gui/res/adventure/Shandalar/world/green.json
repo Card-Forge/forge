@@ -1,52 +1,108 @@
-{		
-  "startPointX": 0.22,
-  "startPointY": 0.43,
-  "name": "green",
-  "noiseWeight": 0.5,
-  "distWeight": 1.5,
-  "tilesetName":"Green",
-  "tilesetAtlas":"world/tilesets/terrain.atlas",
-  "terrain":[
-    {
-      "spriteName":"Green_1",
-      "min": 0,
-      "max": 0.2,
-      "resolution": 10
-    },{
-      "spriteName":"Green_2",
-      "min": 0.8,
-      "max": 1.0,
-      "resolution": 10
-    }
-  ],
-  "structures":[
-    {
-      "sourcePath"  :   "world/tilesets/forestSource.png",
-      "structureAtlasPath":"world/tilesets/structures.atlas",
-      "mappingInfo":[
-      {
-        "name":"Forest",
-        "color":"007000"
-      }
-      ],
-      "x": 0.5,
-      "y": 0.5,
-      "width": 0.3   ,
-      "height": 0.3
-    } 
-  ],
-  "width": 0.7,
-  "height": 0.7,
-  "color": "59a650",
-  "spriteNames":[ "WoodTree","WoodTree2","Bush","Stump","Moss","Stone","Flower","Wood"]      ,
-  "enemies":[ "Ape","Bear","Centaur","Centaur Warrior","Dino","Eldraine Faerie","Elf","Elf warrior","Elk","Faerie","Giant Spider","Gorgon","Gorgon 2","Green Beast","Green Wiz1","Green Wiz2","Green Wiz3","High Elf","Hydra","Satyr","Snake","Spider","Treefolk","Treefolk Guardian","Viper","Werewolf","Wurm" ]  ,
-  "pointsOfInterest":[
-    "Green Castle",
-    "Forest Town",
-    "ElfTown",
-    "WurmPond",
-    "Grove", "Grove1", "Grove2", "Grove3", "Grove4", "Grove5", "Grove6", "Grove7", "Grove8",
-    "CatLairG", "CatLairG1", "CatLairG2",
-    "CaveG", "CaveG1", "CaveG2", "CaveG3", "CaveG4", "CaveG5", "CaveG6", "CaveG8", "CaveG9", "CaveGB"
-  ]
+{
+"startPointX": 0.22,
+"startPointY": 0.43,
+"noiseWeight": 0.5,
+"distWeight": 1.5,
+"name": "green",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "Green",
+"terrain": [
+	{
+		"spriteName": "Green_1",
+		"max": 0.2,
+		"resolution": 10
+	},
+	{
+		"spriteName": "Green_2",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 10
+	}
+],
+"width": 0.7,
+"height": 0.7,
+"color": "59a650",
+"spriteNames": [
+	"WoodTree",
+	"WoodTree2",
+	"Bush",
+	"Stump",
+	"Moss",
+	"Stone",
+	"Flower",
+	"Wood"
+],
+"enemies": [
+	"Ape",
+	"Bear",
+	"Centaur",
+	"Centaur Warrior",
+	"Dino",
+	"Eldraine Faerie",
+	"Elf",
+	"Elf warrior",
+	"Elk",
+	"Faerie",
+	"Giant Spider",
+	"Gorgon",
+	"Gorgon 2",
+	"Green Beast",
+	"Green Wiz1",
+	"Green Wiz2",
+	"Green Wiz3",
+	"High Elf",
+	"Hydra",
+	"Satyr",
+	"Snake",
+	"Spider",
+	"Treefolk",
+	"Treefolk Guardian",
+	"Viper",
+	"Werewolf",
+	"Wurm"
+],
+"pointsOfInterest": [
+	"Green Castle",
+	"Forest Town",
+	"ElfTown",
+	"WurmPond",
+	"Grove",
+	"Grove1",
+	"Grove2",
+	"Grove3",
+	"Grove4",
+	"Grove5",
+	"Grove6",
+	"Grove7",
+	"Grove8",
+	"CatLairG",
+	"CatLairG1",
+	"CatLairG2",
+	"CaveG",
+	"CaveG1",
+	"CaveG2",
+	"CaveG3",
+	"CaveG4",
+	"CaveG5",
+	"CaveG6",
+	"CaveG8",
+	"CaveG9",
+	"CaveGB"
+],
+"structures": [
+	{
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/tilesets/structures.atlas",
+		"sourcePath": "world/tilesets/forestSource.png",
+		"height": 0.3,
+		"width": 0.3,
+		"mappingInfo": [
+			{
+				"name": "Forest",
+				"color": "007000"
+			}
+		]
+	}
+]
 }
