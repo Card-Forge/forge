@@ -875,7 +875,7 @@ public class ComputerUtilCost {
             }
         }
 
-        val = ObjectUtils.min(val, abCost.getMaxForNonManaX(root, ai, false));
+        val = ObjectUtils.min(val, abCost.getMaxForNonManaX(root, ai, effect));
 
         if (val != null && val > 0) {
             // filter cost parts for preferences, don't choose X > than possible preferences

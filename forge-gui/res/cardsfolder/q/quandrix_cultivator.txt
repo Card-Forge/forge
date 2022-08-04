@@ -2,6 +2,6 @@ Name:Quandrix Cultivator
 ManaCost:1 G GU U
 Types:Creature Turtle Druid
 PT:3/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic Forest or Island card, put it onto the battlefield, then shuffle.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic Forest or Island card, put it onto the battlefield, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest.Basic,Island.Basic | ChangeNum$ 1 | ShuffleNonMandatory$ True
 Oracle:When Quandrix Cultivator enters the battlefield, you may search your library for a basic Forest or Island card, put it onto the battlefield, then shuffle.

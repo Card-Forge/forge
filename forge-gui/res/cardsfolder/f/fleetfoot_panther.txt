@@ -3,7 +3,7 @@ ManaCost:1 G W
 Types:Creature Cat
 PT:3/4
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a green or white creature you control to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a green or white creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.White+YouCtrl,Creature.Green+YouCtrl | AILogic$ NeverBounceItself
 SVar:NeedsToPlay:Creature.White+cmcLE3+YouCtrl+inZoneBattlefield,Creature.Green+cmcLE3+YouCtrl+inZoneBattlefield
 Oracle:Flash\nWhen Fleetfoot Panther enters the battlefield, return a green or white creature you control to its owner's hand.

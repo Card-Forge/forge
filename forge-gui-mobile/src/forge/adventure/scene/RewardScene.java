@@ -51,10 +51,13 @@ public class RewardScene extends UIScene {
         //There were reports of memory leaks after using the shop many times, so remove() everything on exit to be sure.
         for(Actor A: new Array.ArrayIterator<>(generated)) {
             if(A instanceof RewardActor){
+                ((RewardActor) A).removeTooltip();
                 ((RewardActor) A).dispose();
                 A.remove();
             }
         }
+        //save RAM
+        ImageCache.unloadCardTextures(true);
         Forge.switchToLast();
     }
 
@@ -63,7 +66,7 @@ public class RewardScene extends UIScene {
         if (doneClicked) {
             if(exitCountDown > 0.2f) {
                 clearGenerated();
-                Forge.switchToLast();
+                quitScene();
             }
             return true;
         }
@@ -119,7 +122,7 @@ public class RewardScene extends UIScene {
             }
             if (flipCountDown <= 0) {
                 clearGenerated();
-                Forge.switchToLast();
+                quitScene();
             }
         }
     }
@@ -128,12 +131,7 @@ public class RewardScene extends UIScene {
     public void resLoaded() {
         super.resLoaded();
             goldLabel=ui.findActor("gold");
-            ui.onButtonPress("done", new Runnable() {
-                @Override
-                public void run() {
-                    RewardScene.this.done();
-                }
-            });
+            ui.onButtonPress("done", () -> RewardScene.this.done());
             doneButton = ui.findActor("done");
     }
 
@@ -214,9 +212,33 @@ public class RewardScene extends UIScene {
                 bestCardHeight = h;
             }
         }
-
+        float AR = 480f/270f;
+        int x = Forge.getDeviceAdapter().getRealScreenSize(false).getLeft();
+        int y = Forge.getDeviceAdapter().getRealScreenSize(false).getRight();
+        int realX = Forge.getDeviceAdapter().getRealScreenSize(true).getLeft();
+        int realY = Forge.getDeviceAdapter().getRealScreenSize(true).getRight();
+        float fW = x > y ? x : y;
+        float fH = x > y ? y : x;
+        float mul = fW/fH < AR ? AR/(fW/fH) : (fW/fH)/AR;
+        if (fW/fH >= 2f) {//tall display
+            mul = (fW/fH) - ((fW/fH)/AR);
+            if ((fW/fH) >= 2.1f && (fW/fH) < 2.3f)
+                mul *= 0.9f;
+            else if ((fW/fH) > 2.3) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
+                mul *= 0.8f;
+        }
         cardHeight = bestCardHeight * 0.90f ;
-        cardWidth = bestCardHeight / CARD_WIDTH_TO_HEIGHT;
+        if (realX > x || realY > y) {
+            mul *= Forge.isLandscapeMode() ? 0.95f : 1.05f;
+        } else {
+            //immersive | no navigation and/or showing cutout cam
+            if (fW/fH > 2.3f)
+                mul *= Forge.isLandscapeMode() ? 1.1f : 1.5f;
+            else if (fW/fH > 2f)
+                mul *= Forge.isLandscapeMode() ? 1.1f : 1.3f;
+
+        }
+        cardWidth = (cardHeight / CARD_WIDTH_TO_HEIGHT)*mul;
 
         yOff += (targetHeight - (cardHeight * numberOfRows)) / 2f;
         xOff += (targetWidth - (cardWidth * numberOfColumns)) / 2f;

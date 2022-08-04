@@ -2,7 +2,7 @@ Name:Soul Snuffers
 ManaCost:2 B B
 Types:Creature Elemental Shaman
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME enters the battlefield, put a -1/-1 counter on each creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME enters the battlefield, put a -1/-1 counter on each creature.
 SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature | CounterType$ M1M1 | CounterNum$ 1 | IsCurse$ True
 AI:RemoveDeck:Random
 Oracle:When Soul Snuffers enters the battlefield, put a -1/-1 counter on each creature.

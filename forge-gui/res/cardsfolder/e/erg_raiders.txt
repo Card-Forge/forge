@@ -2,8 +2,8 @@ Name:Erg Raiders
 ManaCost:1 B
 Types:Creature Human Warrior
 PT:2/3
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | IsPresent$ Creature.Self+notAttackedThisTurn | TriggerDescription$ At the beginning of your end step, if CARDNAME didn't attack this turn, CARDNAME deals 2 damage to you unless it came under your control this turn.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | IsPresent$ Card.Self+notAttackedThisTurn | TriggerDescription$ At the beginning of your end step, if CARDNAME didn't attack this turn, CARDNAME deals 2 damage to you unless it came under your control this turn.
 SVar:TrigDamage:DB$ DealDamage | Defined$ You | NumDmg$ 2 | ConditionCheckSVar$ ErgAttacked | ConditionSVarCompare$ EQ1
-SVar:ErgAttacked:Count$Valid Creature.Self+notFirstTurnControlled
+SVar:ErgAttacked:Count$Valid Card.Self+notFirstTurnControlled
 SVar:MustAttack:True
 Oracle:At the beginning of your end step, if Erg Raiders didn't attack this turn, Erg Raiders deals 2 damage to you unless it came under your control this turn.

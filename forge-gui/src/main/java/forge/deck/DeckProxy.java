@@ -35,12 +35,7 @@ public class DeckProxy implements InventoryItem {
     protected final String deckType;
     protected final IStorage<? extends IHasName> storage;
 
-    public static final Function<DeckProxy, String> FN_GET_NAME = new Function<DeckProxy, String>() {
-        @Override
-        public String apply(final DeckProxy arg0) {
-            return arg0.getName();
-        }
-    };
+    public static final Function<DeckProxy, String> FN_GET_NAME = arg0 -> arg0.getName();
 
     // cached values
     protected ColorSet color;
@@ -235,7 +230,55 @@ public class DeckProxy implements InventoryItem {
         }
         return deckIdentity;
     }
-
+    public int getColorIdentityforAdventure() {
+        return getColorIdentityforAdventure(getDeck());
+    }
+    public static int getColorIdentityforAdventure(Deck deck) {
+        int adventureColorIdentity = 0;
+        int w = 0, u = 0, b = 0, g = 0, r = 0, highest = -1;
+        for (final Entry<DeckSection, CardPool> deckEntry : deck) {
+            switch (deckEntry.getKey()) {
+                case Main:
+                case Sideboard:
+                case Commander:
+                    for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                        if (poolEntry.getKey().getRules().getType().isLand())
+                            continue;
+                        w += poolEntry.getKey().getRules().getManaCost().getShardCount(ManaCostShard.WHITE);
+                        u += poolEntry.getKey().getRules().getManaCost().getShardCount(ManaCostShard.BLUE);
+                        b += poolEntry.getKey().getRules().getManaCost().getShardCount(ManaCostShard.BLACK);
+                        g += poolEntry.getKey().getRules().getManaCost().getShardCount(ManaCostShard.GREEN);
+                        r += poolEntry.getKey().getRules().getManaCost().getShardCount(ManaCostShard.RED);
+                    }
+                    break;
+                default:
+                    break; //ignore other sections
+            }
+        }
+        if (w > highest) {
+            highest = w;
+            adventureColorIdentity = 1;
+        }
+        if (u > highest) {
+            highest = u;
+            adventureColorIdentity = 3;
+        }
+        if (b > highest) {
+            highest = b;
+            adventureColorIdentity = 2;
+        }
+        if (g > highest) {
+            highest = g;
+            adventureColorIdentity = 5;
+        }
+        if (r > highest) {
+            highest = r;
+            adventureColorIdentity = 4;
+        }
+        if (highest == 0)
+            adventureColorIdentity = 0;
+        return adventureColorIdentity;
+    }
     public Deck.UnplayableAICards getAI() {
         return getDeck().getUnplayableAICards();
     }
@@ -485,26 +528,23 @@ public class DeckProxy implements InventoryItem {
 
     // Consider using a direct predicate to manage DeckProxies (not this tunnel to collection of paper cards)
     public static final Predicate<DeckProxy> createPredicate(final Predicate<PaperCard> cardPredicate) {
-        return new Predicate<DeckProxy>() {
-            @Override
-            public boolean apply(final DeckProxy input) {
-                for (final Entry<DeckSection, CardPool> deckEntry : input.getDeck()) {
-                    switch (deckEntry.getKey()) {
-                    case Main:
-                    case Sideboard:
-                    case Commander:
-                        for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
-                            if (!cardPredicate.apply(poolEntry.getKey())) {
-                                return false; //all cards in deck must pass card predicate to pass deck predicate
-                            }
+        return input -> {
+            for (final Entry<DeckSection, CardPool> deckEntry : input.getDeck()) {
+                switch (deckEntry.getKey()) {
+                case Main:
+                case Sideboard:
+                case Commander:
+                    for (final Entry<PaperCard, Integer> poolEntry : deckEntry.getValue()) {
+                        if (!cardPredicate.apply(poolEntry.getKey())) {
+                            return false; //all cards in deck must pass card predicate to pass deck predicate
                         }
-                        break;
-                    default:
-                        break; //ignore other sections
                     }
+                    break;
+                default:
+                    break; //ignore other sections
                 }
-                return true;
             }
+            return true;
         };
     }
 
@@ -616,6 +656,13 @@ public class DeckProxy implements InventoryItem {
         final List<DeckProxy> decks = new ArrayList<>();
         final IStorage<Deck> genetic = FModel.getDecks().getGeneticAIDecks();
         addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", genetic, null);
+        return decks;
+    }
+
+    public static List<DeckProxy> getAllEasyStarterDecks() {
+        final List<DeckProxy> decks = new ArrayList<>();
+        final IStorage<Deck> easy = FModel.getDecks().getEasyStarterDecks();
+        addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", easy, null);
         return decks;
     }
 
@@ -742,54 +789,33 @@ public class DeckProxy implements InventoryItem {
         return randomLandSet;
     }
 
-    public static final Predicate<DeckProxy> IS_WHITE = new Predicate<DeckProxy>() {
-        @Override
-        public boolean apply(final DeckProxy deck) {
-            final ColorSet cs = deck.getColor();
-            return cs != null && cs.hasAnyColor(MagicColor.WHITE);
-        }
+    public static final Predicate<DeckProxy> IS_WHITE = deck -> {
+        final ColorSet cs = deck.getColor();
+        return cs != null && cs.hasAnyColor(MagicColor.WHITE);
     };
-    public static final Predicate<DeckProxy> IS_BLUE = new Predicate<DeckProxy>() {
-        @Override
-        public boolean apply(final DeckProxy deck) {
-            final ColorSet cs = deck.getColor();
-            return cs != null && cs.hasAnyColor(MagicColor.BLUE);
-        }
+    public static final Predicate<DeckProxy> IS_BLUE = deck -> {
+        final ColorSet cs = deck.getColor();
+        return cs != null && cs.hasAnyColor(MagicColor.BLUE);
     };
-    public static final Predicate<DeckProxy> IS_BLACK = new Predicate<DeckProxy>() {
-        @Override
-        public boolean apply(final DeckProxy deck) {
-            final ColorSet cs = deck.getColor();
-            return cs != null && cs.hasAnyColor(MagicColor.BLACK);
-        }
+    public static final Predicate<DeckProxy> IS_BLACK = deck -> {
+        final ColorSet cs = deck.getColor();
+        return cs != null && cs.hasAnyColor(MagicColor.BLACK);
     };
-    public static final Predicate<DeckProxy> IS_RED = new Predicate<DeckProxy>() {
-        @Override
-        public boolean apply(final DeckProxy deck) {
-            final ColorSet cs = deck.getColor();
-            return cs != null && cs.hasAnyColor(MagicColor.RED);
-        }
+    public static final Predicate<DeckProxy> IS_RED = deck -> {
+        final ColorSet cs = deck.getColor();
+        return cs != null && cs.hasAnyColor(MagicColor.RED);
     };
-    public static final Predicate<DeckProxy> IS_GREEN = new Predicate<DeckProxy>() {
-        @Override
-        public boolean apply(final DeckProxy deck) {
-            final ColorSet cs = deck.getColor();
-            return cs != null && cs.hasAnyColor(MagicColor.GREEN);
-        }
+    public static final Predicate<DeckProxy> IS_GREEN = deck -> {
+        final ColorSet cs = deck.getColor();
+        return cs != null && cs.hasAnyColor(MagicColor.GREEN);
     };
-    public static final Predicate<DeckProxy> IS_COLORLESS = new Predicate<DeckProxy>() {
-        @Override
-        public boolean apply(final DeckProxy deck) {
-            final ColorSet cs = deck.getColor();
-            return cs != null && cs.getColor() == 0;
-        }
+    public static final Predicate<DeckProxy> IS_COLORLESS = deck -> {
+        final ColorSet cs = deck.getColor();
+        return cs != null && cs.getColor() == 0;
     };
-    public static final Predicate<DeckProxy> IS_MULTICOLOR = new Predicate<DeckProxy>() {
-        @Override
-        public boolean apply(final DeckProxy deck) {
-            final ColorSet cs = deck.getColor();
-            return cs != null && BinaryUtil.bitCount(cs.getColor()) > 1;
-        }
+    public static final Predicate<DeckProxy> IS_MULTICOLOR = deck -> {
+        final ColorSet cs = deck.getColor();
+        return cs != null && BinaryUtil.bitCount(cs.getColor()) > 1;
     };
 
     @Override

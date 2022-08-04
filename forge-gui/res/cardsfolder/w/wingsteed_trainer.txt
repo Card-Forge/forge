@@ -2,7 +2,7 @@ Name:Wingsteed Trainer
 ManaCost:3 W
 Types:Creature Human
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield or attacks, conjure a Stormfront Pegasus card into your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield or attacks, conjure a Stormfront Pegasus card into your hand.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, conjure a Stormfront Pegasus card into your hand.
 SVar:TrigConjure:DB$ MakeCard | Name$ Stormfront Pegasus | Zone$ Hand
 SVar:HasAttackEffect:TRUE

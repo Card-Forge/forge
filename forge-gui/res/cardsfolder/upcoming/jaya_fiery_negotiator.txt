@@ -2,19 +2,22 @@ Name:Jaya, Fiery Negotiator
 ManaCost:2 R R
 Types:Legendary Planeswalker Jaya
 Loyalty:4
-A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenScript$ r_1_1_monk_prowess | TokenOwner$ You | SpellDescription$ Create a 1/1 red Monk creature token with prowess.
-A:AB$ Dig | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Exile the top two cards of your library. Choose one of them. You may play that card this turn.
-SVar:DBChoose:DB$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Card.IsRemembered | ChoiceZone$ Exile | ChoiceTitle$ Choose one of the exiled cards | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | RememberObjects$ ChosenCard | SubAbility$ DBCleanup
-SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play the chosen card this turn.
-A:AB$ Pump | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | RememberObjects$ Targeted | SubAbility$ DBDelayedTrigger | StackDescription$ Whenever you attack this turn, CARDNAME deals damage equal to the number of attacking creatures to {c:ThisTargetedCard}. | SpellDescription$ Choose target creature an opponent controls. Whenever you attack this turn, CARDNAME deals damage equal to the number of attacking creatures to that creature.
-SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ AttackersDeclared | ThisTurn$ True | Execute$ TrigDamage | SubAbility$ DBCleanup | StackDescription$ None | TriggerDescription$ Whenever you attack this turn, CARDNAME deals damage equal to the number of attacking creatures to that creature.
-SVar:TrigDamage:DB$ DealDamage | Defined$ Remembered | NumDmg$ X
-A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Jaya, Fiery Negotiator | Image$ emblem_jaya_fiery_negotiator | Triggers$ CopySpell | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a red instant or sorcery spell, copy it twice. You may choose new targets for the copies."
-SVar:CopySpell:Mode$ SpellCast | ValidCard$ Instant.Red,Sorcery.Red | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Command | TriggerDescription$ Whenever you cast an instant or sorcery spell, copy it. You may choose new targets for the copy.
-SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 2 | MayChooseTarget$ True
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ r_1_1_monk_prowess | SpellDescription$ Create a 1/1 red Monk creature token with prowess.
+A:AB$ Dig | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChoose | SpellDescription$ Exile the top two cards of your library. Choose one of them. You may play that card this turn.
+SVar:DBChoose:DB$ ChooseCard | Amount$ 1 | Mandatory$ True | Choices$ Card.IsRemembered | ChoiceZone$ Exile | ChoiceTitle$ Choose one of the exiled cards | SubAbility$ DBCleanup | StackDescription$ {p:You} chooses one of them.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBPlayEffect
+SVar:DBPlayEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | SubAbility$ DBClearChosen | StackDescription$ {p:You} may play that card this turn.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.ChosenCard | AffectedZone$ Exile | Description$ You may play the chosen card this turn.
+SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True
+A:AB$ Pump | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls | SubAbility$ DBEffect | StackDescription$ Whenever you attack this turn, CARDNAME deals damage equal to the number of attacking creatures to {c:ThisTargetedCard}. | SpellDescription$ Choose target creature an opponent controls. Whenever you attack this turn, CARDNAME deals damage equal to the number of attacking creatures to that creature.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | Triggers$ Attack
+SVar:Attack:Mode$ AttackersDeclared | Execute$ TrigDamage | TriggerDescription$ Whenever you attack this turn, EFFECTSOURCE deals damage equal to the number of attacking creatures to that creature.
+SVar:TrigDamage:DB$ DealDamage | DamageSource$ EffectSource | Defined$ Remembered | NumDmg$ X
 SVar:X:Count$Valid Creature.attacking+YouCtrl
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
-SVar:BuffedBy:Instant,Sorcery
+A:AB$ Effect | Cost$ SubCounter<8/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Jaya, Fiery Negotiator | Image$ emblem_jaya_fiery_negotiator | Triggers$ CopySpell | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a red instant or sorcery spell, copy it twice. You may choose new targets for the copies."
+SVar:CopySpell:Mode$ SpellCast | ValidCard$ Instant.Red,Sorcery.Red | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Command | TriggerDescription$ Whenever you cast a red instant or sorcery spell, copy it twice. You may choose new targets for the copies.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | Amount$ 2 | MayChooseTarget$ True
+SVar:BuffedBy:Instant.Red,Sorcery.Red
 DeckHints:Type$Instant|Sorcery
+DeckHas:Ability$Token & Type$Monk
 Oracle:[+1]: Create a 1/1 red Monk creature token with prowess.\n[−1]: Exile the top two cards of your library. Choose one of them. You may play that card this turn.\n[−2]: Choose target creature an opponent controls. Whenever you attack this turn, Jaya, Fiery Negotiator deals damage equal to the number of attacking creatures to that creature.\n[−8]: You get an emblem with "Whenever you cast a red instant or sorcery spell, copy it twice. You may choose new targets for the copies."

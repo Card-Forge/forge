@@ -5,8 +5,7 @@ PT:4/4
 K:Haste
 S:Mode$ ActivateAbilityAsIfHaste | ValidCard$ Creature.Other+YouCtrl+inZoneBattlefield | Description$ You may activate abilities of other creatures you control as though those creatures had haste.
 A:AB$ Effect | Cost$ T | Triggers$ ActivateTrig | SpellDescription$ When you next activate an ability that isn't a mana ability this turn by spending four or more mana to activate it, copy that ability. You may choose new targets for the copy.
-SVar:ActivateTrig:Mode$ AbilityCast | ValidSA$ SpellAbility.nonManaAbility+ManaSpent GE4 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ When you next activate an ability that isn't a mana ability this turn by spending four or more mana to activate it, copy that ability. You may choose new targets for the copy.
-SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True | SubAbility$ DBExileSelf
-SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:ActivateTrig:Mode$ AbilityCast | ValidSA$ SpellAbility.nonManaAbility+ManaSpent GE4 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopy | OneOff$ True | TriggerDescription$ When you next activate an ability that isn't a mana ability this turn by spending four or more mana to activate it, copy that ability. You may choose new targets for the copy.
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 SVar:BuffedBy:Creature.hasActivatedAbility
 Oracle:Haste\nYou may activate abilities of other creatures you control as though those creatures had haste.\n{T}: When you next activate an ability that isn't a mana ability this turn by spending four or more mana to activate it, copy that ability. You may choose new targets for the copy.

@@ -2,7 +2,7 @@ Name:Crypt Lurker
 ManaCost:3 B
 Types:Creature Horror
 PT:3/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChoice | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice a creature or discard a creature card. If you do, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoice | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice a creature or discard a creature card. If you do, draw a card.
 SVar:TrigChoice:DB$ GenericChoice | Defined$ You | Choices$ DBSacToDraw,DBDiscardToDraw | StackDescription$ None
 SVar:DBSacToDraw:DB$ Draw | Defined$ You | UnlessCost$ Sac<1/Creature> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ Sacrifice a creature. Draw a card.
 SVar:DBDiscardToDraw:DB$ Draw | Defined$ You | UnlessCost$ Discard<1/Creature> | UnlessPayer$ You | UnlessSwitched$ True | SpellDescription$ Discard a creature card. Draw a card.

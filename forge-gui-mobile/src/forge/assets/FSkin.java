@@ -113,7 +113,7 @@ public class FSkin {
         //load theme logo while changing skins
         final FileHandle theme_logo = getSkinFile("hd_logo.png");
         if (theme_logo.exists()) {
-            manager.load(theme_logo.path(), Texture.class, new TextureLoader.TextureParameter(){{genMipMaps = true; minFilter = Texture.TextureFilter.MipMapLinearLinear; magFilter = Texture.TextureFilter.Linear;}});
+            manager.load(theme_logo.path(), Texture.class, Forge.getAssets().getTextureFilter());
             manager.finishLoadingAsset(theme_logo.path());
             hdLogo = manager.get(theme_logo.path());
         } else {
@@ -121,7 +121,7 @@ public class FSkin {
         }
         final FileHandle duals_overlay = getDefaultSkinFile("overlay_alpha.png");
         if (duals_overlay.exists()) {
-            manager.load(duals_overlay.path(), Texture.class, new TextureLoader.TextureParameter(){{genMipMaps = true; minFilter = Texture.TextureFilter.MipMapLinearLinear; magFilter = Texture.TextureFilter.Linear;}});
+            manager.load(duals_overlay.path(), Texture.class, Forge.getAssets().getTextureFilter());
             manager.finishLoadingAsset(duals_overlay.path());
             overlay_alpha = manager.get(duals_overlay.path());
         } else {
@@ -129,7 +129,7 @@ public class FSkin {
         }
         final FileHandle splatter_overlay = getDefaultSkinFile("splatter.png");
         if (splatter_overlay.exists()) {
-            manager.load(splatter_overlay.path(), Texture.class, new TextureLoader.TextureParameter(){{genMipMaps = true; minFilter = Texture.TextureFilter.MipMapLinearLinear; magFilter = Texture.TextureFilter.Linear;}});
+            manager.load(splatter_overlay.path(), Texture.class, Forge.getAssets().getTextureFilter());
             manager.finishLoadingAsset(splatter_overlay.path());
             splatter = manager.get(splatter_overlay.path());
         } else {
@@ -162,7 +162,7 @@ public class FSkin {
                     h = manager.get(f.path(), Texture.class).getHeight();
 
                     if (f2.exists()) {
-                        manager.load(f2.path(), Texture.class, new TextureLoader.TextureParameter(){{genMipMaps = true; minFilter = Texture.TextureFilter.MipMapLinearLinear; magFilter = Texture.TextureFilter.Linear;}});
+                        manager.load(f2.path(), Texture.class, Forge.getAssets().getTextureFilter());
                         manager.finishLoadingAsset(f2.path());
                         splashScreen.setBackground(new TextureRegion(manager.get(f2.path(), Texture.class)));
                     } else {
@@ -211,13 +211,6 @@ public class FSkin {
 
         Forge.getAssets().avatars().clear();
         Forge.getAssets().sleeves().clear();
-
-        TextureLoader.TextureParameter parameter = new TextureLoader.TextureParameter();
-        if (Forge.isTextureFilteringEnabled()) {
-            parameter.genMipMaps = true;
-            parameter.minFilter = Texture.TextureFilter.MipMapLinearLinear;
-            parameter.magFilter = Texture.TextureFilter.Linear;
-        }
 
         AssetManager manager = Forge.getAssets().manager();
 
@@ -273,7 +266,7 @@ public class FSkin {
                 if (GuiBase.isAndroid() && Forge.totalDeviceRAM <5000) {
                     Forge.hdbuttons = false;
                 } else {
-                    manager.load(f11.path(), Texture.class, new TextureLoader.TextureParameter(){{genMipMaps = true; minFilter = Texture.TextureFilter.MipMapLinearLinear; magFilter = Texture.TextureFilter.Linear;}});
+                    manager.load(f11.path(), Texture.class, Forge.getAssets().getTextureFilter());
                     manager.finishLoadingAsset(f11.path());
                     Forge.hdbuttons = true;
                 }
@@ -282,7 +275,7 @@ public class FSkin {
                 if (GuiBase.isAndroid() && Forge.totalDeviceRAM <5000) {
                     Forge.hdstart = false;
                 } else {
-                    manager.load(f12.path(), Texture.class, new TextureLoader.TextureParameter(){{genMipMaps = true; minFilter = Texture.TextureFilter.MipMapLinearLinear; magFilter = Texture.TextureFilter.Linear;}});
+                    manager.load(f12.path(), Texture.class, Forge.getAssets().getTextureFilter());
                     manager.finishLoadingAsset(f12.path());
                     Forge.hdstart = true;
                 }
@@ -320,15 +313,15 @@ public class FSkin {
             pxDefaultAvatars = new Pixmap(f4);
             pxDefaultSleeves = new Pixmap(f8);
             //default avatar
-            manager.load(f4.path(), Texture.class, parameter);
+            manager.load(f4.path(), Texture.class, Forge.getAssets().getTextureFilter());
             manager.finishLoadingAsset(f4.path());
             //sleeves first set
-            manager.load(f8.path(), Texture.class, parameter);
+            manager.load(f8.path(), Texture.class, Forge.getAssets().getTextureFilter());
             manager.finishLoadingAsset(f8.path());
             //preferred avatar
             if (f5.exists()) {
                 pxPreferredAvatars = new Pixmap(f5);
-                manager.load(f5.path(), Texture.class, parameter);
+                manager.load(f5.path(), Texture.class, Forge.getAssets().getTextureFilter());
                 manager.finishLoadingAsset(f5.path());
 
                 final int pw = pxPreferredAvatars.getWidth();
@@ -360,7 +353,7 @@ public class FSkin {
             }
             if (f20.exists()) {
                 pxPreferredSleeves = new Pixmap(f20);
-                manager.load(f20.path(), Texture.class, parameter);
+                manager.load(f20.path(), Texture.class, Forge.getAssets().getTextureFilter());
                 manager.finishLoadingAsset(f20.path());
 
                 final int sw = pxPreferredSleeves.getWidth();
@@ -388,7 +381,7 @@ public class FSkin {
             }
             if (f21.exists()) {
                 pxPreferredSleeves = new Pixmap(f21);
-                manager.load(f21.path(), Texture.class, parameter);
+                manager.load(f21.path(), Texture.class, Forge.getAssets().getTextureFilter());
                 manager.finishLoadingAsset(f21.path());
 
                 final int sw = pxPreferredSleeves.getWidth();
@@ -405,7 +398,7 @@ public class FSkin {
             } else {
                 //re init second set of sleeves
                 pxDefaultSleeves = new Pixmap(f9);
-                manager.load(f9.path(), Texture.class, parameter);
+                manager.load(f9.path(), Texture.class, Forge.getAssets().getTextureFilter());
                 manager.finishLoadingAsset(f9.path());
 
                 final int sw2 = pxDefaultSleeves.getWidth();
@@ -421,7 +414,7 @@ public class FSkin {
             }
 
             //cracks
-            manager.load(f17.path(), Texture.class, parameter);
+            manager.load(f17.path(), Texture.class, Forge.getAssets().getTextureFilter());
             manager.finishLoadingAsset(f17.path());
             int crackCount = 0;
             for (int j = 0; j < 4; j++) {
@@ -438,7 +431,7 @@ public class FSkin {
             Forge.getAssets().borders().put(0, new TextureRegion(manager.get(f10.path(), Texture.class), 2, 2, 672, 936));
             Forge.getAssets().borders().put(1, new TextureRegion(manager.get(f10.path(), Texture.class), 676, 2, 672, 936));
             //deckboxes
-            manager.load(f13.path(), Texture.class, parameter);
+            manager.load(f13.path(), Texture.class, Forge.getAssets().getTextureFilter());
             manager.finishLoadingAsset(f13.path());
             //gold bg
             Forge.getAssets().deckbox().put(0, new TextureRegion(manager.get(f13.path(), Texture.class), 2, 2, 488, 680));
