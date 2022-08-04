@@ -102,28 +102,31 @@ public class Controls {
         switch (fontName) {
             case "blackbig":
             case "big":
-                return Forge.getAssets().advBigFont;
+                GetSkin().getFont("default").getData().setScale(2, 2);
+                return GetSkin().getFont("default");
             default:
-                return Forge.getAssets().advDefaultFont;
+                GetSkin().getFont("default").getData().setScale(1, 1);
+                return GetSkin().getFont("default");
         }
     }
 
     static public Skin GetSkin() {
-        if (Forge.getAssets().skin == null) {
-            Forge.getAssets().skin = new Skin();
-            FileHandle skinFile = Config.instance().getFile(Paths.SKIN);
+        FileHandle skinFile = Config.instance().getFile(Paths.SKIN);
+        if (!Forge.getAssets().manager().contains(skinFile.path(), Skin.class)) {
+            Forge.getAssets().manager().load(skinFile.path(), Skin.class);
+            Forge.getAssets().manager().finishLoadingAsset(skinFile.path());
             FileHandle atlasFile = skinFile.sibling(skinFile.nameWithoutExtension() + ".atlas");
-            TextureAtlas atlas = new TextureAtlas(atlasFile);
+            Forge.getAssets().manager().load(atlasFile.path(), TextureAtlas.class);
+            Forge.getAssets().manager().finishLoadingAsset(atlasFile.path());
             //font
-            Forge.getAssets().advDefaultFont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixel.fnt"));
-            Forge.getAssets().advBigFont = new BitmapFont(Config.instance().getFile(Paths.SKIN).sibling("LanaPixel.fnt"));
-            Forge.getAssets().advBigFont.getData().setScale(2, 2);
-            Forge.getAssets().skin.add("default", Forge.getAssets().advDefaultFont);
-            Forge.getAssets().skin.add("big", Forge.getAssets().advBigFont);
-            Forge.getAssets().skin.addRegions(atlas);
-            Forge.getAssets().skin.load(skinFile);
+            FileHandle pixelFont = Config.instance().getFile(Paths.SKIN).sibling("LanaPixel.fnt");
+            Forge.getAssets().manager().load(pixelFont.path(), BitmapFont.class);
+            Forge.getAssets().manager().finishLoadingAsset(pixelFont.path());
+            Forge.getAssets().manager().get(skinFile.path(), Skin.class).add("default", Forge.getAssets().manager().get(pixelFont.path(), BitmapFont.class), BitmapFont.class);
+            Forge.getAssets().manager().get(skinFile.path(), Skin.class).addRegions(Forge.getAssets().manager().get(atlasFile.path(), TextureAtlas.class));
+            Forge.getAssets().manager().finishLoadingAsset(skinFile.path());
         }
-        return Forge.getAssets().skin;
+        return Forge.getAssets().manager().get(skinFile.path(), Skin.class);
     }
 
     public static Label newLabel(String name) {
