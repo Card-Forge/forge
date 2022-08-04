@@ -363,9 +363,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         float mul = fW/fH < AR ? AR/(fW/fH) : (fW/fH)/AR;
         if (fW/fH >= 2f) {//tall display
             mul = (fW/fH) - ((fW/fH)/AR);
-            if ((fW/fH) >= 2.1f && (fW/fH) < 2.3f)
+            if ((fW/fH) >= 2.1f && (fW/fH) < 2.2f)
                 mul *= 0.9f;
-            else if ((fW/fH) > 2.3) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
+            else if ((fW/fH) > 2.2f) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
                 mul *= 0.8f;
         }
         if (Forge.isLandscapeMode())
