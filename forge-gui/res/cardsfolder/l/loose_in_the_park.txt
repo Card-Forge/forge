@@ -3,11 +3,11 @@ ManaCost:1 G
 Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ 1 G | ValidTgts$ Land | AILogic$ Pump
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraft |TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, draw a card, then draft a card from Loose in the Park’s spellbook and exile it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraft | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, draw a card, then draft a card from Loose in the Park’s spellbook and exile it.
 SVar:TrigDraft:DB$ Draft | Spellbook$ Bristling Boar,Enraged Ceratok,Exuberant Wolfbear,Gaea's Protector,Master Symmetrist,Ornery Dilophosaur,Overgrown Armasaur,Predatory Wurm,Prized Unicorn,Sabertooth Mauler,Spike-Tailed Ceratops,Spore Crawler,Thrashing Brontodon,Wardscale Crocodile,World Shaper | Zone$ Exile | RememberDrafted$ True | SubAbility$ DBEffect    
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ExileOnMoved$ Exile 
 SVar:Play:Mode$ Continuous | MayPlay$ False | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile
-A:AB$ Animate | Cost$ 3 | Defined$ Enchanted | Keywords$ Haste | Types$ Land | SubAbility$ DDCopy | TriggerDescription$ {3}: Enchanted land becomes a copy of the exiled card until end of turn and gains haste. It’s still a land.
+A:AB$ Animate | Cost$ 3 | Defined$ Enchanted | Keywords$ Haste | Types$ Land | SubAbility$ DDCopy | TriggerDescription$ {3}: Enchanted land becomes a copy of the exiled card until end of turn and gains haste. It's still a land.
 SVar:DDCopy:DB$ Clone | Defined$ Remembered | CloneTarget$ Enchanted | Types$ Land | Duration$ UntilEndOfTurn
 SVar:NonStackingAttachEffect:True
-Oracle:Enchant land \n When Loose in the Park enters the battlefield, draw a card, then draft a card from Loose in the Park’s spellbook and exile it.\n {3}: Enchanted land becomes a copy of the exiled card until end of turn and gains haste. It’s still a land.
+Oracle:Enchant land\nWhen Loose in the Park enters the battlefield, draw a card, then draft a card from Loose in the Park's spellbook and exile it.\n{3}: Enchanted land becomes a copy of the exiled card until end of turn and gains haste. It's still a land.
