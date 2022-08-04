@@ -257,7 +257,7 @@ public class Main extends AndroidApplication {
         }
     }
 
-    /*@Override
+    @Override
     protected void onDestroy() {
         try {
             final Forge forge = (Forge) Gdx.app.getApplicationListener();
@@ -267,13 +267,10 @@ public class Main extends AndroidApplication {
             e.printStackTrace();
         }
         super.onDestroy();
-
         //ensure app doesn't stick around
         //ActivityManager am = (ActivityManager)getSystemService(Activity.ACTIVITY_SERVICE);
         //am.killBackgroundProcesses(getApplicationContext().getPackageName());
-
-        
-    }*/
+    }
 
     @Override
     protected void onPause()
