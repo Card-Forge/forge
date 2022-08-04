@@ -6,7 +6,6 @@ A:SP$ Attach | Cost$ 1 G | ValidTgts$ Land | AILogic$ Pump
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ FreeCard | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
 SVar:FreeCard:DB$ Draw | Defined$ You | NumCards$ 1 | SubAbility$ TrigDraft
 SVar:TrigDraft:DB$ Draft | TriggerZones$ Battlefield | Spellbook$ Bristling Boar,Enraged Ceratok,Exuberant Wolfbear,Gaea's Protector,Master Symmetrist,Ornery Dilophosaur,Overgrown Armasaur,Predatory Wurm,Prized Unicorn,Sabertooth Mauler,Spike-Tailed Ceratops,Spore Crawler,Thrashing Brontodon,Wardscale Crocodile,World Shaper | Zone$ Exile | RememberDrafted$ True | TriggerDescription$ Draft a card from Loose in the Park's spellbook and exile it.  
-A:AB$ Animate | Cost$ 3 | Defined$ Enchanted | Keywords$ Haste | Types$ Land | SubAbility$ DDCopy | TriggerDescription$ {3}: Enchanted land becomes a copy of the exiled card until end of turn and gains haste. It's still a land.
-SVar:DDCopy:DB$ Clone | Defined$ Remembered | CloneTarget$ Enchanted | Types$ Land | Duration$ UntilEndOfTurn
+A:AB$ Clone | Cost$ 3 | Defined$ Remembered | CloneTarget$ Enchanted | PumpKeywords$ Haste | AddTypes$ Land | Duration$ UntilEndOfTurn | SpellDescription$ Enchanted land becomes a copy of the exiled card until end of turn and gains haste. It's still a land.
 SVar:NonStackingAttachEffect:True
 Oracle:Enchant land\nWhen Loose in the Park enters the battlefield, draw a card, then draft a card from Loose in the Park's spellbook and exile it.\n{3}: Enchanted land becomes a copy of the exiled card until end of turn and gains haste. It's still a land.
