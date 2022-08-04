@@ -353,21 +353,13 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         int y = Forge.getDeviceAdapter().getRealScreenSize(false).getRight();
         int realX = Forge.getDeviceAdapter().getRealScreenSize(true).getLeft();
         int realY = Forge.getDeviceAdapter().getRealScreenSize(true).getRight();
-        float fW = x > y ? x : y;
-        float fH = x > y ? y : x;
         if (realX > x) {
             x *= 1.1f;
         } else if (realY > y) {
             y *= 1.1f;
-        } else {
-            if (fW/fH > 2f) {
-                //immersive | no navigation and showing cutout cam
-                if (Forge.isLandscapeMode())
-                    x *= 1.3f;
-                else
-                    y *= 1.5f;
-            }
         }
+        float fW = x > y ? x : y;
+        float fH = x > y ? y : x;
         float mul = fW/fH < AR ? AR/(fW/fH) : (fW/fH)/AR;
         if (fW/fH >= 2f) {//tall display
             mul = (fW/fH) - ((fW/fH)/AR);

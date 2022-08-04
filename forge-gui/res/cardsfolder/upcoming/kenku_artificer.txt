@@ -1,5 +1,5 @@
 Name:Kenku Artificer
-ManaCost:2 G
+ManaCost:2 U
 Types:Creature Bird Artificer
 PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Homunculus Servant — When CARDNAME enters the battlefield, put three +1/+1 counters on up to one target noncreature artifact. That artifact becomes a 0/0 Homunculus artifact creature with flying.
