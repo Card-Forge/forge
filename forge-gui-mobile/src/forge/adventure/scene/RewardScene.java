@@ -222,9 +222,9 @@ public class RewardScene extends UIScene {
         float mul = fW/fH < AR ? AR/(fW/fH) : (fW/fH)/AR;
         if (fW/fH >= 2f) {//tall display
             mul = (fW/fH) - ((fW/fH)/AR);
-            if ((fW/fH) >= 2.1f && (fW/fH) < 2.3f)
+            if ((fW/fH) >= 2.1f && (fW/fH) < 2.2f)
                 mul *= 0.9f;
-            else if ((fW/fH) > 2.3) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
+            else if ((fW/fH) > 2.2f) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
                 mul *= 0.8f;
         }
         cardHeight = bestCardHeight * 0.90f ;
@@ -232,10 +232,12 @@ public class RewardScene extends UIScene {
             mul *= Forge.isLandscapeMode() ? 0.95f : 1.05f;
         } else {
             //immersive | no navigation and/or showing cutout cam
-            if (fW/fH > 2.3f)
+            if (fW/fH > 2.2f)
                 mul *= Forge.isLandscapeMode() ? 1.1f : 1.6f;
-            else if (fW/fH > 2f)
-                mul *= Forge.isLandscapeMode() ? 1.1f : 1.5f;
+            else if (fW/fH >= 2.1f)
+                mul *= Forge.isLandscapeMode() ? 1.05f : 1.5f;
+            else if (fW/fH >= 2f)
+                mul *= Forge.isLandscapeMode() ? 1f : 1.4f;
 
         }
         cardWidth = (cardHeight / CARD_WIDTH_TO_HEIGHT)*mul;
