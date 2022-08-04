@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
@@ -24,6 +22,7 @@ import forge.adventure.util.Controls;
 import forge.adventure.util.Selector;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
+import forge.deck.DeckProxy;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -49,7 +48,8 @@ public class NewGameScene extends UIScene {
     private ImageButton leftArrow, rightArrow;
     private TextButton backButton, startButton;
     boolean fantasyMode = false;
-    private CheckBox box;
+    boolean easyMode = false;
+    private CheckBox box, box2;
 
     public NewGameScene() {
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
@@ -59,21 +59,18 @@ public class NewGameScene extends UIScene {
         if (selectedName.getText().isEmpty()) {
             selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
         }
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
-                WorldSave.generateNewWorld(selectedName.getText(),
-                        gender.getCurrentIndex() == 0,
-                        race.getCurrentIndex(),
-                        avatarIndex,
-                        deck.getCurrentIndex(),
-                        Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
-                        fantasyMode,0);
-                GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
-                Forge.clearTransitionScreen();
-                Forge.switchScene(SceneType.GameScene.instance);
-            }
+        Runnable runnable = () -> {
+            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
+            WorldSave.generateNewWorld(selectedName.getText(),
+                    gender.getCurrentIndex() == 0,
+                    race.getCurrentIndex(),
+                    avatarIndex,
+                    deck.getCurrentIndex(),
+                    Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
+                    fantasyMode, easyMode, deck.getText(), 0);
+            GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
+            Forge.clearTransitionScreen();
+            Forge.switchScene(SceneType.GameScene.instance);
         };
         Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true));
         return true;
@@ -92,32 +89,21 @@ public class NewGameScene extends UIScene {
             avatarImage = ui.findActor("avatarPreview");
             gender = ui.findActor("gender");
             gender.setTextList(new String[]{"Male", "Female"});
-            gender.addListener(new EventListener() {
-                @Override
-                public boolean handle(Event event) {
-                    return NewGameScene.this.updateAvatar();
-                }
-            });
+            gender.addListener(event -> NewGameScene.this.updateAvatar());
             Random rand = new Random();
-
             deck = ui.findActor("deck");
-
             starterDeck = Config.instance().starterDecks();
             Array<String> stringList = new Array<>(starterDeck.length);
             for (Deck deck : starterDeck)
                 stringList.add(deck.getName());
             Array<String> chaos = new Array<>();
             chaos.add("Preconstructed");
-
+            Array<String> easyDecks = new Array<>();
+            for (DeckProxy deckProxy : DeckProxy.getAllEasyStarterDecks())
+                easyDecks.add(deckProxy.getName());
             deck.setTextList(stringList);
-
             race = ui.findActor("race");
-            race.addListener(new EventListener() {
-                @Override
-                public boolean handle(Event event) {
-                    return NewGameScene.this.updateAvatar();
-                }
-            });
+            race.addListener(event -> NewGameScene.this.updateAvatar());
             race.setTextList(HeroListData.getRaces());
             difficulty = ui.findActor("difficulty");
 
@@ -136,30 +122,10 @@ public class NewGameScene extends UIScene {
             gender.setCurrentIndex(rand.nextInt());
             deck.setCurrentIndex(rand.nextInt());
             race.setCurrentIndex(rand.nextInt());
-            ui.onButtonPress("back", new Runnable() {
-                @Override
-                public void run() {
-                    NewGameScene.this.back();
-                }
-            });
-            ui.onButtonPress("start", new Runnable() {
-                @Override
-                public void run() {
-                    NewGameScene.this.start();
-                }
-            });
-            ui.onButtonPress("leftAvatar", new Runnable() {
-                @Override
-                public void run() {
-                    NewGameScene.this.leftAvatar();
-                }
-            });
-            ui.onButtonPress("rightAvatar", new Runnable() {
-                @Override
-                public void run() {
-                    NewGameScene.this.rightAvatar();
-                }
-            });
+            ui.onButtonPress("back", () -> NewGameScene.this.back());
+            ui.onButtonPress("start", () -> NewGameScene.this.start());
+            ui.onButtonPress("leftAvatar", () -> NewGameScene.this.leftAvatar());
+            ui.onButtonPress("rightAvatar", () -> NewGameScene.this.rightAvatar());
 
             scrollPane = ui.findActor("scroll");
             titleL = ui.findActor("titleL");
@@ -178,20 +144,56 @@ public class NewGameScene extends UIScene {
             difficultyL.setText(Forge.getLocalizer().getMessage("lblDifficulty"));
             deckL = ui.findActor("deckL");
             deckL.setText(Forge.getLocalizer().getMessage("lblDeck"));
+            box2 = Controls.newCheckBox("");
+            box2.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent changeEvent, Actor actor) {
+                    if (((CheckBox) actor).isChecked()) {
+                        box.setChecked(false);
+                        easyMode = true;
+                        fantasyMode = false;
+                        deck.setTextList(easyDecks);
+                    } else {
+                        easyMode = false;
+                        deck.setTextList(stringList);
+                    }
+                }
+            });
+
             box = Controls.newCheckBox("");
             box.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    fantasyMode = ((CheckBox) actor).isChecked();
-                    deck.setTextList(fantasyMode ? chaos : stringList);
+                if (((CheckBox) actor).isChecked()) {
+                    box2.setChecked(false);
+                    fantasyMode = true;
+                    easyMode = false;
+                    deck.setTextList(chaos);
+                } else {
+                    fantasyMode = false;
+                    deck.setTextList(stringList);
+                }
                 }
             });
-            box.setBounds(deckL.getX()-box.getHeight(), deckL.getY()-box.getHeight(), deckL.getHeight(), deckL.getHeight());
-            Label label = Controls.newLabel("Chaos Mode");
+            //easy mode
+            box2.setBounds(deckL.getX()-box2.getHeight(), deckL.getY()-box2.getHeight(), deckL.getHeight(), deckL.getHeight());
+            Label label2 = Controls.newLabel("Starter");
+            label2.setColor(Color.BLACK);
+            label2.setBounds(box2.getX()+22, box2.getY(), box2.getWidth(), box2.getHeight());
+            ui.addActor(box2);
+            ui.addActor(label2);
+            //chaos mode
+            box.setBounds(label2.getX()+25, label2.getY(), box2.getWidth(), box2.getHeight());
+            Label label = Controls.newLabel("Chaos");
             label.setColor(Color.BLACK);
             label.setBounds(box.getX()+22, box.getY(), box.getWidth(), box.getHeight());
             ui.addActor(box);
             ui.addActor(label);
+            if (easyDecks.isEmpty()) {
+                box2.setDisabled(true);
+                box2.getColor().a = 0.5f;
+                label2.getColor().a = 0.5f;
+            }
             leftArrow = ui.findActor("leftAvatar");
             rightArrow = ui.findActor("rightAvatar");
             backButton = ui.findActor("back");

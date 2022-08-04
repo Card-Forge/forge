@@ -65,10 +65,6 @@ public class CardProperty {
             if (card.sharesNameWith(name)) {
                 return false;
             }
-        } else if (property.startsWith("sameName")) {
-            if (!card.sharesNameWith(source)) {
-                return false;
-            }
         } else if (property.equals("NamedCard")) {
             if (!card.sharesNameWith(source.getNamedCard())) {
                 return false;
@@ -639,18 +635,12 @@ public class CardProperty {
                 }
 
                 final String restriction = property.split("SharesColorWith ")[1];
-                if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted")) {
+                if (restriction.startsWith("Remembered") || restriction.startsWith("Imprinted") || restriction.startsWith("TopOfLibrary")) {
                     CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
                     return Iterables.any(list, CardPredicates.sharesColorWith(card));
                 }
 
                 switch (restriction) {
-                    case "TopCardOfLibrary":
-                        final CardCollectionView cards = sourceController.getCardsIn(ZoneType.Library);
-                        if (cards.isEmpty() || !card.sharesColorWith(cards.get(0))) {
-                            return false;
-                        }
-                        break;
                     case "Equipped":
                         if (!source.isEquipment() || !source.isEquipping()
                                 || !card.sharesColorWith(source.getEquipping())) {
@@ -778,16 +768,6 @@ public class CardProperty {
                             return false;
                         }
                         break;
-                    case "Remembered":
-                        for (final Object rem : source.getRemembered()) {
-                            if (rem instanceof Card) {
-                                final Card c = (Card) rem;
-                                if (card.sharesCardTypeWith(c)) {
-                                    return true;
-                                }
-                            }
-                        }
-                        return false;
                     case "EachTopLibrary":
                         final CardCollection cards = new CardCollection();
                         for (Player p : game.getPlayers()) {
@@ -829,6 +809,10 @@ public class CardProperty {
             return false;
         } else if (property.equals("canProduceMana")) {
             return !card.getManaAbilities().isEmpty();
+        } else if (property.startsWith("sameName")) {
+            if (!card.sharesNameWith(source)) {
+                return false;
+            }
         } else if (property.startsWith("sharesNameWith")) {
             if (property.equals("sharesNameWith")) {
                 if (!card.sharesNameWith(source)) {
@@ -930,20 +914,16 @@ public class CardProperty {
             } else {
                 final String restriction = property.split("sharesOwnerWith ")[1];
                 CardCollection def = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                for (final Object rem : def) {
-                    if (rem instanceof Card) {
-                        final Card c = (Card) rem;
-                        if (!card.getOwner().equals(c.getOwner())) {
-                            return false;
-                        }
-                    }
+                if (!Iterables.all(def, CardPredicates.isOwner(card.getOwner()))) {
+                    return false;
                 }
             }
         } else if (property.startsWith("SecondSpellCastThisTurn")) {
             final List<Card> cards = CardUtil.getThisTurnCast("Card", source, spellAbility);
             if (cards.size() < 2) {
                 return false;
-            } else if (cards.get(1) != card) {
+            }
+            if (!cards.get(1).equalsWithTimestamp(card)) {
                 return false;
             }
         } else if (property.equals("ThisTurnCast")) {

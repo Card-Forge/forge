@@ -12,9 +12,8 @@ SVar:STGrinning:Mode$ Continuous | Affected$ Card.IsRemembered+OppOwn | MayPlay$
 SVar:TrigDuration:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Static$ True | TriggerZones$ Command | Execute$ DBDuration
 SVar:DBDuration:DB$ StoreSVar | SVar$ ActiveTotem | Type$ Number | Expression$ 0
 # Return the card as a normal trigger
-SVar:TrigReturn:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Static$ True | TriggerZones$ Command | Execute$ DBReturn
-SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Graveyard | SubAbility$ RemoveEffect
-SVar:RemoveEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:TrigReturn:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ DBReturn | OneOff$ True | TriggerDescription$ At the beginning of your next upkeep, if you haven't played it, put it into its owner's graveyard.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Graveyard
 # Remove Totem Effect when the card is played
 SVar:TrigLandPlayed:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | Static$ True | TriggerZones$ Command | Execute$ RemoveEffect
 SVar:TrigCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Static$ True | TriggerZones$ Command | Execute$ RemoveEffect

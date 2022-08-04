@@ -4052,6 +4052,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final StatBreakdown getUnswitchedPowerBreakdown() {
+        // 208.3 A noncreature permanent has no power or toughness
+        if (isInPlay() && !isCreature()) {
+            return new StatBreakdown();
+        }
         return new StatBreakdown(getCurrentPower(), getTempPowerBoost(), getPowerBonusFromCounters());
     }
     public final int getUnswitchedPower() {
@@ -4111,6 +4115,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final StatBreakdown getUnswitchedToughnessBreakdown() {
+        // 208.3 A noncreature permanent has no power or toughness
+        if (isInPlay() && !isCreature()) {
+            return new StatBreakdown();
+        }
         return new StatBreakdown(getCurrentToughness(), getTempToughnessBoost(), getToughnessBonusFromCounters());
     }
     public final int getUnswitchedToughness() {

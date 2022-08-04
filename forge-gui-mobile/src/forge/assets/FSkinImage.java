@@ -1,7 +1,6 @@
 package forge.assets;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -543,13 +542,7 @@ public enum FSkinImage implements FImage {
         if (texture == null) {
             if (preferredFile.exists()) {
                 try {
-                    TextureParameter parameter = new TextureParameter();
-                    if (Forge.isTextureFilteringEnabled()) {
-                        parameter.genMipMaps = true;
-                        parameter.minFilter = Texture.TextureFilter.MipMapLinearLinear;
-                        parameter.magFilter = Texture.TextureFilter.Linear;
-                    }
-                    manager.load(preferredFile.path(), Texture.class, parameter);
+                    manager.load(preferredFile.path(), Texture.class, Forge.getAssets().getTextureFilter());
                     manager.finishLoadingAsset(preferredFile.path());
                     texture = manager.get(preferredFile.path(), Texture.class);
                 }
@@ -622,13 +615,7 @@ public enum FSkinImage implements FImage {
         if (texture == null) {
             if (defaultFile.exists()) {
                 try {
-                    TextureParameter parameter = new TextureParameter();
-                    if (Forge.isTextureFilteringEnabled()) {
-                        parameter.genMipMaps = true;
-                        parameter.minFilter = Texture.TextureFilter.MipMapLinearLinear;
-                        parameter.magFilter = Texture.TextureFilter.Linear;
-                    }
-                    manager.load(defaultFile.path(), Texture.class, parameter);
+                    manager.load(defaultFile.path(), Texture.class, Forge.getAssets().getTextureFilter());
                     manager.finishLoadingAsset(defaultFile.path());
                     texture = manager.get(defaultFile.path(), Texture.class);
                 }

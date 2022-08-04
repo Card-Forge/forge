@@ -273,6 +273,12 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
 
+        if (mandatory) {
+            // Necessary because the AI goes into this method twice, first to set up targets (with mandatory=true)
+            // and then the second time to confirm the trigger (where mandatory may be set to false).
+            return true;
+        }
+
         Card actualToken = spawnToken(ai, sa);
         String tokenPower = sa.getParamOrDefault("TokenPower", actualToken.getBasePowerString());
         String tokenToughness = sa.getParamOrDefault("TokenToughness", actualToken.getBaseToughnessString());
@@ -291,12 +297,6 @@ public class TokenAi extends SpellAbilityAi {
             if (x <= 0) {
                 return false;
             }
-        }
-
-        if (mandatory) {
-            // Necessary because the AI goes into this method twice, first to set up targets (with mandatory=true)
-            // and then the second time to confirm the trigger (where mandatory may be set to false).
-            return true;
         }
 
         if ("OnlyOnAlliedAttack".equals(sa.getParam("AILogic"))) {

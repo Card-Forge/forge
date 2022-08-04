@@ -16,12 +16,13 @@ public class GoadEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final Player player = sa.getActivatingPlayer();
-        List<Card> tgt = getTargetCards(sa);
-        if (tgt.size() <= 0) {
+        List<Card> tgt = getDefinedCardsOrTargeted(sa, "Defined");
+        String tgtString = sa.getParamOrDefault("DefinedDesc", Lang.joinHomogenous(tgt));
+        if (tgtString.isEmpty()) {
             return "";
         } else {
             final StringBuilder sb = new StringBuilder();
-            sb.append(player).append(" goads ").append(Lang.joinHomogenous(tgt)).append(".");
+            sb.append(player).append(" goads ").append(tgtString).append(".");
             return sb.toString();
         }
     }

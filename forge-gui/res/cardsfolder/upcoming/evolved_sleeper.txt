@@ -8,4 +8,5 @@ SVar:TrigAnimate:DB$ Animate | ConditionPresent$ Card.Self+Cleric | Types$ Phyre
 A:AB$ PutCounter | Cost$ 1 B B | ConditionPresent$ Card.Self+Phyrexian | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ TrigDraw | StackDescription$ SpellDescription | SpellDescription$ If CARDNAME is a Phyrexian, put a +1/+1 counter on it, then you draw a card and you lose 1 life.
 SVar:TrigDraw:DB$ Draw | ConditionPresent$ Card.Self+Phyrexian | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
+DeckHas:Type$Cleric|Phyrexian & Ability$Counters
 Oracle:{B}: Evolved Sleeper becomes a Human Cleric with base power and toughness 2/2.\n{1}{B}: If Evolved Sleeper is a Cleric, put a deathtouch counter on it and it becomes a Phyrexian Human Cleric with base power and toughness 3/3.\n{1}{B}{B}: If Evolved Sleeper is a Phyrexian, put a +1/+1 counter on it, then you draw a card and you lose 1 life.

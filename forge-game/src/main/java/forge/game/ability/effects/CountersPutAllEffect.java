@@ -94,6 +94,13 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         }
 
         table.replaceCounterEffect(game, sa, true);
+
+        //for cards like Agitator Ant/Spectacular Showdown that care if counters were actually put on,
+        // instead use "RememberPut" – this checks after replacement
+        if (sa.hasParam("RememberCards")) { // remembers whether counters actually placed or not
+            host.addRemembered(table.columnKeySet());
+        }
+
     }
 
 }
