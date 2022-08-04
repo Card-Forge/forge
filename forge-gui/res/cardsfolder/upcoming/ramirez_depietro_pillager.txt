@@ -11,4 +11,5 @@ SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | ForgetOnMoved$ Exile | Reme
 SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast that card for as long as it remains exiled.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Pirate
-Oracle:When Ramirez DePietro, Pillager enters the battlefield, you lose 2 life and create two Treasure tokens.\nWhenever one or more Pirates you control deal combat damage to a player, exile the top card of that player’s library. You may cast that card for as long as it remains exiled.
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+Oracle:When Ramirez DePietro, Pillager enters the battlefield, you lose 2 life and create two Treasure tokens.\nWhenever one or more Pirates you control deal combat damage to a player, exile the top card of that player's library. You may cast that card for as long as it remains exiled.
