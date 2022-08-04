@@ -259,6 +259,13 @@ public class Main extends AndroidApplication {
 
     /*@Override
     protected void onDestroy() {
+        try {
+            final Forge forge = (Forge) Gdx.app.getApplicationListener();
+            if (forge != null)
+                forge.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         super.onDestroy();
 
         //ensure app doesn't stick around

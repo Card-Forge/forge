@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeSet;
 
+import forge.util.ImageUtil;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
@@ -1784,6 +1785,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmPayment(final CostPart costPart, final String question, SpellAbility sa) {
         if (GuiBase.getInterface().isLibgdxPort()) {
+            CardView cardView = sa.getView().getHostCard();
+            if (cardView.getZone() == null || cardView.getZone().isHidden())
+                cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getCurrentState().getImageKey()));
             return this.getGui().confirm(sa.getView().getHostCard(), question.replaceAll("\n", " "));
         } else {
             final InputConfirm inp = new InputConfirm(this, question, sa);
