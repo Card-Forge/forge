@@ -361,8 +361,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         float fW = x > y ? x : y;
         float fH = x > y ? y : x;
         float mul = fW/fH < AR ? AR/(fW/fH) : (fW/fH)/AR;
-        if (Config.instance().getSettingData().cardTooltipAdj != 1f) {
-            mul *= Config.instance().getSettingData().cardTooltipAdj;
+        Float custom = Forge.isLandscapeMode() ? Config.instance().getSettingData().cardTooltipAdjLandscape : Config.instance().getSettingData().cardTooltipAdj;
+        if (custom != null && custom != 1f) {
+            mul *= custom;
         } else {
             if (fW/fH >= 2f) {//tall display
                 mul = (fW/fH) - ((fW/fH)/AR);

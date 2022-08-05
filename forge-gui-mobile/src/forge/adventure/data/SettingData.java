@@ -16,4 +16,6 @@ public class SettingData {
     public String lastActiveSave;
     public Float rewardCardAdj;
     public Float cardTooltipAdj;
+    public Float rewardCardAdjLandscape;
+    public Float cardTooltipAdjLandscape;
 }

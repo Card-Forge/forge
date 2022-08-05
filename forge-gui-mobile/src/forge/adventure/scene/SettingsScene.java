@@ -189,32 +189,63 @@ public class SettingsScene extends UIScene {
             addLabel(Forge.getLocalizer().getMessage("lblVideoMode"));
             settingGroup.add(videomode).align(Align.right).pad(2);
         }
-        SelectBox rewardCardAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().rewardCardAdj, new Function<Object, Void>() {
-            @Override
-            public Void apply(Object o) {
-                Float val = (Float) o;
-                if (val == null || val == 0f)
-                    val = 1f;
-                Config.instance().getSettingData().rewardCardAdj = val;
-                Config.instance().saveSettings();
-                return null;
-            }
-        });
-        addLabel("Reward/Shop Card Display Ratio");
-        settingGroup.add(rewardCardAdj).align(Align.right).pad(2);
-        SelectBox tooltipAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().cardTooltipAdj, new Function<Object, Void>() {
-            @Override
-            public Void apply(Object o) {
-                Float val = (Float) o;
-                if (val == null || val == 0f)
-                    val = 1f;
-                Config.instance().getSettingData().cardTooltipAdj = val;
-                Config.instance().saveSettings();
-                return null;
-            }
-        });
-        addLabel("Reward/Shop Card Tooltip Ratio");
-        settingGroup.add(tooltipAdj).align(Align.right).pad(2);
+        if (Forge.isLandscapeMode()) {
+            //different adjustment to landscape
+            SelectBox rewardCardAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().rewardCardAdjLandscape, new Function<Object, Void>() {
+                @Override
+                public Void apply(Object o) {
+                    Float val = (Float) o;
+                    if (val == null || val == 0f)
+                        val = 1f;
+                    Config.instance().getSettingData().rewardCardAdjLandscape = val;
+                    Config.instance().saveSettings();
+                    return null;
+                }
+            });
+            addLabel("Reward/Shop Card Display Ratio");
+            settingGroup.add(rewardCardAdjLandscape).align(Align.right).pad(2);
+            SelectBox tooltipAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().cardTooltipAdjLandscape, new Function<Object, Void>() {
+                @Override
+                public Void apply(Object o) {
+                    Float val = (Float) o;
+                    if (val == null || val == 0f)
+                        val = 1f;
+                    Config.instance().getSettingData().cardTooltipAdjLandscape = val;
+                    Config.instance().saveSettings();
+                    return null;
+                }
+            });
+            addLabel("Reward/Shop Card Tooltip Ratio");
+            settingGroup.add(tooltipAdjLandscape).align(Align.right).pad(2);
+        } else {
+            //portrait adjustment
+            SelectBox rewardCardAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().rewardCardAdj, new Function<Object, Void>() {
+                @Override
+                public Void apply(Object o) {
+                    Float val = (Float) o;
+                    if (val == null || val == 0f)
+                        val = 1f;
+                    Config.instance().getSettingData().rewardCardAdj = val;
+                    Config.instance().saveSettings();
+                    return null;
+                }
+            });
+            addLabel("Reward/Shop Card Display Ratio");
+            settingGroup.add(rewardCardAdj).align(Align.right).pad(2);
+            SelectBox tooltipAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().cardTooltipAdj, new Function<Object, Void>() {
+                @Override
+                public Void apply(Object o) {
+                    Float val = (Float) o;
+                    if (val == null || val == 0f)
+                        val = 1f;
+                    Config.instance().getSettingData().cardTooltipAdj = val;
+                    Config.instance().saveSettings();
+                    return null;
+                }
+            });
+            addLabel("Reward/Shop Card Tooltip Ratio");
+            settingGroup.add(tooltipAdj).align(Align.right).pad(2);
+        }
         if (!GuiBase.isAndroid()) {
             addSettingField(Forge.getLocalizer().getMessage("lblFullScreen"), Config.instance().getSettingData().fullScreen, new ChangeListener() {
                 @Override
