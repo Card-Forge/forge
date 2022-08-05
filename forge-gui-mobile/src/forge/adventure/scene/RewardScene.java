@@ -233,9 +233,9 @@ public class RewardScene extends UIScene {
         } else {
             //immersive | no navigation and/or showing cutout cam
             if (fW/fH > 2.3f)
-                mul *= Forge.isLandscapeMode() ? 1.1f : 1.5f;
+                mul *= Forge.isLandscapeMode() ? 1.1f : 1.6f;
             else if (fW/fH > 2f)
-                mul *= Forge.isLandscapeMode() ? 1.1f : 1.3f;
+                mul *= Forge.isLandscapeMode() ? 1.1f : 1.5f;
 
         }
         cardWidth = (cardHeight / CARD_WIDTH_TO_HEIGHT)*mul;
