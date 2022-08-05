@@ -16,8 +16,6 @@ import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 
-import java.util.function.Function;
-
 /**
  * Scene to handle settings of the base forge and adventure mode
  */
