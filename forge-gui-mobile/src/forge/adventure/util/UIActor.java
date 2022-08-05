@@ -29,7 +29,7 @@ public class UIActor extends Group {
         setWidth(data.width);
         setHeight(data.height);
 
-        for (OrderedMap<String, String> element : new Array.ArrayIterator<>(data.elements)) {
+        for (OrderedMap<String, String> element : data.elements) {
             String type = element.get("type");
             Actor newActor;
             if (type == null) {

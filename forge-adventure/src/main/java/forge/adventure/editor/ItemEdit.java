@@ -24,16 +24,15 @@ public class ItemEdit extends JComponent {
     {
 
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        JPanel parameters=new JPanel();
+        FormPanel parameters=new FormPanel();
         parameters.setBorder(BorderFactory.createTitledBorder("Parameter"));
-        parameters.setLayout(new GridLayout(6,2)) ;
 
-        parameters.add(new JLabel("Name:")); parameters.add(nameField);
-        parameters.add(new JLabel("equipmentSlot:")); parameters.add(equipmentSlot);
-        parameters.add(new JLabel("description:")); parameters.add(description);
-        parameters.add(new JLabel("iconName")); parameters.add(iconName);
-        parameters.add(new JLabel("questItem")); parameters.add(questItem);
-        parameters.add(new JLabel("cost")); parameters.add(cost);
+        parameters.add("Name:",nameField);
+        parameters.add("equipmentSlot:",equipmentSlot);
+        parameters.add("description:",description);
+        parameters.add("iconName",iconName);
+        parameters.add("questItem",questItem);
+        parameters.add("cost",cost);
 
         add(parameters);
         add(effect);

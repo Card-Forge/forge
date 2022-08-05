@@ -18,10 +18,8 @@ import forge.card.ColorSet;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -142,7 +140,7 @@ public class SpellSmithScene extends UIScene {
         List<CardEdition> editions = StaticData.instance().getSortedEditions();
         editions = editions.stream().filter(input -> {
            if(input == null) return false;
-           return(!Config.instance().getConfigData().restrictedEditions.contains(input.getCode()));
+           return(!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getCode()));
         }).collect(Collectors.toList());
         editionList = ui.findActor("BSelectPlane");
         rewardDummy = ui.findActor("RewardDummy");

@@ -14,7 +14,7 @@ public class MapActor extends Actor {
 
 
     Texture debugTexture;
-    float collisionHeight=1.0f;
+    protected float collisionHeight=1.0f;
     final int objectId;
     public MapActor(int objectId)
     {
@@ -35,7 +35,7 @@ public class MapActor extends Actor {
         }
         return debugTexture;
     }
-    Rectangle boundingRect;
+    final Rectangle boundingRect=new Rectangle();
 
     boolean isCollidingWithPlayer=false;
     protected void onPlayerCollide()
@@ -67,7 +67,7 @@ public class MapActor extends Actor {
     }
 
     void updateBoundingRect() {
-        boundingRect = new Rectangle(getX(), getY(), getWidth(), getHeight()*collisionHeight);
+        boundingRect.set(getX(), getY(), getWidth(), getHeight()*collisionHeight);
     }
 
     public Rectangle boundingRect() {
@@ -105,5 +105,9 @@ public class MapActor extends Actor {
     public boolean collideWith(Actor other) {
         return boundingRect.x < other.getX() + other.getWidth() && boundingRect.x + boundingRect.width > other.getX() && boundingRect.y < other.getY() + other.getHeight() && boundingRect.y + boundingRect.height > other.getY();
 
+    }
+
+    public float getCollisionHeight() {
+        return collisionHeight;
     }
 }

@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * Editor class to edit configuration, maybe moved or removed
  */
-public class EnemyEdit extends JComponent {
+public class EnemyEdit extends FormPanel {
     EnemyData currentData;
     JTextField nameField=new JTextField();
     JTextField colorField=new JTextField();
@@ -26,23 +26,20 @@ public class EnemyEdit extends JComponent {
     public EnemyEdit()
     {
 
-        JComponent center=new JComponent() {  };
-        center.setLayout(new GridLayout(9,2));
+        FormPanel center=new FormPanel() {  };
 
-        center.add(new JLabel("Name:")); center.add(nameField);
-        center.add(new JLabel("Life:")); center.add(lifeFiled);
-        center.add(new JLabel("Spawn rate:")); center.add(spawnRate);
-        center.add(new JLabel("Difficulty:")); center.add(difficulty);
-        center.add(new JLabel("Speed:")); center.add(speed);
-        center.add(new JLabel("Deck:")); center.add(deck);
-        center.add(new JLabel("Sprite:")); center.add(atlas);
-        center.add(new JLabel("Equipment:")); center.add(equipment);
-        center.add(new JLabel("Colors:")); center.add(colorField);
-        BorderLayout layout=new BorderLayout();
-        setLayout(layout);
-        add(center,BorderLayout.PAGE_START);
-        add(rewards,BorderLayout.CENTER);
-        add(preview,BorderLayout.LINE_START);
+        center.add("Name:",nameField);
+        center.add("Life:",lifeFiled);
+        center.add("Spawn rate:",spawnRate);
+        center.add("Difficulty:",difficulty);
+        center.add("Speed:",speed);
+        center.add("Deck:",deck);
+        center.add("Sprite:",atlas);
+        center.add("Equipment:",equipment);
+        center.add("Colors:",colorField);
+        add(center);
+        add(rewards);
+        add(preview);
 
         equipment.getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
         atlas.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));

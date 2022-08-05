@@ -19,6 +19,6 @@ public class ConfigData {
     public String[] starterDecks;
     public DifficultyData[] difficulties;
     public RewardData legalCards;
-    public List<String> restrictedCards;
-    public List<String> restrictedEditions;
+    public String[] restrictedCards;
+    public String[] restrictedEditions;
 }
