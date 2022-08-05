@@ -38,7 +38,7 @@ public class CharacterSprite extends MapActor {
 
     @Override
     void updateBoundingRect() { //We want a slimmer box for the player entity so it can navigate terrain without getting stuck.
-        boundingRect = new Rectangle(getX() + 4, getY(), getWidth() - 6, getHeight() * collisionHeight);
+        boundingRect.set(getX() + 4, getY(), getWidth() - 6, getHeight() * collisionHeight);
     }
 
     protected void load(String path) {

@@ -11,3 +11,17 @@ Forest
   orig: 0, 0
   offset: 0, 0
   index: 0       
+Lake
+  Lake: false
+  xy: 48, 0
+  size: 48, 64
+  orig: 0, 0
+  offset: 0, 0
+  index: 0       
+Forest2
+  rotate: false
+  xy: 96, 0
+  size: 48, 64
+  orig: 0, 0
+  offset: 0, 0
+  index: 0       

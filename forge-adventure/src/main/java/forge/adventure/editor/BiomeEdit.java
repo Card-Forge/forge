@@ -19,6 +19,7 @@ public class BiomeEdit extends FormPanel {
     public JSpinner width= new JSpinner(new SpinnerNumberModel(0.0f, 0.f, 1f, 0.1f));
     public JSpinner height= new JSpinner(new SpinnerNumberModel(0.0f, 0.f, 1f, 0.1f));
     public JTextField color=new JTextField();
+    public JCheckBox collision=new JCheckBox();
     public TextListEdit spriteNames =new TextListEdit();
     public TextListEdit enemies =new TextListEdit();
     public TextListEdit pointsOfInterest =new TextListEdit();
@@ -45,6 +46,7 @@ public class BiomeEdit extends FormPanel {
         center.add("enemies:",enemies);
         center.add("pointsOfInterest:",pointsOfInterest);
         center.add("color:",color);
+        center.add("collision:",collision);
         center.add("terrain/structures:",new JLabel(""));
 
         add(center);
@@ -54,6 +56,7 @@ public class BiomeEdit extends FormPanel {
         name.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeEdit.this.updateTerrain()));
         tilesetName.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeEdit.this.updateTerrain()));
         color.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeEdit.this.updateTerrain()));
+        collision.addChangeListener(e -> BiomeEdit.this.updateTerrain());
         spriteNames.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeEdit.this.updateTerrain()));
         enemies.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeEdit.this.updateTerrain()));
         terrain.addChangeListener(e -> BiomeEdit.this.updateTerrain());
@@ -84,6 +87,7 @@ public class BiomeEdit extends FormPanel {
         currentData.width    = (Float) width.getValue();
         currentData.height    = (Float) height.getValue();
         currentData.color    = color.getText();
+        currentData.collision    = collision.isSelected();
         currentData.spriteNames    = spriteNames.getList();
         currentData.enemies    = enemies.getList();
         currentData.pointsOfInterest    = pointsOfInterest.getList();
@@ -116,7 +120,7 @@ public class BiomeEdit extends FormPanel {
         color.setText(currentData.color);
         spriteNames.setText(currentData.spriteNames);
         enemies.setText(currentData.enemies);
-        color.setText(currentData.color);
+        collision.setSelected(currentData.collision);
         pointsOfInterest.setText(currentData.pointsOfInterest);
         updating=false;
     }

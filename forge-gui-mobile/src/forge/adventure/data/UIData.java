@@ -12,5 +12,5 @@ public class UIData {
     public int width;
     public int height;
     public boolean yDown;
-    public Array<OrderedMap<String,String>> elements;
+    public OrderedMap<String,String>[] elements;
 }

@@ -2,19 +2,18 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import forge.Forge;
@@ -40,7 +39,8 @@ public class GameHUD extends Stage {
     private final Image miniMapPlayer;
     private final Label lifePoints;
     private final Label money;
-    private final Image miniMap, gamehud, mapborder, avatarborder, blank;
+    private final Image miniMap,miniMapTooltip, gamehud, mapborder, avatarborder, blank;
+    private Tooltip<Image> toolTip;
     private TextButton deckActor, menuActor, statsActor, inventoryActor;
     private UIActor ui;
     private Touchpad touchpad;
@@ -61,6 +61,15 @@ public class GameHUD extends Stage {
         blank = ui.findActor("blank");
         miniMap = ui.findActor("map");
         mapborder = ui.findActor("mapborder");
+
+        miniMapTooltip=new Image();
+        miniMapTooltip.setScaling(Scaling.contain);
+        miniMapTooltip.setSize(miniMap.getWidth()*3,miniMap.getHeight()*3);
+        miniMapTooltip.setPosition(0,0,Align.topLeft);
+        ui.addActor(miniMapTooltip);
+        toolTip=new Tooltip<Image>(miniMapTooltip);
+        toolTip.setInstant(true);
+        mapborder.addListener(toolTip);
         avatarborder = ui.findActor("avatarborder");
         deckActor = ui.findActor("deck");
         deckActor.getLabel().setText(Forge.getLocalizer().getMessage("lblDeck"));
@@ -165,6 +174,7 @@ public class GameHUD extends Stage {
                 return true;
             if(Current.isInDebug())
                 WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+
             return true;
         }
         return super.touchDragged(screenX, screenY, pointer);
@@ -228,12 +238,21 @@ public class GameHUD extends Stage {
     }
 
     Texture miniMapTexture;
+    Texture miniMapToolTipTexture;
+    Pixmap miniMapToolTipPixmap;
     public void enter() {
         if(miniMapTexture!=null)
             miniMapTexture.dispose();
         miniMapTexture=new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage());
-
+        if(miniMapToolTipTexture!=null)
+            miniMapToolTipTexture.dispose();
+        if(miniMapToolTipPixmap!=null)
+            miniMapToolTipPixmap.dispose();
+        miniMapToolTipPixmap=new Pixmap((int) (miniMap.getWidth()*3), (int) (miniMap.getHeight()*3), Pixmap.Format.RGBA8888);
+        miniMapToolTipPixmap.drawPixmap(WorldSave.getCurrentSave().getWorld().getBiomeImage(),0,0,WorldSave.getCurrentSave().getWorld().getBiomeImage().getWidth(),WorldSave.getCurrentSave().getWorld().getBiomeImage().getHeight(),0,0,miniMapToolTipPixmap.getWidth(),miniMapToolTipPixmap.getHeight());
+        miniMapToolTipTexture=new Texture(miniMapToolTipPixmap);
         miniMap.setDrawable(new TextureRegionDrawable(miniMapTexture));
+        miniMapTooltip.setDrawable(new TextureRegionDrawable(miniMapToolTipTexture));
         avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
     }
 

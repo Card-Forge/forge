@@ -26,6 +26,7 @@ public class BiomeData implements Serializable {
     public float width;
     public float height;
     public String color;
+    public boolean collision;
     public boolean invertHeight;
     public String[] spriteNames;
     public String[] enemies;

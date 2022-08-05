@@ -18,6 +18,7 @@ public class BiomeStructure {
     private int biomeWidth;
     private int biomeHeight;
     private int dataMap[][];
+    private boolean collisionMap[][];
     boolean init=false;
     private TextureAtlas structureAtlas;
     public BufferedImage image;
@@ -59,14 +60,18 @@ public class BiomeStructure {
         {
                 colorIdMap.put(Integer.parseInt(data.mappingInfo[i].color,16),i);
         }
-        boolean suc=model.run((int) seed,0);
+        boolean suc=false;
+        for(int i=0;i<10&&!suc;i++)
+            suc=model.run((int) seed+(i*5355),15000);
         if(!suc)
         {
             dataMap=new int[(int) (data.width* biomeWidth)][ (int) (data.height*biomeHeight)];
+            collisionMap=new boolean[(int) (data.width* biomeWidth)][ (int) (data.height*biomeHeight)];
             return;
         }
         image=model.graphics();
         dataMap=new int[image.getWidth()][image.getHeight()];
+        collisionMap=new boolean[image.getWidth()][image.getHeight()];
         for(int x=0;x<image.getWidth();x++)
         {
 
@@ -79,6 +84,7 @@ public class BiomeStructure {
                 }
                 else {
                     dataMap[x][y]=colorIdMap.get(rgb);
+                    collisionMap[x][y]=data.mappingInfo[colorIdMap.get(rgb)].collision;
                 }
             }
         }
@@ -106,4 +112,13 @@ public class BiomeStructure {
     }
 
 
+    public boolean collision(int x, int y) {
+        if(!init)
+        {
+            initialize();
+        }
+        if(x>=collisionMap.length||x<0||y<0||y>=collisionMap[0].length)
+            return false;
+        return collisionMap[x][y];
+    }
 }

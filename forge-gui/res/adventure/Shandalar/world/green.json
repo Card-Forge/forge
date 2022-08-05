@@ -97,10 +97,35 @@
 		"sourcePath": "world/tilesets/forestSource.png",
 		"height": 0.3,
 		"width": 0.3,
+		"symmetry": 1,
+		"periodicOutput": false,
 		"mappingInfo": [
 			{
 				"name": "Forest",
-				"color": "007000"
+				"color": "007000",
+				"collision": true
+			}
+		]
+	},
+	{
+		"N": 2,
+		"x": 0.3,
+		"y": 0.3,
+		"structureAtlasPath": "world/tilesets/structures.atlas",
+		"sourcePath": "world/tilesets/lakeSource.png",
+		"height": 0.3,
+		"width": 0.3,
+		"periodicOutput": false,
+		"mappingInfo": [
+			{
+				"name": "Lake",
+				"color": "0070a0",
+				"collision": true
+			},
+			{
+				"name": "Forest2",
+				"color": "009000",
+				"collision": true
 			}
 		]
 	}

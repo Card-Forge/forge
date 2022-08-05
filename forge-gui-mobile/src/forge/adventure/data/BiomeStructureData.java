@@ -5,10 +5,11 @@ import java.awt.image.BufferedImage;
 
 public class BiomeStructureData {
 
+
     static public class BiomeStructureDataMapping
     {
         public int getColor() {
-            return 0xff000000 |(Integer.parseInt(color,16));
+            return ((Integer.parseInt(color,16)<<8)|0xff);
         }
         public String name;
         public String color;
