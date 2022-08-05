@@ -229,8 +229,9 @@ public class RewardScene extends UIScene {
                 mul *= 0.8f;
         }
         cardHeight = bestCardHeight * 0.90f ;
-        if (Config.instance().getSettingData().rewardCardAdj != 1f) {
-            mul *= Config.instance().getSettingData().rewardCardAdj;
+        Float custom = Forge.isLandscapeMode() ? Config.instance().getSettingData().rewardCardAdjLandscape : Config.instance().getSettingData().rewardCardAdj;
+        if (custom != null && custom != 1f) {
+            mul *= custom;
         } else {
             if (realX > x || realY > y) {
                 mul *= Forge.isLandscapeMode() ? 0.95f : 1.05f;
