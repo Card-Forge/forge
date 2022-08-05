@@ -14,6 +14,7 @@ import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.CardUtil;
+import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.adventure.util.Reward;
 import forge.adventure.util.RewardActor;
@@ -228,17 +229,21 @@ public class RewardScene extends UIScene {
                 mul *= 0.8f;
         }
         cardHeight = bestCardHeight * 0.90f ;
-        if (realX > x || realY > y) {
-            mul *= Forge.isLandscapeMode() ? 0.95f : 1.05f;
+        if (Config.instance().getSettingData().rewardCardAdj != 1f) {
+            mul *= Config.instance().getSettingData().rewardCardAdj;
         } else {
-            //immersive | no navigation and/or showing cutout cam
-            if (fW/fH > 2.2f)
-                mul *= Forge.isLandscapeMode() ? 1.1f : 1.6f;
-            else if (fW/fH >= 2.1f)
-                mul *= Forge.isLandscapeMode() ? 1.05f : 1.5f;
-            else if (fW/fH >= 2f)
-                mul *= Forge.isLandscapeMode() ? 1f : 1.4f;
+            if (realX > x || realY > y) {
+                mul *= Forge.isLandscapeMode() ? 0.95f : 1.05f;
+            } else {
+                //immersive | no navigation and/or showing cutout cam
+                if (fW/fH > 2.2f)
+                    mul *= Forge.isLandscapeMode() ? 1.1f : 1.6f;
+                else if (fW/fH >= 2.1f)
+                    mul *= Forge.isLandscapeMode() ? 1.05f : 1.5f;
+                else if (fW/fH >= 2f)
+                    mul *= Forge.isLandscapeMode() ? 1f : 1.4f;
 
+            }
         }
         cardWidth = (cardHeight / CARD_WIDTH_TO_HEIGHT)*mul;
 

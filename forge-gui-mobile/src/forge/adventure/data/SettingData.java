@@ -14,4 +14,6 @@ public class SettingData {
     public boolean fullScreen;
     public String videomode;
     public String lastActiveSave;
+    public Float rewardCardAdj;
+    public Float cardTooltipAdj;
 }

@@ -188,6 +188,34 @@ public class SettingsScene extends UIScene {
             });
             addLabel(Forge.getLocalizer().getMessage("lblVideoMode"));
             settingGroup.add(videomode).align(Align.right).pad(2);
+        }
+        SelectBox rewardCardAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().rewardCardAdj, new Function<Object, Void>() {
+            @Override
+            public Void apply(Object o) {
+                Float val = (Float) o;
+                if (val == null || val == 0f)
+                    val = 1f;
+                Config.instance().getSettingData().rewardCardAdj = val;
+                Config.instance().saveSettings();
+                return null;
+            }
+        });
+        addLabel("Reward/Shop Card Display Ratio");
+        settingGroup.add(rewardCardAdj).align(Align.right).pad(2);
+        SelectBox tooltipAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().cardTooltipAdj, new Function<Object, Void>() {
+            @Override
+            public Void apply(Object o) {
+                Float val = (Float) o;
+                if (val == null || val == 0f)
+                    val = 1f;
+                Config.instance().getSettingData().cardTooltipAdj = val;
+                Config.instance().saveSettings();
+                return null;
+            }
+        });
+        addLabel("Reward/Shop Card Tooltip Ratio");
+        settingGroup.add(tooltipAdj).align(Align.right).pad(2);
+        if (!GuiBase.isAndroid()) {
             addSettingField(Forge.getLocalizer().getMessage("lblFullScreen"), Config.instance().getSettingData().fullScreen, new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -202,6 +230,19 @@ public class SettingsScene extends UIScene {
                 }
             });
         }
+        addSettingField(Forge.getLocalizer().getMessage("lblFullScreen"), Config.instance().getSettingData().fullScreen, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                boolean value = ((CheckBox) actor).isChecked();
+                Config.instance().getSettingData().fullScreen = value;
+                Config.instance().saveSettings();
+                //update
+                if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_FULLSCREEN_MODE) != value) {
+                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_LANDSCAPE_MODE, value);
+                    FModel.getPreferences().save();
+                }
+            }
+        });
         addCheckBox(Forge.getLocalizer().getMessage("lblCardName"), ForgePreferences.FPref.UI_OVERLAY_CARD_NAME);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustMusicVolume"), ForgePreferences.FPref.UI_VOL_MUSIC, 0, 100);
         addSettingSlider(Forge.getLocalizer().getMessage("cbAdjustSoundsVolume"), ForgePreferences.FPref.UI_VOL_SOUNDS, 0, 100);

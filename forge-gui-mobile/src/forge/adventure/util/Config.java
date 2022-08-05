@@ -64,6 +64,12 @@ public class Config {
         }
         if(settingsData.videomode == null || settingsData.videomode.isEmpty())
             settingsData.videomode="720p";
+        //reward card display fine tune
+        if(settingsData.rewardCardAdj == null || settingsData.rewardCardAdj == 0f)
+            settingsData.rewardCardAdj=1f;
+        //tooltip fine tune
+        if(settingsData.cardTooltipAdj == null || settingsData.cardTooltipAdj == 0f)
+            settingsData.cardTooltipAdj=1f;
 
         this.plane = settingsData.plane;
         currentConfig = this;
