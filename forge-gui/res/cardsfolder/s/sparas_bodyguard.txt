@@ -12,4 +12,4 @@ T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigPu
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X | NumDef$ +X 
 SVar:X:Count$Valid Creature.YouCtrl+Other$CardCounters.SHIELD
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-Oracle:When Spara's Bodyguard enters the battlefield, you may choose a creature card in your hand. If you do, it perpetually gains “This creature enters the battlefield with an additional shield counter on it.” Otherwise, put a shield counter on Spara’s Bodyguard./nAt the beginning of each combat, Spara's Bodyguard gets +1/+1 until end of turn for each shield counter among other creatures you control.
+Oracle:When Spara's Bodyguard enters the battlefield, you may choose a creature card in your hand. If you do, it perpetually gains “This creature enters the battlefield with an additional shield counter on it.” Otherwise, put a shield counter on Spara’s Bodyguard.\nAt the beginning of each combat, Spara's Bodyguard gets +1/+1 until end of turn for each shield counter among other creatures you control.
