@@ -1,12 +1,7 @@
 package forge.screens.match.winlose;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -22,15 +17,12 @@ import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.menu.FMagnifyView;
 import forge.model.FModel;
-import forge.toolbox.FButton;
-import forge.toolbox.FContainer;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOverlay;
-import forge.toolbox.FTextArea;
 import forge.util.Utils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
 
 public class ViewWinLose extends FOverlay implements IWinLoseView<FButton> {
     private static final float INSETS_FACTOR = 0.025f;

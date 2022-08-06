@@ -1,21 +1,16 @@
 package forge.itemmanager;
 
-import java.util.Map.Entry;
-
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.item.PaperCard;
-import forge.itemmanager.filters.AdvancedSearchFilter;
-import forge.itemmanager.filters.CardColorFilter;
-import forge.itemmanager.filters.CardFormatFilter;
-import forge.itemmanager.filters.CardSearchFilter;
-import forge.itemmanager.filters.CardTypeFilter;
-import forge.itemmanager.filters.TextSearchFilter;
+import forge.itemmanager.filters.*;
 import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
+
+import java.util.Map.Entry;
 
 /** 
  * ItemManager for cards

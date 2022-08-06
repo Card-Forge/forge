@@ -3,7 +3,6 @@ package forge.adventure.editor;
 import forge.adventure.data.EnemyData;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Editor class to edit configuration, maybe moved or removed

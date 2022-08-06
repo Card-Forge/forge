@@ -6,7 +6,6 @@ import forge.adventure.data.BiomeTerrainData;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
 
 public class BiomeTerrainEdit extends FormPanel {
     SwingAtlasPreview preview=new SwingAtlasPreview(128);

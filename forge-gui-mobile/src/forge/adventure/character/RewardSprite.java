@@ -1,6 +1,5 @@
 package forge.adventure.character;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.data.RewardData;
 import forge.adventure.util.JSONStringLoader;

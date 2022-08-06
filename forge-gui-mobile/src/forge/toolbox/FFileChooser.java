@@ -1,13 +1,7 @@
 package forge.toolbox;
 
-import java.io.File;
-import java.io.FilenameFilter;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -19,6 +13,10 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.FileUtil;
 import forge.util.Utils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.FilenameFilter;
 
 public class FFileChooser extends FDialog {
     private static final float BACK_ICON_THICKNESS = Utils.scale(2);

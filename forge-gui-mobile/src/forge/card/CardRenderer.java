@@ -1,17 +1,5 @@
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import forge.ImageKeys;
-import forge.localinstance.properties.ForgeConstants;
-import forge.util.*;
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
@@ -27,19 +15,11 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFont
 import com.badlogic.gdx.graphics.glutils.PixmapTextureData;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-
 import forge.CachedCardImage;
 import forge.Forge;
 import forge.Graphics;
-import forge.assets.FImage;
-import forge.assets.FImageComplex;
-import forge.assets.FRotatedImage;
-import forge.assets.FSkin;
-import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
-import forge.assets.FTextureRegionImage;
-import forge.assets.ImageCache;
+import forge.ImageKeys;
+import forge.assets.*;
 import forge.card.CardZoom.ActivateHandler;
 import forge.card.mana.ManaCost;
 import forge.game.card.CardView;
@@ -51,12 +31,20 @@ import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
+import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgeConstants.CounterDisplayType;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.toolbox.FList;
+import forge.util.CardTranslation;
+import forge.util.FileUtil;
+import forge.util.TextBounds;
+import forge.util.Utils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 public class CardRenderer {
     public enum CardStackPosition {

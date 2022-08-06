@@ -1,26 +1,21 @@
 package forge.itemmanager.views;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import com.badlogic.gdx.math.Rectangle;
-
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.item.InventoryItem;
-import forge.itemmanager.ColumnDef;
-import forge.itemmanager.ItemColumn;
-import forge.itemmanager.ItemManager;
-import forge.itemmanager.ItemManagerConfig;
-import forge.itemmanager.ItemManagerModel;
+import forge.itemmanager.*;
 import forge.toolbox.FContainer;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FScrollPane;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 public abstract class ItemView<T extends InventoryItem> {
     protected static final float UNOWNED_ALPHA_COMPOSITE = 0.35f;

@@ -3,7 +3,6 @@ package forge.menu;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
-
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;

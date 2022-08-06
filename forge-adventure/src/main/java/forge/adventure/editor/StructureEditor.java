@@ -2,7 +2,6 @@ package forge.adventure.editor;
 
 import forge.adventure.data.BiomeData;
 import forge.adventure.data.BiomeStructureData;
-import forge.adventure.data.WorldData;
 import forge.adventure.util.Config;
 import forge.adventure.world.BiomeStructure;
 
@@ -83,13 +82,14 @@ public class StructureEditor extends JComponent{
     private void test() {
         if (list.isSelectionEmpty())
             return;
+        long start = System.currentTimeMillis();
         BiomeStructureData data = model.get(list.getSelectedIndex());
 
         try {
 
         BiomeStructure struct = new BiomeStructure(data, System.currentTimeMillis(),
-                (int) (currentData.width * EditorMainWindow.worldEditor.width.intValue() * data.width),
-                (int) (currentData.width * EditorMainWindow.worldEditor.height.intValue() * data.height));
+                (int) (currentData.width * EditorMainWindow.worldEditor.width.intValue() ),
+                (int) (currentData.width * EditorMainWindow.worldEditor.height.intValue()));
         struct.initialize();
         JLabel label = new JLabel();
         BufferedImage image = struct.image;
@@ -111,11 +111,14 @@ public class StructureEditor extends JComponent{
         }
         label.setIcon(new ImageIcon(image));
         label.setSize(640, 640);
-        JOptionPane.showMessageDialog(this, label);
+
+
+
+        JOptionPane.showMessageDialog(this, label,"Calculating took "+ ((System.currentTimeMillis() - start)/1000)+" seconds",JOptionPane.PLAIN_MESSAGE);
         }
         catch (Exception e)
         {
-            JOptionPane.showMessageDialog(this, "WaveFunctionCollapse was not successful");
+            JOptionPane.showMessageDialog(this, "WaveFunctionCollapse was not successful","can not calculate function "+e.getMessage(),JOptionPane.ERROR_MESSAGE);
         }
 
     }

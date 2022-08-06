@@ -3,8 +3,6 @@ package forge.adventure.editor;
 import forge.adventure.data.BiomeData;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.Arrays;
 
 public class BiomeEdit extends FormPanel {
     BiomeData currentData;

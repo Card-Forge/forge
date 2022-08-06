@@ -275,8 +275,18 @@ private void clearTerrain(int x,int y,int size)
             }
         }
 }
+private long measureGenerationTime(String msg,long lastTime)
+{
+    long currentTime = System.currentTimeMillis();
+    System.out.print("\n"+msg+" :\t\t"+((currentTime-lastTime)/1000f)+" s");
+    return currentTime;
+}
     public World generateNew(long seed) {
+
+        long currentTime = System.currentTimeMillis();
+
         loadWorldData();
+
         if(seed==0) { seed=random.nextLong(); }
         this.seed=seed;
         random.setSeed(seed);
@@ -301,6 +311,7 @@ private void clearTerrain(int x,int y,int size)
         pix.fill();
 
         int biomeIndex = -1;
+        currentTime=measureGenerationTime("loading data",currentTime);
         for (BiomeData biome : data.GetBiomes()) {
 
             biomeIndex++;
@@ -311,8 +322,8 @@ private void clearTerrain(int x,int y,int size)
 
             int beginX = Math.max(biomeXStart - biomeWidth / 2, 0);
             int beginY = Math.max(biomeYStart - biomeHeight / 2, 0);
-            int endX = Math.min(biomeXStart + biomeWidth, width);
-            int endY = Math.min(biomeYStart + biomeHeight, height);
+            int endX = Math.min(biomeXStart + biomeWidth/2, width);
+            int endY = Math.min(biomeYStart + biomeHeight/2, height);
             if (biome.width == 1.0 && biome.height == 1.0) {
                 beginX = 0;
                 beginY = 0;
@@ -358,21 +369,29 @@ private void clearTerrain(int x,int y,int size)
                         {
                             for(BiomeStructureData data:biome.structures)
                             {
+
                                 BiomeStructure structure;
                                 if(!structureDataMap.containsKey(data))
                                 {
-                                    structureDataMap.put(data,new BiomeStructure(data,seed,biomeWidth,biomeHeight));
+                                    structure=new BiomeStructure(data,seed,biomeWidth,biomeHeight);
+                                    structure.initialize();
+                                    structureDataMap.put(data,structure);
+                                    currentTime=measureGenerationTime("wavefunctioncollapse "+data.sourcePath,currentTime);
                                 }
-                                structure=structureDataMap.get(data);
-                                int structureXStart= structure.x()+beginX;
-                                int structureYStart= structure.y()+beginY;
-                                int structureIndex=structure.objectID(x-structureXStart,y-structureYStart);
+                                else
+                                {
+                                    structure=structureDataMap.get(data);
+                                }
+                                int structureXStart= x-(biomeXStart - biomeWidth / 2)-(int) ((data.x*biomeWidth)-(data.width*biomeWidth/2));
+                                int structureYStart= y-(biomeYStart - biomeHeight / 2)- (int) ((data.y*biomeHeight)-(data.height*biomeHeight/2));
+
+                                int structureIndex=structure.objectID(structureXStart,structureYStart);
                                 if(structureIndex>=0)
                                 {
                                     pix.setColor(data.mappingInfo[structureIndex].getColor());
                                     pix.drawPixel(x, y);
                                     terrainMap[x][y]=terrainCounter+structureIndex;
-                                    if(structure.collision(x-structureXStart,y-structureYStart))
+                                    if(structure.collision(structureXStart,structureYStart))
                                         terrainMap[x][y]|=collisionBit;
                                     terrainMap[x][y]|=isStructureBit;
 
@@ -485,6 +504,7 @@ private void clearTerrain(int x,int y,int size)
             }
 
         }
+        currentTime=measureGenerationTime("poi placement",currentTime);
 
         //sort towns
         List<Pair<PointOfInterest, PointOfInterest>> allSortedTowns = new ArrayList<>();
@@ -624,6 +644,7 @@ private void clearTerrain(int x,int y,int size)
                 }
             }
         }
+        currentTime=measureGenerationTime("roads",currentTime);
 
         mapObjectIds = new SpritesDataMap(getChunkSize(), data.tileSize, data.width / getChunkSize());
         for (int x = 0; x < width; x++) {
@@ -656,7 +677,7 @@ private void clearTerrain(int x,int y,int size)
             }
         }
         biomeImage = pix;
-
+        measureGenerationTime("sprites",currentTime);
         WorldStage.getInstance().clearCache();
         return this;
     }

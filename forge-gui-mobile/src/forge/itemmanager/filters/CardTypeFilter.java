@@ -1,15 +1,14 @@
 package forge.itemmanager.filters;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
 import forge.card.CardRules;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CardTypeFilter extends StatTypeFilter<PaperCard> {

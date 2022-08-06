@@ -1,7 +1,6 @@
 package forge.itemmanager.filters;
 
 import com.google.common.base.Predicate;
-
 import forge.deck.DeckProxy;
 import forge.itemmanager.ItemManager;
 import forge.itemmanager.SFilterUtil;

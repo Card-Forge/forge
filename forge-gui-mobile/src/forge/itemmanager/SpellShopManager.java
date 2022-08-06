@@ -1,11 +1,8 @@
 package forge.itemmanager;
 
-import java.util.Map.Entry;
-
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Function;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -20,6 +17,8 @@ import forge.itemmanager.filters.AdvancedSearchFilter;
 import forge.itemmanager.filters.TextSearchFilter;
 import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
+
+import java.util.Map.Entry;
 
 
 public class SpellShopManager extends ItemManager<InventoryItem> {

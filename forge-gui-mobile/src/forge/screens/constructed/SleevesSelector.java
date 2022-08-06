@@ -1,11 +1,7 @@
 package forge.screens.constructed;
 
-import java.util.List;
-import java.util.Map;
-
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkin;
@@ -20,6 +16,9 @@ import forge.toolbox.FScrollPane;
 import forge.util.Callback;
 import forge.util.MyRandom;
 import forge.util.Utils;
+
+import java.util.List;
+import java.util.Map;
 
 public class SleevesSelector  extends FScreen {
     public static int getRandomSleeves(List<Integer> usedSleeves) {

@@ -1,11 +1,8 @@
 package forge.screens;
 
-import java.util.List;
-
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
@@ -24,6 +21,8 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.util.Callback;
 import forge.util.Utils;
+
+import java.util.List;
 
 public abstract class FScreen extends FContainer {
     public static final FSkinColor TEXTURE_OVERLAY_COLOR = FSkinColor.get(Colors.CLR_THEME);

@@ -1,16 +1,15 @@
 package forge.util;
 
+import com.badlogic.gdx.files.FileHandle;
+import forge.Forge;
+import forge.gui.GuiBase;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import com.badlogic.gdx.files.FileHandle;
-
-import forge.Forge;
-import forge.gui.GuiBase;
 
 public class LibGDXImageFetcher extends ImageFetcher {
     @Override

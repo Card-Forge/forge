@@ -1,14 +1,9 @@
 package forge.screens.online;
 
 import com.google.common.collect.ImmutableList;
-
 import forge.Forge;
 import forge.gamemodes.match.GameLobby;
-import forge.gamemodes.net.ChatMessage;
-import forge.gamemodes.net.IOnlineChatInterface;
-import forge.gamemodes.net.IOnlineLobby;
-import forge.gamemodes.net.NetConnectUtil;
-import forge.gamemodes.net.OfflineLobby;
+import forge.gamemodes.net.*;
 import forge.gamemodes.net.client.FGameClient;
 import forge.gamemodes.net.server.FServerManager;
 import forge.gui.FThreads;

@@ -1,11 +1,6 @@
 package forge.card;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
@@ -21,6 +16,10 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FTextField;
 import forge.util.Callback;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class GameEntityPicker extends TabPageScreen<GameEntityPicker> {
     private final FOptionPane optionPane;

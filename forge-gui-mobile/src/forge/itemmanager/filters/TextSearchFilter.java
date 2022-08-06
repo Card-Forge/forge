@@ -3,7 +3,6 @@ package forge.itemmanager.filters;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinFont;

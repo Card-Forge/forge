@@ -1,7 +1,6 @@
 package forge.screens.planarconquest;
 
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
@@ -12,12 +11,8 @@ import forge.gamemodes.planarconquest.IVConquestStats;
 import forge.gui.interfaces.IButton;
 import forge.model.FModel;
 import forge.screens.FScreen;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FLabel;
-import forge.toolbox.FScrollPane;
 import forge.util.Utils;
 
 public class ConquestStatsScreen extends FScreen implements IVConquestStats {

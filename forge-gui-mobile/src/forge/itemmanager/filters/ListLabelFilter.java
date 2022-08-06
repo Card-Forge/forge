@@ -1,7 +1,6 @@
 package forge.itemmanager.filters;
 
 import com.badlogic.gdx.utils.Align;
-
 import forge.assets.FSkinFont;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;

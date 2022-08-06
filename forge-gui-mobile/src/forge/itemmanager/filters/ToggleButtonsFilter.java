@@ -1,10 +1,6 @@
 package forge.itemmanager.filters;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.utils.Align;
-
 import forge.assets.FImage;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
@@ -12,6 +8,9 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.toolbox.FLabel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public abstract class ToggleButtonsFilter<T extends InventoryItem> extends ItemFilter<T> {

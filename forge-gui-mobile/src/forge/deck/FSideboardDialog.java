@@ -1,10 +1,6 @@
 package forge.deck;
 
-import java.util.List;
-
 import forge.Forge;
-import org.apache.commons.lang3.StringUtils;
-
 import forge.assets.FImage;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
@@ -19,6 +15,9 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.GuiChoose;
 import forge.util.Callback;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
 
 public class FSideboardDialog extends FDialog {
     private final SideboardTabs tabs;

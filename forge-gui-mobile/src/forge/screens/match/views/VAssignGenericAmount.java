@@ -17,13 +17,7 @@
  */
 package forge.screens.match.views;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
@@ -36,20 +30,14 @@ import forge.card.MagicColor;
 import forge.game.card.CardView;
 import forge.game.player.PlayerView;
 import forge.screens.match.MatchController;
-import forge.toolbox.FCardPanel;
-import forge.toolbox.FContainer;
-import forge.toolbox.FDialog;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FScrollPane;
-import forge.util.Callback;
-import forge.util.CardTranslation;
-import forge.util.TextUtil;
-import forge.util.Utils;
-import forge.util.WaitCallback;
+import forge.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class VAssignGenericAmount extends FDialog {
     private static final float CARD_GAP_X = Utils.scale(10);

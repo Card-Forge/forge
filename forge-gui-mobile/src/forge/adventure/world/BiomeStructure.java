@@ -33,7 +33,14 @@ public class BiomeStructure {
     public TextureAtlas atlas() {
         if(structureAtlas==null)
         {
-            structureAtlas = Config.instance().getAtlas(data.structureAtlasPath);
+            try
+            {
+                structureAtlas = Config.instance().getAtlas(data.structureAtlasPath);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
         }
         return structureAtlas;
     }
@@ -62,23 +69,31 @@ public class BiomeStructure {
         }
         boolean suc=false;
         for(int i=0;i<10&&!suc;i++)
-            suc=model.run((int) seed+(i*5355),15000);
+            suc=model.run((int) seed+(i*5355),0);
         if(!suc)
         {
             dataMap=new int[(int) (data.width* biomeWidth)][ (int) (data.height*biomeHeight)];
             collisionMap=new boolean[(int) (data.width* biomeWidth)][ (int) (data.height*biomeHeight)];
+            for(int x=0;x<data.width* biomeWidth;x++)
+                for(int y=0;y<data.height*biomeHeight;y++)
+                    dataMap[x][y]=-1;
             return;
         }
         image=model.graphics();
         dataMap=new int[image.getWidth()][image.getHeight()];
         collisionMap=new boolean[image.getWidth()][image.getHeight()];
+        BufferedImage maskImage=maskImage();
         for(int x=0;x<image.getWidth();x++)
         {
 
             for(int y=0;y<image.getHeight();y++)
             {
+                boolean isWhitePixel=maskImage!=null&&(maskImage.getRGB((int) (x*maskImage.getWidth()/(float)image.getWidth()),(int)(y*(maskImage.getHeight()/(float)image.getHeight())) ) & 0xffffff)!=0;
+
+                if(isWhitePixel)
+                    image.setRGB(x,y, 0xffffffff);
                 int rgb=image.getRGB(x,y) & 0xffffff;
-                if(!colorIdMap.containsKey(rgb))
+                if(!colorIdMap.containsKey(rgb)||isWhitePixel)
                 {
                     dataMap[x][y]=-1;
                 }
@@ -99,13 +114,15 @@ public class BiomeStructure {
         }
 
     }
+    private BufferedImage maskImage() {
+        try {
+            return ImageIO.read(new File(Config.instance().getFilePath(data.maskPath)));
+        } catch (IOException e) {
+            return null;
+        }
 
-    public int x() {
-        return (int) ((data.x*biomeWidth)-(data.width*biomeWidth)/2);
     }
-    public int y() {
-        return (int) ((data.y*biomeHeight)-(data.height*biomeHeight)/2);
-    }
+
 
     public BiomeStructureData.BiomeStructureDataMapping[] mapping() {
         return data.mappingInfo;

@@ -1,9 +1,6 @@
 package forge.screens.match.views;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.utils.Align;
-
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -19,6 +16,7 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.util.TextBounds;
 import forge.util.Utils;
+import org.apache.commons.lang3.StringUtils;
 
 public class VPrompt extends FContainer {
     public static final float HEIGHT = Utils.AVG_FINGER_HEIGHT;

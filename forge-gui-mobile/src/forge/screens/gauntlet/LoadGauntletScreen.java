@@ -1,13 +1,6 @@
 package forge.screens.gauntlet;
 
-import java.io.File;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -35,6 +28,12 @@ import forge.toolbox.FOptionPane;
 import forge.util.Callback;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
+
+import java.io.File;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class LoadGauntletScreen extends LaunchScreen {
     private static final float ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT;

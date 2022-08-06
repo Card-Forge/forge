@@ -1,8 +1,6 @@
 package forge.screens.limited;
 
 import forge.Forge;
-import org.apache.commons.lang3.StringUtils;
-
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.FDeckEditor;
@@ -16,6 +14,7 @@ import forge.screens.FScreen;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
+import org.apache.commons.lang3.StringUtils;
 
 public class DraftingProcessScreen extends FDeckEditor {
     private boolean isDraftSaved;

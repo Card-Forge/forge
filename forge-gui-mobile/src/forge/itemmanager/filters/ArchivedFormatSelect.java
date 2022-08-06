@@ -1,11 +1,6 @@
 package forge.itemmanager.filters;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -18,6 +13,10 @@ import forge.toolbox.FGroupList;
 import forge.toolbox.FList;
 import forge.util.Callback;
 import forge.util.Utils;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by maustin on 16/04/2018.

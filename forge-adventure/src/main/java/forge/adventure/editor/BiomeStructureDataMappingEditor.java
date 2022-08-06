@@ -2,7 +2,6 @@ package forge.adventure.editor;
 
 import forge.adventure.data.BiomeStructureData;
 import forge.adventure.util.Config;
-import forge.adventure.world.BiomeStructure;
 
 import javax.swing.*;
 import java.awt.*;

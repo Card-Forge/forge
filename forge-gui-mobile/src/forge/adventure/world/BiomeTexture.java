@@ -86,7 +86,13 @@ public class BiomeTexture implements Serializable {
                 {
                     for(BiomeTerrainData terrain:data.terrain)
                     {
-                        regions.add(Config.instance().getAtlas(data.tilesetAtlas).findRegion(terrain.spriteName));
+                        TextureAtlas.AtlasRegion region = Config.instance().getAtlas(data.tilesetAtlas).findRegion(terrain.spriteName);
+                        if(region==null)
+                        {
+                            System.err.print("Can not find sprite "+terrain.spriteName);
+                            continue;
+                        }
+                        regions.add(region);
                         source.add(Config.instance().getAtlas(data.tilesetAtlas));
                     }
                 }
@@ -98,8 +104,13 @@ public class BiomeTexture implements Serializable {
                         TextureAtlas atlas=structure.atlas ();
                         for(BiomeStructureData.BiomeStructureDataMapping mapping:structure.mapping())
                         {
-
-                            regions.add(atlas.findRegion(mapping.name));
+                            TextureAtlas.AtlasRegion region = atlas.findRegion(mapping.name);
+                            if(region==null)
+                            {
+                                System.err.print("Can not find sprite "+mapping.name);
+                                continue;
+                            }
+                            regions.add(region);
                             source.add(atlas);
                         }
                     }
@@ -108,6 +119,7 @@ public class BiomeTexture implements Serializable {
                 for (TextureAtlas.AtlasRegion region : regions) {
                     ArrayList<Pixmap> pics = new ArrayList<>();
                     ArrayList<Pixmap> spics = new ArrayList<>();
+                    if(!region.getTexture().getTextureData().isPrepared())
                         region.getTexture().getTextureData().prepare();
                         Pixmap completePicture = region.getTexture().getTextureData().consumePixmap();
                     for (int y = 0; y < 4; y++) {

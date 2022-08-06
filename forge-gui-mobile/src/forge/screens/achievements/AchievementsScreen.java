@@ -3,15 +3,9 @@ package forge.screens.achievements;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.Graphics;
-import forge.assets.FBufferedImage;
-import forge.assets.FImage;
-import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
-import forge.assets.FSkinTexture;
+import forge.assets.*;
 import forge.card.CardZoom;
 import forge.item.IPaperCard;
 import forge.localinstance.achievements.Achievement;

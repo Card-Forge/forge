@@ -1,20 +1,13 @@
 package forge.toolbox;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import forge.Forge;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
-
+import forge.Forge;
 import forge.game.card.CardView;
 import forge.util.Callback;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 public class GuiChoose {
 

@@ -4,7 +4,6 @@ import forge.adventure.util.Config;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;

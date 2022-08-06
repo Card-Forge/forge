@@ -1,10 +1,7 @@
 package forge.toolbox;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -18,6 +15,7 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.TextBounds;
 import forge.util.Utils;
+import org.apache.commons.lang3.StringUtils;
 
 public class FButton extends FDisplayObject implements IButton {
     private static final FSkinColor DEFAULT_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);

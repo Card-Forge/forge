@@ -1,15 +1,14 @@
 package forge.toolbox;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.utils.Align;
-
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.util.Utils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FRadioButton extends FLabel {
     private static final FSkinColor INNER_CIRCLE_COLOR = FSkinColor.get(Colors.CLR_TEXT);

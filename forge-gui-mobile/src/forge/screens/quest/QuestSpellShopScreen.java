@@ -1,13 +1,6 @@
 package forge.screens.quest;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
@@ -35,6 +28,12 @@ import forge.toolbox.GuiChoose;
 import forge.util.Callback;
 import forge.util.ItemPool;
 import forge.util.Utils;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class QuestSpellShopScreen extends TabPageScreen<QuestSpellShopScreen> {
     private final SpellShopPage spellShopPage;

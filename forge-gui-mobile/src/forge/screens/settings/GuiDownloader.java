@@ -17,21 +17,17 @@
  */
 package forge.screens.settings;
 
-import java.net.Proxy;
-
 import forge.Forge;
 import forge.gui.UiCommand;
 import forge.gui.download.GuiDownloadService;
 import forge.gui.download.GuiDownloadZipService;
-import forge.toolbox.FDialog;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FProgressBar;
-import forge.toolbox.FRadioButton;
 import forge.toolbox.FRadioButton.RadioButtonGroup;
-import forge.toolbox.FTextField;
 import forge.util.Callback;
 import forge.util.Utils;
+
+import java.net.Proxy;
 
 public class GuiDownloader extends FDialog {
     public static final Proxy.Type[] TYPES = Proxy.Type.values();

@@ -1,16 +1,7 @@
 package forge.screens.planarconquest;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -39,6 +30,9 @@ import forge.toolbox.FTextArea;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
+
+import java.io.File;
+import java.util.*;
 
 public class LoadConquestScreen extends LaunchScreen {
     private static final float ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT;

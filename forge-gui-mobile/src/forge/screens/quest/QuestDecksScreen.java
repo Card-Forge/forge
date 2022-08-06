@@ -1,7 +1,6 @@
 package forge.screens.quest;
 
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;

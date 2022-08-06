@@ -1,17 +1,13 @@
 package forge.screens.match.views;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.Forge;
 import forge.screens.match.MatchController;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FChoiceList;
-import forge.toolbox.FDialog;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FOptionPane;
 import forge.util.TextBounds;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class VAutoYields extends FDialog {
     private final FChoiceList<String> lstAutoYields;

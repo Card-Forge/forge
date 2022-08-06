@@ -1,7 +1,6 @@
 package forge.menu;
 
 import com.badlogic.gdx.math.Vector2;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.screens.FScreen;

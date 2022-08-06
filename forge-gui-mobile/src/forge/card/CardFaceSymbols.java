@@ -17,14 +17,14 @@
  */
 package forge.card;
 
-import java.util.StringTokenizer;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinImage;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.gui.error.BugReporter;
+
+import java.util.StringTokenizer;
 
 
 public class CardFaceSymbols {

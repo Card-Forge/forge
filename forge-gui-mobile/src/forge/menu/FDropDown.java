@@ -1,7 +1,6 @@
 package forge.menu;
 
 import com.badlogic.gdx.math.Rectangle;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;

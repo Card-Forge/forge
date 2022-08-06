@@ -1,9 +1,6 @@
 package forge.itemmanager;
 
-import java.util.Map.Entry;
-
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -24,6 +21,8 @@ import forge.itemmanager.filters.TextSearchFilter;
 import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
 import forge.util.Utils;
+
+import java.util.Map.Entry;
 
 /** 
  * ItemManager for decks

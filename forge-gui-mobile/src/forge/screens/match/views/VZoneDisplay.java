@@ -1,13 +1,13 @@
 package forge.screens.match.views;
 
-import java.util.List;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
+
+import java.util.List;
 
 public class VZoneDisplay extends VCardDisplayArea {
     private final PlayerView player;

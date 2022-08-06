@@ -1,7 +1,6 @@
 package forge.toolbox;
 
 import com.badlogic.gdx.utils.Align;
-
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;

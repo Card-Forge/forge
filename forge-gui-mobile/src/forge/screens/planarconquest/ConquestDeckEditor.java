@@ -1,7 +1,5 @@
 package forge.screens.planarconquest;
 
-import java.util.Map;
-
 import forge.Forge;
 import forge.deck.DeckProxy;
 import forge.deck.FDeckEditor;
@@ -14,6 +12,8 @@ import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+
+import java.util.Map;
 
 public class ConquestDeckEditor extends FDeckEditor {
     public ConquestDeckEditor(final ConquestCommander commander) {

@@ -1,7 +1,5 @@
 package forge.screens.quest;
 
-import java.util.List;
-
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
@@ -14,15 +12,11 @@ import forge.gui.interfaces.ICheckBox;
 import forge.gui.interfaces.IComboBox;
 import forge.model.FModel;
 import forge.screens.FScreen;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FLabel;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FScrollPane;
 import forge.util.Utils;
+
+import java.util.List;
 
 public class QuestStatsScreen extends FScreen {
     private static final float PADDING = FOptionPane.PADDING;

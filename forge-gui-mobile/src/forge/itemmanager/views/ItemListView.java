@@ -17,14 +17,7 @@
  */
 package forge.itemmanager.views;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.badlogic.gdx.math.Rectangle;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
@@ -33,14 +26,16 @@ import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.item.InventoryItem;
-import forge.itemmanager.ColumnDef;
-import forge.itemmanager.ItemColumn;
-import forge.itemmanager.ItemManager;
-import forge.itemmanager.ItemManagerConfig;
-import forge.itemmanager.ItemManagerModel;
+import forge.itemmanager.*;
 import forge.toolbox.FCheckBox;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FList;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 
 public final class ItemListView<T extends InventoryItem> extends ItemView<T> {

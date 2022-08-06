@@ -1,11 +1,7 @@
 package forge.screens.planarconquest;
 
-import java.util.Collection;
-import java.util.Map.Entry;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
-
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
@@ -33,6 +29,9 @@ import forge.screens.TabPageScreen;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
+
+import java.util.Collection;
+import java.util.Map.Entry;
 
 public class ConquestCollectionScreen extends TabPageScreen<ConquestCollectionScreen> {
     private final FLabel lblShards = add(new FLabel.Builder().font(ConquestAEtherScreen.LABEL_FONT).parseSymbols().build());

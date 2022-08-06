@@ -6,8 +6,6 @@ import forge.adventure.data.BiomeStructureData;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class BiomeStructureEdit extends FormPanel {
     private boolean updating=false;
@@ -21,6 +19,7 @@ public class BiomeStructureEdit extends FormPanel {
     public JCheckBox randomPosition=new JCheckBox();
     public IntSpinner N= new IntSpinner();
     public JTextField sourcePath= new JTextField();
+    public JTextField maskPath= new JTextField();
     public JCheckBox periodicInput= new JCheckBox();
     public IntSpinner ground= new IntSpinner();
     public IntSpinner symmetry= new IntSpinner();
@@ -37,6 +36,7 @@ public class BiomeStructureEdit extends FormPanel {
         center.add("height:",height);
         center.add("N:",N);
         center.add("sourcePath:",sourcePath);
+        center.add("maskPath:",maskPath);
         center.add("periodicInput:",periodicInput);
         center.add("ground:",ground);
         center.add("symmetry:",symmetry);
@@ -56,6 +56,7 @@ public class BiomeStructureEdit extends FormPanel {
 
         N.addChangeListener(e -> BiomeStructureEdit.this.updateStructure());
         sourcePath.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeStructureEdit.this.updateStructure()));
+        maskPath.getDocument().addDocumentListener(new DocumentChangeListener(() -> BiomeStructureEdit.this.updateStructure()));
         periodicInput.addChangeListener(e -> BiomeStructureEdit.this.updateStructure());
         ground.addChangeListener(e -> BiomeStructureEdit.this.updateStructure());
         symmetry.addChangeListener(e -> BiomeStructureEdit.this.updateStructure());
@@ -78,6 +79,7 @@ public class BiomeStructureEdit extends FormPanel {
         randomPosition.setSelected(currentData.randomPosition);
         N.setValue(currentData.N);
         sourcePath.setText(currentData.sourcePath);
+        maskPath.setText(currentData.maskPath);
         periodicInput.setSelected(currentData.periodicInput);
         ground.setValue(currentData.ground);
         symmetry.setValue(currentData.symmetry);
@@ -105,6 +107,7 @@ public class BiomeStructureEdit extends FormPanel {
 
         currentData.N= N.intValue();
         currentData.sourcePath= sourcePath.getText();
+        currentData.maskPath= maskPath.getText();
         currentData.periodicInput= periodicInput.isSelected();
         currentData.ground= ground.intValue();
         currentData.symmetry= symmetry.intValue();

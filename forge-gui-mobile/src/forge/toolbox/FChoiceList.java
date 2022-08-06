@@ -1,13 +1,6 @@
 package forge.toolbox;
 
-import static forge.card.CardRenderer.MANA_SYMBOL_SIZE;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.badlogic.gdx.utils.Align;
-
 import forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
@@ -37,6 +30,12 @@ import forge.screens.match.views.VAvatar;
 import forge.screens.match.views.VStack;
 import forge.util.TextUtil;
 import forge.util.Utils;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import static forge.card.CardRenderer.MANA_SYMBOL_SIZE;
 
 public class FChoiceList<T> extends FList<T> implements ActivateHandler {
     public static final FSkinColor ITEM_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);

@@ -1,10 +1,5 @@
 package forge.screens.gauntlet;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.deck.Deck;
@@ -25,6 +20,11 @@ import forge.toolbox.GuiChoose;
 import forge.toolbox.ListChooser;
 import forge.util.Callback;
 import forge.util.Utils;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class NewGauntletScreen extends LaunchScreen {
     private static final float PADDING = Utils.scale(10);

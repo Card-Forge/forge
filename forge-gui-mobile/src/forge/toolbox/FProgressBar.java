@@ -1,18 +1,16 @@
 package forge.toolbox;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
-
 import forge.Graphics;
 import forge.assets.FSkinFont;
 import forge.gui.interfaces.IProgressBar;
 import forge.util.Utils;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class FProgressBar extends FDisplayObject implements IProgressBar {
     public static Color BACK_COLOR, FORE_COLOR, SEL_BACK_COLOR, SEL_FORE_COLOR;

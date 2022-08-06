@@ -1,18 +1,7 @@
 package forge.screens.quest;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -41,6 +30,11 @@ import forge.toolbox.FList;
 import forge.toolbox.FTextArea;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.util.*;
 
 public class LoadQuestScreen extends LaunchScreen {
     private static final float ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT;

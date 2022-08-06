@@ -1,8 +1,6 @@
 package forge.adventure.data;
 
 
-import java.util.List;
-
 /**
  * Data class that will be used to read Json configuration files
  * BiomeData

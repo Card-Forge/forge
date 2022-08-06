@@ -1,14 +1,8 @@
 package forge.screens.match.views;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.card.CardRenderer.CardStackPosition;
@@ -22,6 +16,11 @@ import forge.screens.match.MatchController;
 import forge.toolbox.FCardPanel;
 import forge.toolbox.FDisplayObject;
 import forge.util.ThreadUtil;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public abstract class VCardDisplayArea extends VDisplayArea implements ActivateHandler {
     private static final float CARD_STACK_OFFSET = 0.2f;

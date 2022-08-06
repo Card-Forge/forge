@@ -1,11 +1,7 @@
 package forge.screens.match.views;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
-
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -15,6 +11,9 @@ import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
 import forge.util.TextBounds;
 import forge.util.Utils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class VPhaseIndicator extends FContainer {
     public static final FSkinFont BASE_FONT = FSkinFont.get(11);

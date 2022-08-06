@@ -3,7 +3,6 @@ package forge.adventure.editor;
 import forge.adventure.data.PointOfInterestData;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class PointOfInterestEdit extends JComponent {
 

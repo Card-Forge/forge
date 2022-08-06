@@ -3,6 +3,7 @@ package forge.adventure.editor;
 import forge.adventure.util.Config;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -27,6 +28,7 @@ public class TextListEdit extends Box {
         });
 
         add(edit);
+        edit.setPreferredSize(new Dimension(400,edit.getPreferredSize().height));
         //add(findButton);
         elements= new JComboBox(possibleElements);
         add(elements);
@@ -84,7 +86,7 @@ public class TextListEdit extends Box {
         {
             values.append(intValues[i]);
             if(intValues.length>i+2)
-                values.append(";");
+                values.append("\n");
         }
         edit.setText(values.toString());
     }

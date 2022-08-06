@@ -91,17 +91,18 @@
 ],
 "structures": [
 	{
+		"N": 2,
 		"x": 0.5,
 		"y": 0.5,
 		"structureAtlasPath": "world/tilesets/structures.atlas",
-		"sourcePath": "world/tilesets/forestSource.png",
-		"height": 0.3,
-		"width": 0.3,
+		"sourcePath": "world/tilesets/forest.png",
+		"maskPath": "world/tilesets/circle.png",
+		"height": 0.20000002,
+		"width": 0.20000002,
 		"symmetry": 1,
-		"periodicOutput": false,
 		"mappingInfo": [
 			{
-				"name": "Forest",
+				"name": "forest",
 				"color": "007000",
 				"collision": true
 			}
@@ -109,21 +110,22 @@
 	},
 	{
 		"N": 2,
-		"x": 0.3,
-		"y": 0.3,
+		"x": 0.5,
+		"y": 0.5,
 		"structureAtlasPath": "world/tilesets/structures.atlas",
-		"sourcePath": "world/tilesets/lakeSource.png",
-		"height": 0.3,
-		"width": 0.3,
+		"sourcePath": "world/tilesets/lake.png",
+		"maskPath": "world/tilesets/ring.png",
+		"height": 0.4,
+		"width": 0.4,
 		"periodicOutput": false,
 		"mappingInfo": [
 			{
-				"name": "Lake",
+				"name": "lake",
 				"color": "0070a0",
 				"collision": true
 			},
 			{
-				"name": "Forest2",
+				"name": "forest2",
 				"color": "009000",
 				"collision": true
 			}

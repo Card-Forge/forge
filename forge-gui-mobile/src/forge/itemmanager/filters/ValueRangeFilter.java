@@ -2,7 +2,6 @@ package forge.itemmanager.filters;
 
 import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Predicate;
-
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.item.InventoryItem;

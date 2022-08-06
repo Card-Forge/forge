@@ -1,7 +1,6 @@
 package forge.card;
 
 import com.badlogic.gdx.graphics.Texture;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;

@@ -55,15 +55,25 @@ public class SwingAtlas {
     }
 
     private ImageIcon spriteToImage(TextureAtlas.TextureAtlasData.Region sprite) throws IOException {
-        BufferedImage img = ImageIO.read(sprite.page.textureFile.file());
-        if(sprite.width== sprite.height)
-            return new ImageIcon(img.getSubimage(sprite.left,sprite.top, sprite.width, sprite.height).getScaledInstance(imageSize,imageSize,SCALE_FAST));
-        if(sprite.width>sprite.height)
-            return new ImageIcon(img.getSubimage(sprite.left,sprite.top, sprite.width, sprite.height).getScaledInstance(imageSize, (int) (imageSize*(sprite.height/(float)sprite.width)),SCALE_FAST));
-        return new ImageIcon(img.getSubimage(sprite.left,sprite.top, sprite.width, sprite.height).getScaledInstance((int) (imageSize*(sprite.width/(float)sprite.height)),imageSize,SCALE_FAST));
-    }
+        try
+        {
+            BufferedImage img = ImageIO.read(sprite.page.textureFile.file());
+            if(sprite.width== sprite.height)
+                return new ImageIcon(img.getSubimage(sprite.left,sprite.top, sprite.width, sprite.height).getScaledInstance(imageSize,imageSize,SCALE_FAST));
+            if(sprite.width>sprite.height)
+                return new ImageIcon(img.getSubimage(sprite.left,sprite.top, sprite.width, sprite.height).getScaledInstance(imageSize, (int) (imageSize*(sprite.height/(float)sprite.width)),SCALE_FAST));
+            return new ImageIcon(img.getSubimage(sprite.left,sprite.top, sprite.width, sprite.height).getScaledInstance((int) (imageSize*(sprite.width/(float)sprite.height)),imageSize,SCALE_FAST));
+
+        }
+        catch (IOException e)
+        {
+            return null;
+        }
+}
 
     public ImageIcon get(String name) {
+        if(images.get(name).size()==0)
+            return null;
         return images.get(name).get(0);
     }
 

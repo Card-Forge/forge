@@ -17,11 +17,7 @@
  */
 package forge.deck;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.StaticData;
@@ -29,14 +25,12 @@ import forge.deck.DeckRecognizer.TokenType;
 import forge.game.GameType;
 import forge.gui.FThreads;
 import forge.gui.util.SOptionPane;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FDialog;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FTextArea;
 import forge.util.Callback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class FDeckImportDialog extends FDialog {

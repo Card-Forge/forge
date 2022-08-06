@@ -1,10 +1,7 @@
 package forge.screens.planarconquest;
 
-import java.util.Map.Entry;
-
 import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Predicate;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
@@ -26,21 +23,15 @@ import forge.itemmanager.ItemManager;
 import forge.itemmanager.ItemManagerConfig;
 import forge.itemmanager.SFilterUtil;
 import forge.itemmanager.SItemManagerUtil.StatTypes;
-import forge.itemmanager.filters.AdvancedSearchFilter;
-import forge.itemmanager.filters.ComboBoxFilter;
-import forge.itemmanager.filters.ItemFilter;
-import forge.itemmanager.filters.StatTypeFilter;
-import forge.itemmanager.filters.TextSearchFilter;
+import forge.itemmanager.filters.*;
 import forge.model.FModel;
 import forge.screens.FScreen;
-import forge.toolbox.FButton;
-import forge.toolbox.FEvent;
+import forge.toolbox.*;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.toolbox.FList;
 import forge.toolbox.FList.CompactModeHandler;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FTextField;
 import forge.util.Callback;
+
+import java.util.Map.Entry;
 
 public class ConquestCommandersScreen extends FScreen {
     private static final float PADDING = FDeckChooser.PADDING;

@@ -1,10 +1,6 @@
 package forge.screens.match.views;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -17,6 +13,9 @@ import forge.game.player.PlayerView;
 import forge.player.GamePlayerUtil;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class VManaPool extends VDisplayArea {
     private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);

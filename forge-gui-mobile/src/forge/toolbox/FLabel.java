@@ -3,14 +3,9 @@ package forge.toolbox;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
-
 import forge.Graphics;
-import forge.assets.FImage;
-import forge.assets.FSkinColor;
+import forge.assets.*;
 import forge.assets.FSkinColor.Colors;
-import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
-import forge.assets.TextRenderer;
 import forge.gui.UiCommand;
 import forge.gui.interfaces.IButton;
 import forge.localinstance.skin.FSkinProp;

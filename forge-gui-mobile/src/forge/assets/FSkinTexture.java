@@ -1,16 +1,15 @@
 package forge.assets;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureWrap;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.localinstance.properties.ForgeConstants;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public enum FSkinTexture implements FImage {
     BG_TEXTURE(ForgeConstants.TEXTURE_BG_FILE, true, false),

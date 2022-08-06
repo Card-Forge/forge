@@ -1,13 +1,11 @@
 package forge.toolbox;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.ImmutableList;
-
 import forge.game.card.CardView;
 import forge.util.Callback;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
 
 /** 
  * Holds player interactions using standard windows 

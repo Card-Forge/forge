@@ -1,29 +1,15 @@
 package forge.screens.constructed;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import forge.player.GamePlayerUtil;
-import org.apache.commons.lang3.StringUtils;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.Iterables;
-
 import forge.Forge;
 import forge.Graphics;
 import forge.ai.AIOption;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckSection;
-import forge.deck.DeckType;
-import forge.deck.FDeckChooser;
+import forge.deck.*;
 import forge.game.GameType;
 import forge.gamemodes.match.GameLobby;
 import forge.gamemodes.match.LobbySlot;
@@ -38,19 +24,18 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
+import forge.player.GamePlayerUtil;
 import forge.screens.FScreen;
 import forge.screens.LaunchScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.settings.SettingsScreen;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FLabel;
-import forge.toolbox.FList;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FScrollPane;
+import forge.toolbox.*;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.Utils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.*;
 
 public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
     private static final ForgePreferences prefs = FModel.getPreferences();

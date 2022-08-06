@@ -1,6 +1,5 @@
 package forge.adventure.data;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class BiomeStructureData {
@@ -31,6 +30,7 @@ public class BiomeStructureData {
 
     public String structureAtlasPath;
     public String sourcePath;
+    public String maskPath;
     public boolean periodicInput=true;
     public float height;
     public float width;
@@ -45,6 +45,7 @@ public class BiomeStructureData {
     public BiomeStructureData(BiomeStructureData biomeStructureData) {
         this.structureAtlasPath=biomeStructureData.structureAtlasPath;
         this.sourcePath=biomeStructureData.sourcePath;
+        this.maskPath=biomeStructureData.maskPath;
         this.x=biomeStructureData.x;
         this.y=biomeStructureData.y;
         this.width=biomeStructureData.width;

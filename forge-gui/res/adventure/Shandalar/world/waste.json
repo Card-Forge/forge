@@ -1,37 +1,141 @@
 {
-		"startPointX": 0.5,
-		"startPointY": 0.5,
-		"name": "waste",
-		"noiseWeight": 0.3,
-		"distWeight": 1.0,     
-    "tilesetName":"Waste",
-    "tilesetAtlas":"world/tilesets/terrain.atlas",    
-    "terrain":[
-    {
-    "spriteName":"Waste_1",
-    "min": 0,           
-    "max": 0.2,           
-    "resolution": 5
-    },    {
-    "spriteName":"Waste_2",
-    "min": 0.8,           
-    "max": 1.0,           
-    "resolution": 5
-    }
-    ],
-    "width": 0.85,
-    "height": 0.85,
-    "color": "aeaeae",
-    "spriteNames":[ "WasteTree","Stone","WasteRock"]  ,
-    "enemies":[ "Bandit","ClayGolem","Construct","Eldrazi","Gargoyle","Gargoyle 2","Golem","Sliver","Black Wiz1","Black Wiz2","Black Wiz3","Blue Wiz1","Blue Wiz2","Blue Wiz3","Green Wiz1","Green Wiz2","Green Wiz3","Red Wiz1","Red Wiz2","Red Wiz3","White Wiz1","White Wiz2","White Wiz3","Doppelganger" ]  ,
-    "pointsOfInterest":[
-      "Final Castle",
-      "Colorless Castle",
-      "Skep",
-      "Waste Town", 
-      "Fort", "Fort1", "Fort2", "Fort3", "Fort4", "Fort5", "Fort6",
-      "Factory", "Factory1", "Factory2", "Factory3",
-      "MageTowerC", "MageTowerC1", "MageTowerC2", "MageTowerC3", "MageTowerC4", "MageTowerC5",
-      "CaveC", "CaveC1", "CaveC2", "CaveC3", "CaveC4", "CaveC5", "CaveC6", "CaveC7", "CaveC8", "CaveC9", "CaveCA", "CaveCB", "CaveCD"
-    ]
+"startPointX": 0.5,
+"startPointY": 0.5,
+"noiseWeight": 0.3,
+"distWeight": 1,
+"name": "waste",
+"tilesetAtlas": "world/tilesets/terrain.atlas",
+"tilesetName": "Waste",
+"terrain": [
+	{
+		"spriteName": "Waste_1",
+		"max": 0.2,
+		"resolution": 5
+	},
+	{
+		"spriteName": "Waste_2",
+		"min": 0.8,
+		"max": 1,
+		"resolution": 5
+	}
+],
+"width": 0.85,
+"height": 0.85,
+"color": "aeaeae",
+"spriteNames": [
+	"WasteTree",
+	"Stone",
+	"WasteRock"
+],
+"enemies": [
+	"Bandit",
+	"ClayGolem",
+	"Construct",
+	"Eldrazi",
+	"Gargoyle",
+	"Gargoyle 2",
+	"Golem",
+	"Sliver",
+	"Black Wiz1",
+	"Black Wiz2",
+	"Black Wiz3",
+	"Blue Wiz1",
+	"Blue Wiz2",
+	"Blue Wiz3",
+	"Green Wiz1",
+	"Green Wiz2",
+	"Green Wiz3",
+	"Red Wiz1",
+	"Red Wiz2",
+	"Red Wiz3",
+	"White Wiz1",
+	"White Wiz2",
+	"White Wiz3",
+	"Doppelganger"
+],
+"pointsOfInterest": [
+	"Final Castle",
+	"Colorless Castle",
+	"Skep",
+	"Waste Town",
+	"Fort",
+	"Fort1",
+	"Fort2",
+	"Fort3",
+	"Fort4",
+	"Fort5",
+	"Fort6",
+	"Factory",
+	"Factory1",
+	"Factory2",
+	"Factory3",
+	"MageTowerC",
+	"MageTowerC1",
+	"MageTowerC2",
+	"MageTowerC3",
+	"MageTowerC4",
+	"MageTowerC5",
+	"CaveC",
+	"CaveC1",
+	"CaveC2",
+	"CaveC3",
+	"CaveC4",
+	"CaveC5",
+	"CaveC6",
+	"CaveC7",
+	"CaveC8",
+	"CaveC9",
+	"CaveCA",
+	"CaveCB",
+	"CaveCD"
+],
+"structures": [
+	{
+		"N": 2,
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/tilesets/structures.atlas",
+		"sourcePath": "world/tilesets/waste_structure.png",
+		"maskPath": "world/tilesets/circle.png",
+		"periodicInput": false,
+		"height": 0.20000002,
+		"width": 0.20000002,
+		"symmetry": 4,
+		"mappingInfo": [
+			{
+				"name": "waste_structure",
+				"color": "444444",
+				"collision": true
+			},
+			{
+				"name": "waste_mountain",
+				"color": "9a9a9a",
+				"collision": true
+			}
+		]
+	},
+	{
+		"x": 0.5,
+		"y": 0.5,
+		"structureAtlasPath": "world/tilesets/structures.atlas",
+		"sourcePath": "world/tilesets/hole.png",
+		"maskPath": "world/tilesets/ring.png",
+		"height": 0.3,
+		"width": 0.3,
+		"symmetry": 8,
+		"periodicOutput": false,
+		"mappingInfo": [
+			{
+				"name": "hole",
+				"color": "111111",
+				"collision": true
+			},
+			{
+				"name": "waste_mountain",
+				"color": "9a9a9a",
+				"collision": true
+			}
+		]
+	}
+]
 }

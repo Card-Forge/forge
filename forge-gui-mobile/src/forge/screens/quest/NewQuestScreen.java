@@ -1,13 +1,6 @@
 package forge.screens.quest;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import com.badlogic.gdx.utils.Align;
-
 import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -16,13 +9,8 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.deck.DeckSection;
 import forge.game.GameFormat;
-import forge.gamemodes.quest.QuestController;
-import forge.gamemodes.quest.QuestMode;
-import forge.gamemodes.quest.QuestUtil;
-import forge.gamemodes.quest.QuestWorld;
-import forge.gamemodes.quest.StartingPoolPreferences;
+import forge.gamemodes.quest.*;
 import forge.gamemodes.quest.StartingPoolPreferences.PoolType;
-import forge.gamemodes.quest.StartingPoolType;
 import forge.gamemodes.quest.data.DeckConstructionRules;
 import forge.gamemodes.quest.data.GameFormatQuest;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
@@ -39,18 +27,17 @@ import forge.screens.FScreen;
 import forge.screens.LoadingOverlay;
 import forge.screens.home.NewGameMenu;
 import forge.screens.quest.QuestMenu.LaunchReason;
-import forge.toolbox.FCheckBox;
-import forge.toolbox.FComboBox;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FLabel;
-import forge.toolbox.FNumericTextField;
-import forge.toolbox.FOptionPane;
-import forge.toolbox.FRadioButton;
+import forge.toolbox.*;
 import forge.toolbox.FRadioButton.RadioButtonGroup;
-import forge.toolbox.FScrollPane;
 import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import forge.util.Utils;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class NewQuestScreen extends FScreen {
 

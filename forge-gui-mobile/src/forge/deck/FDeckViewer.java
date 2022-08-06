@@ -1,13 +1,7 @@
 package forge.deck;
 
-import java.util.Map.Entry;
-
 import forge.Forge;
-import forge.assets.FImage;
-import forge.assets.FSkin;
-import forge.assets.FSkinImage;
-import forge.assets.FTextureRegionImage;
-import forge.assets.ImageCache;
+import forge.assets.*;
 import forge.item.PaperCard;
 import forge.itemmanager.CardManager;
 import forge.itemmanager.ItemManagerConfig;
@@ -19,6 +13,8 @@ import forge.screens.match.MatchController;
 import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
+
+import java.util.Map.Entry;
 
 public class FDeckViewer extends FScreen {
     private static FDeckViewer deckViewer;

@@ -1,7 +1,6 @@
 package forge.itemmanager.filters;
 
 import com.google.common.base.Predicate;
-
 import forge.assets.FSkinFont;
 import forge.item.InventoryItem;
 import forge.itemmanager.ItemManager;
