@@ -322,6 +322,8 @@ public abstract class VCardDisplayArea extends VDisplayArea implements ActivateH
 
         @Override
         public boolean tap(float x, float y, int count) {
+            if (count > 1) //prevent double choice lists or activate handle
+                return false;
             if (renderedCardContains(x, y)) {
                 ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
                     @Override
