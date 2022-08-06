@@ -30,9 +30,9 @@ public class World implements  Disposable, SaveFileContent {
     private Pixmap biomeImage;
     private long[][] biomeMap;
     private int[][] terrainMap;
-    private static int collisionBit  =0b10000000000000000000000000000000;
-    private static int isStructureBit=0b01000000000000000000000000000000;
-    private static int terrainMask  =collisionBit|isStructureBit;
+    private static final int collisionBit  =0b10000000000000000000000000000000;
+    private static final int isStructureBit=0b01000000000000000000000000000000;
+    private static final int terrainMask  =collisionBit|isStructureBit;
     private int width;
     private int height;
     private SpritesDataMap mapObjectIds;
@@ -278,7 +278,7 @@ private void clearTerrain(int x,int y,int size)
 private long measureGenerationTime(String msg,long lastTime)
 {
     long currentTime = System.currentTimeMillis();
-    System.out.print("\n"+msg+" :\t\t"+((currentTime-lastTime)/1000f)+" s");
+    //System.out.print("\n"+msg+" :\t\t"+((currentTime-lastTime)/1000f)+" s");
     return currentTime;
 }
     public World generateNew(long seed) {
