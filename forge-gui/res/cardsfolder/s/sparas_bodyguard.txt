@@ -2,10 +2,10 @@ Name:Spara's Bodyguard
 ManaCost: G W U
 Types: Creature Rhino Warrior
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, choose a card in your hand. It perpetually gains lifelink.
-SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.YouOwn | ChoiceTitle$ You may choose a Creature card in your hand | MinAmount$ 0 | Amount$ 1 | Optional$ YES | RememberChosen$ True | SubAbility$ DBBranch | TriggerDescription$ When Spara's Bodyguard enters the battlefield, you may choose a creature card in your hand. If you do, it perpetually gains “This creature enters the battlefield with an additional shield counter on it.” Otherwise, put a shield counter on Spara's Bodyguard.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, you may choose a creature card in your hand. If you do, it perpetually gains “This creature enters the battlefield with an additional shield counter on it.” Otherwise, put a shield counter on CARDNAME.
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.YouOwn | ChoiceTitle$ You may choose a Creature card in your hand | MinAmount$ 0 | Amount$ 1 | Optional$ YES | RememberChosen$ True | SubAbility$ DBEffect | TriggerDescription$ When CARDNAME enters the battlefield, you may choose a creature card in your hand. If you do, it perpetually gains “This creature enters the battlefield with an additional shield counter on it.”
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualShield | Name$ Spara's Bodyguard's Perpetual Effect | Duration$ Permanent
-SVar:PerpetualShield:Mode$ Continuous | Affected$ Card.ChosenCard | AddKeyword$ etbCounter:SHIELD:1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually gets +1/+0.
+SVar:PerpetualShield:Mode$ Continuous | Affected$ Card.ChosenCard | AddKeyword$ etbCounter:SHIELD:1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually enters the battlefield with an additional Shield Counter
 SVar:DBAddCounter:DB$ PutCounter | ConditionCheckSVar$ X | Defined$ Self | CounterType$ SHIELD | ETB$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigPump 
