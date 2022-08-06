@@ -4,6 +4,6 @@ Types:Artifact Creature Gargoyle Demon
 PT:5/4
 K:Flying
 K:Kicker:Sac<1/Creature.nonDemon/non-Demon creature>:Generic
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.Self+pseudokicked | NoResolvingCheck$ True | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, if its additional cost was paid, conjure a card named Demonic Pact onto the battlefield.
-SVar:TrigConjure:DB$ | MakeCardName$ Demonic Pact | Zone$ Battlefield
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.Self+pseudokicked | NoResolvingCheck$ True | Execute$ TrigConjure 
+SVar:TrigConjure:DB$ | MakeCardName$ Demonic Pact | Zone$ Battlefield| TriggerDescription$ When CARDNAME enters the battlefield, if its additional cost was paid, conjure a card named Demonic Pact onto the battlefield.
 Oracle:As an additional cost to cast this spell, you may sacrifice a non-Demon creature.\nFlying\nWhen Graven Archfiend enters the battlefield, if its additional cost was paid, conjure a card named Demonic Pact onto the battlefield.
