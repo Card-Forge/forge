@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.ObjectMap;
 import forge.Forge;
@@ -24,61 +23,67 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Assets implements Disposable {
-    private MemoryTrackingAssetManager manager = new MemoryTrackingAssetManager(new AbsoluteFileHandleResolver());
-    private HashMap<Integer, FSkinFont> fonts = new HashMap<>();
-    private HashMap<String, FImageComplex> cardArtCache = new HashMap<>(1024);
-    private HashMap<String, FImage> avatarImages = new HashMap<>();
-    private HashMap<String, FSkinImage> manaImages = new HashMap<>(128);
-    private HashMap<String, FSkinImage> symbolLookup = new HashMap<>(64);
-    private HashMap<FSkinProp, FSkinImage> images = new HashMap<>(512);
-    private HashMap<Integer, TextureRegion> avatars = new HashMap<>(150);
-    private HashMap<Integer, TextureRegion> sleeves = new HashMap<>(64);
-    private HashMap<Integer, TextureRegion> cracks = new HashMap<>(16);
-    private HashMap<Integer, TextureRegion> borders = new HashMap<>();
-    private HashMap<Integer, TextureRegion> deckbox = new HashMap<>();
-    private HashMap<Integer, TextureRegion> cursor = new HashMap<>();
-    private ObjectMap<Integer, BitmapFont> counterFonts = new ObjectMap<>();
-    private ObjectMap<String, Texture> generatedCards = new ObjectMap<>(512);
-    private ObjectMap<Integer, Texture> fallback_skins = new ObjectMap<>();
-    private ObjectMap<String, Texture> tmxMap = new ObjectMap<>();
-    public Skin skin;
-    public BitmapFont advDefaultFont, advBigFont;
+    private MemoryTrackingAssetManager manager;
+    private HashMap<Integer, FSkinFont> fonts;
+    private HashMap<String, FImageComplex> cardArtCache;
+    private HashMap<String, FImage> avatarImages;
+    private HashMap<String, FSkinImage> manaImages;
+    private HashMap<String, FSkinImage> symbolLookup;
+    private HashMap<FSkinProp, FSkinImage> images;
+    private HashMap<Integer, TextureRegion> avatars;
+    private HashMap<Integer, TextureRegion> sleeves;
+    private HashMap<Integer, TextureRegion> cracks;
+    private HashMap<Integer, TextureRegion> borders;
+    private HashMap<Integer, TextureRegion> deckbox;
+    private HashMap<Integer, TextureRegion> cursor;
+    private ObjectMap<Integer, BitmapFont> counterFonts;
+    private ObjectMap<String, Texture> generatedCards;
+    private ObjectMap<Integer, Texture> fallback_skins;
+    private ObjectMap<String, Texture> tmxMap;
     private Texture defaultImage, dummy;
     private TextureParameter textureParameter;
-    private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0, aDF = 0, cDFVal = 0;
+    private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0, aDF = 0, cDFVal = 0;
     public Assets() {
         //init titlebg fallback
-        fallback_skins.put(0, new Texture(GuiBase.isAndroid()
+        fallback_skins().put(0, new Texture(GuiBase.isAndroid()
                 ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png")
-                : Gdx.files.classpath("fallback_skin").child("title_bg_lq.png")));
+                : Gdx.files.local("fallback_skin").child("title_bg_lq.png")));
         //init transition fallback
-        fallback_skins.put(1, new Texture(GuiBase.isAndroid()
+        fallback_skins().put(1, new Texture(GuiBase.isAndroid()
                 ? Gdx.files.internal("fallback_skin").child("transition.png")
-                : Gdx.files.classpath("fallback_skin").child("transition.png")));
+                : Gdx.files.local("fallback_skin").child("transition.png")));
     }
     @Override
     public void dispose() {
-        manager.dispose();
         for (BitmapFont bitmapFont : counterFonts.values())
             bitmapFont.dispose();
         for (Texture texture : generatedCards.values())
             texture.dispose();
-        for (FSkinFont fSkinFont : fonts.values())
-            fSkinFont.font.dispose();
         for (Texture texture : fallback_skins.values())
             texture.dispose();
         for (Texture texture : tmxMap.values())
             texture.dispose();
-        if (advDefaultFont != null)
-            advDefaultFont.dispose();
-        if (advBigFont != null)
-            advBigFont.dispose();
-        if (skin != null)
-            skin.dispose();
         if (defaultImage != null)
             defaultImage.dispose();
         if (dummy != null)
             dummy.dispose();
+        cardArtCache.clear();
+        avatarImages.clear();
+        manaImages.clear();
+        symbolLookup.clear();
+        images.clear();
+        avatars.clear();
+        sleeves.clear();
+        cracks.clear();
+        borders.clear();
+        deckbox.clear();
+        cursor.clear();
+        fonts.clear();
+        counterFonts.clear();
+        generatedCards.clear();
+        fallback_skins.clear();
+        tmxMap.clear();
+        manager.dispose();
     }
     public MemoryTrackingAssetManager manager() {
         if (manager == null)
@@ -237,7 +242,7 @@ public class Assets implements Disposable {
             }
             memoryPerFile.put(fileName, textureSize);
 
-            int sum = memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts() + calcCounterFonts() + calcAdvFonts()
+            int sum = memoryPerFile.values().stream().mapToInt(Integer::intValue).sum() + calcFonts() + calcCounterFonts()
                     + calculateObjectMaps(generatedCards()) + calculateObjectMaps(fallback_skins()) + calculateObjectMaps(tmxMap());
             return sum;
         }
@@ -323,20 +328,6 @@ public class Assets implements Disposable {
             }
             cCFVal = val;
             return cCFVal;
-        }
-        private int calcAdvFonts() {
-            if (!Forge.showFPS)
-                return 0;
-            if (advDefaultFont == null || advBigFont == null)
-                return 0;
-            if (aDF == -1)
-                return cDFVal;
-            int val = 0;
-            val += calcBitmapFont(advDefaultFont);
-            val += calcBitmapFont(advBigFont);
-            cDFVal = val;
-            aDF = -1;
-            return cDFVal;
         }
         private int calcBitmapFont(BitmapFont bitmapFont) {
             if (bitmapFont == null)

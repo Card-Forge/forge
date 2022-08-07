@@ -1,0 +1,8 @@
+Name:Uthgardt Fury
+ManaCost:1 R R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage to any target.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4
+SVar:PlayMain1:TRUE
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddHiddenKeyword$ Damage isn't removed from CARDNAME during cleanup steps. | Description$ Damage isn't removed from creatures your opponents control during cleanup steps.
+Oracle:When Uthgardt Fury enters the battlefield, it deals 4 damage to any target.\nDamage isn't removed from creatures your opponents control during cleanup steps.

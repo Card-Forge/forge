@@ -1131,7 +1131,7 @@ public class CardFactoryUtil {
             SpellAbility loseLifeSA = AbilityFactory.getAbility(loseLifeStr, card);
 
             AbilitySub gainLifeSA = (AbilitySub) AbilityFactory.getAbility(gainLifeStr, card);
-            gainLifeSA.setSVar("AFLifeLost", "Number$0");
+            loseLifeSA.setSVar("AFLifeLost", "Number$0");
             loseLifeSA.setSubAbility(gainLifeSA);
             loseLifeSA.setIntrinsic(intrinsic);
 

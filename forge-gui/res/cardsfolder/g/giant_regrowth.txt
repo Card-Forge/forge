@@ -1,0 +1,8 @@
+Name:Giant Regrowth
+ManaCost:1 G G
+Types:Instant
+A:SP$ ChangeZone | Cost$ 1 G G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target card in your graveyard | ValidTgts$ Card.YouCtrl | SubAbility$ DBEffect | RememberObjects$ Targeted | SpellDescription$ Return target card from your graveyard. If it's a creature card, it perpetually gets +3/+3. to your hand.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | StaticAbilities$ PerpetualP3P3 | ChosenName$ Giant Regrowth's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualP3P3:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 3 | AddToughness$ 3 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually gets +3/+3.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True 
+Oracle:Return target card from your graveyard to your hand. If it’s a creature card, it perpetually gets +3/+3.

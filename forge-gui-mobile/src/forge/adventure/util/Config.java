@@ -64,6 +64,18 @@ public class Config {
         }
         if(settingsData.videomode == null || settingsData.videomode.isEmpty())
             settingsData.videomode="720p";
+        //reward card display fine tune
+        if(settingsData.rewardCardAdj == null || settingsData.rewardCardAdj == 0f)
+            settingsData.rewardCardAdj=1f;
+        //tooltip fine tune
+        if(settingsData.cardTooltipAdj == null || settingsData.cardTooltipAdj == 0f)
+            settingsData.cardTooltipAdj=1f;
+        //reward card display fine tune landscape
+        if(settingsData.rewardCardAdjLandscape == null || settingsData.rewardCardAdjLandscape == 0f)
+            settingsData.rewardCardAdjLandscape=1f;
+        //tooltip fine tune landscape
+        if(settingsData.cardTooltipAdjLandscape == null || settingsData.cardTooltipAdjLandscape == 0f)
+            settingsData.cardTooltipAdjLandscape=1f;
 
         this.plane = settingsData.plane;
         currentConfig = this;
