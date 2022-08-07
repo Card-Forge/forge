@@ -1,6 +1,5 @@
 package forge.adventure.data;
 
-import java.awt.image.BufferedImage;
 
 public class BiomeStructureData {
 
@@ -61,8 +60,4 @@ public class BiomeStructureData {
             this.mappingInfo=null;
     }
 
-    public BufferedImage sourceImage() {
-
-        return null;
-    }
 }

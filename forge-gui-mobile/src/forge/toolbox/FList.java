@@ -1,6 +1,11 @@
 package forge.toolbox;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import com.badlogic.gdx.utils.Align;
+
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -12,10 +17,6 @@ import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.screens.FScreen;
 import forge.util.Utils;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class FList<T> extends FScrollPane implements Iterable<T> {
     public static final float PADDING = Utils.scale(3);

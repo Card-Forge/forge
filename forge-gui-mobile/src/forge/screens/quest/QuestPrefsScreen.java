@@ -8,8 +8,15 @@ import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gamemodes.quest.data.QuestPreferences.QPref;
 import forge.model.FModel;
 import forge.screens.FScreen;
-import forge.toolbox.*;
+import forge.toolbox.FContainer;
+import forge.toolbox.FDisplayObject;
+import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
+import forge.toolbox.FNumericTextField;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FTextField;
 import forge.util.Utils;
 
 public class QuestPrefsScreen extends FScreen {

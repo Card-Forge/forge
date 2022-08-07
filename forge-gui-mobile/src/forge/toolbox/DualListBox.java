@@ -1,15 +1,16 @@
 package forge.toolbox;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
 import forge.util.Callback;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 // An input box for handling the order of choices.
 // Left box has the original choices

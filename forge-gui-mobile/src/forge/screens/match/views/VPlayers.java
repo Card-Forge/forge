@@ -1,6 +1,7 @@
 package forge.screens.match.views;
 
 import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinFont;
@@ -10,7 +11,11 @@ import forge.deck.FDeckViewer;
 import forge.game.player.PlayerView;
 import forge.menu.FDropDown;
 import forge.screens.match.MatchController;
-import forge.toolbox.*;
+import forge.toolbox.FContainer;
+import forge.toolbox.FDisplayObject;
+import forge.toolbox.FEvent;
+import forge.toolbox.FLabel;
+import forge.toolbox.FList;
 import forge.util.Utils;
 
 public class VPlayers extends FDropDown {

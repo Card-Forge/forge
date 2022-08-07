@@ -1,12 +1,13 @@
 package forge.toolbox;
 
-import com.badlogic.gdx.math.Vector2;
-import forge.Graphics;
-import forge.gui.error.BugReporter;
-
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
+
+import com.badlogic.gdx.math.Vector2;
+
+import forge.Graphics;
+import forge.gui.error.BugReporter;
 
 public abstract class FContainer extends FDisplayObject {
     private final List<FDisplayObject> children = new ArrayList<>();

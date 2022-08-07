@@ -1,8 +1,13 @@
 package forge.toolbox;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -10,10 +15,6 @@ import forge.assets.FSkinColor.Colors;
 import forge.gui.FThreads;
 import forge.screens.FScreen;
 import forge.screens.match.MatchController;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
 
 public abstract class FOverlay extends FContainer {
     public static final float ALPHA_COMPOSITE = 0.5f;

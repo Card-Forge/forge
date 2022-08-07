@@ -1,9 +1,17 @@
 package forge.screens.limited;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.assets.FSkinFont;
-import forge.deck.*;
+import forge.deck.Deck;
+import forge.deck.DeckGroup;
+import forge.deck.DeckProxy;
+import forge.deck.FDeckChooser;
+import forge.deck.FDeckEditor;
 import forge.deck.FDeckEditor.EditorType;
 import forge.deck.io.DeckPreferences;
 import forge.game.GameType;
@@ -24,9 +32,6 @@ import forge.screens.home.LoadGameMenu;
 import forge.toolbox.FComboBox;
 import forge.toolbox.FLabel;
 import forge.toolbox.FOptionPane;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LoadDraftScreen extends LaunchScreen {
     private final DeckManager lstDecks = add(new DeckManager(GameType.Draft));

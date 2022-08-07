@@ -1,5 +1,7 @@
 package forge.screens.online;
 
+import static forge.screens.online.OnlineLobbyScreen.getGameLobby;
+
 import forge.Forge;
 import forge.assets.FImage;
 import forge.assets.FSkinImage;
@@ -14,8 +16,6 @@ import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FOptionPane;
 import forge.util.Callback;
-
-import static forge.screens.online.OnlineLobbyScreen.getGameLobby;
 
 public class OnlineMenu extends FPopupMenu {
     public enum OnlineScreen {

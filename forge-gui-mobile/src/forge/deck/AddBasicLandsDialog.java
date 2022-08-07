@@ -17,8 +17,13 @@
  */
 package forge.deck;
 
+import java.text.NumberFormat;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.Iterables;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.StaticData;
@@ -32,15 +37,20 @@ import forge.card.CardZoom;
 import forge.card.mana.ManaCostShard;
 import forge.item.PaperCard;
 import forge.model.FModel;
-import forge.toolbox.*;
+import forge.toolbox.FCardPanel;
+import forge.toolbox.FComboBox;
+import forge.toolbox.FContainer;
+import forge.toolbox.FDialog;
+import forge.toolbox.FDisplayObject;
+import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FScrollPane;
+import forge.toolbox.FTextArea;
 import forge.util.Callback;
 import forge.util.MyRandom;
 import forge.util.Utils;
-
-import java.text.NumberFormat;
-import java.util.Map;
-import java.util.Map.Entry;
 
 
 public class AddBasicLandsDialog extends FDialog {

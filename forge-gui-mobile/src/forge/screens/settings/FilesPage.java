@@ -1,31 +1,44 @@
 package forge.screens.settings;
 
-import com.badlogic.gdx.utils.Align;
-import com.google.common.collect.ImmutableList;
-import forge.Forge;
-import forge.Graphics;
-import forge.StaticData;
-import forge.assets.FSkinColor;
-import forge.assets.FSkinFont;
-import forge.assets.FSkinImage;
-import forge.gui.FThreads;
-import forge.gui.GuiBase;
-import forge.gui.download.*;
-import forge.localinstance.properties.ForgeConstants;
-import forge.localinstance.properties.ForgeProfileProperties;
-import forge.screens.LoadingOverlay;
-import forge.screens.TabPageScreen.TabPage;
-import forge.toolbox.*;
-import forge.toolbox.FFileChooser.ChoiceType;
-import forge.util.Callback;
-import forge.util.FileUtil;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.Pair;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import com.google.common.collect.ImmutableList;
+import forge.StaticData;
+import forge.gui.FThreads;
+import forge.gui.GuiBase;
+import forge.screens.LoadingOverlay;
+import org.apache.commons.lang3.StringUtils;
+
+import com.badlogic.gdx.utils.Align;
+
+import forge.Forge;
+import forge.Graphics;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
+import forge.gui.download.GuiDownloadAchievementImages;
+import forge.gui.download.GuiDownloadPicturesLQ;
+import forge.gui.download.GuiDownloadPrices;
+import forge.gui.download.GuiDownloadQuestImages;
+import forge.gui.download.GuiDownloadService;
+import forge.gui.download.GuiDownloadSetPicturesLQ;
+import forge.gui.download.GuiDownloadSkins;
+import forge.gui.download.GuiDownloadZipService;
+import forge.localinstance.properties.ForgeConstants;
+import forge.localinstance.properties.ForgeProfileProperties;
+import forge.screens.TabPageScreen.TabPage;
+import forge.toolbox.FFileChooser;
+import forge.toolbox.FFileChooser.ChoiceType;
+import forge.toolbox.FGroupList;
+import forge.toolbox.FList;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.GuiChoose;
+import forge.util.Callback;
+import forge.util.FileUtil;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class FilesPage extends TabPage<SettingsScreen> {
     private final FGroupList<FilesItem> lstItems = add(new FGroupList<>());

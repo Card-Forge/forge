@@ -1,7 +1,11 @@
 package forge.screens.home;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Align;
+
 import com.google.common.collect.ImmutableList;
 import forge.Forge;
 import forge.Graphics;
@@ -19,13 +23,14 @@ import forge.screens.online.OnlineMenu.OnlineScreen;
 import forge.screens.planarconquest.ConquestMenu;
 import forge.screens.quest.QuestMenu;
 import forge.screens.settings.SettingsScreen;
-import forge.toolbox.*;
+import forge.toolbox.FButton;
+import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FScrollPane;
 import forge.util.Callback;
 import forge.util.Utils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomeScreen extends FScreen {
     private static final float PADDING = Utils.scale(5);

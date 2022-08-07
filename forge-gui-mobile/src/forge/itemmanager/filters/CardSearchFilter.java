@@ -1,6 +1,7 @@
 package forge.itemmanager.filters;
 
 import com.google.common.base.Predicate;
+
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;

@@ -1,10 +1,11 @@
 package forge.assets;
 
+import java.util.HashMap;
+
 import com.badlogic.gdx.graphics.Color;
+
 import forge.localinstance.skin.FSkinProp;
 import forge.screens.match.TargetingOverlay;
-
-import java.util.HashMap;
 
 public class FSkinColor {
     public enum Colors {

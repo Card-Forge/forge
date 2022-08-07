@@ -1,6 +1,7 @@
 package forge.screens;
 
 import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
@@ -10,8 +11,12 @@ import forge.assets.FSkinFont;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.menu.FPopupMenu;
 import forge.model.FModel;
-import forge.toolbox.*;
+import forge.toolbox.FContainer;
+import forge.toolbox.FDisplayObject;
+import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
+import forge.toolbox.FScrollPane;
 import forge.util.Utils;
 
 public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {

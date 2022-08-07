@@ -1,5 +1,8 @@
 package forge.screens.quest;
 
+import java.io.File;
+import java.io.IOException;
+
 import forge.Forge;
 import forge.assets.FSkinImage;
 import forge.deck.Deck;
@@ -24,9 +27,6 @@ import forge.screens.home.HomeScreen;
 import forge.screens.home.LoadGameMenu.LoadGameScreen;
 import forge.screens.home.NewGameMenu.NewGameScreen;
 import forge.util.ThreadUtil;
-
-import java.io.File;
-import java.io.IOException;
 
 public class QuestMenu extends FPopupMenu implements IVQuestStats {
 

@@ -284,6 +284,7 @@ private long measureGenerationTime(String msg,long lastTime)
     public World generateNew(long seed) {
 
         long currentTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
 
         loadWorldData();
 
@@ -678,6 +679,7 @@ private long measureGenerationTime(String msg,long lastTime)
         }
         biomeImage = pix;
         measureGenerationTime("sprites",currentTime);
+        //System.out.print("\nGenerating world took :\t\t"+((System.currentTimeMillis()-startTime)/1000f)+" s");
         WorldStage.getInstance().clearCache();
         return this;
     }

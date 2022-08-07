@@ -1,10 +1,10 @@
 package forge.menu;
 
-import forge.Graphics;
-import forge.screens.FScreen.Header;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import forge.Graphics;
+import forge.screens.FScreen.Header;
 
 public class FMenuBar extends Header {
     private final List<FMenuTab> tabs = new ArrayList<>();

@@ -1,8 +1,14 @@
 package forge.screens.match.views;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
@@ -20,7 +26,11 @@ import forge.gui.card.CardDetailUtil;
 import forge.gui.card.CardDetailUtil.DetailColors;
 import forge.gui.interfaces.IGuiGame;
 import forge.interfaces.IGameController;
-import forge.menu.*;
+import forge.menu.FCheckBoxMenuItem;
+import forge.menu.FDropDown;
+import forge.menu.FMenuItem;
+import forge.menu.FMenuTab;
+import forge.menu.FPopupMenu;
 import forge.player.PlayerZoneUpdates;
 import forge.screens.match.MatchController;
 import forge.screens.match.TargetingOverlay;
@@ -32,11 +42,6 @@ import forge.toolbox.FLabel;
 import forge.util.TextUtil;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public class VStack extends FDropDown {
     public static final float CARD_WIDTH = Utils.AVG_FINGER_WIDTH;

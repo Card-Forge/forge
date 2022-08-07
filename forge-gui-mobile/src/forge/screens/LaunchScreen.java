@@ -1,6 +1,7 @@
 package forge.screens;
 
 import com.badlogic.gdx.Input.Keys;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinImage;

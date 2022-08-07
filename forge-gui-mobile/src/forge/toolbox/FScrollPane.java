@@ -1,6 +1,9 @@
 package forge.toolbox;
 
+import java.util.List;
+
 import com.badlogic.gdx.math.Vector2;
+
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkinColor;
@@ -8,8 +11,6 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.PhysicsObject;
 import forge.util.Utils;
-
-import java.util.List;
 
 public abstract class FScrollPane extends FContainer {
     private static final float FLING_DECEL = 750f;

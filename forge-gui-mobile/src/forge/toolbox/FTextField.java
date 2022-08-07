@@ -2,6 +2,7 @@ package forge.toolbox;
 
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.Forge.KeyInputAdapter;
 import forge.Graphics;

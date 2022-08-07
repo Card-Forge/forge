@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
+
 import forge.Forge;
 import forge.assets.FSkin;
 import forge.localinstance.properties.ForgePreferences.FPref;

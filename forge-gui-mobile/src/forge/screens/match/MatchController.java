@@ -1,27 +1,42 @@
 package forge.screens.match;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import forge.adventure.scene.DuelScene;
+import forge.adventure.scene.SceneType;
+import forge.ai.GameState;
+import forge.deck.Deck;
+import forge.game.player.Player;
+import forge.item.IPaperCard;
+import forge.screens.TransitionScreen;
+import forge.util.collect.FCollection;
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.LobbyPlayer;
-import forge.adventure.scene.DuelScene;
-import forge.adventure.scene.SceneType;
-import forge.ai.GameState;
-import forge.assets.*;
+import forge.assets.FImage;
+import forge.assets.FSkin;
+import forge.assets.FSkinImage;
+import forge.assets.FTextureRegionImage;
+import forge.assets.ImageCache;
 import forge.card.CardAvatarImage;
 import forge.card.GameEntityPicker;
 import forge.deck.CardPool;
-import forge.deck.Deck;
 import forge.deck.FSideboardDialog;
 import forge.game.GameEntityView;
 import forge.game.card.CardView;
 import forge.game.phase.PhaseType;
 import forge.game.player.DelayedReveal;
 import forge.game.player.IHasIcon;
-import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbilityView;
 import forge.game.zone.ZoneType;
@@ -31,7 +46,6 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.util.SGuiChoose;
 import forge.gui.util.SOptionPane;
-import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -39,9 +53,12 @@ import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.player.PlayerZoneUpdate;
 import forge.player.PlayerZoneUpdates;
-import forge.screens.TransitionScreen;
-import forge.screens.match.views.*;
+import forge.screens.match.views.VAssignCombatDamage;
+import forge.screens.match.views.VAssignGenericAmount;
+import forge.screens.match.views.VPhaseIndicator;
+import forge.screens.match.views.VPlayerPanel;
 import forge.screens.match.views.VPlayerPanel.InfoTab;
+import forge.screens.match.views.VPrompt;
 import forge.screens.match.winlose.ViewWinLose;
 import forge.toolbox.FButton;
 import forge.toolbox.FDisplayObject;
@@ -50,14 +67,7 @@ import forge.trackable.TrackableCollection;
 import forge.util.ITriggerEvent;
 import forge.util.MessageUtil;
 import forge.util.WaitCallback;
-import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 public class MatchController extends AbstractGuiGame {
     private MatchController() { }

@@ -1,9 +1,14 @@
 package forge.toolbox;
 
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
@@ -20,9 +25,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.Utils;
 import forge.util.WaitCallback;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.List;
 
 public class FOptionPane extends FDialog {
     public static final FSkinImage QUESTION_ICON = FSkinImage.QUESTION;

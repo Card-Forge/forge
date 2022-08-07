@@ -1,8 +1,13 @@
 package forge.card;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map.Entry;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinImage;
@@ -24,10 +29,6 @@ import forge.toolbox.FDialog;
 import forge.toolbox.FOverlay;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map.Entry;
 
 public class CardZoom extends FOverlay {
     private static final float REQ_AMOUNT = Utils.AVG_FINGER_WIDTH;

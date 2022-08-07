@@ -1,5 +1,9 @@
 package forge.screens.home.puzzle;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import forge.Forge;
 import forge.assets.FSkinFont;
 import forge.deck.Deck;
@@ -21,10 +25,6 @@ import forge.toolbox.FTextArea;
 import forge.toolbox.GuiChoose;
 import forge.util.Callback;
 import forge.util.Utils;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class PuzzleScreen extends LaunchScreen {
 

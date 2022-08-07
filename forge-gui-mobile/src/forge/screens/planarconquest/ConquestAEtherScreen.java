@@ -1,5 +1,9 @@
 package forge.screens.planarconquest;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
@@ -7,12 +11,21 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
-import forge.assets.*;
-import forge.card.*;
+import forge.assets.FSkin;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
+import forge.assets.FSkinTexture;
+import forge.assets.TextRenderer;
+import forge.card.CardRarity;
+import forge.card.CardRenderer;
 import forge.card.CardRenderer.CardStackPosition;
+import forge.card.CardZoom;
+import forge.card.ColorSet;
+import forge.card.ColorSetImage;
 import forge.gamemodes.planarconquest.ConquestCommander;
 import forge.gamemodes.planarconquest.ConquestData;
 import forge.gamemodes.planarconquest.ConquestPlane;
@@ -23,16 +36,16 @@ import forge.item.PaperCard;
 import forge.localinstance.skin.FSkinProp;
 import forge.model.FModel;
 import forge.screens.FScreen;
-import forge.toolbox.*;
+import forge.toolbox.FCardPanel;
+import forge.toolbox.FDisplayObject;
+import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
+import forge.toolbox.FLabel;
+import forge.toolbox.GuiChoose;
 import forge.util.Aggregates;
 import forge.util.Callback;
 import forge.util.MyRandom;
 import forge.util.Utils;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class ConquestAEtherScreen extends FScreen {
     public static final Color FILTER_BUTTON_COLOR = ConquestMultiverseScreen.LOCATION_BAR_COLOR;

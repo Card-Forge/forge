@@ -1,13 +1,14 @@
 package forge.animation;
 
-import com.badlogic.gdx.math.Rectangle;
-import forge.Graphics;
-import forge.toolbox.FDisplayObject;
-import forge.toolbox.FOverlay;
-
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
+
+import com.badlogic.gdx.math.Rectangle;
+
+import forge.Graphics;
+import forge.toolbox.FDisplayObject;
+import forge.toolbox.FOverlay;
 
 public class ForgeTransition extends ForgeAnimation {
     private static final FOverlay overlay = new FOverlay(null) {

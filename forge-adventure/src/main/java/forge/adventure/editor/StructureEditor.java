@@ -1,10 +1,13 @@
 package forge.adventure.editor;
 
+import com.badlogic.gdx.graphics.Color;
 import forge.adventure.data.BiomeData;
 import forge.adventure.data.BiomeStructureData;
 import forge.adventure.util.Config;
 import forge.adventure.world.BiomeStructure;
+import forge.adventure.world.ColorMap;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -13,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Editor class to edit configuration, maybe moved or removed
@@ -85,14 +90,50 @@ public class StructureEditor extends JComponent{
         long start = System.currentTimeMillis();
         BiomeStructureData data = model.get(list.getSelectedIndex());
 
-        try {
+        try
+        {
 
         BiomeStructure struct = new BiomeStructure(data, System.currentTimeMillis(),
                 (int) (currentData.width * EditorMainWindow.worldEditor.width.intValue() ),
                 (int) (currentData.width * EditorMainWindow.worldEditor.height.intValue()));
-        struct.initialize();
+
+            BufferedImage sourceImage= null;
+            try {
+                sourceImage = ImageIO.read(new File(struct.sourceImagePath()));
+            ColorMap sourceColorMap=new ColorMap(sourceImage.getWidth(),sourceImage.getHeight());
+            for(int y=0;y<sourceColorMap.getHeight();y++)
+                for(int x=0;x<sourceColorMap.getWidth();x++)
+                {
+                    Color c =new Color();
+                    Color.argb8888ToColor(c,sourceImage.getRGB(x,y));
+                    sourceColorMap.setColor(x,y,c);
+                }
+
+
+            BufferedImage  maskImage=   ImageIO.read(new File(struct.maskImagePath()));
+            ColorMap maskColorMap=new ColorMap(maskImage.getWidth(),maskImage.getHeight());
+            for(int y=0;y<maskColorMap.getHeight();y++)
+                for(int x=0;x<maskColorMap.getWidth();x++)
+                {
+                    Color c =new Color();
+                    Color.argb8888ToColor(c,maskImage.getRGB(x,y));
+                    maskColorMap.setColor(x,y,c);
+                }
+
+            struct.initialize(sourceColorMap,maskColorMap);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        float calcTime=(System.currentTimeMillis() - start)/1000f;
+
         JLabel label = new JLabel();
-        BufferedImage image = struct.image;
+        ColorMap colorMap=struct.image;
+        BufferedImage image = new BufferedImage(colorMap.getWidth(),colorMap.getHeight(),BufferedImage.TYPE_INT_ARGB);
+
+            for(int y=0;y<colorMap.getHeight();y++)
+                for(int x=0;x<colorMap.getWidth();x++)
+                    image.setRGB(x,y,Color.argb8888(colorMap.getColor(x,y)));
+
         if (image.getWidth() < 640 | image.getHeight() < 640) {
             if (image.getHeight() > image.getWidth()) {
                 BufferedImage nimage = new BufferedImage(640, 640 * (image.getWidth() / image.getHeight()), BufferedImage.TYPE_INT_ARGB);
@@ -114,7 +155,7 @@ public class StructureEditor extends JComponent{
 
 
 
-        JOptionPane.showMessageDialog(this, label,"Calculating took "+ ((System.currentTimeMillis() - start)/1000)+" seconds",JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(this, label,"Calculating took "+ calcTime+" seconds",JOptionPane.PLAIN_MESSAGE);
         }
         catch (Exception e)
         {

@@ -1,5 +1,8 @@
 package forge.toolbox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -9,9 +12,6 @@ import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FList.DefaultListItemRenderer;
 import forge.toolbox.FList.ListItemRenderer;
 import forge.util.Utils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FGroupList<E> extends FScrollPane {
     private static final float GROUP_HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.6f);

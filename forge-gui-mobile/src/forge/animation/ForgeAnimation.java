@@ -1,10 +1,11 @@
 package forge.animation;
 
-import com.badlogic.gdx.Gdx;
-import forge.Forge;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.badlogic.gdx.Gdx;
+
+import forge.Forge;
 
 public abstract class ForgeAnimation {
     private static final List<ForgeAnimation> activeAnimations = new ArrayList<>();

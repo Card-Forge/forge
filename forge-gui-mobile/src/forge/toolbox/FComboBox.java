@@ -1,16 +1,17 @@
 package forge.toolbox;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.badlogic.gdx.utils.Align;
+
 import forge.Graphics;
 import forge.gui.interfaces.IComboBox;
 import forge.menu.FDropDownMenu;
 import forge.menu.FMenuItem;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FEvent.FEventType;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class FComboBox<T> extends FTextField implements IComboBox<T> {
     private final List<T> items = new ArrayList<>();

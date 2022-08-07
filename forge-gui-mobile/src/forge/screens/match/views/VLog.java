@@ -1,6 +1,9 @@
 package forge.screens.match.views;
 
+import java.util.List;
+
 import com.badlogic.gdx.utils.Align;
+
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -14,8 +17,6 @@ import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
-
-import java.util.List;
 
 public class VLog extends FDropDown {
     private static final float PADDING = Utils.scale(5);

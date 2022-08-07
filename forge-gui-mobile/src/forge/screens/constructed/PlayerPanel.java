@@ -1,8 +1,15 @@
 package forge.screens.constructed;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.ai.AIOption;
@@ -10,7 +17,11 @@ import forge.assets.FSkin;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
 import forge.assets.FTextureRegionImage;
-import forge.deck.*;
+import forge.deck.Deck;
+import forge.deck.DeckProxy;
+import forge.deck.DeckType;
+import forge.deck.FDeckChooser;
+import forge.deck.FVanguardChooser;
 import forge.game.GameType;
 import forge.gamemodes.match.LobbySlot;
 import forge.gamemodes.match.LobbySlotType;
@@ -20,14 +31,20 @@ import forge.itemmanager.DeckManager;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
-import forge.toolbox.*;
+import forge.toolbox.FComboBox;
+import forge.toolbox.FContainer;
+import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
-import forge.util.*;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import forge.toolbox.FLabel;
+import forge.toolbox.FList;
+import forge.toolbox.FOptionPane;
+import forge.toolbox.FTextField;
+import forge.toolbox.FToggleSwitch;
+import forge.util.Callback;
+import forge.util.Lang;
+import forge.util.NameGenerator;
+import forge.util.TextUtil;
+import forge.util.Utils;
 
 public class PlayerPanel extends FContainer {
     private static final ForgePreferences prefs = FModel.getPreferences();

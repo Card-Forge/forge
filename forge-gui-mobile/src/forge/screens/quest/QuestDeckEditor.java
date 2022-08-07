@@ -1,5 +1,8 @@
 package forge.screens.quest;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import forge.deck.DeckProxy;
 import forge.deck.FDeckEditor;
 import forge.gamemodes.quest.QuestSpellShop;
@@ -8,9 +11,6 @@ import forge.itemmanager.ColumnDef;
 import forge.itemmanager.ItemColumn;
 import forge.itemmanager.ItemManagerConfig;
 import forge.model.FModel;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class QuestDeckEditor extends FDeckEditor {
     public QuestDeckEditor(boolean commander) {

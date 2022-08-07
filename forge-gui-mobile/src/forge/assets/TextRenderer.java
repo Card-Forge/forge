@@ -1,7 +1,13 @@
 package forge.assets;
 
+import java.text.BreakIterator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.card.CardFaceSymbols;
@@ -9,11 +15,6 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
 import forge.model.FModel;
 import forge.util.TextBounds;
-
-import java.text.BreakIterator;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 //Encodes text for drawing with symbols and reminder text
 public class TextRenderer {

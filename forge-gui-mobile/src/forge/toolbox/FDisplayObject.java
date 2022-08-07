@@ -1,11 +1,12 @@
 package forge.toolbox;
 
+import java.util.List;
+
 import com.badlogic.gdx.math.Rectangle;
+
 import forge.Forge;
 import forge.Graphics;
 import forge.gui.GuiBase;
-
-import java.util.List;
 
 public abstract class FDisplayObject {
     protected static final float DISABLED_COMPOSITE = 0.25f;

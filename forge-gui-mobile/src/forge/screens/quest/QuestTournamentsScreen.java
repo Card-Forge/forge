@@ -1,9 +1,17 @@
 package forge.screens.quest;
 
+import java.util.Arrays;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
+
 import forge.Forge;
-import forge.assets.*;
+import forge.assets.FSkin;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
+import forge.assets.FTextureRegionImage;
+import forge.assets.ImageCache;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -29,8 +37,6 @@ import forge.toolbox.FContainer;
 import forge.toolbox.FLabel;
 import forge.toolbox.FTextField;
 import forge.util.Utils;
-
-import java.util.Arrays;
 
 public class QuestTournamentsScreen extends QuestLaunchScreen implements IQuestTournamentView {
     //Select Tournament panel

@@ -1,14 +1,21 @@
 package forge.screens.planarconquest;
 
+import java.util.List;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
+
 import forge.Forge;
 import forge.Graphics;
-import forge.assets.*;
+import forge.assets.FImage;
+import forge.assets.FSkinColor;
+import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
+import forge.assets.FSkinTexture;
 import forge.card.CardRenderer;
 import forge.gamemodes.planarconquest.ConquestPlane;
 import forge.item.PaperCard;
@@ -19,8 +26,6 @@ import forge.toolbox.FTimer;
 import forge.toolbox.GuiDialog;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
-
-import java.util.List;
 
 public class ConquestPlaneSelector extends FDisplayObject {
     private static final FSkinFont PLANE_NAME_FONT = FSkinFont.get(30);

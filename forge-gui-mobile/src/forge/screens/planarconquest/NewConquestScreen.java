@@ -1,6 +1,7 @@
 package forge.screens.planarconquest;
 
 import com.google.common.collect.Iterables;
+
 import forge.Forge;
 import forge.assets.FImage;
 import forge.card.CardImage;
