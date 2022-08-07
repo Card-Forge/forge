@@ -328,6 +328,9 @@ public class Forge implements ApplicationListener {
             altZoneTabs = true;
         //pixl cursor for adventure
         setCursor(null, "0");
+        loadAdventureResources(true);
+    }
+    private static void loadAdventureResources(boolean startScene) {
         try {
             if(!adventureLoaded)
             {
@@ -336,7 +339,8 @@ public class Forge implements ApplicationListener {
                 }
                 adventureLoaded=true;
             }
-            switchScene(SceneType.StartScene.instance);
+            if (startScene)
+                switchScene(SceneType.StartScene.instance);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -362,6 +366,10 @@ public class Forge implements ApplicationListener {
                 //load Drafts
                 preloadBoosterDrafts();
                 FThreads.invokeInEdtLater(() -> {
+                    if (selector.equals("Adventure")) {
+                        //preload adventure resources to speedup startup if selector is adventure. Needs in edt when setting up worldstage
+                        loadAdventureResources(false);
+                    }
                     //selection transition
                     setTransitionScreen(new TransitionScreen(() -> {
                         if (selector.equals("Classic")) {
@@ -944,10 +952,10 @@ public class Forge implements ApplicationListener {
     @Override
     public void dispose() {
         if (currentScreen != null) {
-            FOverlay.hideAll();
             currentScreen.onClose(null);
             currentScreen = null;
         }
+        FOverlay.hideAll();
         assets.dispose();
         Dscreens.clear();
         graphics.dispose();
