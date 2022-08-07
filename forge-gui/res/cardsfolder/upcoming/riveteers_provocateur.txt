@@ -1,0 +1,12 @@
+Name:Riveteers Provocateur
+ManaCost:B R
+Types:Creature Viashino Warrior
+PT:3/1
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ Whenever CARDNAME enters the battlefield, choose a creature card in your hand without blitz. It perpetually gains blitz. The blitz cost is equal to its mana cost.
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.withoutBlitz+YouOwn | ChoiceTitle$ Choose a card in your hand without blitz | Amount$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualBlitz | Name$ Riveteers Provacateur's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualBlitz:Mode$ Continuous | Affected$ Card.ChosenCard | AddKeyword$ Blitz:CardManaCost:Spell.Creature | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually gains blitz. The blitz cost is equal to its mana cost.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+K:Blitz: B R
+Oracle:Menace\nWhen Riveteers Provocateur enters the battlefield, choose a creature card in your hand without blitz. It perpetually gains blitz. The blitz cost is equal to its mana cost.\nBlitz {B}{R}
