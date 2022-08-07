@@ -2,6 +2,7 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -25,6 +26,7 @@ import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
+import forge.deck.Deck;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 
@@ -254,6 +256,12 @@ public class GameHUD extends Stage {
         miniMap.setDrawable(new TextureRegionDrawable(miniMapTexture));
         miniMapTooltip.setDrawable(new TextureRegionDrawable(miniMapToolTipTexture));
         avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
+        Deck deck = AdventurePlayer.current().getSelectedDeck();
+        if (deck == null || deck.isEmpty() || deck.getMain().toFlatList().size() < 30) {
+            deckActor.getLabel().setColor(Color.RED);
+        } else {
+            deckActor.getLabel().setColor(menuActor.getLabel().getColor());
+        }
     }
 
     private void openDeck() {
