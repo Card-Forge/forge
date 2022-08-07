@@ -1,0 +1,12 @@
+Name:Racketeer Boss
+ManaCost:R G
+Types:Creature Cat Warrior
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, you may choose 2 creature and/or planeswalker cards in your hand. They perpetually gain “When you cast this spell, create a Treasure token.”
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.YouOwn,Planeswalker.YouOwn  | ChoiceTitle$ Choose up to two creature and/or planeswalker cards in your hand.| MinAmount$ 0 | Amount$ 2 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$PerpetualEffect | Name$ Racketeer Boss' Perpetual Effect | Duration$ Permanent
+SVar:PerpetualEffect:Mode$ Continuous | Affected$ Card.ChosenCard  | AddTrigger$ CastSpellTreasure  | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ When you cast this spell, create a Treasure token
+SVar:CastSpellTreasure:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast this spell, create a Treasure token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBCleanup 
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:When Racketeer Boss enters the battlefield, choose up to two creature and/or planeswalker cards in your hand. They perpetually gain “When you cast this spell, create a Treasure token.”
