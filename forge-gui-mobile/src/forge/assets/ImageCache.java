@@ -320,6 +320,7 @@ public class ImageCache {
                 syncQ.clear();
                 cardsLoaded.clear();
                 counter = 0;
+                CardRenderer.clearcardArtCache();
             } catch (Exception e) {
                 //e.printStackTrace();
             } finally {
