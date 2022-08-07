@@ -1,0 +1,12 @@
+Name:Effluence Devourer
+ManaCost:B R G
+Types:Creature Crocodile
+PT:4/3
+K:Blitz:B R G
+T:Mode$ Sacrificed | ValidCard$ Creature | ValidPlayer$ You | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice CARDNAME or another creature, it perpetually gains “{2}, Exile this card from your graveyard: Create an X/X green Ooze creature token, where X is this card’s power. Activate only as a sorcery.”
+SVar:TrigEffect:DB$ Effect | ValidCard$ Creature | EffectZone$ Command | StaticAbilities$ PerpetualAbility | Name$ Absorb Energy's Perpetual Effect | Duration$ Permanent | TriggerDescription$ Target creature card in your graveyard perpetually gains "{1}{B}{B}, Exile this card from your graveyard: Shuffle it into your library. Create a token that's a copy of it, except it's a 4/4 black Zombie in addition to its other types. Activate only as a sorcery."
+SVar:PerpetualAbility:Mode$ Continuous |  Affected$ Creature | AddAbility$ ABToken | Defined$ Remembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Cards in your hand that share a card type with that [imprinted] spell perpetually gain "This spell costs {1} less to cast."
+SVar:ABToken:AB$ ChangeZone | Cost$ 1 ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Origin$ All | Destination$ Exile |  EffectZone$ Command | Defined$ Remembered | SorcerySpeed$ True | Defined$ Self | SubAbility$ DBToken | SorcerySpeed$ True | StackDescription$ Exile create token 
+SVar:DBToken:DB$ Token | TokenScript$ g_x_x_ooze | TokenPower$ X | TokenToughness$ X | TokenOwner$ You | TokenAmount$ 1
+SVar:Y:Sacrificed$CardPower
+Oracle:Target creature card in your graveyard perpetually gains "{1}{B}{B}, Exile this card from your graveyard: Shuffle it into your library. Create a token that's a copy of it, except it's a 4/4 black Zombie in addition to its other types. Activate only as a sorcery."
