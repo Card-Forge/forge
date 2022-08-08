@@ -699,7 +699,7 @@ private long measureGenerationTime(String msg,long lastTime)
         }
         biomeImage = pix;
         measureGenerationTime("sprites",currentTime);
-        System.out.print("\nGenerating world took :\t\t"+((System.currentTimeMillis()-startTime)/1000f)+" s");
+        System.out.print("\nGenerating world took :\t\t"+((System.currentTimeMillis()-startTime)/1000f)+" s\n");
         WorldStage.getInstance().clearCache();
         ThreadUtil.getServicePool().shutdownNow();
         ThreadUtil.refreshServicePool();
