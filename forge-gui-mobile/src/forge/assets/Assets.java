@@ -55,14 +55,18 @@ public class Assets implements Disposable {
     }
     @Override
     public void dispose() {
-        for (BitmapFont bitmapFont : counterFonts.values())
-            bitmapFont.dispose();
-        for (Texture texture : generatedCards.values())
-            texture.dispose();
-        for (Texture texture : fallback_skins.values())
-            texture.dispose();
-        for (Texture texture : tmxMap.values())
-            texture.dispose();
+        if (counterFonts != null)
+            for (BitmapFont bitmapFont : counterFonts.values())
+                bitmapFont.dispose();
+        if (generatedCards != null)
+            for (Texture texture : generatedCards.values())
+                texture.dispose();
+        if (fallback_skins != null)
+            for (Texture texture : fallback_skins.values())
+                texture.dispose();
+        if (tmxMap != null)
+            for (Texture texture : tmxMap.values())
+                texture.dispose();
         if (defaultImage != null)
             defaultImage.dispose();
         if (dummy != null)
