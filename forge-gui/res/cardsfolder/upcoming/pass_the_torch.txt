@@ -1,0 +1,11 @@
+Name:Pass the Torch
+ManaCost:1 R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SubAbility$ DBChoose | SpellDescription$ CARDNAME deals 2 damage to any target.
+SVar:DBChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.YouOwn | Mandatory$ True | ChoiceTitle$ You may choose a creature card in your hand | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ FreeCastGrave | Name$ Pass the Torch's Perpetual Effect | Duration$ Permanent
+SVar:FreeCastGrave:Mode$ Continuous | Affected$ Card.ChosenCard | AddTrigger$ TrigDamage | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually gains “Whenever this creature deals combat damage to a player, you may cast target card named Pass the Torch from your graveyard without paying its mana cost. If you do, this creature perpetually loses this ability”.
+SVar:TrigDamage:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigPlay | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player, you may cast target card named Pass the Torch from your graveyard without paying its mana cost. If you do, this creature perpetually loses this ability
+SVar:TrigPlay:DB$ Play | TgtZone$ Graveyard | ValidTgts$ Card.namedPass the Torch | TgtPrompt$ Cast Pass the Torch without paying it's mana cost ? | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | AILogic$ ReplaySpell | SubAbility$ ExileEff
+SVar:ExileEff:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ OriginalHost
+Oracle: Pass the Torch deals 2 damage to any target. Choose a creature card in your hand. It perpetually gains “Whenever this creature deals combat damage to a player, you may cast target card named Pass the Torch from your graveyard without paying its mana cost. If you do, this creature perpetually loses this ability”.

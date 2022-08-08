@@ -1,0 +1,10 @@
+Name:Choice of Fortunes
+ManaCost:2 U
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 2 | ChangeType$ Card | RememberChanged$ True | SubAbility$ DBShuffle | StackDescription$ Seek two cards | SpellDescription$ Seek two cards. You may shuffle them into your library. If you do, seek two cards. 
+SVar:DBShuffle:DB$ ChangeZone | Origin$ Hand | Destination$ Library | Optional$ True | OptionalDecider$ You | MayShuffle$ True | ChangeType$ Card.IsRemembered | ChangeNum$ 2 | DefinedPlayer$ Player | SubAbility$ DBSeek | TgtPrompt$ Want to shuffle the cards into your library ? 
+SVar:DBSeek:DB$ ChangeZone | ConditionDefined$ ChosenCard | ConditionNotPresent$ Card |EQ0 Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 2 | ChangeType$ Card | StackDescription$ Seek two cards | SpellDescription$ Seek two cards. | DefinedPlayer$ Player |
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STHandSize | Duration$ Permanent | SpellDescription$ You have no maximum hand size for the rest of the game.
+SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size for the rest of the game.
+AI:RemoveDeck:All
+Oracle:Seek two cards. You may shuffle them into your library. If you do, seek two cards.\nYou have no maximum hand size for the rest of the game.
