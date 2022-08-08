@@ -18,6 +18,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
+import forge.util.ThreadUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.*;
@@ -324,17 +325,13 @@ private long measureGenerationTime(String msg,long lastTime)
                 int biomeHeight = (int) Math.round(biome.height * (double) height);
                 for (BiomeStructureData data : biome.structures) {
                     long localSeed=seed;
-                    Thread worker=new Thread(()->
-                    {
+                    ThreadUtil.getServicePool().submit(() -> {
                         long threadStartTime = System.currentTimeMillis();
                         BiomeStructure structure  = new BiomeStructure(data, localSeed, biomeWidth, biomeHeight);
                         structure.initialize();
                         structureDataMap.put(data, structure);
                         measureGenerationTime("wavefunctioncollapse " + data.sourcePath, threadStartTime);
                     });
-
-                    worker.start();
-
                 }
             }
         }
@@ -704,6 +701,8 @@ private long measureGenerationTime(String msg,long lastTime)
         measureGenerationTime("sprites",currentTime);
         System.out.print("\nGenerating world took :\t\t"+((System.currentTimeMillis()-startTime)/1000f)+" s");
         WorldStage.getInstance().clearCache();
+        ThreadUtil.getServicePool().shutdownNow();
+        ThreadUtil.refreshServicePool();
         return this;
     }
 
