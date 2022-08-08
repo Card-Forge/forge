@@ -278,7 +278,7 @@ private void clearTerrain(int x,int y,int size)
 private long measureGenerationTime(String msg,long lastTime)
 {
     long currentTime = System.currentTimeMillis();
-    //System.out.print("\n"+msg+" :\t\t"+((currentTime-lastTime)/1000f)+" s");
+    System.out.print("\n"+msg+" :\t\t"+((currentTime-lastTime)/1000f)+" s");
     return currentTime;
 }
     public World generateNew(long seed) {
@@ -288,8 +288,10 @@ private long measureGenerationTime(String msg,long lastTime)
 
         loadWorldData();
 
-        if(seed==0) { seed=random.nextLong(); }
-        this.seed=seed;
+        if (seed == 0) {
+            seed = random.nextLong();
+        }
+        this.seed = seed;
         random.setSeed(seed);
         OpenSimplexNoise noise = new OpenSimplexNoise(seed);
 
@@ -298,7 +300,7 @@ private long measureGenerationTime(String msg,long lastTime)
         height = data.height;
         //save at all data
         biomeMap = new long[width][height];
-        terrainMap= new int[width][height];
+        terrainMap = new int[width][height];
         Pixmap pix = new Pixmap(width, height, Pixmap.Format.RGBA8888);
 
         for (int x = 0; x < width; x++) {
@@ -312,7 +314,32 @@ private long measureGenerationTime(String msg,long lastTime)
         pix.fill();
 
         int biomeIndex = -1;
-        currentTime=measureGenerationTime("loading data",currentTime);
+        currentTime = measureGenerationTime("loading data", currentTime);
+        HashMap<BiomeStructureData, BiomeStructure> structureDataMap = new HashMap<>();
+
+
+        for (BiomeData biome : data.GetBiomes()) {
+            if (biome.structures != null) {
+                int biomeWidth = (int) Math.round(biome.width * (double) width);
+                int biomeHeight = (int) Math.round(biome.height * (double) height);
+                for (BiomeStructureData data : biome.structures) {
+                    long localSeed=seed;
+                    Thread worker=new Thread(()->
+                    {
+                        long threadStartTime = System.currentTimeMillis();
+                        BiomeStructure structure  = new BiomeStructure(data, localSeed, biomeWidth, biomeHeight);
+                        structure.initialize();
+                        structureDataMap.put(data, structure);
+                        measureGenerationTime("wavefunctioncollapse " + data.sourcePath, threadStartTime);
+                    });
+
+                    worker.start();
+
+                }
+            }
+        }
+
+
         for (BiomeData biome : data.GetBiomes()) {
 
             biomeIndex++;
@@ -331,7 +358,6 @@ private long measureGenerationTime(String msg,long lastTime)
                 endX = width;
                 endY = height;
             }
-            HashMap<BiomeStructureData,BiomeStructure> structureDataMap=new HashMap<>();
             for (int x = beginX; x < endX; x++) {
                 for (int y = beginY; y < endY; y++) {
                     //value 0-1 based on noise
@@ -370,19 +396,15 @@ private long measureGenerationTime(String msg,long lastTime)
                         {
                             for(BiomeStructureData data:biome.structures)
                             {
+                                while(!structureDataMap.containsKey(data)) {
+                                    try {
+                                        Thread.sleep(10);
+                                    } catch (InterruptedException e) {
+                                        throw new RuntimeException(e);
+                                    }
+                                }
 
-                                BiomeStructure structure;
-                                if(!structureDataMap.containsKey(data))
-                                {
-                                    structure=new BiomeStructure(data,seed,biomeWidth,biomeHeight);
-                                    structure.initialize();
-                                    structureDataMap.put(data,structure);
-                                    currentTime=measureGenerationTime("wavefunctioncollapse "+data.sourcePath,currentTime);
-                                }
-                                else
-                                {
-                                    structure=structureDataMap.get(data);
-                                }
+                                BiomeStructure structure=structureDataMap.get(data);
                                 int structureXStart= x-(biomeXStart - biomeWidth / 2)-(int) ((data.x*biomeWidth)-(data.width*biomeWidth/2));
                                 int structureYStart= y-(biomeYStart - biomeHeight / 2)- (int) ((data.y*biomeHeight)-(data.height*biomeHeight/2));
 
@@ -406,6 +428,7 @@ private long measureGenerationTime(String msg,long lastTime)
                 }
             }
         }
+        currentTime=measureGenerationTime("biomes in total",currentTime);
 
         mapPoiIds = new PointOfInterestMap(getChunkSize(), data.tileSize, data.width / getChunkSize(),data.height / getChunkSize());
         List<PointOfInterest> towns = new ArrayList<>();
@@ -679,7 +702,7 @@ private long measureGenerationTime(String msg,long lastTime)
         }
         biomeImage = pix;
         measureGenerationTime("sprites",currentTime);
-        //System.out.print("\nGenerating world took :\t\t"+((System.currentTimeMillis()-startTime)/1000f)+" s");
+        System.out.print("\nGenerating world took :\t\t"+((System.currentTimeMillis()-startTime)/1000f)+" s");
         WorldStage.getInstance().clearCache();
         return this;
     }
