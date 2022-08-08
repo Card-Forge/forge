@@ -5,7 +5,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.google.common.collect.Lists;
-import forge.adventure.data.*;
+import forge.adventure.data.DifficultyData;
+import forge.adventure.data.EffectData;
+import forge.adventure.data.HeroListData;
+import forge.adventure.data.ItemData;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.deck.CardPool;
@@ -18,7 +21,10 @@ import forge.util.ItemPool;
 import forge.util.MyRandom;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Class that represents the player (not the player sprite)

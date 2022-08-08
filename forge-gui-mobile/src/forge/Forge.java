@@ -123,6 +123,7 @@ public class Forge implements ApplicationListener {
     private static Cursor cursor0, cursor1, cursor2, cursorA0, cursorA1, cursorA2;
     public static boolean forcedEnglishonCJKMissing = false;
     public static boolean adventureLoaded = false;
+    public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
@@ -372,17 +373,22 @@ public class Forge implements ApplicationListener {
                     }
                     //selection transition
                     setTransitionScreen(new TransitionScreen(() -> {
-                        if (selector.equals("Classic")) {
-                            openHomeDefault();
-                            clearSplashScreen();
-                        } else if (selector.equals("Adventure")) {
+                        if (createNewAdventureMap) {
                             openAdventure();
                             clearSplashScreen();
-                        } else if (splashScreen != null) {
-                            splashScreen.setShowModeSelector(true);
-                        } else {//default mode in case splashscreen is null at some point as seen on resume..
-                            openHomeDefault();
-                            clearSplashScreen();
+                        } else {
+                            if (selector.equals("Classic")) {
+                                openHomeDefault();
+                                clearSplashScreen();
+                            } else if (selector.equals("Adventure")) {
+                                openAdventure();
+                                clearSplashScreen();
+                            } else if (splashScreen != null) {
+                                splashScreen.setShowModeSelector(true);
+                            } else {//default mode in case splashscreen is null at some point as seen on resume..
+                                openHomeDefault();
+                                clearSplashScreen();
+                            }
                         }
                         //start background music
                         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
@@ -895,6 +901,8 @@ public class Forge implements ApplicationListener {
             //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
             if (BugReporter.isSentryEnabled())
                 BugReporter.reportException(ex);
+            else
+                ex.printStackTrace();
         }
         if (showFPS)
             frameRate.render();
