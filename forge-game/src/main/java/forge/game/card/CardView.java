@@ -1262,6 +1262,7 @@ public class CardView extends GameEntityView {
             }
             set(TrackableProperty.Power, c.getBasePower());
         }
+
         public int getToughness() {
             return get(TrackableProperty.Toughness);
         }
