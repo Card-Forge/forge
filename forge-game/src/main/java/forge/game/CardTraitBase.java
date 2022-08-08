@@ -23,6 +23,7 @@ import forge.game.card.IHasCardView;
 import forge.game.keyword.KeywordInterface;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.Trigger;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
@@ -187,7 +188,15 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
         if (srcCard == null) {
             return false;
         }
-        return matchesValid(o, valids, srcCard, srcCard.getController());
+
+        Player controller = srcCard.getController();
+        if (this instanceof Trigger) {
+            // check for delayed trigger
+            if (((Trigger) this).getSpawningAbility() != null) {
+                controller = ((Trigger) this).getSpawningAbility().getActivatingPlayer();
+            }
+        }
+        return matchesValid(o, valids, srcCard, controller);
     }
 
     public boolean matchesValid(final Object o, final String[] valids, final Card srcCard, final Player srcPlayer) {
