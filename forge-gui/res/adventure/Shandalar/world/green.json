@@ -115,8 +115,8 @@
 		"structureAtlasPath": "world/tilesets/structures.atlas",
 		"sourcePath": "world/tilesets/lake.png",
 		"maskPath": "world/tilesets/ring.png",
-		"height": 0.4,
-		"width": 0.4,
+		"height": 0.5,
+		"width": 0.5,
 		"periodicOutput": false,
 		"mappingInfo": [
 			{

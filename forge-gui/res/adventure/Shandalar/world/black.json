@@ -95,8 +95,8 @@
 		"structureAtlasPath": "world/tilesets/structures.atlas",
 		"sourcePath": "world/tilesets/swamp_forest.png",
 		"maskPath": "world/tilesets/ring.png",
-		"height": 0.4,
-		"width": 0.4,
+		"height": 0.5,
+		"width": 0.5,
 		"symmetry": 8,
 		"periodicOutput": false,
 		"mappingInfo": [

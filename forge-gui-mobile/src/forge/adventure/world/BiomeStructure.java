@@ -18,6 +18,7 @@ public class BiomeStructure {
     boolean init=false;
     private TextureAtlas structureAtlas;
     public ColorMap image;
+    private final static int MAXIMUM_WAVEFUNCTIONSIZE=50;
 
     public BiomeStructure(BiomeStructureData data,long seed,int width,int height)
     {
@@ -59,49 +60,61 @@ public class BiomeStructure {
         long currentTime = System.currentTimeMillis();
 
         init=true;
-        OverlappingModel model= new OverlappingModel(sourceImage,data.N, (int) (data.width* biomeWidth), (int) (data.height*biomeHeight),data.periodicInput,data.periodicOutput,data.symmetry,data.ground);
+        int targetWidth=(int) (data.width* biomeWidth);
+        int targetHeight=(int) (data.width* biomeWidth);
+        dataMap=new int[targetWidth][  targetHeight];
+        collisionMap=new boolean[targetWidth][ targetHeight];
+        ColorMap finalImage=new ColorMap(targetWidth, targetHeight);
         HashMap<Integer,Integer> colorIdMap=new HashMap<>();
         for(int i=0;i<data.mappingInfo.length;i++)
         {
             colorIdMap.put(Integer.parseInt(data.mappingInfo[i].color,16),i);
         }
-        boolean suc=false;
-        for(int i=0;i<10&&!suc;i++)
-            suc=model.run((int) seed+(i*5355),0);
-        currentTime= System.currentTimeMillis();
-        if(!suc)
+        for(int mx=0;mx<targetWidth;mx+=Math.min(targetWidth-mx,MAXIMUM_WAVEFUNCTIONSIZE))
         {
-            dataMap=new int[(int) (data.width* biomeWidth)][ (int) (data.height*biomeHeight)];
-            collisionMap=new boolean[(int) (data.width* biomeWidth)][ (int) (data.height*biomeHeight)];
-            for(int x=0;x<dataMap.length;x++)
-                for(int y=0;y<dataMap[x].length;y++)
-                    dataMap[x][y]=-1;
-            return;
-        }
-        image=model.graphics();
-        dataMap=new int[image.getWidth()][image.getHeight()];
-        collisionMap=new boolean[image.getWidth()][image.getHeight()];
-        for(int x=0;x<image.getWidth();x++)
-        {
-
-            for(int y=0;y<image.getHeight();y++)
+            for(int my=0;my<targetWidth;my+=Math.min(targetHeight-my,MAXIMUM_WAVEFUNCTIONSIZE))
             {
-                boolean isWhitePixel=maskImage!=null&&(maskImage.getColor((int) (x*maskImage.getWidth()/(float)image.getWidth()),(int)(y*(maskImage.getHeight()/(float)image.getHeight())) )).equals(Color.WHITE);
+                OverlappingModel model= new OverlappingModel(sourceImage,data.N,Math.min(targetWidth-mx,MAXIMUM_WAVEFUNCTIONSIZE), Math.min(targetHeight-my,MAXIMUM_WAVEFUNCTIONSIZE),data.periodicInput,data.periodicOutput,data.symmetry,data.ground);
 
-                if(isWhitePixel)
-                    image.setColor(x,y, Color.WHITE);
-                int rgb=Color.rgb888(image.getColor(x,y))  ;
-                if(isWhitePixel||!colorIdMap.containsKey(rgb))
+                boolean suc=false;
+                for(int i=0;i<10&&!suc;i++)
+                    suc=model.run((int) seed+(i*5355)+mx*my,0);
+                if(!suc)
                 {
-                    dataMap[x][y]=-1;
+                    for(int x=0;x<dataMap.length;x++)
+                        for(int y=0;y<dataMap[x].length;y++)
+                            dataMap[mx+x][my+y]=-1;
+                    return;
                 }
-                else
+                image=model.graphics();
+                for(int x=0;x<image.getWidth();x++)
                 {
-                    dataMap[x][y]=colorIdMap.get(rgb);
-                    collisionMap[x][y]=data.mappingInfo[colorIdMap.get(rgb)].collision;
+
+                    for(int y=0;y<image.getHeight();y++)
+                    {
+                        boolean isWhitePixel=maskImage!=null&&(maskImage.getColor((int) ((mx+x)*maskImage.getWidth()/(float)targetWidth),(int)((my+y)*(maskImage.getHeight()/(float)targetHeight)) )).equals(Color.WHITE);
+
+                        if(isWhitePixel)
+                            finalImage.setColor(mx+x,my+y, Color.WHITE);
+                        else
+                            finalImage.setColor(mx+x,my+y, image.getColor(x,y));
+                        int rgb=Color.rgb888(image.getColor(x,y))  ;
+                        if(isWhitePixel||!colorIdMap.containsKey(rgb))
+                        {
+                            dataMap[mx+x][my+y]=-1;
+                        }
+                        else
+                        {
+                            dataMap[mx+x][my+y]=colorIdMap.get(rgb);
+                            collisionMap[mx+x][my+y]=data.mappingInfo[colorIdMap.get(rgb)].collision;
+                        }
+                    }
                 }
+
             }
+            image=finalImage;
         }
+
 
     }
     public void initialize() {

@@ -120,8 +120,8 @@
 		"structureAtlasPath": "world/tilesets/structures.atlas",
 		"sourcePath": "world/tilesets/hole.png",
 		"maskPath": "world/tilesets/ring.png",
-		"height": 0.3,
-		"width": 0.3,
+		"height": 0.5,
+		"width": 0.5,
 		"symmetry": 8,
 		"periodicOutput": false,
 		"mappingInfo": [

@@ -225,7 +225,16 @@ public class NewGameScene extends UIScene {
 
         if(Forge.createNewAdventureMap)
         {
-            start();
+            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
+            WorldSave.generateNewWorld(selectedName.getText(),
+                    gender.getCurrentIndex() == 0,
+                    race.getCurrentIndex(),
+                    avatarIndex,
+                    deck.getCurrentIndex(),
+                    Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
+                    fantasyMode, easyMode, deck.getText(), 0);
+            GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
+            Forge.switchScene(SceneType.GameScene.instance);
         }
     }
 
