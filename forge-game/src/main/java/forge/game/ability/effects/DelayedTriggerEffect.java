@@ -11,7 +11,6 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
@@ -46,13 +45,8 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
             mapParams.remove("SpellDescription");
         }
 
-        // in case the card moved before the delayed trigger can be created, need to check the latest card state for right timestamp
-        Card gameCard = game.getCardState(host);
-        Card lki = CardUtil.getLKICopy(gameCard);
-        lki.clearControllers();
-        lki.setOwner(sa.getActivatingPlayer());
-        final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, lki, sa.isIntrinsic(), null);
-        delTrig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
+        final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, host, sa.isIntrinsic(), null);
+        delTrig.setSpawningAbility(sa.copy(host, sa.getActivatingPlayer(), true));
         delTrig.setActiveZone(null);
 
         if (sa.hasParam("RememberObjects")) {
@@ -76,7 +70,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasAdditionalAbility("Execute")) {
-            SpellAbility overridingSA = sa.getAdditionalAbility("Execute").copy(lki, sa.getActivatingPlayer(), false);
+            SpellAbility overridingSA = sa.getAdditionalAbility("Execute").copy(host, sa.getActivatingPlayer(), false);
             // need to reset the parent, additionalAbility does set it to this
             if (overridingSA instanceof AbilitySub) {
                 ((AbilitySub)overridingSA).setParent(null);
