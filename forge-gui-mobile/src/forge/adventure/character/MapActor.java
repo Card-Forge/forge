@@ -55,9 +55,8 @@ public class MapActor extends Actor {
     }
     @Override
     protected void positionChanged() {
-
-        updateBoundingRect();
         super.positionChanged();
+        updateBoundingRect();
     }
 
     @Override

@@ -11,10 +11,13 @@ public class EnemyEdit extends FormPanel {
     EnemyData currentData;
     JTextField nameField=new JTextField();
     JTextField colorField=new JTextField();
-    JSpinner lifeFiled= new JSpinner(new SpinnerNumberModel(0, 0, 1000, 1));
-    JSpinner spawnRate= new JSpinner(new SpinnerNumberModel(0.0, 0., 1, 0.1));
-    JSpinner difficulty= new JSpinner(new SpinnerNumberModel(0.0, 0., 1, 0.1));
-    JSpinner speed= new JSpinner(new SpinnerNumberModel(0.0, 0., 100., 1.0));
+    JTextField ai=new JTextField();
+    JCheckBox flying=new JCheckBox();
+    JCheckBox boss=new JCheckBox();
+    FloatSpinner lifeFiled= new FloatSpinner(0, 1000, 1);
+    FloatSpinner spawnRate= new FloatSpinner(  0.f, 1, 0.1f);
+    FloatSpinner difficulty= new FloatSpinner(  0.f, 1, 0.1f);
+    FloatSpinner speed= new FloatSpinner( 0.f, 100.f, 1.0f);
     FilePicker deck=new FilePicker(new String[]{"dck","json"});
     FilePicker atlas=new FilePicker(new String[]{"atlas"});
     JTextField equipment=new JTextField();
@@ -36,13 +39,23 @@ public class EnemyEdit extends FormPanel {
         center.add("Sprite:",atlas);
         center.add("Equipment:",equipment);
         center.add("Colors:",colorField);
+
+        center.add("ai:",ai);
+        center.add("flying:",flying);
+        center.add("boss:",boss);
+
+
+        add(preview);
         add(center);
         add(rewards);
-        add(preview);
 
         equipment.getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
         atlas.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
         colorField.getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
+        ai.getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
+        flying.addChangeListener(e -> EnemyEdit.this.updateEnemy());
+        boss.addChangeListener(e -> EnemyEdit.this.updateEnemy());
+
         nameField.getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
         deck.getEdit().getDocument().addDocumentListener(new DocumentChangeListener(() -> EnemyEdit.this.updateEnemy()));
         lifeFiled.addChangeListener(e -> EnemyEdit.this.updateEnemy());
@@ -59,6 +72,9 @@ public class EnemyEdit extends FormPanel {
             return;
         currentData.name=nameField.getText();
         currentData.colors=colorField.getText();
+        currentData.ai=ai.getText();
+        currentData.flying=flying.isSelected();
+        currentData.boss=boss.isSelected();
         currentData.life= (int) lifeFiled.getValue();
         currentData.sprite= atlas.getEdit().getText();
         if(equipment.getText().isEmpty())
@@ -88,6 +104,9 @@ public class EnemyEdit extends FormPanel {
         updating=true;
         nameField.setText(currentData.name);
         colorField.setText(currentData.colors);
+        ai.setText(currentData.ai);
+        boss.setSelected(currentData.boss);
+        flying.setSelected(currentData.flying);
         lifeFiled.setValue(currentData.life);
         atlas.getEdit().setText(currentData.sprite);
         if(currentData.equipment!=null)

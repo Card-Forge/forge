@@ -82,7 +82,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 enemyMoveVector.setLength(mob.speed()*delta);
                 tempBoundingRect.set(mob.getX()+ enemyMoveVector.x,mob.getY()+ enemyMoveVector.y,mob.getWidth(),mob.getHeight()*mob.getCollisionHeight());
 
-                if(WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if direct path is not possible
+                if(!mob.getData().flying && WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if direct path is not possible
                 {
                     tempBoundingRect.set(mob.getX()+ enemyMoveVector.x,mob.getY(),mob.getWidth(),mob.getHeight());
                     if(WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if only x path is not possible
@@ -238,7 +238,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 boolean enemyYIsBigger=sprite.getY()>player.getY();
                 sprite.setX(player.getX() + spawnPos.x+(i*sprite.getWidth()*(enemyXIsBigger?1:-1)));//maybe find a better way to get spawn points
                 sprite.setY(player.getY() + spawnPos.y+(i*sprite.getHeight()*(enemyYIsBigger?1:-1)));
-                if(!WorldSave.getCurrentSave().getWorld().collidingTile(sprite.boundingRect()))
+                if(sprite.getData().flying || !WorldSave.getCurrentSave().getWorld().collidingTile(sprite.boundingRect()))
                 {
                     enemies.add(Pair.of(globalTimer,sprite));
                     foregroundSprites.addActor(sprite);

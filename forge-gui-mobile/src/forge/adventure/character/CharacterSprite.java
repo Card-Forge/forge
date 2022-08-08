@@ -56,8 +56,14 @@ public class CharacterSprite extends MapActor {
                     anim = atlas.createSprites(stand.toString());
                 else
                     anim = atlas.createSprites(stand.toString() + dir.toString());
+
                 if (anim.size != 0) {
                     dirs.put(dir, new Animation<>(0.2f, anim));
+                    if(getWidth()==0.0)//init size onload
+                    {
+                        setWidth(anim.first().getWidth());
+                        setHeight(anim.first().getHeight());
+                    }
                 }
             }
             animations.put(stand, dirs);

@@ -40,7 +40,7 @@ public class SwingAtlasPreview extends Box {
         setSpritePath(sprite,null);
     }
     public void setSpritePath(String sprite,String name) {
-        if(this.sprite==null||name==null||sprite==null||(this.sprite.equals(sprite)&&(spriteName==null&&spriteName.equals(name))))
+        if(this.sprite==null||sprite==null||(this.sprite.equals(sprite)&&(spriteName!=null&&name!=null&&spriteName.equals(name))))
             return;
         removeAll();
         counter=0;
