@@ -67,6 +67,7 @@ public class AddPhaseEffect extends SpellAbilityEffect {
             SpellAbility overridingSA = AbilityFactory.getAbility(sa.getSVar(sa.getParam("ExtraPhaseDelayedTriggerExcute")), sa.getHostCard());
             overridingSA.setActivatingPlayer(sa.getActivatingPlayer());
             delTrig.setOverridingAbility(overridingSA);
+            delTrig.setSpawningAbility(sa.copy(sa.getHostCard(), sa.getActivatingPlayer(), true));
             extraPhase.addTrigger(delTrig);
         }
     }

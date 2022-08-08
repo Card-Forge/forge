@@ -541,7 +541,7 @@ public class TriggerHandler {
                 sa.changeText();
             }
         } else {
-            Player controller = delayedTriggers.contains(regtrig) ? sa.getActivatingPlayer() : host.getController();
+            Player controller = regtrig.getSpawningAbility() != null ? regtrig.getSpawningAbility().getActivatingPlayer() : host.getController();
             // need to copy the SA because of TriggeringObjects
             sa = sa.copy(host, controller, false);
         }
