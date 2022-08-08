@@ -373,17 +373,22 @@ public class Forge implements ApplicationListener {
                     }
                     //selection transition
                     setTransitionScreen(new TransitionScreen(() -> {
-                        if (selector.equals("Classic")) {
-                            openHomeDefault();
-                            clearSplashScreen();
-                        } else if (selector.equals("Adventure")) {
+                        if (createNewAdventureMap) {
                             openAdventure();
                             clearSplashScreen();
-                        } else if (splashScreen != null) {
-                            splashScreen.setShowModeSelector(true);
-                        } else {//default mode in case splashscreen is null at some point as seen on resume..
-                            openHomeDefault();
-                            clearSplashScreen();
+                        } else {
+                            if (selector.equals("Classic")) {
+                                openHomeDefault();
+                                clearSplashScreen();
+                            } else if (selector.equals("Adventure")) {
+                                openAdventure();
+                                clearSplashScreen();
+                            } else if (splashScreen != null) {
+                                splashScreen.setShowModeSelector(true);
+                            } else {//default mode in case splashscreen is null at some point as seen on resume..
+                                openHomeDefault();
+                                clearSplashScreen();
+                            }
                         }
                         //start background music
                         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
