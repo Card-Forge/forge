@@ -5,4 +5,4 @@ A:SP$ ChangeZone | Cost$ 1 G G | Origin$ Graveyard | Destination$ Hand | TgtProm
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Creature | ConditionCompare$ EQ1 | StaticAbilities$ PerpetualP3P3 | ChosenName$ Giant Regrowth's Perpetual Effect | Duration$ Permanent
 SVar:PerpetualP3P3:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 3 | AddToughness$ 3 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually gets +3/+3.
 DeckHas:Ability$Graveyard
-Oracle:Return target card from your graveyard to your hand. If it’s a creature card, it perpetually gets +3/+3.
+Oracle:Return target card from your graveyard to your hand. If it's a creature card, it perpetually gets +3/+3.

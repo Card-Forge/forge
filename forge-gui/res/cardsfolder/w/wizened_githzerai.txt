@@ -1,8 +1,0 @@
-Name:Wizened Githzerai
-ManaCost:1 U
-Types:Creature Gith Monk
-PT:2/1
-T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.Self | ValidBlocker$ Creature | Execute$ TrigEffect | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, that creature perpetually gets -2/-0.
-SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredBlockerLKICopy | Defined$ TriggeredBlocker | StaticAbilities$ PerpetualDebuff | IsCurse$ True | Name$ Wizened Githzerais Perpetual Effect | Duration$ Permanent
-SVar:PerpetualDebuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ -2 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets -2/-0.
-Oracle: Psionic Adept — Whenever Wizened Githzerai becomes blocked by a creature, that creature perpetually gets -2/-0.
