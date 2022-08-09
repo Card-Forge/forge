@@ -6,4 +6,8 @@ Type=Promo
 ScryfallCode=PLG22
 
 [cards]
+1 M Moraug, Fury of Akoum @Rudy Siswanto
 1 R Sol Ring @Mike Bierek
+2 M Ox of Agonas @Lie Setiawan
+3 M Angrath, the Flame-Chained @Song Qijin
+4 R Tahngarth, First Mate @Song Qijin
