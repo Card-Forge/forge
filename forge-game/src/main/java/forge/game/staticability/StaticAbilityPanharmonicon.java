@@ -107,6 +107,19 @@ public class StaticAbilityPanharmonicon {
             if (table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), ZoneType.smartValueOf(destination), stAb.getParam("ValidCause"), card, stAb).isEmpty()) {
                 return false;
             }
+        } else if (trigMode.equals(TriggerType.Attacks)) {
+            if (stAb.hasParam("ValidCause")) {
+                if (!stAb.matchesValidParam("ValidCause", runParams.get(AbilityKey.Attacker))) {
+                    return false;
+                }
+            }
+        } else if (trigMode.equals(TriggerType.AttackersDeclared)
+                || trigMode.equals(TriggerType.AttackersDeclaredOneTarget)) {
+            if (stAb.hasParam("ValidCause")) {
+                if (!stAb.matchesValidParam("ValidCause", runParams.get(AbilityKey.Attackers))) {
+                    return false;
+                }
+            }
         } else if (trigMode.equals(TriggerType.SpellCastOrCopy)
                 || trigMode.equals(TriggerType.SpellCast) || trigMode.equals(TriggerType.SpellCopy)) {
             // Check if the spell cast and the caster match
