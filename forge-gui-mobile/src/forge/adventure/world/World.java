@@ -277,7 +277,7 @@ public class World implements Disposable, SaveFileContent {
 
     private long measureGenerationTime(String msg, long lastTime) {
         long currentTime = System.currentTimeMillis();
-        System.out.print("\n" + msg + " :\t\t" + ((currentTime - lastTime) / 1000f) + " s");
+        System.out.print("\n" + msg + " :\t\t" + ((currentTime - lastTime) / 1000f) + " s\n");
         return currentTime;
     }
 

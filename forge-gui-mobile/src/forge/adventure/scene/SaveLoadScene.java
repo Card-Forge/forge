@@ -125,31 +125,27 @@ public class SaveLoadScene extends UIScene {
                 break;
             case Load:
                 if (WorldSave.load(currentSlot)) {
-                    Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
-                        @Override
-                        public void run() {
-                            Forge.switchScene(SceneType.GameScene.instance);
-                        }
-                    }, null, false, true));
+                    Forge.setTransitionScreen(new TransitionScreen(() -> Forge.switchScene(SceneType.GameScene.instance), null, false, true));
                 } else {
                     Forge.clearTransitionScreen();
                 }
                 break;
             case NewGamePlus:
-                if (WorldSave.load(currentSlot)) {
-                    WorldSave.getCurrentSave().clearChanges();
-                    WorldSave.getCurrentSave().getWorld().generateNew(0);
-                    if (difficulty != null)
-                        Current.player().updateDifficulty(Config.instance().getConfigData().difficulties[difficulty.getSelectedIndex()]);
-                    Current.player().setWorldPosY((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosY * WorldSave.getCurrentSave().getWorld().getData().height * WorldSave.getCurrentSave().getWorld().getTileSize()));
-                    Current.player().setWorldPosX((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosX * WorldSave.getCurrentSave().getWorld().getData().width * WorldSave.getCurrentSave().getWorld().getTileSize()));
-                    Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
-                        @Override
-                        public void run() {
+                try {
+                    Forge.setTransitionScreen(new TransitionScreen(() -> {
+                        if (WorldSave.load(currentSlot)) {
+                            WorldSave.getCurrentSave().clearChanges();
+                            WorldSave.getCurrentSave().getWorld().generateNew(0);
+                            if (difficulty != null)
+                                Current.player().updateDifficulty(Config.instance().getConfigData().difficulties[difficulty.getSelectedIndex()]);
+                            Current.player().setWorldPosY((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosY * WorldSave.getCurrentSave().getWorld().getData().height * WorldSave.getCurrentSave().getWorld().getTileSize()));
+                            Current.player().setWorldPosX((int) (WorldSave.getCurrentSave().getWorld().getData().playerStartPosX * WorldSave.getCurrentSave().getWorld().getData().width * WorldSave.getCurrentSave().getWorld().getTileSize()));
                             Forge.switchScene(SceneType.GameScene.instance);
+                        } else {
+                            Forge.clearTransitionScreen();
                         }
                     }, null, false, true));
-                } else {
+                } catch (Exception e) {
                     Forge.clearTransitionScreen();
                 }
                 break;
@@ -286,30 +282,17 @@ public class SaveLoadScene extends UIScene {
         }
         ;
 
-        difficulty = Controls.newComboBox(diffList, null, new Function<Object, Void>() {
-            @Override
-            public Void apply(Object o) {
-                //DifficultyData difficulty1 = Config.instance().getConfigData().difficulties[difficulty.getSelectedIndex()];
-                return null;
-            }
+        difficulty = Controls.newComboBox(diffList, null, o -> {
+            //DifficultyData difficulty1 = Config.instance().getConfigData().difficulties[difficulty.getSelectedIndex()];
+            return null;
         });
         dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2).pad(2, 15, 2, 15);
         dialog.getButtonTable().row();
         dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName") + ": ")).align(Align.left).pad(2, 15, 2, 2);
         dialog.getButtonTable().add(textInput).fillX().expandX().padRight(15);
         dialog.getButtonTable().row();
-        dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblSave"), new Runnable() {
-            @Override
-            public void run() {
-                SaveLoadScene.this.save();
-            }
-        })).align(Align.left).padLeft(15);
-        dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), new Runnable() {
-            @Override
-            public void run() {
-                SaveLoadScene.this.saveAbort();
-            }
-        })).align(Align.right).padRight(15);
+        dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblSave"), () -> SaveLoadScene.this.save())).align(Align.left).padLeft(15);
+        dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), () -> SaveLoadScene.this.saveAbort())).align(Align.right).padRight(15);
 
         //makes dialog hidden immediately when you open saveload scene..
         dialog.getColor().a = 0;
@@ -326,20 +309,10 @@ public class SaveLoadScene extends UIScene {
 
         saveLoadButton = ui.findActor("save");
         saveLoadButton.getLabel().setText(Forge.getLocalizer().getMessage("lblSave"));
-        ui.onButtonPress("save", new Runnable() {
-            @Override
-            public void run() {
-                SaveLoadScene.this.loadSave();
-            }
-        });
+        ui.onButtonPress("save", () -> SaveLoadScene.this.loadSave());
         back = ui.findActor("return");
         back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
-        ui.onButtonPress("return", new Runnable() {
-            @Override
-            public void run() {
-                SaveLoadScene.this.back();
-            }
-        });
+        ui.onButtonPress("return", () -> SaveLoadScene.this.back());
 
         defColor = saveLoadButton.getColor();
 
@@ -348,12 +321,13 @@ public class SaveLoadScene extends UIScene {
         ui.addActor(difficulty);
         difficulty.setSelectedIndex(1);
         difficulty.setAlignment(Align.center);
+        difficulty.getStyle().fontColor = Color.GOLD;
         if (Forge.isLandscapeMode()) {
             difficulty.setX(280);
-            difficulty.setY(230);
+            difficulty.setY(220);
         } else {
             difficulty.setX(190);
-            difficulty.setY(346);
+            difficulty.setY(336);
         }
     }
 }
