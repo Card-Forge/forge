@@ -110,7 +110,7 @@ public class NewGameScene extends UIScene {
             gender.setCurrentIndex(rand.nextInt());
             colorId.setCurrentIndex(rand.nextInt());
             race.setCurrentIndex(rand.nextInt());
-            ui.onButtonPress("back", () -> back());
+            ui.onButtonPress("back", () -> NewGameScene.this.back());
             ui.onButtonPress("start", () -> NewGameScene.this.start());
             ui.onButtonPress("leftAvatar", () -> NewGameScene.this.leftAvatar());
             ui.onButtonPress("rightAvatar", () -> NewGameScene.this.rightAvatar());
