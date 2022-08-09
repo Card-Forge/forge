@@ -277,7 +277,7 @@ public class World implements Disposable, SaveFileContent {
 
     private long measureGenerationTime(String msg, long lastTime) {
         long currentTime = System.currentTimeMillis();
-        System.out.print("\n" + msg + " :\t\t" + ((currentTime - lastTime) / 1000f) + " s\n");
+        System.out.println(msg + " :\t\t" + ((currentTime - lastTime) / 1000f) + " s");
         return currentTime;
     }
 
@@ -675,7 +675,7 @@ public class World implements Disposable, SaveFileContent {
             biomeImage = pix;
             measureGenerationTime("sprites", currentTime[0]);
         });
-        System.out.print("\nGenerating world took :\t\t" + ((System.currentTimeMillis() - startTime) / 1000f) + " s\n");
+        System.out.println("Generating world took :\t\t" + ((System.currentTimeMillis() - startTime) / 1000f) + " s");
         WorldStage.getInstance().clearCache();
         ThreadUtil.getServicePool().shutdownNow();
         ThreadUtil.refreshServicePool();
