@@ -13,38 +13,29 @@
       "type": "Scroll",
       "name" : "scroll",
       "style": "paper",
-      "x": 10,
+      "x": 5,
       "y": 60,
       "width": 256,
-      "height": 318
+      "height": 323
     },
     {
       "type": "Label",
       "name" : "titleL",
-      "text": "Create a Character",
+      "text": "{lblCreateACharacter}",
       "width": 128,
       "height": 32,
+      "scale": 2,
       "fontSize": 1.5,   
       "fontColor": "0x000000FF",
-      "x": 16,
+      "x": 30,
       "y": 66
-    },
-    {
-      "type": "Label",
-      "name" : "avatarL",
-      "text": "Avatar:",
-      "width": 128,
-      "height": 32,
-      "fontColor": "0x000000FF",
-      "x": 16,
-      "y": 108
-    },
+    } ,
     {
       "type": "Label",
       "name" : "nameL",
-      "text": "Name:",
+      "text": "{lblName}:",
       "width": 128,
-      "height": 32,
+      "height": 24,
       "fontColor": "0x000000FF",
       "x": 16,
       "y": 140
@@ -52,42 +43,52 @@
     {
       "type": "Label",
       "name" : "raceL",
-      "text": "Race:",
+      "text": "{lblRace}:",
       "width": 128,
-      "height": 32,
+      "height": 24,
       "fontColor": "0x000000FF",
       "x": 16,
-      "y": 174
+      "yOffset": 8
     },
     {
       "type": "Label",
       "name" : "genderL",
-      "text": "Gender:",
+      "text": "{lblGender}:",
       "width": 128,
-      "height": 32,
+      "height": 24,
       "fontColor": "0x000000FF",
       "x": 16,
-      "y": 204
+      "yOffset": 8
     },
     {
       "type": "Label",
       "name" : "difficultyL",
-      "text": "Difficulty:",
+      "text": "{lblDifficulty}:",
       "width": 128,
-      "height": 32,
+      "height": 24,
       "fontColor": "0x000000FF",
       "x": 16,
-      "y": 236
+      "yOffset": 8
     },
     {
       "type": "Label",
-      "name" : "deckL",
-      "text": "Deck:",
+      "name" : "colorIdL",
+      "text": "{lblColors}:",
       "width": 128,
-      "height": 32,
+      "height": 24,
       "font" : "black",
       "x": 16,
-      "y": 268
+      "yOffset": 8
+    },
+    {
+      "type": "Label",
+      "name" : "modeL",
+      "text": "{lblMode}",
+      "width": 128,
+      "height": 24,
+      "font" : "black",
+      "x": 16,
+      "yOffset": 8
     },
     {
       "type": "ImageButton",
@@ -118,60 +119,68 @@
     {
       "type": "TextField",
       "name": "nameField",
-      "width": 165,
-      "height": 28,
+      "width": 160,
+      "height": 24,
       "x": 96,
       "y": 146
     },
     {
       "type": "Selector",
       "name": "race",
-      "width": 170,
-      "height": 28,
+      "width": 168,
+      "height": 24,
       "x": 96,
-      "y": 178
+      "yOffset": 8
     },
     {
       "type": "Selector",
       "name": "gender",
-      "width": 170,
-      "height": 28,
+      "width": 168,
+      "height": 24,
       "x": 96,
-      "y": 210
+      "yOffset": 8
     },
     {
       "type": "Selector",
       "name": "difficulty",
-      "width": 170,
-      "height": 28,
+      "width": 168,
+      "height": 24,
       "x": 96,
-      "y": 242
+      "yOffset": 8
     },
     {
       "type": "Selector",
-      "name": "deck",
-      "width": 170,
-      "height": 28,
+      "name": "colorId",
+      "width": 168,
+      "height": 24,
       "x": 96,
-      "y": 274
+      "yOffset": 8
+    },
+    {
+      "type": "Selector",
+      "name": "mode",
+      "width": 168,
+      "height": 24,
+      "x": 96,
+      "yOffset": 8
     },
     {
       "type": "TextButton",
       "name": "back",
-      "text": "Back",
+      "text": "{lblBack}",
       "width": 64,
       "height": 28,
       "x": 32,
-      "y": 320
+      "y": 344
     },
     {
       "type": "TextButton",
       "name": "start",
-      "text": "Start",
+      "text": "{lblStart}",
       "width": 64,
-      "height": 32,
+      "height": 28,
       "x": 165,
-      "y": 320
+      "y": 344
     }
   ]
 }

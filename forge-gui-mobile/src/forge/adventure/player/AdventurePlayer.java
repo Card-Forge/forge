@@ -11,6 +11,7 @@ import forge.adventure.data.HeroListData;
 import forge.adventure.data.ItemData;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
+import forge.card.ColorSet;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
@@ -38,7 +39,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private int heroRace;
     private int avatarIndex;
     private boolean isFemale;
-    private ColorID colorIdentity = ColorID.COLORLESS;
+    private ColorSet colorIdentity = ColorSet.ALL_COLORS;
 
     // Deck data
     private Deck deck;
@@ -106,7 +107,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final CardPool cards=new CardPool();
     private final ItemPool<InventoryItem> newCards=new ItemPool<>(InventoryItem.class);
 
-    public void create(String n, int startingColorIdentity, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy, DifficultyData difficultyData) {
+    public void create(String n, ColorSet startingColorIdentity, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy, DifficultyData difficultyData) {
         clear();
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
 
@@ -131,7 +132,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         if (fantasyMode){ //Set a random ColorID in fantasy mode.
            setColorIdentity(MyRandom.getRandom().nextInt(5)); // MyRandom to not interfere with the unstable RNG.
-        } else setColorIdentity(startingColorIdentity + 1); // +1 because index 0 is colorless.
+        }
+        else
+            this.colorIdentity=startingColorIdentity;
 
         life = maxLife = difficultyData.startingLife;
 
@@ -177,26 +180,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public Collection<String> getEquippedItems() { return equippedItems.values(); }
     public ItemPool<InventoryItem> getNewCards() { return newCards;               }
 
-    public String getColorIdentity(){
-        switch (colorIdentity){
-            case BLUE     : return "U";
-            case GREEN    : return "G";
-            case RED      : return "R";
-            case BLACK    : return "B";
-            case WHITE    : return "W";
-            case COLORLESS: default: return "C"; //You are either Ugin or an Eldrazi. Nice.
-        }
+    public byte getColorIdentity(){
+        return colorIdentity.getColor();
     }
 
     public String getColorIdentityLong(){
-        switch (colorIdentity){
-            case BLUE     : return "blue";
-            case GREEN    : return "green";
-            case RED      : return "red";
-            case BLACK    : return "black";
-            case WHITE    : return "white";
-            case COLORLESS: default: return "colorless";
-        }
+        return colorIdentity.toString();
     }
 
 
@@ -209,25 +198,11 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void setColorIdentity(String C){
-        switch (C.toUpperCase()){
-            case "B": this.colorIdentity = ColorID.BLACK; break;
-            case "G": this.colorIdentity = ColorID.GREEN; break;
-            case "R": this.colorIdentity = ColorID.RED; break;
-            case "U": this.colorIdentity = ColorID.BLUE; break;
-            case "W": this.colorIdentity = ColorID.WHITE; break;
-            case "C": default: this.colorIdentity = ColorID.COLORLESS; break;
-        }
+        colorIdentity= ColorSet.fromNames(C.toCharArray());
     }
 
     public void setColorIdentity(int C){
-        switch (C){
-            case 2: this.colorIdentity = ColorID.BLACK; break;
-            case 5: this.colorIdentity = ColorID.GREEN; break;
-            case 4: this.colorIdentity = ColorID.RED; break;
-            case 3: this.colorIdentity = ColorID.BLUE; break;
-            case 1: this.colorIdentity = ColorID.WHITE; break;
-            case 0: default: this.colorIdentity = ColorID.COLORLESS; break;
-        }
+        colorIdentity= ColorSet.fromMask(C);
     }
 
 
@@ -250,8 +225,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         heroRace    = data.readInt("heroRace");
         avatarIndex = data.readInt("avatarIndex");
         isFemale    = data.readBool("isFemale");
-        if(data.containsKey("colorIdentity")) setColorIdentity(data.readString("colorIdentity"));
-        else colorIdentity = ColorID.COLORLESS;
+        if(data.containsKey("colorIdentity"))
+            setColorIdentity(data.readString("colorIdentity"));
+        else
+            colorIdentity = ColorSet.ALL_COLORS;
 
         gold        = data.readInt("gold");
         maxLife     = data.readInt("maxLife");
@@ -342,7 +319,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("heroRace",heroRace);
         data.store("avatarIndex",avatarIndex);
         data.store("isFemale",isFemale);
-        data.store("colorIdentity", getColorIdentity());
+        data.store("colorIdentity", colorIdentity.getColor());
 
         data.store("fantasyMode",fantasyMode);
         data.store("announceFantasy",announceFantasy);
@@ -466,9 +443,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         onLifeTotalChangeList.emit();
     }
     public void defeated() {
-        int percentLoss = 10;
-        gold=gold-(gold*percentLoss/100);
-        life=Math.max(1,(int)(life-(maxLife*0.2f)));
+        gold= (int) (gold-(gold*difficultyData.goldLoss));
+        life=Math.max(1,(int)(life-(maxLife*difficultyData.lifeLoss)));
         onLifeTotalChangeList.emit();
         onGoldChangeList.emit();
     }

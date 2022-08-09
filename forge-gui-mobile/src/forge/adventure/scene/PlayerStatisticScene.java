@@ -17,6 +17,7 @@ import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
+import forge.card.MagicColor;
 import forge.player.GamePlayerUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -59,16 +60,16 @@ public class PlayerStatisticScene extends UIScene {
         Forge.switchToLast();
         return true;
     }
-    private TextureRegion getColorFrame(String C){
+    private TextureRegion getColorFrame(byte C){
         int x, y;
         switch(C){
-            case "B": { x = 0 ; y = 0 ; break; }
-            case "G": { x = 64; y = 0 ; break; }
-            case "R": { x = 0 ; y = 32; break; }
-            case "U": { x = 32; y = 32; break; }
-            case "W": { x = 64; y = 32; break; }
+            case MagicColor.BLACK: { x = 0 ; y = 0 ; break; }
+            case MagicColor.GREEN: { x = 64; y = 0 ; break; }
+            case MagicColor.RED: { x = 0 ; y = 32; break; }
+            case MagicColor.BLUE:  { x = 32; y = 32; break; }
+            case MagicColor.WHITE: { x = 64; y = 32; break; }
             default:
-            case "C": { x = 32; y = 0 ; break; }
+            case MagicColor.COLORLESS: { x = 32; y = 0 ; break; }
         }
         TextureRegion result = new TextureRegion(colorFrames, x, y, 32, 32);
         return result;

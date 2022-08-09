@@ -3,14 +3,9 @@
   "screenHeight": 270,
   "skin": "skin/ui_skin.json",
   "playerBaseSpeed": 32,
-  "minDeckSize": 40,
-  "starterDecks": [
-    "decks/starter/white.json",
-    "decks/starter/black.json",
-    "decks/starter/blue.json",
-    "decks/starter/red.json",
-    "decks/starter/green.json"
-  ],
+  "minDeckSize": 40,         
+  "colorIds":["W","U","B","R","G"],  
+  "colorIdNames":["{lblWhite}","{lblBlue}","{lblBlack}","{lblRed}","{lblGreen}"], 
   "restrictedCards": [
     "Black Lotus",
     "Mox Emerald",
@@ -48,8 +43,24 @@
       "startingLife": 16,
       "staringMoney": 500,
       "enemyLifeFactor": 0.8,
-      "spawnRank": 0,
-      "sellFactor": 0.6,
+      "spawnRank": 0,          
+      "goldLoss": 0.02,          
+      "lifeLoss": 0.1,  
+      "sellFactor": 0.6,        
+      "starterDecks": {
+        "W":"decks/starter/white_e.json",
+        "B":"decks/starter/black_e.json",
+        "U":"decks/starter/blue_e.json",
+        "R":"decks/starter/red_e.json",
+        "G":"decks/starter/green_e.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/Adventure - Low White.dck",
+        "B":"decks/starter/Adventure - Low Black.dck",
+        "U":"decks/starter/Adventure - Low Blue.dck",
+        "R":"decks/starter/Adventure - Low Red.dck",
+        "G":"decks/starter/Adventure - Low Green.dck"
+      },
       "startItems": [
         "Manasight Amulet",
         "Leather Boots"
@@ -60,8 +71,24 @@
       "staringMoney": 250,
       "startingDifficulty": true,
       "enemyLifeFactor": 1.0,
-      "spawnRank": 1,
-      "sellFactor": 0.5,
+      "spawnRank": 1,                   
+      "goldLoss": 0.1,             
+      "lifeLoss": 0.2,  
+      "sellFactor": 0.5,      
+      "starterDecks": {
+        "W":"decks/starter/white_n.json",
+        "B":"decks/starter/black_n.json",
+        "U":"decks/starter/blue_n.json",
+        "R":"decks/starter/red_n.json",
+        "G":"decks/starter/green_n.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/Adventure - Low Azorius.dck",
+        "B":"decks/starter/Adventure - Low Rakdos.dck",
+        "U":"decks/starter/Adventure - Low Dimir.dck",
+        "R":"decks/starter/Adventure - Low Gruul.dck",
+        "G":"decks/starter/Adventure - Low Selesnya.dck"
+      },
       "startItems": [
         "Leather Boots"
       ]
@@ -70,8 +97,24 @@
       "startingLife": 8,
       "staringMoney": 125,
       "enemyLifeFactor": 1.5,
-      "spawnRank": 2,
-      "sellFactor": 0.25
+      "spawnRank": 2,         
+      "goldLoss": 0.5,            
+      "lifeLoss": 0.3,  
+      "sellFactor": 0.25,      
+      "starterDecks": {
+        "W":"decks/starter/white_h.json",
+        "B":"decks/starter/black_h.json",
+        "U":"decks/starter/blue_h.json",
+        "R":"decks/starter/red_h.json",
+        "G":"decks/starter/green_h.json"
+      },
+      "constructedStarterDecks": {
+        "W":"decks/starter/Adventure - Low Orzhov.dck",
+        "B":"decks/starter/Adventure - Low Golgari.dck",
+        "U":"decks/starter/Adventure - Low Izzet.dck",
+        "R":"decks/starter/Adventure - Low Boros.dck",
+        "G":"decks/starter/Adventure - Low Simic.dck"
+      }
     }
   ]
 }

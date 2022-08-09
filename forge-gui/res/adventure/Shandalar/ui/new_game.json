@@ -21,73 +21,74 @@
     {
       "type": "Label",
       "name" : "titleL",
-      "text": "Create a Character",
+      "text": "{lblCreateACharacter}",
       "width": 128,
-      "height": 32,
+      "height": 16,
+      "scale": 2,
       "fontSize": 1.5,   
       "fontColor": "0x000000FF",
-      "x": 104,
+      "x": 76,
       "y": 16
-    },
-    {
-      "type": "Label",
-      "name" : "avatarL",
-      "text": "Avatar:",
-      "width": 128,
-      "height": 32,
-      "font" : "black",
-      "x": 75,
-      "y": 58
-    },
+    } ,
     {
       "type": "Label",
       "name" : "nameL",
-      "text": "Name:",
+      "text": "{lblName}:",
       "width": 128,
-      "height": 32,
+      "height": 16,
       "font" : "black",
       "x": 75,
-      "y": 90
+      "y": 96
     },
     {
       "type": "Label",
       "name" : "raceL",
-      "text": "Race:",
+      "text": "{lblRace}:",
       "width": 128,
-      "height": 32,
+      "height": 16,
       "font" : "black",
       "x": 75,
-      "y": 124
+      "yOffset": 8
     },
     {
       "type": "Label",
       "name" : "genderL",
-      "text": "Gender:",
+      "text": "{lblGender}:",
       "width": 128,
-      "height": 32,
+      "height": 16,
       "font" : "black",
       "x": 75,
-      "y": 154
+      "yOffset": 8
     },
     {
       "type": "Label",
       "name" : "difficultyL",
-      "text": "Difficulty:",
+      "text": "{lblDifficulty}:",
       "width": 128,
-      "height": 32,
+      "height": 16,
       "font" : "black",
       "x": 75,
-      "y": 186
+      "yOffset": 8
     },
     {
       "type": "Label",
-      "name" : "deckL",
-      "text": "Deck:",
+      "name" : "colorIdL",
+      "text": "{lblColors}:",
       "width": 128,
-      "height": 32,
+      "height": 16,
       "font" : "black",
       "x": 75,
-      "y": 218
+      "yOffset": 8
+    },
+    {
+      "type": "Label",
+      "name" : "modeL",
+      "text": "{lblMode}",
+      "width": 128,
+      "height": 16,
+      "font" : "black",
+      "x": 75,
+      "yOffset": 8
     },
     {
       "type": "ImageButton",
@@ -130,7 +131,7 @@
       "width": 112,
       "height": 16,
       "x": 164,
-      "y": 128
+      "yOffset": 8
     },
     {
       "type": "Selector",
@@ -138,7 +139,7 @@
       "width": 112,
       "height": 16,
       "x": 164,
-      "y": 160
+      "yOffset": 8
     },
     {
       "type": "Selector",
@@ -146,20 +147,28 @@
       "width": 112,
       "height": 16,
       "x": 164,
-      "y": 192
+      "yOffset": 8
     },
     {
       "type": "Selector",
-      "name": "deck",
+      "name": "colorId",
       "width": 112,
       "height": 16,
       "x": 164,
-      "y": 224
+      "yOffset": 8
+    },
+    {
+      "type": "Selector",
+      "name": "mode",
+      "width": 112,
+      "height": 16,
+      "x": 164,
+      "yOffset": 8
     },
     {
       "type": "TextButton",
       "name": "back",
-      "text": "Back",
+      "text": "{lblBack}",
       "width": 100,
       "height": 30,
       "x": 348,
@@ -168,7 +177,7 @@
     {
       "type": "TextButton",
       "name": "start",
-      "text": "Start",
+      "text": "{lblStart}",
       "width": 100,
       "height": 30,
       "x": 348,
