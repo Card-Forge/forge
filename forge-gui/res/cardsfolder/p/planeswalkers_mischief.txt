@@ -6,7 +6,7 @@ SVar:DBChangeZone:DB$ ChangeZoneAll | ChangeType$ Instant.IsRemembered,Sorcery.I
 SVar:DBEffect:DB$ Effect | StaticAbilities$ MischiefPlay | ExileOnMoved$ Exile | RememberObjects$ Remembered | Duration$ Permanent | SubAbility$ DBDelayedTrigger
 SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ MischiefReturn | IsPresent$ Card.IsRemembered | PresentZone$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next end step, if that card is still exiled, put it into your graveyard and create a Treasure token.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:MischiefPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered+OppOwn+nonLand | AffectedZone$ Exile | Description$ You may cast the exiled instant or sorcery card without paying its mana cost for as long as it remains exiled.
-SVar:MischiefReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand
+SVar:MischiefPlay:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | AffectedZone$ Exile | Description$ You may cast the exiled instant or sorcery card without paying its mana cost for as long as it remains exiled.
+SVar:MischiefReturn:DB$ ChangeZone | Defined$ RememberedLKI | Origin$ Exile | Destination$ Hand
 SVar:NonStackingEffect:True
 Oracle:{3}{U}: Target opponent reveals a card at random from their hand. If it's an instant or sorcery card, exile it. You may cast it without paying its mana cost for as long as it remains exiled. At the beginning of the next end step, if you haven't cast it, return it to its owner's hand. Activate only as a sorcery.
