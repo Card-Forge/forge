@@ -2,7 +2,7 @@ Name:Teyo, Aegis Adept
 ManaCost:2 W W
 Types:Legendary Planeswalker Teyo
 Loyalty:4
-A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | RememberObjects$ Targeted | StaticAbilities$ PerpetualStatic | Duration$ Permanent | SpellDescription$ Up to one target creature's base power perpetually becomes equal to its toughness. It perpetually gains "This creature can attack as though it didn't have defender."
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | Name$ Teyo, Aegis Adept's Perpetual Effect | RememberObjects$ Targeted | StaticAbilities$ PerpetualStatic | Duration$ Permanent | SpellDescription$ Up to one target creature's base power perpetually becomes equal to its toughness. It perpetually gains "This creature can attack as though it didn't have defender."
 SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | SetPower$ X | AddStaticAbility$ CanAttack | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature's base power perpetually becomes equal to its toughness. It perpetually gains "This creature can attack as though it didn't have defender."
 SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.Self | Description$ This creature can attack as though it didn't have defender.
 SVar:X:Remembered$CardToughness
