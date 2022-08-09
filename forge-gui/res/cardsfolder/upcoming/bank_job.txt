@@ -7,7 +7,7 @@ SVar:DBEffect:DB$ Effect | StaticAbilities$ MayCast | RememberObjects$ Remembere
 SVar:MayCast:Mode$ Continuous | Affected$ Card.IsRemembered+nonLand | MayPlay$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ You may cast that card this turn.
 SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigGrave | IsPresent$ Card.IsRemembered | PresentZone$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next end step, if that card is still exiled, put it into your graveyard and create a Treasure token.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:TrigGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Graveyard | SubAbility$ DBTreasure
+SVar:TrigGrave:DB$ ChangeZone | Defined$ RememberedLKI | Origin$ Exile | Destination$ Graveyard | SubAbility$ DBTreasure
 SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
 DeckHas:Ability$Sacrifice|Token & Type$Treasure|Artifact
 Oracle:At the beginning of your upkeep, exile the bottom creature card of your library. You may cast that card this turn. At the beginning of the next end step, if that card is still exiled, put it into your graveyard and create a Treasure token.
