@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Sorcery
 A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | AddKWs$ Haste | Untap$ True | SubAbility$ DBEffect | SpellDescription$ Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. It perpetually gains "This creature attacks each combat if able."
 SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ PerpetualAbility | Name$ Incessant Provocation's Perpetual Effect | Duration$ Permanent
-SVar:PerpetualAbility:Mode$ Continuous  | RememberObjects$ Targeted | Affected$ Creature.IsRemembered | AddStaticAbility$ PerpetualMustAttack | EffectZone$ Command | Duration$ Permanent | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains "This creature attacks each combat if able."
+SVar:PerpetualAbility:Mode$ Continuous | Affected$ Creature.IsRemembered | AddStaticAbility$ PerpetualMustAttack | EffectZone$ Command | Duration$ Permanent | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains "This creature attacks each combat if able."
 SVar:PerpetualMustAttack:Mode$ MustAttack | Affected$ Creature.IsRemembered
 Oracle: Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. It perpetually gains "This creature attacks each combat if able."
