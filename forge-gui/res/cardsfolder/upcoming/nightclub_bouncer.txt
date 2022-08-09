@@ -4,7 +4,7 @@ Types:Creature Human Rogue
 PT:2/3
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield,return target nonland permanent an opponent controls to its owner's hand. It perpetually gains "This spell costs {1} more to cast."
-SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+OppCtrl | Origin$ Battlefield | Destination$ Hand | RememberChanged$ True | TgtPrompt$ Choose target creature an opponent controls | SubAbility$ DBEffect
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Permanent.nonLand+OppCtrl | Origin$ Battlefield | Destination$ Hand | RememberChanged$ True | TgtPrompt$ Choose target nonland permanent an opponent controls | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Name$ Nightclub Bouncer's Perpetual Effect | Duration$ Permanent
 SVar:PerpetualAbility:Mode$ RaiseCost | ValidCard$ Card.IsRemembered | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} more to cast.
 Oracle:Flash\nWhen Nightclub Bouncer enters the battlefield, return target nonland permanent an opponent controls to its owner's hand. It perpetually gains "This spell costs {1} more to cast."
