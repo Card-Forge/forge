@@ -2,9 +2,10 @@ Name:Psychic Theft
 ManaCost:1 U
 Types:Sorcery
 A:SP$ ChangeZone | ValidTgts$ Player | Origin$ Hand | Destination$ Exile | ChangeType$ Instant,Sorcery | Mandatory$ True | IsCurse$ True | Chooser$ You | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ TheftEffect | SpellDescription$ Target player reveals their hand. You choose an instant or sorcery card from it and exile that card. | StackDescription$ SpellDescription
-SVar:TheftEffect:DB$ Effect | StaticAbilities$ STThieving | Duration$ Permanent | RememberObjects$ Remembered | Triggers$ TrigReturn | ExileOnMoved$ Exile | SubAbility$ DBCleanup | SpellDescription$ You may cast that card for as long as it remains exiled. At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand.
+SVar:TheftEffect:DB$ Effect | StaticAbilities$ STThieving | Duration$ Permanent | RememberObjects$ Remembered | ExileOnMoved$ Exile | SubAbility$ DBDelayedTrigger | SpellDescription$ You may cast that card for as long as it remains exiled. At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand.
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ DBReturn | IsPresent$ Card.IsRemembered | PresentZone$ Exile | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:STThieving:Mode$ Continuous | Affected$ Card.IsRemembered+OppOwn | MayPlay$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ You may cast that card for as long as it remains exiled.
+SVar:STThieving:Mode$ Continuous | Affected$ Card.IsRemembered+OppOwn+nonLand | MayPlay$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ You may cast that card for as long as it remains exiled.
 SVar:TrigReturn:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Command | Execute$ DBReturn | TriggerDescription$ At the beginning of the next end step, if you haven't cast the card, return it to its owner's hand.
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand
 AI:RemoveDeck:All
