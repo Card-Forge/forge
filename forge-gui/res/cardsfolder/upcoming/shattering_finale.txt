@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Sorcery
 K:Casualty:1
 A:SP$ Effect | StaticAbilities$ PerpetualDebuff | RememberObjects$ Targeted | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | IsCurse$ True | Name$ Shattering Finale's Perpetual Effect | Duration$ Permanent | SpellDescription$ Target creature an opponent controls perpetually gets -0/-3.
-SVar:PerpetualDebuff:Mode$ Continuous | Affected$ Card.IsRemembered |  AddToughness$ -3 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets -0/-3. | SubAbility$ DBCleanup 
+SVar:PerpetualDebuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddToughness$ -3 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets -0/-3. | SubAbility$ DBCleanup 
 SVar:DBCleanup:DB$ Cleanup | ClearRembered$ True
 DeckHas:Ability$Sacrifice
 Oracle:Casualty 1\nTarget creature an opponent controls perpetually gets -0/-3.
