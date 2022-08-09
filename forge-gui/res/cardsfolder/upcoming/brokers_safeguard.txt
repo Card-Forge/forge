@@ -7,7 +7,7 @@ SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddReplace
 SVar:ETBAddCounter:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ ETBAddExtraCounter | Description$ This creature enters the battlefield with an additional shield counter on it.
 SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ SHIELD | SubAbility$ MoveToBattlefield
 SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
-SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup | SpellDescription$ Then return that card to the battlefield under its owner's control.
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup | StackDescription$ Then return {c:Remembered} to the battlefield under its owner's control. | SpellDescription$ Then return that card to the battlefield under its owner's control.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
 Oracle:Exile target nonartifact creature you control. It perpetually gains "This creature enters the battlefield with an additional shield counter on it." Then return that card to the battlefield under its owner's control.
