@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
@@ -29,7 +28,7 @@ public class UIActor extends Group {
         setWidth(data.width);
         setHeight(data.height);
 
-        for (OrderedMap<String, String> element : new Array.ArrayIterator<>(data.elements)) {
+        for (OrderedMap<String, String> element : data.elements) {
             String type = element.get("type");
             Actor newActor;
             if (type == null) {

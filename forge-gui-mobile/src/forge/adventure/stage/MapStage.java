@@ -41,7 +41,6 @@ import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
 
-
 import java.util.HashMap;
 import java.util.Map;
 

@@ -16,8 +16,6 @@ import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 
-import java.util.function.Function;
-
 /**
  * Scene to handle settings of the base forge and adventure mode
  */
@@ -118,12 +116,7 @@ public class SettingsScene extends UIScene {
 
     private void addSettingField(String name, int value, ChangeListener change) {
         TextField text = Controls.newTextField(String.valueOf(value));
-        text.setTextFieldFilter(new TextField.TextFieldFilter() {
-            @Override
-            public boolean acceptChar(TextField textField, char c) {
-                return Character.isDigit(c);
-            }
-        });
+        text.setTextFieldFilter((textField, c) -> Character.isDigit(c));
         text.addListener(change);
         addLabel(name);
         settingGroup.add(text).align(Align.right);
@@ -145,49 +138,90 @@ public class SettingsScene extends UIScene {
             Preference = new ForgePreferences();
         }
 
-        SelectBox plane = Controls.newComboBox(Config.instance().getAllAdventures(), Config.instance().getSettingData().plane, new Function<Object, Void>() {
-            @Override
-            public Void apply(Object o) {
-                Config.instance().getSettingData().plane = (String) o;
-                Config.instance().saveSettings();
-                return null;
-            }
+        SelectBox plane = Controls.newComboBox(Config.instance().getAllAdventures(), Config.instance().getSettingData().plane, o -> {
+            Config.instance().getSettingData().plane = (String) o;
+            Config.instance().saveSettings();
+            return null;
         });
         addLabel(Forge.getLocalizer().getMessage("lblWorld"));
         settingGroup.add(plane).align(Align.right).pad(2);
 
         if (!GuiBase.isAndroid()) {
-            SelectBox videomode = Controls.newComboBox(new String[]{"720p", "768p", "900p", "1080p"}, Config.instance().getSettingData().videomode, new Function<Object, Void>() {
-                @Override
-                public Void apply(Object o) {
-                    String mode = (String) o;
-                    if (mode == null)
-                        mode = "720p";
-                    Config.instance().getSettingData().videomode = mode;
-                    if (mode.equalsIgnoreCase("768p")) {
-                        Config.instance().getSettingData().width = 1366;
-                        Config.instance().getSettingData().height = 768;
-                    } else if (mode.equalsIgnoreCase("900p")) {
-                        Config.instance().getSettingData().width = 1600;
-                        Config.instance().getSettingData().height = 900;
-                    } else if (mode.equalsIgnoreCase("1080p")) {
-                        Config.instance().getSettingData().width = 1920;
-                        Config.instance().getSettingData().height = 1080;
-                    } else {
-                        Config.instance().getSettingData().width = 1280;
-                        Config.instance().getSettingData().height = 720;
-                    }
-                    Config.instance().saveSettings();
-                    //update preference for classic mode if needed
-                    if (FModel.getPreferences().getPref(ForgePreferences.FPref.UI_VIDEO_MODE) != mode) {
-                        FModel.getPreferences().setPref(ForgePreferences.FPref.UI_VIDEO_MODE, mode);
-                        FModel.getPreferences().save();
-                    }
-                    return null;
+            SelectBox videomode = Controls.newComboBox(new String[]{"720p", "768p", "900p", "1080p"}, Config.instance().getSettingData().videomode, o -> {
+                String mode = (String) o;
+                if (mode == null)
+                    mode = "720p";
+                Config.instance().getSettingData().videomode = mode;
+                if (mode.equalsIgnoreCase("768p")) {
+                    Config.instance().getSettingData().width = 1366;
+                    Config.instance().getSettingData().height = 768;
+                } else if (mode.equalsIgnoreCase("900p")) {
+                    Config.instance().getSettingData().width = 1600;
+                    Config.instance().getSettingData().height = 900;
+                } else if (mode.equalsIgnoreCase("1080p")) {
+                    Config.instance().getSettingData().width = 1920;
+                    Config.instance().getSettingData().height = 1080;
+                } else {
+                    Config.instance().getSettingData().width = 1280;
+                    Config.instance().getSettingData().height = 720;
                 }
+                Config.instance().saveSettings();
+                //update preference for classic mode if needed
+                if (FModel.getPreferences().getPref(ForgePreferences.FPref.UI_VIDEO_MODE) != mode) {
+                    FModel.getPreferences().setPref(ForgePreferences.FPref.UI_VIDEO_MODE, mode);
+                    FModel.getPreferences().save();
+                }
+                return null;
             });
             addLabel(Forge.getLocalizer().getMessage("lblVideoMode"));
             settingGroup.add(videomode).align(Align.right).pad(2);
+        }
+        if (Forge.isLandscapeMode()) {
+            //different adjustment to landscape
+            SelectBox rewardCardAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().rewardCardAdjLandscape, o -> {
+                Float val = (Float) o;
+                if (val == null || val == 0f)
+                    val = 1f;
+                Config.instance().getSettingData().rewardCardAdjLandscape = val;
+                Config.instance().saveSettings();
+                return null;
+            });
+            addLabel("Reward/Shop Card Display Ratio");
+            settingGroup.add(rewardCardAdjLandscape).align(Align.right).pad(2);
+            SelectBox tooltipAdjLandscape = Controls.newComboBox(new Float[]{0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 1f, 1.05f, 1.1f, 1.15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f, 1.55f, 1.6f}, Config.instance().getSettingData().cardTooltipAdjLandscape, o -> {
+                Float val = (Float) o;
+                if (val == null || val == 0f)
+                    val = 1f;
+                Config.instance().getSettingData().cardTooltipAdjLandscape = val;
+                Config.instance().saveSettings();
+                return null;
+            });
+            addLabel("Reward/Shop Card Tooltip Ratio");
+            settingGroup.add(tooltipAdjLandscape).align(Align.right).pad(2);
+        } else {
+            //portrait adjustment
+            SelectBox rewardCardAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().rewardCardAdj, o -> {
+                Float val = (Float) o;
+                if (val == null || val == 0f)
+                    val = 1f;
+                Config.instance().getSettingData().rewardCardAdj = val;
+                Config.instance().saveSettings();
+                return null;
+            });
+            addLabel("Reward/Shop Card Display Ratio");
+            settingGroup.add(rewardCardAdj).align(Align.right).pad(2);
+            SelectBox tooltipAdj = Controls.newComboBox(new Float[]{0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1f, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f, 1.6f, 1.8f, 1.9f, 2f}, Config.instance().getSettingData().cardTooltipAdj, o -> {
+                Float val = (Float) o;
+                if (val == null || val == 0f)
+                    val = 1f;
+                Config.instance().getSettingData().cardTooltipAdj = val;
+                Config.instance().saveSettings();
+                return null;
+            });
+            addLabel("Reward/Shop Card Tooltip Ratio");
+            settingGroup.add(tooltipAdj).align(Align.right).pad(2);
+        }
+        if (!GuiBase.isAndroid()) {
             addSettingField(Forge.getLocalizer().getMessage("lblFullScreen"), Config.instance().getSettingData().fullScreen, new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
@@ -231,12 +265,7 @@ public class SettingsScene extends UIScene {
         settingGroup.row();
         back = ui.findActor("return");
         back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
-        ui.onButtonPress("return", new Runnable() {
-            @Override
-            public void run() {
-                SettingsScene.this.back();
-            }
-        });
+        ui.onButtonPress("return", () -> SettingsScene.this.back());
 
         ScrollPane scrollPane = ui.findActor("settings");
         scrollPane.setActor(settingGroup);

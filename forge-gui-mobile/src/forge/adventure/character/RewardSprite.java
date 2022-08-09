@@ -1,6 +1,5 @@
 package forge.adventure.character;
 
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.data.RewardData;
 import forge.adventure.util.JSONStringLoader;
@@ -40,7 +39,7 @@ public class RewardSprite extends CharacterSprite {
 
     @Override
     void updateBoundingRect() { //We want rewards to take a full tile.
-        boundingRect = new Rectangle(getX(), getY(), getWidth(), getHeight());
+        boundingRect.set(getX(), getY(), getWidth(), getHeight());
     }
 
     public Array<Reward> getRewards() { //Get list of rewards.

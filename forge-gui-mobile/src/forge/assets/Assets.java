@@ -42,7 +42,7 @@ public class Assets implements Disposable {
     private ObjectMap<String, Texture> tmxMap;
     private Texture defaultImage, dummy;
     private TextureParameter textureParameter;
-    private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0, aDF = 0, cDFVal = 0;
+    private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0, aDF = 0, cDFVal = 0;
     public Assets() {
         //init titlebg fallback
         fallback_skins().put(0, new Texture(GuiBase.isAndroid()
@@ -55,14 +55,18 @@ public class Assets implements Disposable {
     }
     @Override
     public void dispose() {
-        for (BitmapFont bitmapFont : counterFonts.values())
-            bitmapFont.dispose();
-        for (Texture texture : generatedCards.values())
-            texture.dispose();
-        for (Texture texture : fallback_skins.values())
-            texture.dispose();
-        for (Texture texture : tmxMap.values())
-            texture.dispose();
+        if (counterFonts != null)
+            for (BitmapFont bitmapFont : counterFonts.values())
+                bitmapFont.dispose();
+        if (generatedCards != null)
+            for (Texture texture : generatedCards.values())
+                texture.dispose();
+        if (fallback_skins != null)
+            for (Texture texture : fallback_skins.values())
+                texture.dispose();
+        if (tmxMap != null)
+            for (Texture texture : tmxMap.values())
+                texture.dispose();
         if (defaultImage != null)
             defaultImage.dispose();
         if (dummy != null)

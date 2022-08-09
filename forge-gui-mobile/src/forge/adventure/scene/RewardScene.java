@@ -13,10 +13,7 @@ import forge.adventure.character.ShopActor;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.GameHUD;
-import forge.adventure.util.CardUtil;
-import forge.adventure.util.Current;
-import forge.adventure.util.Reward;
-import forge.adventure.util.RewardActor;
+import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.assets.ImageCache;
 import forge.sound.SoundEffectType;
@@ -222,21 +219,28 @@ public class RewardScene extends UIScene {
         float mul = fW/fH < AR ? AR/(fW/fH) : (fW/fH)/AR;
         if (fW/fH >= 2f) {//tall display
             mul = (fW/fH) - ((fW/fH)/AR);
-            if ((fW/fH) >= 2.1f && (fW/fH) < 2.3f)
+            if ((fW/fH) >= 2.1f && (fW/fH) < 2.2f)
                 mul *= 0.9f;
-            else if ((fW/fH) > 2.3) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
+            else if ((fW/fH) > 2.2f) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
                 mul *= 0.8f;
         }
         cardHeight = bestCardHeight * 0.90f ;
-        if (realX > x || realY > y) {
-            mul *= Forge.isLandscapeMode() ? 0.95f : 1.05f;
+        Float custom = Forge.isLandscapeMode() ? Config.instance().getSettingData().rewardCardAdjLandscape : Config.instance().getSettingData().rewardCardAdj;
+        if (custom != null && custom != 1f) {
+            mul *= custom;
         } else {
-            //immersive | no navigation and/or showing cutout cam
-            if (fW/fH > 2.3f)
-                mul *= Forge.isLandscapeMode() ? 1.1f : 1.6f;
-            else if (fW/fH > 2f)
-                mul *= Forge.isLandscapeMode() ? 1.1f : 1.5f;
+            if (realX > x || realY > y) {
+                mul *= Forge.isLandscapeMode() ? 0.95f : 1.05f;
+            } else {
+                //immersive | no navigation and/or showing cutout cam
+                if (fW/fH > 2.2f)
+                    mul *= Forge.isLandscapeMode() ? 1.1f : 1.6f;
+                else if (fW/fH >= 2.1f)
+                    mul *= Forge.isLandscapeMode() ? 1.05f : 1.5f;
+                else if (fW/fH >= 2f)
+                    mul *= Forge.isLandscapeMode() ? 1f : 1.4f;
 
+            }
         }
         cardWidth = (cardHeight / CARD_WIDTH_TO_HEIGHT)*mul;
 

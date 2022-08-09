@@ -146,15 +146,20 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     PaperCard card = ImageUtil.getPaperCardFromImageKey(reward.getCard().getImageKey(false));
                     File frontFace = ImageKeys.getImageFile(card.getCardImageKey());
                     if (frontFace != null) {
-                        if (!Forge.getAssets().manager().contains(frontFace.getPath())) {
-                            Forge.getAssets().manager().load(frontFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
-                            Forge.getAssets().manager().finishLoadingAsset(frontFace.getPath());
-                            count+=1;
-                        }
-                        Texture front = Forge.getAssets().manager().get(frontFace.getPath(), Texture.class, false);
-                        if (front != null) {
-                            setCardImage(front);
-                        } else {
+                        try {
+                            if (!Forge.getAssets().manager().contains(frontFace.getPath())) {
+                                Forge.getAssets().manager().load(frontFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
+                                Forge.getAssets().manager().finishLoadingAsset(frontFace.getPath());
+                                count+=1;
+                            }
+                            Texture front = Forge.getAssets().manager().get(frontFace.getPath(), Texture.class, false);
+                            if (front != null) {
+                                setCardImage(front);
+                            } else {
+                                loaded = false;
+                            }
+                        } catch (Exception e) {
+                            System.err.println("Failed to load image: "+frontFace.getPath());
                             loaded = false;
                         }
                     } else {
@@ -166,10 +171,14 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         PaperCard cardBack = ImageUtil.getPaperCardFromImageKey(reward.getCard().getImageKey(true));
                         File backFace = ImageKeys.getImageFile(cardBack.getCardAltImageKey());
                         if (backFace != null) {
-                            if (!Forge.getAssets().manager().contains(backFace.getPath())) {
-                                Forge.getAssets().manager().load(backFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
-                                Forge.getAssets().manager().finishLoadingAsset(backFace.getPath());
-                                ImageCache.updateSynqCount(backFace, 1);
+                            try {
+                                if (!Forge.getAssets().manager().contains(backFace.getPath())) {
+                                    Forge.getAssets().manager().load(backFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
+                                    Forge.getAssets().manager().finishLoadingAsset(backFace.getPath());
+                                    ImageCache.updateSynqCount(backFace, 1);
+                                }
+                            } catch (Exception e) {
+                                System.err.println("Failed to load image: "+backFace.getPath());
                             }
                         }
                     }
@@ -178,18 +187,23 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     File lookup = ImageKeys.hasSetLookup(imagePath) ? ImageKeys.setLookUpFile(imagePath, imagePath+"border") : null;
                     int count = 0;
                     if (lookup != null) {
-                        if (!Forge.getAssets().manager().contains(lookup.getPath())) {
-                            Forge.getAssets().manager().load(lookup.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
-                            Forge.getAssets().manager().finishLoadingAsset(lookup.getPath());
-                            count+=1;
-                        }
-                        Texture replacement = Forge.getAssets().manager().get(lookup.getPath(), Texture.class, false);
-                        if (replacement != null) {
-                            setCardImage(replacement);
-                        } else {
+                        try {
+                            if (!Forge.getAssets().manager().contains(lookup.getPath())) {
+                                Forge.getAssets().manager().load(lookup.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
+                                Forge.getAssets().manager().finishLoadingAsset(lookup.getPath());
+                                count += 1;
+                            }
+                            Texture replacement = Forge.getAssets().manager().get(lookup.getPath(), Texture.class, false);
+                            if (replacement != null) {
+                                setCardImage(replacement);
+                            } else {
+                                loaded = false;
+                            }
+                            ImageCache.updateSynqCount(lookup, count);
+                        } catch (Exception e) {
+                            System.err.println("Failed to load image: "+lookup.getPath());
                             loaded = false;
                         }
-                        ImageCache.updateSynqCount(lookup, count);
                     } else if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
                         //Cannot find an image file, set up a rendered card until (if) a file is downloaded.
                         T = renderPlaceholder(getGraphics(), reward.getCard()); //Now we can render the card.
@@ -361,12 +375,17 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         float fW = x > y ? x : y;
         float fH = x > y ? y : x;
         float mul = fW/fH < AR ? AR/(fW/fH) : (fW/fH)/AR;
-        if (fW/fH >= 2f) {//tall display
-            mul = (fW/fH) - ((fW/fH)/AR);
-            if ((fW/fH) >= 2.1f && (fW/fH) < 2.3f)
-                mul *= 0.9f;
-            else if ((fW/fH) > 2.3) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
-                mul *= 0.8f;
+        Float custom = Forge.isLandscapeMode() ? Config.instance().getSettingData().cardTooltipAdjLandscape : Config.instance().getSettingData().cardTooltipAdj;
+        if (custom != null && custom != 1f) {
+            mul *= custom;
+        } else {
+            if (fW/fH >= 2f) {//tall display
+                mul = (fW/fH) - ((fW/fH)/AR);
+                if ((fW/fH) >= 2.1f && (fW/fH) < 2.2f)
+                    mul *= 0.9f;
+                else if ((fW/fH) > 2.2f) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
+                    mul *= 0.8f;
+            }
         }
         if (Forge.isLandscapeMode())
             drawable.setMinSize(newW*mul, newH);

@@ -1,11 +1,6 @@
 package forge.adventure.character;
 
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
@@ -38,7 +33,7 @@ public class CharacterSprite extends MapActor {
 
     @Override
     void updateBoundingRect() { //We want a slimmer box for the player entity so it can navigate terrain without getting stuck.
-        boundingRect = new Rectangle(getX() + 4, getY(), getWidth() - 6, getHeight() * collisionHeight);
+        boundingRect.set(getX() + 4, getY(), getWidth() - 6, getHeight() * collisionHeight);
     }
 
     protected void load(String path) {
@@ -61,8 +56,14 @@ public class CharacterSprite extends MapActor {
                     anim = atlas.createSprites(stand.toString());
                 else
                     anim = atlas.createSprites(stand.toString() + dir.toString());
+
                 if (anim.size != 0) {
                     dirs.put(dir, new Animation<>(0.2f, anim));
+                    if(getWidth()==0.0)//init size onload
+                    {
+                        setWidth(anim.first().getWidth());
+                        setHeight(anim.first().getHeight());
+                    }
                 }
             }
             animations.put(stand, dirs);
