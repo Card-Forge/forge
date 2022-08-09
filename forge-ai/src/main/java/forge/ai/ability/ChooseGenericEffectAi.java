@@ -198,7 +198,7 @@ public class ChooseGenericEffectAi extends SpellAbilityAi {
         } else if ("SinProdder".equals(logic)) {
             SpellAbility allow = null, deny = null;
             for (final SpellAbility sp : spells) {
-                if (sp.getDescription().equals("Allow")) {
+                if (sp.getDescription().equals("No")) {
                     allow = sp;
                 } else {
                     deny = sp;
