@@ -3,10 +3,10 @@ ManaCost:B R G
 Types:Creature Crocodile
 PT:4/3
 K:Blitz:B R G
-T:Mode$ Sacrificed | ValidCard$ Creature | ValidPlayer$ You | Execute$ TrigEffect | TriggerZones$ Battlefield | RememberSacrificed$ True | TriggerDescription$ Whenever you sacrifice CARDNAME or another creature, it perpetually gains "{2}, Exile this card from your graveyard: Create an X/X green Ooze creature token, where X is this card's power. Activate only as a sorcery."
-SVar:TrigEffect:DB$ Effect | ValidCard$ Card.IsRemembered | EffectZone$ Command | StaticAbilities$ PerpetualAbility | Name$ Effluence Devourer's Perpetual Effect | Duration$ Permanent
-SVar:PerpetualAbility:Mode$ Continuous |  Affected$ Card.IsRemembered | AddAbility$ ABToken | Defined$ Remembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ {2} Exile this card from your graveyard: Create an X/X green Ooze creature token, where X is this card's power. Activate only as a sorcery.
-SVar:ABToken:AB$ Token | Cost$ 2 ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | TokenScript$ g_x_x_ooze | | Destination$ Exile | EffectZone$ Command | SorcerySpeed$ True | TokenPower$ X | TokenToughness$ X |  StackDescription$ Exile this card from your graveyard | SpellDescription$ Exile From Grave, Create an X/X green Ooze creature token, where X is this card's power.  
+T:Mode$ Sacrificed | ValidCard$ Card.Self,Creature | ValidPlayer$ You | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ Whenever you sacrifice CARDNAME or another creature, it perpetually gains "{2}, Exile this card from your graveyard: Create an X/X green Ooze creature token, where X is this card's power. Activate only as a sorcery."
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualAbility | Name$ Effluence Devourer's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualAbility:Mode$ Continuous |  Affected$ Card.IsRemembered | AddAbility$ ABToken | Defined$ Remembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This card perpetually gains "{2}, Exile this card from your graveyard: Create an X/X green Ooze creature token, where X is this card's power. Activate only as a sorcery."
+SVar:ABToken:AB$ Token | Cost$ 2 ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | TokenScript$ g_x_x_ooze | Destination$ Exile | EffectZone$ Command | SorcerySpeed$ True | TokenPower$ X | TokenToughness$ X |  StackDescription$ Exile this card from your graveyard | SpellDescription$ Create an X/X green Ooze creature token, where X is this card's power.  
 SVar:X:Exiled$CardPower
 DeckHints:Ability$Sacrifice
 DeckHas:Ability$Token & Type$Ooze
