@@ -155,7 +155,7 @@ public class MapDialog {
                 } else if(condition.not) return false;
             }
             if(condition.colorIdentity != null && !condition.colorIdentity.isEmpty()) { //Check for player's color ID.
-                if(player.getColorIdentity()!=(ColorSet.fromNames(condition.colorIdentity.toCharArray()).getColor()))
+                if(player.getColorIdentity().hasAllColors(ColorSet.fromNames(condition.colorIdentity.toCharArray()).getColor()))
                 {
                     if(!condition.not) return false;
                 } else if(condition.not) return false;

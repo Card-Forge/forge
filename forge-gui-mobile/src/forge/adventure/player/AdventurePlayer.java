@@ -12,6 +12,7 @@ import forge.adventure.data.ItemData;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.card.ColorSet;
+import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
@@ -32,8 +33,6 @@ import java.util.Map;
  */
 public class AdventurePlayer implements Serializable, SaveFileContent {
     public static final int NUMBER_OF_DECKS=10;
-    private enum ColorID { COLORLESS, WHITE, BLACK, BLUE, RED, GREEN }
-
     // Player profile data.
     private String name;
     private int heroRace;
@@ -107,7 +106,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final CardPool cards=new CardPool();
     private final ItemPool<InventoryItem> newCards=new ItemPool<>(InventoryItem.class);
 
-    public void create(String n, ColorSet startingColorIdentity, Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy, DifficultyData difficultyData) {
+    public void create(String n,   Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy, DifficultyData difficultyData) {
         clear();
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
 
@@ -131,10 +130,20 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         isFemale    = !male;
 
         if (fantasyMode){ //Set a random ColorID in fantasy mode.
-           setColorIdentity(MyRandom.getRandom().nextInt(5)); // MyRandom to not interfere with the unstable RNG.
+           switch (MyRandom.getRandom().nextInt(5))
+           {
+               case 0:colorIdentity=ColorSet.fromMask(MagicColor.WHITE);
+               case 1:colorIdentity=ColorSet.fromMask(MagicColor.BLUE);
+               case 2:colorIdentity=ColorSet.fromMask(MagicColor.BLACK);
+               case 3:colorIdentity=ColorSet.fromMask(MagicColor.RED);
+               case 4:colorIdentity=ColorSet.fromMask(MagicColor.GREEN);
+               case 5:colorIdentity=ColorSet.fromMask(MagicColor.COLORLESS);
+           }
         }
         else
-            this.colorIdentity=startingColorIdentity;
+        {
+            setColorIdentity(DeckProxy.getColorIdentity(deck));
+        }
 
         life = maxLife = difficultyData.startingLife;
 
@@ -148,7 +157,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             selectedDeckIndex = slot;
             deck = decks[selectedDeckIndex];
             if (!fantasyMode)
-                setColorIdentity(DeckProxy.getColorIdentityforAdventure(deck));
+                setColorIdentity(DeckProxy.getColorIdentity(deck));
         }
     }
     public void updateDifficulty(DifficultyData diff) {
@@ -180,8 +189,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public Collection<String> getEquippedItems() { return equippedItems.values(); }
     public ItemPool<InventoryItem> getNewCards() { return newCards;               }
 
-    public byte getColorIdentity(){
-        return colorIdentity.getColor();
+    public ColorSet getColorIdentity(){
+        return colorIdentity;
     }
 
     public String getColorIdentityLong(){
@@ -201,8 +210,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         colorIdentity= ColorSet.fromNames(C.toCharArray());
     }
 
-    public void setColorIdentity(int C){
-        colorIdentity= ColorSet.fromMask(C);
+    public void setColorIdentity(ColorSet set){
+        this.colorIdentity = set;
     }
 
 

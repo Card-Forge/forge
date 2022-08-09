@@ -313,7 +313,7 @@ public class CardUtil {
                 List<PrintSheet> candidates=new ArrayList<>();
                 for(PrintSheet sheet : StaticData.instance().getPrintSheets())
                 {
-                    if(sheet.containsCardNamed(targetName)&&sheet.getName().startsWith("JMP"))
+                    if(sheet.containsCardNamed(targetName,3)&&sheet.getName().startsWith("JMP"))//dodge the rainbow jumpstart sheet
                     {
                         candidates.add(sheet);
                     }

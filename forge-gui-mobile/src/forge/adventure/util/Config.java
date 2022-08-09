@@ -141,7 +141,17 @@ public class Config {
 
         return configData.colorIds;
     }
-    public Deck starterDeck(ColorSet color, DifficultyData difficultyData) {
+    public Deck starterDeck(ColorSet color, DifficultyData difficultyData, boolean constructed) {
+        if(constructed)
+        {
+            for(ObjectMap.Entry<String, String> entry:difficultyData.constructedStarterDecks)
+            {
+                if(ColorSet.fromNames(entry.key.toCharArray()).getColor()==color.getColor())
+                {
+                    return CardUtil.getDeck(entry.value, false, false, "", false, false);
+                }
+            }
+        }
         for(ObjectMap.Entry<String, String> entry:difficultyData.starterDecks)
         {
             if(ColorSet.fromNames(entry.key.toCharArray()).getColor()==color.getColor())

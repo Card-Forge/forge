@@ -100,11 +100,15 @@ public class PrintSheet {
         }
         return result;
     }
-    public boolean containsCardNamed(String name) {
+    public boolean containsCardNamed(String name,int atLeast) {
+        int count=0;
         for (Entry<PaperCard, Integer> kv : cardsWithWeights) {
             for (int i = 0; i < kv.getValue(); i++) {
                 if(kv.getKey().getName().equals(name))
-                    return true;
+                {
+                    count++;
+                    if(count>=atLeast)return true;
+                }
             }
         }
         return false;

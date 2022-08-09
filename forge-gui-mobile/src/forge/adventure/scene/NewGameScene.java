@@ -27,7 +27,7 @@ import java.util.Random;
  */
 public class NewGameScene extends UIScene {
     TextField selectedName;
-    ColorSet[] starterDeck;
+    ColorSet[] colorIds;
     private Image avatarImage;
     private int avatarIndex = 0;
     private Selector race;
@@ -50,7 +50,7 @@ public class NewGameScene extends UIScene {
                     gender.getCurrentIndex() == 0,
                     race.getCurrentIndex(),
                     avatarIndex,
-                    starterDeck[colorId.getCurrentIndex()],
+                    colorIds[colorId.getCurrentIndex()],
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     mode.getCurrentIndex()==2, mode.getCurrentIndex()==1,  0);//maybe replace with enum
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
@@ -81,11 +81,11 @@ public class NewGameScene extends UIScene {
             colorId = ui.findActor("colorId");
             String[] colorSet=Config.instance().colorIds();
             String[] colorIdNames=Config.instance().colorIdNames();
-            starterDeck= new ColorSet[colorSet.length];
-            for(int i=0;i<starterDeck.length;i++)
-                starterDeck[i]=  ColorSet.fromNames(colorSet[i].toCharArray());
+            colorIds = new ColorSet[colorSet.length];
+            for(int i = 0; i< colorIds.length; i++)
+                colorIds[i]=  ColorSet.fromNames(colorSet[i].toCharArray());
 
-            Array<String> stringList = new Array<>(starterDeck.length);
+            Array<String> stringList = new Array<>(colorIds.length);
             for (String idName : colorIdNames)
                 stringList.add(UIActor.localize(idName));
             Array<String> chaos = new Array<>();
@@ -99,7 +99,7 @@ public class NewGameScene extends UIScene {
             race.setTextList(HeroListData.getRaces());
             difficulty = ui.findActor("difficulty");
 
-            Array<String> diffList = new Array<>(starterDeck.length);
+            Array<String> diffList = new Array<>(colorIds.length);
             int i = 0;
             int startingDifficulty = 0;
             for (DifficultyData diff : Config.instance().getConfigData().difficulties) {
@@ -111,6 +111,7 @@ public class NewGameScene extends UIScene {
             difficulty.setTextList(diffList);
             difficulty.setCurrentIndex(startingDifficulty);
             avatarIndex = rand.nextInt();
+            updateAvatar();
             gender.setCurrentIndex(rand.nextInt());
             colorId.setCurrentIndex(rand.nextInt());
             race.setCurrentIndex(rand.nextInt());
@@ -156,7 +157,7 @@ public class NewGameScene extends UIScene {
                     gender.getCurrentIndex() == 0,
                     race.getCurrentIndex(),
                     avatarIndex,
-                    starterDeck[colorId.getCurrentIndex()],
+                    colorIds[colorId.getCurrentIndex()],
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     mode.getCurrentIndex()==2, mode.getCurrentIndex()==1,  0);//maybe replace with enum
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
