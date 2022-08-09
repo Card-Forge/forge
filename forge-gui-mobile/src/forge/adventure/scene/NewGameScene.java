@@ -13,7 +13,6 @@ import forge.adventure.util.Selector;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
 import forge.card.ColorSet;
-import forge.deck.DeckProxy;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -88,11 +87,7 @@ public class NewGameScene extends UIScene {
             Array<String> stringList = new Array<>(colorIds.length);
             for (String idName : colorIdNames)
                 stringList.add(UIActor.localize(idName));
-            Array<String> chaos = new Array<>();
-            chaos.add("Preconstructed");
-            Array<String> easyDecks = new Array<>();
-            for (DeckProxy deckProxy : DeckProxy.getAllEasyStarterDecks())
-                easyDecks.add(deckProxy.getName());
+
             colorId.setTextList(stringList);
             race = ui.findActor("race");
             race.addListener(event -> NewGameScene.this.updateAvatar());
@@ -115,7 +110,7 @@ public class NewGameScene extends UIScene {
             gender.setCurrentIndex(rand.nextInt());
             colorId.setCurrentIndex(rand.nextInt());
             race.setCurrentIndex(rand.nextInt());
-            ui.onButtonPress("back", () -> NewGameScene.this.back());
+            ui.onButtonPress("back", () -> back());
             ui.onButtonPress("start", () -> NewGameScene.this.start());
             ui.onButtonPress("leftAvatar", () -> NewGameScene.this.leftAvatar());
             ui.onButtonPress("rightAvatar", () -> NewGameScene.this.rightAvatar());
