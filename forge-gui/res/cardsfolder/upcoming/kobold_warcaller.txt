@@ -1,0 +1,10 @@
+Name:Kobold Warcaller
+ManaCost:R
+Types:Creature Kobold
+PT:1/1
+A:AB$ ChooseCard | Cost$ T | ChoiceZone$ Hand | Choices$ Card.Creature+YouOwn | ChoiceTitle$ Choose up to one creature card in your hand | Amount$ 1 | SubAbility$ DBEffect | SpellDescription$ Choose a creature card in your hand. It perpetually gains haste.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualHaste | Name$ Reckless Ringleader's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualHaste:Mode$ Continuous | Affected$ Card.ChosenCard | AddKeyword$ Haste | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually gains haste.
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Commander creatures you own have "Whenever this creature attacks a player, if no opponent has more life than that player, for each opponent, create a 1/1 white Soldier creature token that's tapped and attacking that player."
+Oracle:{T}: Choose a creature card in your hand. It perpetually gains haste.
