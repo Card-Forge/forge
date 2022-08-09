@@ -1,0 +1,13 @@
+Name:Brokers' Safeguard
+ManaCost:W U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature.nonArtifact+YouCtrl | TgtPrompt$ Select target nonartifact creature you control | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ DBEffect | SpellDescription$ Exile target target nonartifact creature you control.
+SVar:DBEffect:DB$ Effect | Name$ Brokers' Safeguard's Perpetual Effect | RememberObjects$ RememberedLKI | StaticAbilities$ PerpetualStatic | Duration$ Permanent | SubAbility$ DBReturn | SpellDescription$ It perpetually gains "This creature enters the battlefield with an additional shield counter on it."
+SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | AddReplacementEffects$ ETBAddCounter | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains "This creature enters the battlefield with an additional shield counter on it."
+SVar:ETBAddCounter:Event$ Moved | Destination$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ ETBAddExtraCounter | Description$ This creature enters the battlefield with an additional shield counter on it.
+SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ SHIELD | SubAbility$ MoveToBattlefield
+SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ All | Destination$ Battlefield | SubAbility$ DBCleanup | SpellDescription$ Then return that card to the battlefield under its owner's control.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Counters
+Oracle:Exile target nonartifact creature you control. It perpetually gains "This creature enters the battlefield with an additional shield counter on it." Then return that card to the battlefield under its owner's control.
