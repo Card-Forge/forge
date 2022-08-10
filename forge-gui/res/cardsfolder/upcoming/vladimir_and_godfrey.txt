@@ -7,4 +7,6 @@ SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualPump | RememberObjects$ Sel
 SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ CARDNAME perpetually gets +1/+1.
 SVar:SacMe:3
 SVar:DiscardMe:3
-Oracle:{2}{W}: Return Vladimir and Godfrey from your graveyard to the battlefield tapped. It perpetually gets +1/+1. Activate only if you control a 1/1 creature.
+DeckHas:Ability$Graveyard
+AI:RemoveDeck:Random
+Oracle:Rejuvenation – {2}{W}: Return Vladimir and Godfrey from your graveyard to the battlefield tapped. It perpetually gets +1/+1. Activate only if you control a 1/1 creature.
