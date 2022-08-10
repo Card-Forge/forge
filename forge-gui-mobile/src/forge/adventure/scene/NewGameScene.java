@@ -56,10 +56,9 @@ public class NewGameScene extends UIScene {
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     mode.getCurrentIndex()==2, mode.getCurrentIndex()==1,  0);//maybe replace with enum
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
-            Forge.clearTransitionScreen();
             Forge.switchScene(SceneType.GameScene.instance);
         };
-        Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true));
+        Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true, "Generating World..."));
         return true;
     }
 
