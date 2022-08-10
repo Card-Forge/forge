@@ -12,7 +12,6 @@ import forge.adventure.data.ItemData;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.card.ColorSet;
-import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
@@ -20,7 +19,6 @@ import forge.deck.DeckSection;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
-import forge.util.MyRandom;
 
 import java.io.Serializable;
 import java.util.ArrayList;
