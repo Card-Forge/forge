@@ -12,7 +12,6 @@ import forge.adventure.data.ItemData;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.card.ColorSet;
-import forge.card.MagicColor;
 import forge.deck.CardPool;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
@@ -20,7 +19,6 @@ import forge.deck.DeckSection;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
 import forge.util.ItemPool;
-import forge.util.MyRandom;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -129,21 +127,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         avatarIndex = avatar;
         isFemale    = !male;
 
-        if (fantasyMode){ //Set a random ColorID in fantasy mode.
-           switch (MyRandom.getRandom().nextInt(5))
-           {
-               case 0:colorIdentity=ColorSet.fromMask(MagicColor.WHITE);
-               case 1:colorIdentity=ColorSet.fromMask(MagicColor.BLUE);
-               case 2:colorIdentity=ColorSet.fromMask(MagicColor.BLACK);
-               case 3:colorIdentity=ColorSet.fromMask(MagicColor.RED);
-               case 4:colorIdentity=ColorSet.fromMask(MagicColor.GREEN);
-               case 5:colorIdentity=ColorSet.fromMask(MagicColor.COLORLESS);
-           }
-        }
-        else
-        {
-            setColorIdentity(DeckProxy.getColorIdentity(deck));
-        }
+        setColorIdentity(DeckProxy.getColorIdentity(deck));
 
         life = maxLife = difficultyData.startingLife;
 
@@ -156,8 +140,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if(slot>=0&&slot<NUMBER_OF_DECKS) {
             selectedDeckIndex = slot;
             deck = decks[selectedDeckIndex];
-            if (!fantasyMode)
-                setColorIdentity(DeckProxy.getColorIdentity(deck));
+            setColorIdentity(DeckProxy.getColorIdentity(deck));
         }
     }
     public void updateDifficulty(DifficultyData diff) {
