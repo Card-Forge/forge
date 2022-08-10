@@ -3,10 +3,11 @@ ManaCost:G W
 Types:Creature Cat Citizen
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, creature cards in your hand perpetually gain "When this creature enters the battlefield, create a 1/1 green and white Citizen creature token."
-SVar:TrigEffect:DB$ Effect | RememberObjects$ ValidHand Creature.YouOwn | StaticAbilities$ PerpetualEffect | Duration$ Permanent | Triggers$ Update |  Name$ Rope Line Attendants Perpetual Effect
+SVar:TrigEffect:DB$ Effect | RememberObjects$ ValidHand Creature.YouOwn | StaticAbilities$ PerpetualEffect | Duration$ Permanent | Triggers$ Update |  Name$ Rope Line Attendant's Perpetual Effect
 SVar:PerpetualEffect:Mode$ Continuous | Affected$ Card.IsRemembered  | AddTrigger$ ETBToken | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command 
 SVar:ETBToken:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters the battlefield, create a 1/1 green and white Citizen creature token
 SVar:TrigToken:DB$ Token | TokenScript$ gw_1_1_citizen | TokenOwner$ You
 SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
 SVar:DBUpdate:DB$ UpdateRemember
+DeckHas:Ability$Token
 Oracle:When Rope Line Attendant enters the battlefield, creature cards in your hand perpetually gain "When this creature enters the battlefield, create a 1/1 green and white Citizen creature token."
