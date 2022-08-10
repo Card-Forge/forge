@@ -1,6 +1,5 @@
 package forge.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.Forge;
@@ -10,7 +9,6 @@ import forge.assets.FSkin;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.gui.FThreads;
-import forge.gui.GuiBase;
 import forge.sound.SoundSystem;
 import forge.toolbox.FContainer;
 import forge.toolbox.FProgressBar;
