@@ -202,6 +202,10 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
         return WorldSave.getCurrentSave().getWorld().collidingTile(boundingRect);
     }
+    public boolean spawn(String enemy)
+    {
+        return spawn(WorldData.getEnemy(enemy));
+    }
 
     private void HandleMonsterSpawn(float delta) {
         World world = WorldSave.getCurrentSave().getWorld();
@@ -223,8 +227,12 @@ public class WorldStage extends GameStage implements SaveFileContent {
         if (list == null)
             return;
         EnemyData enemyData = data.getEnemy( 1.0f );
+        spawn(enemyData);
+    }
+
+    private boolean spawn(EnemyData enemyData) {
         if (enemyData == null)
-            return;
+            return false;
         EnemySprite sprite = new EnemySprite(enemyData);
         float unit = Scene.getIntendedHeight() / 6f;
         Vector2 spawnPos = new Vector2(1, 1);
@@ -242,11 +250,12 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 {
                     enemies.add(Pair.of(globalTimer,sprite));
                     foregroundSprites.addActor(sprite);
-                    return;
+                    return true;
                 }
                 int g=0;
             }
         }
+        return false;
     }
 
     @Override

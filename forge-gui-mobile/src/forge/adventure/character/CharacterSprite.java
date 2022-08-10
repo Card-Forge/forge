@@ -19,7 +19,7 @@ public class CharacterSprite extends MapActor {
     private Animation<TextureRegion> currentAnimation = null;
     private AnimationTypes currentAnimationType = AnimationTypes.Idle;
     private AnimationDirections currentAnimationDir = AnimationDirections.None;
-    private Sprite avatar;
+    private Array<Sprite> avatar=new Array<>();
     public boolean hidden = false;
 
     public CharacterSprite(int id,String path) {
@@ -45,7 +45,7 @@ public class CharacterSprite extends MapActor {
         animations.clear();
         for (AnimationTypes stand : AnimationTypes.values()) {
             if (stand == AnimationTypes.Avatar) {
-                avatar = atlas.createSprite(stand.toString());
+                avatar.addAll(atlas.createSprites(stand.toString()));
                 continue;
             }
             HashMap<AnimationDirections, Animation<TextureRegion>> dirs = new HashMap<>();
@@ -227,7 +227,10 @@ public class CharacterSprite extends MapActor {
     }
 
     public Sprite getAvatar() {
-        return avatar;
+        return avatar.first();
+    }
+    public Sprite getAvatar(int index) {
+        return avatar.get(index);
     }
 
     public enum AnimationTypes {

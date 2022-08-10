@@ -100,6 +100,22 @@ public class PrintSheet {
         }
         return result;
     }
+    public boolean containsCardNamed(String name,int atLeast) {
+        int count=0;
+        for (Entry<PaperCard, Integer> kv : cardsWithWeights) {
+            for (int i = 0; i < kv.getValue(); i++) {
+                if(kv.getKey().getName().equals(name))
+                {
+                    count++;
+                    if(count>=atLeast)return true;
+                }
+            }
+        }
+        return false;
+    }
+    public String getName() {
+        return name;
+    }
 
     public List<PaperCard> random(int number, boolean wantUnique) {
         List<PaperCard> result = new ArrayList<>();
