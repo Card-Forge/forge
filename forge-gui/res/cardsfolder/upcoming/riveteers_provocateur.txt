@@ -8,5 +8,6 @@ SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.withoutBli
 SVar:DBEffect:DB$ Effect | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1 | StaticAbilities$ PerpetualBlitz | Name$ Riveteers Provacateur's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:PerpetualBlitz:Mode$ Continuous | Affected$ Card.ChosenCard | AddKeyword$ Blitz:CardManaCost:Spell.Creature | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually gains blitz. The blitz cost is equal to its mana cost.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-K:Blitz: B R
+K:Blitz:B R
+DeckHas:Ability$Sacrifice
 Oracle:Menace\nWhen Riveteers Provocateur enters the battlefield, choose a creature card in your hand without blitz. It perpetually gains blitz. The blitz cost is equal to its mana cost.\nBlitz {B}{R}
