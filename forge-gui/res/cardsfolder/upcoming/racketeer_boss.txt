@@ -9,4 +9,6 @@ SVar:PerpetualEffect:Mode$ Continuous | Affected$ Card.ChosenCard  | AddTrigger$
 SVar:CastSpellTreasure:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When you cast this spell, create a Treasure token.
 SVar:TrigToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBCleanup 
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+DeckHints:Type$Planeswalker
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
 Oracle:When Racketeer Boss enters the battlefield, choose up to two creature and/or planeswalker cards in your hand. They perpetually gain "When you cast this spell, create a Treasure token."
