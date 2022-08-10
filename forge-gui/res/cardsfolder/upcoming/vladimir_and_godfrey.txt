@@ -4,7 +4,7 @@ Types:Legendary Creature Zombie Knight
 PT:3/2
 A:AB$ ChangeZone | Cost$ 2 W | Origin$ Graveyard | Destination$ Battlefield | Defined$ Self | ActivationZone$ Graveyard | IsPresent$ Creature.YouCtrl+powerEQ1+toughnessEQ1 | Tapped$ True | SubAbility$ DBEffect | PrecostDesc$ Rejuvenation — | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped. It perpetually gets +1/+1. Activate only if you control a 1/1 creature.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualPump | RememberObjects$ Self | Name$ Vladimir and Godfrey's Perpetual Effect | Duration$ Permanent
-SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ CARDNAME perpetually gets +1/+1.
+SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ EFFECTSOURCE perpetually gets +1/+1.
 SVar:SacMe:3
 SVar:DiscardMe:3
 DeckHas:Ability$Graveyard
