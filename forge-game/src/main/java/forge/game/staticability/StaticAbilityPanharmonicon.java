@@ -108,17 +108,13 @@ public class StaticAbilityPanharmonicon {
                 return false;
             }
         } else if (trigMode.equals(TriggerType.Attacks)) {
-            if (stAb.hasParam("ValidCause")) {
-                if (!stAb.matchesValidParam("ValidCause", runParams.get(AbilityKey.Attacker))) {
-                    return false;
-                }
+            if (!stAb.matchesValidParam("ValidCause", runParams.get(AbilityKey.Attacker))) {
+                return false;
             }
         } else if (trigMode.equals(TriggerType.AttackersDeclared)
                 || trigMode.equals(TriggerType.AttackersDeclaredOneTarget)) {
-            if (stAb.hasParam("ValidCause")) {
-                if (!stAb.matchesValidParam("ValidCause", runParams.get(AbilityKey.Attackers))) {
-                    return false;
-                }
+            if (!stAb.matchesValidParam("ValidCause", runParams.get(AbilityKey.Attackers))) {
+                return false;
             }
         } else if (trigMode.equals(TriggerType.SpellCastOrCopy)
                 || trigMode.equals(TriggerType.SpellCast) || trigMode.equals(TriggerType.SpellCopy)) {
