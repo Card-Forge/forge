@@ -1,6 +1,6 @@
 Name:Spara's Bodyguard
-ManaCost: G W U
-Types: Creature Rhino Warrior
+ManaCost:G W U
+Types:Creature Rhino Warrior
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, you may choose a creature card in your hand. If you do, it perpetually gains "This creature enters the battlefield with an additional shield counter on it." Otherwise, put a shield counter on CARDNAME.
 SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.YouOwn | ChoiceTitle$ You may choose a creature card in your hand | SubAbility$ DBEffect
