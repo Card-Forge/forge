@@ -2,7 +2,9 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
@@ -34,6 +36,7 @@ public class NewGameScene extends UIScene {
     private Selector gender;
     private Selector mode;
     private Selector difficulty;
+    private Array<String> stringList, random;
 
     public NewGameScene() {
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
@@ -83,12 +86,21 @@ public class NewGameScene extends UIScene {
             colorIds = new ColorSet[colorSet.length];
             for(int i = 0; i< colorIds.length; i++)
                 colorIds[i]=  ColorSet.fromNames(colorSet[i].toCharArray());
-
-            Array<String> stringList = new Array<>(colorIds.length);
+            stringList = new Array<>(colorIds.length);
             for (String idName : colorIdNames)
                 stringList.add(UIActor.localize(idName));
-
             colorId.setTextList(stringList);
+            random = new Array<>();
+            random.add(Forge.getLocalizer().getMessage("lblRandomDeck"));
+            mode.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent changeEvent, Actor actor) {
+                    if (mode.getCurrentIndex() == 2)
+                        colorId.setTextList(random);
+                    else
+                        colorId.setTextList(stringList);
+                }
+            });
             race = ui.findActor("race");
             race.addListener(event -> NewGameScene.this.updateAvatar());
             race.setTextList(HeroListData.getRaces());

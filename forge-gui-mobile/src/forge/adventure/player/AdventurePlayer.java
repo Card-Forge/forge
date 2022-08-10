@@ -129,21 +129,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         avatarIndex = avatar;
         isFemale    = !male;
 
-        if (fantasyMode){ //Set a random ColorID in fantasy mode.
-           switch (MyRandom.getRandom().nextInt(5))
-           {
-               case 0:colorIdentity=ColorSet.fromMask(MagicColor.WHITE);
-               case 1:colorIdentity=ColorSet.fromMask(MagicColor.BLUE);
-               case 2:colorIdentity=ColorSet.fromMask(MagicColor.BLACK);
-               case 3:colorIdentity=ColorSet.fromMask(MagicColor.RED);
-               case 4:colorIdentity=ColorSet.fromMask(MagicColor.GREEN);
-               case 5:colorIdentity=ColorSet.fromMask(MagicColor.COLORLESS);
-           }
-        }
-        else
-        {
-            setColorIdentity(DeckProxy.getColorIdentity(deck));
-        }
+        setColorIdentity(DeckProxy.getColorIdentity(deck));
 
         life = maxLife = difficultyData.startingLife;
 
@@ -156,8 +142,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if(slot>=0&&slot<NUMBER_OF_DECKS) {
             selectedDeckIndex = slot;
             deck = decks[selectedDeckIndex];
-            if (!fantasyMode)
-                setColorIdentity(DeckProxy.getColorIdentity(deck));
+            setColorIdentity(DeckProxy.getColorIdentity(deck));
         }
     }
     public void updateDifficulty(DifficultyData diff) {
