@@ -8,19 +8,33 @@ import forge.animation.ForgeAnimation;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
+import forge.gui.FThreads;
 import forge.sound.SoundSystem;
 import forge.toolbox.FContainer;
+import forge.toolbox.FProgressBar;
 
 public class TransitionScreen extends FContainer {
     private BGAnimation bgAnimation;
+    private FProgressBar progressBar;
     Runnable runnable;
     TextureRegion textureRegion;
+    private String message = "";
     boolean matchTransition, isloading, isIntro, isFadeMusic;
 
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading) {
         this(proc, screen, enterMatch, loading, false, false);
     }
+    public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading, String loadingMessage) {
+        this(proc, screen, enterMatch, loading, false, false, loadingMessage);
+    }
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading, boolean intro, boolean fadeMusic) {
+        this(proc, screen, enterMatch, loading, intro, fadeMusic, "");
+    }
+    public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading, boolean intro, boolean fadeMusic, String loadingMessage) {
+        progressBar = new FProgressBar();
+        progressBar.setMaximum(100);
+        progressBar.setPercentMode(true);
+        progressBar.setShowETA(false);
         bgAnimation = new BGAnimation();
         runnable = proc;
         textureRegion = screen;
@@ -28,8 +42,12 @@ public class TransitionScreen extends FContainer {
         isloading = loading;
         isIntro = intro;
         isFadeMusic = fadeMusic;
+        message = loadingMessage;
     }
 
+    public FProgressBar getProgressBar() {
+        return progressBar;
+    }
     @Override
     protected void doLayout(float width, float height) {
 
@@ -63,11 +81,28 @@ public class TransitionScreen extends FContainer {
                     g.setAlphaComposite(oldAlpha);
                 }
                 float xmod = Forge.getScreenHeight() > 2000 ? 1.5f : 1f;
-                xmod *= percentage;
+                xmod *= Forge.isMobileAdventureMode ? 1 : percentage;
+                float ymod;
                 if (FSkin.hdLogo != null) {
+                    ymod = Forge.getScreenHeight()/2 + (FSkin.hdLogo.getHeight()*xmod)/2;
                     g.drawImage(FSkin.hdLogo, Forge.getScreenWidth()/2 - (FSkin.hdLogo.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkin.hdLogo.getHeight()*xmod)/2, FSkin.hdLogo.getWidth()*xmod, FSkin.hdLogo.getHeight()*xmod);
                 } else {
+                    ymod = Forge.getScreenHeight()/2 + (FSkinImage.LOGO.getHeight()*xmod)/1.5f;
                     g.drawImage(FSkinImage.LOGO,Forge.getScreenWidth()/2 - (FSkinImage.LOGO.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkinImage.LOGO.getHeight()*xmod)/1.5f, FSkinImage.LOGO.getWidth()*xmod, FSkinImage.LOGO.getHeight()*xmod);
+                }
+                //loading progressbar - todo make this accurate when generating world
+                if (Forge.isMobileAdventureMode) {
+                    float w = Forge.isLandscapeMode() ? Forge.getScreenWidth() / 2 : Forge.getScreenHeight() / 2;
+                    float h = 57f / 450f * (w/2);
+                    float x = (Forge.getScreenWidth() - w) / 2;
+                    float y = ymod + 10;
+                    int multi = ((int) (percentage*100)) < 97 ? (int) (percentage*100) : 100;
+                    progressBar.setBounds(x, y, w, h);
+                    progressBar.setValue(multi);
+                    if (multi == 100 && !message.isEmpty()) {
+                        progressBar.setDescription(message);
+                    }
+                    g.draw(progressBar);
                 }
             } else if (matchTransition) {
                 if (textureRegion != null)
@@ -93,8 +128,9 @@ public class TransitionScreen extends FContainer {
 
         @Override
         protected void onEnd(boolean endingAll) {
-            if (runnable != null)
-                runnable.run();
+            if (runnable != null) {
+                FThreads.invokeInEdtNowOrLater(runnable);
+            }
         }
     }
 

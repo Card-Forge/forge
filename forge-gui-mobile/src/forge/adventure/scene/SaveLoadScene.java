@@ -143,7 +143,7 @@ public class SaveLoadScene extends UIScene {
                         } else {
                             Forge.clearTransitionScreen();
                         }
-                    }, null, false, true));
+                    }, null, false, true, "Generating World..."));
                 } catch (Exception e) {
                     Forge.clearTransitionScreen();
                 }
