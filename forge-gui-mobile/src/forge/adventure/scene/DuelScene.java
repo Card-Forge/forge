@@ -9,7 +9,6 @@ import forge.LobbyPlayer;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
 import forge.adventure.data.EffectData;
-import forge.adventure.data.EnemyData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.Config;
