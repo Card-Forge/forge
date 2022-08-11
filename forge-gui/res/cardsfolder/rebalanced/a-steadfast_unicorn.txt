@@ -1,0 +1,6 @@
+Name:A-Steadfast Unicorn
+ManaCost:W
+Types:Creature Unicorn
+PT:1/2
+A:AB$ PumpAll | Cost$ 4 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Vigilance | PlayerTurn$ True | SpellDescription$ Creatures you control get +1/+1 and gain vigilance until end of turn. Activate only during your turn.
+Oracle:{4}{W}: Creatures you control get +1/+1 and gain vigilance until end of turn. Activate only during your turn.
