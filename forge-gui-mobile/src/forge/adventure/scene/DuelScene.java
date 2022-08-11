@@ -231,7 +231,7 @@ public class DuelScene extends ForgeScene {
             if (this.chaosBattle) { //random challenge for chaos mode
                 //aiextras
                 List<IPaperCard> aiCards = new ArrayList<>();
-                for (String s : deckProxyMapMap.get(deck).getRight()) {
+                for (String s : deckProxyMapMap.get(deckProxy).getRight()) {
                     aiCards.add(QuestUtil.readExtraCard(s));
                 }
                 this.AIExtras = aiCards;
