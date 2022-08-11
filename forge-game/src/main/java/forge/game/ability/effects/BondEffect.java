@@ -1,5 +1,9 @@
 package forge.game.ability.effects;
 
+import java.util.Map;
+
+import com.google.common.collect.Maps;
+
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -34,7 +38,10 @@ public class BondEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            Card partner = p.getController().chooseSingleEntityForEffect(cards, sa, Localizer.getInstance().getMessage("lblSelectACardPair"), true, null);
+            Map<String, Object> params = Maps.newHashMap();
+            params.put("Partner", gameCard); // info for AI to bond them
+
+            Card partner = p.getController().chooseSingleEntityForEffect(cards, sa, Localizer.getInstance().getMessage("lblSelectACardPair"), true, params);
 
             if (partner != null) {
                 // pair choices together
@@ -52,6 +59,6 @@ public class BondEffect extends SpellAbilityEffect {
 
         sb.append(" pairs with another unpaired creature you control.");
         return sb.toString();
-    } // end bondStackDescription()
+    }
 
 }
