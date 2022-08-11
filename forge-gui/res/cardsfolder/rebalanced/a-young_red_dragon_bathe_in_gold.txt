@@ -1,0 +1,16 @@
+Name:A-Young Red Dragon
+ManaCost:3 R
+Types:Creature Dragon
+PT:3/1
+K:Flying
+Oracle:Flying
+AlternateMode:Adventure
+
+ALTERNATE
+
+Name:A-Bathe in Gold
+ManaCost:1 R
+Types:Instant Adventure
+A:SP$ Token | TokenScript$ c_a_treasure_sac | SpellDescription$ Create a Treasure token.
+DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
+Oracle:Create a Treasure token.
