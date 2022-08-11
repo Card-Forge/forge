@@ -1,4 +1,4 @@
-Name:Blessed Hippogriff
+Name:A-Blessed Hippogriff
 ManaCost:3 W
 Types:Creature Hippogriff
 PT:2/3
@@ -10,8 +10,8 @@ Oracle:Flying\nWhenever Blessed Hippogriff attacks, target attacking creature wi
 
 ALTERNATE
 
-Name:Tyr's Blesing
-ManaCost:W
+Name:A-Tyr's Blesing
+ManaCost:1 W
 Types:Instant Adventure
 A:SP$ Pump | ValidTgts$ Creature | KW$ Indestructible | SpellDescription$ Target creature gains indestructible until end of turn.
 Oracle:Target creature gains indestructible until end of turn.
