@@ -398,8 +398,31 @@ ScryfallCode=HBG
 286 L Forest @Julian Kok Joon Wen
 
 [rebalanced]
+A85 C A-Blessed Hippogriff @Leanna Crossan
+A104 C A-Steadfast Unicorn @John Thacker
+A117 C A-Dragonborn Looter @Julio Reyna
+A120 U A-Goggles of Night @Forrest Imel
+A125 U A-Kenku Artificer @Dave Greco
+A127 U A-Lapis Orb of Dragonkind @Olena Richards
+A128 C A-Pseudodragon Familiar @Campbell White
+A136 C A-You Come to a River @Viko Menezes
+A138 C A-Young Blue Dragon @Tuan Duong Chu
+A143 C A-Baleful Beholder @Lars Grant-West
+A154 C A-Eyes of the Beholder @Kari Christensen
+A160 C A-Guildsworn Prowler @Fariba Khamseh
+A163 C A-Manticore @Billy Christian
 A166 C A-Sepulcher Ghoul @Jason A. Engle
+A168 U A-Sigil of Myrkul @David Astruga
+A177 U A-Carnelian Orb of Dragonkind @Olena Richards
+A197 C A-Young Red Dragon @Adam Vehige
+A203 C A-Circle of the Land Druid @Alexandre Honoré
+A208 C A-Druidic Ritual @Vincent Christiaens
 A209 R A-Earthquake Dragon @Johan Grenier
+A210 U A-Emerald Dragon @Diego Gisbert
+A215 U A-Jade Orb of Dragonkind @Olena Richards
 A217 R A-Monster Manual @David Gaillet
+A223 U A-Split the Spoils @Edgar Sánchez Hidalgo
 A232 R A-Baba Lysaga, Night Witch @Slawomir Maniak
 A243 M A-Minsc & Boo, Timeless Heroes @Andreas Zafiratos
+A259 C A-Lantern of Revealing @Eytan Zana
+A262 U A-Navigation Orb @Robin Olausson
