@@ -3,6 +3,7 @@ package forge.adventure.data;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.SerializationException;
 import forge.adventure.util.Config;
 import forge.adventure.util.Paths;
 import forge.adventure.world.BiomeSprites;
@@ -17,19 +18,22 @@ import java.util.List;
  */
 public class WorldData implements Serializable {
 
-    static Array<EnemyData> allEnemies;
     public int width;
     public int height;
     public float playerStartPosX;
     public float playerStartPosY;
     public float noiseZoomBiome;
     public int tileSize;
-    public List<String> biomesNames;
     public BiomeData roadTileset;
     public String biomesSprites;
     public float maxRoadDistance;
+    public String[] biomesNames;
+
+
     private BiomeSprites sprites;
     private List<BiomeData> biomes;
+
+    private static Array<EnemyData> allEnemies;
     private static Array<ShopData> shopList;
 
 
@@ -77,10 +81,16 @@ public class WorldData implements Serializable {
 
     public List<BiomeData> GetBiomes() {
         if (biomes == null) {
-            biomes = new ArrayList<BiomeData>();
-            Json json = new Json();
-            for (String name : biomesNames) {
-                biomes.add(json.fromJson(BiomeData.class, Config.instance().getFile(name)));
+            try
+            {
+                biomes = new ArrayList<BiomeData>();
+                Json json = new Json();
+                for (String name : biomesNames) {
+                    biomes.add(json.fromJson(BiomeData.class, Config.instance().getFile(name)));
+                }
+            }
+            catch (SerializationException ex) {
+                ex.printStackTrace();
             }
         }
         return biomes;

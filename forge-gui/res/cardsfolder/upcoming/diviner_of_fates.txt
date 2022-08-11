@@ -1,0 +1,10 @@
+Name:Diviner of Fates
+ManaCost:W U B
+Types:Creature Cephalid Wizard
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerDescription$ When CARDNAME enters the battlefield, it connives. (Draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on this creature.)
+SVar:TrigConnive:DB$ Connive
+T:Mode$ DiscardedAll | ValidPlayer$ You | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigSeek | ActivationLimit$ 1 | TriggerDescription$ Whenever you discard one or more cards, seek a card that shares a card type with one of the discarded cards. This ability triggers only once each turn.
+SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.sharesCardTypeWith TriggeredCards | ChangeNum$ 1
+DeckHas:Ability$Discard|Counters
+Oracle:When Diviner of Fates enters the battlefield, it connives.\nWhenever you discard one or more cards, seek a card that shares a card type with one of the discarded cards. This ability triggers only once each turn.

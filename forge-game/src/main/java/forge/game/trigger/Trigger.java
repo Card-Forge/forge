@@ -531,7 +531,6 @@ public abstract class Trigger extends TriggerReplacementBase {
     public SpellAbility getSpawningAbility() {
         return spawningAbility;
     }
-
     public void setSpawningAbility(SpellAbility ability) {
         spawningAbility = ability;
     }

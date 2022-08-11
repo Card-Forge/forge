@@ -5,7 +5,6 @@ import forge.adventure.data.EffectData;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
 
 public class EffectEditor extends JComponent  {
     EffectData currentData;
@@ -25,16 +24,15 @@ public class EffectEditor extends JComponent  {
         if(!isOpponentEffect)
             opponent=new EffectEditor(true);
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        JPanel parameters=new JPanel();
+        FormPanel parameters=new FormPanel();
         parameters.setBorder(BorderFactory.createTitledBorder("Effect"));
-        parameters.setLayout(new GridLayout(7,2)) ;
 
-        parameters.add(new JLabel("Name:"));                        parameters.add(name);
-        parameters.add(new JLabel("Start with extra cards:"));      parameters.add(changeStartCards);
-        parameters.add(new JLabel("Change life:"));                 parameters.add(lifeModifier);
-        parameters.add(new JLabel("Movement speed:"));              parameters.add(moveSpeed);
-        parameters.add(new JLabel("Start battle with cards:"));     parameters.add(startBattleWithCard);
-        parameters.add(new JLabel("color view:"));                  parameters.add(colorView);
+        parameters.add("Name:",  name);
+        parameters.add("Start with extra cards:",    changeStartCards);
+        parameters.add("Change life:",             lifeModifier);
+        parameters.add("Movement speed:",          moveSpeed);
+        parameters.add("Start battle with cards:",    startBattleWithCard);
+        parameters.add("color view:",              colorView);
         add(parameters);
         if(!isOpponentEffect)
         {    add(new JLabel("Opponent:")); add(opponent);}
