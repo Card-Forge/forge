@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.IntMap;
 import forge.adventure.data.BiomeData;
+import forge.adventure.data.BiomeStructureData;
 import forge.adventure.data.BiomeTerrainData;
 import forge.adventure.util.Config;
 import forge.gui.FThreads;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 public class BiomeTexture implements Serializable {
     private final BiomeData data;
     private final int tileSize;
-    public Pixmap emptyPixmap = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+    public static Pixmap emptyPixmap = null;
     ArrayList<ArrayList<Pixmap>> images = new ArrayList<>();
     ArrayList<ArrayList<Pixmap>> smallImages = new ArrayList<>();
     ArrayList<IntMap<Pixmap>> edgeImages = new ArrayList<>();
@@ -45,7 +46,6 @@ public class BiomeTexture implements Serializable {
         FThreads.invokeInEdtNowOrLater(new Runnable() {
             @Override
             public void run() {
-                Pixmap completePicture = null;
 
                 if (images != null) {
                     for (ArrayList<Pixmap> val : images) {
@@ -79,22 +79,49 @@ public class BiomeTexture implements Serializable {
                 edgeImages = new ArrayList<>();
 
                 ArrayList<TextureAtlas.AtlasRegion> regions =new ArrayList<>();
+                ArrayList<TextureAtlas> source =new ArrayList<>();
                 regions.add(Config.instance().getAtlas(data.tilesetAtlas).findRegion(data.tilesetName));
+                source.add(Config.instance().getAtlas(data.tilesetAtlas));
                 if(data.terrain!=null)
                 {
                     for(BiomeTerrainData terrain:data.terrain)
                     {
-                        regions.add(Config.instance().getAtlas(data.tilesetAtlas).findRegion(terrain.spriteName));
+                        TextureAtlas.AtlasRegion region = Config.instance().getAtlas(data.tilesetAtlas).findRegion(terrain.spriteName);
+                        if(region==null)
+                        {
+                            System.err.print("Can not find sprite "+terrain.spriteName);
+                            continue;
+                        }
+                        regions.add(region);
+                        source.add(Config.instance().getAtlas(data.tilesetAtlas));
                     }
                 }
+                if(data.structures!=null)
+                {
+                    for(BiomeStructureData structureData:data.structures)
+                    {
+                        BiomeStructure structure=new BiomeStructure(structureData,0,0,0);
+                        TextureAtlas atlas=structure.atlas ();
+                        for(BiomeStructureData.BiomeStructureDataMapping mapping:structure.mapping())
+                        {
+                            TextureAtlas.AtlasRegion region = atlas.findRegion(mapping.name);
+                            if(region==null)
+                            {
+                                System.err.print("Can not find sprite "+mapping.name);
+                                continue;
+                            }
+                            regions.add(region);
+                            source.add(atlas);
+                        }
+                    }
+                }
+
                 for (TextureAtlas.AtlasRegion region : regions) {
                     ArrayList<Pixmap> pics = new ArrayList<>();
                     ArrayList<Pixmap> spics = new ArrayList<>();
-                    if (completePicture == null) {
+                    if(!region.getTexture().getTextureData().isPrepared())
                         region.getTexture().getTextureData().prepare();
-                        completePicture = region.getTexture().getTextureData().consumePixmap();
-                    }
-
+                        Pixmap completePicture = region.getTexture().getTextureData().consumePixmap();
                     for (int y = 0; y < 4; y++) {
                         for (int x = 0; x < 3; x++) {
                             int px = region.getRegionX() + (x * tileSize);
@@ -117,6 +144,7 @@ public class BiomeTexture implements Serializable {
                     smallImages.add(spics);
                     edgeImages.add(new IntMap<>());
 
+                    completePicture.dispose();
                 }
             }
         });
@@ -124,6 +152,8 @@ public class BiomeTexture implements Serializable {
 
     public Pixmap getPixmap(int biomeSubIndex) {
         if (biomeSubIndex >= edgeImages.size() || biomeSubIndex < 0) {
+            if(emptyPixmap==null)
+                emptyPixmap=new Pixmap(1, 1, Pixmap.Format.RGBA8888);
             return emptyPixmap;
         }
         return images.get(biomeSubIndex).get(BigPictures.Center.value);

@@ -1682,8 +1682,8 @@ public class AiController {
 
         Iterables.removeIf(saList, new Predicate<SpellAbility>() {
             @Override
-            public boolean apply(final SpellAbility spellAbility) {
-                return spellAbility instanceof LandAbility;
+            public boolean apply(final SpellAbility spellAbility) { //don't include removedAI cards if somehow the AI can play the ability or gain control of unsupported card
+                return spellAbility instanceof LandAbility || (spellAbility.getHostCard() != null && spellAbility.getHostCard().getRules().getAiHints().getRemAIDecks());
             }
         });
 

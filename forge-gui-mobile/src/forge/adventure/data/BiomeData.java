@@ -6,7 +6,6 @@ import forge.util.MyRandom;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -15,7 +14,6 @@ import java.util.Random;
  * contains the information for the biomes
  */
 public class BiomeData implements Serializable {
-    private final Random rand = MyRandom.getRandom();
     public float startPointX;
     public float startPointY;
     public float noiseWeight;
@@ -27,14 +25,17 @@ public class BiomeData implements Serializable {
     public float width;
     public float height;
     public String color;
+    public boolean collision;
     public boolean invertHeight;
     public String[] spriteNames;
-    public List<String> enemies;
-    public List<String> pointsOfInterest;
+    public String[] enemies;
+    public String[] pointsOfInterest;
+    public BiomeStructureData[] structures;
 
     private ArrayList<EnemyData> enemyList;
     private ArrayList<PointOfInterestData> pointOfInterestList;
 
+    private final Random rand = MyRandom.getRandom();
     public Color GetColor() {
         return Color.valueOf(color);
     }
@@ -45,8 +46,13 @@ public class BiomeData implements Serializable {
             if (enemies == null)
                 return enemyList;
             for (EnemyData data : new Array.ArrayIterator<>(WorldData.getAllEnemies())) {
-                if (enemies.contains(data.name)) {
-                    enemyList.add(data);
+                for (String enemyName:enemies)
+                {
+                    if(data.name.equals(enemyName))
+                    {
+                        enemyList.add(data);
+                        break;
+                    }
                 }
             }
         }
@@ -60,8 +66,13 @@ public class BiomeData implements Serializable {
                 return pointOfInterestList;
             Array<PointOfInterestData> allTowns = PointOfInterestData.getAllPointOfInterest();
             for (PointOfInterestData data : new Array.ArrayIterator<>(allTowns)) {
-                if (pointsOfInterest.contains(data.name)) {
-                    pointOfInterestList.add(data);
+                for (String poiName:pointsOfInterest)
+                {
+                    if(data.name.equals(poiName))
+                    {
+                        pointOfInterestList.add(data);
+                        break;
+                    }
                 }
             }
         }

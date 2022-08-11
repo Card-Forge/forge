@@ -12,5 +12,5 @@ ALTERNATE
 Name:Dissonant Wave
 ManaCost:2 G
 Types:Instant Adventure
-A:SP$ Counter | TargetType$ Activated,Triggered | TgtPrompt$ Select target activated or triggered ability from a noncreature source | ValidTgts$ Card.nonCreature | SpellDescription$ Counter target activated or triggered ability from a noncreature source. (Then exile this card. You may cast the creature later from exile.)
+A:SP$ Counter | TargetType$ Activated,Triggered | TgtPrompt$ Select target activated or triggered ability from a noncreature source | ValidTgts$ Card.nonCreature,Emblem | SpellDescription$ Counter target activated or triggered ability from a noncreature source. (Then exile this card. You may cast the creature later from exile.)
 Oracle:Counter target activated or triggered ability from a noncreature source. (Then exile this card. You may cast the creature later from exile.)

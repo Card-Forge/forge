@@ -117,6 +117,13 @@ public class ConsoleCommandInterpreter {
             WorldStage.getInstance().GetPlayer().setPosition(poi.getPosition());
             return  "Teleported to " + s[0] + "(" + poi.getPosition() + ")";
         });
+        registerCommand(new String[]{"spawn","enemy"}, s -> {
+            if(s.length<1) return "Command needs 1 parameter: enemy name.";
+
+            if(WorldStage.getInstance().spawn(s[0]))
+                return  "Spawn " + s[0];
+            return "Can not find enemy "+s[0];
+        });
         registerCommand(new String[]{"give", "gold"}, s -> {
             if(s.length<1) return "Command needs 1 parameter: Amount.";
             int amount;

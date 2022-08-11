@@ -1,12 +1,15 @@
 package forge.adventure.util;
 
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.DialogData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.MapStage;
+import forge.card.ColorSet;
 import forge.util.Localizer;
 
 /**
@@ -152,7 +155,8 @@ public class MapDialog {
                 } else if(condition.not) return false;
             }
             if(condition.colorIdentity != null && !condition.colorIdentity.isEmpty()) { //Check for player's color ID.
-                if(!player.getColorIdentity().equals(condition.colorIdentity.toUpperCase())){
+                if(player.getColorIdentity().hasAllColors(ColorSet.fromNames(condition.colorIdentity.toCharArray()).getColor()))
+                {
                     if(!condition.not) return false;
                 } else if(condition.not) return false;
             }

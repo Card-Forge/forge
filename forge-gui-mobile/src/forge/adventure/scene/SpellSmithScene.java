@@ -3,7 +3,10 @@ package forge.adventure.scene;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import forge.Forge;
@@ -18,10 +21,7 @@ import forge.card.ColorSet;
 import forge.item.PaperCard;
 import forge.util.MyRandom;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -142,7 +142,7 @@ public class SpellSmithScene extends UIScene {
         List<CardEdition> editions = StaticData.instance().getSortedEditions();
         editions = editions.stream().filter(input -> {
            if(input == null) return false;
-           return(!Config.instance().getConfigData().restrictedEditions.contains(input.getCode()));
+           return(!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getCode()));
         }).collect(Collectors.toList());
         editionList = ui.findActor("BSelectPlane");
         rewardDummy = ui.findActor("RewardDummy");
