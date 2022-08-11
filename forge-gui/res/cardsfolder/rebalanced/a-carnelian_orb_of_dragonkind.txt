@@ -1,0 +1,6 @@
+Name:A-Carnelian Orb of Dragonkind
+ManaCost:2 R
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | AddsKeywords$ Haste | AddsKeywordsValid$ Spell.Dragon+Creature | AddsKeywordsUntil$ UntilEOT | SpellDescription$ Add one mana of any color. If that mana is spent on a Dragon creature spell, it gains haste until end of turn.
+DeckHints:Type$Dragon
+Oracle:{T}: Add one mana of any color. If that mana is spent on a Dragon creature spell, it gains haste until end of turn.
