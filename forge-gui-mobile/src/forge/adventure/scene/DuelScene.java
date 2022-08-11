@@ -9,6 +9,7 @@ import forge.LobbyPlayer;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
 import forge.adventure.data.EffectData;
+import forge.adventure.data.EnemyData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.Config;
@@ -51,7 +52,7 @@ public class DuelScene extends ForgeScene {
     PlayerSprite player;
     RegisteredPlayer humanPlayer;
     private EffectData dungeonEffect;
-    Deck playerDeck, enemyDeck;
+    Deck playerDeck;
     boolean chaosBattle = false;
     boolean callbackExit = false;
     List<IPaperCard> playerExtras = new ArrayList<>();
@@ -144,7 +145,6 @@ public class DuelScene extends ForgeScene {
         dungeonEffect = E;
     }
 
-
     @Override
     public void enter() {
         Set<GameType> appliedVariants = new HashSet<>();
@@ -155,25 +155,37 @@ public class DuelScene extends ForgeScene {
         int missingCards = Config.instance().getConfigData().minDeckSize - playerDeck.getMain().countAll();
         if (missingCards > 0) //Replace unknown cards for a Wastes.
             playerDeck.getMain().add("Wastes", missingCards);
-        humanPlayer = RegisteredPlayer.forVariants(2, appliedVariants, playerDeck, null, false, null, null);
+        int playerCount = 1;
+        EnemyData currentEnemy = enemy.getData();
+        for (int i = 0; i < 8 && currentEnemy != null; i++) {
+            playerCount++;
+            currentEnemy = currentEnemy.nextEnemy;
+        }
+
+        humanPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, playerDeck, null, false, null, null);
         LobbyPlayer playerObject = GamePlayerUtil.getGuiPlayer();
         FSkin.getAvatars().put(90000, advPlayer.avatar());
         playerObject.setAvatarIndex(90000);
         humanPlayer.setPlayer(playerObject);
+        humanPlayer.setTeamNumber(0);
         humanPlayer.setStartingLife(advPlayer.getLife());
-        Current.setLatestDeck(enemyDeck);
-        RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(2, appliedVariants, Current.latestDeck(), null, false, null, null);
-        LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(this.enemy.getData().name, selectAI(this.enemy.getData().ai));
-        if (!enemy.nameOverride.isEmpty())
-            enemyPlayer.setName(enemy.nameOverride); //Override name if defined in the map.
-        FSkin.getAvatars().put(90001, this.enemy.getAvatar());
-        enemyPlayer.setAvatarIndex(90001);
-
-        aiPlayer.setPlayer(enemyPlayer);
-        aiPlayer.setStartingLife(Math.round((float) enemy.getData().life * advPlayer.getDifficulty().enemyLifeFactor));
 
         Array<EffectData> playerEffects = new Array<>();
         Array<EffectData> oppEffects = new Array<>();
+
+        Map<DeckProxy, Pair<List<String>, List<String>>> deckProxyMapMap = null;
+        DeckProxy deckProxy = null;
+        if (chaosBattle) {
+            deckProxyMapMap = DeckProxy.getAllQuestChallenges();
+            List<DeckProxy> decks = new ArrayList<>(deckProxyMapMap.keySet());
+            deckProxy = Aggregates.random(decks);
+            //playerextras
+            List<IPaperCard> playerCards = new ArrayList<>();
+            for (String s : deckProxyMapMap.get(deckProxy).getLeft()) {
+                playerCards.add(QuestUtil.readExtraCard(s));
+            }
+            humanPlayer.addExtraCardsOnBattlefield(playerCards);
+        }
 
         //Collect and add items effects first.
         for (String playerItem : advPlayer.getEquippedItems()) {
@@ -183,13 +195,6 @@ public class DuelScene extends ForgeScene {
                 if (item.effect.opponent != null) oppEffects.add(item.effect.opponent);
             } else {
                 System.err.printf("Item %s not found.", playerItem);
-            }
-        }
-        if (enemy.getData().equipment != null) {
-            for (String oppItem : enemy.getData().equipment) {
-                ItemData item = ItemData.getItem(oppItem);
-                oppEffects.add(item.effect);
-                if (item.effect.opponent != null) playerEffects.add(item.effect.opponent);
             }
         }
 
@@ -214,22 +219,62 @@ public class DuelScene extends ForgeScene {
         }
 
         addEffects(humanPlayer, playerEffects);
-        addEffects(aiPlayer, oppEffects);
 
-        //add extra cards for challenger mode
-        if (chaosBattle) {
-            humanPlayer.addExtraCardsOnBattlefield(playerExtras);
-            aiPlayer.addExtraCardsOnBattlefield(AIExtras);
+        currentEnemy = enemy.getData();
+        for (int i = 0; i < 8 && currentEnemy != null; i++) {
+            Deck deck = null;
+
+            if (this.chaosBattle) { //random challenge for chaos mode
+                //aiextras
+                List<IPaperCard> aiCards = new ArrayList<>();
+                for (String s : deckProxyMapMap.get(deckProxy).getRight()) {
+                    aiCards.add(QuestUtil.readExtraCard(s));
+                }
+                this.AIExtras = aiCards;
+                deck = deckProxy.getDeck();
+            } else {
+                deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
+            }
+            RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, null, false, null, null);
+
+            LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(currentEnemy.name, selectAI(currentEnemy.ai));
+            if (!enemy.nameOverride.isEmpty())
+                enemyPlayer.setName(enemy.nameOverride); //Override name if defined in the map.(only supported for 1 enemy atm)
+            FSkin.getAvatars().put(90001 + i, enemy.getAvatar(i));
+            enemyPlayer.setAvatarIndex(90001 + i);
+            aiPlayer.setPlayer(enemyPlayer);
+            aiPlayer.setTeamNumber(currentEnemy.teamNumber);
+            aiPlayer.setStartingLife(Math.round((float) currentEnemy.life * advPlayer.getDifficulty().enemyLifeFactor));
+
+            Array<EffectData> equipmentEffects = new Array<>();
+            if (currentEnemy.equipment != null) {
+                for (String oppItem : currentEnemy.equipment) {
+                    ItemData item = ItemData.getItem(oppItem);
+                    equipmentEffects.add(item.effect);
+                    if (item.effect.opponent != null) playerEffects.add(item.effect.opponent);
+                }
+            }
+            addEffects(aiPlayer, oppEffects);
+            addEffects(aiPlayer, equipmentEffects);
+
+            //add extra cards for challenger mode
+            if (chaosBattle) {
+                aiPlayer.addExtraCardsOnBattlefield(AIExtras);
+            }
+
+            players.add(aiPlayer);
+
+            Current.setLatestDeck(deck);
+
+            currentEnemy = currentEnemy.nextEnemy;
         }
 
         players.add(humanPlayer);
-        players.add(aiPlayer);
 
         final Map<RegisteredPlayer, IGuiGame> guiMap = new HashMap<>();
         guiMap.put(humanPlayer, MatchController.instance);
 
         hostedMatch = MatchController.hostMatch();
-
 
         GameRules rules = new GameRules(GameType.Constructed);
         rules.setPlayForAnte(false);
@@ -250,7 +295,7 @@ public class DuelScene extends ForgeScene {
                     "It's all or nothing!", "It's all on the line!", "You can't back down now!", "Do you have what it takes?", "What will happen next?",
                     "Don't blink!", "You can't lose here!", "There's no turning back!", "It's all or nothing now!");
             String message = Aggregates.random(list);
-            FThreads.delayInEDT(600, () -> FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, aiPlayer.getPlayer().getName(), new FBufferedImage(120, 120) {
+            FThreads.delayInEDT(600, () -> FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride, new FBufferedImage(120, 120) {
                 @Override
                 protected void draw(Graphics g, float w, float h) {
                     if (FSkin.getAvatars().get(90001) != null)
@@ -258,7 +303,6 @@ public class DuelScene extends ForgeScene {
                 }
             })));
         }
-
 
         for (final Player p : hostedMatch.getGame().getPlayers()) {
             if (p.getController() instanceof PlayerControllerHuman) {
@@ -281,37 +325,8 @@ public class DuelScene extends ForgeScene {
         this.enemy = enemySprite;
         this.playerDeck = (Deck) AdventurePlayer.current().getSelectedDeck().copyTo("PlayerDeckCopy");
         this.chaosBattle = this.enemy.getData().copyPlayerDeck && Current.player().isFantasyMode();
-        if (this.chaosBattle) { //random challenge for chaos mode
-            Map<DeckProxy, Pair<List<String>, List<String>>> deckProxyMapMap = DeckProxy.getAllQuestChallenges();
-            List<DeckProxy> decks = new ArrayList<>(deckProxyMapMap.keySet());
-            DeckProxy deck = Aggregates.random(decks);
-            //playerextras
-            List<IPaperCard> playerCards = new ArrayList<>();
-            for (String s : deckProxyMapMap.get(deck).getLeft()) {
-                playerCards.add(QuestUtil.readExtraCard(s));
-            }
-            this.playerExtras = playerCards;
-            //aiextras
-            List<IPaperCard> aiCards = new ArrayList<>();
-            for (String s : deckProxyMapMap.get(deck).getRight()) {
-                aiCards.add(QuestUtil.readExtraCard(s));
-            }
-            this.AIExtras = aiCards;
-            this.enemyDeck = deck.getDeck();
-        } else {
-            this.AIExtras.clear();
-            this.playerExtras.clear();
-            this.enemyDeck = this.enemy.getData().copyPlayerDeck ? this.playerDeck : this.enemy.getData().generateDeck(Current.player().isFantasyMode(), Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
-        }
-    }
-
-    //was planning to get player and enemy deck outside the duelscene while loading to display VS screen in the future with deck colors displayed...
-    public Deck getPlayerDeck() {
-        return this.playerDeck;
-    }
-
-    public Deck getEnemyDeck() {
-        return this.enemyDeck;
+        this.AIExtras.clear();
+        this.playerExtras.clear();
     }
 
     private String selectAI(String ai) { //Decide opponent AI.
@@ -338,4 +353,3 @@ public class DuelScene extends ForgeScene {
         return AI;
     }
 }
-
