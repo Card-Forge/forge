@@ -6,8 +6,8 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.YouOwn | ChoiceTitle$ You may choose a creature card in your hand | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | ConditionDefined$ ChosenCard | ConditionPresent$ Card | StaticAbilities$ PerpetualShield | Name$ Spara's Bodyguard's Perpetual Effect | Duration$ Permanent | SubAbility$ DBAddCounter
 SVar:PerpetualShield:Mode$ Continuous | Affected$ Card.ChosenCard | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | AddReplacementEffect$ ETBShield | Description$ The chosen card perpetually enters the battlefield with an additional shield counter.
-SVar:ETBShield:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBPutShield:1 | ReplacementResult$ Updated | Description$ This Creature perpetually enters the battlefield with an additional shield counter.
-SVar:ExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ SHIELD:1
+SVar:ETBShield:Event$ Moved | ValidCard$ Card.ChosenCard | Destination$ Battlefield | ReplaceWith$ DBExtraCounter | ReplacementResult$ Updated | Description$ This Creature perpetually enters the battlefield with an additional shield counter.
+SVar:DBExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ SHIELD | CounterNum$ 1
 SVar:DBAddCounter:DB$ PutCounter | Defined$ Self | ConditionDefined$ ChosenCard | ConditionNotPresent$ Card | CounterType$ SHIELD | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of each combat, CARDNAME gets +1/+1 until end of turn for each shield counter among other creatures you control.
