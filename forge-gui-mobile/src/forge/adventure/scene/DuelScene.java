@@ -90,8 +90,8 @@ public class DuelScene extends ForgeScene {
             FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, enemyName, new FBufferedImage(120, 120) {
                 @Override
                 protected void draw(Graphics g, float w, float h) {
-                    if (FSkin.getAvatars().get(90000) != null)
-                        g.drawImage(FSkin.getAvatars().get(90000), 0, 0, w, h);
+                    if (FSkin.getAvatars().get(90001) != null)
+                        g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
                 }
             }, new Callback<Integer>() {
                 @Override
@@ -135,7 +135,7 @@ public class DuelScene extends ForgeScene {
             changeStartCards+= data.changeStartCards;
             startCards.addAll(data.startBattleWithCards());
         }
-        player.addExtraCardsOnBattlefield(startCards);
+        player.setCardsOnBattlefield(startCards);
         player.setStartingLife(Math.max(1,lifeMod+player.getStartingLife()));
         player.setStartingHand(player.getStartingHand()+changeStartCards);
     }
@@ -179,7 +179,7 @@ public class DuelScene extends ForgeScene {
         DeckProxy deckProxy =null;
         if(chaosBattle)
         {
-             deckProxyMapMap = DeckProxy.getAllQuestChallenges();
+            deckProxyMapMap = DeckProxy.getAllQuestChallenges();
             List<DeckProxy> decks = new ArrayList<>(deckProxyMapMap.keySet());
             deckProxy = Aggregates.random(decks);
             //playerextras
@@ -309,11 +309,11 @@ public class DuelScene extends ForgeScene {
                     "It's all or nothing!","It's all on the line!","You can't back down now!","Do you have what it takes?","What will happen next?",
                     "Don't blink!","You can't lose here!","There's no turning back!","It's all or nothing now!");
             String message = Aggregates.random(list);
-            FThreads.delayInEDT(600, () -> FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, enemy.getName(), new FBufferedImage(120, 120) {
+            FThreads.delayInEDT(600, () -> FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride, new FBufferedImage(120, 120) {
                 @Override
                 protected void draw(Graphics g, float w, float h) {
-                    if (FSkin.getAvatars().get(90000) != null)
-                        g.drawImage(FSkin.getAvatars().get(90000), 0, 0, w, h);
+                    if (FSkin.getAvatars().get(90001) != null)
+                        g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
                 }
             })));
         }
