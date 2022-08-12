@@ -1,0 +1,9 @@
+Name:Follow the Tracks
+ManaCost:2 G
+Types:Sorcery
+A:SP$ NameCard | Defined$ You | ChooseFromList$ Gate of the Black Dragon,Gate to Manorborn,Gate to Seatower,Gate to the Citadel,Gate to Tumbledown | SubAbility$ DBConjure | SpellDescription$ Conjure a card of your choice from CARDNAME's spellbook onto the battlefield.
+SVar:DBConjure:DB$ MakeCard | Name$ ChosenName | Zone$ Battlefield | SubAbility$ LandTapped | RememberMade$ True
+SVar:LandTapped:DB$ Tap | Defined$ Remembered | ETB$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearNamedCard$ True
+DeckHas:Type$Gate
+Oracle:Conjure a card of your choice from Follow the Tracks's spellbook onto the battlefield.
