@@ -16,4 +16,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Hand | Static$ True | V
 SVar:DBForget:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CardCounters.FLAME
 AI:RemoveDeck:Random
+SVar:HasAttackEffect:TRUE
 Oracle:Haste\nWhenever Kardum, Patron of Flames attacks, put a flame counter on it, then seek a card with mana value equal to the number of flame counters on it and exile that card face down.\nWhen Kardum dies, put all cards you own exiled with it into your hand. At the beginning of the end step of your next turn, discard those cards.
