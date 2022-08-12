@@ -9,8 +9,7 @@ SVar:DBSeek:DB$ ChangeZone | Origin$ Library | Destination$ Exile | ExileFaceDow
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigReturn | ForgetOnMoved$ Exile | TriggerDescription$ When CARDNAME dies, put the cards exiled with it into their owner's hand.
 SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+ExiledWithSource | RememberChanged$ True | Origin$ Exile | Destination$ Hand | SubAbility$ DBDelay
 SVar:DBDelay:DB$ DelayedTrigger | DelayedTriggerDefinedPlayer$ You | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDiscardExiled | RememberObjects$ Remembered | TriggerDescription$ At the beginning of the end step of your next turn, discard those cards.
-SVar:TrigDiscardExiled:DB$ Discard | Mode$ Defined | DelayedTriggerDefinedPlayer$ You | DefinedCards$ DelayTriggerRemembered | TriggerDescription$ Discard the cards put into your hand with CARDNAME
+SVar:TrigDiscardExiled:DB$ Discard | Mode$ Defined | DelayedTriggerDefinedPlayer$ You | DefinedCards$ DelayTriggerRemembered
 SVar:X:Count$CardCounters.FLAME
-AI:RemoveDeck:Random
 SVar:HasAttackEffect:TRUE
 Oracle:Haste\nWhenever Kardum, Patron of Flames attacks, put a flame counter on it, then seek a card with mana value equal to the number of flame counters on it and exile that card face down.\nWhen Kardum dies, put all cards you own exiled with it into your hand. At the beginning of the end step of your next turn, discard those cards.
