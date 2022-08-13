@@ -50,7 +50,7 @@ public class TileMapScene extends HudScene {
         }
         stage.act(Gdx.graphics.getDeltaTime());
         hud.act(Gdx.graphics.getDeltaTime());
-        if (autoheal) { //todo add simple bg animation or effect also add check if auto heal is needed if player has full life so sound don't keep playing
+        if (autoheal) { //todo add simple bg animation or effect
             SoundSystem.instance.play(SoundEffectType.Enchantment, false);
             autoheal = false;
         }
@@ -90,8 +90,8 @@ public class TileMapScene extends HudScene {
         super.enter();
         if (inTown()) {
             // auto heal
-            Current.player().fullHeal();
-            autoheal = true;
+            if (Current.player().fullHeal())
+                autoheal = true; // to play sound/effect on act
         }
     }
 
