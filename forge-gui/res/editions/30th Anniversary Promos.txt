@@ -7,5 +7,7 @@ ScryfallCode=P30A
 
 [cards]
 1 U Serra Angel @Kev Walker
+1 R Arcane Signet @Gaboleps
+1 R Richard Garfield, Ph.D. @Dave Dorman
 2 R Ball Lightning @Trevor Claxton
 3 R Fyndhorn Elves @Igor Kieryluk
