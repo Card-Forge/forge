@@ -1,0 +1,75 @@
+
+goblin_group.png
+size: 64,96
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+Avatar 
+  xy: 0, 0
+  size: 16, 16        
+Avatar 
+  xy: 16, 0
+  size: 16, 16      
+Avatar 
+  xy: 32, 0
+  size: 16, 16    
+Idle 
+  xy: 0, 16
+  size: 32, 16 
+Idle 
+  xy: 32, 16
+  size: 32, 16
+Idle 
+  xy: 64, 16
+  size: 32, 16
+Idle 
+  xy: 96, 16
+  size: 32, 16
+Walk
+  xy: 0, 32
+  size: 32, 16   
+Walk 
+  xy: 32, 32
+  size: 32, 16
+Walk 
+  xy: 64, 32
+  size: 32, 16
+Walk 
+  xy: 96, 32
+  size: 32, 16   
+Attack 
+  xy: 0, 48
+  size: 32, 16 
+Attack 
+  xy: 32, 48
+  size: 32, 16 
+Attack 
+  xy: 64, 48
+  size: 32, 16
+Attack 
+  xy: 96, 48
+  size: 32, 16        
+Hit 
+  xy: 0, 64
+  size: 32, 16    
+Hit 
+  xy: 32, 64
+  size: 32, 16
+Hit 
+  xy: 64, 64
+  size: 32, 16
+Hit 
+  xy: 96, 64
+  size: 32, 16
+Death 
+  xy: 0, 80
+  size: 32, 16      
+Death 
+  xy: 32, 80
+  size: 32, 16 
+Death 
+  xy: 64, 80
+  size: 32, 16
+Death 
+  xy: 96, 80
+  size: 32, 16 

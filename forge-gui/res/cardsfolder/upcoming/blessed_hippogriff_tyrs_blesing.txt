@@ -13,6 +13,5 @@ ALTERNATE
 Name:Tyr's Blesing
 ManaCost:W
 Types:Instant Adventure
-A:SP$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target to make indestructable | KW$ Indestructible | SpellDescription$ Target creature gains indestructible until end of turn.
-SVar:HasAttackEffect:TRUE
+A:SP$ Pump | ValidTgts$ Creature | KW$ Indestructible | SpellDescription$ Target creature gains indestructible until end of turn.
 Oracle:Target creature gains indestructible until end of turn.

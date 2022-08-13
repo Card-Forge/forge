@@ -1176,7 +1176,8 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             else if (ability.getTargets() != null && ability.getTargets().isTargetingAnyCard() && ability.getTargets().size() == 1)
                 cardView = CardView.get(ability.getTargetCard());
             else if (cardView.getZone() == null || cardView.getZone().isHidden()) {
-                cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getCurrentState().getImageKey()));
+                if (!cardView.hasAlternateState()) //don't override if it has alternatestate since it maybe showing alternate view
+                    cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getCurrentState().getImageKey()));
             }
             return controller.getGui().confirm(cardView, message.replaceAll("\n", " "));
         } else {

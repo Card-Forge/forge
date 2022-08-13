@@ -67,6 +67,12 @@
             <version>5.2.2</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.jetopto1.cling</groupId>
+            <artifactId>cling-core</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>

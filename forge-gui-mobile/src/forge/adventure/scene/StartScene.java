@@ -7,9 +7,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.stage.GameStage;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
+import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 import forge.screens.TransitionScreen;
 
@@ -104,6 +106,13 @@ public class StartScene extends UIScene {
         }
 
         Gdx.input.setInputProcessor(stage); //Start taking input from the ui
+
+        if(Forge.createNewAdventureMap)
+        {
+            this.NewGame();
+            Current.setDebug(true);
+            GameStage.maximumScrollDistance=4f;
+        }
     }
 
     @Override

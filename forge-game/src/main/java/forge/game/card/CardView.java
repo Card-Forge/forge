@@ -1247,12 +1247,17 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Power);
         }
         void updatePower(Card c) {
-            if (c.getCurrentState().getView() == this || c.getAlternateState() == null) {
-                set(TrackableProperty.Power, c.getNetPower());
+            int num;
+            if (getType().hasSubtype("Vehicle") && !isCreature()) {
+                // use printed value so user can still see it
+                num = c.getCurrentPower();
+            } else {
+                num = c.getNetPower();
             }
-            else {
-                set(TrackableProperty.Power, c.getNetPower() - c.getBasePower() + c.getAlternateState().getBasePower());
+            if (c.getCurrentState().getView() != this && c.getAlternateState() != null) {
+                num -= c.getBasePower() + c.getAlternateState().getBasePower();
             }
+            set(TrackableProperty.Power, num);
         }
         void updatePower(CardState c) {
             Card card = c.getCard();
@@ -1267,12 +1272,17 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Toughness);
         }
         void updateToughness(Card c) {
-            if (c.getCurrentState().getView() == this || c.getAlternateState() == null) {
-                set(TrackableProperty.Toughness, c.getNetToughness());
+            int num;
+            if (getType().hasSubtype("Vehicle") && !isCreature()) {
+                // use printed value so user can still see it
+                num = c.getCurrentToughness();
+            } else {
+                num = c.getNetToughness();
             }
-            else {
-                set(TrackableProperty.Toughness, c.getNetToughness() - c.getBaseToughness() + c.getAlternateState().getBaseToughness());
+            if (c.getCurrentState().getView() != this && c.getAlternateState() != null) {
+                num -= c.getBaseToughness() + c.getAlternateState().getBaseToughness();
             }
+            set(TrackableProperty.Toughness, num);
         }
         void updateToughness(CardState c) {
             Card card = c.getCard();

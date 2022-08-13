@@ -2,11 +2,7 @@ package forge.adventure;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowListener;
+import com.badlogic.gdx.backends.lwjgl3.*;
 import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import forge.Forge;
 import forge.adventure.util.Config;
@@ -107,7 +103,13 @@ public class Main {
             }
         });
 
-
+        for(int i=0;i<args.length;i++)
+        {
+            if(args[i].equals("testMap"))
+            {
+                Forge.createNewAdventureMap=true;
+            }
+        }
         new Lwjgl3Application(start, config);
 
     }

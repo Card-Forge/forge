@@ -293,10 +293,14 @@ public class ImageCache {
         }
         String fileName = file.getPath();
         //load to assetmanager
-        if (!Forge.getAssets().manager().contains(fileName, Texture.class)) {
-            Forge.getAssets().manager().load(fileName, Texture.class, Forge.getAssets().getTextureFilter());
-            Forge.getAssets().manager().finishLoadingAsset(fileName);
-            counter+=1;
+        try {
+            if (!Forge.getAssets().manager().contains(fileName, Texture.class)) {
+                Forge.getAssets().manager().load(fileName, Texture.class, Forge.getAssets().getTextureFilter());
+                Forge.getAssets().manager().finishLoadingAsset(fileName);
+                counter += 1;
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to load image: "+fileName);
         }
 
         //return loaded assets
@@ -305,7 +309,7 @@ public class ImageCache {
         } else {
             Texture cardTexture = Forge.getAssets().manager().get(fileName, Texture.class, false);
             //if full bordermasking is enabled, update the border color
-            if (Forge.enableUIMask.equals("Full")) {
+            if (cardTexture != null && Forge.enableUIMask.equals("Full")) {
                 boolean borderless = isBorderless(imageKey);
                 updateBorders(cardTexture.toString(), borderless ? Pair.of(Color.valueOf("#171717").toString(), false): isCloserToWhite(getpixelColor(cardTexture)));
                 //if borderless, generate new texture from the asset and store
@@ -327,6 +331,7 @@ public class ImageCache {
                 syncQ.clear();
                 cardsLoaded.clear();
                 counter = 0;
+                CardRenderer.clearcardArtCache();
             } catch (Exception e) {
                 //e.printStackTrace();
             } finally {

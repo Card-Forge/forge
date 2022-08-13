@@ -331,7 +331,7 @@ public class DeckProxy implements InventoryItem {
             if (pc.getKey().getRules().getManaCost() != null) {
                 if (pc.getKey().getRules().getType().hasSubtype("Saga") || pc.getKey().getRules().getType().hasSubtype("Class") || CardSplitType.Split.equals(pc.getKey().getRules().getSplitType()))
                     continue;
-                    keyCMC.put(pc.getKey(),pc.getKey().getRules().getManaCost().getCMC());
+                keyCMC.put(pc.getKey(),pc.getKey().getRules().getManaCost().getCMC());
             }
         }
 
@@ -659,9 +659,10 @@ public class DeckProxy implements InventoryItem {
         return decks;
     }
 
-    public static List<DeckProxy> getAllEasyStarterDecks() {
+    //todo custom starter decks in adventure
+    public static List<DeckProxy> getAllCustomStarterDecks() {
         final List<DeckProxy> decks = new ArrayList<>();
-        final IStorage<Deck> easy = FModel.getDecks().getEasyStarterDecks();
+        final IStorage<Deck> easy = FModel.getDecks().getCustomStarterDecks();
         addDecksRecursivelly("Constructed", GameType.Constructed, decks, "", easy, null);
         return decks;
     }
