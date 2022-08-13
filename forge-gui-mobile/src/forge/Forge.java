@@ -19,7 +19,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import forge.adventure.scene.*;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
-import forge.adventure.util.Current;
 import forge.animation.ForgeAnimation;
 import forge.assets.Assets;
 import forge.assets.AssetsDownloader;
