@@ -3,7 +3,7 @@ ManaCost:3 U U U
 Types:Creature Elemental
 PT:3/2
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigGainControl | TriggerZones$ Battlefield | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may gain control of target creature for as long as you control CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | Execute$ TrigGainControl | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Landfall — Whenever a land enters the battlefield under your control, you may gain control of target creature for as long as you control CARDNAME.
 SVar:TrigGainControl:DB$ GainControl | TgtPrompt$ Choose target creature | ValidTgts$ Creature | LoseControl$ LeavesPlay,LoseControl | SpellDescription$ Gain control of target creature for as long as CARDNAME remains on the battlefield.
 SVar:BuffedBy:Land
 Oracle:Flying\nLandfall — Whenever a land enters the battlefield under your control, you may gain control of target creature for as long as you control Roil Elemental.

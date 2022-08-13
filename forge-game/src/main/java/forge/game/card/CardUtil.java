@@ -530,27 +530,25 @@ public final class CardUtil {
     // however, due to the changes necessary for SA_Requirements this is much
     // different than the original
     public static List<Card> getValidCardsToTarget(TargetRestrictions tgt, SpellAbility ability) {
-        Card activatingCard = ability.getHostCard();
+        final Card activatingCard = ability.getHostCard();
         final Game game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();
 
         final boolean canTgtStack = zone.contains(ZoneType.Stack);
-        List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ability.getActivatingPlayer(), ability.getHostCard(), ability);
+        List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ability.getActivatingPlayer(), activatingCard, ability);
         List<Card> choices = CardLists.getTargetableCards(validCards, ability);
         if (canTgtStack) {
             // Since getTargetableCards doesn't have additional checks if one of the Zones is stack
             // Remove the activating card from targeting itself if its on the Stack
             if (activatingCard.isInZone(ZoneType.Stack)) {
-                choices.remove(ability.getHostCard());
+                choices.remove(activatingCard);
             }
         }
         List<GameObject> targetedObjects = ability.getUniqueTargets();
 
         // Remove cards already targeted
         final List<Card> targeted = Lists.newArrayList(ability.getTargets().getTargetCards());
-        for (final Card c : targeted) {
-            choices.remove(c);
-        }
+        choices.removeAll(targeted);
 
         // Remove cards exceeding total CMC
         if (ability.hasParam("MaxTotalTargetCMC")) {
