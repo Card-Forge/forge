@@ -224,7 +224,16 @@ public class GameHUD extends Stage {
         miniMapPlayer.setPosition(miniMap.getX() + xPosMini - miniMapPlayer.getWidth()/2, miniMap.getY() + yPosMini -  miniMapPlayer.getHeight()/2);
         if (GuiBase.isAndroid()) // prevent drawing on top of console
             miniMapPlayer.setVisible(!console.isVisible()&&miniMap.isVisible());
-
+        //colored lifepoints
+        if (Current.player().getLife() >= Current.player().getMaxLife()) {
+            //color green if max life
+            lifePoints.setColor(Color.GREEN);
+        } else if (Current.player().getLife() <= 5) {
+            //color red if critical
+            lifePoints.setColor(Color.RED);
+        } else {
+            lifePoints.setColor(Color.WHITE);
+        }
     }
 
     Texture miniMapTexture;
