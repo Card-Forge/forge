@@ -61,7 +61,7 @@ public class InnScene extends UIScene {
             sell.getLabel().setText(Forge.getLocalizer().getMessage("lblSell"));
 
             tempHitPoints = ui.findActor("tempHitPoints");
-            tempHitPoints.setText(Forge.getLocalizer().getMessage("lblTempHitPoints"));
+            tempHitPoints.setText(Forge.getLocalizer().getMessageorUseDefault("lblTempHitPoints", "Temporary Hit Points"));
 
             leaveIcon = ui.findActor("leaveIcon");
             healIcon = ui.findActor("healIcon");
