@@ -473,7 +473,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
 
     public void heal() {
-        life = Math.max(maxLife, life);
+        life = maxLife;
         onLifeTotalChangeList.emit();
     }
     public void defeated() {
