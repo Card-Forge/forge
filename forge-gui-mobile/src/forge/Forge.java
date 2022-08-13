@@ -969,12 +969,6 @@ public class Forge implements ApplicationListener {
             MapStage.getInstance().clearIsInMap();
         currentScene = newScene;
 
-        if (currentScene instanceof TileMapScene) {
-            if (((TileMapScene)currentScene).inTown()) {
-                Current.player().fullHeal();
-            }
-        }
-
         currentScene.enter();
         return true;
     }
