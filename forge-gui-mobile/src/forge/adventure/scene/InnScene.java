@@ -2,6 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
@@ -11,7 +12,8 @@ import forge.adventure.util.Current;
  * Scene for the Inn in towns
  */
 public class InnScene extends UIScene {
-    TextButton heal, sell, leave;
+    TextButton tempHitPointCost, sell, leave;
+    Label tempHitPoints;
     Image healIcon, sellIcon, leaveIcon;
 
     public InnScene() {
@@ -23,8 +25,8 @@ public class InnScene extends UIScene {
         Forge.switchToLast();
     }
 
-    public void heal() {
-        Current.player().fullHeal();
+    public void potionOfFalseLife() {
+        Current.player().potionOfFalseLife();
     }
 
     @Override
@@ -41,10 +43,10 @@ public class InnScene extends UIScene {
                     InnScene.this.done();
                 }
             });
-            ui.onButtonPress("heal", new Runnable() {
+            ui.onButtonPress("tempHitPointCost", new Runnable() {
                 @Override
                 public void run() {
-                    InnScene.this.heal();
+                    InnScene.this.potionOfFalseLife();
                 }
             });
             ui.onButtonPress("sell", new Runnable() {
@@ -57,13 +59,26 @@ public class InnScene extends UIScene {
             leave.getLabel().setText(Forge.getLocalizer().getMessage("lblLeave"));
             sell = ui.findActor("sell");
             sell.getLabel().setText(Forge.getLocalizer().getMessage("lblSell"));
-            heal = ui.findActor("heal");
-            heal.getLabel().setText(Forge.getLocalizer().getMessage("lblHeal"));
+
+            tempHitPoints = ui.findActor("tempHitPoints");
+            tempHitPoints.setText(Forge.getLocalizer().getMessageorUseDefault("lblTempHitPoints", "Temporary Hit Points"));
 
             leaveIcon = ui.findActor("leaveIcon");
             healIcon = ui.findActor("healIcon");
             sellIcon = ui.findActor("sellIcon");
+    }
 
+    @Override
+    public void render() {
+        super.render();
+
+        int tempHealthCost = Current.player().falseLifeCost();
+        boolean purchaseable = Current.player().getMaxLife() == Current.player().getLife() &&
+                tempHealthCost <= Current.player().getGold();
+
+        tempHitPointCost = ui.findActor("tempHitPointCost");
+        tempHitPointCost.setDisabled(!purchaseable);
+        tempHitPointCost.getLabel().setText("$" + tempHealthCost);
     }
 
     private void sell() {

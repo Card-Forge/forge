@@ -16,10 +16,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
 import com.badlogic.gdx.utils.ScreenUtils;
-import forge.adventure.scene.ForgeScene;
-import forge.adventure.scene.GameScene;
-import forge.adventure.scene.Scene;
-import forge.adventure.scene.SceneType;
+import forge.adventure.scene.*;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.animation.ForgeAnimation;
@@ -52,10 +49,7 @@ import forge.toolbox.*;
 import forge.util.*;
 
 import java.io.File;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 public class Forge implements ApplicationListener {
     public static final String CURRENT_VERSION = "1.6.53.001";
@@ -404,13 +398,13 @@ public class Forge implements ApplicationListener {
         if (GuiBase.isAndroid())
             return;
         if (isMobileAdventureMode) {
-            if (cursorA0 != null && name == "0") {
+            if (cursorA0 != null && Objects.equals(name, "0")) {
                 setGdxCursor(cursorA0);
                 return;
-            } else if (cursorA1 != null && name == "1") {
+            } else if (cursorA1 != null && Objects.equals(name, "1")) {
                 setGdxCursor(cursorA1);
                 return;
-            } else if (cursorA2 != null && name == "2") {
+            } else if (cursorA2 != null && Objects.equals(name, "2")) {
                 setGdxCursor(cursorA2);
                 return;
             }
@@ -974,7 +968,6 @@ public class Forge implements ApplicationListener {
         }
     }
     /** Retrieve assets.
-     * @param other if set to true returns otherAssets otherwise returns cardAssets
      */
     public static Assets getAssets() {
         return ((Forge)Gdx.app.getApplicationListener()).assets;
@@ -990,6 +983,7 @@ public class Forge implements ApplicationListener {
         if (newScene instanceof GameScene)
             MapStage.getInstance().clearIsInMap();
         currentScene = newScene;
+
         currentScene.enter();
         return true;
     }

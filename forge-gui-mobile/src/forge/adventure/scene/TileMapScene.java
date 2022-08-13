@@ -8,8 +8,11 @@ import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.stage.MapStage;
 import forge.adventure.stage.PointOfInterestMapRenderer;
 import forge.adventure.util.Config;
+import forge.adventure.util.Current;
 import forge.adventure.util.TemplateTmxMapLoader;
 import forge.adventure.world.WorldSave;
+import forge.sound.SoundEffectType;
+import forge.sound.SoundSystem;
 
 /**
  * Scene that will render tiled maps.
@@ -19,6 +22,7 @@ public class TileMapScene extends HudScene {
     TiledMap map;
     PointOfInterestMapRenderer tiledMapRenderer;
     private String nextMap;
+    private boolean autoheal = false;
     private float cameraWidth = 0f, cameraHeight = 0f;
 
     public TileMapScene() {
@@ -46,6 +50,10 @@ public class TileMapScene extends HudScene {
         }
         stage.act(Gdx.graphics.getDeltaTime());
         hud.act(Gdx.graphics.getDeltaTime());
+        if (autoheal) { //todo add simple bg animation or effect
+            SoundSystem.instance.play(SoundEffectType.Enchantment, false);
+            autoheal = false;
+        }
     }
 
     @Override
@@ -80,6 +88,11 @@ public class TileMapScene extends HudScene {
     @Override
     public void enter() {
         super.enter();
+        if (inTown()) {
+            // auto heal
+            if (Current.player().fullHeal())
+                autoheal = true; // to play sound/effect on act
+        }
     }
 
     public void load(PointOfInterest point) {
