@@ -2,6 +2,6 @@ Name:Ranger of Eos
 ManaCost:3 W
 Types:Creature Human Soldier Ranger
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for up to two creature cards with mana value 1 or less, reveal them, put them into your hand, then shuffle.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for up to two creature cards with mana value 1 or less, reveal them, put them into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.cmcLE1 | ChangeNum$ 2 | ShuffleNonMandatory$ True
 Oracle:When Ranger of Eos enters the battlefield, you may search your library for up to two creature cards with mana value 1 or less, reveal them, put them into your hand, then shuffle.

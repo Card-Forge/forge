@@ -2,6 +2,6 @@ Name:Guardians of Koilos
 ManaCost:5
 Types:Artifact Creature Construct
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return another target historic permanent you control to its owner's hand. (Artifacts, legendaries, and Sagas are historic.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may return another target historic permanent you control to its owner's hand. (Artifacts, legendaries, and Sagas are historic.)
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.Historic+YouCtrl+Other | TgtPrompt$ Select another historic permanent you control.
 Oracle:When Guardians of Koilos enters the battlefield, you may return another target historic permanent you control to its owner's hand. (Artifacts, legendaries, and Sagas are historic.)

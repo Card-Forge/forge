@@ -3,16 +3,15 @@ ManaCost:1 W
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AITgts$ Creature.nonToken | AILogic$ Pump
-A:AB$ Pump | Cost$ 2 W W | Defined$ Enchanted | ImprintCards$ Enchanted | StackDescription$ None | SubAbility$ DBRemAura | SpellDescription$ Exile enchanted creature and all Auras attached to it. At the beginning of the next end step, return that card to the battlefield under its owner's control. If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature.
+A:AB$ Pump | Cost$ 2 W W | Defined$ Enchanted | ImprintCards$ Enchanted | StackDescription$ SpellDescription | SubAbility$ DBRemAura | SpellDescription$ Exile enchanted creature and all Auras attached to it. At the beginning of the next end step, return that card to the battlefield under its owner's control. If you do, return the other cards exiled this way to the battlefield under their owners' control attached to that creature.
 SVar:DBRemAura:DB$ PumpAll | ValidCards$ Card.IsImprinted,Aura.AttachedTo Creature.IsImprinted | RememberAllPumped$ True | StackDescription$ None | SubAbility$ DBChangeZoneAll
 SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Card.IsRemembered | SubAbility$ DelayedEffect
 SVar:DelayedEffect:DB$ Effect | Name$ Flickerform Effect | Triggers$ TrigEOT | RememberObjects$ Remembered | ImprintCards$ Imprinted | Duration$ Permanent | SubAbility$ DBCleanup
-SVar:TrigEOT:Mode$ Phase | Phase$ End of Turn | Execute$ FlickerformReturn | TriggerZones$ Command | TriggerDescription$ At the beginning of the next end step, return that card to the battlefield under its owner's control.
+SVar:TrigEOT:Mode$ Phase | Phase$ End of Turn | Execute$ FlickerformReturn | OneOff$ True | TriggerZones$ Command | TriggerDescription$ At the beginning of the next end step, return that card to the battlefield under its owner's control.
 SVar:FlickerformReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+IsImprinted | Origin$ Exile | Destination$ Battlefield | SubAbility$ ClearImprint
 SVar:ClearImprint:DB$ Cleanup | ClearImprinted$ True | SubAbility$ FlickerformAttach
-SVar:FlickerformAttach:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Aura.IsRemembered | Zone$ Exile | RepeatSubAbility$ DBAllAuraAttach | SubAbility$ FlickerformCleanup
+SVar:FlickerformAttach:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Aura.IsRemembered | Zone$ Exile | RepeatSubAbility$ DBAllAuraAttach
 SVar:DBAllAuraAttach:DB$ ChangeZone | Defined$ Imprinted | Origin$ Exile | Destination$ Battlefield | AttachedTo$ Valid Creature.IsRemembered
-SVar:FlickerformCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 AI:RemoveDeck:All
 SVar:NonStackingAttachEffect:True

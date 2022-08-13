@@ -126,7 +126,7 @@ public abstract class Lang {
     }
 
     public static String getPlural(final String noun) {
-        return noun + (noun.endsWith("s") || noun.endsWith("x") || noun.endsWith("ch") ? "es" : "s");
+        return noun + (noun.endsWith("s") && !noun.endsWith("ds") || noun.endsWith("x") || noun.endsWith("ch") ? "es" : noun.endsWith("ds") ? "" : "s");
     }
 
     public static String nounWithAmount(final int cnt, final String noun) {

@@ -2,7 +2,7 @@ Name:Ambitious Farmhand
 ManaCost:1 W
 Types:Creature Human Peasant
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Plains.Basic | ShuffleNonMandatory$ True
 A:AB$ SetState | Cost$ 1 W W | Defined$ Self | CheckSVar$ X | SVarCompare$ GE3 | Mode$ Transform | PrecostDesc$ Coven — | SpellDescription$ Transform CARDNAME. Activate only if you control three or more creatures with different powers.
 SVar:X:Count$DifferentPower_Creature.YouCtrl

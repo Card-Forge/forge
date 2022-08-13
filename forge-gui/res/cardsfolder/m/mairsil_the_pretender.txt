@@ -3,7 +3,7 @@ ManaCost:1 U B R
 Types:Legendary Creature Human Wizard
 PT:4/4
 S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Card.YouOwn+inZoneExile+counters_GE1_CAGE | GainsAbilitiesOfZones$ Exile | GainsAbilitiesLimitPerTurn$ 1 | Description$ CARDNAME has all activated abilities of all cards you own in exile with cage counters on them. You may activate each of those abilities only once each turn.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may exile an artifact or creature card from your hand or graveyard and put a cage counter on it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may exile an artifact or creature card from your hand or graveyard and put a cage counter on it.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Hand,Graveyard | Destination$ Exile | ChangeType$ Artifact.YouCtrl,Creature.YouCtrl | SubAbility$ DBCounter | RememberChanged$ True | ChangeNum$ 1 | AILogic$ Mairsil
 SVar:DBCounter:DB$ PutCounter | CounterType$ CAGE | CounterNum$ 1 | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

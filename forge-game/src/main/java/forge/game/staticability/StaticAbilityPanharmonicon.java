@@ -29,6 +29,12 @@ public class StaticAbilityPanharmonicon {
             return n;
         }
 
+        // "triggers only once" means it can't happen
+        if (t.hasParam("ActivationLimit")) {
+            // currently no other limits, so no further calculation needed
+            return n;
+        }
+
         CardCollectionView cardList = null;
         // if LTB look back
         if (t.getMode() == TriggerType.ChangesZone && "Battlefield".equals(t.getParam("Origin"))) {
@@ -99,6 +105,15 @@ public class StaticAbilityPanharmonicon {
             final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
 
             if (table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), ZoneType.smartValueOf(destination), stAb.getParam("ValidCause"), card, stAb).isEmpty()) {
+                return false;
+            }
+        } else if (trigMode.equals(TriggerType.Attacks)) {
+            if (!stAb.matchesValidParam("ValidCause", runParams.get(AbilityKey.Attacker))) {
+                return false;
+            }
+        } else if (trigMode.equals(TriggerType.AttackersDeclared)
+                || trigMode.equals(TriggerType.AttackersDeclaredOneTarget)) {
+            if (!stAb.matchesValidParam("ValidCause", runParams.get(AbilityKey.Attackers))) {
                 return false;
             }
         } else if (trigMode.equals(TriggerType.SpellCastOrCopy)

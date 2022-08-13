@@ -2,7 +2,7 @@ Name:Predatory Nightstalker
 ManaCost:3 B B
 Types:Creature Nightstalker
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigSac | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may have target opponent sacrifice a creature.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may have target opponent sacrifice a creature.
 SVar:TrigSac:DB$ Sacrifice | ValidTgts$ Opponent | SacValid$ Creature
 SVar:PlayMain1:TRUE
 Oracle:When Predatory Nightstalker enters the battlefield, you may have target opponent sacrifice a creature.

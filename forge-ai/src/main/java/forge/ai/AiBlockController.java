@@ -633,7 +633,7 @@ public class AiBlockController {
                 final Card blocker = ComputerUtilCard.getWorstCreatureAI(killingBlockers);
                 boolean doTrade = false;
 
-                if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+                if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
                     // Always trade when life in danger
                     doTrade = true;
                 } else {
@@ -647,7 +647,7 @@ public class AiBlockController {
                 }
             }
         }
-        attackersLeft = new ArrayList<>(currentAttackers);
+        attackersLeft = currentAttackers;
     }
 
     // Chump Blocks (should only be made if life is in danger)
@@ -656,13 +656,17 @@ public class AiBlockController {
 
         makeChumpBlocks(combat, currentAttackers);
 
-        if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+        if (lifeInDanger) {
             makeMultiChumpBlocks(combat);
         }
     }
 
     private void makeChumpBlocks(final Combat combat, List<Card> attackers) {
-        if (attackers.isEmpty() || !ComputerUtilCombat.lifeInDanger(ai, combat)) {
+        if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
+            lifeInDanger = false;
+            return;
+        }
+        if (attackers.isEmpty()) {
             return;
         }
 
@@ -848,9 +852,8 @@ public class AiBlockController {
     }
 
     private void makeChumpBlocksToSavePW(Combat combat) {
-        if (ai.getLife() <= ai.getStartingLife() / 5 || ComputerUtilCombat.lifeInDanger(ai, combat)) {
-            // most likely not worth trying to protect planeswalkers when at threateningly low life or in
-            // dangerous combat which threatens lethal or severe damage to face
+        if (lifeInDanger) {
+            // most likely not worth trying to protect planeswalkers when at threateningly low life
             return;
         }
 
@@ -1078,11 +1081,10 @@ public class AiBlockController {
             makeTradeBlocks(combat); // choose necessary trade blocks
 
             // if life is still in danger
-            if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
+            if (lifeInDanger) {
                 makeChumpBlocks(combat); // choose necessary chump blocks
-            } else {
-                lifeInDanger = false;
             }
+
             // Reinforce blockers blocking attackers with trample if life is still in danger
             if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
                 reinforceBlockersAgainstTrample(combat);
@@ -1096,25 +1098,23 @@ public class AiBlockController {
             }
 
             // TODO could be made more accurate if this would be inside each blocker choosing loop instead
-            lifeInDanger |= removeUnpayableBlocks(combat);
+            lifeInDanger |= removeUnpayableBlocks(combat) && ComputerUtilCombat.lifeInDanger(ai, combat);
 
             // == 2. If the AI life would still be in danger make a safer approach ==
-            if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
+            if (lifeInDanger) {
                 clearBlockers(combat, possibleBlockers); // reset every block assignment
                 makeTradeBlocks(combat); // choose necessary trade blocks
                 makeGoodBlocks(combat);
                 // choose necessary chump blocks if life is still in danger
-                if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                    makeChumpBlocks(combat);
-                } else {
-                    lifeInDanger = false;
-                }
+                makeChumpBlocks(combat);
+
                 // Reinforce blockers blocking attackers with trample if life is still in danger
                 if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
                     reinforceBlockersAgainstTrample(combat);
                 } else {
                     lifeInDanger = false;
                 }
+
                 makeGangBlocks(combat);
                 reinforceBlockersToKill(combat);
             }
@@ -1123,15 +1123,23 @@ public class AiBlockController {
             if (lifeInDanger && ComputerUtilCombat.lifeInSeriousDanger(ai, combat)) {
                 clearBlockers(combat, possibleBlockers);
                 makeChumpBlocks(combat);
-                if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
+
+                if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
                     makeTradeBlocks(combat);
+                } else {
+                    lifeInDanger = false;
                 }
 
-                if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                    makeGoodBlocks(combat);
-                } else {
+                if (lifeInDanger && ComputerUtilCombat.lifeInDanger(ai, combat)) {
                     reinforceBlockersAgainstTrample(combat);
+                } else {
+                    lifeInDanger = false;
                 }
+
+                if (!lifeInDanger) {
+                    makeGoodBlocks(combat);
+                }
+
                 makeGangBlocks(combat);
                 reinforceBlockersToKill(combat);
             }

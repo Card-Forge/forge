@@ -3,8 +3,9 @@ package forge.app;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.concurrent.Callable;
 
+import android.graphics.Point;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Version;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 
@@ -16,7 +17,6 @@ import android.app.PendingIntent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -40,7 +40,6 @@ import android.text.style.StyleSpan;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -55,6 +54,7 @@ import forge.util.FileUtil;
 import forge.util.ThreadUtil;
 import io.sentry.Breadcrumb;
 import io.sentry.Sentry;
+import org.apache.commons.lang3.tuple.Pair;
 //import io.sentry.android.core.SentryAndroid;
 
 public class Main extends AndroidApplication {
@@ -138,15 +138,12 @@ public class Main extends AndroidApplication {
 
         button.setBackground(states);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
-            }
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Uri uri = Uri.fromParts("package", getPackageName(), null);
+            intent.setData(uri);
+            startActivity(intent);
         });
 
         row2.addView(button);
@@ -155,12 +152,7 @@ public class Main extends AndroidApplication {
         TL.addView(row, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
         TL.addView(row2, new TableLayout.LayoutParams(TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT));
         TL.setGravity(Gravity.CENTER);
-        TL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapter.exit();
-            }
-        });
+        TL.setOnClickListener(v -> adapter.exit());
         setContentView(TL);
     }
     @Override
@@ -189,13 +181,10 @@ public class Main extends AndroidApplication {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Storage Permission Denied...");
             builder.setMessage("This app needs storage permission to run properly.\n\n\n\n");
-            builder.setPositiveButton("Open App Details", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                    //ActivityCompat crashes... maybe it needs the appcompat v7???
-                    //ActivityCompat.requestPermissions(Main.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                }
+            builder.setPositiveButton("Open App Details", (dialog, which) -> {
+                dialog.cancel();
+                //ActivityCompat crashes... maybe it needs the appcompat v7???
+                //ActivityCompat.requestPermissions(Main.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             });
             /*builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
@@ -268,16 +257,20 @@ public class Main extends AndroidApplication {
         }
     }
 
-    /*@Override
+    @Override
     protected void onDestroy() {
+        try {
+            final Forge forge = (Forge) Gdx.app.getApplicationListener();
+            if (forge != null)
+                forge.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         super.onDestroy();
-
         //ensure app doesn't stick around
         //ActivityManager am = (ActivityManager)getSystemService(Activity.ACTIVITY_SERVICE);
         //am.killBackgroundProcesses(getApplicationContext().getPackageName());
-
-        
-    }*/
+    }
 
     @Override
     protected void onPause()
@@ -347,23 +340,17 @@ public class Main extends AndroidApplication {
 
         @Override
         public boolean isConnectedToInternet() {
-            return Boolean.TRUE.equals(ThreadUtil.executeWithTimeout(new Callable<Boolean>() {
-                @Override
-                public Boolean call() throws Exception {
-                    NetworkInfo activeNetworkInfo = connManager.getActiveNetworkInfo();
-                    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-                }
+            return Boolean.TRUE.equals(ThreadUtil.executeWithTimeout(() -> {
+                NetworkInfo activeNetworkInfo = connManager.getActiveNetworkInfo();
+                return activeNetworkInfo != null && activeNetworkInfo.isConnected();
             }, 2000)); //if can't determine Internet connection within two seconds, assume not connected
         }
 
         @Override
         public boolean isConnectedToWifi() {
-            return Boolean.TRUE.equals(ThreadUtil.executeWithTimeout(new Callable<Boolean>() {
-                @Override
-                public Boolean call() throws Exception {
-                    NetworkInfo wifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-                    return wifi.isConnected();
-                }
+            return Boolean.TRUE.equals(ThreadUtil.executeWithTimeout(() -> {
+                NetworkInfo wifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                return wifi.isConnected();
             }, 2000)); //if can't determine Internet connection within two seconds, assume not connected
         }
 
@@ -445,15 +432,12 @@ public class Main extends AndroidApplication {
             // Setting getWindow() Flags needs to run on UI thread.
             // Should fix android.view.ViewRoot$CalledFromWrongThreadException:
             // Only the original thread that created a view hierarchy can touch its views.
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (preventSleep) {
-                        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                    }
-                    else {
-                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                    }
+            runOnUiThread(() -> {
+                if (preventSleep) {
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
+                else {
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 }
             });
         }
@@ -462,6 +446,34 @@ public class Main extends AndroidApplication {
         public void convertToJPEG(InputStream input, OutputStream output) {
             Bitmap bmp = BitmapFactory.decodeStream(input);
             bmp.compress(Bitmap.CompressFormat.JPEG, 100, output);
+        }
+        @Override
+        public Pair<Integer, Integer> getRealScreenSize(boolean real) {
+            //app size
+            WindowManager windowManager = (WindowManager) getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+            Display display = windowManager.getDefaultDisplay();
+            Point size = new Point();
+            if (Build.VERSION.SDK_INT >= 17) {
+                // Seems it doesn't compile if using 4.1.1.4 since it's missing this method
+                /*if (real)
+                    display.getRealSize(size);
+                else
+                    display.getSize(size);*/
+                //remove this line below and use the method above if using Android libs higher than 4.1.1.4
+                return Pair.of(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); // this method don't take account the soft navigation bars taken in rendered screen
+            } else if (Build.VERSION.SDK_INT >= 14) {
+                try {
+                    size.x = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
+                    size.y = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
+                } catch (Exception e) {
+                    size.x = Gdx.graphics.getWidth();
+                    size.y = Gdx.graphics.getHeight();
+                }
+            } else {
+                size.x = Gdx.graphics.getWidth();
+                size.y = Gdx.graphics.getHeight();
+            }
+            return Pair.of(size.x, size.y);
         }
     }
 

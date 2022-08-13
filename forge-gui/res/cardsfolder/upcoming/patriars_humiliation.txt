@@ -1,0 +1,8 @@
+Name:Patriar's Humiliation
+ManaCost:W
+Types:Instant
+A:SP$ Effect | StaticAbilities$ PerpetualLoss | RememberObjects$ Targeted | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | Name$ Patriar's Humiliation's Perpetual Effect | Duration$ Permanent | SubAbility$ DBDealDamage | SpellDescription$ Target creature perpetually loses all abilities.
+SVar:PerpetualLoss:Mode$ Continuous | Affected$ Card.IsRemembered | RemoveAllAbilities$ True | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature loses all abilities.
+SVar:DBDealDamage:DB$ DealDamage | NumDmg$ X | Defined$ Targeted | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals damage to it equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Target creature perpetually loses all abilities, then Patriar's Humiliation deals damage to it equal to the number of creatures you control.

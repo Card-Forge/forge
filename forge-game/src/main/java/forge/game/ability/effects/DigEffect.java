@@ -115,7 +115,7 @@ public class DigEffect extends SpellAbilityEffect {
         final Game game = player.getGame();
         final Player cont = host.getController();
         Player chooser = player;
-        int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
+        int digNum = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
 
         final ZoneType srcZone = sa.hasParam("SourceZone") ? ZoneType.smartValueOf(sa.getParam("SourceZone")) : ZoneType.Library;
 
@@ -189,7 +189,7 @@ public class DigEffect extends SpellAbilityEffect {
             final CardCollection rest = new CardCollection();
             final PlayerZone sourceZone = p.getZone(srcZone);
 
-            numToDig = Math.min(numToDig, sourceZone.size());
+            int numToDig = Math.min(digNum, sourceZone.size());
             for (int i = 0; i < numToDig; i++) {
                 top.add(sourceZone.get(i));
             }

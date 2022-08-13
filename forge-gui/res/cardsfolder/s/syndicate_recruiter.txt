@@ -1,0 +1,11 @@
+Name:Syndicate Recruiter
+ManaCost: 2 U B
+Types:Creature Vampire Assassin
+PT:4/5
+K:Flying
+K:Ward:1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, mill four cards. Then if there are five or more mana values among cards in your graveyard, conjure a card named Dig Up the Body into your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | ConditionCheckSVar$ X | ConditionSVarCompare$ GE5 | Name$ Dig Up the Body | Zone$ Hand
+SVar:X:Count$ValidGraveyard Card.YouOwn$DifferentCMC
+Oracle:Flying\nWard 1\nWhenever Syndicate Recruiter enters the battlefield, mill four cards. Then if there are five or more mana values among cards in your graveyard, conjure a card named Dig Up the Body into your hand.

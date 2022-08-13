@@ -65,10 +65,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             source.addRemembered(c);
         }
 
-        if ((power != null) || (toughness != null)) {
-            c.addNewPT(power, toughness, timestamp, 0);
-        }
-
         if (!addType.isEmpty() || !removeType.isEmpty() || addAllCreatureTypes || removeSuperTypes
                 || removeCardTypes || removeSubTypes || removeLandTypes || removeCreatureTypes || removeArtifactTypes || removeEnchantmentTypes) {
             c.addChangedCardTypes(addType, removeType, addAllCreatureTypes, removeSuperTypes, removeCardTypes, removeSubTypes,
@@ -76,6 +72,11 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
         }
 
         c.addChangedCardKeywords(keywords, removeKeywords, removeAll, timestamp, 0);
+
+        // do this after changing types in case it wasn't a creature before
+        if (power != null || toughness != null) {
+            c.addNewPT(power, toughness, timestamp, 0);
+        }
 
         if (sa.hasParam("CantHaveKeyword")) {
             c.addCantHaveKeyword(timestamp, Keyword.setValueOf(sa.getParam("CantHaveKeyword")));

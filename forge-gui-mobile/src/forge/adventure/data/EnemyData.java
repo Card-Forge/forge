@@ -15,6 +15,7 @@ public class EnemyData {
     public boolean copyPlayerDeck = false;
     public String ai;
     public boolean boss = false;
+    public boolean flying = false;
     public float spawnRate;
     public float difficulty;
     public float speed;
@@ -23,6 +24,9 @@ public class EnemyData {
     public String[] equipment;
     public String colors = "";
 
+    public EnemyData nextEnemy;
+    public int teamNumber=-1;
+
     public EnemyData() { }
     public EnemyData(EnemyData enemyData) {
         name           = enemyData.name;
@@ -30,6 +34,7 @@ public class EnemyData {
         deck           = enemyData.deck;
         ai             = enemyData.ai;
         boss           = enemyData.boss;
+        flying           = enemyData.flying;
         spawnRate      = enemyData.spawnRate;
         copyPlayerDeck = enemyData.copyPlayerDeck;
         difficulty     = enemyData.difficulty;

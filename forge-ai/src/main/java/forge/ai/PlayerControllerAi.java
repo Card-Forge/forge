@@ -721,6 +721,8 @@ public class PlayerControllerAi extends PlayerController {
 
         if (ComputerUtilCost.canPayCost(ability, c.getController(), true)) {
             ComputerUtil.playNoStack(c.getController(), ability, getGame(), true);
+            // transfer this info for Balduvian Fallen
+            sa.setPayingMana(ability.getPayingMana());
             return true;
         }
         return false;

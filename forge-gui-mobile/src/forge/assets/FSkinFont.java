@@ -384,7 +384,8 @@ public class FSkinFont {
                 }
                 translationFile.close();
             } catch (IOException e) {
-                System.err.println("Error reading translation file: " + translationFilePaths[i]);
+                if (!"en-US".equalsIgnoreCase(langCode))
+                    System.err.println("Error reading translation file: " + translationFilePaths[i]);
             }
         }
         langUniqueCharacterSet.put(langCode, characters.toString());
@@ -393,27 +394,28 @@ public class FSkinFont {
     }
 
     private void updateFont() {
-        if (scale != 1) { //re-use font inside range if possible
-            if (fontSize > MAX_FONT_SIZE) {
-                font = _get(MAX_FONT_SIZE).font;
-            } else {
-                font = _get(MIN_FONT_SIZE).font;
-            }
-            return;
+        String fontName = "f";
+        if (scale != 1) {
+            if (fontSize > MAX_FONT_SIZE)
+                fontName += MAX_FONT_SIZE;
+            else
+                fontName += MIN_FONT_SIZE;
+        } else {
+            fontName += fontSize;
         }
-
-        String fontName = "f" + fontSize;
         if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
             fontName += Forge.locale;
         }
         FileHandle fontFile = Gdx.files.absolute(ForgeConstants.FONTS_DIR + fontName + ".fnt");
         final boolean[] found = {false};
         if (fontFile != null && fontFile.exists()) {
-            final BitmapFontData data = new BitmapFontData(fontFile, false);
-            String finalFontName = fontName;
             FThreads.invokeInEdtNowOrLater(() -> { //font must be initialized on UI thread
                 try {
-                    font = new BitmapFont(data, (TextureRegion) null, true);
+                    if (!Forge.getAssets().manager().contains(fontFile.path(), BitmapFont.class)) {
+                        Forge.getAssets().manager().load(fontFile.path(), BitmapFont.class);
+                        Forge.getAssets().manager().finishLoadingAsset(fontFile.path());
+                    }
+                    font = Forge.getAssets().manager().get(fontFile.path(), BitmapFont.class);
                     found[0] = true;
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -442,11 +444,15 @@ public class FSkinFont {
 
         //approximate optimal page size
         int pageSize;
-        if (fontSize >= 28) {
+        if (fontSize >= 50) {
+          pageSize = 1024;
+        } else if (fontSize >= 20) {
+            pageSize = 512;
+        } else {
             pageSize = 256;
         }
-        else {
-            pageSize = 128;
+        if (Forge.locale.equals("zh-CN") || Forge.locale.equals("ja-JP") && !Forge.forcedEnglishonCJKMissing) {
+            pageSize = 1024;
         }
 
         final PixmapPacker packer = new PixmapPacker(pageSize, pageSize, Pixmap.Format.RGBA8888, 2, false);
@@ -475,7 +481,7 @@ public class FSkinFont {
                     textureRegions.addAll(new TextureRegion(texture));
                 }
 
-                font = new BitmapFont(fontData, textureRegions, true);
+                BitmapFont temp = new BitmapFont(fontData, textureRegions, true);
 
                 //create .fnt and .png files for font
                 FileHandle pixmapDir = Gdx.files.absolute(ForgeConstants.FONTS_DIR);
@@ -484,11 +490,16 @@ public class FSkinFont {
                     BitmapFontWriter.setOutputFormat(BitmapFontWriter.OutputFormat.Text);
 
                     String[] pageRefs = BitmapFontWriter.writePixmaps(packer.getPages(), pixmapDir, fontName);
-                    BitmapFontWriter.writeFont(font.getData(), pageRefs, fontFile, new BitmapFontWriter.FontInfo(fontName, fontSize), 1, 1);
+                    BitmapFontWriter.writeFont(temp.getData(), pageRefs, fontFile, new BitmapFontWriter.FontInfo(fontName, fontSize), 1, 1);
+                    //load to assetManager
+                    Forge.getAssets().manager().load(fontFile.path(), BitmapFont.class);
+                    Forge.getAssets().manager().finishLoadingAsset(fontFile.path());
+                    font = Forge.getAssets().manager().get(fontFile.path(), BitmapFont.class);
                 }
 
                 generator.dispose();
                 packer.dispose();
+                temp.dispose();
             }
         });
     }

@@ -3,7 +3,7 @@ ManaCost:4 G W
 Types:Creature Elf Knight
 PT:4/4
 K:First Strike
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a green or white creature you control to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a green or white creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.White+YouCtrl,Creature.Green+YouCtrl | AILogic$ NeverBounceItself
 SVar:NeedsToPlay:Creature.White+YouCtrl+cmcLE4+inZoneBattlefield,Creature.Green+YouCtrl+cmcLE4+inZoneBattlefield
 Oracle:First strike\nWhen Steel Leaf Paladin enters the battlefield, return a green or white creature you control to its owner's hand.

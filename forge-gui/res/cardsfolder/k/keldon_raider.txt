@@ -2,7 +2,7 @@ Name:Keldon Raider
 ManaCost:2 R R
 Types:Creature Human Warrior
 PT:4/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, draw a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, you may discard a card. If you do, draw a card.
 SVar:TrigDiscard:AB$ Draw | NumCards$ 1 | Cost$ Discard<1/Card>
 SVar:X:Remembered$Amount
 Oracle:When Keldon Raider enters the battlefield, you may discard a card. If you do, draw a card.

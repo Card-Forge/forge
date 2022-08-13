@@ -2,7 +2,7 @@ Name:Invasive Species
 ManaCost:2 G
 Types:Creature Insect
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return another permanent you control to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return another permanent you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Permanent.Other+YouCtrl | AILogic$ NeverBounceItself
 SVar:NeedsToPlay:Creature.YouCtrl+cmcLE2
 AI:RemoveDeck:Random

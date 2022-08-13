@@ -768,8 +768,9 @@ public class CountersPutAi extends CountersAi {
             list = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             if (amountStr.equals("X")
-                    && root.getXManaCostPaid() != null /* SubAbility on something that already had set PayX, e.g. Endless One ETB counters */
-                    && sa.hasParam(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) {
+                    && root.getXManaCostPaid() == null
+                    && source.getXManaCostPaid() == 0 /* SubAbility on something that already had set PayX, e.g. Endless One ETB counters */
+                    && sa.hasSVar(amountStr) && sa.getSVar(amountStr).equals("Count$xPaid")) {
 
                 // detect if there's more than one X in the cost (Hangarback Walker, Walking Ballista, etc.)
                 SpellAbility testSa = sa;

@@ -1,0 +1,10 @@
+Name:Sculpted Sunburst
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ ChooseCard | Choices$ Creature.YouCtrl | ChoiceDesc$ creature they control | Mandatory$ True | AILogic$ BestCard | ChoiceTitle$ Choose a creature you control | RememberChosen$ True | ImprintChosen$ True | SubAbility$ DBRepeatEach | SpellDescription$ Choose a creature you control, then each opponent chooses a creature they control with equal or lesser power.
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChooseCard | SubAbility$ DBChangeZoneAll | StackDescription$ Then each opponent chooses a creature they control with equal or lesser power.
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.RememberedPlayerCtrl+powerLEX | Mandatory$ True | AILogic$ BestCard | ChoiceTitle$ Choose a creature you control with equal or lesser power | RememberChosen$ True
+SVar:X:Imprinted$CardPower
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ConditionDefined$ Imprinted | ConditionPresent$ Creature | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.IsNotRemembered | SubAbility$ DBCleanup | SpellDescription$ If you chose a creature this way, exile each creature not chosen by any player this way.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | ClearChosenCard$ True
+Oracle:Choose a creature you control, then each opponent chooses a creature they control with equal or lesser power. If you chose a creature this way, exile each creature not chosen by any player this way.

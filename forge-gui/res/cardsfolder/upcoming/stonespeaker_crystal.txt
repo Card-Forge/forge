@@ -1,0 +1,9 @@
+Name:Stonespeaker Crystal
+ManaCost:4
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
+A:AB$ ChangeZoneAll | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select any number of target players | TargetMin$ 0 | TargetMax$ MaxTgt | ChangeType$ Card | SubAbility$ DBDraw | StackDescription$ Exile graveyards ({p:Targeted}). | SpellDescription$ Exile any number of target players' graveyards.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+SVar:MaxTgt:PlayerCountPlayers$Amount
+DeckHas:Ability$Sacrifice
+Oracle:{T}: Add {C}{C}.\n{2}, {T}, Sacrifice Stonespeaker Crystal: Exile any number of target players' graveyards. Draw a card.

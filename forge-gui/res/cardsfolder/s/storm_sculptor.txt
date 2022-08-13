@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Merfolk Wizard
 PT:3/2
 K:Unblockable
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a creature you control to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.YouCtrl | AILogic$ NeverBounceItself
 SVar:NeedsToPlay:Creature.YouCtrl+cmcLE4+inZoneBattlefield
 Oracle:Storm Sculptor can't be blocked.\nWhen Storm Sculptor enters the battlefield, return a creature you control to its owner's hand.

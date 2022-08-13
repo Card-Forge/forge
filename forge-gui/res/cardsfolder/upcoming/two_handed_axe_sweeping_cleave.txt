@@ -1,0 +1,17 @@
+Name:Two-Handed Axe
+ManaCost:2 R
+Types:Artifact Equipment
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigPump | TriggerDescription$ Whenever equipped creature attacks, double its power until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +Y | Double$ True
+SVar:Y:TriggeredAttacker$CardPower
+K:Equip:1 R
+AlternateMode:Adventure
+Oracle:Whenever equipped creature attacks, double its power until end of turn.\nEquip {1}{R}
+
+ALTERNATE
+
+Name:Sweeping Cleave
+ManaCost:1 R
+Types:Instant Adventure
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KW$ Double Strike | SpellDescription$ Target creature you control gains double strike until end of turn. (Then exile this card. You may cast the artifact later from exile.)
+Oracle:Target creature you control gains double strike until end of turn. (Then exile this card. You may cast the artifact later from exile.)

@@ -1,5 +1,6 @@
 {
   "invertHeight": true,
+  "collision": true,
   "name": "ocean",
   "startPointX": 0.5,
   "startPointY": 0.5,

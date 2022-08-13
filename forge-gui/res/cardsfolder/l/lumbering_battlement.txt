@@ -4,18 +4,9 @@ Types:Creature Beast
 PT:4/5
 K:Vigilance
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile any number of other nontoken creatures you control until it leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | Hidden$ True | ChangeType$ Creature.nonToken+Other+YouCtrl | ChangeNum$ MaxTgts | SelectPrompt$ Choose any number of other nontoken creatures you control | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ RememberedCard | ImprintCards$ Self | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnMoved$ Exile
-SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ That creature is exiled until EFFECTSOURCE leaves the battlefield
-SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf
-SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Hidden$ True | ChangeType$ Creature.nonToken+Other+YouCtrl | ChangeNum$ MaxTgts | SelectPrompt$ Choose any number of other nontoken creatures you control | Duration$ UntilHostLeavesPlay
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +2/+2 for each card exiled with it.
-#Triggers to forget remembered on this
-T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZones$ Battlefield | Static$ True | Execute$ TrigForget
-SVar:TrigForget:DB$ Pump | ForgetObjects$ TriggeredCard
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Static$ True | Execute$ TrigForgetAll
-SVar:TrigForgetAll:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$ValidExile Card.IsRemembered+ExiledWithSource/Times.2
+SVar:X:Count$ValidExile Card.ExiledWithSource/Times.2
 SVar:MaxTgts:Count$Valid Creature.nonToken+Other+YouCtrl
 AI:RemoveDeck:Random
 Oracle:Vigilance\nWhen Lumbering Battlement enters the battlefield, exile any number of other nontoken creatures you control until it leaves the battlefield.\nLumbering Battlement gets +2/+2 for each card exiled with it.

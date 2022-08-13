@@ -37,6 +37,16 @@ import forge.game.spellability.TargetRestrictions;
 public class WrappedAbility extends Ability {
 
     static Set<ApiType> noTimestampCheck = ImmutableSet.of(
+            ApiType.Abandon, // no Triggered
+            ApiType.AddPhase, // only player
+            ApiType.AddTurn, // only player
+
+            ApiType.Amass, // no Triggered only you
+            ApiType.Ascend, // only player (you)
+
+            ApiType.BecomeMonarch, // only player
+            ApiType.Bond, // updated
+
             ApiType.PutCounter,
             ApiType.MoveCounter,
             ApiType.MultiplyCounter,

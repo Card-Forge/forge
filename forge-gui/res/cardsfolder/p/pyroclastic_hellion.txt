@@ -2,7 +2,7 @@ Name:Pyroclastic Hellion
 ManaCost:4 R
 Types:Creature Hellion
 PT:4/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, you may return a land you control to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, you may return a land you control to its owner's hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Land.YouCtrl | ChangeNum$ 1 | SubAbility$ DBImmediateTrigger | RememberChanged$ True | SelectPrompt$ You may choose a land you control to return to its owner's hand
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | RememberObjects$ RememberedCard | ConditionDefined$ Remembered | ConditionPresent$ Card | Execute$ TrigDamage | SubAbility$ DBCleanup | TriggerDescription$ When you do, CARDNAME deals 2 damage to each opponent.
 SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 2

@@ -1,0 +1,7 @@
+Name:Volo's Journal
+ManaCost:no cost
+Types:Legendary Artifact
+K:Hexproof
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigNoteType | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, note one of its creature types that hasn't been noted for this artifact.
+SVar:TrigNoteType:DB$ ChooseType | Type$ Creature | TypesFromDefined$ TriggeredCard | Note$ True
+Oracle:Hexproof\nWhenever you cast a creature spell, note one of its creature types that hasn't been noted for this artifact.

@@ -2,7 +2,7 @@ Name:Solemn Simulacrum
 ManaCost:4
 Types:Artifact Creature Golem
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | ShuffleNonMandatory$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | OptionalDecider$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may draw a card.
 SVar:TrigDraw:DB$ Draw | Defined$ TriggeredCardController | NumCards$ 1

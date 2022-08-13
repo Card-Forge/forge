@@ -13,6 +13,7 @@ import forge.item.PaperCard;
 import forge.model.FModel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -75,8 +76,8 @@ public class RewardData {
             @Override
             public boolean apply(PaperCard input){
                 if(input == null) return false;
-                if(Config.instance().getConfigData().restrictedEditions.contains(input.getEdition())) return false;
-                return !Config.instance().getConfigData().restrictedCards.contains(input.getName());
+                if(Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getEdition())) return false;
+                return !Arrays.asList(Config.instance().getConfigData().restrictedCards).contains(input.getName());
             }
         });
         //Filter AI cards for enemies.

@@ -2,11 +2,7 @@ package forge.adventure;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowListener;
+import com.badlogic.gdx.backends.lwjgl3.*;
 import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import forge.Forge;
 import forge.adventure.util.Config;
@@ -16,6 +12,7 @@ import forge.util.FileUtil;
 import forge.util.OperatingSystem;
 import forge.util.RestartUtil;
 import io.sentry.Sentry;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -106,7 +103,13 @@ public class Main {
             }
         });
 
-
+        for(int i=0;i<args.length;i++)
+        {
+            if(args[i].equals("testMap"))
+            {
+                Forge.createNewAdventureMap=true;
+            }
+        }
         new Lwjgl3Application(start, config);
 
     }
@@ -185,6 +188,11 @@ public class Main {
         public void convertToJPEG(InputStream input, OutputStream output) throws IOException {
             BufferedImage image = ImageIO.read(input);
             ImageIO.write(image, "jpg", output);
+        }
+
+        @Override
+        public Pair<Integer, Integer> getRealScreenSize(boolean real) {
+            return Pair.of(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }
     }
 }

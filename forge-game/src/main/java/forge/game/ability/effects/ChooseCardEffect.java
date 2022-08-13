@@ -40,8 +40,10 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         } else {
             sb.append("may choose ");
         }
-        String desc = sa.getParamOrDefault("ChoiceDesc", "");
-        desc = desc.isEmpty() ? "card" : desc + " card";
+        String desc = sa.getParamOrDefault("ChoiceDesc", "card");
+        if (!desc.contains("card") && !desc.contains("control")) {
+            desc = desc + " card";
+        }
         sb.append(Lang.nounWithNumeralExceptOne(numCards, desc));
         if (sa.hasParam("FromDesc")) {
             sb.append(" ").append(sa.getParam("FromDesc"));

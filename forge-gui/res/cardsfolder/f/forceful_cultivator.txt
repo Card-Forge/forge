@@ -3,6 +3,6 @@ ManaCost:2 G G
 Types:Creature Snake Shaman
 PT:2/3
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | IsPresent$ Land.YouOwn | PresentZone$ Hand | PresentCompare$ EQ0 | Description$ This spell costs {2} less to cast if there are no land cards in your hand.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
 Oracle:This spell costs {2} less to cast if there are no land cards in your hand.\nWhen Forceful Cultivator enters the battlefield, search your library for a basic land card, put that card onto the battlefield tapped, then shuffle.

@@ -2,7 +2,7 @@ Name:Selvala's Enforcer
 ManaCost:3 G
 Types:Creature Elf Warrior
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigReveal | TriggerDescription$ Parley — When CARDNAME enters the battlefield, each player reveals the top card of their library. For each nonland card revealed this way, put a +1/+1 counter on CARDNAME. Then each player draws a card.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ Parley — When CARDNAME enters the battlefield, each player reveals the top card of their library. For each nonland card revealed this way, put a +1/+1 counter on CARDNAME. Then each player draws a card.
 SVar:TrigReveal:DB$ PeekAndReveal | Defined$ Player | RememberRevealed$ True | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | CounterNum$ X | CounterType$ P1P1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ Player | SubAbility$ DBCleanup

@@ -4,9 +4,12 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
+import com.badlogic.gdx.utils.ObjectMap;
 import forge.Forge;
 import forge.adventure.data.ConfigData;
+import forge.adventure.data.DifficultyData;
 import forge.adventure.data.SettingData;
+import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
@@ -26,7 +29,7 @@ public class Config {
     private static Config currentConfig;
     private final String prefix;
     private final HashMap<String, FileHandle> Cache = new HashMap<String, FileHandle>();
-    private final ConfigData configData;
+    private ConfigData configData;
     private final String[] adventures;
     private SettingData settingsData;
     private String Lang = "en-us";
@@ -64,6 +67,18 @@ public class Config {
         }
         if(settingsData.videomode == null || settingsData.videomode.isEmpty())
             settingsData.videomode="720p";
+        //reward card display fine tune
+        if(settingsData.rewardCardAdj == null || settingsData.rewardCardAdj == 0f)
+            settingsData.rewardCardAdj=1f;
+        //tooltip fine tune
+        if(settingsData.cardTooltipAdj == null || settingsData.cardTooltipAdj == 0f)
+            settingsData.cardTooltipAdj=1f;
+        //reward card display fine tune landscape
+        if(settingsData.rewardCardAdjLandscape == null || settingsData.rewardCardAdjLandscape == 0f)
+            settingsData.rewardCardAdjLandscape=1f;
+        //tooltip fine tune landscape
+        if(settingsData.cardTooltipAdjLandscape == null || settingsData.cardTooltipAdjLandscape == 0f)
+            settingsData.cardTooltipAdjLandscape=1f;
 
         this.plane = settingsData.plane;
         currentConfig = this;
@@ -71,7 +86,16 @@ public class Config {
         prefix = path + "/res/adventure/" + plane + "/";
         if (FModel.getPreferences() != null)
             Lang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_LANGUAGE);
-        configData = new Json().fromJson(ConfigData.class, new FileHandle(prefix + "config.json"));
+        try
+        {
+            configData = new Json().fromJson(ConfigData.class, new FileHandle(prefix + "config.json"));
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            configData=new ConfigData();
+        }
 
     }
 
@@ -109,13 +133,33 @@ public class Config {
         return plane;
     }
 
-    public Deck[] starterDecks() {
+    public String[] colorIdNames() {
 
-        Deck[] deck = new Deck[configData.starterDecks.length];
-        for (int i = 0; i < configData.starterDecks.length; i++) {
-            deck[i] = CardUtil.getDeck(configData.starterDecks[i], false, false, "", false, false);
+        return configData.colorIdNames;
+    }
+    public String[] colorIds() {
+
+        return configData.colorIds;
+    }
+    public Deck starterDeck(ColorSet color, DifficultyData difficultyData, boolean constructed) {
+        if(constructed)
+        {
+            for(ObjectMap.Entry<String, String> entry:difficultyData.constructedStarterDecks)
+            {
+                if(ColorSet.fromNames(entry.key.toCharArray()).getColor()==color.getColor())
+                {
+                    return CardUtil.getDeck(entry.value, false, false, "", false, false);
+                }
+            }
         }
-        return deck;
+        for(ObjectMap.Entry<String, String> entry:difficultyData.starterDecks)
+        {
+            if(ColorSet.fromNames(entry.key.toCharArray()).getColor()==color.getColor())
+            {
+                return CardUtil.getDeck(entry.value, false, false, "", false, false);
+            }
+        }
+        return null;
     }
 
     public TextureAtlas getAtlas(String spriteAtlas) {

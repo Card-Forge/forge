@@ -59,7 +59,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
-import forge.util.FileSection;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import forge.util.Visitor;
@@ -881,11 +880,7 @@ public class ReplacementHandler {
         return parseReplacement(repParse, host, intrinsic, host);
     }
     public static ReplacementEffect parseReplacement(final String repParse, final Card host, final boolean intrinsic, final IHasSVars sVarHolder) {
-        return ReplacementHandler.parseReplacement(parseParams(repParse), host, intrinsic, sVarHolder);
-    }
-
-    public static Map<String, String> parseParams(final String repParse) {
-        return FileSection.parseToMap(repParse, FileSection.DOLLAR_SIGN_KV_SEPARATOR);
+        return ReplacementHandler.parseReplacement(AbilityFactory.getMapParams(repParse), host, intrinsic, sVarHolder);
     }
 
     /**

@@ -7,4 +7,4 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$
 SVar:TrigLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw
 DeckHas:Ability$LifeGain
-Oracle:When Inspiring Overseer enters the battlefield, you gain 1 life and draw a card.
+Oracle:Flying\nWhen Inspiring Overseer enters the battlefield, you gain 1 life and draw a card.

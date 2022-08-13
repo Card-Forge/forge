@@ -1,0 +1,12 @@
+Name:Volo, Itinerant Scholar
+ManaCost:2 U
+Types:Legendary Creature Human Wizard
+PT:2/3
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME enters the battlefield, create Volo's Journal, a legendary colorless artifact token with hexproof and "Whenever you cast a creature spell, note one of its creature types that hasn't been noted for this artifact."
+SVar:TrigToken:DB$ Token | TokenScript$ volos_journal
+A:AB$ Pump | Cost$ 2 T | ValidTgts$ Permanent.namedVolo's Journal+YouCtrl | TgtPrompt$ Select target permanent you control named Volo's Journal | SubAbility$ DBDraw | StackDescription$ None | SpellDescription$ Draw a card for each creature type noted for target permanent you control named Volo's Journal.
+SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:X:Targeted$CardNumNotedTypes
+K:Choose a Background
+DeckHas:Ability$Token & Type$Artifact
+Oracle:When Volo enters the battlefield, create Volo's Journal, a legendary colorless artifact token with hexproof and "Whenever you cast a creature spell, note one of its creature types that hasn't been noted for this artifact."\n{2}, {T}: Draw a card for each creature type noted for target permanent you control named Volo's Journal.\nChoose a Background

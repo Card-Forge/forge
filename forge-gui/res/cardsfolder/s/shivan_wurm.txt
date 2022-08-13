@@ -3,7 +3,7 @@ ManaCost:3 R G
 Types:Creature Wurm
 PT:7/7
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a red or green creature you control to its owner's hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a red or green creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.Red+YouCtrl,Creature.Green+YouCtrl | AILogic$ NeverBounceItself
 SVar:NeedsToPlay:Creature.Red+YouCtrl+cmcLE5+inZoneBattlefield,Creature.Green+YouCtrl+cmcLE5+inZoneBattlefield
 Oracle:Trample\nWhen Shivan Wurm enters the battlefield, return a red or green creature you control to its owner's hand.

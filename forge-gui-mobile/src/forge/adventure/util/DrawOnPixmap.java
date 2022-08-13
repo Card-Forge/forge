@@ -54,6 +54,8 @@ public abstract class DrawOnPixmap {
         frameBuffer.end();
         texture.dispose();
         batch.dispose();
+        if (bigText) //don't know why this is needed to circumvent bug getting default size for the same pixelfont
+            Controls.getBitmapFont("default");
 
     }
 }

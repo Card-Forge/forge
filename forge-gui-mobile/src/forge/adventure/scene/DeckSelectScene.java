@@ -3,12 +3,7 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.IntMap;
@@ -110,18 +105,8 @@ public class DeckSelectScene extends UIScene {
             dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left);
             dialog.getButtonTable().add(textInput).fillX().expandX();
             dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblRename"), new Runnable() {
-                @Override
-                public void run() {
-                    DeckSelectScene.this.rename();
-                }
-            })).align(Align.left);
-            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), new Runnable() {
-                @Override
-                public void run() {
-                    dialog.hide();
-                }
-            })).align(Align.left);
+            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblRename"), () -> DeckSelectScene.this.rename())).align(Align.left);
+            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), () -> dialog.hide())).align(Align.left);
 
             back = ui.findActor("return");
             back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
@@ -129,25 +114,12 @@ public class DeckSelectScene extends UIScene {
             edit.getLabel().setText(Forge.getLocalizer().getMessage("lblEdit"));
             rename = ui.findActor("rename");
             rename.getLabel().setText(Forge.getLocalizer().getMessage("lblRename"));
-            ui.onButtonPress("return", new Runnable() {
-                @Override
-                public void run() {
-                    DeckSelectScene.this.back();
-                }
-            });
-            ui.onButtonPress("edit", new Runnable() {
-                @Override
-                public void run() {
-                    DeckSelectScene.this.edit();
-                }
-            });
-            ui.onButtonPress("rename", new Runnable() {
-                @Override
-                public void run() {
-                    textInput.setText(Current.player().getSelectedDeck().getName());
-                    dialog.show(stage);
-                    stage.setKeyboardFocus(textInput);
-                }
+            ui.onButtonPress("return", () -> DeckSelectScene.this.back());
+            ui.onButtonPress("edit", () -> DeckSelectScene.this.edit());
+            ui.onButtonPress("rename", () -> {
+                textInput.setText(Current.player().getSelectedDeck().getName());
+                dialog.show(stage);
+                stage.setKeyboardFocus(textInput);
             });
             defColor = ui.findActor("return").getColor();
 

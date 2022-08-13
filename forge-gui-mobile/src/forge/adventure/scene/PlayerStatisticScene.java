@@ -2,13 +2,8 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import forge.Forge;
@@ -20,7 +15,9 @@ import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
+import forge.adventure.util.Paths;
 import forge.adventure.world.WorldSave;
+import forge.card.ColorSet;
 import forge.player.GamePlayerUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -35,7 +32,6 @@ public class PlayerStatisticScene extends UIScene {
     Label winloss, lossWinRatio;
     Label playerName;
     TextButton back;
-    Texture colorFrames;
     private Table enemiesGroup;
     Label blessingScroll;
 
@@ -46,7 +42,7 @@ public class PlayerStatisticScene extends UIScene {
 
     @Override
     public void dispose() {
-        colorFrames.dispose(); //Get rid of the cached color ID texture.
+
     }
 
 
@@ -63,19 +59,19 @@ public class PlayerStatisticScene extends UIScene {
         Forge.switchToLast();
         return true;
     }
-    private TextureRegion getColorFrame(String C){
-        int x, y;
-        switch(C){
-            case "B": { x = 0 ; y = 0 ; break; }
-            case "G": { x = 64; y = 0 ; break; }
-            case "R": { x = 0 ; y = 32; break; }
-            case "U": { x = 32; y = 32; break; }
-            case "W": { x = 64; y = 32; break; }
-            default:
-            case "C": { x = 32; y = 0 ; break; }
-        }
-        TextureRegion result = new TextureRegion(colorFrames, x, y, 32, 32);
-        return result;
+    private TextureRegion getColorFrame(ColorSet color){
+        String colorName= "color_";
+        if(color.hasWhite())
+            colorName+="w";
+        if(color.hasBlue())
+            colorName+="u";
+        if(color.hasBlack())
+            colorName+="b";
+        if(color.hasRed())
+            colorName+="r";
+        if(color.hasGreen())
+            colorName+="g";
+        return Config.instance().getAtlas(Paths.COLOR_FRAME_ATLAS).findRegion(colorName);
     }
 
     @Override
@@ -187,7 +183,6 @@ public class PlayerStatisticScene extends UIScene {
         back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
         ScrollPane scrollPane = ui.findActor("enemies");
         scrollPane.setActor(enemiesGroup);
-        colorFrames = new Texture(Config.instance().getFile("ui/color_frames.png"));
         ScrollPane blessing = ui.findActor("blessingInfo");
         blessing.setActor(blessingScroll);
 

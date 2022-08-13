@@ -315,6 +315,7 @@ public final class CardUtil {
         }
         newCopy.setCastFrom(in.getCastFrom());
 
+        newCopy.setExiledBy(in.getExiledBy());
         newCopy.setExiledWith(getLKICopy(in.getExiledWith(), cachedMap));
 
         if (in.getGame().getCombat() != null && in.isPermanent()) {

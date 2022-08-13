@@ -3,7 +3,7 @@ ManaCost:4 G G
 Types:Creature Wurm
 PT:4/3
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for up to three cards named Nesting Wurm, reveal them, put them into your hand, then shuffle.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for up to three cards named Nesting Wurm, reveal them, put them into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.namedNesting Wurm | ChangeNum$ 3 | ShuffleNonMandatory$ True
 DeckHints:Name$Nesting Wurm
 Oracle:Trample\nWhen Nesting Wurm enters the battlefield, you may search your library for up to three cards named Nesting Wurm, reveal them, put them into your hand, then shuffle.

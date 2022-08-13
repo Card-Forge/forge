@@ -2,12 +2,8 @@ Name:Ixalan's Binding
 ManaCost:3 W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | ConditionPresent$ Card.Self | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Triggers$ ComeBack | RememberObjects$ Targeted | ImprintCards$ Self | StaticAbilities$ NoCast | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnMoved$ Exile
-SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ That permanent is exiled until EFFECTSOURCE leaves the battlefield
-SVar:TrigReturn:DB$ ChangeZoneAll | Origin$ Exile | Destination$ Battlefield | ChangeType$ Card.IsRemembered | SubAbility$ ExileSelf
-SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
-SVar:NoCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.sharesNameWith Remembered | Caster$ Opponent | Description$ Your opponents can't cast spells with the same name as the exiled card.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Duration$ UntilHostLeavesPlay
+S:Mode$ CantBeCast | ValidCard$ Card.sharesNameWith ValidExile Card.ExiledWithSource | Caster$ Opponent | Description$ Your opponents can't cast spells with the same name as the exiled card.
 SVar:PlayMain1:TRUE
 SVar:OblivionRing:TRUE
 Oracle:When Ixalan's Binding enters the battlefield, exile target nonland permanent an opponent controls until Ixalan's Binding leaves the battlefield.\nYour opponents can't cast spells with the same name as the exiled card.

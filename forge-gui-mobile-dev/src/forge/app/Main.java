@@ -13,6 +13,7 @@ import forge.util.OperatingSystem;
 import forge.util.RestartUtil;
 import forge.util.Utils;
 import org.apache.commons.cli.*;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -223,6 +224,11 @@ public class Main {
         public void convertToJPEG(InputStream input, OutputStream output) throws IOException {
             BufferedImage image = ImageIO.read(input);
             ImageIO.write(image, "jpg", output);
+        }
+
+        @Override
+        public Pair<Integer, Integer> getRealScreenSize(boolean real) {
+            return Pair.of(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         }
     }
 }

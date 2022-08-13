@@ -1115,11 +1115,9 @@ public class Game {
         List<Pair<Card, Integer>> result = countersAddedThisTurn.get(cType, putter);
         if (result == null) {
             result = Lists.newArrayList();
-        }
-        result.add(Pair.of(CardUtil.getLKICopy(card), value));
-        if (!countersAddedThisTurn.contains(cType, putter)) {
             countersAddedThisTurn.put(cType, putter, result);
         }
+        result.add(Pair.of(CardUtil.getLKICopy(card), value));
     }
 
     public int getCounterAddedThisTurn(CounterType cType, String validPlayer, String validCard, Card source, Player sourceController, CardTraitBase ctb) {

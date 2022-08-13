@@ -5,12 +5,8 @@ PT:5/5
 K:Mutate:4 B
 K:Flying
 T:Mode$ Mutates | ValidCard$ Card.Self | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature mutates, exile the top card of each opponent's library face down. You may look at and play those cards for as long as they remain exiled.
-SVar:TrigExile:DB$ Mill | Defined$ Player.Opponent | NumCards$ 1 | Destination$ Exile | RememberMilled$ True | ExileFaceDown$ True | NoReveal$ True | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | Duration$ Permanent | Triggers$ TrigCleanup,TrigCleanup2 | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | Defined$ Opponent | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ STPlay | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:STPlay:Mode$ Continuous | MayLookAt$ You | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may look at and play a card as long as it remains exiled.
-SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | TriggerZones$ Command | Execute$ DBExileSelf | Static$ True
-SVar:TrigCleanup2:Mode$ Phase | Phase$ Cleanup | Static$ True | CheckSVar$ X | SVarCompare$ EQ0 | Execute$ DBExileSelf
-SVar:DBExileSelf:DB$ ChangeZone | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:X:Count$ValidExile Card.IsRemembered
 Oracle:Mutate {4}{B} (If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it.)\nFlying\nWhenever this creature mutates, exile the top card of each opponent's library face down. You may look at and play those cards for as long as they remain exiled.
