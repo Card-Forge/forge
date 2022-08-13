@@ -71,7 +71,11 @@ public class InnScene extends UIScene {
     @Override
     public void render() {
         super.render();
+    }
 
+    @Override
+    public void enter() {
+        super.enter();
         int tempHealthCost = Current.player().falseLifeCost();
         boolean purchaseable = Current.player().getMaxLife() == Current.player().getLife() &&
                 tempHealthCost <= Current.player().getGold();
