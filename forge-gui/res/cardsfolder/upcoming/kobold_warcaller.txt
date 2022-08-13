@@ -2,7 +2,7 @@ Name:Kobold Warcaller
 ManaCost:R
 Types:Creature Kobold
 PT:1/1
-A:AB$ ChooseCard | Cost$ T |  ChoiceZone$ Hand | Choices$ Creature.YouOwn | ChoiceTitle$ Choose a card in your hand | Amount$ 1 | SpellDescription$ Choose a creature card in your hand. It perpetually gains haste. | SubAbility$ DBEffect
+A:AB$ ChooseCard | Cost$ T | ChoiceZone$ Hand | Choices$ Creature.YouOwn | ChoiceTitle$ Choose a creature card in your hand | Amount$ 1 | SpellDescription$ Choose a creature card in your hand. It perpetually gains haste. | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualHaste | Name$ Kobold WarCaller's Perpetual Effect | Duration$ Permanent
 SVar:PerpetualHaste:Mode$ Continuous | Affected$ Card.ChosenCard | AddKeyword$ Haste | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains haste.
 Oracle:{T}: Choose a creature card in your hand. It perpetually gains haste.
