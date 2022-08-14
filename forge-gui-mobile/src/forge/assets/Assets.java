@@ -382,6 +382,7 @@ public class Assets implements Disposable {
             if (memoryPerFile.containsKey(fileName)) {
                 memoryPerFile.remove(fileName);
             }
+            cardArtCache().clear();
         }
 
         public float getMemoryInMegabytes() {

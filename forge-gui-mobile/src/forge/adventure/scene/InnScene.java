@@ -77,6 +77,8 @@ public class InnScene extends UIScene {
     public void enter() {
         super.enter();
         int tempHealthCost = Current.player().falseLifeCost();
+        if (tempHealthCost < 0) // if computed negative set 250 as minimum
+            tempHealthCost = 250;
         boolean purchaseable = Current.player().getMaxLife() == Current.player().getLife() &&
                 tempHealthCost <= Current.player().getGold();
 
