@@ -99,6 +99,13 @@ public class StaticAbilityCantTarget {
             }
         }
 
+        if ("Stack".equals(stAb.getParam("EffectZone"))) {
+            // Enthralling Hold: only works if it wasn't already cast
+            if (card.getGame().getStack().getSpellMatchingHost(spellAbility.getHostCard()) != null) {
+                return false;
+            }
+        }
+
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
