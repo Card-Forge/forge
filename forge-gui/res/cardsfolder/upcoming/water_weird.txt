@@ -1,0 +1,9 @@
+Name:Water Weird
+ManaCost:3 U
+Types:Creature Elemental Weird
+PT:3/4
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigReveal | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on CARDNAME if the top card of your library is a nonland card. Otherwise, you may mill a card.
+SVar:TrigReveal:DB$ PeekAndReveal | PeekAmount$ 1 | NoPeek$ True | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Whenever Water Weird deals combat damage to a player, put a +1/+1 counter on Water Weird if the top card of your library is a nonland card. Otherwise, you may mill a card.
