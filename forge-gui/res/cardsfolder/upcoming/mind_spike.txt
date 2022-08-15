@@ -1,8 +1,8 @@
 Name:Mind Spike
 ManaCost:B
 Types:Sorcery
-A:SP$ Reveal | ValidTgts$ Opponent | RevealAllValid$ Card.nonLand+nonCreature+TargetedPlayerCtrl | RememberRevealed$ True | SubAbility$ DBExile | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals each noncreature, nonland card in their hand. You choose a card revealed this way. That player discards that card. You lose 2 life. If they didn't reveal a card this way, you draw a card.
-SVar:DBExile:DB$ ChangeZone | DefinedPlayer$ Targeted | Chooser$ You | Origin$ Hand | Destination$ Graveyard | ChangeNum$ 1 | ChangeType$ Card.nonLand+nonCreature+TargetedPlayerCtrl | Mandatory$ True | AlreadyRevealed$ True | RememberChanged$ True | AILogic$ BestCard | SubAbility$ DBLoseLife | StackDescription$ None
+A:SP$ Reveal | ValidTgts$ Opponent | RevealAllValid$ Card.nonLand+nonCreature+TargetedPlayerCtrl | RememberRevealed$ True | SubAbility$ DBDiscard | StackDescription$ SpellDescription | SpellDescription$ Target opponent reveals each noncreature, nonland card in their hand. You choose a card revealed this way. That player discards that card. You lose 2 life. If they didn't reveal a card this way, you draw a card.
+SVar:DBDiscard:DB$ ChangeZone | DefinedPlayer$ Targeted | Chooser$ You | Origin$ Hand | Destination$ Graveyard | ChangeNum$ 1 | ChangeType$ Card.nonLand+nonCreature+TargetedPlayerCtrl | Mandatory$ True | AlreadyRevealed$ True | RememberChanged$ True | AILogic$ BestCard | SubAbility$ DBLoseLife | StackDescription$ None
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 2 | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | Defined$ You | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 
 Oracle:Target opponent reveals each noncreature, nonland card in their hand. You choose a card revealed this way. That player discards that card. You lose 2 life. If they didn't reveal a card this way, you draw a card.
