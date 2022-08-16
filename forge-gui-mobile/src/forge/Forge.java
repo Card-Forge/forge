@@ -15,7 +15,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
-import com.badlogic.gdx.utils.ScreenUtils;
 import forge.adventure.scene.*;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
@@ -758,8 +757,19 @@ public class Forge implements ApplicationListener {
         splashScreen = null;
     }
     public static TextureRegion takeScreenshot() {
-        TextureRegion screenShot = ScreenUtils.getFrameBufferTexture();
-        return screenShot;
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (lastScreenTexture != null)
+                lastScreenTexture.getTexture().dispose();
+            //some Android device don't support RGBA on FrameBuffer like Unisoc T618 with Mali G52 MP2 and maybe others...
+            Texture texture = new Texture(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGB888);
+            Gdx.gl.glEnable(GL20.GL_TEXTURE_2D);
+            Gdx.gl.glActiveTexture(GL20.GL_TEXTURE0);
+            texture.bind();
+            Gdx.gl.glCopyTexImage2D(GL20.GL_TEXTURE_2D, 0, GL20.GL_RGB, 0, 0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
+            Gdx.gl.glDisable(GL20.GL_TEXTURE_2D);
+            lastScreenTexture = new TextureRegion(texture, 0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), -Gdx.graphics.getHeight());
+        });
+        return lastScreenTexture;
     }
 
     private static void setCurrentScreen(FScreen screen0) {
@@ -990,12 +1000,8 @@ public class Forge implements ApplicationListener {
 
     protected static void storeScreen() {
         if (!(currentScene instanceof ForgeScene)) {
-            if (lastScreenTexture != null)
-                lastScreenTexture.getTexture().dispose();
-            lastScreenTexture = Forge.takeScreenshot();
+            Forge.takeScreenshot();
         }
-
-
     }
 
     public static Scene switchToLast() {
