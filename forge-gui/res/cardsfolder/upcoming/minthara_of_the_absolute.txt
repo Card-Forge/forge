@@ -3,8 +3,8 @@ ManaCost:2 W B
 Types:Legendary Creature Elf Cleric
 PT:2/4
 K:Starting intensity:0
-T:Mode$ ChangesZone | ValidCards$ Permanent.YouCtrl | Origin$ Battlefield | Destination$ Any | TriggerZones$ Battlefield | Execute$ TrigIntensify | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more permanents you control leave the battlefield, perpetually increase NICKNAME's intensity and the intensity of cards named Minthara of the Absolute in your hand, graveyard, and library by 1. This ability triggers only once each turn.
-SVar:TrigIntensify:DB$ Intensify | AllDefined$ Card.YouOwn+namedMinthara of the Absolute | DefinedDesc$ all cards they own named Minthara of the Absolute.
+T:Mode$ ChangesZone | ValidCards$ Permanent.YouCtrl | Origin$ Battlefield | Destination$ Any | ExcludedDestinations$ Exile,Command | TriggerZones$ Battlefield | Execute$ TrigIntensify | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more permanents you control leave the battlefield, perpetually increase NICKNAME's intensity and the intensity of cards named Minthara of the Absolute in your hand, graveyard, and library by 1. This ability triggers only once each turn.
+SVar:TrigIntensify:DB$ Intensify | AllDefined$ Card.YouOwn+namedMinthara of the Absolute | DefinedDesc$ Perpetually increase the intensity of Minthara of the Absolute and the intensity of cards named Minthara of the Absolute in your hand, graveyard, and library by 1.
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ X | Description$ Creatures you control get +X/+0, where X is CARDNAME's intensity.
 SVar:X:Count$Intensity
 SVar:BuffedBy:Creature
