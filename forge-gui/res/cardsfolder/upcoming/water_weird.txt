@@ -5,7 +5,7 @@ PT:3/4
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigReveal | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a +1/+1 counter on CARDNAME if the top card of your library is a nonland card. Otherwise, you may mill a card.
 SVar:TrigReveal:DB$ PeekAndReveal | PeekAmount$ 1 | NoPeek$ True | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBCounter
 SVar:DBCounter:DB$ PutCounter | CounterNum$ 1 | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | CounterType$ P1P1 | SubAbility$ DBMill
-SVar:DBMill:DB$ Mill | NumCards$ 1 | Defined$ Player | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
-A:AB$ Pump | Cost$ 1 U | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn. 
+SVar:DBMill:DB$ Mill | NumCards$ 1 | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+A:AB$ Pump | Cost$ 1 U | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn. 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Whenever Water Weird deals combat damage to a player, put a +1/+1 counter on Water Weird if the top card of your library is a nonland card. Otherwise, you may mill a card..\n{1}{U}: Water Weird gets +1/-1 until end of turn.
