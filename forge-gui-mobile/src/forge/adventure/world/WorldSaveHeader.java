@@ -41,7 +41,7 @@ public class WorldSaveHeader implements java.io.Serializable, Disposable {
     }
 
     public void createPreview() {
-        //todo how to support this to some android devie since it produce black pixmap/texture?
+        //todo how to support this to some android device since it produce black pixmap/texture?
         Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Pixmap scaled = new Pixmap(WorldSaveHeader.previewImageWidth, (int) (WorldSaveHeader.previewImageWidth / (Scene.getIntendedWidth() / (float) Scene.getIntendedHeight())), Pixmap.Format.RGBA8888);
         scaled.drawPixmap(pixmap,
