@@ -28,7 +28,7 @@ public class WorldSaveHeader implements java.io.Serializable, Disposable {
         out.writeUTF(name);
         if (preview == null)
             preview = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
-        Serializer.WritePixmap(out, preview, false);
+        Serializer.WritePixmap(out, preview, true);
         out.writeObject(saveDate);
     }
 
