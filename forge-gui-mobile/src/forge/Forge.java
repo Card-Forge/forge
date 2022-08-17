@@ -15,11 +15,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
-import com.badlogic.gdx.utils.ScreenUtils;
-import forge.adventure.scene.ForgeScene;
-import forge.adventure.scene.GameScene;
-import forge.adventure.scene.Scene;
-import forge.adventure.scene.SceneType;
+import forge.adventure.scene.*;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.animation.ForgeAnimation;
@@ -52,10 +48,7 @@ import forge.toolbox.*;
 import forge.util.*;
 
 import java.io.File;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 public class Forge implements ApplicationListener {
     public static final String CURRENT_VERSION = "1.6.53.001";
@@ -404,13 +397,13 @@ public class Forge implements ApplicationListener {
         if (GuiBase.isAndroid())
             return;
         if (isMobileAdventureMode) {
-            if (cursorA0 != null && name == "0") {
+            if (cursorA0 != null && Objects.equals(name, "0")) {
                 setGdxCursor(cursorA0);
                 return;
-            } else if (cursorA1 != null && name == "1") {
+            } else if (cursorA1 != null && Objects.equals(name, "1")) {
                 setGdxCursor(cursorA1);
                 return;
-            } else if (cursorA2 != null && name == "2") {
+            } else if (cursorA2 != null && Objects.equals(name, "2")) {
                 setGdxCursor(cursorA2);
                 return;
             }
@@ -764,8 +757,19 @@ public class Forge implements ApplicationListener {
         splashScreen = null;
     }
     public static TextureRegion takeScreenshot() {
-        TextureRegion screenShot = ScreenUtils.getFrameBufferTexture();
-        return screenShot;
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (lastScreenTexture != null)
+                lastScreenTexture.getTexture().dispose();
+            //some Android device don't support RGBA on FrameBuffer like Unisoc T618 with Mali G52 MP2 and maybe others...
+            Texture texture = new Texture(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGB888);
+            Gdx.gl.glEnable(GL20.GL_TEXTURE_2D);
+            Gdx.gl.glActiveTexture(GL20.GL_TEXTURE0);
+            texture.bind();
+            Gdx.gl.glCopyTexImage2D(GL20.GL_TEXTURE_2D, 0, GL20.GL_RGB, 0, 0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
+            Gdx.gl.glDisable(GL20.GL_TEXTURE_2D);
+            lastScreenTexture = new TextureRegion(texture, 0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), -Gdx.graphics.getHeight());
+        });
+        return lastScreenTexture;
     }
 
     private static void setCurrentScreen(FScreen screen0) {
@@ -974,7 +978,6 @@ public class Forge implements ApplicationListener {
         }
     }
     /** Retrieve assets.
-     * @param other if set to true returns otherAssets otherwise returns cardAssets
      */
     public static Assets getAssets() {
         return ((Forge)Gdx.app.getApplicationListener()).assets;
@@ -990,18 +993,15 @@ public class Forge implements ApplicationListener {
         if (newScene instanceof GameScene)
             MapStage.getInstance().clearIsInMap();
         currentScene = newScene;
+
         currentScene.enter();
         return true;
     }
 
     protected static void storeScreen() {
         if (!(currentScene instanceof ForgeScene)) {
-            if (lastScreenTexture != null)
-                lastScreenTexture.getTexture().dispose();
-            lastScreenTexture = Forge.takeScreenshot();
+            Forge.takeScreenshot();
         }
-
-
     }
 
     public static Scene switchToLast() {

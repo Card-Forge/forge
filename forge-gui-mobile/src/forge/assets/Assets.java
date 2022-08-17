@@ -61,39 +61,43 @@ public class Assets implements Disposable {
     }
     @Override
     public void dispose() {
-        if (counterFonts != null)
-            for (BitmapFont bitmapFont : counterFonts.values())
-                bitmapFont.dispose();
-        if (generatedCards != null)
-            for (Texture texture : generatedCards.values())
-                texture.dispose();
-        if (fallback_skins != null)
-            for (Texture texture : fallback_skins.values())
-                texture.dispose();
-        if (tmxMap != null)
-            for (Texture texture : tmxMap.values())
-                texture.dispose();
-        if (defaultImage != null)
-            defaultImage.dispose();
-        if (dummy != null)
-            dummy.dispose();
-        cardArtCache.clear();
-        avatarImages.clear();
-        manaImages.clear();
-        symbolLookup.clear();
-        images.clear();
-        avatars.clear();
-        sleeves.clear();
-        cracks.clear();
-        borders.clear();
-        deckbox.clear();
-        cursor.clear();
-        fonts.clear();
-        counterFonts.clear();
-        generatedCards.clear();
-        fallback_skins.clear();
-        tmxMap.clear();
-        manager.dispose();
+        try {
+            if (counterFonts != null)
+                for (BitmapFont bitmapFont : counterFonts.values())
+                    bitmapFont.dispose();
+            if (generatedCards != null)
+                for (Texture texture : generatedCards.values())
+                    texture.dispose();
+            if (fallback_skins != null)
+                for (Texture texture : fallback_skins.values())
+                    texture.dispose();
+            if (tmxMap != null)
+                for (Texture texture : tmxMap.values())
+                    texture.dispose();
+            if (defaultImage != null)
+                defaultImage.dispose();
+            if (dummy != null)
+                dummy.dispose();
+            cardArtCache.clear();
+            avatarImages.clear();
+            manaImages.clear();
+            symbolLookup.clear();
+            images.clear();
+            avatars.clear();
+            sleeves.clear();
+            cracks.clear();
+            borders.clear();
+            deckbox.clear();
+            cursor.clear();
+            fonts.clear();
+            counterFonts.clear();
+            generatedCards.clear();
+            fallback_skins.clear();
+            tmxMap.clear();
+            manager.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public MemoryTrackingAssetManager manager() {
         if (manager == null)
@@ -378,6 +382,7 @@ public class Assets implements Disposable {
             if (memoryPerFile.containsKey(fileName)) {
                 memoryPerFile.remove(fileName);
             }
+            cardArtCache().clear();
         }
 
         public float getMemoryInMegabytes() {

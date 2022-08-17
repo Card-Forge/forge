@@ -123,9 +123,15 @@ public class SaveLoadScene extends UIScene {
                 }
                 break;
             case Load:
-                if (WorldSave.load(currentSlot)) {
-                    Forge.setTransitionScreen(new TransitionScreen(() -> Forge.switchScene(SceneType.GameScene.instance), null, false, true));
-                } else {
+                try {
+                    Forge.setTransitionScreen(new TransitionScreen(() -> {
+                        if (WorldSave.load(currentSlot)) {
+                            Forge.switchScene(SceneType.GameScene.instance);
+                        } else {
+                            Forge.clearTransitionScreen();
+                        }
+                    }, null, false, true, "Loading World..."));
+                } catch (Exception e) {
                     Forge.clearTransitionScreen();
                 }
                 break;

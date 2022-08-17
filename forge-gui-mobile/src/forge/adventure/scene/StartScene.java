@@ -57,15 +57,18 @@ public class StartScene extends UIScene {
     public boolean Continue() {
         final String lastActiveSave = Config.instance().getSettingData().lastActiveSave;
 
-        if (WorldSave.isSafeFile(lastActiveSave) && WorldSave.load(WorldSave.filenameToSlot(lastActiveSave))) {
-            Forge.setTransitionScreen(new TransitionScreen(new Runnable() {
-                @Override
-                public void run() {
-                    Forge.switchScene(SceneType.GameScene.instance);
-                }
-            }, null, false, true));
-        } else {
-            Forge.clearTransitionScreen();
+        if (WorldSave.isSafeFile(lastActiveSave)) {
+            try {
+                Forge.setTransitionScreen(new TransitionScreen(() -> {
+                    if (WorldSave.load(WorldSave.filenameToSlot(lastActiveSave))) {
+                        Forge.switchScene(SceneType.GameScene.instance);
+                    } else {
+                        Forge.clearTransitionScreen();
+                    }
+                }, null, false, true, "Loading World..."));
+            } catch (Exception e) {
+                Forge.clearTransitionScreen();
+            }
         }
 
         return true;

@@ -130,9 +130,11 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void refreshCardDetails(final Iterable<CardView> cards) {
-        //ensure cards appear in the correct row of the field
         for (final VPlayerPanel pnl : view.getPlayerPanels().values()) {
+            //ensure cards appear in the correct row of the field
             pnl.getField().update(true);
+            //ensure flashback zone has updated info ie Snapcaster Mage, etc..
+            pnl.getZoneTab(ZoneType.Flashback).update();
         }
     }
 
