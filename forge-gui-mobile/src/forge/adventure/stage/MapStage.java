@@ -27,7 +27,6 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
-import com.github.tommyettinger.textra.TypingListener;
 import forge.Forge;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
