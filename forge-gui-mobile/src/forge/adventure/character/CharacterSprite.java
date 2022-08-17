@@ -37,6 +37,7 @@ public class CharacterSprite extends MapActor {
     }
 
     protected void load(String path) {
+        if(path==null||path.isEmpty())return;
         TextureAtlas atlas = Config.instance().getAtlas(path);
         /*
         for (Texture texture : new ObjectSet.ObjectSetIterator<>( atlas.getTextures()))

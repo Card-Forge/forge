@@ -1,5 +1,6 @@
 package forge.adventure.character;
 
+import com.badlogic.gdx.math.Vector2;
 import forge.adventure.scene.SceneType;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.MapStage;
@@ -12,29 +13,28 @@ public class EntryActor extends MapActor{
     private final MapStage stage;
     String targetMap;
 
-    public EntryActor(MapStage stage,String sourceMap, int id,String targetMap,float x,float y,float w,float h,String direction)
+    public EntryActor(MapStage stage, int id,String targetMap,float x,float y,float w,float h,String direction,boolean spawnPlayerThere)
     {
         super(id);
         this.stage = stage;
         this.targetMap = targetMap;
 
 
-        if((targetMap==null||targetMap.isEmpty()&&sourceMap.isEmpty())||//if target is null and "from world"
-            !sourceMap.isEmpty()&&targetMap.equals(sourceMap))          //or if source is this target
+        if(spawnPlayerThere)          //or if source is this target
         {
             switch(direction)
             {
                 case "up":
-                    stage.GetPlayer().setPosition(x,y+h);
+                    stage.GetPlayer().setPosition(x+w/2-stage.GetPlayer().getWidth()/2,y+h);
                     break;
                 case "down":
-                    stage.GetPlayer().setPosition(x,y-stage.GetPlayer().getHeight());
+                    stage.GetPlayer().setPosition(x+w/2-stage.GetPlayer().getWidth()/2,y-stage.GetPlayer().getHeight());
                     break;
                 case "right":
-                    stage.GetPlayer().setPosition(x-stage.GetPlayer().getWidth(),y);
+                    stage.GetPlayer().setPosition(x-stage.GetPlayer().getWidth(),y+h/2-stage.GetPlayer().getHeight()/2);
                     break;
                 case "left":
-                    stage.GetPlayer().setPosition(x+w,y);
+                    stage.GetPlayer().setPosition(x+w,y+h/2-stage.GetPlayer().getHeight()/2);
                     break;
 
             }

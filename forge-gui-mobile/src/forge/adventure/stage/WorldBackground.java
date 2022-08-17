@@ -81,7 +81,7 @@ public class WorldBackground extends Actor {
 
     }
 
-    private void loadChunk(int x, int y) {
+    public void loadChunk(int x, int y) {
         if (chunksSprites[x][y] == null)
             chunksSprites[x][y] =  MapSprite.GetMapSprites(x, y);
 

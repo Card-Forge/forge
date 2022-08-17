@@ -426,7 +426,7 @@ public class World implements Disposable, SaveFileContent {
             List<Rectangle> otherPoints = new ArrayList<>();
 
             clearTerrain((int) (data.width * data.playerStartPosX), (int) (data.height * data.playerStartPosY), 10);
-            otherPoints.add(new Rectangle(((float) data.width * data.playerStartPosX * (float) data.tileSize) - data.tileSize * 3, ((float) data.height * data.playerStartPosY * data.tileSize) - data.tileSize * 3, data.tileSize * 6, data.tileSize * 6));
+            //otherPoints.add(new Rectangle(((float) data.width * data.playerStartPosX * (float) data.tileSize) - data.tileSize * 3, ((float) data.height * data.playerStartPosY * data.tileSize) - data.tileSize * 3, data.tileSize * 6, data.tileSize * 6));
             int biomeIndex2 = -1;
             for (BiomeData biome : data.GetBiomes()) {
                 biomeIndex2++;
@@ -442,6 +442,9 @@ public class World implements Disposable, SaveFileContent {
                             float y = (float) (radius * Math.sin(theta));
                             y *= (biome.height * height / 2);
                             y += (height - (biome.startPointY * height));
+
+                            y += (poi.offsetY * (biome.height * height));
+                            x += (poi.offsetX * (biome.width * width));
 
                             if ((int) x < 0 || (int) y <= 0 || (int) y >= height || (int) x >= width || biomeIndex2 != highestBiome(getBiome((int) x, (int) y))) {
                                 continue;
@@ -492,8 +495,16 @@ public class World implements Disposable, SaveFileContent {
 
 
                             Color color = biome.GetColor();
-                            pix.setColor(color.r, 0.1f, 0.1f, 1);
-                            pix.fillRectangle((int) x / data.tileSize - 3, height - (int) y / data.tileSize - 3, 6, 6);
+                            if(poi.markOnMap)
+                            {
+                                pix.setColor(0.1f, 0.1f, 1f, 1);
+                                pix.fillCircle((int) x / data.tileSize - 3, height - (int) y / data.tileSize - 3, 10);
+                            }
+                            else
+                            {
+                                pix.setColor(1, 0.1f, 0.1f, 1);
+                                pix.fillCircle((int) x / data.tileSize - 3, height - (int) y / data.tileSize - 3, 3);
+                            }
 
 
                             if (poi.type != null && poi.type.equals("town")) {

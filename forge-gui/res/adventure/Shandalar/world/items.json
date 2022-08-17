@@ -1,317 +1,387 @@
 [
-  {
-    "name": "Sol Ring",
-    "equipmentSlot": "Left",
-    "effect": {
-      "startBattleWithCard": [
-        "Sol Ring"
-      ]
-    },
-    "iconName": "SolRing"
-  },
-  {
-    "name": "Mox Emerald",
-    "equipmentSlot": "Neck",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Emerald"
-      ]
-    },
-    "description": "",
-    "iconName": "MoxEmerald"
-  },
-  {
-    "name": "Black Lotus",
-    "equipmentSlot": "Right",
-    "effect": {
-      "startBattleWithCard": [
-        "Black Lotus"
-      ]
-    },
-    "iconName": "BlackLotus"
-  },
-  {
-    "name": "Mox Jet",
-    "equipmentSlot": "Neck",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Jet"
-      ]
-    },
-    "iconName": "MoxJet"
-  },
-  {
-    "name": "Mox Pearl",
-    "equipmentSlot": "Neck",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Pearl"
-      ]
-    },
-    "description": "",
-    "iconName": "MoxPearl"
-  },
-  {
-    "name": "Mox Ruby",
-    "equipmentSlot": "Neck",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Ruby"
-      ]
-    },
-    "iconName": "MoxRuby"
-  },
-  {
-    "name": "Mox Sapphire",
-    "equipmentSlot": "Neck",
-    "effect": {
-      "startBattleWithCard": [
-        "Mox Sapphire"
-      ]
-    },
-    "iconName": "MoxSapphire"
-  },
-  {
-    "name": "Life Amulet",
-    "equipmentSlot": "Neck",
-    "effect": {
-      "lifeModifier": 2
-    },
-    "iconName": "LifeAmulet"
-  },
-  {
-    "name": "Red Key",
-    "description": "A mysterious red key.",
-    "iconName": "RedKey",
-    "questItem": true
-  },
-  {
-    "name": "White Key",
-    "description": "A mysterious white key.",
-    "iconName": "WhiteKey",
-    "questItem": true
-  },
-  {
-    "name": "Blue Key",
-    "description": "A mysterious blue key.",
-    "iconName": "BlueKey",
-    "questItem": true
-  },
-  {
-    "name": "Green Key",
-    "description": "A mysterious green key.",
-    "iconName": "GreenKey",
-    "questItem": true
-  },
-  {
-    "name": "Black Key",
-    "description": "A mysterious black key.",
-    "iconName": "BlackKey",
-    "questItem": true
-  },
-  {
-    "name": "Strange Key",
-    "description": "A mysterious key.",
-    "iconName": "StrangeKey",
-    "questItem": true
-  },
-  {
-    "name": "Jungle Shield",
-    "equipmentSlot": "Right",
-    "effect": {
-      "startBattleWithCard": [
-        "g_0_1_plant"
-      ]
-    },
-    "iconName": "JungleShield"
-  },
-  {
-    "name": "Iron Shield",
-    "equipmentSlot": "Right",
-    "effect": {
-      "startBattleWithCard": [
-        "c_0_2_a_wall_defender"
-      ]
-    },
-    "iconName": "IronShield",
-    "cost": 500
-  },
-  {
-    "name": "Steel Shield",
-    "equipmentSlot": "Right",
-    "effect": {
-      "lifeModifier": 1,
-      "startBattleWithCard": [
-        "w_0_3_wall_defender"
-      ]
-    },
-    "iconName": "SteelShield",
-    "cost": 1500
-  },
-  {
-    "name": "Spirit Guard",
-    "equipmentSlot": "Right",
-    "effect": {
-      "lifeModifier": 2,
-      "startBattleWithCard": [
-        "Geist of the Archives"
-      ]
-    },
-    "iconName": "SpiritGuard"
-  },
-  {
-    "name": "Iron Armor",
-    "equipmentSlot": "Body",
-    "effect": {
-      "lifeModifier": 3
-    },
-    "iconName": "IronArmor",
-    "cost": 500
-  },
-  {
-    "name": "Steel Armor",
-    "equipmentSlot": "Body",
-    "effect": {
-      "lifeModifier": 5
-    },
-    "iconName": "SteelArmor",
-    "cost": 1500
-  },
-  {
-    "name": "Leather Boots",
-    "equipmentSlot": "Boots",
-    "effect": {
-      "moveSpeed": 1.2
-    },
-    "iconName": "LeatherBoots"
-  },
-  {
-    "name": "Iron Boots",
-    "equipmentSlot": "Boots",
-    "effect": {
-      "lifeModifier": 1,
-      "moveSpeed": 1.35
-    },
-    "iconName": "IronBoots",
-    "cost": 500
-  },
-  {
-    "name": "Steel Boots",
-    "equipmentSlot": "Boots",
-    "effect": {
-      "lifeModifier": 2,
-      "moveSpeed": 1.4
-    },
-    "iconName": "SteelBoots",
-    "cost": 1500
-  },
-  {
-    "name": "Cheat",
-    "equipmentSlot": "Neck",
-    "effect": {
-      "startBattleWithCard": [
-        "Blightsteel Colossus",
-        "Lightning Greaves"
-      ]
-    },
-    "iconName": "Goose"
-  },
-  {
-    "name": "Shell Wand",
-    "equipmentSlot": "Left",
-    "effect": {
-      "opponent": {
-        "lifeModifier": -2
-      }
-    },
-    "iconName": "ShellWand"
-  },
-  {
-    "name": "Flame Sword",
-    "equipmentSlot": "Left",
-    "effect": {
-      "opponent": {
-        "lifeModifier": -5
-      }
-    },
-    "iconName": "FlameSword"
-  },
-  {
-    "name": "Dungeon Map",
-    "equipmentSlot": "Right",
-    "effect": {
-      "startBattleWithCard": [
-        "Dungeon Map"
-      ]
-    },
-    "iconName": "DungeonMap"
-  },
-  {
-    "name": "Blood Vial",
-    "equipmentSlot": "Right",
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_blood_draw"
-      ]
-    },
-    "iconName": "Blood"
-  },
-  {
-    "name": "Charm",
-    "equipmentSlot": "Right",
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_clue_draw"
-      ]
-    },
-    "iconName": "Clue"
-  },
-  {
-    "name": "Snack",
-    "equipmentSlot": "Right",
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_food_sac"
-      ]
-    },
-    "iconName": "Cheese"
-  },
-  {
-    "name": "Change",
-    "equipmentSlot": "Right",
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_gold_sac"
-      ]
-    },
-    "iconName": "Gold"
-  },
-  {
-    "name": "Treasure",
-    "equipmentSlot": "Right",
-    "effect": {
-      "startBattleWithCard": [
-        "c_a_treasure_sac"
-      ]
-    },
-    "iconName": "Treasure"
-  },
-  {
-    "name": "Manasight Amulet",
-    "equipmentSlot": "Neck",
-    "description": "Grants Manasight, letting you know the colors used by your adversaries.",
-    "effect": {
-      "colorView": true
-    },
-    "iconName": "RelicAmulet"
-  },
-  {
-    "name": "Fortune Coin",
-    "equipmentSlot": "Left",
-    "effect": {
-      "goldModifier": 0.85,
-      "cardRewardBonus": 1
-    },
-    "iconName": "FortuneCoin"
-  }
+{
+	"name": "Sol Ring",
+	"equipmentSlot": "Left",
+	"effect": {
+		"startBattleWithCard": [
+			"Sol Ring"
+		]
+	},
+	"iconName": "SolRing"
+},
+{
+	"name": "Mox Emerald",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Mox Emerald"
+		]
+	},
+	"description": "",
+	"iconName": "MoxEmerald"
+},
+{
+	"name": "Black Lotus",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Black Lotus"
+		]
+	},
+	"iconName": "BlackLotus"
+},
+{
+	"name": "Mox Jet",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Mox Jet"
+		]
+	},
+	"iconName": "MoxJet"
+},
+{
+	"name": "Mox Pearl",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Mox Pearl"
+		]
+	},
+	"description": "",
+	"iconName": "MoxPearl"
+},
+{
+	"name": "Mox Ruby",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Mox Ruby"
+		]
+	},
+	"iconName": "MoxRuby"
+},
+{
+	"name": "Mox Sapphire",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Mox Sapphire"
+		]
+	},
+	"iconName": "MoxSapphire"
+},
+{
+	"name": "Life Amulet",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"lifeModifier": 2
+	},
+	"iconName": "LifeAmulet"
+},
+{
+	"name": "Red Key",
+	"description": "A mysterious red key.",
+	"iconName": "RedKey",
+	"questItem": true
+},
+{
+	"name": "White Key",
+	"description": "A mysterious white key.",
+	"iconName": "WhiteKey",
+	"questItem": true
+},
+{
+	"name": "Blue Key",
+	"description": "A mysterious blue key.",
+	"iconName": "BlueKey",
+	"questItem": true
+},
+{
+	"name": "Green Key",
+	"description": "A mysterious green key.",
+	"iconName": "GreenKey",
+	"questItem": true
+},
+{
+	"name": "Black Key",
+	"description": "A mysterious black key.",
+	"iconName": "BlackKey",
+	"questItem": true
+},
+{
+	"name": "Strange Key",
+	"description": "A mysterious key.",
+	"iconName": "StrangeKey",
+	"questItem": true
+},
+{
+	"name": "Jungle Shield",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"g_0_1_plant"
+		]
+	},
+	"iconName": "JungleShield"
+},
+{
+	"name": "Iron Shield",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"c_0_2_a_wall_defender"
+		]
+	},
+	"iconName": "IronShield",
+	"cost": 500
+},
+{
+	"name": "Steel Shield",
+	"equipmentSlot": "Right",
+	"effect": {
+		"lifeModifier": 1,
+		"startBattleWithCard": [
+			"w_0_3_wall_defender"
+		]
+	},
+	"iconName": "SteelShield",
+	"cost": 1500
+},
+{
+	"name": "Spirit Guard",
+	"equipmentSlot": "Right",
+	"effect": {
+		"lifeModifier": 2,
+		"startBattleWithCard": [
+			"Geist of the Archives"
+		]
+	},
+	"iconName": "SpiritGuard"
+},
+{
+	"name": "Iron Armor",
+	"equipmentSlot": "Body",
+	"effect": {
+		"lifeModifier": 3
+	},
+	"iconName": "IronArmor",
+	"cost": 500
+},
+{
+	"name": "Steel Armor",
+	"equipmentSlot": "Body",
+	"effect": {
+		"lifeModifier": 5
+	},
+	"iconName": "SteelArmor",
+	"cost": 1500
+},
+{
+	"name": "Leather Boots",
+	"equipmentSlot": "Boots",
+	"effect": {
+		"moveSpeed": 1.2
+	},
+	"iconName": "LeatherBoots"
+},
+{
+	"name": "Iron Boots",
+	"equipmentSlot": "Boots",
+	"effect": {
+		"lifeModifier": 1,
+		"moveSpeed": 1.35
+	},
+	"iconName": "IronBoots",
+	"cost": 500
+},
+{
+	"name": "Steel Boots",
+	"equipmentSlot": "Boots",
+	"effect": {
+		"lifeModifier": 2,
+		"moveSpeed": 1.4
+	},
+	"iconName": "SteelBoots",
+	"cost": 1500
+},
+{
+	"name": "Cheat",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"startBattleWithCard": [
+			"Blightsteel Colossus",
+			"Lightning Greaves"
+		]
+	},
+	"iconName": "Goose"
+},
+{
+	"name": "Shell Wand",
+	"equipmentSlot": "Left",
+	"effect": {
+		"opponent": {
+			"lifeModifier": -2
+		}
+	},
+	"iconName": "ShellWand"
+},
+{
+	"name": "Flame Sword",
+	"equipmentSlot": "Left",
+	"effect": {
+		"opponent": {
+			"lifeModifier": -5
+		}
+	},
+	"iconName": "FlameSword"
+},
+{
+	"name": "Dungeon Map",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"Dungeon Map"
+		]
+	},
+	"iconName": "DungeonMap"
+},
+{
+	"name": "Blood Vial",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"c_a_blood_draw"
+		]
+	},
+	"iconName": "Blood"
+},
+{
+	"name": "Charm",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"c_a_clue_draw"
+		]
+	},
+	"iconName": "Clue"
+},
+{
+	"name": "Snack",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"c_a_food_sac"
+		]
+	},
+	"iconName": "Cheese"
+},
+{
+	"name": "Change",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"c_a_gold_sac"
+		]
+	},
+	"iconName": "Gold"
+},
+{
+	"name": "Treasure",
+	"equipmentSlot": "Right",
+	"effect": {
+		"startBattleWithCard": [
+			"c_a_treasure_sac"
+		]
+	},
+	"iconName": "Treasure"
+},
+{
+	"name": "Manasight Amulet",
+	"equipmentSlot": "Neck",
+	"effect": {
+		"colorView": true
+	},
+	"description": "Grants Manasight, letting you know the colors used by your adversaries.",
+	"iconName": "RelicAmulet"
+},
+{
+	"name": "Fortune Coin",
+	"equipmentSlot": "Left",
+	"effect": {
+		"name": "",
+		"goldModifier": 0.85,
+		"cardRewardBonus": 1
+	},
+	"description": "",
+	"iconName": "FortuneCoin"
+},
+{
+	"name": "Colorless rune",
+	"equipmentSlot": "",
+	"effect": {
+		"name": "",
+		"goldModifier": 0.85,
+		"cardRewardBonus": 1
+	},
+	"description": "Teleports you to the center",
+	"iconName": "ColorlessRune",
+	"questItem": true,
+	"cost": 100
+},
+{
+	"name": "White rune",
+	"equipmentSlot": "",
+	"effect": {
+		"name": ""
+	},
+	"description": "Teleports you to the plains",
+	"iconName": "WhiteRune",
+	"questItem": true,
+	"cost": 100
+},
+{
+	"name": "Black rune",
+	"equipmentSlot": "",
+	"effect": {
+		"name": ""
+	},
+	"description": "Teleports you to the swamp",
+	"iconName": "BlackRune",
+	"questItem": true,
+	"cost": 100
+},
+{
+	"name": "Blue rune",
+	"equipmentSlot": "",
+	"effect": {
+		"name": ""
+	},
+	"description": "Teleports you to the island",
+	"iconName": "BlueRune",
+	"questItem": true,
+	"cost": 100
+},
+{
+	"name": "Red rune",
+	"equipmentSlot": "",
+	"effect": {
+		"name": ""
+	},
+	"description": "Teleports you to the mountain",
+	"iconName": "RedRune",
+	"questItem": true,
+	"cost": 100
+},
+{
+	"name": "Green rune",
+	"equipmentSlot": "",
+	"effect": {
+		"name": ""
+	},
+	"description": "Teleports you to the forest",
+	"iconName": "GreenRune",
+	"questItem": true,
+	"cost": 100
+}
 ]

@@ -78,6 +78,7 @@ public class MapStage extends GameStage {
     //These maps are defined as embedded properties within the Tiled maps.
     private EffectData effect;             //"Dungeon Effect": Character Effect applied to all adversaries within the map.
     private boolean preventEscape = false; //Prevents player from escaping the dungeon by any means that aren't an exit.
+    private boolean foundPlayerSpawn;
 
 
     public boolean getDialogOnlyInput() {
@@ -343,6 +344,7 @@ public class MapStage extends GameStage {
 
         GetPlayer().stop();
         spriteLayer = null;
+        foundPlayerSpawn=false;
         for (MapLayer layer : map.getLayers()) {
             if (layer.getProperties().containsKey("spriteLayer") && layer.getProperties().get("spriteLayer", boolean.class)) {
                 spriteLayer = layer;
@@ -404,7 +406,18 @@ public class MapStage extends GameStage {
                         float y = Float.parseFloat(prop.get("y").toString());
                         float w = Float.parseFloat(prop.get("width").toString());
                         float h = Float.parseFloat(prop.get("height").toString());
-                        EntryActor entry = new EntryActor(this, sourceMap, id, prop.get("teleport").toString(), x, y, w, h, prop.get("direction").toString());
+                        
+                        String targetMap=prop.get("teleport").toString();
+                        boolean spawnPlayerThere=(targetMap==null||targetMap.isEmpty()&&sourceMap.isEmpty())||//if target is null and "from world"
+                                !sourceMap.isEmpty()&&targetMap.equals(sourceMap);
+                        if(foundPlayerSpawn)
+                            spawnPlayerThere=false;
+                        if((prop.containsKey("spawn")&&prop.get("spawn").toString()=="true")&&spawnPlayerThere)
+                        {
+                            foundPlayerSpawn=true;
+                            spawnPlayerThere=true;
+                        }//set spawn to option with "spawn" over other entries
+                        EntryActor entry = new EntryActor(this, id, prop.get("teleport").toString(), x, y, w, h, prop.get("direction").toString(),spawnPlayerThere);
                         addMapActor(obj, entry);
                         break;
                     case "reward":
@@ -486,7 +499,11 @@ public class MapStage extends GameStage {
                     case "dialog":
                         if(obj instanceof TiledMapTileMapObject) {
                             TiledMapTileMapObject tiledObj = (TiledMapTileMapObject) obj;
-                            DialogActor dialog = new DialogActor(this, id, prop.get("dialog").toString(), tiledObj.getTextureRegion());
+                            DialogActor dialog;
+                            if(prop.containsKey("sprite"))
+                                dialog= new DialogActor(this, id, prop.get("dialog").toString(), prop.get("sprite").toString());
+                            else
+                                dialog= new DialogActor(this, id, prop.get("dialog").toString(), tiledObj.getTextureRegion());
                             addMapActor(obj, dialog);
                         }
                         break;

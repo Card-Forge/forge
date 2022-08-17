@@ -19,6 +19,10 @@ public class PointOfInterestData {
     public String sprite;
     public String map;
     public float radiusFactor;
+    public float offsetX=0f;
+    public float offsetY=0f;
+
+    public boolean markOnMap;
 
 
 

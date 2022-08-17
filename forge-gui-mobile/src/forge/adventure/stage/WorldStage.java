@@ -1,6 +1,7 @@
 package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -176,7 +177,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
 
     }
-    private void handlePointsOfInterestCollision() {
+    public void handlePointsOfInterestCollision() {
 
         for (Actor actor : foregroundSprites.getChildren()) {
             if (actor.getClass() == PointOfInterestMapSprite.class) {
@@ -286,6 +287,9 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     "\nEnemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
             WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
         }
+        GridPoint2 pos = background.translateFromWorldToChunk(player.getX(), player.getY());
+        background.loadChunk(pos.x,pos.y);
+        handlePointsOfInterestCollision();
     }
 
     @Override

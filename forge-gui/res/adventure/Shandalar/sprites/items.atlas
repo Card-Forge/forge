@@ -234,3 +234,24 @@ FortuneCoin
 SpiritGuard
   xy: 192,160
   size: 16, 16
+MulticolorRune
+  xy: 352,64
+  size: 16, 16
+ColorlessRune
+  xy: 336,80
+  size: 16, 16
+BlackRune
+  xy: 352,80
+  size: 16, 16
+RedRune
+  xy: 336,96
+  size: 16, 16
+GreenRune
+  xy: 352,96
+  size: 16, 16
+BlueRune
+  xy: 336,112
+  size: 16, 16
+WhiteRune
+  xy: 352,112
+  size: 16, 16

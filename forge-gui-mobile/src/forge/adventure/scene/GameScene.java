@@ -46,6 +46,7 @@ public class GameScene extends HudScene {
         Forge.clearTransitionScreen();
         Forge.clearCurrentScreen();
         super.enter();
+        WorldStage.getInstance().handlePointsOfInterestCollision();
     }
 
 }
