@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="64">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzrENACAMwLAOSFzZ7zmEJ6qCwEPmOEdEqqQ174iPj4+Pj4+Pj4+Pj4+Pj+98fHx87/kq6/rw8f3s21DxrDk=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmEtOwzAQQL0iTnqCLiqBYAcUroAQcCTYUtYpqHADPseAq0AL67bAAfAoHWU0jdNxbNMgMdKoVho5L/N3lGqfTLVSh5lSw3TdJNWSpwVbTL6TRKnTBnqWlLaLyTcxz3lvoB9Jyfap28sHbPuZ7FmDTqlN+c67Sl10izUXzlfFBjlzYK7NzO9cL3NxdeW7NWx3Qr4qu9GcuSZx2YStim/D7JlU6FO6zFclUj6pSOPvyNhqu6fUTq+eb9fc960Lvj7xsytXEz6J/UBGxIbcjv98f5+P5ohLfVwH341n7wvNR2caX9/G4MsDxh7y3ZPaa1sjH16T8oXw72tW9ok3y/p4sR5nbnxQo+ce801s//raMCQfz41QfKHiD3rvl2HcIz04RH0OGX8o6Oc21Ocpi3/qZzrDrIsvZ/7jOeJjw9B8YLu6MyHEr8s5cTP140NfosDsUvfOfJ9QauMbkfMlsraNr5+V62GL7Ddj31/yhS3bwkdzFPn6K/xLa61EH4X3jWv4MP6wfwDfi7n+LMw9F7tQfejY/6N8vH8B31Yqrw2r+OBdB7pQyTvD/Vfa3v8vdbmfjwIL8NFaK9mbsvn21zqZJMt8NuFnMpxPfOfjUHz0TAtMmAuxbOfKZ/vuE1Oa8MWMNy4ufOBPmIt/iw3EhW+V/AAJonRV
+  </data>
+ </layer>
+ <layer id="6" name="Ground2" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztlO0KgjAUhg/+8wPaXzGtLqyoFOoyQutaujLvI8eQbC2SUve2zgOHfTjmw8s2ImYoynC4qgNsv6uP7VeF2H5T5lfFROemLjGmH3p+Lvqh3w/2G+f8rROiTWLf71fzQ/GT+eUpUZGqvV/1W0xz/5wf+33vh3z++H1xO7/yjV/uPY4Lz7zOlt8nLCKiZVOBr9q25kK1mbh/k63e786touf9j52Mdj3yQmIP4KufOVS2mucBwFt30sd97i9jRs9yTE6z6f7lKvI9l2TCrgfDuM4NBkkQ7g==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztmEsOgjAQhmflgwRWrjBuPAWKG8M59CZ6EB9svJO683ESIdJYcfpiAEvSP5mknTrTT5DBDkA3tPMB9pbYwf/liwKAWWGLzC4EiyvkiLn954GcD1s3UVQhh2r/iPvO1z/wnbnrKOKjXrc6coliu853GtL3oMSqci49+h6UWMdHi+X908nHz8aMD1vjfW3w3TOW/vBtj2KceN9zfvz09PbItRoDrMc0Pkw23V9MNvFtQoBtaC8fVotlfOXPt/l8MEsQHzOT56MOPkw23V9MNvHJ6nN5HZv/sz6Xa7T7/enltIEvlZz3cj7dM+jRb4ZPdCbMz0s531mwLoqpmw/zj4r33M37njelNs5HFDk+mrrMl0r6RyrtkP4T5lPFi2oTtT+ExZvk1OkPsXVRnVbVZBmfKicWz8uk9urW5qo5qf0zJyfb1cv+Vw8MeoYivQCqHdW9
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1E0OgjAQBeC3UnasK+lhYCOJXgI3LZdAjuXRXDI7IpZGw88ovC9p0r/FSzodgIimcAbwMmqjnYRCjhZIrHaKV4+TdoLlHGx4PnY2vPPP8gwoMu0U+1bJ37p9+L8u8lbXkfc6S12WNj4P3Z2Tk2ye9bRLS9VfrD+H9rbUn4m+1aTAXUabaid59zTxNRER9X65nxPRejqGURMa
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="41" template="../../obj/shop.tx" x="465" y="260">
+   <properties>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/shop.tx" x="416" y="260">
+   <properties>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/shop.tx" x="545" y="259">
+   <properties>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+   </properties>
+  </object>
+  <object id="43" template="../../obj/shop.tx" x="370" y="325">
+   <properties>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+   </properties>
+  </object>
+  <object id="47" template="../../obj/inn.tx" x="536" y="144"/>
+  <object id="49" template="../../obj/shop.tx" x="417" y="324">
+   <properties>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/shop.tx" x="465" y="323">
+   <properties>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/shop.tx" x="545" y="325">
+   <properties>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/shop.tx" x="369" y="261">
+   <properties>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/spellsmith.tx" x="452" y="212"/>
+  <object id="55" template="../../obj/shop.tx" x="465" y="515">
+   <properties>
+    <property name="shopList" value="Plains"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/entry_up.tx" x="320" y="644" width="80" height="20">
+   <properties>
+    <property name="spawn" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/entry_left.tx" x="416" y="552" width="16" height="71.964" rotation="179.747"/>
+  <object id="60" template="../../obj/entry_right.tx" x="304" y="624" width="16" height="69"/>
+  <object id="61" template="../../obj/arena.tx" x="423" y="114"/>
+  <object id="62" template="../../obj/shop.tx" x="263" y="257">
+   <properties>
+    <property name="shopList" value="Plains"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/shop.tx" x="82" y="257">
+   <properties>
+    <property name="shopList" value="Plains"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
