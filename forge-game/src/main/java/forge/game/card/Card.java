@@ -661,6 +661,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         } else if (mode.equals("Meld") && isMeldable()) {
             return changeToState(CardStateName.Meld);
+        } else if (mode.equals("Specialize")) {
+            if (customState.equalsIgnoreCase("white")) {
+                return changeToState(CardStateName.SpecializeW);
+            } else if (customState.equalsIgnoreCase("blue")) {
+                return changeToState(CardStateName.SpecializeU);
+            } else if (customState.equalsIgnoreCase("black")) {
+                return changeToState(CardStateName.SpecializeB);
+            } else if (customState.equalsIgnoreCase("red")) {
+                return changeToState(CardStateName.SpecializeR);
+            } else if (customState.equalsIgnoreCase("green")) {
+                return changeToState(CardStateName.SpecializeG);
+            }
+            //do trigger here?
         }
         return false;
     }
