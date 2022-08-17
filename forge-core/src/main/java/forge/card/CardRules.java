@@ -414,6 +414,11 @@ public final class CardRules implements ICardCharacteristics {
             CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, removedFromNonCommanderDecks, hints, needs, has);
             faces[0].assignMissingFields();
             if (null != faces[1]) faces[1].assignMissingFields();
+            if (null != faces[2]) faces[2].assignMissingFields();
+            if (null != faces[3]) faces[3].assignMissingFields();
+            if (null != faces[4]) faces[4].assignMissingFields();
+            if (null != faces[5]) faces[5].assignMissingFields();
+            if (null != faces[6]) faces[6].assignMissingFields();
             final CardRules result = new CardRules(faces, altMode, cah);
 
             result.setNormalizedName(this.normalizedName);
