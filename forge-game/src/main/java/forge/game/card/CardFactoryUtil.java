@@ -3221,15 +3221,11 @@ public class CardFactoryUtil {
             final String[] k = keyword.split(":");
             final String cost = k[1];
 
-            //this needs to just be AB$ SetState with choosecolor and discard costs
-            //don't forget to add SorcerySpeed$ True!!!
-            final String effect = "AB$ ChooseColor | Cost$ " + cost;
-            final String sub = "DB$ SetState | Mode$ Specialize";
+            final String effect = "AB$ SetState | Cost$ " + cost + " ChooseColor<1> Discard<1/Card.ChosenColor;" +
+                    "Card.AssociatedWithChosenColor/card of the chosen color or its associated basic land type> | " +
+                    "Mode$ Specialize | SorcerySpeed$ True";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
-            final AbilitySub subSa = (AbilitySub) AbilityFactory.getAbility(sub, card);
-            sa.setSubAbility(subSa);
-
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Spectacle")) {
