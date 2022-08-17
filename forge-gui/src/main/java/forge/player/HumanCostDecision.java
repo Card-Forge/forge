@@ -11,6 +11,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
@@ -66,6 +67,15 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(final CostAddMana cost) {
         return PaymentDecision.number(cost.getAbilityAmount(ability));
+    }
+
+    @Override
+    public PaymentDecision visit(CostChooseColor cost) {
+        int c = cost.getAbilityAmount(ability);
+        List<String> choices = player.getController().chooseColors(Localizer.getInstance().
+                        getMessage("lblChooseAColor"), ability, c, c,
+                new ArrayList<>(MagicColor.Constant.ONLY_COLORS));
+        return PaymentDecision.colors(choices);
     }
 
     @Override
