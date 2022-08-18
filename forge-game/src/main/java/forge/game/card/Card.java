@@ -5745,6 +5745,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         foretoldThisTurn = false;
     }
 
+    public boolean isSpecialized() {
+        return specialized;
+    }
+    public final void setSpecialized(final boolean bool) {
+        specialized = bool;
+    }
+    public final boolean canSpecialize() {
+        return getRules() != null && getRules().getSplitType() == CardSplitType.Specialize;
+    }
+
     public int getTimesCrewedThisTurn() {
         return timesCrewedThisTurn;
     }
