@@ -97,6 +97,7 @@ public class CardFactory {
         out.setAttachedCards(in.getAttachedCards());
         out.setEntityAttachedTo(in.getEntityAttachedTo());
 
+        out.setSpecialized(in.isSpecialized());
         out.addRemembered(in.getRemembered());
         out.addImprintedCards(in.getImprintedCards());
         out.setCommander(in.isRealCommander());
