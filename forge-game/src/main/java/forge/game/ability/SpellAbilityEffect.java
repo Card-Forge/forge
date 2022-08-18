@@ -326,6 +326,7 @@ public abstract class SpellAbilityEffect {
         final SpellAbility newSa = AbilityFactory.getAbility(trigSA, sa.getHostCard());
         newSa.setIntrinsic(intrinsic);
         trig.setOverridingAbility(newSa);
+        trig.setSpawningAbility(sa.copy(sa.getHostCard(), sa.getActivatingPlayer(), true));
         sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
     }
 
@@ -641,10 +642,16 @@ public abstract class SpellAbilityEffect {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         hostCard.addUntilLeavesBattlefield(triggerList.allCards());
-        final TriggerHandler trigHandler  = game.getTriggerHandler();
-        final Card lki = CardUtil.getLKICopy(hostCard);
-        lki.clearControllers();
-        lki.setOwner(sa.getActivatingPlayer());
+        final TriggerHandler trigHandler = game.getTriggerHandler();
+
+        final Card lki;
+        if (sa.hasParam("ReturnAbility")) {
+            lki = CardUtil.getLKICopy(hostCard);
+            lki.clearControllers();
+            lki.setOwner(sa.getActivatingPlayer());
+        } else {
+            lki = null;
+        }
 
         return new GameCommand() {
 
@@ -671,14 +678,13 @@ public abstract class SpellAbilityEffect {
                         if (newCard == null || !newCard.equalsWithTimestamp(c)) {
                             continue;
                         }
-                        Trigger trig = null;
                         if (sa.hasAdditionalAbility("ReturnAbility")) {
                             String valid = sa.getParamOrDefault("ReturnValid", "Card.IsTriggerRemembered");
 
                             String trigSA = "Mode$ ChangesZone | Origin$ " + cell.getColumnKey() + " | Destination$ " + cell.getRowKey() + " | ValidCard$ " + valid +
                                     " | TriggerDescription$ " + sa.getAdditionalAbility("ReturnAbility").getParam("SpellDescription");
 
-                            trig = TriggerHandler.parseTrigger(trigSA, hostCard, sa.isIntrinsic(), null);
+                            Trigger trig = TriggerHandler.parseTrigger(trigSA, hostCard, sa.isIntrinsic(), null);
                             trig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
                             trig.setActiveZone(null);
                             trig.addRemembered(newCard);

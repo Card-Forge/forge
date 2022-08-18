@@ -122,7 +122,6 @@
 		"maskPath": "world/tilesets/ring.png",
 		"height": 0.5,
 		"width": 0.5,
-		"symmetry": 8,
 		"periodicOutput": false,
 		"mappingInfo": [
 			{

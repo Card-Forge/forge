@@ -8,8 +8,6 @@ import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
-import forge.game.replacement.ReplacementType;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.Trigger;
@@ -45,15 +43,8 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
 
         mapParams.put("Mode", TriggerType.Immediate.name());
 
-        // in case the card moved before the delayed trigger can be created, need to check the latest card state for right timestamp
-        Card gameCard = game.getCardState(host);
-        Card lki = CardUtil.getLKICopy(gameCard);
-        lki.clearControllers();
-        lki.setOwner(sa.getActivatingPlayer());
-        // if this trigger is part of ETBReplacement it shouldn't run with LKI from incomplete zone change (Mimic Vat + Wall of Stolen Identity)
-        final Card trigHost = sa.getRootAbility().getReplacementEffect() != null && sa.getRootAbility().getReplacementEffect().getMode().equals(ReplacementType.Moved) && gameCard.getZone() == null ? gameCard : lki;
-        final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, trigHost, sa.isIntrinsic(), null);
-        immediateTrig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
+        final Trigger immediateTrig = TriggerHandler.parseTrigger(mapParams, host, sa.isIntrinsic(), null);
+        immediateTrig.setSpawningAbility(sa.copy(host, sa.getActivatingPlayer(), true));
 
         // Need to copy paid costs
 
@@ -71,7 +62,7 @@ public class ImmediateTriggerEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasAdditionalAbility("Execute")) {
-            SpellAbility overridingSA = sa.getAdditionalAbility("Execute").copy(lki, sa.getActivatingPlayer(), false);
+            SpellAbility overridingSA = sa.getAdditionalAbility("Execute").copy(host, sa.getActivatingPlayer(), false);
             // need to set Parent to null, otherwise it might have wrong root ability
             if (overridingSA instanceof AbilitySub) {
                 ((AbilitySub)overridingSA).setParent(null);

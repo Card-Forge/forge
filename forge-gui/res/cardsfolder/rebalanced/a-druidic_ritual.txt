@@ -1,0 +1,7 @@
+Name:A-Druidic Ritual
+ManaCost:2 G
+Types:Sorcery
+A:SP$ Mill | NumCards$ 3 | Optional$ True | SubAbility$ DBReturn | SpellDescription$ You may mill three cards.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | ChangeNum$ 2 | ChangeType$ Creature.YouOwn,Land.YouOwn | ChangeTypeDesc$ creature and/or land cards they own | SelectPrompt$ Select up to two creature and/or land cards from your graveyard to return to your hand | SpellDescription$ Then return up to two creature and/or land cards from your graveyard to your hand.
+DeckHas:Ability$Mill|Graveyard
+Oracle:You may mill three cards. Then return up to two creature and/or land cards from your graveyard to your hand.

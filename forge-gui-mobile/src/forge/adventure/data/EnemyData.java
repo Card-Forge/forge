@@ -24,6 +24,9 @@ public class EnemyData {
     public String[] equipment;
     public String colors = "";
 
+    public EnemyData nextEnemy;
+    public int teamNumber=-1;
+
     public EnemyData() { }
     public EnemyData(EnemyData enemyData) {
         name           = enemyData.name;

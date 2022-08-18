@@ -202,6 +202,10 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
         return WorldSave.getCurrentSave().getWorld().collidingTile(boundingRect);
     }
+    public boolean spawn(String enemy)
+    {
+        return spawn(WorldData.getEnemy(enemy));
+    }
 
     private void HandleMonsterSpawn(float delta) {
         World world = WorldSave.getCurrentSave().getWorld();
@@ -223,8 +227,12 @@ public class WorldStage extends GameStage implements SaveFileContent {
         if (list == null)
             return;
         EnemyData enemyData = data.getEnemy( 1.0f );
+        spawn(enemyData);
+    }
+
+    private boolean spawn(EnemyData enemyData) {
         if (enemyData == null)
-            return;
+            return false;
         EnemySprite sprite = new EnemySprite(enemyData);
         float unit = Scene.getIntendedHeight() / 6f;
         Vector2 spawnPos = new Vector2(1, 1);
@@ -242,11 +250,12 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 {
                     enemies.add(Pair.of(globalTimer,sprite));
                     foregroundSprites.addActor(sprite);
-                    return;
+                    return true;
                 }
                 int g=0;
             }
         }
+        return false;
     }
 
     @Override
@@ -254,6 +263,12 @@ public class WorldStage extends GameStage implements SaveFileContent {
         background.setPlayerPos(player.getX(), player.getY());
         //spriteGroup.setCullingArea(new Rectangle(player.getX()-getViewport().getWorldHeight()/2,player.getY()-getViewport().getWorldHeight()/2,getViewport().getWorldHeight(),getViewport().getWorldHeight()));
         super.draw();
+        if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
+            MapStage.getInstance().showDeckAwardDialog("{BLINK=WHITE;RED}Chaos Mode!{ENDBLINK}\n"+ WorldSave.getCurrentSave().getPlayer().getName()+ "'s Deck: "+
+                    WorldSave.getCurrentSave().getPlayer().getSelectedDeck().getName()+
+                    "\nEnemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
+            WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
+        }
     }
 
     @Override
@@ -271,12 +286,6 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
         }
         setBounds(WorldSave.getCurrentSave().getWorld().getWidthInPixels(), WorldSave.getCurrentSave().getWorld().getHeightInPixels());
-        if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
-            MapStage.getInstance().showDeckAwardDialog("Chaos Mode!\n"+ WorldSave.getCurrentSave().getPlayer().getName()+ "'s Deck: "+
-                    WorldSave.getCurrentSave().getPlayer().getSelectedDeck().getName()+
-                    "\nEnemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
-            WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
-        }
     }
 
     @Override

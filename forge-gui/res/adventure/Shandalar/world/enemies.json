@@ -3547,5 +3547,56 @@
 		"Black Lotus"
 	],
 	"colors": "BGRUW"
+},
+{
+	"name": "Goblin pack",
+	"sprite": "sprites/goblin_group.atlas",
+	"deck": "decks/goblin_bad.json",
+	"ai": "",
+	"teamNumber" :1,
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 27,
+	"life": 8,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Red"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "R",
+	"nextEnemy": {
+		"name": "Goblin",
+		"teamNumber" :1,
+		"deck": "decks/goblin_bad.json",
+		"ai": "",
+		"life": 8,
+		"nextEnemy": {
+			"name": "Goblin",
+			"teamNumber" :1,
+			"deck": "decks/goblin_bad.json",
+			"ai": "",
+			"life": 8
+		}
+	}
 }
 ]

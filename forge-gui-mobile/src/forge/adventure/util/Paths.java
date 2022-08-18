@@ -15,7 +15,5 @@ public class Paths {
     public static final String ITEMS_EQUIP = "skin/equip.png";
     public static final String ITEMS_ATLAS = "sprites/items.atlas";
     public static final String MANA_ATLAS = "sprites/pixelmana.atlas";
-
-
-
+    public static final String COLOR_FRAME_ATLAS = "ui/color_frames.atlas";
 }

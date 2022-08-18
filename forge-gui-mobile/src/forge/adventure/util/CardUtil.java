@@ -4,13 +4,12 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import forge.StaticData;
 import forge.adventure.data.GeneratedDeckData;
 import forge.adventure.data.GeneratedDeckTemplateData;
 import forge.adventure.data.RewardData;
 import forge.adventure.world.WorldSave;
-import forge.card.CardRarity;
-import forge.card.CardType;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -287,23 +286,55 @@ public class CardUtil {
     public static Deck generateDeck(GeneratedDeckData data)
     {
         Deck deck= new Deck(data.name);
-        if(data.template==null)
+        if(data.mainDeck!=null)
         {
             deck.getOrCreate(DeckSection.Main).addAllFlat(generateAllCards(Arrays.asList(data.mainDeck), true));
             if(data.sideBoard!=null)
                 deck.getOrCreate(DeckSection.Sideboard).addAllFlat(generateAllCards(Arrays.asList(data.sideBoard), true));
             return deck;
         }
-        float count=data.template.count;
-        float lands=count*0.4f;
-        float spells=count-lands;
-        List<RewardData> dataArray= generateRewards(data.template,spells*0.5f,new int[]{1,2});
-        dataArray.addAll(generateRewards(data.template,spells*0.3f,new int[]{3,4,5}));
-        dataArray.addAll(generateRewards(data.template,spells*0.2f,new int[]{6,7,8}));
-        List<PaperCard>  nonLand= generateAllCards(dataArray, true);
+        if(data.jumpstartPacks!=null)
+        {
+            deck.getOrCreate(DeckSection.Main);
+            for(int i=0;i<data.jumpstartPacks.length;i++)
+            {
 
-        nonLand.addAll(fillWithLands(nonLand,data.template));
-        deck.getOrCreate(DeckSection.Main).addAllFlat(nonLand);
+                String targetName;
+                switch (MagicColor.fromName(data.jumpstartPacks[i]))
+                {
+                    default:
+                    case MagicColor.WHITE:  targetName = "Plains";  break;
+                    case MagicColor.BLUE:   targetName = "Island";  break;
+                    case MagicColor.BLACK:  targetName = "Swamp";   break;
+                    case MagicColor.RED:    targetName = "Mountain";break;
+                    case MagicColor.GREEN:  targetName = "Forest";  break;
+                }
+
+                List<PrintSheet> candidates=new ArrayList<>();
+                for(PrintSheet sheet : StaticData.instance().getPrintSheets())
+                {
+                    if(sheet.containsCardNamed(targetName,3)&&sheet.getName().startsWith("JMP"))//dodge the rainbow jumpstart sheet
+                    {
+                        candidates.add(sheet);
+                    }
+                }
+                deck.getOrCreate(DeckSection.Main).addAllFlat(candidates.get(Current.world().getRandom().nextInt(candidates.size())).all());
+            }
+            return deck;
+        }
+       if(data.template!=null)
+       {
+           float count=data.template.count;
+           float lands=count*0.4f;
+           float spells=count-lands;
+           List<RewardData> dataArray= generateRewards(data.template,spells*0.5f,new int[]{1,2});
+           dataArray.addAll(generateRewards(data.template,spells*0.3f,new int[]{3,4,5}));
+           dataArray.addAll(generateRewards(data.template,spells*0.2f,new int[]{6,7,8}));
+           List<PaperCard>  nonLand= generateAllCards(dataArray, true);
+
+           nonLand.addAll(fillWithLands(nonLand,data.template));
+           deck.getOrCreate(DeckSection.Main).addAllFlat(nonLand);
+       }
         return deck;
     }
 

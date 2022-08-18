@@ -596,7 +596,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("GainControl")) {
                         final String g = sa.getParam("GainControl");
-                        Player newController = g.equals("True") ? sa.getActivatingPlayer() :
+                        Player newController = g.equals("True") ? player :
                                 AbilityUtils.getDefinedPlayers(sa.getHostCard(), g, sa).get(0);
                         if (newController != null) {
                             if (newController != gameCard.getController()) {
@@ -764,7 +764,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         movedCard.setForetoldThisTurn(true);
                         movedCard.setForetoldByEffect(true);
                         // look at the exiled card
-                        movedCard.addMayLookTemp(sa.getActivatingPlayer());
+                        movedCard.addMayLookTemp(player);
                     }
 
                     if (sa.hasParam("TrackDiscarded")) {

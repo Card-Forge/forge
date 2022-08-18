@@ -7,3 +7,7 @@ ScryfallCode=PLG22
 
 [cards]
 1 R Sol Ring @Mike Bierek
+P1 M Moraug, Fury of Akoum @Rudy Siswanto
+P2 M Ox of Agonas @Lie Setiawan
+P3 M Angrath, the Flame-Chained @Song Qijin
+P4 R Tahngarth, First Mate @Song Qijin

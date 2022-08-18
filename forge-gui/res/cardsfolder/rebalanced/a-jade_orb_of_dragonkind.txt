@@ -1,0 +1,12 @@
+Name:A-Jade Orb of Dragonkind
+ManaCost:2 G
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | TriggersWhenSpent$ TrigSpent | SpellDescription$ Add one mana of any color. When you spend this mana to cast a Dragon creature spell, it enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn.
+SVar:TrigSpent:Mode$ SpellCast | ValidCard$ Creature.Dragon | ValidActivatingPlayer$ You | Execute$ TrigEffect | TriggerDescription$ When you spend this mana to cast a Dragon creature spell, it enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | ForgetOnMoved$ Stack | ReplacementEffects$ ETBCreat
+SVar:ETBCreat:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated | Description$ That creature enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn.
+SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ ReplacedCard | Duration$ UntilYourNextTurn | KW$ Hexproof | PumpZone$ Stack
+DeckHas:Ability$Counters
+DeckHints:Type$Dragon
+Oracle:{T}: Add one mana of any color. When you spend this mana to cast a Dragon creature spell, it enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn.

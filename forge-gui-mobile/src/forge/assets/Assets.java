@@ -44,50 +44,60 @@ public class Assets implements Disposable {
     private TextureParameter textureParameter;
     private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0, aDF = 0, cDFVal = 0;
     public Assets() {
-        //init titlebg fallback
-        fallback_skins().put(0, new Texture(GuiBase.isAndroid()
-                ? Gdx.files.internal("fallback_skin").child("title_bg_lq.png")
-                : Gdx.files.local("fallback_skin").child("title_bg_lq.png")));
-        //init transition fallback
-        fallback_skins().put(1, new Texture(GuiBase.isAndroid()
-                ? Gdx.files.internal("fallback_skin").child("transition.png")
-                : Gdx.files.local("fallback_skin").child("transition.png")));
+        try {
+            //init titleLQ
+            Texture titleBG_LQ = GuiBase.isAndroid() ?
+                    new Texture(Gdx.files.internal("fallback_skin").child("title_bg_lq.png")) :
+                    new Texture(Gdx.files.classpath("fallback_skin").child("title_bg_lq.png"));
+            fallback_skins().put(0, titleBG_LQ == null ? getDummy() : titleBG_LQ);
+            //init transition
+            Texture transitionLQ = GuiBase.isAndroid() ?
+                    new Texture(Gdx.files.internal("fallback_skin").child("transition.png")) :
+                    new Texture(Gdx.files.classpath("fallback_skin").child("transition.png"));
+            fallback_skins().put(1, transitionLQ == null ? getDummy() : transitionLQ);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     @Override
     public void dispose() {
-        if (counterFonts != null)
-            for (BitmapFont bitmapFont : counterFonts.values())
-                bitmapFont.dispose();
-        if (generatedCards != null)
-            for (Texture texture : generatedCards.values())
-                texture.dispose();
-        if (fallback_skins != null)
-            for (Texture texture : fallback_skins.values())
-                texture.dispose();
-        if (tmxMap != null)
-            for (Texture texture : tmxMap.values())
-                texture.dispose();
-        if (defaultImage != null)
-            defaultImage.dispose();
-        if (dummy != null)
-            dummy.dispose();
-        cardArtCache.clear();
-        avatarImages.clear();
-        manaImages.clear();
-        symbolLookup.clear();
-        images.clear();
-        avatars.clear();
-        sleeves.clear();
-        cracks.clear();
-        borders.clear();
-        deckbox.clear();
-        cursor.clear();
-        fonts.clear();
-        counterFonts.clear();
-        generatedCards.clear();
-        fallback_skins.clear();
-        tmxMap.clear();
-        manager.dispose();
+        try {
+            if (counterFonts != null)
+                for (BitmapFont bitmapFont : counterFonts.values())
+                    bitmapFont.dispose();
+            if (generatedCards != null)
+                for (Texture texture : generatedCards.values())
+                    texture.dispose();
+            if (fallback_skins != null)
+                for (Texture texture : fallback_skins.values())
+                    texture.dispose();
+            if (tmxMap != null)
+                for (Texture texture : tmxMap.values())
+                    texture.dispose();
+            if (defaultImage != null)
+                defaultImage.dispose();
+            if (dummy != null)
+                dummy.dispose();
+            cardArtCache.clear();
+            avatarImages.clear();
+            manaImages.clear();
+            symbolLookup.clear();
+            images.clear();
+            avatars.clear();
+            sleeves.clear();
+            cracks.clear();
+            borders.clear();
+            deckbox.clear();
+            cursor.clear();
+            fonts.clear();
+            counterFonts.clear();
+            generatedCards.clear();
+            fallback_skins.clear();
+            tmxMap.clear();
+            manager.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public MemoryTrackingAssetManager manager() {
         if (manager == null)
@@ -372,6 +382,7 @@ public class Assets implements Disposable {
             if (memoryPerFile.containsKey(fileName)) {
                 memoryPerFile.remove(fileName);
             }
+            cardArtCache().clear();
         }
 
         public float getMemoryInMegabytes() {

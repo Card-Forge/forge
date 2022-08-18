@@ -13,7 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
+import forge.Forge;
 import forge.adventure.data.UIData;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Group of controls that will be loaded from a configuration file
@@ -86,6 +90,9 @@ public class UIActor extends Group {
             float yValue = 0;
             for (ObjectMap.Entry property : new OrderedMap.OrderedMapEntries<>(element)) {
                 switch (property.key.toString()) {
+                    case "scale":
+                        newActor.setScale((Float) property.value);
+                        break;
                     case "width":
                         newActor.setWidth((Float) property.value);
                         break;
@@ -152,13 +159,26 @@ public class UIActor extends Group {
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
                 case "text":
-                    newActor.setText(property.value.toString());
+
+                    newActor.setText(localize(property.value.toString()));
                     break;
                 case "align":
                     newActor.setAlignment(((Float) property.value).intValue());
                     break;
             }
         }
+    }
+
+    public static String localize(String str) {
+        Pattern regex=Pattern.compile("\\{[^\\}]*\\}");
+        for(int i=0;i<100;i++)
+        {
+           Matcher matcher= regex.matcher(str);
+           if(!matcher.find())
+               return str;
+            str=matcher.replaceAll(Forge.getLocalizer().getMessage(matcher.group().substring(1,matcher.group().length()-1)));
+        }
+        return str;
     }
 
     private void readImageButtonProperties(ImageButton newActor, ObjectMap.Entries<String, String> entries) {
@@ -176,7 +196,7 @@ public class UIActor extends Group {
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
                 case "text":
-                    newActor.setText(property.value.toString());
+                    newActor.setText(localize(property.value.toString()));
                     break;
                 case "font"://legacy
                     style.font = Controls.getBitmapFont(property.value.toString());
@@ -221,7 +241,7 @@ public class UIActor extends Group {
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
                 case "text":
-                    newActor.setText(property.value.toString());
+                    newActor.setText(localize(property.value.toString()));
                     break;
             }
         }
@@ -231,7 +251,7 @@ public class UIActor extends Group {
         for (ObjectMap.Entry property : entries) {
             switch (property.key.toString()) {
                 case "text":
-                    newActor.setText(property.value.toString());
+                    newActor.setText(localize(property.value.toString()));
                     break;
             }
         }

@@ -7,8 +7,8 @@ import forge.adventure.stage.WorldStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.SaveFileData;
 import forge.adventure.util.SignalList;
+import forge.card.ColorSet;
 import forge.deck.Deck;
-import forge.deck.DeckProxy;
 import forge.deck.DeckgenUtil;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
@@ -21,50 +21,53 @@ import java.util.zip.InflaterInputStream;
 /**
  * Represents everything that will be saved, like the player and the world.
  */
-public class WorldSave {
+public class WorldSave   {
 
-    static final public int AUTO_SAVE_SLOT = -1;
-    static final public int QUICK_SAVE_SLOT = -2;
-    static final public int INVALID_SAVE_SLOT = -3;
-    static final WorldSave currentSave = new WorldSave();
+    static final public int AUTO_SAVE_SLOT =-1;
+    static final public int QUICK_SAVE_SLOT =-2;
+    static final public int INVALID_SAVE_SLOT =-3;
+    static final WorldSave currentSave=new WorldSave();
     public WorldSaveHeader header = new WorldSaveHeader();
-    private final AdventurePlayer player = new AdventurePlayer();
-    private final World world = new World();
-    private final PointOfInterestChanges.Map pointOfInterestChanges = new PointOfInterestChanges.Map();
+    private final AdventurePlayer player=new AdventurePlayer();
+    private final World world=new World();
+    private final PointOfInterestChanges.Map pointOfInterestChanges=  new PointOfInterestChanges.Map();
 
 
-    private final SignalList onLoadList = new SignalList();
+    private final SignalList onLoadList=new SignalList();
 
-    public final World getWorld() {
+    public final World getWorld()
+    {
         return world;
     }
-
-    public AdventurePlayer getPlayer() {
+    public AdventurePlayer getPlayer()
+    {
         return player;
     }
 
-    public void onLoad(Runnable run) {
+    public void onLoad(Runnable run)
+    {
         onLoadList.add(run);
     }
-
-    public PointOfInterestChanges getPointOfInterestChanges(String id) {
-        if (!pointOfInterestChanges.containsKey(id))
-            pointOfInterestChanges.put(id, new PointOfInterestChanges());
+    public PointOfInterestChanges getPointOfInterestChanges(String id)
+    {
+        if(!pointOfInterestChanges.containsKey(id))
+            pointOfInterestChanges.put(id,new PointOfInterestChanges());
         return pointOfInterestChanges.get(id);
     }
 
     static public boolean load(int currentSlot) {
 
         String fileName = WorldSave.getSaveFile(currentSlot);
-        if (!new File(fileName).exists())
+        if(!new File(fileName).exists())
             return false;
         new File(getSaveDir()).mkdirs();
         try {
-            try (FileInputStream fos = new FileInputStream(fileName);
-                 InflaterInputStream inf = new InflaterInputStream(fos);
-                 ObjectInputStream oos = new ObjectInputStream(inf)) {
+            try(FileInputStream fos  = new FileInputStream(fileName);
+                InflaterInputStream inf = new InflaterInputStream(fos);
+                ObjectInputStream oos = new ObjectInputStream(inf))
+            {
                 currentSave.header = (WorldSaveHeader) oos.readObject();
-                SaveFileData mainData = (SaveFileData) oos.readObject();
+                SaveFileData mainData=(SaveFileData)oos.readObject();
                 currentSave.player.load(mainData.readSubData("player"));
                 GamePlayerUtil.getGuiPlayer().setName(currentSave.player.getName());
                 try {
@@ -86,11 +89,9 @@ public class WorldSave {
         }
         return true;
     }
-
     public static boolean isSafeFile(String name) {
-        return filenameToSlot(name) != INVALID_SAVE_SLOT;
+        return filenameToSlot(name)!= INVALID_SAVE_SLOT;
     }
-
     static public int filenameToSlot(String name) {
         if (name.equals("auto_save.sav"))
             return AUTO_SAVE_SLOT;
@@ -121,42 +122,31 @@ public class WorldSave {
         return currentSave;
     }
 
-    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, int startingColorIdentity, DifficultyData diff, boolean isFantasy, boolean isEasy, String starter, long seed) {
+    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, ColorSet startingColorIdentity, DifficultyData diff, boolean chaos, boolean constructed,   long seed) {
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
-        Deck starterDeck;
-        int identity = startingColorIdentity;
-        if (isEasy) {
-            DeckProxy dp = DeckProxy.getAllEasyStarterDecks().get(startingColorIdentity);
-            starterDeck = dp.getDeck();
-            identity = dp.getColorIdentityforAdventure();
-        } else {
-            starterDeck = isFantasy ? DeckgenUtil.getRandomOrPreconOrThemeDeck("", false, false, false) : Config.instance().starterDecks()[startingColorIdentity];
-            identity = DeckProxy.getColorIdentityforAdventure(starterDeck);
-        }
-        currentSave.player.create(name, startingColorIdentity, starterDeck, male, race, avatarIndex, isFantasy, diff);
+        Deck starterDeck = chaos ? DeckgenUtil.getRandomOrPreconOrThemeDeck("", false, false, false) : Config.instance().starterDeck(startingColorIdentity,diff,constructed);
+
+        currentSave.player.create(name,  starterDeck, male, race, avatarIndex, chaos, diff);
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
         currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));
         //after getting deck override starting color identity to match
-        if (identity != startingColorIdentity)
-            currentSave.player.setColorIdentity(identity);
+        //if (identity != startingColorIdentity)
+        //    currentSave.player.setColorIdentity(identity);
         currentSave.onLoadList.emit();
         return currentSave;
         //return currentSave = ret;
     }
 
     public boolean autoSave() {
-        return save("auto save", AUTO_SAVE_SLOT);
+        return save("auto save",AUTO_SAVE_SLOT);
     }
-
     public boolean quickSave() {
-        return save("quick save", QUICK_SAVE_SLOT);
+        return save("quick save",QUICK_SAVE_SLOT);
     }
-
     public boolean quickLoad() {
         return load(QUICK_SAVE_SLOT);
     }
-
     public boolean save(String text, int currentSlot) {
         header.name = text;
 
@@ -164,16 +154,17 @@ public class WorldSave {
         new File(getSaveDir()).mkdirs();
 
         try {
-            try (FileOutputStream fos = new FileOutputStream(fileName);
-                 DeflaterOutputStream def = new DeflaterOutputStream(fos);
-                 ObjectOutputStream oos = new ObjectOutputStream(def)) {
-                header.saveDate = new Date();
+            try(FileOutputStream fos =  new FileOutputStream(fileName);
+                DeflaterOutputStream def= new DeflaterOutputStream(fos);
+                ObjectOutputStream oos = new ObjectOutputStream(def))
+            {
+                header.saveDate= new Date();
                 oos.writeObject(header);
-                SaveFileData mainData = new SaveFileData();
-                mainData.store("player", currentSave.player.save());
-                mainData.store("world", currentSave.world.save());
+                SaveFileData mainData=new SaveFileData();
+                mainData.store("player",currentSave.player.save());
+                mainData.store("world",currentSave.world.save());
                 mainData.store("worldStage", WorldStage.getInstance().save());
-                mainData.store("pointOfInterestChanges", currentSave.pointOfInterestChanges.save());
+                mainData.store("pointOfInterestChanges",currentSave.pointOfInterestChanges.save());
 
                 oos.writeObject(mainData);
             }

@@ -42,7 +42,7 @@ public class DigUntilEffect extends SpellAbilityEffect {
         }
 
         final ZoneType revealed = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
-        sb.append(revealed.equals(ZoneType.Exile) ? "exiles cards from their library until they exile " :
+        sb.append(ZoneType.Exile.equals(revealed) ? "exiles cards from their library until they exile " :
                 "reveals cards from their library until revealing ");
         sb.append(Lang.nounWithNumeralExceptOne(untilAmount, desc + " card"));
         if (untilAmount != 1) {
@@ -62,18 +62,18 @@ public class DigUntilEffect extends SpellAbilityEffect {
                 sb.append(untilAmount > 1 ? "those cards" : "that card");
                 sb.append(" ");
 
-                if (found.equals(ZoneType.Hand)) {
+                if (ZoneType.Hand.equals(found)) {
                     sb.append("into their hand ");
                 }
 
-                if (revealed.equals(ZoneType.Graveyard)) {
+                if (ZoneType.Graveyard.equals(revealed)) {
                     sb.append("and all other cards into their graveyard.");
                 }
-                if (revealed.equals(ZoneType.Exile)) {
+                if (ZoneType.Exile.equals(revealed)) {
                     sb.append("and exile all other cards revealed this way.");
                 }
             } else if (revealed != null) {
-                if (revealed.equals(ZoneType.Hand)) {
+                if (ZoneType.Hand.equals(revealed)) {
                     sb.append("all cards revealed this way into their hand");
                 }
             }

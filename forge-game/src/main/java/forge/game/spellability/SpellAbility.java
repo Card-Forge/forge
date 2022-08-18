@@ -1942,7 +1942,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
         }
 
-        return topSA.getHostCard().isValid(tgt.getValidTgts(), getActivatingPlayer(), getHostCard(), this);
+        Card host = topSA.getHostCard();
+        // if from an effect it's always Delayed Trigger
+        if (host.isImmutable() && !host.isEmblem()) {
+            host = host.getEffectSource();
+        }
+
+        return host.isValid(tgt.getValidTgts(), getActivatingPlayer(), getHostCard(), this);
     }
 
     public boolean isTargeting(GameObject o) {
