@@ -1,6 +1,6 @@
 [metadata]
 Code=DMR
-Date=2022-09-09
+Date=2023-01-13
 Name=Dominaria Remastered
 Code2=DMR
 MciCode=dmr
