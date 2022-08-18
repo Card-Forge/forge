@@ -3998,6 +3998,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final CardStateName getFaceupCardStateName() {
         if (isFlipped() && hasState(CardStateName.Flipped)) {
             return CardStateName.Flipped;
+        } else if (isSpecialized()) {
+            return getCurrentStateName();
         } else if (backside && hasBackSide()) {
             CardStateName stateName = getRules().getSplitType().getChangedStateName();
             if (hasState(stateName)) {
