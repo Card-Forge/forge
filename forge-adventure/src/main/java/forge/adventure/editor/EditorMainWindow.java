@@ -1,5 +1,6 @@
 package forge.adventure.editor;
 
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,6 +20,27 @@ public class EditorMainWindow extends JFrame {
         tabs.addTab("POI",new PointOfInterestEditor());
         tabs.addTab("Items",new ItemsEditor());
         tabs.addTab("Enemies",new EnemyEditor());
+
+        UIManager.LookAndFeelInfo[] var1 = UIManager.getInstalledLookAndFeels();
+        int var2 = var1.length;
+
+        for(int var3 = 0; var3 < var2; ++var3) {
+            UIManager.LookAndFeelInfo info = var1[var3];
+            if ("Nimbus".equals(info.getName())) {
+                try {
+                    UIManager.setLookAndFeel(info.getClassName());
+                } catch (Throwable var6) {
+                }
+                break;
+            }
+        }
+
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ParticleEditor();
+            }
+        });
+
         setVisible(true);
         setSize(800,600);
     }

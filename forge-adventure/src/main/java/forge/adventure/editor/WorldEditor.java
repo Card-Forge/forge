@@ -131,6 +131,15 @@ public class WorldEditor extends JComponent {
         newButton=new JButton("test map");
         newButton.addActionListener(e -> WorldEditor.this.test());
         toolBar.add(newButton);
+
+
+        newButton=new JButton("edit effects");
+        newButton.addActionListener(e -> WorldEditor.this.startEffectEditor());
+        toolBar.add(newButton);
+    }
+
+    private void startEffectEditor() {
+
     }
 
     private void test() {

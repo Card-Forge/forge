@@ -1,7 +1,6 @@
 package forge.adventure.editor;
 
 import forge.adventure.data.PointOfInterestData;
-import forge.adventure.util.Config;
 
 import javax.swing.*;
 

@@ -619,7 +619,7 @@ public class World implements Disposable, SaveFileContent {
                 int y1 = (int) townPair.getValue().getTilePosition(data.tileSize).y;
                 for (int x = startX - 1; x < startX + 2; x++) {
                     for (int y = startY - 1; y < startY + 2; y++) {
-                        if (x < 0 || y <= 0 || x >= width || y > height) continue;
+                        if (x < 0 || y < 0 || x >= width || y >= height) continue;
                         biomeMap[x][height - y - 1] |= (1L << biomeIndex[0]);
                         terrainMap[x][height - y - 1] = 0;
 

@@ -177,6 +177,15 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
 
     }
+
+    @Override
+    protected void teleported(Vector2 position)
+    {
+        GridPoint2 pos = background.translateFromWorldToChunk(player.getX(), player.getY());
+        background.loadChunk(pos.x,pos.y);
+        handlePointsOfInterestCollision();
+    }
+
     public void handlePointsOfInterestCollision() {
 
         for (Actor actor : foregroundSprites.getChildren()) {

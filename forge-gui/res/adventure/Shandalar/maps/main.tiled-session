@@ -2210,10 +2210,10 @@
         },
         "map/main_story/white_capital.tmx": {
             "scale": 1,
-            "selectedLayer": 0,
+            "selectedLayer": 4,
             "viewCenter": {
                 "x": 232,
-                "y": 240
+                "y": 240.5
             }
         },
         "map/main_story/white_castle.tmx": {

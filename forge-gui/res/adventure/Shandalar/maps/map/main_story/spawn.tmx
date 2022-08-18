@@ -53,7 +53,7 @@
             &quot;options&quot;:[
             {
                &quot;name&quot;:&quot;thank you&quot;,
-                &quot;action&quot;:[{&quot;advanceMapFlag&quot;:&quot;intro&quot;},{&quot;addItem&quot;,&quot;Colorless rune&quot;}]
+                &quot;action&quot;:[{&quot;advanceMapFlag&quot;:&quot;intro&quot;},{&quot;addItem&quot;:&quot;Colorless rune&quot;}]
              }
       ]
         }

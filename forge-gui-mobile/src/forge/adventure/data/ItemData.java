@@ -24,7 +24,7 @@ public class ItemData {
     public boolean questItem=false;
     public int cost=1000;
 
-    public boolean usableOnMap;
+    public boolean usableOnWorldMap;
     public boolean usableInPoi;
     public String commandOnUse;
     public int manaNeeded;

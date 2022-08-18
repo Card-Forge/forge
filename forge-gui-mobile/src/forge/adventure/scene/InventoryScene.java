@@ -9,7 +9,9 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
 import forge.adventure.data.ItemData;
+import forge.adventure.stage.ConsoleCommandInterpreter;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
@@ -21,6 +23,7 @@ import java.util.Map;
 public class InventoryScene  extends UIScene {
     TextButton leave;
     Button equipButton;
+    Button useButton;
     Label itemDescription;
     Dialog confirm;
     private Table inventory;
@@ -69,7 +72,10 @@ public class InventoryScene  extends UIScene {
         leave = ui.findActor("return");
         ui.onButtonPress("delete", () -> confirm.show(stage));
         ui.onButtonPress("equip", () -> equip());
+        ui.onButtonPress("use", () -> use());
         equipButton = ui.findActor("equip");
+        useButton= ui.findActor("use");
+        useButton.setDisabled(true);
         deleteButton = ui.findActor("delete");
         itemDescription = ui.findActor("item_description");
         itemDescription.setAlignment(Align.topLeft);
@@ -152,6 +158,14 @@ public class InventoryScene  extends UIScene {
         confirm.getColor().a = 0;
     }
 
+    private void use() {
+        if(selected==null)return;
+
+        ItemData data = ItemData.getItem(itemLocation.get(selected));
+        done();
+        ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
+    }
+
     private void setSelected(Button actor) {
         selected=actor;
         if(actor==null)
@@ -159,6 +173,7 @@ public class InventoryScene  extends UIScene {
             itemDescription.setText("");
             deleteButton.setDisabled(true);
             equipButton.setDisabled(true);
+            useButton.setDisabled(true);
             for(Button button:inventoryButtons)
             {
                 button.setChecked(false);
@@ -167,6 +182,9 @@ public class InventoryScene  extends UIScene {
         }
         ItemData data = ItemData.getItem(itemLocation.get(actor));
         deleteButton.setDisabled(data.questItem);
+
+        boolean isInPoi = MapStage.getInstance().isInMap();
+        useButton.setDisabled(!(isInPoi&&data.usableInPoi||!isInPoi&&data.usableOnWorldMap));
         if(data.equipmentSlot==null||data.equipmentSlot=="")
         {
             equipButton.setDisabled(true);

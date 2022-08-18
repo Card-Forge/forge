@@ -354,4 +354,12 @@ public abstract class GameStage extends Stage {
         return Vector2.Zero.cpy();
     }
 
+    protected void teleported(Vector2 position)
+    {
+
+    }
+    public void setPosition(Vector2 position) {
+        GetPlayer().setPosition(position);
+        teleported(position);
+    }
 }

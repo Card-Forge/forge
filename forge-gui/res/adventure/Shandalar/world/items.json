@@ -318,20 +318,16 @@
 },
 {
 	"name": "Colorless rune",
-	"equipmentSlot": "",
-	"effect": {
-		"name": "",
-		"goldModifier": 0.85,
-		"cardRewardBonus": 1
-	},
+	"usableOnWorldMap":true, 
 	"description": "Teleports you to the center",
+	"commandOnUse": "teleport to poi Spawn",
 	"iconName": "ColorlessRune",
 	"questItem": true,
 	"cost": 100
 },
 {
 	"name": "White rune",
-	"equipmentSlot": "",
+	"usableOnWorldMap":true,
 	"effect": {
 		"name": ""
 	},
@@ -342,7 +338,7 @@
 },
 {
 	"name": "Black rune",
-	"equipmentSlot": "",
+	"usableOnWorldMap":true,
 	"effect": {
 		"name": ""
 	},
@@ -353,7 +349,7 @@
 },
 {
 	"name": "Blue rune",
-	"equipmentSlot": "",
+	"usableOnWorldMap":true,
 	"effect": {
 		"name": ""
 	},
@@ -364,7 +360,7 @@
 },
 {
 	"name": "Red rune",
-	"equipmentSlot": "",
+	"usableOnWorldMap":true,
 	"effect": {
 		"name": ""
 	},
@@ -375,7 +371,7 @@
 },
 {
 	"name": "Green rune",
-	"equipmentSlot": "",
+	"usableOnWorldMap":true,
 	"effect": {
 		"name": ""
 	},

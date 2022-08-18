@@ -11,7 +11,6 @@ public class Console extends Window {
     private String last = "";
     private final InputLine input;
     private final Table content;
-    private final ConsoleCommandInterpreter interpreter = new ConsoleCommandInterpreter();
 
     public void toggle() {
         if(isVisible()) {
@@ -62,7 +61,7 @@ public class Console extends Window {
     }
 
     private String complete(String text) {
-        return interpreter.complete(text);
+        return ConsoleCommandInterpreter.getInstance().complete(text);
     }
 
     public void command(String text) {
@@ -70,7 +69,7 @@ public class Console extends Window {
         newLine.getActor().setColor(1,1,1,1);
         newLine.growX().align(Align.left|Align.bottom).row();
         last = text; //Preserve last command.
-        newLine=content.add(interpreter.command(text));
+        newLine=content.add(ConsoleCommandInterpreter.getInstance().command(text));
         newLine.getActor().setColor(0.6f,0.6f,0.6f,1);
         newLine.growX().align(Align.left|Align.bottom).row();
         scroll.layout();

@@ -105,11 +105,20 @@
     },
     {
       "type": "TextButton",
+      "name": "use",
+      "text": "Use",
+      "width": 60,
+      "height": 30,
+      "x": 240,
+      "y": 222
+    },
+    {
+      "type": "TextButton",
       "name": "delete",
       "text": "Discard",
       "width": 60,
       "height": 30,
-      "x": 240,
+      "x": 160,
       "y": 222
     }
   ]

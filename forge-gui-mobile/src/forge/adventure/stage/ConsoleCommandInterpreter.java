@@ -1,6 +1,7 @@
 package forge.adventure.stage;
 
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import forge.StaticData;
 import forge.adventure.data.EnemyData;
@@ -23,6 +24,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ConsoleCommandInterpreter {
+    private static ConsoleCommandInterpreter instance;
     Command root = new Command();
 
     class Command {
@@ -95,15 +97,20 @@ public class ConsoleCommandInterpreter {
         }
         currentCommand.function = function;
     }
-
-    public ConsoleCommandInterpreter() {
+public static ConsoleCommandInterpreter getInstance()
+{
+    if(instance==null)
+        instance=new ConsoleCommandInterpreter();
+    return instance;
+}
+    private ConsoleCommandInterpreter() {
         registerCommand(new String[]{"teleport", "to"}, s -> {
             if(s.length<2)
                 return "Command needs 2 parameter";
             try {
                 int x = Integer.parseInt(s[0]);
                 int y = Integer.parseInt(s[1]);
-                WorldStage.getInstance().GetPlayer().setPosition(x,y);
+                WorldStage.getInstance().setPosition(new Vector2(x,y));
                 return  "teleport to ("+s[0]+","+s[1]+")";
             } catch (Exception e) {
                 return "Exception occured, Invalid input";
@@ -114,7 +121,7 @@ public class ConsoleCommandInterpreter {
             PointOfInterest poi=Current.world().findPointsOfInterest(s[0]);
             if(poi==null)
                 return "PoI " + s[0] + " not found";
-            WorldStage.getInstance().GetPlayer().setPosition(poi.getPosition());
+            WorldStage.getInstance().setPosition(poi.getPosition());
             return  "Teleported to " + s[0] + "(" + poi.getPosition() + ")";
         });
         registerCommand(new String[]{"spawn","enemy"}, s -> {

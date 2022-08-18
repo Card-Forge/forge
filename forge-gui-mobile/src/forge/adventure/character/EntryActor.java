@@ -1,6 +1,5 @@
 package forge.adventure.character;
 
-import com.badlogic.gdx.math.Vector2;
 import forge.adventure.scene.SceneType;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.MapStage;
