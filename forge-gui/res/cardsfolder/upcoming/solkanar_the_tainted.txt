@@ -1,0 +1,16 @@
+Name:Sol'Kanar the Tainted
+ManaCost:2 U B R
+Types:Legendary Creature Elemental Demon
+PT:5/5
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DrawPact,DrainPact,DamagePact,BetrayPact | ChoiceRestriction$ ThisGame | CharmNum$ 1
+SVar:DrawPact:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DrainPact:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Each opponent loses 2 life and you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+SVar:DamagePact:DB$ DealDamage | NumDmg$ 3 | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.Other,Planeswalker.Other | TgtPrompt$ Select up to one other target creature or planeswalker | SpellDescription$ CARDNAME deals 3 damage to up to one other target creature or planeswalker.
+SVar:BetrayPact:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBChooseOpp | RememberChanged$ True | SpellDescription$ Exile CARDNAME, then return it to the battlefield under an opponent's control.
+SVar:DBChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to give control to: | SubAbility$ MoveToPlay
+SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ Remembered | GainControl$ ChosenPlayer | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:All
+Oracle:At the beginning of your end step, choose one that hasn't been chosen —\n• Draw a card.\n• Each opponent loses 2 life and you gain 2 life.\n• Sol'Kanar the Tainted deals 3 damage to up to one other target creature or planeswalker.\n• Exile Sol'Kanar the Tainted, then return it to the battlefield under an opponent's control.
