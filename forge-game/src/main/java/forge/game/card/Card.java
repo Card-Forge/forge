@@ -212,6 +212,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean foretoldThisTurn;
     private boolean foretoldByEffect;
 
+    private boolean specialized;
+
     private int timesCrewedThisTurn = 0;
 
     private int classLevel = 1;
