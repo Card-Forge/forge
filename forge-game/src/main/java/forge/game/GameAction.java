@@ -608,6 +608,10 @@ public class GameAction {
         if (c.hasIntensity()) {
             copied.setIntensity(c.getIntensity(false));
         }
+        // specialize is perpetual
+        if (c.isSpecialized()) {
+            copied.setState(c.getCurrentStateName(), false);
+        }
 
         // update state for view
         copied.updateStateForView();
@@ -688,7 +692,7 @@ public class GameAction {
         }
 
         if (fromBattlefield) {
-            if (!c.isRealToken()) {
+            if (!c.isRealToken() && !c.isSpecialized()) {
                 copied.setState(CardStateName.Original, true);
             }
             // Soulbond unpairing
