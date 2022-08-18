@@ -21,15 +21,22 @@ public class SetStateEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
+        boolean specialize = sa.getParam("Mode").equals("Specialize");
 
         if (sa.hasParam("Flip")) {
             sb.append("Flip ");
+        } else if (specialize) { // verb will come later
         } else {
             sb.append("Transform ");
         }
 
         sb.append(Lang.joinHomogenous(getTargetCards(sa)));
+        if (specialize) {
+            sb.append(" perpetually specializes into ");
+            sb.append(host.hasChosenColor() ? host.getChosenColor() : "the chosen color");
+        }
         sb.append(".");
         return sb.toString();
     }
