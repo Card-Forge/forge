@@ -169,7 +169,7 @@ public class SetStateEffect extends SpellAbilityEffect {
                 hasTransformed = gameCard.turnFaceUp(true, true, sa);
             } else if ("Specialize".equals(mode)) {
                 hasTransformed = gameCard.changeCardState(mode, host.getChosenColor(), sa);
-                //remove Chosen Color here? Or just add to kw handling?
+                host.setChosenColors(null);
             } else {
                 hasTransformed = gameCard.changeCardState(mode, sa.getParam("NewState"), sa);
                 if (gameCard.isFaceDown() && (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
