@@ -177,16 +177,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
 
     }
-
-    @Override
-    protected void teleported(Vector2 position)
-    {
-        GridPoint2 pos = background.translateFromWorldToChunk(player.getX(), player.getY());
-        background.loadChunk(pos.x,pos.y);
-        handlePointsOfInterestCollision();
-    }
-
-    public void handlePointsOfInterestCollision() {
+    private void handlePointsOfInterestCollision() {
 
         for (Actor actor : foregroundSprites.getChildren()) {
             if (actor.getClass() == PointOfInterestMapSprite.class) {
@@ -273,6 +264,12 @@ public class WorldStage extends GameStage implements SaveFileContent {
         background.setPlayerPos(player.getX(), player.getY());
         //spriteGroup.setCullingArea(new Rectangle(player.getX()-getViewport().getWorldHeight()/2,player.getY()-getViewport().getWorldHeight()/2,getViewport().getWorldHeight(),getViewport().getWorldHeight()));
         super.draw();
+        if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
+            MapStage.getInstance().showDeckAwardDialog("{BLINK=WHITE;RED}Chaos Mode!{ENDBLINK}\n"+ WorldSave.getCurrentSave().getPlayer().getName()+ "'s Deck: "+
+                    WorldSave.getCurrentSave().getPlayer().getSelectedDeck().getName()+
+                    "\nEnemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
+            WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
+        }
     }
 
     @Override
@@ -290,12 +287,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
         }
         setBounds(WorldSave.getCurrentSave().getWorld().getWidthInPixels(), WorldSave.getCurrentSave().getWorld().getHeightInPixels());
-        if (WorldSave.getCurrentSave().getPlayer().hasAnnounceFantasy()) {
-            MapStage.getInstance().showDeckAwardDialog("{BLINK=WHITE;RED}Chaos Mode!{ENDBLINK}\n"+ WorldSave.getCurrentSave().getPlayer().getName()+ "'s Deck: "+
-                    WorldSave.getCurrentSave().getPlayer().getSelectedDeck().getName()+
-                    "\nEnemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
-            WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
-        }
+
         GridPoint2 pos = background.translateFromWorldToChunk(player.getX(), player.getY());
         background.loadChunk(pos.x,pos.y);
         handlePointsOfInterestCollision();
