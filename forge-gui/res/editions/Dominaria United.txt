@@ -85,4 +85,5 @@ ScryfallCode=DMU
 434 U Nishoba Brawler @Valera Lutfullina
 
 [tokens]
+b_1_1_bird_flying_noblock
 r_1_1_monk_prowess
