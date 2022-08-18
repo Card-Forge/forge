@@ -3220,10 +3220,14 @@ public class CardFactoryUtil {
         } else if (keyword.startsWith("Specialize")) {
             final String[] k = keyword.split(":");
             final String cost = k[1];
+            String flavor = k.length > 2 && !k[2].isEmpty() ? k[2] + " – " : "";
+            String extra = k.length > 3 && !k[3].isEmpty() ? k[3] + " | " : "";
 
             final String effect = "AB$ SetState | Cost$ " + cost + " ChooseColor<1> Discard<1/Card.ChosenColor;" +
                     "Card.AssociatedWithChosenColor/card of the chosen color or its associated basic land type> | " +
-                    "Mode$ Specialize | SorcerySpeed$ True";
+                    "Mode$ Specialize | SorcerySpeed$ True | " + extra + "PrecostDesc$ " + flavor + "Specialize | " +
+                    "CostDesc$ " + ManaCostParser.parse(cost) + " | SpellDescription$ (" + inst.getReminderText() +
+                    ")";
 
             final SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setIntrinsic(intrinsic);
