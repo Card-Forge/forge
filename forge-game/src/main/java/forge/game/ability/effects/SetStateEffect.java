@@ -203,6 +203,11 @@ public class SetStateEffect extends SpellAbilityEffect {
                 }
                 if (!gameCard.isDoubleFaced())
                     transformedCards.add(gameCard);
+                if ("Specialize".equals(mode)) {
+                    gameCard.setSpecialized(true);
+                } else if ("Unspecialize".equals(mode)) {
+                    gameCard.setSpecialized(false);
+                }
             }
         }
         table.replaceCounterEffect(game, sa, true);
