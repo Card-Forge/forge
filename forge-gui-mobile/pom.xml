@@ -46,11 +46,6 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.tommyettinger</groupId>
-            <artifactId>textratypist</artifactId>
-            <version>0.7.0</version>
-        </dependency>
-        <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>
             <version>1.11.0</version>

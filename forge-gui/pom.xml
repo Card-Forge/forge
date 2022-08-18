@@ -41,6 +41,16 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.github.tommyettinger</groupId>
+            <artifactId>textratypist</artifactId>
+            <version>2f773002a8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tommyettinger</groupId>
+            <artifactId>regexodus</artifactId>
+            <version>0.1.13</version>
+        </dependency>
+        <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
             <version>1.4.19</version>
