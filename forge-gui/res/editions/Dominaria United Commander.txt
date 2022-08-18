@@ -13,6 +13,7 @@ ScryfallCode=DMC
 34 M Jedit Ojanen, Mercenary @Ilse Gort
 38 U Ramirez DePietro, Pillager @Anna Steinbauer
 39 R Ramses, Assassin Lord @Manuel Castañón
+41 R Rohgahh, Kher Keep Overlord @Chris Seaman
 46 U Tor Wauki the Younger @Karl Kopinski
 54 R Hazezon, Shaper of Sand @Bryan Sola
 55 U Jasmine Boreal of the Seven @Bastien L. Deharme
@@ -22,3 +23,7 @@ ScryfallCode=DMC
 64 R Stangg, Echo Warrior @Randy Vargas
 65 M Sivitri, Dragon Master @Livia Prima
 68 U Tor Wauki the Younger @Karl Kopinski
+
+[tokens]
+rgw_1_1_sand_warrior
+stangg_twin

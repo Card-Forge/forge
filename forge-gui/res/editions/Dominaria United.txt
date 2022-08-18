@@ -50,8 +50,12 @@ ScryfallCode=DMU
 288 R Braids, Arisen Nightmare @Dibujante Nocturno
 289 R The Raven Man @David Curtis
 290 M Sheoldred, the Apocalypse @Chris Rahn
-291 R Squee, Dubious Monarch @
+291 R Squee, Dubious Monarch @Daniel Lieske
+301 R Jhoira, Ageless Innovator @Lisa Heidhoff
 311 U Raff, Weatherlight Stalwart @Ivan Shavrin
+318 M Sol'Kanar the Tainted @Lisa Heidhoff
+319 M Soul of Windgrace @Ivan Shavrin
+327 M Zur, Eternal Schemer @Dan Mumford
 330 R The Raven Man @David Curtis
 331 M Sheoldred, the Apocalypse @Joe Esposito
 332 R Squee, Dubious Monarch @
@@ -70,6 +74,7 @@ ScryfallCode=DMU
 382 R Yavimaya Coast @Mark Poole
 384 R Archangel of Wrath @Miguel Mercado
 386 R Guardian of New Benalia @Ernanda Souza
+396 M Sphinx of Clear Skies @Valera Lutfullina
 402 R Evolved Sleeper @Jason A. Engle
 410 M Shivan Devastator @Brent Hollowell
 411 R Temporal Firestorm @Nestor Ossandon Leal
