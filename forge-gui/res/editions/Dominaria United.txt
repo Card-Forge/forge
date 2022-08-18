@@ -8,22 +8,55 @@ Type=Expansion
 ScryfallCode=DMU
 
 [cards]
+3 R Archangel of Wrath @Miguel Mercado
+19 R Guardian of New Benalia @Ernanda Souza
+54 C Impede Momentum @Igor Kieryluk
+59 R The Phasing of Zhalfir @LA Draws
+84 R Braids, Arisen Nightmare @Heonhwa Choe
 93 R Evolved Sleeper @Jason A. Engle
+97 M Liliana of the Veil @Martina Fackova
+103 R The Raven Man @Chris Rahn
 133 M Jaya, Fiery Negotiator @Marta Nael
 143 M Shivan Devastator @Brent Hollowell
+146 R Squee, Dubious Monarch @Zoltan Boros
 147 R Temporal Firestorm @Nestor Ossandon Leal
 170 R Llanowar Loamspeaker @Zara Alfonso
+174 U Nishoba Brawler @
+184 U Territorial Maro @Simon Dominic
+189 M The World Spell @Adam Paquette
+192 M Ajani, Sleeper Agent @Matt Stewart
+243 R Adarkar Wastes @Piotr Dura
+256 R Sulfurous Springs @Bruce Brenneise
 277 L Plains @Magali Villeneuve
 278 L Island @Magali Villeneuve
 279 L Swamp @Magali Villeneuve
 280 L Mountain @Magali Villeneuve
 281 L Forest @Magali Villeneuve
+288 R Braids, Arisen Nightmare @Dibujante Nocturno
+289 R The Raven Man @David Curtis
+290 M Sheoldred, the Apocalypse @Chris Rahn
+291 R Squee, Dubious Monarch @
+330 R The Raven Man @David Curtis
+331 M Sheoldred, the Apocalypse @Joe Esposito
+332 R Squee, Dubious Monarch @
+369 M Sheoldred, the Apocalypse @Chris Rahn
+370 M Ajani, Sleeper Agent @Victor Adame Minguez
+371 M Ajani, Sleeper Agent @Victor Adame Minguez
+373 M Liliana of the Veil @Brom
+375 M Ajani, Sleeper Agent @Adam Rex
+376 M Ajani, Sleeper Agent @Thomas M. Baxa
+377 R Adarkar Wastes @Rob Alexander
 374 M Jaya, Fiery Negotiator @Scott M. Fischer
+381 R Sulfurous Springs @Mark Tedin
+384 R Archangel of Wrath @Miguel Mercado
+386 R Guardian of New Benalia @Ernanda Souza
 402 R Evolved Sleeper @Jason A. Engle
 410 M Shivan Devastator @Brent Hollowell
 411 R Temporal Firestorm @Nestor Ossandon Leal
 416 R Llanowar Loamspeaker @Zara Alfonso
 428 R Llanowar Loamspeaker @Volkan Baǵa
+429 P Herd Migration @Antonio José Manzanedo
+434 U Nishoba Brawler @
 
 [tokens]
 r_1_1_monk_prowess

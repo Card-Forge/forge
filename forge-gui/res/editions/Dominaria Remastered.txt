@@ -1,0 +1,16 @@
+[metadata]
+Code=DMR
+Date=2022-09-09
+Name=Dominaria Remastered
+Code2=DMR
+MciCode=dmr
+Type=Reprint
+ScryfallCode=DMR
+
+[cards]
+50 M Force of Will @Donato Giancola
+149 R Arboria @Uriah Voth
+284 M Force of Will @Donato Giancola
+335 R Arboria @Uriah Voth
+418 M Force of Will @Richard Kane Ferguson
+438 R Arboria @Dave Kendall

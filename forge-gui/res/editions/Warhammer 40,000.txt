@@ -11,3 +11,7 @@ ScryfallCode=40K
 108 C Blood for the Blood God! @Artur Nakhodkin
 171 M Abaddon the Despoiler @Johan Grenier
 181 R Fabricate @Johan Grenier
+249 U Sol Ring @
+250 U Sol Ring @Kekai Kotaki
+251 U Sol Ring @
+252 U Sol Ring @
