@@ -663,7 +663,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         } else if (mode.equals("Meld") && isMeldable()) {
             return changeToState(CardStateName.Meld);
-        } else if (mode.equals("Specialize")) {
+        } else if (mode.equals("Specialize") && canSpecialize()) {
             if (customState.equalsIgnoreCase("white")) {
                 return changeToState(CardStateName.SpecializeW);
             } else if (customState.equalsIgnoreCase("blue")) {
