@@ -1,0 +1,76 @@
+Name:Lukamina, Moon Druid
+ManaCost:2 G
+Types:Legendary Creature Human Druid
+PT:2/2
+K:Specialize:3:Wild Shape:Activate only if you control six or more lands.:IsPresent$ Land.YouCtrl | PresentCompare$ GE6
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastByYou+Self | Destination$ Battlefield | Execute$ TrigSeek | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, seek a land card with a basic land type.
+SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Land.hasABasicLandType | ChangeNum$ 1
+AlternateMode:Specialize
+Oracle:Wild Shape — Specialize {3}. Activate only if you control six or more lands.\nWhen Lukamina, Moon Druid enters the battlefield, if you cast it, seek a land card with a basic land type.
+
+SPECIALIZE:WHITE
+
+Name:Lukamina, Hawk Form
+ManaCost:2 G W
+Types:Legendary Creature Bird Druid
+PT:4/4
+K:Flying
+K:Lifelink
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigUnspecialize | TriggerDescription$ When CARDNAME dies, it unspecializes. If it unspecializes this way, return it to the battlefield tapped.
+SVar:TrigUnspecialize:DB$ SetState | Mode$ Unspecialize | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPresent$ Card | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ Remembered
+DeckHas:Ability$LifeGain
+Oracle:Flying, lifelink\nWhen Lukamina, Hawk Form dies, it unspecializes. If it unspecializes this way, return it to the battlefield tapped.
+
+SPECIALIZE:BLUE
+
+Name:Lukamina, Crocodile Form
+ManaCost:2 G U
+Types:Legendary Creature Crocodile Druid
+PT:4/4
+#Needs specialize trigger
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigUnspecialize | TriggerDescription$ When NICKNAME dies, it unspecializes. If it unspecializes this way, return it to the battlefield tapped.
+SVar:TrigUnspecialize:DB$ SetState | Defined$ TriggeredCard | Mode$ Unspecialize | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPresent$ Card | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ Remembered
+Oracle:When this creature specializes, tap target nonland permanent an opponent controls. That permanent doesn't untap during its controller's untap step for as long as you control Lukamina, Crocodile Form.\nWhen Lukamina dies, it unspecializes. If it unspecializes this way, return it to the battlefield tapped.
+
+SPECIALIZE:BLACK
+
+Name:Lukamina, Scorpion Form
+ManaCost:2 B G
+Types:Legendary Creature Scorpion Druid
+PT:4/4
+K:Deathtouch
+K:CARDNAME must be blocked if able.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigUnspecialize | TriggerDescription$ When NICKNAME dies, it unspecializes. If it unspecializes this way, return it to the battlefield tapped.
+SVar:TrigUnspecialize:DB$ SetState | Defined$ TriggeredCard | Mode$ Unspecialize | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPresent$ Card | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ Remembered
+Oracle:Deathtouch\nLukamina, Scorpion Form must be blocked if able.\nWhen Lukamina dies, it unspecializes. If it unspecializes this way, return it to the battlefield tapped.
+
+SPECIALIZE:RED
+
+Name:Lukamina, Wolf Form
+ManaCost:2 R G
+Types:Legendary Creature Wolf Druid
+PT:4/4
+K:Menace
+#Needs specialize trigger - then make attacks trigger secondary
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this creature specializes or attacks, create a 2/2 green Wolf creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_2_2_wolf
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigUnspecialize | TriggerDescription$ When NICKNAME dies, it unspecializes. If it unspecializes this way, return it to the battlefield tapped.
+SVar:TrigUnspecialize:DB$ SetState | Defined$ TriggeredCard | Mode$ Unspecialize | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPresent$ Card | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ Remembered
+DeckHas:Ability$Token
+Oracle:Menace\nWhenever this creature specializes or attacks, create a 2/2 green Wolf creature token.\nWhen Lukamina, Wolf Form dies, it unspecializes. If it unspecializes this way, return it to the battlefield tapped.
+
+SPECIALIZE:GREEN
+
+Name:Lukamina, Bear Form
+ManaCost:2 G G
+Types:Legendary Creature Bear Druid
+K:Trample
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Trample | Description$ Other creatures you control get +1/+1 and have trample.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigUnspecialize | TriggerDescription$ When CARDNAME dies, it unspecializes. If it unspecializes this way, return it to the battlefield tapped.
+SVar:TrigUnspecialize:DB$ SetState | Defined$ TriggeredCard | Mode$ Unspecialize | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPresent$ Card | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ Remembered
+Oracle:Trample\nOther creatures you control get +1/+1 and have trample.\nWhen Lukamina, Bear Form dies, it unspecializes. If it unspecializes this way, return it to the battlefield tapped.
