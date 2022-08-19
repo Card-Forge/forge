@@ -535,7 +535,7 @@ public class CardUtil {
         if(path.endsWith(".dck"))
             return DeckSerializer.fromFile(new File(Config.instance().getFilePath(path)));
 
-        if(forAI && isFantasyMode) {
+        if(forAI && (isFantasyMode||useGeneticAI)) {
             Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, forAI, isTheme, useGeneticAI);
             if (deck != null)
                 return deck;
