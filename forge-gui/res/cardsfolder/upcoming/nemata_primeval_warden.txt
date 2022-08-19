@@ -1,4 +1,4 @@
-Name:Nemata, Primal Guardian
+Name:Nemata, Primeval Warden
 ManaCost:2 B G
 Types:Legendary Creature Treefolk
 PT:3/4
@@ -11,4 +11,4 @@ A:AB$ Pump | Cost$ G Sac<1/Saproling/a Saproling> | NumAtt$ +2 | NumDef$ +2 | AI
 A:AB$ Draw | Cost$ 1 B Sac<2/Saproling/two Saprolings> | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
 DeckHints:Type$Saproling
 DeckHas:Ability$Token
-Oracle:Reach\nIf a creature an opponent controls would die, exile it instead. When you do, create a 1/1 green Saproling creature token.\n{G}, Sacrifice a Saproling: Nemata, Primal Guardian gets +2/+2 until end of turn.\n{1}{B}, Sacrifice two Saprolings: Draw a card.
+Oracle:Reach\nIf a creature an opponent controls would die, exile it instead. When you do, create a 1/1 green Saproling creature token.\n{G}, Sacrifice a Saproling: Nemata, Primeval Warden gets +2/+2 until end of turn.\n{1}{B}, Sacrifice two Saprolings: Draw a card.
