@@ -2,7 +2,8 @@ Name:Jedit Ojanen, Mercenary
 ManaCost:1 W U
 Types:Legendary Creature Cat Mercenary
 PT:3/3
-T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.Legendary+YouCtrl| Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME or another legendary creature enters the battlefield, you may pay {G}. If you do, create a 2/2 green Cat Warrior creature token with forestwalk.
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.Other+Legendary+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME or another legendary creature enters the battlefield, you may pay {G}. If you do, create a 2/2 green Cat Warrior creature token with forestwalk.
 SVar:TrigToken:AB$ Token | Cost$ G | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ g_2_2_cat_warrior_forestwalk
+DeckHas:Ability$Token & Type$Warrior
+DeckHints:Type$Legendary
 Oracle:Whenever Jedit Ojanen, Mercenary or another legendary creature enters the battlefield, you may pay {G}. If you do, create a 2/2 green Cat Warrior creature token with forestwalk.
-DeckHas:Ability$Token
