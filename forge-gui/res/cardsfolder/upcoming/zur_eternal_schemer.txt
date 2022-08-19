@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Creature.Enchantment+YouCtrl | AddKeyword$ Deatht
 A:AB$ Animate | Cost$ 1 W | ValidTgts$ Enchantment.nonAura+YouCtrl | TgtPrompt$ Select target non-Aura enchantment you control | Power$ X | Toughness$ X | Types$ Creature | Duration$ Permanent | SpellDescription$ Target non-Aura enchantment you control becomes a creature in addition to its other types and has base power and toughness each equal to its mana value.
 SVar:X:Targeted$CardManaCost
 DeckNeeds:Type$Enchantment
+DeckHas:Ability$LifeGain
 Oracle:Flying\nEnchantment creatures you control have deathtouch, lifelink, and hexproof.\nTarget non-Aura enchantment you control becomes a creature in addition to its other types and has base power and toughness each equal to its mana value.
