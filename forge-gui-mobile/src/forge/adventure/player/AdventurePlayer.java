@@ -60,6 +60,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     // Fantasy/Chaos mode settings.
     private boolean fantasyMode     = false;
     private boolean announceFantasy = false;
+    private boolean usingCustomDeck = false;
+    private boolean announceCustom = false;
 
     // Signals
     SignalList onLifeTotalChangeList = new SignalList();
@@ -83,6 +85,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         //Reset all properties HERE.
         fantasyMode       = false;
         announceFantasy   = false;
+        usingCustomDeck   = false;
         blessing          = null;
         gold              = 0;
         maxLife           = 20;
@@ -104,9 +107,10 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private final CardPool cards=new CardPool();
     private final ItemPool<InventoryItem> newCards=new ItemPool<>(InventoryItem.class);
 
-    public void create(String n,   Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy, DifficultyData difficultyData) {
+    public void create(String n,   Deck startingDeck, boolean male, int race, int avatar, boolean isFantasy, boolean isUsingCustomDeck, DifficultyData difficultyData) {
         clear();
         announceFantasy = fantasyMode = isFantasy; //Set Chaos mode first.
+        announceCustom = usingCustomDeck = isUsingCustomDeck;
 
         deck     = startingDeck;
         decks[0] = deck;
@@ -289,6 +293,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         fantasyMode     = data.containsKey("fantasyMode")     ? data.readBool("fantasyMode")     : false;
         announceFantasy = data.containsKey("announceFantasy") ? data.readBool("announceFantasy") : false;
+        usingCustomDeck = data.containsKey("usingCustomDeck") ? data.readBool("usingCustomDeck") : false;
+        announceCustom  = data.containsKey("announceCustom")  ? data.readBool("announceCustom")  : false;
 
         onLifeTotalChangeList.emit();
         onGoldChangeList.emit();
@@ -315,6 +321,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
         data.store("fantasyMode",fantasyMode);
         data.store("announceFantasy",announceFantasy);
+        data.store("usingCustomDeck", usingCustomDeck);
+        data.store("announceCustom", announceCustom);
 
         data.store("worldPosX",worldPosX);
         data.store("worldPosY",worldPosY);
@@ -493,6 +501,9 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public boolean isFantasyMode(){
         return fantasyMode;
     }
+    public boolean isUsingCustomDeck(){
+        return usingCustomDeck;
+    }
 
     public boolean hasAnnounceFantasy(){
         return announceFantasy;
@@ -500,6 +511,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public void clearAnnounceFantasy(){
         announceFantasy = false;
+    }
+    public boolean hasAnnounceCustom(){
+        return announceCustom;
+    }
+    public void clearAnnounceCustom(){
+        announceCustom = false;
     }
 
     public boolean hasColorView() {
