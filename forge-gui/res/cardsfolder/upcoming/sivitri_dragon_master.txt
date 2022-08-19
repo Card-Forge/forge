@@ -1,0 +1,11 @@
+Name:Sivitri, Dragon Master
+ManaCost:2 U B
+Types:Legendary Planeswalker Sivitri
+Loyalty:4
+Text:CARDNAME can be your commander.
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Name$ Sivitri, Dragon Master's Effect | StaticAbilities$ CantAttack | Duration$ UntilYourNextTurn | SpellDescription$ Until your next turn, creatures can't attack you or planeswalkers you control unless their controller pays 2 life for each of those creatures. 
+SVar:CantAttack:Mode$ CantAttackUnless | ValidCard$ Creature | Target$ Player,Planeswalker | Cost$ PayLife<2> | TriggerDescription$ Until your next turn, creatures can't attack you or planeswalkers you control unless their controller pays 2 life for each of those creatures.
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True |  Origin$ Library | Destination$ Hand | ChangeType$ Dragon | SpellDescription$ Search your library for a Dragon card, reveal it, put it into your hand, then shuffle.
+A:AB$ DestroyAll | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | ValidCards$ Creature.nonDragon | SpellDescription$ Destroy all non-Dragon creatures.
+DeckNeeds:Type$Dragon
+Oracle:[+1]: Until your next turn, creatures can't attack you or planeswalkers you control unless their controller pays 2 life for each of those creatures.\n[-3]: Search your library for a Dragon card, reveal it, put it into your hand, then shuffle.\n[-7]: Destroy all non-Dragon creatures.\nSivitri, Dragon Master can be your commander.

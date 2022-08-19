@@ -1,0 +1,12 @@
+Name:Dihada, Binder of Wills
+ManaCost:3 R W B
+Types:Legendary Planeswalker Dihada
+Loyalty:5
+Text:CARDNAME can be your commander.
+A:AB$ Pump | TargetMin$ 0 | TargetMax$ 1 | Cost$ AddCounter<2/LOYALTY> | KW$ vigilance &  lifelink & indestructible | Planeswalker$ True | ValidTgts$ Creature.Legendary | Duration$ UntilYourNextTurn | TgtPrompt$ Choose up to one legendary creature. | SpellDescription$ Up to one target legendary creature gains vigilance, lifelink, and indestructible until your next turn.
+A:AB$ Dig | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | DigNum$ 4 | Reveal$ True | AnyNumber$ True | Defined$ You | ChangeValid$ Card.Legendary | DestinationZone2$ Graveyard | SubAbility$ DBTreasure | RememberRevealed$ True | SpellDescription$ Reveal the top four cards of your library. Put any number of legendary cards from among them into your hand and the rest into your graveyard. Create a Treasure token for each card put into your graveyard this way.
+SVar:DBTreasure: DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You | SubAbility$ DBCleanup |
+A:AB$ GainControl | Cost$ SubCounter<11/LOYALTY> | Planeswalker$ True | AllValid$ Permanent.nonLand | AddKWs$ Haste | LoseControl$ EOT | Untap$ True | SpellDescription$ Gain control of all nonland permanents until end of. Untap them. They gain haste until end of turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$ValidGraveyard Card.IsRemembered
+Oracle:[+2] Up to one target legendary creature gains vigilance, lifelink, and indestructible until your next turn.\n[-3]: Reveal the top four cards of your library. Put any number of legendary cards from among them into your hand and the rest into your graveyard. Create a Treasure token for each card put into your graveyard this way.\n[−11]: Gain control of all nonland permanents until end of. Untap them. They gain haste until end of turn.\nDihada, Binder of Wills can be your commander.
