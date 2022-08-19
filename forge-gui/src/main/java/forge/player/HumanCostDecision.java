@@ -174,6 +174,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final String type = discardType;
         final String[] validType = type.split(";");
         hand = CardLists.getValidCards(hand, validType, player, source, ability);
+        if (hand.size() < 1) { // if we somehow have no valids (e.g. picked bad Specialize color), cancel payment
+            return null;
+        }
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, hand, ability);
         inp.setMessage(Localizer.getInstance().getMessage("lblSelectNMoreTargetTypeCardToDiscard", "%d", cost.getDescriptiveType()));
