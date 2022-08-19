@@ -1,10 +1,11 @@
 package forge.game.ability.effects;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.ICardFace;
 import forge.game.Game;
@@ -34,18 +35,23 @@ public class MakeCardEffect extends SpellAbilityEffect {
         for (final Player player : players) {
             final Game game = player.getGame();
 
-            String name = sa.getParamOrDefault("Name", "");
-            if (name.equals("ChosenName")) {
-                if (sa.getHostCard().hasChosenName()) {
-                    name = sa.getHostCard().getChosenName();
-                } else {
-                    continue;
+            List<String> names = Lists.newArrayList();
+            if (sa.hasParam("Name")) {
+                final String n = sa.getParam("Name");
+                if (n.equals("ChosenName")) {
+                    if (source.hasChosenName()) {
+                        names.add(source.getChosenName());
+                    } else {
+                        names.add(n);
+                    }
                 }
             }
             if (sa.hasParam("DefinedName")) {
                 final CardCollection def = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedName"), sa);
                 if (def.size() > 0) {
-                    name = def.getFirst().getName();
+                    for (final Card c : def) {
+                        names.add(c.getName());
+                    }
                 }
             } else if (sa.hasParam("Spellbook")) {
                 List<String> spellbook = Arrays.asList(sa.getParam("Spellbook").split(","));
@@ -56,44 +62,49 @@ public class MakeCardEffect extends SpellAbilityEffect {
                     faces.add(StaticData.instance().getCommonCards().getFaceByName(s));
                 }
                 if (sa.hasParam("AtRandom")) {
-                    name = Aggregates.random(faces).getName();
+                    names.add(Aggregates.random(faces).getName());
                 } else {
-                    name = player.getController().chooseCardName(sa, faces,
-                            Localizer.getInstance().getMessage("lblChooseFromSpellbook", CardTranslation.getTranslatedName(source.getName())));
+                    names.add(player.getController().chooseCardName(sa, faces,
+                            Localizer.getInstance().getMessage("lblChooseFromSpellbook",
+                                    CardTranslation.getTranslatedName(source.getName()))));
                 }
             }
             final ZoneType zone = ZoneType.smartValueOf(sa.getParamOrDefault("Zone", "Library"));
-            int amount = sa.hasParam("Amount") ?
-                    AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("Amount"), sa) : 1;
+            final int amount = sa.hasParam("Amount") ?
+                    AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa) : 1;
 
             CardCollection cards = new CardCollection();
 
-            if (!name.equals("")) {
-                while (amount > 0) {
-                    Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), player);
-                    if (sa.hasParam("TokenCard")) {
-                        card.setTokenCard(true);
+            for (final String name : names) {
+                int toMake = amount;
+                if (!name.equals("")) {
+                    while (toMake > 0) {
+                        Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name),
+                                player);
+                        if (sa.hasParam("TokenCard")) {
+                            card.setTokenCard(true);
+                        }
+                        game.getAction().moveTo(ZoneType.None, card, sa, moveParams);
+                        cards.add(card);
+                        toMake--;
                     }
-                    game.getAction().moveTo(ZoneType.None, card, sa, moveParams);
-                    cards.add(card);
-                    amount--;
                 }
+            }
 
-                final CardZoneTable triggerList = new CardZoneTable();
-                for (final Card c : cards) {
-                    Card made = game.getAction().moveTo(zone, c, sa, moveParams);
-                    triggerList.put(ZoneType.None, made.getZone().getZoneType(), made);
-                    if (sa.hasParam("RememberMade")) {
-                        sa.getHostCard().addRemembered(made);
-                    }
-                    if (sa.hasParam("ImprintMade")) {
-                        sa.getHostCard().addImprintedCard(made);
-                    }
+            final CardZoneTable triggerList = new CardZoneTable();
+            for (final Card c : cards) {
+                Card made = game.getAction().moveTo(zone, c, sa, moveParams);
+                triggerList.put(ZoneType.None, made.getZone().getZoneType(), made);
+                if (sa.hasParam("RememberMade")) {
+                    source.addRemembered(made);
                 }
-                triggerList.triggerChangesZoneAll(game, sa);
-                if (zone.equals(ZoneType.Library)) {
-                    player.shuffle(sa);
+                if (sa.hasParam("ImprintMade")) {
+                    source.addImprintedCard(made);
                 }
+            }
+            triggerList.triggerChangesZoneAll(game, sa);
+            if (zone.equals(ZoneType.Library)) {
+                player.shuffle(sa);
             }
         }
     }
