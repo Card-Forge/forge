@@ -17,6 +17,7 @@
  */
 package forge.game.cost;
 
+import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 
@@ -73,6 +74,19 @@ public class CostChooseColor extends CostPart {
         sb.append("Choose ");
         sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), "color"));
         return sb.toString();
+    }
+
+    @Override
+    public boolean isUndoable() { return true; }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see forge.card.cost.CostPart#refund(forge.Card)
+     */
+    @Override
+    public final void refund(final Card source) {
+        source.setChosenColors(null);
     }
 
     @Override
