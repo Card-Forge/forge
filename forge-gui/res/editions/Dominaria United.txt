@@ -12,9 +12,11 @@ ScryfallCode=DMU
 8 C Benalish Sleeper @Josu Hernaiz
 10 C Charismatic Vanguard @David Palumbo
 19 R Guardian of New Benalia @Ernanda Souza
+29 U Resolute Reinforcements @Billy Christian
 33 U Shalai's Acolyte @Zara Alfonso
 46 R Defiler of Dreams @Ryan Pancoast
 54 C Impede Momentum @Igor Kieryluk
+57 U Micromancer @Ernanda Souza
 59 R The Phasing of Zhalfir @LA Draws
 84 R Braids, Arisen Nightmare @Heonhwa Choe
 93 R Evolved Sleeper @Jason A. Engle
@@ -22,7 +24,8 @@ ScryfallCode=DMU
 103 R The Raven Man @Chris Rahn
 107 M Sheoldred, the Apocalypse @Chris Rahn
 133 M Jaya, Fiery Negotiator @Marta Nael
-141 R Radha's Firebrand @Angelo Bortolini
+137 C Lightning Strike @Marta Nael
+141 R Radha's Firebrand @Ângelo Bortolini
 143 M Shivan Devastator @Brent Hollowell
 146 R Squee, Dubious Monarch @Zoltan Boros
 147 R Temporal Firestorm @Nestor Ossandon Leal
@@ -31,8 +34,9 @@ ScryfallCode=DMU
 184 U Territorial Maro @Simon Dominic
 189 M The World Spell @Adam Paquette
 192 M Ajani, Sleeper Agent @Matt Stewart
+194 R Astor, Bearer of Blades @Josh Hass
 202 R Jhoira, Ageless Innovator @Justyna Gil
-209 R Nemata, Primeval Ward @Andrew Mar
+209 R Nemata, Primeval Warden @Andrew Mar
 212 U Raff, Weatherlight Stalwart @Eelis Kyttanen
 219 M Sol'Kanar the Tainted @Filip Burburan
 220 M Soul of Windgrace @Liiga Smilshkalne
@@ -50,9 +54,11 @@ ScryfallCode=DMU
 281 L Forest @Magali Villeneuve
 288 R Braids, Arisen Nightmare @Dibujante Nocturno
 289 R The Raven Man @David Curtis
-290 M Sheoldred, the Apocalypse @Chris Rahn
+290 M Sheoldred, the Apocalypse @Joe Esposito
 291 R Squee, Dubious Monarch @Daniel Lieske
+293 R Astor, Bearer of Blades @Ivan Shavrin
 301 R Jhoira, Ageless Innovator @Lisa Heidhoff
+308 R Nemata, Primeval Warden @Bastien Grivet
 311 U Raff, Weatherlight Stalwart @Ivan Shavrin
 318 M Sol'Kanar the Tainted @Lisa Heidhoff
 319 M Soul of Windgrace @Ivan Shavrin
