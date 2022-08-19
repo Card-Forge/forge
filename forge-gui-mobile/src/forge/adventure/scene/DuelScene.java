@@ -73,8 +73,9 @@ public class DuelScene extends ForgeScene {
     public void GameEnd() {
         boolean winner = humanPlayer == hostedMatch.getGame().getMatch().getWinner();
         String enemyName = (enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride);
+        boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
         Current.player().clearBlessing();
-        if (chaosBattle && !winner) {
+        if ((chaosBattle||showMessages) && !winner) {
             callbackExit = true;
             List<String> insult = Lists.newArrayList("I'm sorry...", "... ....", "Learn from your defeat.",
                     "I haven't begun to use my full power.", "No matter how much you try, you still won't beat me.",
@@ -285,7 +286,8 @@ public class DuelScene extends ForgeScene {
         hostedMatch.setEndGameHook(() -> DuelScene.this.GameEnd());
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap);
         MatchController.instance.setGameView(hostedMatch.getGameView());
-        if (chaosBattle) {
+        boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
+        if (chaosBattle||showMessages) {
             List<String> list = Lists.newArrayList("It all depends on your skill!", "It's showtime!", "Let's party!",
                     "You've proved yourself!", "Are you ready? Go!", "Prepare to strike, now!", "Let's go!", "What's next?",
                     "Yeah, I've been waitin' for this!", "The stage of battle is set!", "And the battle begins!", "Let's get started!",
@@ -324,7 +326,7 @@ public class DuelScene extends ForgeScene {
         this.player = playerSprite;
         this.enemy = enemySprite;
         this.playerDeck = (Deck) AdventurePlayer.current().getSelectedDeck().copyTo("PlayerDeckCopy");
-        this.chaosBattle = this.enemy.getData().copyPlayerDeck && Current.player().isFantasyMode();
+        this.chaosBattle = this.enemy.getData().copyPlayerDeck && (Current.player().isFantasyMode());
         this.AIExtras.clear();
         this.playerExtras.clear();
     }
