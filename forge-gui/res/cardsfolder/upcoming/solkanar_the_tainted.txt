@@ -12,5 +12,4 @@ SVar:BetrayPact:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | SubA
 SVar:DBChooseOpp:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | ChoiceTitle$ Choose an opponent | SubAbility$ MoveToPlay
 SVar:MoveToPlay:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield | Defined$ Remembered | GainControl$ ChosenPlayer | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenPlayer$ True
-AI:RemoveDeck:All
 Oracle:At the beginning of your end step, choose one that hasn't been chosen —\n• Draw a card.\n• Each opponent loses 2 life and you gain 2 life.\n• Sol'Kanar the Tainted deals 3 damage to up to one other target creature or planeswalker.\n• Exile Sol'Kanar the Tainted, then return it to the battlefield under an opponent's control.
