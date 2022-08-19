@@ -747,3 +747,76 @@ F567 R Puresteel Angel @Lukas Litzsinger
 739 R Treasury Thrull @Mark Zug
 740 R Wasitora, Nekoru Queen @Cynthia Sheppard
 741 M Zacama, Primal Calamity @Jaime Jones
+742 R Alabaster Dragon @Ted Naifeh
+743 U Archway Angel @Milivoj Ćeran
+744 R Fountain Watch @Jeff Miracola
+745 R Ghostway @Jim Murray
+746 R Loxodon Gatekeeper @Carl Critchlow
+747 U Nova Cleric @Alan Pollack
+748 R Paladin en-Vec @Dave Kendall
+749 R Pentarch Paladin @Jim Murray
+750 R Puresteel Paladin @Jason Chan
+751 R Ranger of Eos @Volkan Baǵa
+752 U Treasure Hunter @Adam Rex
+753 R Aura Thief @Ron Spears
+754 U Broodbirth Viper @Mathias Kollros
+755 R Cloud Dragon @John Avon
+756 R Curse of Echoes @Slawomir Maniak
+757 U Ominous Seas @Vincent Proce
+758 C Opal Lake Gatekeepers @Seb McKinnon
+759 R Plea for Power @John Severin Brassell
+760 R Quicksilver Dragon @Ron Spencer
+761 C Sea Gate Oracle @Daniel Ljunggren
+762 R Search the City @Jack Wang
+763 R Serendib Sorcerer @Dan Scott
+764 R Sunder @Stephen Daniele
+765 U Wizard Class @Marta Nael
+766 U Wizard's Retort @Grzegorz Rutkowski
+767 M Demon of Death's Gate @Vance Kovacs
+768 R Endrek Sahr, Master Breeder @Mark Tedin
+769 R Kederekt Parasite @Dan Scott
+770 M Lolth, Spider Queen @Tyler Jacobson
+771 U Pitiless Plunderer @David Palumbo
+772 R Quest for the Nihil Stone @Mike Bierek
+773 R Repay in Kind @Vance Kovacs
+774 R Volrath's Dungeon @Stephen Daniele
+775 C Dragon's Approach @Andrew Mar
+776 U Dragon's Rage Channeler @Martina Fackova
+777 M Goldspan Dragon @Andrew Mar
+778 R Lathliss, Dragon Queen @Alex Konstad
+779 U Magic Missile @PINDURSKI
+780 U Thundering Sparkmage @Billy Christian
+781 R Worldgorger Dragon @Wayne England
+782 U Devoted Druid @Kimonas Theodossiou
+783 U Druid's Call @Greg Hildebrandt
+784 U Edgewall Innkeeper @Matt Stewart
+785 R Gilt-Leaf Archdruid @Steve Prescott
+786 M Old Gnawbone @Filip Burburan
+787 U Scryb Ranger @Rebecca Guay
+788 R Silvos, Rogue Elemental @Carl Critchlow
+789 U Tireless Provisioner @Josu Hernaiz
+790 U Clutch of the Undercity @Pete Venters
+791 U Forging the Tyrite Sword @Kieran Yanner
+792 U Invade the City @Sung Choi
+793 U Krydle of Baldur's Gate @Jeff Dee
+794 R Linvala, Shield of Sea Gate @Wayne Reynolds
+795 M Minsc, Beloved Ranger @Howard Lyon
+796 U Risen Reef @Johan Grenier
+797 U Spoils of Adventure @Zezhou Chen
+798 M Tiamat @Chris Rahn
+799 C Yavimaya Barbarian @Don Hazeltine
+800 C Shield of the Oversoul @Steven Belledin
+801 U Bucknard's Everfull Purse @Joe Slucher
+802 R Clockwork Dragon @Arnie Swekel
+803 U Component Pouch @Chris Seaman
+804 U Fifty Feet of Rope @Andrew Mar
+805 U Kite Shield @Jim Pavelec
+806 C Leather Armor @Martina Pilcerova
+807 U Lucky Clover @John Stanko
+808 C Mimic @Diesel
+809 R Pariah's Shield @Doug Chaffee
+810 R Sword of the Chosen @Adam Rex
+811 U Barbarian Ring @John Avon
+812 R Forsaken City @Dana Knutson
+813 M Maze's End @Cliff Childs
+814 U Underdark Rift @Chris Ostrowski
