@@ -28,7 +28,9 @@ Name:Lukamina, Crocodile Form
 ManaCost:2 G U
 Types:Legendary Creature Crocodile Druid
 PT:4/4
-#Needs specialize trigger
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ When this creature specializes, tap target nonland permanent an opponent controls. That permanent doesn't untap during its controller's untap step for as long as you control CARDNAME.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ HIDDEN CARDNAME doesn't untap during your untap step. | Duration$ UntilLoseControlOfHost
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigUnspecialize | TriggerDescription$ When NICKNAME dies, it unspecializes. If it unspecializes this way, return it to the battlefield tapped.
 SVar:TrigUnspecialize:DB$ SetState | Defined$ TriggeredCard | Mode$ Unspecialize | RememberChanged$ True | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPresent$ Card | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Defined$ Remembered
@@ -54,8 +56,8 @@ ManaCost:2 R G
 Types:Legendary Creature Wolf Druid
 PT:4/4
 K:Menace
-#Needs specialize trigger - then make attacks trigger secondary
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever this creature specializes or attacks, create a 2/2 green Wolf creature token.
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature specializes or attacks, create a 2/2 green Wolf creature token.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever this creature specializes or attacks, create a 2/2 green Wolf creature token.
 SVar:TrigToken:DB$ Token | TokenScript$ g_2_2_wolf
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigUnspecialize | TriggerDescription$ When NICKNAME dies, it unspecializes. If it unspecializes this way, return it to the battlefield tapped.
 SVar:TrigUnspecialize:DB$ SetState | Defined$ TriggeredCard | Mode$ Unspecialize | RememberChanged$ True | SubAbility$ DBReturn
