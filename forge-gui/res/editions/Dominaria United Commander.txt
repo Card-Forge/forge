@@ -8,7 +8,8 @@ ScryfallCode=DMC
 [cards]
 1 M Dihada, Binder of Wills @Nestor Ossandon Leal
 2 M Jared Carthalion @Manuel Castañón
-31 U General Marhault Elsdragon @
+30 R The Ever-Changing 'Dane @Campbell White
+31 U General Marhault Elsdragon @Heonhwa Choe
 32 R Hazezon, Shaper of Sand @Bryan Sola
 33 U Jasmine Boreal of the Seven @Bastien L. Deharme
 34 M Jedit Ojanen, Mercenary @Ilse Gort
