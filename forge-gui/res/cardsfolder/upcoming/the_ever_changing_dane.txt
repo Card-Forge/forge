@@ -4,3 +4,4 @@ Types:Legendary Creature Shapeshifter
 PT:3/3
 A:AB$ Clone | Cost$ 1 Sac<1/Creature.Other> | Defined$ Sacrificed | GainThisAbility$ True | SpellDescription$ Sacrifice another creature: CARDNAME becomes a copy of the sacrificed creature, except it has this ability.
 Oracle:{1}, Sacrifice another creature: The Ever-Changing 'Dane becomes a copy of the sacrificed creature, except it has this ability.
+DeckHas:Ability$Sacrifice
