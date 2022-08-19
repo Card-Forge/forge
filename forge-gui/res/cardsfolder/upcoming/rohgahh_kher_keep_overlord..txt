@@ -3,7 +3,7 @@ ManaCost:3 B R
 Types:Legendary Creature Kobold Warrior
 PT:4/4
 S:Mode$ Continuous | Affected$ Creature.Kobold+Other+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Other Kobolds you control get +2/+2.
-T:Mode$ SpellCast | ValidCard$ Kobold | ValidActivatingPlayer$ You | Execute$ TrigTokenDragon | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Kobold spell, you may pay {2}. If you do, create a 4/4 red Dragon creature token with flying.
+T:Mode$ SpellCast | ValidCard$ Kobold | ValidActivatingPlayer$ You | Execute$ TrigTokenDragon | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Kobold spell, you may pay {2}. If you do, create a 4/4 red Dragon creature token with flying.
 SVar:TrigTokenDragon:AB$ Token | Cost$ 2 | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ r_4_4_dragon_flying
 T:Mode$ SpellCast | ValidCard$ Dragon | ValidActivatingPlayer$ You | Execute$ TrigTokenKobold | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Dragon spell, create a 0/1 red Kobold creature token named Kobolds of Kher Keep.
 SVar:TrigTokenKobold:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ kobolds_of_kher_keep 
