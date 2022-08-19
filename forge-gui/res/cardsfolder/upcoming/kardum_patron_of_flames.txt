@@ -9,7 +9,7 @@ SVar:DBSeek:DB$ ChangeZone | Origin$ Library | Destination$ Exile | ExileFaceDow
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigReturn | TriggerDescription$ When NICKNAME dies, put the cards exiled with it into their owner's hand.
 SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered+ExiledWithSource | RememberChanged$ True | Origin$ Exile | Destination$ Hand | SubAbility$ DBDelay
 SVar:DBDelay:DB$ DelayedTrigger | DelayedTriggerDefinedPlayer$ You | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDiscardExiled | RememberObjects$ Remembered | TriggerDescription$ At the beginning of the end step of your next turn, discard those cards.
-SVar:TrigDiscardExiled:DB$ Discard | Mode$ Defined | DelayedTriggerDefinedPlayer$ You | DefinedCards$ DelayTriggerRemembered
+SVar:TrigDiscardExiled:DB$ Discard | Mode$ Defined | DefinedCards$ DelayTriggerRemembered
 T:Mode$ ChangesZone | Origin$ Battlefield | ExcludedDestinations$ Graveyard | Static$ True | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
