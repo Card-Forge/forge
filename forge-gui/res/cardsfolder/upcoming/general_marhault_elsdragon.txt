@@ -1,4 +1,4 @@
-Name:General Marhault Elsdragón
+Name:General Marhault Elsdragon
 ManaCost:2 R G
 Types:Legendary Creature Elf Warrior
 PT:4/4
