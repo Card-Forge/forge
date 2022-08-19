@@ -10,7 +10,7 @@ A:AB$ PutCounter | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$
 SVar:DBPump:DB$ Pump | KW$ Vigilance | Defined$ Targeted | SpellDescription$ They gain vigilance until end of turn.
 A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Ajani, Sleeper Agent | Image$ emblem_ajani_sleeper_agent | Triggers$ TrigSpellCast | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a creature or planeswalker spell, target opponent gets two poison counters."
 SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Creature,Planeswalker | ValidActivatingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a creature or planeswalker spell, target opponent gets two poison counters.
-SVar:EffSpellCast:DB$ Poison | ValidTgts$ Opponent | TgtPrompt$ Select target opponent to get two poison counters | Num$ 2
+SVar:EffSpellCast:DB$ Poison | ValidTgts$ Opponent | Num$ 2
 SVar:BuffedBy:Creature,Planeswalker
 DeckHints:Type$Creature|Planeswalker
 Oracle:Compleated ({PGW} can be paid with {G}, {W}, or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)\n[+1]: Reveal the top card of your library. If it's a creature or planeswalker card, put it into your hand. Otherwise, you may put it on the bottom of your library.\n[-3]: Distribute three +1/+1 counters among up to three target creatures. They gain vigilance until end of turn.\n[-6]: You get an emblem with "Whenever you cast a creature or planeswalker spell, target opponent gets two poison counters."
