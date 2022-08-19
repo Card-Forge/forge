@@ -4,18 +4,23 @@ import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.trigger.TriggerHandler;
+import forge.game.trigger.TriggerType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.Map;
 
 public class SetStateEffect extends SpellAbilityEffect {
 
@@ -207,6 +212,12 @@ public class SetStateEffect extends SpellAbilityEffect {
                     transformedCards.add(gameCard);
                 if ("Specialize".equals(mode)) {
                     gameCard.setSpecialized(true);
+                    //run Specializes trigger
+                    final TriggerHandler th = game.getTriggerHandler();
+                    th.clearActiveTriggers(gameCard, null);
+                    th.registerActiveTrigger(gameCard, false);
+                    final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
+                    th.runTrigger(TriggerType.Specializes, runParams, false);
                 } else if ("Unspecialize".equals(mode)) {
                     gameCard.setSpecialized(false);
                 }
