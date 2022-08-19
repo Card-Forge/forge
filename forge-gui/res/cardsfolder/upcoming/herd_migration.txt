@@ -1,0 +1,11 @@
+Name:Herd Migration
+ManaCost:6 G
+Types:Sorcery
+A:SP$ Token | TokenAmount$ X | TokenScript$ g_3_3_beast | TokenOwner$ You | SpellDescription$ Domain — Create a 3/3 green Beast creature token for each basic land type among lands you control.
+A:AB$ ChangeZone | Cost$ 1 G Discard<1/CARDNAME> | ActivationZone$ Hand | Origin$ Library | Destination$ Hand | ChangeType$ Land.Basic | ChangeNum$ 1 | ChangeTypeDesc$ basic land card | SubAbility$ DBGainLife | SpellDescription$ Search your library for a basic land card, reveal it, put it into your hand, then shuffle. You gain 3 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+DeckHas:Ability$Discard|LifeGain
+SVar:X:Count$Domain
+AI:RemoveDeck:Random
+DeckHas:Ability$Token
+Oracle:Domain — Create a 3/3 green Beast creature token for each basic land type among lands you control.\n{1}{G}, Discard Herd Migration: Search your library for a basic land card, reveal it, put it into your hand, then shuffle. You gain 3 life.
