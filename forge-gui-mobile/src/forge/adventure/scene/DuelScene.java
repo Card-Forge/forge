@@ -326,7 +326,7 @@ public class DuelScene extends ForgeScene {
         this.player = playerSprite;
         this.enemy = enemySprite;
         this.playerDeck = (Deck) AdventurePlayer.current().getSelectedDeck().copyTo("PlayerDeckCopy");
-        this.chaosBattle = this.enemy.getData().copyPlayerDeck && (Current.player().isFantasyMode());
+        this.chaosBattle = this.enemy.getData().copyPlayerDeck && Current.player().isFantasyMode();
         this.AIExtras.clear();
         this.playerExtras.clear();
     }
