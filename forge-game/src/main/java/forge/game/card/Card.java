@@ -675,7 +675,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             } else if (customState.equalsIgnoreCase("green")) {
                 return changeToState(CardStateName.SpecializeG);
             }
-            //do trigger here?
         } else if (mode.equals("Unspecialize") && isSpecialized()) {
             return changeToState(CardStateName.Original);
         }
