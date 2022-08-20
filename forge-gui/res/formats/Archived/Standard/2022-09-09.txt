@@ -1,0 +1,6 @@
+[format]
+Name:Standard (DMU)
+Type:Archived
+Subtype:Standard
+Effective:2022-09-09
+Sets:MID, VOW, NEO, SNC, DMU
