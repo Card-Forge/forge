@@ -9,4 +9,4 @@ SVar:DBMill:DB$ Mill | NumCards$ 1 | Optional$ True | ConditionDefined$ Remember
 A:AB$ Pump | Cost$ 1 U | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn. 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
-Oracle:Whenever Water Weird deals combat damage to a player, put a +1/+1 counter on Water Weird if the top card of your library is a nonland card. Otherwise, you may mill a card\n{1}{U}: Water Weird gets +1/-1 until end of turn.
+Oracle:Whenever Water Weird deals combat damage to a player, put a +1/+1 counter on Water Weird if the top card of your library is a nonland card. Otherwise, you may mill a card.\n{1}{U}: Water Weird gets +1/-1 until end of turn.
