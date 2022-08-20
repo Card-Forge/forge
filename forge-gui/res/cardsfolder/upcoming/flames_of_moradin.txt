@@ -3,7 +3,7 @@ ManaCost:2 R R
 Types:Sorcery
 A:SP$ RepeatEach | Cost$ 3 R | ValidTgts$ Artifact | TargetMin$ 0 | TargetMax$ 3 | RepeatSubAbility$ DBConjure | SubAbility$ DestroyTargets | RepeatPresent$ Card | RepeatTargeted$ True | RememberTargets$ True | SpellDescription$ Destroy up to three target artifacts. Conjure a duplicate of each nontoken artifact destroyed this way into your hand. The duplicates perpetually gain “You may pay {R} rather than pay this spell's mana cost" and "at the beginning of your end step, sacrifice this artifact."
 SVar:DestroyTargets:DB$ DestroyAll | ValidCards$ Remembered | SubAbility$ DBEffect
-SVar:DBConjure:DB$ MakeCard | DefinedName$ Remembered.nonToken | Zone$ Hand | RememberMade$ True 
+SVar:DBConjure:DB$ MakeCard | ConditionPresent$ Card.nonToken | DefinedName$ Remembered | Zone$ Hand | RememberMade$ True 
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualAbility | RememberObjects$ Remembered | Name$ Flames of Moradin's Perpetual Effect | Duration$ Permanent
 SVar:PerpetualAbility:Mode$ Continuous | RememberObjects$ Targeted | AddKeyword$ Alternative Cost: R | Affected$ Card.IsRemembered | AddTrigger$ TrigSac | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains "You may pay {R} rather than pay this spell's mana cost" and "at the beginning of your end step, sacrifice this artifact." 
 SVar:TrigSac:Mode$ Phase | Phase$ End of Turn | Execute$ TrigSacrifice | TriggerDescription$ Sacrifice CARDNAME at you end step.
