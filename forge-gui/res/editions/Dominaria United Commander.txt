@@ -8,15 +8,40 @@ ScryfallCode=DMC
 [cards]
 1 M Dihada, Binder of Wills @Nestor Ossandon Leal
 2 M Jared Carthalion @Manuel Castañón
+3 M Jenson Carthalion, Druid Exile @Livia Prima
+4 M Shanid, Sleepers' Scourge @Ryan Pancoast
+5 R Zeriam, Golden Wind @John Tedrick
+6 R Moira, Urborg Haunt @Marta Nael
+7 R Mana Cannons @Sidharth Chaturvedi
+8 R The Reaver Cleaver @Yigit Koroglu
+9 R Bladewing, Deathless Tyrant @Antonio José Manzanedo
+10 R Cadric, Soul Kindler @Joseph Weston
+11 R Fallaji Wayfarer @Victor Adame Minguez
+12 R Iridian Maelstrom @Justyna Gil
+13 R Primeval Spawn @Filip Burburan
+14 R Two-Headed Hellkite @Fajareka Setiawan
+15 R Unite the Coalition @Nestor Ossandon Leal
+16 R Verrak, Warped Sengir @Alix Branwyn
+17 R Gerrard's Hourglass Pendant @Sam Burley
+18 R Obsidian Obelisk @Andrew Mar
+19 R The Peregrine Dynamo @Zoltan Boros
+20 R Tiller Engine @Alexander Mokhov
+29 R Ayesha Tanaka, Armorer @Aurore Folny
 30 R The Ever-Changing 'Dane @Campbell White
 31 U General Marhault Elsdragon @Heonhwa Choe
 32 R Hazezon, Shaper of Sand @Bryan Sola
 33 U Jasmine Boreal of the Seven @Bastien L. Deharme
 34 M Jedit Ojanen, Mercenary @Ilse Gort
+37 R Orca, Siege Demon @Daarken
 38 U Ramirez DePietro, Pillager @Anna Steinbauer
 39 R Ramses, Assassin Lord @Manuel Castañón
+40 R Rasputin, the Oneiromancer @Matt Stewart
 41 R Rohgahh, Kher Keep Overlord @Chris Seaman
+44 M Tetsuo, Imperial Champion @Lius Lasahido
 46 U Tor Wauki the Younger @Karl Kopinski
+47 M Torsten, Founder of Benalia @Volkan Baǵa
+51 R Ayesha Tanaka, Armorer @Aurore Folny
+52 R The Ever-Changing 'Dane @Campbell White
 54 R Hazezon, Shaper of Sand @Bryan Sola
 55 U Jasmine Boreal of the Seven @Bastien L. Deharme
 56 M Jedit Ojanen, Mercenary @Ilse Gort
@@ -24,7 +49,21 @@ ScryfallCode=DMC
 61 R Ramses, Assassin Lord @Manuel Castañón
 64 R Stangg, Echo Warrior @Randy Vargas
 65 M Sivitri, Dragon Master @Livia Prima
+66 M Tetsuo, Imperial Champion @Lius Lasahido
 68 U Tor Wauki the Younger @Karl Kopinski
+69 M Torsten, Founder of Benalia @Volkan Baǵa
+104 U Path to Exile @Todd Lockwood
+127 C Thrill of Possibility @Izzy
+143 R Baleful Strix @Nils Hamm
+149 R Faeburrow Elder @Raoul Vitale
+159 M Maelstrom Nexus @Steven Belledin
+163 M Nethroi, Apex of Death @Slawomir Maniak
+164 M O-Kagachi, Vengeful Kami @Daarken
+169 M Surrak Dragonclaw @Jaime Jones
+197 U Bad River @Nils Hamm
+202 R Cascading Cataracts @Paul Scott Canavan
+206 R Crystal Quarry @Alan Pollack
+220 R Murmuring Bosk @John Avon
 
 [tokens]
 rgw_1_1_sand_warrior
