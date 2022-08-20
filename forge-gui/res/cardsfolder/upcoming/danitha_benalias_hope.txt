@@ -5,7 +5,7 @@ PT:4/4
 K:First strike
 K:Vigilance
 K:Lifelink
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, you may put an Aura or Equipment card from your hand or graveyard onto the battlefield attached to CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, you may put an Aura or Equipment card from your hand or graveyard onto the battlefield attached to NICKNAME.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Hand,Graveyard | Destination$ Battlefield | ChangeType$ Aura.CanEnchantSource,Equipment.CanEnchantSource | AttachedTo$ Self | ChangeNum$ 1
 DeckNeeds:Type$Aura|Equipment
-Oracle:First strike, vigilance, lifelink\nWhen Danitha, Benalia's Hope enters the battlefield, you may put an Aura or Equipment card from your hand or graveyard onto the battlefield attached to Danitha, Benalia's Hope.
+Oracle:First strike, vigilance, lifelink\nWhen Danitha, Benalia's Hope enters the battlefield, you may put an Aura or Equipment card from your hand or graveyard onto the battlefield attached to Danitha.
