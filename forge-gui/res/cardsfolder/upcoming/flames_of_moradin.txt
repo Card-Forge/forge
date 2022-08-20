@@ -2,10 +2,10 @@ Name:Flames of Moradin
 ManaCost:2 R R
 Types:Sorcery
 A:SP$ Destroy | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Artifact | SubAbility$ DBRepeatEach | TgtPrompt$ Select up to three target artifacts | SpellDescription$ Destroy up to three target artifacts. Conjure a duplicate of each nontoken artifact destroyed this way into your hand. The duplicates perpetually gain "You may pay {R} rather than pay this spell's mana cost" and "at the beginning of your end step, sacrifice this artifact."
-SVar:DBRepeatEach:DB$ RepeatEach | RepeatSubAbility$ DBConjure | RepeatCards$ Card.Artifact+IsRemembered
-SVar:DBConjure:DB$ MakeCard | ConditionPresent$ Card.nonToken | DefinedName$ Remembered | Zone$ Hand | SubAbility$ DBEffect
+SVar:DBRepeatEach:DB$ RepeatEach | RepeatSubAbility$ DBConjure | RepeatTargeted$ True | SubAbility$ DBEffect
+SVar:DBConjure:DB$ MakeCard | DefinedName$ Remembered | Zone$ Hand | RememberMade$ True 
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualAbility | Name$ Flames of Moradin's Perpetual Effect | Duration$ Permanent
-SVar:PerpetualAbility:Mode$ Continuous | AddKeyword$ Alternative Cost:R | Affected$ Card.IsRemembered+nonToken | AddTrigger$ TrigSac | EffectZone$ Command | AffectedZone$ Battlefield | Description$ This creature perpetually gains "You may pay {R} rather than pay this spell's mana cost" and "at the beginning of your end step, sacrifice this artifact." 
+SVar:PerpetualAbility:Mode$ Continuous | RememberObjects$ Targeted | AddKeyword$ Alternative Cost:R | Affected$ Card.IsRemembered | AddTrigger$ TrigSac | EffectZone$ Command | AffectedZone$ Battlefield | Description$ This creature perpetually gains "You may pay {R} rather than pay this spell's mana cost" and "at the beginning of your end step, sacrifice this artifact." 
 SVar:TrigSac:Mode$ Phase | Phase$ End of Turn | Execute$ TrigSacrifice | TriggerDescription$ Sacrifice CARDNAME at you end step.
 SVar:TrigSacrifice:DB$ Sacrifice | Mode$ Defined | DelayedTriggerDefinedPlayer$ You | DefinedCards$ Self 
 Oracle:Destroy up to three target artifacts. Conjure a duplicate of each nontoken artifact destroyed this way into your hand. The duplicates perpetually gain "You may pay {R} rather than pay this spell's mana cost" and "at the beginning of your end step, sacrifice this artifact."
