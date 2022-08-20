@@ -1,0 +1,12 @@
+Name:Rasputin, the Oneiromancer
+ManaCost:1 W U
+Types:Legendary Creature Human Wizard
+PT:4/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters the battlefield, put a dream counter on it for each opponent you have. Each opponent creates a 1/1 red Goblin creature token.
+SVar:TrigCounter:DB$ PutCounter | CounterType$ Dream | CounterNum$ X | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_1_1_goblin | TokenOwner$ Opponent 
+A:AB$ Mana | Cost$ T SubCounter<X/DREAM> | Produced$ C | Amount$ Y |  SpellDescription$ Add that much {C}.
+A:AB$ Token | Cost$ T SubCounter<1/DREAM> | TokenScript$ w_2_2_knight_protectionred | SpellDescription$ Create a 2/2 white Knight creature token with protection from red.
+SVar:X:PlayerCountOpponents$Amount
+SVar:Y:Count$xPaid
+Oracle:When Rasputin, the Oneiromancer enters the battlefield, put a dream counter on it for each opponent you have. Each opponent creates a 1/1 red Goblin creature token.\n{T}: Remove one or more dream counters from Raputin: Add that much {C}.\n{T}: Remove a dream counter from Rasputin: Create a 2/2 white Knight creature token with protection from red.
