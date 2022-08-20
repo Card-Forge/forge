@@ -1,0 +1,11 @@
+Name:Ertai Resurrected
+ManaCost:2 U B
+Types:Legendary Creature Phyrexian Human Wizard
+PT:3/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 0 | CharmNum$ 1 | Choices$ DBCounter,DBDestroy
+SVar:DBCounter:DB$ Counter | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Card,Emblem | SubAbility$ DBDraw | SpellDescription$ Counter target spell, activated ability, or triggered ability. Its controller draws a card.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature.Other,Planeswalker.Other | TgtPrompt$ Select another target creature or planeswalker | SubAbility$ DBDraw | SpellDescription$ Destroy another target creature or planeswalker. Its controller draws a card.
+SVar:DBDraw:DB$ Draw | Defined$ TargetedController | NumCards$ 1
+Oracle:When Ertai Resurrected enters the battlefield, choose up to one —\n• Counter target spell, activated ability, or triggered ability. Its controller draws a card.\n• Destroy another target creature or planeswalker. Its controller draws a card.
