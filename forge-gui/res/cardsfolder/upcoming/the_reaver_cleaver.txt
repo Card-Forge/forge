@@ -6,5 +6,5 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever this creature deals combat damage to a player or planeswalker, create that many Treasure tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 SVar:X:TriggerCount$DamageAmount
-DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+DeckHas:Ability$Token & Type$Treasure|Artifact
 Oracle:Equipped creature gets +1/+1 and has trample and "Whenever this creature deals combat damage to a player or planeswalker, create that many Treasure tokens."\nEquip {3}
