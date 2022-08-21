@@ -191,6 +191,15 @@ public final class ColorSet implements Comparable<ColorSet>, Iterable<Byte>, Ser
     }
 
     /**
+     * Checks if is all colors.
+     *
+     * @return true, if is all colors
+     */
+    public boolean isAllColors() {
+        return this == ALL_COLORS;
+    }
+
+    /**
      * Checks if is mono color.
      *
      * @return true, if is mono color
