@@ -381,6 +381,14 @@ public class PlayerProperty {
             if (player.getCreaturesAttackedThisTurn().isEmpty()) {
                 return false;
             }
+        } else if (property.startsWith("wasAttackedThisTurnBy")) {
+            String restriction = property.split(" ")[1];
+            for (Card c : sourceController.getCreaturesAttackedThisTurn(player)) {
+                if (c.isValid(restriction, sourceController, source, spellAbility)) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.equals("attackedYouTheirLastTurn")) {
             if (!player.getAttackedPlayersMyLastTurn().contains(sourceController)) {
                 return false;
