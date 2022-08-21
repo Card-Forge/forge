@@ -5,4 +5,4 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
 A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Spell.MultiColor | SpellDescription$ Add one mana of any color. Spend this mana only to cast a multicolored spell.
 AI:RemoveDeck:Random
-Oracle:Obsidian Obelisk enters the battlefield tapped./n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a multicolored spell.
+Oracle:Obsidian Obelisk enters the battlefield tapped.\n{T}: Add {C}.\n{T}: Add one mana of any color. Spend this mana only to cast a multicolored spell.
