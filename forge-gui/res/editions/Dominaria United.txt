@@ -8,6 +8,7 @@ Type=Expansion
 ScryfallCode=DMU
 
 [cards]
+1 M Karn, Living Legacy @Chris Rahn
 3 R Archangel of Wrath @Miguel Mercado
 8 C Benalish Sleeper @Josu Hernaiz
 10 C Charismatic Vanguard @David Palumbo
@@ -24,6 +25,7 @@ ScryfallCode=DMU
 54 C Impede Momentum @Igor Kieryluk
 57 U Micromancer @Ernanda Souza
 59 R The Phasing of Zhalfir @LA Draws
+62 C Protect the Negotiators @Dominik Mayer
 67 M Sphinx of Clear Skies @Valera Lutfullina
 71 C Tolarian Geyser @Olivier Bernard
 72 C Tolarian Terror @Vincent Christiaens
@@ -34,6 +36,7 @@ ScryfallCode=DMU
 89 U Cut Down @Dominik Mayer
 93 R Evolved Sleeper @Jason A. Engle
 97 M Liliana of the Veil @Martina Fackova
+98 U Monstrous War-Leech @Christopher Burdett
 103 R The Raven Man @Chris Rahn
 104 U Sengir Connoisseur @Irina Nordsol
 107 M Sheoldred, the Apocalypse @Chris Rahn
@@ -42,6 +45,7 @@ ScryfallCode=DMU
 114 C Urborg Repossession @Cristi Balanescu
 115 C Writhing Necromass @Campbell White
 117 R Chaotic Transformation @Joseph Meehan
+120 U Dragon Whelp @Jokubas Uogintas
 133 M Jaya, Fiery Negotiator @Marta Nael
 135 R Keldon Flamesage @Jason A. Engle
 137 C Lightning Strike @Marta Nael
@@ -58,10 +62,12 @@ ScryfallCode=DMU
 174 U Nishoba Brawler @Valera Lutfullina
 176 C Scout the Wilderness @A. M. Sartor
 179 C Snarespinner @Michele Giorgi
+180 U Strength of the Coalition @Justine Cruz
 184 U Territorial Maro @Simon Dominic
 185 R Threats Undetected @Randy Vargas
 187 C Vineshaper Prodigy @Inka Schulz
 189 M The World Spell @Adam Paquette
+190 U Yavimaya Iconoclast @Caio Monteiro
 192 M Ajani, Sleeper Agent @Matt Stewart
 194 R Astor, Bearer of Blades @Josh Hass
 202 R Jhoira, Ageless Innovator @Justyna Gil
@@ -77,6 +83,7 @@ ScryfallCode=DMU
 243 R Adarkar Wastes @Piotr Dura
 244 R Caves of Koilos @Julian Kok Joon Wen
 250 R Karplusan Forest @Sam Burley
+252 R Plaza of Heroes @Gabor Szikszai
 255 R Shivan Reef @Andrew Mar
 256 R Sulfurous Springs @Bruce Brenneise
 261 R Yavimaya Coast @Jesper Ejsing
@@ -119,6 +126,7 @@ ScryfallCode=DMU
 369 M Sheoldred, the Apocalypse @Chris Rahn
 370 M Ajani, Sleeper Agent @Victor Adame Minguez
 371 M Ajani, Sleeper Agent @Victor Adame Minguez
+372 M Karn, Living Legacy @rk post
 373 M Liliana of the Veil @Brom
 374 M Jaya, Fiery Negotiator @Scott M. Fischer
 375 M Ajani, Sleeper Agent @Adam Rex
@@ -138,6 +146,7 @@ ScryfallCode=DMU
 410 M Shivan Devastator @Brent Hollowell
 411 R Temporal Firestorm @Nestor Ossandon Leal
 416 R Llanowar Loamspeaker @Zara Alfonso
+421 R Plaza of Heroes @Gabor Szikszai
 428 R Llanowar Loamspeaker @Volkan Baǵa
 429 R Herd Migration @Antonio José Manzanedo
 434 U Nishoba Brawler @Valera Lutfullina

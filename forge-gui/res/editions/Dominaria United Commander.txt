@@ -37,6 +37,8 @@ ScryfallCode=DMC
 39 R Ramses, Assassin Lord @Manuel Castañón
 40 R Rasputin, the Oneiromancer @Matt Stewart
 41 R Rohgahh, Kher Keep Overlord @Chris Seaman
+42 R Stangg, Echo Warrior @Randy Vargas
+43 M Sivitri, Dragon Master @Livia Prima
 44 M Tetsuo, Imperial Champion @Lius Lasahido
 46 U Tor Wauki the Younger @Karl Kopinski
 47 M Torsten, Founder of Benalia @Volkan Baǵa
