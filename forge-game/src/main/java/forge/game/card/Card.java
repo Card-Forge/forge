@@ -334,6 +334,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private ReplacementEffect shieldCounterReplaceDamage = null;
     private ReplacementEffect shieldCounterReplaceDestroy = null;
+    private ReplacementEffect stunCounterReplaceUntap = null;
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -6100,16 +6101,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         // Shield Counter aren't affected by Changed Card Traits
-        if (this.getCounters(CounterEnumType.SHIELD) > 0) {
+        if (getCounters(CounterEnumType.SHIELD) > 0) {
             String sa = "DB$ RemoveCounter | Defined$ Self | CounterType$ Shield | CounterNum$ 1";
             if (shieldCounterReplaceDamage == null) {
-                String reStr = "Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | PreventionEffect$ True | AlwaysReplace$ True "
+                String reStr = "Event$ DamageDone | ActiveZones$ Battlefield | ValidTarget$ Card.Self | PreventionEffect$ True | AlwaysReplace$ True | Secondary$ True "
             + "| Description$ If damage would be dealt to this permanent, prevent that damage and remove a shield counter from it.";
                 shieldCounterReplaceDamage = ReplacementHandler.parseReplacement(reStr, this, false, null);
                 shieldCounterReplaceDamage.setOverridingAbility(AbilityFactory.getAbility(sa, this));
             }
             if (shieldCounterReplaceDestroy == null) {
-                String reStr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.Self | ValidSource$ SpellAbility "
+                String reStr = "Event$ Destroy | ActiveZones$ Battlefield | ValidCard$ Card.Self | ValidSource$ SpellAbility | Secondary$ True "
             + "| Description$ If this permanent would be destroyed as the result of an effect, instead remove a shield counter from it.";
                 shieldCounterReplaceDestroy = ReplacementHandler.parseReplacement(reStr, this, false, null);
                 shieldCounterReplaceDestroy.setOverridingAbility(AbilityFactory.getAbility(sa, this));
@@ -6117,6 +6118,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
             list.add(shieldCounterReplaceDamage);
             list.add(shieldCounterReplaceDestroy);
+        }
+        if (getCounters(CounterEnumType.STUN) > 0) {
+            String sa = "DB$ RemoveCounter | Defined$ Self | CounterType$ Stun | CounterNum$ 1";
+            if (stunCounterReplaceUntap == null) {
+                String reStr = "Event$ Untap | ActiveZones$ Battlefield | ValidCard$ Card.Self  | Secondary$ True "
+            + "| Description$ If this permanent would become untapped, instead remove a stun counter from it.";
+
+                stunCounterReplaceUntap = ReplacementHandler.parseReplacement(reStr, this, false, null);
+                stunCounterReplaceUntap.setOverridingAbility(AbilityFactory.getAbility(sa, this));
+            }
+            list.add(stunCounterReplaceUntap);
         }
     }
 

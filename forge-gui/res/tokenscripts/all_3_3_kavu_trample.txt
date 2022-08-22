@@ -1,0 +1,8 @@
+Name:Kavu Token
+ManaCost:no cost
+Colors:all
+Types:Creature Kavu
+PT:3/3
+K:Trample
+Text:This creature is all colors.
+Oracle:Trample\nThis creature is all colors.

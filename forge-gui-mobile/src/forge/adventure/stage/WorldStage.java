@@ -153,25 +153,19 @@ public class WorldStage extends GameStage implements SaveFileContent {
         if (playerIsWinner) {
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
-            startPause(0.5f, new Runnable() {
-                @Override
-                public void run() {
-                    ((RewardScene) SceneType.RewardScene.instance).loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
-                    WorldStage.this.removeEnemy(currentMob);
-                    currentMob = null;
-                    Forge.switchScene(SceneType.RewardScene.instance);
-                }
+            startPause(0.5f, () -> {
+                ((RewardScene) SceneType.RewardScene.instance).loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
+                WorldStage.this.removeEnemy(currentMob);
+                currentMob = null;
+                Forge.switchScene(SceneType.RewardScene.instance);
             });
         } else {
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Attack);
-            startPause(0.5f, new Runnable() {
-                @Override
-                public void run() {
-                    Current.player().defeated();
-                    WorldStage.this.removeEnemy(currentMob);
-                    currentMob = null;
-                }
+            startPause(0.5f, () -> {
+                Current.player().defeated();
+                WorldStage.this.removeEnemy(currentMob);
+                currentMob = null;
             });
 
         }
@@ -269,6 +263,11 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     WorldSave.getCurrentSave().getPlayer().getSelectedDeck().getName()+
                     "\nEnemy will use Preconstructed or Random Generated Decks. Genetic AI Decks will be available to some enemies on Hard difficulty.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
             WorldSave.getCurrentSave().getPlayer().clearAnnounceFantasy();
+        } else if (WorldSave.getCurrentSave().getPlayer().hasAnnounceCustom()) {
+            MapStage.getInstance().showDeckAwardDialog("{GRADIENT}Custom Deck Mode!{ENDGRADIENT}\n"+ WorldSave.getCurrentSave().getPlayer().getName()+ "'s Deck: "+
+                    WorldSave.getCurrentSave().getPlayer().getSelectedDeck().getName()+
+                    "\nSome enemies will use Genetic AI Decks randomly.", WorldSave.getCurrentSave().getPlayer().getSelectedDeck());
+            WorldSave.getCurrentSave().getPlayer().clearAnnounceCustom();
         }
     }
 
