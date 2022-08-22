@@ -1754,7 +1754,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             alphaRelaseDate = format.parse(alphaEditionReleaseDate);
-            latestShivanDragonReleaseDateToDate = format.parse("2019-07-12");
+            latestShivanDragonReleaseDateToDate = format.parse("2022-09-09");
         } catch (ParseException e) {
             e.printStackTrace();
             fail();
