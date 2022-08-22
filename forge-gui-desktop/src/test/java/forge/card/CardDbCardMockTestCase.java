@@ -1139,7 +1139,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         sdCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, artPreference,
                 tenthEditionReleaseDate);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), latestArtShivanDragonEdition);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEditionNoPromo);
 
         // foiled card request
         ldFoilCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameFoilLightningDragon, artPreference,
@@ -1260,7 +1260,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         sdCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, artPreference, 1,
                 tenthEditionReleaseDate);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), latestArtShivanDragonEdition);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEditionNoPromo);
         assertEquals(sdCard.getArtIndex(), 1);
 
         // foiled card request
