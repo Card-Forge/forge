@@ -1,0 +1,7 @@
+Name:Gerrard's Hourglass Pendant
+ManaCost:1
+Types:Legendary Artifact
+K:Flash
+R:Event$ BeginTurn | ActiveZones$ Battlefield |  ExtraTurn$ True | Skip$ True | Description$ If a player would begin an extra turn, that player skips that turn instead.
+A:AB$ ChangeZone | Cost$ 4 T Exile<1/CARDNAME> | Origin$ Graveyard | Destination$ Battlefield | Defined$ ValidGraveyard Artifact.YouOwn+ThisTurnEnteredFrom_Battlefield,Creature.YouOwn+ThisTurnEnteredFrom_Battlefield,Land.YouOwn+ThisTurnEnteredFrom_Battlefield,Enchantment.YouOwn+ThisTurnEnteredFrom_Battlefield | SpellDescription$ Return to the battlefield tapped all artifact, creature, enchantment, and land cards in your graveyard that were put there from the battlefield this turn.
+Oracle:Flash\nIf a player would begin an extra turn, that player skips that turn instead.\n{4}, {T}, Exile Gerrard's Hourglass Pendant: Return to the battlefield tapped all artifact, creature, enchantment, and land cards in your graveyard that were put there from the battlefield this turn.
