@@ -54,7 +54,7 @@
                             </goals>
                             <configuration>
                                 <headerType>gui</headerType>
-                                <outfile>${project.build.directory}/forge-adventure-java8.exe</outfile>
+                                <outfile>${project.build.directory}/forge-adventure-editor-java8.exe</outfile>
                                 <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
                                 <dontWrapJar>true</dontWrapJar>
                                 <errTitle>forge</errTitle>
@@ -86,9 +86,9 @@
                                     <txtProductVersion>
                                         1.0.0.0
                                     </txtProductVersion>
-                                    <productName>forge-adventure</productName>
-                                    <internalName>forge-adventure</internalName>
-                                    <originalFilename>forge-adventure-java8.exe</originalFilename>
+                                    <productName>forge-adventure-editor</productName>
+                                    <internalName>forge-adventure-editor</internalName>
+                                    <originalFilename>forge-adventure-editor-java8.exe</originalFilename>
                                 </versionInfo>
                             </configuration>
                         </execution>
@@ -101,7 +101,7 @@
                             </goals>
                             <configuration>
                                 <headerType>gui</headerType>
-                                <outfile>${project.build.directory}/forge-adventure.exe</outfile>
+                                <outfile>${project.build.directory}/forge-adventure-editor.exe</outfile>
                                 <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
                                 <dontWrapJar>true</dontWrapJar>
                                 <errTitle>forge</errTitle>
@@ -156,9 +156,9 @@
                                     <txtProductVersion>
                                         1.0.0.0
                                     </txtProductVersion>
-                                    <productName>forge-adventure</productName>
-                                    <internalName>forge-adventure</internalName>
-                                    <originalFilename>forge-adventure.exe</originalFilename>
+                                    <productName>forge-adventure-editor</productName>
+                                    <internalName>forge-adventure-editor</internalName>
+                                    <originalFilename>forge-adventure-editor.exe</originalFilename>
                                 </versionInfo>
                             </configuration>
                         </execution>
@@ -180,7 +180,7 @@
                 </executions>
                 <configuration>
                     <basedir>${basedir}/${configSourceDirectory}</basedir>
-                    <filesToInclude>forge-adventure.sh, forge-adventure-mac.sh, forge-adventure.command, forge-adventure.cmd</filesToInclude>
+                    <filesToInclude>forge-adventure-editor.sh, forge-adventure-editor-mac.sh, forge-adventure-editor.command, forge-adventure-editor.cmd</filesToInclude>
                     <outputBasedir>${project.build.directory}</outputBasedir>
                     <outputDir>.</outputDir>
                     <regex>false</regex>
@@ -246,7 +246,7 @@
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx-backend-lwjgl3</artifactId>
+            <artifactId>gdx-backend-lwjgl</artifactId>
             <version>1.11.0</version>
             <scope>compile</scope>
         </dependency>

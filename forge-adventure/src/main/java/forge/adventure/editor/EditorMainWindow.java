@@ -1,6 +1,9 @@
 package forge.adventure.editor;
 
 
+
+import com.badlogic.gdx.tools.particleeditor.ParticleEditor;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,14 +16,6 @@ public class EditorMainWindow extends JFrame {
 
     public EditorMainWindow()
     {
-        BorderLayout layout=new BorderLayout();
-        setLayout(layout);
-        add(tabs);
-        tabs.addTab("World",worldEditor);
-        tabs.addTab("POI",new PointOfInterestEditor());
-        tabs.addTab("Items",new ItemsEditor());
-        tabs.addTab("Enemies",new EnemyEditor());
-
         UIManager.LookAndFeelInfo[] var1 = UIManager.getInstalledLookAndFeels();
         int var2 = var1.length;
 
@@ -34,12 +29,18 @@ public class EditorMainWindow extends JFrame {
                 break;
             }
         }
-
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ParticleEditor();
-            }
-        });
+        BorderLayout layout=new BorderLayout();
+        JToolBar toolBar = new JToolBar("toolbar");
+        JButton newButton=new JButton("open ParticleEditor");
+        newButton.addActionListener(e -> EventQueue.invokeLater(() ->new ParticleEditor()));
+        toolBar.add(newButton);
+        setLayout(layout);
+        add(toolBar, BorderLayout.NORTH);
+        add(tabs, BorderLayout.CENTER);
+        tabs.addTab("World",worldEditor);
+        tabs.addTab("POI",new PointOfInterestEditor());
+        tabs.addTab("Items",new ItemsEditor());
+        tabs.addTab("Enemies",new EnemyEditor());
 
         setVisible(true);
         setSize(800,600);

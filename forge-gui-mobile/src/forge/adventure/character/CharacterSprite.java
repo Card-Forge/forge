@@ -218,6 +218,7 @@ public class CharacterSprite extends MapActor {
     public void draw(Batch batch, float parentAlpha) {
         if (currentAnimation == null || hidden)
             return;
+        beforeDraw(batch,parentAlpha);
         TextureRegion currentFrame = currentAnimation.getKeyFrame(timer, true);
         setHeight(currentFrame.getRegionHeight());
         setWidth(currentFrame.getRegionWidth());
@@ -226,6 +227,7 @@ public class CharacterSprite extends MapActor {
         //batch.draw(getDebugTexture(),getX(),getY());
 
     }
+
 
     public Sprite getAvatar() {
         return avatar.first();

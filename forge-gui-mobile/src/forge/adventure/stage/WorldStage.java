@@ -177,7 +177,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
 
     }
-    private void handlePointsOfInterestCollision() {
+    public void handlePointsOfInterestCollision() {
 
         for (Actor actor : foregroundSprites.getChildren()) {
             if (actor.getClass() == PointOfInterestMapSprite.class) {

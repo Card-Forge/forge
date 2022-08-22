@@ -111,6 +111,7 @@ public static ConsoleCommandInterpreter getInstance()
                 int x = Integer.parseInt(s[0]);
                 int y = Integer.parseInt(s[1]);
                 WorldStage.getInstance().setPosition(new Vector2(x,y));
+                WorldStage.getInstance().player.playEffect("particle_effects/Particle Park Fireworks.p");
                 return  "teleport to ("+s[0]+","+s[1]+")";
             } catch (Exception e) {
                 return "Exception occured, Invalid input";
@@ -122,6 +123,7 @@ public static ConsoleCommandInterpreter getInstance()
             if(poi==null)
                 return "PoI " + s[0] + " not found";
             WorldStage.getInstance().setPosition(poi.getPosition());
+            WorldStage.getInstance().player.playEffect("particle_effects/Particle Park Laser.p");
             return  "Teleported to " + s[0] + "(" + poi.getPosition() + ")";
         });
         registerCommand(new String[]{"spawn","enemy"}, s -> {

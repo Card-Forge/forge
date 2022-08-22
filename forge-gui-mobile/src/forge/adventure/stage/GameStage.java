@@ -2,11 +2,13 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import forge.Forge;
@@ -17,9 +19,13 @@ import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
 import forge.adventure.scene.TileMapScene;
+import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
 import forge.util.MyRandom;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.HashMap;
 
 /**
  * Base class to render a player sprite on a map
@@ -48,7 +54,6 @@ public abstract class GameStage extends Stage {
         animationTimeout = i;
         player.setMovementDirection(Vector2.Zero);
     }
-
     public boolean isPaused() {
         return animationTimeout > 0;
     }
