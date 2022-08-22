@@ -49,6 +49,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     // Get Card From Editions Test fixtures
     protected final String originalArtShivanDragonEdition = "LEA";
     protected final String latestArtShivanDragonEdition = "P30H";
+    protected final String latestArtShivanDragonEditionNoPromo = "M20";
 
     protected final String originalArtLightningDragonEdition = "USG";
     protected final String originalArtLightningDragonEditionNoPromo = "USG";
@@ -423,7 +424,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), latestArtShivanDragonEdition);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEditionNoPromo);
 
         ldCard = this.cardDb.getCardFromEditions(cardNameLightningDragon, frame);
         assertEquals(ldCard.getName(), cardNameLightningDragon);
