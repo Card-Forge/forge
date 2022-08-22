@@ -1,0 +1,18 @@
+[metadata]
+Code=P30H
+Date=2022-09-09
+Name=30th Anniversary History Promos
+Type=Promo
+ScryfallCode=P30H
+
+[cards]
+1 R Serra Angel @Hisashi Momose
+1★ R Serra Angel @Hisashi Momose
+2 R Lord of Atlantis @Rorubei
+2★ R Lord of Atlantis @Rorubei
+3 R Sengir Vampire @Ai Nanahira
+3★ R Sengir Vampire @Ai Nanahira
+4 R Shivan Dragon @Satoru Senda
+4★ R Shivan Dragon @Satoru Senda
+5 R Llanowar Elves @Areku Nishiki
+5★ R Llanowar Elves @Areku Nishiki
