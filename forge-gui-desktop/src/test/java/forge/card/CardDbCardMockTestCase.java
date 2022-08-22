@@ -655,7 +655,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
             assertNull(nullCard);
 
             shivanNotExistingDragon = this.cardDb.getCardFromEditions(cardNameShivanDragon, preference, 2);
-            assertNull(shivanNotExistingDragon);
+            assertNull(nullCard);
 
             nullCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, preference, 5);
             assertNull(nullCard);
