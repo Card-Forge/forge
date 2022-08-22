@@ -1,6 +1,6 @@
 [metadata]
 Code=P30H
-Date=2022-09-09
+Date=2022-08-20
 Name=30th Anniversary History Promos
 Type=Promo
 ScryfallCode=P30H
