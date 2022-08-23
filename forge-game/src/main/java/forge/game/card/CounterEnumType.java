@@ -329,6 +329,8 @@ public enum CounterEnumType {
 
     STUDY("STUDY", 226, 192, 165),
 
+    STUN("STUN", 226, 192, 165),
+
     TASK("TASK", 191, 63, 49),
 
     THEFT("THEFT", 255, 176, 125),

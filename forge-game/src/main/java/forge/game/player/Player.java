@@ -24,6 +24,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -202,9 +203,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     private Table<Long, Long, KeywordsChange> changedKeywords = TreeBasedTable.create();
     private ManaPool manaPool = new ManaPool(this);
-    private List<Card> creatureAttackedThisTurn = new ArrayList<>();
-    private List<Player> attackedPlayersThisTurn = new ArrayList<>();
-    private List <Player> attackedPlayersLastTurn = new ArrayList<>();
+    private Map<GameEntity, List<Card>> attackedThisTurn = new HashMap<>();
+    private List<Player> attackedPlayersLastTurn = new ArrayList<>();
     private List<Player> attackedPlayersThisCombat = new ArrayList<>();
 
     private boolean activateLoyaltyAbilityThisTurn = false;
@@ -1826,37 +1826,37 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final List<Card> getCreaturesAttackedThisTurn() {
-        return creatureAttackedThisTurn;
+        List<Card> result = Lists.newArrayList(Iterables.concat(attackedThisTurn.values()));
+        return result;
     }
-    public final void addCreaturesAttackedThisTurn(final Card c) {
-        creatureAttackedThisTurn.add(c);
+    public final List<Card> getCreaturesAttackedThisTurn(final GameEntity e) {
+        return attackedThisTurn.getOrDefault(e, Lists.newArrayList());
     }
-    public final void clearCreaturesAttackedThisTurn() {
-        creatureAttackedThisTurn.clear();
-    }
-
-    public final void addAttackedPlayersMyTurn(final Player p) {
-        if (!attackedPlayersThisTurn.contains(p)) {
-            attackedPlayersThisCombat.add(p);
-            attackedPlayersThisTurn.add(p);
+    public final void addCreaturesAttackedThisTurn(final Card c, final GameEntity e) {
+        final List<Card> creatures = attackedThisTurn.getOrDefault(e, Lists.newArrayList());
+        creatures.add(c);
+        attackedThisTurn.putIfAbsent(e, creatures);
+        if (e instanceof Player && !attackedPlayersThisCombat.contains(e)) {
+            attackedPlayersThisCombat.add((Player) e);
         }
     }
-    public final List<Player> getAttackedPlayersMyTurn() {
-        return attackedPlayersThisTurn;
+
+    public final Iterable<Player> getAttackedPlayersMyTurn() {
+        return Iterables.filter(attackedThisTurn.keySet(), Player.class);
     }
     public final List<Player> getAttackedPlayersMyLastTurn() {
         return attackedPlayersLastTurn;
     }
-    public final void clearAttackedPlayersMyTurn() {
-        attackedPlayersThisTurn.clear();
+    public final void clearAttackedMyTurn() {
+        attackedThisTurn.clear();
     }
-    public final void setAttackedPlayersMyLastTurn(List<Player> players) {
+    public final void setAttackedPlayersMyLastTurn(Iterable<Player> players) {
         attackedPlayersLastTurn.clear();
-        attackedPlayersLastTurn.addAll(players);
+        Iterables.addAll(attackedPlayersLastTurn, players);
     }
 
     public final List<Player> getAttackedPlayersMyCombat() {
-        return attackedPlayersThisTurn;
+        return attackedPlayersThisCombat;
     }
     public final void clearAttackedPlayersMyCombat() {
         attackedPlayersThisCombat.clear();
@@ -2390,7 +2390,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         resetNumForetoldThisTurn();
         resetNumTokenCreatedThisTurn();
         setNumCardsInHandStartedThisTurnWith(getCardsIn(ZoneType.Hand).size());
-        clearCreaturesAttackedThisTurn();
         setActivateLoyaltyAbilityThisTurn(false);
         setTappedLandForManaThisTurn(false);
         setLandsPlayedLastTurn(getLandsPlayedThisTurn());
@@ -2417,8 +2416,8 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         // set last turn nr
         if (game.getPhaseHandler().isPlayerTurn(this)) {
-            setAttackedPlayersMyLastTurn(attackedPlayersThisTurn);
-            clearAttackedPlayersMyTurn();
+            setAttackedPlayersMyLastTurn(getAttackedPlayersMyTurn());
+            clearAttackedMyTurn();
             this.lastTurnNr = game.getPhaseHandler().getTurn();
         }
     }

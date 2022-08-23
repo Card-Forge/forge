@@ -366,7 +366,9 @@ public class GameAction {
                 }
             }
 
-            if (zoneFrom == null) {
+            // in addition to actual tokens, cards "made" by digital-only mechanics
+            // are also added to inbound tokens so their etb replacements will work
+            if (zoneFrom == null || zoneFrom.is(ZoneType.None)) {
                 copied.getOwner().addInboundToken(copied);
             }
 

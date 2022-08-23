@@ -407,10 +407,7 @@ public class CombatUtil {
 
         c.getDamageHistory().setCreatureAttackedThisCombat(defender);
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
-        c.getController().addCreaturesAttackedThisTurn(CardUtil.getLKICopy(c));
-        if (defender instanceof Player) {
-            c.getController().addAttackedPlayersMyTurn(combat.getDefenderPlayerByAttacker(c));
-        }
+        c.getController().addCreaturesAttackedThisTurn(CardUtil.getLKICopy(c), defender);
     }
 
     /**

@@ -8,22 +8,149 @@ Type=Expansion
 ScryfallCode=DMU
 
 [cards]
+1 M Karn, Living Legacy @Chris Rahn
+3 R Archangel of Wrath @Miguel Mercado
+8 C Benalish Sleeper @Josu Hernaiz
+10 C Charismatic Vanguard @David Palumbo
+19 R Guardian of New Benalia @Ernanda Souza
+21 U Join Forces @Aurore Folny
+26 C Mesa Cavalier @David Palumbo
+29 U Resolute Reinforcements @Billy Christian
+31 C Samite Herbalist @Alessandra Pisano
+33 U Shalai's Acolyte @Zara Alfonso
+34 C Stall for Time @Ryan Alexander Lee
+35 C Take Up the Shield @Manuel Castañón
+46 R Defiler of Dreams @Ryan Pancoast
+51 U Frostfist Strider @Francisco Miyara
+54 C Impede Momentum @Igor Kieryluk
+57 U Micromancer @Ernanda Souza
+59 R The Phasing of Zhalfir @LA Draws
+62 C Protect the Negotiators @Dominik Mayer
+67 M Sphinx of Clear Skies @Valera Lutfullina
+71 C Tolarian Geyser @Olivier Bernard
+72 C Tolarian Terror @Vincent Christiaens
+74 C Voda Sea Scavenger @Uriah Voth
+77 C Volshe Tideturner @Tia Masic
+79 U Balduvian Atrocity @Mike Jordana
+84 R Braids, Arisen Nightmare @Heonhwa Choe
+89 U Cut Down @Dominik Mayer
 93 R Evolved Sleeper @Jason A. Engle
+97 M Liliana of the Veil @Martina Fackova
+98 U Monstrous War-Leech @Christopher Burdett
+103 R The Raven Man @Chris Rahn
+104 U Sengir Connoisseur @Irina Nordsol
+107 M Sheoldred, the Apocalypse @Chris Rahn
+111 C Tattered Apparition @Jason A. Engle
+112 C Toxic Abomination @Igor Kieryluk
+114 C Urborg Repossession @Cristi Balanescu
+115 C Writhing Necromass @Campbell White
+117 R Chaotic Transformation @Joseph Meehan
+120 U Dragon Whelp @Jokubas Uogintas
 133 M Jaya, Fiery Negotiator @Marta Nael
+135 R Keldon Flamesage @Jason A. Engle
+137 C Lightning Strike @Marta Nael
+139 C Molten Monstrosity @Manuel Castañón
+141 R Radha's Firebrand @Ângelo Bortolini
 143 M Shivan Devastator @Brent Hollowell
+146 R Squee, Dubious Monarch @Zoltan Boros
 147 R Temporal Firestorm @Nestor Ossandon Leal
+150 C Viashino Branchrider @Andrew Mar
+152 C Yavimaya Steelcrusher @Gabor Szikszai
+160 R Defiler of Vigor @Chase Stone
 170 R Llanowar Loamspeaker @Zara Alfonso
+172 C Magnigoth Sentry @Dave Kendall
+174 U Nishoba Brawler @Valera Lutfullina
+176 C Scout the Wilderness @A. M. Sartor
+179 C Snarespinner @Michele Giorgi
+180 U Strength of the Coalition @Justine Cruz
+184 U Territorial Maro @Simon Dominic
+185 R Threats Undetected @Randy Vargas
+187 C Vineshaper Prodigy @Inka Schulz
+189 M The World Spell @Adam Paquette
+190 U Yavimaya Iconoclast @Caio Monteiro
+192 M Ajani, Sleeper Agent @Matt Stewart
+194 R Astor, Bearer of Blades @Josh Hass
+202 R Jhoira, Ageless Innovator @Justyna Gil
+208 U Najal, the Storm Runner @PINDURSKI
+209 R Nemata, Primeval Warden @Andrew Mar
+212 U Raff, Weatherlight Stalwart @Eelis Kyttanen
+218 M Shanna, Purifying Blade @Magali Villeneuve
+219 M Sol'Kanar the Tainted @Filip Burburan
+220 M Soul of Windgrace @Liiga Smilshkalne
+223 U Tori D'Avenant, Fury Rider @Anna Podedworna
+228 M Zur, Eternal Schemer @Jesper Ejsing
+230 R Golden Argosy @Daniel Ljunggren
+243 R Adarkar Wastes @Piotr Dura
+244 R Caves of Koilos @Julian Kok Joon Wen
+250 R Karplusan Forest @Sam Burley
+252 R Plaza of Heroes @Gabor Szikszai
+255 R Shivan Reef @Andrew Mar
+256 R Sulfurous Springs @Bruce Brenneise
+261 R Yavimaya Coast @Jesper Ejsing
+262 L Plains @Lorenzo Lanfranconi
+263 L Plains @Seb McKinnon
+264 L Plains @Johannes Voss
+265 L Island @Seb McKinnon
+266 L Island @James Paick
+267 L Island @Johannes Voss
+268 L Swamp @Seb McKinnon
+269 L Swamp @Mark Poole
+270 L Swamp @Johannes Voss
+271 L Mountain @Titus Lunter
+272 L Mountain @Seb McKinnon
+273 L Mountain @Johannes Voss
+274 L Forest @Seb McKinnon
+275 L Forest @Johannes Voss
+276 L Forest @Darek Zabrocki
 277 L Plains @Magali Villeneuve
 278 L Island @Magali Villeneuve
 279 L Swamp @Magali Villeneuve
 280 L Mountain @Magali Villeneuve
 281 L Forest @Magali Villeneuve
+288 R Braids, Arisen Nightmare @Dibujante Nocturno
+289 R The Raven Man @David Curtis
+290 M Sheoldred, the Apocalypse @Joe Esposito
+291 R Squee, Dubious Monarch @Daniel Lieske
+292 U Aron, Benalia's Ruin @Jody Clark
+293 R Astor, Bearer of Blades @Ivan Shavrin
+301 R Jhoira, Ageless Innovator @Lisa Heidhoff
+308 R Nemata, Primeval Warden @Bastien Grivet
+311 U Raff, Weatherlight Stalwart @Ivan Shavrin
+318 M Sol'Kanar the Tainted @Lisa Heidhoff
+319 M Soul of Windgrace @Ivan Shavrin
+327 M Zur, Eternal Schemer @Dan Mumford
+330 R The Raven Man @David Curtis
+331 M Sheoldred, the Apocalypse @Joe Esposito
+332 R Squee, Dubious Monarch @
+358 M Shanna, Purifying Blade @Jody Clark
+369 M Sheoldred, the Apocalypse @Chris Rahn
+370 M Ajani, Sleeper Agent @Victor Adame Minguez
+371 M Ajani, Sleeper Agent @Victor Adame Minguez
+372 M Karn, Living Legacy @rk post
+373 M Liliana of the Veil @Brom
 374 M Jaya, Fiery Negotiator @Scott M. Fischer
+375 M Ajani, Sleeper Agent @Adam Rex
+376 M Ajani, Sleeper Agent @Thomas M. Baxa
+377 R Adarkar Wastes @Rob Alexander
+378 R Caves of Koilos @Lars Grant-West
+379 R Karplusan Forest @Randy Gallegos
+380 R Shivan Reef @Donato Giancola
+381 R Sulfurous Springs @Mark Tedin
+382 R Yavimaya Coast @Mark Poole
+384 R Archangel of Wrath @Miguel Mercado
+386 R Guardian of New Benalia @Ernanda Souza
+396 M Sphinx of Clear Skies @Valera Lutfullina
 402 R Evolved Sleeper @Jason A. Engle
+405 R Chaotic Transformation @Joseph Meehan
+407 R Keldon Flamesage @Jason A. Engle
 410 M Shivan Devastator @Brent Hollowell
 411 R Temporal Firestorm @Nestor Ossandon Leal
 416 R Llanowar Loamspeaker @Zara Alfonso
+421 R Plaza of Heroes @Gabor Szikszai
 428 R Llanowar Loamspeaker @Volkan Baǵa
+429 R Herd Migration @Antonio José Manzanedo
+434 U Nishoba Brawler @Valera Lutfullina
 
 [tokens]
+b_1_1_bird_flying_noblock
 r_1_1_monk_prowess

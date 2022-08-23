@@ -439,6 +439,9 @@ public class CountersPutEffect extends SpellAbilityEffect {
                 }
 
                 if (obj instanceof Card) {
+                    if (sa.hasParam("CounterNumPerDefined")) {
+                        counterAmount = AbilityUtils.calculateAmount(gameCard, sa.getParam("CounterNumPerDefined"), sa);
+                    }
                     counterAmount = sa.usesTargeting() && sa.isDividedAsYouChoose() ? sa.getDividedValue(gameCard)
                             : counterAmount;
                     if (!sa.usesTargeting() || gameCard.canBeTargetedBy(sa)) {

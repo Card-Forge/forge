@@ -1,0 +1,11 @@
+Name:Squee, Dubious Monarch
+ManaCost:2 R
+Types:Legendary Creature Goblin Noble
+PT:2/2
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a 1/1 red Goblin creature token that's tapped and attacking.
+SVar:TrigToken:DB$ Token | TokenScript$ r_1_1_goblin | TokenTapped$ True | TokenAttacking$ True
+SVar:AltCost:Cost$ 3 R ExileFromGrave<4/Card.Other/other cards> | ActivationZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard by paying {3}{R} and exiling four other cards from your graveyard rather than paying its mana cost.
+DeckHas:Ability$Token|Graveyard & Type$Goblin
+SVar:HasAttackEffect:TRUE
+Oracle:Haste\nWhenever Squee, Dubious Monarch attacks, create a 1/1 red Goblin creature token that's tapped and attacking.\nYou may cast Squee, Dubious Monarch from your graveyard by paying {3}{R} and exiling four other cards from your graveyard rather than paying its mana cost.
