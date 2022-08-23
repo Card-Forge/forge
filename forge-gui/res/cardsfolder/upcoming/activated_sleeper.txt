@@ -4,6 +4,6 @@ Types:Creature Phyrexian Shapeshifter
 PT:0/0
 K:Flash
 K:ETBReplacement:Copy:DBCopy:Optional
-SVar:DBCopy:DB$ Clone | Choices$ Creature.ThisTurnEnteredFrom_Battlefield | ChoiceZone$ Graveyard | AddTypes$ Phyrexian | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature card in a graveyard that was put there from the battlefield this turn, except it’s a Phyrexian in addition to its other types.
-Oracle:You may have Activated Sleeper enter the battlefield as a copy of any creature card in a graveyard that was put there from the battlefield this turn, except it’s a Phyrexian in addition to its other types.
+SVar:DBCopy:DB$ Clone | Choices$ Creature.ThisTurnEnteredFrom_Battlefield | ChoiceZone$ Graveyard | AddTypes$ Phyrexian | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature card in a graveyard that was put there from the battlefield this turn, except it's a Phyrexian in addition to its other types.
+Oracle:You may have Activated Sleeper enter the battlefield as a copy of any creature card in a graveyard that was put there from the battlefield this turn, except it's a Phyrexian in addition to its other types.
  
