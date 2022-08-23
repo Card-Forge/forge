@@ -32,6 +32,7 @@ ScryfallCode=DMC
 32 R Hazezon, Shaper of Sand @Bryan Sola
 33 U Jasmine Boreal of the Seven @Bastien L. Deharme
 34 M Jedit Ojanen, Mercenary @Ilse Gort
+36 R Ohabi Caleria @Nestor Ossandon Leal
 37 R Orca, Siege Demon @Daarken
 38 U Ramirez DePietro, Pillager @Anna Steinbauer
 39 R Ramses, Assassin Lord @Manuel Castañón
@@ -42,6 +43,7 @@ ScryfallCode=DMC
 44 M Tetsuo, Imperial Champion @Lius Lasahido
 46 U Tor Wauki the Younger @Karl Kopinski
 47 M Torsten, Founder of Benalia @Volkan Baǵa
+48 R Xira, the Golden Sting @Mila Pesic
 51 R Ayesha Tanaka, Armorer @Aurore Folny
 52 R The Ever-Changing 'Dane @Campbell White
 54 R Hazezon, Shaper of Sand @Bryan Sola
