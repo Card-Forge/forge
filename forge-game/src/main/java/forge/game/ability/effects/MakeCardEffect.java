@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Lists;
+
 import forge.StaticData;
 import forge.card.ICardFace;
 import forge.game.Game;
@@ -90,9 +92,17 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 }
                 triggerList.triggerChangesZoneAll(game, sa);
                 if (zone.equals(ZoneType.Library)) {
-                    player.shuffle(sa);
+                    player.shuffle(sa);}
                 }
+                    final StringBuilder sb = new StringBuilder();
+                    final Card host = sa.getHostCard();
+                    Card tgtCard = host;
+                    final List<String> pumpKeywords = Lists.newArrayList();
+
+                    if (sa.hasParam("Keywords")) {
+                        pumpKeywords.removeAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
+                    }
             }
         }
     }
-}
+
