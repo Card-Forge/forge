@@ -1063,6 +1063,21 @@ public class CardFactoryUtil {
             dethroneTrigger.setOverridingAbility(AbilityFactory.getAbility(abString, card));
 
             inst.addTrigger(dethroneTrigger);
+        } else if (keyword.equals("Double Team")) {
+        	
+        	final String doubleteamScript = "Mode$ Attacks | ValidCard$ Card.Self+nonToken | Secondary$ True |  TriggerZones$ Battlefield | RemoveKeyword$ Double Team |  AddStaticAbility$ ForgetDoubleTeam | TriggerDescription$(" + inst.getReminderText() + ")";
+            final String makeString = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True ";
+            final String effectString = "DB$ Effect | StaticAbilities$ ForgetDoubleTeam  | Duration$ Permanent";
+            final String forgetString = "Mode$ Continuous | Affected$ Card.Self | RemoveKeyword$ Double Team | EffectZone$ Command | AffectedZone$ Battlefield,Command,Exile,Graveyard,Library";          
+            
+            final SpellAbility makeSA = AbilityFactory.getAbility(makeString, card);
+            final Trigger doubleteamTrigger = TriggerHandler.parseTrigger(doubleteamScript, card, intrinsic);
+            doubleteamTrigger.setOverridingAbility(AbilityFactory.getAbility(makeString,card));
+            AbilitySub effectSA = (AbilitySub) AbilityFactory.getAbility(effectString, card);
+            effectSA.setSVar("ForgetDoubleTeam", forgetString);
+            makeSA.setSubAbility(effectSA);          
+            inst.addTrigger(doubleteamTrigger);
+            
         } else if (keyword.startsWith("Echo")) {
             final String[] k = keyword.split(":");
             final String cost = k[1];

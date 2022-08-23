@@ -1369,6 +1369,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean hasDoubleStrike() {
         return hasKeyword(Keyword.DOUBLE_STRIKE);
     }
+    
+    public final boolean hasDoubleTeam() {
+        return hasKeyword(Keyword.DOUBLE_TEAM);
+    }
 
     public final boolean hasSecondStrike() {
         return hasDoubleStrike() || !hasFirstStrike();
