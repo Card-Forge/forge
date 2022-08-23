@@ -1,0 +1,6 @@
+Name:Badger Token
+ManaCost:no cost
+Types:Creature Badger
+Colors:green
+PT:3/3
+Oracle:
