@@ -5,6 +5,6 @@ K:Flash
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 2/2 black Zombie creature token for each nontoken creature you controlled that died this turn.
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ b_2_2_zombie | TokenOwner$ You
-SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.nonToken+YouOwn
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.nonToken+YouCtrl
 DeckHas:Ability$Token
 Oracle:Flash\nWhen Tobias, Doomed Conqueror dies, create a 2/2 black Zombie creature token for each nontoken creature you controlled that died this turn.
