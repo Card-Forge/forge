@@ -4,9 +4,9 @@ Types:Legendary Creature Phyrexian Merfolk Wizard
 PT:1/2
 A:AB$ Draw | Cost$ T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card. If you discarded an instant or sorcery card this way, each opponent loses 1 life and you gain 1 life.
 SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$ LoseLife | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ If you discarded an instant or sorcery card this way, each opponent loses 1 life and you gain 1 life.
+SVar:DBLoseLife:DB$ LoseLife | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Play | Cost$ 2 Sac<1/CARDNAME> | SorcerySpeed$ True | Optional$ True | ValidTgts$ Instant.YouOwn+ThisTurnEntered,Sorcery.YouOwn+ThisTurnEntered | TgtZone$ Graveyard | ReplaceGraveyard$ Exile | TgtPrompt$ Select target instant or sorcery card in your graveyard | AILogic$ ReplaySpell | SpellDescription$ You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.
 DeckHas:Ability$Discard
-Oracle:{T}:Draw a card, then discard a card. If you discarded an instant or sorcery card this way, each opponent loses 1 life and you gain 1 life.\n{2},Sacrifice Vohar, Vodalian Desecrator: You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.
+Oracle:{T}: Draw a card, then discard a card. If you discarded an instant or sorcery card this way, each opponent loses 1 life and you gain 1 life.\n{2},Sacrifice Vohar, Vodalian Desecrator: You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.
