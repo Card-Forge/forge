@@ -1064,19 +1064,21 @@ public class CardFactoryUtil {
 
             inst.addTrigger(dethroneTrigger);
         } else if (keyword.equals("Double Team")) {
-        	
-        	final String doubleteamScript = "Mode$ Attacks | ValidCard$ Card.Self+nonToken | Secondary$ True |  TriggerZones$ Battlefield | RemoveKeyword$ Double Team |  AddStaticAbility$ ForgetDoubleTeam | TriggerDescription$(" + inst.getReminderText() + ")";
-            final String makeString = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True ";
-            final String effectString = "DB$ Effect | StaticAbilities$ ForgetDoubleTeam  | Duration$ Permanent";
-            final String forgetString = "Mode$ Continuous | Affected$ Card.Self | RemoveKeyword$ Double Team | EffectZone$ Command | AffectedZone$ Battlefield,Command,Exile,Graveyard,Library";          
-            
-            final SpellAbility makeSA = AbilityFactory.getAbility(makeString, card);
-            final Trigger doubleteamTrigger = TriggerHandler.parseTrigger(doubleteamScript, card, intrinsic);
-            doubleteamTrigger.setOverridingAbility(AbilityFactory.getAbility(makeString,card));
-            AbilitySub effectSA = (AbilitySub) AbilityFactory.getAbility(effectString, card);
-            effectSA.setSVar("ForgetDoubleTeam", forgetString);
-            makeSA.setSubAbility(effectSA);          
-            inst.addTrigger(doubleteamTrigger);
+        
+         	final String doubleteamScript = "Mode$ Attacks | ValidCard$ Card.Self+nonToken | TriggerZones$ Battlefield | Imprint$ True | TriggerDescription$(" + inst.getReminderText() + ")";
+        	final String makeString = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True ";
+        	final String forgetString = "DB$ Effect | Duration$ Permanent | RememberObjects$ Remembered | Keywords$ Double Team | StaticAbilities$ RemoveDoubleTeamMade";
+            final String madeforgetString ="Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | RemoveKeyword$ Double Team | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually loses Double Team";
+           /// final String SelfforgetString ="Mode$ Continuous | EffectZone$ Command | Affected$ Card.Self | RemoveKeyword$ Double Team | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually loses Double Team";
+            final Trigger trigger = TriggerHandler.parseTrigger(doubleteamScript, card, intrinsic);
+            final SpellAbility youMake = AbilityFactory.getAbility(makeString, card);
+            final AbilitySub forget = (AbilitySub) AbilityFactory.getAbility(forgetString, card);
+            forget.setSVar("RemoveDoubleTeamMade",madeforgetString);
+           /// forget.setSVar("RemoveDoubleTeamSelf",SelfforgetString);
+            youMake.setSubAbility(forget);
+            trigger.setOverridingAbility(youMake);
+            inst.addTrigger(trigger);
+
             
         } else if (keyword.startsWith("Echo")) {
             final String[] k = keyword.split(":");
