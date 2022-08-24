@@ -13,7 +13,7 @@ SVar:TrigDiscardExiled:DB$ Discard | Mode$ Defined | DefinedCards$ DelayTriggerR
 T:Mode$ ChangesZone | Origin$ Battlefield | ExcludedDestinations$ Graveyard | Static$ True | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 SVar:X:Count$CardCounters.FLAME
 SVar:HasAttackEffect:TRUE
 Oracle:Haste\nWhenever Kardum, Patron of Flames attacks, put a flame counter on it, then seek a card with mana value equal to the number of flame counters on it and exile that card face down.\nWhen Kardum dies, put all cards you own exiled with it into your hand. At the beginning of the end step of your next turn, discard those cards.
