@@ -157,7 +157,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardStack stack = allTokens.get(i);
                 final CardPanel firstPanel = stack.get(0);
                 final CardView firstCard = firstPanel.getCard();
-                final CardStateView firstState = firstCard.getCurrentState();
 
                 if (firstPanel.getCard().getCurrentState().getName().equals(state.getName())) {
                     if (!firstPanel.getAttachedPanels().isEmpty()) {
@@ -170,8 +169,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                     if (!panel.getAttachedPanels().isEmpty()
                             || !card.hasSameCounters(firstPanel.getCard())
                             || (card.isSick() != firstCard.isSick())
-                            || (state.getPower() != firstState.getPower())
-                            || (state.getToughness() != firstState.getToughness())
+                            || !card.hasSamePT(firstCard)
                             || !(card.getText().equals(firstCard.getText()))
                             || (stack.size() == tokenStackMax)) {
                         // If this token has attachments or the stack is full,
@@ -213,7 +211,6 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                 final CardStack stack = allCreatures.get(i);
                 final CardPanel firstPanel = stack.get(0);
                 final CardView firstCard = firstPanel.getCard();
-                final CardStateView firstState = firstCard.getCurrentState();
                 if (firstCard.getName().equals(card.getName())) {
                     if (!firstPanel.getAttachedPanels().isEmpty()) {
                         // Put this creature to the left of creatures with the same
@@ -225,8 +222,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
                             || card.isCloned()
                             || !card.hasSameCounters(firstCard)
                             || (card.isSick() != firstCard.isSick())
-                            || (state.getPower() != firstState.getPower())
-                            || (state.getToughness() != firstState.getToughness())
+                            || !card.hasSamePT(firstCard)
                             || (stack.size() == creatureStackMax)) {
                         // If this creature has attachments or the stack is full,
                         // put it to the right.

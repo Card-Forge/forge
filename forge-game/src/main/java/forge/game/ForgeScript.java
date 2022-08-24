@@ -59,6 +59,11 @@ public class ForgeScript {
                 return false;
             return property.startsWith("non") != colors.isMulticolor();
 
+        } else if (property.contains("AllColors")) {
+            if (property.endsWith("Source") && isColorlessSource)
+                return false;
+            return property.startsWith("non") != colors.isAllColors();
+
         } else if (property.contains("MonoColor")) { // ... Card is monocolored
             if (property.endsWith("Source") && isColorlessSource)
                 return false;

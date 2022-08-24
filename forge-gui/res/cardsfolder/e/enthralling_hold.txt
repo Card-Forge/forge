@@ -3,6 +3,6 @@ ManaCost:3 U U
 Types:Enchantment Aura
 K:Enchant creature
 S:Mode$ CantTarget | EffectZone$ Stack | ValidSource$ Spell.Self | ValidCard$ Creature.untapped | Description$ You can't choose an untapped creature as this spell's target as you cast it.
-A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Creature | AILogic$ GainControl
+A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Creature | AILogic$ GainControl | AITgts$ Creature.tapped
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | GainControl$ You | Description$ You control enchanted creature.
 Oracle:Enchant creature\nYou can't choose an untapped creature as this spell's target as you cast it.\nYou control enchanted creature.

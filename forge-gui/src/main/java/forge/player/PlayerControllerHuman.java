@@ -1786,9 +1786,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     public boolean confirmPayment(final CostPart costPart, final String question, SpellAbility sa) {
         if (GuiBase.getInterface().isLibgdxPort()) {
             CardView cardView = sa.getView().getHostCard();
-            if (cardView.getZone() == null || cardView.getZone().isHidden())
-                cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getCurrentState().getImageKey()));
-            return this.getGui().confirm(sa.getView().getHostCard(), question.replaceAll("\n", " "));
+            try {
+                if (cardView.getZone() == null || cardView.getZone().isHidden())
+                    cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getCurrentState().getImageKey()));
+            } catch (Exception e) {
+                //prevent NPE
+                cardView = sa.getView().getHostCard();
+            }
+            return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
         } else {
             final InputConfirm inp = new InputConfirm(this, question, sa);
             inp.showAndWait();
@@ -2748,9 +2753,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             getGame().getAction().invoke(() -> {
                 if (targetZone == ZoneType.Battlefield) {
                     if (!forgeCard.getName().equals(f.getName())) {
-                        forgeCard.changeToState(CardStateName.Flipped);
-                        forgeCard.changeToState(CardStateName.Transformed);
-                        forgeCard.changeToState(CardStateName.Modal);
+                        forgeCard.changeToState(forgeCard.getRules().getSplitType().getChangedStateName());
+                        if (forgeCard.getCurrentStateName().equals(CardStateName.Transformed) ||
+                                forgeCard.getCurrentStateName().equals(CardStateName.Modal)) {
+                            forgeCard.setBackSide(true);
+                        }
                     }
 
                     if (noTriggers) {

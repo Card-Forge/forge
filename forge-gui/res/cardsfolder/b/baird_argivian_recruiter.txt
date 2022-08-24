@@ -1,0 +1,9 @@
+Name:Baird, Argivian Recruiter
+ManaCost:R W
+Types:Legendary Creature Human Soldier
+PT:2/2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | IsPresent$ Creature.YouCtrl+powerGTbasePower | TriggerDescription$ At the beginning of your end step, if you control a creature with power greater than its base power, create a 1/1 white Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_soldier
+DeckHas:Ability$Token
+AI:RemoveDeck:Random
+Oracle:At the beginning of your end step, if you control a creature with power greater than its base power, create a 1/1 white Soldier creature token.

@@ -2,7 +2,12 @@ package forge.adventure.world;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Disposable;
+import forge.Forge;
+import forge.Graphics;
 import forge.adventure.scene.Scene;
 import forge.adventure.util.Serializer;
 
@@ -41,6 +46,18 @@ public class WorldSaveHeader implements java.io.Serializable, Disposable {
     }
 
     public void createPreview() {
+        TextureRegion tr = Forge.takeScreenshot();
+        Matrix4 m  = new Matrix4();
+        Graphics g = new Graphics();
+        FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false);
+        frameBuffer.begin();
+        m.setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        g.begin(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        g.setProjectionMatrix(m);
+        g.startClip();
+        g.drawImage(tr, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        g.end();
+        g.endClip();
         Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Pixmap scaled = new Pixmap(WorldSaveHeader.previewImageWidth, (int) (WorldSaveHeader.previewImageWidth / (Scene.getIntendedWidth() / (float) Scene.getIntendedHeight())), Pixmap.Format.RGBA8888);
         scaled.drawPixmap(pixmap,
@@ -50,5 +67,8 @@ public class WorldSaveHeader implements java.io.Serializable, Disposable {
         if (preview != null)
             preview.dispose();
         preview = scaled;
+        frameBuffer.end();
+        g.dispose();
+        frameBuffer.dispose();
     }
 }

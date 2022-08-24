@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 
 import java.util.function.Function;
@@ -152,6 +153,11 @@ public class Controls {
 
     public static Label newLabel(String name) {
         Label ret = new Label(name, GetSkin());
+        return ret;
+    }
+
+    public static TypingLabel newTypingLabel(String name) {
+        TypingLabel ret = new TypingLabel(name, GetSkin());
         return ret;
     }
 

@@ -1,0 +1,11 @@
+Name:Kagha, Shadow Archdruid
+ManaCost:2 B G
+Types:Legendary Creature Elf Druid
+PT:1/4
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gains deathtouch until end of turn. Mill two cards. (Put the top two cards of your library into your graveyard.)
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Deathtouch | SubAbility$ TrigMill
+SVar:TrigMill:DB$ Mill | NumCards$ 2
+S:Mode$ Continuous | Affected$ Land.YouOwn+ThisTurnEnteredFrom_Library,Permanent.YouOwn+ThisTurnEnteredFrom_Library | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | Description$ Once during each of your turns, you may play a land or cast a permanent spell from among cards in your graveyard that were put there from your library this turn.
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Mill|Graveyard
+Oracle:Whenever Kagha, Shadow Archdruid attacks, it gains deathtouch until end of turn. Mill two cards. (Put the top two cards of your library into your graveyard.)\nOnce during each of your turns, you may play a land or cast a permanent spell from among cards in your graveyard that were put there from your library this turn.
