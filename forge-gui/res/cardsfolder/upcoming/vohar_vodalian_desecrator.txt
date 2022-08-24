@@ -7,11 +7,10 @@ SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | RememberDiscarded$ True | SubAbil
 SVar:DBLoseLife:DB$ LoseLife | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | Defined$ You | LifeAmount$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ Effect | Cost$ 2 Sac<1/CARDNAME> | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | SorcerySpeed$ True | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card in your graveyard | RememberObjects$ Targeted | StaticAbilities$ MayPlay | ReplacementEffects$ ReplaceGraveyard | SubAbility$ DBCleanup | SpellDescription$ You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.
+A:AB$ Effect | Cost$ 2 Sac<1/CARDNAME> | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | SorcerySpeed$ True | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card in your graveyard | RememberObjects$ Targeted | StaticAbilities$ MayPlay | ReplacementEffects$ ReplaceGraveyard | SpellDescription$ You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may cast target instant or sorcery card from your graveyard this turn. (You still pay the spell's costs. Timing rules for the spell still apply.)
 SVar:ReplaceGraveyard:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Graveyard | ReplaceWith$ MoveExile | Description$ If that spell would be put into your graveyard, exile it instead.
 SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckNeeds:Type$Instant|Sorcery
 DeckHas:Ability$Discard
 Oracle:{T}: Draw a card, then discard a card. If you discarded an instant or sorcery card this way, each opponent loses 1 life and you gain 1 life.\n{2},Sacrifice Vohar, Vodalian Desecrator: You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.
