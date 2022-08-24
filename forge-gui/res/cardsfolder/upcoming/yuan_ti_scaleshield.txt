@@ -4,4 +4,4 @@ Types:Instant
 A:SP$ PumpAll | ValidCards$ Permanent.YouCtrl | KW$ Hexproof & Indestructible | SubAbility$ DBSeek | SpellDescription$ Permanents you control gain hexproof and indestructible until end of turn. Seek a creature card if an opponent has cast a spell with mana value 3 or less this turn.
 SVar:DBSeek:DB$ ChangeZone | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.Creature | ChangeNum$ 1 
 SVar:X:Count$ThisTurnCast_Card.cmcLE3+OppCtrl
-Oracle:Permanents you control gain hexproof and indestructible until end of turn./nSeek a creature card if an opponent has cast a spell with mana value 3 or less this turn.
+Oracle:Permanents you control gain hexproof and indestructible until end of turn.\nSeek a creature card if an opponent has cast a spell with mana value 3 or less this turn.
