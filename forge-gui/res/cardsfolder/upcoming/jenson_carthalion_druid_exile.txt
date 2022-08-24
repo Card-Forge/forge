@@ -1,0 +1,10 @@
+Name:Jenson Carthalion, Druid Exile
+ManaCost:G W
+Types:Legendary Creature Human Druid
+PT:2/2
+T:Mode$ SpellCast | ValidCard$ Card.MultiColor | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigScry | TriggerDescription$ Whenever you cast a multicolored spell, scry 1. If that spell was all colors, create a 4/4 white Angel creature token with flying and vigilance.
+SVar:TrigScry:DB$ Scry | ScryNum$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ w_4_4_angel_flying_vigilance | TokenAmount$ 1 | ConditionDefined$ TriggeredCard | ConditionPresent$ Card.AllColors
+A:AB$ Mana | Cost$ 5 T | Produced$ W U B R G | SpellDescription$ Add {W}{U}{B}{R}{G}.
+DeckHas:Ability$Token & Type$Angel
+Oracle:Whenever you cast a multicolored spell, scry 1. If that spell was all colors, create a 4/4 white Angel creature token with flying and vigilance.\n{5}, {T}: Add {W}{U}{B}{R}{G}.
