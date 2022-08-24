@@ -1,0 +1,11 @@
+Name:Elas il-Kor, Sadistic Pilgrim
+ManaCost:W B
+Types:Legendary Creature Phyrexian Kor Cleric
+PT:2/2
+K:Deathtouch
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever another creature enters the battlefield under your control, you gain 1 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever another creature you control dies, each opponent loses 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+Oracle:Deathtouch\nWhenever another creature enters the battlefield under your control, you gain 1 life.\nWhenever another creature you control dies, each opponent loses 1 life.
