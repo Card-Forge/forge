@@ -1,7 +1,8 @@
-Name:Jasmine Boreal of the Seven
-ManaCost:1 G W
-Types:Legendary Creature Human Druid
-PT:2/4
-A:AB$ Mana | Cost$ T | Produced$ G W | RestrictValid$ Spell.Creature+NoAbilities | SpellDescription$ Add {G}{W}. Spend this mana only to cast creature spells with no abilities.
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.NoAbilities+YouCtrl | ValidBlocker$ Creature.!NoAbilities | Description$ Creatures you control with no abilities can't be blocked by creatures with abilities.
-Oracle:{T}: Add {G}{W}. Spend this mana only to cast creature spells with no abilities.\nCreatures you control with no abilities can't be blocked by creatures with abilities.
+Name:Zar Ojanen, Scion of Efrava
+ManaCost:3 G W
+Types:Legendary Creature Cat Warrior
+PT:4/4
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigPutcounter | TriggerZones$ Battlefield | TriggerDescription$ Domain — Whenever CARDNAME becomes tapped, put a +1/+1 counter on each creature you control with toughness less than the number of basic land types among lands you control.
+SVar:TrigPutcounter:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+toughnessLEX | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$Domain
+Oracle:Domain — Whenever Zar Ojanen, Scion of Efrava becomes tapped, put a +1/+1 counter on each creature you control with toughness less than the number of basic land types among lands you control.
