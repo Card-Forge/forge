@@ -1,7 +1,12 @@
-Name:Jasmine Boreal of the Seven
-ManaCost:1 G W
-Types:Legendary Creature Human Druid
-PT:2/4
-A:AB$ Mana | Cost$ T | Produced$ G W | RestrictValid$ Spell.Creature+NoAbilities | SpellDescription$ Add {G}{W}. Spend this mana only to cast creature spells with no abilities.
-S:Mode$ CantBlockBy | ValidAttacker$ Creature.NoAbilities+YouCtrl | ValidBlocker$ Creature.!NoAbilities | Description$ Creatures you control with no abilities can't be blocked by creatures with abilities.
-Oracle:{T}: Add {G}{W}. Spend this mana only to cast creature spells with no abilities.\nCreatures you control with no abilities can't be blocked by creatures with abilities.
+Name:Vohar, Vodalian Desecrator
+ManaCost:U B
+Types:Legendary Creature Phyrexian Merfolk Wizard
+PT:1/2
+A:AB$ Draw | Cost$ T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card. If you discarded an instant or sorcery card this way, each opponent loses 1 life and you gain 1 life.
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ If you discarded an instant or sorcery card this way, each opponent loses 1 life and you gain 1 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Play | Cost$ 2 Sac<1/CARDNAME> | SorcerySpeed$ True | Optional$ True | ValidTgts$ Instant.YouOwn+ThisTurnEntered,Sorcery.YouOwn+ThisTurnEntered | TgtZone$ Graveyard | ReplaceGraveyard$ Exile | TgtPrompt$ Select target instant or sorcery card in your graveyard | AILogic$ ReplaySpell | SpellDescription$ You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.
+DeckHas:Ability$Discard
+Oracle:{T}:Draw a card, then discard a card. If you discarded an instant or sorcery card this way, each opponent loses 1 life and you gain 1 life.\n{2}, Sacrifice Vohar, Vodalian Desecrator: You may cast target instant or sorcery card from your graveyard this turn. If that spell would be put into your graveyard, exile it instead. Activate only as a sorcery.
