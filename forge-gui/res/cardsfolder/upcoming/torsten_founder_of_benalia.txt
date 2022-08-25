@@ -6,4 +6,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigDig:DB$ Dig | DigNum$ 7 | ChangeValid$ Creature,Land | DestinationZone$ Hand | RestRandomOrder$ True | AnyNumber$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When NICKNAME dies, create seven 1/1 white Soldier creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 7 | TokenScript$ w_1_1_soldier | TokenOwner$ You
+DeckHas:Ability$Token
 Oracle:When Torsten, Founder of Benalia enters the battlefield, reveal the top seven cards of your library. Put any number of creature and/or land cards from among them into your hand and the rest on the bottom of your library in a random order.\nWhen Torsten dies, create seven 1/1 white Soldier creature tokens.
