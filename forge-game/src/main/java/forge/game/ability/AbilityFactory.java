@@ -1,6 +1,5 @@
 /*
  * Forge: Play Magic: the Gathering.
-
  * Copyright (C) 2011  Forge Team
  *
  * This program is free software: you can redistribute it and/or modify
