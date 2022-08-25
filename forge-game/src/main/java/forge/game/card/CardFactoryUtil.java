@@ -1063,20 +1063,19 @@ public class CardFactoryUtil {
             dethroneTrigger.setOverridingAbility(AbilityFactory.getAbility(abString, card));
 
             inst.addTrigger(dethroneTrigger);
-        } else if (keyword.equals("Double Team")) {
-        
+        } else if (keyword.equals("Double Team")) {	
          	final String doubleteamScript = "Mode$ Attacks | ValidCard$ Card.Self+nonToken | TriggerZones$ Battlefield | ImprintSource$ True | TriggerDescription$(" + inst.getReminderText() + ")";
-        	final String makeString = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True ";
+        	final String makeString = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True";
         	final String forgetString = "DB$ Effect | Duration$ Permanent | RememberObjects$ Remembered | RememberObjects$ Imprinted | StaticAbilities$ RemoveDoubleTeamMade";
-            final String madeforgetString ="Mode$ Continuous | EffectZone$ Command | ValidCard$ Card.IsRemembered,Card.IsImprinted | RemoveKeyword$ Double Team | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually loses Double Team";
+            final String madeforgetString = "Mode$ Continuous | EffectZone$ Command | ValidCard$ Card.IsRemembered,Card.IsImprinted | RemoveKeyword$ Double Team | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually loses Double Team";
             final Trigger trigger = TriggerHandler.parseTrigger(doubleteamScript, card, intrinsic);
             final SpellAbility youMake = AbilityFactory.getAbility(makeString, card);
             final AbilitySub forget = (AbilitySub) AbilityFactory.getAbility(forgetString, card);
             forget.setSVar("RemoveDoubleTeamMade",madeforgetString);
             youMake.setSubAbility(forget);
             trigger.setOverridingAbility(youMake);
-            inst.addTrigger(trigger);
             
+            inst.addTrigger(trigger); 
         } else if (keyword.startsWith("Echo")) {
             final String[] k = keyword.split(":");
             final String cost = k[1];
