@@ -9,4 +9,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_bird_flying
 SVar:X:Count$Valid Creature.withDefender+YouCtrl
 DeckHints:Keyword$Defender
+DeckHas:Ability$Token
 Oracle:Defender\nWhen Wingmantle Chaplain enters the battlefield, create a 1/1 white Bird creature token with flying for each creature with defender you control.\nWhenever another creature with defender enters the battlefield under your control, create a 1/1 white Bird creature token with flying.
