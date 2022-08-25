@@ -5,5 +5,4 @@ PT:5/5
 K:Deathtouch
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature card in your graveyard.
 SVar:X:Count$TypeInYourYard.Creature
-DeckHas:Ability$Graveyard
 Oracle:This spell costs {1} less to cast for each creature card in your graveyard.\nDeathtouch
