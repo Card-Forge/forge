@@ -4,7 +4,7 @@ Types:Legendary Creature Elemental
 PT:*/*
 K:Protection:Planeswalker,Wizards:Protection from planeswalkers and Wizards
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of lands you control.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a land enters the battlefield under your control, you may create a 3/3 green Badger creature token.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a land enters the battlefield under your control, create a 3/3 green Badger creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_badger | TokenOwner$ You
 SVar:X:Count$Valid Land.YouCtrl
 DeckHas:Ability$Token & Type$Badger
