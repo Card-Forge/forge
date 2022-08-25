@@ -2753,9 +2753,11 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             getGame().getAction().invoke(() -> {
                 if (targetZone == ZoneType.Battlefield) {
                     if (!forgeCard.getName().equals(f.getName())) {
-                        forgeCard.changeToState(CardStateName.Flipped);
-                        forgeCard.changeToState(CardStateName.Transformed);
-                        forgeCard.changeToState(CardStateName.Modal);
+                        forgeCard.changeToState(forgeCard.getRules().getSplitType().getChangedStateName());
+                        if (forgeCard.getCurrentStateName().equals(CardStateName.Transformed) ||
+                                forgeCard.getCurrentStateName().equals(CardStateName.Modal)) {
+                            forgeCard.setBackSide(true);
+                        }
                     }
 
                     if (noTriggers) {

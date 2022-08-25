@@ -9,6 +9,7 @@ import forge.adventure.util.SaveFileData;
 import forge.adventure.util.SignalList;
 import forge.card.ColorSet;
 import forge.deck.Deck;
+import forge.deck.DeckProxy;
 import forge.deck.DeckgenUtil;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
@@ -122,20 +123,15 @@ public class WorldSave   {
         return currentSave;
     }
 
-    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, ColorSet startingColorIdentity, DifficultyData diff, boolean chaos, boolean constructed,   long seed) {
+    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, ColorSet startingColorIdentity, DifficultyData diff, boolean chaos, boolean constructed, boolean custom, int customDeckIndex, long seed) {
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
-        Deck starterDeck = chaos ? DeckgenUtil.getRandomOrPreconOrThemeDeck("", false, false, false) : Config.instance().starterDeck(startingColorIdentity,diff,constructed);
-
-        currentSave.player.create(name,  starterDeck, male, race, avatarIndex, chaos, diff);
+        Deck starterDeck = chaos ? DeckgenUtil.getRandomOrPreconOrThemeDeck("", false, false, false) : custom ? DeckProxy.getAllCustomStarterDecks().get(customDeckIndex).getDeck() : Config.instance().starterDeck(startingColorIdentity,diff,constructed);
+        currentSave.player.create(name,  starterDeck, male, race, avatarIndex, chaos, custom, diff);
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
         currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));
-        //after getting deck override starting color identity to match
-        //if (identity != startingColorIdentity)
-        //    currentSave.player.setColorIdentity(identity);
         currentSave.onLoadList.emit();
         return currentSave;
-        //return currentSave = ret;
     }
 
     public boolean autoSave() {
