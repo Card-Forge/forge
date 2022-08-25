@@ -1,0 +1,9 @@
+Name:Ragefire Hellkite
+ManaCost:4 R R
+Types:Creature Dragon
+PT:5/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice another creature. If you do, CARDNAME gains double strike until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | Defined$ Self | KW$ Double Strike
+DeckHas:Ability$Sacrifice
+Oracle:Flying\nWhenever Ragefire Hellkite attacks, you may sacrifice another creature. If you do, Ragefire Hellkite gains double strike until end of turn.
