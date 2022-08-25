@@ -1,0 +1,10 @@
+Name:Ulder Ravengard, Marshal
+ManaCost:1 R W
+Types:Legendary Creature Human Noble Soldier
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPumpEOT | TriggerDescription$ When CARDNAME enters the battlefield, another target nontoken creature you control gains double team until end of turn.
+SVar:TrigPumpEOT:DB$ Pump | ValidTgts$ Creature.YouCtrl+nonToken+Other | TgtPrompt$ Select another target nontoken creature | KW$ Double Team
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ Whenever CARDNAME attacks, conjure a duplicate of another target nontoken attacking creature into your hand.
+SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.attacking+Other+nonToken | TgtPrompt$ Select another target nontoken creature that is attacking | SubAbility$ DBMakeCard
+SVar:DBMakeCard:DB$ MakeCard | DefinedName$ ChosenCard | Zone$ Hand
+Oracle:When Ulder Ravengard, Marshal enters the battlefield, another target nontoken creature you control gains double team until end of turn.\nWhenever Ulder Ravengard attacks, conjure a duplicate of another target nontoken attacking creature into your hand.
