@@ -4,6 +4,6 @@ Types:Creature Angel Soldier
 PT:2/4
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.powerLE2+YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever another creature with power 2 or less enters the battlefield under your control, put two +1/+1 counters on that creature.
-SVar:TrigCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy  | RememberObjects$ Remembered | CounterType$ P1P1 | CounterNum$ 2
+SVar:TrigCounter:DB$ PutCounter | Defined$ TriggeredCardLKICopy | RememberObjects$ Remembered | CounterType$ P1P1 | CounterNum$ 2
 DeckHas:Ability$Counters
 Oracle:Flying\nWhenever another creature with power 2 or less enters the battlefield under your control, put two +1/+1 counters on that creature.
