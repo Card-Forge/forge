@@ -32,6 +32,7 @@ ScryfallCode=DMC
 32 R Hazezon, Shaper of Sand @Bryan Sola
 33 U Jasmine Boreal of the Seven @Bastien L. Deharme
 34 M Jedit Ojanen, Mercenary @Ilse Gort
+35 M The Lady of Otaria @Scott Murphy
 36 R Ohabi Caleria @Nestor Ossandon Leal
 37 R Orca, Siege Demon @Daarken
 38 U Ramirez DePietro, Pillager @Anna Steinbauer
@@ -41,6 +42,7 @@ ScryfallCode=DMC
 42 R Stangg, Echo Warrior @Randy Vargas
 43 M Sivitri, Dragon Master @Livia Prima
 44 M Tetsuo, Imperial Champion @Lius Lasahido
+45 U Tobias, Doomed Conqueror @Dmitry Burmak
 46 U Tor Wauki the Younger @Karl Kopinski
 47 M Torsten, Founder of Benalia @Volkan Baǵa
 48 R Xira, the Golden Sting @Mila Pesic
@@ -56,18 +58,148 @@ ScryfallCode=DMC
 66 M Tetsuo, Imperial Champion @Lius Lasahido
 68 U Tor Wauki the Younger @Karl Kopinski
 69 M Torsten, Founder of Benalia @Volkan Baǵa
+97 R Anafenza, Kin-Tree Spirit @Ryan Yee
+98 M The Circle of Loyalty @Bastien L. Deharme
+99 R Day of Destiny @Daren Bader
+100 U Generous Gift @Kev Walker
+101 R Hero of Precinct One @Bram Sels
+102 M Jazal Goldmane @Aaron Miller
+103 R Odric, Lunarch Marshal @Chase Stone
 104 U Path to Exile @Todd Lockwood
+105 R Teshar, Ancestor's Apostle @Even Amundsen
+106 R Unbreakable Formation @Matt Stewart
+107 R Urza's Ruinous Blast @Slawomir Maniak
+108 R Zetalpa, Primal Dawn @Chris Rallis
+109 C Echoing Truth @Greg Staples
+110 U Ambition's Cost @Zezhou Chen
+111 M Drana, Liberator of Malakir @Mike Bierek
+112 U Hero's Downfall @Chris Rallis
+113 R Josu Vess, Lich Knight @Tyler Jacobson
+114 R Kothophed, Soul Hoarder @Jakub Kasper
+115 C Night's Whisper @John Severin Brassell
+116 R Painful Truths @Winona Nelson
+117 C Read the Bones @Lars Grant-West
+118 R Alesha, Who Smiles at Death @Anastasia Ovchinnikova
+119 R Ashling the Pilgrim @Wayne Reynolds
+120 R Captain Lannery Storm @Chris Rallis
+121 R Etali, Primal Storm @Raymond Swanland
+122 C Faithless Looting @Karl Kopinski
+123 R Kari Zev, Skyship Raider @Brad Rigney
+124 R Krenko, Tin Street Kingpin @Mark Behm
+125 R Neheb, Dreadhorde Champion @Igor Kieryluk
+126 R Radiant Flames @Slawomir Maniak
 127 C Thrill of Possibility @Izzy
+128 C Abundant Growth @Vincent Proce
+129 U Beast Within @Jesper Ejsing
+130 U Cultivate @Anthony Palumbo
+131 C Explore @John Avon
+132 U Explosive Vegetation @John Avon
+133 C Farseek @Martina Pilcerova
+134 C Kodama's Reach @Sam Burley
+135 U Migration Path @Grzegorz Rutkowski
+136 U Path to the World Tree @Daniel Ljunggren
+137 C Search for Tomorrow @Greg Staples
+138 U Abzan Charm @Mathias Kollros
+139 R Adriana, Captain of the Guard @Chris Rallis
+140 R Archelos, Lagoon Mystic @Dan Scott
+141 U Arvad the Cursed @Lius Lasahido
+142 R Atla Palani, Nest Tender @Ekaterina Burmak
 143 R Baleful Strix @Nils Hamm
+144 R Bedevil @Seb McKinnon
+145 R Bell Borca, Spectral Sergeant @Mila Pesic
+146 M Chromanticore @Min Yum
+147 C Coiling Oracle @Mark Zug
+148 R Duneblast @Ryan Alexander Lee
 149 R Faeburrow Elder @Raoul Vitale
+150 U Fusion Elemental @Michael Komarck
+151 U Garna, the Bloodflame @Winona Nelson
+152 R Glint-Eye Nephilim @Mark Zug
+153 C Growth Spiral @Seb McKinnon
+155 R Kaya's Wrath @Victor Adame Minguez
+156 R Knight of New Alara @Chris Rahn
+157 R Lavalanche @Steve Argyle
+158 M Maelstrom Archangel @Cyril Van Der Haegen
 159 M Maelstrom Nexus @Steven Belledin
+160 R Merciless Eviction @Richard Wright
+161 U Mortify @Anthony Palumbo
+162 U Naya Charm @Jesper Ejsing
 163 M Nethroi, Apex of Death @Slawomir Maniak
 164 M O-Kagachi, Vengeful Kami @Daarken
+165 R Primevals' Glorious Rebirth @Yigit Koroglu
+166 M Rienne, Angel of Rebirth @Kieran Yanner
+167 R Selvala, Explorer Returned @Tyler Jacobson
+168 U Sultai Charm @Mathias Kollros
 169 M Surrak Dragonclaw @Jaime Jones
+170 U Sylvan Reclamation @Seb McKinnon
+171 R Tajic, Blade of the Legion @James Ryman
+172 C Terminate @DiTerlizzi
+173 R Time Wipe @Svetlin Velinov
+174 U Wear // Tear @Ryan Pancoast
+175 M Xyris, the Writhing Storm @Filip Burburan
+176 M Zaxara, the Exemplary @Simon Dominic
+177 C Arcane Signet @Dan Scott
+178 R Blackblade Reforged @Chris Rahn
+179 U Bontu's Monument @Jonas De Ro
+180 R Coalition Relic @Donato Giancola
+181 C Commander's Sphere @Ryan Alexander Lee
+182 U Fellwar Stone @John Avon
+183 U Hazoret's Monument @Richard Wright
+184 U Hedron Archive @Craig J Spearing
+185 R Heroes' Podium @Willian Murai
+186 U Hero's Blade @Aaron Miller
+187 U Honor-Worn Shaku @Tony Szczudlo
+188 U Oketra's Monument @Christine Choi
+189 C Prophetic Prism @John Avon
+190 U Sol Ring @Mike Bierek
+191 R Solemn Simulacrum @Donato Giancola
+192 R Sword of the Chosen @Adam Rex
+193 U Tenza, Godo's Maul @Paolo Parente
+194 U Transguild Courier @John Avon
+195 R Traxos, Scourge of Kroog @Lius Lasahido
+196 U Arcane Sanctum @Anthony Francisco
 197 U Bad River @Nils Hamm
+198 R Battlefield Forge @Darrell Riche
+199 C Bojuka Bog @Howard Lyon
+200 U Boros Garrison @John Avon
+201 R Canopy Vista @Adam Paquette
 202 R Cascading Cataracts @Paul Scott Canavan
+203 R Cinder Glade @Adam Paquette
+204 C Command Tower @Evan Shipard
+205 U Crumbling Necropolis @Volkan Baǵa
 206 R Crystal Quarry @Alan Pollack
+207 R Dragonskull Summit @Alayna Danner
+208 C Evolving Wilds @Steven Belledin
+209 R Exotic Orchard @Steven Belledin
+211 R Foreboding Ruins @Adam Paquette
+212 U Frontier Bivouac @Titus Lunter
+213 R Geier Reach Sanitarium @Cliff Childs
+214 U Grasslands @John Avon
+215 U Jungle Shrine @Wayne Reynolds
+216 U Krosan Verge @Ruxing Gao
+217 R Mikokoro, Center of the Sea @John Avon
+218 R Mobilized District @Jedd Chevrier
+219 U Mountain Valley @Kari Johnson
 220 R Murmuring Bosk @John Avon
+221 U Mystic Monastery @Florian de Gesincourt
+222 U Nomad Outpost @Kamila Szutenberg
+223 U Opulent Palace @Adam Paquette
+224 U Orzhov Basilica @John Avon
+225 R Prairie Stream @Adam Paquette
+226 U Rakdos Carnarium @John Avon
+227 U Reliquary Tower @Jesper Ejsing
+228 U Rocky Tar Pit @Jeff Miracola
+229 U Sandsteppe Citadel @Sam Burley
+230 U Savage Lands @Vance Kovacs
+231 U Seaside Citadel @Volkan Baǵa
+232 R Shivan Gorge @John Matson
+233 R Shizo, Death's Storehouse @John Matson
+234 R Smoldering Marsh @Adam Paquette
+235 R Sunken Hollow @Adam Paquette
+236 R Temple of Malice @Jonas De Ro
+237 R Temple of Silence @Adam Paquette
+238 R Temple of Triumph @Piotr Dura
+239 C Terramorphic Expanse @Dan Scott
+240 R Tyrite Sanctum @Volkan Baǵa
 
 [tokens]
 rgw_1_1_sand_warrior
