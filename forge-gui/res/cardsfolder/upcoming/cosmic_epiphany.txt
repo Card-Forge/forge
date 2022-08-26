@@ -3,5 +3,6 @@ ManaCost:4 U U
 Types:Sorcery
 A:SP$ Draw | NumCards$ X | SpellDescription$ Draw cards equal to the number of instant and sorcery cards in your graveyard.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
-DeckNeeds:Type$Instant|Sorcery & Ability$Graveyard
+DeckNeeds:Type$Instant|Sorcery
+DeckHas:Ability$Graveyard
 Oracle:Draw cards equal to the number of instant and sorcery cards in your graveyard.
