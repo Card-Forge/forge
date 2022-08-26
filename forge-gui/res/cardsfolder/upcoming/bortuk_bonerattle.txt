@@ -1,0 +1,9 @@
+Name:Bortuk Bonerattle
+ManaCost:4 B G
+Types:Legendary Creature Troll Shaman
+PT:4/4
+T:Mode$ ChangesZone | ValidCard$ Card.wasCastByYou+Self | Destination$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Domain — When CARDNAME enters the battlefield, if you cast it, choose target creature card in your graveyard. Return that card to the battlefield if its mana value is less than or equal to the number of basic land types among lands you control. Otherwise, put it into your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.YouOwn | Origin$ Graveyard | Destination$ Battlefield | ConditionDefined$ Targeted | ConditionPresent$ Card.cmcLEX | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Targeted | Origin$ Graveyard | Destination$ Hand | ConditionDefined$ Targeted | ConditionPresent$ Card.cmcGTX
+SVar:X:Count$Domain
+Oracle:Domain — When Bortuk Bonerattle enters the battlefield, if you cast it, choose target creature card in your graveyard. Return that card to the battlefield if its mana value is less than or equal to the number of basic land types among lands you control. Otherwise, put it into your hand.
