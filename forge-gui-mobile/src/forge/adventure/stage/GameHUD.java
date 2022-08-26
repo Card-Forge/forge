@@ -19,8 +19,10 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.scene.DeckSelectScene;
+import forge.adventure.scene.InventoryScene;
+import forge.adventure.scene.PlayerStatisticScene;
 import forge.adventure.scene.Scene;
-import forge.adventure.scene.SceneType;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
@@ -143,7 +145,7 @@ public class GameHUD extends Stage {
     }
 
     private void statistic() {
-        Forge.switchScene(SceneType.PlayerStatisticScene.instance);
+        Forge.switchScene(PlayerStatisticScene.instance());
     }
 
     public static GameHUD getInstance() {
@@ -274,12 +276,12 @@ public class GameHUD extends Stage {
     }
 
     private void openDeck() {
-        Forge.switchScene(SceneType.DeckSelectScene.instance);
+        Forge.switchScene(DeckSelectScene.instance());
     }
 
     private void openInventory() {
         WorldSave.getCurrentSave().header.createPreview();
-        Forge.switchScene(SceneType.InventoryScene.instance);
+        Forge.switchScene(InventoryScene.instance());
     }
     private void menu() {
         gameStage.openMenu();

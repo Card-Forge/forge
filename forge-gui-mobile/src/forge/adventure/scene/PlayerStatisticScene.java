@@ -35,9 +35,56 @@ public class PlayerStatisticScene extends UIScene {
     private Table enemiesGroup;
     Label blessingScroll;
 
-    public PlayerStatisticScene() {
+    private PlayerStatisticScene() {
         super(Forge.isLandscapeMode() ? "ui/statistic.json" : "ui/statistic_portrait.json");
+
+
+        enemiesGroup = new Table(Controls.GetSkin());
+        enemiesGroup.row();
+        blessingScroll = Controls.newLabel("");
+        blessingScroll.setStyle(new Label.LabelStyle(Controls.getBitmapFont("default"), Color.BLACK));
+        blessingScroll.setAlignment(Align.topLeft);
+        blessingScroll.setWrap(true);
+        ui.onButtonPress("return", new Runnable() {
+            @Override
+            public void run() {
+                PlayerStatisticScene.this.back();
+            }
+        });
+
+        avatar = ui.findActor("avatar");
+        avatarBorder = ui.findActor("avatarBorder");
+        playerName = ui.findActor("playerName");
+        life = ui.findActor("lifePoints");
+        money = ui.findActor("money");
+        lifeIcon = ui.findActor("lifeIcon");
+        goldIcon = ui.findActor("goldIcon");
+        wins = ui.findActor("wins");
+        colorFrame = ui.findActor("colorFrame");
+        wins.setText(Forge.getLocalizer().getMessage("lblWinProper")+":");
+        totalWins = ui.findActor("totalWins");
+        loss = ui.findActor("loss");
+        loss.setText(Forge.getLocalizer().getMessage("lblLossProper")+":");
+        totalLoss = ui.findActor("totalLoss");
+        winloss = ui.findActor("winloss");
+        winloss.setText(Forge.getLocalizer().getMessage("lblWinProper")+"/"+Forge.getLocalizer().getMessage("lblLossProper"));
+        lossWinRatio = ui.findActor("lossWinRatio");
+        back = ui.findActor("return");
+        back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
+        ScrollPane scrollPane = ui.findActor("enemies");
+        scrollPane.setActor(enemiesGroup);
+        ScrollPane blessing = ui.findActor("blessingInfo");
+        blessing.setActor(blessingScroll);
     }
+
+    private static PlayerStatisticScene object;
+
+    public static PlayerStatisticScene instance() {
+        if(object==null)
+            object=new PlayerStatisticScene();
+        return object;
+    }
+
 
 
     @Override
@@ -146,47 +193,6 @@ public class PlayerStatisticScene extends UIScene {
 
     }
 
-    @Override
-    public void resLoaded() {
-        super.resLoaded();
-        enemiesGroup = new Table(Controls.GetSkin());
-        enemiesGroup.row();
-        blessingScroll = Controls.newLabel("");
-        blessingScroll.setStyle(new Label.LabelStyle(Controls.getBitmapFont("default"), Color.BLACK));
-        blessingScroll.setAlignment(Align.topLeft);
-        blessingScroll.setWrap(true);
-        ui.onButtonPress("return", new Runnable() {
-            @Override
-            public void run() {
-                PlayerStatisticScene.this.back();
-            }
-        });
-
-        avatar = ui.findActor("avatar");
-        avatarBorder = ui.findActor("avatarBorder");
-        playerName = ui.findActor("playerName");
-        life = ui.findActor("lifePoints");
-        money = ui.findActor("money");
-        lifeIcon = ui.findActor("lifeIcon");
-        goldIcon = ui.findActor("goldIcon");
-        wins = ui.findActor("wins");
-        colorFrame = ui.findActor("colorFrame");
-        wins.setText(Forge.getLocalizer().getMessage("lblWinProper")+":");
-        totalWins = ui.findActor("totalWins");
-        loss = ui.findActor("loss");
-        loss.setText(Forge.getLocalizer().getMessage("lblLossProper")+":");
-        totalLoss = ui.findActor("totalLoss");
-        winloss = ui.findActor("winloss");
-        winloss.setText(Forge.getLocalizer().getMessage("lblWinProper")+"/"+Forge.getLocalizer().getMessage("lblLossProper"));
-        lossWinRatio = ui.findActor("lossWinRatio");
-        back = ui.findActor("return");
-        back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
-        ScrollPane scrollPane = ui.findActor("enemies");
-        scrollPane.setActor(enemiesGroup);
-        ScrollPane blessing = ui.findActor("blessingInfo");
-        blessing.setActor(blessingScroll);
-
-    }
 
     @Override
     public void create() {

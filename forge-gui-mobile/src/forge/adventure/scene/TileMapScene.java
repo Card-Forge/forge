@@ -25,9 +25,25 @@ public class TileMapScene extends HudScene {
     private boolean autoheal = false;
     private float cameraWidth = 0f, cameraHeight = 0f;
 
-    public TileMapScene() {
+    private TileMapScene() {
         super(MapStage.getInstance());
         tiledMapRenderer = new PointOfInterestMapRenderer((MapStage) stage);
+
+
+        //set initial camera width and height
+        if (cameraWidth == 0f)
+            cameraWidth = stage.getCamera().viewportWidth;
+        if (cameraHeight == 0f)
+            cameraHeight = stage.getCamera().viewportHeight;
+        MapStage.getInstance().setDialogStage(hud);
+    }
+
+    private static TileMapScene object;
+
+    public static TileMapScene instance() {
+        if(object==null)
+            object=new TileMapScene();
+        return object;
     }
 
     public MapStage currentMap() {
@@ -50,7 +66,8 @@ public class TileMapScene extends HudScene {
         }
         stage.act(Gdx.graphics.getDeltaTime());
         hud.act(Gdx.graphics.getDeltaTime());
-        if (autoheal) { //todo add simple bg animation or effect
+        if (autoheal) { //todo add better effect
+            stage.GetPlayer().playEffect("particle_effects/Particle Park Hallucinogen.p",2);
             SoundSystem.instance.play(SoundEffectType.Enchantment, false);
             autoheal = false;
         }
@@ -73,17 +90,6 @@ public class TileMapScene extends HudScene {
         hud.draw();
     }
 
-    @Override
-    public void resLoaded() {
-        MapStage.getInstance().resLoaded();
-        //set initial camera width and height
-        if (cameraWidth == 0f)
-            cameraWidth = stage.getCamera().viewportWidth;
-        if (cameraHeight == 0f)
-            cameraHeight = stage.getCamera().viewportHeight;
-        MapStage.getInstance().setDialogStage(hud);
-        super.resLoaded();
-    }
 
     @Override
     public void enter() {

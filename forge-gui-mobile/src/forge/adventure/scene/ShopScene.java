@@ -8,10 +8,17 @@ import forge.screens.FScreen;
  * scene class that contains the Deck editor
  */
 public class ShopScene extends ForgeScene {
+    private static ShopScene object;
+
+    public static ShopScene instance() {
+        if(object==null)
+            object=new ShopScene();
+        return object;
+    }
 
     AdventureDeckEditor screen;
 
-    public ShopScene() {
+    private ShopScene() {
 
     }
 

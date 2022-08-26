@@ -2,7 +2,7 @@
   "width": 480,
   "height": 270,
   "yDown": true,
-  "elements": [       
+  "elements": [      
     {
       "type": "Image",
       "name": "market_background",   
@@ -11,29 +11,39 @@
       "height": 270
     },
     {
-      "name": "cards",
+	  "type":"Scroll",
+      "name": "arena",
       "x": 5,
       "y": 5,
-      "width": 405,
-      "height": 265
+      "width": 470,
+      "height": 235
     },
     {
       "type": "TextButton",
       "name": "done",
-      "text": "Take all",
+      "text": "Back",
       "width": 48,
-      "height": 30,
-      "x": 420,
-      "y": 120
+      "height": 20,
+      "x": 5,
+      "y": 245
     }  ,
     {
       "type": "Label",
       "name": "gold",
       "text": "$",
       "width": 48,
-      "height": 30,
-      "x": 420,
-      "y": 160
+      "height": 20,
+      "x": 380,
+      "y": 245
+    },
+    {
+      "type": "TextButton",
+      "name": "start",
+      "text": "Start",
+      "width": 48,
+      "height": 20,
+      "x": 430,
+      "y": 245
     }
   ]
 }

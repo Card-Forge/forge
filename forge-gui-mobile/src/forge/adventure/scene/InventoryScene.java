@@ -34,39 +34,9 @@ public class InventoryScene  extends UIScene {
     Button deleteButton;
     Texture equipOverlay;
     int columns=0;
-    public InventoryScene() {
+    public InventoryScene()
+    {
         super(Forge.isLandscapeMode() ? "ui/inventory.json" : "ui/inventory_portrait.json");
-    }
-
-    public void done() {
-        GameHUD.getInstance().getTouchpad().setVisible(false);
-        Forge.switchToLast();
-    }
-
-    public void delete() {
-
-        ItemData data = ItemData.getItem(itemLocation.get(selected));
-        if(data != null) {
-            Current.player().removeItem(data.name);
-        }
-        updateInventory();
-
-    }
-    public void equip() {
-        if(selected == null) return;
-        ItemData data = ItemData.getItem(itemLocation.get(selected));
-        Current.player().equip(data);
-        updateInventory();
-    }
-
-    @Override
-    public void act(float delta) {
-        stage.act(delta);
-    }
-
-    @Override
-    public void resLoaded() {
-        super.resLoaded();
         equipOverlay = new Texture(Config.instance().getFile(Paths.ITEMS_EQUIP));
         ui.onButtonPress("return", () -> done());
         leave = ui.findActor("return");
@@ -142,9 +112,9 @@ public class InventoryScene  extends UIScene {
         {
             protected void result(Object object)
             {
-                 if(object!=null&&object.equals(true))
-                     delete();
-                 confirm.hide();
+                if(object!=null&&object.equals(true))
+                    delete();
+                confirm.hide();
             };
         };
 
@@ -157,6 +127,42 @@ public class InventoryScene  extends UIScene {
         //makes confirm dialog hidden immediately when you open inventory first time..
         confirm.getColor().a = 0;
     }
+
+    private static InventoryScene object;
+
+    public static InventoryScene instance() {
+        if(object==null)
+            object=new InventoryScene();
+        return object;
+    }
+
+
+    public void done() {
+        GameHUD.getInstance().getTouchpad().setVisible(false);
+        Forge.switchToLast();
+    }
+
+    public void delete() {
+
+        ItemData data = ItemData.getItem(itemLocation.get(selected));
+        if(data != null) {
+            Current.player().removeItem(data.name);
+        }
+        updateInventory();
+
+    }
+    public void equip() {
+        if(selected == null) return;
+        ItemData data = ItemData.getItem(itemLocation.get(selected));
+        Current.player().equip(data);
+        updateInventory();
+    }
+
+    @Override
+    public void act(float delta) {
+        stage.act(delta);
+    }
+
 
     private void use() {
         if(selected==null)return;

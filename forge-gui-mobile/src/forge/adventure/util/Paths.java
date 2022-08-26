@@ -16,4 +16,5 @@ public class Paths {
     public static final String ITEMS_ATLAS = "sprites/items.atlas";
     public static final String MANA_ATLAS = "sprites/pixelmana.atlas";
     public static final String COLOR_FRAME_ATLAS = "ui/color_frames.atlas";
+    public static final String ARENA_ATLAS = "ui/arena.atlas";
 }

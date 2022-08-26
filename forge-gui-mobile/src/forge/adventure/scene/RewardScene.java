@@ -25,6 +25,15 @@ import forge.sound.SoundSystem;
 public class RewardScene extends UIScene {
     private TextButton doneButton;
     private Label goldLabel;
+
+    private static RewardScene object;
+
+    public static RewardScene instance() {
+        if(object==null)
+            object=new RewardScene();
+        return object;
+    }
+
     public enum Type {
         Shop,
         Loot
@@ -36,8 +45,13 @@ public class RewardScene extends UIScene {
     static public final float CARD_HEIGHT = 400f;
     static public final float CARD_WIDTH_TO_HEIGHT = CARD_WIDTH / CARD_HEIGHT;
 
-    public RewardScene() {
+    private RewardScene() {
+
         super(Forge.isLandscapeMode() ? "ui/items.json" : "ui/items_portrait.json");
+
+        goldLabel=ui.findActor("gold");
+        ui.onButtonPress("done", () -> RewardScene.this.done());
+        doneButton = ui.findActor("done");
     }
 
     boolean doneClicked = false;
@@ -124,13 +138,6 @@ public class RewardScene extends UIScene {
         }
     }
 
-    @Override
-    public void resLoaded() {
-        super.resLoaded();
-            goldLabel=ui.findActor("gold");
-            ui.onButtonPress("done", () -> RewardScene.this.done());
-            doneButton = ui.findActor("done");
-    }
 
     @Override
     public boolean keyPressed(int keycode) {

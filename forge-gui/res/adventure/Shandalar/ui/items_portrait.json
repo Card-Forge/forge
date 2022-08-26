@@ -5,12 +5,6 @@
   "elements": [
     {
       "type": "Image",
-      "name": "lastScreen",
-      "width": 270,
-      "height": 480
-    },      
-    {
-      "type": "Image",
       "name": "market_background",   
       "image": "ui/market_portrait.png",
       "width": 270,

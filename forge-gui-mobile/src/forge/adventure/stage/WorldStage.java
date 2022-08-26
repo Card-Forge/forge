@@ -113,12 +113,12 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     startPause(0.8f, () -> {
                         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
                         SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
-                        DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
+                        DuelScene duelScene =  DuelScene.instance();
                         FThreads.invokeInEdtNowOrLater(() -> {
                             Forge.setTransitionScreen(new TransitionScreen(() -> {
                                 duelScene.initDuels(player, mob);
                                 Forge.clearTransitionScreen();
-                                startPause(0.3f, () -> Forge.switchScene(SceneType.DuelScene.instance));
+                                startPause(0.3f, () -> Forge.switchScene(DuelScene.instance()));
                             }, Forge.takeScreenshot(), true, false));
                             currentMob = mob;
                             WorldSave.getCurrentSave().autoSave();
@@ -154,10 +154,10 @@ public class WorldStage extends GameStage implements SaveFileContent {
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
             startPause(0.5f, () -> {
-                ((RewardScene) SceneType.RewardScene.instance).loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
+                RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
                 WorldStage.this.removeEnemy(currentMob);
                 currentMob = null;
-                Forge.switchScene(SceneType.RewardScene.instance);
+                Forge.switchScene(RewardScene.instance());
             });
         } else {
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
@@ -180,8 +180,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     if (point == collidingPoint) {
                         continue;
                     }
-                    ((TileMapScene) SceneType.TileMapScene.instance).load(point.getPointOfInterest());
-                    Forge.switchScene(SceneType.TileMapScene.instance);
+                     TileMapScene.instance().load(point.getPointOfInterest());
+                    Forge.switchScene(TileMapScene.instance());
                 } else {
                     if (point == collidingPoint) {
                         collidingPoint = null;

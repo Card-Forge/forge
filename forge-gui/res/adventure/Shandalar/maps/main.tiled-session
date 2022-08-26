@@ -7,9 +7,9 @@
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "map/main_story",
-        "map",
+        "obj",
         "tileset",
-        "obj"
+        "map"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -2125,7 +2125,7 @@
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 240,
-                "y": 912
+                "y": 911.9999999999999
             }
         },
         "map/main_story/forest_capital.tmx": {
@@ -2141,7 +2141,7 @@
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 232,
-                "y": 239.66666666666666
+                "y": 244.33333333333331
             }
         },
         "map/main_story/island_capital.tmx": {
@@ -2188,8 +2188,8 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 840.6666666666667,
-                "y": 323.6666666666667
+                "x": 240,
+                "y": 240
             }
         },
         "map/main_story/swamp_capital.tmx": {
@@ -2220,8 +2220,8 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 228.75,
-                "y": 304.5
+                "x": 430,
+                "y": 389.25
             }
         },
         "map/maze_1.tmx": {

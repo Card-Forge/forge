@@ -57,6 +57,18 @@ StrangeKey
 WhiteKey
   xy: 272, 992
   size: 16, 16
+SteelArmor
+  xy: 176, 64
+  size: 16, 16     
+SteelShield
+  xy: 272, 208
+  size: 16, 16
+SteelBoots
+  xy: 128, 128
+  size: 16, 16
+SteelSword
+  xy: 272, 752
+  size: 16, 16
 IronArmor
   xy: 224, 0
   size: 16, 16     
@@ -66,8 +78,8 @@ IronShield
 IronBoots
   xy: 48, 160
   size: 16, 16
-SteelSword
-  xy: 208, 656
+BronzeSword
+  xy: 256, 720
   size: 16, 16
 SteelAxt
   xy: 160, 272
@@ -86,14 +98,17 @@ Goose
   size: 16, 16
 SpellBook
   xy: 144, 688
-  size: 16, 16  
-SteelShield
+  size: 16, 16       
+Nine-RingedBo
+  xy: 272, 608
+  size: 16, 16   
+MithrilShield
   xy: 224, 176
-  size: 16, 16    
-SteelArmor
+  size: 16, 16
+MithrilArmor
   xy: 224, 64
   size: 16, 16       
-SteelBoots
+MithrilBoots
   xy: 96, 176
   size: 16, 16      
 AladdinsRing

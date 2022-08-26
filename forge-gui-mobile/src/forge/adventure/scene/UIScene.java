@@ -17,14 +17,23 @@ import forge.adventure.util.UIActor;
  * Base class for an GUI scene where the elements are loaded from a json file
  */
 public class UIScene extends Scene {
+
     protected UIActor ui;
     Stage stage;
 
     String uiFile;
 
-    public UIScene(String uiFilePath) {
+    protected UIScene(String uiFilePath) {
+        stage = new Stage(new ScalingViewport(Scaling.stretch, getIntendedWidth(), getIntendedHeight())) {
 
-        uiFile = uiFilePath;
+            @Override
+            public boolean keyUp(int keycode) {
+                return keyPressed(keycode);
+            }
+        };
+        ui = new UIActor(Config.instance().getFile(uiFile=uiFilePath));
+        screenImage = ui.findActor("lastScreen");
+        stage.addActor(ui);
     }
 
     @Override
@@ -53,19 +62,6 @@ public class UIScene extends Scene {
         return true;
     }
 
-    @Override
-    public void resLoaded() {
-            stage = new Stage(new ScalingViewport(Scaling.stretch, getIntendedWidth(), getIntendedHeight())) {
-
-                @Override
-                public boolean keyUp(int keycode) {
-                    return keyPressed(keycode);
-                }
-            };
-            ui = new UIActor(Config.instance().getFile(uiFile));
-            screenImage = ui.findActor("lastScreen");
-            stage.addActor(ui);
-    }
 
     Image screenImage;
     TextureRegion backgroundTexture;

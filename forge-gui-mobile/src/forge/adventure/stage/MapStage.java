@@ -2,7 +2,6 @@ package forge.adventure.stage;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -32,9 +31,7 @@ import forge.Forge;
 import forge.adventure.character.*;
 import forge.adventure.data.*;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
-import forge.adventure.scene.DuelScene;
-import forge.adventure.scene.RewardScene;
-import forge.adventure.scene.SceneType;
+import forge.adventure.scene.*;
 import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.card.ColorSet;
@@ -120,13 +117,14 @@ public class MapStage extends GameStage {
         return changes;
     }
 
+    private MapStage()
+    {
+        dialog = Controls.newDialog("");
+    }
     public static MapStage getInstance() {
         return instance == null ? instance = new MapStage() : instance;
     }
 
-    public void resLoaded() {
-        dialog = Controls.newDialog("");
-    }
 
     public void addMapActor(MapObject obj, MapActor newActor) {
         newActor.setWidth(Float.parseFloat(obj.getProperties().get("width").toString()));
@@ -494,10 +492,18 @@ public class MapStage extends GameStage {
                         //TODO: Ability to move them (using a sequence such as "UULU" for up, up, left, up).
                         break;
                     case "inn":
-                        addMapActor(obj, new OnCollide(() -> Forge.switchScene(SceneType.InnScene.instance)));
+                        addMapActor(obj, new OnCollide(() -> Forge.switchScene(InnScene.instance())));
                         break;
                     case "spellsmith":
-                        addMapActor(obj, new OnCollide(() -> Forge.switchScene(SceneType.SpellSmithScene.instance)));
+                        addMapActor(obj, new OnCollide(() -> Forge.switchScene(SpellSmithScene.instance())));
+                        break;
+                    case "arena":
+
+                        addMapActor(obj, new OnCollide(() -> {
+                            ArenaData arenaData = JSONStringLoader.parse(ArenaData.class, prop.get("arena").toString(), "");
+                            ArenaScene.instance().loadArenaData(arenaData,WorldSave.getCurrentSave().getWorld().getRandom().nextLong());
+                                Forge.switchScene(ArenaScene.instance());
+                        }));
                         break;
                     case "exit":
                         addMapActor(obj, new OnCollide(() -> MapStage.this.exit()));
@@ -559,7 +565,7 @@ public class MapStage extends GameStage {
         isLoadingMatch = false;
         effect = null; //Reset dungeon effects.
         clearIsInMap();
-        Forge.switchScene(SceneType.GameScene.instance);
+        Forge.switchScene(GameScene.instance());
         return true;
     }
 
@@ -617,8 +623,8 @@ public class MapStage extends GameStage {
 
     protected void getReward() {
         isLoadingMatch = false;
-        ((RewardScene) SceneType.RewardScene.instance).loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
-        Forge.switchScene(SceneType.RewardScene.instance);
+         RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
+        Forge.switchScene(RewardScene.instance());
         if (currentMob.defeatDialog == null) {
             currentMob.remove();
             actors.removeValue(currentMob, true);
@@ -663,11 +669,11 @@ public class MapStage extends GameStage {
                     Gdx.input.vibrate(50);
                     startPause(0.1f, () -> { //Switch to item pickup scene.
                         RewardSprite RS = (RewardSprite) actor;
-                        ((RewardScene) SceneType.RewardScene.instance).loadRewards(RS.getRewards(), RewardScene.Type.Loot, null);
+                         RewardScene.instance().loadRewards(RS.getRewards(), RewardScene.Type.Loot, null);
                         RS.remove();
                         actors.removeValue(RS, true);
                         changes.deleteObject(RS.getId());
-                        Forge.switchScene(SceneType.RewardScene.instance);
+                        Forge.switchScene(RewardScene.instance());
                     });
                     break;
                 }
@@ -685,7 +691,7 @@ public class MapStage extends GameStage {
         startPause(0.8f, () -> {
             Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
             SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
-            DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
+            DuelScene duelScene =  DuelScene.instance();
             FThreads.invokeInEdtNowOrLater(() -> {
                 if (!isLoadingMatch) {
                     isLoadingMatch = true;
@@ -694,7 +700,7 @@ public class MapStage extends GameStage {
                         Forge.clearTransitionScreen();
                         startPause(0.3f, () -> {
                             if (isInMap && effect != null) duelScene.setDungeonEffect(effect);
-                            Forge.switchScene(SceneType.DuelScene.instance);
+                            Forge.switchScene(DuelScene.instance());
                         });
                     }, Forge.takeScreenshot(), true, false));
                 }

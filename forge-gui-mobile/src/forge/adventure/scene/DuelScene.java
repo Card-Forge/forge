@@ -46,6 +46,13 @@ import java.util.*;
  * Forge screen scene that contains the duel screen
  */
 public class DuelScene extends ForgeScene {
+    private static DuelScene object;
+
+    public static DuelScene instance() {
+        if(object==null)
+            object=new DuelScene();
+        return object;
+    }
     //GameLobby lobby;
     HostedMatch hostedMatch;
     EnemySprite enemy;
@@ -59,8 +66,9 @@ public class DuelScene extends ForgeScene {
     List<IPaperCard> AIExtras = new ArrayList<>();
 
 
-    public DuelScene() {
+    private DuelScene() {
     }
+
 
     @Override
     public void dispose() {

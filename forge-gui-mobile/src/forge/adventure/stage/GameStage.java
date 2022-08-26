@@ -2,13 +2,11 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import forge.Forge;
@@ -17,15 +15,11 @@ import forge.adventure.character.PlayerSprite;
 import forge.adventure.data.PointOfInterestData;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.Scene;
-import forge.adventure.scene.SceneType;
+import forge.adventure.scene.StartScene;
 import forge.adventure.scene.TileMapScene;
-import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
 import forge.util.MyRandom;
-import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.HashMap;
 
 /**
  * Base class to render a player sprite on a map
@@ -177,7 +171,7 @@ public abstract class GameStage extends Stage {
         }
         if (keycode == Input.Keys.F5)//todo config
         {
-            if (!((TileMapScene) SceneType.TileMapScene.instance).currentMap().isInMap()) {
+            if (!TileMapScene.instance().currentMap().isInMap()) {
                 GetPlayer().storePos();
                 WorldSave.getCurrentSave().header.createPreview();
                 WorldSave.getCurrentSave().quickSave();
@@ -186,7 +180,7 @@ public abstract class GameStage extends Stage {
         }
         if (keycode == Input.Keys.F8)//todo config
         {
-            if (!((TileMapScene) SceneType.TileMapScene.instance).currentMap().isInMap()) {
+            if (!TileMapScene.instance().currentMap().isInMap()) {
                 WorldSave.getCurrentSave().quickLoad();
                 enter();
             }
@@ -202,7 +196,7 @@ public abstract class GameStage extends Stage {
             player.setBoundDebug(true);
         }
         if (keycode == Input.Keys.F2) {
-            TileMapScene S = ((TileMapScene)SceneType.TileMapScene.instance);
+            TileMapScene S = TileMapScene.instance();
             PointOfInterestData P = PointOfInterestData.getPointOfInterest("DEBUGZONE");
             PointOfInterest PoI = new PointOfInterest(P,new Vector2(0,0), MyRandom.getRandom());
             S.load(PoI);
@@ -300,7 +294,7 @@ public abstract class GameStage extends Stage {
     public void openMenu() {
 
         WorldSave.getCurrentSave().header.createPreview();
-        Forge.switchScene(SceneType.StartScene.instance);
+        Forge.switchScene(StartScene.instance());
     }
 
     public void enter() {

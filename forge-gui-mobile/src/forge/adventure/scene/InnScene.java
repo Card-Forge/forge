@@ -12,13 +12,53 @@ import forge.adventure.util.Current;
  * Scene for the Inn in towns
  */
 public class InnScene extends UIScene {
+    private static InnScene object;
+
+    public static InnScene instance() {
+        if(object==null)
+            object=new InnScene();
+        return object;
+    }
+
     TextButton tempHitPointCost, sell, leave;
     Label tempHitPoints;
     Image healIcon, sellIcon, leaveIcon;
 
-    public InnScene() {
+    private InnScene() {
+
         super(Forge.isLandscapeMode() ? "ui/inn.json" : "ui/inn_portrait.json");
+        ui.onButtonPress("done", new Runnable() {
+            @Override
+            public void run() {
+                InnScene.this.done();
+            }
+        });
+        ui.onButtonPress("tempHitPointCost", new Runnable() {
+            @Override
+            public void run() {
+                InnScene.this.potionOfFalseLife();
+            }
+        });
+        ui.onButtonPress("sell", new Runnable() {
+            @Override
+            public void run() {
+                InnScene.this.sell();
+            }
+        });
+        leave = ui.findActor("done");
+        leave.getLabel().setText(Forge.getLocalizer().getMessage("lblLeave"));
+        sell = ui.findActor("sell");
+        sell.getLabel().setText(Forge.getLocalizer().getMessage("lblSell"));
+
+        tempHitPoints = ui.findActor("tempHitPoints");
+        tempHitPoints.setText(Forge.getLocalizer().getMessageorUseDefault("lblTempHitPoints", "Temporary Hit Points"));
+
+        leaveIcon = ui.findActor("leaveIcon");
+        healIcon = ui.findActor("healIcon");
+        sellIcon = ui.findActor("sellIcon");
     }
+
+
 
     public void done() {
         GameHUD.getInstance().getTouchpad().setVisible(false);
@@ -34,39 +74,6 @@ public class InnScene extends UIScene {
         stage.act(delta);
     }
 
-    @Override
-    public void resLoaded() {
-        super.resLoaded();
-            ui.onButtonPress("done", new Runnable() {
-                @Override
-                public void run() {
-                    InnScene.this.done();
-                }
-            });
-            ui.onButtonPress("tempHitPointCost", new Runnable() {
-                @Override
-                public void run() {
-                    InnScene.this.potionOfFalseLife();
-                }
-            });
-            ui.onButtonPress("sell", new Runnable() {
-                @Override
-                public void run() {
-                    InnScene.this.sell();
-                }
-            });
-            leave = ui.findActor("done");
-            leave.getLabel().setText(Forge.getLocalizer().getMessage("lblLeave"));
-            sell = ui.findActor("sell");
-            sell.getLabel().setText(Forge.getLocalizer().getMessage("lblSell"));
-
-            tempHitPoints = ui.findActor("tempHitPoints");
-            tempHitPoints.setText(Forge.getLocalizer().getMessageorUseDefault("lblTempHitPoints", "Temporary Hit Points"));
-
-            leaveIcon = ui.findActor("leaveIcon");
-            healIcon = ui.findActor("healIcon");
-            sellIcon = ui.findActor("sellIcon");
-    }
 
     @Override
     public void render() {
@@ -88,7 +95,7 @@ public class InnScene extends UIScene {
     }
 
     private void sell() {
-        Forge.switchScene(SceneType.ShopScene.instance);
+        Forge.switchScene(ShopScene.instance());
     }
 
     @Override

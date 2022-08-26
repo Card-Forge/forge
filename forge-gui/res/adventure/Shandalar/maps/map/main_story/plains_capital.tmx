@@ -17,7 +17,7 @@
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJztlO0KgjAUhg/+8wPaXzGtLqyoFOoyQutaujLvI8eQbC2SUve2zgOHfTjmw8s2ImYoynC4qgNsv6uP7VeF2H5T5lfFROemLjGmH3p+Lvqh3w/2G+f8rROiTWLf71fzQ/GT+eUpUZGqvV/1W0xz/5wf+33vh3z++H1xO7/yjV/uPY4Lz7zOlt8nLCKiZVOBr9q25kK1mbh/k63e786touf9j52Mdj3yQmIP4KufOVS2mucBwFt30sd97i9jRs9yTE6z6f7lKvI9l2TCrgfDuM4NBkkQ7g==
+   eJztlO0KgkAQRS/+y4L2r5jWixWaQj1G9PHeuYhkwyJSaw7bPTDM7AfsYdhdgPjiuvQX9KOfL79bAtybeCQ6/bT3j370C8VvnwKHVK/fN/ybX5UBdTZcd7jmpvbzDf10+fH+0U+rXxW9j+vIvW8uv0/YroBdE/GizV1sTJtz81qzWdb9ORfnXo/KEf3SxFGBr7xzWimE50mBt3SS4zHvl7iRvZySy/p3Z4WK/c8tuZnXg5DQeQKDcgII
   </data>
  </layer>
  <layer id="3" name="Walls" width="40" height="40">
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmEsOgjAQhmflgwRWrjBuPAWKG8M59CZ6EB9svJO683ESIdJYcfpiAEvSP5mknTrTT5DBDkA3tPMB9pbYwf/liwKAWWGLzC4EiyvkiLn954GcD1s3UVQhh2r/iPvO1z/wnbnrKOKjXrc6coliu853GtL3oMSqci49+h6UWMdHi+X908nHz8aMD1vjfW3w3TOW/vBtj2KceN9zfvz09PbItRoDrMc0Pkw23V9MNvFtQoBtaC8fVotlfOXPt/l8MEsQHzOT56MOPkw23V9MNvHJ6nN5HZv/sz6Xa7T7/enltIEvlZz3cj7dM+jRb4ZPdCbMz0s531mwLoqpmw/zj4r33M37njelNs5HFDk+mrrMl0r6RyrtkP4T5lPFi2oTtT+ExZvk1OkPsXVRnVbVZBmfKicWz8uk9urW5qo5qf0zJyfb1cv+Vw8MeoYivQCqHdW9
+   eJztmEsOgjAQhmdnaAIrVxo3ngIfG+M59CZ6EB9svBO683ESbaSx4vTFIJbYP5mknTrTD5AhU4B2aBMDbD2xXfzJlyYAo8KmDzsSbFIhx0Taf5zo+bB1F6UVcpj2T6VrPv2AL5fuo4qPet/qyKWKbTvfIaLvQYk15Zwx+h6U2MBHi5X9w8HLL8aCD1uTfU3wXR4snehp12I8Z+9zeXxjdntwLfoAyz6ND5NPzxeTT3yrHsC65y8fVot1fOXfN/l+CJsjPmEu70cdfJh8er6YfOLT1efyOjb/ZX0u1+jw/7PL6QNfpun3OJ9tD7qPv8On6gl5v8T5csW6KqZuPszfLb5zZ/Y+/5aa6I8oCnw0tZkv05wfmbRBzp8wnyleVZuo50NYvEtOm/Mhsa6q06aarOMz5cTiZbnUXtvaXDUn9fwsKOhfdAehc9Wd
   </data>
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
@@ -89,7 +89,7 @@
   </object>
   <object id="59" template="../../obj/entry_left.tx" x="416" y="552" width="16" height="71.964" rotation="179.747"/>
   <object id="60" template="../../obj/entry_right.tx" x="304" y="624" width="16" height="69"/>
-  <object id="61" template="../../obj/arena.tx" x="423" y="114"/>
+  <object id="61" template="../../obj/arena.tx" x="352" y="583"/>
   <object id="62" template="../../obj/shop.tx" x="263" y="257">
    <properties>
     <property name="shopList" value="Plains"/>

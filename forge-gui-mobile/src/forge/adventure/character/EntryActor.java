@@ -1,6 +1,5 @@
 package forge.adventure.character;
 
-import forge.adventure.scene.SceneType;
 import forge.adventure.scene.TileMapScene;
 import forge.adventure.stage.MapStage;
 
@@ -55,7 +54,7 @@ public class EntryActor extends MapActor{
         }
         else
         {
-            ((TileMapScene)SceneType.TileMapScene.instance).loadNext(targetMap);
+            TileMapScene.instance().loadNext(targetMap);
         }
     }
 

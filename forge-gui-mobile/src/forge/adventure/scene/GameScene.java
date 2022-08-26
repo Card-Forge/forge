@@ -13,6 +13,20 @@ public class GameScene extends HudScene {
     private float cameraWidth = 0f, cameraHeight = 0f;
     public GameScene() {
         super(WorldStage.getInstance());
+
+        if (cameraWidth == 0f)
+            cameraWidth = stage.getCamera().viewportWidth;
+        if (cameraHeight == 0f)
+            cameraHeight = stage.getCamera().viewportHeight;
+    }
+
+
+    private static GameScene object;
+
+    public static GameScene instance() {
+        if(object==null)
+            object=new GameScene();
+        return object;
     }
 
     @Override
@@ -32,14 +46,6 @@ public class GameScene extends HudScene {
         hud.draw();
     }
 
-    @Override
-    public void resLoaded() {
-        //set initial camera width and height
-        if (cameraWidth == 0f)
-            cameraWidth = stage.getCamera().viewportWidth;
-        if (cameraHeight == 0f)
-            cameraHeight = stage.getCamera().viewportHeight;
-    }
 
     @Override
     public void enter() {

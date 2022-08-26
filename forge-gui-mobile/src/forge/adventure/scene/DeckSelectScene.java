@@ -22,9 +22,55 @@ public class DeckSelectScene extends UIScene {
     TextButton back, edit, rename;
     int currentSlot = 0;
 
-    public DeckSelectScene() {
+    private DeckSelectScene() {
         super(Forge.isLandscapeMode() ? "ui/deck_selector.json" : "ui/deck_selector_portrait.json");
+
+        layout = new Table();
+        stage.addActor(layout);
+
+        header = Controls.newLabel(Forge.getLocalizer().getMessage("lblSelectYourDeck"));
+        layout.add(header).colspan(2).align(Align.center).pad(2, 5, 2, 5);
+        layout.row();
+        for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++)
+            addDeckSlot(Forge.getLocalizer().getMessage("lblDeck")+": " + (i + 1), i);
+
+        dialog = Controls.newDialog(Forge.getLocalizer().getMessage("lblSave"));
+        textInput = Controls.newTextField("");
+        dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2);
+        dialog.getButtonTable().row();
+        dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left);
+        dialog.getButtonTable().add(textInput).fillX().expandX();
+        dialog.getButtonTable().row();
+        dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblRename"), () -> DeckSelectScene.this.rename())).align(Align.left);
+        dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), () -> dialog.hide())).align(Align.left);
+
+        back = ui.findActor("return");
+        back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
+        edit = ui.findActor("edit");
+        edit.getLabel().setText(Forge.getLocalizer().getMessage("lblEdit"));
+        rename = ui.findActor("rename");
+        rename.getLabel().setText(Forge.getLocalizer().getMessage("lblRename"));
+        ui.onButtonPress("return", () -> DeckSelectScene.this.back());
+        ui.onButtonPress("edit", () -> DeckSelectScene.this.edit());
+        ui.onButtonPress("rename", () -> {
+            textInput.setText(Current.player().getSelectedDeck().getName());
+            dialog.show(stage);
+            stage.setKeyboardFocus(textInput);
+        });
+        defColor = ui.findActor("return").getColor();
+
+        ScrollPane scrollPane = ui.findActor("deckSlots");
+        scrollPane.setActor(layout);
     }
+
+    private static DeckSelectScene object;
+
+    public static DeckSelectScene instance() {
+        if(object==null)
+            object=new DeckSelectScene();
+        return object;
+    }
+
 
     private TextButton addDeckSlot(String name, int i) {
         TextButton button = Controls.newTextButton("-");
@@ -86,47 +132,6 @@ public class DeckSelectScene extends UIScene {
         super.enter();
     }
 
-    @Override
-    public void resLoaded() {
-        super.resLoaded();
-            layout = new Table();
-            stage.addActor(layout);
-
-            header = Controls.newLabel(Forge.getLocalizer().getMessage("lblSelectYourDeck"));
-            layout.add(header).colspan(2).align(Align.center).pad(2, 5, 2, 5);
-            layout.row();
-            for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++)
-                addDeckSlot(Forge.getLocalizer().getMessage("lblDeck")+": " + (i + 1), i);
-
-            dialog = Controls.newDialog(Forge.getLocalizer().getMessage("lblSave"));
-            textInput = Controls.newTextField("");
-            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2);
-            dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left);
-            dialog.getButtonTable().add(textInput).fillX().expandX();
-            dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblRename"), () -> DeckSelectScene.this.rename())).align(Align.left);
-            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), () -> dialog.hide())).align(Align.left);
-
-            back = ui.findActor("return");
-            back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
-            edit = ui.findActor("edit");
-            edit.getLabel().setText(Forge.getLocalizer().getMessage("lblEdit"));
-            rename = ui.findActor("rename");
-            rename.getLabel().setText(Forge.getLocalizer().getMessage("lblRename"));
-            ui.onButtonPress("return", () -> DeckSelectScene.this.back());
-            ui.onButtonPress("edit", () -> DeckSelectScene.this.edit());
-            ui.onButtonPress("rename", () -> {
-                textInput.setText(Current.player().getSelectedDeck().getName());
-                dialog.show(stage);
-                stage.setKeyboardFocus(textInput);
-            });
-            defColor = ui.findActor("return").getColor();
-
-            ScrollPane scrollPane = ui.findActor("deckSlots");
-            scrollPane.setActor(layout);
-
-    }
 
     private void rename() {
         dialog.hide();
@@ -136,6 +141,6 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void edit() {
-        Forge.switchScene(SceneType.DeckEditScene.instance);
+        Forge.switchScene(DeckEditScene.instance());
     }
 }

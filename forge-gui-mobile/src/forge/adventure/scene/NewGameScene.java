@@ -40,38 +40,10 @@ public class NewGameScene extends UIScene {
     private Array<String> stringList, random, custom;
     private Label colorLabel;
 
-    public NewGameScene() {
+    private NewGameScene() {
+
         super(Forge.isLandscapeMode() ? "ui/new_game.json" : "ui/new_game_portrait.json");
-    }
 
-    public boolean start() {
-        if (selectedName.getText().isEmpty()) {
-            selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
-        }
-        Runnable runnable = () -> {
-            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
-            WorldSave.generateNewWorld(selectedName.getText(),
-                    gender.getCurrentIndex() == 0,
-                    race.getCurrentIndex(),
-                    avatarIndex,
-                    colorIds[colorId.getCurrentIndex()],
-                    Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
-                    mode.getCurrentIndex() == 2, mode.getCurrentIndex() == 1, mode.getCurrentIndex() == 3, colorId.getCurrentIndex(), 0);//maybe replace with enum
-            GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
-            Forge.switchScene(SceneType.GameScene.instance);
-        };
-        Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true, "Generating World..."));
-        return true;
-    }
-
-    public boolean back() {
-        Forge.switchScene(SceneType.StartScene.instance);
-        return true;
-    }
-
-    @Override
-    public void resLoaded() {
-        super.resLoaded();
         selectedName = ui.findActor("nameField");
         selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
         avatarImage = ui.findActor("avatarPreview");
@@ -137,6 +109,41 @@ public class NewGameScene extends UIScene {
         ui.onButtonPress("rightAvatar", () -> NewGameScene.this.rightAvatar());
     }
 
+    private static NewGameScene object;
+
+    public static NewGameScene instance() {
+        if(object==null)
+            object=new NewGameScene();
+        return object;
+    }
+
+
+    public boolean start() {
+        if (selectedName.getText().isEmpty()) {
+            selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
+        }
+        Runnable runnable = () -> {
+            FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
+            WorldSave.generateNewWorld(selectedName.getText(),
+                    gender.getCurrentIndex() == 0,
+                    race.getCurrentIndex(),
+                    avatarIndex,
+                    colorIds[colorId.getCurrentIndex()],
+                    Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
+                    mode.getCurrentIndex() == 2, mode.getCurrentIndex() == 1, mode.getCurrentIndex() == 3, colorId.getCurrentIndex(), 0);//maybe replace with enum
+            GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
+            Forge.switchScene(GameScene.instance());
+        };
+        Forge.setTransitionScreen(new TransitionScreen(runnable, null, false, true, "Generating World..."));
+        return true;
+    }
+
+    public boolean back() {
+        Forge.switchScene(StartScene.instance());
+        return true;
+    }
+
+
     private void rightAvatar() {
 
         avatarIndex++;
@@ -173,7 +180,7 @@ public class NewGameScene extends UIScene {
                     Config.instance().getConfigData().difficulties[difficulty.getCurrentIndex()],
                     mode.getCurrentIndex() == 2, mode.getCurrentIndex() == 1, mode.getCurrentIndex() == 3, colorId.getCurrentIndex(), 0);//maybe replace with enum
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
-            Forge.switchScene(SceneType.GameScene.instance);
+            Forge.switchScene(GameScene.instance());
         }
     }
 

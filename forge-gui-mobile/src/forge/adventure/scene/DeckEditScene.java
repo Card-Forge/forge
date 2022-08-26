@@ -12,9 +12,18 @@ public class DeckEditScene extends ForgeScene {
     AdventureDeckEditor screen;
     Stage stage;
 
-    public DeckEditScene() {
+    private DeckEditScene() {
 
     }
+
+    private static DeckEditScene object;
+
+    public static DeckEditScene instance() {
+        if(object==null)
+            object=new DeckEditScene();
+        return object;
+    }
+
 
     @Override
     public void dispose() {

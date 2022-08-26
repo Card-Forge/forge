@@ -115,7 +115,6 @@ public class Forge implements ApplicationListener {
     public static InputProcessor inputProcessor;
     private static Cursor cursor0, cursor1, cursor2, cursorA0, cursorA1, cursorA2;
     public static boolean forcedEnglishonCJKMissing = false;
-    public static boolean adventureLoaded = false;
     public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
 
@@ -326,15 +325,8 @@ public class Forge implements ApplicationListener {
     }
     private static void loadAdventureResources(boolean startScene) {
         try {
-            if(!adventureLoaded)
-            {
-                for (SceneType sceneType : SceneType.values()) {
-                    sceneType.instance.resLoaded();
-                }
-                adventureLoaded=true;
-            }
             if (startScene)
-                switchScene(SceneType.StartScene.instance);
+                switchScene(StartScene.instance());
         } catch (Exception e) {
             e.printStackTrace();
         }

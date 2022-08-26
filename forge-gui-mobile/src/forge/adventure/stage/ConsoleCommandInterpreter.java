@@ -7,7 +7,8 @@ import forge.StaticData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
 import forge.adventure.pointofintrest.PointOfInterest;
-import forge.adventure.scene.SceneType;
+import forge.adventure.scene.InventoryScene;
+import forge.adventure.scene.PlayerStatisticScene;
 import forge.adventure.util.Current;
 import forge.card.ColorSet;
 import forge.deck.Deck;
@@ -111,7 +112,7 @@ public static ConsoleCommandInterpreter getInstance()
                 int x = Integer.parseInt(s[0]);
                 int y = Integer.parseInt(s[1]);
                 WorldStage.getInstance().setPosition(new Vector2(x,y));
-                WorldStage.getInstance().player.playEffect("particle_effects/Particle Park Fireworks.p");
+                WorldStage.getInstance().player.playEffect("particle_effects/Particle Park Fireworks.p",10);
                 return  "teleport to ("+s[0]+","+s[1]+")";
             } catch (Exception e) {
                 return "Exception occured, Invalid input";
@@ -123,7 +124,7 @@ public static ConsoleCommandInterpreter getInstance()
             if(poi==null)
                 return "PoI " + s[0] + " not found";
             WorldStage.getInstance().setPosition(poi.getPosition());
-            WorldStage.getInstance().player.playEffect("particle_effects/Particle Park Laser.p");
+            WorldStage.getInstance().player.playEffect("particle_effects/Particle Park Laser.p",10);
             return  "Teleported to " + s[0] + "(" + poi.getPosition() + ")";
         });
         registerCommand(new String[]{"spawn","enemy"}, s -> {
@@ -178,11 +179,6 @@ public static ConsoleCommandInterpreter getInstance()
             if(s.length < 1) return "Please specify color ID: Valid choices: B, G, R, U, W, C. Example:\n\"setColorID G\"";
             Current.player().setColorIdentity(s[0]);
             return "Player color identity set to " + Current.player().getColorIdentity() + ".";
-        });
-        registerCommand(new String[]{"reloadScenes"}, s -> {
-            SceneType.InventoryScene.instance.resLoaded();
-            SceneType.PlayerStatisticScene.instance.resLoaded();
-            return "Force reload status scenes. WARNING: Game might be unstable.";
         });
         registerCommand(new String[]{"resetQuests"}, s -> {
             Current.player().resetQuestFlags();

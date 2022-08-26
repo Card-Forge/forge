@@ -3,7 +3,6 @@ package forge.adventure.character;
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
 import forge.adventure.scene.RewardScene;
-import forge.adventure.scene.SceneType;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Reward;
 
@@ -34,8 +33,8 @@ public class ShopActor extends MapActor{
     {
 
         stage.GetPlayer().stop();
-        ((RewardScene) SceneType.RewardScene.instance).loadRewards(rewardData, RewardScene.Type.Shop,this);
-        Forge.switchScene(SceneType.RewardScene.instance);
+         RewardScene.instance().loadRewards(rewardData, RewardScene.Type.Shop,this);
+        Forge.switchScene(RewardScene.instance());
     }
 
 

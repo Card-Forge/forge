@@ -53,12 +53,6 @@ public abstract class HudScene extends Scene implements InputProcessor {
     }
 
     @Override
-    public void resLoaded() {
-
-
-    }
-
-    @Override
     public boolean keyDown(int keycode) {
 
         if (hud.keyDown(keycode))
