@@ -1065,17 +1065,15 @@ public class CardFactoryUtil {
             inst.addTrigger(dethroneTrigger);
         } else if (keyword.equals("Double Team")) {	
             final String doubleteamScript = "Mode$ Attacks | ValidCard$ Card.Self+nonToken | TriggerZones$ Battlefield | TriggerDescription$(" + inst.getReminderText() + ")";
-            final String makeString = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True";
-            final String forgetString = "DB$ Effect | Duration$ Permanent | RememberObjects$ Remembered,Imprinted | StaticAbilities$ RemoveDoubleTeamMade,RemoveDoubleStrikeSelf";       
-            final String madeforgetmadeString = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | RemoveKeyword$ Double Team | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually loses Double Team";
-            final String madeforgetselfString = "Mode$ Continuous | EffectZone$ Command | Defined$ Self | RemoveKeyword$ Double Team | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually loses Double Team";
+            final String makeString = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberImprinted$ True | RememberMade$ True";
+            final String forgetString = "DB$ Effect | Duration$ Permanent | RememberObjects$ Remembered | ImprintCards$ TriggeredAttacker | StaticAbilities$ RemoveDoubleTeamMade";       
+            final String madeforgetmadeString = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered,Card.IsImprinted | RemoveKeyword$ Double Team | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually loses Double Team";
             final String CleanupString = "DB$ Cleanup | ClearRemembered$ True";
             final Trigger trigger = TriggerHandler.parseTrigger(doubleteamScript, card, intrinsic);
             final SpellAbility youMake = AbilityFactory.getAbility(makeString, card);
             final AbilitySub forget = (AbilitySub) AbilityFactory.getAbility(forgetString, card);
             final AbilitySub Cleanup = (AbilitySub) AbilityFactory.getAbility(CleanupString, card);
             forget.setSVar("RemoveDoubleTeamMade",madeforgetmadeString);
-            forget.setSVar("RemoveDoubleTeamSelf",madeforgetselfString);
             youMake.setSubAbility(forget);
             forget.setSubAbility(Cleanup);
             trigger.setOverridingAbility(youMake);
