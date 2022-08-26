@@ -1,0 +1,9 @@
+Name:Ivy, Gleeful Spellthief
+ManaCost:G U
+Types:Legendary Creature Faerie Rogue
+PT:2/1
+K:Flying
+T:Mode$ SpellCast | TriggerZones$ Battlefield | TargetsValid$ Creature.Other+inZoneBattlefield | RememberValidCards$ True | Execute$ TrigCopyTarget | OptionalDecider$ You | TriggerDescription$ Whenever a player casts a spell that targets only a single creature other than CARDNAME, you may copy that spell. The copy targets NICKNAME. (A copy of an Aura spell becomes a token.)
+SVar:TrigCopyTarget:DB$ CopySpellAbility | DefinedMagnet$ Self | ValidTgts$ Instant,Sorcery,Enchantment,Artifact,Creature,Planeswalker | TargetType$ Spell | SubAbility$ TrigChange
+SVar:TrigChange:DB$ ChangeTargets | TargetType$ Spell | ValidTgts$ Card | DefinedMagnet$ Self | ChangeSingleTarget$ True
+Oracle:Flying\nWhenever a player casts a spell that targets only a single creature other than Ivy, Gleeful Spellthief, you may copy that spell. The copy targets Ivy. (A copy of an Aura spell becomes a token.)

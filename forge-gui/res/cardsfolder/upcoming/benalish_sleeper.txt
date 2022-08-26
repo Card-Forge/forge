@@ -1,0 +1,9 @@
+Name:Benalish Sleeper
+ManaCost:1 W
+Types:Creature Phyrexian Human Soldier
+PT:3/1
+K:Kicker:B
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, each player sacrifices a creature.
+SVar:TrigSac:DB$ Sacrifice | Condition$ Kicked | Defined$ Player | SacValid$ Creature
+SVar:NeedsToPlay:Creature.OppCtrl
+Oracle:Kicker {B} (You may pay an additional {B} as you cast this spell.)\nWhen Benalish Sleeper enters the battlefield, if it was kicked, each player sacrifices a creature.
