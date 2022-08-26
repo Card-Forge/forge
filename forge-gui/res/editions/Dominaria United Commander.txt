@@ -202,5 +202,27 @@ ScryfallCode=DMC
 240 R Tyrite Sanctum @Volkan Baǵa
 
 [tokens]
+all_3_3_kavu_trample
+b_1_1_insect_flying
+b_2_2_zombie
+b_2_2_zombie_knight_menace
+c_a_treasure_sac
+g_0_0_hydra
+g_0_1_egg_defender
+g_1_1_snake
+g_2_2_bear
+g_2_2_cat_warrior_forestwalk
+g_3_3_badger
+g_3_3_elephant
+g_4_4_wurm
+kobolds_of_kher_keep
+ragavan
 rgw_1_1_sand_warrior
 stangg_twin
+u_1_1_merfolk
+w_1_1_human
+w_1_1_warrior_vigilance
+w_2_2_griffin_flying
+w_2_2_knight_pro_red
+w_2_2_knight_vigilance
+w_4_4_angel_flying_vigilance

@@ -342,4 +342,14 @@ ScryfallCode=DMU
 
 [tokens]
 b_1_1_bird_flying_noblock
+b_2_2_phyrexian
+c_a_powerstone
+g_1_1_saproling
+g_3_3_beast
+ornithopter
+r_1_1_goblin
 r_1_1_monk_prowess
+r_2_1_elemental_trample_haste
+r_4_4_dragon_flying
+w_1_1_bird_flying
+w_1_1_soldier
