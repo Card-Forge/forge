@@ -3217,6 +3217,22 @@ public class CardFactoryUtil {
 
             sa.setIntrinsic(intrinsic);
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Specialize")) {
+            final String[] k = keyword.split(":");
+            final String cost = k[1];
+            String flavor = k.length > 2 && !k[2].isEmpty() ? k[2] + " – " : "";
+            String condition = k.length > 3 && !k[3].isEmpty() ? ". " + k[3] : "";
+            String extra = k.length > 4 && !k[4].isEmpty() ? k[4] + " | " : "";
+
+            final String effect = "AB$ SetState | Cost$ " + cost + " ChooseColor<1> Discard<1/Card.ChosenColor;" +
+                    "Card.AssociatedWithChosenColor/card of the chosen color or its associated basic land type> | " +
+                    "Mode$ Specialize | SorcerySpeed$ True | " + extra + "PrecostDesc$ " + flavor + "Specialize | " +
+                    "CostDesc$ " + ManaCostParser.parse(cost) + condition + " | SpellDescription$ (" +
+                    inst.getReminderText() + ")";
+
+            final SpellAbility sa = AbilityFactory.getAbility(effect, card);
+            sa.setIntrinsic(intrinsic);
+            inst.addSpellAbility(sa);
         } else if (keyword.startsWith("Spectacle")) {
             final String[] k = keyword.split(":");
             final Cost cost = new Cost(k[1], false);

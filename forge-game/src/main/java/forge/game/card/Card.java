@@ -212,6 +212,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean foretoldThisTurn;
     private boolean foretoldByEffect;
 
+    private boolean specialized;
+
     private int timesCrewedThisTurn = 0;
 
     private int classLevel = 1;
@@ -661,6 +663,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         } else if (mode.equals("Meld") && isMeldable()) {
             return changeToState(CardStateName.Meld);
+        } else if (mode.equals("Specialize") && canSpecialize()) {
+            if (customState.equalsIgnoreCase("white")) {
+                return changeToState(CardStateName.SpecializeW);
+            } else if (customState.equalsIgnoreCase("blue")) {
+                return changeToState(CardStateName.SpecializeU);
+            } else if (customState.equalsIgnoreCase("black")) {
+                return changeToState(CardStateName.SpecializeB);
+            } else if (customState.equalsIgnoreCase("red")) {
+                return changeToState(CardStateName.SpecializeR);
+            } else if (customState.equalsIgnoreCase("green")) {
+                return changeToState(CardStateName.SpecializeG);
+            }
+        } else if (mode.equals("Unspecialize") && isSpecialized()) {
+            return changeToState(CardStateName.Original);
         }
         return false;
     }
@@ -2221,7 +2237,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
-                        || keyword.startsWith("Class") || keyword.startsWith("Blitz")) {
+                        || keyword.startsWith("Class") || keyword.startsWith("Blitz")
+                        || keyword.startsWith("Specialize")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Unblockable")) {
                     sbLong.append(getName()).append(" can't be blocked.\r\n");
@@ -3980,6 +3997,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final CardStateName getFaceupCardStateName() {
         if (isFlipped() && hasState(CardStateName.Flipped)) {
             return CardStateName.Flipped;
+        } else if (isSpecialized()) {
+            return getCurrentStateName();
         } else if (backside && hasBackSide()) {
             CardStateName stateName = getRules().getSplitType().getChangedStateName();
             if (hasState(stateName)) {
@@ -5728,6 +5747,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public void resetForetoldThisTurn() {
         foretoldThisTurn = false;
+    }
+
+    public boolean isSpecialized() {
+        return specialized;
+    }
+    public final void setSpecialized(final boolean bool) {
+        specialized = bool;
+    }
+    public final boolean canSpecialize() {
+        return getRules() != null && getRules().getSplitType() == CardSplitType.Specialize;
     }
 
     public int getTimesCrewedThisTurn() {
