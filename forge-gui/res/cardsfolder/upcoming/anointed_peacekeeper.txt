@@ -9,6 +9,6 @@ SVar:DBLook:DB$ RevealHand | Defined$ ChosenPlayer | Look$ True | SubAbility$ DB
 SVar:DBNameCard:DB$ NameCard | Defined$ You | SubAbility$ DBClear
 SVar:DBClear:DB$ Cleanup | ClearChosenPlayer$ True
 S:Mode$ RaiseCost | EffectZone$ Battlefield | ValidCard$ Card.NamedCard | Type$ Spell | Amount$ 2 | Activator$ Opponent | Description$ Spells your opponents cast with the chosen name cost {2} more to cast.
-S:Mode$ RaiseCost | EffectZone$ Battlefield | ValidCard$ Card.NamedCard | Type$ NonManaAbility | Amount$ 2 | Activator$ Opponent | AffectedZone$ Battlefield | Description$ Activated abilities of sources with the chosen name cost {2} more to activate unless they’re mana abilities.
+S:Mode$ RaiseCost | EffectZone$ Battlefield | ValidCard$ Card.NamedCard | Type$ NonManaAbility | Amount$ 2 | Activator$ Opponent | AffectedZone$ Battlefield | Description$ Activated abilities of sources with the chosen name cost {2} more to activate unless they're mana abilities.
 AI:RemoveDeck:Random
-Oracle:Vigilance\nAs Anointed Peacekeeper enters the battlefield, look at an opponent’s hand, then choose any card name.\nSpells your opponents cast with the chosen name cost {2} more to cast.\nActivated abilities of sources with the chosen name cost {2} more to activate unless they’re mana abilities.
+Oracle:Vigilance\nAs Anointed Peacekeeper enters the battlefield, look at an opponent's hand, then choose any card name.\nSpells your opponents cast with the chosen name cost {2} more to cast.\nActivated abilities of sources with the chosen name cost {2} more to activate unless they're mana abilities.
