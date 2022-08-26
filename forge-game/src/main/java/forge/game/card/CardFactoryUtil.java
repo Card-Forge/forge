@@ -1068,11 +1068,14 @@ public class CardFactoryUtil {
             final String makeString = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True";
             final String forgetString = "DB$ Effect | Duration$ Permanent | RememberObjects$ Remembered | RememberObjects$ Imprinted | StaticAbilities$ RemoveDoubleTeamMade";
             final String madeforgetString = "Mode$ Continuous | EffectZone$ Command | ValidCard$ Card.IsRemembered,Card.IsImprinted | RemoveKeyword$ Double Team | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually loses Double Team";
+            final String CleanupString = "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True$";
             final Trigger trigger = TriggerHandler.parseTrigger(doubleteamScript, card, intrinsic);
             final SpellAbility youMake = AbilityFactory.getAbility(makeString, card);
             final AbilitySub forget = (AbilitySub) AbilityFactory.getAbility(forgetString, card);
+            final AbilitySub Cleanup = (AbilitySub) AbilityFactory.getAbility(CleanupString, card);
             forget.setSVar("RemoveDoubleTeamMade",madeforgetString);
             youMake.setSubAbility(forget);
+            forget.setSubAbility(Cleanup);
             trigger.setOverridingAbility(youMake);
             
             inst.addTrigger(trigger); 
