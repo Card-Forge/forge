@@ -4,7 +4,7 @@ Types:Legendary Creature Human Warrior
 PT:3/3
 K:Desertwalk
 S:Mode$ Continuous | Affected$ Desert.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play Desert lands from your graveyard
-T:Mode$ ChangesZone | ValidCard$ Desert.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a Desert enters the battlefield under your control, create two 1/1 red, green, and white Sand Warrior creature tokens.
+T:Mode$ ChangesZone | ValidCard$ Desert.YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a Desert enters the battlefield under your control, create two 1/1 red, green, and white Sand Warrior creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ rgw_1_1_sand_warrior | TokenOwner$ You
 DeckHas:Ability$Token
 DeckHints:Type$Desert
