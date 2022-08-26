@@ -50,7 +50,8 @@ public class TileMapScene extends HudScene {
         }
         stage.act(Gdx.graphics.getDeltaTime());
         hud.act(Gdx.graphics.getDeltaTime());
-        if (autoheal) { //todo add simple bg animation or effect
+        if (autoheal) { //todo add better effect
+            stage.GetPlayer().playEffect("particle_effects/Particle Park Hallucinogen.p",2);
             SoundSystem.instance.play(SoundEffectType.Enchantment, false);
             autoheal = false;
         }

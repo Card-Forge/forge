@@ -7,9 +7,9 @@
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "map/main_story",
-        "map",
+        "obj",
         "tileset",
-        "obj"
+        "map"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -2188,8 +2188,8 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 840.6666666666667,
-                "y": 323.6666666666667
+                "x": -80,
+                "y": 443.6666666666666
             }
         },
         "map/main_story/swamp_capital.tmx": {

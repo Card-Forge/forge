@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
+import com.badlogic.gdx.graphics.g2d.ParticleEmitter;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -35,17 +36,35 @@ public class MapActor extends Actor {
     final int objectId;
     Array<CurrentEffect> effects=new Array<>();
 
-    public void playEffect(String path,Vector2 offset,boolean overlay)
+    public void playEffect(String path,float duration,boolean overlay,Vector2 offset)
     {
         ParticleEffect effect = new ParticleEffect();
         effect.load(Config.instance().getFile(path),Config.instance().getFile(path).parent());
-        effect.getEmitters().first().setPosition(offset.x,offset.y);
         effects.add(new CurrentEffect(effect,offset,overlay));
+        if(duration!=0)//ParticleEffect.setDuration uses an integer for some reason
+        {
+            int i = 0;
+            for(int n = effect.getEmitters().size; i < n; ++i) {
+                ParticleEmitter emitter =  effect.getEmitters().get(i);
+                emitter.setContinuous(false);
+                emitter.duration = duration;
+                emitter.durationTimer = 0.0F;
+            }
+
+        }
         effect.start();
+    }
+    public void playEffect(String path,float duration,boolean overlay)
+    {
+        playEffect(path,duration,overlay,Vector2.Zero);
+    }
+    public void playEffect(String path,float duration)
+    {
+        playEffect(path,duration,false,Vector2.Zero);
     }
     public void playEffect(String path)
     {
-        playEffect(path,Vector2.Zero,false);
+        playEffect(path,0,false,Vector2.Zero);
     }
     public MapActor(int objectId)
     {
@@ -112,8 +131,7 @@ public class MapActor extends Actor {
         {
             CurrentEffect effect=effects.get(i);
             effect.effect.update(delta);
-            effect.effect.setPosition(getX()+effect.offset.x,getY()+effect.offset.y);
-
+            effect.effect.setPosition(getX()+getHeight()/2+effect.offset.x,getY()+getWidth()/2+effect.offset.y);
             if(effect.effect.isComplete())
             {
                 effects.removeIndex(i);
