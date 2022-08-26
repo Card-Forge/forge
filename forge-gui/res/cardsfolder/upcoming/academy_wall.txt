@@ -2,7 +2,7 @@ Name:Academy Wall
 ManaCost:2 U
 Types:Creature Wall
 PT:0/5
-T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | OptionalDecider$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may draw a card. If you do, discard a card. This ability triggers only once each turn.
-SVar:TrigDraw:DB$ Draw | Defined$ Self | NumCards$ 1 | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | Defined$ Self  | NumCards$ 1
+K:Defender
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | OptionalDecider$ You | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast an instant or sorcery spell, you may draw a card. If you do, discard a card. This ability triggers only once each turn.
+SVar:TrigLoot:AB$ Discard | Defined$ You | Mode$ TgtChoose | Cost$ Draw<1/You>
 Oracle:Defender\nWhenever you cast an instant or sorcery spell, you may draw a card. If you do, discard a card. This ability triggers only once each turn.
