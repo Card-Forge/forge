@@ -1,0 +1,11 @@
+Name:Hazezon, Shaper of Sand
+ManaCost:R G W
+Types:Legendary Creature Human Warrior
+PT:3/3
+K:Desertwalk
+S:Mode$ Continuous | Affected$ Desert.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play Desert lands from your graveyard
+T:Mode$ ChangesZone | ValidCard$ Desert.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a Desert enters the battlefield under your control, create two 1/1 red, green, and white Sand Warrior creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ rgw_1_1_sand_warrior | TokenOwner$ You
+DeckHas:Ability$Token
+DeckHints:Type$Desert
+Oracle:Desertwalk (This creature can't be blocked as long as defending player controls a Desert.\nYou may play Desert lands from your graveyard.\nWhenever a Desert enters the battlefield under your control, create two 1/1 red, green, and white Sand Warrior creature tokens.

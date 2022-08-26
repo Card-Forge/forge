@@ -2737,10 +2737,10 @@ public class AbilityUtils {
                     SpellAbility sa = (SpellAbility) ctb;
                     if (sa.isReplacementAbility()) {
                         if (zones.get(0).equals(ZoneType.Battlefield)) {
-                            cardsInZones = sa.getLastStateBattlefield();
+                            cardsInZones = sa.getRootAbility().getLastStateBattlefield();
                             usedLastState = true;
                         } else if (zones.get(0).equals(ZoneType.Graveyard)) {
-                            cardsInZones = sa.getLastStateGraveyard();
+                            cardsInZones = sa.getRootAbility().getLastStateGraveyard();
                             usedLastState = true;
                         }
                     }
@@ -3478,8 +3478,8 @@ public class AbilityUtils {
         }
 
         if (value.equals("OpponentsAttackedThisTurn")) {
-            final List<Player> opps = player.getAttackedPlayersMyTurn();
-            return doXMath(opps == null ? 0 : opps.size(), m, source, ctb);
+            final Iterable<Player> opps = player.getAttackedPlayersMyTurn();
+            return doXMath(opps == null ? 0 : Iterables.size(opps), m, source, ctb);
         }
 
         if (value.equals("OpponentsAttackedThisCombat")) {

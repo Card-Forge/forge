@@ -313,6 +313,7 @@ Food
 Fortification
 Gold
 Key:Keys
+Powerstone
 Treasure
 Vehicle
 [WalkerTypes]
