@@ -27,7 +27,12 @@ public class ImageUtil {
     }
 
     public static String getImageRelativePath(PaperCard cp, boolean backFace, boolean includeSet, boolean isDownloadUrl) {
-        final String nameToUse = cp == null ? null : getNameToUse(cp, backFace);
+        return getImageRelativePath(cp, backFace, includeSet, isDownloadUrl, "");
+    }
+
+    public static String getImageRelativePath(PaperCard cp, boolean backFace, boolean includeSet, boolean isDownloadUrl,
+                                              String specializeColor) {
+        final String nameToUse = cp == null ? null : getNameToUse(cp, backFace, specializeColor);
         if (nameToUse == null) {
             return null;
         }
@@ -80,8 +85,37 @@ public class ImageUtil {
         }
     }
 
-    public static String getNameToUse(PaperCard cp, boolean backFace) {
+    public static String getNameToUse(PaperCard cp, boolean backFace, String specialize) {
         final CardRules card = cp.getRules();
+        if (!specialize.equals("")) {
+            switch (specialize) {
+                case "white":
+                    if (card.getWSpecialize() != null) {
+                        return card.getWSpecialize().getName();
+                    }
+                    break;
+                case "blue":
+                    if (card.getUSpecialize() != null) {
+                        return card.getUSpecialize().getName();
+                    }
+                    break;
+                case "black":
+                    if (card.getBSpecialize() != null) {
+                        return card.getBSpecialize().getName();
+                    }
+                    break;
+                case "red":
+                    if (card.getRSpecialize() != null) {
+                        return card.getRSpecialize().getName();
+                    }
+                    break;
+                case "green":
+                    if (card.getGSpecialize() != null) {
+                        return card.getGSpecialize().getName();
+                    }
+                    break;
+            }
+        }
         if (backFace) {
             if (cp.hasBackFace())
                 if (card.getOtherPart() != null) {
@@ -94,7 +128,7 @@ public class ImageUtil {
                 }
             else
                 return null;
-        } else if(CardSplitType.Split == cp.getRules().getSplitType()) {
+        } else if (CardSplitType.Split == cp.getRules().getSplitType()) {
             return card.getMainPart().getName() + card.getOtherPart().getName();
         } else {
             return cp.getName();
@@ -102,7 +136,11 @@ public class ImageUtil {
     }
 
     public static String getImageKey(PaperCard cp, boolean backFace, boolean includeSet) {
-        return getImageRelativePath(cp, backFace, includeSet, false);
+        return getImageKey(cp, backFace, includeSet, "");
+    }
+
+    public static String getImageKey(PaperCard cp, boolean backFace, boolean includeSet, String specializeColor) {
+        return getImageRelativePath(cp, backFace, includeSet, false, specializeColor);
     }
 
     public static String getDownloadUrl(PaperCard cp, boolean backFace) {

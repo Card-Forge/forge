@@ -108,7 +108,42 @@ public abstract class ImageFetcher {
             String imagePath = ImageUtil.getImageRelativePath(paperCard, false, true, false);
             final boolean hasSetLookup = ImageKeys.hasSetLookup(imagePath);
             final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-            String filename = backFace ? paperCard.getCardAltImageKey() : paperCard.getCardImageKey();
+            String specColor = "";
+            if (imageKey.endsWith(ImageKeys.SPECFACE_W)) {
+                specColor = "white";
+            } else if (imageKey.endsWith(ImageKeys.SPECFACE_U)) {
+                specColor = "blue";
+            } else if (imageKey.endsWith(ImageKeys.SPECFACE_B)) {
+                specColor = "black";
+            } else if (imageKey.endsWith(ImageKeys.SPECFACE_R)) {
+                specColor = "red";
+            } else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) {
+                specColor = "green";
+            }
+            String filename = "";
+            if (backFace) {
+                filename = paperCard.getCardAltImageKey();
+            } else if (!specColor.equals("")) {
+                switch (specColor) {
+                    case "white":
+                        filename = paperCard.getCardWSpecImageKey();
+                        break;
+                    case "blue":
+                        filename = paperCard.getCardUSpecImageKey();
+                        break;
+                    case "black":
+                        filename = paperCard.getCardBSpecImageKey();
+                        break;
+                    case "red":
+                        filename = paperCard.getCardRSpecImageKey();
+                        break;
+                    case "green":
+                        filename = paperCard.getCardGSpecImageKey();
+                        break;
+                }
+            } else {
+                filename = paperCard.getCardImageKey();
+            }
             if (useArtCrop) {
                 filename = TextUtil.fastReplace(filename, ".full", ".artcrop");
             }

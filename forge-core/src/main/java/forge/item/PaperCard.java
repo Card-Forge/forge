@@ -336,6 +336,66 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
         return cardAltImageKey;
     }
 
+    private String cardWSpecImageKey = null;
+    @Override
+    public String getCardWSpecImageKey() {
+        if (this.cardWSpecImageKey == null) {
+            if (this.rules.getSplitType() == CardSplitType.Specialize)
+                this.cardWSpecImageKey = ImageUtil.getImageKey(this, false, true, "white");
+            else  // just use cardImageKey
+                this.cardWSpecImageKey = ImageUtil.getImageKey(this, false, true);
+        }
+        return cardWSpecImageKey;
+    }
+
+    private String cardUSpecImageKey = null;
+    @Override
+    public String getCardUSpecImageKey() {
+        if (this.cardUSpecImageKey == null) {
+            if (this.rules.getSplitType() == CardSplitType.Specialize)
+                this.cardUSpecImageKey = ImageUtil.getImageKey(this, false, true, "blue");
+            else  // just use cardImageKey
+                this.cardUSpecImageKey = ImageUtil.getImageKey(this, false, true);
+        }
+        return cardUSpecImageKey;
+    }
+
+    private String cardBSpecImageKey = null;
+    @Override
+    public String getCardBSpecImageKey() {
+        if (this.cardBSpecImageKey == null) {
+            if (this.rules.getSplitType() == CardSplitType.Specialize)
+                this.cardBSpecImageKey = ImageUtil.getImageKey(this, false, true, "black");
+            else  // just use cardImageKey
+                this.cardBSpecImageKey = ImageUtil.getImageKey(this, false, true);
+        }
+        return cardBSpecImageKey;
+    }
+
+    private String cardRSpecImageKey = null;
+    @Override
+    public String getCardRSpecImageKey() {
+        if (this.cardRSpecImageKey == null) {
+            if (this.rules.getSplitType() == CardSplitType.Specialize)
+                this.cardRSpecImageKey = ImageUtil.getImageKey(this, false, true, "red");
+            else  // just use cardImageKey
+                this.cardRSpecImageKey = ImageUtil.getImageKey(this, false, true);
+        }
+        return cardRSpecImageKey;
+    }
+
+    private String cardGSpecImageKey = null;
+    @Override
+    public String getCardGSpecImageKey() {
+        if (this.cardGSpecImageKey == null) {
+            if (this.rules.getSplitType() == CardSplitType.Specialize)
+                this.cardGSpecImageKey = ImageUtil.getImageKey(this, false, true, "green");
+            else  // just use cardImageKey
+                this.cardGSpecImageKey = ImageUtil.getImageKey(this, false, true);
+        }
+        return cardGSpecImageKey;
+    }
+
     @Override
     public boolean hasBackFace(){
         CardSplitType cst = this.rules.getSplitType();
