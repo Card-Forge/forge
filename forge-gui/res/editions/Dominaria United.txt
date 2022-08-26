@@ -244,7 +244,7 @@ ScryfallCode=DMU
 234 M Karn's Sylex @Adam Paquette
 235 C Meteorite @Olena Richards
 236 U Relic of Legends @Titus Lunter
-237 R Salvaged Manaworker @Julian Kok Joon Wen
+237 C Salvaged Manaworker @Julian Kok Joon Wen
 238 C Shield-Wall Sentinel @Titus Lunter
 239 M Timeless Lotus @Lindsey Look
 240 C Vanquisher's Axe @Joe Slucher
@@ -252,22 +252,22 @@ ScryfallCode=DMU
 242 M Weatherlight Compleated @Adam Paquette
 243 R Adarkar Wastes @Piotr Dura
 244 R Caves of Koilos @Julian Kok Joon Wen
-245 L Contaminated Aquifer @Robin Olausson
+245 C Contaminated Aquifer @Robin Olausson
 246 C Crystal Grotto @Piotr Dura
-247 L Geothermal Bog @Gabor Szikszai
-248 L Haunted Mire @Bruce Brenneise
-249 L Idyllic Beachfront @Robin Olausson
+247 C Geothermal Bog @Gabor Szikszai
+248 C Haunted Mire @Bruce Brenneise
+249 C Idyllic Beachfront @Robin Olausson
 250 R Karplusan Forest @Sam Burley
-251 L Molten Tributary @Yeong-Hao Han
+251 C Molten Tributary @Yeong-Hao Han
 252 R Plaza of Heroes @Gabor Szikszai
-253 L Radiant Grove @Lorenzo Lanfranconi
-254 L Sacred Peaks @Kamila Szutenberg
+253 C Radiant Grove @Lorenzo Lanfranconi
+254 C Sacred Peaks @Kamila Szutenberg
 255 R Shivan Reef @Andrew Mar
 256 R Sulfurous Springs @Bruce Brenneise
-257 L Sunlit Marsh @Marc Simonetti
-258 L Tangled Islet @Randy Gallegos
+257 C Sunlit Marsh @Marc Simonetti
+258 C Tangled Islet @Randy Gallegos
 259 R Thran Portal @Sarah Finnigan
-260 L Wooded Ridgeline @Jinho Bae
+260 C Wooded Ridgeline @Jinho Bae
 261 R Yavimaya Coast @Jesper Ejsing
 262 L Plains @Lorenzo Lanfranconi
 263 L Plains @Seb McKinnon
@@ -340,7 +340,7 @@ ScryfallCode=DMU
 330 R The Raven Man @David Curtis
 331 M Sheoldred, the Apocalypse @Joe Esposito
 332 R Squee, Dubious Monarch @Daniel Lieske
-333 U Aron, Benalia's Ruin @@Jody Clark
+333 U Aron, Benalia's Ruin @Jody Clark
 334 R Astor, Bearer of Blades @Ivan Shavrin
 335 U Baird, Argivian Recruiter @Barbara Rosiak
 336 U Balmor, Battlemage Captain @Nino Vecia
