@@ -1,0 +1,9 @@
+Name:The Peregrine Dynamo
+ManaCost:3
+Types:Legendary Artifact Creature Construct
+PT:1/5
+K:Haste
+A:AB$ CopySpellAbility | Cost$ 1 T | TargetType$ Activated.YouCtrl,Triggered.YouCtrl | ValidTgts$ Card.Legendary+Other+IsNotCommander+YouCtrl | TgtPrompt$ Choose target triggered ability you control | MayChooseTarget$ True | SpellDescription$ Copy target activated or triggered ability you control from another legendary source that's not a commander. You may choose new targets for the copy.
+SVar:BuffedBy:Legendary
+DeckNeeds:Type$Legendary
+Oracle:Haste\n{1}, {T}: Copy target activated or triggered ability you control from another legendary source that's not a commander. You may choose new targets for the copy. (Mana abilities can't be targeted.)
