@@ -1065,7 +1065,7 @@ public class CardFactoryUtil {
             inst.addTrigger(dethroneTrigger);
         } else if (keyword.equals("Double Team")) {	
             final String doubleteamScript = "Mode$ Attacks | ValidCard$ Card.Self+nonToken | TriggerZones$ Battlefield | TriggerDescription$(" + inst.getReminderText() + ")";
-            final String makeString = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberImprinted$ True | RememberMade$ True";
+            final String makeString = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True";
             final String forgetString = "DB$ Effect | Duration$ Permanent | RememberObjects$ Remembered | ImprintCards$ TriggeredAttacker | StaticAbilities$ RemoveDoubleTeamMade";       
             final String madeforgetmadeString = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered,Card.IsImprinted | RemoveKeyword$ Double Team | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually loses Double Team";
             final String CleanupString = "DB$ Cleanup | ClearRemembered$ True";
