@@ -9,4 +9,5 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:BuffedBy:Creature
 SVar:NoZeroToughnessAI:True
 DeckHas:Ability$Token & Type$Soldier
+DeckHints:Ability$Token
 Oracle:Queen Allenal of Ruadach's power and toughness are each equal to the number of creatures you control.\nIf one or more creature tokens would be created under your control, those tokens plus a 1/1 white Soldier creature token are created instead.
