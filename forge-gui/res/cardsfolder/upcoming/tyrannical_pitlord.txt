@@ -5,9 +5,10 @@ PT:6/6
 K:Flying
 K:Trample
 K:ETBReplacement:Other:DBChoose
-SVar:DBChoose:DB$ ChooseCard | Choices$ Creature.Other+YouCtrl | RememberChosen$ True | TgtPrompt$ Select another target creature you control | Description$ As CARDNAME enters the battlefield, choose another creature you control.
-S:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Flying | AddToughness$ 3 | AddPower$ 3 | SpellDescription$ The chosen creature gets +3/+3 and has flying.
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigSacrifice | SpellDescription$ When CARDNAME leaves the battlefield, sacrifice the chosen creature.
-SVar:TrigSacrifice:DB$ SacrificeAll | Defined$ Remembered
+SVar:DBChoose:DB$ ChooseCard | Choices$ Creature.Other+YouCtrl |TgtPrompt$ Select another target creature you control | Description$ As CARDNAME enters the battlefield, choose another creature you control.
+S:Mode$ Continuous | Affected$ Card.IsChosen | AddKeyword$ Flying | AddToughness$ 3 | AddPower$ 3 | SpellDescription$ The chosen creature gets +3/+3 and has flying.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigSacrifice | SubAbility$ DBCleanup | SpellDescription$ When CARDNAME leaves the battlefield, sacrifice the chosen creature.
+SVar:TrigSacrifice:DB$ SacrificeAll | Defined$ Chosen
+SVar:DBCleanup:DB$ Cleanup | ClearChosen$ True
 DeckHas:Ability$Sacrifice
 Oracle:Flying, trample\nAs Tyrannical Pitlord enters the battlefield, choose another creature you control.\nThe chosen creature gets +3/+3 and has flying.\nWhen Tyrannical Pitlord leaves the battlefield, sacrifice the chosen creature.
