@@ -1,8 +1,0 @@
-Name:Elemental token
-ManaCost:no cost
-Colors:red
-Types:Creature Elemental
-PT:2/1
-K:Trample
-K:Haste
-Oracle:Trample, haste
