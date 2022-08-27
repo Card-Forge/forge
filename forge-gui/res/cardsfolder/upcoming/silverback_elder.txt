@@ -6,6 +6,6 @@ T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ 
 SVar:TrigCharm:DB$ Charm | Choices$ Destroy,DigLand,GainLife | CharmNum$ 1
 SVar:Destroy:DB$ Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 SVar:DigLand:DB$ Dig | DigNum$ 5 | ChangeNum$ 1 | ChangeValid$ Card.Land | Optional$ True | DestinationZone$ Battlefield | RestRandomOrder$ True | Tapped$ True | SpellDescription$ Look at the top five cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order.
-SVar:GainLife:DB$ GainLife | LifeAmount$ 4 | TgtPrompt$ Choose a player | SpellDescription$ You gain 4 life.
+SVar:GainLife:DB$ GainLife | LifeAmount$ 4 | SpellDescription$ You gain 4 life.
 DeckHas:Ability$LifeGain
 Oracle:Whenever you cast a creature spell, choose one —\n• Destroy target artifact or enchantment.\n• Look at the top five cards of your library. You may put a land card from among them onto the battlefield tapped. Put the rest on the bottom of your library in a random order.\n• You gain 4 life.
