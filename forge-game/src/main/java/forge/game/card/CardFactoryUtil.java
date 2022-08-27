@@ -1068,7 +1068,7 @@ public class CardFactoryUtil {
             final String makeString = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True";
             final String forgetString = "DB$ Effect | Duration$ Permanent | RememberObjects$ Remembered | ImprintCards$ TriggeredAttacker | StaticAbilities$ RemoveDoubleTeamMade";       
             final String madeforgetmadeString = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered,Card.IsImprinted | RemoveKeyword$ Double Team | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually loses Double Team";
-            final String CleanupString = "DB$ Cleanup | ClearRemembered$ True";
+            final String CleanupString = "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True";
             final Trigger trigger = TriggerHandler.parseTrigger(doubleteamScript, card, intrinsic);
             final SpellAbility youMake = AbilityFactory.getAbility(makeString, card);
             final AbilitySub forget = (AbilitySub) AbilityFactory.getAbility(forgetString, card);
