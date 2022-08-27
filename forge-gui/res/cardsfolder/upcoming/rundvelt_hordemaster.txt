@@ -6,7 +6,7 @@ S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Goblin.Other+YouCtrl 
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Goblin.Other+YouCtrl | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME or another Goblin you control dies, exile the top card of your library.
 SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | ForgetOnMoved$ Exile | Duration$ UntilTheEndOfYourNextTurn | ConditionCheckSVar$ Z | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
-SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$  If it's a Goblin creature card, you may cast that card until the end of your next turn.
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ If it's a Goblin creature card, you may cast that card until the end of your next turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Z:Remembered$Valid Creature.Goblin
 DeckNeeds:Type$Goblin
