@@ -11,6 +11,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.card.CardType;
+import forge.card.MagicColor;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
@@ -66,6 +67,15 @@ public class HumanCostDecision extends CostDecisionMakerBase {
     @Override
     public PaymentDecision visit(final CostAddMana cost) {
         return PaymentDecision.number(cost.getAbilityAmount(ability));
+    }
+
+    @Override
+    public PaymentDecision visit(CostChooseColor cost) {
+        int c = cost.getAbilityAmount(ability);
+        List<String> choices = player.getController().chooseColors(Localizer.getInstance().
+                        getMessage("lblChooseAColor"), ability, c, c,
+                new ArrayList<>(MagicColor.Constant.ONLY_COLORS));
+        return PaymentDecision.colors(choices);
     }
 
     @Override
@@ -164,6 +174,9 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         final String type = discardType;
         final String[] validType = type.split(";");
         hand = CardLists.getValidCards(hand, validType, player, source, ability);
+        if (hand.size() < 1) { // if we somehow have no valids (e.g. picked bad Specialize color), cancel payment
+            return null;
+        }
 
         final InputSelectCardsFromList inp = new InputSelectCardsFromList(controller, c, c, hand, ability);
         inp.setMessage(Localizer.getInstance().getMessage("lblSelectNMoreTargetTypeCardToDiscard", "%d", cost.getDescriptiveType()));

@@ -19,7 +19,6 @@ package forge.game.trigger;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
@@ -54,8 +53,8 @@ public class TriggerAbilityTriggered extends Trigger {
             return false;
         }
         final Card source = spellAbility.getHostCard();
+        @SuppressWarnings("unchecked")
         final Iterable<Card> causes = (Iterable<Card>) runParams.get(AbilityKey.Cause);
-        final Game game = source.getGame();
 
         if (hasParam("ValidMode")) {
             List<String> validModes = Arrays.asList(getParam("ValidMode").split(","));
@@ -71,6 +70,10 @@ public class TriggerAbilityTriggered extends Trigger {
             if (Collections.disjoint(validDestinations, destinations)) {
                 return false;
             }
+        }
+
+        if (!matchesValidParam("ValidSpellAbility", spellAbility)) {
+            return false;
         }
 
         if (!matchesValidParam("ValidSource", source)) {

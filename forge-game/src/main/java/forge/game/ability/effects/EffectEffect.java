@@ -226,6 +226,8 @@ public class EffectEffect extends SpellAbilityEffect {
                     if (!"Stack".equals(sa.getParam("ForgetOnMoved"))) {
                         addForgetOnCastTrigger(eff);
                     }
+                } else if (sa.hasParam("ForgetOnCast")) {
+                    addForgetOnCastTrigger(eff);
                 } else if (sa.hasParam("ExileOnMoved")) {
                     addExileOnMovedTrigger(eff, sa.getParam("ExileOnMoved"));
                 }

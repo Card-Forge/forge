@@ -80,6 +80,22 @@ public class ForgeScript {
             return source.hasChosenColor()
                     && colors.hasAnyColor(ColorSet.fromNames(source.getChosenColors()).getColor());
 
+        } else if (property.equals("AssociatedWithChosenColor")) {
+            final String color = source.getChosenColor();
+            switch (color) {
+                case "white":
+                    return cardState.getTypeWithChanges().getLandTypes().contains("Plains");
+                case "blue":
+                    return cardState.getTypeWithChanges().getLandTypes().contains("Island");
+                case "black":
+                    return cardState.getTypeWithChanges().getLandTypes().contains("Swamp");
+                case "red":
+                    return cardState.getTypeWithChanges().getLandTypes().contains("Mountain");
+                case "green":
+                    return cardState.getTypeWithChanges().getLandTypes().contains("Forest");
+                default:
+                    return false;
+            }
         } else if (property.startsWith("non")) {
             // ... Other Card types
             return !cardState.getTypeWithChanges().hasStringType(property.substring(3));
@@ -207,6 +223,8 @@ public class ForgeScript {
             return sa.hasParam("Nightbound");
         } else if (property.equals("paidPhyrexianMana")) {
             return sa.getSpendPhyrexianMana();
+        } else if (property.equals("LastChapter")) {
+            return sa.isLastChapter();
         } else if (property.startsWith("ManaSpent")) {
             String[] k = property.split(" ", 2);
             String comparator = k[1].substring(0, 2);

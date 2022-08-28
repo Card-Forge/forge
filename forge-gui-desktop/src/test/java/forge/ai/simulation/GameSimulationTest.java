@@ -230,7 +230,7 @@ public class GameSimulationTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Card sorin = addCard("Sorin, Solemn Visitor", p);
-        sorin.addCounterInternal(CounterEnumType.LOYALTY, 5, p, false, null);
+        sorin.addCounterInternal(CounterEnumType.LOYALTY, 5, p, false, null, null);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
@@ -275,7 +275,7 @@ public class GameSimulationTest extends SimulationTest {
         String bearCardName = "Runeclaw Bear";
         addCard(bearCardName, p);
         Card gideon = addCard("Gideon, Ally of Zendikar", p);
-        gideon.addCounterInternal(CounterEnumType.LOYALTY, 4, p, false, null);
+        gideon.addCounterInternal(CounterEnumType.LOYALTY, 4, p, false, null, null);
 
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
@@ -404,7 +404,7 @@ public class GameSimulationTest extends SimulationTest {
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);
         Card sarkhan = addCard(sarkhanCardName, p);
-        sarkhan.addCounterInternal(CounterEnumType.LOYALTY, 4, p, false, null);
+        sarkhan.addCounterInternal(CounterEnumType.LOYALTY, 4, p, false, null, null);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
@@ -439,7 +439,7 @@ public class GameSimulationTest extends SimulationTest {
         addCard(ornithoperCardName, p);
         addCard(bearCardName, p);
         Card ajani = addCard(ajaniCardName, p);
-        ajani.addCounterInternal(CounterEnumType.LOYALTY, 4, p, false, null);
+        ajani.addCounterInternal(CounterEnumType.LOYALTY, 4, p, false, null, null);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
@@ -472,7 +472,7 @@ public class GameSimulationTest extends SimulationTest {
         SpellAbility boltSA = boltCard.getFirstSpellAbility();
 
         Card ajani = addCard(ajaniCardName, p);
-        ajani.addCounterInternal(CounterEnumType.LOYALTY, 8, p, false, null);
+        ajani.addCounterInternal(CounterEnumType.LOYALTY, 8, p, false, null, null);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
 
@@ -523,7 +523,7 @@ public class GameSimulationTest extends SimulationTest {
         addCard("Swamp", p);
         addCard("Swamp", p);
         Card depths = addCard("Dark Depths", p);
-        depths.addCounterInternal(CounterEnumType.ICE, 10, p, false, null);
+        depths.addCounterInternal(CounterEnumType.ICE, 10, p, false, null, null);
         Card thespian = addCard("Thespian's Stage", p);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
         game.getAction().checkStateEffects(true);
@@ -2256,7 +2256,7 @@ public class GameSimulationTest extends SimulationTest {
         Player p = game.getPlayers().get(0);
 
         Card polukranos = addCard(polukranosCardName, p);
-        polukranos.addCounterInternal(CounterEnumType.P1P1, 6, p, false, null);
+        polukranos.addCounterInternal(CounterEnumType.P1P1, 6, p, false, null, null);
         addCard(hydraCardName, p);
         addCard(leylineCardName, p);
         for (int i = 0; i < 2; ++i) {
@@ -2301,7 +2301,7 @@ public class GameSimulationTest extends SimulationTest {
         }
 
         Card nishoba = addCard(nishobaName, p1);
-        nishoba.addCounterInternal(CounterEnumType.P1P1, 7, p1, false, null);
+        nishoba.addCounterInternal(CounterEnumType.P1P1, 7, p1, false, null, null);
         addCard(capridorName, p1);
         Card pridemate = addCard(pridemateName, p1);
         Card indestructibility = addCard(indestructibilityName, p1);

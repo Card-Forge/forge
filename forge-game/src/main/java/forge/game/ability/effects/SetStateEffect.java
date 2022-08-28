@@ -4,12 +4,15 @@ import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameLogEntryType;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.event.GameEventCardStatsChanged;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.trigger.TriggerHandler;
+import forge.game.trigger.TriggerType;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
@@ -17,19 +20,28 @@ import forge.util.Localizer;
 import forge.util.TextUtil;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Map;
+
 public class SetStateEffect extends SpellAbilityEffect {
 
     @Override
     protected String getStackDescription(final SpellAbility sa) {
+        final Card host = sa.getHostCard();
         final StringBuilder sb = new StringBuilder();
+        boolean specialize = sa.getParam("Mode").equals("Specialize");
 
         if (sa.hasParam("Flip")) {
             sb.append("Flip ");
+        } else if (specialize) { // verb will come later
         } else {
             sb.append("Transform ");
         }
 
         sb.append(Lang.joinHomogenous(getTargetCards(sa)));
+        if (specialize) {
+            sb.append(" perpetually specializes into ");
+            sb.append(host.hasChosenColor() ? host.getChosenColor() : "the chosen color");
+        }
         sb.append(".");
         return sb.toString();
     }
@@ -87,7 +99,9 @@ public class SetStateEffect extends SpellAbilityEffect {
 
             // Cards which are not on the battlefield should not be able to transform.
             // TurnFace should be allowed in other zones like Exile too
-            if (!"TurnFace".equals(mode) && !gameCard.isInPlay() && !sa.hasParam("ETB")) {
+            // Specialize and Unspecialize are allowed in other zones
+            if (!"TurnFace".equals(mode) && !"Unspecialize".equals(mode) && !"Specialize".equals(mode)
+                    && !gameCard.isInPlay() && !sa.hasParam("ETB")) {
                 continue;
             }
 
@@ -160,6 +174,9 @@ public class SetStateEffect extends SpellAbilityEffect {
                 hasTransformed = gameCard.turnFaceUp(sa);
             } else if (sa.isManifestUp()) {
                 hasTransformed = gameCard.turnFaceUp(true, true, sa);
+            } else if ("Specialize".equals(mode)) {
+                hasTransformed = gameCard.changeCardState(mode, host.getChosenColor(), sa);
+                host.setChosenColors(null);
             } else {
                 hasTransformed = gameCard.changeCardState(mode, sa.getParam("NewState"), sa);
                 if (gameCard.isFaceDown() && (sa.hasParam("FaceDownPower") || sa.hasParam("FaceDownToughness")
@@ -193,6 +210,17 @@ public class SetStateEffect extends SpellAbilityEffect {
                 }
                 if (!gameCard.isDoubleFaced())
                     transformedCards.add(gameCard);
+                if ("Specialize".equals(mode)) {
+                    gameCard.setSpecialized(true);
+                    //run Specializes trigger
+                    final TriggerHandler th = game.getTriggerHandler();
+                    th.clearActiveTriggers(gameCard, null);
+                    th.registerActiveTrigger(gameCard, false);
+                    final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(gameCard);
+                    th.runTrigger(TriggerType.Specializes, runParams, false);
+                } else if ("Unspecialize".equals(mode)) {
+                    gameCard.setSpecialized(false);
+                }
             }
         }
         table.replaceCounterEffect(game, sa, true);

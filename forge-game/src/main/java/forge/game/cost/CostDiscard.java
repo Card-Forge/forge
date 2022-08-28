@@ -166,7 +166,9 @@ public class CostDiscard extends CostPartWithList {
                 sameName = true;
                 type = TextUtil.fastReplace(type, "+WithSameName", "");
             }
-            if (!type.equals("Random") && !type.contains("X")) {
+            if (type.contains("ChosenColor") && !source.hasChosenColor()) {
+                //color hasn't been chosen yet, so skip getValidCards
+            } else if (!type.equals("Random") && !type.contains("X")) {
                 // Knollspine Invocation fails to activate without the above conditional
                 handList = CardLists.getValidCards(handList, type.split(";"), payer, source, ability);
             }

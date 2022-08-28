@@ -341,6 +341,13 @@ public class Cost implements Serializable {
             return new CostUnattach(splitStr[0], description);
         }
 
+        if (parse.startsWith("ChooseColor<")) {
+            // ChooseColor<NumToChoose>
+            //TODO expand this to set off different UI for Specialize
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostChooseColor(splitStr[0]);
+        }
+
         if (parse.startsWith("ChooseCreatureType<")) {
             final String[] splitStr = abCostParse(parse, 1);
             return new CostChooseCreatureType(splitStr[0]);
