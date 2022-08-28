@@ -1,0 +1,8 @@
+Name:Vodalian Hexcatcher
+ManaCost:1 U 
+Types:Creature Merfolk Wizard
+PT:1/1
+K:Flash
+S:Mode$ Continuous | Affected$ Card.Merfolk+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Merfolk you control get +1/+1.
+A:AB$ Counter | Cost$ 1 Sac<1/Merfolk> | TargetType$ Spell | UnlessCost$ 1 | ValidTgts$ Card.nonCreature | SpellDescription$ Sacrifice a Merfolk: Counter target noncreature spell unless its controller pays {1}
+Oracle:Flash\nOther Merfolk you control get +1/+1.\nSacrifice a Merfolk: Counter target noncreature spell unless its controller pays {1}

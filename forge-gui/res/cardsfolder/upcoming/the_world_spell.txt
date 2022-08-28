@@ -1,0 +1,7 @@
+Name:The World Spell
+ManaCost:5 G G
+Types:Enchantment Saga
+K:Read ahead:3:DBDig,DBDig,DBChangeZone
+SVar:DBDig:DB$ Dig | DigNum$ 7 | ChangeNum$ 1 | Optional$ True | ForceRevealToController$ True | ChangeValid$ Card.nonSaga | RestRandomOrder$ True | SpellDescription$ Look at the top seven cards of your library. You may reveal a non-Saga permanent card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Permanent.nonSaga | ChangeNum$ 2 | SpellDescription$ Put up to two non-Saga permanent cards from your hand onto the battlefield.
+Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don’t trigger. Sacrifice after III.)\nI, II — Look at the top seven cards of your library. You may reveal a non-Saga permanent card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.\nIII — Put up to two non-Saga permanent cards from your hand onto the battlefield.
