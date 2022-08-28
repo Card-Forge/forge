@@ -1697,7 +1697,7 @@ public class CardFactoryUtil {
             parsedTrigger.setOverridingAbility(sa);
 
             inst.addTrigger(parsedTrigger);
-        } else if (keyword.startsWith("Saga")) {
+        } else if (keyword.startsWith("Saga") || keyword.startsWith("Read ahead")) {
             final String[] k = keyword.split(":");
             final List<String> abs = Arrays.asList(k[2].split(","));
             if (abs.size() != Integer.valueOf(k[1])) {
@@ -1724,9 +1724,10 @@ public class CardFactoryUtil {
                 for (int i = idx; i <= skipId; i++) {
                     SpellAbility sa = AbilityFactory.getAbility(card, ab);
                     sa.setChapter(i);
+                    sa.setLastChapter(idx == abs.size());
 
                     StringBuilder trigStr = new StringBuilder("Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield");
-                    trigStr.append("| CounterType$ LORE | CounterAmount$ EQ").append(i);
+                    trigStr.append("| Chapter$ True | CounterType$ LORE | CounterAmount$ EQ").append(i);
                     if (i != idx) {
                         trigStr.append(" | Secondary$ True");
                     }
@@ -2311,6 +2312,23 @@ public class CardFactoryUtil {
                 re.getOverridingAbility().setSVar("Sunburst", "Count$Converge");
             }
             inst.addReplacement(re);
+        } else if (keyword.startsWith("Read ahead")) {
+            final String[] k = keyword.split(":");
+            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Secondary$ True | ReplacementResult$ Updated | Description$ Choose a chapter and start with that many lore counters.";
+
+            String effStr = "DB$ PutCounter | Defined$ Self | CounterType$ LORE | ETB$ True | UpTo$ True | UpToMin$ 1 | ReadAhead$ True | CounterNum$ " + k[1];
+
+            SpellAbility saCounter = AbilityFactory.getAbility(effStr, card);
+
+            if (!intrinsic) {
+                saCounter.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, host, intrinsic, card);
+
+            re.setOverridingAbility(saCounter);
+
+            inst.addReplacement(re); 
         } else if (keyword.equals("Rebound")) {
             String repeffstr = "Event$ Moved | ValidLKI$ Card.Self+wasCastFromHand+YouOwn+YouCtrl "
             + " | Origin$ Stack | Destination$ Graveyard | Fizzle$ False "
