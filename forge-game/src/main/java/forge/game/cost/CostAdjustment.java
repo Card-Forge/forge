@@ -485,6 +485,10 @@ public class CostAdjustment {
                 if (!sa.isActivatedAbility() || sa.isManaAbility() || sa.isReplacementAbility()) {
                     return false;
                 }
+            } else if (type.equals("ManaAbility")) {
+                if (!sa.isManaAbility()) {
+                    return false;
+                }
             } else if (type.equals("MorphDown")) {
                 if (!sa.isSpell() || !sa.isCastFaceDown()) {
                     return false;
