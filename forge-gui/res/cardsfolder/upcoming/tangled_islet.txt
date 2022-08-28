@@ -1,0 +1,5 @@
+Name:Tangled Islet
+ManaCost:no cost
+Types:Land Forest Island
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {G} or {U}.)\nTangled Islet enters the battlefield tapped.
