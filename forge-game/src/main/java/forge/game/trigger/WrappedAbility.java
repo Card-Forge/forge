@@ -286,17 +286,28 @@ public class WrappedAbility extends Ability {
         return sa.isCycling();
     }
 
-
+    @Override
     public boolean isChapter() {
         return sa.isChapter();
     }
 
+    @Override
     public Integer getChapter() {
         return sa.getChapter();
     }
 
+    @Override
     public void setChapter(int val) {
         sa.setChapter(val);
+    }
+
+    @Override
+    public boolean isLastChapter() {
+        return sa.isLastChapter();
+    }
+    @Override
+    public boolean setLastChapter(boolean value) {
+        return sa.setLastChapter(value);
     }
 
     @Override
@@ -566,4 +577,5 @@ public class WrappedAbility extends Ability {
     public void setChosenList(List<AbilitySub> choices) {
         sa.setChosenList(choices);
     }
+
 }

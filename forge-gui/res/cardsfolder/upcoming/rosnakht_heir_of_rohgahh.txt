@@ -1,0 +1,9 @@
+Name:Rosnakht, Heir of Rohgahh
+ManaCost:R
+Types:Legendary Creature Kobold Warrior
+PT:0/1
+K:Battle Cry
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken| TriggerDescription$ Heroic — Whenever you cast a spell that targets CARDNAME, create a 0/1 red Kobold creature token named Kobolds of Kher Keep 
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ kobolds_of_kher_keep 
+DeckHas:Ability$Token
+Oracle:Battle cry (Whenever this creature attacks, each other attacking creature gets +1/+0 until end of turn.)\nHeroic — Whenever you cast a spell that targets Rosnakht, Heir of Rohgahh, create a 0/1 red Kobold creature token named Kobolds of Kher Keep

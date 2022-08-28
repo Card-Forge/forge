@@ -155,11 +155,18 @@ public class GameEntityCounterTable extends ForwardingTable<Optional<Player>, Ga
                 continue;
             }
 
+            // Add ETB flag
+            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            runParams.put(AbilityKey.ETB, etb);
+            if (params != null) {
+                runParams.putAll(params);
+            }
+
             // Apply counter after replacement effect
             for (Map.Entry<Optional<Player>, Map<CounterType, Integer>> e : values.entrySet()) {
                 boolean remember = cause != null && cause.hasParam("RememberPut");
                 for (Map.Entry<CounterType, Integer> ec : e.getValue().entrySet()) {
-                    gm.getKey().addCounterInternal(ec.getKey(), ec.getValue(), e.getKey().orNull(), true, result);
+                    gm.getKey().addCounterInternal(ec.getKey(), ec.getValue(), e.getKey().orNull(), true, result, runParams);
                     if (remember && ec.getValue() >= 1) {
                         cause.getHostCard().addRemembered(gm.getKey());
                     }

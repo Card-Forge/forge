@@ -1,0 +1,5 @@
+Name:Iridian Maelstrom
+ManaCost:W U B R G
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Creature.!AllColors | SpellDescription$ Destroy each creature that isn't all colors.
+Oracle:Destroy each creature that isn't all colors.

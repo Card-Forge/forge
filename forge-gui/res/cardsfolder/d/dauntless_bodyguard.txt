@@ -4,6 +4,6 @@ Types:Creature Human Knight
 PT:2/1
 K:ETBReplacement:Other:ChooseC
 SVar:ChooseC:DB$ ChooseCard | Defined$ You | Choices$ Creature.YouCtrl+Other | AILogic$ AtLeast1 | Mandatory$ True | SpellDescription$ As CARDNAME enters the battlefield, choose another creature you control.
-A:AB$ Pump | Cost$ Sac<1/CARDNAME> | Defined$ ChosenCard | KW$ Indestructible | SubAbility$ DBCleanup | SpellDescription$ The chosen creature gains indestructible until end of turn.
+A:AB$ Pump | Cost$ Sac<1/CARDNAME> | Defined$ Valid Card.ChosenCardStrict | KW$ Indestructible | SubAbility$ DBCleanup | SpellDescription$ The chosen creature gains indestructible until end of turn.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 Oracle:As Dauntless Bodyguard enters the battlefield, choose another creature you control.\nSacrifice Dauntless Bodyguard: The chosen creature gains indestructible until end of turn.
