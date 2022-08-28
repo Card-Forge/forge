@@ -6,7 +6,7 @@ SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBChe
 K:ETBReplacement:Other:DBChooseBasic
 SVar:DBChooseBasic:DB$ ChooseType | Type$ Basic Land | SpellDescription$ As CARDNAME enters the battlefield, choose a basic land type.
 S:Mode$ Continuous | Affected$ Card.Self | AddType$ ChosenType | Description$ CARDNAME is the chosen type in addition to its other types.
-S:Mode$ RaiseCost | Type$ ManaAbility | ValidCard$ Card.Self | Cost$ PayLife<1> | EffectZone$ All | Description$ Activated abilities of CARDNAME cost an additional "1 life" to activate.
+S:Mode$ RaiseCost | Type$ ManaAbility | ValidCard$ Card.Self | Cost$ PayLife<1> | EffectZone$ All | Description$ Mana abilities of CARDNAME cost an additional "1 life" to activate.
 SVar:ETBCheckSVar2:Count$LastStateBattlefield Land.YouCtrl
 AI:RemoveDeck:All
 Oracle:Thran Portal enters the battlefield tapped unless you control two or fewer other lands.\nAs Thran Portal enters the battlefield, choose a basic land type.\nThran Portal is the chosen type in addition to its other types.\nMana abilities of Thran Portal cost an additional 1 life to activate.
