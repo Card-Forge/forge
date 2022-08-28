@@ -135,6 +135,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private boolean cumulativeupkeep = false;
     private boolean blessing = false;
     private Integer chapter = null;
+    private boolean lastChapter = false;
 
     /** The pay costs. */
     private Cost payCosts;
@@ -1066,6 +1067,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         chapter = val;
     }
 
+    public boolean isLastChapter() {
+        return lastChapter;
+    }
+    public boolean setLastChapter(boolean value) {
+        return lastChapter = value;
+    }
+
     public StaticAbility getMayPlay() {
         return mayPlay;
     }
@@ -1128,6 +1136,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             }
             clone.paidAbilities = Lists.newArrayList();
             clone.setPaidHash(Maps.newHashMap(getPaidHash()));
+
+            // copy last chapter flag for Trigger
+            clone.lastChapter = this.lastChapter;
 
             if (usesTargeting()) {
                 // the targets need to be cloned, otherwise they might be cleared
