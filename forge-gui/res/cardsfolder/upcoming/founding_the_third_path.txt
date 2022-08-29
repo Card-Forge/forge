@@ -8,4 +8,4 @@ SVar:DBCopy:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | D
 SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | Optional$ True | CopyCard$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Mill|Graveyard
-Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don’t trigger. Sacrifice after III.)\nI — You may cast an instant or sorcery spell with mana value 1 or 2 from your hand without paying its mana cost.\nII — Target player mills four cards.\nIII — Exile target instant or sorcery card from your graveyard. Copy it. You may cast the copy.
+Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don't trigger. Sacrifice after III.)\nI — You may cast an instant or sorcery spell with mana value 1 or 2 from your hand without paying its mana cost.\nII — Target player mills four cards.\nIII — Exile target instant or sorcery card from your graveyard. Copy it. You may cast the copy.
