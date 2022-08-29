@@ -12,4 +12,4 @@ SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Exile | Destination$ Ba
 SVar:DBScry:DB$ Scry | ScryNum$ 1 | SpellDescription$ Scry 1.
 DeckHints:Type$Instant|Sorcery
 SVar:BuffedBy:Spell.Instant,Spell.Sorcery
-Oracle:Flying\nWhenever you cast an instant or sorcery spell, choose one —\n• Djinn of the Fountain gets +1/+1 until end of turn.\n• Exile Djinn of the Fountain. Return it to thebattlefield under its owner's control at the beginning of the next end step.\n• Scry 1.
+Oracle:Flying\nWhenever you cast an instant or sorcery spell, choose one —\n• Djinn of the Fountain gets +1/+1 until end of turn.\n• Exile Djinn of the Fountain. Return it to the battlefield under its owner's control at the beginning of the next end step.\n• Scry 1.
