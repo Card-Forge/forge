@@ -433,10 +433,6 @@ public class CostAdjustment {
         if (!st.matchesValidParam("Activator", activator)) {
             return false;
         }
-        if (st.hasParam("NonActivatorTurn") && (activator == null
-                || game.getPhaseHandler().isPlayerTurn(activator))) {
-            return false;
-        }
 
         if (st.hasParam("Type")) {
             final String type = st.getParam("Type");
