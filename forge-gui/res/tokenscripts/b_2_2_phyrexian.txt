@@ -1,4 +1,4 @@
-Name:Phyrexian
+Name:Phyrexian Token
 ManaCost:no cost
 Types:Creature Phyrexian
 Colors:black
