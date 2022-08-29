@@ -1,0 +1,8 @@
+Name:Fires of Victory
+ManaCost:1 R
+Types:Instant
+K:Kicker:2 U
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ X | SubAbility$ DBDraw | SpellDescription$ If this spell was kicked, draw a card. CARDNAME deals damage to target creature or planeswalker equal to the number of cards in your hand.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | Condition$ Kicked | ConditionDescription$ If this spell was kicked
+SVar:X:Count$InYourHand
+Oracle:Kicker {2}{U} (You may pay an additional {2}{U} as you cast this spell.)\nIf this spell was kicked, draw a card. Fires of Victory deals damage to target creature or planeswalker equal to the number of cards in your hand.
