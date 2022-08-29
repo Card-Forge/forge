@@ -1,10 +1,13 @@
 Name:Yotia Declares War
 ManaCost:1 R
 Types:Enchantment Saga
-K:Read ahead:3:DBToken,DBTap,DBAnimate
+K:Read ahead:3:DBToken,DBChoose,DBAnimate
 SVar:DBToken:DB$ Token | TokenScript$ ornithopter | SpellDescription$ Create a 0/2 colorless Thopter artifact creature token with flying named Ornithopter.
-SVar:DBTap:AB$ DealDamage | Cost$ tapXType<X/Artifact> | CostDesc$ As an additional cost to cast this spell, tap any number of untapped artifacts you control. | ValidTgts$ Creature,Planeswalker | NumDmg$ X | SpellDescription$ Tap any number of untapped artifacts you control. When you do, NICKNAME Declares War deals that much damage to target creature or planeswalker.
-SVar:X:Count$xPaid
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | Defined$ You | MinAmount$ 0 | Amount$ X | Choices$ Artifact.untapped+YouCtrl | ChoiceZone$ Battlefield | RememberChosen$ True | SubAbility$ TrigTap | SpellDescription$  Tap any number of untapped artifacts you control. When you do, CARDNAME deals that much damage to target creature or planeswalker.
+SVar:TrigTap:DB$ Tap | Defined$ Remembered | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | NumDmg$ Y
+SVar:X:Count$Valid Artifact.YouCtrl+untapped
+SVar:Y:Remembered$Amount
 SVar:DBAnimate:DB$ Animate | ValidTgts$ Artifact.YouCtrl | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature | SpellDescription$ Up to one target artifact you control becomes an artifact creature with base power and toughness 4/4 until end of turn.
 DeckHas:Ability$Token & Type$Artifact
 Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don't trigger. Sacrifice after III.)\nI — Create a 0/2 colorless Thopter artifact creature token with flying named Ornithopter.\nII — Tap any number of untapped artifacts you control. When you do, Yotia Declares War deals that much damage to target creature or planeswalker.\nIII — Up to one target artifact you control becomes an artifact creature with base power and toughness 4/4 until end of turn.
