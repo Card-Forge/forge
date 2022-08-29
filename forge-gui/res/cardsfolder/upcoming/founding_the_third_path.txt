@@ -1,10 +1,11 @@
 Name:Founding the Third Path
 ManaCost:1 U
 Types:Enchantment Saga
-K:Read ahead:3:DBMayPlay,DBMill,DBCopy
-SVar:DBMayPlay:DB$ Sacrifice| Optional$ True | Defined$ You | RememberSacrificed$ True | SacValid$ Creature | Amount$ 1 | SubAbility$ DBDiscard | SpellDescription$ You may sacrifice a creature. If you do, each opponent discards a card.
-SVar:DBMill:DB$ Discard | Mode$ TgtChoose | Defined$ Player.Opponent | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | NumCards$ 1 | ConditionPresent$ Card | SubAbility DBCleanup
-SVar:DBCopy:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to your hand.
-
-DeckHas:Ability$Discard|Sacrifice
-Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don’t trigger. Sacrifice after III.)\nI — You may sacrifice a creature. If you do, each opponent discards a card.\nII — Return target creature card from your graveyard to your hand.III — Target opponent may sacrifice a nonland, nontoken permanent. If they don’t, they lose 2 life and you draw a card.
+K:Read ahead:3:DBPlayFree,DBMill,DBCopy
+SVar:DBPlayFree:DB$ Play | Valid$ Instant.YouOwn,Sorcery.YouOwn | ValidSA$ Spell.cmcEQ1,Spell.cmcEQ2 | ValidZone$ Hand | WithoutManaCost$ True | Amount$ 1 | Controller$ You | Optional$ True | SpellDescription$ You may cast an instant or sorcery spell with mana value 1 or 2 from your hand without paying its mana cost.
+SVar:DBMill:DB$ Mill | NumCards$ 4 | ValidTgts$ Player | SpellDescription$ Target player mills four cards.
+SVar:DBCopy:DB$ ChangeZone | TargetMin$ 0 | TargetMax$ 1 | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose up to one target instant or sorcery card in your graveyard | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | RememberChanged$ True | SubAbility$ DBPlay | SpellDescription$ Exile target instant or sorcery card from your graveyard. Copy it. You may cast the copy.
+SVar:DBPlay:DB$ Play | Defined$ Remembered | ValidSA$ Spell | Optional$ True | CopyCard$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill|Graveyard
+Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don’t trigger. Sacrifice after III.)\nI — You may cast an instant or sorcery spell with mana value 1 or 2 from your hand without paying its mana cost.\nII — Target player mills four cards.\nIII — Exile target instant or sorcery card from your graveyard. Copy it. You may cast the copy.

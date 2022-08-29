@@ -1,13 +1,15 @@
-Name:Braids's Frightful Return
-ManaCost:2 B
+Name:The Phasing of Zhalfir
+ManaCost:2 U U
 Types:Enchantment Saga
-K:Read ahead:3:DBSacrifice,DBChangeZone,DBSacrificeOpp
-SVar:DBSacrifice:DB$ Sacrifice| Optional$ True | Defined$ You | RememberSacrificed$ True | SacValid$ Creature | Amount$ 1 | SubAbility$ DBDiscard | SpellDescription$ You may sacrifice a creature. If you do, each opponent discards a card.
-SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ Player.Opponent | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | NumCards$ 1 | ConditionPresent$ Card | SubAbility DBCleanup
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to your hand.
-SVar:DBSacrificeOpp:DB$ Sacrifice | ValidTgts$ Player | SacValid$ Permanent.nonLand+nonToken | RememberSacrificed$ True | SubAbility$ DBDraw | SpellDescription$ Target opponent may sacrifice a nonland, nontoken permanent. If they don’t, they lose 2 life and you draw a card.
-SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$ LoseLife | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | LifeAmount$ 2 | Defined$ Targeted | SubAbility DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Discard|Sacrifice
+K:Read ahead:3:DBPhase,DBPhase,DBDestroyAll
+SVar:DBPhase:DB$ Phases | ValidTgts$ Permanent.nonLand+Other | WontPhaseInNormal$ True | ConditionPresent$ Card.Self | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | Triggers$ TrigComeBack | RememberObjects$ Targeted | ImprintCards$ Self | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnPhasedIn$ True
+SVar:TrigComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ DBPhaseIn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ Target creature phases out until CARDNAME leaves the battlefield. Tap that creature as it phases in this way.
+SVar:DBPhaseIn:DB$ Phases | Defined$ Remembered | Tapped$ True | PhaseInOrOut$ True | SubAbility$ DBExileSelf
+SVar:DBExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all creatures. For each creature destroyed this way, its controller creates a 2/2 black Phyrexian creature token.
+SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | RepeatSubAbility$ DBToken | SubAbility$ DBCleanup | ChangeZoneTable$ True
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ ImprintedController | TokenScript$ b_2_2_phyrexian
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ true
+DeckHas:Ability$Tokens
 Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don’t trigger. Sacrifice after III.)\nI — You may sacrifice a creature. If you do, each opponent discards a card.\nII — Return target creature card from your graveyard to your hand.III — Target opponent may sacrifice a nonland, nontoken permanent. If they don’t, they lose 2 life and you draw a card.

@@ -1,0 +1,6 @@
+Name:Phyrexian
+ManaCost:no cost
+Types:Creature Phyrexian
+Colors:black
+PT:2/2
+Oracle:
