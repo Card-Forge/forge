@@ -2,7 +2,7 @@ Name:The Phasing of Zhalfir
 ManaCost:2 U U
 Types:Enchantment Saga
 K:Read ahead:3:DBPhase,DBPhase,DBDestroyAll
-SVar:DBPhase:DB$ Phases | ValidTgts$ Permanent.nonLand+Other | WontPhaseInNormal$ True | ConditionPresent$ Card.Self | SubAbility$ DBEffect
+SVar:DBPhase:DB$ Phases | ValidTgts$ Permanent.nonLand+Other | WontPhaseInNormal$ True | ConditionPresent$ Card.Self | SubAbility$ DBEffect | SpellDescription$ Another target nonland permanent phases out. It can't phase in for as long as you control CARDNAME.
 SVar:DBEffect:DB$ Effect | Triggers$ TrigComeBack | RememberObjects$ Targeted | ImprintCards$ Self | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnPhasedIn$ True
 SVar:TrigComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ DBPhaseIn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True
 SVar:DBPhaseIn:DB$ Phases | Defined$ Remembered | PhaseInOrOut$ True | SubAbility$ DBExileSelf
