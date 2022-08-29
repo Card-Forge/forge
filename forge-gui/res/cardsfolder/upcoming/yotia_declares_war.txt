@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Enchantment Saga
 K:Read ahead:3:DBToken,TrigTap,DBAnimate
 SVar:DBToken:DB$ Token | TokenScript$ ornithopter | SpellDescription$ Create a 0/2 colorless Thopter artifact creature token with flying named Ornithopter.
-SVar:TrigTap:AB$ ImmediateTrigger | Cost$ tapXType<X/Artifact> | Execute$ DBDamage | SpellDescription$ Tap any number of untapped artifacts you control. When you do, CARDNAME deals that much damage to target creature or planeswalker.
+SVar:TrigTap:AB$ ImmediateTrigger | Cost$ Mandatory tapXType<X/Artifact> | Execute$ DBDamage | SpellDescription$ Tap any number of untapped artifacts you control. When you do, CARDNAME deals that much damage to target creature or planeswalker.
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Planeswalker | NumDmg$ X
 SVar:X:Count$xPaid
 SVar:DBAnimate:DB$ Animate | ValidTgts$ Artifact.YouCtrl | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature | SpellDescription$ Up to one target artifact you control becomes an artifact creature with base power and toughness 4/4 until end of turn.
