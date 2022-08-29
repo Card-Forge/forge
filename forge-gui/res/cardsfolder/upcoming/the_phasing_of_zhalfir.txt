@@ -12,4 +12,4 @@ SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemember
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ ImprintedController | TokenScript$ b_2_2_phyrexian
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ true
 DeckHas:Ability$Tokens
-Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don’t trigger. Sacrifice after III.)\nI — You may sacrifice a creature. If you do, each opponent discards a card.\nII — Return target creature card from your graveyard to your hand.III — Target opponent may sacrifice a nonland, nontoken permanent. If they don’t, they lose 2 life and you draw a card.
+Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don't trigger. Sacrifice after III.)\nI — You may sacrifice a creature. If you do, each opponent discards a card.\nII — Return target creature card from your graveyard to your hand.III — Target opponent may sacrifice a nonland, nontoken permanent. If they don’t, they lose 2 life and you draw a card.
