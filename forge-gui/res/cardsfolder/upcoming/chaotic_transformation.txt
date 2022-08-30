@@ -1,0 +1,11 @@
+Name:Chaotic Transformation
+ManaCost:5 R
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Artifact | TargetMin$ 0 | TargetMax$ 1 | SubAbilility$ ExileCreature | RememberTargets$ True | SpellDescription$ Exile target artifact
+SVar:ExileCreature:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | SubAbilility$ ExileEnchantment | RememberTargets$ True | SpellDescription$ Exile target Creature
+SVar:ExileEnchantment:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Enchantment | TargetMin$ 0 | TargetMax$ 1 | SubAbilility$ ExileLand | RememberTargets$ True | SpellDescription$ Exile target Enchantment
+SVar:ExileLand:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Land | TargetMin$ 0 | TargetMax$ 1 | SubAbilility$ ExilePlaneswalker | RememberTargets$ True | SpellDescription$ Exile target Land
+SVar:ExilePlaneswalker:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Planeswalker | TargetMin$ 0 | TargetMax$ 1 | Execute$ RepeatEach | RememberTargets$ True | SpellDescription$ Exile target Planeswalker
+SVar:RepeatEach:DB$ RepeatEach | Defined$ Remembered |  RepeatTargeted$ Targeted | RepeatSubAbility$ DBDigUntil | TriggerDescription 
+SVar:DBDigUntil:DB$ DigUntil | Defined$ RememberedController | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | Valid$ Permanent.sharesCardTypeWith RememberedLKI | ValidDescription$ permanent card that shares a card type with the sacrificed permanent | FoundDestination$ Battlefield | RevealedDestination$ Library | Shuffle$ True | StackDescription$ they reveal cards from the top of their library until they reveal a permanent card that shares a card type with {c:Targeted}, put that card onto the battlefield, then shuffle their library. | SubAbility$ DBCleanup
+Oracle:({T}: Add {U} or {R}.)\nMolten Tributary enters the battlefield tapped.
