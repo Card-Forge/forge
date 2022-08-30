@@ -135,7 +135,7 @@ ScryfallCode=DMC
 127 C Thrill of Possibility @Izzy
 128 C Abundant Growth @Vincent Proce
 129 U Beast Within @Jesper Ejsing
-130 U Cultivate @Anthony Palumbo
+130 C Cultivate @Anthony Palumbo
 131 C Explore @John Avon
 132 U Explosive Vegetation @John Avon
 133 C Farseek @Martina Pilcerova

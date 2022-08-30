@@ -820,3 +820,78 @@ F567 R Puresteel Angel @Lukas Litzsinger
 812 R Forsaken City @Dana Knutson
 813 M Maze's End @Cliff Childs
 814 U Underdark Rift @Chris Ostrowski
+815 M Karn Liberated @Jason Chan
+816 R Ajani's Last Stand @Slawomir Maniak
+817 M Ajani, Strength of the Pride @Chris Rallis
+818 C Benalish Infantry @Dan Frazier
+819 R Dominaria's Judgment @John Avon
+820 R Graceful Antelope @Heather Hudson
+821 R Orim's Chant @Kev Walker
+822 R Planar Collapse @Mark Zug
+823 R Rout @Ron Spencer
+824 C Teremko Griffin @Martin McKenna
+825 R Braids, Conjurer Adept @Zoltan Boros
+826 R Collective Restraint @Alan Rabinowitz
+827 R Empress Galina @Matt Cavotta
+828 R Ertai's Meddling @Steve Luke
+829 U Ghost of Ramirez DePietro @Grzegorz Rutkowski
+830 U Jodah's Avenger @Pete Venters
+831 U Metathran Elite @Jim Nelson
+832 C Probe @Eric Peterson
+833 R Seahunter @Heather Hudson
+834 U Teferi's Veil @Brom
+835 R Whirlpool Warrior @Kev Walker
+836 U Cast Down @Bastien L. Deharme
+837 U Chain of Smog @Greg Staples
+838 R Contamination @Stephen Daniele
+839 C Crypt Rats @Paul Lee
+840 C Dark Ritual @Tom Fleming
+841 C Dash Hopes @Zoltan Boros
+842 R Doomsday @Adrian Smith
+843 U Hymn to Tourach @Greg Staples
+844 U Imps' Taunt @Colin MacNeil
+845 C Phyresis @Izzy
+846 C Phyrexian Battleflies @Dan Frazier
+847 M Phyrexian Scriptures @Joseph Meehan
+848 M Sheoldred, Whispering One @Jana Schirmer
+849 R Sleeper Agent @Randy Gallegos
+850 U Stitch Together @Arnie Swekel
+851 M Tourach, Dread Cantor @Greg Staples
+852 R Alpine Moon @Alayna Danner
+853 C Brightstone Ritual @Wayne England
+854 C Burning Inquiry @Zoltan Boros
+855 R Ghitu Fire @Glen Angus
+856 R Invasion Plans @Pete Venters
+857 R Jaya Ballard, Task Mage @Matt Cavotta
+858 R Lovisa Coldeyes @Brian Snõddy
+859 R Obliterate @Kev Walker
+860 R Pandemonium @Pete Venters
+861 R Skirk Fire Marshal @Greg Hildebrandt
+862 U Viashino Heretic @Douglas Shuler
+863 R Wake of Destruction @Todd Lockwood
+864 U Wall of Granite @Kev Walker
+865 U Elephant Grass @Tony Roberts
+866 R Elvish Champion @D. Alexander Gregory
+867 R Jedit Ojanen of Efrava @Carl Critchlow
+868 R Magnigoth Treefolk @Peter Bollinger
+869 R The Mending of Dominaria @Adam Paquette
+870 U Riftsweeper @Brian Despain
+871 C Cavern Harpy @Daren Bader
+872 S Coalition Victory @Eric Peterson
+873 R Ertai, the Corrupted @Mark Tedin
+874 R Jhoira of the Ghitu @Kev Walker
+875 R Kangee, Aerie Keeper @Mark Romanoski
+876 M Prossh, Skyraider of Kher @Todd Lockwood
+877 R Tsabo Tavoc @Michael Sutfin
+878 M Vaevictis Asmadi, the Dire @Steven Belledin
+879 U Wall of Denial @Howard Lyon
+880 R Amber Prison @Donato Giancola
+881 R Coalition Relic @Donato Giancola
+882 R Helm of the Host @Igor Kieryluk
+883 R Legacy Weapon @John Avon
+884 U Phyrexian Furnace @George Pratt
+885 C Phyrexian Walker @Bryan Talbot
+886 M Scion of Draco @Greg Staples
+887 U Shifting Wall @Michael Sutfin
+888 U Desert @Glen Angus
+889 U Dromar's Cavern @Franz Vohwinkel

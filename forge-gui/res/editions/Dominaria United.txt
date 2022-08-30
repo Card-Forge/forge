@@ -27,7 +27,7 @@ ScryfallCode=DMU
 17 C Destroy Evil @Anna Christenson
 18 C Griffin Protector @Omar Rayyan
 19 R Guardian of New Benalia @Ernanda Souza
-20 C Heroic Charge @Paul Scott Canavan
+20 C Heroic Charge @Zoltan Boros
 21 U Join Forces @Aurore Folny
 22 C Juniper Order Rootweaver @Matt Stewart
 23 U Knight of Dawn's Light @Billy Christian
@@ -55,7 +55,7 @@ ScryfallCode=DMU
 45 U Coral Colony @Campbell White
 46 R Defiler of Dreams @Ryan Pancoast
 47 U Djinn of the Fountain @Bastien L. Deharme
-48 C Ertai's Scorn @Alex Negrea
+48 U Ertai's Scorn @Alex Negrea
 49 C Essence Scatter @Anastasia Ovchinnikova
 50 U Founding the Third Path @Chris Seaman
 51 U Frostfist Strider @Francisco Miyara
@@ -172,7 +172,7 @@ ScryfallCode=DMU
 162 U Elvish Hydromancer @Fajareka Setiawan
 163 C Floriferous Vinewall @Jakub Kasper
 164 C Gaea's Might @Alex Negrea
-165 R Herd Migration @Antonio José Manzanedo
+165 R Herd Migration @Eric Deschamps
 166 C Hexbane Tortoise @Joshua Raphael
 167 R Leaf-Crowned Visionary @Anna Steinbauer
 168 U Linebreaker Baloth @Brent Hollowell
@@ -420,7 +420,7 @@ ScryfallCode=DMU
 410 M Shivan Devastator @Brent Hollowell
 411 R Temporal Firestorm @Nestor Ossandon Leal
 412 R Defiler of Vigor @Chase Stone
-413 R Herd Migration @Antonio José Manzanedo
+413 R Herd Migration @Eric Deschamps
 414 R Leaf-Crowned Visionary @Anna Steinbauer
 415 R Llanowar Greenwidow @Jokubas Uogintas
 416 R Llanowar Loamspeaker @Zara Alfonso
