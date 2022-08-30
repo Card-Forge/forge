@@ -7,4 +7,5 @@ SVar:PerpetualDoubleTeam:Mode$ Continuous | Affected$ Card.IsRemembered | AddKey
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBEffectCast | TriggerDescription$ Whenever you cast a creature spell, it perpetually gains double team. 
 SVar:DBEffectCast:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualDoubleTeamCast | Name$ Sworn to the Legion's Perpetual Effect two | Duration$ Permanent 
 SVar:PerpetualDoubleTeamCast:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Double Team | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains double team
+SVar:BuffedBy:Creature
 Oracle:When Sworn to the Legion enters the battlefield, nontoken creatures you control perpetually gain double team.\nWhenever you cast a creature spell, it perpetually gains double team.
