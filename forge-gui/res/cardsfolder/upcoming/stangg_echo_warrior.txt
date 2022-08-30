@@ -2,13 +2,14 @@ Name:Stangg, Echo Warrior
 ManaCost:2 R G
 Types:Legendary Creature Human Warrior
 PT:3/4
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigStangg | TriggerDescription$ Whenever CARDNAME attacks, create Stangg Twin, a legendary 3/4 red and green Human Warrior creature token. It enters the battlefield tapped and attacking. For each Aura and Equipment attached to Stangg, create a token that's a copy of it attached to Stangg Twin. Sacrifice all tokens created this way at the beginning of the next end step.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigStangg | TriggerDescription$ Whenever CARDNAME attacks, create Stangg Twin, a legendary 3/4 red and green Human Warrior creature token. It enters the battlefield tapped and attacking. For each Aura and Equipment attached to NICKNAME, create a token that's a copy of it attached to Stangg Twin. Sacrifice all tokens created this way at the beginning of the next end step.
 SVar:TrigStangg:DB$ Token | TokenScript$ stangg_twin | TokenOwner$ You | ImprintTokens$ True | RememberTokens$ True | TokenAttacking$ True | TokenTapped$ True | SubAbility$ CreateCopy
 SVar:CreateCopy:DB$ CopyPermanent | Defined$ Valid Equipment.Attached,Aura.Attached | NumCopies$ 1 | AttachedTo$ Imprinted | RememberTokens$ True | SubAbility$ ExileTokens
 SVar:ExileTokens:DB$ Pump | Defined$ Remembered | AtEOT$ Sacrifice | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
 SVar:EnchantMe:Multiple
 SVar:EquipMe:Multiple
-DeckHints:Type$Equipment|Aura
-DeckHas:Ability$Token
+DeckHints:Type$Equipment|Aura 
+DeckHas:Ability$Token|Sacrifice
 Oracle:Whenever Stangg, Echo Warrior attacks, create Stangg Twin, a legendary 3/4 red and green Human Warrior creature token. It enters the battlefield tapped and attacking. For each Aura and Equipment attached to Stangg, create a token that's a copy of it attached to Stangg Twin. Sacrifice all tokens created this way at the beginning of the next end step.
