@@ -5,6 +5,10 @@ Name=Dominaria United
 Code2=DMU
 MciCode=dmu
 Type=Expansion
+BoosterCovers=3
+Booster=10 Common:fromsheet("DMU cards"), 3 Uncommon:fromSheet("DMU cards"), 1 RareMythic:fromSheet("DMU cards"), 1 fromSheet("DMU lands")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=DMU
 
 [cards]
@@ -289,11 +293,20 @@ ScryfallCode=DMU
 279 L Swamp @Magali Villeneuve
 280 L Mountain @Magali Villeneuve
 281 L Forest @Magali Villeneuve
+
+[jumpstart]
 282 R Serra Redeemer @Joshua Raphael
 283 R Cosmic Epiphany @Eli Minaya
 284 R Tyrannical Pitlord @Donato Giancola
 285 R Ragefire Hellkite @Xavier Ribeiro
 286 R Briar Hydra @Caio Monteiro
+423 R Serra Redeemer @Joshua Raphael
+424 R Cosmic Epiphany @Eli Minaya
+425 R Tyrannical Pitlord @Donato Giancola
+426 R Ragefire Hellkite @Xavier Ribeiro
+427 R Briar Hydra @Caio Monteiro
+
+[showcase]
 287 R Danitha, Benalia's Hope @Barbara Rosiak
 288 R Braids, Arisen Nightmare @Dibujante Nocturno
 289 R The Raven Man @David Curtis
@@ -379,6 +392,8 @@ ScryfallCode=DMU
 369 M Sheoldred, the Apocalypse @Chris Rahn
 370 M Ajani, Sleeper Agent @Victor Adame Minguez
 371 M Ajani, Sleeper Agent @Victor Adame Minguez
+
+[borderless]
 372 M Karn, Living Legacy @rk post
 373 M Liliana of the Veil @Brom
 374 M Jaya, Fiery Negotiator @Scott M. Fischer
@@ -390,6 +405,8 @@ ScryfallCode=DMU
 380 R Shivan Reef @Donato Giancola
 381 R Sulfurous Springs @Mark Tedin
 382 R Yavimaya Coast @Mark Poole
+
+[extended art]
 383 R Anointed Peacekeeper @Tia Masic
 384 R Archangel of Wrath @Miguel Mercado
 385 R Defiler of Faith @Magali Villeneuve
@@ -430,18 +447,39 @@ ScryfallCode=DMU
 420 R Urborg Lhurgoyf @Andrey Kuzinskiy
 421 R Plaza of Heroes @Gabor Szikszai
 422 R Thran Portal @Sarah Finnigan
-423 R Serra Redeemer @Joshua Raphael
-424 R Cosmic Epiphany @Eli Minaya
-425 R Tyrannical Pitlord @Donato Giancola
-426 R Ragefire Hellkite @Xavier Ribeiro
-427 R Briar Hydra @Caio Monteiro
+
+[buy a box]
 428 R Llanowar Loamspeaker @Volkan Baǵa
+
+[promo]
 429 R Herd Migration @Antonio José Manzanedo
 430 U Resolute Reinforcements @Billy Christian
 431 U Micromancer @Ernanda Souza
 432 U Cut Down @Dominik Mayer
 433 C Lightning Strike @Marta Nael
 434 U Nishoba Brawler @Valera Lutfullina
+
+[lands]
+2 Plains|DMU|1
+2 Plains|DMU|2
+2 Plains|DMU|3
+1 Plains|DMU|4
+2 Island|DMU|1
+2 Island|DMU|2
+2 Island|DMU|3
+1 Island|DMU|4
+2 Swamp|DMU|1
+2 Swamp|DMU|2
+2 Swamp|DMU|3
+1 Swamp|DMU|4
+2 Mountain|DMU|1
+2 Mountain|DMU|2
+2 Mountain|DMU|3
+1 Mountain|DMU|4
+2 Forest|DMU|1
+2 Forest|DMU|2
+2 Forest|DMU|3
+1 Forest|DMU|4
 
 [tokens]
 b_1_1_bird_flying_noblock
