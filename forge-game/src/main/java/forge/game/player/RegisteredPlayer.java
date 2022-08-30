@@ -63,7 +63,10 @@ public class RegisteredPlayer {
     }
 
     public final void addExtraCardsOnBattlefield(Iterable<IPaperCard> extraCardsonTable) {
-        this.extraCardsOnBattlefield = extraCardsonTable;
+        if (this.extraCardsOnBattlefield == null)
+            this.extraCardsOnBattlefield = extraCardsonTable;
+        else
+            this.extraCardsOnBattlefield = Iterables.concat(this.extraCardsOnBattlefield, extraCardsonTable);
     }
 
     public int getStartingHand() {
