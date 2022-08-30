@@ -1,0 +1,5 @@
+Name:Haunted Mire
+ManaCost:no cost
+Types:Land Swamp Forest
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {B} or {G}.)\nHaunted Mire enters the battlefield tapped.

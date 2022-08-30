@@ -1,0 +1,10 @@
+Name:Academy Loremaster
+ManaCost:U U
+Types:Creature Human Wizard
+PT:2/3
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | OptionalDecider$ TriggeredPlayer | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player may draw an additional card. If they do, spells they cast this turn cost {2} more to cast
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | Defined$ TriggeredPlayer | RememberDrawn$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | ConditionDefined$ Remembered | ConditionPresent$ Card | Duration$ EndOfTurn | StaticAbilities$ RaiseCost | SubAbility$ DBCleanup | SpellDescription$  Spells they cast this turn cost {2} more to cast
+SVar:RaiseCost:Mode$ RaiseCost | ValidCard$ Card.ActivePlayerCtrl | Type$ Spell | Amount$ 2 | Description$ Spells they cast this turn cost {2} more to cast
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:At the beginning of each player's draw step, that player may draw an additional card. If they do, spells they cast this turn cost {2} more to cast

@@ -183,6 +183,8 @@ public enum CounterEnumType {
 
     INFECTION("INFCT", 0, 230, 66),
 
+    INGENUITY("INGTY", 67, 186, 205),
+
     INTERVENTION("INTRV", 205, 203, 105),
 
     INVITATION("INVIT", 205, 0, 26),
@@ -264,6 +266,8 @@ public enum CounterEnumType {
     PRESSURE("PRESS", 255, 164, 159),
 
     PHYLACTERY("PHYLA", 117, 219, 153),
+
+    PHYRESIS("PHYRE", 125, 97, 128),
 
     POINT("POINT", 153, 255, 130),
 

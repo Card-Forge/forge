@@ -6,7 +6,7 @@ SVar:TrigExile:DB$ ChangeZoneAll | ValidTgts$ Opponent | TgtPrompt$ Select targe
 S:Mode$ Continuous | MayPlay$ True | Affected$ Land.IsRemembered+ExiledWithSource | AffectedZone$ Exile | Description$ You may play lands from among cards exiled with CARDNAME.
 S:Mode$ Continuous | MayPlay$ True | MayPlayLimit$ 1 | Affected$ Card.nonLand+IsRemembered+ExiledWithSource | AffectedZone$ Exile | Description$ You may play cards exiled with CARDNAME.
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:When Hedonist's Trove enters the battlefield, exile all cards from target opponent's graveyard.\nYou may play lands from among cards exiled with Hedonist's Trove.\nYou may cast spells from among cards exiled with Hedonist's Trove. You can't cast more than one spell this way each turn.

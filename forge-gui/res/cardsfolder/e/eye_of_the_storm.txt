@@ -6,7 +6,7 @@ SVar:TrigExileSpell:DB$ ChangeZone | Defined$ TriggeredCardLKICopy | Origin$ Sta
 SVar:DBPlaySpell:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered | ChooseOrder$ True | Zone$ Exile | RepeatSubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Defined$ Imprinted | Controller$ TriggeredCardController | WithoutManaCost$ True | ValidSA$ Spell | CopyCard$ True | Optional$ True
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
-SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All

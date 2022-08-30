@@ -1,0 +1,11 @@
+Name:Emperor Mihail II
+ManaCost:1 U U
+Types:Legendary Creature Merfolk Noble
+PT:3/3
+S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
+S:Mode$ Continuous | Affected$ Merfolk.TopLibrary+YouCtrl | AffectedZone$ Library | MayPlay$ True | Description$ You may play Merfolk spells from the top of your library.
+T:Mode$ SpellCast | ValidCard$ Merfolk | ValidActivatingPlayer$ You | Execute$ TrigToken | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Merfolk spell, you may pay {1}. If you do, create a 1/1 blue Merfolk creature token.
+SVar:TrigToken:AB$ Token | Cost$ 1 | TokenScript$ u_1_1_merfolk | TokenOwner$ You | SpellDescription$ Create a 1/1 blue Merfolk creature token.
+DeckHas:Ability$Token
+DeckHints:Type$Merfolk
+Oracle:You may look at the top card of your library any time.\nYou may cast Merfolk spells from the top of your library.\nWhenever you cast a Merfolk spell, you may pay {1}. If you do, create a 1/1 blue Merfolk creature token.

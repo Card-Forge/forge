@@ -2737,10 +2737,10 @@ public class AbilityUtils {
                     SpellAbility sa = (SpellAbility) ctb;
                     if (sa.isReplacementAbility()) {
                         if (zones.get(0).equals(ZoneType.Battlefield)) {
-                            cardsInZones = sa.getLastStateBattlefield();
+                            cardsInZones = sa.getRootAbility().getLastStateBattlefield();
                             usedLastState = true;
                         } else if (zones.get(0).equals(ZoneType.Graveyard)) {
-                            cardsInZones = sa.getLastStateGraveyard();
+                            cardsInZones = sa.getRootAbility().getLastStateGraveyard();
                             usedLastState = true;
                         }
                     }

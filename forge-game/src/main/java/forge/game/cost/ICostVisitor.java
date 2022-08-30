@@ -3,6 +3,7 @@ package forge.game.cost;
 public interface ICostVisitor<T> {
 
     T visit(CostGainControl cost);
+    T visit(CostChooseColor cost);
     T visit(CostChooseCreatureType cost);
     T visit(CostDiscard cost);
     T visit(CostDamage cost);
@@ -37,6 +38,11 @@ public interface ICostVisitor<T> {
 
         @Override
         public T visit(CostGainControl cost) {
+            return null;
+        }
+
+        @Override
+        public T visit(CostChooseColor cost) {
             return null;
         }
 

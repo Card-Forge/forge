@@ -8,7 +8,7 @@ SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogi
 SVar:TrigChoice:DB$ ChooseCard | Defined$ ChosenPlayer | Amount$ 1 | Choices$ Permanent.YouCtrl+Other | RememberChosen$ True | Mandatory$ True | SubAbility$ ExileChoice
 SVar:ExileChoice:DB$ ChangeZone | IsCurse$ True | Defined$ Remembered | Origin$ Battlefield | Destination$ Exile
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered.ExiledWithSource | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

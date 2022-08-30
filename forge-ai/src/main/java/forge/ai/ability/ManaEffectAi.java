@@ -105,13 +105,11 @@ public class ManaEffectAi extends SpellAbilityAi {
         }
 
         PhaseHandler ph = ai.getGame().getPhaseHandler();
-        boolean moreManaNextTurn = false;
-        if (ph.is(PhaseType.END_OF_TURN) && (ph.getNextTurn() == ai || ComputerUtilCard.willUntap(ai, sa.getHostCard())) && canRampPool(ai, sa.getHostCard())) {
-            moreManaNextTurn = true;
-        }
+        boolean moreManaNextTurn = ph.is(PhaseType.END_OF_TURN) && (ph.getNextTurn() == ai || ComputerUtilCard.willUntap(ai, sa.getHostCard()))
+                && canRampPool(ai, sa.getHostCard());
 
         return sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
-                && sa.getSubAbility() == null && (ComputerUtil.playImmediately(ai, sa) || moreManaNextTurn);
+                && sa.getSubAbility() == null && (moreManaNextTurn || ComputerUtil.playImmediately(ai, sa));
     }
 
     /**

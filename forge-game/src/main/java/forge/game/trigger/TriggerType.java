@@ -102,6 +102,7 @@ public enum TriggerType {
     SearchedLibrary(TriggerSearchedLibrary.class),
     SetInMotion(TriggerSetInMotion.class),
     Shuffled(TriggerShuffled.class),
+    Specializes(TriggerSpecializes.class),
     SpellAbilityCast(TriggerSpellAbilityCastOrCopy.class),
     SpellAbilityCopy(TriggerSpellAbilityCastOrCopy.class),
     SpellCast(TriggerSpellAbilityCastOrCopy.class),

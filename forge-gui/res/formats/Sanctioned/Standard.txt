@@ -3,5 +3,4 @@ Name:Standard
 Order:101
 Subtype:Standard
 Type:Sanctioned
-Sets:ZNR, KHM, STX, AFR, MID, VOW, NEO, SNC
-Banned:Alrund's Epiphany; Divide by Zero; Faceless Haven; Omnath, Locus of Creation
+Sets:MID, VOW, NEO, SNC, DMU

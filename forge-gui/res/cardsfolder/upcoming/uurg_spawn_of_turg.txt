@@ -1,0 +1,12 @@
+Name:Uurg, Spawn of Turg
+ManaCost:B B G
+Types:Legendary Creature Frog Beast
+PT:*/5
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of land cards in your graveyard.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.
+SVar:TrigDig:DB$ Dig | DigNum$ 1 | DestinationZone$ Graveyard | Optional$ True | LibraryPosition2$ 0
+A:AB$ GainLife | Cost$ B G Sac<1/Land> | LifeAmount$ 2
+SVar:X:Count$TypeInYourYard.Land
+DeckHas:Ability$LifeGain|Graveyard
+DeckHints:Ability$Graveyard
+Oracle:Uurg, Spawn of Turg's power is equal to the number of land cards in your graveyard.\nAt the beginning of your upkeep, look at the top card of your library. You may put that card into your graveyard.\n{B}{G}, Sacrifice a land: You gain 2 life.

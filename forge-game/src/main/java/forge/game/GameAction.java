@@ -608,6 +608,10 @@ public class GameAction {
         if (c.hasIntensity()) {
             copied.setIntensity(c.getIntensity(false));
         }
+        // specialize is perpetual
+        if (c.isSpecialized()) {
+            copied.setState(c.getCurrentStateName(), false);
+        }
 
         // update state for view
         copied.updateStateForView();
@@ -688,7 +692,7 @@ public class GameAction {
         }
 
         if (fromBattlefield) {
-            if (!c.isRealToken()) {
+            if (!c.isRealToken() && !c.isSpecialized()) {
                 copied.setState(CardStateName.Original, true);
             }
             // Soulbond unpairing
@@ -2415,7 +2419,7 @@ public class GameAction {
         }
 
         // for Zangief do this before runWaitingTriggers DamageDone
-        damageMap.triggerExcessDamage(isCombat, lethalDamage, game);
+        damageMap.triggerExcessDamage(isCombat, lethalDamage, game, lkiCache);
 
         // lose life simultaneously
         if (isCombat) {
