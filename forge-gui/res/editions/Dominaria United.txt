@@ -7,6 +7,7 @@ MciCode=dmu
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromsheet("DMU cards"), 3 Uncommon:fromSheet("DMU cards"), 1 RareMythic:fromSheet("DMU cards"), 1 fromSheet("DMU lands")
+BoosterMustContain=Legendary Creature
 Prerelease=6 Boosters, 1 RareMythic+
 BoosterBox=36
 ScryfallCode=DMU
