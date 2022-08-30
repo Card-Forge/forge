@@ -57,8 +57,8 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     protected final String latestArtLightningDragonEdition = "VMA";
     protected final String latestArtLightningDragonEditionNoPromo = "USG";
 
-    protected final String latestArtHymnToTourachEdition = "EMA";
-    protected final String latestArtHymnToTourachEditionNoPromo = "EMA";
+    protected final String latestArtHymnToTourachEdition = "PLIST";
+    protected final String latestArtHymnToTourachEditionNoPromo = "PLIST";
     protected final String originalArtHymnToTourachEdition = "FEM";
     protected final String originalArtHymnToTourachEditionNoPromo = "FEM";
 
