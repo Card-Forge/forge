@@ -71,7 +71,6 @@ public class MakeCardEffect extends SpellAbilityEffect {
             if (!name.equals("")) {
                 while (amount > 0) {
                     Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), player);
-                    card.setTokenCard(true);
                     game.getAction().moveTo(ZoneType.None, card, sa, moveParams);
                     cards.add(card);
                     amount--;

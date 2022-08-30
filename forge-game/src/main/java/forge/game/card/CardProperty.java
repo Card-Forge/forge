@@ -1339,7 +1339,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("token")) {
-            if (!card.isToken() && !card.isTokenCard()) {
+            if (!card.isToken()) {
                 return false;
             }
             // copied spell don't count
@@ -1347,7 +1347,7 @@ public class CardProperty {
                 return false;
             }
         } else if (property.startsWith("nonToken")) {
-            if (card.isToken() || card.isTokenCard()) {
+            if (card.isToken()) {
                 return false;
             }
         } else if (property.startsWith("copiedSpell")) {
