@@ -16,20 +16,21 @@ import forge.util.lang.LangGerman;
 import forge.util.lang.LangItalian;
 import forge.util.lang.LangJapanese;
 import forge.util.lang.LangSpanish;
+import forge.util.lang.LangFrench;
 
 /**
  * Static library containing language-related utility methods.
  */
 public abstract class Lang {
 
-	private static Lang instance;
+    private static Lang instance;
     private static Lang englishInstance;
 
     protected String languageCode;
     protected String countryCode;
 
     public static void createInstance(String localeID) {
-		String[] splitLocale = localeID.split("-");
+        String[] splitLocale = localeID.split("-");
         String language = splitLocale[0];
         String country = splitLocale[1];
         if (language.equals("de")) {
@@ -42,6 +43,8 @@ public abstract class Lang {
             instance = new LangChinese();
         } else if (language.equals("ja")) {
             instance = new LangJapanese();
+        } else if (language.equals("fr")) {
+            instance = new LangFrench();
         } else { // default is English
             instance = new LangEnglish();
         }
@@ -54,14 +57,14 @@ public abstract class Lang {
         englishInstance.countryCode = "US";
     }
 
-	public static Lang getInstance() {
-		return instance;
-	}
+    public static Lang getInstance() {
+        return instance;
+    }
 
     public static Lang getEnglishInstance() {
         return englishInstance;
     }
-	
+
     protected Lang() {
     }
 
@@ -70,7 +73,7 @@ public abstract class Lang {
      * of a numbers, eg. "st" for 1 ("first") and "th" for 4 ("fourth").
      * 
      * @param position
-     *            the number to get the ordinal suffix for.
+     *                 the number to get the ordinal suffix for.
      * @return a string containing two characters.
      */
     public abstract String getOrdinal(final int position);
@@ -81,26 +84,32 @@ public abstract class Lang {
         return has1 ? (has2 ? s1 + " and " + s2 : s1) : (has2 ? s2 : "");
     }
 
-    public static <T> String joinHomogenous(final Iterable<T> objects) { return joinHomogenous(Lists.newArrayList(objects)); }
-    public static <T> String joinHomogenous(final Collection<T> objects) { return joinHomogenous(objects, null, "and"); }
+    public static <T> String joinHomogenous(final Iterable<T> objects) {
+        return joinHomogenous(Lists.newArrayList(objects));
+    }
+
+    public static <T> String joinHomogenous(final Collection<T> objects) {
+        return joinHomogenous(objects, null, "and");
+    }
+
     public static <T> String joinHomogenous(final Collection<T> objects, final Function<T, String> accessor) {
         return joinHomogenous(objects, accessor, "and");
     }
-    public static <T> String joinHomogenous(final Collection<T> objects, final Function<T, String> accessor, final String lastUnion) {
+
+    public static <T> String joinHomogenous(final Collection<T> objects, final Function<T, String> accessor,
+            final String lastUnion) {
         int remaining = objects.size();
         final StringBuilder sb = new StringBuilder();
         for (final T obj : objects) {
             remaining--;
             if (accessor != null) {
                 sb.append(accessor.apply(obj));
-            }
-            else {
+            } else {
                 sb.append(obj);
             }
             if (remaining > 1) {
                 sb.append(", ");
-            }
-            else if (remaining == 1) {
+            } else if (remaining == 1) {
                 sb.append(" ").append(lastUnion).append(" ");
             }
         }
@@ -108,7 +117,8 @@ public abstract class Lang {
     }
 
     public static <T> String joinVerb(final List<T> subjects, final String verb) {
-        return subjects.size() > 1 || !subjectIsSingle3rdPerson(Iterables.getFirst(subjects, "it").toString()) ? verb : verbs3rdPersonSingular(verb);
+        return subjects.size() > 1 || !subjectIsSingle3rdPerson(Iterables.getFirst(subjects, "it").toString()) ? verb
+                : verbs3rdPersonSingular(verb);
     }
 
     public static String joinVerb(final String subject, final String verb) {
@@ -126,7 +136,8 @@ public abstract class Lang {
     }
 
     public static String getPlural(final String noun) {
-        return noun + (noun.endsWith("s") && !noun.endsWith("ds") || noun.endsWith("x") || noun.endsWith("ch") ? "es" : noun.endsWith("ds") ? "" : "s");
+        return noun + (noun.endsWith("s") && !noun.endsWith("ds") || noun.endsWith("x") || noun.endsWith("ch") ? "es"
+                : noun.endsWith("ds") ? "" : "s");
     }
 
     public static String nounWithAmount(final int cnt, final String noun) {
@@ -170,6 +181,7 @@ public abstract class Lang {
     }
 
     public abstract String getPossesive(final String name);
+
     public abstract String getPossessedObject(final String owner, final String object);
 
     public static boolean startsWithVowel(final String word) {
@@ -177,14 +189,17 @@ public abstract class Lang {
     }
 
     private static final Pattern VOWEL_PATTERN = Pattern.compile("[aeiou]", Pattern.CASE_INSENSITIVE);
+
     public static boolean isVowel(final char letter) {
         return VOWEL_PATTERN.matcher(String.valueOf(letter)).find();
     }
 
     public final static String[] numbers0 = new String[] {
-        "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eightteen", "nineteen" };
-    public final static String[] numbers20 = new String[] {"twenty", "thirty", "fourty", "fifty", "sixty", "seventy", "eighty", "ninety" };
+            "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+            "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eightteen",
+            "nineteen" };
+    public final static String[] numbers20 = new String[] { "twenty", "thirty", "fourty", "fifty", "sixty", "seventy",
+            "eighty", "ninety" };
 
     public static String getNumeral(int n) {
         final String prefix = n < 0 ? "minus " : "";
