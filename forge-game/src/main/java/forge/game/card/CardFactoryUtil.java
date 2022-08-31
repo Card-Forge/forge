@@ -1063,6 +1063,22 @@ public class CardFactoryUtil {
             dethroneTrigger.setOverridingAbility(AbilityFactory.getAbility(abString, card));
 
             inst.addTrigger(dethroneTrigger);
+        } else if (keyword.equals("Double Team")) {	
+            final String doubleteamScript = "Mode$ Attacks | ValidCard$ Card.Self+nonToken | TriggerZones$ Battlefield | TriggerDescription$ (" + inst.getReminderText() + ")";
+            final String makeString = "DB$ MakeCard | DefinedName$ Self | Zone$ Hand | RememberMade$ True";
+            final String forgetString = "DB$ Effect | Duration$ Permanent | RememberObjects$ Remembered | ImprintCards$ TriggeredAttacker | StaticAbilities$ RemoveDoubleTeamMade";       
+            final String madeforgetmadeString = "Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered,Card.IsImprinted | RemoveKeyword$ Double Team | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Both cards perpetually lose double team.";
+            final String CleanupString = "DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True";
+            final Trigger trigger = TriggerHandler.parseTrigger(doubleteamScript, card, intrinsic);
+            final SpellAbility youMake = AbilityFactory.getAbility(makeString, card);
+            final AbilitySub forget = (AbilitySub) AbilityFactory.getAbility(forgetString, card);
+            final AbilitySub Cleanup = (AbilitySub) AbilityFactory.getAbility(CleanupString, card);
+            forget.setSVar("RemoveDoubleTeamMade",madeforgetmadeString);
+            youMake.setSubAbility(forget);
+            forget.setSubAbility(Cleanup);
+            trigger.setOverridingAbility(youMake);
+            
+            inst.addTrigger(trigger); 
         } else if (keyword.startsWith("Echo")) {
             final String[] k = keyword.split(":");
             final String cost = k[1];
