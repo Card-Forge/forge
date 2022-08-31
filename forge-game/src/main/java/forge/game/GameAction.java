@@ -852,11 +852,7 @@ public class GameAction {
 
         if (zoneTo.is(ZoneType.Stack)) {
             // zoneFrom maybe null if the spell is cast from "Ouside the game", ex. ability of Garth One-Eye
-            if (zoneFrom == null) {
-                c.setCastFrom(null);
-            } else {
-                c.setCastFrom(zoneFrom);
-            }
+            c.setCastFrom(zoneFrom);
             if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
                 c.setCastSA(cause);
             } else {
@@ -1849,7 +1845,6 @@ public class GameAction {
     }
 
     public final boolean destroy(final Card c, final SpellAbility sa, final boolean regenerate, CardZoneTable table, Map<AbilityKey, Object> params) {
-        Player activator = null;
         if (!c.canBeDestroyed()) {
             return false;
         }
@@ -1866,6 +1861,7 @@ public class GameAction {
             return false;
         }
 
+        Player activator = null;
         if (sa != null) {
             activator = sa.getActivatingPlayer();
         }
