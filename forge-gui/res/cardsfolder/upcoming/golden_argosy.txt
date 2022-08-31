@@ -11,5 +11,5 @@ SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defi
 T:Mode$ Phase | Phase$ End of Turn | Static$ True | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Crew:1
-SVar:HasAttackEffect:True
+SVar:HasAttackEffect:TRUE
 Oracle:Whenever Golden Argosy attacks, exile each creature that crewed it this turn. Return them to the battlefield tapped under their owner's control at the beginning of the next end step.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)
