@@ -2,9 +2,9 @@ Name:Combat Research
 ManaCost:U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curiosity
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curiosity | AITgts$ Creature.Legendary
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ TrigDamageDone | Description$ Enchanted creature has "Whenever this creature deals combat damage to a player, draw a card."
-SVar:TrigDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card
+SVar:TrigDamageDone:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
 SVar:TrigDraw:DB$ Draw
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Legendary | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Ward:1 | Description$ As long as enchanted creature is legendary, it gets +1/+1 and has ward {1}. (Whenever enchanted creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {1}.) 
 DeckHints:Type$Legendary
