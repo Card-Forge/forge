@@ -1,0 +1,8 @@
+Name:Llanowar Stalker
+ManaCost:G
+Types:Creature Elf Warrior
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature enters the battlefield under your control, CARDNAME gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1
+SVar:BuffedBy:Creature
+Oracle:Whenever another creature enters the battlefield under your control, Llanowar Stalker gets +1/+0 until end of turn.

@@ -1,0 +1,10 @@
+Name:Gibbering Barricade
+ManaCost:2 B
+Types:Creature Nightmare Wall
+PT:2/4
+K:Defender
+A:AB$ GainLife | Cost$ 2 B Sac<1/Creature> | LifeAmount$ 1 | SubAbility$ DBDraw | SpellDescription$ Sacrifice a creature: You gain 1 life and draw a card.
+SVar:DBDraw:DB$ Draw
+DeckHas:Ability$Sacrifice|Lifegain
+DeckHints:Type$Creature
+Oracle:Defender\n{2}{B}, Sacrifice a creature: You gain 1 life and draw a card.
