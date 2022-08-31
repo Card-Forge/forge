@@ -2,6 +2,8 @@ package forge.adventure.stage;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -15,7 +17,9 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -24,7 +28,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TypingAdapter;
 import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
@@ -81,6 +87,10 @@ public class MapStage extends GameStage {
     //These maps are defined as embedded properties within the Tiled maps.
     private EffectData effect;             //"Dungeon Effect": Character Effect applied to all adversaries within the map.
     private boolean preventEscape = false; //Prevents player from escaping the dungeon by any means that aren't an exit.
+    private ObjectMap<Integer, TextButton> dialogButtonMap;
+    private int selected = 0;
+    public InputEvent eventEnter, eventExit, eventTouchDown, eventTouchUp;
+    TextButton selectedKey;
 
 
     public boolean getDialogOnlyInput() {
@@ -124,6 +134,18 @@ public class MapStage extends GameStage {
 
     public void resLoaded() {
         dialog = Controls.newDialog("");
+        eventTouchDown = new InputEvent();
+        eventTouchDown.setPointer(-1);
+        eventTouchDown.setType(InputEvent.Type.touchDown);
+        eventTouchUp = new InputEvent();
+        eventTouchUp.setPointer(-1);
+        eventTouchUp.setType(InputEvent.Type.touchUp);
+        eventEnter = new InputEvent();
+        eventEnter.setPointer(-1);
+        eventEnter.setType(InputEvent.Type.enter);
+        eventExit = new InputEvent();
+        eventExit.setPointer(-1);
+        eventExit.setType(InputEvent.Type.exit);
     }
 
     public void addMapActor(MapObject obj, MapActor newActor) {
@@ -643,6 +665,8 @@ public class MapStage extends GameStage {
                     break;
                 } else if (actor instanceof RewardSprite) {
                     Gdx.input.vibrate(50);
+                    if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
+                        Controllers.getCurrent().startVibration(100,1);
                     startPause(0.1f, () -> { //Switch to item pickup scene.
                         RewardSprite RS = (RewardSprite) actor;
                         ((RewardScene) SceneType.RewardScene.instance).loadRewards(RS.getRewards(), RewardScene.Type.Loot, null);
@@ -664,6 +688,9 @@ public class MapStage extends GameStage {
         mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
         SoundSystem.instance.play(SoundEffectType.Block, false);
         Gdx.input.vibrate(50);
+        int duration = mob.getData().boss ? 400 : 200;
+        if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
+            Controllers.getCurrent().startVibration(duration,1);
         startPause(0.8f, () -> {
             Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
             SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
@@ -691,16 +718,30 @@ public class MapStage extends GameStage {
     public boolean isInMap() {
         return isInMap;
     }
+    public boolean isDialogOnlyInput() {
+        return dialogOnlyInput;
+    }
 
     public void showDialog() {
+        if (dialogButtonMap == null)
+            dialogButtonMap = new ObjectMap<>();
+        else
+            dialogButtonMap.clear();
+        for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
+            dialogButtonMap.put(i, (TextButton) dialog.getButtonTable().getCells().get(i).getActor());
+        }
         dialog.show(dialogStage, Actions.show());
         dialog.setPosition((dialogStage.getWidth() - dialog.getWidth()) / 2, (dialogStage.getHeight() - dialog.getHeight()) / 2);
         dialogOnlyInput = true;
+        if (Forge.hasGamepad())
+            selectDialogButton(dialogButtonMap.get(0), false);
     }
 
     public void hideDialog() {
         dialog.hide(Actions.sequence(Actions.sizeTo(dialog.getOriginX(), dialog.getOriginY(), 0.3f), Actions.hide()));
         dialogOnlyInput = false;
+        selected = 0;
+        selectedKey = null;
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -735,5 +776,63 @@ public class MapStage extends GameStage {
 
     public void resetQuestFlags() {
         changes.getMapFlags().clear();
+    }
+
+    public boolean buttonPress(int keycode) {
+        if (dialogOnlyInput) {
+            if (keycode == Input.Keys.DPAD_UP) {
+                selectPreviousDialogButton();
+            }
+            if (keycode == Input.Keys.DPAD_DOWN) {
+                selectNextDialogButton();
+            }
+            if (keycode == Input.Keys.BUTTON_A) {
+                selectDialogButton(selectedKey, true);
+            }
+        }
+        return true;
+    }
+
+    private void selectDialogButton(TextButton dialogButton, boolean press) {
+        if (dialogOnlyInput) {
+            if (selectedKey != null)
+                selectedKey.fire(eventExit);
+            if (dialogButton != null && dialogButton.isVisible()) {
+                dialogButton.fire(eventEnter);
+                selectedKey = dialogButton;
+                selected = getButtonIndexKey(dialogButton);
+                if (press)
+                    performTouch(dialogButton);
+            }
+        }
+    }
+    public void performTouch(Actor actor) {
+        if (actor == null)
+            return;
+        actor.fire(eventTouchDown);
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                actor.fire(eventTouchUp);
+            }
+        }, 0.10f);
+    }
+    private int getButtonIndexKey(TextButton dialogbutton) {
+        if (dialogButtonMap.isEmpty())
+            return 0;
+        Integer key = dialogButtonMap.findKey(dialogbutton, true);
+        if (key == null)
+            return 0;
+        return key;
+    }
+    private void selectNextDialogButton() {
+        if (dialogButtonMap.size < 2)
+            return;
+        selectDialogButton(dialogButtonMap.get(selected+1), false);
+    }
+    private void selectPreviousDialogButton() {
+        if (dialogButtonMap.size < 2)
+            return;
+        selectDialogButton(dialogButtonMap.get(selected-1), false);
     }
 }

@@ -2,6 +2,9 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.ControllerListener;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,11 +19,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.scene.HudScene;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.SceneType;
+import forge.adventure.scene.UIScene;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
@@ -33,7 +39,7 @@ import forge.gui.GuiBase;
 /**
  * Stage to handle everything rendered in the HUD
  */
-public class GameHUD extends Stage {
+public class GameHUD extends Stage implements ControllerListener {
 
     static public GameHUD instance;
     private final GameStage gameStage;
@@ -50,6 +56,7 @@ public class GameHUD extends Stage {
     float TOUCHPAD_SCALE = 70f, referenceX;
     boolean isHiding = false, isShowing = false;
     float opacity = 1f;
+    private InputEvent eventTouchDown, eventTouchUp;
 
     private GameHUD(GameStage gameStage) {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
@@ -110,19 +117,9 @@ public class GameHUD extends Stage {
         ui.onButtonPress("deck", () -> openDeck());
         lifePoints = ui.findActor("lifePoints");
         lifePoints.setText("20/20");
-        AdventurePlayer.current().onLifeChange(new Runnable() {
-            @Override
-            public void run() {
-                lifePoints.setText(AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
-            }
-        });
+        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText(AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
         money = ui.findActor("money");
-        WorldSave.getCurrentSave().getPlayer().onGoldChange(new Runnable() {
-            @Override
-            public void run() {
-                money.setText(String.valueOf(AdventurePlayer.current().getGold()));
-            }
-        }) ;
+        WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText(String.valueOf(AdventurePlayer.current().getGold()))) ;
         addActor(ui);
         addActor(miniMapPlayer);
         console=new Console();
@@ -134,12 +131,14 @@ public class GameHUD extends Stage {
             avatarborder.addListener(new ConsoleToggleListener());
             gamehud.addListener(new ConsoleToggleListener());
         }
-        WorldSave.getCurrentSave().onLoad(new Runnable() {
-            @Override
-            public void run() {
-                GameHUD.this.enter();
-            }
-        });
+        WorldSave.getCurrentSave().onLoad(() -> GameHUD.this.enter());
+        eventTouchDown = new InputEvent();
+        eventTouchDown.setPointer(-1);
+        eventTouchDown.setType(InputEvent.Type.touchDown);
+        eventTouchUp = new InputEvent();
+        eventTouchUp.setPointer(-1);
+        eventTouchUp.setType(InputEvent.Type.touchUp);
+        Controllers.addListener(this);
     }
 
     private void statistic() {
@@ -327,7 +326,30 @@ public class GameHUD extends Stage {
                     showButtons();
             }
         }
+        if (keycode == Input.Keys.BUTTON_B) {
+            performTouch(statsActor);
+        }
+        if (keycode == Input.Keys.BUTTON_Y) {
+            performTouch(inventoryActor);
+        }
+        if (keycode == Input.Keys.BUTTON_X) {
+            performTouch(deckActor);
+        }
+        if (keycode == Input.Keys.BUTTON_A) {
+            performTouch(menuActor);
+        }
         return super.keyDown(keycode);
+    }
+    public void performTouch(Actor actor) {
+        if (actor == null)
+            return;
+        actor.fire(eventTouchDown);
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                actor.fire(eventTouchUp);
+            }
+        }, 0.10f);
     }
     public void hideButtons() {
         if (isShowing)
@@ -355,6 +377,123 @@ public class GameHUD extends Stage {
         deckActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.parallel(Actions.show(), Actions.alpha(opacity,0.1f), Actions.moveTo(referenceX, deckActor.getY(), 0.25f))));
         FThreads.delayInEDT(300, () -> isShowing = false);
     }
+
+    @Override
+    public void connected(Controller controller) {
+
+    }
+
+    @Override
+    public void disconnected(Controller controller) {
+
+    }
+
+    @Override
+    public boolean buttonDown(Controller controller, int buttonIndex) {
+        if (Forge.getCurrentScene() instanceof HudScene) {
+            if (controller.getMapping().buttonA == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyDown(Input.Keys.BUTTON_A);
+            if (controller.getMapping().buttonB == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyDown(Input.Keys.BUTTON_B);
+            if (controller.getMapping().buttonX == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyDown(Input.Keys.BUTTON_X);
+            if (controller.getMapping().buttonY == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyDown(Input.Keys.BUTTON_Y);
+            if (controller.getMapping().buttonDpadUp == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyDown(Input.Keys.DPAD_UP);
+            if (controller.getMapping().buttonDpadRight == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyDown(Input.Keys.DPAD_RIGHT);
+            if (controller.getMapping().buttonDpadDown == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyDown(Input.Keys.DPAD_DOWN);
+            if (controller.getMapping().buttonDpadLeft == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyDown(Input.Keys.DPAD_LEFT);
+        } else if (Forge.getCurrentScene() instanceof UIScene) {
+            if (controller.getMapping().buttonDpadUp == buttonIndex)
+                return ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.DPAD_UP);
+            if (controller.getMapping().buttonDpadRight == buttonIndex)
+                return ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.DPAD_RIGHT);
+            if (controller.getMapping().buttonDpadDown == buttonIndex)
+                return ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.DPAD_DOWN);
+            if (controller.getMapping().buttonDpadLeft == buttonIndex)
+                return ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.DPAD_LEFT);
+            if (controller.getMapping().buttonA == buttonIndex)
+                return ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.BUTTON_A);
+            if (controller.getMapping().buttonB == buttonIndex)
+                return ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.BUTTON_B);
+            if (controller.getMapping().buttonX == buttonIndex)
+                return ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.BUTTON_X);
+            if (controller.getMapping().buttonY == buttonIndex)
+                return ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.BUTTON_Y);
+            if (controller.getMapping().buttonR1 == buttonIndex)
+                return ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.BUTTON_R1);
+            if (controller.getMapping().buttonL1 == buttonIndex)
+                return ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.BUTTON_L1);
+            if (controller.getMapping().buttonR2 == buttonIndex)
+                return ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.BUTTON_R2);
+            if (controller.getMapping().buttonL2 == buttonIndex)
+                return ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.BUTTON_L2);
+            if (controller.getMapping().buttonBack == buttonIndex)
+                return ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.BUTTON_SELECT);
+            if (controller.getMapping().buttonStart == buttonIndex)
+                return ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.BUTTON_START);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean buttonUp(Controller controller, int buttonIndex) {
+        if (Forge.getCurrentScene() instanceof HudScene) {
+            if (controller.getMapping().buttonA == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyUp(Input.Keys.BUTTON_A);
+            if (controller.getMapping().buttonB == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyUp(Input.Keys.BUTTON_B);
+            if (controller.getMapping().buttonX == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyUp(Input.Keys.BUTTON_X);
+            if (controller.getMapping().buttonY == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyUp(Input.Keys.BUTTON_Y);
+            if (controller.getMapping().buttonDpadUp == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyUp(Input.Keys.DPAD_UP);
+            if (controller.getMapping().buttonDpadRight == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyUp(Input.Keys.DPAD_RIGHT);
+            if (controller.getMapping().buttonDpadDown == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyUp(Input.Keys.DPAD_DOWN);
+            if (controller.getMapping().buttonDpadLeft == buttonIndex)
+                return ((HudScene) Forge.getCurrentScene()).keyUp(Input.Keys.DPAD_LEFT);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean axisMoved(Controller controller, int axisIndex, float value) {
+        if (Forge.hasGamepad()) {
+            if (Forge.getCurrentScene() instanceof HudScene) {
+                if (controller.getAxis(controller.getMapping().axisLeftX) > 0.5f) {
+                    ((HudScene) Forge.getCurrentScene()).keyDown(Input.Keys.DPAD_RIGHT);
+                } else if (controller.getAxis(controller.getMapping().axisLeftX) < -0.5f) {
+                    ((HudScene) Forge.getCurrentScene()).keyDown(Input.Keys.DPAD_LEFT);
+                } else {
+                    ((HudScene) Forge.getCurrentScene()).keyUp(Input.Keys.DPAD_LEFT);
+                    ((HudScene) Forge.getCurrentScene()).keyUp(Input.Keys.DPAD_RIGHT);
+                }
+                if (controller.getAxis(controller.getMapping().axisLeftY) > 0.5f) {
+                    ((HudScene) Forge.getCurrentScene()).keyDown(Input.Keys.DPAD_DOWN);
+                } else if (controller.getAxis(controller.getMapping().axisLeftY) < -0.5f) {
+                    ((HudScene) Forge.getCurrentScene()).keyDown(Input.Keys.DPAD_UP);
+                } else {
+                    ((HudScene) Forge.getCurrentScene()).keyUp(Input.Keys.DPAD_UP);
+                    ((HudScene) Forge.getCurrentScene()).keyUp(Input.Keys.DPAD_DOWN);
+                }
+            } else if (Forge.getCurrentScene() instanceof UIScene) {
+                if (controller.getAxis(4) == 1f) //L2
+                    ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.BUTTON_L2);
+                if (controller.getAxis(5) == 1f) //R2
+                    ((UIScene) Forge.getCurrentScene()).keyPressed(Input.Keys.BUTTON_R2);
+            }
+        }
+
+        return true;
+    }
+
     class ConsoleToggleListener extends ActorGestureListener {
         public ConsoleToggleListener() {
             getGestureDetector().setLongPressSeconds(0.6f);

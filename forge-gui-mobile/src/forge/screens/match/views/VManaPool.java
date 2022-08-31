@@ -90,7 +90,7 @@ public class VManaPool extends VDisplayArea {
         return new ScrollBounds(visibleWidth, visibleHeight);
     }
 
-    private class ManaLabel extends FDisplayObject {
+    public class ManaLabel extends FDisplayObject {
         private final FSkinImage image;
         private final byte colorCode;
         private String text = "0";
@@ -102,12 +102,14 @@ public class VManaPool extends VDisplayArea {
 
         @Override
         public boolean tap(float x, float y, int count) {
+            activate();
+            return true;
+        }
+        public void activate() {
             if (player.isLobbyPlayer(GamePlayerUtil.getGuiPlayer())) {
                 MatchController.instance.getGameController().useMana(colorCode);
             }
-            return true;
         }
-
         @Override
         public boolean flick(float x, float y) {
             if (player.isLobbyPlayer(GamePlayerUtil.getGuiPlayer())) {
@@ -141,6 +143,8 @@ public class VManaPool extends VDisplayArea {
             float x = (getWidth() - w) / 2;
             float y = gapY + (maxImageHeight - h) / 2;
 
+            if (isHovered())
+                g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, 0, getWidth(), getHeight());
             g.drawImage(image, x, y, w, h);
 
             x = 0;

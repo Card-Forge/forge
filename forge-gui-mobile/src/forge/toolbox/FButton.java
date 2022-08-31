@@ -1,5 +1,6 @@
 package forge.toolbox;
 
+import com.badlogic.gdx.utils.Timer;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.Input.Keys;
@@ -221,7 +222,19 @@ public class FButton extends FDisplayObject implements IButton {
 
     public boolean trigger() {
         if (isEnabled() && command != null) {
-            command.handleEvent(new FEvent(this, FEventType.TAP));
+            FEvent fEvent = new FEvent(this, FEventType.TAP);
+            if (Forge.hasGamepad()) {
+                press(0, 0);
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        command.handleEvent(fEvent);
+                        release(0,0);
+                    }
+                }, 0.10f);
+                return true;
+            }
+            command.handleEvent(fEvent);
             return true;
         }
         return false;

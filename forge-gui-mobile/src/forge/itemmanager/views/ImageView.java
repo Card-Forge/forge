@@ -26,7 +26,6 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.toolbox.*;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.util.ImageUtil;
 import forge.util.TextUtil;
 import forge.util.Utils;
@@ -67,20 +66,17 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         private ExpandCollapseButton() {
             super(new FLabel.ButtonBuilder());
-            setCommand(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    if (groupBy == null || model.getItems().isEmpty()) { return; }
+            setCommand(e -> {
+                if (groupBy == null || model.getItems().isEmpty()) { return; }
 
-                    boolean collapsed = !isAllCollapsed;
-                    for (Group group : groups) {
-                        group.isCollapsed = collapsed;
-                    }
-
-                    updateIsAllCollapsed();
-                    clearSelection(); //must clear selection since indices and visible items will be changing
-                    updateLayout(false);
+                boolean collapsed = !isAllCollapsed;
+                for (Group group : groups) {
+                    group.isCollapsed = collapsed;
                 }
+
+                updateIsAllCollapsed();
+                clearSelection(); //must clear selection since indices and visible items will be changing
+                updateLayout(false);
             });
         }
 
@@ -139,26 +135,20 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         SItemManagerUtil.populateImageViewOptions(itemManager0, cbGroupByOptions, cbPileByOptions);
 
-        cbGroupByOptions.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                if (cbGroupByOptions.getSelectedIndex() > 0) {
-                    setGroupBy((GroupDef) cbGroupByOptions.getSelectedItem());
-                }
-                else {
-                    setGroupBy(null);
-                }
+        cbGroupByOptions.setChangedHandler(e -> {
+            if (cbGroupByOptions.getSelectedIndex() > 0) {
+                setGroupBy((GroupDef) cbGroupByOptions.getSelectedItem());
+            }
+            else {
+                setGroupBy(null);
             }
         });
-        cbPileByOptions.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                if (cbPileByOptions.getSelectedIndex() > 0) {
-                    setPileBy((ColumnDef) cbPileByOptions.getSelectedItem());
-                }
-                else {
-                    setPileBy(null);
-                }
+        cbPileByOptions.setChangedHandler(e -> {
+            if (cbPileByOptions.getSelectedIndex() > 0) {
+                setPileBy((ColumnDef) cbPileByOptions.getSelectedItem());
+            }
+            else {
+                setPileBy(null);
             }
         });
 
@@ -759,6 +749,22 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         return new Rectangle(itemInfo.group.screenPos.x + relPos.x - SEL_BORDER_SIZE + itemInfo.group.getLeft(),
                 itemInfo.group.screenPos.y + relPos.y - SEL_BORDER_SIZE,
                 itemInfo.getWidth() + 2 * SEL_BORDER_SIZE, itemInfo.getHeight() + 2 * SEL_BORDER_SIZE);
+    }
+
+    @Override
+    public void zoomSelected() {
+        if (selectedIndices.isEmpty()) { return; }
+        int index=selectedIndices.get(0);
+        if(index<0||orderedItems.size()<=index) { return ; }
+
+        ItemInfo itemInfo = orderedItems.get(index);
+        if (itemInfo != null) {
+            if(itemInfo.getKey() instanceof CardThemedDeckGenerator || itemInfo.getKey() instanceof CommanderDeckGenerator
+                    || itemInfo.getKey() instanceof ArchetypeDeckGenerator || itemInfo.getKey() instanceof DeckProxy){
+                FDeckViewer.show(((DeckProxy)itemInfo.getKey()).getDeck());
+            }
+            CardZoom.show(orderedItems, orderedItems.indexOf(itemInfo), itemManager);
+        }
     }
 
     private class Group extends FScrollPane {

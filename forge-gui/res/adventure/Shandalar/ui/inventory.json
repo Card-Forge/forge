@@ -5,7 +5,7 @@
   "elements": [
     {
       "type": "Image",
-      "image": "ui/title_bg.png",
+      "name": "lastScreen",
       "width": 480,
       "height": 270
     },
