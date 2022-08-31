@@ -34,6 +34,7 @@ public class PlayerStatisticScene extends UIScene {
     TextButton back;
     private Table enemiesGroup;
     Label blessingScroll;
+    ScrollPane scrollPane, blessing;
 
     public PlayerStatisticScene() {
         super(Forge.isLandscapeMode() ? "ui/statistic.json" : "ui/statistic_portrait.json");
@@ -51,6 +52,16 @@ public class PlayerStatisticScene extends UIScene {
         if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
             back();
         }
+        if (keycode == Input.Keys.BUTTON_B)
+            performTouch(ui.findActor("return"));
+        else if (keycode == Input.Keys.BUTTON_A)
+            performTouch(selectedActor);
+        else if (keycode == Input.Keys.BUTTON_L1 || keycode == Input.Keys.DPAD_UP) {
+            scrollPane.fling(1f, 0, -300);
+        } else if (keycode == Input.Keys.BUTTON_R1 || keycode == Input.Keys.DPAD_DOWN) {
+            scrollPane.fling(1f, 0, +300);
+        } else if (keycode == Input.Keys.DPAD_LEFT || keycode == Input.Keys.DPAD_RIGHT || keycode == Input.Keys.DPAD_UP || keycode == Input.Keys.DPAD_DOWN)
+            selectActor(back, false);
         return true;
     }
 
@@ -93,20 +104,10 @@ public class PlayerStatisticScene extends UIScene {
             avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
         }
         if (life != null) {
-            AdventurePlayer.current().onLifeChange(new Runnable() {
-                @Override
-                public void run() {
-                    life.setText(AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
-                }
-            });
+            AdventurePlayer.current().onLifeChange(() -> life.setText(AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
         }
         if (money != null) {
-            WorldSave.getCurrentSave().getPlayer().onGoldChange(new Runnable() {
-                @Override
-                public void run() {
-                    money.setText(String.valueOf(AdventurePlayer.current().getGold()));
-                }
-            });
+            WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText(String.valueOf(AdventurePlayer.current().getGold())));
         }
         if (totalWins != null) {
             totalWins.setText(Current.player().getStatistic().totalWins());
@@ -142,8 +143,8 @@ public class PlayerStatisticScene extends UIScene {
             enemiesGroup.add((entry.getValue().getRight().toString())).align(Align.center).space(3, 2, 3, 2);
             enemiesGroup.row().space(8);
         }
-
-
+        clearActorObjects();
+        addActorObject(back);
     }
 
     @Override
@@ -155,12 +156,7 @@ public class PlayerStatisticScene extends UIScene {
         blessingScroll.setStyle(new Label.LabelStyle(Controls.getBitmapFont("default"), Color.BLACK));
         blessingScroll.setAlignment(Align.topLeft);
         blessingScroll.setWrap(true);
-        ui.onButtonPress("return", new Runnable() {
-            @Override
-            public void run() {
-                PlayerStatisticScene.this.back();
-            }
-        });
+        ui.onButtonPress("return", () -> PlayerStatisticScene.this.back());
 
         avatar = ui.findActor("avatar");
         avatarBorder = ui.findActor("avatarBorder");
@@ -181,9 +177,9 @@ public class PlayerStatisticScene extends UIScene {
         lossWinRatio = ui.findActor("lossWinRatio");
         back = ui.findActor("return");
         back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
-        ScrollPane scrollPane = ui.findActor("enemies");
+        scrollPane = ui.findActor("enemies");
         scrollPane.setActor(enemiesGroup);
-        ScrollPane blessing = ui.findActor("blessingInfo");
+        blessing = ui.findActor("blessingInfo");
         blessing.setActor(blessingScroll);
 
     }

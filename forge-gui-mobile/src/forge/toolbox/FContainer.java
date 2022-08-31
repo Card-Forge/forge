@@ -150,11 +150,16 @@ public abstract class FContainer extends FDisplayObject {
     @Override
     public boolean keyDown(int keyCode) {
         //by default, give all enabled children a chance handle keyDown
-        for (FDisplayObject c : children) {
-            if (c.isEnabled() && c.keyDown(keyCode)) {
-                return true;
+        try {
+            for (FDisplayObject c : children) {
+                if (c.isEnabled() && c.keyDown(keyCode)) {
+                    return true;
+                }
             }
+            return false;
+        } catch (Exception e) {
+            //e.printStackTrace();
+            return false;
         }
-        return false;
     }
 }

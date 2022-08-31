@@ -277,6 +277,7 @@ public abstract class ItemView<T extends InventoryItem> {
     public abstract int getIndexAtPoint(float x, float y);
     public abstract void scrollSelectionIntoView();
     public abstract Rectangle getSelectionBounds();
+    public abstract void zoomSelected();
     public abstract FImage getIcon();
     public abstract String getCaption();
     protected abstract void onSetSelectedIndex(int index);

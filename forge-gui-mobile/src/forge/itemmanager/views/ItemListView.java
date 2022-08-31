@@ -135,6 +135,13 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
     }
 
     @Override
+    public void zoomSelected() {
+        if (selectedIndices.isEmpty())
+            return;
+        list.longPress(list.screenPos.x, list.screenPos.y+list.getItemStartPosition(getSelectedIndex())-list.getListItemRenderer().getItemHeight());
+    }
+
+    @Override
     public void selectAll() {
         selectedIndices.clear();
         for (Integer i = 0; i < getCount(); i++) {

@@ -25,6 +25,7 @@ public class SettingsScene extends UIScene {
     Texture Background;
     private Table settingGroup;
     TextButton back;
+    ScrollPane scrollPane;
 
     public SettingsScene() {
         super(Forge.isLandscapeMode() ? "ui/settings.json" : "ui/settings_portrait.json");
@@ -53,6 +54,13 @@ public class SettingsScene extends UIScene {
     public boolean keyPressed(int keycode) {
         if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
             back();
+        }
+        if (keycode == Input.Keys.BUTTON_B)
+            performTouch(back);
+        else if (keycode == Input.Keys.BUTTON_L1) {
+            scrollPane.fling(1f, 0, -300);
+        } else if (keycode == Input.Keys.BUTTON_R1) {
+            scrollPane.fling(1f, 0, +300);
         }
         return true;
     }
@@ -267,7 +275,7 @@ public class SettingsScene extends UIScene {
         back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
         ui.onButtonPress("return", () -> SettingsScene.this.back());
 
-        ScrollPane scrollPane = ui.findActor("settings");
+        scrollPane = ui.findActor("settings");
         scrollPane.setActor(settingGroup);
 
     }

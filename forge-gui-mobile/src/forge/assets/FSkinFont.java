@@ -411,7 +411,7 @@ public class FSkinFont {
         if (fontFile != null && fontFile.exists()) {
             FThreads.invokeInEdtNowOrLater(() -> { //font must be initialized on UI thread
                 try {
-                    if (!Forge.getAssets().manager().contains(fontFile.path(), BitmapFont.class)) {
+                    if (!Forge.getAssets().manager().contains(fontFile.path(), BitmapFont.class) && fontFile.toString().endsWith(".fnt")) {
                         Forge.getAssets().manager().load(fontFile.path(), BitmapFont.class);
                         Forge.getAssets().manager().finishLoadingAsset(fontFile.path());
                     }

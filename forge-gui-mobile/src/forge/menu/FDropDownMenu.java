@@ -5,6 +5,7 @@ import java.util.List;
 
 public abstract class FDropDownMenu extends FDropDown {
     protected final List<FMenuItem> items = new ArrayList<>();
+    private int selected = -1;
 
     public FDropDownMenu() {
     }
@@ -72,5 +73,50 @@ public abstract class FDropDownMenu extends FDropDown {
     public boolean tap(float x, float y, int count) {
         super.tap(x, y, count);
         return !(getDropDownOwner() instanceof FSubMenu); //return false so owning sub menu can be hidden
+    }
+
+    @Override
+    public void setNextSelected() {
+        selected++;
+        clearHighlight();
+        if (selected > items.size()) {
+            selected = 0;
+        }
+        try {
+            items.get(selected).setHovered(true);
+        } catch (Exception e){}
+        if (selected > items.size()) {
+            clearHighlight();
+            selected = items.size();
+        }
+        super.setNextSelected();
+    }
+
+    @Override
+    public void setPreviousSelected() {
+        selected--;
+        if (selected < 0) {
+            selected = items.size();
+        }
+        clearHighlight();
+        try {
+            items.get(selected).setHovered(true);
+        } catch (Exception e){}
+        if (selected < 0) {
+            clearHighlight();
+            selected = -1;
+        }
+        super.setPreviousSelected();
+    }
+    private void clearHighlight() {
+        for (FMenuItem item : items) {
+            item.setHovered(false);
+        }
+    }
+
+    @Override
+    public void hide() {
+        selected = -1;
+        super.hide();
     }
 }

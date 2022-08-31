@@ -45,6 +45,12 @@
         </resources>
         <finalName>forge-android-${alpha-version}</finalName>
     </build>
+    <repositories>
+        <repository>
+            <id>gdx-nightlies</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>com.google.android</groupId>
@@ -166,6 +172,12 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx-controllers</groupId>
+            <artifactId>gdx-controllers-android</artifactId>
+            <version>2.2.3-SNAPSHOT</version>
+            <type>aar</type>
         </dependency>
     </dependencies>
 
@@ -401,6 +413,7 @@
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="INSTALLATION.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="CHANGES.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="GAMEPAD_README.txt" />
                                             <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
                                             <fileset dir="${basedir}/../forge-gui-mobile-dev/" includes="sentry.properties" />
                                             <fileset dir="${basedir}/../forge-gui/">
