@@ -1,0 +1,11 @@
+Name:Ghitu Amplifier
+ManaCost:1 R
+Types:Creature Human Wizard
+PT:1/2
+K:Kicker:2 U
+T:Mode$ ChangesZone | Origin$ Any | Condition$ Kicked | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return target creature an opponent controls to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBPump | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME gets +2/+0 until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ 2
+DeckHints:Type$Instant|Sorcery
+Oracle:Kicker {2}{U} (You may pay an additional {2}{U} as you cast this spell.)\nWhen Ghitu Amplifier enters the battlefield, if it was kicked, return target creature an opponent controls to its owner's hand.\nWhenever you cast an instant or sorcery spell, Ghitu Amplifier gets +2/+0 until end of turn.
