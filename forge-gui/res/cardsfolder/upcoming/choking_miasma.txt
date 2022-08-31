@@ -1,0 +1,8 @@
+Name:Choking Miasma
+ManaCost:1 B B
+Types:Sorcery
+K:Kicker:G
+A:SP$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | Condition$ Kicked | CounterNum$ 1 | SubAbility$ PumpAll
+SVar:PumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | SpellDescription$ If this spell was kicked, put a +1/+1 counter on a creature you control.\nAll creatures get -2/-2 until end of turn.
+DeckHas:Ability$Counters
+Oracle:Kicker {G} (You may pay an additional {G} as you cast this spell.)\nIf this spell was kicked, put a +1/+1 counter on a creature you control.\nAll creatures get -2/-2 until end of turn.
