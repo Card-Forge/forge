@@ -331,9 +331,19 @@ public abstract class SpellAbilityEffect {
     }
 
     protected static void addSelfTrigger(final SpellAbility sa, String location, final Card card) {
+    	String player = "";
+        if (location.contains("_")) {
+    	    String[] locSplit = location.split("_");
+    	    player = locSplit[0];
+    	    location = locSplit[1];
+        }
+
     	String trigStr = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield " +
     	     "| TriggerDescription$ At the beginning of the end step, " + location.toLowerCase()  + " CARDNAME.";
-    	
+        if (!player.equals("")) {
+            trigStr += " | Player$ " + player;
+        }
+
     	final Trigger trig = TriggerHandler.parseTrigger(trigStr, card, true);
     	
     	String trigSA = "";
