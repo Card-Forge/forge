@@ -531,6 +531,9 @@ public abstract class SpellAbilityEffect {
                     "| Origin$ Battlefield | Destination$ Graveyard " +
                     "| Description$ If that permanent would die this turn, exile it instead.";
             String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ " + zone;
+            if (sa.hasParam("ReplaceDyingRemember")) {
+                effect += " | RememberToEffectSource$ True";
+            }
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
             re.setLayer(ReplacementLayer.Other);
