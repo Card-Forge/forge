@@ -6,7 +6,6 @@ import forge.toolbox.FDisplayObject;
 import forge.toolbox.FScrollPane;
 
 import java.util.Arrays;
-import java.util.List;
 
 public abstract class VDisplayArea extends FScrollPane {
     private FDisplayObject selectedChild;
