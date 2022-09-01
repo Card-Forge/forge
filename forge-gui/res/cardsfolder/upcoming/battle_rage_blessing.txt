@@ -1,5 +1,6 @@
-Name:Contaminated Aquifer
-ManaCost:no cost
-Types:Land Island Swamp
-K:CARDNAME enters the battlefield tapped.
-Oracle:({T}: Add {U} or {B}.)\nContaminated Aquifer enters the battlefield tapped.
+Name:Battle-Rage Blessing
+ManaCost:1 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | KW$ Indestructible & Deathtouch | SpellDescription$ Target creature gains deathtouch and indestructible until end of turn. (Damage and effects that say "destroy" don’t destroy it.)
+DeckHas:Ability$Deathtouch|Indestructible
+Oracle:Target creature gains deathtouch and indestructible until end of turn. (Damage and effects that say "destroy" don’t destroy it.)
