@@ -7,8 +7,8 @@ import urllib.request
 
 # 'scryfall lang code':'ISO 639 lang code'
 languages = {'es': 'es-ES', 'de': 'de-DE', 'it': 'it-IT',
-             'pt': 'pt-BR', 'zhs': 'zh-CN'}
-langfiles = {'es': None, 'de': None, 'it': None, 'zhs': None}
+             'pt': 'pt-BR', 'zhs': 'zh-CN', 'fr': 'fr-FR'}
+langfiles = {'es': None, 'de': None, 'it': None, 'zhs': None, 'fr': None}
 
 # Request Scryfall API to download all_cards json file
 request = urllib.request.urlopen('https://api.scryfall.com/bulk-data')
