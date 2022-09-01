@@ -4,6 +4,6 @@ Types:Creature Spirit Cleric
 PT:3/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
-A:AB$ ChangeZone | Cost$ 4 B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl+other | SpellDescription$ Return target creature card from your graveyard to your hand.
-DeckHas:Ability$Graveyard
+A:AB$ ChangeZone | Cost$ 4 B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select another target creature card in your graveyard | ValidTgts$ Creature.YouOwn+Other  | SpellDescription$ Return another target creature card from your graveyard to your hand.
+DeckHas:Ability$Graveyard|Mill
 Oracle:When Eerie Soultender enters the battlefield, mill three cards. (To mill a card, put the top card of your library into your graveyard.)\n{4}{B}, Exile Eerie Soultender from your graveyard: Return another target creature card from your graveyard to your hand.
