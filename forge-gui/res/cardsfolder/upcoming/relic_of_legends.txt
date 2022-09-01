@@ -1,0 +1,8 @@
+Name:Relic of Legends
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ tapXType<1/Creature.Legendary/untapped legendary creature> | Produced$ Any | SpellDescription$ Add one mana of any color.
+AI:RemoveDeck:Random
+DeckNeeds:Type$Legendary
+Oracle:{T}: Add one mana of any color.\nTap an untapped legendary creature you control: Add one mana of any color.

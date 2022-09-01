@@ -1,0 +1,12 @@
+Name:The Weatherseed Treaty
+ManaCost:2 G
+Types:Enchantment Saga
+K:Read ahead:3:DBChangeZone,DBToken,DBDomain
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | Tapped$ True | ChangeNum$ 1 | SpellDescription$ Search your library for a basic land card and put that card onto the battlefield tapped. Then shuffle.
+SVar:DBToken:DB$ Token | TokenScript$ g_1_1_saproling | SpellDescription$ Create a 1/1 green Saproling creature token.
+SVar:DBDomain:DB$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +X | NumDef$ +X | KW$ Trample | TgtPrompt$ Select target creature you control | SpellDescription$ Domain — Target creature you control gets +X/+X and gains trample until end of turn, where X is the number of basic land types among lands you control.
+SVar:X:Count$Domain
+SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
+AI:RemoveDeck:Random
+DeckHas:Ability$Token & Type$Saproling
+Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don't trigger. Sacrifice after III.)\nI — Search your library for a basic land card, put it onto the battlefield tapped, then shuffle.\nII — Create a 1/1 green Saproling creature token.\nIII — Domain — Target creature you control gets +X/+X and gains trample until end of turn, where X is the number of basic land types among lands you control.
