@@ -44,7 +44,7 @@
             <plugin>
                     <groupId>com.akathist.maven.plugins.launch4j</groupId>
                     <artifactId>launch4j-maven-plugin</artifactId>
-                    <version>2.1.2</version>
+                    <version>1.7.25</version>
                     <executions>
                         <execution>
                             <id>l4j-adv</id>
