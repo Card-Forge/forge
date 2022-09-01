@@ -105,7 +105,7 @@ public class FMenuBar extends Header {
 
     @Override
     public boolean keyDown(int keyCode) {
-        if (keyCode == Input.Keys.BUTTON_L1) {
+        if (keyCode == Input.Keys.BUTTON_SELECT) { //show menu tabs
             setNextSelected();
             return true;
         }

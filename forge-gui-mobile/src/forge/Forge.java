@@ -288,6 +288,9 @@ public class Forge implements ApplicationListener {
                         if (controller.getMapping().buttonB == buttonIndex) {
                             container.keyDown(Keys.BUTTON_B);
                         }
+                        if (controller.getMapping().buttonBack == buttonIndex) {
+                            container.keyDown(Keys.BUTTON_SELECT);
+                        }
                     } else {//Others
                         /*if (controller.getMapping().buttonL2 == buttonIndex) {//others are axis-4
                             container.keyDown(Keys.ENTER);
