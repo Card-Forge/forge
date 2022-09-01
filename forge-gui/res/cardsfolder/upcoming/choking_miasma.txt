@@ -2,7 +2,7 @@ Name:Choking Miasma
 ManaCost:1 B B
 Types:Sorcery
 K:Kicker:G
-A:SP$ PutCounter | Choices$ Creature.YouCtrl | CounterType$ P1P1 | Condition$ Kicked | CounterNum$ 1 | SubAbility$ DBPumpAll | SpellDescription$ If this spell was kicked, put a +1/+1 counter on a creature you control. All creatures get -2/-2 until end of turn.
+A:SP$ PutCounter | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you control | CounterType$ P1P1 | Condition$ Kicked | CounterNum$ 1 | SubAbility$ DBPumpAll | SpellDescription$ If this spell was kicked, put a +1/+1 counter on a creature you control. All creatures get -2/-2 until end of turn.
 SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2
 DeckHas:Ability$Counters
 DeckHints:Color$Green
