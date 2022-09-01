@@ -1,0 +1,14 @@
+Name:Rivaz of the Claw
+ManaCost:1 B R
+Types:Legendary Creature Viashino Warlock
+PT:3/3
+K:Menace
+A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Creature.Dragon | SpellDescription$ {T}: Add two mana in any combination of colors. Spend this mana only to cast Dragon creature spells.
+S:Mode$ Continuous | Affected$ Creature.Dragon+YouCtrl | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | SpellDescription$ Once during each of your turns, you may cast a Dragon creature spell from your graveyard.
+T:Mode$ SpellCast | ValidCard$ Dragon.wasCastFromYourGraveyard | ValidActivatingPlayer$ You | Execute$ DBAnimate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Dragon creature spell from your graveyard, it gains "When this creature dies, exile it."
+SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCard | Duration$ Permanent | Triggers$ TrigDieExile | StackDescription$ {c:Targeted} gains "When this creature dies, exile it."
+SVar:TrigDieExile:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When this creature dies, exile it.
+SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile
+DeckNeeds:Type$Dragon
+DeckHints:Ability$Graveyard
+Oracle:Menace\n{T}: Add two mana in any combination of colors. Spend this mana only to cast Dragon creature spells.\nOnce during each of your turns, you may cast a Dragon creature spell from your graveyard.\nWhenever you cast a Dragon creature spell from your graveyard, it gains "When this creature dies, exile it."
