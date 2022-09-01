@@ -6,5 +6,5 @@ SVar:DelayedTrigger:DB$ DelayedTrigger | AILogic$ SpellCopy | Mode$ SpellCast | 
 SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
 SVar:DBDoubleStrike:DB$ Pump | ValidTgts$ Creature.YouCtrl | KW$ Double Strike | SpellDescription$ Target creature you control gains double strike until end of turn.
 SVar:BuffedBy:Instant,Sorcery
-DeckHints:Type$Instant|Sorcery & Keyword$DoubleStrike
+DeckHints:Type$Instant|Sorcery & Keyword$Double Strike
 Oracle:Choose one — \n• When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.\n• Target creature you control gains double strike until end of turn.
