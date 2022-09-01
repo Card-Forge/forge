@@ -1,0 +1,7 @@
+Name:Ertai's Scorn
+ManaCost:1 U U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | CheckSVar$ OppCastThisTurn | SVarCompare$ GE2 | Type$ Spell | Amount$ U | EffectZone$ All | Description$ This spell costs {1} less to cast if you control a Wizard.
+A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+SVar:OppCastThisTurn:Count$ThisTurnCast_Card.OppCtrl
+Oracle:This spell costs {U} less to cast if an opponent cast two or more spells this turn.\nCounter target spell.
