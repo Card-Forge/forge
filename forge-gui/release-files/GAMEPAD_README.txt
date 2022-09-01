@@ -57,10 +57,11 @@ Right Trigger - Keep/Mulligan/Cancel/End Turn/Alpha Strike (Bottom Right Button)
 (To select cards on the battlefield, close Zone tabs first (Button B), then use DPAD)
 
 DPAD Up/Down/Left/Right - Selector
-Left Shoulder - Tab Selector/Show
+Left Shoulder - Player Panel Selector
 Right Shoulder - Zone Selector/Show
-Left Analog Down - Switch Player for Selector
+Left Analog Down - Select Player (current selected panel)
 
 Button A - Confirm
 Button B - Cancel/Hide
 Button Y - Show Zoom
+Button Back - Show Menu Tabs

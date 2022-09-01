@@ -579,14 +579,16 @@ public class MatchScreen extends FScreen {
                     } catch (Exception e) {}
                 }
                 break;
-            case Keys.PAGE_DOWN:
+            case Keys.BUTTON_L1: //switch selected panels
                 if (Forge.hasGamepad()) {
                     //nullPotentialListener();
                     selectedPlayerPanel().hideSelectedTab();
                     selectedPlayer--;
                     if (selectedPlayer < 0)
                         selectedPlayer=playerPanelsList.size()-1;
-                    selectedPlayerPanel().setNextSelectedTab(true);
+                    selectedPlayerPanel().closeSelectedTab();
+                    selectedPlayerPanel().getSelectedRow().unselectCurrent();
+                    //selectedPlayerPanel().setNextSelectedTab(true);
                 }
                 break;
             case Keys.ENTER:

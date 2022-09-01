@@ -179,7 +179,7 @@ public class VAvatar extends FDisplayObject {
 
     @Override
     public boolean keyDown(int keyCode) {
-        if (keyCode == Input.Keys.BUTTON_SELECT) {
+        if (keyCode == Input.Keys.PAGE_DOWN) { // left analog down to select current selected panel
             //must invoke in game thread in case a dialog needs to be shown
             if (MatchController.getView().selectedPlayerPanel() != null) {
                 PlayerView selected = MatchController.getView().selectedPlayerPanel().getPlayer();
