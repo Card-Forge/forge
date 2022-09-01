@@ -1,7 +1,7 @@
 Name:Ertai's Scorn
 ManaCost:1 U U
 Types:Instant
-S:Mode$ ReduceCost | ValidCard$ Card.Self | CheckSVar$ OppCastThisTurn | SVarCompare$ GE2 | Type$ Spell | Amount$ 1 | Color$ U | EffectZone$ All | Description$ This spell costs {U} less to cast if an opponent cast two or more spells this turn. 
+S:Mode$ ReduceCost | ValidCard$ Card.Self | CheckSVar$ OppCastThisTurn | SVarCompare$ GE2 | Type$ Spell | Amount$ 1 | Color$ U |ar EffectZone$ All | Description$ This spell costs {U} less to cast if an opponent cast two or more spells this turn. 
 A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 SVar:OppCastThisTurn:Count$ThisTurnCast_Card.OppCtrl
 Oracle:This spell costs {U} less to cast if an opponent cast two or more spells this turn.\nCounter target spell.

@@ -3,5 +3,5 @@ ManaCost:1 W
 Types:Instant
 A:SP$ Charm | Choices$ DBDestroyCreature,DBDestroyEnchantment
 SVar:DBDestroyCreature:DB$ Destroy | ValidTgts$ Creature.toughnessGE4 | TgtPrompt$ Select target creature with toughness 4 or greater | SpellDescription$ Destroy target creature with toughness 4 or greater.
-SVar:DestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
+SVar:DBDestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | SpellDescription$ Destroy target enchantment.
 Oracle:Choose one — \n• Destroy target creature with toughness 4 or greater.\n• Destroy target enchantment.
