@@ -1,11 +1,13 @@
 package forge.game.staticability;
 
 import forge.game.Game;
+import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Expressions;
 
 public class StaticAbilityCastWithFlash {
 
@@ -20,7 +22,7 @@ public class StaticAbilityCastWithFlash {
                 if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
                     continue;
                 }
-                if (applyWithFlashNeedsTargeting(stAb, sa, card, activator)) {
+                if (applyWithFlashNeedsInfo(stAb, sa, card, activator)) {
                     return true;
                 }
             }
@@ -60,12 +62,12 @@ public class StaticAbilityCastWithFlash {
         return true;
     }
 
-    public static boolean applyWithFlashNeedsTargeting(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
+    public static boolean applyWithFlashNeedsInfo(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
         if (!commonParts(stAb, sa, card, activator)) {
             return false;
         }
 
-        return stAb.hasParam("Targeting");
+        return stAb.hasParam("Targeting") || stAb.hasParam("XCondition");
     }
 
     public static boolean applyWithFlashAbility(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
@@ -81,6 +83,16 @@ public class StaticAbilityCastWithFlash {
             if (!stAb.matchesValidParam("Targeting", sa.getTargets())) {
                 return false;
             }
+        }
+
+        if (stAb.hasParam("XCondition")) {
+            final String value = stAb.getParam("XCondition");
+            String comparator = value.substring(0, 2);
+            int y = AbilityUtils.calculateAmount(sa.getHostCard(), value.substring(2), sa);
+            if (!Expressions.compare(sa.getXManaCostPaid(), comparator, y)) {
+                return false;
+            }
+
         }
 
         return true;
