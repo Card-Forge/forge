@@ -4,13 +4,13 @@ Types:Creature Spider
 PT:4/3
 K:Reach
 K:Trample
-A:AB$ ChangeZone | Cost$ 7 G | ReduceCost$ X | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | ActivationZone$ Graveyard | SubAbility$ DBAnimate | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped.It gains "If this permanent would leave the battlefield, exile it instead." This ability costs {1} less to activate for each basic land type among lands you control.
+A:AB$ ChangeZone | Cost$ 7 G | ReduceCost$ X | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | ActivationZone$ Graveyard | SubAbility$ DBAnimate | SpellDescription$ Return CARDNAME from your graveyard to the battlefield tapped. It gains "If this permanent would leave the battlefield, exile it instead." This ability costs {1} less to activate for each basic land type among lands you control.
 SVar:DBAnimate:DB$ Animate | Replacements$ ReplaceLeaves | Defined$ Self | Duration$ Permanent
-SVar:ReplaceLeaves:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If this permanent would leave the battlefield, exile it instead of putting it anywhere else.
+SVar:ReplaceLeaves:Event$ Moved | ActiveZones$ Battlefield | Origin$ Battlefield | ValidCard$ Card.Self | ReplaceWith$ Exile | Description$ If this permanent would leave the battlefield, exile it instead.
 SVar:Exile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ ReplacedCard
 SVar:DiscardMe:2
 SVar:SacMe:1
 SVar:X:Count$Domain
 SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 AI:RemoveDeck:Random
-Oracle:{T}: Add one mana of any color.\n{T}: Target land you control becomes a 3/3 Elemental creature with haste until end of turn. It's still a land. Activate only as as sorcery.
+Oracle:{T}:Reach, trample\nDomain — {7}{G}: Return Llanowar Greenwidow from your graveyard to the battlefield tapped. It gains "If this permanent would leave the battlefield, exile it instead." This ability costs {1} less to activate for each basic land type among lands you control.
