@@ -1,19 +1,17 @@
 package forge.game.staticability;
 
 import forge.game.Game;
-import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
-import forge.util.Expressions;
 
 public class StaticAbilityCastWithFlash {
 
     static String MODE = "CastWithFlash";
 
-    public static boolean anyWithFlashNeedsTargeting(final SpellAbility sa, final Card card, final Player activator) {
+    public static boolean anyWithFlashNeedsInfo(final SpellAbility sa, final Card card, final Player activator) {
         final Game game = activator.getGame();
         final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         allp.add(card);
@@ -47,13 +45,15 @@ public class StaticAbilityCastWithFlash {
         return false;
     }
 
-    public static boolean commonParts(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
+    private static boolean commonParts(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator, final boolean skipValidSA) {
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
 
-        if (!stAb.matchesValidParam("ValidSA", sa)) {
-            return false;
+        if (!skipValidSA) {
+            if (!stAb.matchesValidParam("ValidSA", sa)) {
+                return false;
+            }
         }
 
         if (!stAb.matchesValidParam("Caster", activator)) {
@@ -63,36 +63,21 @@ public class StaticAbilityCastWithFlash {
     }
 
     public static boolean applyWithFlashNeedsInfo(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
-        if (!commonParts(stAb, sa, card, activator)) {
+        boolean info = false;
+        String validSA = stAb.getParam("ValidSA");
+        if (validSA.contains("IsTargeting") || validSA.contains("XCost")) {
+            info = true;
+        }
+        if (!commonParts(stAb, sa, card, activator, info)) {
             return false;
         }
 
-        return stAb.hasParam("Targeting") || stAb.hasParam("XCondition");
+        return info;
     }
 
     public static boolean applyWithFlashAbility(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
-        if (!commonParts(stAb, sa, card, activator)) {
+        if (!commonParts(stAb, sa, card, activator, false)) {
             return false;
-        }
-
-        if (stAb.hasParam("Targeting")) {
-            if (!sa.usesTargeting()) {
-                return false;
-            }
-
-            if (!stAb.matchesValidParam("Targeting", sa.getTargets())) {
-                return false;
-            }
-        }
-
-        if (stAb.hasParam("XCondition")) {
-            final String value = stAb.getParam("XCondition");
-            String comparator = value.substring(0, 2);
-            int y = AbilityUtils.calculateAmount(sa.getHostCard(), value.substring(2), sa);
-            if (!Expressions.compare(sa.getXManaCostPaid(), comparator, y)) {
-                return false;
-            }
-
         }
 
         return true;
