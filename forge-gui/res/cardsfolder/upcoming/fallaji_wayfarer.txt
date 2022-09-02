@@ -2,7 +2,7 @@ Name:Fallaji Wayfarer
 ManaCost:2 G
 Types:Creature Human Scout
 PT:2/4
-S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ False | SetColor$ All | Description$ CARDNAME is all colors. This ability doesn’t affect its color identity. (It can be in any deck whose commander’s color identity includes green.)
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ False | SetColor$ All | Description$ CARDNAME is all colors. This ability doesn’t affect its color identity. (It can be in any deck whose commander's color identity includes green.)
 S:Mode$ Continuous | Affected$ Card.YouCtrl+MultiColor| AffectedZone$ Stack | AddKeyword$ Convoke | Description$ Multicolored spells you cast have convoke. (Your creatures can help cast those spells. Each creature you tap while casting a multicolored spell pays for {1} or one mana of a color that creature is.)
 AI:RemoveDeck:Random
 SVar:BuffedBy:Card.MultiColor
