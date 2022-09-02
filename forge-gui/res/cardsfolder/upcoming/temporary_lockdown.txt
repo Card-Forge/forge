@@ -2,8 +2,6 @@ Name:Temporary Lockdown
 ManaCost:1 W W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile each nonland permanent with mana value 2 or less until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZoneAll | ChangeType$ Permanent.nonLand+cmcLE2 | RememberChanged$ True | ForgetOtherTargets$ True | Origin$ Battlefield | Destination$ Exile
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled cards to the battlefield under their owner's control.
-SVar:TrigReturn:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Battlefield
+SVar:TrigExile:DB$ ChangeZoneAll | ChangeType$ Permanent.nonLand+cmcLE2 | Duration$ UntilHostLeavesPlay | Origin$ Battlefield | Destination$ Exile
 SVar:OblivionRing:TRUE
 Oracle:When Temporary Lockdown enters the battlefield, exile each nonland permanent with mana value 2 or less until Temporary Lockdown leaves the battlefield.
