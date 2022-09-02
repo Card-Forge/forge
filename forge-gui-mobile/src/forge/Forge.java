@@ -171,174 +171,6 @@ public class Forge implements ApplicationListener {
         frameRate = new FrameRate();
         animationBatch = new SpriteBatch();
         inputProcessor = new MainInputProcessor();
-        controllerListener = new ControllerAdapter() {
-            @Override
-            public void connected(final Controller controller) {
-                Gdx.app.log("Controller", "Controller connected: " + controller.getName()
-                        + "/" + controller.getUniqueId());
-                controller.addListener(controllerListener);
-                hasGamepad = true;
-                if (controller.canVibrate())
-                    controller.startVibration(200,1);
-                if (Forge.isMobileAdventureMode && Forge.currentScene instanceof UIScene) {
-                    ((UIScene) Forge.currentScene).selectCurrent();
-                }
-            }
-            @Override
-            public void disconnected(Controller controller) {
-                Gdx.app.log("Controller", "Controller disconnected: " + controller.getName()
-                        + "/" + controller.getUniqueId());
-                hasGamepad = false;
-            }
-
-            @Override
-            public boolean buttonDown(Controller controller, int buttonIndex) {
-                //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: "+buttonIndex);
-                hasGamepad = true;
-                translateButtons(controller, buttonIndex, true);
-                return super.buttonDown(controller, buttonIndex);
-            }
-
-            @Override
-            public boolean buttonUp(Controller controller, int buttonIndex) {
-                hasGamepad = true;
-                translateButtons(controller, buttonIndex, false);
-                return super.buttonUp(controller, buttonIndex);
-            }
-
-            @Override
-            public boolean axisMoved(Controller controller, int axisIndex, float value) {
-                //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: axis: "+axisIndex+" - "+value);
-                hasGamepad = true;
-                translateAxis(controller, axisIndex, value);//prevent multi press axis
-                return super.axisMoved(controller, axisIndex, value);
-            }
-            private void translateAxis(Controller controller, int axisIndex, float value) {
-                if (!hasGamepad())
-                    return;//adventure only
-                FContainer container = FOverlay.getTopOverlay();
-                if (container == null) {
-                    container = currentScreen;
-                }
-                if (container != null) {
-                    if (currentScreen instanceof MatchScreen) {
-                        if (4 == axisIndex && value == 1f) { //others are L2Button if missing this axis
-                            container.keyDown(Keys.ENTER);
-                        }
-                        if (5 == axisIndex && value == 1f) { //others are R2 Button if missing this axis
-                            container.keyDown(Keys.ESCAPE);
-                        }
-                        if (controller.getMapping().axisLeftY == axisIndex) {
-                            if (value == 1f)
-                                container.keyDown(Keys.PAGE_DOWN);
-                        }
-                        /*if (controller.getMapping().axisLeftX == axisIndex) {
-                            if (value == 1f) {
-
-                            }
-                        }*/
-                    }
-                }
-            }
-            private void translateButtons(Controller controller, int buttonIndex, boolean keyDown) {
-                if (!hasGamepad())
-                    return; //adventure only
-                if (!keyDown)
-                    return; //prevent keyup on forgescene
-                //overlay shoud have priority
-                FContainer container = FOverlay.getTopOverlay();
-                if (container == null) {
-                    container = currentScreen;
-                }
-                if (container != null) {
-                    if (currentScreen instanceof MatchScreen) {
-                        if (controller.getMapping().buttonL2 == buttonIndex) {//others are axis-4
-                            container.keyDown(Keys.ENTER);
-                        }
-                        if (controller.getMapping().buttonR2 == buttonIndex) {//others are axis-5
-                            container.keyDown(Keys.ESCAPE);
-                        }
-                        if (controller.getMapping().buttonX == buttonIndex) {
-                            container.keyDown(Keys.BUTTON_X);
-                        }
-                        if (controller.getMapping().buttonY == buttonIndex) {
-                            container.keyDown(Keys.BUTTON_Y);
-                        }
-                        if (controller.getMapping().buttonR1 == buttonIndex) {
-                            container.keyDown(Keys.BUTTON_R1);
-                        }
-                        if (controller.getMapping().buttonL1 == buttonIndex) {
-                            container.keyDown(Keys.BUTTON_L1);
-                        }
-                        if (controller.getMapping().buttonDpadDown == buttonIndex) {
-                            container.keyDown(Keys.DPAD_DOWN);
-                        }
-                        if (controller.getMapping().buttonDpadLeft == buttonIndex) {
-                            container.keyDown(Keys.DPAD_LEFT);
-                        }
-                        if (controller.getMapping().buttonDpadRight == buttonIndex) {
-                            container.keyDown(Keys.DPAD_RIGHT);
-                        }
-                        if (controller.getMapping().buttonDpadUp == buttonIndex) {
-                            container.keyDown(Keys.DPAD_UP);
-                        }
-                        if (controller.getMapping().buttonA == buttonIndex) {
-                            container.keyDown(Keys.BUTTON_A);
-                        }
-                        if (controller.getMapping().buttonB == buttonIndex) {
-                            container.keyDown(Keys.BUTTON_B);
-                        }
-                        if (controller.getMapping().buttonBack == buttonIndex) {
-                            container.keyDown(Keys.BUTTON_SELECT);
-                        }
-                    } else {//Others
-                        /*if (controller.getMapping().buttonL2 == buttonIndex) {//others are axis-4
-                            container.keyDown(Keys.ENTER);
-                        }
-                        if (controller.getMapping().buttonR2 == buttonIndex) {//others are axis-5
-                            container.keyDown(Keys.ESCAPE);
-                        }*/
-                        if (controller.getMapping().buttonDpadDown == buttonIndex) {
-                            container.keyDown(Keys.DPAD_DOWN);
-                        }
-                        if (controller.getMapping().buttonDpadLeft == buttonIndex) {
-                            container.keyDown(Keys.DPAD_LEFT);
-                        }
-                        if (controller.getMapping().buttonDpadRight == buttonIndex) {
-                            container.keyDown(Keys.DPAD_RIGHT);
-                        }
-                        if (controller.getMapping().buttonDpadUp == buttonIndex) {
-                            container.keyDown(Keys.DPAD_UP);
-                        }
-                        if (controller.getMapping().buttonBack == buttonIndex) {
-                            container.keyDown(Keys.BUTTON_SELECT);
-                        }
-                        if (controller.getMapping().buttonB == buttonIndex) {
-                            container.keyDown(Keys.BUTTON_B);
-                        }
-                        if (controller.getMapping().buttonA == buttonIndex) {
-                            container.keyDown(Keys.BUTTON_A);
-                        }
-                        if (controller.getMapping().buttonX == buttonIndex) {
-                            container.keyDown(Keys.BUTTON_X);
-                        }
-                        if (controller.getMapping().buttonY == buttonIndex) {
-                            container.keyDown(Keys.BUTTON_Y);
-                        }
-                        if (controller.getMapping().buttonR1 == buttonIndex) {
-                            container.keyDown(Keys.BUTTON_R1);
-                        }
-                        if (controller.getMapping().buttonL1 == buttonIndex) {
-                            container.keyDown(Keys.BUTTON_L1);
-                        }
-                    }
-                }
-            }
-        };
-        Controllers.addListener(controllerListener);
-        if (Controllers.getCurrent() != null)
-            System.out.println("Gamepad: " + Controllers.getCurrent().getName());
-
 
         Gdx.input.setInputProcessor(inputProcessor);
         /*
@@ -505,6 +337,7 @@ public class Forge implements ApplicationListener {
             altZoneTabs = true;
         //pixl cursor for adventure
         setCursor(null, "0");
+        enableControllerListener();
         loadAdventureResources(true);
     }
     private static void loadAdventureResources(boolean startScene) {
@@ -1584,5 +1417,175 @@ public class Forge implements ApplicationListener {
             }
             return handled;
         }
+    }
+    public static void enableControllerListener() {
+        if (controllerListener == null) {
+            controllerListener = new ControllerAdapter() {
+                @Override
+                public void connected(final Controller controller) {
+                    Gdx.app.log("Controller", "Controller connected: " + controller.getName()
+                            + "/" + controller.getUniqueId());
+                    hasGamepad = true;
+                    if (controller.canVibrate())
+                        controller.startVibration(200,1);
+                    if (Forge.isMobileAdventureMode && Forge.currentScene instanceof UIScene) {
+                        ((UIScene) Forge.currentScene).selectCurrent();
+                    }
+                }
+                @Override
+                public void disconnected(Controller controller) {
+                    Gdx.app.log("Controller", "Controller disconnected: " + controller.getName()
+                            + "/" + controller.getUniqueId());
+                    hasGamepad = false;
+                }
+
+                @Override
+                public boolean buttonDown(Controller controller, int buttonIndex) {
+                    //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: "+buttonIndex);
+                    hasGamepad = true;
+                    translateButtons(controller, buttonIndex, true);
+                    return super.buttonDown(controller, buttonIndex);
+                }
+
+                @Override
+                public boolean buttonUp(Controller controller, int buttonIndex) {
+                    hasGamepad = true;
+                    translateButtons(controller, buttonIndex, false);
+                    return super.buttonUp(controller, buttonIndex);
+                }
+
+                @Override
+                public boolean axisMoved(Controller controller, int axisIndex, float value) {
+                    //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: axis: "+axisIndex+" - "+value);
+                    hasGamepad = true;
+                    translateAxis(controller, axisIndex, value);//prevent multi press axis
+                    return super.axisMoved(controller, axisIndex, value);
+                }
+                private void translateAxis(Controller controller, int axisIndex, float value) {
+                    if (!hasGamepad())
+                        return;//adventure only
+                    FContainer container = FOverlay.getTopOverlay();
+                    if (container == null) {
+                        container = currentScreen;
+                    }
+                    if (container != null) {
+                        if (currentScreen instanceof MatchScreen) {
+                            if (4 == axisIndex && value == 1f) { //others are L2Button if missing this axis
+                                container.keyDown(Keys.ENTER);
+                            }
+                            if (5 == axisIndex && value == 1f) { //others are R2 Button if missing this axis
+                                container.keyDown(Keys.ESCAPE);
+                            }
+                            if (controller.getMapping().axisLeftY == axisIndex) {
+                                if (value == 1f)
+                                    container.keyDown(Keys.PAGE_DOWN);
+                            }
+                        /*if (controller.getMapping().axisLeftX == axisIndex) {
+                            if (value == 1f) {
+
+                            }
+                        }*/
+                        }
+                    }
+                }
+                private void translateButtons(Controller controller, int buttonIndex, boolean keyDown) {
+                    if (!hasGamepad())
+                        return; //adventure only
+                    if (!keyDown)
+                        return; //prevent keyup on forgescene
+                    //overlay shoud have priority
+                    FContainer container = FOverlay.getTopOverlay();
+                    if (container == null) {
+                        container = currentScreen;
+                    }
+                    if (container != null) {
+                        if (currentScreen instanceof MatchScreen) {
+                            if (controller.getMapping().buttonL2 == buttonIndex) {//others are axis-4
+                                container.keyDown(Keys.ENTER);
+                            }
+                            if (controller.getMapping().buttonR2 == buttonIndex) {//others are axis-5
+                                container.keyDown(Keys.ESCAPE);
+                            }
+                            if (controller.getMapping().buttonX == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_X);
+                            }
+                            if (controller.getMapping().buttonY == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_Y);
+                            }
+                            if (controller.getMapping().buttonR1 == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_R1);
+                            }
+                            if (controller.getMapping().buttonL1 == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_L1);
+                            }
+                            if (controller.getMapping().buttonDpadDown == buttonIndex) {
+                                container.keyDown(Keys.DPAD_DOWN);
+                            }
+                            if (controller.getMapping().buttonDpadLeft == buttonIndex) {
+                                container.keyDown(Keys.DPAD_LEFT);
+                            }
+                            if (controller.getMapping().buttonDpadRight == buttonIndex) {
+                                container.keyDown(Keys.DPAD_RIGHT);
+                            }
+                            if (controller.getMapping().buttonDpadUp == buttonIndex) {
+                                container.keyDown(Keys.DPAD_UP);
+                            }
+                            if (controller.getMapping().buttonA == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_A);
+                            }
+                            if (controller.getMapping().buttonB == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_B);
+                            }
+                            if (controller.getMapping().buttonBack == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_SELECT);
+                            }
+                        } else {//Others
+                        /*if (controller.getMapping().buttonL2 == buttonIndex) {//others are axis-4
+                            container.keyDown(Keys.ENTER);
+                        }
+                        if (controller.getMapping().buttonR2 == buttonIndex) {//others are axis-5
+                            container.keyDown(Keys.ESCAPE);
+                        }*/
+                            if (controller.getMapping().buttonDpadDown == buttonIndex) {
+                                container.keyDown(Keys.DPAD_DOWN);
+                            }
+                            if (controller.getMapping().buttonDpadLeft == buttonIndex) {
+                                container.keyDown(Keys.DPAD_LEFT);
+                            }
+                            if (controller.getMapping().buttonDpadRight == buttonIndex) {
+                                container.keyDown(Keys.DPAD_RIGHT);
+                            }
+                            if (controller.getMapping().buttonDpadUp == buttonIndex) {
+                                container.keyDown(Keys.DPAD_UP);
+                            }
+                            if (controller.getMapping().buttonBack == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_SELECT);
+                            }
+                            if (controller.getMapping().buttonB == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_B);
+                            }
+                            if (controller.getMapping().buttonA == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_A);
+                            }
+                            if (controller.getMapping().buttonX == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_X);
+                            }
+                            if (controller.getMapping().buttonY == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_Y);
+                            }
+                            if (controller.getMapping().buttonR1 == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_R1);
+                            }
+                            if (controller.getMapping().buttonL1 == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_L1);
+                            }
+                        }
+                    }
+                }
+            };
+        }
+        Controllers.addListener(controllerListener);
+        if (Controllers.getCurrent() != null)
+            System.out.println("Gamepad: " + Controllers.getCurrent().getName());
     }
 }
