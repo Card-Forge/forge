@@ -168,7 +168,6 @@ public final class CardPredicates {
             }
         };
     }
-
     public static final Predicate<Card> sharesColorWith(final Card color) {
         return new Predicate<Card>() {
             @Override
