@@ -1,0 +1,11 @@
+Name:Meria's Outrider
+ManaCost:4 R
+Types:Creature Elf Archer
+PT:4/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ Domain — When CARDNAME enters the battlefield, it deals damage to each opponent equal to the number of basic land types among lands you control.
+SVar:TrigDamage1:DB$ DealDamage | Valid$ Opponent | TargetMax$ 1 | NumDmg$ X
+SVar:X:Count$Domain/Plus.1
+SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
+AI:RemoveDeck:Random
+Oracle:Reach\nDomain — When Meria's Outrider enters the battlefield, it deals damage to each opponent equal to the number of basic land types among lands you control.
