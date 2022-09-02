@@ -1,0 +1,8 @@
+Name:Molten Monstrosity
+ManaCost:7 R
+Types:Creature Hellion
+PT:5/5
+K:Trample
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {X} less to cast, where X is the greatest power among creatures you control.
+SVar:X:Count$GreatestPower_Creature.YouCtrl
+Oracle:This spell costs {X} less to cast, where X is the greatest power among creatures you control.\nTrample
