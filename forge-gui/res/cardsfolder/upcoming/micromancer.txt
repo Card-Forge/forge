@@ -4,6 +4,5 @@ Types:Creature Human Wizard
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield,you may search your library for an instant or sorcery card with mana value 1, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Instant.cmcEQ1,Sorcery.cmcEQ1 | ChangeNum$ 1
-SVar:BuffedBy:Instant,Sorcery
 DeckHints:Type$Instant|Sorcery
 Oracle:When Micromancer enters the battlefield, you may search your library for an instant or sorcery card with mana value 1, reveal it, put it into your hand, then shuffle.
