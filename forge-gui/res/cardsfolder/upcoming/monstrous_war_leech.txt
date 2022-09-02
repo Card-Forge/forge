@@ -3,9 +3,10 @@ ManaCost:3 B
 Types:Creature Leech Horror
 PT:*/*
 K:Kicker:U
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill four cards.
-SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You
+K:ETBReplacement:Other:TrigMill
+SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You | Condition$ Kicked
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the highest mana value among cards in your graveyard.
 SVar:X:Count$HighestCMC_Creature.YouCtrl+inZoneGraveyard
 DeckHas:Ability$Graveyard|Mill
+SVar:NoZeroToughnessAI:True
 Oracle:Kicker {U} (You may pay an additional {U} as you cast this spell.)\nAs Monstrous War-Leech enters the battlefield, if it was kicked, mill four cards. (To mill a card, put the top card of your library into your graveyard.)\nMonstrous War-Leech's power and toughness are each equal to the highest mana value among cards in your graveyard.
