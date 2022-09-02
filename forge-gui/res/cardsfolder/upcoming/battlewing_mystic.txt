@@ -7,5 +7,6 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, discard your hand, then draw two cards.
 SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | NumCards$ 2
-DeckHints:Ability$Discard & Color$Red
+DeckHas:Ability$Discard
+DeckHints:Color$Red
 Oracle:Kicker {R} (You may pay an additional {R} as you cast this spell.)\nFlying\nWhen Battlewing Mystic enters the battlefield, if it was kicked, discard your hand, then draw two cards.
