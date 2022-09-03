@@ -9,6 +9,8 @@ import forge.card.CardType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
@@ -58,6 +60,14 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                             }
                         }
                     }
+                } else if (sa.hasParam("MostPrevalentInDefinedDeck")) {
+                    Player definedP = AbilityUtils.getDefinedPlayers(
+                            sa.getHostCard(), sa.getParam("MostPrevalentInDefinedDeck"), sa).get(0);
+                    CardCollectionView deck = definedP.getAllCards();
+                    for (String s : CardFactoryUtil.getMostProminentCreatureType(deck)) {
+                        validTypes.add(s);
+                    }
+
                 } else {
                     validTypes.addAll(CardType.getAllCreatureTypes());
                 }
