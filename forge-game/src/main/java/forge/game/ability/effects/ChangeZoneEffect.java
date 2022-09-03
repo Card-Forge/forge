@@ -1145,7 +1145,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("DifferentPower")) {
                         for (Card c : chosenCards) {
-                            fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.sharesPowerWith(c)));
+                        	fetchList = CardLists.filter(fetchList, Predicates.not(Predicates.compose(Predicates.equalTo(c.getNetPower()), CardPredicates.Accessors.fnGetNetPower)));
                         }
                     }
                     if (sa.hasParam("ShareLandType")) {

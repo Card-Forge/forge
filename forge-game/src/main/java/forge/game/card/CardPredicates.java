@@ -160,14 +160,6 @@ public final class CardPredicates {
             }
         };
     }
-    public static final Predicate<Card> sharesPowerWith(final Card power) {
-        return new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                return c.sharesPowerWith(power);
-            }
-        };
-    }
     public static final Predicate<Card> sharesColorWith(final Card color) {
         return new Predicate<Card>() {
             @Override

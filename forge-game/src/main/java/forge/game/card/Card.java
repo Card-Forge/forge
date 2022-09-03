@@ -5311,18 +5311,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         return getType().sharesCreaturetypeWith(c1.getType());
     }
-    public final boolean sharesPowerWith(final int n) {
-        final Card source = game.getCardState(this);
-
-        return source.getNetPower() == n;
-    }
-
-    public final boolean sharesPowerWith(final Card c1) {
-        final Card source = game.getCardState(this);
-        final Card other = game.getCardState(c1);
-
-        return source.getNetPower() == other.getNetPower();
-    }
 
     public final boolean sharesLandTypeWith(final Card c1) {
         if (c1 == null) {

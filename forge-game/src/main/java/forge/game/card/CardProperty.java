@@ -619,17 +619,6 @@ public class CardProperty {
                 CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
                 return Iterables.any(list, CardPredicates.sharesCMCWith(card));
             }
-        } else if (property.startsWith("SharesPowerWith")) {
-            if (property.equals("SharesPowerWith")) {
-                if (!card.sharesPowerWith(source)) {
-                    return false;
-            } else {
-                final String restriction = property.split("SharesPowerWith ")[1];
-                CardCollection list = AbilityUtils.getDefinedCards(source, restriction, spellAbility);
-                return Iterables.any(list, CardPredicates.sharesPowerWith(card));
-            }
-        }
-   
         } else if (property.startsWith("SharesColorWith")) {
             // if card is colorless, it can't share colors
             if (card.isColorless()) {
