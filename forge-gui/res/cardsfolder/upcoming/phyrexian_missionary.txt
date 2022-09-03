@@ -1,0 +1,10 @@
+Name:Phyrexian Missionary
+ManaCost:1 W
+Types:Creature Phyrexian Human Cleric
+PT:2/3
+K:Kicker:1 B
+K:LifeLink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | OptionalDecider$ You | Execute$ TrigChangeZone | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, you may return target creature card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Creature.YouCtrl
+DeckHas:Ability$Graveyard & Color$Black
+Oracle:Kicker {1}{B} (You may pay an additional {1}{B} as you cast this spell.)\nLifelink\nWhen Phyrexian Missionary enters the battlefield, if it was kicked, return target creature card from your graveyard to your hand.
