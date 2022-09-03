@@ -1143,6 +1143,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.sharesCMCWith(c)));
                         }
                     }
+                    if (sa.hasParam("DifferentPower")) {
+                        for (Card c : chosenCards) {
+                        	fetchList = CardLists.filter(fetchList, Predicates.not(Predicates.compose(Predicates.equalTo(c.getNetPower()), CardPredicates.Accessors.fnGetNetPower)));
+                        }
+                    }
                     if (sa.hasParam("ShareLandType")) {
                         // After the first card is chosen, check if the land type is shared
                         for (final Card card : chosenCards) {
@@ -1494,6 +1499,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 && !sa.hasParam("Mandatory")                // only handle optional decisions, for now
                 && !sa.hasParam("ShareLandType")
                 && !sa.hasParam("DifferentNames")
+                && !sa.hasParam("DifferentPower")
                 && !sa.hasParam("DifferentCMC")
                 && !sa.hasParam("AtRandom")
                 && (!sa.hasParam("Defined") || sa.hasParam("ChooseFromDefined"))
