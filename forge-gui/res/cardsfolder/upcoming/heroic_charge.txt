@@ -4,5 +4,6 @@ Types:Instant
 K:Kicker:1 R
 A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +1  | SubAbility$ Kicked | SpellDescription$ Creatures you control get +2/+1 until end of turn. If this spell was kicked, those creatures also gain trample until end of turn.
 SVar:Kicked:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Trample | Condition$ Kicked
-DeckHas:Keyword$Trample & Color$Red
+DeckHas:Keyword$Trample
+DeckHints:Color$Red
 Oracle:Kicker {1}{R} (You may pay an additional {1}{R} as you cast this spell.)\nCreatures you control get +2/+1 until end of turn. If this spell was kicked, those creatures also gain trample until end of turn.
