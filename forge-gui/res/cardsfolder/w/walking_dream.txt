@@ -4,5 +4,5 @@ Types:Creature Illusion
 PT:3/3
 K:Unblockable
 S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | CheckSVar$ X | SVarCompare$ GE2 | Description$ CARDNAME doesn't untap during your untap step if an opponent controls two or more creatures.
-SVar:X:Count$Valid Creature.OppCtrl
+SVar:X:PlayerCountOpponents$HighestValid Creature.YouCtrl
 Oracle:Walking Dream can't be blocked.\nWalking Dream doesn't untap during your untap step if an opponent controls two or more creatures.
