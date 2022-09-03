@@ -1,6 +1,6 @@
 Name:Inscribed Tablet
 ManaCost:1
 Types:Artifact
-A:AB$ Dig | Cost$ 1 T Sac<1/CARDNAME>| DigNum$ 5 | Reveal$ True | ChangeNum$ 1 | RememberChanged$ True | ChangeValid$ Land | RestRandomOrder$ True | SubAbility$ DBDraw | SpellDescription$ Reveal the top five cards of your library. Put a land card from among them into your hand and the rest on the bottom of your library in a random order. If you didn't put a card into your hand this way, draw a card.
+A:AB$ Dig | Cost$ 1 T Sac<1/CARDNAME> | DigNum$ 5 | Reveal$ True | ChangeNum$ 1 | RememberChanged$ True | ChangeValid$ Land | RestRandomOrder$ True | SubAbility$ DBDraw | SpellDescription$ Reveal the top five cards of your library. Put a land card from among them into your hand and the rest on the bottom of your library in a random order. If you didn't put a card into your hand this way, draw a card.
 SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card
 Oracle:{1}, {T}, Sacrifice Inscribed Tablet: Reveal the top five cards of your library. Put a land card from among them into your hand and the rest on the bottom of your library in a random order. If you didn't put a card into your hand this way, draw a card.

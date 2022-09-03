@@ -1,0 +1,9 @@
+Name:Karn's Sylex
+ManaCost:3
+Types:Legendary Artifact
+K:CARDNAME enters the battlefield tapped.
+S:Mode$ CantPayLife | ValidPlayer$ Player | ValidCause$ Spell,Activated.nonManaAbility | ForCost$ True | Description$ Players can't pay life or sacrifice creatures to cast spells or activate abilities.
+S:Mode$ CantSacrifice | ValidCard$ Creature | ValidCause$ Spell,Activated.nonManaAbility | ForCost$ True | Secondary$ True | Description$ Players can't pay life or sacrifice creatures to cast spells or activate abilities.
+A:AB$ DestroyAll | Cost$ X T Exile<1/CARDNAME> | ValidCards$ Permanent.nonLand+cmcEQX | SorcerySpeed$ True | SpellDescription$ Destroy each nonland permanent with mana value X or less. Activate only as a sorcery.
+SVar:X:Count$xPaid
+Oracle:Karn's Sylex enters the battlefield tapped.\nPlayers can’t pay life to cast spells or to activate abilities that aren't mana abilities.\n{X}, {T}, Exile Karn's Sylex: Destroy each nonland permanent with mana value X or less. Activate only as a sorcery.
