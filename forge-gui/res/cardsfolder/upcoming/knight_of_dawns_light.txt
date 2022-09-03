@@ -8,4 +8,4 @@ SVar:GainLife:DB$ ReplaceEffect | VarName$ LifeGained | VarValue$ X
 SVar:X:ReplaceCount$LifeGained/Plus.1
 A:AB$ Pump | Cost$ 1 W | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 DeckNeeds:Ability$LifeGain
-Oracle:First strike\nIf you would gain life, you gain that much life plus 1 instead.\n{1}{W}: Knight of Dawn’s Light gets +1/+1 until end of turn.
+Oracle:First strike\nIf you would gain life, you gain that much life plus 1 instead.\n{1}{W}: Knight of Dawn's Light gets +1/+1 until end of turn.
