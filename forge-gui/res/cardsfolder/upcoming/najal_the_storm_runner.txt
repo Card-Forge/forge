@@ -1,0 +1,10 @@
+Name:Najal, the Storm Runner
+ManaCost:2 U U R
+Types:Legendary Creature Efreet Wizard
+PT:5/4
+S:Mode$ CastWithFlash | ValidCard$ Sorcery | ValidSA$ Spell | Caster$ You | Description$ You may cast sorcery spells as though they had flash.
+T:Mode$ Attacks | ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigDelayedTrigger | TriggerDescription$ Whenever a creature attacks, you may pay {3}. When you do, put a +1/+1 counter on that creature.
+SVar:TrigDelayedTrigger:DB$ DelayedTrigger | Cost$ 2 | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever Jedit Ojanen, Mercenary or another legendary creature enters the battlefield, you may pay {G}. If you do, create a 2/2 green Cat Warrior creature token with forestwalk.SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 3 | Execute$ TrigCounter |
