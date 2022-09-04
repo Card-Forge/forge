@@ -32,42 +32,49 @@ def convertMana(cardInfo: str) -> str:
 	return cardInfo
 
 #Manuel scrap
-if sys.argv[1] == '-u' or sys.argv[1] == '-url':
-	if len(sys.argv) <= 2:
-		print('Missing second arg : url to scrap')
-		exit(1)
+if len(sys.argv) >= 2:
+	if sys.argv[1] == '-u' or sys.argv[1] == '-url':
+		if len(sys.argv) <= 2:
+			print('Missing second arg : url to scrap')
+			exit(1)
 
-	output = open('cardnames-fr-FR-missing.txt', 'a')
+		output = open('cardnames-fr-FR-missing.txt', 'a')
 
-	response = requests.get(sys.argv[2])
+		response = requests.get(sys.argv[2])
 
-	#Founded
-	if response.status_code == SUCCESS_STATUS:
-		#Get brut chaos the data from web page
-		try:
-			match = re.findall(r'<div class="text_card text_fr txt_fr_right"><div class="type">.+?<\/div><div class="clear"><\/div><div class="cout (1|hide)">.+?<\/div><div class="clear"><\/div><div class="txt">.+?<\/div>(<div class="forc_end">|<\/div>)', response.content.decode('utf-8').replace('\n', ''))[0]
+		#Founded
+		if response.status_code == SUCCESS_STATUS:
+			#Get brut chaos the data from web page
+			try:
+				match = re.search(re.compile('<div class="text_card text_fr txt_fr_right"><div class="type">.+?<\/div><div class="clear"><\/div><div class="cout (1|hide)">.+?<\/div><div class="clear"><\/div><div class="txt">.+?<\/div>(<div class="forc_end">|<\/div>)'), response.content.decode('utf-8').replace('\n', '')).group()
 
-			#Split in different tags, interesting data
-			translatedName: str = re.findall(r'<title>.+?<\/title>', response.content.decode('utf-8').replace('\n', ''))[0].split('<title>')[1].split(' -')[0]
-			orignalName: str = re.findall(r'<title>.+?<\/title>', response.content.decode('utf-8').replace('\n', ''))[0].split('<title>')[1].split(' -')[1].split(' -')[0]
-			translatedType: str = match.split('<div class="text_card text_fr txt_fr_right"><div class="type">')[1].split('</div>')[0]
-			translatedInfo: str = convertMana(match.split('<div class="txt">')[1].split('</div>')[0])
+				#Split in different tags, interesting data
+				translatedName: str = re.findall(r'<title>.+?<\/title>', response.content.decode('utf-8').replace('\n', ''))[0].split('<title>')[1].split(' -')[0]
+				orignalName: str = re.findall(r'<title>.+?<\/title>', response.content.decode('utf-8').replace('\n', ''))[0].split('<title>')[1].split(' -')[1].split(' -')[0]
+				translatedType: str = match.split('<div class="text_card text_fr txt_fr_right"><div class="type">')[1].split('</div>')[0]
+				translatedInfo: str = convertMana(match.split('<div class="txt">')[1].split('</div>')[0])
 
-			#print(orignalName + '|' + translatedName + '|' + translatedType.replace('&nbsp;', '') + '|' + translatedInfo)
-			output.writelines(orignalName + '|' + translatedName + '|' + translatedType.replace('&nbsp;', '') + '|' + translatedInfo + '\n')
-		except IndexError:
-			#Request probably gives multiple value
-			print(response.url)
-	output.close()
-	exit(0)
+				#print(orignalName + '|' + translatedName + '|' + translatedType.replace('&nbsp;', '') + '|' + translatedInfo)
+				output.writelines(orignalName + '|' + translatedName + '|' + translatedType.replace('&nbsp;', '') + '|' + translatedInfo + '\n')
+			except IndexError:
+				#Request probably gives multiple value
+				print(response.url)
+		output.close()
+		exit(0)
 
-output = open('cardnames-fr-FR-missing.txt', 'w')
+output = open('cardnames-fr-FR-missing.txt', 'a')
 
 #Show only missing lines
 for line in lines:
 	#None complete line
 	if line.endswith('||\n'):
 		engName = line.split('|')[0]
+
+		#Check already done
+		with open('cardnames-fr-FR-missing.txt') as f:
+			if engName in f.read():
+				continue
+
 		response = requests.get(url + engName)
 
 		#Founded
@@ -76,8 +83,8 @@ for line in lines:
 
 			#Get brut chaos the data from web page
 			try:
-				match = re.findall(r'<div class="text_card text_fr txt_fr_right"><div class="type">.+?<\/div><div class="clear"><\/div><div class="cout (1|hide)">.+?<\/div><div class="clear"><\/div><div class="txt">.+?<\/div>(<div class="forc_end">|<\/div>)', response.content.decode('utf-8').replace('\n', ''))[0]
-
+				match = re.search(re.compile('<div class="text_card text_fr txt_fr_right"><div class="type">.+?<\/div><div class="clear"><\/div><div class="cout (1|hide)">.+?<\/div><div class="clear"><\/div><div class="txt">.+?<\/div>(<div class="forc_end">|<\/div>)'), response.content.decode('utf-8').replace('\n', '')).group()
+				
 				#Split in different tags, interesting data
 				translatedName: str = re.findall(r'<title>.+?<\/title>', response.content.decode('utf-8').replace('\n', ''))[0].split('<title>')[1].split(' -')[0]
 				translatedType: str = match.split('<div class="text_card text_fr txt_fr_right"><div class="type">')[1].split('</div>')[0]
@@ -88,6 +95,13 @@ for line in lines:
 			except IndexError:
 				#Request probably gives multiple value
 				print(response.url)
+			except AttributeError:
+				#Request probably gives multiple value
+				print(response.url)
+			except UnicodeDecodeError:
+				#Request probably gives multiple value
+				print(response.url)
+
 		counter += 1
 
 
