@@ -7148,4 +7148,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public void setReadAhead(int value) {
         readAhead = value;
     }
+
+    public boolean attackVigilance() {
+        return StaticAbilityAttackVigilance.attackVigilance(this);
+    }
 }
