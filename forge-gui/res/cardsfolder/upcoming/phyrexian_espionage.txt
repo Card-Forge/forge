@@ -1,0 +1,9 @@
+Name:Phyrexian Espionage
+ManaCost:2 U
+Types:Sorcery
+K:Kicker:1 B
+A:SP$ Draw | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards. If this spell was kicked, each opponent discards a card.
+SVar:DBDiscard:DB$ Discard | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose | Condition$ Kicked
+DeckHas:Ability$Discard
+DeckHints:Color$Black
+Oracle:Kicker {1}{B} (You may pay an additional {1}{B} as you cast this spell.)\nDraw two cards. If this spell was kicked, each opponent discards a card.
