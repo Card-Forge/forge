@@ -52,7 +52,6 @@ import forge.game.event.GameEventTokenStateUpdate;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.event.GameEventTurnEnded;
 import forge.game.event.GameEventTurnPhase;
-import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
@@ -556,8 +555,7 @@ public class PhaseHandler implements java.io.Serializable {
                 final CardCollection untapFromCancel = new CardCollection();
                 // do a full loop first so attackers can't be used to pay for Propaganda
                 for (final Card attacker : combat.getAttackers()) {
-                    final boolean shouldTapForAttack = !attacker.hasKeyword(Keyword.VIGILANCE) && !attacker.hasKeyword("Attacking doesn't cause CARDNAME to tap.");
-                    if (shouldTapForAttack) {
+                    if (!attacker.attackVigilance()) {
                         // set tapped to true without firing triggers because it may affect propaganda costs
                         attacker.setTapped(true);
                         untapFromCancel.add(attacker);
@@ -589,8 +587,7 @@ public class PhaseHandler implements java.io.Serializable {
             } while (!success);
 
             for (final Card attacker : combat.getAttackers()) {
-                final boolean shouldTapForAttack = !attacker.hasKeyword(Keyword.VIGILANCE) && !attacker.hasKeyword("Attacking doesn't cause CARDNAME to tap.");
-                if (shouldTapForAttack) {
+                if (!attacker.attackVigilance()) {
                     attacker.setTapped(false);
                     attacker.tap(true, true);
                 }
