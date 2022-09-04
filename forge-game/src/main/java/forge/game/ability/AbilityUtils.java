@@ -3728,7 +3728,7 @@ public class AbilityUtils {
             }
         }
 
-        //  Count$InTargetedLibrary (targeted player's cards in hand)
+        //  Count$InTargetedLibrary (targeted player's cards in library)
         if (sq[0].contains("InTargetedLibrary")) {
             for (Player tgtP : getDefinedPlayers(c, "TargetedPlayer", ctb)) {
                 someCards.addAll(tgtP.getCardsIn(ZoneType.Library));
