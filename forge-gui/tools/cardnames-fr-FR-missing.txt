@@ -1,0 +1,67 @@
+Abbey Gargoyles|Gargouilles de l'abbaye|Créature: gargouille|Vol, protection contre le rouge
+Abbey Matron|Mère abbesse|Créature: clerc|{W}, {T}: La Mère abbesse gagne +0/+3 jusqu'à la fin du tour.
+Abduction|Rapt|Enchantement: aura|Quand le Rapt arrive en jeu, dégagez la créature enchantée.\nVous contrôlez la créature enchantée.\nQuand la créature enchantée est mise dans un cimetière, renvoyez cette créature en jeu sous le contrôle de son propriétaire.
+Abeyance|Suspens|Ephémère|Jusqu'à la fin du tour, le joueur ciblé ne peut pas jouer d'éphémères, de rituels ou de capacités activées qui ne sont pas des capacités de mana.\nPiochez une carte.
+Abjure|Abjuration|Ephémère|En tant que coût supplémentaire pour jouer l'Abjuration, sacrifiez un permanent bleu.\nContrecarrez le sort ciblé.
+Aboroth|Aboroth|Créature: Aboroth|Entretien cumulatif - Mettez un marqueur -1/-1 sur l'Aboroth.
+About Face|Demi-tour|Ephémère|Echangez la force et l'endurance de la créature ciblée jusqu'à la fin du tour.
+Absolute Grace|Grâce suprême|Enchantement|Toutes les créatures ont la protection contre le noir.
+Absolute Law|Loi suprême|Enchantement|Toutes les créatures ont la protection contre le rouge.
+Abyssal Gatekeeper|Gardien de la porte des abysses|Créature: gardien de la porte|Quand le Gardien de la porte des abysses est mis dans un cimetière depuis le jeu, chaque joueur sacrifie une créature.
+Abyssal Hunter|Chasseur des abysses|Créature: Humain et Assassin|{B}, {T}: Engagez la créature ciblée. Le Chasseur des abysses inflige à cette créature un nombre de blessures égal à la force du Chasseur des abysses.
+Abyssal Nightstalker|Chassenuit des abysses|Créature: chassenuit|À chaque fois que le Chassenuit des abysses attaque et n'est pas bloqué, le joueur défenseur se défausse d'une carte.
+Academy Rector|Recteur de l'académie|Créature: clerc|Quand le Recteur de l'académie est mis dans un cimetière depuis le jeu, vous pouvez retirer le Recteur de l'académie de la partie. Si vous faites ainsi, cherchez une carte d'enchantement dans votre bibliothèque et mettez cette carte en jeu. Mélangez ensuite votre bibliothèque.
+Accumulated Knowledge|Connaissance accumulée|Ephémère|Piochez une carte, puis piochez autant de cartes que le nombre de cartes appelées Connaissance accumulée dans tous les cimetières.
+Acidic Dagger|Dague acide|Artefact|{4}, {T}: À chaque fois que la créature ciblée inflige des blessures de combat à une créature non-mur ce tour-ci, détruisez cette créature non-mur. Quand la créature ciblée quitte le jeu ce tour-ci, sacrifiez la Dague acide. Ne jouez cette capacité que pendant le combat et avant l'étape de déclaration des bloqueurs.
+Acidic Sliver|Slivoïde acide|Créature: slivoïde|Tous les slivoïdes ont "{2}, Sacrifiez cette créature: Cette créature inflige 2 blessures à une cible, créature ou joueur."
+Acidic Soil|Terre acide|Rituel|La Terre acide inflige à chaque joueur un nombre de blessures égal au nombre de terrains qu'il contrôle.
+Acridian|Acridien|Créature: insecte|Écho {1}{G}
+Adarkar Sentinel|Sentinelle adarkare|Créature-Artefact|{1}: La Sentinelle adarkare gagne +0/+1 jusqu'à la fin du tour.
+Adarkar Unicorn|Licorne adarkare|Créature: licorne|{T}: Ajoutez soit {U} soit {1}{U} à votre réserve. Ne dépensez ce mana que pour des capacités d'entretien cumulatif.
+Advance Scout|Éclaireur avancé|Créature: soldat|Initiative\n{W}: La créature ciblée acquiert l'initiative jusqu'à la fin du tour.
+Aegis of the Meek|Égide des humbles|Artefact|{1}, {T}: La créature 1/1 ciblée gagne +1/+2 jusqu'à la fin du tour.
+Aerial Caravan|Caravane aérienne|Créature: soldat|Vol\n{1}{U}{U}: Retirez de la partie la carte du dessus de votre bibliothèque. Jusqu'à la fin du tour, vous pouvez jouer cette carte.
+Aether Barrier|Barrière d'Aether|Enchantement|À chaque fois qu'un joueur joue un sort de créature, ce joueur sacrifie un permanent à moins qu'il ne paye {1}.
+Aether Sting|Piqûre d'Aether|Enchantement|À chaque fois qu'un adversaire joue un sort de créature, la Piqûre d'Aether inflige 1 blessure à ce joueur.
+Aether Storm|Résultat recherche : Aether Storm|Enchantement|À chaque fois qu'un adversaire joue un sort de créature, la Piqûre d'Aether inflige 1 blessure à ce joueur.
+Aether Tide|Résultat recherche : Aether Tide|Enchantement|À chaque fois qu'un adversaire joue un sort de créature, la Piqûre d'Aether inflige 1 blessure à ce joueur.
+Afiya Grove|Bosquet d'afiyas|Enchantement|Le Bosquet d'afiyas arrive en jeu avec trois marqueurs +1/+1 sur lui.\nAu début de votre entretien, déplacez un marqueur +1/+1 du Bosquet d'afiyas vers la créature ciblée.\nQuand le Bosquet d'afiyas n'a pas de marqueur +1/+1 sur lui, sacrifiez-le.
+Agent of Shauku|Agent de Shaukú|Créature: mercenaire|{1}{B}, Sacrifiez un terrain: La créature ciblée gagne +2/+0 jusqu'à la fin du tour.
+Agent of Stromgald|Agent de Stromgald|Créature: chevalier|{R}: Ajoutez {B} à votre réserve.
+Agility|Agilité|Enchantement: aura|La créature enchantée gagne +1/+1 et a le débordement.
+Air Bladder|Ballonnement|Enchantement: aura|La créature enchantée a le vol.\nLa créature enchantée ne peut bloquer que des créatures avec le vol.
+Air Elemental|Résultat recherche : Air Elemental|Enchantement: aura|La créature enchantée a le vol.\nLa créature enchantée ne peut bloquer que des créatures avec le vol.
+Akron Legionnaire|Légionnaire d'Akron|Créature: légionnaire|Les créatures que vous contrôlez ne peuvent pas attaquer sauf celles appelée Légionnaire d'Akron et les créatures-artefacts.
+Aku Djinn|Djinn d'Akou|Créature: djinn|Piétinement\nAu début de votre entretien, mettez un marqueur +1/+1 sur chaque créature que chaque adversaire contrôle.
+Alabaster Dragon|Dragon d'albâtre|Créature: dragon|Vol\nSi le Dragon d'albâtre devait être mis dans un cimetière depuis le jeu, mélangez le Dragon d'albâtre dans la bibliothèque de son propriétaire à la place.
+Alabaster Potion|Potion d'albâtre|Ephémère|Choisissez l'un - Le joueur ciblé gagne X points de vie; ou prévenez, ce tour-ci, les prochaines X blessures qui devraient être infligées à une cible, créature ou joueur.
+Alabaster Wall|Mur d'albâtre|Créature: mur|Défenseur\n{T}: Prévenez, ce tour-ci, la prochaine 1 blessure qui devrait être infligée à une cible, créature ou joueur.
+Alaborn Grenadier|Grenadier d'Alaborn|Créature: soldat|Vigilance
+Alaborn Musketeer|Mousquetaire d'Alaborn|Créature: soldat|Le Mousquetaire d'Alaborn peut bloquer comme s'il avait le vol.
+Alaborn Trooper|Troupier d'Alaborn|Créature: soldat|Le Mousquetaire d'Alaborn peut bloquer comme s'il avait le vol.
+Alaborn Veteran|Vétéran d'Alaborn|Créature: chevalier|{T}: La créature ciblée gagne +2/+2 jusqu'à la fin du tour. Ne jouez cette capacité que pendant votre tour, avant la phase de combat.
+Alaborn Zealot|Zélatrice d'Alaborn|Créature: soldat|À chaque fois que la Zélatrice d'Alaborn bloque une créature, détruisez cette créature et la Zélatrice d'Alaborn.
+Aladdin's Lamp|Lampe d'aladdin|Artefact|{X}, {T} : La prochaine fois que vous devriez piocher une carte ce tour-ci, à la place regardez les X cartes du dessus de votre bibliothèque, mettez toutes ces cartes sauf une au-dessous de votre bibliothèque dans un ordre aléatoire, et piochez ensuite une carte. X ne peut pas valoir 0.
+Alarum|Réveil en sursaut|Ephémère|Dégagez la créature non-attaquante ciblée. Elle gagne +1/+3 jusqu'à la fin du tour.
+Albino Troll|Troll albinos|Créature: troll|Écho {1}{G}\n{1}{G}: Régénérez le Troll albinos.
+Aleatory|Aléatoire|Ephémère|Ne jouez l'Aléatoire que pendant le combat après que les bloqueurs soient déclarés.\nJouez à pile ou face. Si vous gagnez, la créature ciblée gagne +1/+1 jusqu'à la fin du tour.\nPiochez une carte au début de l'entretien du prochain tour.
+Alexi's Cloak|Manteau d'Alexie|Enchantement: aura|Flash\nEnchanter : créature\nLa créature enchantée ne peut pas être la cible de sorts ou de capacités.
+Alexi, Zephyr Mage|Alexie, mage du zéphyr|Créature Légendaire : sortisan|{X}{U},{T}, Défaussez-vous de deux cartes: Renvoyez X créatures ciblées dans les mains de leurs propriétaires.
+Ali Baba|Résultat recherche : Ali Baba|Créature Légendaire : sortisan|{X}{U},{T}, Défaussez-vous de deux cartes: Renvoyez X créatures ciblées dans les mains de leurs propriétaires.
+Aliban's Tower|Tour selon Aliban|Ephémère|La créature bloqueuse ciblée gagne +3/+1 jusqu'à la fin du tour.
+Allay|Apaisement|Ephémère|Rappel {3}\nDétruisez l'enchantement ciblé.
+Alley Grifters|Filous des allées|Créature: mercenaire|À chaque fois que les Filous des allées deviennent bloqués, le joueur défenseur se défausse d'une carte.
+Alluring Scent|Odeur alléchante|Rituel|Toutes les créatures capables de bloquer la créature ciblée ce tour-ci le font.
+Altar of Bone|Résultat recherche : Altar of Bone|Rituel|Toutes les créatures capables de bloquer la créature ciblée ce tour-ci le font.
+Aluren|Contrée ensorcelée|Enchantement|N'importe quel joueur peut jouer des cartes de créature dont le coût converti de mana est de 3 ou moins sans payer leur coût de mana comme si elles avaient flash.
+Amber Prison|Prison d'ambre|Artefact|Vous pouvez choisir de ne pas dégager la Prison d'Ambre pendant votre étape de dégagement.\n{4}, {T}: Engagez la cible, créature, artefact ou terrain. Tant que la Prison d'ambre reste engagée, ce permanent ne se dégage pas pendant l'étape de dégagement de son contrôleur.
+Ambush Party|Escarmoucheurs|Créature: escarmoucheur|Initiative, célérité
+Amrou Kithkin|Amrou sangami|Créature: sangami|L'Amrou sangami ne peut pas être bloquée par des créatures avec une force de 2 ou plus.
+Amulet of Kroog|Amulette de Kroog|Artefact|{2}, {T}: Prévenez, ce tour-ci, la prochaine 1 blessure qui devrait être infligée à une cible, créature ou joueur.
+Amulet of Quoz|Amulette saugrenue|Artefact|Retirez l'Amulette saugrenue de votre paquet avant de jouer si vous jouez sans mise.\n{T}, Sacrifiez l'Amulette Saugrenue: L'adversaire ciblé peut ajouter la carte du dessus de sa bibliothèque à la mise. S'il ne le fait pas, jouez à pile ou face. Si vous gagnez, ce joueur perd la partie. Si vous perdez, vous perdez la partie. Ne jouez cette capacité que pendant votre entretien.
+Amulet of Unmaking|Amulette de déconstruction|Artefact|{5}, {T}, Retirez l'Amulette de déconstruction de la partie: Retirez l'artefact, la créature ou le terrain ciblé de la partie. Ne jouez cette capacité que lorsque vous pourriez jouer un rituel.
+An-Havva Constable|Sergent d'An-Havva|Créature: sergent|L'endurance du Sergent d'An-Havva est égale à 1 plus le nombre de créatures vertes en jeu.
+An-Havva Inn|Auberge d'An-Havva|Rituel|Gagnez X+1 points de vie, X étant le nombre de créatures vertes en jeu.
+An-Havva Township|Bourg d'An-havva|Rituel|Gagnez X+1 points de vie, X étant le nombre de créatures vertes en jeu.
+An-Zerrin Ruins|Ruines des An-Zerrins|Enchantement|Au moment où les Ruines des An-Zerrins arrivent en jeu, choisissez un type de créature.\nLes créatures du type choisi ne se dégagent pas pendant les étapes de dégagement de leurs contrôleurs.
+Anaba Ancestor|Ancêtre anabaan|Créature: fantôme|{T}: Le minotaure ciblé gagne +1/+1 jusqu'à la fin du tour.
