@@ -9,4 +9,4 @@ SVar:X:Count$Domain
 SVar:OblivionRing:TRUE
 SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 AI:RemoveDeck:Random
-Oracle:Flash\nDomain — This spell costs {1} less to cast for each basic land type among lands you control.\n\nWhen Leyline Binding enters the battlefield, exile target nonland permanent an opponent controls until Leyline Binding leaves the battlefield.
+Oracle:Flash\nDomain — This spell costs {1} less to cast for each basic land type among lands you control.\nWhen Leyline Binding enters the battlefield, exile target nonland permanent an opponent controls until Leyline Binding leaves the battlefield.
