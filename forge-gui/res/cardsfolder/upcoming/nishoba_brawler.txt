@@ -1,7 +1,7 @@
 Name:Nishoba Brawler
 ManaCost:1 G
 Types:Creature Cat Warrior
-PT:*/*
+PT:*/3
 K:Trample
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X  | Description$ Domain — CARDNAME's power is each equal to the number of basic land types among lands you control.
 SVar:X:Count$Domain
