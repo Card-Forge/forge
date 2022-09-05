@@ -8,7 +8,7 @@ SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredAttackingPlayer | NumCards$ 1 |
 SVar:DBSacrifice:DB$ Sacrifice | SacValid$ Creature.attacking | Defined$ TriggeredAttackingPlayer | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0
 A:AB$ GenericChoice | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ChoicePrompt$ Choose an offer | NumRandomChoices$ 3 | Choices$ Draw3,Conjure,Return2,ReturnBig,EmblemBuff,EmblemReduceCost,EmblemDavrielPW,EmblemDrawGain | SubAbility$ DBCondition | StackDescription$ SpellDescription | SpellDescription$ Accept one of NICKNAME's offers, then accept one of NICKNAME's conditions.
 SVar:Draw3:DB$ Draw | NumCards$ 3 | SpellDescription$ Draw three cards.
-SVar:Conjure:DB$ MakeCard | Name$ Manor Guardian | Zone$ Hand | SpellDescription$ Conjure a Manor Guardian card into your hand.
+SVar:Conjure:DB$ MakeCard | Conjure$ True | Name$ Manor Guardian | Zone$ Hand | SpellDescription$ Conjure a Manor Guardian card into your hand.
 SVar:Return2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn | ChangeNum$ 2 | RememberChanged$ True | Hidden$ True | Mandatory$ True | AtRandom$ True | SubAbility$ DBEffect | SpellDescription$ Return two random creature cards from your graveyard to your hand. They perpetually gain +1/+1.
 SVar:DBEffect:DB$ Effect | Name$ Davriel, Soul Broker's Perpetual -2 Effect (Offer 4) | StaticAbilities$ PerpetualBuff | RememberObjects$ Remembered | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:PerpetualBuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ These cards perpetually gain +1/+1.
