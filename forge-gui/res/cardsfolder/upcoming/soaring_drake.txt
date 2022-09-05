@@ -1,0 +1,6 @@
+Name:Soaring Drake
+ManaCost:2 U
+Types:Creature Drake
+PT:2/3
+K:Flying
+Oracle:Flying
