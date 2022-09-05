@@ -462,6 +462,8 @@ public abstract class SpellAbilityEffect {
             eff.setEmblem(true);
             // Emblem needs to be colorless
             eff.setColor(MagicColor.COLORLESS);
+        } else if (sa.hasParam("Boon")) {
+            eff.setBoon(true);
         }
 
         eff.setOwner(controller);
