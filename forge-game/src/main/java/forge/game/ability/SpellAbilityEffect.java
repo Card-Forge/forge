@@ -331,9 +331,24 @@ public abstract class SpellAbilityEffect {
     }
 
     protected static void addSelfTrigger(final SpellAbility sa, String location, final Card card) {
+    	String player = "";
+    	String whose = " the ";
+        if (location.contains("_")) {
+    	    String[] locSplit = location.split("_");
+    	    player = locSplit[0];
+    	    location = locSplit[1];
+    	    if (player.equals("You")) {
+    	        whose = " your next ";
+            }
+        }
+
     	String trigStr = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield " +
-    	     "| TriggerDescription$ At the beginning of the end step, " + location.toLowerCase()  + " CARDNAME.";
-    	
+    	     "| TriggerDescription$ At the beginning of" + whose + "end step, " + location.toLowerCase()
+                + " CARDNAME.";
+        if (!player.equals("")) {
+            trigStr += " | Player$ " + player;
+        }
+
     	final Trigger trig = TriggerHandler.parseTrigger(trigStr, card, true);
     	
     	String trigSA = "";
@@ -518,6 +533,9 @@ public abstract class SpellAbilityEffect {
                     "| Origin$ Battlefield | Destination$ Graveyard " +
                     "| Description$ If that permanent would die this turn, exile it instead.";
             String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ " + zone;
+            if (sa.hasParam("ReplaceDyingRemember")) {
+                effect += " | RememberToEffectSource$ True";
+            }
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
             re.setLayer(ReplacementLayer.Other);
