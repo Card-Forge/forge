@@ -3,8 +3,7 @@ ManaCost:4
 Types:Artifact Creature Golem
 PT:1/3
 K:Defender
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSearch | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a creature card with defender, reveal it, put it into your hand, then shuffle.
+T:Mode$ ChangesZone | Origin$ Any | OptionalDecider$ You | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSearch | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a creature card with defender, reveal it, put it into your hand, then shuffle.
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.withDefender | ChangeNum$ 1
-DeckNeeds:Type|Defender
-DeckHints:Type|Defender
+DeckNeeds:Keyword$Defender
 Oracle:Defender\nWhen Shield-Wall Sentinel enters the battlefield, you may search your library for a creature card with defender, reveal it, put it into your hand, then shuffle.
