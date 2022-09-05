@@ -24,7 +24,7 @@ ScryfallCode=HBG
 3r U Lulu, Inspiring Hollyphant @Jakob Eirich
 3u U Lulu, Curious Hollyphant @Jakob Eirich
 3w U Lulu, Helpful Hollyphant @Jakob Eirich
-4 U Rasaad, Monk of Selûne @Dan Scott
+4 U Rasaad, Monk of Selune @Dan Scott
 4b U Rasaad, Shadow Monk @Dan Scott
 4g U Rasaad, Sylvan Monk @Dan Scott
 4r U Rasaad, Warrior Monk @Dan Scott
