@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Sorcery
 A:SP$ Charm | Choices$ DBDestroyArtifact,DBDestroyDefender,DBDamage
 SVar:DBDestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | Tgtprompt$ Select target artifact | SpellDescription$ Destroy target artifact
-SVar:DBDestrorDefender:DB$ Destroy | ValidTgts$ Creature.withDefender | TgtPrompt$ Select target creature with defender. | SpellDescription$ Destroy target creature with defender.
+SVar:DBDestroyDefender:DB$ Destroy | ValidTgts$ Creature.withDefender | TgtPrompt$ Select target creature with defender. | SpellDescription$ Destroy target creature with defender.
 SVar:DBDamage:DB$ DamageAll | NumDmg$ 1 | ValidPlayers$ Player.Opponent | ValidCards$ Creature.OppCtrl | ValidDescription$ each opponent and each creature they control. | SpellDescription$ CARDNAME deals 1 damage to each creature your opponents control.
 Oracle:Choose one —\n• Destroy target artifact.\n• Destroy target creature with defender.\n• Smash to Dust deals 1 damage to each creature your opponents control.
