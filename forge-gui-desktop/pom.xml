@@ -105,6 +105,57 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>se.bjurr.gitchangelog</groupId>
+                <artifactId>git-changelog-maven-plugin</artifactId>
+                <version>1.92</version>
+                <executions>
+                    <execution>
+                        <id>GenerateGitChangelog</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>git-changelog</goal>
+                        </goals>
+                        <configuration>
+                            <!-- TODO: insert placeholder for latest version tag -->
+                            <fromRef>forge-1.6.53</fromRef>
+                            <file>../forge-gui/release-files/CHANGES.txt</file>
+                            <templateContent>
+<![CDATA[
+{{#tags}}
+## {{name}}
+ {{#issues}}
+  {{#hasIssue}}
+   {{#hasLink}}
+### {{name}} [{{issue}}]({{link}}) {{title}} {{#hasIssueType}} *{{issueType}}* {{/hasIssueType}} {{#hasLabels}} {{#labels}} *{{.}}* {{/labels}} {{/hasLabels}}
+   {{/hasLink}}
+   {{^hasLink}}
+### {{name}} {{issue}} {{title}} {{#hasIssueType}} *{{issueType}}* {{/hasIssueType}} {{#hasLabels}} {{#labels}} *{{.}}* {{/labels}} {{/hasLabels}}
+   {{/hasLink}}
+  {{/hasIssue}}
+  {{^hasIssue}}
+### {{name}}
+  {{/hasIssue}}
+
+  {{#commits}}
+**{{{messageTitle}}}**
+
+{{#messageBodyItems}}
+ * {{.}}
+{{/messageBodyItems}}
+
+[{{hash}}](https://github.com/{{ownerName}}/{{repoName}}/commit/{{hash}}) {{authorName}} *{{commitTime}}*
+
+  {{/commits}}
+
+ {{/issues}}
+{{/tags}}
+]]>
+                            </templateContent>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
