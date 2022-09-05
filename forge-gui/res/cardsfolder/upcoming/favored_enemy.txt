@@ -3,7 +3,7 @@ ManaCost:G
 Types:Enchantment
 K:ETBReplacement:Other:ChooseOpp
 SVar:ChooseOpp:DB$ ChoosePlayer | Choices$ Opponent | ChoiceTitle$ Choose an opponent | AILogic$ Curse | SubAbility$ DBChooseType | SpellDescription$ As CARDNAME enters the battlefield, note the most prevalent creature type in an opponent's library.
-SVar:DBChooseType:DB$ ChooseType | Type$ Creature | MostPrevalentInDefinedDeck$ ChosenPlayer | Note$ True | SubAbility$ DBCleanupChosen
+SVar:DBChooseType:DB$ ChooseType | Type$ Creature | MostPrevalentInDefinedZone$ ChosenPlayer_Library | Note$ True | SubAbility$ DBCleanupChosen
 SVar:DBCleanupChosen:DB$ Cleanup | ClearChosenPlayer$ True
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When CARDNAME enters the battlefield, target creature you control fights up to one target creature you don't control.
 SVar:TrigFight:DB$ Pump | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBFight
