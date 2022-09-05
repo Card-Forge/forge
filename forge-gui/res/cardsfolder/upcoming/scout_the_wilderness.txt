@@ -2,7 +2,7 @@ Name:Scout the Wilderness
 ManaCost:2 G
 Types:Sorcery
 K:Kicker:1 W
-A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | ChangeNum$ 1 | SubAbility$ DBToken | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. If this spell was kicked, create two 1/1 white Soldier creature tokens.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | SubAbility$ DBToken | SpellDescription$ Search your library for a basic land card, put it onto the battlefield tapped, then shuffle. If this spell was kicked, create two 1/1 white Soldier creature tokens.
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_soldier | Condition$ Kicked
 DeckHints:Color$White
 DeckHas:Ability$Token
