@@ -20,13 +20,12 @@ package forge.game.cost;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.common.base.Predicate;
-
 import forge.game.GameLogEntryType;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
+import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
@@ -90,12 +89,7 @@ public class CostReveal extends CostPartWithList {
             return true;
         } else if (this.getType().equals("SameColor")) {
             for (final Card card : handList) {
-                if (CardLists.filter(handList, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return c.sharesColorWith(card);
-                    }
-                }).size() >= amount) {
+                if (CardLists.count(handList, CardPredicates.sharesColorWith(card)) >= amount) {
                     return true;
                 }
             }

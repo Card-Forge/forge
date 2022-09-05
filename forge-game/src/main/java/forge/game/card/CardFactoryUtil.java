@@ -162,14 +162,12 @@ public class CardFactoryUtil {
      */
     public static SpellAbility abilityMorphUp(final CardState cardState, final String costStr, final boolean mega) {
         Cost cost = new Cost(costStr, true);
-        String costDesc = cost.toString();
         StringBuilder sbCost = new StringBuilder(mega ? "Megamorph" : "Morph");
         sbCost.append(" ");
         if (!cost.isOnlyManaCost()) {
             sbCost.append("— ");
         }
-        // get rid of the ": " at the end
-        sbCost.append(costDesc, 0, costDesc.length() - 2);
+        sbCost.append(cost.toString());
 
         StringBuilder sb = new StringBuilder();
         sb.append("ST$ SetState | Cost$ ").append(costStr).append(" | CostDesc$ ").append(sbCost);
