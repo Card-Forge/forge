@@ -19,6 +19,9 @@ public class GameRules {
     // same for me
     private boolean useGrayText;
 
+    // whether to warn about cards AI can't play well
+    private boolean warnAboutAICards = true;
+
     public GameRules(final GameType type) {
         this.gameType = type;
     }
@@ -108,5 +111,12 @@ public class GameRules {
     }
     public void setUseGrayText(final boolean useGrayText) {
         this.useGrayText = useGrayText;
+    }
+
+    public boolean warnAboutAICards() {
+        return warnAboutAICards;
+    }
+    public void setWarnAboutAICards(final boolean warnAboutAICards) {
+        this.warnAboutAICards = warnAboutAICards;
     }
 }
