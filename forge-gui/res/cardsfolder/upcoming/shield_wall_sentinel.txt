@@ -7,4 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Creature.withDefender | ChangeNum$ 1
 DeckNeeds:Type|Defender
 DeckHints:Type|Defender
-Oracle:DefenderWhen Shield-Wall Sentinel enters the battlefield, you may search your library for a creature card with defender, reveal it, put it into your hand, then shuffle.
+Oracle:Defender\nWhen Shield-Wall Sentinel enters the battlefield, you may search your library for a creature card with defender, reveal it, put it into your hand, then shuffle.
