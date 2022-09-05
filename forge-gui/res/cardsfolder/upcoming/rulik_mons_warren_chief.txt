@@ -3,10 +3,10 @@ ManaCost:1 R G G
 Types:Legendary Creature Goblin
 PT:3/3
 K:Menace
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDig | TriggerDescription$ Whenever CARDNAME Chief attacks, look at the top card of your library. If it’s a land card, you may put it onto the battlefield tapped. If you didn't put a card onto the battlefield this way, create a 1/1 red Goblin creature token.
-SVar:TrigDig:DB$ PeekAndReveal | RememberRevealed$ True | NoPeek$ True | OptionalDecider$ You | SubAbility$ MoveLand
-SVar:MoveLand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | OptionalDecider$ You | Tapped$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | TokenScript$ r_1_1_goblin 
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBDig | OptionalDecider$ You |  TriggerDescription$ Whenever CARDNAME Chief attacks, look at the top card of your library. If it’s a land card, you may put it onto the battlefield tapped. If you didn't put a card onto the battlefield this way, create a 1/1 red Goblin creature token.
+SVar:DBDig:DB$ Dig | DigNum$ 1 | ChangeNum$ 1 | ChangeValid$ Card.Land | Tapped$ True | RememberChanged$ True | DestinationZone$ Battlefield | DestinationZone2$ Library | SubAbility$ DBToken | SpellDescription$ Reveal the top card of your library. If it's a land card, put it onto the battlefield. Otherwise, put it into your hand.
+SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card.inZoneBattlefield | ConditionCompare$ EQ0 | TokenScript$ r_1_1_goblin | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token
 DeckHints:Type$Goblin
-Oracle:Menace (This creature can’t be blocked except by two or more creatures.)\nWhenever Rulik Mons, Warren Chief attacks, look at the top card of your library. If it’s a land card, you may put it onto the battlefield tapped. If you didn’t put a card onto the battlefield this way, create a 1/1 red Goblin creature token.
+Oracle:Menace (This creature can't be blocked except by two or more creatures.)\nWhenever Rulik Mons, Warren Chief attacks, look at the top card of your library. If it’s a land card, you may put it onto the battlefield tapped. If you didn’t put a card onto the battlefield this way, create a 1/1 red Goblin creature token.
