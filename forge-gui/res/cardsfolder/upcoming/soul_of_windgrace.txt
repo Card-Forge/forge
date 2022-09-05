@@ -9,6 +9,6 @@ A:AB$ GainLife | Cost$ G Discard<1/Land> | LifeAmount$ 3 | SpellDescription$ Gai
 A:AB$ Draw | Cost$ 1 R Discard<1/Land> | SpellDescription$ Draw a card.
 A:AB$ Pump | Cost$ 2 B Discard<1/Land> | KW$ Indestructible | SubAbility$ DBTap | SpellDescription$ CARDNAME gains indestructible until end of turn. Tap it.
 SVar:DBTap:DB$ Tap | Defined$ Self
-DeckHas:Ability$Lifegain|Discard & Keyword$Indestructible
+DeckHas:Ability$LifeGain|Discard & Keyword$Indestructible
 SVar:HasAttackEffect:TRUE
 Oracle:Whenever Soul of Windgrace enters the battlefield or attacks, you may put a land card from a graveyard onto the battlefield tapped under your control.\n{G}, Discard a land card: You gain 3 life.\n{1}{R}, Discard a land card: Draw a card.\n{2}{B}, Discard a land card: Soul of Windgrace gains indestructible until end of turn. Tap it.
