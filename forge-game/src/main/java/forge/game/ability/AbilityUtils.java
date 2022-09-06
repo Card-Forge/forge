@@ -3565,8 +3565,7 @@ public class AbilityUtils {
      * @return a int.
      */
     public static int handlePaid(final Iterable<Card> paidList, final String string, final Card source, CardTraitBase ctb) {
-        if (paidList == null) {
-            //issue is here for Monstrous War-Leech
+        if (Iterables.isEmpty(paidList)) {
             if (string.contains(".")) {
                 final String[] splitString = string.split("\\.", 2);
                 return doXMath(0, splitString[1], source, ctb);
