@@ -27,6 +27,7 @@ import forge.ai.ability.ExploreAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
+import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.deck.Deck;
@@ -1615,6 +1616,13 @@ public class AiController {
                 }
                 for (String sv : card.getSVars().keySet()) {
                     String varValue = card.getSVar(sv);
+                    if (varValue.equals("Count$Domain")) {
+                        for (String type : landToPlay.getType().getLandTypes()) {
+                            if (CardType.isABasicLandType(type) && CardLists.getType(otb, type).isEmpty()) {
+                                return true;
+                            }
+                        }
+                    }
                     if (varValue.startsWith("Count$Valid") || sv.equals("BuffedBy")) {
                         if (varValue.contains("Land") || varValue.contains("Plains") || varValue.contains("Forest")
                                 || varValue.contains("Mountain") || varValue.contains("Island") || varValue.contains("Swamp")

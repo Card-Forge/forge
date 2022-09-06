@@ -580,11 +580,9 @@ public final class GameActionUtil {
                 if (tr != null) {
                     String n = o.split(":")[1];
                     if (host.wasCast() && n.equals("X")) {
-                        CardCollectionView creatures = CardLists.filter(CardLists.filterControlledBy(game.getCardsIn
-                                (ZoneType.Battlefield), activator), CardPredicates.Presets.CREATURES);
+                        CardCollectionView creatures = activator.getCreaturesInPlay();
                         int max = Aggregates.max(creatures, CardPredicates.Accessors.fnGetNetPower);
-                        int min = Aggregates.min(creatures, CardPredicates.Accessors.fnGetNetPower);
-                        n = Integer.toString(pc.chooseNumber(sa, "Choose X for Casualty", min, max));
+                        n = Integer.toString(pc.chooseNumber(sa, "Choose X for Casualty", 0, max));
                     }
                     final String casualtyCost = "Sac<1/Creature.powerGE" + n + "/creature with power " + n +
                             " or greater>";

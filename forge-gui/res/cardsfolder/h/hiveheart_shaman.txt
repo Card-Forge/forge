@@ -8,7 +8,6 @@ A:AB$ Token | Cost$ 5 G | TokenScript$ g_1_1_insect | RememberTokens$ True | Sor
 SVar:DBCounters:DB$ PutCounter | Defined$ Remembered | CounterType$ P1P1 | CounterNum$ X | StackDescription$ None | SubAbility$ DBCleanup | SpellDescription$ Activate only as a sorcery.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Domain
-SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 SVar:HasAttackEffect:TRUE
 DeckHints:Color$White|Blue|Red|Black
 DeckHas:Ability$Token|Counters
