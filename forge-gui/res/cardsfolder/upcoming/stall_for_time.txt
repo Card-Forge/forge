@@ -1,11 +1,10 @@
-Name:Cadric, Soul Kindler
-ManaCost:2 R W
-Types:Legendary Creature Dwarf Wizard
-PT:4/3
-S:Mode$ IgnoreLegendRule | ValidCard$ Permanent.token+YouCtrl | Description$ The "legend rule" doesn't apply to tokens you control.
-T:Mode$ ChangesZone | ValidCard$ Permanent.nonToken+Legendary+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever another nontoken legendary permanent enters the battlefield under your control, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
-SVar:TrigCopy:AB$ CopyPermanent | Cost$ 1 | Defined$ TriggeredCard | PumpKeywords$ Haste | AtEOT$ Sacrifice
-SVar:BuffedBy:Legendary
-DeckHas:Ability$Token
-DeckNeeds:Type$Legendary
-Oracle:The "legend rule" doesn't apply to tokens you control.\nWhenever another nontoken legendary permanent enters the battlefield under your control, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
+Name:Stall for Time
+ManaCost:2 W
+Types:Instant
+K:Kicker:1 U
+A:SP$ Tap | TgtPrompt$ Select up to two target creatures | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | SubAbility$ DBDraw | SpellDescription$ Tap up to two target creatures. If this spell was kicked, put a stun counter on each of those creatures. (If a permanent with a stun counter on it would become untapped, remove one from it instead.)
+SVar:DBDraw:DB$ Draw  | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Condition$ Kicked | Defined$ Targeted | CounterType$ Stun | CounterNum$ 3
+DeckHas:Ability$Counters
+DeckHints:Color$Blue
+Oracle:Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nTap up to two target creatures. If this spell was kicked, put a stun counter on each of those creatures. (If a permanent with a stun counter on it would become untapped, remove one from it instead.)\nDraw a card.
