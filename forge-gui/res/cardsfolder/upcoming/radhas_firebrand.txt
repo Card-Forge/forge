@@ -8,6 +8,5 @@ A:AB$ Pump | Cost$ 5 R | ReduceCost$ Y | Defined$ Self | NumAtt$ +2 | NumDef$ +2
 SVar:X:Count$CardPower
 SVar:Y:Count$Domain
 SVar:HasAttackEffect:TRUE
-SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 AI:RemoveDeck:Random
 Oracle:Whenever Radha's Firebrand attacks, target creature defending player controls with power less than Radha's Firebrand's power can't block this turn.\nDomain — {5}{R}: Radha's Firebrand gets +2/+2 until end of turn. This ability costs {1} less to activate for each basic land type among lands you control. Activate only once each turn.
