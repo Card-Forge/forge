@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Merfolk Rogue
 PT:3/2
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ Domain — When CARDNAME enters the battlefield, look at the top card X cards of your library, where X is the number of basic land types among lands you control. You may put one of those cards on top of your library. Put the rest on the bottom of your library in a random order.
-SVar:TrigDig:DB$ Dig | DigNum$ X | Defined$ You | DestinationZone$ Library | RestRandomOrder$ True | LibraryPosition$ 0
+SVar:TrigDig:DB$ Dig | DigNum$ X | Defined$ You | Optional$ True | ChangeNum$ 1 | DestinationZone$ Library | RestRandomOrder$ True | LibraryPosition$ 0
 SVar:X:Count$Domain
 SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 AI:RemoveDeck:Random
