@@ -1,11 +1,7 @@
-Name:Cadric, Soul Kindler
-ManaCost:2 R W
-Types:Legendary Creature Dwarf Wizard
-PT:4/3
-S:Mode$ IgnoreLegendRule | ValidCard$ Permanent.token+YouCtrl | Description$ The "legend rule" doesn't apply to tokens you control.
-T:Mode$ ChangesZone | ValidCard$ Permanent.nonToken+Legendary+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever another nontoken legendary permanent enters the battlefield under your control, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
-SVar:TrigCopy:AB$ CopyPermanent | Cost$ 1 | Defined$ TriggeredCard | PumpKeywords$ Haste | AtEOT$ Sacrifice
-SVar:BuffedBy:Legendary
-DeckHas:Ability$Token
-DeckNeeds:Type$Legendary
-Oracle:The "legend rule" doesn't apply to tokens you control.\nWhenever another nontoken legendary permanent enters the battlefield under your control, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
+Name:Take Up the Shield
+ManaCost:1 W
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. It gains lifelink and indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Lifelink & Hexproof
+DeckHas:Ability$Counters & Keyword$Lifelink|Hexproof
+Oracle:Put a +1/+1 counter on target creature. It gains lifelink and indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

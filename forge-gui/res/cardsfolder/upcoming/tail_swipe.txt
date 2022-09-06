@@ -1,11 +1,9 @@
-Name:Cadric, Soul Kindler
-ManaCost:2 R W
-Types:Legendary Creature Dwarf Wizard
-PT:4/3
-S:Mode$ IgnoreLegendRule | ValidCard$ Permanent.token+YouCtrl | Description$ The "legend rule" doesn't apply to tokens you control.
-T:Mode$ ChangesZone | ValidCard$ Permanent.nonToken+Legendary+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever another nontoken legendary permanent enters the battlefield under your control, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
-SVar:TrigCopy:AB$ CopyPermanent | Cost$ 1 | Defined$ TriggeredCard | PumpKeywords$ Haste | AtEOT$ Sacrifice
-SVar:BuffedBy:Legendary
-DeckHas:Ability$Token
-DeckNeeds:Type$Legendary
-Oracle:The "legend rule" doesn't apply to tokens you control.\nWhenever another nontoken legendary permanent enters the battlefield under your control, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
+Name:Tail Swipe
+ManaCost:G
+Types:Instant
+A:SP$ Pump | ConditionPlayerTurn$ True | ConditionPhases$ Main1,Main2 | ConditionDefined$ Self | ConditionPresent$ Card.wasCast | NumAtt$ +1 | NumDef$ +1 | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | CounterType$ P1P1 | SubAbility$ DBFight | SpellDescription$ Choose target creature you control and target creature you don’t control. If you cast this spell during your main phase, the creature you control gets +1/+1 until end of turn. Then those creatures fight each other. (Each deals damage equal to its power to the other.)
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Choose target creature you don't control | StackDescription$ Then the chosen creatures fight each other. (They each deal damage equal to their power to the other.)
+DeckHas:Ability$Counters
+SVar:PlayMain1:TRUE
+Oracle:Choose target creature you control and target creature you don't control. If you cast this spell during your main phase, the creature you control gets +1/+1 until end of turn. Then those creatures fight each other. (Each deals damage equal to its power to the other.)
+
