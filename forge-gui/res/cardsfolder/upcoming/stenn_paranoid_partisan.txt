@@ -1,11 +1,12 @@
-Name:Cadric, Soul Kindler
-ManaCost:2 R W
-Types:Legendary Creature Dwarf Wizard
-PT:4/3
-S:Mode$ IgnoreLegendRule | ValidCard$ Permanent.token+YouCtrl | Description$ The "legend rule" doesn't apply to tokens you control.
-T:Mode$ ChangesZone | ValidCard$ Permanent.nonToken+Legendary+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever another nontoken legendary permanent enters the battlefield under your control, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
-SVar:TrigCopy:AB$ CopyPermanent | Cost$ 1 | Defined$ TriggeredCard | PumpKeywords$ Haste | AtEOT$ Sacrifice
-SVar:BuffedBy:Legendary
-DeckHas:Ability$Token
-DeckNeeds:Type$Legendary
-Oracle:The "legend rule" doesn't apply to tokens you control.\nWhenever another nontoken legendary permanent enters the battlefield under your control, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
+Name:Stenn, Paranoid Partisan
+ManaCost:W U
+Types:Legendary Creature Human Wizard
+PT:2/2
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Card | ValidTypes$ Artifact,Planeswalker,Enchantment,Instant,Sorcery | SpellDescription$ As CARDNAME enters the battlefield, choose a card type other than creature or land.
+S:Mode$ ReduceCost | ValidCard$ Card.ChosenType | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Spells you cast of the chosen type cost {1} less to cast.
+A:AB$ ChangeZone | Cost$ 1 W U | Origin$ Battlefield | Destination$ Exile | SubAbility$ DelTrig | SpellDescription$ Exile NICKNAME, Return it to the battlefield under its owner's control at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Exile | Destination$ Battlefield
+AI:RemoveDeck:All
+Oracle:As Stenn, Paranoid Partisan enters the battlefield, choose a card type other than creature or land.\nSpells you cast of the chosen type cost {1} less to cast.\n{1}{W}{U}: Exile Stenn. Return it to the battlefield under its owner’s control at the beginning of the next end step.

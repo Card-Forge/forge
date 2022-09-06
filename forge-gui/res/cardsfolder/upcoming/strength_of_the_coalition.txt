@@ -1,11 +1,9 @@
-Name:Cadric, Soul Kindler
-ManaCost:2 R W
-Types:Legendary Creature Dwarf Wizard
-PT:4/3
-S:Mode$ IgnoreLegendRule | ValidCard$ Permanent.token+YouCtrl | Description$ The "legend rule" doesn't apply to tokens you control.
-T:Mode$ ChangesZone | ValidCard$ Permanent.nonToken+Legendary+Other+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever another nontoken legendary permanent enters the battlefield under your control, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
-SVar:TrigCopy:AB$ CopyPermanent | Cost$ 1 | Defined$ TriggeredCard | PumpKeywords$ Haste | AtEOT$ Sacrifice
-SVar:BuffedBy:Legendary
-DeckHas:Ability$Token
-DeckNeeds:Type$Legendary
-Oracle:The "legend rule" doesn't apply to tokens you control.\nWhenever another nontoken legendary permanent enters the battlefield under your control, you may pay {1}. If you do, create a token that's a copy of it. That token gains haste. Sacrifice it at the beginning of the next end step.
+Name:Strength of the Coalition
+ManaCost:G
+Types:Instant
+K:Kicked:2 W
+A:SP$ Pump | ValidTgts$ Creature.youCtrl | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBCounter | SpellDescription$ Target creature you control gets +2/+2 until end of turn. If this spell was kicked, put a +1/+1 counter on each creature you control.
+SVar:DBCounter:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | Condition$ Kicked
+DeckHas:Ability$Counters
+DeckHints:Color$White
+Oracle:Kicker {2}{W} (You may pay an additional {2}{W} as you cast this spell.)\nTarget creature you control gets +2/+2 until end of turn. If this spell was kicked, put a +1/+1 counter on each creature you control.
