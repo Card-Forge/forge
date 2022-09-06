@@ -1,0 +1,9 @@
+Name:Urborg Repossession
+ManaCost:B
+Types:Sorcery
+K:Kicker:1 G
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeNum$ X | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouCtrl | SubAbility$ DBGainLife | SpellDescription$ Return target creature card from your graveyard to your hand. You gain 2 life. If this spell was kicked, return another target permanent card from your graveyard to your hand.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+SVar:X:Count$Kicked.2.1
+DeckHints:Ability$Graveyard|LifeGain & Color$Green
+Oracle:Return target creature card from your graveyard to your hand. You gain 2 life. If this spell was kicked, return another target permanent card from your graveyard to your hand.
