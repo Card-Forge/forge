@@ -550,6 +550,7 @@
                                             <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="CONTRIBUTORS.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="INSTALLATION.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="GAMEPAD_README.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="CHANGES.txt" />
                                             <fileset dir="${basedir}/../forge-gui/">
@@ -677,6 +678,7 @@
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="CONTRIBUTORS.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="ISSUES.txt" />
                                             <fileset dir="${basedir}/../forge-gui/release-files/" includes="INSTALLATION.txt" />
+                                            <fileset dir="${basedir}/../forge-gui/release-files/" includes="GAMEPAD_README.txt" />
                                             <fileset dir="${basedir}/../forge-gui/" includes="MANUAL.txt" />
                                             <fileset dir="${basedir}/" includes="sentry.properties" />
                                         </copy>

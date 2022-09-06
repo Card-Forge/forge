@@ -20,8 +20,9 @@ import forge.screens.TransitionScreen;
  */
 public class StartScene extends UIScene {
 
-    TextButton saveButton, resumeButton, continueButton, newGameButton, newGameButtonPlus, loadButton, settingsButton, exitButton, switchButton;
+    TextButton saveButton, resumeButton, continueButton, newGameButton, newGameButtonPlus, loadButton, settingsButton, exitButton, switchButton, dialogOk, dialogCancel, dialogButtonSelected;
     Dialog dialog;
+    private int selected = -1;
 
     public StartScene() {
         super(Forge.isLandscapeMode() ? "ui/start_menu.json" : "ui/start_menu_portrait.json");
@@ -82,6 +83,8 @@ public class StartScene extends UIScene {
     public boolean Exit() {
         if (dialog != null)
             dialog.show(stage);
+        if (showGamepadSelector)
+            dialogOk.fire(eventEnter);
         return true;
     }
 
@@ -124,14 +127,225 @@ public class StartScene extends UIScene {
     }
 
     @Override
+    public boolean pointerMoved(int screenX, int screenY) {
+        ui.screenToLocalCoordinates(pointer.set(screenX,screenY));
+        if (showGamepadSelector) {
+            unSelectAll();
+            showGamepadSelector = false;
+        }
+        updateSelected();
+        return super.pointerMoved(screenX, screenY);
+    }
+
+    @Override
     public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
-            if (WorldSave.getCurrentSave().getWorld().getData() != null)
-                Resume();
+        if (Forge.hasGamepad())
+            showGamepadSelector = true;
+        if (dialog.getColor().a != 1) {
+            if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
+                if (WorldSave.getCurrentSave().getWorld().getData() != null) {
+                    if (showGamepadSelector)
+                        performTouch(resumeButton);
+                    else
+                        Resume();
+                }
+            }
+            if (keycode == Input.Keys.DPAD_DOWN) {
+                selected++;
+                if (selected == 1 && Forge.isLandscapeMode())
+                    selected++;
+                if (!saveButton.isVisible() && selected == 3)
+                    selected++;
+                if (!resumeButton.isVisible() && selected == 4)
+                    selected++;
+                if (!continueButton.isVisible() && selected == 5)
+                    selected++;
+                if (selected > 7 && Forge.isLandscapeMode())
+                    selected = 0;
+                if (selected > 8 && !Forge.isLandscapeMode())
+                    selected = 8;
+                setSelected(selected, false);
+            } else if (keycode == Input.Keys.DPAD_UP) {
+                selected--;
+                if (selected == 7 && Forge.isLandscapeMode())
+                    selected--;
+                if (!continueButton.isVisible() && selected == 5)
+                    selected--;
+                if (!resumeButton.isVisible() && selected == 4)
+                    selected--;
+                if (!saveButton.isVisible() && selected == 3)
+                    selected--;
+                if (selected == 1 && Forge.isLandscapeMode())
+                    selected--;
+                if (selected < 0)
+                    selected = Forge.isLandscapeMode() ? 7 : 0;
+                setSelected(selected, false);
+            } else if (keycode == Input.Keys.DPAD_RIGHT && Forge.isLandscapeMode()) {
+                if (selected == 0 || selected == 7)
+                    selected++;
+                if (selected > 8)
+                    selected = 8;
+                setSelected(selected, false);
+            } else if (keycode == Input.Keys.DPAD_LEFT && Forge.isLandscapeMode()) {
+                if (selected == 1 || selected == 8)
+                    selected--;
+                if (selected < 0)
+                    selected = 0;
+                setSelected(selected, false);
+            } else if (keycode == Input.Keys.BUTTON_A)
+                setSelected(selected, true);
+        } else {
+            if (keycode == Input.Keys.DPAD_RIGHT) {
+                dialogOk.fire(eventExit);
+                dialogCancel.fire(eventEnter);
+                dialogButtonSelected  = dialogCancel;
+            } else if (keycode == Input.Keys.DPAD_LEFT) {
+                dialogOk.fire(eventEnter);
+                dialogCancel.fire(eventExit);
+                dialogButtonSelected = dialogOk;
+            } else if (keycode == Input.Keys.BUTTON_A) {
+                dialogOk.fire(eventExit);
+                dialogCancel.fire(eventExit);
+                performTouch(dialogButtonSelected);
+            }
         }
         return true;
     }
-
+    private void setSelected(int select, boolean press) {
+        if (!showGamepadSelector)
+            return;
+        unSelectAll();
+        switch (select) {
+            case 0:
+                newGameButton.fire(eventEnter);
+                if (press)
+                    performTouch(newGameButton);
+                break;
+            case 1:
+                newGameButtonPlus.fire(eventEnter);
+                if (press)
+                    performTouch(newGameButtonPlus);
+                break;
+            case 2:
+                loadButton.fire(eventEnter);
+                if (press)
+                    performTouch(loadButton);
+                break;
+            case 3:
+                saveButton.fire(eventEnter);
+                if (press)
+                    performTouch(saveButton);
+                break;
+            case 4:
+                resumeButton.fire(eventEnter);
+                if (press)
+                    performTouch(resumeButton);
+                break;
+            case 5:
+                continueButton.fire(eventEnter);
+                if (press) {
+                    performTouch(continueButton);
+                    setSelected(4, false);
+                    selected = 4;
+                }
+                break;
+            case 6:
+                settingsButton.fire(eventEnter);
+                if (press)
+                    performTouch(settingsButton);
+                break;
+            case 7:
+                if (Forge.isLandscapeMode()) {
+                    exitButton.fire(eventEnter);
+                    if (press)
+                        performTouch(exitButton);
+                } else {
+                    switchButton.fire(eventEnter);
+                    if (press)
+                        performTouch(switchButton);
+                }
+                break;
+            case 8:
+                if (Forge.isLandscapeMode()) {
+                    switchButton.fire(eventEnter);
+                    if (press)
+                        performTouch(switchButton);
+                } else {
+                    exitButton.fire(eventEnter);
+                    if (press)
+                        performTouch(exitButton);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    private void unSelectAll() {
+        if (!showGamepadSelector)
+            return;
+        newGameButton.fire(eventExit);
+        newGameButtonPlus.fire(eventExit);
+        loadButton.fire(eventExit);
+        saveButton.fire(eventExit);
+        resumeButton.fire(eventExit);
+        continueButton.fire(eventExit);
+        settingsButton.fire(eventExit);
+        exitButton.fire(eventExit);
+        switchButton.fire(eventExit);
+        dialogOk.fire(eventExit);
+        dialogCancel.fire(eventExit);
+    }
+    private void updateSelected() {
+        if (dialog.getColor().a == 1) {
+            if (Controls.actorContainsVector(dialogOk, pointer)) {
+                dialogCancel.fire(eventExit);
+                dialogOk.fire(eventEnter);
+                dialogButtonSelected = dialogOk;
+            }
+            if (Controls.actorContainsVector(dialogCancel, pointer)) {
+                dialogOk.fire(eventExit);
+                dialogCancel.fire(eventEnter);
+                dialogButtonSelected = dialogCancel;
+            }
+            return;
+        }
+        if (Controls.actorContainsVector(newGameButton, pointer)) {
+            newGameButton.fire(eventEnter);
+            selected = 0;
+        }
+        if (Controls.actorContainsVector(newGameButtonPlus, pointer)) {
+            newGameButtonPlus.fire(eventEnter);
+            selected = 1;
+        }
+        if (Controls.actorContainsVector(loadButton, pointer)) {
+            loadButton.fire(eventEnter);
+            selected = 2;
+        }
+        if (Controls.actorContainsVector(saveButton, pointer)) {
+            saveButton.fire(eventEnter);
+            selected = 3;
+        }
+        if (Controls.actorContainsVector(resumeButton, pointer)) {
+            resumeButton.fire(eventEnter);
+            selected = 4;
+        }
+        if (Controls.actorContainsVector(continueButton, pointer)) {
+            continueButton.fire(eventEnter);
+            selected = 5;
+        }
+        if (Controls.actorContainsVector(settingsButton, pointer)) {
+            settingsButton.fire(eventEnter);
+            selected = 6;
+        }
+        if (Controls.actorContainsVector(exitButton, pointer)) {
+            exitButton.fire(eventEnter);
+            selected = Forge.isLandscapeMode() ? 7 : 8;
+        }
+        if (Controls.actorContainsVector(switchButton, pointer)) {
+            switchButton.fire(eventEnter);
+            selected = Forge.isLandscapeMode() ? 8 : 7;
+        }
+    }
     @Override
     public void resLoaded() {
         super.resLoaded();
@@ -169,8 +383,11 @@ public class StartScene extends UIScene {
         dialog = Controls.newDialog(Forge.getLocalizer().getMessage("lblExitForge"));
         dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblAreYouSureYouWishExitForge"))).colspan(2).pad(2, 15, 2, 15);
         dialog.getButtonTable().row();
-        dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblExit"), () -> Forge.exit(true))).width(60).align(Align.left).padLeft(15);
-        dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblCancel"), () -> dialog.hide())).width(60).align(Align.right).padRight(15);
+        dialogOk = Controls.newTextButton(Forge.getLocalizer().getMessage("lblExit"), () -> Forge.exit(true));
+        dialogButtonSelected = dialogOk;
+        dialog.getButtonTable().add(dialogOk).width(60).align(Align.left).padLeft(15);
+        dialogCancel = Controls.newTextButton(Forge.getLocalizer().getMessage("lblCancel"), () -> dialog.hide());
+        dialog.getButtonTable().add(dialogCancel).width(60).align(Align.right).padRight(15);
         dialog.getColor().a = 0;
     }
 

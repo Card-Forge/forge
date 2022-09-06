@@ -1,0 +1,7 @@
+Name:Volshe Tideturner
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ U | Amount$ 1 | RestrictValid$ Spell.Kicked,Spell.Instant,Spell.Sorcery | SpellDescription$ Add {U}. Spend this mana only to cast an instant or sorcery spell or a kicked spell.
+DeckNeeds:Type$Instant|Sorcery & Keyword$Kicker
+Oracle:{T}: Add {U}. Spend this mana only to cast an instant or sorcery spell or a kicked spell.

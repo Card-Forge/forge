@@ -241,6 +241,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // for Vanguard / Manapool / Emblems etc.
     private boolean isImmutable = false;
     private boolean isEmblem = false;
+    private boolean isBoon = false;
 
     private int exertThisTurn = 0;
     private PlayerCollection exertedByPlayer = new PlayerCollection();
@@ -1387,6 +1388,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final boolean hasDoubleStrike() {
         return hasKeyword(Keyword.DOUBLE_STRIKE);
+    }
+    
+    public final boolean hasDoubleTeam() {
+        return hasKeyword(Keyword.DOUBLE_TEAM);
     }
 
     public final boolean hasSecondStrike() {
@@ -5209,6 +5214,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isEmblem() {
         return isEmblem;
     }
+    public final void setBoon(final boolean isBoon0) {
+        isBoon = isBoon0;
+        view.updateBoon(this);
+    }
+
+    public final boolean isBoon() {
+        return isBoon;
+    }
+
     public final void setEmblem(final boolean isEmblem0) {
         isEmblem = isEmblem0;
         view.updateEmblem(this);
@@ -7143,5 +7157,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public void setReadAhead(int value) {
         readAhead = value;
+    }
+
+    public boolean attackVigilance() {
+        return StaticAbilityAttackVigilance.attackVigilance(this);
     }
 }

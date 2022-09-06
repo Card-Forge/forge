@@ -91,6 +91,15 @@ public class Selector extends Group {
     public String getText() {
         return textList.get(currentIndex);
     }
+    public TextButton getLabel() {
+        return label;
+    }
+    public ImageButton getLeftArrow() {
+        return leftArrow;
+    }
+    public ImageButton getRightArrow() {
+        return rightArrow;
+    }
 
     public Array<String> getTextList() {
         return textList;

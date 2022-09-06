@@ -7,119 +7,24 @@ ScryfallCode=HBG
 
 [cards]
 1 R Klement, Novice Acolyte @Maria Poliakova
-1b R Klement, Death Acolyte @Diego Gisbert
-1g R Klement, Nature Acolyte @Raluca Marinescu
-1r R Klement, Tempest Acolyte @Zezhou Chen
-1u R Klement, Knowledge Acolyte @Jodie Muir
-1w R Klement, Life Acolyte @Winona Nelson
 2 R Lae'zel, Githyanki Warrior @John Stanko
-2b R Lae'zel, Callous Warrior @John Stanko
-2g R Lae'zel, Primal Warrior @John Stanko
-2r R Lae'zel, Wrathful Warrior @John Stanko
-2u R Lae'zel, Illithid Thrall @Igor Grechanyi
-2w R Lae'zel, Blessed Warrior @John Stanko
 3 U Lulu, Forgetful Hollyphant @Jakob Eirich
-3b U Lulu, Vengeful Hollyphant @Jakob Eirich
-3g U Lulu, Wild Hollyphant @Jakob Eirich
-3r U Lulu, Inspiring Hollyphant @Jakob Eirich
-3u U Lulu, Curious Hollyphant @Jakob Eirich
-3w U Lulu, Helpful Hollyphant @Jakob Eirich
-4 U Rasaad, Monk of Selûne @Dan Scott
-4b U Rasaad, Shadow Monk @Dan Scott
-4g U Rasaad, Sylvan Monk @Dan Scott
-4r U Rasaad, Warrior Monk @Dan Scott
-4u U Rasaad, Dragon Monk @Dan Scott
-4w U Rasaad, Radiant Monk @Dan Scott
+4 U Rasaad, Monk of Selune @Dan Scott
 5 U Alora, Rogue Companion @Aaron Miller
-5b U Alora, Cheerful Assassin @Aaron Miller
-5g U Alora, Cheerful Scout @Aaron Miller
-5r U Alora, Cheerful Swashbuckler @Aaron Miller
-5u U Alora, Cheerful Thief @Aaron Miller
-5w U Alora, Cheerful Mastermind @Aaron Miller
 6 M Gale, Conduit of the Arcane @Cristi Balanescu
-6b M Gale, Abyssal Conduit @Cristi Balanescu
-6g M Gale, Primeval Conduit @Cristi Balanescu
-6r M Gale, Storm Conduit @Cristi Balanescu
-6u M Gale, Temporal Conduit @Cristi Balanescu
-6w M Gale, Holy Conduit @Cristi Balanescu
 7 R Imoen, Trickster Friend @Alix Branwyn
-7b R Imoen, Occult Trickster @Alix Branwyn
-7g R Imoen, Wise Trickster @Alix Branwyn
-7r R Imoen, Chaotic Trickster @Alix Branwyn
-7u R Imoen, Wily Trickster @Alix Branwyn
-7w R Imoen, Honorable Trickster @Alix Branwyn
 8 U Vhal, Eager Scholar @David Gaillet
-8b U Vhal, Scholar of Mortality @David Gaillet
-8g U Vhal, Scholar of Creation @David Gaillet
-8r U Vhal, Scholar of Elements @David Gaillet
-8u U Vhal, Scholar of Prophecy @David Gaillet
-8w U Vhal, Scholar of Tactics @David Gaillet
 9 U Sarevok the Usurper @Ben Hill
-9b U Sarevok, Deadly Usurper @Ben Hill
-9g U Sarevok, Mighty Usurper @Ben Hill
-9r U Sarevok, Ferocious Usurper @Ben Hill
-9u U Sarevok, Deceitful Usurper @Ben Hill
-9w U Sarevok, Divine Usurper @Ben Hill
 10 R Shadowheart, Sharran Cleric @Cristi Balanescu
-10b R Shadowheart, Cleric of Graves @Cristi Balanescu
-10g R Shadowheart, Cleric of Twilight @Cristi Balanescu
-10r R Shadowheart, Cleric of War @Cristi Balanescu
-10u R Shadowheart, Cleric of Trickery @Cristi Balanescu
-10w R Shadowheart, Cleric of Order @Cristi Balanescu
 11 U Viconia, Nightsinger's Disciple @Daarken
-11b U Viconia, Disciple of Blood @Daarken
-11g U Viconia, Disciple of Strength @Daarken
-11r U Viconia, Disciple of Violence @Daarken
-11u U Viconia, Disciple of Arcana @Daarken
-11w U Viconia, Disciple of Rebirth @Daarken
 12 U Ambergris, Citadel Agent @Darek Zabrocki
-12b U Ambergris, Agent of Tyranny @Darek Zabrocki
-12g U Ambergris, Agent of Balance @Darek Zabrocki
-12r U Ambergris, Agent of Destruction @Darek Zabrocki
-12u U Ambergris, Agent of Progress @Darek Zabrocki
-12w U Ambergris, Agent of Law @Darek Zabrocki
 13 U Gut, Fanatical Priestess @Wayne Reynolds
-13b U Gut, Brutal Fanatic @Wayne Reynolds
-13g U Gut, Bestial Fanatic @Wayne Reynolds
-13r U Gut, Furious Fanatic @Wayne Reynolds
-13u U Gut, Devious Fanatic @Wayne Reynolds
-13w U Gut, Zealous Fanatic @Wayne Reynolds
 14 R Karlach, Raging Tiefling @Billy Christian
-14b R Karlach, Tiefling Punisher @Billy Christian
-14g R Karlach, Tiefling Guardian @Billy Christian
-14r R Karlach, Tiefling Berserker @Billy Christian
-14u R Karlach, Tiefling Spellrager @Billy Christian
-14w R Karlach, Tiefling Zealot @Billy Christian
 15 M Wyll, Pact-Bound Duelist @Mads Ahm
-15b M Wyll of the Fiend Pact @Mads Ahm
-15g M Wyll of the Fey Pact @Mads Ahm
-15r M Wyll of the Blade Pact @Mads Ahm
-15u M Wyll of the Elder Pact @Mads Ahm
-15w M Wyll of the Celestial Pact @Mads Ahm
 16 U Jaheira, Harper Emissary @Mila Pesic
-16b U Jaheira, Ruthless Harper @Mila Pesic
-16g U Jaheira, Merciful Harper @Mila Pesic
-16r U Jaheira, Stirring Harper @Mila Pesic
-16u U Jaheira, Insightful Harper @Mila Pesic
-16w U Jaheira, Heroic Harper @Mila Pesic
 17 M Lukamina, Moon Druid @Zara Alfonso
-17b M Lukamina, Scorpion Form @Jason Kang
-17g M Lukamina, Bear Form @Wisnu Tan
-17r M Lukamina, Wolf Form @Maria Zolotukhina
-17u M Lukamina, Crocodile Form @Simon Dominic
-17w M Lukamina, Hawk Form @Julie Dillon
 18 U Skanos, Dragon Vassal @Daarken
-18b U Skanos, Black Dragon Vassal @Daarken
-18g U Skanos, Green Dragon Vassal @Daarken
-18r U Skanos, Red Dragon Vassal @Daarken
-18u U Skanos, Blue Dragon Vassal @Daarken
-18w U Skanos, White Dragon Vassal @Daarken
 19 R Wilson, Bear Comrade @Ilse Gort
-19b R Wilson, Fearsome Bear @Ilse Gort
-19g R Wilson, Majestic Bear @Ilse Gort
-19r R Wilson, Ardent Bear @Ilse Gort
-19u R Wilson, Subtle Bear @Ilse Gort
-19w R Wilson, Urbane Bear @Ilse Gort
 20 U Boareskyr Tollkeeper @Andrey Kuzinskiy
 21 M Champions of Tyr @Fajareka Setiawan
 22 C Flaming Fist Duskguard @Matt Forsyth

@@ -1,0 +1,12 @@
+Name:Leyline Binding
+ManaCost:5 W
+Types:Enchantment
+K:Flash
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Domain — This spell costs {1} less to cast for each basic land type among lands you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | TargetMin$ 1 | IsCurse$ True | Duration$ UntilHostLeavesPlay | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Choose target nonland permanent an opponent controls | Origin$ Battlefield | Destination$ Exile
+SVar:X:Count$Domain
+SVar:OblivionRing:TRUE
+SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
+AI:RemoveDeck:Random
+Oracle:Flash\nDomain — This spell costs {1} less to cast for each basic land type among lands you control.\nWhen Leyline Binding enters the battlefield, exile target nonland permanent an opponent controls until Leyline Binding leaves the battlefield.

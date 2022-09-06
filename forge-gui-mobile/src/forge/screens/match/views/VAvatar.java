@@ -1,5 +1,6 @@
 package forge.screens.match.views;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -96,12 +97,8 @@ public class VAvatar extends FDisplayObject {
     }
     @Override
     public boolean tap(float x, float y, int count) {
-        ThreadUtil.invokeInGameThread(new Runnable() { //must invoke in game thread in case a dialog needs to be shown
-            @Override
-            public void run() {
-                MatchController.instance.getGameController().selectPlayer(player, null);
-            }
-        });
+        //must invoke in game thread in case a dialog needs to be shown
+        ThreadUtil.invokeInGameThread(() -> MatchController.instance.getGameController().selectPlayer(player, null));
         return true;
     }
 
@@ -170,5 +167,27 @@ public class VAvatar extends FDisplayObject {
         if (MatchController.instance.isHighlighted(player)) {
             g.drawRect(w / 16f, Color.MAGENTA, 0, 0, w, h);
         }
+        //selector
+        if (Forge.hasGamepad()) {
+            if (MatchController.getView().selectedPlayerPanel() != null) {
+                if (MatchController.getView().selectedPlayerPanel().getPlayer() == player) {
+                    g.drawRect(w / 16f, Color.ORANGE, 0, 0, w, h);
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        if (keyCode == Input.Keys.PAGE_DOWN) { // left analog down to select current selected panel
+            //must invoke in game thread in case a dialog needs to be shown
+            if (MatchController.getView().selectedPlayerPanel() != null) {
+                PlayerView selected = MatchController.getView().selectedPlayerPanel().getPlayer();
+                if (selected != null)
+                    ThreadUtil.invokeInGameThread(() -> MatchController.instance.getGameController().selectPlayer(selected, null));
+            }
+            return true;
+        }
+        return super.keyDown(keyCode);
     }
 }

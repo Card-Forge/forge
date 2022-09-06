@@ -246,6 +246,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.IsEmblem, c.isEmblem());
     }
 
+    public boolean isBoon() {
+        return get(TrackableProperty.IsBoon);
+    }
+    public void updateBoon(Card c) {
+        set(TrackableProperty.IsBoon, c.isBoon());
+    }
+
     public boolean isTokenCard() { return get(TrackableProperty.TokenCard); }
     void updateTokenCard(Card c) { set(TrackableProperty.TokenCard, c.isTokenCard()); }
 
@@ -1364,6 +1371,7 @@ public class CardView extends GameEntityView {
         public boolean hasDefender() { return get(TrackableProperty.HasDefender); }
         public boolean hasDivideDamage() { return get(TrackableProperty.HasDivideDamage); }
         public boolean hasDoubleStrike() { return get(TrackableProperty.HasDoubleStrike); }
+        public boolean hasDoubleTeam() { return get(TrackableProperty.HasDoubleTeam); }
         public boolean hasFirstStrike() { return get(TrackableProperty.HasFirstStrike); }
         public boolean hasFlying() { return get(TrackableProperty.HasFlying); }
         public boolean hasFear() { return get(TrackableProperty.HasFear); }

@@ -1,7 +1,9 @@
 package forge.menu;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -42,6 +44,29 @@ public class FMenuTab extends FDisplayObject {
             dropDown.show();
         }
         return true;
+    }
+    public void hideDropDown() {
+        if (dropDown.isVisible())
+            dropDown.hide();
+    }
+    public void showDropDown() {
+        if (!dropDown.isVisible())
+            dropDown.show();
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        if (Forge.hasGamepad() && dropDown.isVisible()) {
+            if (keyCode == Input.Keys.DPAD_UP)
+                dropDown.setPreviousSelected();
+            if (keyCode == Input.Keys.DPAD_DOWN)
+                dropDown.setNextSelected();
+            if (keyCode == Input.Keys.BUTTON_A)
+                dropDown.tapChild();
+            if (keyCode == Input.Keys.BUTTON_B)
+                dropDown.cancel();
+        }
+        return super.keyDown(keyCode);
     }
 
     public void setText(String text0) {
@@ -102,5 +127,16 @@ public class FMenuTab extends FDisplayObject {
         if (isHovered())
             g.fillRect(SEL_BACK_COLOR.brighter(), x, y, w, h);
         g.drawText(text, FONT, foreColor, x, y, w, h, false, Align.center, true);
+    }
+    public boolean isShowingDropdownMenu(boolean any) {
+        if (dropDown == null)
+            return false;
+        if (any)
+            return dropDown.isVisible();
+        return dropDown.isVisible() && dropDown instanceof FDropDownMenu;
+    }
+    public void clearSelected() {
+        if (menuBar != null)
+            menuBar.clearSelected();
     }
 }

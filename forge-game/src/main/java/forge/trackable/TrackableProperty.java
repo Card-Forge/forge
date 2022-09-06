@@ -26,6 +26,7 @@ public enum TrackableProperty {
 
     IsImmutable(TrackableTypes.BooleanType),
     IsEmblem(TrackableTypes.BooleanType),
+    IsBoon(TrackableTypes.BooleanType),
 
     Flipped(TrackableTypes.BooleanType),
     Facedown(TrackableTypes.BooleanType),
@@ -138,6 +139,7 @@ public enum TrackableProperty {
     HasDefender(TrackableTypes.BooleanType),
     HasDivideDamage(TrackableTypes.BooleanType),
     HasDoubleStrike(TrackableTypes.BooleanType),
+    HasDoubleTeam(TrackableTypes.BooleanType),
     HasFirstStrike(TrackableTypes.BooleanType),
     HasFlying(TrackableTypes.BooleanType),
     HasFear(TrackableTypes.BooleanType),

@@ -1,0 +1,10 @@
+Name:Coral Colony
+ManaCost:1 U
+Types:Creature Wall
+PT:1/4
+K:Defender
+A:AB$ Mill | Cost$ 1 U T | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player mills X cards, where X is the number of cards you control with defender.
+SVar:X:Count$Valid Creature.withDefender+YouCtrl
+DeckHas:Ability$Mill
+DeckHints:Keyword$Defender
+Oracle:Defender\n{1}{U}, {T}: Target player mills X cards, where X is the number of cards you control with defender. (To mill a card, a player puts the top card of their library into their graveyard.)

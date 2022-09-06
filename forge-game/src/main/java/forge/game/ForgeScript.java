@@ -176,6 +176,10 @@ public class ForgeScript {
             return !sa.isManaAbility();
         } else if (property.equals("withoutXCost")) {
             return !sa.costHasManaX();
+        } else if (property.startsWith("XCost")) {
+            String comparator = property.substring(5, 7);
+            int y = AbilityUtils.calculateAmount(sa.getHostCard(), property.substring(7), sa);
+            return Expressions.compare(sa.getXManaCostPaid(), comparator, y);
         } else if (property.equals("hasTapCost")) {
             Cost cost = sa.getPayCosts();
             return cost != null && cost.hasTapCost();

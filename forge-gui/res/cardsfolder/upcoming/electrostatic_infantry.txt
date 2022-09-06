@@ -1,0 +1,11 @@
+Name:Electrostatic Infantry
+ManaCost:1 R
+Types:Creature Dwarf Wizard
+PT:1/2
+K:Trample
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | NoResolvingCheck$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever you cast an instant or sorcery spell, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Counters
+DeckHints:Type$Instant|Sorcery
+SVar:BuffedBy:Spell.Instant,Spell.Sorcery
+Oracle:Trample\nWhenever you cast an instant or sorcery spell, put a +1/+1 counter on Electrostatic Infantry.

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 
@@ -20,6 +21,7 @@ import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
 import forge.game.zone.ZoneType;
 import forge.localinstance.properties.ForgePreferences.FPref;
+import forge.menu.FMenuBar;
 import forge.model.FModel;
 import forge.screens.match.MatchController;
 import forge.screens.match.MatchScreen;
@@ -49,12 +51,12 @@ public class VPlayerPanel extends FContainer {
     private final Map<ZoneType, InfoTab> zoneTabs = new HashMap<>();
     private final List<InfoTab> tabs = new ArrayList<>();
     private InfoTab selectedTab;
+    private VField.FieldRow selectedRow;
     private float avatarHeight = VAvatar.HEIGHT;
     private float displayAreaHeightFactor = 1.0f;
     private boolean forMultiPlayer = false;
     public int adjustHeight = 1;
-    public boolean noBG = false;
-
+    private int selected = 0;
     public VPlayerPanel(PlayerView player0, boolean showHand, int playerCount) {
         player = player0;
         phaseIndicator = add(new VPhaseIndicator());
@@ -65,6 +67,7 @@ public class VPlayerPanel extends FContainer {
             //displayAreaHeightFactor *= 0.7f;
         }
         field = add(new VField(player));
+        selectedRow = field.getRow1();
         avatar = add(new VAvatar(player, avatarHeight));
         lblLife = add(new LifeLabel());
         addZoneDisplay(ZoneType.Hand, Forge.hdbuttons ? FSkinImage.HDHAND : FSkinImage.HAND);
@@ -138,6 +141,7 @@ public class VPlayerPanel extends FContainer {
     public void hideSelectedTab() {
         if (selectedTab != null) {
             selectedTab.displayArea.setVisible(false);
+            selectedTab = null;
         }
     }
 
@@ -157,6 +161,38 @@ public class VPlayerPanel extends FContainer {
         if (MatchController.getView() != null) { //must revalidate entire screen so panel heights updated
             MatchController.getView().revalidate();
         }
+    }
+    public void setNextSelectedTab(boolean change) {
+        if (change) {
+            if (selectedTab != null) {
+                selectedTab.displayArea.setVisible(false);
+                selectedTab = null;
+            }
+            if (MatchController.getView() != null) { //must revalidate entire screen so panel heights updated
+                MatchController.getView().revalidate();
+            }
+        }
+        if (!change)
+            selected++;
+        else
+            hideSelectedTab();
+        if (selected >= tabs.size())
+            selected = 0;
+        if (selected < 0)
+            selected = 0;
+        setSelectedTab(tabs.get(selected));
+    }
+    public void closeSelectedTab() {
+        if (selectedTab != null) {
+            selectedTab.displayArea.setVisible(false);
+            selectedTab = null;
+        }
+        if (MatchController.getView() != null) { //must revalidate entire screen so panel heights updated
+            MatchController.getView().revalidate();
+        }
+        selected--;
+        if (selected < -1)
+            selected = -1;
     }
 
     public InfoTab getManaPoolTab() {
@@ -185,6 +221,15 @@ public class VPlayerPanel extends FContainer {
 
     public VField getField() {
         return field;
+    }
+    public VField.FieldRow getSelectedRow() {
+        return selectedRow;
+    }
+    public void switchRow() {
+        if (selectedRow == field.getRow1())
+            selectedRow = field.getRow2();
+        else
+            selectedRow = field.getRow1();
     }
 
     public VPhaseIndicator getPhaseIndicator() {
@@ -377,8 +422,6 @@ public class VPlayerPanel extends FContainer {
 
     @Override
     public void drawBackground(Graphics g) {
-        if (noBG)
-            return;
         float y;
         if (selectedTab != null) { //draw background and border for selected zone if needed
             VDisplayArea selectedDisplayArea = selectedTab.displayArea;
@@ -548,11 +591,15 @@ public class VPlayerPanel extends FContainer {
         @Override
         public void draw(Graphics g) {
             float x, y, w, h;
-
+            boolean drawOverlay = MatchController.getView().selectedPlayerPanel().getPlayer() == player && Forge.hasGamepad();
             if (Forge.altZoneTabs) {
                 //draw extra
-                if (isAltZoneDisplay(this) && selectedTab == this) {
-                    g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);
+                if (isAltZoneDisplay(this)) {
+                    if (selectedTab == this) {
+                        if (drawOverlay)
+                            g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);
+                        g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);
+                    }
                 }
             }
             if (selectedTab == this) {
@@ -571,6 +618,8 @@ public class VPlayerPanel extends FContainer {
                     y--;
                     h += 2;
                 }
+                if (drawOverlay)
+                    g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
                 //change the graveyard tab selection color to active phase color to indicate the player has delirium
                 if ((icon == FSkinImage.HDGRAVEYARD || icon == FSkinImage.GRAVEYARD) && player.hasDelirium()) {
                     g.fillRect(DELIRIUM_HIGHLIGHT, 0 ,isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
@@ -673,5 +722,21 @@ public class VPlayerPanel extends FContainer {
         protected boolean layoutVerticallyForLandscapeMode() {
             return false;
         }
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        if (MatchController.getView().selectedPlayerPanel() == this && !((FMenuBar)MatchController.getView().getHeader()).isShowingMenu(true)) {
+            if (keyCode == Input.Keys.BUTTON_B) {
+                MatchScreen.nullPotentialListener();
+                closeSelectedTab();
+                return true;
+            }
+            if (keyCode == Input.Keys.BUTTON_R1) {
+                setNextSelectedTab(false);
+                return true;
+            }
+        }
+        return super.keyDown(keyCode);
     }
 }

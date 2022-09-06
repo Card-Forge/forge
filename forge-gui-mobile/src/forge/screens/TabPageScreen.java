@@ -13,7 +13,6 @@ import forge.menu.FPopupMenu;
 import forge.model.FModel;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
 import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
@@ -137,7 +136,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         private static final FSkinColor SEPARATOR_COLOR = BACK_COLOR.stepColor(-40);
 
         private final TabPage<T>[] tabPages;
-        private final FLabel btnBack;
+        public final FLabel btnBack;
         private boolean isScrollable;
         private FDisplayObject finalVisibleTab;
         private boolean showBottomBorder = true;
@@ -188,12 +187,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         public TabHeader(TabPage<T>[] tabPages0, boolean showBackButton) {
             tabPages = tabPages0;
             if (showBackButton) {
-                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        Forge.back();
-                    }
-                }).build());
+                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(e -> Forge.back()).build());
             }
             else {
                 btnBack = null;
@@ -206,12 +200,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         public TabHeader(TabPage<T>[] tabPages0, FEventHandler backButton) {
             tabPages = tabPages0;
             if(backButton==null) {
-                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        Forge.back();
-                    }
-                }).build());
+                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(e -> Forge.back()).build());
             }
             else
             {

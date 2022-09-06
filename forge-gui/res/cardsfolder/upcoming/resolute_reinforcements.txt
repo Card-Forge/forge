@@ -1,0 +1,9 @@
+Name:Resolute Reinforcements
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:1/1
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a 1/1 white Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_soldier
+DeckHas:Ability$Token
+Oracle:Flash\nWhen Resolute Reinforcements enters the battlefield, create a 1/1 white Soldier creature token.

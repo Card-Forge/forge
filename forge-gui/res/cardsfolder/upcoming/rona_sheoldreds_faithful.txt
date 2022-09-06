@@ -1,0 +1,11 @@
+Name:Rona, Sheoldred's Faithful
+ManaCost:1 U B B
+Types:Legendary Creature Human Wizard
+PT:3/4
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you cast an instant or sorcery spell, each opponent loses 1 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1
+SVar:AltCost:Cost$ 1 U B B Discard<2/Card> | ActivationZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard by discarding two cards in addition to paying its other costs.
+DeckHas:Ability$Discard|Graveyard
+DeckNeeds:Type$Instant|Sorcery
+SVar:DiscardMe:1
+Oracle:Whenever you cast an instant or sorcery spell, each opponent loses 1 life.\nYou may cast Rona, Sheoldred's Faithful from your graveyard by discarding two cards in addition to paying its other costs.
