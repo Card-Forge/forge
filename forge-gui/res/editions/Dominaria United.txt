@@ -236,7 +236,7 @@ ScryfallCode=DMU
 221 R Stenn, Paranoid Partisan @Mila Pesic
 222 U Tatyova, Steward of Tides @Howard Lyon
 223 U Tori D'Avenant, Fury Rider @Anna Podedworna
-224 U Tura Kennerüd, Skyknight @Donato Giancola
+224 U Tura Kennerud, Skyknight @Donato Giancola
 225 U Uurg, Spawn of Turg @Nicholas Gregory
 226 U Vohar, Vodalian Desecrator @Daarken
 227 U Zar Ojanen, Scion of Efrava @Justine Cruz
@@ -344,7 +344,7 @@ ScryfallCode=DMU
 320 R Stenn, Paranoid Partisan @Tyler Crook
 321 U Tatyova, Steward of Tides @Lisa Heidhoff
 322 U Tori D'Avenant, Fury Rider @Jody Clark
-323 U Tura Kennerüd, Skyknight @Benjamin Ee
+323 U Tura Kennerud, Skyknight @Benjamin Ee
 324 U Uurg, Spawn of Turg @Eugene Frost
 325 U Vohar, Vodalian Desecrator @Nino Vecia
 326 U Zar Ojanen, Scion of Efrava @Eshpur
@@ -385,7 +385,7 @@ ScryfallCode=DMU
 361 R Stenn, Paranoid Partisan @Tyler Crook
 362 U Tatyova, Steward of Tides @Lisa Heidhoff
 363 U Tori D'Avenant, Fury Rider @Jody Clark
-364 U Tura Kennerüd, Skyknight @Benjamin Ee
+364 U Tura Kennerud, Skyknight @Benjamin Ee
 365 U Uurg, Spawn of Turg @Eugene Frost
 366 U Vohar, Vodalian Desecrator @Nino Vecia
 367 U Zar Ojanen, Scion of Efrava @Eshpur
