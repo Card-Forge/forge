@@ -2,8 +2,8 @@ Name:Ahn-Crop Champion
 ManaCost:2 G W
 Types:Creature Human Warrior
 PT:4/4
-K:You may exert CARDNAME as it attacks.
-T:Mode$ Exerted | ValidCard$ Card.Self | Execute$ TrigUntapAll | TriggerDescription$ When you exert CARDNAME, untap all other creatures you control.
+R:Event$ DeclareAttacker | ValidCard$ Card.Self | ReplaceWith$ ExertedTrigger | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ You may exert CARDNAME as it attacks. ABILITY
+SVar:ExertedTrigger:AB$ ImmediateTrigger | Cost$ Exert<1/CARDNAME> | Execute$ TrigUntapAll | SpellDescription$ When you do, untap all other creatures you control.
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl+Other
 SVar:AIExertCondition:NumCreats GE3
 SVar:NumCreats:Count$Valid Creature.YouCtrl+tapped

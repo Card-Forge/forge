@@ -222,11 +222,6 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public List<Card> exertAttackers(List<Card> attackers) {
-        return Lists.newArrayList(attackers);
-    }
-
-    @Override
     public CardCollection orderBlocker(final Card attacker, final Card blocker, final CardCollection oldBlockers) {
         final CardCollection allBlockers = new CardCollection(oldBlockers);
         allBlockers.add(blocker);

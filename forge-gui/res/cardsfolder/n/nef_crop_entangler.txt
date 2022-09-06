@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Creature Human Warrior
 PT:2/1
 K:Trample
-K:You may exert CARDNAME as it attacks.
-T:Mode$ Exerted | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When you exert CARDNAME, it gets +1/+2 until end of turn.
+R:Event$ DeclareAttacker | ValidCard$ Card.Self | ReplaceWith$ ExertedTrigger | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ You may exert CARDNAME as it attacks. ABILITY
+SVar:ExertedTrigger:AB$ ImmediateTrigger | Cost$ Exert<1/CARDNAME> | Execute$ TrigPump | SpellDescription$ When you do, it gets +1/+2 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 2
 Oracle:Trample\nYou may exert Nef-Crop Entangler as it attacks. When you do, it gets +1/+2 until end of turn. (An exerted creature won't untap during your next untap step.)

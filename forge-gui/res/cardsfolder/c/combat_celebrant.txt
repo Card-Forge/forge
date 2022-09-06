@@ -2,8 +2,8 @@ Name:Combat Celebrant
 ManaCost:2 R
 Types:Creature Human Warrior
 PT:4/1
-S:Mode$ Continuous | Affected$ Creature.Self+notExertedThisTurn | AddKeyword$ You may exert CARDNAME as it attacks. | Description$ If CARDNAME hasn't been exerted this turn, you may exert it as it attacks.
-T:Mode$ Exerted | ValidCard$ Card.Self | Execute$ TrigUntapAll | TriggerDescription$ When you exert CARDNAME, untap all other creatures you control and after this phase, there is an additional combat phase.
+R:Event$ DeclareAttacker | ValidCard$ Card.Self+notExertedThisTurn | ReplaceWith$ ExertedTrigger | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ If CARDNAME hasn't been exerted this turn, you may exert it as it attacks.
+SVar:ExertedTrigger:AB$ ImmediateTrigger | Cost$ Exert<1/CARDNAME> | Execute$ TrigUntapAll | SpellDescription$ When you do, untap all other creatures you control and after this phase, there is an additional combat phase.
 SVar:TrigUntapAll:DB$ UntapAll | ValidCards$ Creature.YouCtrl+Other | SubAbility$ DBAddCombat
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
 Oracle:If Combat Celebrant hasn't been exerted this turn, you may exert it as it attacks. When you do, untap all other creatures you control and after this phase, there is an additional combat phase. (An exerted creature won't untap during your next untap step.)

@@ -31,7 +31,6 @@ import com.google.common.collect.Lists;
 import forge.ai.ability.AnimateAi;
 import forge.card.CardTypeView;
 import forge.game.GameEntity;
-import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.ability.effects.ProtectEffect;
 import forge.game.card.Card;
@@ -39,7 +38,6 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
 import forge.game.card.CounterEnumType;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
@@ -55,7 +53,6 @@ import forge.game.trigger.TriggerType;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.Expressions;
 import forge.util.MyRandom;
 import forge.util.collect.FCollection;
 import forge.util.collect.FCollectionView;
@@ -1395,80 +1392,6 @@ public class AiAttackController {
             break;
         }
         return false; // don't attack
-    }
-
-    public static List<Card> exertAttackers(final List<Card> attackers, int aggression) {
-        List<Card> exerters = Lists.newArrayList();
-        for (Card c : attackers) {
-            boolean shouldExert = false;
-
-            if (c.hasSVar("EndOfTurnLeavePlay")) {
-                // creature would leave the battlefield
-                // no pain in exerting it
-                shouldExert = true;
-            } else if (c.hasKeyword(Keyword.VIGILANCE) || ComputerUtilCard.willUntap(c.getController(), c)) {
-                // Free exert - why not?
-                shouldExert = true;
-            }
-
-            // if card has a Exert Trigger which would target,
-            // but there are no creatures it can target, no need to exert with it
-            boolean missTarget = false;
-            for (Trigger t : c.getTriggers()) {
-                if (!TriggerType.Exerted.equals(t.getMode())) {
-                    continue;
-                }
-                SpellAbility sa = t.ensureAbility();
-                if (sa == null) {
-                    continue;
-                }
-                if (sa.usesTargeting()) {
-                    sa.setActivatingPlayer(c.getController());
-                    List<Card> validTargets = CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa);
-                    if (validTargets.isEmpty()) {
-                        missTarget = true;
-                        break;
-                    } else if (sa.isCurse() && !Iterables.any(validTargets,
-                            CardPredicates.isControlledByAnyOf(c.getController().getOpponents()))) {
-                        // e.g. Ahn-Crop Crasher - the effect is only good when aimed at opponent's creatures
-                        missTarget = true;
-                        break;
-                    }
-                }
-            }
-
-            if (missTarget) {
-                continue;
-            }
-
-            if (!shouldExert) {
-                // TODO Improve when the AI wants to use Exert powers
-                shouldExert = aggression > 3;
-            }
-
-            // A specific AI condition for Exert: if specified on the card, the AI will always
-            // exert creatures that meet this condition
-            if (!shouldExert && c.hasSVar("AIExertCondition")) {
-                if (!c.getSVar("AIExertCondition").isEmpty()) {
-                    final String needsToExert = c.getSVar("AIExertCondition");
-                    String sVar = needsToExert.split(" ")[0];
-                    String comparator = needsToExert.split(" ")[1];
-                    String compareTo = comparator.substring(2);
-
-                    int x = AbilityUtils.calculateAmount(c, sVar, null);
-                    int y = AbilityUtils.calculateAmount(c, compareTo, null);
-                    if (Expressions.compare(x, comparator, y)) {
-                        shouldExert = true;
-                    }
-                }
-            }
-
-            if (shouldExert) {
-                exerters.add(c);
-            }
-        }
-
-        return exerters;
     }
 
     /**

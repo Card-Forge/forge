@@ -2,7 +2,8 @@ Name:Vizier of the True
 ManaCost:3 W
 Types:Creature Human Cleric
 PT:3/2
-K:You may exert CARDNAME as it attacks.
+R:Event$ DeclareAttacker | ValidCard$ Card.Self | ReplaceWith$ ExertedTrigger | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ You may exert CARDNAME as it attacks.
+SVar:ExertedTrigger:AB$ Pump | Cost$ Exert<1/CARDNAME>
 T:Mode$ Exerted | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ Whenever you exert a creature, tap target creature an opponent controls.
 // This code presumes that you are only ever allowed to exert creatures you control. If this is changed in the future, it will need an update.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls.

@@ -2,7 +2,8 @@ Name:Resolute Survivors
 ManaCost:1 R W
 Types:Creature Human Warrior
 PT:3/3
-K:You may exert CARDNAME as it attacks.
+R:Event$ DeclareAttacker | ValidCard$ Card.Self | ReplaceWith$ ExertedTrigger | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ You may exert CARDNAME as it attacks.
+SVar:ExertedTrigger:AB$ Pump | Cost$ Exert<1/CARDNAME>
 T:Mode$ Exerted | ValidCard$ Creature.YouCtrl | Execute$ TrigDamageAll | TriggerZones$ Battlefield | TriggerDescription$ Whenever you exert a creature, CARDNAME deals 1 damage to each opponent and you gain 1 life.
 // This code presumes that you are only ever allowed to exert creatures you control. If this is changed in the future, it will need an update.
 SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ Player.Opponent | NumDmg$ 1 | SubAbility$ DBGainLife

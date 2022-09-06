@@ -2,7 +2,7 @@ Name:Hooded Brawler
 ManaCost:2 G
 Types:Creature Naga Warrior
 PT:3/2
-K:You may exert CARDNAME as it attacks.
-T:Mode$ Exerted | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When you exert CARDNAME, it gets +2/+2 until end of turn.
+R:Event$ DeclareAttacker | ValidCard$ Card.Self | ReplaceWith$ ExertedTrigger | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ You may exert CARDNAME as it attacks. ABILITY
+SVar:ExertedTrigger:AB$ ImmediateTrigger | Cost$ Exert<1/CARDNAME> | Execute$ TrigPump | SpellDescription$ When you do, it gets +2/+2 until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 2 | NumDef$ 2
 Oracle:You may exert Hooded Brawler as it attacks. When you do, it gets +2/+2 until end of turn. (An exerted creature won't untap during your next untap step.)

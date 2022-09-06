@@ -2,7 +2,8 @@ Name:Battlefield Scavenger
 ManaCost:1 R
 Types:Creature Jackal Rogue
 PT:2/2
-K:You may exert CARDNAME as it attacks.
+R:Event$ DeclareAttacker | ValidCard$ Card.Self | ReplaceWith$ ExertedTrigger | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ You may exert CARDNAME as it attacks.
+SVar:ExertedTrigger:AB$ Pump | Cost$ Exert<1/CARDNAME>
 T:Mode$ Exerted | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever you exert a creature, you may discard a card. If you do, draw a card.
 // This code presumes that you are only ever allowed to exert creatures you control. If this is changed in the future, it will need an update.
 SVar:TrigDiscard:AB$ Draw | NumCards$ 1 | Cost$ Discard<1/Card>

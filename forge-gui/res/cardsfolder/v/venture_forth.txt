@@ -2,7 +2,7 @@ Name:Venture Forth
 ManaCost:3 G
 Types:Sorcery
 K:Suspend:3:1 G
-A:SP$ DigUntil | Defined$ You | Valid$ Permanent.Land | ValidDescription$ land | FoundDestination$ Battlefield | RevealedDestination$ Exile | RememberRevealed$ True | SubAbility$ DBRestRandomOrder | SpellDescription$ Exile cards from the top of your library until you exile a land card. Put that card onto the battlefield and the rest on the bottom of your library in a random order. 
+A:SP$ DigUntil | Defined$ You | Valid$ Permanent.Land | ValidDescription$ land | FoundDestination$ Battlefield | RevealedDestination$ Exile | RememberRevealed$ True | SubAbility$ DBRestRandomOrder | SpellDescription$ Exile cards from the top of your library until you exile a land card. Put that card onto the battlefield and the rest on the bottom of your library in a random order.
 SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBExileSelf
 SVar:DBExileSelf:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | WithCountersType$ TIME | WithCountersAmount$ 3 | SpellDescription$ Exile CARDNAME with three time counters on it.

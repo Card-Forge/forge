@@ -219,7 +219,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     public String getDescription() {
         if (hasParam("Description") && !this.isSuppressed()) {
-            String desc = AbilityUtils.applyDescriptionTextChangeEffects(getParam("Description"), this);
+            String desc = AbilityUtils.applyDescriptionTextChangeEffects(replaceAbilityText(getParam("Description")), this);
             String currentName;
             if (this.isIntrinsic() && cardState != null && cardState.getCard() == getHostCard()) {
                 currentName = cardState.getName();
@@ -262,6 +262,20 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         }
     }
 
+    public final String replaceAbilityText(final String desc) {
+        String result = desc;
+
+        // this function is for ABILITY
+        if (!result.contains("ABILITY")) {
+            return result;
+        }
+        SpellAbility sa = this.ensureAbility();
+        if (sa == null) {
+            return result;
+        }
+        // i don't want Cost in this String
+        return TextUtil.fastReplace(result, "ABILITY", sa.getParam("SpellDescription"));
+    }
     /**
      * To string.
      *

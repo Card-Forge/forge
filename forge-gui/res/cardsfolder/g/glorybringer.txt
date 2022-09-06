@@ -4,7 +4,7 @@ Types:Creature Dragon
 PT:4/4
 K:Flying
 K:Haste
-K:You may exert CARDNAME as it attacks.
-T:Mode$ Exerted | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When you exert CARDNAME, it deals 4 damage to target non-Dragon creature an opponent controls.
+R:Event$ DeclareAttacker | ValidCard$ Card.Self | ReplaceWith$ ExertedTrigger | ReplacementResult$ Updated | ActiveZones$ Battlefield | Description$ You may exert CARDNAME as it attacks. ABILITY
+SVar:ExertedTrigger:AB$ ImmediateTrigger | Cost$ Exert<1/CARDNAME> | Execute$ TrigDealDamage | SpellDescription$ When you do, it deals 4 damage to target non-Dragon creature an opponent controls.
 SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.nonDragon+OppCtrl | TgtPrompt$ Select target non-Dragon creature an opponent controls | NumDmg$ 4
 Oracle:Flying, haste\nYou may exert Glorybringer as it attacks. When you do, it deals 4 damage to target non-Dragon creature an opponent controls. (An exerted creature won't untap during your next untap step.)

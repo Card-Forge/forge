@@ -593,14 +593,12 @@ public class PhaseHandler implements java.io.Serializable {
                 }
             }
 
-            // Exert creatures here
-            List<Card> possibleExerters = CardLists.getKeyword(combat.getAttackers(),
-                    "You may exert CARDNAME as it attacks.");
-
-            if (!possibleExerters.isEmpty()) {
-                for (Card exerter : whoDeclares.getController().exertAttackers(possibleExerters)) {
-                    exerter.exert();
-                }
+            // TODO optional costs are tricky, i treat them like Update Replacements for now
+            // currently only for exert and elist
+            for (final Card attacker : combat.getAttackers()) {
+                final Map<AbilityKey, Object> repRunParams = AbilityKey.mapFromAffected(attacker);
+                // only update ones are used, no need for replacement result
+                game.getReplacementHandler().run(ReplacementType.DeclareAttacker, repRunParams);
             }
         }
 

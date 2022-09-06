@@ -142,7 +142,6 @@ public abstract class PlayerController {
     public abstract Player chooseStartingPlayer(boolean isFirstGame);
 
     public abstract CardCollection orderBlockers(Card attacker, CardCollection blockers);
-    public abstract List<Card> exertAttackers(List<Card> attackers);
     /**
      * Add a card to a pre-existing blocking order.
      * @param attacker the attacking creature.
