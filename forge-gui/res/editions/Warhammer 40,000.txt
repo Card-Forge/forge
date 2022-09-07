@@ -6,7 +6,10 @@ Type=Commander
 ScryfallCode=40K
 
 [cards]
+1 M Szarekh, the Silent King @Anton Solovianchyk
 2 M Abaddon the Despoiler @Johan Grenier
+3 M Inquisitor Greyfax @Lie Setiawan
+4 M The Swarmlord @Antonio José Manzanedo
 27 R Vanguard Suppressor @Fajareka Setiawan
 108 R Blood for the Blood God! @Artur Nakhodkin
 171 M Abaddon the Despoiler @Johan Grenier
