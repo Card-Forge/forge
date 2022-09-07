@@ -9,4 +9,4 @@ A:AB$ ChangeZone | Cost$ 1 W U | Origin$ Battlefield | Destination$ Exile | SubA
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return CARDNAME to the battlefield.
 SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Exile | Destination$ Battlefield
 AI:RemoveDeck:All
-Oracle:As Stenn, Paranoid Partisan enters the battlefield, choose a card type other than creature or land.\nSpells you cast of the chosen type cost {1} less to cast.\n{1}{W}{U}: Exile Stenn. Return it to the battlefield under its owner’s control at the beginning of the next end step.
+Oracle:As Stenn, Paranoid Partisan enters the battlefield, choose a card type other than creature or land.\nSpells you cast of the chosen type cost {1} less to cast.\n{1}{W}{U}: Exile Stenn. Return it to the battlefield under its owner's control at the beginning of the next end step.
