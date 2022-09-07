@@ -26,13 +26,8 @@ public class ImageUtil {
         return cp;
     }
 
-    public static String getImageRelativePath(PaperCard cp, boolean backFace, boolean includeSet, boolean isDownloadUrl) {
-        return getImageRelativePath(cp, backFace, includeSet, isDownloadUrl, "");
-    }
-
-    public static String getImageRelativePath(PaperCard cp, boolean backFace, boolean includeSet, boolean isDownloadUrl,
-                                              String specializeColor) {
-        final String nameToUse = cp == null ? null : getNameToUse(cp, backFace, specializeColor);
+    public static String getImageRelativePath(PaperCard cp, String face, boolean includeSet, boolean isDownloadUrl) {
+        final String nameToUse = cp == null ? null : getNameToUse(cp, face);
         if (nameToUse == null) {
             return null;
         }
@@ -85,69 +80,55 @@ public class ImageUtil {
         }
     }
 
-    public static String getNameToUse(PaperCard cp, boolean backFace, String specialize) {
+    public static String getNameToUse(PaperCard cp, String face) {
         final CardRules card = cp.getRules();
-        if (!specialize.equals("")) {
-            switch (specialize) {
-                case "white":
-                    if (card.getWSpecialize() != null) {
-                        return card.getWSpecialize().getName();
-                    }
-                    break;
-                case "blue":
-                    if (card.getUSpecialize() != null) {
-                        return card.getUSpecialize().getName();
-                    }
-                    break;
-                case "black":
-                    if (card.getBSpecialize() != null) {
-                        return card.getBSpecialize().getName();
-                    }
-                    break;
-                case "red":
-                    if (card.getRSpecialize() != null) {
-                        return card.getRSpecialize().getName();
-                    }
-                    break;
-                case "green":
-                    if (card.getGSpecialize() != null) {
-                        return card.getGSpecialize().getName();
-                    }
-                    break;
-            }
-        }
-        if (backFace) {
+        if (face.equals("back")) {
             if (cp.hasBackFace())
                 if (card.getOtherPart() != null) {
                     return card.getOtherPart().getName();
                 } else if (!card.getMeldWith().isEmpty()) {
-                    final CardDb db =  StaticData.instance().getCommonCards();
+                    final CardDb db = StaticData.instance().getCommonCards();
                     return db.getRules(card.getMeldWith()).getOtherPart().getName();
                 } else {
                     return null;
                 }
             else
                 return null;
+        } else if (face.equals("white")) {
+            if (card.getWSpecialize() != null) {
+                return card.getWSpecialize().getName();
+            }
+        } else if (face.equals("blue")) {
+            if (card.getUSpecialize() != null) {
+                return card.getUSpecialize().getName();
+            }
+        } else if (face.equals("black")) {
+            if (card.getBSpecialize() != null) {
+                return card.getBSpecialize().getName();
+            }
+        } else if (face.equals("red")) {
+            if (card.getRSpecialize() != null) {
+                return card.getRSpecialize().getName();
+            }
+        } else if (face.equals("green")) {
+            if (card.getGSpecialize() != null) {
+                return card.getGSpecialize().getName();
+            }
         } else if (CardSplitType.Split == cp.getRules().getSplitType()) {
             return card.getMainPart().getName() + card.getOtherPart().getName();
-        } else {
-            return cp.getName();
         }
+        return cp.getName();
     }
 
-    public static String getImageKey(PaperCard cp, boolean backFace, boolean includeSet) {
-        return getImageKey(cp, backFace, includeSet, "");
+    public static String getImageKey(PaperCard cp, String face, boolean includeSet) {
+        return getImageRelativePath(cp, face, includeSet, false);
     }
 
-    public static String getImageKey(PaperCard cp, boolean backFace, boolean includeSet, String specializeColor) {
-        return getImageRelativePath(cp, backFace, includeSet, false, specializeColor);
+    public static String getDownloadUrl(PaperCard cp, String face) {
+        return getImageRelativePath(cp, face, true, true);
     }
 
-    public static String getDownloadUrl(PaperCard cp, boolean backFace) {
-        return getImageRelativePath(cp, backFace, true, true);
-    }
-
-    public static String getScryfallDownloadUrl(PaperCard cp, boolean backFace, String setCode, String langCode, boolean useArtCrop){
+    public static String getScryfallDownloadUrl(PaperCard cp, String face, String setCode, String langCode, boolean useArtCrop){
         String editionCode;
         if ((setCode != null) && (setCode.length() > 0))
             editionCode = setCode;
@@ -159,7 +140,7 @@ public class ImageUtil {
         String versionParam = useArtCrop ? "art_crop" : "normal";
         String faceParam = "";
         if (cp.getRules().getOtherPart() != null) {
-            faceParam = (backFace ? "&face=back" : "&face=front");
+            faceParam = (face.equals("back") ? "&face=back" : "&face=front");
         }
         return String.format("%s/%s/%s?format=image&version=%s%s", editionCode, cardCollectorNumber,
                 langCode, versionParam, faceParam);
