@@ -3565,7 +3565,7 @@ public class AbilityUtils {
      * @return a int.
      */
     public static int handlePaid(final Iterable<Card> paidList, final String string, final Card source, CardTraitBase ctb) {
-        if (paidList == null) {
+        if (Iterables.isEmpty(paidList)) {
             if (string.contains(".")) {
                 final String[] splitString = string.split("\\.", 2);
                 return doXMath(0, splitString[1], source, ctb);
@@ -3592,6 +3592,10 @@ public class AbilityUtils {
 
         if (string.startsWith("SumToughness")) {
             return Aggregates.sum(paidList, CardPredicates.Accessors.fnGetNetToughness);
+        }
+
+        if (string.startsWith("GreatestCMC")) {
+            return Aggregates.max(paidList, CardPredicates.Accessors.fnGetCmc);
         }
 
         if (string.startsWith("DifferentCMC")) {

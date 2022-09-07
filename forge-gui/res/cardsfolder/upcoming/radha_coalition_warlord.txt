@@ -5,6 +5,5 @@ PT:3/3
 T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Domain — Whenever CARDNAME becomes tapped, another target creature you control gets +X/+X until end of turn, where X is the number of basic land types among lands you control.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl  | TgtPrompt$ Select another target creature you control | NumAtt$ +X | NumDef$ +X 
 SVar:X:Count$Domain
-SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 AI:RemoveDeck:Random
 Oracle:Domain — Whenever Radha, Coalition Warlord becomes tapped, another target creature you control gets +X/+X until end of turn, where X is the number of basic land types among lands you control.

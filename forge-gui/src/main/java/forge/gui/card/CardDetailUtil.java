@@ -277,6 +277,8 @@ public class CardDetailUtil {
             area.append("Token card");
         } else if (card.isEmblem()) {
             area.append("Emblem");
+        } else if (card.isBoon()) {
+            area.append("Boon");
         } else if (card.isImmutable()) {
             area.append("Effect");
         }

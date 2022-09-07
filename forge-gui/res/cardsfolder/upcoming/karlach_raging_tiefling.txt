@@ -42,6 +42,7 @@ T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescript
 SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 1 | ChangeType$ Instant.cmcLE3,Sorcery.cmcLE3 | RememberChanged$ True
 SVar:DBEffect:DB$ Effect | StaticAbilities$ MayPlay | RememberObjects$ Remembered | ForgetOnMoved$ Hand | SubAbility$ DBCleanup
 SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered+nonLand | MayPlayWithoutManaCost$ True | EffectZone$ Command | AffectedZone$ Hand
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Instant|Sorcery
 Oracle:First strike, haste\nWhen this card specializes from your graveyard, return it from your graveyard to the battlefield. It perpetually gains "This creature can't block."\nWhen this card specializes from any zone, seek an instant or sorcery card with mana value 3 or less. Until end of turn, you may cast that card without paying its mana cost.
 
