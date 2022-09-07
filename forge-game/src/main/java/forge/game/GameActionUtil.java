@@ -590,6 +590,8 @@ public final class GameActionUtil {
                     String str = "Pay for Casualty? " + cost.toSimpleString();
                     boolean v = pc.addKeywordCost(sa, cost, ki, str);
 
+                    tr.setSVar("CasualtyPaid", v ? "1" : "0");
+                    tr.getOverridingAbility().setSVar("CasualtyPaid", v ? "1" : "0");
                     tr.setSVar("Casualty", v ? n : "0");
                     tr.getOverridingAbility().setSVar("Casualty", v ? n : "0");
 
@@ -605,7 +607,7 @@ public final class GameActionUtil {
                 Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
                 if (tr != null) {
                     final String conspireCost = "tapXType<2/Creature.SharesColorWith/" +
-                        "untapped creature you control that shares a color with " + host.getName() + ">";
+                        "creature that shares a color with " + host.getName() + ">";
                     final Cost cost = new Cost(conspireCost, false);
                     String str = "Pay for Conspire? " + cost.toSimpleString();
 
