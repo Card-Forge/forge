@@ -1748,22 +1748,24 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         assertEquals(shivanDragon.getName(), cardNameShivanDragon);
         assertEquals(shivanDragon.getEdition(), latestArtShivanDragonEdition);
 
-        Date alphaRelaseDate = null;
+        Date alphaReleaseDate = null;
         Date currentDate = Date.from(Instant.now());
         Date latestShivanDragonReleaseDateToDate = null; // latest print to date for Shivan is in P30H
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            alphaRelaseDate = format.parse(alphaEditionReleaseDate);
+            alphaReleaseDate = format.parse(alphaEditionReleaseDate);
             latestShivanDragonReleaseDateToDate = format.parse("2022-09-09");
         } catch (ParseException e) {
             e.printStackTrace();
             fail();
         }
 
-        assertNull(this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, alphaRelaseDate));
-        assertNull(this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, currentDate));
+        assertNull(this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, alphaReleaseDate));
         assertNull(this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon,
                 latestShivanDragonReleaseDateToDate));
+        if (currentDate.after(latestShivanDragonReleaseDateToDate)) {
+            assertNull(this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, currentDate));
+        }
     }
 
     @Test
