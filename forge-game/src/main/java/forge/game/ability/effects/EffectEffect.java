@@ -122,8 +122,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
         String name = sa.getParam("Name");
         if (name == null) {
-            String hostName = hostCard.getName();
-            name = sa.hasParam("Boon") ? hostName + "'s Boon" : "'s Effect";
+            name = hostCard.getName() + (sa.hasParam("Boon") ? "'s Boon" : "'s Effect");
         }
 
         // Unique Effects shouldn't be duplicated
