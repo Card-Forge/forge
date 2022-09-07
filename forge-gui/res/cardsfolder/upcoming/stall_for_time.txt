@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Instant
 K:Kicker:1 U
 A:SP$ Tap | TgtPrompt$ Select up to two target creatures | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | SubAbility$ DBDraw | SpellDescription$ Tap up to two target creatures. If this spell was kicked, put a stun counter on each of those creatures. (If a permanent with a stun counter on it would become untapped, remove one from it instead.)
-SVar:DBDraw:DB$ Draw  | SubAbility$ DBCounter
+SVar:DBDraw:DB$ Draw  | SubAbility$ DBCounter | SpellDescription$ Draw a card.
 SVar:DBCounter:DB$ PutCounter | Condition$ Kicked | Defined$ Targeted | CounterType$ Stun | CounterNum$ 3
 DeckHas:Ability$Counters
 DeckHints:Color$Blue
