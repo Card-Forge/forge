@@ -7,4 +7,5 @@ SVar:X:Count$TotalCommanderCastFromCommandZone/Twice
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+HasCounters | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Xenos Cunning — Whenever a creature you control with a counter on it dies, draw a card.
 SVar:TrigDraw:DB$ Draw | NumCards$ 1
 DeckHas:Ability$Counters
+DeckHints:Ability$Counters
 Oracle:Rapid Regeneration — The Swarmlord enters the battlefield with two +1/+1 counters on it for each time you've cast your commander from the command zone this game.\nXenos Cunning — Whenever a creature you control with a counter on it dies, draw a card.
