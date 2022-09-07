@@ -7,8 +7,8 @@ T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Instant,Sorcery | Val
 SVar:TrigCharm:DB$ Charm | Choices$ DBPump,DBExile,DBScry
 SVar:DBPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DelTrig | RememberChanged$ True | SpellDescription$ Exile CARDNAME. Return it to the battlefield under its owner's control at the beginning of the next end step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | ConditionDefined$ Remembered | ConditionPresent$ Card | TriggerDescription$ Return CARDNAME to the battlefield under its owner's control at the beginning of the next end step.
-SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Exile | Destination$ Battlefield
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | RememberObjects$ Remembered | ConditionDefined$ Remembered | ConditionPresent$ Card | TriggerDescription$ Return CARDNAME to the battlefield under its owner's control at the beginning of the next end step.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Exile | Destination$ Battlefield
 SVar:DBScry:DB$ Scry | ScryNum$ 1 | SpellDescription$ Scry 1.
 DeckNeeds:Type$Instant|Sorcery
 SVar:BuffedBy:Spell.Instant,Spell.Sorcery

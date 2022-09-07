@@ -2827,11 +2827,6 @@ public class AbilityUtils {
             CardCollection filteredCards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restrictions[1], player, c, ctb);
             return doXMath(Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetNetPower), expr, c, ctb);
         }
-        if (sq[0].startsWith("HighestCMC_")) {
-            final String restriction = l[0].substring(11);
-            CardCollection list = CardLists.getValidCards(game.getCardsInGame(), restriction, player, c, ctb);
-            return Aggregates.max(list, CardPredicates.Accessors.fnGetCmc);
-        }
         if (sq[0].startsWith("DifferentPower_")) {
             final String restriction = l[0].substring(15);
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
