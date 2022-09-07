@@ -6,4 +6,3 @@ SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl
 DeckHas:Ability$Counters
 SVar:PlayMain1:TRUE
 Oracle:Choose target creature you control and target creature you don't control. If you cast this spell during your main phase, the creature you control gets +1/+1 until end of turn. Then those creatures fight each other. (Each deals damage equal to its power to the other.)
-
