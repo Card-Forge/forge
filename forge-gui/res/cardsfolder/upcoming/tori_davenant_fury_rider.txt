@@ -1,0 +1,12 @@
+Name:Tori D'Avenant, Fury Rider
+ManaCost:1 R R W
+Types:Legendary Creature Human Knight
+PT:3/3
+K:Vigilance
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, all other attacking creatures you control get +1/+1 until end of turn. Other red attacking creatures you control gain trample until end of turn Untap each other white attacking creature you control.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking+Other | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBPumpRed
+SVar:TrigPumpRed:DB$ PumpAll | ValidCards$ Creature.attacking+Red+Other | KW$ Trample | SubAbility$ DBPumpWhite
+SVar:DBPumpWhite:DB$ UntapAll | ValidCards$ Creature.attacking+White+Other
+SVar:BuffedBy:Creature
+Oracle:Vigilance, trample\nWhenever Tori D'Avenant, Fury Rider attacks, all other attacking creatures you control get +1/+1 until end of turn. Other red attacking creatures you control gain trample until end of turn Untap each other white attacking creature you control.
