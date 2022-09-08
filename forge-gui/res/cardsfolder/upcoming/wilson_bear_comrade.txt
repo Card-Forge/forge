@@ -23,6 +23,7 @@ A:AB$ Pump | Cost$ 1 G W ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard 
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualLifelink | RememberObjects$ Targeted | Name$ Wilson, Urbane Bear's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:PerpetualLifelink:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Lifelink | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains lifelink.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$LifeGain
 Oracle:Reach, trample, lifelink\nWard {2}\n{1}{G}{W}, Exile Wilson, Urbane Bear from your graveyard: Target creature you control perpetually gains lifelink. Activate only as a sorcery.
 
 SPECIALIZE:BLUE
@@ -39,6 +40,7 @@ A:AB$ Pump | Cost$ 1 G U ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard 
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualUnblockable | RememberObjects$ Targeted | Name$ Wilson, Subtle Bear's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:PerpetualUnblockable:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$  HIDDEN Unblockable | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains "This creature can’t be blocked."
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Unblockable
 Oracle:Reach, trample\nWard {2}\nWilson, Subtle Bear can't be blocked.\n{1}{G}{U}, Exile Wilson from your graveyard: Target creature you control perpetually gains "This creature can’t be blocked." Activate only as a sorcery.
 
 SPECIALIZE:BLACK
@@ -55,6 +57,7 @@ A:AB$ Pump | Cost$ 1 B G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard 
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualMenace | Name$ Wilson, Fearsome Bear's Perpetual Effect | RememberObjects$ Targeted | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:PerpetualMenace:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Menace | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains menace
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Keyword$Menace
 Oracle:Menace, reach, trample\nWard {2}\n{1}{B}{G}, Exile Wilson, Fearsome Bear from your graveyard: Target creature you control perpetually gains menace. Activate only as a sorcery.
 
 SPECIALIZE:RED
@@ -71,7 +74,8 @@ A:AB$ Pump | Cost$ 1 R G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard 
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualDoubleStrike | RememberObjects$ Targeted | Name$ Wilson, Ardent Bear's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:PerpetualDoubleStrike:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Double Strike | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains double strike
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Double strike, reach, trample\nWard {2}\n{1}{B}{G}, Exile Wilson, Fearsome Bear from your graveyard: Target creature you control perpetually gains menace. Activate only as a sorcery.
+DeckHas:Keyword$DoubleStrike
+Oracle:Double strike, reach, trample\nWard {2}\n{1}{B}{G}, Exile Wilson, Ardent Bear from your graveyard: Target creature you control perpetually gains double strike. Activate only as a sorcery.
 
 SPECIALIZE:GREEN
 
@@ -86,4 +90,4 @@ A:AB$ Pump | Cost$ 1 R G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard 
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualPump | RememberObjects$ Targeted | Name$ Wilson, Majestic Bear's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Reach & Trample & Ward:2 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Target creature you control perpetually gets +1/+1 and gains reach, trample, and ward {2}. Activate only as a sorcery.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Reach, trample\nWard {2}\n{1}{G}{G}, Exile Wilson from your graveyard: Target creature you control perpetually gets +1/+1 and gains reach, trample, and ward {2}. Activate only as a sorcery.
+Oracle:Reach, trample\nWard {2}\n{1}{G}{G}, Exile Wilson, Majestic Bear from your graveyard: Target creature you control perpetually gets +1/+1 and gains reach, trample, and ward {2}. Activate only as a sorcery.

@@ -21,7 +21,8 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ Lifelink 
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
-Oracle:Lifelink\nWhenever Skanos, Dragon Vassal attacks, another target attacking creature gains lifelink and gets +X/+0 until end of turn, where X is Skanos's power.
+DeckHas:Ability$LifeGain
+Oracle:Lifelink\nWhenever Skanos, White Dragon Vassal attacks, another target attacking creature gains lifelink and gets +X/+0 until end of turn, where X is Skanos's power.
 
 SPECIALIZE:BLUE
 
@@ -34,7 +35,8 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ Flying 
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
-Oracle:Flying\nWhenever Skanos, Dragon Vassal attacks, another target attacking creature gains flying and gets +X/+0 until end of turn, where X is Skanos's power.
+DeckHas:Keyword$Flying
+Oracle:Flying\nWhenever Skanos, Blue Dragon Vassal attacks, another target attacking creature gains flying and gets +X/+0 until end of turn, where X is Skanos's power.
 
 SPECIALIZE:BLACK
 
@@ -43,11 +45,12 @@ ManaCost:4 B G
 Types:Legendary Creature Dragon Ranger
 PT:5/5
 K:Menace
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains Menace and gets +X/+0 until end of turn, where X is CARDNAME's power.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains menace and gets +X/+0 until end of turn, where X is CARDNAME's power.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ Menace 
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
-Oracle:Menace\nWhenever Skanos, Dragon Vassal attacks, another target attacking creature gains menace and gets +X/+0 until end of turn, where X is Skanos's power.
+DeckHas:Keyword$Menace
+Oracle:Menace\nWhenever Skanos, Black Dragon Vassal attacks, another target attacking creature gains menace and gets +X/+0 until end of turn, where X is Skanos's power.
 
 SPECIALIZE:RED
 
@@ -60,7 +63,8 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ First Strike 
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
-Oracle:First strike\nWhenever Skanos, Dragon Vassal attacks, another target attacking creature gains first strike and gets +X/+0 until end of turn, where X is Skanos's power.
+DeckHas:Keyword$FirstStrike
+Oracle:First strike\nWhenever Skanos, Red Dragon Vassal attacks, another target attacking creature gains first strike and gets +X/+0 until end of turn, where X is Skanos's power.
 
 SPECIALIZE:GREEN
 
@@ -73,4 +77,5 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ Vigilance
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
-Oracle:Vigilance\nWhenever Skanos, Dragon Vassal attacks, another target attacking creature gains first strike and gets +X/+0 until end of turn, where X is Skanos's power.
+DeckHas:Keyword$Vigilance
+Oracle:Vigilance\nWhenever Skanos, Green Dragon Vassal attacks, another target attacking creature gains vigilance and gets +X/+0 until end of turn, where X is Skanos's power.
