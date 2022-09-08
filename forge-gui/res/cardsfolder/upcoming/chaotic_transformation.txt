@@ -9,5 +9,8 @@ SVar:DestroyLand:DB$ Pump | ValidTgts$ Land | TgtPrompt$ Select target land | Ta
 SVar:DBDestroy:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Targeted | SubAbility$ DBRepeat | RememberLKI$ True
 SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ DirectRemembered | RepeatSubAbility$ DBRevealUntilShare | ClearRemembered$ True | ChooseOrder$ True | SubAbility$ DBShuffle
 SVar:DBRevealUntilShare:DB$ DigUntil | Valid$ Card.sharesCardTypeWith RememberedLKI | FoundDestination$ Battlefield | Defined$ RememberedController | RevealedDestination$ Library | RevealedLibraryPosition$ -1
+SVar:DBShuffle:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ ShuffleSearched | SubAbility$ DBCleanup
+SVar:ShuffleSearched:DB$ Shuffle | Defined$ Player.IsRemembered | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1
+SVar:X:Count$Valid Card.IsRemembered+RememberedPlayerCtrl
 AI:RemoveDeck:All
 Oracle:Exile up to one target artifact, up to one target creature, up to one target enchantment, up to one target planeswalker, and/or up to one target land. For each permanent exiled this way, its controller reveals cards from the top of their library until they reveal a card that shares a card type with it, puts that card onto the battlefield, then shuffles.
