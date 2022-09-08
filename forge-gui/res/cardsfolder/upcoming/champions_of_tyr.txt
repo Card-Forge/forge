@@ -5,9 +5,11 @@ PT:4/3
 K:Flying
 K:Double team
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAddAPI | TriggerDescription$ When CARDNAME enters the battlefield, you get a boon with "When you cast your next creature spell, that creature enters the battlefield with your choice of a +1/+1 counter, a flying counter, or a lifelink counter on it."
-SVar:TrigAddAPI:DB$ Effect | RememberObjects$ TriggeredCard | Boon$ True | ForgetOnMoved$ Stack | ReplacementEffects$ ReplaceEnter
-SVar:ReplaceEnter:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ AddExtraCounter | ReplacementResult$ Updated | Description$ When you cast your next creature spell, that creature enters the battlefield with your choice of a +1/+1 counter, a flying counter, or a lifelink counter on it.
-SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1,Flying,Lifelink | CounterNum$ 1
+SVar:DBBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast | SpellDescription$ You get a boon with "When you cast your next creature spell, that creature enters the battlefield with an additional +1/+1 counter, reach counter, and trample counter on it."
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | OneOff$ True | ActivationLimit$ 1 | TriggerZones$ Command | Execute$ ReplEffAddCounter | TriggerDescription$ When you cast your next creature spell, that creature enters the battlefield with an additional +1/+1 counter, flying counter, and lifelink counter on it.
+SVar:ReplEffAddCounter:DB$ Effect | ReplacementEffects$ ETBAddCounter | RememberObjects$ TriggeredCard
+SVar:ETBAddCounter:Event$ Moved | Origin$ Stack | Destination$ Battlefield | ValidCard$ Card.IsRemembered | ReplaceWith$ ETBAddExtraCounter
+SVar:ETBAddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1,Flying,Lifelink | CounterNum$ 1
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-DeckHas:Ability$LifeGain|Counters
+DeckHas:Ability$LifeGain|Counters & Keyword$Lifelink|Flying
 Oracle:Flying\nDouble team\nWhen Champions of Tyr enters the battlefield, you get a boon with "When you cast your next creature spell, that creature enters the battlefield with your choice of a +1/+1 counter, a flying counter, or a lifelink counter on it."
