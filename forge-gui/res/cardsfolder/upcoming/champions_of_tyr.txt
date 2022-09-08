@@ -4,8 +4,7 @@ Types:Creature Angel Knight
 PT:4/3
 K:Flying
 K:Double Team
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBDelayedTrigger | TriggerDescription$ When CARDNAME enters the battlefield, you get a boon with "When you cast your next creature spell, that creature enters the battlefield with your choice of a +1/+1 counter, a flying counter, or a lifelink counter on it."
-SVar:DBDelayedTrigger:DB$ DelayedTrigger | Execute$ TrigAddAPI | Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerDescription$ When you cast your next creature spell, that creature enters the battlefield with an additional +1/+1 counter, trample counter, and vigilance counter on it.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAddAPI | TriggerDescription$ When CARDNAME enters the battlefield, you get a boon with "When you cast your next creature spell, that creature enters the battlefield with your choice of a +1/+1 counter, a flying counter, or a lifelink counter on it."
 SVar:TrigAddAPI:DB$ Effect | RememberObjects$ TriggeredCard | Boon$ True | ForgetOnMoved$ Stack | ReplacementEffects$ ReplaceEnter
 SVar:ReplaceEnter:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ AddExtraCounter | ReplacementResult$ Updated | Description$ When you cast your next creature spell, that creature enters the battlefield with your choice of a +1/+1 counter, a flying counter, or a lifelink counter on it.
 SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1,Flying,Lifelink | CounterNum$ 1
