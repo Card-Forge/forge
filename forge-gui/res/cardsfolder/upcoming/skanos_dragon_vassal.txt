@@ -3,7 +3,7 @@ ManaCost:4 G
 Types:Legendary Creature Dragon Ranger
 PT:4/4
 K:Specialize:4
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gets +X/+0 until end of turn, where X is CARDNAME's power.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gets +X/+0 until end of turn, where X is NICKNAME's power.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
@@ -17,7 +17,7 @@ ManaCost:4 G W
 Types:Legendary Creature Dragon Ranger
 PT:4/4
 K:Lifelink
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains lifelink and gets +X/+0 until end of turn, where X is CARDNAME's power.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains lifelink and gets +X/+0 until end of turn, where X is NICKNAME's power.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ Lifelink 
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
@@ -31,7 +31,7 @@ ManaCost:4 U G
 Types:Legendary Creature Dragon Ranger
 PT:4/4
 K:Flying
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains flying and gets +X/+0 until end of turn, where X is CARDNAME's power.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains flying and gets +X/+0 until end of turn, where X is NICKNAME's power.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ Flying 
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
@@ -45,7 +45,7 @@ ManaCost:4 B G
 Types:Legendary Creature Dragon Ranger
 PT:5/5
 K:Menace
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains menace and gets +X/+0 until end of turn, where X is CARDNAME's power.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains menace and gets +X/+0 until end of turn, where X is NICKNAME's power.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ Menace 
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
@@ -59,7 +59,7 @@ ManaCost:4 R G
 Types:Legendary Creature Dragon Ranger
 PT:5/5
 K:First Strike
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains first strike and gets +X/+0 until end of turn, where X is CARDNAME's power.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains first strike and gets +X/+0 until end of turn, where X is NICKNAME's power.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ First Strike 
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
@@ -73,7 +73,7 @@ ManaCost:4 G G
 Types:Legendary Creature Dragon Ranger
 PT:6/6
 K:Vigilance
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains vigilance and gets +X/+0 until end of turn, where X is CARDNAME's power.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature gains vigilance and gets +X/+0 until end of turn, where X is NICKNAME's power.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | NumAtt$ X | KW$ Vigilance
 SVar:X:Count$CardPower
 SVar:HasAttackEffect:TRUE
