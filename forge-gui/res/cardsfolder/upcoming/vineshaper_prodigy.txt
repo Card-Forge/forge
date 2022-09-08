@@ -5,4 +5,5 @@ PT:2/2
 K:Kicker:1 U
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
 SVar:TrigDig:DB$ Dig | DigNum$ 3 | ChangeNum$ 1
-Oracle:\nKicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nWhen Vineshaper Prodigy enters the battlefield, if it was kicked, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
+DeckHints:Color$Blue
+Oracle:Kicker {1}{U} (You may pay an additional {1}{U} as you cast this spell.)\nWhen Vineshaper Prodigy enters the battlefield, if it was kicked, look at the top three cards of your library. Put one of them into your hand and the rest on the bottom of your library in any order.
