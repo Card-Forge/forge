@@ -1,7 +1,7 @@
 Name:Unexpected Allies
 ManaCost:1 R
 Types:Sorcery
-A:SP$ Pump | ValidTgts$ Creature.YouCtrl+nonToken | RememberTargets$ True | TgtPrompt$ Select target nontoken creature you control | KW$ Double Team | NumAtt$ 2 | SubAbility$ TrigEffect | SpellDescription$ Target nontoken creature you control gets +2/+0 and gains double team until end of turn. It also gains first strike until end of turn if it has the same name as another creature you control or a creature card in your graveyard.
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl+nonToken | RememberTargets$ True | TgtPrompt$ Select target nontoken creature you control | KW$ Double team | NumAtt$ 2 | SubAbility$ TrigEffect | SpellDescription$ Target nontoken creature you control gets +2/+0 and gains double team until end of turn. It also gains first strike until end of turn if it has the same name as another creature you control or a creature card in your graveyard.
 SVar:TrigEffect:DB$ Pump | ConditionCheckSVar$ X | Defined$ Remembered | KW$ First strike 
 SVar:X:Count$Valid Creature.IsNotRemembered+YouCtrl+sharesNameWith Remembered/Plus.Y
 SVar:Y:Count$ValidGraveyard Creature.YouOwn+sharesNameWith Remembered
