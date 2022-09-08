@@ -1,0 +1,13 @@
+Name:Valiant Farewell
+ManaCost:1 W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +2 | SubAbility$ BoonEffect | SpellDescription$ Target creature you control gets +2/+0 until end of turn. When that creature leaves the battlefield this turn, you get a boon with "When you cast your next creature spell, it perpetually gets +2/+0." Draw a card.
+SVar:BoonEffect:DB$ Effect | Name$ Valiant Farewell's Effect | RememberObjects$ Targeted | Boon$ True | Duration$ Permanent | Triggers$ ChangesZone | SubAbility$ DBDraw | SpellDescription$ When that creature leaves the battlefield this turn, you get a boon with "When you cast your next creature spell, it perpetually gets +2/+0."
+SVar:DBDraw:DB$ Draw
+SVar:ChangesZone:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ TrigBoon | TriggerDescription$ When the targeted creature leaves the battlefield this turn, sacrifice Heart Wolf.
+SVar:TrigBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | OneOff$ True | ActivationLimit$ 1 | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ When you cast your next creature spell, it perpetually gets +1/+0.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualPump | Duration$ Permanent | Name$ Valiant Farewell's Boon's Perpetual Effect
+SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 2 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets +2/+0.
+DeckNeeds:Type$Creature
+Oracle:Target creature you control gets +2/+0 until end of turn. When that creature leaves the battlefield this turn, you get a boon with "When you cast your next creature spell, it perpetually gets +2/+0."\nDraw a card.
