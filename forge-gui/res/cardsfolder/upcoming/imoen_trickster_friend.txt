@@ -45,7 +45,7 @@ PT:3/2
 K:Unblockable
 T:Mode$ DamageDone | ValidSource$ Card.Self | OptionalDecider$ You | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, create a 2/2 black Zombie creature token.
 SVar:TrigToken:AB$ Token | Cost$ ExileFromGrave<1/Instant;Sorcery> | TokenScript$ B_2_2_zombie
-DeckHas:Ability$Token
+DeckHas:Ability$Token & Type$Zombie
 DeckHints:Ability$Graveyard & Type$Instant|Sorcery
 Oracle:Imoen, Occult Trickster can't be blocked.\nWhenever Imoen deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, create a 2/2 black Zombie creature token.
 
