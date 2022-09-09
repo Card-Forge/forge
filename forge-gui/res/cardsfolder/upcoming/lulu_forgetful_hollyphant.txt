@@ -74,5 +74,5 @@ Types:Legendary Creature Elephant Angel
 PT:2/4
 K:Flying
 T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl+Other+withFlying | Execute$ DBPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with one or more other creatures with flying, those creatures get +2/+2 until end of turn.
-SVar:DBPump:DB$ Pump | Defined$ TriggeredCard | NumAtt$ +2 | NumDef$ +2
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withFlying+attacking | NumAtt$ +2 | NumDef$ +2
 Oracle:Flying\nWhenever you attack with one or more other creatures with flying, those creatures get +2/+2 until end of turn.
