@@ -2,7 +2,7 @@ Name:Snowborn Simulacra
 ManaCost:X U U
 Types:Sorcery
 A:SP$ RepeatEach | ValidTgts$ Permanent.nonToken | TgtPrompt$ Select X target nontoken permanents | TargetMin$ X | TargetMax$ X | RepeatSubAbility$ DBConjure | RepeatTargeted$ True | SubAbility$ DBEffect | StackDescription$ SpellDescription | SpellDescription$ Conjure a duplicate of each of X target nontoken permanents into your hand. Those cards perpetually gain "You may spend mana as though it were mana of any color to cast this spell." If X is 5 or more, you may put one of them from your hand onto the battlefield.
-SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ Remembered | Zone$ Hand | ImprintMade$ True
+SVar:DBConjure:DB$ MakeCard | DefinedName$ Remembered | Zone$ Hand | ImprintMade$ True
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Snowborn Simulacra's Perpetual Effect | Triggers$ Update | RememberObjects$ Imprinted | SubAbility$ DBPutFromHand
 SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The conjured card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
 SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AffectedZone$ Stack | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast this spell.

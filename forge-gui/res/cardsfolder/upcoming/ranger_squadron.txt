@@ -3,5 +3,5 @@ ManaCost:4 W W
 Types:Creature Cat Ranger
 PT:3/4
 K:Flying
-K:Double team
-Oracle:Flying\nDouble team
+K:Double Team
+Oracle:Flying\nDouble Team

@@ -2,6 +2,6 @@ Name:Giant Fire Beetles
 ManaCost:2 R
 Types:Creature Insect
 PT:2/2
-K:Double team
+K:Double Team
 K:Menace
 Oracle:Menace\nDouble team

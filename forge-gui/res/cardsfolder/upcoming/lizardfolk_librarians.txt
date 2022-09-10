@@ -2,7 +2,7 @@ Name:Lizardfolk Librarians
 ManaCost:3 U
 Types:Creature Lizard
 PT:2/1
-K:Double team
+K:Double Team
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2.
 SVar:TrigScry:DB$ Scry | ScryNum$ 2
 Oracle:Double team\When Lizardfolk Librarians enters the battlefield, scry 2.
