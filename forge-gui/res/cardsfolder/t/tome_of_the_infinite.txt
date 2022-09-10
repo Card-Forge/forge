@@ -1,7 +1,7 @@
 Name:Tome of the Infinite
 ManaCost:2 U
 Types:Legendary Artifact
-A:AB$ MakeCard | Cost$ U T | AtRandom$ True | Spellbook$ Light of Hope,Swords to Plowshares,Force Spike,Ponder,Dark Ritual,Duress,Assault Strobe,Lightning Bolt,Fog,Giant Growth | Zone$ Hand | RememberMade$ True | SubAbility$ DBEffect | SpellDescription$ Conjure a random card from CARDNAME's spellbook into your hand.
+A:AB$ MakeCard | Cost$ U T | Conjure$ True | AtRandom$ True | Spellbook$ Light of Hope,Swords to Plowshares,Force Spike,Ponder,Dark Ritual,Duress,Assault Strobe,Lightning Bolt,Fog,Giant Growth | Zone$ Hand | RememberMade$ True | SubAbility$ DBEffect | SpellDescription$ Conjure a random card from CARDNAME's spellbook into your hand.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Tome of the Infinite's Perpetual Effect | SubAbility$ DBCleanup | SpellDescription$ It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
 SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The conjured card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
 SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AffectedZone$ Stack | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast this spell.
