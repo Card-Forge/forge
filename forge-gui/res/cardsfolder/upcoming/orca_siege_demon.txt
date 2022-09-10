@@ -1,6 +1,6 @@
 Name:Orca, Siege Demon
 ManaCost:5 B R
-Types:Legendary Creature Human Soldier
+Types:Legendary Creature Demon
 K:Trample
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever another creature dies, put a +1/+1 counter on CARDNAME.

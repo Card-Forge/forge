@@ -1,0 +1,8 @@
+Name:Hurler Cyclops
+ManaCost:3 R R
+Types:Creature Cyclops
+PT:5/4
+A:AB$ DealDamage | Cost$ 1 Sac<1/Creature.Other/another creature> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to any target.
+SVar:AICostPreference:SacCost$Creature.Token,Creature.cmcLE2
+AI:RemoveDeck:Random
+Oracle:{1}, Sacrifice another creature: Hurler Cyclops deals 1 damage to any target.

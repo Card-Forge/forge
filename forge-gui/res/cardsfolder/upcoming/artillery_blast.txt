@@ -3,6 +3,5 @@ ManaCost:1 W
 Types:Instant
 A:SP$ DealDamage | ValidTgts$ Creature.tapped | TgtPrompt$ Select target tapped creature |NumDmg$ X | SpellDescription$ Domain — CARDNAME deals X damage to target tapped creature, where X is 1 plus the number of basic land types among lands you control.
 SVar:X:Count$Domain/Plus.1
-SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 AI:RemoveDeck:Random
 Oracle:Domain — Artillery Blast deals X damage to target tapped creature, where X is 1 plus the number of basic land types among lands you control.

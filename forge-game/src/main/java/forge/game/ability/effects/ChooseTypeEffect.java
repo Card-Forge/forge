@@ -9,9 +9,12 @@ import forge.card.CardType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
 public class ChooseTypeEffect extends SpellAbilityEffect {
@@ -58,6 +61,15 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                             }
                         }
                     }
+                } else if (sa.hasParam("MostPrevalentInDefinedZone")) {
+                    final String[] info = sa.getParam("MostPrevalentInDefinedZone").split("_");
+                    final Player definedP = AbilityUtils.getDefinedPlayers(sa.getHostCard(), info[0], sa).get(0);
+                    final ZoneType z = info.length > 1 ? ZoneType.smartValueOf(info[1]) : ZoneType.Battlefield;
+                    CardCollectionView zoneCards = definedP.getCardsIn(z);
+                    for (String s : CardFactoryUtil.getMostProminentCreatureType(zoneCards)) {
+                        validTypes.add(s);
+                    }
+
                 } else {
                     validTypes.addAll(CardType.getAllCreatureTypes());
                 }

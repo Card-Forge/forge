@@ -9,4 +9,5 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ B
 T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked | Origin$ Any | Destination$ Battlefield | CheckSVar$ X | SVarCompare$ EQ2 | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked twice, it deals 2 damage to any target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2
 SVar:X:Count$TimesKicked
+DeckHints:Color$Black|Red
 Oracle:Kicker {B} and/or {R} (You may pay an additional {B} and/or {R} as you cast this spell.)\nFlying, lifelink\nWhen Archangel of Wrath enters the battlefield, if it was kicked, it deals 2 damage to any target.\nWhen Archangel of Wrath enters the battlefield, if it was kicked twice, it deals 2 damage to any target.

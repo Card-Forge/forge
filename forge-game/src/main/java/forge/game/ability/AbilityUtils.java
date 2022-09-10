@@ -2827,11 +2827,6 @@ public class AbilityUtils {
             CardCollection filteredCards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restrictions[1], player, c, ctb);
             return doXMath(Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetNetPower), expr, c, ctb);
         }
-        if (sq[0].startsWith("HighestCMC_")) {
-            final String restriction = l[0].substring(11);
-            CardCollection list = CardLists.getValidCards(game.getCardsInGame(), restriction, player, c, ctb);
-            return Aggregates.max(list, CardPredicates.Accessors.fnGetCmc);
-        }
         if (sq[0].startsWith("DifferentPower_")) {
             final String restriction = l[0].substring(15);
             CardCollection list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restriction, player, c, ctb);
@@ -3565,7 +3560,7 @@ public class AbilityUtils {
      * @return a int.
      */
     public static int handlePaid(final Iterable<Card> paidList, final String string, final Card source, CardTraitBase ctb) {
-        if (paidList == null) {
+        if (Iterables.isEmpty(paidList)) {
             if (string.contains(".")) {
                 final String[] splitString = string.split("\\.", 2);
                 return doXMath(0, splitString[1], source, ctb);
@@ -3592,6 +3587,10 @@ public class AbilityUtils {
 
         if (string.startsWith("SumToughness")) {
             return Aggregates.sum(paidList, CardPredicates.Accessors.fnGetNetToughness);
+        }
+
+        if (string.startsWith("GreatestCMC")) {
+            return Aggregates.max(paidList, CardPredicates.Accessors.fnGetCmc);
         }
 
         if (string.startsWith("DifferentCMC")) {

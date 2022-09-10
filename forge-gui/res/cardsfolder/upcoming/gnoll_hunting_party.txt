@@ -5,6 +5,6 @@ PT:5/5
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature you attacked with this turn.
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | Condition$ PlayerTurn | Description$ As long as it's your turn, CARDNAME has first strike.
 SVar:X:Count$AttackersDeclared
-K:Double Team
+K:Double team
 SVar:PlayMain2:TRUE
 Oracle:This spell costs {1} less to cast for each creature you attacked with this turn.\nDouble team\nAs long as it's your turn, Gnoll Hunting Party has first strike.
