@@ -1,0 +1,71 @@
+Name:Gale, Conduit of the Arcane
+ManaCost:3 U
+Types:Legendary Creature Human Wizard
+PT:2/3
+K:Specialize:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.wasCastFromYourHandByYou+Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, return target instant or sorcery card from your graveyard to your hand.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl
+DeckHints:Ability$Graveyard & Type$Sorcery|Instant
+Oracle:When Gale, Conduit of the Arcane enters the battlefield, if you cast it, return target instant or sorcery card from your graveyard to your hand.
+AlternateMode:Specialize
+
+SPECIALIZE:WHITE
+
+Name:Gale, Holy Conduit
+ManaCost:3 W U
+Types:Legendary Creature Human Wizard
+PT:4/5
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever you cast an instant or sorcery spell, create a 1/1 white Pegasus creature token with flying.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_pegasus_flying
+DeckHas:Ability$Token & Type$Pegasus
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, create a 1/1 white Pegasus creature token with flying.
+
+SPECIALIZE:BLUE
+
+Name:Gale, Temporal Conduit
+ManaCost:3 U U
+Types:Legendary Creature Human Wizard
+PT:4/5
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoot | TriggerDescription$ Whenever you cast an instant or sorcery spell, draw a card, then discard a card.
+SVar:TrigLoot:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+DeckHas:Ability$Discard
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, draw a card, then discard a card.
+
+SPECIALIZE:BLACK
+
+Name:Gale, Abyssal Conduit
+ManaCost:3 U B
+Types:Legendary Creature Human Wizard
+PT:4/5
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever you cast an instant or sorcery spell, each opponent loses 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, each opponent loses 2 life.
+
+SPECIALIZE:RED
+
+Name:Gale, Storm Conduit
+ManaCost:3 U R
+Types:Legendary Creature Human Wizard
+PT:4/5
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBEffect | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME perpetually gains "Creatures you control get +1/+0."
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualPump | RememberObjects$ Self | Name$ Gale, Storm Conduit's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualPump:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Creatures you control perpetually get +1/+0.
+SVar:BuffedBy:Creature
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, Gale, Storm Conduit perpetually gains "Creatures you control get +1/+0."
+
+SPECIALIZE:GREEN
+
+Name:Gale, Primeval Conduit
+ManaCost:3 G U
+Types:Legendary Creature Human Wizard
+PT:4/5
+T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever you cast an instant or sorcery spell, put two +1/+1 counters on target creature.
+SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 2
+DeckHas:Ability$Counter
+DeckHints:Type$Instant|Sorcery
+Oracle:Whenever you cast an instant or sorcery spell, put two +1/+1 counters on target creature.
