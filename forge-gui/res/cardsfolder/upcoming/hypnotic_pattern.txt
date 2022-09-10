@@ -1,8 +1,8 @@
 Name:Hypnotic Pattern
 ManaCost:U
 Types:Instant
-A:SP$ Effect | ValidTgts$ Creature | StaticAbilities$ PerpetualDebuff | RememberObjects$ Targeted | Name$ Hypnotic Pattern's Perpetual Effect | Duration$ Permanent | SubAbility$ DBPump | SpellDescription$ Target creature perpetually gets -2/-0.
+A:SP$ Effect| Cost$ U | ValidTgts$ Creature | TgtPrompt$ Target creature perpetually gets -2/-0 | StaticAbilities$ PerpetualDebuff |RememberObjects$ Targeted | Name$ Hypnotic Pattern's Perpetual Effect | Duration$ Permanent | SubAbility$ DBPump
 SVar:PerpetualDebuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ -2 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets -2/-0.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-0 until end of turn.
+SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature to get -2/-0 until end of turn. | NumAtt$ -2 | IsCurse$ True | SpellDescription$ Target creature gets -2/-0 until end of turn.
 Oracle:Target creature perpetually gets -2/-0.\nTarget creature gets -2/-0 until end of turn.

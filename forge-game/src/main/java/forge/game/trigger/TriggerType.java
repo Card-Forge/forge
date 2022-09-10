@@ -40,6 +40,7 @@ public enum TriggerType {
     ChangesZoneAll(TriggerChangesZoneAll.class),
     Clashed(TriggerClashed.class),
     ClassLevelGained(TriggerClassLevelGained.class),
+    ConjureAll(TriggerConjureAll.class),
     CounterAdded(TriggerCounterAdded.class),
     CounterAddedOnce(TriggerCounterAddedOnce.class),
     CounterPlayerAddedAll(TriggerCounterPlayerAddedAll.class),

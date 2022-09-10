@@ -1,0 +1,13 @@
+Name:Thayan Evokers
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:1/1
+K:Double team
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, conjure a card named Lightning Bolt into your hand, then discard a card.
+SVar:TrigConjure:DB$ MakeCard | Name$ Lightning Bolt | Zone$ Hand | Conjure$ True | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
+T:Mode$ ConjureAll | ValidPlayer$ You | ValidCard$ Card | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you conjure one or more cards, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1
+DeckHas:Ability$Discard|Counters
+DeckNeeds:Color$Red
+Oracle:Double team\nWhen Thayan Evokers enters the battlefield, conjure a card named Lightning Bolt into your hand, then discard a card.\nWhenever you conjure one or more cards, put a +1/+1 counter on Thayan Evokers.
