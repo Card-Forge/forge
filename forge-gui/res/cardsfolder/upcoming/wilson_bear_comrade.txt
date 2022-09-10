@@ -3,8 +3,8 @@ ManaCost:1 G
 Types:Legendary Creature Bear Warrior
 PT:2/2
 K:Reach
-K:Trample
 K:Ward:2
+K:Trample
 K:Specialize:4
 AlternateMode:Specialize
 Oracle:Reach, trample\nWard {2}\nSpecialize {4}.
