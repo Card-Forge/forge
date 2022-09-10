@@ -293,6 +293,11 @@
             <version>1.6.54-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx-controllers</groupId>
+            <artifactId>gdx-controllers-desktop</artifactId>
+            <version>2.2.3-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <properties>
