@@ -18,6 +18,7 @@ import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.CardTranslation;
@@ -42,8 +43,10 @@ public class MakeCardEffect extends SpellAbilityEffect {
                     if (source.hasChosenName()) {
                         names.add(source.getChosenName());
                     } else {
-                        names.add(n);
+                        System.err.println("Malformed MakeCard entry! - " + source.toString());
                     }
+                } else {
+                    names.add(n);
                 }
             }
             if (sa.hasParam("DefinedName")) {
@@ -92,9 +95,11 @@ public class MakeCardEffect extends SpellAbilityEffect {
             }
 
             final CardZoneTable triggerList = new CardZoneTable();
+            CardCollection madeCards = new CardCollection();
             for (final Card c : cards) {
                 Card made = game.getAction().moveTo(zone, c, sa, moveParams);
                 triggerList.put(ZoneType.None, made.getZone().getZoneType(), made);
+                madeCards.add(made);
                 if (sa.hasParam("RememberMade")) {
                     source.addRemembered(made);
                 }
@@ -103,6 +108,15 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 }
             }
             triggerList.triggerChangesZoneAll(game, sa);
+
+            if (sa.hasParam("Conjure")) {
+                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+                runParams.put(AbilityKey.Player, player);
+                runParams.put(AbilityKey.Cards, madeCards);
+                runParams.put(AbilityKey.Cause, sa); //-- currently not needed
+                game.getTriggerHandler().runTrigger(TriggerType.ConjureAll, runParams, false);
+            }
+
             if (zone.equals(ZoneType.Library)) {
                 player.shuffle(sa);
             }
