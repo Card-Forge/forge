@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -68,6 +69,11 @@ public abstract class DamageAiBase extends SpellAbilityAi {
             return false;
         }
         if (sa.getTargets() != null && sa.getTargets().contains(enemy)) {
+            return false;
+        }
+
+        // If the opponent will gain life (ex. Fiery Justice), not beneficial unless life gain is harmful or ignored
+        if ("OpponentGainLife".equals(sa.getParam("AILogic")) && ComputerUtil.lifegainPositive(enemy, sa.getHostCard())) {
             return false;
         }
 
