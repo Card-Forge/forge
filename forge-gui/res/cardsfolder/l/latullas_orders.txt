@@ -4,6 +4,6 @@ Types:Enchantment Aura
 K:Flash
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AITgts$ Card.powerGE1 | AILogic$ Pump
-T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ Whenever enchanted creature deals combat damage to defending player, you may destroy target artifact that player controls.
+T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player.TriggeredDefendingPlayer | CombatDamage$ True | Execute$ TrigDestroy | OptionalDecider$ You | TriggerDescription$ Whenever enchanted creature deals combat damage to defending player, you may destroy target artifact that player controls.
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredDefendingPlayer | TgtPrompt$ Select target artifact
 Oracle:Flash\nEnchant creature\nWhenever enchanted creature deals combat damage to defending player, you may destroy target artifact that player controls.
