@@ -783,7 +783,7 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         // if opponent will gain life (ex. Fiery Justice), don't target only enemy player unless life gain is harmful or ignored
-        if ("OpponentGainLife".equals(logic) && tcs.size() == 1 && tcs.contains(enemy) && ComputerUtil.lifegainPositive(enemy, source)){
+        if ("OpponentGainLife".equals(logic) && tcs.size() == 1 && tcs.contains(enemy) && ComputerUtil.lifegainPositive(enemy, source)) {
             sa.resetTargets();
             return false;
         }
