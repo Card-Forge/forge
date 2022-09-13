@@ -495,7 +495,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Run any applicable replacement effects.
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.LifeGained, lifeGain);
-        repParams.put(AbilityKey.Source, source);
+        repParams.put(AbilityKey.SourceSA, sa);
 
         switch (getGame().getReplacementHandler().run(ReplacementType.GainLife, repParams)) {
         case NotReplaced:
