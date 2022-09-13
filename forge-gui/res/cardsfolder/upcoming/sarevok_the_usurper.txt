@@ -31,7 +31,7 @@ Types:Legendary Creature Human Knight
 PT:4/4
 K:First Strike
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gets +X/+0 until end of turn, where X is the number of creature, instant, and sorcery cards in your graveyard.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X | KW$ First Strike 
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ X 
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn,Creature.YouOwn
 DeckHas:Ability$Graveyard
 DeckHints:Type$Instant|Sorcery
