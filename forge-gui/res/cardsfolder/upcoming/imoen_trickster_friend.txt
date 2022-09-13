@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Legendary Creature Human Rogue Wizard
 PT:2/1
 K:Specialize:5:
-S:Mode$ ReduceCost | ValidSpell$ Activated.Specialize | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | Amount$ 2 | ValidCard$ Card.Self | Description$ CARDNAME's equip ability costs {2} less to activate if it targets a colorless creature.
+S:Mode$ ReduceCost | ValidSpell$ Activated.Specialize | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | Amount$ 3 | ValidCard$ Card.Self | Description$ This ability costs {3} less to activate if there are two or more instant and/or sorcery cards in your graveyard.
 S:Mode$ Continuous | Affected$ Card.Self+attacking | AddHiddenKeyword$ Unblockable | IsPresent$ Card.Other+attacking | PresentCompare$ EQ0 | Description$ CARDNAME can't be blocked as long as it's attacking alone.
 SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 DeckHints:Ability$Graveyard & Type$Instant|Sorcery
