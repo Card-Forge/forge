@@ -1,0 +1,9 @@
+Name:Toxicrene
+ManaCost:3 G
+Types:Creature Tyranid
+PT:4/4
+K:Reach
+K:Deathtouch
+S:Mode$ Continuous | Affected$ Land | AffectedZone$ All | RemoveAllAbilities$ True | RemoveCardTypes$ True | AddType$ Land | AddAbility$ ABMana | Description$ Hypertoxic Miasma - All lands have "T: Add one mana of any color" and lose all other abilities.
+SVar:ABMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color.
+Oracle:Reach, deathtouch\nAll lands have "T: Add one mana of any color" and lose all other abilities.

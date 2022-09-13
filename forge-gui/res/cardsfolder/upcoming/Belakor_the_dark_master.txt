@@ -1,0 +1,15 @@
+Name:Be'lakor, the Dark Master
+ManaCost:3 U B R
+Types:Legendary Creature Demon Noble
+PT:6/5
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Prince of Chaos — When CARDNAME enters the battlefield, you draw X cards and you lose X life, where X is the number of Demons you control.
+SVar:TrigDraw:DB$ Draw | NumCards$ X | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | PrecostDesc$ Lord of Torment — | ValidCard$ Demon.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever another demon enters the battlefield under your control, CARDNAME deals damage equal to that creature's power to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ Y
+SVar:X:Count$Valid Demon.YouCtrl
+SVar:Y:TriggeredCard$CardPower
+SVar:BuffedBy:Demon
+DeckHints:Type$Demon
+Oracle:Flying\nPrince of Chaos — When Be'lakor, the Dark Master enters the battlefield, you draw X cards and you lose X life, where X is the number of Demons you control.\nLord of Torment — Whenever another Demon enters the battlefield under your control, it deals damage equal to its power to any target.
