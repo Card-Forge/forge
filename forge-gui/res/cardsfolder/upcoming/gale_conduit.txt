@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Legendary Creature Human Wizard
 PT:2/3
 K:Specialize:2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.wasCastFromYourHandByYou+Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, return target instant or sorcery card from your graveyard to your hand.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+wasCast | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, return target instant or sorcery card from your graveyard to your hand.
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl
 DeckHints:Ability$Graveyard & Type$Sorcery|Instant
 Oracle:When Gale, Conduit of the Arcane enters the battlefield, if you cast it, return target instant or sorcery card from your graveyard to your hand.

@@ -7,8 +7,8 @@ SVar:DBSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ Tru
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualAbility | RememberObjects$ Remembered | Triggers$ Update | Name$ Goblin Trapfinder's Perpetual Effect | Duration$ Permanent
 SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsRemembered | AddTrigger$ TrigSac | AddStaticAbility$ PerpetualReduceCost | AddKeyword$ Haste | EffectZone$ Command | | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This card perpetually gains haste, "This spell costs {2} less to cast," and "At the beginning of your end step, sacrifice this creature."
 SVar:PerpetualReduceCost:Mode$ ReduceCost | ValidCard$ Creature.IsRemembererd | Type$ Spell | Amount$ 2 | EffectZone$ All | Description$ This spell costs {1} less to cast.
-SVar:TrigSac:Mode$ Phase | Phase$ End of Turn | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Sacrifice CARDNAME at you end step.
-SVar:TrigSacrifice:DB$ Sacrifice | Mode$ Defined | DefinedCards$ Self 
+SVar:TrigSac:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Sacrifice CARDNAME at you end step.
+SVar:TrigSacrifice:DB$ Sacrifice | Defined$ Self
 SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
 SVar:DBUpdate:DB$ UpdateRemember
 Oracle:When Goblin Trapfinder dies, seek a creature card with mana value 3 or less. That card perpetually gains haste, "This spell costs {2} less to cast," and "At the beginning of your end step, sacrifice this creature."
