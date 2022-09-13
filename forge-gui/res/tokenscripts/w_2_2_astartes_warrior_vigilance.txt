@@ -1,4 +1,4 @@
-Name:Astartes Warrior
+Name:Astartes Warrior Token
 ManaCost:no cost
 Types:Astartes Warrior
 Colors:white

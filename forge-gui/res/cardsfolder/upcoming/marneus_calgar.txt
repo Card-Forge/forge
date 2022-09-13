@@ -3,8 +3,9 @@ ManaCost:2 W U B
 Types:Legendary Creature Astartes Warrior
 PT:3/5
 K:Double Strike
-T:Mode$ TokenCreated | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Master Tactician — Whenever one or more tokens enter the battlefield under your control, draw a card.
-A:AB$ Token | Cost$ 6 | TokenAmount$ 2 | TokenScript$ w_2_2_Astartes_warrior_vigilance | PrecostDesc$ Chapter Master — |  TokenOwner$ You | SpellDescription$ Create two 2/2 white Astartes Warrior creature tokens with vigilance.
+T:Mode$ TokenCreated | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBDraw | TriggerDescription$ Master Tactician — Whenever one or more tokens enter the battlefield under your control, draw a card.
+SVar:DBDraw:DB$ Draw
+A:AB$ Token | Cost$ 6 | TokenAmount$ 2 | TokenScript$ w_2_2_astartes_warrior_vigilance | TokenOwner$ You | SpellDescription$ Chapter Master — Create two 2/2 white Astartes Warrior creature tokens with vigilance.
 DeckHints:Ability$Tokens
 DeckHas:Ability$Tokens
-Oracle:Domain — When Bortuk Bonerattle enters the battlefield, if you cast it, choose target creature card in your graveyard. Return that card to the battlefield if its mana value is less than or equal to the number of basic land types among lands you control. Otherwise, put it into your hand.
+Oracle:Double strike\nMaster Tactician — Whenever one or more tokens enter the battlefield under your control, draw a card.\nChapter Master — {6}: Create two 2/2 white Astartes Warrior creature tokens with vigilance.
