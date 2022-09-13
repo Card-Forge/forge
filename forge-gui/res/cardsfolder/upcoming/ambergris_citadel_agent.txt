@@ -49,8 +49,8 @@ ManaCost:2 B R
 Types:Legendary Creature Dwarf Cleric
 PT:4/3
 K:Haste
-T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards. When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the number of cards you've discarded this turn.
-SVar:TrigDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDraw
+T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ ImmediateTrigger | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards. When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the number of cards you've discarded this turn.
+SVar:ImmediateTrigger:AB$ ImmediateTrigger | Cost$ Discard<1/Hand> | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | ValidCards$ Creature.OppCtrl | NumAtt$ -X | NumDef$ -X | IsCurse$ True
 SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
@@ -65,8 +65,8 @@ ManaCost:2 R R
 Types:Legendary Creature Dwarf Cleric
 PT:4/3
 K:Haste
-T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards. When you do,If you do, NICKNAME deals X damage to each opponent, where X is the number of cards you've discarded this turn.
-SVar:TrigDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDraw
+T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ ImmediateTrigger | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards. When you do,If you do, NICKNAME deals X damage to each opponent, where X is the number of cards you've discarded this turn.
+SVar:ImmediateTrigger:AB$ ImmediateTrigger | Cost$ Discard<1/Hand> | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DamageAll | NumDmg$ X | ValidPlayers$ Player.Opponent
 SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
