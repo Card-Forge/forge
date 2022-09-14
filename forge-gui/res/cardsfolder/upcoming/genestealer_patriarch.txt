@@ -1,0 +1,5 @@
+Name:
+ManaCost:
+Types:Creature Human Tyranid Wizard
+PT:
+Oracle:
