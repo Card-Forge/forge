@@ -38,10 +38,10 @@ K:Ward:2
 K:Unblockable
 A:AB$ Pump | Cost$ 1 G U ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBEffect | SorcerySpeed$ True | SpellDescription$ Target creature you control perpetually gains "This creature can't be blocked." Activate only as a sorcery.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualUnblockable | RememberObjects$ Targeted | Name$ Wilson, Subtle Bear's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
-SVar:PerpetualUnblockable:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$  HIDDEN Unblockable | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains "This creature can’t be blocked."
+SVar:PerpetualUnblockable:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$  HIDDEN Unblockable | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains "This creature can't be blocked."
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Unblockable
-Oracle:Reach, trample\nWard {2}\nWilson, Subtle Bear can't be blocked.\n{1}{G}{U}, Exile Wilson from your graveyard: Target creature you control perpetually gains "This creature can’t be blocked." Activate only as a sorcery.
+Oracle:Reach, trample\nWard {2}\nWilson, Subtle Bear can't be blocked.\n{1}{G}{U}, Exile Wilson from your graveyard: Target creature you control perpetually gains "This creature can't be blocked." Activate only as a sorcery.
 
 SPECIALIZE:BLACK
 
