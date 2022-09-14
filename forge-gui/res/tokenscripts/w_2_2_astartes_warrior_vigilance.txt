@@ -1,6 +1,6 @@
 Name:Astartes Warrior Token
 ManaCost:no cost
-Types:Astartes Warrior
+Types:Creature Astartes Warrior
 Colors:white
 PT:2/2
 K:Vigilance
