@@ -1,13 +1,13 @@
 Name:Chaotic Transformation
 ManaCost:5 R
 Types:Sorcery
-A:SP$ Pump | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DestroyCreature | AILogic$ Destroy | IsCurse$ True | SpellDescription$ Exile up to one target artifact, up to one target creature, up to one target enchantment, up to one target planeswalker, and/or up to one target land. For each permanent exiled this way, its controller reveals cards from the top of their library until they reveal a card that shares a card type with it, puts that card onto the battlefield, then shuffles. | StackDescription$ None
-SVar:DestroyCreature:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 1 | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyEnch | StackDescription$ None
-SVar:DestroyEnch:DB$ Pump | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | TargetMin$ 0 | TargetMax$ 1 | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyPlaneswalker | StackDescription$ None
-SVar:DestroyPlaneswalker:DB$ Pump | ValidTgts$ Planeswalker | TgtPrompt$ Select target planeswalker | TargetMin$ 0 | TargetMax$ 1 | AILogic$ Destroy | IsCurse$ True | SubAbility$ DestroyLand | StackDescription$ None
-SVar:DestroyLand:DB$ Pump | ValidTgts$ Land | TgtPrompt$ Select target land | TargetMin$ 0 | TargetMax$ 1 | AILogic$ Destroy | IsCurse$ True | SubAbility$ DBDestroy | StackDescription$ None
+A:SP$ Pump | ValidTgts$ Artifact | Imprint$ True |  TgtPrompt$ Select target artifact | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DestroyCreature | IsCurse$ True | SpellDescription$ Exile up to one target artifact, up to one target creature, up to one target enchantment, up to one target planeswalker, and/or up to one target land. For each permanent exiled this way, its controller reveals cards from the top of their library until they reveal a card that shares a card type with it, puts that card onto the battlefield, then shuffles. | StackDescription$ None
+SVar:DestroyCreature:DB$ Pump |  Imprint$ True |  ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ 1 | IsCurse$ True | SubAbility$ DestroyEnch | StackDescription$ None
+SVar:DestroyEnch:DB$ Pump | Imprint$ True |  ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | TargetMin$ 0 | TargetMax$ 1 | IsCurse$ True | SubAbility$ DestroyPlaneswalker | StackDescription$ None
+SVar:DestroyPlaneswalker:DB$ Pump | Imprint$ True | ValidTgts$ Planeswalker | TgtPrompt$ Select target planeswalker | TargetMin$ 0 | TargetMax$ 1 |  IsCurse$ True | SubAbility$ DestroyLand | StackDescription$ None
+SVar:DestroyLand:DB$ Pump | ValidTgts$ Land | Imprint$ True | TgtPrompt$ Select target land | TargetMin$ 0 | TargetMax$ 1 | IsCurse$ True | SubAbility$ DBDestroy | StackDescription$ None
 SVar:DBDestroy:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Targeted | SubAbility$ DBRepeat | RememberLKI$ True
-SVar:DBRepeat:DB$ RepeatEach | DefinedCards$ DirectRemembered | RepeatSubAbility$ DBRevealUntilShare | ClearRemembered$ True | ChooseOrder$ True
+SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Card.IsImprinted+RememberedPlayerOwn | RepeatSubAbility$ DBRevealUntilShare | ClearRemembered$ True | ChooseOrder$ True
 SVar:DBRevealUntilShare:DB$ DigUntil | Valid$ Card.sharesCardTypeWith RememberedLKI | FoundDestination$ Battlefield | Defined$ RememberedController | Shuffle$ True | RevealedDestination$ Library | RevealedLibraryPosition$ -1
 AI:RemoveDeck:All
 Oracle:Exile up to one target artifact, up to one target creature, up to one target enchantment, up to one target planeswalker, and/or up to one target land. For each permanent exiled this way, its controller reveals cards from the top of their library until they reveal a card that shares a card type with it, puts that card onto the battlefield, then shuffles.
