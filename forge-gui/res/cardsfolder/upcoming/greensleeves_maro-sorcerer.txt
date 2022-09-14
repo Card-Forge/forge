@@ -8,5 +8,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.Y
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_badger | TokenOwner$ You
 SVar:X:Count$Valid Land.YouCtrl
 DeckHas:Ability$Token & Type$Badger
-Oracle:Protection from planeswalkers and from Wizards\nGreensleeves, Maro-Sorcerer’s power and toughness are each equal to the number of lands you control.\nWhenever a land enters the battlefield under your control, create a 3/3 green Badger creature token.
+Oracle:Protection from planeswalkers and from Wizards\nGreensleeves, Maro-Sorcerer's power and toughness are each equal to the number of lands you control.\nWhenever a land enters the battlefield under your control, create a 3/3 green Badger creature token.
  
