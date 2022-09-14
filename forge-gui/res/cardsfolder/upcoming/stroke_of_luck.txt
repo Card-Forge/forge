@@ -1,0 +1,11 @@
+Name:Stroke of Luck
+ManaCost:1 B
+Types:Sorcery
+A:SP$ PeekAndReveal | PeekAmount$ 4 | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBChoose | SpellDescription$ Look at the top four cards of your library. Choose one of them and put all cards with the same name as the chosen card from among them into your hand. You lose 1 life for each card put into your hand this way. Put the rest on the bottom of your library in a random order.
+SVar:DBChoose:DB$ ChooseCard | Defined$ You | Choices$ Card.IsRemembered | ChoiceZone$ Library | Amount$ 1 | SubAbility$ DBChangeZoneAll
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ForgetChanged$ True | Origin$ Library | Destination$ Hand | ChangeType$ Card.IsRemembered+sharesNameWith ChosenCard | SubAbility$ DBChangeZoneAllBottomLibrary
+SVar:DBChangeZoneAllBottomLibrary:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Y
+SVar:X:Remembered$Amount
+SVar:Y:4-X
+Oracle:Look at the top four cards of your library. Choose one of them and put all cards with the same name as the chosen card from among them into your hand. You lose 1 life for each card put into your hand this way. Put the rest on the bottom of your library in a random order.

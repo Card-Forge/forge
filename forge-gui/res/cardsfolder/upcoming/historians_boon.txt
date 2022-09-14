@@ -7,4 +7,4 @@ T:Mode$ AbilityTriggered | ValidMode$ CounterAdded | ValidSpellAbility$ Triggere
 SVar:TrigBigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying_vigilance | TokenOwner$ You
 DeckHas:Ability$Token
 DeckHints:Type$Enchantment|Saga
-Oracle:Whenever Historian’s Boon or another nontoken enchantment enters the battlefield under your control, create a 1/1 white Soldier creature token.\nWhenever the final chapter of a Saga you control triggers, create a 4/4 white Angel creature token with flying and vigilance.
+Oracle:Whenever Historian's Boon or another nontoken enchantment enters the battlefield under your control, create a 1/1 white Soldier creature token.\nWhenever the final chapter of a Saga you control triggers, create a 4/4 white Angel creature token with flying and vigilance.

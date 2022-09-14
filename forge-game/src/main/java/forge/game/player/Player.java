@@ -458,14 +458,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         return isOpponentOf(otherPlayer);
     }
 
-    public final boolean setLife(final int newLife, final Card source) {
+    public final boolean setLife(final int newLife, final SpellAbility sa) {
         boolean change = false;
         // rule 119.5
         if (life > newLife) {
             change = loseLife(life - newLife, false, false) > 0;
         }
         else if (newLife > life) {
-            change = gainLife(newLife - life, source);
+            change = gainLife(newLife - life, sa == null ? null : sa.getHostCard(), sa);
         }
         else { // life == newLife
             change = false;
@@ -487,9 +487,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return life;
     }
 
-    public final boolean gainLife(int lifeGain, final Card source) {
-        return gainLife(lifeGain, source, null);
-    }
     public final boolean gainLife(int lifeGain, final Card source, final SpellAbility sa) {
         if (!canGainLife()) {
             return false;
@@ -498,7 +495,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Run any applicable replacement effects.
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.LifeGained, lifeGain);
-        repParams.put(AbilityKey.Source, source);
+        repParams.put(AbilityKey.SourceSA, sa);
 
         switch (getGame().getReplacementHandler().run(ReplacementType.GainLife, repParams)) {
         case NotReplaced:

@@ -1,0 +1,10 @@
+Name:Timely Interference
+ManaCost:U
+Types:Instant
+K:Kicker:1 R
+A:SP$ Pump | NumAtt$ -1 | ValidTgts$ Creature | IsCurse$ True | SubAbility$ DBPump | SpellDescription$ Target creature gets -1/-0 until end of turn. If this spell was kicked, that creature blocks this turn if able.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | Condition$ Kicked | KW$ HIDDEN CARDNAME blocks each combat if able. | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card. 
+AI:RemoveDeck:All
+DeckHints:Color$Red
+Oracle:Kicker {1}{R} (You may pay an additional {1}{R} as you cast this spell.)\nTarget creature gets -1/-0 until end of turn. If this spell was kicked, that creature blocks this turn if able.\nDraw a card.

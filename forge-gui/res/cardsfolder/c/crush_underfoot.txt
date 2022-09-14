@@ -1,9 +1,8 @@
 Name:Crush Underfoot
 ManaCost:1 R
 Types:Tribal Instant Giant
-A:SP$ ChooseCard | Cost$ 1 R | Defined$ You | Mandatory$ True | Choices$ Creature.Giant+YouCtrl | ChoiceTitle$ Choose a Giant creature you control | RememberChosen$ True | SubAbility$ DBDmg | SpellDescription$ Choose a Giant creature you control. It deals damage equal to its power to target creature.
-SVar:DBDmg:DB$ DealDamage | NumDmg$ X | DamageSource$ Remembered | ValidTgts$ Creature | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$CardPower
+A:SP$ ChooseCard | Cost$ 1 R | Defined$ You | Mandatory$ True | Choices$ Creature.Giant+YouCtrl | ChoiceTitle$ Choose a Giant creature you control | SubAbility$ DBDmg | SpellDescription$ Choose a Giant creature you control. It deals damage equal to its power to target creature.
+SVar:DBDmg:DB$ DealDamage | NumDmg$ X | DamageSource$ ChosenCard | ValidTgts$ Creature
+SVar:X:ChosenCard$CardPower
 AI:RemoveDeck:Random
 Oracle:Choose a Giant creature you control. It deals damage equal to its power to target creature.

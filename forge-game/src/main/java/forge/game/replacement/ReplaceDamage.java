@@ -100,7 +100,7 @@ public class ReplaceDamage extends ReplacementEffect {
             //Lava Burst and Whippoorwill check
             SpellAbility cause = (SpellAbility) runParams.get(AbilityKey.Cause);
             GameEntity affected = (GameEntity) runParams.get(AbilityKey.Affected);
-            if (((cause != null) && (cause.hasParam("NoRedirection")) || (affected.hasKeyword("Damage that would be dealt to CARDNAME can't be redirected.")))) {
+            if ((cause != null && cause.hasParam("NoRedirection") || affected.hasKeyword("Damage that would be dealt to CARDNAME can't be redirected."))) {
                 return false;
             }
             // check for DamageRedirection, the Thing where the damage is redirected to must be a creature or planeswalker or a player

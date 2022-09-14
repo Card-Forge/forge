@@ -77,7 +77,7 @@ public class CardFactory {
      */
     public final static Card copyCard(final Card in, boolean assignNewId) {
         Card out;
-        if (!(in.isToken() || in.getCopiedPermanent() != null)) {
+        if (!(in.isRealToken() || in.getCopiedPermanent() != null)) {
             out = assignNewId ? getCard(in.getPaperCard(), in.getOwner(), in.getGame())
                               : getCard(in.getPaperCard(), in.getOwner(), in.getId(), in.getGame());
         } else { // token

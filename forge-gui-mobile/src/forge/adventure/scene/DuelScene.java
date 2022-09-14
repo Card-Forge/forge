@@ -282,6 +282,7 @@ public class DuelScene extends ForgeScene {
         rules.setMatchAnteRarity(true);
         rules.setGamesPerMatch(1);
         rules.setManaBurn(false);
+        rules.setWarnAboutAICards(false);
 
         hostedMatch.setEndGameHook(() -> DuelScene.this.GameEnd());
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap);

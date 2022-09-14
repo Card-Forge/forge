@@ -6,6 +6,7 @@ Ajani, Adversary of Tyrants|Ajani's House of Cats|Here, kitty, kitty, kitty...
 Ajani, Caller of the Pride|Ajani's Menagerie|You're a crazy cat lady now!
 Ajani, Inspiring Leader|Ajani's Leap of Faith|Cats from above!
 Ajani, Mentor of Heroes|Ajani's Vitality|Do sta let!
+Ajani, Sleeper Agent|Ajani's Progress|Every step brings us closer to perfection.
 Ajani, Strength of the Pride|Ajani's Obliteration|A defiant roar... then silence.
 Ajani, Valiant Protector|Ajani's Valiant Smash|Sometimes, life can be brutal.
 Ajani, Wise Counselor|Ajani's Mega-growth|Let's just pile these on...
@@ -38,6 +39,7 @@ Dack Fayden|Dack's Discount|Do you have any evidence it was me?
 Dakkon, Shadow Slayer|Dakkon's Masterpiece|I put lots of my sweat and other people's blood into it.
 Daretti, Ingenious Iconoclast|Daretti's Mass Production|Imitation is the sincerest form of irritation.
 Daretti, Scrap Savant|Daretti's Recycler|Save the environment!
+Dihada, Binder of Wills|Dihada's Absolute Control|Resisting? Not one of your brightest ideas.
 Domri Rade|Domri's Surprise|That's GOTTA get me a date!
 Domri, Chaos Bringer|Domri's Wild Army|Let's have a team-destroying exercise!
 Domri, City Smasher|Domri's Overrun|You may feel a slight sensation of burning rage.
@@ -87,9 +89,12 @@ Jace, the Living Guildpact|Jace's Timetwister|Symmetry? What symmetry?
 Jace, the Mind Sculptor|Jace's Lobotomy|What do you mean, "overpowered"?
 Jace, Unraveler of Secrets|Jace's Perfect Plan|So, I've read about this neat guy named Erayo...
 Jace, Wielder of Mysteries|Jace's Neat Solution|Everything is solved. No loose ends.
+Jared Carthalion|Jared's Rainbow Recycling|No matter what you believe in, I still need your help.
 Jaya Ballard|Jaya's Flashback|Fire is easily rekindled.
+Jaya, Fiery Negotiator|Jaya's Triple Trouble|If fire doesn't do the trick, more fire will.
 Kaito Shizuki|Kaito's Stealth Army|Assemble.
 Karn Liberated|Karn's Reset|Let's do this again!
+Karn, Living Legacy|Karn's Ultimate Machine|This is my greates achievement. The machine... that goes 'ping'.
 Kasmina, Enigma Sage|Kasmina's Private Tutoring|This will be on the spelling test next week.
 Kaya the Inexorable|Kaya's Dimensional Breach|A little help here?
 Kaya, Geist Hunter|Kaya's Graf Liberation|Who would you like to call?
@@ -156,6 +161,7 @@ Sarkhan, Fireblood|Sarkhan's Call for Friends|My minions, meet the meat.
 Sarkhan, the Dragonspeaker|Sarkhan's Voices|Huh? What are you saying?
 Sarkhan Unbroken|Sarkhan's Dragonstorm|Skies full of dragons! Oh, what a glorious day!
 Serra the Benevolent|Serra's Worship Service|As long as you have belief in me, you shall not die.
+Sivitri, Dragon Master|Sivitri's Dragon Cleansing|Nothing can withstand a dragon's breath, except another dragon.
 Sorin Markov|Sorin's Hypnosis|You're getting sleepy... very sleepy...
 Sorin the Mirthless|Sorin's Unlucky Strike|Not very funny when it happens to you, is it?
 Sorin, Grim Nemesis|Sorin's Vampire Army|Taste the might of my blood relatives!

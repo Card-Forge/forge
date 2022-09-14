@@ -1,0 +1,9 @@
+Name:Strength of the Coalition
+ManaCost:G
+Types:Instant
+K:Kicker:2 W
+A:SP$ Pump | ValidTgts$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | SubAbility$ DBCounter | TgtPrompt$ Select target creature you control | SpellDescription$ Target creature you control gets +2/+2 until end of turn. If this spell was kicked, put a +1/+1 counter on each creature you control.
+SVar:DBCounter:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | Condition$ Kicked
+DeckHas:Ability$Counters
+DeckHints:Color$White
+Oracle:Kicker {2}{W} (You may pay an additional {2}{W} as you cast this spell.)\nTarget creature you control gets +2/+2 until end of turn. If this spell was kicked, put a +1/+1 counter on each creature you control.

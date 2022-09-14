@@ -1,0 +1,6 @@
+Name:Tidepool Turtle
+ManaCost:3 U
+Types:Creature Turtle
+PT:2/5
+A:AB$ Scry | Cost$ 2 U | ScryNum$ 1 | SpellDescription$ Scry 1.(Look at the top card of your library. You may put that card on the bottom of your library.)
+Oracle:{2}{U}: Scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

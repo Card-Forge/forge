@@ -91,8 +91,8 @@ public class PlayEffect extends SpellAbilityEffect {
         final boolean imprint = sa.hasParam("ImprintPlayed");
         final boolean forget = sa.hasParam("ForgetPlayed");
         final boolean hasTotalCMCLimit = sa.hasParam("WithTotalCMC");
-        int amount = 1;
         int totalCMCLimit = Integer.MAX_VALUE;
+        int amount = 1;
         if (sa.hasParam("Amount") && !sa.getParam("Amount").equals("All")) {
             amount = AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa);
         }

@@ -2143,6 +2143,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
                         || keyword.equals("Changeling") || keyword.equals("Delve") || keyword.equals("Decayed")
                         || keyword.equals("Split second") || keyword.equals("Sunburst")
+                        || keyword.equals("Double team")
                         || keyword.equals("Suspend") // for the ones without amount
                         || keyword.equals("Foretell") // for the ones without cost
                         || keyword.equals("Ascend") || keyword.equals("Totem armor")
@@ -2269,7 +2270,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         keyword = keyword.replace("Strike", "strike");
                     }
                     sb.append(i !=0 && sb.length() !=0 ? ", " : "");
-                    sb.append(i > 0 && sb.length() !=0 ? keyword.toLowerCase() : keyword);
+                    sb.append(i > 0 && sb.length() !=0 ? StringUtils.uncapitalize(keyword) : keyword);
                 }
                 if (sbLong.length() > 0) {
                     sbLong.append("\r\n");

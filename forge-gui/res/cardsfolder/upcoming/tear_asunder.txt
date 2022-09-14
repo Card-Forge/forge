@@ -1,0 +1,10 @@
+Name:Tear Asunder
+ManaCost:1 G
+Types:Instant
+K:Kicker:1 B
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | TgtPrompt$ Select target artifact or enchantment | ValidTgts$ Artifact,Enchantment | TargetMin$ X | TargetMax$ X | SubAbility$ DBChangeZone | SpellDescription$ Exile target artifact or enchantment. If this spell was kicked, exile target nonland permanent instead.
+SVar:DBChangeZone:DB$ ChangeZone | TargetMin$ Y | TargetMax$ Y | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Condition$ Kicked
+SVar:X:Count$Kicked.0.1
+SVar:Y:Count$Kicked.1.0
+DeckHints:Color$Black
+Oracle:Kicker {1}{B} (You may pay an additional {1}{B} as you cast this spell.)\nExile target artifact or enchantment. If this spell was kicked, exile target nonland permanent instead.
