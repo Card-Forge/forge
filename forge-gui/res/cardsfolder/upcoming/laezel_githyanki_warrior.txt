@@ -1,0 +1,86 @@
+Name:Lae'zel, Githyanki Warrior
+ManaCost:3 W
+Types:Legendary Creature Gith Warrior
+PT:2/4
+K:Double Strike
+K:Specialize:1
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigAnimate | TriggerDescription$ When you cast this spell, it gains "When this creature becomes the target of a spell or ability an opponent controls, you may exile this creature, then return it to the battlefield under its owner's control."
+SVar:TrigAnimate:DB$ Animate | Triggers$ BecomesTarget
+SVar:BecomesTarget:Mode$ BecomesTarget | ValidSource$ Card.OppCtrl | ValidTarget$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigBlink | OptionalDecider$ You | TriggerDescription$ When this creature becomes the target of a spell or ability an opponent controls, you may exile this creature, then return it to the battlefield under its owner's control.
+SVar:TrigBlink:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ TriggeredTargetLKICopy | SubAbility$ DBReturn | RememberChanged$ True
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:Specialize
+Oracle:Double strike\nSpecialize {1}\nWhen you cast this spell, it gains "When this creature becomes the target of a spell or ability an opponent controls, you may exile this creature, then return it to the battlefield under its owner's control."
+
+SPECIALIZE:WHITE
+
+Name:Lae'zel, Blessed Warrior
+ManaCost:3 W W
+Types:Legendary Creature Gith Warrior
+PT:3/6
+K:Double Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When this creature enters the battlefield or specializes, seek a nonland permanent card with mana value 3 or less.
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigSeek | Secondary$ True | TriggerDescription$ When this creature enters the battlefield or specializes, seek a nonland permanent card with mana value 3 or less.
+SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Permanent.nonLand+cmcLE3
+Oracle:Double strike\nWhen this creature enters the battlefield or specializes, seek a nonland permanent card with mana value 3 or less.
+
+SPECIALIZE:BLUE
+
+Name:Lae'zel, Illithid Thrall
+ManaCost:3 W U
+Types:Legendary Creature Gith Horror Warrior
+PT:3/6
+K:Double Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When this creature enters the battlefield or specializes, conjure a duplicate of a random creature card from an opponent's library into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigChoose | Secondary$ True | TriggerDescription$ When this creature enters the battlefield or specializes, conjure a duplicate of a random creature card from an opponent's library into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.OppCtrl | ChoiceZone$ Library | AtRandom$ True | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | DefinedName$ ChosenCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBClearChosen
+SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Lae'zel, Illithid Thrall's Perpetual Effect | SubAbility$ DBCleanup
+SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The conjured card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AffectedZone$ Stack | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast this spell.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+Oracle:Double strike\nWhen this creature enters the battlefield or specializes, conjure a duplicate of a random creature card from an opponent's library into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+
+SPECIALIZE:BLACK
+
+Name:Lae'zel, Callous Warrior
+ManaCost:3 W B
+Types:Legendary Creature Gith Warrior
+PT:3/6
+K:Double Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this creature enters the battlefield or specializes, return up to two target creature cards with total mana value 3 or less from your graveyard to the battlefield.
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigReturn | Secondary$ True | TriggerDescription$ When this creature enters the battlefield or specializes, return up to two target creature cards with total mana value 3 or less from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 2 | MaxTotalTargetCMC$ 3 | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select up to two target creature cards with total mana value 3 or less
+Oracle:Double strike\nWhen this creature enters the battlefield or specializes, return up to two target creature cards with total mana value 3 or less from your graveyard to the battlefield.
+
+SPECIALIZE:RED
+
+Name:Lae'zel, Wrathful Warrior
+ManaCost:3 R W
+Types:Legendary Creature Gith Warrior
+PT:3/6
+K:Double Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature enters the battlefield or specializes, create two 1/1 white Soldier creature tokens.
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigToken | Secondary$ True | TriggerDescription$ When this creature enters the battlefield or specializes, create two 1/1 white Soldier creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_soldier
+DeckHas:Ability$Token & Type$Soldier
+Oracle:Double strike\nWhen this creature enters the battlefield or specializes, create two 1/1 white Soldier creature tokens.
+
+SPECIALIZE:GREEN
+
+Name:Lae'zel, Primal Warrior
+ManaCost:3 G W
+Types:Legendary Creature Gith Warrior
+PT:3/6
+K:Double Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When this creature enters the battlefield or specializes, other creatures you control and creature cards in your hand perpetually get +1/+1.
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigEffect | Secondary$ True | TriggerDescription$ When this creature enters the battlefield or specializes, other creatures you control and creature cards in your hand perpetually get +1/+1.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ Creature.YouCtrl+Other,ValidHand Creature.YouOwn | StaticAbilities$ PerpetualP1P1 | Duration$ Permanent | Triggers$ Update | Name$ Lae'zel, Primal Warrior's Perpetual Effect
+SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ These creature cards perpetually get +1/+1.
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+Oracle:Double strike\nWhen this creature enters the battlefield or specializes, other creatures you control and creature cards in your hand perpetually get +1/+1.
