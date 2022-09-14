@@ -1,9 +1,10 @@
 Name:Genestealer Patriarch
 ManaCost:3 U
 Types:Creature Tyranid Human
-PT:3/3
-T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You | TriggerZones$ Battlefield | Execute$ TrigDebuff | TriggerDescription$ Neurotraumal Rod — Whenever a creature attacks you, it gets -1/-0 until end of turn.
-SVar:TrigDebuff:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ -1
-T:Mode$ Attacks | ValidCard$ Creature | Attacked$ Player.Opponent,Planeswalker.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature attacks one of your opponents or a planeswalker an opponent controls, that creature gets +0/+1 until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumDef$ +1
+PT:4/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigInfectionCounter | TriggerDescription$ Genestealer’s Kiss — Whenever CARDNAME attacks, put an infection counter on target creature defending player controls.
+SVar:TrigInfectionCounter:DB$ PutCounter | CounterType$ INFECTION | CounterNum$ 1 | ValidTgts$ Creature.ControlledBy TriggeredDefendingPlayer |  TgtPrompt$ Put an infection counter on target creature defending player controls. 
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.counters_GE1_INFECTION | Execute$ DBCopy | TriggerDescription$ Children of the Cult — Whenever a creature with an infection counter on it dies, you create a token that's a copy of that creature, except it's a Tyranid in addition to its other types.
+SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | AddTypes$ Tyranid 
+DeckHas:Type$Counters|Tokens
 Oracle:Genestealer’s Kiss — Whenever Genestealer Patriarch attacks, put an infection counter on target creature defending player controls.\nChildren of the Cult — Whenever a creature with an infection counter on it dies, you create a token that's a copy of that creature, except it's a Tyranid in addition to its other types.
