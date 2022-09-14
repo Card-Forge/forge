@@ -1,69 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="49">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="64">
  <editorsettings>
-  <export target="wastetown..tmx" format="tmx"/>
+  <export format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="4425" source="../../tileset/buildings.tsx"/>
- <layer id="1" name="Background" width="30" height="17">
+ <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJyL4GZgiBjFo3gUj+JRPIpH8YjAAH23xTs=
+   eJztw7ENAAAMAiB3l/5/rX80kNBLqqqqqqqq+ugA4iKowQ==
   </data>
  </layer>
- <layer id="2" name="Ground" width="30" height="17">
+ <layer id="2" name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJydVUtSg0AQ7QUkBCsnMH42uo0eQC8UPcKQFPfws9Rz6BY9gpp4D+0m82qaZkBwqrpggOnX7/VjppgRFT5+JkQ0DXMdxznRV0b1OOT776z9zZafHfG7D76e5vE8D5z/0WDc8fx+2swj+eW68zkxBHuhYmcwbV3IdcVxnTWfxWp3fL+eUWssE6LLpP1c6pF1pcGTHKXKjzpLo8fGY5UKV7AufOTck4NJmCNQC/SQ3KjFzYJ2de55s2dbpSnWLD3WW9IfUktMB8vBaoQa7aj+wOvDFl7gVms73/sAPo31UOs6FBfYWncZZynReRq4Sy8t/lBdY/HM627SfdymIecL37/6ufP/pnh/o7Qfo6uN947+CrdPz88pD68V7xXX9fRPvrq/0kvtH/Gu8HPmfx3r37GcoS9qsP6ufJ/GcEZfZY3FFR1P8rB/dnmr8jUP0Rt48FAV+Zec2ZeAC2+B90rl6cMWTO1ZfI864CV7Tuh+Fx37CTgMwYSeMd9aXJwhen+0AxzQvxgmOCw8D2gYO1/1t12YMe5dfo3h2/NV6vgFXcroBg==
+   eJzNWMtS21AMveCEadg4yY7yDcCwhg5fAf2B1oUWvgE2rMtjSdOCyd/Qx7eUwppK1BqOFd3rm9RJrBmNh4skHx097DhLnUu6zrWVLpJ+SP3KPu/oOqSrSBaw1fHZ97b7ou/T0fuzX8vjq+0t1TloHILBirUEebHkYIf3z5W/cJJ3y/n51Iqp8ScG5qHCl6maCG8sLSOmT/fTclzxXYKcNGaspcZlxckgJ41v0priOZ4lETlbPu1IfFV9PG0VfBqHrx6xfTmJWrkLPpynp1fO7SyPquuMaugc/awr6kKnnLtgtfANyPbrjPVbx943Fr7c8D9ede5kdXb4BGMsvivC9mXG+ERi8FXGJ+zX/4H/WuHbpdq+hfry3pHdOwm+uvk7JzyXar/ILpkHPs2fcGjVV+b3huqVGzW7pbNhzb1o9d858If1ncd+sfjD+Zh3favmt2nzofHhO2MTnh9Nw1fVf22ocVP2iwi+N/CMNK2+WurAt7bi3PpKPfzhs25e/RfiD59108J3+rpZ9Z1m/zVtfrVs0e+BbdKkE75ug12LdNGws3zwXP5+sxyPLyR6lkQGBgcbPec2e3HxfHHHFZmlTH1LyIseQkyf+s4d9cPYzijWYzo6o1YOIdFc5Oq3seD7QTYH/bKtzkXkD539Tv240O5R+euYmgv5lobvPIyP7Q6Vrc4F7/uZzveAH+EB+RA75NAXE/+P3xcGY+4IFq7pRaHCofD/kfRX76UHmOf7ijr76iT4xtkRPmF8PwtlfMzdQ1Ffi0fElhTvYJzTXlquSz4Bf5Zwf3wnXHe9fz0i+BgX8/hg9OLz/aGeXJf7tGxbF3/cd1JbFsGH6uMQRc9eLH+hHmHR84VciIZ6UXaR9U4Rw1/V3FmiOQztS995XfX14WPOLgou9U6KkWnh+wtIU1uf
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="17">
+ <layer id="6" name="Ground2" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztV21uwyAM9d+EkAu0UrMzbCeYmuxc066ytuutuia9R0EFxbKgITRQNvEkqwSS+uFn8wGQkZHxX/DNAXZPsj2f5vdeA3TCfiNbK2xbu/FzeW9puPrN/B7za3uvLwEu5Xy/fA1Qr8Pz+2QAh8L+HeYv24OwTpnLvB7ldxTcvpj9Ozwu51KI51LZSxWe31T8ML+puSzFT+sk7UNYq/QayG9HxmX73lyW4rcRujTVqBM1PMaKm6ayj0WK3xxITXXMZC60JL4DsY7UT2h+kpOtPkzxbpA2sn5i8otRH68rgLfVrc/Wpvzu6Ut1xm0ffXvynyYftH41P1xXum5MuupnH32xD1rD2kdDeJg0ddU6Rv61hji7roWh8++IdKTxDrG/9ZY8ozmO829uzfry++Fj/pnWLFM/U+uz7/3lwN34nWbeGwZh53rcP06qz+cOcg54Lsbrc4qYOn89G6nHz2fPjYnU9cXnvxSRev5tKrd9LCPjL+EKsTvNGA==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="40" height="40">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYKAcNPJSJk9tQG/7KAUNQPc6MDEwLGYkDzsxkW5nPTSM7pKhdxE3eXqR/VjHjF3NbkEGhj2C+M0h1V5i1OuzU8ccGADFKTHqzyLZ+1uUgeGPKCabEv/iMhPZXn0cbErsxWUmsr3ngOzJbBCcx0Ede3OA5hixY7LP4nADCMDChVx7YfpB9sH8cwHNXgN2VD+CACxcyLUXW5o9i2YvzE2GWMKaXHthZoLCFuQvEI1uL7J70Ms2XHmfkL0wALIf5AcQncsB8VsuUtjD/EhO2YYMapjxl7nY/EaK/+rIqKfuQu2l1G8Aq5NY2w==
+   eJzty0EGACAABMA+ED0gvb7+2SkRHYoOMcOyh90QAAAAAO60eJahHv7W/ws5zV7SfgcA/KEDgLsSbg==
   </data>
  </layer>
- <layer id="5" name="AboveSprites" width="30" height="17">
+ <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJxjYBg8oIZ3oF0wCmBgviADwwJB2trRNEjj+74oA8MDUUw2rczU46Tc/OEAKA1rasUVMmgZJGl0sLiDGFBPBbfC/Ns8hPw9lAAA6oEQ9g==
+   eJzt0ksKhDAQRdGa2xB00kotQFdpC/3R7eoKrIETUVoRY4HcA4HiQUjIiwgAAH7eKvLRZd5bNqzk8Pe1Xn4r3bSWdXQWXWJv/ND989VKO7fS/TPmYvb7tD25/p+30O9xaSGSFd638HPG/8M91EHkNa0meN8GAADc3Qj2GhFY
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../../obj/entry_up.tx" x="208" y="272"/>
-  <object id="41" template="../../obj/shop.tx" x="129" y="146">
+  <object id="41" template="../../obj/shop.tx" x="473" y="273">
    <properties>
-    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
    </properties>
   </object>
-  <object id="42" template="../../obj/shop.tx" x="177" y="145">
+  <object id="56" template="../../obj/shop.tx" x="424" y="274">
    <properties>
-    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
    </properties>
   </object>
-  <object id="43" template="../../obj/shop.tx" x="321" y="129">
+  <object id="57" template="../../obj/shop.tx" x="520" y="273">
    <properties>
-    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
    </properties>
   </object>
-  <object id="44" template="../../obj/shop.tx" x="114" y="194">
+  <object id="43" template="../../obj/shop.tx" x="377" y="322">
    <properties>
-    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
    </properties>
   </object>
-  <object id="45" template="../../obj/shop.tx" x="273" y="130">
+  <object id="47" template="../../obj/inn.tx" x="361" y="371"/>
+  <object id="49" template="../../obj/shop.tx" x="424" y="322">
    <properties>
-    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
    </properties>
   </object>
-  <object id="46" template="../../obj/shop.tx" x="337" y="177">
+  <object id="50" template="../../obj/shop.tx" x="472" y="322">
    <properties>
-    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
    </properties>
   </object>
-  <object id="47" template="../../obj/inn.tx" x="230" y="98"/>
-  <object id="48" template="../../obj/shop.tx" x="336" y="80">
+  <object id="51" template="../../obj/shop.tx" x="521" y="322">
    <properties>
-    <property name="shopList" value="Swamp"/>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/shop.tx" x="376" y="274">
+   <properties>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/spellsmith.tx" x="392" y="194"/>
+  <object id="55" template="../../obj/shop.tx" x="416" y="402">
+   <properties>
+    <property name="shopList" value="Plains"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/entry_up.tx" x="258" y="639" width="97" height="20">
+   <properties>
+    <property name="spawn" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/entry_left.tx" x="368" y="442" width="16" height="197.002" rotation="179.747"/>
+  <object id="60" template="../../obj/entry_right.tx" x="242" y="642" width="16" height="198"/>
+  <object id="61" template="../../obj/arena.tx" x="168" y="178"/>
+  <object id="62" template="../../obj/shop.tx" x="216" y="241">
+   <properties>
+    <property name="shopList" value="Plains"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/shop.tx" x="115" y="241">
+   <properties>
+    <property name="shopList" value="Plains"/>
+    <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
  </objectgroup>
