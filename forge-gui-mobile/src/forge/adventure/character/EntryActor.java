@@ -23,16 +23,16 @@ public class EntryActor extends MapActor{
             switch(direction)
             {
                 case "up":
-                    stage.GetPlayer().setPosition(x+w/2-stage.GetPlayer().getWidth()/2,y+h);
+                    stage.getPlayerSprite().setPosition(x+w/2-stage.getPlayerSprite().getWidth()/2,y+h);
                     break;
                 case "down":
-                    stage.GetPlayer().setPosition(x+w/2-stage.GetPlayer().getWidth()/2,y-stage.GetPlayer().getHeight());
+                    stage.getPlayerSprite().setPosition(x+w/2-stage.getPlayerSprite().getWidth()/2,y-stage.getPlayerSprite().getHeight());
                     break;
                 case "right":
-                    stage.GetPlayer().setPosition(x-stage.GetPlayer().getWidth(),y+h/2-stage.GetPlayer().getHeight()/2);
+                    stage.getPlayerSprite().setPosition(x-stage.getPlayerSprite().getWidth(),y+h/2-stage.getPlayerSprite().getHeight()/2);
                     break;
                 case "left":
-                    stage.GetPlayer().setPosition(x+w,y+h/2-stage.GetPlayer().getHeight()/2);
+                    stage.getPlayerSprite().setPosition(x+w,y+h/2-stage.getPlayerSprite().getHeight()/2);
                     break;
 
             }

@@ -36,13 +36,14 @@ public class ItemData {
     }
     public ItemData(ItemData cpy)
     {
-          name              = cpy.name         ;
-          equipmentSlot     = cpy.equipmentSlot;
-          effect            = new EffectData(cpy.effect);
-          description       = cpy.description  ;
-          iconName          = cpy.iconName     ;
-          questItem         = cpy.questItem    ;
-          cost              = cpy.cost         ;
+        name              = cpy.name;
+        equipmentSlot     = cpy.equipmentSlot;
+        effect            = new EffectData(cpy.effect);
+        description       = cpy.description;
+        iconName          = cpy.iconName;
+        questItem         = cpy.questItem;
+        cost              = cpy.cost;
+        manaNeeded        = cpy.manaNeeded;
     }
 
     public Sprite sprite()
@@ -86,6 +87,8 @@ public class ItemData {
             result += "Slot: " + this.equipmentSlot + "\n";
         if(effect != null)
             result += effect.getDescription();
+        if(manaNeeded != 0)
+            result += "Mana cost: "+manaNeeded;
         return result;
     }
 

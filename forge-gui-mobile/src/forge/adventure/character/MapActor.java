@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.util.Config;
-import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Map Actor base class for Actors on the map
@@ -18,17 +17,21 @@ import org.apache.commons.lang3.tuple.Pair;
  */
 public class MapActor extends Actor {
 
+
     class CurrentEffect
     {
-        public CurrentEffect(ParticleEffect effect,Vector2 offset,boolean overlay)
+        public CurrentEffect(String path,ParticleEffect effect,Vector2 offset,boolean overlay)
         {
+            this.path = path;
             this.effect=effect;
             this.offset=offset;
             this.overlay=overlay;
         }
+
+        private String path;
         public ParticleEffect effect;
         public Vector2 offset;
-        public boolean overlay;
+        public boolean overlay=true;
     }
 
     Texture debugTexture;
@@ -36,16 +39,27 @@ public class MapActor extends Actor {
     final int objectId;
     Array<CurrentEffect> effects=new Array<>();
 
+    public void removeEffect(String effectFly) {
+
+        for(int i=0;i<effects.size;i++)
+        {
+            CurrentEffect currentEffect =effects.get(i);
+            if(currentEffect.path.equals(effectFly))
+            {
+                for(ParticleEmitter emitter:currentEffect.effect.getEmitters()) {
+                    emitter.setContinuous(false);
+                }
+            }
+        }
+    }
     public void playEffect(String path,float duration,boolean overlay,Vector2 offset)
     {
         ParticleEffect effect = new ParticleEffect();
         effect.load(Config.instance().getFile(path),Config.instance().getFile(path).parent());
-        effects.add(new CurrentEffect(effect,offset,overlay));
+        effects.add(new CurrentEffect(path,effect,offset,overlay));
         if(duration!=0)//ParticleEffect.setDuration uses an integer for some reason
         {
-            int i = 0;
-            for(int n = effect.getEmitters().size; i < n; ++i) {
-                ParticleEmitter emitter =  effect.getEmitters().get(i);
+            for(ParticleEmitter emitter:effect.getEmitters()){
                 emitter.setContinuous(false);
                 emitter.duration = duration;
                 emitter.durationTimer = 0.0F;
@@ -60,7 +74,7 @@ public class MapActor extends Actor {
     }
     public void playEffect(String path,float duration)
     {
-        playEffect(path,duration,false,Vector2.Zero);
+        playEffect(path,duration,true,Vector2.Zero);
     }
     public void playEffect(String path)
     {

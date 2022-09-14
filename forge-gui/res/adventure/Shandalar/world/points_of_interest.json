@@ -1,12 +1,11 @@
 [
 {
 	"name": "Final Castle",
+	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "final_castle",
 	"map": "maps/map/main_story/final_castle.tmx",
-	"markOnMap": true,
-	"offsetX": 0.0,
 	"offsetY": 0.025
 },
 {
@@ -15,128 +14,114 @@
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Spawn",
-	"map": "maps/map/main_story/spawn.tmx",
-	"markOnMap": true,
-	"radiusFactor": 0.0 
+	"map": "maps/map/main_story/spawn.tmx"
 },
 {
 	"name": "Forest Capital",
-	"type": "town",
+	"type": "capital",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "ForestCapital",
-	"map": "maps/map/main_story/forest_capital.tmx",
-	"markOnMap": true,
-	"radiusFactor": 0.0
+	"map": "maps/map/main_story/forest_capital.tmx"
 },
 {
 	"name": "Plains Capital",
-	"type": "town",
+	"type": "capital",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "PlainsCapital",
-	"map": "maps/map/main_story/plains_capital.tmx",
-	"markOnMap": true,
-	"radiusFactor": 0.0
+	"map": "maps/map/main_story/plains_capital.tmx"
 },
 {
 	"name": "Island Capital",
-	"type": "town",
+	"type": "capital",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "IslandCapital",
-	"map": "maps/map/main_story/island_capital.tmx",
-	"markOnMap": true,
-	"radiusFactor": 0.0
+	"map": "maps/map/main_story/island_capital.tmx"
 },
 {
 	"name": "Mountain Capital",
-	"type": "town",
+	"type": "capital",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MountainCapital",
-	"map": "maps/map/main_story/mountain_capital.tmx",
-	"markOnMap": true,
-	"radiusFactor": 0.0
+	"map": "maps/map/main_story/mountain_capital.tmx"
 },
 {
 	"name": "Swamp Capital",
-	"type": "town",
+	"type": "capital",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "SwampCapital",
-	"map": "maps/map/main_story/swamp_capital.tmx",
-	"markOnMap": true,
-	"radiusFactor": 0.0
+	"map": "maps/map/main_story/swamp_capital.tmx"
 },
 {
 	"name": "Colorless Castle",
+	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "colorless_castle",
-	"map": "maps/map/main_story/colorless_castle.tmx", 
-	"markOnMap": true,
-	"radiusFactor": 0.4,
-	"offsetX": 0.0,
-	"offsetY": 0.0
+	"map": "maps/map/main_story/colorless_castle.tmx",
+	"radiusFactor": 0.4
 },
 {
 	"name": "White Castle",
+	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "white_castle",
 	"map": "maps/map/main_story/white_castle.tmx",
-	"markOnMap": true,
 	"radiusFactor": 0.01,
-	"offsetX": 0.0,
-	"offsetY": 0.10
+	"offsetY": 0.1
 },
 {
 	"name": "Black Castle",
+	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "black_castle",
 	"map": "maps/map/main_story/black_castle.tmx",
-	"markOnMap": true,
 	"radiusFactor": 0.01,
-	"offsetX": 0.10,
-	"offsetY": -0.10
+	"offsetX": 0.1,
+	"offsetY": -0.1
 },
 {
 	"name": "Green Castle",
+	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "green_castle",
 	"map": "maps/map/main_story/green_castle.tmx",
-	"markOnMap": true,
 	"radiusFactor": 0.01,
-	"offsetX": -0.10,
-	"offsetY": 0.10
+	"offsetX": -0.1,
+	"offsetY": 0.1
 },
 {
 	"name": "Red Castle",
+	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "red_castle",
 	"map": "maps/map/main_story/red_castle.tmx",
-	"markOnMap": true,
 	"radiusFactor": 0.01,
-	"offsetX": -0.10,
-	"offsetY": -0.10
+	"offsetX": -0.1,
+	"offsetY": -0.1
 },
 {
 	"name": "Blue Castle",
+	"type": "castle",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "blue_castle",
 	"map": "maps/map/main_story/blue_castle.tmx",
-	"markOnMap": true,
 	"radiusFactor": 0.01,
-	"offsetX": 0.10,
-	"offsetY": 0.10
+	"offsetX": 0.1,
+	"offsetY": 0.1
 },
 {
 	"name": "Skep",
+	"type": "cave",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -215,6 +200,7 @@
 },
 {
 	"name": "MageTowerC",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -223,6 +209,7 @@
 },
 {
 	"name": "MageTowerC2",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -231,6 +218,7 @@
 },
 {
 	"name": "MageTowerC3",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -239,6 +227,7 @@
 },
 {
 	"name": "MageTowerC4",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -247,6 +236,7 @@
 },
 {
 	"name": "MageTowerC5",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -255,6 +245,7 @@
 },
 {
 	"name": "MageTowerC6",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -263,6 +254,7 @@
 },
 {
 	"name": "MageTowerC8",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -271,6 +263,7 @@
 },
 {
 	"name": "MageTowerX",
+	"type": "dungeon",
 	"count": 1,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -279,6 +272,7 @@
 },
 {
 	"name": "MageTowerCE",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -287,6 +281,7 @@
 },
 {
 	"name": "CaveC",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -295,6 +290,7 @@
 },
 {
 	"name": "CaveC1",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -303,6 +299,7 @@
 },
 {
 	"name": "CaveC2",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -311,6 +308,7 @@
 },
 {
 	"name": "CaveC3",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -319,6 +317,7 @@
 },
 {
 	"name": "CaveC4",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -327,6 +326,7 @@
 },
 {
 	"name": "CaveC5",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -335,6 +335,7 @@
 },
 {
 	"name": "CaveC6",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -343,6 +344,7 @@
 },
 {
 	"name": "CaveC7",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -351,6 +353,7 @@
 },
 {
 	"name": "CaveC8",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -359,6 +362,7 @@
 },
 {
 	"name": "CaveC9",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -367,6 +371,7 @@
 },
 {
 	"name": "CaveCA",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -375,6 +380,7 @@
 },
 {
 	"name": "CaveCB",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -383,6 +389,7 @@
 },
 {
 	"name": "CaveCD",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -391,6 +398,7 @@
 },
 {
 	"name": "Fort",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Fort",
@@ -399,6 +407,7 @@
 },
 {
 	"name": "Fort1",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Fort",
@@ -407,6 +416,7 @@
 },
 {
 	"name": "Fort2",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Fort",
@@ -415,6 +425,7 @@
 },
 {
 	"name": "Fort3",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Fort",
@@ -423,6 +434,7 @@
 },
 {
 	"name": "Fort4",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Fort",
@@ -431,6 +443,7 @@
 },
 {
 	"name": "Fort5",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Fort",
@@ -439,6 +452,7 @@
 },
 {
 	"name": "Fort6",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Fort",
@@ -447,6 +461,7 @@
 },
 {
 	"name": "Fort7",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Fort",
@@ -455,6 +470,7 @@
 },
 {
 	"name": "Fort8",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Fort",
@@ -463,6 +479,7 @@
 },
 {
 	"name": "Fort9",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Fort",
@@ -471,6 +488,7 @@
 },
 {
 	"name": "Factory",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Factory",
@@ -479,6 +497,7 @@
 },
 {
 	"name": "Factory1",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Factory",
@@ -487,6 +506,7 @@
 },
 {
 	"name": "Factory2",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Factory",
@@ -495,6 +515,7 @@
 },
 {
 	"name": "Factory3",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Factory",
@@ -503,6 +524,7 @@
 },
 {
 	"name": "CaveW",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -511,6 +533,7 @@
 },
 {
 	"name": "CaveW1",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -519,6 +542,7 @@
 },
 {
 	"name": "CaveW2",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -527,6 +551,7 @@
 },
 {
 	"name": "CaveW3",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -535,6 +560,7 @@
 },
 {
 	"name": "CaveW4",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -543,6 +569,7 @@
 },
 {
 	"name": "CaveW5",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -551,6 +578,7 @@
 },
 {
 	"name": "CaveW6",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -559,6 +587,7 @@
 },
 {
 	"name": "NestW",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Nest",
@@ -567,6 +596,7 @@
 },
 {
 	"name": "Aerie",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Aerie",
@@ -575,6 +605,7 @@
 },
 {
 	"name": "Monastery",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Monastery",
@@ -583,6 +614,7 @@
 },
 {
 	"name": "Monastery1",
+	"type": "dungeon",
 	"count": 5,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Monastery",
@@ -591,6 +623,7 @@
 },
 {
 	"name": "Monastery2",
+	"type": "dungeon",
 	"count": 5,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Monastery",
@@ -599,6 +632,7 @@
 },
 {
 	"name": "Monastery3",
+	"type": "dungeon",
 	"count": 5,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Monastery",
@@ -607,6 +641,7 @@
 },
 {
 	"name": "Monastery4",
+	"type": "dungeon",
 	"count": 5,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Monastery",
@@ -615,6 +650,7 @@
 },
 {
 	"name": "Castle",
+	"type": "dungeon",
 	"count": 6,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Castle",
@@ -623,6 +659,7 @@
 },
 {
 	"name": "Castle1",
+	"type": "dungeon",
 	"count": 6,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Castle",
@@ -631,6 +668,7 @@
 },
 {
 	"name": "Castle2",
+	"type": "dungeon",
 	"count": 6,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Castle",
@@ -639,6 +677,7 @@
 },
 {
 	"name": "CatLairW",
+	"type": "dungeon",
 	"count": 5,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "CatLair",
@@ -647,6 +686,7 @@
 },
 {
 	"name": "CatLairW1",
+	"type": "dungeon",
 	"count": 5,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "CatLair",
@@ -655,6 +695,7 @@
 },
 {
 	"name": "CatLairW2",
+	"type": "dungeon",
 	"count": 5,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "CatLair",
@@ -663,6 +704,7 @@
 },
 {
 	"name": "CaveU",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -671,6 +713,7 @@
 },
 {
 	"name": "CaveU1",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -679,6 +722,7 @@
 },
 {
 	"name": "CaveU2",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -687,6 +731,7 @@
 },
 {
 	"name": "CaveU3",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -695,6 +740,7 @@
 },
 {
 	"name": "CaveU4",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -703,6 +749,7 @@
 },
 {
 	"name": "MageTowerU",
+	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -711,6 +758,7 @@
 },
 {
 	"name": "MageTowerU1",
+	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -719,6 +767,7 @@
 },
 {
 	"name": "MageTowerU2",
+	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -727,6 +776,7 @@
 },
 {
 	"name": "MageTowerU3",
+	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -735,6 +785,7 @@
 },
 {
 	"name": "MageTowerU4",
+	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -743,6 +794,7 @@
 },
 {
 	"name": "MageTowerU5",
+	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -751,6 +803,7 @@
 },
 {
 	"name": "MageTowerU6",
+	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -759,6 +812,7 @@
 },
 {
 	"name": "MageTowerU7",
+	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -767,6 +821,7 @@
 },
 {
 	"name": "MageTowerUD",
+	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MageTower",
@@ -775,6 +830,7 @@
 },
 {
 	"name": "NestU",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Nest",
@@ -783,6 +839,7 @@
 },
 {
 	"name": "MerfolkPool",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MerfolkPool",
@@ -791,6 +848,7 @@
 },
 {
 	"name": "MerfolkPool1",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MerfolkPool",
@@ -799,6 +857,7 @@
 },
 {
 	"name": "MerfolkPool2",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MerfolkPool",
@@ -807,6 +866,7 @@
 },
 {
 	"name": "MerfolkPool3",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MerfolkPool",
@@ -815,6 +875,7 @@
 },
 {
 	"name": "MerfolkPool4",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "MerfolkPool",
@@ -823,6 +884,7 @@
 },
 {
 	"name": "DjinnPalace",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "DjinnPalace",
@@ -831,6 +893,7 @@
 },
 {
 	"name": "DjinnPalace1",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "DjinnPalace",
@@ -839,6 +902,7 @@
 },
 {
 	"name": "CaveB",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -847,6 +911,7 @@
 },
 {
 	"name": "CaveB1",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -855,6 +920,7 @@
 },
 {
 	"name": "CaveB2",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -863,6 +929,7 @@
 },
 {
 	"name": "CaveB3",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -871,6 +938,7 @@
 },
 {
 	"name": "CaveB4",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -879,6 +947,7 @@
 },
 {
 	"name": "CaveB5",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -887,6 +956,7 @@
 },
 {
 	"name": "CaveB6",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -895,6 +965,7 @@
 },
 {
 	"name": "CaveB8",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -903,6 +974,7 @@
 },
 {
 	"name": "CaveBA",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -911,6 +983,7 @@
 },
 {
 	"name": "Graveyard",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Graveyard",
@@ -919,6 +992,7 @@
 },
 {
 	"name": "Graveyard1",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Graveyard",
@@ -927,6 +1001,7 @@
 },
 {
 	"name": "Graveyard2",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Graveyard",
@@ -935,6 +1010,7 @@
 },
 {
 	"name": "Graveyard3",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Graveyard",
@@ -943,6 +1019,7 @@
 },
 {
 	"name": "Graveyard4",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Graveyard",
@@ -951,6 +1028,7 @@
 },
 {
 	"name": "EvilGrove",
+	"type": "cave",
 	"count": 5,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
@@ -959,6 +1037,7 @@
 },
 {
 	"name": "EvilGrove1",
+	"type": "cave",
 	"count": 5,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
@@ -967,6 +1046,7 @@
 },
 {
 	"name": "EvilGrove2",
+	"type": "cave",
 	"count": 5,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
@@ -975,6 +1055,7 @@
 },
 {
 	"name": "EvilGrove3",
+	"type": "cave",
 	"count": 5,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
@@ -983,6 +1064,7 @@
 },
 {
 	"name": "EvilGrove4",
+	"type": "cave",
 	"count": 5,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "EvilGrove",
@@ -991,6 +1073,7 @@
 },
 {
 	"name": "VampireCastle",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "VampireCastle",
@@ -999,6 +1082,7 @@
 },
 {
 	"name": "VampireCastle1",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "VampireCastle",
@@ -1007,6 +1091,7 @@
 },
 {
 	"name": "VampireCastle2",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "VampireCastle",
@@ -1015,6 +1100,7 @@
 },
 {
 	"name": "SkullCaveB",
+	"type": "cave",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "SkullCave",
@@ -1023,6 +1109,7 @@
 },
 {
 	"name": "SkullCaveB1",
+	"type": "cave",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "SkullCave",
@@ -1031,6 +1118,7 @@
 },
 {
 	"name": "SkullCaveB2",
+	"type": "cave",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "SkullCave",
@@ -1039,6 +1127,7 @@
 },
 {
 	"name": "Zombie Town",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "SwampTown",
@@ -1047,6 +1136,7 @@
 },
 {
 	"name": "CaveR",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1055,6 +1145,7 @@
 },
 {
 	"name": "CaveR2",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1063,6 +1154,7 @@
 },
 {
 	"name": "CaveR3",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1071,6 +1163,7 @@
 },
 {
 	"name": "CaveR4",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1079,6 +1172,7 @@
 },
 {
 	"name": "CaveR5",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1087,6 +1181,7 @@
 },
 {
 	"name": "CaveR6",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1095,6 +1190,7 @@
 },
 {
 	"name": "CaveR7",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1103,6 +1199,7 @@
 },
 {
 	"name": "CaveR8",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1111,6 +1208,7 @@
 },
 {
 	"name": "CaveR9",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1119,6 +1217,7 @@
 },
 {
 	"name": "CaveRA",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1127,6 +1226,7 @@
 },
 {
 	"name": "CaveRB",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1135,6 +1235,7 @@
 },
 {
 	"name": "CaveRC",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1143,6 +1244,7 @@
 },
 {
 	"name": "CaveRE",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1151,6 +1253,7 @@
 },
 {
 	"name": "CaveRG",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1159,6 +1262,7 @@
 },
 {
 	"name": "CaveRH",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1167,6 +1271,7 @@
 },
 {
 	"name": "CaveRJ",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1175,6 +1280,7 @@
 },
 {
 	"name": "Maze",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Maze",
@@ -1183,6 +1289,7 @@
 },
 {
 	"name": "Maze1",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Maze",
@@ -1191,6 +1298,7 @@
 },
 {
 	"name": "Maze2",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Maze",
@@ -1199,6 +1307,7 @@
 },
 {
 	"name": "Maze3",
+	"type": "dungeon",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Maze",
@@ -1207,6 +1316,7 @@
 },
 {
 	"name": "BarbarianCamp",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "BarbarianCamp",
@@ -1215,6 +1325,7 @@
 },
 {
 	"name": "BarbarianCamp1",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "BarbarianCamp",
@@ -1223,6 +1334,7 @@
 },
 {
 	"name": "BarbarianCamp2",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "BarbarianCamp",
@@ -1231,6 +1343,7 @@
 },
 {
 	"name": "SkullCaveR",
+	"type": "cave",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "SkullCave",
@@ -1239,6 +1352,7 @@
 },
 {
 	"name": "SkullCaveR1",
+	"type": "cave",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "SkullCave",
@@ -1247,6 +1361,7 @@
 },
 {
 	"name": "SkullCaveR2",
+	"type": "cave",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "SkullCave",
@@ -1255,6 +1370,7 @@
 },
 {
 	"name": "YuleTown",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "YuleTown",
@@ -1263,6 +1379,7 @@
 },
 {
 	"name": "SnowAbbey",
+	"type": "dungeon",
 	"count": 6,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "SnowAbbey",
@@ -1271,6 +1388,7 @@
 },
 {
 	"name": "SnowAbbey1",
+	"type": "dungeon",
 	"count": 6,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "SnowAbbey",
@@ -1279,6 +1397,7 @@
 },
 {
 	"name": "SnowAbbey2",
+	"type": "dungeon",
 	"count": 6,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "SnowAbbey",
@@ -1287,6 +1406,7 @@
 },
 {
 	"name": "CaveG",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1295,6 +1415,7 @@
 },
 {
 	"name": "CaveG1",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1303,6 +1424,7 @@
 },
 {
 	"name": "CaveG2",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1311,6 +1433,7 @@
 },
 {
 	"name": "CaveG3",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1319,6 +1442,7 @@
 },
 {
 	"name": "CaveG4",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1327,6 +1451,7 @@
 },
 {
 	"name": "CaveG5",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1335,6 +1460,7 @@
 },
 {
 	"name": "CaveG6",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1343,6 +1469,7 @@
 },
 {
 	"name": "CaveG9",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1351,6 +1478,7 @@
 },
 {
 	"name": "CaveGB",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Cave",
@@ -1359,6 +1487,7 @@
 },
 {
 	"name": "ElfTown",
+	"type": "dungeon",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "ForestTown",
@@ -1367,6 +1496,7 @@
 },
 {
 	"name": "Grove",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Grove",
@@ -1375,6 +1505,7 @@
 },
 {
 	"name": "Grove1",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Grove",
@@ -1383,6 +1514,7 @@
 },
 {
 	"name": "Grove2",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Grove",
@@ -1391,6 +1523,7 @@
 },
 {
 	"name": "Grove3",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Grove",
@@ -1399,6 +1532,7 @@
 },
 {
 	"name": "Grove4",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Grove",
@@ -1407,6 +1541,7 @@
 },
 {
 	"name": "Grove5",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Grove",
@@ -1415,6 +1550,7 @@
 },
 {
 	"name": "Grove6",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Grove",
@@ -1423,6 +1559,7 @@
 },
 {
 	"name": "Grove7",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Grove",
@@ -1431,6 +1568,7 @@
 },
 {
 	"name": "Grove8",
+	"type": "cave",
 	"count": 3,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "Grove",
@@ -1439,6 +1577,7 @@
 },
 {
 	"name": "CatLairG",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "CatLair",
@@ -1447,6 +1586,7 @@
 },
 {
 	"name": "CatLairG1",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "CatLair",
@@ -1455,6 +1595,7 @@
 },
 {
 	"name": "CatLairG2",
+	"type": "dungeon",
 	"count": 4,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "CatLair",
@@ -1463,6 +1604,7 @@
 },
 {
 	"name": "DEBUGZONE",
+	"type": "dungeon",
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "WurmPond",
 	"map": "maps/map/debug_map.tmx",
@@ -1470,6 +1612,7 @@
 },
 {
 	"name": "WurmPond",
+	"type": "cave",
 	"count": 2,
 	"spriteAtlas": "maps/tileset/buildings.atlas",
 	"sprite": "WurmPond",

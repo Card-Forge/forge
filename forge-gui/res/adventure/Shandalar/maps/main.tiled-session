@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/main_story/spawn.tmx",
+    "activeFile": "map/main_story/island_capital.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map/main_story",
-        "obj",
         "tileset",
-        "map"
+        "map",
+        "map/main_story",
+        "obj"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -2124,8 +2124,8 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
-                "y": 911.9999999999999
+                "x": 240.33333333333331,
+                "y": 911.3333333333333
             }
         },
         "map/main_story/forest_capital.tmx": {
@@ -2133,23 +2133,23 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 240,
-                "y": 136
+                "y": 136.5
             }
         },
         "map/main_story/green_castle.tmx": {
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 232,
-                "y": 244.33333333333331
+                "x": 240,
+                "y": 239.83333333333331
             }
         },
         "map/main_story/island_capital.tmx": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240,
-                "y": 136
+                "x": 240.5,
+                "y": 137
             }
         },
         "map/main_story/mountain_capital.tmx": {
@@ -2157,23 +2157,26 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 240,
-                "y": 136
+                "y": 136.5
             }
         },
         "map/main_story/plains_capital.tmx": {
-            "scale": 8,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.5,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 320,
-                "y": 320
+                "x": 358.3333333333333,
+                "y": 390
             }
         },
         "map/main_story/red_castle.tmx": {
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 232,
-                "y": 240
+                "x": 240,
+                "y": 239.75
             }
         },
         "map/main_story/skep.tmx": {
@@ -2185,10 +2188,13 @@
             }
         },
         "map/main_story/spawn.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
+                "x": 240.33333333333331,
                 "y": 240
             }
         },
@@ -2197,7 +2203,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 240,
-                "y": 136
+                "y": 136.5
             }
         },
         "map/main_story/unbenannt.tmx": {
@@ -2820,7 +2826,6 @@
     "openFiles": [
         "map/main_story/green_castle.tmx",
         "map/main_story/red_castle.tmx",
-        "map/main_story/white_capital.tmx",
         "map/main_story/forest_capital.tmx",
         "map/main_story/swamp_capital.tmx",
         "map/main_story/mountain_capital.tmx",
@@ -2834,14 +2839,14 @@
     "recentFiles": [
         "map/main_story/green_castle.tmx",
         "map/main_story/red_castle.tmx",
-        "map/main_story/white_capital.tmx",
         "map/main_story/forest_capital.tmx",
         "map/main_story/swamp_capital.tmx",
         "map/main_story/mountain_capital.tmx",
-        "map/main_story/island_capital.tmx",
-        "map/main_story/plains_capital.tmx",
         "map/main_story/final_castle.tmx",
         "map/main_story/spawn.tmx",
+        "map/main_story/plains_capital.tmx",
+        "map/main_story/island_capital.tmx",
+        "map/main_story/white_capital.tmx",
         "map/main_story/skep.tmx",
         "map/debug_map.tmx"
     ],

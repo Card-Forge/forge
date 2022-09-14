@@ -121,6 +121,12 @@ MerfolkShop
 EquipmentShop
   xy: 304, 784   
   size: 16, 16   
+ItemShop
+  xy: 304, 800   
+  size: 16, 16 
+CapitalShop
+  xy: 304, 816   
+  size: 16, 16 
 ArtifactShop
   xy: 320, 784   
   size: 16, 16

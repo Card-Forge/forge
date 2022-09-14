@@ -5,7 +5,7 @@
   "elements": [
     {
       "type": "Image",
-      "name": "lastScreen",
+      "image": "ui/spellsmith.png",
       "width": 480,
       "height": 270
     },

@@ -5,11 +5,12 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
+import forge.adventure.stage.IAfterMatch;
 
 /**
  * Hud base scene
  */
-public abstract class HudScene extends Scene implements InputProcessor {
+public abstract class HudScene extends Scene implements InputProcessor, IAfterMatch {
 
     GameHUD hud;
     GameStage stage;
@@ -127,6 +128,10 @@ public abstract class HudScene extends Scene implements InputProcessor {
         return stage.scrolled(amountX, amountY);
     }
 
+    @Override
+    public void setWinner(boolean winner) {
+        stage.setWinner(winner);
+    }
     public boolean isInHudOnlyMode()
     {
         return false;

@@ -2,7 +2,14 @@
   "width": 480,
   "height": 270,
   "yDown": true,
-  "elements": [       
+  "elements": [    
+    {
+      "type": "Image",
+      "name": "rewards_background",   
+      "image": "ui/reward.png",
+      "width": 480,
+      "height": 270
+    },      
     {
       "type": "Image",
       "name": "market_background",   

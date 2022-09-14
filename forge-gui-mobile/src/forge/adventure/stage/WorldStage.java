@@ -12,8 +12,12 @@ import forge.adventure.character.EnemySprite;
 import forge.adventure.data.BiomeData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
-import forge.adventure.scene.*;
+import forge.adventure.scene.DuelScene;
+import forge.adventure.scene.RewardScene;
+import forge.adventure.scene.Scene;
+import forge.adventure.scene.TileMapScene;
 import forge.adventure.util.Current;
+import forge.adventure.util.Paths;
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
 import forge.adventure.world.World;
@@ -25,10 +29,7 @@ import forge.sound.SoundSystem;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 /**
@@ -64,7 +65,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     @Override
     protected void onActing(float delta) {
         if (player.isMoving()) {
-            HandleMonsterSpawn(delta);
+            handleMonsterSpawn(delta);
             handlePointsOfInterestCollision();
             globalTimer+=delta;
             Iterator<Pair<Float, EnemySprite>> it = enemies.iterator();
@@ -79,31 +80,35 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 }
                 EnemySprite mob=pair.getValue();
 
-                enemyMoveVector.set(player.getX(), player.getY()).sub(mob.pos());
-                enemyMoveVector.setLength(mob.speed()*delta);
-                tempBoundingRect.set(mob.getX()+ enemyMoveVector.x,mob.getY()+ enemyMoveVector.y,mob.getWidth(),mob.getHeight()*mob.getCollisionHeight());
-
-                if(!mob.getData().flying && WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if direct path is not possible
+                if(!currentModifications.containsKey(PlayerModification.Hide))
                 {
-                    tempBoundingRect.set(mob.getX()+ enemyMoveVector.x,mob.getY(),mob.getWidth(),mob.getHeight());
-                    if(WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if only x path is not possible
+                    enemyMoveVector.set(player.getX(), player.getY()).sub(mob.pos());
+                    enemyMoveVector.setLength(mob.speed()*delta);
+                    tempBoundingRect.set(mob.getX()+ enemyMoveVector.x,mob.getY()+ enemyMoveVector.y,mob.getWidth(),mob.getHeight()*mob.getCollisionHeight());
+
+                    if(!mob.getData().flying && WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if direct path is not possible
                     {
-                        tempBoundingRect.set(mob.getX(),mob.getY()+ enemyMoveVector.y,mob.getWidth(),mob.getHeight());
-                        if(!WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if y path is possible
+                        tempBoundingRect.set(mob.getX()+ enemyMoveVector.x,mob.getY(),mob.getWidth(),mob.getHeight());
+                        if(WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if only x path is not possible
                         {
-                            mob.moveBy(0, enemyMoveVector.y);
+                            tempBoundingRect.set(mob.getX(),mob.getY()+ enemyMoveVector.y,mob.getWidth(),mob.getHeight());
+                            if(!WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if y path is possible
+                            {
+                                mob.moveBy(0, enemyMoveVector.y);
+                            }
+                        }
+                        else
+                        {
+
+                            mob.moveBy(enemyMoveVector.x, 0);
                         }
                     }
                     else
                     {
-
-                        mob.moveBy(enemyMoveVector.x, 0);
+                        mob.moveBy(enemyMoveVector.x, enemyMoveVector.y);
                     }
                 }
-                else
-                {
-                    mob.moveBy(enemyMoveVector.x, enemyMoveVector.y);
-                }
+
 
                 if (player.collideWith(mob)) {
                     player.setAnimation(CharacterSprite.AnimationTypes.Attack);
@@ -151,6 +156,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     public void setWinner(boolean playerIsWinner) {
 
         if (playerIsWinner) {
+            Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
             startPause(0.5f, () -> {
@@ -194,7 +200,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
     @Override
     public boolean isColliding(Rectangle boundingRect)
     {
-
+        if(currentModifications.containsKey(PlayerModification.Fly))
+            return false;
         return WorldSave.getCurrentSave().getWorld().collidingTile(boundingRect);
     }
     public boolean spawn(String enemy)
@@ -202,15 +209,16 @@ public class WorldStage extends GameStage implements SaveFileContent {
         return spawn(WorldData.getEnemy(enemy));
     }
 
-    private void HandleMonsterSpawn(float delta) {
+    private void handleMonsterSpawn(float delta) {
         World world = WorldSave.getCurrentSave().getWorld();
         int currentBiome = World.highestBiome(world.getBiome((int) player.getX() / world.getTileSize(), (int) player.getY() / world.getTileSize()));
         List<BiomeData> biomeData = WorldSave.getCurrentSave().getWorld().getData().GetBiomes();
-        if (biomeData.size() <= currentBiome) {
-            player.setMoveModifier(1.5f);
+        float sprintingMod=currentModifications.containsKey(PlayerModification.Sprint)?2:1;
+        if (biomeData.size() <= currentBiome) {// "if isOnRoad
+            player.setMoveModifier(1.5f*sprintingMod);
             return;
         }
-        player.setMoveModifier(1.0f);
+        player.setMoveModifier(1.0f*sprintingMod);
         BiomeData data = biomeData.get(currentBiome);
         if (data == null) return;
 
@@ -274,8 +282,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
     @Override
     public void enter() {
 
-        GetPlayer().LoadPos();
-        GetPlayer().setMovementDirection(Vector2.Zero);
+        getPlayerSprite().LoadPos();
+        getPlayerSprite().setMovementDirection(Vector2.Zero);
         for (Actor actor : foregroundSprites.getChildren()) {
             if (actor.getClass() == PointOfInterestMapSprite.class) {
                 PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
@@ -294,7 +302,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
     @Override
     public void leave() {
-        GetPlayer().storePos();
+        getPlayerSprite().storePos();
     }
 
     @Override
@@ -358,5 +366,26 @@ public class WorldStage extends GameStage implements SaveFileContent {
     @Override
     public Viewport getViewport() {
         return super.getViewport();
+    }
+
+
+    public void removeNearestEnemy() {
+
+        float shortestDist=Float.MAX_VALUE;
+        EnemySprite enemy=null;
+        for (Pair<Float, EnemySprite> pair : enemies) {
+            float dist= pair.getValue().pos().sub(player.pos()).len();
+            if(shortestDist<dist)
+            {
+                shortestDist=dist;
+                enemy=pair.getValue();
+            }
+        }
+        if(enemy!=null)
+        {
+            removeEnemy(enemy);
+            player.playEffect(Paths.EFFECT_KILL);
+        }
+
     }
 }

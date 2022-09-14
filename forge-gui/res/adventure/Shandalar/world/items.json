@@ -754,6 +754,7 @@
 	"commandOnUse": "teleport to poi Spawn",
 	"iconName": "ColorlessRune",
 	"questItem": true,
+	"manaNeeded": 10,
 	"cost": 100
 },
 {
@@ -763,8 +764,10 @@
 		"name": ""
 	},
 	"description": "Teleports you to the plains",
+	"commandOnUse": "teleport to poi \"Plains Capital\"",
 	"iconName": "WhiteRune",
 	"questItem": true,
+	"manaNeeded": 10,
 	"cost": 100
 },
 {
@@ -774,8 +777,10 @@
 		"name": ""
 	},
 	"description": "Teleports you to the swamp",
+	"commandOnUse": "teleport to poi \"Swamp Capital\"",
 	"iconName": "BlackRune",
 	"questItem": true,
+	"manaNeeded": 10,
 	"cost": 100
 },
 {
@@ -785,8 +790,10 @@
 		"name": ""
 	},
 	"description": "Teleports you to the island",
+	"commandOnUse": "teleport to poi \"Island Capital\"",
 	"iconName": "BlueRune",
 	"questItem": true,
+	"manaNeeded": 10,
 	"cost": 100
 },
 {
@@ -796,8 +803,10 @@
 		"name": ""
 	},
 	"description": "Teleports you to the mountain",
+	"commandOnUse": "teleport to poi \"Mountain Capital\"",
 	"iconName": "RedRune",
 	"questItem": true,
+	"manaNeeded": 10,
 	"cost": 100
 },
 {
@@ -807,8 +816,77 @@
 		"name": ""
 	},
 	"description": "Teleports you to the forest",
+	"commandOnUse": "teleport to poi \"Forest Capital\"",
 	"iconName": "GreenRune",
 	"questItem": true,
+	"manaNeeded": 10,
 	"cost": 100
+},
+{
+	"name": "White Staff",
+	"usableOnWorldMap":true,
+	"usableInPoi":true,
+	"effect": {
+		"name": ""
+	},
+	"description": "Heals you half of your life",
+	"commandOnUse": "heal percent 0.5",
+	"iconName": "WhiteStaff",
+	"questItem": true,
+	"manaNeeded": 50,
+	"cost": 1000
+},
+{
+	"name": "Black Staff",
+	"usableOnWorldMap":true,
+	"usableInPoi":false,
+	"effect": {
+		"name": ""
+	},
+	"description": "Hide from enemies for some time",
+	"commandOnUse": "hide 10",
+	"iconName": "BlackStaff",
+	"questItem": true,
+	"manaNeeded": 50,
+	"cost": 1000
+},
+{
+	"name": "Blue Staff",
+	"usableOnWorldMap":true,
+	"effect": {
+		"name": ""
+	},
+	"description": "Lets you fly for some time",
+	"commandOnUse": "fly 10",
+	"questItem": true,
+	"manaNeeded": 50,
+	"cost": 1000
+},
+{
+	"name": "Red Staff",
+	"usableOnWorldMap":true,
+	"effect": {
+		"name": ""
+	},
+	"description": "Kills the closest enemy on the Overworld",
+	"commandOnUse": "remove enemy nearest",
+	"iconName": "RedStaff",
+	"questItem": true,
+	"manaNeeded": 50,
+	"cost": 1000
+},
+{
+	"name": "Green Staff",
+	"usableOnWorldMap":true,
+	"usableInPoi":true,
+	"effect": {
+		"name": ""
+	},
+	"description": "Doubles your speed for some time",
+	"commandOnUse": "sprint 10",
+	"iconName": "GreenStaff",
+	"questItem": true,
+	"manaNeeded": 50,
+	"cost": 1000
 }
 ]

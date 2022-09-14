@@ -32,7 +32,7 @@ public class ShopActor extends MapActor{
     public void  onPlayerCollide()
     {
 
-        stage.GetPlayer().stop();
+        stage.getPlayerSprite().stop();
          RewardScene.instance().loadRewards(rewardData, RewardScene.Type.Shop,this);
         Forge.switchScene(RewardScene.instance());
     }

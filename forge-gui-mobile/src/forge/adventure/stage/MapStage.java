@@ -357,7 +357,7 @@ public class MapStage extends GameStage {
             //TODO: Add a way to play a music file directly without using a playlist.
         }
 
-        GetPlayer().stop();
+        getPlayerSprite().stop();
         spriteLayer = null;
         foundPlayerSpawn=false;
         for (MapLayer layer : map.getLayers()) {
@@ -574,6 +574,8 @@ public class MapStage extends GameStage {
     public void setWinner(boolean playerWins) {
         isLoadingMatch = false;
         if (playerWins) {
+
+            Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
             startPause(0.3f, () -> MapStage.this.getReward());

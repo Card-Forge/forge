@@ -9,6 +9,7 @@ import forge.adventure.stage.MapStage;
 import forge.adventure.stage.PointOfInterestMapRenderer;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
+import forge.adventure.util.Paths;
 import forge.adventure.util.TemplateTmxMapLoader;
 import forge.adventure.world.WorldSave;
 import forge.sound.SoundEffectType;
@@ -18,7 +19,7 @@ import forge.sound.SoundSystem;
  * Scene that will render tiled maps.
  * Used for towns dungeons etc
  */
-public class TileMapScene extends HudScene {
+public class TileMapScene extends HudScene   {
     TiledMap map;
     PointOfInterestMapRenderer tiledMapRenderer;
     private String nextMap;
@@ -67,7 +68,7 @@ public class TileMapScene extends HudScene {
         stage.act(Gdx.graphics.getDeltaTime());
         hud.act(Gdx.graphics.getDeltaTime());
         if (autoheal) { //todo add better effect
-            stage.GetPlayer().playEffect("particle_effects/Particle Park Hallucinogen.p",2);
+            stage.getPlayerSprite().playEffect(Paths.EFFECT_HEAL,2);
             SoundSystem.instance.play(SoundEffectType.Enchantment, false);
             autoheal = false;
         }
@@ -84,7 +85,7 @@ public class TileMapScene extends HudScene {
         tiledMapRenderer.setView(stage.getCamera().combined, stage.getCamera().position.x - Scene.getIntendedWidth() / 2.0f, stage.getCamera().position.y - Scene.getIntendedHeight() / 2.0f, Scene.getIntendedWidth(), Scene.getIntendedHeight());
 
         if (!Forge.isLandscapeMode()) {
-            stage.getCamera().position.x = stage.GetPlayer().pos().x;
+            stage.getCamera().position.x = stage.getPlayerSprite().pos().x;
         }
         tiledMapRenderer.render();
         hud.draw();
@@ -106,7 +107,7 @@ public class TileMapScene extends HudScene {
         oldMap = point.getData().map;
         map = new TemplateTmxMapLoader().load(Config.instance().getFilePath(point.getData().map));
         ((MapStage) stage).setPointOfInterest(WorldSave.getCurrentSave().getPointOfInterestChanges(point.getID() + oldMap));
-        stage.GetPlayer().setPosition(0, 0);
+        stage.getPlayerSprite().setPosition(0, 0);
         WorldSave.getCurrentSave().getWorld().setSeed(point.getSeedOffset());
         tiledMapRenderer.loadMap(map, "");
     }
@@ -121,7 +122,7 @@ public class TileMapScene extends HudScene {
     private void load(String targetMap) {
         map = new TemplateTmxMapLoader().load(Config.instance().getFilePath(targetMap));
         ((MapStage) stage).setPointOfInterest(WorldSave.getCurrentSave().getPointOfInterestChanges(rootPoint.getID() + targetMap));
-        stage.GetPlayer().setPosition(0, 0);
+        stage.getPlayerSprite().setPosition(0, 0);
         WorldSave.getCurrentSave().getWorld().setSeed(rootPoint.getSeedOffset());
         tiledMapRenderer.loadMap(map, oldMap);
         oldMap = targetMap;
@@ -136,5 +137,6 @@ public class TileMapScene extends HudScene {
     public void loadNext(String targetMap) {
         nextMap = targetMap;
     }
+
 }
 

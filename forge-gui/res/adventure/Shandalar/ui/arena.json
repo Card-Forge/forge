@@ -4,9 +4,8 @@
   "yDown": true,
   "elements": [      
     {
-      "type": "Image",
-      "name": "market_background",   
-      "image": "ui/market.png",
+      "type": "Image", 
+      "image": "ui/arena_bg.png",
       "width": 480,
       "height": 270
     },

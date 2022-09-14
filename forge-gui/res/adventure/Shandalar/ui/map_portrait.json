@@ -1,0 +1,22 @@
+{
+  "width": 270,
+  "height": 480,
+  "yDown": true,
+  "elements": [      
+    {
+      "type": "Scroll",
+      "name": "map",    
+      "width": 270,
+      "height": 480
+    }, 
+    {
+      "type": "TextButton",
+      "name": "done",
+      "text": "{lblBack}",
+      "width": 48,
+      "height": 20,
+      "x": 5,
+      "y": 455
+    }  
+  ]
+}

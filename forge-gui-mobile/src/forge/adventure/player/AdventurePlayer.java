@@ -50,6 +50,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private int gold   =  0;
     private int maxLife= 20;
     private int life   = 20;
+    private int maxMana= 100;
+    private int mana   = 100;
     private EffectData blessing; //Blessing to apply for next battle.
     private final PlayerStatistic statistic    = new PlayerStatistic();
     private final Map<String, Byte> questFlags = new HashMap<>();
@@ -65,6 +67,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     // Signals
     SignalList onLifeTotalChangeList = new SignalList();
+    SignalList onManaTotalChangeList = new SignalList();
     SignalList onGoldChangeList      = new SignalList();
     SignalList onPlayerChangeList    = new SignalList();
     SignalList onEquipmentChange     = new SignalList();
@@ -90,6 +93,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         gold              = 0;
         maxLife           = 20;
         life              = 20;
+        maxMana           = 100;
+        mana              = 100;
         clearDecks();
         inventoryItems.clear();
         equippedItems.clear();
@@ -134,10 +139,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         setColorIdentity(DeckProxy.getColorIdentity(deck));
 
         life = maxLife = difficultyData.startingLife;
+        mana = maxMana = difficultyData.startingMana;
 
         inventoryItems.addAll(difficultyData.startItems);
         onGoldChangeList.emit();
         onLifeTotalChangeList.emit();
+        onManaTotalChangeList.emit();
     }
 
     public void setSelectedDeckSlot(int slot) {
@@ -149,6 +156,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     }
     public void updateDifficulty(DifficultyData diff) {
         maxLife = diff.startingLife;
+        maxMana = diff.startingMana;
+        this.difficultyData.startingMana = diff.startingMana;
         this.difficultyData.startingLife = diff.startingLife;
         this.difficultyData.staringMoney = diff.staringMoney;
         this.difficultyData.startingDifficulty = diff.startingDifficulty;
@@ -171,6 +180,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public int getGold()                  { return gold;              }
     public int getLife()                  { return life;              }
     public int getMaxLife()               { return maxLife;           }
+    public int getMana()               { return mana;           }
+    public int getMaxMana()               { return maxMana;           }
     public @Null EffectData getBlessing() { return blessing;          }
 
     public Collection<String> getEquippedItems() { return equippedItems.values(); }
@@ -229,6 +240,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         gold        = data.readInt("gold");
         maxLife     = data.readInt("maxLife");
         life        = data.readInt("life");
+        maxMana     = data.containsKey("maxMana")?data.readInt("maxMana"):100;
+        mana        = data.containsKey("mana")?data.readInt("mana"):100;
         worldPosX   = data.readFloat("worldPosX");
         worldPosY   = data.readFloat("worldPosY");
 
@@ -297,6 +310,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         announceCustom  = data.containsKey("announceCustom")  ? data.readBool("announceCustom")  : false;
 
         onLifeTotalChangeList.emit();
+        onManaTotalChangeList.emit();
         onGoldChangeList.emit();
         onBlessing.emit();
     }
@@ -329,6 +343,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         data.store("gold",gold);
         data.store("life",life);
         data.store("maxLife",maxLife);
+        data.store("mana",mana);
+        data.store("maxMana",maxMana);
         data.store("deckName",deck.getName());
 
         data.storeObject("inventory",inventoryItems.toArray(String.class));
@@ -401,12 +417,19 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
             case Life:
                 addMaxLife(reward.getCount());
                 break;
+            case Mana:
+                addMaxMana(reward.getCount());
+                break;
         }
     }
 
     private void addGold(int goldCount) {
         gold+=goldCount;
         onGoldChangeList.emit();
+    }
+    public void onManaChange(Runnable  o) {
+        onManaTotalChangeList.add(o);
+        o.run();
     }
 
     public void onLifeChange(Runnable  o) {
@@ -458,8 +481,20 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         return 200 + (int)(50 * getStatistic().winLossRatio());
     }
 
+    public void addMana(int addedValue) {
+        mana =  Math.min(maxMana,Math.max(mana  + addedValue, 0));
+        onManaTotalChangeList.emit();
+    }
+    public void addManaPercent(float percent) {
+        mana =  Math.min(mana + (int)(maxMana*percent), maxMana);
+        onManaTotalChangeList.emit();
+    }
     public void heal(int amount) {
         life = Math.min(life + amount, maxLife);
+        onLifeTotalChangeList.emit();
+    }
+    public void heal(float percent) {
+        life =  Math.min(life + (int)(maxLife*percent), maxLife);
         onLifeTotalChangeList.emit();
     }
     public void defeated() {
@@ -468,10 +503,18 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         onLifeTotalChangeList.emit();
         onGoldChangeList.emit();
     }
+    public void win() {
+        Current.player().addManaPercent(0.1f);
+    }
     public void addMaxLife(int count) {
         maxLife += count;
         life    += count;
         onLifeTotalChangeList.emit();
+    }
+    public void addMaxMana(int count) {
+        maxMana += count;
+        mana    += count;
+        onManaTotalChangeList.emit();
     }
     public void giveGold(int price) {
         takeGold(-price);
@@ -646,4 +689,5 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     public void resetQuestFlags(){
         questFlags.clear();
     }
+
 }

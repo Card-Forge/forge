@@ -86,12 +86,12 @@ public class WorldBackground extends Actor {
             chunksSprites[x][y] =  MapSprite.GetMapSprites(x, y);
 
         for (Actor sprite : chunksSprites[x][y]) {
-            stage.GetSpriteGroup().addActor(sprite);
+            stage.getSpriteGroup().addActor(sprite);
         }
         if (chunksSpritesBackground[x][y] == null)
             chunksSpritesBackground[x][y] =  MapSprite.GetMapSpritesBackground(x, y);
         for (Actor sprite : chunksSpritesBackground[x][y]) {
-            stage.GetBackgroundSprites().addActor(sprite);
+            stage.getBackgroundSprites().addActor(sprite);
         }
     }
 
@@ -99,13 +99,13 @@ public class WorldBackground extends Actor {
         Array<Actor> sprites = chunksSprites[x][y];
         if (sprites != null) {
             for (Actor sprite : sprites) {
-                stage.GetSpriteGroup().removeActor(sprite);
+                stage.getSpriteGroup().removeActor(sprite);
             }
         }
         sprites = chunksSpritesBackground[x][y];
         if (sprites != null) {
             for (Actor sprite : sprites) {
-                stage.GetBackgroundSprites().removeActor(sprite);
+                stage.getBackgroundSprites().removeActor(sprite);
             }
         }
     }
@@ -129,7 +129,7 @@ public class WorldBackground extends Actor {
         chunkSize = WorldSave.getCurrentSave().getWorld().getChunkSize();
         if(chunks!=null)
         {
-            stage.GetSpriteGroup().clear();
+            stage.getSpriteGroup().clear();
             for(int i=0;i<chunks.length;i++)
                 for(int j=0;j<chunks[i].length;j++)
                     if(chunks[i][j]!=null)

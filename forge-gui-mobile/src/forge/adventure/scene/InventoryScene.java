@@ -23,9 +23,10 @@ import java.util.Map;
 public class InventoryScene  extends UIScene {
     TextButton leave;
     Button equipButton;
-    Button useButton;
+    TextButton useButton;
     Label itemDescription;
     Dialog confirm;
+    Dialog useDialog;
     private Table inventory;
     Array<Button> inventoryButtons=new Array<>();
     HashMap<String,Button> equipmentSlots=new HashMap<>();
@@ -126,6 +127,26 @@ public class InventoryScene  extends UIScene {
         itemDescription.setWrap(true);
         //makes confirm dialog hidden immediately when you open inventory first time..
         confirm.getColor().a = 0;
+
+
+        useDialog = new Dialog("\n "+Forge.getLocalizer().getMessage("lblDelete"), Controls.GetSkin())
+        {
+            protected void result(Object object)
+            {
+                useDialog.hide();
+                if(object!=null&&object.equals(true))
+                {
+                    triggerUse();
+                    useDialog.getColor().a = 0;
+                }
+            };
+        };
+
+        useDialog.button(Forge.getLocalizer().getMessage("lblYes"), true);
+        useDialog.button(Forge.getLocalizer().getMessage("lblNo"), false);
+        ui.addActor(useDialog);
+        useDialog.hide();
+        useDialog.getColor().a = 0;
     }
 
     private static InventoryScene object;
@@ -164,12 +185,19 @@ public class InventoryScene  extends UIScene {
     }
 
 
-    private void use() {
+    private void triggerUse() {
         if(selected==null)return;
 
         ItemData data = ItemData.getItem(itemLocation.get(selected));
+        Current.player().addMana(-data.manaNeeded);
         done();
         ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
+    }
+    private void use() {
+        useDialog.getContentTable().clear();
+        ItemData data = ItemData.getItem(itemLocation.get(selected));
+        useDialog.text("Use "+data.name+"?\n"+data.getDescription());
+        useDialog.show(stage);
     }
 
     private void setSelected(Button actor) {
@@ -191,6 +219,14 @@ public class InventoryScene  extends UIScene {
 
         boolean isInPoi = MapStage.getInstance().isInMap();
         useButton.setDisabled(!(isInPoi&&data.usableInPoi||!isInPoi&&data.usableOnWorldMap));
+        if(data.manaNeeded==0)
+            useButton.setText("Use Item");
+        else
+            useButton.setText("Use Item ("+data.manaNeeded+" mana)");
+
+        if(Current.player().getMana()<data.manaNeeded)
+            useButton.setDisabled(true);
+
         if(data.equipmentSlot==null||data.equipmentSlot=="")
         {
             equipButton.setDisabled(true);

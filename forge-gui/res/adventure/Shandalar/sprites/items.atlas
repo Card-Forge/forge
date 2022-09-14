@@ -11,7 +11,10 @@ Gold
   size: 16, 16              
 Life 
   xy: 48, 16
-  size: 16, 16   
+  size: 16, 16            
+Mana 
+  xy: 192, 912
+  size: 16, 16  
 SolRing
   xy: 320, 144
   size: 16, 16          
@@ -269,4 +272,19 @@ BlueRune
   size: 16, 16
 WhiteRune
   xy: 352,112
+  size: 16, 16
+BlackStaff
+  xy: 352,128
+  size: 16, 16
+RedStaff
+  xy: 336,144 
+  size: 16, 16
+GreenStaff
+  xy: 352,144
+  size: 16, 16
+BlueStaff
+  xy: 336,160
+  size: 16, 16
+WhiteStaff
+  xy: 352,160
   size: 16, 16

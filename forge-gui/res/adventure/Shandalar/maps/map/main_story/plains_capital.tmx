@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="64">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="65">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -89,17 +89,81 @@
   </object>
   <object id="59" template="../../obj/entry_left.tx" x="416" y="552" width="16" height="71.964" rotation="179.747"/>
   <object id="60" template="../../obj/entry_right.tx" x="304" y="624" width="16" height="69"/>
-  <object id="61" template="../../obj/arena.tx" x="352" y="583"/>
+  <object id="61" template="../../obj/arena.tx" x="422.667" y="113.364">
+   <properties>
+    <property name="arena">{
+
+    &quot;enemyPool&quot;:[
+	&quot;Adventurer&quot;,
+	&quot;Archer&quot;,
+	&quot;Cat&quot;,
+	&quot;Cathar&quot;,
+	&quot;Cleric&quot;,
+	&quot;Dawnhart Witch&quot;,
+	&quot;Eldraine Knight&quot;,
+	&quot;Griffin&quot;,
+	&quot;Horseman&quot;,
+	&quot;Human&quot;,
+	&quot;Human elite&quot;,
+	&quot;Human guard&quot;,
+	&quot;Knight&quot;,
+	&quot;Monk&quot;,
+	&quot;White Dwarf&quot;,
+	&quot;White Wiz1&quot;,
+	&quot;White Wiz2&quot;,
+	&quot;White Wiz3&quot;
+	],
+    &quot;rounds&quot;:3,
+    &quot;entryFee&quot;:100,
+     &quot;rewards&quot;: [[
+		{
+			&quot;type&quot;: &quot;card&quot;,
+			&quot;probability&quot;: 1, 
+      			&quot;count&quot;:2,
+			&quot;rarity&quot;: [
+				&quot;Mythic Rare&quot;
+			],
+      			&quot;colors&quot;: [&quot;white&quot;] 
+		}
+		],[
+		{
+			&quot;type&quot;: &quot;gold&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 500,
+			&quot;itemNames&quot;: [&quot;Gold Armor&quot;,&quot;Gold Shield&quot;,&quot;Gold Boots&quot;,&quot;Bronze Sword&quot;]
+		}
+		],[{
+			&quot;type&quot;: &quot;items&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 1,
+			&quot;itemNames&quot;: [&quot;Gold Armor&quot;,&quot;Gold Shield&quot;,&quot;Gold Boots&quot;,&quot;Bronze Sword&quot;]
+		}
+		]
+		] 
+}</property>
+   </properties>
+  </object>
   <object id="62" template="../../obj/shop.tx" x="263" y="257">
    <properties>
-    <property name="shopList" value="Plains"/>
+    <property name="shopList" value="WhiteItems"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
   <object id="63" template="../../obj/shop.tx" x="82" y="257">
    <properties>
-    <property name="shopList" value="Plains"/>
+    <property name="shopList" value="WhiteEquipment"/>
     <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="64" name="IntroChar" class="dialog" gid="7627" x="159.75" y="114.667" width="16" height="16">
+   <properties>
+    <property name="dialog">[{
+  &quot;text&quot;:&quot;Hello there is nothing to do for you...\nFor now.&quot;,
+  &quot;options&quot;:[ 
+    { &quot;name&quot;:&quot;Bye&quot; }
+  ]
+}]</property>
+    <property name="sprite" value=""/>
    </properties>
   </object>
  </objectgroup>

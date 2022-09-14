@@ -280,6 +280,10 @@ public class CardUtil {
             return getCardPrice(card);
         if(reward.getItem()!=null)
             return reward.getItem().cost;
+        if(reward.getType()== Reward.Type.Life)
+            return reward.getCount()*500;
+        if(reward.getType()== Reward.Type.Mana)
+            return reward.getCount()*50;
         return 1000;
     }
 

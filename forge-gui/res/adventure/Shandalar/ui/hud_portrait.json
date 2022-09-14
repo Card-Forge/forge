@@ -66,13 +66,23 @@
     },
     {
       "type": "Label",
-      "name": "money",
+      "name": "mana",
       "font": "default",
       "width": 48,
       "height": 3,    
       "fontSize": 1,
       "x": 234,
       "y": 85
+    },
+    {
+      "type": "Label",
+      "name": "money",
+      "font": "default",
+      "width": 48,
+      "height": 3,    
+      "fontSize": 1,
+      "x": 234,
+      "y": 104
     },
     {
       "type": "TextButton",
