@@ -1,0 +1,80 @@
+Name:Shadowheart, Sharran Cleric
+ManaCost:1 B
+Types:Legendary Creature Human Elf Cleric
+PT:2/2
+K:Deathtouch
+K:Specialize:2::Activate only if a player has 13 or less life.:CheckSVar$ X | SVarCompare$ LE13
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your end step, CARDNAME deals 1 damage to each player.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player | NumDmg$ 1
+SVar:X:PlayerCountPlayers$LowestLifeTotal
+AlternateMode:Specialize
+DeckHas:Ability$Discard
+Oracle:Deathtouch\nSpecialize {2}. Activate only if a player has 13 or less life.\nAt the beginning of your end step, Shadowheart, Sharran Cleric deals 1 damage to each player.
+
+SPECIALIZE:WHITE
+
+Name:Shadowheart, Cleric of Order
+ManaCost:1 W B
+Types:Legendary Creature Human Elf Cleric
+PT:4/4
+K:Deathtouch
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your end step, CARDNAME deals 1 damage to each player.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player | NumDmg$ 1
+T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigToken | TriggerDescription$ Whenever you lose life during your turn, create a 2/2 white Knight creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_2_2_knight
+DeckHas:Ability$Token & Type$Knight
+Oracle:Deathtouch\nAt the beginning of your end step, Shadowheart, Cleric of Order deals 1 damage to each player.\nWhenever you lose life during your turn, create a 2/2 white Knight creature token.
+
+SPECIALIZE:BLUE
+
+Name:Shadowheart, Cleric of Trickery
+ManaCost:1 U B
+Types:Legendary Creature Human Elf Cleric
+PT:4/4
+K:Deathtouch
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your end step, CARDNAME deals 1 damage to each player.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player | NumDmg$ 1
+T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigDraw | TriggerDescription$ Whenever you lose life during your turn, draw a card.
+SVar:TrigDraw:DB$ Draw
+Oracle:Deathtouch\nAt the beginning of your end step, Shadowheart, Cleric of Trickery deals 1 damage to each player.\nWhenever you lose life during your turn, draw a card.
+
+SPECIALIZE:BLACK
+
+Name:Shadowheart, Cleric of Graves
+ManaCost:1 B B
+Types:Legendary Creature Human Elf Cleric
+PT:4/4
+K:Deathtouch
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your end step, CARDNAME deals 1 damage to each player.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player | NumDmg$ 1
+DeckHas:Ability$LifeGain
+Oracle:Deathtouch, lifelink\nAt the beginning of your end step, Shadowheart, Cleric of Graves deals 1 damage to each player.
+
+SPECIALIZE:RED
+
+Name:Shadowheart, Cleric of War
+ManaCost:1 B R
+Types:Legendary Creature Human Elf Cleric
+PT:4/4
+K:Deathtouch
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamageAll | TriggerDescription$ At the beginning of your end step, CARDNAME deals 1 damage to each player.
+SVar:TrigDamageAll:DB$ DealDamage | Defined$ Player | NumDmg$ 1
+T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigDamageOpp | TriggerDescription$ Whenever you lose life during your turn, NICKNAME deals that much damage to each opponent.
+SVar:TrigDamageOpp:DB$ DealDamage | NumDmg$ X | Defined$ Opponent
+SVar:X:TriggerCount$LifeAmount
+Oracle:Deathtouch\nAt the beginning of your end step, Shadowheart, Cleric of War deals 1 damage to each player.\nWhenever you lose life during your turn, Shadowheart deals that much damage to each opponent.
+
+SPECIALIZE:GREEN
+
+Name:Shadowheart, Cleric of Twilight
+ManaCost:1 B G
+Types:Legendary Creature Human Elf Cleric
+PT:4/4
+K:Deathtouch
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.powerLE2 | Description$ CARDNAME can't be blocked by creatures with power 2 or less.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ At the beginning of your end step, NICKNAME deals 1 damage to each player.
+SVar:TrigDealDamage:DB$ DealDamage | Defined$ Player | NumDmg$ 1
+T:Mode$ LifeLost | ValidPlayer$ You | TriggerZones$ Battlefield | PlayerTurn$ True | Execute$ TrigPutCounter | TriggerDescription$ Whenever you lose life during your turn, put a +1/+1 counter on NICKNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1
+Oracle:Deathtouch\nShadowheart, Cleric of Twilight can't be blocked by creatures with power 2 or less.\nAt the beginning of your end step, Shadowheart deals 1 damage to each player.\nWhenever you lose life during your turn, put a +1/+1 counter on Shadowheart.
