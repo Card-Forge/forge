@@ -1,8 +1,10 @@
-Name:Argivian Phalanx
-ManaCost:5 W
-Types:Creature Human Kor Soldier
-PT:4/4
-K:Vigilance
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature you control.
-SVar:X:Count$Valid Creature.YouCtrl
-Oracle:This spell costs {1} less to cast for each creature you control.\nVigilance
+Name:Lictor
+ManaCost:3 G
+Types:Creature Tyranid
+PT:3/3
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Pheromone Trail — When CARDNAME enters the battlefield, if a creature entered the battlefield under an opponent's control this turn, create a 3/3 green Tyranid Warrior creature token with trample.
+SVar:TrigToken:DB$ Token | TokenScript$ g_3_3_tyranid_warrior | CheckSVar$ X | SVarCompare$ GE1
+SVar:X:Count$ThisTurnEntered_Battlefield_Creature.OppCtrl
+DeckHas:Ability$Token
+Oracle:Flash\nPheromone Trail — When Lictor enters the battlefield, if a creature entered the battlefield under an opponent’s control this turn, create a 3/3 green Tyranid Warrior creature token with trample.

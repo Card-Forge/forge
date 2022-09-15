@@ -1,8 +1,11 @@
-Name:Argivian Phalanx
-ManaCost:5 W
-Types:Creature Human Kor Soldier
-PT:4/4
-K:Vigilance
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature you control.
-SVar:X:Count$Valid Creature.YouCtrl
-Oracle:This spell costs {1} less to cast for each creature you control.\nVigilance
+Name:Malanthrope
+ManaCost:1 G U
+Types:Creature Tyranid
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile all cards from target player's graveyard.
+SVar:TrigExile:DB$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | SubAbility$ DBCounter | RememberChanged$ True
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X
+SVar:X:Remembered$Valid Creature
+DeckHas:Ability$Counter
+Oracle:Flash\nPheromone Trail — When Lictor enters the battlefield, if a creature entered the battlefield under an opponent’s control this turn, create a 3/3 green Tyranid Warrior creature token with trample.
