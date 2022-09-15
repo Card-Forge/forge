@@ -283,6 +283,7 @@ public class CardUtil {
         return 1000;
     }
 
+    static List<PrintSheet> jumpStartSheetsCandidates=null;
     public static Deck generateDeck(GeneratedDeckData data)
     {
         Deck deck= new Deck(data.name);
@@ -309,16 +310,19 @@ public class CardUtil {
                     case MagicColor.RED:    targetName = "Mountain";break;
                     case MagicColor.GREEN:  targetName = "Forest";  break;
                 }
-
-                List<PrintSheet> candidates=new ArrayList<>();
-                for(PrintSheet sheet : StaticData.instance().getPrintSheets())
+                if(jumpStartSheetsCandidates==null)
                 {
-                    if(sheet.containsCardNamed(targetName,3)&&sheet.getName().startsWith("JMP"))//dodge the rainbow jumpstart sheet
+                    jumpStartSheetsCandidates=new ArrayList<>();
+                    for(PrintSheet sheet : StaticData.instance().getPrintSheets())
                     {
-                        candidates.add(sheet);
+                        if(sheet.containsCardNamed(targetName,3)&&sheet.getName().startsWith("JMP") && sheet.all().size() != 20)//dodge the rainbow jumpstart sheet and the sheet for every card
+                        {
+                            jumpStartSheetsCandidates.add(sheet);
+                        }
                     }
                 }
-                deck.getOrCreate(DeckSection.Main).addAllFlat(candidates.get(Current.world().getRandom().nextInt(candidates.size())).all());
+                PrintSheet sheet=jumpStartSheetsCandidates.get(Current.world().getRandom().nextInt(jumpStartSheetsCandidates.size()));
+                deck.getOrCreate(DeckSection.Main).addAllFlat(sheet.all());
             }
             return deck;
         }
