@@ -7,4 +7,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenScript$ g_3_3_tyranid_warrior | CheckSVar$ X | SVarCompare$ GE1
 SVar:X:Count$ThisTurnEntered_Battlefield_Creature.OppCtrl
 DeckHas:Ability$Token
-Oracle:Flash\nPheromone Trail — When Lictor enters the battlefield, if a creature entered the battlefield under an opponent’s control this turn, create a 3/3 green Tyranid Warrior creature token with trample.
+Oracle:Flash\nPheromone Trail — When Lictor enters the battlefield, if a creature entered the battlefield under an opponent's control this turn, create a 3/3 green Tyranid Warrior creature token with trample.
