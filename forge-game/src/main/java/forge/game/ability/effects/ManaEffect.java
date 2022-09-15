@@ -45,6 +45,7 @@ public class ManaEffect extends SpellAbilityEffect {
             return;
         }
 
+        boolean runTriggers = true;
         for (Player p : tgtPlayers) {
             if (sa.usesTargeting() && !p.canBeTargetedBy(sa)) {
                 // Illegal target. Skip.
@@ -241,7 +242,8 @@ public class ManaEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            abMana.produceMana(mana, p, sa);
+            abMana.produceMana(mana, p, sa, runTriggers);
+            runTriggers = false; //avoid running TapsForMana triggers for each player
         }
 
         // Only clear express choice after mana has been produced
