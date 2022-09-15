@@ -1,0 +1,10 @@
+Name:Goliath Truck
+ManaCost:4
+Types:Artifact Vehicle
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigPutCounter | TriggerDescription$ Stowage - Whenever CARDNAME attacks, put two +1/+1 counters on another target attacking creature.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.attacking+Other | TgtPrompt$ Select another target attacking creature | CounterType$ P1P1 | CounterNum$ 2
+K:Crew:2
+SVar:HasAttackEffect:TRUE
+DeckHas:Type$Counters
+Oracle:Stowage — Whenever Goliath Truck attacks, put two +1/+1 counters on another target attacking creature.\nCrew 2 (Tap any number of creatures you control with total power 2 or more: This Vehicle becomes an artifact creature until end of turn.)
