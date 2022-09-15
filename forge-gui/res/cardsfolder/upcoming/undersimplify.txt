@@ -1,0 +1,8 @@
+Name:Undersimplify
+ManaCost:1 U
+Types:Instant
+A:SP$ Pump | TargetType$ Spell | TgtZone$ Stack | ValidTgts$ Card | SubAbility$ DBEffect | StackDescription$ {p:You} chooses {s:Targeted}. | SpellDescription$ Choose target spell.
+SVar:DBEffect:DB$ Effect | ConditionDefined$ Targeted | ConditionPresent$ Spell.Creature | ConditionZone$ Stack | StaticAbilities$ PerpetualDebuff | RememberObjects$ TargetedSource | Name$ Undersimplify's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCounter | SpellDescription$ If it's a creature spell, it perpetually gets -2/-0.
+SVar:PerpetualDebuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ -2 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets -2/-0.
+SVar:DBCounter:DB$ Counter | Defined$ Targeted | UnlessCost$ 2 | UnlessPayer$ TargetedController | SpellDescription$ Counter that spell unless its controller pays {2}.
+Oracle:Choose target spell. If it's a creature spell, it perpetually gets -2/-0. Counter that spell unless its controller pays {2}.
