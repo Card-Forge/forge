@@ -1,8 +1,10 @@
-Name:Argivian Phalanx
-ManaCost:5 W
-Types:Creature Human Kor Soldier
-PT:4/4
-K:Vigilance
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature you control.
-SVar:X:Count$Valid Creature.YouCtrl
-Oracle:This spell costs {1} less to cast for each creature you control.\nVigilance
+Name:Gargoyle Flock
+ManaCost:2 G U
+Types:Creature Tyranid Gargoyle
+PT:2/2
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigToken | TriggerDescription$ Skyswarm — At the beginning of your end step, if a creature entered the battlefield under your control this turn, create a 1/1 blue Tyranid Gargoyle creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_1_1_tyranid_gargoyle_flying | TokenOwner$ You
+SVar:X:Count$ThisTurnEntered_Battlefield_Creature.YouCtrl
+DeckHas:Ability$Token
+Oracle:Flying\nSkyswarm — At the beginning of your end step, if a creature entered the battlefield under your control this turn, create a 1/1 blue Tyranid Gargoyle creature token with flying.
