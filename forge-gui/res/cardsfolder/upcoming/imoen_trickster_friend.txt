@@ -2,13 +2,14 @@ Name:Imoen, Trickster Friend
 ManaCost:1 U
 Types:Legendary Creature Human Rogue Wizard
 PT:2/1
-K:Specialize:5:
-S:Mode$ ReduceCost | ValidSpell$ Activated.Specialize | ConditionCheckSVar$ X | ConditionSVarCompare$ GE2 | Amount$ 3 | ValidCard$ Card.Self | Description$ This ability costs {3} less to activate if there are two or more instant and/or sorcery cards in your graveyard.
+K:Specialize:5::This ability costs {3} less to activate if there are two or more instant and/or sorcery cards in your graveyard.:ReduceCost$ X
 S:Mode$ Continuous | Affected$ Card.Self+attacking | AddHiddenKeyword$ Unblockable | IsPresent$ Card.Other+attacking | PresentCompare$ EQ0 | Description$ CARDNAME can't be blocked as long as it's attacking alone.
-SVar:X:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+SVar:X:Count$Compare Y GE2.3.0
+SVar:Y:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
+DeckHas:Ability$Discard
 DeckHints:Ability$Graveyard & Type$Instant|Sorcery
-Oracle:Specialize {5}. This ability costs {3} less to activate if there are two or more instant and/or sorcery cards in your graveyard.\nImoen, Trickster Friend can't be blocked as long as it's attacking alone.
 AlternateMode:Specialize
+Oracle:Specialize {5}. This ability costs {3} less to activate if there are two or more instant and/or sorcery cards in your graveyard.\nImoen, Trickster Friend can't be blocked as long as it's attacking alone.
 
 SPECIALIZE:WHITE
 
@@ -18,21 +19,21 @@ Types:Legendary Creature Human Rogue Wizard
 PT:3/2
 K:Unblockable
 T:Mode$ DamageDone | ValidSource$ Card.Self | OptionalDecider$ You | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, put a +1/+1 counter on each creature you control.
-SVar:TrigCounter:AB$ PutCounterAll | Cost$ ExileFromGrave<1/Instant;Sorcery> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigCounter:AB$ PutCounterAll | Cost$ ExileFromGrave<1/Instant;Sorcery/instant or sorcery> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
 DeckHints:Ability$Graveyard & Type$Instant|Sorcery
 Oracle:Imoen, Honorable Trickster can't be blocked.\nWhenever Imoen deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, put a +1/+1 counter on each creature you control.
 
 SPECIALIZE:BLUE
 
-Name:Imoen, Willy Trickster
-ManaCost:1 W U
+Name:Imoen, Wily Trickster
+ManaCost:1 U U
 Types:Legendary Creature Human Rogue Wizard
 PT:3/2
 K:Unblockable
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigImmTrigger | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. When you do, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
-SVar:TrigImmTrigger:AB$ ImmediateTrigger | Cost$ ExileFromGrave<1/Instant;Sorcery> | Execute$ TrigTap | Secondary$ True | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. When you do, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
-SVar:TrigTap:DB$ Tap | ValidTgts$ Creature | SubAbility$ DBPump
+SVar:TrigImmTrigger:AB$ ImmediateTrigger | Cost$ ExileFromGrave<1/Instant;Sorcery/instant or sorcery> | Execute$ TrigTap | Secondary$ True | TriggerDescription$ When you do, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
+SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPromopt$ Select target creature an opponent controls | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | Duration$ Permanent | KW$ HIDDEN This card doesn't untap during your next untap step.
 DeckHints:Ability$Graveyard & Type$Instant|Sorcery
 Oracle:Imoen, Wily Trickster can't be blocked.\nWhenever Imoen deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. When you do, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
@@ -40,12 +41,12 @@ Oracle:Imoen, Wily Trickster can't be blocked.\nWhenever Imoen deals combat dama
 SPECIALIZE:BLACK
 
 Name:Imoen, Occult Trickster
-ManaCost:1 W U
+ManaCost:1 U B
 Types:Legendary Creature Human Rogue Wizard
 PT:3/2
 K:Unblockable
 T:Mode$ DamageDone | ValidSource$ Card.Self | OptionalDecider$ You | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, create a 2/2 black Zombie creature token.
-SVar:TrigToken:AB$ Token | Cost$ ExileFromGrave<1/Instant;Sorcery> | TokenScript$ B_2_2_zombie
+SVar:TrigToken:AB$ Token | Cost$ ExileFromGrave<1/Instant;Sorcery/instant or sorcery> | TokenScript$ b_2_2_zombie
 DeckHas:Ability$Token & Type$Zombie
 DeckHints:Ability$Graveyard & Type$Instant|Sorcery
 Oracle:Imoen, Occult Trickster can't be blocked.\nWhenever Imoen deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, create a 2/2 black Zombie creature token.
@@ -58,7 +59,7 @@ Types:Legendary Creature Human Rogue Wizard
 PT:3/2
 K:Unblockable
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, NICKNAME deals 2 damage to each opponent.
-SVar:TrigDamage:AB$ DealDamage | Cost$ ExileFromGrave<1/Instant;Sorcery> | Defined$ Player.Opponent | NumDmg$ 2
+SVar:TrigDamage:AB$ DealDamage | Cost$ ExileFromGrave<1/Instant;Sorcery/instant or sorcery> | Defined$ Opponent | NumDmg$ 2
 DeckHints:Ability$Graveyard & Type$Instant|Sorcery
 Oracle:Imoen, Chaotic Trickster can't be blocked.\nWhenever Imoen deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, Imoen deals 2 damage to each opponent.
 
@@ -70,8 +71,8 @@ Types:Legendary Creature Human Rogue Wizard
 PT:3/2
 K:Unblockable
 T:Mode$ DamageDone | ValidSource$ Card.Self | OptionalDecider$ You | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, draw a card and you may play an additional land this turn.
-SVar:TrigDraw:AB$ Draw | Cost$ ExileFromGrave<1/Instant;Sorcery> | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Name$ Imoen, Wise Trickster's Exploration Effect | StaticAbilities$ Exploration
+SVar:TrigDraw:AB$ Draw | Cost$ ExileFromGrave<1/Instant;Sorcery/instant or sorcery> | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ Exploration
 SVar:Exploration:Mode$ Continuous | Affected$ You | AdjustLandPlays$ 1 | EffectZone$ Command | Description$ You may play an additional land this turn.
 DeckHints:Ability$Graveyard & Type$Instant|Sorcery
 Oracle:Imoen, Wise Trickster can't be blocked.\nWhenever Imoen deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, draw a card and you may play an additional land this turn.
