@@ -1,8 +1,8 @@
-Name:Argivian Phalanx
-ManaCost:5 W
-Types:Creature Human Kor Soldier
-PT:4/4
-K:Vigilance
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature you control.
-SVar:X:Count$Valid Creature.YouCtrl
-Oracle:This spell costs {1} less to cast for each creature you control.\nVigilance
+Name:Kill! Maim! Burn!
+ManaCost:3 B R
+Types:Instant
+A:SP$ Charm | Choices$ DBBurn,DBKill,DBMaim | MinCharmNum$ 1 | CharmNum$ 3
+SVar:DBBurn:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact. 
+SVar:DBKill:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Destroy target creature.
+SVar:DBMaim:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target player.
+Oracle:Choose one or more —\n• Destroy target artifact.\n• Destroy target creature.\n• Kill! Maim! Burn! deals 3 damage to target player.
