@@ -1,0 +1,10 @@
+Name:Atalan Jackal
+ManaCost:1 R G
+Types:Creature Human Tyranid Scout
+PT:2/2
+K:Trample
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigSearch | CombatDamage$ True | TriggerDescription$ Skilled Outrider — Whenever CARDNAME deals combat damage to a player, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | Optional$ True | ChangeType$ Land.Basic | ChangeNum$ 1
+HasAttackEffect:True
+Oracle:Trample, haste\nSkilled Outrider — Whenever Atalan Jackal deals combat damage to a player, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
