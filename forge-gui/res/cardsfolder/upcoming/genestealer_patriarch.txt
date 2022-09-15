@@ -7,4 +7,5 @@ SVar:TrigInfectionCounter:DB$ PutCounter | CounterType$ INFECTION | CounterNum$ 
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.counters_GE1_INFECTION | Execute$ DBCopy | TriggerDescription$ Children of the Cult — Whenever a creature with an infection counter on it dies, you create a token that's a copy of that creature, except it's a Tyranid in addition to its other types.
 SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | AddTypes$ Tyranid 
 DeckHas:Ability$Counters|Token
+SVar:HasAttackEffect:TRUE
 Oracle:Genestealer's Kiss — Whenever Genestealer Patriarch attacks, put an infection counter on target creature defending player controls.\nChildren of the Cult — Whenever a creature with an infection counter on it dies, you create a token that's a copy of that creature, except it's a Tyranid in addition to its other types.
