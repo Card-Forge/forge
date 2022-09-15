@@ -4,7 +4,7 @@ Types:Creature Tyranid
 PT:4/4
 K:Flying
 K:Haste
-S:Mode$ Continuous | ValidAttackers$ Creature.YouCtrl+HasCounters | AddKeyword$ Flying & Haste | Description$ The Will of the Hive Mind — Other creatures you control with counters on them have flying and haste.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+HasCounters | AddKeyword$ Flying & Haste | Description$ The Will of the Hive Mind — Other creatures you control with counters on them have flying and haste.
 SVar:PlayMain1:TRUE
 DeckNeeds:Ability$Counters
 DeckHas:Keyword$Flying|Haste
