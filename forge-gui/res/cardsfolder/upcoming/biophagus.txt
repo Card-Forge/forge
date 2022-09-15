@@ -1,0 +1,11 @@
+Name:Biophagus
+ManaCost:1 G
+Types:Creature Human Tyranid Wizard
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ Any | PrecostDesc$ Genomic Enhancement — | TriggersWhenSpent$ TrigSpent | SpellDescription$ Add one mana of any color. If this mana is spent to cast a creature spell, that creature enters the battlefield with an additional +1/+1 counter on it.
+SVar:TrigSpent:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigEffect | TriggerDescription$ If this mana is spent to cast a creature spell, that creature enters the battlefield with an additional +1/+1 counter on it.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | ForgetOnMoved$ Stack | ReplacementEffects$ ETBCreat
+SVar:ETBCreat:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ DBPutP1P1 | ReplacementResult$ Updated | Description$ That creature enters the battlefield with an additional +1/+1 counter on it and gains hexproof until your next turn.
+SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$ True | CounterNum$ 1
+DeckHas:Ability$Counter
+Oracle:Genomic Enhancement — {T}: Add one mana of any color. If this mana is spent to cast a creature spell, that creature enters the battlefield with an additional +1/+1 counter on it.
