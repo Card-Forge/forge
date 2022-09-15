@@ -3,7 +3,8 @@ ManaCost:4 R
 Types:Creature Astartes Warrior
 PT:3/2
 K:Cascade
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Sonic Blaster — When CARDNAME enters the battlefield, it deals damage equal to the number of spells you’ve cast this turn to any target.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Sonic Blaster — When CARDNAME enters the battlefield, it deals damage equal to the number of spells you've cast this turn to any target.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X
 SVar:X:Count$ThisTurnCast_Card.YouCtrl
-Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nSonic Blaster — When Noise Marine enters the battlefield, it deals damage equal to the number of spells you’ve cast this turn to any target.
+Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nSonic Blast
+er — When Noise Marine enters the battlefield, it deals damage equal to the number of spells you've cast this turn to any target.
