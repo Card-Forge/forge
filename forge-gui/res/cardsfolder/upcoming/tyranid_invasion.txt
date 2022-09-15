@@ -1,8 +1,7 @@
-Name:Argivian Phalanx
-ManaCost:5 W
-Types:Creature Human Kor Soldier
-PT:4/4
-K:Vigilance
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature you control.
-SVar:X:Count$Valid Creature.YouCtrl
-Oracle:This spell costs {1} less to cast for each creature you control.\nVigilance
+Name:Tyranid Invasion
+ManaCost:3 G
+Types:Sorcery
+A:SP$ Token | TokenOwner$ You | TokenAmount$ X | TokenScript$ g_3_3_tyranid_warrior
+SVar:X:PlayerCountOpponents$Amount
+DeckHas:Ability$Token
+Oracle:Create a number of 3/3 green Tyranid Warrior creature tokens with trample equal to the number of opponents you have.
