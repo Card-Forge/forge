@@ -1,8 +1,11 @@
-Name:Argivian Phalanx
-ManaCost:5 W
-Types:Creature Human Kor Soldier
+Name:Winged Hive Tyrant
+ManaCost:3 U R
+Types:Creature Tyranid
 PT:4/4
-K:Vigilance
-S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each creature you control.
-SVar:X:Count$Valid Creature.YouCtrl
-Oracle:This spell costs {1} less to cast for each creature you control.\nVigilance
+K:Flying
+K:Haste
+S:Mode$ Continuous | ValidAttackers$ Creature.YouCtrl+HasCounters | AddKeyword$ Flying & Haste | Description$ The Will of the Hive Mind — Other creatures you control with counters on them have flying and haste.
+SVar:PlayMain1:TRUE
+DeckNeeds:Ability$Counters
+DeckHas:Keyword$Flying|Haste
+Oracle:Flying, haste\nThe Will of the Hive Mind — Other creatures you control with counters on them have flying and haste.
