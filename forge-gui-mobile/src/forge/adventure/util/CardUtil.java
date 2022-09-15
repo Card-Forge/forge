@@ -315,7 +315,7 @@ public class CardUtil {
                     jumpStartSheetsCandidates=new ArrayList<>();
                     for(PrintSheet sheet : StaticData.instance().getPrintSheets())
                     {
-                        if(sheet.containsCardNamed(targetName,3)&&sheet.getName().startsWith("JMP") && sheet.all().size() != 20)//dodge the rainbow jumpstart sheet and the sheet for every card
+                        if(sheet.containsCardNamed(targetName,3) && sheet.getName().startsWith("JMP") && sheet.all().size() == 20)//dodge the rainbow jumpstart sheet and the sheet for every card
                         {
                             jumpStartSheetsCandidates.add(sheet);
                         }
