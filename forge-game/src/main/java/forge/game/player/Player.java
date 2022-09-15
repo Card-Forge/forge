@@ -1605,9 +1605,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // MilledAll trigger
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.Cards, milled);
-        runParams.put(AbilityKey.Player, this);
         game.getTriggerHandler().runTrigger(TriggerType.MilledAll, runParams, false);
 
         return milled;
