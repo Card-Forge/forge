@@ -39,7 +39,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
         if (sa.hasParam("Toughness")) {
             toughness = AbilityUtils.calculateAmount(host, sa.getParam("Toughness"), sa);
         }
-        final Game game = sa.getActivatingPlayer().getGame();
+        final Game game = host.getGame();
 
         // Every Animate event needs a unique time stamp
         final long timestamp = game.getNextTimestamp();
@@ -142,7 +142,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
             list = getTargetPlayers(sa).getCardsIn(ZoneType.Battlefield);
         }
 
-        list = CardLists.getValidCards(list, valid, host.getController(), host, sa);
+        list = CardLists.getValidCards(list, valid, sa.getActivatingPlayer(), host, sa);
 
         for (final Card c : list) {
             doAnimate(c, sa, power, toughness, types, removeTypes, finalColors, keywords, removeKeywords,
@@ -170,6 +170,6 @@ public class AnimateAllEffect extends AnimateEffectBase {
                 addUntilCommand(sa, unanimate);
             }
         }
-    } // animateAllResolve
+    }
 
 }
