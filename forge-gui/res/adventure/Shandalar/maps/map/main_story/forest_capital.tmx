@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="64">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="71">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -30,55 +30,20 @@
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1DsKgDAMBuB/8QEKnTP0PHoq9Up6OVezi0UwEEn/Dzq0U54FiIjemTIwZ+8ofLEGdlhLW7sAh3hHYYfz8T+D9mMM2hOveWt0Z9tAe0tlkXYo4h/9lFOnb/3HXCPWi4jqtCRg1bMl70juTinfiaheFwqTDNA=
+   eJzt1DkKgDAQBdDfuAupp8h59FTqlfRytk4vBsHAyOQ/SJFUswYgInpnisAcraOwxRrkw1rmtQtwiHUU+XA+/qfTfvROe2I1b5XubO1obylt0BkbneyQxz/6KadG39qPuXqsFxGVaQnAqmcL1pHcnZK+E1G5Ls9cDMw=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="41" template="../../obj/shop.tx" x="513" y="242">
-   <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
-   </properties>
-  </object>
   <object id="56" template="../../obj/shop.tx" x="208" y="162">
    <properties>
     <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
    </properties>
   </object>
-  <object id="57" template="../../obj/shop.tx" x="449" y="132">
-   <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
-   </properties>
-  </object>
-  <object id="43" template="../../obj/shop.tx" x="97" y="419">
-   <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
-   </properties>
-  </object>
   <object id="47" template="../../obj/inn.tx" x="199" y="419"/>
-  <object id="49" template="../../obj/shop.tx" x="466" y="417">
-   <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
-   </properties>
-  </object>
-  <object id="50" template="../../obj/shop.tx" x="450" y="309">
-   <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
-   </properties>
-  </object>
-  <object id="51" template="../../obj/shop.tx" x="530" y="390">
-   <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
-   </properties>
-  </object>
-  <object id="52" template="../../obj/shop.tx" x="256" y="194">
-   <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
-   </properties>
-  </object>
   <object id="53" template="../../obj/spellsmith.tx" x="327" y="228"/>
   <object id="55" template="../../obj/shop.tx" x="479" y="453">
    <properties>
-    <property name="shopList" value="Plains"/>
+    <property name="shopList" value="Forest"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
@@ -92,14 +57,49 @@
   <object id="61" template="../../obj/arena.tx" x="352" y="583"/>
   <object id="62" template="../../obj/shop.tx" x="361" y="370">
    <properties>
-    <property name="shopList" value="Plains"/>
+    <property name="shopList" value="GreenEquipment"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
   <object id="63" template="../../obj/shop.tx" x="216" y="290">
    <properties>
-    <property name="shopList" value="Plains"/>
+    <property name="shopList" value="GreenItems"/>
     <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/shop.tx" x="466" y="417">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/shop.tx" x="529" y="386">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/shop.tx" x="449" y="305">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/shop.tx" x="513" y="241">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/shop.tx" x="448" y="130">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/shop.tx" x="257" y="194">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/shop.tx" x="97" y="417">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
    </properties>
   </object>
  </objectgroup>

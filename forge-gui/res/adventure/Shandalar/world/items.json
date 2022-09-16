@@ -754,7 +754,7 @@
 	"commandOnUse": "teleport to poi Spawn",
 	"iconName": "ColorlessRune",
 	"questItem": true,
-	"manaNeeded": 10,
+	"manaNeeded": 1,
 	"cost": 100
 },
 {
@@ -767,7 +767,7 @@
 	"commandOnUse": "teleport to poi \"Plains Capital\"",
 	"iconName": "WhiteRune",
 	"questItem": true,
-	"manaNeeded": 10,
+	"manaNeeded": 1,
 	"cost": 100
 },
 {
@@ -780,7 +780,7 @@
 	"commandOnUse": "teleport to poi \"Swamp Capital\"",
 	"iconName": "BlackRune",
 	"questItem": true,
-	"manaNeeded": 10,
+	"manaNeeded": 1,
 	"cost": 100
 },
 {
@@ -793,7 +793,7 @@
 	"commandOnUse": "teleport to poi \"Island Capital\"",
 	"iconName": "BlueRune",
 	"questItem": true,
-	"manaNeeded": 10,
+	"manaNeeded": 1,
 	"cost": 100
 },
 {
@@ -806,7 +806,7 @@
 	"commandOnUse": "teleport to poi \"Mountain Capital\"",
 	"iconName": "RedRune",
 	"questItem": true,
-	"manaNeeded": 10,
+	"manaNeeded": 1,
 	"cost": 100
 },
 {
@@ -819,7 +819,7 @@
 	"commandOnUse": "teleport to poi \"Forest Capital\"",
 	"iconName": "GreenRune",
 	"questItem": true,
-	"manaNeeded": 10,
+	"manaNeeded": 1,
 	"cost": 100
 },
 {
@@ -833,7 +833,7 @@
 	"commandOnUse": "heal percent 0.5",
 	"iconName": "WhiteStaff",
 	"questItem": true,
-	"manaNeeded": 50,
+	"manaNeeded": 5,
 	"cost": 1000
 },
 {
@@ -847,7 +847,7 @@
 	"commandOnUse": "hide 10",
 	"iconName": "BlackStaff",
 	"questItem": true,
-	"manaNeeded": 50,
+	"manaNeeded": 5,
 	"cost": 1000
 },
 {
@@ -858,8 +858,9 @@
 	},
 	"description": "Lets you fly for some time",
 	"commandOnUse": "fly 10",
+    "iconName": "BlueStaff",
 	"questItem": true,
-	"manaNeeded": 50,
+	"manaNeeded": 5,
 	"cost": 1000
 },
 {
@@ -872,7 +873,7 @@
 	"commandOnUse": "remove enemy nearest",
 	"iconName": "RedStaff",
 	"questItem": true,
-	"manaNeeded": 50,
+	"manaNeeded": 5,
 	"cost": 1000
 },
 {
@@ -886,7 +887,7 @@
 	"commandOnUse": "sprint 10",
 	"iconName": "GreenStaff",
 	"questItem": true,
-	"manaNeeded": 50,
+	"manaNeeded": 5,
 	"cost": 1000
 }
 ]

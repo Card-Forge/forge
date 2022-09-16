@@ -69,10 +69,12 @@ public class RewardData {
     private static Iterable<PaperCard> allCards;
     private static Iterable<PaperCard> allEnemyCards;
 
-    private void initializeAllCards(){
+    static private void initializeAllCards(){
         RewardData legals = Config.instance().getConfigData().legalCards;
-        if(legals==null) allCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
-        else             allCards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(),  new CardUtil.CardPredicate(legals, true));
+        if(legals==null)
+            allCards = FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt();
+        else
+            allCards = Iterables.filter(FModel.getMagicDb().getCommonCards().getUniqueCardsNoAlt(),  new CardUtil.CardPredicate(legals, true));
         //Filter out specific cards.
         allCards = Iterables.filter(allCards,  new Predicate<PaperCard>() {
             @Override
@@ -92,7 +94,7 @@ public class RewardData {
         });
     }
 
-    public Iterable<PaperCard> getAllCards() {
+    static public Iterable<PaperCard> getAllCards() {
         if(allCards == null) initializeAllCards();
         return allCards;
     }

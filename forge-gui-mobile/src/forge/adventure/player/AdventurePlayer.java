@@ -93,8 +93,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         gold              = 0;
         maxLife           = 20;
         life              = 20;
-        maxMana           = 100;
-        mana              = 100;
+        maxMana           = 10;
+        mana              = 10;
         clearDecks();
         inventoryItems.clear();
         equippedItems.clear();

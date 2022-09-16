@@ -6,9 +6,9 @@
     "activeFile": "map/main_story/plains_capital.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
+        "map",
         "tileset",
         "obj",
-        "map",
         "map/main_story"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -1548,11 +1548,14 @@
             }
         },
         "map/forest_town.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 254.99999999999997,
-                "y": 133
+                "x": 239.66666666666666,
+                "y": 154
             }
         },
         "map/fort_1.tmx": {
@@ -2124,48 +2127,60 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 93,
-                "y": 911.3333333333333
+                "x": 239.66666666666666,
+                "y": 911.6666666666666
             }
         },
         "map/main_story/forest_capital.tmx": {
-            "scale": 2,
-            "selectedLayer": 1,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 3,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 320.25,
-                "y": 320
+                "x": 319.8333333333333,
+                "y": 319.8333333333333
             }
         },
         "map/main_story/green_castle.tmx": {
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 245.66666666666666,
-                "y": 239.66666666666666
+                "x": 239.83333333333331,
+                "y": 239.83333333333331
             }
         },
         "map/main_story/island_capital.tmx": {
-            "scale": 3,
-            "selectedLayer": 1,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 237.83333333333331,
-                "y": 227
+                "x": 319.5,
+                "y": 319.5
             }
         },
         "map/main_story/mountain_capital.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 2,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 4,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 117.66666666666663,
-                "y": 412
+                "x": 373.125,
+                "y": 216.75
             }
         },
         "map/main_story/plains_capital.tmx": {
-            "scale": 3,
-            "selectedLayer": 4,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 527.8333333333333,
-                "y": 385.66666666666663
+                "x": 410.75,
+                "y": 173.5
             }
         },
         "map/main_story/red_castle.tmx": {
@@ -2173,7 +2188,7 @@
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 239.75,
-                "y": 240
+                "y": 239.75
             }
         },
         "map/main_story/skep.tmx": {
@@ -2188,16 +2203,19 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240.9999999999999,
-                "y": 239.33333333333331
+                "x": 239.66666666666666,
+                "y": 239.66666666666669
             }
         },
         "map/main_story/swamp_capital.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 3,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 408.16666666666663,
-                "y": 257.3333333333333
+                "x": 319.8333333333333,
+                "y": 319.8333333333333
             }
         },
         "map/main_story/unbenannt.tmx": {
@@ -2220,8 +2238,8 @@
             "scale": 4,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 302.875,
-                "y": 185
+                "x": 239.875,
+                "y": 239.875
             }
         },
         "map/maze_1.tmx": {
@@ -2829,13 +2847,15 @@
         "map/main_story/final_castle.tmx",
         "map/main_story/white_castle.tmx",
         "tileset/main.tsx",
-        "tileset/buildings.tsx"
+        "tileset/buildings.tsx",
+        "map/forest_town.tmx"
     ],
     "project": "main.tiled-project",
     "property.type": "string",
     "recentFiles": [
         "map/main_story/green_castle.tmx",
         "map/main_story/red_castle.tmx",
+        "map/forest_town.tmx",
         "tileset/buildings.tsx",
         "tileset/main.tsx",
         "map/main_story/white_castle.tmx",
@@ -2844,8 +2864,7 @@
         "map/main_story/island_capital.tmx",
         "map/main_story/mountain_capital.tmx",
         "map/main_story/swamp_capital.tmx",
-        "map/main_story/forest_capital.tmx",
-        "map/main_story/plains_capital.tmx"
+        "map/main_story/forest_capital.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true

@@ -12,7 +12,7 @@
  </layer>
  <layer id="2" name="Ground" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzdmc1u00AQx4dYFFo1uTT2IcYhCKQCByRUPs4InqDwJnAnLULio6SJKB8VZy6FlymovAAtJ9QmHHJmB+/K4/Xsem2Z4DDSX7vtbta//MfeeqerLYCXzay2hFRs+ABP/Ljd1PRY6EKQzL0s1rvagkysNwBeeQAT0U6ljoW2vUQnZEzpOcP2rJm+xvkgZsC2J9SXXL0gzWaLMcM09LJzJkQ4f7WV5rpi+P400MdIcB213dgwBtKfX43s2Eibo9iwNXmmxw7pKx9t3l0/xTPqnunzBl46566eucZrx3kcvx54z+Jz8Ebobc30rhl7iXxrwrsbNdNNmU/Ma535MOaN77bQlxnrVgE+OjarsDHMK9/BCkDgV6tvK9Xx+X71PpnWNDHs1JzPNqbWOt0BWOjE/bALcK6bXf8oAvgRJT+HoZgXxv1ItN3w7/EtLAKccdBHy9jZRZ5P/R2exf13Zyl/TpX+PWwXezaRL2/OI8M7I8fwczmfvUi4+GcKjgHPCsfL9eXD4N6v5oHvotgPLsk9waXP8X0X+82h3HM+y3Zbtp9kO4zsfNz7H4657ilUd5fM+0pZ//LGioQpv3uaZ3uad+htUb4q8lskivKVye89je9pJ+kPNe8Gmqf/Mr8u8T/x7ZY8ryJf2bP0+6Y7XxnheshX1VlwHvhM7wd14Xsha5D7rfLn1gPZfpV8+9rvywrXw/eXw3ZSx+NqSlhDesDU7LjQn1/usx/clvoTmN/NnFrj2FBTdOHDz255APcbsSjrNUN9bUT6mN++zzOuyzWxZmy6hgvflNRr1Tqu+cD8bshacl9jpPXiE3INm5ccH62HTwknZRxBNtS9oWrJ3SDt45isperueR6Y+CYap+176nlDLlWL75G6MlerpvV3vY7M8Q0s/zvQPVRs1AvUb9TBixY=
+   eJzdmc1u00AQx4dYFFo1uTT2IalDEEgFDkiIFs4InqDwJnAnLULio6SJaPkQ515KX6ag8gK0nFCbcMiZHbwrj9ez67VlgsNIf62TXa9/+Y+9XU9XGgCv62ltCanY8AGe+VG7qemp0OUgHntNzHejAalYrwG88QDGop1InQpte7HOSJ/SS4btRT15jUtBxIBtV6gnubpBks0WI4Zp4KXHjIlw/EojyXXd8PtpoI+h4DppurFh9KU/v2rpvqE2RrFha/JMjx1yrHy0eXfrHM+oe6aP63vJnLt65hpvHcdx/HrgPYvPwa7Qu4rpfT3yEvluC+9WK6Y1mU/Ma5X5MGaN767QlynrTg4+2jetsDHMKt/REkDgl6tvS+Xx+X75PpnmNDHsVJzP1qfmOt8CmGtFx+0OwHInPf9JCPAjjD+HbYBOW54j2uX23+Obmwe44KA9S9/FeZ5P/R2exv13byF7TJn+PW7mezaRL2vME8OekWP4uZjNnidc/DMFx4DvCqeL1eXD4PZXs8B3RawHV+Wa4HLM8X0X682xXHMOZLst28+yHYR2Pm7/h32uawrV/QXzulLUv6y+PGHK777m2b7mHXqbl6+M/OaJvHxF8vtA43veio8Hmnd9zdN/mV+X+J/4PhZ8X0W+ou/SH+rufEWE8yFfWe+Cs8Bn2h9Uhe+VrEEeNoq/tx7J9qvkO9S+LyqcD/cvx824jsfVlLCG9Iip2XGhP7/cuZ/cpvoTmN/NjFrjyFBTdOHDc7c8gIe1SJT1pqG+NiTHmN+ezzOuyzmxZmy6hgvfhNRr1Tyu+cD8bshack9jpPXiM3INm5ccH62HTwgnZRxCOtS9oWrJnSDp44jMperuWR6Y+MYap+136nlDLlWL75K6MlerpvV3vY7M8fUt/zvQPVRs1AvUb9TxixY=
   </data>
  </layer>
  <layer id="6" name="Ground2" width="40" height="40">
@@ -92,13 +92,13 @@
   <object id="61" template="../../obj/arena.tx" x="200" y="258"/>
   <object id="62" template="../../obj/shop.tx" x="361" y="258">
    <properties>
-    <property name="shopList" value="Plains"/>
+    <property name="shopList" value="RedEquipment"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
   <object id="63" template="../../obj/shop.tx" x="409" y="259">
    <properties>
-    <property name="shopList" value="Plains"/>
+    <property name="shopList" value="RedItems"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
