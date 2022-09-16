@@ -398,7 +398,7 @@ public class CostAdjustment {
                 return Math.min(value, maxReduction);
             }
         } else {
-            final String color = staticAbility.getParamOrDefault("Cost",  staticAbility.getParam("Color"));
+            final String color = staticAbility.getParamOrDefault("Cost", staticAbility.getParam("Color"));
             int sumGeneric = 0;
             // might be problematic for wierd hybrid combinations
             for (final String cost : color.split(" ")) {
@@ -431,10 +431,6 @@ public class CostAdjustment {
             return false;
         }
         if (!st.matchesValidParam("Activator", activator)) {
-            return false;
-        }
-        if (st.hasParam("NonActivatorTurn") && (activator == null
-                || game.getPhaseHandler().isPlayerTurn(activator))) {
             return false;
         }
 

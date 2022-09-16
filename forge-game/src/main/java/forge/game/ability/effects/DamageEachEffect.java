@@ -65,7 +65,7 @@ public class DamageEachEffect extends DamageBaseEffect {
 
         FCollectionView<Card> sources = game.getCardsIn(ZoneType.Battlefield);
         if (sa.hasParam("ValidCards")) {
-            sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), card.getController(), card, sa);
+            sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), sa.getActivatingPlayer(), card, sa);
         }
 
         final List<GameObject> tgts = getTargets(sa, "DefinedPlayers");
@@ -121,7 +121,7 @@ public class DamageEachEffect extends DamageBaseEffect {
                     final int dmg = AbilityUtils.calculateAmount(source, "X", sa);
                     final Card sourceLKI = source.getGame().getChangeZoneLKIInfo(source);
 
-                    for (final Object o : sa.getHostCard().getRemembered()) {
+                    for (final Object o : card.getRemembered()) {
                         if (o instanceof Card) {
                             Card rememberedcard = (Card) o;
                             damageMap.put(sourceLKI, rememberedcard, dmg);

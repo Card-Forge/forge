@@ -1,0 +1,7 @@
+Name:Warriors of Tiamat
+ManaCost:4 R
+Types:Creature Dragon Warrior
+PT:4/2
+K:Haste
+K:Double team
+Oracle:Haste\nDouble team

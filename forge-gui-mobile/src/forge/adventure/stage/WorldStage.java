@@ -1,7 +1,7 @@
 package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.GridPoint2;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -115,6 +115,9 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     mob.setAnimation(CharacterSprite.AnimationTypes.Attack);
                     SoundSystem.instance.play(SoundEffectType.Block, false);
                     Gdx.input.vibrate(50);
+                    int duration = mob.getData().boss ? 400 : 200;
+                    if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
+                        Controllers.getCurrent().startVibration(duration,1);
                     startPause(0.8f, () -> {
                         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
                         SoundSystem.instance.play(SoundEffectType.ManaBurn, false);

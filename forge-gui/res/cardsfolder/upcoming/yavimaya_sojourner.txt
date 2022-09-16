@@ -1,0 +1,8 @@
+Name:Yavimaya Sojourner
+ManaCost:7 G
+Types:Creature Treefolk
+PT:4/6
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ Domain — This spell costs {1} less to cast for each basic land type among lands you control.
+SVar:X:Count$Domain
+AI:RemoveDeck:Random
+Oracle:Domain — This spell costs {1} less to cast for each basic land type among lands you control.

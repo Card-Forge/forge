@@ -34,6 +34,7 @@ public class RewardScene extends UIScene {
         return object;
     }
 
+    private boolean showTooltips = false;
     public enum Type {
         Shop,
         Loot
@@ -54,7 +55,7 @@ public class RewardScene extends UIScene {
         doneButton = ui.findActor("done");
     }
 
-    boolean doneClicked = false;
+    boolean doneClicked = false, shown = false;
     float flipCountDown = 1.0f;
     float exitCountDown = 0.0f; //Serves as additional check for when scene is exiting, so you can't double tap too fast.
 
@@ -144,11 +145,91 @@ public class RewardScene extends UIScene {
         if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
             done();
         }
+        if (keycode == Input.Keys.BUTTON_B || keycode == Input.Keys.BUTTON_START)
+            showLootOrDone();
+        else if (keycode == Input.Keys.BUTTON_A)
+            performTouch(selectedActor);
+        else if (keycode == Input.Keys.DPAD_RIGHT) {
+            hideTooltips();
+            selectNextActor(false);
+            if (selectedActor != null && Type.Loot == type) {
+                selectedActor.fire(eventEnter);
+            }
+            showHideTooltips();
+        } else if (keycode == Input.Keys.DPAD_LEFT) {
+            hideTooltips();
+            selectPreviousActor(false);
+            if (selectedActor != null && Type.Loot == type) {
+                selectedActor.fire(eventEnter);
+            }
+            showHideTooltips();
+        } else if (keycode == Input.Keys.BUTTON_Y) {
+            showTooltips = !showTooltips;
+            showHideTooltips();
+        }
         return true;
+    }
+    private void showHideTooltips() {
+        if (selectedActor instanceof RewardActor) {
+            if (showTooltips) {
+                if (((RewardActor) selectedActor).isFlipped())
+                    ((RewardActor) selectedActor).showTooltip();
+            } else {
+                ((RewardActor) selectedActor).hideTooltip();
+            }
+        } else if (selectedActor instanceof BuyButton) {
+            if (showTooltips)
+                ((BuyButton) selectedActor).reward.showTooltip();
+            else
+                ((BuyButton) selectedActor).reward.hideTooltip();
+        }
+    }
+    private void hideTooltips() {
+        if (selectedActor instanceof RewardActor) {
+            ((RewardActor) selectedActor).hideTooltip();
+        } else if (selectedActor instanceof BuyButton) {
+            ((BuyButton) selectedActor).reward.hideTooltip();
+        }
+    }
+    private void showLootOrDone() {
+        boolean exit = true;
+        for (Actor actor : new Array.ArrayIterator<>(generated)) {
+            if (!(actor instanceof RewardActor)) {
+                continue;
+            }
+            RewardActor reward = (RewardActor) actor;
+            if (!reward.isFlipped()) {
+                exit = false;
+                break;
+            }
+        }
+        if (exit)
+            performTouch(doneButton);
+        else if (type == Type.Loot && !shown) {
+            shown = true;
+            for (Actor actor : new Array.ArrayIterator<>(generated)) {
+                if (!(actor instanceof RewardActor)) {
+                    continue;
+                }
+                RewardActor reward = (RewardActor) actor;
+                AdventurePlayer.current().addReward(reward.getReward());
+                if (!reward.isFlipped()) {
+                    Timer.schedule(new Timer.Task() {
+                        @Override
+                        public void run() {
+                            reward.flip();
+                        }
+                    }, 0.09f);
+                }
+            }
+        } else {
+            performTouch(doneButton);
+        }
     }
 
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor) {
+        clearActorObjects();
         this.type   = type;
         doneClicked = false;
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
@@ -283,7 +364,10 @@ public class RewardScene extends UIScene {
                 generated.add(buyCardButton);
                 if (!skipCard) {
                     stage.addActor(buyCardButton);
+                    addActorObject(buyCardButton);
                 }
+            } else {
+                addActorObject(actor);
             }
             generated.add(actor);
             if (!skipCard) {

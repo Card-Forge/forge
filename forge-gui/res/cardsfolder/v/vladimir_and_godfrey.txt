@@ -9,4 +9,4 @@ SVar:SacMe:3
 SVar:DiscardMe:3
 DeckHas:Ability$Graveyard
 AI:RemoveDeck:Random
-Oracle:Rejuvenation – {2}{W}: Return Vladimir and Godfrey from your graveyard to the battlefield tapped. It perpetually gets +1/+1. Activate only if you control a 1/1 creature.
+Oracle:Rejuvenation — {2}{W}: Return Vladimir and Godfrey from your graveyard to the battlefield tapped. It perpetually gets +1/+1. Activate only if you control a 1/1 creature.

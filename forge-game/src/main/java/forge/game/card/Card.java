@@ -212,6 +212,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean foretoldThisTurn;
     private boolean foretoldByEffect;
 
+    private boolean specialized;
+
     private int timesCrewedThisTurn = 0;
 
     private int classLevel = 1;
@@ -239,6 +241,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // for Vanguard / Manapool / Emblems etc.
     private boolean isImmutable = false;
     private boolean isEmblem = false;
+    private boolean isBoon = false;
 
     private int exertThisTurn = 0;
     private PlayerCollection exertedByPlayer = new PlayerCollection();
@@ -335,6 +338,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private ReplacementEffect shieldCounterReplaceDamage = null;
     private ReplacementEffect shieldCounterReplaceDestroy = null;
     private ReplacementEffect stunCounterReplaceUntap = null;
+
+    private Integer readAhead = null;
 
     // Enumeration for CMC request types
     public enum SplitCMCMode {
@@ -661,6 +666,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         } else if (mode.equals("Meld") && isMeldable()) {
             return changeToState(CardStateName.Meld);
+        } else if (mode.equals("Specialize") && canSpecialize()) {
+            if (customState.equalsIgnoreCase("white")) {
+                return changeToState(CardStateName.SpecializeW);
+            } else if (customState.equalsIgnoreCase("blue")) {
+                return changeToState(CardStateName.SpecializeU);
+            } else if (customState.equalsIgnoreCase("black")) {
+                return changeToState(CardStateName.SpecializeB);
+            } else if (customState.equalsIgnoreCase("red")) {
+                return changeToState(CardStateName.SpecializeR);
+            } else if (customState.equalsIgnoreCase("green")) {
+                return changeToState(CardStateName.SpecializeG);
+            }
+        } else if (mode.equals("Unspecialize") && isSpecialized()) {
+            return changeToState(CardStateName.Original);
         }
         return false;
     }
@@ -1370,6 +1389,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean hasDoubleStrike() {
         return hasKeyword(Keyword.DOUBLE_STRIKE);
     }
+    
+    public final boolean hasDoubleTeam() {
+        return hasKeyword(Keyword.DOUBLE_TEAM);
+    }
 
     public final boolean hasSecondStrike() {
         return hasDoubleStrike() || !hasFirstStrike();
@@ -1389,7 +1412,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     @Override
-    public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table) {
+    public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
         int addAmount = n;
         if (addAmount <= 0 || !canReceiveCounters(counterType)) {
             // As per rule 107.1b
@@ -1423,6 +1446,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(this);
             runParams.put(AbilityKey.Source, source);
             runParams.put(AbilityKey.CounterType, counterType);
+            if (params != null) {
+                runParams.putAll(params);
+            }
             for (int i = 0; i < addAmount; i++) {
                 runParams.put(AbilityKey.CounterAmount, oldValue + i + 1);
                 getGame().getTriggerHandler().runTrigger(
@@ -2093,12 +2119,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append("Trample over planeswalkers").append(" (").append(inst.getReminderText()).append(")").append("\r\n");
                 } else if (keyword.startsWith("Hexproof:")) {
                     final String[] k = keyword.split(":");
-                    sbLong.append("Hexproof from ");
-                    if (k[2].equals("chosen")) {
-                        k[2] = k[1].substring(5).toLowerCase();
+                    if(!k[2].equals("Secondary")) {
+                        sbLong.append("Hexproof from ");
+                        if (k[2].equals("chosen")) {
+                            k[2] = k[1].substring(5).toLowerCase();
+                        }
+                        sbLong.append(k[2]);
+                        if (!k[2].contains(" and ")) { // skip reminder text for more complicated Hexproofs
+                            sbLong.append(" (").append(inst.getReminderText().replace("chosen", k[2]));
+                            sbLong.append(")");
+                        }
+                        sbLong.append("\r\n");
                     }
-                    sbLong.append(k[2]).append(" (").append(inst.getReminderText().replace("chosen", k[2]))
-                            .append(")").append("\r\n");
                 } else if (inst.getKeyword().equals(Keyword.COMPANION)) {
                     sbLong.append("Companion — ");
                     sbLong.append(((Companion)inst).getDescription());
@@ -2117,6 +2149,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
                         || keyword.equals("Changeling") || keyword.equals("Delve") || keyword.equals("Decayed")
                         || keyword.equals("Split second") || keyword.equals("Sunburst")
+                        || keyword.equals("Double team")
                         || keyword.equals("Suspend") // for the ones without amount
                         || keyword.equals("Foretell") // for the ones without cost
                         || keyword.equals("Ascend") || keyword.equals("Totem armor")
@@ -2217,11 +2250,12 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Embalm") || keyword.startsWith("Level up") || keyword.equals("Prowess")
                         || keyword.startsWith("Eternalize") || keyword.startsWith("Reinforce")
                         || keyword.startsWith("Champion") || keyword.startsWith("Prowl") || keyword.startsWith("Adapt")
-                        || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Saga")
+                        || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Saga") || keyword.startsWith("Read ahead")
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
-                        || keyword.startsWith("Class") || keyword.startsWith("Blitz")) {
+                        || keyword.startsWith("Class") || keyword.startsWith("Blitz")
+                        || keyword.startsWith("Specialize")) {
                     // keyword parsing takes care of adding a proper description
                 } else if (keyword.equals("Unblockable")) {
                     sbLong.append(getName()).append(" can't be blocked.\r\n");
@@ -2242,7 +2276,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         keyword = keyword.replace("Strike", "strike");
                     }
                     sb.append(i !=0 && sb.length() !=0 ? ", " : "");
-                    sb.append(i > 0 && sb.length() !=0 ? keyword.toLowerCase() : keyword);
+                    sb.append(i > 0 && sb.length() !=0 ? StringUtils.uncapitalize(keyword) : keyword);
                 }
                 if (sbLong.length() > 0) {
                     sbLong.append("\r\n");
@@ -3980,6 +4014,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final CardStateName getFaceupCardStateName() {
         if (isFlipped() && hasState(CardStateName.Flipped)) {
             return CardStateName.Flipped;
+        } else if (isSpecialized()) {
+            return getCurrentStateName();
         } else if (backside && hasBackSide()) {
             CardStateName stateName = getRules().getSplitType().getChangedStateName();
             if (hasState(stateName)) {
@@ -4501,7 +4537,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         return result;
     }
-    
+
     public final void addKeywordForStaticAbility(KeywordInterface kw) {
         if (kw.getStaticId() > 0) {
             storedKeywords.put(kw.getStaticId(), kw.getOriginal(), kw);
@@ -5185,6 +5221,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isEmblem() {
         return isEmblem;
     }
+    public final void setBoon(final boolean isBoon0) {
+        isBoon = isBoon0;
+        view.updateBoon(this);
+    }
+
+    public final boolean isBoon() {
+        return isBoon;
+    }
+
     public final void setEmblem(final boolean isEmblem0) {
         isEmblem = isEmblem0;
         view.updateEmblem(this);
@@ -5728,6 +5773,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
     public void resetForetoldThisTurn() {
         foretoldThisTurn = false;
+    }
+
+    public boolean isSpecialized() {
+        return specialized;
+    }
+    public final void setSpecialized(final boolean bool) {
+        specialized = bool;
+    }
+    public final boolean canSpecialize() {
+        return getRules() != null && getRules().getSplitType() == CardSplitType.Specialize;
     }
 
     public int getTimesCrewedThisTurn() {
@@ -7102,5 +7157,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             return true;
         }
         return StaticAbilityIgnoreLegendRule.ignoreLegendRule(this);
+    }
+
+    public Integer getReadAhead() {
+        return readAhead;
+    }
+    public void setReadAhead(int value) {
+        readAhead = value;
+    }
+
+    public boolean attackVigilance() {
+        return StaticAbilityAttackVigilance.attackVigilance(this);
     }
 }

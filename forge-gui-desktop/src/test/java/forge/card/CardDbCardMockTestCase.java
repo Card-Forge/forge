@@ -48,7 +48,8 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
 
     // Get Card From Editions Test fixtures
     protected final String originalArtShivanDragonEdition = "LEA";
-    protected final String latestArtShivanDragonEdition = "M20";
+    protected final String latestArtShivanDragonEdition = "P30H";
+    protected final String latestArtShivanDragonEditionNoPromo = "M20";
 
     protected final String originalArtLightningDragonEdition = "USG";
     protected final String originalArtLightningDragonEditionNoPromo = "USG";
@@ -56,8 +57,8 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     protected final String latestArtLightningDragonEdition = "VMA";
     protected final String latestArtLightningDragonEditionNoPromo = "USG";
 
-    protected final String latestArtHymnToTourachEdition = "EMA";
-    protected final String latestArtHymnToTourachEditionNoPromo = "EMA";
+    protected final String latestArtHymnToTourachEdition = "PLIST";
+    protected final String latestArtHymnToTourachEditionNoPromo = "PLIST";
     protected final String originalArtHymnToTourachEdition = "FEM";
     protected final String originalArtHymnToTourachEditionNoPromo = "FEM";
 
@@ -423,7 +424,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
 
         sdCard = this.cardDb.getCardFromEditions(cardNameShivanDragon, frame);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), latestArtShivanDragonEdition);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEditionNoPromo);
 
         ldCard = this.cardDb.getCardFromEditions(cardNameLightningDragon, frame);
         assertEquals(ldCard.getName(), cardNameLightningDragon);
@@ -653,7 +654,8 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
             nullCard = this.cardDb.getCardFromEditions(null, preference);
             assertNull(nullCard);
 
-            shivanNotExistingDragon = this.cardDb.getCardFromEditions(cardNameShivanDragon, preference, 2);
+            //P30H Shivan Dragon had 2 treatments, so bumped artIndex to 3
+            shivanNotExistingDragon = this.cardDb.getCardFromEditions(cardNameShivanDragon, preference, 3);
             assertNull(shivanNotExistingDragon);
 
             nullCard = this.cardDb.getCardFromEditions(cardNameHymnToTourach, preference, 5);
@@ -1138,7 +1140,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         sdCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, artPreference,
                 tenthEditionReleaseDate);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), latestArtShivanDragonEdition);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEditionNoPromo);
 
         // foiled card request
         ldFoilCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameFoilLightningDragon, artPreference,
@@ -1259,7 +1261,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         sdCard = this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, artPreference, 1,
                 tenthEditionReleaseDate);
         assertEquals(sdCard.getName(), cardNameShivanDragon);
-        assertEquals(sdCard.getEdition(), latestArtShivanDragonEdition);
+        assertEquals(sdCard.getEdition(), latestArtShivanDragonEditionNoPromo);
         assertEquals(sdCard.getArtIndex(), 1);
 
         // foiled card request
@@ -1747,22 +1749,24 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         assertEquals(shivanDragon.getName(), cardNameShivanDragon);
         assertEquals(shivanDragon.getEdition(), latestArtShivanDragonEdition);
 
-        Date alphaRelaseDate = null;
+        Date alphaReleaseDate = null;
         Date currentDate = Date.from(Instant.now());
-        Date latestShivanDragonReleaseDateToDate = null; // latest print to date for Shivan is in M20
+        Date latestShivanDragonReleaseDateToDate = null; // latest print to date for Shivan is in P30H
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            alphaRelaseDate = format.parse(alphaEditionReleaseDate);
-            latestShivanDragonReleaseDateToDate = format.parse("2019-07-12");
+            alphaReleaseDate = format.parse(alphaEditionReleaseDate);
+            latestShivanDragonReleaseDateToDate = format.parse("2022-09-09");
         } catch (ParseException e) {
             e.printStackTrace();
             fail();
         }
 
-        assertNull(this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, alphaRelaseDate));
-        assertNull(this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, currentDate));
+        assertNull(this.cardDb.getCardFromEditionsReleasedBefore(cardNameShivanDragon, alphaReleaseDate));
         assertNull(this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon,
                 latestShivanDragonReleaseDateToDate));
+        if (currentDate.after(latestShivanDragonReleaseDateToDate)) {
+            assertNull(this.cardDb.getCardFromEditionsReleasedAfter(cardNameShivanDragon, currentDate));
+        }
     }
 
     @Test

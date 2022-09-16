@@ -25,10 +25,122 @@ public class SettingsScene extends UIScene {
     Texture Background;
     private Table settingGroup;
     TextButton back;
+    ScrollPane scrollPane;
 
     private SettingsScene() {
-
         super(Forge.isLandscapeMode() ? "ui/settings.json" : "ui/settings_portrait.json");
+    }
+
+
+    @Override
+    public void dispose() {
+        if (stage != null)
+            stage.dispose();
+    }
+
+    public void renderAct(float delta) {
+        Gdx.gl.glClearColor(1, 0, 1, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.getBatch().begin();
+        stage.getBatch().disableBlending();
+        stage.getBatch().draw(Background, 0, 0, getIntendedWidth(), getIntendedHeight());
+        stage.getBatch().enableBlending();
+        stage.getBatch().end();
+        stage.act(delta);
+        stage.draw();
+    }
+
+    @Override
+    public boolean keyPressed(int keycode) {
+        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
+            back();
+        }
+        if (keycode == Input.Keys.BUTTON_B)
+            performTouch(back);
+        else if (keycode == Input.Keys.BUTTON_L1) {
+            scrollPane.fling(1f, 0, -300);
+        } else if (keycode == Input.Keys.BUTTON_R1) {
+            scrollPane.fling(1f, 0, +300);
+        }
+        return true;
+    }
+
+    public boolean back() {
+        Forge.switchToLast();
+        return true;
+    }
+
+    private void addInputField(String name, ForgePreferences.FPref pref) {
+        TextField box = Controls.newTextField("");
+        box.setText(Preference.getPref(pref));
+        box.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Preference.setPref(pref, ((TextField) actor).getText());
+                Preference.save();
+            }
+        });
+
+        addLabel(name);
+        settingGroup.add(box).align(Align.right);
+    }
+
+    private void addCheckBox(String name, ForgePreferences.FPref pref) {
+        CheckBox box = Controls.newCheckBox("");
+        box.setChecked(Preference.getPrefBoolean(pref));
+        box.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Preference.setPref(pref, ((CheckBox) actor).isChecked());
+                Preference.save();
+            }
+        });
+
+        addLabel(name);
+        settingGroup.add(box).align(Align.right);
+    }
+
+    private void addSettingSlider(String name, ForgePreferences.FPref pref, int min, int max) {
+        Slider slide = Controls.newSlider(min, max, 1, false);
+        slide.setValue(Preference.getPrefInt(pref));
+        slide.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Preference.setPref(pref, String.valueOf((int) ((Slider) actor).getValue()));
+                Preference.save();
+            }
+        });
+        addLabel(name);
+        settingGroup.add(slide).align(Align.right);
+    }
+
+    private void addSettingField(String name, boolean value, ChangeListener change) {
+        CheckBox box = Controls.newCheckBox("");
+        box.setChecked(value);
+        box.addListener(change);
+        addLabel(name);
+        settingGroup.add(box).align(Align.right);
+    }
+
+    private void addSettingField(String name, int value, ChangeListener change) {
+        TextField text = Controls.newTextField(String.valueOf(value));
+        text.setTextFieldFilter((textField, c) -> Character.isDigit(c));
+        text.addListener(change);
+        addLabel(name);
+        settingGroup.add(text).align(Align.right);
+    }
+
+    void addLabel(String name) {
+        Label label = Controls.newLabel(name);
+        label.setWrap(true);
+        settingGroup.row().space(5);
+        int w = Forge.isLandscapeMode() ? 160 : 80;
+        settingGroup.add(label).align(Align.left).pad(2, 2, 2, 5).width(w).expand();
+    }
+
+    @Override
+    public void resLoaded() {
+        super.resLoaded();
         settingGroup = new Table();
         if (Preference == null) {
             Preference = new ForgePreferences();

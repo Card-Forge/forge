@@ -458,14 +458,14 @@ public class Player extends GameEntity implements Comparable<Player> {
         return isOpponentOf(otherPlayer);
     }
 
-    public final boolean setLife(final int newLife, final Card source) {
+    public final boolean setLife(final int newLife, final SpellAbility sa) {
         boolean change = false;
         // rule 119.5
         if (life > newLife) {
             change = loseLife(life - newLife, false, false) > 0;
         }
         else if (newLife > life) {
-            change = gainLife(newLife - life, source);
+            change = gainLife(newLife - life, sa == null ? null : sa.getHostCard(), sa);
         }
         else { // life == newLife
             change = false;
@@ -487,9 +487,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return life;
     }
 
-    public final boolean gainLife(int lifeGain, final Card source) {
-        return gainLife(lifeGain, source, null);
-    }
     public final boolean gainLife(int lifeGain, final Card source, final SpellAbility sa) {
         if (!canGainLife()) {
             return false;
@@ -498,7 +495,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         // Run any applicable replacement effects.
         final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(this);
         repParams.put(AbilityKey.LifeGained, lifeGain);
-        repParams.put(AbilityKey.Source, source);
+        repParams.put(AbilityKey.SourceSA, sa);
 
         switch (getGame().getReplacementHandler().run(ReplacementType.GainLife, repParams)) {
         case NotReplaced:
@@ -835,7 +832,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         return true;
     }
 
-    public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table) {
+    @Override
+    public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
         int addAmount = n;
         if (addAmount <= 0 || !canReceiveCounters(counterType)) {
             // As per rule 107.1b
@@ -849,6 +847,9 @@ public class Player extends GameEntity implements Comparable<Player> {
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.Source, source);
         runParams.put(AbilityKey.CounterType, counterType);
+        if (params != null) {
+            runParams.putAll(params);
+        }
         for (int i = 0; i < addAmount; i++) {
             runParams.put(AbilityKey.CounterAmount, oldValue + i + 1);
             getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, AbilityKey.newMap(runParams), false);
@@ -1604,9 +1605,8 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         // MilledAll trigger
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
         runParams.put(AbilityKey.Cards, milled);
-        runParams.put(AbilityKey.Player, this);
         game.getTriggerHandler().runTrigger(TriggerType.MilledAll, runParams, false);
 
         return milled;

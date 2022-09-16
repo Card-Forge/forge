@@ -48,6 +48,7 @@ Brainiac:Brainiacs
 Bringer:Bringers
 Brushwagg:Brushwaggs
 Camarid:Camarids
+C'tan:C'tan
 Camel:Camels
 Caribou:Caribous
 Carrier:Carriers
@@ -132,6 +133,7 @@ Illusion:Illusions
 Imp:Imps
 Incarnation:Incarnations
 Inkling:Inklings
+Inquisitor:Inquisitors
 Insect:Insects
 Jackal:Jackals
 Jellyfish:Jellyfishes
@@ -173,6 +175,7 @@ Myr:Myrs
 Mystic:Mystics
 Naga:Nagas
 Nautilus:Nautili
+Necron:Necrons
 Nephilim:Nephilims
 Nightmare:Nightmares
 Nightstalker:Nightstalkers
@@ -204,6 +207,7 @@ Pincher:Pinchers
 Pirate:Pirates
 Plant:Plants
 Praetor:Praetors
+Primarch:Primarchs
 Prism:Prisms
 Processor:Processors
 Rabbit:Rabbits
@@ -268,6 +272,7 @@ Trilobite:Trilobites
 Triskelavite:Triskelavites
 Troll:Trolls
 Turtle:Turtles
+Tyranid:Tyranids
 Unicorn:Unicorns
 Vampire:Vampires
 Vedalken:Vedalkens

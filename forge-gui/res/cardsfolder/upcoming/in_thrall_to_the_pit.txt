@@ -1,0 +1,10 @@
+Name:In Thrall to the Pit
+ManaCost:3 R
+Types:Sorcery
+K:Kicker:2 B
+A:SP$ GainControl | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DelTrig | SpellDescription$ Gain control of target creature until end of turn. Untap it. It gains haste until end of turn. If this spell was kicked, sacrifice that creature at the beginning of the next end step.
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Condition$ Kicked | Execute$ TrigSac | RememberObjects$ Targeted | TriggerDescription$ If this spell was kicked, sacrifice that creature at the beginning of the next end step.
+SVar:TrigSac:DB$ SacrificeAll | Defined$ DelayTriggerRememberedLKI | Controller$ You
+DeckHas:Ability$Sacrifice
+DeckHints:Color$Black
+Oracle:Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)\nGain control of target creature until end of turn. Untap that creature. It gains haste until end of turn. If this spell was kicked, sacrifice that creature at the beginning of the next end step.

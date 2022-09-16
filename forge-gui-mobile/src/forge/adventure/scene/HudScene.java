@@ -5,7 +5,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
-import forge.adventure.stage.IAfterMatch;
 
 /**
  * Hud base scene
@@ -55,7 +54,11 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
 
     @Override
     public boolean keyDown(int keycode) {
-
+        if (Forge.hasGamepad()) {
+            if (MapStage.getInstance().isDialogOnlyInput()) {
+                return MapStage.getInstance().buttonPress(keycode);
+            }
+        }
         if (hud.keyDown(keycode))
             return true;
         if(isInHudOnlyMode())

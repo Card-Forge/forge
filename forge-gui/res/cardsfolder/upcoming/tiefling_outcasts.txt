@@ -1,0 +1,8 @@
+Name:Tiefling Outcasts
+ManaCost:R
+Types:Creature Tiefling Peasant
+PT:1/1
+K:Double team
+S:Mode$ Continuous | Affected$ Demon.Other+YouCtrl,Devil.Other+YouCtrl,Imp.Other+YouCtrl,Tiefling.Other+YouCtrl | AddPower$ 1 | Description$ Other Demons, Devils, Imps, and Tieflings you control get +1/+0.
+DeckHints:Type$Demon|Devil|Imp|Tiefling
+Oracle:Double team\nOther Demons, Devils, Imps, and Tieflings you control get +1/+0.

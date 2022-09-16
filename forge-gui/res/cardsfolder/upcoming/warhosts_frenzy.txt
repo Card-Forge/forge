@@ -1,0 +1,10 @@
+Name:Warhost's Frenzy
+ManaCost:2 R
+Types:Instant
+K:Kicker:B
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 2 | SubAbility$ DBEffect | SpellDescription$ Creatures you control get +2/+0 until end of turn. If this spell was kicked, whenever a creature you control dies this turn, draw a card.
+SVar:DBEffect:DB$ Effect | Triggers$ TrigDies | Condition$ Kicked
+SVar:TrigDies:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | Execute$ TrigDraw | TriggerDescription$ Whenever a creature you control dies this turn, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Color$Black
+Oracle:Kicker {B} (You may pay an additional {B} as you cast this spell.)\nCreatures you control get +2/+0 until end of turn. If this spell was kicked, whenever a creature you control dies this turn, draw a card.

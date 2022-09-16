@@ -1,0 +1,7 @@
+Name:Biophagus
+ManaCost:1 G
+Types:Creature Human Tyranid Wizard
+PT:1/3
+A:AB$ Mana | Cost$ T | Produced$ Any | PrecostDesc$ Genomic Enhancement — | AddsCounters$ Card.Creature_P1P1_1 | SpellDescription$ Add one mana of any color. If this mana is spent to cast a creature spell, that creature enters the battlefield with an additional +1/+1 counter on it.
+DeckHas:Ability$Counters
+Oracle:Genomic Enhancement — {T}: Add one mana of any color. If this mana is spent to cast a creature spell, that creature enters the battlefield with an additional +1/+1 counter on it.

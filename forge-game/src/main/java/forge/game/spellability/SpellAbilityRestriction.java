@@ -570,7 +570,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             System.out.println(c.getName() + " Did not have activator set in SpellAbilityRestriction.canPlay()");
         }
 
-        if (!StaticAbilityCastWithFlash.anyWithFlashNeedsTargeting(sa, c, activator)) {
+        if (!StaticAbilityCastWithFlash.anyWithFlashNeedsInfo(sa, c, activator)) {
             if (!sa.canCastTiming(c, activator)) {
                 return false;
             }

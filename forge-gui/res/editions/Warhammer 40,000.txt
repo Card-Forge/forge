@@ -6,12 +6,228 @@ Type=Commander
 ScryfallCode=40K
 
 [cards]
+1 M Szarekh, the Silent King @Anton Solovianchyk
 2 M Abaddon the Despoiler @Johan Grenier
+3 M Inquisitor Greyfax @Lie Setiawan
+4 M The Swarmlord @Antonio José Manzanedo
+5 M Imotekh the Stormlord @JB Casacop
+6 M Be'lakor, the Dark Master @Daarken
+7 M Magus Lucea Kane @Bartek Fedyczak
+8 M Marneus Calgar @Slawomir Maniak
+21 U Genestealer Locus @Diego Gisbert
+22 R Genestealer Patriarch @Games Workshop
+23 U Heralds of Tzeentch @Games Workshop
+24 R Lord of Change @Games Workshop
 27 R Vanguard Suppressor @Fajareka Setiawan
+28 R Anrakyr the Traveller @Games Workshop
+30 R Biotransference @Anthony Devine
+31 R Blight Grenade @Alexey Kruglov
+32 R Chronomancer @Alexey Kruglov
+33 R Cryptek @David Álvarez
+34 U Flayed One @David Sondered
+35 R Great Unclean One @Helge C. Balzer
+36 U Hexmark Destroyer @Wonchun Choi
+37 R Illuminor Szeras @Darren Tan
+38 R Lokhust Heavy Destroyer @Adrián Rodríguez Pérez
+39 R Lychguard @Games Workshop
+40 R Mandate of Abaddon @Games Workshop
+41 R Mortarion, Daemon Primarch @Helge C. Balzer
+42 R Necron Deathmark @Games Workshop
+43 R Necron Overlord @David Sondered
+44 R Nurgle's Conscription @Ørjan Ruttenborg Svendsen
+45 U Nurgle's Rot @Roman Tishenin
+46 R Out of the Tombs @Games Workshop
+47 R Plague Drone @Games Workshop
+48 U Plasmancer @Bartek Fedyczak
+49 R Poxwalkers @Games Workshop
+51 U Psychomancer @Alex Konstad
+52 R Royal Warden @Artur Nakhodkin
+54 U Sautekh Immortal @Games Workshop
+55 R Shard of the Nightbringer
+56 R Shard of the Void Dragon @Alex Konstad
+57 U Skorpekh Destroyer @Games Workshop
+58 R Skorpekh Lord @Adrián Rodríguez Pérez
+59 R Sloppity Bilepiper @Ørjan Ruttenborg Svendsen
+60 R Tallyman of Nurgle @Games Workshop
+61 R Technomancer @David Álvarez
+62 R Their Name Is Death @Evan Shipard
+63 R Their Number Is Legion @Games Workshop
+64 R Tomb Blade @Darren Tan
+65 R Trazyn the Infinitea @Michał Makowski
+66 U Triarch Praetorian @Lucas Terryn
+67 R Triarch Stalker @JB Casacop
+68 R Venomcrawler @Ivan Dedov
+69 R The War in Heaven @Darren Tan
+70 U Acolyte Hybrid @Slawomir Maniak
+71 R Aspiring Champion @Miguel Sacristan
+72 U Bloodcrusher of Khorne @Games Workshop
+73 R Bloodthirster @Games Workshop
+74 U Chaos Terminator Lord @Games Workshop
+75 R Dark Apostle @Games Workshop
+76 R Exocrine @Cory Trego-Erdner
+77 U Herald of Slaanesh @Alexander Mokhov
+78 R Keeper of Secrets @Miguel Sacristan
+79 R Khârn the Betrayer @Kekai Kotaki
+80 R Knight Rampager @Games Workshop
+81 R Let the Galaxy Burn @Evan Shipard
+82 U Noise Marine @Johan Grenier
+83 R The Red Terror @Bryan Sola
+84 R Screamer-Killer @David Auden Nash
+85 U Seeker of Slaanesh @Games Workshop
+86 U Aberrant @Games Workshop
+87 R Biophagus @Teodora Dumitriu
+88 R Bone Sabres @David Auden Nash
+89 R Broodlord @Mathias Kollros
+90 R Clamavus @Adrián Rodríguez Pérez
+91 R Haruspex @Helge C. Balzer
+92 R Hierophant Bio-Titan @David Astruga
+93 R Hormagaunt Horde @Nikola Matkovic
+94 R Lictor @Games Workshop
+95 R Nexos @Josu Hernaiz
+96 R Old One Eye @Mathias Kollros
+97 U Purestrain Genestealer @Games Workshop
+98 R Sporocyst @Fajareka Setiawan
+99 R Termagant Swarm @Nikola Matkovic
+100 R Tervigon @Xavier Ribeiro
+101 R Toxicrene @Logan Feliciano
+102 U Tyranid Invasion @Games Workshop
+103 R Tyrant Guard @Xavier Ribeiro
+105 R Atalan Jackal @David Astruga
 108 R Blood for the Blood God! @Artur Nakhodkin
+110 R Chaos Defiler @Games Workshop
+111 R Chaos Mutation @Lie Setiawan
+115 R Deathleaper, Terror Weapon @Mirko Failoni
+117 R Drach'Nyen @Artur Nakhodkin
+119 R Exalted Flamer of Tzeentch @Alexey Kruglov
+121 R The First Tyrannic War @Antonio José Manzanedo
+123 R Gargoyle Flock @Nikola Matkovic
+124 R Ghyrson Starn, Kelermorph @Aaron J. Riley
+125 R Helbrute @Anton Solovianchyk
+126 R The Horus Heresy @Roman Tishenin
+128 R Kill! Maim! Burn! @Anthony Devine
+129 U The Lost and the Damned @Henry Peters
+130 R Lucius the Eternal @Evan Shipard
+131 R Magnus the Red @Wonchun Choi
+132 R Malanthrope @Ørjan Ruttenborg Svendsen
+133 R Mawloc @Mathias Kollros
+134 R Mutalith Vortex Beast @Kekai Kotaki
+136 R Pink Horror @Games Workshop
+138 R Ravener @Xavier Ribeiro
+139 R The Ruinous Powers @Lie Setiawan
+140 R Shadow in the Warp @Kim Sokol
+143 U Trygon Prime @Mathias Kollros
+144 R Tyranid Harridan @Billy Christian
+145 R Tyranid Prime @Mathias Kollros
+146 R Tzaangor Shaman @Wisnu Tan
+147 U Venomthrope @Antonio José Manzanedo
+148 R Winged Hive Tyrant @Antonio José Manzanedo
+149 R Zoanthrope @Billy Christian
+150 R Canoptek Scarab Swarm @Alexey Kruglov
+151 R Canoptek Spyder @Wisnu Tan
+152 R Canoptek Tomb Sentinel @Ivan Dedov
+153 R Canoptek Wraith
+154 R Convergence of Dominion @David Álvarez
+155 R Cryptothrall @Henry Peters
+156 R Ghost Ark @Alexey Kruglov
+158 U Goliath Truck @Diego Gisbert
+161 R Necron Monolith @Anthony Devine
+162 U Night Scythe @Calder Moore
+165 R Resurrection Orb @Hector Ortiz
+166 R Sceptre of Eternal Glory @Michał Makowski
+168 R Tomb Fortress @Josu Solano
 171 M Abaddon the Despoiler @Johan Grenier
 181 R Fabricate @Johan Grenier
+191 U Aetherize @Xavier Ribeiro
+192 C Brainstorm @Alex Konstad
+195 U Bile Blight @Games Workshop
+196 C Dark Ritual @Wonchun Choi
+197 C Darkness @Daarken
+198 R Decree of Pain @Evan Shipard
+199 U Defile @Stanton Feng
+200 U Dread Return @L J Koh
+202 R Living Death @L J Koh
+203 R Mutilate @Games Workshop
+204 R Blasphemous Act @Games Workshop
+205 R Chaos Warp @Heonhwa Choe
+206 M Past in Flames @Johannes Mücke
+207 R Reverberate @David Astruga
+208 R Starstorm @Zhillustrator
+209 R Warstorm Surge @Josu Solano
+210 R Abundance @Irina Nordsol
+211 C Cultivate @Slawomir Maniak
+212 R Death's Presence @Josu Hernaiz
+213 C Explore @Games Workshop
+214 C Farseek @Irina Nordsol
+215 R Hardened Scales @Mathias Kollros
+216 C Harrow @Filipe Pagliuso
+217 U Inspiring Call @Irina Nordsol
+218 C New Horizons
+219 C Overgrowth @Marina Ortega Lorente
+220 C Rampant Growth @Cory Trego-Erdner
+221 U Bituminous Blast @JB Casacop
+222 U Bred for the Hunt @David Astruga
+223 C Deny Reality @Artur Nakhodkin
+224 U Hull Breach @Sergio Cosmai
+227 C Arcane Signet @David Astruga
+228 C Arcane Signet @Andrey Nyarl
+229 C Arcane Signet @Kim Sokol
+230 U Assault Suit @Games Workshop
+231 R Caged Sun @Johan Grenier
+232 R Chromatic Lantern @Anton Solovianchyk
+235 C Commander's Sphere @Roman Tishenin
+236 U Cranial Plating @L J Koh
+237 R Endless Atlas
+239 R Gilded Lotus @Roman Tishenin
+241 U Herald's Horn @Artur Nakhodkin
+242 R Icon of Ancestry @Ivan Dedov
+245 U Mind Stone @David Sondered
+246 R Mystic Forge @Rafater
 249 U Sol Ring @Teodora Dumitriu
 250 U Sol Ring @Kekai Kotaki
 251 U Sol Ring @Oleg Shekhovtsov
 252 U Sol Ring @Lucas Terryn
+253 U Talisman of Creativity @Hector Ortiz
+255 U Talisman of Dominance @Miguel Sacristan
+256 U Talisman of Hierarchy @Philip Helliwell
+257 U Talisman of Indulgence @Nikola Matkovic
+259 C Thought Vessel @L J Koh
+261 C Wayfarer's Bauble @Helge C. Balzer
+263 U Worn Powerstone @David Sondered
+266 U Barren Moor @Rafater
+267 C Cave of Temptation @Teodora Dumitriu
+268 R Choked Estuary @LiXin Yin
+269 R Cinder Glade @Sergio Cosmai
+270 C Command Tower @Logan Feliciano
+271 C Command Tower @Games Workshop
+272 C Command Tower @Games Workshop
+273 U Crumbling Necropolis @David Álvarez
+276 C Dismal Backwater @Henry Peters
+277 C Evolving Wilds @Rafater
+278 R Exotic Orchard @Filipe Pagliuso
+279 R Crumbling Necropolis @Josu Hernaiz
+280 C Forgotten Cave @Andrey Nyarl
+281 U Frontier Bivouac @Álvaro Calvo Escudero
+282 R Game Trail @LiXin Yin
+284 U Molten Slagheap @Anthony Devine
+286 C Opal Palace @Logan Feliciano
+287 C Path of Ancestry @Anthony Devine
+291 U Reliquary Tower
+292 C Rugged Highlands @Oleg Shekhovtsov
+295 R Sunken Hollow @Calder Moore
+296 C Swiftwater Cliffs @David Álvarez
+297 R Temple of Abandon @Logan Feliciano
+298 R Temple of Epiphany @Álvaro Calvo Escudero
+299 R Temple of Mystery @Eliz Roxs
+300 U Temple of the False God @Josu Hernaiz
+301 C Terramorphic Expanse @Kekai Kotaki
+302 C Thornwood Falls @Josu Hernaiz
+304 U Unclaimed Territory @Henry Peters
+308 L Island @Calder Moore
+309 L Island @LiXin Yin
+310 L Swamp @JB Casacop
+311 L Swamp @Johan Grenier
+312 L Swamp @Calder Moore
+313 L Swamp @Andrey Nyarl
+315 L Mountain @Diego Gisbert
+316 L Mountain @Evan Shipard
+317 L Forest @Kamila Szutenberg

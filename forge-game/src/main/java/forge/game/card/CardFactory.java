@@ -77,7 +77,7 @@ public class CardFactory {
      */
     public final static Card copyCard(final Card in, boolean assignNewId) {
         Card out;
-        if (!(in.isToken() || in.getCopiedPermanent() != null)) {
+        if (!(in.isRealToken() || in.getCopiedPermanent() != null)) {
             out = assignNewId ? getCard(in.getPaperCard(), in.getOwner(), in.getGame())
                               : getCard(in.getPaperCard(), in.getOwner(), in.getId(), in.getGame());
         } else { // token
@@ -97,6 +97,7 @@ public class CardFactory {
         out.setAttachedCards(in.getAttachedCards());
         out.setEntityAttachedTo(in.getEntityAttachedTo());
 
+        out.setSpecialized(in.isSpecialized());
         out.addRemembered(in.getRemembered());
         out.addImprintedCards(in.getImprintedCards());
         out.setCommander(in.isRealCommander());
@@ -364,7 +365,33 @@ public class CardFactory {
 
         readCardFace(card, rules.getMainPart());
 
-        if (st != CardSplitType.None) {
+        if (st == CardSplitType.Specialize) {
+            card.addAlternateState(CardStateName.SpecializeW, false);
+            card.setState(CardStateName.SpecializeW, false);
+            if (rules.getWSpecialize() != null) {
+                readCardFace(card, rules.getWSpecialize());
+            }
+            card.addAlternateState(CardStateName.SpecializeU, false);
+            card.setState(CardStateName.SpecializeU, false);
+            if (rules.getUSpecialize() != null) {
+                readCardFace(card, rules.getUSpecialize());
+            }
+            card.addAlternateState(CardStateName.SpecializeB, false);
+            card.setState(CardStateName.SpecializeB, false);
+            if (rules.getBSpecialize() != null) {
+                readCardFace(card, rules.getBSpecialize());
+            }
+            card.addAlternateState(CardStateName.SpecializeR, false);
+            card.setState(CardStateName.SpecializeR, false);
+            if (rules.getRSpecialize() != null) {
+                readCardFace(card, rules.getRSpecialize());
+            }
+            card.addAlternateState(CardStateName.SpecializeG, false);
+            card.setState(CardStateName.SpecializeG, false);
+            if (rules.getGSpecialize() != null) {
+                readCardFace(card, rules.getGSpecialize());
+            }
+        } else if (st != CardSplitType.None) {
             card.addAlternateState(st.getChangedStateName(), false);
             card.setState(st.getChangedStateName(), false);
             if (rules.getOtherPart() != null) {

@@ -1,0 +1,12 @@
+Name:Jon Irenicus, the Exile
+ManaCost:2 U B
+Types:Legendary Creature Elf Wizard
+PT:3/5
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigBranch | TriggerDescription$ At the beginning of your end step, draw a card if your library has more cards in it than target opponent's library. Otherwise, each opponent mills five cards.
+SVar:TrigBranch:DB$ Branch | ValidTgts$ Opponent | BranchConditionSVar$ X | BranchConditionSVarCompare$ GEY | TrueSubAbility$ Draw | FalseSubAbility$ Mill
+SVar:Draw:DB$ Draw
+SVar:Mill:DB$ Mill | Defined$ Opponent | NumCards$ 5
+SVar:X:Count$InYourLibrary
+SVar:Y:Count$InTargetedLibrary
+DeckHas:Ability$Mill
+Oracle:At the beginning of your end step, draw a card if your library has more cards in it than target opponent's library. Otherwise, each opponent mills five cards.

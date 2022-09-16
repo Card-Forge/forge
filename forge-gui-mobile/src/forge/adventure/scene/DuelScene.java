@@ -146,7 +146,7 @@ public class DuelScene extends ForgeScene {
             changeStartCards += data.changeStartCards;
             startCards.addAll(data.startBattleWithCards());
         }
-        player.setCardsOnBattlefield(startCards);
+        player.addExtraCardsOnBattlefield(startCards);
         player.setStartingLife(Math.max(1, lifeMod + player.getStartingLife()));
         player.setStartingHand(player.getStartingHand() + changeStartCards);
     }
@@ -291,6 +291,7 @@ public class DuelScene extends ForgeScene {
         rules.setMatchAnteRarity(true);
         rules.setGamesPerMatch(1);
         rules.setManaBurn(false);
+        rules.setWarnAboutAICards(false);
 
         hostedMatch.setEndGameHook(() -> DuelScene.this.GameEnd());
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap);

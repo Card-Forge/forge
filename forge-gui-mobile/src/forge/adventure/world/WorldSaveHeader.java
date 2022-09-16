@@ -2,10 +2,12 @@ package forge.adventure.world;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Disposable;
+import forge.util.BlurUtils;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.scene.Scene;
@@ -59,11 +61,16 @@ public class WorldSaveHeader implements java.io.Serializable, Disposable {
         g.end();
         g.endClip();
         Pixmap pixmap = Pixmap.createFromFrameBuffer(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        if (Forge.lastPreview != null)
+            Forge.lastPreview.dispose();
+        Pixmap blurred = BlurUtils.blur(pixmap, 4, 2, false, true);
+        Forge.lastPreview = new Texture(blurred);
         Pixmap scaled = new Pixmap(WorldSaveHeader.previewImageWidth, (int) (WorldSaveHeader.previewImageWidth / (Scene.getIntendedWidth() / (float) Scene.getIntendedHeight())), Pixmap.Format.RGBA8888);
         scaled.drawPixmap(pixmap,
                 0, 0, pixmap.getWidth(), pixmap.getHeight(),
                 0, 0, scaled.getWidth(), scaled.getHeight());
         pixmap.dispose();
+        blurred.dispose();
         if (preview != null)
             preview.dispose();
         preview = scaled;

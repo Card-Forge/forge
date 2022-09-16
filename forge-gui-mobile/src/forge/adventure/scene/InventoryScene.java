@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
 import forge.Forge;
 import forge.adventure.data.ItemData;
 import forge.adventure.stage.ConsoleCommandInterpreter;
@@ -261,6 +262,7 @@ public class InventoryScene  extends UIScene {
     }
 
     private void updateInventory() {
+        clearActorObjects();
         inventoryButtons.clear();
         inventory.clear();
         for(int i=0;i<Current.player().getItems().size;i++) {
@@ -302,6 +304,7 @@ public class InventoryScene  extends UIScene {
                     }
                 }
             });
+            addActorObject(newActor);
         }
         for(Map.Entry<String, Button> slot :equipmentSlots.entrySet()) {
             if(slot.getValue().getChildren().size>=2)
@@ -337,6 +340,27 @@ public class InventoryScene  extends UIScene {
         if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
             done();
         }
+        if (keycode == Input.Keys.BUTTON_SELECT)
+            performTouch(ui.findActor("return"));
+        else if (keycode == Input.Keys.BUTTON_B)
+            performTouch(ui.findActor("return"));
+        else if (keycode == Input.Keys.BUTTON_A) {
+            if (selectedActor instanceof ImageButton) {
+                performTouch(equipButton);
+                Timer.schedule(new Timer.Task() {
+                    @Override
+                    public void run() {
+                        selectCurrent();
+                    }
+                }, 0.25f);
+
+            } else {
+                performTouch(selectedActor);
+            }
+        } else if (keycode == Input.Keys.DPAD_RIGHT || keycode == Input.Keys.DPAD_DOWN)
+            selectNextActor(false);
+        else if (keycode == Input.Keys.DPAD_LEFT || keycode == Input.Keys.DPAD_UP)
+            selectPreviousActor(false);
         return true;
     }
 }

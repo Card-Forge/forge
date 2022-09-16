@@ -2737,10 +2737,10 @@ public class AbilityUtils {
                     SpellAbility sa = (SpellAbility) ctb;
                     if (sa.isReplacementAbility()) {
                         if (zones.get(0).equals(ZoneType.Battlefield)) {
-                            cardsInZones = sa.getLastStateBattlefield();
+                            cardsInZones = sa.getRootAbility().getLastStateBattlefield();
                             usedLastState = true;
                         } else if (zones.get(0).equals(ZoneType.Graveyard)) {
-                            cardsInZones = sa.getLastStateGraveyard();
+                            cardsInZones = sa.getRootAbility().getLastStateGraveyard();
                             usedLastState = true;
                         }
                     }
@@ -2826,11 +2826,6 @@ public class AbilityUtils {
             final String[] restrictions = l[0].split("_");
             CardCollection filteredCards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), restrictions[1], player, c, ctb);
             return doXMath(Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetNetPower), expr, c, ctb);
-        }
-        if (sq[0].startsWith("HighestCMC_")) {
-            final String restriction = l[0].substring(11);
-            CardCollection list = CardLists.getValidCards(game.getCardsInGame(), restriction, player, c, ctb);
-            return Aggregates.max(list, CardPredicates.Accessors.fnGetCmc);
         }
         if (sq[0].startsWith("DifferentPower_")) {
             final String restriction = l[0].substring(15);
@@ -3565,7 +3560,7 @@ public class AbilityUtils {
      * @return a int.
      */
     public static int handlePaid(final Iterable<Card> paidList, final String string, final Card source, CardTraitBase ctb) {
-        if (paidList == null) {
+        if (Iterables.isEmpty(paidList)) {
             if (string.contains(".")) {
                 final String[] splitString = string.split("\\.", 2);
                 return doXMath(0, splitString[1], source, ctb);
@@ -3592,6 +3587,10 @@ public class AbilityUtils {
 
         if (string.startsWith("SumToughness")) {
             return Aggregates.sum(paidList, CardPredicates.Accessors.fnGetNetToughness);
+        }
+
+        if (string.startsWith("GreatestCMC")) {
+            return Aggregates.max(paidList, CardPredicates.Accessors.fnGetCmc);
         }
 
         if (string.startsWith("DifferentCMC")) {
@@ -3728,7 +3727,7 @@ public class AbilityUtils {
             }
         }
 
-        //  Count$InTargetedLibrary (targeted player's cards in hand)
+        //  Count$InTargetedLibrary (targeted player's cards in library)
         if (sq[0].contains("InTargetedLibrary")) {
             for (Player tgtP : getDefinedPlayers(c, "TargetedPlayer", ctb)) {
                 someCards.addAll(tgtP.getCardsIn(ZoneType.Library));

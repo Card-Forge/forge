@@ -582,7 +582,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
         if(blessing != null) {
             if(blessing.cardRewardBonus > 0) result += blessing.cardRewardBonus;
         }
-        return Math.max(result, 3);
+        return Math.min(result, 3);
     }
 
     public DifficultyData getDifficulty() {

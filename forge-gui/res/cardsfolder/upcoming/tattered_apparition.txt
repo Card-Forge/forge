@@ -1,0 +1,7 @@
+Name:Tattered Apparition
+ManaCost:3 B
+Types:Creature Shade
+PT:2/2
+K:Flying
+A:AB$ Pump | Cost$ 1 B | Defined$ Self | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
+Oracle:Flying\n{1}{B}: Tattered Apparition gets +1/+1 until end of turn.

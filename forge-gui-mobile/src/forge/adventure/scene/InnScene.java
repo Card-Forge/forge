@@ -92,6 +92,10 @@ public class InnScene extends UIScene {
         tempHitPointCost = ui.findActor("tempHitPointCost");
         tempHitPointCost.setDisabled(!purchaseable);
         tempHitPointCost.getLabel().setText("$" + tempHealthCost);
+        clearActorObjects();
+        addActorObject(tempHitPointCost);
+        addActorObject(sell);
+        addActorObject(leave);
     }
 
     private void sell() {
@@ -102,6 +106,24 @@ public class InnScene extends UIScene {
     public boolean keyPressed(int keycode) {
         if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
             done();
+        }
+        if (keycode == Input.Keys.DPAD_RIGHT) {
+            if (selectedActor == null)
+                selectActor(tempHitPointCost, false);
+            else
+                selectNextActor(false);
+        } else if ( keycode == Input.Keys.DPAD_LEFT) {
+            if (selectedActor == null)
+                selectActor(leave, false);
+            else
+                selectPreviousActor(false);
+
+        } else if (keycode == Input.Keys.BUTTON_B) {
+            performTouch(leave);
+
+        } else if (keycode == Input.Keys.BUTTON_A) {
+            performTouch(selectedActor);
+
         }
         return true;
     }

@@ -1,0 +1,8 @@
+Name:Phyrexian Vivisector
+ManaCost:1 B
+Types:Creature Phyrexian Human
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | Execute$ TrigScry | TriggerDescription$ Whenever a creature you control dies, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)
+SVar:TrigScry:DB$ Scry
+DeckHints:Ability$Sacrifice
+Oracle:Whenever a creature you control dies, scry 1. (Look at the top card of your library. You may put that card on the bottom of your library.)

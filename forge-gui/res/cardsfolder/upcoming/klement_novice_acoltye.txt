@@ -1,0 +1,77 @@
+Name:Klement, Novice Acolyte
+ManaCost:1 W
+Types:Legendary Creature Tiefling Cleric
+PT:2/2
+K:Specialize:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME enters the battlefield, creature cards in your hand perpetually get +1/+1.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ ValidHand Creature.YouOwn | StaticAbilities$ PerpetualP1P1 | Duration$ Permanent | Triggers$ Update | Name$ Klement, Novice Acolyte's Perpetual Effect
+SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ These creature cards perpetually get +1/+1.
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+AlternateMode:Specialize
+Oracle:Specialize {2}\nWhen Klement, Novice Acolyte enters the battlefield, creature cards in your hand perpetually get +1/+1.
+
+SPECIALIZE:WHITE
+
+Name:Klement, Life Acolyte
+ManaCost:1 W W
+Types:Legendary Creature Tiefling Cleric
+PT:3/3
+K:Lifelink
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigBoon | TriggerDescription$ When this creature specializes, you get a boon with "When you cast your next creature spell, that creature enters the battlefield with a lifelink counter on it."
+SVar:TrigBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | OneOff$ True | ActivationLimit$ 1 | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ When you cast your next creature spell, that creature enters the battlefield with a lifelink counter on it.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | ForgetOnMoved$ Stack | ReplacementEffects$ ReplaceEnter
+SVar:ReplaceEnter:Event$ Moved | ValidCard$ Card.IsRemembered | Destination$ Battlefield | ReplaceWith$ AddExtraCounter | ReplacementResult$ Updated
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterTypes$ Lifelink | CounterNum$ 1 | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+DeckHas:Ability$LifeGain|Counters
+Oracle:Lifelink\nWhen this creature specializes, you get a boon with "When you cast your next creature spell, that creature enters the battlefield with a lifelink counter on it."
+
+SPECIALIZE:BLUE
+
+Name:Klement, Knowledge Acolyte
+ManaCost:1 W U
+Types:Legendary Creature Tiefling Cleric
+PT:3/4
+K:Vigilance
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ When this creature specializes, seek three nonland permanent cards. Choose one of those cards and shuffle the rest into your library.
+SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 3 | ChangeType$ Permanent.nonLand | RememberChanged$ True | SubAbility$ DBChooseCard
+SVar:DBChooseCard:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.IsRemembered | ForgetChosen$ True | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ ChangeZone | Origin$ Hand | Destination$ Library | Defined$ Remembered | Shuffle$ True | SubAbility$ DBClearChosen
+SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Vigilance\nWhen this creature specializes, seek three nonland permanent cards. Choose one of those cards and shuffle the rest into your library.
+
+SPECIALIZE:BLACK
+
+Name:Klement, Death Acolyte
+ManaCost:1 W B
+Types:Legendary Creature Tiefling Cleric
+PT:3/3
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When this creature specializes, create two 2/2 black Zombie creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ b_2_2_zombie
+DeckHas:Ability$Token & Type$Zombie
+Oracle:When this creature specializes, create two 2/2 black Zombie creature tokens.
+
+SPECIALIZE:RED
+
+Name:Klement, Tempest Acolyte
+ManaCost:1 R W
+Types:Legendary Creature Tiefling Cleric
+PT:2/3
+K:Double Strike
+T:Mode$ DamageDoneOnce | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to any target.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ X | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target
+SVar:X:TriggerCount$DamageAmount
+Oracle:Double strike\nWhenever Klement, Tempest Acolyte is dealt damage, it deals that much damage to any target.
+
+SPECIALIZE:GREEN
+
+Name:Klement, Nature Acolyte
+ManaCost:1 G W
+Types:Legendary Creature Tiefling Cleric
+PT:4/4
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME leaves the battlefield, create a 4/4 green Ox creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ g_4_4_ox
+DeckHas:Ability$Token & Type$Ox
+Oracle:When Klement, Nature Acolyte leaves the battlefield, create a 4/4 green Ox creature token.

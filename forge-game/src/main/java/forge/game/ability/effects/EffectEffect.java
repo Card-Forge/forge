@@ -122,7 +122,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
         String name = sa.getParam("Name");
         if (name == null) {
-            name = hostCard.getName() + "'s Effect";
+            name = hostCard.getName() + (sa.hasParam("Boon") ? "'s Boon" : "'s Effect");
         }
 
         // Unique Effects shouldn't be duplicated
@@ -226,6 +226,8 @@ public class EffectEffect extends SpellAbilityEffect {
                     if (!"Stack".equals(sa.getParam("ForgetOnMoved"))) {
                         addForgetOnCastTrigger(eff);
                     }
+                } else if (sa.hasParam("ForgetOnCast")) {
+                    addForgetOnCastTrigger(eff);
                 } else if (sa.hasParam("ExileOnMoved")) {
                     addExileOnMovedTrigger(eff, sa.getParam("ExileOnMoved"));
                 }
@@ -275,6 +277,14 @@ public class EffectEffect extends SpellAbilityEffect {
             // Set Chosen name
             if (!hostCard.getNamedCard().isEmpty()) {
                 eff.setNamedCard(hostCard.getNamedCard());
+            }
+
+            // chosen number
+            if (sa.hasParam("SetChosenNumber")) {
+                eff.setChosenNumber(AbilityUtils.calculateAmount(sa.getHostCard(),
+                        sa.getParam("SetChosenNumber"), sa));
+            } else if (hostCard.hasChosenNumber()) {
+                eff.setChosenNumber(hostCard.getChosenNumber());
             }
 
             if (sa.hasParam("CopySVar")) {

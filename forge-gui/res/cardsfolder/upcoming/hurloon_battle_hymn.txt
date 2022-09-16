@@ -1,0 +1,9 @@
+Name:Hurloon Battle Hymn
+ManaCost:2 R
+Types:Instant
+K:Kicker:W
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to target creature or planeswalker. If this spell was kicked, you gain 4 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 4 | Condition$ Kicked
+DeckHas:Ability$LifeGain
+DeckHints:Color$White
+Oracle:Kicker {W} (You may pay an additional {W} as you cast this spell.)\nHurloon Battle Hymn deals 4 damage to target creature or planeswalker. If this spell was kicked, you gain 4 life.

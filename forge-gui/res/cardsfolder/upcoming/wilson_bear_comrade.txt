@@ -1,0 +1,93 @@
+Name:Wilson, Bear Comrade
+ManaCost:1 G
+Types:Legendary Creature Bear Warrior
+PT:2/2
+K:Reach
+K:Ward:2
+K:Trample
+K:Specialize:4
+AlternateMode:Specialize
+Oracle:Reach, trample\nWard {2}\nSpecialize {4}.
+
+SPECIALIZE:WHITE
+
+Name:Wilson, Urbane Bear
+ManaCost:1 G W
+Types:Legendary Creature Bear Warrior
+PT:3/4
+K:Reach
+K:Trample
+K:Lifelink
+K:Ward:2
+A:AB$ Pump | Cost$ 1 G W ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBEffect | SorcerySpeed$ True | SpellDescription$ Target creature you control perpetually gains lifelink. Activate only as a sorcery.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualLifelink | RememberObjects$ Targeted | Name$ Wilson, Urbane Bear's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualLifelink:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Lifelink | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains lifelink.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$LifeGain
+Oracle:Reach, trample, lifelink\nWard {2}\n{1}{G}{W}, Exile Wilson, Urbane Bear from your graveyard: Target creature you control perpetually gains lifelink. Activate only as a sorcery.
+
+SPECIALIZE:BLUE
+
+Name:Wilson, Subtle Bear
+ManaCost:1 G U
+Types:Legendary Creature Bear Warrior
+PT:3/4
+K:Reach
+K:Trample
+K:Ward:2
+K:Unblockable
+A:AB$ Pump | Cost$ 1 G U ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBEffect | SorcerySpeed$ True | SpellDescription$ Target creature you control perpetually gains "This creature can't be blocked." Activate only as a sorcery.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualUnblockable | RememberObjects$ Targeted | Name$ Wilson, Subtle Bear's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualUnblockable:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$  HIDDEN Unblockable | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains "This creature can't be blocked."
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Unblockable
+Oracle:Reach, trample\nWard {2}\nWilson, Subtle Bear can't be blocked.\n{1}{G}{U}, Exile Wilson from your graveyard: Target creature you control perpetually gains "This creature can't be blocked." Activate only as a sorcery.
+
+SPECIALIZE:BLACK
+
+Name:Wilson, Fearsome Bear
+ManaCost:1 B G
+Types:Legendary Creature Bear Warrior
+PT:4/4
+K:Menace
+K:Reach
+K:Trample
+K:Ward:2
+A:AB$ Pump | Cost$ 1 B G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBEffect | SorcerySpeed$ True | SpellDescription$ Target creature you control perpetually gains menace. Activate only as a sorcery.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualMenace | Name$ Wilson, Fearsome Bear's Perpetual Effect | RememberObjects$ Targeted | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualMenace:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Menace | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains menace.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Keyword$Menace
+Oracle:Menace, reach, trample\nWard {2}\n{1}{B}{G}, Exile Wilson, Fearsome Bear from your graveyard: Target creature you control perpetually gains menace. Activate only as a sorcery.
+
+SPECIALIZE:RED
+
+Name:Wilson, Ardent Bear
+ManaCost:1 R G
+Types:Legendary Creature Bear Warrior
+PT:2/3
+K:Double Strike
+K:Reach
+K:Trample
+K:Ward:2
+A:AB$ Pump | Cost$ 1 R G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBEffect | SorcerySpeed$ True | SpellDescription$ Target creature you control perpetually gains double strike. Activate only as a sorcery.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualDoubleStrike | RememberObjects$ Targeted | Name$ Wilson, Ardent Bear's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualDoubleStrike:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Double Strike | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains double strike.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Keyword$DoubleStrike
+Oracle:Double strike, reach, trample\nWard {2}\n{1}{B}{G}, Exile Wilson, Ardent Bear from your graveyard: Target creature you control perpetually gains double strike. Activate only as a sorcery.
+
+SPECIALIZE:GREEN
+
+Name:Wilson, Majestic Bear
+ManaCost:1 G G
+Types:Legendary Creature Bear Warrior
+PT:5/5
+K:Reach
+K:Trample
+K:Ward:2
+A:AB$ Pump | Cost$ 1 G G ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBEffect | SorcerySpeed$ True | SpellDescription$ Target creature you control perpetually gets +1/+1 and gains reach, trample, and ward {2}. Activate only as a sorcery.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualPump | RememberObjects$ Targeted | Name$ Wilson, Majestic Bear's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Reach & Trample & Ward:2 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets +1/+1 and gains reach, trample, and ward {2}.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Reach, trample\nWard {2}\n{1}{G}{G}, Exile Wilson, Majestic Bear from your graveyard: Target creature you control perpetually gets +1/+1 and gains reach, trample, and ward {2}. Activate only as a sorcery.

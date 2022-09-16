@@ -608,6 +608,10 @@ public class GameAction {
         if (c.hasIntensity()) {
             copied.setIntensity(c.getIntensity(false));
         }
+        // specialize is perpetual
+        if (c.isSpecialized()) {
+            copied.setState(c.getCurrentStateName(), false);
+        }
 
         // update state for view
         copied.updateStateForView();
@@ -688,7 +692,7 @@ public class GameAction {
         }
 
         if (fromBattlefield) {
-            if (!c.isRealToken()) {
+            if (!c.isRealToken() && !c.isSpecialized()) {
                 copied.setState(CardStateName.Original, true);
             }
             // Soulbond unpairing
@@ -848,11 +852,7 @@ public class GameAction {
 
         if (zoneTo.is(ZoneType.Stack)) {
             // zoneFrom maybe null if the spell is cast from "Ouside the game", ex. ability of Garth One-Eye
-            if (zoneFrom == null) {
-                c.setCastFrom(null);
-            } else {
-                c.setCastFrom(zoneFrom);
-            }
+            c.setCastFrom(zoneFrom);
             if (cause != null && cause.isSpell() && c.equals(cause.getHostCard())) {
                 c.setCastSA(cause);
             } else {
@@ -1845,7 +1845,6 @@ public class GameAction {
     }
 
     public final boolean destroy(final Card c, final SpellAbility sa, final boolean regenerate, CardZoneTable table, Map<AbilityKey, Object> params) {
-        Player activator = null;
         if (!c.canBeDestroyed()) {
             return false;
         }
@@ -1862,6 +1861,7 @@ public class GameAction {
             return false;
         }
 
+        Player activator = null;
         if (sa != null) {
             activator = sa.getActivatingPlayer();
         }
@@ -2238,8 +2238,7 @@ public class GameAction {
         game.setMonarch(p);
 
         // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, p);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
         game.getTriggerHandler().runTrigger(TriggerType.BecomeMonarch, runParams, false);
     }
 
@@ -2264,8 +2263,7 @@ public class GameAction {
 
         // You can take the initiative even if you already have it
         // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, p);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
         game.getTriggerHandler().runTrigger(TriggerType.TakesInitiative, runParams, false);
     }
 
@@ -2354,8 +2352,7 @@ public class GameAction {
 
             if (cause != null) {
                 // set up triggers (but not actually do them until later)
-                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                runParams.put(AbilityKey.Player, p);
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
                 runParams.put(AbilityKey.ScryNum, numLookedAt);
                 game.getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
             }
@@ -2415,7 +2412,7 @@ public class GameAction {
         }
 
         // for Zangief do this before runWaitingTriggers DamageDone
-        damageMap.triggerExcessDamage(isCombat, lethalDamage, game);
+        damageMap.triggerExcessDamage(isCombat, lethalDamage, game, lkiCache);
 
         // lose life simultaneously
         if (isCombat) {

@@ -5,87 +5,274 @@ Name=Dominaria United
 Code2=DMU
 MciCode=dmu
 Type=Expansion
+BoosterCovers=3
+Booster=10 Common:fromsheet("DMU cards"), 3 Uncommon:fromSheet("DMU cards"), 1 RareMythic:fromSheet("DMU cards"), 1 fromSheet("DMU lands")
+BoosterMustContain=Legendary Creature
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=DMU
 
 [cards]
 1 M Karn, Living Legacy @Chris Rahn
+2 R Anointed Peacekeeper @Tia Masic
 3 R Archangel of Wrath @Miguel Mercado
+4 C Argivian Cavalier @Chris Seaman
+5 C Argivian Phalanx @Josh Hass
+6 C Artillery Blast @Julian Kok Joon Wen
+7 C Benalish Faithbonder @Francisco Miyara
 8 C Benalish Sleeper @Josu Hernaiz
+9 C Captain's Call @A. M. Sartor
 10 C Charismatic Vanguard @David Palumbo
+11 C Citizen's Arrest @Wisnu Tan
+12 U Cleaving Skyrider @Joshua Raphael
+13 C Clockwork Drawbridge @Nadia Hurianova
+14 U Coalition Skyknight @Aaron Miller
+15 R Danitha, Benalia's Hope @Magali Villeneuve
+16 R Defiler of Faith @Magali Villeneuve
+17 C Destroy Evil @Anna Christenson
+18 C Griffin Protector @Omar Rayyan
 19 R Guardian of New Benalia @Ernanda Souza
+20 C Heroic Charge @Zoltan Boros
 21 U Join Forces @Aurore Folny
+22 C Juniper Order Rootweaver @Matt Stewart
+23 U Knight of Dawn's Light @Billy Christian
+24 R Leyline Binding @Cristi Balanescu
+25 U Love Song of Night and Day @Eli Minaya
 26 C Mesa Cavalier @David Palumbo
+27 U Phyrexian Missionary @Mila Pesic
+28 U Prayer of Binding @Wylie Beckert
 29 U Resolute Reinforcements @Billy Christian
+30 U Runic Shot @Cristi Balanescu
 31 C Samite Herbalist @Alessandra Pisano
+32 M Serra Paragon @Heonhwa Choe
 33 U Shalai's Acolyte @Zara Alfonso
 34 C Stall for Time @Ryan Alexander Lee
 35 C Take Up the Shield @Manuel Castañón
+36 R Temporary Lockdown @Bryan Sola
+37 R Urza Assembles the Titans @Josu Hernaiz
+38 R Valiant Veteran @Nestor Ossandon Leal
+39 U Wingmantle Chaplain @Miranda Meeks
+40 R Academy Loremaster @Marcela Medeiros
+41 C Academy Wall @Adam Paquette
+42 R Aether Channeler @Caio Monteiro
+43 U Battlewing Mystic @Borja Pindado
+44 U Combat Research @Justine Cruz
+45 U Coral Colony @Campbell White
 46 R Defiler of Dreams @Ryan Pancoast
+47 U Djinn of the Fountain @Bastien L. Deharme
+48 U Ertai's Scorn @Alex Negrea
+49 C Essence Scatter @Anastasia Ovchinnikova
+50 U Founding the Third Path @Chris Seaman
 51 U Frostfist Strider @Francisco Miyara
+52 R Haughty Djinn @Mike Jordana
+53 C Haunting Figment @Chris Cold
 54 C Impede Momentum @Igor Kieryluk
+55 C Impulse @Sam Guay
+56 U Joint Exploration @Zezhou Chen
 57 U Micromancer @Ernanda Souza
+58 C Negate @Isis
 59 R The Phasing of Zhalfir @LA Draws
-62 C Protect the Negotiators @Dominik Mayer
+60 C Phyrexian Espionage @Allen Williams
+61 C Pixie Illusionist @Anastasia Ovchinnikova
+62 U Protect the Negotiators @Dominik Mayer
+63 U Rona's Vortex @Dominik Mayer
+64 C Shore Up @Mark Behm
+65 R Silver Scrutiny @Donato Giancola
+66 C Soaring Drake @Jason Kang
 67 M Sphinx of Clear Skies @Valera Lutfullina
+68 C Talas Lookout @Julia Metzger
+69 C Tidepool Turtle @Andrew Mar
+70 C Timely Interference @Joshua Raphael
 71 C Tolarian Geyser @Olivier Bernard
 72 C Tolarian Terror @Vincent Christiaens
+73 M Vesuvan Duplimancy @Wylie Beckert
 74 C Voda Sea Scavenger @Uriah Voth
+75 R Vodalian Hexcatcher @Dmitry Burmak
+76 R Vodalian Mindsinger @Steve Prescott
 77 C Volshe Tideturner @Tia Masic
+78 C Aggressive Sabotage @Daarken
 79 U Balduvian Atrocity @Mike Jordana
+80 C Battle-Rage Blessing @Jarel Threat
+81 C Battlefly Swarm @Xavier Ribeiro
+82 U Blight Pile @Olivier Bernard
+83 C Bone Splinters @Jeremy Wilson
 84 R Braids, Arisen Nightmare @Heonhwa Choe
+85 U Braids's Frightful Return @Dominik Mayer
+86 U Choking Miasma @Inka Schulz
+87 R The Cruelty of Gix @Volkan Baǵa
+88 U Cult Conscript @Joe Slucher
 89 U Cut Down @Dominik Mayer
+90 R Defiler of Flesh @Mathias Kollros
+91 R Drag to the Bottom @Nino Is
+92 C Eerie Soultender @Igor Kieryluk
 93 R Evolved Sleeper @Jason A. Engle
+94 C Extinguish the Light @Ekaterina Burmak
+95 C Gibbering Barricade @Drew Tucker
+96 U Knight of Dusk's Shadow @Wisnu Tan
 97 M Liliana of the Veil @Martina Fackova
 98 U Monstrous War-Leech @Christopher Burdett
+99 C Phyrexian Rager @Brock Grossman
+100 C Phyrexian Vivisector @Irina Nordsol
+101 C Phyrexian Warhorse @Chris Cold
+102 U Pilfer @Pauline Voss
 103 R The Raven Man @Chris Rahn
 104 U Sengir Connoisseur @Irina Nordsol
+105 C Shadow Prophecy @Rovina Cai
+106 R Shadow-Rite Priest @Michael C. Hayes
 107 M Sheoldred, the Apocalypse @Chris Rahn
+108 U Sheoldred's Restoration @Igor Kieryluk
+109 C Splatter Goblin @Lars Grant-West
+110 R Stronghold Arena @Alexander Mokhov
 111 C Tattered Apparition @Jason A. Engle
 112 C Toxic Abomination @Igor Kieryluk
+113 C Tribute to Urborg @Jodie Muir
 114 C Urborg Repossession @Cristi Balanescu
 115 C Writhing Necromass @Campbell White
+116 U Balduvian Berserker @Cristi Balanescu
 117 R Chaotic Transformation @Joseph Meehan
+118 C Coalition Warbrute @Will Gist
+119 R Defiler of Instinct @Steven Belledin
 120 U Dragon Whelp @Jokubas Uogintas
+121 R The Elder Dragon War @Filip Burburan
+122 U Electrostatic Infantry @Kekai Kotaki
+123 U Fires of Victory @Sidharth Chaturvedi
+124 C Flowstone Infusion @Allen Williams
+125 C Flowstone Kavu @Simon Dominic
+126 C Furious Bellow @Joshua Raphael
+127 C Ghitu Amplifier @Deruchenko Alexander
+128 C Goblin Picker @Vladimir Krisetskiy
+129 C Hammerhand @Joshua Raphael
+130 U Hurler Cyclops @Xavier Ribeiro
+131 U Hurloon Battle Hymn @Dominik Mayer
+132 C In Thrall to the Pit @Andrey Kuzinskiy
 133 M Jaya, Fiery Negotiator @Marta Nael
+134 C Jaya's Firenado @Jeremy Wilson
 135 R Keldon Flamesage @Jason A. Engle
+136 C Keldon Strike Team @Josu Hernaiz
 137 C Lightning Strike @Marta Nael
+138 C Meria's Outrider @Lius Lasahido
 139 C Molten Monstrosity @Manuel Castañón
+140 U Phoenix Chick @Brian Valeza
 141 R Radha's Firebrand @Ângelo Bortolini
+142 R Rundvelt Hordemaster @Bruno Biazotto
 143 M Shivan Devastator @Brent Hollowell
+144 C Smash to Dust @Marc Simonetti
+145 U Sprouting Goblin @Uriah Voth
 146 R Squee, Dubious Monarch @Zoltan Boros
 147 R Temporal Firestorm @Nestor Ossandon Leal
+148 C Thrill of Possibility @David Auden Nash
+149 U Twinferno @Justyna Dura
 150 C Viashino Branchrider @Andrew Mar
+151 U Warhost's Frenzy @Igor Grechanyi
 152 C Yavimaya Steelcrusher @Gabor Szikszai
+153 U Yotia Declares War @Fariba Khamseh
+154 C Barkweave Crusher @Kev Walker
+155 C Bite Down @Kitt Lapeña
+156 C Bog Badger @Sam Burley
+157 C Broken Wings @Svetlin Velinov
+158 C Colossal Growth @Eelis Kyttanen
+159 C Deathbloom Gardener @Marta Nael
 160 R Defiler of Vigor @Chase Stone
+161 C Elfhame Wurm @Victor Adame Minguez
+162 U Elvish Hydromancer @Fajareka Setiawan
+163 C Floriferous Vinewall @Jakub Kasper
+164 C Gaea's Might @Alex Negrea
+165 R Herd Migration @Eric Deschamps
+166 C Hexbane Tortoise @Joshua Raphael
+167 R Leaf-Crowned Visionary @Anna Steinbauer
+168 U Linebreaker Baloth @Brent Hollowell
+169 R Llanowar Greenwidow @Jokubas Uogintas
 170 R Llanowar Loamspeaker @Zara Alfonso
+171 C Llanowar Stalker @Fariba Khamseh
 172 C Magnigoth Sentry @Dave Kendall
+173 U Mossbeard Ancient @Alexandre Honoré
 174 U Nishoba Brawler @Valera Lutfullina
+175 R Quirion Beastcaller @Valera Lutfullina
 176 C Scout the Wilderness @A. M. Sartor
+177 M Silverback Elder @Alexander Mokhov
+178 U Slimefoot's Survey @Piotr Dura
 179 C Snarespinner @Michele Giorgi
 180 U Strength of the Coalition @Justine Cruz
+181 C Sunbathing Rootwalla @Campbell White
+182 U Tail Swipe @Ângelo Bortolini
+183 U Tear Asunder @Dave Kendall
 184 U Territorial Maro @Simon Dominic
 185 R Threats Undetected @Randy Vargas
+186 R Urborg Lhurgoyf @Andrey Kuzinskiy
 187 C Vineshaper Prodigy @Inka Schulz
+188 U The Weatherseed Treaty @Livia Prima
 189 M The World Spell @Adam Paquette
 190 U Yavimaya Iconoclast @Caio Monteiro
+191 C Yavimaya Sojourner @Brian Valeza
 192 M Ajani, Sleeper Agent @Matt Stewart
+193 U Aron, Benalia's Ruin @Mark Winters
 194 R Astor, Bearer of Blades @Josh Hass
-202 R Jhoira, Ageless Innovator @Justyna Gil
+195 U Baird, Argivian Recruiter @Jarel Threat
+196 U Balmor, Battlemage Captain @Bram Sels
+197 U Bortuk Bonerattle @Wayne Reynolds
+198 U Elas il-Kor, Sadistic Pilgrim @G-host Lee
+199 R Ertai Resurrected @Ryan Pancoast
+200 U Garna, Bloodfist of Keld @Andrey Kuzinskiy
+201 R Ivy, Gleeful Spellthief @Evyn Fong
+202 R Jhoira, Ageless Innovator @Justyna Dura
+203 M Jodah, the Unifier @Ryan Pancoast
+204 R King Darien XLVIII @Donato Giancola
+205 U Lagomos, Hand of Hatred @Tuan Duong Chu
+206 R Meria, Scholar of Antiquity @Aurore Folny
+207 U Nael, Avizoa Aeronaut @Miguel Mercado
 208 U Najal, the Storm Runner @PINDURSKI
 209 R Nemata, Primeval Warden @Andrew Mar
+210 U Queen Allenal of Ruadach @Ekaterina Burmak
+211 U Radha, Coalition Warlord @Randy Vargas
 212 U Raff, Weatherlight Stalwart @Eelis Kyttanen
+213 R Ratadrabik of Urborg @Anna Pavleeva
+214 M Rith, Liberated Primeval @Victor Adame Minguez
+215 R Rivaz of the Claw @Joshua Raphael
+216 U Rona, Sheoldred's Faithful @Ryan Alexander Lee
+217 U Rulik Mons, Warren Chief @Tuan Duong Chu
 218 M Shanna, Purifying Blade @Magali Villeneuve
 219 M Sol'Kanar the Tainted @Filip Burburan
 220 M Soul of Windgrace @Liiga Smilshkalne
+221 R Stenn, Paranoid Partisan @Mila Pesic
+222 U Tatyova, Steward of Tides @Howard Lyon
 223 U Tori D'Avenant, Fury Rider @Anna Podedworna
+224 U Tura Kennerud, Skyknight @Donato Giancola
+225 U Uurg, Spawn of Turg @Nicholas Gregory
+226 U Vohar, Vodalian Desecrator @Daarken
+227 U Zar Ojanen, Scion of Efrava @Justine Cruz
 228 M Zur, Eternal Schemer @Jesper Ejsing
+229 C Automatic Librarian @Alex Konstad
 230 R Golden Argosy @Daniel Ljunggren
+231 U Hero's Heirloom @Ovidio Cartagena
+232 U Inscribed Tablet @Jarel Threat
+233 U Jodah's Codex @Aaron Miller
+234 M Karn's Sylex @Adam Paquette
+235 C Meteorite @Olena Richards
+236 U Relic of Legends @Titus Lunter
+237 C Salvaged Manaworker @Julian Kok Joon Wen
+238 C Shield-Wall Sentinel @Titus Lunter
+239 M Timeless Lotus @Lindsey Look
+240 C Vanquisher's Axe @Joe Slucher
+241 U Walking Bulwark @Jonas De Ro
+242 M Weatherlight Compleated @Adam Paquette
 243 R Adarkar Wastes @Piotr Dura
 244 R Caves of Koilos @Julian Kok Joon Wen
+245 C Contaminated Aquifer @Robin Olausson
+246 C Crystal Grotto @Piotr Dura
+247 C Geothermal Bog @Gabor Szikszai
+248 C Haunted Mire @Bruce Brenneise
+249 C Idyllic Beachfront @Robin Olausson
 250 R Karplusan Forest @Sam Burley
+251 C Molten Tributary @Yeong-Hao Han
 252 R Plaza of Heroes @Gabor Szikszai
+253 C Radiant Grove @Lorenzo Lanfranconi
+254 C Sacred Peaks @Kamila Szutenberg
 255 R Shivan Reef @Andrew Mar
 256 R Sulfurous Springs @Bruce Brenneise
+257 C Sunlit Marsh @Marc Simonetti
+258 C Tangled Islet @Randy Gallegos
+259 R Thran Portal @Sarah Finnigan
+260 C Wooded Ridgeline @Jinho Bae
 261 R Yavimaya Coast @Jesper Ejsing
 262 L Plains @Lorenzo Lanfranconi
 263 L Plains @Seb McKinnon
@@ -107,25 +294,107 @@ ScryfallCode=DMU
 279 L Swamp @Magali Villeneuve
 280 L Mountain @Magali Villeneuve
 281 L Forest @Magali Villeneuve
+
+[jumpstart]
+282 R Serra Redeemer @Joshua Raphael
+283 R Cosmic Epiphany @Eli Minaya
+284 R Tyrannical Pitlord @Donato Giancola
+285 R Ragefire Hellkite @Xavier Ribeiro
+286 R Briar Hydra @Caio Monteiro
+423 R Serra Redeemer @Joshua Raphael
+424 R Cosmic Epiphany @Eli Minaya
+425 R Tyrannical Pitlord @Donato Giancola
+426 R Ragefire Hellkite @Xavier Ribeiro
+427 R Briar Hydra @Caio Monteiro
+
+[showcase]
+287 R Danitha, Benalia's Hope @Barbara Rosiak
 288 R Braids, Arisen Nightmare @Dibujante Nocturno
 289 R The Raven Man @David Curtis
 290 M Sheoldred, the Apocalypse @Joe Esposito
 291 R Squee, Dubious Monarch @Daniel Lieske
 292 U Aron, Benalia's Ruin @Jody Clark
 293 R Astor, Bearer of Blades @Ivan Shavrin
+294 U Baird, Argivian Recruiter @Barbara Rosiak
+295 U Balmor, Battlemage Captain @Nino Vecia
+296 U Bortuk Bonerattle @Justin Hernandez & Alexis Hernandez
+297 U Elas il-Kor, Sadistic Pilgrim @Joe Esposito
+298 R Ertai Resurrected @Justin Hernandez & Alexis Hernandez
+299 U Garna, Bloodfist of Keld @Benjamin Ee
+300 R Ivy, Gleeful Spellthief @Eshpur
 301 R Jhoira, Ageless Innovator @Lisa Heidhoff
+302 M Jodah, the Unifier @Barbara Rosiak
+303 R King Darien XLVIII @Jody Clark
+304 U Lagomos, Hand of Hatred @Joe Esposito
+305 R Meria, Scholar of Antiquity @Carly Mazur
+306 U Nael, Avizoa Aeronaut @Lisa Heidhoff
+307 U Najal, the Storm Runner @Serena Malyon
 308 R Nemata, Primeval Warden @Bastien Grivet
+309 U Queen Allenal of Ruadach @Carly Mazur
+310 U Radha, Coalition Warlord @Carly Mazur
 311 U Raff, Weatherlight Stalwart @Ivan Shavrin
+312 R Ratadrabik of Urborg @Nino Vecia
+313 M Rith, Liberated Primeval @Roman Kuteynikov
+314 R Rivaz of the Claw @Eugene Frost
+315 U Rona, Sheoldred's Faithful @Nino Vecia
+316 U Rulik Mons, Warren Chief @Roman Kuteynikov
+317 M Shanna, Purifying Blade @Jody Clark
 318 M Sol'Kanar the Tainted @Lisa Heidhoff
 319 M Soul of Windgrace @Ivan Shavrin
+320 R Stenn, Paranoid Partisan @Tyler Crook
+321 U Tatyova, Steward of Tides @Lisa Heidhoff
+322 U Tori D'Avenant, Fury Rider @Jody Clark
+323 U Tura Kennerud, Skyknight @Benjamin Ee
+324 U Uurg, Spawn of Turg @Eugene Frost
+325 U Vohar, Vodalian Desecrator @Nino Vecia
+326 U Zar Ojanen, Scion of Efrava @Eshpur
 327 M Zur, Eternal Schemer @Dan Mumford
+328 R Danitha, Benalia's Hope @Barbara Rosiak
+329 R Braids, Arisen Nightmare @Dibujante Nocturno
 330 R The Raven Man @David Curtis
 331 M Sheoldred, the Apocalypse @Joe Esposito
-332 R Squee, Dubious Monarch @
+332 R Squee, Dubious Monarch @Daniel Lieske
+333 U Aron, Benalia's Ruin @Jody Clark
+334 R Astor, Bearer of Blades @Ivan Shavrin
+335 U Baird, Argivian Recruiter @Barbara Rosiak
+336 U Balmor, Battlemage Captain @Nino Vecia
+337 U Bortuk Bonerattle @Justin Hernandez & Alexis Hernandez
+338 U Elas il-Kor, Sadistic Pilgrim @Joe Esposito
+339 R Ertai Resurrected @Justin Hernandez & Alexis Hernandez
+340 U Garna, Bloodfist of Keld @Benjamin Ee
+341 R Ivy, Gleeful Spellthief @Eshpur
+342 R Jhoira, Ageless Innovator @Lisa Heidhoff
+343 M Jodah, the Unifier @Barbara Rosiak
+344 R King Darien XLVIII @Jody Clark
+345 U Lagomos, Hand of Hatred @Joe Esposito
+346 R Meria, Scholar of Antiquity @Carly Mazur
+347 U Nael, Avizoa Aeronaut @Lisa Heidhoff
+348 U Najal, the Storm Runner @Serena Malyon
+349 R Nemata, Primeval Warden @Bastien Grivet
+350 U Queen Allenal of Ruadach @Carly Mazur
+351 U Radha, Coalition Warlord @Carly Mazur
+352 U Raff, Weatherlight Stalwart @Ivan Shavrin
+353 R Ratadrabik of Urborg @Nino Vecia
+354 M Rith, Liberated Primeval @Roman Kuteynikov
+355 R Rivaz of the Claw @Eugene Frost
+356 U Rona, Sheoldred's Faithful @Nino Vecia
+357 U Rulik Mons, Warren Chief @Roman Kuteynikov
 358 M Shanna, Purifying Blade @Jody Clark
+359 M Sol'Kanar the Tainted @Lisa Heidhoff
+360 M Soul of Windgrace @Ivan Shavrin
+361 R Stenn, Paranoid Partisan @Tyler Crook
+362 U Tatyova, Steward of Tides @Lisa Heidhoff
+363 U Tori D'Avenant, Fury Rider @Jody Clark
+364 U Tura Kennerud, Skyknight @Benjamin Ee
+365 U Uurg, Spawn of Turg @Eugene Frost
+366 U Vohar, Vodalian Desecrator @Nino Vecia
+367 U Zar Ojanen, Scion of Efrava @Eshpur
+368 M Zur, Eternal Schemer @Dan Mumford
 369 M Sheoldred, the Apocalypse @Chris Rahn
 370 M Ajani, Sleeper Agent @Victor Adame Minguez
 371 M Ajani, Sleeper Agent @Victor Adame Minguez
+
+[borderless]
 372 M Karn, Living Legacy @rk post
 373 M Liliana of the Veil @Brom
 374 M Jaya, Fiery Negotiator @Scott M. Fischer
@@ -137,20 +406,92 @@ ScryfallCode=DMU
 380 R Shivan Reef @Donato Giancola
 381 R Sulfurous Springs @Mark Tedin
 382 R Yavimaya Coast @Mark Poole
+
+[extended art]
+383 R Anointed Peacekeeper @Tia Masic
 384 R Archangel of Wrath @Miguel Mercado
+385 R Defiler of Faith @Magali Villeneuve
 386 R Guardian of New Benalia @Ernanda Souza
+387 R Leyline Binding @Cristi Balanescu
+388 M Serra Paragon @Heonhwa Choe
+389 R Temporary Lockdown @Bryan Sola
+390 R Valiant Veteran @Nestor Ossandon Leal
+391 R Academy Loremaster @Marcela Medeiros
+392 R Aether Channeler @Caio Monteiro
+393 R Defiler of Dreams @Ryan Pancoast
+394 R Haughty Djinn @Mike Jordana
+395 R Silver Scrutiny @Donato Giancola
 396 M Sphinx of Clear Skies @Valera Lutfullina
+397 M Vesuvan Duplimancy @Wylie Beckert
+398 R Vodalian Hexcatcher @Dmitry Burmak
+399 R Vodalian Mindsinger @Steve Prescott
+400 R Defiler of Flesh @Mathias Kollros
+401 R Drag to the Bottom @Nino Is
 402 R Evolved Sleeper @Jason A. Engle
+403 R Shadow-Rite Priest @Michael C. Hayes
+404 R Stronghold Arena @Alexander Mokhov
 405 R Chaotic Transformation @Joseph Meehan
+406 R Defiler of Instinct @Steven Belledin
 407 R Keldon Flamesage @Jason A. Engle
+408 R Radha's Firebrand @Ângelo Bortolini
+409 R Rundvelt Hordemaster @Bruno Biazotto
 410 M Shivan Devastator @Brent Hollowell
 411 R Temporal Firestorm @Nestor Ossandon Leal
+412 R Defiler of Vigor @Chase Stone
+413 R Herd Migration @Eric Deschamps
+414 R Leaf-Crowned Visionary @Anna Steinbauer
+415 R Llanowar Greenwidow @Jokubas Uogintas
 416 R Llanowar Loamspeaker @Zara Alfonso
+417 R Quirion Beastcaller @Valera Lutfullina
+418 M Silverback Elder @Alexander Mokhov
+419 R Threats Undetected @Randy Vargas
+420 R Urborg Lhurgoyf @Andrey Kuzinskiy
 421 R Plaza of Heroes @Gabor Szikszai
+422 R Thran Portal @Sarah Finnigan
+
+[buy a box]
 428 R Llanowar Loamspeaker @Volkan Baǵa
+
+[promo]
 429 R Herd Migration @Antonio José Manzanedo
+430 U Resolute Reinforcements @Billy Christian
+431 U Micromancer @Ernanda Souza
+432 U Cut Down @Dominik Mayer
+433 C Lightning Strike @Marta Nael
 434 U Nishoba Brawler @Valera Lutfullina
+
+[lands]
+2 Plains|DMU|1
+2 Plains|DMU|2
+2 Plains|DMU|3
+1 Plains|DMU|4
+2 Island|DMU|1
+2 Island|DMU|2
+2 Island|DMU|3
+1 Island|DMU|4
+2 Swamp|DMU|1
+2 Swamp|DMU|2
+2 Swamp|DMU|3
+1 Swamp|DMU|4
+2 Mountain|DMU|1
+2 Mountain|DMU|2
+2 Mountain|DMU|3
+1 Mountain|DMU|4
+2 Forest|DMU|1
+2 Forest|DMU|2
+2 Forest|DMU|3
+1 Forest|DMU|4
 
 [tokens]
 b_1_1_bird_flying_noblock
+b_2_2_phyrexian
+c_a_powerstone
+g_1_1_saproling
+g_3_3_beast
+ornithopter
+r_1_1_goblin
 r_1_1_monk_prowess
+r_2_1_elemental_trample_haste
+r_4_4_dragon_flying
+w_1_1_bird_flying
+w_1_1_soldier

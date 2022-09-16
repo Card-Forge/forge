@@ -98,7 +98,7 @@ public abstract class GameStage extends Stage {
                     return;
                 foregroundSprites.removeActor(player);
                 player = null;
-                GameStage.this.getPlayerSprite();
+                GameStage.this.GetPlayer();
             }
         });
         camera = (OrthographicCamera) getCamera();
@@ -211,19 +211,19 @@ public abstract class GameStage extends Stage {
     @Override
     public boolean keyDown(int keycode) {
         super.keyDown(keycode);
-        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A)//todo config
+        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A || keycode == Input.Keys.DPAD_LEFT)//todo config
         {
             player.getMovementDirection().x = -1;
         }
-        if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)//todo config
+        if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D || keycode == Input.Keys.DPAD_RIGHT)//todo config
         {
             player.getMovementDirection().x = +1;
         }
-        if (keycode == Input.Keys.UP || keycode == Input.Keys.W)//todo config
+        if (keycode == Input.Keys.UP || keycode == Input.Keys.W || keycode == Input.Keys.DPAD_UP)//todo config
         {
             player.getMovementDirection().y = +1;
         }
-        if (keycode == Input.Keys.DOWN || keycode == Input.Keys.S)//todo config
+        if (keycode == Input.Keys.DOWN || keycode == Input.Keys.S || keycode == Input.Keys.DPAD_DOWN)//todo config
         {
             player.getMovementDirection().y = -1;
         }

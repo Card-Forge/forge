@@ -1,0 +1,12 @@
+Name:Urza Assembles the Titans
+ManaCost:3 W W
+Types:Enchantment Saga
+K:Read ahead:3:DBScry,DBChangeZone,DBLoyalty
+SVar:DBScry:DB$ Scry | ScryNum$ 4 | SubAbility$ DBDig | SpellAbility$ Scry 4, then you may reveal the top card of your library. If a planeswalker card is revealed this way, put it into your hand.
+SVar:DBDig:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Planeswalker | LibraryPosition2$ 0
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Planeswalker.cmcLE6 | ChangeNum$ 1 | SpellDescription$ You may put a planeswalker card with mana value 6 or less from your hand onto the battlefield.
+SVar:DBLoyalty:DB$ Effect | StaticAbilities$ STPump | SpellDescription$ You may activate the loyalty abilities of planeswalkers you control twice this turn rather than only once.
+SVar:STPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Planeswalker.YouCtrl | AddHiddenKeyword$ CARDNAME's loyalty abilities can be activated twice each turn rather than only once | Description$ You may activate the loyalty abilities of planeswalkers you control twice this turn rather than only once.
+DeckNeeds:Type$Planeswalker
+AI:RemoveDeck:Random
+Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don't trigger. Sacrifice after III.)\nI — Scry 4, then you may reveal the top card of your library. If a planeswalker card is revealed this way, put it into your hand.\nII — You may put a planeswalker card with mana value 6 or less from your hand onto the battlefield.\nIII — You may activate the loyalty abilities of planeswalkers you control twice this turn rather than only once.
