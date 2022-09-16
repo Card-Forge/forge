@@ -48,6 +48,7 @@ Brainiac:Brainiacs
 Bringer:Bringers
 Brushwagg:Brushwaggs
 Camarid:Camarids
+C'tan:C'tan
 Camel:Camels
 Caribou:Caribous
 Carrier:Carriers
@@ -206,6 +207,7 @@ Pincher:Pinchers
 Pirate:Pirates
 Plant:Plants
 Praetor:Praetors
+Primarch:Primarchs
 Prism:Prisms
 Processor:Processors
 Rabbit:Rabbits
