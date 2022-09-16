@@ -1,0 +1,6 @@
+Name:Necron Warrior Token
+ManaCost:no cost
+Types:Creature Necron Warrior
+Colors:black
+PT:2/2
+Oracle:
