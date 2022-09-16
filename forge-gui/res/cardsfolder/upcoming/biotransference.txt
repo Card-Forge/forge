@@ -5,5 +5,5 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield,Hand
 T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ DBLoseLife | TriggerDescription$ Whenever you cast an artifact spell, you lose 1 life and create a 2/2 black Necron Warrior artifact creature token.
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ b_2_2_necron_warrior
-DeckHas:Ability$Token
+DeckHas:Ability$Token & Type$Necron|Warrior
 Oracle:Creatures you control are artifacts in addition to their other types. The same is true for creature spells you control and creature cards you own that aren’t on the battlefield.\nWhenever you cast an artifact spell, you lose 1 life and create a 2/2 black Necron Warrior artifact creature token.
