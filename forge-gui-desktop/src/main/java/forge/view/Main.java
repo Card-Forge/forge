@@ -20,6 +20,7 @@ package forge.view;
 import forge.GuiDesktop;
 import forge.Singletons;
 import forge.error.ExceptionHandler;
+import forge.gamemodes.net.StandaloneServer;
 import forge.gui.GuiBase;
 import forge.gui.card.CardReaderExperiments;
 import forge.util.BuildInfo;
@@ -75,8 +76,9 @@ public final class Main {
                 break;
 
             case "server":
-                System.out.println("Dedicated server mode.\nNot implemented.");
-                break;
+                Singletons.initializeOnce(true);
+                StandaloneServer.start(args);
+                return;
             
             default:
                 System.out.println("Unknown mode.\nKnown mode is 'sim', 'parse' ");
