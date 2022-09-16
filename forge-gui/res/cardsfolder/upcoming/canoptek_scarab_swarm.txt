@@ -7,7 +7,6 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigExile:DB$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | SubAbility$ DBToken | RememberChanged$ True
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ c_1_1_insect_artifact_flying | TokenOwner$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Valid Land/.Y
-SVar:Y:Remembered$Valid Artifact
+SVar:X:Rememebered$Valid Land,Artifact
 DeckHas:Ability$Token
 Oracle:Flying\nFeeder Mandibles — When Canoptek Scarab Swarm enters the battlefield, exile target player's graveyard. For each artifact or land card exiled this way, create a 1/1 colorless Insect artifact creature token with flying.
