@@ -4,6 +4,7 @@ Types:Artifact Equipment
 K:Equip:3
 T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigCounter | TriggerDescription$ Whenever equipped creature attacks, put four +1/+1 counters on it.
 SVar:TrigCounter:DB$ PutCounter | Defined$ Equipped | CounterType$ P1P1 | CounterNum$ 4
-DeckHas:Ability$Counter
-HasAttackEffect:True
+DeckHas:Ability$Counters
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ AE
+SVar:AE:SVar:HasAttackEffect:TRUE
 Oracle:Whenever equipped creature attacks, put four +1/+1 counters on it.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)

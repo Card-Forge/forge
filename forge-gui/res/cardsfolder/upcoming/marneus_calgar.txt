@@ -6,6 +6,6 @@ K:Double Strike
 T:Mode$ ChangesZoneAll | ValidCards$ Card.token+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ DBDraw | TriggerDescription$ Master Tactician — Whenever one or more tokens enter the battlefield under your control, draw a card.
 SVar:DBDraw:DB$ Draw
 A:AB$ Token | Cost$ 6 | PrecostDesc$ Chapter Master — | TokenAmount$ 2 | TokenScript$ w_2_2_astartes_warrior_vigilance | TokenOwner$ You | SpellDescription$ Create two 2/2 white Astartes Warrior creature tokens with vigilance.
-DeckHints:Ability$Tokens
-DeckHas:Ability$Tokens
+DeckHints:Ability$Token
+DeckHas:Ability$Token
 Oracle:Double strike\nMaster Tactician — Whenever one or more tokens enter the battlefield under your control, draw a card.\nChapter Master — {6}: Create two 2/2 white Astartes Warrior creature tokens with vigilance.
