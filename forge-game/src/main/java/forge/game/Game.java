@@ -887,8 +887,7 @@ public class Game {
         ingamePlayers.remove(p);
         lostPlayers.add(p);
 
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, p);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
         getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams, false);
     }
 
@@ -1202,8 +1201,7 @@ public class Game {
 
                     // If an effect allows or instructs a player to reveal the card as it’s being drawn,
                     // it’s revealed after the spell becomes cast or the ability becomes activated.
-                    final Map<AbilityKey, Object> runParams = Maps.newHashMap();
-                    runParams.put(AbilityKey.Card, c);
+                    final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
                     runParams.put(AbilityKey.Number, facedownWhileCasting.get(c));
                     runParams.put(AbilityKey.Player, this);
                     runParams.put(AbilityKey.CanReveal, true);

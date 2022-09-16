@@ -1,0 +1,10 @@
+Name:Acolyte Hybrid
+ManaCost:2 R
+Types:Creature Tyranid Human
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Heavy Rock Cutter — Whenever CARDNAME attacks, destroy up to one target artifact. If an artifact is destroyed this way, its controller draws a card.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select up to one target artifact | TargetMin$ 0 | TargetMax$ 1 | RememberDestroyed$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ RememberedController | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Heavy Rock Cutter — Whenever Acolyte Hybrid attacks, destroy up to one target artifact. If an artifact is destroyed this way, its controller draws a card.

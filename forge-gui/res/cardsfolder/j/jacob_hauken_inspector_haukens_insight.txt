@@ -1,7 +1,7 @@
 Name:Jacob Hauken, Inspector
 ManaCost:1 U
 Types:Legendary Creature Human Advisor
-PT:1/2
+PT:0/2
 A:AB$ Draw | Cost$ T | NumCards$ 1 | SubAbility$ DBExile | StackDescription$ {p:You} draws a card, | SpellDescription$ Draw a card,
 SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | ExileFaceDown$ True | Imprint$ True | Mandatory$ True | SubAbility$ DBEffect | StackDescription$ then exiles a card from their hand face down. | SpellDescription$ then exile a card from your hand face down.
 SVar:DBEffect:DB$ Effect | RememberObjects$ Imprinted | StaticAbilities$ STLook | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ DBTransform | SpellDescription$ You may look at that card for as long as it remains exiled.

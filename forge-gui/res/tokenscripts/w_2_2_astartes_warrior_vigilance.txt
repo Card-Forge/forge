@@ -1,0 +1,7 @@
+Name:Astartes Warrior Token
+ManaCost:no cost
+Types:Creature Astartes Warrior
+Colors:white
+PT:2/2
+K:Vigilance
+Oracle:Vigilance

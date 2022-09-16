@@ -1,264 +1,264 @@
 //Rank|Name|Rarity|Set
-#1|Sphinx of Clear Skies|M|DMU
-#2|Sheoldred, the Apocalypse|M|DMU
-#3|Jaya, Fiery Negotiator|M|DMU
-#4|Archangel of Wrath|R|DMU
-#5|Silverback Elder|M|DMU
-#6|The Cruelty of Gix|R|DMU
-#7|Rith, Liberated Primeval|M|DMU
-#8|Serra Paragon|M|DMU
-#9|Shivan Devastator|M|DMU
-#10|Ajani, Sleeper Agent|M|DMU
-#11|Sol'Kanar the Tainted|M|DMU
-#12|King Darien XLVIII|R|DMU
-#13|Nemata, Primeval Warden|R|DMU
-#14|The Phasing of Zhalfir|R|DMU
-#15|The Elder Dragon War|R|DMU
-#16|Temporal Firestorm|R|DMU
-#17|Squee, Dubious Monarch|R|DMU
-#18|Soul of Windgrace|M|DMU
-#19|Guardian of New Benalia|R|DMU
-#20|Drag to the Bottom|R|DMU
-#21|Defiler of Vigor|R|DMU
-#22|Ertai Resurrected|R|DMU
-#23|Braids, Arisen Nightmare|R|DMU
-#24|Aether Channeler|R|DMU
-#25|Haughty Djinn|R|DMU
+#1|Sheoldred, the Apocalypse|M|DMU
+#2|Archangel of Wrath|R|DMU
+#3|Shivan Devastator|M|DMU
+#4|Rith, Liberated Primeval|M|DMU
+#5|Serra Paragon|M|DMU
+#6|Sphinx of Clear Skies|M|DMU
+#7|Nemata, Primeval Warden|R|DMU
+#8|Jaya, Fiery Negotiator|M|DMU
+#9|Temporal Firestorm|R|DMU
+#10|Wingmantle Chaplain|U|DMU
+#11|The Elder Dragon War|R|DMU
+#12|Defiler of Vigor|R|DMU
+#13|The Cruelty of Gix|R|DMU
+#14|Vodalian Mindsinger|R|DMU
+#15|Drag to the Bottom|R|DMU
+#16|Herd Migration|R|DMU
+#17|Silverback Elder|M|DMU
+#18|King Darien XLVIII|R|DMU
+#19|Sol'Kanar the Tainted|M|DMU
+#20|Defiler of Instinct|R|DMU
+#21|Llanowar Greenwidow|R|DMU
+#22|Ajani, Sleeper Agent|M|DMU
+#23|Soul of Windgrace|M|DMU
+#24|Guardian of New Benalia|R|DMU
+#25|Leyline Binding|R|DMU
 #26|Evolved Sleeper|R|DMU
-#27|Defiler of Instinct|R|DMU
-#28|Llanowar Greenwidow|R|DMU
+#27|Sprouting Goblin|U|DMU
+#28|Llanowar Loamspeaker|R|DMU
 #29|Quirion Beastcaller|R|DMU
-#30|Defiler of Flesh|R|DMU
-#31|Llanowar Loamspeaker|R|DMU
-#32|Danitha, Benalia's Hope|R|DMU
-#33|Meria, Scholar of Antiquity|R|DMU
-#34|Najal, the Storm Runner|U|DMU
-#35|Defiler of Faith|R|DMU
-#36|Phyrexian Missionary|U|DMU
-#37|Defiler of Dreams|R|DMU
-#38|Liliana of the Veil|M|DMU
-#39|Sprouting Goblin|U|DMU
-#40|Aron, Benalia's Ruin|U|DMU
-#41|Raff, Weatherlight Stalwart|U|DMU
-#42|Shanna, Purifying Blade|M|DMU
-#43|Leyline Binding|R|DMU
-#44|Prayer of Binding|U|DMU
-#45|Vodalian Mindsinger|R|DMU
-#46|Cut Down|U|DMU
-#47|Phyrexian Rager|C|DMU
-#48|Electrostatic Infantry|U|DMU
-#49|Lightning Strike|C|DMU
-#50|Tear Asunder|U|DMU
-#51|Ivy, Gleeful Spellthief|R|DMU
-#52|Queen Allenal of Ruadach|U|DMU
-#53|Rona, Sheoldred's Faithful|U|DMU
-#54|Rulik Mons, Warren Chief|U|DMU
-#55|Stenn, Paranoid Partisan|R|DMU
-#56|Tatyova, Steward of Tides|U|DMU
-#57|Uurg, Spawn of Turg|U|DMU
-#58|Zar Ojanen, Scion of Efrava|U|DMU
-#59|Garna, Bloodfist of Keld|U|DMU
-#60|Anointed Peacekeeper|R|DMU
-#61|Extinguish the Light|C|DMU
-#62|Linebreaker Baloth|U|DMU
-#63|Tail Swipe|U|DMU
-#64|Golden Argosy|R|DMU
-#65|Weatherlight Compleated|M|DMU
-#66|Astor, Bearer of Blades|R|DMU
-#67|Elas il-Kor, Sadistic Pilgrim|U|DMU
-#68|Nael, Avizoa Aeronaut|U|DMU
-#69|Tori D'Avenant, Fury Rider|U|DMU
-#70|Citizen's Arrest|C|DMU
-#71|Knight of Dawn's Light|U|DMU
-#72|Valiant Veteran|R|DMU
-#73|Battlewing Mystic|U|DMU
-#74|Rona's Vortex|U|DMU
-#75|Vesuvan Duplimancy|M|DMU
-#76|Cult Conscript|U|DMU
-#77|Tribute to Urborg|C|DMU
-#78|Balduvian Berserker|U|DMU
-#79|Fires of Victory|U|DMU
-#80|Hurloon Battle Hymn|U|DMU
-#81|Keldon Flamesage|R|DMU
-#82|Radha's Firebrand|R|DMU
-#83|Herd Migration|R|DMU
-#84|Nishoba Brawler|U|DMU
-#85|The Weatherseed Treaty|U|DMU
-#86|Yavimaya Iconoclast|U|DMU
-#87|Karn's Sylex|M|DMU
-#88|Bite Down|C|DMU
-#89|Knight of Dusk's Shadow|U|DMU
-#90|Balmor, Battlemage Captain|U|DMU
-#91|Bortuk Bonerattle|U|DMU
-#92|Tura Kennerüd, Skyknight|U|DMU
-#93|Vohar, Vodalian Desecrator|U|DMU
-#94|Baird, Argivian Recruiter|U|DMU
-#95|Cleaving Skyrider|U|DMU
-#96|Runic Shot|U|DMU
-#97|Shalai's Acolyte|U|DMU
-#98|Djinn of the Fountain|U|DMU
-#99|Frostfist Strider|U|DMU
-#100|Tolarian Terror|C|DMU
-#101|Braids's Frightful Return|U|DMU
-#102|Hurler Cyclops|U|DMU
-#103|Warhost's Frenzy|U|DMU
-#104|Magnigoth Sentry|C|DMU
-#105|Strength of the Coalition|U|DMU
-#106|Territorial Maro|U|DMU
-#107|Vineshaper Prodigy|C|DMU
-#108|Keldon Strike Team|C|DMU
-#109|The Raven Man|R|DMU
-#110|Radha, Coalition Warlord|U|DMU
-#111|Ratadrabik of Urborg|R|DMU
-#112|Argivian Cavalier|C|DMU
-#113|Join Forces|U|DMU
-#114|Resolute Reinforcements|U|DMU
-#115|Academy Loremaster|R|DMU
-#116|Joint Exploration|U|DMU
-#117|Silver Scrutiny|R|DMU
-#118|Timely Interference|C|DMU
-#119|Tolarian Geyser|C|DMU
-#120|Blight Pile|U|DMU
-#121|Sengir Connoisseur|U|DMU
-#122|Stronghold Arena|R|DMU
-#123|Twinferno|U|DMU
-#124|Elvish Hydromancer|U|DMU
-#125|Mossbeard Ancient|U|DMU
-#126|Scout the Wilderness|C|DMU
-#127|Sunbathing Rootwalla|C|DMU
-#128|Hero's Heirloom|U|DMU
-#129|Geothermal Bog|C|DMU
-#130|Haunted Mire|C|DMU
-#131|Idyllic Beachfront|C|DMU
-#132|Molten Tributary|C|DMU
-#133|Radiant Grove|C|DMU
-#134|Sacred Peaks|C|DMU
-#135|Sunlit Marsh|C|DMU
-#136|Tangled Islet|C|DMU
-#137|Wooded Ridgeline|C|DMU
-#138|Contaminated Aquifer|C|DMU
-#139|Combat Research|U|DMU
-#140|Ghitu Amplifier|C|DMU
-#141|Essence Scatter|C|DMU
-#142|Jhoira, Ageless Innovator|R|DMU
-#143|Rivaz of the Claw|R|DMU
-#144|Karn, Living Legacy|M|DMU
-#145|Coalition Skyknight|U|DMU
-#146|Mesa Cavalier|C|DMU
-#147|Wingmantle Chaplain|U|DMU
-#148|Coral Colony|U|DMU
-#149|Phyrexian Espionage|C|DMU
-#150|Protect the Negotiators|U|DMU
-#151|Volshe Tideturner|C|DMU
-#152|Balduvian Atrocity|U|DMU
-#153|Pilfer|U|DMU
-#154|Sheoldred's Restoration|U|DMU
-#155|Urborg Repossession|C|DMU
-#156|Dragon Whelp|U|DMU
-#157|Jaya's Firenado|C|DMU
-#158|Molten Monstrosity|C|DMU
-#159|Phoenix Chick|U|DMU
-#160|Thrill of Possibility|C|DMU
-#161|Viashino Branchrider|C|DMU
-#162|Yavimaya Steelcrusher|C|DMU
-#163|Bog Badger|C|DMU
-#164|Leaf-Crowned Visionary|R|DMU
-#165|Slimefoot's Survey|U|DMU
-#166|Urborg Lhurgoyf|R|DMU
-#167|Yavimaya Sojourner|C|DMU
-#168|Automatic Librarian|C|DMU
-#169|Inscribed Tablet|U|DMU
-#170|Shield-Wall Sentinel|C|DMU
-#171|Adarkar Wastes|R|DMU
-#172|Caves of Koilos|R|DMU
-#173|Karplusan Forest|R|DMU
-#174|Shivan Reef|R|DMU
-#175|Sulfurous Springs|R|DMU
-#176|Yavimaya Coast|R|DMU
-#177|Artillery Blast|C|DMU
-#178|Bone Splinters|C|DMU
-#179|Talas Lookout|C|DMU
-#180|Deathbloom Gardener|C|DMU
-#181|Flowstone Infusion|C|DMU
-#182|Eerie Soultender|C|DMU
-#183|Captain's Call|C|DMU
-#184|Lagomos, Hand of Hatred|U|DMU
-#185|Zur, Eternal Schemer|M|DMU
-#186|Jodah, the Unifier|M|DMU
-#187|Benalish Sleeper|C|DMU
-#188|Juniper Order Rootweaver|C|DMU
-#189|Love Song of Night and Day|U|DMU
-#190|Samite Herbalist|C|DMU
-#191|Stall for Time|C|DMU
-#192|Micromancer|U|DMU
-#193|Voda Sea Scavenger|C|DMU
-#194|Monstrous War-Leech|U|DMU
-#195|Phyrexian Warhorse|C|DMU
-#196|Tattered Apparition|C|DMU
-#197|Writhing Necromass|C|DMU
-#198|Smash to Dust|C|DMU
-#199|Colossal Growth|C|DMU
-#200|Gaea's Might|C|DMU
-#201|Snarespinner|C|DMU
-#202|Threats Undetected|R|DMU
-#203|Jodah's Codex|U|DMU
-#204|Relic of Legends|U|DMU
-#205|Walking Bulwark|U|DMU
-#206|Plaza of Heroes|R|DMU
-#207|Thran Portal|R|DMU
-#208|Argivian Phalanx|C|DMU
-#209|Griffin Protector|C|DMU
-#210|Floriferous Vinewall|C|DMU
-#211|Elfhame Wurm|C|DMU
-#212|Goblin Picker|C|DMU
-#213|Coalition Warbrute|C|DMU
-#214|Splatter Goblin|C|DMU
-#215|Phyrexian Vivisector|C|DMU
-#216|Clockwork Drawbridge|C|DMU
-#217|Benalish Faithbonder|C|DMU
-#218|Choking Miasma|U|DMU
-#219|Charismatic Vanguard|C|DMU
-#220|Take Up the Shield|C|DMU
-#221|Temporary Lockdown|R|DMU
-#222|Academy Wall|C|DMU
-#223|Founding the Third Path|U|DMU
-#224|Impede Momentum|C|DMU
-#225|Negate|C|DMU
-#226|Vodalian Hexcatcher|R|DMU
-#227|Shadow-Rite Priest|R|DMU
-#228|Toxic Abomination|C|DMU
-#229|Rundvelt Hordemaster|R|DMU
-#230|Yotia Declares War|U|DMU
-#231|The World Spell|M|DMU
-#232|Timeless Lotus|M|DMU
-#233|Ertai's Scorn|U|DMU
-#234|Aggressive Sabotage|C|DMU
-#235|Gibbering Barricade|C|DMU
-#236|Haunting Figment|C|DMU
-#237|Pixie Illusionist|C|DMU
-#238|Crystal Grotto|C|DMU
-#239|Meteorite|C|DMU
-#240|Hexbane Tortoise|C|DMU
-#241|Barkweave Crusher|C|DMU
-#242|Meria's Outrider|C|DMU
-#243|Flowstone Kavu|C|DMU
-#244|Shadow Prophecy|C|DMU
-#245|Battlefly Swarm|C|DMU
-#246|Tidepool Turtle|C|DMU
-#247|Soaring Drake|C|DMU
-#248|Destroy Evil|C|DMU
-#249|In Thrall to the Pit|C|DMU
-#250|Llanowar Stalker|C|DMU
-#251|Furious Bellow|C|DMU
-#252|Shore Up|C|DMU
-#253|Chaotic Transformation|R|DMU
-#254|Impulse|C|DMU
-#255|Vanquisher's Axe|C|DMU
-#256|Salvaged Manaworker|C|DMU
-#257|Battle-Rage Blessing|C|DMU
-#258|Heroic Charge|C|DMU
-#259|Hammerhand|C|DMU
-#260|Broken Wings|C|DMU
+#30|Shanna, Purifying Blade|M|DMU
+#31|Defiler of Dreams|R|DMU
+#32|Rona's Vortex|U|DMU
+#33|Danitha, Benalia's Hope|R|DMU
+#34|Bortuk Bonerattle|U|DMU
+#35|Tatyova, Steward of Tides|U|DMU
+#36|Defiler of Faith|R|DMU
+#37|Haughty Djinn|R|DMU
+#38|Defiler of Flesh|R|DMU
+#39|Tear Asunder|U|DMU
+#40|Ertai Resurrected|R|DMU
+#41|Phyrexian Missionary|U|DMU
+#42|Aether Channeler|R|DMU
+#43|Radha's Firebrand|R|DMU
+#44|Nishoba Brawler|U|DMU
+#45|Braids, Arisen Nightmare|R|DMU
+#46|Squee, Dubious Monarch|R|DMU
+#47|Aron, Benalia's Ruin|U|DMU
+#48|Nael, Avizoa Aeronaut|U|DMU
+#49|Najal, the Storm Runner|U|DMU
+#50|Baird, Argivian Recruiter|U|DMU
+#51|Anointed Peacekeeper|R|DMU
+#52|Prayer of Binding|U|DMU
+#53|Frostfist Strider|U|DMU
+#54|Cult Conscript|U|DMU
+#55|Extinguish the Light|C|DMU
+#56|Liliana of the Veil|M|DMU
+#57|Fires of Victory|U|DMU
+#58|Hurloon Battle Hymn|U|DMU
+#59|Lightning Strike|C|DMU
+#60|Tail Swipe|U|DMU
+#61|Territorial Maro|U|DMU
+#62|Karn's Sylex|M|DMU
+#63|The Raven Man|R|DMU
+#64|Balmor, Battlemage Captain|U|DMU
+#65|Queen Allenal of Ruadach|U|DMU
+#66|Raff, Weatherlight Stalwart|U|DMU
+#67|Rulik Mons, Warren Chief|U|DMU
+#68|Garna, Bloodfist of Keld|U|DMU
+#69|Cleaving Skyrider|U|DMU
+#70|Knight of Dawn's Light|U|DMU
+#71|Valiant Veteran|R|DMU
+#72|Battlewing Mystic|U|DMU
+#73|Tolarian Terror|C|DMU
+#74|Cut Down|U|DMU
+#75|Phyrexian Rager|C|DMU
+#76|Electrostatic Infantry|U|DMU
+#77|Keldon Flamesage|R|DMU
+#78|Strength of the Coalition|U|DMU
+#79|The Weatherseed Treaty|U|DMU
+#80|Meria's Outrider|C|DMU
+#81|Elas il-Kor, Sadistic Pilgrim|U|DMU
+#82|Lagomos, Hand of Hatred|U|DMU
+#83|Rona, Sheoldred's Faithful|U|DMU
+#84|Tori D'Avenant, Fury Rider|U|DMU
+#85|Jodah, the Unifier|M|DMU
+#86|Citizen's Arrest|C|DMU
+#87|Tolarian Geyser|C|DMU
+#88|Balduvian Berserker|U|DMU
+#89|Dragon Whelp|U|DMU
+#90|Linebreaker Baloth|U|DMU
+#91|Vineshaper Prodigy|C|DMU
+#92|Yavimaya Iconoclast|U|DMU
+#93|Bite Down|C|DMU
+#94|Talas Lookout|C|DMU
+#95|Floriferous Vinewall|C|DMU
+#96|Knight of Dusk's Shadow|U|DMU
+#97|Uurg, Spawn of Turg|U|DMU
+#98|Zar Ojanen, Scion of Efrava|U|DMU
+#99|Karn, Living Legacy|M|DMU
+#100|Shalai's Acolyte|U|DMU
+#101|Djinn of the Fountain|U|DMU
+#102|Micromancer|U|DMU
+#103|Silver Scrutiny|R|DMU
+#104|Balduvian Atrocity|U|DMU
+#105|Tribute to Urborg|C|DMU
+#106|Urborg Repossession|C|DMU
+#107|Phoenix Chick|U|DMU
+#108|Gaea's Might|C|DMU
+#109|Magnigoth Sentry|C|DMU
+#110|Mossbeard Ancient|U|DMU
+#111|Urborg Lhurgoyf|R|DMU
+#112|Jodah's Codex|U|DMU
+#113|Shield-Wall Sentinel|C|DMU
+#114|Argivian Phalanx|C|DMU
+#115|Deathbloom Gardener|C|DMU
+#116|Flowstone Infusion|C|DMU
+#117|Eerie Soultender|C|DMU
+#118|Essence Scatter|C|DMU
+#119|Destroy Evil|C|DMU
+#120|Choking Miasma|U|DMU
+#121|Ivy, Gleeful Spellthief|R|DMU
+#122|Radha, Coalition Warlord|U|DMU
+#123|Ratadrabik of Urborg|R|DMU
+#124|Tura Kennerüd, Skyknight|U|DMU
+#125|Vohar, Vodalian Desecrator|U|DMU
+#126|Argivian Cavalier|C|DMU
+#127|Benalish Sleeper|C|DMU
+#128|Resolute Reinforcements|U|DMU
+#129|Runic Shot|U|DMU
+#130|Coral Colony|U|DMU
+#131|Phyrexian Espionage|C|DMU
+#132|Timely Interference|C|DMU
+#133|Vesuvan Duplimancy|M|DMU
+#134|Blight Pile|U|DMU
+#135|Phyrexian Warhorse|C|DMU
+#136|Sengir Connoisseur|U|DMU
+#137|Writhing Necromass|C|DMU
+#138|Twinferno|U|DMU
+#139|Yavimaya Steelcrusher|C|DMU
+#140|Bog Badger|C|DMU
+#141|Elvish Hydromancer|U|DMU
+#142|Sunbathing Rootwalla|C|DMU
+#143|Yavimaya Sojourner|C|DMU
+#144|Golden Argosy|R|DMU
+#145|Relic of Legends|U|DMU
+#146|Geothermal Bog|C|DMU
+#147|Haunted Mire|C|DMU
+#148|Idyllic Beachfront|C|DMU
+#149|Molten Tributary|C|DMU
+#150|Radiant Grove|C|DMU
+#151|Sacred Peaks|C|DMU
+#152|Sunlit Marsh|C|DMU
+#153|Tangled Islet|C|DMU
+#154|Wooded Ridgeline|C|DMU
+#155|Contaminated Aquifer|C|DMU
+#156|Impulse|C|DMU
+#157|Artillery Blast|C|DMU
+#158|Griffin Protector|C|DMU
+#159|Gibbering Barricade|C|DMU
+#160|Keldon Strike Team|C|DMU
+#161|Goblin Picker|C|DMU
+#162|Flowstone Kavu|C|DMU
+#163|Splatter Goblin|C|DMU
+#164|Phyrexian Vivisector|C|DMU
+#165|Battlefly Swarm|C|DMU
+#166|Soaring Drake|C|DMU
+#167|Clockwork Drawbridge|C|DMU
+#168|Captain's Call|C|DMU
+#169|Rivaz of the Claw|R|DMU
+#170|Stenn, Paranoid Partisan|R|DMU
+#171|Coalition Skyknight|U|DMU
+#172|Join Forces|U|DMU
+#173|Juniper Order Rootweaver|C|DMU
+#174|Love Song of Night and Day|U|DMU
+#175|Academy Wall|C|DMU
+#176|Joint Exploration|U|DMU
+#177|Braids's Frightful Return|U|DMU
+#178|Pilfer|U|DMU
+#179|Toxic Abomination|C|DMU
+#180|Hurler Cyclops|U|DMU
+#181|Jaya's Firenado|C|DMU
+#182|Molten Monstrosity|C|DMU
+#183|Thrill of Possibility|C|DMU
+#184|Warhost's Frenzy|U|DMU
+#185|Leaf-Crowned Visionary|R|DMU
+#186|Scout the Wilderness|C|DMU
+#187|Slimefoot's Survey|U|DMU
+#188|Automatic Librarian|C|DMU
+#189|Inscribed Tablet|U|DMU
+#190|Weatherlight Compleated|M|DMU
+#191|Adarkar Wastes|R|DMU
+#192|Caves of Koilos|R|DMU
+#193|Karplusan Forest|R|DMU
+#194|Shivan Reef|R|DMU
+#195|Sulfurous Springs|R|DMU
+#196|Yavimaya Coast|R|DMU
+#197|Ertai's Scorn|U|DMU
+#198|In Thrall to the Pit|C|DMU
+#199|Aggressive Sabotage|C|DMU
+#200|Bone Splinters|C|DMU
+#201|Ghitu Amplifier|C|DMU
+#202|Pixie Illusionist|C|DMU
+#203|Crystal Grotto|C|DMU
+#204|Furious Bellow|C|DMU
+#205|Coalition Warbrute|C|DMU
+#206|Shadow Prophecy|C|DMU
+#207|Shore Up|C|DMU
+#208|Astor, Bearer of Blades|R|DMU
+#209|Meria, Scholar of Antiquity|R|DMU
+#210|Mesa Cavalier|C|DMU
+#211|Stall for Time|C|DMU
+#212|Take Up the Shield|C|DMU
+#213|Academy Loremaster|R|DMU
+#214|The Phasing of Zhalfir|R|DMU
+#215|Protect the Negotiators|U|DMU
+#216|Voda Sea Scavenger|C|DMU
+#217|Vodalian Hexcatcher|R|DMU
+#218|Volshe Tideturner|C|DMU
+#219|Monstrous War-Leech|U|DMU
+#220|Shadow-Rite Priest|R|DMU
+#221|Stronghold Arena|R|DMU
+#222|Viashino Branchrider|C|DMU
+#223|Colossal Growth|C|DMU
+#224|Snarespinner|C|DMU
+#225|Threats Undetected|R|DMU
+#226|The World Spell|M|DMU
+#227|Hero's Heirloom|U|DMU
+#228|Walking Bulwark|U|DMU
+#229|Plaza of Heroes|R|DMU
+#230|Thran Portal|R|DMU
+#231|Combat Research|U|DMU
+#232|Haunting Figment|C|DMU
+#233|Hexbane Tortoise|C|DMU
+#234|Elfhame Wurm|C|DMU
+#235|Barkweave Crusher|C|DMU
+#236|Battle-Rage Blessing|C|DMU
+#237|Heroic Charge|C|DMU
+#238|Jhoira, Ageless Innovator|R|DMU
+#239|Zur, Eternal Schemer|M|DMU
+#240|Charismatic Vanguard|C|DMU
+#241|Samite Herbalist|C|DMU
+#242|Impede Momentum|C|DMU
+#243|Negate|C|DMU
+#244|Sheoldred's Restoration|U|DMU
+#245|Tattered Apparition|C|DMU
+#246|Smash to Dust|C|DMU
+#247|Salvaged Manaworker|C|DMU
+#248|Meteorite|C|DMU
+#249|Llanowar Stalker|C|DMU
+#250|Broken Wings|C|DMU
+#251|Hammerhand|C|DMU
+#252|Tidepool Turtle|C|DMU
+#253|Benalish Faithbonder|C|DMU
+#254|Temporary Lockdown|R|DMU
+#255|Rundvelt Hordemaster|R|DMU
+#256|Yotia Declares War|U|DMU
+#257|Timeless Lotus|M|DMU
+#258|Vanquisher's Axe|C|DMU
+#259|Founding the Third Path|U|DMU
+#260|Chaotic Transformation|R|DMU
 #261|Urza Assembles the Titans|R|DMU
 #262|Plains 1|C|DMU
 #263|Plains 2|C|DMU
