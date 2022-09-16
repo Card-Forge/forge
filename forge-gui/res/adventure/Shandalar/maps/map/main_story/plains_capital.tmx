@@ -25,12 +25,12 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJztmEsOgjAQhmdnaAIrVxo3ngIfG+M59CZ6EB9svBO683ESbaSx4vTFIJbYP5mknTrTD5AhU4B2aBMDbD2xXfzJlyYAo8KmDzsSbFIhx0Taf5zo+bB1F6UVcpj2T6VrPv2AL5fuo4qPet/qyKWKbTvfIaLvQYk15Zwx+h6U2MBHi5X9w8HLL8aCD1uTfU3wXR4snehp12I8Z+9zeXxjdntwLfoAyz6ND5NPzxeTT3yrHsC65y8fVot1fOXfN/l+CJsjPmEu70cdfJh8er6YfOLT1efyOjb/ZX0u1+jw/7PL6QNfpun3OJ9tD7qPv8On6gl5v8T5csW6KqZuPszfLb5zZ/Y+/5aa6I8oCnw0tZkv05wfmbRBzp8wnyleVZuo50NYvEtOm/Mhsa6q06aarOMz5cTiZbnUXtvaXDUn9fwsKOhfdAehc9Wd
+   eJztmEsOgjAQhmdnJMGVK4gbT4HixnAO3eol9CC+Nt4J3fk4iRBpLDh9wACW2D+ZpJ06088WhrQA3dDOBdgbYgf3my8YAEwymyV2IVhYIUfIzT8dyPmw8TIKKuRQzR9w//n6A76YW0cRH3Xd6sgliu0637lPn4MSq8o5d+hzUGItHy2W949HHz9rMz5sjPe1wXdPWHr9tz2yduTk+3z76ejNkWrhAyx9Gh8mk/YXk0l8Gw9g6+nxrZK9Whf2q2k+rBbL1q/4+zbfD2YR4mNW5v2ogw+TSc8fJpP4ZPW5OI71f1mfizXaPn96OU3gO0nOeymf7hn06DbDJzoTpuellC8WjIti6ubD/MPsO3dz8v2m1Mb5iCLLR1OX+U6S+yOVdsj9E+ZTxYtqE/V+CIsvk1PnfoiNi+q0qibL+FQ5sXheZWqvbm2umpN6f2Zl9S96AU0B1qI=
   </data>
  </layer>
  <layer id="5" name="Overlay" width="40" height="40">
   <data encoding="base64" compression="zlib">
-   eJzt1E0OgjAQBeC3UnasK+lhYCOJXgI3LZdAjuXRXDI7IpZGw88ovC9p0r/FSzodgIimcAbwMmqjnYRCjhZIrHaKV4+TdoLlHGx4PnY2vPPP8gwoMu0U+1bJ37p9+L8u8lbXkfc6S12WNj4P3Z2Tk2ye9bRLS9VfrD+H9rbUn4m+1aTAXUabaid59zTxNRER9X65nxPRejqGURMa
+   eJzt1E0OgjAQBeC3EnddF9LD6EYSvARswEsIx/JoLp2dEUqDkTKA70ua9G/xkmkHIKJf1BZoZNysdhLySRxwdNopPj1S7QTxHJx/PnbWv7Nlpww4Z9op/lspf6ua+L8KqdV1pF4XeZe5C899d4nmEOv9hfqzb29P/ZnoW3cDtDI6o51k6GnDayIieltzPyei5bwA2sMSFQ==
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -133,7 +133,7 @@
 			&quot;itemNames&quot;: [&quot;Gold Armor&quot;,&quot;Gold Shield&quot;,&quot;Gold Boots&quot;,&quot;Bronze Sword&quot;]
 		}
 		],[{
-			&quot;type&quot;: &quot;items&quot;,
+			&quot;type&quot;: &quot;item&quot;,
 			&quot;probability&quot;: 1,
 			&quot;count&quot;: 1,
 			&quot;itemNames&quot;: [&quot;Gold Armor&quot;,&quot;Gold Shield&quot;,&quot;Gold Boots&quot;,&quot;Bronze Sword&quot;]

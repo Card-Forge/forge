@@ -132,7 +132,6 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     private void startButton() {
         if(roundsWon ==0)
         {
-            goldLabel.setVisible(false);
             startDialog.show(stage);
         }
         else
@@ -143,6 +142,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
     int roundsWon =0;
     private void startArena() {
+        goldLabel.setVisible(false);
         arenaStarted=true;
         startButton.setText(Forge.getLocalizer().getMessage("lblContinue"));
         doneButton.setText(Forge.getLocalizer().getMessage("lblConcede"));
@@ -152,26 +152,26 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     }
     @Override
     public void setWinner(boolean winner) {
-            Array<Actor> winners=new Array<>();
-            Array<EnemySprite> winnersEnemies=new Array<>();
-             for(int i=0;i<fighters.size-2;i+=2)
+        Array<Actor> winners=new Array<>();
+        Array<EnemySprite> winnersEnemies=new Array<>();
+         for(int i=0;i<fighters.size-2;i+=2)
+         {
+             boolean leftWon=rand.nextBoolean();
+             if(leftWon)
              {
-                 boolean leftWon=rand.nextBoolean();
-                 if(leftWon)
-                 {
-                     winners.add(fighters.get(i));
-                     winnersEnemies.add(enemies.get(i));
-                     moveFighter(fighters.get(i),true);
-                     markLostFighter(fighters.get(i+1));
-                 }
-                 else
-                 {
-                     markLostFighter(fighters.get(i));
-                     moveFighter(fighters.get(i+1),false);
-                     winners.add(fighters.get(i+1));
-                     winnersEnemies.add(enemies.get(i+1));
-                 }
+                 winners.add(fighters.get(i));
+                 winnersEnemies.add(enemies.get(i));
+                 moveFighter(fighters.get(i),true);
+                 markLostFighter(fighters.get(i+1));
              }
+             else
+             {
+                 markLostFighter(fighters.get(i));
+                 moveFighter(fighters.get(i+1),false);
+                 winners.add(fighters.get(i+1));
+                 winnersEnemies.add(enemies.get(i+1));
+             }
+         }
         if(winner)
         {
             markLostFighter(fighters.get(fighters.size-2));
@@ -286,10 +286,10 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
         arenaData=data;
         //rand.setSeed(seed); allow to reshuffle arena enemies for now
+
         enemies.clear();
-        for(Actor fighter:fighters)
-            arenaPlane.removeActor(fighter);
         fighters.clear();
+        arenaPlane.clear();
         roundsWon =0;
         int numberOfEnemies= (int) (Math.pow(2f, data.rounds)-1);
 

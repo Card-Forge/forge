@@ -90,13 +90,13 @@
   <object id="61" template="../../obj/arena.tx" x="216" y="403"/>
   <object id="62" template="../../obj/shop.tx" x="360" y="370">
    <properties>
-    <property name="shopList" value="Plains"/>
+    <property name="shopList" value="BlueItems"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
   <object id="63" template="../../obj/shop.tx" x="263" y="371">
    <properties>
-    <property name="shopList" value="Plains"/>
+    <property name="shopList" value="BlueEquipment"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>

@@ -19,6 +19,7 @@ import forge.adventure.util.RewardActor;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.util.MyRandom;
 
 import java.util.*;
@@ -59,7 +60,14 @@ public class SpellSmithScene extends UIScene {
 
         List<CardEdition> editions = StaticData.instance().getSortedEditions();
         editions = editions.stream().filter(input -> {
-            if(input == null) return false;
+            if(input == null)
+                return false;
+            if(input.getType()==        CardEdition.Type.REPRINT||input.getType()== CardEdition.Type.PROMO||input.getType()== CardEdition.Type.COLLECTOR_EDITION)
+                return false;
+            List<PaperCard> it = StreamSupport.stream(RewardData.getAllCards().spliterator(), false)
+                    .filter(input2 -> input2.getEdition().equals(input.getCode())).collect(Collectors.toList());
+            if(it.size()==0)
+                return false;
             return(!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getCode()));
         }).collect(Collectors.toList());
         editionList = ui.findActor("BSelectPlane");
@@ -222,8 +230,7 @@ public class SpellSmithScene extends UIScene {
 
 
     public void filterResults() {
-        RewardData R = new RewardData();
-        Iterable<PaperCard> P = R.getAllCards();
+        Iterable<PaperCard> P = RewardData.getAllCards();
         goldLabel.setText("Gold: "+ Current.player().getGold());
         float totalCost = basePrice * Current.player().goldModifier();
         final List<String> colorFilter = new ArrayList<>();
@@ -251,7 +258,9 @@ public class SpellSmithScene extends UIScene {
         P = StreamSupport.stream(P.spliterator(), false).filter(input -> {
             //L|Basic Land, C|Common, U|Uncommon, R|Rare, M|Mythic Rare, S|Special, N|None
             if (input == null) return false;
-            if(!edition.isEmpty()) if (!input.getEdition().equals(edition)) return false;
+            final CardEdition cardEdition = FModel.getMagicDb().getEditions().get(edition);
+
+            if(cardEdition!=null&&cardEdition.getCardInSet(input.getName()).size()==0) return false;
             if(colorFilter.size() > 0) if(input.getRules().getColor() != ColorSet.fromNames(colorFilter)) return false;
             if(!rarity.isEmpty()) if (!input.getRarity().toString().equals(rarity)) return false;
             if(cost_low > -1) {

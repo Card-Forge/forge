@@ -154,6 +154,18 @@ public static ConsoleCommandInterpreter getInstance()
             Current.player().giveGold(amount);
             return "Added "+amount+" gold";
         });
+        registerCommand(new String[]{"give", "mana"}, s -> {
+            if(s.length<1) return "Command needs 1 parameter: Amount.";
+            int amount;
+            try {
+                amount=Integer.parseInt(s[0]);
+            }
+            catch (Exception e) {
+                return "Can not convert " + s[0] + " to number";
+            }
+            Current.player().addMaxMana(amount);
+            return "Added " + amount + " max mana";
+        });
         registerCommand(new String[]{"give", "life"}, s -> {
             if(s.length<1) return "Command needs 1 parameter: Amount.";
             int amount;

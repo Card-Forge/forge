@@ -283,7 +283,9 @@ public class CardUtil {
         if(reward.getType()== Reward.Type.Life)
             return reward.getCount()*500;
         if(reward.getType()== Reward.Type.Mana)
-            return reward.getCount()*50;
+            return reward.getCount()*500;
+        if(reward.getType()== Reward.Type.Gold)
+            return reward.getCount();
         return 1000;
     }
 
