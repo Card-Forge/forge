@@ -62,7 +62,7 @@ public final class CardUtil {
             "Enchant", "Protection", "Cumulative upkeep", "Equip", "Buyback",
             "Cycling", "Echo", "Kicker", "Flashback", "Madness", "Morph",
             "Affinity", "Entwine", "Splice", "Ninjutsu", "Presence",
-            "Transmute", "Replicate", "Recover", "Suspend", "Aura swap",
+            "Transmute", "Replicate", "Recover", "Squad", "Suspend", "Aura swap",
             "Fortify", "Transfigure", "Champion", "Evoke", "Prowl", "IfReach",
             "Reinforce", "Unearth", "Level up", "Miracle", "Overload", "Cleave",
             "Scavenge", "Encore", "Bestow", "Outlast", "Dash", "Surge", "Emerge", "Hexproof:",
