@@ -1,0 +1,9 @@
+Name:Canoptek Spyder
+ManaCost:5
+Types:Artifact Creature Spider
+PT:4/4
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Creature.Artifact+YouCtrl+Other+nonToken,Vehicle | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Fabricator Claw Array — Whenever another nontoken artifact creature or Vehicle enters the battlefield under your control, draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
+DeckHints:Type$Artifact|Vehicle
+Oracle:Flying\nFabricator Claw Array — Whenever another nontoken artifact creature or Vehicle enters the battlefield under your control, draw a card.
