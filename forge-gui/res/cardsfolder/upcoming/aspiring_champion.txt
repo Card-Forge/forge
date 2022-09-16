@@ -3,9 +3,12 @@ ManaCost:3 R
 Types:Creature Astartes Warrior
 PT:3/3
 K:Menace
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBPlay | TriggerDescription$ Lord of the Pyrrhian Legions — Whenever CARDNAME attacks, you may cast an artifact spell from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.
-SVar:TrigDig:AB$ DigUntil | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | GainControl$ True | SubAbility$ DBDamage | RememberChanged$ True
-SVar:DBDamage:DB$ DamageAll | NumDmg$ X | ValidPlayers$ Player.Opponent | ConditionDefined$ Remembered | ConditionPresent$ Demon | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player |  Execute$ TrigSac | TriggerDescription$ Ruinous Ascension — When Aspiring Champion deals combat damage to a player, sacrifice it. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield, then shuffle the rest into your library. If that creature is a Demon, it deals damage equal to its power to each opponent.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Self | SubAbility$ TrigDig
+SVar:TrigDig:DB$ DigUntil | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True | GainControl$ True | SubAbility$ DBDamage | RememberFound$ True
+SVar:DBDamage:DB$ DamageAll | NumDmg$ X | ValidPlayers$ Player.Opponent | ConditionDefined$ Remembered | ConditionPresent$ Creature.Demon | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
+DeckHints:Type$Demon
+DeckHas:Ability$Sacrifice
 Oracle:Menace\nRuinous Ascension — When Aspiring Champion deals combat damage to a player, sacrifice it. If you do, reveal cards from the top of your library until you reveal a creature card. Put that card onto the battlefield, then shuffle the rest into your library. If that creature is a Demon, it deals damage equal to its power to each opponent.
