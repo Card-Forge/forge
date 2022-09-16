@@ -72,7 +72,7 @@ ScryfallCode=DMU
 57 U Micromancer @Ernanda Souza
 58 C Negate @Isis
 59 R The Phasing of Zhalfir @LA Draws
-60 C Phyrexian Espionage @Allen Douglas
+60 C Phyrexian Espionage @Allen Williams
 61 C Pixie Illusionist @Anastasia Ovchinnikova
 62 U Protect the Negotiators @Dominik Mayer
 63 U Rona's Vortex @Dominik Mayer
@@ -161,7 +161,7 @@ ScryfallCode=DMU
 146 R Squee, Dubious Monarch @Zoltan Boros
 147 R Temporal Firestorm @Nestor Ossandon Leal
 148 C Thrill of Possibility @David Auden Nash
-149 U Twinferno @Justyna Gil
+149 U Twinferno @Justyna Dura
 150 C Viashino Branchrider @Andrew Mar
 151 U Warhost's Frenzy @Igor Grechanyi
 152 C Yavimaya Steelcrusher @Gabor Szikszai
@@ -214,7 +214,7 @@ ScryfallCode=DMU
 199 R Ertai Resurrected @Ryan Pancoast
 200 U Garna, Bloodfist of Keld @Andrey Kuzinskiy
 201 R Ivy, Gleeful Spellthief @Evyn Fong
-202 R Jhoira, Ageless Innovator @Justyna Gil
+202 R Jhoira, Ageless Innovator @Justyna Dura
 203 M Jodah, the Unifier @Ryan Pancoast
 204 R King Darien XLVIII @Donato Giancola
 205 U Lagomos, Hand of Hatred @Tuan Duong Chu
