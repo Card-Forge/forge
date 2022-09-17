@@ -1,0 +1,9 @@
+Name:Flayed One
+ManaCost:2 B
+Types:Artifact Creature Necron
+PT:4/1
+K:LifefLink
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Flesh Flayer — When CARDNAME enters the battlefield, mill three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
+DeckHas:Ability$Mill|Graveyard
+Oracle:Lifelink\nFlesh Flayer — When Flayed One enters the battlefield, mill three cards.

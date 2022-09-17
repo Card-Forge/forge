@@ -1,0 +1,7 @@
+Name:Hexmark Destroyer
+ManaCost:4 B B 
+Types:Artifact Creature Necron
+PT:6/6
+S:Mode$ MinMaxBlocker | ValidCard$ Creature.Self | Min$ 6 | Description$ CARDNAME can't be blocked except by six or more creatures.
+K:Unearth:4 B B
+Oracle:Multi-threat Eliminator — Hexmark Destroyer can't be blocked except by six or more creatures.\nUnearth {4}{B}{B} ({4}{B}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
