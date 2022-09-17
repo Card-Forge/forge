@@ -2,7 +2,7 @@ Name:Dark Apostle
 ManaCost:3 R
 Types:Creature Astartes Warlock
 PT:3/3
-A:AB$ Effect | PrecostDesc$ :Gift of Chaos — {3}, {T}| Cost$ 3 T |  StaticAbilities$ GrantCascade | SpellDescription$ The next noncreature spell you cast this turn has cascade. (When you cast that spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)
+A:AB$ Effect | PrecostDesc$ :Gift of Chaos — | Cost$ 3 T |  StaticAbilities$ GrantCascade | SpellDescription$ The next noncreature spell you cast this turn has cascade. (When you cast that spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)
 SVar:GrantCascade:Mode$ Continuous | EffectZone$ Command | OneOff$ True | Affected$ Card.nonCreature+YouCtrl+YouOwn | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ As you cast spells from your hand this turn, they gain cascade.
 DeckHas:Keyword$Cascade
 Oracle:Gift of Chaos — {3}, {T}: The next noncreature spell you cast this turn has cascade. (When you cast that spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)
