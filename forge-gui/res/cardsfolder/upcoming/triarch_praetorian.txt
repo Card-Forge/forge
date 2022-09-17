@@ -1,14 +1,11 @@
-Name:Anointed Peacekeeper
-ManaCost:2 W
-Types:Creature Human Cleric
-PT:3/3
-K:Vigilance
-K:ETBReplacement:Other:ChoosePlayer
-SVar:ChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to look at the hand: | SubAbility$ DBLook | SpellDescription$ As CARDNAME enters the battlefield, look at an opponent's hand, then choose any card name.
-SVar:DBLook:DB$ RevealHand | Defined$ ChosenPlayer | Look$ True | SubAbility$ DBNameCard
-SVar:DBNameCard:DB$ NameCard | Defined$ You | SubAbility$ DBClear
-SVar:DBClear:DB$ Cleanup | ClearChosenPlayer$ True
-S:Mode$ RaiseCost | EffectZone$ Battlefield | ValidCard$ Card.NamedCard | Type$ Spell | Amount$ 2 | Activator$ Opponent | Description$ Spells your opponents cast with the chosen name cost {2} more to cast.
-S:Mode$ RaiseCost | EffectZone$ Battlefield | ValidCard$ Card.NamedCard | Type$ NonManaAbility | Amount$ 2 | Description$ Activated abilities of sources with the chosen name cost {2} more to activate unless they're mana abilities.
-AI:RemoveDeck:Random
-Oracle:Vigilance\nAs Anointed Peacekeeper enters the battlefield, look at an opponent's hand, then choose any card name.\nSpells your opponents cast with the chosen name cost {2} more to cast.\nActivated abilities of sources with the chosen name cost {2} more to activate unless they're mana abilities.
+Name:Triarch Praetorian
+ManaCost:1 B
+Types:Artifact Creature Necron
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Dynastic Codes — When CARDNAME enters the battlefield from a graveyard, you draw two cards and you lose 2 life.
+SVar:TrigDraw:DB$ Draw |  NumCards$ 2 | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | NumLife$ 2
+K:Unearth:4 B
+DeckHas:Ability$Graveyard
+Oracle:Flying\nDynastic Codes — When Triarch Praetorian enters the battlefield from a graveyard, you draw two cards and you lose 2 life.\nUnearth {4}{B} ({4}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

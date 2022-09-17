@@ -1,14 +1,9 @@
-Name:Anointed Peacekeeper
-ManaCost:2 W
-Types:Creature Human Cleric
-PT:3/3
-K:Vigilance
-K:ETBReplacement:Other:ChoosePlayer
-SVar:ChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to look at the hand: | SubAbility$ DBLook | SpellDescription$ As CARDNAME enters the battlefield, look at an opponent's hand, then choose any card name.
-SVar:DBLook:DB$ RevealHand | Defined$ ChosenPlayer | Look$ True | SubAbility$ DBNameCard
-SVar:DBNameCard:DB$ NameCard | Defined$ You | SubAbility$ DBClear
-SVar:DBClear:DB$ Cleanup | ClearChosenPlayer$ True
-S:Mode$ RaiseCost | EffectZone$ Battlefield | ValidCard$ Card.NamedCard | Type$ Spell | Amount$ 2 | Activator$ Opponent | Description$ Spells your opponents cast with the chosen name cost {2} more to cast.
-S:Mode$ RaiseCost | EffectZone$ Battlefield | ValidCard$ Card.NamedCard | Type$ NonManaAbility | Amount$ 2 | Description$ Activated abilities of sources with the chosen name cost {2} more to activate unless they're mana abilities.
-AI:RemoveDeck:Random
-Oracle:Vigilance\nAs Anointed Peacekeeper enters the battlefield, look at an opponent's hand, then choose any card name.\nSpells your opponents cast with the chosen name cost {2} more to cast.\nActivated abilities of sources with the chosen name cost {2} more to activate unless they're mana abilities.
+Name:Tomb Fortress
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Mill | Cost$ 2 B B B T Sac<1/CARDNAME> | Defined$ You | SorcerySpeed$ True | NumCards$ 4 | SubAbility$ DBReturn | SpellDescription$ Mill four cards, then return a creature card from your graveyard to the battlefield. Activate only as a sorcery.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouCtrl | ChangeNum$ 1 | Hidden$ True | Tapped$ True
+DeckHas:Ability$Graveyard|Mill
+Oracle:Tomb Fortress enters the battlefield tapped.\n{T}: Add {B}.\n{2}{B}{B}{B}, {T}, Exile Tomb Fortress: Mill four cards, then return a creature card from your graveyard to the battlefield. Activate only as a sorcery.

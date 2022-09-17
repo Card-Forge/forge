@@ -1,0 +1,9 @@
+Name:Triarch Stalker
+ManaCost:3 B B
+Types:Artifact Creature Necron
+PT:4/5
+S:Mode$ Continuous | Affected$ Creature.attacking ChosenPlayer | AddKeyword$ Menace | Description$ Creatures attacking the last chosen player have menace.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescriptionLure the Unwary — At the beginning of combat on your turn, choose an opponent.
+SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | SetChosenPlayer$ True
+DeckHas:Keyword$Menace
+Oracle:Targeting Relay — At the beginning of combat on your turn, choose an opponent.\nCreatures attacking the last chosen player have menace.
