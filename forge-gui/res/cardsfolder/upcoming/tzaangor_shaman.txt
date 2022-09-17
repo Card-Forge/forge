@@ -1,14 +1,10 @@
-Name:Anointed Peacekeeper
-ManaCost:2 W
-Types:Creature Human Cleric
+Name:Tzaangor Shaman
+ManaCost:2 U R
+Types:Creature Mutant Shaman
 PT:3/3
-K:Vigilance
-K:ETBReplacement:Other:ChoosePlayer
-SVar:ChoosePlayer:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to look at the hand: | SubAbility$ DBLook | SpellDescription$ As CARDNAME enters the battlefield, look at an opponent's hand, then choose any card name.
-SVar:DBLook:DB$ RevealHand | Defined$ ChosenPlayer | Look$ True | SubAbility$ DBNameCard
-SVar:DBNameCard:DB$ NameCard | Defined$ You | SubAbility$ DBClear
-SVar:DBClear:DB$ Cleanup | ClearChosenPlayer$ True
-S:Mode$ RaiseCost | EffectZone$ Battlefield | ValidCard$ Card.NamedCard | Type$ Spell | Amount$ 2 | Activator$ Opponent | Description$ Spells your opponents cast with the chosen name cost {2} more to cast.
-S:Mode$ RaiseCost | EffectZone$ Battlefield | ValidCard$ Card.NamedCard | Type$ NonManaAbility | Amount$ 2 | Description$ Activated abilities of sources with the chosen name cost {2} more to activate unless they're mana abilities.
-AI:RemoveDeck:Random
-Oracle:Vigilance\nAs Anointed Peacekeeper enters the battlefield, look at an opponent's hand, then choose any card name.\nSpells your opponents cast with the chosen name cost {2} more to cast.\nActivated abilities of sources with the chosen name cost {2} more to activate unless they're mana abilities.
+K:Flying
+T:Mode$ DamageDone | CombatDamage$ True | ValidTarget$ Player | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDelayedTrigger | TriggerDescription$ Sorcerous Elixir — Whenever CARDNAME deals combat damage to a player, copy the next instant or sorcery spell you cast this turn when you cast it. You may choose new targets for the copy.
+SVar:TrigDelayedTrigger:DB$ DelayedTrigger | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+DeckHints:Type$Instant|Sorcery
+Oracle:Flying\nSorcerous Elixir — Whenever Tzaangor Shaman deals combat damage to a player, copy the next instant or sorcery spell you cast this turn when you cast it. You may choose new targets for the copy.
