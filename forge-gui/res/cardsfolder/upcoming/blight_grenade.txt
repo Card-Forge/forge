@@ -1,0 +1,6 @@
+Name:Blight Grenade
+ManaCost:4 B
+Types:Sorcery
+A:SP$ Destroy | ValidTgts$ Creature | SubAbility$ DBDebuff | SpellDescription$ Destroy target creature. All creatures get -3/-3 until end of turn.
+SVar:DBDebuff:DB$ PumpAll | ValidCards$ Creature | NumAtt$ -3 | NumDef$ -3
+Oracle:Destroy target creature.\nAll creatures get -3/-3 until end of turn.
