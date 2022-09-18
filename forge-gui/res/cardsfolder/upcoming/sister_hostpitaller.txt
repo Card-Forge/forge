@@ -3,7 +3,7 @@ ManaCost:4 W B
 Types:Creature Human Cleric
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ Medicus Ministorum - When CARDNAME enters the battlefield, return target creature card from your graveyard to the battlefield. You gain life equal to that card's mana value.
-SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature card in your graveyard | GainControl$ True | ChangeNum$ 1 | SubAbility$ DBGainLife
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPrompt$ Choose target creature card in your graveyard | GainControl$ True | ChangeNum$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:Targeted$CardManaCost
 DeckHas:Ability$Graveyard|Lifegain
