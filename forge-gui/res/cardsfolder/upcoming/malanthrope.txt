@@ -1,0 +1,12 @@
+Name:Malanthrope
+ManaCost:1 G U
+Types:Creature Tyranid
+PT:2/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Scavenge the Dead — When CARDNAME enters the battlefield, exile target player's graveyard. Put a +1/+1 counter on CARDNAME for each creature card exiled this way.
+SVar:TrigExile:DB$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | SubAbility$ DBCounter | RememberChanged$ True
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Valid Creature
+DeckHas:Ability$Counters
+Oracle:Flying\nScavenge the Dead — When Malanthrope enters the battlefield, exile target player's graveyard. Put a +1/+1 counter on Malanthrope for each creature card exiled this way.

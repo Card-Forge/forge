@@ -91,7 +91,7 @@ public class ItemData {
         if(effect != null)
             result += effect.getDescription();
         if(manaNeeded != 0)
-            result +=  manaNeeded+" [Mana]";
+            result +=  manaNeeded+" [+Mana]";
         return result;
     }
 

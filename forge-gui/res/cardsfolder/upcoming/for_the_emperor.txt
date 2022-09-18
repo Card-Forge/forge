@@ -1,0 +1,6 @@
+Name:For the Emperor!
+ManaCost:3 W
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | NumDef$ +2 | KW$ Vigilance & Lifelink | SpellDescription$ Creatures you control get +2/+2 and gain vigilance and lifelink until end of turn.
+DeckHas:Keyword$Vigilance|Lifelink & Ability$LifeGain
+Oracle:Creatures you control get +2/+2 and gain vigilance and lifelink until end of turn.

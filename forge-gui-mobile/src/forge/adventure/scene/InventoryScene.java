@@ -200,7 +200,7 @@ public class InventoryScene  extends UIScene {
         useDialog.getContentTable().clear();
         ItemData data = ItemData.getItem(itemLocation.get(selected));
         if(data==null)return;
-        useDialog.text("Use "+data.name+"?\n"+data.getDescription());
+        useDialog.getContentTable().add(Controls.newTextraLabel("Use "+data.name+"?\n"+data.getDescription()));
         useDialog.show(stage);
     }
 

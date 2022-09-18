@@ -312,7 +312,7 @@ public static ConsoleCommandInterpreter getInstance()
             float value = 0;
             try { value = Float.parseFloat(s[0]); }
             catch (Exception e) { return "Can not convert " + s[0] + " to float"; }
-            WorldStage.getInstance().hideFor(value);
+            currentGameStage().hideFor(value);
             return "removed all enemies";
         });
 
@@ -321,7 +321,7 @@ public static ConsoleCommandInterpreter getInstance()
             float value = 0;
             try { value = Float.parseFloat(s[0]); }
             catch (Exception e) { return "Can not convert " + s[0] + " to float"; }
-            WorldStage.getInstance().flyFor(value);
+            currentGameStage().flyFor(value);
             return "removed all enemies";
         });
         registerCommand(new String[]{"sprint"}, s -> {
@@ -329,7 +329,7 @@ public static ConsoleCommandInterpreter getInstance()
             float value = 0;
             try { value = Float.parseFloat(s[0]); }
             catch (Exception e) { return "Can not convert " + s[0] + " to float"; }
-            WorldStage.getInstance().sprintFor(value);
+            currentGameStage().sprintFor(value);
             return "removed all enemies";
         });
         registerCommand(new String[]{"remove","enemy","nearest"}, s -> {

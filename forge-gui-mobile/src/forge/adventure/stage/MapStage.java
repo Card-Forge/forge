@@ -610,6 +610,8 @@ public class MapStage extends GameStage {
 
     @Override
     protected void onActing(float delta) {
+        float sprintingMod=currentModifications.containsKey(PlayerModification.Sprint)?2:1;
+        player.setMoveModifier(2*sprintingMod);
         oldPosition4.set(oldPosition3);
         oldPosition3.set(oldPosition2);
         oldPosition2.set(oldPosition);

@@ -1,0 +1,10 @@
+Name:Biotransference
+ManaCost:2 B B 
+Types:Enchantment
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | AddType$ Artifact | Description$ Creatures you control are artifacts in addition to their other types. The same is true for creature spells you control and creature cards you own that aren’t on the battlefield.
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Artifact | ValidActivatingPlayer$ You | Execute$ DBLoseLife | TriggerDescription$ Whenever you cast an artifact spell, you lose 1 life and create a 2/2 black Necron Warrior artifact creature token.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ b_2_2_a_necron_warrior
+DeckHas:Ability$Token & Type$Necron|Warrior
+DeckHints:Type$Artifact
+Oracle:Creatures you control are artifacts in addition to their other types. The same is true for creature spells you control and creature cards you own that aren't on the battlefield.\nWhenever you cast an artifact spell, you lose 1 life and create a 2/2 black Necron Warrior artifact creature token.
