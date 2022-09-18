@@ -597,6 +597,16 @@
                                                 <include name="forge.cmd" />
                                                 <include name="forge-java8.exe" />
                                                 <include name="forge.exe" />
+                                                <include name="forge-adventure.sh" />
+                                                <include name="forge-adventure.command" />
+                                                <include name="forge-adventure.cmd" />
+                                                <include name="forge-adventure-java8.exe" />
+                                                <include name="forge-adventure.exe" />
+                                                <include name="forge-adventure-editor.sh" />
+                                                <include name="forge-adventure-editor.command" />
+                                                <include name="forge-adventure-editor.cmd" />
+                                                <include name="forge-adventure-editor-java8.exe" />
+                                                <include name="forge-adventure-editor.exe" />
                                             </tarfileset>
                                             <tarfileset dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="**" />
@@ -605,6 +615,16 @@
                                                 <exclude name="forge.cmd" />
                                                 <exclude name="forge-java8.exe" />
                                                 <exclude name="forge.exe" />
+                                                <exclude name="forge-adventure.sh" />
+                                                <exclude name="forge-adventure.command" />
+                                                <exclude name="forge-adventure.cmd" />
+                                                <exclude name="forge-adventure-java8.exe" />
+                                                <exclude name="forge-adventure.exe" />
+                                                <exclude name="forge-adventure-editor.sh" />
+                                                <exclude name="forge-adventure-editor.command" />
+                                                <exclude name="forge-adventure-editor.cmd" />
+                                                <exclude name="forge-adventure-editor-java8.exe" />
+                                                <exclude name="forge-adventure-editor.exe" />
                                             </tarfileset>
                                         </tar>
                                     </target>
