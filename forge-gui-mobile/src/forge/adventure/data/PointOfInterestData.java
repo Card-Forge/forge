@@ -58,5 +58,7 @@ public class PointOfInterestData {
         sprite=other.sprite;
         map=other.map;
         radiusFactor=other.radiusFactor;
+        offsetX=other.offsetX;
+        offsetY=other.offsetY;
     }
 }

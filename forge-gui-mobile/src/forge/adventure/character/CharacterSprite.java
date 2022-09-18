@@ -20,7 +20,7 @@ public class CharacterSprite extends MapActor {
     private Animation<TextureRegion> currentAnimation = null;
     private AnimationTypes currentAnimationType = AnimationTypes.Idle;
     private AnimationDirections currentAnimationDir = AnimationDirections.None;
-    private Array<Sprite> avatar=new Array<>();
+    private final Array<Sprite> avatar=new Array<>();
     public boolean hidden = false;
 
     public CharacterSprite(int id,String path) {
@@ -40,10 +40,6 @@ public class CharacterSprite extends MapActor {
     protected void load(String path) {
         if(path==null||path.isEmpty())return;
         TextureAtlas atlas = Config.instance().getAtlas(path);
-        /*
-        for (Texture texture : new ObjectSet.ObjectSetIterator<>( atlas.getTextures()))
-            texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-         */
         animations.clear();
         for (AnimationTypes stand : AnimationTypes.values()) {
             if (stand == AnimationTypes.Avatar) {

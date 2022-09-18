@@ -50,10 +50,13 @@ public class GameHUD extends Stage implements ControllerListener {
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
     private final InputEvent eventTouchDown;
     private final InputEvent eventTouchUp;
-    private TextraButton deckActor, menuActor, statsActor, inventoryActor;
-    private UIActor ui;
-    private Touchpad touchpad;
-    private Console console;
+    private final TextraButton deckActor;
+    private final TextraButton menuActor;
+    private final TextraButton statsActor;
+    private final TextraButton inventoryActor;
+    private final UIActor ui;
+    private final Touchpad touchpad;
+    private final Console console;
     float TOUCHPAD_SCALE = 70f, referenceX;
     boolean isHiding = false, isShowing = false;
     float opacity = 1f;

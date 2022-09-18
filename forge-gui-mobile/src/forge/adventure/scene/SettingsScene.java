@@ -23,7 +23,7 @@ public class SettingsScene extends UIScene {
     static public ForgePreferences Preference;
     Stage stage;
     Texture Background;
-    private Table settingGroup;
+    private final Table settingGroup;
     TextraButton backButton;
     ScrollPane scrollPane;
 

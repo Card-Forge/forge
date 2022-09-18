@@ -18,9 +18,9 @@ import forge.adventure.world.WorldSave;
 public class MapViewScene extends UIScene   {
     private static MapViewScene object;
     private final ScrollPane scroll;
-    private Image img;
+    private final Image img;
     private Texture miniMapTexture;
-    private Image miniMapPlayer;
+    private final Image miniMapPlayer;
 
     public static MapViewScene instance() {
         if(object==null)

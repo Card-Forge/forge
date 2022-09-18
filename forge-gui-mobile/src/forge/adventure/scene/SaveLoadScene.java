@@ -64,7 +64,6 @@ public class SaveLoadScene extends UIScene {
             diffList[c] = diff.name;
             c++;
         }
-        ;
 
         difficulty = Controls.newComboBox(diffList, null, o -> {
             //DifficultyData difficulty1 = Config.instance().getConfigData().difficulties[difficulty.getSelectedIndex()];

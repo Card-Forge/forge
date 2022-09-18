@@ -38,9 +38,9 @@ public class SpellSmithScene extends UIScene {
     }
 
     private List<PaperCard> cardPool = new ArrayList<>();
-    private TextraLabel goldLabel;
-    private TextraButton pullButton;
-    private ScrollPane rewardDummy;
+    private final TextraLabel goldLabel;
+    private final TextraButton pullButton;
+    private final ScrollPane rewardDummy;
     private RewardActor rewardActor;
     SelectBox<CardEdition> editionList;
     //Button containers.
@@ -53,7 +53,7 @@ public class SpellSmithScene extends UIScene {
     private int cost_low   = -1;
     private int cost_high  = 9999;
     //Other
-    private float basePrice  = 125f;
+    private final float basePrice  = 125f;
     private int currentPrice = 0;
 
     private SpellSmithScene() { super(Forge.isLandscapeMode() ? "ui/spellsmith.json" : "ui/spellsmith_portrait.json");

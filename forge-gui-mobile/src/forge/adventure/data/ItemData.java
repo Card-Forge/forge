@@ -43,6 +43,9 @@ public class ItemData {
         iconName          = cpy.iconName;
         questItem         = cpy.questItem;
         cost              = cpy.cost;
+        usableInPoi       = cpy.usableInPoi;
+        usableOnWorldMap  = cpy.usableOnWorldMap;
+        commandOnUse      = cpy.commandOnUse;
         manaNeeded        = cpy.manaNeeded;
     }
 
@@ -62,7 +65,7 @@ public class ItemData {
             Json json = new Json();
             FileHandle handle = Config.instance().getFile(Paths.ITEMS);
             if (handle.exists()) {
-                Array readJson = json.fromJson(Array.class, ItemData.class, handle);
+                Array<ItemData> readJson = json.fromJson(Array.class, ItemData.class, handle);
                 itemList = readJson;
 
             }
@@ -88,7 +91,7 @@ public class ItemData {
         if(effect != null)
             result += effect.getDescription();
         if(manaNeeded != 0)
-            result += "Mana cost: "+manaNeeded;
+            result +=  manaNeeded+" [Mana]";
         return result;
     }
 

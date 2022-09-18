@@ -31,9 +31,9 @@ public class UIScene extends Scene {
     Stage stage;
 
     String uiFile;
-    private Dialog keyboardDialog;
-    private Label kbLabel;
-    private TextraButton keyA, keyB, keyC, keyD, keyE, keyF, keyG, keyH, keyI, keyJ, keyK, keyL, keyM, keyN, keyO, keyP,
+    private final Dialog keyboardDialog;
+    private final Label kbLabel;
+    private final TextraButton keyA, keyB, keyC, keyD, keyE, keyF, keyG, keyH, keyI, keyJ, keyK, keyL, keyM, keyN, keyO, keyP,
             keyQ, keyR, keyS, keyT, keyU, keyV, keyW, keyX, keyY, keyZ, key1, key2, key3, key4, key5, key6, key7, key8,
             key9, key0, keyDot, keyComma, keyShift, keyBackspace, keySpace, keyOK;
     public Actor lastInputField;

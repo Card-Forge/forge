@@ -29,7 +29,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     private static ArenaScene object;
     private final float gridSize;
     private ArenaData arenaData;
-    private TextraButton startButton;
+    private final TextraButton startButton;
 
     public static ArenaScene instance() {
         if(object==null)
@@ -37,24 +37,24 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         return object;
     }
 
-    private TextraButton doneButton;
+    private final TextraButton doneButton;
     Dialog startDialog;
     Dialog areYouSureDialog;
-    private TextraLabel goldLabel;
+    private final TextraLabel goldLabel;
 
-    private Group arenaPlane;
-    private Random rand=new Random();
+    private final Group arenaPlane;
+    private final Random rand=new Random();
 
-    Sprite fighterSpot;
-    Sprite lostOverlay;
-    Sprite up;
-    Sprite upWin;
-    Sprite side;
-    Sprite sideWin;
-    Sprite edge;
-    Sprite edgeM;
-    Sprite edgeWin;
-    Sprite edgeWinM;
+    final Sprite fighterSpot;
+    final Sprite lostOverlay;
+    final Sprite up;
+    final Sprite upWin;
+    final Sprite side;
+    final Sprite sideWin;
+    final Sprite edge;
+    final Sprite edgeM;
+    final Sprite edgeWin;
+    final Sprite edgeWinM;
     boolean arenaStarted=false;
     private ArenaScene() {
         super(Forge.isLandscapeMode() ? "ui/arena.json" : "ui/arena_portrait.json");
@@ -98,7 +98,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
                 if(object!=null&&object.equals(true))
                     startArena();
                 startDialog.hide();
-            };
+            }
         };
         startDialog.text("Do you want to go into the Arena?");
         startDialog.button(Forge.getLocalizer().getMessage("lblYes"), true);

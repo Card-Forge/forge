@@ -54,10 +54,6 @@ public class MapStage extends GameStage {
 
     TiledMap map;
     Array<Rectangle> collisionRect=new Array<>();
-    private float tileHeight;
-    private float tileWidth;
-    private float width;
-    private float height;
     private boolean isInMap = false;
     MapLayer spriteLayer;
     private PointOfInterestChanges changes;
@@ -93,7 +89,7 @@ public class MapStage extends GameStage {
     }
 
     public boolean canEscape() {
-        return (preventEscape ? true : false);
+        return !preventEscape;
     } //Check if escape is possible.
 
     public void clearIsInMap() {
@@ -266,10 +262,10 @@ public class MapStage extends GameStage {
 
         actors.clear();
         collisionRect.clear();
-        width = Float.parseFloat(map.getProperties().get("width").toString());
-        height = Float.parseFloat(map.getProperties().get("height").toString());
-        tileHeight = Float.parseFloat(map.getProperties().get("tileheight").toString());
-        tileWidth = Float.parseFloat(map.getProperties().get("tilewidth").toString());
+        float width = Float.parseFloat(map.getProperties().get("width").toString());
+        float height = Float.parseFloat(map.getProperties().get("height").toString());
+        float tileHeight = Float.parseFloat(map.getProperties().get("tileheight").toString());
+        float tileWidth = Float.parseFloat(map.getProperties().get("tilewidth").toString());
         setBounds(width * tileWidth, height * tileHeight);
         //collision = new Array[(int) width][(int) height];
 

@@ -24,7 +24,6 @@ public class TileMapScene extends HudScene   {
     PointOfInterestMapRenderer tiledMapRenderer;
     private String nextMap;
     private boolean autoheal = false;
-    private float cameraWidth = 0f, cameraHeight = 0f;
 
     private TileMapScene() {
         super(MapStage.getInstance());
@@ -32,10 +31,6 @@ public class TileMapScene extends HudScene   {
 
 
         //set initial camera width and height
-        if (cameraWidth == 0f)
-            cameraWidth = stage.getCamera().viewportWidth;
-        if (cameraHeight == 0f)
-            cameraHeight = stage.getCamera().viewportHeight;
         MapStage.getInstance().setDialogStage(hud);
     }
 

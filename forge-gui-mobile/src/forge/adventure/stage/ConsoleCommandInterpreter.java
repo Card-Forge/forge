@@ -28,7 +28,7 @@ public class ConsoleCommandInterpreter {
     private static ConsoleCommandInterpreter instance;
     Command root = new Command();
 
-    class Command {
+    static class Command {
         HashMap<String, Command> children = new HashMap<>();
         Function<String[], String> function;
     }
@@ -93,7 +93,7 @@ public class ConsoleCommandInterpreter {
 
         for(String name:path) {
             if(!currentCommand.children.containsKey(name))
-                currentCommand.children.put(name,new Command());
+                currentCommand.children.put(name, new Command());
             currentCommand = currentCommand.children.get(name);
         }
         currentCommand.function = function;

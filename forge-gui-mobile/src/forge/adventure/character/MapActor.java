@@ -25,7 +25,7 @@ public class MapActor extends Actor {
         removeIfEffectsAreFinished=true;
     }
 
-    class CurrentEffect
+    static class CurrentEffect
     {
         public CurrentEffect(String path,ParticleEffect effect,Vector2 offset,boolean overlay)
         {
@@ -35,7 +35,7 @@ public class MapActor extends Actor {
             this.overlay=overlay;
         }
 
-        private String path;
+        private final String path;
         public ParticleEffect effect;
         public Vector2 offset;
         public boolean overlay=true;
@@ -63,7 +63,7 @@ public class MapActor extends Actor {
     {
         ParticleEffect effect = new ParticleEffect();
         effect.load(Config.instance().getFile(path),Config.instance().getFile(path).parent());
-        effects.add(new CurrentEffect(path,effect,offset,overlay));
+        effects.add(new CurrentEffect(path, effect, offset, overlay));
         if(duration!=0)//ParticleEffect.setDuration uses an integer for some reason
         {
             for(ParticleEmitter emitter:effect.getEmitters()){

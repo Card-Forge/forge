@@ -22,6 +22,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Main {
     public static void main(String[] args) {
@@ -46,17 +48,26 @@ public class Main {
         }
 
         // Set this to "true" to make the mobile game port run as a full-screen desktop application
-        boolean desktopMode = cmd.hasOption("fullscreen");
+        boolean desktopMode = true;//cmd.hasOption("fullscreen");
         // Set this to the location where you want the mobile game port to look for assets when working as a full-screen desktop application
         // (uncomment the bottom version and comment the top one to load the res folder from the current folder the .jar is in if you would
         // like to make the game load from a desktop game folder configuration).
-        String desktopModeAssetsDir = "../forge-gui/";
-        //String desktopModeAssetsDir = "./";
+        //String desktopModeAssetsDir = "../forge-gui/";
+        String desktopModeAssetsDir = "./";
+        if(!Files.exists(Paths.get(desktopModeAssetsDir+"res")))
+            desktopModeAssetsDir = "../forge-gui/";//try IDE run
 
         // Assets directory used when the game fully emulates smartphone/tablet mode (desktopMode = false), useful when debugging from IDE
-        String assetsDir = AssetsDownloader.SHARE_DESKTOP_ASSETS ? "../forge-gui/" : "testAssets/";
+        String assetsDir ;
         if (!AssetsDownloader.SHARE_DESKTOP_ASSETS) {
+            assetsDir= "testAssets/";
             FileUtil.ensureDirectoryExists(assetsDir);
+        }
+        else
+        {
+            assetsDir= "./";
+            if(!Files.exists(Paths.get(assetsDir+"res")))
+                assetsDir = "../forge-gui/";
         }
 
         // Place the file "switch_orientation.ini" to your assets folder to make the game switch to landscape orientation (unless desktopMode = true)
@@ -73,6 +84,7 @@ public class Main {
                 screenWidth = Integer.parseInt(res[0].trim());
                 screenHeight = Integer.parseInt(res[1].trim());
             }
+            desktopMode=false;
         }
 
         // Fullscreen width and height for desktop mode (desktopMode = true)

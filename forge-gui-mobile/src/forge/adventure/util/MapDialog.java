@@ -19,9 +19,9 @@ import forge.util.Localizer;
 
 public class MapDialog {
     private final MapStage stage;
-    private Array<DialogData> data;
+    private final Array<DialogData> data;
     private final int parentID;
-    private final float WIDTH = 260f;
+    private final static float WIDTH = 260f;
     static private final String defaultJSON = "[\n" +
             "  {\n" +
             "    \"effect\":[],\n" +

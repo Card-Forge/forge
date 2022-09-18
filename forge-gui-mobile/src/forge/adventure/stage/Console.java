@@ -8,7 +8,7 @@ import forge.adventure.util.Controls;
 
 public class Console extends Window {
     private final ScrollPane scroll;
-    private String last = "";
+    private  String last = "";
     private final InputLine input;
     private final Table content;
 
@@ -22,8 +22,8 @@ public class Console extends Window {
         }
     }
 
-    class InputLine extends TextField {
-        private Console console;
+    static class InputLine extends TextField {
+        private final Console console;
 
         public InputLine(Console console) {
             super("", Controls.getSkin());
@@ -43,8 +43,15 @@ public class Console extends Window {
                     case BACKSPACE:
                         break;
                     case TAB:
-                        self.setText(console.complete(self.getText()));
-                        self.setCursorPosition(Integer.MAX_VALUE);
+                        if(self.getText().isEmpty())
+                        {
+                            self.setText(console.last);
+                        }
+                        else
+                        {
+                            self.setText(console.complete(self.getText()));
+                            self.setCursorPosition(Integer.MAX_VALUE);
+                        }
                         break;
                     case NEWLINE:
                     case CARRIAGE_RETURN:

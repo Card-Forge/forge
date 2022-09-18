@@ -115,17 +115,17 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (toolTipImage.getDrawable() instanceof TextureRegionDrawable) {
                 ((TextureRegionDrawable) toolTipImage.getDrawable()).getRegion().getTexture().dispose();
             }
-        }
-        toolTipImage.remove();
-        toolTipImage = new Image(processDrawable(image));
-        if (GuiBase.isAndroid()||Forge.hasGamepad()) {
-            if (holdTooltip.tooltip_image.getDrawable() instanceof TextureRegionDrawable) {
-                ((TextureRegionDrawable) holdTooltip.tooltip_image.getDrawable()).getRegion().getTexture().dispose();
+            toolTipImage.remove();
+            toolTipImage = new Image(processDrawable(image));
+            if (GuiBase.isAndroid()||Forge.hasGamepad()) {
+                if (holdTooltip.tooltip_image.getDrawable() instanceof TextureRegionDrawable) {
+                    ((TextureRegionDrawable) holdTooltip.tooltip_image.getDrawable()).getRegion().getTexture().dispose();
+                }
+                holdTooltip.tooltip_actor.clear();
+                holdTooltip.tooltip_actor.add(toolTipImage);
+            } else {
+                tooltip.setActor(toolTipImage);
             }
-            holdTooltip.tooltip_actor.clear();
-            holdTooltip.tooltip_actor.add(toolTipImage);
-        } else {
-            tooltip.setActor(toolTipImage);
         }
         if (T != null)
             T.dispose();
@@ -721,8 +721,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 tooltip_actor.setX(Scene.getIntendedWidth() / 2 - tooltip_actor.getWidth() / 2);
             }
             tooltip_actor.setY(Scene.getIntendedHeight() / 2 - tooltip_actor.getHeight() / 2);
-            //tooltip_actor.setX(480/2 - tooltip_actor.getWidth()/2); //480 hud width
-            //tooltip_actor.setY(270/2-tooltip_actor.getHeight()/2); //270 hud height
+
             actor.getStage().addActor(tooltip_actor);
             return super.longPress(actor, x, y);
         }

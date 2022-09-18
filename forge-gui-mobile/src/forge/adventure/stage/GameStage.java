@@ -256,9 +256,12 @@ public abstract class GameStage extends Stage {
         if (keycode == Input.Keys.F2) {
             TileMapScene S = TileMapScene.instance();
             PointOfInterestData P = PointOfInterestData.getPointOfInterest("DEBUGZONE");
-            PointOfInterest PoI = new PointOfInterest(P,new Vector2(0,0), MyRandom.getRandom());
-            S.load(PoI);
-            Forge.switchScene(S);
+            if( P != null)
+            {
+                PointOfInterest PoI = new PointOfInterest(P,new Vector2(0,0), MyRandom.getRandom());
+                S.load(PoI);
+                Forge.switchScene(S);
+            }
         }
         if (keycode == Input.Keys.F11) {
             debugCollision(false);

@@ -140,7 +140,7 @@ public class World implements Disposable, SaveFileContent {
         return mapObjectIds.get(id);
     }
 
-    private class DrawingInformation {
+    private static class DrawingInformation {
 
         private int neighbors;
         private final BiomeTexture regions;
@@ -407,8 +407,7 @@ public class World implements Disposable, SaveFileContent {
 
                                     int structureIndex = structure.objectID(structureXStart, structureYStart);
                                     if (structureIndex >= 0) {
-                                        //pix.setColor(data.mappingInfo[structureIndex].getColor());
-                                        //pix.fillRectangle(x*data.miniMapTileSize, y*data.miniMapTileSize,data.miniMapTileSize,data.miniMapTileSize);
+
                                         terrainMap[x][y] = terrainCounter + structureIndex;
                                         if (structure.collision(structureXStart, structureYStart))
                                             terrainMap[x][y] |= collisionBit;
@@ -804,7 +803,7 @@ public class World implements Disposable, SaveFileContent {
 
     }
 
-    class DrawInfo
+    static class DrawInfo
     {
         Pixmap mapMarkerPixmap;
         int regionX;
@@ -818,7 +817,7 @@ public class World implements Disposable, SaveFileContent {
     }
     final Array<DrawInfo> storedInfo=new Array<>();
     private void drawPixmapLater(Pixmap mapMarkerPixmap, int regionX, int regionY, int regionWidth, int regionHeight, int x, int y, int regionWidth1, int regionHeight1) {
-        DrawInfo info=new DrawInfo();
+        DrawInfo info= new DrawInfo();
         info.mapMarkerPixmap=mapMarkerPixmap;
         info.regionX=regionX;
         info.regionY=regionY;

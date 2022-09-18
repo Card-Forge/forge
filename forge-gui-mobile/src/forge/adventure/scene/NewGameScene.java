@@ -36,16 +36,18 @@ import java.util.Random;
 public class NewGameScene extends UIScene {
     TextField selectedName;
     ColorSet[] colorIds;
-    private Image avatarImage;
+    private final Image avatarImage;
     private int avatarIndex = 0;
-    private Selector race;
-    private Selector colorId;
-    private Selector gender;
-    private Selector mode;
-    private Selector difficulty;
-    private Array<String> stringList, random, custom;
-    private TextraLabel colorLabel;
-    private int selected = -1;
+    private final Selector race;
+    private final Selector colorId;
+    private final Selector gender;
+    private final Selector mode;
+    private final Selector difficulty;
+    private final Array<String> stringList;
+    private final Array<String> random;
+    private final Array<String> custom;
+    private final TextraLabel colorLabel;
+    private final int selected = -1;
 
     private NewGameScene() {
 

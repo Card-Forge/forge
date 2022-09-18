@@ -26,7 +26,7 @@ public class BiomeSpriteData implements SaveFileContent {
         startArea=data.readDouble("startArea");
         endArea=data.readDouble("endArea");
         density=data.readDouble("density");
-        resolution=data.readDouble("resolution");;
+        resolution=data.readDouble("resolution");
         layer=data.readInt("layer");
     }
 

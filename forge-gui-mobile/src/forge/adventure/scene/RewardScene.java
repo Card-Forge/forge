@@ -24,8 +24,8 @@ import forge.sound.SoundSystem;
  * Displays the rewards of a fight or a treasure
  */
 public class RewardScene extends UIScene {
-    private TextraButton doneButton;
-    private TextraLabel goldLabel;
+    private final TextraButton doneButton;
+    private final TextraLabel goldLabel;
 
     private static RewardScene object;
 
@@ -399,7 +399,7 @@ public class RewardScene extends UIScene {
         }
 
         public BuyButton(int id, int i, PointOfInterestChanges ch, RewardActor actor, TextraButton style) {
-            super("", style.getStyle());
+            super("", style.getStyle(),Controls.getTextraFont());
             this.objectID = id;
             this.index = i;
             this.changes = ch;
@@ -410,7 +410,7 @@ public class RewardScene extends UIScene {
             setY(actor.getY() - getHeight());
             price = CardUtil.getRewardPrice(actor.getReward());
             price *= Current.player().goldModifier();
-            setText("$ " + price);
+            setText(price+"[+Gold]");
             addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
@@ -424,7 +424,7 @@ public class RewardScene extends UIScene {
                     SoundSystem.instance.play(SoundEffectType.FlipCoin, false);
 
                     updateBuyButtons();
-                    goldLabel.setText("Gold: " + String.valueOf(AdventurePlayer.current().getGold()));
+                    goldLabel.setText(AdventurePlayer.current().getGold()+"[+Gold]");
                     if(changes==null)
                         return;
                     setDisabled(true);

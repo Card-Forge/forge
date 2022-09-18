@@ -66,12 +66,12 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
     private boolean announceCustom = false;
 
     // Signals
-    SignalList onLifeTotalChangeList = new SignalList();
-    SignalList onManaTotalChangeList = new SignalList();
-    SignalList onGoldChangeList      = new SignalList();
-    SignalList onPlayerChangeList    = new SignalList();
-    SignalList onEquipmentChange     = new SignalList();
-    SignalList onBlessing            = new SignalList();
+    final SignalList onLifeTotalChangeList = new SignalList();
+    final SignalList onManaTotalChangeList = new SignalList();
+    final SignalList onGoldChangeList      = new SignalList();
+    final SignalList onPlayerChangeList    = new SignalList();
+    final SignalList onEquipmentChange     = new SignalList();
+    final SignalList onBlessing            = new SignalList();
 
     public AdventurePlayer() { clear(); }
 
@@ -458,7 +458,7 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
 
     public boolean fullHeal() {
         if (life < maxLife) {
-            life = Math.max(maxLife, life);
+            life = maxLife;
             onLifeTotalChangeList.emit();
             return true;
         }

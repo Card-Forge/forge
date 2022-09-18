@@ -273,7 +273,7 @@ public class Controls {
             return Color.PURPLE;
         if(upperCase.equals("VIOLET"))
             return Color.VIOLET;
-        if(upperCase.equals("PINK"))
+        if(upperCase.equals("MAROON"))
             return Color.MAROON;
         return Color.BLACK;
     }

@@ -30,9 +30,9 @@ public class InventoryScene  extends UIScene {
     TextraLabel itemDescription;
     Dialog confirm;
     Dialog useDialog;
-    private Table inventory;
-    Array<Button> inventoryButtons=new Array<>();
-    HashMap<String,Button> equipmentSlots=new HashMap<>();
+    private final Table inventory;
+    private final Array<Button> inventoryButtons=new Array<>();
+    private final HashMap<String,Button> equipmentSlots=new HashMap<>();
     HashMap<Button,String> itemLocation=new HashMap<>();
     Button selected;
     Button deleteButton;
@@ -54,8 +54,6 @@ public class InventoryScene  extends UIScene {
         itemDescription = ui.findActor("item_description");
         itemDescription.setAlignment(Align.topLeft);
 
-        inventoryButtons=new Array<>();
-        equipmentSlots=new HashMap<>();
 
         Array<Actor> children = ui.getChildren();
         for (int i = 0, n = children.size; i < n; i++)
@@ -79,7 +77,7 @@ public class InventoryScene  extends UIScene {
                                 }
                             }
                             String item=Current.player().itemInSlot(slotName);
-                            if(item!=null&&item!="")
+                            if(item!=null&& !item.equals(""))
                             {
                                 Button changeButton=null;
                                 for(Button invButton:inventoryButtons)
@@ -118,7 +116,7 @@ public class InventoryScene  extends UIScene {
                 if(object!=null&&object.equals(true))
                     delete();
                 confirm.hide();
-            };
+            }
         };
         confirm.text( Controls.newLabel(Forge.getLocalizer().getMessage("lblDelete")));
 
@@ -142,7 +140,7 @@ public class InventoryScene  extends UIScene {
                     triggerUse();
                     useDialog.getColor().a = 0;
                 }
-            };
+            }
         };
 
         useDialog.button(Forge.getLocalizer().getMessage("lblYes"), true);
@@ -178,6 +176,7 @@ public class InventoryScene  extends UIScene {
     public void equip() {
         if(selected == null) return;
         ItemData data = ItemData.getItem(itemLocation.get(selected));
+        if(data==null)return;
         Current.player().equip(data);
         updateInventory();
     }
@@ -192,6 +191,7 @@ public class InventoryScene  extends UIScene {
         if(selected==null)return;
 
         ItemData data = ItemData.getItem(itemLocation.get(selected));
+        if(data==null)return;
         Current.player().addMana(-data.manaNeeded);
         done();
         ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
@@ -199,6 +199,7 @@ public class InventoryScene  extends UIScene {
     private void use() {
         useDialog.getContentTable().clear();
         ItemData data = ItemData.getItem(itemLocation.get(selected));
+        if(data==null)return;
         useDialog.text("Use "+data.name+"?\n"+data.getDescription());
         useDialog.show(stage);
     }
@@ -218,6 +219,8 @@ public class InventoryScene  extends UIScene {
             return;
         }
         ItemData data = ItemData.getItem(itemLocation.get(actor));
+
+        if(data==null) return;
         deleteButton.setDisabled(data.questItem);
 
         boolean isInPoi = MapStage.getInstance().isInMap();
@@ -230,7 +233,7 @@ public class InventoryScene  extends UIScene {
         if(Current.player().getMana()<data.manaNeeded)
             useButton.setDisabled(true);
 
-        if(data.equipmentSlot==null||data.equipmentSlot=="")
+        if(data.equipmentSlot==null|| data.equipmentSlot.equals(""))
         {
             equipButton.setDisabled(true);
         }
