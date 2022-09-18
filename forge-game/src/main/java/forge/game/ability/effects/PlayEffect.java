@@ -360,10 +360,10 @@ public class PlayEffect extends SpellAbilityEffect {
                 tgtSA = tgtSA.copyWithNoManaCost();
             } else if (sa.hasParam("PlayCost")) {
                 Cost abCost;
-                if ("ManaCost".equals(sa.getParam("PlayCost"))) {
+                String cost = sa.getParam("PlayCost");
+                if (cost.equals("ManaCost")) {
                     abCost = new Cost(source.getManaCost(), false);
                 } else {
-                    String cost = sa.getParam("PlayCost");
                     if (cost.contains("ConvertedManaCost")) {
                         final String costcmc = Integer.toString(tgtCard.getCMC());
                         cost = cost.replace("ConvertedManaCost", costcmc);
