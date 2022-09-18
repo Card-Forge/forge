@@ -1,16 +1,9 @@
-Name:Ajani, Sleeper Agent
-ManaCost:1 G PGW W
-Types:Legendary Planeswalker Ajani
-Loyalty:4
-K:Compleated
-A:AB$ Dig | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature,Planeswalker | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition2$ -1 | RememberChanged$ True | SubAbility$ DBDig | SpellDescription$ Reveal the top card of your library. If it's a creature or planeswalker card, put it into your hand. Otherwise, you may put it on the bottom of your library.
-SVar:DBDig:DB$ Dig | DigNum$ 1 | DestinationZone$ Library | Optional$ True | LibraryPosition$ -1 | LibraryPosition2$ 0 | ConditionDefined$ Remembered | ConditionNotPresent$ Card | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-A:AB$ PutCounter | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select up to three target creatures you control | CounterType$ P1P1 | CounterNum$ 3 | TargetMin$ 0 | TargetMax$ 3 | DividedAsYouChoose$ 3 | SubAbility$ DBPump | SpellDescription$ Distribute three +1/+1 counters among up to three target creatures.
-SVar:DBPump:DB$ Pump | KW$ Vigilance | Defined$ Targeted | SpellDescription$ They gain vigilance until end of turn.
-A:AB$ Effect | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Emblem - Ajani, Sleeper Agent | Image$ emblem_ajani_sleeper_agent | Triggers$ TrigSpellCast | Duration$ Permanent | AILogic$ Always | SpellDescription$ You get an emblem with "Whenever you cast a creature or planeswalker spell, target opponent gets two poison counters."
-SVar:TrigSpellCast:Mode$ SpellCast | ValidCard$ Creature,Planeswalker | ValidActivatingPlayer$ You | Execute$ EffSpellCast | TriggerDescription$ Whenever you cast a creature or planeswalker spell, target opponent gets two poison counters.
-SVar:EffSpellCast:DB$ Poison | ValidTgts$ Opponent | Num$ 2
-SVar:BuffedBy:Creature,Planeswalker
-DeckHints:Type$Creature|Planeswalker
-Oracle:Compleated ({PGW} can be paid with {G}, {W}, or 2 life. If life was paid, this planeswalker enters with two fewer loyalty counters.)\n[+1]: Reveal the top card of your library. If it's a creature or planeswalker card, put it into your hand. Otherwise, you may put it on the bottom of your library.\n[-3]: Distribute three +1/+1 counters among up to three target creatures. They gain vigilance until end of turn.\n[-6]: You get an emblem with "Whenever you cast a creature or planeswalker spell, target opponent gets two poison counters."
+Name:Chaos Terminator Lord
+ManaCost:3 R
+Types:Creature Astartes Warrior
+PT:3/3
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Lord of Chaos — At the beginning of combat on your turn, another target creature you control gains double strike until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select another target creature you control | KW$ Double Strike
+SVar:PlayMain1:TRUE
+DeckHas:Keyword$DoubleStrike
+Oracle:Lord of Chaos — At the beginning of combat on your turn, another target creature you control gains double strike until end of turn.
