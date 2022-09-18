@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Artifact Creature Necron Wizard
 PT:1/1
 K:Flying
-A:AB$ Draw | PreCostDesc$ Atomic Transmutation — | Cost$ 1 T Sac<1/Artifact.Other;Creature.Other/another artifact or creature> | SpellDescription$ Draw a card.
+A:AB$ Draw | PreCostDesc$ Atomic Transmutation — | Cost$ 1 T Sac<1/Artifact.Other/another artifact> | SpellDescription$ Draw a card.
 K:Unearth:2 B
 DeckHas:Ability$Sacrifice|Graveyard
 DeckHints:Type$Artifact|Creature
