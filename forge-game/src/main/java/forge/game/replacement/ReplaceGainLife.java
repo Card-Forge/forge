@@ -50,11 +50,11 @@ public class ReplaceGainLife extends ReplacementEffect {
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Affected))) {
             return false;
         }
-        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.Source))) {
+        if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.SourceSA))) {
             return false;
         }
         if ("True".equals(getParam("SourceController"))) {
-            if (runParams.get(AbilityKey.Source) == null || !runParams.get(AbilityKey.Affected).equals(((Card)runParams.get(AbilityKey.Source)).getController())) {
+            if (runParams.get(AbilityKey.SourceSA) == null || !runParams.get(AbilityKey.Affected).equals(((SpellAbility)runParams.get(AbilityKey.SourceSA)).getActivatingPlayer())) {
                 return false;
             }
         }

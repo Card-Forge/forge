@@ -3,7 +3,7 @@ ManaCost:1 B R
 Types:Legendary Creature Viashino Warlock
 PT:3/3
 K:Menace
-A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Creature.Dragon | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast Dragon creature spells.
+A:AB$ Mana | Cost$ T | Produced$ Combo Any | Amount$ 2 | RestrictValid$ Spell.Creature+Dragon | SpellDescription$ Add two mana in any combination of colors. Spend this mana only to cast Dragon creature spells.
 S:Mode$ Continuous | Affected$ Creature.Dragon+YouOwn | Condition$ PlayerTurn | MayPlay$ True | MayPlayLimit$ 1 | EffectZone$ Battlefield | AffectedZone$ Graveyard | SpellDescription$ Once during each of your turns, you may cast a Dragon creature spell from your graveyard.
 T:Mode$ SpellCast | ValidCard$ Dragon.wasCastFromYourGraveyard | ValidActivatingPlayer$ You | Execute$ DBAnimate | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a Dragon creature spell from your graveyard, it gains "When this creature dies, exile it."
 SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCard | Duration$ Permanent | Triggers$ TrigDieExile

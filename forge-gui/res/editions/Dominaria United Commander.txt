@@ -17,7 +17,7 @@ ScryfallCode=DMC
 9 R Bladewing, Deathless Tyrant @Antonio José Manzanedo
 10 R Cadric, Soul Kindler @Joseph Weston
 11 R Fallaji Wayfarer @Victor Adame Minguez
-12 R Iridian Maelstrom @Justyna Gil
+12 R Iridian Maelstrom @Justyna Dura
 13 R Primeval Spawn @Filip Burburan
 14 R Two-Headed Hellkite @Fajareka Setiawan
 15 R Unite the Coalition @Nestor Ossandon Leal
@@ -54,8 +54,8 @@ ScryfallCode=DMC
 46 U Tor Wauki the Younger @Karl Kopinski
 47 M Torsten, Founder of Benalia @Volkan Baǵa
 48 R Xira, the Golden Sting @Mila Pesic
-
-
+49 M Dihada, Binder of Wills @Nestor Ossandon Leal
+50 M Jared Carthalion @Manuel Castañón
 51 R Ayesha Tanaka, Armorer @Aurore Folny
 52 R The Ever-Changing 'Dane @Campbell White
 53 U General Marhault Elsdragon @Heonhwa Choe
@@ -93,7 +93,7 @@ ScryfallCode=DMC
 85 R Bladewing, Deathless Tyrant @Antonio José Manzanedo
 86 R Cadric, Soul Kindler @Joseph Weston
 87 R Fallaji Wayfarer @Victor Adame Minguez
-88 R Iridian Maelstrom @Justyna Gil
+88 R Iridian Maelstrom @Justyna Dura
 89 R Primeval Spawn @Filip Burburan
 90 R Two-Headed Hellkite @Fajareka Setiawan
 91 R Unite the Coalition @Nestor Ossandon Leal
@@ -147,7 +147,7 @@ ScryfallCode=DMC
 139 R Adriana, Captain of the Guard @Chris Rallis
 140 R Archelos, Lagoon Mystic @Dan Scott
 141 U Arvad the Cursed @Lius Lasahido
-142 R Atla Palani, Nest Tender @Ekaterina Burmak
+142 M Atla Palani, Nest Tender @Ekaterina Burmak
 143 R Baleful Strix @Nils Hamm
 144 R Bedevil @Seb McKinnon
 145 R Bell Borca, Spectral Sergeant @Mila Pesic

@@ -55,7 +55,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
         }
 
         CardCollectionView cards = game.getCardsIn(zone);
-        cards = CardLists.getValidCards(cards, valid, host.getController(), host, sa);
+        cards = CardLists.getValidCards(cards, valid, activator, host, sa);
 
         if (sa.usesTargeting()) {
             final Player pl = sa.getTargets().getFirstTargetedPlayer();
@@ -80,7 +80,7 @@ public class CountersPutAllEffect extends SpellAbilityEffect  {
                     ZoneType.smartValueOf(sa.getParam("ValidZone2")) : zone;
             if (sa.hasParam("ValidCards2")) {
                 cards = CardLists.getValidCards(game.getCardsIn(zone2), sa.getParam("ValidCards2"),
-                        host.getController(), host, sa);
+                        activator, host, sa);
                 if (sa.usesTargeting()) {
                     cards = CardLists.filterControlledBy(cards, sa.getTargets().getFirstTargetedPlayer());
                 }

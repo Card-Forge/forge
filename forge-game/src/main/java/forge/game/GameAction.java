@@ -2238,8 +2238,7 @@ public class GameAction {
         game.setMonarch(p);
 
         // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, p);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
         game.getTriggerHandler().runTrigger(TriggerType.BecomeMonarch, runParams, false);
     }
 
@@ -2264,8 +2263,7 @@ public class GameAction {
 
         // You can take the initiative even if you already have it
         // Run triggers
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, p);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
         game.getTriggerHandler().runTrigger(TriggerType.TakesInitiative, runParams, false);
     }
 
@@ -2354,8 +2352,7 @@ public class GameAction {
 
             if (cause != null) {
                 // set up triggers (but not actually do them until later)
-                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                runParams.put(AbilityKey.Player, p);
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
                 runParams.put(AbilityKey.ScryNum, numLookedAt);
                 game.getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
             }

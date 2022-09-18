@@ -4,7 +4,7 @@ Types:Legendary Creature Merfolk Druid
 PT:3/3
 S:Mode$ Continuous | Affected$ Creature.Land+YouCtrl | AddKeyword$ Flying | Description$ Land creatures you control have flying.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | IsPresent$ Land.YouCtrl | PresentCompare$ GE7 | TriggerZones$ Battlefield | Execute$ TrigAnimate | TriggerDescription$ Whenever a land enters the battlefield under your control, if you control seven or more lands, up to one target land you control becomes a 3/3 Elemental creature with haste. It's still a land.
-SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target land you control | Power$ 3 | Toughness$ 3 | Types$ Elemental,Creature | Keywords$ Haste
+SVar:TrigAnimate:DB$ Animate | ValidTgts$ Land.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | Duration$ Permanent | TgtPrompt$ Select up to one target land you control | Power$ 3 | Toughness$ 3 | Types$ Elemental,Creature | Keywords$ Haste
 DeckHints:Type$Land
 SVar:BuffedBy:Land
 Oracle:Land creatures you control have flying.\nWhenever a land enters the battlefield under your control, if you control seven or more lands, up to one target land you control becomes a 3/3 Elemental creature with haste. It's still a land.

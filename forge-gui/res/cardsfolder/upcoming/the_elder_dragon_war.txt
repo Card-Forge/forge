@@ -9,4 +9,4 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Y:Count$RememberedSize
 SVar:DBToken:DB$ Token | TokenScript$ r_4_4_dragon_flying | SpellDescription$ Create a 4/4 red Dragon creature token with flying.
 DeckHas:Ability$Token
-Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don’t trigger. Sacrifice after III.)\nI — The Elder Dragon War deals 2 damage to each creature and each opponent.\nII — Discard any number of cards, then draw that many cards.\nIII — Create a 4/4 red Dragon creature token with flying.
+Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don't trigger. Sacrifice after III.)\nI — The Elder Dragon War deals 2 damage to each creature and each opponent.\nII — Discard any number of cards, then draw that many cards.\nIII — Create a 4/4 red Dragon creature token with flying.
