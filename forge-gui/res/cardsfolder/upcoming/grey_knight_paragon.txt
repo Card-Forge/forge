@@ -3,8 +3,9 @@ ManaCost:4 W
 Types:Creature Astartes Knight
 PT:4/4
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Rites of Banishment — When CARDNAME enters the battlefield, destroy target attacking creature. If that creature is a Demon, exile it instead.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | RememberDestroyed$ True
-R:Event$ Moved | ValidCard$ Targeted.Demon | Destination$ Graveyard | ReplaceWith$ DBExile
-SVar:DBExile:DB$ ChangeZone | Defined$ Targeted | Destination$ Exile
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBranch | TriggerDescription$ Rites of Banishment — When CARDNAME enters the battlefield, destroy target attacking creature. If that creature is a Demon, exile it instead.
+SVar:TrigBranch:DB$ Branch | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ1 | TrueSubAbility$ ExileDemon | FalseSubAbility$ DestroyAttacker
+SVar:DestroyAttacker:DB$ Destroy  | Defined$ Targeted
+SVar:ExileDemon:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile
+SVar:X:Targeted$Valid Creature.Demon
 Oracle:Flash\nRites of Banishment — When Grey Knight Paragon enters the battlefield, destroy target attacking creature. If that creature is a Demon, exile it instead.
