@@ -10,6 +10,6 @@ SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ b_2_2_a_necron_warrior | 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 K:Crew:4
 SVar:X:Remembered$Valid Creature
-DeckHas:Ability$Mill|Token
+DeckHas:Ability$Mill|Token & Type$Necron|Warrior
 SVar:HasAttackEffect:TRUE
 Oracle:Flying, indestructible\nEternity Gate — Whenever Necron Monolith attacks, mill three cards. For each creature card milled this way, create a 2/2 black Necron Warrior artifact creature token.\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)
