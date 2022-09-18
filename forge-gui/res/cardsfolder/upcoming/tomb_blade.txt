@@ -4,7 +4,7 @@ Types:Artifact Creature Necron
 PT:5/4
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigLoseLife | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player loses life equal to the number of creatures they control unless they sacrifice a creature.
-SVar:TrigLoseLife | Defined$ TriggeredTarget | UnlessCost$ Sac<1/Creature> | UnlessPayer$ TriggeredTarget | LifeAmount$ X
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredTarget | UnlessCost$ Sac<1/Creature> | UnlessPayer$ TriggeredTarget | LifeAmount$ X
 SVar:X:TriggeredTarget$Valid Creature
 K:Unearth:6 B B
 DeckHas:Ability$Sacrifice

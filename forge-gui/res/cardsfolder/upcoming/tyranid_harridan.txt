@@ -2,7 +2,7 @@ Name:Tyranid Harridan
 ManaCost:4 G U
 Types:Creature Tyranid
 K:Flying
-K:Ward:4d
+K:Ward:4
 PT:4/4
 T:Mode$ DamageDone | ValidSource$ Card.Self,Tyranid.YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Shrieking Gargoyles — Whenever CARDNAME or another Tyranid you control deals combat damage to a player, create a 1/1 blue Tyranid Gargoyle creature token with flying.
 SVar:TrigToken:DB$ Token | TokenScript$ u_1_1_tyranid_gargoyle_flying
