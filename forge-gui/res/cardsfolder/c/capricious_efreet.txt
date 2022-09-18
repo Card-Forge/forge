@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | E
 SVar:TrigPump:DB$ Pump | ValidTgts$ Permanent.nonLand+YouCtrl | TgtPrompt$ Select target nonland permanent you control | Mandatory$ True | RememberObjects$ Targeted | IsCurse$ True | SubAbility$ DBPump | StackDescription$ None
 SVar:DBPump:DB$ Pump | ValidTgts$ Permanent.nonLand+YouDontCtrl | TgtPrompt$ Select target nonland permanent you don't control | TargetMin$ 0 | TargetMax$ 1 | RememberObjects$ Targeted | IsCurse$ True | SubAbility$ DBPump2 | StackDescription$ None
 SVar:DBPump2:DB$ Pump | ValidTgts$ Permanent.nonLand+YouDontCtrl | TgtPrompt$ Select another target nonland permanent you don't control | TargetMin$ 0 | TargetMax$ 1 | TargetUnique$ True | RememberObjects$ Targeted | IsCurse$ True | SubAbility$ DBChooseRandom | StackDescription$ None
-SVar:DBChooseRandom:DB$ ChooseCard | Defined$ You | Amount$ 1 | AtRandom$ True | Choices$ Card.IsRemembered | SubAbility$ DBDestroy
+SVar:DBChooseRandom:DB$ ChooseCard | AtRandom$ True | Choices$ Card.IsRemembered | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$ Destroy | Defined$ ChosenCard | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 Oracle:At the beginning of your upkeep, choose target nonland permanent you control and up to two target nonland permanents you don't control. Destroy one of them at random.
