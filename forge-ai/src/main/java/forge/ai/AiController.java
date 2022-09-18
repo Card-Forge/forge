@@ -87,7 +87,6 @@ public class AiController {
     private boolean cheatShuffle;
     private boolean useSimulation;
     private SpellAbilityPicker simPicker;
-    private int lastAttackAggression;
 
     public AiController(final Player computerPlayer, final Game game0) {
         player = computerPlayer;
@@ -109,10 +108,6 @@ public class AiController {
     }
     public void setUseSimulation(boolean value) {
         this.useSimulation = value;
-    }
-
-    public int getAttackAggression() {
-        return lastAttackAggression;
     }
 
     public SpellAbilityPicker getSimulationPicker() {
@@ -1430,7 +1425,7 @@ public class AiController {
     public void declareAttackers(Player attacker, Combat combat) {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
         AiAttackController aiAtk = new AiAttackController(attacker); 
-        lastAttackAggression = aiAtk.declareAttackers(combat);
+        aiAtk.declareAttackers(combat);
 
         // if invalid: just try an attack declaration that we know to be legal
         if (!CombatUtil.validateAttackers(combat)) {

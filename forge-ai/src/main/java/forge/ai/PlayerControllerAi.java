@@ -538,9 +538,12 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public void playSpellAbilityNoStack(SpellAbility effectSA, boolean canSetupTargets) {
+        boolean result = true;
         if (canSetupTargets)
-            brains.doTrigger(effectSA, true); // first parameter does not matter, since return value won't be used
-        ComputerUtil.playNoStack(player, effectSA, getGame(), true);
+            result = brains.doTrigger(effectSA, true); // first parameter does not matter, since return value won't be used
+        if (result) {
+            ComputerUtil.playNoStack(player, effectSA, getGame(), true);
+        }
     }
 
     @Override
