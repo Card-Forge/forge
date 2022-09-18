@@ -1,86 +1,9 @@
-Name:Alora, Rogue Companion
-ManaCost:3 U
-Types:Legendary Creature Halfling Rogue
-PT:3/3
-K:Specialize:2
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand.
-SVar:TrigPump:DB$ Pump | KW$ HIDDEN Unblockable | TgtPrompt$ Select target attacking creature | ValidTgts$ Creature.attacking | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDelTrig
-SVar:DBDelTrig:DB$ DelayedTrigger | ConditionDefined$ Targeted | ConditionPresent$ Card | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Targeted | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next end step, return that creature to its owner's hand.
-SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand
-AlternateMode:Specialize
-Oracle:Specialize {2}\nWhenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand.
+Name:Necron Overlord
+ManaCost:2 B B
+Types:Artifact Creature Necron Noble
+PT:2/5
+A:AB$ LoseLife | Cost$ X T tapXType<X/Artifact> | ValidTgts$ Opponent | LifeAmount$ X | SpellDescription$ Relentless Mind — {X}, {T}, Tap X untapped artifacts you control: Target opponent loses X life.
+SVar:X:Count$xPaid
+DeckHints:Type$Artifact
+Oracle:Relentless Mind — {X}, {T}, Tap X untapped artifacts you control: Target opponent loses X life.
 
-SPECIALIZE:WHITE
-
-Name:Alora, Cheerful Mastermind
-ManaCost:3 W U
-Types:Legendary Creature Halfling Rogue
-PT:4/4
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand. If you do, create a 1/1 white Soldier creature token.
-SVar:TrigPump:DB$ Pump | KW$ HIDDEN Unblockable | TgtPrompt$ Select target attacking creature | ValidTgts$ Creature.attacking | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDelTrig
-SVar:DBDelTrig:DB$ DelayedTrigger | ConditionDefined$ Targeted | ConditionPresent$ Card | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Targeted | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next end step, return that creature to its owner's hand. If you do, create a 1/1 white Soldier creature token.
-SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand | ForgetOtherRemembered$ True | RememberChanged$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | TokenScript$ w_1_1_soldier | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Token & Type$Soldier
-Oracle:Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand. If you do, create a 1/1 white Soldier creature token.
-
-SPECIALIZE:BLUE
-
-Name:Alora, Cheerful Thief
-ManaCost:3 U U
-Types:Legendary Creature Halfling Rogue
-PT:4/4
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand. If you do, a creature of your choice an opponent controls perpetually gets -1/-0.
-SVar:TrigPump:DB$ Pump | KW$ HIDDEN Unblockable | TgtPrompt$ Select target attacking creature | ValidTgts$ Creature.attacking | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDelTrig
-SVar:DBDelTrig:DB$ DelayedTrigger | ConditionDefined$ Targeted | ConditionPresent$ Card | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Targeted | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next end step, return that creature to its owner's hand. If you do, a creature of your choice an opponent controls perpetually gets -1/-0.
-SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand | ForgetOtherRemembered$ True | RememberChanged$ True | SubAbility$ DBChooseCard
-SVar:DBChooseCard:DB$ ChooseCard | ConditionDefined$ Remembered | ConditionPresent$ Card | Choices$ Creature.OppCtrl | Mandatory$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBPerpetual
-SVar:DBPerpetual:DB$ Effect | ConditionDefined$ ChosenCard | ConditionPresent$ Card | StaticAbilities$ PerpetualDebuff | Name$ Alora, Cheerful Thief's Perpetual Effect | Duration$ Permanent | SubAbility$ DBClearChosen
-SVar:PerpetualDebuff:Mode$ Continuous | Affected$ Card.ChosenCard | AddPower$ -1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen creature perpetually gets -1/-0.
-SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True
-Oracle:Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand. If you do, a creature of your choice an opponent controls perpetually gets -1/-0.
-
-SPECIALIZE:BLACK
-
-Name:Alora, Cheerful Assassin
-ManaCost:3 U B
-Types:Legendary Creature Halfling Rogue Assassin
-PT:4/4
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand. If you do, each opponent loses 2 life.
-SVar:TrigPump:DB$ Pump | KW$ HIDDEN Unblockable | TgtPrompt$ Select target attacking creature | ValidTgts$ Creature.attacking | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDelTrig
-SVar:DBDelTrig:DB$ DelayedTrigger | ConditionDefined$ Targeted | ConditionPresent$ Card | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Targeted | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next end step, return that creature to its owner's hand. If you do, each opponent loses 2 life.
-SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand | ForgetOtherRemembered$ True | RememberChanged$ True | SubAbility$ DBDrain
-SVar:DBDrain:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card
-Oracle:Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand. If you do, each opponent loses 2 life.
-
-SPECIALIZE:RED
-
-Name:Alora, Cheerful Swashbuckler
-ManaCost:3 U R
-Types:Legendary Creature Halfling Rogue
-PT:4/4
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand. If you do, create a Treasure token.
-SVar:TrigPump:DB$ Pump | KW$ HIDDEN Unblockable | TgtPrompt$ Select target attacking creature | ValidTgts$ Creature.attacking | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDelTrig
-SVar:DBDelTrig:DB$ DelayedTrigger | ConditionDefined$ Targeted | ConditionPresent$ Card | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Targeted | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next end step, return that creature to its owner's hand. If you do, create a Treasure token.
-SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand | ForgetOtherRemembered$ True | RememberChanged$ True | SubAbility$ DBTreasure
-SVar:DBTreasure:DB$ Token | TokenScript$ c_a_treasure_sac | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Token|Sacrifice & Type$Artifact|Treasure
-Oracle:Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand. If you do, create a Treasure token.
-
-SPECIALIZE:GREEN
-
-Name:Alora, Cheerful Scout
-ManaCost:3 G U
-Types:Legendary Creature Halfling Rogue Scout
-PT:4/4
-T:Mode$ AttackersDeclared | AttackingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand. If you do, it perpetually gets +1/+1.
-SVar:TrigPump:DB$ Pump | KW$ HIDDEN Unblockable | TgtPrompt$ Select target attacking creature | ValidTgts$ Creature.attacking | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBDelTrig
-SVar:DBDelTrig:DB$ DelayedTrigger | ConditionDefined$ Targeted | ConditionPresent$ Card | Mode$ Phase | Phase$ End of Turn | RememberObjects$ Targeted | Execute$ TrigReturn | TriggerDescription$ At the beginning of the next end step, return that creature to its owner's hand. If you do, it perpetually gets +1/+1.
-SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Hand | ForgetOtherRemembered$ True | RememberChanged$ True | SubAbility$ DBPerpetual
-SVar:DBPerpetual:DB$ Effect | ConditionDefined$ Remembered | ConditionPresent$ Card | RememberObjects$ Remembered | StaticAbilities$ PerpetualP1P1 | Name$ Alora, Cheerful Scout's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
-SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ That creature perpetually gets +1/+1.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:Whenever you attack, up to one target attacking creature can't be blocked this turn. At the beginning of the next end step, return that creature to its owner's hand. If you do, it perpetually gets +1/+1.
