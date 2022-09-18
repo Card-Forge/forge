@@ -7,6 +7,6 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredTarget | UnlessCost$ Sac<1/Creature> | UnlessPayer$ TriggeredTarget | LifeAmount$ X
 SVar:X:TriggeredTarget$Valid Creature
 K:Unearth:6 B B
-DeckHas:Ability$Sacrifice
+DeckHas:Ability$Sacrifice|Graveyard
 SVar:HasAttackEffect:TRUE
 Oracle:Flying\nWhenever Tomb Blade deals combat damage to a player, that player loses life equal to the number of creatures they control unless they sacrifice a creature.\nUnearth {6}{B}{B}
