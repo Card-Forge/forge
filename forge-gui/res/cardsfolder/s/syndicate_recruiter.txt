@@ -1,6 +1,6 @@
 Name:Syndicate Recruiter
 ManaCost: 2 U B
-Types:Creature Vampire Assassin
+Types:Creature Vampire Rogue
 PT:4/5
 K:Flying
 K:Ward:1
