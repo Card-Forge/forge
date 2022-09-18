@@ -5,5 +5,4 @@ PT:3/3
 K:Trample
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Trample | Description$ Devastating Charge — Other creatures you control have trample.
 SVar:PlayMain1:TRUE
-DeckHas:Keyword$Trample
 Oracle:Trample\nDevastating Charge — Other creatures you control have trample.
