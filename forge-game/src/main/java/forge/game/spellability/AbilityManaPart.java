@@ -148,6 +148,7 @@ public class AbilityManaPart implements java.io.Serializable {
     public final void produceMana(final String produced, final Player player, SpellAbility sa, boolean runTriggers) {
         final Card source = this.getSourceCard();
         final ManaPool manaPool = player.getManaPool();
+        final Game game = player.getGame();
         String afterReplace = produced;
 
         SpellAbility root = sa == null ? null : sa.getRootAbility();
@@ -159,7 +160,7 @@ public class AbilityManaPart implements java.io.Serializable {
             repParams.put(AbilityKey.AbilityMana, root);
             repParams.put(AbilityKey.Activator, root.getActivatingPlayer());
 
-            switch (player.getGame().getReplacementHandler().run(ReplacementType.ProduceMana, repParams)) {
+            switch (game.getReplacementHandler().run(ReplacementType.ProduceMana, repParams)) {
             case NotReplaced:
                 break;
             case Updated:
@@ -192,16 +193,17 @@ public class AbilityManaPart implements java.io.Serializable {
         // add the mana produced to the mana pool
         manaPool.add(this.lastManaProduced);
 
-        if (runTriggers) {
-            // Run triggers
-            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
-            runParams.put(AbilityKey.Player, player);
-            runParams.put(AbilityKey.Produced, afterReplace);
-            runParams.put(AbilityKey.AbilityMana, root);
-            runParams.put(AbilityKey.Activator, root == null ? null : root.getActivatingPlayer());
+        // Run triggers
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(source);
+        runParams.put(AbilityKey.Player, player);
+        runParams.put(AbilityKey.Produced, afterReplace);
+        runParams.put(AbilityKey.AbilityMana, root);
+        runParams.put(AbilityKey.Activator, root == null ? null : root.getActivatingPlayer());
 
-            player.getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
+        if (runTriggers) {
+            game.getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
         }
+        game.getTriggerHandler().runTrigger(TriggerType.ManaAdded, runParams, false);
 
         if (source.isLand() && root.isManaAbility() && root.getPayCosts() != null && root.getPayCosts().hasTapCost()) {
             root.getActivatingPlayer().setTappedLandForManaThisTurn(true);
