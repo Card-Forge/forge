@@ -1,9 +1,9 @@
 package forge.adventure.util;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Array;
+import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.DialogData;
@@ -54,7 +54,7 @@ public class MapDialog {
         String text; //Check for localized string (locname), otherwise print text.
         if(dialog.loctext != null && !dialog.loctext.isEmpty()) text = L.getMessage(dialog.loctext);
         else text = dialog.text;
-        Label A = Controls.newLabel(text);
+        TypingLabel A = Controls.newTypingLabel(text);
         A.setWrap(true);
         D.getContentTable().add(A).width(WIDTH); //Add() returns a Cell, which is what the width is being applied to.
         if(dialog.options != null) {
@@ -63,8 +63,8 @@ public class MapDialog {
                     String name; //Get localized label if present.
                     if(option.locname != null && !option.locname.isEmpty()) name = L.getMessage(option.locname);
                     else name = option.name;
-                    TextButton B = Controls.newTextButton(name,() -> loadDialog(option));
-                    B.getLabel().setWrap(true); //We want this to wrap in case it's a wordy choice.
+                    TextraButton B = Controls.newTextButton(name,() -> loadDialog(option));
+                    B.getTextraLabel().setWrap(true); //We want this to wrap in case it's a wordy choice.
                     D.getButtonTable().add(B).width(WIDTH - 10); //The button table also returns a Cell when adding.
                     //TODO: Reducing the space a tiny bit could help. But should be fine as long as there aren't more than 4-5 options.
                     D.getButtonTable().row(); //Add a row. Tried to allow a few per row but it was a bit erratic.

@@ -28,8 +28,8 @@
     }  ,
     {
       "type": "Label",
-      "name": "gold",
-      "text": "$",
+	  "style":"background",
+      "name": "gold", 
       "width": 48,
       "height": 20,
       "x": 65,
@@ -38,7 +38,7 @@
     {
       "type": "TextButton",
       "name": "start",
-      "text": "Start",
+      "text": "tr(lblBattle)",
       "width": 48,
       "height": 20,
       "x": 125,

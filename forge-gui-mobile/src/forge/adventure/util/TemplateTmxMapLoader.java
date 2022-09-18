@@ -196,6 +196,8 @@ public class TemplateTmxMapLoader extends TmxMapLoader {
     protected void loadObject(TiledMap map, MapObjects objects, XmlReader.Element element, float heightInPixels) {
         if (element.getName().equals("object")) {
 
+            if( element.hasAttribute("class")&& !element.hasAttribute("type"))
+                element.setAttribute("type",element.getAttribute("class"));//set type to class value for Tiled 1.9 compatibility
             if (!element.hasAttribute("template")) {
                 super.loadObject(map, objects, element, heightInPixels);
                 return;

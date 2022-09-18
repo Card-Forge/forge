@@ -27,7 +27,7 @@
     {
       "type": "TextButton",
       "name": "done",
-      "text": "Take all",
+      "text": "tr(lblLeave)",
       "width": 48,
       "height": 30,
       "x": 420,
@@ -36,7 +36,8 @@
     {
       "type": "Label",
       "name": "gold",
-      "text": "$",
+	  "style":"background",
+      "text": "[+Gold]",
       "width": 48,
       "height": 30,
       "x": 420,

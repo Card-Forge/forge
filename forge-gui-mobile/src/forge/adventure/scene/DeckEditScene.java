@@ -18,7 +18,7 @@ public class DeckEditScene extends ForgeScene {
 
     private static DeckEditScene object;
 
-    public static DeckEditScene instance() {
+    public static DeckEditScene getInstance() {
         if(object==null)
             object=new DeckEditScene();
         return object;

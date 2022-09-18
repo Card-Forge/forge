@@ -14,14 +14,14 @@ public class Paths {
     public static final String SKIN_FONT = "skin/LanaPixel.ttf";
     public static final String ITEMS_EQUIP = "skin/equip.png";
     public static final String ITEMS_ATLAS = "sprites/items.atlas";
-    public static final String MANA_ATLAS = "sprites/pixelmana.atlas";
     public static final String COLOR_FRAME_ATLAS = "ui/color_frames.atlas";
     public static final String ARENA_ATLAS = "ui/arena.atlas";
     public static final String MAP_MARKER = "sprites/map_marker.atlas";
 
 
     public static final String EFFECT_HEAL = "particle_effects/heal.p";
-    public static final String EFFECT_KILL = "particle_effects/kill.p";
+    public static final String EFFECT_KILL = "particle_effects/killed.p";
+    public static final String TRIGGER_KILL = "particle_effects/kill.p";
     public static final String EFFECT_HIDE = "particle_effects/hide.p";
     public static final String EFFECT_SPRINT = "particle_effects/sprint.p";
     public static final String EFFECT_FLY = "particle_effects/fly.p";

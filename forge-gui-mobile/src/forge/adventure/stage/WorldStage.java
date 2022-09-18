@@ -2,6 +2,7 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -29,7 +30,10 @@ import forge.sound.SoundSystem;
 import forge.util.MyRandom;
 import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -145,7 +149,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     }
     private void removeEnemy(EnemySprite currentMob) {
 
-        foregroundSprites.removeActor(currentMob);
+        currentMob.removeAfterEffects();
         Iterator<Pair<Float, EnemySprite>> it = enemies.iterator();
         while (it.hasNext()) {
             Pair<Float, EnemySprite> pair = it.next();
@@ -378,7 +382,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         EnemySprite enemy=null;
         for (Pair<Float, EnemySprite> pair : enemies) {
             float dist= pair.getValue().pos().sub(player.pos()).len();
-            if(shortestDist<dist)
+            if(dist<shortestDist)
             {
                 shortestDist=dist;
                 enemy=pair.getValue();
@@ -386,8 +390,9 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
         if(enemy!=null)
         {
+            enemy.playEffect(Paths.EFFECT_KILL);
             removeEnemy(enemy);
-            player.playEffect(Paths.EFFECT_KILL);
+            player.playEffect(Paths.TRIGGER_KILL);
         }
 
     }

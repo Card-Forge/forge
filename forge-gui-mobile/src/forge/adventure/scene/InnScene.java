@@ -2,8 +2,7 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.github.tommyettinger.textra.TextraButton;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Current;
@@ -20,38 +19,19 @@ public class InnScene extends UIScene {
         return object;
     }
 
-    TextButton tempHitPointCost, sell, leave;
-    Label tempHitPoints;
+    TextraButton tempHitPointCost, sell, leave;
     Image healIcon, sellIcon, leaveIcon;
 
     private InnScene() {
 
         super(Forge.isLandscapeMode() ? "ui/inn.json" : "ui/inn_portrait.json");
-        ui.onButtonPress("done", new Runnable() {
-            @Override
-            public void run() {
-                InnScene.this.done();
-            }
-        });
-        ui.onButtonPress("tempHitPointCost", new Runnable() {
-            @Override
-            public void run() {
-                InnScene.this.potionOfFalseLife();
-            }
-        });
-        ui.onButtonPress("sell", new Runnable() {
-            @Override
-            public void run() {
-                InnScene.this.sell();
-            }
-        });
+        tempHitPointCost = ui.findActor("tempHitPointCost");
+        ui.onButtonPress("done", InnScene.this::done);
+        ui.onButtonPress("tempHitPointCost", InnScene.this::potionOfFalseLife);
+        ui.onButtonPress("sell", InnScene.this::sell);
         leave = ui.findActor("done");
-        leave.getLabel().setText(Forge.getLocalizer().getMessage("lblLeave"));
         sell = ui.findActor("sell");
-        sell.getLabel().setText(Forge.getLocalizer().getMessage("lblSell"));
 
-        tempHitPoints = ui.findActor("tempHitPoints");
-        tempHitPoints.setText(Forge.getLocalizer().getMessageorUseDefault("lblTempHitPoints", "Temporary Hit Points"));
 
         leaveIcon = ui.findActor("leaveIcon");
         healIcon = ui.findActor("healIcon");
@@ -89,9 +69,8 @@ public class InnScene extends UIScene {
         boolean purchaseable = Current.player().getMaxLife() == Current.player().getLife() &&
                 tempHealthCost <= Current.player().getGold();
 
-        tempHitPointCost = ui.findActor("tempHitPointCost");
         tempHitPointCost.setDisabled(!purchaseable);
-        tempHitPointCost.getLabel().setText("$" + tempHealthCost);
+        tempHitPointCost.setText(  tempHealthCost+"[+Gold]");
         clearActorObjects();
         addActorObject(tempHitPointCost);
         addActorObject(sell);

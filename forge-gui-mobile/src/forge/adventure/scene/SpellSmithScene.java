@@ -3,12 +3,12 @@ package forge.adventure.scene;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.StaticData;
 import forge.adventure.data.RewardData;
@@ -38,15 +38,15 @@ public class SpellSmithScene extends UIScene {
     }
 
     private List<PaperCard> cardPool = new ArrayList<>();
-    private Label goldLabel;
-    private TextButton pullButton;
+    private TextraLabel goldLabel;
+    private TextraButton pullButton;
     private ScrollPane rewardDummy;
     private RewardActor rewardActor;
     SelectBox<CardEdition> editionList;
     //Button containers.
-    final private HashMap<String, TextButton> rarityButtons = new HashMap<>();
-    final private HashMap<String, TextButton> costButtons   = new HashMap<>();
-    final private HashMap<String, TextButton> colorButtons  = new HashMap<>();
+    final private HashMap<String, TextraButton> rarityButtons = new HashMap<>();
+    final private HashMap<String, TextraButton> costButtons   = new HashMap<>();
+    final private HashMap<String, TextraButton> colorButtons  = new HashMap<>();
     //Filter variables.
     private String edition = "";
     private String rarity  = "";
@@ -91,7 +91,7 @@ public class SpellSmithScene extends UIScene {
         pullButton.setDisabled(true);
         goldLabel.setText("Gold: "+ Current.player().getGold());
         for(String i : new String[]{"BBlack", "BBlue", "BGreen", "BRed", "BWhite", "BColorless"} ){
-            TextButton button = ui.findActor(i);
+            TextraButton button = ui.findActor(i);
             if(button != null){
                 colorButtons.put(i, button);
                 button.addListener(new ClickListener() {
@@ -104,7 +104,7 @@ public class SpellSmithScene extends UIScene {
             }
         }
         for(String i : new String[]{"BCommon", "BUncommon", "BRare", "BMythic"} ){
-            TextButton button = ui.findActor(i);
+            TextraButton button = ui.findActor(i);
             if(button != null) {
                 rarityButtons.put(i, button);
                 button.addListener(new ClickListener() {
@@ -117,7 +117,7 @@ public class SpellSmithScene extends UIScene {
             }
         }
         for(String i : new String[]{"B02", "B35", "B68", "B9X"} ){
-            TextButton button = ui.findActor(i);
+            TextraButton button = ui.findActor(i);
             if(button != null) {
                 costButtons.put(i, button);
                 button.addListener(new ClickListener() {
@@ -148,7 +148,7 @@ public class SpellSmithScene extends UIScene {
     }
 
     private boolean selectRarity(String what){
-        for(Map.Entry<String, TextButton> B : rarityButtons.entrySet())
+        for(Map.Entry<String, TextraButton> B : rarityButtons.entrySet())
             B.getValue().setColor(Color.WHITE);
         switch(what){
             case "BCommon":
@@ -170,11 +170,11 @@ public class SpellSmithScene extends UIScene {
     }
 
     private void selectColor(String what){
-        TextButton B = colorButtons.get(what);
+        TextraButton B = colorButtons.get(what);
         switch(what){
             case "BColorless":
                 if(B.getColor().equals(Color.RED)) B.setColor(Color.WHITE); else {
-                    for (Map.Entry<String, TextButton> BT : colorButtons.entrySet())
+                    for (Map.Entry<String, TextraButton> BT : colorButtons.entrySet())
                         BT.getValue().setColor(Color.WHITE);
                     B.setColor(Color.RED);
                 }
@@ -191,7 +191,7 @@ public class SpellSmithScene extends UIScene {
     }
 
     private boolean selectCost(String what){
-        for(Map.Entry<String, TextButton> B : costButtons.entrySet())
+        for(Map.Entry<String, TextraButton> B : costButtons.entrySet())
             B.getValue().setColor(Color.WHITE);
         switch(what){
             case "B02":
@@ -218,11 +218,11 @@ public class SpellSmithScene extends UIScene {
         cost_low = -1; cost_high = 9999;
         rarity = "";
         currentPrice = (int)basePrice;
-        goldLabel.setText("Gold: "+ Current.player().getGold());
+        goldLabel.setText(Current.player().getGold()+"[+Gold]");
 
-        for(Map.Entry<String, TextButton> B : colorButtons.entrySet())  B.getValue().setColor(Color.WHITE);
-        for(Map.Entry<String, TextButton> B : costButtons.entrySet())   B.getValue().setColor(Color.WHITE);
-        for(Map.Entry<String, TextButton> B : rarityButtons.entrySet()) B.getValue().setColor(Color.WHITE);
+        for(Map.Entry<String, TextraButton> B : colorButtons.entrySet())  B.getValue().setColor(Color.WHITE);
+        for(Map.Entry<String, TextraButton> B : costButtons.entrySet())   B.getValue().setColor(Color.WHITE);
+        for(Map.Entry<String, TextraButton> B : rarityButtons.entrySet()) B.getValue().setColor(Color.WHITE);
         editionList.setColor(Color.WHITE);
         filterResults();
         super.enter();
@@ -231,10 +231,10 @@ public class SpellSmithScene extends UIScene {
 
     public void filterResults() {
         Iterable<PaperCard> P = RewardData.getAllCards();
-        goldLabel.setText("Gold: "+ Current.player().getGold());
+        goldLabel.setText( Current.player().getGold()+"[+Gold]");
         float totalCost = basePrice * Current.player().goldModifier();
         final List<String> colorFilter = new ArrayList<>();
-        for(Map.Entry<String, TextButton> B : colorButtons.entrySet())
+        for(Map.Entry<String, TextraButton> B : colorButtons.entrySet())
             switch (B.getKey()){
                 case "BColorless":
                     if(B.getValue().getColor().equals(Color.RED)) colorFilter.add("Colorless");

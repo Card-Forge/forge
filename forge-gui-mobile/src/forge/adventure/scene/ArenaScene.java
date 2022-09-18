@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.utils.Array;
+import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.ArenaData;
@@ -27,7 +29,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     private static ArenaScene object;
     private final float gridSize;
     private ArenaData arenaData;
-    private TextButton startButton;
+    private TextraButton startButton;
 
     public static ArenaScene instance() {
         if(object==null)
@@ -35,10 +37,10 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         return object;
     }
 
-    private TextButton doneButton;
+    private TextraButton doneButton;
     Dialog startDialog;
     Dialog areYouSureDialog;
-    private Label goldLabel;
+    private TextraLabel goldLabel;
 
     private Group arenaPlane;
     private Random rand=new Random();
@@ -89,7 +91,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
         startButton=ui.findActor("start");
 
-        startDialog = new Dialog(Forge.getLocalizer().getMessage("lblStart"), Controls.GetSkin())
+        startDialog = new Dialog(Forge.getLocalizer().getMessage("lblStart"), Controls.getSkin())
         {
             protected void result(Object object)
             {
@@ -106,7 +108,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         startDialog.getColor().a = 0;
 
 
-        areYouSureDialog= new Dialog(Forge.getLocalizer().getMessage("lblConcedeTitle"), Controls.GetSkin())
+        areYouSureDialog= new Dialog(Forge.getLocalizer().getMessage("lblConcedeTitle"), Controls.getSkin())
         {
             protected void result(Object object)
             {
@@ -304,7 +306,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         player=fighters.get(fighters.size-1);
 
 
-        goldLabel.setText(data.entryFee +" $");
+        goldLabel.setText(data.entryFee +" [+Gold]");
         goldLabel.setVisible(true);
 
         startButton.setDisabled(data.entryFee>Current.player().getGold());

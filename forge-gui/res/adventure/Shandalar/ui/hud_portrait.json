@@ -59,8 +59,7 @@
       "type": "Label",
       "name": "lifePoints", 
       "width": 48,
-      "height": 16,         
-      "fontSize": 1,
+      "height": 16,
       "x": 234,
       "y": 64
     },
@@ -69,8 +68,7 @@
       "name": "mana",
       "font": "default",
       "width": 48,
-      "height": 3,    
-      "fontSize": 1,
+      "height": 3,
       "x": 234,
       "y": 85
     },
@@ -79,15 +77,15 @@
       "name": "money",
       "font": "default",
       "width": 48,
-      "height": 3,    
-      "fontSize": 1,
+      "height": 3,
       "x": 234,
       "y": 104
     },
     {
       "type": "TextButton",
       "name": "deck",
-      "text": "Deck",
+	  "style":"menu",
+      "text": "{Scale=200%}[+Deck]",
       "width": 64,
       "height": 32,
       "x": 206,
@@ -96,7 +94,8 @@
     {
       "type": "TextButton",
       "name": "inventory",
-      "text": "Inventory",
+	  "style":"menu",
+      "text": "{Scale=200%}[+Item]",
       "width": 64,
       "height": 32,
       "x": 206,
@@ -106,7 +105,8 @@
     {
       "type": "TextButton",
       "name": "statistic",
-      "text": "Status",
+	  "style":"menu",
+      "text": "{Scale=200%}[+Status]",
       "width": 64,
       "height": 32,
       "x": 206,
@@ -115,7 +115,8 @@
     {
       "type": "TextButton",
       "name": "menu",
-      "text": "Menu",
+	  "style":"menu",
+      "text": "{Scale=200%}[+Menu]",
       "width": 64,
       "height": 32,
       "x": 206,

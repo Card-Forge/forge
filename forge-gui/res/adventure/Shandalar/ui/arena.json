@@ -20,7 +20,7 @@
     {
       "type": "TextButton",
       "name": "done",
-      "text": "Back",
+      "text": "tr(lblBack)",
       "width": 48,
       "height": 20,
       "x": 5,
@@ -28,8 +28,8 @@
     }  ,
     {
       "type": "Label",
-      "name": "gold",
-      "text": "$",
+	  "style":"background",
+      "name": "gold", 
       "width": 48,
       "height": 20,
       "x": 380,
@@ -38,7 +38,7 @@
     {
       "type": "TextButton",
       "name": "start",
-      "text": "Start",
+      "text": "tr(lblBattle)",
       "width": 48,
       "height": 20,
       "x": 430,

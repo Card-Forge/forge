@@ -2,7 +2,25 @@ items.png
 size: 480,1008
 format: RGBA8888
 filter: Nearest,Nearest
-repeat: none          
+repeat: none      
+c
+  xy: 368,80
+  size: 16, 16
+b
+  xy: 384,80
+  size: 16, 16
+r
+  xy: 368,96
+  size: 16, 16
+g
+  xy: 384,96
+  size: 16, 16
+u
+  xy: 368,112
+  size: 16, 16
+w
+  xy: 384,112
+  size: 16, 16    
 CardBack 
   xy: 0, 0
   size: 48, 64
@@ -13,7 +31,19 @@ Life
   xy: 48, 16
   size: 16, 16            
 Mana 
-  xy: 192, 912
+  xy: 48, 32
+  size: 16, 16        
+Deck 
+  xy: 48, 48
+  size: 16, 16   
+Item 
+  xy: 0, 64
+  size: 16, 16  
+Status 
+  xy: 16, 64
+  size: 16, 16  
+Menu 
+  xy: 32, 64
   size: 16, 16  
 SolRing
   xy: 320, 144
@@ -171,7 +201,7 @@ Blood
 Cheese
   xy: 80, 768
   size: 16, 16
-Gold
+GoldStack
   xy: 208, 816
   size: 16, 16
 Treasure

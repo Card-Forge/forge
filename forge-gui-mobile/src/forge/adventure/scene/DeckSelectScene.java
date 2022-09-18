@@ -7,29 +7,38 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.IntMap;
+import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 
 public class DeckSelectScene extends UIScene {
-    private final IntMap<TextButton> buttons = new IntMap<>();
+    private final IntMap<TextraButton> buttons = new IntMap<>();
     Color defColor;
     Dialog dialog;
     TextField textInput;
     Table layout;
-    Label header;
-    TextButton back, edit, rename, dialogRenameBtn, dialogAbortBtn;
+    TextraLabel header;
+    TextraButton back, edit, rename, dialogRenameBtn, dialogAbortBtn;
     int currentSlot = 0;
     ScrollPane scrollPane;
 
+    private static DeckSelectScene object;
+
+    public static DeckSelectScene instance() {
+        if(object==null)
+            object=new DeckSelectScene();
+        return object;
+    }
     public DeckSelectScene() {
         super(Forge.isLandscapeMode() ? "ui/deck_selector.json" : "ui/deck_selector_portrait.json");
 
         layout = new Table();
         stage.addActor(layout);
 
-        header = Controls.newLabel(Forge.getLocalizer().getMessage("lblSelectYourDeck"));
+        header = Controls.newTextraLabel(Forge.getLocalizer().getMessage("lblSelectYourDeck"));
         layout.add(header).colspan(2).align(Align.center).pad(2, 5, 2, 5);
         layout.row();
         for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++)
@@ -50,11 +59,8 @@ public class DeckSelectScene extends UIScene {
         dialog.hide();
 
         back = ui.findActor("return");
-        back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
         edit = ui.findActor("edit");
-        edit.getLabel().setText(Forge.getLocalizer().getMessage("lblEdit"));
         rename = ui.findActor("rename");
-        rename.getLabel().setText(Forge.getLocalizer().getMessage("lblRename"));
         ui.onButtonPress("return", () -> DeckSelectScene.this.back());
         ui.onButtonPress("edit", () -> DeckSelectScene.this.edit());
         ui.onButtonPress("rename", () -> {
@@ -68,8 +74,8 @@ public class DeckSelectScene extends UIScene {
         scrollPane.setActor(layout);
     }
 
-    private TextButton addDeckSlot(String name, int i) {
-        TextButton button = Controls.newTextButton("-");
+    private TextraButton addDeckSlot(String name, int i) {
+        TextraButton button = Controls.newTextButton("-");
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -96,11 +102,11 @@ public class DeckSelectScene extends UIScene {
     public boolean select(int slot) {
         currentSlot = slot;
 
-        for (IntMap.Entry<TextButton> butt : new IntMap.Entries<TextButton>(buttons)) {
+        for (IntMap.Entry<TextraButton> butt : new IntMap.Entries<TextraButton>(buttons)) {
             butt.value.setColor(defColor);
         }
         if (buttons.containsKey(slot)) {
-            TextButton button = buttons.get(slot);
+            TextraButton button = buttons.get(slot);
             button.setColor(Color.RED);
         }
         Current.player().setSelectedDeckSlot(slot);
@@ -136,47 +142,7 @@ public class DeckSelectScene extends UIScene {
         super.enter();
     }
 
-    @Override
-    public void resLoaded() {
-        super.resLoaded();
-            layout = new Table();
-            stage.addActor(layout);
 
-            header = Controls.newLabel(Forge.getLocalizer().getMessage("lblSelectYourDeck"));
-            layout.add(header).colspan(2).align(Align.center).pad(2, 5, 2, 5);
-            layout.row();
-            for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++)
-                addDeckSlot(Forge.getLocalizer().getMessage("lblDeck")+": " + (i + 1), i);
-
-            dialog = Controls.newDialog(Forge.getLocalizer().getMessage("lblSave"));
-            textInput = Controls.newTextField("");
-            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2);
-            dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left);
-            dialog.getButtonTable().add(textInput).fillX().expandX();
-            dialog.getButtonTable().row();
-            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblRename"), () -> DeckSelectScene.this.rename())).align(Align.left);
-            dialog.getButtonTable().add(Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), () -> dialog.hide())).align(Align.left);
-
-            back = ui.findActor("return");
-            back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
-            edit = ui.findActor("edit");
-            edit.getLabel().setText(Forge.getLocalizer().getMessage("lblEdit"));
-            rename = ui.findActor("rename");
-            rename.getLabel().setText(Forge.getLocalizer().getMessage("lblRename"));
-            ui.onButtonPress("return", () -> DeckSelectScene.this.back());
-            ui.onButtonPress("edit", () -> DeckSelectScene.this.edit());
-            ui.onButtonPress("rename", () -> {
-                textInput.setText(Current.player().getSelectedDeck().getName());
-                dialog.show(stage);
-                stage.setKeyboardFocus(textInput);
-            });
-            defColor = ui.findActor("return").getColor();
-
-            ScrollPane scrollPane = ui.findActor("deckSlots");
-            scrollPane.setActor(layout);
-
-    }
 
     private void rename() {
         dialog.hide();
@@ -186,6 +152,6 @@ public class DeckSelectScene extends UIScene {
     }
 
     private void edit() {
-        Forge.switchScene(SceneType.DeckEditScene.instance);
+        Forge.switchScene(DeckEditScene.getInstance());
     }
 }

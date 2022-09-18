@@ -115,7 +115,7 @@
     {
       "type": "TextButton",
       "name": "return",
-      "text": "Back",
+      "text": "tr(lblBack)",
       "width": 80,
       "height": 30,
       "x": 184,

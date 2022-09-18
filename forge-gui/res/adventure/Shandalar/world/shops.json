@@ -19,8 +19,8 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "White rune"  },
     { "type": "item","count":1, "itemName": "White Staff"  },
-    { "type": "mana","count":25,    },
-    { "type": "life","count":1,    } 
+    { "type": "mana","count":2    },
+    { "type": "life","count":1    }
     
     ]
 
@@ -45,8 +45,8 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Red rune"  },
     { "type": "item","count":1, "itemName": "Red Staff"  },
-    { "type": "mana","count":25,    },
-    { "type": "life","count":1,    } 
+    { "type": "mana","count":2    },
+    { "type": "life","count":1    }
     
     ]
 
@@ -71,8 +71,8 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Blue rune"  },
     { "type": "item","count":1, "itemName": "Blue Staff"  },
-    { "type": "mana","count":25,    },
-    { "type": "life","count":1,    } 
+    { "type": "mana","count":2    },
+    { "type": "life","count":1    }
     
     ]
 
@@ -98,12 +98,12 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Black rune"  },
     { "type": "item","count":1, "itemName": "Black Staff"  },
-    { "type": "mana","count":25,    },
-    { "type": "life","count":1,    } 
+    { "type": "mana","count":2    },
+    { "type": "life","count":1    }
     
     ]
 
-}
+},
 {                                      
 "name":"GreenEquipment",                  
 "spriteAtlas":"maps/tileset/buildings.atlas",   
@@ -125,13 +125,12 @@
   "rewards": [ 
     { "type": "item","count":1, "itemName": "Green rune"  },
     { "type": "item","count":1, "itemName": "Green Staff"  },
-    { "type": "mana","count":25,    },
-    { "type": "life","count":1,    } 
+    { "type": "mana","count":2    },
+    { "type": "life","count":1   }
     
     ]
 
-}
-,{                                      
+},{
 "name":"Equipment",                  
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"EquipmentShop",   

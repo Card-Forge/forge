@@ -98,7 +98,7 @@ public abstract class GameStage extends Stage {
                     return;
                 foregroundSprites.removeActor(player);
                 player = null;
-                GameStage.this.GetPlayer();
+                GameStage.this.getPlayerSprite();
             }
         });
         camera = (OrthographicCamera) getCamera();

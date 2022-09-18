@@ -36,49 +36,49 @@
  <objectgroup id="4" name="Objects">
   <object id="41" template="../../obj/shop.tx" x="232" y="162">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="56" template="../../obj/shop.tx" x="103" y="226">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="57" template="../../obj/shop.tx" x="392" y="162">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="43" template="../../obj/shop.tx" x="152" y="451">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="47" template="../../obj/inn.tx" x="311" y="227"/>
   <object id="49" template="../../obj/shop.tx" x="520" y="225">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="50" template="../../obj/shop.tx" x="536" y="354">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="51" template="../../obj/shop.tx" x="472" y="450">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="52" template="../../obj/shop.tx" x="88" y="354">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Blue,Azorius,Dimir,Izzet,Simic,Merfolk "/>
    </properties>
   </object>
   <object id="53" template="../../obj/spellsmith.tx" x="408" y="402"/>
   <object id="55" template="../../obj/shop.tx" x="465" y="515">
    <properties>
-    <property name="shopList" value="Plains"/>
+    <property name="shopList" value="Island"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
@@ -87,7 +87,58 @@
     <property name="spawn" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="61" template="../../obj/arena.tx" x="216" y="403"/>
+  <object id="61" template="../../obj/arena.tx" x="216" y="403">
+   <properties>
+    <property name="arena">{
+
+    &quot;enemyPool&quot;:[
+	&quot;Bird&quot;,
+	&quot;Djinn&quot;,
+	&quot;Elemental&quot;,
+	&quot;Merfolk&quot;,
+	&quot;Merfolk Avatar&quot;,
+	&quot;Merfolk Fighter&quot;,
+	&quot;Merfolk Lord&quot;,
+	&quot;Merfolk Soldier&quot;,
+	&quot;Merfolk warrior&quot;,
+	&quot;Blue Wiz1&quot;,
+	&quot;Blue Wiz2&quot;,
+	&quot;Blue Wiz3&quot;,
+	&quot;Geist&quot;,
+	&quot;Rogue&quot;,
+	&quot;Sea Monster&quot;,
+	&quot;Tarkir Djinn&quot;,
+	&quot;Doppelganger&quot;
+	],
+    &quot;rounds&quot;:3,
+    &quot;entryFee&quot;:100,
+     &quot;rewards&quot;: [[
+		{
+			&quot;type&quot;: &quot;card&quot;,
+			&quot;probability&quot;: 1, 
+      			&quot;count&quot;:2,
+			&quot;rarity&quot;: [
+				&quot;Mythic Rare&quot;
+			],
+      			&quot;colors&quot;: [&quot;blue&quot;] 
+		}
+		],[
+		{
+			&quot;type&quot;: &quot;gold&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 500 
+		}
+		],[{
+			&quot;type&quot;: &quot;item&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 1,
+			&quot;itemNames&quot;: [&quot;Mithril Armor&quot;,&quot;Mithril Shield&quot;,&quot;Mithril Boots&quot;,&quot;Dagger&quot;]
+		}
+		]
+		] 
+}</property>
+   </properties>
+  </object>
   <object id="62" template="../../obj/shop.tx" x="360" y="370">
    <properties>
     <property name="shopList" value="BlueItems"/>

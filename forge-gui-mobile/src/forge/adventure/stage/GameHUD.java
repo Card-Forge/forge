@@ -2,6 +2,9 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.ControllerListener;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,17 +13,19 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
-import forge.adventure.scene.Scene;
-import forge.adventure.scene.SceneType;
+import forge.adventure.scene.*;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
@@ -33,17 +38,19 @@ import forge.gui.GuiBase;
 /**
  * Stage to handle everything rendered in the HUD
  */
-public class GameHUD extends Stage {
+public class GameHUD extends Stage implements ControllerListener {
 
     static public GameHUD instance;
     private final GameStage gameStage;
     private final Image avatar;
     private final Image miniMapPlayer;
-    private final Label lifePoints;
-    private final Label money;
-    private final Label mana;
+    private final TextraLabel lifePoints;
+    private final TextraLabel money;
+    private final TextraLabel mana;
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
-    private TextButton deckActor, menuActor, statsActor, inventoryActor;
+    private final InputEvent eventTouchDown;
+    private final InputEvent eventTouchUp;
+    private TextraButton deckActor, menuActor, statsActor, inventoryActor;
     private UIActor ui;
     private Touchpad touchpad;
     private Console console;
@@ -66,19 +73,15 @@ public class GameHUD extends Stage {
 
         avatarborder = ui.findActor("avatarborder");
         deckActor = ui.findActor("deck");
-        deckActor.getLabel().setText(Forge.getLocalizer().getMessage("lblDeck"));
         menuActor = ui.findActor("menu");
         referenceX = menuActor.getX();
-        menuActor.getLabel().setText(Forge.getLocalizer().getMessage("lblMenu"));
         statsActor = ui.findActor("statistic");
-        statsActor.getLabel().setText(Forge.getLocalizer().getMessage("lblStatus"));
         inventoryActor = ui.findActor("inventory");
-        inventoryActor.getLabel().setText(Forge.getLocalizer().getMessage("lblItem"));
         gamehud = ui.findActor("gamehud");
 
         miniMapPlayer = new Image(new Texture(Config.instance().getFile("ui/minimap_player.png")));
         //create touchpad
-        touchpad = new Touchpad(10, Controls.GetSkin());
+        touchpad = new Touchpad(10, Controls.getSkin());
         touchpad.setBounds(15, 15, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
         touchpad.addListener(new ChangeListener() {
             @Override
@@ -257,9 +260,9 @@ public class GameHUD extends Stage {
         avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
         Deck deck = AdventurePlayer.current().getSelectedDeck();
         if (deck == null || deck.isEmpty() || deck.getMain().toFlatList().size() < 30) {
-            deckActor.getLabel().setColor(Color.RED);
+            deckActor.setColor(Color.RED);
         } else {
-            deckActor.getLabel().setColor(menuActor.getLabel().getColor());
+            deckActor.setColor(menuActor.getColor());
         }
     }
 

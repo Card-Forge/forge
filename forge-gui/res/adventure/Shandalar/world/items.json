@@ -477,7 +477,7 @@
   {
     "name": "Change",
     "equipmentSlot": "Right",
-    "iconName": "Gold",
+    "iconName": "GoldStack",
     "effect": {
       "startBattleWithCard": [
         "c_a_gold_draw"

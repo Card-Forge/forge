@@ -26,7 +26,7 @@ public class Console extends Window {
         private Console console;
 
         public InputLine(Console console) {
-            super("", Controls.GetSkin());
+            super("", Controls.getSkin());
             this.console = console;
             writeEnters=true;
         }
@@ -77,8 +77,8 @@ public class Console extends Window {
     }
 
     public Console() {
-        super("", Controls.GetSkin());
-        content = new Table(Controls.GetSkin());
+        super("", Controls.getSkin());
+        content = new Table(Controls.getSkin());
         input   = new InputLine(this);
         scroll  = new ScrollPane(content,new ScrollPane.ScrollPaneStyle());
 

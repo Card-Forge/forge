@@ -1,5 +1,6 @@
 package forge.adventure.character;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -217,12 +218,19 @@ public class CharacterSprite extends MapActor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         if (currentAnimation == null || hidden)
+        {
+
             return;
+        }
+        super.draw(batch,parentAlpha);
         beforeDraw(batch,parentAlpha);
         TextureRegion currentFrame = currentAnimation.getKeyFrame(timer, true);
         setHeight(currentFrame.getRegionHeight());
         setWidth(currentFrame.getRegionWidth());
+        Color oldColor=batch.getColor().cpy();
+        batch.setColor(getColor());
         batch.draw(currentFrame, getX(), getY());
+        batch.setColor(oldColor);
         super.draw(batch,parentAlpha);
         //batch.draw(getDebugTexture(),getX(),getY());
 

@@ -3,8 +3,8 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.Align;
+import com.github.tommyettinger.textra.TextraButton;
 import forge.Forge;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
@@ -20,8 +20,10 @@ import forge.screens.TransitionScreen;
  */
 public class StartScene extends UIScene {
 
-    TextButton saveButton, resumeButton, continueButton, newGameButton, newGameButtonPlus, loadButton, settingsButton, exitButton, switchButton;
+    private static StartScene object;
+    TextraButton saveButton, resumeButton, continueButton, newGameButton, newGameButtonPlus, loadButton, settingsButton, exitButton, switchButton, dialogOk, dialogCancel, dialogButtonSelected;
     Dialog dialog;
+    private int selected = -1;
 
     public StartScene() {
         super(Forge.isLandscapeMode() ? "ui/start_menu.json" : "ui/start_menu_portrait.json");
@@ -36,23 +38,13 @@ public class StartScene extends UIScene {
         ui.onButtonPress("Switch", () -> Forge.switchToClassic());
 
         newGameButton = ui.findActor("Start");
-        newGameButton.getLabel().setText(Forge.getLocalizer().getMessage("lblNewGame"));
-        newGameButtonPlus = ui.findActor("Start+");
-        newGameButtonPlus.getLabel().setText(Forge.getLocalizer().getMessage("lblNewGame") + "+");
         loadButton = ui.findActor("Load");
-        loadButton.getLabel().setText(Forge.getLocalizer().getMessage("lblLoad"));
         saveButton = ui.findActor("Save");
-        saveButton.getLabel().setText(Forge.getLocalizer().getMessage("lblSave"));
         resumeButton = ui.findActor("Resume");
-        resumeButton.getLabel().setText(Forge.getLocalizer().getMessage("lblResume"));
         continueButton = ui.findActor("Continue");
-        continueButton.getLabel().setText(Forge.getLocalizer().getMessage("lblContinue"));
         settingsButton = ui.findActor("Settings");
-        settingsButton.getLabel().setText(Forge.getLocalizer().getMessage("lblSettings"));
         exitButton = ui.findActor("Exit");
-        exitButton.getLabel().setText(Forge.getLocalizer().getMessage("lblExit"));
         switchButton = ui.findActor("Switch");
-        switchButton.getLabel().setText(Forge.getLocalizer().getMessage("lblClassic"));
 
         saveButton.setVisible(false);
         resumeButton.setVisible(false);
@@ -65,6 +57,12 @@ public class StartScene extends UIScene {
         dialogCancel = Controls.newTextButton(Forge.getLocalizer().getMessage("lblCancel"), () -> dialog.hide());
         dialog.getButtonTable().add(dialogCancel).width(60).align(Align.right).padRight(15);
         dialog.getColor().a = 0;
+    }
+
+    public static StartScene instance() {
+        if(object==null)
+            object=new StartScene();
+        return object;
     }
 
     public boolean NewGame() {

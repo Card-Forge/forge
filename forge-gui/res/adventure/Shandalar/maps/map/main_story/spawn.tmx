@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="68">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="69">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
@@ -32,15 +32,16 @@
   <object id="38" template="../../obj/entry_up.tx" x="1" y="481" width="478" height="16">
    <properties>
     <property name="spawn" type="bool" value="true"/>
+    <property name="teleport" value=""/>
    </properties>
   </object>
   <object id="61" template="../../obj/entry_left.tx" x="0" y="465" width="16" height="465"/>
   <object id="65" template="../../obj/entry_left.tx" x="464" y="463" width="16" height="462"/>
   <object id="66" template="../../obj/entry_down.tx" x="16" y="17" width="447" height="16"/>
-  <object id="67" name="IntroChar" type="dialog" gid="7627" x="238" y="208" width="16" height="16">
+  <object id="67" name="IntroChar" class="dialog" gid="7627" x="238" y="208" width="16" height="16">
    <properties>
     <property name="dialog">[{
-  &quot;text&quot;:&quot;Hello Planeswalker&quot;,
+  &quot;text&quot;:&quot;Hello Planeswalker {var=player_name}&quot;,
   &quot;options&quot;:[
     {      
       &quot;name&quot;:&quot;Why am I here&quot;,     

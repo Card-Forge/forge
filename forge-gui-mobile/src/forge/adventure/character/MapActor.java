@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 import forge.adventure.util.Config;
+import forge.util.MyRandom;
 
 /**
  * Map Actor base class for Actors on the map
@@ -17,6 +18,12 @@ import forge.adventure.util.Config;
  */
 public class MapActor extends Actor {
 
+
+    private boolean removeIfEffectsAreFinished;
+
+    public void removeAfterEffects() {
+        removeIfEffectsAreFinished=true;
+    }
 
     class CurrentEffect
     {
@@ -78,7 +85,7 @@ public class MapActor extends Actor {
     }
     public void playEffect(String path)
     {
-        playEffect(path,0,false,Vector2.Zero);
+        playEffect(path,0,true,Vector2.Zero);
     }
     public MapActor(int objectId)
     {
@@ -91,7 +98,9 @@ public class MapActor extends Actor {
     private Texture getDebugTexture() {
         if (debugTexture == null) {
             Pixmap pixmap = new Pixmap((int) getWidth(), (int) getHeight(), Pixmap.Format.RGBA8888);
-            pixmap.setColor(1.0f,0,0,0.5f);
+            //pixmap.setColor(1.0f,0,0,0.5f);
+            pixmap.setColor(MyRandom.getRandom().nextFloat(),MyRandom.getRandom().nextFloat(),MyRandom.getRandom().nextFloat(),0.5f);
+
             pixmap.fillRectangle((int)(boundingRect.x - getX()), (int)(getHeight()- boundingRect.getHeight()) + (int)(boundingRect.y - getY()), (int)boundingRect.getWidth(), (int)boundingRect.getHeight());
             debugTexture = new Texture(pixmap);
             pixmap.dispose();
@@ -115,7 +124,9 @@ public class MapActor extends Actor {
     public void draw(Batch batch, float alpha) {
 
         if(boundDebug)
+        {
             batch.draw(getDebugTexture(),getX(),getY());
+        }
 
 
 
@@ -153,6 +164,9 @@ public class MapActor extends Actor {
                 effect.effect.dispose();
             }
         }
+        if(effects.size==0&&removeIfEffectsAreFinished&&getParent()!=null)
+            getParent().removeActor(this);
+
     }
     @Override
     protected void positionChanged() {

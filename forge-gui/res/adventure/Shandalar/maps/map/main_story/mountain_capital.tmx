@@ -36,12 +36,12 @@
  <objectgroup id="4" name="Objects">
   <object id="41" template="../../obj/shop.tx" x="249" y="370">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
    </properties>
   </object>
   <object id="56" template="../../obj/shop.tx" x="153" y="371">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
    </properties>
   </object>
   <object id="57" template="../../obj/shop.tx" x="201" y="418">
@@ -51,34 +51,34 @@
   </object>
   <object id="43" template="../../obj/shop.tx" x="105" y="370">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
    </properties>
   </object>
   <object id="47" template="../../obj/inn.tx" x="376" y="370"/>
   <object id="49" template="../../obj/shop.tx" x="105" y="418">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
    </properties>
   </object>
   <object id="50" template="../../obj/shop.tx" x="152" y="418">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
    </properties>
   </object>
   <object id="51" template="../../obj/shop.tx" x="248" y="417">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
    </properties>
   </object>
   <object id="52" template="../../obj/shop.tx" x="201" y="370">
    <properties>
-    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
    </properties>
   </object>
   <object id="53" template="../../obj/spellsmith.tx" x="152" y="258"/>
   <object id="55" template="../../obj/shop.tx" x="368" y="433">
    <properties>
-    <property name="shopList" value="Plains"/>
+    <property name="shopList" value="Mountain"/>
     <property name="signYOffset" type="float" value="0"/>
    </properties>
   </object>
@@ -87,9 +87,73 @@
     <property name="spawn" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="59" template="../../obj/entry_left.tx" x="351" y="534" width="16" height="89.9726" rotation="179.747"/>
+  <object id="59" template="../../obj/entry_left.tx" x="337" y="627" width="16" height="89.9726" rotation="0"/>
   <object id="60" template="../../obj/entry_right.tx" x="266" y="623" width="16" height="88"/>
-  <object id="61" template="../../obj/arena.tx" x="200" y="258"/>
+  <object id="61" template="../../obj/arena.tx" x="200" y="258">
+   <properties>
+    <property name="arena">{
+
+    &quot;enemyPool&quot;:[
+	&quot;Amonkhet Minotaur&quot;,
+	&quot;Ashmouth Devil&quot;,
+	&quot;Axgard Dwarf&quot;,
+	&quot;Berserker&quot;,
+	&quot;Boggart&quot;,
+	&quot;Cyclops&quot;,
+	&quot;Devil&quot;,
+	&quot;Dinosaur&quot;,
+	&quot;Dragon&quot;,
+	&quot;Dwarf&quot;,
+	&quot;Efreet&quot;,
+	&quot;Fire Elemental&quot;,
+	&quot;Flame Elemental&quot;,
+	&quot;Goblin&quot;,
+	&quot;Goblin Chief&quot;,
+	&quot;Goblin Warrior&quot;,
+	&quot;Hellhound&quot;,
+	&quot;Immersturm Demon&quot;,
+	&quot;Khan&quot;,
+	&quot;Minotaur&quot;,
+	&quot;Minotaur Flayer&quot;,
+	&quot;Red Beast&quot;,
+	&quot;Red Wiz1&quot;,
+	&quot;Red Wiz2&quot;,
+	&quot;Red Wiz3&quot;,
+	&quot;Shaman&quot;,
+	&quot;Troll&quot;,
+	&quot;Vampire Lord&quot;,
+	&quot;Viashino&quot;,
+	&quot;Yeti&quot;
+	],
+    &quot;rounds&quot;:3,
+    &quot;entryFee&quot;:100,
+     &quot;rewards&quot;: [[
+		{
+			&quot;type&quot;: &quot;card&quot;,
+			&quot;probability&quot;: 1, 
+      			&quot;count&quot;:2,
+			&quot;rarity&quot;: [
+				&quot;Mythic Rare&quot;
+			],
+      			&quot;colors&quot;: [&quot;red&quot;] 
+		}
+		],[
+		{
+			&quot;type&quot;: &quot;gold&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 500 
+		}
+		],[{
+			&quot;type&quot;: &quot;item&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 1,
+			&quot;itemNames&quot;: [&quot;Aladdin's Ring&quot;,&quot;Axt&quot;,&quot;Ring of Immortals&quot;,&quot;Jandor's Ring&quot;]
+		}
+		]
+		] 
+}</property>
+   </properties>
+  </object>
   <object id="62" template="../../obj/shop.tx" x="361" y="258">
    <properties>
     <property name="shopList" value="RedEquipment"/>

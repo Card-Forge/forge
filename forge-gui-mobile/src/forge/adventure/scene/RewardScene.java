@@ -4,10 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Timer;
+import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.character.ShopActor;
 import forge.adventure.player.AdventurePlayer;
@@ -23,8 +24,8 @@ import forge.sound.SoundSystem;
  * Displays the rewards of a fight or a treasure
  */
 public class RewardScene extends UIScene {
-    private TextButton doneButton;
-    private Label goldLabel;
+    private TextraButton doneButton;
+    private TextraLabel goldLabel;
 
     private static RewardScene object;
 
@@ -272,7 +273,7 @@ public class RewardScene extends UIScene {
         switch (type) {
             case Shop:
                 doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
-                goldLabel.setText("Gold:"+Current.player().getGold());
+                goldLabel.setText(Current.player().getGold()+"[+Gold]");
                 break;
             case Loot:
                 goldLabel.setText("");
@@ -360,7 +361,7 @@ public class RewardScene extends UIScene {
                 if (currentRow != ((i + 1) / numberOfColumns))
                     yOff += doneButton.getHeight();
 
-                TextButton buyCardButton = new BuyButton(shopActor.getObjectId(), i, shopActor.isUnlimited()?null:shopActor.getMapStage().getChanges(), actor, doneButton);
+                TextraButton buyCardButton = new BuyButton(shopActor.getObjectId(), i, shopActor.isUnlimited()?null:shopActor.getMapStage().getChanges(), actor, doneButton);
                 generated.add(buyCardButton);
                 if (!skipCard) {
                     stage.addActor(buyCardButton);
@@ -386,7 +387,7 @@ public class RewardScene extends UIScene {
         }
     }
 
-    private class BuyButton extends TextButton {
+    private class BuyButton extends TextraButton {
         private final int objectID;
         private final int index;
         private final PointOfInterestChanges changes;
@@ -397,7 +398,7 @@ public class RewardScene extends UIScene {
             setDisabled(WorldSave.getCurrentSave().getPlayer().getGold() < price);
         }
 
-        public BuyButton(int id, int i, PointOfInterestChanges ch, RewardActor actor, TextButton style) {
+        public BuyButton(int id, int i, PointOfInterestChanges ch, RewardActor actor, TextraButton style) {
             super("", style.getStyle());
             this.objectID = id;
             this.index = i;

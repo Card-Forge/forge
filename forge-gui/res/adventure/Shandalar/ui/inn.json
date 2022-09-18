@@ -30,6 +30,7 @@
     {
       "type": "Label",
       "name": "tempHitPoints",
+      "text": "tr(lblTempHitPoints)",
       "font": "default",
       "width": 100,
       "height": 30,
@@ -48,7 +49,7 @@
     {
       "type": "TextButton",
       "name": "sell",
-      "text": "Sell cards",
+      "text": "tr(lblSell)", 
       "width": 100,
       "height": 30,
       "x": 190,
@@ -66,7 +67,7 @@
     {
       "type": "TextButton",
       "name": "done",
-      "text": "Leave",
+      "text": "tr(lblBack)",
       "width": 100,
       "height": 30,
       "x": 320,

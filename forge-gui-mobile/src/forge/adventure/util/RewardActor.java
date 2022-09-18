@@ -17,13 +17,13 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
+import com.github.tommyettinger.textra.TextraButton;
 import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
@@ -680,7 +680,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         Image tooltip_image;
         Table tooltip_actor;
         float height;
-        TextButton switchButton;
+        TextraButton switchButton;
         //Vector2 tmp = new Vector2();
 
         public HoldTooltip(Image tooltip_image) {
@@ -704,7 +704,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
         @Override
         public boolean longPress(Actor actor, float x, float y) {
-            TextButton done = actor.getStage().getRoot().findActor("done");
+            TextraButton done = actor.getStage().getRoot().findActor("done");
             if (done != null && Reward.Type.Card.equals(reward.type)) {
                 switchButton.setBounds(done.getX(), done.getY(), done.getWidth(), done.getHeight());
                 if (reward.getCard().hasBackFace())

@@ -87,9 +87,9 @@
     <property name="spawn" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="59" template="../../obj/entry_left.tx" x="416" y="552" width="16" height="71.964" rotation="179.747"/>
+  <object id="59" template="../../obj/entry_left.tx" x="392" y="625" width="16" height="71.964" rotation="0"/>
   <object id="60" template="../../obj/entry_right.tx" x="304" y="624" width="16" height="69"/>
-  <object id="61" template="../../obj/arena.tx" x="422.667" y="113.364">
+  <object id="61" template="../../obj/arena.tx" x="423" y="114">
    <properties>
     <property name="arena">{
 

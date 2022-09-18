@@ -76,7 +76,8 @@
     {
       "type": "TextButton",
       "name": "deck",
-      "text": "Deck",
+	  "style":"menu",
+      "text": "{Scale=200%}[+Deck]",
       "width": 64,
       "height": 36,
       "x": 416,
@@ -85,7 +86,8 @@
     {
       "type": "TextButton",
       "name": "inventory",
-      "text": "Inventory",
+	  "style":"menu",
+      "text": "{Scale=200%}[+Item]",
       "width": 64,
       "height": 36,
       "x": 416,
@@ -95,7 +97,8 @@
     {
       "type": "TextButton",
       "name": "statistic",
-      "text": "Status",
+	  "style":"menu",
+      "text": "{Scale=200%}[+Status]",
       "width": 64,
       "height": 36,
       "x": 416,
@@ -104,7 +107,8 @@
     {
       "type": "TextButton",
       "name": "menu",
-      "text": "Menu",
+	  "style":"menu",
+      "text": "{Scale=200%}[+Menu]",
       "width": 64,
       "height": 36,
       "x": 416,

@@ -3,13 +3,16 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
+import forge.Forge;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
+import forge.adventure.stage.IAfterMatch;
+import forge.adventure.stage.MapStage;
 
 /**
  * Hud base scene
  */
-public abstract class HudScene extends Scene implements InputProcessor, IAfterMatch {
+public abstract class HudScene extends Scene implements InputProcessor, IAfterMatch  {
 
     GameHUD hud;
     GameStage stage;

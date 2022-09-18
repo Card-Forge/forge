@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Timer;
+import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.ItemData;
 import forge.adventure.stage.ConsoleCommandInterpreter;
@@ -22,10 +24,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InventoryScene  extends UIScene {
-    TextButton leave;
+    TextraButton leave;
     Button equipButton;
-    TextButton useButton;
-    Label itemDescription;
+    TextraButton useButton;
+    TextraLabel itemDescription;
     Dialog confirm;
     Dialog useDialog;
     private Table inventory;
@@ -51,7 +53,6 @@ public class InventoryScene  extends UIScene {
         deleteButton = ui.findActor("delete");
         itemDescription = ui.findActor("item_description");
         itemDescription.setAlignment(Align.topLeft);
-        leave.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
 
         inventoryButtons=new Array<>();
         equipmentSlots=new HashMap<>();
@@ -102,7 +103,7 @@ public class InventoryScene  extends UIScene {
                 });
             }
         }
-        inventory = new Table(Controls.GetSkin());
+        inventory = new Table(Controls.getSkin());
         ScrollPane scrollPane = ui.findActor("inventory");
         scrollPane.setScrollingDisabled(true,false);
         scrollPane.setActor(inventory);
@@ -110,7 +111,7 @@ public class InventoryScene  extends UIScene {
         columns-=1;
         if(columns<=0)columns=1;
         scrollPane.setActor(inventory);
-        confirm = new Dialog("\n "+Forge.getLocalizer().getMessage("lblDelete"), Controls.GetSkin())
+        confirm = new Dialog("", Controls.getSkin())
         {
             protected void result(Object object)
             {
@@ -119,6 +120,7 @@ public class InventoryScene  extends UIScene {
                 confirm.hide();
             };
         };
+        confirm.text( Controls.newLabel(Forge.getLocalizer().getMessage("lblDelete")));
 
         confirm.button(Forge.getLocalizer().getMessage("lblYes"), true);
         confirm.button(Forge.getLocalizer().getMessage("lblNo"), false);
@@ -130,7 +132,7 @@ public class InventoryScene  extends UIScene {
         confirm.getColor().a = 0;
 
 
-        useDialog = new Dialog("\n "+Forge.getLocalizer().getMessage("lblDelete"), Controls.GetSkin())
+        useDialog = new Dialog("", Controls.getSkin())
         {
             protected void result(Object object)
             {
@@ -221,10 +223,10 @@ public class InventoryScene  extends UIScene {
         boolean isInPoi = MapStage.getInstance().isInMap();
         useButton.setDisabled(!(isInPoi&&data.usableInPoi||!isInPoi&&data.usableOnWorldMap));
         if(data.manaNeeded==0)
-            useButton.setText("Use Item");
+            useButton.setText("Use");
         else
-            useButton.setText("Use Item ("+data.manaNeeded+" mana)");
-
+            useButton.setText("Use "+data.manaNeeded+"[+Mana]");
+        useButton.layout();
         if(Current.player().getMana()<data.manaNeeded)
             useButton.setDisabled(true);
 
@@ -235,9 +237,9 @@ public class InventoryScene  extends UIScene {
         else
         {
             equipButton.setDisabled(false);
-            if(equipButton instanceof TextButton)
+            if(equipButton instanceof TextraButton)
             {
-                TextButton button=(TextButton) equipButton;
+                TextraButton button=(TextraButton) equipButton;
                 String item=Current.player().itemInSlot(data.equipmentSlot);
                 if(item!=null&&item.equals(data.name))
                 {
@@ -247,6 +249,7 @@ public class InventoryScene  extends UIScene {
                 {
                     button.setText("Equip");
                 }
+                button.layout();
             }
         }
 
@@ -331,7 +334,7 @@ public class InventoryScene  extends UIScene {
 
     public Button createInventorySlot() {
 
-        ImageButton button=new ImageButton(Controls.GetSkin(),"item_frame");
+        ImageButton button=new ImageButton(Controls.getSkin(),"item_frame");
         return  button;
     }
 
