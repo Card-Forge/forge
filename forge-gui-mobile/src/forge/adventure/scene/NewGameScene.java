@@ -211,6 +211,7 @@ public class NewGameScene extends UIScene {
         addActorObject(ui.findActor("back"));
         addActorObject(ui.findActor("start"));
         unselectActors();
+        super.enter();
     }
     @Override
     public boolean pointerMoved(int screenX, int screenY) {

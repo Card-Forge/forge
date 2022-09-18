@@ -153,6 +153,8 @@ public class StartScene extends UIScene {
             Current.setDebug(true);
             GameStage.maximumScrollDistance=4f;
         }
+
+        super.enter();
     }
 
     @Override

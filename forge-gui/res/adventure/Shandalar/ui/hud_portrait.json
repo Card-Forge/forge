@@ -59,9 +59,9 @@
       "type": "Label",
       "name": "lifePoints", 
       "width": 48,
-      "height": 16,
+      "height": 3,
       "x": 234,
-      "y": 64
+      "y": 62
     },
     {
       "type": "Label",
@@ -70,7 +70,7 @@
       "width": 48,
       "height": 3,
       "x": 234,
-      "y": 85
+      "y": 76
     },
     {
       "type": "Label",
@@ -79,7 +79,7 @@
       "width": 48,
       "height": 3,
       "x": 234,
-      "y": 104
+      "y": 90
     },
     {
       "type": "TextButton",
