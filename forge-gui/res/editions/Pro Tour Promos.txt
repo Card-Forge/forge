@@ -40,3 +40,6 @@ ScryfallCode=PPRO
 20224 M Grand Master of Flowers @Toshiaki Takayama
 20225 R Adult Gold Dragon @Kotakan
 20226 U Krydle of Baldur's Gate @Sansyu
+20227 M The Wandering Emperor @Takayuki Futami
+20228 R Farewell @SOFT MEN
+20229 U Banishing Slash @Ruiko Nakamura
