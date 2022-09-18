@@ -1,0 +1,8 @@
+Name:Cryptothrall
+ManaCost:4
+Types:Artifact Creature Construct
+PT:3/3
+S:Mode$ Continuous | Affected$ Artifact.Creature+YouCtrl+Other | AddKeyword$ Hexproof | Description$ Protector — Other artifact creatures you control have hexproof.
+DeckHas:Keyword$Hexproof
+DeckHints:Type$Artifact
+Oracle:Protector — Other artifact creatures you control have hexproof.
