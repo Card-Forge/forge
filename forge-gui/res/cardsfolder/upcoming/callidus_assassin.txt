@@ -1,0 +1,10 @@
+Name:Callidus Assassin
+ManaCost:4 U B
+Types:Creature Human Shapeshifter Assassin
+PT:3/3
+K:Flash
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | IntoPlayTapped$ True | AddTriggers$ ETBDestroy | AddSVars$ TrigDestroy | SpellDescription$ Polymorphine — You may have CARDNAME enter the battlefield tapped as a copy of any creature on the battlefield, except it has "When this creature enters the battlefield, destroy up to one other target creature with the same name as this creature."
+SVar:ETBDestroy:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigDestroy | TriggerDescription$ When this creature enters the battlefield, destroy up to one other target creature with the same name as this creature.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.Other+sameName | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one other target creature with the same name as this creature
+Oracle:Flash\nPolymorphine — You may have Callidus Assassin enter the battlefield tapped as a copy of any creature on the battlefield, except it has "When this creature enters the battlefield, destroy up to one other target creature with the same name as this creature."
