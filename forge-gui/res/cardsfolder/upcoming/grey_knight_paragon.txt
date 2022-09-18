@@ -4,6 +4,7 @@ Types:Creature Astartes Knight
 PT:4/4
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Rites of Banishment — When CARDNAME enters the battlefield, destroy target attacking creature. If that creature is a Demon, exile it instead.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ DBExile | SpellDescription$ Destroy target attacking creature. Draw a card.
-SVar:DBExile:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile | ConditionDefined$ Targeted | ConditionPresent$ Card.Demon
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | RememberDestroyed$ True
+R:Event$ Moved | ValidCard$ Targeted | Destination$ Graveyard | ReplaceWith$ DBExile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
+SVar:DBExile:DB$ ChangeZone | Defined$ Targeted | Destination$ Exile
 Oracle:Flash\nRites of Banishment — When Grey Knight Paragon enters the battlefield, destroy target attacking creature. If that creature is a Demon, exile it instead.
