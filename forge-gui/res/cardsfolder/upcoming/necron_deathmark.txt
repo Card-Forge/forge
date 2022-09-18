@@ -4,7 +4,7 @@ Types:Artifact Creature Necron
 PT:5/3
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Synaptic Disintegrator — When CARDNAME enters the battlefield, destroy up to one target creature and target player mills three cards.
-SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature | SubAbility DBMill
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBMill
 SVar:DBMill:DB$ Mill | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 3
 DeckHas:Ability$Mill
 Oracle:Flash\nSynaptic Disintegrator — When Necron Deathmark enters the battlefield, destroy up to one target creature and target player mills three cards.
