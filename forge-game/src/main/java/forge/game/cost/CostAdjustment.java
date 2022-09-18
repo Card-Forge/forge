@@ -6,11 +6,13 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
 import forge.card.CardStateName;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.card.mana.ManaCostShard;
 import forge.game.Game;
 import forge.game.GameObject;
@@ -387,7 +389,7 @@ public class CostAdjustment {
             value = AbilityUtils.calculateAmount(hostCard, amount, staticAbility);
         }
 
-        if (!staticAbility.hasParam("Cost") && ! staticAbility.hasParam("Color")) {
+        if (!staticAbility.hasParam("Cost") && !staticAbility.hasParam("Color")) {
             int minMana = 0;
             if (staticAbility.hasParam("MinMana")) {
                 minMana = Integer.valueOf(staticAbility.getParam("MinMana"));
@@ -405,7 +407,11 @@ public class CostAdjustment {
                 if (StringUtils.isNumeric(cost)) {
                     sumGeneric += Integer.parseInt(cost) * value;
                 } else {
-                    manaCost.decreaseShard(ManaCostShard.parseNonGeneric(cost), value);
+                    if (staticAbility.hasParam("IgnoreGeneric")) {
+                        manaCost.decreaseShard(ManaCostShard.parseNonGeneric(cost), value);
+                    } else {
+                        manaCost.subtractManaCost(new ManaCost(new ManaCostParser(Strings.repeat(cost + " ", value))));
+                    }
                 }
             }
             return sumGeneric;
