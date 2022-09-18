@@ -5,7 +5,7 @@ PT:4/4
 K:Vigilance
 T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ TrigCounters | TriggerDescription$ Subterranean Assault — Whenever cardname attacks, put a +1/+1 counter on it and a +1/+1 counter on up to one other target attacking creature. That creature can't be blocked this turn.
 SVar:TrigCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBCounter
-SVar:DBCounter:DB$ PutCounter | ValidTgts$ Creature.attacking+Other | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBCounter:DB$ PutCounter | ValidTgts$ Creature.attacking+Other ||TargetMin$ 0 | TargetMax$ 1 | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ ParentTarget | KW$ HIDDEN Unblockable
 DeckHas:Ability$Counters
 SVar:HasAttackEffect:TRUE
