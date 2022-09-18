@@ -3,7 +3,7 @@ ManaCost:3 X G
 Types:Creature Tyranid
 PT:3/3
 K:Ravenous
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ When CARDNAME enters the battlefield, distribute X +1/+1 counters among any number of other target creatures you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounters | TriggerDescription$ Brood Telepathy — When CARDNAME enters the battlefield, distribute X +1/+1 counters among any number of other target creatures you control.
 SVar:TrigPutCounters:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Select any number of other target creatures you control | CounterType$ P1P1 | CounterNum$ X | TargetMin$ 0 | TargetMax$ X | DividedAsYouChoose$ X
 SVar:X:Count$xPaid
 DeckHas:Ability$Counters
