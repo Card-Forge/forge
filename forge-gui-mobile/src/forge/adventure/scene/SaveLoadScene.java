@@ -107,13 +107,8 @@ public class SaveLoadScene extends UIScene {
         difficulty.setSelectedIndex(1);
         difficulty.setAlignment(Align.center);
         difficulty.getStyle().fontColor = Color.GOLD;
-        if (Forge.isLandscapeMode()) {
-            difficulty.setX(280);
-            difficulty.setY(220);
-        } else {
-            difficulty.setX(190);
-            difficulty.setY(336);
-        }
+        difficulty.setX(scrollPane.getWidth()-difficulty.getWidth()+5);
+        difficulty.setY(scrollPane.getTop()-difficulty.getHeight()-5);
     }
 
 
