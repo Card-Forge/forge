@@ -1,0 +1,6 @@
+Name:Lucius the Eternal
+ManaCost:3 B R
+Types:Legendary Creature Astartes Warrior
+PT:5/3
+K:Haste
+Oracle:Haste\nArmor of Shrieking Souls — When Lucius the Eternal dies, exile it and choose target creature an opponent controls. When that creature leaves the battlefield, return Lucius the Eternal from exile to the battlefield under its owner’s control.
