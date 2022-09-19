@@ -92,7 +92,7 @@ public class NewGameScene extends UIScene {
         mode.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
-                colorLabel.setText(mode.getCurrentIndex() < 2 ? colorIdLabel : Forge.getLocalizer().getMessage("lblDeck")+":");
+                colorLabel.setText(mode.getCurrentIndex() < 2 ? colorIdLabel : "[BLACK]"+Forge.getLocalizer().getMessage("lblDeck")+":");
                 if (mode.getCurrentIndex() == 3)
                     colorId.setTextList(custom);
                 if (mode.getCurrentIndex() == 2)
