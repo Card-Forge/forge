@@ -280,6 +280,27 @@ public class CardFactory {
             } else if (c.isAdventureCard()) {
                 c.setState(CardStateName.Adventure, false);
                 c.setImageKey(originalPicture);
+            } else if (c.canSpecialize()) {
+                c.setState(CardStateName.SpecializeW, false);
+                c.setImageKey(cp.getImageKey(false) + ImageKeys.SPECFACE_W);
+                c.setSetCode(cp.getEdition());
+                c.setRarity(cp.getRarity());
+                c.setState(CardStateName.SpecializeU, false);
+                c.setImageKey(cp.getImageKey(false) + ImageKeys.SPECFACE_U);
+                c.setSetCode(cp.getEdition());
+                c.setRarity(cp.getRarity());
+                c.setState(CardStateName.SpecializeB, false);
+                c.setImageKey(cp.getImageKey(false) + ImageKeys.SPECFACE_B);
+                c.setSetCode(cp.getEdition());
+                c.setRarity(cp.getRarity());
+                c.setState(CardStateName.SpecializeR, false);
+                c.setImageKey(cp.getImageKey(false) + ImageKeys.SPECFACE_R);
+                c.setSetCode(cp.getEdition());
+                c.setRarity(cp.getRarity());
+                c.setState(CardStateName.SpecializeG, false);
+                c.setImageKey(cp.getImageKey(false) + ImageKeys.SPECFACE_G);
+                c.setSetCode(cp.getEdition());
+                c.setRarity(cp.getRarity());
             }
 
             c.setSetCode(cp.getEdition());

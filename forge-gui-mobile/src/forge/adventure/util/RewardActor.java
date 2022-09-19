@@ -183,7 +183,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         }
                     }
                 } else {
-                    String imagePath = ImageUtil.getImageRelativePath(reward.getCard(), false, true, false);
+                    String imagePath = ImageUtil.getImageRelativePath(reward.getCard(), "", true, false);
                     File lookup = ImageKeys.hasSetLookup(imagePath) ? ImageKeys.setLookUpFile(imagePath, imagePath+"border") : null;
                     int count = 0;
                     if (lookup != null) {

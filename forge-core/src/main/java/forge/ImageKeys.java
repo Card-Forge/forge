@@ -25,6 +25,11 @@ public final class ImageKeys {
     public static final String FORETELL_IMAGE        = "foretell";
 
     public static final String BACKFACE_POSTFIX  = "$alt";
+    public static final String SPECFACE_W = "$wspec";
+    public static final String SPECFACE_U = "$uspec";
+    public static final String SPECFACE_B = "$bspec";
+    public static final String SPECFACE_R = "$rspec";
+    public static final String SPECFACE_G = "$gspec";
 
     private static String CACHE_CARD_PICS_DIR, CACHE_TOKEN_PICS_DIR, CACHE_ICON_PICS_DIR, CACHE_BOOSTER_PICS_DIR,
         CACHE_FATPACK_PICS_DIR, CACHE_BOOSTERBOX_PICS_DIR, CACHE_PRECON_PICS_DIR, CACHE_TOURNAMENTPACK_PICS_DIR;
