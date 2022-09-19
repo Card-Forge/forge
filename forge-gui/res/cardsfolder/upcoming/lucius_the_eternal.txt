@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Triggers$ ComeBack | ImprintCards$ ThisTargetedCard | Duration$ Permanent | ForgetOnMoved$ Exile | SubAbility$ Cleanup | RememberObjects$ TriggeredCard
 SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True 
+SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController
 SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered | SubAbility$ ExileSelf
 SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 SVar:SacMe:3
