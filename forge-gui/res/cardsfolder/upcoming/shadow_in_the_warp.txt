@@ -2,6 +2,6 @@ Name:Shadow in the Warp
 ManaCost:1 R G
 Types:Enchantment
 S:Mode$ ReduceCost | EffectZone$ Battlefield | ValidCard$ Card.Creature | Activator$ You | Type$ Spell | OnlyFirstSpell$ True | Amount$ 2 | Description$ The first creature spell you cast each turn costs {2} less to cast.
-T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Player.Opponent | ActivatorThisTurnCast$ EQ1 | NoResolvingCheck$ True | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts their first noncreature spell each turn, Shadow in the Warp deals 2 damage to that player.
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ Player.Opponent | ActivatorThisTurnCast$ EQ1 | NoResolvingCheck$ True | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent casts their first noncreature spell each turn, CARDNAME deals 2 damage to that player.
 SVar:TrigDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ TriggeredPlayer 
 Oracle:The first creature spell you cast each turn costs {2} less to cast.\nWhenever an opponent casts their first noncreature spell each turn, Shadow in the Warp deals 2 damage to that player.
