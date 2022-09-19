@@ -1,0 +1,11 @@
+Name:Plague Drone
+ManaCost:3 B
+Type:Creature — Demon
+PT:3/3
+K:Flying
+R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ Player | ReplaceWith$ RLoseLife | AiLogic$ LoseLife | Description$ Rot Fly — If an opponent would gain life, that player loses that much life instead.
+SVar:RLoseLife:DB$ LoseLife | LifeAmount$ X | Defined$ ReplacedPlayer
+SVar:X:ReplaceCount$LifeGained
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+Oracle:Flying\nRot Fly — If an opponent would gain life, that player loses that much life instead.
