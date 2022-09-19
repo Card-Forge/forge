@@ -1,0 +1,6 @@
+Name:Plaguebearer of Nurgle Token
+ManaCost:no cost
+Types:Demon
+Colors:black
+PT:1/3
+Oracle:
