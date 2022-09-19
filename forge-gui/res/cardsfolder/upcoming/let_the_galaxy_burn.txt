@@ -2,6 +2,6 @@ Name:Let the Galaxy Burn
 ManaCost:X 5 R
 Types:Sorcery
 K:Cascade
-A:SP$ DamageAll | ValidCards$ Creature.!ThisTurnEntered | NumDmg$ X | SpellDescription$ CARDNAME deals X plus 2 damage to each creature that didn’t enter the battlefield this turn.
+A:SP$ DamageAll | ValidCards$ Creature.!ThisTurnEntered | NumDmg$ X | SpellDescription$ CARDNAME deals X plus 2 damage to each creature that didn't enter the battlefield this turn.
 SVar:X:Count$xPaid/Plus.2
-Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nLet the Galaxy Burn deals X plus 2 damage to each creature that didn’t enter the battlefield this turn.
+Oracle:Cascade (When you cast this spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)\nLet the Galaxy Burn deals X plus 2 damage to each creature that didn't enter the battlefield this turn.
