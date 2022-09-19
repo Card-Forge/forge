@@ -6,7 +6,7 @@ K:Lifelink
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 |  Execute$ TrigBranch | TriggerDescription$ The Seven-fold Chant — At the beginning of your end step, if a creature died this turn, you draw a card and you lose 1 life. If seven or more creatures died this turn, instead you draw seven cards and you lose 7 life.
 SVar:TrigBranch:DB$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ GT7 | TrueSubAbility$ DBDrawSeven | FalseSubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw
-SVar:DBDrawSeven=DB$ Draw | NumCards$ 7 | SubAbility$ DBLoseLife
+SVar:DBDrawSeven:DB$ Draw | NumCards$ 7 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 7
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 Oracle:Lifelink\nThe Seven-fold Chant — At the beginning of your end step, if a creature died this turn, you draw a card and you lose 1 life. If seven or more creatures died this turn, instead you draw seven cards and you lose 7 life.

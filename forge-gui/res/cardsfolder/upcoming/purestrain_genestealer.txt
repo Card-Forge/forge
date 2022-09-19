@@ -4,7 +4,7 @@ Types:Creature Tyranid
 PT:1/1
 K:etbCounter:P1P1:2
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigRamp | TriggerDescription$ Vanguard Species — Whenever CARDNAME attacks, you may remove a +1/+1 counter from it. If you do, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
-SVar:TrigRamp:AB$ ChangeZone | Cost$ SubCounter<1/P1P1> | ValidTgts$ You | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | Chooser$ Targeted | SpellDescription$ Target player searches their library for a basic land card, puts it onto the battlefield tapped, then shuffles.
+SVar:TrigRamp:AB$ ChangeZone | Cost$ SubCounter<1/P1P1> | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1
 DeckHas:Ability$Counters
 SVar:HasAttackEffect:TRUE
 Oracle:Purestrain Genestealer enters the battlefield with two +1/+1 counters on it.\nVanguard Species — Whenever Purestrain Genestealer attacks, you may remove a +1/+1 counter from it. If you do, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
