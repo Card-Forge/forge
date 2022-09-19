@@ -1,6 +1,6 @@
 Name:Plague Drone
 ManaCost:3 B
-Type:Creature — Demon
+Types:Creature Demon
 PT:3/3
 K:Flying
 R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ Player | ReplaceWith$ RLoseLife | AiLogic$ LoseLife | Description$ Rot Fly — If an opponent would gain life, that player loses that much life instead.
