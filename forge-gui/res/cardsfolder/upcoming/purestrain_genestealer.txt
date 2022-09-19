@@ -1,0 +1,5 @@
+Name:Purestrain Genestealer
+ManaCost:2 G
+Types:Creature Tyranid
+PT:1/1
+Oracle:Purestrain Genestealer enters the battlefield with two +1/+1 counters on it.\nVanguard Species — Whenever Purestrain Genestealer attacks, you may remove a +1/+1 counter from it. If you do, search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
