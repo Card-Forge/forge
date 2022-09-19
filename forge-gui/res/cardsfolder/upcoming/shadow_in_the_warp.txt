@@ -1,0 +1,4 @@
+Name:Shadow in the Warp
+ManaCost:1 R G
+Types:Enchantment
+Oracle:The first creature spell you cast each turn costs {2} less to cast.\nWhenever an opponent casts their first noncreature spell each turn, Shadow in the Warp deals 2 damage to that player.
