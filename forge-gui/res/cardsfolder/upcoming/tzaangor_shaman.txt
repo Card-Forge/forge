@@ -1,0 +1,10 @@
+Name:Tzaangor Shaman
+ManaCost:2 U R
+Types:Creature Mutant Shaman
+PT:3/3
+K:Flying
+T:Mode$ DamageDone | CombatDamage$ True | ValidTarget$ Player | ValidSource$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDelayedTrigger | TriggerDescription$ Sorcerous Elixir — Whenever CARDNAME deals combat damage to a player, copy the next instant or sorcery spell you cast this turn when you cast it. You may choose new targets for the copy.
+SVar:TrigDelayedTrigger:DB$ DelayedTrigger | AILogic$ SpellCopy | Execute$ EffTrigCopy | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
+SVar:EffTrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility | MayChooseTarget$ True
+DeckHints:Type$Instant|Sorcery
+Oracle:Flying\nSorcerous Elixir — Whenever Tzaangor Shaman deals combat damage to a player, copy the next instant or sorcery spell you cast this turn when you cast it. You may choose new targets for the copy.
