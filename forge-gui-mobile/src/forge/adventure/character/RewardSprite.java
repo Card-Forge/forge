@@ -11,7 +11,7 @@ import forge.adventure.util.Reward;
  */
 
 public class RewardSprite extends CharacterSprite {
-    private final String default_reward = "[\n" +
+    private final static String default_reward = "[\n" +
             "\t\t{\n" +
             "\t\t\t\"type\": \"gold\",\n" +
             "\t\t\t\"count\": 10,\n" +

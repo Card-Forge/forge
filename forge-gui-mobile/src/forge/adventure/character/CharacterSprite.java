@@ -1,5 +1,6 @@
 package forge.adventure.character;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -19,7 +20,7 @@ public class CharacterSprite extends MapActor {
     private Animation<TextureRegion> currentAnimation = null;
     private AnimationTypes currentAnimationType = AnimationTypes.Idle;
     private AnimationDirections currentAnimationDir = AnimationDirections.None;
-    private Array<Sprite> avatar=new Array<>();
+    private final Array<Sprite> avatar=new Array<>();
     public boolean hidden = false;
 
     public CharacterSprite(int id,String path) {
@@ -37,11 +38,8 @@ public class CharacterSprite extends MapActor {
     }
 
     protected void load(String path) {
+        if(path==null||path.isEmpty())return;
         TextureAtlas atlas = Config.instance().getAtlas(path);
-        /*
-        for (Texture texture : new ObjectSet.ObjectSetIterator<>( atlas.getTextures()))
-            texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-         */
         animations.clear();
         for (AnimationTypes stand : AnimationTypes.values()) {
             if (stand == AnimationTypes.Avatar) {
@@ -216,15 +214,24 @@ public class CharacterSprite extends MapActor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         if (currentAnimation == null || hidden)
+        {
+
             return;
+        }
+        super.draw(batch,parentAlpha);
+        beforeDraw(batch,parentAlpha);
         TextureRegion currentFrame = currentAnimation.getKeyFrame(timer, true);
         setHeight(currentFrame.getRegionHeight());
         setWidth(currentFrame.getRegionWidth());
+        Color oldColor=batch.getColor().cpy();
+        batch.setColor(getColor());
         batch.draw(currentFrame, getX(), getY());
+        batch.setColor(oldColor);
         super.draw(batch,parentAlpha);
         //batch.draw(getDebugTexture(),getX(),getY());
 
     }
+
 
     public Sprite getAvatar() {
         return avatar.first();

@@ -16,6 +16,7 @@ public class PointOfInterestEdit extends JComponent {
     JTextField  sprite      = new JTextField();
     FilePicker  map         = new FilePicker(new String[]{"tmx"});
     JSpinner    radiusFactor= new JSpinner(new SpinnerNumberModel(0.0f, 0.0f, 2.0f, 0.1f));
+    SwingAtlasPreview preview=new SwingAtlasPreview(256,2000);
 
 
     private boolean updating=false;
@@ -34,6 +35,7 @@ public class PointOfInterestEdit extends JComponent {
         parameters.add("Sprite:",sprite);
         parameters.add("Map:",map);
         parameters.add("Radius factor:",radiusFactor);
+        parameters.add(preview);
 
         add(parameters);
 
@@ -80,6 +82,7 @@ public class PointOfInterestEdit extends JComponent {
         map.getEdit().setText(currentData.map);
         radiusFactor.setValue(currentData.radiusFactor);
 
+        preview.setSpritePath(currentData.spriteAtlas,currentData.sprite);
         updating=false;
     }
 }

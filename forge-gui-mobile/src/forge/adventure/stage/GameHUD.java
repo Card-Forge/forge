@@ -13,20 +13,19 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
-import forge.adventure.scene.HudScene;
-import forge.adventure.scene.Scene;
-import forge.adventure.scene.SceneType;
-import forge.adventure.scene.UIScene;
+import forge.adventure.scene.*;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
@@ -45,18 +44,22 @@ public class GameHUD extends Stage implements ControllerListener {
     private final GameStage gameStage;
     private final Image avatar;
     private final Image miniMapPlayer;
-    private final Label lifePoints;
-    private final Label money;
-    private final Image miniMap,miniMapTooltip, gamehud, mapborder, avatarborder, blank;
-    private Tooltip<Image> toolTip;
-    private TextButton deckActor, menuActor, statsActor, inventoryActor;
-    private UIActor ui;
-    private Touchpad touchpad;
-    private Console console;
+    private final TextraLabel lifePoints;
+    private final TextraLabel money;
+    private final TextraLabel mana;
+    private final Image miniMap, gamehud, mapborder, avatarborder, blank;
+    private final InputEvent eventTouchDown;
+    private final InputEvent eventTouchUp;
+    private final TextraButton deckActor;
+    private final TextraButton menuActor;
+    private final TextraButton statsActor;
+    private final TextraButton inventoryActor;
+    private final UIActor ui;
+    private final Touchpad touchpad;
+    private final Console console;
     float TOUCHPAD_SCALE = 70f, referenceX;
     boolean isHiding = false, isShowing = false;
     float opacity = 1f;
-    private InputEvent eventTouchDown, eventTouchUp;
 
     private GameHUD(GameStage gameStage) {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
@@ -71,39 +74,27 @@ public class GameHUD extends Stage implements ControllerListener {
         miniMap = ui.findActor("map");
         mapborder = ui.findActor("mapborder");
 
-        miniMapTooltip=new Image();
-        miniMapTooltip.setScaling(Scaling.contain);
-        miniMapTooltip.setSize(miniMap.getWidth()*3,miniMap.getHeight()*3);
-        miniMapTooltip.setPosition(0,0,Align.topLeft);
-        ui.addActor(miniMapTooltip);
-        toolTip=new Tooltip<Image>(miniMapTooltip);
-        toolTip.setInstant(true);
-        mapborder.addListener(toolTip);
         avatarborder = ui.findActor("avatarborder");
         deckActor = ui.findActor("deck");
-        deckActor.getLabel().setText(Forge.getLocalizer().getMessage("lblDeck"));
         menuActor = ui.findActor("menu");
         referenceX = menuActor.getX();
-        menuActor.getLabel().setText(Forge.getLocalizer().getMessage("lblMenu"));
         statsActor = ui.findActor("statistic");
-        statsActor.getLabel().setText(Forge.getLocalizer().getMessage("lblStatus"));
         inventoryActor = ui.findActor("inventory");
-        inventoryActor.getLabel().setText(Forge.getLocalizer().getMessage("lblItem"));
         gamehud = ui.findActor("gamehud");
 
         miniMapPlayer = new Image(new Texture(Config.instance().getFile("ui/minimap_player.png")));
         //create touchpad
-        touchpad = new Touchpad(10, Controls.GetSkin());
+        touchpad = new Touchpad(10, Controls.getSkin());
         touchpad.setBounds(15, 15, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
         touchpad.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 if (MapStage.getInstance().isInMap()) {
-                    MapStage.getInstance().GetPlayer().getMovementDirection().x+=((Touchpad) actor).getKnobPercentX();
-                    MapStage.getInstance().GetPlayer().getMovementDirection().y+=((Touchpad) actor).getKnobPercentY();
+                    MapStage.getInstance().getPlayerSprite().getMovementDirection().x+=((Touchpad) actor).getKnobPercentX();
+                    MapStage.getInstance().getPlayerSprite().getMovementDirection().y+=((Touchpad) actor).getKnobPercentY();
                 } else {
-                    WorldStage.getInstance().GetPlayer().getMovementDirection().x+=((Touchpad) actor).getKnobPercentX();
-                    WorldStage.getInstance().GetPlayer().getMovementDirection().y+=((Touchpad) actor).getKnobPercentY();
+                    WorldStage.getInstance().getPlayerSprite().getMovementDirection().x+=((Touchpad) actor).getKnobPercentX();
+                    WorldStage.getInstance().getPlayerSprite().getMovementDirection().y+=((Touchpad) actor).getKnobPercentY();
                 }
             }
         });
@@ -116,9 +107,13 @@ public class GameHUD extends Stage implements ControllerListener {
         ui.onButtonPress("statistic", () -> statistic());
         ui.onButtonPress("deck", () -> openDeck());
         lifePoints = ui.findActor("lifePoints");
+        mana = ui.findActor("mana");
+        money = ui.findActor("money");
+        mana.setText("0/0");
         lifePoints.setText("20/20");
         AdventurePlayer.current().onLifeChange(() -> lifePoints.setText(AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
-        money = ui.findActor("money");
+        AdventurePlayer.current().onManaChange(() -> mana.setText(AdventurePlayer.current().getMana() + "/" + AdventurePlayer.current().getMaxMana()));
+
         WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText(String.valueOf(AdventurePlayer.current().getGold()))) ;
         addActor(ui);
         addActor(miniMapPlayer);
@@ -141,8 +136,12 @@ public class GameHUD extends Stage implements ControllerListener {
         Controllers.addListener(this);
     }
 
+    private void openMap()  {
+        Forge.switchScene(MapViewScene.instance());
+    }
+
     private void statistic() {
-        Forge.switchScene(SceneType.PlayerStatisticScene.instance);
+        Forge.switchScene(PlayerStatisticScene.instance());
     }
 
     public static GameHUD getInstance() {
@@ -156,8 +155,8 @@ public class GameHUD extends Stage implements ControllerListener {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         touchpad.setVisible(false);
-        MapStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
-        WorldStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
+        MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
+        WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
         return super.touchUp(screenX, screenY, pointer, button);
     }
 
@@ -171,10 +170,9 @@ public class GameHUD extends Stage implements ControllerListener {
         //map bounds
         if (Controls.actorContainsVector(miniMap,c)) {
             touchpad.setVisible(false);
-            if (MapStage.getInstance().isInMap())
-                return true;
+
             if(Current.isInDebug())
-                WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+                WorldStage.getInstance().getPlayerSprite().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
 
             return true;
         }
@@ -196,11 +194,11 @@ public class GameHUD extends Stage implements ControllerListener {
             return true;
         }
         if (Controls.actorContainsVector(miniMap,c)) {
-            if (MapStage.getInstance().isInMap())
-                return true;
             if(Current.isInDebug())
-                WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
-            return true;
+                WorldStage.getInstance().getPlayerSprite().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+            else
+                openMap();
+        return true;
         }
         //auto follow touchpad
         if (GuiBase.isAndroid() && !MapStage.getInstance().getDialogOnlyInput() && !console.isVisible()) {
@@ -262,23 +260,22 @@ public class GameHUD extends Stage implements ControllerListener {
         miniMapToolTipPixmap.drawPixmap(WorldSave.getCurrentSave().getWorld().getBiomeImage(),0,0,WorldSave.getCurrentSave().getWorld().getBiomeImage().getWidth(),WorldSave.getCurrentSave().getWorld().getBiomeImage().getHeight(),0,0,miniMapToolTipPixmap.getWidth(),miniMapToolTipPixmap.getHeight());
         miniMapToolTipTexture=new Texture(miniMapToolTipPixmap);
         miniMap.setDrawable(new TextureRegionDrawable(miniMapTexture));
-        miniMapTooltip.setDrawable(new TextureRegionDrawable(miniMapToolTipTexture));
         avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
         Deck deck = AdventurePlayer.current().getSelectedDeck();
         if (deck == null || deck.isEmpty() || deck.getMain().toFlatList().size() < 30) {
-            deckActor.getLabel().setColor(Color.RED);
+            deckActor.setColor(Color.RED);
         } else {
-            deckActor.getLabel().setColor(menuActor.getLabel().getColor());
+            deckActor.setColor(menuActor.getColor());
         }
     }
 
     private void openDeck() {
-        Forge.switchScene(SceneType.DeckSelectScene.instance);
+        Forge.switchScene(DeckSelectScene.instance());
     }
 
     private void openInventory() {
         WorldSave.getCurrentSave().header.createPreview();
-        Forge.switchScene(SceneType.InventoryScene.instance);
+        Forge.switchScene(InventoryScene.instance());
     }
     private void menu() {
         gameStage.openMenu();
@@ -289,6 +286,7 @@ public class GameHUD extends Stage implements ControllerListener {
         miniMapPlayer.setVisible(visible);
         gamehud.setVisible(visible);
         lifePoints.setVisible(visible);
+        mana.setVisible(visible);
         money.setVisible(visible);
         blank.setVisible(visible);
         if (visible) {

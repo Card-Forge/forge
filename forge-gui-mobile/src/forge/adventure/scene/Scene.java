@@ -10,10 +10,9 @@ import forge.adventure.util.Config;
 /**
  * Base class for all rendered scenes
  */
-public abstract class Scene implements Disposable {
+public abstract class Scene<T> implements Disposable {
 
     public Scene() {
-
     }
 
     public static int getIntendedWidth() {
@@ -35,8 +34,6 @@ public abstract class Scene implements Disposable {
         return new TextureRegionDrawable(new Texture(Config.instance().getFile(path)));
     }
 
-    public void resLoaded() {
-    }
 
     public boolean leave() {
         return true;

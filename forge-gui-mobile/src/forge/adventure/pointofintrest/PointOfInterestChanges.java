@@ -13,7 +13,7 @@ import java.util.HashSet;
 public class PointOfInterestChanges implements SaveFileContent  {
     private final HashSet<Integer> deletedObjects=new HashSet<>();
     private final HashMap<Integer, HashSet<Integer>> cardsBought = new HashMap<>();
-    private java.util.Map<String, Byte> mapFlags = new HashMap<>();
+    private final java.util.Map<String, Byte> mapFlags = new HashMap<>();
 
     public static class Map extends HashMap<String,PointOfInterestChanges> implements SaveFileContent {
         @Override

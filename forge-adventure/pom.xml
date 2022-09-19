@@ -19,6 +19,13 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+        <repository>
+        <id>4thline-repo</id>
+        <url>http://4thline.org/m2</url>
+        <snapshots>
+            <enabled>false</enabled>
+        </snapshots>
+    </repository>
     </repositories>
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
@@ -58,11 +65,11 @@
                             </goals>
                             <configuration>
                                 <headerType>gui</headerType>
-                                <outfile>${project.build.directory}/forge-adventure-java8.exe</outfile>
+                                <outfile>${project.build.directory}/forge-adventure-editor-java8.exe</outfile>
                                 <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
                                 <dontWrapJar>true</dontWrapJar>
                                 <errTitle>forge</errTitle>
-                                <icon>src/main/config/forge-adventure.ico</icon>
+                                <icon>src/main/config/forge-adventure-editor.ico</icon>
                                 <classPath>
                                     <mainClass>forge.adventure.Main</mainClass>
                                     <addDependencies>false</addDependencies>
@@ -90,9 +97,9 @@
                                     <txtProductVersion>
                                         1.0.0.0
                                     </txtProductVersion>
-                                    <productName>forge-adventure</productName>
-                                    <internalName>forge-adventure</internalName>
-                                    <originalFilename>forge-adventure-java8.exe</originalFilename>
+                                    <productName>forge-adventure-editor</productName>
+                                    <internalName>forge-adventure-editor</internalName>
+                                    <originalFilename>forge-adventure-editor-java8.exe</originalFilename>
                                 </versionInfo>
                             </configuration>
                         </execution>
@@ -105,12 +112,12 @@
                             </goals>
                             <configuration>
                                 <headerType>gui</headerType>
-                                <outfile>${project.build.directory}/forge-adventure.exe</outfile>
+                                <outfile>${project.build.directory}/forge-adventure-editor.exe</outfile>
                                 <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
                                 <dontWrapJar>true</dontWrapJar>
                                 <errTitle>forge</errTitle>
                                 <downloadUrl>https://www.oracle.com/java/technologies/downloads/</downloadUrl>
-                                <icon>src/main/config/forge-adventure.ico</icon>
+                                <icon>src/main/config/forge-adventure-editor.ico</icon>
                                 <classPath>
                                     <mainClass>forge.adventure.Main</mainClass>
                                     <addDependencies>false</addDependencies>
@@ -160,9 +167,9 @@
                                     <txtProductVersion>
                                         1.0.0.0
                                     </txtProductVersion>
-                                    <productName>forge-adventure</productName>
-                                    <internalName>forge-adventure</internalName>
-                                    <originalFilename>forge-adventure.exe</originalFilename>
+                                    <productName>forge-adventure-editor</productName>
+                                    <internalName>forge-adventure-editor</internalName>
+                                    <originalFilename>forge-adventure-editor.exe</originalFilename>
                                 </versionInfo>
                             </configuration>
                         </execution>
@@ -184,7 +191,7 @@
                 </executions>
                 <configuration>
                     <basedir>${basedir}/${configSourceDirectory}</basedir>
-                    <filesToInclude>forge-adventure.sh, forge-adventure-mac.sh, forge-adventure.command, forge-adventure.cmd</filesToInclude>
+                    <filesToInclude>forge-adventure-editor.sh, forge-adventure-editor-mac.sh, forge-adventure-editor.command, forge-adventure-editor.cmd</filesToInclude>
                     <outputBasedir>${project.build.directory}</outputBasedir>
                     <outputDir>.</outputDir>
                     <regex>false</regex>
@@ -250,7 +257,13 @@
         </dependency>
         <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
-            <artifactId>gdx-backend-lwjgl3</artifactId>
+            <artifactId>gdx-backend-lwjgl</artifactId>
+            <version>1.11.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-tools</artifactId>
             <version>1.11.0</version>
             <scope>compile</scope>
         </dependency>
@@ -289,12 +302,6 @@
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>22.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>forge</groupId>
-            <artifactId>forge-gui-mobile</artifactId>
-            <version>1.6.54-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

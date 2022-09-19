@@ -2,6 +2,7 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -12,8 +13,12 @@ import forge.adventure.character.EnemySprite;
 import forge.adventure.data.BiomeData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
-import forge.adventure.scene.*;
+import forge.adventure.scene.DuelScene;
+import forge.adventure.scene.RewardScene;
+import forge.adventure.scene.Scene;
+import forge.adventure.scene.TileMapScene;
 import forge.adventure.util.Current;
+import forge.adventure.util.Paths;
 import forge.adventure.util.SaveFileContent;
 import forge.adventure.util.SaveFileData;
 import forge.adventure.world.World;
@@ -41,10 +46,10 @@ public class WorldStage extends GameStage implements SaveFileContent {
     protected Random rand = MyRandom.getRandom();
     WorldBackground background;
     private float spawnDelay = 0;
-    private final float spawnInterval = 4;//todo config
+    private static final float spawnInterval = 4;//todo config
     private PointOfInterestMapSprite collidingPoint;
     protected ArrayList<Pair<Float, EnemySprite>> enemies = new ArrayList<>();
-    private final Float dieTimer=20f;//todo config
+    private final static Float dieTimer=20f;//todo config
     private Float globalTimer=0f;
 
     public WorldStage() {
@@ -64,7 +69,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     @Override
     protected void onActing(float delta) {
         if (player.isMoving()) {
-            HandleMonsterSpawn(delta);
+            handleMonsterSpawn(delta);
             handlePointsOfInterestCollision();
             globalTimer+=delta;
             Iterator<Pair<Float, EnemySprite>> it = enemies.iterator();
@@ -79,31 +84,35 @@ public class WorldStage extends GameStage implements SaveFileContent {
                 }
                 EnemySprite mob=pair.getValue();
 
-                enemyMoveVector.set(player.getX(), player.getY()).sub(mob.pos());
-                enemyMoveVector.setLength(mob.speed()*delta);
-                tempBoundingRect.set(mob.getX()+ enemyMoveVector.x,mob.getY()+ enemyMoveVector.y,mob.getWidth(),mob.getHeight()*mob.getCollisionHeight());
-
-                if(!mob.getData().flying && WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if direct path is not possible
+                if(!currentModifications.containsKey(PlayerModification.Hide))
                 {
-                    tempBoundingRect.set(mob.getX()+ enemyMoveVector.x,mob.getY(),mob.getWidth(),mob.getHeight());
-                    if(WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if only x path is not possible
+                    enemyMoveVector.set(player.getX(), player.getY()).sub(mob.pos());
+                    enemyMoveVector.setLength(mob.speed()*delta);
+                    tempBoundingRect.set(mob.getX()+ enemyMoveVector.x,mob.getY()+ enemyMoveVector.y,mob.getWidth(),mob.getHeight()*mob.getCollisionHeight());
+
+                    if(!mob.getData().flying && WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if direct path is not possible
                     {
-                        tempBoundingRect.set(mob.getX(),mob.getY()+ enemyMoveVector.y,mob.getWidth(),mob.getHeight());
-                        if(!WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if y path is possible
+                        tempBoundingRect.set(mob.getX()+ enemyMoveVector.x,mob.getY(),mob.getWidth(),mob.getHeight());
+                        if(WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if only x path is not possible
                         {
-                            mob.moveBy(0, enemyMoveVector.y);
+                            tempBoundingRect.set(mob.getX(),mob.getY()+ enemyMoveVector.y,mob.getWidth(),mob.getHeight());
+                            if(!WorldSave.getCurrentSave().getWorld().collidingTile(tempBoundingRect))//if y path is possible
+                            {
+                                mob.moveBy(0, enemyMoveVector.y);
+                            }
+                        }
+                        else
+                        {
+
+                            mob.moveBy(enemyMoveVector.x, 0);
                         }
                     }
                     else
                     {
-
-                        mob.moveBy(enemyMoveVector.x, 0);
+                        mob.moveBy(enemyMoveVector.x, enemyMoveVector.y);
                     }
                 }
-                else
-                {
-                    mob.moveBy(enemyMoveVector.x, enemyMoveVector.y);
-                }
+
 
                 if (player.collideWith(mob)) {
                     player.setAnimation(CharacterSprite.AnimationTypes.Attack);
@@ -116,12 +125,12 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     startPause(0.8f, () -> {
                         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
                         SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
-                        DuelScene duelScene = ((DuelScene) SceneType.DuelScene.instance);
+                        DuelScene duelScene =  DuelScene.instance();
                         FThreads.invokeInEdtNowOrLater(() -> {
                             Forge.setTransitionScreen(new TransitionScreen(() -> {
                                 duelScene.initDuels(player, mob);
                                 Forge.clearTransitionScreen();
-                                startPause(0.3f, () -> Forge.switchScene(SceneType.DuelScene.instance));
+                                startPause(0.3f, () -> Forge.switchScene(DuelScene.instance()));
                             }, Forge.takeScreenshot(), true, false));
                             currentMob = mob;
                             WorldSave.getCurrentSave().autoSave();
@@ -140,7 +149,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
     }
     private void removeEnemy(EnemySprite currentMob) {
 
-        foregroundSprites.removeActor(currentMob);
+        currentMob.removeAfterEffects();
         Iterator<Pair<Float, EnemySprite>> it = enemies.iterator();
         while (it.hasNext()) {
             Pair<Float, EnemySprite> pair = it.next();
@@ -154,13 +163,14 @@ public class WorldStage extends GameStage implements SaveFileContent {
     public void setWinner(boolean playerIsWinner) {
 
         if (playerIsWinner) {
+            Current.player().win();
             player.setAnimation(CharacterSprite.AnimationTypes.Attack);
             currentMob.setAnimation(CharacterSprite.AnimationTypes.Death);
             startPause(0.5f, () -> {
-                ((RewardScene) SceneType.RewardScene.instance).loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
+                RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
                 WorldStage.this.removeEnemy(currentMob);
                 currentMob = null;
-                Forge.switchScene(SceneType.RewardScene.instance);
+                Forge.switchScene(RewardScene.instance());
             });
         } else {
             player.setAnimation(CharacterSprite.AnimationTypes.Hit);
@@ -174,7 +184,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
         }
 
     }
-    private void handlePointsOfInterestCollision() {
+    public void handlePointsOfInterestCollision() {
 
         for (Actor actor : foregroundSprites.getChildren()) {
             if (actor.getClass() == PointOfInterestMapSprite.class) {
@@ -183,8 +193,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
                     if (point == collidingPoint) {
                         continue;
                     }
-                    ((TileMapScene) SceneType.TileMapScene.instance).load(point.getPointOfInterest());
-                    Forge.switchScene(SceneType.TileMapScene.instance);
+                     TileMapScene.instance().load(point.getPointOfInterest());
+                    Forge.switchScene(TileMapScene.instance());
                 } else {
                     if (point == collidingPoint) {
                         collidingPoint = null;
@@ -197,7 +207,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
     @Override
     public boolean isColliding(Rectangle boundingRect)
     {
-
+        if(currentModifications.containsKey(PlayerModification.Fly))
+            return false;
         return WorldSave.getCurrentSave().getWorld().collidingTile(boundingRect);
     }
     public boolean spawn(String enemy)
@@ -205,15 +216,16 @@ public class WorldStage extends GameStage implements SaveFileContent {
         return spawn(WorldData.getEnemy(enemy));
     }
 
-    private void HandleMonsterSpawn(float delta) {
+    private void handleMonsterSpawn(float delta) {
         World world = WorldSave.getCurrentSave().getWorld();
         int currentBiome = World.highestBiome(world.getBiome((int) player.getX() / world.getTileSize(), (int) player.getY() / world.getTileSize()));
         List<BiomeData> biomeData = WorldSave.getCurrentSave().getWorld().getData().GetBiomes();
-        if (biomeData.size() <= currentBiome) {
-            player.setMoveModifier(1.5f);
+        float sprintingMod=currentModifications.containsKey(PlayerModification.Sprint)?2:1;
+        if (biomeData.size() <= currentBiome) {// "if isOnRoad
+            player.setMoveModifier(1.5f*sprintingMod);
             return;
         }
-        player.setMoveModifier(1.0f);
+        player.setMoveModifier(1.0f*sprintingMod);
         BiomeData data = biomeData.get(currentBiome);
         if (data == null) return;
 
@@ -277,8 +289,8 @@ public class WorldStage extends GameStage implements SaveFileContent {
     @Override
     public void enter() {
 
-        GetPlayer().LoadPos();
-        GetPlayer().setMovementDirection(Vector2.Zero);
+        getPlayerSprite().LoadPos();
+        getPlayerSprite().setMovementDirection(Vector2.Zero);
         for (Actor actor : foregroundSprites.getChildren()) {
             if (actor.getClass() == PointOfInterestMapSprite.class) {
                 PointOfInterestMapSprite point = (PointOfInterestMapSprite) actor;
@@ -289,11 +301,15 @@ public class WorldStage extends GameStage implements SaveFileContent {
 
         }
         setBounds(WorldSave.getCurrentSave().getWorld().getWidthInPixels(), WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+
+        GridPoint2 pos = background.translateFromWorldToChunk(player.getX(), player.getY());
+        background.loadChunk(pos.x,pos.y);
+        handlePointsOfInterestCollision();
     }
 
     @Override
     public void leave() {
-        GetPlayer().storePos();
+        getPlayerSprite().storePos();
     }
 
     @Override
@@ -357,5 +373,27 @@ public class WorldStage extends GameStage implements SaveFileContent {
     @Override
     public Viewport getViewport() {
         return super.getViewport();
+    }
+
+
+    public void removeNearestEnemy() {
+
+        float shortestDist=Float.MAX_VALUE;
+        EnemySprite enemy=null;
+        for (Pair<Float, EnemySprite> pair : enemies) {
+            float dist= pair.getValue().pos().sub(player.pos()).len();
+            if(dist<shortestDist)
+            {
+                shortestDist=dist;
+                enemy=pair.getValue();
+            }
+        }
+        if(enemy!=null)
+        {
+            enemy.playEffect(Paths.EFFECT_KILL);
+            removeEnemy(enemy);
+            player.playEffect(Paths.TRIGGER_KILL);
+        }
+
     }
 }

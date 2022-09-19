@@ -20,9 +20,6 @@ public class BiomeSprites {
     public Sprite getSprite(String name, int seed) {
         if (textureAtlasBuffer == null) {
             textureAtlasBuffer = Config.instance().getAtlas(textureAtlas);
-            /*for (Texture texture : new  ObjectSet.ObjectSetIterator<>(textureAtlasBuffer.getTextures())) {
-                texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
-            }*/
         }
         if (!spriteBuffer.containsKey(name)) {
             spriteBuffer.put(name, new Array<Sprite>());

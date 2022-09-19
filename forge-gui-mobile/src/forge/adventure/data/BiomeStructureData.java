@@ -45,10 +45,14 @@ public class BiomeStructureData {
         this.structureAtlasPath=biomeStructureData.structureAtlasPath;
         this.sourcePath=biomeStructureData.sourcePath;
         this.maskPath=biomeStructureData.maskPath;
+        this.periodicInput=biomeStructureData.periodicInput;
         this.x=biomeStructureData.x;
         this.y=biomeStructureData.y;
         this.width=biomeStructureData.width;
         this.height=biomeStructureData.height;
+        this.periodicOutput=biomeStructureData.periodicOutput;
+        this.symmetry=biomeStructureData.symmetry;
+        this.ground=biomeStructureData.ground;
         this.randomPosition=biomeStructureData.randomPosition;
         if(biomeStructureData.mappingInfo!=null)
         {

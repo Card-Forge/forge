@@ -24,6 +24,7 @@ public class WorldData implements Serializable {
     public float playerStartPosY;
     public float noiseZoomBiome;
     public int tileSize;
+    public int miniMapTileSize;
     public BiomeData roadTileset;
     public String biomesSprites;
     public float maxRoadDistance;

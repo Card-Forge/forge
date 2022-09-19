@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztw7ENAAAMAiB3l/5/rX80kNBLqqqqqqqq+ugA4iKowQ==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzNWMtS21AMveCEadg4yY7yDcCwhg5fAf2B1oUWvgE2rMtjSdOCyd/Qx7eUwppK1BqOFd3rm9RJrBmNh4skHx097DhLnUu6zrWVLpJ+SP3KPu/oOqSrSBaw1fHZ97b7ou/T0fuzX8vjq+0t1TloHILBirUEebHkYIf3z5W/cJJ3y/n51Iqp8ScG5qHCl6maCG8sLSOmT/fTclzxXYKcNGaspcZlxckgJ41v0priOZ4lETlbPu1IfFV9PG0VfBqHrx6xfTmJWrkLPpynp1fO7SyPquuMaugc/awr6kKnnLtgtfANyPbrjPVbx943Fr7c8D9ede5kdXb4BGMsvivC9mXG+ERi8FXGJ+zX/4H/WuHbpdq+hfry3pHdOwm+uvk7JzyXar/ILpkHPs2fcGjVV+b3huqVGzW7pbNhzb1o9d858If1ncd+sfjD+Zh3favmt2nzofHhO2MTnh9Nw1fVf22ocVP2iwi+N/CMNK2+WurAt7bi3PpKPfzhs25e/RfiD59108J3+rpZ9Z1m/zVtfrVs0e+BbdKkE75ug12LdNGws3zwXP5+sxyPLyR6lkQGBgcbPec2e3HxfHHHFZmlTH1LyIseQkyf+s4d9cPYzijWYzo6o1YOIdFc5Oq3seD7QTYH/bKtzkXkD539Tv240O5R+euYmgv5lobvPIyP7Q6Vrc4F7/uZzveAH+EB+RA75NAXE/+P3xcGY+4IFq7pRaHCofD/kfRX76UHmOf7ijr76iT4xtkRPmF8PwtlfMzdQ1Ffi0fElhTvYJzTXlquSz4Bf5Zwf3wnXHe9fz0i+BgX8/hg9OLz/aGeXJf7tGxbF3/cd1JbFsGH6uMQRc9eLH+hHmHR84VciIZ6UXaR9U4Rw1/V3FmiOQztS995XfX14WPOLgou9U6KkWnh+wtIU1uf
+  </data>
+ </layer>
+ <layer id="6" name="Ground2" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztV21uwyAM9d+EkAu0UrMzbCeYmuxc066ytuutuia9R0EFxbKgITRQNvEkqwSS+uFn8wGQkZHxX/DNAXZPsj2f5vdeA3TCfiNbK2xbu/FzeW9puPrN/B7za3uvLwEu5Xy/fA1Qr8Pz+2QAh8L+HeYv24OwTpnLvB7ldxTcvpj9Ozwu51KI51LZSxWe31T8ML+puSzFT+sk7UNYq/QayG9HxmX73lyW4rcRujTVqBM1PMaKm6ayj0WK3xxITXXMZC60JL4DsY7UT2h+kpOtPkzxbpA2sn5i8otRH68rgLfVrc/Wpvzu6Ut1xm0ffXvynyYftH41P1xXum5MuupnH32xD1rD2kdDeJg0ddU6Rv61hji7roWh8++IdKTxDrG/9ZY8ozmO829uzfry++Fj/pnWLFM/U+uz7/3lwN34nWbeGwZh53rcP06qz+cOcg54Lsbrc4qYOn89G6nHz2fPjYnU9cXnvxSRev5tKrd9LCPjL+EKsTvNGA==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzty0EGACAABMA+ED0gvb7+2SkRHYoOMcOyh90QAAAAAO60eJahHv7W/ws5zV7SfgcA/KEDgLsSbg==
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt0ksKhDAQRdGa2xB00kotQFdpC/3R7eoKrIETUVoRY4HcA4HiQUjIiwgAAH7eKvLRZd5bNqzk8Pe1Xn4r3bSWdXQWXWJv/ND989VKO7fS/TPmYvb7tD25/p+30O9xaSGSFd638HPG/8M91EHkNa0meN8GAADc3Qj2GhFY
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="47" template="../../obj/inn.tx" x="361" y="371"/>
+  <object id="53" template="../../obj/spellsmith.tx" x="392" y="194"/>
+  <object id="55" template="../../obj/shop.tx" x="416" y="402">
+   <properties>
+    <property name="shopList" value="Swamp"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/entry_up.tx" x="258" y="639" width="97" height="20">
+   <properties>
+    <property name="spawn" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/entry_left.tx" x="354" y="635" width="16" height="197.002" rotation="0"/>
+  <object id="60" template="../../obj/entry_right.tx" x="242" y="642" width="16" height="198"/>
+  <object id="61" template="../../obj/arena.tx" x="168" y="178">
+   <properties>
+    <property name="arena">{
+
+    &quot;enemyPool&quot;:[
+	&quot;Beholder&quot;,
+	&quot;Big Zombie&quot;,
+	&quot;Black Wiz1&quot;,
+	&quot;Black Wiz2&quot;,
+	&quot;Black Wiz3&quot;,
+	&quot;Dark Knight&quot;,
+	&quot;Death Knight&quot;,
+	&quot;Demon&quot;,
+	&quot;Ghoul&quot;,
+	&quot;Ghost&quot;,
+	&quot;Harpy&quot;,
+	&quot;Harpy 2&quot;,
+	&quot;High Vampire&quot;,
+	&quot;Lich&quot;,
+	&quot;Rakdos Devil&quot;,
+	&quot;Skeleton&quot;,
+	&quot;Skeleton Soldier&quot;,
+	&quot;Vampire&quot;,
+	&quot;Zombie&quot;,
+	&quot;Zombie Lord&quot;
+	],
+    &quot;rounds&quot;:3,
+    &quot;entryFee&quot;:100,
+     &quot;rewards&quot;: [[
+		{
+			&quot;type&quot;: &quot;card&quot;,
+			&quot;probability&quot;: 1, 
+      			&quot;count&quot;:2,
+			&quot;rarity&quot;: [
+				&quot;Mythic Rare&quot;
+			],
+      			&quot;colors&quot;: [&quot;black&quot;] 
+		}
+		],[
+		{
+			&quot;type&quot;: &quot;gold&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 500 
+		}
+		],[{
+			&quot;type&quot;: &quot;item&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 1,
+			&quot;itemNames&quot;: [&quot;Death Ring&quot;,&quot;Dark Armor&quot;,&quot;Dark Shield&quot;,&quot;Dark Boots&quot;]
+		}
+		]
+		] 
+}</property>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/shop.tx" x="216" y="241">
+   <properties>
+    <property name="shopList" value="BlackItems"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/shop.tx" x="115" y="241">
+   <properties>
+    <property name="shopList" value="BlackEquipment"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/shop.tx" x="376" y="274">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/shop.tx" x="376" y="322">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/shop.tx" x="424" y="274">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/shop.tx" x="424" y="322">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/shop.tx" x="472" y="274">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/shop.tx" x="472" y="322">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/shop.tx" x="520" y="274">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/shop.tx" x="520" y="322">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

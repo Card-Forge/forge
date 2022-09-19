@@ -1,0 +1,332 @@
+
+ui_skin.png
+size: 512, 512
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+BKey_3_14
+  rotate: false
+  xy: 253, 371
+  size: 32, 16
+  split: 6, 6, 9, 6
+  pad: 0, 0, 0, 0
+  orig: 32, 16
+  offset: 0, 0
+  index: -1
+BKey_3_9
+  rotate: false
+  xy: 203, 321
+  size: 32, 16
+  split: 5, 5, 6, 7
+  pad: 0, 0, 0, 0
+  orig: 32, 16
+  offset: 0, 0
+  index: -1
+MiKrollFantasy
+  rotate: false
+  xy: 1, 491
+  size: 506, 18
+  orig: 506, 18
+  offset: 0, 0
+  index: -1
+MiKrollFantasy(1)
+  rotate: false
+  xy: 1, 450
+  size: 506, 39
+  orig: 506, 39
+  offset: 0, 0
+  index: -1
+MiKrollFantasy(2)
+  rotate: false
+  xy: 1, 430
+  size: 506, 18
+  orig: 506, 18
+  offset: 0, 0
+  index: -1
+MiKrollFantasy(3)
+  rotate: false
+  xy: 1, 389
+  size: 506, 39
+  orig: 506, 39
+  offset: 0, 0
+  index: -1
+9patch4
+  rotate: false
+  xy: 75, 137
+  size: 48, 48
+  split: 7, 7, 7, 7
+  pad: 0, 0, 0, 0
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+down
+  rotate: false
+  xy: 97, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+down_down
+  rotate: false
+  xy: 125, 147
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+left
+  rotate: false
+  xy: 147, 169
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+left_down
+  rotate: false
+  xy: 203, 281
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+right
+  rotate: false
+  xy: 275, 353
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+right_down
+  rotate: false
+  xy: 305, 371
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+up
+  rotate: false
+  xy: 1, 19
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+up_down
+  rotate: false
+  xy: 51, 72
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+cursor
+  rotate: false
+  xy: 25, 58
+  size: 4, 3
+  split: 1, 1, 1, 1
+  pad: 0, 0, 0, 0
+  orig: 4, 3
+  offset: 0, 0
+  index: -1
+item_frame
+  rotate: false
+  xy: 75, 115
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+item_frame_hover
+  rotate: false
+  xy: 125, 165
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+item_frame_selected
+  rotate: false
+  xy: 203, 299
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+item_frame_selected_hover
+  rotate: false
+  xy: 253, 349
+  size: 20, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: -1
+select
+  rotate: false
+  xy: 509, 507
+  size: 2, 2
+  orig: 2, 2
+  offset: 0, 0
+  index: -1
+bar
+  rotate: false
+  xy: 1, 55
+  size: 22, 6
+  split: 2, 2, 2, 2
+  pad: 0, 0, 0, 0
+  orig: 22, 6
+  offset: 0, 0
+  index: -1
+barcontent
+  rotate: false
+  xy: 51, 108
+  size: 20, 3
+  split: 0, 0, 0, 0
+  orig: 20, 3
+  offset: 0, 0
+  index: -1
+check
+  rotate: false
+  xy: 115, 127
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+map
+  rotate: false
+  xy: 1, 63
+  size: 48, 48
+  split: 17, 16, 13, 11
+  pad: 0, 0, 0, 0
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+pressed
+  rotate: false
+  xy: 253, 331
+  size: 14, 16
+  split: 4, 4, 6, 5
+  pad: 0, 0, 0, 0
+  orig: 14, 16
+  offset: 0, 0
+  index: -1
+pressedMap
+  rotate: false
+  xy: 1, 37
+  size: 16, 16
+  split: 6, 6, 4, 3
+  pad: 0, 0, 0, 0
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+pressedround
+  rotate: false
+  xy: 293, 354
+  size: 12, 15
+  split: 4, 4, 7, 5
+  pad: 0, 0, 0, 0
+  orig: 12, 15
+  offset: 0, 0
+  index: -1
+scroll
+  rotate: false
+  xy: 1, 2
+  size: 6, 15
+  split: 2, 2, 3, 4
+  pad: 0, 0, 0, 0
+  orig: 6, 15
+  offset: 0, 0
+  index: -1
+scroll2
+  rotate: false
+  xy: 225, 312
+  size: 14, 7
+  split: 3, 3, 2, 3
+  pad: 0, 0, 0, 0
+  orig: 14, 7
+  offset: 0, 0
+  index: -1
+thinwindow
+  rotate: false
+  xy: 51, 90
+  size: 16, 16
+  split: 2, 2, 2, 2
+  pad: 0, 0, 0, 0
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+uncheck
+  rotate: false
+  xy: 125, 137
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+unpressed
+  rotate: false
+  xy: 237, 321
+  size: 14, 16
+  split: 4, 4, 4, 7
+  pad: 0, 0, 0, 0
+  orig: 14, 16
+  offset: 0, 0
+  index: -1
+unpressed-disable
+  rotate: false
+  xy: 203, 263
+  size: 14, 16
+  split: 3, 3, 3, 6
+  pad: 0, 0, 0, 0
+  orig: 14, 16
+  offset: 0, 0
+  index: -1
+unpressed-hover
+  rotate: false
+  xy: 165, 169
+  size: 14, 16
+  split: 3, 3, 3, 6
+  pad: 0, 0, 0, 0
+  orig: 14, 16
+  offset: 0, 0
+  index: -1
+unpressedMap
+  rotate: false
+  xy: 287, 371
+  size: 16, 16
+  split: 6, 6, 3, 4
+  pad: 0, 0, 0, 0
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+unpressedround
+  rotate: false
+  xy: 323, 372
+  size: 12, 15
+  split: 4, 4, 5, 7
+  pad: 0, 0, 0, 0
+  orig: 12, 15
+  offset: 0, 0
+  index: -1
+windowMain
+  rotate: false
+  xy: 203, 339
+  size: 48, 48
+  split: 6, 6, 6, 6
+  pad: 0, 0, 0, 0
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+touchBackground
+  rotate: false
+  xy: 1, 187
+  size: 200, 200
+  orig: 200, 200
+  offset: 0, 0
+  index: -1
+touchKnob
+  rotate: false
+  xy: 1, 113
+  size: 72, 72
+  orig: 72, 72
+  offset: 0, 0
+  index: -1
+dummy
+    rotate: false
+    xy: 0, 360
+    size: 5,5
+    orig: 1,1
+    split: 1, 1, 1, 1
+    pad: 0, 0, 0, 0
+    offset: 0,0
+    index:-1

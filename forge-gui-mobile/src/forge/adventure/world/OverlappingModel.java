@@ -17,7 +17,7 @@ public class OverlappingModel extends Model {
 
   @FunctionalInterface
   interface Agrees<One, Two, Three, Four, Five> {
-    public Five apply(One one, Two two, Three three, Four four);
+    Five apply(One one, Two two, Three three, Four four);
   }
 
   /**
@@ -51,10 +51,10 @@ public class OverlappingModel extends Model {
 
     this.colors = new ArrayList<Color>();
 
-    for (int y = 0; y < SMY; y++) for (int x = 0; x < SMX; x++) {
-      Color color = data.getColor(x, y);
-    if(color==null)
-      break;
+      for (int y = 0; y < SMY; y++) for (int x = 0; x < SMX; x++) {
+        Color color = data.getColor(x, y);
+      if(color==null)
+        break;
       int i = 0;
       for (Color c : colors) {
         if (c.equals(color)) break;

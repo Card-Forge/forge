@@ -7,45 +7,39 @@ repeat: none
 IslandTown 
   xy: 144, 0
   size: 48, 48
-IslandTown 
-  xy: 144, 0
-  size: 48, 48
-IslandTown 
-  xy: 144, 0
-  size: 48, 48   
 MountainTown 
   xy: 48, 0
   size: 48, 48  
 SwampTown 
   xy: 0, 0
   size: 48, 48
-SwampTown 
-  xy: 97, 336
-  size: 32, 32 
 ForestTown 
   xy: 352, 496
-  size: 32, 32        
-ForestTown 
-  xy: 384, 496
-  size: 32, 32         
-ForestTown 
-  xy: 416, 496
-  size: 32, 32 
-ForestTown 
-  xy: 0, 48
-  size: 32, 32  
+  size: 32, 32    
 PlainsTown 
   xy: 96, 0
   size: 48, 48 
-PlainsTown 
-  xy: 160, 272
-  size: 32, 32  
 WasteTown 
   xy: 272, 128
-  size: 48, 48      
-WasteTown 
-  xy: 320, 128
-  size: 48, 48
+  size: 48, 48 
+IslandCapital
+  xy: 128, 592
+  size: 64, 64
+MountainCapital
+  xy: 128, 720
+  size: 64, 64  
+SwampCapital
+  xy: 128, 464
+  size: 64, 64
+ForestCapital 
+  xy: 64, 656
+  size: 64, 64    
+PlainsCapital 
+  xy: 0, 464
+  size: 64, 64 
+Spawn 
+  xy: 304, 288
+  size: 16, 16   
 Gate 
   xy: 384, 128
   size: 64, 48
@@ -127,6 +121,12 @@ MerfolkShop
 EquipmentShop
   xy: 304, 784   
   size: 16, 16   
+ItemShop
+  xy: 304, 800   
+  size: 16, 16 
+CapitalShop
+  xy: 304, 816   
+  size: 16, 16 
 ArtifactShop
   xy: 320, 784   
   size: 16, 16

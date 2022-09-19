@@ -2,13 +2,14 @@
   "width": 480,
   "height": 270,
   "yDown": true,
-  "elements": [
+  "elements": [    
     {
       "type": "Image",
-      "name": "lastScreen",
+      "name": "rewards_background",   
+      "image": "ui/reward.png",
       "width": 480,
       "height": 270
-    },        
+    },      
     {
       "type": "Image",
       "name": "market_background",   
@@ -26,7 +27,7 @@
     {
       "type": "TextButton",
       "name": "done",
-      "text": "Take all",
+      "text": "tr(lblLeave)",
       "width": 48,
       "height": 30,
       "x": 420,
@@ -35,7 +36,8 @@
     {
       "type": "Label",
       "name": "gold",
-      "text": "$",
+	  "style":"background",
+      "text": "[+Gold]",
       "width": 48,
       "height": 30,
       "x": 420,

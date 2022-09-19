@@ -1,24 +1,24 @@
 package forge.util;
 
-import java.io.File;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.RejectedExecutionException;
-
-import forge.card.CardEdition;
-import forge.item.IPaperCard;
-import org.apache.commons.lang3.tuple.Pair;
-
 import forge.ImageKeys;
 import forge.StaticData;
+import forge.card.CardEdition;
 import forge.gui.FThreads;
+import forge.item.IPaperCard;
 import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.concurrent.RejectedExecutionException;
 
 public abstract class ImageFetcher {
-    private static final ExecutorService threadPool = ThreadUtil.getServicePool();
     // see https://scryfall.com/docs/api/languages and
     // https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     private static final HashMap<String, String> langCodeMap = new HashMap<>();
@@ -209,7 +209,7 @@ public abstract class ImageFetcher {
             }
         };
         try {
-            threadPool.submit(getDownloadTask(downloadUrls.toArray(new String[0]), destPath, notifyObservers));
+            ThreadUtil.getServicePool().submit(getDownloadTask(downloadUrls.toArray(new String[0]), destPath, notifyObservers));
         } catch (RejectedExecutionException re) {
             re.printStackTrace();
         }

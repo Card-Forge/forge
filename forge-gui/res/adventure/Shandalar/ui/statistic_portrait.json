@@ -50,17 +50,17 @@
       "y": 56,
       "width": 26,
       "height": 24,
-      "font": "black"
+      "fontColor":"black"
     },
     {
       "type": "Label",
       "name": "wins",
-      "text": "Win:",
+      "text": "tr(lblWinProper):",
       "x": 98,
       "y": 56,
       "width": 60,
       "height": 24,
-      "font": "black"
+      "fontColor":"black"
     },
     {
       "type": "Label",
@@ -69,17 +69,17 @@
       "y": 68,
       "width": 26,
       "height": 24,
-      "font": "black"
+      "fontColor":"black"
     },
     {
       "type": "Label",
       "name": "loss",
-      "text": "Loss:",
+      "text": "tr(lblLossProper):",
       "x": 98,
       "y": 68,
       "width": 60,
       "height": 24,
-      "font": "black"
+      "fontColor":"black"
     },
     {
       "type": "Label",
@@ -88,22 +88,22 @@
       "y": 80,
       "width": 26,
       "height": 24,
-      "font": "black"
+      "fontColor":"black"
     },
     {
       "type": "Label",
       "name": "winloss",
-      "text": "Win Loss Ratio:",
+      "text": "tr(lblWinProper)/tr(lblLossProper):",
       "x": 98,
       "y": 80,
       "width": 60,
       "height": 24,
-      "font": "black"
+      "fontColor":"black"
     },
     {
       "type": "TextButton",
       "name": "return",
-      "text": "Back",
+      "text": "tr(lblBack)",
       "width": 260,
       "height": 30,
       "x": 5,
@@ -116,7 +116,7 @@
       "y": 4,
       "width": 80,
       "height": 24,
-      "font": "black"
+      "fontColor":"black"
     },
     {
       "type": "Image",
@@ -139,7 +139,7 @@
     {
       "type": "Label",
       "name": "lifePoints",
-      "font": "black",
+      "fontColor":"black",
       "width": 64,
       "height": 16,
       "x": 118,
@@ -148,7 +148,7 @@
     {
       "type": "Label",
       "name": "money",
-      "font": "black",
+      "fontColor":"black",
       "width": 64,
       "height": 16,
       "x": 118,

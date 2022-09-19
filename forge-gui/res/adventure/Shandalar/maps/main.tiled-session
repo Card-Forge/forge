@@ -3,13 +3,13 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map/main_story/skep.tmx",
+    "activeFile": "map/main_story/spawn.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
-        "map/main_story",
+        "tileset",
         "map",
         "obj",
-        "tileset"
+        "map/main_story"
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
@@ -1428,14 +1428,11 @@
             }
         },
         "map/debug_map.tmx": {
-            "expandedObjectLayers": [
-                4
-            ],
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 179.5,
-                "y": 274.3333333333333
+                "x": 221.66666666666663,
+                "y": 302.83333333333337
             }
         },
         "map/djinnpalace_1.tmx": {
@@ -1551,11 +1548,14 @@
             }
         },
         "map/forest_town.tmx": {
-            "scale": 1.5,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 254.99999999999997,
-                "y": 133
+                "x": 230.5,
+                "y": 155.83333333333331
             }
         },
         "map/fort_1.tmx": {
@@ -1939,11 +1939,11 @@
             "expandedObjectLayers": [
                 4
             ],
-            "scale": 1.5,
+            "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 256.3333333333333,
-                "y": 129
+                "x": 255.25,
+                "y": 122.25
             }
         },
         "map/magetower_1.tmx": {
@@ -2095,23 +2095,23 @@
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 235.25,
-                "y": 208.5
+                "x": 235.5,
+                "y": 208.75
             }
         },
         "map/main_story/blue_castle.tmx": {
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 215.16666666666666,
-                "y": 331.3333333333333
+                "x": 214.99999999999997,
+                "y": 331.16666666666663
             }
         },
         "map/main_story/colorless_castle.tmx": {
             "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 242.75,
+                "x": 243,
                 "y": 339.25
             }
         },
@@ -2124,41 +2124,101 @@
             }
         },
         "map/main_story/final_castle.tmx": {
-            "expandedObjectLayers": [
-                4
-            ],
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 273,
-                "y": 250.66666666666669
+                "x": 240,
+                "y": 912
+            }
+        },
+        "map/main_story/forest_capital.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 3,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 320,
+                "y": 320
             }
         },
         "map/main_story/green_castle.tmx": {
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 218.5,
-                "y": 308
+                "x": 246,
+                "y": 239.66666666666663
+            }
+        },
+        "map/main_story/island_capital.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 320,
+                "y": 320
+            }
+        },
+        "map/main_story/mountain_capital.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 320,
+                "y": 320
+            }
+        },
+        "map/main_story/plains_capital.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 8,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 320,
+                "y": 320
             }
         },
         "map/main_story/red_castle.tmx": {
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 272.25,
-                "y": 328
+                "x": 240,
+                "y": 240
             }
         },
         "map/main_story/skep.tmx": {
-            "expandedObjectLayers": [
-                4
-            ],
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 232.33333333333331,
-                "y": 233.3333333333333
+                "x": 240,
+                "y": 240
+            }
+        },
+        "map/main_story/spawn.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 4,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 240,
+                "y": 240
+            }
+        },
+        "map/main_story/swamp_capital.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 320,
+                "y": 320
             }
         },
         "map/main_story/unbenannt.tmx": {
@@ -2169,12 +2229,20 @@
                 "y": 480.34259430595574
             }
         },
-        "map/main_story/white_castle.tmx": {
-            "scale": 2,
+        "map/main_story/white_capital.tmx": {
+            "scale": 1,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 228.75,
-                "y": 304.5
+                "x": 232,
+                "y": 240.5
+            }
+        },
+        "map/main_story/white_castle.tmx": {
+            "scale": 4,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 240,
+                "y": 240
             }
         },
         "map/maze_1.tmx": {
@@ -2314,11 +2382,14 @@
             }
         },
         "map/mountain_town.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
                 "x": 235.5,
-                "y": 135.66666666666663
+                "y": 135.83333333333331
             }
         },
         "map/nest_blue_1.tmx": {
@@ -2629,6 +2700,9 @@
             }
         },
         "map/swamp_town.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
@@ -2707,14 +2781,11 @@
             }
         },
         "map/waste_town.tmx": {
-            "expandedObjectLayers": [
-                4
-            ],
-            "scale": 1.5,
-            "selectedLayer": 4,
+            "scale": 3,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 214.33333333333331,
-                "y": 298.6666666666667
+                "x": 239.99999999999997,
+                "y": 240
             }
         },
         "map/waste_town_2.tmx": {
@@ -2737,33 +2808,33 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 250.33333333333331,
-                "y": 148.33333333333331
+                "x": 240,
+                "y": 136
             }
         },
         "map/yule_town.tmx": {
             "scale": 1.5,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 250.99999999999997,
-                "y": 33.666666666666686
+                "x": 240,
+                "y": 136
             }
         },
         "map/zombietown.tmx": {
             "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 479.75,
+                "x": 480,
                 "y": 272
             }
         },
         "tileset/buildings.tsx": {
-            "scaleInDock": 1.5,
+            "scaleInDock": 3,
             "scaleInEditor": 2
         },
         "tileset/main.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1,
+            "scaleInDock": 2,
             "scaleInEditor": 2
         }
     },
@@ -2774,25 +2845,39 @@
     "map.tileWidth": 16,
     "map.width": 90,
     "openFiles": [
+        "map/main_story/green_castle.tmx",
+        "map/main_story/red_castle.tmx",
+        "map/main_story/plains_capital.tmx",
+        "map/main_story/forest_capital.tmx",
+        "map/main_story/mountain_capital.tmx",
+        "map/main_story/island_capital.tmx",
+        "map/main_story/spawn.tmx",
+        "map/main_story/final_castle.tmx",
+        "map/main_story/white_castle.tmx",
+        "tileset/main.tsx",
+        "tileset/buildings.tsx",
+        "map/zombietown.tmx",
+        "map/yule_town.tmx",
+        "map/wurmpond_1.tmx",
         "map/waste_town.tmx",
-        "map/main_story/skep.tmx",
-        "map/debug_map.tmx"
+        "map/main_story/swamp_capital.tmx",
+        "map/main_story/skep.tmx"
     ],
     "project": "main.tiled-project",
-    "property.type": "string",
+    "property.type": "int",
     "recentFiles": [
-        "map/magetower_10.tmx",
-        "map/magetower_12.tmx",
-        "map/magetower_11.tmx",
-        "map/main_story/blue_castle.tmx",
-        "map/waste_town.tmx",
-        "map/debug_map.tmx",
+        "map/main_story/green_castle.tmx",
+        "map/main_story/red_castle.tmx",
+        "map/main_story/plains_capital.tmx",
+        "map/main_story/forest_capital.tmx",
+        "map/main_story/mountain_capital.tmx",
+        "map/main_story/island_capital.tmx",
         "map/main_story/skep.tmx",
-        "map/waste_town_3.tmx",
-        "map/waste_town_2.tmx",
-        "map/snowabbey_1.tmx",
-        "map/snowabbey_2.tmx",
-        "map/snowabbey_3.tmx"
+        "map/main_story/swamp_capital.tmx",
+        "map/waste_town.tmx",
+        "map/wurmpond_1.tmx",
+        "map/yule_town.tmx",
+        "map/zombietown.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true
