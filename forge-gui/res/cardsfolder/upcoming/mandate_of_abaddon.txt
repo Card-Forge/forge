@@ -2,6 +2,6 @@ Name:Mandate of Abaddon
 ManaCost:3 B
 Types:Sorcery
 A:SP$ ChooseCard | Choices$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | ImprintChosen$ True |  SubAbility$ DBDestroyAll | SpellDescription$ Choose target creature you control. Destroy all creatures with power less than that creature's power.
-SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.powerLEX
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.powerLTX
 SVar:X:Imprinted$CardPower
 Oracle:Choose target creature you control. Destroy all creatures with power less than that creature's power.
