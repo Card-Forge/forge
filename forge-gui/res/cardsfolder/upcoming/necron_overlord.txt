@@ -1,0 +1,8 @@
+Name:Necron Overlord
+ManaCost:2 B B
+Types:Artifact Creature Necron Noble
+PT:2/5
+A:AB$ LoseLife | PrecostDesc$ Relentless Mind — | Cost$ X T tapXType<X/Artifact> | ValidTgts$ Opponent | LifeAmount$ X | SpellDescription$ Target opponent loses X life.
+SVar:X:Count$xPaid
+DeckHints:Type$Artifact
+Oracle:Relentless Mind — {X}, {T}, Tap X untapped artifacts you control: Target opponent loses X life.

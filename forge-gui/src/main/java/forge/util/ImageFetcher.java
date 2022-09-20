@@ -39,7 +39,7 @@ public abstract class ImageFetcher {
     private HashMap<String, HashSet<Callback>> currentFetches = new HashMap<>();
     private HashMap<String, String> tokenImages;
 
-    private String getScryfallDownloadURL(PaperCard c, boolean backFace, boolean useArtCrop, boolean hasSetLookup, String imagePath, ArrayList<String> downloadUrls) {
+    private String getScryfallDownloadURL(PaperCard c, String face, boolean useArtCrop, boolean hasSetLookup, String imagePath, ArrayList<String> downloadUrls) {
         StaticData data = StaticData.instance();
         CardEdition edition = data.getEditions().get(c.getEdition());
         if (edition == null) // edition does not exist - some error occurred with card data
@@ -53,7 +53,7 @@ public abstract class ImageFetcher {
                         if (ed != null) {
                             String setCode =ed.getScryfallCode();
                             String langCode = ed.getCardsLangCode();
-                            downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, backFace, setCode, langCode, useArtCrop));
+                            downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, face, setCode, langCode, useArtCrop));
                         }
                     }
                 } else {// original from set
@@ -61,7 +61,7 @@ public abstract class ImageFetcher {
                     if (ed != null) {
                         String setCode =ed.getScryfallCode();
                         String langCode = ed.getCardsLangCode();
-                        downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, backFace, setCode, langCode, useArtCrop));
+                        downloadUrls.add(ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + ImageUtil.getScryfallDownloadUrl(pc, face, setCode, langCode, useArtCrop));
                     }
                 }
             }
@@ -71,7 +71,7 @@ public abstract class ImageFetcher {
             String setCode = edition.getScryfallCode();
             String langCode = edition.getCardsLangCode();
             return ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD +
-                    ImageUtil.getScryfallDownloadUrl(c, backFace, setCode, langCode, useArtCrop);
+                    ImageUtil.getScryfallDownloadUrl(c, face, setCode, langCode, useArtCrop);
         }
     }
 
@@ -105,10 +105,46 @@ public abstract class ImageFetcher {
             // Skip fetching if artist info is not available for art crop
             if (useArtCrop && paperCard.getArtist().isEmpty())
                 return;
-            String imagePath = ImageUtil.getImageRelativePath(paperCard, false, true, false);
+            String imagePath = ImageUtil.getImageRelativePath(paperCard, "", true, false);
             final boolean hasSetLookup = ImageKeys.hasSetLookup(imagePath);
-            final boolean backFace = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
-            String filename = backFace ? paperCard.getCardAltImageKey() : paperCard.getCardImageKey();
+            String face = "";
+            if (imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX)) {
+                face = "back";
+            } else if (imageKey.endsWith(ImageKeys.SPECFACE_W)) {
+                face = "white";
+            } else if (imageKey.endsWith(ImageKeys.SPECFACE_U)) {
+                face = "blue";
+            } else if (imageKey.endsWith(ImageKeys.SPECFACE_B)) {
+                face = "black";
+            } else if (imageKey.endsWith(ImageKeys.SPECFACE_R)) {
+                face = "red";
+            } else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) {
+                face = "green";
+            }
+            String filename = "";
+            switch (face) {
+                case "back":
+                    filename = paperCard.getCardAltImageKey();
+                    break;
+                case "white":
+                    filename = paperCard.getCardWSpecImageKey();
+                    break;
+                case "blue":
+                    filename = paperCard.getCardUSpecImageKey();
+                    break;
+                case "black":
+                    filename = paperCard.getCardBSpecImageKey();
+                    break;
+                case "red":
+                    filename = paperCard.getCardRSpecImageKey();
+                    break;
+                case "green":
+                    filename = paperCard.getCardGSpecImageKey();
+                    break;
+                default:
+                    filename = paperCard.getCardImageKey();
+                    break;
+            }
             if (useArtCrop) {
                 filename = TextUtil.fastReplace(filename, ".full", ".artcrop");
             }
@@ -119,7 +155,7 @@ public abstract class ImageFetcher {
                 //move priority of ftp image here
                 StringBuilder setDownload = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
                 if (!hasSetLookup) {
-                    setDownload.append(ImageUtil.getDownloadUrl(paperCard, backFace));
+                    setDownload.append(ImageUtil.getDownloadUrl(paperCard, face));
                     downloadUrls.add(setDownload.toString());
                 } else {
                     List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(paperCard.getName());
@@ -127,12 +163,12 @@ public abstract class ImageFetcher {
                         if (clones.size() > 1) {//clones only
                             if (!paperCard.getEdition().equalsIgnoreCase(pc.getEdition())) {
                                 StringBuilder set = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
-                                set.append(ImageUtil.getDownloadUrl(pc, backFace));
+                                set.append(ImageUtil.getDownloadUrl(pc, face));
                                 downloadUrls.add(set.toString());
                             }
                         } else {// original from set
                             StringBuilder set = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
-                            set.append(ImageUtil.getDownloadUrl(pc, backFace));
+                            set.append(ImageUtil.getDownloadUrl(pc, face));
                             downloadUrls.add(set.toString());
                         }
                     }
@@ -140,7 +176,7 @@ public abstract class ImageFetcher {
             }
             final String cardCollectorNumber = paperCard.getCollectorNumber();
             if (!cardCollectorNumber.equals(IPaperCard.NO_COLLECTOR_NUMBER)) {
-                final String scryfallURL = this.getScryfallDownloadURL(paperCard, backFace, useArtCrop, hasSetLookup, imagePath, downloadUrls);
+                final String scryfallURL = this.getScryfallDownloadURL(paperCard, face, useArtCrop, hasSetLookup, filename, downloadUrls);
                 if (scryfallURL != null && !hasSetLookup)
                     downloadUrls.add(scryfallURL);
             }

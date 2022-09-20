@@ -711,13 +711,26 @@ public class World implements Disposable, SaveFileContent {
             }
             for(Map.Entry<String, Pair<Pixmap, HashMap<String, Pixmap>>> entry:pixmapHash.entrySet())
             {
-                entry.getValue().getLeft().dispose();
+                try {
+                    entry.getValue().getLeft().dispose();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 for(Map.Entry<String, Pixmap> pairEntry:entry.getValue().getRight().entrySet())
                 {
-                    pairEntry.getValue().dispose();
+                    try {
+                        pairEntry.getValue().dispose();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-            drawPixmapNow(pix);
+            pixmapHash.clear();
+            try {
+                drawPixmapNow(pix);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             currentTime[0] = measureGenerationTime("mini map", currentTime[0]);
 
 

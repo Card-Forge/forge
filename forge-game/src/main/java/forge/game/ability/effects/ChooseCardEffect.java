@@ -101,6 +101,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         }
 
         for (final Player p : tgtPlayers) {
+            boolean dontRevealToOwner = true;
             if (sa.hasParam("EachBasicType")) {
                 // Get all lands, 
                 List<Card> land = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
@@ -220,6 +221,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("AtRandom") && !choices.isEmpty()) {
                     Aggregates.random(choices, validAmount, chosen);
+                    dontRevealToOwner = false;
                 } else {
                     String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
                     if (sa.hasParam ("ChoiceTitleAppendDefined")) {
@@ -248,12 +250,14 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 }
             }
             if (sa.hasParam("Reveal") && !sa.hasParam("SecretlyChoose")) {
-                game.getAction().reveal(chosen, p, true, sa.hasParam("RevealTitle") ? sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ");
+                game.getAction().reveal(chosen, p, dontRevealToOwner, sa.hasParam("RevealTitle") ?
+                        sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ");
             }
         }
-        if(sa.hasParam("Reveal") && sa.hasParam("SecretlyChoose")) {
+        if (sa.hasParam("Reveal") && sa.hasParam("SecretlyChoose")) {
             for (final Player p : tgtPlayers) {
-                game.getAction().reveal(chosen, p, true, sa.hasParam("RevealTitle") ? sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ");
+                game.getAction().reveal(chosen, p, true, sa.hasParam("RevealTitle") ?
+                        sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ");
             }
         }
         host.setChosenCards(chosen);

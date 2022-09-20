@@ -1,0 +1,10 @@
+Name:Chronomancer
+ManaCost:1 B
+Types:Artifact Creature Necron Wizard
+PT:1/1
+K:Flying
+A:AB$ Draw | PrecostDesc$ Atomic Transmutation — | Cost$ 1 T Sac<1/Artifact.Other/another artifact> | SpellDescription$ Draw a card.
+K:Unearth:2 B
+DeckHas:Ability$Sacrifice|Graveyard
+DeckHints:Type$Artifact
+Oracle:Flying\nAtomic Transmutation — {1}, {T}, Sacrifice another artifact: Draw a card.\nUnearth {2}{B} ({2}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

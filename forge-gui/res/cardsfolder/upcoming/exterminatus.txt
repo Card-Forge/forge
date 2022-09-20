@@ -1,0 +1,6 @@
+Name:Exterminatus
+ManaCost:5 W B
+Types:Sorcery
+A:SP$ AnimateAll | ValidCards$ Permanent.nonLand+OppCtrl | RemoveKeywords$ Indestructible | SubAbility$ DBDestroyAll | SpellDescription$ Nonland permanents your opponents control lose indestructible until end of turn. Destroy all nonland permanents.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.nonLand
+Oracle:Nonland permanents your opponents control lose indestructible until end of turn.\nDestroy all nonland permanents.

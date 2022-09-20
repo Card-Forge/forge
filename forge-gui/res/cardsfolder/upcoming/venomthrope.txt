@@ -1,0 +1,8 @@
+Name:Venomthrope
+ManaCost:1 G U
+Types:Creature Tyranid
+PT:2/2
+K:Flying
+K:Deathtouch
+K:Hexproof
+Oracle:Flying, deathtouch, hexproof

@@ -1,0 +1,9 @@
+Name:Lord of Change
+ManaCost:6 U
+Types:Creature Demon
+PT:6/6
+K:Flying
+K:Ward:3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Architect of Deception — When CARDNAME enters the battlefield, draw three cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 3
+Oracle:Flying, ward {3}\nArchitect of Deception — When Lord of Change enters the battlefield, draw three cards.
