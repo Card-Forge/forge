@@ -6,7 +6,7 @@ K:Trample
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Frenzied Rampage — At the beginning of combat on your turn, choose an opponent at random. CARDNAME attacks that player this combat if able.
 SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Random$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Self | KW$ HIDDEN CARDNAME attacks specific player each combat if able:ChosenPlayer | Duration$ UntilEndOfCombat
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChoose | Secondary$ True | TriggerDescription$ When CARDNAME dies, it deals 4 damage to target opponent chosen at random.
-SVar:TrigChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Random$ True | SubAbility$ DBDealDamage
-SVar:DBDealDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ 4 | SubAbility$ DBCleanup
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChooseBis | TriggerDescription$ When CARDNAME dies, it deals 4 damage to target opponent chosen at random.
+SVar:TrigChooseBis:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | Random$ True | SubAbility$ DBDealDamage
+SVar:DBDealDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ 4
 Oracle:Trample\nFrenzied Rampage — At the beginning of combat on your turn, choose an opponent at random. Knight Rampager attacks that player this combat if able.\nWhen Knight Rampager dies, it deals 4 damage to target opponent chosen at random.
