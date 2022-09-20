@@ -3,45 +3,117 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
+import forge.adventure.util.UIActor;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Stream;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
  * Scene to handle settings of the base forge and adventure mode
  */
 public class SettingsScene extends UIScene {
     static public ForgePreferences Preference;
-    Stage stage;
     Texture Background;
     private final Table settingGroup;
     TextraButton backButton;
+    TextraButton newPlane;
     ScrollPane scrollPane;
+
+    SelectBox selectSourcePlane;
+    TextField newPlaneName;
+    private void copyNewPlane() {
+        String plane=(String) selectSourcePlane.getSelected();
+        Path source= Paths.get(Config.instance().getPlanePath(plane));
+        Path destination= Paths.get(Config.instance().getPlanePath("<user>"+newPlaneName.getText()));
+        AtomicBoolean somethingWentWrong= new AtomicBoolean(false);
+        try (Stream<Path> stream = Files.walk(source))
+        {
+            Files.createDirectories(destination);
+            stream.forEach(s -> {
+                try { Files.copy(s, destination.resolve(source.relativize(s)), REPLACE_EXISTING); }
+                catch (IOException e) {
+                    somethingWentWrong.set(true);
+                }
+            });
+        } catch (IOException e) {
+            somethingWentWrong.set(true);
+        }
+        if(somethingWentWrong.get())
+        {
+            Dialog dialog=ui.showDialog(stage,"Something went wrong", UIActor.ButtonOk|UIActor.ButtonAbort,null);
+            dialog.text("Copy was not successful check your access right\n and if the folder is in use");
+            dialog.show(stage);
+        }
+        else
+        {
+            Dialog dialog=ui.showDialog(stage,"Copied plane", UIActor.ButtonOk|UIActor.ButtonAbort,null);
+            dialog.text("New plane "+newPlaneName.getText()+" was created\nYou can now start the editor to change the plane\n" +
+                    "or edit it manually from the folder\n" +
+                    Config.instance().getPlanePath("<user>"+newPlaneName.getText()));
+            Config.instance().getSettingData().plane = "<user>"+newPlaneName.getText();
+            Config.instance().saveSettings();
+            dialog.show(stage);
+        }
+
+    }
+    private void createNewPlane() {
+        Dialog dialog=ui.showDialog(stage,"Create your own Plane", UIActor.ButtonOk|UIActor.ButtonAbort,()->copyNewPlane());
+        dialog.text("Select a plane to copy");
+        dialog.getContentTable().row();
+        dialog.getContentTable().add(selectSourcePlane);
+        dialog.getContentTable().row();
+        dialog.text("Set new plane name");
+        dialog.getContentTable().row();
+        dialog.getContentTable().add(newPlaneName);
+        newPlaneName.setText(selectSourcePlane.getSelected().toString()+"_copy");
+        dialog.show(stage);
+    }
 
     private SettingsScene() {
         super(Forge.isLandscapeMode() ? "ui/settings.json" : "ui/settings_portrait.json");
 
+        selectSourcePlane = new SelectBox<String>(Controls.getSkin());
+        newPlaneName = Controls.newTextField("");
         settingGroup = new Table();
         if (Preference == null) {
             Preference = new ForgePreferences();
         }
-
+        selectSourcePlane.setItems(Config.instance().getAllAdventures());
         SelectBox plane = Controls.newComboBox(Config.instance().getAllAdventures(), Config.instance().getSettingData().plane, o -> {
             Config.instance().getSettingData().plane = (String) o;
             Config.instance().saveSettings();
             return null;
         });
+        newPlane=Controls.newTextButton("Create own plane");
+        newPlane.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                createNewPlane();
+            }
+        });
         addLabel(Forge.getLocalizer().getMessage("lblWorld"));
         settingGroup.add(plane).align(Align.right).pad(2);
+        addLabel(Forge.getLocalizer().getMessage("lblCreate")+Forge.getLocalizer().getMessage("lblWorld"));
+        settingGroup.add(newPlane).align(Align.right).pad(2);
 
         if (!GuiBase.isAndroid()) {
             SelectBox videomode = Controls.newComboBox(new String[]{"720p", "768p", "900p", "1080p"}, Config.instance().getSettingData().videomode, o -> {

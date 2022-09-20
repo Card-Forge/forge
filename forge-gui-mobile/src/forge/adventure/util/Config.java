@@ -2,6 +2,7 @@ package forge.adventure.util;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
 import com.badlogic.gdx.utils.ObjectMap;
@@ -43,7 +44,7 @@ public class Config {
     }
     private Config() {
 
-        String path= GuiBase.isAndroid() ? ForgeConstants.ASSETS_DIR : Files.exists(Paths.get("./res"))?"./":"../forge-gui/";
+        String path= resPath();
          adventures = new File(GuiBase.isAndroid() ? ForgeConstants.ADVENTURE_DIR : path + "/res/adventure").list();
         try
         {
@@ -59,6 +60,7 @@ public class Config {
             if(adventures!=null&&adventures.length>=1)
                 settingsData.plane=adventures[0];
         }
+        plane=settingsData.plane;
 
         if(settingsData.width==0||settingsData.height==0)
         {
@@ -80,10 +82,9 @@ public class Config {
         if(settingsData.cardTooltipAdjLandscape == null || settingsData.cardTooltipAdjLandscape == 0f)
             settingsData.cardTooltipAdjLandscape=1f;
 
-        this.plane = settingsData.plane;
-        currentConfig = this;
+        prefix = getPlanePath(settingsData.plane);
 
-        prefix = path + "/res/adventure/" + plane + "/";
+        currentConfig = this;
         if (FModel.getPreferences() != null)
             Lang = FModel.getPreferences().getPref(ForgePreferences.FPref.UI_LANGUAGE);
         try
@@ -97,6 +98,22 @@ public class Config {
             configData=new ConfigData();
         }
 
+    }
+
+    private String resPath() {
+
+        return GuiBase.isAndroid() ? ForgeConstants.ASSETS_DIR : Files.exists(Paths.get("./res"))?"./":"../forge-gui/";
+    }
+
+    public String getPlanePath(String plane) {
+        if(plane.startsWith("<user>"))
+        {
+            return ForgeConstants.USER_ADVENTURE_DIR + "/userplanes/" + plane.substring("<user>".length()) + "/";
+        }
+        else
+        {
+            return resPath() + "/res/adventure/" + plane + "/";
+        }
     }
 
     public ConfigData getConfigData() {
@@ -130,7 +147,7 @@ public class Config {
 
 
     public String getPlane() {
-        return plane;
+        return plane.replace("<user>","user_");
     }
 
     public String[] colorIdNames() {
@@ -174,8 +191,17 @@ public class Config {
     {
         return settingsData;
     }
-    public String[] getAllAdventures()
+    public Array<String> getAllAdventures()
     {
+        String path=ForgeConstants.USER_ADVENTURE_DIR + "/userplanes/";
+        Array<String> adventures = new Array<String>();
+        if(new File(path).exists())
+            adventures.addAll(new File(path).list());
+        for(int i=0;i<adventures.size;i++)
+        {
+            adventures.set(i,"<user>"+adventures.get(i));
+        }
+        adventures.addAll(this.adventures);
         return adventures;
     }
 
