@@ -18,8 +18,11 @@ public class DifficultyData {
     public float sellFactor=0.2f;
     public float goldLoss=0.2f;
     public float lifeLoss=0.2f;
+
+    public float rewardMaxFactor=1f;
     public String[] startItems=new String[0];
     public ObjectMap<String,String> starterDecks = null;
     public ObjectMap<String,String> constructedStarterDecks= null;
+    public ObjectMap<String,String> pileDecks= null;
 
 }

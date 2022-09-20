@@ -1,13 +1,13 @@
 {                                    
-"name":"Red",
+"name":"Blue",
   "mainDeck": [
     {  
       "count":10, 
-      "cardName": "Mountain" 
+      "cardName": "Island" 
     },        
     {  
       "count":4, 
-      "cardName": "Forest" 
+      "cardName": "Plains" 
     },   
     {  
       "count":4, 
@@ -15,39 +15,33 @@
     },
     {  
       "count":6,
-      "colors": ["red"],
+      "colors": ["blue"],
       "rarity": ["Uncommon","Common"],   
-      "manaCosts": [1,2], 
+      "manaCosts": [1,2]
     },
     {  
       "count":4,
-      "colors": ["green","black"],
+      "colors": ["white","black"],
       "rarity": ["Uncommon","Common"],   
-      "manaCosts": [1,2], 
+      "manaCosts": [1,2]
     },
     {  
       "count":4,
-      "colors": ["red"],
+      "colors": ["blue"],
       "rarity": ["Uncommon","Common"],   
-      "manaCosts": [3,4], 
+      "manaCosts": [3,4]
     },
     {  
       "count":2,
-      "colors": ["green","black"],
+      "colors": ["white","black"],
       "rarity": ["Uncommon","Common"],   
-      "manaCosts": [3,4], 
+      "manaCosts": [3,4]
     },
-    {  
-      "count":5,
-      "colors": ["red"],
-      "rarity": ["Uncommon","Common"],   
-      "manaCosts": [5,6]
-    },
-    {  
-      "count":1,
-      "colors": ["red"],
+    { 
+      "count":6,
+      "colors": ["blue"],
       "rarity": ["rare"],   
-      "manaCosts": [7,8,9] 
+      "manaCosts": [5,6,7,8,9] 
     }
     ]
 }

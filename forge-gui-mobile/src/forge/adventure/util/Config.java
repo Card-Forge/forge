@@ -12,6 +12,8 @@ import forge.adventure.data.DifficultyData;
 import forge.adventure.data.SettingData;
 import forge.card.ColorSet;
 import forge.deck.Deck;
+import forge.deck.DeckProxy;
+import forge.deck.DeckgenUtil;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
@@ -158,23 +160,38 @@ public class Config {
 
         return configData.colorIds;
     }
-    public Deck starterDeck(ColorSet color, DifficultyData difficultyData, boolean constructed) {
-        if(constructed)
+    public Deck starterDeck(ColorSet color, DifficultyData difficultyData, AdventureModes mode,int index) {
+        switch (mode)
         {
-            for(ObjectMap.Entry<String, String> entry:difficultyData.constructedStarterDecks)
-            {
-                if(ColorSet.fromNames(entry.key.toCharArray()).getColor()==color.getColor())
+            case Constructed:
+                for(ObjectMap.Entry<String, String> entry:difficultyData.constructedStarterDecks)
                 {
-                    return CardUtil.getDeck(entry.value, false, false, "", false, false);
+                    if(ColorSet.fromNames(entry.key.toCharArray()).getColor()==color.getColor())
+                    {
+                        return CardUtil.getDeck(entry.value, false, false, "", false, false);
+                    }
                 }
-            }
-        }
-        for(ObjectMap.Entry<String, String> entry:difficultyData.starterDecks)
-        {
-            if(ColorSet.fromNames(entry.key.toCharArray()).getColor()==color.getColor())
-            {
-                return CardUtil.getDeck(entry.value, false, false, "", false, false);
-            }
+            case Standard:
+
+                for(ObjectMap.Entry<String, String> entry:difficultyData.starterDecks)
+                {
+                    if(ColorSet.fromNames(entry.key.toCharArray()).getColor()==color.getColor())
+                    {
+                        return CardUtil.getDeck(entry.value, false, false, "", false, false);
+                    }
+                }
+            case Chaos:
+                return DeckgenUtil.getRandomOrPreconOrThemeDeck("", false, false, false);
+            case Custom:
+                return DeckProxy.getAllCustomStarterDecks().get(index).getDeck();
+            case Pile:
+                for(ObjectMap.Entry<String, String> entry:difficultyData.pileDecks)
+                {
+                    if(ColorSet.fromNames(entry.key.toCharArray()).getColor()==color.getColor())
+                    {
+                        return CardUtil.getDeck(entry.value, false, false, "", false, false);
+                    }
+                }
         }
         return null;
     }
