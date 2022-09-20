@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.github.tommyettinger.textra.Font;
 import com.github.tommyettinger.textra.TextraButton;
@@ -99,6 +100,26 @@ public class Controls {
         return ret;
     }
 
+    static public SelectBox newComboBox(Array<String> text, String item, Function<Object, Void> func) {
+        SelectBox ret = new SelectBox<String>(getSkin());
+        ret.getStyle().listStyle.selection.setTopHeight(4);
+        ret.setItems(text);
+        ret.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                try {
+                    func.apply(((SelectBox) actor).getSelected());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        func.apply(item);
+        ret.getList().setAlignment(Align.center);
+        ret.setSelected(item);
+        ret.setAlignment(Align.right);
+        return ret;
+    }
     static public SelectBox newComboBox(Float[] text, float item, Function<Object, Void> func) {
         SelectBox ret = new SelectBox<Float>(getSkin());
         ret.getStyle().listStyle.selection.setTopHeight(4);

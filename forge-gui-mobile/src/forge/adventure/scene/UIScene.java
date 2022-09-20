@@ -28,7 +28,7 @@ import forge.adventure.util.UIActor;
  */
 public class UIScene extends Scene {
     protected UIActor ui;
-    Stage stage;
+    protected Stage stage;
 
     String uiFile;
     private final Dialog keyboardDialog;

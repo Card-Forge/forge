@@ -234,11 +234,6 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>com.github.jetopto1</groupId>
-            <artifactId>cling</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>
             <version>1.11.0</version>

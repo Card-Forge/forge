@@ -1,0 +1,48 @@
+{                                    
+"name":"Red",
+  "mainDeck": [
+    {  
+      "count":10, 
+      "cardName": "Mountain" 
+    },        
+    {  
+      "count":4, 
+      "cardName": "Forest" 
+    },   
+    {  
+      "count":4, 
+      "cardName": "Swamp" 
+    },
+    {  
+      "count":6,
+      "colors": ["red"],
+      "rarity": ["Common"],   
+      "manaCosts": [1,2]
+    },
+    {  
+      "count":4,
+      "colors": ["green","black"],
+      "rarity": ["Common"],   
+      "manaCosts": [1,2]
+    },
+    {  
+      "count":4,
+      "colors": ["red"],
+      "rarity": ["Common"],   
+      "manaCosts": [3,4]
+    },
+    {  
+      "count":2,
+      "colors": ["green","black"],
+      "rarity": ["Uncommon","Common"],   
+      "manaCosts": [3,4]
+    },
+    {  
+      "count":6,
+      "colors": ["red"],
+      "rarity": ["Uncommon","Common"],   
+      "manaCosts": [5,6]
+    } 
+    ]
+}
+

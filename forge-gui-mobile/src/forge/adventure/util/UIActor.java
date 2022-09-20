@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -285,5 +286,32 @@ public class UIActor extends Group {
                 func.run();
             }
         });
+    }
+    static final public int ButtonYes=0x1;
+    static final public int ButtonNo=0x2;
+    static final public int ButtonOk=0x4;
+    static final public int ButtonAbort=0x8;
+    public Dialog showDialog(Stage stage, String header, int buttons, Runnable onOkOrYes) {
+        Dialog dialog =new Dialog(header, Controls.getSkin())
+        {
+            protected void result(Object object)
+            {
+                if(onOkOrYes!=null&&object!=null&&object.equals(true))
+                    onOkOrYes.run();
+                this.hide();
+                removeActor(this);
+            }
+        };
+        if((buttons&ButtonYes)!=0)
+            dialog.button(Forge.getLocalizer().getMessage("lblYes"), true);
+        if((buttons&ButtonNo)!=0)
+            dialog.button(Forge.getLocalizer().getMessage("lblNo"), false);
+        if((buttons&ButtonOk)!=0)
+            dialog.button(Forge.getLocalizer().getMessage("lblOk"), true);
+        if((buttons&ButtonAbort)!=0)
+            dialog.button(Forge.getLocalizer().getMessage("lblAbort"), false);
+        addActor(dialog);
+        dialog.show(stage);
+        return dialog;
     }
 }
