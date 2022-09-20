@@ -327,3 +327,22 @@ ScryfallCode=40K
 319 M Abaddon the Despoiler @Johan Grenier
 320 M Inquisitor Greyfax @Lie Setiawan
 321 M The Swarmlord @Antonio José Manzanedo
+
+[tokens]
+b_2_2_a_necron_warrior
+b_2_2_astartes_warrior_menace
+blue_horror
+c_1_1_a_insect_flying
+c_4_4_a_robot_noblock
+c_a_clue_draw
+cherubael
+g_1_1_tyranid
+g_3_3_tyranid_warrior_trample
+g_5_5_tyranid
+plaguebearer_of_nurgle
+r_3_3_spawn
+u_1_1_tyranid_gargoyle_flying
+w_1_1_soldier
+w_1_1_soldier
+w_1_1_soldier
+w_2_2_astartes_warrior_vigilance
