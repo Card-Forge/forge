@@ -1,0 +1,10 @@
+Name:Drach'Nyen
+ManaCost:4 B R
+Types:Legendary Artifact Equipment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ Echo of the First Murder — When CARDNAME enters the battlefield, exile up to one target creature.
+SVar:TrigExile:DB$ ChangeZone | Imprint$ True$ | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddKeyword$ Menace | Description$ Daemon Sword — Equipped creature has menace and gets +X/+0, where X is the exiled card’s power.
+K:Equip:2
+SVar:X:Imprinted$CardPower
+DeckHas:Keyword$Menace
+Oracle:Echo of the First Murder — When Drach'Nyen enters the battlefield, exile up to one target creature.\nDaemon Sword — Equipped creature has menace and gets +X/+0, where X is the exiled card’s power.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)

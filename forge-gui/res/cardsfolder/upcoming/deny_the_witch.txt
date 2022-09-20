@@ -1,0 +1,7 @@
+Name:Deny the Witch
+ManaCost:1 W U B
+Types:Instant
+A:SP$ Counter | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Card,Emblem | SubAbility$ DBDrain | SpellDescription$ Counter target spell, activated ability, or triggered ability. Its controller loses life equal to the number of creatures you control.
+SVar:DBDrain:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ X | SubAbility$ DBGain
+SVar:X:Count$Valid Creature.YouCtrl
+Oracle:Domain — Each creature gets -X/-X until end of turn, where X is 1 plus the number of basic land types among lands you control.
