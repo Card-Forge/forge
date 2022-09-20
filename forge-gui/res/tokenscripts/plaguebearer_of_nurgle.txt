@@ -1,4 +1,4 @@
-Name:Plaguebearer of Nurgle Token
+Name:Plaguebearer of Nurgle
 ManaCost:no cost
 Types:Creature Demon
 Colors:black
