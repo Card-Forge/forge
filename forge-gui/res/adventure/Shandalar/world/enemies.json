@@ -2130,6 +2130,30 @@
 	"colors": "BR"
 },
 {
+	"name": "Kavu",
+	"sprite": "sprites/kavu.atlas",
+	"deck": "decks/kavu.dck",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 4,
+			"addMaxCount": 6
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "RGW"
+},
+{
 	"name": "Khan",
 	"sprite": "sprites/cavalier.atlas",
 	"deck": "decks/mardu.dck",
