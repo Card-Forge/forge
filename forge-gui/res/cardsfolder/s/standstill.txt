@@ -3,7 +3,6 @@ ManaCost:1 U
 Types:Enchantment
 T:Mode$ SpellCast | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When a player casts a spell, sacrifice CARDNAME. If you do, each of that player's opponents draws three cards.
 SVar:TrigSac:AB$ Draw | NumCards$ 3 | Cost$ Mandatory Sac<1/CARDNAME> | Defined$ TriggeredCardOpponent
-SVar:X:Remembered$Amount
 SVar:Y:Count$Valid Creature.YouCtrl
 SVar:Z:Count$Valid Creature.OppCtrl
 SVar:NeedsToPlayVar:Y GTZ
