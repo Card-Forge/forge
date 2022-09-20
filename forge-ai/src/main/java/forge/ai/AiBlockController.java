@@ -133,9 +133,10 @@ public class AiBlockController {
         final CardCollection sortedAttackers = new CardCollection();
         CardCollection firstAttacker = new CardCollection();
         final FCollectionView<GameEntity> defenders = combat.getDefenders();
+        final List<Card> attackingCmd = ComputerUtilCombat.getLifeThreateningCommanders(ai, combat);
 
         // If I don't have any planeswalkers then sorting doesn't really matter
-        if (defenders.size() == 1) {
+        if (defenders.size() == 1 || !attackingCmd.isEmpty()) {
             final CardCollection attackers = combat.getAttackersOf(defenders.get(0));
             // Begin with the attackers that pose the biggest threat
             ComputerUtilCard.sortByEvaluateCreature(attackers);
@@ -146,7 +147,14 @@ public class AiBlockController {
                 public int compare(final Card o1, final Card o2) {
                     if (o1.hasSVar("MustBeBlocked") && !o2.hasSVar("MustBeBlocked")) {
                         return -1;
-                    } else if (!o1.hasSVar("MustBeBlocked") && o2.hasSVar("MustBeBlocked")) {
+                    }
+                    if (!o1.hasSVar("MustBeBlocked") && o2.hasSVar("MustBeBlocked")) {
+                        return 1;
+                    }
+                    if (attackingCmd.contains(o1) && !attackingCmd.contains(o2)) {
+                        return -1;
+                    }
+                    if (!attackingCmd.contains(o1) && attackingCmd.contains(o2)) {
                         return 1;
                     }
                     return 0;
@@ -166,14 +174,13 @@ public class AiBlockController {
                 sortedAttackers.addAll(attackers);
             } else if (defender instanceof Player && defender.equals(ai)) {
                 firstAttacker = combat.getAttackersOf(defender);
+                CardLists.sortByPowerDesc(firstAttacker);
             }
         }
 
         if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
             // add creatures attacking the Player to the front of the list
-            for (final Card c : firstAttacker) {
-                sortedAttackers.add(0, c);
-            }
+            sortedAttackers.addAll(0, firstAttacker);
         } else {
             // add creatures attacking the Player to the back of the list
             sortedAttackers.addAll(firstAttacker);
