@@ -56,6 +56,11 @@ public class Controls {
 
         }
         @Override
+        public String getText() {
+            return this.getTextraLabel().storedText;
+        }
+
+        @Override
         public void setText(@Null String text) {
             getTextraLabel().storedText = text;
             getTextraLabel().layout.setTargetWidth(getTextraLabel().getMaxWidth());

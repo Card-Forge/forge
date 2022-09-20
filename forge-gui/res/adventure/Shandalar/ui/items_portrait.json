@@ -6,7 +6,7 @@
     {
       "type": "Image",
       "name": "rewards_background",   
-      "image": "ui/rewards_portrait.png",
+      "image": "ui/reward_portrait.png",
       "width": 270,
       "height": 480
     },
