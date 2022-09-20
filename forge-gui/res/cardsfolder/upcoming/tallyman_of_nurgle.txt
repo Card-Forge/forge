@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Astartes Warrior
 PT:2/3
 K:Lifelink
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ DBDrawSeven | TriggerDescription$ The Seven-fold Chant — At the beginning of your end step, if a creature died this turn, you draw a card and you lose 1 life. If seven or more creatures died this turn, instead you draw seven cards and you lose 7 life.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ Y | SVarCompare$ GE1 | Execute$ DBDrawSeven | TriggerDescription$ The Seven-fold Chant — At the beginning of your end step, if a creature died this turn, you draw a card and you lose 1 life. If seven or more creatures died this turn, instead you draw seven cards and you lose 7 life.
 SVar:DBDrawSeven:DB$ Draw | NumCards$ X | SubAbility$ DBLoseLifeSeven
 SVar:DBLoseLifeSeven:DB$ LoseLife | LifeAmount$ X
 SVar:X:Count$Compare Y GE7.7.1
