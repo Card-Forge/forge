@@ -129,6 +129,7 @@ public class DeckSelectScene extends UIScene {
         for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++) {
             if (buttons.containsKey(i)) {
                 buttons.get(i).setText(Current.player().getDeck(i).getName());
+                buttons.get(i).getTextraLabel().layout();
                 addActorObject(buttons.get(i));
             }
         }
@@ -149,6 +150,7 @@ public class DeckSelectScene extends UIScene {
         String text = textInput.getText();
         Current.player().renameDeck(text);
         buttons.get(currentSlot).setText(Current.player().getDeck(currentSlot).getName());
+        buttons.get(currentSlot).getTextraLabel().layout();
     }
 
     private void edit() {
