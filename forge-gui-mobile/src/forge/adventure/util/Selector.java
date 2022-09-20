@@ -3,11 +3,11 @@ package forge.adventure.util;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
+import com.github.tommyettinger.textra.TextraButton;
 
 /**
  * UI element to click through options, can be configured in an UiActor
@@ -15,19 +15,19 @@ import com.badlogic.gdx.utils.Pools;
 public class Selector extends Group {
     private final ImageButton leftArrow;
     private final ImageButton rightArrow;
-    private final TextButton label;
+    private final TextraButton label;
     private int currentIndex = 0;
     private Array<String> textList;
 
 
     public Selector() {
-        ImageButton.ImageButtonStyle leftArrowStyle = Controls.GetSkin().get("leftarrow", ImageButton.ImageButtonStyle.class);
+        ImageButton.ImageButtonStyle leftArrowStyle = Controls.getSkin().get("leftarrow", ImageButton.ImageButtonStyle.class);
         leftArrow = new ImageButton(leftArrowStyle);
 
-        ImageButton.ImageButtonStyle rightArrowStyle = Controls.GetSkin().get("rightarrow", ImageButton.ImageButtonStyle.class);
+        ImageButton.ImageButtonStyle rightArrowStyle = Controls.getSkin().get("rightarrow", ImageButton.ImageButtonStyle.class);
         rightArrow = new ImageButton(rightArrowStyle);
 
-        label = new TextButton("", Controls.GetSkin());
+        label = Controls.newTextButton("");
         addActor(leftArrow);
         addActor(rightArrow);
         addActor(label);
@@ -80,10 +80,12 @@ public class Selector extends Group {
         int oldIndex = currentIndex;
         this.currentIndex = currentIndex;
         label.setText(textList.get(currentIndex));
+        label.layout();
         ChangeListener.ChangeEvent changeEvent = Pools.obtain(ChangeListener.ChangeEvent.class);
         if (fire(changeEvent)) {
             this.currentIndex = oldIndex;
             label.setText(textList.get(currentIndex));
+            label.layout();
         }
         Pools.free(changeEvent);
     }
@@ -91,7 +93,7 @@ public class Selector extends Group {
     public String getText() {
         return textList.get(currentIndex);
     }
-    public TextButton getLabel() {
+    public TextraButton getLabel() {
         return label;
     }
     public ImageButton getLeftArrow() {

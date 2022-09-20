@@ -18,6 +18,7 @@ public class PointOfInterestEditor extends JComponent {
     JList<PointOfInterestData> list = new JList<>(model);
     JToolBar toolBar = new JToolBar("toolbar");
     PointOfInterestEdit edit=new PointOfInterestEdit();
+
     static HashMap<String,SwingAtlas> atlas=new HashMap<>();
 
 

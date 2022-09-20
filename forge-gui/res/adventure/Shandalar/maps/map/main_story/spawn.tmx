@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="69">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1DEKwCAMBVAHt17YS3nHDl2kaBpj8j+UDB/EwWcSsV2ltExmM70+YZhjIs7V7Hm5Um3e7leNUiyzmXlo1xqWK9mRJtNd2eniXMabHvcRnrbnJ/ex/smrteRYTY85nJqaPrwtb3d2PqLeHTei1wwX/a6QffxTbui3Dvk=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="30" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztlesKgzAMRjPdD+sr6Zwv6gVfdMuHCxRBU2hTkPVAab3Q0zaJEhUK/8enIXq4/N6JneuJ97imVGvEPGNLNHB7cyO3Nxnj2eL293BPrmPBXmelDT9fxeOe+1cb7+14jprneypuOFP4fOSsczqBdtY4Z4t83wJifJbvMSDGWnwtvOLuvRyrvL42iq+P5BhqtEtUMyFIjqX4NtzFa1Wvmjf3XsFmWDNXXP0TLclZO4XCHfgCksc6cg==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="30" height="30">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztlmsKwjAQhPef6cGqkut5CKv2GupB6qP/vYAJdmEpa5y0EQT3gyF9zc6mSaFExju2juheETXDGLVz38mQdX04X450E300iic3sxd1uWav5GriXtB8niNa/5NWFZZbF8pjrWfk7sM7uITx4F7i4ziyWlc2N2ZeAW+n5KPeiM/IPCr3ZN/o2o77Rn1n8Vw3rEH0o+9YUif6PQH1Uv4UHtgTj4V+nb/9KfNFclPenD0lies0xTfXaxjG77Mp/E9mGP/KE8gXUVk=
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="30" height="30" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUDAbgLsvA4CGLyR4FgxcQG0+44nY0ngc34ATGDRc0fqKlGBhipLCrG43fUTAKRsEoGAVDGQAA8c0ISg==
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="38" template="../../obj/entry_up.tx" x="1" y="481" width="478" height="16">
+   <properties>
+    <property name="spawn" type="bool" value="true"/>
+    <property name="teleport" value=""/>
+   </properties>
+  </object>
+  <object id="61" template="../../obj/entry_left.tx" x="0" y="465" width="16" height="465"/>
+  <object id="65" template="../../obj/entry_left.tx" x="464" y="463" width="16" height="462"/>
+  <object id="66" template="../../obj/entry_down.tx" x="16" y="17" width="447" height="16"/>
+  <object id="67" name="IntroChar" class="dialog" gid="7627" x="238" y="208" width="16" height="16">
+   <properties>
+    <property name="dialog">[{
+  &quot;text&quot;:&quot;Hello Planeswalker {var=player_name}&quot;,
+  &quot;options&quot;:[
+    {      
+      &quot;name&quot;:&quot;Why am I here&quot;,     
+      &quot;condition&quot;:[ { &quot;checkMapFlag&quot;: &quot;intro&quot; ,&quot;not&quot;:true} ],    
+      &quot;text&quot;:&quot;You traveld to the planes of Shandalar\nEvery Planeswalker is trapped here&quot;,
+      &quot;options&quot;:[
+        {
+          &quot;name&quot;:&quot;continue&quot;, 
+            &quot;text&quot;:&quot;You have to defeat every guardianTake this rune, it will let you travel back to me.&quot;,
+            &quot;options&quot;:[
+            {
+               &quot;name&quot;:&quot;thank you&quot;,
+                &quot;action&quot;:[{&quot;advanceMapFlag&quot;:&quot;intro&quot;},{&quot;addItem&quot;:&quot;Colorless rune&quot;}]
+             }
+      ]
+        }
+      ]
+    },
+    { &quot;name&quot;:&quot;Bye&quot; }
+  ]
+}]</property>
+    <property name="sprite" value="sprites/knight.atlas"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

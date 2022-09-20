@@ -42,6 +42,8 @@ public class EnemyData {
         life           = enemyData.life;
         equipment      = enemyData.equipment;
         colors         = enemyData.colors;
+        teamNumber     = enemyData.teamNumber;
+        nextEnemy     =enemyData.nextEnemy==null?null: new EnemyData(enemyData.nextEnemy);
         if(enemyData.rewards == null) {
             rewards=null;
         } else {

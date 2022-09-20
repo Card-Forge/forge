@@ -9,18 +9,14 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.github.tommyettinger.textra.TextraButton;
 import forge.Forge;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
@@ -35,9 +31,9 @@ public class UIScene extends Scene {
     Stage stage;
 
     String uiFile;
-    private Dialog keyboardDialog;
-    private Label kbLabel;
-    private TextButton keyA, keyB, keyC, keyD, keyE, keyF, keyG, keyH, keyI, keyJ, keyK, keyL, keyM, keyN, keyO, keyP,
+    private final Dialog keyboardDialog;
+    private final Label kbLabel;
+    private final TextraButton keyA, keyB, keyC, keyD, keyE, keyF, keyG, keyH, keyI, keyJ, keyK, keyL, keyM, keyN, keyO, keyP,
             keyQ, keyR, keyS, keyT, keyU, keyV, keyW, keyX, keyY, keyZ, key1, key2, key3, key4, key5, key6, key7, key8,
             key9, key0, keyDot, keyComma, keyShift, keyBackspace, keySpace, keyOK;
     public Actor lastInputField;
@@ -53,52 +49,6 @@ public class UIScene extends Scene {
     public UIScene(String uiFilePath) {
 
         uiFile = uiFilePath;
-    }
-
-    @Override
-    public void dispose() {
-        if (stage != null)
-            stage.dispose();
-    }
-
-    @Override
-    public void act(float delta) {
-        stage.act(delta);
-    }
-
-    @Override
-    public void render() {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.draw();
-    }
-
-    public UIActor getUI() {
-        return ui;
-    }
-
-    public boolean keyPressed(int keycode) {
-        return true;
-    }
-
-    public boolean pointerMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    public void performTouch(Actor actor) {
-        if (actor == null)
-            return;
-        actor.fire(eventTouchDown);
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                actor.fire(eventTouchUp);
-            }
-        }, 0.10f);
-    }
-
-    @Override
-    public void resLoaded() {
         stage = new Stage(new ScalingViewport(Scaling.stretch, getIntendedWidth(), getIntendedHeight())) {
             @Override
             public boolean keyUp(int keycode) {
@@ -232,8 +182,50 @@ public class UIScene extends Scene {
         keyboardDialog.getButtonTable().add(keyOK).width(100).height(20).colspan(4);
         keyboardDialog.setKeepWithinStage(true);
         keyboardDialog.setResizable(false);
-        //keyboardDialog.getColor().a = 0f;
     }
+
+    @Override
+    public void dispose() {
+        if (stage != null)
+            stage.dispose();
+    }
+
+    @Override
+    public void act(float delta) {
+        stage.act(delta);
+    }
+
+    @Override
+    public void render() {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.draw();
+    }
+
+    public UIActor getUI() {
+        return ui;
+    }
+
+    public boolean keyPressed(int keycode) {
+        return true;
+    }
+
+    public boolean pointerMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    public void performTouch(Actor actor) {
+        if (actor == null)
+            return;
+        actor.fire(eventTouchDown);
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                actor.fire(eventTouchUp);
+            }
+        }, 0.10f);
+    }
+
     private String transformKey(String c) {
         return lowercaseKey ? c.toLowerCase() : c.toUpperCase();
     }
@@ -250,33 +242,33 @@ public class UIScene extends Scene {
     }
     private void shiftKey() {
         lowercaseKey = !lowercaseKey;
-        keyShift.getLabel().setColor(lowercaseKey ? Color.WHITE : Color.CYAN);
-        keyA.getLabel().setText(lowercaseKey ? "a" : "A");
-        keyB.getLabel().setText(lowercaseKey ? "b" : "B");
-        keyC.getLabel().setText(lowercaseKey ? "c" : "C");
-        keyD.getLabel().setText(lowercaseKey ? "d" : "D");
-        keyE.getLabel().setText(lowercaseKey ? "e" : "E");
-        keyF.getLabel().setText(lowercaseKey ? "f" : "F");
-        keyG.getLabel().setText(lowercaseKey ? "g" : "G");
-        keyH.getLabel().setText(lowercaseKey ? "h" : "H");
-        keyI.getLabel().setText(lowercaseKey ? "i" : "I");
-        keyJ.getLabel().setText(lowercaseKey ? "j" : "J");
-        keyK.getLabel().setText(lowercaseKey ? "k" : "K");
-        keyL.getLabel().setText(lowercaseKey ? "l" : "L");
-        keyM.getLabel().setText(lowercaseKey ? "m" : "M");
-        keyN.getLabel().setText(lowercaseKey ? "n" : "N");
-        keyO.getLabel().setText(lowercaseKey ? "o" : "O");
-        keyP.getLabel().setText(lowercaseKey ? "p" : "P");
-        keyQ.getLabel().setText(lowercaseKey ? "q" : "Q");
-        keyR.getLabel().setText(lowercaseKey ? "r" : "R");
-        keyS.getLabel().setText(lowercaseKey ? "s" : "S");
-        keyT.getLabel().setText(lowercaseKey ? "t" : "T");
-        keyU.getLabel().setText(lowercaseKey ? "u" : "U");
-        keyV.getLabel().setText(lowercaseKey ? "v" : "V");
-        keyW.getLabel().setText(lowercaseKey ? "w" : "W");
-        keyX.getLabel().setText(lowercaseKey ? "x" : "X");
-        keyY.getLabel().setText(lowercaseKey ? "y" : "Y");
-        keyZ.getLabel().setText(lowercaseKey ? "z" : "Z");
+        keyShift.setColor(lowercaseKey ? Color.WHITE : Color.CYAN);
+        keyA.setText(lowercaseKey ? "a" : "A");
+        keyB.setText(lowercaseKey ? "b" : "B");
+        keyC.setText(lowercaseKey ? "c" : "C");
+        keyD.setText(lowercaseKey ? "d" : "D");
+        keyE.setText(lowercaseKey ? "e" : "E");
+        keyF.setText(lowercaseKey ? "f" : "F");
+        keyG.setText(lowercaseKey ? "g" : "G");
+        keyH.setText(lowercaseKey ? "h" : "H");
+        keyI.setText(lowercaseKey ? "i" : "I");
+        keyJ.setText(lowercaseKey ? "j" : "J");
+        keyK.setText(lowercaseKey ? "k" : "K");
+        keyL.setText(lowercaseKey ? "l" : "L");
+        keyM.setText(lowercaseKey ? "m" : "M");
+        keyN.setText(lowercaseKey ? "n" : "N");
+        keyO.setText(lowercaseKey ? "o" : "O");
+        keyP.setText(lowercaseKey ? "p" : "P");
+        keyQ.setText(lowercaseKey ? "q" : "Q");
+        keyR.setText(lowercaseKey ? "r" : "R");
+        keyS.setText(lowercaseKey ? "s" : "S");
+        keyT.setText(lowercaseKey ? "t" : "T");
+        keyU.setText(lowercaseKey ? "u" : "U");
+        keyV.setText(lowercaseKey ? "v" : "V");
+        keyW.setText(lowercaseKey ? "w" : "W");
+        keyX.setText(lowercaseKey ? "x" : "X");
+        keyY.setText(lowercaseKey ? "y" : "Y");
+        keyZ.setText(lowercaseKey ? "z" : "Z");
     }
     public void setSelectedKey(int keyCode) {
         switch(keyCode) {
@@ -636,7 +628,7 @@ public class UIScene extends Scene {
                 if (actor instanceof TextButton)
                     ((TextButton) actor).fire(eventExit);
                 else if (actor instanceof Selector)
-                    ((Selector) actor).getLabel().fire(eventExit);
+                    ((Selector) actor).fire(eventExit);
                 else if (actor instanceof TextField) {
                     if (stage.getKeyboardFocus() == actor)
                         stage.setKeyboardFocus(null);
@@ -672,8 +664,8 @@ public class UIScene extends Scene {
         if (kbVisible) {
             if (selectedKey != null) {
                 selectedKey.fire(eventExit);
-                if (selectedKey instanceof TextButton)
-                    if (!(((TextButton) selectedKey) == keyOK || ((TextButton) selectedKey) == keySpace))
+                if (selectedKey instanceof TextraButton)
+                    if (!(selectedKey == keyOK || selectedKey == keySpace))
                         lastSelectedKey = selectedKey;
             }
             selectedKey = actor;
@@ -689,10 +681,10 @@ public class UIScene extends Scene {
                 return;
             Actor a = actorObjectMap.get(key);
             if (a != null) {
-                if (a instanceof TextButton)
-                    ((TextButton) a).fire(eventEnter);
+                if (a instanceof TextraButton)
+                    a.fire(eventEnter);
                 else if (a instanceof Selector)
-                    ((Selector) a).getLabel().fire(eventEnter);
+                    ((Selector) a).fire(eventEnter);
                 else if (a instanceof TextField) {
                     stage.setKeyboardFocus(a);
                 } else if (a instanceof ImageButton) {

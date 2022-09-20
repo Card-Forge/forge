@@ -37,6 +37,156 @@
             </plugin>
 
             <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.2</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <basedir>${basedir}/${configSourceDirectory}</basedir>
+                    <filesToInclude>forge-adventure.sh, forge-adventure-mac.sh, forge-adventure.command, forge-adventure.cmd</filesToInclude>
+                    <outputBasedir>${project.build.directory}</outputBasedir>
+                    <outputDir>.</outputDir>
+                    <regex>false</regex>
+                    <replacements>
+                        <replacement>
+                            <token>$project.build.finalName$</token>
+                            <value>${project.build.finalName}-jar-with-dependencies.jar</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>1.7.25</version>
+                <executions>
+                    <execution>
+                        <id>l4j-adv</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>gui</headerType>
+                            <outfile>${project.build.directory}/forge-adventure-java8.exe</outfile>
+                            <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
+                            <dontWrapJar>true</dontWrapJar>
+                            <errTitle>forge</errTitle>
+                            <icon>src/main/config/forge-adventure.ico</icon>
+                            <classPath>
+                                <mainClass>forge.app.Main</mainClass>
+                                <addDependencies>false</addDependencies>
+                                <preCp>anything</preCp>
+                            </classPath>
+                            <jre>
+                                <minVersion>1.8.0</minVersion>
+                                <maxHeapSize>4096</maxHeapSize>
+                                <opts>
+                                    <opt>-Dfile.encoding=UTF-8</opt>
+                                </opts>
+                            </jre>
+                            <versionInfo>
+                                <fileVersion>
+                                    1.0.0.0
+                                </fileVersion>
+                                <txtFileVersion>
+                                    1.0.0.0
+                                </txtFileVersion>
+                                <fileDescription>Forge</fileDescription>
+                                <copyright>Forge</copyright>
+                                <productVersion>
+                                    1.0.0.0
+                                </productVersion>
+                                <txtProductVersion>
+                                    1.0.0.0
+                                </txtProductVersion>
+                                <productName>forge-adventure</productName>
+                                <internalName>forge-adventure</internalName>
+                                <originalFilename>forge-adventure-java8.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
+                    </execution>
+                    <!--extra-->
+                    <execution>
+                        <id>l4j-adv2</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>gui</headerType>
+                            <outfile>${project.build.directory}/forge-adventure.exe</outfile>
+                            <jar>${project.build.finalName}-jar-with-dependencies.jar</jar>
+                            <dontWrapJar>true</dontWrapJar>
+                            <errTitle>forge</errTitle>
+                            <downloadUrl>https://www.oracle.com/java/technologies/downloads/</downloadUrl>
+                            <icon>src/main/config/forge-adventure.ico</icon>
+                            <classPath>
+                                <mainClass>forge.app.Main</mainClass>
+                                <addDependencies>false</addDependencies>
+                                <preCp>anything</preCp>
+                            </classPath>
+                            <jre>
+                                <minVersion>11.0.1</minVersion>
+                                <jdkPreference>jdkOnly</jdkPreference>
+                                <maxHeapSize>4096</maxHeapSize>
+                                <opts>
+                                    <opt>-Dfile.encoding=UTF-8</opt>
+                                    <opt>--add-opens java.base/java.lang=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.base/java.math=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.base/jdk.internal.misc=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.base/java.nio=ALL-UNNAMED</opt>
+                                    <opt>--add-opens=java.base/sun.nio.ch=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.base/java.util=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.base/java.lang.reflect=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.base/java.text=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.desktop/java.awt=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.desktop/java.awt.font=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.desktop/java.awt.image=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.desktop/java.awt.color=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.desktop/sun.awt.image=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.desktop/javax.swing=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.desktop/javax.swing.border=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.desktop/javax.swing.event=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.desktop/sun.swing=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.desktop/java.beans=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.base/java.util.concurrent=ALL-UNNAMED</opt>
+                                    <opt>--add-opens java.base/java.net=ALL-UNNAMED</opt>
+                                    <opt>-Dio.netty.tryReflectionSetAccessible=true</opt>
+                                </opts>
+                            </jre>
+                            <versionInfo>
+                                <fileVersion>
+                                    1.0.0.0
+                                </fileVersion>
+                                <txtFileVersion>
+                                    1.0.0.0
+                                </txtFileVersion>
+                                <fileDescription>Forge</fileDescription>
+                                <copyright>Forge</copyright>
+                                <productVersion>
+                                    1.0.0.0
+                                </productVersion>
+                                <txtProductVersion>
+                                    1.0.0.0
+                                </txtProductVersion>
+                                <productName>forge-adventure</productName>
+                                <internalName>forge-adventure</internalName>
+                                <originalFilename>forge-adventure.exe</originalFilename>
+                            </versionInfo>
+                        </configuration>
+                    </execution>
+                    <!--extra-->
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
                     <attach>false</attach>

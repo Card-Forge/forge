@@ -5,7 +5,7 @@
   "elements": [
     {
       "type": "Image",
-      "name": "lastScreen",
+      "image": "ui/spellsmith_portrait.png",
       "width": 270,
       "height": 480
     },
@@ -62,7 +62,7 @@
     {
       "type": "TextButton",
       "name": "done",
-      "text": "Done",
+      "text": "tr(lblBack)", 
       "x": 175,
       "y": 150,
       "width": 70,
@@ -71,7 +71,7 @@
     {
       "type": "TextButton",
       "name": "BBlack",
-      "text": "Black",
+      "text": "tr(lblBlack)", 
       "x": 58,
       "y": 290,
       "width": 45,
@@ -80,7 +80,7 @@
     {
       "type": "TextButton",
       "name": "BBlue",
-      "text": "Blue",
+      "text": "tr(lblBlue)", 
       "x": 113,
       "y": 290,
       "width": 45,
@@ -89,7 +89,7 @@
     {
       "type": "TextButton",
       "name": "BGreen",
-      "text": "Green",
+      "text": "tr(lblGreen)", 
       "x": 168,
       "y": 290,
       "width": 45,
@@ -98,7 +98,7 @@
     {
       "type": "TextButton",
       "name": "BRed",
-      "text": "Red",
+      "text": "tr(lblRed)", 
       "x": 58,
       "y": 320,
       "width": 45,
@@ -107,7 +107,7 @@
     {
       "type": "TextButton",
       "name": "BWhite",
-      "text": "White",
+      "text": "tr(lblWhite)", 
       "x": 113,
       "y": 320,
       "width": 45,
@@ -116,7 +116,7 @@
     {
       "type": "TextButton",
       "name": "BColorless",
-      "text": "Colorless",
+      "text": "tr(lblColorless)", 
       "x": 168,
       "y": 320,
       "width": 45,
@@ -124,8 +124,7 @@
     },
     {
       "type": "Label",
-      "name": "gold",
-      "text": "$",
+      "name": "gold", 
       "x": 150,
       "y": 0,
       "width": 120,
@@ -134,7 +133,7 @@
     {
       "type": "TextButton",
       "name": "pull",
-      "text": "Pull",
+      "text": "tr(lblDraw)", 
       "x": 16,
       "y": 150,
       "width": 97,
@@ -143,7 +142,7 @@
     {
       "type": "Label",
       "name": "colorLabel",
-      "text": "Colors",
+      "text": "tr(lblColors)", 
       "x": 10,
       "y": 260,
       "width": 100,
@@ -152,7 +151,7 @@
     {
       "type": "Label",
       "name": "vnXYKZJw_P5wMnHa1tH7-3",
-      "text": "Plane",
+      "text": "tr(lblPlane)", 
       "x": 10,
       "y": 190,
       "width": 100,
@@ -170,7 +169,7 @@
     {
       "type": "Label",
       "name": "vnXYKZJw_P5wMnHa1tH7-5",
-      "text": "Mana Cost",
+      "text": "tr(lblManaCost)",  
       "x": 10,
       "y": 360,
       "width": 100,
@@ -215,7 +214,7 @@
     {
       "type": "Label",
       "name": "vnXYKZJw_P5wMnHa1tH7-10",
-      "text": "Rarity",
+      "text": "tr(lblRarity)",  
       "x": 10,
       "y": 427,
       "width": 100,
@@ -224,7 +223,7 @@
     {
       "type": "TextButton",
       "name": "BCommon",
-      "text": "Common",
+      "text": "tr(lblCommon)",  
       "x": 20,
       "y": 450,
       "width": 50,
@@ -233,7 +232,7 @@
     {
       "type": "TextButton",
       "name": "BUncommon",
-      "text": "Uncommon",
+      "text": "tr(lblUncommon)",  
       "x": 80,
       "y": 450,
       "width": 50,
@@ -242,7 +241,7 @@
     {
       "type": "TextButton",
       "name": "BRare",
-      "text": "Rare",
+      "text": "tr(lblRare)",  
       "x": 140,
       "y": 450,
       "width": 50,
@@ -251,7 +250,7 @@
     {
       "type": "TextButton",
       "name": "BMythic",
-      "text": "Mythic",
+      "text": "Mythic", 
       "x": 200,
       "y": 450,
       "width": 50,
@@ -260,7 +259,7 @@
     {
       "type": "TextButton",
       "name": "BResetEdition",
-      "text": "Reset",
+      "text": "tr(lblReset)",  
       "x": 195,
       "y": 220,
       "width": 70,

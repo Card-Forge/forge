@@ -5,7 +5,7 @@
   "playerBaseSpeed": 32,
   "minDeckSize": 40,         
   "colorIds":["W","U","B","R","G"],  
-  "colorIdNames":["{lblWhite}","{lblBlue}","{lblBlack}","{lblRed}","{lblGreen}"], 
+  "colorIdNames":["tr(lblWhite) [+w]","tr(lblBlue) [+u]","tr(lblBlack) [+b]","tr(lblRed) [+r]","tr(lblGreen) [+g]"],
   "restrictedCards": [
     "Black Lotus",
     "Mox Emerald",
@@ -36,11 +36,28 @@
     "Study Hall",
     "Witch's Clinic"
   ],
-  "restrictedEditions": [],
+  "restrictedEditions": [
+    "HTR",
+    "HTR17",
+    "HTR18",
+    "HTR19",
+    "HTR20",
+    "PCEL",
+    "DS0",
+    "HHO",
+    "CMB1",
+    "UNF",
+    "UGL",
+    "UNH",
+    "UND",
+    "PUST",
+    "UST"
+  ],
   "difficulties": [
     {
       "name": "Easy",
       "startingLife": 16,
+      "startingMana": 32,
       "staringMoney": 500,
       "enemyLifeFactor": 0.8,
       "spawnRank": 0,          
@@ -68,6 +85,7 @@
     },{
       "name": "Normal",
       "startingLife": 12,
+      "startingMana": 25,
       "staringMoney": 250,
       "startingDifficulty": true,
       "enemyLifeFactor": 1.0,
@@ -95,6 +113,7 @@
     },{
       "name": "Hard",
       "startingLife": 8,
+      "startingMana": 10,
       "staringMoney": 125,
       "enemyLifeFactor": 1.5,
       "spawnRank": 2,         

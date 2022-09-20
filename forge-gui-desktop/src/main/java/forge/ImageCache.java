@@ -172,12 +172,48 @@ public class ImageCache {
 
         IPaperCard ipc = null;
         boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
+        String specColor = "";
+        if (imageKey.endsWith(ImageKeys.SPECFACE_W)) {
+            specColor = "white";
+        } else if (imageKey.endsWith(ImageKeys.SPECFACE_U)) {
+            specColor = "blue";
+        } else if (imageKey.endsWith(ImageKeys.SPECFACE_B)) {
+            specColor = "black";
+        } else if (imageKey.endsWith(ImageKeys.SPECFACE_R)) {
+            specColor = "red";
+        } else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) {
+            specColor = "green";
+        }
         if (altState)
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
+        if (!specColor.equals(""))
+            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.SPECFACE_W.length());
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
             ipc = ImageUtil.getPaperCardFromImageKey(imageKey);
             if (ipc != null) {
-                imageKey = altState ? ipc.getCardAltImageKey() : ipc.getCardImageKey();
+                if (altState) {
+                    imageKey = ipc.getCardAltImageKey();
+                } else if (!specColor.equals("")) {
+                    switch (specColor) {
+                        case "white":
+                            imageKey = ipc.getCardWSpecImageKey();
+                            break;
+                        case "blue":
+                            imageKey = ipc.getCardUSpecImageKey();
+                            break;
+                        case "black":
+                            imageKey = ipc.getCardBSpecImageKey();
+                            break;
+                        case "red":
+                            imageKey = ipc.getCardRSpecImageKey();
+                            break;
+                        case "green":
+                            imageKey = ipc.getCardGSpecImageKey();
+                            break;
+                    }
+                } else {
+                    imageKey = ipc.getCardImageKey();
+                }
                 if (StringUtils.isBlank(imageKey))
                     return Pair.of(_defaultImage, true);
             }

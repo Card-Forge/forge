@@ -102,11 +102,20 @@
       "height": 30,
       "x": 96,
       "y": 363
+    } ,
+    {
+      "type": "TextButton",
+      "name": "use",
+      "text": "Use",
+      "width": 80,
+      "height": 30,
+      "x": 10,
+      "y": 363
     },
     {
       "type": "TextButton",
       "name": "return",
-      "text": "Back",
+      "text": "tr(lblBack)",
       "width": 80,
       "height": 30,
       "x": 184,

@@ -1,4 +1,136 @@
 [{                                      
+"name":"WhiteEquipment",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CapitalShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Life Amulet"  },
+    { "type": "item","count":1, "itemName": "Gold Armor"  },
+    { "type": "item","count":1, "itemName": "Mirror Shield"  },
+    { "type": "item","count":1, "itemName": "Entrancing Lyre"  },
+    { "type": "item","count":1, "itemName": "Nine-Ringed Bo"  },
+    { "type": "item","count":1, "itemName": "Kite Shield"  }
+    
+    ]
+
+},{                                      
+"name":"WhiteItems",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"ItemShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "White rune"  },
+    { "type": "item","count":1, "itemName": "White Staff"  },
+    { "type": "mana","count":2    },
+    { "type": "life","count":1    }
+    
+    ]
+
+},{                                      
+"name":"RedEquipment",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CapitalShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Axt"  },
+    { "type": "item","count":1, "itemName": "Aladdin's Ring"  },
+    { "type": "item","count":1, "itemName": "Flame Sword"  },
+    { "type": "item","count":1, "itemName": "Heavy Arbalest"  },
+    { "type": "item","count":1, "itemName": "Jeweled Amulet"  },
+    { "type": "item","count":1, "itemName": "Ring of Immortals"  }
+    
+    ]
+
+},{                                      
+"name":"RedItems",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",    
+"sprite":"ItemShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Red rune"  },
+    { "type": "item","count":1, "itemName": "Red Staff"  },
+    { "type": "mana","count":2    },
+    { "type": "life","count":1    }
+    
+    ]
+
+},{                                      
+"name":"BlueEquipment",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CapitalShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Traveler's Amulet"  },
+    { "type": "item","count":1, "itemName": "Magic Shard"  },
+    { "type": "item","count":1, "itemName": "Spell Book"  },
+    { "type": "item","count":1, "itemName": "Mithril Armor"  },
+    { "type": "item","count":1, "itemName": "Mithril Boots"  },
+    { "type": "item","count":1, "itemName": "Mithril Shield"  }
+    
+    ]
+
+},{                                      
+"name":"BlueItems",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",    
+"sprite":"ItemShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Blue rune"  },
+    { "type": "item","count":1, "itemName": "Blue Staff"  },
+    { "type": "mana","count":2    },
+    { "type": "life","count":1    }
+    
+    ]
+
+},
+{                                      
+"name":"BlackEquipment",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CapitalShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Death Ring"  },
+    { "type": "item","count":1, "itemName": "Dark Amulet"  },
+    { "type": "item","count":1, "itemName": "Mad Staff"  },
+    { "type": "item","count":1, "itemName": "Dark Armor"  },
+    { "type": "item","count":1, "itemName": "Dark Boots"  },
+    { "type": "item","count":1, "itemName": "Dark Shield"  }
+    
+    ]
+
+},{                                      
+"name":"BlackItems",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",    
+"sprite":"ItemShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Black rune"  },
+    { "type": "item","count":1, "itemName": "Black Staff"  },
+    { "type": "mana","count":2    },
+    { "type": "life","count":1    }
+    
+    ]
+
+},
+{                                      
+"name":"GreenEquipment",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CapitalShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Jungle Shield"  },
+    { "type": "item","count":1, "itemName": "Ring of Three Wishes"  },
+    { "type": "item","count":1, "itemName": "Heart-Piercer"  },
+    { "type": "item","count":1, "itemName": "Wood Bow"  },
+    { "type": "item","count":1, "itemName": "Steel Sword"  },
+    { "type": "item","count":1, "itemName": "Unerring Sling"  }
+    
+    ]
+
+},{                                      
+"name":"GreenItems",                  
+"spriteAtlas":"maps/tileset/buildings.atlas",    
+"sprite":"ItemShop",   
+  "rewards": [ 
+    { "type": "item","count":1, "itemName": "Green rune"  },
+    { "type": "item","count":1, "itemName": "Green Staff"  },
+    { "type": "mana","count":2    },
+    { "type": "life","count":1   }
+    
+    ]
+
+},{
 "name":"Equipment",                  
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"EquipmentShop",   

@@ -65,7 +65,7 @@ public class EffectData implements Serializable {
         if(name != null && !name.isEmpty()) description += name + "\n";
         if(colorView) description += "Manasight.\n";
         if(lifeModifier != 0)
-            description += "Life: " + ((lifeModifier > 0) ? "+" : "") + lifeModifier + "\n";
+            description += "[+Life] " + ((lifeModifier > 0) ? "+" : "") + lifeModifier + "\n";
         if(startBattleWithCard != null && startBattleWithCard.length != 0)
             description+="Cards on battlefield: \n" + cardNames() + "\n";
         if(changeStartCards != 0)

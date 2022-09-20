@@ -9,12 +9,12 @@ import java.util.HashMap;
 
 public class BiomeStructure {
 
-    private BiomeStructureData data;
-    long seed;
-    private int biomeWidth;
-    private int biomeHeight;
-    private int dataMap[][];
-    private boolean collisionMap[][];
+    private final BiomeStructureData data;
+    final long seed;
+    private final int biomeWidth;
+    private final int biomeHeight;
+    private int[][] dataMap;
+    private boolean[][] collisionMap;
     boolean init=false;
     private TextureAtlas structureAtlas;
     public ColorMap image;
@@ -61,7 +61,7 @@ public class BiomeStructure {
 
         init=true;
         int targetWidth=(int) (data.width* biomeWidth);
-        int targetHeight=(int) (data.width* biomeWidth);
+        int targetHeight=(int) (data.height* biomeHeight);
         dataMap=new int[targetWidth][  targetHeight];
         collisionMap=new boolean[targetWidth][ targetHeight];
         ColorMap finalImage=new ColorMap(targetWidth, targetHeight);

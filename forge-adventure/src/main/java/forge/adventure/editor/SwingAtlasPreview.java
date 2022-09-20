@@ -6,6 +6,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,9 +18,13 @@ public class SwingAtlasPreview extends Box {
     private String sprite="";
     private String spriteName="";
     Timer timer;
-    public SwingAtlasPreview() {
+    public SwingAtlasPreview()
+    {
+        this(32,200);
+    }
+    public SwingAtlasPreview(int imageSize,int timeDelay) {
         super(BoxLayout.Y_AXIS);
-         timer = new Timer(200, new AbstractAction() {
+         timer = new Timer(timeDelay, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 counter++;
@@ -28,7 +33,9 @@ public class SwingAtlasPreview extends Box {
                 }
             }
         });
+        this.imageSize=imageSize;
     }
+    static Map<String,Map<Integer,SwingAtlas>> cache=new HashMap<>();
     public SwingAtlasPreview(int size) {
         this();
         imageSize=size;
@@ -47,7 +54,16 @@ public class SwingAtlasPreview extends Box {
         labels.clear();
         this.sprite=sprite;
         this.spriteName=name;
-        SwingAtlas atlas=new SwingAtlas(Config.instance().getFile(sprite),imageSize);
+        SwingAtlas atlas;
+        if(!cache.containsKey(sprite))
+        {
+            cache.put(sprite,new HashMap<>() );
+        }
+        if(!cache.get(sprite).containsKey(imageSize))
+        {
+            cache.get(sprite).put(imageSize,new SwingAtlas(Config.instance().getFile(sprite),imageSize) );
+        }
+        atlas=cache.get(sprite).get(imageSize);
         int maxCount=0;
         for(Map.Entry<String, ArrayList<ImageIcon>> element:atlas.getImages().entrySet())
         {

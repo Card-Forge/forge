@@ -14,7 +14,7 @@ import java.util.List;
  * Class that hold all sprites as a list for each chunk
  */
 public class SpritesDataMap implements SaveFileContent {
-    public class BiomeSpriteDataMap extends HashMap<Integer, BiomeSpriteData> implements SaveFileContent
+    public static class BiomeSpriteDataMap extends HashMap<Integer, BiomeSpriteData> implements SaveFileContent
     {
         @Override
         public void load(SaveFileData data) {

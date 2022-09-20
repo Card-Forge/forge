@@ -27,7 +27,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             for (final Player p : getTargetPlayers(sa)) {
                 sb.append(p);
             }
-            sb.append(" chooses a type.");
+            sb.append(" chooses a ").append(sa.getParam("Type").toLowerCase()).append(" type.");
         } else {
             sb.append("Please improve the stack description.");
         }

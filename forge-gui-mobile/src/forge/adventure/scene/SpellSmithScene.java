@@ -3,12 +3,12 @@ package forge.adventure.scene;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.StaticData;
 import forge.adventure.data.RewardData;
@@ -19,6 +19,7 @@ import forge.adventure.util.RewardActor;
 import forge.card.CardEdition;
 import forge.card.ColorSet;
 import forge.item.PaperCard;
+import forge.model.FModel;
 import forge.util.MyRandom;
 
 import java.util.*;
@@ -27,26 +28,117 @@ import java.util.stream.StreamSupport;
 
 
 public class SpellSmithScene extends UIScene {
+
+    private static SpellSmithScene object;
+
+    public static SpellSmithScene instance() {
+        if(object==null)
+            object=new SpellSmithScene();
+        return object;
+    }
+
     private List<PaperCard> cardPool = new ArrayList<>();
-    private Label goldLabel;
-    private TextButton pullButton;
-    private ScrollPane rewardDummy;
+    private final TextraLabel goldLabel;
+    private final TextraButton pullButton;
+    private final ScrollPane rewardDummy;
     private RewardActor rewardActor;
     SelectBox<CardEdition> editionList;
     //Button containers.
-    final private HashMap<String, TextButton> rarityButtons = new HashMap<>();
-    final private HashMap<String, TextButton> costButtons   = new HashMap<>();
-    final private HashMap<String, TextButton> colorButtons  = new HashMap<>();
+    final private HashMap<String, TextraButton> rarityButtons = new HashMap<>();
+    final private HashMap<String, TextraButton> costButtons   = new HashMap<>();
+    final private HashMap<String, TextraButton> colorButtons  = new HashMap<>();
     //Filter variables.
     private String edition = "";
     private String rarity  = "";
     private int cost_low   = -1;
     private int cost_high  = 9999;
     //Other
-    private float basePrice  = 125f;
+    private final float basePrice  = 125f;
     private int currentPrice = 0;
 
-    public SpellSmithScene() { super(Forge.isLandscapeMode() ? "ui/spellsmith.json" : "ui/spellsmith_portrait.json"); }
+    private SpellSmithScene() { super(Forge.isLandscapeMode() ? "ui/spellsmith.json" : "ui/spellsmith_portrait.json");
+
+        List<CardEdition> editions = StaticData.instance().getSortedEditions();
+        editions = editions.stream().filter(input -> {
+            if(input == null)
+                return false;
+            if(input.getType()==        CardEdition.Type.REPRINT||input.getType()== CardEdition.Type.PROMO||input.getType()== CardEdition.Type.COLLECTOR_EDITION)
+                return false;
+            List<PaperCard> it = StreamSupport.stream(RewardData.getAllCards().spliterator(), false)
+                    .filter(input2 -> input2.getEdition().equals(input.getCode())).collect(Collectors.toList());
+            if(it.size()==0)
+                return false;
+            return(!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getCode()));
+        }).collect(Collectors.toList());
+        editionList = ui.findActor("BSelectPlane");
+        rewardDummy = ui.findActor("RewardDummy");
+        rewardDummy.setVisible(false);
+        editionList.clearItems();
+        editionList.showScrollPane();
+        editionList.setItems(editions.toArray(new CardEdition[editions.size()]));
+        editionList.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                CardEdition E = editionList.getSelected();
+                edition = E.getCode();
+                editionList.setColor(Color.RED);
+                filterResults();
+            }
+        });
+
+        goldLabel  = ui.findActor("gold");
+        pullButton = ui.findActor("pull");
+        pullButton.setDisabled(true);
+        goldLabel.setText("Gold: "+ Current.player().getGold());
+        for(String i : new String[]{"BBlack", "BBlue", "BGreen", "BRed", "BWhite", "BColorless"} ){
+            TextraButton button = ui.findActor(i);
+            if(button != null){
+                colorButtons.put(i, button);
+                button.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y){
+                        selectColor(i);
+                        filterResults();
+                    }
+                });
+            }
+        }
+        for(String i : new String[]{"BCommon", "BUncommon", "BRare", "BMythic"} ){
+            TextraButton button = ui.findActor(i);
+            if(button != null) {
+                rarityButtons.put(i, button);
+                button.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        if(selectRarity(i)) button.setColor(Color.RED);
+                        filterResults();
+                    }
+                });
+            }
+        }
+        for(String i : new String[]{"B02", "B35", "B68", "B9X"} ){
+            TextraButton button = ui.findActor(i);
+            if(button != null) {
+                costButtons.put(i, button);
+                button.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        if(selectCost(i)) button.setColor(Color.RED);
+                        filterResults();
+                    }
+                });
+            }
+        }
+
+        ui.onButtonPress("done", () -> SpellSmithScene.this.done());
+        ui.onButtonPress("pull", () -> SpellSmithScene.this.pullCard());
+        ui.onButtonPress("BResetEdition", () -> {
+            editionList.setColor(Color.WHITE);
+            edition = "";
+            filterResults();
+        });
+    }
+
 
     public boolean done() {
         if(rewardActor != null) rewardActor.remove();
@@ -56,7 +148,7 @@ public class SpellSmithScene extends UIScene {
     }
 
     private boolean selectRarity(String what){
-        for(Map.Entry<String, TextButton> B : rarityButtons.entrySet())
+        for(Map.Entry<String, TextraButton> B : rarityButtons.entrySet())
             B.getValue().setColor(Color.WHITE);
         switch(what){
             case "BCommon":
@@ -78,11 +170,11 @@ public class SpellSmithScene extends UIScene {
     }
 
     private void selectColor(String what){
-        TextButton B = colorButtons.get(what);
+        TextraButton B = colorButtons.get(what);
         switch(what){
             case "BColorless":
                 if(B.getColor().equals(Color.RED)) B.setColor(Color.WHITE); else {
-                    for (Map.Entry<String, TextButton> BT : colorButtons.entrySet())
+                    for (Map.Entry<String, TextraButton> BT : colorButtons.entrySet())
                         BT.getValue().setColor(Color.WHITE);
                     B.setColor(Color.RED);
                 }
@@ -99,7 +191,7 @@ public class SpellSmithScene extends UIScene {
     }
 
     private boolean selectCost(String what){
-        for(Map.Entry<String, TextButton> B : costButtons.entrySet())
+        for(Map.Entry<String, TextraButton> B : costButtons.entrySet())
             B.getValue().setColor(Color.WHITE);
         switch(what){
             case "B02":
@@ -126,113 +218,23 @@ public class SpellSmithScene extends UIScene {
         cost_low = -1; cost_high = 9999;
         rarity = "";
         currentPrice = (int)basePrice;
-        goldLabel.setText("Gold: "+ Current.player().getGold());
+        goldLabel.setText(Current.player().getGold()+"[+Gold]");
 
-        for(Map.Entry<String, TextButton> B : colorButtons.entrySet())  B.getValue().setColor(Color.WHITE);
-        for(Map.Entry<String, TextButton> B : costButtons.entrySet())   B.getValue().setColor(Color.WHITE);
-        for(Map.Entry<String, TextButton> B : rarityButtons.entrySet()) B.getValue().setColor(Color.WHITE);
+        for(Map.Entry<String, TextraButton> B : colorButtons.entrySet())  B.getValue().setColor(Color.WHITE);
+        for(Map.Entry<String, TextraButton> B : costButtons.entrySet())   B.getValue().setColor(Color.WHITE);
+        for(Map.Entry<String, TextraButton> B : rarityButtons.entrySet()) B.getValue().setColor(Color.WHITE);
         editionList.setColor(Color.WHITE);
         filterResults();
         super.enter();
     }
 
-    @Override
-    public void resLoaded() {
-        super.resLoaded();
-        List<CardEdition> editions = StaticData.instance().getSortedEditions();
-        editions = editions.stream().filter(input -> {
-           if(input == null) return false;
-           return(!Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getCode()));
-        }).collect(Collectors.toList());
-        editionList = ui.findActor("BSelectPlane");
-        rewardDummy = ui.findActor("RewardDummy");
-        rewardDummy.setVisible(false);
-        editionList.clearItems();
-        editionList.showScrollPane();
-        editionList.setItems(editions.toArray(new CardEdition[editions.size()]));
-        editionList.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor){
-                CardEdition E = editionList.getSelected();
-                edition = E.getCode();
-                editionList.setColor(Color.RED);
-                filterResults();
-            }
-        });
-
-        goldLabel  = ui.findActor("gold");
-        pullButton = ui.findActor("pull");
-        pullButton.setDisabled(true);
-        goldLabel.setText("Gold: "+ Current.player().getGold());
-        for(String i : new String[]{"BBlack", "BBlue", "BGreen", "BRed", "BWhite", "BColorless"} ){
-            TextButton button = ui.findActor(i);
-            if(button != null){
-                colorButtons.put(i, button);
-                button.addListener(new ClickListener() {
-                   @Override
-                   public void clicked(InputEvent event, float x, float y){
-                       selectColor(i);
-                       filterResults();
-                   }
-                });
-            }
-        }
-        for(String i : new String[]{"BCommon", "BUncommon", "BRare", "BMythic"} ){
-            TextButton button = ui.findActor(i);
-            if(button != null) {
-                rarityButtons.put(i, button);
-                button.addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        if(selectRarity(i)) button.setColor(Color.RED);
-                        filterResults();
-                    }
-                });
-            }
-        }
-        for(String i : new String[]{"B02", "B35", "B68", "B9X"} ){
-            TextButton button = ui.findActor(i);
-            if(button != null) {
-                costButtons.put(i, button);
-                button.addListener(new ClickListener() {
-                    @Override
-                    public void clicked(InputEvent event, float x, float y) {
-                        if(selectCost(i)) button.setColor(Color.RED);
-                        filterResults();
-                    }
-                });
-            }
-        }
-
-        ui.onButtonPress("done", new Runnable() {
-            @Override
-            public void run() {
-                SpellSmithScene.this.done();
-            }
-        });
-        ui.onButtonPress("pull", new Runnable() {
-            @Override
-            public void run() { SpellSmithScene.this.pullCard(); }
-        });
-        ui.onButtonPress("BResetEdition", new Runnable() {
-            @Override
-            public void run() {
-                editionList.setColor(Color.WHITE);
-                edition = "";
-                filterResults();
-            }
-        });
-
-    }
-
 
     public void filterResults() {
-        RewardData R = new RewardData();
-        Iterable<PaperCard> P = R.getAllCards();
-        goldLabel.setText("Gold: "+ Current.player().getGold());
+        Iterable<PaperCard> P = RewardData.getAllCards();
+        goldLabel.setText( Current.player().getGold()+"[+Gold]");
         float totalCost = basePrice * Current.player().goldModifier();
         final List<String> colorFilter = new ArrayList<>();
-        for(Map.Entry<String, TextButton> B : colorButtons.entrySet())
+        for(Map.Entry<String, TextraButton> B : colorButtons.entrySet())
             switch (B.getKey()){
                 case "BColorless":
                     if(B.getValue().getColor().equals(Color.RED)) colorFilter.add("Colorless");
@@ -256,7 +258,9 @@ public class SpellSmithScene extends UIScene {
         P = StreamSupport.stream(P.spliterator(), false).filter(input -> {
             //L|Basic Land, C|Common, U|Uncommon, R|Rare, M|Mythic Rare, S|Special, N|None
             if (input == null) return false;
-            if(!edition.isEmpty()) if (!input.getEdition().equals(edition)) return false;
+            final CardEdition cardEdition = FModel.getMagicDb().getEditions().get(edition);
+
+            if(cardEdition!=null&&cardEdition.getCardInSet(input.getName()).size()==0) return false;
             if(colorFilter.size() > 0) if(input.getRules().getColor() != ColorSet.fromNames(colorFilter)) return false;
             if(!rarity.isEmpty()) if (!input.getRarity().toString().equals(rarity)) return false;
             if(cost_low > -1) {

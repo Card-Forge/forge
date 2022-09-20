@@ -97,7 +97,7 @@ import java.util.Map;
         private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(Align.center).pressedColor(Header.BTN_PRESSED_COLOR).build());
 
 
-        boolean isShop=false;
+        boolean isShop;
         public AdventureDeckEditor(boolean createAsShop) {
             super(e -> leave(),getPages());
 

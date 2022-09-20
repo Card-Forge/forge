@@ -121,7 +121,7 @@ public class BiomeTexture implements Serializable {
                     ArrayList<Pixmap> spics = new ArrayList<>();
                     if(!region.getTexture().getTextureData().isPrepared())
                         region.getTexture().getTextureData().prepare();
-                        Pixmap completePicture = region.getTexture().getTextureData().consumePixmap();
+                    Pixmap completePicture = region.getTexture().getTextureData().consumePixmap();
                     for (int y = 0; y < 4; y++) {
                         for (int x = 0; x < 3; x++) {
                             int px = region.getRegionX() + (x * tileSize);
@@ -285,6 +285,7 @@ public class BiomeTexture implements Serializable {
                 }
             }
         }
+        //noinspection ConstantConditions
         if (false)//debug neighbors
         {
             subPixmap.setColor(Color.GREEN);
@@ -340,7 +341,7 @@ public class BiomeTexture implements Serializable {
         BottomEdge(10),
         RightBottomEdge(11);
 
-        public int value;
+        public final int value;
 
         BigPictures(int i) {
             value = i;
@@ -398,7 +399,7 @@ public class BiomeTexture implements Serializable {
         RightBottomEdge01(46),
         RightBottomEdge11(47);
 
-        public int value;
+        public final int value;
 
         SmallPictures(int i) {
             value = i;

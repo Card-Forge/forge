@@ -560,11 +560,17 @@
                                             <fileset dir="${project.build.directory}" includes="forge-java8.exe" />
                                             <fileset dir="${project.build.directory}" includes="forge.exe" />
                                             <fileset dir="${project.build.directory}" includes="${project.build.finalName}-jar-with-dependencies.jar" />
-                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure.exe" />
-                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-java8.exe" />
-                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure.sh" />
-                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure.command" />
-                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure.cmd" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.exe" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure-java8.exe" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.sh" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.command" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-adventure.cmd" />
+                                            <fileset dir="${project.build.directory}/../../forge-gui-mobile-dev/target" includes="forge-gui-mobile-dev-${project.version}-jar-with-dependencies.jar" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor.exe" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor-java8.exe" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor.sh" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor.command" />
+                                            <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-editor.cmd" />
                                             <fileset dir="${project.build.directory}/../../forge-adventure/target" includes="forge-adventure-${project.version}-jar-with-dependencies.jar" />
                                         </copy>
                                         <mkdir dir="${project.build.directory}/${project.build.finalName}/res/cardsfolder" />
@@ -575,10 +581,15 @@
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.sh" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.command" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.cmd" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure-editor.sh" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure-editor.command" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure-editor.cmd" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-java8.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure.exe" perm="a+rx" />
                                         <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure-java8.exe" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure-editor.exe" perm="a+rx" />
+                                        <chmod file="${project.build.directory}/${project.build.finalName}/forge-adventure-editor-java8.exe" perm="a+rx" />
                                         <tar destfile="${project.build.directory}/${project.build.finalName}.tar.bz2" compression="bzip2">
                                             <tarfileset filemode="755" dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="forge.sh" />
@@ -586,6 +597,16 @@
                                                 <include name="forge.cmd" />
                                                 <include name="forge-java8.exe" />
                                                 <include name="forge.exe" />
+                                                <include name="forge-adventure.sh" />
+                                                <include name="forge-adventure.command" />
+                                                <include name="forge-adventure.cmd" />
+                                                <include name="forge-adventure-java8.exe" />
+                                                <include name="forge-adventure.exe" />
+                                                <include name="forge-adventure-editor.sh" />
+                                                <include name="forge-adventure-editor.command" />
+                                                <include name="forge-adventure-editor.cmd" />
+                                                <include name="forge-adventure-editor-java8.exe" />
+                                                <include name="forge-adventure-editor.exe" />
                                             </tarfileset>
                                             <tarfileset dir="${project.build.directory}/${project.build.finalName}">
                                                 <include name="**" />
@@ -594,6 +615,16 @@
                                                 <exclude name="forge.cmd" />
                                                 <exclude name="forge-java8.exe" />
                                                 <exclude name="forge.exe" />
+                                                <exclude name="forge-adventure.sh" />
+                                                <exclude name="forge-adventure.command" />
+                                                <exclude name="forge-adventure.cmd" />
+                                                <exclude name="forge-adventure-java8.exe" />
+                                                <exclude name="forge-adventure.exe" />
+                                                <exclude name="forge-adventure-editor.sh" />
+                                                <exclude name="forge-adventure-editor.command" />
+                                                <exclude name="forge-adventure-editor.cmd" />
+                                                <exclude name="forge-adventure-editor-java8.exe" />
+                                                <exclude name="forge-adventure-editor.exe" />
                                             </tarfileset>
                                         </tar>
                                     </target>

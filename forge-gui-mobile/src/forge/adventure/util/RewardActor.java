@@ -17,13 +17,13 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Tooltip;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
+import com.github.tommyettinger.textra.TextraButton;
 import forge.Forge;
 import forge.Graphics;
 import forge.ImageKeys;
@@ -115,17 +115,17 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (toolTipImage.getDrawable() instanceof TextureRegionDrawable) {
                 ((TextureRegionDrawable) toolTipImage.getDrawable()).getRegion().getTexture().dispose();
             }
-        }
-        toolTipImage.remove();
-        toolTipImage = new Image(processDrawable(image));
-        if (GuiBase.isAndroid()||Forge.hasGamepad()) {
-            if (holdTooltip.tooltip_image.getDrawable() instanceof TextureRegionDrawable) {
-                ((TextureRegionDrawable) holdTooltip.tooltip_image.getDrawable()).getRegion().getTexture().dispose();
+            toolTipImage.remove();
+            toolTipImage = new Image(processDrawable(image));
+            if (GuiBase.isAndroid()||Forge.hasGamepad()) {
+                if (holdTooltip.tooltip_image.getDrawable() instanceof TextureRegionDrawable) {
+                    ((TextureRegionDrawable) holdTooltip.tooltip_image.getDrawable()).getRegion().getTexture().dispose();
+                }
+                holdTooltip.tooltip_actor.clear();
+                holdTooltip.tooltip_actor.add(toolTipImage);
+            } else {
+                tooltip.setActor(toolTipImage);
             }
-            holdTooltip.tooltip_actor.clear();
-            holdTooltip.tooltip_actor.add(toolTipImage);
-        } else {
-            tooltip.setActor(toolTipImage);
         }
         if (T != null)
             T.dispose();
@@ -183,7 +183,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         }
                     }
                 } else {
-                    String imagePath = ImageUtil.getImageRelativePath(reward.getCard(), false, true, false);
+                    String imagePath = ImageUtil.getImageRelativePath(reward.getCard(), "", true, false);
                     File lookup = ImageKeys.hasSetLookup(imagePath) ? ImageKeys.setLookUpFile(imagePath, imagePath+"border") : null;
                     int count = 0;
                     if (lookup != null) {
@@ -231,32 +231,19 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 needsToBeDisposed = true;
                 break;
             }
+            case Life:
+            case Mana:
             case Gold: {
                 TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
                 Sprite backSprite = atlas.createSprite("CardBack");
                 Pixmap drawingMap = new Pixmap((int) backSprite.getWidth(), (int) backSprite.getHeight(), Pixmap.Format.RGBA8888);
 
                 DrawOnPixmap.draw(drawingMap, backSprite);
-                Sprite gold = atlas.createSprite("Gold");
+                Sprite gold = atlas.createSprite(reward.type.toString());
                 DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - gold.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1f), gold);
                 DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f)-1, backSprite.getWidth(), true,Color.WHITE);
 
                 image=new Texture(drawingMap);
-                drawingMap.dispose();
-                needsToBeDisposed = true;
-                break;
-            }
-            case Life: {
-                TextureAtlas atlas = Config.instance().getAtlas(ITEMS_ATLAS);
-                Sprite backSprite = atlas.createSprite("CardBack");
-                Pixmap drawingMap = new Pixmap((int) backSprite.getWidth(), (int) backSprite.getHeight(), Pixmap.Format.RGBA8888);
-
-                DrawOnPixmap.draw(drawingMap, backSprite);
-                Sprite gold = atlas.createSprite("Life");
-                DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - gold.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1f), gold);
-                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f)-1, backSprite.getWidth(), true,Color.WHITE);
-
-                image = new Texture(drawingMap);
                 drawingMap.dispose();
                 needsToBeDisposed = true;
                 break;
@@ -693,7 +680,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         Image tooltip_image;
         Table tooltip_actor;
         float height;
-        TextButton switchButton;
+        TextraButton switchButton;
         //Vector2 tmp = new Vector2();
 
         public HoldTooltip(Image tooltip_image) {
@@ -717,7 +704,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
         @Override
         public boolean longPress(Actor actor, float x, float y) {
-            TextButton done = actor.getStage().getRoot().findActor("done");
+            TextraButton done = actor.getStage().getRoot().findActor("done");
             if (done != null && Reward.Type.Card.equals(reward.type)) {
                 switchButton.setBounds(done.getX(), done.getY(), done.getWidth(), done.getHeight());
                 if (reward.getCard().hasBackFace())
@@ -734,8 +721,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 tooltip_actor.setX(Scene.getIntendedWidth() / 2 - tooltip_actor.getWidth() / 2);
             }
             tooltip_actor.setY(Scene.getIntendedHeight() / 2 - tooltip_actor.getHeight() / 2);
-            //tooltip_actor.setX(480/2 - tooltip_actor.getWidth()/2); //480 hud width
-            //tooltip_actor.setY(270/2-tooltip_actor.getHeight()/2); //270 hud height
+
             actor.getStage().addActor(tooltip_actor);
             return super.longPress(actor, x, y);
         }

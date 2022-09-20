@@ -9,6 +9,7 @@ import forge.adventure.stage.MapStage;
 import forge.adventure.stage.PointOfInterestMapRenderer;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
+import forge.adventure.util.Paths;
 import forge.adventure.util.TemplateTmxMapLoader;
 import forge.adventure.world.WorldSave;
 import forge.sound.SoundEffectType;
@@ -18,16 +19,27 @@ import forge.sound.SoundSystem;
  * Scene that will render tiled maps.
  * Used for towns dungeons etc
  */
-public class TileMapScene extends HudScene {
+public class TileMapScene extends HudScene   {
     TiledMap map;
     PointOfInterestMapRenderer tiledMapRenderer;
     private String nextMap;
     private boolean autoheal = false;
-    private float cameraWidth = 0f, cameraHeight = 0f;
 
-    public TileMapScene() {
+    private TileMapScene() {
         super(MapStage.getInstance());
         tiledMapRenderer = new PointOfInterestMapRenderer((MapStage) stage);
+
+
+        //set initial camera width and height
+        MapStage.getInstance().setDialogStage(hud);
+    }
+
+    private static TileMapScene object;
+
+    public static TileMapScene instance() {
+        if(object==null)
+            object=new TileMapScene();
+        return object;
     }
 
     public MapStage currentMap() {
@@ -50,7 +62,8 @@ public class TileMapScene extends HudScene {
         }
         stage.act(Gdx.graphics.getDeltaTime());
         hud.act(Gdx.graphics.getDeltaTime());
-        if (autoheal) { //todo add simple bg animation or effect
+        if (autoheal) { //todo add better effect
+            stage.getPlayerSprite().playEffect(Paths.EFFECT_HEAL,2);
             SoundSystem.instance.play(SoundEffectType.Enchantment, false);
             autoheal = false;
         }
@@ -67,23 +80,12 @@ public class TileMapScene extends HudScene {
         tiledMapRenderer.setView(stage.getCamera().combined, stage.getCamera().position.x - Scene.getIntendedWidth() / 2.0f, stage.getCamera().position.y - Scene.getIntendedHeight() / 2.0f, Scene.getIntendedWidth(), Scene.getIntendedHeight());
 
         if (!Forge.isLandscapeMode()) {
-            stage.getCamera().position.x = stage.GetPlayer().pos().x;
+            stage.getCamera().position.x = stage.getPlayerSprite().pos().x;
         }
         tiledMapRenderer.render();
         hud.draw();
     }
 
-    @Override
-    public void resLoaded() {
-        MapStage.getInstance().resLoaded();
-        //set initial camera width and height
-        if (cameraWidth == 0f)
-            cameraWidth = stage.getCamera().viewportWidth;
-        if (cameraHeight == 0f)
-            cameraHeight = stage.getCamera().viewportHeight;
-        MapStage.getInstance().setDialogStage(hud);
-        super.resLoaded();
-    }
 
     @Override
     public void enter() {
@@ -100,7 +102,7 @@ public class TileMapScene extends HudScene {
         oldMap = point.getData().map;
         map = new TemplateTmxMapLoader().load(Config.instance().getFilePath(point.getData().map));
         ((MapStage) stage).setPointOfInterest(WorldSave.getCurrentSave().getPointOfInterestChanges(point.getID() + oldMap));
-        stage.GetPlayer().setPosition(0, 0);
+        stage.getPlayerSprite().setPosition(0, 0);
         WorldSave.getCurrentSave().getWorld().setSeed(point.getSeedOffset());
         tiledMapRenderer.loadMap(map, "");
     }
@@ -115,7 +117,7 @@ public class TileMapScene extends HudScene {
     private void load(String targetMap) {
         map = new TemplateTmxMapLoader().load(Config.instance().getFilePath(targetMap));
         ((MapStage) stage).setPointOfInterest(WorldSave.getCurrentSave().getPointOfInterestChanges(rootPoint.getID() + targetMap));
-        stage.GetPlayer().setPosition(0, 0);
+        stage.getPlayerSprite().setPosition(0, 0);
         WorldSave.getCurrentSave().getWorld().setSeed(rootPoint.getSeedOffset());
         tiledMapRenderer.loadMap(map, oldMap);
         oldMap = targetMap;
@@ -130,5 +132,6 @@ public class TileMapScene extends HudScene {
     public void loadNext(String targetMap) {
         nextMap = targetMap;
     }
+
 }
 

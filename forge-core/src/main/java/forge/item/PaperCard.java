@@ -320,7 +320,7 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     @Override
     public String getCardImageKey() {
         if (this.cardImageKey == null)
-            this.cardImageKey = ImageUtil.getImageKey(this, false, true);
+            this.cardImageKey = ImageUtil.getImageKey(this, "", true);
         return cardImageKey;
     }
 
@@ -329,11 +329,71 @@ public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFro
     public String getCardAltImageKey() {
         if (this.cardAltImageKey == null){
             if (this.hasBackFace())
-                this.cardAltImageKey = ImageUtil.getImageKey(this, true, true);
+                this.cardAltImageKey = ImageUtil.getImageKey(this, "back", true);
             else  // altImageKey will be the same as cardImageKey
-                this.cardAltImageKey = ImageUtil.getImageKey(this, false, true);
+                this.cardAltImageKey = ImageUtil.getImageKey(this, "", true);
         }
         return cardAltImageKey;
+    }
+
+    private String cardWSpecImageKey = null;
+    @Override
+    public String getCardWSpecImageKey() {
+        if (this.cardWSpecImageKey == null) {
+            if (this.rules.getSplitType() == CardSplitType.Specialize)
+                this.cardWSpecImageKey = ImageUtil.getImageKey(this, "white", true);
+            else  // just use cardImageKey
+                this.cardWSpecImageKey = ImageUtil.getImageKey(this, "", true);
+        }
+        return cardWSpecImageKey;
+    }
+
+    private String cardUSpecImageKey = null;
+    @Override
+    public String getCardUSpecImageKey() {
+        if (this.cardUSpecImageKey == null) {
+            if (this.rules.getSplitType() == CardSplitType.Specialize)
+                this.cardUSpecImageKey = ImageUtil.getImageKey(this, "blue", true);
+            else  // just use cardImageKey
+                this.cardUSpecImageKey = ImageUtil.getImageKey(this, "", true);
+        }
+        return cardUSpecImageKey;
+    }
+
+    private String cardBSpecImageKey = null;
+    @Override
+    public String getCardBSpecImageKey() {
+        if (this.cardBSpecImageKey == null) {
+            if (this.rules.getSplitType() == CardSplitType.Specialize)
+                this.cardBSpecImageKey = ImageUtil.getImageKey(this, "black", true);
+            else  // just use cardImageKey
+                this.cardBSpecImageKey = ImageUtil.getImageKey(this, "", true);
+        }
+        return cardBSpecImageKey;
+    }
+
+    private String cardRSpecImageKey = null;
+    @Override
+    public String getCardRSpecImageKey() {
+        if (this.cardRSpecImageKey == null) {
+            if (this.rules.getSplitType() == CardSplitType.Specialize)
+                this.cardRSpecImageKey = ImageUtil.getImageKey(this, "red", true);
+            else  // just use cardImageKey
+                this.cardRSpecImageKey = ImageUtil.getImageKey(this, "", true);
+        }
+        return cardRSpecImageKey;
+    }
+
+    private String cardGSpecImageKey = null;
+    @Override
+    public String getCardGSpecImageKey() {
+        if (this.cardGSpecImageKey == null) {
+            if (this.rules.getSplitType() == CardSplitType.Specialize)
+                this.cardGSpecImageKey = ImageUtil.getImageKey(this, "green", true);
+            else  // just use cardImageKey
+                this.cardGSpecImageKey = ImageUtil.getImageKey(this, "", true);
+        }
+        return cardGSpecImageKey;
     }
 
     @Override

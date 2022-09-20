@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="64">
+ <editorsettings>
+  <export format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmG0OwiAMhon/hufRGQ+ye0ydF/VjHkca10jIGF9CUfvjDckC6UMLZH3HRoiR9TPaKLUVcNi4Hkr3yvYBsc5SiJN8jTY+mLdVGqZ5t0J8kLOrpjk+3APO2SkdZXk+W9xefdsTsJl5WaoZ7mO19pe+PmSdKV++lBipsp09vcaUfCDX20LN53ozqPlc95Kaz+fOMx/zMR/zMR/zMV9ZPkq2b+CD3rGtmM/1j0/NBz1kzf/Qvv5GiMwYnUcM6MUOU8+NvoY+Lp3BEHWRfDon+gIujyNFGAe8B8hLiP+AvgCsRdZP82GcGE/p0rw9Fax7Dn8l9mz3mXjm8pCjLv/CV6pONekJ5zkFQw==
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzdmc1u00AQx4dYFFo1uTT2IalDEEgFDkiIFs4InqDwJnAnLULio6SJaPkQ515KX6ag8gK0nFCbcMiZHbwrj9ez67VlgsNIf62TXa9/+Y+9XU9XGgCv62ltCanY8AGe+VG7qemp0OUgHntNzHejAalYrwG88QDGop1InQpte7HOSJ/SS4btRT15jUtBxIBtV6gnubpBks0WI4Zp4KXHjIlw/EojyXXd8PtpoI+h4DppurFh9KU/v2rpvqE2RrFha/JMjx1yrHy0eXfrHM+oe6aP63vJnLt65hpvHcdx/HrgPYvPwa7Qu4rpfT3yEvluC+9WK6Y1mU/Ma5X5MGaN767QlynrTg4+2jetsDHMKt/REkDgl6tvS+Xx+X75PpnmNDHsVJzP1qfmOt8CmGtFx+0OwHInPf9JCPAjjD+HbYBOW54j2uX23+Obmwe44KA9S9/FeZ5P/R2exv13byF7TJn+PW7mezaRL2vME8OekWP4uZjNnidc/DMFx4DvCqeL1eXD4PZXs8B3RawHV+Wa4HLM8X0X682xXHMOZLst28+yHYR2Pm7/h32uawrV/QXzulLUv6y+PGHK777m2b7mHXqbl6+M/OaJvHxF8vtA43veio8Hmnd9zdN/mV+X+J/4PhZ8X0W+ou/SH+rufEWE8yFfWe+Cs8Bn2h9Uhe+VrEEeNoq/tx7J9qvkO9S+LyqcD/cvx824jsfVlLCG9Iip2XGhP7/cuZ/cpvoTmN/NjFrjyFBTdOHDc7c8gIe1SJT1pqG+NiTHmN+ezzOuyzmxZmy6hgvfhNRr1Tyu+cD8bshack9jpPXiM3INm5ccH62HTwgnZRxCOtS9oWrJnSDp44jMperuWR6Y+MYap+136nlDLlWL75K6MlerpvV3vY7M8fUt/zvQPVRs1AvUb9TxixY=
+  </data>
+ </layer>
+ <layer id="6" name="Ground2" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1sEJwCAMheEMUCEDFNdw1dRpLfTmpRFSDPT/Ll48PCM8IgIAQKx+xN5DHGaOv2tld4K8ss3Gm8fuXrsc3ZbtfQDYS954um2VMXM59Tmr7s2Bb/C/AGYDsZYG7w==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAMCXARkAAAE=
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1DsKgDAMgOHoolvnWupR1dv5uIleQgMKDio4WErl/6AhfUEgEBEAAID/ma3IYvd89Rrq65tRzyd/7jMnkrvjT6XBha4SQCoKnQele5/f6XXeDP75HvF80V8Au8aItLo6E7sShEB/AaRmAzrgDb8=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="41" template="../../obj/shop.tx" x="249" y="370">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+   </properties>
+  </object>
+  <object id="56" template="../../obj/shop.tx" x="153" y="371">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+   </properties>
+  </object>
+  <object id="57" template="../../obj/shop.tx" x="201" y="418">
+   <properties>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+   </properties>
+  </object>
+  <object id="43" template="../../obj/shop.tx" x="105" y="370">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+   </properties>
+  </object>
+  <object id="47" template="../../obj/inn.tx" x="376" y="370"/>
+  <object id="49" template="../../obj/shop.tx" x="105" y="418">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+   </properties>
+  </object>
+  <object id="50" template="../../obj/shop.tx" x="152" y="418">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+   </properties>
+  </object>
+  <object id="51" template="../../obj/shop.tx" x="248" y="417">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+   </properties>
+  </object>
+  <object id="52" template="../../obj/shop.tx" x="201" y="370">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Red,Rakdos,Gruul,Izzet,Boros,Goblin "/>
+   </properties>
+  </object>
+  <object id="53" template="../../obj/spellsmith.tx" x="152" y="258"/>
+  <object id="55" template="../../obj/shop.tx" x="368" y="433">
+   <properties>
+    <property name="shopList" value="Mountain"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/entry_up.tx" x="273" y="642" width="80" height="20">
+   <properties>
+    <property name="spawn" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/entry_left.tx" x="337" y="627" width="16" height="89.9726" rotation="0"/>
+  <object id="60" template="../../obj/entry_right.tx" x="266" y="623" width="16" height="88"/>
+  <object id="61" template="../../obj/arena.tx" x="200" y="258">
+   <properties>
+    <property name="arena">{
+
+    &quot;enemyPool&quot;:[
+	&quot;Amonkhet Minotaur&quot;,
+	&quot;Ashmouth Devil&quot;,
+	&quot;Axgard Dwarf&quot;,
+	&quot;Berserker&quot;,
+	&quot;Boggart&quot;,
+	&quot;Cyclops&quot;,
+	&quot;Devil&quot;,
+	&quot;Dinosaur&quot;,
+	&quot;Dragon&quot;,
+	&quot;Dwarf&quot;,
+	&quot;Efreet&quot;,
+	&quot;Fire Elemental&quot;,
+	&quot;Flame Elemental&quot;,
+	&quot;Goblin&quot;,
+	&quot;Goblin Chief&quot;,
+	&quot;Goblin Warrior&quot;,
+	&quot;Hellhound&quot;,
+	&quot;Immersturm Demon&quot;,
+	&quot;Khan&quot;,
+	&quot;Minotaur&quot;,
+	&quot;Minotaur Flayer&quot;,
+	&quot;Red Beast&quot;,
+	&quot;Red Wiz1&quot;,
+	&quot;Red Wiz2&quot;,
+	&quot;Red Wiz3&quot;,
+	&quot;Shaman&quot;,
+	&quot;Troll&quot;,
+	&quot;Vampire Lord&quot;,
+	&quot;Viashino&quot;,
+	&quot;Yeti&quot;
+	],
+    &quot;rounds&quot;:3,
+    &quot;entryFee&quot;:100,
+     &quot;rewards&quot;: [[
+		{
+			&quot;type&quot;: &quot;card&quot;,
+			&quot;probability&quot;: 1, 
+      			&quot;count&quot;:2,
+			&quot;rarity&quot;: [
+				&quot;Mythic Rare&quot;
+			],
+      			&quot;colors&quot;: [&quot;red&quot;] 
+		}
+		],[
+		{
+			&quot;type&quot;: &quot;gold&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 500 
+		}
+		],[{
+			&quot;type&quot;: &quot;item&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 1,
+			&quot;itemNames&quot;: [&quot;Aladdin's Ring&quot;,&quot;Axt&quot;,&quot;Ring of Immortals&quot;,&quot;Jandor's Ring&quot;]
+		}
+		]
+		] 
+}</property>
+   </properties>
+  </object>
+  <object id="62" template="../../obj/shop.tx" x="361" y="258">
+   <properties>
+    <property name="shopList" value="RedEquipment"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/shop.tx" x="409" y="259">
+   <properties>
+    <property name="shopList" value="RedItems"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

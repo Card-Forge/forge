@@ -44,7 +44,7 @@
     {
       "type": "TextButton",
       "name": "return",
-      "text": "Back",
+      "text": "tr(lblBack)",
       "width": 100,
       "height": 30,
       "x": 368,
@@ -52,16 +52,11 @@
     },
     {
       "type": "TextButton",
-      "name": "save",
-      "text": "saveLoad",
+      "name": "save", 
       "width": 100,
       "height": 30,
       "x": 368,
       "y": 220
-    },
-    {
-      "type": "Table",
-      "font": "default"
-    }
+    } 
   ]
 }

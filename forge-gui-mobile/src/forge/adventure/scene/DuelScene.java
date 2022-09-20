@@ -12,6 +12,7 @@ import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.stage.IAfterMatch;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
 import forge.assets.FBufferedImage;
@@ -46,6 +47,13 @@ import java.util.*;
  * Forge screen scene that contains the duel screen
  */
 public class DuelScene extends ForgeScene {
+    private static DuelScene object;
+
+    public static DuelScene instance() {
+        if(object==null)
+            object=new DuelScene();
+        return object;
+    }
     //GameLobby lobby;
     HostedMatch hostedMatch;
     EnemySprite enemy;
@@ -59,8 +67,9 @@ public class DuelScene extends ForgeScene {
     List<IPaperCard> AIExtras = new ArrayList<>();
 
 
-    public DuelScene() {
+    private DuelScene() {
     }
+
 
     @Override
     public void dispose() {
@@ -117,10 +126,10 @@ public class DuelScene extends ForgeScene {
             Forge.clearTransitionScreen();
             Forge.clearCurrentScreen();
             Scene last = Forge.switchToLast();
+            Current.player().getStatistic().setResult(enemyName, winner);
 
-            if (last instanceof HudScene) {
-                Current.player().getStatistic().setResult(enemyName, winner);
-                ((HudScene) last).stage.setWinner(winner);
+            if (last instanceof IAfterMatch) {
+                ((IAfterMatch) last).setWinner(winner);
             }
         });
     }

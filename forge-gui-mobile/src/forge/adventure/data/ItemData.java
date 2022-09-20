@@ -23,19 +23,30 @@ public class ItemData {
     public String iconName;
     public boolean questItem=false;
     public int cost=1000;
+
+    public boolean usableOnWorldMap;
+    public boolean usableInPoi;
+    public String commandOnUse;
+    public int manaNeeded;
+
+
     public ItemData()
     {
 
     }
     public ItemData(ItemData cpy)
     {
-          name              = cpy.name         ;
-          equipmentSlot     = cpy.equipmentSlot;
-          effect            = new EffectData(cpy.effect);
-          description       = cpy.description  ;
-          iconName          = cpy.iconName     ;
-          questItem         = cpy.questItem    ;
-          cost              = cpy.cost         ;
+        name              = cpy.name;
+        equipmentSlot     = cpy.equipmentSlot;
+        effect            = new EffectData(cpy.effect);
+        description       = cpy.description;
+        iconName          = cpy.iconName;
+        questItem         = cpy.questItem;
+        cost              = cpy.cost;
+        usableInPoi       = cpy.usableInPoi;
+        usableOnWorldMap  = cpy.usableOnWorldMap;
+        commandOnUse      = cpy.commandOnUse;
+        manaNeeded        = cpy.manaNeeded;
     }
 
     public Sprite sprite()
@@ -54,7 +65,7 @@ public class ItemData {
             Json json = new Json();
             FileHandle handle = Config.instance().getFile(Paths.ITEMS);
             if (handle.exists()) {
-                Array readJson = json.fromJson(Array.class, ItemData.class, handle);
+                Array<ItemData> readJson = json.fromJson(Array.class, ItemData.class, handle);
                 itemList = readJson;
 
             }
@@ -79,6 +90,8 @@ public class ItemData {
             result += "Slot: " + this.equipmentSlot + "\n";
         if(effect != null)
             result += effect.getDescription();
+        if(manaNeeded != 0)
+            result +=  manaNeeded+" [+Mana]";
         return result;
     }
 
