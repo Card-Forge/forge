@@ -3,6 +3,6 @@ ManaCost:3 G
 Types:Sorcery
 A:SP$ Token | TokenOwner$ You | TokenAmount$ X | TokenScript$ g_3_3_tyranid_warrior_trample
 SVar:X:PlayerCountOpponents$Amount
-DeckHas:Ability$Token
+DeckHas:Ability$Token & Type$Tyranid|Warrior
 AI:RemoveDeck:Random
 Oracle:Create a number of 3/3 green Tyranid Warrior creature tokens with trample equal to the number of opponents you have.
