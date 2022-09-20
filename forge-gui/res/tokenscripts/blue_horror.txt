@@ -1,4 +1,4 @@
-Name:Blue Horror Token
+Name:Blue Horror
 ManaCost:no cost
 Colors:blue,red
 Types:Creature Demon Horror
