@@ -2,7 +2,7 @@ Name:Lychguard
 ManaCost:2 B
 Types:Artifact Creature Necron
 PT:2/3
-A:AB$ ChangeZoneAll | Cost$ 3 B Sac<1/CARDNAME> | ChangeType$ Creature.Legendary+YouOwn | PrecostDesc$ Guardian Patrols | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return all legendary creature cards from your graveyard to your hand.
-DeckHas:Ability$Graveyard
-DeckHints:Type$Legendary
+A:AB$ ChangeZoneAll | Cost$ 3 B Sac<1/CARDNAME> | ChangeType$ Creature.Legendary+YouOwn | PrecostDesc$ Guardian Patrols - | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return all legendary creature cards from your graveyard to your hand.
+DeckHas:Ability$Graveyard|Sacrifice
+DeckNeeds:Type$Legendary
 Oracle:Guardian Patrols — {3}{B}, Sacrifice Lychguard: Return all legendary creature cards from your graveyard to your hand.
