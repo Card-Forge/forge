@@ -5,4 +5,4 @@ PT:3/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Dynastic Advisor — When CARDNAME enters the battlefield, search your library for a basic Swamp card, reveal it, put it into your hand, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Swamp.Basic
-Oracle:Flying\Dynastic Advisor — When Plasmancer enters the battlefield, search your library for a basic Swamp card, reveal it, put it into your hand, then shuffle.
+Oracle:Flying\nDynastic Advisor — When Plasmancer enters the battlefield, search your library for a basic Swamp card, reveal it, put it into your hand, then shuffle.
