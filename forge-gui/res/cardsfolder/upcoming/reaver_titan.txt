@@ -1,0 +1,10 @@
+Name:Reaver Titan
+ManaCost:7
+Types:Artifact Vehicle
+PT:10/10
+K:Protection:Card.cmcLE3:Protection from mana value 3 or less
+T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Gatling Blaster — Whenever CARDNAME attacks, it deals 5 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 5
+K:Crew:4
+SVar:HasAttackEffect:TRUE
+Oracle:Void Shields — Protection from mana value 3 or less.\nGatling Blaster — Whenever Reaver Titan attacks, it deals 5 damage to each opponent.\Crew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)
