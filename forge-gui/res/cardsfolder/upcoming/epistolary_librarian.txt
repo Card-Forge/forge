@@ -6,5 +6,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self  | Execute$ TrigCast | TriggerDescription
 SVar:TrigCast:DB$ Play | ValidZone$ Hand | Valid$ Card | ValidSA$ Spell | Optional$ True | WithoutManaCost$ True | 
 SVar:Z:Count$Valid Creature.attacking+YouCtrl
 SVar:HasAttackingEffect:TRUE
-DeckHints:Type$Instant|Sorcery
 Oracle:Veil of Time — Whenever Epistolary Librarian attacks, you may cast a spell with mana value X or less from your hand without paying its mana cost, where X is the number of attacking creatures.
