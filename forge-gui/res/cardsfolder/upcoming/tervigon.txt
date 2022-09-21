@@ -1,4 +1,4 @@
-NameTervigon
+Name:Tervigon
 ManaCost:X 1 G
 Types:Creature Tyranid
 PT:0/0
