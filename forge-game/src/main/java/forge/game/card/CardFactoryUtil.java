@@ -2329,7 +2329,7 @@ public class CardFactoryUtil {
                 re.getOverridingAbility().setSVar("Sunburst", "Count$Converge");
             }
             inst.addReplacement(re);
-        } else if (keyword.startsWith("Ravenous")) {
+        } else if (keyword.equals("Ravenous")) {
             String repeffStr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | " +
                     " | ReplacementResult$ Updated | Description$ Ravenous (" + inst.getReminderText() + ")";
 
