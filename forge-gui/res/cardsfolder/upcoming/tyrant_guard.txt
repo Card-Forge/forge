@@ -1,0 +1,10 @@
+Name:Tyrant Guard
+ManaCost:2 X G
+Types:Creature Tyranid
+PT:3/3
+K:Ravenous
+A:AB$ PumpAll | PrecostDesc$ Shieldwall — | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.YouCtrl+HasCounters | KW$ Hexproof & Indestructible | SpellDescription$ Creatures you control with counters on them gain hexproof and indestructible until end of turn.
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters|Sacrifice
+DeckHints:Ability$Counters
+Oracle:Ravenous (This creature enters the battlefield with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\Shieldwall — Sacrifice Tyrant Guard: Creatures you control with counters on them gain hexproof and indestructible until end of turn.
