@@ -137,6 +137,7 @@ public enum Keyword {
     PROWESS("Prowess", SimpleKeyword.class, false, "Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn."),
     PROWL("Prowl", KeywordWithCost.class, false, "You may pay %s rather than pay this spell's mana cost if a player was dealt combat damage this turn by a source that, at the time it dealt that damage, was under your control and had any of this spell's creature types."),
     RAMPAGE("Rampage", KeywordWithAmount.class, false, "Whenever this creature becomes blocked, it gets +%1$d/+%1$d until end of turn for each creature blocking it beyond the first."),
+    RAVENOUS("Ravenous", SimpleKeyword.class, false, "This creature enters the battlefield with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters."),
     REACH("Reach", SimpleKeyword.class, true, "This creature can block creatures with flying."),
     REBOUND("Rebound", SimpleKeyword.class, true, "If you cast this spell from your hand, exile it as it resolves. At the beginning of your next upkeep, you may cast this card from exile without paying its mana cost."),
     RECOVER("Recover", KeywordWithCost.class, false, "When a creature is put into your graveyard from the battlefield, you may pay %s. If you do, return this card from your graveyard to your hand. Otherwise, exile this card."),

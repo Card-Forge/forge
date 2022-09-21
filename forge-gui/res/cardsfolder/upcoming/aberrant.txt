@@ -1,0 +1,11 @@
+Name:Aberrant
+ManaCost:X 1 G
+Types:Creature Tyranid Mutant
+PT:0/0
+K:Ravenous
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDestroy | CombatDamage$ True | TriggerDescription$ Heavy Power Hammer — Whenever CARDNAME deals combat damage to a player, destroy target artifact or enchantment that player controls.
+SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Artifact.ControlledBy TriggeredTarget,Enchantment.ControlledBy TriggeredTarget | TgtPrompt$ Select target artifact or enchantment damaged player controls
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+Oracle:Ravenous (This creature enters the battlefield with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nTrample\nHeavy Power Hammer — Whenever Aberrant deals combat damage to a player, destroy target artifact or enchantment that player controls.

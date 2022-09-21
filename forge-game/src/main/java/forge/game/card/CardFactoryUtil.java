@@ -2329,6 +2329,35 @@ public class CardFactoryUtil {
                 re.getOverridingAbility().setSVar("Sunburst", "Count$Converge");
             }
             inst.addReplacement(re);
+        } else if (keyword.startsWith("Ravenous")) {
+            String repeffStr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | " +
+                    " | ReplacementResult$ Updated | Description$ Ravenous (" + inst.getReminderText() + ")";
+
+            String counterStr = "DB$ PutCounter | CounterType$ P1P1 | ETB$ True | CounterNum$ X";
+            SpellAbility countersSA = AbilityFactory.getAbility(counterStr, card);
+
+            String delTrigStr = "DB$ DelayedTrigger | CheckSVar$ X | SVarCompare$ GE5 | " +
+                    "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | " +
+                    "TriggerDescription$ If X is 5 or more, draw a card when it enters.";
+            AbilitySub delTrigSub = (AbilitySub) AbilityFactory.getAbility(delTrigStr, card);
+
+            String drawStr = "DB$ Draw";
+
+            AbilitySub drawSub = (AbilitySub) AbilityFactory.getAbility(drawStr, card);
+
+            countersSA.setSubAbility(delTrigSub);
+
+            delTrigSub.setAdditionalAbility("Execute", drawSub);
+
+            if (!intrinsic) {
+                countersSA.setIntrinsic(false);
+            }
+
+            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffStr, host, intrinsic, card);
+
+            re.setOverridingAbility(countersSA);
+
+            inst.addReplacement(re);
         } else if (keyword.startsWith("Read ahead")) {
             final String[] k = keyword.split(":");
             String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Secondary$ True | ReplacementResult$ Updated | Description$ Choose a chapter and start with that many lore counters.";
