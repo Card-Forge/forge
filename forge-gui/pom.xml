@@ -69,13 +69,7 @@
         <dependency>
             <groupId>com.github.raeleus.TenPatch</groupId>
             <artifactId>tenpatch</artifactId>
-            <version>5.2.2</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.fourthline.cling</groupId>
-            <artifactId>cling-core</artifactId>
-            <version>2.1.2</version>
+            <version>5.2.3</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
