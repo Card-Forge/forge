@@ -72,11 +72,6 @@
             <version>5.2.3</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>org.fourthline.cling</groupId>
-            <artifactId>cling-core</artifactId>
-            <version>2.1.2</version>
-        </dependency>
     </dependencies>
 
 </project>
