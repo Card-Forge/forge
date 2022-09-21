@@ -1,0 +1,6 @@
+Name:Robot Token
+ManaCost:no cost
+Types:Artifact Creature Robot
+PT:4/4
+K:CARDNAME can't block.
+Oracle:This creature can't block

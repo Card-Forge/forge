@@ -1,8 +1,13 @@
-Name:Convergence of Dominion
-ManaCost:3
-Types:Artifact
-S:Mode$ ReduceCost | ValidCard$ Card | Type$ Ability | Amount$ 2 | MinMana$ 1 | AffectedZone$ Graveyard | IsPresent$ Card.IsCommander+YouOwn+YouCtrl | Description$ Dynastic Command Node — As long as you control your commander, activated abilities of cards in your graveyard cost {2} less to activate. This effect can’t reduce the mana in that ability’s activation cost to less than one mana.
-A:AB$ Mill | Cost$ T 3 | Defined$ You | NumCards$ 3 | PrecostDesc$ Translocation Protocols - | SpellDescription$ Mill three cards.
-AI:RemoveDeck:NonCommander
-DeckHas:Ability$Mill|Graveyard
-Oracle:Dynastic Command Node — As long as you control your commander, activated abilities of cards in your graveyard cost {2} less to activate. This effect can’t reduce the mana in that ability’s activation cost to less than one mana.\nTranslocation Protocols — {3}, {T}: Mill three cards.
+Name:Magnus the Red
+ManaCost:3 U R
+Types:Legendary Creature Demon Primarch
+PT:4/5
+K:Flying
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ X | Description$ Unearthly Power — Instant and sorcery spells you cast cost {1} less to cast for each creature token you control.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Blade of Magnus — Whenever CARDNAME deals combat damage to a player, create a 3/3 red Spawn creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_3_3_spawn
+SVar:X:Count$Valid Creature.YouCtrl+Token
+SVar:BuffedBy:Token
+DeckHas:Type$Spawn & Ability$Token
+DeckHints:Ability$Token & Type$Instant|Sorcery
+Oracle:Flying\nUnearthly Power — Instant and sorcery spells you cast cost {1} less to cast for each creature token you control.\nBlade of Magnus — Whenever Magnus the Red deals combat damage to a player, create a 3/3 red Spawn creature token.

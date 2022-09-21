@@ -1,0 +1,6 @@
+Name:Spawn Token
+ManaCost:no cost
+Types:Creature Spawn
+Colors:red
+PT:3/3
+Oracle:
