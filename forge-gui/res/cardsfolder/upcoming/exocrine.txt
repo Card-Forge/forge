@@ -1,0 +1,10 @@
+Name:Exocrine
+ManaCost:2 X R
+Types:Creature Tyranid
+PT:2/2
+K:Ravenous
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamageAll | TriggerDescription$ Bio-plasmic Barrage — When CARDNAME enters the battlefield, it deals X damage to each player and each other creature.
+SVar:TrigDamageAll:DB$ DamageAll | ValidPlayers$ Player | ValidCards$ Creature.Other | NumDmg$ X
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters
+Oracle:Ravenous (This creature enters the battlefield with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nBio-plasmic Barrage — When Exocrine enters the battlefield, it deals X damage to each player and each other creature.
