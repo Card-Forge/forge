@@ -4,7 +4,7 @@ Types:Legendary Creature Human Inquisitor
 PT:2/3
 T:Mode$ Drawn | ValidCard$ Card.YouOwn | Number$ 1 | OptionalDecider$ You | Static$ True | ForReveal$ True | Execute$ DBReveal | TriggerZones$ Battlefield | TriggerDescription$ You may reveal the first card you draw each turn as you draw it. Whenever you reveal an instant or sorcery card this way, create Cherubael, and legendary 4/4 black Demon creature token with flying.
 SVar:DBReveal:DB$ Reveal | Defined$ You | RevealDefined$ TriggeredCard | RememberRevealed$ True | SubAbility$ DBToken
-SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | SubAbility$ DBCleanup | TokenScript$ cherubael
+SVar:DBToken:DB$ Token | TokenOwner$ You |  SubAbility$ DBCleanup | TokenScript$ cherubael | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigInvestigate | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, investigate that many times. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:TrigInvestigate:DB$ Investigate | Num$ X | Defined$ You
