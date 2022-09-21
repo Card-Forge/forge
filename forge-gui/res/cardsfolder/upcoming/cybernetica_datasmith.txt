@@ -3,7 +3,7 @@ ManaCost:1 U B
 Types:Artifact Creature Human Artificer
 PT:0/1
 K:Protection from Robots
-A:AB$ Draw | ValidTgts$ Player | Cost$ U T | SubAbility²$ DBToken  | PrecostDesc$ Field Reprogramming — | SpellDescription$ Target player draws a card. Another target player creates a 4/4 colorless Robot artifact creature token with "This creature can't block."
+A:AB$ Draw | ValidTgts$ Player | Cost$ U T | SubAbility$ DBToken  | PrecostDesc$ Field Reprogramming — | SpellDescription$ Target player draws a card. Another target player creates a 4/4 colorless Robot artifact creature token with "This creature can't block."
 SVar:DBToken:DB$ Token | TokenScript$ c_4_4_a_robot_noblock | ValidTgts$ Player | TargetUnique$ True | TokenAmount$ 1 | TokenOwner$ ThisTargetedPlayer
 DeckHas:Ability$Token & Type$Robot
 Oracle:Protection from Robots\nField Reprogramming — {U}, {T}: Target player draws a card. Another target player creates a 4/4 colorless Robot artifact creature token with "This creature can't block."
