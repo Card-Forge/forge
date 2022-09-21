@@ -1,6 +1,6 @@
 Name:Cherubael
 ManaCost:no cost
-Types:Legendary Demon
+Types:Legendary Creature Demon
 Colors:black
 PT:4/4
 K:Flying
