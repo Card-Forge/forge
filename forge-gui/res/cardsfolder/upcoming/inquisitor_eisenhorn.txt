@@ -6,7 +6,7 @@ T:Mode$ Drawn | ValidCard$ Card.YouOwn | Number$ 1 | OptionalDecider$ You | Stat
 SVar:DBReveal:DB$ Reveal | Defined$ You | RevealDefined$ TriggeredCard | RememberRevealed$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Instant,Sorcery | SubAbility$ DBCleanup | TokenScript$ cherubael
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ TrigInvestigate | Execute$ TrigInvestigate | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, investigate that many times. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigInvestigate | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, investigate that many times. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
 SVar:TrigInvestigate:DB$ Investigate | Num$ X | Defined$ You
 SVar:X:TriggerCount$DamageAmount
 DeckHas:Type$Clue|Demon & Ability$Token
