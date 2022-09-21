@@ -1,8 +1,9 @@
 Name:Epistolary Librarian
 ManaCost:2 W U
 Types:Creature Astartes Wizard
+PT:3/4
 T:Mode$ Attacks | ValidCard$ Card.Self  | Execute$ TrigCast | TriggerDescription$ Veil of Time — Whenever CARDNAME attacks, you may cast a spell with mana value X or less from your hand without paying its mana cost, where X is the number of attacking creatures.
-SVar:TrigCast:DB$ Play | ValidZone$ Hand | Valid$ Instant.YouCtrl+cmcLEX,Sorcery.YouCtrl+cmcLEX | ValidSA$ Spell | Optional$ True | WithoutManaCost$ True | 
+SVar:TrigCast:DB$ Play | ValidZone$ Hand | Valid$ Card | ValidSA$ Spell | Optional$ True | WithoutManaCost$ True | 
 SVar:Z:Count$Valid Creature.attacking+YouCtrl
 SVar:HasAttackingEffect:TRUE
 DeckHints:Type$Instant|Sorcery
