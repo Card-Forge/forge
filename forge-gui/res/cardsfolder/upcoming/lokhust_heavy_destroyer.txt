@@ -1,0 +1,10 @@
+Name:Lokhust Heavy Destroyer
+ManaCost:1 B B B
+Types:Artifact Creature Necron
+PT:3/2
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Enmitic Exterminator — When CARDNAME enters the battlefield, each player sacrifices a creature.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Player | SacValid$ Creature
+K:Unearth:5 B B B
+DeckHas:Ability$Sacrifice|Graveyard
+Oracle:Flying\nEnmitic Exterminator — When Lokhust Heavy Destroyer enters the battlefield, each player sacrifices a creature.\nUnearth {5}{B}{B}{B} ({5}{B}{B}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
