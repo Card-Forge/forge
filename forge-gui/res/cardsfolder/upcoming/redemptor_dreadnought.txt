@@ -3,9 +3,11 @@ ManaCost:5
 Types:Artifact Creature Astartes Dreadnought
 PT:4/4
 K:Trample
-S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Cost$ ExileFromGrave<1/Creature/creature card> | EffectZone$ All | ImprintExiled$ True | Description$ Fallen Warrior — As an additional cost to cast this spell, you may exile a creature card from your graveyard.
+S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Cost$ ExileFromGrave<Y/Creature/creature card> | EffectZone$ All | ImprintExiled$ True | Description$ Fallen Warrior — As an additional cost to cast this spell, you may exile a creature card from your graveyard.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Plasma Incinerator — Whenever CARDNAME attacks, if a card is exiled with it, it gets +X/+X until end of turn, where X is the power of the exiled card.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumDef$ X | NumAtt$ X
 SVar:X:Imprinted$CardPower
+SVar:Y:SVar$Exiled
+SVar:Exiled:Number$0
 SVar:HasAttackEffect:TRUE
 Oracle:Fallen Warrior — As an additional cost to cast this spell, you may exile a creature card from your graveyard.\nTrample\nPlasma Incinerator — Whenever Redemptor Dreadnought attacks, if a card is exiled with it, it gets +X/+X until end of turn, where X is the power of the exiled card.
