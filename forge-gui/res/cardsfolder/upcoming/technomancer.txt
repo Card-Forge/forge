@@ -4,7 +4,7 @@ Types:Artifact Creature Necron Wizard
 PT:5/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards, then return any number of artifact creature cards with total mana value 6 or less from your graveyard to the battlefield.
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | SubAbility DBChange
-SVar:DBChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ X | MaxTotalTargetCMC$ 6 | ValidTgts$ Artifact.Creature+YouOwn | TgtPrompt$ Select target artifact creature card in your graveyard.
+SVar:DBChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ X | MaxTotalTargetCMC$ 6 | ValidTgts$ Artifact.Creature+YouOwn
 SVar:X:Count$ValidGraveyard Artifact.Creature+YouOwn
 DeckHas:Ability$Graveyard|Mill
 DeckHints:Type$Artifact
