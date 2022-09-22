@@ -4,6 +4,6 @@ Types:Creature Astartes Warrior
 PT:3/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBDestroy,DBDebuff
-SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Executioner Round — Destroy target creature.
-SVar:DBDebuff:DB$ PumpAll | ValidTgts$ Player | TgtPrompt$ Select target player | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | SpellDescription$ Hyperfang Round — Creatures target player controls get -2/-2 until end of turn.
+SVar:DBDestroy:DB$ Destroy | ValidTgts$ Creature | SpellDescription$ Executioner Round — Destroy target creature.
+SVar:DBDebuff:DB$ PumpAll | ValidTgts$ Player | ValidCards$ Creature | NumAtt$ -2 | NumDef$ -2 | SpellDescription$ Hyperfang Round — Creatures target player controls get -2/-2 until end of turn.
 Oracle:When Primaris Eliminator enters the battlefield, choose one —\n• Executioner Round — Destroy target creature.\n• Hyperfang Round — Creatures target player controls get -2/-2 until end of turn.
