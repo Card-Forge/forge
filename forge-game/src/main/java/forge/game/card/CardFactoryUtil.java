@@ -2336,7 +2336,7 @@ public class CardFactoryUtil {
             String counterStr = "DB$ PutCounter | CounterType$ P1P1 | ETB$ True | CounterNum$ X";
             SpellAbility countersSA = AbilityFactory.getAbility(counterStr, card);
 
-            String delTrigStr = "DB$ DelayedTrigger | CheckSVar$ X | SVarCompare$ GE5 | " +
+            String delTrigStr = "DB$ DelayedTrigger | CheckSVar$ Count$xPaid | SVarCompare$ GE5 | " +
                     "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | " +
                     "TriggerDescription$ If X is 5 or more, draw a card when it enters.";
             AbilitySub delTrigSub = (AbilitySub) AbilityFactory.getAbility(delTrigStr, card);
@@ -2356,6 +2356,7 @@ public class CardFactoryUtil {
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffStr, host, intrinsic, card);
 
             re.setOverridingAbility(countersSA);
+            countersSA.setSVar("X", "Count$xPaid");
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Read ahead")) {
