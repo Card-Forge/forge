@@ -373,6 +373,11 @@ public abstract class Trigger extends TriggerReplacementBase {
             final Card moved = (Card) runParams.get(AbilityKey.Card);
             if (null != moved && !moved.isOptionalCostPaid(OptionalCost.AltCost))
                 return false;
+        } else if ("LifePaid".equals(condition)) {
+            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
+            if (trigSA != null && trigSA.getAmountLifePaid() <= 0) {
+                return false;
+            }
         } else if ("NoOpponentHasMoreLifeThanAttacked".equals(condition)) {
             GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
             if (attacked == null) {
