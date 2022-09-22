@@ -4,7 +4,7 @@ Types:Creature Astartes Scout
 PT:2/1
 K:First Strike
 K:Vigilance
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Concealed Position — When CARDNAME Scout enters the battlefield, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ Concealed Position — When CARDNAME enters the battlefield, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield tapped, then shuffle.
 SVar:TrigChange:DB$ ChangeZone | CheckSVar$ X | SVarCompare$ GTY | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic+Plains | ChangeNum$ 1 | Tapped$ True
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Y:PlayerCountOpponents$HighestValid Land.YouCtrl
