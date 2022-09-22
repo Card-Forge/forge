@@ -3,7 +3,7 @@ ManaCost:X B B B B
 Types:Sorcery
 A:SP$ Token | TokenAmount$ X | TokenScript$ b_2_2_a_necron_warrior | TokenTapped$ True | SubAbility$ DBGainLife | SpellDescription$ Create X tapped 2/2 black Necron Warrior artifact creature tokens, then you gain life equal to the number of artifacts you control. Exile CARDNAME.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ Y | StackDescription$ you gain life equal to the number of artifacts you control | SubAbility$ DBChange
-SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ Exile CARDNAME
 S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | AffectedZone$ Graveyard | EffectZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard.
 SVar:X:Count$xPaid
 SVar:Y:Count$Valid Artifact.YouCtrl
