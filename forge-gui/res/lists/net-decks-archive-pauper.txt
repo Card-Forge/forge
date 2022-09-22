@@ -1980,4 +1980,3 @@
 2022-09-18 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-09-18-pauper-challenge.zip
 2022-09-19 Pauper Challenge (32 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-09-19-pauper-challenge.zip
 2022-09-21 Pauper League (34 decks) | https://downloads.cardforge.org/decks/archive/pauper/2022-09-21-pauper-league.zip
-Pauper League (20 decks) | https://downloads.cardforge.org/decks/archive/pauper/pauper-league.zip
