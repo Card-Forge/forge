@@ -4,7 +4,7 @@ Types:Artifact Creature Necron Wizard
 PT:1/1
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard,Exile | ValidCard$ Card.Self,Artifact.YouCtrl+Other+nonToken | Execute$ TrigLoseLife | TriggerDescription$ Harbinger of Despair — Whenever CARDNAME or another nontoken artifact you control is put into a graveyard from the battlefield or is put into exile from the battlefield, target opponent loses 1 life and you gain 1 life.
-SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | TgtPrompt$ Choose a opponent to lose life | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 DeckHas:Ability$Lifegain 
 DeckHints:Ability$Sacrifice & Type$Artifact
