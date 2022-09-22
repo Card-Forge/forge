@@ -1,0 +1,9 @@
+Name:Royal Warden
+ManaCost:3 B B
+Types:Artifact Creature Necron
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Phalanx Commander — When CARDNAME enters the battlefield, create two tapped 2/2 black Necron Warrior artifact creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ b_2_2_a_necron_warrior | Tapped$ True
+K:Unearth:3 B
+DeckHas:Ability$Token|Graveyard & Type$Warrior
+Oracle:Phalanx Commander — When Royal Warden enters the battlefield, create two tapped 2/2 black Necron Warrior artifact creature tokens.\nUnearth {3}{B} ({3}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
