@@ -1,7 +1,7 @@
 Name:Their Number Is Legion
 ManaCost:X B B B B
 Types:Sorcery
-A:SP$ Token | TokenAmount$ X | TokenScript$ b_2_2_a_necron_warrior | SubAbility$ DBGainLife | SpellDescription$ \nCreate X tapped 2/2 black Necron Warrior artifact creature tokens, then you gain life equal to the number of artifacts you control. Exile CARDNAME.
+A:SP$ Token | TokenAmount$ X | TokenScript$ b_2_2_a_necron_warrior | SubAbility$ DBGainLife | SpellDescription$ Create X tapped 2/2 black Necron Warrior artifact creature tokens, then you gain life equal to the number of artifacts you control. Exile CARDNAME.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ Y | SubAbility$ DBChange
 SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ None
 S:Mode$ Continuous | Affected$ Card.Self | MayPlay$ True | AffectedZone$ Graveyard | EffectZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard.
