@@ -4,6 +4,10 @@ Types:Legendary Artifact Equipment
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ Echo of the First Murder — When CARDNAME enters the battlefield, exile up to one target creature.
 SVar:TrigExile:DB$ ChangeZone | Imprint$ True | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ X | AddKeyword$ Menace | Description$ Daemon Sword — Equipped creature has menace and gets +X/+0, where X is the exiled card's power.
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsImprinted+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetImprinted$ TriggeredCard
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 K:Equip:2
 SVar:X:Imprinted$CardPower
 SVar:NeedsToPlay:Creature.OppCtrl
