@@ -3,7 +3,7 @@ ManaCost:5
 Types:Artifact Creature Astartes Dreadnought
 PT:4/4
 K:Trample
-A:SP$ PermanentCreature | Cost$ 6 B B ExileFromGrave<X/Creature/creature card> | XMaxLimit$ 1
+A:SP$ PermanentCreature | Cost$ 5 ExileFromGrave<X/Creature/creature card> | XMaxLimit$ 1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Plasma Incinerator — Whenever CARDNAME attacks, if a card is exiled with it, it gets +X/+X until end of turn, where X is the power of the exiled card.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumDef$ Y | NumAtt$ Y
 SVar:X:Count$xPaid
