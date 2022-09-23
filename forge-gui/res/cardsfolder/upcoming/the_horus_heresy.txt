@@ -2,9 +2,9 @@ Name:The Horus Heresy
 ManaCost:3 U B R
 Types:Enchantment Saga
 K:Saga:3:GainControl,DBDraw,DBRepeat
-SVar:GainControl:DB$ GainControl | ValidTgts$ Creature.nonLegendary+OppCtrl | LoseControl$ LeavesPlay,LoseControl | TgtPrompt$ Select target Non-Legendary creature an opponent controls to gain control of. | TargetMin$ OneEach | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SpellDescription$ For each opponent, gain control of up to one target nonlegendary creature that player controls for as long as CARDNAME remains on the battlefield.
+SVar:GainControl:DB$ GainControl | ValidTgts$ Creature.nonLegendary+OppCtrl | LoseControl$ LeavesPlay,LoseControl | TgtPrompt$ Select target nonlegendary creature an opponent controls to gain control of. | TargetMin$ OneEach | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SpellDescription$ For each opponent, gain control of up to one target nonlegendary creature that player controls for as long as CARDNAME remains on the battlefield.
 SVar:OneEach:PlayerCountOpponents$Amount
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SpellDescription$ Draw a card for each creature you control but don't own.
 SVar:X:Count$Valid Creature.YouDontOwn+YouCtrl
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBChooseCreature | SubAbility$ DBDestroy | SpellDescription$ Starting with you, each player chooses a creature. Destroy each creature chosen this way.
 SVar:DBChooseCreature:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.RememberedPlayerCtrl | ChoiceTitle$ Choose a creature | Mandatory$ True | SubAbility$ DBChooseLand | RememberChosen$ True
