@@ -7,7 +7,7 @@ SVar:OneEach:PlayerCountOpponents$Amount
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SpellDescription$ Draw a card for each creature you control but don't own.
 SVar:X:Count$Valid Creature.YouDontOwn+YouCtrl
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBChooseCreature | SubAbility$ DBDestroy | SpellDescription$ Starting with you, each player chooses a creature. Destroy each creature chosen this way.
-SVar:DBChooseCreature:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.RememberedPlayerCtrl  | ChoiceTitle$ Choose a creature you control | Mandatory$ True | RememberChosen$ True
+SVar:DBChooseCreature:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature  | ChoiceTitle$ Choose a creature | Mandatory$ True | RememberChosen$ True
 SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — For each opponent, gain control of up to one target nonlegendary creature that player controls for as long as The Horus Heresy remains on the battlefield.\nII — Draw a card for each creature you control but don't own.\nIII — Starting with you, each player chooses a creature. Destroy each creature chosen this way.
