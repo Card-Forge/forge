@@ -1,0 +1,8 @@
+Name:Seeker of Slaanesh
+ManaCost:3 R
+Types:Creature Demon
+PT:3/3
+K:Haste
+Oracle:Haste\nAllure of Slaanesh — Each opponent must attack with at least one creature each combat if able.
+K:Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.
+Oracle:Haste\nAllure of Slaanesh — Each opponent must attack with at least one creature each combat if able

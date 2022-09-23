@@ -1,0 +1,10 @@
+Name:Anrakyr the Traveller
+ManaCost:4 B
+Types:Legendary Artifact Creature Necron
+PT:4/4
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCast | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may cast an artifact spell from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.
+SVar:TrigCast:DB$ Play | ValidZone$ Hand | Valid$ Artifact.YouOwn | ValidSA$ Spell | Controller$ You | ValidZone$ Hand,Graveyard | Optional$ True | Amount$ 1 | PlayCost$ PayLife<ConvertedManaCost>
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Graveyard
+DeckHints:Type$Artifact
+Oracle:Lord of the Pyrrhian Legions — Whenever Anrakyr the Traveller attacks, you may cast an artifact spell from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.
