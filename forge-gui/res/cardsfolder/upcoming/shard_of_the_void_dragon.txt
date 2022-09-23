@@ -1,0 +1,12 @@
+Name:Shard of the Void Dragon
+ManaCost:4 B B B
+Types:Creature C'tan
+PT:7/7
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Sphere of the Void Dragon — Whenever Shard of the Void Dragon attacks, each opponent sacrifices a nonland permanent.
+SVar:DBSacrifice:DB$ Sacrifice | Amount$ 1 | SacValid$ nonLand.Permanent | Defined$ Opponent 
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard,Exile | ValidCard$ Artifact | Execute$ TrigCounter | TriggerDescription$ 
+SVar:TrigCounter:DB$ TrigCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2
+DeckHas:Ability$Sacrifice|Counters
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nSphere of the Void Dragon — Whenever Shard of the Void Dragon attacks, each opponent sacrifices a nonland permanent.\nMatter Absorption — Whenever an artifact is put into a graveyard from the battlefield or is put into exile from the battlefield, put two +1/+1 counters on Shard of the Void Dragon.
