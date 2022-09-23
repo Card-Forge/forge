@@ -6,7 +6,7 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create two 2/2 white Astartes Warrior creature tokens with vigilance.
 SVar:TrigToken:DB$ Token | TokenScript$ W_2_2_astartes_warrior_vigilance | TokenAmount$ 2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, attacking creatures you control gain flying until end of turn.
-SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking | KW$ Flying
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking+YouCtrl | KW$ Flying
 K:Crew:2
 DeckHas:Ability$Token & Type$Astartes|Warrior & Keyword$Viligance
 Svar:HasAttackingEffect:TRUE
