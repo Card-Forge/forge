@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Artifact Creature Necron
 PT:4/2
 K:Deathtouch
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ 
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Hyperphase Threshers — Whenever an artifact enters the battlefield under your control, CARDNAME gains first strike until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ First Strike
 DeckHas:Keyword$FirstStrike
 DeckHints:Type$Artifact

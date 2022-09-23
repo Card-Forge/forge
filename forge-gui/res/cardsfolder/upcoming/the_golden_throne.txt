@@ -1,11 +1,9 @@
-Name:The Horus Heresy
-ManaCost:3 U B R
-Types:Enchantment Saga
-SVar:GainControl:DB$ GainControl | ValidTgts$ Creature.nonLegendary+OppCtrl | LoseControl$ LeavesPlay,LoseControl | TgtPrompt$ Select target Non-Legendary creature an opponent controls to gain control of. | TargetMin$ OneEach | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | SpellDescription$ For each opponent, gain control of up to one target nonlegendary creature that player controls for as long as CARDNAME remains on the battlefield.
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X
-SVar:X:Count$Valid Creature.YouDontCtrl+YouOwn
-SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBChooseCreature | SubAbility$ DBDestroy | SpellDescription$ Starting with you, each player chooses a creature. Destroy each creature chosen this way.
-SVar:DBChooseCreature:DB$ ChooseCard | Defined$ Remembered | Choices$ Creature.ControlledByPlayerInTheDirection_Left_Player.IsRemembered | ChoiceTitle$ Choose a creature | Mandatory$ True | SubAbility$ DBChooseLand | RememberChosen$ True
-SVar:DBDestroy:DB$ Destroy | Defined$ Remembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — For each opponent, gain control of up to one target nonlegendary creature that player controls for as long as The Horus Heresy remains on the battlefield.\nII — Draw a card for each creature you control but don’t own.\nIII — Starting with you, each player chooses a creature. Destroy each creature chosen this way.
+Name:The Golden Throne
+ManaCost:4
+Types:Legendary Artifact
+R:Event$ GameLoss | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ ExileSetLife | Description$ Arcane Life-support — If you would lose the game, instead exile CARDNAME and your life total becomes 1.
+SVar:ExileSetLife:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self | SubAbility$ DBSetLife
+SVar:DBSetLife:DB$ SetLife | Defined$ You | LifeAmount$ 1
+A:AB$ Mana | Cost$ T Sac<1/Creature/creature> | PrecostDesc$ A Thousand Souls Die Every Day — | Produced$ Combo Any | Amount$ 3 | SpellDescription$ Add three mana in any combination of colors.
+DeckHas:Ability$Sacrifice
+Oracle:Arcane Life-support — If you would lose the game, instead exile The Golden Throne and your life total becomes 1.\nA Thousand Souls Die Every Day — {T}, Sacrifice a creature: Add three mana in any combination of colors.
