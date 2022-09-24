@@ -3,8 +3,8 @@ ManaCost:2
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Lifelink | Description$ Equipped creature has lifelink.
 T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ DelTrig | TriggerDescription$ Whenever equipped creature dies, return that card to the battlefield under its owner's control at the beginning of the next end step.
-SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigReturn | TriggerDescription$ Return equipped creature from the graveyard to the battlefield at the beginning of the next end step. 
-SVar:TrigReturn:DB$ ChangeZone | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | RememberObjects$ TriggeredCard | Execute$ TrigReturn | TriggerDescription$ Return equipped creature from the graveyard to the battlefield at the beginning of the next end step. 
+SVar:TrigReturn:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Graveyard | Destination$ Battlefield
 K:Equip:4
 DeckHas:Keyword$Lifelink & Ability$Lifegain
 Oracle:Equipped creature has lifelink.\nWhenever equipped creature dies, return that card to the battlefield under its owner’s control at the beginning of the next end step.\nEquip {4} ({4}: Attach to target creature you control. Equip only as a sorcery.)
