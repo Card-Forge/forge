@@ -1,10 +1,12 @@
-Name:Anrakyr the Traveller
-ManaCost:4 B
-Types:Legendary Artifact Creature Necron
-PT:4/4
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCast | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may cast an artifact spell from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.
-SVar:TrigCast:DB$ Play | ValidZone$ Hand | Valid$ Artifact.YouOwn | ValidSA$ Spell | Controller$ You | ValidZone$ Hand,Graveyard | Optional$ True | Amount$ 1 | PlayCost$ PayLife<ConvertedManaCost>
-SVar:HasAttackEffect:TRUE
-DeckHas:Ability$Graveyard
-DeckHints:Type$Artifact
-Oracle:Lord of the Pyrrhian Legions — Whenever Anrakyr the Traveller attacks, you may cast an artifact spell from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.
+Name:Hierophant Bio-Titan
+ManaCost:10 G G
+Types:Creature Tyranid
+PT:12/12
+K:Vigilance
+K:Reach
+K:Ward:2
+A:SP$ PermanentCreature | Cost$ 6 R Sac<X/Artifact;Creature/artifact or creature> | AILogic$ SacToReduceCost | CostDesc$ As an additional cost to cast this spell, you may sacrifice any number of artifacts and/or creatures. | SpellDescription$
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Y | EffectZone$ All | Relative$ True | Description$ This spell costs {2} less to cast for each permanent sacrificed this way and {2} less to cast for each other artifact or creature you've sacrificed this turn.
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidBlocker$ Creature.powerLE2 | Description$ Titanic — CARDNAME can't be blocked by creatures with power 2 or less.
+DeckHints:Ability$Counters
+Oracle:Frenzied Metabolism — As an additional cost to cast this spell, you may remove any number of +1/+1 counters from among creatures you control. This spell costs {2} less to cast for each counter removed this way.\nVigilance, reach, ward {2}\nTitanic — Hierophant Bio-Titan can’t be blocked by creatures with power 2 or less.
