@@ -1,0 +1,13 @@
+Name:Magnus the Red
+ManaCost:3 U R
+Types:Legendary Creature Demon Primarch
+PT:4/5
+K:Flying
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ X | Description$ Unearthly Power — Instant and sorcery spells you cast cost {1} less to cast for each creature token you control.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Blade of Magnus — Whenever CARDNAME deals combat damage to a player, create a 3/3 red Spawn creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ r_3_3_spawn
+SVar:X:Count$Valid Creature.YouCtrl+token
+SVar:BuffedBy:Token
+DeckHas:Type$Spawn & Ability$Token
+DeckHints:Ability$Token & Type$Instant|Sorcery
+Oracle:Flying\nUnearthly Power — Instant and sorcery spells you cast cost {1} less to cast for each creature token you control.\nBlade of Magnus — Whenever Magnus the Red deals combat damage to a player, create a 3/3 red Spawn creature token.

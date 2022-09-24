@@ -1,0 +1,11 @@
+Name:Inquisitorial Rosette
+ManaCost:2
+Types:Artifact Equipment
+T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigToken | TriggerDescription$ Inquisition Agents — Whenever equipped creature attacks, create a 2/2 white Astartes Warrior creature token with vigilance that's attacking. Then attacking creatures gain menace until end of turn.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_2_2_astartes_warrior_vigilance | TokenOwner$ You | TokenAttacking$ True | SubAbility$ DBPump
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.attacking | KW$ Menace
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ AE
+SVar:AE:SVar:HasAttackEffect:TRUE
+DeckHas:Keyword$Menace & Type$Warrior|Astartes & Ability$Token
+K:Equip:3
+Oracle:Inquisition Agents — Whenever equipped creature attacks, create a 2/2 white Astartes Warrior creature token with vigilance that's attacking. Then attacking creatures gain menace until end of turn.\nEquip {3} ({3}: Attach to target creature you control. Equip only as a sorcery.)
