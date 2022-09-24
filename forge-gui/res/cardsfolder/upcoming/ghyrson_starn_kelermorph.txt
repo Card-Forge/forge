@@ -3,7 +3,7 @@ ManaCost:1 U R
 Types:Legendary Creature Tyranid Human
 PT:3/2
 K:Ward:2
-T:Mode$ DamageDone | ValidSource$ Card.YouCtrl | ValidTarget$ Player,Permanent | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ TrigDamage | SpellDescription$ Three Autostubs — Whenever another source you control deals exactly 1 damage to a permanent or player, CARDNAME deals 2 damage to that permanent or player.
-SVar:TrigDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ ParentTarget
+T:Mode$ DamageDone | ValidSource$ Card.YouCtrl | ValidTarget$ Player,Permanent | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | Execute$ TrigDamage | SpellDescription$ Three Autostubs — Whenever another source you control deals exactly 1 damage to a permanent or player, CARDNAME deals 2 damage to that permanent or player.
+SVar:TrigDamage:DB$ DealDamage | NumDmg$ 2 | Defined$ TriggeredTarget
 SVar:X:TriggerCount$DamageAmount
 Oracle:Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)\nThree Autostubs — Whenever another source you control deals exactly 1 damage to a permanent or player, Ghyrson Starn, Kelermorph deals 2 damage to that permanent or player.
