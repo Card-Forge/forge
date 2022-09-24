@@ -11,4 +11,4 @@ S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | ValidBlocker$ Creature.powerLE2
 SVar:X:Count$xPaid
 SVar:Y:SVar$X/Times.2
 DeckHints:Ability$Counters
-Oracle:Frenzied Metabolism — As an additional cost to cast this spell, you may remove any number of +1/+1 counters from among creatures you control. This spell costs {2} less to cast for each counter removed this way.\nVigilance, reach, ward {2}\nTitanic — Hierophant Bio-Titan can’t be blocked by creatures with power 2 or less.
+Oracle:Frenzied Metabolism — As an additional cost to cast this spell, you may remove any number of +1/+1 counters from among creatures you control. This spell costs {2} less to cast for each counter removed this way.\nVigilance, reach, ward {2}\nTitanic — Hierophant Bio-Titan can't be blocked by creatures with power 2 or less.
