@@ -1,10 +1,8 @@
-Name:Anrakyr the Traveller
-ManaCost:4 B
-Types:Legendary Artifact Creature Necron
-PT:4/4
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCast | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may cast an artifact spell from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.
-SVar:TrigCast:DB$ Play | ValidZone$ Hand | Valid$ Artifact.YouOwn | ValidSA$ Spell | Controller$ You | ValidZone$ Hand,Graveyard | Optional$ True | Amount$ 1 | PlayCost$ PayLife<ConvertedManaCost>
-SVar:HasAttackEffect:TRUE
-DeckHas:Ability$Graveyard
-DeckHints:Type$Artifact
-Oracle:Lord of the Pyrrhian Legions — Whenever Anrakyr the Traveller attacks, you may cast an artifact spell from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.
+Name:Out of the Tombs
+ManaCost:2 B
+Types:Enchantment
+At the beginning of your upkeep, put two eon counters on Out of the Tombs, then mill cards equal to the number of eon counters on it.
+
+
+DeckHas:Ability$Graveyard|Mill|Counters
+Oracle:At the beginning of your upkeep, put two eon counters on Out of the Tombs, then mill cards equal to the number of eon counters on it.\nIf you would draw a card while your library has no cards in it, instead return a creature card from your graveyard to the battlefield. If you can’t, you lose the game.
