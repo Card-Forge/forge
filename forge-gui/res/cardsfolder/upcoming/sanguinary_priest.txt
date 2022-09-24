@@ -1,0 +1,9 @@
+Name:Sanguinary Priest
+ManaCost:3 B
+Types:Creature Astartes Cleric
+PT:2/4
+K:LifeLink
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Blood Chalice — Whenever another creature you control dies, CARDNAME deals 1 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 1
+DeckHints:Ability$Sacrifice
+Oracle:Lifelink\nBlood Chalice — Whenever another creature you control dies, Sanguinary Priest deals 1 damage to any target.
