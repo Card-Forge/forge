@@ -1093,7 +1093,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
             String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : MessageUtil.formatMessage(Localizer.getInstance().getMessage("lblSelectCardFromPlayerZone", "{player's}", Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME).toLowerCase()), decider, player);
             final String totalcmc = sa.getParam("WithTotalCMC");
+            final String totalpower = sa.getParam("WithTotalPower");
             int totcmc = AbilityUtils.calculateAmount(source, totalcmc, sa);
+            int totpower = AbilityUtils.calculateAmount(source, totalpower, sa);
 
             fetchList.sort();
 
@@ -1163,6 +1165,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             fetchList = CardLists.getValidCards(fetchList, "Card.cmcLE" + totcmc, source.getController(), source, sa);
                         }
                     }
+                    if (totalpower != null) {
+                        if (totpower >= 0) {
+                            fetchList = CardLists.getValidCards(fetchList, "Card.powerLE" + totpower, source.getController(), source, sa);
+                        }
+                    }
 
                     // If we're choosing multiple cards, only need to show the reveal dialog the first time through.
                     boolean shouldReveal = (i == 0);
@@ -1202,6 +1209,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                     if (totalcmc != null) {
                         totcmc -= c.getCMC();
+                    }
+                    if (totalpower != null) {
+                        totpower -= c.getCurrentPower();
                     }
                 }
             }
@@ -1501,7 +1511,8 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 && !sa.hasParam("DifferentCMC")
                 && !sa.hasParam("AtRandom")
                 && (!sa.hasParam("Defined") || sa.hasParam("ChooseFromDefined"))
-                && sa.getParam("WithTotalCMC") == null;
+                && !sa.hasParam("WithTotalCMC")
+                && !sa.hasParam("WithTotalPower");
     }
 
     /**

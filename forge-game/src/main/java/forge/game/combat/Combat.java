@@ -203,7 +203,7 @@ public class Combat {
 
     //gets attacked player opponents (ignores planeswalkers)
     public final FCollection<Player> getAttackedOpponents(Player atk) {
-        FCollection<Player> attackedOpps = new FCollection<Player>();
+        FCollection<Player> attackedOpps = new FCollection<>();
         if (atk == playerWhoAttacks) {
             for (Player defender : getDefendingPlayers()) {
                 if (!getAttackersOf(defender).isEmpty()) {

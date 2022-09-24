@@ -395,14 +395,8 @@ public class CardProperty {
             }
 
             if (!card.getEntityAttachedTo().isValid(restriction, sourceController, source, spellAbility)) {
-                boolean found = false;
-                for (final GameObject o : AbilityUtils.getDefinedObjects(source, restriction, spellAbility)) {
-                    if (o.equals(card.getEntityAttachedTo())) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
+                // only few cases need players
+                if (!(restriction.contains("Player") ? AbilityUtils.getDefinedPlayers(source, restriction, spellAbility) : AbilityUtils.getDefinedCards(source, restriction, spellAbility)).contains(card.getEntityAttachedTo())) {
                     return false;
                 }
             }
