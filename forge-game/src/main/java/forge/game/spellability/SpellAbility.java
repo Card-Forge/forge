@@ -1954,9 +1954,14 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         }
 
         Card host = topSA.getHostCard();
-        // if from an effect it's always Delayed Trigger
+        // if from an effect it's usually Delayed Trigger
         if (host.isImmutable() && !host.isEmblem()) {
-            host = host.getEffectSource();
+            if (host.getEffectSource() != null) {
+                host = host.getEffectSource();
+            } else {
+                // or it could be the monarch, in that case it's only targetable if no source restriction
+                return StringUtils.indexOfAny("Card", tgt.getValidTgts()) != -1;
+            }
         }
 
         return host.isValid(tgt.getValidTgts(), getActivatingPlayer(), getHostCard(), this);
