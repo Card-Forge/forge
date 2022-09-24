@@ -240,6 +240,8 @@ public enum CounterEnumType {
     MUSIC("MUSIC", 255, 138, 255),
 
     MUSTER("MUSTR", 235, 196, 0),
+    
+    NECRODERMIS("NECRO", 80, 209, 250),
 
     NET("NET", 0, 221, 251),
 

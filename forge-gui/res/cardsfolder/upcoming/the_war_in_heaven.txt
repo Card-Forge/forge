@@ -1,10 +1,11 @@
-Name:Anrakyr the Traveller
-ManaCost:4 B
-Types:Legendary Artifact Creature Necron
-PT:4/4
-T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCast | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may cast an artifact spell from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.
-SVar:TrigCast:DB$ Play | ValidZone$ Hand | Valid$ Artifact.YouOwn | ValidSA$ Spell | Controller$ You | ValidZone$ Hand,Graveyard | Optional$ True | Amount$ 1 | PlayCost$ PayLife<ConvertedManaCost>
-SVar:HasAttackEffect:TRUE
-DeckHas:Ability$Graveyard
-DeckHints:Type$Artifact
-Oracle:Lord of the Pyrrhian Legions — Whenever Anrakyr the Traveller attacks, you may cast an artifact spell from your hand or graveyard by paying life equal to its mana value rather than paying its mana cost.
+Name:The War in Heaven
+ManaCost:3 B B B
+Types:Enchantment Saga
+K:Saga:3:DBDraw,DBMill,DBChoose
+SVar:DBDraw:DB$ Draw | NumCards$ 3 | SubAbility$ DBLoseLife | SpellDescription$ You draw three cards and you lose 3 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3
+SVar:DBMill:DB$ Mill | NumCards$ 3 | SpellDescription$ Mill three cards.
+SVar:DBChoose:DB$ ChangeZone | | Origin$ Graveyard | Destination$ Battlefield | TargetMin$ 0 | TargetMax$ 3 | MaxTotalTargetCMC$ 8 |  ValidTgts$ Creature.YouOwn | WithCountersType$ NECRODERMIS | AnimateSubAbility$ Animate | SpellDescription$ Choose up to three target creature cards with total mana value 8 or less in your graveyard. Return each of them to the battlefield with a necrodermis counter on it. They’re artifacts in addition to their other types.
+SVar:Animate:DB$ Animate | Defined$ Remembered | Types$ Artifact | Duration$ Permanent
+DeckHas:Ability$Graveyard|Mill|Counters & Type$Artifact
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — You draw three cards and you lose 3 life.\nII — Mill three cards.\nIII — Choose up to three target creature cards with total mana value 8 or less in your graveyard. Return each of them to the battlefield with a necrodermis counter on it. They’re artifacts in addition to their other types.
