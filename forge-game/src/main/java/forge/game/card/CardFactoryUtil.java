@@ -1791,6 +1791,19 @@ public class CardFactoryUtil {
             parsedTrigger.setOverridingAbility(sp);
 
             inst.addTrigger(parsedTrigger);
+        } else if (keyword.startsWith("Squad")) {
+            final String trigScript = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | " +
+                    "ValidCard$ Card.Self+wasCast | CheckSVar$ SquadAmount | Secondary$ True | " +
+                    "TriggerDescription$ When this creature enters the battlefield, create that many tokens that " +
+                    "are copies of it.";
+            final String abString = "DB$ CopyPermanent | Defined$ TriggeredCard | NumCopies$ SquadAmount";
+
+            final Trigger squadTrigger = TriggerHandler.parseTrigger(trigScript, card, intrinsic);
+            final SpellAbility squadAbility = AbilityFactory.getAbility(abString, card);
+            squadAbility.setSVar("SquadAmount", "0");
+            squadTrigger.setOverridingAbility(squadAbility);
+            squadTrigger.setSVar("SquadAmount", "0");
+            inst.addTrigger(squadTrigger);
         } else if (keyword.equals("Storm")) {
             final String actualTrigger = "Mode$ SpellCast | ValidCard$ Card.Self | TriggerZones$ Stack | Secondary$ True"
                     + "| TriggerDescription$ Storm (" + inst.getReminderText() + ")";
