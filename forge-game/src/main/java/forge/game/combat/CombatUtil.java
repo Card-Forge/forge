@@ -383,13 +383,13 @@ public class CombatUtil {
      *            a {@link forge.game.card.Card} object.
      */
     public static void checkDeclaredAttacker(final Game game, final Card c, final Combat combat, boolean triggers) {
-        GameEntity defender = combat.getDefenderByAttacker(c);
+        final GameEntity defender = combat.getDefenderByAttacker(c);
+        final List<Card> otherAttackers = combat.getAttackers();
 
         // Run triggers
         if (triggers) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Attacker, c);
-            final List<Card> otherAttackers = combat.getAttackers();
             otherAttackers.remove(c);
             runParams.put(AbilityKey.OtherAttackers, otherAttackers);
             runParams.put(AbilityKey.Attacked, defender);
@@ -405,7 +405,7 @@ public class CombatUtil {
             game.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
         }
 
-        c.getDamageHistory().setCreatureAttackedThisCombat(defender);
+        c.getDamageHistory().setCreatureAttackedThisCombat(defender, otherAttackers.size());
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
         c.getController().addCreaturesAttackedThisTurn(CardUtil.getLKICopy(c), defender);
     }
