@@ -9,4 +9,4 @@ SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
 SVar:X:Targeted$CardManaCost
 SVar:Y:Count$TimesKicked
 DeckHas:Ability$Graveyard|LifeGain
-Oracle:Return target creature card from your graveyard to the battlefield. If this spell was kicked, you gain life equal to that card's mana value. Otherwise, you lose that much life. Exile Sheoldred's Restoration.
+Oracle:Kicker {2}{W} (You may pay an additional {2}{W} as you cast this spell.)\nReturn target creature card from your graveyard to the battlefield. If this spell was kicked, you gain life equal to that card's mana value. Otherwise, you lose that much life. Exile Sheoldred's Restoration.

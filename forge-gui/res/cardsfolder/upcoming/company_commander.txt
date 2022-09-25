@@ -1,0 +1,12 @@
+Name:Company Commander
+ManaCost:2 W B
+Types:Creature Human Soldier
+PT:2/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Command Section — When CARDNAME enters the battlefield, create a number of 1/1 white Soldier creature tokens equal to the number of opponents you have.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You
+SVar:X:PlayerCountOpponents$Amount
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | NoResolvingCheck$ True | TriggerDescription$ Bring it Down! — Whenever CARDNAME attacks, creatures you control gain deathtouch until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Deathtouch
+SVar:HasAttackEffect:TRUE
+DeckHas:Keyword$Deathtouch & Ability$Token
+Oracle:Command Section — When Company Commander enters the battlefield, create a number of 1/1 white Soldier creature tokens equal to the number of opponents you have.\nBring it Down! — Whenever Company Commander attacks, creatures you control gain deathtouch until end of turn.

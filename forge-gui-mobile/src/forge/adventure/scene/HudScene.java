@@ -24,6 +24,14 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     }
 
     @Override
+    public void connected(final Controller controller) {
+        hud.ui.controllerConnected();
+    }
+    @Override
+    public void disconnected(final Controller controller) {
+        hud.ui.controllerDisconnected();
+    }
+    @Override
     public boolean leave() {
         stage.leave();
         return super.leave();

@@ -3,4 +3,5 @@ ManaCost:no cost
 Types:Creature Tyranid Warrior
 Colors:green
 PT:3/3
-Oracle:
+K:Trample
+Oracle:Trample

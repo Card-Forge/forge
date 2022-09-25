@@ -192,11 +192,13 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
         }
 
         if (hasParam("HasXManaCost")) {
-            final Cost cost = (Cost) (runParams.get(AbilityKey.Cost));
-            if (cost.hasNoManaCost()) {
-                return false;
+            final int numX;
+            if (spellAbility.isActivatedAbility()) {
+                numX = spellAbility.getPayCosts().hasManaCost() ? spellAbility.getPayCosts().getCostMana().getAmountOfX() : 0;
+            } else {
+                numX = cast.getManaCost().countX();
             }
-            if (cost.getCostMana().getAmountOfX() <= 0) {
+            if (numX == 0) {
                 return false;
             }
         }

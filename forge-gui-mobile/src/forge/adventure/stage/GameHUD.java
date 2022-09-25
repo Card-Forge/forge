@@ -52,7 +52,7 @@ public class GameHUD extends Stage   {
     private final TextraButton menuActor;
     private final TextraButton statsActor;
     private final TextraButton inventoryActor;
-    private final UIActor ui;
+    public final UIActor ui;
     private final Touchpad touchpad;
     private final Console console;
     float TOUCHPAD_SCALE = 70f, referenceX;
@@ -307,7 +307,13 @@ public class GameHUD extends Stage   {
     }
 
     @Override
+    public boolean keyUp(int keycode) {
+        ui.pressUp(keycode);
+        return super.keyUp(keycode);
+    }
+    @Override
     public boolean keyDown(int keycode) {
+        ui.pressDown(keycode);
         if (keycode == Input.Keys.F9 || keycode == Input.Keys.F10) {
             console.toggle();
             return true;

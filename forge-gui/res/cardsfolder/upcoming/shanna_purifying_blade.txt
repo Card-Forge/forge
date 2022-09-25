@@ -1,5 +1,5 @@
 Name:Shanna, Purifying Blade
-ManaCost:1 G W U
+ManaCost:G W U
 Types:Legendary Creature Human Warrior
 PT:3/3
 K:Lifelink

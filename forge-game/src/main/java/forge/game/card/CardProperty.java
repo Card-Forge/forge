@@ -395,14 +395,8 @@ public class CardProperty {
             }
 
             if (!card.getEntityAttachedTo().isValid(restriction, sourceController, source, spellAbility)) {
-                boolean found = false;
-                for (final GameObject o : AbilityUtils.getDefinedObjects(source, restriction, spellAbility)) {
-                    if (o.equals(card.getEntityAttachedTo())) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
+                // only few cases need players
+                if (!(restriction.contains("Player") ? AbilityUtils.getDefinedPlayers(source, restriction, spellAbility) : AbilityUtils.getDefinedCards(source, restriction, spellAbility)).contains(card.getEntityAttachedTo())) {
                     return false;
                 }
             }
@@ -1445,7 +1439,7 @@ public class CardProperty {
                 rhs = property.substring(11);
                 y = card.getNetToughness();
             } else if (property.startsWith("baseToughness")) {
-                rhs= property.substring(15);
+                rhs = property.substring(15);
                 y = card.getCurrentToughness();
             } else if (property.startsWith("cmc")) {
                 rhs = property.substring(5);
@@ -1550,9 +1544,15 @@ public class CardProperty {
             }
         } else if (property.startsWith("notattacking")) {
             return null == combat || !combat.isAttacking(card);
-        } else if (property.equals("attackedThisCombat")) {
-            if (null == combat || !card.getDamageHistory().getCreatureAttackedThisCombat()) {
+        } else if (property.startsWith("attackedThisCombat")) {
+            if (null == combat || card.getDamageHistory().getCreatureAttackedThisCombat() == 0) {
                 return false;
+            }
+            if (property.length() > 18) {
+                int x = AbilityUtils.calculateAmount(source, property.substring(21), spellAbility);
+                if (!Expressions.compare(card.getDamageHistory().getCreatureAttackedThisCombat(), property, x)) {
+                    return false;
+                }
             }
         } else if (property.equals("blockedThisCombat")) {
             if (null == combat || !card.getDamageHistory().getCreatureBlockedThisCombat()) {
