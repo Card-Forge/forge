@@ -258,7 +258,7 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
 
         // intervening if check, make sure to use right controller
         if (game.getStack().isResolving(getHostCard())) {
-            SpellAbility sa = game.getStack().peekAbility();
+            SpellAbility sa = game.getStack().peek().getSpellAbility(false);
             if (sa.isTrigger()) {
                 hostController = sa.getActivatingPlayer();
             }
