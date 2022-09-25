@@ -80,13 +80,11 @@ public class TriggerAbilityTriggered extends Trigger {
             return false;
         }
 
-        if (!matchesValidParam("ValidCause", causes))
-        {
+        if (!matchesValidParam("ValidCause", causes)) {
             return false;
         }
         
-        if (hasParam("TriggeredOwnAbility") && "True".equals(getParam("TriggeredOwnAbility")) && !Iterables.contains(causes, source))
-        {
+        if (hasParam("TriggeredOwnAbility") && "True".equals(getParam("TriggeredOwnAbility")) && !Iterables.contains(causes, source)) {
             return false;
         }
 
@@ -112,7 +110,7 @@ public class TriggerAbilityTriggered extends Trigger {
         return sb.toString();
     }
 
-    public static void addTriggeringObject(Trigger regtrig, SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public static Map<AbilityKey, Object> getRunParams(Trigger regtrig, SpellAbility sa, Map<AbilityKey, Object> runParams) {
         Map<AbilityKey, Object> newRunParams = AbilityKey.newMap();
         newRunParams.put(AbilityKey.Mode, regtrig.getMode().toString());
         if (regtrig.getMode() == TriggerType.ChangesZone) {
@@ -129,6 +127,9 @@ public class TriggerAbilityTriggered extends Trigger {
             newRunParams.put(AbilityKey.Destination, TextUtil.join(destinations, ","));
             newRunParams.put(AbilityKey.Cause, table.allCards());
         }
-        sa.setTriggeringObject(AbilityKey.TriggeredParams, newRunParams);
+
+        newRunParams.put(AbilityKey.SpellAbility, sa);
+
+        return newRunParams;
     }
 }
