@@ -253,8 +253,16 @@ public abstract class CardTraitBase extends GameObject implements IHasCardView, 
     }
 
     protected boolean meetsCommonRequirements(Map<String, String> params) {
-        final Player hostController = this.getHostCard().getController();
+        Player hostController = this.getHostCard().getController();
         final Game game = hostController.getGame();
+
+        // intervening if check, make sure to use right controller
+        if (game.getStack().isResolving(getHostCard())) {
+            SpellAbility sa = game.getStack().peekAbility();
+            if (sa.isTrigger()) {
+                hostController = sa.getActivatingPlayer();
+            }
+        }
 
         if (params.containsKey("Metalcraft")) {
             if ("True".equalsIgnoreCase(params.get("Metalcraft")) != hostController.hasMetalcraft()) return false;
