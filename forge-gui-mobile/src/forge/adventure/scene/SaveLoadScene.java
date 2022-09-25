@@ -1,6 +1,5 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -34,19 +33,20 @@ import java.util.zip.InflaterInputStream;
  * Scene to load and save the game.
  */
 public class SaveLoadScene extends UIScene {
-    private final IntMap<TextraButton> buttons = new IntMap<>();
+    private static final int NUMBEROFSAVESLOTS = 11;
+    private final IntMap<Selectable<TextraButton>> buttons = new IntMap<>();
     IntMap<WorldSaveHeader> previews = new IntMap<>();
-    Color defColor;
     Table layout;
     Modes mode;
-    Dialog dialog;
     TextField textInput;
     TextraLabel header;
-    int currentSlot = -3, lastSelectedSlot = 0;
+    int currentSlot = 0, lastSelectedSlot = 0;
     Image previewImage;
     TextraLabel previewDate;
     Image previewBorder;
-    TextraButton saveLoadButton, back, quickSave, autoSave, dialogSaveBtn, dialogAbortBtn;
+    TextraButton saveLoadButton, back;
+    Selectable<TextraButton> quickSave;
+    Selectable<TextraButton> autoSave;
     Actor lastHighlightedSave;
     SelectBox difficulty;
     ScrollPane scrollPane;
@@ -56,7 +56,6 @@ public class SaveLoadScene extends UIScene {
 
         layout = new Table();
         stage.addActor(layout);
-        dialog = Controls.newDialog(Forge.getLocalizer().getMessage("lblSave"));
         textInput = Controls.newTextField("");
         int c = 0;
         String[] diffList = new String[Config.instance().getConfigData().difficulties.length];
@@ -69,19 +68,7 @@ public class SaveLoadScene extends UIScene {
             //DifficultyData difficulty1 = Config.instance().getConfigData().difficulties[difficulty.getSelectedIndex()];
             return null;
         });
-        dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2).pad(2, 15, 2, 15);
-        dialog.getButtonTable().row();
-        dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName") + ": ")).align(Align.left).pad(2, 15, 2, 2);
-        dialog.getButtonTable().add(textInput).fillX().expandX().padRight(15);
-        dialog.getButtonTable().row();
-        dialogSaveBtn = Controls.newTextButton(Forge.getLocalizer().getMessage("lblSave"), () -> SaveLoadScene.this.save());
-        dialog.getButtonTable().add(dialogSaveBtn).align(Align.left).padLeft(15);
-        dialogAbortBtn = Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), () -> SaveLoadScene.this.saveAbort());
-        dialog.getButtonTable().add(dialogAbortBtn).align(Align.right).padRight(15);
 
-        //makes dialog hidden immediately when you open saveload scene..
-        dialog.getColor().a = 0;
-        dialog.hide();
         previewImage = ui.findActor("preview");
         previewDate = ui.findActor("saveDate");
         header = Controls.newTextraLabel(Forge.getLocalizer().getMessage("lblSave"));
@@ -90,7 +77,7 @@ public class SaveLoadScene extends UIScene {
         layout.row();
         autoSave = addSaveSlot(Forge.getLocalizer().getMessage("lblAutoSave"), WorldSave.AUTO_SAVE_SLOT);
         quickSave = addSaveSlot(Forge.getLocalizer().getMessage("lblQuickSave"), WorldSave.QUICK_SAVE_SLOT);
-        for (int i = 1; i < 11; i++)
+        for (int i = 1; i < NUMBEROFSAVESLOTS; i++)
             addSaveSlot(Forge.getLocalizer().getMessage("lblSlot") + ": " + i, i);
 
         saveLoadButton = ui.findActor("save");
@@ -98,8 +85,6 @@ public class SaveLoadScene extends UIScene {
         ui.onButtonPress("save", () -> SaveLoadScene.this.loadSave());
         back = ui.findActor("return");
         ui.onButtonPress("return", () -> SaveLoadScene.this.back());
-
-        defColor = saveLoadButton.getColor();
 
         scrollPane = ui.findActor("saveSlots");
         scrollPane.setActor(layout);
@@ -120,33 +105,58 @@ public class SaveLoadScene extends UIScene {
         return object;
     }
 
+    public class SaveSlot extends Selectable<TextraButton>
+    {
+        private int slotNumber;
 
-    private TextraButton addSaveSlot(String name, int i) {
-        layout.add(Controls.newLabel(name)).align(Align.left).pad(2, 5, 2, 10);
-        TextraButton button = Controls.newTextButton("...");
-        button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                try {
-                    if (!button.isDisabled())
-                        select(i);
-                } catch (Exception e) {
-                    e.printStackTrace();
+        public SaveSlot(  int slotNumber) {
+            super(Controls.newTextButton("..."));
+            this.slotNumber = slotNumber;
+            SaveSlot self=this;
+            actor.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    try {
+                        if (!actor.isDisabled())
+                        {
+                            selectActor(self);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        });
-        layout.add(button).fill(true,false).expand(true,false).align(Align.left).expandX();
+            });
+        }
+        @Override
+        public void onSelect(UIScene scene)
+        {
+            super.onSelect(scene);
+            updateSlot(slotNumber);
+        }
+
+    }
+
+    private Selectable<TextraButton> addSaveSlot(String name, int i) {
+        layout.add(Controls.newLabel(name)).align(Align.left).pad(2, 5, 2, 10);
+        SaveSlot button = new SaveSlot(i);
+        layout.add(button.actor).fill(true,false).expand(true,false).align(Align.left).expandX();
         buttons.put(i, button);
         layout.row();
+        addToSelectable(button) ;
         return button;
 
     }
 
-    public void back() {
-        Forge.switchToLast();
-    }
 
     public boolean select(int slot) {
+        if(!buttons.containsKey(slot))
+            return false;
+        selectActor(buttons.get(slot));
+        return updateSlot(slot);
+    }
+
+    private boolean updateSlot(int slot) {
+
         currentSlot = slot;
         if (slot > 0)
             lastSelectedSlot = slot;
@@ -169,14 +179,6 @@ public class SaveLoadScene extends UIScene {
             if (previewDate != null)
                 previewDate.setVisible(false);
         }
-        for (IntMap.Entry<TextraButton> butt : new IntMap.Entries<TextraButton>(buttons)) {
-            butt.value.setColor(defColor);
-        }
-        if (buttons.containsKey(slot)) {
-            TextraButton button = buttons.get(slot);
-            button.setColor(Color.RED);
-            selectActor(button, false);
-        }
 
         return true;
     }
@@ -186,9 +188,16 @@ public class SaveLoadScene extends UIScene {
             case Save:
                 if (currentSlot > 0) {
                     //prevent NPE, allowed saveslot is 1 to 10..
-                    textInput.setText(buttons.get(currentSlot).getText().toString());
-                    dialog.show(stage);
-                    selectActor(textInput, false);
+                    textInput.setText(buttons.get(currentSlot).actor.getText().toString());
+
+                    Dialog dialog=prepareDialog(Forge.getLocalizer().getMessage("lblSave"),ButtonOk|ButtonAbort,() -> SaveLoadScene.this.save());
+
+                    dialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2).pad(2, 15, 2, 15);
+                    dialog.getContentTable().row();
+                    dialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName") + ": ")).align(Align.left).pad(2, 15, 2, 2);
+                    dialog.getContentTable().add(textInput).fillX().expandX().padRight(15);
+                    dialog.getContentTable().row();
+                    showDialog(dialog);
                     stage.setKeyboardFocus(textInput);
                 }
                 break;
@@ -228,143 +237,11 @@ public class SaveLoadScene extends UIScene {
         }
     }
 
-    public boolean saveAbort() {
-        dialog.hide();
-        return true;
-    }
-
-    @Override
-    public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
-            back();
-        }
-        if (kbVisible) {
-            if (keycode == Input.Keys.BUTTON_START)
-                keyOK();
-            else if (keycode == Input.Keys.BUTTON_L1)
-                toggleShiftOrBackspace(true);
-            else if (keycode == Input.Keys.BUTTON_R1)
-                toggleShiftOrBackspace(false);
-            else if (keycode == Input.Keys.BUTTON_B)
-                hideOnScreenKeyboard();
-            else if (keycode == Input.Keys.BUTTON_A) {
-                if (selectedKey != null)
-                    performTouch(selectedKey);
-            } else if (keycode == Input.Keys.DPAD_UP || keycode == Input.Keys.DPAD_DOWN || keycode == Input.Keys.DPAD_LEFT || keycode == Input.Keys.DPAD_RIGHT)
-                setSelectedKey(keycode);
-        } else if (dialog.getColor().a != 0f) {
-            if (keycode == Input.Keys.BUTTON_A) {
-                if (selectedActor == textInput) {
-                    lastInputField = textInput;
-                    showOnScreenKeyboard(textInput.getText());
-                } else if (selectedActor == dialogAbortBtn || selectedActor == dialogSaveBtn) {
-                    performTouch(selectedActor);
-                    if (lastSelectedSlot > 0)
-                        select(lastSelectedSlot);
-                    else
-                        select(-3);
-                }
-            } else if (keycode == Input.Keys.BUTTON_B) {
-                performTouch(dialogAbortBtn);
-                if (lastSelectedSlot > 0)
-                    select(lastSelectedSlot);
-                else
-                    select(-3);
-            }
-            else if (keycode == Input.Keys.DPAD_DOWN) {
-                if (selectedActor == null) {
-                    selectActor(textInput, false);
-                } else if (selectedActor == textInput)
-                    selectActor(dialogSaveBtn, false);
-            } else if (keycode == Input.Keys.DPAD_UP) {
-                if (selectedActor == null)
-                    selectActor(dialogSaveBtn, false);
-                else if (selectedActor == dialogSaveBtn || selectedActor == dialogAbortBtn) {
-                    selectActor(textInput, false);
-                }
-            } else if (keycode == Input.Keys.DPAD_LEFT) {
-                if (selectedActor == dialogAbortBtn)
-                    selectActor(dialogSaveBtn, false);
-            } else if (keycode == Input.Keys.DPAD_RIGHT) {
-                if (selectedActor == dialogSaveBtn)
-                    selectActor(dialogAbortBtn, false);
-            }
-        } else {
-            if (keycode == Input.Keys.BUTTON_B)
-                performTouch(back);
-            else if (keycode == Input.Keys.BUTTON_Y) {
-                if (difficulty != null && difficulty.isVisible()) {
-                    int index = difficulty.getSelectedIndex()-1;
-                    if (index < 0)
-                        index = 0;
-                    difficulty.setSelectedIndex(index);
-                }
-            } else if (keycode == Input.Keys.BUTTON_X) {
-                if (difficulty != null && difficulty.isVisible()) {
-                    int index = difficulty.getSelectedIndex()+1;
-                    if (index >= 2)
-                        index = 2;
-                    difficulty.setSelectedIndex(index);
-                }
-            } else if (keycode == Input.Keys.BUTTON_L1) {
-                scrollPane.fling(1f, 0, -300);
-            } else if (keycode == Input.Keys.BUTTON_R1) {
-                scrollPane.fling(1f, 0, +300);
-            } else if (keycode == Input.Keys.BUTTON_A) {
-                performTouch(selectedActor);
-            } else if (keycode == Input.Keys.DPAD_LEFT) {
-                if (selectedActor == back || selectedActor == saveLoadButton) {
-                    if (lastHighlightedSave != null)
-                        selectActor(lastHighlightedSave, false);
-                    else
-                        selectActor(actorObjectMap.get(0), false);
-                    lastHighlightedSave = selectedActor;
-                }
-            } else if (keycode == Input.Keys.DPAD_RIGHT) {
-                if (!(selectedActor == back || selectedActor == saveLoadButton)) {
-                    lastHighlightedSave = selectedActor;
-                    selectActor(saveLoadButton, false);
-                }
-            } else if (keycode == Input.Keys.DPAD_DOWN) {
-                int index = mode == Modes.Save ? 9 : 11;
-                if (selectedActor == back)
-                    selectActor(saveLoadButton, false);
-                else if (selectedActorIndex == index) {
-                    selectActor(actorObjectMap.get(0), false);
-                    scrollPane.fling(1f, 0, +300);
-                } else {
-                    selectNextActor(false);
-                }
-                if (selectedActorIndex == 6)
-                    scrollPane.fling(1f, 0, -300);
-                if (!(selectedActor == back || selectedActor == saveLoadButton))
-                    lastHighlightedSave = selectedActor;
-            } else if (keycode == Input.Keys.DPAD_UP) {
-                if (selectedActor == saveLoadButton)
-                    selectActor(back, false);
-                else if (selectedActorIndex == 0) {
-                    selectActor(buttons.get(10), false);
-                    scrollPane.fling(1f, 0, -300);
-                } else {
-                    selectPreviousActor(false);
-                }
-                if (selectedActorIndex == 5)
-                    scrollPane.fling(1f, 0, +300);
-                if (!(selectedActor == back || selectedActor == saveLoadButton))
-                    lastHighlightedSave = selectedActor;
-            } else if (keycode == Input.Keys.BUTTON_START) {
-                performTouch(saveLoadButton);
-            }
-        }
-        return true;
-    }
 
     public void save() {
-        dialog.hide();
         if (WorldSave.getCurrentSave().save(textInput.getText(), currentSlot)) {
             updateFiles();
             //ensure the dialog is hidden before switching
-            dialog.getColor().a = 0f;
 
             Scene restoreScene = Forge.switchToLast();
             if (restoreScene != null) {
@@ -398,7 +275,7 @@ public class SaveLoadScene extends UIScene {
 
                         int slot = WorldSave.filenameToSlot(name.getName());
                         WorldSaveHeader header = (WorldSaveHeader) oos.readObject();
-                        buttons.get(slot).setText(header.name);
+                        buttons.get(slot).actor.setText(header.name);
                         previews.put(slot, header);
                     }
 
@@ -432,22 +309,18 @@ public class SaveLoadScene extends UIScene {
                 saveLoadButton.setText(Forge.getLocalizer().getMessage("lblStart"));
                 break;
         }
-        autoSave.setDisabled(mode == Modes.Save);
-        quickSave.setDisabled(mode == Modes.Save);
+        autoSave.actor.setDisabled(mode == Modes.Save);
+        quickSave.actor.setDisabled(mode == Modes.Save);
         this.mode = mode;
     }
 
     @Override
     public void enter() {
         unselectActors();
-        clearActorObjects();
-        if (lastSelectedSlot > 0)
-            select(lastSelectedSlot);
-        else
-            select(-3);
+        select(lastSelectedSlot);
         updateFiles();
-        autoSave.setText(Forge.getLocalizer().getMessage("lblAutoSave"));
-        quickSave.setText(Forge.getLocalizer().getMessage("lblQuickSave"));
+        autoSave.actor.setText(Forge.getLocalizer().getMessage("lblAutoSave"));
+        quickSave.actor.setText(Forge.getLocalizer().getMessage("lblQuickSave"));
         if (mode == Modes.NewGamePlus) {
             if (difficulty != null) {
                 difficulty.setVisible(true);
@@ -456,28 +329,6 @@ public class SaveLoadScene extends UIScene {
         } else {
             if (difficulty != null) {
                 difficulty.setVisible(false);
-            }
-        }
-        if (!autoSave.isDisabled())
-            addActorObject(autoSave);
-        if (!quickSave.isDisabled())
-            addActorObject(quickSave);
-        for (int i=0; i <= 10; i++) {
-            if (buttons.containsKey(i))
-                addActorObject(buttons.get(i));
-        }
-        addActorObject(textInput);
-        addActorObject(dialogSaveBtn);
-        addActorObject(dialogAbortBtn);
-        addActorObject(back);
-        addActorObject(saveLoadButton);
-        if (scrollPane != null) {
-            if (lastSelectedSlot >= 6) {
-                scrollPane.fling(1f, 0, -300);
-                selectActor(buttons.get(lastSelectedSlot), false);
-            } else if (lastSelectedSlot > 0 && lastSelectedSlot < 6) {
-                scrollPane.fling(1f, 0, +300);
-                selectActor(buttons.get(lastSelectedSlot), false);
             }
         }
         super.enter();

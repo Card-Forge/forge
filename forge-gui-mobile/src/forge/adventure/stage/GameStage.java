@@ -1,6 +1,7 @@
 package forge.adventure.stage;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -18,6 +19,7 @@ import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.Scene;
 import forge.adventure.scene.StartScene;
 import forge.adventure.scene.TileMapScene;
+import forge.adventure.util.KeyBinding;
 import forge.adventure.util.Paths;
 import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
@@ -43,6 +45,20 @@ public abstract class GameStage extends Stage {
     private float animationTimeout = 0;
     public static float maximumScrollDistance=1.5f;
     public static float minimumScrollDistance=0.3f;
+
+    public boolean axisMoved(Controller controller, int axisIndex, float value) {
+
+        if (MapStage.getInstance().isDialogOnlyInput()) {
+            return true;
+        }
+        player.getMovementDirection().x = controller.getAxis(0);
+        player.getMovementDirection().y = -controller.getAxis(1);
+        if(player.getMovementDirection().len()<0.2)
+        {
+            player.stop();
+        }
+        return true;
+    }
 
     enum PlayerModification
     {
@@ -211,19 +227,19 @@ public abstract class GameStage extends Stage {
     @Override
     public boolean keyDown(int keycode) {
         super.keyDown(keycode);
-        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A || keycode == Input.Keys.DPAD_LEFT)//todo config
+        if (KeyBinding.Left.isPressed(keycode))
         {
             player.getMovementDirection().x = -1;
         }
-        if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D || keycode == Input.Keys.DPAD_RIGHT)//todo config
+        if (KeyBinding.Right.isPressed(keycode) )
         {
             player.getMovementDirection().x = +1;
         }
-        if (keycode == Input.Keys.UP || keycode == Input.Keys.W || keycode == Input.Keys.DPAD_UP)//todo config
+        if (KeyBinding.Up.isPressed(keycode))
         {
             player.getMovementDirection().y = +1;
         }
-        if (keycode == Input.Keys.DOWN || keycode == Input.Keys.S || keycode == Input.Keys.DPAD_DOWN)//todo config
+        if (KeyBinding.Down.isPressed(keycode))
         {
             player.getMovementDirection().y = -1;
         }
@@ -243,15 +259,13 @@ public abstract class GameStage extends Stage {
                 enter();
             }
         }
+        if (keycode == Input.Keys.F11) {
+            debugCollision(false);
+
+        }
         if (keycode == Input.Keys.F12) {
             debugCollision(true);
-            for (Actor actor : foregroundSprites.getChildren()) {
-                if (actor instanceof MapActor) {
-                    ((MapActor) actor).setBoundDebug(true);
-                }
-            }
-            setDebugAll(true);
-            player.setBoundDebug(true);
+
         }
         if (keycode == Input.Keys.F2) {
             TileMapScene S = TileMapScene.instance();
@@ -276,7 +290,14 @@ public abstract class GameStage extends Stage {
         return true;
     }
 
-    protected void debugCollision(boolean b) {
+    public void debugCollision(boolean b) {
+        for (Actor actor : foregroundSprites.getChildren()) {
+            if (actor instanceof MapActor) {
+                ((MapActor) actor).setBoundDebug(b);
+            }
+        }
+        setDebugAll(b);
+        player.setBoundDebug(b);
     }
 
     @Override
@@ -334,19 +355,19 @@ public abstract class GameStage extends Stage {
     public boolean keyUp(int keycode) {
         if (isPaused())
             return true;
-        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A || keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)//todo config
+        if (KeyBinding.Left.isPressed(keycode)||KeyBinding.Right.isPressed(keycode))
         {
             player.getMovementDirection().x = 0;
             if (!player.isMoving())
                 stop();
         }
-        if (keycode == Input.Keys.UP || keycode == Input.Keys.W || keycode == Input.Keys.DOWN || keycode == Input.Keys.S)//todo config
+        if (KeyBinding.Down.isPressed(keycode)||KeyBinding.Up.isPressed(keycode))
         {
             player.getMovementDirection().y = 0;
             if (!player.isMoving())
                 stop();
         }
-        if (keycode == Input.Keys.ESCAPE) {
+        if (KeyBinding.Menu.isPressed(keycode)) {
             openMenu();
         }
         return false;

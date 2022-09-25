@@ -3,6 +3,7 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import forge.Forge;
+import forge.adventure.stage.MapStage;
 import forge.adventure.stage.WorldStage;
 
 /**
@@ -44,6 +45,7 @@ public class GameScene extends HudScene {
 
     @Override
     public void enter() {
+        MapStage.getInstance().clearIsInMap();
         Forge.clearTransitionScreen();
         Forge.clearCurrentScreen();
         super.enter();

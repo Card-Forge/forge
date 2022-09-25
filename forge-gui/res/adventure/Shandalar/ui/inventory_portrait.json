@@ -89,7 +89,8 @@
       "type": "TextButton",
       "name": "delete",
       "text": "Discard",
-      "width": 80,
+      "binding": "Status",
+      "width": 60,
       "height": 30,
       "x": 8,
       "y": 363
@@ -98,27 +99,30 @@
       "type": "TextButton",
       "name": "equip",
       "text": "Equip",
-      "width": 80,
+      "binding": "Equip",
+      "width": 60,
       "height": 30,
-      "x": 96,
+      "x": 75,
       "y": 363
     } ,
     {
       "type": "TextButton",
       "name": "use",
       "text": "Use",
-      "width": 80,
+      "binding": "Use",
+      "width": 60,
       "height": 30,
-      "x": 10,
+      "x": 140,
       "y": 363
     },
     {
       "type": "TextButton",
       "name": "return",
       "text": "tr(lblBack)",
-      "width": 80,
+      "binding": "Back",
+      "width": 60,
       "height": 30,
-      "x": 184,
+      "x": 205,
       "y": 363
     }
   ]

@@ -1,16 +1,11 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
-import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.DifficultyData;
@@ -22,7 +17,6 @@ import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
 import forge.card.ColorSet;
 import forge.deck.DeckProxy;
-import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.player.GamePlayerUtil;
@@ -54,16 +48,6 @@ public class NewGameScene extends UIScene {
 
         selectedName = ui.findActor("nameField");
         selectedName.setText(NameGenerator.getRandomName("Any", "Any", ""));
-        selectedName.addListener(new InputListener() {
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                if (!GuiBase.isAndroid() && showGamepadSelector) {
-                    //show onscreen keyboard
-                    return true;
-                }
-                return super.touchDown(event, x, y, pointer, button);
-            }
-        });
         avatarImage = ui.findActor("avatarPreview");
         gender = ui.findActor("gender");
         mode = ui.findActor("mode");
@@ -211,15 +195,10 @@ public class NewGameScene extends UIScene {
         return false;
     }
 
-    @Override
-    public void create() {
-
-    }
 
     @Override
     public void enter() {
         updateAvatar();
-        Gdx.input.setInputProcessor(stage); //Start taking input from the ui
 
         if (Forge.createNewAdventureMap) {
             FModel.getPreferences().setPref(ForgePreferences.FPref.UI_ENABLE_MUSIC, false);
@@ -233,155 +212,8 @@ public class NewGameScene extends UIScene {
             GamePlayerUtil.getGuiPlayer().setName(selectedName.getText());
             Forge.switchScene(GameScene.instance());
         }
-        clearActorObjects();
-        addActorObject(selectedName);
-        addActorObject(race);
-        addActorObject(gender);
-        addActorObject(difficulty);
-        addActorObject(colorId);
-        addActorObject(mode);
-        addActorObject(ui.findActor("back"));
-        addActorObject(ui.findActor("start"));
+
         unselectActors();
         super.enter();
-    }
-    @Override
-    public boolean pointerMoved(int screenX, int screenY) {
-        ui.screenToLocalCoordinates(pointer.set(screenX,screenY));
-        if (showGamepadSelector) {
-            unselectActors();
-            showGamepadSelector = false;
-        }
-        if (kbVisible)
-            return super.pointerMoved(screenX, screenY);
-        updateHovered();
-        return super.pointerMoved(screenX, screenY);
-    }
-    @Override
-    public boolean keyPressed(int keycode) {
-        if (Forge.hasGamepad())
-            showGamepadSelector = true;
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
-            if(!kbVisible)
-                back();
-        }
-        if (keycode == Input.Keys.BUTTON_SELECT) {
-            if (showGamepadSelector) {
-                if(!kbVisible)
-                    performTouch(ui.findActor("back"));
-            }
-        } else if (keycode == Input.Keys.BUTTON_START) {
-            if (showGamepadSelector) {
-                if(kbVisible)
-                    keyOK();
-                else
-                    performTouch(ui.findActor("start"));
-            }
-        } else if (keycode == Input.Keys.BUTTON_L2) {
-            if(!kbVisible)
-                selectedName.setText(NameGenerator.getRandomName("Female", "Any", selectedName.getText()));
-        } else if (keycode == Input.Keys.BUTTON_R2) {
-            if(!kbVisible)
-                selectedName.setText(NameGenerator.getRandomName("Male", "Any", selectedName.getText()));
-        } else if (keycode == Input.Keys.BUTTON_L1) {
-            if (showGamepadSelector) {
-                if (kbVisible)
-                    toggleShiftOrBackspace(true);
-                else
-                    performTouch(ui.findActor("leftAvatar"));
-            }
-        } else if (keycode == Input.Keys.BUTTON_R1) {
-            if (showGamepadSelector) {
-                if(kbVisible)
-                    toggleShiftOrBackspace(false);
-                else
-                    performTouch(ui.findActor("rightAvatar"));
-            }
-        } else if (keycode == Input.Keys.DPAD_DOWN) {
-            if (showGamepadSelector) {
-                if (kbVisible) {
-                    setSelectedKey(keycode);
-                } else {
-                    if (selectedActor == mode)
-                        selectActor(selectedName, false);
-                    else if (selectedActor == ui.findActor("back"))
-                        selectActor(ui.findActor("start"), false);
-                    else if (selectedActor == ui.findActor("start"))
-                        selectActor(ui.findActor("back"), false);
-                    else
-                        selectNextActor(false);
-                }
-            }
-        } else if (keycode == Input.Keys.DPAD_UP) {
-            if (showGamepadSelector) {
-                if (kbVisible) {
-                    setSelectedKey(keycode);
-                } else {
-                    if (selectedActor == selectedName)
-                        selectActor(mode, false);
-                    else if (selectedActor == ui.findActor("start"))
-                        selectActor(ui.findActor("back"), false);
-                    else if (selectedActor == ui.findActor("back"))
-                        selectActor(ui.findActor("start"), false);
-                    else
-                        selectPreviousActor(false);
-                }
-            }
-        } else if (keycode == Input.Keys.DPAD_LEFT) {
-            if (showGamepadSelector) {
-                if (kbVisible) {
-                    setSelectedKey(keycode);
-                } else {
-                    if (selectedActor == ui.findActor("back") || selectedActor == ui.findActor("start"))
-                        selectActor(mode, false);
-                }
-            }
-        } else if (keycode == Input.Keys.DPAD_RIGHT) {
-            if (showGamepadSelector) {
-                if (kbVisible) {
-                    setSelectedKey(keycode);
-                } else {
-                    if (!(selectedActor == ui.findActor("back") || selectedActor == ui.findActor("start")))
-                        selectActor(ui.findActor("start"), false);
-                }
-            }
-        } else if (keycode == Input.Keys.BUTTON_A) {
-            if (showGamepadSelector) {
-                if (kbVisible) {
-                    if (selectedKey != null)
-                        performTouch(selectedKey);
-                } else {
-                    if (selectedActor != null) {
-                        if (selectedActor instanceof TextraButton)
-                            performTouch(selectedActor);
-                        else if (selectedActor instanceof TextField && !kbVisible) {
-                            lastInputField = selectedActor;
-                            showOnScreenKeyboard("");
-                        }
-                    }
-                }
-            }
-        } else if (keycode == Input.Keys.BUTTON_B) {
-            if (showGamepadSelector) {
-                if (kbVisible) {
-                    hideOnScreenKeyboard();
-                } else {
-                    performTouch(ui.findActor("back"));
-                }
-            }
-        } else if (keycode == Input.Keys.BUTTON_X) {
-            if (showGamepadSelector) {
-                if(!kbVisible)
-                    if (selectedActor != null && selectedActor instanceof Selector)
-                        performTouch(((Selector) selectedActor).getLeftArrow());
-            }
-        } else if (keycode == Input.Keys.BUTTON_Y) {
-            if (showGamepadSelector) {
-                if(!kbVisible)
-                    if (selectedActor != null && selectedActor instanceof Selector)
-                        performTouch(((Selector) selectedActor).getRightArrow());
-            }
-        }
-        return true;
     }
 }

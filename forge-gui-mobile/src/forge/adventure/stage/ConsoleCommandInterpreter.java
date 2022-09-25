@@ -178,6 +178,15 @@ public static ConsoleCommandInterpreter getInstance()
             Current.player().addMaxLife(amount);
             return "Added " + amount + " max life";
         });
+        registerCommand(new String[]{"leave"}, s -> {
+            if(!MapStage.getInstance().isInMap()) return "not on a map";
+            MapStage.getInstance().exit();
+            return "Got out";
+        });
+        registerCommand(new String[]{"debug","collision"}, s -> {
+            currentGameStage().debugCollision(true);
+            return "Got out";
+        });
         registerCommand(new String[]{"give", "card"}, s -> {
             //TODO: Specify optional amount.
             if(s.length<1) return "Command needs 1 parameter: Card name.";
@@ -290,13 +299,14 @@ public static ConsoleCommandInterpreter getInstance()
             Current.player().addManaPercent(1.0f);
             return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
         });
-        registerCommand(new String[]{"debug","on"}, s -> {
-            Current.setDebug(true);
-            return "Debug mode ON";
+        registerCommand(new String[]{"debug","map"}, s -> {
+            GameHUD.getInstance().setDebug(true);
+            return "Debug map ON";
         });
         registerCommand(new String[]{"debug","off"}, s -> {
-            Current.setDebug(false);
-            return "Debug mode OFF";
+            GameHUD.getInstance().setDebug(true);
+            currentGameStage().debugCollision(false);
+            return "Debug  OFF";
         });
         registerCommand(new String[]{"remove","enemy","all"}, s -> {
             //TODO: Remove all overworld enemies if not inside a map.

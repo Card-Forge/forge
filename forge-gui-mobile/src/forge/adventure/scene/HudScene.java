@@ -2,12 +2,13 @@ package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
-import forge.Forge;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.GameStage;
 import forge.adventure.stage.IAfterMatch;
 import forge.adventure.stage.MapStage;
+import forge.adventure.util.KeyBinding;
 
 /**
  * Hud base scene
@@ -25,7 +26,7 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     @Override
     public boolean leave() {
         stage.leave();
-        return true;
+        return super.leave();
     }
 
     @Override
@@ -33,6 +34,7 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
         Gdx.input.setInputProcessor(this);
         stage.enter();
         hud.enter();
+        super.enter();
     }
 
     @Override
@@ -57,10 +59,8 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
 
     @Override
     public boolean keyDown(int keycode) {
-        if (Forge.hasGamepad()) {
-            if (MapStage.getInstance().isDialogOnlyInput()) {
-                return MapStage.getInstance().buttonPress(keycode);
-            }
+        if (MapStage.getInstance().isDialogOnlyInput()) {
+            return MapStage.getInstance().dialogInput(keycode);
         }
         if (hud.keyDown(keycode))
             return true;
@@ -72,11 +72,22 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
     @Override
     public boolean keyUp(int keycode) {
 
+        if (MapStage.getInstance().isDialogOnlyInput()) {
+            return true;
+        }
         if (hud.keyUp(keycode))
             return true;
         if(isInHudOnlyMode())
             return false;
         return stage.keyUp(keycode);
+    }
+    @Override
+    public boolean buttonDown(Controller var1, int var2) {
+            return keyDown(KeyBinding.controllerButtonToKey(var1,var2));
+    }
+    @Override
+    public boolean buttonUp(Controller var1, int var2) {
+        return keyUp(KeyBinding.controllerButtonToKey(var1,var2));
     }
 
     @Override
@@ -134,6 +145,11 @@ public abstract class HudScene extends Scene implements InputProcessor, IAfterMa
         return stage.scrolled(amountX, amountY);
     }
 
+    @Override
+    public boolean axisMoved(Controller controller, int axisIndex, float value) {
+
+        return stage.axisMoved(controller, axisIndex, value);
+    }
     @Override
     public void setWinner(boolean winner) {
         stage.setWinner(winner);

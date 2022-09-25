@@ -86,7 +86,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (T != null)
             T.dispose();
     }
-
+public boolean toolTipIsVisible()
+{
+    if(holdTooltip!=null)
+        return holdTooltip.tooltip_actor.getStage()!=null;
+    return false;
+}
     public Reward getReward() {
         return reward;
     }
@@ -220,6 +225,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 Pixmap drawingMap = new Pixmap((int) backSprite.getWidth(), (int) backSprite.getHeight(), Pixmap.Format.RGBA8888);
 
                 DrawOnPixmap.draw(drawingMap, backSprite);
+                if(reward.getItem()==null)
+                {
+                    needsToBeDisposed = true;
+                    image=new Texture(drawingMap);
+                    break;
+                }
                 Sprite item = reward.getItem().sprite();
 
                 DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - item.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1.7f), item);
@@ -558,8 +569,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         applyProjectionMatrix(batch);
 
 
-        if (hover)
+        if (hover|hasKeyboardFocus())
             batch.setColor(0.5f, 0.5f, 0.5f, 1);
+
 
         if (!frontSideUp()) {
             if (flipOnClick) {
