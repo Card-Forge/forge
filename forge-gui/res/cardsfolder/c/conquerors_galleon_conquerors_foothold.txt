@@ -3,14 +3,10 @@ ManaCost:4
 Types:Artifact Vehicle
 PT:2/10
 K:Crew:4
-SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
-SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True | SubAbility$ DBCleanup
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ GalleonReset | TriggerDescription$ When CARDNAME attacks, exile it at end of combat, then return it to the battlefield transformed under your control.
-T:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | CheckSVar$ CanFlip | SVarCompare$ GE1 | TriggerZones$ Battlefield | Execute$ TrigExile | Secondary$ True | TriggerDescription$ When CARDNAME attacks, exile it at end of combat, then return it to the battlefield transformed under your control.
-SVar:GalleonReset:DB$ StoreSVar | SVar$ CanFlip | Type$ Number | Expression$ 0 | SubAbility$ GalleonAttacked
-SVar:GalleonAttacked:DB$ StoreSVar | SVar$ CanFlip | Type$ Number | Expression$ 1 | ConditionPresent$ Card.attackedThisCombat+Self
-SVar:CanFlip:Number$0
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DelayedTransform | TriggerDescription$ When CARDNAME attacks, exile it at end of combat, then return it to the battlefield transformed under your control.
+SVar:DelayedTransform:DB$ DelayedTrigger | Mode$ Phase | Phase$ EndCombat | RememberObjects$ TriggeredAttacker | Execute$ TrigExile | TriggerDescription$ When CARDNAME attacks, exile it at end of combat, then return it to the battlefield transformed under your control.
+SVar:TrigExile:DB$ ChangeZone | Defined$ DelayTriggerRememberedLKI | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Transformed$ True
 AlternateMode:DoubleFaced
 Oracle:When Conqueror's Galleon attacks, exile it at end of combat, then return it to the battlefield transformed under your control.\nCrew 4 (Tap any number of creatures you control with total power 4 or more: This Vehicle becomes an artifact creature until end of turn.)
 
