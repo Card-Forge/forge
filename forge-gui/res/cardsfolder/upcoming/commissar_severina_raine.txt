@@ -1,0 +1,12 @@
+Name:Commissar Severina Raine
+ManaCost:1 W B
+Types:Legendary Creature Human Soldier
+PT:2/2
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Leading from the Front — Whenever CARDNAME attacks, each opponent loses X life, where X is the number of other attacking creatures.
+SVar:TrigLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ X 
+A:AB$ GainLife | Cost$ T Sac<1/Creature.Other/another creature> | PrecostDesc$ Summary Execution — | LifeAmount$ 2 | SubAbility$ DBDraw | SpellDescription$ You gain 2 life and draw a card.
+SVar:DBDraw:DB$ Draw
+SVar:X:Count$Valid Creature.attacking+Other
+DeckHas:Ability$Sacrifice|LifeGain
+SVar:HasAttackEffect:TRUE
+Oracle:Leading from the Front — Whenever Commissar Severina Raine attacks, each opponent loses X life, where X is the number of other attacking creatures.\nSummary Execution — {2}, Sacrifice another creature: You gain 2 life and draw a card.

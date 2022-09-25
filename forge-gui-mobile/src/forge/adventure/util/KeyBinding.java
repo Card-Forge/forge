@@ -20,7 +20,7 @@ public enum KeyBinding {
     Use("Use", Input.Keys.ENTER,Input.Keys.BUTTON_A),
     Back("Back", Input.Keys.ESCAPE,Input.Keys.BUTTON_B),
     ScrollUp("ScrollUp", Input.Keys.PAGE_UP,Input.Keys.BUTTON_L1),
-    ScrollDown("ScrollDown", Input.Keys.PAGE_DOWN,Input.Keys.BUTTON_L2),
+    ScrollDown("ScrollDown", Input.Keys.PAGE_DOWN,Input.Keys.BUTTON_R1),
     ;
     String name;
     int binding;

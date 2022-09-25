@@ -1,8 +1,9 @@
 Name:Spit Flame
 ManaCost:2 R
 Types:Instant
-A:SP$ DealDamage | Cost$ 2 R | NumDmg$ 4 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ CARDNAME deals 4 damage to target creature.
-T:Mode$ ChangesZone | ValidCard$ Dragon.YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Graveyard | OptionalDecider$ You | Execute$ TrigABChangeZone | TriggerDescription$ Whenever a Dragon enters the battlefield under your control, you may pay {R}. If you do, return Spit Flame from your graveyard to your hand.
+A:SP$ DealDamage | NumDmg$ 4 | ValidTgts$ Creature | SpellDescription$ CARDNAME deals 4 damage to target creature.
+T:Mode$ ChangesZone | ValidCard$ Dragon.YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Graveyard | Execute$ TrigABChangeZone | TriggerDescription$ Whenever a Dragon enters the battlefield under your control, you may pay {R}. If you do, return CARDNAME from your graveyard to your hand.
 SVar:TrigABChangeZone:AB$ ChangeZone | ValidCard$ Card.Self | Cost$ R | Origin$ Graveyard | Destination$ Hand
 DeckHints:Type$Dragon
+DeckHas:Ability$Graveyard
 Oracle:Spit Flame deals 4 damage to target creature.\nWhenever a Dragon enters the battlefield under your control, you may pay {R}. If you do, return Spit Flame from your graveyard to your hand.

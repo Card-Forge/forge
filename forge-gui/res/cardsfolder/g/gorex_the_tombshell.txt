@@ -2,7 +2,7 @@ Name:Gorex, the Tombshell
 ManaCost:6 B B
 Types:Legendary Creature Zombie Turtle
 PT:4/4
-A:SP$ PermanentCreature | Cost$ 6 B B ExileFromGrave<X/Creature/creature cards> | AdditionalDesc$ This spell costs {2} less to cast for each card exiled this way.
+A:SP$ PermanentCreature | Cost$ 6 B B ExileFromGrave<X/Creature> | AdditionalDesc$ This spell costs {2} less to cast for each card exiled this way.
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ Y | EffectZone$ All | Relative$ True | Secondary$ True | Description$ This spell costs {2} less to cast for each card exiled this way.
 SVar:X:Count$xPaid
 SVar:Y:SVar$X/Times.2

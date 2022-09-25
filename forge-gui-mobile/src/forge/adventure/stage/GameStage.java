@@ -48,7 +48,7 @@ public abstract class GameStage extends Stage {
 
     public boolean axisMoved(Controller controller, int axisIndex, float value) {
 
-        if (MapStage.getInstance().isDialogOnlyInput()) {
+        if (MapStage.getInstance().isDialogOnlyInput()||isPaused()) {
             return true;
         }
         player.getMovementDirection().x = controller.getAxis(0);
@@ -227,6 +227,8 @@ public abstract class GameStage extends Stage {
     @Override
     public boolean keyDown(int keycode) {
         super.keyDown(keycode);
+        if (isPaused())
+            return true;
         if (KeyBinding.Left.isPressed(keycode))
         {
             player.getMovementDirection().x = -1;

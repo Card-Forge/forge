@@ -348,7 +348,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         return true;
     }
 
-    public boolean meetsRequirementsOnTriggeredObjects(Game game,  final Map<AbilityKey, Object> runParams) {
+    public boolean meetsRequirementsOnTriggeredObjects(Game game, final Map<AbilityKey, Object> runParams) {
         if ("True".equals(getParam("EvolveCondition"))) {
             final Card moved = (Card) runParams.get(AbilityKey.Card);
             if (moved == null) {

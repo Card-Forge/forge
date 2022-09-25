@@ -1,9 +1,11 @@
 package forge.app;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.*;
 import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import forge.Forge;
+import forge.adventure.util.Config;
 import forge.assets.AssetsDownloader;
 import forge.interfaces.IDeviceAdapter;
 import forge.localinstance.properties.ForgePreferences;
@@ -103,10 +105,16 @@ public class Main {
 
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setResizable(false);
-        config.setWindowedMode(desktopMode ? desktopScreenWidth : screenWidth,  desktopMode ? desktopScreenHeight : screenHeight);
-        if (desktopMode && fullscreenFlag) {
+        ForgePreferences prefs = FModel.getPreferences();
+        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
+        ApplicationListener start = Forge.getApp(new Lwjgl3Clipboard(), new DesktopAdapter(switchOrientationFile),//todo get totalRAM && isTabletDevice
+                desktopMode ? desktopModeAssetsDir : assetsDir, propertyConfig, false, 0, false, 0, "", "");
+        if (Config.instance().getSettingData().fullScreen) {
             config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
-            config.setAutoIconify(true); //fix alt-tab when running fullscreen
+            config.setAutoIconify(true);
+            config.setHdpiMode(HdpiMode.Logical);
+        } else {
+            config.setWindowedMode(Config.instance().getSettingData().width, Config.instance().getSettingData().height);
         }
         config.setTitle("Forge");
         config.setWindowListener(new Lwjgl3WindowListener() {
@@ -156,10 +164,7 @@ public class Main {
         if (desktopMode)
             config.setHdpiMode(HdpiMode.Logical);
 
-        ForgePreferences prefs = FModel.getPreferences();
-        boolean propertyConfig = prefs != null && prefs.getPrefBoolean(ForgePreferences.FPref.UI_NETPLAY_COMPAT);
-        new Lwjgl3Application(Forge.getApp(new Lwjgl3Clipboard(), new DesktopAdapter(switchOrientationFile),//todo get totalRAM && isTabletDevice
-                desktopMode ? desktopModeAssetsDir : assetsDir, propertyConfig, false, 0, false, 0, "", ""), config);
+        new Lwjgl3Application(start, config);
     }
 
     private static class DesktopAdapter implements IDeviceAdapter {

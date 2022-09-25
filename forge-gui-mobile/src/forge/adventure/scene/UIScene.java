@@ -351,7 +351,7 @@ public class UIScene extends Scene {
             if(focus!=null&&focus instanceof ScrollPane)
             {
                 ScrollPane scroll=((ScrollPane)focus);
-                scroll.setScrollY(scroll.getScaleY()-20);
+                scroll.setScrollY(scroll.getScrollY()-20);
             }
         }
         if(KeyBinding.ScrollDown.isPressed(keycode))
@@ -360,7 +360,7 @@ public class UIScene extends Scene {
             if(focus!=null&&focus instanceof ScrollPane)
             {
                 ScrollPane scroll=((ScrollPane)focus);
-                scroll.setScrollY(scroll.getScaleY()+20);
+                scroll.setScrollY(scroll.getScrollY()+20);
             }
         }
         if(KeyBinding.Down.isPressed(keycode))

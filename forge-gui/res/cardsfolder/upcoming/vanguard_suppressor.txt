@@ -1,0 +1,10 @@
+Name:Vanguard Suppressor
+ManaCost:3 U
+Types:Creature Astartes Warrior
+PT:3/2
+K:Squad:2
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Suppressing Fire — Whenever CARDNAME deals combat damage to a player, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHas:Ability$Token
+Oracle:Squad {2} (As an additional cost to cast this spell, you may pay {2} any number of times. When this creature enters the battlefield, create that many tokens that are copies of it.)\nFlying\nSuppressing Fire — Whenever Vanguard Suppressor deals combat damage to a player, draw a card.

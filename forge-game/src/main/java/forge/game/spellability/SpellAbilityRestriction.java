@@ -465,7 +465,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 life = activator.getOpponentsSmallestLifeTotal();
             }
 
-            int right =AbilityUtils.calculateAmount(sa.getHostCard(), this.getLifeAmount().substring(2), sa);
+            int right = AbilityUtils.calculateAmount(sa.getHostCard(), this.getLifeAmount().substring(2), sa);
 
             if (!Expressions.compare(life, this.getLifeAmount(), right)) {
                 return false;

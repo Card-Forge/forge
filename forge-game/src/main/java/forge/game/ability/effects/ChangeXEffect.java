@@ -25,7 +25,7 @@ public class ChangeXEffect extends SpellAbilityEffect {
         for (final SpellAbility tgtSA : sas) {
             // for Unbound Flourishing, can't go over SpellAbilityStackInstances because the x is in cast SA copy
             SpellAbility castSA = tgtSA.getHostCard().getCastSA();
-            if (castSA != null && tgtSA.equals(castSA)) {
+            if (castSA != null && tgtSA.equals(castSA) && castSA.getXManaCostPaid() != null) {
                 castSA.setXManaCostPaid(castSA.getXManaCostPaid() * 2);
             }
             // fall back to other potential cards
