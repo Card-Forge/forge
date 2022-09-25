@@ -1,0 +1,6 @@
+Name:Clown Robot Token
+ManaCost:no cost
+Types:Artifact Creature Clown Robot
+Colors:White
+PT:1/1
+Oracle:
