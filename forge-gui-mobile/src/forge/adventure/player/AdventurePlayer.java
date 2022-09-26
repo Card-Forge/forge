@@ -412,7 +412,8 @@ public class AdventurePlayer implements Serializable, SaveFileContent {
                 addGold(reward.getCount());
                 break;
             case Item:
-                inventoryItems.add(reward.getItem().name);
+                if(reward.getItem()!=null)
+                    inventoryItems.add(reward.getItem().name);
                 break;
             case Life:
                 addMaxLife(reward.getCount());

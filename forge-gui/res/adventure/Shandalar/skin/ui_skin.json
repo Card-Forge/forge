@@ -325,6 +325,26 @@
 		"regions": [],
 		"playMode": 2,
 		"crushMode": 0
+	},
+	"unpressedFocus10Patch": {
+		"region": "unpressedFocus",
+		"horizontalStretchAreas": [ 3, 6, 8, 9 ],
+		"verticalStretchAreas": [ 6, 7, 9, 12 ],
+		"tiling": false,
+		"minWidth": 14,
+		"minHeight": 16,
+		"rightWidth": 5,
+		"leftWidth": 5,
+		"bottomHeight": 8,
+		"topHeight": 5,
+		"offsetX": 0,
+		"offsetY": 0,
+		"offsetXspeed": 0,
+		"offsetYspeed": 0,
+		"frameDuration": 0.03,
+		"regions": [],
+		"playMode": 2,
+		"crushMode": 0
 	}
 },
 "ButtonStyle": {
@@ -332,6 +352,7 @@
 		"up": "unpressed10patch",
 		"down": "pressed10Patch",
 		"over": "unpressed-hover10patch",
+		"focused": "unpressedFocus10Patch",
 		"disabled": "unpressed-disable10Patch"
 	},
 	"paper": {
@@ -350,7 +371,9 @@
 	"default": {
 		"checkboxOn": "check",
 		"checkboxOff": "uncheck",
-		"font": "default"
+		"font": "default",
+		"focused": "unpressedFocus10Patch",
+		"checkedFocused": "unpressedFocus10Patch"
 	}
 },
 "ImageButtonStyle": {
@@ -359,18 +382,22 @@
 		"imageDown": "pressed10Patch"
 	},
 	"leftarrow": {
-		"imageUp": "left",
-		"imageDown": "left_down"
+		"up": "left",
+		"down": "left_down",
+		"focused": "left_f"
 	},
 	"rightarrow": {
-		"imageUp": "right",
-		"imageDown": "right_down"
+		"up": "right",
+		"down": "right_down",
+		"focused": "right_f"
 	},
 	"item_frame": {
-		"imageUp": "item_frame",
-		"imageOver": "item_frame_hover",
-		"imageChecked": "item_frame_selected",
-		"imageCheckedOver": "item_frame_selected_hover"
+		"imageCheckedOver": "item_frame_selected_hover",
+		"up": "item_frame",
+		"over": "item_frame_hover",
+		"focused": "item_frame_selected",
+		"checked": "item_frame_selected",
+		"checkedOver": "item_frame_selected_hover"
 	}
 },
 "ImageTextButtonStyle": {
@@ -426,12 +453,15 @@
 		"fontColor": "RGBA_255_255_255_255",
 		"overFontColor": "RGBA_0_216_255_255",
 		"disabledFontColor": "RGBA_255_255_255_255",
+		"background": "unpressed10patch",
 		"scrollStyle": "default",
-		"listStyle": "default"
+		"listStyle": "default",
+		"backgroundOver": "unpressed-hover10patch"
 	}
 },
 "SliderStyle": {
 	"default-horizontal": {
+		"backgroundOver": "unpressed-hover10patch",
 		"background": "thinwindow10Patch",
 		"knob": "scroll"
 	},

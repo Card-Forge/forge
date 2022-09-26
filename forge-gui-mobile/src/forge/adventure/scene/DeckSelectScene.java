@@ -1,9 +1,11 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.IntMap;
@@ -17,11 +19,10 @@ import forge.adventure.util.Current;
 public class DeckSelectScene extends UIScene {
     private final IntMap<TextraButton> buttons = new IntMap<>();
     Color defColor;
-    Dialog dialog;
     TextField textInput;
     Table layout;
     TextraLabel header;
-    TextraButton back, edit, rename, dialogRenameBtn, dialogAbortBtn;
+    TextraButton back, edit, rename;
     int currentSlot = 0;
     ScrollPane scrollPane;
 
@@ -44,20 +45,7 @@ public class DeckSelectScene extends UIScene {
         for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++)
             addDeckSlot(Forge.getLocalizer().getMessage("lblDeck")+": " + (i + 1), i);
 
-        dialog = Controls.newDialog(Forge.getLocalizer().getMessage("lblSave"));
         textInput = Controls.newTextField("");
-        dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2);
-        dialog.getButtonTable().row();
-        dialog.getButtonTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left);
-        dialog.getButtonTable().add(textInput).fillX().expandX();
-        dialog.getButtonTable().row();
-        dialogRenameBtn = Controls.newTextButton(Forge.getLocalizer().getMessage("lblRename"), () -> DeckSelectScene.this.rename());
-        dialog.getButtonTable().add(dialogRenameBtn).align(Align.left).padLeft(15);
-        dialogAbortBtn = Controls.newTextButton(Forge.getLocalizer().getMessage("lblAbort"), () -> dialog.hide());
-        dialog.getButtonTable().add(dialogAbortBtn).align(Align.right).padRight(15);
-        dialog.getColor().a = 0f;
-        dialog.hide();
-
         back = ui.findActor("return");
         edit = ui.findActor("edit");
         rename = ui.findActor("rename");
@@ -65,13 +53,23 @@ public class DeckSelectScene extends UIScene {
         ui.onButtonPress("edit", () -> DeckSelectScene.this.edit());
         ui.onButtonPress("rename", () -> {
             textInput.setText(Current.player().getSelectedDeck().getName());
-            dialog.show(stage);
-            selectActor(textInput, false);
+            showRenameDialog();
         });
         defColor = ui.findActor("return").getColor();
 
         scrollPane = ui.findActor("deckSlots");
         scrollPane.setActor(layout);
+    }
+
+    private void showRenameDialog() {
+
+        Dialog dialog = prepareDialog(Forge.getLocalizer().getMessage("lblRenameDeck"),ButtonOk|ButtonAbort,()->DeckSelectScene.this.rename());
+        dialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblNameYourSaveFile"))).colspan(2);
+        dialog.getContentTable().row();
+        dialog.getContentTable().add(Controls.newLabel(Forge.getLocalizer().getMessage("lblName")+": ")).align(Align.left);
+        dialog.getContentTable().add(textInput).fillX().expandX();
+        dialog.getContentTable().row();
+        showDialog(dialog);
     }
 
     private TextraButton addDeckSlot(String name, int i) {
@@ -91,13 +89,11 @@ public class DeckSelectScene extends UIScene {
         layout.add(Controls.newLabel(name)).expandX().pad(2);
         layout.add(button).expandX().pad(2);
         buttons.put(i, button);
+        addToSelectable(new Selectable(button));
         layout.row();
         return button;
     }
 
-    public void back() {
-        Forge.switchToLast();
-    }
 
     public boolean select(int slot) {
         currentSlot = slot;
@@ -115,30 +111,15 @@ public class DeckSelectScene extends UIScene {
     }
 
 
-    @Override
-    public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
-            back();
-        }
-        return true;
-    }
 
     @Override
     public void enter() {
-        clearActorObjects();
         for (int i = 0; i < AdventurePlayer.NUMBER_OF_DECKS; i++) {
             if (buttons.containsKey(i)) {
                 buttons.get(i).setText(Current.player().getDeck(i).getName());
                 buttons.get(i).getTextraLabel().layout();
-                addActorObject(buttons.get(i));
             }
         }
-        addActorObject(back);
-        addActorObject(rename);
-        addActorObject(edit);
-        addActorObject(textInput);
-        addActorObject(dialogRenameBtn);
-        addActorObject(dialogAbortBtn);
         select(Current.player().getSelectedDeckIndex());
         super.enter();
     }
@@ -146,7 +127,6 @@ public class DeckSelectScene extends UIScene {
 
 
     private void rename() {
-        dialog.hide();
         String text = textInput.getText();
         Current.player().renameDeck(text);
         buttons.get(currentSlot).setText(Current.player().getDeck(currentSlot).getName());

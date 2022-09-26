@@ -10,6 +10,9 @@ import forge.adventure.data.DialogData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.MapStage;
 import forge.card.ColorSet;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
+import forge.sound.AudioClip;
 import forge.util.Localizer;
 
 /**
@@ -45,6 +48,7 @@ public class MapDialog {
         }
         this.data = JSONStringLoader.parse(Array.class, DialogData.class, S, defaultJSON);
     }
+    static AudioClip audio=null;
 
     private void loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
         setEffects(dialog.action);
@@ -54,6 +58,14 @@ public class MapDialog {
         String text; //Check for localized string (locname), otherwise print text.
         if(dialog.loctext != null && !dialog.loctext.isEmpty()) text = L.getMessage(dialog.loctext);
         else text = dialog.text;
+        if(audio!=null)
+            audio.stop();
+        if(dialog.voiceFile!=null)
+        {
+            audio = AudioClip.createClip(Config.instance().getFilePath(dialog.voiceFile));
+            if(audio!=null)
+                audio.play(FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_SOUNDS)/100f);
+        }
         TypingLabel A = Controls.newTypingLabel(text);
         A.setWrap(true);
         D.getContentTable().add(A).width(WIDTH); //Add() returns a Cell, which is what the width is being applied to.

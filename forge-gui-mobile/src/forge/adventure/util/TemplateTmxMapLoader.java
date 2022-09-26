@@ -30,7 +30,7 @@ public class TemplateTmxMapLoader extends TmxMapLoader {
         FileHandle tmxFile = new FileHandle(f);
 
         this.root = xml.parse(tmxFile);
-
+        parameter.generateMipMaps=true;
         final Array<FileHandle> textureFiles = getDependencyFileHandles(tmxFile);
         for (FileHandle textureFile : textureFiles) {
             Texture texture = new Texture(textureFile, parameter.generateMipMaps);

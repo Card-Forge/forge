@@ -7,10 +7,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.OrderedMap;
@@ -18,7 +18,10 @@ import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.UIData;
+import forge.adventure.scene.UIScene;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,6 +31,9 @@ import java.util.regex.Pattern;
 public class UIActor extends Group {
     UIData data;
     Actor lastActor=null;
+    public Array<UIScene.Selectable> selectActors=new Array<>();
+    private HashMap<KeyBinding,Button> keyMap=new HashMap<>();
+    public Array<KeyHintLabel> keyLabels=new Array<>();
 
     public UIActor(FileHandle handle) {
         data = (new Json()).fromJson(UIData.class, handle);
@@ -83,7 +89,7 @@ public class UIActor extends Group {
                         readCheckBoxProperties((CheckBox) newActor, new OrderedMap.OrderedMapEntries<>(element));
                         break;
                     case "SelectBox":
-                        newActor = new SelectBox<>(Controls.getSkin());
+                        newActor =Controls.newComboBox();
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + type);
@@ -93,6 +99,9 @@ public class UIActor extends Group {
             float yValue = 0;
             for (ObjectMap.Entry property : new OrderedMap.OrderedMapEntries<>(element)) {
                 switch (property.key.toString()) {
+                    case "selectable":
+                        selectActors.add(new UIScene.Selectable(newActor));
+                        break;
                     case "scale":
                         newActor.setScale((Float) property.value);
                         break;
@@ -135,6 +144,19 @@ public class UIActor extends Group {
             lastActor=newActor;
             addActor(newActor);
         }
+
+    }
+
+    public Button buttonPressed(int key)
+    {
+        for(Map.Entry<KeyBinding, Button> entry:keyMap.entrySet())
+        {
+            if(entry.getKey().isPressed(key))
+            {
+                return entry.getValue();
+            }
+        }
+        return null;
     }
 
     private void readScrollPaneProperties(ScrollPane newActor, ObjectMap.Entries<String, String> entries) {
@@ -189,7 +211,10 @@ public class UIActor extends Group {
             switch (property.key.toString()) {
                 case "style":
                     newActor.setStyle(Controls.getSkin().get(property.value.toString(), ImageButton.ImageButtonStyle.class));
-                    break; 
+                    break;
+                case "binding":
+                    keyMap.put(KeyBinding.valueOf(property.value.toString()),newActor);
+                    break;
             }
         }
     }
@@ -254,6 +279,12 @@ public class UIActor extends Group {
                 case "style":
                     newActor.setStyle(Controls.getSkin().get(property.value.toString(), TextButton.TextButtonStyle.class));
                     break;
+                case "binding":
+                    keyMap.put(KeyBinding.valueOf(property.value.toString()),newActor);
+                    KeyHintLabel label=new KeyHintLabel(KeyBinding.valueOf(property.value.toString()));
+                    keyLabels.add(label);
+                    newActor.add(label);
+                    break;
             }
         }
         newActor.layout();
@@ -287,31 +318,64 @@ public class UIActor extends Group {
             }
         });
     }
-    static final public int ButtonYes=0x1;
-    static final public int ButtonNo=0x2;
-    static final public int ButtonOk=0x4;
-    static final public int ButtonAbort=0x8;
-    public Dialog showDialog(Stage stage, String header, int buttons, Runnable onOkOrYes) {
-        Dialog dialog =new Dialog(header, Controls.getSkin())
+
+    public void controllerDisconnected( ) {
+        for(KeyHintLabel label:keyLabels)
         {
-            protected void result(Object object)
-            {
-                if(onOkOrYes!=null&&object!=null&&object.equals(true))
-                    onOkOrYes.run();
-                this.hide();
-                removeActor(this);
-            }
-        };
-        if((buttons&ButtonYes)!=0)
-            dialog.button(Forge.getLocalizer().getMessage("lblYes"), true);
-        if((buttons&ButtonNo)!=0)
-            dialog.button(Forge.getLocalizer().getMessage("lblNo"), false);
-        if((buttons&ButtonOk)!=0)
-            dialog.button(Forge.getLocalizer().getMessage("lblOk"), true);
-        if((buttons&ButtonAbort)!=0)
-            dialog.button(Forge.getLocalizer().getMessage("lblAbort"), false);
-        addActor(dialog);
-        dialog.show(stage);
-        return dialog;
+            label.disconnected();
+        }
+    }
+    public void controllerConnected( ) {
+        for(KeyHintLabel label:keyLabels)
+        {
+            label.connected();
+        }
+    }
+    public void pressUp(int code) {
+        for(KeyHintLabel label:keyLabels)
+        {
+            label.buttonUp(code);
+        }
+    }
+
+    public void pressDown(int code) {
+        for(KeyHintLabel label:keyLabels)
+        {
+            label.buttonDown(code);
+        }
+    }
+
+
+    private class KeyHintLabel extends TextraLabel {
+        public KeyHintLabel(KeyBinding keyBinding) {
+            super(keyBinding.getLabelText(false),Controls.getKeysFont());
+            this.keyBinding=keyBinding;
+        }
+        KeyBinding keyBinding;
+        public void connected( ) {
+            updateText();
+        }
+
+        private void updateText() {
+            setText(keyBinding.getLabelText(false));
+            layout();
+        }
+
+        public void disconnected() {
+            updateText();
+        }
+
+        public boolean buttonDown(int i) {
+            if(keyBinding.isPressed(i))
+                setText(keyBinding.getLabelText(true));
+            layout();
+            return false;
+        }
+
+        public boolean buttonUp( int i) {
+            if(keyBinding.isPressed(i))
+                updateText();
+            return false;
+        }
     }
 }

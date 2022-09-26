@@ -4,7 +4,7 @@
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJzt1DEKwCAMBVAHt17YS3nHDl2kaBpj8j+UDB/EwWcSsV2ltExmM70+YZhjIs7V7Hm5Um3e7leNUiyzmXlo1xqWK9mRJtNd2eniXMabHvcRnrbnJ/ex/smrteRYTY85nJqaPrwtb3d2PqLeHTei1wwX/a6QffxTbui3Dvk=
@@ -25,7 +25,7 @@
  </layer>
  <layer id="5" name="Overlay" width="30" height="30" visible="0">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUDAbgLsvA4CGLyR4FgxcQG0+44nY0ngc34ATGDRc0fqKlGBhipLCrG43fUTAKRsEoGAVDGQAA8c0ISg==
+   eJzt0bENwCAQBMHtAlpA//33AtU4cIgtET7STnTBZQuSKmgJPfetuk47/bW1c20zYMW7Y0CO7599JUk3ewCmfgdy
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -38,32 +38,46 @@
   <object id="61" template="../../obj/entry_left.tx" x="0" y="465" width="16" height="465"/>
   <object id="65" template="../../obj/entry_left.tx" x="464" y="463" width="16" height="462"/>
   <object id="66" template="../../obj/entry_down.tx" x="16" y="17" width="447" height="16"/>
-  <object id="67" name="IntroChar" class="dialog" gid="7627" x="238" y="208" width="16" height="16">
+  <object id="67" name="IntroChar" class="dialog" gid="11419" x="238" y="208" width="16" height="16">
    <properties>
     <property name="dialog">[{
-  &quot;text&quot;:&quot;Hello Planeswalker {var=player_name}&quot;,
+  &quot;text&quot;:&quot;HELLO PLANESWALKER {var=player_name}&quot;, 
   &quot;options&quot;:[
-    {      
-      &quot;name&quot;:&quot;Why am I here&quot;,     
-      &quot;condition&quot;:[ { &quot;checkMapFlag&quot;: &quot;intro&quot; ,&quot;not&quot;:true} ],    
-      &quot;text&quot;:&quot;You traveld to the planes of Shandalar\nEvery Planeswalker is trapped here&quot;,
-      &quot;options&quot;:[
-        {
-          &quot;name&quot;:&quot;continue&quot;, 
-            &quot;text&quot;:&quot;You have to defeat every guardianTake this rune, it will let you travel back to me.&quot;,
-            &quot;options&quot;:[
-            {
-               &quot;name&quot;:&quot;thank you&quot;,
-                &quot;action&quot;:[{&quot;advanceMapFlag&quot;:&quot;intro&quot;},{&quot;addItem&quot;:&quot;Colorless rune&quot;}]
-             }
-      ]
-        }
-      ]
-    },
+    {
+	  &quot;name&quot;:&quot;Why am I here&quot;,      
+	  &quot;condition&quot;:[ { &quot;checkMapFlag&quot;: &quot;intro&quot; ,&quot;not&quot;:true} ],    
+	  &quot;text&quot;:&quot;THIS... IS SHANDALAR A PLANE WHERE MANA IS SO PREVALENT AND USED BY ALL THAT IS SENTIENT EVEN THE COMMON PEOPLE USE SPELLS DAILY&quot;,
+	  &quot;voiceFile&quot;:&quot;audio/WizPAR1.mp3&quot;,
+	  &quot;options&quot;:[
+		{      
+		  &quot;name&quot;:&quot;continue&quot;,      
+		  &quot;text&quot;:&quot;LIKE YOU,SOME PLANESWALKERS HAVE BEEN IMPRISONED HEREBY THE GUARDIANS IN THE CASTLES YOU MUST DEFEAT THEM IN BATTLE TO RELEASE US FROM THIS PLANE USE YOUR POWERS OF MAGIC TO CHALLENGE THEM&quot;,
+		  &quot;voiceFile&quot;:&quot;audio/WizPAR2.mp3&quot;
+		  &quot;options&quot;:[
+			{
+			  &quot;name&quot;:&quot;continue&quot;, 
+				&quot;text&quot;:&quot;FIND THE PLANESWALKERS TRAPPED HERE  GUIDE THEM TO ME, THEY WILL HELP YOU ON YOUR JOURNEY.&quot;,
+				&quot;voiceFile&quot;:&quot;audio/WizPAR3.mp3&quot;,
+				&quot;options&quot;:[
+				{
+					&quot;name&quot;:&quot;continue&quot;, 
+					&quot;text&quot;:&quot;TAKE THIS RUNE YOU CAN USE IT ANYTIME TO RETURN HERE BE CAREFUL PLANESWALKER&quot;,
+					&quot;voiceFile&quot;:&quot;audio/WizPAR4.mp3&quot;
+					&quot;options&quot;:[
+					{
+						&quot;name&quot;:&quot;thank you&quot;,
+						&quot;action&quot;:[{&quot;advanceMapFlag&quot;:&quot;intro&quot;},{&quot;addItem&quot;:&quot;Colorless rune&quot;}]
+					}]
+				}]
+			}]
+		  
+		} 
+	  ]
+	},
     { &quot;name&quot;:&quot;Bye&quot; }
   ]
 }]</property>
-    <property name="sprite" value="sprites/knight.atlas"/>
+    <property name="sprite" value="sprites/black_wiz2.atlas"/>
    </properties>
   </object>
  </objectgroup>

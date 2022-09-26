@@ -87,9 +87,10 @@
       "name": "deck",
 	  "style":"menu",
       "text": "{Scale=200%}[+Deck]",
-      "width": 40,
+      "binding": "Deck",
+      "width": 48,
       "height": 36,
-      "x": 428,
+      "x": 424,
       "y": 106
     }, 
     {
@@ -97,9 +98,10 @@
       "name": "inventory", 
 	  "style":"menu",
       "text": "{Scale=200%}[+Item]",
-      "width": 40,
+      "binding": "Inventory",
+      "width": 48,
       "height": 36,
-      "x": 428,
+      "x": 424,
       "y": 146
     },
     
@@ -108,9 +110,10 @@
       "name": "statistic",
 	  "style":"menu",
       "text": "{Scale=200%}[+Status]",
-      "width": 40,
+      "binding": "Status",
+      "width": 48,
       "height": 36,
-      "x": 428,
+      "x": 424,
       "y": 186
     },
     {
@@ -118,9 +121,10 @@
       "name": "menu",
 	  "style":"menu",
       "text": "{Scale=200%}[+Menu]",
-      "width": 40,
+      "binding": "Menu",
+      "width": 48,
       "height": 36,
-      "x": 428,
+      "x": 424,
       "y": 226
     }
   ]

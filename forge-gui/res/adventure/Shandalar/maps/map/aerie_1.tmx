@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="89">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="89">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJxjYCAMZHgIY2oDYs2kpt3IZtXzYleDLE4Nu8k1gxK7KXU3Ofpx6SEmnCmxG6R+Fx6MDJDF9/JgmkOqvSCAyx/YAEitNJXsJRUMZXvR4xJbPEfx4k8HtPAvLD6R0wB6eqBmXqKH/oEor4gxAz0dUctOQmZRmn6JtRtbPUtJ/QsA90Mgnw==
-  </data>
- </layer>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxr4mZgaBrFo3gUj+JRPIpH8YjAAJnxGPY=

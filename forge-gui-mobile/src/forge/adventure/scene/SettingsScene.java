@@ -1,6 +1,5 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -13,7 +12,6 @@ import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
-import forge.adventure.util.UIActor;
 import forge.gui.GuiBase;
 import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
@@ -59,24 +57,24 @@ public class SettingsScene extends UIScene {
         }
         if(somethingWentWrong.get())
         {
-            Dialog dialog=ui.showDialog(stage,"Something went wrong", UIActor.ButtonOk|UIActor.ButtonAbort,null);
+            Dialog dialog=prepareDialog("Something went wrong", ButtonOk|ButtonAbort,null);
             dialog.text("Copy was not successful check your access right\n and if the folder is in use");
-            dialog.show(stage);
+            showDialog(dialog);
         }
         else
         {
-            Dialog dialog=ui.showDialog(stage,"Copied plane", UIActor.ButtonOk|UIActor.ButtonAbort,null);
+            Dialog dialog=prepareDialog("Copied plane", ButtonOk|ButtonAbort,null);
             dialog.text("New plane "+newPlaneName.getText()+" was created\nYou can now start the editor to change the plane\n" +
                     "or edit it manually from the folder\n" +
                     Config.instance().getPlanePath("<user>"+newPlaneName.getText()));
             Config.instance().getSettingData().plane = "<user>"+newPlaneName.getText();
             Config.instance().saveSettings();
-            dialog.show(stage);
+            showDialog(dialog);
         }
 
     }
     private void createNewPlane() {
-        Dialog dialog=ui.showDialog(stage,"Create your own Plane", UIActor.ButtonOk|UIActor.ButtonAbort,()->copyNewPlane());
+        Dialog dialog=prepareDialog("Create your own Plane", ButtonOk|ButtonAbort,()->copyNewPlane());
         dialog.text("Select a plane to copy");
         dialog.getContentTable().row();
         dialog.getContentTable().add(selectSourcePlane);
@@ -91,7 +89,7 @@ public class SettingsScene extends UIScene {
     private SettingsScene() {
         super(Forge.isLandscapeMode() ? "ui/settings.json" : "ui/settings_portrait.json");
 
-        selectSourcePlane = new SelectBox<String>(Controls.getSkin());
+        selectSourcePlane = Controls.newComboBox();
         newPlaneName = Controls.newTextField("");
         settingGroup = new Table();
         if (Preference == null) {
@@ -237,24 +235,11 @@ public class SettingsScene extends UIScene {
 
         ScrollPane scrollPane = ui.findActor("settings");
         scrollPane.setActor(settingGroup);
+        addToSelectable(settingGroup);
     }
 
 
 
-    @Override
-    public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
-            back();
-        }
-        if (keycode == Input.Keys.BUTTON_B)
-            performTouch(backButton);
-        else if (keycode == Input.Keys.BUTTON_L1) {
-            scrollPane.fling(1f, 0, -300);
-        } else if (keycode == Input.Keys.BUTTON_R1) {
-            scrollPane.fling(1f, 0, +300);
-        }
-        return true;
-    }
 
     public boolean back() {
         Forge.switchToLast();
@@ -346,9 +331,4 @@ public class SettingsScene extends UIScene {
             stage.dispose();
     }
 
-
-    @Override
-    public void create() {
-
-    }
 }

@@ -2,43 +2,43 @@
 "name":"Green",
   "mainDeck": [
     {  
-      "count":10, 
+      "count":15, 
       "cardName": "Forest" 
     },        
     {  
-      "count":4, 
+      "count":6, 
       "cardName": "Plains" 
     },   
     {  
-      "count":4, 
+      "count":6, 
       "cardName": "Mountain" 
     },
     {  
-      "count":6,
+      "count":9,
       "colors": ["green"],
       "rarity": ["Uncommon","Common"],   
       "manaCosts": [1,2]
     },
     {  
-      "count":4,
+      "count":6,
       "colors": ["white","red"],
       "rarity": ["Uncommon","Common"],   
       "manaCosts": [1,2]
     },
     {  
-      "count":4,
+      "count":6,
       "colors": ["green"],
       "rarity": ["Uncommon","Common"],   
       "manaCosts": [3,4]
     },
     {  
-      "count":2,
+      "count":3,
       "colors": ["red","white"],
       "rarity": ["Uncommon","Common"],   
       "manaCosts": [3,4]
     },
     {  
-      "count":6,
+      "count":9,
       "colors": ["green"],
       "rarity": ["rare"],   
       "manaCosts": [5,6,7,8,9] 

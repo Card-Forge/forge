@@ -13,6 +13,9 @@ public class DialogData {
     public String loctext;            //References a localized string for the text body.
     public DialogData[] options;      //List of sub-dialogs. Show up as options in the current one.
 
+
+    public String voiceFile;
+
     static public class ActionData {
         static public class QuestFlag {
             public String key;

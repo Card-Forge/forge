@@ -1,6 +1,5 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.github.tommyettinger.textra.TextraButton;
 import forge.Forge;
@@ -71,40 +70,11 @@ public class InnScene extends UIScene {
 
         tempHitPointCost.setDisabled(!purchaseable);
         tempHitPointCost.setText(  tempHealthCost+"[+Gold]");
-        clearActorObjects();
-        addActorObject(tempHitPointCost);
-        addActorObject(sell);
-        addActorObject(leave);
     }
 
     private void sell() {
         Forge.switchScene(ShopScene.instance());
     }
 
-    @Override
-    public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
-            done();
-        }
-        if (keycode == Input.Keys.DPAD_RIGHT) {
-            if (selectedActor == null)
-                selectActor(tempHitPointCost, false);
-            else
-                selectNextActor(false);
-        } else if ( keycode == Input.Keys.DPAD_LEFT) {
-            if (selectedActor == null)
-                selectActor(leave, false);
-            else
-                selectPreviousActor(false);
-
-        } else if (keycode == Input.Keys.BUTTON_B) {
-            performTouch(leave);
-
-        } else if (keycode == Input.Keys.BUTTON_A) {
-            performTouch(selectedActor);
-
-        }
-        return true;
-    }
 
 }
