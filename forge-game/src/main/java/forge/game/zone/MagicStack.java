@@ -348,14 +348,6 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
                 runParams.put(AbilityKey.Crew, sp.getPaidList("TappedCards"));
                 game.getTriggerHandler().runTrigger(TriggerType.Crewed, runParams, false);
             }
-
-            // Run AbilityTriggered
-            if (sp.isTrigger()) {
-                @SuppressWarnings("unchecked")
-                Map<AbilityKey, Object> newRunParams = (Map<AbilityKey, Object>) sp.getTriggeringObject(AbilityKey.TriggeredParams);
-                newRunParams.put(AbilityKey.SpellAbility, sp);
-                game.getTriggerHandler().runTrigger(TriggerType.AbilityTriggered, newRunParams, false);
-            }
         } else {
             // Run Copy triggers
             if (sp.isSpell()) {
@@ -812,26 +804,35 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         Player whoAddsToStack = playerTurn;
         do {
-            result |= chooseOrderOfSimultaneousStackEntry(whoAddsToStack);
+            result |= chooseOrderOfSimultaneousStackEntry(whoAddsToStack, false);
             // 2014-08-10 Fix infinite loop when a player dies during a multiplayer game during their turn
+            whoAddsToStack = game.getNextPlayerAfter(whoAddsToStack);
+        } while (whoAddsToStack != null && whoAddsToStack != playerTurn);
+        // 603.3b (Strict Proctor)
+        whoAddsToStack = playerTurn;
+        do {
+            result |= chooseOrderOfSimultaneousStackEntry(whoAddsToStack, true);
             whoAddsToStack = game.getNextPlayerAfter(whoAddsToStack);
         } while (whoAddsToStack != null && whoAddsToStack != playerTurn);
         return result;
     }
 
-    private final boolean chooseOrderOfSimultaneousStackEntry(final Player activePlayer) {
+    private final boolean chooseOrderOfSimultaneousStackEntry(final Player activePlayer, boolean isAbilityTriggered) {
         if (simultaneousStackEntryList.isEmpty()) {
             return false;
         }
 
         activePlayerSAs.clear();
-        for (int i = 0; i < simultaneousStackEntryList.size(); i++) {
-            SpellAbility sa = simultaneousStackEntryList.get(i);
-            Player activator = sa.getActivatingPlayer();
+        for (SpellAbility sa : simultaneousStackEntryList) {
+            if (isAbilityTriggered != (sa.isTrigger() && sa.getTrigger().getMode() == TriggerType.AbilityTriggered)) {
+                continue;
+            }
 
+            Player activator = sa.getActivatingPlayer();
             if (activator == null) {
                 activator = sa.getHostCard().getController();
             }
+
             if (activator.equals(activePlayer)) {
                 activePlayerSAs.add(sa);
             }
