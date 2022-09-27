@@ -232,7 +232,7 @@ public class HumanPlay {
             current = Iterables.getFirst(AbilityUtils.getDefinedCards(source, sourceAbility.getParam("ShowCurrentCard"), sourceAbility), null);
         }
 
-        final List<CostPart> parts = CostAdjustment.adjust(cost, sourceAbility).getCostParts();
+        final List<CostPart> parts = cost.getCostParts();
         final List<CostPart> remainingParts = new ArrayList<>(parts);
         CostPart costPart = null;
         if (!parts.isEmpty()) {
