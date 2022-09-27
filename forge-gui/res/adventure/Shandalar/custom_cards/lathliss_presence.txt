@@ -1,0 +1,8 @@
+Name:Lathliss presence
+ManaCost:no cost
+Colors:Red
+Types:Enchantment
+K:Hexproof
+T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of each upkeep, CARDNAME deals 2 damage to every none red creature.
+SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.nonRed  | NumDmg$ 2
+Oracle:At the beginning of each upkeep, Lathliss presence deals 2 damage to every none red creature.

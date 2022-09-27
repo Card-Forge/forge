@@ -80,7 +80,7 @@ public class MapStage extends GameStage {
     private int selected = 0;
     public InputEvent   eventTouchDown, eventTouchUp;
     TextraButton selectedKey;
-    private boolean foundPlayerSpawn=false;
+    private boolean respawnEnemies;
 
 
     public boolean getDialogOnlyInput() {
@@ -246,6 +246,9 @@ public class MapStage extends GameStage {
         setDialogStage(GameHUD.getInstance());
         showDialog();
     }
+    Array<EntryActor> otherEntries=new Array<>();
+    Array<EntryActor> spawnClassified=new Array<>();
+    Array<EntryActor> sourceMapMatch=new Array<>();
 
     public void loadMap(TiledMap map, String sourceMap) {
         isLoadingMatch = false;
@@ -278,6 +281,14 @@ public class MapStage extends GameStage {
             effect = JSONStringLoader.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
             effectDialog(effect);
         }
+        if(MP.get("respawnEnemies")!=null&&MP.get("respawnEnemies") instanceof Boolean&&(Boolean)MP.get("respawnEnemies"))
+        {
+            respawnEnemies=true;
+        }
+        else
+        {
+            respawnEnemies=false;
+        }
         if (MP.get("preventEscape") != null) preventEscape = (boolean) MP.get("preventEscape");
 
         if (MP.get("music") != null && !MP.get("music").toString().isEmpty()) {
@@ -286,7 +297,9 @@ public class MapStage extends GameStage {
 
         getPlayerSprite().stop();
         spriteLayer = null;
-        foundPlayerSpawn=false;
+        otherEntries.clear();
+        spawnClassified.clear();
+        sourceMapMatch.clear();
         for (MapLayer layer : map.getLayers()) {
             if (layer.getProperties().containsKey("spriteLayer") && layer.getProperties().get("spriteLayer", boolean.class)) {
                 spriteLayer = layer;
@@ -297,6 +310,12 @@ public class MapStage extends GameStage {
                 loadObjects(layer, sourceMap);
             }
         }
+        if(!spawnClassified.isEmpty())
+            spawnClassified.first().spawn();
+        else if(!sourceMapMatch.isEmpty())
+            sourceMapMatch.first().spawn();
+        else if(!otherEntries.isEmpty())
+            otherEntries.first().spawn();
 
         //reduce geometry in collision rectangles
         int oldSize;
@@ -329,6 +348,7 @@ public class MapStage extends GameStage {
         }while (oldSize!=collisionRect.size);
         if (spriteLayer == null) System.err.print("Warning: No spriteLayer present in map.\n");
 
+        getPlayerSprite().stop();
     }
 
     static public boolean containsOrEquals(Rectangle r1,Rectangle r2) {
@@ -387,13 +407,18 @@ public class MapStage extends GameStage {
                         boolean spawnPlayerThere=(targetMap==null||targetMap.isEmpty()&&sourceMap.isEmpty())||//if target is null and "from world"
                                 !sourceMap.isEmpty()&&targetMap.equals(sourceMap);
 
-                        if(foundPlayerSpawn)
-                            spawnPlayerThere=false;
+                        EntryActor entry=new EntryActor(this, id, prop.get("teleport").toString(), x, y, w, h, prop.get("direction").toString());
                         if((prop.containsKey("spawn")&& prop.get("spawn").toString().equals("true"))&&spawnPlayerThere)
                         {
-                            foundPlayerSpawn=true;
-                        }//set spawn to option with "spawn" over other entries
-                        EntryActor entry = new EntryActor(this, id, prop.get("teleport").toString(), x, y, w, h, prop.get("direction").toString(),spawnPlayerThere);
+                            spawnClassified.add(entry);
+                        }else if(spawnPlayerThere)
+                        {
+                            sourceMapMatch.add(entry);
+                        }
+                        else
+                        {
+                            otherEntries.add(entry);
+                        }
                         addMapActor(obj, entry);
                         break;
                     case "reward":
@@ -591,7 +616,8 @@ public class MapStage extends GameStage {
         if (currentMob.defeatDialog == null) {
             currentMob.remove();
             actors.removeValue(currentMob, true);
-            changes.deleteObject(currentMob.getId());
+            if(!respawnEnemies||currentMob.getData().boss)
+                changes.deleteObject(currentMob.getId());
         } else {
             currentMob.defeatDialog.activate();
             player.setAnimation(CharacterSprite.AnimationTypes.Idle);

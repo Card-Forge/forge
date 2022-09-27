@@ -22,7 +22,7 @@ import forge.util.Localizer;
 
 public class MapDialog {
     private final MapStage stage;
-    private final Array<DialogData> data;
+    private  Array<DialogData> data;
     private final int parentID;
     private final static float WIDTH = 260f;
     static private final String defaultJSON = "[\n" +
@@ -41,12 +41,21 @@ public class MapDialog {
     public MapDialog(String S, MapStage stage, int parentID) {
         this.stage = stage;
         this.parentID = parentID;
-        if (S.isEmpty()) {
-            System.err.print("Dialog error. Dialog property is empty.\n");
-            this.data = JSONStringLoader.parse(Array.class, DialogData.class, defaultJSON, defaultJSON);
-            return;
+        try
+        {
+
+            if (S.isEmpty()) {
+                System.err.print("Dialog error. Dialog property is empty.\n");
+                this.data = JSONStringLoader.parse(Array.class, DialogData.class, defaultJSON, defaultJSON);
+                return;
+            }
+            this.data = JSONStringLoader.parse(Array.class, DialogData.class, S, defaultJSON);
         }
-        this.data = JSONStringLoader.parse(Array.class, DialogData.class, S, defaultJSON);
+        catch (Exception exception)
+        {
+            exception.printStackTrace();
+
+        }
     }
     static AudioClip audio=null;
 
@@ -70,6 +79,7 @@ public class MapDialog {
         A.setWrap(true);
         D.getContentTable().add(A).width(WIDTH); //Add() returns a Cell, which is what the width is being applied to.
         if(dialog.options != null) {
+            int i=0;
             for(DialogData option:dialog.options) {
                 if( isConditionOk(option.condition) ) {
                     String name; //Get localized label if present.
@@ -80,9 +90,13 @@ public class MapDialog {
                     D.getButtonTable().add(B).width(WIDTH - 10); //The button table also returns a Cell when adding.
                     //TODO: Reducing the space a tiny bit could help. But should be fine as long as there aren't more than 4-5 options.
                     D.getButtonTable().row(); //Add a row. Tried to allow a few per row but it was a bit erratic.
+                    i++;
                 }
             }
-            stage.showDialog();
+            if(i==0)
+                stage.hideDialog();
+            else
+                stage.showDialog();
         }
         else {
             stage.hideDialog();

@@ -1,0 +1,8 @@
+Name:Ghalta presence
+ManaCost:no cost
+Colors:Green
+Types:Enchantment
+K:Hexproof
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDestroyAll | TriggerDescription$ At the beginning of your upkeep, destroy all artifacts and enchantments you dont control.
+SVar:TrigDestroyAll:DB$ DestroyAll | ValidCards$ Artifact.YouDontCtrl,Enchantment.YouDontCtrl,Planeswalker.YouDontCtrl |  
+Oracle:At the beginning of your upkeep, destroy all artifacts and enchantments you dont control.

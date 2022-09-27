@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tileset/buildings.tsx",
+    "activeFile": "map/castle_plains_2.tmx",
     "automapping.whileDrawing": false,
     "expandedProjectPaths": [
         "tileset",
@@ -92,32 +92,32 @@
             "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 241,
-                "y": 137.33333333333334
+                "x": 359.66666666666663,
+                "y": 295.33333333333326
             }
         },
         "map/castle_plains_3.tmx": {
             "scale": 2,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 239.75,
-                "y": 137
+                "x": 240,
+                "y": 136
             }
         },
         "map/catlair_1.tmx": {
             "scale": 4,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 198.375,
-                "y": 183.25
+                "x": 240,
+                "y": 136
             }
         },
         "map/catlair_2.tmx": {
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 157.25,
-                "y": 117
+                "x": 240,
+                "y": 136
             }
         },
         "map/catlair_3.tmx": {
@@ -167,8 +167,8 @@
             "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 276.25,
-                "y": 184.5
+                "x": 240,
+                "y": 136
             }
         },
         "map/cave_11.tmx": {
@@ -343,8 +343,8 @@
             "scale": 1.0548958333333331,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 239.83410684309274,
-                "y": 136.50636911227411
+                "x": 757.8947368421054,
+                "y": 362.12106250617165
             }
         },
         "map/cave_18.tmx": {
@@ -1399,11 +1399,14 @@
             }
         },
         "map/crypt.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 243.33333333333337,
-                "y": 151.33333333333334
+                "x": 243.66666666666666,
+                "y": 150.66666666666669
             }
         },
         "map/crypt_2.tmx": {
@@ -1712,8 +1715,8 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 232.33333333333331,
-                "y": 136
+                "x": 289.66666666666663,
+                "y": 135.33333333333334
             }
         },
         "map/graveyard_2.tmx": {
@@ -2111,27 +2114,58 @@
             }
         },
         "map/main_story/black_castle.tmx": {
-            "scale": 4,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 2,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 449,
+                "y": 440
+            }
+        },
+        "map/main_story/black_castle_f1.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.7891666666666666,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 220.375,
-                "y": 487
+                "x": 288.402421984164,
+                "y": 240.33535165346998
             }
         },
         "map/main_story/blue_castle.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 3,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 391.5,
+                "y": 493
+            }
+        },
+        "map/main_story/blue_castle_f1.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.7891666666666666,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 214.99999999999997,
-                "y": 331.16666666666663
+                "x": 288.402421984164,
+                "y": 240.33535165346998
             }
         },
         "map/main_story/colorless_castle.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 2,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 242.75,
-                "y": 339
+                "x": 240,
+                "y": 240
             }
         },
         "map/main_story/crypt.tmx": {
@@ -2143,11 +2177,22 @@
             }
         },
         "map/main_story/final_castle.tmx": {
-            "scale": 4,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 212.125,
-                "y": 1718.25
+                "x": 326.66666666666663,
+                "y": 1110.6666666666665
+            }
+        },
+        "map/main_story/final_castle_f1.tmx": {
+            "scale": 0.4708333333333333,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 241.06194690265477,
+                "y": 913.2743362831858
             }
         },
         "map/main_story/forest_capital.tmx": {
@@ -2162,11 +2207,22 @@
             }
         },
         "map/main_story/green_castle.tmx": {
-            "scale": 3,
+            "scale": 2,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 359.75,
+                "y": 536.5
+            }
+        },
+        "map/main_story/green_castle_f1.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.7891666666666666,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 246,
-                "y": 239.66666666666663
+                "x": 307.6851420586866,
+                "y": 240.33535165346998
             }
         },
         "map/main_story/island_capital.tmx": {
@@ -2203,19 +2259,33 @@
             }
         },
         "map/main_story/red_castle.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
             "scale": 2,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 265.25,
+                "y": 576
+            }
+        },
+        "map/main_story/red_castle_f1.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.5120833333333332,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
-                "y": 240
+                "x": 296.6106365389915,
+                "y": 239.4047947092863
             }
         },
         "map/main_story/skep.tmx": {
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240.33333333333334,
-                "y": 240
+                "x": 105.33333333333331,
+                "y": 239.3333333333333
             }
         },
         "map/main_story/spawn.tmx": {
@@ -2225,8 +2295,8 @@
             "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 231.83333333333331,
-                "y": 243.66666666666666
+                "x": 240,
+                "y": 240
             }
         },
         "map/main_story/swamp_capital.tmx": {
@@ -2257,11 +2327,25 @@
             }
         },
         "map/main_story/white_castle.tmx": {
-            "scale": 4,
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 1.5,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 427.66666666666663,
+                "y": 637.3333333333333
+            }
+        },
+        "map/main_story/white_castle_f1.tmx": {
+            "expandedObjectLayers": [
+                4
+            ],
+            "scale": 3,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 240,
-                "y": 240
+                "x": 286.5,
+                "y": 176
             }
         },
         "map/maze_1.tmx": {
@@ -2866,28 +2950,38 @@
     "map.tileWidth": 16,
     "map.width": 90,
     "openFiles": [
-        "map/cave_1.tmx",
         "tileset/main.tsx",
         "map/cave_17.tmx",
         "map/cave_2.tmx",
         "map/cave_3.tmx",
-        "tileset/buildings.tsx"
-    ],
-    "project": "main.tiled-project",
-    "property.type": "int",
-    "recentFiles": [
-        "map/cave_1.tmx",
-        "map/cave_1..tmx",
+        "tileset/buildings.tsx",
+        "map/barbariancamp_4.tmx",
+        "map/castle_plains_1.tmx",
+        "map/castle_plains_2.tmx",
+        "map/castle_plains_3.tmx",
         "map/catlair_1.tmx",
         "map/catlair_2.tmx",
-        "map/catlair_3.tmx",
-        "map/main_story/black_castle.tmx",
-        "map/aerie_1.tmx",
-        "map/aerie_1B.tmx",
-        "map/aerie_1C.tmx",
+        "map/cave_10.tmx",
         "map/main_story/skep.tmx",
         "map/main_story/spawn.tmx",
-        "map/barbariancamp_4.tmx"
+        "map/main_story/colorless_castle.tmx",
+        "map/main_story/final_castle.tmx"
+    ],
+    "project": "main.tiled-project",
+    "property.type": "string",
+    "recentFiles": [
+        "map/main_story/green_castle_f1.tmx",
+        "map/main_story/white_castle_f1.tmx",
+        "map/main_story/green_castle.tmx",
+        "map/castle_plains_2.tmx",
+        "map/castle_plains_3.tmx",
+        "map/catlair_1.tmx",
+        "map/catlair_2.tmx",
+        "map/cave_10.tmx",
+        "map/main_story/skep.tmx",
+        "map/main_story/spawn.tmx",
+        "map/main_story/colorless_castle.tmx",
+        "map/main_story/final_castle.tmx"
     ],
     "resizeMap.removeObjects": true,
     "textEdit.monospace": true
