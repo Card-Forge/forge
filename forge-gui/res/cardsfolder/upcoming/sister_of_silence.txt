@@ -4,5 +4,5 @@ Types:Creature Human Knight
 PT:3/3
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ Psychic Abomination — When CARDNAME enters the battlefield, counter target instant spell, sorcery spell, activated ability, or triggered ability.
-SVar:TrigCounter:DB$ Counter | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Card,Emblem
+SVar:TrigCounter:DB$ Counter | TargetType$ Spell,Activated,Triggered | TgtPrompt$ Select target spell or ability | ValidTgts$ Instant,Sorcery,Emblem
 Oracle:Flash\nPsychic Abomination — When Sister of Silence enters the battlefield, counter target instant spell, sorcery spell, activated ability, or triggered ability.
