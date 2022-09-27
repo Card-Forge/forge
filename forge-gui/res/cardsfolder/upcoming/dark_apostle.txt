@@ -3,8 +3,8 @@ ManaCost:3 R
 Types:Creature Astartes Warlock
 PT:3/3
 A:AB$ Effect | PrecostDesc$ Gift of Chaos — | Cost$ 3 T | StaticAbilities$ GrantCascade | Triggers$ ExileEffect | SpellDescription$ The next noncreature spell you cast this turn has cascade. (When you cast that spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)
-SVar:GrantCascade:Mode$ Continuous | EffectZone$ Command | Affected$ Card.nonCreature+YouOwn | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ The next noncreature spell you cast this turn has cascade.
-SVar:ExileEffect:Mode$ SpellCast | EffectZone$ Command | Valid$ Card.nonCreature+YouOwn | AffectedZone$ Stack | Execute$ RemoveEffect | Static$ True
+SVar:GrantCascade:Mode$ Continuous | EffectZone$ Command | Affected$ Card.nonCreature+YouCtrl | AffectedZone$ Stack | AddKeyword$ Cascade | Description$ The next noncreature spell you cast this turn has cascade.
+SVar:ExileEffect:Mode$ SpellCast | EffectZone$ Command | Valid$ Card.nonCreature+YouCtrl  | AffectedZone$ Stack | Execute$ RemoveEffect | Static$ True
 SVar:RemoveEffect:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
 DeckHas:Keyword$Cascade
 Oracle:Gift of Chaos — {3}, {T}: The next noncreature spell you cast this turn has cascade. (When you cast that spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)

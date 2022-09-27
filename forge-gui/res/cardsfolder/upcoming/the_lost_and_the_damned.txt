@@ -1,0 +1,8 @@
+Name:The Lost and the Damned
+ManaCost:1 U B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Graveyard,Exile,CommandZone,Library | Destination$ Battlefield | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a land enters the battlefield under your control from anywhere other than your hand or you cast a spell from anywhere other than your hand, create 3/3 red Spawn creature token.
+T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromYourHand | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigToken | Secondary$ True | TriggerDescription$ Whenever a land enters the battlefield under your control from anywhere other than your hand or you cast a spell from anywhere other than your hand, create 3/3 red Spawn creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ r_3_3_spawn
+DeckHas:Ability$Token & Type$Spawn
+Oracle:Whenever a land enters the battlefield under your control from anywhere other than your hand or you cast a spell from anywhere other than your hand, create 3/3 red Spawn creature token.
