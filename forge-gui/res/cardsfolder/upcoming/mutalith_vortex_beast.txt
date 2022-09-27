@@ -3,7 +3,7 @@ ManaCost:4 U R
 Types:Creature Mutant Beast
 PT:6/6
 K:Trample
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFlipCoin | TriggerDescription$ Warp Vortex — When CARDNAME Beast enters the battlefield, flip a coin for each opponent you have. For each flip you win, draw a card. For each flip you lose, CARDNAME Beast deals 3 damage to that player.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFlipCoin | TriggerDescription$ Warp Vortex — When CARDNAME enters the battlefield, flip a coin for each opponent you have. For each flip you win, draw a card. For each flip you lose, CARDNAME deals 3 damage to that player.
 SVar:TrigFlipCoin:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBCoinFlip
 SVar:DBCoinFlip:DB$ FlipACoin | WinSubAbility$ DBDraw | LoseSubAbility$ DBLoseLife
 SVar:DBDraw:DB$ Draw | Defined$ You
