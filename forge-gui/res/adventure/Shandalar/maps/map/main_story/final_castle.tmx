@@ -3,8 +3,11 @@
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
+ <properties>
+  <property name="respawnEnemies" type="bool" value="true"/>
+ </properties>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="114">
   <data encoding="base64" compression="zlib">
    eJztw8EJAAAMA6H7dn/IvF1EwV1NVVVVVVVVVVVVVVVV1R62fUyd

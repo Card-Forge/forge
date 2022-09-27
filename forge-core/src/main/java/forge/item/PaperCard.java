@@ -37,7 +37,7 @@ import java.io.Serializable;
  *
  * @author Forge
  */
-public final class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, IPaperCard, Serializable {
+public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, IPaperCard, Serializable {
     private static final long serialVersionUID = 2942081982620691205L;
 
     // Reference to rules

@@ -1,0 +1,7 @@
+Name:Lorthos presence
+ManaCost:no cost
+Colors:Blue
+Types:Enchantment
+K:Hexproof
+S:Mode$ Continuous | Affected$ Player.Opponent | AddKeyword$ UntapAdjust:Land:1  | SVarCompare$ EQ1 |  Description$ Opponents can't untap more than one land during their untap steps.
+Oracle:Opponents can't untap more than one land during their untap steps.

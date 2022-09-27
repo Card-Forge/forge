@@ -10,34 +10,24 @@ import forge.adventure.stage.MapStage;
 public class EntryActor extends MapActor{
     private final MapStage stage;
     String targetMap;
+    private float x;
+    private float y;
+    private float w;
+    private float h;
+    private String direction;
 
-    public EntryActor(MapStage stage, int id,String targetMap,float x,float y,float w,float h,String direction,boolean spawnPlayerThere)
+    public EntryActor(MapStage stage, int id,String targetMap,float x,float y,float w,float h,String direction)
     {
         super(id);
         this.stage = stage;
         this.targetMap = targetMap;
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
 
 
-        if(spawnPlayerThere)          //or if source is this target
-        {
-            switch(direction)
-            {
-                case "up":
-                    stage.getPlayerSprite().setPosition(x+w/2-stage.getPlayerSprite().getWidth()/2,y+h);
-                    break;
-                case "down":
-                    stage.getPlayerSprite().setPosition(x+w/2-stage.getPlayerSprite().getWidth()/2,y-stage.getPlayerSprite().getHeight());
-                    break;
-                case "right":
-                    stage.getPlayerSprite().setPosition(x-stage.getPlayerSprite().getWidth(),y+h/2-stage.getPlayerSprite().getHeight()/2);
-                    break;
-                case "left":
-                    stage.getPlayerSprite().setPosition(x+w,y+h/2-stage.getPlayerSprite().getHeight()/2);
-                    break;
-
-            }
-        }
-
+        this.direction = direction;
     }
 
     public MapStage getMapStage()
@@ -58,5 +48,23 @@ public class EntryActor extends MapActor{
         }
     }
 
+    public void spawn() {
+        switch(direction)
+        {
+            case "up":
+                stage.getPlayerSprite().setPosition(x+w/2-stage.getPlayerSprite().getWidth()/2,y+h);
+                break;
+            case "down":
+                stage.getPlayerSprite().setPosition(x+w/2-stage.getPlayerSprite().getWidth()/2,y-stage.getPlayerSprite().getHeight());
+                break;
+            case "right":
+                stage.getPlayerSprite().setPosition(x-stage.getPlayerSprite().getWidth(),y+h/2-stage.getPlayerSprite().getHeight()/2);
+                break;
+            case "left":
+                stage.getPlayerSprite().setPosition(x+w,y+h/2-stage.getPlayerSprite().getHeight()/2);
+                break;
+
+        }
+    }
 }
 
