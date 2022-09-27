@@ -3,7 +3,7 @@ ManaCost:3 W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self,Enchantment.nonToken+Other+YouCtrl | Execute$ TrigSmallToken | TriggerDescription$ Whenever CARDNAME or another nontoken enchantment enters the battlefield under your control, create a 1/1 white Soldier creature token.
 SVar:TrigSmallToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ You
-T:Mode$ AbilityTriggered | ValidMode$ CounterAdded | ValidSpellAbility$ Triggered.LastChapter | TriggerZones$ Battlefield | Execute$ TrigBigToken | TriggerDescription$ Whenever the final chapter of a Saga you control triggers, create a 4/4 white Angel creature token with flying and vigilance.
+T:Mode$ AbilityTriggered | ValidMode$ CounterAdded | ValidSource$ Saga.YouCtrl | ValidSpellAbility$ Triggered.LastChapter | TriggerZones$ Battlefield | Execute$ TrigBigToken | TriggerDescription$ Whenever the final chapter of a Saga you control triggers, create a 4/4 white Angel creature token with flying and vigilance.
 SVar:TrigBigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_4_4_angel_flying_vigilance | TokenOwner$ You
 DeckHas:Ability$Token
 DeckHints:Type$Enchantment|Saga

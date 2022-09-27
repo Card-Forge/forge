@@ -2,7 +2,6 @@ package forge.adventure.stage;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -21,9 +20,13 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.*;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import com.github.tommyettinger.textra.TypingAdapter;
@@ -73,11 +76,11 @@ public class MapStage extends GameStage {
     //These maps are defined as embedded properties within the Tiled maps.
     private EffectData effect;             //"Dungeon Effect": Character Effect applied to all adversaries within the map.
     private boolean preventEscape = false; //Prevents player from escaping the dungeon by any means that aren't an exit.
-    private ObjectMap<Integer, TextraButton> dialogButtonMap;
+    private final Array< TextraButton> dialogButtonMap=new Array<>();
     private int selected = 0;
-    public InputEvent eventEnter, eventExit, eventTouchDown, eventTouchUp;
+    public InputEvent   eventTouchDown, eventTouchUp;
     TextraButton selectedKey;
-    private boolean foundPlayerSpawn=false;
+    private boolean respawnEnemies;
 
 
     public boolean getDialogOnlyInput() {
@@ -124,12 +127,6 @@ public class MapStage extends GameStage {
         eventTouchUp = new InputEvent();
         eventTouchUp.setPointer(-1);
         eventTouchUp.setType(InputEvent.Type.touchUp);
-        eventEnter = new InputEvent();
-        eventEnter.setPointer(-1);
-        eventEnter.setType(InputEvent.Type.enter);
-        eventExit = new InputEvent();
-        eventExit.setPointer(-1);
-        eventExit.setType(InputEvent.Type.exit);
     }
     public static MapStage getInstance() {
         return instance == null ? instance = new MapStage() : instance;
@@ -169,7 +166,7 @@ public class MapStage extends GameStage {
     Group collisionGroup;
 
     @Override
-    protected void debugCollision(boolean b) {
+    public void debugCollision(boolean b) {
 
         if (collisionGroup == null) {
             collisionGroup = new Group();
@@ -190,7 +187,7 @@ public class MapStage extends GameStage {
         } else {
             collisionGroup.remove();
         }
-
+        super.debugCollision(b);
     }
 
     private void effectDialog(EffectData effectData) {
@@ -249,6 +246,9 @@ public class MapStage extends GameStage {
         setDialogStage(GameHUD.getInstance());
         showDialog();
     }
+    Array<EntryActor> otherEntries=new Array<>();
+    Array<EntryActor> spawnClassified=new Array<>();
+    Array<EntryActor> sourceMapMatch=new Array<>();
 
     public void loadMap(TiledMap map, String sourceMap) {
         isLoadingMatch = false;
@@ -262,6 +262,11 @@ public class MapStage extends GameStage {
 
         actors.clear();
         collisionRect.clear();
+
+        if(collisionGroup!=null)
+            collisionGroup.remove();
+        collisionGroup=null;
+
         float width = Float.parseFloat(map.getProperties().get("width").toString());
         float height = Float.parseFloat(map.getProperties().get("height").toString());
         float tileHeight = Float.parseFloat(map.getProperties().get("tileheight").toString());
@@ -276,6 +281,14 @@ public class MapStage extends GameStage {
             effect = JSONStringLoader.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
             effectDialog(effect);
         }
+        if(MP.get("respawnEnemies")!=null&&MP.get("respawnEnemies") instanceof Boolean&&(Boolean)MP.get("respawnEnemies"))
+        {
+            respawnEnemies=true;
+        }
+        else
+        {
+            respawnEnemies=false;
+        }
         if (MP.get("preventEscape") != null) preventEscape = (boolean) MP.get("preventEscape");
 
         if (MP.get("music") != null && !MP.get("music").toString().isEmpty()) {
@@ -284,7 +297,9 @@ public class MapStage extends GameStage {
 
         getPlayerSprite().stop();
         spriteLayer = null;
-        foundPlayerSpawn=false;
+        otherEntries.clear();
+        spawnClassified.clear();
+        sourceMapMatch.clear();
         for (MapLayer layer : map.getLayers()) {
             if (layer.getProperties().containsKey("spriteLayer") && layer.getProperties().get("spriteLayer", boolean.class)) {
                 spriteLayer = layer;
@@ -295,6 +310,12 @@ public class MapStage extends GameStage {
                 loadObjects(layer, sourceMap);
             }
         }
+        if(!spawnClassified.isEmpty())
+            spawnClassified.first().spawn();
+        else if(!sourceMapMatch.isEmpty())
+            sourceMapMatch.first().spawn();
+        else if(!otherEntries.isEmpty())
+            otherEntries.first().spawn();
 
         //reduce geometry in collision rectangles
         int oldSize;
@@ -327,6 +348,7 @@ public class MapStage extends GameStage {
         }while (oldSize!=collisionRect.size);
         if (spriteLayer == null) System.err.print("Warning: No spriteLayer present in map.\n");
 
+        getPlayerSprite().stop();
     }
 
     static public boolean containsOrEquals(Rectangle r1,Rectangle r2) {
@@ -385,13 +407,18 @@ public class MapStage extends GameStage {
                         boolean spawnPlayerThere=(targetMap==null||targetMap.isEmpty()&&sourceMap.isEmpty())||//if target is null and "from world"
                                 !sourceMap.isEmpty()&&targetMap.equals(sourceMap);
 
-                        if(foundPlayerSpawn)
-                            spawnPlayerThere=false;
+                        EntryActor entry=new EntryActor(this, id, prop.get("teleport").toString(), x, y, w, h, prop.get("direction").toString());
                         if((prop.containsKey("spawn")&& prop.get("spawn").toString().equals("true"))&&spawnPlayerThere)
                         {
-                            foundPlayerSpawn=true;
-                        }//set spawn to option with "spawn" over other entries
-                        EntryActor entry = new EntryActor(this, id, prop.get("teleport").toString(), x, y, w, h, prop.get("direction").toString(),spawnPlayerThere);
+                            spawnClassified.add(entry);
+                        }else if(spawnPlayerThere)
+                        {
+                            sourceMapMatch.add(entry);
+                        }
+                        else
+                        {
+                            otherEntries.add(entry);
+                        }
                         addMapActor(obj, entry);
                         break;
                     case "reward":
@@ -589,7 +616,8 @@ public class MapStage extends GameStage {
         if (currentMob.defeatDialog == null) {
             currentMob.remove();
             actors.removeValue(currentMob, true);
-            changes.deleteObject(currentMob.getId());
+            if(!respawnEnemies||currentMob.getData().boss)
+                changes.deleteObject(currentMob.getId());
         } else {
             currentMob.defeatDialog.activate();
             player.setAnimation(CharacterSprite.AnimationTypes.Idle);
@@ -688,18 +716,16 @@ public class MapStage extends GameStage {
     }
 
     public void showDialog() {
-        if (dialogButtonMap == null)
-            dialogButtonMap = new ObjectMap<>();
-        else
-            dialogButtonMap.clear();
+
+        dialogButtonMap.clear();
         for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
-            dialogButtonMap.put(i, (TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
+            dialogButtonMap.add( (TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
         }
         dialog.show(dialogStage, Actions.show());
         dialog.setPosition((dialogStage.getWidth() - dialog.getWidth()) / 2, (dialogStage.getHeight() - dialog.getHeight()) / 2);
         dialogOnlyInput = true;
-        if (Forge.hasGamepad())
-            selectDialogButton(dialogButtonMap.get(0), false);
+        if (Forge.hasGamepad()&&!dialogButtonMap.isEmpty())
+            dialogStage.setKeyboardFocus(dialogButtonMap.first());
     }
 
     public void hideDialog() {
@@ -743,34 +769,21 @@ public class MapStage extends GameStage {
         changes.getMapFlags().clear();
     }
 
-    public boolean buttonPress(int keycode) {
+    public boolean dialogInput(int keycode) {
         if (dialogOnlyInput) {
-            if (keycode == Input.Keys.DPAD_UP) {
+            if (KeyBinding.Up.isPressed(keycode)) {
                 selectPreviousDialogButton();
             }
-            if (keycode == Input.Keys.DPAD_DOWN) {
+            if (KeyBinding.Down.isPressed(keycode)) {
                 selectNextDialogButton();
             }
-            if (keycode == Input.Keys.BUTTON_A) {
-                selectDialogButton(selectedKey, true);
+            if (KeyBinding.Use.isPressed(keycode)) {
+                performTouch(dialogStage.getKeyboardFocus());
             }
         }
         return true;
     }
 
-    private void selectDialogButton(TextraButton dialogButton, boolean press) {
-        if (dialogOnlyInput) {
-            if (selectedKey != null)
-                selectedKey.fire(eventExit);
-            if (dialogButton != null && dialogButton.isVisible()) {
-                dialogButton.fire(eventEnter);
-                selectedKey = dialogButton;
-                selected = getButtonIndexKey(dialogButton);
-                if (press)
-                    performTouch(dialogButton);
-            }
-        }
-    }
     public void performTouch(Actor actor) {
         if (actor == null)
             return;
@@ -782,22 +795,43 @@ public class MapStage extends GameStage {
             }
         }, 0.10f);
     }
-    private int getButtonIndexKey(TextraButton dialogbutton) {
-        if (dialogButtonMap.isEmpty())
-            return 0;
-        Integer key = dialogButtonMap.findKey(dialogbutton, true);
-        if (key == null)
-            return 0;
-        return key;
-    }
     private void selectNextDialogButton() {
         if (dialogButtonMap.size < 2)
             return;
-        selectDialogButton(dialogButtonMap.get(selected+1), false);
+        if(!(dialogStage.getKeyboardFocus() instanceof Button))
+        {
+            dialogStage.setKeyboardFocus(dialogButtonMap.first());
+            return;
+        }
+        for(int i=0;i<dialogButtonMap.size;i++)
+        {
+            if(dialogStage.getKeyboardFocus()==dialogButtonMap.get(i))
+            {
+                i+=1;
+                i%=dialogButtonMap.size;
+                dialogStage.setKeyboardFocus(dialogButtonMap.get(i));
+                return;
+            }
+        }
     }
     private void selectPreviousDialogButton() {
         if (dialogButtonMap.size < 2)
             return;
-        selectDialogButton(dialogButtonMap.get(selected-1), false);
+        if(!(dialogStage.getKeyboardFocus() instanceof Button))
+        {
+            dialogStage.setKeyboardFocus(dialogButtonMap.first());
+            return;
+        }
+        for(int i=0;i<dialogButtonMap.size;i++)
+        {
+            if(dialogStage.getKeyboardFocus()==dialogButtonMap.get(i))
+            {
+                i-=1;
+                if(i<0)
+                    i=dialogButtonMap.size-1;
+                dialogStage.setKeyboardFocus(dialogButtonMap.get(i));
+                return;
+            }
+        }
     }
 }

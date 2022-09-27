@@ -11,7 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
 import com.github.tommyettinger.textra.Font;
 import com.github.tommyettinger.textra.TextraButton;
@@ -45,7 +47,7 @@ public class Controls {
     {
         public TextButtonFix(@Null String text)
         {
-            super(text, Controls.getSkin(),Controls.getTextraFont()) ;
+            super(text==null?"NULL":text, Controls.getSkin(),Controls.getTextraFont()) ;
         }
 
         @Override
@@ -54,6 +56,11 @@ public class Controls {
             this.getTextraLabel().setFont( Controls.getTextraFont());
 
         }
+        @Override
+        public String getText() {
+            return this.getTextraLabel().storedText;
+        }
+
         @Override
         public void setText(@Null String text) {
             getTextraLabel().storedText = text;
@@ -78,8 +85,8 @@ public class Controls {
         return getBoundingRect(actor).contains(point);
     }
 
-    static public SelectBox newComboBox(String[] text, String item, Function<Object, Void> func) {
-        SelectBox ret = new SelectBox<String>(getSkin());
+    static public SelectBox<String> newComboBox(String[] text, String item, Function<Object, Void> func) {
+        SelectBox<String> ret = newComboBox();
         ret.getStyle().listStyle.selection.setTopHeight(4);
         ret.setItems(text);
         ret.addListener(new ChangeListener() {
@@ -99,8 +106,45 @@ public class Controls {
         return ret;
     }
 
-    static public SelectBox newComboBox(Float[] text, float item, Function<Object, Void> func) {
-        SelectBox ret = new SelectBox<Float>(getSkin());
+    static public SelectBox<String> newComboBox(Array<String> text, String item, Function<Object, Void> func) {
+        SelectBox<String> ret = newComboBox();
+        ret.getStyle().listStyle.selection.setTopHeight(4);
+        ret.setItems(text);
+        ret.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                try {
+                    func.apply(((SelectBox) actor).getSelected());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        func.apply(item);
+        ret.getList().setAlignment(Align.center);
+        ret.setSelected(item);
+        ret.setAlignment(Align.right);
+        return ret;
+    }
+    static public<T> SelectBox newComboBox()
+    {
+        return new SelectBox<T>(getSkin())
+        {
+
+            @Null
+            protected Drawable getBackgroundDrawable() {
+                if (this.isDisabled() && this.getStyle().backgroundDisabled != null) {
+                    return this.getStyle().backgroundDisabled;
+                } else if (this.getScrollPane().hasParent() && this.getStyle().backgroundOpen != null) {
+                    return this.getStyle().backgroundOpen;
+                } else {
+                    return  (this.isOver() || hasKeyboardFocus()) && this.getStyle().backgroundOver != null ? this.getStyle().backgroundOver : this.getStyle().background;
+                }
+            }
+        };
+    }
+    static public SelectBox<Float> newComboBox(Float[] text, float item, Function<Object, Void> func) {
+        SelectBox<Float> ret =   newComboBox();
         ret.getStyle().listStyle.selection.setTopHeight(4);
         ret.setItems(text);
         ret.addListener(new ChangeListener() {
@@ -157,7 +201,20 @@ public class Controls {
     }
 
     static public Slider newSlider(float min, float max, float step, boolean vertical) {
-        Slider ret = new Slider(min, max, step, vertical, getSkin());
+        Slider ret = new Slider(min, max, step, vertical, getSkin())
+        {
+            @Override
+            protected Drawable getBackgroundDrawable() {
+                SliderStyle style = (SliderStyle)super.getStyle();
+                if (this.isDisabled() && style.disabledBackground != null) {
+                    return style.disabledBackground;
+                } else if (this.isDragging() && style.backgroundDown != null) {
+                    return style.backgroundDown;
+                } else {
+                    return (this.isOver() || hasKeyboardFocus()) && style.backgroundOver != null ? style.backgroundOver : style.background;
+                }
+            }
+        };
         return ret;
     }
 
@@ -315,6 +372,16 @@ public class Controls {
     }
 
     static Font textraFont=null;
+    static Font keysFont=null;
+    static public Font getKeysFont()
+    {
+        if(keysFont==null)
+        {
+            keysFont=new Font(getSkin().getFont("default"));
+            keysFont.addAtlas(Config.instance().getAtlas(Paths.KEYS_ATLAS));
+        }
+        return keysFont;
+    }
     static public Font getTextraFont()
     {
         if(textraFont==null)

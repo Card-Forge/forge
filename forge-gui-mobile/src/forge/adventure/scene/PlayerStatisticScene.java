@@ -1,6 +1,5 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -15,7 +14,6 @@ import forge.adventure.character.EnemySprite;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
 import forge.adventure.player.AdventurePlayer;
-import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
@@ -39,6 +37,7 @@ public class PlayerStatisticScene extends UIScene {
     private final Table enemiesGroup;
     TextraLabel blessingScroll;
     ScrollPane scrollPane, blessing;
+
 
     private PlayerStatisticScene() {
         super(Forge.isLandscapeMode() ? "ui/statistic.json" : "ui/statistic_portrait.json");
@@ -89,29 +88,7 @@ public class PlayerStatisticScene extends UIScene {
     }
 
 
-    @Override
-    public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
-            back();
-        }
-        if (keycode == Input.Keys.BUTTON_B)
-            performTouch(ui.findActor("return"));
-        else if (keycode == Input.Keys.BUTTON_A)
-            performTouch(selectedActor);
-        else if (keycode == Input.Keys.BUTTON_L1 || keycode == Input.Keys.DPAD_UP) {
-            scrollPane.fling(1f, 0, -300);
-        } else if (keycode == Input.Keys.BUTTON_R1 || keycode == Input.Keys.DPAD_DOWN) {
-            scrollPane.fling(1f, 0, +300);
-        } else if (keycode == Input.Keys.DPAD_LEFT || keycode == Input.Keys.DPAD_RIGHT || keycode == Input.Keys.DPAD_UP || keycode == Input.Keys.DPAD_DOWN)
-            selectActor(back, false);
-        return true;
-    }
 
-    public boolean back() {
-        GameHUD.getInstance().getTouchpad().setVisible(false);
-        Forge.switchToLast();
-        return true;
-    }
     private TextureRegion getColorFrame(ColorSet color){
         String colorName= "color_";
         if(color.hasWhite())
@@ -187,10 +164,5 @@ public class PlayerStatisticScene extends UIScene {
         }
 
 
-    }
-
-
-    @Override
-    public void create() {
     }
 }

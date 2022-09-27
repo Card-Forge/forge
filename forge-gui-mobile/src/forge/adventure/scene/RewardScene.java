@@ -1,7 +1,6 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -53,7 +52,38 @@ public class RewardScene extends UIScene {
 
         goldLabel=ui.findActor("gold");
         ui.onButtonPress("done", () -> RewardScene.this.done());
+        ui.onButtonPress("detail",()->RewardScene.this.toggleToolTip());
         doneButton = ui.findActor("done");
+    }
+
+    private void toggleToolTip() {
+
+        Selectable selectable=getSelected();
+        if(selectable==null)
+            return;
+        RewardActor actor;
+        if(selectable.actor instanceof BuyButton)
+        {
+            actor= ((BuyButton) selectable.actor).reward;
+        }
+        else if (selectable.actor instanceof RewardActor)
+        {
+            actor= (RewardActor) selectable.actor;
+        }
+        else
+        {
+            return;
+        }
+        if(actor.toolTipIsVisible())
+        {
+            actor.hideTooltip();
+        }
+        else
+        {
+            if(!actor.isFlipped())
+                actor.showTooltip();
+        }
+
     }
 
     boolean doneClicked = false, shown = false;
@@ -139,59 +169,6 @@ public class RewardScene extends UIScene {
             }
         }
     }
-
-
-    @Override
-    public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
-            done();
-        }
-        if (keycode == Input.Keys.BUTTON_B || keycode == Input.Keys.BUTTON_START)
-            showLootOrDone();
-        else if (keycode == Input.Keys.BUTTON_A)
-            performTouch(selectedActor);
-        else if (keycode == Input.Keys.DPAD_RIGHT) {
-            hideTooltips();
-            selectNextActor(false);
-            if (selectedActor != null && Type.Loot == type) {
-                selectedActor.fire(eventEnter);
-            }
-            showHideTooltips();
-        } else if (keycode == Input.Keys.DPAD_LEFT) {
-            hideTooltips();
-            selectPreviousActor(false);
-            if (selectedActor != null && Type.Loot == type) {
-                selectedActor.fire(eventEnter);
-            }
-            showHideTooltips();
-        } else if (keycode == Input.Keys.BUTTON_Y) {
-            showTooltips = !showTooltips;
-            showHideTooltips();
-        }
-        return true;
-    }
-    private void showHideTooltips() {
-        if (selectedActor instanceof RewardActor) {
-            if (showTooltips) {
-                if (((RewardActor) selectedActor).isFlipped())
-                    ((RewardActor) selectedActor).showTooltip();
-            } else {
-                ((RewardActor) selectedActor).hideTooltip();
-            }
-        } else if (selectedActor instanceof BuyButton) {
-            if (showTooltips)
-                ((BuyButton) selectedActor).reward.showTooltip();
-            else
-                ((BuyButton) selectedActor).reward.hideTooltip();
-        }
-    }
-    private void hideTooltips() {
-        if (selectedActor instanceof RewardActor) {
-            ((RewardActor) selectedActor).hideTooltip();
-        } else if (selectedActor instanceof BuyButton) {
-            ((BuyButton) selectedActor).reward.hideTooltip();
-        }
-    }
     private void showLootOrDone() {
         boolean exit = true;
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
@@ -230,7 +207,7 @@ public class RewardScene extends UIScene {
 
 
     public void loadRewards(Array<Reward> newRewards, Type type, ShopActor shopActor) {
-        clearActorObjects();
+        clearSelectable();
         this.type   = type;
         doneClicked = false;
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
@@ -244,7 +221,7 @@ public class RewardScene extends UIScene {
 
         Actor card = ui.findActor("cards");
         if(type==Type.Shop) {
-            goldLabel.setText("Gold:"+Current.player().getGold());
+            goldLabel.setText(Current.player().getGold()+"[+Gold]");
             Actor background = ui.findActor("market_background");
             if(background!=null)
                 background.setVisible(true);
@@ -361,14 +338,14 @@ public class RewardScene extends UIScene {
                 if (currentRow != ((i + 1) / numberOfColumns))
                     yOff += doneButton.getHeight();
 
-                TextraButton buyCardButton = new BuyButton(shopActor.getObjectId(), i, shopActor.isUnlimited()?null:shopActor.getMapStage().getChanges(), actor, doneButton);
+                BuyButton buyCardButton = new BuyButton(shopActor.getObjectId(), i, shopActor.isUnlimited()?null:shopActor.getMapStage().getChanges(), actor, doneButton);
                 generated.add(buyCardButton);
                 if (!skipCard) {
                     stage.addActor(buyCardButton);
-                    addActorObject(buyCardButton);
+                    addToSelectable(buyCardButton);
                 }
             } else {
-                addActorObject(actor);
+                addToSelectable(actor);
             }
             generated.add(actor);
             if (!skipCard) {
@@ -378,6 +355,7 @@ public class RewardScene extends UIScene {
         }
         updateBuyButtons();
     }
+
 
     private void updateBuyButtons() {
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
@@ -391,7 +369,7 @@ public class RewardScene extends UIScene {
         private final int objectID;
         private final int index;
         private final PointOfInterestChanges changes;
-        RewardActor reward;
+        public RewardActor reward;
         int price;
 
         void update() {

@@ -1,8 +1,9 @@
 package forge.adventure.util;
 
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
@@ -12,7 +13,7 @@ import com.github.tommyettinger.textra.TextraButton;
 /**
  * UI element to click through options, can be configured in an UiActor
  */
-public class Selector extends Group {
+public class Selector extends Table {
     private final ImageButton leftArrow;
     private final ImageButton rightArrow;
     private final TextraButton label;
@@ -21,37 +22,62 @@ public class Selector extends Group {
 
 
     public Selector() {
+        Selector self=this;
         ImageButton.ImageButtonStyle leftArrowStyle = Controls.getSkin().get("leftarrow", ImageButton.ImageButtonStyle.class);
-        leftArrow = new ImageButton(leftArrowStyle);
+        leftArrow = new ImageButton(leftArrowStyle)
+        {
+            @Override
+            public boolean hasKeyboardFocus()
+            {
+                return  self.hasKeyboardFocus();
+            }
+        };
 
         ImageButton.ImageButtonStyle rightArrowStyle = Controls.getSkin().get("rightarrow", ImageButton.ImageButtonStyle.class);
-        rightArrow = new ImageButton(rightArrowStyle);
+        rightArrow = new ImageButton(rightArrowStyle)
+        {
+            @Override
+            public boolean hasKeyboardFocus()
+            {
+                return  self.hasKeyboardFocus();
+            }
+        };
 
-        label = Controls.newTextButton("");
-        addActor(leftArrow);
-        addActor(rightArrow);
-        addActor(label);
+        label = new Controls.TextButtonFix("")
+        {
+            @Override
+            public boolean hasKeyboardFocus()
+            {
+                return  self.hasKeyboardFocus();
+            }
+        };
+        add(leftArrow).pad(2);
+        add(label).expand().fill();
+        add(rightArrow).pad(2);
         leftArrow.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                try {
-                    setCurrentIndex(currentIndex - 1);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                setCurrentIndex(currentIndex - 1);
             }
         });
         rightArrow.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                try {
-                    setCurrentIndex(currentIndex + 1);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                setCurrentIndex(currentIndex + 1);
             }
         });
 
+        addListener(new InputListener()
+        {
+            @Override
+            public boolean keyDown(InputEvent event, int keycode) {
+                if(KeyBinding.Left.isPressed(keycode))
+                    setCurrentIndex(currentIndex - 1);
+                if(KeyBinding.Right.isPressed(keycode))
+                    setCurrentIndex(currentIndex + 1);
+                return true;
+            }
+        });
     }
 
     @Override

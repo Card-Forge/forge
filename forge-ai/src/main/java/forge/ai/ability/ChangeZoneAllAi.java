@@ -278,7 +278,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         }
 
         if (destination.equals(ZoneType.Battlefield)) {
-            if (sa.getParam("GainControl") != null) {
+            if (sa.hasParam("GainControl")) {
                 // Check if the cards are valuable enough
                 if (CardLists.getNotType(oppType, "Creature").size() == 0
                         && CardLists.getNotType(computerType, "Creature").size() == 0) {

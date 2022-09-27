@@ -1,8 +1,8 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.ControllerListener;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.utils.Disposable;
 import forge.Forge;
 import forge.adventure.util.Config;
@@ -10,9 +10,44 @@ import forge.adventure.util.Config;
 /**
  * Base class for all rendered scenes
  */
-public abstract class Scene<T> implements Disposable {
+public abstract class Scene implements Disposable {
 
+    static class SceneControllerListener implements ControllerListener {
+
+        @Override
+        public void connected(Controller controller) {
+            Forge.getCurrentScene().connected(controller);
+
+        }
+
+        @Override
+        public void disconnected(Controller controller) {
+            Forge.getCurrentScene().disconnected(controller);
+
+        }
+
+        @Override
+        public boolean buttonDown(Controller controller, int i) {
+            return Forge.getCurrentScene().buttonDown(controller,i);
+        }
+
+        @Override
+        public boolean buttonUp(Controller controller, int i) {
+            return Forge.getCurrentScene().buttonUp(controller,i);
+        }
+
+        @Override
+        public boolean axisMoved(Controller controller, int i, float v) {
+            return Forge.getCurrentScene().axisMoved(controller,i,v);
+        }
+    }
+    static private SceneControllerListener listener=null;
     public Scene() {
+        if(listener==null)
+        {
+            listener=new SceneControllerListener();
+            Controllers.addListener(listener);
+        }
     }
 
     public static int getIntendedWidth() {
@@ -25,21 +60,34 @@ public abstract class Scene<T> implements Disposable {
 
     public abstract void act(float delta);
     public abstract void render();
-
-    public void create() {
-
-    }
-
-    public Drawable DrawableImage(String path) {
-        return new TextureRegionDrawable(new Texture(Config.instance().getFile(path)));
-    }
-
-
     public boolean leave() {
+
         return true;
     }
 
     public void enter() {
+
+    }
+
+
+    public void connected(Controller controller) {
+
+    }
+
+    public void disconnected(Controller controller) {
+
+    }
+
+    public boolean buttonDown(Controller controller, int buttonIndex) {
+        return false;
+    }
+
+    public boolean buttonUp(Controller controller, int buttonIndex) {
+        return false;
+    }
+
+    public boolean axisMoved(Controller controller, int axisIndex, float value) {
+        return true;
     }
 
 

@@ -643,6 +643,27 @@ public final class GameActionUtil {
                         reset = true;
                     }
                 }
+            } else if (o.startsWith("Squad")) {
+                Trigger tr = Iterables.getFirst(ki.getTriggers(), null);
+                if (tr != null) {
+                    String costStr = o.split(":")[1];
+                    final Cost cost = new Cost(costStr, false);
+
+                    String str = "Choose amount for Squad: " + cost.toSimpleString();
+
+                    int v = pc.chooseNumberForKeywordCost(sa, cost, ki, str, Integer.MAX_VALUE);
+
+                    tr.setSVar("SquadAmount", String.valueOf(v));
+                    tr.getOverridingAbility().setSVar("SquadAmount", String.valueOf(v));
+
+                    for (int i = 0; i < v; i++) {
+                        if (result == null) {
+                            result = sa.copy();
+                        }
+                        result.getPayCosts().add(cost);
+                        reset = true;
+                    }
+                }
             }
         }
 

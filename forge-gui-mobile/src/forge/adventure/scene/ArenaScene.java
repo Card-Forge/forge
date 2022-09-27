@@ -1,6 +1,5 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -38,8 +37,6 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     }
 
     private final TextraButton doneButton;
-    Dialog startDialog;
-    Dialog areYouSureDialog;
     private final TextraLabel goldLabel;
 
     private final Group arenaPlane;
@@ -81,7 +78,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             if(!arenaStarted)
                 ArenaScene.this.done();
             else
-                areYouSureDialog.show(stage);
+                showAreYouSure();
         });
         ui.onButtonPress("start", () -> startButton());
         doneButton = ui.findActor("done");
@@ -91,38 +88,15 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
         startButton=ui.findActor("start");
 
-        startDialog = new Dialog(Forge.getLocalizer().getMessage("lblStart"), Controls.getSkin())
-        {
-            protected void result(Object object)
-            {
-                if(object!=null&&object.equals(true))
-                    startArena();
-                startDialog.hide();
-            }
-        };
-        startDialog.text("Do you want to go into the Arena?");
-        startDialog.button(Forge.getLocalizer().getMessage("lblYes"), true);
-        startDialog.button(Forge.getLocalizer().getMessage("lblNo"), false);
-        ui.addActor(startDialog);
-        startDialog.hide();
-        startDialog.getColor().a = 0;
 
 
-        areYouSureDialog= new Dialog(Forge.getLocalizer().getMessage("lblConcedeTitle"), Controls.getSkin())
-        {
-            protected void result(Object object)
-            {
-                if(object!=null&&object.equals(true))
-                    loose();
-                startDialog.hide();
-            }
-        };
+    }
+
+    private void showAreYouSure() {
+
+        Dialog areYouSureDialog= prepareDialog(Forge.getLocalizer().getMessage("lblConcedeTitle"),ButtonYes|ButtonNo,()->loose());
         areYouSureDialog.text(Forge.getLocalizer().getMessage("lblConcedeCurrentGame"));
-        areYouSureDialog.button(Forge.getLocalizer().getMessage("lblYes"), true);
-        areYouSureDialog.button(Forge.getLocalizer().getMessage("lblNo"), false);
-        ui.addActor(areYouSureDialog);
-        areYouSureDialog.hide();
-        areYouSureDialog.getColor().a = 0;
+        showDialog(areYouSureDialog);
     }
 
     private void loose() {
@@ -134,7 +108,9 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     private void startButton() {
         if(roundsWon ==0)
         {
-            startDialog.show(stage);
+            Dialog startDialog = prepareDialog(Forge.getLocalizer().getMessage("lblStart"), ButtonYes|ButtonNo,()->startArena());
+            startDialog.text("Do you want to go into the Arena?");
+            showDialog(startDialog);
         }
         else
         {
@@ -271,13 +247,6 @@ public class ArenaScene extends UIScene implements IAfterMatch {
     }
 
 
-    @Override
-    public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
-            done();
-        }
-        return true;
-    }
 
     Array<EnemySprite> enemies = new Array<>();
     Array<Actor> fighters = new Array<>();

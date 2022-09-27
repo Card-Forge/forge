@@ -105,6 +105,7 @@ public class TileMapScene extends HudScene   {
         stage.getPlayerSprite().setPosition(0, 0);
         WorldSave.getCurrentSave().getWorld().setSeed(point.getSeedOffset());
         tiledMapRenderer.loadMap(map, "");
+        stage.getPlayerSprite().stop();
     }
 
     public boolean inTown() {
@@ -121,6 +122,7 @@ public class TileMapScene extends HudScene   {
         WorldSave.getCurrentSave().getWorld().setSeed(rootPoint.getSeedOffset());
         tiledMapRenderer.loadMap(map, oldMap);
         oldMap = targetMap;
+        stage.getPlayerSprite().stop();
     }
 
 

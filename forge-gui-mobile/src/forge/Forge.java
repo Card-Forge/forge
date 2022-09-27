@@ -9,26 +9,17 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerAdapter;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.graphics.Cursor;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.TextureData;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
 import forge.adventure.scene.*;
-import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.adventure.world.WorldSave;
 import forge.animation.ForgeAnimation;
-import forge.assets.Assets;
-import forge.assets.AssetsDownloader;
-import forge.assets.FSkin;
-import forge.assets.FSkinFont;
-import forge.assets.ImageCache;
+import forge.assets.*;
 import forge.error.ExceptionHandler;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gui.FThreads;
@@ -341,6 +332,7 @@ public class Forge implements ApplicationListener {
     }
     private static void loadAdventureResources(boolean startScene) {
         try {
+            Config.instance().loadResources();
             if (startScene)
                 switchScene(StartScene.instance());
         } catch (Exception e) {
@@ -1003,8 +995,6 @@ public class Forge implements ApplicationListener {
         }
         storeScreen();
         sceneWasSwapped = true;
-        if (newScene instanceof GameScene)
-            MapStage.getInstance().clearIsInMap();
         currentScene = newScene;
 
         currentScene.enter();
@@ -1420,9 +1410,6 @@ public class Forge implements ApplicationListener {
                     hasGamepad = true;
                     if (controller.canVibrate())
                         controller.startVibration(200,1);
-                    if (Forge.isMobileAdventureMode && Forge.currentScene instanceof UIScene) {
-                        ((UIScene) Forge.currentScene).selectCurrent();
-                    }
                 }
                 @Override
                 public void disconnected(Controller controller) {

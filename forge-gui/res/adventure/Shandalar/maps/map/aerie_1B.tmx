@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="90">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="90">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJy9lYENgCAMBBkAN7CL6TDsBcsJicTmI1Jo8ZNGUPgTKOBcX7vvh7Wknpbs6kX5Gbb3Nvy9BZt70ICfhs37ljJBvbe2M2xkzmq0b22vXSstt+QNn+cz16N/gqt+O7Y5boQgYY5hHoxyi8L97zje1dyWcJ55pIVc6V7W7iVkJYGf1f7767xCj6+8sj6fW16tsa+6C63v3wuqfx2I
-  </data>
- </layer>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJxr4mZgaBrFo3gUj+JRPIpH8YjAAJnxGPY=
@@ -22,7 +17,7 @@
  </layer>
  <layer id="7" name="Ornamental Walls" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYBi8wIKJgeEyHmzJRBs7rxAw9xKV7SbGTmrbDbPzDwl6KLUbZmcYO+l6KbU7hnytZAMzpPBFD2czPH6BpW8TMv2Lnk+IBTA3kWsvTL+9IHn6KLWXVDkYINfea0B9MxjJs3caUN91CtIzPrtpZSc5dlPLTlx2YwtnatuJbPd0Rgg2Q2LDMC3spBUAAGSiK40=
+   eJxjYBi8wIKJgeEyHmzJRBs7rxAw9xKV7SbGTmrbDbPzDwl6KLUbZmcYO+l6KbU7hnytZAMzpPBFD2czPH6BpW8TMv2Lnk+IBTA3kWsvTL+2Nnn6KLWXVDkYINfea0B9MxjJs3caUN91CtIzPrtpZSc5dlPLTlx2YwtnatuJbPd0Rgg2Q2LDMC3spBUAAHpgK5M=
   </data>
  </layer>
  <layer id="3" name="Clutter" width="30" height="17">
@@ -30,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgF6MCMiYGhDYccLnFq2TsQANneN4KYeKQDEyrFC674vcxEnDpy7UHnqzDi1quKR44Y0IZED1R6phe4RqH/rtM4XdEaDEZ7aVk+g8B0RlQaXXyoAAAl7g7H
+   eJxjYBgF6MCMiYGhDYccLnFq2TsQANneG9qYeKQDEyrFC674vcxEnDpy7UHnqzDi1quKR44Y0IZED1R6phe4RqH/rtM4XdEaDEZ7aVk+g8B0RlQaXXyoAADVrA7l
   </data>
  </layer>
  <objectgroup id="4" name="Objects">

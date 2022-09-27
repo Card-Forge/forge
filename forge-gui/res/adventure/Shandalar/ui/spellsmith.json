@@ -61,8 +61,10 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "done",
-      "text": "tr(lblBack)", 
+      "text": "tr(lblBack)",
+      "binding": "Back",
       "x": 400,
       "y": 240,
       "width": 70,
@@ -70,6 +72,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "BBlack",
       "text": "tr(lblBlack)", 
       "x": 15,
@@ -79,6 +82,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "BBlue",
       "text": "tr(lblBlue)", 
       "x": 65,
@@ -88,6 +92,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "BGreen",  
       "text": "tr(lblGreen)", 
       "x": 115,
@@ -97,6 +102,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "BRed",
       "text": "tr(lblRed)", 
       "x": 165,
@@ -106,6 +112,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "BWhite",
       "text": "tr(lblWhite)", 
       "x": 215,
@@ -115,6 +122,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "BColorless",
       "text": "tr(lblColorless)", 
       "x": 265,
@@ -132,7 +140,9 @@
     },
     {
       "type": "TextButton",
-      "name": "pull", 
+      "selectable": true,
+      "name": "pull",
+      "binding": "Equip",
       "text": "tr(lblDraw)",  
       "x": 360,
       "y": 180,
@@ -159,6 +169,7 @@
     },
     {
       "type": "SelectBox",
+      "selectable": true,
       "name": "BSelectPlane",
       "text": "Select Plane",
       "x": 10,
@@ -177,6 +188,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "B02",
       "text": "0-2",
       "x": 10,
@@ -186,6 +198,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "B35",
       "text": "3-5",
       "x": 90,
@@ -195,6 +208,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "B68",
       "text": "6-8",
       "x": 170,
@@ -204,6 +218,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "B9X",
       "text": "9+",
       "x": 250,
@@ -222,6 +237,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "BCommon", 
       "text": "tr(lblCommon)",  
       "x": 10,
@@ -231,6 +247,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "BUncommon", 
       "text": "tr(lblUncommon)",  
       "x": 90,
@@ -240,6 +257,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "BRare", 
       "text": "tr(lblRare)",  
       "x": 170,
@@ -249,6 +267,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "BMythic",
       "text": "Mythic",  
       "x": 250,
@@ -258,6 +277,7 @@
     },
     {
       "type": "TextButton",
+      "selectable": true,
       "name": "BResetEdition",
       "text": "tr(lblReset)",  
       "x": 250,

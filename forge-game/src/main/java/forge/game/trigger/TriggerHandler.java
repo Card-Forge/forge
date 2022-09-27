@@ -552,7 +552,6 @@ public class TriggerHandler {
         sa.setTrigger(regtrig);
         sa.setSourceTrigger(regtrig.getId());
         regtrig.setTriggeringObjects(sa, runParams);
-        TriggerAbilityTriggered.addTriggeringObject(regtrig, sa, runParams);
         sa.setTriggerRemembered(regtrig.getTriggerRemembered());
 
         if (regtrig.hasParam("TriggerController")) {
@@ -592,6 +591,8 @@ public class TriggerHandler {
         }
 
         regtrig.triggerRun();
+
+        game.getTriggerHandler().runTrigger(TriggerType.AbilityTriggered, TriggerAbilityTriggered.getRunParams(regtrig, sa, runParams), false);
 
         if (regtrig.hasParam("OneOff")) {
             if (regtrig.getHostCard().isImmutable()) {

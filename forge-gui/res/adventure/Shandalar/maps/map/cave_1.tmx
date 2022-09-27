@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="60">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="60">
  <editorsettings>
-  <export format="tmx"/>
+  <export target="cave_1..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="6321" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJzz42Rg8BvFo3gUj+JRPIqHINbghuCRYi/M7uEa1gMZnwMRxgPh17wBtpfecZyHZvdgsDePTm4YqeXUSLOXGvEMABb/Ltw=
@@ -17,7 +17,7 @@
  </layer>
  <layer id="2" name="Ground" width="30" height="30">
   <data encoding="base64" compression="zlib">
-   eJztlEsKgCAURR0qtK0sWkk7s6xd9aFlZKgkUjbRC8F7cAaOjle9SsGYJAiCIIgfoDljM39fl6IxdIl1Se9imLhlA3qV8Q0BB8iLyJc651Vg3pR29xlODcoaDyL7kzfeQwn3l9dPX93k8O7C9mbkzz5VuFOxXwF77P3XoHwe7fIiOhzSurzo/yuX9wRfCR8q
+   eJztlE0KgCAQRl2OB8uii1rWrfqhY2SoIGK1aT4IZuAtZvX8RkejlTKCIAiC8AMcKTXTfc9F6+kfek7v4pkosAG91vuGjAPkReR7mvOqMW/KxfvMqwFlLQuRveYtz8DhfvNyzX3XYW9Gqjst806Vfgvc4+S/CuVLuJgXscM5XcyL/r++8p7+7h8J
   </data>
  </layer>
  <layer id="7" name="Foreground" width="30" height="30">

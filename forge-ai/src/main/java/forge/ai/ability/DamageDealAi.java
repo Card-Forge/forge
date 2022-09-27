@@ -25,6 +25,7 @@ import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -805,11 +806,11 @@ public class DamageDealAi extends DamageAiBase {
      */
     private boolean damageChooseNontargeted(Player ai, final SpellAbility saMe, final int dmg) {
         // TODO: Improve circumstances where the Defined Damage is unwanted
-        final List<GameObject> objects = AbilityUtils.getDefinedObjects(saMe.getHostCard(), saMe.getParam("Defined"), saMe);
+        final List<GameEntity> objects = AbilityUtils.getDefinedEntities(saMe.getHostCard(), saMe.getParam("Defined"), saMe);
         boolean urgent = false; // can it wait?
         boolean positive = false;
 
-        for (final Object o : objects) {
+        for (final GameEntity o : objects) {
             if (o instanceof Card) {
                 Card c = (Card) o;
                 final int restDamage = ComputerUtilCombat.predictDamageTo(c, dmg, saMe.getHostCard(), false);

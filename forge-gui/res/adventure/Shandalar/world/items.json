@@ -240,7 +240,8 @@
     "effect": {
       "startBattleWithCard": [
         "Blightsteel Colossus",
-        "Lightning Greaves"
+        "Urabrask the Hidden",
+        "Avatar of Slaughter"
       ]
     }
   },
@@ -725,6 +726,16 @@
         "Kite Shield"
       ]
     }
+  },
+  {
+    "name": "Shell Wand",
+    "equipmentSlot": "Left",
+    "effect": {
+      "opponent": {
+        "lifeModifier": -2
+      }
+    },
+    "iconName": "ShellWand"
   },
 
 {

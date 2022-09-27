@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="56">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="56">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
- <layer id="6" name="Collision" width="30" height="17">
-  <data encoding="base64" compression="zlib">
-   eJyL5mVg2MVDXxwFtFMWSNMbSPOM2ksMgMUTPezFZw+pbiDHv9JI6ZLcOBpK9lIDDAV7BzpdUQOM2osfoMcjuWXWQPqX1LoT5k5y9CJjAGyrOkI=
-  </data>
- </layer>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="17">
   <data encoding="base64" compression="zlib">
    eJzr42Rg6MOC25AwNnl86onB1DJnqNtLrt3E6hu1d9TeUXtH7R3q9pJjJ6nuG6z20qL+BQDfkyFi
@@ -25,11 +20,11 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJy9VTkSwjAMTEsR4FfxTPgPOR5pfkCdtNDREA3ZyUYj2U7DNtg6bHm1KFW14XH6/c5ki4ZtqPf+YNgFo9rzHZ5fA/d2FNvm04rQGLaSmgSoq1/jb+seXER6Z1B7neMhFNp7VbPugwb83IvneVtLrcwD+3JgnUy05rsYn8TZ7MO5OAccaC2wTri/s4rj/WvJedcbL90BPrVe7kYszmOf1H9Z3nc9wK3A0qzWQ07DrDvOnZWfObLeBQzqXYyUdixfdHSSgpUD7VhzS3y6xymI5lpaT0aM1lcOzBn6ZfW2BE2V7vlYODstTvAunBGcWO4768vjxZoHVm1evthLvjcc72kY/fRm1D+R+i95s8biDbbofG+/XkBHzQ==
+   eJy9VTkSwjAMdEvBO8JP4pnwH3I8kcL8ADom+QIUoCGaLJqVbRq2wZZkWV4tSggbLrvP7wK2RGzj/tsfiV0wmT3e4fkt9N4eYrvysSq0xFZTk0DrGtb447pXLhK8M5q9PeMhVtoHU7Ptg4X6sRfnw7aWWpEH9JWAOplhjXch7pnc6NO8mkc5sFpAnWB/FxOH+2sTwq3ZeOl/4NPq5URiNR/6pP7H+85n4+dmYJq1eihpGHWHZxfjR47YuxSjeRcipx3mS45OcmBnVDtsbonP9jgH0VwH65nEWH2VgJxpv1hva9CGfM+nytnJONF3aY7oxGLfUV8eL2wesNq882Kv+d5gvKdh7ac3o/6J3H/JmzWMN7Ul53v7ApCcShM=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="38" template="../obj/entry_up.tx" x="208" y="281">
+  <object id="38" template="../obj/entry_up.tx" x="1" y="281" width="478" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>

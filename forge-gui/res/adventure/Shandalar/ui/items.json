@@ -26,10 +26,21 @@
     },
     {
       "type": "TextButton",
+      "name": "detail",
+      "text": "Detail",
+      "binding": "Equip",
+      "width": 48,
+      "height": 30,
+      "x": 420,
+      "y": 80
+    }  ,
+    {
+      "type": "TextButton",
       "name": "done",
       "text": "tr(lblLeave)",
       "width": 48,
       "height": 30,
+      "binding": "Back",
       "x": 420,
       "y": 120
     }  ,

@@ -25,13 +25,4 @@ public class Current {
         deck=generateDeck;
     }
 
-    static boolean debug=false;
-    public static boolean isInDebug()
-    {
-        return debug;
-    }
-
-    public static void setDebug(boolean b) {
-        debug=b;
-    }
 }

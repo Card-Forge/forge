@@ -1,13 +1,11 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Timer;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
@@ -28,8 +26,6 @@ public class InventoryScene  extends UIScene {
     Button equipButton;
     TextraButton useButton;
     TextraLabel itemDescription;
-    Dialog confirm;
-    Dialog useDialog;
     private final Table inventory;
     private final Array<Button> inventoryButtons=new Array<>();
     private final HashMap<String,Button> equipmentSlots=new HashMap<>();
@@ -44,7 +40,7 @@ public class InventoryScene  extends UIScene {
         equipOverlay = new Texture(Config.instance().getFile(Paths.ITEMS_EQUIP));
         ui.onButtonPress("return", () -> done());
         leave = ui.findActor("return");
-        ui.onButtonPress("delete", () -> confirm.show(stage));
+        ui.onButtonPress("delete", () -> showConfirm());
         ui.onButtonPress("equip", () -> equip());
         ui.onButtonPress("use", () -> use());
         equipButton = ui.findActor("equip");
@@ -109,45 +105,16 @@ public class InventoryScene  extends UIScene {
         columns-=1;
         if(columns<=0)columns=1;
         scrollPane.setActor(inventory);
-        confirm = new Dialog("", Controls.getSkin())
-        {
-            protected void result(Object object)
-            {
-                if(object!=null&&object.equals(true))
-                    delete();
-                confirm.hide();
-            }
-        };
-        confirm.text( Controls.newLabel(Forge.getLocalizer().getMessage("lblDelete")));
-
-        confirm.button(Forge.getLocalizer().getMessage("lblYes"), true);
-        confirm.button(Forge.getLocalizer().getMessage("lblNo"), false);
-        ui.addActor(confirm);
-        confirm.hide();
 
         itemDescription.setWrap(true);
-        //makes confirm dialog hidden immediately when you open inventory first time..
-        confirm.getColor().a = 0;
 
 
-        useDialog = new Dialog("", Controls.getSkin())
-        {
-            protected void result(Object object)
-            {
-                useDialog.hide();
-                if(object!=null&&object.equals(true))
-                {
-                    triggerUse();
-                    useDialog.getColor().a = 0;
-                }
-            }
-        };
+    }
 
-        useDialog.button(Forge.getLocalizer().getMessage("lblYes"), true);
-        useDialog.button(Forge.getLocalizer().getMessage("lblNo"), false);
-        ui.addActor(useDialog);
-        useDialog.hide();
-        useDialog.getColor().a = 0;
+    private void showConfirm() {
+        Dialog confirm = prepareDialog("",ButtonYes|ButtonNo,()->delete());
+        confirm.text( Controls.newLabel(Forge.getLocalizer().getMessage("lblDelete")));
+        showDialog(confirm);
     }
 
     private static InventoryScene object;
@@ -197,11 +164,11 @@ public class InventoryScene  extends UIScene {
         ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
     }
     private void use() {
-        useDialog.getContentTable().clear();
         ItemData data = ItemData.getItem(itemLocation.get(selected));
         if(data==null)return;
+        Dialog useDialog = prepareDialog("",ButtonYes|ButtonNo,()->triggerUse());
         useDialog.getContentTable().add(Controls.newTextraLabel("Use "+data.name+"?\n"+data.getDescription()));
-        useDialog.show(stage);
+        showDialog(useDialog);
     }
 
     private void setSelected(Button actor) {
@@ -268,7 +235,7 @@ public class InventoryScene  extends UIScene {
     }
 
     private void updateInventory() {
-        clearActorObjects();
+        clearSelectable();
         inventoryButtons.clear();
         inventory.clear();
         for(int i=0;i<Current.player().getItems().size;i++) {
@@ -277,6 +244,13 @@ public class InventoryScene  extends UIScene {
                 inventory.row();
             Button newActor=createInventorySlot();
             inventory.add(newActor).top().left().space(1);
+            addToSelectable(new Selectable(newActor){
+                @Override
+                public void onSelect(UIScene scene) {
+                    setSelected(newActor);
+                    super.onSelect(scene);
+                }
+            });
             inventoryButtons.add(newActor);
             ItemData item=ItemData.getItem(Current.player().getItems().get(i));
             if(item==null)
@@ -310,7 +284,6 @@ public class InventoryScene  extends UIScene {
                     }
                 }
             });
-            addActorObject(newActor);
         }
         for(Map.Entry<String, Button> slot :equipmentSlots.entrySet()) {
             if(slot.getValue().getChildren().size>=2)
@@ -341,32 +314,4 @@ public class InventoryScene  extends UIScene {
         return  button;
     }
 
-    @Override
-    public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
-            done();
-        }
-        if (keycode == Input.Keys.BUTTON_SELECT)
-            performTouch(ui.findActor("return"));
-        else if (keycode == Input.Keys.BUTTON_B)
-            performTouch(ui.findActor("return"));
-        else if (keycode == Input.Keys.BUTTON_A) {
-            if (selectedActor instanceof ImageButton) {
-                performTouch(equipButton);
-                Timer.schedule(new Timer.Task() {
-                    @Override
-                    public void run() {
-                        selectCurrent();
-                    }
-                }, 0.25f);
-
-            } else {
-                performTouch(selectedActor);
-            }
-        } else if (keycode == Input.Keys.DPAD_RIGHT || keycode == Input.Keys.DPAD_DOWN)
-            selectNextActor(false);
-        else if (keycode == Input.Keys.DPAD_LEFT || keycode == Input.Keys.DPAD_UP)
-            selectPreviousActor(false);
-        return true;
-    }
 }
