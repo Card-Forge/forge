@@ -77,7 +77,7 @@ public class MapStage extends GameStage {
     private EffectData effect;             //"Dungeon Effect": Character Effect applied to all adversaries within the map.
     private boolean preventEscape = false; //Prevents player from escaping the dungeon by any means that aren't an exit.
     private final Array< TextraButton> dialogButtonMap=new Array<>();
-    private int selected = 0;
+
     public InputEvent   eventTouchDown, eventTouchUp;
     TextraButton selectedKey;
     private boolean respawnEnemies;
@@ -327,13 +327,13 @@ public class MapStage extends GameStage {
                 for(int j=i+1;j<collisionRect.size;j++)
                 {
                     Rectangle r2= collisionRect.get(j);
-                    if((Math.abs(r1.x-r2.x+r2.width)<1&&Math.abs(r1.y-r2.y)<1&&Math.abs(r1.height-r2.height)<1)//left edge is the same as right edge
+                    if((       Math.abs(r1.x-(r2.x+r2.width))<1&&Math.abs(r1.y-r2.y)<1&&Math.abs(r1.height-r2.height)<1)//left edge is the same as right edge
 
-                            ||(Math.abs(r1.x+r1.width-r2.x)<1&&Math.abs(r1.y-r2.y)<1&&Math.abs(r1.height-r2.height)<1)//right edge is the same as left edge
+                            ||(Math.abs((r1.x+r1.width)-r2.x)<1&&Math.abs(r1.y-r2.y)<1&&Math.abs(r1.height-r2.height)<1)//right edge is the same as left edge
 
-                            ||(Math.abs(r1.x - r2.x )<1&& Math.abs(r1.y+r1.height-r2.y)<1&&Math.abs(r1.width-r2.width)<1)//top edge is the same as bottom edge
+                            ||(Math.abs(r1.x - r2.x )<1&& Math.abs((r1.y+r1.height)-r2.y)<1&&Math.abs(r1.width-r2.width)<1)//top edge is the same as bottom edge
 
-                            ||(Math.abs(r1.x - r2.x )<1&& Math.abs(r1.y-r2.y+r2.height)<1&&Math.abs(r1.width-r2.width)<1)//bottom edge is the same as left edge
+                            ||(Math.abs(r1.x - r2.x )<1&& Math.abs(r1.y-(r2.y+r2.height))<1&&Math.abs(r1.width-r2.width)<1)//bottom edge is the same as left edge
 
                             ||containsOrEquals(r1,r2)||containsOrEquals(r2,r1)
                     )
@@ -731,7 +731,6 @@ public class MapStage extends GameStage {
     public void hideDialog() {
         dialog.hide(Actions.sequence(Actions.sizeTo(dialog.getOriginX(), dialog.getOriginY(), 0.3f), Actions.hide()));
         dialogOnlyInput = false;
-        selected = 0;
         selectedKey = null;
     }
 
