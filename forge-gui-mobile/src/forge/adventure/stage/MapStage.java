@@ -327,7 +327,7 @@ public class MapStage extends GameStage {
                 for(int j=i+1;j<collisionRect.size;j++)
                 {
                     Rectangle r2= collisionRect.get(j);
-                    if((       Math.abs(r1.x-(r2.x+r2.width))<1&&Math.abs(r1.y-r2.y)<1&&Math.abs(r1.height-r2.height)<1)//left edge is the same as right edge
+                    if(      (Math.abs(r1.x-(r2.x+r2.width))<1&&Math.abs(r1.y-r2.y)<1&&Math.abs(r1.height-r2.height)<1)//left edge is the same as right edge
 
                             ||(Math.abs((r1.x+r1.width)-r2.x)<1&&Math.abs(r1.y-r2.y)<1&&Math.abs(r1.height-r2.height)<1)//right edge is the same as left edge
 
