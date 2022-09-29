@@ -1,0 +1,13 @@
+[metadata]
+Code=SCD
+Date=2022-12-02
+Name=Starter Commander Decks
+Type=Commander
+ScryfallCode=SCD
+
+[cards]
+1 M Atarka, World Render @Camille Alquier
+2 M Emmara, Soul of the Accord @Kai Carpenter
+3 M Gisa and Geralf @Aaron J. Riley
+4 M Isperia, Supreme Judge @Minard Maxime
+5 M Kardur, Doomscourge @Helge C. Balzer

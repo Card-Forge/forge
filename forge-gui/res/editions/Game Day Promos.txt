@@ -12,3 +12,5 @@ ScryfallCode=GDY
 4 R Touch the Spirit Realm @Mila Pesic
 5 R Workshop Warchief @Minard Maxime
 6 M Shivan Devastator @Aldo Domínguez
+7 U Recruitment Officer @Zoltan Boros
+9 M Surge Engine @Volkan Baga

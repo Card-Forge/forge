@@ -1,0 +1,31 @@
+[metadata]
+Code=BRO
+Date=2022-11-18
+Name=The Brothers' War
+Code2=BRO
+MciCode=bro
+Type=Expansion
+ScryfallCode=BRO
+
+[cards]
+23 U Recruitment Officer @Johan Grenier
+81 M Surge Engine @Daarken
+218 R Queen Kayla bin-Kroog @Cristi Balanescu
+225 M Urza, Lord Protector @Ryan Pancoast
+238 R The Mightstone and Weakstone @Ryan Pancoast
+265 R Mishra's Foundry @Leon Tukker
+278 L Plains @Sergey Glushakov
+279 L Plains @Robin Olausson
+280 L Island @Robin Olausson
+281 L Island @Lucas Staniec
+282 L Swamp @Sergey Glushakov
+283 L Swamp @Robin Olausson
+284 L Mountain @Sergey Glushakov
+285 L Mountain @Victor Harmatiuk
+286 L Forest @Jonas De Ro
+287 L Forest @Piotr Dura
+320 M Surge Engine @Daarken
+357 R Queen Kayla bin-Kroog @Cristi Balanescu
+372 R Mishra's Foundry @Leon Tukker
+378 R Mishra's Foundry @Leon Tukker
+379 R Queen Kayla bin-Kroog @Howard Lyon
