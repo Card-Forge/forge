@@ -6,6 +6,7 @@ K:Ravenous
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Spawn Termagants — Whenever CARDNAME deals combat damage to a player, create that many 1/1 green Tyranid creature tokens.
 SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ g_1_1_tyranid
+SVar:X:Count$xPaid
 SVar:Y:TriggerCount$DamageAmount
 DeckHas:Ability$Counters|Token
 Oracle:Ravenous (This creature enters the battlefield with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nTrample\nSpawn Termagants — Whenever Tervigon deals combat damage to a player, create that many 1/1 green Tyranid creature tokens.
