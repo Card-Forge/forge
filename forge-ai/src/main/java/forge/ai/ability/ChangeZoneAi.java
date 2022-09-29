@@ -123,8 +123,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return doSacAndReturnFromGraveLogic(aiPlayer, sa);
             } else if (aiLogic.equals("Necropotence")) {
                 return SpecialCardAi.Necropotence.consider(aiPlayer, sa);
-            } else if (aiLogic.equals("SameName")) { // Declaration in Stone
-                return doSameNameLogic(aiPlayer, sa);
             } else if (aiLogic.equals("ReanimateAll")) {
                 return SpecialCardAi.LivingDeath.consider(aiPlayer, sa);
             } else if (aiLogic.equals("TheScarabGod")) {
@@ -1852,80 +1850,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // no candidates to upgrade
-        return false;
-    }
-
-    private boolean doSameNameLogic(Player aiPlayer, SpellAbility sa) {
-        final Game game = aiPlayer.getGame();
-        final Card source = sa.getHostCard();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
-        CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), aiPlayer,
-                source, sa);
-        list = CardLists.filterControlledBy(list, aiPlayer.getOpponents());
-        if (list.isEmpty()) {
-            return false; // no valid targets
-        }
-
-        Map<Player, Map.Entry<String, Integer>> data = Maps.newHashMap();
-
-        // need to filter for the opponents first
-        for (final Player opp : aiPlayer.getOpponents()) {
-            CardCollection oppList = CardLists.filterControlledBy(list, opp);
-
-            // no cards
-            if (oppList.isEmpty()) {
-                continue;
-            }
-
-            // Compute value for each possible target
-            Map<String, Integer> values = ComputerUtilCard.evaluateCreatureListByName(oppList);
-
-            // reject if none of them can be targeted
-            oppList = CardLists.filter(oppList, CardPredicates.isTargetableBy(sa));
-            // none can be targeted
-            if (oppList.isEmpty()) {
-                continue;
-            }
-
-            List<String> toRemove = Lists.newArrayList();
-            for (final String name : values.keySet()) {
-                if (!Iterables.any(oppList, CardPredicates.nameEquals(name))) {
-                    toRemove.add(name);
-                }
-            }
-            values.keySet().removeAll(toRemove);
-
-            // JAVA 1.8 use Map.Entry.comparingByValue()
-            data.put(opp, Collections.max(values.entrySet(), new Comparator<Map.Entry<String, Integer>>() {
-                @Override
-                public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                    return o1.getValue() - o2.getValue();
-                }
-            }));
-        }
-
-        if (!data.isEmpty()) {
-            // JAVA 1.8 use Map.Entry.comparingByValue() somehow
-            Map.Entry<Player, Map.Entry<String, Integer>> max = Collections.max(data.entrySet(), new Comparator<Map.Entry<Player, Map.Entry<String, Integer>>>() {
-                @Override
-                public int compare(Map.Entry<Player, Map.Entry<String, Integer>> o1, Map.Entry<Player, Map.Entry<String, Integer>> o2) {
-                    return o1.getValue().getValue() - o2.getValue().getValue();
-                }
-            });
-
-            // filter list again by the opponent and a creature of the wanted name that can be targeted
-            list = CardLists.filter(CardLists.filterControlledBy(list, max.getKey()),
-                    CardPredicates.nameEquals(max.getValue().getKey()), CardPredicates.isTargetableBy(sa));
-
-            // list should contain only one element or zero
-            sa.resetTargets();
-            for (Card c : list) {
-                sa.getTargets().add(c);
-                return true;
-            }
-        }
-
         return false;
     }
 
