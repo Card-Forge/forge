@@ -1,0 +1,9 @@
+[metadata]
+Code=YDMU
+Date=2021-10-06
+Name=Alchemy: Dominaria
+Type=Online
+ScryfallCode=YDMU
+
+[cards]
+0 M Oracle of the Alpha @Nino Vecia

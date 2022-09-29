@@ -1,0 +1,20 @@
+[metadata]
+Code=BRC
+Date=2022-11-18
+Name=The Brothers' War Commander
+Type=Commander
+ScryfallCode=BRC
+
+[cards]
+1 M Mishra, Eminent One @Randy Vargas
+2 M Urza, Chief Artificer @Bartlomiej Gawel
+39 M Mishra, Eminent One @Randy Vargas
+40 M Urza, Chief Artificer @Bartlomiej Gawel
+48 M Mishra, Eminent One @Randy Vargas
+49 M Urza, Chief Artificer @Bartlomiej Gawel
+92 C Preordain @Svetlin Velinov
+120 R Baleful Strix @Nils Hamm
+159 U Skullclamp @Daniel Ljunggren
+160 U Sol Ring @Mike Bierek
+178 C Command Tower @Ryan Yee
+196 U Reliquary Tower @Jesper Ejsing
