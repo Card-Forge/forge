@@ -1,8 +1,8 @@
 Name:Declaration in Stone
 ManaCost:1 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 1 W | Origin$ Battlefield | Destination$ Exile | AILogic$ SameName | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberLKI$ True | SubAbility$ DBExile | SpellDescription$ Exile target creature and all other creatures its controller controls with the same name as that creature. That player investigates for each nontoken creature exiled this way. | StackDescription$ SpellDescription
-SVar:DBExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | Defined$ RememberedController | ChangeType$ Remembered.Creature+sameName | Shuffle$ True | RememberChanged$ True | SubAbility$ DBInvestigate
+A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBExile | AILogic$ SameName | SpellDescription$ Exile target creature and all other creatures its controller controls with the same name as that creature. That player investigates for each nontoken creature exiled this way. | StackDescription$ SpellDescription
+SVar:DBExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | Defined$ TargetedController | ChangeType$ TargetedCard.Self,Creature.NotDefinedTargeted+sharesNameWith Targeted | Shuffle$ True | RememberLKI$ True | AILogic$ Always | SubAbility$ DBInvestigate
 SVar:DBInvestigate:DB$ Investigate | Num$ X | Defined$ RememberedController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:RememberedLKI$Valid Card.nonToken

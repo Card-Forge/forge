@@ -3,12 +3,10 @@ ManaCost:6 C
 Types:Creature Eldrazi
 PT:8/8
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBReveal | TriggerDescription$ At the beginning of combat on your turn, reveal the top card of your library. If a creature card is revealed this way, you may have creatures you control other than CARDNAME become copies of that card until end of turn. You may put that card on the bottom of your library.
-SVar:DBReveal:DB$ PeekAndReveal | PeekAmount$ 1 | RevealValid$ Card | RememberRevealed$ True | SubAbility$ DBDeceive
-SVar:DBDeceive:DB$ GenericChoice | Choices$ CloneArmy,DBNoop | Defined$ You | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
-SVar:CloneArmy:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Creature.YouCtrl+Other | RepeatSubAbility$ DBCopy | SpellDescription$ Clone your other creatures with revealed
+SVar:DBReveal:DB$ PeekAndReveal | PeekAmount$ 1 | RevealValid$ Card | RememberRevealed$ True | SubAbility$ CloneArmy
+SVar:CloneArmy:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Creature.YouCtrl+Other | RepeatSubAbility$ DBCopy | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Creature | ConditionCompare$ EQ1 | Optional$ True | OptionPrompt$ Clone your other creatures with revealed?
 SVar:DBCopy:DB$ Clone | Defined$ Remembered | CloneTarget$ Imprinted | Duration$ UntilEndOfTurn
-SVar:DBNoop:DB$ Cleanup | SpellDescription$ Do nothing.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | SpellDescription$ Do nothing. | SubAbility$ FakeScry
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ FakeScry
 SVar:FakeScry:DB$ Dig | DigNum$ 1 | AnyNumber$ True | DestinationZone$ Library | LibraryPosition2$ 0
 AI:RemoveDeck:All
 DeckNeeds:Ability$Mana.Colorless

@@ -1,7 +1,7 @@
 Name:Distant Memories
 ManaCost:2 U U
 Types:Sorcery
-A:SP$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | Imprint$ True | AILogic$ BestCard | SubAbility$ DBReturn | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card, exile it, then shuffle. Any opponent may have you put that card into your hand. If no player does, you draw three cards.
+A:SP$ ChangeZone | Origin$ Library | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | Mandatory$ True | Imprint$ True | AILogic$ BestCard | SubAbility$ DBRepeat | StackDescription$ SpellDescription | SpellDescription$ Search your library for a card, exile it, then shuffle. Any opponent may have you put that card into your hand. If no player does, you draw three cards.
 SVar:DBRepeat:DB$ RepeatEach | RepeatPlayers$ Opponent | RepeatSubAbility$ DBChoose | SubAbility$ DBDraw
 SVar:DBChoose:DB$ GenericChoice | Defined$ Remembered | Choices$ DBToHand,DoNothing | ChoicePrompt$ Have them put the card in their hand? | ConditionDefined$ Imprinted | ConditionZone$ Exile | ConditionPresent$ Card | ConditionCompare$ EQ1
 SVar:DBToHand:DB$ ChangeZone | Origin$ Exile | Destination$ Hand | Defined$ Imprinted | Unimprint$ True | SpellDescription$ Yes
