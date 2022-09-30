@@ -1,5 +1,0 @@
-Name:Molten Tributary
-ManaCost:no cost
-Types:Land Island Mountain
-K:CARDNAME enters the battlefield tapped.
-Oracle:({T}: Add {U} or {R}.)\nMolten Tributary enters the battlefield tapped.

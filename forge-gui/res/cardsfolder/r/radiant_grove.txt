@@ -1,0 +1,5 @@
+Name:Radiant Grove
+ManaCost:no cost
+Types:Land Forest Plains
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {G} or {W}.)\nRadiant Grove enters the battlefield tapped.
