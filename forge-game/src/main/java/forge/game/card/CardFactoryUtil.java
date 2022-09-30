@@ -3532,7 +3532,9 @@ public class CardFactoryUtil {
 
             StaticAbility st = StaticAbility.create(effect, state.getCard(), state, intrinsic);
 
-            st.setSVar("AffinityX", "Count$Valid " + t + ".YouCtrl");
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append("Count$Valid ").append(t).append(t.contains(".") ? "+" : ".").append("YouCtrl");
+            st.setSVar("AffinityX", sb2.toString());
             inst.addStaticAbility(st);
         } else if (keyword.startsWith("Blitz")) {
             final String[] k = keyword.split(":");
