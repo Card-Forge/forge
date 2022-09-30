@@ -1,0 +1,6 @@
+Name:Recruitment Officer
+ManaCost:W
+Types:Creature Human Soldier
+PT:2/1
+A:AB$ Dig | Cost$ 3 W | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature.cmcLE3 | ForceRevealToController$ True | RestRandomOrder$ True | SpellDescription$ Look at the top four cards of your library. You may reveal a creature card with mana value 3 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+Oracle:{3}{W}: Look at the top four cards of your library. You may reveal a creature card with mana value 3 or less from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
