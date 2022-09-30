@@ -3,8 +3,8 @@ ManaCost:2 U B R
 Types:Legendary Creature Human Artificer
 PT:5/4
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ At the beginning of combat on your turn, create a token that's a copy of target noncreature artifact you control, except its name is Mishra's Warform and it's a 4/4 Construct artifact creature in addition to its other types. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
-SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Artifact.nonCreature+YouCtrl | TgtPrompt$ Select target noncreature artifact you control. | AddTypes$ Construct | PumpKeywords$ Haste | AtEOT$ Sacrifice | NewName$ Mishra's Warform | SetPower$ 4 | SetToughness$ 4
+SVar:TrigCopy:DB$ CopyPermanent | ValidTgts$ Artifact.nonCreature+YouCtrl | TgtPrompt$ Select target noncreature artifact you control | AddTypes$ Creature & Construct | PumpKeywords$ Haste | AtEOT$ Sacrifice | NewName$ Mishra's Warform | SetPower$ 4 | SetToughness$ 4
 DeckHints:Type$Artifact
-DeckHas:Type$Token|Construct & Ability$Sacrifice
+DeckHas:Type$Construct & Ability$Sacrifice|Token
 SVar:PlayMain1:TRUE
 Oracle:At the beginning of combat on your turn, create a token that's a copy of target noncreature artifact you control, except its name is Mishra's Warform and it's a 4/4 Construct artifact creature in addition to its other types. It gains haste until end of turn. Sacrifice it at the beginning of the next end step.
