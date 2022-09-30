@@ -149,7 +149,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     protected ApiType api = null;
 
     private List<Mana> payingMana = Lists.newArrayList();
-    @Deprecated
     private List<SpellAbility> paidAbilities = Lists.newArrayList();
     private Integer xManaCostPaid = null;
 
