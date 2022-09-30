@@ -1,0 +1,14 @@
+Name:Chaotic Transformation
+ManaCost:5 R
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Artifact | Imprint$ True | TgtPrompt$ Select up to one target artifact | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ Creature | IsCurse$ True | StackDescription$ None | SpellDescription$ Exile up to one target artifact, up to one target creature, up to one target enchantment, up to one target planeswalker, and/or up to one target land.
+SVar:Creature:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select up to one target creature | TargetMin$ 0 | TargetMax$ 1 | IsCurse$ True | SubAbility$ Enchantment | StackDescription$ None
+SVar:Enchantment:DB$ Pump | ValidTgts$ Enchantment | TgtPrompt$ Select up to one target enchantment | TargetMin$ 0 | TargetMax$ 1 | IsCurse$ True | SubAbility$ Planeswalker | StackDescription$ None
+SVar:Planeswalker:DB$ Pump | ValidTgts$ Planeswalker | TgtPrompt$ Select up to one target planeswalker | TargetMin$ 0 | TargetMax$ 1 | IsCurse$ True | SubAbility$ Land | StackDescription$ None
+SVar:Land:DB$ Pump | ValidTgts$ Land | TgtPrompt$ Select up to one target land | TargetMin$ 0 | TargetMax$ 1 | IsCurse$ True | SubAbility$ DBExile | StackDescription$ None
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Targeted | SubAbility$ DBRepeatPlayer | Imprint$ True
+SVar:DBRepeatPlayer:DB$ RepeatEach | RepeatPlayers$ ImprintedController | RepeatSubAbility$ DBRepeatCard | SubAbility$ DBCleanup | SpellDescription$ For each permanent exiled this way, its controller reveals cards from the top of their library until they reveal a card that shares a card type with it, puts that card onto the battlefield, then shuffles.
+SVar:DBRepeatCard:DB$ RepeatEach | RepeatCards$ Card.IsImprinted+RememberedPlayerCtrl | Zone$ Exile | ChooseOrder$ RememberedPlayer | RepeatSubAbility$ DBDigUntil
+SVar:DBDigUntil:DB$ DigUntil | Valid$ Card.sharesCardTypeWith RememberedLKI | FoundDestination$ Battlefield | Defined$ RememberedController | Shuffle$ True | RevealedDestination$ Library | RevealedLibraryPosition$ -1
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+Oracle:Exile up to one target artifact, up to one target creature, up to one target enchantment, up to one target planeswalker, and/or up to one target land. For each permanent exiled this way, its controller reveals cards from the top of their library until they reveal a card that shares a card type with it, puts that card onto the battlefield, then shuffles.
