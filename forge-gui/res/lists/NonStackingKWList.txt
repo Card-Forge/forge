@@ -1,7 +1,6 @@
 All creatures able to block CARDNAME do so.
 Banding
 CARDNAME's activated abilities can't be activated.
-CARDNAME blocks each combat if able.
 CARDNAME can block any number of creatures.
 CARDNAME can't be regenerated.
 CARDNAME can't phase in.

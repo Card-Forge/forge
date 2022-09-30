@@ -50,6 +50,7 @@ import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
+import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
@@ -807,7 +808,7 @@ public class CombatUtil {
             }
 
             // "CARDNAME blocks each turn/combat if able."
-            if (!blockers.contains(blocker) && blocker.hasKeyword("CARDNAME blocks each combat if able.")) {
+            if (!blockers.contains(blocker) && StaticAbilityMustBlock.blocksEachCombatIfAble(blocker)) {
                 for (final Card attacker : attackers) {
                     if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
                         continue;
