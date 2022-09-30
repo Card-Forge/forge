@@ -149,6 +149,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     protected ApiType api = null;
 
     private List<Mana> payingMana = Lists.newArrayList();
+    @Deprecated
     private List<SpellAbility> paidAbilities = Lists.newArrayList();
     private Integer xManaCostPaid = null;
 
@@ -1111,7 +1112,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             clone.setPayCosts(getPayCosts().copy());
             if (manaPart != null) {
-                clone.manaPart = new AbilityManaPart(host, mapParams);
+                clone.manaPart = new AbilityManaPart(this, mapParams);
             }
 
             // need to copy the damage tables

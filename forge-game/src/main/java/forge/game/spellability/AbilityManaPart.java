@@ -29,6 +29,7 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
 import forge.game.GameActionUtil;
+import forge.game.IHasSVars;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -72,6 +73,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private transient List<Mana> lastManaProduced = Lists.newArrayList();
 
     private transient Card sourceCard;
+    private transient IHasSVars sVarHolder;
 
 
     // Spells paid with this mana spell can't be countered.
@@ -85,8 +87,13 @@ public class AbilityManaPart implements java.io.Serializable {
      * @param sourceCard
      *            a {@link forge.game.card.Card} object.
      */
+    public AbilityManaPart(final SpellAbility sourceSA, final Map<String, String> params) {
+        this(sourceSA.getHostCard(), params);
+        sVarHolder = sourceSA;
+    }
     public AbilityManaPart(final Card sourceCard, final Map<String, String> params) {
         this.sourceCard = sourceCard;
+        sVarHolder = sourceCard;
 
         origProduced = params.getOrDefault("Produced", "1");
         this.manaRestrictions = params.getOrDefault("RestrictValid", "");
@@ -260,7 +267,7 @@ public class AbilityManaPart implements java.io.Serializable {
             return;
 
         TriggerHandler handler = card.getGame().getTriggerHandler();
-        Trigger trig = TriggerHandler.parseTrigger(sourceCard.getSVar(this.triggersWhenSpent), sourceCard, false);
+        Trigger trig = TriggerHandler.parseTrigger(sVarHolder.getSVar(this.triggersWhenSpent), sourceCard, false);
         handler.registerOneTrigger(trig);
     }
 
