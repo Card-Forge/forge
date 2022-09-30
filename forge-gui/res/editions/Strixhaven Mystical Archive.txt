@@ -133,7 +133,6 @@ ScryfallCode=STA
 125 R Lightning Helix @Daken
 126 R Putrefy @Magane Okuda
 
-
 [etched]
 1e M Approach of the Second Sun @Minttu Hynninen
 2e M Day of Judgment @Anato Finnstark
