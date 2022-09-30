@@ -629,6 +629,7 @@ public class Player extends GameEntity implements Comparable<Player> {
         }
 
         loseLife(lifePayment, false, false);
+        cause.setPaidLife(lifePayment);
 
         // Run triggers
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(this);
