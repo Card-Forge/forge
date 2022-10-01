@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+nonLegendary+ThisTurnEnteredFrom_Battlefield | RememberChanged$ True | TgtPrompt$ Choose target nonlegendary creature card in your graveyard that was put there from the battlefield this turn | ChangeNum$ 1 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualBecomesTargetDraw | Duration$ Permanent | RememberObjects$ Remembered | Name$ Niambi,Beloved Protector's Perpetual Effect
 SVar:PerpetualBecomesTargetDraw:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | AddTrigger$ BecomesTarget | Description$ Whenever this creature becomes the target of a spell or ability, draw a card. This ability triggers only once each turn.
-SVar:BecomesTarget:Mode$ BecomesTarget | ValidTarget$ Card.Self | ActivationLimit$ 1 | TriggerZones$ Battlefield | Execute$ TrigDraw | ValidSource$ SpellAbility.OppCtrl
+SVar:BecomesTarget:Mode$ BecomesTarget | ValidTarget$ Card.Self | ActivationLimit$ 1 | TriggerZones$ Battlefield | Execute$ TrigDraw
 SVar:TrigDraw:DB$ Draw
 DeckHas:Ability$Graveyard
 Oracle:Flash\nWhen Niambi,Beloved Protector enters the battlefield, choose  target nonlegendary creature card in your graveyard that was put there from the battlefield this turn. Return it to the battlefield. It perpetually gains "Whenever this creature becomes the target of a spell or ability, draw a card. This ability triggers only once each turn."
