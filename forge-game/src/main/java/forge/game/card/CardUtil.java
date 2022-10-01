@@ -232,7 +232,6 @@ public final class CardUtil {
         }
         //*/
 
-        newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
         newCopy.setCopiedSpell(in.isCopiedSpell());
         newCopy.setImmutable(in.isImmutable());

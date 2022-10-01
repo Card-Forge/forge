@@ -1344,6 +1344,7 @@ public abstract class GameState {
                     c.setState(CardStateName.Flipped, true);
                 } else if (info.startsWith("Meld")) {
                     c.setState(CardStateName.Meld, true);
+                    c.setBackSide(true);
                 } else if (info.startsWith("Modal")) {
                     c.setState(CardStateName.Modal, true);
                     c.setBackSide(true);
