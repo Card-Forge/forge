@@ -1,9 +1,19 @@
 [metadata]
 Code=YDMU
-Date=2021-10-06
+Date=2022-10-06
 Name=Alchemy: Dominaria
 Type=Online
 ScryfallCode=YDMU
 
 [cards]
 0 M Oracle of the Alpha @Nino Vecia
+0 R Skywriter Djinn @Gaboleps
+0 U Diminished Returner @Bruno Biazotto
+0 R Smogbelcher Chariot @Michele Giorgi
+0 U Goblin Morale Sergent @Inkognit
+0 M Marwyyn's Kindred @Alessandra Pisano
+0 U Wandering Treefolk @Iris Compiet
+0 R Niambi, Beloved Protector @Julia Metzger
+0 M Protean Warengine @Ben Wootten
+0 R Tiana, Angel Mechanic @Joseph Weston
+0 R Slimefoot, Thallid Transplant @Loïc Canavaggia
