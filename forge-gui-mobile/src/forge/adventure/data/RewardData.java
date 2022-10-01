@@ -79,8 +79,15 @@ public class RewardData {
         allCards = Iterables.filter(allCards,  new Predicate<PaperCard>() {
             @Override
             public boolean apply(PaperCard input){
-                if(input == null) return false;
-                if(Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getEdition())) return false;
+                if(input == null)
+                    return false;
+                if (Iterables.contains(input.getRules().getMainPart().getKeywords(), "Remove CARDNAME from your deck before playing if you're not playing for ante."))
+                   return false;
+                if(input.getRules().getAiHints().getRemNonCommanderDecks())
+                    return false;
+                if(Arrays.asList(Config.instance().getConfigData().restrictedEditions).contains(input.getEdition()))
+                    return false;
+
                 return !Arrays.asList(Config.instance().getConfigData().restrictedCards).contains(input.getName());
             }
         });
