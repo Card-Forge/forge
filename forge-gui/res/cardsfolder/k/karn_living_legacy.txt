@@ -5,7 +5,7 @@ Loyalty:4
 A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenAmount$ 1 | TokenTapped$ True | TokenScript$ c_a_powerstone | TokenOwner$ You | SpellDescription$ Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
 A:AB$ ChooseNumber | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | ChooseAnyNumber$ True | ListTitle$ Pay Any Mana | SubAbility$ DBDig | SpellDescription$ Pay any amount of mana. Look at that many cards from the top of your library, then put one of those cards into your hand and the rest on the bottom of your library in a random order.
 SVar:DBDig:DB$ Dig | DigNum$ X | ChangeNum$ 1 | RestRandomOrder$ True | UnlessCost$ X | UnlessPayer$ You | UnlessSwitched$ True
-A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | AIlogic$ Always | Stackable$ False | Name$ Emblem - Karn, Living Legacy | Image$ emblem_karn_living_legacy | Duration$ Permanent | Abilities$ KarnPing | SpellDescription$ You get an emblem with "Tap an untapped artifact you control: This emblem deals 1 damage to any target."
+A:AB$ Effect | Cost$ SubCounter<7/LOYALTY> | Planeswalker$ True | Ultimate$ True | AILogic$ Always | Stackable$ False | Name$ Emblem - Karn, Living Legacy | Image$ emblem_karn_living_legacy | Duration$ Permanent | Abilities$ KarnPing | SpellDescription$ You get an emblem with "Tap an untapped artifact you control: This emblem deals 1 damage to any target."
 SVar:KarnPing:AB$ DealDamage | Cost$ tapXType<1/Artifact> | ActivationZone$ Command | ValidTgts$ Creature,Player,Planeswalker | NumDmg$ 1
 SVar:PlayMain1:TRUE
 DeckHas:Ability$Token & Type|Artifact
