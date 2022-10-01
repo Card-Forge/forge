@@ -3,7 +3,8 @@ ManaCost:2
 Types:Artifact Creature Construct
 PT:3/2
 K:Defender
-A:AB$ Animate | Cost$ U | HiddenKeywords$ Unblockable | RemoveKeywords$ Defender | Duration$ Permanent | SpellDescription$ CARDNAME loses defender and gains "This creature can't be blocked."
+A:AB$ Animate | Cost$ U | AddStaticAbility$ Unblockable | RemoveKeywords$ Defender | Duration$ Permanent | SpellDescription$ CARDNAME loses defender and gains "This creature can't be blocked."
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Creature.Self 
 A:AB$ Animate | Cost$ 2 U | IsPresent$ Card.Self+!withDefender | Duration$ Permanent | Colors$ Blue | Power$ 5 | Toughness$ 4 | SpellDescription$ CARDNAME becomes blue and has base power and toughness 5/4. Activate only if CARDNAME doesn't have defender.
 A:AB$ Draw | Cost$ 4 U U | NumCards$ 3 | IsPresent$ Card.Self+Blue | GameActivationLimit$ 1 | SpellDescription$ Draw three cards. Activate only if CARDNAME is blue and only once.
 DeckHas:Color$Blue 
