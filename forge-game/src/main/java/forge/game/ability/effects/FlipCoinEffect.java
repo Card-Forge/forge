@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.collect.Lists;
 import forge.game.GameObject;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -12,6 +13,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.event.GameEventFlipCoin;
 import forge.game.player.Player;
+import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
@@ -60,6 +62,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
         }
 
         final boolean noCall = sa.hasParam("NoCall");
+        final boolean forEachPlayer = sa.hasParam("ForEachPlayer");
         String varName = sa.getParamOrDefault("SaveNumFlipsToSVar", "X");
         boolean victory = false;
         int amount = 1;
@@ -67,7 +70,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             amount = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
         }
 
-        if (!noCall && amount == 1) {
+        if (!noCall && !forEachPlayer && amount == 1) {
             flipMultiplier = getFlipMultiplier(caller.get(0));
             victory = flipCoinCall(caller.get(0), sa, flipMultiplier, varName);
         }
@@ -149,6 +152,50 @@ public class FlipCoinEffect extends SpellAbilityEffect {
                         host.addRemembered(countLosses);
                     }
                 }
+            } else if (forEachPlayer) {
+                flipMultiplier = getFlipMultiplier(flipper);
+
+                int countWins = 0;
+                int countLosses = 0;
+                PlayerCollection wonFor = new PlayerCollection();
+                PlayerCollection lostFor = new PlayerCollection();
+
+                for (final Player p : AbilityUtils.getDefinedPlayers(host, sa.getParam("ForEachPlayer"), sa)) {
+                    final String info = " (" + p.getName() +")";
+                    final boolean win = flipCoinCall(caller.get(0), sa, flipMultiplier, varName, info);
+
+                    if (win) {
+                        countWins++;
+                        wonFor.add(p);
+                    } else {
+                        countLosses++;
+                        lostFor.add(p);
+                    }
+                }
+                if (countWins > 0) {
+                    SpellAbility sub = sa.getAdditionalAbility("WinSubAbility");
+                    if (sub != null) {
+                        List<Object> tempRemembered = Lists.newArrayList(host.getRemembered());
+                        host.removeRemembered(tempRemembered);
+                        host.addRemembered(wonFor);
+                        sub.setSVar("Wins", "Number$" + countWins);
+                        AbilityUtils.resolve(sub);
+                        host.removeRemembered(wonFor);
+                        host.addRemembered(tempRemembered);
+                    }
+                }
+                if (countLosses > 0) {
+                    SpellAbility sub = sa.getAdditionalAbility("LoseSubAbility");
+                    if (sub != null) {
+                        List<Object> tempRemembered = Lists.newArrayList(host.getRemembered());
+                        host.removeRemembered(tempRemembered);
+                        host.addRemembered(lostFor);
+                        sub.setSVar("Losses", "Number$" + countLosses);
+                        AbilityUtils.resolve(sub);
+                        host.removeRemembered(lostFor);
+                        host.addRemembered(tempRemembered);
+                    }
+                }
             } else {
                 if (victory) {
                     if (sa.getParam("RememberWinner") != null) {
@@ -219,15 +266,18 @@ public class FlipCoinEffect extends SpellAbilityEffect {
      */
     public static boolean flipCoinCall(final Player caller, final SpellAbility sa, final int multiplier) {
         String varName = sa.getParamOrDefault("SaveNumFlipsToSVar", "X");
-        return flipCoinCall(caller, sa, multiplier, varName);
+        return flipCoinCall(caller, sa, multiplier, varName, "");
     }
     public static boolean flipCoinCall(final Player caller, final SpellAbility sa, final int multiplier, final String varName) {
+        return flipCoinCall(caller, sa, multiplier, varName, "");
+    }
+    public static boolean flipCoinCall(final Player caller, final SpellAbility sa, final int multiplier, final String varName, final String info) {
         boolean wonFlip = false;
         int numSuccesses = 0;
 
         do {
             Set<Boolean> flipResults = new HashSet<>();
-            final boolean choice = caller.getController().chooseBinary(sa, sa.getHostCard().getName() + " - " + Localizer.getInstance().getMessage("lblCallCoinFlip"), PlayerController.BinaryChoiceType.HeadsOrTails);
+            final boolean choice = caller.getController().chooseBinary(sa, sa.getHostCard().getName() + " - " + Localizer.getInstance().getMessage("lblCallCoinFlip") + info, PlayerController.BinaryChoiceType.HeadsOrTails);
             for (int i = 0; i < multiplier; i++) {
                 flipResults.add(MyRandom.getRandom().nextBoolean());
             }
