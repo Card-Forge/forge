@@ -1,0 +1,24 @@
+Name:Smogbelcher Chariot
+ManaCost:2 B
+Types:Artifact Vehicle
+PT:3/3
+K:Menace
+K:Deathtouch
+K:Lifelink
+T:Mode$ BecomesCrewed | ValidVehicle$ Card.Self | Execute$ RememberCrew | Static$ True
+SVar:RememberCrew:DB$ PumpAll | ValidCards$ Creature.TriggeredCrew | RememberAllPumped$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ DBCleanup | Static$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature that crewed it this turn perpetually gains your choice of menace, deathtouch, or lifelink.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Card.IsRemembered | TgtPrompt$ Select target creature that crewed it this turn | RememberTargets$ True | SubAbility$ DBGenericChoice
+SVar:DBGenericChoice:DB$ GenericChoice | Choices$ Menace,Deathtouch,LifeLink | AILogic$ Random
+SVar:Menace:DB$ Effect | StaticAbilities$ PerpetualMenace | RememberObjects$ Targeted | Name$ Smogbelcher Chariot's Perpetual Effect | Duration$ Permanent | SpellDescription$ This creature perpetually gains Menace.
+SVar:PerpetualMenace:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Menace | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains Menace.
+SVar:Deathtouch:DB$ Effect | StaticAbilities$ PerpetualDeathtouch | RememberObjects$ Targeted | Name$ Smogbelcher Chariot's Perpetual Effect | Duration$ Permanent | SpellDescription$ This creature perpetually gains Deathtouch.
+SVar:PerpetualDeathtouch:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Deathtouch | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains Deathtouch.
+SVar:LifeLink:DB$ Effect | StaticAbilities$ PerpetualLifelink | RememberObjects$ Targeted | Name$ Smogbelcher Chariot's Perpetual Effect | Duration$ Permanent | SpellDescription$ This creature perpetually gains Lifelink.
+SVar:PerpetualLifelink:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Lifelink | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains Lifelink.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+K:Crew:3
+SVar:HasAttackEffect:TRUE
+Oracle:Menace,Deathtouch,Lifelink\nWhenever Smogbelcher Chariot attacks, target creature that crewed it this turn perpetually gains your choice of menace, deathtouch, or lifelink.\nCrew 3
