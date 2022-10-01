@@ -1,5 +1,5 @@
 Name:Sloppity Bilepiper
-ManaCost:3 R
+ManaCost:3 B
 Types:Creature Demon
 PT:3/3
 A:AB$ Effect | PrecostDesc$ Jolly Gutpipes — | Cost$ 2 T Sac<1/Creature> | StaticAbilities$ GrantCascade | Triggers$ ExileEffect | SpellDescription$ The next creature spell you cast this turn has cascade. (When you cast your next creature spell, exile cards from the top of your library until you exile a nonland card that costs less. You may cast it without paying its mana cost. Put the exiled cards on the bottom of your library in a random order.)
