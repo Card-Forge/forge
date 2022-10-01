@@ -2,7 +2,6 @@ Name:Mishra's Workshop
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 3 | RestrictValid$ Spell.Artifact | SpellDescription$ Add {C}{C}{C}. Spend this mana only to cast artifact spells.
-DeckHints:Type$Artifact
 DeckNeeds:Type$Artifact
 AI:RemoveDeck:Random
 Oracle:{T}: Add {C}{C}{C}. Spend this mana only to cast artifact spells.
