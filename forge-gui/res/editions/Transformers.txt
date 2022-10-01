@@ -18,3 +18,7 @@ ScryfallCode=BOT
 25 M Goldbug, Humanity's Ally @VOLTA Creation
 27 M Optimus Prime, Hero @VOLTA Creation
 28 M Soundwave, Sonic Spy @VOLTA Creation
+
+[tokens]
+laserbeak
+ravage
