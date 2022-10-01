@@ -1,0 +1,24 @@
+[metadata]
+Code=BOT
+Date=2022-11-18
+Name=Transformers
+Type=Promo
+ScryfallCode=BOT
+
+[cards]
+5 M Starscream, Power Hungry @VOLTA Creation
+6 M Slicer, Hired Muscle @VOLTA Creation
+10 M Flamewar, Brash Veteran @VOLTA Creation
+11 M Goldbug, Humanity's Ally @VOLTA Creation
+13 M Optimus Prime, Hero @VOLTA Creation
+14 M Soundwave, Sonic Spy @VOLTA Creation
+20 M Starscream, Power Hungry @VOLTA Creation
+21 M Slicer, Hired Muscle @VOLTA Creation
+24 M Flamewar, Brash Veteran @VOLTA Creation
+25 M Goldbug, Humanity's Ally @VOLTA Creation
+27 M Optimus Prime, Hero @VOLTA Creation
+28 M Soundwave, Sonic Spy @VOLTA Creation
+
+[tokens]
+laserbeak
+ravage
