@@ -24,6 +24,7 @@ ScryfallCode=BOT
 16 M Prowl, Stoic Strategist @VOLTA Creation
 17 M Ratchet, Field Medic @VOLTA Creation
 18 M Jetfire, Ingenious Scientist @VOLTA Creation
+19 M Blitzwing, Cruel Tormentor @VOLTA Creation
 20 M Starscream, Power Hungry @VOLTA Creation
 21 M Slicer, Hired Muscle @VOLTA Creation
 22 M Blaster, Combat DJ @VOLTA Creation
