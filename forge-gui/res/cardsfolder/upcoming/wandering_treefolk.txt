@@ -1,6 +1,6 @@
 Name:Wandering Treefolk
 ManaCost:1 G
-Types:Creature threefolk
+Types:Creature treefolk
 PT:2/3
 K:Vigilance
 A:AB$ ChangeZone | Cost$ 7 G | ReduceCost$ X | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.Creature | ChangeNum$ 1 | PrecostDesc$ Domain — | SpellDescription$ Seek a creature card. This ability costs {1} less to activate for each basic land type among lands you control.
