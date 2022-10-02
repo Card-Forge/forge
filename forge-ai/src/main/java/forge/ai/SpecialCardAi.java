@@ -602,7 +602,7 @@ public class SpecialCardAi {
             return true;
         }
 
-        public static String chooseSpellAbility(final Player ai, final SpellAbility sa, final List<String> options) {
+        public static String chooseKeyword(final Player ai, final SpellAbility sa, final List<String> options) {
             // TODO: generalize and improve this so that it acts in a more reasonable way and can potentially be used for other cards too
             List<String> possible = Lists.newArrayList();
             Card tgtCard = sa.getTargetCard();

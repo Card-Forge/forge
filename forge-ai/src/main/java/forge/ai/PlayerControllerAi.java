@@ -946,7 +946,7 @@ public class PlayerControllerAi extends PlayerController {
         final String aiLogic = sa.getParamOrDefault("AILogic", "");
 
         if (aiLogic.equals("GideonBlackblade")) {
-            return SpecialCardAi.GideonBlackblade.chooseSpellAbility(player, sa, options);
+            return SpecialCardAi.GideonBlackblade.chooseKeyword(player, sa, options);
         }
 
         return Iterables.getFirst(options, null);
