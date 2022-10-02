@@ -610,35 +610,31 @@ public class SpecialCardAi {
             return true;
         }
 
-        public static SpellAbility chooseSpellAbility(final Player ai, final SpellAbility sa, final List<SpellAbility> spells) {
+        public static String chooseSpellAbility(final Player ai, final SpellAbility sa, final List<String> options) {
             // TODO: generalize and improve this so that it acts in a more reasonable way and can potentially be used for other cards too
-            List<SpellAbility> best = Lists.newArrayList();
-            List<SpellAbility> possible = Lists.newArrayList();
+            List<String> possible = Lists.newArrayList();
             Card tgtCard = sa.getTargetCard();
             if (tgtCard != null) {
-                for (SpellAbility sp : spells) {
-                    if (SpellApiToAi.Converter.get(sp.getApi()).canPlayAIWithSubs(ai, sp)) {
-                        best.add(sp); // these SAs are prioritized since the AI sees a reason to play them now
-                    }
-                    final List<String> keywords = sp.hasParam("KW") ? Arrays.asList(sp.getParam("KW").split(" & "))
-                            : Lists.newArrayList();
-                    for (String kw : keywords) {
-                        if (!tgtCard.hasKeyword(kw)) {
-                            if ("Indestructible".equals(kw) && ai.getOpponents().getCreaturesInPlay().isEmpty()) {
+                CardCollection oppUntappedCreatures = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), CardPredicates.Presets.UNTAPPED);
+                for (String kw : options) {
+                    if (!tgtCard.hasKeyword(kw)) {
+                        if ("Indestructible".equals(kw)) {
+                            if (oppUntappedCreatures.isEmpty()) {
                                 continue; // nothing to damage or kill the creature with
+                            } else {
+                                possible.clear();
+                                possible.add(kw); // prefer Indestructible above all else
+                                break;
                             }
-                            possible.add(sp); // these SAs at least don't duplicate a keyword on the card
-                            break;
                         }
+                        possible.add(kw); // these SAs at least don't duplicate a keyword on the card
                     }
                 }
             }
-            if (!best.isEmpty()) {
-                return Aggregates.random(best);
-            } else if (!possible.isEmpty()) {
+            if (!possible.isEmpty()) {
                 return Aggregates.random(possible);
             } else {
-                return Aggregates.random(spells); // if worst comes to worst, it's a PW +1 ability, so do at least something
+                return Aggregates.random(options); // if worst comes to worst, it's a PW +1 ability, so do at least something
             }
         }
     }
