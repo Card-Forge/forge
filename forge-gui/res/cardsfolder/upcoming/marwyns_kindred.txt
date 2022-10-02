@@ -1,9 +1,0 @@
-Name:Marwyn's Kindred
-ManaCost:X 2 G G
-Types:Sorcery
-A:SP$ MakeCard | Conjure$ True | Name$ Marwyn, the Nurturer | Zone$ Battlefield | Amount$ 1 | SubAbility$ DBConjure | SpellDescription$ Conjure a card named Marwyn,the Nurturer and X cards named Llanowar Elves onto the battlefield. 
-SVar:DBConjure:DB$ MakeCard | Name$ Llanowar Elves | Zone$ Battlefield | Conjure$ True | Amount$ X
-SVar:X:Count$xPaid
-DeckHints:Type$Elves|Druid
-DeckHas:Type$Elves|Druid
-Oracle:Conjure a card named Marwyn,the Nurturer and X cards named Llanowar Elves onto the battlefield. 

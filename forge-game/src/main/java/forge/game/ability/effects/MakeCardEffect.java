@@ -130,6 +130,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                         int cAmount = AbilityUtils.calculateAmount(c, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
                         made.addCounter(cType, cAmount, player, counterTable);
                     }
+                }    
             }
             triggerList.triggerChangesZoneAll(game, sa);
             
