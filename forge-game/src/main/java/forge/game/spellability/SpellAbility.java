@@ -115,6 +115,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Pair<Long, Player> controlledByPlayer;
     private ManaCostBeingPaid manaCostBeingPaid;
     private boolean spentPhyrexian = false;
+    private int paidLifeAmount = 0;
 
     private SpellAbility grantorOriginal;
     private StaticAbility grantorStatic;
@@ -624,6 +625,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         this.spentPhyrexian = value;
     }
 
+    public final int getAmountLifePaid() {
+        return this.paidLifeAmount;
+    }
+    public final void setPaidLife(int value) {
+        this.paidLifeAmount = value;
+    }
+
     public final void applyPayingManaEffects() {
         Card host = getHostCard();
 
@@ -777,8 +785,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return replacingObjects;
     }
     public Object getReplacingObject(final AbilityKey type) {
-        final Object res = replacingObjects.get(type);
-        return res;
+        return replacingObjects.get(type);
     }
 
     public void setReplacingObject(final AbilityKey type, final Object o) {
@@ -1112,7 +1119,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
             clone.setPayCosts(getPayCosts().copy());
             if (manaPart != null) {
-                clone.manaPart = new AbilityManaPart(host, mapParams);
+                clone.manaPart = new AbilityManaPart(this, mapParams);
             }
 
             // need to copy the damage tables

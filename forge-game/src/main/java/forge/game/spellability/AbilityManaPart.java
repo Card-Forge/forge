@@ -28,8 +28,8 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
-import forge.game.Game;
 import forge.game.GameActionUtil;
+import forge.game.IHasSVars;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -37,7 +37,7 @@ import forge.game.card.CardUtil;
 import forge.game.mana.Mana;
 import forge.game.mana.ManaPool;
 import forge.game.player.Player;
-import forge.game.replacement.ReplacementEffect;
+import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
@@ -73,6 +73,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private transient List<Mana> lastManaProduced = Lists.newArrayList();
 
     private transient Card sourceCard;
+    private transient IHasSVars sVarHolder;
 
 
     // Spells paid with this mana spell can't be countered.
@@ -86,8 +87,13 @@ public class AbilityManaPart implements java.io.Serializable {
      * @param sourceCard
      *            a {@link forge.game.card.Card} object.
      */
+    public AbilityManaPart(final SpellAbility sourceSA, final Map<String, String> params) {
+        this(sourceSA.getHostCard(), params);
+        sVarHolder = sourceSA;
+    }
     public AbilityManaPart(final Card sourceCard, final Map<String, String> params) {
         this.sourceCard = sourceCard;
+        sVarHolder = sourceCard;
 
         origProduced = params.getOrDefault("Produced", "1");
         this.manaRestrictions = params.getOrDefault("RestrictValid", "");
@@ -261,7 +267,7 @@ public class AbilityManaPart implements java.io.Serializable {
             return;
 
         TriggerHandler handler = card.getGame().getTriggerHandler();
-        Trigger trig = TriggerHandler.parseTrigger(sourceCard.getSVar(this.triggersWhenSpent), sourceCard, false);
+        Trigger trig = TriggerHandler.parseTrigger(sVarHolder.getSVar(this.triggersWhenSpent), sourceCard, false);
         handler.registerOneTrigger(trig);
     }
 
@@ -636,24 +642,13 @@ public class AbilityManaPart implements java.io.Serializable {
         // check for produce mana replacement effects - they mess this up, so just use the mana ability
         final Card source = am.getHostCard();
         final Player activator = am.getActivatingPlayer();
-        final Game g = source.getGame();
-        final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromPlayer(activator);
         repParams.put(AbilityKey.Mana, getOrigProduced());
         repParams.put(AbilityKey.Affected, source);
-        repParams.put(AbilityKey.Player, activator);
         repParams.put(AbilityKey.AbilityMana, am.getRootAbility());
 
-        for (final Player p : g.getPlayers()) {
-            for (final Card crd : p.getAllCards()) {
-                for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
-                    if (replacementEffect.getMode() == ReplacementType.ProduceMana
-                            && replacementEffect.requirementsCheck(g)
-                            && replacementEffect.canReplace(repParams)
-                            && replacementEffect.zonesCheck(g.getZoneOf(crd))) {
-                        return true;
-                    }
-                }
-            }
+        if (!source.getGame().getReplacementHandler().getReplacementList(ReplacementType.ProduceMana, repParams, ReplacementLayer.Other).isEmpty()) {
+            return true;
         }
 
         if (am.getApi() == ApiType.ManaReflected) {

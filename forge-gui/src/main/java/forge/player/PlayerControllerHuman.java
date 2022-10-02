@@ -1107,6 +1107,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         case Stack:
             choices = getGui().order(localizer.getMessage("lblChooseOrderCopiesCast"), localizer.getMessage("lblPutFirst"), choices, null);
             break;
+        case None: //for when we want to order but don't really want to move the cards
+            choices = getGui().order(localizer.getMessage("lblChooseOrderCards"), localizer.getMessage("lblPutFirst"), choices, null);
+            break;
         default:
             System.out.println("ZoneType " + destinationZone + " - Not Ordered");
             endTempShowCards();

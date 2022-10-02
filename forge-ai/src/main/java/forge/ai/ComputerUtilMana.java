@@ -393,10 +393,9 @@ public class ComputerUtilMana {
         String manaProduced = toPay.isSnow() && hostCard.isSnow() ? "S" : GameActionUtil.generatedTotalMana(saPayment);
         //String originalProduced = manaProduced;
 
-        final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromPlayer(ai);
         repParams.put(AbilityKey.Mana, manaProduced);
         repParams.put(AbilityKey.Affected, hostCard);
-        repParams.put(AbilityKey.Player, ai);
         repParams.put(AbilityKey.AbilityMana, saPayment); // RootAbility
 
         // TODO Damping Sphere might replace later?
@@ -1617,10 +1616,9 @@ public class ComputerUtilMana {
 
                         // setup produce mana replacement effects
                         String origin = mp.getOrigProduced();
-                        final Map<AbilityKey, Object> repParams = AbilityKey.newMap();
+                        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromPlayer(ai);
                         repParams.put(AbilityKey.Mana, origin);
                         repParams.put(AbilityKey.Affected, sourceCard);
-                        repParams.put(AbilityKey.Player, ai);
                         repParams.put(AbilityKey.AbilityMana, m); // RootAbility
 
                         List<ReplacementEffect> reList = game.getReplacementHandler().getReplacementList(ReplacementType.ProduceMana, repParams, ReplacementLayer.Other);

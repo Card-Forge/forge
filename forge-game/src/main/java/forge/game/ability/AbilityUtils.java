@@ -1804,6 +1804,11 @@ public class AbilityUtils {
                     final SpellAbility root = (SpellAbility) sa.getRootAbility().getTriggeringObject(AbilityKey.SpellAbility);
                     return root == null ? 0 : root.getTotalManaSpent();
                 }
+                // Count$TriggeredLifeSpent
+                if (sq[0].equals("TriggeredLifeSpent")) {
+                    final SpellAbility root = (SpellAbility) sa.getRootAbility().getTriggeringObject(AbilityKey.SpellAbility);
+                    return root == null ? 0 : root.getAmountLifePaid();
+                }
 
                 // Count$ManaColorsPaid
                 if (sq[0].equals("ManaColorsPaid")) {

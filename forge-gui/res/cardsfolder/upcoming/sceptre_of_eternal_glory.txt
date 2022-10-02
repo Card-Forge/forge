@@ -1,0 +1,7 @@
+Name:Sceptre of Eternal Glory
+ManaCost:4
+Types:Legendary Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 3 | CheckSVar$ X | SVarCompare$ GE3 | SpellDescription$ Add three mana of any one color. Activate only if you control three or more lands with the same name.
+SVar:X:Count$MostCardName Land.YouCtrl
+Oracle:{T}: Add one mana of any color.\n{T}: Add three mana of any one color. Activate only if you control three or more lands with the same name.

@@ -48,8 +48,14 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 } else {
                     names.add(n);
                 }
-            }
-            if (sa.hasParam("DefinedName")) {
+            } else if (sa.hasParam("Names")) {
+                List<String> nameList = Arrays.asList(sa.getParam("Names").split(","));
+                for (String s : nameList) {
+                    // Cardnames that include "," must use ";" instead here
+                    s = s.replace(";", ",");
+                    names.add(s);
+                }
+            } else if (sa.hasParam("DefinedName")) {
                 final CardCollection def = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedName"), sa);
                 if (def.size() > 0) {
                     for (final Card c : def) {

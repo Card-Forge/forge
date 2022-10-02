@@ -5,5 +5,6 @@ PT:1/1
 K:Ravenous
 T:Mode$ ChangesZone | ValidCard$ Land.YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Endless Swarm — Whenever a land enters the battlefield under your control, you may pay {2}{G}. If you do, return CARDNAME from your graveyard to your hand.
 SVar:TrigReturn:AB$ ChangeZone | ValidCard$ Card.Self | Cost$ 2 G | Origin$ Graveyard | Destination$ Hand
+SVar:X:Count$xPaid
 DeckHas:Ability$Counters|Graveyard
 Oracle:Ravenous (This creature enters the battlefield with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nEndless Swarm — Whenever a land enters the battlefield under your control, you may pay {2}{G}. If you do, return Hormagaunt Horde from your graveyard to your hand.

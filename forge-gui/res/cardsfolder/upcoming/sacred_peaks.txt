@@ -1,5 +1,0 @@
-Name:Sacred Peaks
-ManaCost:no cost
-Types:Land Mountain Plains
-K:CARDNAME enters the battlefield tapped.
-Oracle:({T}: Add {R} or {W}.)\nSacred Peaks enters the battlefield tapped.
