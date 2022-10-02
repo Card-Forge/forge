@@ -1,0 +1,10 @@
+Name:Vodalian Wavemage
+ManaCost:1 G U
+Types:Creature Merfolk Wizard
+PT:3/3
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl+nonToken | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigChoose | RememberObjects$ TriggeredSource | TriggerDescription$ Whenever one or more nontoken creatures you control deal combat damage to a player, choose one of those creatures. Conjure a copy of the chosen creature in your hand.
+SVar:TirgChoose:DB$ ChooseCard | Choices$ Card.IsImprinted | Mandatory$ True | SubAbility$ DBConjure | ChoiceZone$ Battlefield
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ChosenCard | Zone$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
+SVar:PlayMain1:TRUE
+Oracle:Whenever one or more nontoken creatures you control deal combat damage to a player, choose one of those creatures. Conjure a copy of the chosen creature in your hand.
