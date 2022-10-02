@@ -943,6 +943,12 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public String chooseKeywordForPump(final List<String> options, final SpellAbility sa, final String prompt) {
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
+
+        if (aiLogic.equals("GideonBlackblade")) {
+            return SpecialCardAi.GideonBlackblade.chooseKeyword(player, sa, options);
+        }
+
         return Iterables.getFirst(options, null);
     }
 

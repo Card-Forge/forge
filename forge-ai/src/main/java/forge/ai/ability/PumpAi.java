@@ -143,6 +143,8 @@ public class PumpAi extends PumpAiBase {
             return SpecialCardAi.ElectrostaticPummeler.consider(ai, sa);
         } else if (aiLogic.startsWith("AristocratCounters")) {
             return true; // the preconditions to this are already tested in checkAiLogic
+        } else if ("GideonBlackblade".equals(aiLogic)) {
+            return SpecialCardAi.GideonBlackblade.consider(ai, sa);
         } else if ("MoveCounter".equals(aiLogic)) {
             final SpellAbility moveSA = sa.findSubAbilityByType(ApiType.MoveCounter);
 
