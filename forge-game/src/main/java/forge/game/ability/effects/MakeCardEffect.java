@@ -9,10 +9,12 @@ import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.ICardFace;
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CounterType;
 import forge.game.card.CardCollection;
 import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
@@ -32,6 +34,8 @@ public class MakeCardEffect extends SpellAbilityEffect {
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
         final Card source = sa.getHostCard();
         final PlayerCollection players = AbilityUtils.getDefinedPlayers(source, sa.getParam("Defined"), sa);
+        GameEntityCounterTable counterTable = new GameEntityCounterTable();
+
 
         for (final Player player : players) {
             final Game game = player.getGame();
@@ -112,9 +116,23 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ImprintMade")) {
                     source.addImprintedCard(made);
                 }
+                if (zone.equals(ZoneType.Exile)) {
+                    source.addExiledCard(made);
+                    made.setExiledWith(source);
+                    made.setExiledBy(source.getController());
+                    
+                    if (sa.hasParam("ExileFaceDown")) {
+                        made.turnFaceDown(true);
+                        triggerList.triggerChangesZoneAll(game, sa);
+                    }
+                    if (sa.hasParam("WithCountersType")) {
+                    	CounterType cType = CounterType.getType(sa.getParam("WithCountersType"));
+                        int cAmount = AbilityUtils.calculateAmount(c, sa.getParamOrDefault("WithCountersAmount", "1"), sa);
+                        made.addCounter(cType, cAmount, player, counterTable);
+                    }
             }
             triggerList.triggerChangesZoneAll(game, sa);
-
+            
             if (sa.hasParam("Conjure")) {
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Player, player);
