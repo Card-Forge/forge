@@ -942,6 +942,11 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
+    public String chooseKeywordForPump(final List<String> options, final SpellAbility sa, final String prompt) {
+        return Iterables.getFirst(options, null);
+    }
+
+    @Override
     public boolean confirmPayment(CostPart costPart, String prompt, SpellAbility sa) {
         return brains.confirmPayment(costPart); // AI is expected to know what it is paying for at the moment (otherwise add another parameter to this method)
     }
