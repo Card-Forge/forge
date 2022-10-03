@@ -1,0 +1,12 @@
+Name:Priest of Possibility
+ManaCost:1 W
+Types:Creature Kor Cleric
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLook | TriggerDescription$ When CARDNAME enters the battlefield, look at the top seven cards of your library. If a card among them has flying, CARDNAME perpetually gains flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance. Then shuffle.
+SVar:TrigLook:DB$ PeekAndReveal | PeekAmount$ 7 | NoReveal$ True | RememberPeeked$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ ShareKW | Keywords$ Flying,First Strike,Double Strike,Deathtouch,Haste,Hexproof,Indestructible,Lifelink,Menace,Protection,Reach,Trample,Vigilance | SharedKeywordsZone$ Library | SharedRestrictions$ Card.IsRemembered | Duration$ Permanent | Name$ Priest of Possibility's Perpetual Effect | SubAbility$ DBCleanup
+SVar:ShareKW:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Affected$ Card.EffectSource | ShareKeywords$ True | Description$ EFFECTSOURCE perpetually gains these keywords.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ Shuffle
+DeckHints:Keyword$Flying|First Strike|Double Strike|Deathtouch|Haste|Hexproof|Indestructible|Lifelink|Menace|Protection|Reach|Trample|Vigilance
+Oracle:When Priest of Possibility enters the battlefield, look at the top seven cards of your library. If a card among them has flying, Priest of Possibility perpetually gains flying. The same is true for first strike, double strike, deathtouch, haste, hexproof, indestructible, lifelink, menace, protection, reach, trample, and vigilance. Then shuffle.
