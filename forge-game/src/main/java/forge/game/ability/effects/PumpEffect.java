@@ -290,7 +290,7 @@ public class PumpEffect extends SpellAbilityEffect {
         if (sa.hasParam("SharedKeywordsZone")) {
             List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
             String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",") : new String[]{"Card"};
-            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, sa.getHostCard(), sa);
+            keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, host, sa);
         }
 
         List<GameEntity> tgts = Lists.newArrayList();
@@ -398,7 +398,7 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("NoteNumber")) {
-            int num = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NoteNumber"), sa);
+            int num = AbilityUtils.calculateAmount(host, sa.getParam("NoteNumber"), sa);
             for (Player p : tgtPlayers) {
                 p.noteNumberForName(host.getName(), num);
             }
