@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.keyword.Keyword;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -947,28 +948,57 @@ public class PlayerControllerAi extends PlayerController {
             return Iterables.getFirst(options, null);
         }
         List<String> possible = Lists.newArrayList();
-        for (String kw : options) {
-            if (!tgtCard.hasKeyword(kw)) { //don't add the keyword to the possible list unless the tgt doesn't have it
-                if ("Indestructible".equals(kw) && player.getOpponents().getCreaturesInPlay().isEmpty()) {
-                    continue; // no creatures to damage or kill the creature with - removal could still be a problem
-                } else if ("Protection from red".equals(kw)) {
-                    CardCollection known = player.getOpponents().getCardsIn(ZoneType.Battlefield);
-                    boolean found = false;
-                    for (final Card c : known) {
-                        if (c.isRed() || c.getCurrentState().getTypeWithChanges().getLandTypes().contains("Mountain")) {
-                            found = true;
+        CardCollection oppUntappedCreatures = CardLists.filter(player.getOpponents().getCreaturesInPlay(), CardPredicates.Presets.UNTAPPED);
+        if (tgtCard != null) {
+            for (String kw : options) {
+                if (!tgtCard.hasKeyword(kw)) { // try not to duplicate a keyword on the card
+                    if ("Indestructible".equals(kw)) {
+                        if (oppUntappedCreatures.isEmpty()) {
+                            continue; // no threats on battlefield - removal still a concern perhaps?
+                        } else {
+                            possible.clear();
+                            possible.add(kw); // prefer Indestructible above all else
                             break;
                         }
+                    } else if ("Flying".equals(kw)) {
+                        if (oppUntappedCreatures.isEmpty()) {
+                            continue; // no need for evasion
+                        } else {
+                            boolean fliers = false;
+                            for (Card c : oppUntappedCreatures) {
+                                if (c.hasKeyword(Keyword.FLYING)) {
+                                    fliers = true;
+                                    break;
+                                }
+                            }
+                            if (!fliers) {
+                                possible.clear();
+                                possible.add(kw); // flying is great when no one else has it
+                                break;
+                            }
+                        }
+                    } else if ("Protection from red".equals(kw)) {
+                        CardCollection known = player.getOpponents().getCardsIn(ZoneType.Battlefield);
+                        boolean found = false;
+                        for (final Card c : known) {
+                            if (c.isRed() || c.getCurrentState().getTypeWithChanges().getLandTypes().contains("Mountain")) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            continue;
+                        }
                     }
-                    if (!found) {
-                        continue;
-                    }
+                    possible.add(kw);
                 }
-                possible.add(kw);
-                break;
             }
         }
-        return Aggregates.random(possible);
+        if (!possible.isEmpty()) {
+            return Aggregates.random(possible);
+        } else {
+            return Aggregates.random(options); // if worst comes to worst, at do least something
+        }
     }
 
     @Override
