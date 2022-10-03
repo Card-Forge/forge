@@ -2309,7 +2309,9 @@ public class ComputerUtil {
         return getCardsToDiscardFromOpponent(aiChooser, p, sa, validCards, min, max);
     }
 
-    public static String chooseSomeType(Player ai, String kindOfType, String logic, Collection<String> validTypes, List<String> invalidTypes) {
+    public static String chooseSomeType(Player ai, String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes) {
+        final String logic = sa.getParam("AILogic");
+
         if (invalidTypes == null) {
             invalidTypes = ImmutableList.of();
         }
@@ -2334,6 +2336,23 @@ public class ComputerUtil {
                             chosen = type;
                         }
                     }
+                }
+            }
+            else {
+                // Are we picking a type to reduce costs for that type?
+                boolean reducingCost = false;
+                for (StaticAbility s : sa.getHostCard().getStaticAbilities()) {
+                    if ("ReduceCost".equals(s.getParam("Mode")) && "Card.ChosenType".equals(s.getParam("ValidCard"))) {
+                        reducingCost = true;
+                        break;
+                    }
+                }
+
+                if (reducingCost) {
+                    List<String> valid = Lists.newArrayList(validTypes);
+                    valid.removeAll(invalidTypes);
+                    valid.remove("Land"); // Lands don't have costs to reduce
+                    chosen = ComputerUtilCard.getMostProminentCardType(ai.getAllCards(), valid);
                 }
             }
             if (StringUtils.isEmpty(chosen)) {
