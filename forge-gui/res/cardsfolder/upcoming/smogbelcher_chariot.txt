@@ -10,7 +10,7 @@ SVar:RememberCrew:DB$ PumpAll | ValidCards$ Creature.TriggeredCrew | RememberAll
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ DBCleanup | Static$ True
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target creature that crewed it this turn perpetually gains your choice of menace, deathtouch, or lifelink.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Card.IsRemembered | TgtPrompt$ Select target creature that crewed it this turn | RememberTargets$ True | SubAbility$ DBGenericChoice
+SVar:TrigPump:DB$ Pump | ValidTgts$ Card.IsRemembered | TgtPrompt$ Select target creature that crewed it this turn | SubAbility$ DBGenericChoice
 SVar:DBGenericChoice:DB$ GenericChoice | Choices$ Menace,Deathtouch,LifeLink | AILogic$ Random
 SVar:Menace:DB$ Effect | StaticAbilities$ PerpetualMenace | RememberObjects$ Targeted | Name$ Smogbelcher Chariot's Perpetual Effect | Duration$ Permanent | SpellDescription$ This creature perpetually gains Menace.
 SVar:PerpetualMenace:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Menace | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains Menace.
