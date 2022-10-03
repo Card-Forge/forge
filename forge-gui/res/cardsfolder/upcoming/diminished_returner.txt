@@ -9,4 +9,4 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield 
 SVar:DiscardMe:2
 SVar:SacMe:1
 DeckHas:Ability$Graveyard
-Oracle:Deminished Returner enters the battlefield tapped.\n{B}{B}:Deminished Returner perpetually gets -1/-1, then return it to the battlefield. Activate only if Diminished Returner is in your graveyard and its toughness is 2 or greater. 
+Oracle:Diminished Returner enters the battlefield tapped.\n{B}{B}:Diminished Returner perpetually gets -1/-1, then return it to the battlefield. Activate only if Diminished Returner is in your graveyard and its toughness is 2 or greater. 

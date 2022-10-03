@@ -6,8 +6,9 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMakeCard | TriggerDescription$ When CARDNAME enters the battlefield conjure a random card from CARDNAME's spellbook into your hand. Then if you have fewer cards in hand than the number of basic land types among lands you control, repeat this process.
 SVar:TrigMakeCard:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Hard Evidence,Stifle,Contentious Plan,Suit Up,Befuddle,Majestic Metamorphosis,Hampering Snare,Ghostform,See the Truth,Keep Safe,Teferi's Time Twist,Startle,Flood of Recollection,Choking Tethers,Bury in Books | Zone$ Hand | SubAbility$ DBRepeat 
 SVar:DBRepeat:DB$ Repeat | RepeatCheckSVar$ X | RepeatSVarCompare$ LTY | ConditionCheckSVar$ X | ConditionSVarCompare$ LTY | RepeatSubAbility$ DBMakeCard
-SVar:DBMakeCard:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Hard Evidence, Stifle,Contentious Plan,Suit Up,Befuddle,Majestic Metamorphosis,Hampering Snare,Ghostform,See the Truth,Keep Safe,Teferi's Time Twist,Startle,Flood of Recollection,Choking Tethers,Bury in Books | Zone$ Hand 
+SVar:DBMakeCard:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Hard Evidence,Stifle,Contentious Plan,Suit Up,Befuddle,Majestic Metamorphosis,Hampering Snare,Ghostform,See the Truth,Keep Safe,Teferi's Time Twist,Startle,Flood of Recollection,Choking Tethers,Bury in Books | Zone$ Hand 
 SVar:X:Count$CardsInYourHand
 SVar:Y:Count$Domain
+AI:RemoveDeck:Random
 DeckHas:Ability$Token|Cycling & Type$Crab|Zombie
 Oracle:Flying\nDomain - When Skywriter Djinn enters the battlefield conjure a random card from Skywriter Djinn's spellbook into your hand. Then if you have fewer cards in hand than the number of basic land types among lands you control, repeat this process. 
