@@ -942,14 +942,33 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public String chooseKeywordForPump(final List<String> options, final SpellAbility sa, final String prompt) {
-        final String aiLogic = sa.getParamOrDefault("AILogic", "");
-
-        if (aiLogic.equals("GideonBlackblade")) {
-            return SpecialCardAi.GideonBlackblade.chooseKeyword(player, sa, options);
+    public String chooseKeywordForPump(final List<String> options, final SpellAbility sa, final String prompt, final Card tgtCard) {
+        if (options.size() <= 1) {
+            return Iterables.getFirst(options, null);
         }
-
-        return Iterables.getFirst(options, null);
+        List<String> possible = Lists.newArrayList();
+        for (String kw : options) {
+            if (!tgtCard.hasKeyword(kw)) { //don't add the keyword to the possible list unless the tgt doesn't have it
+                if ("Indestructible".equals(kw) && player.getOpponents().getCreaturesInPlay().isEmpty()) {
+                    continue; // no creatures to damage or kill the creature with - removal could still be a problem
+                } else if ("Protection from red".equals(kw)) {
+                    CardCollection known = player.getOpponents().getCardsIn(ZoneType.Battlefield);
+                    boolean found = false;
+                    for (final Card c : known) {
+                        if (c.isRed() || c.getCurrentState().getTypeWithChanges().getLandTypes().contains("Mountain")) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        continue;
+                    }
+                }
+                possible.add(kw);
+                break;
+            }
+        }
+        return Aggregates.random(possible);
     }
 
     @Override

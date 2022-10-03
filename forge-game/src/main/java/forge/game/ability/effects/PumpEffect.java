@@ -274,6 +274,9 @@ public class PumpEffect extends SpellAbilityEffect {
         final Game game = activator.getGame();
         final Card host = sa.getHostCard();
         final long timestamp = game.getNextTimestamp();
+        List<GameEntity> tgts = Lists.newArrayList();
+        List<Card> tgtCards = getCardsfromTargets(sa);
+        List<Player> tgtPlayers = getTargetPlayers(sa);
 
         List<String> keywords = Lists.newArrayList();
         if (sa.hasParam("KW")) {
@@ -281,7 +284,7 @@ public class PumpEffect extends SpellAbilityEffect {
         } else if (sa.hasParam("KWChoice")) {
             List<String> options = Arrays.asList(sa.getParam("KWChoice").split(","));
             String chosen = activator.getController().chooseKeywordForPump(options, sa,
-                    Localizer.getInstance().getMessage("lblChooseKeyword"));
+                    Localizer.getInstance().getMessage("lblChooseKeyword"), tgtCards.get(0));
             keywords.add(chosen);
         }
         final int a = AbilityUtils.calculateAmount(host, sa.getParam("NumAtt"), sa, !sa.hasParam("Double"));
@@ -293,9 +296,6 @@ public class PumpEffect extends SpellAbilityEffect {
             keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, host, sa);
         }
 
-        List<GameEntity> tgts = Lists.newArrayList();
-        List<Card> tgtCards = getCardsfromTargets(sa);
-        List<Player> tgtPlayers = getTargetPlayers(sa);
         tgts.addAll(tgtCards);
         tgts.addAll(tgtPlayers);
         final CardCollection untargetedCards = CardUtil.getRadiance(sa);
