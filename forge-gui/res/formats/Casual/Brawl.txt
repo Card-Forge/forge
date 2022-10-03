@@ -5,3 +5,4 @@ Type:Casual
 Subtype:Commander
 Sets:MID, VOW, NEO, SNC, DMU
 Banned:Pithing Needle
+Additional:Arcane Signet; Command Tower
