@@ -1,5 +1,6 @@
 package forge.game.ability.effects;
 
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
@@ -16,11 +17,8 @@ import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.*;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -50,14 +48,12 @@ public class EffectEffect extends SpellAbilityEffect {
 
         String[] effectAbilities = null;
         String[] effectTriggers = null;
-        String[] effectKeywords = null;
         String[] effectStaticAbilities = null;
         String[] effectReplacementEffects = null;
         FCollection<GameObject> rememberList = null;
         String effectImprinted = null;
         String noteCounterDefined = null;
         List<Player> effectOwner = null;
-        boolean imprintOnHost = false;
         final String duration = sa.getParam("Duration");
 
         if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration))
@@ -82,10 +78,6 @@ public class EffectEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("ReplacementEffects")) {
             effectReplacementEffects = sa.getParam("ReplacementEffects").split(",");
-        }
-
-        if (sa.hasParam("Keywords")) {
-            effectKeywords = sa.getParam("Keywords").split(",");
         }
 
         if (sa.hasParam("RememberSpell")) {
@@ -134,10 +126,6 @@ public class EffectEffect extends SpellAbilityEffect {
             effectOwner = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("EffectOwner"), sa);
         } else {
             effectOwner = Lists.newArrayList(sa.getActivatingPlayer());
-        }
-
-        if (sa.hasParam("ImprintOnHost")) {
-            imprintOnHost = true;
         }
 
         String image;
@@ -211,10 +199,18 @@ public class EffectEffect extends SpellAbilityEffect {
             }
 
             // Grant Keywords
-            if (effectKeywords != null) {
-                for (final String s : effectKeywords) {
-                    final String actualKeyword = hostCard.getSVar(s);
-                    eff.addIntrinsicKeyword(actualKeyword);
+            if (sa.hasParam("Keywords")) {
+                List<String> effectKeywords = Arrays.asList(sa.getParam("Keywords").split(","));
+                if (sa.hasParam("SharedKeywordsZone")) {
+                    List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
+                    String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",")
+                            : new String[]{"Card"};
+                    effectKeywords = CardFactoryUtil.sharedKeywords(effectKeywords, restrictions, zones, hostCard, sa);
+                }
+                if (effectKeywords != null) {
+                    for (final String s : effectKeywords) {
+                        eff.addIntrinsicKeyword(s);
+                    }
                 }
             }
 
@@ -349,7 +345,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 }
             }
 
-            if (imprintOnHost) {
+            if (sa.hasParam("ImprintOnHost")) {
                 hostCard.addImprintedCard(eff);
             }
 
