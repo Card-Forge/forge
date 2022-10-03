@@ -71,7 +71,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
         // ex. "Return all Auras attached to target"
         // ex. "Return all blocking/blocked by target creature"
 
-        CardCollectionView oppType = CardLists.filterControlledBy(game.getCardsIn(origin), ai.getOpponents());
+        CardCollectionView oppType = ai.getOpponents().getCardsIn(origin);
         CardCollectionView computerType = ai.getCardsIn(origin);
 
         // remove cards that won't be seen in AI's own library if it can't be searched
@@ -374,7 +374,7 @@ public class ChangeZoneAllAi extends SpellAbilityAi {
             return Iterables.any(ai.getOpponents().getCardsIn(origin), CardPredicates.Presets.CREATURES);
         }
 
-        CardCollectionView humanType = CardLists.filterControlledBy(ai.getGame().getCardsIn(origin), ai.getOpponents());
+        CardCollectionView humanType = ai.getOpponents().getCardsIn(origin);
         humanType = AbilityUtils.filterListByType(humanType, sa.getParam("ChangeType"), sa);
 
         CardCollectionView computerType = ai.getCardsIn(origin);

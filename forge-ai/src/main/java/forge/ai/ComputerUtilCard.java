@@ -865,7 +865,7 @@ public class ComputerUtilCard {
     }
 
     public static String getMostProminentCardType(final CardCollectionView list, final Collection<String> valid) {
-        if (list.size() == 0 || valid.isEmpty()) {
+        if (list.isEmpty() || valid.isEmpty()) {
             return "";
         }
 

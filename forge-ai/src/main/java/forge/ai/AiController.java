@@ -744,7 +744,7 @@ public class AiController {
                 return AiPlayDecision.CantAfford;
             }
             // TODO check for Reduce too, e.g. Battlefield Thaumaturge could make it castable
-            if (sa.usesTargeting()) {
+            if (!sa.getAllTargetChoices().isEmpty()) {
                 oldCMC = CostAdjustment.adjust(sa.getPayCosts(), sa).getTotalMana().getCMC();
             }
         }
