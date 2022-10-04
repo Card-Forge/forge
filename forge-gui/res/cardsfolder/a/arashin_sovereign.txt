@@ -4,5 +4,5 @@ Types:Creature Dragon
 PT:6/6
 K:Flying
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | OptionalDecider$ TriggeredCardController | Execute$ TrigChange | TriggerDescription$ When CARDNAME dies, you may put it on the top or bottom of its owner's library.
-SVar:DBTop:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDestinationMessage$ Would you like to put the card on the top of the library (and not on the bottom)?
+SVar:TrigChange:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDestinationMessage$ Would you like to put the card on the top of the library (and not on the bottom)?
 Oracle:Flying\nWhen Arashin Sovereign dies, you may put it on the top or bottom of its owner's library.
