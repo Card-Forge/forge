@@ -577,10 +577,10 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes, boolean isOptional) {
-        String chosen = ComputerUtil.chooseSomeType(player, kindOfType, sa.getParam("AILogic"), validTypes, invalidTypes);
+        String chosen = ComputerUtil.chooseSomeType(player, kindOfType, sa, validTypes, invalidTypes);
         if (StringUtils.isBlank(chosen) && !validTypes.isEmpty()) {
             chosen = validTypes.iterator().next();
-            System.err.println("AI has no idea how to choose " + kindOfType +", defaulting to arbitrary element: chosen");
+            System.err.println("AI has no idea how to choose " + kindOfType +", defaulting to arbitrary element: " + chosen);
         }
         return chosen;
     }
@@ -939,6 +939,17 @@ public class PlayerControllerAi extends PlayerController {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
         return SpellApiToAi.Converter.get(api).chooseCounterType(options, sa, params);
+    }
+
+    @Override
+    public String chooseKeywordForPump(final List<String> options, final SpellAbility sa, final String prompt) {
+        final String aiLogic = sa.getParamOrDefault("AILogic", "");
+
+        if (aiLogic.equals("GideonBlackblade")) {
+            return SpecialCardAi.GideonBlackblade.chooseKeyword(player, sa, options);
+        }
+
+        return Iterables.getFirst(options, null);
     }
 
     @Override

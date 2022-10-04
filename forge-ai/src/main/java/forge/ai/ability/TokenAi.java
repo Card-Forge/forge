@@ -175,8 +175,7 @@ public class TokenAi extends SpellAbilityAi {
                     sa.getTargets().add(ai);
                 } else {
                     // Flash Foliage
-                    CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield),
-                            ai.getOpponents());
+                    CardCollection list =  ai.getOpponents().getCardsIn(ZoneType.Battlefield);
                     list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
                     list = CardLists.getTargetableCards(list, sa);
                     CardCollection betterList = CardLists.filter(list, new Predicate<Card>() {

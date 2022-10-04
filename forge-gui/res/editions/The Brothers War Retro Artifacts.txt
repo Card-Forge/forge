@@ -6,11 +6,15 @@ Type=Collector_Edition
 ScryfallCode=BRR
 
 [cards]
+20 R Howling Mine @Mark Poole
 21 U Ivory Tower @Jason Chan
 24 C Jalum Tome @Jerry Tiritilli
 29 R Lodestone Golem @Chris Rahn
+40 R Phyrexian Revoker @Kev Walker
 61 M Wurmcoil Engine @Raymond Swanland
+83 R Howling Mine @Mark Poole
 86 U Ivory Tower @Irina Nordsol
 87 U Jalum Tome @Ben Hill
 92 R Lodestone Golem @Chris Rahn
+103 R Phyrexian Revoker @Kev Walker
 123 M Wurmcoil Engine @Raymond Swanland

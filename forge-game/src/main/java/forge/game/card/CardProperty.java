@@ -1602,6 +1602,8 @@ public class CardProperty {
         // Nex predicates refer to past combat and don't need a reference to actual combat
         else if (property.equals("blocked")) {
             return null != combat && combat.isBlocked(card);
+        } else if (property.startsWith("blockedBySourceThisTurn")) {
+            return card.getBlockedByThisTurn().contains(source);
         } else if (property.startsWith("blockedBySourceLKI")) {
             return null != combat && combat.isBlocking(game.getChangeZoneLKIInfo(source), card);
         } else if (property.startsWith("blockedBySource")) {
@@ -1642,8 +1644,6 @@ public class CardProperty {
                 }
             }
             return false;
-        } else if (property.startsWith("blockedBySourceThisTurn")) {
-            return source.getBlockedByThisTurn().contains(card);
         } else if (property.startsWith("blockedSource")) {
             return null != combat && combat.isBlocking(card, source);
         } else if (property.startsWith("isBlockedByRemembered")) {

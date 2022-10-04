@@ -2,9 +2,5 @@ Name:Jodah's Avenger
 ManaCost:5 U
 Types:Creature Shapeshifter
 PT:4/4
-A:AB$ GenericChoice | Cost$ 0 | Choices$ DBDoubleStrike,DBProtection,DBVigilance,DBShadow | SpellDescription$ Until end of turn, CARDNAME gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow.
-SVar:DBDoubleStrike:DB$ Pump | Defined$ Self | NumAtt$ -1 | NumDef$ -1 | KW$ Double Strike | SpellDescription$ CARDNAME gets -1/-1 and gains double strike until end of turn.
-SVar:DBProtection:DB$ Pump | Defined$ Self | NumAtt$ -1 | NumDef$ -1 | KW$ Protection from red | SpellDescription$ CARDNAME gets -1/-1 and gains protection from red until end of turn.
-SVar:DBVigilance:DB$ Pump | Defined$ Self | NumAtt$ -1 | NumDef$ -1 | KW$ Vigilance | SpellDescription$ CARDNAME gets -1/-1 and gains vigilance until end of turn.
-SVar:DBShadow:DB$ Pump | Defined$ Self | NumAtt$ -1 | NumDef$ -1 | KW$ Shadow | SpellDescription$ CARDNAME gets -1/-1 and gains shadow until end of turn.
+A:AB$ Pump | Cost$ 0 | NumAtt$ -1 | NumDef$ -1 | KWChoice$ Double Strike,Protection from red,Vigilance,Shadow | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, CARDNAME gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow.
 Oracle:{0}: Until end of turn, Jodah's Avenger gets -1/-1 and gains your choice of double strike, protection from red, vigilance, or shadow. (A creature with shadow can block or be blocked by only creatures with shadow.)

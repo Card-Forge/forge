@@ -1786,6 +1786,14 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public String chooseKeywordForPump(final List<String> options, final SpellAbility sa, final String prompt) {
+        if (options.size() <= 1) {
+            return Iterables.getFirst(options, null);
+        }
+        return getGui().one(prompt, options);
+    }
+
+    @Override
     public boolean confirmPayment(final CostPart costPart, final String question, SpellAbility sa) {
         if (GuiBase.getInterface().isLibgdxPort()) {
             CardView cardView = sa.getView().getHostCard();

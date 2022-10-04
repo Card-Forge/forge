@@ -4,11 +4,8 @@ Types:Artifact Creature Construct
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigEnergy | TriggerDescription$ When CARDNAME enters the battlefield, you get {E}{E}{E} (three energy counters).
 SVar:TrigEnergy:DB$ PutCounter | Defined$ You | CounterType$ ENERGY | CounterNum$ 3
-A:AB$ GenericChoice | Cost$ PayEnergy<1> | Choices$ DBFlying,DBVigilance,DBLifelink | SpellDescription$ CARDNAME gains your choice of flying, vigilance, or lifelink until end of turn.
-SVar:DBFlying:DB$ Pump | Defined$ Self | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
-SVar:DBVigilance:DB$ Pump | Defined$ Self | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilance until end of turn.
-SVar:DBLifelink:DB$ Pump | Defined$ Self | KW$ Lifelink | SpellDescription$ CARDNAME gains lifelink until end of turn.
-A:AB$ Pump | Cost$ PayEnergy<1> | Subability$ ABChoice | SpellDescription$ CARDNAME gets +2/-2 or -2/+2 until end of turn.
+A:AB$ Pump | Cost$ PayEnergy<1> | KWChoice$ Flying,Vigilance,Lifelink | StackDescription$ SpellDescription | SpellDescription$ CARDNAME gains your choice of flying, vigilance, or lifelink until end of turn.
+A:AB$ Pump | Cost$ PayEnergy<1> | Subability$ ABChoice | StackDescription$ SpellDescription | SpellDescription$ CARDNAME gets +2/-2 or -2/+2 until end of turn.
 SVar:ABChoice:DB$ GenericChoice | Defined$ You | Choices$ ABPump1,ABPump2
 SVar:ABPump1:DB$ Pump | Defined$ Self | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ +2/-2
 SVar:ABPump2:DB$ Pump | Defined$ Self | NumAtt$ -2 | NumDef$ +2 | SpellDescription$ -2/+2

@@ -1054,8 +1054,11 @@ public class AbilityUtils {
             final SpellAbility root = ((SpellAbility)sa).getRootAbility();
             Object o = null;
             if (defParsed.endsWith("Controller")) {
-                final boolean orCont = defParsed.endsWith("OrController");
-                String triggeringType = defParsed.substring(9, defParsed.length() - (orCont ? 12 : 10));
+                final boolean orCont = defParsed.endsWith("OrController") || defParsed.endsWith("OriginalController");
+                String triggeringType = defParsed.substring(9);
+                if (!triggeringType.equals("OriginalController")) { //certain triggering objects we don't want to trim
+                    triggeringType = triggeringType.substring(0, triggeringType.length() - (orCont ? 12 : 10));
+                }
                 final Object c = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
                 if (orCont && c instanceof Player) {
                     o = c;

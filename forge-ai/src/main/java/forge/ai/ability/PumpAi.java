@@ -143,6 +143,8 @@ public class PumpAi extends PumpAiBase {
             return SpecialCardAi.ElectrostaticPummeler.consider(ai, sa);
         } else if (aiLogic.startsWith("AristocratCounters")) {
             return true; // the preconditions to this are already tested in checkAiLogic
+        } else if ("GideonBlackblade".equals(aiLogic)) {
+            return SpecialCardAi.GideonBlackblade.consider(ai, sa);
         } else if ("MoveCounter".equals(aiLogic)) {
             final SpellAbility moveSA = sa.findSubAbilityByType(ApiType.MoveCounter);
 
@@ -421,6 +423,9 @@ public class PumpAi extends PumpAiBase {
         }
 
         if (sa.hasParam("TargetingPlayer") && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
+            if (ComputerUtilAbility.isFullyTargetable(sa)) { // Volcanic Offering: only prompt if second part can happen too
+                return false;
+            }
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
             sa.setTargetingPlayer(targetingPlayer);
             return targetingPlayer.getController().chooseTargetsFor(sa);
@@ -469,7 +474,7 @@ public class PumpAi extends PumpAiBase {
                 }
 
                 List<Card> alliedTgts = CardLists.filter(tgts, Predicates.or(CardPredicates.isControlledByAnyOf(ai.getAllies()), CardPredicates.isController(ai)));
-                List<Card> oppTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getRegisteredOpponents()));
+                List<Card> oppTgts = CardLists.filter(tgts, CardPredicates.isControlledByAnyOf(ai.getOpponents()));
 
                 Card destroyTgt = null;
                 if (!oppTgts.isEmpty()) {

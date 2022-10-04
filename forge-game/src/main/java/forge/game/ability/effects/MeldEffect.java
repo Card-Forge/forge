@@ -1,7 +1,5 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Lists;
-
 import forge.card.CardStateName;
 import forge.game.Game;
 import forge.game.ability.SpellAbilityEffect;
@@ -26,12 +24,12 @@ public class MeldEffect extends SpellAbilityEffect {
         Game game = hostCard.getGame();
         Player controller = sa.getActivatingPlayer();
 
-        // a creature you control and own named secondary
+        // a permanent you control and own named secondary
         CardCollection field = CardLists.filter(
-                controller.getCreaturesInPlay(),
+                controller.getCardsIn(ZoneType.Battlefield),
                 CardPredicates.isOwner(controller),
                 CardPredicates.nameEquals(secName));
-
+        field = CardLists.getType(field, sa.getParamOrDefault("SecondaryType", "Creature"));
         if (field.isEmpty()) {
             return;
         }
@@ -48,7 +46,7 @@ public class MeldEffect extends SpellAbilityEffect {
             return;
         }
 
-        for (Card c : Lists.newArrayList(primary, secondary)) {
+        for (Card c : exiled) {
             if (c.isToken() || c.getCloneOrigin() != null) {
                 // Neither of these things
                 return;
@@ -58,6 +56,7 @@ public class MeldEffect extends SpellAbilityEffect {
         }
 
         primary.changeToState(CardStateName.Meld);
+        primary.setBackSide(true);
         primary.setMeldedWith(secondary);
         PlayerZoneBattlefield bf = (PlayerZoneBattlefield)controller.getZone(ZoneType.Battlefield);
         game.getAction().changeZone(primary.getZone(), bf, primary, 0, sa);

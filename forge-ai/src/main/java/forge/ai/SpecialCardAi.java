@@ -17,33 +17,20 @@
  */
 package forge.ai;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import forge.game.GameEntity;
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-
 import forge.ai.ability.AnimateAi;
 import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameType;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
-import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardLists;
-import forge.game.card.CardPredicates;
-import forge.game.card.CardUtil;
-import forge.game.card.CounterEnumType;
+import forge.game.card.*;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.cost.CostPart;
@@ -64,6 +51,11 @@ import forge.util.MyRandom;
 import forge.util.TextUtil;
 import forge.util.maps.LinkedHashMapToAmount;
 import forge.util.maps.MapToAmount;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Special logic for individual cards
@@ -610,35 +602,31 @@ public class SpecialCardAi {
             return true;
         }
 
-        public static SpellAbility chooseSpellAbility(final Player ai, final SpellAbility sa, final List<SpellAbility> spells) {
+        public static String chooseKeyword(final Player ai, final SpellAbility sa, final List<String> options) {
             // TODO: generalize and improve this so that it acts in a more reasonable way and can potentially be used for other cards too
-            List<SpellAbility> best = Lists.newArrayList();
-            List<SpellAbility> possible = Lists.newArrayList();
+            List<String> possible = Lists.newArrayList();
             Card tgtCard = sa.getTargetCard();
             if (tgtCard != null) {
-                for (SpellAbility sp : spells) {
-                    if (SpellApiToAi.Converter.get(sp.getApi()).canPlayAIWithSubs(ai, sp)) {
-                        best.add(sp); // these SAs are prioritized since the AI sees a reason to play them now
-                    }
-                    final List<String> keywords = sp.hasParam("KW") ? Arrays.asList(sp.getParam("KW").split(" & "))
-                            : Lists.newArrayList();
-                    for (String kw : keywords) {
-                        if (!tgtCard.hasKeyword(kw)) {
-                            if ("Indestructible".equals(kw) && ai.getOpponents().getCreaturesInPlay().isEmpty()) {
+                CardCollection oppUntappedCreatures = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), CardPredicates.Presets.UNTAPPED);
+                for (String kw : options) {
+                    if (!tgtCard.hasKeyword(kw)) {
+                        if ("Indestructible".equals(kw)) {
+                            if (oppUntappedCreatures.isEmpty()) {
                                 continue; // nothing to damage or kill the creature with
+                            } else {
+                                possible.clear();
+                                possible.add(kw); // prefer Indestructible above all else
+                                break;
                             }
-                            possible.add(sp); // these SAs at least don't duplicate a keyword on the card
-                            break;
                         }
+                        possible.add(kw); // these SAs at least don't duplicate a keyword on the card
                     }
                 }
             }
-            if (!best.isEmpty()) {
-                return Aggregates.random(best);
-            } else if (!possible.isEmpty()) {
+            if (!possible.isEmpty()) {
                 return Aggregates.random(possible);
             } else {
-                return Aggregates.random(spells); // if worst comes to worst, it's a PW +1 ability, so do at least something
+                return Aggregates.random(options); // if worst comes to worst, it's a PW +1 ability, so do at least something
             }
         }
     }

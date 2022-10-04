@@ -44,6 +44,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
+import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
@@ -958,10 +959,11 @@ public class AiBlockController {
 
     private void makeRequiredBlocks(Combat combat) {
         // assign blockers that have to block
-        final CardCollection chumpBlockers = CardLists.getKeyword(blockersLeft, "CARDNAME blocks each combat if able.");
+        final CardCollection chumpBlockers = new CardCollection();
         // if an attacker with lure attacks - all that can block
         for (final Card blocker : blockersLeft) {
-            if (CombatUtil.mustBlockAnAttacker(blocker, combat, null)) {
+            if (CombatUtil.mustBlockAnAttacker(blocker, combat, null) ||
+                    StaticAbilityMustBlock.blocksEachCombatIfAble(blocker)) {
                 chumpBlockers.add(blocker);
             }
         }
@@ -971,7 +973,7 @@ public class AiBlockController {
                 for (final Card blocker : blockers) {
                     if (CombatUtil.canBlock(attacker, blocker, combat) && blockersLeft.contains(blocker)
                             && (CombatUtil.mustBlockAnAttacker(blocker, combat, null)
-                                    || blocker.hasKeyword("CARDNAME blocks each combat if able."))) {
+                                    || StaticAbilityMustBlock.blocksEachCombatIfAble(blocker))) {
                         combat.addBlocker(attacker, blocker);
                         if (!blocker.getMustBlockCards().isEmpty()) {
                             int mustBlockAmt = blocker.getMustBlockCards().size();
