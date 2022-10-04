@@ -1,0 +1,9 @@
+Name:Slimefoot, Thallid Transplant 
+ManaCost:B G
+Types:Legendary Creature Fungus
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Forest.YouCtrl,Swamp.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraft | TriggerDescription$ Whenever a Swamp or Forest enters the battlefield under your control, draft a card from CARDNAME's spellbook.
+SVar:TrigDraft:DB$ Draft | Spellbook$ 
+SVar:BuffedBy:Forest
+SVar:BuffedBy:Swamp
+Oracle:Whenever a Swamp or a Forest enters the battlefield under your control, draft a card from Slimefoot,Thallid Transplant's spellbook. 
