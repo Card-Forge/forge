@@ -1,13 +1,12 @@
-
 Name:Ghitu Embercoiler
 ManaCost:1 R
 Types:Creature Human Wizard
 PT:2/2
 K:Prowess
 T:Mode$ Phase | Phase$ Main1 | PreCombatMain$ True | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSeek | TriggerDescription$ At the beginning of your precombat main phase, you may discard a card. If you do, seek a card with greater mana value and exile it. Until the end of your next turn, you may play the exiled card. 
-SVar:TrigSeek:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Library | Destination$ Exile | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.cmcGTX | ChangeNum$ 1 | Imprint$ True | SubAbility$ DBEffect
+SVar:TrigSeek:AB$ ChangeZone | Cost$ Discard<1/Card> | Origin$ Library | Destination$ Exile | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.cmcGTX | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBEffect
 SVar:X:Discarded$CardManaCost
-SVar:DBEffect:DB$ Effect | RememberObjects$ ImprintedCard| StaticAbilities$ MayPlay | Duration$ UntilTheEndOfYourNextTurn | ForgetOnMoved$ Exile | SubAbility$ DBCleanup | SpellDescription$ You may play up to two of those cards until the end of your next turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ MayPlay | Duration$ UntilTheEndOfYourNextTurn | ForgetOnMoved$ Exile | SubAbility$ DBCleanup | SpellDescription$ You may play up to two of those cards until the end of your next turn.
 SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ You may play up to two of those cards until the end of your next turn.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Graveyard|Discard 
