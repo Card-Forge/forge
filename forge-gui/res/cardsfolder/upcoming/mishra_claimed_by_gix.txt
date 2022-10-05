@@ -1,14 +1,26 @@
-Name:Lucius the Eternal
-ManaCost:3 B R
-Types:Legendary Creature Astartes Warrior
-PT:5/3
-K:Haste
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Armor of Shrieking Souls — When CARDNAME dies, exile it and choose target creature an opponent controls. When that creature leaves the battlefield, return CARDNAME from exile to the battlefield under its owner's control.
-SVar:TrigExile:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Triggers$ ComeBack | ImprintCards$ ThisTargetedCard | Duration$ Permanent | ForgetOnMoved$ Exile | RememberObjects$ TriggeredCard
-SVar:ComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ TrigReturn | TriggerZones$ Command | TriggerController$ TriggeredCardController
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ Remembered | SubAbility$ ExileSelf
-SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
-SVar:SacMe:3
-DeckHints:Ability$Sacrifice
-Oracle:Haste\nArmor of Shrieking Souls — When Lucius the Eternal dies, exile it and choose target creature an opponent controls. When that creature leaves the battlefield, return Lucius the Eternal from exile to the battlefield under its owner's control.
+Name:Mishra, Claimed by Gix
+ManaCost:2 W W
+Types:Legendary Creature Angel Horror
+PT:4/3
+K:Flying
+K:First Strike
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+YouOwn | IsPresent2$ Creature.YouCtrl+YouOwn+namedPhyrexian Dragon Engine | ValidPlayer$ You | Execute$ Meld | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if you both own and control CARDNAME and a creature named Bruna, the Fading Light, exile them, then meld them into Brisela, Voice of Nightmares.
+SVar:Meld:DB$ Meld | Name$ Mishra, Lost to Phyrexia | Primary$ Mishra, Claimed by Gix | Secondary$ Phyrexian Dragon Engine
+DeckHints:Name$Phyrexian Dragon Engine
+MeldPair:Phyrexian Dragon Engine
+AlternateMode:Meld
+Oracle:Whenever you attack, each opponent loses X life and you gain X life, where X is the number of attacking creatures. If Mishra, Claimed by Gix and a creature named Phyrexian Dragon Engine are attacking, and you both own and control them, exile them, then meld them into Mishra, Lost to Phyrexia. It enters the battlefield tapped and attacking.
+
+ALTERNATE
+
+Name:Mishra, Lost to Phyrexia
+ManaCost:no cost
+Types:Legendary Artifact Creature Phyrexian Artificer
+PT:9/10
+K:Flying
+K:First Strike
+K:Vigilance
+K:Lifelink
+S:Mode$ CantBeCast | ValidCard$ Card.cmcLE3 | Caster$ Opponent | Description$ Your opponents can't cast spells with mana value 3 or less.
+Oracle:Flying, first strike, vigilance, lifelink\nYour opponents can't cast spells with mana value 3 or less.
