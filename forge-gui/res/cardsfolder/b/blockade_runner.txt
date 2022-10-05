@@ -2,5 +2,6 @@ Name:Blockade Runner
 ManaCost:3 U
 Types:Creature Merfolk
 PT:2/2
-A:AB$ Pump | Cost$ U | Defined$ Self | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
+A:AB$ Effect | Cost$ U | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | StackDescription$ {c:Self} can't be blocked this turn. | SpellDescription$ CARDNAME can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
 Oracle:{U}: Blockade Runner can't be blocked this turn.
