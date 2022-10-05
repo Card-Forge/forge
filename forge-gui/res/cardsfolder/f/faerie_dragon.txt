@@ -37,7 +37,8 @@ SVar:DBAnimateU:DB$ Animate | Defined$ ChosenCard | Colors$ Blue | OverwriteColo
 SVar:NoRegen:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump13 | SpellDescription$ A creature chosen at random can't be regenerated this turn.
 SVar:DBPump13:DB$ Pump | Defined$ ChosenCard | KW$ HIDDEN CARDNAME can't be regenerated. | SubAbility$ DBCleanup
 SVar:LilSneak:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump14 | RememberChosen$ True | SpellDescription$ If a creature chosen at random has power 2 or less, it is unblockable this turn.
-SVar:DBPump14:DB$ Pump | ConditionDefined$ Remembered | ConditionPresent$ Card.powerLE2 | Defined$ Remembered | KW$ HIDDEN Unblockable | SubAbility$ DBCleanup
+SVar:DBPump14:DB$ Effect | ConditionDefined$ Remembered | ConditionPresent$ Card.powerLE2 | RememberObjects$ Remembered | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SubAbility$ DBCleanup
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 SVar:M2M0:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump15 | SpellDescription$ A creature chosen at random gets -2/-0 until end of turn.
 SVar:DBPump15:DB$ Pump | Defined$ ChosenCard | NumAtt$ -2 | SubAbility$ DBCleanup
 SVar:ToHand:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBChangeZone16 | SpellDescription$ Return a creature chosen at random to its owner's hand.
