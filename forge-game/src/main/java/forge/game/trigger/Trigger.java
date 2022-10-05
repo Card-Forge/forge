@@ -101,7 +101,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         this.mapParams.putAll(params);
         this.setHostCard(host);
 
-        String triggerZones = getParam("TriggerZones");
+        String triggerZones = getParamOrDefault("TriggerZones", "Battlefield");
         if (null != triggerZones) {
             setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(triggerZones)));
         }
