@@ -2,8 +2,9 @@ Name:Kumena, Tyrant of Orazca
 ManaCost:1 G U
 Types:Legendary Creature Merfolk Shaman
 PT:2/4
-A:AB$ Pump | Cost$ tapXType<1/Merfolk.Other> | Defined$ Self | KW$ HIDDEN Unblockable | AILogic$ BeforeCombat | SpellDescription$ CARDNAME can't be blocked this turn.
-A:AB$ Draw | Cost$ tapXType<3/Merfolk> | NumCards$ 1 | AILogic$ AtOppEOT | SpellDescription$ Draw a card.
+A:AB$ Effect | Cost$ tapXType<1/Merfolk.Other> | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | StackDescription$ {c:Self} can't be blocked this turn. | SpellDescription$ CARDNAME can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
+A:AB$ Draw | Cost$ tapXType<3/Merfolk> | AILogic$ AtOppEOT | SpellDescription$ Draw a card.
 A:AB$ PutCounterAll | Cost$ tapXType<5/Merfolk> | ValidCards$ Merfolk.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | AILogic$ AtOppEOT | SpellDescription$ Put a +1/+1 counter on each Merfolk you control.
 DeckHints:Type$Merfolk
 SVar:BuffedBy:Merfolk
