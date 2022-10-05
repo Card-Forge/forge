@@ -6,7 +6,7 @@ K:Flying
 K:First Strike
 K:Lifelink
 T:Mode$ Phase | Phase$ End of Turn | IsPresent$ Card.Self+YouOwn | IsPresent2$ Creature.YouCtrl+YouOwn+namedPhyrexian Dragon Engine | ValidPlayer$ You | Execute$ Meld | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, if you both own and control CARDNAME and a creature named Bruna, the Fading Light, exile them, then meld them into Brisela, Voice of Nightmares.
-SVar:Meld:DB$ Meld | Name$ Mishra, Lost to Phyrexia | Primary$ Mishra, Claimed by Gix | Secondary$ Phyrexian Dragon Engine
+SVar:Meld:DB$ Meld | Name$ Mishra, Lost to Phyrexia | EntersTapped$ True | Attacking$ True | Primary$ Mishra, Claimed by Gix | Secondary$ Phyrexian Dragon Engine
 DeckHints:Name$Phyrexian Dragon Engine
 MeldPair:Phyrexian Dragon Engine
 AlternateMode:Meld

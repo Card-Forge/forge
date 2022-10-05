@@ -6,12 +6,12 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
-import forge.game.event.GameEventCombatChanged;
 import forge.game.card.CardPredicates;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
+import forge.game.event.GameEventCombatChanged;
 import forge.util.Localizer;
 import java.util.Arrays;
 
@@ -47,11 +47,18 @@ public class MeldEffect extends SpellAbilityEffect {
         }
 
         for (Card c : exiled) {
+        boolean attacking = sa.hasParam("Attacking");
             if (c.isToken() || c.getCloneOrigin() != null) {
                 // Neither of these things
                 return;
             } else if (!c.isInZone(ZoneType.Exile)) {
                 return;
+            }
+            if (sa.hasParam("EntersTapped")) {
+                c.setTapped(true);
+            }
+            if (sa.hasParam("Attacking")) {
+            	attacking = true;
             }
         }
 
@@ -62,9 +69,5 @@ public class MeldEffect extends SpellAbilityEffect {
         game.getAction().changeZone(primary.getZone(), bf, primary, 0, sa);
         bf.addToMelded(secondary);
         
-        	
-        if (sa.hasParam("Enters Tapped")) {
-            primary.setTapped(true);
-        }
     }
 }

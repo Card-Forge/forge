@@ -18,6 +18,7 @@
 package forge.game.ability.effects;
 
 import java.util.Arrays;
+
 import java.util.List;
 
 import forge.util.Lang;
