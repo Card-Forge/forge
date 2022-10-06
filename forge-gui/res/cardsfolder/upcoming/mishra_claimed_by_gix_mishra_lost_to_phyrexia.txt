@@ -2,10 +2,10 @@ Name:Mishra, Claimed by Gix
 ManaCost:2 B R
 Types:Legendary Creature Phyrexian Human Artificer
 PT:3/5
-T:Mode$ AttackersDeclaredOneTarget | AttackedTarget$ Player,Planeswalker | ValidAttackers$ Creature.YouCtrl |  Execute$ TrigDrain | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, each opponent loses X life and you gain X life, where X is the number of attacking creatures. If CARDNAME and a creature named Phyrexian Dragon Engine are attacking, and you both own and control them, exile them, then meld them into Mishra, Lost to Phyrexia. It enters the battlefield tapped and attacking
+T:Mode$ AttackersDeclared | AttackingPlayer$ You | AttackedTarget$ Player,Planeswalker | Execute$ TrigDrain | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, each opponent loses X life and you gain X life, where X is the number of attacking creatures. If CARDNAME and a creature named Phyrexian Dragon Engine are attacking, and you both own and control them, exile them, then meld them into Mishra, Lost to Phyrexia. It enters the battlefield tapped and attacking
 SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ Meld 
-SVar:Meld:DB$ Meld | IsPresent$ Card.Self+YouOwn+Attacking | IsPresent2$ Creature.YouCtrl+YouOwn+namedPhyrexian Dragon Engine+Attacking | Name$ Mishra, Lost to Phyrexia | EntersTapped$ True | Attacking$ True | Primary$ Mishra, Claimed by Gix | Secondary$ Phyrexian Dragon Engine
+SVar:Meld:DB$ Meld | IsPresent$ Card.Self+YouOwn+attacking | IsPresent2$ Creature.YouCtrl+YouOwn+namedPhyrexian Dragon Engine+attacking | Name$ Mishra, Lost to Phyrexia | EntersTapped$ True | Attacking$ True | Primary$ Mishra, Claimed by Gix | Secondary$ Phyrexian Dragon Engine
 SVar:X:Count$Valid Creature.attacking+YouCtrl
 SVar:PlayMain1:TRUE
 DeckHints:Name$Phyrexian Dragon Engine
@@ -19,8 +19,8 @@ Name:Mishra, Lost to Phyrexia
 ManaCost:no cost
 Types:Legendary Artifact Creature Phyrexian Artificer
 PT:9/9
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, ABILITY
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, ABILITY
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, ABILITY.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, ABILITY.
 SVar:TrigCharm:DB$ Charm | Choices$ DBDamage,DBDestroy,DBPump,DBCurse,DBToken | CharmNum$ 3
 SVar:DBDamage:DB$ DealDamage | NumDmg$ 3 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SpellDescription$ NICKNAME deals 3 damage to any target.
 SVar:DBDestroy:DB$ Destroy | TargetMax$ 1 | ValidTgts$ Artifact,Planeswalker | TgtPrompt$ Select target artifact or planeswalker | SpellDescription$ Destroy target artifact or planeswalker
