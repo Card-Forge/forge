@@ -69,6 +69,5 @@ public class MeldEffect extends SpellAbilityEffect {
         PlayerZoneBattlefield bf = (PlayerZoneBattlefield)controller.getZone(ZoneType.Battlefield);
         game.getAction().changeZone(primary.getZone(), bf, primary, 0, sa);
         bf.addToMelded(secondary);
-        
     }
 }
