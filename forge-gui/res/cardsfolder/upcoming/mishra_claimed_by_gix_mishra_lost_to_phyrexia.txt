@@ -23,7 +23,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, ABILITY
 SVar:TrigCharm:DB$ Charm | Choices$ DBDamage,DBDestroy,DBPump,DBCurse,DBToken | CharmNum$ 3
 SVar:DBDamage:DB$ DealDamage | NumDmg$ 3 | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | SpellDescription$ CARDNAME deals 3 damage to any target.
-SVar:DBDestroy:DB$ Destroy | TargetMax$ 1 | ValidTgts$ Artifact,Planeswalker | TgtPrompt$ Select up to one target artifact or planeswalker | SpellDescription$ Destroy target artifact or planeswalker
+SVar:DBDestroy:DB$ Destroy | TargetMax$ 1 | ValidTgts$ Artifact,Planeswalker | TgtPrompt$ Select target artifact or planeswalker | SpellDescription$ Destroy target artifact or planeswalker
 SVar:DBPump:DB$ PumpAll | ValidCards$ Card.Creature+YouCtrl | KW$ Menace & Trample | SpellDescription$ Creatures you control gain menace and trample until end of turn.
 SVar:DBCurse:DB$ PumpAll | ValidCards$ Card.Creature+YouDontCtrl | NumAtt$ -1 | NumDef$ -1 | SpellDescription$ Creatures you don't control get -1/-1 until end of turn.
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenTapped$ True | TokenScript$ c_a_powerstone | TokenOwner$ You | SpellDescription$ Create two tapped Powerstone tokens.
