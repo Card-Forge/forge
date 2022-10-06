@@ -661,9 +661,9 @@ public class AttachAi extends SpellAbilityAi {
             if (card.hasKeyword(Keyword.HORSEMANSHIP)) {
                 cardPriority += 40;
             }
-            if (card.hasKeyword("Unblockable")) {
-                cardPriority += 50;
-            }
+            //if (card.hasKeyword("Unblockable")) { pseudo "keyword" refactored to static – how to refactor this?
+            //    cardPriority += 50;
+            //}
             // Prefer "tap to deal damage"
             // TODO : Skip this one if triggers on combat damage only?
             for (SpellAbility sa2 : card.getSpellAbilities()) {
@@ -1551,7 +1551,7 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
-        final boolean evasive = keyword.equals("Unblockable") || keyword.equals("Fear")
+        final boolean evasive = keyword.equals("Fear")
                 || keyword.equals("Intimidate") || keyword.equals("Shadow")
                 || keyword.equals("Flying") || keyword.equals("Horsemanship")
                 || keyword.endsWith("walk") || keyword.equals("All creatures able to block CARDNAME do so.");

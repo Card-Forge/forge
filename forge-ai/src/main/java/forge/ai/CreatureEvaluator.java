@@ -59,9 +59,9 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         }
         if (c.hasKeyword(Keyword.HORSEMANSHIP)) {
             value += addValue(power * 10, "horses");
-        }
-        if (c.hasKeyword("Unblockable")) {
-            value += addValue(power * 10, "unblockable");
+        //} TODO is there a way to parse the CantBlockBy static here?
+        //if (c.hasKeyword("Unblockable")) {
+        //    value += addValue(power * 10, "unblockable");
         } else {
             if (StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(c)
                     || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(c, false)) {

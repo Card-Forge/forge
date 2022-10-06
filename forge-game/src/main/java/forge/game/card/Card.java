@@ -1964,8 +1964,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (keyword.startsWith("CantBeCounteredBy")) {
                 final String[] p = keyword.split(":");
                 sbLong.append(p[2]).append("\r\n");
-            } else if (keyword.equals("Unblockable")) {
-                sbLong.append(getName()).append(" can't be blocked.\r\n");
             } else if (keyword.startsWith("IfReach")) {
                 String[] k = keyword.split(":");
                 sbLong.append(getName()).append(" can block ")
@@ -2258,8 +2256,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")) {
                     // keyword parsing takes care of adding a proper description
-                } else if (keyword.equals("Unblockable")) {
-                    sbLong.append(getName()).append(" can't be blocked.\r\n");
                 } else if (keyword.startsWith("IfReach")) {
                     String[] k = keyword.split(":");
                     sbLong.append(getName()).append(" can block ")
