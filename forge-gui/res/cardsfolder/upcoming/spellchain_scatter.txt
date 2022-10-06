@@ -1,15 +1,12 @@
-Name:Be'lakor, the Dark Master
-ManaCost:3 U B R
-Types:Legendary Creature Demon Noble
-PT:6/5
-K:Flying
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Prince of Chaos — When CARDNAME enters the battlefield, you draw X cards and you lose X life, where X is the number of Demons you control.
-SVar:TrigDraw:DB$ Draw | NumCards$ X | SubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Demon.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Lord of Torment — Whenever another Demon enters the battlefield under your control, it deals damage equal to its power to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ Y
-SVar:X:Count$Valid Demon.YouCtrl
-SVar:Y:TriggeredCard$CardPower
-SVar:BuffedBy:Demon
-DeckHints:Type$Demon
-Oracle:Flying\nPrince of Chaos — When Be'lakor, the Dark Master enters the battlefield, you draw X cards and you lose X life, where X is the number of Demons you control.\nLord of Torment — Whenever another Demon enters the battlefield under your control, it deals damage equal to its power to any target.
+Name:Spellchain Scatter
+ManaCost:R
+Types:Instant
+K:Kicker:U
+A:SP$ DelayedTrigger | Execute$ TrigConjure | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell this turn, conjure a duplicate of that spell into your hand. If this spell wasn’t kicked, discard the duplicate at the beginning of your next end step.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | DefinedName$ TriggeredCard | Zone$ Hand | SubAbility$ DBDelayTrig | RememberMade$ True 
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | IsPresent$ Card.Self+notKicked | Phase$ End of Turn | Execute$ TrigDiscard | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ If this spell wasn't kicked, discard the duplicate at the beginning of your next end step.
+SVar:TrigDiscard:DB$ Discard | Mode$ Defined | DefinedCards$ DelayTriggerRemembered
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckNeeds:Type$Instant|Sorcery
+DeckHas:Color$Blue
+Oracle:Kicker {U}\nWhen you cast your next instant or sorcery spell this turn, conjure a duplicate of that spell into your hand. If this spell wasn't kicked, discard the duplicate at the beginning of your next end step.
