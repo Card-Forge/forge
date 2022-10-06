@@ -1,6 +1,6 @@
 Name:Mishra, Claimed by Gix
 ManaCost:2 B R
-Types:Legendary Creature Angel Horror
+Types:Legendary Creature Phyrexian Human Artificer
 PT:3/5
 T:Mode$ AttackersDeclaredOneTarget | AttackedTarget$ Player,Planeswalker | ValidAttackers$ Creature.YouCtrl |  Execute$ TrigDrain | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack, each opponent loses X life and you gain X life, where X is the number of attacking creatures. If CARDNAME and a creature named Phyrexian Dragon Engine are attacking, and you both own and control them, exile them, then meld them into Mishra, Lost to Phyrexia. It enters the battlefield tapped and attacking
 SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBGainLife
