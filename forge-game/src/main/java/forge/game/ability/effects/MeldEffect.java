@@ -66,7 +66,7 @@ public class MeldEffect extends SpellAbilityEffect {
         if (addToCombat(primary, primary.getController(), sa, "Attacking", "Blocking")) {
             game.updateCombatForView();
             game.fireEvent(new GameEventCombatChanged());
-        if (sa.hasParam("tapped")) {
+        if (sa.hasParam("Tapped")) {
                 primary.setTapped(true);
             }
         }
