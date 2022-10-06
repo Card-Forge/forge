@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.game.staticability.StaticAbilityMustAttack;
+import forge.game.staticability.StaticAbilityPlayerMustAttack;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
@@ -53,7 +54,25 @@ public class AttackRequirement {
             defenderSpecific.add(e);
         }
 
-        final Game game = attacker.getGame();
+        Map<Integer, List<GameEntity>> requirements = StaticAbilityPlayerMustAttack.mustAttack(attacker.getController());
+        if (!requirements.isEmpty()) {
+
+            for (Map.Entry<Integer, List<GameEntity>> e : requirements.entrySet()) {
+                for (GameEntity ge : e.getValue()) {
+                    if (ge instanceof Player && !defenderOrPWSpecific.containsKey(ge)) {
+                        defenderOrPWSpecific.put(ge, e.getKey());
+                    } else if (ge instanceof Card) {
+                        final Card pw = (Card) ge;
+                        if (!defenderSpecificAlternatives.containsKey(pw.getController())) {
+                            defenderSpecificAlternatives.put(pw.getController(), Lists.newArrayList());
+                        }
+                        defenderSpecificAlternatives.get(pw.getController()).add(pw);
+                    }
+                }
+            }
+        }
+
+        /**final Game game = attacker.getGame();
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (c.hasKeyword("Each opponent must attack you or a planeswalker you control with at least one creature each combat if able.")) {
                 if (attacker.getController().isOpponentOf(c.getController()) && !defenderOrPWSpecific.containsKey(c.getController())) {
@@ -67,7 +86,7 @@ public class AttackRequirement {
                     }
                 }
             }
-        }
+        }**/
 
         for (final GameEntity defender : possibleDefenders) {
             // use put here because we want to always put it, even if the value is 0
