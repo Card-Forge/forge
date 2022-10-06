@@ -9,12 +9,14 @@ import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.ICardFace;
 import forge.game.Game;
+import forge.game.GameEntityCounterTable;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
+import forge.game.card.*;
 import forge.game.card.CardCollection;
 import forge.game.card.CardZoneTable;
+import forge.game.card.CounterType;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
@@ -101,9 +103,23 @@ public class MakeCardEffect extends SpellAbilityEffect {
             }
 
             final CardZoneTable triggerList = new CardZoneTable();
+            GameEntityCounterTable counterTable = new GameEntityCounterTable();
             CardCollection madeCards = new CardCollection();
             for (final Card c : cards) {
+                if (sa.hasParam("WithCounter") && zone != null && zone.equals(ZoneType.Battlefield)) {
+                    c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")),
+                            AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCounterNum", "1"), sa),
+                            player);
+                }
                 Card made = game.getAction().moveTo(zone, c, sa, moveParams);
+                if (sa.hasParam("WithCounter") && zone != null && !zone.equals(ZoneType.Battlefield)) {
+                    made.addCounter(CounterType.getType(sa.getParam("WithCounter")),
+                            AbilityUtils.calculateAmount(source, sa.getParamOrDefault("WithCounterNum", "1"), sa),
+                            player, counterTable);
+                }
+                if (sa.hasParam("FaceDown")) {
+                    made.turnFaceDown(true);
+                }
                 triggerList.put(ZoneType.None, made.getZone().getZoneType(), made);
                 madeCards.add(made);
                 if (sa.hasParam("RememberMade")) {
@@ -114,6 +130,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 }
             }
             triggerList.triggerChangesZoneAll(game, sa);
+            counterTable.replaceCounterEffect(game, sa, true);
 
             if (sa.hasParam("Conjure")) {
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
