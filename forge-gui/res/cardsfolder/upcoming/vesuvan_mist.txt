@@ -1,15 +1,13 @@
-Name:Be'lakor, the Dark Master
-ManaCost:3 U B R
-Types:Legendary Creature Demon Noble
-PT:6/5
-K:Flying
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Prince of Chaos — When CARDNAME enters the battlefield, you draw X cards and you lose X life, where X is the number of Demons you control.
-SVar:TrigDraw:DB$ Draw | NumCards$ X | SubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Demon.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Lord of Torment — Whenever another Demon enters the battlefield under your control, it deals damage equal to its power to any target.
-SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ Y
-SVar:X:Count$Valid Demon.YouCtrl
-SVar:Y:TriggeredCard$CardPower
-SVar:BuffedBy:Demon
-DeckHints:Type$Demon
-Oracle:Flying\nPrince of Chaos — When Be'lakor, the Dark Master enters the battlefield, you draw X cards and you lose X life, where X is the number of Demons you control.\nLord of Torment — Whenever another Demon enters the battlefield under your control, it deals damage equal to its power to any target.
+Name:Vesuvan Mist
+ManaCost:1 U
+Types:Instant
+K:Kicker:1 B
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+nonToken | TgtPrompt$ Select target nontoken, nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBConjure | SpellDescription$ Return target nontoken, nonland permanent to its owner’s hand. If this spell was kicked, conjure a duplicate of that card into your hand. It perpetually gains “You may spend mana as though it were mana of any color to cast this spell.”
+SVar:DBConjure:DB$ MakeCard | Condition$ Kicked | Conjure$ True | DefinedName$ Targeted | Zone$ Hand | RememberMade$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Snowborn Simulacra's Perpetual Effect | Triggers$ Update | RememberObjects$ Imprinted | SubAbility$ DBPutFromHand
+SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The conjured card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AffectedZone$ Stack | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast this spell.
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+DeckHas:Color$Black
+Oracle:Kicker {1}{B}\nReturn target nontoken, nonland permanent to its owner's hand. If this spell was kicked, conjure a duplicate of that card into your hand. It perpetually gains “You may spend mana as though it were mana of any color to cast this spell.”
