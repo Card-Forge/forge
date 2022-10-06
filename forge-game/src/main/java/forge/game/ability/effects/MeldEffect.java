@@ -55,6 +55,10 @@ public class MeldEffect extends SpellAbilityEffect {
                 return;
             }
         }
+        
+        if (sa.hasParam("Tapped")) {
+            primary.setTapped(true);
+        }
 
         primary.changeToState(CardStateName.Meld);
         primary.setBackSide(true);
@@ -66,9 +70,6 @@ public class MeldEffect extends SpellAbilityEffect {
         if (addToCombat(primary, primary.getController(), sa, "Attacking", "Blocking")) {
             game.updateCombatForView();
             game.fireEvent(new GameEventCombatChanged());
-        if (sa.hasParam("Tapped")) {
-                primary.setTapped(true);
-            }
         }
     }
 }
