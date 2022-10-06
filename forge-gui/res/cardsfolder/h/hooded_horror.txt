@@ -2,7 +2,7 @@ Name:Hooded Horror
 ManaCost:4 B
 Types:Creature Horror
 PT:4/4
-S:Mode$ Continuous | Affected$ Card.Self+attacking | AddHiddenKeyword$ Unblockable | CheckSVar$ X | SVarCompare$ EQY | Description$ CARDNAME can't be blocked as long as defending player controls the most creatures or is tied for the most.
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self+attacking | CheckSVar$ X | SVarCompare$ EQY | Description$ CARDNAME can't be blocked as long as defending player controls the most creatures or is tied for the most.
 SVar:X:Count$Valid Creature.DefenderCtrl
 SVar:Y:PlayerCountPlayers$HighestValid Creature.YouCtrl
 Oracle:Hooded Horror can't be blocked as long as defending player controls the most creatures or is tied for the most.
