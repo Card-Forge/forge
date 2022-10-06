@@ -13,6 +13,7 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.game.event.GameEventCombatChanged;
 import forge.util.Localizer;
+
 import java.util.Arrays;
 
 public class MeldEffect extends SpellAbilityEffect {
