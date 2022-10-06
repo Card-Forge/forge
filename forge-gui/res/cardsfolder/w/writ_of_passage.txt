@@ -8,5 +8,7 @@ SVar:TrigUnblockable:DB$ Effect | RememberObjects$ TriggeredAttacker | ExileOnMo
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 A:AB$ Effect | Cost$ 1 U Reveal<1/CARDNAME> | TgtPrompt$ Choose target creature with power 2 or less | ValidTgts$ Creature.powerLE2 | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | Forecast$ True | StackDescription$ {c:Targeted} can't be blocked this turn. | SpellDescription$ Target creature with power 2 or less can't be blocked this turn. (Activate only during your upkeep and only once each turn.)
 SVar:NonStackingAttachEffect:True
+S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
+SVar:AE:SVar:HasAttackEffect:TRUE
 AI:RemoveDeck:Random
 Oracle:Enchant creature\nWhenever enchanted creature attacks, if its power is 2 or less, it can't be blocked this turn.\nForecast — {1}{U}, Reveal Writ of Passage from your hand: Target creature with power 2 or less can't be blocked this turn. (Activate only during your upkeep and only once each turn.)
