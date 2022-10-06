@@ -4,7 +4,7 @@ Types:Creature Zombie Horror
 PT:3/6
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player mills three cards. (They put the top three cards of their library into their graveyard.)
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | ValidTgts$ Player
-A:AB$ Effect | Cost$ 2 U | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | StackDescription$ {c:Self} can't be blocked this turn. | SpellDescription$ CARDNAME can't be blocked this turn.
+A:AB$ Effect | Cost$ 2 U | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
 DeckHas:Ability$Mill
 Oracle:When Drownyard Amalgam enters the battlefield, target player mills three cards. (They put the top three cards of their library into their graveyard.)\n{2}{U}: Drownyard Amalgam can't be blocked this turn.

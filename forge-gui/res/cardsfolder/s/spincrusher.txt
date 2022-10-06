@@ -4,7 +4,7 @@ Types:Artifact Creature Construct
 PT:0/2
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ Whenever CARDNAME blocks, put a +1/+1 counter on it.
 SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1
-A:AB$ Effect | Cost$ SubCounter<1/P1P1> | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | StackDescription$ {c:Self} can't be blocked this turn. | SpellDescription$ CARDNAME can't be blocked this turn.
+A:AB$ Effect | Cost$ SubCounter<1/P1P1> | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
 AI:RemoveDeck:All
 SVar:HasBlockEffect:TRUE

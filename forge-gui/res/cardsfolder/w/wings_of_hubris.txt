@@ -2,7 +2,11 @@ Name:Wings of Hubris
 ManaCost:2
 Types:Artifact Equipment
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | Description$ Equipped creature has flying.
-A:AB$ Pump | Cost$ Sac<1/CARDNAME> | Defined$ Equipped | KW$ HIDDEN Unblockable | AtEOT$ Sacrifice | SpellDescription$ Equipped creature can't be blocked this turn. Sacrifice it at the beginning of the next end step.
-AI:RemoveDeck:All
+A:AB$ Effect | Cost$ Sac<1/CARDNAME> | RememberObjects$ Equipped | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | Triggers$ Sacrifice | StackDescription$ {c:Equipped} can't be blocked this turn. Sacrifice it at the beginning of the next end step. | SpellDescription$ Equipped creature can't be blocked this turn. Sacrifice it at the beginning of the next end step.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+SVar:Sacrifice:Mode$ Phase | Phase$ End of Turn | Execute$ TrigSac | TriggerDescription$ Sacrifice it at the beginning of the next end step.
+SVar:TrigSac:DB$ SacrificeAll | ValidCards$ Card.IsRemembered
 K:Equip:1
+DeckHas:Ability$Sacrifice
+AI:RemoveDeck:All
 Oracle:Equipped creature has flying.\nSacrifice Wings of Hubris: Equipped creature can't be blocked this turn. Sacrifice it at the beginning of the next end step.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)
