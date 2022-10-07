@@ -8,4 +8,4 @@ SVar:PerpetualArtifact:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may cast that card this turn.
 DeckHints:Ability$Graveyard & Type$Artifact 
 DeckHas:Ability$Graveyard & Type$Artifact 
-Oracle:{T}:Target creature card in your graveyard perpetually becomes an artifact. You may cast that card this turn. (It loses all other card types.)
+Oracle:{T} :Target creature card in your graveyard perpetually becomes an artifact. You may cast that card this turn. (It loses all other card types.)
