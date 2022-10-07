@@ -2,11 +2,12 @@ Name:Spellchain Scatter
 ManaCost:R
 Types:Instant
 K:Kicker:U
-A:SP$ DelayedTrigger | Execute$ TrigConjure | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell this turn, conjure a duplicate of that spell into your hand. If this spell wasn’t kicked, discard the duplicate at the beginning of your next end step.
+A:SP$ DelayedTrigger | Execute$ TrigConjure | ThisTurn$ True | Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | SpellDescription$ When you cast your next instant or sorcery spell this turn, conjure a duplicate of that spell into your hand. If this spell wasn't kicked, discard the duplicate at the beginning of your next end step.
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | DefinedName$ TriggeredCard | Zone$ Hand | SubAbility$ DBDelayTrig | RememberMade$ True 
-SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | IsPresent$ Card.Self+notKicked | Phase$ End of Turn | Execute$ TrigDiscard | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ If this spell wasn't kicked, discard the duplicate at the beginning of your next end step.
+SVar:DBDelayTrig:DB$ DelayedTrigger | Mode$ Phase | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | Phase$ End of Turn | Execute$ TrigDiscard | RememberObjects$ Remembered | SubAbility$ DBCleanup | TriggerDescription$ If this spell wasn't kicked, discard the duplicate at the beginning of your next end step.
 SVar:TrigDiscard:DB$ Discard | Mode$ Defined | DefinedCards$ DelayTriggerRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$TimesKicked
 DeckNeeds:Type$Instant|Sorcery
 DeckHas:Color$Blue
 Oracle:Kicker {U}\nWhen you cast your next instant or sorcery spell this turn, conjure a duplicate of that spell into your hand. If this spell wasn't kicked, discard the duplicate at the beginning of your next end step.
