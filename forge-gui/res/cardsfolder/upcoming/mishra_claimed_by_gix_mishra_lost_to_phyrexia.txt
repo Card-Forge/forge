@@ -19,6 +19,7 @@ Name:Mishra, Lost to Phyrexia
 ManaCost:no cost
 Types:Legendary Artifact Creature Phyrexian Artificer
 PT:9/9
+Colors:black,red
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, ABILITY.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, ABILITY.
 SVar:TrigCharm:DB$ Charm | Choices$ DBDamage,DBDestroy,DBPump,DBCurse,DBToken | CharmNum$ 3
