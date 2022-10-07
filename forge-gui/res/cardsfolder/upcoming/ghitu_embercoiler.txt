@@ -9,5 +9,5 @@ SVar:X:Discarded$CardManaCost
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ MayPlay | Duration$ UntilTheEndOfYourNextTurn | ForgetOnMoved$ Exile | SubAbility$ DBCleanup
 SVar:MayPlay:Mode$ Continuous | Affected$ Card.IsRemembered | MayPlay$ True | EffectZone$ Command | AffectedZone$ Exile | Description$ Until the end of your next turn, you may play the exiled card. 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Graveyard|Discard 
+DeckHas:Ability$Discard 
 Oracle:Prowess\nAt the beginning of your precombat main phase, you may discard a card. If you do, seek a card with greater mana value and exile it. Until the end of your next turn, you may play the exiled card. 
