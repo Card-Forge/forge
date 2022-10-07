@@ -3,7 +3,7 @@ ManaCost:1 W U
 Types:Legendary Creature Human Artificer
 PT:2/4
 S:Mode$ ReduceCost | ValidCard$ Artifact,Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Artifact, instant and sorcery spells you cast cost {1} less to cast.
-A:AB$ Meld | Cost$ 7 | ConditionPresent$ Card.Self+YouCtrl+YouOwn | ConditionCheckSVar$ X | Name$ Urza, Planeswalker | Primary$ Urza, Lord Protector | Secondary$ The Mightstone and Weakstone | SecondaryType$ Artifact | SpellDescription$ If you both own and control CARDNAME and an artifact named The Mightstone and Weakstone, exile them, then meld them into Urza, Planeswalker. Activate only as a sorcery.
+A:AB$ Meld | Cost$ 7 | ConditionPresent$ Card.Self+YouCtrl+YouOwn | ConditionCheckSVar$ X | Name$ Urza, Planeswalker | Primary$ Urza, Lord Protector | Secondary$ The Mightstone and Weakstone | SecondaryType$ Artifact | SorcerySpeed$ True | SpellDescription$ If you both own and control CARDNAME and an artifact named The Mightstone and Weakstone, exile them, then meld them into Urza, Planeswalker. Activate only as a sorcery.
 SVar:X:Count$Valid Artifact.YouCtrl+YouOwn+namedThe Mightstone and Weakstone
 DeckHints:Name$The Mightstone and Weakstone & Type$Artifact|Instant|Sorcery
 MeldPair:The Mightstone and Weakstone
