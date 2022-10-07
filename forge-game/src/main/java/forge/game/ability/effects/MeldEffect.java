@@ -13,7 +13,6 @@ import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
-
 import java.util.Arrays;
 
 public class MeldEffect extends SpellAbilityEffect {
@@ -66,10 +65,11 @@ public class MeldEffect extends SpellAbilityEffect {
         PlayerZoneBattlefield bf = (PlayerZoneBattlefield)controller.getZone(ZoneType.Battlefield);
         game.getAction().changeZone(primary.getZone(), bf, primary, 0, sa);
         bf.addToMelded(secondary);
-        
-        if (addToCombat(primary, primary.getController(), sa, "Attacking", "Blocking")) {
+        Card movedCard = primary;
+        if (addToCombat(movedCard, movedCard.getController(), sa, "Attacking", "Blocking")) {
             game.updateCombatForView();
             game.fireEvent(new GameEventCombatChanged());
         }
+        
     }
 }
