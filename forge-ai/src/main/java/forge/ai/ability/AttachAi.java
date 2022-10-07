@@ -661,9 +661,15 @@ public class AttachAi extends SpellAbilityAi {
             if (card.hasKeyword(Keyword.HORSEMANSHIP)) {
                 cardPriority += 40;
             }
-            //if (card.hasKeyword("Unblockable")) { pseudo "keyword" refactored to static – how to refactor this?
-            //    cardPriority += 50;
-            //}
+            //check if card is generally unblockable
+            for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+                for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                    if (stAb.applyAbility("CantBlockBy", card, null)) {
+                        cardPriority += 50;
+                        break;
+                    }
+                }
+            }
             // Prefer "tap to deal damage"
             // TODO : Skip this one if triggers on combat damage only?
             for (SpellAbility sa2 : card.getSpellAbilities()) {
