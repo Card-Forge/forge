@@ -3,7 +3,7 @@ ManaCost:W B
 Types:Creature Human Artificer 
 PT:2/2
 K:Vigilance
-T:Mode$ ChangesZone | Affected$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | SpellDescription$ When Juggernaut Peddler enters the battlefield, target player reveals all nonland cards in their hand. You may choose one of those cards. If you do, that player exiles it and conjures a card named Juggernaut into their hand. 
+T:Mode$ ChangesZone | Affected$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | SpellDescription$ When CARDNAME enters the battlefield, target player reveals all nonland cards in their hand. You may choose one of those cards. If you do, that player exiles it and conjures a card named Juggernaut into their hand. 
 SVar:TrigDiscard:DB$ Reveal | ValidTgts$ Player | TgtPrompt$ Select target player | RevealAllValid$ Card.nonLand+TargetedPlayerCtrl | SubAbility$ DBExile
 SVar:DBExile:DB$ ChangeZone | DefinedPlayer$ Targeted | Chooser$ You | Origin$ Hand | Destination$ Exile | ChangeNum$ 1 | ChangeType$ Card.nonLand+TargetedPlayerCtrl | AlreadyRevealed$ True | AILogic$ BestCard | RememberChanged$ True | SubAbility$ DBConjure
 SVar:DBConjure:DB$ MakeCard | ConditionDefined$ Remembered | ConditionPresent$ Card | Conjure$ True | Defined$ TargetedPlayer | Name$ Juggernaut | Zone$ Hand | SubAbility$ DBCleanup
