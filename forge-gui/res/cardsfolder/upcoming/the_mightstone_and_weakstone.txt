@@ -1,0 +1,12 @@
+Name:The Mightstone and Weakstone
+ManaCost:5
+Types:Legendary Artifact Powerstone
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME enters the battlefield, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ DBDraw,DBPump
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SpellDescription$ Draw two cards.
+SVar:DBPump:DB$ Pump | IsCurse$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -5 | NumDef$ -5 | SpellDescription$ Target creature gets -5/-5 until end of turn.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ 2 | RestrictValid$ CantCastNonArtifactSpells | SpellDescription$ Add {C}{C}. This mana can't be spent to cast nonartifact spells.
+DeckHints:Name$Urza, Lord Protector
+MeldPair:Urza, Lord Protector
+AlternateMode:Meld
+Oracle:When The Mightstone and Weakstone enters the battlefield, choose one —\n• Draw two cards.\n• Target creature gets -5/-5 until end of turn.\n{T}: Add {C}{C}. This mana can't be spent to cast nonartifact spells.\n(Melds with Urza, Lord Protector.)

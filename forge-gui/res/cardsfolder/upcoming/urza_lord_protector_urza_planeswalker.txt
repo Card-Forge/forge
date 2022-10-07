@@ -1,0 +1,30 @@
+Name:Urza, Lord Protector
+ManaCost:1 W U
+Types:Legendary Creature Human Artificer
+PT:2/4
+S:Mode$ ReduceCost | ValidCard$ Artifact,Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Artifact, instant and sorcery spells you cast cost {1} less to cast.
+A:AB$ Meld | Cost$ 7 | ConditionPresent$ Card.Self+YouCtrl+YouOwn | ConditionCheckSVar$ X | Name$ Urza, Planeswalker | Primary$ Urza, Lord Protector | Secondary$ The Mightstone and Weakstone | SecondaryType$ Artifact | SpellDescription$ If you both own and control CARDNAME and an artifact named The Mightstone and Weakstone, exile them, then meld them into Urza, Planeswalker. Activate only as a sorcery.
+SVar:X:Count$Valid Artifact.YouCtrl+YouOwn+namedThe Mightstone and Weakstone
+DeckHints:Name$The Mightstone and Weakstone & Type$Artifact|Instant|Sorcery
+MeldPair:The Mightstone and Weakstone
+AlternateMode:Meld
+Oracle:Artifact, instant and sorcery spells you cast cost {1} less to cast.\n{7}: If you both own and control Urza, Lord Protector and an artifact named The Mightstone and Weakstone, exile them, then meld them into Urza, Planeswalker. Activate only as a sorcery.
+
+ALTERNATE
+
+Name:Urza, Planeswalker
+ManaCost:no cost
+Colors:white,blue
+Types:Legendary Planeswalker Urza
+Loyalty:7
+S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME's loyalty abilities can be activated twice each turn rather than only once | CharacteristicDefining$ True | Description$ You may activate the loyalty abilities of CARDNAME twice each turn rather than only once.
+A:AB$ Effect | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | StaticAbilities$ ReduceCost | SubAbility$ DBGainLife | SpellDescription$ Artifact, instant, and sorcery spells you cast this turn cost {2} less to cast.
+SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Artifact,Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Artifact, instant, and sorcery spells you cast this turn cost {2} less to cast.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
+A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | NumCards$ 2 | SubAbility$ DBDiscard | SpellDescription$ Draw two cards, then discard a card.
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+A:AB$ Token | Cost$ AddCounter<0/LOYALTY> | Planeswalker$ True | TokenScript$ c_1_1_a_soldier | TokenAmount$ 2 | SpellDescription$ Create two 1/1 colorless Soldier artifact creature tokens.
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target nonland permanent.
+A:AB$ PumpAll | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Artifact.YouCtrl,Planeswalker.YouCtrl | KW$ Indestructible | SubAbility$ DBDestroyAll | SpellDescription$ Artifacts and planeswalkers you control gain indestructible until end of turn.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Permanent.nonLand | SpellDescription$ Destroy all nonland permanents.
+Oracle:You may activate the loyalty abilities of Urza, Planeswalker twice each turn rather than only once.\n[+2]: Artifact, instant, and sorcery spells you cast this turn cost {2} less to cast. You gain 2 life.\n[+1]: Draw two cards, then discard a card.\n[-3]: Exile target nonland permanent.\n[-10]: Artifacts and planeswalkers you control gain indestructible until end of turn. Destroy all nonland permanents.
