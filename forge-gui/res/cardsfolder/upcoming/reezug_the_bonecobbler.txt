@@ -2,7 +2,7 @@ Name:Reezug, the Bonecobbler
 ManaCost:1 B
 Types:Legendary Creature Spirit Artificer
 PT:1/3
-A:AB$ Effect | Name$ Reezug, the Bonecobbler's Perpetual Effect | Cost$ T | ValidTgts$ Creature.YouOwn | TgtZone$ Graveyard | RememberObjects$ Targeted | TgtPrompt$ Select target creature card in your graveyard | StaticAbilities$ MayPlay | SubAbility$ DBEffect | SpellDescription$ Target creature card in your graveyard perpetually becomes an artifact. You may cast that card this turn. 
+A:AB$ Effect | Name$ Reezug, the Bonecobbler's Effect | Cost$ T | ValidTgts$ Creature.YouOwn | TgtZone$ Graveyard | RememberObjects$ Targeted | TgtPrompt$ Select target creature card in your graveyard | StaticAbilities$ MayPlay | SubAbility$ DBEffect | StackDescription$ {c:Targeted} perpetually becomes an artifact. | You may cast that card this turn. SpellDescription$ Target creature card in your graveyard perpetually becomes an artifact. You may cast that card this turn. (It loses all other card types.)
 SVar:DBEffect:DB$ Effect | Name$ Reezug, the Bonecobbler's Perpetual Effect | RememberObjects$ Targeted | StaticAbilities$ PerpetualArtifact | Duration$ Permanent 
 SVar:PerpetualArtifact:Mode$ Continuous | Affected$ Card.IsRemembered | AddType$ Artifact | RemoveCardTypes$ True | Description$ This creature perpetually becomes an artifact. (It loses all other card types.)
 SVar:MayPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Graveyard | Description$ You may cast that card this turn.
