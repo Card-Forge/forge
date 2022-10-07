@@ -512,7 +512,7 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
-    public String chooseKeywordForPump(final List<String> options, final SpellAbility sa, final String prompt) {
+    public String chooseKeywordForPump(final List<String> options, final SpellAbility sa, final String prompt, final Card tgtCard) {
         if (options.size() <= 1) {
             return Iterables.getFirst(options, null);
         }

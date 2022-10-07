@@ -601,34 +601,6 @@ public class SpecialCardAi {
             }
             return true;
         }
-
-        public static String chooseKeyword(final Player ai, final SpellAbility sa, final List<String> options) {
-            // TODO: generalize and improve this so that it acts in a more reasonable way and can potentially be used for other cards too
-            List<String> possible = Lists.newArrayList();
-            Card tgtCard = sa.getTargetCard();
-            if (tgtCard != null) {
-                CardCollection oppUntappedCreatures = CardLists.filter(ai.getOpponents().getCreaturesInPlay(), CardPredicates.Presets.UNTAPPED);
-                for (String kw : options) {
-                    if (!tgtCard.hasKeyword(kw)) {
-                        if ("Indestructible".equals(kw)) {
-                            if (oppUntappedCreatures.isEmpty()) {
-                                continue; // nothing to damage or kill the creature with
-                            } else {
-                                possible.clear();
-                                possible.add(kw); // prefer Indestructible above all else
-                                break;
-                            }
-                        }
-                        possible.add(kw); // these SAs at least don't duplicate a keyword on the card
-                    }
-                }
-            }
-            if (!possible.isEmpty()) {
-                return Aggregates.random(possible);
-            } else {
-                return Aggregates.random(options); // if worst comes to worst, it's a PW +1 ability, so do at least something
-            }
-        }
     }
 
     // Goblin Polka Band
