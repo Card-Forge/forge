@@ -11,4 +11,4 @@ SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affect
 SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AffectedZone$ Stack | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast this spell.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Graveyard
-Oracle:Kicker{B}\nWhen Nantuko Slicer enters the battlefield return target card from your graveyard to you hand. If this spell was kicked, conjure a duplicate of target card in an opponent's graveyard into your hand. It perpetually gains: "You may spend mana as though it were mana of any color to cast this spell." 
+Oracle:Kicker{B}\nWhen Nantuko Slicer enters the battlefield return target card from your graveyard to your hand. If this spell was kicked, conjure a duplicate of target card in an opponent's graveyard into your hand. It perpetually gains: "You may spend mana as though it were mana of any color to cast this spell." 
