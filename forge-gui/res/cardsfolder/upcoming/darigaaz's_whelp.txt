@@ -7,7 +7,11 @@ K:Flying
 T:Mode$ Drawn | ValidCard$ Card.YouOwn+Dragon | TriggerZones$ Battlefield | RememberDrawn$ True | Execute$ DBEffect | TriggerDescription$ Whenever you draw a Dragon card, it perpetually gets +1/+1.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualP1P1 | RememberObjects$ Remembered | Name$ Darigaaz's Whelp's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This card perpetually gets +1/+1.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigSeek | TriggerDescription$ When this creature enters the battlefield, if it was kicked, seek a Dragon card. CARDNAME and that Dragon card each perpetually get +1/+1.
+SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.Dragon | SubAbility$ DBEffectBis
+SVar:DBEffectBis:DB$ Effect | StaticAbilities$ PerpetualP1P1Bis | RememberObjects$ Remembered | Name$ Darigaaz's Whelp's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualP1P1Bis:Mode$ Continuous | Affected$ Card.Self,Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ CARDNAME and the conjured Dragon card each perpetually get +1/+1.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHints:Type$Dragon
+DeckNeeds:Type$Dragon
 DeckHas:Color$Red
-Oracle:Kicker {1}{R}\nFlying\nWhenever you draw a Dragon card, it perpetually gets +1/+1.\nWhen Darigaaz’s Whelp enters the battlefield, if it was kicked, seek a Dragon card. Darigaaz’s Whelp and that Dragon card each perpetually get +1/+1.
+Oracle:Kicker {1}{R}\nFlying\nWhenever you draw a Dragon card, it perpetually gets +1/+1.\nWhen Darigaaz’s Whelp enters the battlefield, if it was kicked, seek a Dragon card. Darigaaz's Whelp and that Dragon card each perpetually get +1/+1.
