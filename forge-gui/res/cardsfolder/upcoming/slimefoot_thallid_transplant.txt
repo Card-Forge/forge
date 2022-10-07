@@ -8,4 +8,4 @@ SVar:BuffedBy:Forest
 SVar:BuffedBy:Swamp
 DeckHints:Type$Fungus|Saproling
 DeckHas:Ability$Token|Mill|LifeGain|Graveyard|Counters|Sacrifice & Type$Elemental|Saproling
-Oracle:Whenever a Swamp or a Forest enters the battlefield under your control, draft a card from Slimefoot,Thallid Transplant's spellbook. 
+Oracle:Whenever a Swamp or a Forest enters the battlefield under your control, draft a card from Slimefoot, Thallid Transplant's spellbook. 
