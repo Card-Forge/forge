@@ -114,7 +114,7 @@ public class TriggerAbilityTriggered extends Trigger {
         Map<AbilityKey, Object> newRunParams = AbilityKey.newMap();
         newRunParams.put(AbilityKey.Mode, regtrig.getMode().toString());
         if (regtrig.getMode() == TriggerType.ChangesZone) {
-            newRunParams.put(AbilityKey.Destination, runParams.get(AbilityKey.Destination));
+            newRunParams.put(AbilityKey.Destination, runParams.getOrDefault(AbilityKey.Destination, ""));
             newRunParams.put(AbilityKey.Cause, ImmutableList.of(runParams.get(AbilityKey.Card)));
         } else if (regtrig.getMode() == TriggerType.ChangesZoneAll) {
             final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
