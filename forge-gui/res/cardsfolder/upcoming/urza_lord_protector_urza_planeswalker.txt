@@ -17,7 +17,7 @@ ManaCost:no cost
 Colors:white,blue
 Types:Legendary Planeswalker Urza
 Loyalty:7
-S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME's loyalty abilities can be activated twice each turn rather than only once | CharacteristicDefining$ True | Description$ You may activate the loyalty abilities of CARDNAME twice each turn rather than only once.
+S:Mode$ Continuous | EffectZone$ Battlefield | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME's loyalty abilities can be activated twice each turn rather than only once | Description$ You may activate the loyalty abilities of CARDNAME twice each turn rather than only once.
 A:AB$ Effect | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | StaticAbilities$ ReduceCost | SubAbility$ DBGainLife | SpellDescription$ Artifact, instant, and sorcery spells you cast this turn cost {2} less to cast.
 SVar:ReduceCost:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Artifact,Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Artifact, instant, and sorcery spells you cast this turn cost {2} less to cast.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
