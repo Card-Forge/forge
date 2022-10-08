@@ -45,7 +45,6 @@ public abstract class ItemPredicate {
      * 
      * @return the predicate
      */
-    
 
     /**
      * The Class Presets.
