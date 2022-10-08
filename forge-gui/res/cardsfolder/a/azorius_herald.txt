@@ -2,7 +2,7 @@ Name:Azorius Herald
 ManaCost:2 W
 Types:Creature Spirit
 PT:2/1
-K:Unblockable
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 4 life.
 T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | ManaNotSpent$ U | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless {U} was spent to cast it.
 SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4

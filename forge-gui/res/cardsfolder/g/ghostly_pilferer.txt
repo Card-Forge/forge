@@ -3,10 +3,11 @@ ManaCost:1 U
 Types:Creature Spirit Rogue
 PT:2/1
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDraw1 | TriggerDescription$ Whenever CARDNAME becomes untapped, you may pay {2}. If you do, draw a card.
-SVar:TrigDraw1:AB$ Draw | Cost$ 2 | Defined$ You | NumCards$ 1
+SVar:TrigDraw1:AB$ Draw | Cost$ 2
 T:Mode$ SpellCast | ValidCard$ Card.wasNotCastFromTheirHand | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDraw2 | TriggerDescription$ Whenever an opponent casts a spell from anywhere other than their hand, draw a card.
-SVar:TrigDraw2:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw2:DB$ Draw
 SVar:AIPreference:DiscardCost$Card.cmcLE2
+A:AB$ Effect | Cost$ Discard<1/Card> | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | StackDescription$ SpellDescription | SpellDescription$ CARDNAME can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
 DeckHas:Ability$Discard
-A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
 Oracle:Whenever Ghostly Pilferer becomes untapped, you may pay {2}. If you do, draw a card.\nWhenever an opponent casts a spell from anywhere other than their hand, draw a card.\nDiscard a card: Ghostly Pilferer can't be blocked this turn.

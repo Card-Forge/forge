@@ -573,10 +573,6 @@ public class CombatUtil {
             return true;
         }
 
-        if (attacker.hasKeyword("Unblockable")) {
-            return false;
-        }
-
         // Landwalk
         if (isUnblockableFromLandwalk(attacker, defender)) {
             return CardLists.getAmountOfKeyword(defender.getCreaturesInPlay(), "CARDNAME can block creatures with landwalk abilities as though they didn't have those abilities.") != 0;

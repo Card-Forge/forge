@@ -661,8 +661,14 @@ public class AttachAi extends SpellAbilityAi {
             if (card.hasKeyword(Keyword.HORSEMANSHIP)) {
                 cardPriority += 40;
             }
-            if (card.hasKeyword("Unblockable")) {
-                cardPriority += 50;
+            //check if card is generally unblockable
+            for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+                for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                    if (stAb.applyAbility("CantBlockBy", card, null)) {
+                        cardPriority += 50;
+                        break;
+                    }
+                }
             }
             // Prefer "tap to deal damage"
             // TODO : Skip this one if triggers on combat damage only?
@@ -1551,7 +1557,7 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
-        final boolean evasive = keyword.equals("Unblockable") || keyword.equals("Fear")
+        final boolean evasive = keyword.equals("Fear")
                 || keyword.equals("Intimidate") || keyword.equals("Shadow")
                 || keyword.equals("Flying") || keyword.equals("Horsemanship")
                 || keyword.endsWith("walk") || keyword.equals("All creatures able to block CARDNAME do so.");

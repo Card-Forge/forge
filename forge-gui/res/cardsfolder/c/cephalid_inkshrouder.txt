@@ -2,7 +2,10 @@ Name:Cephalid Inkshrouder
 ManaCost:2 U
 Types:Creature Cephalid
 PT:2/1
-A:AB$ Pump | Cost$ Discard<1/Card> | Defined$ Self | KW$ Shroud & HIDDEN Unblockable | SpellDescription$ CARDNAME gains shroud until end of turn and can't be blocked this turn. (A creature with shroud can't be the target of spells or abilities.)
+A:AB$ Pump | Cost$ Discard<1/Card> | KW$ Shroud | SubAbility$ DBUnblockable | StackDescription$ CARDNAME gains shroud until end of turn and can't be blocked this turn. | SpellDescription$ CARDNAME gains shroud until end of turn and can't be blocked this turn. (A creature with shroud can't be the target of spells or abilities.)
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
 AI:RemoveDeck:Random
-SVar:AIPreference:DiscardCost$Card.cmcEQ1,Card.cmcEQ2
+SVar:AIPreference:DiscardCost$Card.cmcLE2
+DeckHas:Ability$Discard
 Oracle:Discard a card: Cephalid Inkshrouder gains shroud until end of turn and can't be blocked this turn. (A creature with shroud can't be the target of spells or abilities.)

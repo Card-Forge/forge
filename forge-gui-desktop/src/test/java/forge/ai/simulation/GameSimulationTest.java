@@ -128,12 +128,12 @@ public class GameSimulationTest extends SimulationTest {
         cloak.attachToEntity(bear, null);
         game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
         game.getAction().checkStateEffects(true);
-        AssertJUnit.assertEquals(1, bear.getAmountOfKeyword("Unblockable"));
+        AssertJUnit.assertEquals(1, bear.getAmountOfKeyword("Shroud"));
 
         GameSimulator sim = createSimulator(game, p);
         Game simGame = sim.getSimulatedGameState();
         Card bearCopy = findCardWithName(simGame, bearCardName);
-        AssertJUnit.assertEquals(1, bearCopy.getAmountOfKeyword("Unblockable"));
+        AssertJUnit.assertEquals(1, bearCopy.getAmountOfKeyword("Shroud"));
     }
 
     @Test
