@@ -1,6 +1,7 @@
 Name:Dissatisfied Customer
 ManaCost:2 B
 Types:Creature Vampire Guest
+PT:2/1
 K:Flying
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiceRoll | TriggerDescription$ When CARDNAME enters the battlefield, roll a six-sided die. If the result is 3 or less, you lose that much life.

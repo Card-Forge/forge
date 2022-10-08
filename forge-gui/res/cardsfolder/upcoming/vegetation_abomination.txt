@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Artifact Creature Plant Mutant Food
 PT:2/2
 K:Deathtouch
-A:AB$ RollDice | Cost$ 1 Sac<1/CARDNAME> | ResultSVar$ Result | SubAbility$ DBGainLife | SpellDescription$ Roll a six-sided die. You gain life equal to the result.
+A:AB$ RollDice | Cost$ T Sac<1/CARDNAME> | ResultSVar$ Result | SubAbility$ DBGainLife | SpellDescription$ Roll a six-sided die. You gain life equal to the result.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ Result
 DeckHas:Ability$Lifegain|Sacrifice
 Oracle:Deathtouch\n{T}, Sacrifice Vegetation Abomination: Roll a six-sided die. You gain life equal to the result.
