@@ -128,6 +128,9 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
     public void setSelectCommand(final UiCommand c0) {
         this.cmdSelect = c0;
     }
+    public UiCommand getSelectCommand() {
+        return this.cmdSelect;
+    }
 
     @Override
     protected void addDefaultFilters() {
