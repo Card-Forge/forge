@@ -35,6 +35,7 @@
 "enemies": [
 	"Ape",
 	"Bear",
+	"Beastmaster",
 	"Centaur",
 	"Centaur Warrior",
 	"Dino",
@@ -60,6 +61,7 @@
 	"Treefolk Guardian",
 	"Viper",
 	"Werewolf",
+	"Wild-Magic Sorcerer",
 	"Wurm"
 ],
 "pointsOfInterest": [
