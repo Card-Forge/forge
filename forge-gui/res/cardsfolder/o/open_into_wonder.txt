@@ -1,8 +1,9 @@
 Name:Open into Wonder
 ManaCost:X U U
 Types:Sorcery
-A:SP$ Pump | Cost$ X U U | ValidTgts$ Creature | KW$ HIDDEN Unblockable | AILogic$ Pump | TargetMin$ X | TargetMax$ X | TgtPrompt$ Select X target creatures | SubAbility$ DBAnimate | StackDescription$ X target creatures [{c:Targeted}] can't be blocked this turn. Until end of turn, those creatures gain "Whenever this creature deals combat damage to a player, draw a card." | SpellDescription$ X target creatures can't be blocked this turn. Until end of turn, those creatures gain "Whenever this creature deals combat damage to a player, draw a card."
-SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ OpenIntoWonderTrigger | StackDescription$ None
+A:SP$ Effect | ValidTgts$ Creature | TargetMin$ X | TargetMax$ X | TgtPrompt$ Select X target creatures | AILogic$ Pump | RememberObjects$ Targeted | SubAbility$ DBAnimate | StackDescription$ X target creatures [{c:Targeted}] can't be blocked this turn. | SpellDescription$ X target creatures can't be blocked this turn.
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ These creatures can't be blocked this turn.
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Triggers$ OpenIntoWonderTrigger | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, those creatures gain "Whenever this creature deals combat damage to a player, draw a card."
 SVar:OpenIntoWonderTrigger:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ OpenIntoWonderDraw | CombatDamage$ True | TriggerDescription$ Whenever this creature deals combat damage to a player, draw a card.
 SVar:OpenIntoWonderDraw:DB$ Draw | NumCards$ 1
 SVar:X:Count$xPaid

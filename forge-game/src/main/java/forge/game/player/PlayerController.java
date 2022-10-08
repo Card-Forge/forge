@@ -227,6 +227,8 @@ public abstract class PlayerController {
     public abstract CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt,
             Map<String, Object> params);
 
+    public abstract String chooseKeywordForPump(List<String> options, SpellAbility sa, String prompt, Card tgtCard);
+
     public abstract boolean confirmPayment(CostPart costPart, String string, SpellAbility sa);
     public abstract ReplacementEffect chooseSingleReplacementEffect(String prompt, List<ReplacementEffect> possibleReplacers);
     public abstract String chooseProtectionType(String string, SpellAbility sa, List<String> choices);

@@ -84,7 +84,7 @@ ScryfallCode=40K
 76 R Exocrine @Cory Trego-Erdner
 77 U Herald of Slaanesh @Alexander Mokhov
 78 R Keeper of Secrets @Miguel Sacristan
-79 R Khârn the Betrayer @Kekai Kotaki
+79 R Kharn the Betrayer @Kekai Kotaki
 80 R Knight Rampager @Games Workshop
 81 R Let the Galaxy Burn @Evan Shipard
 82 U Noise Marine @Johan Grenier
@@ -270,7 +270,7 @@ ScryfallCode=40K
 262 C Wayfarer's Bauble @Ivan Dedov
 263 U Worn Powerstone @David Sondered
 264 U Arcane Sanctum @Games Workshop
-265 C Ash Barrens @Sergei Leoluch Panin
+265 U Ash Barrens @Sergei Leoluch Panin
 266 U Barren Moor @Rafater
 267 C Cave of Temptation @Teodora Dumitriu
 268 R Choked Estuary @LiXin Yin

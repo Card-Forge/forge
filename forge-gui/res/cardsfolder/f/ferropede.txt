@@ -2,7 +2,7 @@ Name:Ferropede
 ManaCost:3
 Types:Artifact Creature Insect
 PT:1/1
-K:Unblockable
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may remove a counter from target permanent.
 SVar:TrigRemoveCounter:DB$ RemoveCounter | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | CounterType$ Any | CounterNum$ 1
 Oracle:Ferropede can't be blocked.\nWhenever Ferropede deals combat damage to a player, you may remove a counter from target permanent.

@@ -1,6 +1,10 @@
 Name:Teleportal
 ManaCost:U R
 Types:Sorcery
-A:SP$ Pump | Cost$ U R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control. | NumAtt$ 1 | KW$ HIDDEN Unblockable | SpellDescription$ Target creature you control gets +1/+0 until end of turn and can't be blocked this turn.
-A:SP$ PumpAll | Cost$ 3 U R | ValidCards$ Creature.YouCtrl | ValidDescription$ each creature you control. | NumAtt$ 1 | KW$ HIDDEN Unblockable | PrecostDesc$ Overload | CostDesc$ {3}{U}{R} | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.") | StackDescription$ Each creature you control gets +1/+0 until end of turn and can't be blocked this turn.
+A:SP$ Pump | Cost$ U R | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 1 | SubAbility$ DBUnblockable | StackDescription$ {c:Targeted} gets +2/+0 until end of turn and can't be blocked this turn. | SpellDescription$ Target creature you control gets +1/+0 until end of turn and can't be blocked this turn.
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
+A:SP$ PumpAll | Cost$ 3 U R | ValidCards$ Creature.YouCtrl | ValidDescription$ each creature you control. | NumAtt$ 1 | PrecostDesc$ Overload | CostDesc$ {3}{U}{R} | NonBasicSpell$ True | SubAbility$ DBEffect | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.") | StackDescription$ Each creature you control gets +1/+0 until end of turn and can't be blocked this turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Valid Creature.YouCtrl | ForgetOnMoved$ Battlefield | StaticAbilities$ AllUnblockable
+SVar:AllUnblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ These creatures can't be blocked this turn.
 Oracle:Target creature you control gets +1/+0 until end of turn and can't be blocked this turn.\nOverload {3}{U}{R} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")

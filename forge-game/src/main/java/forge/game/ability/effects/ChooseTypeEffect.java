@@ -95,9 +95,8 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             }
         }
 
-        for (final String s : invalidTypes) {
-            validTypes.remove(s);
-        }
+        validTypes.removeAll(invalidTypes);
+
         if (sa.hasParam("Note") && card.hasAnyNotedType()) {
             for (String noted : card.getNotedTypes()) {
                 validTypes.remove(noted);

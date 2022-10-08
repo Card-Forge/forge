@@ -1,0 +1,13 @@
+Name:Darigaaz, Shivan Champion
+ManaCost:2 B R G
+Types:Legendary Creature Dragon
+PT:5/5
+K:Flying
+T:Mode$ Phase | Phase$ End of Turn | Execute$ TrigDraft | ValidPlayer$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, conjure a random card from CARDNAME's spellbook into exile face down with three egg counters on it. It gains "At the beginning of your upkeep, if this card is exiled, remove an egg counter from it. Then if it has no egg counters on it, put it onto the battlefield."
+SVar:TrigDraft:DB$ MakeCard | Conjure$ True | AtRandom$ True | Spellbook$ Shivan Dragon,Moonveil Regent,Terror of the Peaks,Leyline Tyrant,Immersturm Predator,Manaform Hellkite,Bone Dragon,Demanding Dragon,Skarrgan Hellkite,Thunderbreak Regent,Black Dragon,Skyship Stalker,Red Dragon | WithCounter$ EGG | WithCounterNum$ 3 | Zone$ Exile | FaceDown$ True | RememberMade$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Duration$ Permanent | Triggers$ TrigRemoveEgg | SubAbility$ DBCleanup
+SVar:TrigRemoveEgg:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Exile | Execute$ DBRemoveCounter | TriggerDescription$ At the beginning of your upkeep, if this card is exiled, remove an egg counter from it. Then if it has no egg counters on it, put it onto the battlefield.
+SVar:DBRemoveCounter:DB$ RemoveCounter | CounterType$ EGG | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | ConditionDefined$ Self | ConditionPresent$ Card.counters_EQ0_EGG
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Flying\nAt the beginning of your end step, conjure a random card from Darigaaz, Shivan Champion's spellbook into exile face down with three egg counters on it. It gains "At the beginning of your upkeep, if this card is exiled, remove an egg counter from it. Then if it has no egg counters on it, put it onto the battlefield."

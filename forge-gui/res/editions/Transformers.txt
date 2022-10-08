@@ -6,18 +6,35 @@ Type=Promo
 ScryfallCode=BOT
 
 [cards]
+1 M Prowl, Stoic Strategist @VOLTA Creation
+2 M Ratchet, Field Medic @VOLTA Creation
+3 M Jetfire, Ingenious Scientist @VOLTA Creation
+4 M Blitzwing, Cruel Tormentor @VOLTA Creation
 5 M Starscream, Power Hungry @VOLTA Creation
 6 M Slicer, Hired Muscle @VOLTA Creation
+7 M Arcee, Sharpshooter @VOLTA Creation
+8 M Blaster, Combat DJ @VOLTA Creation
+9 M Cyclonus, the Saboteur @VOLTA Creation
 10 M Flamewar, Brash Veteran @VOLTA Creation
 11 M Goldbug, Humanity's Ally @VOLTA Creation
+12 M Megatron, Tyrant @VOLTA Creation
 13 M Optimus Prime, Hero @VOLTA Creation
 14 M Soundwave, Sonic Spy @VOLTA Creation
+15 M Ultra Magnus, Tactician @VOLTA Creation
+16 M Prowl, Stoic Strategist @VOLTA Creation
+17 M Ratchet, Field Medic @VOLTA Creation
+18 M Jetfire, Ingenious Scientist @VOLTA Creation
+19 M Blitzwing, Cruel Tormentor @VOLTA Creation
 20 M Starscream, Power Hungry @VOLTA Creation
 21 M Slicer, Hired Muscle @VOLTA Creation
+22 M Blaster, Combat DJ @VOLTA Creation
+23 M Cyclonus, the Saboteur @VOLTA Creation
 24 M Flamewar, Brash Veteran @VOLTA Creation
 25 M Goldbug, Humanity's Ally @VOLTA Creation
+26 M Megatron, Tyrant @VOLTA Creation
 27 M Optimus Prime, Hero @VOLTA Creation
 28 M Soundwave, Sonic Spy @VOLTA Creation
+29 M Ultra Magnus, Tactician @VOLTA Creation
 
 [tokens]
 laserbeak

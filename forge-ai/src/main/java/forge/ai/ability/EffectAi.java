@@ -215,6 +215,10 @@ public class EffectAi extends SpellAbilityAi {
                 return topStack.getActivatingPlayer().isOpponentOf(ai) && topStack.getApi() == ApiType.GainLife;
             } else if (logic.equals("Fight")) {
                 return FightAi.canFightAi(ai, sa, 0, 0);
+            } else if (logic.equals("Pump")) {
+                if (SpellApiToAi.Converter.get(sa.getApi()).canPlayAIWithSubs(ai, sa)) {
+                    return true;
+                }
             } else if (logic.equals("Burn")) {
                 // for DamageDeal sub-abilities (eg. Wild Slash, Skullcrack)
                 SpellAbility burn = sa.getSubAbility();

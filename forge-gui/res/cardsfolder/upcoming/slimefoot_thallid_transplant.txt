@@ -1,0 +1,11 @@
+Name:Slimefoot, Thallid Transplant 
+ManaCost:B G
+Types:Legendary Creature Fungus
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Forest.YouCtrl,Swamp.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraft | TriggerDescription$ Whenever a Swamp or Forest enters the battlefield under your control, draft a card from CARDNAME's spellbook.
+SVar:TrigDraft:DB$ Draft | Spellbook$ Deathbloom Thallid,Deathbonnet Sprout,Rhizome Lurcher,Spore Crawler,Sporecrown Thallid,Sporemound,Swarm Shambler,Thallid Omnivore,Thallid Soothsayer,Yavimaya Sapherd,Fungal Plots,Verdant Force,Verdant Embrace,Spore Swarm,Saproling Migration
+SVar:BuffedBy:Forest
+SVar:BuffedBy:Swamp
+DeckHints:Type$Fungus|Saproling
+DeckHas:Ability$Token|Mill|LifeGain|Graveyard|Counters|Sacrifice & Type$Elemental|Saproling
+Oracle:Whenever a Swamp or a Forest enters the battlefield under your control, draft a card from Slimefoot, Thallid Transplant's spellbook. 

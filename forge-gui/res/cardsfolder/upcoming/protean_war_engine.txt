@@ -1,0 +1,12 @@
+Name:Protean War Engine
+ManaCost:R W
+Types:Artifact Vehicle
+PT:0/4
+K:ETBReplacement:Other:DBDraft
+SVar:DBDraft:DB$ Draft | TriggerZones$ Battlefield | Spellbook$ Serra Angel,Resplendent Angel,Steel-Plume Marshal, Duelcraft Trainer,Falconer Adept,Seraph of Dawn,Star-Crowned Stag,Benalish Marshal,Blade Historian,Captivating Crew,Manaform Hellkite,Serra Paragon,Moonveil Regent,Skyship Stalker,Ogre Battledriver | Zone$ Exile | RememberDrafted$ True | SpellDescription$ As CARDNAME enters the battlefield, draft a card from CARDNAME's spellbook and exile it. 
+T:Mode$ BecomesCrewed | ValidVehicle$ Card.Self | Execute$ TrigClone | TriggerDescription$ Whenever CARDNAME becomes crewed, until end of turn, it becomes a copy of the exiled card, except it's a Vehicle artifact in addition to its other types. 
+SVar:TrigClone:DB$ Clone | Cost$ 3 | Defined$ Remembered | CloneTarget$ Self | AddTypes$ Vehicle | Duration$ UntilEndOfTurn 
+K:Crew:3
+SVar:HasAttackingEffect:TRUE
+DeckHas:Type$ Angel|Dragon|Ogre|Warrior|Knight|Elk|Bird|Soldier|Human| & Ability$Lifegain|Token & Keyword$DoubleStrike|Haste|FirstStrike|Flying
+Oracle:As Protean War Engine enters the battlefield, draft a card from Protean War Engine's spellbook and exile it.\nWhenever Protean War Engine becomes crewed, until end of turn, it becomes a copy of the exiled card, except it's a Vehicle artifact in addition to its other types. 

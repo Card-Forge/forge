@@ -1,9 +1,38 @@
 [metadata]
 Code=YDMU
-Date=2021-10-06
+Date=2022-10-06
 Name=Alchemy: Dominaria
 Type=Online
 ScryfallCode=YDMU
 
 [cards]
-0 M Oracle of the Alpha @Nino Vecia
+1 U Benalish Knight-Counselor @Paolo Parente
+2 R Priest of Possibility @Nicholas Elias
+3 U Pull of the Mist Moon @Titus Lunter
+4 M Oracle of the Alpha @Nino Vecia
+5 R Skywriter Djinn @Gaboleps
+6 U Trove Mage @Nino Vecia
+7 U Vesuvan Mist @Monztre
+8 U Darigaaz's Whelp @Brian Valeza
+9 U Diminished Returner @Bruno Biazotto
+10 M Reezug, the Bonecobbler @stoicHua
+11 R Smogbelcher Chariot @Michele Giorgi
+12 R Ghitu Embercoiler @Jason Rainville
+13 R Goblin Influx Array @Jennie Kim
+14 U Goblin Morale Sergeant @Inkognit
+15 U Spellchain Scatter @Michele Giorgi
+16 M Marwyn's Kindred @Alessandra Pisano
+17 R Nantuko Slicer @Simon Dominic
+18 U Vinesoul Spider @David Astruga
+19 U Wandering Treefolk @Iris Compiet
+20 R Arvad, Weatherlight Smuggler @Maaz Ali Khan
+21 R Bloodsprout Talisman @Pete Venters
+22 M Darigaaz, Shivan Champion @Andrew Mar
+23 R Juggernaut Peddler @Monztre
+24 R Niambi, Beloved Protector @Julia Metzger
+25 M Protean War Engine @Ben Wootten
+26 R Slimefoot, Thallid Transplant @Loïc Canavaggia
+27 R Teferi's Contingency @Milivoj Ćeran
+28 R Tiana, Angelic Mechanic @Joseph Weston
+29 R Vodalian Tide Mage @Joseph Weston
+30 R Coalition Construct @Artur Treffner

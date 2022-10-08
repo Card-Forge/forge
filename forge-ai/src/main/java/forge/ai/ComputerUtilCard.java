@@ -864,6 +864,41 @@ public class ComputerUtilCard {
         return maxType;
     }
 
+    public static String getMostProminentCardType(final CardCollectionView list, final Collection<String> valid) {
+        if (list.isEmpty() || valid.isEmpty()) {
+            return "";
+        }
+
+        final Map<String, Integer> typesInDeck = Maps.newHashMap();
+        for (String type : valid) {
+            typesInDeck.put(type, 0);
+        }
+
+        for (final Card c : list) {
+            Iterable<CardType.CoreType> cardTypes = c.getType().getCoreTypes();
+            for (CardType.CoreType type : cardTypes) {
+                Integer count = typesInDeck.get(type.toString());
+                if (count != null) {
+                    typesInDeck.put(type.toString(), count + 1);
+                }
+            }
+        }
+
+        int max = 0;
+        String maxType = "";
+
+        for (final Entry<String, Integer> entry : typesInDeck.entrySet()) {
+            final String type = entry.getKey();
+
+            if (max < entry.getValue()) {
+                max = entry.getValue();
+                maxType = type;
+            }
+        }
+
+        return maxType;
+    }
+
     /**
      * <p>
      * getMostProminentColor.

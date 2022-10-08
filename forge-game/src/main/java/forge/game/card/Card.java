@@ -1964,8 +1964,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             if (keyword.startsWith("CantBeCounteredBy")) {
                 final String[] p = keyword.split(":");
                 sbLong.append(p[2]).append("\r\n");
-            } else if (keyword.equals("Unblockable")) {
-                sbLong.append(getName()).append(" can't be blocked.\r\n");
             } else if (keyword.startsWith("IfReach")) {
                 String[] k = keyword.split(":");
                 sbLong.append(getName()).append(" can block ")
@@ -2258,8 +2256,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")) {
                     // keyword parsing takes care of adding a proper description
-                } else if (keyword.equals("Unblockable")) {
-                    sbLong.append(getName()).append(" can't be blocked.\r\n");
                 } else if (keyword.startsWith("IfReach")) {
                     String[] k = keyword.split(":");
                     sbLong.append(getName()).append(" can block ")
@@ -2846,21 +2842,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return sb.toString();
     }
 
-    public final boolean canProduceSameManaTypeWith(final Card c) {
-        final FCollectionView<SpellAbility> manaAb = getManaAbilities();
-        if (manaAb.isEmpty()) {
-            return false;
-        }
-        Set<String> colors = new HashSet<>();
-        for (final SpellAbility ab : c.getManaAbilities()) {
-            if (ab.getApi() == ApiType.ManaReflected) {
-                colors.addAll(CardUtil.getReflectableManaColors(ab));
-            } else {
-                colors = CardUtil.canProduce(6, ab, colors);
-            }
-        }
-
-        for (final SpellAbility mana : manaAb) {
+    public final boolean canProduceColorMana(final Set<String> colors) {
+        for (final SpellAbility mana : getManaAbilities()) {
             for (String s : colors) {
                 if (mana.getApi() == ApiType.ManaReflected) {
                     if (CardUtil.getReflectableManaColors(mana).contains(s)) {
@@ -2874,6 +2857,21 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
         return false;
+    }
+
+    public final boolean canProduceSameManaTypeWith(final Card c) {
+        if (getManaAbilities().isEmpty()) {
+            return false;
+        }
+        Set<String> colors = new HashSet<>();
+        for (final SpellAbility ab : c.getManaAbilities()) {
+            if (ab.getApi() == ApiType.ManaReflected) {
+                colors.addAll(CardUtil.getReflectableManaColors(ab));
+            } else {
+                colors = CardUtil.canProduce(6, ab, colors);
+            }
+        }
+        return canProduceColorMana(colors);
     }
 
     public final void clearFirstSpell() {
@@ -5247,6 +5245,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isGreen() { return getColor().hasGreen(); }
     public final boolean isWhite() { return getColor().hasWhite(); }
     public final boolean isColorless() { return getColor().isColorless(); }
+    public final boolean associatedWithColor(final String col) {
+        final Set<String> color = new HashSet<>();
+        if (col != null) {
+            color.add(col);
+        }
+        return isOfColor(col) || canProduceColorMana(color);
+    }
 
     public final boolean sharesNameWith(final Card c1) {
         // in a corner case where c1 is null, there is no name to share with.

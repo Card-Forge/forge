@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Double Masters #02
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/08/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. You have one experience counter. Assume your opponent has no cards in hand. Remember that your solution must satisfy all possible blocking decisions. Good luck!
+[state]
+humanlife=11
+ailife=11
+turn=1
+humancounters=EXPERIENCE=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Staggershock;Breakthrough;Wash Out;Dack's Duplicate
+humanbattlefield=Mizzix of the Izmagnus;Disciple of the Ring;Hero of the Games;Island;Island;Island;Mountain;Mountain
+aibattlefield=Advanced Stitchwing;Greater Gargadon

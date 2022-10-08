@@ -1,7 +1,9 @@
 Name:Domineering Will
 ManaCost:3 U
 Types:Instant
-A:SP$ Pump | Cost$ 3 U | ValidTgts$ Player | StackDescription$ None | SubAbility$ DBGainControl | SpellDescription$ Target player gains control of up to three target nonattacking creatures until end of turn. Untap those creatures. They block this turn if able.
-SVar:DBGainControl:DB$ GainControl | ValidTgts$ Creature.notattacking | TgtPrompt$ Select target nonattacking creature | AddKWs$ HIDDEN CARDNAME blocks each combat if able. | LoseControl$ EOT | TargetMin$ 0 | TargetMax$ 3 | NewController$ ParentTarget | Untap$ True
+A:SP$ Pump | ValidTgts$ Player | StackDescription$ None | SubAbility$ DBGainControl | SpellDescription$ Target player gains control of up to three target nonattacking creatures until end of turn. Untap those creatures. They block this turn if able.
+SVar:DBGainControl:DB$ GainControl | ValidTgts$ Creature.notattacking | TgtPrompt$ Select up to three target nonattacking creatures | LoseControl$ EOT | TargetMin$ 0 | TargetMax$ 3 | NewController$ ParentTarget | Untap$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | ForgetOnMoved$ Battlefield | StaticAbilities$ MustBlock | SpellDescription$ They block this turn if able.
+SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ Those creatures block this turn if able.
 AI:RemoveDeck:All
 Oracle:Target player gains control of up to three target nonattacking creatures until end of turn. Untap those creatures. They block this turn if able.

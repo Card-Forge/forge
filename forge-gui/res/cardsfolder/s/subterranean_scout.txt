@@ -2,7 +2,8 @@ Name:Subterranean Scout
 ManaCost:1 R
 Types:Creature Goblin Scout
 PT:2/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature with power 2 or less can't be blocked this turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less. | KW$ HIDDEN Unblockable
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUnblockable | TriggerDescription$ When CARDNAME enters the battlefield, target creature with power 2 or less can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | ValidTgts$ Creature.powerLE2 | TgtPrompt$ Select target creature with power 2 or less | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | AILogic$ Pump
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 SVar:PlayMain1:TRUE
 Oracle:When Subterranean Scout enters the battlefield, target creature with power 2 or less can't be blocked this turn.

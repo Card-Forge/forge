@@ -12,6 +12,8 @@ ALTERNATE
 Name:Aquatic Ingress
 ManaCost:2 U
 Types:Instant Adventure
-A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | NumAtt$ 1 | KW$ HIDDEN Unblockable | SpellDescription$ Up to two target creatures each get +1/+0 until end of turn and can't be blocked this turn.
+A:SP$ Pump | TargetMin$ 0 | TargetMax$ 2 | ValidTgts$ Creature | TgtPrompt$ Select up to two target creatures | NumAtt$ 1 | SubAbility$ DBUnblockable | StackDescription$ SpellDescription | SpellDescription$ Up to two target creatures each get +1/+0 until end of turn and can't be blocked this turn.
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ These creatures can't be blocked this turn.
 SVar:PlayMain1:TRUE
 Oracle:Up to two target creatures each get +1/+0 until end of turn and can't be blocked this turn. (Then exile this card. You may cast the creature later from exile.)

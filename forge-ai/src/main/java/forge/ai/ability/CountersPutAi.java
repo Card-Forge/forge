@@ -680,7 +680,7 @@ public class CountersPutAi extends CountersAi {
             CardCollection list = null;
 
             if (sa.isCurse()) {
-                list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
+                list = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
             } else {
                 list = new CardCollection(ai.getCardsIn(ZoneType.Battlefield));
             }

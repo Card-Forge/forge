@@ -3,7 +3,7 @@ ManaCost:3 U
 Types:Creature Spirit
 PT:3/3
 K:Disturb:3 U
-S:Mode$ Continuous | Affected$ Card.Self+attacking | AddHiddenKeyword$ Unblockable | IsPresent$ Card.Other+attacking | PresentCompare$ EQ0 | Description$ CARDNAME can't be blocked as long as it's attacking alone.
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self+attacking | IsPresent$ Card.Other+attacking | PresentCompare$ EQ0 | Description$ CARDNAME can't be blocked as long as it's attacking alone.
 DeckHas:Ability$Graveyard
 AlternateMode:DoubleFaced
 Oracle:Gutter Skulker can't be blocked as long as it's attacking alone.\nDisturb {3}{U} (You may cast this card from your graveyard transformed for its disturb cost.)
@@ -15,8 +15,8 @@ ManaCost:no cost
 Colors:blue
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy+attacking | AddHiddenKeyword$ Unblockable | IsPresent$ Card.attacking | PresentCompare$ EQ1 | Description$ Enchanted creature can't be blocked as long as it's attacking alone.
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy+attacking | IsPresent$ Card.attacking | PresentCompare$ EQ1 | Description$ Enchanted creature can't be blocked as long as it's attacking alone.
 R:Event$ Moved | ValidCard$ Card.Self | Destination$ Graveyard | ReplaceWith$ Exile | Description$ If CARDNAME would be put into a graveyard from anywhere, exile it instead.
 SVar:Exile:DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 Oracle:Enchant creature\nEnchanted creature can't be blocked as long as it's attacking alone.\nIf Gutter Shortcut would be put into a graveyard from anywhere, exile it instead.

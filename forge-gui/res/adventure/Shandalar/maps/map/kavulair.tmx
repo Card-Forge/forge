@@ -50,7 +50,7 @@
   &quot;type&quot;: &quot;randomCard&quot;,
   &quot;count&quot;: 1,
   &quot;probability&quot;: 0.8,
-  &quot;rarity&quot;: [ &quot;mythic&quot; ],
+  &quot;rarity&quot;: [ &quot;mythicrare&quot; ],
   &quot;colors&quot;: [ &quot;colorID&quot; ]
 },{
   &quot;type&quot;: &quot;randomCard&quot;,

@@ -1,0 +1,10 @@
+Name:Vinesoul Spider
+ManaCost:1 G
+Types:Creature Elemental Spider
+PT:3/2
+K:Reach
+T:Mode$ Phase | Phase$ End of Turn | Execute$ TrigChange | ValidPlayer$ You | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, put a random land card from your library into your graveyard.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Land.YouOwn | ChangeNum$ 1 | Hidden$ True | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Graveyard
+Oracle:Reach\nAt the beginning of your end step, put a random land card from your library into your graveyard.

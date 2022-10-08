@@ -2,10 +2,10 @@ Name:Gateway Sneak
 ManaCost:2 U
 Types:Creature Vedalken Rogue
 PT:1/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Gate.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a Gate enters the battlefield under your control, CARDNAME can't be blocked this turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ HIDDEN Unblockable | SpellDescription$ CARDNAME can't be blocked this turn.
-SVar:PlayMain1:TRUE
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Gate.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigUnblockable | TriggerDescription$ Whenever a Gate enters the battlefield under your control, CARDNAME can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, draw a card.
-SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:TrigDraw:DB$ Draw
 DeckHints:Type$Gate
 Oracle:Whenever a Gate enters the battlefield under your control, Gateway Sneak can't be blocked this turn.\nWhenever Gateway Sneak deals combat damage to a player, draw a card.

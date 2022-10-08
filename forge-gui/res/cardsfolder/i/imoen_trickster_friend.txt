@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Legendary Creature Human Rogue Wizard
 PT:2/1
 K:Specialize:5::This ability costs {3} less to activate if there are two or more instant and/or sorcery cards in your graveyard.:ReduceCost$ X
-S:Mode$ Continuous | Affected$ Card.Self+attacking | AddHiddenKeyword$ Unblockable | IsPresent$ Card.Other+attacking | PresentCompare$ EQ0 | Description$ CARDNAME can't be blocked as long as it's attacking alone.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self+attacking | IsPresent$ Card.Other+attacking | PresentCompare$ EQ0 | Description$ CARDNAME can't be blocked as long as it's attacking alone.
 SVar:X:Count$Compare Y GE2.3.0
 SVar:Y:Count$ValidGraveyard Instant.YouOwn,Sorcery.YouOwn
 DeckHas:Ability$Discard
@@ -17,7 +17,7 @@ Name:Imoen, Honorable Trickster
 ManaCost:1 W U
 Types:Legendary Creature Human Rogue Wizard
 PT:3/2
-K:Unblockable
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 T:Mode$ DamageDone | ValidSource$ Card.Self | OptionalDecider$ You | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, put a +1/+1 counter on each creature you control.
 SVar:TrigCounter:AB$ PutCounterAll | Cost$ ExileFromGrave<1/Instant;Sorcery/instant or sorcery> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 DeckHas:Ability$Counters
@@ -30,7 +30,7 @@ Name:Imoen, Wily Trickster
 ManaCost:1 U U
 Types:Legendary Creature Human Rogue Wizard
 PT:3/2
-K:Unblockable
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigImmTrigger | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. When you do, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
 SVar:TrigImmTrigger:AB$ ImmediateTrigger | Cost$ ExileFromGrave<1/Instant;Sorcery/instant or sorcery> | Execute$ TrigTap | Secondary$ True | TriggerDescription$ When you do, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.
 SVar:TrigTap:DB$ Tap | ValidTgts$ Creature.OppCtrl | TgtPromopt$ Select target creature an opponent controls | SubAbility$ DBPump
@@ -44,7 +44,7 @@ Name:Imoen, Occult Trickster
 ManaCost:1 U B
 Types:Legendary Creature Human Rogue Wizard
 PT:3/2
-K:Unblockable
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 T:Mode$ DamageDone | ValidSource$ Card.Self | OptionalDecider$ You | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, create a 2/2 black Zombie creature token.
 SVar:TrigToken:AB$ Token | Cost$ ExileFromGrave<1/Instant;Sorcery/instant or sorcery> | TokenScript$ b_2_2_zombie
 DeckHas:Ability$Token & Type$Zombie
@@ -57,7 +57,7 @@ Name:Imoen, Chaotic Trickster
 ManaCost:1 U R
 Types:Legendary Creature Human Rogue Wizard
 PT:3/2
-K:Unblockable
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, NICKNAME deals 2 damage to each opponent.
 SVar:TrigDamage:AB$ DealDamage | Cost$ ExileFromGrave<1/Instant;Sorcery/instant or sorcery> | Defined$ Opponent | NumDmg$ 2
 DeckHints:Ability$Graveyard & Type$Instant|Sorcery
@@ -69,7 +69,7 @@ Name:Imoen, Wise Trickster
 ManaCost:1 G U
 Types:Legendary Creature Human Rogue Wizard
 PT:3/2
-K:Unblockable
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 T:Mode$ DamageDone | ValidSource$ Card.Self | OptionalDecider$ You | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, you may exile an instant or sorcery card from your graveyard. If you do, draw a card and you may play an additional land this turn.
 SVar:TrigDraw:AB$ Draw | Cost$ ExileFromGrave<1/Instant;Sorcery/instant or sorcery> | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ Exploration

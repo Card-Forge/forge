@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import forge.game.keyword.Keyword;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -577,10 +578,10 @@ public class PlayerControllerAi extends PlayerController {
 
     @Override
     public String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes, boolean isOptional) {
-        String chosen = ComputerUtil.chooseSomeType(player, kindOfType, sa.getParam("AILogic"), validTypes, invalidTypes);
+        String chosen = ComputerUtil.chooseSomeType(player, kindOfType, sa, validTypes, invalidTypes);
         if (StringUtils.isBlank(chosen) && !validTypes.isEmpty()) {
             chosen = validTypes.iterator().next();
-            System.err.println("AI has no idea how to choose " + kindOfType +", defaulting to arbitrary element: chosen");
+            System.err.println("AI has no idea how to choose " + kindOfType +", defaulting to arbitrary element: " + chosen);
         }
         return chosen;
     }
@@ -939,6 +940,71 @@ public class PlayerControllerAi extends PlayerController {
             throw new InvalidParameterException("SA is not api-based, this is not supported yet");
         }
         return SpellApiToAi.Converter.get(api).chooseCounterType(options, sa, params);
+    }
+
+    @Override
+    public String chooseKeywordForPump(final List<String> options, final SpellAbility sa, final String prompt, final Card tgtCard) {
+        if (options.size() <= 1) {
+            return Iterables.getFirst(options, null);
+        }
+        List<String> possible = Lists.newArrayList();
+        CardCollection oppUntappedCreatures = CardLists.filter(player.getOpponents().getCreaturesInPlay(), CardPredicates.Presets.UNTAPPED);
+        if (tgtCard != null) {
+            for (String kw : options) {
+                if (tgtCard.hasKeyword(kw)) {
+                    continue;
+                } else if ("Indestructible".equals(kw)) {
+                    if (oppUntappedCreatures.isEmpty()) {
+                        continue; // no threats on battlefield - removal still a concern perhaps?
+                    } else {
+                        possible.clear();
+                        possible.add(kw); // prefer Indestructible above all else
+                        break;
+                    }
+                } else if ("Flying".equals(kw)) {
+                    if (oppUntappedCreatures.isEmpty()) {
+                        continue; // no need for evasion
+                    } else {
+                        boolean flyingGood = true;
+                        for (Card c : oppUntappedCreatures) {
+                            if (c.hasKeyword(Keyword.FLYING) || c.hasKeyword(Keyword.REACH)) {
+                                flyingGood = false;
+                                break;
+                            }
+                        }
+                        if (flyingGood) {
+                            possible.clear();
+                            possible.add(kw); // flying is great when no one else has it
+                            break;
+                        } // even if opp has flying or reach, flying might still be useful so we won't skip it
+                    }
+                } else if (kw.startsWith("Protection from ")) {
+                    //currently, keyword choice lists only include color protection
+                    final String fromWhat = kw.substring(16);
+                    boolean found = false;
+                    for (String color : MagicColor.Constant.ONLY_COLORS) {
+                        if (color.equalsIgnoreCase(fromWhat)) {
+                            CardCollection known = player.getOpponents().getCardsIn(ZoneType.Battlefield);
+                            for (final Card c : known) {
+                                if (c.associatedWithColor(color)) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (!found) {
+                        continue;
+                    }
+                }
+                possible.add(kw);
+            }
+        }
+        if (!possible.isEmpty()) {
+            return Aggregates.random(possible);
+        } else {
+            return Aggregates.random(options); // if worst comes to worst, at least do something
+        }
     }
 
     @Override
