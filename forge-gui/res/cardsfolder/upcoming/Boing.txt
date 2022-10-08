@@ -1,0 +1,7 @@
+Name:Boing!
+ManaCost:1 U
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBRoll | SpellDescription$ Return target creature to its owner's hand, then roll a six-sided die. If the result is 3 or less, scry a number of cards equal to the result.
+SVar:DBRoll:DB$ RollDice | ResultSVar$ Result | ResultSubAbilities$ 1-3:DBScry 
+SVar:DBScry:DB$ Scry | ScryNum$ Result 
+Oracle:Return target creature to its owner's hand, then roll a six-sided die. If the result is 3 or less, scry a number of cards equal to the result.
