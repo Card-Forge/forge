@@ -48,7 +48,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
 
     // Get Card From Editions Test fixtures
     protected final String originalArtShivanDragonEdition = "LEA";
-    protected final String latestArtShivanDragonEdition = "P30H";
+    protected final String latestArtShivanDragonEdition = "30A";
     protected final String latestArtShivanDragonEditionNoPromo = "M20";
 
     protected final String originalArtLightningDragonEdition = "USG";
@@ -654,7 +654,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
             nullCard = this.cardDb.getCardFromEditions(null, preference);
             assertNull(nullCard);
 
-            //P30H Shivan Dragon had 2 treatments, so bumped artIndex to 3
+            //30A Shivan Dragon had 2 treatments, so bumped artIndex to 3
             shivanNotExistingDragon = this.cardDb.getCardFromEditions(cardNameShivanDragon, preference, 3);
             assertNull(shivanNotExistingDragon);
 
@@ -1751,11 +1751,11 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
 
         Date alphaReleaseDate = null;
         Date currentDate = Date.from(Instant.now());
-        Date latestShivanDragonReleaseDateToDate = null; // latest print to date for Shivan is in P30H
+        Date latestShivanDragonReleaseDateToDate = null; // latest print to date for Shivan is in 30A
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             alphaReleaseDate = format.parse(alphaEditionReleaseDate);
-            latestShivanDragonReleaseDateToDate = format.parse("2022-09-09");
+            latestShivanDragonReleaseDateToDate = format.parse("2022-11-28");
         } catch (ParseException e) {
             e.printStackTrace();
             fail();

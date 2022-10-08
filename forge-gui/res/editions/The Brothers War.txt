@@ -10,6 +10,8 @@ ScryfallCode=BRO
 [cards]
 23 U Recruitment Officer @Johan Grenier
 81 M Surge Engine @Daarken
+163 R Phyrexian Dragon Engine @Chris Rahn
+216 M Mishra, Claimed by Gix @Chris Rahn
 218 R Queen Kayla bin-Kroog @Cristi Balanescu
 225 M Urza, Lord Protector @Ryan Pancoast
 238 R The Mightstone and Weakstone @Ryan Pancoast

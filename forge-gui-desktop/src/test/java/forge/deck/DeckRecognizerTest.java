@@ -1214,7 +1214,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertFalse(tokenCard.isFoil());
-        assertEquals(tokenCard.getEdition(), "VMA");
+        assertEquals(tokenCard.getEdition(), "30A");
         assertTrue(cardToken.cardRequestHasNoCode());
 
         lineRequest = "4x Power Sink+";
@@ -1226,7 +1226,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertTrue(tokenCard.isFoil());
-        assertEquals(tokenCard.getEdition(), "VMA");
+        assertEquals(tokenCard.getEdition(), "30A");
         assertTrue(cardToken.cardRequestHasNoCode());
 
         lineRequest = "Power Sink+";
@@ -1238,7 +1238,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertEquals(cardToken.getQuantity(), 1);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertTrue(tokenCard.isFoil());
-        assertEquals(tokenCard.getEdition(), "VMA");
+        assertEquals(tokenCard.getEdition(), "30A");
         assertTrue(cardToken.cardRequestHasNoCode());
     }
 
@@ -1268,7 +1268,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         tokenCard = cardToken.getCard();
         assertEquals(cardToken.getQuantity(), 2);
         assertEquals(tokenCard.getName(), "Counterspell");
-        assertEquals(tokenCard.getEdition(), "MH2");
+        assertEquals(tokenCard.getEdition(), "DMR");
         assertTrue(cardToken.cardRequestHasNoCode());
 
     }
@@ -1593,7 +1593,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         //assertEquals(cardToken.getTokenSection(), DeckSection.Main); //fix test since signature spell is allowed on commander section
         PaperCard tc = cardToken.getCard();
         assertEquals(tc.getName(), "Counterspell");
-        assertEquals(tc.getEdition(), "MH2");
+        assertEquals(tc.getEdition(), "DMR");
         assertTrue(cardToken.cardRequestHasNoCode());
 
         // Setting Original Core
@@ -1625,7 +1625,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertEquals(cardToken.getQuantity(), 4);
         assertEquals(tokenCard.getName(), "Power Sink");
         assertTrue(tokenCard.isFoil());
-        assertEquals(tokenCard.getEdition(), "VMA");
+        assertEquals(tokenCard.getEdition(), "30A");
         assertTrue(cardToken.cardRequestHasNoCode());
 
         recognizer.setArtPreference(CardDb.CardArtPreference.ORIGINAL_ART_CORE_EXPANSIONS_REPRINT_ONLY);
@@ -1697,7 +1697,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertEquals(ancestralCard.getName(), "Ancestral Recall");
         assertEquals(StaticData.instance().getCommonCards().getCardArtPreference(),
                 CardDb.CardArtPreference.LATEST_ART_ALL_EDITIONS);
-        assertEquals(ancestralCard.getEdition(), "VMA");
+        assertEquals(ancestralCard.getEdition(), "30A");
         assertTrue(cardToken.cardRequestHasNoCode());
 
         recognizer.setDeckFormatConstraint(DeckFormat.TinyLeaders);
@@ -2325,7 +2325,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         assertNotNull(token.getCard());
         PaperCard ancestralRecallCard = token.getCard();
         assertEquals(ancestralRecallCard.getName(), "Ancestral Recall");
-        assertEquals(ancestralRecallCard.getEdition(), "VMA");
+        assertEquals(ancestralRecallCard.getEdition(), "30A");
     }
 
     // === XMage Format
@@ -3077,7 +3077,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         token = recognizer.recognizeLine(lineRequest, null);
         assertNotNull(token);
         assertEquals(token.getType(), TokenType.LEGAL_CARD);
-        assertEquals(token.getText(), "Ancestral Recall [VMA] #1");
+        assertEquals(token.getText(), "Ancestral Recall [30A] #47");
         assertNotNull(token.getCard());
         assertNotNull(token.getTokenSection());
         assertEquals(token.getTokenSection(), DeckSection.Sideboard);
@@ -3087,7 +3087,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         token = recognizer.recognizeLine(lineRequest, null);
         assertNotNull(token);
         assertEquals(token.getType(), TokenType.LEGAL_CARD);
-        assertEquals(token.getText(), "Ancestral Recall [VMA] #1");
+        assertEquals(token.getText(), "Ancestral Recall [30A] #47");
         assertNotNull(token.getCard());
         assertNotNull(token.getTokenSection());
         assertEquals(token.getTokenSection(), DeckSection.Sideboard);
@@ -3097,7 +3097,7 @@ public class DeckRecognizerTest extends CardMockTestCase {
         token = recognizer.recognizeLine(lineRequest, null);
         assertNotNull(token);
         assertEquals(token.getType(), TokenType.LEGAL_CARD);
-        assertEquals(token.getText(), "Ancestral Recall [VMA] #1");
+        assertEquals(token.getText(), "Ancestral Recall [30A] #47");
         assertNotNull(token.getCard());
         assertTrue(token.cardRequestHasNoCode());
 
