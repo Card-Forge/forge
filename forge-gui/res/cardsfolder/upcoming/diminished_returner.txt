@@ -3,10 +3,10 @@ ManaCost:1 B B
 Types:Creature Phyrexian Skeleton
 PT:4/3
 K:CARDNAME enters the battlefield tapped.
-A:AB$ Effect | Cost$ B B | IsPresent$ Card.Self+toughnessGE2 | PresentZone$ Graveyard | ActivationZone$ Graveyard | StaticAbilities$ PerpetualDebuff | Name$ Dimished Returner's Perpetual Effect | SubAbility$ DBChangeZone | Duration$ Permanent | SpellDescription$ CARDNAME perpetually gets -1/-1, then return it to the battlefield. Activate only if CARDNAME is in your graveyard and its toughness is 2 or greater. 
+A:AB$ Effect | Cost$ B B | IsPresent$ Card.Self+toughnessGE2 | PresentZone$ Graveyard | ActivationZone$ Graveyard | StaticAbilities$ PerpetualDebuff | Name$ Dimished Returner's Perpetual Effect | SubAbility$ DBChangeZone | Duration$ Permanent | SpellDescription$ CARDNAME perpetually gets -1/-1, then return it to the battlefield. Activate only if CARDNAME is in your graveyard and its toughness is 2 or greater.
 SVar:PerpetualDebuff:Mode$ Continuous | Affected$ Card.EffectSource | AddPower$ -1 | AddToughness$ -1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets -1/-1.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Self
 SVar:DiscardMe:2
 SVar:SacMe:1
 DeckHas:Ability$Graveyard
-Oracle:Diminished Returner enters the battlefield tapped.\n{B}{B}:Diminished Returner perpetually gets -1/-1, then return it to the battlefield. Activate only if Diminished Returner is in your graveyard and its toughness is 2 or greater. 
+Oracle:Diminished Returner enters the battlefield tapped.\n{B}{B}: Diminished Returner perpetually gets -1/-1, then return it to the battlefield. Activate only if Diminished Returner is in your graveyard and its toughness is 2 or greater.
