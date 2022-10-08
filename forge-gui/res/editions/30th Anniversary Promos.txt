@@ -1,17 +1,39 @@
 [metadata]
 Code=P30A
 Date=2022-09-02
-Name=30th Anniversary Promos
+Name=30th Anniversary Play Promos
 Type=Promo
 ScryfallCode=P30A
 
 [cards]
 1 U Serra Angel @Kev Walker
-1F R Arcane Signet @Gaboleps
-F1★ R Richard Garfield, Ph.D. @Dave Dorman
 2 R Ball Lightning @Trevor Claxton
 3 R Fyndhorn Elves @Igor Kieryluk
 4 R Wall of Roots @Matt Stewart
 5 R Wood Elves @Rebecca Guay
 6 R Windfall @Pete Venters
 7 R Loyal Retainers @Solomon Au Yeung
+8 R Kor Haven @Mark Poole
+9 R Vindicate @Karla Ortiz
+10 R Exalted Angel @Tyler Jacobson
+11 R Temple of the False God @Brian Snõddy
+12 R Eternal Witness @Scott M. Fischer
+13 R Chord of Calling @Karl Kopinski
+14 R Niv-Mizzet, the Firemind @Daarken
+15 R Tarmogoyf @Ryan Barger
+16 R Glen Elendra Archmage @Warren Mahy
+17 U Acidic Slime @Karl Kopinski
+18 R Terastodon @Lars Grant-West
+19 R Hornet Queen @Martina Pilcerova
+20 R Harvester of Souls @Thomas M. Baxa
+21 M Kalonian Hydra @Chris Rahn
+22 R Goblin Rabblemaster @Svetlin Velinov
+23 M Dragonlord Atarka @Greg Staples
+24 R Dramatic Reversal @Eric Deschamps
+25 R Path of Ancestry @Alayna Danner
+26 R Beast Whisperer @Pete Venters
+27 R Dovin's Veto @Drew Tucker
+28 R Vito, Thorn of the Dusk Rose @Lie Setiawan
+29 R Deadly Dispute @Irina Nordsol
+1F R Arcane Signet @Gaboleps
+F1★ R Richard Garfield, Ph.D. @Dave Dorman

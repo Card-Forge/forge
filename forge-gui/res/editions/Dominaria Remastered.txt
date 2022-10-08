@@ -8,9 +8,24 @@ Type=Reprint
 ScryfallCode=DMR
 
 [cards]
+31 U Swords to Plowshares @Jesper Ejsing
 50 M Force of Will @Donato Giancola
+69 M Time Stretch @Dominik Mayer
+139 R Sneak Attack @Jerry Tiritilli
 149 R Arboria @Uriah Voth
+151 R Birds of Paradise @Mark Poole
+227 R Jester's Cap @Jesper Ejsing
+275 U Swords to Plowshares @Jesper Ejsing
 284 M Force of Will @Donato Giancola
+294 M Time Stretch @Dominik Mayer
+331 R Sneak Attack @Jerry Tiritilli
 335 R Arboria @Uriah Voth
+336 R Birds of Paradise @Mark Poole
+371 U Tatyova, Benthic Druid @Mathias Kollros
+381 R Jester's Cap @Jesper Ejsing
 418 M Force of Will @Richard Kane Ferguson
+422 M Time Stretch @Dermot Power
 438 R Arboria @Dave Kendall
+439 R Birds of Paradise @Darrell Riche
+449 R Jester's Cap @Matt Cavotta
+457 R Counterspell @Mark Poole
