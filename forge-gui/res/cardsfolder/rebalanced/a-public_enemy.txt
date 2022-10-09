@@ -1,0 +1,9 @@
+Name:A-Public Enemy
+ManaCost:2 U
+Types:Enchantment Aura
+K:Enchant creature
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ MustAttack | ValidCreature$ Creature | MustAttack$ EnchantedController | Description$ All creatures attack enchanted creature's controller each combat if able.
+T:Mode$ ChangesZone | ValidCard$ Card.AttachedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | TriggerDescription$ When enchanted creature dies, draw two cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2
+Oracle:Enchant creature\nAll creatures attack enchanted creature's controller each combat if able.\nWhen enchanted creature dies, draw two cards.
