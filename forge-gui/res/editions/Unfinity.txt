@@ -545,3 +545,15 @@ F525 R D00-DL, Caricaturist @Scooter
 536 R Sacred Foundry @Cliff Childs
 537 R Breeding Pool @Bruce Brenneise
 F538 R Water Gun Balloon Game @Ralph Horsley
+
+[tokens]
+w_1_1_a_clown_robot
+w_1_1_a_clown_robot
+storm_crow
+b_2_2_zombie_employee
+r_1_1_balloon_flying
+g_1_1_squirrel
+c_a_food_sac
+c_a_food_sac
+c_a_treasure_sac
+c_a_treasure_sac
