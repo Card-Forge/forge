@@ -68,6 +68,8 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
     protected final List<String> setsWithBasicLands = new ArrayList<>();
     protected List<PaperCard> rankedColorList;
 
+    protected boolean isForAI = false;
+
     // Views for aiPlayable
     protected Iterable<PaperCard> onColorCreaturesAndSpells;
 
@@ -99,6 +101,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         this.availableList = dList;
         keyCard=keyCard0;
         secondKeyCard=secondKeyCard0;
+        this.isForAI = isForAI;
         // remove Unplayables
         if(isForAI) {
             final Iterable<PaperCard> playables = Iterables.filter(availableList,
@@ -275,7 +278,7 @@ public class CardThemedDeckBuilder extends DeckGeneratorBase {
         addLandKeyCards();
 
         // 8. Add non-basic lands
-        List<String> duals = getDualLandList();
+        List<String> duals = getDualLandList(isForAI ? CardRulesPredicates.IS_KEPT_IN_AI_DECKS : Predicates.alwaysTrue());
         addNonBasicLands();
         if (logToConsole) {
             System.out.println("Post Nonbasic lands : " + deckList.size());

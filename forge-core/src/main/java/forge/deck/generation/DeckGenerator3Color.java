@@ -119,7 +119,7 @@ public class DeckGenerator3Color extends DeckGeneratorBase {
         trace.append("numLands:").append(numLands).append("\n");
 
         // Add dual lands
-        List<String> duals = getDualLandList();
+        List<String> duals = getDualLandList(forAi);
         for (String s : duals) {
             this.cardCounts.put(s, 0);
         }

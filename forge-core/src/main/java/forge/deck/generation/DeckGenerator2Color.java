@@ -109,7 +109,7 @@ public class DeckGenerator2Color extends DeckGeneratorBase {
         trace.append(String.format("Adjusted deck size to: %d, should add %d land(s)%n", size - numLands, numLands));
 
         // Add dual lands
-        List<String> duals = getDualLandList();
+        List<String> duals = getDualLandList(forAi);
         for (String s : duals) {
             this.cardCounts.put(s, 0);
         }

@@ -53,7 +53,7 @@ public abstract class DeckGeneratorBase {
     protected int maxDuplicates = 4;
     protected boolean useArtifacts = true;
     protected String basicLandEdition = null;
-    protected List<String> inverseDLands= new ArrayList<>();
+    protected List<String> inverseDLands = new ArrayList<>();
     protected List<String> dLands = new ArrayList<>();
 
     protected ColorSet colors;
@@ -79,7 +79,7 @@ public abstract class DeckGeneratorBase {
         fullCardDB = pool0;
     }
 
-    public void setSingleton(boolean singleton){
+    public void setSingleton(boolean singleton) {
         maxDuplicates = singleton ? 1 : 4;
     }
     public void setUseArtifacts(boolean value) {
@@ -285,7 +285,7 @@ public abstract class DeckGeneratorBase {
     protected Iterable<PaperCard> selectCardsOfMatchingColorForPlayer(boolean forAi) {
         // start with all cards
         // remove cards that generated decks don't like
-        Predicate<CardRules> canPlay = forAi ? AI_CAN_PLAY : HUMAN_CAN_PLAY;
+        Predicate<CardRules> canPlay = forAi ? AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
         Predicate<CardRules> hasColor = new MatchColorIdentity(colors);
         Predicate<CardRules> canUseInFormat = new Predicate<CardRules>() {
             @Override
@@ -298,7 +298,7 @@ public abstract class DeckGeneratorBase {
         if (useArtifacts) {
             hasColor = Predicates.or(hasColor, COLORLESS_CARDS);
         }
-        return Iterables.filter(pool.getAllCards(),Predicates.compose(Predicates.and(canPlay, hasColor, canUseInFormat), PaperCard.FN_GET_RULES));
+        return Iterables.filter(pool.getAllCards(), Predicates.compose(Predicates.and(canPlay, hasColor, canUseInFormat), PaperCard.FN_GET_RULES));
     }
 
     protected static Map<String, Integer> countLands(ItemPool<PaperCard> outList) {
@@ -333,20 +333,8 @@ public abstract class DeckGeneratorBase {
         final Integer boxed = map.get(key);
         map.put(key, boxed == null ? delta : boxed.intValue() + delta);
     }
-    
-    public static final Predicate<CardRules> AI_CAN_PLAY = new Predicate<CardRules>() {
-        @Override
-        public boolean apply(CardRules c) {
-            return !c.getAiHints().getRemAIDecks() && !c.getAiHints().getRemRandomDecks();
-        }
-    };
 
-    public static final Predicate<CardRules> HUMAN_CAN_PLAY = new Predicate<CardRules>() {
-        @Override
-        public boolean apply(CardRules c) {
-            return !c.getAiHints().getRemRandomDecks();
-        }
-    };
+    public static final Predicate<CardRules> AI_CAN_PLAY = Predicates.and(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS);
 
     public static final Predicate<CardRules> COLORLESS_CARDS = new Predicate<CardRules>() {
         @Override
@@ -389,12 +377,15 @@ public abstract class DeckGeneratorBase {
         }
     }
 
+    protected List<String> getDualLandList(boolean forAi) {
+        return getDualLandList(forAi ? AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS);
+    }
     /**
      * Get list of dual lands for this color combo.
      *
      * @return dual land names
      */
-    protected List<String> getDualLandList() {
+    protected List<String> getDualLandList(Predicate<CardRules> canPlay) {
         if (colors.countColors() > 3) {
             addCardNameToList("Rupture Spire", dLands);
             addCardNameToList("Undiscovered Paradise", dLands);
@@ -406,14 +397,15 @@ public abstract class DeckGeneratorBase {
         }
 
         //filter to provide all dual lands from pool matching 2 or 3 colors from current deck
-        Predicate<PaperCard> dualLandFilter = Predicates.compose(CardRulesPredicates.coreType(true, CardType.CoreType.Land), PaperCard.FN_GET_RULES);
-        Predicate<PaperCard> exceptBasicLand = Predicates.not(Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, PaperCard.FN_GET_RULES));
-        Iterable<PaperCard> landCards = pool.getAllCards(Predicates.and(dualLandFilter,exceptBasicLand));
+        Predicate<CardRules> dualLandFilter = CardRulesPredicates.coreType(true, CardType.CoreType.Land);
+        Predicate<CardRules> exceptBasicLand = Predicates.not(CardRulesPredicates.Presets.IS_BASIC_LAND);
+
+        Iterable<PaperCard> landCards = pool.getAllCards(Predicates.compose(Predicates.and(dualLandFilter, exceptBasicLand, canPlay), PaperCard.FN_GET_RULES));
         Iterable<String> dualLandPatterns = Arrays.asList("Add \\{([WUBRG])\\} or \\{([WUBRG])\\}",
                 "Add \\{([WUBRG])\\}, \\{([WUBRG])\\}, or \\{([WUBRG])\\}",
                 "Add \\{([WUBRG])\\}\\{([WUBRG])\\}",
                 "Add \\{[WUBRG]\\}\\{[WUBRG]\\}, \\{([WUBRG])\\}\\{([WUBRG])\\}, or \\{[WUBRG]\\}\\{[WUBRG]\\}");
-        for (String pattern:dualLandPatterns){
+        for (String pattern:dualLandPatterns) {
             regexLandSearch(pattern, landCards);
         }
         regexFetchLandSearch(landCards);
@@ -421,13 +413,10 @@ public abstract class DeckGeneratorBase {
         return dLands;
     }
 
-    public List<String> regexLandSearch(String pattern, Iterable<PaperCard> landCards){
+    public List<String> regexLandSearch(String pattern, Iterable<PaperCard> landCards) {
         //final List<String> dLands = new ArrayList<>();
         Pattern p = Pattern.compile(pattern);
-        for (PaperCard card:landCards){
-            if (card.getRules().getAiHints().getRemAIDecks()) {
-                continue;
-            }
+        for (PaperCard card:landCards) {
             Matcher matcher = p.matcher(card.getRules().getOracleText());
             while (matcher.find()) {
                 List<String> manaColorNames = new ArrayList<>();
@@ -445,7 +434,7 @@ public abstract class DeckGeneratorBase {
         return dLands;
     }
 
-    public List<String> regexFetchLandSearch(Iterable<PaperCard> landCards){
+    public List<String> regexFetchLandSearch(Iterable<PaperCard> landCards) {
         final String fetchPattern="Search your library for an* ([^\\s]*) or ([^\\s]*) card";
         //final List<String> dLands = new ArrayList<String>();
         Map<String,String> colorLookup= new HashMap<>();
@@ -455,10 +444,7 @@ public abstract class DeckGeneratorBase {
         colorLookup.put("Island","U");
         colorLookup.put("Swamp","B");
         Pattern p = Pattern.compile(fetchPattern);
-        for (PaperCard card:landCards){
-            if (card.getRules().getAiHints().getRemAIDecks()) {
-                continue;
-            }
+        for (PaperCard card:landCards) {
             Matcher matcher = p.matcher(card.getRules().getOracleText());
             while (matcher.find()) {
                 List<String> manaColorNames = new ArrayList<>();

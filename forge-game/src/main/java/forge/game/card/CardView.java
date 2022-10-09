@@ -1262,7 +1262,7 @@ public class CardView extends GameEntityView {
                 num = c.getNetPower();
             }
             if (c.getCurrentState().getView() != this && c.getAlternateState() != null) {
-                num -= c.getBasePower() + c.getAlternateState().getBasePower();
+                num = num - c.getBasePower() + c.getAlternateState().getBasePower();
             }
             set(TrackableProperty.Power, num);
         }
@@ -1287,7 +1287,7 @@ public class CardView extends GameEntityView {
                 num = c.getNetToughness();
             }
             if (c.getCurrentState().getView() != this && c.getAlternateState() != null) {
-                num -= c.getBaseToughness() + c.getAlternateState().getBaseToughness();
+                num = num - c.getBaseToughness() + c.getAlternateState().getBaseToughness();
             }
             set(TrackableProperty.Toughness, num);
         }
