@@ -302,7 +302,7 @@ public class StaticAbility extends CardTraitBase implements IIdentifiable, Clone
 
         if (mode.equals("CantAttack")) {
             return StaticAbilityCantAttackBlock.applyCantAttackAbility(this, card, target);
-        } else if (mode.equals("CantBlockBy") && target instanceof Card) {
+        } else if (mode.equals("CantBlockBy")) { // null allowed, so no instanceof check
             return StaticAbilityCantAttackBlock.applyCantBlockByAbility(this, card, (Card)target);
         } else if (mode.equals("CanAttackIfHaste")) {
             return StaticAbilityCantAttackBlock.applyCanAttackHasteAbility(this, card, target);

@@ -555,10 +555,19 @@ public class CombatUtil {
                 return false;
             }
         }
+
+        // Unblockable check
+        for (final Card ca : attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CantBlockBy", attacker, null)) {
+                    return false;
+                }
+            }
+        }
+
         return canBeBlocked(attacker, defendingPlayer);
     }
 
-    // can the attacker be blocked at all?
     /**
      * <p>
      * canBeBlocked.
