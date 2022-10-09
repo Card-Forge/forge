@@ -547,13 +547,13 @@ F525 R D00-DL, Caricaturist @Scooter
 F538 R Water Gun Balloon Game @Ralph Horsley
 
 [tokens]
-w_1_1_a_clown_robot
-w_1_1_a_clown_robot
-storm_crow
 b_2_2_zombie_employee
-r_1_1_balloon_flying
+c_a_food_sac
+c_a_food_sac
+c_a_treasure_sac
+c_a_treasure_sac
 g_1_1_squirrel
-c_a_food_sac
-c_a_food_sac
-c_a_treasure_sac
-c_a_treasure_sac
+r_1_1_balloon_flying
+storm_crow
+w_1_1_a_clown_robot
+w_1_1_a_clown_robot
