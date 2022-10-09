@@ -1,0 +1,8 @@
+Name:A-Forge Boss
+ManaCost:2 B R
+Types:Creature Human Warrior
+PT:4/4
+T:Mode$ Sacrificed | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | ActivationLimit$ 1 | TriggerDescription$ Whenever you sacrifice one or more other creatures, CARDNAME deals 2 damage to each opponent. This ability triggers only once each turn.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 2
+DeckNeeds:Ability$Sacrifice
+Oracle:Whenever you sacrifice one or more other creatures, Forge Boss deals 2 damage to each opponent. This ability triggers only once each turn.
