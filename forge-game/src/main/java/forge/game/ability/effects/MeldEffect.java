@@ -7,12 +7,12 @@ import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
-
 import java.util.Arrays;
 
 public class MeldEffect extends SpellAbilityEffect {
@@ -54,12 +54,20 @@ public class MeldEffect extends SpellAbilityEffect {
                 return;
             }
         }
+        
+        if (sa.hasParam("Tapped")) {
+            primary.setTapped(true);
+        }
 
         primary.changeToState(CardStateName.Meld);
         primary.setBackSide(true);
         primary.setMeldedWith(secondary);
         PlayerZoneBattlefield bf = (PlayerZoneBattlefield)controller.getZone(ZoneType.Battlefield);
-        game.getAction().changeZone(primary.getZone(), bf, primary, 0, sa);
         bf.addToMelded(secondary);
+        Card movedCard = game.getAction().changeZone(primary.getZone(), bf, primary, 0, sa);
+        if (addToCombat(movedCard, movedCard.getController(), sa, "Attacking", "Blocking")) {
+            game.updateCombatForView();
+            game.fireEvent(new GameEventCombatChanged());
+        }
     }
 }
