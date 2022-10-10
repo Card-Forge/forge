@@ -8,6 +8,6 @@ ScryfallCode=PL22
 [cards]
 1 R Temur Sabertooth @tswck
 2 R Jedit Ojanen @
-4 M Snapdax, Apex of the Hunt @Walleystation
 3 M Yuriko, the Tiger's Shadow @Walleystation
+4 M Snapdax, Apex of the Hunt @Walleystation
 5 R Herald's Horn @tswck
