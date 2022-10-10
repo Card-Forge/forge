@@ -1055,11 +1055,9 @@ public class AiController {
                 // Cheaper Spectacle costs should be preferred
                 // FIXME: Any better way to identify that these are the same ability, one with Spectacle and one not?
                 // (looks like it's not a full-fledged alternative cost as such, and is not processed with other alt costs)
-                if (a.isSpectacle() && !b.isSpectacle()
-                        && a.getPayCosts().getTotalMana().getCMC() < b.getPayCosts().getTotalMana().getCMC()) {
+                if (a.isSpectacle() && !b.isSpectacle() && a1 < b1) {
                     return 1;
-                } else if (b.isSpectacle() && !a.isSpectacle()
-                        && b.getPayCosts().getTotalMana().getCMC() < a.getPayCosts().getTotalMana().getCMC()) {
+                } else if (b.isSpectacle() && !a.isSpectacle() && b1 < a1) {
                     return 1;
                 }
             }
@@ -1087,6 +1085,9 @@ public class AiController {
                 }
                 if (source.hasSVar("AIPriorityModifier")) {
                     p += Integer.parseInt(source.getSVar("AIPriorityModifier"));
+                }
+                if (ComputerUtilCard.isCardRemAIDeck(source)) {
+                    p -= 10;
                 }
                 // don't play equipments before having any creatures
                 if (source.isEquipment() && noCreatures) {
@@ -1691,6 +1692,7 @@ public class AiController {
         Iterables.removeIf(saList, new Predicate<SpellAbility>() {
             @Override
             public boolean apply(final SpellAbility spellAbility) { //don't include removedAI cards if somehow the AI can play the ability or gain control of unsupported card
+                // TODO allow when experimental profile?
                 return spellAbility instanceof LandAbility || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
             }
         });

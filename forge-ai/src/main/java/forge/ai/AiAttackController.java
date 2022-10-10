@@ -359,7 +359,7 @@ public class AiAttackController {
             }
         });
 
-        final List<Card> notNeededAsBlockers = new CardCollection(attackers);
+        final CardCollection notNeededAsBlockers = new CardCollection(attackers);
 
         // don't hold back creatures that can't block any of the human creatures
         final List<Card> blockers = getPossibleBlockers(attackers, opponentsAttackers, true);
@@ -378,7 +378,7 @@ public class AiAttackController {
             int thresholdMod = 0;
             int lastAcceptableBaselineLife = 0;
             if (pilotsNonAggroDeck) {
-                lastAcceptableBaselineLife = ComputerUtil.predictNextCombatsRemainingLife(ai, playAggro, pilotsNonAggroDeck, 0, new CardCollection(notNeededAsBlockers));
+                lastAcceptableBaselineLife = ComputerUtil.predictNextCombatsRemainingLife(ai, playAggro, pilotsNonAggroDeck, 0, notNeededAsBlockers);
                 if (!ai.isCardInPlay("Laboratory Maniac")) {
                     // AI is getting milled out
                     thresholdMod += 3 - Math.min(ai.getCardsIn(ZoneType.Library).size(), 3);
@@ -397,7 +397,7 @@ public class AiAttackController {
                     continue;
                 }
                 notNeededAsBlockers.add(c);
-                int currentBaselineLife = ComputerUtil.predictNextCombatsRemainingLife(ai, playAggro, pilotsNonAggroDeck, 0, new CardCollection(notNeededAsBlockers));
+                int currentBaselineLife = ComputerUtil.predictNextCombatsRemainingLife(ai, playAggro, pilotsNonAggroDeck, 0, notNeededAsBlockers);
                 // AI doesn't know from what it will lose, so it might still keep an unnecessary blocker back sometimes
                 if (currentBaselineLife == Integer.MIN_VALUE) {
                     notNeededAsBlockers.remove(c);
@@ -839,6 +839,7 @@ public class AiAttackController {
                 if (attackMax != -1 && combat.getAttackers().size() >= attackMax)
                     return aiAggression;
 
+                // TODO if lifeInDanger use chance to hold back some
                 if (canAttackWrapper(attacker, defender) && isEffectiveAttacker(ai, attacker, combat, defender)) {
                     combat.addAttacker(attacker, defender);
                 }
@@ -848,7 +849,7 @@ public class AiAttackController {
         }
 
         // Cards that are remembered to attack anyway (e.g. temporarily stolen creatures)
-        if (ai.getController() instanceof PlayerControllerAi) {
+        if (ai.getController().isAI()) {
             // Only do this if |ai| is actually an AI - as we could be trying to predict how the human will attack.
             for (Card attacker : this.attackers) {
                 if (AiCardMemory.isRememberedCard(ai, attacker, AiCardMemory.MemorySet.MANDATORY_ATTACKERS)) {
@@ -894,7 +895,7 @@ public class AiAttackController {
             aiAggression = 6;
             for (Card attacker : this.attackers) {
                 // reached max, breakup
-                if (attackMax != -1 && combat.getAttackers().size() >= attackMax)
+                if (combat.getAttackers().size() >= attackMax)
                     break;
                 if (canAttackWrapper(attacker, defender) && shouldAttack(attacker, this.blockers, combat, defender)) {
                     combat.addAttacker(attacker, defender);

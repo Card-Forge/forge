@@ -336,7 +336,7 @@ public abstract class PumpAiBase extends SpellAbilityAi {
                     Keyword.FLANKING).isEmpty();
         } else if (keyword.startsWith("Trample")) {
             return !ph.isPlayerTurn(opp) && (CombatUtil.canAttack(card, opp) || (combat != null && combat.isAttacking(card)))
-                    && CombatUtil.canBeBlocked(card, opp)
+                    && CombatUtil.canBeBlocked(card, null, opp)
                     && !ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && newPower > 1
                     && Iterables.any(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card));

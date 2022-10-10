@@ -1061,7 +1061,7 @@ public class AiBlockController {
 
         // remove all attackers that can't be blocked anyway
         for (final Card a : attackers) {
-            if (!CombatUtil.canBeBlocked(a, ai)) {
+            if (!CombatUtil.canBeBlocked(a, null, ai)) { // pass null to skip redundant checks for performance
                 attackersLeft.remove(a);
             }
         }

@@ -385,6 +385,9 @@ public class ComputerUtilCard {
      * @return the card
      */
     public static Card getBestCreatureAI(final Iterable<Card> list) {
+        if (Iterables.size(list) == 1) {
+            return Iterables.get(list, 0);
+        }
         return Aggregates.itemWithMax(Iterables.filter(list, CardPredicates.Presets.CREATURES), ComputerUtilCard.creatureEvaluator);
     }
 
@@ -397,6 +400,9 @@ public class ComputerUtilCard {
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getWorstCreatureAI(final Iterable<Card> list) {
+        if (Iterables.size(list) == 1) {
+            return Iterables.get(list, 0);
+        }
         return Aggregates.itemWithMin(Iterables.filter(list, CardPredicates.Presets.CREATURES), ComputerUtilCard.creatureEvaluator);
     }
 
@@ -410,6 +416,9 @@ public class ComputerUtilCard {
      * @return a {@link forge.game.card.Card} object.
      */
     public static Card getBestCreatureToBounceAI(final CardCollectionView list) {
+        if (Iterables.size(list) == 1) {
+            return Iterables.get(list, 0);
+        }
         final int tokenBonus = 60;
         Card biggest = null;
         int biggestvalue = -1;
