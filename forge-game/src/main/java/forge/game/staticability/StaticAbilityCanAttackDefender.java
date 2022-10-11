@@ -31,8 +31,12 @@ public class StaticAbilityCanAttackDefender {
     static String MODE = "CanAttackDefender";
 
     public static boolean canAttack(final Card card, final GameEntity target) {
+        final Game game = card.getGame();
+        if (game == null) {
+            return false;
+        }
         // CanAttack static abilities
-        for (final Card ca : target.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
                     continue;
