@@ -8,8 +8,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Card.nonLand+YouOwn | ChoiceTitle$ Choose a nonland card in your hand | Amount$ 1 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualORing | Name$ Pull of the Mist Moon's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
 SVar:PerpetualORing:Mode$ Continuous | Affected$ Card.ChosenCard | AddTrigger$ ETBExile | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | SubAbility$ DBCleanup | Description$ The chosen card perpetually gains "When this permanent enters the battlefield, exile target nonland permanent an opponent controls until this permanent leaves the battlefield."
-SVar:ETBExile:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExileBis | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
-SVar:TrigExileBis:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Duration$ UntilHostLeavesPlay
+SVar:ETBExile:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
 SVar:OblivionRing:TRUE
 DeckHas:Color$Blue
