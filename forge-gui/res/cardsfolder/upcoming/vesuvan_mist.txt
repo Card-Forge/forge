@@ -10,5 +10,5 @@ SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | Aff
 SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
 SVar:DBUpdate:DB$ UpdateRemember
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
-DeckHas:Color$Black
+DeckHints:Color$Black
 Oracle:Kicker {1}{B}\nReturn target nontoken, nonland permanent to its owner's hand. If this spell was kicked, conjure a duplicate of that card into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
