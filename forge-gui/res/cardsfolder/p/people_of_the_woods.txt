@@ -5,5 +5,4 @@ PT:1/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetToughness$ X | Description$ CARDNAME's toughness is equal to the number of Forests you control.
 SVar:X:Count$Valid Forest.YouCtrl
 SVar:BuffedBy:Forest
-Svar:NeedsToPlayVar:X GE1
 Oracle:People of the Woods's toughness is equal to the number of Forests you control.
