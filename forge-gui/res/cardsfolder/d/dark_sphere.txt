@@ -7,4 +7,5 @@ SVar:DBPrevent:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card.Chos
 SVar:DBReplace:DB$ ReplaceDamage | Amount$ ShieldAmount | SubAbility$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:ShieldAmount:ReplaceCount$DamageAmount/HalfDown
+DeckHas:Ability$Sacrifice
 Oracle:{T}, Sacrifice Dark Sphere: The next time a source of your choice would deal damage to you this turn, prevent half that damage, rounded down.

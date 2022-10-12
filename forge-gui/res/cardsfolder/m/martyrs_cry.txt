@@ -7,4 +7,7 @@ SVar:DBDraw:DB$ Draw | Defined$ Remembered | NumCards$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Valid Card.RememberedPlayerCtrl
 AI:RemoveDeck:Random
+SVar:NeedsToPlayVar:CountOpps GTCountMe
+SVar:CountOpps:Count$Valid Creature.OppCtrl+White
+SVar:CountMe:Count$Valid Creature.YouCtrl+White
 Oracle:Exile all white creatures. For each creature exiled this way, its controller draws a card.

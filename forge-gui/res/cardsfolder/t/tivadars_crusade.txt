@@ -3,4 +3,7 @@ ManaCost:1 W W
 Types:Sorcery
 A:SP$ DestroyAll | Cost$ 1 W W | ValidCards$ Goblin | SpellDescription$ Destroy all Goblins.
 AI:RemoveDeck:Random
+SVar:NeedsToPlayVar:CountOpps GTCountMe
+SVar:CountOpp:Count$Valid Goblin.OppCtrl
+SVar:CountMe:Count$Valid Goblin.YouCtrl
 Oracle:Destroy all Goblins.

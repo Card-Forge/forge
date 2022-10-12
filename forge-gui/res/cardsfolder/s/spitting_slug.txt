@@ -7,4 +7,5 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ PumpSelf | Secondary$ True | Tr
 SVar:PumpSelf:DB$ Pump | Defined$ Self | KW$ First Strike | UnlessCost$ 1 G | UnlessPayer$ You | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid | SubAbility$ PumpOthers
 SVar:PumpOthers:DB$ PumpAll | ValidCards$ Creature.blockingSource,Creature.blockedBySource | KW$ First Strike
 AI:RemoveDeck:All
+DeckHas:Keyword$FirstStrike
 Oracle:Whenever Spitting Slug blocks or becomes blocked, you may pay {1}{G}. If you do, Spitting Slug gains first strike until end of turn. Otherwise, each creature blocking or blocked by Spitting Slug gains first strike until end of turn.

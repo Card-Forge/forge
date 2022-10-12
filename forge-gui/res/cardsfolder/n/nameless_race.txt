@@ -13,6 +13,6 @@ SVar:Limit:SVar$Active/Plus.Buried
 SVar:Active:Count$Valid Permanent.White+nonToken+OppCtrl
 SVar:Buried:Count$ValidGraveyard Card.White+OppCtrl
 SVar:LifePaidOnETB:Number$0
-AI:RemoveDeck:All
+SVar:NeedstoPlayVar:Limit GE1
 AI:RemoveDeck:Random
 Oracle:Trample\nAs Nameless Race enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.\nNameless Race's power and toughness are each equal to the life paid as it entered the battlefield.
