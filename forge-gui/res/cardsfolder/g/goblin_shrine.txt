@@ -3,7 +3,7 @@ ManaCost:1 R R
 Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ 1 R R | ValidTgts$ Land | AITgts$ Mountain.Basic | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.Goblin | AddPower$ 1 | IsPresent Land.AttachedBy+Basic+Mountain | Description$ If enchanted land is a basic Mountain, Goblin creatures get +1/+0.
+S:Mode$ Continuous | Affected$ Creature.Goblin | AddPower$ 1 | IsPresent$ Land.AttachedBy+Basic+Mountain | Description$ If enchanted land is a basic Mountain, Goblin creatures get +1/+0.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME leaves the battlefield, it deals 1 damage to each Goblin creature.
 SVar:TrigDealDamage:DB$ DamageAll | ValidCards$ Creature.Goblin | NumDmg$ 1
 SVar:PlayMain1:TRUE
