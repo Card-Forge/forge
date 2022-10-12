@@ -7,7 +7,7 @@ SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredPlayer | Amount$ X | Choices$
 SVar:DBUntap:DB$ RepeatEach | DefinedCards$ ChosenCard | RepeatSubAbility$ UntapEach
 SVar:UntapEach:DB$ Untap | Defined$ Remembered | UnlessCost$ 4 | UnlessPayer$ RememberedController | UnlessSwitched$ True | ShowCurrentCard$ Remembered
 SVar:X:Count$Valid Creature.tapped+Blue+ActivePlayerCtrl
-SVar:NeedsToPlay:CountOpps GTCountMe
+SVar:NeedsToPlayVar:CountOpps GTCountMe
 SVar:CountOpps:Count$Valid Creature.OppCtrl+Blue/LimitMax.3
 SVar:CountMe:Count$Valid Creature.YouCtrl+Blue
 SVar:NonStackingEffect:True
