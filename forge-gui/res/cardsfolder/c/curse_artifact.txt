@@ -7,5 +7,6 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | Execute$ Trig
 SVar:TrigCurseArtifactSacrifice:DB$ Sacrifice | Defined$ TriggeredPlayer | SacValid$ Artifact.EnchantedBy | Optional$ True | RememberSacrificed$ True | SubAbility$ DBCurseArtifactDamage
 SVar:DBCurseArtifactDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCurseArtifactCleanup
 SVar:DBCurseArtifactCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Sacrifice
 AI:RemoveDeck:Random
 Oracle:Enchant artifact\nAt the beginning of the upkeep of enchanted artifact's controller, Curse Artifact deals 2 damage to that player unless they sacrifice that artifact.
