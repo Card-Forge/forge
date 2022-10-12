@@ -3,7 +3,4 @@ ManaCost:U
 Types:Instant
 A:SP$ TapAll | Cost$ U | ValidCards$ Creature.Blue | SpellDescription$ Tap all blue creatures.
 AI:RemoveDeck:Random
-SVar:NeedsToPlayVar:CountOpps GTCountMe
-SVar:CountOpp:Count$Valid Creature.OppCtrl+Blue
-SVar:CountMe:Count$Valid Creature.YouCtrl+Blue
 Oracle:Tap all blue creatures.
