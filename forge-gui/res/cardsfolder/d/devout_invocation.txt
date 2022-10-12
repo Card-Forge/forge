@@ -7,6 +7,6 @@ SVar:DBToken:DB$ Token | TokenAmount$ Y | TokenScript$ w_4_4_angel_flying | Toke
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Creature.YouCtrl
 SVar:Y:Remembered$Amount
-SVar:NeedsToPlay:Creature.YouCtrl+inZoneBattlefield+untapped
+SVar:NeedsToPlay:Creature.YouCtrl+untapped
 SVar:PlayMain1:ALWAYS
 Oracle:Tap any number of untapped creatures you control. Create a 4/4 white Angel creature token with flying for each creature tapped this way.

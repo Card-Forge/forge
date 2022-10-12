@@ -5,5 +5,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying & First Strike | Description$ Equipped creature gets +2/+2 and has flying and first strike.
 K:Equip:2 W W
-SVar:NeedsToPlay:Creature.YouCtrl+inZoneBattlefield
+SVar:NeedsToPlay:Creature.YouCtrl
 Oracle:When Maul of the Skyclaves enters the battlefield, attach it to target creature you control.\nEquipped creature gets +2/+2 and has flying and first strike.\nEquip {2}{W}{W}

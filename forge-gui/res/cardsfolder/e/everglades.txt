@@ -5,5 +5,5 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ C B | SpellDescription$ Add {C}{B}.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return an untapped Swamp you control to its owner's hand.
 SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Swamp.untapped/untapped Swamp> | UnlessPayer$ You
-SVar:NeedsToPlay:Swamp.YouCtrl+inZoneBattlefield+untapped
+SVar:NeedsToPlay:Swamp.YouCtrl+untapped
 Oracle:Everglades enters the battlefield tapped.\nWhen Everglades enters the battlefield, sacrifice it unless you return an untapped Swamp you control to its owner's hand.\n{T}: Add {C}{B}.
