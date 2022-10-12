@@ -5,4 +5,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | TriggerZones$ Battlefield 
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ X
 SVar:X:Count$Valid Swamp.ActivePlayerCtrl
 AI:RemoveDeck:Random
+SVar:NeedsToPlayVar:CountOpps GTCountMe
+SVar:CountOpp:Count$Valid Swamp.OppCtrl/LimitMax.5
+SVar:CountMe:Count$Valid Swamp.YouCtrl
 Oracle:At the beginning of each player's upkeep, Karma deals damage to that player equal to the number of Swamps they control.
