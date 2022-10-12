@@ -6,4 +6,6 @@ S:Mode$ Continuous | Affected$ Creature.Zombie+Other | AddKeyword$ Swampwalk | D
 S:Mode$ Continuous | Affected$ Card.Zombie+Other | AddAbility$ Regenerate | Description$ Other Zombies have "{B}: Regenerate this permanent."
 SVar:Regenerate:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate this permanent
 SVar:PlayMain1:TRUE
+DeckHas:Keyword$Regenerate|Swampwalk 
+DeckHints:Type$Zombie & Name$Urborg, Tomb of Yawgmoth
 Oracle:Other Zombie creatures have swampwalk. (They can't be blocked as long as defending player controls a Swamp.)\nOther Zombies have "{B}: Regenerate this permanent."
