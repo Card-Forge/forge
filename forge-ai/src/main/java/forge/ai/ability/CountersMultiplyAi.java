@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.ai.ComputerUtil;
@@ -97,7 +99,21 @@ public class CountersMultiplyAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        return !sa.usesTargeting() || setTargets(ai, sa) || mandatory;
+        if (!sa.usesTargeting()) {
+            return true;
+        }
+        if (setTargets(ai, sa)) {
+            return true;
+        } else if (mandatory) {
+            CardCollection list = CardLists.getTargetableCards(ai.getGame().getCardsIn(ZoneType.Battlefield), sa);
+            if (list.isEmpty()) {
+                return false;
+            }
+            Card safeMatch = Iterables.getFirst(Iterables.filter(list, Predicates.not(CardPredicates.hasCounters())), null);
+            sa.getTargets().add(safeMatch == null ? list.getFirst() : safeMatch);
+            return true;
+        }
+        return mandatory;
     }
 
     private CounterType getCounterType(SpellAbility sa) {
