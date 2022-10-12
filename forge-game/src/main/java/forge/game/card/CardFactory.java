@@ -662,31 +662,30 @@ public class CardFactory {
         final CardCloneStates result = new CardCloneStates(in, sa);
 
         final String newName = sa.getParamOrDefault("NewName", null);
-        String shortColors = "";
+        ColorSet colors = null;
 
         if (sa.hasParam("AddTypes")) {
             types.addAll(Arrays.asList(sa.getParam("AddTypes").split(" & ")));
+        }
+
+        if (sa.hasParam("SetCreatureTypes")) {
+            creatureTypes = ImmutableList.copyOf(sa.getParam("SetCreatureTypes").split(" "));
         }
 
         if (sa.hasParam("AddKeywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
         }
 
-        if (sa.hasParam("AddColors")) {
-            shortColors = CardUtil.getShortColorsString(Arrays.asList(sa.getParam("AddColors")
-                    .split(" & ")));
-        }
-
         if (sa.hasParam("RemoveKeywords")) {
             removeKeywords.addAll(Arrays.asList(sa.getParam("RemoveKeywords").split(" & ")));
         }
 
-        if (sa.hasParam("SetColor")) {
-            shortColors = CardUtil.getShortColorsString(Arrays.asList(sa.getParam("SetColor").split(",")));
+        if (sa.hasParam("AddColors")) {
+            colors = ColorSet.fromNames(sa.getParam("AddColors").split(","));
         }
 
-        if (sa.hasParam("SetCreatureTypes")) {
-            creatureTypes = ImmutableList.copyOf(sa.getParam("SetCreatureTypes").split(" "));
+        if (sa.hasParam("SetColor")) {
+            colors = ColorSet.fromNames(sa.getParam("SetColor").split(","));
         }
 
         // TODO handle Volrath's Shapeshifter
@@ -734,11 +733,11 @@ public class CardFactory {
             }
 
             if (sa.hasParam("AddColors")) {
-                state.addColor(shortColors);
+                state.addColor(colors.getColor());
             }
 
             if (sa.hasParam("SetColor")) {
-                state.setColor(shortColors);
+                state.setColor(colors.getColor());
             }
 
             if (sa.hasParam("NonLegendary")) {

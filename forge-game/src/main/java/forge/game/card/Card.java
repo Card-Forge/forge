@@ -3667,7 +3667,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void addType(final String type0) {
         currentState.addType(type0);
     }
-
     public final void addType(final Iterable<String> type0) {
         currentState.addType(type0);
     }
@@ -3876,8 +3875,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         currentState.getView().updateHasChangeColors(!Iterables.isEmpty(getChangedCardColors()));
     }
 
-    public final void setColor(final String color) {
-        currentState.setColor(color);
+    public final void setColor(final String... color) {
+        setColor(ColorSet.fromNames(color).getColor());
     }
     public final void setColor(final byte color) {
         currentState.setColor(color);
