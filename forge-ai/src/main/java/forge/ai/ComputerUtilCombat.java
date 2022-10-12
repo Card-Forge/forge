@@ -518,7 +518,7 @@ public class ComputerUtilCombat {
             return true;
         }
 
-        return resultingPoison(ai, combat) > 9;
+        return resultingPoison(ai, combat) >= ai.getGame().getRules().getPoisonCountersToLose();
     }
 
     // This calculates the amount of damage a blockgang can deal to the attacker

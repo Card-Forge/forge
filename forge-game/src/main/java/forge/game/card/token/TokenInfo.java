@@ -308,7 +308,7 @@ public class TokenInfo {
         if (sa.hasParam("TokenColors")) {
             String colors = sa.getParam("TokenColors");
             colors = colors.replace("ChosenColor", host.getChosenColor());
-            result.setColor(MagicColor.toShortString(colors));
+            result.setColor(colors.split(","));
         }
 
         return result;

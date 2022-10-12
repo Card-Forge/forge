@@ -6,5 +6,5 @@ K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return a blue or black creature you control to its owner's hand.
 A:AB$ ChangeZone | Cost$ PayLife<1> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.Black+YouCtrl,Creature.Blue+YouCtrl | AILogic$ NeverBounceItself
-SVar:NeedsToPlay:Creature.Black+YouCtrl+cmcLE2+inZoneBattlefield,Creature.Blue+YouCtrl+cmcLE2+inZoneBattlefield
+SVar:NeedsToPlay:Creature.Black+YouCtrl+cmcLE2,Creature.Blue+YouCtrl+cmcLE2
 Oracle:Flying\nWhen Cavern Harpy enters the battlefield, return a blue or black creature you control to its owner's hand.\nPay 1 life: Return Cavern Harpy to its owner's hand.

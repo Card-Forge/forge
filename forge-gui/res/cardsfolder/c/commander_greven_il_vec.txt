@@ -5,5 +5,5 @@ PT:7/5
 K:Fear
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature | AILogic$ ExceptSelf
-SVar:NeedsToPlay:Creature.YouCtrl+cmcLE5+inZoneBattlefield
+SVar:NeedsToPlay:Creature.YouCtrl+cmcLE5
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhen Commander Greven il-Vec enters the battlefield, sacrifice a creature.
