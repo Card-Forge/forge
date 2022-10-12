@@ -492,6 +492,51 @@ ScryfallCode=SNC
 466 C Light 'Em Up @Tony Foti
 467 U Courier's Briefcase @Josu Hernaiz
 
+[rebalanced]
+A6 C A-Buy Your Silence @Tony Foti
+A7 C A-Celebrity Fencer @Inka Schulz
+A32 C A-Speakeasy Server @Scott Murphy
+A37 C A-Case the Joint @Stella Spente
+A53 C A-Psionic Snoop @Marcela Medeiros
+A55 U A-Public Enemy @Dominik Mayer
+A60 C A-Sewer Crocodile @Milivoj Ćeran
+A74 C A-Deal Gone Bad @Mathias Kollros
+A75 C A-Demon's Due @Slawomir Maniak
+A81 U A-Graveyard Shift @Liiga Smilshkalne
+A84 C A-Incriminate @Kieran Yanner
+A87 C A-Midnight Assassin @Christina Davis
+A91 C A-Revel Ruiner @Christina Davis
+A98 U A-Vampire Scrivener @Bastien L. Deharme
+A106 C A-Exhibition Magician @Greg Staples
+A111 C A-Jackhammer @John Severin Brassell
+A118 U A-Pyre-Sledge Arsonist @Kekai Kotaki
+A119 C A-Ready to Rumble @Josu Hernaiz
+A120 C A-Riveteers Initiate @Svetlin Velinov
+A123 U A-Sizzling Soloist @Véronique Meignaud
+A139 C A-Capenna Express @Viko Menezes
+A149 C A-Glittermonger @Evyn Fong
+A150 C A-High-Rise Sawjack @Randy Vargas
+A153 C A-Most Wanted @Rémi Jacquot
+A157 C A-Social Climber @Carly Mazur
+A164 C A-Warm Welcome @Inka Schulz
+A173 U A-Cabaretti Charm @Steve Argyle
+A174 C A-Celestial Regulator @Mathias Kollros
+A176 C A-Civil Servant @Tony Foti
+A189 U A-Forge Boss @Igor Kieryluk
+A190 C A-Glamorous Outlaw @Maria Zolotukhina
+A201 C A-Masked Bandits @Micah Epstein
+A203 U A-Metropolis Angel @Lie Setiawan
+A204 U A-Mr. Orfeo, the Boulder @Daarken
+A212 U A-Queza, Augur of Agonies @Josh Hass
+A214 C A-Rakish Revelers @Alessandra Pisano
+A220 U A-Security Rhox @Lie Setiawan
+A221 C A-Shattered Seraph @Bastien L. Deharme
+A224 C A-Spara's Adjudicators @Aaron J. Riley
+A225 U A-Stimulus Package @Robin Olausson
+A226 U A-Syndicate Infiltrator @Mila Pesic
+A241 C A-Ominous Parcel @Joe Slucher
+A242 C A-Paragon of Modernity @Volkan Baǵa
+
 [lands]
 2 Plains|SNC|1
 2 Plains|SNC|2

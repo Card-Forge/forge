@@ -5,7 +5,7 @@ PT:4/4
 K:Flying
 K:Ward:2
 AlternateMode:Adventure
-Oracle:Flying, Ward {2}
+Oracle:Flying, ward {2}
 
 ALTERNATE
 
