@@ -4,4 +4,6 @@ Types:Creature Goblin
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Goblin+Other | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Mountainwalk | Description$ Other Goblin creatures get +1/+1 and have mountainwalk.
 SVar:PlayMain1:TRUE
+DeckHas:Keyword$Mountainwalk
+DeckHints:Type$Goblin & Name$Blood Moon
 Oracle:Other Goblins get +1/+1 and have mountainwalk.
