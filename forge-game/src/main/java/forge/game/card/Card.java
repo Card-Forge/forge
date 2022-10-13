@@ -625,6 +625,29 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
             return retResult;
 
+        } else if (mode.equals("Convert") && isDoubleFaced()) {
+            // Need to remove mutated states, otherwise the changeToState() will fail
+            if (hasMergedCard()) {
+                removeMutatedStates();
+            }
+            CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
+            boolean retResult = false;
+            for (final Card c : cards) {
+                if (!c.isDoubleFaced()) {
+                    continue;
+                }
+                c.backside = !c.backside;
+
+                boolean result = c.changeToState(c.backside ? CardStateName.Converted : CardStateName.Original);
+                retResult = retResult || result;
+            }
+            if (hasMergedCard()) {
+                rebuildMutatedStates(cause);
+                game.getTriggerHandler().clearActiveTriggers(this, null);
+                game.getTriggerHandler().registerActiveTrigger(this, false);
+            }
+            return retResult;
+
         } else if (mode.equals("Flip")) {
             // 709.4. Flipping a permanent is a one-way process.
             if (isFlipped()) {
