@@ -13,4 +13,4 @@ SVar:DBEffectBis:DB$ Effect | StaticAbilities$ PerpetualP1P1Bis | RememberObject
 SVar:PerpetualP1P1Bis:Mode$ Continuous | Affected$ Card.IsRemembered,Card.Self | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ CARDNAME and the conjured Dragon card each perpetually get +1/+1.
 DeckNeeds:Type$Dragon
 DeckHas:Color$Red
-Oracle:Kicker {1}{R}\nFlying\nWhenever you draw a Dragon card, it perpetually gets +1/+1.\nWhen Darigaaz’s Whelp enters the battlefield, if it was kicked, seek a Dragon card. Darigaaz's Whelp and that Dragon card each perpetually get +1/+1.
+Oracle:Kicker {1}{R}\nFlying\nWhenever you draw a Dragon card, it perpetually gets +1/+1.\nWhen Darigaaz's Whelp enters the battlefield, if it was kicked, seek a Dragon card. Darigaaz's Whelp and that Dragon card each perpetually get +1/+1.
