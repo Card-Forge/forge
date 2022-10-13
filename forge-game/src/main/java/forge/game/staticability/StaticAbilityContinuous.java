@@ -323,10 +323,10 @@ public final class StaticAbilityContinuous {
                     String[] restrictions = params.containsKey("SharedRestrictions") ? params.get("SharedRestrictions").split(",") : new String[] {"Card"};
                     addKeywords = CardFactoryUtil.sharedKeywords(addKeywords, restrictions, zones, hostCard, stAb);
                 }
-            } else if (params.containsKey("ShareKeywords")) {
+            } else if (params.containsKey("ShareRememberedKeywords")) {
                 List<String> kwToShare = Lists.newArrayList();
-                for (KeywordInterface inst : hostCard.getKeywords()) {
-                    final String k = inst.getOriginal();
+                for (final Object o : hostCard.getRemembered()) {
+                    final String k = (String) o;
                     kwToShare.add(k);
                 }
                 if (!kwToShare.isEmpty()) {

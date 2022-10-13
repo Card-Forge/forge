@@ -19,6 +19,7 @@ import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.card.Card;
+import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementHandler;
@@ -198,9 +199,10 @@ public class EffectEffect extends SpellAbilityEffect {
                 }
             }
 
-            // Grant Keywords
-            if (sa.hasParam("Keywords")) {
-                List<String> effectKeywords = Arrays.asList(sa.getParam("Keywords").split(","));
+            // Remember Keywords
+            if (sa.hasParam("RememberKeywords")) {
+                rememberList = new FCollection<>();
+                List<String> effectKeywords = Arrays.asList(sa.getParam("RememberKeywords").split(","));
                 if (sa.hasParam("SharedKeywordsZone")) {
                     List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
                     String[] restrictions = sa.hasParam("SharedRestrictions") ? sa.getParam("SharedRestrictions").split(",")
@@ -209,7 +211,7 @@ public class EffectEffect extends SpellAbilityEffect {
                 }
                 if (effectKeywords != null) {
                     for (final String s : effectKeywords) {
-                        eff.addIntrinsicKeyword(s);
+                        eff.addRemembered(s);
                     }
                 }
             }
