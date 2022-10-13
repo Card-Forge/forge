@@ -1,0 +1,8 @@
+Name:Teferi's Contingency
+ManaCost:W U U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | SubAbility$ DBEffect | RememberTargets$ True | SpellDescription$ Counter target spell. Each creature card in its controller's graveyard, hand, and library with the same name as that spell perpetually gains "This spell costs {2} more to cast."
+SVar:DBEffect:DB$ Effect | ImprintCards$ Remembered | RememberObjects$ TargetedPlayer | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Teferi's Contingency's Perpetual Effect
+SVar:PerpetualAbility:Mode$ Continuous | Affected$ Card.IsImprinted+samename+RememberedPlayerOwn+Creature | AddStaticAbility$ RaiseCost | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command
+SVar:RaiseCost:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | Description$ This spell costs {2} more to cast.
+Oracle:Counter target spell. Each creature card in its controller's graveyard, hand, and library with the same name as that spell perpetually gains "This spell costs {2} more to cast."
