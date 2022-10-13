@@ -284,6 +284,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
             sa.setTriggeringObject(AbilityKey.SpellAbilityTarget, saForTargets.getTargets().get(0));
         }
         sa.setTriggeringObject(AbilityKey.SpellAbilityTargetingCards, saForTargets.getTargets().getTargetCards());
+        sa.setTriggeringObject(AbilityKey.SpellAbilityNumTargets, saForTargets.getTargets().size());
         sa.setTriggeringObjectsFrom(
                 runParams,
             AbilityKey.Player,

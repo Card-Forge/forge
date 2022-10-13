@@ -1,0 +1,27 @@
+Name:Arcee, Sharpshooter
+ManaCost:1 R W
+Types:Legendary Artifact Creature Robot
+PT:2/2
+K:More Than Meets the Eye:R W
+K:First Strike
+A:AB$ DealDamage | Cost$ 1 XCantBe0 SubCounter<X/P1P1/NICKNAME> | ValidTgts$ Creature | NumDmg$ X | SubAbility$ DBConvert | SpellDescription$ It deals that much damage to target creature.
+SVar:DBConvert:DB$ SetState | Mode$ Convert | StackDescription$ SpellDescription | SpellDescription$ Convert NICKNAME.
+SVar:X:Count$xPaid
+AlternateMode:DoubleFaced
+DeckNeeds:Ability$Counters
+Oracle:More Than Meets the Eye {R}{W} (You may cast this card converted for {R}{W}.)\nFirst strike\n{1}, Remove one or more +1/+1 counters from Arcee: It deals that much damage to target creature. Convert Arcee.
+
+ALTERNATE
+
+Name:Arcee, Acrobatic Coupe
+ManaCost:no cost
+Colors:red,white
+Types:Legendary Artifact Vehicle
+PT:2/2
+K:Living metal
+T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Creature.YouCtrl,Vehicle.YouCtrl | Execute$ TrigPutCounters | TriggerDescription$ Whenever you cast a spell that targets one or more creatures or Vehicles you control, put that many +1/+1 counters on NICKNAME. Convert NICKNAME.
+SVar:TrigPutCounters:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBConvert
+SVar:DBConvert:DB$ SetState | Mode$ Convert
+SVar:X:TriggerObjectsSpellAbilityTargetingCards$Valid Creature.YouCtrl,Vehicle.YouCtrl
+DeckHas:Ability$Counters
+Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nWhenever you cast a spell that targets one or more creatures or Vehicles you control, put that many +1/+1 counters on Arcee. Convert Arcee.
