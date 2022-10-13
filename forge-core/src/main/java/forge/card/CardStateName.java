@@ -5,6 +5,7 @@ public enum CardStateName {
     Original,
     FaceDown,
     Flipped,
+    Converted,
     Transformed,
     Meld,
     LeftSplit,
