@@ -9,6 +9,6 @@ SVar:SacTopPower:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbil
 SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestPowerControlledByRemembered | ChoiceTitle$ Choose a creature you control with the greatest power | Mandatory$ True | RememberChosen$ True
 SVar:DBSacAll:DB$ SacrificeAll | ValidCards$ Card.IsRemembered | SubAbility$ DBCleanup
 SVar:DBCleanupChosen:DB$ Cleanup | ClearChosenPlayer$ True
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosen$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NeedsToPlay:Creature.OppCtrl
 Oracle:Roll a d20.\n1—9 | Choose an opponent. That player sacrifices a creature.\n10—19 | Each opponent sacrifices a creature.\n20 | Each opponent sacrifices a creature with the greatest power among creatures that player controls.

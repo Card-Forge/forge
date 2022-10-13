@@ -11,7 +11,6 @@ ALTERNATE
 Name:Deadly Vanity
 ManaCost:5 B B B
 Types:Sorcery
-A:SP$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature,Planeswalker | ChoiceTitle$ Choose a creature or planeswalker | Mandatory$ True | ChoiceZone$ Battlefield | SubAbility$ DBDestroyAll | RememberChosen$ True | AILogic$ BestCard | StackDescription$ SpellDescription | SpellDescription$ Choose a creature or planeswalker,
-SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.IsNotRemembered,Planeswalker.IsNotRemembered | SubAbility$ DBCleanup | StackDescription$ SpellDescription | SpellDescription$ then destroy all other creatures and planeswalkers.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:SP$ ChooseCard | Defined$ You | Amount$ 1 | Choices$ Creature,Planeswalker | ChoiceTitle$ Choose a creature or planeswalker | Mandatory$ True | ChoiceZone$ Battlefield | SubAbility$ DBDestroyAll | AILogic$ BestCard | StackDescription$ SpellDescription | SpellDescription$ Choose a creature or planeswalker,
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.nonChosenCard,Planeswalker.nonChosenCard | StackDescription$ SpellDescription | SpellDescription$ then destroy all other creatures and planeswalkers.
 Oracle:Choose a creature or planeswalker, then destroy all other creatures and planeswalkers.
