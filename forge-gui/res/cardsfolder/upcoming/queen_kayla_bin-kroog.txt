@@ -7,7 +7,7 @@ SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBChooseCardOne
 SVar:DBChooseCardOne:DB$ ChooseCard | Defined$ You | Choices$ Artifact.IsRemembered+cmcEQ1,Creature.IsRemembered+cmcEQ1 | ImprintChosen$ True | ChoiceTitle$ You may choose an artifact or creature card with mana value 1 you discarded this way | ChoiceZone$ Graveyard | AILogic$ BestCard | SubAbility$ DBChooseCardTwo 
 SVar:DBChooseCardTwo:DB$ ChooseCard | Defined$ You | Choices$ Artifact.IsRemembered+cmcEQ2,Creature.IsRemembered+cmcEQ2 | ImprintChosen$ True  | ChoiceTitle$ You may choose an artifact or creature card with mana value 2 you discarded this way | ChoiceZone$ Graveyard | AILogic$ BestCard | SubAbility$ DBChooseCardThree
 SVar:DBChooseCardThree:DB$ ChooseCard | Defined$ You | Choices$ Artifact.IsRemembered+cmcEQ3,Creature.IsRemembered+cmcEQ3 | ImprintChosen$ True | ChoiceTitle$ You may choose an artifact or creature card with mana value 3 you discarded this way | ChoiceZone$ Graveyard | AILogic$ BestCard | SubAbility$ DBChangeZoneAll
-SVar:DBChangeZoneAll:DB$ ChangeZoneAll | Origin$ Graveyard | ChangeType$ Card.IsImprinted | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBChangeZoneAll:DB$ ChangeZone | Defined$ Imprinted | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Remembered$Amount
 DeckHints:Type$Artifact
