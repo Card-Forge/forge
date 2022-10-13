@@ -1,9 +1,6 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -420,6 +417,16 @@ public class DigEffect extends SpellAbilityEffect {
                                 final int numCtr = AbilityUtils.calculateAmount(host,
                                         sa.getParamOrDefault("WithCounterNum", "1"), sa);
                                 c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), numCtr, player);
+                            }
+                            if (sa.hasAdditionalAbility("AnimateSubAbility")) {
+                                // need LKI before Animate does apply
+                                if (!moveParams.containsKey(AbilityKey.CardLKI)) {
+                                    moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
+                                }
+
+                                host.addRemembered(c);
+                                AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
+                                host.removeRemembered(c);
                             }
                             c = game.getAction().moveTo(zone, c, sa, moveParams);
                             if (destZone1.equals(ZoneType.Battlefield)) {
