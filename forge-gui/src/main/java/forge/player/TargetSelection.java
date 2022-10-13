@@ -104,18 +104,18 @@ public class TargetSelection {
         }
 
         List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
-        final boolean hasCandidates = candidates.size() >= minTargets;
-        if (!hasCandidates && !hasEnoughTargets) {
+        final boolean hasEnoughCandidates = candidates.size() >= minTargets;
+        if (!hasEnoughCandidates && !hasEnoughTargets) {
             // Cancel ability if there aren't any valid Candidates
             return false;
         }
-        if (isMandatory() && !hasCandidates && hasEnoughTargets) {
+        if (isMandatory() && candidates.size() == 0 && hasEnoughTargets) {
             // Mandatory target selection, that has no candidates but enough targets (Min == 0, but no choices)
             return true;
         }
 
         final List<ZoneType> zones = tgt.getZone();
-        final boolean mandatory = isMandatory() && hasCandidates && !optional;
+        final boolean mandatory = isMandatory() && hasEnoughCandidates && !optional;
 
         final boolean choiceResult;
         if (tgt.isRandomTarget() && numTargets == null) {
