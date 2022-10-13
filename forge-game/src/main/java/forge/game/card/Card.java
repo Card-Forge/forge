@@ -625,7 +625,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
             return retResult;
 
-        } else if (mode.equals("Convert") && isDoubleFaced()) {
+        } else if (mode.equals("Convert") && isConvertable()) {
             // Need to remove mutated states, otherwise the changeToState() will fail
             if (hasMergedCard()) {
                 removeMutatedStates();
@@ -633,7 +633,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
             boolean retResult = false;
             for (final Card c : cards) {
-                if (!c.isDoubleFaced()) {
+                if (!c.isConvertable()) {
                     continue;
                 }
                 c.backside = !c.backside;
@@ -953,12 +953,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Meld;
     }
 
+    public final boolean isConvertable() {
+        return getRules() != null && getRules().getSplitType() == CardSplitType.Convert;
+    }
+
     public final boolean isModal() {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Modal;
     }
 
     public final boolean hasBackSide() {
-        return isDoubleFaced() || isMeldable() || isModal();
+        return isDoubleFaced() || isMeldable() || isModal() || isConvertable();
     }
 
     public final boolean isFlipCard() {
@@ -2058,7 +2062,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
                         || keyword.startsWith("Disturb") || keyword.startsWith("Madness:")
                         || keyword.startsWith("Reconfigure") || keyword.startsWith("Squad")
-                        || keyword.startsWith("Miracle")) {
+                        || keyword.startsWith("Miracle") || keyword.startsWith("More Than Meets the Eye")) {
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
