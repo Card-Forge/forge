@@ -7,7 +7,7 @@ SVar:DBChangeZone:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPrese
 SVar:X:Remembered$CardManaCost/Plus.1
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Mill | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ 5 | RememberMilled$ True | SubAbility$ DBChangeZone2 | SpellDescription$ Mill five cards, then put any number of creature cards milled this way into your hand.
-SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | ChangeType$ Creature.IsRemembered | ChangeTypeDesc$ creature cards milled this way | ChangeNum$ Z | ChangeNumDesc$ any number of | SelectPrompt$ Select any number of creature cards milled this way | SubAbility$ DBCleanup
+SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Hand | Hidden$ True | ChangeType$ Creature.IsRemembered | ChangeTypeDesc$ creature cards milled this way | ChangeNum$ Z | ChangeNumDesc$ any number of | SelectPrompt$ Select any number of creature cards milled this way | SubAbility$ DBCleanup
 SVar:Z:Remembered$Valid Creature
 A:AB$ Token | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ g_4_4_rhino_warrior | SpellDescription$ Create a 4/4 green Rhino Warrior creature token.
 DeckHas:Ability$Sacrifice|Token|Mill|Graveyard & Type$Rhino

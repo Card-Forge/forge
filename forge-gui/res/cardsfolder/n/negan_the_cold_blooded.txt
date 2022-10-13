@@ -9,7 +9,7 @@ SVar:DBOppChoose:DB$ ChooseCard | Defined$ Remembered | Amount$ 1 | Mandatory$ T
 SVar:DBReveal:DB$ Reveal | Defined$ You | RevealDefined$ Remembered | RememberRevealed$ True | SubAbility$ DBRevealOpp
 SVar:DBRevealOpp:DB$ Reveal | Defined$ Remembered | RevealDefined$ ChosenCard | RememberRevealed$ True | SubAbility$ DBSacrificeAll
 SVar:DBSacrificeAll:DB$ SacrificeAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosen$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 T:Mode$ Sacrificed | ValidCard$ Creature.OppCtrl | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent sacrifices a creature, you create a Treasure token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_a_treasure_sac | TokenOwner$ You
 DeckHas:Ability$Token
