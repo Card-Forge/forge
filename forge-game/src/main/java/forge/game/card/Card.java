@@ -629,7 +629,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
             return retResult;
 
-        } else if (mode.equals("Convert") && isConvertable()) {
+        } else if (mode.equals("Convert") && isConvertable() || hasMergedCard()) {
             // Need to remove mutated states, otherwise the changeToState() will fail
             if (hasMergedCard()) {
                 removeMutatedStates();
@@ -2179,7 +2179,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
                         || keyword.equals("Changeling") || keyword.equals("Delve") || keyword.equals("Decayed")
                         || keyword.equals("Split second") || keyword.equals("Sunburst")
-                        || keyword.equals("Double team")
+                        || keyword.equals("Double team") || keyword.equals("Living metal")
                         || keyword.equals("Suspend") // for the ones without amount
                         || keyword.equals("Foretell") // for the ones without cost
                         || keyword.equals("Ascend") || keyword.equals("Totem armor")
