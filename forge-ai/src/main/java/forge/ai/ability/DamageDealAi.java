@@ -210,7 +210,7 @@ public class DamageDealAi extends DamageAiBase {
             if (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) {
                 boolean doTarget = damageTargetAI(ai, sa, dmg, true);
                 if (doTarget) {
-                    Card tgt = sa.getTargets().getFirstTargetedCard();
+                    Card tgt = sa.getTargetCard();
                     if (tgt != null) {
                         return ai.getGame().getPhaseHandler().getPlayerTurn() == tgt.getController();
                     }
