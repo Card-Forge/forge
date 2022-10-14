@@ -104,7 +104,7 @@ public class TargetSelection {
         }
 
         List<GameEntity> candidates = tgt.getAllCandidates(this.ability, true);
-        final boolean hasEnoughCandidates = candidates.size() >= minTargets;
+        final boolean hasEnoughCandidates = candidates.size() >= minTargets || tgt.getZone().contains(ZoneType.Stack);
         if (!hasEnoughCandidates && !hasEnoughTargets) {
             // Cancel ability if there aren't any valid Candidates
             return false;
@@ -151,7 +151,7 @@ public class TargetSelection {
             // single zone
             if (isSingleZone) {
                 final List<Card> removeCandidates = new ArrayList<>();
-                final Card firstTgt = ability.getTargets().getFirstTargetedCard();
+                final Card firstTgt = ability.getTargetCard();
                 if (firstTgt != null) {
                     for (Card t : validTargets) {
                         if (!t.getController().equals(firstTgt.getController())) {
