@@ -840,12 +840,13 @@ public class ComputerUtil {
 
                     String logic = source.getParamOrDefault("AILogic", "");
                     if (logic.startsWith("SacForDamage")) {
-                        if (c.getNetPower() <= 0) {
+                        final int damageAmt = logic.contains("cmc") ? c.getManaCost().getCMC() : c.getNetPower();
+                        if (damageAmt <= 0) {
                             return false;
-                        } else if (c.getNetPower() >= ai.getOpponentsSmallestLifeTotal()) {
+                        } else if (damageAmt >= ai.getOpponentsSmallestLifeTotal()) {
                             return true;
                         } else if (logic.endsWith(".GiantX2") && c.getType().hasCreatureType("Giant")
-                                && c.getNetPower() * 2 >= ai.getOpponentsSmallestLifeTotal()) {
+                                && damageAmt * 2 >= ai.getOpponentsSmallestLifeTotal()) {
                             return true; // TODO: generalize this for any type and actually make the AI prefer giants?
                         }
                     }
