@@ -1,10 +1,7 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import forge.card.MagicColor;
+import forge.deck.DeckRecognizer;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
@@ -13,6 +10,11 @@ import forge.game.spellability.TargetRestrictions;
 import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.Localizer;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChooseColorEffect extends SpellAbilityEffect {
 
@@ -80,7 +82,9 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                     }
                     noNotify = null;
                 } else {
+                    colorChoices = colorChoices.stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList());
                     chosenColors = p.getController().chooseColors(prompt, sa, cntMin, cntMax, colorChoices);
+                    chosenColors = chosenColors.stream().map(DeckRecognizer::getColorNameByLocalisedName).collect(Collectors.toList());
                 }
                 if (chosenColors.isEmpty()) {
                     return;

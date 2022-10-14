@@ -1,23 +1,14 @@
 package forge.gui.card;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import forge.game.card.*;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Sets;
-
-import forge.card.CardRarity;
-import forge.card.CardStateName;
-import forge.card.CardType;
-import forge.card.ColorSet;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCostShard;
+import forge.deck.DeckRecognizer;
 import forge.game.GameView;
+import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.card.CounterType;
 import forge.game.zone.ZoneType;
 import forge.item.InventoryItemFromSet;
 import forge.item.PaperCard;
@@ -28,6 +19,14 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.CardTranslation;
 import forge.util.Lang;
+import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class CardDetailUtil {
 
@@ -436,8 +435,8 @@ public class CardDetailUtil {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(chosen colors: ");
-            area.append(Lang.joinHomogenous(card.getChosenColors()));
+            area.append("(").append(Localizer.getInstance().getMessage("lblChosenColors")).append(" ");
+            area.append(Lang.joinHomogenous(card.getChosenColors().stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList())));
             area.append(")");
         }
 
