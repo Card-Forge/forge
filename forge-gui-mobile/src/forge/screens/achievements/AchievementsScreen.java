@@ -19,8 +19,6 @@ import forge.localinstance.achievements.AchievementCollection;
 import forge.menu.FDropDown;
 import forge.screens.FScreen;
 import forge.toolbox.FComboBox;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.util.Localizer;
@@ -56,12 +54,7 @@ public class AchievementsScreen extends FScreen {
 
         cbCollections.setSelectedIndex(0);
         cbCollections.setAlignment(Align.center);
-        cbCollections.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                setAchievements(cbCollections.getSelectedItem());
-            }
-        });
+        cbCollections.setChangedHandler(e -> setAchievements(cbCollections.getSelectedItem()));
         setAchievements(cbCollections.getSelectedItem());
     }
 

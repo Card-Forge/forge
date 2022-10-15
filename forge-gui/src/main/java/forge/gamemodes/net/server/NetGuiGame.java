@@ -295,7 +295,7 @@ public class NetGuiGame extends AbstractGuiGame {
     }
 
     @Override
-    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> players) {
+    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> players, boolean backupLastZones) {
         updateGameView();
         return sendAndWait(ProtocolMethod.openZones, controller, zones, players);
     }

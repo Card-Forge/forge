@@ -165,7 +165,7 @@ public interface IGuiGame {
 
     void setCard(CardView card);
     void setPlayerAvatar(LobbyPlayer player, IHasIcon ihi);
-    PlayerZoneUpdates openZones(PlayerView controller, Collection<ZoneType> zones, Map<PlayerView, Object> players);
+    PlayerZoneUpdates openZones(PlayerView controller, Collection<ZoneType> zones, Map<PlayerView, Object> players, boolean backupLastZones);
     void restoreOldZones(PlayerView playerView, PlayerZoneUpdates playerZoneUpdates);
     void setHighlighted(PlayerView pv, boolean b);
     void setUsedToPay(CardView card, boolean value);

@@ -1166,7 +1166,7 @@ public final class CMatchUI
     }
 
     @Override
-    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables) {
+    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables, boolean backupLastZones) {
         final PlayerZoneUpdates zonesToUpdate = new PlayerZoneUpdates();
         for (final PlayerView view : playersWithTargetables.keySet()) {
             for(final ZoneType zone : zones) {
