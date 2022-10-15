@@ -83,7 +83,7 @@ public class VStack extends FDropDown {
             }
         }
         if (zones.isEmpty() || playersWithValidTargets.isEmpty()) { return; }
-        restorablePlayerZones = MatchController.instance.openZones(player, zones, playersWithValidTargets);
+        restorablePlayerZones = MatchController.instance.openZones(player, zones, playersWithValidTargets, true);
     }
 
     //restore old zones when active stack instance changes
@@ -288,59 +288,45 @@ public class VStack extends FDropDown {
                             final String key = stackInstance.getKey();
                             final boolean autoYield = gui.shouldAutoYield(key);
                             addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("cbpAutoYieldMode"), autoYield,
-                                    new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    gui.setShouldAutoYield(key, !autoYield);
-                                    if (!autoYield && stackInstance.equals(gameView.peekStack())) {
-                                        //auto-pass priority if ability is on top of stack
-                                        controller.passPriority();
-                                    }
-                                }
-                            }));
+                                    e -> {
+                                        gui.setShouldAutoYield(key, !autoYield);
+                                        if (!autoYield && stackInstance.equals(gameView.peekStack())) {
+                                            //auto-pass priority if ability is on top of stack
+                                            controller.passPriority();
+                                        }
+                                    }));
                             if (stackInstance.isOptionalTrigger() && stackInstance.getActivatingPlayer().equals(player)) {
                                 final int triggerID = stackInstance.getSourceTrigger();
                                 addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysYes"),
                                         gui.shouldAlwaysAcceptTrigger(triggerID),
-                                        new FEventHandler() {
-                                    @Override
-                                    public void handleEvent(FEvent e) {
-                                        if (gui.shouldAlwaysAcceptTrigger(triggerID)) {
-                                            gui.setShouldAlwaysAskTrigger(triggerID);
-                                        }
-                                        else {
-                                            gui.setShouldAlwaysAcceptTrigger(triggerID);
-                                            if (stackInstance.equals(gameView.peekStack())) {
-                                                //auto-yes if ability is on top of stack
-                                                controller.selectButtonOk();
+                                        e -> {
+                                            if (gui.shouldAlwaysAcceptTrigger(triggerID)) {
+                                                gui.setShouldAlwaysAskTrigger(triggerID);
                                             }
-                                        }
-                                    }
-                                }));
+                                            else {
+                                                gui.setShouldAlwaysAcceptTrigger(triggerID);
+                                                if (stackInstance.equals(gameView.peekStack())) {
+                                                    //auto-yes if ability is on top of stack
+                                                    controller.selectButtonOk();
+                                                }
+                                            }
+                                        }));
                                 addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblAlwaysNo"),
                                         gui.shouldAlwaysDeclineTrigger(triggerID),
-                                        new FEventHandler() {
-                                    @Override
-                                    public void handleEvent(FEvent e) {
-                                        if (gui.shouldAlwaysDeclineTrigger(triggerID)) {
-                                            gui.setShouldAlwaysAskTrigger(triggerID);
-                                        }
-                                        else {
-                                            gui.setShouldAlwaysDeclineTrigger(triggerID);
-                                            if (stackInstance.equals(gameView.peekStack())) {
-                                                //auto-no if ability is on top of stack
-                                                controller.selectButtonCancel();
+                                        e -> {
+                                            if (gui.shouldAlwaysDeclineTrigger(triggerID)) {
+                                                gui.setShouldAlwaysAskTrigger(triggerID);
                                             }
-                                        }
-                                    }
-                                }));
+                                            else {
+                                                gui.setShouldAlwaysDeclineTrigger(triggerID);
+                                                if (stackInstance.equals(gameView.peekStack())) {
+                                                    //auto-no if ability is on top of stack
+                                                    controller.selectButtonCancel();
+                                                }
+                                            }
+                                        }));
                             }
-                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblZoomOrDetails"), new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    CardZoom.show(stackInstance.getSourceCard());
-                                }
-                            }));
+                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblZoomOrDetails"), e -> CardZoom.show(stackInstance.getSourceCard())));
                         }
                     };
 

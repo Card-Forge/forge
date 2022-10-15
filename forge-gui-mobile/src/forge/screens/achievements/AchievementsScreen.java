@@ -56,12 +56,7 @@ public class AchievementsScreen extends FScreen {
 
         cbCollections.setSelectedIndex(0);
         cbCollections.setAlignment(Align.center);
-        cbCollections.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                setAchievements(cbCollections.getSelectedItem());
-            }
-        });
+        cbCollections.setChangedHandler(e -> setAchievements(cbCollections.getSelectedItem()));
         setAchievements(cbCollections.getSelectedItem());
     }
 

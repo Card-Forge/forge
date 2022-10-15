@@ -192,7 +192,7 @@ public class TargetSelection {
             }
 
             PlayerView playerView = controller.getLocalPlayerView();
-            PlayerZoneUpdates playerZoneUpdates = controller.getGui().openZones(playerView, zones, playersWithValidTargets);
+            PlayerZoneUpdates playerZoneUpdates = controller.getGui().openZones(playerView, zones, playersWithValidTargets, true);
             if (!zones.contains(ZoneType.Stack)) {
                 InputSelectTargets inp = new InputSelectTargets(controller, validTargets, ability, mandatory, divisionValues, filter, mustTargetFiltered);
                 inp.showAndWait();
