@@ -19,8 +19,6 @@ import forge.localinstance.achievements.AchievementCollection;
 import forge.menu.FDropDown;
 import forge.screens.FScreen;
 import forge.toolbox.FComboBox;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
 import forge.util.Localizer;
