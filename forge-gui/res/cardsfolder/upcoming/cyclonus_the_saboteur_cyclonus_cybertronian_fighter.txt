@@ -1,0 +1,27 @@
+Name:Cyclonus, the Saboteur
+ManaCost:2 U B
+Types:Legendary Artifact Creature Robot
+PT:2/5
+K:More Than Meets the Eye:5 U B
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigConnive | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, it connives. Then if NICKNAME's power is 5 or greater, convert it. (To have a creature connive, draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+SVar:TrigConnive:DB$ Connive | SubAbility$ DBConvert
+SVar:DBConvert:DB$ SetState | Mode$ Convert | IsPresent$ Card.Self+powerGE5
+AlternateMode:DoubleFaced
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Graveyard
+Oracle:More Than Meets the Eye {5}{U}{B} (You may cast this card converted for {5}{U}{B}.)\nFlying\nWhenever Cyclonus deals combat damage to a player, it connives. Then if Cyclonus’s power is 5 or greater, convert it. (To have a creature connive, draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+ALTERNATE
+
+Name:Cyclonus, Cybertronian Fighter
+ManaCost:no cost
+Colors:black
+Types:Legendary Artifact Vehicle
+PT:5/5
+K:Living metal
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigConvert | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, convert it. If you do, there is an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)
+SVar:TrigConvert:DB$ SetState | Mode$ Convert | SubAbility$ ExtraBeginningPhase
+SVar:ExtraBeginningPhase:DB$ AddPhase | ExtraPhase$ Beginning
+SVar:HasAttackEffect:TRUE
+Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nFlying:Whenever Cyclonus deals combat damage to a player, convert it. If you do, there is an additional beginning phase after this phase. (The beginning phase includes the untap, upkeep, and draw steps.)

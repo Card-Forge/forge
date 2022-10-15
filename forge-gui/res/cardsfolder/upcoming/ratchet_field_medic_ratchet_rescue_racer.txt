@@ -1,0 +1,27 @@
+Name:Ratchet, Field Medic
+ManaCost:2 W
+Types:Legendary Artifact Creature Robot
+PT:2/4
+K:More Than Meets the Eye:1 W
+A:AB$ PutCounter | Cost$ Sac<1/Artifact.Other> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SubAbility$ DBConvert | AILogic$ AristocratCounters | SpellDescription$ Put a +1/+1 counter on CARDNAME and convert it.
+SVar:DBConvert:DB$ SetState | Mode$ Convert
+A:AB$ ChangeZone | Cost$ 1 Discard<1/Hand> | Defined$ You | Defined$ Remembered.ExiledWithSource+ | Origin$ Exile | Destination$ Hand | SpellDescription$ Put all exiled cards you own with intel counters on them into your hand.
+DeckHints:Ability$Counters
+DeckHas:Ability$LifeGain
+Oracle:More Than Meets the Eye {1}{W} (You may cast this card converted for {1}{W}.)\nLifelink\nWhenever you gain life, you may convert Ratchet. When you do, return target artifact card with mana value less than or equal to the amount of life you gained this turn from your graveyard to the battlefield tapped.
+ALTERNATE
+
+Name:Flamewar, Streetwise Operative
+ManaCost:no cost
+Colors:black
+Types:Legendary Artifact Vehicle
+PT:2/1
+K:Living metal
+K:Menace
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, exile that many cards from the top of your library face down. Put an intel counter on each of them. Convert Flamewar.
+SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | ExileWithCounter$ INTEL | SubAbility$ DBConvert
+SVar:DBConvert:DB$ SetState | Mode$ Convert
+SVar:X:TriggerCount$DamageAmount
+SVar:HasAttackEffect:TRUE
+Oracle:Living metal (As long as it’s your turn, this Vehicle is also a creature.)\nMenace, deathtouch\nWhenever Flamewar deals combat damage to a player, exile that many cards from the top of your library face down. Put an intel counter on each of them. Convert Flamewar.
