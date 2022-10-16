@@ -368,14 +368,20 @@ public class CountersMoveAi extends SpellAbilityAi {
                 return false;
             }
 
-            Card lki = CardUtil.getLKICopy(src);
+            Card lkiWithCounters = CardUtil.getLKICopy(src);
+            Card lkiWithoutCounters = CardUtil.getLKICopy(src);
             if (cType == null) {
-                lki.clearCounters();
+                lkiWithoutCounters.clearCounters();
             } else {
-                lki.setCounters(cType, 0);
+                lkiWithoutCounters.setCounters(cType, 0);
             }
+
+            // need to fake animate it for P/T
+            lkiWithCounters.addType("Creature");
+            lkiWithoutCounters.addType("Creature");
+
             // go for opponent when higher value implies debuff
-            if (ComputerUtilCard.evaluateCreature(src) > ComputerUtilCard.evaluateCreature(lki)) {
+            if (ComputerUtilCard.evaluateCreature(lkiWithCounters) > ComputerUtilCard.evaluateCreature(lkiWithoutCounters)) {
                 List<Card> aiList = CardLists.filterControlledBy(tgtCards, ai);
                 if (!aiList.isEmpty()) {
                     List<Card> best = CardLists.filter(aiList, new Predicate<Card>() {
