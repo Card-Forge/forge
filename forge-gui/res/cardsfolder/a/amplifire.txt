@@ -8,4 +8,5 @@ SVar:DBAnimate:DB$ Animate | Power$ X | Toughness$ Y | Duration$ UntilYourNextTu
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower/Times.2
 SVar:Y:Remembered$CardToughness/Times.2
+DeckNeeds:Type$Creature
 Oracle:At the beginning of your upkeep, reveal cards from the top of your library until you reveal a creature card. Until your next turn, Amplifire's base power becomes twice that card's power and its base toughness becomes twice that card's toughness. Put the revealed cards on the bottom of your library in a random order.
