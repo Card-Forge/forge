@@ -59,7 +59,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
 
         Player separator = card.getController();
         if (sa.hasParam("Separator")) {
-            final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Separator"), sa);
+            final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(card, sa.getParam("Separator"), sa);
             if (!choosers.isEmpty()) {
                 separator = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, null, null);
             }
@@ -67,7 +67,7 @@ public class TwoPilesEffect extends SpellAbilityEffect {
 
         Player chooser = tgtPlayers.get(0);
         if (sa.hasParam("Chooser")) {
-            final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Chooser"), sa);
+            final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(card, sa.getParam("Chooser"), sa);
             if (!choosers.isEmpty()) {
                 chooser = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, null, null);
             }

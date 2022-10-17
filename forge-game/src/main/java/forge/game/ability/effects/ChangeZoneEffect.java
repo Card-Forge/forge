@@ -1004,8 +1004,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         final int fetchNum = Math.min(player.getCardsIn(ZoneType.Library).size(), 4);
                         if (fetchNum == 0) {
                             searchedLibrary = false;
-                        }
-                        else {
+                        } else {
                             fetchList.addAll(player.getCardsIn(ZoneType.Library, fetchNum));
                         }
                     }
