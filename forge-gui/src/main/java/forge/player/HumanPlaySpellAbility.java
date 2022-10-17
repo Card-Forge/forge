@@ -170,6 +170,8 @@ public class HumanPlaySpellAbility {
                     Card newCard = game.getAction().moveToGraveyard(c, null);
                     newCard.setMadnessWithoutCast(true);
                 }
+            } else {
+                payment.refundPayment();
             }
 
             if (manaTypeConversion || manaColorConversion || keywordColor) {

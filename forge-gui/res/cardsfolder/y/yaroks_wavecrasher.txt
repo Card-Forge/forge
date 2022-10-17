@@ -4,5 +4,5 @@ Types:Creature Elemental
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return another creature you control to its owner's hand.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Creature.Other+YouCtrl
-SVar:NeedsToPlay:Creature.YouCtrl+cmcLE5+inZoneBattlefield
+SVar:NeedsToPlay:Creature.YouCtrl+nonToken
 Oracle:When Yarok's Wavecrasher enters the battlefield, return another creature you control to its owner's hand.

@@ -4,3 +4,4 @@ Order:101
 Subtype:Standard
 Type:Sanctioned
 Sets:MID, VOW, NEO, SNC, DMU
+Banned:The Meathook Massacre

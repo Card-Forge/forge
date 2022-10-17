@@ -32,7 +32,6 @@ import forge.card.CardType;
 import forge.card.CardTypeView;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
-import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
 import forge.game.ForgeScript;
 import forge.game.GameObject;
@@ -170,19 +169,9 @@ public class CardState extends GameObject implements IHasSVars {
     public final byte getColor() {
         return color;
     }
-    public final void addColor(final String color) {
-        final ManaCostParser parser = new ManaCostParser(color);
-        final ManaCost cost = new ManaCost(parser);
-        addColor(cost.getColorProfile());
-    }
     public final void addColor(final byte color) {
         this.color |= color;
         view.updateColors(card);
-    }
-    public final void setColor(final String color) {
-        final ManaCostParser parser = new ManaCostParser(color);
-        final ManaCost cost = new ManaCost(parser);
-        setColor(cost.getColorProfile());
     }
     public final void setColor(final byte color) {
         this.color = color;

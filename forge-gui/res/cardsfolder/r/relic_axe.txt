@@ -8,6 +8,6 @@ SVar:X:Count$Compare Y GE1.2.1
 SVar:Y:Targeted$Valid Warrior
 SVar:Y:Count$Valid Warrior.AttachedBy
 K:Equip:2
-SVar:NeedsToPlay:Creature.YouCtrl+inZoneBattlefield
+SVar:NeedsToPlay:Creature.YouCtrl
 DeckHints:Type$Warrior
 Oracle:When Relic Axe enters the battlefield, attach it to target creature you control.\nEquipped creature gets +1/+1. If it's a Warrior, it gets +2/+1 instead.\nEquip {2}

@@ -2766,7 +2766,8 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
                     if (!forgeCard.getName().equals(f.getName())) {
                         forgeCard.changeToState(forgeCard.getRules().getSplitType().getChangedStateName());
                         if (forgeCard.getCurrentStateName().equals(CardStateName.Transformed) ||
-                                forgeCard.getCurrentStateName().equals(CardStateName.Modal)) {
+                                forgeCard.getCurrentStateName().equals(CardStateName.Modal) ||
+                                forgeCard.getCurrentStateName().equals(CardStateName.Converted)) {
                             forgeCard.setBackSide(true);
                         }
                     }

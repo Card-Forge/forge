@@ -1000,6 +1000,35 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                     return true;
                 }
+                // blink logic: get my own permanents back or blink permanents with ETB effects
+                if (blink) {
+                    CardCollection blinkTargets = CardLists.filter(list, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            return !c.isToken() && c.getOwner().equals(ai) && (c.getController().isOpponentOf(ai) || c.hasETBTrigger(false));
+                        }
+                    });
+                    if (!blinkTargets.isEmpty()) {
+                        CardCollection opponentBlinkTargets = CardLists.filterControlledBy(blinkTargets, ai.getOpponents());
+                        // prefer post-combat unless targeting opponent's stuff or part of another ability
+                        if (immediately || sa.getParent() != null || sa.isTrigger() || !opponentBlinkTargets.isEmpty() || !game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+                            while (!blinkTargets.isEmpty() && sa.canAddMoreTarget()) {
+                                Card choice = null;
+                                // first prefer targeting opponents stuff
+                                if (!opponentBlinkTargets.isEmpty()) {
+                                    choice = ComputerUtilCard.getBestAI(opponentBlinkTargets);
+                                    opponentBlinkTargets.remove(choice);
+                                }
+                                else {
+                                    choice = ComputerUtilCard.getBestAI(blinkTargets);
+                                }
+                                sa.getTargets().add(choice);
+                                blinkTargets.remove(choice);
+                            }
+                            return true;
+                        }
+                    }
+                }
                 // bounce opponent's stuff
                 list = CardLists.filterControlledBy(list, ai.getOpponents());
                 if (!CardLists.getNotType(list, "Land").isEmpty()) {
@@ -1017,26 +1046,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         }
                     });
                 }
-                // TODO: Blink permanents with ETB triggers
-                /*else if (!sa.isTrigger() && SpellAbilityAi.playReusable(ai, sa)) {
-                    aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            if (c.hasCounters()) {
-                                return false; // don't blink something with
-                            }
-                            // counters TODO check good and
-                            // bad counters
-                            // checks only if there is a dangerous ETB effect
-                            return !c.equals(sa.getHostCard()) && SpellPermanent.checkETBEffects(c, ai);
-                        }
-                    });
-                    if (!aiPermanents.isEmpty()) {
-                        // Choose "best" of the remaining to save
-                        sa.getTargets().add(ComputerUtilCard.getBestAI(aiPermanents));
-                        return true;
-                    }
-                }*/
             }
 
         } else if (origin.contains(ZoneType.Graveyard)) {
@@ -1266,17 +1275,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // TODO: ideally the AI should consider at this point which targets exactly to pick (e.g. one card in the first player's graveyard
         // vs. two cards in the second player's graveyard, which cards are more relevant to be targeted, etc.). Consider improving.
         if (sa.getTargetRestrictions().isSingleZone()) {
-            Card firstTgt = sa.getTargets().getFirstTargetedCard();
+            Card firstTgt = sa.getTargetCard();
             CardCollection toRemove = new CardCollection();
             if (firstTgt != null) {
                 for (Card t : sa.getTargets().getTargetCards()) {
-                   if (!t.getController().equals(firstTgt.getController())) {
-                       toRemove.add(t);
-                   }
+                    if (!t.getController().equals(firstTgt.getController())) {
+                        toRemove.add(t);
+                    }
                 }
-                for (Card dontTarget : toRemove) {
-                   sa.getTargets().remove(dontTarget);
-                }
+                sa.getTargets().removeAll(toRemove);
             }
         }
 

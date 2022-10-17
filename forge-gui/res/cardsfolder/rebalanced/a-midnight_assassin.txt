@@ -1,0 +1,7 @@
+Name:A-Midnight Assassin
+ManaCost:2 B
+Types:Creature Vampire Assassin
+PT:1/3
+K:Flying
+K:Deathtouch
+Oracle:Flying, deathtouch

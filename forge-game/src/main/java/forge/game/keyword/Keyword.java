@@ -109,6 +109,7 @@ public enum Keyword {
     LANDWALK("Landwalk", KeywordWithType.class, false, "This creature is unblockable as long as defending player controls a %s."),
     LEVEL_UP("Level up", KeywordWithCost.class, false, "%s: Put a level counter on this. Level up only as a sorcery."),
     LIFELINK("Lifelink", SimpleKeyword.class, true, "Damage dealt by this creature also causes its controller to gain that much life."),
+    LIVING_METAL("Living metal", SimpleKeyword.class, true, "As long as it's your turn, this Vehicle is also a creature."),
     LIVING_WEAPON("Living Weapon", SimpleKeyword.class, true, "When this Equipment enters the battlefield, create a 0/0 black Phyrexian Germ creature token, then attach this to it."),
     MADNESS("Madness", KeywordWithCost.class, false, "If you discard this card, discard it into exile. When you do, cast it for its madness cost or put it into your graveyard."),
     MELEE("Melee", SimpleKeyword.class, false, "Whenever this creature attacks, it gets +1/+1 until end of turn for each opponent you attacked this combat."),
@@ -119,6 +120,7 @@ public enum Keyword {
     // technically not a keyword but easier this way
     MONSTROSITY("Monstrosity", KeywordWithCostAndAmount.class, false, "If this creature isn't monstrous, put {%2$d:+1/+1 counter} on it and it becomes monstrous."),
     MODULAR("Modular", Modular.class, false, "This creature enters the battlefield with {%d:+1/+1 counter} on it. When it dies, you may put its +1/+1 counters on target artifact creature."),
+    MORE_THAN_MEETS_THE_EYE("More Than Meets the Eye", KeywordWithCost.class, false, "You may cast this card converted for %s."),
     MORPH("Morph", KeywordWithCost.class, false, "You may cast this card face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost."),
     MULTIKICKER("Multikicker", KeywordWithCost.class, false, "You may pay an additional %s any number of times as you cast this spell."),
     MUTATE("Mutate", KeywordWithCost.class, true, "If you cast this spell for its mutate cost, put it over or under target non-Human creature you own. They mutate into the creature on top plus all abilities from under it."),

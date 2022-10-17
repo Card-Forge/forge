@@ -34,5 +34,5 @@ ScryfallCode=YDMU
 26 R Slimefoot, Thallid Transplant @Loïc Canavaggia
 27 R Teferi's Contingency @Milivoj Ćeran
 28 R Tiana, Angelic Mechanic @Joseph Weston
-29 R Vodalian Tide Mage @Joseph Weston
+29 R Vodalian Tide Mage @Brian Valeza
 30 R Coalition Construct @Artur Treffner

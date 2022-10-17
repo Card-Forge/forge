@@ -1,0 +1,14 @@
+Name:Six-Sided Die
+ManaCost:2 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | SubAbility$ DBRollDice | IsCurse$ True | SpellDescription$ Choose target creature. Roll a six-sided die.
+SVar:DBRollDice:DB$ RollDice | ResultSubAbilities$ 1:DBCurse,2:DBCounter,3:DBDrain,4:DBCurseBis,5:DBDestroy,6:DBExile | StackDescription$ Roll a six-sided die.
+SVar:DBCurse:DB$ Animate | Defined$ Targeted | Toughness$ 1 | SpellDescription$ 1 VERT It has base toughness 1 until end of turn.
+SVar:DBCounter:DB$ PutCounter | Defined$ Targeted | CounterType$ M1M1 | CounterNum$ 2 | SpellDescription$ 2 VERT Put two -1/-1 counters on it.
+SVar:DBDrain:DB$ DealDamage | Defined$ Targeted | DamageAmount$ 3 | SubAbility$ DBGainLife | SpellDescription$ 3 VERT CARDNAME deals 3 damage to it and you gain 3 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 
+SVar:DBCurseBis:DB$ Pump | Defined$ Targeted | NumAtt$ -4 | NumDef$ -4 | SpellDescription$ 4 VERT It gets -4/-4 until end of turn.
+SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | SpellDescription$ 5 VERT Destroy it.
+SVar:DBExile:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile | SpellDescription$ 6 VERT Exile it.
+DeckHas:Ability$Counters|LifeGain
+Oracle:Choose target creature. Roll a six-sided die.\n1 — It has base toughness 1 until end of turn.\n2 — Put two -1/-1 counters on it.\n3 — Six-Sided Die deals 3 damage to it and you gain 3 life.\n4 — It gets -4/-4 until end of turn.\n5 — Destroy it.\n6 — Exile it.

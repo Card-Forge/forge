@@ -217,6 +217,7 @@ Rebel:Rebels
 Reflection:Reflections
 Rhino:Rhinos
 Rigger:Riggers
+Robot:Robots
 Rogue:Rogues
 Sable:Sables
 Salamander:Salamanders

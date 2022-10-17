@@ -298,9 +298,9 @@ public class DamageDealEffect extends DamageBaseEffect {
                 }
             } else {
                 damageMap.put(sourceLKI, c, dmg);
-                if (sa.hasParam("ExcessSVar")) {
-                    sa.setSVar(sa.getParam("ExcessSVar"), Integer.toString(excess));
-                }
+            }
+            if (sa.hasParam("ExcessSVar")) {
+                sa.setSVar(sa.getParam("ExcessSVar"), Integer.toString(excess));
             }
         }
     }

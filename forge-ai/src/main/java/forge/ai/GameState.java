@@ -313,6 +313,8 @@ public abstract class GameState {
                 newText.append("|Meld");
             } else if (c.getCurrentStateName().equals(CardStateName.Modal)) {
                 newText.append("|Modal");
+            } else if (c.getCurrentStateName().equals(CardStateName.Converted)) {
+                newText.append("|Converted");
             }
 
             if (c.getPlayerAttachedTo() != null) {

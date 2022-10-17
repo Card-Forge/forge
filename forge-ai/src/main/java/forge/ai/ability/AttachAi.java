@@ -1565,8 +1565,9 @@ public class AttachAi extends SpellAbilityAi {
 
         boolean canBeBlocked = false;
         for (Player opp : ai.getOpponents()) {
-            if (CombatUtil.canBeBlocked(card, opp)) {
+            if (CombatUtil.canBeBlocked(card, null, opp)) {
                 canBeBlocked = true;
+                break;
             }
         }
 

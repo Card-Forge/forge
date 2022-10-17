@@ -22,6 +22,7 @@ A12 R Xathrid Necromancer @Maciej Kuciara
 26 R Felidar Sovereign @Zoltan Boros & Gabor Szikszai
 47 R Thalia's Lancers @David Palumbo
 49 R Curator of Mysteries @Christine Choi
+52 R Cyclone Summoner @Andrey Kuzinskiy
 100 R Etali, Primal Storm @Raymond Swanland
 123 R Beast Whisperer @Matt Stewart
 124 R End-Raze Forerunners @Mathias Kollros
@@ -40,3 +41,4 @@ A12 R Xathrid Necromancer @Maciej Kuciara
 221★ R Oran-Rief, the Vastwood @Mike Bierek
 235 R Stonecoil Serpent @Mark Poole
 235★ R Nyx Lotus @Raoul Vitale
+374 R Valkyrie Harbinger @Tran Nguyen

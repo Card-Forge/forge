@@ -399,7 +399,8 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
     @Override
     public boolean hasBackFace(){
         CardSplitType cst = this.rules.getSplitType();
-        return cst == CardSplitType.Transform || cst == CardSplitType.Flip || cst == CardSplitType.Meld || cst == CardSplitType.Modal;
+        return cst == CardSplitType.Transform || cst == CardSplitType.Flip || cst == CardSplitType.Meld
+                || cst == CardSplitType.Modal || cst == CardSplitType.Convert;
     }
 
     // Return true if card is one of the five basic lands that can be added for free

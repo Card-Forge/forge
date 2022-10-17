@@ -4,5 +4,6 @@ Types:Artifact
 A:AB$ Pump | Cost$ 2 T | KW$ Islandwalk | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDelayedTrigger | SpellDescription$ Target creature gains islandwalk until end of turn. When that creature dies this turn, destroy CARDNAME. (A creature with islandwalk can't be blocked as long as defending player controls an Island.)
 SVar:DBDelayedTrigger:DB$ DelayedTrigger | Mode$ ChangesZone | RememberObjects$ Targeted | ValidCard$ Card.IsTriggerRemembered | Origin$ Battlefield | Destination$ Graveyard | ThisTurn$ True | Execute$ TrigDestroy | TriggerDescription$ When that creature dies this turn, destroy CARDNAME.
 SVar:TrigDestroy:DB$ Destroy | Defined$ Self
+DeckHas:Keyword$Islandwalk
 AI:RemoveDeck:Random
 Oracle:{2}, {T}: Target creature gains islandwalk until end of turn. When that creature dies this turn, destroy Sandals of Abdallah. (A creature with islandwalk can't be blocked as long as defending player controls an Island.)

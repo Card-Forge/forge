@@ -1,0 +1,8 @@
+Name:A-Deal Gone Bad
+ManaCost:3 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ -3 | NumDef$ -3 | SubAbility$ DBMill | IsCurse$ True | SpellDescription$ Target creature gets -3/-3 until end of turn.
+SVar:DBMill:DB$ Mill | NumCards$ 3 | ValidTgts$ Player | SubAbility$ DBGainLife | SpellDescription$ Target player mills three cards.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SpellDescription$ You gain 3 life.
+DeckHas:Ability$Mill|LifeGain
+Oracle:Target creature gets -3/-3 until end of turn. Target player mills three cards. You gain 3 life.

@@ -1630,6 +1630,19 @@ public class CardFactoryUtil {
             sa.setIntrinsic(intrinsic);
             trigger.setOverridingAbility(sa);
             inst.addTrigger(trigger);
+        } else if (keyword.startsWith("Ravenous")) {
+            final String ravenousTrig = "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | " +
+                    "Destination$ Battlefield | CheckSVar$ Count$xPaid | SVarCompare$ GE5 | Secondary$ True | " +
+                    "TriggerDescription$ If X is 5 or more, draw a card when it enters.";
+
+            final String drawStr = "DB$ Draw";
+
+            final Trigger trigger = TriggerHandler.parseTrigger(ravenousTrig, card, intrinsic);
+            SpellAbility sa = AbilityFactory.getAbility(drawStr, card);
+
+            sa.setIntrinsic(intrinsic);
+            trigger.setOverridingAbility(sa);
+            inst.addTrigger(trigger);
         } else if (keyword.startsWith("Renown")) {
             final String[] k = keyword.split(":");
 
@@ -2348,19 +2361,6 @@ public class CardFactoryUtil {
 
             String counterStr = "DB$ PutCounter | CounterType$ P1P1 | ETB$ True | CounterNum$ X";
             SpellAbility countersSA = AbilityFactory.getAbility(counterStr, card);
-
-            String delTrigStr = "DB$ DelayedTrigger | CheckSVar$ Count$xPaid | SVarCompare$ GE5 | " +
-                    "Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | " +
-                    "TriggerDescription$ If X is 5 or more, draw a card when it enters.";
-            AbilitySub delTrigSub = (AbilitySub) AbilityFactory.getAbility(delTrigStr, card);
-
-            String drawStr = "DB$ Draw";
-
-            AbilitySub drawSub = (AbilitySub) AbilityFactory.getAbility(drawStr, card);
-
-            countersSA.setSubAbility(delTrigSub);
-
-            delTrigSub.setAdditionalAbility("Execute", drawSub);
 
             if (!intrinsic) {
                 countersSA.setIntrinsic(false);
@@ -3691,6 +3691,9 @@ public class CardFactoryUtil {
         } else if (keyword.equals("Intimidate")) {
             String effect = "Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.nonArtifact+notSharesColorWith | Secondary$ True " +
                     " | Description$ Intimidate ( " + inst.getReminderText() + ")";
+            inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
+        } else if (keyword.equals("Living metal")) {
+            String effect = "Mode$ Continuous | Affected$ Card.Self | AddType$ Creature | Condition$ PlayerTurn | Secondary$ True";
             inst.addStaticAbility(StaticAbility.create(effect, state.getCard(), state, intrinsic));
         } else if (keyword.equals("Nightbound")) {
             String effect = "Mode$ CantTransform | ValidCard$ Creature.Self | ExceptCause$ SpellAbility.Nightbound | Secondary$ True | Description$ This permanent can't be transformed except by its nightbound ability.";
