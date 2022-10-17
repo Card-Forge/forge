@@ -8,7 +8,6 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | IsPresent$
 SVar:Y:Count$Valid Forest.DefenderCtrl
 A:AB$ Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Forest | RemoveLandTypes$ True | Duration$ UntilHostLeavesPlay | SpellDescription$ Target land becomes a Forest until CARDNAME leaves the battlefield.
 SVar:BuffedBy:Forest
-SVar:NeedsToPlayVar:X GE1
 AI:RemoveDeck:All
-DeckHints:Type$Forest & Keyword$Forestwalk & Name:Yavimaya, Cradle of Growth
+DeckHints:Type$Forest & Keyword$Forestwalk & Name$Yavimaya, Cradle of Growth
 Oracle:As long as Gaea's Liege isn't attacking, its power and toughness are each equal to the number of Forests you control. As long as Gaea's Liege is attacking, its power and toughness are each equal to the number of Forests defending player controls.\n{T}: Target land becomes a Forest until Gaea's Liege leaves the battlefield.
