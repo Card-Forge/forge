@@ -220,6 +220,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
+    private long convertedTimestamp = 0;
     private long mutatedTimestamp = -1;
     private int timesMutated = 0;
     private boolean tributed = false;
@@ -391,6 +392,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public long getTransformedTimestamp() { return transformedTimestamp; }
     public void incrementTransformedTimestamp() { this.transformedTimestamp++; }
+
+    public long getConvertedTimestamp() { return convertedTimestamp; }
+    public void incrementConvertedTimestamp() { this.convertedTimestamp++; }
 
     public CardState getCurrentState() {
         return currentState;
@@ -623,6 +627,29 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
             incrementTransformedTimestamp();
 
+            return retResult;
+
+        } else if (mode.equals("Convert") && (isConvertable() || hasMergedCard())) {
+            // Need to remove mutated states, otherwise the changeToState() will fail
+            if (hasMergedCard()) {
+                removeMutatedStates();
+            }
+            CardCollectionView cards = hasMergedCard() ? getMergedCards() : new CardCollection(this);
+            boolean retResult = false;
+            for (final Card c : cards) {
+                if (!c.isConvertable()) {
+                    continue;
+                }
+                c.backside = !c.backside;
+
+                boolean result = c.changeToState(c.backside ? CardStateName.Converted : CardStateName.Original);
+                retResult = retResult || result;
+            }
+            if (hasMergedCard()) {
+                rebuildMutatedStates(cause);
+                game.getTriggerHandler().clearActiveTriggers(this, null);
+                game.getTriggerHandler().registerActiveTrigger(this, false);
+            }
             return retResult;
 
         } else if (mode.equals("Flip")) {
@@ -930,12 +957,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Meld;
     }
 
+    public final boolean isConvertable() {
+        return getRules() != null && getRules().getSplitType() == CardSplitType.Convert;
+    }
+
     public final boolean isModal() {
         return getRules() != null && getRules().getSplitType() == CardSplitType.Modal;
     }
 
     public final boolean hasBackSide() {
-        return isDoubleFaced() || isMeldable() || isModal();
+        return isDoubleFaced() || isMeldable() || isModal() || isConvertable();
     }
 
     public final boolean isFlipCard() {
@@ -2035,7 +2066,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Escape") || keyword.startsWith("Foretell:")
                         || keyword.startsWith("Disturb") || keyword.startsWith("Madness:")
                         || keyword.startsWith("Reconfigure") || keyword.startsWith("Squad")
-                        || keyword.startsWith("Miracle")) {
+                        || keyword.startsWith("Miracle") || keyword.startsWith("More Than Meets the Eye")) {
                     String[] k = keyword.split(":");
                     sbLong.append(k[0]);
                     if (k.length > 1) {
@@ -2148,7 +2179,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Living Weapon") || keyword.equals("Myriad") || keyword.equals("Exploit")
                         || keyword.equals("Changeling") || keyword.equals("Delve") || keyword.equals("Decayed")
                         || keyword.equals("Split second") || keyword.equals("Sunburst")
-                        || keyword.equals("Double team")
+                        || keyword.equals("Double team") || keyword.equals("Living metal")
                         || keyword.equals("Suspend") // for the ones without amount
                         || keyword.equals("Foretell") // for the ones without cost
                         || keyword.equals("Ascend") || keyword.equals("Totem armor")
