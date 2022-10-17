@@ -132,9 +132,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
                 for (final Card tgt : sa.getTargets().getTargetCards()) {
                     if (matchesValid(tgt, getParam("TargetsValid").split(","))) {
                         validTgtFound = true;
-                        if (this.hasParam("RememberValidCards")) {
-                            this.getHostCard().addRemembered(tgt);
-                        } else break;
+                        break;
                     }
                 }
 
@@ -280,11 +278,19 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
         sa.setTriggeringObject(AbilityKey.Card, castSA.getHostCard());
         sa.setTriggeringObject(AbilityKey.SpellAbility, castSA.isWrapper() ? castSA : castSA.copy(castSA.getHostCard(), true));
         sa.setTriggeringObject(AbilityKey.StackInstance, si);
-        if (!saForTargets.getTargets().isEmpty()) {
-            sa.setTriggeringObject(AbilityKey.SpellAbilityTarget, saForTargets.getTargets().get(0));
-        }
-        sa.setTriggeringObject(AbilityKey.SpellAbilityTargetingCards, saForTargets.getTargets().getTargetCards());
-        sa.setTriggeringObject(AbilityKey.SpellAbilityNumTargets, saForTargets.getTargets().size());
+        final List<TargetChoices> allTgts = saForTargets.getAllTargetChoices();
+        if (!allTgts.isEmpty()) {
+            boolean target = false;
+            final CardCollection targetedCards = new CardCollection();
+            for (TargetChoices tc : allTgts) {
+                if (!target) {
+                    sa.setTriggeringObject(AbilityKey.SpellAbilityTarget, tc.getTargetEntities().get(0));
+                    target = true;
+                }
+                targetedCards.addAll((tc.getTargetCards()));
+            }
+            sa.setTriggeringObject(AbilityKey.SpellAbilityTargetingCards, targetedCards);
+            }
         sa.setTriggeringObjectsFrom(
                 runParams,
             AbilityKey.Player,
