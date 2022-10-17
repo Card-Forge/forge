@@ -1,0 +1,16 @@
+Name:Arvad, Weatherlight Smuggler
+ManaCost:W B
+Types:Legendary Creature Vampire Knight
+PT:1/1
+K:Deathtouch
+K:Lifelink
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ DBStore | TriggerDescription$ At the beginning of your end step, if a creature died this turn, CARDNAME perpetually gets +X/+X where X is the number of creatures that died this turn. This ability also triggers if NICKNAME is in your graveyard.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Graveyard | CheckSVar$ X | Secondary$ True | Execute$ DBStore | TriggerDescription$ At the beginning of your end step, if a creature died this turn, CARDNAME perpetually gets +X/+X where X is the number of creatures that died this turn. This ability also triggers if NICKNAME is in your graveyard.
+SVar:DBStore:DB$ StoreSVar | SVar$ Num | Type$ CountSVar | Expression$ X | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualPXPX | Name$ Arvad, Weatherlight Smuggler's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualPXPX:Mode$ Continuous | Affected$ Card.EffectSource | AddPower$ Num | AddToughness$ Num | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ CARDNAME perpetually gets +X/+X, where X is the number of creatures that died this turn.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
+SVar:Num:Number$0
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Sacrifice
+Oracle:Deathtouch, lifelink\nAt the beginning of your end step, if a creature died this turn, Arvad, Weatherlight Smuggler perpetually gets +X/+X, where X is the number of creature that died this turn. This ability also triggers if Arvad is in your graveyard.
