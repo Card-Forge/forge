@@ -3,4 +3,5 @@ ManaCost:1 U
 Types:Enchantment
 K:ETBReplacement:Copy:DBCopy:Optional
 SVar:DBCopy:DB$ Clone | Choices$ Artifact.Other | AddTypes$ Enchantment | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any artifact on the battlefield, except it's an enchantment in addition to its other types.
+DeckHas:Type$Artifact
 Oracle:You may have Copy Artifact enter the battlefield as a copy of any artifact on the battlefield, except it's an enchantment in addition to its other types.

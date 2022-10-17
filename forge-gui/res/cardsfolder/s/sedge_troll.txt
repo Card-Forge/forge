@@ -6,4 +6,5 @@ S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | Check
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
 SVar:X:Count$Valid Swamp.YouCtrl
 SVar:BuffedBy:Swamp
+DeckNeeds:Color$Black
 Oracle:Sedge Troll gets +1/+1 as long as you control a Swamp.\n{B}: Regenerate Sedge Troll.

@@ -9,5 +9,7 @@ SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature.Other | SubAbilit
 SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ 7 | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-AI:RemoveDeck:Random
+DeckHas:Ability$Sacrifice
+DeckHints:Ability$Sacrifice|Token
+SVar:NeedsToPlay:Creature.YouCtrl
 Oracle:Flying, trample\nAt the beginning of your upkeep, sacrifice a creature other than Lord of the Pit. If you can't, Lord of the Pit deals 7 damage to you.

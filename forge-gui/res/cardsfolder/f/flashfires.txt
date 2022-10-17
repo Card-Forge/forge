@@ -1,6 +1,9 @@
 Name:Flashfires
 ManaCost:3 R
 Types:Sorcery
-A:SP$ DestroyAll | Cost$ 3 R | ValidCards$ Plains | SpellDescription$ Destroy all Plains.
+A:SP$ DestroyAll | ValidCards$ Plains | SpellDescription$ Destroy all Plains.
 AI:RemoveDeck:Random
+SVar:NeedsToPlayVar:CountOpps GTCountMe
+SVar:CountOpps:Count$Valid Plains.OppCtrl/LimitMax.5
+SVar:CountMe:Count$Valid Plains.YouCtrl
 Oracle:Destroy all Plains.

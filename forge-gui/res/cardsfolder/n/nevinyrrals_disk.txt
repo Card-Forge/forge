@@ -4,4 +4,5 @@ Types:Artifact
 K:CARDNAME enters the battlefield tapped.
 A:AB$ DestroyAll | Cost$ 1 T | ValidCards$ Artifact,Creature,Enchantment | SpellDescription$ Destroy all artifacts, creatures, and enchantments.
 SVar:NonStackingEffect:True
+DeckHints:Type$Planeswalker & Name$Nevinyrral, Urborg Tyrant
 Oracle:Nevinyrral's Disk enters the battlefield tapped.\n{1}, {T}: Destroy all artifacts, creatures, and enchantments.

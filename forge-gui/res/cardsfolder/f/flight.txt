@@ -4,4 +4,5 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying. (It can't be blocked except by creatures with flying or reach.)
+DeckHas:Keyword$Flying
 Oracle:Enchant creature\nEnchanted creature has flying.
