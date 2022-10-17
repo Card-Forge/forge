@@ -629,7 +629,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
             return retResult;
 
-        } else if (mode.equals("Convert") && isConvertable() || hasMergedCard()) {
+        } else if (mode.equals("Convert") && (isConvertable() || hasMergedCard())) {
             // Need to remove mutated states, otherwise the changeToState() will fail
             if (hasMergedCard()) {
                 removeMutatedStates();
