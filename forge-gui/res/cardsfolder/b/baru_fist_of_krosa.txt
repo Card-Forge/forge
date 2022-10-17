@@ -7,5 +7,5 @@ A:AB$ Token | Cost$ Discard<1/Card.namedBaru, Fist of Krosa> | TokenAmount$ 1 | 
 SVar:X:Count$Valid Land.YouCtrl
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.Green+YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample
 SVar:BuffedBy:Forest
-DeckHints:Name$Baru, Fist of Krosa
+DeckHints:Name$Baru, Fist of Krosa & Ability$Token & Type$Wurm
 Oracle:Whenever a Forest enters the battlefield, green creatures you control get +1/+1 and gain trample until end of turn.\nGrandeur — Discard another card named Baru, Fist of Krosa: Create an X/X green Wurm creature token, where X is the number of lands you control.
