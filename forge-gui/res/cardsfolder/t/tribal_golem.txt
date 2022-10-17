@@ -2,16 +2,11 @@ Name:Tribal Golem
 ManaCost:6
 Types:Artifact Creature Golem
 PT:4/4
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | CheckSVar$ BEAST | SVarCompare$ GE1 | Description$ CARDNAME has trample as long as you control a Beast,
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ GOBLIN | SVarCompare$ GE1 | Description$ CARDNAME has haste as long as you control a Goblin,
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | CheckSVar$ SOLDIER | SVarCompare$ GE1 | Description$ CARDNAME has first strike as long as you control a Soldier,
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | CheckSVar$ WIZARD | SVarCompare$ GE1 | Description$ CARDNAME has flying as long as you control a Wizard,
-S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Regen | CheckSVar$ ZOMBIE | SVarCompare$ GE1 | Description$ CARDNAME has "{B}: Regenerate CARDNAME" as long as you control a Zombie.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Trample | IsPresent$ Beast.YouCtrl | Description$ CARDNAME has trample as long as you control a Beast,
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | IsPresent$ Goblin.YouCtrl | Description$ CARDNAME has haste as long as you control a Goblin,
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ First Strike | IsPresent$ Soldier.YouCtrl | Description$ CARDNAME has first strike as long as you control a Soldier,
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Flying | IsPresent$ Wizard.YouCtrl | Description$ CARDNAME has flying as long as you control a Wizard,
+S:Mode$ Continuous | Affected$ Card.Self | AddAbility$ Regen | IsPresent$ Zombie.YouCtrl | Description$ CARDNAME has "{B}: Regenerate CARDNAME" as long as you control a Zombie.
 SVar:Regen:AB$Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
-SVar:BEAST:Count$Valid Beast.YouCtrl
-SVar:GOBLIN:Count$Valid Goblin.YouCtrl
-SVar:SOLDIER:Count$Valid Soldier.YouCtrl
-SVar:WIZARD:Count$Valid Wizard.YouCtrl
-SVar:ZOMBIE:Count$Valid Zombie.YouCtrl
 SVar:BuffedBy:Beast,Goblin,Soldier,Wizard,Zombie
 Oracle:Tribal Golem has trample as long as you control a Beast, haste as long as you control a Goblin, first strike as long as you control a Soldier, flying as long as you control a Wizard, and "{B}: Regenerate Tribal Golem" as long as you control a Zombie.

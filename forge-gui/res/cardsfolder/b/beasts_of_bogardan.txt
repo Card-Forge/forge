@@ -3,6 +3,5 @@ ManaCost:4 R
 Types:Creature Beast
 PT:3/3
 K:Protection from red
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as an opponent controls a nontoken white permanent.
-SVar:X:Count$Valid Permanent.White+OppCtrl+nonToken
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Permanent.White+OppCtrl+nonToken | Description$ CARDNAME gets +1/+1 as long as an opponent controls a nontoken white permanent.
 Oracle:Protection from red\nBeasts of Bogardan gets +1/+1 as long as an opponent controls a nontoken white permanent.
