@@ -5,4 +5,5 @@ PT:2/3
 K:Flying
 A:AB$ Pump | Cost$ R | Defined$ Self | NumAtt$ +1 | ActivationNumberSacrifice$ GE4 | ActivationResolveSub$ DBPump | SpellDescription$ CARDNAME gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice CARDNAME at the beginning of the next end step.
 SVar:DBPump:DB$ Pump | Defined$ Self | AtEOT$ Sacrifice
+DeckHas:Ability$Sacrifice
 Oracle:Flying\n{R}: Dragon Whelp gets +1/+0 until end of turn. If this ability has been activated four or more times this turn, sacrifice Dragon Whelp at the beginning of the next end step.

@@ -16,4 +16,5 @@ SVar:X:Count$xPaid
 SVar:Y:Count$CardCounters.P1P1
 SVar:Z:SVar$NumDmg/Minus.Y
 AI:RemoveDeck:All
+DeckHas:Ability$Counters
 Oracle:Rock Hydra enters the battlefield with X +1/+1 counters on it.\nFor each 1 damage that would be dealt to Rock Hydra, if it has a +1/+1 counter on it, remove a +1/+1 counter from it and prevent that 1 damage.\n{R}: Prevent the next 1 damage that would be dealt to Rock Hydra this turn.\n{R}{R}{R}: Put a +1/+1 counter on Rock Hydra. Activate only during your upkeep.
