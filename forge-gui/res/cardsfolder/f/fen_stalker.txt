@@ -2,7 +2,6 @@ Name:Fen Stalker
 ManaCost:3 B
 Types:Creature Nightstalker
 PT:3/2
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Fear | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME has fear as long as you control no untapped lands. (It can't be blocked except by artifact creatures and/or black creatures.)
-SVar:X:Count$Valid Land.YouCtrl+untapped
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Fear | IsPresent$ Land.YouCtrl+untapped | PresentCompare$ EQ0 | Description$ CARDNAME has fear as long as you control no untapped lands. (It can't be blocked except by artifact creatures and/or black creatures.)
 SVar:BuffedBy:Card.nonLand
 Oracle:Fen Stalker has fear as long as you control no untapped lands. (It can't be blocked except by artifact creatures and/or black creatures.)

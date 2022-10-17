@@ -2,8 +2,7 @@ Name:Jorubai Murk Lurker
 ManaCost:2 U
 Types:Creature Leech
 PT:1/3
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +1/+1 as long as you control a Swamp.
-SVar:X:Count$Valid Swamp.YouCtrl
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | IsPresent$ Swamp.YouCtrl | Description$ CARDNAME gets +1/+1 as long as you control a Swamp.
 A:AB$ Pump | Cost$ 1 B | ValidTgts$ Creature | KW$ Lifelink | SpellDescription$ Target creature gains lifelink until end of turn.
 SVar:BuffedBy:Swamp
 AI:RemoveDeck:Random
