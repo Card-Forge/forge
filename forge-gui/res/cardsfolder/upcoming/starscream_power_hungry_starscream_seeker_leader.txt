@@ -1,26 +1,28 @@
-Name:Blaster, Combat DJ
-ManaCost:3 R G
+Name:Starscream, Power Hungry
+ManaCost:3 B
 Types:Legendary Artifact Creature Robot
-PT:3/3
-K:More Than Meets the Eye:1 R G
-S:Mode$ Continuous | Affected$ Artifact.Creature+Other+YouCtrl,Vehicles+Other+YouCtrl | AddKeyword$ Modular:1 | SpellDescription$ Other nontoken artifact creatures and Vehicles you control have modular 1. (They enter the battlefield with an additional +1/+1 counter on them. When they die, you may put their +1/+1 counters on target artifact creature.)
-T:Mode$ CounterAddedAll | CounterType$ P1P1 | Valid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigConvert| ActivationLimit$ 1 | TriggerDescription$ Whenever you put one or more +1/+1 counters on NICKNAME,convert it.
+PT:2/3
+K:More Than Meets the Eye:2 B
+K:Flying
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Condition$ Monarch | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you draw a card, if you’re the monarch, target opponent loses 2 life.
+SVar:TrigDrain:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 2
+T:Mode$ DamageDoneOnce | ValidSource$ Creature | TriggerZones$ Battlefield | ValidTarget$ You | CombatDamage$ True | Execute$ TrigConvert | TriggerDescription$ Whenever one or more creatures deal combat damage to you, convert NICKNAME.
 SVar:TrigConvert:DB$ SetState | Mode$ Convert
 AlternateMode:DoubleFaced
-DeckHas:Ability$Counters & Keyword$Modular
-DeckHints:Type$Vehicle|Artifact
-Oracle:More Than Meets the Eye {1}{R}{G} (You may cast this card converted for {1}{R}{G}.)\nOther nontoken artifact creatures and Vehicles you control have modular 1. (They enter the battlefield with an additional +1/+1 counter on them. When they die, you may put their +1/+1 counters on target artifact creature.)\nWhenever you put one or more +1/+1 counters on Blaster, convert it.
+Oracle:More Than Meets the Eye {2}{B} (You may cast this card converted for {2}{B}.)\nFlying\nWhenever you draw a card, if you’re the monarch, target opponent loses 2 life.\nWhenever one or more creatures deal combat damage to you, convert Starscream.
 
 ALTERNATE
 
-Name:Blaster, Morale Booster
+Name:Starscream, Seeker Leader
 ManaCost:no cost
-Colors:red,green
-Types:Legendary Artifact
-K:Modular:3
-A:AB$ MoveCounter | Cost$ X T | Source$ Self | ValidTgts$ Artifact.Other| TgtPrompt$ Select target artifact to get counters | CounterType$ P1P1 | CounterNum$ X | SorcerySpeed$ True | SubAbility$ DBAnimate | SpellDescription$ Move X +1/+1 counters from Blaster onto another target artifact. That artifact gains haste until end of turn. If Blaster has no +1/+1 counters on it, convert it. Activate only as a sorcery.
-SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Artifact | Keywords$ Haste | SubAbility$ DBConvert 
-SVar:DBConvert:DB$ SetState | Mode$ Convert | IsPresent$ Card.Self+!HasCounters
-SVar:X:Count$xPaid
-DeckHas:Ability$Counters
-Oracle:Modular 3\n{X}, {T}: Move X +1/+1 counters from Blaster onto another target artifact. That artifact gains haste until end of turn. If Blaster has no +1/+1 counters on it, convert it. Activate only as a sorcery.
+Colors:black
+Types:Legendary Artifact Vehicle
+K:Living metal
+K:Flying
+K:Menace
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMonarch | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, if there is no monarch, that player becomes the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ TriggeredTarget
+T:Mode$ BecomeMonarch | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConvert | TriggerDescription$ Whenever you become the monarch, convert NICKNAME.
+SVar:TrigConvert:DB$ SetState | Mode$ Convert
+Oracle:Living metal (As long as it’s your turn, this Vehicle is also a creature.)\nFlying, menace, haste\nWhenever Starscream deals combat damage to a player, if there is no monarch, that player becomes the monarch.\nWhenever you become the monarch, convert Starscream.
