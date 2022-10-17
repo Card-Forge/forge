@@ -4,7 +4,7 @@ Types:Legendary Artifact Creature Robot
 PT:3/3
 K:More Than Meets the Eye:1 R G
 S:Mode$ Continuous | Affected$ Artifact.Creature+Other+YouCtrl,Vehicles+Other+YouCtrl | AddKeyword$ Modular:1 | Description$ Other nontoken artifact creatures and Vehicles you control have modular 1. (They enter the battlefield with an additional +1/+1 counter on them. When they die, you may put their +1/+1 counters on target artifact creature.)
-T:Mode$ CounterAddedAll | CounterType$ P1P1 | Valid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigConvert| ActivationLimit$ 1 | TriggerDescription$ Whenever you put one or more +1/+1 counters on NICKNAME,convert it.
+T:Mode$ CounterAddedOnce | CounterType$ P1P1 | Valid$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigConvert | TriggerDescription$ Whenever you put one or more +1/+1 counters on NICKNAME, convert it.
 SVar:TrigConvert:DB$ SetState | Mode$ Convert
 AlternateMode:DoubleFaced
 DeckHas:Ability$Counters & Keyword$Modular
@@ -20,7 +20,7 @@ Types:Legendary Artifact
 K:Modular:3
 A:AB$ MoveCounter | Cost$ X T | Source$ Self | ValidTgts$ Artifact.Other| TgtPrompt$ Select target artifact to get counters | CounterType$ P1P1 | CounterNum$ X | SorcerySpeed$ True | SubAbility$ DBAnimate | SpellDescription$ Move X +1/+1 counters from Blaster onto another target artifact. That artifact gains haste until end of turn. If Blaster has no +1/+1 counters on it, convert it. Activate only as a sorcery.
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Types$ Artifact | Keywords$ Haste | SubAbility$ DBConvert 
-SVar:DBConvert:DB$ SetState | Mode$ Convert | IsPresent$ Card.Self+!HasCounters
+SVar:DBConvert:DB$ SetState | Mode$ Convert | ConditionDefined$ Card.Self | ConditionPresent$ Card.Self+HasCounters | ConditionCompare$ EQ0
 SVar:X:Count$xPaid
 DeckHas:Ability$Counters
 Oracle:Modular 3\n{X}, {T}: Move X +1/+1 counters from Blaster onto another target artifact. That artifact gains haste until end of turn. If Blaster has no +1/+1 counters on it, convert it. Activate only as a sorcery.
