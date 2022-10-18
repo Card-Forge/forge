@@ -10,6 +10,6 @@ SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualPXPX | Name$ Arvad, Weather
 SVar:PerpetualPXPX:Mode$ Continuous | Affected$ Card.EffectSource | AddPower$ Num | AddToughness$ Num | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ CARDNAME perpetually gets +X/+X, where X is the number of creatures that died this turn.
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature
 SVar:Num:Number$0
-DeckHas:Ability$Graveyard
+DeckHas:Ability$Graveyard|LifeGain
 DeckHints:Ability$Sacrifice
 Oracle:Deathtouch, lifelink\nAt the beginning of your end step, if a creature died this turn, Arvad, Weatherlight Smuggler perpetually gets +X/+X, where X is the number of creature that died this turn. This ability also triggers if Arvad is in your graveyard.
