@@ -174,7 +174,7 @@ public class CostDiscard extends CostPartWithList {
             }
             if (sameName) {
                 for (Card c : handList) {
-                    if (CardLists.filter(handList, CardPredicates.nameEquals(c.getName())).size() > 1) {
+                    if (CardLists.count(handList, CardPredicates.nameEquals(c.getName())) > 1) {
                         return true;
                     }
                 }

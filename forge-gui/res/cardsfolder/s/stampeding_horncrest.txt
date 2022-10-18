@@ -2,7 +2,6 @@ Name:Stampeding Horncrest
 ManaCost:4 R
 Types:Creature Dinosaur
 PT:4/4
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has haste as long as you control another Dinosaur.
-SVar:X:Count$Valid Dinosaur.Other+YouCtrl
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Haste | IsPresent$ Dinosaur.Other+YouCtrl | Description$ CARDNAME has haste as long as you control another Dinosaur.
 DeckHints:Type$Dinosaur
 Oracle:Stampeding Horncrest has haste as long as you control another Dinosaur.
