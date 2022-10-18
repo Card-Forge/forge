@@ -5,7 +5,8 @@ PT:3/3
 K:Level up:1 R
 SVar:maxLevel:6
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | IsPresent$ Card.Self+counters_GE1_LEVEL+counters_LE5_LEVEL | Description$ LEVEL 1-5 6/6
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | AddTrigger$ TriggerDamage | IsPresent$ Card.Self+counters_GE6_LEVEL | Description$ LEVEL 6+ 6/6 Whenever CARDNAME attacks, it deals 6 damage to each creature defending player controls.
-SVar:TriggerDamage:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, it deals 6 damage to each creature defending player controls.
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | AddTrigger$ TriggerDamage | AddSVar$ AE | IsPresent$ Card.Self+counters_GE6_LEVEL | Description$ LEVEL 6+ 6/6 Whenever CARDNAME attacks, it deals 6 damage to each creature defending player controls.
+SVar:TriggerDamage:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks, it deals 6 damage to each creature defending player controls.
 SVar:TrigDamage:DB$ DamageAll | ValidCards$ Creature.ControlledBy TriggeredDefendingPlayer | NumDmg$ 6
+SVar:AE:SVar:HasAttackEffect:TRUE
 Oracle:Level up {1}{R} ({1}{R}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-5\n6/6\nLEVEL 6+\n6/6\nWhenever Lord of Shatterskull Pass attacks, it deals 6 damage to each creature defending player controls.
