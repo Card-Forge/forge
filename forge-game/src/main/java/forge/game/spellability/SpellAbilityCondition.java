@@ -365,11 +365,23 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         }
 
         if (getIsPresent() != null) {
-            FCollection<GameObject> list;
+            FCollection<GameObject> list = null;
             if (getPresentDefined() != null) {
                 list = AbilityUtils.getDefinedObjects(host, getPresentDefined(), sa);
             } else {
-                list = new FCollection<>(game.getCardsIn(getPresentZone()));
+                boolean usedLastState = false;
+                if (sa.isReplacementAbility()) {
+                    if (getPresentZone().equals(ZoneType.Battlefield)) {
+                        list = new FCollection<>(sa.getRootAbility().getLastStateBattlefield());
+                        usedLastState = true;
+                    } else if (getPresentZone().equals(ZoneType.Graveyard)) {
+                        list = new FCollection<>(sa.getRootAbility().getLastStateGraveyard());
+                        usedLastState = true;
+                    }
+                }
+                if (!usedLastState) {
+                    list = new FCollection<>(game.getCardsIn(getPresentZone()));
+                }
             }
 
             final int left = Iterables.size(Iterables.filter(list, GameObjectPredicates.restriction(getIsPresent().split(","), sa.getActivatingPlayer(), host, sa)));
