@@ -2,7 +2,7 @@ Name:Vesuvan Duplimancy
 ManaCost:3 U
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card.YouCtrl  | Execute$ TrigCopyTarget | ValidActivatingPlayer$ You | IsSingleTarget$ True | TriggerZones$ Battlefield | TargetsValid$ Creature.YouCtrl+inZoneBattlefield,Artifact.YouCtrl+inZoneBattlefield | TriggerDescription$ Whenever you cast a spell that targets only a single artifact or creature you control, create a token that's a copy of that artifact or creature, except it's not legendary.
-SVar:TrigCopyTarget:DB$ CopyPermanent | Defined$ TriggeredSpellAbilityTarget | Choices$ Card | NonLegendary$ True
+SVar:TrigCopyTarget:DB$ CopyPermanent | Defined$ TriggeredSpellAbilityTargets | Choices$ Card | NonLegendary$ True
 DeckHints:Type$Instant|Sorcery
 DeckHas:Ability$Token & Type$Artifact
 Oracle:Whenever you cast a spell that targets only a single artifact or creature you control, create a token that's a copy of that artifact or creature, except it's not legendary.

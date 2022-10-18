@@ -41,6 +41,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.Localizer;
+import forge.util.collect.FCollection;
 
 /**
  * <p>
@@ -280,17 +281,12 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
         sa.setTriggeringObject(AbilityKey.StackInstance, si);
         final List<TargetChoices> allTgts = saForTargets.getAllTargetChoices();
         if (!allTgts.isEmpty()) {
-            boolean target = false;
-            final CardCollection targetedCards = new CardCollection();
+            final FCollection<GameEntity> saTargets = new FCollection<>();
             for (TargetChoices tc : allTgts) {
-                if (!target) {
-                    sa.setTriggeringObject(AbilityKey.SpellAbilityTarget, tc.getTargetEntities().get(0));
-                    target = true;
-                }
-                targetedCards.addAll((tc.getTargetCards()));
+                saTargets.addAll(tc.getTargetEntities());
             }
-            sa.setTriggeringObject(AbilityKey.SpellAbilityTargetingCards, targetedCards);
-            }
+            sa.setTriggeringObject(AbilityKey.SpellAbilityTargets, saTargets);
+        }
         sa.setTriggeringObjectsFrom(
                 runParams,
             AbilityKey.Player,

@@ -4,7 +4,7 @@ Types:Legendary Creature Shapeshifter
 PT:3/3
 K:Changeling
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TargetsValid$ Permanent.YouCtrl+Other+inZoneBattlefield | Execute$ TrigCopyTarget | TriggerDescription$ Whenever you cast an instant or sorcery spell, if it targets one or more other permanents you control, create a token that's a copy of one of those permanents.
-SVar:TrigCopyTarget:DB$ CopyPermanent | Defined$ TriggeredSpellAbilityTargetingCards | Choices$ Permanent.YouCtrl+Other
+SVar:TrigCopyTarget:DB$ CopyPermanent | Defined$ TriggeredSpellAbilityTargets | Choices$ Permanent.YouCtrl+Other
 T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.OppCtrl | Execute$ TrigTokenCopy | TriggerDescription$ When a spell or ability an opponent controls causes you to discard this card, create a token that's a copy of target permanent.
 SVar:TrigTokenCopy:DB$ CopyPermanent | ValidTgts$ Permanent
 DeckHints:Type$Instant|Sorcery

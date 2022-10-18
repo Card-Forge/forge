@@ -1317,12 +1317,14 @@ public class AbilityUtils {
                 // if there is no target information in SA but targets are listed in SpellAbilityTargeting cards, copy that
                 // information so it's not lost if the calling code is interested in targets of the triggered SA.
                 if (triggeringType.equals("SpellAbility")) {
-                    final CardCollectionView tgtList = (CardCollectionView)root.getTriggeringObject(AbilityKey.SpellAbilityTargetingCards);
+                    final List<GameEntity> tgtList = (List<GameEntity>) root.getTriggeringObject(AbilityKey.SpellAbilityTargets);
                     if (s.getTargets() != null && s.getTargets().size() == 0) {
                         if (tgtList != null && tgtList.size() > 0) {
                             TargetChoices tc = new TargetChoices();
-                            for (Card c : tgtList) {
-                                tc.add(c);
+                            for (GameEntity ge : tgtList) {
+                                if (ge instanceof Card) {
+                                    tc.add((Card) ge);
+                                }
                             }
                             s.setTargets(tc);
                         }

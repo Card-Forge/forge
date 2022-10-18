@@ -22,6 +22,6 @@ K:Living metal
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | TargetsValid$ Creature.YouCtrl,Vehicle.YouCtrl | Execute$ TrigPutCounters | TriggerDescription$ Whenever you cast a spell that targets one or more creatures or Vehicles you control, put that many +1/+1 counters on NICKNAME. Convert NICKNAME.
 SVar:TrigPutCounters:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBConvert
 SVar:DBConvert:DB$ SetState | Mode$ Convert
-SVar:X:TriggerObjectsSpellAbilityTargetingCards$Valid Creature.YouCtrl,Vehicle.YouCtrl
+SVar:X:TriggerObjectsSpellAbilityTargets$Valid Creature.YouCtrl,Vehicle.YouCtrl
 DeckHas:Ability$Counters
 Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nWhenever you cast a spell that targets one or more creatures or Vehicles you control, put that many +1/+1 counters on Arcee. Convert Arcee.
