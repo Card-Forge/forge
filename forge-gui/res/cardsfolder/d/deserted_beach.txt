@@ -2,7 +2,6 @@ Name:Deserted Beach
 ManaCost:no cost
 Types:Land
 K:ETBReplacement:Other:LandTapped
-SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionCheckSVar$ ETBCheckSVar2 | ConditionSVarCompare$ LT2 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control two or more other lands.
-SVar:ETBCheckSVar2:Count$Valid Land.YouCtrl
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Land.YouCtrl | ConditionCompare$ LT2 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control two or more other lands.
 A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
 Oracle:Deserted Beach enters the battlefield tapped unless you control two or more other lands.\n{T}: Add {W} or {U}.

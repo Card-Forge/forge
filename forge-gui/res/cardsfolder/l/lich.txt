@@ -1,9 +1,8 @@
 Name:Lich
 ManaCost:B B B B
 Types:Enchantment
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ MoveToPlay | Description$ As CARDNAME enters the battlefield, you lose life equal to your life total.
-SVar:MoveToPlay:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Battlefield | SubAbility$ TrigLoseLife
-SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ LifeTotal
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LoseLife | ReplacementResult$ Updated | Description$ As CARDNAME enters the battlefield, you lose life equal to your life total.
+SVar:LoseLife:DB$ LoseLife | LifeAmount$ LifeTotal
 SVar:LifeTotal:Count$YourLifeTotal
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You don't lose the game for having 0 or less life. | Description$ You don't lose the game for having 0 or less life.
 R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | AiLogic$ LichDraw | ReplaceWith$ Draw | Description$ If you would gain life, draw that many cards instead.
