@@ -295,14 +295,23 @@ public class CardDetailUtil {
             card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null) :
             card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()) : null );
 
-        // LEVEL [0-9]+-[0-9]+
-        // LEVEL [0-9]+\+
+        // Bracket P/T for Level up
+        if (text.contains("LEVEL")) {
+            String regex = "[0-99]+/[0-99]";
+            text = text.replaceAll(regex, "[$0]");
+        }
 
-        String regex = "LEVEL [0-9]+-[0-9]+ ";
+        // LEVEL [0-9]+-[0-9]+
+        String regex = "LEVEL [0-9]+-[0-9]+ \\[[0-99]+/[0-99]]+ ";
         text = text.replaceAll(regex, "$0\r\n");
 
-        regex = "LEVEL [0-9]+\\+ ";
-        text = text.replaceAll(regex, "\r\n$0\r\n");
+        // LEVEL [0-9]+\+
+        regex = "LEVEL [0-9]+\\+ \\[[0-99]+/[0-99]]+ ";
+        text = text.replaceAll(regex, "$0\r\n");
+
+        // ",,," becomes a line break
+        regex = ",,,";
+        text = text.replaceAll(regex, "\r\n");
 
         // displays keywords that have dots in them a little better:
         regex = "\\., ";

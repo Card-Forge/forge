@@ -5,5 +5,5 @@ PT:0/3
 K:Level up:2
 SVar:maxLevel:5
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 0 | SetToughness$ 6 | IsPresent$ Card.Self+counters_GE1_LEVEL+counters_LE4_LEVEL | Description$ LEVEL 1-4 0/6
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | AddKeyword$ Islandwalk | IsPresent$ Card.Self+counters_GE5_LEVEL | Description$ LEVEL 5+ 6/6 CARDNAME has Islandwalk (This creature can't be blocked as long as defending player controls an Island.)
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | AddKeyword$ Islandwalk | IsPresent$ Card.Self+counters_GE5_LEVEL | Description$ LEVEL 5+ 6/6 Islandwalk
 Oracle:Level up {2} ({2}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-4\n0/6\nLEVEL 5+\n6/6\nIslandwalk (This creature can't be blocked as long as defending player controls an Island.)
