@@ -309,8 +309,9 @@ public class CardDetailUtil {
         regex = "LEVEL [0-9]+\\+ \\[[0-99]+/[0-99]]+ ";
         text = text.replaceAll(regex, "$0\r\n");
 
-        regex = "LEVEL [0-9]+\\+ ";
-        text = text.replaceAll(regex, "\r\n$0\r\n");
+        // ",,," becomes a line break
+        regex = ",,,";
+        text = text.replaceAll(regex, "\r\n");
 
         // displays keywords that have dots in them a little better:
         regex = "\\., ";
