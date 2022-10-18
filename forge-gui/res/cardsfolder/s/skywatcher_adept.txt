@@ -4,6 +4,6 @@ Types:Creature Merfolk Wizard
 PT:1/1
 K:Level up:3
 SVar:maxLevel:3
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 2 | AddKeyword$ Flying | IsPresent$ Card.Self+counters_GE1_LEVEL+counters_LE2_LEVEL | Description$ LEVEL 1-2 2/2 CARDNAME has Flying
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 2 | AddKeyword$ Flying | IsPresent$ Card.Self+counters_GE3_LEVEL | Description$ LEVEL 3+ 4/2 CARDNAME has Flying
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 2 | AddKeyword$ Flying | IsPresent$ Card.Self+counters_GE1_LEVEL+counters_LE2_LEVEL | Description$ LEVEL 1-2 2/2 Flying
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 2 | AddKeyword$ Flying | IsPresent$ Card.Self+counters_GE3_LEVEL | Description$ LEVEL 3+ 4/2 Flying
 Oracle:Level up {3} ({3}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-2\n2/2\nFlying\nLEVEL 3+\n4/2\nFlying

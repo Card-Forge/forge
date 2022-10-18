@@ -4,6 +4,6 @@ Types:Creature Snake
 PT:2/1
 K:Level up:1
 SVar:maxLevel:8
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | AddKeyword$ Protection:Instant:Protection from instants | IsPresent$ Card.Self+counters_GE3_LEVEL+counters_LT8_LEVEL | Description$ LEVEL 3-7 4/4 CARDNAME has Protection from Instants
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | AddKeyword$ Protection from everything | IsPresent$ Card.Self+counters_GE8_LEVEL | Description$ LEVEL 8+ 6/6 CARDNAME has Protection from everything
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 4 | SetToughness$ 4 | AddKeyword$ Protection:Instant:Protection from instants | IsPresent$ Card.Self+counters_GE3_LEVEL+counters_LT8_LEVEL | Description$ LEVEL 3-7 4/4 Protection from instants
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 6 | SetToughness$ 6 | AddKeyword$ Protection from everything | IsPresent$ Card.Self+counters_GE8_LEVEL | Description$ LEVEL 8+ 6/6 Protection from everything
 Oracle:Level up {1} ({1}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 3-7\n4/4\nProtection from instants\nLEVEL 8+\n6/6\nProtection from everything
