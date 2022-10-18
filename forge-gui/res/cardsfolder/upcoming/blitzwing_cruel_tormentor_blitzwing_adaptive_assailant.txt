@@ -22,7 +22,7 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCharm | Tri
 SVar:TrigCharm:DB$ Charm | Random$ True | Choices$ Indestructible,Flying
 SVar:Indestructible:DB$ Pump | Defined$ Self | KW$ Indestructible
 SVar:Flying:DB$ Pump | Defined$ Self | KW$ Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigConvert| TriggerDescription$ Whenever NICKNAME deals combat damage to a player, convert it.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigConvert | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, convert it.
 SVar:TrigConvert:DB$ SetState | Mode$ Convert
 DeckHas:Keyword$Flying|Indestructible
 SVar:HasAttackEffect:TRUE
