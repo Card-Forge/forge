@@ -1,0 +1,12 @@
+Name:Teferi's Contingency
+ManaCost:W U U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | SubAbility$ DBPump | SpellDescription$ Counter target spell.
+SVar:DBPump:DB$ PumpAll | Defined$ TargetedController | PumpZone$ Graveyard,Hand,Library | ValidCards$ Targeted.sameName | RememberAllPumped$ True | SubAbility$ DBEffect | StackDescription$ None
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ Perpetual | Name$ Teferi's Contingency's Perpetual Effect | Duration$ Permanent | Triggers$ Update | SubAbility$ DBCleanup | SpellDescription$ Each card in its controller's graveyard, hand, and library with the same name as that spell perpetually gains "This spell costs {2} more to cast."
+SVar:Perpetual:Mode$ Continuous | Affected$ Card.IsRemembered | AddStaticAbility$ PerpetualRaiseCost | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Each card in its controller's graveyard, hand, and library with the same name as that spell perpetually gains "This spell costs {2} more to cast."
+SVar:PerpetualRaiseCost:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | Description$ This spell costs {2} more to cast.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+Oracle:Counter target spell. Each card in its controller's graveyard, hand, and library with the same name as that spell perpetually gains "This spell costs {2} more to cast."
