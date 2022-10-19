@@ -185,7 +185,7 @@ public enum CounterEnumType {
 
     INGENUITY("INGTY", 67, 186, 205),
     
-    INTELL("INTEL", 80, 250, 180),
+    INTEL("INTEL", 80, 250, 180),
 
     INTERVENTION("INTRV", 205, 203, 105),
 
