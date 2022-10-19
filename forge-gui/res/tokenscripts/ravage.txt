@@ -1,0 +1,8 @@
+Name:Ravage
+ManaCost:no cost
+Colors:black
+Types:Legendary Artifact Creature Robot
+PT:3/3
+K:Menace
+K:Deathtouch
+Oracle:Menace, deathtouch

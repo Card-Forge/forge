@@ -1,0 +1,28 @@
+Name:Flamewar, Brash Veteran
+ManaCost:1 B R
+Types:Legendary Artifact Creature Robot
+PT:3/2
+K:More Than Meets the Eye:B R
+A:AB$ PutCounter | Cost$ Sac<1/Artifact.Other/another artifact> | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SorcerySpeed$ True | SubAbility$ DBConvert | AILogic$ AristocratCounters | SpellDescription$ Put a +1/+1 counter on NICKNAME. Activate only as a sorcery.
+SVar:DBConvert:DB$ SetState | Mode$ Convert | StackDescription$ Convert NICKNAME
+A:AB$ ChangeZone | Cost$ 1 Discard<1/Hand> | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Hand | SpellDescription$ Put all exiled cards you own with intel counters on them into your hand.
+DeckHints:Ability$Counters
+DeckHas:Ability$Sacrifice|Discard|Counters
+Oracle:More Than Meets the Eye {B}{R} (You may cast this card converted for {B}{R}.)\nSacrifice another artifact: Put a +1/+1 counter on Flamewar and convert it. Activate only as a sorcery.\n{1}, Discard your hand: Put all exiled cards you own with intel counters on them into your hand.
+
+ALTERNATE
+
+Name:Flamewar, Streetwise Operative
+ManaCost:no cost
+Colors:black, red
+Types:Legendary Artifact Vehicle
+PT:2/1
+K:Living metal
+K:Menace
+K:Deathtouch
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, exile that many cards from the top of your library face down. Put an intel counter on each of them. Convert NICKNAME.
+SVar:TrigDig:DB$ Dig | DigNum$ X | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | ExileWithCounter$ INTEL | SubAbility$ DBConvert
+SVar:DBConvert:DB$ SetState | Mode$ Convert
+SVar:X:TriggerCount$DamageAmount
+SVar:HasAttackEffect:TRUE
+Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nMenace, deathtouch\nWhenever Flamewar deals combat damage to a player, exile that many cards from the top of your library face down. Put an intel counter on each of them. Convert Flamewar.
