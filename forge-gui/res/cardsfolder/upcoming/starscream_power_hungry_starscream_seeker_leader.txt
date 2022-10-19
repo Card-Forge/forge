@@ -17,6 +17,7 @@ Name:Starscream, Seeker Leader
 ManaCost:no cost
 Colors:black
 Types:Legendary Artifact Vehicle
+PT:2/3
 K:Living metal
 K:Flying
 K:Menace
