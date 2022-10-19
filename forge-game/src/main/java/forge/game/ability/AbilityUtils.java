@@ -1066,8 +1066,11 @@ public class AbilityUtils {
                     o = ((Card) c).getController();
                 } else if (c instanceof SpellAbility) {
                     o = ((SpellAbility) c).getActivatingPlayer();
-                } else if (c instanceof CardCollection) { // For merged permanent
-                    o = ((CardCollection) c).get(0).getController();
+                } else if (c instanceof Iterable<?>) { // For merged permanent
+                    if (orCont) {
+                        addPlayer(ImmutableList.copyOf(Iterables.filter((Iterable<Object>)c, Player.class)), "", players);
+                    }
+                    addPlayer(ImmutableList.copyOf(Iterables.filter((Iterable<Object>)c, Card.class)), "Controller", players);
                 }
             }
             else if (defParsed.endsWith("Opponent")) {
