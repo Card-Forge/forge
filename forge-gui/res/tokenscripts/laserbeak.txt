@@ -1,0 +1,7 @@
+Name:Laserbeak
+ManaCost:no cost
+Types:Legendary Artifact Creature Robot
+PT:2/2
+K:Flying
+K:Hexproof
+Oracle:Flying, hexproof
