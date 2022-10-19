@@ -3,7 +3,7 @@ ManaCost:3 R G
 Types:Legendary Artifact Creature Robot
 PT:3/3
 K:More Than Meets the Eye:1 R G
-S:Mode$ Continuous | Affected$ Artifact.Creature+Other+YouCtrl,Vehicles+Other+YouCtrl | AddKeyword$ Modular:1 | Description$ Other nontoken artifact creatures and Vehicles you control have modular 1. (They enter the battlefield with an additional +1/+1 counter on them. When they die, you may put their +1/+1 counters on target artifact creature.)
+S:Mode$ Continuous | Affected$ Artifact.Creature+Other+YouCtrl,Vehicles.Other+YouCtrl | AddKeyword$ Modular:1 | Description$ Other nontoken artifact creatures and Vehicles you control have modular 1. (They enter the battlefield with an additional +1/+1 counter on them. When they die, you may put their +1/+1 counters on target artifact creature.)
 T:Mode$ CounterAddedOnce | CounterType$ P1P1 | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigConvert | TriggerDescription$ Whenever you put one or more +1/+1 counters on NICKNAME, convert it.
 SVar:TrigConvert:DB$ SetState | Mode$ Convert
 AlternateMode:Convert
