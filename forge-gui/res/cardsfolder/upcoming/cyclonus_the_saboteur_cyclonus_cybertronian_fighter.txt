@@ -10,7 +10,7 @@ SVar:DBConvert:DB$ SetState | Mode$ Convert | ConditionPresent$ Card.Self+powerG
 AlternateMode:Convert
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Graveyard
-Oracle:More Than Meets the Eye {5}{U}{B} (You may cast this card converted for {5}{U}{B}.)\nFlying\nWhenever Cyclonus deals combat damage to a player, it connives. Then if Cyclonus’s power is 5 or greater, convert it. (To have a creature connive, draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
+Oracle:More Than Meets the Eye {5}{U}{B} (You may cast this card converted for {5}{U}{B}.)\nFlying\nWhenever Cyclonus deals combat damage to a player, it connives. Then if Cyclonus's power is 5 or greater, convert it. (To have a creature connive, draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
 
 ALTERNATE
 
