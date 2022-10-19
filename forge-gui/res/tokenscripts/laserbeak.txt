@@ -1,5 +1,6 @@
 Name:Laserbeak
 ManaCost:no cost
+colors:blue
 Types:Legendary Artifact Creature Robot
 PT:2/2
 K:Flying
