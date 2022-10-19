@@ -6,7 +6,7 @@ K:More Than Meets the Eye:1 W U B
 T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl | TriggerZones$ Graveyard | ValidTarget$ Player | Execute$ TrigPlay | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, if CARDNAME is in your graveyard, you may pay {2}{R}{R}{R}. If you do, you may cast it without paying its mana cost.
 
 SVar:TrigConvert:DB$ SetState | Mode$ Convert
-AlternateMode:DoubleFaced
+AlternateMode:Convert
 DeckHas:Ability$Graveyard
 Oracle:More Than Meets the Eye {2}{W}{U}{B} (You may cast this card converted for {2}{W}{U}{B}.)\nWhenever one or more creature tokens you control deal combat damage to a player, exile target instant or sorcery card with mana value equal to the damage dealt from their graveyard. Copy it. You may cast the copy without paying its mana cost. If you do, convert Soundwave.
 
@@ -16,5 +16,11 @@ Name:Soundwave, Superior Captain
 ManaCost:no cost
 Colors:white,blue,black
 Types:Legendary Artifact
-
+T:Mode$ SpellCast | ValidCard$ Spell.cmcOdd | ValidActivatingPlayer$ You | Execute$ TrigConvertRavage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with an odd mana value, convert NICKNAME. If you do, create Ravage, a legendary 3/3 black Robot artifact creature token with menace and deathtouch
+SVar:TrigConvertRavage:DB$ SetState | Mode$ Convert | SubAbility$ DBTokenRavage
+SVar:DBTokenRavage:DB$ Token | TokenScript$ ravage
+T:Mode$ SpellCast | ValidCard$ Spell.cmcEven | ValidActivatingPlayer$ You | Execute$ TrigConvertLaserbeak | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with an even mana value, convert NICKNAME.  If you do, create Laserbeak, a legendary 2/2 blue Robot artifact creature token with flying and hexproof.
+SVar:TrigConvertLaserbeak:DB$ SetState | Mode$ Convert | SubAbility$ DBTokenLaserbeak
+SVar:DBTokenLaserbeak:DB$ Token | TokenScript$ laserbeak
+DeckHas:Ability$Token & Keyword$Flying|Hexproof|Menace|Deathtouch
 Oracle:Whenever you cast a spell with an odd mana value, convert Soundwave. If you do, create Ravage, a legendary 3/3 black Robot artifact creature token with menace and deathtouch.\nWhenever you cast a spell with an even mana value, convert Soundwave. If you do, create Laserbeak, a legendary 2/2 blue Robot artifact creature token with flying and hexproof.
