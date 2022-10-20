@@ -29,25 +29,12 @@ public class CounterEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         final List<SpellAbility> sas;
 
-        if (sa.hasParam("AllType")) {
-            boolean countersSpells = sa.getParam("AllType").contains("Spell");
-            boolean countersActivated = sa.getParam("AllType").contains("Activated");
-            boolean countersTriggers = sa.getParam("AllType").contains("Triggered");
-
+        if (sa.hasParam("AllValid")) {
             sas = Lists.newArrayList();
             for (SpellAbilityStackInstance si : game.getStack()) {
                 SpellAbility spell = si.getSpellAbility(true);
-                if (spell.isSpell() && !countersSpells) {
+                if (!spell.isValid(sa.getParam("AllValid").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                     continue;
-                } else if (spell.isActivatedAbility() && !countersActivated) {
-                    continue;
-                } else if (spell.isTrigger() && !countersTriggers) {
-                    continue;
-                }
-                if (sa.hasParam("AllValid")) {
-                    if (!spell.getHostCard().isValid(sa.getParam("AllValid"), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
-                        continue;
-                    }
                 }
                 sas.add(spell);
             }
@@ -86,25 +73,12 @@ public class CounterEffect extends SpellAbilityEffect {
         // still on the stack
         final List<SpellAbility> sas;
 
-        if (sa.hasParam("AllType")) {
-            boolean countersSpells = sa.getParam("AllType").contains("Spell");
-            boolean countersActivated = sa.getParam("AllType").contains("Activated");
-            boolean countersTriggers = sa.getParam("AllType").contains("Triggered");
-
+        if (sa.hasParam("AllValid")) {
             sas = Lists.newArrayList();
             for (SpellAbilityStackInstance si : game.getStack()) {
                 SpellAbility spell = si.getSpellAbility(true);
-                if (spell.isSpell() && !countersSpells) {
+                if (!spell.isValid(sa.getParam("AllValid").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                     continue;
-                } else if (spell.isActivatedAbility() && !countersActivated) {
-                    continue;
-                } else if (spell.isTrigger() && !countersTriggers) {
-                    continue;
-                }
-                if (sa.hasParam("AllValid")) {
-                    if (!spell.getHostCard().isValid(sa.getParam("AllValid"), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
-                        continue;
-                    }
                 }
                 sas.add(spell);
             }

@@ -797,7 +797,7 @@ public class ComputerUtilCost {
         if (ApiType.Counter.equals(sa.getApi())) {
             List<SpellAbility> spells = AbilityUtils.getDefinedSpellAbilities(source, sa.getParamOrDefault("Defined", "Targeted"), sa);
             for (SpellAbility toBeCountered : spells) {
-                if (!CardFactoryUtil.isCounterable(toBeCountered.getHostCard())) {
+                if (sa.isSpell() && !CardFactoryUtil.isCounterable(toBeCountered.getHostCard())) {
                     return false;
                 }
                 // TODO check hasFizzled

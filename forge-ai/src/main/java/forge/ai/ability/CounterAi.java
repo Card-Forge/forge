@@ -64,7 +64,7 @@ public class CounterAi extends SpellAbilityAi {
 
         if (sa.usesTargeting()) {
             final SpellAbility topSA = ComputerUtilAbility.getTopSpellAbilityOnStack(game, sa);
-            if (!CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa) || topSA.getActivatingPlayer() == ai
+            if ((topSA.isSpell() && !CardFactoryUtil.isCounterableBy(topSA.getHostCard(), sa)) || topSA.getActivatingPlayer() == ai
                     || ai.getAllies().contains(topSA.getActivatingPlayer())) {
                 // might as well check for player's friendliness
                 return false;
@@ -326,7 +326,7 @@ public class CounterAi extends SpellAbilityAi {
                 leastBadOption = tgtSA;
             }
 
-            if (!CardFactoryUtil.isCounterableBy(tgtSA.getHostCard(), sa) ||
+            if ((tgtSA.isSpell() && !CardFactoryUtil.isCounterableBy(tgtSA.getHostCard(), sa)) ||
                 tgtSA.getActivatingPlayer() == ai ||
                 !tgtSA.getActivatingPlayer().isOpponentOf(ai)) {
                 // Is this a "better" least bad option

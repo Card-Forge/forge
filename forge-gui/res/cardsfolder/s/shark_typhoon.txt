@@ -3,7 +3,7 @@ ManaCost:5 U
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, create an X/X blue Shark creature token with flying, where X is that spell's mana value.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ u_x_x_shark_flying | TokenOwner$ You | TokenPower$ Y | TokenToughness$ Y | TokenAmount$ 1
-SVar:Y:TriggeredCard$CardManaCost
+SVar:Y:TriggeredStackInstance$CardManaCostLKI
 K:Cycling:X 1 U
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigToken2 | TriggerDescription$ When you cycle CARDNAME, create an X/X blue Shark creature token with flying.
 SVar:TrigToken2:DB$ Token | TokenAmount$ 1 | TokenScript$ u_x_x_shark_flying | TokenOwner$ You | TokenPower$ X | TokenToughness$ X | TokenAmount$ 1

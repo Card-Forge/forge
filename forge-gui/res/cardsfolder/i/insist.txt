@@ -3,8 +3,7 @@ ManaCost:G
 Types:Sorcery
 A:SP$ Effect | Triggers$ SpellCastTrig | SubAbility$ DBDraw | SpellDescription$ The next creature spell you cast this turn can't be countered.
 SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ Insistence | TriggerDescription$ The next creature spell you cast this turn can't be countered.
-SVar:Insistence:DB$ Pump | Defined$ TriggeredCard | KW$ HIDDEN CARDNAME can't be countered. | PumpZone$ Stack | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ Insistence | OneOff$ True | Static$ True | TriggerDescription$ The next creature spell you cast this turn can't be countered.
+SVar:Insistence:DB$ Pump | Defined$ TriggeredCard | KW$ HIDDEN CARDNAME can't be countered. | PumpZone$ Stack
 AI:RemoveDeck:All
 Oracle:The next creature spell you cast this turn can't be countered.\nDraw a card.
