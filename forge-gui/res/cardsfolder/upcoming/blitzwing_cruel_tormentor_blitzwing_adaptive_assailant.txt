@@ -4,9 +4,10 @@ Types:Legendary Artifact Creature Robot
 PT:6/5
 K:More Than Meets the Eye:3 B
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, target opponent loses life equal to the life that player lost this turn. If no life is lost this way, convert NICKNAME.
-SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X | SubAbility$ DBConvert
+SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ AFLifeLost | SubAbility$ DBConvert
 SVar:DBConvert:DB$ SetState | Mode$ Convert | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0
-SVar:X:TargetedPlayer$LifeLostThisTurn
+SVar:AFLifeLost:Number$0
+#AFLifeLost will be set by LoseLife
 AlternateMode:Convert
 Oracle:More Than Meets the Eye {3}{B} (You may cast this card converted for {3}{B}.)\nAt the beginning of your end step, target opponent loses life equal to the life that player lost this turn. If no life is lost this way, convert Blitzwing.
 
