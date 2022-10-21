@@ -7,7 +7,7 @@ T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.token+YouCtr
 SVar:TrigCast:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target instant or sorcery card in that player's graveyard | ValidTgts$ Instant.cmcEQX+OwnedBy TriggeredTarget,Sorcery.cmcEQX+OwnedBy TriggeredTarget | RememberChanged$ True | SubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | Controller$ You | CopyCard$ True | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | ImprintPlayed$ True | SubAbility$ DBConvert
 SVar:DBConvert:DB$ SetState | Mode$ Convert | ConditionDefined$ Imprinted | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanup 
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearImprinted$ True
 SVar:X:TriggerCount$DamageAmount
 AlternateMode:Convert
 DeckHas:Ability$Graveyard
