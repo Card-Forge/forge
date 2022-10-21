@@ -3,9 +3,9 @@ ManaCost:2 W
 Types:Legendary Artifact Creature Robot
 PT:2/4
 K:More Than Meets the Eye:1 W
-T:Mode$ LifeGained | TriggerZones$ Battlefield | ValidPlayer$ You | OptionalDecider$ You | NoResolvingCheck$ True | Execute$ DBImmediateTrig | TriggerDescription$ Whenever you gain life, you may convert NICKNAME. When you do, return target artifact card with mana value less than or equal to the amount of life you gained this turn from your graveyard to the battlefield tapped.
-SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ TrigConvert | TriggerDescription$ When you do, return target artifact card with mana value less than or equal to the amount of life you gained this turn from your graveyard to the battlefield tapped.
-SVar:TrigConvert:DB$ SetState | Mode$ Convert | SubAbility$ DBReturn 
+T:Mode$ LifeGained | TriggerZones$ Battlefield | ValidPlayer$ You | OptionalDecider$ You | NoResolvingCheck$ True | Execute$ TrigConvert | TriggerDescription$ Whenever you gain life, you may convert NICKNAME. When you do, return target artifact card with mana value less than or equal to the amount of life you gained this turn from your graveyard to the battlefield tapped.
+SVar:TrigConvert:DB$ SetState | Mode$ Convert | SubAbility$ DBImmediateTrig 
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | Execute$ DBReturn | TriggerDescription$ When you do, return target artifact card with mana value less than or equal to the amount of life you gained this turn from your graveyard to the battlefield tapped.
 SVar:DBReturn:DB$ ChangeZone | ValidTgts$ Artifact.cmcLEX+YouOwn | TgtPrompt$ Select target artifact card with mana value equal or less than the amount of life you gained this turn from your graveyard | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True 
 SVar:X:Count$LifeYouGainedThisTurn
 DeckHas:Ability$LifeGain|Graveyard
