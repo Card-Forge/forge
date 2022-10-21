@@ -22,8 +22,8 @@ K:Living metal
 K:Flying
 K:Menace
 K:Haste
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigMonarch | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, if there is no monarch, that player becomes the monarch.
-SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ TriggeredTarget | CheckSVar$ Monarch | SVarCompare$ EQ0
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CheckSVar$ Monarch | SVarCompare$ EQ0 | CombatDamage$ True | Execute$ TrigMonarch | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, if there is no monarch, that player becomes the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ TriggeredTarget 
 T:Mode$ BecomeMonarch | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConvert | TriggerDescription$ Whenever you become the monarch, convert NICKNAME.
 SVar:TrigConvert:DB$ SetState | Mode$ Convert
 SVar:Monarch:PlayerCountPlayers$HasPropertyisMonarch

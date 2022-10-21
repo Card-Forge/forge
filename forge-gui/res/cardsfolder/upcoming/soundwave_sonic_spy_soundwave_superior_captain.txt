@@ -4,9 +4,9 @@ Types:Legendary Artifact Creature Robot
 PT:5/4
 K:More Than Meets the Eye:1 W U B
 T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.token+YouCtrl | TriggerZones$ Battlefield | ValidTarget$ Player | Execute$ TrigCast | TriggerDescription$ nWhenever one or more creature tokens you control deal combat damage to a player, exile target instant or sorcery card with mana value equal to the damage dealt from their graveyard. Copy it. You may cast the copy without paying its mana cost. If you do, convert NICKNAME.
-SVar:TrigCast:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target instant or sorcery card in that player' graveyard | ValidTgts$ Instant.cmcLEX+OwnedBy TriggeredTarget,Sorcery.cmcLEX+OwnedBy TriggeredTarget | RememberChanged$ True | SubAbility$ DBPlay
-SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | Controller$ You | CopyCard$ True | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | RememberCast True | SubAbility$ DBConvert
-SVar:DBConvert:DB$ SetState | Mode$ Convert | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanup 
+SVar:TrigCast:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Choose target instant or sorcery card in that player's graveyard | ValidTgts$ Instant.cmcEQX+OwnedBy TriggeredTarget,Sorcery.cmcEQX+OwnedBy TriggeredTarget | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | Controller$ You | CopyCard$ True | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | ImprintPlayed$ True | SubAbility$ DBConvert
+SVar:DBConvert:DB$ SetState | Mode$ Convert | ConditionDefined$ Imprinted | ConditionPresent$ Card | ConditionCompare$ EQ1 | SubAbility$ DBCleanup 
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggerCount$DamageAmount
 AlternateMode:Convert
@@ -21,10 +21,10 @@ ManaCost:no cost
 Colors:white,blue,black
 Types:Legendary Artifact
 T:Mode$ SpellCast | ValidCard$ Spell.cmcOdd | ValidActivatingPlayer$ You | Execute$ TrigConvertRavage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with an odd mana value, convert NICKNAME. If you do, create Ravage, a legendary 3/3 black Robot artifact creature token with menace and deathtouch
-SVar:TrigConvertRavage:DB$ SetState | Mode$ Convert | RememberChanged True | SubAbility$ DBTokenRavage
+SVar:TrigConvertRavage:DB$ SetState | Mode$ Convert | RememberChanged$ True | SubAbility$ DBTokenRavage
 SVar:DBTokenRavage:DB$ Token | TokenScript$ ravage | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 T:Mode$ SpellCast | ValidCard$ Spell.cmcEven | ValidActivatingPlayer$ You | Execute$ TrigConvertLaserbeak | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with an even mana value, convert NICKNAME. If you do, create Laserbeak, a legendary 2/2 blue Robot artifact creature token with flying and hexproof.
-SVar:TrigConvertLaserbeak:DB$ SetState | Mode$ Convert | RememberChanged True | SubAbility$ DBTokenLaserbeak
+SVar:TrigConvertLaserbeak:DB$ SetState | Mode$ Convert | RememberChanged$ True | SubAbility$ DBTokenLaserbeak
 SVar:DBTokenLaserbeak:DB$ Token | TokenScript$ laserbeak | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token & Keyword$Flying|Hexproof|Menace|Deathtouch
