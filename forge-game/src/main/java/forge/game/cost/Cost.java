@@ -289,13 +289,18 @@ public class Cost implements Serializable {
         }
 
         if (parse.startsWith("SubCounter<")) {
-            // SubCounter<NumCounters/CounterType>
+            // SubCounter<NumCounters/CounterType/{Type/Description/Zone}>
             final String[] splitStr = abCostParse(parse, 5);
             final String type = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
             final String description = splitStr.length > 3 ? splitStr[3] : null;
             final ZoneType zone = splitStr.length > 4 ? ZoneType.smartValueOf(splitStr[4]) : ZoneType.Battlefield;
+            boolean oneOrMore = false;
+            if (splitStr[0].equals("X1+")) {
+                oneOrMore = true;
+                splitStr[0] = "X";
+            }
 
-            return new CostRemoveCounter(splitStr[0], CounterType.getType(splitStr[1]), type, description, zone);
+            return new CostRemoveCounter(splitStr[0], CounterType.getType(splitStr[1]), type, description, zone, oneOrMore);
         }
 
         if (parse.startsWith("AddCounter<")) {
@@ -401,7 +406,12 @@ public class Cost implements Serializable {
         if (parse.startsWith("RemoveAnyCounter<")) {
             final String[] splitStr = abCostParse(parse, 4);
             final String description = splitStr.length > 3 ? splitStr[3] : null;
-            return new CostRemoveAnyCounter(splitStr[0], CounterType.getType(splitStr[1]), splitStr[2], description);
+            boolean oneOrMore = false;
+            if (splitStr[0].equals("X1+")) {
+                oneOrMore = true;
+                splitStr[0] = "X";
+            }
+            return new CostRemoveAnyCounter(splitStr[0], CounterType.getType(splitStr[1]), splitStr[2], description, oneOrMore);
         }
 
         if (parse.startsWith("Exile<")) {

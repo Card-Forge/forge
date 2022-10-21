@@ -35,18 +35,13 @@ import forge.game.zone.ZoneType;
 public class CostRemoveCounter extends CostPart {
     // SubCounter<Num/Counter/{Type/TypeDescription/Zone}>
 
-    // Here are the cards that have RemoveCounter<Type>
-    // Ion Storm, Noviken Sages, Ghave, Guru of Spores, Power Conduit (any
-    // Counter is tough),
-    // Quillspike, Rift Elemental, Sage of Fables, Spike Rogue
-
-
     /**
      * Serializables need a version ID.
      */
     private static final long serialVersionUID = 1L;
     public final CounterType counter;
     public final ZoneType zone;
+    public final Boolean oneOrMore;
 
     /**
      * Instantiates a new cost remove counter.
@@ -61,11 +56,12 @@ public class CostRemoveCounter extends CostPart {
      *            the description
      * @param zone the zone.
      */
-    public CostRemoveCounter(final String amount, final CounterType counter, final String type, final String description, ZoneType zone) {
+    public CostRemoveCounter(final String amount, final CounterType counter, final String type, final String description, final ZoneType zone, final boolean oneOrMore) {
         super(amount, type, description);
 
         this.counter = counter;
         this.zone = zone;
+        this.oneOrMore = oneOrMore;
     }
 
     @Override
@@ -108,7 +104,12 @@ public class CostRemoveCounter extends CostPart {
         } else {
             sb.append("Remove ");
             if (this.getAmount().equals("X")) {
-                sb.append("any number of counters");
+                if (oneOrMore) {
+                    sb.append("one or more ");
+                } else {
+                    sb.append("any number of ");
+                }
+                sb.append(this.counter.getName().toLowerCase()).append(" counters");
             } else if (this.getAmount().equals("All")) {
                 sb.append("all ").append(this.counter.getName().toLowerCase()).append(" counters");
             } else {
