@@ -268,8 +268,13 @@ public class ManaEffect extends SpellAbilityEffect {
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
         String mana = !sa.hasParam("Amount") || StringUtils.isNumeric(sa.getParam("Amount"))
                 ? GameActionUtil.generatedMana(sa) : "mana";
+        String manaDesc = "";
+        if (mana.equals("mana") && sa.hasParam("Produced") && sa.hasParam("AmountDesc")) {
+            mana = sa.getParam("Produced");
+            manaDesc = sa.getParam("AmountDesc");
+        }
         sb.append(Lang.joinHomogenous(tgtPlayers)).append(tgtPlayers.size() == 1 ? " adds " : " add ");
-        sb.append(toManaString(mana)).append(".");
+        sb.append(toManaString(mana)).append(manaDesc).append(".");
         if (sa.hasParam("RestrictValid")) {
             sb.append(" ");
             final String desc = sa.getDescription();
