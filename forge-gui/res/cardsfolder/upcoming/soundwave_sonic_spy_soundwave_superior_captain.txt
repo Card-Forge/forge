@@ -20,10 +20,10 @@ Name:Soundwave, Superior Captain
 ManaCost:no cost
 Colors:white,blue,black
 Types:Legendary Artifact
-T:Mode$ SpellCast | ValidCard$ Spell.cmcOdd | ValidActivatingPlayer$ You | Execute$ TrigConvertRavage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with an odd mana value, convert NICKNAME. If you do, create Ravage, a legendary 3/3 black Robot artifact creature token with menace and deathtouch
+T:Mode$ SpellCast | ValidCard$ Card.cmcOdd | ValidActivatingPlayer$ You | Execute$ TrigConvertRavage | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with an odd mana value, convert NICKNAME. If you do, create Ravage, a legendary 3/3 black Robot artifact creature token with menace and deathtouch
 SVar:TrigConvertRavage:DB$ SetState | Mode$ Convert | RememberChanged$ True | SubAbility$ DBTokenRavage
 SVar:DBTokenRavage:DB$ Token | TokenScript$ ravage | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | ConditionCompare$ GE1 | SubAbility$ DBCleanup
-T:Mode$ SpellCast | ValidCard$ Spell.cmcEven | ValidActivatingPlayer$ You | Execute$ TrigConvertLaserbeak | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with an even mana value, convert NICKNAME. If you do, create Laserbeak, a legendary 2/2 blue Robot artifact creature token with flying and hexproof.
+T:Mode$ SpellCast | ValidCard$ Card.cmcEven | ValidActivatingPlayer$ You | Execute$ TrigConvertLaserbeak | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell with an even mana value, convert NICKNAME. If you do, create Laserbeak, a legendary 2/2 blue Robot artifact creature token with flying and hexproof.
 SVar:TrigConvertLaserbeak:DB$ SetState | Mode$ Convert | RememberChanged$ True | SubAbility$ DBTokenLaserbeak
 SVar:DBTokenLaserbeak:DB$ Token | TokenScript$ laserbeak | ConditionDefined$ Remembered | ConditionPresent$ Card.Self | ConditionCompare$ GE1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
