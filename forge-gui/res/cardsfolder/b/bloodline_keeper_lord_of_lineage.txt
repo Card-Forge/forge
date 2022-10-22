@@ -4,7 +4,7 @@ Types:Creature Vampire
 PT:3/3
 K:Flying
 A:AB$ Token | Cost$ T | TokenAmount$ 1 | TokenOwner$ You | TokenScript$ b_2_2_vampire_flying | SpellDescription$ Create a 2/2 black Vampire creature token with flying.
-A:AB$ SetState | Cost$ B | Defined$ Self | IsPresent$ Card.Vampire+YouCtrl | PresentCompare$ GE5 | Mode$ Transform | SpellDescription$ Transform CARDNAME.Activate only if you control five or more Vampires.
+A:AB$ SetState | Cost$ B | Defined$ Self | IsPresent$ Card.Vampire+YouCtrl | PresentCompare$ GE5 | Mode$ Transform | SpellDescription$ Transform CARDNAME. Activate only if you control five or more Vampires.
 AlternateMode:DoubleFaced
 Oracle:Flying\n{T}: Create a 2/2 black Vampire creature token with flying.\n{B}: Transform Bloodline Keeper. Activate only if you control five or more Vampires.
 

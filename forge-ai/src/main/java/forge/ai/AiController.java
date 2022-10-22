@@ -1086,7 +1086,7 @@ public class AiController {
                 if (source.hasSVar("AIPriorityModifier")) {
                     p += Integer.parseInt(source.getSVar("AIPriorityModifier"));
                 }
-                if (ComputerUtilCard.isCardRemAIDeck(source)) {
+                if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
                     p -= 10;
                 }
                 // don't play equipments before having any creatures
@@ -1955,6 +1955,22 @@ public class AiController {
         return max;
     }
 
+    public int chooseNumber(SpellAbility sa, String title, List<Integer> options, Player relatedPlayer) {
+        switch(sa.getApi())
+        {
+            case SetLife: // Reverse the Sands
+                if (relatedPlayer.equals(sa.getHostCard().getController())) {
+                    return Collections.max(options);
+                } else if (relatedPlayer.isOpponentOf(sa.getHostCard().getController())) {
+                    return Collections.min(options);
+                } else {
+                    return options.get(0);
+                }
+            default:
+                return options.get(0);
+        }
+    }
+
     public boolean confirmPayment(CostPart costPart) {
         throw new UnsupportedOperationException("AI is not supposed to reach this code at the moment");
     }
@@ -2119,22 +2135,6 @@ public class AiController {
 
         return library;
     } // smoothComputerManaCurve()
-
-    public int chooseNumber(SpellAbility sa, String title, List<Integer> options, Player relatedPlayer) {
-        switch(sa.getApi())
-        {
-            case SetLife: // Reverse the Sands
-                if (relatedPlayer.equals(sa.getHostCard().getController())) {
-                    return Collections.max(options);
-                } else if (relatedPlayer.isOpponentOf(sa.getHostCard().getController())) {
-                    return Collections.min(options);
-                } else {
-                    return options.get(0);
-                }
-            default:
-                return 0;
-        }
-    }
 
     public boolean chooseDirection(SpellAbility sa) {
         if (sa == null || sa.getApi() == null) {

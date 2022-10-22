@@ -592,11 +592,6 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, GameEntity affected, String question) {
-        return brains.aiShouldRun(replacementEffect, effectSA, affected);
-    }
-
-    @Override
     public boolean mulliganKeepHand(Player firstPlayer, int cardsToReturn)  {
         return !ComputerUtil.wantMulligan(player, cardsToReturn);
     }
@@ -1010,6 +1005,11 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public boolean confirmPayment(CostPart costPart, String prompt, SpellAbility sa) {
         return brains.confirmPayment(costPart); // AI is expected to know what it is paying for at the moment (otherwise add another parameter to this method)
+    }
+
+    @Override
+    public boolean confirmReplacementEffect(ReplacementEffect replacementEffect, SpellAbility effectSA, GameEntity affected, String question) {
+        return brains.aiShouldRun(replacementEffect, effectSA, affected);
     }
 
     @Override
