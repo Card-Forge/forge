@@ -184,6 +184,8 @@ public enum CounterEnumType {
     INFECTION("INFCT", 0, 230, 66),
 
     INGENUITY("INGTY", 67, 186, 205),
+    
+    INTEL("INTEL", 80, 250, 180),
 
     INTERVENTION("INTRV", 205, 203, 105),
 
