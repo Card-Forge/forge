@@ -245,7 +245,7 @@ public class Cost implements Serializable {
                 this.isMandatory = true;
             } else {
                 CostPart cp = parseCostPart(part, tapCost, untapCost);
-                if (null != cp )
+                if (null != cp)
                     if (cp instanceof CostPartMana) {
                         parsedMana = (CostPartMana) cp;
                     } else {
