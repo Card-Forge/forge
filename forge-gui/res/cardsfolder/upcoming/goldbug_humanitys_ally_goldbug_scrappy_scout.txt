@@ -1,0 +1,28 @@
+Name:Goldbug, Humanity's Ally
+ManaCost:1 W U
+Types:Legendary Artifact Creature Robot
+PT:3/3
+K:More Than Meets the Eye:W U
+R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Human.attacking+YouCtrl | IsCombat$ True | Description$ Prevent all combat damage that would be dealt to attacking Humans you control.
+SVar:NonStackingEffect:True
+T:Mode$ SpellCast | ValidCard$ Card.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigConvert | CheckSVar$ YouCastThisTurn | SVarCompare$ EQ2 | NoResolvingCheck$ True | TriggerDescription$ Whenever you cast your second spell each turn, convert NICKNAME.
+SVar:TrigConvert:DB$ SetState | Mode$ Convert
+SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
+AlternateMode:Convert
+DeckHints:Type$Human
+Oracle:More Than Meets the Eye {W}{U} (You may cast this card converted for {W}{U}.)\nPrevent all combat damage that would be dealt to attacking Humans you control.\nWhenever you cast your second spell each turn, convert Goldbug.
+
+ALTERNATE
+
+Name:Goldbug, Scrappy Scout
+ManaCost:no cost
+Colors:white,blue
+Types:Legendary Artifact Vehicle
+PT:1/3
+K:Living metal
+S:Mode$ Continuous | Affected$ Human.YouCtrl | AddHiddenKeyword$ This spell can't be countered. | AffectedZone$ Stack | Description$ Human spells you control can't be countered.
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | IsPresent$ Human.attacking+Other | Execute$ TrigDraw | TriggerDescription$ Whenever NICKNAME and at least one Human attack, draw a card and convert NICKNAME.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBConvert
+SVar:DBConvert:DB$ SetState | Mode$ Convert
+DeckNeeds:Type$Human
+Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nHuman spells you control can't be countered\nWhenever Goldbug and at least one Human attack, draw a card and convert Goldbug.
