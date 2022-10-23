@@ -1,0 +1,19 @@
+[quest]
+id=KHM Challenge: Dogged Pursuit
+OpponentName=Kaya
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Dogged Pursuit|Dogged Pursuit|Dogged Pursuit|Dogged Pursuit
+HumanExtras=
+[metadata]
+Title=Dogged Pursuit
+Difficulty=hard
+Description=Kaya had stalked countless horrific foes, but never one that killed with such callous precision and twisted creativity.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=KHM Challenge: Dogged Pursuit
+[Main]
+60 Kaya the Inexorable|KHM|2

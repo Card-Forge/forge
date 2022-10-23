@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Calamity Bearer
+OpponentName=The Bearers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Raven Wings|Dwarven Hammer|Tormentor's Helm
+HumanExtras=
+[metadata]
+Title=Calamity Bearer
+Difficulty=hard
+Description=3 . . . 6 . . . 12 . . . 24 . . . 48 . . . 96 . . . 192 . . . 384 . . . 768 . . . 1536 . . .
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Calamity Bearer
+[Main]
+30 Calamity Bearer|KHM|2
+30 Snow-Covered Mountain|KHM|1

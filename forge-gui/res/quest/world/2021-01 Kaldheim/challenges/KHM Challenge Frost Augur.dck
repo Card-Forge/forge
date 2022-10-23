@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Frost Augur
+OpponentName=The Augurs
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Rimewood Falls
+HumanExtras=
+[metadata]
+Title=Frost Augur
+Difficulty=easy
+Description=From the barest crack in the ice, she teases forth a swirling, living map of the Cosmos.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Frost Augur
+[Main]
+20 Boreal Outrider|KHM|1
+20 Frost Augur|KHM|1
+20 Rimewood Falls|KHM|1

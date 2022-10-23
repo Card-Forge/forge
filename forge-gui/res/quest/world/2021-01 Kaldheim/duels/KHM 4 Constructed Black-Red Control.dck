@@ -1,0 +1,23 @@
+[metadata]
+Title=Black-Red Control
+Difficulty=very hard
+Description=Played in the Kaldheim Constructed Event, 13 Februari 2021.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM 4 Constructed: Black-Red Control
+[Main]
+4 Demon Bolt|KHM
+4 Dream Devourer|KHM|1
+4 Elderfang Disciple|KHM
+4 Feed the Serpent|KHM
+4 Frost Bite|KHM|1
+4 Goldspan Dragon|KHM|1
+4 Immersturm Predator|KHM|1
+2 Immersturm Skullcairn|KHM
+2 Priest of the Haunted Edge|KHM
+10 Snow-Covered Mountain|KHM|1
+10 Snow-Covered Swamp|KHM|2
+4 Sulfurous Mire|KHM
+4 Valki, God of Lies|KHM|1
+[Sideboard]
+4 Blightstep Pathway|KHM|1

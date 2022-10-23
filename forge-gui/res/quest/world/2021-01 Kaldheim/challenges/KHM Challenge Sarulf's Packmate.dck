@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Sarulf's Packmate
+OpponentName=The Packmates
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Woodland Chasm|Woodland Chasm|Woodland Chasm
+HumanExtras=
+[metadata]
+Title=Sarulf's Packmate
+Difficulty=medium
+Description=u wot m8
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Sarulf's Packmate
+[Main]
+10 Crippling Fear|KHM|2
+20 Sarulf's Packmate|KHM|1
+30 Woodland Chasm|KHM|1

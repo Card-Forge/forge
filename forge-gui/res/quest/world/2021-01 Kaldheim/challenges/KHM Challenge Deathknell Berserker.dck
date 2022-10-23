@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Deathknell Berserker
+OpponentName=The Berserkers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Deathknell Berserker
+Difficulty=medium
+Description="Sven felled the elf with an arrow through the chest, but moments later, the corpse rose with a sneer to fight again."\n--Longbeard Saga
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Deathknell Berserker
+[Main]
+20 Deathknell Berserker|KHM|1
+20 Rally the Ranks|KHM|2
+20 Snowfield Sinkhole|KHM|1

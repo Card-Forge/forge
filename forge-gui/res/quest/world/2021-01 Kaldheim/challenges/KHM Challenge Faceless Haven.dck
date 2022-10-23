@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Faceless Haven
+OpponentName=The Havens
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Cosmos Elixir|Replicating Ring|Replicating Ring
+HumanExtras=
+[metadata]
+Title=Faceless Haven
+Difficulty=medium
+Description=It is everywhere and nowhere, a place unbound by logic, just beyond the real.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+Name=KHM Challenge: Faceless Haven
+[Main]
+10 Doomskar|KHM|2
+30 Faceless Haven|KHM|2
+20 Snow-Covered Plains|KHM|1

@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Fearless Pup
+OpponentName=The Pups
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=In Search of Greatness
+HumanExtras=
+[metadata]
+Title=Fearless Pup
+Difficulty=easy
+Description=Awooo!"
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Fearless Pup
+[Main]
+20 Fearless Pup|KHM|1
+20 Rune of Mortality|KHM|1
+20 Sulfurous Mire|KHM|1

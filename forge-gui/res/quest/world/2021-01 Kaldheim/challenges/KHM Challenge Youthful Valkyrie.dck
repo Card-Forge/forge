@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Youthful Valkyrie
+OpponentName=The Valkyries
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Youthful Valkyrie
+Difficulty=medium
+Description=Before she is admitted to the host of Starnheim, a young valkyrie must learn a thousand tales of her ancestors.
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+Name=KHM Challenge: Youthful Valkyrie
+[Main]
+20 Plains|KHM|1
+40 Youthful Valkyrie|KHM|1

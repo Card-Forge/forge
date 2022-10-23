@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Doomskar Titan
+OpponentName=The Titans
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Doomskar Titan
+HumanExtras=
+[metadata]
+Title=Doomskar Titan
+Difficulty=medium
+Description="Doomskar. That doesn't sound great," Kaya said.\n\n"A collision of the realms," said Inga. "And with it, inevitably, comes war and chaos. A time of great suffering."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Doomskar Titan
+[Main]
+20 Blood on the Snow|KHM|2
+40 Snow-Covered Swamp|KHM|1

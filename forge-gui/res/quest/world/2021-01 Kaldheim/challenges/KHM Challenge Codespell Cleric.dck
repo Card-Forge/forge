@@ -1,0 +1,22 @@
+[quest]
+id=KHM Challenge: Codespell Cleric
+OpponentName=The Clerics
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Gates of Istfell
+HumanExtras=
+[metadata]
+Title=Codespell Cleric
+Difficulty=easy
+Description="Today we are not Beskir or Tuskeri. We must fight as one clan, shoulder to shoulder, to defend our rightful home!"
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Codespell Cleric
+[Main]
+24 Alpine Meadow|KHM|1
+14 Clarion Spirit|KHM|1
+14 Codespell Cleric|KHM|1
+8 Showdown of the Skalds|KHM|1

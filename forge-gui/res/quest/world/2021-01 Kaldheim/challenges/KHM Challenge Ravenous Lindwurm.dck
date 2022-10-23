@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Ravenous Lindwurm
+OpponentName=The Lindwurms
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Bretagard Stronghold|Bretagard Stronghold
+HumanExtras=
+[metadata]
+Title=Ravenous Lindwurm
+Difficulty=medium
+Description="I'm no coward, but I'd sooner tangle with a rampaging Torga troll than a hungry lindwurm!"\n--Yegar, Beskir warrior
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=KHM Challenge: Ravenous Lindwurm
+[Main]
+30 Forest|KHM|1
+30 Ravenous Lindwurm|KHM|1

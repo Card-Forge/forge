@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Ascendant Spirit
+OpponentName=The Spirits
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Glacial Floodplain|Glacial Floodplain
+HumanExtras=
+[metadata]
+Title=Ascendant Spirit
+Difficulty=medium
+Description=A to the S to the C to the E to the N to the D to the A to the N to the T to the S to the P to the I to the R to the I to the T!
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+Name=KHM Challenge: Ascendant Spirit
+[Main]
+30 Ascendant Spirit|KHM|2
+30 Snow-Covered Island|KHM|1

@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Double Team
+OpponentName=The Team
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Replicating Ring
+HumanExtras=
+[metadata]
+Title=Double Team
+Difficulty=easy
+Description=While relaxing by the poolside after retirement, Fynn is summoned by a valkyrie who informs him about the return of his nemesis, forcing Fynn to join the Starnheim forces again.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Double Team
+[Main]
+20 Arctic Treeline|KHM|1
+20 Fynn, the Fangbearer|KHM|2
+20 Halvar, God of Battle|KHM|2

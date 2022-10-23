@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Basalt Ravager
+OpponentName=The Ravagers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Surtland Frostpyre
+HumanExtras=
+[metadata]
+Title=Basalt Ravager
+Difficulty=easy
+Description=They hate two things; first strike, and you.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=KHM Challenge: Basalt Ravager
+[Main]
+30 Basalt Ravager|KHM|1
+30 Mountain|KHM|1

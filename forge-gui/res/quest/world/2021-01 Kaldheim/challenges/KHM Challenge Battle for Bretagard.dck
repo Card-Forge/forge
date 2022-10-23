@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Battle for Bretagard
+OpponentName=The Battle
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Arctic Treeline
+HumanExtras=
+[metadata]
+Title=Battle for Bretagard
+Difficulty=medium
+Description=Kaya turned back toward the mass of draugr and demons. Something was surging through the crowd toward them, knocking corpse-like soldiers into the air as it barreled their way. Varragoth—who else?—crashed free of the ranks of draugr, looking more like a wild beast than a demon jarl now. The iron armor he'd been wearing was warped, gouged, and broken; somewhere along the way he'd lost his axe. He was bleeding from a dozen different wounds now, but he was still upright. Clinging to his back, red hair darkened with blood and eyes unfocused, was Tyvar.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Battle for Bretagard
+[Main]
+30 Arctic Treeline|KHM|1
+20 Battle for Bretagard|KHM|1
+10 King Harald's Revenge|KHM|1

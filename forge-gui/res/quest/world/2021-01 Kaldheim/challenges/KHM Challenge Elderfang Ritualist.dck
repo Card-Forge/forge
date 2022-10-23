@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Elderfang Ritualist
+OpponentName=The Ritualists
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Skemfar Elderhall|Skemfar Elderhall
+HumanExtras=
+[metadata]
+Title=Elderfang Ritualist
+Difficulty=medium
+Description=Her fingers stiffened as the shrouded corpse stirred. Her final, ragged breath was one of triumph. "Return, my chosen, and grant our people victory!"
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=KHM Challenge: Elderfang Ritualist
+[Main]
+15 Elderfang Ritualist|KHM|1
+15 Rune of Mortality|KHM|1
+30 Swamp|KHM|1

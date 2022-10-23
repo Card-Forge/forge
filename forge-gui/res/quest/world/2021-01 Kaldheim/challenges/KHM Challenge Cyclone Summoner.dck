@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Cyclone Summoner
+OpponentName=The Summoners
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Littjara Mirrorlake|Littjara Mirrorlake
+HumanExtras=
+[metadata]
+Title=Cyclone Summoner
+Difficulty=hard
+Description=Frost giants study for centuries in isolation, honing their ability to harness elemental mayhem.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+Name=KHM Challenge: Cyclone Summoner
+[Main]
+20 Cyclone Summoner|KHM|2
+40 Rimewood Falls|KHM|1
