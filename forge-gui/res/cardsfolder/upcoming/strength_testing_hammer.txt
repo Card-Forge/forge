@@ -6,4 +6,4 @@ T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigRollDice | TriggerDe
 SVar:TrigRollDice:DB$ RollDice | ResultSVar$ X | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Equipped | NumAtt$ X | SubAbility$ DBDraw
 SVar:DBDraw:DB$ Draw | ConditionDefined$ Equipped | ConditionPresent$ Creature.greatestPower
-Oracle:Whenever equipped creature attacks, roll a six-sided die. That creature gets +X/+0 until end of turn, where X is the result. Then if it has the greatest power or is tied for greatest power among creatures on the battlefield, draw a card.\nEquip {3}
+Oracle:Whenever equipped creature attacks, roll a six-sided die. That creature gets +X/+0 until end of turn, where X is the result. Then if it has the greatest power or is tied for greatest power among creatures on the battlefield, draw a card.\nEquip {3}.
