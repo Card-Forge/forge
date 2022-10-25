@@ -18,6 +18,7 @@ import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.CardTranslation;
 import forge.util.Localizer;
 
 public class ControlGainEffect extends SpellAbilityEffect {
@@ -157,6 +158,12 @@ public class ControlGainEffect extends SpellAbilityEffect {
         boolean combatChanged = false;
         for (Card tgtC : tgtCards) {
             if (!tgtC.isInPlay() || !tgtC.canBeControlledBy(newController)) {
+                continue;
+            }
+
+            if (sa.hasParam("Optional") && !activator.getController().confirmAction(sa, null,
+                    Localizer.getInstance().getMessage("lblGainControlConfirm", newController,
+                            CardTranslation.getTranslatedName(tgtC.getName())), null)) {
                 continue;
             }
 
