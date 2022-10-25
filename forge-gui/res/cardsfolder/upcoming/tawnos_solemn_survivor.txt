@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Legendary Creature Human Artificer
 PT:1/3
 A:AB$ CopyPermanent | Cost$ 2 T | ValidTgts$ Artifact.YouCtrl+token | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target artifact token you control | SubAbility$ DBMill | SpellDescription$ Create a token that's a copy of up to one target artifact token you control. Mill two cards.
-SVar:DBMill:DB$ Mill | Mill | NumCards$ 2
+SVar:DBMill:DB$ Mill | NumCards$ 2
 A:AB$ CopyPermanent | Cost$ 1 W U B T Sac<2/Artifact.token/artifact tokens> ExileFromGrave<1/Artifact;Creature/artifact or creature card> | Defined$ Exiled | AddTypes$ Artifact | SorcerySpeed$ True | SpellDescription$ Create a token that's a copy of the exiled card, except it's an artifact in addition to its other types. Activate only as a sorcery.
 DeckHints:Ability$Graveyard|Mill & Type$Artifact 
 DeckHas:Ability$Mill|Graveyard|Token|Sacrifice|Token & Type$Artifact
