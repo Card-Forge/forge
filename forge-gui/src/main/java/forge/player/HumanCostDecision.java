@@ -839,11 +839,11 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             this.validChoices = validCards;
             counterType = cType;
             String fromWhat = costPart.getDescriptiveType();
-            if (fromWhat.equals("CARDNAME")) {
-                fromWhat = sa.getHostCard().getName();
+            if (fromWhat.equals("CARDNAME") || fromWhat.equals("NICKNAME")) {
+                fromWhat = CardTranslation.getTranslatedName(sa.getHostCard().getName());
             }
 
-            setMessage(Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostConfirm",
+            setMessage(Localizer.getInstance().getMessage("lblRemoveNTargetCounterFromCardPayCostSelect",
                     "%d", counterType == null ? "" : " " + counterType.getName().toLowerCase(), fromWhat));
         }
 
