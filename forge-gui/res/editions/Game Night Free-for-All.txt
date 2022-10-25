@@ -1,0 +1,155 @@
+[metadata]
+Code=GN3
+Date=2022-10-14
+Name=Game Night: Free-for-All
+Type=Multiplayer
+ScryfallCode=GN3
+
+[cards]
+1 M Zamriel, Seraph of Steel @Chris Rallis
+2 M Maeve, Insidious Singer @Jason Rainville
+3 M Vogar, Necropolis Tyrant @Jason A. Engle
+4 M Nogi, Draco-Zealot @Dmitry Burmak
+5 M Imaryll, Elfhame Elite @Ryan Pancoast
+6 C Ancestral Blade @Scott Murphy
+7 U Banisher Priest @Willian Murai
+8 R Captain of the Watch @Greg Staples
+9 U Danitha Capashen, Paragon @Chris Rallis
+10 U Forbidding Spirit @Ryan Yee
+11 R Heavenly Blademaster @Zack Stella
+12 C Kitesail Apprentice @Austin Hsu
+13 U Kor Duelist @Izzy
+14 C Kor Outfitter @Kieran Yanner
+15 U Path to Exile @Todd Lockwood
+16 C Pilgrim of the Ages @JiHun Lee
+17 U Serra Angel @Donato Giancola
+18 C Strength of Arms @John Stanko
+19 U Swords to Plowshares @Jesper Ejsing
+20 U Valorous Stance @Willian Murai
+21 U Vow of Duty @Wayne Reynolds
+22 U Angler Drake @Svetlin Velinov
+23 R Angler Turtle @Alex Konstad
+24 U Brineborn Cutthroat @Caio Monteiro
+25 C Counterspell @Zack Stella
+26 R Diluvian Primordial @Stephan Martiniere
+27 U Fact or Fiction @Matt Cavotta
+28 U Fog Bank @Howard Lyon
+29 U Illusory Ambusher @Steve Argyle
+30 C Impulse @Izzy
+31 C Jeering Homunculus @Steve Prescott
+32 U Murmuring Mystic @Mark Winters
+33 R Plea for Power @John Severin Brassell
+34 R Precognitive Perception @Chris Rallis
+35 R Pull from Tomorrow @Sara Winters
+36 C Repulse @Aaron Boyd
+37 C Run Away Together @Filip Burburan
+38 C Sea Gate Oracle @Daniel Ljunggren
+39 U Split Decision @Robbie Trevino
+40 U Supreme Will @Alayna Danner
+41 U Talrand's Invocation @Svetlin Velinov
+42 U Vow of Flight @Erica Yang
+43 U Bloodsoaked Altar @Sidharth Chaturvedi
+44 C Bushmeat Poacher @Randy Vargas
+45 R Demon of Loathing @Tomasz Jedruszek
+46 R Demonic Embrace @Sidharth Chaturvedi
+47 U Doom Blade @Chippy
+48 C Doomed Dissenter @Tony Foti
+49 C Dusk Legion Zealot @Winona Nelson
+50 U Fleshbag Marauder @Mark Zug
+51 C Gavony Unhallowed @Christopher Moeller
+52 U Gifted Aetherborn @Ryan Yee
+53 R Gravewaker @Daniel Ljunggren
+54 R Liliana's Mastery @Kieran Yanner
+55 U Lord of the Accursed @Grzegorz Rutkowski
+56 C Maalfeld Twins @Mike Sass
+57 C Moan of the Unhallowed @Nils Hamm
+58 R Priest of the Blood Rite @David Palumbo
+59 U Ravenous Chupacabra @Daarken
+60 U Reassembling Skeleton @Austin Hsu
+61 C Sign in Blood @Howard Lyon
+62 C Supernatural Stamina @Christopher Moeller
+63 R Vilis, Broker of Blood @Tyler Jacobson
+64 C Village Rites @Igor Kieryluk
+65 U Vow of Torment @Taylor Ingvarsson
+67 C Abrade @Jonas De Ro
+68 R Ancient Hellkite @Jason Chan
+69 U Blaze @Alex Horley-Orlandelli
+70 R Crucible of Fire @Dominick Domingo
+71 C Dragon Egg @Jack Wang
+72 C Dragon Hatchling @David Palumbo
+73 U Dragon Mage @Matthew D. Wilson
+74 U Dragon Tempest @Willian Murai
+75 U Dragonspeaker Shaman @Kev Walker
+76 R Drakuseth, Maw of Flames @Grzegorz Rutkowski
+77 R Flameblast Dragon @Jaime Jones
+78 U Flametongue Kavu @Slawomir Maniak
+79 U Furnace Whelp @Shreya Shetty
+80 C Goblin Motivator @Johann Bodin
+81 C Kargan Dragonrider @Greg Opalinski
+82 R Knollspine Dragon @Steve Prescott
+83 U Lightning Bolt @Christopher Moeller
+84 C Mana Geyser @Martina Pilcerova
+85 C Rapacious Dragon @Johan Grenier
+86 C Seize the Spoils @Jesper Ejsing
+87 R Shivan Dragon @Donato Giancola
+88 U Vow of Lightning @Randy Vargas
+89 R Beast Whisperer @Matt Stewart
+90 C Broken Wings @Lars Grant-West
+91 U Dwynen's Elite @Volkan Baǵa
+92 U Elven Ambush @Chris Seaman
+93 R Elvish Archdruid @Raymond Swanland
+94 C Elvish Rejuvenator @Winona Nelson
+95 C Elvish Skysweeper @Mark Tedin
+96 C Elvish Visionary @D. Alexander Gregory
+97 R End-Raze Forerunners @Mathias Kollros
+98 R Immaculate Magistrate @Jim Nelson
+99 U Invigorate @Mark Zug
+100 C Joraga Visionary @Andrey Kuzinskiy
+101 C Llanowar Elves @Chris Rahn
+102 U Llanowar Tribe @Scott Murphy
+103 U Overrun @Carl Critchlow
+104 C Rabid Bite @John Thacker
+105 C Ram Through @Zoltan Boros
+106 U Regrowth @Dan Scott
+107 U Sylvan Messenger @PINDURSKI
+108 C Taunting Elf @Rebecca Guay
+109 R Thorn Lieutenant @Uriah Voth
+110 C Thornweald Archer @Dave Kendall
+111 U Vow of Wildness @Jim Pavelec
+112 C Wirewood Pride @Dave Dorman
+113 R Argentum Armor @Matt Cavotta
+114 U Bloodthirsty Blade @Jason Kang
+115 U Colossus Hammer @Dmitry Burmak
+116 U Greatsword @Nic Klein
+117 C Howling Golem @Grzegorz Rutkowski
+118 R Moonsilver Spear @James Paick
+119 U Ring of Thune @Erica Yang
+120 R Sword of Vengeance @Dan Scott
+121 U Trusty Machete @Raymond Swanland
+122 L Plains @Sam Burley
+123 L Plains @Alayna Danner
+124 L Plains @Jonas De Ro
+125 L Island @Sam Burley
+126 L Island @Mark Poole
+127 L Island @Kev Walker
+128 L Swamp @Paul Scott Canavan
+129 L Swamp @Adam Paquette
+130 L Swamp @Svetlin Velinov
+131 L Mountain @Sam Burley
+132 L Mountain @Alayna Danner
+133 L Mountain @Mark Poole
+134 L Forest @Jonas De Ro
+135 L Forest @Mark Poole
+136 L Forest @Kev Walker
+
+[tokens]
+b_2_2_zombie
+b_5_5_demon_flying
+c_a_treasure_sac
+g_1_1_elf_warrior
+r_2_2_dragon_flying_firebreathing
+u_1_1_bird_illusion_flying
+u_2_2_drake_flying
+w_1_1_human_soldier
+w_1_1_soldier
+w_4_4_angel_flying

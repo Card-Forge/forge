@@ -8,6 +8,8 @@ ScryfallCode=BRC
 [cards]
 1 M Mishra, Eminent One @Randy Vargas
 2 M Urza, Chief Artificer @Bartlomiej Gawel
+3 M Tawnos, Solemn Survivor @Matt Stewart
+4 M Ashnod the Uncaring @Kieran Yanner
 39 M Mishra, Eminent One @Randy Vargas
 40 M Urza, Chief Artificer @Bartlomiej Gawel
 48 M Mishra, Eminent One @Randy Vargas

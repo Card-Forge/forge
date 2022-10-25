@@ -1,0 +1,12 @@
+[metadata]
+Code=J22
+Date=2022-12-02
+Name=Jumpstart 2022
+Type=Draft
+ScryfallCode=J22
+
+[cards]
+12 M Isu the Abominable @Victor Adame Minguez
+29 R Ardoz, Cobbler of War @Kev Walker
+79 M Kiki-Jiki, Mirror Breaker @Ishikawa Kenta
+94 U Coldsteel Heart @I☆LA
