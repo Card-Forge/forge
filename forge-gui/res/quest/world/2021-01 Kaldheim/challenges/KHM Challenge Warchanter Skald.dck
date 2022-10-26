@@ -1,0 +1,26 @@
+[quest]
+id=KHM Challenge: Warchanter Skald
+OpponentName=The Skalds
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Gates of Istfell|Gates of Istfell
+HumanExtras=
+[metadata]
+Title=Warchanter Skald
+Difficulty=medium
+Description="Who will be the hero of my tale?"
+Icon=Dungeon Crawling White.jpg
+Deck Type=constructed
+Name=KHM Challenge: Warchanter Skald
+[Main]
+30 Plains|KHM|1
+1 Rune of Flight|KHM|1
+1 Rune of Might|KHM|1
+1 Rune of Mortality|KHM|1
+1 Rune of Speed|KHM|1
+1 Rune of Sustenance|KHM|1
+10 Runed Crown|KHM|1
+20 Warchanter Skald|KHM|1

@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Avalanche Caller
+OpponentName=The Callers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Ice Tunnel
+HumanExtras=
+[metadata]
+Title=Avalanche Caller
+Difficulty=easy
+Description=Actually, it's "jökulhlaup," not "jokulhaups."
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+Name=KHM Challenge: Avalanche Caller
+[Main]
+20 Avalanche Caller|KHM|1
+40 Snow-Covered Island|KHM|1

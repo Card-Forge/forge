@@ -1,0 +1,22 @@
+[quest]
+id=KHM Challenge: Skemfar Shadowsage
+OpponentName=The Shadowsages
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Skemfar Elderhall
+HumanExtras=
+[metadata]
+Title=Skemfar Shadowsage
+Difficulty=medium
+Description="I've been watching, I've been waiting // In the shadows for my time\nI've been searching, I've been living // For tomorrows all my life\nIn the shadows // In the shadows"\n--In the Shadows, The Rasmus
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=KHM Challenge: Skemfar Shadowsage
+[Main]
+5 Raven Wings|KHM|1
+5 Return Upon the Tide|KHM|1
+20 Skemfar Shadowsage|KHM|1
+30 Swamp|KHM|1

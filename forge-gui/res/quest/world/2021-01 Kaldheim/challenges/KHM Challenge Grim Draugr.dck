@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Grim Draugr
+OpponentName=The Draugr
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Ice Tunnel|Ice Tunnel|Ice Tunnel
+HumanExtras=
+[metadata]
+Title=Grim Draugr
+Difficulty=medium
+Description=She was a ragged shadow of her living form, but she had lost none of her deadly prowess.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=KHM Challenge: Grim Draugr
+[Main]
+30 Grim Draugr|KHM|1
+30 Snow-Covered Swamp|KHM|1

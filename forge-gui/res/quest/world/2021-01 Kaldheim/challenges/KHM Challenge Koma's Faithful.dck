@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Koma's Faithful
+OpponentName=The Faithful
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Koma's Faithful
+Difficulty=medium
+Description="Great Serpent, hear my song! We wait, our faith unshaken, for your glorious return."
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=KHM Challenge: Koma's Faithful
+[Main]
+100 Blood on the Snow|KHM|2
+100 Koma's Faithful|KHM|1
+200 Snow-Covered Swamp|KHM|2

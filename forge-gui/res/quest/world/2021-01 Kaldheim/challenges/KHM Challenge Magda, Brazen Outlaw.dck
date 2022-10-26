@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Magda, Brazen Outlaw
+OpponentName=Magda
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Esika's Chariot|Funeral Longboat|Gilded Assault Cart
+HumanExtras=
+[metadata]
+Title=Magda, Brazen Outlaw
+Difficulty=easy
+Description="Where are the damn dragons?!"\n--Magda
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=KHM Challenge: Magda, Brazen Outlaw
+[Main]
+15 Dwarven Hammer|KHM|1
+15 Magda, Brazen Outlaw|KHM|2
+30 Mountain|KHM|1

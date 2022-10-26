@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Old-Growth Troll
+OpponentName=The Trolls
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Old-Growth Troll
+Difficulty=medium
+Description=The art of trolling is very simple. The first thing you have to do is
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=KHM Challenge: Old-Growth Troll
+[Main]
+30 Forest|KHM|1
+30 Old-Growth Troll|KHM|2

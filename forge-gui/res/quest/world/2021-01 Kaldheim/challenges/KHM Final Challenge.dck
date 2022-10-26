@@ -1,0 +1,32 @@
+[quest]
+id=KHM Challenge: Final Challenge
+OpponentName=The Gods
+AILife=20
+Repeat=true
+WinMessage=Congratulations!\n\nYou have completed the ultimate challenge in Kaldheim and have proven that you are strong enough to defeat the deadliest of opponents.\n\nYou are free to continue playing this quest for as long as you desire or start a new one and try proving yourself yet again.
+Wins=20
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=The World Tree|The World Tree|The World Tree|The World Tree
+HumanExtras=
+[metadata]
+Title=The Final Challenge
+Difficulty=hard
+Description=The gods themselves have conspired against you. Defeat them to conquer Kaldheim!
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: The World Tree
+[Main]
+2 Alrund, God of the Cosmos|KHM|2
+2 Birgi, God of Storytelling|KHM|2
+2 Cosima, God of the Voyage|KHM|2
+2 Egon, God of Death|KHM|2
+2 Esika, God of the Tree|KHM|2
+2 Halvar, God of Battle|KHM|2
+2 Jorn, God of Winter|KHM|2
+2 Kolvori, God of Kinship|KHM|2
+2 Reidane, God of the Worthy|KHM|2
+2 Tergrid, God of Fright|KHM|2
+36 The World Tree|KHM|1
+2 Toralf, God of Fury|KHM|2
+2 Valki, God of Lies|KHM|3
