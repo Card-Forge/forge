@@ -48,6 +48,7 @@ https://downloads.cardforge.org/images/products/boosterboxes/INV.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/ISD.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/JOU.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/JUD.jpg
+https://downloads.cardforge.org/images/products/boosterboxes/KHM.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/KLD.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/KTK.jpg
 https://downloads.cardforge.org/images/products/boosterboxes/LEA.jpg

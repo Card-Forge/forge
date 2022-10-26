@@ -212,6 +212,9 @@ https://downloads.cardforge.org/images/products/boosters/JOU_2.jpg
 https://downloads.cardforge.org/images/products/boosters/JOU_3.jpg
 https://downloads.cardforge.org/images/products/boosters/JUD.jpg
 https://downloads.cardforge.org/images/products/boosters/JUD.png
+https://downloads.cardforge.org/images/products/boosters/KHM.png
+https://downloads.cardforge.org/images/products/boosters/KHM_1.jpg
+https://downloads.cardforge.org/images/products/boosters/KHM_2.jpg
 https://downloads.cardforge.org/images/products/boosters/KLD_1.jpg
 https://downloads.cardforge.org/images/products/boosters/KLD_2.jpg
 https://downloads.cardforge.org/images/products/boosters/KLD_3.jpg
