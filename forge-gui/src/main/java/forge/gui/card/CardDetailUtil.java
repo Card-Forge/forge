@@ -198,7 +198,7 @@ public class CardDetailUtil {
                 ptText.insert(0, "P/T: ");
                 ptText.append(" - ").append("Loy: ");
             } else {
-                ptText.append("Loyalty: ");
+                ptText.append(Localizer.getInstance().getMessage("lblLoyalty")).append(": ");
             }
 
             ptText.append(card.getLoyalty());
