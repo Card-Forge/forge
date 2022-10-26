@@ -31,6 +31,7 @@ https://downloads.cardforge.org/images/products/fatpacks/INV.jpg
 https://downloads.cardforge.org/images/products/fatpacks/ISD.jpg
 https://downloads.cardforge.org/images/products/fatpacks/JOU.jpg
 https://downloads.cardforge.org/images/products/fatpacks/JUD.jpg
+https://downloads.cardforge.org/images/products/fatpacks/KHM.jpg
 https://downloads.cardforge.org/images/products/fatpacks/KLD.jpg
 https://downloads.cardforge.org/images/products/fatpacks/KTK.jpg
 https://downloads.cardforge.org/images/products/fatpacks/LGN.jpg
