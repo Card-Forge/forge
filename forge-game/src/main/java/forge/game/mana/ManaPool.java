@@ -295,24 +295,16 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         if (sa.getHostCard() != null) {
             sa.getHostCard().setCanCounter(true);
         }
-        for (final Mana m : manaSpent) {
-            player.getManaPool().addMana(m);
-        }
+        player.getManaPool().add(manaSpent);
         manaSpent.clear();
     }
 
     public final void refundManaPaid(final SpellAbility sa) {
         // Send all mana back to your mana pool, before accounting for it.
-        final List<Mana> manaPaid = sa.getPayingMana();
 
         // move non-undoable paying mana back to floating
-        if (sa.getHostCard() != null) {
-            sa.getHostCard().setCanCounter(true);
-        }
-        for (final Mana m : manaPaid) {
-            addMana(m);
-        }
-        manaPaid.clear();
+
+        refundMana(sa.getPayingMana(), owner, sa);
 
         List<SpellAbility> payingAbilities = sa.getPayingManaAbilities();
         for (final SpellAbility am : payingAbilities) {

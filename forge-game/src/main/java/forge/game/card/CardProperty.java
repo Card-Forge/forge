@@ -663,7 +663,7 @@ public class CardProperty {
                         List<Mana> payingMana = castSA.getPayingMana();
                         // even if the cost was raised, we only care about mana from activation part
                         // since this can only be 1 currently with Protective Sphere, let's just assume it's the first shard spent for easy handling
-                        if (!card.getColor().hasAnyColor(payingMana.get(payingMana.size() - 1).getColor())) {
+                        if (payingMana.isEmpty() || !card.getColor().hasAnyColor(payingMana.get(payingMana.size() - 1).getColor())) {
                             return false;
                         }
                         break;

@@ -508,7 +508,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             view.updateState(this);
             view.updateNeedsTransformAnimation(needsTransformAnimation);
 
-            final Game game = getGame();
             if (game != null) {
                 // update Type, color and keywords again if they have changed
                 if (!changedCardTypes.isEmpty()) {
