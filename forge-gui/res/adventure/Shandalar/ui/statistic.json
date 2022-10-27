@@ -148,7 +148,8 @@
     },
     {
       "type": "Label",
-      "name": "[BLACK]lifePoints", 
+      "name": "lifePoints",
+      "fontColor":"black",
       "width": 64,
       "height": 16,
       "x": 410,
