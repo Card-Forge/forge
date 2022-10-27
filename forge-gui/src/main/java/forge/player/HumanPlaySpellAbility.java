@@ -62,7 +62,7 @@ public class HumanPlaySpellAbility {
 
     public final boolean playAbility(final boolean mayChooseTargets, final boolean isFree, final boolean skipStack) {
         final Player human = ability.getActivatingPlayer();
-        final Game game = ability.getActivatingPlayer().getGame();
+        final Game game = human.getGame();
 
         // CR 401.5: freeze top library cards until cast so player can't cheat and see the next
         game.setTopLibsCast();

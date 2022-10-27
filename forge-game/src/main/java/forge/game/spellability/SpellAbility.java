@@ -1412,8 +1412,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 }
             }
 
-            String[] validTgt = tr.getValidTgts();
             if (entity instanceof GameEntity) {
+                String[] validTgt = tr.getValidTgts();
                 GameEntity e = (GameEntity)entity;
                 if (!e.isValid(validTgt, getActivatingPlayer(), getHostCard(), this)) {
                     return false;

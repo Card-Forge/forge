@@ -8,7 +8,6 @@ import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.token.TokenInfo;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
 import forge.game.spellability.SpellAbility;
@@ -41,11 +40,6 @@ public class ReplaceEffect extends SpellAbilityEffect {
             List<GameObject> list = AbilityUtils.getDefinedObjects(card, varValue, sa);
             if (list.size() > 0) {
                 params.put(varName, list.get(0));
-            }
-        } else if ("TokenScript".equals(type)) {
-            final Card protoType = TokenInfo.getProtoType(varValue, sa, sa.getActivatingPlayer());
-            if (protoType != null) {
-                params.put(varName, protoType);
             }
         } else {
             params.put(varName, AbilityUtils.calculateAmount(card, varValue, sa));
