@@ -1,5 +1,0 @@
-Name:Soldier Token
-ManaCost:no cost
-PT:1/1
-Types:Artifact Creature Soldier
-Oracle:
