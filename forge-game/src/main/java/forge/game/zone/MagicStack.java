@@ -29,11 +29,13 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import forge.GameCommand;
+import forge.game.CardTraitPredicates;
 import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.GameLogEntryType;
@@ -192,18 +194,32 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
     public final boolean undo() {
         if (undoStack.isEmpty()) { return false; }
 
-        SpellAbility sa = undoStack.pop();
+        SpellAbility sa = undoStack.peek();
         sa.undo();
+        clearUndoStack(sa);
         sa.getActivatingPlayer().getManaPool().refundManaPaid(sa);
         if (undoStack.isEmpty()) {
             undoStackOwner = null;
         }
         return true;
     }
+    private final void clearUndoStack(SpellAbility sa) {
+        clearUndoStack(Lists.newArrayList(sa));
+    }
+    private final void clearUndoStack(List<SpellAbility> sas) {
+        for (SpellAbility sa : sas) {
+            // reset in case a trigger stopped it on a previous activation
+            sa.setUndoable(true);
+        }
+        undoStack.removeAll(sas);
+    }
     public final void clearUndoStack() {
         if (undoStackOwner == null) { return; }
-        undoStack.clear();
+        clearUndoStack(undoStack);
         undoStackOwner = null;
+    }
+    public Iterable<SpellAbility> filterUndoStackByHost(final Card c) {
+        return Iterables.filter(undoStack, CardTraitPredicates.isHostCard(c));
     }
 
     public final void add(final SpellAbility sp) {
@@ -221,7 +237,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
 
         //either push onto or clear undo stack based on whether spell/ability is undoable
         if (sp.isUndoable()) {
-            if (undoStackOwner != activator) {
+            if (!canUndo(activator)) {
                 clearUndoStack(); //clear if undo stack owner changes
                 undoStackOwner = activator;
             }
@@ -231,17 +247,14 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         }
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
-            Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sp.getHostCard().getController());
+            Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(source.getController());
             runParams.put(AbilityKey.Cost, sp.getPayCosts());
-            runParams.put(AbilityKey.Activator, sp.getActivatingPlayer());
+            runParams.put(AbilityKey.Activator, activator);
             runParams.put(AbilityKey.CastSA, sp);
             game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
             if (sp.isActivatedAbility()) {
                 game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams, true);
             }
-
-            // reset in case a trigger stopped it on a previous activation
-            sp.setUndoable(true);
 
             AbilityUtils.resolve(sp);
             game.getGameLog().add(GameLogEntryType.MANA, source + " - " + sp.getDescription());
@@ -363,46 +376,32 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         // Create a new object, since the triggers aren't happening right away
         List<TargetChoices> chosenTargets = sp.getAllTargetChoices();
         if (!chosenTargets.isEmpty()) {
-            runParams = Maps.newHashMap();
+            runParams = AbilityKey.newMap();
             SpellAbility s = sp;
             if (si != null) {
                 s = si.getSpellAbility(true);
                 chosenTargets = s.getAllTargetChoices();
             }
             runParams.put(AbilityKey.SourceSA, s);
-            Set<Object> distinctObjects = Sets.newHashSet();
+            Set<GameObject> distinctObjects = Sets.newHashSet();
             for (final TargetChoices tc : chosenTargets) {
-                if (tc != null && tc.getTargetCards() != null) {
-                    for (final Object tgt : tc) {
-                        // Track distinct objects so Becomes targets don't trigger for things like:
-                        // Seeds of Strength
-                        if (distinctObjects.contains(tgt)) {
-                            continue;
-                        }
-
-                        distinctObjects.add(tgt);
-                        if (tgt instanceof Card && !((Card) tgt).hasBecomeTargetThisTurn()) {
-                            runParams.put(AbilityKey.FirstTime, null);
-                            ((Card) tgt).setBecameTargetThisTurn(true);
-                        }
-                        runParams.put(AbilityKey.Target, tgt);
-                        game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
+                for (final GameObject tgt : tc) {
+                    // Track distinct objects so Becomes targets don't trigger for things like:
+                    // Seeds of Strength
+                    if (!distinctObjects.add(tgt)) {
+                        continue;
                     }
-                    runParams.put(AbilityKey.Targets, tc);
-                    runParams.put(AbilityKey.Cause, s.getHostCard());
-                    game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
+
+                    if (tgt instanceof Card && !((Card) tgt).hasBecomeTargetThisTurn()) {
+                        runParams.put(AbilityKey.FirstTime, null);
+                        ((Card) tgt).setBecameTargetThisTurn(true);
+                    }
+                    runParams.put(AbilityKey.Target, tgt);
+                    game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
                 }
             }
-        }
-        // Not sure these clauses are necessary. Consider it a precaution
-        // for backwards compatibility for hardcoded cards.
-        else if (sp.getTargetCard() != null) {
-            runParams.put(AbilityKey.Target, sp.getTargetCard());
-
-            game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
-
-            runParams.put(AbilityKey.Targets, Lists.newArrayList(sp.getTargetCard()));
-            runParams.put(AbilityKey.Cause, sp.getHostCard());
+            runParams.put(AbilityKey.Targets, distinctObjects);
+            runParams.put(AbilityKey.Cause, s.getHostCard());
             game.getTriggerHandler().runTrigger(TriggerType.BecomesTargetOnce, runParams, false);
         }
 
