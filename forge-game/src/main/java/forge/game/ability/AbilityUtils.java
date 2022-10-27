@@ -2042,13 +2042,7 @@ public class AbilityUtils {
             return doXMath(c.getNetPower() + c.getNetToughness(), expr, c, ctb);
         }
         if (sq[0].contains("CardNumTypes")) {
-            Card ce;
-            if (sq[0].contains("Remembered")) {
-                ce = (Card) c.getFirstRemembered();
-            } else {
-                ce = c;
-            }
-            return doXMath(ce == null ? 0 : getNumberOfTypes(ce), expr, c, ctb);
+            return doXMath(getNumberOfTypes(c), expr, c, ctb);
         }
 
         if (sq[0].contains("CardNumNotedTypes")) {
