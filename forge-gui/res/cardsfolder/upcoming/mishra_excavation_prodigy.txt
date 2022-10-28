@@ -1,0 +1,12 @@
+Name:Mishra, Excavation Prodigy
+ManaCost:2 R
+Types:Legendary Creature Human Artificer
+PT:2/1
+K:Haste
+A:AB$ Draw | Cost$ 1 T | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
+T:Mode$ DiscardedAll | ValidPlayer$ You | ValidCard$ Card.Artifact| TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigMana | TriggerDescription$ Whenever you discard one or more artifact cards, add {R}{R}. This ability triggers only once each turn.
+SVar:TrigMana:DB$ Mana | Produced$ R R
+DeckHints:Type$Artifact
+DeckHas:Ability$Discard
+Oracle:Haste\n{1},{T}, Discard a card: Draw a card.\nWhenever you discard one or more artifact cards, add {R}{R}. This ability triggers only once each turn.
