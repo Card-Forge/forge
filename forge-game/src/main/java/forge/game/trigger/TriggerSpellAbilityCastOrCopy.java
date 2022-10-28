@@ -41,6 +41,7 @@ import forge.game.spellability.TargetChoices;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 import forge.util.Localizer;
+import forge.util.collect.FCollection;
 
 /**
  * <p>
@@ -132,9 +133,7 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
                 for (final Card tgt : sa.getTargets().getTargetCards()) {
                     if (matchesValid(tgt, getParam("TargetsValid").split(","))) {
                         validTgtFound = true;
-                        if (this.hasParam("RememberValidCards")) {
-                            this.getHostCard().addRemembered(tgt);
-                        } else break;
+                        break;
                     }
                 }
 
@@ -280,10 +279,14 @@ public class TriggerSpellAbilityCastOrCopy extends Trigger {
         sa.setTriggeringObject(AbilityKey.Card, castSA.getHostCard());
         sa.setTriggeringObject(AbilityKey.SpellAbility, castSA.isWrapper() ? castSA : castSA.copy(castSA.getHostCard(), true));
         sa.setTriggeringObject(AbilityKey.StackInstance, si);
-        if (!saForTargets.getTargets().isEmpty()) {
-            sa.setTriggeringObject(AbilityKey.SpellAbilityTarget, saForTargets.getTargets().get(0));
+        final List<TargetChoices> allTgts = saForTargets.getAllTargetChoices();
+        if (!allTgts.isEmpty()) {
+            final FCollection<GameEntity> saTargets = new FCollection<>();
+            for (TargetChoices tc : allTgts) {
+                saTargets.addAll(tc.getTargetEntities());
+            }
+            sa.setTriggeringObject(AbilityKey.SpellAbilityTargets, saTargets);
         }
-        sa.setTriggeringObject(AbilityKey.SpellAbilityTargetingCards, saForTargets.getTargets().getTargetCards());
         sa.setTriggeringObjectsFrom(
                 runParams,
             AbilityKey.Player,
