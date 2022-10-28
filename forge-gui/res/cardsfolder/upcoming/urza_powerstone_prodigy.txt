@@ -9,4 +9,5 @@ T:Mode$ DiscardedAll | ValidPlayer$ You | ValidCard$ Card.Artifact| TriggerZones
 SVar:TrigPowerStone:DB$ Token | TokenAmount$ 1 | TokenTapped$ True | TokenScript$ c_a_powerstone | TokenOwner$ You
 DeckHas:Ability$Discard|Token
 DeckHints:Type$Artifact
+SVar:AIPreference:DiscardCost$Card.Artifact
 Oracle:Vigilance\n{1}, {T}: Draw a card, then discard a card.\nWhenever you discard one or more artifact cards, create a tapped Powerstone token. This ability triggers only once each turn. (The token is an artifact with "{T}; Add {C}. This mana can't be spent to cast a nonartifact spell.")
