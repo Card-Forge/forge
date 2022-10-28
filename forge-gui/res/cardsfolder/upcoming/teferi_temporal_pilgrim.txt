@@ -8,6 +8,7 @@ A:AB$ Draw | Cost$ AddCounter<0/LOYALTY> | NumCards$ 1 | Planeswalker$ True | Sp
 A:AB$ Token | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | TokenScript$ u_2_2_spirit_vigilance_drawcounter | TokenAmount$ 1 | TokenOwner$ You | SpellDescription$ Create a 2/2 blue Spirit creature token with vigilance and "Whenever you draw a card, put a +1/+1 counter on this creature."
 A:AB$ ChooseCard | Cost$ SubCounter<12/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Mandatory$ True | Choices$ Permanent.TargetedPlayerCtrl | SubAbility$ DBChangeZone | RememberChosen$ True | SpellDescription$ Target opponent chooses a permanent they control and returns it to its owner's hand. Then they shuffle each nonland permanent they control into its owner's library.
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBShuffleAll
-SVar:DBShuffleAll:DB$ ChangeZoneAll | ChangeType$ Permanent.nonLand+TargetedPlayerCtrl | Origin$ Battlefield | Destination$ Library | Shuffle$ True
-DeckHas:Type$Spirit & Ability$Token
+SVar:DBShuffleAll:DB$ ChangeZoneAll | ChangeType$ Permanent.nonLand+TargetedPlayerCtrl | Origin$ Battlefield | Destination$ Library | Shuffle$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Type$Spirit & Ability$Token|Counters
 Oracle:Whenever you draw a card, put a loyalty counter on Teferi, Temporal Pilgrim.\n[0]: Draw a card.\n[-2]: Create a 2/2 blue Spirit creature token with vigilance and "Whenever you draw a card, put a +1/+1 counter on this creature."\n[-12]: Target opponent chooses a permanent they control and returns it to its owner's hand. Then they shuffle each nonland permanent they control into its owner's library.
