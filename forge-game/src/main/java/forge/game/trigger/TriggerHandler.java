@@ -561,7 +561,7 @@ public class TriggerHandler {
         sa.setTriggerRemembered(regtrig.getTriggerRemembered());
 
         if (regtrig.hasParam("TriggerController")) {
-            Player p = AbilityUtils.getDefinedPlayers(regtrig.getHostCard(), regtrig.getParam("TriggerController"), sa).get(0);
+            Player p = AbilityUtils.getDefinedPlayers(host, regtrig.getParam("TriggerController"), sa).get(0);
             sa.setActivatingPlayer(p);
         }
 
