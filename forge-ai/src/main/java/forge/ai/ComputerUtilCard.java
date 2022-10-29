@@ -1080,10 +1080,9 @@ public class ComputerUtilCard {
 
         }
         if (chosen.isEmpty()) {
-            //chosen.add(MagicColor.Constant.GREEN);
             chosen.add(getMostProminentColor(ai.getAllCards(), colorChoices));
         }
-        //convert to proper case same with the colorChoices..
+        //convert to localized name
         return chosen.stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList());
     }
 
