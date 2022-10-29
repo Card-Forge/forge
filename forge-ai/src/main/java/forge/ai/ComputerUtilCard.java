@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import forge.card.mana.ManaCost;
 import org.apache.commons.lang3.StringUtils;
@@ -1078,9 +1079,11 @@ public class ComputerUtilCard {
 
         }
         if (chosen.isEmpty()) {
-            chosen.add(MagicColor.Constant.GREEN);
+            //chosen.add(MagicColor.Constant.GREEN);
+            chosen.add(getMostProminentColor(ai.getAllCards(), colorChoices));
         }
-        return chosen;
+        //convert to proper case same with the colorChoices..
+        return chosen.stream().map(s -> Character.toUpperCase(s.charAt(0)) + s.substring(1)).collect(Collectors.toList());
     }
 
     public static boolean useRemovalNow(final SpellAbility sa, final Card c, final int dmg, ZoneType destination) {
