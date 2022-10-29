@@ -23,6 +23,7 @@ import java.util.Map;
 
 import com.google.common.collect.*;
 import forge.game.card.*;
+import forge.game.staticability.StaticAbility;
 import forge.util.Aggregates;
 import org.apache.commons.lang3.StringUtils;
 
@@ -444,6 +445,41 @@ public final class GameActionUtil {
             source.clearStaticChangedCardKeywords(false);
             CardCollection preList = new CardCollection(source);
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
+        }
+
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals("OptionalCost") || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+
+                if (!stAb.matchesValidParam("ValidCard", source)) {
+                    continue;
+                }
+                if (!stAb.matchesValidParam("ValidSA", sa)) {
+                    continue;
+                }
+                if (!stAb.matchesValidParam("Activator", sa.getActivatingPlayer())) {
+                    continue;
+                }
+
+                final Cost cost = new Cost(stAb.getParam("Cost"), false);
+                if (stAb.hasParam("ReduceColor")) {
+                    if (stAb.getParam("ReduceColor").equals("W")) {
+                        costs.add(new OptionalCostValue(OptionalCost.ReduceW, cost));
+                    } else if (stAb.getParam("ReduceColor").equals("U")) {
+                        costs.add(new OptionalCostValue(OptionalCost.ReduceU, cost));
+                    } else if (stAb.getParam("ReduceColor").equals("B")) {
+                        costs.add(new OptionalCostValue(OptionalCost.ReduceB, cost));
+                    } else if (stAb.getParam("ReduceColor").equals("R")) {
+                        costs.add(new OptionalCostValue(OptionalCost.ReduceR, cost));
+                    } else if (stAb.getParam("ReduceColor").equals("G")) {
+                        costs.add(new OptionalCostValue(OptionalCost.ReduceG, cost));
+                    }
+                } else {
+                    costs.add(new OptionalCostValue(OptionalCost.AltCost, cost));
+                }
+            }
         }
 
         for (KeywordInterface inst : source.getKeywords()) {

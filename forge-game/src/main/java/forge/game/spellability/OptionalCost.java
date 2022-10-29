@@ -11,6 +11,11 @@ public enum OptionalCost {
     Kicker2("Kicker"),
     Retrace("Retrace"),
     Jumpstart("Jump-start"),
+    ReduceW("(to reduce white mana)"),
+    ReduceU("(to reduce blue mana)"),
+    ReduceB("(to reduce black mana)"),
+    ReduceR("(to reduce red mana)"),
+    ReduceG("(to reduce green mana)"),
     AltCost(""),
     Flash("Flash"), // used for Pay Extra for Flash
     Generic("Generic"); // used by "Dragon Presence" and pseudo-kicker cards

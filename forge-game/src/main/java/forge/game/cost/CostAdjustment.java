@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.game.spellability.OptionalCost;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Strings;
@@ -207,6 +208,22 @@ public class CostAdjustment {
         }
         // need to reduce generic extra because of 2 hybrid mana
         cost.decreaseGenericMana(sumGeneric);
+
+        if (sa.isSpell() && sa.isOptionalCostPaid(OptionalCost.ReduceW)) {
+            cost.decreaseShard(ManaCostShard.parseNonGeneric("W"), 1);
+        }
+        if (sa.isSpell() && sa.isOptionalCostPaid(OptionalCost.ReduceU)) {
+            cost.decreaseShard(ManaCostShard.parseNonGeneric("U"), 1);
+        }
+        if (sa.isSpell() && sa.isOptionalCostPaid(OptionalCost.ReduceB)) {
+            cost.decreaseShard(ManaCostShard.parseNonGeneric("B"), 1);
+        }
+        if (sa.isSpell() && sa.isOptionalCostPaid(OptionalCost.ReduceR)) {
+            cost.decreaseShard(ManaCostShard.parseNonGeneric("R"), 1);
+        }
+        if (sa.isSpell() && sa.isOptionalCostPaid(OptionalCost.ReduceG)) {
+            cost.decreaseShard(ManaCostShard.parseNonGeneric("G"), 1);
+        }
 
         if (sa.isSpell() && sa.isOffering()) { // cost reduction from offerings
             adjustCostByOffering(cost, sa);

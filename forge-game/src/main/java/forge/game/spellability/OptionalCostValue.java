@@ -51,11 +51,12 @@ public class OptionalCostValue implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if (type != OptionalCost.Generic) {
+        if (type != OptionalCost.Generic && !type.getName().startsWith("(to reduce")) {
             sb.append(type.getName());
             sb.append(" ");
         }
         sb.append(cost.toSimpleString());
+        sb.append(type.getName().startsWith("(to reduce") ? " " + type.getName() : "");
         return sb.toString();
     }
 }
