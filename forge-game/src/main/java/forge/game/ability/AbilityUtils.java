@@ -1317,22 +1317,6 @@ public class AbilityUtils {
             final Object o = root.getTriggeringObject(AbilityKey.fromString(triggeringType));
             if (o instanceof SpellAbility) {
                 s = (SpellAbility) o;
-                // if there is no target information in SA but targets are listed in SpellAbilityTargeting cards, copy that
-                // information so it's not lost if the calling code is interested in targets of the triggered SA.
-                if (triggeringType.equals("SpellAbility")) {
-                    final List<GameEntity> tgtList = (List<GameEntity>) root.getTriggeringObject(AbilityKey.SpellAbilityTargets);
-                    if (s.getTargets() != null && s.getTargets().size() == 0) {
-                        if (tgtList != null && tgtList.size() > 0) {
-                            TargetChoices tc = new TargetChoices();
-                            for (GameEntity ge : tgtList) {
-                                if (ge instanceof Card) {
-                                    tc.add((Card) ge);
-                                }
-                            }
-                            s.setTargets(tc);
-                        }
-                    }
-                }
             } else if (o instanceof SpellAbilityStackInstance) {
                 s = ((SpellAbilityStackInstance) o).getSpellAbility(true);
             }
