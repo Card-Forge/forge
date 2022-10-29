@@ -9,7 +9,9 @@ T:Mode$ Phase | Phase$ Upkeep | CheckSVar$ X | SVarCompare$ GE4 | IsPresent$ Car
 SVar:Meld:DB$ Meld | Name$ Titania, Gaea Incarnate | Primary$ Titania, Voice of Gaea | Secondary$ Argoth, Sanctum of Nature | SecondaryType$ Land
 DeckHints:Name$Argoth, Sanctum of Nature
 MeldPair:Argoth, Sanctum of Nature
-SVar:X:Count$ValidGraveyard Land
+SVar:X:Count$TypeInYourYard.Land
+DeckHints:Ability$Mill|Graveyard|Dredge & Name$Argoth, Sanctum of Nature
+DeckHas:Ability$LifeGain
 AlternateMode:Meld
 Oracle:Reach\nWhenever one or more land cards are put into your graveyard from anywhere, you gain 2 life.\nAt the beginning of your upkeep, if there are four or more land cards in your graveyard and you both own and control Titania, Voice of Gaea and a land named Argoth, Sanctum of Nature, exile them, then meld them into Titania, Gaea Incarnate.
 
@@ -30,4 +32,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Land.YouCtrl | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True
 A:AB$ PutCounter | Cost$ 3 G | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | CounterType$ P1P1 | CounterNum$ 4 | SubAbility$ DBAnimate | SpellDescription$ Put 4 +1/+1 counters on target land you control. That land becomes a 0/0 Elemental creature with haste. It's still a land.
 SVar:DBAnimate:DB$ Animate | Defined$ ParentTarget | Power$ 0 | Toughness$ 0 | Types$ Creature,Elemental | Keywords$ Haste | Duration$ Permanent
+DeckHas:Ability$Graveyard
 Oracle:Vigilance, reach, trample, haste\nTitania, Gaea Incarnate’s power and toughness are each equal to the number of lands you control.\nWhen Titania, Gaea Incarnate enters the battlefield, return all land cards from your graveyard to the battlefield tapped.\n{3}{G}: Put four +1/+1 counters on target land you control. It becomes a 0/0 Elemental creature with haste. It’s still a land.
