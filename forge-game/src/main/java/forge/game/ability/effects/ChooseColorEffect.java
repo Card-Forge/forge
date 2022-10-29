@@ -82,14 +82,13 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                     }
                     noNotify = null;
                 } else {
-                    colorChoices = colorChoices.stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList());
                     chosenColors = p.getController().chooseColors(prompt, sa, cntMin, cntMax, colorChoices);
-                    chosenColors = chosenColors.stream().map(DeckRecognizer::getColorNameByLocalisedName).collect(Collectors.toList());
                 }
                 if (chosenColors.isEmpty()) {
                     return;
                 }
                 card.setChosenColors(chosenColors);
+                chosenColors = chosenColors.stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList());
                 p.getGame().getAction().notifyOfValue(sa, p, Lang.joinHomogenous(chosenColors), noNotify);
             }
         }
