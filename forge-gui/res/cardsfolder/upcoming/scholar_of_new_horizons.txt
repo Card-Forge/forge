@@ -1,0 +1,13 @@
+Name:Scholar of New Horizons
+ManaCost:1 W
+Types:Creature Human Scout
+PT:1/1
+K:etbCounter:P1P1:1
+A:AB$ ChangeZone | Cost$ T RemoveAnyCounter<1/Any/Permanent.YouCtrl/a permanent you control> | Origin$ Library | Destination$ Library | ChangeType$ Land.Plains | ChangeNum$ 1 | RememberChanged$ True | Reveal$ True | Shuffle$ False | SubAbility$ DBBranch | SpellDescription$ Search your library for a Plains card and reveal it. If an opponent controls more lands than you, you may put that card onto the battlefield tapped. If you don't put the card onto the battlefield, put it into your hand. Then shuffle.
+SVar:DBBranch:DB$ Branch | BranchConditionSVar$ X | TrueSubAbility$ ToBattlefieldTapped | FalseSubAbility$ ToHand | SubAbility$ DBCleanup
+SVar:X:PlayerCountOpponents$HasPropertywithMoreLandsThanYou
+SVar:ToBattlefieldTapped:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | Tapped$ True | Shuffle$ True
+SVar:ToHand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Hand | Shuffle$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+DeckHas:Ability$Counters
+Oracle:Scholar of New Horizons enters the battlefield with a +1/+1 counter on it.\n{T}, Remove a counter from a permanent you control: Search your library for a Plains card and reveal it. If an opponent controls more lands than you, you may put that card onto the battlefield tapped. If you don't put the card onto the battlefield, put it into your hand. Then shuffle.
