@@ -1,6 +1,6 @@
 Name:Argoth, Sanctum of Nature
 ManaCost:no cost
-Colors:Green
+Colors:green
 Types:Land
 K:ETBReplacement:Other:LandTapped
 SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Creature.Legendary+YouCtrl | ConditionCompare$ EQ0 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control a legendary green creature.
