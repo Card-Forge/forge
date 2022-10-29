@@ -56,6 +56,7 @@ public class ChooseColorEffect extends SpellAbilityEffect {
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 List<String> chosenColors = new ArrayList<>();
+                List<String> translated = new ArrayList<>();
                 int cntMin = sa.hasParam("TwoColors") ? 2 : 1;
                 int cntMax = sa.hasParam("TwoColors") ? 2 : sa.hasParam("OrColors") ? colorChoices.size() : 1;
                 String prompt = null;
@@ -80,17 +81,19 @@ public class ChooseColorEffect extends SpellAbilityEffect {
                         colorChoices.remove(choice);
                         chosenColors.add(choice);
                     }
+                    translated = new ArrayList<>(chosenColors.stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList()));
                     noNotify = null;
                 } else {
                     colorChoices = colorChoices.stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList());
                     chosenColors = p.getController().chooseColors(prompt, sa, cntMin, cntMax, colorChoices);
+                    translated = new ArrayList<>(chosenColors);
                     chosenColors = chosenColors.stream().map(DeckRecognizer::getColorNameByLocalisedName).collect(Collectors.toList());
                 }
                 if (chosenColors.isEmpty()) {
                     return;
                 }
                 card.setChosenColors(chosenColors);
-                p.getGame().getAction().notifyOfValue(sa, p, Lang.joinHomogenous(chosenColors), noNotify);
+                p.getGame().getAction().notifyOfValue(sa, p, Lang.joinHomogenous(translated), noNotify);
             }
         }
     }

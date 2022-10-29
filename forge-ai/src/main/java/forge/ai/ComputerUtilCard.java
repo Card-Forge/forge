@@ -11,6 +11,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import forge.card.mana.ManaCost;
+import forge.deck.DeckRecognizer;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -1083,7 +1084,7 @@ public class ComputerUtilCard {
             chosen.add(getMostProminentColor(ai.getAllCards(), colorChoices));
         }
         //convert to proper case same with the colorChoices..
-        return chosen.stream().map(s -> Character.toUpperCase(s.charAt(0)) + s.substring(1)).collect(Collectors.toList());
+        return chosen.stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList());
     }
 
     public static boolean useRemovalNow(final SpellAbility sa, final Card c, final int dmg, ZoneType destination) {
