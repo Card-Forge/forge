@@ -8,14 +8,35 @@ Type=Expansion
 ScryfallCode=BRO
 
 [cards]
+8 M In the Trenches @Daarken
 23 U Recruitment Officer @Johan Grenier
+37 C Scrapwork Cohort @Caio Monteiro
+51 R Hurkyl, Master Wizard @Randy Vargas
+63 U Splitting the Powerstone @Campbell White
+66 M Teferi, Temporal Pilgrim @Magali Villeneuve
+69 U Urza, Powerstone Prodigy @Donato Giancola
 81 M Surge Engine @Daarken
+95 M Gix, Yawgmoth Praetor @Anna Podedworna
+117 U Ashnod's Harvester @Halil Ural
+121 M Phyrexian Fleshgorger @Steve Prescott
+135 R Feldon, Ronom Excavator @Howard Lyon
+140 U Mishra, Excavation Prodigy @Donato Giancola
+144 U Monastery Swiftspear @Gabor Szikszai
 163 R Phyrexian Dragon Engine @Chris Rahn
+193 M Titania, Voice of Gaea @Cristi Balanescu
 216 M Mishra, Claimed by Gix @Chris Rahn
+217 R Mishra, Tamer of Mak Fawa @Darren Tan
 218 R Queen Kayla bin-Kroog @Cristi Balanescu
 225 M Urza, Lord Protector @Ryan Pancoast
+226 R Urza, Prince of Kroog @Joshua Raphael
 238 R The Mightstone and Weakstone @Ryan Pancoast
+256 R Argoth, Sanctum of Nature @Cristi Balanescu
+257 R Battlefield Forge @Thomas Stoop
+258 R Blast Zone @Jorge Jacinto
+259 R Brushland @Thomas Stoop
+264 R Llanowar Wastes @Lucas Graciano
 265 R Mishra's Foundry @Leon Tukker
+267 R Underground River @Volkan Baǵa
 278 L Plains @Sergey Glushakov
 279 L Plains @Robin Olausson
 280 L Island @Robin Olausson
@@ -26,7 +47,16 @@ ScryfallCode=BRO
 285 L Mountain @Victor Harmatiuk
 286 L Forest @Jonas De Ro
 287 L Forest @Piotr Dura
+292 M Teferi, Temporal Pilgrim @Cosmin Podar
+295 R Mishra, Tamer of Mak Fawa @Cosmin Podar
+296 R Urza, Prince of Kroog @Cosmin Podar
+297 R Battlefield Forge @Rob Alexander
+298 R Brushland @Rob Alexander
+299 R Llanowar Wastes @Rob Alexander
+300 R Underground River @Rob Alexander
+314 M Hurkyl, Master Wizard @Randy Vargas
 320 M Surge Engine @Daarken
+332 M Phyrexian Fleshgorger @Steve Prescott
 357 R Queen Kayla bin-Kroog @Cristi Balanescu
 372 R Mishra's Foundry @Leon Tukker
 378 R Mishra's Foundry @Leon Tukker

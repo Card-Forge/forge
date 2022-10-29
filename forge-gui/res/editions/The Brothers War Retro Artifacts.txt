@@ -6,15 +6,24 @@ Type=Collector_Edition
 ScryfallCode=BRR
 
 [cards]
+4 R Ashnod's Altar @Greg Staples
+18 R Goblin Charbelcher @Jesper Ejsing
 20 R Howling Mine @Mark Poole
 23 U Ivory Tower @Jason Chan
-24 C Jalum Tome @Jerry Tiritilli
+24 U Jalum Tome @Jerry Tiritilli
 29 R Lodestone Golem @Chris Rahn
+33 M Mind's Eye @Karl Kopinski
+37 U Ornithopter @Franz Vohwinkel
 40 R Phyrexian Revoker @Kev Walker
 63 M Wurmcoil Engine @Raymond Swanland
+67 R Ashnod's Altar @Greg Staples
+73 R Chromatic Lantern @Ben Hill
 83 R Howling Mine @Mark Poole
 86 U Ivory Tower @Irina Nordsol
 87 U Jalum Tome @Ben Hill
+88 R Goblin Charbelcher @Jesper Ejsing
 92 R Lodestone Golem @Chris Rahn
+96 M Mind's Eye @Warren Mahy
+100 U Ornithopter @Franz Vohwinkel
 103 R Phyrexian Revoker @Yeong-Hao Han
 126 M Wurmcoil Engine @Raymond Swanland
