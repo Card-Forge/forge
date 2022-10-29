@@ -4,7 +4,7 @@ Types:Legendary Creature Human Soldier
 PT:3/3
 T:Mode$ ChangesZone | ValidCard$ Artifact.nonToken+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken artifact you control is put into a graveyard from the battlefield, create a colorless artifact token named Scrap.
 SVar:TrigToken:DB$ Token | TokenScript$ scrap 
-A:AB$ Charm | Cost$ 1 R Sac<1/Artifact> |  Choices$ DBCounter,DBGoad,DBLoot | CharmNum$ 1 | SpellDescription$ Choose one, then ABILITY
+A:AB$ Charm | Cost$ 1 R Sac<1/Artifact> |  Choices$ DBCounter,DBGoad,DBLoot | CharmNum$ 1
 SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on NICKNAME. It gains haste until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Self |  KW$ Haste
 SVar:DBGoad:DB$ Goad | ValidTgts$ Creature | SpellDescription$ Goad target creature.
