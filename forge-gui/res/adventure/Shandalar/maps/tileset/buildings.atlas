@@ -325,6 +325,12 @@ Grove
 WurmPond 
   xy: 224, 400
   size: 32, 32  
+StonePyramid
+  xy: 384, 464
+  size: 32, 32
+Mine
+  xy: 96, 144
+  size: 32, 32
 black_castle 
   xy: 0, 800
   size: 64, 64       
