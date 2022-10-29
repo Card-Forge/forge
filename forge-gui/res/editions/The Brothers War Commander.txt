@@ -10,13 +10,174 @@ ScryfallCode=BRC
 2 M Urza, Chief Artificer @Bartlomiej Gawel
 3 M Tawnos, Solemn Survivor @Matt Stewart
 4 M Ashnod the Uncaring @Kieran Yanner
+5 R Sanwell, Avenger Ace @Josu Hernaiz
+6 R Scholar of New Horizons @Randy Vargas
+7 R Glint Raker @Lars Grant-West
+8 R March of Progress @Ben Wootten
+9 R Terisiare's Devastation @Bram Sels
+10 R Wire Surgeons @Josu Hernaiz
+11 R Wreck Hunter @Josu Hernaiz
+12 R Blast-Furnace Hellkite
+13 R Farid, Enterprising Salvager @Bruno Biazotto
+14 R Hexavus @Mark Tedin
+15 R Kayla's Music Box @Aaron Miller
+16 R Machine God's Effigy @Martin de Diego Sádaba
+17 R Scavenged Brawler @Craig J Spearing
+18 R Smelting Vat @Robin Olausson
+19 R Thopter Shop @Craig J Spearing
+20 R Wondrous Crucible @Evan Shipard
+29 L Plains @Raymond Bonilla
+30 L Plains @Jorge Jacinto
+31 L Island @Eddie Mendoza
+32 L Island @Lucas Staniec
+33 L Swamp @Sam Burley
+34 L Swamp @Robin Olausson
+35 L Mountain @Bruce Brenneise
+36 L Mountain @Victor Harmatiuk
 39 M Mishra, Eminent One @Randy Vargas
 40 M Urza, Chief Artificer @Bartlomiej Gawel
 48 M Mishra, Eminent One @Randy Vargas
 49 M Urza, Chief Artificer @Bartlomiej Gawel
+68 R Angel of the Ruins @Viko Menezes
+69 R Austere Command @Anna Steinbauer
+70 R Bronze Guardian @Grzegorz Rutkowski
+71 R Digsite Engineer @Zoltan Boros
+72 M Indomitable Archangel @Allen Williams
+73 R Losheel, Clockwork Scholar @Daniel Zrom
+74 R Phyrexian Rebirth @Scott Chou
+75 U Swords to Plowshares @Jesper Ejsing
+76 R Tempered Steel @Wayne Reynolds
+77 R Teshar, Ancestor's Apostle @Even Amundsen
+78 R Unbreakable Formation @Matt Stewart
+79 R Urza's Ruinous Blast @Slawomir Maniak
+80 R Bident of Thassa @Kari Christensen
+81 R Emry, Lurker of the Loch @Livia Prima
+82 C Etherium Sculptor @Steven Belledin
+83 M Ethersworn Adjudicator @Dan Scott
+84 U Fact or Fiction @Matt Cavotta
+85 U Filigree Attendant @Igor Kieryluk
+86 R Master of Etherium @Matt Cavotta
+87 R Master Transmuter @Chippy
+88 C Mnemonic Sphere @Robin Olausson
+89 M Muzzio, Visionary Architect @Volkan Baǵa
+90 R One with the Machine @Chase Stone
+91 R Padeem, Consul of Innovation @Matt Stewart
 92 C Preordain @Svetlin Velinov
+93 R Sai, Master Thopterist @Adam Paquette
+94 R Sharding Sphinx @Michael Bruinsma
+95 R Shimmer Dragon @Lie Setiawan
+96 U Thirst for Knowledge @Anna Pavleeva
+97 R Thopter Spy Network @Jung Park
+98 R Thought Monitor @Martina Pilcerova
+99 C Thoughtcast @Greg Hildebrandt
+100 R Vedalken Humiliator @Jehan Choo
+101 U Whirler Rogue @Winona Nelson
+102 R Workshop Elders @Iain McCaig
+103 U Armix, Filigree Thrasher @Daniel Ljunggren
+104 C Executioner's Capsule @Warren Mahy
+105 R Fain, the Broker @Lius Lasahido
+106 C Feed the Swarm @Andrey Kuzinskiy
+107 M Geth, Lord of the Vault @Whit Brachna
+108 M Herald of Anguish @David Astruga
+109 R Marionette Master @James Ryman
+110 M Noxious Gearhulk @Lius Lasahido
+111 U Abrade @Jonas De Ro
+112 R Audacious Reshapers @Justyna Dura
+113 R Blasphemous Act @Daarken
+114 R Chaos Warp @Trevor Claxton
+115 R Cursed Mirror @David Gaillet
+116 C Faithless Looting @Karl Kopinski
+117 R Hellkite Igniter @Jason Chan
+118 R Slobad, Goblin Tinkerer @Kev Walker
+119 M Alela, Artful Provocateur @Grzegorz Rutkowski
 120 R Baleful Strix @Nils Hamm
+121 R Bedevil @Seb McKinnon
+122 R Brudiclad, Telchor Engineer @Daarken
+123 C Chrome Courier @Hector Ortiz
+124 U Despark @Slawomir Maniak
+125 U Expressive Iteration @Anastasia Ovchinnikova
+126 M Jhoira, Weatherlight Captain @Brad Rigney
+127 U Oni-Cult Anvil @Yeong-Hao Han
+128 R Sharuum the Hegemon @Izzy
+129 M Silas Renn, Seeker Adept @Joseph Meehan
+130 M Sphinx's Revelation @John Di Giovanni
+131 R Vindicate @Brian Snõddy
+132 C Arcane Signet @Dan Scott
+133 U Azorius Signet @Raoul Vitale
+134 U Chief of the Foundry @Daniel Ljunggren
+135 C Commander's Sphere @Ryan Alexander Lee
+136 U Cranial Plating @Adam Rex
+137 R Darksteel Juggernaut @Randis Albion
+138 C Dimir Signet @Raoul Vitale
+139 U Dreamstone Hedron @Eric Deschamps
+140 R Etched Champion @Igor Kieryluk
+141 U Fellwar Stone @John Avon
+142 U Hedron Archive @Craig J Spearing
+143 U Ichor Wellspring @Steven Belledin
+144 R Idol of Oblivion @Piotr Dura
+145 U Liquimetal Torque @Brian Snõddy
+146 M Lithoform Engine @Colin Boyer
+147 R Metalwork Colossus @Jaime Jones
+148 C Mind Stone @Adam Rex
+149 R Mirrorworks @John Avon
+150 C Mycosynth Wellspring @David Rapoza
+151 R Myr Battlesphere @Franz Vohwinkel
+152 C Nihil Spellbomb @Franz Vohwinkel
+153 R Oblivion Stone @Gabor Szikszai
+154 C Orzhov Signet @Martina Pilcerova
+155 C Prophetic Prism @John Avon
+156 U Rakdos Signet @Martina Pilcerova
+157 U Relic of Progenitus @Jean-Sébastien Rossbach
+158 U Servo Schematic @Titus Lunter
 159 U Skullclamp @Daniel Ljunggren
 160 U Sol Ring @Mike Bierek
+161 R Solemn Simulacrum @Donato Giancola
+162 R Spine of Ish Sah @Daniel Ljunggren
+163 R Steel Hellkite @Jaime Jones
+164 R Steel Overseer @Chris Rahn
+165 R Strionic Resonator @Sam White
+166 U Swiftfoot Boots @Svetlin Velinov
+167 U Thought Vessel @rk post
+168 U Thran Dynamo @Ron Spears
+169 R Trading Post @Adam Paquette
+170 R Traxos, Scourge of Kroog @Aldo Domínguez
+171 C Wayfarer's Bauble @Darrell Riche
+172 C Ancient Den @Muhammad Firdaus
+173 U Arcane Sanctum @Anthony Francisco
+174 C Ash Barrens @Jonas De Ro
+175 U Azorius Chancery @John Avon
+176 C Bojuka Bog @Howard Lyon
+177 U Buried Ruin @Franz Vohwinkel
 178 C Command Tower @Ryan Yee
+179 U Crumbling Necropolis @Volkan Baǵa
+180 U Darksteel Citadel @John Avon
+181 R Darkwater Catacombs @Monte Michael Moore
+182 U Dimir Aqueduct @John Avon
+183 C Drossforge Bridge @Raoul Vitale
+184 C Evolving Wilds @Steven Belledin
+185 R Exotic Orchard @Steven Belledin
+186 C Goldmire Bridge @Aaron Miller
+187 C Great Furnace @Raymond Bonilla
+188 U Izzet Boilerworks @John Avon
+189 C Mistvault Bridge @Mathias Kollros
+191 U Orzhov Basilica @John Avon
+192 U Myriad Landscape @Richard Wright
+193 R Prairie Stream @Adam Paquette
+194 U Rakdos Carnarium @John Avon
+195 C Razortide Bridge @Rob Alexander
 196 U Reliquary Tower @Jesper Ejsing
+197 R River of Tears @Chris J. Anderson
+198 C Seat of the Synod @Donato Giancola
+199 R Shadowblood Ridge @Sam White
+200 C Silverbluff Bridge @Joseph Meehan
+201 R Skycloud Expanse @Sam Burley
+202 R Smoldering Marsh @Adam Paquette
+203 R Spire of Industry @John Avon
+204 R Sunken Hollow @Adam Paquette
+205 R Temple of Deceit @Jonas De Ro
+206 R Temple of Enlightenment @Piotr Dura
+207 R Temple of Epiphany @Adam Paquette
+208 R Temple of Malice @Jonas De Ro
+209 R Temple of Silence @Adam Paquette
+210 C Terramorphic Expanse @Dan Scott
+211 C Vault of Whispers @Alexander Forssberg
