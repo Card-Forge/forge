@@ -1,0 +1,10 @@
+Name:Smelting Vat
+ManaCost:4
+Types:Artifact
+A:AB$ Dig | Cost$ 1 T Sac<1/Artifact.Other/another artifact> | DigNum$ 8 | Reveal$ True | RememberRevealed$ True | DestinationZone$ Library | NoMove$ True | SubAbility$ DBChangeZone 
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | SubAbility$ DBCleanup | MaxTotalTargetCMC X | ChangeNum$ 2 | ChangeType$ Artifact.nonCreature+YouOwn | Optional$ True | RestRandomOrder$ True | DestinationZone2$ Library | LibraryPosition$ -1
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Sacrificed$CardManaCost
+DeckNeeds:Type$Artifact
+DeckHas:Ability$Sacrifice
+Oracle:{1}, {T}, Sacrifice another artifact: Reveal the top eight cards of your library. Put up to two noncreature artifact cards with total mana value less than or equal to the sacrificed artifact's mana value from among them onto the battlefield, and the rest on the bottom of your library in a random order.
