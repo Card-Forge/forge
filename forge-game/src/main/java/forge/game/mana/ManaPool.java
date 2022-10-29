@@ -303,10 +303,13 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         // Send all mana back to your mana pool, before accounting for it.
 
         // move non-undoable paying mana back to floating
-
         refundMana(sa.getPayingMana(), owner, sa);
 
         List<SpellAbility> payingAbilities = sa.getPayingManaAbilities();
+
+        // start with the most recent
+        Collections.reverse(payingAbilities);
+
         for (final SpellAbility am : payingAbilities) {
             // undo paying abilities if we can
             am.undo();
