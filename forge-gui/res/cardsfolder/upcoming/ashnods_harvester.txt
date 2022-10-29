@@ -2,7 +2,7 @@ Name:Ashnod's Harvester
 ManaCost:2
 Types:Artifact Creature Construct
 PT:3/1
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile a card from a graveyard.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ Whenever CARDNAME attacks, exile target card from a graveyard.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card | ChangeNum$ 1 | Mandatory$ True
 K:Unearth:1 B
 DeckHas:Ability$Graveyard & Color$Black
