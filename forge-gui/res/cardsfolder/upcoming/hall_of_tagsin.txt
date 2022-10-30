@@ -1,0 +1,8 @@
+Name:Hall of Tagsin
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ 1 T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenTapped$ True | TokenScript$ c_a_powerstone | SpellDescription$ Create a tapped Powerstone token. (It's an artifact with "T: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+DeckHas:Ability$Token & Type$Artifact
+Oracle:{T}: Add {C}.\n{1}, {T}: Add one mana of any color.\n{4}, {T}, Create a tapped Powerstone token. (It's an artifact with "T: Add {C}. This mana can't be spent to cast a nonartifact spell.")

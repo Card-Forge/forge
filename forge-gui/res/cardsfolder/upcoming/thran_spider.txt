@@ -1,0 +1,11 @@
+Name:Thran Spider
+ManaCost:2
+Types:Artifact Creature Spider
+PT:2/4
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, you and target opponent each create a tapped Powerstone token.
+SVar:TrigToken:DB$ Token | ValidTgts$ Opponent | TokenOwner$ TargetedAndYou | TokenAmount$ 1 | TokenTapped$ True | TokenScript$ c_a_powerstone
+A:AB$ Dig | Cost$ 7 | DigNum$ 4 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Artifact | RestRandomOrder$ True | ForceRevealToController$ True | SpellDescription$ Look at the top four cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+DeckHints:Type$Artifact
+DeckHas:Ability$Token
+Oracle:Reach\nWhen Thran Spider enters the battlefield, you and target opponent each create a tapped Powerstone token.\n{7}: Look at the top four cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

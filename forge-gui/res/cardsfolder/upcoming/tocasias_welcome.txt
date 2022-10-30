@@ -1,0 +1,7 @@
+Name:Tocasia's Welcome
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ ChangesZoneAll | ValidCards$ Creature.cmcLE3+YouCtrl | Destination$ Battlefield | TriggerZones$ Battlefield | ActivationLimit$ 1 | Execute$ TrigDraw | TriggerDescription$ Whenever one or more creatures with mana value 3 or less enter the battlefield under your control, draw a card. This ability triggers only once each turn.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:BuffedBy:Creature.cmcLE3
+Oracle:Whenever one or more creatures with mana value 3 or less enter the battlefield under your control, draw a card. This ability triggers only once each turn.

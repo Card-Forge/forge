@@ -1,0 +1,6 @@
+Name:Third Path Savant
+ManaCost:2 U
+Types:Creature Human Wizard
+PT:2/3
+A:AB$ Draw | Cost$ 7 | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:{7}: Draw two cards.

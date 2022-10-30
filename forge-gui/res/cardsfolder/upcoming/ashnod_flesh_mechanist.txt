@@ -1,0 +1,11 @@
+Name:Ashnod, Flesh Mechanist
+ManaCost:B
+Types:Legendary Creature Human Artificer
+PT:1/1
+K:Deathtouch
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice another creature. If you do, create a tapped Powerstone token.
+SVar:TrigToken:AB$ Token | Cost$ Sac<1/Creature.Other/another creature> | TokenTapped$ True | TokenScript$ c_a_powerstone
+A:AB$ Token | Cost$ 5 ExileFromGrave<1/Creature/creature card> | TokenTapped$ True | TokenScript$ c_3_3_a_zombie | SpellDescription$ Create a tapped 3/3 colorless Zombie artifact creature token.
+DeckHas:Ability$Sacrifice|Token|Graveyard & Type$Zombie|Artifact
+SVar:HasAttackEffect:TRUE
+Oracle:Deathtouch\nWhenever Ashnod, Flesh Mechanist attacks, you may sacrifice another creature. If you do, create a tapped Powerstone token.\n{5}, Exile a creature card from your graveyard. Create a tapped 3/3 colorless Zombie artifact creature token.
