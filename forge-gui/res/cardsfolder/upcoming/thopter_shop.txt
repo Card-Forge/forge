@@ -4,6 +4,6 @@ Types:Artifact
 T:Mode$ ChangesZoneAll | TriggerZones$ Battlefield | ValidCards$ Creature.Artifact+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigDraw | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more artifact creatures you control die, draw a card. This ability triggers only once each turn.
 SVar:TrigDraw:DB$ Draw
 A:AB$ Token | Cost$ 2 W T | TokenScript$ c_1_1_a_thopter_flying | SpellDescription$ Create a 1/1 colorless Thopter artifact creature token with flying.
-DeckHints:Ability$Sacrifice
-DeckHas:Ability$Token & Type$Thopter & Keyword$Flying & Color$White
+DeckHints:Ability$Sacrifice & Color$White
+DeckHas:Ability$Token & Type$Thopter & Keyword$Flying 
 Oracle:Whenever one or more artifact creatures you control die, draw a card. This ability triggers only once each turn.\n{2}{W}, {T}: Create a 1/1 colorless Thopter artifact creature token with flying.
