@@ -6,4 +6,4 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | IsPresent$ Creature
 SVar:TrigDraw:DB$ Draw
 SVar:HasAttackEffect:TRUE
 DeckHints:Ability$Graveyard$Mill
-Oracle:Whenever Gaea’s Courser attacks, if there are three or more creature cards in your graveyard, draw a card.
+Oracle:Whenever Gaea's Courser attacks, if there are three or more creature cards in your graveyard, draw a card.
