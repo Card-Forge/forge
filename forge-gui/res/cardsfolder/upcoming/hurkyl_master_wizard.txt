@@ -1,0 +1,24 @@
+Name:Hurkyl, Master Wizard
+ManaCost:1 U U
+Types:Legendary Creature - Human Wizard Advisor
+PT:2/4
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDig | TriggerDescription$ At the beginning of your end step, if you've cast a noncreature spell this turn, reveal the top five cards of your library. For each card type among noncreature spells you've cast this turn, you may put a card of that type from among the revealed cards into your hand. Put the rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 5 | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DBChooseCardOne
+SVar:DBChooseCardOne:DB$ ChooseCard | Defined$ You | Choices$  Instant.YouCtrl+IsRemembered  | ImprintChosen$ True | ConditionCheckSVar$ CheckInstant | ConditionSVarCompare$ EQ1 | ChoiceTitle$ You may choose an instant card if you cast an instant spell this turn | ChoiceZone$ Library | AILogic$ BestCard | SubAbility$ DBChooseCardTwo 
+SVar:DBChooseCardTwo:DB$ ChooseCard | Defined$ You | Choices$ Sorcery.YouCtrl+IsRemembered | ImprintChosen$ True  | ConditionCheckSVar$ CheckSorcery | ConditionSVarCompare$ EQ1 | ChoiceTitle$ You may choose a sorcery card if you cast a sorcery spell this turn | ChoiceZone$ Library | AILogic$ BestCard | SubAbility$ DBChooseCardThree
+SVar:DBChooseCardThree:DB$ ChooseCard | Defined$ You | Choices$ Planeswalker.YouCtrl+IsRemembered | ImprintChosen$ True | ConditionCheckSVar$ CheckPlaneswalker | ConditionSVarCompare$ EQ1 | ChoiceTitle$ You may choose a planeswalker card if you cast a planeswalker spell this turn | ChoiceZone$ Library | AILogic$ BestCard | SubAbility$ DBChooseCardFour
+SVar:DBChooseCardFour:DB$ ChooseCard | Defined$ You | Choices$ Tribal.YouCtrl+IsRemembered | ImprintChosen$ True | ConditionCheckSVar$ CheckTribal | ConditionSVarCompare$ EQ1 | ChoiceTitle$ You may choose a tribal card if you cast a tribal spell this turn | ChoiceZone$ Library | AILogic$ BestCard | SubAbility$ DBChooseCardFive
+SVar:DBChooseCardFive:DB$ ChooseCard | Defined$ You | Choices$ Enchantment.YouCtrl+IsRemembered | ImprintChosen$ True | ConditionCheckSVar$ CheckEnchantment | ConditionSVarCompare$ EQ1 | ChoiceTitle$ You may choose an enchantment card if you cast an enchantment spell this turn | ChoiceZone$ Library | AILogic$ BestCard | SubAbility$ DBChooseCardSix
+SVar:DBChooseCardSix:DB$ ChooseCard | Defined$ You | Choices$ Artifact.YouCtrl+IsRemembered | ImprintChosen$ True | ChoiceTitle$ You may choose an artifact card if you cast an artifact spell this turn | ChoiceZone$ Library | AILogic$ BestCard | ConditionCheckSVar$ CheckArtifact | ConditionSVarCompare$ EQ1 | SubAbility$ DBChangeZoneAll
+SVar:DBChangeZoneAll:DB$ ChangeZone | Defined$ Imprinted | Origin$ Library | Destination$ Hand | SubAbility$ DBRestRandomOrder
+SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
+SVar:CheckArtifact:Count$ThisTurnCast_Card.Artifact.YouCtrl
+SVar:CheckEnchantment:Count$ThisTurnCast_Enchantment.YouCtrl
+SVar:CheckInstant:Count$ThisTurnCast_Instant.YouCtrl
+SVar:CheckSorcery:Count$ThisTurnCast_Sorcery.YouCtrl
+SVar:CheckPlaneswalker:Count$ThisTurnCast_Planeswalker.YouCtrl
+SVar:CheckTribal:Count$ThisTurnCast_Tribal.YouCtrl
+DeckHints:Type$Artifact
+Oracle:At the beginning of your end step, if you've cast a noncreature spell this turn, reveal the top five cards of your library. For each card type among noncreature spells you've cast this turn, you may put a card of that type from among the revealed cards into your hand. Put the rest on the bottom of your library in a random order.
