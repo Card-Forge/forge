@@ -1,0 +1,9 @@
+Name:Tawnos, the Toymaker
+ManaCost:3 G U
+Types:Legendary Creature Human Artificer
+PT:3/5
+T:Mode$ SpellCast | TriggerZones$ Battlefield | ValidCard$ Creature.Bird,Creature.Beast | ValidActivatingPlayer$ You | NoResolvingCheck$ True | Execute$ TrigCopy | TriggerDescription$ Whenever you cast a Beast or Bird creature spell, you may copy it, except it's an artifact in addition to its other types. (The copy becomes a token.)
+SVar:TrigCopy:DB$ CopySpellAbility | Defined$ TriggeredSpellAbility  | CopyAddTypes$ Artifact
+DeckNeeds:Type$Beast|Bird
+DeckHas:Ability$Token & Type$Artifact 
+Oracle:Whenever you cast a Beast or Bird creature spell, you may copy it, except it’s an artifact in addition to its other types. (The copy becomes a token.)

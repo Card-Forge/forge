@@ -1,0 +1,8 @@
+Name:Soul Partition
+ManaCost:1 W
+Types:Instant
+A:SP$ ChangeZone | Cost$ 2 W B | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | SubAbility$ DBMayPlay | SpellDescription$ Exile target nonland permanent. For as long as that card remains exiled, it’s owner may play it. A spell cast by an opponent this way costs {2} more to cast.
+SVar:DBMayPlay:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | Duration$ Permanent | ExileOnMoved$ Exile 
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered+nonLand | MayPlayPlayer$ CardOwner |  AddStaticAbility$ RaiseCost |  AffectedZone$ Exile | Description$ For as long as that card remains exiled, it's owner may play it. A spell cast by an opponent this way costs {2} more to cast.
+SVar:RaiseCost:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 2 | EffectZone$ All | Activator$ Player.Opponent
+Oracle:Exile target nonland permanent. For as long as that card remains exiled, it's owner may play it. A spell cast by an opponent this way costs {2} more to cast.

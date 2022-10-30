@@ -1,0 +1,9 @@
+Name:Mishra's Juggernaut
+ManaCost:5
+Types:Artifact Creature Juggernaut
+PT:5/3
+K:Trample
+K:CARDNAME attacks each combat if able.
+K:Unearth:5 R
+DeckHas:Ability$Graveyard & Color$Red
+Oracle:Trample\nMishra's Juggernaut attacks each turn if able.\nUnearth {5}{R} ({5}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
