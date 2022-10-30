@@ -1,0 +1,11 @@
+Name:Scavenged Brawler
+ManaCost:6
+Types:Artifact Creature Construct
+PT:4/4
+K:Flying
+K:Vigilance
+K:Trample
+K:Lifelink
+A:AB$ PutCounter | Cost$ 5 ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ValidTgts$ Creature | SorcerySpeed$ True | CounterTypes$ P1P1,P1P1,P1P1,P1P1,Flying,Vigilance,Trample,Lifelink | StackDescription$ Put four +1/+1 counters, a flying counter, a vigilance counter, a trample counter, and a lifelink counter on that creature. | SpellDescription$ Choose target creature. Put four +1/+1 counters, a flying counter, a vigilance counter, a trample counter, and a lifelink counter on that creature. Activate only as a sorcery.
+DeckHas:Ability$Counters|Graveyard
+Oracle:Flying, vigilance, trample, lifelink\n{5}, Exile Scavenged Brawler from your graveyard: Choose target creature. Put four +1/+1 counters, a flying counter, a vigilance counter, a trample counter, and a lifelink counter on that creature. Activate only as a sorcery.

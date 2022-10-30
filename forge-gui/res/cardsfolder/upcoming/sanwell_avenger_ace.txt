@@ -1,0 +1,11 @@
+Name:Sanwell, Avenger Ace
+ManaCost:1 W
+Types:Legendary Creature Human Pilot
+PT:3/1
+R:Event$ DamageDone | Prevent$ True | ValidTarget$ Creature.Self | IsPresent$ Artifact.Creature+YouCtrl+attacking | Description$ As long as an artifact creature you control is attacking, prevent all damage that would be dealt to CARDNAME.
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ DBExileTopCard | TriggerDescription$ Whenever NICKNAME becomes tapped, exile the top six cards of your library. You may cast a Vehicle or artifact creature spell from among them. Then put the rest on the bottom of your library in a random order.
+SVar:DBExileTopCard:DB$ Dig | Defined$ You | DigNum$ 6 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Valid$ Vehicle.IsRemembered,Artifact.Creature+IsRemembered | ValidSA$ Spell | ValidZone$ Exile | Controller$ You | Optional$ True | Amount$ 1 | SubAbility$ PutRestBackBottomLibrary
+SVar:PutRestBackBottomLibrary:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Exile | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:As long as an artifact creature you control is attacking, prevent all damage that would be dealt to Sanwell, Avenger Ace.\nWhenever Sanwell becomes tapped, exile the top six cards of your library. You may cast a Vehicle or artifact creature spell from among them. Then put the rest on the bottom of your library in a random order.

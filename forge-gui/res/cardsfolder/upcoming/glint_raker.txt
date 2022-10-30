@@ -1,0 +1,12 @@
+Name:Glint Raker
+ManaCost:3 U
+Types:Creature Drake
+PT:1/3
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | Description$ CARDNAME gets +X/+0, where X is the highest mana value among artifacts you control.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ DBDig | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may reveal that many cards from the top of your library. Put an artifact card revealed this way into your hand and the rest into your graveyard.
+SVar:DBDig:DB$ Dig | Defined$ You | DigNum$ Y | Reveal$ True | ChangeValid$ Card.Artifact | DestinationZone$ Hand | DestinationZone2$ Graveyard
+SVar:Y:TriggerCount$DamageAmount
+SVar:X:Count$Valid Artifact.YouCtrl$GreatestCMC
+DeckHints:Type$Artifact
+Oracle:Flying\nGlint Raker gets +X/+0, where X is the highest mana value among artifacts you control.\nWhenever Glint Raker deals combat damage to a player, you may reveal that many cards from the top of your library. Put an artifact card revealed this way into your hand and the rest into your graveyard.

@@ -1,0 +1,11 @@
+Name:Wreck Hunter
+ManaCost:B B
+Types:Creature Human Artificer
+PT:2/2
+K:Flash
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, choose target player. You create a tapped Powerstone token for each nonland card in that player's graveyard that was put there from the battlefield this turn. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:TrigToken:DB$ Token | ValidTgts$ Player | TokenOwner$ You | TokenAmount$ X | TokenTapped$ True | TokenScript$ c_a_powerstone
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.nonLand+OwnedBy TargetedPlayer
+DeckHas:Ability$Token & Type$Artifact
+AI:RemoveDeck:Random
+Oracle:Flash\nWhen Wreck Hunter enters the battlefield, choose target player. You create a tapped Powerstone token for each nonland card in that player's graveyard that was put there from the battlefield this turn. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
