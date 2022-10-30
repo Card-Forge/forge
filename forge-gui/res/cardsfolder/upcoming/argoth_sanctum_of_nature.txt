@@ -1,0 +1,12 @@
+Name:Argoth, Sanctum of Nature
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:LandTapped
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Creature.Legendary+YouCtrl+Green | ConditionCompare$ EQ0 | SpellDescription$ CARDNAME enters the battlefield tapped unless you control a legendary green creature.
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
+A:AB$ Token | Cost$ 2 G G T | TokenScript$ g_2_2_bear | SorcerySpeed$ True | SpellDescription$ Create a 2/2 green bear creature token. Activate only as a sorcery. 
+MeldPair:Titania, Voice of Gaea
+AlternateMode:Meld
+DeckHas:Ability$Token & Type$Bear
+DeckNeeds:Name$Titania, Voice of Gaea
+Oracle:Argoth, Sanctum of Nature enters the battlefield tapped unless you control a legendary green creature.\n{T}: Add {G}.\n{2}{G}{G},{T}:Create a 2/2 green bear creature token.
