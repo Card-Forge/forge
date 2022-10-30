@@ -2,8 +2,8 @@ Name:Machine God's Effigy
 ManaCost:4
 Types:Artifact
 K:ETBReplacement:Copy:DBCopy:Optional
-SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | AddTypes$ Artifact | AddAbilities$ ABMana | RemoveCardTypes$ True | SpellDescription$ You may have Machine God’s Effigy enter the battlefield as a copy of any creature on the battlefield, except it's an artifact and it has "{T}: Add {U}." (It's not a creature.)
+SVar:DBCopy:DB$ Clone | Choices$ Creature.Other | AddTypes$ Artifact | AddAbilities$ ABMana | RemoveCardTypes$ True | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of any creature on the battlefield, except it's an artifact and it has "{T}: Add {U}." (It's not a creature.)
 SVar:ABMana:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
 A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add {U}.
-SVar:NeedsToPlay:Creature.inZoneBattlefield
+SVar:NeedsToPlay:Creature
 Oracle:You may have Machine God's Effigy enter the battlefield as a copy of any creature on the battlefield, except it's an artifact and it has "{T}: Add {U}." (It's not a creature.)\n{T}: Add {U}.

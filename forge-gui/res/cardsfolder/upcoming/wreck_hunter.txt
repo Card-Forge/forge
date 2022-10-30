@@ -4,7 +4,7 @@ Types:Creature Human Artificer
 PT:2/2
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoosePlayer | TriggerDescription$ When CARDNAME enters the battlefield, choose target player. You create a tapped Powerstone token for each nonland card in that player's graveyard that was put there from the battlefield this turn. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
-SVar:TrigChoosePlayer:DB$ ChoosePlayer | Defined$ You | ValidTgts$ Player | SubAbility$ DBToken
+SVar:TrigChoosePlayer:DB$ ChoosePlayer | Defined$ You | ValidTgts$ Player | Choices$ ThisTargetedPlayer | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ X | TokenTapped$ True | TokenScript$ c_a_powerstone
 SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Card.nonLand+OwnedBy Player.Chosen
 DeckHas:Ability$Token & Type$Artifact
