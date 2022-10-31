@@ -8,4 +8,4 @@ SVar:TrigToken:AB$ Token | Cost$ Sac<1/Creature.Other/another creature> | TokenT
 A:AB$ Token | Cost$ 5 ExileFromGrave<1/Creature/creature card> | TokenTapped$ True | TokenScript$ c_3_3_a_zombie | SpellDescription$ Create a tapped 3/3 colorless Zombie artifact creature token.
 DeckHas:Ability$Sacrifice|Token|Graveyard & Type$Zombie|Artifact
 SVar:HasAttackEffect:TRUE
-Oracle:Deathtouch\nWhenever Ashnod, Flesh Mechanist attacks, you may sacrifice another creature. If you do, create a tapped Powerstone token.\n{5}, Exile a creature card from your graveyard. Create a tapped 3/3 colorless Zombie artifact creature token.
+Oracle:Deathtouch\nWhenever Ashnod, Flesh Mechanist attacks, you may sacrifice another creature. If you do, create a tapped Powerstone token.\n{5}, Exile a creature card from your graveyard: Create a tapped 3/3 colorless Zombie artifact creature token.
