@@ -5,6 +5,6 @@ A:AB$ Dig | Cost$ W T | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | Re
 A:AB$ Effect | Cost$ T | RememberObjects$ Remembered | StaticAbilities$ MayPlay | SpellDescription$ Until end of turn, you may play cards you own exiled with CARDNAME.
 SVar:MayPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | MayPlay$ True | Description$ Until end of turn, you may play cards you own exiled with CARDNAME.
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigCleanup | Static$ True
-SVar:TrigCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:TrigCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Color$White
 Oracle:{W}, {T}: Look at the top card of your library, then exile it face down. (You may look at it any time.)\n{T}: Until end of turn, you may play cards you own exiled with Kayla's Music Box.
