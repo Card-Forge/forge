@@ -10,4 +10,5 @@ SVar:TrigLose:DB$ LosesGame | Defined$ You
 A:SP$ AddTurn | Cost$ 4 U U R | NumTurns$ 1 | ExtraTurnDelayedTrigger$ DBDelTrig | ExtraTurnDelayedTriggerExcute$ TrigEffect2 | PrecostDesc$ Cleave | CostDesc$ {4}{U}{U}{R} | NonBasicSpell$ True | SubAbility$ DBExile | StackDescription$ {p:You} takes an extra turn after this one. During that turn, damage can't be prevented. | SpellDescription$ (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)
 SVar:TrigEffect2:DB$ Effect | Defined$ You | StaticAbilities$ STCantPrevent
 SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | SpellDescription$ Exile CARDNAME.
+AI:RemoveDeck:All
 Oracle:Cleave {4}{U}{U}{R} (You may cast this spell for its cleave cost. If you do, remove the words in square brackets.)\nTake an extra turn after this one. During that turn, damage can't be prevented. [At the beginning of that turn's end step, you lose the game.]\nExile Alchemist's Gambit.
