@@ -1,8 +1,8 @@
 Name:March of Progress
 ManaCost:2 U
 Types:Sorcery
-A:SP$ CopyPermanent | Cost$ 2 U | ValidTgts$ Artifact.Creature+YouCtrl | TgtPrompt$ Select target artifact creature you control | SpellDescription$ Choose target artifact creature you control. For each creature chosen this way, create a token that’s a copy of it.
-A:SP$ CopyPermanent | Cost$ 6 U | PrecostDesc$ Overload | CostDesc$ {6}{U} | Defined$ Valid Artifact.Creature+YouCtrl | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.") | StackDescription$ Create a token of each artifact creature you control. 
+A:SP$ CopyPermanent | Cost$ 2 U | ValidTgts$ Artifact.Creature+YouCtrl | TgtPrompt$ Select target artifact creature you control | SpellDescription$ Choose target artifact creature you control. For each creature chosen this way, create a token that's a copy of it.
+A:SP$ CopyPermanent | Cost$ 6 U | PrecostDesc$ Overload | CostDesc$ {6}{U} | Defined$ Valid Artifact.Creature+YouCtrl | NonBasicSpell$ True | SpellDescription$ (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.") | StackDescription$ Choose each artifact creature you control. For each creature chosen this way, create a token that's a copy of it.
 DeckHas:Ability$Token
 DeckNeeds:Type$Artifact
 Oracle:Choose target artifact creature you control. For each creature chosen this way, create a token that's a copy of it.\nOverload {6}{U} (You may cast this spell for its overload cost. If you do, change its text by replacing all instances of "target" with "each.")
