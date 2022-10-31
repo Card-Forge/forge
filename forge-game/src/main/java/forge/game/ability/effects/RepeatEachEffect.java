@@ -1,22 +1,19 @@
 package forge.game.ability.effects;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
+import forge.game.card.*;
 import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
-import forge.game.card.CardLists;
-import forge.game.card.CardZoneTable;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -137,6 +134,33 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     source.removeRemembered(o);
                 }
             }
+        }
+
+        if (sa.hasParam("RepeatTypesFromDefined")) {
+            final String def = sa.getParam("RepeatTypesFromDefined");
+            final Set<String> validTypes = new HashSet<>();
+            final List<Card> res;
+            if (def.startsWith("ThisTurnCast")) {
+                final String[] workingCopy = def.split("_");
+                final String validFilter = workingCopy[1];
+                res = CardUtil.getThisTurnCast(validFilter, source, sa);
+            } else {
+                res = AbilityUtils.getDefinedCards(source, def, sa);
+            }
+            for (final Card c : res) {
+                for (CardType.CoreType type : c.getType().getCoreTypes()) {
+                    validTypes.add(type.name());
+                }
+            }
+
+            final String storedType = source.getChosenType();
+            while (validTypes.size() > 0) {
+                String chosenT = player.getController().chooseSomeType("card", sa, validTypes, null);
+                source.setChosenType(chosenT);
+                AbilityUtils.resolve(repeat);
+                validTypes.remove(chosenT);
+            }
+            source.setChosenType(storedType);
         }
 
         if (sa.hasParam("RepeatPlayers")) {
