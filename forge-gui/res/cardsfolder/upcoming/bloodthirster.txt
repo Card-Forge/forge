@@ -1,7 +1,7 @@
 Name:Bloodthirster
 ManaCost:5 R
 Types:Creature Demon
-PT:3/3
+PT:6/6
 K:Flying
 K:Trample
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, untap it. After this combat phase, there is an additional combat phase.
