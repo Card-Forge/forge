@@ -1,0 +1,11 @@
+Name:Tocasia's Onulet
+ManaCost:5
+Types:Artifact Creature Construct
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME leaves the battlefield, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+K:Unearth:3 W
+SVar:SacMe:5
+DeckHints:Color$White
+DeckHas:Ability$Graveyard|LifeGain
+Oracle:When Tocasia's Onulet leaves the battlefield, you gain 2 life.\nUnearth {3}{W} ({3}{W}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

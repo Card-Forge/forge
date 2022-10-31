@@ -1,0 +1,9 @@
+Name:Yotian Dissident
+ManaCost:G W
+Types:Creature Human Artificer
+PT:1/1
+T:Mode$ ChangesZone | ValidCard$ Artifact.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever an artifact enters the battlefield under your control, put a +1/+1 counter on target creature you control.
+SVar:TrigCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1
+DeckHas:Ability$Counters
+DeckHints:Type$Artifact
+Oracle:Whenever an artifact enters the battlefield under your control, put a +1/+1 counter on target creature you control.

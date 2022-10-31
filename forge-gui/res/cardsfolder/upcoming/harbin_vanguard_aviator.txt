@@ -1,0 +1,10 @@
+Name:Harbin, Vanguard Aviator
+ManaCost:W U
+Types:Legendary Creature Human Soldier
+PT:3/2
+K:Flying
+T:Mode$ AttackersDeclared | CheckSVar$ X | SVarCompare$ GE5 | NoResolvingCheck$ True | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with five or more Soldiers, creatures you control get +1/+1 and gain flying until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 |  KW$ Flying
+SVar:X:Count$Valid Creature.Soldier+attacking+YouCtrl
+DeckHints:Type$Soldier
+Oracle:Flying\nWhenever you attack with five or more Soldiers, creatures you control get +1/+1 and gain flying until end of turn.
