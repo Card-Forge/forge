@@ -1,7 +1,8 @@
 Name:Afterlife
 ManaCost:2 W
 Types:Instant
-A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SubAbility$ DBToken | SpellDescription$ Destroy target creature. It can't be regenerated.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ TargetedController | SpellDescription$ Its controller creates a 1/1 white Spirit creature token with flying.
+A:SP$ Destroy | Cost$ 2 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | AlwaysRemember$ True | RememberLKI$ True | SubAbility$ DBToken | SpellDescription$ Destroy target creature. It can't be regenerated.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_spirit_flying | TokenOwner$ RememberedController | SubAbility$ DBCleanup | SpellDescription$ Its controller creates a 1/1 white Spirit creature token with flying.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token
 Oracle:Destroy target creature. It can't be regenerated. Its controller creates a 1/1 white Spirit creature token with flying.

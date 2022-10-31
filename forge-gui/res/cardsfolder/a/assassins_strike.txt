@@ -1,6 +1,7 @@
 Name:Assassin's Strike
 ManaCost:4 B B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 4 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDiscard | SpellDescription$ Destroy target creature. Its controller discards a card.
-SVar:DBDiscard:DB$ Discard | Defined$ TargetedController | Mode$ TgtChoose
+A:SP$ Destroy | Cost$ 4 B B | ValidTgts$ Creature | TgtPrompt$ Select target creature | AlwaysRemember$ True | RememberLKI$ True | SubAbility$ DBDiscard | SpellDescription$ Destroy target creature. Its controller discards a card.
+SVar:DBDiscard:DB$ Discard | Defined$ RememberedController | Mode$ TgtChoose | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Destroy target creature. Its controller discards a card.

@@ -1,7 +1,8 @@
 Name:Death Bomb
 ManaCost:3 B
 Types:Instant
-A:SP$ Destroy | Cost$ 3 B Sac<1/Creature/creature> | ValidTgts$ Creature.nonBlack | NoRegen$ True | TgtPrompt$ Select target nonblack creature | SubAbility$ DBDrain | SpellDescription$ Destroy target nonblack creature. It can't be regenerated. Its controller loses 2 life.
-SVar:DBDrain:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 2
+A:SP$ Destroy | Cost$ 3 B Sac<1/Creature/creature> | ValidTgts$ Creature.nonBlack | NoRegen$ True | AlwaysRemember$ True | RememberLKI$ True | TgtPrompt$ Select target nonblack creature | SubAbility$ DBDrain | SpellDescription$ Destroy target nonblack creature. It can't be regenerated. Its controller loses 2 life.
+SVar:DBDrain:DB$ LoseLife | Defined$ RememberedController | LifeAmount$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nDestroy target nonblack creature. It can't be regenerated. Its controller loses 2 life.
