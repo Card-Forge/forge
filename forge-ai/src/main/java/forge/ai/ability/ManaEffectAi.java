@@ -68,7 +68,7 @@ public class ManaEffectAi extends SpellAbilityAi {
         if (ph.is(PhaseType.END_OF_TURN) && (ph.getNextTurn() == ai || ComputerUtilCard.willUntap(ai, sa.getHostCard())) && canRampPool(ai, sa.getHostCard())) {
             return true;
         }
-        if (!ph.is(PhaseType.MAIN2) || !ComputerUtil.activateForCost(sa, ai)) {
+        if (!ph.is(PhaseType.MAIN2)) {
             return false;
         }
         return super.checkPhaseRestrictions(ai, sa, ph);
@@ -102,6 +102,11 @@ public class ManaEffectAi extends SpellAbilityAi {
     protected boolean checkApiLogic(Player ai, SpellAbility sa) {
         if (sa.hasParam("AILogic")) {
             return true; // handled elsewhere, does not meet the standard requirements
+        }
+
+        // TODO check if it would be worth it to keep mana open for opponents turn anyway
+        if (ComputerUtil.activateForCost(sa, ai)) {
+            return true;
         }
 
         PhaseHandler ph = ai.getGame().getPhaseHandler();
