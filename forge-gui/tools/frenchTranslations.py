@@ -7,6 +7,7 @@
 __author__ = 'add-le'
 
 import requests
+import shutil
 import signal
 import json
 import sys
@@ -29,6 +30,34 @@ SUCCESS_STATUS = 200
 
 # Generate by the method mapAlphabet()
 utils = {'A': 0, 'B': 1396, 'C': 2795, 'D': 4515, 'E': 5927, 'F': 6804, 'G': 7869, 'H': 9184, 'I': 10029, 'J': 10639, 'K': 10914, 'L': 11584, 'M': 12336, 'N': 13765, 'O': 14349, 'P': 14849, 'Q': 15970, 'R': 16063, 'S': 17391, 'T': 20691, 'U': 22167, 'V': 22485, 'W': 23145, 'X': 23978, 'Y': 23999, 'Z': 24099}
+
+
+"""
+  " Get missing image art from scryfall. Download fullborder
+  " and art crop images.
+"""
+def getImageArt():
+	bulkfile = open('./scryfallcards.json', 'r', encoding='utf-8')
+	bulk = json.load(bulkfile)
+	bulkfile.close()
+	
+	missingcardsfile = open('./missing-cards.txt', 'r', encoding='utf-8')
+	missingcards = missingcardsfile.readlines()
+	missingcardsfile.close()
+	
+	for card in missingcards:
+		name = card.split('.')[0]
+		for bulkdata in bulk:
+			if bulkdata['name'] == name:
+				res = requests.get(bulkdata['image_uris']['png'], stream = True)
+				if res.status_code == 200:
+					with open('images/' + name + '.fullborder.png','wb') as f:
+						shutil.copyfileobj(res.raw, f)
+				res = requests.get(bulkdata['image_uris']['art_crop'], stream = True)
+				if res.status_code == 200:
+					with open('images/' + name + '.artcrop.jpg','wb') as f:
+						shutil.copyfileobj(res.raw, f)
+
 
 """
   " Function to get all missing cards in the french translation
@@ -209,6 +238,9 @@ if __name__ == "__main__":
 
 		if sys.argv[1] == '-g' or sys.argv[1] == '--get':
 			getMissingCards()
+			
+		if sys.argv[1] == '-i' or sys.argv[1] == '--image':
+			getImageArt()
 
 		if sys.argv[1] == '-u' or sys.argv[1] == '--url':
 			if len(sys.argv) <= 2:
