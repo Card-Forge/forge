@@ -1,6 +1,7 @@
 Name:Despoil
 ManaCost:3 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBDrain | SpellDescription$ Destroy target land. Its controller loses 2 life.
-SVar:DBDrain:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 2
+A:SP$ Destroy | Cost$ 3 B | ValidTgts$ Land | TgtPrompt$ Select target land | AlwaysRemember$ True | RememberLKI$ True | SubAbility$ DBDrain | SpellDescription$ Destroy target land. Its controller loses 2 life.
+SVar:DBDrain:DB$ LoseLife | Defined$ RememberedController | LifeAmount$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Destroy target land. Its controller loses 2 life.

@@ -1,7 +1,8 @@
 Name:Launch Party
 ManaCost:3 B
 Types:Instant
-A:SP$ Destroy | Cost$ 3 B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBDrain | SpellDescription$ Destroy target creature. Its controller loses 2 life.
-SVar:DBDrain:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 2
+A:SP$ Destroy | Cost$ 3 B Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | AlwaysRemember$ True | RememberLKI$ True | SubAbility$ DBDrain | SpellDescription$ Destroy target creature. Its controller loses 2 life.
+SVar:DBDrain:DB$ LoseLife | Defined$ RememberedController | LifeAmount$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 Oracle:As an additional cost to cast this spell, sacrifice a creature.\nDestroy target creature. Its controller loses 2 life.

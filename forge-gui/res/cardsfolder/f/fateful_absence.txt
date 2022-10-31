@@ -1,7 +1,8 @@
 Name:Fateful Absence
 ManaCost:1 W
 Types:Instant
-A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBInvestigate | SpellDescription$ Destroy target creature or planeswalker. Its controller investigates. (They create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
-SVar:DBInvestigate:DB$ Investigate | Num$ 1 | Defined$ TargetedController | StackDescription$ {p:TargetedController} investigates.
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBInvestigate | AlwaysRemember$ True | RememberLKI$ True | SpellDescription$ Destroy target creature or planeswalker. Its controller investigates. (They create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:DBInvestigate:DB$ Investigate | Num$ 1 | Defined$ RememberedController | SubAbility$ DBCleanup | StackDescription$ {p:TargetedController} investigates.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token|Sacrifice
 Oracle:Destroy target creature or planeswalker. Its controller investigates. (They create a colorless Clue artifact token with "{2}, Sacrifice this artifact: Draw a card.")

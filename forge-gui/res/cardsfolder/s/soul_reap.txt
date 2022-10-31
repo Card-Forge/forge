@@ -1,7 +1,8 @@
 Name:Soul Reap
 ManaCost:1 B
 Types:Sorcery
-A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.nonGreen | TgtPrompt$ Select target nongreen creature. | SubAbility$ DBLoseLife | SpellDescription$ Destroy target nongreen creature. Its controller loses 3 life if you've cast another black spell this turn.
-SVar:DBLoseLife:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 3 | ConditionCheckSVar$ X
+A:SP$ Destroy | Cost$ 1 B | ValidTgts$ Creature.nonGreen | TgtPrompt$ Select target nongreen creature. | AlwaysRemember$ True | RememberLKI$ True | SubAbility$ DBLoseLife | SpellDescription$ Destroy target nongreen creature. Its controller loses 3 life if you've cast another black spell this turn.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ RememberedController | LifeAmount$ 3 | ConditionCheckSVar$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ThisTurnCast_Card.Black+Other+YouCtrl
 Oracle:Destroy target nongreen creature. Its controller loses 3 life if you've cast another black spell this turn.

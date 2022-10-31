@@ -1,7 +1,8 @@
 Name:Secure the Scene
 ManaCost:4 W
 Types:Sorcery
-A:SP$ ChangeZone | Cost$ 4 W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | SubAbility$ DBToken | SpellDescription$ Exile target nonland permanent. Its controller creates a 1/1 white Soldier creature token.
-SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ TargetedController
+A:SP$ ChangeZone | Cost$ 4 W | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand | RememberLKI$ True | SubAbility$ DBToken | SpellDescription$ Exile target nonland permanent. Its controller creates a 1/1 white Soldier creature token.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ w_1_1_soldier | TokenOwner$ RememberedController | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Token
 Oracle:Exile target nonland permanent. Its controller creates a 1/1 white Soldier creature token.
