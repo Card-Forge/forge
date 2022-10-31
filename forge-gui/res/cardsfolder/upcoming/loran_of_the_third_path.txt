@@ -1,0 +1,9 @@
+Name:Loran of the Third Path
+ManaCost:2 W
+Types:Legendary Creature Human Artificer
+PT:2/1
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, destroy up to one target artifact or enchantment.
+SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to one target artifact or enchantment
+A:AB$ Draw | Cost$ T | ValidTgts$ Opponent | Defined$ TargetedAndYou | NumCards$ 1 | SpellDescription$ You and target opponent each draw a card. 
+Oracle:Vigilance\nWhen Loran of the Third Path enters the battlefield, destroy up to one target artifact or enchantment.\n{T}: You and target opponent each draw a card.

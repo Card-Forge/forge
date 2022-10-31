@@ -1,0 +1,16 @@
+Name:Saheeli, Filigree Master
+ManaCost:2 U R
+Types:Legendary Planeswalker Saheeli
+Loyalty:3
+A:AB$ Scry | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ScryNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Scry 1. You may tap an untapped artifact you control. If you do, draw a card.
+SVar:DBDraw:AB$ Draw | Cost$ tapXType<1/Artifact>
+A:AB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_thopter_flying | TokenOwner$ You | RememberTokens$ True |  SubAbility$ DBPump 
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+A:AB$ Effect | Cost$ SubCounter<4/LOYALTY> | Name$ Emblem - Saheeli, Filigree Master | StaticAbilities$ EmblemArtifactPump | Planeswalker$ True | Ultimate$ True | Stackable$ False | Duration$ Permanent | AILogic$ Always | Description$ You get an emblem with "Artifact creatures you control get +1/+1" and "Artifact spells you cast cost 1 less to cast."
+SVar:EmblemArtifactPump:Mode$ Continuous | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | Affected$ Artifact.YouCtrl | AddStaticAbility$ ReduceCost | AffectedZone$ Battlefield | Description$ Artifact creatures you control get +1/+1
+Var:ReduceCost:Mode$ ReduceCost | ValidCard$ Artifact | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Artifact spells you cast cost {1} less to cast.
+DeckHas:Ability$Token
+DeckHints:Type$Artifact
+DeckHas:Ability$Token & Type$Thopter
+Oracle:[+1]: Scry 1. You may tap an untapped artifact you control. If you do, draw a card.\n[-2]: Create two 1/1 colorless Thopter artifact creature tokens with flying. They gain haste until end of turn.\n[-4]: You get an emblem with "Artifact creatures you control get +1/+1” and “Artifact spells you cast cost 1 less to cast."
