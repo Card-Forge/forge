@@ -3,8 +3,8 @@ ManaCost:W U
 Types:Lengendary Creature Human Soldier
 PT:3/2
 K:Flying
-:Mode$ AttackersDeclared | ValidAttackers$ Creature.Soldier+YouCtrl | Execute$ DBPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with five or more Soldiers, creatures you control get +1/+1 and gain flying until end of turn.
-A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ X | NumDef$ 1 |
-SVar:DBPump:DB$ GainLife | LifeAmount$ X
+T:Mode$ AttackersDeclared | CheckSVar$ X | SVarCompare$ GE5 | NoResolvingCheck$ True | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with five or more Soldiers, creatures you control get +1/+1 and gain flying until end of turn.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 |  KW$ Flying
+SVar:X:Count$Valid Creature.Soldier+attacking+YouCtrl
 DeckHints:Type$Soldiers
 Oracle:Flying\nWhenever you attack with five or more Soldiers, creatures you control get +1/+1 and gain flying until end of turn.

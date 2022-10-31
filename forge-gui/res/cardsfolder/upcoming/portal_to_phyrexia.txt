@@ -1,0 +1,10 @@
+Name:Portal to Phyrexia
+ManaCost:9
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, each opponent sacrifices three creatures.
+SVar:TrigSac:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature | Amount$ 3
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ At the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control. It's a Phyrexian in addition to its other types.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature | GainControl$ True
+DeckHas:Ability$Sacrifice|Graveyard
+DeckHints:Keyword$Mill|Dredge & Type$Phyrexian
+Oracle:When Portal to Phyrexia enters the battlefield, each opponent sacrifices three creatures.\nAt the beginning of your upkeep, put target creature card from a graveyard onto the battlefield under your control. It's a Phyrexian in addition to its other types.
