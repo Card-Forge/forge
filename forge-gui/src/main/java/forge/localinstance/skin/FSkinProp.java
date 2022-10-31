@@ -338,6 +338,7 @@ public enum FSkinProp {
     IMG_PACK            (new int[] {80, 760, 40, 40}, PropType.IMAGE),
     IMG_SORCERY         (new int[] {412, 740, 80, 80}, PropType.MANAICONS),
     IMG_COMMANDER       (new int[] {120, 760, 40, 40}, PropType.IMAGE),
+    IMG_ALCHEMY         (new int[] {248, 822, 80, 80}, PropType.MANAICONS),
 
     //achievement trophies and shelf
     IMG_COMMON_TROPHY     (new int[] {0, 0, 135, 185}, PropType.TROPHY),
