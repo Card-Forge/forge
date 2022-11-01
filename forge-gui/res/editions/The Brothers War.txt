@@ -8,32 +8,73 @@ Type=Expansion
 ScryfallCode=BRO
 
 [cards]
+4 U Calamity's Wake @Slawomir Maniak
+6 C Disenchant @Richard Kane Ferguson
 8 M In the Trenches @Daarken
+9 R Kayla's Command @Dominik Mayer
+10 R Kayla's Reconstruction @Nicholas Elias
+12 R Loran of the Third Path @Steven Belledin
 23 U Recruitment Officer @Johan Grenier
+24 U Repair and Recharge @Ben Wootten
+26 R Soul Partition @Kekai Kotaki
+28 C Survivor of Korlis @Julia Metzger
+30 R Tocasia's Welcome @Johan Grenier
+33 C Yotian Medic @Aaron J. Riley
 37 C Scrapwork Cohort @Caio Monteiro
+39 C Tocasia's Onulet @Eddie Mendoza
+40 M Urza's Sylex @Joseph Meehan
+47 R Drafna, Founder of Lat-Nam @Lie Setiawan
 51 R Hurkyl, Master Wizard @Randy Vargas
+52 R Hurkyl's Final Meditation @Nephelomancer
 63 U Splitting the Powerstone @Campbell White
+64 C Stern Lesson @Lie Setiawan
 66 M Teferi, Temporal Pilgrim @Magali Villeneuve
+67 C Third Path Savant @Artur Treffner
 69 U Urza, Powerstone Prodigy @Donato Giancola
+70 R Urza's Command @Dominik Mayer
+75 M Arcane Proxy @Kekai Kotaki
+78 C Depth Charge Colossus @Daniel Ljunggren
 81 M Surge Engine @Daarken
+82 R The Temporal Anchor @Kekai Kotaki
 95 M Gix, Yawgmoth Praetor @Anna Podedworna
+102 U Go for the Throat @Kristina Carroll
+110 C Overwhelming Remorse @Ryan Valle
 117 U Ashnod's Harvester @Halil Ural
+118 C Clay Revenant @Filip Burburan
 121 M Phyrexian Fleshgorger @Steve Prescott
+125 R Transmogrant's Crown @Nino Vecia
+127 C Bitter Reunion @Jake Murray
+133 U The Fall of Kroog @David Auden Nash
 135 R Feldon, Ronom Excavator @Howard Lyon
 140 U Mishra, Excavation Prodigy @Donato Giancola
+141 R Mishra's Command @Dominik Mayer
 144 U Monastery Swiftspear @Gabor Szikszai
+161 C Mishra's Juggernaut @Steve Prescott
 163 R Phyrexian Dragon Engine @Chris Rahn
+165 M Skitterbeam Battalion @Leon Tukker
+167 C Argothian Opportunist @Ina Wong
+177 R Fade from History @Alessandra Pisano
+181 U Gaea's Courser @Michele Giorgi
+183 C Giant Growth @Raoul Vitale
 193 M Titania, Voice of Gaea @Cristi Balanescu
+204 C Rust Goliath @Nicholas Gregory
+211 R Hajar, Loyal Bodyguard @Joshua Raphael
+212 R Harbin, Vanguard Aviator @Kieran Yanner
 216 M Mishra, Claimed by Gix @Chris Rahn
 217 R Mishra, Tamer of Mak Fawa @Darren Tan
 218 R Queen Kayla bin-Kroog @Cristi Balanescu
+222 R Tawnos, the Toymaker @Livia Prima
 225 M Urza, Lord Protector @Ryan Pancoast
 226 R Urza, Prince of Kroog @Joshua Raphael
+227 U Yotian Dissident @Steve Prescott
 238 R The Mightstone and Weakstone @Ryan Pancoast
+247 R The Stone Brain @Irina Nordsol
+254 R Thran Spider @Joshua Cairos
 256 R Argoth, Sanctum of Nature @Cristi Balanescu
 257 R Battlefield Forge @Thomas Stoop
 258 R Blast Zone @Jorge Jacinto
 259 R Brushland @Thomas Stoop
+263 R Hall of Tagsin @Christian Dimitrov
 264 R Llanowar Wastes @Lucas Graciano
 265 R Mishra's Foundry @Leon Tukker
 267 R Underground River @Volkan Baǵa
