@@ -6,6 +6,6 @@ A:SP$ Attach | Cost$ 3 G | ValidTgts$ Creature | AITgts$ Creature.withFlying | A
 S:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveKeyword$ Flying | Description$ Enchanted creature loses flying.
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Creature | ValidBlocker$ Card.EnchantedBy | Execute$ TrigPumpAttacker | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a creature, the other creature gains first strike until end of turn.
 T:Mode$ AttackerBlockedByCreature | ValidCard$ Card.EnchantedBy | ValidBlocker$ Creature | Execute$ TrigPumpBlocker | Secondary$ True | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a creature, the other creature gains first strike until end of turn.
-SVar:TrigPumpAttacker:DB$ Pump | Defined$ TriggeredAttacker | KW$ First Strike
-SVar:TrigPumpBlocker:DB$ Pump | Defined$ TriggeredBlocker | KW$ First Strike
+SVar:TrigPumpAttacker:DB$ Pump | Defined$ TriggeredAttackerLKICopy | KW$ First Strike
+SVar:TrigPumpBlocker:DB$ Pump | Defined$ TriggeredBlockerLKICopy | KW$ First Strike
 Oracle:Enchant creature\nEnchanted creature loses flying.\nWhenever enchanted creature blocks or becomes blocked by a creature, the other creature gains first strike until end of turn.

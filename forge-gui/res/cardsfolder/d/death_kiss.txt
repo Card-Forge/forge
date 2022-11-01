@@ -3,7 +3,7 @@ ManaCost:5 R
 Types:Creature Beholder
 PT:5/5
 T:Mode$ Attacks | ValidCard$ Creature.OppCtrl | Attacked$ Opponent | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature an opponent controls attacks one of your opponents, double its power until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +Y | Double$ True
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +Y | Double$ True
 SVar:Y:TriggeredAttacker$CardPower
 K:Monstrosity:X:X X R
 SVar:X:Count$xPaid

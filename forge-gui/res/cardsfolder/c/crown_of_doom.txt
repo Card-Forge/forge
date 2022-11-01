@@ -2,7 +2,7 @@ Name:Crown of Doom
 ManaCost:3
 Types:Artifact
 T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You,Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature attacks you or a planeswalker you control, it gets +2/+0 until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +2
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +2
 A:AB$ GainControl | Cost$ 2 | Defined$ Self | ValidTgts$ Player.OtherThanSourceOwner | TgtPrompt$ Select target player other than the owner | PlayerTurn$ True | SpellDescription$ Target player other than CARDNAME's owner gains control of it. Activate only during your turn.
 AI:RemoveDeck:All
 Oracle:Whenever a creature attacks you or a planeswalker you control, it gets +2/+0 until end of turn.\n{2}: Target player other than Crown of Doom's owner gains control of it. Activate only during your turn.
