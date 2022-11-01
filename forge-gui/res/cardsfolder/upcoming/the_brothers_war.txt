@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Enchantment Saga
 K:Saga:3:DBPowerStone,DBChoose,DBDamage
 SVar:DBPowerStone:DB$ Token | TokenAmount$ 2 | TokenTapped$ True | TokenScript$ c_a_powerstone | TokenOwner$ You | SpellDescription$ Create two tapped Powerstone tokens.
-SVar:DBChoose:DB$ ChoosePlayer | DefinedPlayer$ Targeted | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Player | Choices$ ThisTargetedPlayer | AILogic$ Curse | SubAbility$ ChoosePTwo | SpellDescription$ Choose two target players. Until your next turn, each creature they control attacks the other chosen player each combat if able.
+SVar:DBChoose:DB$ ChoosePlayer | DefinedPlayer$ Targeted | TargetMin$ 2 | TargetMax$ 2 | ValidTgts$ Player | Choices$ ThisTargetedPlayer | AILogic$ Curse | SubAbility$ DBEffect | SpellDescription$ Choose two target players. Until your next turn, each creature they control attacks the other chosen player each combat if able.
 SVar:DBEffect:DB$ Effect | StaticAbilities$ MustAttack | RememberObjects$ Targeted
 SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.RememberedPlayerCtrl+ActivePlayerCtrl | MustAttack$ Remembered.NonActive
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SubAbility$ DBDamageTwo | SpellDescription$ CARDNAME deals X damage to any target and X damage to any other target, where X is the number of artifacts you control.
