@@ -3,13 +3,12 @@ ManaCost:3 R
 Types:Enchantment Saga
 K:Saga:3:DBPowerStone,DBChoose,DBDamage
 SVar:DBPowerStone:DB$ Token | TokenAmount$ 2 | TokenTapped$ True | TokenScript$ c_a_powerstone | TokenOwner$ You | Description$  Create two tapped Powerstone tokens.
-SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse | RememberChosen$ True | SubAbility$ ChoosePTwo | SpellDescription$ Choose two target players. Until your next turn, each creature they control attacks the other chosen player each combat if able.
-SVar:ChoosePTwo:DB$ ChoosePlayer | Defined$ You | Choices$ NonChosenPlayer | AILogic$ Curse | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | StaticAbilities$ MustAttackOne, MustAttackTwo | SubAbility$ DBCleanup | RememberObjects$ Remembered
-SVar:MustAttackOne:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.RememberedPlayerCtrl | MustAttack$ ChosenPlayer
-SVar:MustAttackTwo:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.ChosenPlayerCtrl | MustAttack$ Remembered
-SVar:DBDamage:DB$ DealDamage | TgtPrompt$ Select any target | TargetMin$ 1 | TargetMax$ 2 | NumDmg$ X | TargetUnique$ True | Description$ CARDNAME deals X damage to any target and X damage to any other target, where X is the number of artifacts you control.
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
+SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | ValidTgts$ Player.Opponent | Choices$ ThisTargetedPlayer | AILogic$ Curse | RememberChosen$ True | SubAbility$ ChoosePTwo | SpellDescription$ Choose two target players. Until your next turn, each creature they control attacks the other chosen player each combat if able.
+SVar:ChoosePTwo:DB$ ChoosePlayer | Defined$ You |  ValidTgts$ Player.Opponent | Choices$ ThisTargetedPlayer | TargetUnique$ True | AILogic$ Curse | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MustAttack | SubAbility$ DBCleanup | RememberObjects$ Remembered
+SVar:MustAttack:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.RememberedPlayerCtrl+ActivePlayerCtrl | MustAttack$ Remembered.NonActive
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SubAbility$ DBDamageTwo | Description$ CARDNAME deals X damage to any target and X damage to any other target, where X is the number of artifacts you control.
+SVar:DBDamageTwo:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select another target to deal damage to | NumDmg$ X | TargetUnique$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Artifact.YouCtrl
 DeckHints:Type$Artifact & Ability$Token
