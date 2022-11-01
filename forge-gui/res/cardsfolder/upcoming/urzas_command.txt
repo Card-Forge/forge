@@ -4,7 +4,7 @@ Types:Instant
 A:SP$ Charm | Choices$ DBPump,DBPowerStone,DBKarnstruct,DBDraw | CharmNum$ 2
 SVar:DBPump:DB$ PumpAll | ValidCards$ Card.Creature+YouDontCtrl | NumAtt$ -2 | SpellDescription$ Creatures you don't control get -2/-0 until end of turn.
 SVar:DBPowerStone:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone | SpellDescription$ Create a tapped Powerstone token.
-SVar:DBKarnstruct:DB$ Token |  TokenScript$ c_0_0_a_construct_total_artifacts | SpellDescription$ Create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
+SVar:DBKarnstruct:DB$ Token |  TokenScript$ c_0_0_a_construct_total_artifacts | TokenTapped$ True | SpellDescription$ Create a tapped 0/0 colorless Construct artifct creature token with "This creature gets +1/+1 for each artifact you control.
 SVar:DBDraw:DB$ Scry | ScryNum$ 1 | SubAbility$ Draw | SpellDescription$ Scry 1, then draw a card.
 SVar:Draw:DB$ Draw | Defined$ You | NumCards$ 1
 DeckHas:Ability$Token & Type$Artifact|Construct
