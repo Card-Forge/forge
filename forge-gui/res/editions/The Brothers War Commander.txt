@@ -17,7 +17,7 @@ ScryfallCode=BRC
 9 R Terisiare's Devastation @Bram Sels
 10 R Wire Surgeons @Josu Hernaiz
 11 R Wreck Hunter @Josu Hernaiz
-12 R Blast-Furnace Hellkite
+12 R Blast-Furnace Hellkite @Aldo Domínguez
 13 R Farid, Enterprising Salvager @Bruno Biazotto
 14 R Hexavus @Mark Tedin
 15 R Kayla's Music Box @Aaron Miller
@@ -26,6 +26,7 @@ ScryfallCode=BRC
 18 R Smelting Vat @Robin Olausson
 19 R Thopter Shop @Craig J Spearing
 20 R Wondrous Crucible @Evan Shipard
+22 R The Brothers' War @Mark Poole
 29 L Plains @Raymond Bonilla
 30 L Plains @Jorge Jacinto
 31 L Island @Eddie Mendoza
