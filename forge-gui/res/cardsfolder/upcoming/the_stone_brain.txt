@@ -1,7 +1,7 @@
 Name:The Stone Brain
 ManaCost:2
 Types:Legendary Artifact
-A:AB$ NameCard | Cost$ 2 T Exile<1/CARDNAME> | Defined$ You | SubAbility$ TargetOpp | SpellDescription$ Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way. Activate only as a sorcery.
+A:AB$ NameCard | Cost$ 2 T Exile<1/CARDNAME> | Defined$ You | SubAbility$ TargetOpp | SorcerySpeed$ True | SpellDescription$ Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way. Activate only as a sorcery.
 SVar:TargetOpp:DB$ ChoosePlayer |  | ValidTgts$ Opponent | TargetUnique$ True | Choices$ ThisTargetedPlayer | Defined$ You | SubAbility$ ExileYard
 SVar:ExileYard:DB$ ChangeZone | ChangeType$ Card.NamedCard+sameName | Origin$ Graveyard | DefinedPlayer$ Targeted  | Chooser$ You | Destination$ Exile | ChangeNum$ 4 | Hidden$ True | SubAbility$ ExileHand | StackDescription$ Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles their library.
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted  | ChangeType$ Card.NamedCard+sameName | ChangeNum$ 4 | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None
