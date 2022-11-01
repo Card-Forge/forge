@@ -352,7 +352,7 @@ public class AiBlockController {
                             if (ab.getApi() == ApiType.Pump && "Self".equals(ab.getParam("Defined"))) {
                                 String rawP = ab.getParam("NumAtt");
                                 String rawT = ab.getParam("NumDef");
-                                if ("+X".equals(rawP) && "+X".equals(rawT) && "TriggerCount$NumBlockers".equals(card.getSVar("X"))) {
+                                if ("+X".equals(rawP) && "+X".equals(rawT) && card.getSVar("X").startsWith("Count$Valid Creature.blockingTriggeredAttacker")) {
                                     return true;
                                 }
                                 // TODO: maybe also predict calculated bonus above certain threshold?
