@@ -1,0 +1,10 @@
+Name:Mishra's Research Desk
+ManaCost:1
+Types:Artifact 
+A:AB$ Dig | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | DigNum$ 2 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBChoose | SpellDescription$ Exile the top two cards of your library. Choose one of them. You may play that card this turn.
+SVar:DBChoose:DB$ ChooseCard | Amount$ 1 | Mandatory$ True | Choices$ Card.IsRemembered | ChoiceZone$ Exile | ChoiceTitle$ Choose one of the exiled cards | SubAbility$ DBCleanup | StackDescription$ {p:You} chooses one of them.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBPlayEffect
+SVar:DBPlayEffect:DB$ Effect | StaticAbilities$ STPlay | ExileOnMoved$ Exile | SubAbility$ DBClearChosen | StackDescription$ {p:You} may play that card this turn.
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.ChosenCard | AffectedZone$ Exile | Description$ You may play the chosen card this turn.
+SVar:DBClearChosen:DB$ Cleanup | ClearChosenCard$ True
+Oracle:
