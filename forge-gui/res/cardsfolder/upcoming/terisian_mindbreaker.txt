@@ -4,7 +4,7 @@ Types:Artifact Creature Juggernaut
 PT:6/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ Whenever CARDNAME attacks, defending player mills half their library, rounded up.
 SVar:TrigMill:DB$ Mill | NumCards$ X | Defined$ TriggeredDefendingPlayer 
-SVar:X:TriggeredDefendingPlayer$CardsInLibrary/HalfDown
+SVar:X:TriggeredDefendingPlayer$CardsInLibrary/HalfUp
 K:Unearth:1 U U U
 DeckHints:Color$Blue
 DeckHas:Ability$Graveyard & Keyword$Mill
