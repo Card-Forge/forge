@@ -8,4 +8,4 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigAddMana:DB$ Mana | Produced$ C | Amount$ 8 | PersistentMana$ True
 SVar:SacMe:8
 DeckHints:Type$Artifact|Urza|Ugin|Eldrazi & Ability$Sacrifice
-Oracle:Vigilance\nWard {4} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays 4.)\nWhen Su-Chi Cave Guard dies, add eight {C}. Until end of turn, you don't lose this mana as steps and phases end.
+Oracle:Vigilance\nWard {4} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {4}.)\nWhen Su-Chi Cave Guard dies, add eight {C}. Until end of turn, you don't lose this mana as steps and phases end.
