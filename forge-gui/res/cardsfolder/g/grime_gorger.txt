@@ -4,9 +4,9 @@ Types:Creature Horror
 PT:3/3
 K:Menace
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigRepeatTypes | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, exile up to one card of each card type from defending player's graveyard. Put a +1/+1 counter on CARDNAME for each card exiled this way.
-SVar:TrigRepeatTypes:DB$ RepeatEach | RepeatTypesFrom$ Card.OwnedBy TriggeredDefendingPlayer | TypesFromZone$ Graveyard | RepeatSubAbility$ ChooseCard | SubAbility$ DBPutCounter
-SVar:ChooseCard:DB$ ChooseCard | ChoiceZone$ Graveyard | Choices$ Card.ChosenType+OwnedBy TriggeredDefendingPlayer | ChoiceTitle$ You may choose a card of this type from defending player's graveyard to exile | ChoiceTitleAppend$ ChosenType | AILogic$ BestCard | SubAbility$ DBExile
-SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ ChosenCard | RememberChanged$ True
+SVar:TrigRepeatTypes:DB$ RepeatEach | RepeatTypesFrom$ Card.OwnedBy TriggeredDefendingPlayer | TypesFromZone$ Graveyard | RepeatSubAbility$ ChooseCard | SubAbility$ DBExile
+SVar:ChooseCard:DB$ ChooseCard | ChoiceZone$ Graveyard | Choices$ Card.ChosenType+OwnedBy TriggeredDefendingPlayer | ChoiceTitle$ You may choose a card of this type from defending player's graveyard to exile | ChoiceTitleAppend$ ChosenType | AILogic$ BestCard | RememberChosen$ True
+SVar:DBExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ Remembered | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBPutCounter
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:X:Remembered$Amount

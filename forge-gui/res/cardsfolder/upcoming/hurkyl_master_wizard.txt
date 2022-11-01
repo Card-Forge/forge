@@ -7,7 +7,7 @@ SVar:TrigDig:DB$ Dig | DigNum$ 5 | Reveal$ True | NoMove$ True | RememberReveale
 SVar:DBRepeatEach:DB$ RepeatEach | RepeatTypesFrom$ ThisTurnCast_Card.nonCreature+YouCtrl | RepeatSubAbility$ ChooseCard | SubAbility$ DBChangeZoneAll
 SVar:ChooseCard:DB$ ChooseCard | Choices$ Card.IsRemembered+ChosenType | ImprintChosen$ True | ForgetChosen$ True | ChoiceTitle$ You may choose a card of this type to put into your hand | ChoiceTitleAppend$ ChosenType | ChoiceZone$ Library | AILogic$ BestCard
 SVar:DBChangeZoneAll:DB$ ChangeZone | Defined$ Imprinted | Origin$ Library | Destination$ Hand | SubAbility$ DBRestRandomOrder
-SVar:DBRestRandomOrder:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBRestRandomOrder:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | ClearChosenCard$ True
 SVar:X:Count$ThisTurnCast_Card.nonCreature+YouCtrl
 SVar:BuffedBy:Card.nonCreature

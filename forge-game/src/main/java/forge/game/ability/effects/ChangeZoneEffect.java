@@ -518,7 +518,9 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
         // CR 401.4
         if (destination.equals(ZoneType.Library) && !shuffle) {
-            if (sa.hasParam("Chooser")) {
+            if (sa.hasParam("RandomOrder")) {
+                tgtCards = CardLists.shuffle(new CardCollection(tgtCards));
+            } else if (sa.hasParam("Chooser")) {
                 tgtCards = chooser.getController().orderMoveToZoneList(new CardCollection(tgtCards), destination, sa);
             } else {
                 tgtCards = GameActionUtil.orderCardsByTheirOwners(game, new CardCollection(tgtCards), destination, sa);
