@@ -12,6 +12,7 @@ import signal
 import json
 import sys
 import re
+import os
 
 from bs4 import BeautifulSoup
 
@@ -46,16 +47,20 @@ def getImageArt():
 	missingcardsfile.close()
 	
 	for card in missingcards:
-		name = card.split('.')[0]
+		folder = card.split('/')[0]
+		folder = 'images/' + folder
+		if not os.path.exists(folder):
+			os.makedirs(folder)
+		name = card.split('/')[1].split('.')[0]
 		for bulkdata in bulk:
 			if bulkdata['name'] == name:
 				res = requests.get(bulkdata['image_uris']['png'], stream = True)
 				if res.status_code == 200:
-					with open('images/' + name + '.fullborder.png','wb') as f:
+					with open(folder + '/' + name + '.fullborder.png','wb') as f:
 						shutil.copyfileobj(res.raw, f)
 				res = requests.get(bulkdata['image_uris']['art_crop'], stream = True)
 				if res.status_code == 200:
-					with open('images/' + name + '.artcrop.jpg','wb') as f:
+					with open(folder + '/' + name + '.artcrop.jpg','wb') as f:
 						shutil.copyfileobj(res.raw, f)
 
 
