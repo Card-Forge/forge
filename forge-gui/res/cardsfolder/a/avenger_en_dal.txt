@@ -8,4 +8,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TargetedLKI$CardToughness
 SVar:AIPreference:DiscardCost$Card
 AI:RemoveDeck:Random
+DeckHas:Ability$Discard
 Oracle:{2}{W}, {T}, Discard a card: Exile target attacking creature. Its controller gains life equal to its toughness.

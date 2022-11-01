@@ -25,6 +25,8 @@ public class LifeGainEffect extends SpellAbilityEffect {
 
             sb.append(getDefinedPlayersOrTargeted(sa).size() > 1 ? " gain " : " gains ").append(amount);
             sb.append(" life.");
+        } else if (sa.hasParam("XDesc")) {
+            sb.append(" gains life equal to ").append(sa.getParam("XDesc")).append(".");
         } else {
             sb.append(" gains life equal to the life lost this way.");
         }
