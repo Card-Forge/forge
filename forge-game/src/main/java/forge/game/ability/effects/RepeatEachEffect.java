@@ -136,31 +136,24 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             }
         }
 
-        if (sa.hasParam("RepeatTypes") || sa.hasParam("RepeatTypesFrom")) {
+        if (sa.hasParam("RepeatTypesFrom")) {
             final Set<String> validTypes = new HashSet<>();
-            if (sa.hasParam("RepeatTypes")) {
-                final String def = sa.getParam("RepeatTypes");
-                if (def.equals("Permanent")) {
-                    validTypes.addAll(CardType.CoreType.permanentTypeNames());
-                } else {
-                    validTypes.addAll(Arrays.asList(sa.getParam("RepeatTypes").split(",")));
-                }
-            } else if (sa.hasParam("RepeatTypesFrom")) {
-                final String def = sa.getParam("RepeatTypesFrom");
-                final List<Card> res;
-                if (def.startsWith("ThisTurnCast")) {
-                    final String[] workingCopy = def.split("_");
-                    final String validFilter = workingCopy[1];
-                    res = CardUtil.getThisTurnCast(validFilter, source, sa);
-                } else if (def.startsWith("Defined ")) {
-                    res = AbilityUtils.getDefinedCards(source, def.substring(8), sa);
-                } else {
-                    res = CardLists.getValidCards(game.getCardsInGame(), def, source.getController(), source, sa);
-                }
-                for (final Card c : res) {
-                    for (CardType.CoreType type : c.getType().getCoreTypes()) {
-                        validTypes.add(type.name());
-                    }
+            final String def = sa.getParam("RepeatTypesFrom");
+            final List<Card> res;
+            if (def.startsWith("ThisTurnCast")) {
+                final String[] workingCopy = def.split("_");
+                final String validFilter = workingCopy[1];
+                res = CardUtil.getThisTurnCast(validFilter, source, sa);
+            } else if (def.startsWith("Defined ")) {
+                res = AbilityUtils.getDefinedCards(source, def.substring(8), sa);
+            } else {
+                final ZoneType zone = sa.hasParam("TypesFromZone") ?
+                        ZoneType.smartValueOf(sa.getParam("TypesFromZone")) : ZoneType.Battlefield;
+                res = CardLists.getValidCards(game.getCardsIn(zone), def, source.getController(), source, sa);
+            }
+            for (final Card c : res) {
+                for (CardType.CoreType type : c.getType().getCoreTypes()) {
+                    validTypes.add(type.name());
                 }
             }
 
