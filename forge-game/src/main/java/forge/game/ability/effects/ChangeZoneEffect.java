@@ -1074,8 +1074,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         //some kind of reset here?
                     }
                 }
-                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                runParams.put(AbilityKey.Player, decider);
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(decider);
                 runParams.put(AbilityKey.Target, Lists.newArrayList(player));
                 decider.getGame().getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
             }

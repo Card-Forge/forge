@@ -119,7 +119,7 @@ public class CardFactoryUtil {
                 CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
                 CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
-                Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+                Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
                 moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
                 moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
 

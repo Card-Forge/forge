@@ -397,8 +397,7 @@ public class PhaseHandler implements java.io.Serializable {
                         table.triggerChangesZoneAll(game, null);
 
                         if (!discarded.isEmpty()) {
-                            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                            runParams.put(AbilityKey.Player, playerTurn);
+                            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
                             runParams.put(AbilityKey.Cards, discarded);
                             runParams.put(AbilityKey.Cause, null);
                             runParams.put(AbilityKey.FirstTime, firstDiscarded);
@@ -440,9 +439,8 @@ public class PhaseHandler implements java.io.Serializable {
 
         if (!skipped) {
             // Run triggers if phase isn't being skipped
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
             runParams.put(AbilityKey.Phase, phase.nameForScripts);
-            runParams.put(AbilityKey.Player, playerTurn);
             game.getTriggerHandler().runTrigger(TriggerType.Phase, runParams, false);
         }
 
@@ -519,8 +517,7 @@ public class PhaseHandler implements java.io.Serializable {
                     game.getCleanup().executeUntil(playerTurn);
 
                     // "Trigger" for begin turn to get around a phase skipping
-                    final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                    runParams.put(AbilityKey.Player, playerTurn);
+                    final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
                     game.getTriggerHandler().runTrigger(TriggerType.TurnBegin, runParams, false);
                 }
                 planarDiceRolledthisTurn = 0;

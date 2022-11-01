@@ -678,7 +678,7 @@ public class Combat {
                     // Run Unblocked Trigger
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                     runParams.put(AbilityKey.Attacker, attacker);
-                    runParams.put(AbilityKey.Defender,getDefenderByAttacker(attacker));
+                    runParams.put(AbilityKey.Defender, getDefenderByAttacker(attacker));
                     runParams.put(AbilityKey.DefendingPlayer, getDefenderPlayerByAttacker(attacker));
                     game.getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams, false);
                 }

@@ -302,8 +302,8 @@ public class CountersPutAi extends CountersAi {
             }
 
             CardCollection oppCreats = CardLists.filter(ai.getOpponents().getCreaturesInPlay(),
-                    Predicates.and(Predicates.not(CardPredicates.hasCounter(CounterType.getType(type))),
-                            CardPredicates.isTargetableBy(sa)));
+                    Predicates.not(CardPredicates.hasCounter(CounterType.getType(type))),
+                            CardPredicates.isTargetableBy(sa));
 
             if (!oppCreats.isEmpty()) {
                 Card bestCreat = ComputerUtilCard.getBestCreatureAI(oppCreats);
