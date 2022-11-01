@@ -1,0 +1,16 @@
+Name:The Brothers' War
+ManaCost:3 R
+Types:Enchantment Saga
+K:Saga:3:DBPowerStone,DBChoose,DBDamage
+SVar:DBPowerStone:DB$ Token | TokenAmount$ 2 | TokenTapped$ True | TokenScript$ c_a_powerstone | TokenOwner$ You | Description$  Create two tapped Powerstone tokens.
+SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse | RememberChosen$ True | SubAbility$ ChoosePTwo | SpellDescription$ Choose two target players. Until your next turn, each creature they control attacks the other chosen player each combat if able.
+SVar:ChoosePTwo:DB$ ChoosePlayer | Defined$ You | Choices$ NonChosenPlayer | AILogic$ Curse | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ MustAttackOne, MustAttackTwo | SubAbility$ DBCleanup | RememberObjects$ Remembered
+SVar:MustAttackOne:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.RememberedPlayerCtrl | MustAttack$ Remembered
+SVar:MustAttackTwo:Mode$ MustAttack | EffectZone$ Command | ValidCreature$ Creature.ChosenPlayerCtrl | MustAttack$ ChosenPlayer
+SVar:DBDamage:DB$ DealDamage | TgtPrompt$ Select any target | TargetMin$ 1 | TargetMax$ 2 | NumDmg$ X | TargetUnique$ True | Description$ CARDNAME deals X damage to any target and X damage to any other target, where X is the number of artifacts you control.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Artifact.YouCtrl
+DeckHints:Type$Artifact & Ability$Token
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Create two tapped Powerstone tokens.\nII — Choose two target players. Until your next turn, each creature they control attacks the other chosen player each combat if able.\nIII — The Brothers' War deals X damage to any target and X damage to any other target, where X is the number of artifacts you control.

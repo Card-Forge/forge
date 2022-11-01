@@ -1,0 +1,8 @@
+Name:Urza's Workshop
+ManaCost:no cost
+Types:Land Urza's
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Mana | Cost$ T | Activation$ Metalcraft | PrecostDesc$ Metalcraft — | Produced$ C | Amount$ X | SpellDescription$  Add {C} for each Urza's land you control. Activate only if you control three or more artifacts.
+SVar:X:Count$Valid Urza's.Land+YouCtrl
+DeckNeeds:Type$Urza
+Oracle:{T}: Add {C}.\nMetalcraft - {T}:Add {C} for each Urza's land you control. Activate only if you control three or more artifacts.
