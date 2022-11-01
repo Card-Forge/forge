@@ -644,7 +644,6 @@ public abstract class SpellAbilityEffect {
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                     runParams.put(AbilityKey.Attacker, attacker);
                     runParams.put(AbilityKey.Blockers, blockers);
-                    runParams.put(AbilityKey.NumBlockers, blockers.size());
                     runParams.put(AbilityKey.Defender, combat.getDefenderByAttacker(attacker));
                     runParams.put(AbilityKey.DefendingPlayer, combat.getDefenderPlayerByAttacker(attacker));
                     game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);

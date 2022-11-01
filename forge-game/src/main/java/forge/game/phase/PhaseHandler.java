@@ -791,7 +791,6 @@ public class PhaseHandler implements java.io.Serializable {
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Attacker, a);
                 runParams.put(AbilityKey.Blockers, blockers);
-                runParams.put(AbilityKey.NumBlockers, blockers.size());
                 runParams.put(AbilityKey.Defender, combat.getDefenderByAttacker(a));
                 runParams.put(AbilityKey.DefendingPlayer, combat.getDefenderPlayerByAttacker(a));
                 game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);

@@ -90,7 +90,6 @@ public enum AbilityKey {
     NewCounterAmount("NewCounterAmount"),
     NoPreventDamage("NoPreventDamage"),
     Num("Num"), // TODO confirm that this and NumThisTurn can be merged
-    NumBlockers("NumBlockers"),
     NumThisTurn("NumThisTurn"),
     Number("Number"),
     Object("Object"),
