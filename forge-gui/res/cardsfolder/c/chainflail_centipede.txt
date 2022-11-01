@@ -4,7 +4,7 @@ Types:Artifact Creature Equipment Insect
 PT:2/2
 K:Reconfigure:2
 T:Mode$ Attacks | ValidCard$ Card.Self,Creature.EquippedBy | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or equipped creature attacks, it gets +2/+0 until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ 2
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ 2
 SVar:HasAttackEffect:TRUE
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE

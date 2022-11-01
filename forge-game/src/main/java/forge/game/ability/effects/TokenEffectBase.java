@@ -9,7 +9,6 @@ import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 
@@ -108,7 +107,7 @@ public abstract class TokenEffectBase extends SpellAbilityEffect {
         CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
-        Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+        Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
         moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
         moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
 

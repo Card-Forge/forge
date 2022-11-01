@@ -19,6 +19,8 @@ package forge.game.trigger;
 
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
+
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -59,12 +61,6 @@ public class TriggerAttackerBlocked extends Trigger {
             return false;
         }
 
-        if (hasParam("MinBlockers")) {
-            if ((int) runParams.get(AbilityKey.NumBlockers) < Integer.valueOf(getParam("MinBlockers"))) {
-                return false;
-            }
-        }
-
         if (hasParam("ValidBlocker")) {
             @SuppressWarnings("unchecked")
             int count = CardLists.getValidCardCount(
@@ -89,8 +85,7 @@ public class TriggerAttackerBlocked extends Trigger {
             AbilityKey.Attacker,
             AbilityKey.Blockers,
             AbilityKey.Defender,
-            AbilityKey.DefendingPlayer,
-            AbilityKey.NumBlockers
+            AbilityKey.DefendingPlayer
         );
     }
 
@@ -98,7 +93,7 @@ public class TriggerAttackerBlocked extends Trigger {
     public String getImportantStackObjects(SpellAbility sa) {
         StringBuilder sb = new StringBuilder();
         sb.append(Localizer.getInstance().getMessage("lblAttacker")).append(": ").append(sa.getTriggeringObject(AbilityKey.Attacker)).append(", ");
-        sb.append(Localizer.getInstance().getMessage("lblNumberBlockers")).append(": ").append(sa.getTriggeringObject(AbilityKey.NumBlockers));
+        sb.append(Localizer.getInstance().getMessage("lblNumberBlockers")).append(": ").append(Iterables.size((Iterable<Card>) sa.getTriggeringObject(AbilityKey.Blockers)));
         return sb.toString();
     }
 }

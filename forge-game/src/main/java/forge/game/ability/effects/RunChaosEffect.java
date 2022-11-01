@@ -20,8 +20,7 @@ public class RunChaosEffect extends SpellAbilityEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        Map<AbilityKey, Object> map = AbilityKey.newMap();
-        map.put(AbilityKey.Player, sa.getActivatingPlayer());
+        Map<AbilityKey, Object> map = AbilityKey.mapFromPlayer(sa.getActivatingPlayer());
         map.put(AbilityKey.Result, PlanarDice.Chaos);
 
         List<SpellAbility> validSA = Lists.newArrayList();

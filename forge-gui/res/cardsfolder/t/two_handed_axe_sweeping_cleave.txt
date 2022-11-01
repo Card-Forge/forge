@@ -2,7 +2,7 @@ Name:Two-Handed Axe
 ManaCost:2 R
 Types:Artifact Equipment
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigPump | TriggerDescription$ Whenever equipped creature attacks, double its power until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +Y | Double$ True
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +Y | Double$ True
 SVar:Y:TriggeredAttacker$CardPower
 K:Equip:1 R
 AlternateMode:Adventure

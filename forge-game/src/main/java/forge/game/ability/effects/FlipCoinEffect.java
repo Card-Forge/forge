@@ -293,8 +293,7 @@ public class FlipCoinEffect extends SpellAbilityEffect {
             caller.getGame().getAction().notifyOfValue(sa, caller, wonFlip ? Localizer.getInstance().getMessage("lblWin") : Localizer.getInstance().getMessage("lblLose"), null);
 
             // Run triggers
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.Player, caller);
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(caller);
             runParams.put(AbilityKey.Result, wonFlip);
             caller.getGame().getTriggerHandler().runTrigger(TriggerType.FlippedCoin, runParams, false);
         } while (sa.hasParam("FlipUntilYouLose") && wonFlip);

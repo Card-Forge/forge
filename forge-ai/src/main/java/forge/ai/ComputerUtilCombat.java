@@ -1286,8 +1286,8 @@ public class ComputerUtilCombat {
                 power += Integer.parseInt(att);
             } else {
                 String bonus = AbilityUtils.getSVar(sa, att);
-                if (bonus.contains("TriggerCount$NumBlockers")) {
-                    bonus = TextUtil.fastReplace(bonus, "TriggerCount$NumBlockers", "Number$1");
+                if (bonus.contains("Count$Valid Creature.blockingTriggeredAttacker")) {
+                    bonus = TextUtil.fastReplace(bonus, "Count$Valid Creature.blockingTriggeredAttacker", "Number$1");
                 } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
                     bonus = TextUtil.fastReplace(bonus, "TriggeredPlayersDefenders$Amount", "Number$1");
                 } else if (bonus.contains("TriggeredAttacker$CardPower")) { // e.g. Arahbo, Roar of the World
@@ -1475,8 +1475,8 @@ public class ComputerUtilCombat {
                     toughness += Integer.parseInt(def);
                 } else {
                     String bonus = AbilityUtils.getSVar(sa, def);
-                    if (bonus.contains("TriggerCount$NumBlockers")) {
-                        bonus = TextUtil.fastReplace(bonus, "TriggerCount$NumBlockers", "Number$1");
+                    if (bonus.contains("Count$Valid Creature.blockingTriggeredAttacker")) {
+                        bonus = TextUtil.fastReplace(bonus, "Count$Valid Creature.blockingTriggeredAttacker", "Number$1");
                     } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
                         bonus = TextUtil.fastReplace(bonus, "TriggeredPlayersDefenders$Amount", "Number$1");
                     }
@@ -1507,8 +1507,8 @@ public class ComputerUtilCombat {
                     toughness += Integer.parseInt(def);
                 } else {
                     String bonus = AbilityUtils.getSVar(sa, def);
-                    if (bonus.contains("TriggerCount$NumBlockers")) {
-                        bonus = TextUtil.fastReplace(bonus, "TriggerCount$NumBlockers", "Number$1");
+                    if (bonus.contains("Count$Valid Creature.blockingTriggeredAttacker")) {
+                        bonus = TextUtil.fastReplace(bonus, "Count$Valid Creature.blockingTriggeredAttacker", "Number$1");
                     } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
                         bonus = TextUtil.fastReplace(bonus, "TriggeredPlayersDefenders$Amount", "Number$1");
                     }

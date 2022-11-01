@@ -3,6 +3,6 @@ ManaCost:2
 Types:Artifact Equipment
 K:Equip:2
 T:Mode$ Attacks | ValidCard$ Card.EquippedBy | Execute$ TrigPump | TriggerDescription$ Whenever equipped creature attacks, you may return a land you control to its owner's hand. If you do, the creature gets +2/+2 until end of turn.
-SVar:TrigPump:AB$ Pump | Cost$ Return<1/Land> | Defined$ TriggeredAttacker | NumAtt$ 2 | NumDef$ 2
+SVar:TrigPump:AB$ Pump | Cost$ Return<1/Land> | Defined$ TriggeredAttackerLKICopy | NumAtt$ 2 | NumDef$ 2
 AI:RemoveDeck:Random
 Oracle:Whenever equipped creature attacks, you may return a land you control to its owner's hand. If you do, the creature gets +2/+2 until end of turn.\nEquip {2}

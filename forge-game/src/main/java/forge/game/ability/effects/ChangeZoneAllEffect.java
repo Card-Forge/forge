@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Maps;
 
 import forge.game.Game;
 import forge.game.GameActionUtil;
@@ -164,7 +163,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 }
             }
 
-            Map<AbilityKey, Object> moveParams = Maps.newEnumMap(AbilityKey.class);
+            Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
             moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
             moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
 

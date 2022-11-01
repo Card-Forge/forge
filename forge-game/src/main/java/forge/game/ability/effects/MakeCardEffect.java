@@ -130,8 +130,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
             counterTable.replaceCounterEffect(game, sa, true);
 
             if (sa.hasParam("Conjure")) {
-                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                runParams.put(AbilityKey.Player, player);
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
                 runParams.put(AbilityKey.Cards, madeCards);
                 runParams.put(AbilityKey.Cause, sa); //-- currently not needed
                 game.getTriggerHandler().runTrigger(TriggerType.ConjureAll, runParams, false);

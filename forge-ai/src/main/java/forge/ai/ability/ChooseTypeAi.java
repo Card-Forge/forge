@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.base.Predicates;
-
 import com.google.common.collect.Iterables;
 import forge.ai.AiCardMemory;
 import forge.ai.ComputerUtilAbility;
@@ -82,7 +80,7 @@ public class ChooseTypeAi extends SpellAbilityAi {
 
         if (maxX > 1) {
             CardCollection cre = CardLists.filter(aiPlayer.getCardsIn(ZoneType.Battlefield),
-                    Predicates.and(CardPredicates.isType(chosenType), CardPredicates.Presets.UNTAPPED));
+                    CardPredicates.isType(chosenType), CardPredicates.Presets.UNTAPPED);
             if (!cre.isEmpty()) {
                 for (Card c: cre) {
                     avgPower += c.getNetPower();

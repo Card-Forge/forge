@@ -3,5 +3,5 @@ ManaCost:3 W
 Types:Enchantment Creature Human Cleric
 PT:3/4
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl+Other | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another creature you control attacks, it gets +0/+1 until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumDef$ +1
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumDef$ +1
 Oracle:Whenever another creature you control attacks, it gets +0/+1 until end of turn.
