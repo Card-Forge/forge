@@ -224,9 +224,17 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                     dontRevealToOwner = false;
                 } else {
                     String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
-                    if (sa.hasParam ("ChoiceTitleAppendDefined")) {
-                        String defined = AbilityUtils.getDefinedPlayers(host, sa.getParam("ChoiceTitleAppendDefined"), sa).toString();
-                        title = title + " " + defined;
+                    if (sa.hasParam ("ChoiceTitleAppend")) {
+                        String tag = "";
+                        String value = sa.getParam("ChoiceTitleAppend");
+                        if (value.startsWith("Defined ")) {
+                            tag = AbilityUtils.getDefinedPlayers(host, value.substring(8), sa).toString();
+                        } else if (value.equals("ChosenType")) {
+                            tag = host.getChosenType();
+                        }
+                        if (!tag.equals("")) {
+                            title = title + " (" + tag +")";
+                        }
                     }
                     if (sa.hasParam("QuasiLibrarySearch")) {
                         final Player searched = AbilityUtils.getDefinedPlayers(host,

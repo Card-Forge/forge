@@ -136,26 +136,41 @@ public class RepeatEachEffect extends SpellAbilityEffect {
             }
         }
 
-        if (sa.hasParam("RepeatTypesFromDefined")) {
-            final String def = sa.getParam("RepeatTypesFromDefined");
+        if (sa.hasParam("RepeatTypes") || sa.hasParam("RepeatTypesFrom")) {
             final Set<String> validTypes = new HashSet<>();
-            final List<Card> res;
-            if (def.startsWith("ThisTurnCast")) {
-                final String[] workingCopy = def.split("_");
-                final String validFilter = workingCopy[1];
-                res = CardUtil.getThisTurnCast(validFilter, source, sa);
-            } else {
-                res = AbilityUtils.getDefinedCards(source, def, sa);
-            }
-            for (final Card c : res) {
-                for (CardType.CoreType type : c.getType().getCoreTypes()) {
-                    validTypes.add(type.name());
+            if (sa.hasParam("RepeatTypes")) {
+                final String def = sa.getParam("RepeatTypes");
+                if (def.equals("Permanent")) {
+                    validTypes.addAll(CardType.CoreType.permanentTypeNames());
+                } else {
+                    validTypes.addAll(Arrays.asList(sa.getParam("RepeatTypes").split(",")));
+                }
+            } else if (sa.hasParam("RepeatTypesFrom")) {
+                final String def = sa.getParam("RepeatTypesFrom");
+                final List<Card> res;
+                if (def.startsWith("ThisTurnCast")) {
+                    final String[] workingCopy = def.split("_");
+                    final String validFilter = workingCopy[1];
+                    res = CardUtil.getThisTurnCast(validFilter, source, sa);
+                } else if (def.startsWith("Defined ")) {
+                    res = AbilityUtils.getDefinedCards(source, def.substring(8), sa);
+                } else {
+                    res = CardLists.getValidCards(game.getCardsInGame(), def, source.getController(), source, sa);
+                }
+                for (final Card c : res) {
+                    for (CardType.CoreType type : c.getType().getCoreTypes()) {
+                        validTypes.add(type.name());
+                    }
                 }
             }
 
             final String storedType = source.getChosenType();
+            Player chooser = player;
+            if (sa.hasParam("ChooseOrder") && !sa.getParam("ChooseOrder").equals("True")) {
+                chooser = AbilityUtils.getDefinedPlayers(source, sa.getParam("ChooseOrder"), sa).get(0);
+            }
             while (validTypes.size() > 0) {
-                String chosenT = player.getController().chooseSomeType("card", sa, validTypes, null);
+                String chosenT = chooser.getController().chooseSomeType("card", sa, validTypes, null);
                 source.setChosenType(chosenT);
                 AbilityUtils.resolve(repeat);
                 validTypes.remove(chosenT);

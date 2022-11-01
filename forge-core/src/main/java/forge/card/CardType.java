@@ -17,13 +17,7 @@
  */
 package forge.card;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.NotImplementedException;
@@ -74,6 +68,15 @@ public final class CardType implements Comparable<CardType>, CardTypeView {
         private static Map<String, CoreType> stringToCoreType = EnumUtils.getEnumMap(CoreType.class);
         private static final Set<String> allCoreTypeNames = stringToCoreType.keySet();
         public static final Set<CoreType> spellTypes = ImmutableSet.of(Instant, Sorcery);
+        public static final Set<String> permanentTypeNames() {
+            Set<String> permanentTypes = new HashSet<>();
+            for (CoreType c : CoreType.values()) {
+                if (c.isPermanent) {
+                    permanentTypes.add(c.name());
+                }
+            }
+            return permanentTypes;
+        }
 
         public static CoreType getEnum(String name) {
             return stringToCoreType.get(name);
