@@ -59,12 +59,6 @@ public class TriggerAttackerBlocked extends Trigger {
             return false;
         }
 
-        if (hasParam("MinBlockers")) {
-            if ((int) runParams.get(AbilityKey.NumBlockers) < Integer.valueOf(getParam("MinBlockers"))) {
-                return false;
-            }
-        }
-
         if (hasParam("ValidBlocker")) {
             @SuppressWarnings("unchecked")
             int count = CardLists.getValidCardCount(

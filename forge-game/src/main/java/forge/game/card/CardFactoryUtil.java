@@ -1615,7 +1615,7 @@ public class CardFactoryUtil {
             final String n = k[1];
 
             final String trigStr = "Mode$ AttackerBlocked | ValidCard$ Card.Self | TriggerZones$ Battlefield " +
-                    " | ValidBlocker$ Creature | MinBlockers$ 1 | Secondary$ True " +
+                    " | ValidBlocker$ Creature | Secondary$ True " +
                     " | TriggerDescription$ Rampage " + n + " (" + inst.getReminderText() + ")";
 
             final String effect = "DB$ Pump | Defined$ TriggeredAttackerLKICopy" +
@@ -1626,7 +1626,7 @@ public class CardFactoryUtil {
             SpellAbility sa = AbilityFactory.getAbility(effect, card);
             sa.setSVar("Rampage" + n, "SVar$RampageCount/Times." + n);
 
-            sa.setSVar("RampageCount", "TriggerCount$NumBlockers/Minus.1");
+            sa.setSVar("RampageCount", "Count$Valid Creature.blockingTriggeredAttacker/Minus.1");
             sa.setIntrinsic(intrinsic);
             trigger.setOverridingAbility(sa);
             inst.addTrigger(trigger);
