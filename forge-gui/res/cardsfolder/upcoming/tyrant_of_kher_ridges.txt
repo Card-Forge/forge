@@ -1,0 +1,9 @@
+Name:Tyrant of Kher Ridges
+ManaCost:4 R R
+Types:Creature Dragon
+PT:4/5
+K:Flying
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 4 damage to any target.
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 4
+A:AB$ Pump | Cost$ R | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+Oracle:Flying\nWhen Tyrant of Kher Ridges enters the battlefield, it deals 4 damage to any target.\n{R}: Tyrant of Kher Ridges gets +1/+0 until end of turn.
