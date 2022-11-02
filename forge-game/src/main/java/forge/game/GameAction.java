@@ -43,6 +43,7 @@ import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityPredicates;
+import forge.game.spellability.SpellPermanent;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
@@ -118,7 +119,8 @@ public class GameAction {
         boolean wasFacedown = c.isFaceDown();
 
         // Rule 111.8: A token that has left the battlefield can't move to another zone
-        if (!c.isSpell() && c.isToken() && zoneFrom != null && !fromBattlefield && !zoneFrom.is(ZoneType.Stack)) {
+        if (!c.isSpell() && c.isToken() && !fromBattlefield && zoneFrom != null && !zoneFrom.is(ZoneType.Stack)
+                && (cause == null || !(cause instanceof SpellPermanent) || !cause.hasSVar("IsCastFromPlayEffect"))) {
             return c;
         }
 
@@ -1305,7 +1307,6 @@ public class GameAction {
                     }
                     final Iterable<Card> cards = p.getCardsIn(zt).threadSafeIterable();
                     for (final Card c : cards) {
-                        // If a token is in a zone other than the battlefield, it ceases to exist.
                         checkAgain |= stateBasedAction704_5d(c);
                          // Dungeon Card won't affect other cards, so don't need to set checkAgain
                         stateBasedAction_Dungeon(c);
