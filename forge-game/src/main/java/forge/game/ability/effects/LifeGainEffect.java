@@ -19,16 +19,15 @@ public class LifeGainEffect extends SpellAbilityEffect {
         final String amountStr = sa.getParam("LifeAmount");
 
         sb.append(Lang.joinHomogenous(getDefinedPlayersOrTargeted(sa)));
-
-        if (!amountStr.equals("AFLifeLost") || sa.hasSVar(amountStr)) {
+        sb.append(getDefinedPlayersOrTargeted(sa).size() > 1 ? " gain " : " gains ");
+        if (sa.hasParam("XDesc")) {
+            sb.append("life equal to ").append(sa.getParam("XDesc")).append(".");
+        } else if (!amountStr.equals("AFLifeLost") || sa.hasSVar(amountStr)) {
             final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 
-            sb.append(getDefinedPlayersOrTargeted(sa).size() > 1 ? " gain " : " gains ").append(amount);
-            sb.append(" life.");
-        } else if (sa.hasParam("XDesc")) {
-            sb.append(" gains life equal to ").append(sa.getParam("XDesc")).append(".");
+            sb.append(amount).append(" life.");
         } else {
-            sb.append(" gains life equal to the life lost this way.");
+            sb.append("life equal to the life lost this way.");
         }
 
         return sb.toString();
