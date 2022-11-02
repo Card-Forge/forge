@@ -49,3 +49,4 @@ ScryfallCode=PMEI
 46 R Disenchant @Allen Williams
 47 R Wild Growth @Pat Lewis
 49 R Usher of the Fallen @Anastasia Ovchinnikova
+50 R Frantic Search @Jeff Miracola
