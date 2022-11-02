@@ -248,3 +248,19 @@ ScryfallCode=PRM
 35088 S Zodiac Tiger @Ai Desheng
 225 S Zuran Orb @Sandra Everingham
 F26584 S Gleemox @Dan Frazier
+88400 S Port Town @Kamila Szutenberg
+99665 S Plateau @Sam White
+99667 S Mizzium Mortars @Deruchenko Alexander
+99669 S History of Benalia @Alix Branwyn
+99671 S Winds of Abandon @James Paick
+91241 S Braingeyser @Liiga Smilshkalne
+95465 S Nurturing Peatland @Sam Burley
+95477 S Power Artifact @John Stanko
+95479 S Volcanic Island @Sam Burley
+95481 S Essence Warden @Goran Josic
+95475 S Blast of Genius @Svetlin Velinov
+95473 S Enter the Infinite @Jake Murray
+95471 S Spelltwine @Allen Williams
+95469 S Echo of Eons @Victor Adame Minguez
+
+
