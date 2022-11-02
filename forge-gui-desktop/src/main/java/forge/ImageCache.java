@@ -48,7 +48,6 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
-import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -227,7 +226,7 @@ public class ImageCache {
         if (useArtCrop) {
             if (ipc != null && ipc.getRules().getSplitType() == CardSplitType.Flip) {
                 // Art crop will always use front face as image key for flip cards
-                imageKey = ((PaperCard) ipc).getCardImageKey();
+                imageKey = ipc.getCardImageKey();
             }
             imageKey = TextUtil.fastReplace(imageKey, ".full", ".artcrop");
         }
@@ -330,9 +329,13 @@ public class ImageCache {
             setCode.equals("6E") || setCode.equals("7E") || setCode.equals("8E") || setCode.equals("9E");
     }
 
+    public static boolean isSupportedImageSize(final int width, final int height) {
+        return !((3 > width && -1 != width) || (3 > height && -1 != height));
+    }
+
     // cardView is for Emblem, since there is no paper card for them
     public static BufferedImage scaleImage(String key, final int width, final int height, boolean useDefaultImage, CardView cardView) {
-        if (StringUtils.isEmpty(key) || (3 > width && -1 != width) || (3 > height && -1 != height)) {
+        if (StringUtils.isEmpty(key) || !isSupportedImageSize(width, height)) {
             // picture too small or key not defined; return a blank
             return null;
         }
@@ -347,7 +350,8 @@ public class ImageCache {
         Pair<BufferedImage, Boolean> orgImgs = getOriginalImageInternal(key, useDefaultImage, cardView);
         BufferedImage original = orgImgs.getLeft();
         boolean isPlaceholder = orgImgs.getRight();
-        if (original == null) { return null; }
+        if (original == null) {             System.err.println("Null2");
+            return null; }
 
         if (original == _defaultImage) {
             // Don't put the default image in the cache under the key for the card.
