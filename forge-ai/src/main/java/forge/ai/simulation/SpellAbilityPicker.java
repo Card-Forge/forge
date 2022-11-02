@@ -74,7 +74,7 @@ public class SpellAbilityPicker {
                     continue;
                 }
                 landsDeDupe.put(land.getName(), land);
-                all.add(new PlayLandAbility(land));
+                all.add(new LandAbility(land));
             }
         }
         List<SpellAbility> candidateSAs = ComputerUtilAbility.getOriginalAndAltCostAbilities(all, player);
@@ -147,8 +147,8 @@ public class SpellAbilityPicker {
 
     private static boolean isSorcerySpeed(SpellAbility sa, Player player) {
         // TODO: Can we use the actual rules engine for this instead of trying to do the logic ourselves?
-        if (sa instanceof PlayLandAbility) {
-            return false;
+        if (sa instanceof LandAbility) {
+            return true;
         }
         if (sa.isSpell()) {
             return !sa.withFlash(sa.getHostCard(), player);
@@ -334,7 +334,7 @@ public class SpellAbilityPicker {
     }
 
     private AiPlayDecision canPlayAndPayForSim(final SpellAbility sa) {
-        if (sa instanceof PlayLandAbility) {
+        if (sa instanceof LandAbility) {
             return AiPlayDecision.WillPlay;
         }
         if (!sa.canPlay()) {
@@ -451,14 +451,5 @@ public class SpellAbilityPicker {
             }
         }
         return ComputerUtil.chooseSacrificeType(player, type, ability, ability.getTargetCard(), effect, amount, exclude);
-    }
-
-    public static class PlayLandAbility extends LandAbility {
-        public PlayLandAbility(Card land) {
-            super(land);
-        }
-
-        @Override
-        public String toUnsuppressedString() { return "Play land " + (getHostCard() != null ? getHostCard().getName() : ""); }
     }
 }
