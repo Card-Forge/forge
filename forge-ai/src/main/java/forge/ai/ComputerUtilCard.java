@@ -854,7 +854,6 @@ public class ComputerUtilCard {
                 maxType = type;
             }
         }
-        System.out.println("Max:" + max + " of " + maxType);
 
         return maxType;
     }
