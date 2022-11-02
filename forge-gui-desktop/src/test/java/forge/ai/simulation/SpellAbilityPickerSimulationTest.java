@@ -112,6 +112,8 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         AssertJUnit.assertEquals(tatyova, sa.getHostCard());
 
+        // The plan should involve playing Tatyova first and then playing a land, to benefit from
+        // the landfall trigger.
         Plan plan = picker.getPlan();
         AssertJUnit.assertEquals(2, plan.getDecisions().size());
         AssertJUnit.assertEquals("Tatyova, Benthic Druid - Creature 3 / 3", plan.getDecisions().get(0).saRef.toString());
