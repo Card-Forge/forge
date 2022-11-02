@@ -1,0 +1,12 @@
+Name:Arms Race
+ManaCost:3 R
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ 3 R | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact.YouCtrl | SubAbility$ DBPump | RememberChanged$ True | ForgetOtherRemembered$ True | AILogic$ BeforeCombat | SpellDescription$ You may put an artifact card from your hand onto the battlefield. The artifact gains haste. Sacrifice it at the beginning of the next end step.
+SVar:DBPump:DB$ Animate | Keywords$ Haste | Defined$ Remembered | Duration$ Permanent | AtEOT$ Sacrifice | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:NonStackingEffect:True
+AI:RemoveDeck:Random
+SVar:PlayMain1:ALWAYS
+DeckHints:Type$Artifact
+DeckHas:Keyword$Haste & Ability$Sacrifice
+Oracle:{3}{R}: You may put an artifact card from your hand onto the battlefield. The artifact gains haste. Sacrifice it at the beginning of the next end step.

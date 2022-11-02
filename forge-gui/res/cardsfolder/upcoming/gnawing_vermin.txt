@@ -1,0 +1,10 @@
+Name:Gnawing Vermin
+ManaCost:B
+Types:Creature Rat
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, target player mills three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | ValidTgts$ Player | TgtPrompt$ Choose a player
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDebuff | TriggerDescription$ When CARDNAME dies, target creature you don't control gets -1/-1 until end of turn.
+SVar:TrigDebuff:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
+DeckHas:Ability$Mill
+Oracle:When Gnawing Vermin enters the battlefield, target player mills two cards.\nWhen Gnawing Vermin dies, target creature you don't control gets -1/-1 until end of turn.
