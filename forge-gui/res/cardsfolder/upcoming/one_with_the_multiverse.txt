@@ -2,5 +2,5 @@ Name:One With the Multiverse
 ManaCost:6 U U
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ Player | MayPlay$ True | Description$ Play with the top card of your library revealed. You may play lands and cast spells from the top of your library.
-S:Mode$ Continuous | MayPlay$ True | MayPlayAltManaCost$ 0 | MayPlayLimit$ 1 | MayPlayDontGrantZonePermissions$ True | Affected$ Card.TopLibrary+YouCtrl,Card.nonLand+YouOwn  | AffectedZone$ Library,Hand | Description$ Once during each of your turns, you may cast a spell from your hand or the top of your library without paying its mana cost.
+S:Mode$ Continuous | MayPlay$ True | MayPlayWithoutManaCost$ True | MayPlayLimit$ 1 | MayPlayDontGrantZonePermissions$ True | Affected$ Card.TopLibrary+YouCtrl,Card.nonLand+YouOwn  | AffectedZone$ Library,Hand | Description$ Once during each of your turns, you may cast a spell from your hand or the top of your library without paying its mana cost.
 Oracle:Play with the top card of your library revealed.\nYou may play lands and cast spells from the top of your library.\nOnce during each of your turns, you may cast a spell from your hand or the top of your library without paying its mana cost.
