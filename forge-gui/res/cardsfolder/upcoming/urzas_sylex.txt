@@ -1,4 +1,4 @@
-Name:Urzas's Sylex
+Name:Urza's Sylex
 ManaCost:3
 Types:Legendary Artifact
 A:AB$ RepeatEach | Cost$ 2 W W T Exile<1/CARDNAME> | RepeatPlayers$ Player | RepeatSubAbility$ ChooseSixLands | SorcerySpeed$ True | SubAbility$ DestroyAll | SpellDescription$ Each player chooses six lands they control. Destroy all other permanents. Activate only as a sorcery.
