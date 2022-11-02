@@ -350,8 +350,7 @@ public class ImageCache {
         Pair<BufferedImage, Boolean> orgImgs = getOriginalImageInternal(key, useDefaultImage, cardView);
         BufferedImage original = orgImgs.getLeft();
         boolean isPlaceholder = orgImgs.getRight();
-        if (original == null) {             System.err.println("Null2");
-            return null; }
+        if (original == null) { return null; }
 
         if (original == _defaultImage) {
             // Don't put the default image in the cache under the key for the card.
