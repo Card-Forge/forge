@@ -1,15 +1,15 @@
 Name:Gix's Command
 ManaCost:3 B B
 Types:Sorcery
-A:SP$ Charm | Choices$ DBCounters,DBMurder,DBChangeZone,DBSacrifice | CharmNum$ 2
-SVar:DBCounters:DB$ PutCounter | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature | TgtPrompt$ Choose target creature | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump | SpellDescription$ Put two +1/+1 counters on up to one creature. It gains lifelink until end of turn.
-SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Lifelink
+A:SP$ Charm | Choices$ DBChoose,DBMurder,DBChangeZone,DBSacrifice | CharmNum$ 2
+SVar:DBChoose:DB$ ChooseCard | SubAbility$ DBCounter | Choices$ Creature | SpellDescription$ Put two +1/+1 counters on up to one creature. It gains lifelink until end of turn.
+SVar:DBCounter:DB$ PutCounter | Defined$ ChosenCard | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ ChosenCard | KW$ Lifelink
 SVar:DBMurder:DB$ DestroyAll | ValidCards$ Creature.powerLE2 | SpellDescription$ Destroy each creature with power 2 or less.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeNum$ 2 | ChangeType$ Creature.YouOwn | SelectPrompt$ Select up to two creature cards from your graveyard to return to your hand | Hidden$ True | StackDescription$ {p:You} returns up to two creature cards from their graveyard to their hand. | SpellDescription$ Return up to two creature cards from your graveyard to your hand.
-SVar:DBSacrifice:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChoose | SubAbility$ DBSac | StackDescription$ Each opponent sacrifices a creature with highest power among creatures they control. | SpellDescription$ Each opponent sacrifices a creature with highest power among creatures they control.
-SVar:DBChoose:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.RememberedPlayerCtrl+cmcEQX,| ChoiceTitle$ Choose a creature with the highest mana value to sacrifice | Mandatory$ True | RememberChosen$ True
-SVar:DBSac:DB$ SacrificeAll | ValidCards$ Card.IsRemembered | SubAbility$ DBCleanup | StackDescription$ sacrifices a creature with the highest mana value among creatures and planeswalkers they control.
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosen$ True
-SVar:X:Count$HighestCMC_Planeswalker.RememberedPlayerCtrl
+SVar:DBSacrifice:DB$ RepeatEach | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ DBChooseCard | SubAbility$ DBSac | SpellDescription$ Each opponent sacrifices a creature with the highest power among creatures they control.
+SVar:DBChooseCard:DB$ ChooseCard | Defined$ Player.IsRemembered | Choices$ Creature.greatestPowerControlledByRemembered | ChoiceTitle$ Choose a creature you control with the greatest power | Mandatory$ True | RememberChosen$ True
+SVar:DBSac:DB$ SacrificeAll | ValidCards$ Card.IsRemembered | SubAbility$ DBCleanup | StackDescription$ Each opponent sacrifices a creature with the greatest power among creatures they control.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Sacrifice|LifeGain|Counters & Keyword$Lifelink
 Oracle:Choose two -\n•Put two +1/+1 counters on up to one creature. It gains lifelink until end of turn.\n•Destroy each creature with power 2 or less.\n•Return up to two creature cards from your graveyard to your hand.\n• Each opponent sacrifices a creature with highest power among creatures they control.
