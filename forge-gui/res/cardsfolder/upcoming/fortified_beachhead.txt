@@ -1,0 +1,13 @@
+Name:Fortified Beachhead
+ManaCost:no cost
+Types:Land
+K:ETBReplacement:Other:DBReveal
+SVar:DBReveal:DB$ Reveal | RevealValid$ Soldier | Optional$ True | RememberRevealed$ True | SubAbility$ DBTap | SpellDescription$ As CARDNAME enters the battlefield, you may reveal a Soldier card from your hand. CARDNAME enters the battlefield tapped unless you revealed a Soldier card this way or you control a Soldier.
+SVar:DBTap:DB$ Tap | ETB$ True | Defined$ Self | ConditionCheckSVar$ SoldierPresence | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SoldierPresence:Count$RememberedSize/Plus.SoldierControlled
+SVar:SoldierControlled:Count$Valid Soldier.inZoneBattlefield+YouCtrl
+A:AB$ Mana | Cost$ T | Produced$ Combo W U | SpellDescription$ Add {W} or {U}.
+A:AB$ PumpAll | Cost$ 5 T | ValidCards$ Soldier.YouCtrl | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Soldiers you control get +1/+1 until end of turn.
+DeckNeeds:Type$Soldier
+Oracle:As Fortified Beachhead enters the battlefield, you may reveal a Soldier card from your hand. Fortified Beachhead enters the battlefield tapped unless you revealed a Soldier card this way or you control a Soldier.\n{T}: Add {W} or {U}.\n{5}, {T}: Soldiers you control get +1/+1 until end of turn.

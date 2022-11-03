@@ -1,0 +1,9 @@
+Name:Hajar, Loyal Bodyguard
+ManaCost:R G
+Types:Legendary Creature Human Soldier
+PT:3/3
+A:AB$ PumpAll | Cost$ Sac<1/CARDNAME> | ValidCards$ Creature.Legendary+YouCtrl | NumAtt$ +1 | KW$ Indestructible | SpellDescription$ Legendary creatures you control get +1/+0 and gain indestructible until end of turn.
+AI:RemoveDeck:Random
+DeckHints:Type$Legendary
+DeckHas:Ability$Sacrifice & Keyword$Indestructible
+Oracle:Sacrifice Hajar, Loyal Bodyguard: Legendary creatures you control get +1/+0 and gain indestructible until end of turn.

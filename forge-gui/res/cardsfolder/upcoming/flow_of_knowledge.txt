@@ -1,0 +1,8 @@
+Name:Flow of Knowledge
+ManaCost:4 U
+Types:Instant
+A:SP$ Draw | NumCards$ X | SubAbility$ DBDiscard | SpellDescription$ Draw a card for each Island you control, then discard two cards.
+SVar:DBDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 2
+SVar:X:Count$Valid Island.YouCtrl
+DeckHas:Ability$Discard
+Oracle:Draw a card for each Island you control, then discard two cards.
