@@ -245,25 +245,63 @@ public class GameFormat implements Comparable<GameFormat> {
     }
     
     private boolean isPoolLegal(final CardPool allCards) {
-        for (Entry<PaperCard, Integer> poolEntry : allCards) {
-            if (!filterRules.apply(poolEntry.getKey())) {
-                return false; //all cards in deck must pass card predicate to pass deck predicate
-            }
-        }
-        
-        if(!restrictedCardNames_ro.isEmpty() || restrictedLegendary ) {
-            for (Entry<PaperCard, Integer> poolEntry : allCards) {
-                if( poolEntry.getValue().intValue() > 1 && (restrictedCardNames_ro.contains(poolEntry.getKey().getName())
-                    || (poolEntry.getKey().getRules().getType().isLegendary()
-                        && !poolEntry.getKey().getRules().getType().isPlaneswalker() && restrictedLegendary)))
-                    return false;
-            }
-        }
-        return true;
+        return getPoolLegalityProblem(allCards) == null;
     }
     
     public boolean isDeckLegal(final Deck deck) {
         return isPoolLegal(deck.getAllCardsInASinglePool());
+    }
+
+    private String getPoolLegalityProblem(final CardPool allCards) {
+        // Check filter rules
+        {
+            final List<PaperCard> erroneousCI = new ArrayList<>();
+            for (Entry<PaperCard, Integer> poolEntry : allCards) {
+                if (!filterRules.apply(poolEntry.getKey())) {
+                    erroneousCI.add(poolEntry.getKey());
+                }
+            }
+            if (erroneousCI.size() > 0) {
+                final StringBuilder sb = new StringBuilder("contains the following illegal cards:\n");
+                for (final PaperCard cp : erroneousCI) {
+                    sb.append("\n").append(cp.getName());
+                }
+                return sb.toString();
+            }
+        }
+        // Check number of restricted and legendary-restricted cards
+        if(!restrictedCardNames_ro.isEmpty() || restrictedLegendary ) {
+            final List<PaperCard> erroneousRestricted = new ArrayList<>();
+            for (Entry<PaperCard, Integer> poolEntry : allCards) {
+                boolean isRestricted = restrictedCardNames_ro.contains(poolEntry.getKey().getName());
+                boolean isLegendaryNonPlaneswalker = poolEntry.getKey().getRules().getType().isLegendary()
+                        && !poolEntry.getKey().getRules().getType().isPlaneswalker() && restrictedLegendary;
+                if( poolEntry.getValue() > 1 && (isRestricted || isLegendaryNonPlaneswalker)) {
+                    erroneousRestricted.add(poolEntry.getKey());
+                }
+            }
+            if (erroneousRestricted.size() > 0) {
+                final StringBuilder sb = new StringBuilder("contains more than one copy of the following restricted cards:\n");
+                for (final PaperCard cp : erroneousRestricted) {
+                    sb.append("\n").append(cp.getName());
+                }
+                return sb.toString();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Check the conformance of a deck in this GameFormat.
+     * Will check each card's set legality, and ensure no banned and max one of each restricted card exists.
+     * @param deck The deck to analyse
+     * @return An error string describing the errors and associated cards, or null if no errors
+     */
+    public String getDeckConformanceProblem(final Deck deck) {
+        if (deck == null) {
+            return "is not selected";
+        }
+        return getPoolLegalityProblem(deck.getAllCardsInASinglePool());
     }
 
     @Override
