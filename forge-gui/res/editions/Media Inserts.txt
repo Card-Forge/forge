@@ -48,4 +48,6 @@ ScryfallCode=PMEI
 45 R Bone Shredder @Ron Spencer
 46 R Disenchant @Allen Williams
 47 R Wild Growth @Pat Lewis
+48 R Harald, King of Skemfar @Grzegorz Rutkowski
 49 R Usher of the Fallen @Anastasia Ovchinnikova
+50 R Frantic Search @Jeff Miracola
