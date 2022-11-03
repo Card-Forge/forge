@@ -762,30 +762,21 @@ public class ComputerUtilCard {
         return maxName;
     }
 
-    public static String getMostProminentBasicLandType(final CardCollectionView list) {
-        return getMostProminentType(list, CardType.getBasicTypes());
+    public static String getMostProminentType(final CardCollectionView list, final Collection<String> valid) {
+        return getMostProminentType(list, valid, true);
     }
 
-    /**
-     * <p>
-     * getMostProminentCreatureType.
-     * </p>
-     * 
-     * @param list
-     * @return a {@link java.lang.String} object.
-     */
-    public static String getMostProminentCreatureType(final CardCollectionView list) {
-        return getMostProminentType(list, CardType.getAllCreatureTypes());
-    }
-    public static String getMostProminentType(final CardCollectionView list, final Collection<String> valid) {
+    public static String getMostProminentType(final CardCollectionView list, final Collection<String> valid, boolean includeTokens) {
         if (list.size() == 0) {
             return "";
         }
 
         final Map<String, Integer> typesInDeck = Maps.newHashMap();
 
-        // TODO JAVA 8 use getOrDefault
         for (final Card c : list) {
+            if (!includeTokens && c.isToken()) {
+                continue;
+            }
             // Changeling are all creature types, they are not interesting for
             // counting creature types
             if (c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
@@ -803,58 +794,55 @@ public class ComputerUtilCard {
                 continue;
             }
 
+            // Cards in hand and commanders are worth double, as they are more likely to be played.
+            int weight = 1;
+            if (c.isInZone(ZoneType.Hand) || c.isRealCommander()) {
+                weight = 2;
+            }
+
             Set<String> cardCreatureTypes = c.getType().getCreatureTypes();
             for (String type : cardCreatureTypes) {
-                Integer count = typesInDeck.get(type);
-                if (count == null) {
-                    count = 0;
-                }
-                typesInDeck.put(type, count + 1);
+                Integer count = typesInDeck.getOrDefault(type, 0);
+                typesInDeck.put(type, count + weight);
             }
+
             //also take into account abilities that generate tokens
-            for (SpellAbility sa : c.getAllSpellAbilities()) {
-                if (sa.getApi() != ApiType.Token) {
-                    continue;
-                }
-                if (sa.hasParam("TokenTypes")) {
-                    for (String var : sa.getParam("TokenTypes").split(",")) {
-                        if (!CardType.isACreatureType(var)) {
-                            continue;
-                        }
-                        Integer count = typesInDeck.get(var);
-                        if (count == null) {
-                            count = 0;
-                        }
-                        typesInDeck.put(var, count + 1);
-                    }
-                }
-            }
-            // same for Trigger that does make Tokens
-            for (Trigger t :c .getTriggers()) {
-                SpellAbility sa = t.ensureAbility();
-                if (sa != null) {
-                    if (sa.getApi() != ApiType.Token || !sa.hasParam("TokenTypes")) {
+            if (includeTokens) {
+                for (SpellAbility sa : c.getAllSpellAbilities()) {
+                    if (sa.getApi() != ApiType.Token) {
                         continue;
                     }
-                    for (String var : sa.getParam("TokenTypes").split(",")) {
-                        if (!CardType.isACreatureType(var)) {
-                            continue;
+                    if (sa.hasParam("TokenTypes")) {
+                        for (String var : sa.getParam("TokenTypes").split(",")) {
+                            if (!CardType.isACreatureType(var)) {
+                                continue;
+                            }
+                            Integer count = typesInDeck.getOrDefault(var, 0);
+                            typesInDeck.put(var, count + weight);
                         }
-                        Integer count = typesInDeck.get(var);
-                        if (count == null) {
-                            count = 0;
-                        }
-                        typesInDeck.put(var, count + 1);
                     }
                 }
-            }
-            // special rule for Fabricate and Servo
-            if (c.hasStartOfKeyword(Keyword.FABRICATE.toString())) {
-                Integer count = typesInDeck.get("Servo");
-                if (count == null) {
-                    count = 0;
+                // same for Trigger that does make Tokens
+                for (Trigger t : c.getTriggers()) {
+                    SpellAbility sa = t.ensureAbility();
+                    if (sa != null) {
+                        if (sa.getApi() != ApiType.Token || !sa.hasParam("TokenTypes")) {
+                            continue;
+                        }
+                        for (String var : sa.getParam("TokenTypes").split(",")) {
+                            if (!CardType.isACreatureType(var)) {
+                                continue;
+                            }
+                            Integer count = typesInDeck.getOrDefault(var, 0);
+                            typesInDeck.put(var, count + weight);
+                        }
+                    }
                 }
-                typesInDeck.put("Servo", count + 1);
+                // special rule for Fabricate and Servo
+                if (c.hasStartOfKeyword(Keyword.FABRICATE.toString())) {
+                    Integer count = typesInDeck.getOrDefault("Servo", 0);
+                    typesInDeck.put("Servo", count + weight);
+                }
             }
         } // for
 

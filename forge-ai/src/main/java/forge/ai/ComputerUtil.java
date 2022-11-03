@@ -2378,8 +2378,9 @@ public class ComputerUtil {
                         chosen = ComputerUtilCard.getMostProminentType(list, valid);
                     }
                 }
-                else if (logic.equals("MostProminentInComputerDeck")) {
-                    chosen = ComputerUtilCard.getMostProminentType(ai.getAllCards(), valid);
+                else if (logic.startsWith("MostProminentInComputerDeck")) {
+                    boolean includeTokens = !logic.endsWith("NonToken");
+                    chosen = ComputerUtilCard.getMostProminentType(ai.getAllCards(), valid, includeTokens);
                 }
                 else if (logic.equals("MostProminentInComputerGraveyard")) {
                     chosen = ComputerUtilCard.getMostProminentType(ai.getCardsIn(ZoneType.Graveyard), valid);
