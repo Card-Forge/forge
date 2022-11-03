@@ -32,6 +32,7 @@ import forge.gamemodes.quest.bazaar.QuestPetController;
 import forge.gamemodes.quest.data.DeckConstructionRules;
 import forge.gamemodes.quest.data.QuestAchievements;
 import forge.gamemodes.quest.data.QuestAssets;
+import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IButton;
@@ -681,8 +682,6 @@ public class QuestUtil {
 
         //Check quest mode's generic deck construction rules: minimum cards in deck, sideboard etc
         String errorMessage = GameType.Quest.getDeckFormat().getDeckConformanceProblem(deck);
-
-        //Check the quest mode's generic deck construction rules: minimum cards in deck, sideboard etc
         if(errorMessage != null) return errorMessage; //return immediately if the deck does not conform to quest requirements
 
         //Check for all applicable deck construction rules per this quests's saved DeckConstructionRules enum
@@ -694,8 +693,10 @@ public class QuestUtil {
         if(errorMessage != null) return errorMessage;
 
         //Check for this quest- and World's deck construction rules: allowed sets, banned/restricted cards etc
-        if(FModel.getQuest().getFormat() != null)
-            errorMessage = FModel.getQuest().getFormat().getDeckConformanceProblem(deck);
+        if (FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.WORLD_RULES_CONFORMANCE) == 1) {
+            if(FModel.getQuest().getFormat() != null)
+                errorMessage = FModel.getQuest().getFormat().getDeckConformanceProblem(deck);
+        }
 
         return errorMessage;
     }

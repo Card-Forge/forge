@@ -48,11 +48,13 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
             .opaque(true).fontSize(16).build();
     private final JPanel pnlContent = new JPanel();
     private final FScrollPane scrContent = new FScrollPane(pnlContent, false);
+    private final JPanel pnlGameSettings = new JPanel();
     private final JPanel pnlRewards = new JPanel();
     private final JPanel pnlDifficulty = new JPanel();
     private final JPanel pnlBooster = new JPanel();
     private final JPanel pnlShop = new JPanel();
     private final JPanel pnlDraftTournaments = new JPanel();
+    private final FLabel lblErrGameSettings = new FLabel.Builder().text(localizer.getMessage("lblQuestGameSettingsError")).fontStyle(Font.BOLD).build();
     private final FLabel lblErrRewards = new FLabel.Builder().text(localizer.getMessage("lblRewardsError")).fontStyle(Font.BOLD).build();
     private final FLabel lblErrDifficulty = new FLabel.Builder().text(localizer.getMessage("lblDifficultyError")).fontStyle(Font.BOLD).build();
     private final FLabel lblErrBooster = new FLabel.Builder().text(localizer.getMessage("lblBoosterError")).fontStyle(Font.BOLD).build();
@@ -62,6 +64,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
     private PrefInput focusTarget;
     /** */
     public enum QuestPreferencesErrType { /** */
+    GAME_SETTINGS, /** */
     REWARDS, /** */
     DIFFICULTY, /** */
     BOOSTER, /** */
@@ -75,11 +78,22 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
         pnlContent.setOpaque(false);
         pnlContent.setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        lblErrGameSettings.setForeground(Color.red);
         lblErrRewards.setForeground(Color.red);
         lblErrDifficulty.setForeground(Color.red);
         lblErrBooster.setForeground(Color.red);
         lblErrShop.setForeground(Color.red);
         lblErrDraftTournaments.setForeground(Color.red);
+        // Game settings panel
+        final FPanel pnlTitleGameSettings = new FPanel();
+        pnlTitleGameSettings.setLayout(new MigLayout("insets 0, align center"));
+        pnlTitleGameSettings.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        pnlTitleGameSettings.add(new FLabel.Builder().text(localizer.getMessage("lblQuestGameSettings"))
+                .icon(FSkin.getIcon(FSkinProp.ICO_QUEST_GEAR))
+                .fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
+        pnlContent.add(pnlTitleGameSettings, "w 96%!, h 36px!, gap 2% 0 10px 20px");
+        pnlContent.add(pnlGameSettings, "w 96%!, gap 2% 0 10px 20px");
+        populateGameSettings();
         // Rewards panel
         final FPanel pnlTitleRewards = new FPanel();
         pnlTitleRewards.setLayout(new MigLayout("insets 0, align center"));
@@ -166,6 +180,10 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
         return EDocID.HOME_QUESTPREFS;
     }
     /** @return {@link javax.swing.JLabel} */
+    public JLabel getLblErrGameSettings() {
+        return lblErrGameSettings;
+    }
+    /** @return {@link javax.swing.JLabel} */
     public JLabel getLblErrRewards() {
         return lblErrRewards;
     }
@@ -190,6 +208,19 @@ public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
     }
     private final static String fieldConstraints = "w 60px!, h 26px!";
     private final static String labelConstraints = "w 200px!, h 26px!, gap 0 10px 0 0";
+
+    private void populateGameSettings() {
+        pnlGameSettings.setOpaque(false);
+        pnlGameSettings.setLayout(new MigLayout("insets 0px, gap 0, wrap 2, hidemode 3"));
+        pnlGameSettings.removeAll();
+        pnlGameSettings.add(lblErrGameSettings, "w 100%!, h 30px!, span 2 1");
+        FLabel worldRulesConformance = new FLabel.Builder().text(localizer.getMessage("lblWorldRulesConformance")).fontAlign(SwingConstants.RIGHT).build();
+        worldRulesConformance.setToolTipText(localizer.getMessage("ttWorldRulesConformance"));
+        pnlGameSettings.add(worldRulesConformance, labelConstraints);
+        focusTarget = new PrefInput(QPref.WORLD_RULES_CONFORMANCE, QuestPreferencesErrType.GAME_SETTINGS);
+        pnlGameSettings.add(focusTarget, fieldConstraints);
+    }
+
     private void populateRewards() {
         pnlRewards.setOpaque(false);
         pnlRewards.setLayout(new MigLayout("insets 0px, gap 0, wrap 2, hidemode 3"));
