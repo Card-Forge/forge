@@ -1,0 +1,11 @@
+Name:Bladewhip Transmogrant
+ManaCost:2
+Types:Artifact Creature Zombie
+PT:3/1
+K:CARDNAME can't block.
+A:AB$ ChangeZone | Cost$ 4 B B | Origin$ Graveyard | Destination$ Battlefield | ReduceCost$ X | WithCountersType$ P1P1 | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from the graveyard to the battlefield with a +1/+1 counter on it. This ability costs 4 less to activate if an opponent controls four or more nonbasic lands.
+SVar:X:Count$Compare Y GE4.4.0
+SVar:Y:Count$Valid Land.OppCtrl+nonBasic
+SVar:SacMe:2
+DeckHas:Ability$Graveyard|Counters
+Oracle:Bladewhip Transmogrant can't block.\n{4}{B}{B}:Return Bladewhip Transmogrant from the graveyard to the battlefield with a +1/+1 counter on it. This ability costs 4 less to activate if an opponent controls four or more nonbasic lands.

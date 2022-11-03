@@ -1,0 +1,11 @@
+Name:Static Net
+ManaCost:3 W
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Duration$ UntilHostLeavesPlay
+SVar:PlayMain1:TRUE
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life and create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
+DeckHas:Ability$LifeGain|Token & Type$Artifact
+Oracle:When Static Net enters the battlefield, exile target nonland permanent an opponent controls until Static Net leaves the battlefield.\nWhen Static Net enters the battlefield, you gain 2 life and create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
