@@ -1,0 +1,8 @@
+Name:Deathbloom Ritualist
+ManaCost:3 B G
+Types:Creature Elf Warlock
+PT:3/5
+A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ X | SpellDescription$ Add one mana of any color.
+SVar:X:Count$TypeInYourYard.Creature
+DeckHints:Ability$Mill|Dredge|Graveyard
+Oracle:{T}: Add X mana of any one color, where X is the number of creature cards in your graveyard.

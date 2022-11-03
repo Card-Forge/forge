@@ -1,0 +1,9 @@
+Name:Fateful Cooperation
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBGiveControl | AILogic$ DonateTargetPlayer | SpellDescription$ Target opponent gains control of target artifact you control. Draw cards equal to its mana value.
+SVar:DBGiveControl:DB$ GainControl | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | Defined$ Targeted | NewController$ ParentTarget | AILogic$ DonateTargetPerm | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X
+SVar:X:Targeted$CardManaCost
+AI:RemoveDeck:Random
+Oracle:Target opponent gains control of target artifact you control. Draw cards equal to its mana value.

@@ -1,0 +1,11 @@
+Name:Platoon Dispensary
+ManaCost:5
+Types:Artifact Creature Construct
+PT:4/6
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | IsPresent$ Creature.YouCtrl+Other | PresentCompare$ GE2 | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of your end step, if you control 2 or more other creatures, draw a card.
+SVar:TrigDraw:DB$ Draw
+A:AB$ Token | Cost$ 3 W | TokenScript$ c_1_1_a_soldier | SpellDescription$ Create a 1/1 colorless Artifact Soldier creature token.
+K:Unearth:2 W W
+DeckHas:Ability$Token|Soldier|Graveyard
+DeckHints:Color$White
+Oracle:At the beginning of your end step, if you control 2 or more other creatures, draw a card.\n{3}{W}: Create a 1/1 colorless Artifact Soldier creature token.\nUnearth {2}{W}{W} ({2}{W}{W}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
