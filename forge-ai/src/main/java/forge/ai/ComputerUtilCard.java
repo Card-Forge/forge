@@ -774,6 +774,9 @@ public class ComputerUtilCard {
         final Map<String, Integer> typesInDeck = Maps.newHashMap();
 
         for (final Card c : list) {
+            if (!includeTokens && c.isToken()) {
+                continue;
+            }
             // Changeling are all creature types, they are not interesting for
             // counting creature types
             if (c.hasStartOfKeyword(Keyword.CHANGELING.toString())) {
