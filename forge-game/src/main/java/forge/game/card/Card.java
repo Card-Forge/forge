@@ -2394,11 +2394,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             sb.append("(Gain the next level as a sorcery to add its ability.)").append(linebreak);
         }
 
-        // FIXME: Use state.hasKeyword() ? But need to add Read ahead in keyword enum ?
-        // Check if the saga card has the keyword Read ahead
-        Collection<KeywordInterface> keywords = getUnhiddenKeywords();
-        boolean readAhead = keywords.toString().contains("Read ahead");
-        if (type.hasSubtype("Saga") && !readAhead) {
+        // Check if the saga card does not have the keyword Read ahead
+        if (type.hasSubtype("Saga") && !this.hasStartOfKeyword("Read ahead")) {
             sb.append("(").append(Localizer.getInstance().getMessage("lblSagaHeader"));
             if (!state.getCard().isDoubleFaced()) {
                 sb.append(" ").append(Localizer.getInstance().getMessage("lblSagaFooter")).append(" ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
