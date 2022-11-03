@@ -2,7 +2,7 @@ Name:Hero of the Dunes
 ManaCost:3 W B
 Types:Creature Human Soldier
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, return target artifact or creature card with mana value 3 or less from your graveyard to the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, return target artifact or creature card with mana value 3 or less from your graveyard to the battlefield.
 SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouCtrl+cmcLE3,Artifact.YouCtrl+cmcLE3
 S:Mode$ Continuous | Affected$ Creature.cmcLE3+YouCtrl | AddPower$ 1 | Description$ Creatures you control with mana value 3 or less get +1/+0.
 DeckHas:Ability$Graveyard
