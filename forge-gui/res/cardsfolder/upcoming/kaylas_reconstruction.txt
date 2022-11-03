@@ -1,0 +1,7 @@
+Name:Kayla's Reconstruction
+ManaCost:X W W W
+Types:Sorcery
+A:SP$ Dig | DigNum$ 7 | ChangeNum$ X | Optional$ True | ChangeValid$ Creature.cmcLE3,Artifact.cmcLE3 | DestinationZone$ Battlefield | RestRandomOrder$ True | SpellDescription$ Look at the top seven cards of your library. Put up to X artifact and/or creature cards with mana value 3 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
+SVar:X:Count$xPaid
+DeckHints:Type$Artifact
+Oracle:Look at the top seven cards of your library. Put up to X artifact and/or creature cards with mana value 3 or less from among them onto the battlefield. Put the rest on the bottom of your library in a random order.
