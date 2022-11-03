@@ -1,0 +1,13 @@
+Name:Kayla's Command
+ManaCost:1 W W
+Types:Sorcery
+A:SP$ Charm | Choices$ DBToken,DBChoose,DBChangeZone,DBGainLife | CharmNum$ 2
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_2_2_a_construct | TokenOwner$ You | SpellDescription$ Create a 2/2 colorless Construct artifact creature token.
+SVar:DBChoose:DB$ ChooseCard | SubAbility$ DBCounter | Choices$ Creature.YouCtrl | SpellDescription$ Put a +1/+1 counter on a creature you control. It gains double strike until end of turn.
+SVar:DBCounter:DB$ PutCounter | Defined$ ChosenCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ ChosenCard | KW$ Double Strike
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Plains.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBScry | SpellDescription$ You gain 2 life and scry 2.
+SVar:DBScry:DB$ Scry | ScryNum$ 2
+DeckHas:Ability$Token|LifeGain|Counters & Type$Construct|Artifact
+Oracle:*Create a 2/2 colorless Construct artifact creature token.·\nPut a +1/+1 counter on a creature you control. It gains double strike until end of turn.·\nSearch your library for a basic Plains card, reveal it, put it into your hand, then shuffle.·\nYou gain 2 life and scry 2.

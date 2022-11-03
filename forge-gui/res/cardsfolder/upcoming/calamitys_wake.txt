@@ -1,0 +1,8 @@
+Name:Calamity's Wake
+ManaCost:1 W
+Types:Instant
+A:SP:ChangeZoneAll | ChangeType$ Card | Origin$ Graveyard | Destination$ Exile | SubAbility$ DBEffect | SpellDescription$ Exile all graveyards. Players can't cast noncreature spells this turn. Exile CARDNAME.
+SVar:DBEffect:DB$ Effect | Cost$ Sac<1/CARDNAME> | StaticAbilities$ STCantBeCast | SubAbility$ ExileSelf
+SVar:STCantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card.nonCreature | Caster$ Player | Description$ Players can't cast noncreature spells this turn.
+SVar:ExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile
+Oracle:Exile all graveyards. Players can't cast noncreature spells this turn. Exile Calamity's Wake.
