@@ -5,7 +5,7 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ AE | AddPower$ X |
 T:Mode$ Attacks | ValidCard$ Creature.EquippedBy | Execute$ TrigToken | TriggerDescription$ Whenever equipped creature attacks, create a 1/1 green Forest Dryad land creature token. (It's affected by summoning sickness.)
 SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_forest_dryad_land
 K:Equip:3
-SVar:AE:HasAttackEffect:TRUE
+SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:X:Count$TypeYouCtrl.Forest
 DeckHas:Ability$Token & Type$Dryad
 Oracle:Equipped creature gets +X/+X, where X is the number of Forests you control. Whenever equipped creature attacks, create a 1/1 green Forest Dryad land creature token. (It's affected by summoning sickness.)\nEquip {3}
