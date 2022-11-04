@@ -1,0 +1,15 @@
+Name:The Archimandrite
+ManaCost:2 U R W
+Types:Legendary Creature Human Advisor
+PT:0/5
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep, you gain X life, where X is the number of cards in your hand minus 4.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
+T:Mode$ LifeGained | TriggerZones$ Battlefield | ValidPlayer$ You | Execute$ TrigPumpAll | TriggerDescription$ Whenever you gain life, each Advisor, Artificer, and Monk you control gains vigilance and gets +X/+0 until end of turn, where X is the amount of life you gained.
+SVar:TrigPumpAll:DB$ PumpAll | ValidCards$ Advisor.YouCtrl,Artificer.YouCtrl,Monk.YouCtrl | NumAtt$ +Y | KW$ Vigilance
+A:AB$ Draw | Cost$ tapXType<3/Advisor.YouCtrl;Monk.YouCtrl;Artificer.YouCtrl/Advisors, Artificers, and/or Monks you control> | SpellDescription$ Draw a card. 
+SVar:X:Count$InYourHand/Minus.4
+SVar:Y:TriggerCount$LifeAmount
+DeckNeeds:Type$Monk|Advisor|Artificer
+DeckHints:Ability$LifeGain
+DeckHas:Ability$LifeGain & Keyword$Vigilance
+Oracle:At the beginning of your upkeep, you gain X life, where X is the number of cards in your hand minus 4.\nWhenever you gain life, each Advisor, Artificer, and Monk you control gains vigilance and gets +X/+0 until end of turn, where X is the amount of life you gained.\nTap three untapped Advisors, Artificers, and/or Monks you control: Draw a card.
