@@ -118,7 +118,7 @@ public final class GameFormatQuest extends GameFormat {
 		return unlocksUsed;
 	}
 
-	public abstract static class Predicates {
+	public abstract static class QPredicates {
 		/**
 		 * Checks if is legal in quest format.
 		 *
