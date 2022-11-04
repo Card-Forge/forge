@@ -2,10 +2,10 @@ Name:Avenger en-Dal
 ManaCost:1 W
 Types:Creature Human Spellshaper
 PT:1/1
-A:AB$ ChangeZone | Cost$ 2 W T Discard<1/Card> | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | RememberLKI$ True | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target attacking creature. Its controller gains life equal to its toughness. | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$ GainLife | Defined$ RememberedController | LifeAmount$ X | SubAbility$ DBCleanup
+A:AB$ ChangeZone | Cost$ 2 W T Discard<1/Card> | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | RememberLKI$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target attacking creature.
+SVar:DBGainLife:DB$ GainLife | Defined$ RememberedController | LifeAmount$ X | SubAbility$ DBCleanup | SpellDescription$ Its controller gains life equal to its toughness.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:TargetedLKI$CardToughness
+SVar:X:RememberedLKI$CardToughness
 SVar:AIPreference:DiscardCost$Card
 AI:RemoveDeck:Random
 DeckHas:Ability$Discard

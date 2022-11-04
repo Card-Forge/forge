@@ -7,6 +7,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
+import org.apache.commons.lang3.StringUtils;
 
 public class LifeGainEffect extends SpellAbilityEffect {
 
@@ -20,8 +21,11 @@ public class LifeGainEffect extends SpellAbilityEffect {
 
         sb.append(Lang.joinHomogenous(getDefinedPlayersOrTargeted(sa)));
         sb.append(getDefinedPlayersOrTargeted(sa).size() > 1 ? " gain " : " gains ");
-        if (sa.hasParam("XDesc")) {
-            sb.append("life equal to ").append(sa.getParam("XDesc")).append(".");
+        if (!StringUtils.isNumeric(amountStr) && sa.hasParam("SpellDescription") &&
+                sa.getParam("SpellDescription").contains("life equal to")) {
+            String xDesc = sa.getParam("SpellDescription");
+            xDesc = xDesc.substring(xDesc.indexOf("life equal to"));
+            sb.append(xDesc);
         } else if (!amountStr.equals("AFLifeLost") || sa.hasSVar(amountStr)) {
             final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
 

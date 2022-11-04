@@ -1,7 +1,7 @@
 Name:Swords to Plowshares
 ManaCost:W
 Types:Instant
-A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target creature.
-SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ X | XDesc$ its power | SpellDescription$ Its controller gains life equal to its power.
-SVar:X:TargetedLKI$CardPower
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBGainLife | SpellDescription$ Exile target creature.
+SVar:DBGainLife:DB$ GainLife | Defined$ RememberedController | LifeAmount$ X | SpellDescription$ Its controller gains life equal to its power.
+SVar:X:RememberedLKI$CardPower
 Oracle:Exile target creature. Its controller gains life equal to its power.
