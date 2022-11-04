@@ -241,7 +241,7 @@ public class ForgeScript {
         } else if (property.startsWith("ManaSpent")) {
             String[] k = property.split(" ", 2);
             String comparator = k[1].substring(0, 2);
-            int y = AbilityUtils.calculateAmount(sa.getHostCard(), k[1].substring(2), sa);
+            int y = AbilityUtils.calculateAmount(source, k[1].substring(2), spellAbility);
             return Expressions.compare(sa.getTotalManaSpent(), comparator, y);
         } else if (property.startsWith("ManaFrom")) {
             final String fromWhat = property.substring(8);
