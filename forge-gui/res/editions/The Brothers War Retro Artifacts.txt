@@ -6,20 +6,68 @@ Type=Collector_Edition
 ScryfallCode=BRR
 
 [cards]
+1 R Adaptive Automaton @Igor Kieryluk
+2 M Aetherflux Reservoir @Cliff Childs
 3 M Altar of Dementia @Brom
 4 R Ashnod's Altar @Greg Staples
+5 R Astral Cornucopia @Aleksi Briclot
+6 R Blackblade Reforged @Chris Rahn
+7 U Bone Saw @Pete Venters
+8 U Burnished Hart @Yeong-Hao Han
+9 M Caged Sun @Scott Chou
+10 R Chromatic Lantern @Jung Park
+11 U Chromatic Star @Alex Horley-Orlandelli
+12 R Cloud Key @Trevor Hairsine
+13 R Defense Grid @Mark Tedin
+14 R Door to Nothingness @Svetlin Velinov
+15 U Elsewhere Flask @Carl Frank
+16 U Foundry Inspector @Jason A. Engle
+17 R Gilded Lotus @Volkan Baǵa
 18 R Goblin Charbelcher @Jesper Ejsing
+19 M Helm of the Host @Igor Kieryluk
 20 R Howling Mine @Mark Poole
+21 U Ichor Wellspring @Steven Belledin
+22 R Inspiring Statuary @Kirsten Zirngibl
 23 U Ivory Tower @Jason Chan
 24 U Jalum Tome @Jerry Tiritilli
+25 R Journeyer's Kite @Hiro Izawa
+26 R Keening Stone @Jung Park
+27 R Key to the City @Sean Murray
+28 U Liquimetal Coating @Johann Bodin
 29 R Lodestone Golem @Chris Rahn
+30 R Mazemind Tome @Randy Gallegos
+31 M Mesmeric Orb @David Martin
+32 U Millstone @Yeong-Hao Han
 33 M Mind's Eye @Karl Kopinski
 34 U Mishra's Bauble @Chippy
+35 M Mox Amber @Steven Belledin
+36 M Mystic Forge @Titus Lunter
 37 U Ornithopter @Franz Vohwinkel
+38 M Perilous Vault @Sam Burley
+39 R Phyrexian Processor @Dave Kendall
 40 R Phyrexian Revoker @Kev Walker
+41 M Platinum Angel @Brom
+42 R Precursor Golem @Chippy
+43 U Pristine Talisman @Matt Cavotta
+44 R Psychosis Crawler @Stephan Martiniere
 45 R Quicksilver Amulet @Brad Rigney
+46 R Quietus Spike @Mark Brill
 47 M Ramos, Dragon Engine @Joseph Meehan
+48 R Runechanter's Pike @John Avon
+49 R Scrap Trawler @Daarken
+50 R Sculpting Steel @Heather Hudson
+51 U Self-Assembler @Toraji
+52 R Semblance Anvil @Dan Scott
+53 U Sigil of Valor @Dan Scott
+54 U Soul-Guide Lantern @Cliff Childs
+55 U Springleaf Drum @Seb McKinnon
+56 M Staff of Domination @Ben Thompson
+57 M Sundering Titan @Grzegorz Rutkowski
+58 U Swiftfoot Boots @Svetlin Velinov
+59 R Sword of the Meek @Franz Vohwinkel
 60 R Thorn of Amethyst @Chuck Lukacs
+61 R Unwinding Clock @Mike Bierek
+62 R Well of Lost Dreams @Jeff Miracola
 63 M Wurmcoil Engine @Raymond Swanland
 66 M Altar of Dementia @Isis
 67 R Ashnod's Altar @Greg Staples
@@ -34,6 +82,7 @@ ScryfallCode=BRR
 97 U Mishra's Bauble @Zack Stella
 98 M Mox Amber @Steven Belledin
 100 U Ornithopter @Franz Vohwinkel
+101 M Perilous Vault @David Astruga
 103 R Phyrexian Revoker @Yeong-Hao Han
 108 R Quicksilver Amulet @Ben Hill
 110 M Ramos, Dragon Engine @Joseph Meehan
