@@ -421,7 +421,8 @@ public class ImportSourceAnalyzer {
                 if (validFilenames.containsKey(filename)) {
                     return validFilenames.get(filename);
                 } else if (StringUtils.endsWithIgnoreCase(filename, ".jpg")
-                        || StringUtils.endsWithIgnoreCase(filename, ".png")) {
+                        || StringUtils.endsWithIgnoreCase(filename, ".png")
+                        || StringUtils.endsWithIgnoreCase(filename, ".webp")) {
                     return filename;
                 }
                 return null;

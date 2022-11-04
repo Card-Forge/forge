@@ -66,7 +66,7 @@ public final class ImageKeys {
 
     // image file extensions for various formats in order of likelihood
     // the last, empty, string is for keys that come in with an extension already in place
-    private static final String[] FILE_EXTENSIONS = { ".jpg", ".png", "" };
+    private static final String[] FILE_EXTENSIONS = { ".jpg", ".png", "webp", "" };
 
     public static String getTokenKey(String tokenName) {
         return ImageKeys.TOKEN_PREFIX + tokenName;
@@ -362,11 +362,11 @@ public final class ImageKeys {
                 HashSet<String> setFolderContent = new HashSet<>();
                 for (String filename : Arrays.asList(f.list())) {
                     // TODO: should this use FILE_EXTENSIONS ?
-                    if (!filename.endsWith(".jpg") && !filename.endsWith(".png"))
+                    if (!filename.endsWith(".jpg") && !filename.endsWith(".png") && !filename.endsWith(".webp"))
                         continue;  // not image - not interested
                     setFolderContent.add(filename.split("\\.")[0]);  // get rid of any full or fullborder
                     //preload cachedCards at startUp
-                    String key = setFolder + "/" + filename.replace(".fullborder", ".full").replace(".jpg", "").replace(".png", "");
+                    String key = setFolder + "/" + filename.replace(".fullborder", ".full").replace(".jpg", "").replace(".png", "").replace(".webp", "");
                     File value = new File(CACHE_CARD_PICS_DIR + setFolder + "/" + filename);
                     cachedCards.put(key, value);
                 }
