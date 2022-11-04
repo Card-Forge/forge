@@ -137,22 +137,22 @@ public class GameFormat implements Comparable<GameFormat> {
         this.filterRules = this.buildFilterRules();
         this.filterPrinted = this.buildFilterPrinted();
     }
-    private Predicate<PaperCard> buildFilter(boolean printed) {
-        Predicate<PaperCard> p = Predicates.not(IPaperCard.Predicates.names(this.bannedCardNames_ro));
-        if (!this.allowedSetCodes_ro.isEmpty()) {
+    protected Predicate<PaperCard> buildFilter(boolean printed) {
+        Predicate<PaperCard> p = Predicates.not(IPaperCard.Predicates.names(this.getBannedCardNames()));
+        if (!this.getAllowedSetCodes().isEmpty()) {
             p = Predicates.and(p, printed ?
-                    IPaperCard.Predicates.printedInSets(this.allowedSetCodes_ro, printed) :
-                    StaticData.instance().getCommonCards().wasPrintedInSets(this.allowedSetCodes_ro));
+                    IPaperCard.Predicates.printedInSets(this.getAllowedSetCodes(), printed) :
+                    StaticData.instance().getCommonCards().wasPrintedInSets(this.getAllowedSetCodes()));
         }
-        if (!this.allowedRarities.isEmpty()) {
+        if (!this.getAllowedRarities().isEmpty()) {
             List<Predicate<? super PaperCard>> crp = Lists.newArrayList();
-            for (CardRarity cr: this.allowedRarities) {
+            for (CardRarity cr: this.getAllowedRarities()) {
                 crp.add(StaticData.instance().getCommonCards().wasPrintedAtRarity(cr));
             }
             p = Predicates.and(p, Predicates.or(crp));
         }
-        if (!this.additionalCardNames_ro.isEmpty()) {
-            p = Predicates.or(p, IPaperCard.Predicates.names(this.additionalCardNames_ro));
+        if (!this.getAdditionalCards().isEmpty()) {
+            p = Predicates.or(p, IPaperCard.Predicates.names(this.getAdditionalCards()));
         }
         return p;
     }
@@ -241,7 +241,7 @@ public class GameFormat implements Comparable<GameFormat> {
     }
 
     public boolean isSetLegal(final String setCode) {
-        return this.allowedSetCodes_ro.isEmpty() || this.allowedSetCodes_ro.contains(setCode);
+        return this.getAllowedSetCodes().isEmpty() || this.getAllowedSetCodes().contains(setCode);
     }
     
     private boolean isPoolLegal(final CardPool allCards) {
@@ -257,7 +257,7 @@ public class GameFormat implements Comparable<GameFormat> {
         {
             final List<PaperCard> erroneousCI = new ArrayList<>();
             for (Entry<PaperCard, Integer> poolEntry : allCards) {
-                if (!filterRules.apply(poolEntry.getKey())) {
+                if (!getFilterRules().apply(poolEntry.getKey())) {
                     erroneousCI.add(poolEntry.getKey());
                 }
             }
@@ -270,12 +270,12 @@ public class GameFormat implements Comparable<GameFormat> {
             }
         }
         // Check number of restricted and legendary-restricted cards
-        if(!restrictedCardNames_ro.isEmpty() || restrictedLegendary ) {
+        if(!getRestrictedCards().isEmpty() || isRestrictedLegendary() ) {
             final List<PaperCard> erroneousRestricted = new ArrayList<>();
             for (Entry<PaperCard, Integer> poolEntry : allCards) {
-                boolean isRestricted = restrictedCardNames_ro.contains(poolEntry.getKey().getName());
+                boolean isRestricted = getRestrictedCards().contains(poolEntry.getKey().getName());
                 boolean isLegendaryNonPlaneswalker = poolEntry.getKey().getRules().getType().isLegendary()
-                        && !poolEntry.getKey().getRules().getType().isPlaneswalker() && restrictedLegendary;
+                        && !poolEntry.getKey().getRules().getType().isPlaneswalker() && isRestrictedLegendary();
                 if( poolEntry.getValue() > 1 && (isRestricted || isLegendaryNonPlaneswalker)) {
                     erroneousRestricted.add(poolEntry.getKey());
                 }
