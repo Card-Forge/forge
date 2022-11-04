@@ -1,4 +1,4 @@
-Name:Sarinthian Greatwurm
+Name:Sarinth Greatwurm
 ManaCost:4 R G
 Types:Creature Wurm
 PT:7/6
