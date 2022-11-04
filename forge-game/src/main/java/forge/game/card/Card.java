@@ -2280,13 +2280,17 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Embalm") || keyword.equals("Prowess")
                         || keyword.startsWith("Eternalize") || keyword.startsWith("Reinforce")
                         || keyword.startsWith("Champion") || keyword.startsWith("Prowl") || keyword.startsWith("Adapt")
-                        || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Saga") || keyword.startsWith("Read ahead")
+                        || keyword.startsWith("Amplify") || keyword.startsWith("Ninjutsu") || keyword.startsWith("Saga")
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
                         || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")) {
                     // keyword parsing takes care of adding a proper description
+                } else if(keyword.startsWith("Read ahead")) {
+                    sb.append(Localizer.getInstance().getMessage("lblReadAhead")).append(" (").append(Localizer.getInstance().getMessage("lblReadAheadDesc"));
+                    sb.append(" ").append(Localizer.getInstance().getMessage("lblSagaFooter")).append(" ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
+                    sb.append(")").append("\r\n\r\n");
                 } else if (keyword.startsWith("IfReach")) {
                     String[] k = keyword.split(":");
                     sbLong.append(getName()).append(" can block ")
@@ -2390,10 +2394,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             sb.append("(Gain the next level as a sorcery to add its ability.)").append(linebreak);
         }
 
-        if (type.hasSubtype("Saga")) {
-            sb.append("(As this Saga enters and after your draw step, add a lore counter.");
+        // Check if the saga card does not have the keyword Read ahead
+        if (type.hasSubtype("Saga") && !this.hasStartOfKeyword("Read ahead")) {
+            sb.append("(").append(Localizer.getInstance().getMessage("lblSagaHeader"));
             if (!state.getCard().isDoubleFaced()) {
-                sb.append(" Sacrifice after ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
+                sb.append(" ").append(Localizer.getInstance().getMessage("lblSagaFooter")).append(" ").append(TextUtil.toRoman(getFinalChapterNr())).append(".");
             }
             sb.append(")").append(linebreak);
         }

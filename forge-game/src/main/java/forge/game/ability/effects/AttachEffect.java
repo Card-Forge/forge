@@ -173,7 +173,7 @@ public class AttachEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        sb.append(" Attach to ");
+        sb.append(" ").append(Localizer.getInstance().getMessage("lblAttachTo")).append(" ");
 
         final List<GameObject> targets = getTargets(sa);
         // Should never allow more than one Attachment per card
