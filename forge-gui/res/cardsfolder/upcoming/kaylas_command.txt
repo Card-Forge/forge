@@ -10,4 +10,4 @@ SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeT
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBScry | SpellDescription$ You gain 2 life and scry 2.
 SVar:DBScry:DB$ Scry | ScryNum$ 2
 DeckHas:Ability$Token|LifeGain|Counters & Type$Construct|Artifact
-Oracle:*Create a 2/2 colorless Construct artifact creature token.·\nPut a +1/+1 counter on a creature you control. It gains double strike until end of turn.·\nSearch your library for a basic Plains card, reveal it, put it into your hand, then shuffle.·\nYou gain 2 life and scry 2.
+Oracle:Choose two: - \n• Create a 2/2 colorless Construct artifact creature token.\n• Put a +1/+1 counter on a creature you control. It gains double strike until end of turn.·\n• Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.·\n• You gain 2 life and scry 2.
