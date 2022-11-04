@@ -1,0 +1,13 @@
+Name:Sardian Avenger
+ManaCost:1 R
+Types:Creature Goblin Warrior
+PT:1/1
+K:First Strike
+K:Trample
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+0 until end of turn, where X is the number of artifacts your opponents control.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever an artifact an opponent controls is put into a graveyard from the battlefield, CARDNAME deals 1 damage to that player.
+SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredCardController | NumDmg$ 1
+SVar:X:Count$Valid Artifact.OppCtrl
+SVar:HasAttackEffect:TRUE
+Oracle:First strike, trample\nWhenever Sardian Avenger attacks, it gets +X/+0 until end of turn, where X is the number of artifacts your opponents control.\nWhenever an artifact an opponent controls is put into a graveyard from the battlefield, Sardian Avenger deals 1 damage to that player.
