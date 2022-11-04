@@ -4,6 +4,6 @@ Types:Creature Human Artificer
 PT:2/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever an artifact enters the battlefield under your control, target creature gains flying until end of turn.
 SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | KW$ Flying
-DeckHints:Type$Artifact
+DeckNeeds:Type$Artifact
 DeckHas:Keyword$Flying
 Oracle:Whenever an artifact enters the battlefield under your control, target creature gains flying until end of turn.
