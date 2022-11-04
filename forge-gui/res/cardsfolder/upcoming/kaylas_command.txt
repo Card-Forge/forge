@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Sorcery
 A:SP$ Charm | Choices$ DBToken,DBCounter,DBChangeZone,DBGainLife | CharmNum$ 2
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_2_2_a_construct | TokenOwner$ You | SpellDescription$ Create a 2/2 colorless Construct artifact creature token.
-SVar:DBCounter:DB$ PutCounter | Mandatory$ True | Choices$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | RememberCards$ True | SubAbility$ DBPump | SpellDescription$ SpellDescription$ Put a +1/+1 counter on a creature you control. It gains double strike until end of turn.
+SVar:DBCounter:DB$ PutCounter | Choices$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | RememberCards$ True | SubAbility$ DBPump | SpellDescription$ SpellDescription$ Put a +1/+1 counter on a creature you control. It gains double strike until end of turn.
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Double Strike | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Plains.Basic | ChangeNum$ 1 | SpellDescription$ Search your library for a basic Plains card, reveal it, put it into your hand, then shuffle.
