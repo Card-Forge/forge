@@ -8,6 +8,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 public class RevealHandEffect extends SpellAbilityEffect {
@@ -17,17 +18,17 @@ public class RevealHandEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
+        final int numTgts = tgtPlayers.size();
 
-        sb.append(sa.getActivatingPlayer()).append(" looks at ");
-
-        if (tgtPlayers.size() > 0) {
-            for (final Player p : tgtPlayers) {
-                sb.append(p.toString()).append("'s ");
-            }
+        if (numTgts <= 0) {
+            sb.append("Error - no target players for RevealHand.");
+        } else if (sa.hasParam("Look")) {
+            sb.append(sa.getActivatingPlayer()).append(" looks at ").append(Lang.joinHomogenous(tgtPlayers));
+            sb.append("'s ").append(numTgts == 1 ? "hand." :  "hands.");
         } else {
-            sb.append("Error - no target players for RevealHand. ");
+            sb.append(Lang.joinHomogenous(tgtPlayers)).append(numTgts == 1 ? " reveals" :  " reveal");
+            sb.append(" their ").append(numTgts == 1 ? "hand." :  "hands.");
         }
-        sb.append("hand.");
 
         return sb.toString();
     }
