@@ -1,4 +1,4 @@
-Name:Great Desert Surveyor
+Name:Great Desert Prospector
 ManaCost:4 W
 Types:Creature Human Artificer
 PT:3/2
