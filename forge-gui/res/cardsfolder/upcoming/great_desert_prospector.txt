@@ -2,8 +2,8 @@ Name:Great Desert Prospector
 ManaCost:4 W
 Types:Creature Human Artificer
 PT:3/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a tapped powerstone token for each other creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a tapped powerstone token for each other creature you control. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
 SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenTapped$ True | TokenScript$ c_a_powerstone
 SVar:X:Count$Valid Creature.YouCtrl+Other
 DeckHas:Ability$Token & Type$Artifact
-Oracle:When Great Desert Surveyor enters the battlefield, create a tapped powerstone token for each other creature you control.
+Oracle:When Great Desert Surveyor enters the battlefield, create a tapped powerstone token for each other creature you control. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
