@@ -1,0 +1,12 @@
+Name:Airlift Chaplain
+ManaCost:2 W
+Types:Creature Human Cleric
+PT:1/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards. You may put a Plains card or a creature card with mana value 3 or less from among the cards milled this way into your hand. If you don't, put a +1/+1 counter on CARDNAME. (To mill a card, put the top card of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Hidden$ True | Origin$ Graveyard | Destination$ Hand | ChangeType$ Plains.IsRemembered,Creature.cmcLE3+IsRemembered | SelectPrompt$ You may select a Plains card or a creature card with mana value 3 or less | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | CounterType$ P1P1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill|Counters
+Oracle:Flying\nWhen Airlift Chaplain enters the battlefield, mill three cards. You may put a Plains card or a creature card with mana value 3 or less from among the cards milled this way into your hand. If you don't, put a +1/+1 counter on Airlift Chaplain. (To mill a card, put the top card of your library into your graveyard.)
