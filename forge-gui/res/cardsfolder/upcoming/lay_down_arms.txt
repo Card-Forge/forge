@@ -6,5 +6,4 @@ SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | Defined$ RememberedController | S
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Plains.YouCtrl
 SVar:BuffedBy:Plains
-DeckHas:Ability$LifeGain
 Oracle:Exile target creature with mana value less than or equal to the number of Plains you control. Its controller gains 3 life.
