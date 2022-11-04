@@ -3,7 +3,7 @@ ManaCost:8
 Types:Artifact Creature Golem
 PT:8/8
 K:Trample
-T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$  When you cast this spell and whenever CARDNAME attacks, destroy up to one target nonland permanent. Its controller creates a tapped Powerstone token.
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When you cast this spell and whenever CARDNAME attacks, destroy up to one target nonland permanent. Its controller creates a tapped Powerstone token.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroy | Secondary$ True | TriggerDescription$ When you cast this spell and whenever CARDNAME attacks, destroy up to one target nonland permanent. Its controller creates a tapped Powerstone token.
 SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Permanent.nonland | TgtPrompt$ Select target nonland permanent. | RememberLKI$ True | AlwaysRemember$ True | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone | TokenOwner$ RememberedController | SubAbility$ DBCleanup
