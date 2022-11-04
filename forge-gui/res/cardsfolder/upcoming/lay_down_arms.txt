@@ -1,7 +1,7 @@
 Name:Lay Down Arms
 ManaCost:W
 Types:Sorcery
-A:SP$ ChangeZone |  | ValidTgts$ Creature.cmcLEX | TgtPrompt$ Select target creature with mana value less or equal to the number of plains you control. | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target creature with mana value less than or equal to the number of Plains you control. Its controller gains 3 life.
+A:SP$ ChangeZone | ValidTgts$ Creature.cmcLEX | TgtPrompt$ Select target creature with mana value less or equal to the number of plains you control. | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target creature with mana value less than or equal to the number of Plains you control. Its controller gains 3 life.
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | Defined$ TargetedController
 SVar:X:Count$Valid Plains.YouCtrl
 SVar:BuffedBy:Plains
