@@ -18,20 +18,22 @@ public class LifeGainEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final String amountStr = sa.getParam("LifeAmount");
+        final String spellDesc = sa.getParam("SpellDescription");
 
         sb.append(Lang.joinHomogenous(getDefinedPlayersOrTargeted(sa)));
-        sb.append(getDefinedPlayersOrTargeted(sa).size() > 1 ? " gain " : " gains ");
-        if (!StringUtils.isNumeric(amountStr) && sa.hasParam("SpellDescription") &&
-                sa.getParam("SpellDescription").contains("life equal to")) {
-            String xDesc = sa.getParam("SpellDescription");
-            xDesc = xDesc.substring(xDesc.indexOf("life equal to"));
-            sb.append(xDesc);
-        } else if (!amountStr.equals("AFLifeLost") || sa.hasSVar(amountStr)) {
-            final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
-
-            sb.append(amount).append(" life.");
+        if (sb.length() == 0 && spellDesc != null) {
+            return (spellDesc);
         } else {
-            sb.append("life equal to the life lost this way.");
+            sb.append(getDefinedPlayersOrTargeted(sa).size() > 1 ? " gain " : " gains ");
+            if (!StringUtils.isNumeric(amountStr) && spellDesc != null && spellDesc.contains("life equal to")) {
+                sb.append(spellDesc.substring(spellDesc.indexOf("life equal to")));
+            } else if (!amountStr.equals("AFLifeLost") || sa.hasSVar(amountStr)) {
+                final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+
+                sb.append(amount).append(" life.");
+            } else {
+                sb.append("life equal to the life lost this way.");
+            }
         }
 
         return sb.toString();
