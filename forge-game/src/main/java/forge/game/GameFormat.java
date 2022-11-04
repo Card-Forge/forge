@@ -558,6 +558,10 @@ public class GameFormat implements Comparable<GameFormat> {
             return this.map.get("Modern");
         }
 
+        public GameFormat getVintage() {
+            return this.map.get("Vintage");
+        }
+
         public GameFormat getFormat(String format) {
             return this.map.get(format);
         }
