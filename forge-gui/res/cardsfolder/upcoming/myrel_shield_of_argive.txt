@@ -1,0 +1,13 @@
+Name:Myrel, Shield of Argive
+ManaCost:3 W
+Types:Legendary Creature Human Soldier
+PT:3/4
+S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | Description$ During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments.
+S:Mode$ CantBeActivated | ValidCard$ Artifact,Creature,Enchantment | AffectedZone$ Battlefield | Condition$ PlayerTurn | Activator$ Opponent
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create X 1/1 colorless Soldier artifact creature tokens, where X is the number of Soldiers you control.
+SVar:TrigToken:DB$ Token | TokenAmount$ X | TokenScript$ c_1_1_a_soldier
+SVar:X:Count$Valid Soldier.YouCtrl
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Artifact
+DeckHints:Type$Soldier
+Oracle:During your turn, your opponents can't cast spells or activate abilities of artifacts, creatures, or enchantments.\nWhenever Myrel, Shield of Argive attacks, create X 1/1 colorless Soldier artifact creature tokens, where X is the number of Soldiers you control.
