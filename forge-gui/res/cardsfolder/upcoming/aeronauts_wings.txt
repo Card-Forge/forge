@@ -1,0 +1,7 @@
+Name:Aeronaut's Wings
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Flying | AddPower$ 1 | Description$ Equipped creature gets +1/+0 and has flying.
+K:Equip:2
+DeckHas:Keyword$Flying
+Oracle:Equipped creature gets +1/+0 and has flying.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
