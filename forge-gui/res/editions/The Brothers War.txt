@@ -23,7 +23,7 @@ ScryfallCode=BRO
 13 U Loran, Disciple of History @Cristi Balanescu
 14 C Loran's Escape @Matt Stewart
 15 U Mass Production @Rémi Jacquot
-16 C Meticulous Excavation @Lucas Graciano
+16 U Meticulous Excavation @Lucas Graciano
 17 C Military Discipline @Francisco Miyara
 18 M Myrel, Shield of Argive @Ryan Pancoast
 19 C Phalanx Vanguard @Izzy
@@ -81,7 +81,7 @@ ScryfallCode=BRO
 71 C Urza's Rebuff @Josu Hernaiz
 72 C Weakstone's Subjugation @Igor Kieryluk
 73 C Wing Commando @David Auden Nash
-74 U Zephyr Sentinel
+74 U Zephyr Sentinel @Inkognit
 75 M Arcane Proxy @Kekai Kotaki
 76 C Coastal Bulwark @Artur Nakhodkin
 77 C Combat Courier @Alix Branwyn
@@ -160,7 +160,7 @@ ScryfallCode=BRO
 150 C Roc Hunter @Ina Wong
 151 U Sardian Cliffstomper @Joseph Weston
 152 C Sibling Rivalry @Rovina Cai
-153 C Tomakul Sparksmith @Caio Monteiro
+153 C Tomakul Scrapsmith @Caio Monteiro
 154 R Tyrant of Kher Ridges @Karl Kopinski
 155 C Unleash Shell @Campbell White
 156 R Visions of Phyrexia @Dominik Mayer
@@ -205,7 +205,7 @@ ScryfallCode=BRO
 195 C Tomakul Honor Guard @Francisco Miyara
 196 C Wasteful Harvest @Alex Stone
 197 C Boulderbranch Golem @Dan Scott
-198 C Cradle Clearcutter @Daarken
+198 U Cradle Clearcutter @Daarken
 199 U Haywire Mite @Izzy
 200 U Iron-Craw Crusher @Filip Burburan
 201 U Mask of the Jadecrafter @Alessandra Pisano
