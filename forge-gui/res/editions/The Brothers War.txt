@@ -336,6 +336,7 @@ ScryfallCode=BRO
 326 M Gix, Yawgmoth Praetor @Anna Podedworna
 327 R Gix's Command @Dominik Mayer
 328 R Gixian Puppeteer @Bastien L. Deharme
+329 R Hostile Negotiations @David Auden Nash
 330 R Misery's Shadow @Igor Kieryluk
 331 R Painful Quandary @David Palumbo
 332 M Phyrexian Fleshgorger @Steve Prescott
@@ -352,6 +353,10 @@ ScryfallCode=BRO
 343 M Skitterbeam Battalion @Leon Tukker
 344 M Awaken the Woods @Bryan Sola
 345 R Fade from History @Alessandra Pisano
+346 R Fauna Shaman @Nicholas Elias
+347 R Gwenna, Eyes of Gaea @Steve Prescott
+348 R Teething Wurmlet @Jesper Ejsing
+349 R Titania's Command @Dominik Mayer
 350 R Perennial Behemoth @Wayne Reynolds
 351 M Rootwire Amalgam @Leon Tukker
 352 R Simian Simulacrum @Randy Vargas
@@ -363,7 +368,9 @@ ScryfallCode=BRO
 358 M Sarinth Greatwurm @Jesper Ejsing
 359 R Tawnos, the Toymaker @Livia Prima
 360 R Tocasia, Dig Site Mentor @Lie Setiawan
+361 M Bladecoil Serpent @Joshua Cairos
 362 M Clay Champion @Leon Tukker
+363 M Cityscape Leveler @Leon Tukker
 364 R Liberator, Urza's Battlethopter @Ekaterina Burmak
 365 M Portal to Phyrexia @Svetlin Velinov
 366 R The Stasis Coffin @Artur Nakhodkin
