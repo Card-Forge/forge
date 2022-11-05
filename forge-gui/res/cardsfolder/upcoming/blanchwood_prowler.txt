@@ -2,7 +2,7 @@ Name:Blanchwood Prowler
 ManaCost:1 G
 Types:Creature Elemental
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards, then you may return a land card from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards. You may put a land card from among the cards milled this way into your hand. If you don’t, put a +1/+1 counter on CARDNAME. (To mill a card, put the top card of your library into your graveyard.)
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Land.YouOwn+IsRemembered | RememberChanged$ True | ForgetOtherRemembered$ True | Hidden$ True | Optional$ True | SubAbility$ DBCounter
 SVar:DBCounter:DB$ PutCounter | Defined$ Card.Self | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup

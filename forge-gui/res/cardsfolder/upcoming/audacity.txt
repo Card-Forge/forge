@@ -7,4 +7,4 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddKeyword$ 
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, draw a card.
 SVar:TrigDraw:DB$ Draw
 SVar:SacMe:2
-Oracle:Until end of turn, target creature gets +2/+0 and gains "When this creature dies or is put into exile from the battlefield, return it to its owner's hand."
+Oracle:Enchant creature\nEnchanted creature gets +2/+0 and has trample.\nWhen Audacity is put into a graveyard from the battlefield, draw a card.
