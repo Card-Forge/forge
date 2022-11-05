@@ -70,8 +70,8 @@ ScryfallCode=BRR
 62 R Well of Lost Dreams @Jeff Miracola
 63 M Wurmcoil Engine @Raymond Swanland
 66 M Altar of Dementia @Isis
-67 R Ashnod's Altar @Greg Staples
-73 R Chromatic Lantern @Ben Hill
+67 R Ashnod's Altar @
+73 R Chromatic Lantern @
 83 R Howling Mine @Mark Poole
 86 U Ivory Tower @Irina Nordsol
 87 U Jalum Tome @Ben Hill
@@ -81,7 +81,7 @@ ScryfallCode=BRR
 96 M Mind's Eye @Warren Mahy
 97 U Mishra's Bauble @Zack Stella
 98 M Mox Amber @Steven Belledin
-100 U Ornithopter @Franz Vohwinkel
+100 U Ornithopter @
 101 M Perilous Vault @David Astruga
 103 R Phyrexian Revoker @Yeong-Hao Han
 108 R Quicksilver Amulet @Ben Hill
