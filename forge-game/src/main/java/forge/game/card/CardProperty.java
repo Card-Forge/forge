@@ -315,7 +315,15 @@ public class CardProperty {
                 }
             } else {
                 final CardCollectionView cards = controller.getCardsIn(ZoneType.Battlefield);
-                if (CardLists.getType(cards, type).isEmpty()) {
+                if (type.contains("_")) {
+                    final String[] parts = type.split("_", 2);
+                    CardCollectionView found = CardLists.getType(cards, parts[0]);
+                    final int num = AbilityUtils.calculateAmount(card, parts[1].substring(2), spellAbility);
+                    if (!Expressions.compare(found.size(), parts[1].substring(0, 2), num)) {
+                        return false;
+                    }
+
+                } else if (CardLists.getType(cards, type).isEmpty()) {
                     return false;
                 }
             }
