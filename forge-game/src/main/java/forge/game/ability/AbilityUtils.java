@@ -2599,12 +2599,11 @@ public class AbilityUtils {
 
         // Count$Chroma.<color name>
         if (sq[0].startsWith("Chroma")) {
-            ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
             final CardCollectionView cards;
             if (sq[0].contains("ChromaSource")) { // Runs Chroma for passed in Source card
                 cards = new CardCollection(c);
-            }
-            else {
+            } else {
+                ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
                 cards = player.getCardsIn(sourceZone);
             }
 

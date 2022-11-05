@@ -8,6 +8,6 @@ SVar:DBChooseCard:DB$ ChooseCard | Defined$ You | Choices$ Creature.RememberedPl
 SVar:DBExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.IsRemembered
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PlayExile | SpellDescription$ Until end of turn, you may cast spells from among cards exiled with CARDNAME, and you may spend mana as though it were mana of any color to cast those spells.
-SVar:PlayExile:Mode$ Continuous | MayPlayIgnoreType$ True | MayPlayIgnoreColor$ True | MayPlay$ True | Affected$ Card.ExiledWithEffectSource | AffectedZone$ Exile | Description$ You may play cards exiled with EFFECTSOURCE, and you may spend mana as though it were mana of any color to cast those spells.
+SVar:PlayExile:Mode$ Continuous | MayPlayIgnoreType$ True | MayPlayIgnoreColor$ True | MayPlay$ True | Affected$ Card.ExiledWithEffectSource+nonLand | AffectedZone$ Exile | Description$ You may play cards exiled with EFFECTSOURCE, and you may spend mana as though it were mana of any color to cast those spells.
 DeckHas:Ability$Mill
 Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — Each player mills four cards. Then you may exile a creature or planeswalker card from each graveyard.\nII, III — Until end of turn, you may cast spells from among cards exiled with King Narfi's Betrayal, and you may spend mana as though it were mana of any color to cast those spells.
