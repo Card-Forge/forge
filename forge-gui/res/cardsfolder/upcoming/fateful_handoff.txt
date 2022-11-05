@@ -1,4 +1,4 @@
-Name:Fateful Cooperation
+Name:Fateful Handoff
 ManaCost:3 B
 Types:Sorcery
 A:SP$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ DBGiveControl | AILogic$ DonateTargetPlayer | SpellDescription$ Target opponent gains control of target artifact you control. Draw cards equal to its mana value.

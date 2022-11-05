@@ -7,10 +7,10 @@ SVar:TrigDraw:DB$ Draw | NumCards$ Q
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, for each {B}{B} spent to cast it, each opponent discards a card.
 SVar:TrigDiscard:DB$ Discard | Mode$ TgtChoose | Defined$ Opponent | NumCards$ Y
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, for each {R}{R} spent to cast it, it gets +1/+0 and gains trample and haste until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ Card.Self | NumAtt$ Z | KW$ Trample & Haste
-SVar:Q:Count$CastTotalManaSpent Blue/HalfDown
-SVar:Y:Count$CastTotalManaSpent Red/HalfDown
-SVar:Z:Count$CastTotalManaSpent Black/HalfDown
+SVar:TrigPump:DB$ Pump | Defined$ Card.Self | NumAtt$ 1  | KW$ Trample & Haste
+SVar:Q:Count$TriggeredPayingMana.U/HalfDown 
+SVar:Y:Count$TriggeredPayingMana.R/HalfDown 
+SVar:Z:Count$TriggeredPayingMana.B/HalfDown 
 SVar:X:Count$xPaid
 DeckHints:Color$Red|Blue|Black
 DeckHas:Abiliy$Discard & Keyword$Haste|Trample

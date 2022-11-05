@@ -1,4 +1,4 @@
-Name:Bladewhip Transmogrant
+Name:Razorlash Transmogrant
 ManaCost:2
 Types:Artifact Creature Zombie
 PT:3/1
