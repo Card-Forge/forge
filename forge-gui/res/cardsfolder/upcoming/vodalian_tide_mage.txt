@@ -2,7 +2,7 @@ Name:Vodalian Tide Mage
 ManaCost:1 G U
 Types:Creature Merfolk Wizard
 PT:3/3
-T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl+nonToken | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ Whenever one or more nontoken creatures you control deal combat damage to a player, choose one of those creatures. Conjure a copy of the chosen creature in your hand.
+T:Mode$ DamageDoneOnce | CombatDamage$ True | ValidSource$ Creature.YouCtrl+nonToken+Other | ValidTarget$ Player | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ Whenever one or more nontoken creatures you control deal combat damage to a player, choose one of those creatures. Conjure a copy of the chosen creature in your hand.
 SVar:TrigChoose:DB$ ChooseCard | DefinedCards$ TriggeredSources | Mandatory$ True | SubAbility$ DBConjure
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | DefinedName$ ChosenCard | Zone$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True 
