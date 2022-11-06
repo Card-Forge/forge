@@ -1,0 +1,39 @@
+[duel]
+[metadata]
+Name=Avacyn's Angelic Assault 4
+Title=Avacyn
+Difficulty=very hard
+Description=Mono-white aggro angel theme deck with Concerted Effort
+Icon=Avacyn 4.jpg
+Deck Type=constructed
+[Main]
+2 Admonition Angel
+1 Akroma, Vision of Ixidor
+2 Angel of Jubilation
+1 Concerted Effort
+2 Defy Death
+2 Emeria, the Sky Ruin
+4 Flagstones of Trokair
+1 Giada, Font of Hope
+2 Herald of War
+4 Idyllic Grange
+2 Light from Within
+1 Linvala, Keeper of Silence
+1 Lyra Dawnbringer
+3 March of Otherworldly Light
+2 Mox Pearl
+2 Pearl Medallion
+12 Plains
+3 Rebuff the Wicked
+2 Resplendent Marshal
+1 Reya Dawnbringer
+2 Righteous Valkyrie
+1 Sephara, Sky's Blade
+2 Serra Avenger
+1 Serra's Emissary
+2 Voice of All
+2 Well of Lost Dreams
+[Sideboard] 
+2 Angelic Curator
+2 Baneslayer Angel
+
