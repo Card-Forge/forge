@@ -1,0 +1,11 @@
+Name:Kill-Zone Acrobat
+ManaCost:2 B
+Types:Creature Human Soldier
+PT:3/2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may sacrifice another creature or artifact. If you do, CARDNAME gains flying until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | Defined$ Self | KW$ Flying
+SVar:PlayMain1:TRUE
+SVar:AIPreference:SacCost$Artifact.Token,Creature.Other+cmcLE2,Artifact.cmcEQ1
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+Oracle:Whenever Kill-Zone Acrobat attacks, you may sacrifice another creature or artifact. If you do, Kill-Zone Acrobat gains flying until end of turn.
