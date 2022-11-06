@@ -1,6 +1,6 @@
 Name:Desynchronize
 ManaCost:4 U
 Types:Instant
-SVar:DBSubmerge:DB$ ChangeZone | ValidTgts$ Permanent.nonLand | SubAbility$ DBScry | TgtPrompt$ Select target nonland permanent for its owner to put on the top or bottom of their library | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDestinationMessage$ Would you like to put the card on the top of your library (and not on the bottom)? | SpellDescription$ Target nonland permanent’s owner puts it on the top or bottom of their library. Scry 2.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | SubAbility$ DBScry | TgtPrompt$ Select target nonland permanent for its owner to put on the top or bottom of their library | AlternativeDecider$ TargetedOwner | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | DestinationAlternative$ Library | LibraryPositionAlternative$ -1 | AlternativeDestinationMessage$ Would you like to put the card on the top of your library (and not on the bottom)? | SpellDescription$ Target nonland permanent’s owner puts it on the top or bottom of their library. Scry 2.
 SVar:DBScry:DB$ Scry | ScryNum$ 2
 Oracle:Target nonland permanent's owner puts it on the top or bottom of their library. Scry 2
