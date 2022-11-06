@@ -5,8 +5,8 @@ PT:6/6
 S:Mode$ Continuous | Affected$ Forest.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play Forests from your graveyard.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Forest.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ Whenever a Forest enters the battlefield under your control, create a 5/3 green Elemental creature token.
 SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_5_3_elemental | TokenOwner$ You
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Elemental.YouCtrl | OptionalDecider$ You | Execute$ TrigMill | TriggerDescription$ Whenever an Elemental you control dies, you may mill three cards.
-SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Elemental.YouCtrl | Execute$ TrigMill | TriggerDescription$ Whenever an Elemental you control dies, you may mill three cards.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | Optional$ True
 SVar:BuffedBy:Forest
 DeckHints:Type$Elemental
 DeckHas:Ability$Graveyard|Mill
