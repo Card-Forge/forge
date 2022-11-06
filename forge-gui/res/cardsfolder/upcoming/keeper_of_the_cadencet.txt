@@ -1,4 +1,4 @@
-﻿Name:Keeper of the Cadence
+Name:Keeper of the Cadence
 ManaCost:4 U
 Types:Creature Human Wizard
 PT:2/2
