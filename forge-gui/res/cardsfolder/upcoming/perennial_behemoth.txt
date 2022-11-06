@@ -1,4 +1,4 @@
-Name:Persistent Behemoth
+Name:Perennial Behemoth
 ManaCost:5
 Types:Artifact Creature Beast
 PT:5/3
