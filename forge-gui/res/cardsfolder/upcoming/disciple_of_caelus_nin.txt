@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRepeatEach | TriggerDescription$ When CARDNAME enters the battlefield, starting with you, each player chooses up to five permanents they control. All permanents other than CARDNAME that weren't chosen this way phase out.
 SVar:TrigRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBChoosePermanent | SubAbility$ DBPhaseOut
-SVar:DBChoosePermanent:DB$ ChooseCard | ChoiceTitle$ Choose up to five permanents you control | MinAmount$ 0 | Amount$ 5 | Defined$ Remembered | Choices$ Permanent.RememberedPlayerCtrl | RememberChosen$ True | AILogic$ BestCard
+SVar:DBChoosePermanent:DB$ ChooseCard | ChoiceTitle$ Choose up to five permanents you control | MinAmount$ 0 | Amount$ 5 | Defined$ Remembered | Choices$ Permanent.RememberedPlayerCtrl | RememberChosen$ True | AILogic$ NotSelf
 SVar:DBPhaseOut:DB$ Phases | AllValid$ Permanent.Other+IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
 S:Mode$ CantPhaseIn | ValidCard$ Permanent | Description$ Permanents can't phase in.
