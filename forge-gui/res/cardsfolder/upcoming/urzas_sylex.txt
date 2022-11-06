@@ -1,0 +1,12 @@
+Name:Urza's Sylex
+ManaCost:3
+Types:Legendary Artifact
+A:AB$ RepeatEach | Cost$ 2 W W T Exile<1/CARDNAME> | RepeatPlayers$ Player | RepeatSubAbility$ ChooseSixLands | SorcerySpeed$ True | SubAbility$ DestroyAll | SpellDescription$ Each player chooses six lands they control. Destroy all other permanents. Activate only as a sorcery.
+SVar:ChooseSixLands:DB$ ChooseCard | Defined$ Remembered | Choices$ Land.RememberedPlayerCtrl | ChoiceTitle$ Choose six lands to keep. | Amount$ 6 | Mandatory$ True | RememberChosen$ True
+SVar:DestroyAll:DB$ DestroyAll | ValidCards$ Permanent.IsNotRemembered | StackDescription$ Destroy all other permanents. | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Exile | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSearch | TriggerDescription$ When CARDNAME is put into exile from the battlefield, you may pay {2}. If you do, search your library for a planeswalker card, reveal it, put it into your hand, then shuffle.
+SVar:TrigSearch:AB$ ChangeZone | Cost$ 2 | ChangeType$ Planeswalker.YouOwn | Origin$ Library | Destination$ Hand
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Planeswalker
+Oracle:{2}{W}{W},{T}, Exile Urza's Sylex: Each player chooses six lands they control. Destroy all other permanents. Activate only as a sorcery.\nWhen Urza's Sylex is put into exile from the battlefield, you may pay {2}. If you do, search your library for a planeswalker card, reveal it, put it into your hand, then shuffle.
