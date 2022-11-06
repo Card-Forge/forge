@@ -5,7 +5,7 @@ A:SP$ Charm | Cost$ 3 U | MinCharmNum$ 1 | CharmNum$ X | Choices$ DBControl,DBIm
 SVar:DBControl:DB$ ChooseCard | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | Mandatory$ True | Choices$ Creature.TargetedPlayerCtrl | ChoiceTitle$ Choose a creature you control | SubAbility$ DBGainControl | AILogic$ WorstCard | SpellDescription$ Target opponent chooses a creature they control. You gain control of it.
 SVar:DBGainControl:DB$ GainControl | Defined$ ChosenCard | NewController$ You | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
-SVar:DBImprint:DB$ ChooseCard | Defined$ You | Mandatory$ True | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you control | SubAbility$ MassClone | AILogic$ BestCard | SpellDescription$ Choose a creature you control. Each other creature you control becomes a copy of that creature until end of turn.
+SVar:DBImprint:DB$ ChooseCard | Defined$ You | Mandatory$ True | Choices$ Creature.YouCtrl | ChoiceTitle$ Choose a creature you control | SubAbility$ MassClone | SpellDescription$ Choose a creature you control. Each other creature you control becomes a copy of that creature until end of turn.
 SVar:MassClone:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.Creature+nonChosenCard+YouCtrl | RepeatSubAbility$ DBCopy | SubAbility$ DBCleanup
 SVar:DBCopy:DB$ Clone | Defined$ ChosenCard | CloneTarget$ Imprinted | Duration$ UntilEndOfTurn
 SVar:X:Count$Compare Y GE1.2.1

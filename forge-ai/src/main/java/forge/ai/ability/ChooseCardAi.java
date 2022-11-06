@@ -162,9 +162,17 @@ public class ChooseCardAi extends SpellAbilityAi {
     public Card chooseSingleCard(final Player ai, final SpellAbility sa, Iterable<Card> options, boolean isOptional, Player targetedPlayer, Map<String, Object> params) {
         final Card host = sa.getHostCard();
         final Player ctrl = host.getController();
-        final String logic = sa.getParam("AILogic");
+        String logic = sa.getParamOrDefault("AILogic", "");
+        if (logic.contains("NotSelf")) {
+            CardCollection opt = (CardCollection) options;
+            if (opt.contains(host)) {
+                opt.remove(host);
+            }
+            options = opt;
+            logic = logic.replace("NotSelf", "");
+        }
         Card choice = null;
-        if (logic == null) {
+        if (logic.equals("")) {
             // Base Logic is choose "best"
             choice = ComputerUtilCard.getBestAI(options);
         } else if ("WorstCard".equals(logic)) {
@@ -294,6 +302,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             choice = ComputerUtilCard.getBestCreatureToAttackNextTurnAI(ai, options);
         } else {
             choice = ComputerUtilCard.getBestAI(options);
+            System.err.println("Bad ChooseCard AILogic value for " + host.getName() + " - reverting to default");
         }
         return choice;
     }
