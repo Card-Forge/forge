@@ -5,7 +5,7 @@ PT:2/4
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | SVarCompare$ GE1 | Execute$ TrigDig | TriggerDescription$ At the beginning of your end step, if you've cast a noncreature spell this turn, reveal the top five cards of your library. For each card type among noncreature spells you've cast this turn, you may put a card of that type from among the revealed cards into your hand. Put the rest on the bottom of your library in a random order.
 SVar:TrigDig:DB$ Dig | DigNum$ 5 | Reveal$ True | NoMove$ True | RememberRevealed$ True | SubAbility$ DBRepeatEach
 SVar:DBRepeatEach:DB$ RepeatEach | RepeatTypesFrom$ ThisTurnCast_Card.nonCreature+YouCtrl+sharesCardTypeWith Remembered | RepeatSubAbility$ ChooseCard | SubAbility$ DBChangeZoneAll
-SVar:ChooseCard:DB$ ChooseCard | Choices$ Card.IsRemembered+ChosenType | ImprintChosen$ True | ForgetChosen$ True | ChoiceTitle$ You may choose a card of this type to put into your hand | ChoiceTitleAppend$ ChosenType | ChoiceZone$ Library | AILogic$ BestCard
+SVar:ChooseCard:DB$ ChooseCard | Choices$ Card.IsRemembered+ChosenType | ImprintChosen$ True | ForgetChosen$ True | ChoiceTitle$ You may choose a card of this type to put into your hand | ChoiceTitleAppend$ ChosenType | ChoiceZone$ Library
 SVar:DBChangeZoneAll:DB$ ChangeZone | Defined$ Imprinted | Origin$ Library | Destination$ Hand | SubAbility$ DBRestRandomOrder
 SVar:DBRestRandomOrder:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | RandomOrder$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True | ClearChosenCard$ True

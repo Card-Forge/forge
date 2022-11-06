@@ -8,7 +8,7 @@ A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ b_
 A:AB$ Sacrifice | Cost$ SubCounter<4/LOYALTY> | Planeswalker$ True | Amount$ 2 | SacValid$ Creature | Defined$ Player | SpellDescription$ Each player sacrifices two creatures.
 A:AB$ RepeatEach | Cost$ SubCounter<9/LOYALTY> | Planeswalker$ True | Ultimate$ True | RepeatPlayers$ Opponent | RepeatSubAbility$ ChoosePerms | SubAbility$ SacAllOthers | SpellDescription$ Each opponent chooses a permanent they control of each permanent type and sacrifices the rest.
 SVar:ChoosePerms:DB$ RepeatEach | RepeatTypesFrom$ Permanent.RememberedPlayerCtrl | ChooseOrder$ RememberedPlayer | RepeatSubAbility$ ChooseCard
-SVar:ChooseCard:DB$ ChooseCard | Defined$ RememberedPlayer | Choices$ Card.ChosenType+RememberedPlayerCtrl | ChoiceTitle$ Choose a card of this type to keep | ChoiceTitleAppend$ ChosenType | AILogic$ BestCard | RememberChosen$ True | Mandatory$ True
+SVar:ChooseCard:DB$ ChooseCard | Defined$ RememberedPlayer | Choices$ Card.ChosenType+RememberedPlayerCtrl | ChoiceTitle$ Choose a card of this type to keep | ChoiceTitleAppend$ ChosenType | RememberChosen$ True | Mandatory$ True
 SVar:SacAllOthers:DB$ SacrificeAll | ValidCards$ Permanent.IsNotRemembered+OppCtrl | SubAbility$ DBCleanup | StackDescription$ None
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 DeckHas:Ability$Token|Sacrifice & Type$Zombie
