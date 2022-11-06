@@ -5029,11 +5029,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     private boolean switchPhaseState(final boolean fromUntapStep) {
-        if (phasedOut && hasKeyword("CARDNAME can't phase in.")) {
+        if (phasedOut && StaticAbilityCantPhaseIn.cantPhaseIn(this)) {
             return false;
         }
 
-        if (!phasedOut && hasKeyword("CARDNAME can't phase out.")) {
+        if (!phasedOut && StaticAbilityCantPhaseOut.cantPhaseOut(this)) {
             return false;
         }
 
