@@ -86,5 +86,8 @@ public class PhasesEffect extends SpellAbilityEffect {
                 }
             }
         }
+        if (sa.hasParam("RememberValids")) {
+            source.addRemembered(tgtCards);
+        }
     }
 }
