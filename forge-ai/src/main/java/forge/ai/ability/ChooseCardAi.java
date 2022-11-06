@@ -302,6 +302,7 @@ public class ChooseCardAi extends SpellAbilityAi {
             choice = ComputerUtilCard.getBestCreatureToAttackNextTurnAI(ai, options);
         } else {
             choice = ComputerUtilCard.getBestAI(options);
+            System.err.println("Bad ChooseCard AILogic value for " + host.getName() + " - reverting to default");
         }
         return choice;
     }
