@@ -3,7 +3,6 @@ ManaCost:4 B B
 Types:Creature Phyrexian Human
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, search your library for up to three artifact cards, put them into your graveyard, then shuffle.
-SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Artifact.YouOwn | ChangeNum$ 3 | StackDescription$ Search your library for up to three creature cards, put them into your graveyard, then shuffle.
-DeckHas:Ability$Graveyard
-DeckNeeds:Type$Artifact
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Artifact.YouOwn | ChangeNum$ 3
+DeckNeeds:Type$Artifact & Ability$Graveyard
 Oracle:When Disciples of Gix enters the battlefield, search your library for up to three artifact cards, put them into your graveyard, then shuffle.
