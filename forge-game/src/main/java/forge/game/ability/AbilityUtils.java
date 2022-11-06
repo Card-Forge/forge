@@ -2087,6 +2087,24 @@ public class AbilityUtils {
             return doXMath(castSA == null ? 0 : castSA.getPayingColors().countColors(), expr, c, ctb);
         }
 
+        if (sq[0].startsWith("Each2SpentToCast")) {
+            SpellAbility castSA = c.getCastSA();
+            final List<Mana> paidMana = castSA.getPayingMana();
+            final String type = sq[0].split("_")[1];
+            int count = 0;
+            int t = 0;
+            for (Mana m : paidMana) {
+                if (m.toString().equals(type)) {
+                    t++;
+                    if (t == 2) {
+                        count++;
+                        t = 0;
+                    }
+                }
+            }
+            return doXMath(count, expr, c, ctb);
+        }
+
         // Count$wasCastFrom<Zone>.<true>.<false>
         if (sq[0].startsWith("wasCastFrom")) {
             boolean your = sq[0].contains("Your");
