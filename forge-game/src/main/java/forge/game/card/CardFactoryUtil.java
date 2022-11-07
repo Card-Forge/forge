@@ -3189,6 +3189,33 @@ public class CardFactoryUtil {
             sa.setIntrinsic(intrinsic);
             sa.setAlternativeCost(AlternativeCost.Outlast);
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Prototype")) {
+            final String[] k = keyword.split(":");
+            if (k.length < 4) {
+                System.err.println("Malformed Prototype entry! - Card: " + card.toString());
+                return;
+            }
+
+            final Cost protoCost = new Cost(k[1], false);
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(protoCost);
+            newSA.putParam("SetManaCost", k[1]);
+            newSA.putParam("SetColorByManaCost", "True");
+            newSA.putParam("SetPower", k[2]);
+            newSA.putParam("SetToughness", k[3]);
+            newSA.putParam("PrecostDesc", "Prototype");
+            newSA.putParam("Prototype", "True");
+            newSA.putParam("CostDesc", ManaCostParser.parse(k[1]));
+
+            // makes new SpellDescription
+            final StringBuilder sb = new StringBuilder();
+            sb.append(newSA.getCostDescription()).append("[").append(k[2]).append("/").append(k[3]).append("] ");
+            sb.append("(").append(inst.getReminderText()).append(")");
+            newSA.setDescription(sb.toString());
+
+            newSA.setAlternativeCost(AlternativeCost.Prototype);
+
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Prowl")) {
             final String[] k = keyword.split(":");
             final Cost prowlCost = new Cost(k[1], false);

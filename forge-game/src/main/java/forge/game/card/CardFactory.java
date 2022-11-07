@@ -24,6 +24,7 @@ import forge.ImageKeys;
 import forge.StaticData;
 import forge.card.*;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostParser;
 import forge.game.CardTraitBase;
 import forge.game.Game;
 import forge.game.ability.AbilityFactory;
@@ -688,6 +689,14 @@ public class CardFactory {
             colors = ColorSet.fromNames(sa.getParam("SetColor").split(","));
         }
 
+        if (sa.hasParam("SetColorByManaCost")) {
+            if (sa.hasParam("SetManaCost")) {
+                colors = ColorSet.fromManaCost(new ManaCost(new ManaCostParser(sa.getParam("SetManaCost"))));
+            } else {
+                colors = ColorSet.fromManaCost(host.getManaCost());
+            }
+        }
+
         // TODO handle Volrath's Shapeshifter
 
         if (in.isFaceDown()) {
@@ -736,7 +745,7 @@ public class CardFactory {
                 state.addColor(colors.getColor());
             }
 
-            if (sa.hasParam("SetColor")) {
+            if (sa.hasParam("SetColor") || sa.hasParam("SetColorByManaCost")) {
                 state.setColor(colors.getColor());
             }
 
@@ -775,6 +784,10 @@ public class CardFactory {
             // Planning a Vizier of Many Faces rework; always might come in handy
             if (sa.hasParam("RemoveCost")) {
                 state.setManaCost(ManaCost.NO_COST);
+            }
+
+            if (sa.hasParam("SetManaCost")) {
+                state.setManaCost(new ManaCost(new ManaCostParser(sa.getParam("SetManaCost"))));
             }
 
             // SVars to add to clone
@@ -900,7 +913,8 @@ public class CardFactory {
             if (sa.hasParam("SetCreatureTypes")) {
                 state.removeIntrinsicKeyword("Changeling");
             }
-            if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")) {
+            if (sa.hasParam("SetColor") || sa.hasParam("Embalm") || sa.hasParam("Eternalize")
+                    || sa.hasParam("SetColorByManaCost")) {
                 state.removeIntrinsicKeyword("Devoid");
             }
         }
