@@ -295,11 +295,20 @@ ScryfallCode=BRO
 285 L Mountain @Victor Harmatiuk
 286 L Forest @Jonas De Ro
 287 L Forest @Piotr Dura
+
+[jumpstart]
 288 R Rescue Retriever @Jesper Ejsing
 289 R Geology Enthusiast @Fajareka Setiawan
 290 R Terror Ballista @Leon Tukker
 291 R Artificer's Dragon @Leon Tukker
 292 R Woodcaller Automaton @Ryan Pancoast
+373 R Rescue Retriever @Jesper Ejsing
+374 R Geology Enthusiast @Fajareka Setiawan
+375 R Terror Ballista @Leon Tukker
+376 R Artificer's Dragon @Leon Tukker
+377 R Woodcaller Automaton @Ryan Pancoast
+
+[borderless]
 293 M Teferi, Temporal Pilgrim @Cosmin Podar
 294 M Saheeli, Filigree Master @Cosmin Podar
 295 R Mishra, Tamer of Mak Fawa @Cosmin Podar
@@ -308,6 +317,8 @@ ScryfallCode=BRO
 298 R Brushland @Rob Alexander
 299 R Llanowar Wastes @Rob Alexander
 300 R Underground River @Rob Alexander
+
+[extended art]
 301 M In the Trenches @Daarken
 302 R Kayla's Command @Dominik Mayer
 303 R Kayla's Reconstruction @Nicholas Elias
@@ -380,15 +391,16 @@ ScryfallCode=BRO
 370 R Fortified Beachhead @Christian Dimitrov
 371 R Hall of Tagsin @Christian Dimitrov
 372 R Mishra's Foundry @Leon Tukker
-373 R Rescue Retriever @Jesper Ejsing
-374 R Geology Enthusiast @Fajareka Setiawan
-375 R Terror Ballista @Leon Tukker
-376 R Artificer's Dragon @Leon Tukker
-377 R Woodcaller Automaton @Ryan Pancoast
+
+[buy a box]
 378 R Mishra's Foundry @Leon Tukker
+
+[promo]
 379 R Queen Kayla bin-Kroog @Howard Lyon
 380 U Lay Down Arms @Liiga Smilshkalne
 381 U Flow of Knowledge @Tuan Duong Chu
 382 U Corrupt @Julie Dillon
 383 U Sardian Cliffstomper @Joseph Weston
 384 U Blanchwood Armor @Manuel Castañón
+
+[tokens]

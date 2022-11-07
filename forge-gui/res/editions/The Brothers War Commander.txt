@@ -217,3 +217,5 @@ ScryfallCode=BRC
 209 R Temple of Silence @Adam Paquette
 210 C Terramorphic Expanse @Dan Scott
 211 C Vault of Whispers @Alexander Forssberg
+
+[tokens]

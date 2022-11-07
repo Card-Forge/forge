@@ -107,7 +107,7 @@ ScryfallCode=BRR
 99 M Mystic Forge @Titus Lunter
 100 U Ornithopter @Franz Vohwinkel
 101 M Perilous Vault @David Astruga
-102 R Phyrexian Processor @Dave Kendall
+102 M Phyrexian Processor @Dave Kendall
 103 R Phyrexian Revoker @Yeong-Hao Han
 104 M Platinum Angel @Ovidio Cartagena
 105 R Precursor Golem @Lars Grant-West
