@@ -851,9 +851,6 @@ public class GameAction {
     }
     public final Card moveToStack(final Card c, SpellAbility cause, Map<AbilityKey, Object> params) {
         Card result = moveTo(game.getStackZone(), c, cause, params);
-        if (cause.hasParam("Prototype")) {
-            result.addCloneState(CardFactory.getCloneStates(c, c, cause), game.getNextTimestamp());
-        }
         if (cause != null && cause.isSpell() && result.equals(cause.getHostCard())) {
             result.setSplitStateToPlayAbility(cause);
 
