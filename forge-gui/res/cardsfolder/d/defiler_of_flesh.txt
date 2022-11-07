@@ -1,0 +1,10 @@
+Name:Defiler of Flesh
+ManaCost:2 B B
+Types:Creature Phyrexian Horror
+PT:4/4
+K:Menace
+S:Mode$ OptionalCost | ValidCard$ Permanent.Black | ValidSA$ Spell | Activator$ You | Cost$ PayLife<2> | ReduceColor$ B | Description$ As an additional cost to cast black permanent spells, you may pay 2 life. Those spells cost {B} less to cast if you paid life this way. This effect reduces only the amount of black mana you pay.
+T:Mode$ SpellCast | ValidCard$ Permanent.Black | ValidActivatingPlayer$ You | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a black permanent spell, target creature you control gets +1/+1 and gains menace until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 1 | NumDef$ 1 | KW$ Menace
+SVar:BuffedBy:Permanent.Black
+Oracle:Menace\nAs an additional cost to cast black permanent spells, you may pay 2 life. Those spells cost {B} less to cast if you paid life this way. This effect reduces only the amount of black mana you pay.\nWhenever you cast a black permanent spell, target creature you control gets +1/+1 and gains menace until end of turn.
