@@ -404,3 +404,14 @@ ScryfallCode=BRO
 384 U Blanchwood Armor @Manuel Castañón
 
 [tokens]
+c_0_0_a_construct_total_artifacts
+c_1_1_a_soldier
+c_1_1_a_soldier
+c_1_1_a_thopter_flying
+c_2_2_a_construct
+c_3_3_a_zombie
+c_a_powerstone
+c_x_x_a_golem
+g_1_1_forest_dryad_land
+g_2_2_bear
+u_2_2_spirit_vigilance_drawcounter
