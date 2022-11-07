@@ -1,0 +1,10 @@
+Name:Combat Thresher
+ManaCost:7
+Types:Artifact Creature Construct
+PT:3/3
+K:Prototype:2 W:1:1
+K:Double Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw
+DeckHints:Color$White
+Oracle:Prototype {2}{W} — 1/1 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nDouble strike\nWhen Combat Thresher enters the battlefield, draw a card.
