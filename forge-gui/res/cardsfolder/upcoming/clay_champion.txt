@@ -2,11 +2,12 @@ Name:Clay Champion
 ManaCost:X 4
 Types:Artifact Creature Construct
 PT:2/2
-K:etbCounter:P1P1:GG:no condition:CARDNAME enters the battlefield with three +1/+1 counters on it for each {G}{G} spent to cast it.
+K:etbCounter:P1P1:GGx3:no condition:CARDNAME enters the battlefield with three +1/+1 counters on it for each {G}{G} spent to cast it.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, choose up to two other target creatures you control. For each {W}{W} spent to cast CARDNAME, put a +1/+1 counter on each of them.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.Other+YouCtrl | TgtPrompt$ Choose up to two other target creatures you control | TargetMin$ 0 | TargetMax$ 2 | CounterType$ P1P1 | CounterNum$ WW
-SVar:GG:Count$Each2SpentToCast_G/Times.3
-SVar:WW:Count$Each2SpentToCast_W
+SVar:GG:Count$EachSpentToCast.G/HalfDown
+SVar:GGx3:SVar$GG/Times.3
+SVar:WW:Count$EachSpentToCast.W/HalfDown
 SVar:X:Count$xPaid
 DeckHas:Ability$Counters
 DeckHints:Color$Green|White
