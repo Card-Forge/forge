@@ -1,0 +1,13 @@
+Name:Gurgling Anointer
+ManaCost:2 B
+Types:Creature Phyrexian Horror
+PT:1/3
+K:Flying
+SVar:SacMe:3
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw your second card each turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard| ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME dies, return another target creature card with mana value less than or equal to CARDNAME's power from your graveyard to the battlefield.
+SVar:TrigReturn:DB$ ChangeZone | ValidTgt$ Creature.YouOwn+cmcLEX+Other | TgtPrompt$ Choose another target creature card with mana value less than or equal to CARDNAME's power | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:TriggeredCard$CardPower
+DeckHas:Ability$Counters|Graveyard 
+Oracle:Flying\nWhenever you draw your second card each turn, put a +1/+1 counter on Gurgling Anointer.\nWhen Gurgling Anointer dies, return another target creature card with mana value less than or equal to Gurgling Anointer's power from your graveyard to the battlefield.

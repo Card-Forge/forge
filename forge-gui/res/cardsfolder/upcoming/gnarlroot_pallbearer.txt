@@ -1,0 +1,10 @@
+Name:Gnarlroot Pallbearer
+ManaCost:4 G G
+Types:Creature Treefolk Druid
+PT:5/5
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ X | NumDef$ X
+SVar:X:Count$TypeInYourYard.Creature
+DeckHints:Ability$Graveyard|Mill|Dredge
+Oracle:Trample\nWhen Gnarlroot Pallbearer enters the battlefield, target creature gets +X/+X until end of turn, where X is the number of creature cards in your graveyard.
