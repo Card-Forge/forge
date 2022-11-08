@@ -3212,8 +3212,6 @@ public class CardFactoryUtil {
             sb.append("(").append(inst.getReminderText()).append(")");
             newSA.setDescription(sb.toString());
 
-            newSA.setAlternativeCost(AlternativeCost.Prototype);
-
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Prowl")) {
