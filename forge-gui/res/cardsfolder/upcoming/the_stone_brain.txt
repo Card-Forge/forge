@@ -3,10 +3,12 @@ ManaCost:2
 Types:Legendary Artifact
 A:AB$ NameCard | Cost$ 2 T Exile<1/CARDNAME> | Defined$ You | SubAbility$ TargetOpp | SorcerySpeed$ True | SpellDescription$ Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way. Activate only as a sorcery.
 SVar:TargetOpp:DB$ ChoosePlayer | ValidTgts$ Player.Opponent | Choices$ ThisTargetedPlayer | Defined$ You | SubAbility$ ExileYard
-SVar:ExileYard:DB$ ChangeZone | ChangeType$ Card.NamedCard | Origin$ Graveyard | DefinedPlayer$ Targeted  | Chooser$ You | Destination$ Exile | ChangeNum$ 4 | Hidden$ True | SubAbility$ ExileHand | StackDescription$ Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles their library.
-SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted  | ChangeType$ Card.NamedCard | ChangeNum$ 4 | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None | RememberChanged$ True
-SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ Targeted  | ChangeType$ Card.NamedCard | ChangeNum$ 4 | Chooser$ You | Shuffle$ True | StackDescription$ None | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ RememberedSize | Defined$ Targeted | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RememberedSize:Count$RememberedSize
+SVar:ExileYard:DB$ ChangeZone | ChangeType$ Card.NamedCard | Origin$ Graveyard | DefinedPlayer$ Targeted  | Chooser$ You | Destination$ Exile | ChangeNum$ Y | Hidden$ True | RememberChanged$ True | SubAbility$ ExileHand | StackDescription$ Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles their library.
+SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted  | ChangeType$ Card.NamedCard | ChangeNum$ Y | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None | RememberChanged$ True | Imprint$ True
+SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ Targeted  | ChangeType$ Card.NamedCard | ChangeNum$ Y | Chooser$ You | Shuffle$ True | StackDescription$ None | RememberChanged$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ Z | Defined$ Targeted | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:Remembered$Amount
+SVar:Y:SVar$X/NMinus.4
+SVar:Z:Imprinted$Amount
 Oracle:{2},{T}, Exile The Stone Brain: Choose a card name. Search target opponent's graveyard, hand, and library for up to four cards with that name and exile them. That player shuffles, then draws a card for each card exiled from their hand this way. Activate only as a sorcery.
