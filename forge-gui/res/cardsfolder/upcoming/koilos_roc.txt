@@ -8,4 +8,4 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
 DeckHas:Ability$Token & Type$Artifact
 DeckHints:Type$Artifact
-Oracle:Flash\nFlash\nWhen Koilos Roc enters the battlefield, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+Oracle:Flash\nFlying\nWhen Koilos Roc enters the battlefield, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
