@@ -1,10 +1,10 @@
-Name:Horned Stoneseeker
-ManaCost:1 R
-Types:Creature Lizard
-PT:2/2
-K:Menace
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can’t be spent to cast a nonartifact spell.")
-SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME leaves the battlefield, sacrifice a Powerstone.
-SVar:TrigSac:DB$ Sacrifice | SacValid$ Powerstone
-Oracle:Menace\nWhen Horned Stoneseeker enters the battlefield, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")\nWhen Horned Stoneseeker leaves the battlefield, sacrifice a Powerstone.
+Name:Hormagaunt Horde
+ManaCost:X G
+Types:Creature Tyranid
+PT:1/1
+K:Ravenous
+T:Mode$ ChangesZone | ValidCard$ Land.YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ Endless Swarm — Whenever a land enters the battlefield under your control, you may pay {2}{G}. If you do, return CARDNAME from your graveyard to your hand.
+SVar:TrigReturn:AB$ ChangeZone | ValidCard$ Card.Self | Cost$ 2 G | Origin$ Graveyard | Destination$ Hand
+SVar:X:Count$xPaid
+DeckHas:Ability$Counters|Graveyard
+Oracle:Ravenous (This creature enters the battlefield with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nEndless Swarm — Whenever a land enters the battlefield under your control, you may pay {2}{G}. If you do, return Hormagaunt Horde from your graveyard to your hand.
