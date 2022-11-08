@@ -3,6 +3,6 @@ ManaCost:1 R
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | ValidTgts$ Creature
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Card.EnchantedBy+YouCtrl |Description$ As long as you control enchanted creature, it gets +2/+2. Otherwise, it can't block.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | IsPresent$ Card.EnchantedBy+YouCtrl | Description$ As long as you control enchanted creature, it gets +2/+2. Otherwise, it can't block.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't block. | IsPresent$ Card.EnchantedBy+YouDontCtrl | Secondary$ True | Description$ As long as you control enchanted creature, it gets +2/+2. Otherwise, it can't block.
 Oracle:Enchant creature\nAs long as you control enchanted creature, it gets +2/+2. Otherwise, it can't block.
