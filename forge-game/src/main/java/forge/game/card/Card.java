@@ -222,6 +222,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private long transformedTimestamp = 0;
     private long convertedTimestamp = 0;
     private long mutatedTimestamp = -1;
+    private long prototypeTimestamp = -1;
     private int timesMutated = 0;
     private boolean tributed = false;
     private boolean embalmed = false;
@@ -988,7 +989,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean isCloned() {
-        return !clonedStates.isEmpty() && clonedStates.lastEntry().getKey() != mutatedTimestamp;
+        return !clonedStates.isEmpty() && clonedStates.lastEntry().getKey() != mutatedTimestamp
+                && clonedStates.lastEntry().getKey() != prototypeTimestamp;
     }
 
     public final CardCollectionView getDevouredCards() {
@@ -2284,7 +2286,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
-                        || keyword.startsWith("Class") || keyword.startsWith("Blitz")
+                        || keyword.startsWith("Class") || keyword.startsWith("Blitz") || keyword.startsWith("Prototype")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")) {
                     // keyword parsing takes care of adding a proper description
                 } else if(keyword.startsWith("Read ahead")) {
@@ -6493,6 +6495,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         if (sa.isBestow()) {
             animateBestow();
+        }
+        if (sa.hasParam("Prototype")) {
+            Long next = game.getNextTimestamp();
+            addCloneState(CardFactory.getCloneStates(this, this, sa), next);
+            prototypeTimestamp = next;
         }
         CardStateName stateName = sa.getCardStateName();
         if (stateName != null && hasState(stateName) && this.getCurrentStateName() != stateName) {
