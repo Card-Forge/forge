@@ -1,0 +1,6 @@
+Name:Legions to Ashes
+ManaCost:1 W B
+Types:Sorcery
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | SubAbility$ DBExileAll | SpellDescription$ Exile target nonland permanent an opponent controls and all tokens that player controls with the same name as that permanent.
+SVar:DBExileAll:DB$ ChangeZoneAll | ChangeType$ TargetedCard.Self,Card.Token+sharesNameWith Targeted | Origin$ Battlefield | Destination$ Exile
+Oracle:Exile target nonland permanent an opponent controls and all tokens that player controls with the same name as that permanent.
