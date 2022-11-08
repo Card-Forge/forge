@@ -1,8 +1,8 @@
 Name:Dreams of Steel and Oil
 ManaCost:B
 Types:Sorcery
-A:SP$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | RememberRevealed$ True | SubAbility$ DBChooseCard | SpellDescription$ Target opponent reveals their hand. You choose an artifact or creature card from it, then choose an artifact or creature card from their graveyard. Exile the chosen cards.
-SVar:DBChooseCard:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Artifact.IsRemembered,Creature.IsRemembered | ChoiceTitle$ Choose an artifact or creature card | Mandatory$ True | SubAbility$ DBChooseFromGraveyard
+A:SP$ RevealHand | ValidTgts$ Opponent | TgtPrompt$ Select target opponent |ImprintRevealed$ True | RememberTargets$ True | SubAbility$ DBChooseCard | SpellDescription$ Target opponent reveals their hand. You choose an artifact or creature card from it, then choose an artifact or creature card from their graveyard. Exile the chosen cards.
+SVar:DBChooseCard:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Artifact.IsImprinted,Creature.IsImprinted | ChoiceTitle$ Choose an artifact or creature card | Mandatory$ True | SubAbility$ DBChooseFromGraveyard
 SVar:DBChooseFromGraveyard:DB$ ChooseCard | ChoiceZone$ Graveyard | Choices$ Artifact.RememberedPlayerOwn,Creature.RememberedPlayerOwn | ChoiceTitle$ Choose an artifact or creature card | Mandatory$ True | SubAbility$ DBExileBoth
 SVar:DBExileBoth:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Graveyard | Origin$ Hand | Destination$ Exile | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
