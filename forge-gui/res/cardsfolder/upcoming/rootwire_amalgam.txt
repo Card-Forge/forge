@@ -3,8 +3,7 @@ ManaCost:5
 Types:Artifact Creature Golem
 PT:5/5
 K:Prototype:1 G:2:3
-A:AB$ Token | Cost$ 3 G G Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ c_x_x_a_golem | TokenPower$ X | TokenToughness$ X | PumpDuration$ EOT | TokenOwner$ You | PumpKeywords$ Haste | SorcerySpeed$ True | SubAbility$ StorePower | SpellDescription$ Create an X/X colorless Golem artifact creature token, where X is three times CARDNAME's power. It gains haste until end of turn. Activate only as a sorcery.
-SVar:StorePower:DB$ StoreSVar | SVar$ X | Type$ Number | Expression$ 1
+A:AB$ Token | Cost$ 3 G G Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ c_x_x_a_golem | TokenPower$ X | TokenToughness$ X | PumpDuration$ EOT | TokenOwner$ You | PumpKeywords$ Haste | SorcerySpeed$ True | SpellDescription$ Create an X/X colorless Golem artifact creature token, where X is three times CARDNAME's power. It gains haste until end of turn. Activate only as a sorcery.
 SVar:X:Sacrificed$CardPower/Times.3
 DeckHas:Ability$Token|Sacrifice
 DeckHints:Color$Green
