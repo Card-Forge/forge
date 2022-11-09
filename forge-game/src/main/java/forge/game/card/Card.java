@@ -2256,15 +2256,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("Ward")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
+                    final boolean onlyMana = cost.isOnlyManaCost();
+                    final boolean complex = k[1].contains("X") || k[1].contains("Sac<");
+                    final String extra = k.length > 2 ? ", " + k[2] + "." : "";
 
-                    StringBuilder sbCost = new StringBuilder(k[0]);
-                    if (!cost.isOnlyManaCost()) {
-                        sbCost.append("—");
-                    } else {
-                        sbCost.append(" ");
-                    }
-                    sbCost.append(cost.toSimpleString());
-                    sbLong.append(sbCost).append(" (").append(inst.getReminderText()).append(")");
+                    sbLong.append(k[0]).append(onlyMana ? " " : "—").append(cost.toSimpleString());
+                    sbLong.append(onlyMana? "" : ".").append(extra);
+                    sbLong.append(!complex ? " (" + (inst.getReminderText()) + ")" : "");
                     sbLong.append("\r\n");
                 } else if (keyword.endsWith(" offering")) {
                     String offeringType = keyword.split(" ")[0];
