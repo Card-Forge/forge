@@ -3,8 +3,8 @@ ManaCost:7
 Types:Artifact Creature Wurm
 PT:4/6
 K:Prototype:2 G G:2:5
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME Crusher attacks, target attacking creature gets +X/+0 until end of turn, where X is CARDNAME's power.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature you control | NumAtt$ X
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, target attacking creature gets +X/+0 until end of turn, where X is CARDNAME's power.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ X
 SVar:HasAttackEffect:TRUE
 SVar:X:Count$CardPower
 DeckHints:Color$Green

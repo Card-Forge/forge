@@ -5,8 +5,8 @@ PT:4/4
 K:Trample
 K:Haste
 K:Prototype:3 R R:2:2
-T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+wasCast | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, create two tokens that are copies of it.
-SVar:TrigToken:DB$ CopyPermanent | Defined$ TriggeredCard  | NumCopies$ 2
+T:Mode$ ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self+wasCastByYou | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, create two tokens that are copies of it.
+SVar:TrigToken:DB$ CopyPermanent | Defined$ TriggeredCard | NumCopies$ 2
 DeckHas:Ability$Token
 DeckHints:Color$Red
 Oracle:Prototype {3}{R}{R} — 2/2 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nTrample, haste\nWhen Skitterbeam Battalion enters the battlefield, if you cast it, create two tokens that are copies of it.
