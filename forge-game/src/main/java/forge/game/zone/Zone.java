@@ -215,7 +215,9 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
             return false;
         }
         if (cardsAddedThisTurn.get(origin).contains(card)) {
-            long ts = getCardsAddedThisTurn(origin).get(getCardsAddedThisTurn(origin).lastIndexOf(card)).getTimestamp();
+            List<Card> cardsAddedThisTurnOrigin = getCardsAddedThisTurn(origin);
+            int cardIndexOrigin = cardsAddedThisTurnOrigin.lastIndexOf(card);
+            long cardTimestampOrigin = cardsAddedThisTurnOrigin.get(cardIndexOrigin).getTimestamp();
             // need to check other zones if card didn't change again
             for (ZoneType z : cardsAddedThisTurn.keySet()) {
                 if (z == origin) {
@@ -223,9 +225,11 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
                 }
 
                 if (cardsAddedThisTurn.get(z).contains(card)) {
-                    long tsAlt = getCardsAddedThisTurn(z).get(getCardsAddedThisTurn(z).lastIndexOf(card)).getTimestamp();
+                    List<Card> cardsAddedThisTurnNonOrigin = getCardsAddedThisTurn(z);
+                    int cardIndex = cardsAddedThisTurnNonOrigin.lastIndexOf(card);
+                    long cardTimestamp = cardsAddedThisTurnNonOrigin.get(cardIndex).getTimestamp();
                     // the most recent version of this card did not come from the requested zone
-                    if (tsAlt > ts) {
+                    if (cardTimestamp > cardTimestampOrigin) {
                         return false;
                     }
                 }
