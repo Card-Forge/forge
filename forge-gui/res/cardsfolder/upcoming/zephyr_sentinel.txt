@@ -5,7 +5,7 @@ PT:2/1
 K:Flash
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return up to one other target creature you control to its owner's hand. If it was a Soldier, put a +1/+1 counter on CARDNAME.
-SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | TgtPrompt$ Choose target creature you control to return to your hand | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | RememberChanged$ True | SubAbility$ DBCounter
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | TgtPrompt$ Choose target creature you control to return to your hand | ValidTgts$ Creature.YouCtrl | TargetMin$ 0 | TargetMax$ 1 | RememberLKI$ True | SubAbility$ DBCounter
 SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | ConditionDefined$ Remembered | ConditionPresent$ Soldier | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters
