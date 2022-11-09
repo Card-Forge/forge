@@ -1,8 +1,9 @@
 Name:Wasteful Harvest
 ManaCost:2 G
 Types:Instant
-A:SP$ Mill | NumCards$ 5 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill five cards, then return a creature card milled this way to your hand.
-SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | Mandatory$ True | ChangeType$ Permanent.IsRemembered | ChangeTypeDesc$ permanent cards milled this way | ChangeNum$ 1 | SelectPrompt$ Choose a creature card milled this way | SubAbility$ DBCleanup
+A:SP$ Mill | NumCards$ 5 | RememberMilled$ True | SubAbility$ DBChangeZone | SpellDescription$ Mill five cards. You may put a permanent card from among the cards milled this way into your hand.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Hidden$ True | ChangeType$ Permanent.IsRemembered | ChangeNum$ 1 | SelectPrompt$ Choose a permanent card milled this way | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-DeckHas:Ability$Mill|Graveyard
+DeckHas:Ability$Mill
+DeckHints:Ability$Graveyard
 Oracle:Mill five cards. You may put a permanent card from among the cards milled this way into your hand. (To mill a card, put the top card of your library into your graveyard.)
