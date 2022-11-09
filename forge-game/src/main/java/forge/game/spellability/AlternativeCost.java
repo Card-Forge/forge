@@ -17,7 +17,6 @@ public enum AlternativeCost {
     Mutate,
     Offering,
     Outlast, // ActivatedAbility
-    Prototype,
     Prowl,
     Spectacle,
     Surge;

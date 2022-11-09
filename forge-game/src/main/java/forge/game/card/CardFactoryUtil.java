@@ -3202,17 +3202,10 @@ public class CardFactoryUtil {
             newSA.putParam("SetColorByManaCost", "True");
             newSA.putParam("SetPower", k[2]);
             newSA.putParam("SetToughness", k[3]);
-            newSA.putParam("PrecostDesc", "Prototype");
             newSA.putParam("Prototype", "True");
-            newSA.putParam("CostDesc", ManaCostParser.parse(k[1]));
 
-            // makes new SpellDescription
-            final StringBuilder sb = new StringBuilder();
-            sb.append(newSA.getCostDescription()).append("[").append(k[2]).append("/").append(k[3]).append("] ");
-            sb.append("(").append(inst.getReminderText()).append(")");
-            newSA.setDescription(sb.toString());
-
-            newSA.setAlternativeCost(AlternativeCost.Prototype);
+            // only makes description for prompt
+            newSA.setDescription(k[0] + " " + ManaCostParser.parse(k[1]) + " [" + k[2] + "/" + k[3] + "]");
 
             newSA.setIntrinsic(intrinsic);
             inst.addSpellAbility(newSA);
