@@ -1,7 +1,9 @@
 Name:Thran Power Suit
 ManaCost:2
 Types:Artifact Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ X | AddPower$ X | AddKeyword$ Ward:2 | Description$ Equipped creature gets +1/+1 for each Aura and Equipment attached to it and has Ward {2}. (Whenever equipped creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddToughness$ X | AddPower$ X | AddKeyword$ Ward:2 | AddSVar$ EquipMe & EnchantMe | Description$ Equipped creature gets +1/+1 for each Aura and Equipment attached to it and has Ward {2}. (Whenever equipped creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
+SVar:EquipMe:SVar:EquipMe:Multiple
+SVar:EnchantMe:SVar:EnchantMe:Multiple
 K:Equip:2
 SVar:X:Count$Valid Aura.AttachedTo Creature.EquippedBy/Plus.Y
 SVar:Y:Count$Valid Equipment.AttachedTo Creature.EquippedBy
