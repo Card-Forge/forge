@@ -3,10 +3,10 @@ ManaCost:3
 Types:Artifact Creature Assembly-Worker
 PT:1/3
 K:Reach
-DeckNeeds:Name$Mine Worker|Tower Worker
-A:AB$ Mana | Cost$ T | Produced$ C | Amount$ UrzaAmount | SpellDescription$ Add {C}. If you control an Urza's Mine and an Urza's Tower, add {C}{C} instead.
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ UrzaAmount | SpellDescription$ Add {C}. If you control creatures named Mine Worker and Power Plant Worker, add {C}{C}{C} instead.
 SVar:UrzaAmount:SVar$UrzaCheck/Plus.1
 SVar:UrzaCheck:SVar$X/Plus.Y/LimitMin.2
 SVar:X:Count$Valid Creature.YouCtrl+namedMine Worker/LimitMax.1
 SVar:Y:Count$Valid Creature.YouCtrl+namedPower Plant Worker/LimitMax.1
+DeckNeeds:Name$Mine Worker|Power Plant Worker
 Oracle:Reach\n{T}: Add {C}. If you control creatures named Mine Worker and Power Plant Worker, add {C}{C}{C} instead.

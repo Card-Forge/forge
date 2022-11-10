@@ -2,12 +2,12 @@ Name:Titania's Command
 ManaCost:4 G G
 Types:Sorcery
 A:SP$ Charm | Choices$ DBExileAll,DBSearch,DBToken,DBCounter | CharmNum$ 2
-SVar:DBExileAll:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | TgtPrompt$ Select target player | ChangeType$ Card | RememberedChanged$ True | SubAbility$ DBGainLife | SpellDescription$ Exile target player's graveyard. You gain 1 life for each card exiled this way.
+SVar:DBExileAll:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select target player | ChangeType$ Card | RememberedChanged$ True | SubAbility$ DBGainLife | SpellDescription$ Exile target player's graveyard. You gain 1 life for each card exiled this way.
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield| ChangeType$ Land | ChangeNum$ 2 | Tapped$ True | SpellDescription$ Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 2 | Tapped$ True | SpellDescription$ Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle.
 SVar:DBToken:DB$ Token | TokenScript$ g_2_2_bear | TokenAmount$ 2 | SpellDescription$ Create two 2/2 green Bear creature tokens.
 SVar:DBCounter:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 2 | SpellDescription$ Put two +1/+1 counters on each creature you control.
 SVar:X:Remembered$Amount
-DeckHas:Ability$Token|Counter|LifeGain Type$Bear
-Oracle:Choose two —\n• Exile target player’s graveyard. You gain 1 life for each card exiled this way.\n• Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle.\n• Create two 2/2 green Bear creature tokens.\n• Put two +1/+1 counters on each creature you control.
+DeckHas:Ability$Token|Counter|LifeGain & Type$Bear
+Oracle:Choose two —\n• Exile target player's graveyard. You gain 1 life for each card exiled this way.\n• Search your library for up to two land cards, put them onto the battlefield tapped, then shuffle.\n• Create two 2/2 green Bear creature tokens.\n• Put two +1/+1 counters on each creature you control.

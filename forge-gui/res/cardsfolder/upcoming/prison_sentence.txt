@@ -5,5 +5,5 @@ K:Enchant creature
 A:SP$ Attach | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ When CARDNAME enters the battlefield, scry 2.
 SVar:TrigScry:DB$ Scry | ScryNum$ 2
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't block and its activated abilities can't be activated.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted creature can't attack or block and its activated abilities can't be activated.
 Oracle:Enchant creature\nWhen Prison Sentence enters the battlefield, scry 2.\nEnchanted creature can't attack or block, and its activated abilities can't be activated.

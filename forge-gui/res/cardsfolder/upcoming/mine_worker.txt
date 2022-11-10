@@ -9,5 +9,5 @@ SVar:UrzaCheck:SVar$X/Plus.Y
 SVar:X:Count$Valid Creature.YouCtrl+namedTower Worker/LimitMax.1
 SVar:Y:Count$Valid Creature.YouCtrl+namedPower Plant Worker/LimitMax.1
 DeckHas:Ability$LifeGain
-DeckNeeds:Name$Mine Worker|Tower Worker
+DeckNeeds:Name$Power Plant Worker|Tower Worker
 Oracle:{T}: You gain 1 life. If you control creatures named Power Plant Worker and Tower Worker, you gain 3 life instead.
