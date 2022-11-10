@@ -17,13 +17,7 @@
  */
 package forge.game.spellability;
 
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -158,6 +152,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private EnumMap<AbilityKey, Object> triggeringObjects = AbilityKey.newMap();
 
     private EnumMap<AbilityKey, Object> replacingObjects = AbilityKey.newMap();
+
+    private final List<String> pipsToReduce = new ArrayList<>();
 
     private List<AbilitySub> chosenList = null;
     private CardCollection tappedForConvoke = new CardCollection();
@@ -716,6 +712,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         // Thus, to protect the original's set from changes, we make a copy right here.
         optionalCosts = EnumSet.copyOf(optionalCosts);
         optionalCosts.add(cost);
+        if (!cost.getPip().equals("")) {
+            pipsToReduce.add(cost.getPip());
+        }
     }
 
     public boolean isBuyBackAbility() {
@@ -883,7 +882,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     sb.append(payCosts.toString());
                     sb.append(" or ").append(altOnlyMana ? alternateCost.toString() :
                             StringUtils.uncapitalize(alternateCost.toString()));
-                    sb.append(isEquip() ? "." : "");
+                    sb.append(isEquip() && !altOnlyMana ? "." : "");
                 } else {
                     sb.append(payCosts.toString());
                 }
@@ -1482,6 +1481,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public final boolean isSpectacle() {
         return isAlternativeCost(AlternativeCost.Spectacle);
+    }
+
+    public List<String> getPipsToReduce() {
+        return pipsToReduce;
+    }
+    public final void clearPipsToReduce() {
+        pipsToReduce.clear();
     }
 
     public CardCollection getTappedForConvoke() {

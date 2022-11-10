@@ -402,6 +402,12 @@ public abstract class Trigger extends TriggerReplacementBase {
             if (found) {
                 return false;
             }
+        } else if ("Sacrificed".equals(condition)) {
+            final SpellAbility trigSA = (SpellAbility) runParams.get(AbilityKey.CastSA);
+            if (trigSA != null &&
+                    (trigSA.getPaidList("Sacrificed") == null || trigSA.getPaidList("Sacrificed").isEmpty())) {
+                return false;
+            }
         } else if ("AttackedPlayerWithMostLife".equals(condition)) {
             GameEntity attacked = (GameEntity) runParams.get(AbilityKey.Attacked);
             if (attacked == null) {

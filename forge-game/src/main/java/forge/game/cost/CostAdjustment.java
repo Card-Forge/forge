@@ -208,6 +208,12 @@ public class CostAdjustment {
         // need to reduce generic extra because of 2 hybrid mana
         cost.decreaseGenericMana(sumGeneric);
 
+        if (sa.isSpell() && !sa.getPipsToReduce().isEmpty()) {
+            for (String pip : sa.getPipsToReduce()) {
+                cost.decreaseShard(ManaCostShard.parseNonGeneric(pip), 1);
+            }
+        }
+
         if (sa.isSpell() && sa.isOffering()) { // cost reduction from offerings
             adjustCostByOffering(cost, sa);
         }

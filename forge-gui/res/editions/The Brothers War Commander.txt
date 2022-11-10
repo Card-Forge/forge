@@ -32,7 +32,7 @@ ScryfallCode=BRC
 24 M Rootpath Purifier @Justyna Gil
 25 M Titania, Nature's Force @Heonhwa Choe
 26 R The Archimandrite @Cristi Balanescu
-27 R Staff of Titania @Samuel Araya
+27 R Staff of Titania @Samuel Perin
 28 R Urza's Workshop @Alexander Forssberg
 29 L Plains @Raymond Bonilla
 30 L Plains @Jorge Jacinto
@@ -42,15 +42,20 @@ ScryfallCode=BRC
 34 L Swamp @Robin Olausson
 35 L Mountain @Bruce Brenneise
 36 L Mountain @Victor Harmatiuk
+37 L Forest
+38 L Forest
 39 M Mishra, Eminent One @Randy Vargas
 40 M Urza, Chief Artificer @Bartlomiej Gawel
 41 R Disciple of Caelus Nin @Steve Argyle
+42 M Tawnos, Solemn Survivor @Matt Stewart
 43 R Sardian Avenger @Joseph Weston
 44 M Rootpath Purifier @Justyna Gil
 45 M Titania, Nature's Force @Heonhwa Choe
 46 R The Archimandrite @Cristi Balanescu
+47 M Ashnod the Uncaring @Kieran Yanner
 48 M Mishra, Eminent One @Randy Vargas
 49 M Urza, Chief Artificer @Bartlomiej Gawel
+50 R Staff of Titania @Samuel Perin
 51 R Urza's Workshop @Alexander Forssberg
 52 R Sanwell, Avenger Ace @Josu Hernaiz
 53 R Scholar of New Horizons @Randy Vargas
@@ -212,3 +217,17 @@ ScryfallCode=BRC
 209 R Temple of Silence @Adam Paquette
 210 C Terramorphic Expanse @Dan Scott
 211 C Vault of Whispers @Alexander Forssberg
+
+[tokens]
+c_10_10_eldrazi
+c_1_1_a_construct
+c_1_1_a_myr
+c_1_1_a_servo
+c_x_x_a_phyrexian_horror
+g_5_3_elemental
+scrap
+u_1_1_a_thopter_flying
+u_1_1_faerie_flying
+u_2_1_a_phyrexian_myr
+w_0_1_goat
+wb_2_1_inkling_flying

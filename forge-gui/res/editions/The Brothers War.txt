@@ -5,6 +5,10 @@ Name=The Brothers' War
 Code2=BRO
 MciCode=bro
 Type=Expansion
+BoosterCovers=3
+Booster=9 Common:fromsheet("BRO cards"), 3 Uncommon:fromSheet("BRO cards"), 1 RareMythic:fromSheet("BRO cards"), 1 fromSheet("BRO lands"), 1 fromSheet("BRR cards")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=BRO
 
 [cards]
@@ -133,7 +137,7 @@ ScryfallCode=BRO
 123 C Scrapwork Rager @Michal Ivan
 124 U Transmogrant Altar @Dan Scott
 125 R Transmogrant's Crown @Nino Vecia
-126 U "Rapid Assembly" @Leesha Hannigan
+126 U Arms Race @Leesha Hannigan
 127 C Bitter Reunion @Jake Murray
 128 R Brotherhood's End @Bryan Sola
 129 C Conscripted Infantry @Noah Thatcher
@@ -143,7 +147,7 @@ ScryfallCode=BRO
 133 U The Fall of Kroog @David Auden Nash
 134 C Fallaji Chaindancer @Filipe Pagliuso
 135 R Feldon, Ronom Excavator @Howard Lyon
-136 U "Slag Belcher" @Edgar Sánchez Hidalgo
+136 U Giant Cindermaw @Edgar Sánchez Hidalgo
 137 C Goblin Blast-Runner @Joseph Weston
 138 U Horned Stoneseeker @Eric Velhagen
 139 R Mechanized Warfare @Robin Olausson
@@ -295,11 +299,20 @@ ScryfallCode=BRO
 285 L Mountain @Victor Harmatiuk
 286 L Forest @Jonas De Ro
 287 L Forest @Piotr Dura
+
+[jumpstart]
 288 R Rescue Retriever @Jesper Ejsing
 289 R Geology Enthusiast @Fajareka Setiawan
 290 R Terror Ballista @Leon Tukker
 291 R Artificer's Dragon @Leon Tukker
 292 R Woodcaller Automaton @Ryan Pancoast
+373 R Rescue Retriever @Jesper Ejsing
+374 R Geology Enthusiast @Fajareka Setiawan
+375 R Terror Ballista @Leon Tukker
+376 R Artificer's Dragon @Leon Tukker
+377 R Woodcaller Automaton @Ryan Pancoast
+
+[borderless]
 293 M Teferi, Temporal Pilgrim @Cosmin Podar
 294 M Saheeli, Filigree Master @Cosmin Podar
 295 R Mishra, Tamer of Mak Fawa @Cosmin Podar
@@ -308,6 +321,8 @@ ScryfallCode=BRO
 298 R Brushland @Rob Alexander
 299 R Llanowar Wastes @Rob Alexander
 300 R Underground River @Rob Alexander
+
+[extended art]
 301 M In the Trenches @Daarken
 302 R Kayla's Command @Dominik Mayer
 303 R Kayla's Reconstruction @Nicholas Elias
@@ -380,15 +395,49 @@ ScryfallCode=BRO
 370 R Fortified Beachhead @Christian Dimitrov
 371 R Hall of Tagsin @Christian Dimitrov
 372 R Mishra's Foundry @Leon Tukker
-373 R Rescue Retriever @Jesper Ejsing
-374 R Geology Enthusiast @Fajareka Setiawan
-375 R Terror Ballista @Leon Tukker
-376 R Artificer's Dragon @Leon Tukker
-377 R Woodcaller Automaton @Ryan Pancoast
+
+[buy a box]
 378 R Mishra's Foundry @Leon Tukker
+
+[promo]
 379 R Queen Kayla bin-Kroog @Howard Lyon
 380 U Lay Down Arms @Liiga Smilshkalne
 381 U Flow of Knowledge @Tuan Duong Chu
 382 U Corrupt @Julie Dillon
 383 U Sardian Cliffstomper @Joseph Weston
 384 U Blanchwood Armor @Manuel Castañón
+
+[lands]
+2 Plains|BRO|1
+2 Plains|BRO|2
+1 Plains|BRO|3
+1 Plains|BRO|4
+2 Island|BRO|1
+2 Island|BRO|2
+1 Island|BRO|3
+1 Island|BRO|4
+2 Swamp|BRO|1
+2 Swamp|BRO|2
+1 Swamp|BRO|3
+1 Swamp|BRO|4
+2 Mountain|BRO|1
+2 Mountain|BRO|2
+1 Mountain|BRO|3
+1 Mountain|BRO|4
+2 Forest|BRO|1
+2 Forest|BRO|2
+1 Forest|BRO|3
+1 Forest|BRO|4
+
+[tokens]
+c_0_0_a_construct_total_artifacts
+c_1_1_a_soldier
+c_1_1_a_soldier
+c_1_1_a_thopter_flying
+c_2_2_a_construct
+c_3_3_a_zombie
+c_a_powerstone
+c_x_x_a_golem
+g_1_1_forest_dryad_land
+g_2_2_bear
+u_2_2_spirit_vigilance_drawcounter

@@ -92,7 +92,8 @@ public class CostSacrifice extends CostPartWithList {
         } else {
             String desc;
             if (this.getTypeDescription() == null) {
-                desc = CardType.CoreType.isValidEnum(this.getType()) ? this.getType().toLowerCase() : this.getType();
+                final String typeS = this.getType();
+                desc = typeS.equals("Permanent") || CardType.CoreType.isValidEnum(typeS) ? typeS.toLowerCase() : typeS;
             } else {
                 desc = this.getTypeDescription();
             }

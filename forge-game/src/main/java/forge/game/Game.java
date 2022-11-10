@@ -162,7 +162,6 @@ public class Game {
     public Player getStartingPlayer() {
         return startingPlayer;
     }
-
     public void setStartingPlayer(final Player p) {
         startingPlayer = p;
     }
@@ -170,7 +169,6 @@ public class Game {
     public Player getMonarch() {
         return monarch;
     }
-
     public void setMonarch(final Player p) {
         monarch = p;
     }
@@ -178,7 +176,6 @@ public class Game {
     public Player getMonarchBeginTurn() {
         return monarchBeginTurn;
     }
-
     public void setMonarchBeginTurn(Player monarchBeginTurn) {
         this.monarchBeginTurn = monarchBeginTurn;
     }

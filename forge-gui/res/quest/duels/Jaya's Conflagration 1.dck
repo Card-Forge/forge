@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Jaya's Conflagration 1
+Title=Jaya Ballard
+Difficulty=easy
+Description=Mono-red elemental and burn themed deck
+Icon=Jaya Ballard 1.jpg
+Deck Type=constructed
+[Main]
+2 Ball Lightning
+2 Browbeat
+3 Castle Embereth
+1 Chandra's Incinerator
+2 Cinder Elemental
+2 Cinder Pyromancer
+1 Comet Storm
+2 Disintegrate
+2 Elixir of Immortality
+2 Fire Servant
+2 Hammer of Bogardan
+1 Harmonic Prodigy
+2 Incandescent Soulstoke
+3 Incinerate
+1 Increasing Vengeance
+2 Kiln Fiend
+2 Mimic Vat
+16 Mountain
+3 Pyretic Ritual
+2 Soul-Scar Mage
+1 Spinerock Knoll
+2 Valakut, the Molten Pinnacle
+2 Wildfire Elemental
+2 Young Pyromancer
+[Sideboard]

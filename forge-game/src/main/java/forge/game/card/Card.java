@@ -222,6 +222,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private long transformedTimestamp = 0;
     private long convertedTimestamp = 0;
     private long mutatedTimestamp = -1;
+    private long prototypeTimestamp = -1;
     private int timesMutated = 0;
     private boolean tributed = false;
     private boolean embalmed = false;
@@ -988,7 +989,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean isCloned() {
-        return !clonedStates.isEmpty() && clonedStates.lastEntry().getKey() != mutatedTimestamp;
+        return !clonedStates.isEmpty() && clonedStates.lastEntry().getKey() != mutatedTimestamp
+                && clonedStates.lastEntry().getKey() != prototypeTimestamp;
     }
 
     public final CardCollectionView getDevouredCards() {
@@ -2208,6 +2210,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append(k[0]).append(" ").append(k[1]).append(" (As this enters the battlefield, you may ");
                     sbLong.append("sacrifice any number of ").append(t).append("s. This creature enters the ");
                     sbLong.append("battlefield with that many +1/+1 counters on it.)");
+                } else if (keyword.startsWith("Prototype")) {
+                    final String[] k = keyword.split(":");
+                    final Cost cost = new Cost(k[1], false);
+                    sbLong.append(k[0]).append(" ").append(cost.toSimpleString()).append(" ").append("[").append(k[2]);
+                    sbLong.append("/").append(k[3]).append("] ").append("(").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst") || keyword.startsWith("Dredge")
                         || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift") || keyword.startsWith("Bushido")
                         || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
@@ -2254,15 +2261,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("Ward")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
+                    final boolean onlyMana = cost.isOnlyManaCost();
+                    final boolean complex = k[1].contains("X") || k[1].contains("Sac<");
+                    final String extra = k.length > 2 ? ", " + k[2] + "." : "";
 
-                    StringBuilder sbCost = new StringBuilder(k[0]);
-                    if (!cost.isOnlyManaCost()) {
-                        sbCost.append("—");
-                    } else {
-                        sbCost.append(" ");
-                    }
-                    sbCost.append(cost.toSimpleString());
-                    sbLong.append(sbCost).append(" (").append(inst.getReminderText()).append(")");
+                    sbLong.append(k[0]).append(onlyMana ? " " : "—").append(cost.toSimpleString());
+                    sbLong.append(onlyMana? "" : ".").append(extra);
+                    sbLong.append(!complex ? " (" + (inst.getReminderText()) + ")" : "");
                     sbLong.append("\r\n");
                 } else if (keyword.endsWith(" offering")) {
                     String offeringType = keyword.split(" ")[0];
@@ -5029,11 +5034,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     private boolean switchPhaseState(final boolean fromUntapStep) {
-        if (phasedOut && hasKeyword("CARDNAME can't phase in.")) {
+        if (phasedOut && StaticAbilityCantPhaseIn.cantPhaseIn(this)) {
             return false;
         }
 
-        if (!phasedOut && hasKeyword("CARDNAME can't phase out.")) {
+        if (!phasedOut && StaticAbilityCantPhaseOut.cantPhaseOut(this)) {
             return false;
         }
 
@@ -6493,6 +6498,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         if (sa.isBestow()) {
             animateBestow();
+        }
+        if (sa.hasParam("Prototype")) {
+            Long next = game.getNextTimestamp();
+            addCloneState(CardFactory.getCloneStates(this, this, sa), next);
+            prototypeTimestamp = next;
         }
         CardStateName stateName = sa.getCardStateName();
         if (stateName != null && hasState(stateName) && this.getCurrentStateName() != stateName) {

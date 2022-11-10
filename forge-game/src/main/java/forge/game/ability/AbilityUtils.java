@@ -2087,6 +2087,23 @@ public class AbilityUtils {
             return doXMath(castSA == null ? 0 : castSA.getPayingColors().countColors(), expr, c, ctb);
         }
 
+        if (sq[0].startsWith("EachSpentToCast")) {
+            SpellAbility castSA = c.getCastSA();
+            if (castSA == null) {
+                return 0;
+            }
+            final List<Mana> paidMana = castSA.getPayingMana();
+            final String type = sq[1];
+            int count = 0;
+            for (Mana m : paidMana) {
+                if (m.toString().equals(type)) {
+                    count++;
+
+                }
+            }
+            return doXMath(count, expr, c, ctb);
+        }
+
         // Count$wasCastFrom<Zone>.<true>.<false>
         if (sq[0].startsWith("wasCastFrom")) {
             boolean your = sq[0].contains("Your");
@@ -2599,12 +2616,11 @@ public class AbilityUtils {
 
         // Count$Chroma.<color name>
         if (sq[0].startsWith("Chroma")) {
-            ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
             final CardCollectionView cards;
             if (sq[0].contains("ChromaSource")) { // Runs Chroma for passed in Source card
                 cards = new CardCollection(c);
-            }
-            else {
+            } else {
+                ZoneType sourceZone = sq[0].contains("ChromaInGrave") ?  ZoneType.Graveyard : ZoneType.Battlefield;
                 cards = player.getCardsIn(sourceZone);
             }
 

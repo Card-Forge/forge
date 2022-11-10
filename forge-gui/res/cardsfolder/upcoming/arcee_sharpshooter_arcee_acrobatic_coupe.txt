@@ -7,7 +7,7 @@ K:First Strike
 A:AB$ DealDamage | Cost$ 1 XCantBe0 SubCounter<X/P1P1/NICKNAME> | ValidTgts$ Creature | NumDmg$ X | SubAbility$ DBConvert | SpellDescription$ It deals that much damage to target creature.
 SVar:DBConvert:DB$ SetState | Mode$ Convert | StackDescription$ SpellDescription | SpellDescription$ Convert NICKNAME.
 SVar:X:Count$xPaid
-AlternateMode:DoubleFaced
+AlternateMode:Convert
 DeckNeeds:Ability$Counters
 Oracle:More Than Meets the Eye {R}{W} (You may cast this card converted for {R}{W}.)\nFirst strike\n{1}, Remove one or more +1/+1 counters from Arcee: It deals that much damage to target creature. Convert Arcee.
 

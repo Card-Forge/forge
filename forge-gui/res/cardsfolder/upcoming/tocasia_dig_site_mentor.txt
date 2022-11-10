@@ -1,4 +1,4 @@
-Name:Tocasia, Digsite Mentor
+Name:Tocasia, Dig Site Mentor
 ManaCost:1 G W U
 Types:Legendary Creature Human Artificer
 PT:4/3

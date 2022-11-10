@@ -35,5 +35,6 @@ ScryfallCode=P30A
 27 R Dovin's Veto @Drew Tucker
 28 R Vito, Thorn of the Dusk Rose @Lie Setiawan
 29 R Deadly Dispute @Irina Nordsol
+30 R Urza, Prince of Kroog @Joshua Raphael
 1F R Arcane Signet @Gaboleps
 F1★ R Richard Garfield, Ph.D. @Dave Dorman

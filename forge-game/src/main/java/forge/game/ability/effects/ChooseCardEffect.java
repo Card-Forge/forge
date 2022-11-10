@@ -269,6 +269,9 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             }
         }
         host.setChosenCards(chosen);
+        if (sa.hasParam("ForgetOtherRemembered")) {
+            host.clearRemembered();
+        }
         if (sa.hasParam("RememberChosen")) {
             host.addRemembered(chosen);
         }

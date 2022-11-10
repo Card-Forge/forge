@@ -135,6 +135,7 @@ public enum Keyword {
     POISONOUS("Poisonous", KeywordWithAmount.class, false, "Whenever this creature deals combat damage to a player, that player gets {%d:poison counter}."),
     PRESENCE("Presence", KeywordWithType.class, false, "As an additional cost to cast this spell, you may reveal a %s card from your hand."),
     PROTECTION("Protection", Protection.class, false, "This creature can't be blocked, targeted, dealt damage, or equipped/enchanted by %s."),
+    PROTOTYPE("Prototype", KeywordWithCost.class, false, "You may cast this spell with different mana cost, color, and size. It keeps its abilities and types."),
     PROVOKE("Provoke", SimpleKeyword.class, false, "Whenever this creature attacks, you may have target creature defending player controls untap and block it if able."),
     PROWESS("Prowess", SimpleKeyword.class, false, "Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn."),
     PROWL("Prowl", KeywordWithCost.class, false, "You may pay %s rather than pay this spell's mana cost if a player was dealt combat damage this turn by a source that, at the time it dealt that damage, was under your control and had any of this spell's creature types."),
