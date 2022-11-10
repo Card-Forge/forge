@@ -1,0 +1,6 @@
+Name:Retrieval Agent
+ManaCost:3 U
+Types:Creature Human Soldier
+PT:2/5
+A:AB$ Pump | Cost$ 2 | Defined$ Self | NumAtt$ +1 | NumDef$ -1 | SpellDescription$ CARDNAME gets +1/-1 until end of turn.
+Oracle:{2}: Retrieval Agent gets +1/-1 until end of turn.
