@@ -1,0 +1,8 @@
+Name:Perimeter Patrol
+ManaCost:2 G
+Types:Creature Human Soldier
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever an artifact enters the battlefield under your control, CARDNAME gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1
+PT:3/3
+DeckHints:Type$Artifact
+Oracle:Whenever an artifact enters the battlefield under your control, Perimeter Patrol gets +1/+0 until end of turn.
