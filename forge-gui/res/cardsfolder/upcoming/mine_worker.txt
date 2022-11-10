@@ -2,7 +2,7 @@ Name:Mine Worker
 ManaCost:2
 Types:Artifact Creature Assembly-Worker
 PT:2/1
-A:AB$ GainLife | Cost$ T | LifeAmount$ X | SpellDescription$ You gain 1 life. If you control creatures named Power Plant Worker and Tower Worker, you gain 3 life instead.
+A:AB$ GainLife | Cost$ T | LifeAmount$ X | SpellDescription$ You gain 1 life. If you control creatures named Power Plant Worker and Tower Worker, you gain 3 life instead.| StackDescription$ SpellDescription
 SVar:X:Count$Compare TronCheck GT0.3.1
 SVar:TronCheck:SVar$Z/Times.Y
 SVar:Z:Count$Valid Creature.YouCtrl+namedTower Worker
