@@ -3,6 +3,10 @@ Code=30A
 Date=2022-11-28
 Name=30th Anniversary Edition
 Type=Collector_Edition
+BoosterCovers=3
+Booster=7 Common:fromsheet("30A cards"), 3 Uncommon:fromSheet("30A cards"), 1 Rare:fromSheet("30A cards"), 2 BasicLand:fromSheet("30A cards"), 1 fromSheet("30A retrolands"), 1 fromSheet("30A retrocards")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=30A
 
 [cards]
@@ -601,6 +605,306 @@ ScryfallCode=30A
 593 L Forest @Christopher Rush
 594 L Forest @Christopher Rush
 
+[retrocards]
+1 Animate Wall|30A|2
+1 Armageddon|30A|2
+1 Balance|30A|2
+1 Benalish Hero|30A|2
+1 Black Ward|30A|2
+1 Blaze of Glory|30A|2
+1 Blessing|30A|2
+1 Blue Ward|30A|2
+1 Castle|30A|2
+1 Circle of Protection: Black|30A|2
+1 Circle of Protection: Blue|30A|2
+1 Circle of Protection: Green|30A|2
+1 Circle of Protection: Red|30A|2
+1 Circle of Protection: White|30A|2
+1 Consecrate Land|30A|2
+1 Conversion|30A|2
+1 Death Ward|30A|2
+1 Disenchant|30A|2
+1 Farmstead|30A|2
+1 Green Ward|30A|2
+1 Guardian Angel|30A|2
+1 Healing Salve|30A|2
+1 Holy Armor|30A|2
+1 Holy Strength|30A|2
+1 Island Sanctuary|30A|2
+1 Karma|30A|2
+1 Lance|30A|2
+1 Mesa Pegasus|30A|2
+1 Northern Paladin|30A|2
+1 Pearled Unicorn|30A|2
+1 Personal Incarnation|30A|2
+1 Purelace|30A|2
+1 Red Ward|30A|2
+1 Resurrection|30A|2
+1 Reverse Damage|30A|2
+1 Righteousness|30A|2
+1 Samite Healer|30A|2
+1 Savannah Lions|30A|2
+1 Serra Angel|30A|2
+1 Swords to Plowshares|30A|2
+1 Veteran Bodyguard|30A|2
+1 Wall of Swords|30A|2
+1 White Knight|30A|2
+1 White Ward|30A|2
+1 Wrath of God|30A|2
+1 Air Elemental|30A|2
+1 Ancestral Recall|30A|2
+1 Animate Artifact|30A|2
+1 Blue Elemental Blast|30A|2
+1 Braingeyser|30A|2
+1 Clone|30A|2
+1 Control Magic|30A|2
+1 Copy Artifact|30A|2
+1 Counterspell|30A|2
+1 Creature Bond|30A|2
+1 Drain Power|30A|2
+1 Feedback|30A|2
+1 Flight|30A|2
+1 Invisibility|30A|2
+1 Jump|30A|2
+1 Lifetap|30A|2
+1 Lord of Atlantis|30A|2
+1 Magical Hack|30A|2
+1 Mahamoti Djinn|30A|2
+1 Mana Short|30A|2
+1 Merfolk of the Pearl Trident|30A|2
+1 Phantasmal Forces|30A|2
+1 Phantasmal Terrain|30A|2
+1 Phantom Monster|30A|2
+1 Pirate Ship|30A|2
+1 Power Leak|30A|2
+1 Power Sink|30A|2
+1 Prodigal Sorcerer|30A|2
+1 Psionic Blast|30A|2
+1 Psychic Venom|30A|2
+1 Sea Serpent|30A|2
+1 Siren's Call|30A|2
+1 Sleight of Mind|30A|2
+1 Spell Blast|30A|2
+1 Stasis|30A|2
+1 Steal Artifact|30A|2
+1 Thoughtlace|30A|2
+1 Time Walk|30A|2
+1 Timetwister|30A|2
+1 Twiddle|30A|2
+1 Unsummon|30A|2
+1 Vesuvan Doppelganger|30A|2
+1 Volcanic Eruption|30A|2
+1 Wall of Air|30A|2
+1 Wall of Water|30A|2
+1 Water Elemental|30A|2
+1 Animate Dead|30A|2
+1 Bad Moon|30A|2
+1 Black Knight|30A|2
+1 Bog Wraith|30A|2
+1 Cursed Land|30A|2
+1 Dark Ritual|30A|2
+1 Deathgrip|30A|2
+1 Deathlace|30A|2
+1 Demonic Hordes|30A|2
+1 Demonic Tutor|30A|2
+1 Drain Life|30A|2
+1 Drudge Skeletons|30A|2
+1 Evil Presence|30A|2
+1 Fear|30A|2
+1 Frozen Shade|30A|2
+1 Gloom|30A|2
+1 Howl from Beyond|30A|2
+1 Hypnotic Specter|30A|2
+1 Lich|30A|2
+1 Lord of the Pit|30A|2
+1 Mind Twist|30A|2
+1 Nether Shadow|30A|2
+1 Nettling Imp|30A|2
+1 Nightmare|30A|2
+1 Paralyze|30A|2
+1 Pestilence|30A|2
+1 Plague Rats|30A|2
+1 Raise Dead|30A|2
+1 Royal Assassin|30A|2
+1 Sacrifice|30A|2
+1 Scathe Zombies|30A|2
+1 Scavenging Ghoul|30A|2
+1 Sengir Vampire|30A|2
+1 Simulacrum|30A|2
+1 Sinkhole|30A|2
+1 Terror|30A|2
+1 Unholy Strength|30A|2
+1 Wall of Bone|30A|2
+1 Warp Artifact|30A|2
+1 Sol Ring|30A|2
+1 Will-o'-the-Wisp|30A|2
+1 Word of Command|30A|2
+1 Zombie Master|30A|2
+1 Burrowing|30A|2
+1 Chaoslace|30A|2
+1 Disintegrate|30A|2
+1 Dragon Whelp|30A|2
+1 Dwarven Demolition Team|30A|2
+1 Dwarven Warriors|30A|2
+1 Earth Elemental|30A|2
+1 Earthquake|30A|2
+1 False Orders|30A|2
+1 Fire Elemental|30A|2
+1 Fireball|30A|2
+1 Firebreathing|30A|2
+1 Flashfires|30A|2
+1 Fork|30A|2
+1 Goblin Balloon Brigade|30A|2
+1 Goblin King|30A|2
+1 Granite Gargoyle|30A|2
+1 Gray Ogre|30A|2
+1 Hill Giant|30A|2
+1 Hurloon Minotaur|30A|2
+1 Ironclaw Orcs|30A|2
+1 Keldon Warlord|30A|2
+1 Lightning Bolt|30A|2
+1 Mana Flare|30A|2
+1 Manabarbs|30A|2
+1 Mons's Goblin Raiders|30A|2
+1 Orcish Artillery|30A|2
+1 Orcish Oriflamme|30A|2
+1 Power Surge|30A|2
+1 Raging River|30A|2
+1 Red Elemental Blast|30A|2
+1 Roc of Kher Ridges|30A|2
+1 Rock Hydra|30A|2
+1 Sedge Troll|30A|2
+1 Shatter|30A|2
+1 Shivan Dragon|30A|2
+1 Smoke|30A|2
+1 Stone Giant|30A|2
+1 Stone Rain|30A|2
+1 Tunnel|30A|2
+1 Two-Headed Giant of Foriys|30A|2
+1 Uthden Troll|30A|2
+1 Wall of Fire|30A|2
+1 Wall of Stone|30A|2
+1 Wheel of Fortune|30A|2
+1 Aspect of Wolf|30A|2
+1 Berserk|30A|2
+1 Birds of Paradise|30A|2
+1 Camouflage|30A|2
+1 Channel|30A|2
+1 Cockatrice|30A|2
+1 Craw Wurm|30A|2
+1 Elvish Archers|30A|2
+1 Fastbond|30A|2
+1 Fog|30A|2
+1 Force of Nature|30A|2
+1 Fungusaur|30A|2
+1 Gaea's Liege|30A|2
+1 Giant Growth|30A|2
+1 Giant Spider|30A|2
+1 Grizzly Bears|30A|2
+1 Hurricane|30A|2
+1 Ice Storm|30A|2
+1 Instill Energy|30A|2
+1 Ironroot Treefolk|30A|2
+1 Kudzu|30A|2
+1 Ley Druid|30A|2
+1 Lifeforce|30A|2
+1 Lifelace|30A|2
+1 Living Artifact|30A|2
+1 Living Lands|30A|2
+1 Llanowar Elves|30A|2
+1 Lure|30A|2
+1 Natural Selection|30A|2
+1 Regeneration|30A|2
+1 Regrowth|30A|2
+1 Scryb Sprites|30A|2
+1 Shanodin Dryads|30A|2
+1 Stream of Life|30A|2
+1 Thicket Basilisk|30A|2
+1 Timber Wolves|30A|2
+1 Tranquility|30A|2
+1 Tsunami|30A|2
+1 Verduran Enchantress|30A|2
+1 Wall of Brambles|30A|2
+1 Wall of Ice|30A|2
+1 Wall of Wood|30A|2
+1 Wanderlust|30A|2
+1 War Mammoth|30A|2
+1 Web|30A|2
+1 Wild Growth|30A|2
+1 Ankh of Mishra|30A|2
+1 Basalt Monolith|30A|2
+1 Black Lotus|30A|2
+1 Black Vise|30A|2
+1 Celestial Prism|30A|2
+1 Chaos Orb|30A|2
+1 Clockwork Beast|30A|2
+1 Conservator|30A|2
+1 Copper Tablet|30A|2
+1 Crystal Rod|30A|2
+1 Cyclopean Tomb|30A|2
+1 Dingus Egg|30A|2
+1 Disrupting Scepter|30A|2
+1 Forcefield|30A|2
+1 Gauntlet of Might|30A|2
+1 Glasses of Urza|30A|2
+1 Helm of Chatzuk|30A|2
+1 The Hive|30A|2
+1 Howling Mine|30A|2
+1 Icy Manipulator|30A|2
+1 Illusionary Mask|30A|2
+1 Iron Star|30A|2
+1 Ivory Cup|30A|2
+1 Jade Monolith|30A|2
+1 Jade Statue|30A|2
+1 Jayemdae Tome|30A|2
+1 Juggernaut|30A|2
+1 Kormus Bell|30A|2
+1 Library of Leng|30A|2
+1 Living Wall|30A|2
+1 Mana Vault|30A|2
+1 Meekstone|30A|2
+1 Mox Emerald|30A|2
+1 Mox Jet|30A|2
+1 Mox Pearl|30A|2
+1 Mox Ruby|30A|2
+1 Mox Sapphire|30A|2
+1 Nevinyrral's Disk|30A|2
+1 Obsianus Golem|30A|2
+1 Rod of Ruin|30A|2
+1 Sol Ring|30A|2
+1 Soul Net|30A|2
+1 Sunglasses of Urza|30A|2
+1 Throne of Bone|30A|2
+1 Time Vault|30A|2
+1 Winter Orb|30A|2
+1 Wooden Sphere|30A|2
+1 Badlands|30A|2
+1 Bayou|30A|2
+1 Plateau|30A|2
+1 Savannah|30A|2
+1 Scrubland|30A|2
+1 Taiga|30A|2
+1 Tropical Island|30A|2
+1 Tundra|30A|2
+1 Underground Sea|30A|2
+1 Volcanic Island|30A|2
+
+[retrolands]
+1 Plains|30A|4
+1 Plains|30A|5
+1 Plains|30A|6
+1 Island|30A|4
+1 Island|30A|5
+1 Island|30A|6
+1 Swamp|30A|4
+1 Swamp|30A|5
+1 Swamp|30A|6
+1 Mountain|30A|4
+1 Mountain|30A|5
+1 Mountain|30A|6
+1 Forest|30A|4
+1 Forest|30A|5
+1 Forest|30A|6
 
 [tokens]
 b_1_1_skeleton

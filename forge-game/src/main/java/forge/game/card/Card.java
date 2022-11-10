@@ -2210,6 +2210,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     sbLong.append(k[0]).append(" ").append(k[1]).append(" (As this enters the battlefield, you may ");
                     sbLong.append("sacrifice any number of ").append(t).append("s. This creature enters the ");
                     sbLong.append("battlefield with that many +1/+1 counters on it.)");
+                } else if (keyword.startsWith("Prototype")) {
+                    final String[] k = keyword.split(":");
+                    final Cost cost = new Cost(k[1], false);
+                    sbLong.append(k[0]).append(" ").append(cost.toSimpleString()).append(" ").append("[").append(k[2]);
+                    sbLong.append("/").append(k[3]).append("] ").append("(").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Modular") || keyword.startsWith("Bloodthirst") || keyword.startsWith("Dredge")
                         || keyword.startsWith("Fabricate") || keyword.startsWith("Soulshift") || keyword.startsWith("Bushido")
                         || keyword.startsWith("Crew") || keyword.startsWith("Tribute") || keyword.startsWith("Absorb")
@@ -2256,15 +2261,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 } else if (keyword.startsWith("Ward")) {
                     final String[] k = keyword.split(":");
                     final Cost cost = new Cost(k[1], false);
+                    final boolean onlyMana = cost.isOnlyManaCost();
+                    final boolean complex = k[1].contains("X") || k[1].contains("Sac<");
+                    final String extra = k.length > 2 ? ", " + k[2] + "." : "";
 
-                    StringBuilder sbCost = new StringBuilder(k[0]);
-                    if (!cost.isOnlyManaCost()) {
-                        sbCost.append("—");
-                    } else {
-                        sbCost.append(" ");
-                    }
-                    sbCost.append(cost.toSimpleString());
-                    sbLong.append(sbCost).append(" (").append(inst.getReminderText()).append(")");
+                    sbLong.append(k[0]).append(onlyMana ? " " : "—").append(cost.toSimpleString());
+                    sbLong.append(onlyMana? "" : ".").append(extra);
+                    sbLong.append(!complex ? " (" + (inst.getReminderText()) + ")" : "");
                     sbLong.append("\r\n");
                 } else if (keyword.endsWith(" offering")) {
                     String offeringType = keyword.split(" ")[0];
@@ -2286,7 +2289,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.startsWith("Transfigure") || keyword.startsWith("Aura swap")
                         || keyword.startsWith("Cycling") || keyword.startsWith("TypeCycling")
                         || keyword.startsWith("Encore") || keyword.startsWith("Mutate") || keyword.startsWith("Dungeon")
-                        || keyword.startsWith("Class") || keyword.startsWith("Blitz") || keyword.startsWith("Prototype")
+                        || keyword.startsWith("Class") || keyword.startsWith("Blitz")
                         || keyword.startsWith("Specialize") || keyword.equals("Ravenous")) {
                     // keyword parsing takes care of adding a proper description
                 } else if(keyword.startsWith("Read ahead")) {

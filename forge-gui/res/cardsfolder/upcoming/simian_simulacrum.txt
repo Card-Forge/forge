@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Creature Ape
 PT:2/1
 K:Unearth:2 G G
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$When CARDNAME enters the battlefield, put two +1/+1 counters on target creature you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounter | TriggerDescription$ When CARDNAME enters the battlefield, put two +1/+1 counters on target creature you control.
 SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 2
 DeckHas:Ability$Graveyard|Counters
 DeckHints:Color$Green
