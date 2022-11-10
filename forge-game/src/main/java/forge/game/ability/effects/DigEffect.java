@@ -184,11 +184,15 @@ public class DigEffect extends SpellAbilityEffect {
             }
             final CardCollection top = new CardCollection();
             final CardCollection rest = new CardCollection();
-            final PlayerZone sourceZone = p.getZone(srcZone);
+            CardCollection all = new CardCollection(p.getCardsIn(srcZone));
 
-            int numToDig = Math.min(digNum, sourceZone.size());
+            if (sa.hasParam("FromBottom")) {
+                Collections.reverse(all);
+            }
+
+            int numToDig = Math.min(digNum, all.size());
             for (int i = 0; i < numToDig; i++) {
-                top.add(sourceZone.get(i));
+                top.add(all.get(i));
             }
 
             if (!top.isEmpty()) {

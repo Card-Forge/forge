@@ -2343,6 +2343,7 @@ public class GameAction {
                 // set up triggers (but not actually do them until later)
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
                 runParams.put(AbilityKey.ScryNum, numLookedAt);
+                runParams.put(AbilityKey.ScryBottom, toBottom.size());
                 game.getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
             }
         }
