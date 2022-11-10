@@ -1,0 +1,10 @@
+Name:Demolition Field
+ManaCost:no cost
+Types:Land
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+A:AB$ Destroy | Cost$ 2 T Sac<1/CARDNAME> | ValidTgts$ Land.nonBasic+OppCtrl | TgtPrompt$ Select target nonbasic land an opponent controls | SubAbility$ DBSearch | AILogic$ GhostQuarter | SpellDescription$ Destroy target nonbasic land an opponent controls. That land's controller may search their library for a basic land card, put it onto the battlefield, then shuffle. You may search your library for a basic land card, put it onto the battlefield, then shuffle.
+SVar:DBSearch:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | DefinedPlayer$ TargetedController | ChangeType$ Land.Basic | ChangeNum$ 1 | SubAbility$ DBSearchBis | StackDescription$ That land's controller may search their library for a basic land card, put it onto the battlefield, then shuffle. You may search your library for a basic land card, put it onto the battlefield, then shuffle.
+SVar:DBSearchBis:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | DefinedPlayer$ You | ChangeType$ Land.Basic | ChangeNum$ 1
+AI:RemoveDeck:Random
+DeckHas:Ability$Sacrifice
+Oracle:{T}: Add {C}.\n{2}, {T}, Sacrifice Demolition Field: Destroy target nonbasic land an opponent controls. That land's controller may search their library for a basic land card, put it onto the battlefield, then shuffle. You may search your library for a basic land card, put it onto the battlefield, then shuffle.

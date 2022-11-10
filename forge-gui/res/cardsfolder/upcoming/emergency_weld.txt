@@ -1,0 +1,7 @@
+Name:Emergency Weld
+ManaCost:1 B
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target artifact or creature card in your graveyard | ValidTgts$ Artifact.YouOwn,Creature.YouOwn | SubAbility$ DBToken | SpellDescription$ Return target artifact or creature card from your graveyard to your hand.
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_soldier | SpellDescription$ Create a 1/1 colorless Soldier artifact creature token.
+DeckHas:Ability$Token|Graveyard & Type$Artifact|Soldier
+Oracle:Return target artifact or creature card from your graveyard to your hand. Create a 1/1 colorless Soldier artifact creature token.
