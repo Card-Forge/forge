@@ -387,10 +387,6 @@ public class CardProperty {
             if (!card.canBeSacrificedBy((SpellAbility) spellAbility, false)) {
                 return false;
             }
-        } else if (property.startsWith("AttachedBy")) {
-            if (!card.hasCardAttachment(source)) {
-                return false;
-            }
         } else if (property.equals("Attached")) {
             if (!source.hasCardAttachment(card)) {
                 return false;
@@ -498,7 +494,7 @@ public class CardProperty {
                     return false;
                 }
             }
-        } else if (property.startsWith("EquippedBy")) {
+        } else if (property.startsWith("EquippedBy") || property.startsWith("AttachedBy")) {
             if (property.substring(10).equals("Targeted")) {
                 for (final Card c : AbilityUtils.getDefinedCards(source, "Targeted", spellAbility)) {
                     if (!card.hasCardAttachment(c)) {
@@ -521,11 +517,6 @@ public class CardProperty {
             }
         } else if (property.startsWith("CanBeAttachedBy")) {
             if (!card.canBeAttached(source, null)) {
-                return false;
-            }
-        } else if (property.startsWith("Fortified")) {
-            // FIXME TODO what property has this?
-            if (!source.hasCardAttachment(card)) {
                 return false;
             }
         } else if (property.startsWith("HauntedBy")) {

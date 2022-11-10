@@ -219,3 +219,15 @@ ScryfallCode=BRC
 211 C Vault of Whispers @Alexander Forssberg
 
 [tokens]
+c_10_10_eldrazi
+c_1_1_a_construct
+c_1_1_a_myr
+c_1_1_a_servo
+c_x_x_a_phyrexian_horror
+g_5_3_elemental
+scrap
+u_1_1_a_thopter_flying
+u_1_1_faerie_flying
+u_2_1_a_phyrexian_myr
+w_0_1_goat
+wb_2_1_inkling_flying

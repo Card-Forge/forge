@@ -1,0 +1,10 @@
+Name:Rootwire Amalgam
+ManaCost:5
+Types:Artifact Creature Golem
+PT:5/5
+K:Prototype:1 G:2:3
+A:AB$ Token | Cost$ 3 G G Sac<1/CARDNAME> | TokenAmount$ 1 | TokenScript$ c_x_x_a_golem | TokenPower$ X | TokenToughness$ X | PumpDuration$ EOT | TokenOwner$ You | PumpKeywords$ Haste | SorcerySpeed$ True | SpellDescription$ Create an X/X colorless Golem artifact creature token, where X is three times CARDNAME's power. It gains haste until end of turn. Activate only as a sorcery.
+SVar:X:Sacrificed$CardPower/Times.3
+DeckHas:Ability$Token|Sacrifice
+DeckHints:Color$Green
+Oracle:Prototype {1}{G} — 2/3 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\n{3}{G}{G}, Sacrifice Rootwire Amalgam: Create an X/X colorless Golem artifact creature token, where X is three times Rootwire Amalgam's power. It gains haste until end of turn. Activate only as a sorcery.

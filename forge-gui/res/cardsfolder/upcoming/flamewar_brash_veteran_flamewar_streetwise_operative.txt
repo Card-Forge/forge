@@ -8,6 +8,7 @@ SVar:DBConvert:DB$ SetState | Mode$ Convert | StackDescription$ Convert NICKNAME
 A:AB$ ChangeZone | Cost$ 1 Discard<1/Hand> | ValidCard$ Card.counters_GE1_INTEL+YouOwn | Origin$ Exile | Destination$ Hand | SpellDescription$ Put all exiled cards you own with intel counters on them into your hand.
 DeckHints:Ability$Counters
 DeckHas:Ability$Sacrifice|Discard|Counters
+AlternateMode:Convert
 Oracle:More Than Meets the Eye {B}{R} (You may cast this card converted for {B}{R}.)\nSacrifice another artifact: Put a +1/+1 counter on Flamewar and convert it. Activate only as a sorcery.\n{1}, Discard your hand: Put all exiled cards you own with intel counters on them into your hand.
 
 ALTERNATE

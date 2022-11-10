@@ -5,6 +5,10 @@ Name=The Brothers' War
 Code2=BRO
 MciCode=bro
 Type=Expansion
+BoosterCovers=3
+Booster=9 Common:fromsheet("BRO cards"), 3 Uncommon:fromSheet("BRO cards"), 1 RareMythic:fromSheet("BRO cards"), 1 fromSheet("BRO lands"), 1 fromSheet("BRR cards")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=BRO
 
 [cards]
@@ -403,4 +407,37 @@ ScryfallCode=BRO
 383 U Sardian Cliffstomper @Joseph Weston
 384 U Blanchwood Armor @Manuel Castañón
 
+[lands]
+2 Plains|BRO|1
+2 Plains|BRO|2
+1 Plains|BRO|3
+1 Plains|BRO|4
+2 Island|BRO|1
+2 Island|BRO|2
+1 Island|BRO|3
+1 Island|BRO|4
+2 Swamp|BRO|1
+2 Swamp|BRO|2
+1 Swamp|BRO|3
+1 Swamp|BRO|4
+2 Mountain|BRO|1
+2 Mountain|BRO|2
+1 Mountain|BRO|3
+1 Mountain|BRO|4
+2 Forest|BRO|1
+2 Forest|BRO|2
+1 Forest|BRO|3
+1 Forest|BRO|4
+
 [tokens]
+c_0_0_a_construct_total_artifacts
+c_1_1_a_soldier
+c_1_1_a_soldier
+c_1_1_a_thopter_flying
+c_2_2_a_construct
+c_3_3_a_zombie
+c_a_powerstone
+c_x_x_a_golem
+g_1_1_forest_dryad_land
+g_2_2_bear
+u_2_2_spirit_vigilance_drawcounter

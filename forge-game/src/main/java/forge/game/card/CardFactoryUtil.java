@@ -2886,7 +2886,7 @@ public class CardFactoryUtil {
                 abilityStr.append(" ").append(vstr);
             }
             Cost cost = new Cost(equipCost, true);
-            if (!cost.isOnlyManaCost() || altCost) { //Something other than a mana cost
+            if (!cost.isOnlyManaCost() || (altCost && extra.contains("<"))) { //Something other than a mana cost
                 abilityStr.append("—");
             } else {
                 abilityStr.append(" ");
@@ -3189,6 +3189,26 @@ public class CardFactoryUtil {
             sa.setIntrinsic(intrinsic);
             sa.setAlternativeCost(AlternativeCost.Outlast);
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Prototype")) {
+            final String[] k = keyword.split(":");
+            if (k.length < 4) {
+                System.err.println("Malformed Prototype entry! - Card: " + card.toString());
+                return;
+            }
+
+            final Cost protoCost = new Cost(k[1], false);
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(protoCost);
+            newSA.putParam("SetManaCost", k[1]);
+            newSA.putParam("SetColorByManaCost", "True");
+            newSA.putParam("SetPower", k[2]);
+            newSA.putParam("SetToughness", k[3]);
+            newSA.putParam("Prototype", "True");
+
+            // only makes description for prompt
+            newSA.setDescription(k[0] + " " + ManaCostParser.parse(k[1]) + " [" + k[2] + "/" + k[3] + "]");
+
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Prowl")) {
             final String[] k = keyword.split(":");
             final Cost prowlCost = new Cost(k[1], false);

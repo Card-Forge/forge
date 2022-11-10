@@ -1,6 +1,6 @@
 Name:Cityscape Leveler
 ManaCost:8
-Types:Artifact Creature Golem
+Types:Artifact Creature Construct
 PT:8/8
 K:Trample
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When you cast this spell and whenever CARDNAME attacks, destroy up to one target nonland permanent. Its controller creates a tapped Powerstone token.
