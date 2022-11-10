@@ -2,12 +2,11 @@ Name:Mine Worker
 ManaCost:2
 Types:Artifact Creature Assembly-Worker
 PT:2/1
-A:AB$ Branch | Cost$ T | BranchConditionSVar$ UrzaCheck | BranchConditionSVarCompare$ GE2 | FalseSubAbility$ GainLife | TrueSubAbility$ GainLifeUrza | SpellDescription$ You gain 1 life. If you control creatures named Power Plant Worker and Tower Worker, you gain 3 life instead.
-SVar:GainLife:DB$ GainLife | LifeAmount$ 1
-SVar:GainLifeUrza:DB$ GainLife | LifeAmount$ 3
-SVar:UrzaCheck:SVar$X/Plus.Y
-SVar:X:Count$Valid Creature.YouCtrl+namedTower Worker/LimitMax.1
-SVar:Y:Count$Valid Creature.YouCtrl+namedPower Plant Worker/LimitMax.1
+A:AB$ GainLife | Cost$ T | LifeAmount$ X | SpellDescription$ You gain 1 life. If you control creatures named Power Plant Worker and Tower Worker, you gain 3 life instead.
+SVar:X:Count$Compare TronCheck GT0.3.1
+SVar:TronCheck:SVar$Z/Times.Y
+SVar:Z:Count$Valid Creature.YouCtrl+namedTower Worker
+SVar:Y:Count$Valid Creature.YouCtrl+namedPower Plant Worker
 DeckHas:Ability$LifeGain
 DeckNeeds:Name$Power Plant Worker|Tower Worker
 Oracle:{T}: You gain 1 life. If you control creatures named Power Plant Worker and Tower Worker, you gain 3 life instead.

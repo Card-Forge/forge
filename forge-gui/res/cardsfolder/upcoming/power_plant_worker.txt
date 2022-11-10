@@ -10,4 +10,4 @@ DeckNeeds:Name$Mine Worker|Tower Worker
 SVar:UrzaCheck:SVar$X/Plus.Y
 SVar:X:Count$Valid Creature.YouCtrl+namedMine Worker/LimitMax.1
 SVar:Y:Count$Valid Creature.YouCtrl+namedTower Worker/LimitMax.1
-Oracle:{3}: Power Plant Worker gets +2/+2 until end of turn. If you control creatures named Mine Worker and Tower Worker, put two +1/+1 counters on Power Plant Worker instead. Activate only once each turn
+Oracle:{3}: Power Plant Worker gets +2/+2 until end of turn. If you control creatures named Mine Worker and Tower Worker, put two +1/+1 counters on Power Plant Worker instead. Activate only once each turn.
