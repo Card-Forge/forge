@@ -2,7 +2,8 @@ Name:Raze to the Ground
 ManaCost:1 R
 Types:Sorcery
 K:This spell can't be countered.
-A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact | SubAbility$ DBDraw | SpellDescription$ Destroy target artifact. If its mana value was 1 or less, draw a card.
-SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ LE1
-SVar:X:Targeted$CardManaCost
+A:SP$ Destroy | ValidTgts$ Artifact | SubAbility$ DBDraw | RememberLKI$ True | SpellDescription$ Destroy target artifact. If its mana value was 1 or less, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ LE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:RememberedLKI$CardManaCost
 Oracle:This spell can't be countered.\nDestroy target artifact. If its mana value was 1 or less, draw a card.
