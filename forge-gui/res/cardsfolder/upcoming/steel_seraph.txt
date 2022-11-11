@@ -1,0 +1,11 @@
+Name:Steel Seraph
+ManaCost:6
+Types:Artifact Creature Angel
+PT:5/4
+K:Prototype:1 W W:3:3
+K:Flying
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature you control gains your choice of flying, vigilance, or lifelink until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | KWChoice$ Flying,Vigilance,Lifelink
+DeckHas:Ability$LifeGain
+DeckHints:Color$White
+Oracle:Prototype {1}{W}{W} — 3/3 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nFlying\nAt the beginning of combat on your turn, target creature you control gains your choice of flying, vigilance, or lifelink until end of turn.
