@@ -2,7 +2,7 @@ Name:Stone Retrieval Unit
 ManaCost:4
 Types:Artifact Creature Construct
 PT:2/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerZones$ When CARDNAME enters the battlefield, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.)
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | SpellDescription$ When CARDNAME enters the battlefield, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.)
 SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
 DeckHas:Ability$Token & Type$Artifact
 Oracle:When Stone Retrieval Unit enters the battlefield, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.)
