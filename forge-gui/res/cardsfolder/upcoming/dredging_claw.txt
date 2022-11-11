@@ -1,10 +1,10 @@
-Name:Dissatisfied Customer
-ManaCost:2 B
-Types:Creature Vampire Guest
-PT:2/1
-K:Flying
-K:Haste
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiceRoll | TriggerDescription$ When CARDNAME enters the battlefield, roll a six-sided die. If the result is 3 or less, you lose that much life.
-SVar:TrigDiceRoll:DB$ RollDice | ResultSVar$ Result | ResultSubAbilities$ 1-3:DBLoseLife
-SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Result 
-Oracle:Flying, haste\nWhen Dissatisfied Customer enters the battlefield, roll a six-sided die. If the result is 3 or less, you lose that much life.
+Name:Dredging Claw
+ManaCost:2
+Types:Artifact Equipment
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Menace | Description$ Equipped creature gets +1/+0 and has menace.
+T:Mode$ ChangesZone | Destination$ Battlefield | Origin$ Graveyard | TriggerZones$ Battlefield | OptionalDecider$ You | ValidCard$ Creature.YouOwn | Execute$ TrigAttach | TriggerDescription$ Whenever a creature enters the battlefield from your graveyard, you may attach CARDNAME to it.
+SVar:TrigAttach:DB$ Attach |  Defined$ TriggeredCard
+K:Equip:1 B
+DeckHas:Keyword$Menace
+DeckHints:Ability$Graveyard & Color$Black
+Oracle:Equipped creature gets +1/+0 and has menace. (It’s can't be blocked except by two or more creatures.)\nWhenever a creature enters the battlefield from your graveyard, you may attach Dredging Claw to it.\nEquip {1}{B} ({1}{B}: Attach to target creature you control. Equip only as a sorcery.)

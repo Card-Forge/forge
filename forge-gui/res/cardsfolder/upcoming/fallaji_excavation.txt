@@ -1,8 +1,7 @@
-Name:Clowning Around
-ManaCost:1 W
+Name:Fallaji Excavation
+ManaCost:3 G G
 Types:Sorcery
-A:SP$ Token | TokenAmount$ 2 | TokenScript$ w_1_1_a_clown_robot | SubAbility$ DBRoll | SpellDescription$ Create two 1/1 white Clown Robot artifact creature tokens, then roll a six-sided die. If the result is equal to or less than the number of Robots you control, create a 1/1 white Clown Robot artifact creature token.
-SVar:DBRoll:DB$ RollDice | ResultSVar$ Result | ResultSubAbilities$ 1-6:DBToken
-SVar:DBToken:DB$ Token | TokenScript$ w_1_1_a_clown_robot | ConditionCheckSVar$ Result | ConditionSVarCompare$ LEX
-SVar:X:Count$Valid Robot.YouCtrl
-Oracle:Create two 1/1 white Clown Robot artifact creature tokens, then roll a six-sided die. If the result is equal to or less than the number of Robots you control, create a 1/1 white Clown Robot artifact creature token.
+A:SP$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone | TokenAmount$ 2 | SubAbility$ DBGainLife | SpellDescription$ Create three tapped Powerstone tokens. You gain 3 life. (The tokens are artifacts with é{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3
+DeckHas:Ability$Token|LifeGain & Type$Artifact
+Oracle:Create three tapped Powerstone tokens. You gain 3 life. (The tokens are artifacts with é{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")

@@ -3,10 +3,10 @@ ManaCost:3 W W
 Types:Creature Dog Soldier
 PT:3/3
 K:Flash
-DeckHas:Ability$Counters
-DeckHints:Type$Soldier
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPutCounterAll | TriggerDescription$ When CARDNAME enters the battlefield, put a +1/+1 counter on each other Soldier you control.
 SVar:TrigPutCounterAll:DB$ PutCounterAll | ValidCards$ Soldier.YouCtrl+Other | CounterType$ P1P1 | CounterNum$ 1
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ Soldier.attacking+YouCtrl+Other | IsCombat$ True | Description$ Prevent all damage that would be dealt to other attacking Soldiers you control.
 SVar:NonStackingEffect:True
+DeckHas:Ability$Counters
+DeckHints:Type$Soldier
 Oracle:Flash\nWhen Rescue Retriever enters the battlefield, put a +1/+1 counter on each other Soldier you control.\nPrevent all damage that would be dealt to other attacking Soldiers you control.

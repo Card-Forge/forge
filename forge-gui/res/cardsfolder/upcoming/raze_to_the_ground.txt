@@ -1,11 +1,8 @@
-Name:Disciple of Caelus Nin
-ManaCost:4 W
-Types:Creature Human Wizard
-PT:3/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRepeatEach | TriggerDescription$ When CARDNAME enters the battlefield, starting with you, each player chooses up to five permanents they control. All permanents other than CARDNAME that weren't chosen this way phase out.
-SVar:TrigRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivator$ True | RepeatSubAbility$ DBChoosePermanent | SubAbility$ DBPhaseOut
-SVar:DBChoosePermanent:DB$ ChooseCard | ChoiceTitle$ Choose up to five permanents you control | MinAmount$ 0 | Amount$ 5 | Defined$ Remembered | Choices$ Permanent.RememberedPlayerCtrl | RememberChosen$ True | AILogic$ NotSelf
-SVar:DBPhaseOut:DB$ Phases | AllValid$ Permanent.Other+IsNotRemembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
-S:Mode$ CantPhaseIn | ValidCard$ Permanent | Description$ Permanents can't phase in.
-Oracle:When Disciple of Caelus Nin enters the battlefield, starting with you, each player chooses up to five permanents they control. All permanents other than Disciple of Caelus Nin that weren't chosen this way phase out.\nPermanents can't phase in.
+Name:Raze to the Ground
+ManaCost:1 R
+Types:Sorcery
+K:This spell can't be countered.
+A:SP$ Destroy | Cost$ 2 G | ValidTgts$ Artifact | SubAbility$ DBDraw | SpellDescription$ Destroy target artifact. If its mana value was 1 or less, draw a card.
+SVar:DBDraw:DB$ Draw | ConditionCheckSVar$ X | ConditionSVarCompare$ LE1
+SVar:X:Targeted$CardManaCost
+Oracle:This spell can't be countered.\nDestroy target artifact. If its mana value was 1 or less, draw a card.

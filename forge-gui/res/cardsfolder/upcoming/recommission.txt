@@ -1,10 +1,7 @@
 Name:Recommission
 ManaCost:1 W
 Types:Sorcery
-A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Artifact.YouCtrl+cmcLE3,Creature.YouCtrl+cmcLE3 |SpellDescription$ Return target artifact or creature card with mana value 3 or less from your graveyard to the battlefield. If a creature enters the battlefield this way, it enters with an additional +1/+1 counter on it.
-SVar:TrigAddAPI:DB$ Effect | RememberObjects$ Remembered | ForgetOnMoved$ Stack | ReplacementEffects$ ReplaceEnter
-SVar:ReplaceEnter:Event$ Moved | ValidCard$ Card.IsRemembered | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | Destination$ Battlefield | ReplaceWith$ AddExtraCounter | ReplacementResult$ Updated | Description$ That creature enters the battlefield with an additional +1/+1 counter, trample counter, and vigilance counter on it.
-SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterTypes$ P1P1| CounterNum$ 1 | SubAbility$ DBExile
-SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBPutCounter | ValidTgts$ Artifact.YouCtrl+cmcLE3,Creature.YouCtrl+cmcLE3 | TgtPrompt$ Select target artifact or creature card with mana value 3 from your graveyard | SpellDescription$ Return target artifact or creature card with mana value 3 or less from your graveyard to the battlefield. If a creature enters the battlefield this way, it enters with an additional +1/+1 counter on it.
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature | CounterType$ P1P1 | CounterNum$ 1
+DeckHas:Ability$Graveyard|Counter
 Oracle:Return target artifact or creature card with mana value 3 or less from your graveyard to the battlefield. If a creature enters the battlefield this way, it enters with an additional +1/+1 counter on it.
-

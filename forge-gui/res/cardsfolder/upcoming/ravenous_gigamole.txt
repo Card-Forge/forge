@@ -1,10 +1,12 @@
-Name:Dissatisfied Customer
-ManaCost:2 B
-Types:Creature Vampire Guest
-PT:2/1
-K:Flying
-K:Haste
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiceRoll | TriggerDescription$ When CARDNAME enters the battlefield, roll a six-sided die. If the result is 3 or less, you lose that much life.
-SVar:TrigDiceRoll:DB$ RollDice | ResultSVar$ Result | ResultSubAbilities$ 1-3:DBLoseLife
-SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ Result 
-Oracle:Flying, haste\nWhen Dissatisfied Customer enters the battlefield, roll a six-sided die. If the result is 3 or less, you lose that much life.
+Name:Ravenous Gigamole
+ManaCost:3 B
+Types:Creature Mole Horror
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards. You may put a creature card from among the cards milled this way into your hand. If you don't, put a +1/+1 counter on CARDNAME. (To mill a card, player put the top card of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn+IsRemembered | RememberChanged$ True | ForgetOtherRemembered$ True | Hidden$ True | Optional$ True | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Card.Self | CounterType$ P1P1 | ConditionDefined$ Remembered | ConditionNotPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill|Counters
+DeckHints:Ability$Graveyard
+Oracle:When Ravenous Gigamole enters the battlefield, mill three cards. You may put a creature card from among the cards milled this way into your hand. If you don't, put a +1/+1 counter on Ravenous Gigamole. (To mill a card, player put the top card of your library into your graveyard.)
