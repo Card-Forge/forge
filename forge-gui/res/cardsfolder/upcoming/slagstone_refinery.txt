@@ -1,0 +1,8 @@
+Name:Slagstone Refinery
+ManaCost:4
+Types:Artifact 
+T:Mode$ ChangesZone | ValidCard$ Artifact.nonToken+YouCtrl+Other,Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME or another nontoken artifact you control is put into a graveyard from the battlefield or is put into exile from the battlefield, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
+DeckHints:Type$Artifact
+DeckHas:Ability$Token
+Oracle:Whenever Slagstone Refinery or another nontoken artifact you control is put into a graveyard from the battlefield or is put into exile from the battlefield, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
