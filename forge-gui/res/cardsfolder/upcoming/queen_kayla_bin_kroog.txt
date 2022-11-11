@@ -4,10 +4,10 @@ Types:Legendary Creature Human Noble
 PT:2/3
 A:AB$ Discard | Cost$ 4 T | Defined$ You | RememberDiscarded$ True | Mode$ Hand | SubAbility$ DBDraw | SorcerySpeed$ True | SpellDescription$ Discard all the cards in your hand, then draw that many cards. You may choose an artifact or creature card with mana value 1 you discarded this way, then do the same for artifact or creature cards with mana values 2 and 3. Return those cards to the battlefield. Activate only as a sorcery.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ DBChooseCardOne
-SVar:DBChooseCardOne:DB$ ChooseCard | Defined$ You | Choices$ Artifact.IsRemembered+cmcEQ1,Creature.IsRemembered+cmcEQ1 | ImprintChosen$ True | ChoiceTitle$ You may choose an artifact or creature card with mana value 1 you discarded this way | ChoiceZone$ Graveyard | SubAbility$ DBChooseCardTwo
-SVar:DBChooseCardTwo:DB$ ChooseCard | Defined$ You | Choices$ Artifact.IsRemembered+cmcEQ2,Creature.IsRemembered+cmcEQ2 | ImprintChosen$ True  | ChoiceTitle$ You may choose an artifact or creature card with mana value 2 you discarded this way | ChoiceZone$ Graveyard | SubAbility$ DBChooseCardThree
-SVar:DBChooseCardThree:DB$ ChooseCard | Defined$ You | Choices$ Artifact.IsRemembered+cmcEQ3,Creature.IsRemembered+cmcEQ3 | ImprintChosen$ True | ChoiceTitle$ You may choose an artifact or creature card with mana value 3 you discarded this way | ChoiceZone$ Graveyard | SubAbility$ DBChangeZoneAll
-SVar:DBChangeZoneAll:DB$ ChangeZone | Defined$ Imprinted | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCleanup
+SVar:DBChooseCardOne:DB$ ChooseCard | Defined$ You | Choices$ Artifact.IsRemembered+cmcEQ1,Creature.IsRemembered+cmcEQ1 | ImprintChosen$ True | ChoiceTitle$ You may choose an artifact or creature card with mana value 1 you discarded this way | ChoiceZone$ Graveyard,Exile | SubAbility$ DBChooseCardTwo
+SVar:DBChooseCardTwo:DB$ ChooseCard | Defined$ You | Choices$ Artifact.IsRemembered+cmcEQ2,Creature.IsRemembered+cmcEQ2 | ImprintChosen$ True  | ChoiceTitle$ You may choose an artifact or creature card with mana value 2 you discarded this way | ChoiceZone$ Graveyard,Exile | SubAbility$ DBChooseCardThree
+SVar:DBChooseCardThree:DB$ ChooseCard | Defined$ You | Choices$ Artifact.IsRemembered+cmcEQ3,Creature.IsRemembered+cmcEQ3 | ImprintChosen$ True | ChoiceTitle$ You may choose an artifact or creature card with mana value 3 you discarded this way | ChoiceZone$ Graveyard,Exile | SubAbility$ DBChangeZoneAll
+SVar:DBChangeZoneAll:DB$ ChangeZone | Defined$ Imprinted | Origin$ Graveyard,Exile | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 SVar:X:Remembered$Amount
 DeckHints:Type$Artifact
