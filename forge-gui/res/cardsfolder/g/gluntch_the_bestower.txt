@@ -9,7 +9,7 @@ SVar:Counters:DB$ PutCounter | Defined$ ChosenPlayer | Choices$ Creature.Control
 SVar:TrigChoosePlayer2:DB$ ChoosePlayer | Defined$ You | Choices$ Player.IsNotRemembered | RememberChosen$ True | ChoiceTitle$ Choose a player to draw a card | SubAbility$ Card
 SVar:Card:DB$ Draw | Defined$ ChosenPlayer | SubAbility$ TrigChoosePlayer3
 SVar:TrigChoosePlayer3:DB$ ChoosePlayer | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | Defined$ You | Choices$ Player.IsNotRemembered | RememberChosen$ True | ChoiceTitle$ Choose a player to create two Treasure tokens | SubAbility$Tokens
-SVar:Tokens:DB$ Token | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | Defined$ ChosenPlayer | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ ChosenPlayer | SubAbility$ CleanupFinal
+SVar:Tokens:DB$ Token | ConditionCheckSVar$ X | ConditionSVarCompare$ GE3 | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ ChosenPlayer | SubAbility$ CleanupFinal
 SVar:X:PlayerCountPlayers$Amount
 SVar:CleanupFinal:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Counters|Token|Sacrifice & Type$Treasure|Artifact
