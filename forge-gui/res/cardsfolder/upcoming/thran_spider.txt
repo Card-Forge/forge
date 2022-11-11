@@ -1,5 +1,5 @@
 Name:Thran Spider
-ManaCost:3
+ManaCost:2
 Types:Artifact Creature Spider
 PT:2/4
 K:Reach
