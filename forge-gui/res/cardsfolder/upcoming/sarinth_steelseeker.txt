@@ -4,9 +4,9 @@ Types:Creature Human Artificer Scout
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDig | TriggerDescription$ Whenever an artifact enters the battlefield under your control, look at the top card of your library. If it's a land card, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard.
 SVar:TrigDig:DB$ PeekAndReveal | PeekAmount$ 1 | RevealValid$ Land | RevealOptional$ True | RememberPeeked$ True | ImprintRevealed$ True | SubAbility$ DBChangeZone
-SVar:DBChangeZone:DB$ ChangeZone | Defined$ Imprinted | ForgetChanged$ True | Origin$ Library | Destination$ Hand | SubAbility$ DBGrave
-SVar:DBGrave:DB$ ChangeZone | Defined$ Imprinted | Origin$ Library | Destination$ Graveyard | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Imprinted | Optional$ True | ForgetChanged$ True | Origin$ Library | Destination$ Hand | SubAbility$ DBGrave
+SVar:DBGrave:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Optional$ True | Destination$ Graveyard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
 DeckHas:Ability$Graveyard
 DeckHints:Type$Artifact
 Oracle:Whenever an artifact enters the battlefield under your control, look at the top card of your library. If it's a land card, you may reveal it and put it into your hand. If you don't put the card into your hand, you may put it into your graveyard.
