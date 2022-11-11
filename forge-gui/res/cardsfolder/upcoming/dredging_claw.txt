@@ -1,9 +1,9 @@
 Name:Dredging Claw
 ManaCost:2
 Types:Artifact Equipment
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddKeyword$ Menace | Description$ Equipped creature gets +1/+0 and has menace.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddKeyword$ Menace | Description$ Equipped creature gets +1/+0 and has menace.
 T:Mode$ ChangesZone | Destination$ Battlefield | Origin$ Graveyard | TriggerZones$ Battlefield | OptionalDecider$ You | ValidCard$ Creature.YouOwn | Execute$ TrigAttach | TriggerDescription$ Whenever a creature enters the battlefield from your graveyard, you may attach CARDNAME to it.
-SVar:TrigAttach:DB$ Attach |  Defined$ TriggeredCard
+SVar:TrigAttach:DB$ Attach | Defined$ TriggeredCard
 K:Equip:1 B
 DeckHas:Keyword$Menace
 DeckHints:Ability$Graveyard & Color$Black
