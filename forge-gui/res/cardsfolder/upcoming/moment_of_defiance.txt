@@ -1,0 +1,7 @@
+Name:Moment of Defiance
+ManaCost:2 B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ 2 | NumDef$ 1 | KW$ Lifelink | SubAbility$ DBDraw | SpellDescription$ Target creature gets +2/+1 and gains lifelink until end of turn. Draw a card.
+SVar:DBDraw:DB$ Draw
+DeckHas:Ability$LifeGain & Keyword$Lifelink
+Oracle:Target creature gets +2/+1 and gains lifelink until end of turn.\nDraw a card.
