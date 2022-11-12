@@ -20,6 +20,7 @@ package forge.game.spellability;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
@@ -540,6 +541,13 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             final int levelOperand = AbilityUtils.calculateAmount(c, this.getClassLevel(), sa);
 
             if (!Expressions.compare(level, this.getClassLevelOperator(), levelOperand)) {
+                return false;
+            }
+        }
+
+        if (this.getGameTypes().size() > 0) {
+            Predicate<GameType> pgt = type -> game.getRules().hasAppliedVariant(type);
+            if (!Iterables.any(getGameTypes(), pgt)) {
                 return false;
             }
         }
