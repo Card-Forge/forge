@@ -3204,6 +3204,9 @@ public class CardFactoryUtil {
             newSA.putParam("SetToughness", k[3]);
             newSA.putParam("Prototype", "True");
 
+            // need to store them for additional copies
+            newSA.getOriginalMapParams().putAll(newSA.getMapParams());
+
             // only makes description for prompt
             newSA.setDescription(k[0] + " " + ManaCostParser.parse(k[1]) + " [" + k[2] + "/" + k[3] + "]");
 

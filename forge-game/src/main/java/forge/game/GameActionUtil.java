@@ -151,7 +151,7 @@ public final class GameActionUtil {
                 final StringBuilder sb = new StringBuilder(sa.getDescription());
                 if (!source.equals(host)) {
                     sb.append(" by ");
-                    if ((host.isImmutable()) && host.getEffectSource() != null) {
+                    if (host.isImmutable() && host.getEffectSource() != null) {
                         sb.append(host.getEffectSource());
                     } else {
                         sb.append(host);
