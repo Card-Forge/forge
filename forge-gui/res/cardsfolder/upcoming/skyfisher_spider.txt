@@ -4,11 +4,11 @@ Types:Creature Spider
 PT:3/3
 K:Reach
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, you may sacrifice another creature. When you do, destroy target nonland permanent.
-SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other/another creature> | Execute$ TrigDestroy | TriggerDescription$ When you do, destroy target creature an opponent controls.
+SVar:TrigSac:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other/another creature> | Execute$ TrigDestroy 
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigExile | OptionalDecider$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may gain 1 life for each creature card in your graveyard. If you do, exile CARDNAME from your graveyard.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredNewCardLKICopy | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigGainLife | OptionalDecider$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, you may gain 1 life for each creature card in your graveyard. If you do, exile CARDNAME from your graveyard.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ TrigExile
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | Defined$ TriggeredNewCardLKICopy
 SVar:X:Count$TypeInYourYard.Creature
 DeckHints:Ability$Graveyard|Mill|Dredge|Sacrifice
 DeckHas:Ability$Sacrifice|LifeGain|Graveyard

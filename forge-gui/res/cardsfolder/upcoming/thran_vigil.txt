@@ -1,0 +1,8 @@
+Name:Thran Vigil
+ManaCost:1 B
+Types:Enchantment
+T:Mode$ ChangesZoneAll | Origin$ Graveyard | Destination$ Any | ValidCards$ Creature.YouOwn,Artifact.YouOwn | Execute$ TrigCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever one or more artifact and/or creature cards leave your graveyard during your turn, put a +1/+1 counter on target creature you control.
+SVar:TrigCounter:DB$ PuCounter | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature.YouCtrl
+DeckHas:Ability$Graveyard|Counters
+DeckHints:Ability$Graveyard 
+Oracle:Whenever one or more artifact and/or creature cards leave your graveyard during your turn, put a +1/+1 counter on target creature you control.
