@@ -331,6 +331,9 @@ StonePyramid
 Mine
   xy: 96, 144
   size: 32, 32
+LavaForge
+  xy: 384, 336
+  size: 32, 32
 black_castle 
   xy: 0, 800
   size: 64, 64       
