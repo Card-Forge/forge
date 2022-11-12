@@ -3,6 +3,7 @@ package forge.adventure.scene;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.google.common.collect.Lists;
 import forge.Forge;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.stage.MapStage;
@@ -14,6 +15,8 @@ import forge.adventure.util.TemplateTmxMapLoader;
 import forge.adventure.world.WorldSave;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
+
+import java.util.ArrayList;
 
 /**
  * Scene that will render tiled maps.
@@ -28,7 +31,6 @@ public class TileMapScene extends HudScene   {
     private TileMapScene() {
         super(MapStage.getInstance());
         tiledMapRenderer = new PointOfInterestMapRenderer((MapStage) stage);
-
 
         //set initial camera width and height
         MapStage.getInstance().setDialogStage(hud);
@@ -62,7 +64,7 @@ public class TileMapScene extends HudScene   {
         }
         stage.act(Gdx.graphics.getDeltaTime());
         hud.act(Gdx.graphics.getDeltaTime());
-        if (autoheal) { //todo add better effect
+        if (autoheal) {
             stage.getPlayerSprite().playEffect(Paths.EFFECT_HEAL,2);
             SoundSystem.instance.play(SoundEffectType.Enchantment, false);
             autoheal = false;
@@ -90,7 +92,7 @@ public class TileMapScene extends HudScene   {
     @Override
     public void enter() {
         super.enter();
-        if (inTown()) {
+        if (isAutoHealLocation()) {
             // auto heal
             if (Current.player().fullHeal())
                 autoheal = true; // to play sound/effect on act
@@ -108,8 +110,9 @@ public class TileMapScene extends HudScene   {
         stage.getPlayerSprite().stop();
     }
 
-    public boolean inTown() {
-        return "town".equalsIgnoreCase(rootPoint.getData().type);
+    private final static ArrayList<String> AUTO_HEAL_LOCATIONS = Lists.newArrayList("capital", "town");
+    public boolean isAutoHealLocation() {
+        return AUTO_HEAL_LOCATIONS.contains(rootPoint.getData().type);
     }
 
     PointOfInterest rootPoint;
