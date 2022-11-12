@@ -111,7 +111,7 @@ public class StartScene extends UIScene {
         boolean hasSaveButton = WorldSave.getCurrentSave().getWorld().getData() != null;
         if (hasSaveButton) {
             TileMapScene scene =  TileMapScene.instance();
-            hasSaveButton = !scene.currentMap().isInMap() || scene.inTown();
+            hasSaveButton = !scene.currentMap().isInMap() || scene.isAutoHealLocation();
         }
         saveButton.setVisible(hasSaveButton);
 
