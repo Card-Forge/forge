@@ -1,0 +1,12 @@
+Name:Ravenous Gigamole
+ManaCost:3 B
+Types:Creature Mole Horror
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards. You may put a creature card from among the cards milled this way into your hand. If you don't, put a +1/+1 counter on CARDNAME. (To mill a card, a player puts the top card of their library into their graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Creature.YouOwn+IsRemembered | RememberChanged$ True | ForgetOtherRemembered$ True | Hidden$ True | Optional$ True | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Card.Self | CounterType$ P1P1 | ConditionDefined$ Remembered | ConditionNotPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill|Counters
+DeckHints:Ability$Graveyard
+Oracle:When Ravenous Gigamole enters the battlefield, mill three cards. You may put a creature card from among the cards milled this way into your hand. If you don't, put a +1/+1 counter on Ravenous Gigamole. (To mill a card, a player puts the top card of their library into their graveyard.)
