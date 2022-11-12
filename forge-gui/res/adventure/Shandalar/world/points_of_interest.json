@@ -1645,5 +1645,23 @@
         "spriteAtlas": "maps/tileset/buildings.atlas",
         "sprite": "Mine",
         "map": "maps/map/crawlspace.tmx"
-}
+},
+{
+        "name": "LavaForge1",
+        "type": "dungeon",
+        "count": 1,
+        "radiusFactor": 0.8,
+        "spriteAtlas": "maps/tileset/buildings.atlas",
+        "sprite": "LavaForge",
+        "map": "maps/map/lavaforge_1.tmx"
+},
+{
+        "name": "LavaForge2",
+        "type": "dungeon",
+        "count": 1,
+        "radiusFactor": 0.8,
+        "spriteAtlas": "maps/tileset/buildings.atlas",
+        "sprite": "LavaForge",
+        "map": "maps/map/lavaforge_2.tmx"
+} 
 ]
