@@ -152,6 +152,7 @@ Ral, Izzet Viceroy|Ral's Bonus|I was just researching lightning and then it hit 
 Rowan, Fearless Sparkmage|Rowan's Magnetic Personality|Personal magnetism can create the spark of revolt.
 Rowan, Scholar of Sparks|Rowan's Twin Magic|Of course I haven't copied my answers, professor!
 Saheeli Rai|Saheeli's Creativity|I love when all the pieces come together!
+Saheeli, Filigree Master|Saheeli's Version 2.0|Better. Stronger. Faster.
 Saheeli, the Gifted|Saheeli's Doubling Season|Polished to mirror sheen.
 Samut, the Tested|Samut's Rapid Deployment|My friends will be here in a flash.
 Sarkhan Vol|Sarkhan's Dragons|Go forth, my minions!
@@ -175,6 +176,7 @@ Tamiyo, the Moon Sage|Tamiyo's Recycling|Wash, rinse, repeat!
 Teferi, Hero of Dominaria|Teferi's Oblivion|Don't worry. It's just a phase.
 Teferi, Master of Time|Teferi's Prolonged Afternoon|Defeating me will be quite a stretch.
 Teferi, Temporal Archmage|Teferi's Time Slip|Let's speed this up a bit!
+Teferi, Temporal Pilgrim|Teferi's Silent Witnessing|One of the most impressive Sylex blasts I've ever seen.
 Teferi, Timebender|Teferi's Time Warp|Let's do that again!
 Teferi, Timeless Voyager|Teferi's Zhalfir Trick|I'll need a few volunteers from the audience.
 Teferi, Who Slows the Sunset|Teferi's Intrusion|Your turn is my turn.
@@ -191,6 +193,7 @@ Tibalt, Cosmic Impostor|Tibalt's Heist|Who says crime doesn't pay?
 Tibalt, the Fiend-Blooded|Tibalt's Treason|My side is the winning side!
 Tyvar Kell|Tyvar's Charge|To arms! To arms! And remember -- look fabulous!
 Ugin, the Spirit Dragon|Ugin's Anti-Ultimatum|A ragtag band of misfits, brought from the future...
+Urza, Planeswalker|Urza's Ruinous Blast|Thousands of years... of this?
 Venser, the Sojourner|Venser's Oblivion|Let's just clean this up a bit...
 Vivien of the Arkbow|Vivien's Overrun|No, never heard of a 'Garruk' -- why do you ask?
 Vivien Reid|Vivien's Utter Pandemonium|They're so cute when they're stampeding.
