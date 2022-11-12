@@ -1,12 +1,13 @@
 Name:Kayla's Music Box
 ManaCost:2
 Types:Legendary Artifact
-A:AB$ Dig | Cost$ W T | DigNum$ 1 | ForceRevealToController$ True | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | SpellDescription$ Look at the top card of your library, then exile it face down. (You may look at it any time.) 
+A:AB$ Dig | Cost$ W T | DigNum$ 1 | ForceRevealToController$ True | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | ExileFaceDown$ True | SpellDescription$ Look at the top card of your library, then exile it face down. (You may look at it any time.) 
 S:Mode$ Continuous | MayLookAt$ You | Affected$ Card.ExiledWithSource+YouOwn | AffectedZone$ Exile
 A:AB$ Effect | Cost$ T | StaticAbilities$ MayPlay | SpellDescription$ Until end of turn, you may play cards you own exiled with CARDNAME.
-SVar:MayPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.ExiledWithEffectSource+YouOwn | AffectedZone$ Exile | MayPlay$ True | Description$ Until end of turn, you may play cards you own exiled with CARDNAME.
+SVar:MayPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.ExiledWithEffectSource+YouOwn+IsRemembered | AffectedZone$ Exile | MayPlay$ True | Description$ Until end of turn, you may play cards you own exiled with CARDNAME.
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigCleanup | Static$ True
-T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | Execute$ TrigCleanup | Static$ True
+T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Exile | Destination$ Any | Execute$ TrigForget | Static$ True
+SVar:TrigForget:DB$ Pump | ForgetObjects$ TriggeredCard
 SVar:TrigCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Color$White
 Oracle:{W}, {T}: Look at the top card of your library, then exile it face down. (You may look at it any time.)\n{T}: Until end of turn, you may play cards you own exiled with Kayla's Music Box.
