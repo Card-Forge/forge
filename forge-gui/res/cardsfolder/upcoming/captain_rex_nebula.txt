@@ -8,7 +8,7 @@ SVar:CrashLand:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player,P
 SVar:RollCounters:DB$ RollDice | ResultSVar$ Result | SubAbility$ Crash
 SVar:Crash:DB$ Sacrifice | Defined$ Card.Self | ConditionCheckSVar$ Result | ConditionSVarCompare$ EQX | SubAbility$ CrashDamage
 SVar:CrashDamage:DB$ DealDamage | ValidTgt$ Planeswalker,Player,Permanent | TgtPromp$ Choose any target | DamageAmount$ X | ConditionCheckSVar$ Result | ConditionSVarCompare$ EQX
-SVar:X:Targeted$CardManaCost
+SVar:X:TriggeredCard$CardManaCost
 DeckHints:Type$Vehicle
 DeckHas:Ability$Sacrifice
 Oracle:At the beginning of combat on your turn, choose target nonland permanent you control. Until end of turn, it becomes a Vehicle artifact with base power and toughness each equal to its mana value, and it gains crew 2 and "Crash Land — Whenever this Vehicle deals damage, roll a six-sided die. If the result is equal to this Vehicle's mana value, sacrifice this Vehicle, then it deals that much damage to any target."
