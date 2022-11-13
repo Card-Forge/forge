@@ -1,7 +1,7 @@
 Name:The Fall of Kroog
 ManaCost:4 R R
 Types:Sorcery
-A:SP$ ChoosePlayer | ValidTgts$ Player.Opponent | TgtPrompt$ Select target opponent | Choices$ TargetedPlayer | SubAbility$ DBDestroy | StackDescription$ SpellDescription | SpellDescription$ Choose target opponent. Destroy target land that player controls. The Fall of Kroog deals 3 damage to that player and 1 damage to each creature they control.
+A:SP$ ChoosePlayer | ValidTgts$ Player.Opponent | TgtPrompt$ Select target opponent | Choices$ TargetedPlayer | SubAbility$ DBDestroy | StackDescription$ SpellDescription | SpellDescription$ Choose target opponent. Destroy target land that player controls. CARDNAME deals 3 damage to that player and 1 damage to each creature they control.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Land | TargetsWithDefinedController$ ParentTarget | TgtPrompt$ Select target land that player controls | SubAbility$ DBDealDamage
 SVar:DBDealDamage:DB$ DealDamage | Defined$ TargetedPlayer | NumDmg$ 3 | SubAbility$ DBDamageAll | DamageMap$ True
 SVar:DBDamageAll:DB$ DamageAll | ValidCards$ Creature.ControlledBy TargetedPlayer | NumDmg$ 1
