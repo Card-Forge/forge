@@ -1,0 +1,10 @@
+Name:Meticulous Excavation
+ManaCost:W
+Types:Enchantment
+A:AB$ ChangeZone | Cost$ 2 W | RememberTargets$ True | PlayerTurn$ True | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | SubAbility$ ExileWithUnearth | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target permanent you control to its owner's hand. If it has unearth, instead exile it, then return that card to its owner's hand. Activate only during your turn.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | ConditionDefined Remembered | ConditionPresent$ Card.withUnearth | ExileOnMoved$ Stack | ReplacementEffects$ ReplaceGraveyard | SubAbility$ DBCleanup
+SVar:ReplaceGraveyard:Event$ Moved | ValidCard$ Card.IsRemembered | Origin$ Stack | Destination$ Hand | ReplaceWith$ MoveExile
+SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile | SubAbility$ ToHand
+SVar:ToHand:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Exile | Destination$ Hand
+DeckHints:Keyword$Unearth
+Oracle:{2}{W}: Return target permanent you control to its owner's hand. If it has unearth, instead exile it, then return that card to its owner's hand. Activate only during your turn.
