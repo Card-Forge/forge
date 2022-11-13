@@ -4,4 +4,5 @@ Types:Instant
 A:SP$ Destroy | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select a creature | AILogic$ Pongify | RememberLKI$ True | AlwaysRemember$ True | SubAbility$ DBToken | NoRegen$ True | SpellDescription$ Destroy target creature. It can't be regenerated. Its controller creates a 3/3 green Ape creature token.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenScript$ g_3_3_ape | TokenOwner$ RememberedController | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token & Type$Ape
 Oracle:Destroy target creature. It can't be regenerated. Its controller creates a 3/3 green Ape creature token.
