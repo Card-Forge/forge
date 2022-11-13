@@ -8,7 +8,9 @@ SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Car
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ X | SVarCompare$ EQ0 | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ At the beginning of your end step, if you didn't play a card from exile this turn, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
 SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
+T:Mode$ LandPlayed | Origin$ Exile | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | TriggerZones$ Command | Execute$ StoreVar | Static$ True
+SVar:StoreVar:DB$ StoreSVar | SVar$ LandsPlayedFromExile | Type$ Number | Expression$ 1
 SVar:X:Count$ThisTurnCast_Card.YouCtrl+wasCastFromExile/Plus.LandsPlayedFromExile
-SVar:LandsPlayedFromExile:Count$Valid Land.ThisTurnEnteredFrom_Exile
+SVar:LandsPlayedFromExile:Number$0
 DeckHas:Ability$Token & Type$Artifact
 Oracle:At the beginning of your upkeep, exile the top card of your library. You may play that card this turn.\nAt the beginning of your end step, if you didn't play a card from exile this turn, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
