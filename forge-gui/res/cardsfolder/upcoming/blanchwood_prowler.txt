@@ -5,7 +5,7 @@ PT:1/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME enters the battlefield, mill three cards. You may put a land card from among the cards milled this way into your hand. If you don’t, put a +1/+1 counter on CARDNAME. (To mill a card, put the top card of your library into your graveyard.)
 SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Hand | ChangeType$ Land.YouOwn+IsRemembered | RememberChanged$ True | ForgetOtherRemembered$ True | Hidden$ True | Optional$ True | SubAbility$ DBCounter
-SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | Defined$ Card.Self | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCounter:DB$ PutCounter | CounterType$ P1P1 | Defined$ Card.Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Graveyard|Mill|Counters
 Oracle:When Blanchwood Prowler enters the battlefield, mill three cards. You may put a land card from among the cards milled this way into your hand. If you don't, put a +1/+1 counter on Blanchwood Prowler. (To mill a card, put the top card of your library into your graveyard.)
