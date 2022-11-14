@@ -1,0 +1,8 @@
+Name:Mask of the Jadecrafter
+ManaCost:2
+Types:Artifact
+A:AB$ Token | Cost$ X T Sac<1/CARDNAME> | TokenScript$ c_x_x_a_golem | TokenPower$ X | TokenToughness$ X | SorcerySpeed$ True | SpellDescription$ Create an X/X colorless Golem artifact creature token. Activate only as a sorcery.
+SVar:X:Count$xPaid
+K:Unearth:2 G
+DeckHas:Ability$Graveyard
+Oracle:{X}, {T}, Sacrifice Mask of the Jadecrafter: Create an X/X colorless Golem artifact creature token. Activate only as a sorcery.\nUnearth {2}{G} ({2}{G}: Return this card from your graveyard to the battlefield. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

@@ -65,7 +65,7 @@ public class CardUtil {
 
             if(this.colors!= MagicColor.ALL_COLORS)
             {
-                if(!card.getRules().getColor().hasNoColorsExcept(this.colors)||card.getRules().getColor().isColorless())
+                if(!card.getRules().getColor().hasNoColorsExcept(this.colors)||(this.colors != MagicColor.COLORLESS && card.getRules().getColor().isColorless()))
                     return !this.shouldBeEqual;
             }
             if(colorType!=ColorType.Any)
@@ -182,7 +182,11 @@ public class CardUtil {
                 this.colors=0;
                 for(String color:type.colors)
                 {
-                    colors|=MagicColor.fromName(color.toLowerCase());
+                    if("colorID".equals(color))
+                        for (byte c : Current.player().getColorIdentity())
+                            colors |= c;
+                    else
+                        colors |= MagicColor.fromName(color.toLowerCase());
                 }
             }
             if(type.keyWords!=null&&type.keyWords.length!=0)

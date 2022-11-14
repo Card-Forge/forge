@@ -62,7 +62,9 @@ public class WrappedAbility extends Ability {
             ApiType.Token,
             ApiType.SetState,
             ApiType.Play,
-            ApiType.SacrificeAll
+            ApiType.SacrificeAll,
+
+            ApiType.DelayedTrigger
             );
 
     private final SpellAbility sa;
