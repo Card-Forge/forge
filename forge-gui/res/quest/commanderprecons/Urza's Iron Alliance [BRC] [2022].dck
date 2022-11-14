@@ -1,9 +1,9 @@
 [metadata]
 Name=Urza's Iron Alliance [BRC] [2022]
 [Commander]
-1 Alela, Artful Provocateur|BRC|1
 1 Urza, Chief Artificer|BRC|1
 [Main]
+1 Alela, Artful Provocateur|BRC|1
 1 Ancient Den|BRC|1
 1 Angel of the Ruins|BRC|1
 1 Arcane Sanctum|BRC|1
@@ -74,7 +74,7 @@ Name=Urza's Iron Alliance [BRC] [2022]
 1 Steel Hellkite|BRC|1
 1 Steel Overseer|BRC|1
 1 Sunken Hollow|BRC|1
-4 Swamp|BRC|2
+3 Swamp|BRC|2
 1 Swiftfoot Boots|BRC|1
 1 Swords to Plowshares|BRC|1
 1 Tawnos, Solemn Survivor|BRC|1
@@ -96,4 +96,3 @@ Name=Urza's Iron Alliance [BRC] [2022]
 1 Wire Surgeons|BRC|1
 1 Wreck Hunter|BRC|1
 [Sideboard]
-

@@ -1,0 +1,7 @@
+Name:Energy Refractor
+ManaCost:2
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 1
+A:AB$ Mana | Cost$ 2 | Produced$ Any | SpellDescription$ Add one mana of any color.
+Oracle:When Energy Refractor enters the battlefield, draw a card.\n{2}: Add one mana of any color.
