@@ -117,20 +117,6 @@ public class RewardData {
                 type="randomCard";
             int maxCount=Math.round(addMaxCount*Current.player().getDifficulty().rewardMaxFactor);
             int addedCount = (maxCount > 0 ? WorldSave.getCurrentSave().getWorld().getRandom().nextInt(maxCount) : 0);
-            if( colors != null && colors.length > 0 ) { //Filter special "colorID" case.
-                String C = Current.player().getColorIdentityLong();
-                for(int i = 0; i < colors.length; i++){
-                    if(colors[i].equals("colorID")){
-                        if(C.equals("colorless")) { //Colorless nullifies all other possible colors.
-                            //A quirk of the filter, but flavorful.
-                            colorType = "Colorless";
-                            colors = null;
-                            break;
-                        }
-                        else colors[i] = C;
-                    }
-                }
-            }
 
             switch(type) {
                 case "card":
