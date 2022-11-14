@@ -923,7 +923,7 @@ public class CardFactoryUtil {
 
             StringBuilder trigReturn = new StringBuilder();
             trigReturn.append("Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self");
-            trigReturn.append(" | Secondary$ True | TriggerDescription$ When this leaves the battlefield, that card returns to the battlefield.");
+            trigReturn.append(" | Secondary$ True | TriggerDescription$ When this permanent leaves the battlefield, return the exiled card to the battlefield under its owner’s control.");
 
             StringBuilder ab = new StringBuilder();
             ab.append("DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True ");

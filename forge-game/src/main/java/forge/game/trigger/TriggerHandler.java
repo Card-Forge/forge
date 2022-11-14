@@ -594,11 +594,10 @@ public class TriggerHandler {
             wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory);
         } else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
+            game.getTriggerHandler().runTrigger(TriggerType.AbilityTriggered, TriggerAbilityTriggered.getRunParams(regtrig, wrapperAbility, runParams), false);
         }
 
         regtrig.triggerRun();
-
-        game.getTriggerHandler().runTrigger(TriggerType.AbilityTriggered, TriggerAbilityTriggered.getRunParams(regtrig, wrapperAbility, runParams), false);
 
         if (regtrig.hasParam("OneOff")) {
             if (regtrig.getHostCard().isImmutable()) {
