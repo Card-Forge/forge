@@ -409,7 +409,7 @@ public class ComputerUtilCost {
     }
 
     /**
-     * Check creature sacrifice cost.
+     * Check TapType cost.
      *
      * @param cost
      *            the cost
