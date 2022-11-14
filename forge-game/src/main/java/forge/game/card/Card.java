@@ -220,7 +220,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private long bestowTimestamp = -1;
     private long transformedTimestamp = 0;
-    private long convertedTimestamp = 0;
     private long mutatedTimestamp = -1;
     private long prototypeTimestamp = -1;
     private int timesMutated = 0;
@@ -393,9 +392,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public long getTransformedTimestamp() { return transformedTimestamp; }
     public void incrementTransformedTimestamp() { this.transformedTimestamp++; }
-
-    public long getConvertedTimestamp() { return convertedTimestamp; }
-    public void incrementConvertedTimestamp() { this.convertedTimestamp++; }
 
     public CardState getCurrentState() {
         return currentState;
