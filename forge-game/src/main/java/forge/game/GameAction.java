@@ -1572,13 +1572,23 @@ public class GameAction {
         for (final Card c : p.getCreaturesInPlay().threadSafeIterable()) {
             if (!c.hasSector()) {
                 toAssign.add(c);
-                checkAgain = true;
+                if (!checkAgain) {
+                    checkAgain = true;
+                }
             }
         }
 
+        final StringBuilder sb = new StringBuilder();
         for (Card assignee : toAssign) { // probably would be nice for players to pick order of assigning?
-            assignee.assignSector(p.getController().chooseSector(assignee, "Assign"));
-            toAssign.remove(assignee);
+            String sector = p.getController().chooseSector(assignee, "Assign");
+            assignee.assignSector(sector);
+            if (sb.length() == 0) {
+                sb.append(p).append(" assigns:\n");
+            }
+            sb.append(assignee).append(" ").append(sector).append("\n");
+        }
+        if (sb.length() > 0) {
+            notifyOfValue(null, p, sb.toString(), p);
         }
 
         return checkAgain;
@@ -1971,9 +1981,11 @@ public class GameAction {
 
     /** Delivers a message to all players. (use reveal to show Cards) */
     public void notifyOfValue(SpellAbility saSource, GameObject relatedTarget, String value, Player playerExcept) {
-        String name = CardTranslation.getTranslatedName(saSource.getHostCard().getName());
-        value = TextUtil.fastReplace(value, "CARDNAME", name);
-        value = TextUtil.fastReplace(value, "NICKNAME", Lang.getInstance().getNickName(name));
+        if (saSource != null) {
+            String name = CardTranslation.getTranslatedName(saSource.getHostCard().getName());
+            value = TextUtil.fastReplace(value, "CARDNAME", name);
+            value = TextUtil.fastReplace(value, "NICKNAME", Lang.getInstance().getNickName(name));
+        }
         for (Player p : game.getPlayers()) {
             if (playerExcept == p) continue;
             p.getController().notifyOfValue(saSource, relatedTarget, value);
