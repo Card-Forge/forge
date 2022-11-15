@@ -528,7 +528,7 @@ public class ComputerUtilMana {
                 if (produced.equals("Chosen")) {
                     produced = MagicColor.toShortString(trSA.getHostCard().getChosenColor());
                 }
-                manaProduced += " " + StringUtils.repeat(produced + " ", pAmount);
+                manaProduced += " " + StringUtils.repeat(produced, " ", pAmount);
             } else if (ApiType.ManaReflected.equals(trSA.getApi())) {
                 final String colorOrType = trSA.getParamOrDefault("ColorOrType", "Color");
                 // currently Color or Type, Type is colors + colorless
