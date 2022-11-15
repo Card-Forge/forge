@@ -234,12 +234,13 @@ public abstract class InputPayMana extends InputSyncronizedBase {
         }
 
         final SpellAbility chosen;
+        final String typeRes = manaCost.getSourceRestriction();
+
         if (chosenAbility == null) {
             HashMap<SpellAbilityView, SpellAbility> abilitiesMap = new HashMap<>();
             // you can't remove unneeded abilities inside a for (am:abilities) loop :(
 
-            final String typeRes = manaCost.getSourceRestriction();
-            if (StringUtils.isNotBlank(typeRes) && !card.getType().hasStringType(typeRes)) {
+            if (StringUtils.isNotBlank(typeRes) && !card.isValid(typeRes, player, card, null)) {
                 return false;
             }
 
@@ -350,6 +351,11 @@ public abstract class InputPayMana extends InputSyncronizedBase {
 
                     for (AbilityManaPart sa : manaAbilities) {
                         if (!sa.meetsManaRestrictions(saPaidFor)) {
+                            restrictionsMet = false;
+                            break;
+                        }
+
+                        if (StringUtils.isNotBlank(typeRes) && !card.isValid(typeRes, player, card, null)) {
                             restrictionsMet = false;
                             break;
                         }
