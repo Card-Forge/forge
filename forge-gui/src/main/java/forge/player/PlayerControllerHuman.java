@@ -1370,7 +1370,7 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
         // turn this into two separate localized prompts
         String prompt = "Choose sector";
         if (assignee != null) {
-            prompt = prompt + " for " + assignee.getName();
+            prompt = prompt + " for " + assignee;
         }
         return getGui().one(prompt, sectors);
     }
