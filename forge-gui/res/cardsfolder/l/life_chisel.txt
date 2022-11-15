@@ -3,6 +3,8 @@ ManaCost:4
 Types:Artifact
 A:AB$ GainLife | Cost$ Sac<1/Creature> | LifeAmount$ X | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ You gain life equal to the sacrificed creature's toughness. Activate only during your upkeep.
 SVar:X:Sacrificed$CardToughness
-AI:RemoveDeck:All
+AI:RemoveDeck:Random
 SVar:NonStackingEffect:True
+DeckHas:Ability$Sacrifice|LifeGain
+DeckHints:Type$Zombie|Phyrexian|Thrull
 Oracle:Sacrifice a creature: You gain life equal to the sacrificed creature's toughness. Activate only during your upkeep.

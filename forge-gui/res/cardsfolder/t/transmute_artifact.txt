@@ -14,6 +14,8 @@ SVar:CostNotPaid:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | NoL
 SVar:Y:Remembered$CardManaCost
 SVar:SackedCMC:Number$0
 SVar:X:SVar$Y/Minus.SackedCMC
-AI:RemoveDeck:All
+AI:RemoveDeck:Random
 #ChangeType$ Card.IsRemembered
+DeckHas:Ability$Sacrifice
+DeckNeeds:Type$Artifact
 Oracle:Sacrifice an artifact. If you do, search your library for an artifact card. If that card's mana value is less than or equal to the sacrificed artifact's mana value, put it onto the battlefield. If it's greater, you may pay {X}, where X is the difference. If you do, put it onto the battlefield. If you don't, put it into its owner's graveyard. Then shuffle.

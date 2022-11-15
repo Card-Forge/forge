@@ -9,4 +9,8 @@ SVar:AffectedX:Count$CardManaCost
 SVar:NonStackingEffect:True
 SVar:PlayMain1:ALWAYS
 AI:RemoveDeck:Random
+SVar:NeedsToPlayVar:CountOpps GTCountMe
+SVar:CountOpp:Count$Valid Artifact.OppCtrl+White/LimitMax.5
+SVar:CountMe:Count$Valid Artifact.YouCtrl+White
+DeckHints:Type$Enchantment|Creature|Planeswalker
 Oracle:Each noncreature artifact loses all abilities and becomes an artifact creature with power and toughness each equal to its mana value. If Titania's Song leaves the battlefield, this effect continues until end of turn.

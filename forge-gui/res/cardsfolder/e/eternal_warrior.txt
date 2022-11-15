@@ -4,4 +4,5 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Vigilance | Description$ Enchanted creature has vigilance.
+DeckHas:Keyword$Vigilance
 Oracle:Enchant creature\nEnchanted creature has vigilance.

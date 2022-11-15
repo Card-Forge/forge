@@ -4,4 +4,6 @@ Types:Artifact
 A:AB$ Mana | Cost$ Sac<1/Creature> | Produced$ C | Amount$ 2 | SpellDescription$ Add {C}{C}.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All
+DeckHas:Ability$Sacrifice
+DeckHints:Ability$Token
 Oracle:Sacrifice a creature: Add {C}{C}.

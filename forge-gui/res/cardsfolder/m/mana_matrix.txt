@@ -2,4 +2,5 @@ Name:Mana Matrix
 ManaCost:6
 Types:Artifact
 S:Mode$ ReduceCost | ValidCard$ Instant,Enchantment | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Instant and enchantment spells you cast cost up to {2} less to cast.
+DeckNeeds:Type$Enchantment|Instant
 Oracle:Instant and enchantment spells you cast cost up to {2} less to cast.
