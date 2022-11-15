@@ -376,7 +376,7 @@ public class ComputerUtilMana {
             }
 
             final String typeRes = cost.getSourceRestriction();
-            if (StringUtils.isNotBlank(typeRes) && !paymentChoice.getHostCard().getType().hasStringType(typeRes)) {
+            if (StringUtils.isNotBlank(typeRes) && !paymentChoice.getHostCard().isValid(typeRes, null, null, null)) {
                 continue;
             }
 

@@ -92,7 +92,7 @@ public class TargetSelection {
 
         final boolean hasEnoughTargets = minTargets == 0 || numTargeted >= minTargets;
         final boolean hasAllTargets = numTargeted == maxTargets && maxTargets > 0;
-        if (maxTargets == 0) { return true; }
+        if (maxTargets == 0 && minTargets == 0) { return true; }
 
         // if not enough targets chosen, cancel Ability
         if (this.bTargetingDone && !hasEnoughTargets) {
