@@ -5,6 +5,6 @@ S:Mode$ Continuous | Affected$ Artifact | AddKeyword$ UpkeepCost:2 | Description
 AI:RemoveDeck:Random
 DeckHas:Ability$Sacrifice
 SVar:NeedsToPlayVar:CountOpps GTCountMe
-SVar:CountOpp:Count$Valid Artifact.OppCtrl/LimitMax.5
+SVar:CountOpps:Count$Valid Artifact.OppCtrl/LimitMax.5
 SVar:CountMe:Count$Valid Artifact.YouCtrl
 Oracle:All artifacts have "At the beginning of your upkeep, sacrifice this artifact unless you pay {2}."
