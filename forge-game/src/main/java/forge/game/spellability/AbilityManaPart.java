@@ -154,7 +154,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
         SpellAbility root = sa == null ? null : sa.getRootAbility();
 
-        if (root != null && root.isManaAbility()) {
+        if (root != null) {
             final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(source);
             repParams.put(AbilityKey.Mana, afterReplace);
             repParams.put(AbilityKey.Player, player);
