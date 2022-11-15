@@ -6,4 +6,6 @@ A:AB$ Mana | Cost$ T SubCounter<X/CHARGE> | Produced$ R | AILogic$ ManaRitualBat
 SVar:DBMana: DB$ Mana | Produced$ R | Amount$ X
 SVar:X:Count$xPaid
 AI:RemoveDeck:Random
+DeckHas:Ability$Counters
+DeckHints:Color$Red
 Oracle:{2}, {T}: Put a charge counter on Red Mana Battery.\n{T}, Remove any number of charge counters from Red Mana Battery: Add {R}, then add an additional {R} for each charge counter removed this way.

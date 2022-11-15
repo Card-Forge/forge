@@ -6,4 +6,6 @@ K:Flying
 K:UpkeepCost:U B R
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals damage to an opponent, that player discards their hand.
 SVar:TrigDiscard:DB$ Discard | Defined$ TriggeredTarget | Mode$ Hand
+DeckHas:Ability$Discard
+DeckHints:Type$Bolas
 Oracle:Flying\nAt the beginning of your upkeep, sacrifice Nicol Bolas unless you pay {U}{B}{R}.\nWhenever Nicol Bolas deals damage to an opponent, that player discards their hand.
