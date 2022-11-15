@@ -60,6 +60,9 @@ public class TriggerManaAdded extends Trigger {
         if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.Card))) {
             return false;
         }
+        if (!matchesValidParam("ValidSA", runParams.get(AbilityKey.AbilityMana))) {
+            return false;
+        }
         if (!matchesValidParam("Player", runParams.get(AbilityKey.Player))) {
             return false;
         }
