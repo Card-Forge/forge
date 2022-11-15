@@ -3,6 +3,7 @@ ManaCost:1 W W
 Types:Creature Human Artificer
 PT:1/1
 A:AB$ ChangeZone | Cost$ W W T | TgtPrompt$ Choose target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl | Origin$ Graveyard | Destination$ Hand | SpellDescription$ Return target artifact card from your graveyard to your hand.
+RemoveDeck:Random
 DeckNeeds:Type$Artifact
 DeckHas:Ability$Graveyard
 DeckHints:Ability$Graveyard|Mill
