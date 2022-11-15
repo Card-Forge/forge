@@ -49,6 +49,7 @@ public class GameHUD extends Stage   {
     private final InputEvent eventTouchDown;
     private final InputEvent eventTouchUp;
     private final TextraButton deckActor;
+    private final TextraButton openMapActor;
     private final TextraButton menuActor;
     private final TextraButton statsActor;
     private final TextraButton inventoryActor;
@@ -75,6 +76,8 @@ public class GameHUD extends Stage   {
 
         avatarborder = ui.findActor("avatarborder");
         deckActor = ui.findActor("deck");
+        openMapActor = ui.findActor("openmap");
+        ui.onButtonPress("openmap", ()-> GameHUD.this.openMap());
         menuActor = ui.findActor("menu");
         referenceX = menuActor.getX();
         statsActor = ui.findActor("statistic");
@@ -194,8 +197,6 @@ public class GameHUD extends Stage   {
         if (Controls.actorContainsVector(miniMap,c)) {
             if(debugMap)
                 WorldStage.getInstance().getPlayerSprite().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
-            else
-                openMap();
         return true;
         }
         //auto follow touchpad
@@ -205,6 +206,7 @@ public class GameHUD extends Stage   {
                     && !(Controls.actorContainsVector(gamehud,touch)) //not inside gamehud bounds
                     && !(Controls.actorContainsVector(menuActor,touch)) //not inside menu button
                     && !(Controls.actorContainsVector(deckActor,touch)) //not inside deck button
+                    && !(Controls.actorContainsVector(openMapActor,touch)) //not inside openmap button
                     && !(Controls.actorContainsVector(statsActor,touch)) //not inside stats button
                     && !(Controls.actorContainsVector(inventoryActor,touch)) //not inside inventory button
                     && (Controls.actorContainsVector(ui,touch)) //inside display bounds
@@ -281,6 +283,7 @@ public class GameHUD extends Stage   {
     public void showHideMap(boolean visible) {
         miniMap.setVisible(visible);
         mapborder.setVisible(visible);
+        openMapActor.setVisible(visible);
         miniMapPlayer.setVisible(visible);
         gamehud.setVisible(visible);
         lifePoints.setVisible(visible);
