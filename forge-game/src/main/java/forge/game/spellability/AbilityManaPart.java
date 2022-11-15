@@ -114,7 +114,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * @param sa
      */
     public final void produceMana(SpellAbility sa) {
-        this.produceMana(this.getOrigProduced(), this.getSourceCard().getController(), sa, true);
+        this.produceMana(this.getOrigProduced(), this.getSourceCard().getController(), sa);
     }
 
     /**
@@ -129,24 +129,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * @param sa
      *
      */
-    public final void produceMana(final String produced, final Player player, SpellAbility sa) {
-        produceMana(produced, player, sa, true);
-    }
-
-    /**
-     * <p>
-     * produceMana.
-     * </p>
-     *
-     * @param produced
-     *            a {@link java.lang.String} object.
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @param sa
-     *
-     * @param runTriggers
-     */
-    public final void produceMana(final String produced, final Player player, SpellAbility sa, boolean runTriggers) {
+    public final String produceMana(final String produced, final Player player, SpellAbility sa) {
         final Card source = this.getSourceCard();
         final ManaPool manaPool = player.getManaPool();
         final Game game = player.getGame();
@@ -168,7 +151,7 @@ public class AbilityManaPart implements java.io.Serializable {
                 afterReplace = (String) repParams.get(AbilityKey.Mana);
                 break;
             default:
-                return;
+                return "";
             }
         }
 
@@ -201,14 +184,25 @@ public class AbilityManaPart implements java.io.Serializable {
         runParams.put(AbilityKey.AbilityMana, root);
         runParams.put(AbilityKey.Activator, root == null ? null : root.getActivatingPlayer());
 
-        if (runTriggers) {
-            game.getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
-        }
         game.getTriggerHandler().runTrigger(TriggerType.ManaAdded, runParams, false);
 
-        if (source.isLand() && root.isManaAbility() && root.getPayCosts() != null && root.getPayCosts().hasTapCost()) {
+        return afterReplace;
+    }
+
+    public void tapsForMana(final SpellAbility root, String mana) {
+        if (!root.isManaAbility() || root.getPayCosts() == null || !root.getPayCosts().hasTapCost()) {
+            return;
+        }
+
+        if (getSourceCard().isLand()) {
             root.getActivatingPlayer().setTappedLandForManaThisTurn(true);
         }
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(getSourceCard());
+        runParams.put(AbilityKey.Produced, mana);
+        runParams.put(AbilityKey.Activator, root.getActivatingPlayer());
+
+        getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
     }
 
     /**

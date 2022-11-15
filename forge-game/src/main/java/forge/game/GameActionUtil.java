@@ -31,7 +31,6 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
@@ -834,12 +833,13 @@ public final class GameActionUtil {
     }
 
     public static String generatedMana(final SpellAbility sa) {
-        int amount = sa.amountOfManaGenerated(false);
         AbilityManaPart abMana = sa.getManaPart();
         if (abMana == null) {
             return "";
         }
+
         String baseMana;
+        int amount = sa.amountOfManaGenerated(false);
 
         if (abMana.isComboMana()) {
             baseMana = abMana.getExpressChoice();
@@ -863,7 +863,7 @@ public final class GameActionUtil {
             // Mark SAs with subAbilities as undoable. These are generally things like damage, and other stuff
             // that's hard to track and remove
             sa.setUndoable(false);
-        } else if (sa.getParam("Amount") != null && amount != AbilityUtils.calculateAmount(sa.getHostCard(),sa.getParam("Amount"), sa)) {
+        } else if (sa.hasParam("Amount") && !StringUtils.isNumeric(sa.getParam("Amount"))) {
             sa.setUndoable(false);
         }
 

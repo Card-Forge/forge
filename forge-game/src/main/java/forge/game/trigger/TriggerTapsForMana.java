@@ -57,16 +57,7 @@ public class TriggerTapsForMana extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        SpellAbility manaAbility = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-
-        if (manaAbility == null || !manaAbility.isManaAbility() || !manaAbility.getPayCosts().hasTapCost()) {
-            return false;
-        }
-
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
-            return false;
-        }
-        if (!matchesValidParam("Player", runParams.get(AbilityKey.Player))) {
             return false;
         }
         if (!matchesValidParam("Activator", runParams.get(AbilityKey.Activator))) {
@@ -94,7 +85,7 @@ public class TriggerTapsForMana extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Player, AbilityKey.Produced, AbilityKey.Activator);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Produced, AbilityKey.Activator);
     }
 
     @Override
