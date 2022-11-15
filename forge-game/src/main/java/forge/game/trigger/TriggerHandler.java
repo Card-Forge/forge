@@ -503,7 +503,7 @@ public class TriggerHandler {
     // Return true if the trigger went off, false otherwise.
     private void runSingleTriggerInternal(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
         // All tests passed, execute ability.
-        if (regtrig instanceof TriggerTapsForMana) {
+        if (regtrig instanceof TriggerTapsForMana || regtrig instanceof TriggerManaAdded) {
             final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
             if (null != abMana && null != abMana.getManaPart()) {
                 abMana.setUndoable(false);

@@ -28,6 +28,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
+import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityKey;
