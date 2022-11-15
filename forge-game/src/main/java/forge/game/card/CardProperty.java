@@ -120,6 +120,14 @@ public class CardProperty {
             if (source.hasChosenCard(card)) {
                 return false;
             }
+        } else if (property.equals("ChosenSector")) {
+            if (!source.getChosenSector().equals(card.getSector())) {
+                return false;
+            }
+        } else if (property.equals("DifferentSector")) {
+            if (source.getSector().equals(card.getSector())) {
+                return false;
+            }
         } else if (property.equals("DoubleFaced")) {
             if (!card.isDoubleFaced()) {
                 return false;

@@ -55,10 +55,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.collect.Lists;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Default harmless implementation for tests.
@@ -494,6 +491,12 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public String chooseSomeType(String kindOfType, SpellAbility sa, Collection<String> validTypes, List<String> invalidTypes, boolean isOptional) {
         return chooseItem(validTypes);
+    }
+
+    @Override
+    public String chooseSector(Card assignee, String ai) {
+        final List<String> sectors = Arrays.asList("Alpha", "Beta", "Gamma");
+        return chooseItem(sectors);
     }
 
     @Override

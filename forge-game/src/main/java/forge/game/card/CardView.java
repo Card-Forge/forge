@@ -479,6 +479,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Remembered, sb.toString());
     }
 
+    public String getSector() {
+       return get(TrackableProperty.Sector);
+    }
+    void updateSector(Card c) {
+        set(TrackableProperty.Sector, c.getSector());
+    }
+
     public String getNamedCard() {
         return get(TrackableProperty.NamedCard);
     }

@@ -290,6 +290,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Direction chosenDirection = null;
     private String chosenMode = "";
     private String currentRoom = null;
+    private String sector = null;
+    private String chosenSector = null;
 
     private Card exiledWith;
     private Player exiledBy;
@@ -1898,6 +1900,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return false;
     }
 
+    public String getSector() {
+        return sector;
+    }
+    public void assignSector(String s) {
+        sector = s;
+        view.updateSector(this);
+    }
+    public boolean hasSector() {
+        return sector != null;
+    }
+    public String getChosenSector() {
+        return chosenSector;
+    }
+    public final void setChosenSector(final String s) {
+        chosenSector = s;
+    }
+
     // used for cards like Meddling Mage...
     public final String getNamedCard() {
         return getChosenName();
@@ -2183,7 +2202,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                         || keyword.equals("Ascend") || keyword.equals("Totem armor")
                         || keyword.equals("Battle cry") || keyword.equals("Devoid") || keyword.equals("Riot")
                         || keyword.equals("Daybound") || keyword.equals("Nightbound")
-                        || keyword.equals("Friends forever") || keyword.equals("Choose a Background")) {
+                        || keyword.equals("Friends forever") || keyword.equals("Choose a Background")
+                        || keyword.equals("Space sculptor")) {
                     sbLong.append(keyword).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Partner:")) {
                     final String[] k = keyword.split(":");
