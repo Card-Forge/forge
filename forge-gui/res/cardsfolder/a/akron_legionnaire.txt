@@ -2,7 +2,7 @@ Name:Akron Legionnaire
 ManaCost:6 W W
 Types:Creature Giant Soldier
 PT:8/4
-S:Mode$ Continuous | Affected$ Creature.YouCtrl+nonArtifact+notnamedAkron Legionnaire | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Except for creatures named CARDNAME and artifact creatures, creatures you control can't attack.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+nonArtifact+notnamedAkron Legionnaire | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Except for creatures named Akron Legionnaire and artifact creatures, creatures you control can't attack.
 DeckHints:Type$Artifact
 DeckNeeds:Name$Akron Legionnaire
 Oracle:Except for creatures named Akron Legionnaire and artifact creatures, creatures you control can't attack.
