@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Creature Insect Horror
 PT:2/1
 K:Flying
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target card from an opponent's graveyard. If it was a creature card, that player loses 1 life.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target card from an opponent's graveyard. If it was a creature card, that player loses 1 life.
 SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.OppOwn | TgtPrompt$ Select target card from an opponent's graveyard | RememberChanged$ True | SubAbility$ DBDrain
 SVar:DBDrain:DB$ LoseLife | ConditionDefined$ Remembered | ConditionPresent$ Creature | Defined$ TargetedOwner | LifeAmount$ 1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
