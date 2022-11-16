@@ -104,8 +104,12 @@ public class RollDiceEffect extends SpellAbilityEffect {
         List<Integer> rolls = Lists.newArrayList();
         int oddResults = 0;
         int evenResults = 0;
+        int differentResults = 0;
         for (Integer i : naturalRolls) {
             final int modifiedRoll = i + modifier;
+            if (!rolls.contains(modifiedRoll)) {
+                differentResults++;
+            }
             rolls.add(modifiedRoll);
             if (modifiedRoll % 2 == 0) {
                 evenResults++;
@@ -116,6 +120,9 @@ public class RollDiceEffect extends SpellAbilityEffect {
         if (sa.hasParam("EvenOddResults")) {
             sa.setSVar("EvenResults", Integer.toString(evenResults));
             sa.setSVar("OddResults", Integer.toString(oddResults));
+        }
+        if (sa.hasParam("DifferentResults")) {
+            sa.setSVar("DifferentResults", Integer.toString(differentResults));
         }
         total += modifier;
 
