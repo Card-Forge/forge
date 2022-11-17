@@ -7,8 +7,7 @@ SVar:Token:DB$ PutCounter | CounterType$ LOYALTY | CounterNum$ 2 | SubAbility$ D
 SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_1_1_squirrel | PumpKeywords$ Haste | PumpDuration$ EOT
 SVar:Unearth:DB$ RemoveCounter | CounterType$ LOYALTY | CounterNum$ 1 | SubAbility$ DBChangeZone | SpellDescription$ 3 – [-1], then return a card with mana value 2 or less from your graveyard to your hand.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Mandatory$ True | ChangeType$ Card.YouOwn+cmcLE2 | ChangeDescription$ Choose a card with mana value 2 or less | Hidden$ True
-SVar:Damage:DB$ ChooseEntity | CardChoices$ Creature | PlayerChoices$ Player | RememberChosen$ True | SubAbility$ DBDamage | SpellDescription$ 4 or 5 – CARDNAME deals damage equal to the number of loyalty counters on him to a creature or player, then [-2].
-SVar:DBDamage:DB$ DealDamage | NumDmg$ X | Defined$ Remembered | SubAbility$ DBRemoveCounters
+SVar:Damage:DB$ DealDamage | NumDmg$ X | CardChoices$ Creature | PlayerChoices$ Player | SubAbility$ DBRemoveCounters | SpellDescription$ 4 or 5 – CARDNAME deals damage equal to the number of loyalty counters on him to a creature or player, then [-2].
 SVar:X:Count$CardCounters.LOYALTY
 SVar:DBRemoveCounters:DB$ RemoveCounter | CounterType$ LOYALTY | CounterNum$ 2 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True

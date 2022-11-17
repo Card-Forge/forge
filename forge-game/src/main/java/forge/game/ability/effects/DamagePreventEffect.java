@@ -2,13 +2,19 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
+import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
+import forge.util.Localizer;
+import forge.util.collect.FCollection;
 
 public class DamagePreventEffect extends DamagePreventEffectBase {
 
@@ -66,6 +72,23 @@ public class DamagePreventEffect extends DamagePreventEffectBase {
         int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
 
         final List<GameObject> tgts = getTargets(sa);
+        if (sa.hasParam("CardChoices") || sa.hasParam("PlayerChoices")) { // choosing outside Defined/Targeted
+            // only for Whimsy, for more robust version see DamageDealEffect
+            FCollection<GameEntity> choices = new FCollection<>();
+            if (sa.hasParam("CardChoices")) {
+                choices.addAll(CardLists.getValidCards(host.getGame().getCardsIn(ZoneType.Battlefield),
+                        sa.getParam("CardChoices"), sa.getActivatingPlayer(), host, sa));
+            }
+            if (sa.hasParam("PlayerChoices")) {
+                choices.addAll(AbilityUtils.getDefinedPlayers(host, sa.getParam("PlayerChoices"), sa));
+            }
+            if (sa.hasParam("Random")) {
+                GameObject random = Aggregates.random(choices);
+                tgts.add(random);
+                host.addRemembered(random); // remember random choices for log
+            }
+        }
+
         final CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
         final boolean targeted = sa.usesTargeting();
