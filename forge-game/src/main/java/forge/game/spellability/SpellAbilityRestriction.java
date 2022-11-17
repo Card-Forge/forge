@@ -476,7 +476,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
         if (sa.isPwAbility()) {
             final int initialLimit = StaticAbilityNumLoyaltyAct.limitIncrease(c) ? 1 : 0;
-            final int limit = StaticAbilityNumLoyaltyAct.additionalActivations(c) + initialLimit;
+            final int limit = StaticAbilityNumLoyaltyAct.additionalActivations(c, sa) + initialLimit;
 
             int numActivates = c.getPlaneswalkerAbilityActivated();
             if (numActivates > limit) {

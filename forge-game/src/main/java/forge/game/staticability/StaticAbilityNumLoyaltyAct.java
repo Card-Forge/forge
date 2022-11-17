@@ -2,6 +2,7 @@ package forge.game.staticability;
 
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
+import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 /**
@@ -40,7 +41,7 @@ public class StaticAbilityNumLoyaltyAct {
         return true;
     }
 
-    public static int additionalActivations(final Card card) {
+    public static int additionalActivations(final Card card, final SpellAbility sa) {
         int addl = 0;
         for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
@@ -51,6 +52,11 @@ public class StaticAbilityNumLoyaltyAct {
                     continue;
                 }
                 if (stAb.hasParam("Additional")) {
+                    if (stAb.hasParam("OnlySourceAbs")) {
+                        if (!stAb.getHostCard().getEffectSourceAbility().getRootAbility().equals(sa)) {
+                            continue;
+                        }
+                    }
                     int more = AbilityUtils.calculateAmount(card, stAb.getParam("Additional"), stAb);
                     addl = addl + more;
                 }

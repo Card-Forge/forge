@@ -12,7 +12,7 @@ SVar:X:Count$CardCounters.LOYALTY
 SVar:DBRemoveCounters:DB$ RemoveCounter | CounterType$ LOYALTY | CounterNum$ 2 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:CometGo:DB$ PutCounter | CounterType$ LOYALTY | SubAbility$ DBEffect | SpellDescription$ 6 – [+1], and you may activate CARDNAME's loyalty ability two more times this turn.
-SVar:DBEffect:DB$ Effect | StaticAbilities$ LoyaltyAbs
-SVar:LoyaltyAbs:Mode$ NumLoyaltyAct | ValidCard$ Card.EffectSource | Additional$ 2 | Description$ You may activate EFFECTSOURCE's loyalty ability two more times this turn.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ LoyaltyAbs | RememberObjects$ Self | ExileOnMoved$ Battlefield
+SVar:LoyaltyAbs:Mode$ NumLoyaltyAct | ValidCard$ Card.EffectSource | Additional$ 2 | OnlySourceAbs$ True | Description$ You may activate EFFECTSOURCE's loyalty ability two more times this turn.
 DeckHas:Ability$Token|Graveyard & Type$Squirrel
 Oracle:[0]: Roll a six-sided die.\n1 or 2 — [+2], then create two 1/1 green Squirrel creature tokens. They gain haste until end of turn.\n3 — [-1], then return a card with mana value 2 or less from your graveyard to your hand.\n4 or 5 — Comet, Stellar Pup deals damage equal to the number of loyalty counters on him to a creature or player, then [-2].\n6 — [+1], and you may activate Comet, Stellar Pup's loyalty ability two more times this turn.
