@@ -270,7 +270,7 @@ public class VAssignGenericAmount extends FDialog {
             float w = getWidth();
             float h = getHeight();
             g.drawImage(image, 0, 0, w, w);
-            g.drawText(name, FONT, FORE_COLOR, 0, w, w, h - w, false, Align.center, true);
+            g.drawText(name, FONT, getForeColor(), 0, w, w, h - w, false, Align.center, true);
         }
     }
 

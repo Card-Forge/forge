@@ -447,8 +447,8 @@ public class VPlayerPanel extends FContainer {
             else {
                 y = isFlipped() ? selectedDisplayArea.getTop() + 1 : selectedDisplayArea.getBottom();
                 //leave gap at selected zone tab
-                g.drawLine(1, MatchScreen.BORDER_COLOR, x, y, selectedTab.getLeft(), y);
-                g.drawLine(1, MatchScreen.BORDER_COLOR, selectedTab.getRight(), y, w, y);
+                g.drawLine(1, MatchScreen.getBorderColor(), x, y, selectedTab.getLeft(), y);
+                g.drawLine(1, MatchScreen.getBorderColor(), selectedTab.getRight(), y, w, y);
             }
         }
         if (commandZone.isVisible()) { //draw border for command zone if needed
