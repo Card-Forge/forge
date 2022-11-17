@@ -226,7 +226,7 @@ public class SplashScreen extends FContainer {
             btnAdventure.setCommand(new FEvent.FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    if (FSkin.hdLogo == null) {
+                    if (FSkin.getLogo() == null) {
                         hideBG = true;
                         hideBtn = true;
                         bgAnimation.progress = 0;
@@ -242,7 +242,7 @@ public class SplashScreen extends FContainer {
             btnHome.setCommand(new FEvent.FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
-                    if (FSkin.hdLogo == null) {
+                    if (FSkin.getLogo() == null) {
                         hideBG = true;
                         hideBtn = true;
                         bgAnimation.progress = 0;
