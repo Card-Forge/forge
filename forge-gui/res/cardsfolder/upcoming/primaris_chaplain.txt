@@ -3,7 +3,7 @@ ManaCost:2 W B
 Types:Creature Astartes Cleric
 PT:3/3
 K:Battle cry
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Rosarius — Whenever CARDNAME attacks, it gains indestructible until end of turn.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Rosarius — Whenever CARDNAME attacks, it gains indestructible until end of turn.
 SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Indestructible
 DeckHas:Keyword$Indestructible 
 SVar:HasAttackEffect:TRUE
