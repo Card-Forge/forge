@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
@@ -12,8 +13,14 @@ import forge.assets.FSkinColor.Colors;
 import forge.util.Utils;
 
 public class FRadioButton extends FLabel {
-    private static final FSkinColor INNER_CIRCLE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor OUTER_CIRCLE_COLOR = INNER_CIRCLE_COLOR.alphaColor(0.5f);
+    private static FSkinColor getInnerCircleColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
+    private static FSkinColor getOuterCircleColor() {
+        return getInnerCircleColor().alphaColor(0.5f);
+    }
     private static final float EXTRA_GAP = Utils.scale(3);
     
     private RadioButtonGroup group;
@@ -81,9 +88,9 @@ public class FRadioButton extends FLabel {
             float radius = h / 3;
             x += w - radius;
             y += h / 2;
-            g.drawCircle(Utils.scale(1), OUTER_CIRCLE_COLOR, x, y, radius);
+            g.drawCircle(Utils.scale(1), getOuterCircleColor(), x, y, radius);
             if (isSelected()) {
-                g.fillCircle(INNER_CIRCLE_COLOR, x, y, radius / 2);
+                g.fillCircle(getInnerCircleColor(), x, y, radius / 2);
             }
         }
     }

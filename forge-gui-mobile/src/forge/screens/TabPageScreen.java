@@ -133,7 +133,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         private static final float HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 1.4f);
         private static final float COMPACT_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
         private static final float BACK_BUTTON_WIDTH = Math.round(HEIGHT / 2);
-        private static final FSkinColor SEPARATOR_COLOR = BACK_COLOR.stepColor(-40);
+        private static final FSkinColor SEPARATOR_COLOR = getBackColor().stepColor(-40);
 
         private final TabPage<T>[] tabPages;
         public final FLabel btnBack;
@@ -187,7 +187,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         public TabHeader(TabPage<T>[] tabPages0, boolean showBackButton) {
             tabPages = tabPages0;
             if (showBackButton) {
-                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(e -> Forge.back()).build());
+                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(getBtnPressedColor()).align(Align.center).command(e -> Forge.back()).build());
             }
             else {
                 btnBack = null;
@@ -200,11 +200,11 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
         public TabHeader(TabPage<T>[] tabPages0, FEventHandler backButton) {
             tabPages = tabPages0;
             if(backButton==null) {
-                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(e -> Forge.back()).build());
+                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(getBtnPressedColor()).align(Align.center).command(e -> Forge.back()).build());
             }
             else
             {
-                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(backButton).build());
+                btnBack = add(new FLabel.Builder().icon(new BackIcon(BACK_BUTTON_WIDTH, BACK_BUTTON_WIDTH)).pressedColor(getBtnPressedColor()).align(Align.center).command(backButton).build());
             }
 
             for (TabPage<T> tabPage : tabPages) {
@@ -222,14 +222,14 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
 
         @Override
         public void drawBackground(Graphics g) {
-            g.fillRect(BACK_COLOR, 0, 0, getWidth(), getHeight());
+            g.fillRect(getBackColor(), 0, 0, getWidth(), getHeight());
         }
 
         @Override
         public void drawOverlay(Graphics g) {
             if (Forge.isLandscapeMode()) {
                 //in landscape mode, draw left border for header
-                g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, 0, 0, getHeight());
+                g.drawLine(LINE_THICKNESS, getLineColor(), 0, 0, 0, getHeight());
                 if (showBackButtonInLandscapeMode()) { //draw top border for back button
                     float y = btnBack.getTop() - LINE_THICKNESS / 2;
                     g.drawLine(LINE_THICKNESS, SEPARATOR_COLOR, 0, y, getWidth(), y);
@@ -246,7 +246,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
             //draw bottom border for header
             if (showBottomBorder) {
                 float y = getHeight() - LINE_THICKNESS / 2;
-                g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, y, getWidth(), y);
+                g.drawLine(LINE_THICKNESS, getLineColor(), 0, y, getWidth(), y);
             }
         }
 
@@ -279,8 +279,16 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
     }
 
     public static abstract class TabPage<T extends TabPageScreen<T>> extends FContainer {
-        private static final FSkinColor SEL_TAB_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
-        private static final FSkinColor TAB_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+        private static FSkinColor getSelTabColor() {
+            if (Forge.isMobileAdventureMode)
+                return FSkinColor.get(Colors.ADV_CLR_ACTIVE);
+            return FSkinColor.get(Colors.CLR_ACTIVE);
+        }
+        private static FSkinColor getTabForeColor() {
+            if (Forge.isMobileAdventureMode)
+                return FSkinColor.get(Colors.ADV_CLR_TEXT);
+            return FSkinColor.get(Colors.CLR_TEXT);
+        }
         private static final FSkinFont TAB_FONT = FSkinFont.get(12);
 
         protected T parentScreen;
@@ -369,7 +377,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                 float h = getHeight();
                 float padding = h * 0.1f;
                 if (parentScreen.getSelectedPage() == TabPage.this) {
-                    g.fillRect(SEL_TAB_COLOR, Header.LINE_THICKNESS / 2, 0, w - Header.LINE_THICKNESS, h);
+                    g.fillRect(getSelTabColor(), Header.LINE_THICKNESS / 2, 0, w - Header.LINE_THICKNESS, h);
                 }
                 w -= 2 * padding;
 

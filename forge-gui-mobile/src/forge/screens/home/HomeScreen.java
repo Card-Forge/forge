@@ -54,10 +54,10 @@ public class HomeScreen extends FScreen {
                 }
                 @Override
                 public void draw(Graphics g, float x, float y, float w, float h) {
-                    if (FSkin.hdLogo == null)
+                    if (FSkin.getLogo() == null)
                         FSkinImage.LOGO.draw(g, x, y, w, h);
                     else
-                        g.drawImage(FSkin.hdLogo, x, y, w, h);
+                        g.drawImage(FSkin.getLogo(), x, y, w, h);
                 }
             }
     ).iconInBackground().iconScaleFactor(1).build());

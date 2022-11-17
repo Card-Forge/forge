@@ -348,11 +348,11 @@ public class CardZoom extends FOverlay {
         }
 
         if (currentActivateAction != null) {
-            g.fillRect(FDialog.MSG_BACK_COLOR, 0, 0, w, messageHeight);
-            g.drawText(Forge.getLocalizer().getMessage("lblSwipeUpTo").replace("%s", currentActivateAction), FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, 0, w, messageHeight, false, Align.center, true);
+            g.fillRect(FDialog.getMsgBackColor(), 0, 0, w, messageHeight);
+            g.drawText(Forge.getLocalizer().getMessage("lblSwipeUpTo").replace("%s", currentActivateAction), FDialog.MSG_FONT, FDialog.getMsgForeColor(), 0, 0, w, messageHeight, false, Align.center, true);
         }
-        g.fillRect(FDialog.MSG_BACK_COLOR, 0, h - messageHeight, w, messageHeight);
-        g.drawText(zoomMode ? Forge.getLocalizer().getMessage("lblSwipeDownDetailView") : Forge.getLocalizer().getMessage("lblSwipeDownPictureView"), FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, Align.center, true);
+        g.fillRect(FDialog.getMsgBackColor(), 0, h - messageHeight, w, messageHeight);
+        g.drawText(zoomMode ? Forge.getLocalizer().getMessage("lblSwipeDownDetailView") : Forge.getLocalizer().getMessage("lblSwipeDownPictureView"), FDialog.MSG_FONT, FDialog.getMsgForeColor(), 0, h - messageHeight, w, messageHeight, false, Align.center, true);
 
         interrupt(false);
     }

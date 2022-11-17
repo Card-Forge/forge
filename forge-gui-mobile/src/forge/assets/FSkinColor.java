@@ -24,7 +24,24 @@ public class FSkinColor {
         CLR_OVERLAY                 (FSkinProp.CLR_OVERLAY),
         CLR_COMBAT_TARGETING_ARROW  (FSkinProp.CLR_COMBAT_TARGETING_ARROW),
         CLR_NORMAL_TARGETING_ARROW  (FSkinProp.CLR_NORMAL_TARGETING_ARROW),
-        CLR_PWATTK_TARGETING_ARROW  (FSkinProp.CLR_PWATTK_TARGETING_ARROW);
+        CLR_PWATTK_TARGETING_ARROW  (FSkinProp.CLR_PWATTK_TARGETING_ARROW),
+        //adventure
+        ADV_CLR_THEME                   (FSkinProp.ADV_CLR_THEME),
+        ADV_CLR_BORDERS                 (FSkinProp.ADV_CLR_BORDERS),
+        ADV_CLR_ZEBRA                   (FSkinProp.ADV_CLR_ZEBRA),
+        ADV_CLR_HOVER                   (FSkinProp.ADV_CLR_HOVER),
+        ADV_CLR_ACTIVE                  (FSkinProp.ADV_CLR_ACTIVE),
+        ADV_CLR_INACTIVE                (FSkinProp.ADV_CLR_INACTIVE),
+        ADV_CLR_TEXT                    (FSkinProp.ADV_CLR_TEXT),
+        ADV_CLR_PHASE_INACTIVE_ENABLED  (FSkinProp.ADV_CLR_PHASE_INACTIVE_ENABLED),
+        ADV_CLR_PHASE_INACTIVE_DISABLED (FSkinProp.ADV_CLR_PHASE_INACTIVE_DISABLED),
+        ADV_CLR_PHASE_ACTIVE_ENABLED    (FSkinProp.ADV_CLR_PHASE_ACTIVE_ENABLED),
+        ADV_CLR_PHASE_ACTIVE_DISABLED   (FSkinProp.ADV_CLR_PHASE_ACTIVE_DISABLED),
+        ADV_CLR_THEME2                  (FSkinProp.ADV_CLR_THEME2),
+        ADV_CLR_OVERLAY                 (FSkinProp.ADV_CLR_OVERLAY),
+        ADV_CLR_COMBAT_TARGETING_ARROW  (FSkinProp.ADV_CLR_COMBAT_TARGETING_ARROW),
+        ADV_CLR_NORMAL_TARGETING_ARROW  (FSkinProp.ADV_CLR_NORMAL_TARGETING_ARROW),
+        ADV_CLR_PWATTK_TARGETING_ARROW  (FSkinProp.ADV_CLR_PWATTK_TARGETING_ARROW);
 
         private Color color;
         private final int x, y;

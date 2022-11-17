@@ -66,7 +66,11 @@ import forge.toolbox.FScrollPane;
 import forge.util.Callback;
 
 public class MatchScreen extends FScreen {
-    public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
+    public static FSkinColor getBorderColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_BORDERS);
+        return FSkinColor.get(Colors.CLR_BORDERS);
+    }
 
     private static final Map<PlayerView, VPlayerPanel> playerPanels = Maps.newHashMap();
     private List<VPlayerPanel> playerPanelsList;
@@ -855,7 +859,9 @@ public class MatchScreen extends FScreen {
                     bgAnimation.start();
                     daytime = dayTime;
                 }
-                FSkinTexture matchBG = MatchController.instance.getGameView().getGame().isDay() ? FSkinTexture.BG_MATCH_DAY : FSkinTexture.BG_MATCH_NIGHT;
+                FSkinTexture bgDay = Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_MATCH_DAY : FSkinTexture.BG_MATCH_DAY;
+                FSkinTexture bgNight = Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_MATCH_NIGHT : FSkinTexture.BG_MATCH_NIGHT;
+                FSkinTexture matchBG = MatchController.instance.getGameView().getGame().isDay() ? bgDay : bgNight;
                 bgFullWidth = bgHeight * matchBG.getWidth() / matchBG.getHeight();
                 if (bgFullWidth < w) {
                     scaledbgHeight = w * (bgHeight / bgFullWidth);
@@ -863,11 +869,11 @@ public class MatchScreen extends FScreen {
                     bgHeight = scaledbgHeight;
                 }
                 if (bgAnimation != null && !isGameFast && !MatchController.instance.getGameView().isMatchOver()) {
-                    bgAnimation.drawBackground(g, matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true, true);
+                    bgAnimation.drawBackground(g, matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, !Forge.isMobileAdventureMode, true);
                 } else {
-                    g.drawImage(matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true);
+                    g.drawImage(matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, !Forge.isMobileAdventureMode);
                 }
-            } else if (FModel.getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE)) {
+            } else if (FModel.getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE) || Forge.isMobileAdventureMode) {
                 if(FModel.getPreferences().getPrefBoolean(FPref.UI_DYNAMIC_PLANECHASE_BG)
                         && hasActivePlane()) {
                     String imageName = getPlaneName()
@@ -893,13 +899,14 @@ public class MatchScreen extends FScreen {
                         }
                     }
                 } else {
-                    bgFullWidth = bgHeight * FSkinTexture.BG_MATCH.getWidth() / FSkinTexture.BG_MATCH.getHeight();
+                    FSkinTexture matchBackground = Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_MATCH : FSkinTexture.BG_MATCH;
+                    bgFullWidth = bgHeight * matchBackground.getWidth() / matchBackground.getHeight();
                     if (bgFullWidth < w) {
                         scaledbgHeight = w * (bgHeight / bgFullWidth);
                         bgFullWidth = w;
                         bgHeight = scaledbgHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_MATCH, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight);
+                    g.drawImage(matchBackground, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight);
                 }
             }
         }
@@ -952,19 +959,19 @@ public class MatchScreen extends FScreen {
                     if (playerPanel.getSelectedTab() == null) {
                         y++;
                     }
-                    g.drawLine(1, BORDER_COLOR, x, y, w, y);
+                    g.drawLine(1, getBorderColor(), x, y, w, y);
                 }
             }
 
             for (VPlayerPanel playerPanel: playerPanelsList){
                 midField = playerPanel.getTop();
                 y = midField - 0.5f;
-                g.drawLine(1, BORDER_COLOR, x, y, w, y);
+                g.drawLine(1, getBorderColor(), x, y, w, y);
             }
 
             if (!Forge.isLandscapeMode()) {
                 y = bottomPlayerPanel.getTop() + bottomPlayerPanel.getField().getHeight();
-                g.drawLine(1, BORDER_COLOR, x, y, w, y);
+                g.drawLine(1, getBorderColor(), x, y, w, y);
             }
         }
 

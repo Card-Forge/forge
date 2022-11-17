@@ -115,7 +115,7 @@ public class SplashScreen extends FContainer {
                     g.setAlphaComposite(oldAlpha - percentage);
                     float xmod = Forge.getScreenHeight() > 1000 ? 1.5f : Forge.getScreenHeight() > 800 ? 1.3f : 1f;
                     xmod += 10 * percentage;
-                    g.drawImage(FSkin.hdLogo, getWidth() / 2 - (FSkin.hdLogo.getWidth() * xmod) / 2, getHeight() / 2 - (FSkin.hdLogo.getHeight() * xmod) / 1.5f, FSkin.hdLogo.getWidth() * xmod, FSkin.hdLogo.getHeight() * xmod);
+                    g.drawImage(FSkin.getLogo(), getWidth() / 2 - (FSkin.getLogo().getWidth() * xmod) / 2, getHeight() / 2 - (FSkin.getLogo().getHeight() * xmod) / 1.5f, FSkin.getLogo().getWidth() * xmod, FSkin.getLogo().getHeight() * xmod);
                     g.setAlphaComposite(oldAlpha);
                 } else {
                     g.setAlphaComposite(hideBG ? 1 - percentage : 1);
@@ -209,9 +209,9 @@ public class SplashScreen extends FContainer {
             w = getHeight() / backgroundRatio;
             x = (getWidth() - w) / 2;
         }
-        if (FSkin.hdLogo != null) {
+        if (FSkin.getLogo() != null) {
             float xmod = Forge.getScreenHeight() > 1000 ? 1.5f : Forge.getScreenHeight() > 800 ? 1.3f : 1f;
-            g.drawImage(FSkin.hdLogo, getWidth() / 2 - (FSkin.hdLogo.getWidth() * xmod) / 2, getHeight() / 2 - (FSkin.hdLogo.getHeight() * xmod) / 1.5f, FSkin.hdLogo.getWidth() * xmod, FSkin.hdLogo.getHeight() * xmod);
+            g.drawImage(FSkin.getLogo(), getWidth() / 2 - (FSkin.getLogo().getWidth() * xmod) / 2, getHeight() / 2 - (FSkin.getLogo().getHeight() * xmod) / 1.5f, FSkin.getLogo().getWidth() * xmod, FSkin.getLogo().getHeight() * xmod);
         } else {
             g.drawImage(background, x, y, w, h);
         }

@@ -75,17 +75,18 @@ public class TransitionScreen extends FContainer {
             }
             if (isloading) {
                 g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-                if (FSkinTexture.BG_TEXTURE != null) {
+                FSkinTexture bgTexture = Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE;
+                if (bgTexture != null) {
                     g.setAlphaComposite(percentage);
-                    g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+                    g.drawImage(bgTexture, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
                     g.setAlphaComposite(oldAlpha);
                 }
                 float xmod = Forge.getScreenHeight() > 2000 ? 1.5f : 1f;
                 xmod *= Forge.isMobileAdventureMode ? 1 : percentage;
                 float ymod;
-                if (FSkin.hdLogo != null) {
-                    ymod = Forge.getScreenHeight()/2 + (FSkin.hdLogo.getHeight()*xmod)/2;
-                    g.drawImage(FSkin.hdLogo, Forge.getScreenWidth()/2 - (FSkin.hdLogo.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkin.hdLogo.getHeight()*xmod)/2, FSkin.hdLogo.getWidth()*xmod, FSkin.hdLogo.getHeight()*xmod);
+                if (FSkin.getLogo() != null) {
+                    ymod = Forge.getScreenHeight()/2 + (FSkin.getLogo().getHeight()*xmod)/2;
+                    g.drawImage(FSkin.getLogo(), Forge.getScreenWidth()/2 - (FSkin.getLogo().getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkin.getLogo().getHeight()*xmod)/2, FSkin.getLogo().getWidth()*xmod, FSkin.getLogo().getHeight()*xmod);
                 } else {
                     ymod = Forge.getScreenHeight()/2 + (FSkinImage.LOGO.getHeight()*xmod)/1.5f;
                     g.drawImage(FSkinImage.LOGO,Forge.getScreenWidth()/2 - (FSkinImage.LOGO.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkinImage.LOGO.getHeight()*xmod)/1.5f, FSkinImage.LOGO.getWidth()*xmod, FSkinImage.LOGO.getHeight()*xmod);
@@ -109,7 +110,7 @@ public class TransitionScreen extends FContainer {
                     g.drawWarpImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), percentage);
             } else if (isIntro) {
                 if (textureRegion != null) {
-                    g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+                    g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
                     g.setAlphaComposite(1-percentage);
                     g.drawImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
                     g.setAlphaComposite(oldAlpha);

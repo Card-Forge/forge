@@ -284,7 +284,11 @@ public class VAssignCombatDamage extends FDialog {
 
     private static class MiscAttDefPanel extends FDisplayObject {
         private static final FSkinFont FONT = FSkinFont.get(18);
-        private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+        private static FSkinColor getForeColor() {
+            if (Forge.isMobileAdventureMode)
+                return FSkinColor.get(Colors.ADV_CLR_TEXT);
+            return FSkinColor.get(Colors.CLR_TEXT);
+        }
         private final String name;
         private final FImage image;
 
@@ -298,7 +302,7 @@ public class VAssignCombatDamage extends FDialog {
             float w = getWidth();
             float h = getHeight();
             g.drawImage(image, 0, 0, w, w);
-            g.drawText(name, FONT, FORE_COLOR, 0, w, w, h - w, false, Align.center, true);
+            g.drawText(name, FONT, getForeColor(), 0, w, w, h - w, false, Align.center, true);
         }
     }
 

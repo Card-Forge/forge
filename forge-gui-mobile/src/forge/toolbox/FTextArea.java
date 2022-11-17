@@ -25,7 +25,7 @@ public class FTextArea extends FScrollPane {
         font = FSkinFont.get(14);
         alignment = Align.left;
         insets = new Vector2(1, 1); //prevent text getting cut off by clip
-        textColor = FLabel.DEFAULT_TEXT_COLOR;
+        textColor = FLabel.getDefaultTextColor();
         renderer = new TextRenderer(parseReminderText0);
     }
 

@@ -252,7 +252,11 @@ public class VAssignGenericAmount extends FDialog {
 
     private static class MiscTargetPanel extends FDisplayObject {
         private static final FSkinFont FONT = FSkinFont.get(18);
-        private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+        private static FSkinColor getForeColor() {
+            if (Forge.isMobileAdventureMode)
+                return FSkinColor.get(Colors.ADV_CLR_TEXT);
+            return FSkinColor.get(Colors.CLR_TEXT);
+        }
         private final String name;
         private final FImage image;
 

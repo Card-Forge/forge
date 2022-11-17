@@ -32,9 +32,15 @@ public class FSkin {
     private static FileHandle preferredDir;
     private static String preferredName;
     private static boolean loaded = false;
-    public static Texture hdLogo = null;
+    public static Texture hdLogoTexture = null;
+    public static Texture advLogoTexture = null;
     public static Texture overlay_alpha = null;
     public static Texture splatter = null;
+    public static Texture getLogo() {
+        if (Forge.isMobileAdventureMode)
+            return advLogoTexture;
+        return hdLogoTexture;
+    }
 
     public static void changeSkin(final String skinName) {
         final ForgePreferences prefs = FModel.getPreferences();
@@ -115,9 +121,17 @@ public class FSkin {
         if (theme_logo.exists()) {
             manager.load(theme_logo.path(), Texture.class, Forge.getAssets().getTextureFilter());
             manager.finishLoadingAsset(theme_logo.path());
-            hdLogo = manager.get(theme_logo.path());
+            hdLogoTexture = manager.get(theme_logo.path());
         } else {
-            hdLogo = null;
+            hdLogoTexture = null;
+        }
+        final FileHandle adv_logo = getDefaultSkinFile("adv_logo.png");
+        if (adv_logo.exists()) {
+            manager.load(adv_logo.path(), Texture.class, Forge.getAssets().getTextureFilter());
+            manager.finishLoadingAsset(adv_logo.path());
+            advLogoTexture = manager.get(adv_logo.path());
+        } else {
+            advLogoTexture = null;
         }
         final FileHandle duals_overlay = getDefaultSkinFile("overlay_alpha.png");
         if (duals_overlay.exists()) {
@@ -233,6 +247,8 @@ public class FSkin {
         final FileHandle f19 = getDefaultSkinFile(ForgeConstants.SPRITE_CURSOR_FILE);
         final FileHandle f20 = getSkinFile(ForgeConstants.SPRITE_SLEEVES_FILE);
         final FileHandle f21 = getSkinFile(ForgeConstants.SPRITE_SLEEVES2_FILE);
+        final FileHandle f22 = getDefaultSkinFile(ForgeConstants.SPRITE_ADV_BUTTONS_FILE);
+        final FileHandle f23 = getSkinFile(ForgeConstants.SPRITE_ADV_BUTTONS_FILE);
 
         /*TODO Themeable
         final FileHandle f14 = getDefaultSkinFile(ForgeConstants.SPRITE_SETLOGO_FILE);
@@ -243,6 +259,13 @@ public class FSkin {
         try {
             manager.load(f1.path(), Texture.class);
             manager.finishLoadingAsset(f1.path());
+            Pixmap adventureButtons;
+            if (f23.exists()) {
+                adventureButtons = new Pixmap(f23);
+            } else {
+                adventureButtons = new Pixmap(f22);
+            }
+
             Pixmap preferredIcons = new Pixmap(f1);
             if (f2.exists()) {
                 manager.load(f2.path(), Texture.class);
@@ -282,7 +305,10 @@ public class FSkin {
             } else { Forge.hdstart = false; }
             //update colors
             for (final FSkinColor.Colors c : FSkinColor.Colors.values()) {
-                c.setColor(new Color(preferredIcons.getPixel(c.getX(), c.getY())));
+                if (c.toString().startsWith("ADV_CLR"))
+                    c.setColor(new Color(adventureButtons.getPixel(c.getX(), c.getY())));
+                else
+                    c.setColor(new Color(preferredIcons.getPixel(c.getX(), c.getY())));
             }
 
             //load images
@@ -447,10 +473,16 @@ public class FSkin {
             Forge.getAssets().cursor().put(2, new TextureRegion(manager.get(f19.path(), Texture.class), 64, 0, 32, 32)); // magnify off
 
             Forge.setCursor(Forge.getAssets().cursor().get(0), "0");
+            //set adv_progress bar colors
+            FProgressBar.ADV_BACK_COLOR = new Color(adventureButtons.getPixel(FSkinColor.Colors.ADV_CLR_BORDERS.getX(), FSkinColor.Colors.ADV_CLR_BORDERS.getY()));
+            FProgressBar.ADV_FORE_COLOR = new Color(adventureButtons.getPixel(FSkinColor.Colors.ADV_CLR_THEME.getX(), FSkinColor.Colors.ADV_CLR_THEME.getY()));
+            FProgressBar.ADV_SEL_BACK_COLOR = new Color(adventureButtons.getPixel(FSkinColor.Colors.ADV_CLR_ACTIVE.getX(), FSkinColor.Colors.ADV_CLR_ACTIVE.getY()));
+            FProgressBar.ADV_SEL_FORE_COLOR = new Color(adventureButtons.getPixel(FSkinColor.Colors.ADV_CLR_BORDERS.getX(), FSkinColor.Colors.ADV_CLR_BORDERS.getY()));
 
             preferredIcons.dispose();
             pxDefaultAvatars.dispose();
             pxDefaultSleeves.dispose();
+            adventureButtons.dispose();
         }
         catch (final Exception e) {
             System.err.println("FSkin$loadFull: Missing a sprite (default icons, "

@@ -48,11 +48,11 @@ public class ClosingScreen extends FContainer {
             }
             g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
             g.setAlphaComposite(1-percentage);
-            g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+            g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
             g.setAlphaComposite(oldAlpha);
             float xmod = Forge.getScreenHeight() > 2000 ? 1.5f : 1f;
-            if (FSkin.hdLogo != null) {
-                g.drawImage(FSkin.hdLogo, Forge.getScreenWidth()/2 - (FSkin.hdLogo.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkin.hdLogo.getHeight()*xmod)/2, FSkin.hdLogo.getWidth()*xmod, FSkin.hdLogo.getHeight()*xmod);
+            if (FSkin.getLogo() != null) {
+                g.drawImage(FSkin.getLogo(), Forge.getScreenWidth()/2 - (FSkin.getLogo().getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkin.getLogo().getHeight()*xmod)/2, FSkin.getLogo().getWidth()*xmod, FSkin.getLogo().getHeight()*xmod);
             } else {
                 g.drawImage(FSkinImage.LOGO,Forge.getScreenWidth()/2 - (FSkinImage.LOGO.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkinImage.LOGO.getHeight()*xmod)/1.5f, FSkinImage.LOGO.getWidth()*xmod, FSkinImage.LOGO.getHeight()*xmod);
             }
@@ -87,12 +87,12 @@ public class ClosingScreen extends FContainer {
             }
             g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
             g.setAlphaComposite(percentage);
-            g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+            g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
             g.setAlphaComposite(oldAlpha);
             float xmod = Forge.getScreenHeight() > 2000 ? 1.5f : 1f;
             xmod *= 21-(20*percentage);
-            if (FSkin.hdLogo != null) {
-                g.drawImage(FSkin.hdLogo, Forge.getScreenWidth()/2 - (FSkin.hdLogo.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkin.hdLogo.getHeight()*xmod)/2, FSkin.hdLogo.getWidth()*xmod, FSkin.hdLogo.getHeight()*xmod);
+            if (FSkin.getLogo() != null) {
+                g.drawImage(FSkin.getLogo(), Forge.getScreenWidth()/2 - (FSkin.getLogo().getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkin.getLogo().getHeight()*xmod)/2, FSkin.getLogo().getWidth()*xmod, FSkin.getLogo().getHeight()*xmod);
             } else {
                 g.drawImage(FSkinImage.LOGO,Forge.getScreenWidth()/2 - (FSkinImage.LOGO.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkinImage.LOGO.getHeight()*xmod)/1.5f, FSkinImage.LOGO.getWidth()*xmod, FSkinImage.LOGO.getHeight()*xmod);
             }
