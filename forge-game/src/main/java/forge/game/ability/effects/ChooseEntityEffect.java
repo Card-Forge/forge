@@ -1,20 +1,17 @@
 package forge.game.ability.effects;
 
-import com.google.common.collect.Lists;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
-import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-
-import java.util.List;
+import forge.util.Localizer;
+import forge.util.collect.FCollection;
 
 public class ChooseEntityEffect extends SpellAbilityEffect {
     @Override
@@ -29,18 +26,26 @@ public class ChooseEntityEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
 
-        List<GameEntity> choices = Lists.newArrayList();
-        String cardsDef = sa.getParam("CardChoices");
-        String playersDef = sa.getParam("PlayerChoices");
-        CardCollection cards = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), cardsDef, activator,
-                host, sa);
-        choices.addAll(cards);
-        PlayerCollection players = AbilityUtils.getDefinedPlayers(host, playersDef, sa);
-        choices.addAll(players);
+        FCollection<GameEntity> choices = new FCollection<>();
+        if (sa.hasParam("CardChoices")) {
+            choices.addAll(CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("CardChoices"),
+                    activator, host, sa));
+        }
+        if (sa.hasParam("PlayerChoices")) {
+            choices.addAll(AbilityUtils.getDefinedPlayers(host, sa.getParam("PlayerChoices"), sa));
+        }
 
-        Object chosen = null;
-        if (sa.hasParam("Random")) { // currently we only choose at random for this
-            chosen = Aggregates.random(choices);
+        FCollection<GameEntity> chosen = new FCollection<>();
+        int n = sa.hasParam("ChoiceAmount") ? AbilityUtils.calculateAmount(host, sa.getParam("ChoiceAmount"), sa) : 1;
+        if (sa.hasParam("Random")) {
+            for (int i = 0; i < n; i++) {
+            chosen.add(Aggregates.random(choices));
+            choices.remove(chosen);
+        } else {
+            final String prompt = sa.hasParam("ChoicePrompt") ? sa.getParam("ChoicePrompt") :
+                    Localizer.getInstance().getMessage("lblChooseEntity");
+            chosen.addAll(activator.getController().chooseEntitiesForEffect(choices, n, n, null, sa, prompt,
+                    null, null));
         }
         if (chosen == null) {
             System.err.println("Error: ChooseEntityEffect.java unable to choose an entity");
@@ -48,7 +53,9 @@ public class ChooseEntityEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("RememberChosen")) {
-            host.addRemembered(chosen);
+            for (GameEntity ge : chosen) {
+                host.addRemembered(ge);
+            }
         }
     }
 }
