@@ -40,8 +40,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = Utils.scale(5);
     private static final float PILE_SPACING_Y = 0.1f;
     private static final FSkinFont LABEL_FONT = FSkinFont.get(12);
-    private static final FSkinColor GROUP_HEADER_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor GROUP_HEADER_LINE_COLOR = GROUP_HEADER_FORE_COLOR.alphaColor(0.5f);
+    private static FSkinColor getGroupHeaderForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
+    private static FSkinColor getGroupHeaderLineColor() {
+        return getGroupHeaderForeColor().alphaColor(0.5f);
+    }
     private static final FSkinFont GROUP_HEADER_FONT = LABEL_FONT;
     private static final float GROUP_HEADER_HEIGHT = Utils.scale(19);
     private static final float GROUP_HEADER_GLYPH_WIDTH = Utils.scale(6);
@@ -109,20 +115,20 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
 
             for (int i = 0; i < 2; i++) {
-                g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x, y, x + squareSize, y);
-                g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x + squareSize, y, x + squareSize, y + offset);
-                g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x, y, x, y + squareSize);
-                g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x, y + squareSize, x + offset, y + squareSize);
+                g.drawLine(lineThickness, getGroupHeaderForeColor(), x, y, x + squareSize, y);
+                g.drawLine(lineThickness, getGroupHeaderForeColor(), x + squareSize, y, x + squareSize, y + offset);
+                g.drawLine(lineThickness, getGroupHeaderForeColor(), x, y, x, y + squareSize);
+                g.drawLine(lineThickness, getGroupHeaderForeColor(), x, y + squareSize, x + offset, y + squareSize);
                 x += offset;
                 y += offset;
             }
-            g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x, y, x + squareSize, y);
-            g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x + squareSize, y, x + squareSize, y + squareSize);
-            g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x, y, x, y + squareSize);
-            g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x, y + squareSize, x + squareSize, y + squareSize);
-            g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x + offset + 1, y + squareSize / 2, x + squareSize - offset, y + squareSize / 2);
+            g.drawLine(lineThickness, getGroupHeaderForeColor(), x, y, x + squareSize, y);
+            g.drawLine(lineThickness, getGroupHeaderForeColor(), x + squareSize, y, x + squareSize, y + squareSize);
+            g.drawLine(lineThickness, getGroupHeaderForeColor(), x, y, x, y + squareSize);
+            g.drawLine(lineThickness, getGroupHeaderForeColor(), x, y + squareSize, x + squareSize, y + squareSize);
+            g.drawLine(lineThickness, getGroupHeaderForeColor(), x + offset + 1, y + squareSize / 2, x + squareSize - offset, y + squareSize / 2);
             if (isAllCollapsed) {
-                g.drawLine(lineThickness, GROUP_HEADER_FORE_COLOR, x + squareSize / 2, y + offset, x + squareSize / 2, y + squareSize - offset - 1);
+                g.drawLine(lineThickness, getGroupHeaderForeColor(), x + squareSize / 2, y + offset, x + squareSize / 2, y + squareSize - offset - 1);
             }
         }
     }
@@ -796,23 +802,23 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 float x = GROUP_HEADER_GLYPH_WIDTH + PADDING + 1;
                 float y = 0;
                 String caption = name + " (" + items.size() + ")";
-                g.drawText(caption, GROUP_HEADER_FONT, GROUP_HEADER_FORE_COLOR, x, y, getWidth(), GROUP_HEADER_HEIGHT, false, Align.left, true);
+                g.drawText(caption, GROUP_HEADER_FONT, getGroupHeaderForeColor(), x, y, getWidth(), GROUP_HEADER_HEIGHT, false, Align.left, true);
                 x += GROUP_HEADER_FONT.getBounds(caption).width + PADDING;
                 y += GROUP_HEADER_HEIGHT / 2;
-                g.drawLine(GROUP_HEADER_LINE_THICKNESS, GROUP_HEADER_LINE_COLOR, x, y, getWidth(), y);
+                g.drawLine(GROUP_HEADER_LINE_THICKNESS, getGroupHeaderLineColor(), x, y, getWidth(), y);
 
                 //draw expand/collapse glyph
                 float offset = GROUP_HEADER_GLYPH_WIDTH / 2 + 1;
                 x = offset;
                 if (isCollapsed) {
                     y += GROUP_HEADER_LINE_THICKNESS;
-                    g.fillTriangle(GROUP_HEADER_LINE_COLOR,
+                    g.fillTriangle(getGroupHeaderLineColor(),
                             x, y - offset,
                             x + offset, y,
                             x, y + offset);
                 }
                 else {
-                    g.fillTriangle(GROUP_HEADER_LINE_COLOR,
+                    g.fillTriangle(getGroupHeaderLineColor(),
                             x - offset + 2, y + offset - 1,
                             x + offset, y + offset - 1,
                             x + offset, y - offset + 1);

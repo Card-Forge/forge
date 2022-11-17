@@ -156,7 +156,7 @@ public class LoadConquestScreen extends LaunchScreen {
     @Override
     protected void drawOverlay(Graphics g) {
         float y = lstConquests.getTop();
-        g.drawLine(1, FList.LINE_COLOR, 0, y, lstConquests.getWidth(), y); //draw top border for list
+        g.drawLine(1, FList.getLineColor(), 0, y, lstConquests.getWidth(), y); //draw top border for list
     }
 
     @Override

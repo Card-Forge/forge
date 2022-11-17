@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.badlogic.gdx.math.Rectangle;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
@@ -24,7 +25,11 @@ import forge.toolbox.FScrollPane;
 
 public abstract class ItemView<T extends InventoryItem> {
     protected static final float UNOWNED_ALPHA_COMPOSITE = 0.35f;
-    private static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static FSkinColor getBorderColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
 
     protected final ItemManager<T> itemManager;
     protected final ItemManagerModel<T> model;
@@ -71,7 +76,7 @@ public abstract class ItemView<T extends InventoryItem> {
         @Override
         public void drawOverlay(Graphics g) {
             super.drawOverlay(g);
-            g.drawRect(1.5f, BORDER_COLOR, 0, 0, getWidth(), getHeight());
+            g.drawRect(1.5f, getBorderColor(), 0, 0, getWidth(), getHeight());
         }
     }
 

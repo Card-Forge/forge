@@ -19,6 +19,10 @@ public enum FSkinTexture implements FImage {
     BG_MATCH_NIGHT(ForgeConstants.MATCH_BG_NIGHT_FILE, false, false),
     BG_SPACE(ForgeConstants.SPACE_BG_FILE, false, false),
     BG_CHAOS_WHEEL(ForgeConstants.CHAOS_WHEEL_IMG_FILE, false, false),
+    ADV_BG_MATCH(ForgeConstants.ADV_MATCH_BG_FILE, false, false),
+    ADV_BG_MATCH_DAY(ForgeConstants.ADV_MATCH_BG_DAY_FILE, false, false),
+    ADV_BG_MATCH_NIGHT(ForgeConstants.ADV_MATCH_BG_NIGHT_FILE, false, false),
+    ADV_BG_TEXTURE(ForgeConstants.ADV_TEXTURE_BG_FILE, true, false),
     Academy_at_Tolaria_West(ForgeConstants.BG_1, false, true),
     Agyrem(ForgeConstants.BG_2, false, true),
     Akoum(ForgeConstants.BG_3, false, true),
@@ -190,8 +194,7 @@ public enum FSkinTexture implements FImage {
     public void draw(Graphics g, float x, float y, float w, float h) {
         if (repeat) {
             g.drawRepeatingImage(texture, x, y, w, h);
-        }
-        else {
+        } else {
             g.drawImage(texture, x, y, w, h);
         }
     }

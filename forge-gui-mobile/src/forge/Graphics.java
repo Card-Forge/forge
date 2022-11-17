@@ -918,7 +918,8 @@ public class Graphics {
         }
     }
     public void drawImage(Texture image, float x, float y, float w, float h) {
-        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        if (image != null)
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
     }
     public void drawImage(TextureRegion image, float x, float y, float w, float h) {
         if (image != null)
@@ -978,6 +979,8 @@ public class Graphics {
     }
 
     public void drawRepeatingImage(Texture image, float x, float y, float w, float h) {
+        if (image == null)
+            return;
         if (startClip(x, y, w, h)) { //only render if clip successful, otherwise it will escape bounds
             int tilesW = (int)(w / image.getWidth()) + 1;
             int tilesH = (int)(h / image.getHeight()) + 1;

@@ -54,7 +54,7 @@ public class FMenuBar extends Header {
     protected void drawBackground(Graphics g) {
         float w = getWidth();
         float h = getHeight();
-        g.fillRect(BACK_COLOR, 0, 0, w, h);
+        g.fillRect(getBackColor(), 0, 0, w, h);
     }
 
     @Override

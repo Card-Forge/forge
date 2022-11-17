@@ -21,13 +21,29 @@ import forge.util.Utils;
 
 public abstract class FDialog extends FOverlay {
     public static final FSkinFont MSG_FONT = FSkinFont.get(12);
-    public static final FSkinColor MSG_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.9f);
-    public static final FSkinColor MSG_BACK_COLOR = FScreen.Header.BACK_COLOR.alphaColor(0.75f);
+    public static FSkinColor getMsgForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT).alphaColor(0.9f);
+        return FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.9f);
+    }
+    public static FSkinColor getMsgBackColor() {
+        return FScreen.Header.getBackColor().alphaColor(0.75f);
+    }
     public static final float MSG_HEIGHT = MSG_FONT.getCapHeight() * 2.5f;
-    protected static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS).alphaColor(0.8f);
+    protected static FSkinColor getBorderColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_BORDERS).alphaColor(0.8f);
+        return FSkinColor.get(Colors.CLR_BORDERS).alphaColor(0.8f);
+    }
     protected static final float BORDER_THICKNESS = Utils.scale(1);
-    private static final FSkinColor SWIPE_BAR_COLOR = FScreen.Header.BACK_COLOR;
-    private static final FSkinColor SWIPE_BAR_DOT_COLOR = FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.75f);
+    private static FSkinColor getSwipeBarColor() {
+        return FScreen.Header.getBackColor();
+    }
+    private static FSkinColor getSwipeBarDotColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT).alphaColor(0.75f);
+        return FSkinColor.get(Colors.CLR_TEXT).alphaColor(0.75f);
+    }
     private static final float SWIPE_BAR_HEIGHT = Utils.scale(12);
 
     private static int openDialogCount = 0;
@@ -189,8 +205,8 @@ public abstract class FDialog extends FOverlay {
         float y = getHeight() - (totalHeight + getBottomMargin()) * revealPercent;
         float w = getWidth();
         float h = totalHeight - VPrompt.HEIGHT;
-        g.drawImage(FSkinTexture.BG_TEXTURE, x, y, w, h);
-        g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, x, y, w, h);
+        g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, x, y, w, h);
+        g.fillRect(FScreen.getTextureOverlayColor(), x, y, w, h);
     }
 
     @Override
@@ -204,31 +220,31 @@ public abstract class FDialog extends FOverlay {
         float dotRadius = SWIPE_BAR_HEIGHT / 6;
         float dotTop = y + SWIPE_BAR_HEIGHT / 2;
         int dotCount = 3;
-        g.fillRect(SWIPE_BAR_COLOR, 0, y, w, SWIPE_BAR_HEIGHT);
+        g.fillRect(getSwipeBarColor(), 0, y, w, SWIPE_BAR_HEIGHT);
         for (int i = 0; i < dotCount; i++) {
-            g.fillCircle(SWIPE_BAR_DOT_COLOR, x, dotTop, dotRadius);
+            g.fillCircle(getSwipeBarDotColor(), x, dotTop, dotRadius);
             x += dx;
         }
         x = w - startX;
         for (int i = 0; i < dotCount; i++) {
-            g.fillCircle(BORDER_COLOR, x, dotTop, dotRadius);
+            g.fillCircle(getBorderColor(), x, dotTop, dotRadius);
             x -= dx;
         }
-        g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, w, y);
+        g.drawLine(BORDER_THICKNESS, getBorderColor(), 0, y, w, y);
 
         if (revealPercent == 0) { return; } //skip rest if hidden
 
         y += SWIPE_BAR_HEIGHT;
-        g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, w, y);
+        g.drawLine(BORDER_THICKNESS, getBorderColor(), 0, y, w, y);
 
         //draw border above prompt
         y = prompt.getTop();
         if (btnMiddle != null && !title.isEmpty()) { //render title above prompt if middle button present
             y -= MSG_HEIGHT;
-            g.fillRect(VPrompt.BACK_COLOR, 0, y, w, MSG_HEIGHT);
-            g.drawText(title, VPrompt.FONT, VPrompt.FORE_COLOR, 0, y, w, MSG_HEIGHT, false, Align.center, true);
+            g.fillRect(VPrompt.getBackColor(), 0, y, w, MSG_HEIGHT);
+            g.drawText(title, VPrompt.FONT, VPrompt.getForeColor(), 0, y, w, MSG_HEIGHT, false, Align.center, true);
         }
-        g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, w, y);
+        g.drawLine(BORDER_THICKNESS, getBorderColor(), 0, y, w, y);
     }
 
     @Override

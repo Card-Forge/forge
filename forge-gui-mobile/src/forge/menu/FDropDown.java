@@ -15,7 +15,11 @@ import forge.toolbox.FOverlay;
 import forge.toolbox.FScrollPane;
 
 public abstract class FDropDown extends FScrollPane {
-    public static final FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
+    public static FSkinColor getBorderColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_BORDERS);
+        return FSkinColor.get(Colors.CLR_BORDERS);
+    }
 
     private Backdrop backdrop;
     private FMenuTab menuTab;
@@ -173,8 +177,8 @@ public abstract class FDropDown extends FScrollPane {
     protected void drawBackground(Graphics g) {
         float w = getWidth();
         float h = getHeight();
-        g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, w, h);
-        g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, 0, 0, w, h);
+        g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, w, h);
+        g.fillRect(FScreen.getTextureOverlayColor(), 0, 0, w, h);
     }
 
     protected boolean drawAboveOverlay() {
@@ -186,7 +190,7 @@ public abstract class FDropDown extends FScrollPane {
         super.drawOverlay(g);
         float w = getWidth();
         float h = getHeight();
-        g.drawRect(2, BORDER_COLOR, 0, 0, w, h); //ensure border shows up on all sides
+        g.drawRect(2, getBorderColor(), 0, 0, w, h); //ensure border shows up on all sides
     }
 
     protected FDisplayObject getDropDownOwner() {

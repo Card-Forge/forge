@@ -96,14 +96,14 @@ public class VPlayers extends FDropDown {
             }
             x += h + PADDING;
             //Draw Player Details
-            g.drawText(details, FONT, FList.FORE_COLOR, x, y, getWidth() - PADDING - x, h, true, Align.left, true);
+            g.drawText(details, FONT, FList.getForeColor(), x, y, getWidth() - PADDING - x, h, true, Align.left, true);
         }
 
         @Override
         public void drawOverlay(Graphics g) {
             //draw bottom border
             float y = getHeight();
-            g.drawLine(1, FList.LINE_COLOR, 0, y, getWidth(), y);
+            g.drawLine(1, FList.getLineColor(), 0, y, getWidth(), y);
         }
     }
 }
