@@ -385,7 +385,7 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                 if (parentScreen.showCompactTabs() && !isLandscapeMode) {
                     h -= 2 * padding;
                     if (icon == null) {
-                        g.drawText(caption, TAB_FONT, TAB_FORE_COLOR, padding, padding, w, h, false, Align.center, true);
+                        g.drawText(caption, TAB_FONT, getTabForeColor(), padding, padding, w, h, false, Align.center, true);
                     }
                     else {
                         //center combination of icon and text
@@ -413,12 +413,12 @@ public class TabPageScreen<T extends TabPageScreen<T>> extends FScreen {
                         x += iconOffset;
                         w -= iconOffset;
                         g.startClip(x, y, w, h);
-                        g.drawText(caption, font, TAB_FORE_COLOR, x, y, w, h, false, Align.left, true);
+                        g.drawText(caption, font, getTabForeColor(), x, y, w, h, false, Align.left, true);
                         g.endClip();
                     }
                 } else {
                     float y = h - padding - TAB_FONT.getCapHeight();
-                    g.drawText(caption, TAB_FONT, TAB_FORE_COLOR, padding, y - padding, w, h - y + padding, false, Align.center, true);
+                    g.drawText(caption, TAB_FONT, getTabForeColor(), padding, y - padding, w, h - y + padding, false, Align.center, true);
 
                     if (icon != null) {
                         float iconHeight = y - 2 * padding;
