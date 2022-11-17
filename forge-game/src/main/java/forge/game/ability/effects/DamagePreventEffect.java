@@ -13,7 +13,6 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
-import forge.util.Localizer;
 import forge.util.collect.FCollection;
 
 public class DamagePreventEffect extends DamagePreventEffectBase {
