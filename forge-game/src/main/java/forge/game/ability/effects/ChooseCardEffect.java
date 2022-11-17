@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.*;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
@@ -63,9 +64,9 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        ZoneType choiceZone = ZoneType.Battlefield;
+        List<ZoneType> choiceZone = Lists.newArrayList(ZoneType.Battlefield);
         if (sa.hasParam("ChoiceZone")) {
-            choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+            choiceZone = ZoneType.listValueOf(sa.getParam("ChoiceZone"));
         }
         CardCollectionView choices = sa.hasParam("AllCards") ? game.getCardsInGame() : game.getCardsIn(choiceZone);
         if (sa.hasParam("Choices")) {
