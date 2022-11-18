@@ -2282,23 +2282,31 @@ public class ComputerUtil {
         if (goodChoices.isEmpty()) {
             goodChoices = validCards;
         }
-        final CardCollection dChoices = new CardCollection();
-        if (sa.hasParam("DiscardValid")) {
-            final String validString = sa.getParam("DiscardValid");
-            if (validString.contains("Creature") && !validString.contains("nonCreature")) {
-                final Card c = ComputerUtilCard.getBestCreatureAI(goodChoices);
-                if (c != null) {
-                    dChoices.add(c);
+
+        if (min == 1 && max == 1) {
+            if (sa.hasParam("DiscardValid")) {
+                final String validString = sa.getParam("DiscardValid");
+                if (validString.contains("Creature") && !validString.contains("nonCreature")) {
+                    final Card c = ComputerUtilCard.getBestCreatureAI(goodChoices);
+                    if (c != null) {
+                        return new CardCollection(c);
+                    }
                 }
             }
+        }
+
+        // not enough good choices, need to fill the rest
+        int minDiff = min - goodChoices.size();
+        if (minDiff > 0) {
+            goodChoices.addAll(Aggregates.random(CardLists.filter(validCards, Predicates.not(Predicates.in(goodChoices))), minDiff));
+            return goodChoices;
         }
 
         Collections.sort(goodChoices, CardLists.TextLenComparator);
 
         CardLists.sortByCmcDesc(goodChoices);
-        dChoices.add(goodChoices.get(0));
 
-        return Aggregates.random(goodChoices, min, new CardCollection());
+        return new CardCollection(Aggregates.random(goodChoices, max));
     }
 
     public static CardCollection getCardsToDiscardFromFriend(Player aiChooser, Player p, SpellAbility sa, CardCollection validCards, int min, int max) {
