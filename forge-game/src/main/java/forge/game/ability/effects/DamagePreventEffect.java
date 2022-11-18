@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
 import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
@@ -70,7 +71,7 @@ public class DamagePreventEffect extends DamagePreventEffectBase {
         Card host = sa.getHostCard();
         int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
 
-        final List<GameObject> tgts = getTargets(sa);
+        List<GameObject> tgts = Lists.newArrayList();
         if (sa.hasParam("CardChoices") || sa.hasParam("PlayerChoices")) { // choosing outside Defined/Targeted
             // only for Whimsy, for more robust version see DamageDealEffect
             FCollection<GameEntity> choices = new FCollection<>();
@@ -81,11 +82,13 @@ public class DamagePreventEffect extends DamagePreventEffectBase {
             if (sa.hasParam("PlayerChoices")) {
                 choices.addAll(AbilityUtils.getDefinedPlayers(host, sa.getParam("PlayerChoices"), sa));
             }
-            if (sa.hasParam("Random")) {
+            if (sa.hasParam("Random")) { // currently everything using Choices is random
                 GameObject random = Aggregates.random(choices);
                 tgts.add(random);
                 host.addRemembered(random); // remember random choices for log
             }
+        } else {
+            tgts = getTargets(sa);
         }
 
         final CardCollection untargetedCards = CardUtil.getRadiance(sa);

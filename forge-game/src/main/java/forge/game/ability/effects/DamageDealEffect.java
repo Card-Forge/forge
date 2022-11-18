@@ -157,7 +157,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         final boolean removeDamage = sa.hasParam("Remove");
         final boolean divideOnResolution = sa.hasParam("DividerOnResolution");
 
-        List<GameObject> tgts = getTargets(sa);
+        List<GameObject> tgts = Lists.newArrayList();
         if (sa.hasParam("CardChoices") || sa.hasParam("PlayerChoices")) { // choosing outside Defined/Targeted
             final Player activator = sa.getActivatingPlayer();
             FCollection<GameEntity> choices = new FCollection<>();
@@ -184,6 +184,8 @@ public class DamageDealEffect extends DamageBaseEffect {
                 tgts.addAll(sa.getActivatingPlayer().getController().chooseEntitiesForEffect(choices, n, n, null, sa,
                         prompt, null, null));
             }
+        } else {
+            tgts = getTargets(sa);
         }
 
         if (sa.hasParam("OptionalDecider")) {
