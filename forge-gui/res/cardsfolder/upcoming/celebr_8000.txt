@@ -5,11 +5,11 @@ PT:3/3
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRoll | TriggerDescription$ At the beginning of combat on your turn, roll two six-sided dice. For each result of 1, CARDNAME gets +1/+1 until end of turn. For each other result, it gains the indicated ability until end of turn. If you rolled doubles, it also gains double strike until end of turn. ABILITY
 SVar:TrigRoll:DB$ RollDice | Amount$ 2 | SubsForEach$ True | ResultSubAbilities$ 1:PumpPT,2:PumpMe,3:PumpVi,4:PumpLi,5:PumpFl,6:PumpIn | NoteDoubles$ True | SubAbility$ PumpDS
 SVar:PumpPT:DB$ Pump | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ ,,,
-SVar:PumpMe:DB$ Pump | KW$ Menace | SpellDescription$ • 2 — Menace
-SVar:PumpVi:DB$ Pump | KW$ Vigilance | SpellDescription$ • 3 — Vigilance
-SVar:PumpLi:DB$ Pump | KW$ Lifelink | SpellDescription$ • 4 — Lifelink
-SVar:PumpFl:DB$ Pump | KW$ Flying | SpellDescription$ • 5 — Flying
-SVar:PumpIn:DB$ Pump | KW$ Indestructible | SpellDescription$ • 6 — Indestructible
+SVar:PumpMe:DB$ Pump | KW$ Menace | SpellDescription$ • 2 — menace
+SVar:PumpVi:DB$ Pump | KW$ Vigilance | SpellDescription$ • 3 — vigilance
+SVar:PumpLi:DB$ Pump | KW$ Lifelink | SpellDescription$ • 4 — lifelink
+SVar:PumpFl:DB$ Pump | KW$ Flying | SpellDescription$ • 5 — flying
+SVar:PumpIn:DB$ Pump | KW$ Indestructible | SpellDescription$ • 6 — indestructible
 SVar:PumpDS:DB$ Pump | KW$ Double Strike | ConditionCheckSVar$ Doubles
 DeckHas:Ability$LifeGain
 Oracle:At the beginning of combat on your turn, roll two six-sided dice. For each result of 1, Celebr-8000 gets +1/+1 until end of turn. For each other result, it gains the indicated ability until end of turn. If you rolled doubles, it also gains double strike until end of turn.\n• 2 — menace\n• 3 — vigilance\n• 4 — lifelink\n• 5 — flying\n• 6 — indestructible
