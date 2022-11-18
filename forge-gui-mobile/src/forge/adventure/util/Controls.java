@@ -80,6 +80,8 @@ public class Controls {
         return new Rectangle(actor.getX(),actor.getY(),actor.getWidth(),actor.getHeight());
     }
     static public boolean actorContainsVector (Actor actor, Vector2 point) {
+        if (actor == null)
+            return false;
         if (!actor.isVisible())
             return false;
         return getBoundingRect(actor).contains(point);
