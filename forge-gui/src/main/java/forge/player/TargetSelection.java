@@ -298,6 +298,10 @@ public class TargetSelection {
                         // By peeking at stack item, target is set to its SI state. So set it back before adding targets
                         ability.resetTargets();
                     }
+                    // make sure we're not accidentally finding a cast trigger of this card first
+                    if (!abilityOnStack.isSpell()) {
+                        continue;
+                    }
                     if (abilityOnStack.getHostCard().getView().equals(chosen)) {
                         ability.getTargets().add(abilityOnStack);
                         break;
