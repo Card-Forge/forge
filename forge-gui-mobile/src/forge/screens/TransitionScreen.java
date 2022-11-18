@@ -82,7 +82,7 @@ public class TransitionScreen extends FContainer {
                     g.setAlphaComposite(oldAlpha);
                 }
                 float xmod = Forge.getScreenHeight() > 2000 ? 1.5f : 1f;
-                xmod *= Forge.isMobileAdventureMode ? 1 : percentage;
+                xmod *= percentage;
                 float ymod;
                 if (FSkin.getLogo() != null) {
                     ymod = Forge.getScreenHeight()/2 + (FSkin.getLogo().getHeight()*xmod)/2;

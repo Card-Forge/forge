@@ -800,7 +800,8 @@ public class MatchScreen extends FScreen {
             pnl.setNextPanelInStack(null);
         }
     }
-
+    private String daytime2 = null;
+    FSkinTexture currentBG = FSkinTexture.ADV_BG_MATCH;
     private class BGAnimation extends ForgeAnimation {
         private static final float DURATION = 1.5f;
         private float progress = 0;
@@ -814,12 +815,36 @@ public class MatchScreen extends FScreen {
             } else if (percentage > 1) {
                 percentage = 1;
             }
-            g.setAlphaComposite(percentage);
-            if (!daynightTransition)
-                g.drawGrayTransitionImage(image, x, y, w, h, darkoverlay, 1-(percentage*1));
-            else
-                g.drawUnderWaterImage(image, x, y, w, h, 1-(percentage*1), darkoverlay);
-            g.setAlphaComposite(oldAlpha);
+            if (Forge.isMobileAdventureMode) {
+                FSkinTexture bgDay = FSkinTexture.ADV_BG_MATCH_DAY;
+                FSkinTexture bgNight = FSkinTexture.ADV_BG_MATCH_NIGHT;
+                FSkinTexture bgNeither = FSkinTexture.ADV_BG_MATCH;
+                //back bg
+                FSkinTexture backBG = bgNeither;
+                //front bg
+                FSkinTexture frontBG = bgNeither;
+                if (MatchController.instance.getGameView().getGame().isDay())
+                    backBG = bgDay;
+                if (MatchController.instance.getGameView().getGame().isNight())
+                    backBG = bgNight;
+                if (MatchController.instance.getGameView().getGame().previousTimeIsDay())
+                    frontBG = bgDay;
+                if (MatchController.instance.getGameView().getGame().previousTimeIsNight())
+                    frontBG = bgNight;
+                //draw backBG
+                g.drawImage(backBG, x, y, w, h);
+                //draw frontBG with alpha difference
+                g.setAlphaComposite(1 - (percentage * 1));
+                g.drawImage(frontBG, x, y, w, h);
+                g.setAlphaComposite(oldAlpha);
+            } else {
+                g.setAlphaComposite(percentage);
+                if (!daynightTransition)
+                    g.drawGrayTransitionImage(image, x, y, w, h, darkoverlay, 1 - (percentage * 1));
+                else
+                    g.drawUnderWaterImage(image, x, y, w, h, 1 - (percentage * 1), darkoverlay);
+                g.setAlphaComposite(oldAlpha);
+            }
         }
 
         @Override
@@ -831,6 +856,14 @@ public class MatchScreen extends FScreen {
         @Override
         protected void onEnd(boolean endingAll) {
             finished = true;
+            if (Forge.isMobileAdventureMode) {
+                //set currentBG
+                if (MatchController.instance.getGameView().getGame().isDay())
+                    currentBG = FSkinTexture.ADV_BG_MATCH_DAY;
+                if (MatchController.instance.getGameView().getGame().isNight())
+                    currentBG = FSkinTexture.ADV_BG_MATCH_NIGHT;
+                daytime2 = MatchController.instance.getDayTime();
+            }
         }
     }
     private class FieldScroller extends FScrollPane {
@@ -851,62 +884,83 @@ public class MatchScreen extends FScreen {
             int multiplier = playerPanels.keySet().size() - 1; //fix scaling of background when zoomed in multiplayer
             float bgHeight = (midField + bottomPlayerPanel.getField().getHeight() * multiplier) - y;
 
-            if (MatchController.instance.getDayTime() != null) {
-                //override BG
-                String dayTime = MatchController.instance.getDayTime();
-                if (!daytime.equals(dayTime)) {
+            if (Forge.isMobileAdventureMode) {
+                if (bgAnimation == null)
                     bgAnimation = new BGAnimation();
-                    bgAnimation.start();
-                    daytime = dayTime;
-                }
-                FSkinTexture bgDay = Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_MATCH_DAY : FSkinTexture.BG_MATCH_DAY;
-                FSkinTexture bgNight = Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_MATCH_NIGHT : FSkinTexture.BG_MATCH_NIGHT;
-                FSkinTexture matchBG = MatchController.instance.getGameView().getGame().isDay() ? bgDay : bgNight;
-                bgFullWidth = bgHeight * matchBG.getWidth() / matchBG.getHeight();
+
+                bgFullWidth = bgHeight * currentBG.getWidth() / currentBG.getHeight();
                 if (bgFullWidth < w) {
                     scaledbgHeight = w * (bgHeight / bgFullWidth);
                     bgFullWidth = w;
                     bgHeight = scaledbgHeight;
                 }
-                if (bgAnimation != null && !isGameFast && !MatchController.instance.getGameView().isMatchOver()) {
-                    bgAnimation.drawBackground(g, matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, !Forge.isMobileAdventureMode, true);
+
+                String dayTime = MatchController.instance.getDayTime();
+                if (daytime2 != dayTime) {
+                    bgAnimation.start();
+                    bgAnimation.drawBackground(g, currentBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, false, true);
                 } else {
-                    g.drawImage(matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, !Forge.isMobileAdventureMode);
+                    bgAnimation.progress = 0;
+                    g.drawImage(currentBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight);
                 }
-            } else if (FModel.getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE) || Forge.isMobileAdventureMode) {
-                if(FModel.getPreferences().getPrefBoolean(FPref.UI_DYNAMIC_PLANECHASE_BG)
-                        && hasActivePlane()) {
-                    String imageName = getPlaneName()
-                                .replace(" ", "_")
-                                .replace("'", "")
-                                .replace("-", "");
-                    if (!plane.equals(imageName)) {
+            } else { //non adventure needs update to accomodate multiple BG Effect ie Planchase + Daytime effect...
+                if (MatchController.instance.getDayTime() != null) {
+                    //override BG
+                    String dayTime = MatchController.instance.getDayTime();
+                    if (!daytime.equals(dayTime)) {
                         bgAnimation = new BGAnimation();
                         bgAnimation.start();
-                        plane = imageName;
+                        daytime = dayTime;
                     }
-                    if (FSkinTexture.getValues().contains(imageName)) {
-                        bgFullWidth = bgHeight * FSkinTexture.valueOf(imageName).getWidth() / FSkinTexture.valueOf(imageName).getHeight();
-                        if (bgFullWidth < w) {
-                            scaledbgHeight = w * (bgHeight / bgFullWidth);
-                            bgFullWidth = w;
-                            bgHeight = scaledbgHeight;
-                        }
-                        if (bgAnimation != null && !isGameFast && !MatchController.instance.getGameView().isMatchOver()) {
-                            bgAnimation.drawBackground(g, FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true, false);
-                        } else {
-                            g.drawImage(FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true);
-                        }
-                    }
-                } else {
-                    FSkinTexture matchBackground = Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_MATCH : FSkinTexture.BG_MATCH;
-                    bgFullWidth = bgHeight * matchBackground.getWidth() / matchBackground.getHeight();
+                    FSkinTexture bgDay = Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_MATCH_DAY : FSkinTexture.BG_MATCH_DAY;
+                    FSkinTexture bgNight = Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_MATCH_NIGHT : FSkinTexture.BG_MATCH_NIGHT;
+                    FSkinTexture matchBG = MatchController.instance.getGameView().getGame().isDay() ? bgDay : bgNight;
+                    bgFullWidth = bgHeight * matchBG.getWidth() / matchBG.getHeight();
                     if (bgFullWidth < w) {
                         scaledbgHeight = w * (bgHeight / bgFullWidth);
                         bgFullWidth = w;
                         bgHeight = scaledbgHeight;
                     }
-                    g.drawImage(matchBackground, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight);
+                    if (bgAnimation != null && !isGameFast && !MatchController.instance.getGameView().isMatchOver()) {
+                        bgAnimation.drawBackground(g, matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, !Forge.isMobileAdventureMode, true);
+                    } else {
+                        g.drawImage(matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, !Forge.isMobileAdventureMode);
+                    }
+                } else if (FModel.getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE)) {
+                    if(FModel.getPreferences().getPrefBoolean(FPref.UI_DYNAMIC_PLANECHASE_BG)
+                            && hasActivePlane()) {
+                        String imageName = getPlaneName()
+                                .replace(" ", "_")
+                                .replace("'", "")
+                                .replace("-", "");
+                        if (!plane.equals(imageName)) {
+                            bgAnimation = new BGAnimation();
+                            bgAnimation.start();
+                            plane = imageName;
+                        }
+                        if (FSkinTexture.getValues().contains(imageName)) {
+                            bgFullWidth = bgHeight * FSkinTexture.valueOf(imageName).getWidth() / FSkinTexture.valueOf(imageName).getHeight();
+                            if (bgFullWidth < w) {
+                                scaledbgHeight = w * (bgHeight / bgFullWidth);
+                                bgFullWidth = w;
+                                bgHeight = scaledbgHeight;
+                            }
+                            if (bgAnimation != null && !isGameFast && !MatchController.instance.getGameView().isMatchOver()) {
+                                bgAnimation.drawBackground(g, FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true, false);
+                            } else {
+                                g.drawImage(FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true);
+                            }
+                        }
+                    } else {
+                        FSkinTexture matchBackground = Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_MATCH : FSkinTexture.BG_MATCH;
+                        bgFullWidth = bgHeight * matchBackground.getWidth() / matchBackground.getHeight();
+                        if (bgFullWidth < w) {
+                            scaledbgHeight = w * (bgHeight / bgFullWidth);
+                            bgFullWidth = w;
+                            bgHeight = scaledbgHeight;
+                        }
+                        g.drawImage(matchBackground, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight);
+                    }
                 }
             }
         }
