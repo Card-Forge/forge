@@ -146,7 +146,6 @@ public abstract class AnimateEffectBase extends SpellAbilityEffect {
             }
         };
 
-
         if (sa.hasParam("RevertCost")) {
             final ManaCost cost = new ManaCost(new ManaCostParser(sa.getParam("RevertCost")));
             final String desc = sa.getStackDescription();

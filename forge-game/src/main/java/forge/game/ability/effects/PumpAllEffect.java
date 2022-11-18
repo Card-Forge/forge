@@ -23,12 +23,11 @@ public class PumpAllEffect extends SpellAbilityEffect {
     private static void applyPumpAll(final SpellAbility sa,
             final Iterable<Card> list, final int a, final int d,
             final List<String> keywords, final List<ZoneType> affectedZones) {
-        
         final Game game = sa.getActivatingPlayer().getGame();
         final long timestamp = game.getNextTimestamp();
         final List<String> kws = Lists.newArrayList();
         final List<String> hiddenkws = Lists.newArrayList();
-        
+
         for (String kw : keywords) {
             if (kw.startsWith("HIDDEN")) {
                 hiddenkws.add(kw.substring(7));
@@ -36,7 +35,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
                 kws.add(kw);
             }
         }
-        
+
         for (final Card tgtC : list) {
             // only pump things in the affected zones.
             boolean found = false;
@@ -147,7 +146,7 @@ public class PumpAllEffect extends SpellAbilityEffect {
         }
         final int a = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumAtt"), sa, true);
         final int d = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("NumDef"), sa, true);
-        
+
         if (sa.hasParam("SharedKeywordsZone")) {
             List<ZoneType> zones = ZoneType.listValueOf(sa.getParam("SharedKeywordsZone"));
             String[] restrictions = new String[] {"Card"};

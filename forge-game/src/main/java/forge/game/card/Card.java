@@ -1898,6 +1898,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return false;
     }
 
+    // used for cards like Meddling Mage...
+    public final String getNamedCard() {
+        return getChosenName();
+    }
+    public final void setNamedCard(final String s) {
+        setChosenName(s);
+    }
+    public final String getNamedCard2() { return getChosenName2(); }
+    public final void setNamedCard2(final String s) {
+        setChosenName2(s);
+    }
+
     public boolean hasChosenName() {
         return chosenName != null;
     }
@@ -1929,18 +1941,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (chosenEvenOdd == chosenEvenOdd0) { return; }
         chosenEvenOdd = chosenEvenOdd0;
         view.updateChosenEvenOdd(this);
-    }
-
-    // used for cards like Meddling Mage...
-    public final String getNamedCard() {
-        return getChosenName();
-    }
-    public final void setNamedCard(final String s) {
-        setChosenName(s);
-    }
-    public final String getNamedCard2() { return getChosenName2(); }
-    public final void setNamedCard2(final String s) {
-        setChosenName2(s);
     }
 
     public final boolean getDrawnThisTurn() {
