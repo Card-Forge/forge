@@ -59,7 +59,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
-        final CardCollection chosen = new CardCollection();
+        CardCollection chosen = new CardCollection();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
@@ -221,7 +221,8 @@ public class ChooseCardEffect extends SpellAbilityEffect {
 
             } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("AtRandom") && !choices.isEmpty()) {
-                    Aggregates.random(choices, validAmount, chosen);
+                    // don't pass FCollection for direct modification, the Set part would get messed up
+                    chosen = new CardCollection(Aggregates.random(choices, validAmount));
                     dontRevealToOwner = false;
                 } else {
                     String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";

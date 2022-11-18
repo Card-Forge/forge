@@ -114,7 +114,7 @@ public class HumanCostDecision extends CostDecisionMakerBase {
         int c = cost.getAbilityAmount(ability);
 
         if (discardType.equals("Random")) {
-            CardCollectionView randomSubset = Aggregates.random(hand, c, new CardCollection());
+            CardCollectionView randomSubset = new CardCollection(Aggregates.random(hand, c));
             if (randomSubset.size() > 1 && ability.getActivatingPlayer() != null) {
                 randomSubset = ability.getActivatingPlayer().getController().orderMoveToZoneList(randomSubset, ZoneType.Graveyard, ability);
             }
