@@ -98,7 +98,7 @@ public class TransitionScreen extends FContainer {
                     float x = (Forge.getScreenWidth() - w) / 2;
                     float y = ymod + 10;
                     int multi = ((int) (percentage*100)) < 97 ? (int) (percentage*100) : 100;
-                    progressBar.setBounds(x, y, w, h);
+                    progressBar.setBounds(x, Forge.getScreenHeight() - h * 2f, w, h);
                     progressBar.setValue(multi);
                     if (multi == 100 && !message.isEmpty()) {
                         progressBar.setDescription(message);
