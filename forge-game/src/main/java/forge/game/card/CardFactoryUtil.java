@@ -222,8 +222,10 @@ public class CardFactoryUtil {
         if (name == null || name.isEmpty()) {
             return false;
         }
+        card.setNamedCard(name);
+
         if (card.hasKeyword("Double agenda")) {
-            String name2 = player.getController().chooseCardName(sa, cpp, "Card",
+            String name2 = player.getController().chooseCardName(sa, cpp, "Card.!NamedCard",
                     "Name a second card for " + card.getName());
             if (name2 == null || name2.isEmpty()) {
                 return false;
@@ -231,7 +233,6 @@ public class CardFactoryUtil {
             card.setNamedCard2(name2);
         }
 
-        card.setNamedCard(name);
         card.turnFaceDown();
         card.addMayLookAt(player.getGame().getNextTimestamp(), ImmutableList.of(player));
         card.addSpellAbility(abilityRevealHiddenAgenda(card));
