@@ -1,9 +1,6 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import forge.game.event.GameEventRollDie;
 import org.apache.commons.lang3.StringUtils;
@@ -142,6 +139,30 @@ public class RollDiceEffect extends SpellAbilityEffect {
         return total;
     }
 
+    private static void resolveSub(SpellAbility sa, int num) {
+        Map<String, SpellAbility> diceAbilities = sa.getAdditionalAbilities();
+        SpellAbility resultAbility = null;
+        for (Map.Entry<String, SpellAbility> e : diceAbilities.entrySet()) {
+            String diceKey = e.getKey();
+            if (diceKey.contains("-")) {
+                String[] ranges = diceKey.split("-");
+                if (Integer.parseInt(ranges[0]) <= num && Integer.parseInt(ranges[1]) >= num) {
+                    resultAbility = e.getValue();
+                    break;
+                }
+            } else if (StringUtils.isNumeric(diceKey) && Integer.parseInt(diceKey) == num) {
+                resultAbility = e.getValue();
+                break;
+            }
+        }
+        if (resultAbility != null) {
+            AbilityUtils.resolve(resultAbility);
+
+        } else if (sa.hasAdditionalAbility("Else")) {
+            AbilityUtils.resolve(sa.getAdditionalAbility("Else"));
+        }
+    }
+
     private int rollDice(SpellAbility sa, Player player, int amount, int sides) {
         final Card host = sa.getHostCard();
         final int modifier = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Modifier", "0"), sa);
@@ -173,26 +194,23 @@ public class RollDiceEffect extends SpellAbilityEffect {
             total = Collections.max(rolls);
         }
 
-        Map<String, SpellAbility> diceAbilities = sa.getAdditionalAbilities();
-        SpellAbility resultAbility = null;
-        for (Map.Entry<String, SpellAbility> e: diceAbilities.entrySet()) {
-            String diceKey = e.getKey();
-            if (diceKey.contains("-")) {
-                String [] ranges = diceKey.split("-");
-                if (Integer.parseInt(ranges[0]) <= total && Integer.parseInt(ranges[1]) >= total) {
-                    resultAbility = e.getValue();
-                    break;
+        if (sa.hasParam("SubsForEach")) {
+            for (Integer roll : rolls) {
+                resolveSub(sa, roll);
+            }
+        } else {
+            resolveSub(sa, total);
+        }
+
+        if (sa.hasParam("NoteDoubles")) {
+            Set<Integer> unique = new HashSet<>();
+            for (Integer roll : rolls) {
+                if (!unique.add(roll)) {
+                    sa.setSVar("Doubles", "1");
                 }
-            } else if (StringUtils.isNumeric(diceKey) && Integer.parseInt(diceKey) == total) {
-                resultAbility = e.getValue();
-                break;
             }
         }
-        if (resultAbility != null) {
-            AbilityUtils.resolve(resultAbility);
-        } else if (sa.hasAdditionalAbility("Else")) {
-            AbilityUtils.resolve(sa.getAdditionalAbility("Else"));
-        }
+
         return total;
     }
 
