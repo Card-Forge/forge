@@ -66,6 +66,16 @@ public class CountersPutEffect extends SpellAbilityEffect {
         }
 
         stringBuilder.append(pronoun ? "they" : who).append(" ");
+        final String typeName = CounterType.getType(sa.getParam("CounterType")).getName().toLowerCase();
+
+        final List<String> playerCounters = Arrays.asList("energy", "experience", "poison", "ticket");
+        if (playerCounters.contains(typeName)) {
+            stringBuilder.append(pronoun ? "get " : "gets ");
+            stringBuilder.append(Lang.nounWithNumeralExceptOne(AbilityUtils.calculateAmount(card,
+                    sa.getParamOrDefault("CounterNum", "1"), sa), typeName + " counter"));
+            stringBuilder.append(".");
+            return stringBuilder.toString();
+        }
 
         String desc = sa.getDescription();
         boolean forEach = desc.contains("for each");
@@ -105,7 +115,6 @@ public class CountersPutEffect extends SpellAbilityEffect {
             stringBuilder.append("up to ");
         }
 
-        final String typeName = CounterType.getType(sa.getParam("CounterType")).getName().toLowerCase();
         stringBuilder.append(Lang.nounWithNumeralExceptOne(amount, typeName + " counter"));
         stringBuilder.append(divAsChoose || divRandom ? " among " : " on ");
 
