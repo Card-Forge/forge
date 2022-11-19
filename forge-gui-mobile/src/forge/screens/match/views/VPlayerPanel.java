@@ -548,7 +548,7 @@ public class VPlayerPanel extends FContainer {
                     if (ticketCounters > 0) {
                         g.fillRect(Color.DARK_GRAY, 0, (halfHeight*mod)+2, INFO_FONT.getBounds(String.valueOf(ticketCounters)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(ticketCounters)).height+1);
                         g.drawImage(FSkinImage.TICKET, 0, (halfHeight*mod)+2, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(ticketCounters), INFO_FONT, INFO_FORE_COLOR.getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
+                        g.drawText(String.valueOf(ticketCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
                         mod+=1;
                     }
                     adjustHeight = (mod > 2) && (avatar.getHeight() < halfHeight*mod)? mod : 1;
