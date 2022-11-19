@@ -1,5 +1,6 @@
 package forge.game.player;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -183,7 +184,11 @@ public abstract class PlayerController {
         return chooseSomeType(kindOfType, sa, validTypes, invalidTypes, false);
     }
 
-    public abstract String chooseSector(Card assignee, String ai);
+    public abstract String chooseSector(Card assignee, String ai, List<String> sectors);
+    public final String chooseSector(Card assignee, String ai) {
+        final List<String> sectors = Arrays.asList("Alpha", "Beta", "Gamma");
+        return chooseSector(assignee, ai, sectors);
+    }
 
     public abstract Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer);
 

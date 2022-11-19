@@ -1365,12 +1365,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
-    public String chooseSector(Card assignee, String ai) {
-        final List<String> sectors = Arrays.asList("Alpha", "Beta", "Gamma");
-        // turn this into two separate localized prompts
-        String prompt = "Choose sector";
+    public String chooseSector(Card assignee, String ai, List<String> sectors) {
+        String prompt;
         if (assignee != null) {
-            prompt = prompt + " for " + assignee;
+            String creature = CardTranslation.getTranslatedName(assignee.getName()) + " (" + assignee.getId() + ")";
+            prompt = Localizer.getInstance().getMessage("lblAssignSectorCreature", creature);
+        } else {
+            prompt = Localizer.getInstance().getMessage("lblChooseSectorEffect");
         }
         return getGui().one(prompt, sectors);
     }

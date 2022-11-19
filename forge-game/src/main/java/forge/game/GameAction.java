@@ -1583,9 +1583,10 @@ public class GameAction {
             String sector = p.getController().chooseSector(assignee, "Assign");
             assignee.assignSector(sector);
             if (sb.length() == 0) {
-                sb.append(p).append(" assigns:\n");
+                sb.append(p).append(" ").append(Localizer.getInstance().getMessage("lblAssigns")).append("\n");
             }
-            sb.append(assignee).append(" ").append(sector).append("\n");
+            String creature = CardTranslation.getTranslatedName(assignee.getName()) + " (" + assignee.getId() + ")";
+            sb.append(creature).append(" ").append(sector).append("\n");
         }
         if (sb.length() > 0) {
             notifyOfValue(null, p, sb.toString(), p);

@@ -588,8 +588,7 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     @Override
-    public String chooseSector(Card assignee, String ai) {
-        final List<String> sectors = Arrays.asList("Alpha", "Beta", "Gamma");
+    public String chooseSector(Card assignee, String ai, List<String> sectors) {
         return Aggregates.random(sectors);
     }
 
