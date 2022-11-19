@@ -3,7 +3,7 @@ ManaCost:1 G W U
 Types:Legendary Planeswalker Tamiyo
 Loyalty:4
 A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target creature | Triggers$ TrigDamage | ForgetOnMoved$ Battlefield | Duration$ UntilYourNextTurn | RememberObjects$ Targeted | SpellDescription$ Choose up to two target creatures. Until your next turn, whenever either of those creatures deals combat damage, you draw a card.
-SVar:TrigDamage:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Creature.IsRemembered | Execute$ TrigDrawCard | TriggerDescription$ Whenever a targeted creature of Tamiyo, Field Researcher deals combat damage, you draw a card.
+SVar:TrigDamage:Mode$ DamageDealtOnce | CombatDamage$ True | ValidSource$ Creature.IsRemembered | Execute$ TrigDrawCard | TriggerDescription$ Whenever a targeted creature deals combat damage, you draw a card.
 SVar:TrigDrawCard:DB$ Draw | NumCards$ 1 | Defined$ You
 A:AB$ Tap | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent.nonLand | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Select target nonland permanent | SubAbility$ DBPump | SpellDescription$ Tap up to two target nonland permanents. They don't untap during their controller's next untap step.
 SVar:DBPump:DB$ Pump | Defined$ Targeted | Duration$ Permanent | KW$ HIDDEN This card doesn't untap during your next untap step.
