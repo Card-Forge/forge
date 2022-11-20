@@ -1,12 +1,15 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Function;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.util.Config;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
@@ -39,7 +42,40 @@ import java.util.Map;
         public static FSkinImage MAIN_DECK_ICON = Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
         public static FSkinImage SIDEBOARD_ICON = Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
         private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
-        private static final FLabel lblGold = new FLabel.Builder().text("0").icon(FSkinImage.QUEST_COINSTACK).font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build();
+        private static final FileHandle tomeIcon = Config.instance().getFile("ui/tome.png");
+        private static Texture tomeIconTexture = tomeIcon.exists() ? new Texture(tomeIcon) : null;
+        private static FImage CATALOG_ICON = tomeIcon.exists() ? new FImage() {
+            @Override
+            public float getWidth() {
+                return 100f;
+            }
+            @Override
+            public float getHeight() {
+                return 100f;
+            }
+            @Override
+            public void draw(Graphics g, float x, float y, float w, float h) {
+                g.drawImage(tomeIconTexture, x, y, w, h);
+            }
+        } : FSkinImage.QUEST_BOX;
+        private static final FileHandle sellIcon = Config.instance().getFile("ui/sell.png");
+        private static Texture sellIconTexture = sellIcon.exists() ? new Texture(sellIcon) : null;
+        private static final FLabel lblGold = new FLabel.Builder().text("0").icon( sellIconTexture == null ? FSkinImage.QUEST_COINSTACK :
+                new FImage() {
+                    @Override
+                    public float getWidth() {
+                        return 100f;
+                    }
+                    @Override
+                    public float getHeight() {
+                        return 100f;
+                    }
+                    @Override
+                    public void draw(Graphics g, float x, float y, float w, float h) {
+                        g.drawImage(sellIconTexture, x, y, w, h);
+                    }
+                }
+        ).font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build();
 
         private static ItemPool<InventoryItem> decksUsingMyCards=new ItemPool<>(InventoryItem.class);
         private int selected = 0;
@@ -82,7 +118,7 @@ import java.util.Map;
         }
         private static DeckEditorPage[] getPages() {
             return new DeckEditorPage[] {
-                    new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), FSkinImage.QUEST_BOX),
+                    new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
                     new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)
             };
