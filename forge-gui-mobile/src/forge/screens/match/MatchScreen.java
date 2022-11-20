@@ -846,16 +846,17 @@ public class MatchScreen extends FScreen {
                 percentage = 1;
             }
             if (Forge.isMobileAdventureMode) {
-                 g.drawNightDay(currentBG, x, y, w, h, time);
-                 if (MatchController.instance.getGameView().getGame().isDay()) {
-                     g.setAlphaComposite(percentage);
-                     g.drawNightDay(currentBG, x, y, w, h, 100f);
-                     g.setAlphaComposite(oldAlpha);
-                 } else if (MatchController.instance.getGameView().getGame().isNight()) {
-                     g.setAlphaComposite(percentage);
-                     g.drawNightDay(currentBG, x, y, w, h, -100f);
-                     g.setAlphaComposite(oldAlpha);
-                 }
+                if (percentage < 1)
+                    g.drawNightDay(currentBG, x, y, w, h, time);
+                if (MatchController.instance.getGameView().getGame().isDay()) {
+                    g.setAlphaComposite(percentage);
+                    g.drawNightDay(currentBG, x, y, w, h, 100f);
+                    g.setAlphaComposite(oldAlpha);
+                } else if (MatchController.instance.getGameView().getGame().isNight()) {
+                    g.setAlphaComposite(percentage);
+                    g.drawNightDay(currentBG, x, y, w, h, -100f);
+                    g.setAlphaComposite(oldAlpha);
+                }
             } else {
                 g.setAlphaComposite(percentage);
                 if (!daynightTransition)
