@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.math.Vector2;
+import forge.adventure.scene.DuelScene;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
 import forge.card.CardImageRenderer;
@@ -340,7 +341,7 @@ public class MatchScreen extends FScreen {
         if (game == null) { return; }
 
         if (gameMenu!=null) {
-             if (gameMenu.getChildCount()>2){
+             if (gameMenu.getChildCount()>1){
                  if (viewWinLose == null) {
                      gameMenu.getChildAt(0).setEnabled(!game.isMulligan());
                      gameMenu.getChildAt(1).setEnabled(!game.isMulligan());
@@ -801,7 +802,36 @@ public class MatchScreen extends FScreen {
         }
     }
     private String daytime2 = null;
-    FSkinTexture currentBG = FSkinTexture.ADV_BG_MATCH;
+    private Float time = null;
+    FSkinTexture currentBG = getBG();
+    FSkinTexture getBG() {
+        if (Forge.isMobileAdventureMode) {
+            //System.out.println("Adventure Location: "+DuelScene.instance().getCurrentLocation());
+            switch(DuelScene.instance().getCurrentLocation()) {
+                case "green":
+                    return FSkinTexture.ADV_BG_FOREST;
+                case "black":
+                    return FSkinTexture.ADV_BG_SWAMP;
+                case "red":
+                    return FSkinTexture.ADV_BG_MOUNTAIN;
+                case "blue":
+                    return FSkinTexture.ADV_BG_ISLAND;
+                case "white":
+                    return FSkinTexture.ADV_BG_PLAINS;
+                case "waste":
+                    return FSkinTexture.ADV_BG_WASTE;
+                case "cave":
+                    return FSkinTexture.ADV_BG_CAVE;
+                case "dungeon":
+                    return FSkinTexture.ADV_BG_DUNGEON;
+                case "castle":
+                    return FSkinTexture.ADV_BG_CASTLE;
+                default:
+                    return FSkinTexture.ADV_BG_COMMON;
+            }
+        }
+        return FSkinTexture.BG_MATCH;
+    }
     private class BGAnimation extends ForgeAnimation {
         private static final float DURATION = 1.5f;
         private float progress = 0;
@@ -816,27 +846,17 @@ public class MatchScreen extends FScreen {
                 percentage = 1;
             }
             if (Forge.isMobileAdventureMode) {
-                FSkinTexture bgDay = FSkinTexture.ADV_BG_MATCH_DAY;
-                FSkinTexture bgNight = FSkinTexture.ADV_BG_MATCH_NIGHT;
-                FSkinTexture bgNeither = FSkinTexture.ADV_BG_MATCH;
-                //back bg
-                FSkinTexture backBG = bgNeither;
-                //front bg
-                FSkinTexture frontBG = bgNeither;
-                if (MatchController.instance.getGameView().getGame().isDay())
-                    backBG = bgDay;
-                if (MatchController.instance.getGameView().getGame().isNight())
-                    backBG = bgNight;
-                if (MatchController.instance.getGameView().getGame().previousTimeIsDay())
-                    frontBG = bgDay;
-                if (MatchController.instance.getGameView().getGame().previousTimeIsNight())
-                    frontBG = bgNight;
-                //draw backBG
-                g.drawImage(backBG, x, y, w, h);
-                //draw frontBG with alpha difference
-                g.setAlphaComposite(1 - (percentage * 1));
-                g.drawImage(frontBG, x, y, w, h);
-                g.setAlphaComposite(oldAlpha);
+                if (percentage < 1)
+                    g.drawNightDay(currentBG, x, y, w, h, time);
+                if (MatchController.instance.getGameView().getGame().isDay()) {
+                    g.setAlphaComposite(percentage);
+                    g.drawNightDay(currentBG, x, y, w, h, 100f);
+                    g.setAlphaComposite(oldAlpha);
+                } else if (MatchController.instance.getGameView().getGame().isNight()) {
+                    g.setAlphaComposite(percentage);
+                    g.drawNightDay(currentBG, x, y, w, h, -100f);
+                    g.setAlphaComposite(oldAlpha);
+                }
             } else {
                 g.setAlphaComposite(percentage);
                 if (!daynightTransition)
@@ -857,11 +877,11 @@ public class MatchScreen extends FScreen {
         protected void onEnd(boolean endingAll) {
             finished = true;
             if (Forge.isMobileAdventureMode) {
-                //set currentBG
+                //set time
                 if (MatchController.instance.getGameView().getGame().isDay())
-                    currentBG = FSkinTexture.ADV_BG_MATCH_DAY;
+                    time = 100f;
                 if (MatchController.instance.getGameView().getGame().isNight())
-                    currentBG = FSkinTexture.ADV_BG_MATCH_NIGHT;
+                    time = -100f;
                 daytime2 = MatchController.instance.getDayTime();
             }
         }
@@ -901,7 +921,7 @@ public class MatchScreen extends FScreen {
                     bgAnimation.drawBackground(g, currentBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, false, true);
                 } else {
                     bgAnimation.progress = 0;
-                    g.drawImage(currentBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight);
+                    g.drawNightDay(currentBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, time);
                 }
             } else { //non adventure needs update to accomodate multiple BG Effect ie Planchase + Daytime effect...
                 if (MatchController.instance.getDayTime() != null) {
