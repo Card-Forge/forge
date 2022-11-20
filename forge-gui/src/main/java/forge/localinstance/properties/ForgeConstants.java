@@ -138,11 +138,23 @@ public final class ForgeConstants {
     public static final String ADV_MATCH_BG_FILE      = "adv_bg_match.jpg";
     public static final String ADV_MATCH_BG_DAY_FILE  = "adv_bg_match_day.jpg";
     public static final String ADV_MATCH_BG_NIGHT_FILE= "adv_bg_match_nigh.jpg";
-    public static final String ADV_TEXTURE_BG_FILE        = "adv_bg_texture.jpg";
+    public static final String ADV_TEXTURE_BG_FILE    = "adv_bg_texture.jpg";
     public static final String TEXTURE_BG_FILE        = "bg_texture.jpg";
     public static final String SPACE_BG_FILE          = "bg_space.png";
     public static final String CHAOS_WHEEL_IMG_FILE   = "bg_chaos_wheel.png";
     public static final String DRAFT_DECK_IMG_FILE    = "bg_draft_deck.png";
+    //Adventure locations
+    public static final String ADV_BG_SWAMP_FILE      = "adv_bg_swamp.jpg";
+    public static final String ADV_BG_FOREST_FILE     = "adv_bg_forest.jpg";
+    public static final String ADV_BG_MOUNTAIN_FILE   = "adv_bg_mountain.jpg";
+    public static final String ADV_BG_ISLAND_FILE     = "adv_bg_island.jpg";
+    public static final String ADV_BG_PLAINS_FILE     = "adv_bg_plains.jpg";
+    public static final String ADV_BG_WASTE_FILE      = "adv_bg_waste.jpg";
+    public static final String ADV_BG_COMMON_FILE     = "adv_bg_common.jpg";
+    public static final String ADV_BG_CAVE_FILE       = "adv_bg_cave.jpg";
+    public static final String ADV_BG_DUNGEON_FILE    = "adv_bg_dungeon.jpg";
+    public static final String ADV_BG_CASTLE_FILE     = "adv_bg_castle.jpg";
+
     //Planes addon
     public static final String BG_1                   = "Academy_at_Tolaria_West.jpg";
     public static final String BG_2                   = "Agyrem.jpg";

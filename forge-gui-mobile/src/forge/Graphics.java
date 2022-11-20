@@ -41,6 +41,64 @@ public class Graphics {
     private final ShaderProgram shaderGrayscale = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("grayscale.frag"));
     private final ShaderProgram shaderWarp = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("warp.frag"));
     private final ShaderProgram shaderUnderwater = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("underwater.frag"));
+    private static String vertexShaderDayNight = "attribute vec4 " + ShaderProgram.POSITION_ATTRIBUTE + ";\n"
+            + "attribute vec4 " + ShaderProgram.COLOR_ATTRIBUTE + ";\n"
+            + "attribute vec2 " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n"
+            + "uniform mat4 u_projTrans;\n"
+            + "uniform float u_timeOfDay;\n"
+            + "varying vec4 v_color;\n"
+            + "varying vec4 v_tweak;\n"
+            + "varying vec2 v_texCoords;\n"
+            + "varying float v_lightFix;\n"
+            + "const vec3 forward = vec3(1.0 / 3.0);\n"
+            + "\n"
+            + "void main()\n"
+            + "{\n"
+            + "   float st = sin(1.5707963 * sin(0.2617994 * u_timeOfDay)); // Whenever st is very high or low... \n"
+            + "   float ct = sin(1.5707963 * cos(0.2617994 * u_timeOfDay)); // ...ct is close to 0, and vice versa. \n"
+            + "   float dd = ct * ct; // Positive, small; used for dawn and dusk. \n"
+            + "   v_color = " + ShaderProgram.COLOR_ATTRIBUTE + ";\n"
+            + "   v_color.w = v_color.w * (255.0/254.0);\n"
+            + "   vec3 oklab = mat3(+0.2104542553, +1.9779984951, +0.0259040371, +0.7936177850, -2.4285922050, +0.7827717662, -0.0040720468, +0.4505937099, -0.8086757660) *"
+            + "     pow(mat3(0.4121656120, 0.2118591070, 0.0883097947, 0.5362752080, 0.6807189584, 0.2818474174, 0.0514575653, 0.1074065790, 0.6302613616) \n"
+            + "     * (v_color.rgb * v_color.rgb), forward);\n"
+            + "   // The next four lines make use of the time-based variables st, ct, and dd. Edit to fit. \n"
+            + "   v_color.x = clamp(oklab.x + (0.0625 * st), 0.0, 1.0);\n"
+            + "   v_color.yz = clamp(oklab.yz + vec2(0.0625 * dd + 0.03125 * st, 0.1 * st), -1.0, 1.0) * ((dd + 0.25) * 0.5);\n"
+            + "   v_tweak = vec4(0.2 * st + 0.5);\n"
+            + "   v_tweak.w = pow((1.0 - 0.125 * st), 1.709);\n"
+            + "   v_lightFix = 1.0 + pow(v_tweak.w, 1.41421356);\n"
+            + "   v_texCoords = " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n"
+            + "   gl_Position =  u_projTrans * " + ShaderProgram.POSITION_ATTRIBUTE + ";\n"
+            + "}\n";
+    private static String fragmentShaderDayNight =
+            "#ifdef GL_ES\n" +
+                    "#define LOWP lowp\n" +
+                    "precision mediump float;\n" +
+                    "#else\n" +
+                    "#define LOWP \n" +
+                    "#endif\n" +
+                    "varying vec2 v_texCoords;\n" +
+                    "varying LOWP vec4 v_color;\n" +
+                    "varying LOWP vec4 v_tweak;\n" +
+                    "varying float v_lightFix;\n" +
+                    "uniform sampler2D u_texture;\n" +
+                    "const vec3 forward = vec3(1.0 / 3.0);\n" +
+                    "void main()\n" +
+                    "{\n" +
+                    "  vec4 tgt = texture2D( u_texture, v_texCoords );\n" +
+                    "  vec3 lab = mat3(+0.2104542553, +1.9779984951, +0.0259040371, +0.7936177850, -2.4285922050, +0.7827717662, -0.0040720468, +0.4505937099, -0.8086757660) *" +
+                    "             pow(mat3(0.4121656120, 0.2118591070, 0.0883097947, 0.5362752080, 0.6807189584, 0.2818474174, 0.0514575653, 0.1074065790, 0.6302613616) \n" +
+                    "             * (tgt.rgb * tgt.rgb), forward);\n" +
+                    "  lab.x = clamp(pow(lab.x, v_tweak.w) * v_lightFix * v_tweak.x + v_color.x - 1.0, 0.0, 1.0);\n" +
+                    "  lab.yz = clamp((lab.yz * v_tweak.yz + v_color.yz) * 1.5, -1.0, 1.0);\n" +
+                    "  lab = mat3(1.0, 1.0, 1.0, +0.3963377774, -0.1055613458, -0.0894841775, +0.2158037573, -0.0638541728, -1.2914855480) * lab;\n" +
+                    "  gl_FragColor = vec4(sqrt(clamp(" +
+                    "                 mat3(+4.0767245293, -1.2681437731, -0.0041119885, -3.3072168827, +2.6093323231, -0.7034763098, +0.2307590544, -0.3411344290, +1.7068625689) *\n" +
+                    "                 (lab * lab * lab)," +
+                    "                 0.0, 1.0)), v_color.a * tgt.a);\n" +
+                    "}";
+    private final ShaderProgram shaderNightDay = new ShaderProgram(vertexShaderDayNight, fragmentShaderDayNight);
 
     private Texture dummyTexture = null;
 
@@ -886,6 +944,25 @@ public class Graphics {
             setAlphaComposite(0.4f);
             fillRect(Color.BLACK, x, y, w, h);
             setAlphaComposite(oldalpha);
+        }
+    }
+    public void drawNightDay(FImage image, float x, float y, float w, float h, Float time) {
+        if (image == null)
+            return;
+        if (time != null) {
+            batch.end();
+            shaderNightDay.bind();
+            shaderNightDay.setUniformf("u_timeOfDay", time);
+            batch.setShader(shaderNightDay);
+            batch.begin();
+            //draw
+            image.draw(this, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            drawImage(image, x, y, w, h);
         }
     }
     public void drawUnderWaterImage(TextureRegion image, float x, float y, float w, float h, float time) {

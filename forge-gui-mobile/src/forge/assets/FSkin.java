@@ -324,11 +324,6 @@ public class FSkin {
                     image.load(manager, preferredIcons);
                 }
             }
-            for (FSkinTexture texture : FSkinTexture.values()) {
-                if (texture != FSkinTexture.BG_TEXTURE) {
-                    texture.load();
-                }
-            }
 
             //assemble avatar textures
             int counter = 0;
