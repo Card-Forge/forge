@@ -927,7 +927,11 @@ public final class CMatchUI
             if (enabled && firstEnabled < 0) {
                 firstEnabled = index;
             }
-            GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(ab.toString(), true),
+            String s = ab.toString();
+            if (s.contains("\n")) {
+                s = s.substring(0, s.indexOf("\n"));
+            }
+            GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(s, true),
                     shortcut > 0 ? KeyStroke.getKeyStroke(shortcut, 0) : null,
                     new Runnable() {
                         @Override

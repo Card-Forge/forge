@@ -335,6 +335,7 @@ Basri
 Bolas
 Calix
 Chandra
+Comet
 Dack
 Dakkon
 Daretti
