@@ -10,7 +10,6 @@ import forge.Forge;
 import forge.Graphics;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.util.Config;
-import forge.adventure.util.Paths;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
