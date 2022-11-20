@@ -459,6 +459,16 @@ public class TargetingOverlay {
             if (defender instanceof CardView) {
                 addArc(endpoints.get(defender.getId()), endpoints.get(c.getId()), ArcConnection.FoesAttacking);
             }
+            // if c is attacking a player
+	    if (defender instanceof PlayerView) {
+                final JPanel avatarArea = matchUI.getFieldViewFor((PlayerView)defender).getAvatarArea();
+                if(avatarArea.isShowing()) {
+                    final Point point = new Point(avatarArea.getLocationOnScreen());
+                    point.x += avatarArea.getWidth() / 2;
+                    point.y += avatarArea.getHeight() / 2;
+                    addArc(point, endpoints.get(c.getId()), ArcConnection.FoesAttacking);
+                }
+            }
             // if c is a planeswalker that's being attacked
             for (final CardView pwAttacker : combat.getAttackersOf(c)) {
                 addArc(endpoints.get(c.getId()), endpoints.get(pwAttacker.getId()), ArcConnection.FoesAttacking);
