@@ -325,7 +325,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final StringBuilder sbTargets = new StringBuilder();
         Iterable<Card> tgts;
         if (sa.usesTargeting()) {
-            tgts = sa.getTargets().getTargetCards();
+            tgts = getCardsfromTargets(sa);
         } else { // otherwise add self to list and go from there
             tgts = sa.knownDetermineDefined(sa.getParam("Defined"));
         }

@@ -135,4 +135,3 @@ public class TriggerDamageDone extends Trigger {
         return sb.toString();
     }
 }
-
