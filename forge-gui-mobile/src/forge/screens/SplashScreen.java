@@ -107,6 +107,8 @@ public class SplashScreen extends FContainer {
         private float progress = 0;
         private boolean finished, openAdventure;
         private void drawAdventureBackground(Graphics g) {
+            if (splashTexture == null)
+                return;
             float percentage = progress / DURATION;
             float oldAlpha = g.getfloatAlphaComposite();
             if (percentage < 0) {
