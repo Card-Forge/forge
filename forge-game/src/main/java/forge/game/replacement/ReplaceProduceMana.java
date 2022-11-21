@@ -31,14 +31,6 @@ public class ReplaceProduceMana extends ReplacementEffect {
      */
     @Override
     public boolean canReplace(Map<AbilityKey, Object> runParams) {
-        SpellAbility manaSA = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-        if (!manaSA.isManaAbility() && !hasParam("NonManaAbility")) {
-            return false;
-        }
-
-        if (!matchesValidParam("ValidAbility", manaSA)) {
-            return false;
-        }
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Affected))) {
             return false;
         }
@@ -46,6 +38,9 @@ public class ReplaceProduceMana extends ReplacementEffect {
             return false;
         }
         if (!matchesValidParam("ValidActivator", runParams.get(AbilityKey.Activator))) {
+            return false;
+        }
+        if (!matchesValid(runParams.get(AbilityKey.AbilityMana), getParamOrDefault("ValidSA", "Activated.hasTapCost+ManaAbility").split(","), getHostCard())) {
             return false;
         }
 
