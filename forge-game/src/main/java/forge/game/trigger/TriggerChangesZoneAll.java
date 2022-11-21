@@ -63,7 +63,7 @@ public class TriggerChangesZoneAll extends Trigger {
             origin = ZoneType.listValueOf(getParam("Origin"));
         }
 
-        final String valid = this.getParamOrDefault("ValidCards", null);
+        final String valid = this.getParam("ValidCards");
 
         return table.filterCards(origin, destination, valid, getHostCard(), this);
     }
