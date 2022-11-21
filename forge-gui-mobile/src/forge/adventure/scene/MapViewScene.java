@@ -81,7 +81,7 @@ public class MapViewScene extends UIScene   {
 
     @Override
     public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
+        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK || keycode == Input.Keys.BUTTON_B) {
             done();
         }
         return true;

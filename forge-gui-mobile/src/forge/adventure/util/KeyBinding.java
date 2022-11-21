@@ -15,7 +15,7 @@ public enum KeyBinding {
     Inventory("Inventory", Input.Keys.I,Input.Keys.BUTTON_X),
     Status("Status", Input.Keys.Q,Input.Keys.BUTTON_Y),
     Deck("Deck", Input.Keys.E,Input.Keys.BUTTON_A),
-    Map("Map", Input.Keys.M,Input.Keys.BUTTON_B),
+    Map("Map", Input.Keys.M,Input.Keys.BUTTON_SELECT),
     Equip("Equip", Input.Keys.E,Input.Keys.BUTTON_X),
     Use("Use", Input.Keys.ENTER,Input.Keys.BUTTON_A),
     Back("Back", Input.Keys.ESCAPE,Input.Keys.BUTTON_B),

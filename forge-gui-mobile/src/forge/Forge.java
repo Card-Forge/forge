@@ -9,6 +9,7 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerAdapter;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -326,7 +327,8 @@ public class Forge implements ApplicationListener {
             altZoneTabs = true;
         //pixl cursor for adventure
         setCursor(null, "0");
-        enableControllerListener();
+        if (!GuiBase.isAndroid() || !getDeviceAdapter().getGamepads().isEmpty())
+            enableControllerListener();
         loadAdventureResources(true);
     }
     private static void loadAdventureResources(boolean startScene) {
@@ -339,6 +341,17 @@ public class Forge implements ApplicationListener {
         }
     }
     protected void afterDbLoaded() {
+        //override transition & title bg
+        try {
+            FileHandle transitionFile = Config.instance().getFile("ui/transition.png");
+            FileHandle titleBGFile = Forge.isLandscapeMode() ? Config.instance().getFile("ui/title_bg.png") : Config.instance().getFile("ui/title_bg_portrait.png");
+            if (transitionFile.exists())
+                Forge.getAssets().fallback_skins().put(1, new Texture(transitionFile));
+            if (titleBGFile.exists())
+                Forge.getAssets().fallback_skins().put(0, new Texture(titleBGFile));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         destroyThis = false; //Allow back()
         Gdx.input.setCatchKey(Keys.MENU, true);
 

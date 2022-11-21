@@ -130,6 +130,7 @@
       "type": "TextButton",
       "name": "openmap",
       "text": "{Scale=80%}tr(lblZoom)",
+      "binding": "Map",
       "width": 80,
       "height": 18,
       "x": 0,
