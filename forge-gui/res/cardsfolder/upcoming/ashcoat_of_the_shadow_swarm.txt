@@ -6,9 +6,8 @@ T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, other Rats you control get +X/+X where X is the number of Rats you control.
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Rat.Other+YouCtrl | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$Valid Rat.YouCtrl
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMill | TriggerDescription$ At the beginning of your end step, you may mill four cards. If you do, return up to two Rat creature cards from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)
-SVar:TrigMill:DB$ Mill | NumCards$ 4 | Defined$ You | SubAbility$ DBChange
-SVar:DBChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Rat.Creature+YouOwn | ChangeNum$ 2 | SelectPrompt$ Select up to two Rat creature cards
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ At the beginning of your end step, you may mill four cards. If you do, return up to two Rat creature cards from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)
+SVar:TrigChange:AB$ ChangeZone | Cost$ Mill<4> | Origin$ Graveyard | Destination$ Hand | ChangeType$ Rat.Creature+YouOwn | ChangeNum$ 2 | SelectPrompt$ Select up to two Rat creature cards
 SVar:HasAttackEffect:TRUE
 DeckNeeds:Type$Rat
 DeckHas:Ability$Mill|Graveyard
