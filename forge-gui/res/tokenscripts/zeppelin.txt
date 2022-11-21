@@ -1,0 +1,7 @@
+Name:Zeppelin
+ManaCost:no cost
+Types:Artifact Creature
+PT:5/5
+K:Flying
+K:Crew:2
+Oracle:Flying\nCrew:2
