@@ -153,8 +153,12 @@ public class FSkin {
         if (splashScreen != null) {
             final FileHandle f = getSkinFile("bg_splash.png");
             final FileHandle f2 = getSkinFile("bg_splash_hd.png"); //HD Splashscreen
-            final FileHandle f3 = getSkinFile("adv_bg_splash.png"); //Adventure splash
-            final FileHandle f4 = getSkinFile("adv_bg_texture.jpg"); //Adventure splash
+            FileHandle f3 = getSkinFile("adv_bg_splash.png"); //Adventure splash
+            FileHandle f4 = getSkinFile("adv_bg_texture.jpg"); //Adventure splash
+            if (!f3.exists())
+                f3 = getDefaultSkinFile("adv_bg_splash.png");
+            if (!f4.exists())
+                f4 = getDefaultSkinFile("adv_bg_texture.jpg");
 
             if (!f.exists()) {
                 if (!skinName.equals("default")) {
@@ -188,14 +192,18 @@ public class FSkin {
                 Pixmap pxSplash = new Pixmap(f);
                 //override splashscreen startup
                 if (Forge.selector.equals("Adventure")) {
-                    Texture advSplash = new Texture(f3);
-                    Texture advBG = new Texture(f4);
-                    advBG.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-                    w = advSplash.getWidth();
-                    h = advSplash.getHeight();
-                    splashScreen.setSplashTexture(new TextureRegion(advSplash, 0, 0, w, h - 100));
-                    splashScreen.setSplashBGTexture(advBG);
-                    pxSplash = new Pixmap(f3);
+                    if (f3.exists()) {
+                        Texture advSplash = new Texture(f3);
+                        w = advSplash.getWidth();
+                        h = advSplash.getHeight();
+                        splashScreen.setSplashTexture(new TextureRegion(advSplash, 0, 0, w, h - 100));
+                        pxSplash = new Pixmap(f3);
+                    }
+                    if (f4.exists()) {
+                        Texture advBG = new Texture(f4);
+                        advBG.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
+                        splashScreen.setSplashBGTexture(advBG);
+                    }
                 }
                 FProgressBar.BACK_COLOR = new Color(pxSplash.getPixel(25, h - 75));
                 FProgressBar.FORE_COLOR = new Color(pxSplash.getPixel(75, h - 75));
