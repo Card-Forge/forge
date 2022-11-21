@@ -218,7 +218,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
                 continue;
             }
 
-            if (StringUtils.isNotBlank(restriction) && !mana.getSourceCard().getType().hasStringType(restriction)) {
+            if (StringUtils.isNotBlank(restriction) && !mana.getSourceCard().isValid(restriction, null, null, null)) {
                 continue;
             }
 

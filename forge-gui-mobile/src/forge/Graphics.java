@@ -41,6 +41,7 @@ public class Graphics {
     private final ShaderProgram shaderGrayscale = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("grayscale.frag"));
     private final ShaderProgram shaderWarp = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("warp.frag"));
     private final ShaderProgram shaderUnderwater = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("underwater.frag"));
+    private final ShaderProgram shaderNightDay = new ShaderProgram(Shaders.vertexShaderDayNight, Shaders.fragmentShaderDayNight);
 
     private Texture dummyTexture = null;
 
@@ -888,6 +889,25 @@ public class Graphics {
             setAlphaComposite(oldalpha);
         }
     }
+    public void drawNightDay(FImage image, float x, float y, float w, float h, Float time) {
+        if (image == null)
+            return;
+        if (time != null) {
+            batch.end();
+            shaderNightDay.bind();
+            shaderNightDay.setUniformf("u_timeOfDay", time);
+            batch.setShader(shaderNightDay);
+            batch.begin();
+            //draw
+            image.draw(this, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            drawImage(image, x, y, w, h);
+        }
+    }
     public void drawUnderWaterImage(TextureRegion image, float x, float y, float w, float h, float time) {
         batch.end();
         shaderUnderwater.bind();
@@ -918,7 +938,8 @@ public class Graphics {
         }
     }
     public void drawImage(Texture image, float x, float y, float w, float h) {
-        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        if (image != null)
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
     }
     public void drawImage(TextureRegion image, float x, float y, float w, float h) {
         if (image != null)
@@ -978,6 +999,8 @@ public class Graphics {
     }
 
     public void drawRepeatingImage(Texture image, float x, float y, float w, float h) {
+        if (image == null)
+            return;
         if (startClip(x, y, w, h)) { //only render if clip successful, otherwise it will escape bounds
             int tilesW = (int)(w / image.getWidth()) + 1;
             int tilesH = (int)(h / image.getHeight()) + 1;

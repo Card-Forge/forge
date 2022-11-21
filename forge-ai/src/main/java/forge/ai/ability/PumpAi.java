@@ -260,7 +260,7 @@ public class PumpAi extends PumpAiBase {
             // Donate step 1 - try to target an opponent, preferably one who does not have a donate target yet
             return SpecialCardAi.Donate.considerTargetingOpponent(ai, sa);
         } else if (aiLogic.equals("InfernoOfTheStarMounts")) {
-            int numRedMana = ComputerUtilMana.determineLeftoverMana(sa, ai, "R", false);
+            int numRedMana = ComputerUtilMana.determineLeftoverMana(new SpellAbility.EmptySa(source), ai, "R", false);
             int currentPower = source.getNetPower();
             if (currentPower < 20 && currentPower + numRedMana >= 20) {
                 return true;

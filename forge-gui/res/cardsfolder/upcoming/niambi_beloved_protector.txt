@@ -3,7 +3,7 @@ ManaCost:W U
 Types:Legendary Creature Human Cleric
 PT:2/2
 K:Flash
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, choose target nonlegendary creature card in your graveyard that was put there from the battlefield this turn. Return it to the battlefield. It perpetually gains "Whenever this creature becomes the target of a spell or ability, draw a card. This ability triggers only once each turn."
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.wasCastByYou+Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, choose target nonlegendary creature card in your graveyard that was put there from the battlefield this turn. Return it to the battlefield. It perpetually gains "Whenever this creature becomes the target of a spell or ability, draw a card. This ability triggers only once each turn."
 SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn+nonLegendary+ThisTurnEnteredFrom_Battlefield | RememberChanged$ True | TgtPrompt$ Choose target nonlegendary creature card in your graveyard that was put there from the battlefield this turn | ChangeNum$ 1 | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualBecomesTargetDraw | Duration$ Permanent | RememberObjects$ Remembered | Name$ Niambi,Beloved Protector's Perpetual Effect  | SubAbility$ DBCleanup
 SVar:PerpetualBecomesTargetDraw:Mode$ Continuous | Affected$ Card.IsRemembered | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | AddTrigger$ BecomesTarget | Description$ Whenever this creature becomes the target of a spell or ability, draw a card. This ability triggers only once each turn.
@@ -11,4 +11,4 @@ SVar:BecomesTarget:Mode$ BecomesTarget | ValidTarget$ Card.Self | ActivationLimi
 SVar:TrigDraw:DB$ Draw
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHas:Ability$Graveyard
-Oracle:Flash\nWhen Niambi,Beloved Protector enters the battlefield, choose  target nonlegendary creature card in your graveyard that was put there from the battlefield this turn. Return it to the battlefield. It perpetually gains "Whenever this creature becomes the target of a spell or ability, draw a card. This ability triggers only once each turn."
+Oracle:Flash\nWhen Niambi, Beloved Protector enters the battlefield, if you cast it, choose target nonlegendary creature card in your graveyard that was put there from the battlefield this turn. Return it to the battlefield. It perpetually gains "Whenever this creature becomes the target of a spell or ability, draw a card. This ability triggers only once each turn."

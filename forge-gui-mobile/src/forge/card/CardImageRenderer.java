@@ -277,16 +277,16 @@ public class CardImageRenderer {
         forgeArt = new FBufferedImage(w, h) {
             @Override
             protected void draw(Graphics g, float w, float h) {
-                g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, w, h);
-                g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, 0, 0, w, h);
+                g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, w, h);
+                g.fillRect(FScreen.getTextureOverlayColor(), 0, 0, w, h);
                 g.drawImage(FSkinImage.LOGO, (w - logoWidth) / 2, (h - logoHeight) / 2, logoWidth, logoHeight);
             }
         };
         stretchedArt = new FBufferedImage(w, h) {
             @Override
             protected void draw(Graphics g, float w, float h) {
-                g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, w, h);
-                g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, 0, 0, w, h);
+                g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, w, h);
+                g.fillRect(FScreen.getTextureOverlayColor(), 0, 0, w, h);
                 g.drawImage(FSkinImage.LOGO, (w - logoWidth) / 2, ((h - logoHeight) / 2)+h/3.5f, logoWidth, logoHeight/3);
             }
         };

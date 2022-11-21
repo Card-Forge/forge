@@ -152,7 +152,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
                     }
 
                     if (sa.hasParam("Random")) {
-                        choosenToSacrifice = Aggregates.random(validTargets, Math.min(amount, validTargets.size()), new CardCollection());
+                        choosenToSacrifice = new CardCollection(Aggregates.random(validTargets, Math.min(amount, validTargets.size())));
                     } else if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSacrifice"), null)) {
                         choosenToSacrifice = CardCollection.EMPTY;
                     } else {

@@ -222,8 +222,10 @@ public class CardFactoryUtil {
         if (name == null || name.isEmpty()) {
             return false;
         }
+        card.setNamedCard(name);
+
         if (card.hasKeyword("Double agenda")) {
-            String name2 = player.getController().chooseCardName(sa, cpp, "Card",
+            String name2 = player.getController().chooseCardName(sa, cpp, "Card.!NamedCard",
                     "Name a second card for " + card.getName());
             if (name2 == null || name2.isEmpty()) {
                 return false;
@@ -231,7 +233,6 @@ public class CardFactoryUtil {
             card.setNamedCard2(name2);
         }
 
-        card.setNamedCard(name);
         card.turnFaceDown();
         card.addMayLookAt(player.getGame().getNextTimestamp(), ImmutableList.of(player));
         card.addSpellAbility(abilityRevealHiddenAgenda(card));
@@ -923,7 +924,7 @@ public class CardFactoryUtil {
 
             StringBuilder trigReturn = new StringBuilder();
             trigReturn.append("Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self");
-            trigReturn.append(" | Secondary$ True | TriggerDescription$ When this leaves the battlefield, that card returns to the battlefield.");
+            trigReturn.append(" | Secondary$ True | TriggerDescription$ When this permanent leaves the battlefield, return the exiled card to the battlefield under its owner's control.");
 
             StringBuilder ab = new StringBuilder();
             ab.append("DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True ");
@@ -2593,7 +2594,6 @@ public class CardFactoryUtil {
         }
         else if (keyword.startsWith("If CARDNAME would be put into a graveyard "
                 + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
-
             StringBuilder sb = new StringBuilder("Event$ Moved | Destination$ Graveyard | ValidCard$ Card.Self ");
 
             // to show it on Nexus

@@ -22,8 +22,7 @@ SVar:White:DB$ ChooseCard | Choices$ Permanent | IncludeSpellsOnStack$ True | At
 SVar:DBAnimateW:DB$ Animate | Defined$ ChosenCard | Colors$ White | OverwriteColors$ True | Duration$ Permanent | LockInText$ True | SubAbility$ DBCleanup
 SVar:Red:DB$ ChooseCard | Choices$ Permanent | IncludeSpellsOnStack$ True | AtRandom$ True | LockInText$ True | SubAbility$ DBAnimateR | SpellDescription$ A spell or permanent chosen at random becomes red. (Mana symbols on that permanent remain unchanged.)
 SVar:DBAnimateR:DB$ Animate | Defined$ ChosenCard | Colors$ Red | OverwriteColors$ True | Duration$ Permanent | LockInText$ True | SubAbility$ DBCleanup
-SVar:Damage3:DB$ ChooseEntity | Random$ True | CardChoices$ Creature | PlayerChoices$ Player | RememberChosen$ True | SubAbility$ DBDamage3 | SpellDescription$ CARDNAME deals 3 damage to a creature or player chosen at random.
-SVar:DBDamage3:DB$ DealDamage | Defined$ Remembered | NumDmg$ 3 | SubAbility$ DBCleanup
+SVar:Damage3:DB$ DealDamage | NumDmg$ 3 | Random$ True | CardChoices$ Creature | PlayerChoices$ Player | RememberRandomChoice$ True | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 3 damage to a creature or player chosen at random.
 SVar:Flying:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump8 | SpellDescription$ A creature chosen at random gains flying until end of turn.
 SVar:DBPump8:DB$ Pump | Defined$ ChosenCard | KW$ Flying | SubAbility$ DBCleanup
 SVar:P3P3:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPump9 | SpellDescription$ A creature chosen at random gets +3/+3 until end of turn.
@@ -43,8 +42,7 @@ SVar:M2M0:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBPu
 SVar:DBPump15:DB$ Pump | Defined$ ChosenCard | NumAtt$ -2 | SubAbility$ DBCleanup
 SVar:ToHand:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBChangeZone16 | SpellDescription$ Return a creature chosen at random to its owner's hand.
 SVar:DBChangeZone16:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBCleanup
-SVar:Damage1:DB$ ChooseEntity | Random$ True | CardChoices$ Creature | PlayerChoices$ Player | RememberChosen$ True | SubAbility$ DBDamage1 | SpellDescription$ CARDNAME deals 1 damage to a creature or player chosen at random.
-SVar:DBDamage1:DB$ DealDamage | Defined$ Remembered | NumDmg$ 1 | SubAbility$ DBCleanup
+SVar:Damage1:DB$ DealDamage | NumDmg$ 1 | Random$ True | CardChoices$ Creature | PlayerChoices$ Player | RememberRandomChoice$ True | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 1 damage to a creature or player chosen at random.
 SVar:Nerf:DB$ ChooseCard | Choices$ Creature.Other | AtRandom$ True | SubAbility$ DBAnimate18 | SpellDescription$ A creature other than CARDNAME chosen at random becomes 0/2 until end of turn.
 SVar:DBAnimate18:DB$ Animate | Defined$ ChosenCard | Power$ 0 | Toughness$ 2 | SubAbility$ DBCleanup
 SVar:Exile:DB$ ChooseCard | Choices$ Creature | AtRandom$ True | SubAbility$ DBChangeZone19 | SpellDescription$ Exile a creature chosen at random. Its controller gains life equal to its power.

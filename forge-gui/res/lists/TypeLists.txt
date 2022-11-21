@@ -90,6 +90,7 @@ Elemental:Elementals
 Elephant:Elephants
 Elf:Elves
 Elk:Elks
+Employee:Employees
 Eye:Eyes
 Faerie:Faeries
 Ferret:Ferrets
@@ -334,6 +335,7 @@ Basri
 Bolas
 Calix
 Chandra
+Comet
 Dack
 Dakkon
 Daretti

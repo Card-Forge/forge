@@ -1,0 +1,12 @@
+Name:Clown Car
+ManaCost:X
+Types:Artifact Vehicle
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRollDice | TriggerDescription$ When CARDNAME enters the battlefield, roll X six-sided dice. For each odd result, create a 1/1 white Clown Robot artifact creature token. For each even result, put a +1/+1 counter on CARDNAME.
+SVar:TrigRollDice:DB$ RollDice | Amount$ X | Sides$ 6 | EvenOddResults$ True | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenAmount$ OddResults | TokenScript$ w_1_1_a_clown_robot | SubABility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ EvenResults
+SVar:X:Count$xPaid
+K:Crew:2
+DeckHas:Ability$Counters|Token & Type$Clown|Robot
+Oracle:When Clown Car enters the battlefield, roll X six-sided dice. For each odd result, create a 1/1 white Clown Robot artifact creature token. For each even result, put a +1/+1 counter on Clown Car.\nCrew 2

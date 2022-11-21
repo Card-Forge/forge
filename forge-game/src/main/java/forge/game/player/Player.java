@@ -2641,7 +2641,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         for (Card c : list) {
             if (c.getDamageHistory().getCreatureAttackedThisCombat() > 0) {
-                c.getDamageHistory().setCreatureAttackedThisCombat(null, 0);
+                c.getDamageHistory().setCreatureAttackedThisCombat(null, -1);
             }
             if (c.getDamageHistory().getCreatureBlockedThisCombat()) {
                 c.getDamageHistory().setCreatureBlockedThisCombat(false);

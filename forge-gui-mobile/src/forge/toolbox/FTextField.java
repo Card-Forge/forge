@@ -21,10 +21,24 @@ public class FTextField extends FDisplayObject implements ITextField {
     private static final FSkinFont DEFAULT_FONT = FSkinFont.get(14);
     private static final float BORDER_THICKNESS = Utils.scale(1);
     public static final float PADDING = Utils.scale(5);
-    protected static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    protected static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
-    protected static final FSkinColor GHOST_TEXT_COLOR = FORE_COLOR.alphaColor(0.7f);
-    protected static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
+    protected static FSkinColor getForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
+    protected static FSkinColor getBackColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_THEME2);
+        return FSkinColor.get(Colors.CLR_THEME2);
+    }
+    protected static FSkinColor getGhostTextColor() {
+        return getForeColor().alphaColor(0.7f);
+    }
+    protected static FSkinColor getSelColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_ACTIVE);
+        return FSkinColor.get(Colors.CLR_ACTIVE);
+    }
     private FEventHandler changedHandler;
 
     public static float getDefaultHeight() {
@@ -374,7 +388,7 @@ public class FTextField extends FDisplayObject implements ITextField {
         boolean drawBackground = !readOnly; //don't draw background or border if read-only
 
         if (drawBackground) {
-            g.fillRect(BACK_COLOR, 0, 0, w, h);
+            g.fillRect(getBackColor(), 0, 0, w, h);
         }
 
         //determine actual rendered font so selection logic is accurate
@@ -402,11 +416,11 @@ public class FTextField extends FDisplayObject implements ITextField {
             float selHeight = h - 2 * PADDING;
             if (selLength == 0) {
                 drawText(g, w, h); //draw text behind cursor
-                g.drawLine(BORDER_THICKNESS, FORE_COLOR, selLeft, selTop, selLeft, selTop + selHeight);
+                g.drawLine(BORDER_THICKNESS, getForeColor(), selLeft, selTop, selLeft, selTop + selHeight);
             }
             else if (selStart == 0 && selLength == text.length()) {
                 float selWidth = renderedFont.getBounds(text.substring(selStart, selStart + selLength)).width;
-                g.fillRect(SEL_COLOR, selLeft, selTop, selWidth, selHeight);
+                g.fillRect(getSelColor(), selLeft, selTop, selWidth, selHeight);
                 drawText(g, w, h); //draw text in front of selection background
             }
         }
@@ -415,7 +429,7 @@ public class FTextField extends FDisplayObject implements ITextField {
         }
 
         if (drawBackground) {
-            g.drawRect(BORDER_THICKNESS, FORE_COLOR, BORDER_THICKNESS, BORDER_THICKNESS, w - 2 * BORDER_THICKNESS, h - 2 * BORDER_THICKNESS); //allow smooth border to fully display within bounds
+            g.drawRect(BORDER_THICKNESS, getForeColor(), BORDER_THICKNESS, BORDER_THICKNESS, w - 2 * BORDER_THICKNESS, h - 2 * BORDER_THICKNESS); //allow smooth border to fully display within bounds
         }
     }
 
@@ -425,10 +439,10 @@ public class FTextField extends FDisplayObject implements ITextField {
             h++; //if odd difference between height and font height, increment height so text favors displaying closer to bottom
         }
         if (!text.isEmpty()) {
-            g.drawText(text, renderedFont, FORE_COLOR, getLeftPadding(), 0, w - getLeftPadding() - getRightPadding(), h, false, alignment, true);
+            g.drawText(text, renderedFont, getForeColor(), getLeftPadding(), 0, w - getLeftPadding() - getRightPadding(), h, false, alignment, true);
         }
         else if (!ghostText.isEmpty()) {
-            g.drawText(ghostText, renderedFont, GHOST_TEXT_COLOR, getLeftPadding(), 0, w - getLeftPadding() - getRightPadding(), h, false, alignment, true);
+            g.drawText(ghostText, renderedFont, getGhostTextColor(), getLeftPadding(), 0, w - getLeftPadding() - getRightPadding(), h, false, alignment, true);
         }
     }
 

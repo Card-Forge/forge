@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -20,9 +21,19 @@ import forge.util.Utils;
 
 public class FList<T> extends FScrollPane implements Iterable<T> {
     public static final float PADDING = Utils.scale(3);
-    public static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    public static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
-    public static final FSkinColor LINE_COLOR = FORE_COLOR.alphaColor(0.5f);
+    public static FSkinColor getForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
+    public static FSkinColor getPressedColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_ACTIVE).alphaColor(0.9f);
+        return FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
+    }
+    public static FSkinColor getLineColor() {
+        return getForeColor().alphaColor(0.5f);
+    }
     public static final float LINE_THICKNESS = Utils.scale(1);
 
     protected final List<T> items = new ArrayList<>();
@@ -208,8 +219,8 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
     @Override
     protected void drawBackground(Graphics g) {
         //support scrolling texture with list
-        g.drawImage(FSkinTexture.BG_TEXTURE, -getScrollLeft(), -getScrollTop(), getScrollWidth(), getScrollHeight());
-        g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, 0, 0, getWidth(), getHeight());
+        g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, -getScrollLeft(), -getScrollTop(), getScrollWidth(), getScrollHeight());
+        g.fillRect(FScreen.getTextureOverlayColor(), 0, 0, getWidth(), getHeight());
     }
 
     @Override
@@ -249,7 +260,7 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
                     g.fillRect(fillColor, x, y, w, itemHeight);
                 }
 
-                renderer.drawValue(g, i, items.get(i), font, FORE_COLOR, fillColor, pressedIndex == i, x + padding, y + padding, valueWidth, valueHeight);
+                renderer.drawValue(g, i, items.get(i), font, getForeColor(), fillColor, pressedIndex == i, x + padding, y + padding, valueWidth, valueHeight);
 
                 if (layoutHorizontal) {
                     x += itemWidth;
@@ -261,11 +272,11 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
                 if (drawSeparators) {
                     if (layoutHorizontal) {
                         x -= LINE_THICKNESS / 2;
-                        g.drawLine(LINE_THICKNESS, LINE_COLOR, x, 0, x, h);
+                        g.drawLine(LINE_THICKNESS, getLineColor(), x, 0, x, h);
                     }
                     else {
                         y -= LINE_THICKNESS / 2;
-                        g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, y, w, y);
+                        g.drawLine(LINE_THICKNESS, getLineColor(), 0, y, w, y);
                     }
                 }
             }
@@ -277,7 +288,7 @@ public class FList<T> extends FScrollPane implements Iterable<T> {
 
     protected FSkinColor getItemFillColor(int index) {
         if (index == pressedIndex) {
-            return FList.PRESSED_COLOR;
+            return FList.getPressedColor();
         }
         return null;
     }

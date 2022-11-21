@@ -35,9 +35,21 @@ public class VPlayerPanel extends FContainer {
     private static final FSkinFont LIFE_FONT_ALT = FSkinFont.get(22);
     private static final FSkinFont INFO_FONT = FSkinFont.get(12);
     private static final FSkinFont INFO2_FONT = FSkinFont.get(14);
-    private static final FSkinColor INFO_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor DISPLAY_AREA_BACK_COLOR = FSkinColor.get(Colors.CLR_INACTIVE).alphaColor(0.5f);
-    private static final FSkinColor DELIRIUM_HIGHLIGHT = FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED).alphaColor(0.5f);
+    private static FSkinColor getInfoForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
+    private static FSkinColor getDisplayAreaBackColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_INACTIVE).alphaColor(0.5f);
+        return FSkinColor.get(Colors.CLR_INACTIVE).alphaColor(0.5f);
+    }
+    private static FSkinColor getDeliriumHighlight() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_ENABLED).alphaColor(0.5f);
+        return FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED).alphaColor(0.5f);
+    }
     private static final float INFO_TAB_PADDING_X = Utils.scale(2);
     private static final float INFO_TAB_PADDING_Y = Utils.scale(2);
 
@@ -427,26 +439,26 @@ public class VPlayerPanel extends FContainer {
             VDisplayArea selectedDisplayArea = selectedTab.displayArea;
             float x = selectedDisplayArea.getLeft();
             float w = selectedDisplayArea.getWidth();
-            g.fillRect(DISPLAY_AREA_BACK_COLOR, x, selectedDisplayArea.getTop(), w, selectedDisplayArea.getHeight());
+            g.fillRect(getDisplayAreaBackColor(), x, selectedDisplayArea.getTop(), w, selectedDisplayArea.getHeight());
 
             if (Forge.isLandscapeMode()) {
-                g.drawLine(1, MatchScreen.BORDER_COLOR, x, selectedDisplayArea.getTop(), x, selectedDisplayArea.getBottom());
+                g.drawLine(1, MatchScreen.getBorderColor(), x, selectedDisplayArea.getTop(), x, selectedDisplayArea.getBottom());
             }
             else {
                 y = isFlipped() ? selectedDisplayArea.getTop() + 1 : selectedDisplayArea.getBottom();
                 //leave gap at selected zone tab
-                g.drawLine(1, MatchScreen.BORDER_COLOR, x, y, selectedTab.getLeft(), y);
-                g.drawLine(1, MatchScreen.BORDER_COLOR, selectedTab.getRight(), y, w, y);
+                g.drawLine(1, MatchScreen.getBorderColor(), x, y, selectedTab.getLeft(), y);
+                g.drawLine(1, MatchScreen.getBorderColor(), selectedTab.getRight(), y, w, y);
             }
         }
         if (commandZone.isVisible()) { //draw border for command zone if needed
             float x = commandZone.getLeft();
             y = commandZone.getTop();
-            g.drawLine(1, MatchScreen.BORDER_COLOR, x, y, x, y + commandZone.getHeight());
+            g.drawLine(1, MatchScreen.getBorderColor(), x, y, x, y + commandZone.getHeight());
             if (isFlipped()) {
                 y += commandZone.getHeight();
             }
-            g.drawLine(1, MatchScreen.BORDER_COLOR, x, y, x + commandZone.getWidth(), y);
+            g.drawLine(1, MatchScreen.getBorderColor(), x, y, x + commandZone.getWidth(), y);
         }
     }
 
@@ -505,7 +517,7 @@ public class VPlayerPanel extends FContainer {
             if(Forge.altPlayerLayout && !Forge.altZoneTabs && Forge.isLandscapeMode()) {
                 if (poisonCounters == 0 && energyCounters == 0 && experienceCounters == 0) {
                     g.fillRect(Color.DARK_GRAY, 0, 0, INFO2_FONT.getBounds(lifeStr).width+1, INFO2_FONT.getBounds(lifeStr).height+1);
-                    g.drawText(lifeStr, INFO2_FONT, INFO_FORE_COLOR.getColor(), 0, 0, getWidth(), getHeight(), false, Align.left, false);
+                    g.drawText(lifeStr, INFO2_FONT, getInfoForeColor().getColor(), 0, 0, getWidth(), getHeight(), false, Align.left, false);
                 } else {
                     float halfHeight = getHeight() / divider;
                     float textStart = halfHeight + Utils.scale(1);
@@ -513,42 +525,42 @@ public class VPlayerPanel extends FContainer {
                     int mod = 1;
                     g.fillRect(Color.DARK_GRAY, 0, 0, INFO_FONT.getBounds(lifeStr).width+halfHeight+1, INFO_FONT.getBounds(lifeStr).height+1);
                     g.drawImage(FSkinImage.QUEST_LIFE, 0, 0, halfHeight, halfHeight);
-                    g.drawText(lifeStr, INFO_FONT, INFO_FORE_COLOR.getColor(), textStart, 0, textWidth, halfHeight, false, Align.left, false);
+                    g.drawText(lifeStr, INFO_FONT, getInfoForeColor().getColor(), textStart, 0, textWidth, halfHeight, false, Align.left, false);
                     if (poisonCounters > 0) {
                         g.fillRect(Color.DARK_GRAY, 0, halfHeight+2, INFO_FONT.getBounds(String.valueOf(poisonCounters)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(poisonCounters)).height+1);
                         g.drawImage(FSkinImage.POISON, 0, halfHeight+2, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(poisonCounters), INFO_FONT, INFO_FORE_COLOR.getColor(), textStart, halfHeight+2, textWidth, halfHeight, false, Align.left, false);
+                        g.drawText(String.valueOf(poisonCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, halfHeight+2, textWidth, halfHeight, false, Align.left, false);
                         mod+=1;
                     }
                     if (energyCounters > 0) {
                         g.fillRect(Color.DARK_GRAY, 0, (halfHeight*mod)+2, INFO_FONT.getBounds(String.valueOf(energyCounters)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(energyCounters)).height+1);
                         g.drawImage(FSkinImage.ENERGY, 0, (halfHeight*mod)+2, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(energyCounters), INFO_FONT, INFO_FORE_COLOR.getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
+                        g.drawText(String.valueOf(energyCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
                         mod+=1;
                     }
                     if (experienceCounters > 0) {
                         g.fillRect(Color.DARK_GRAY, 0, (halfHeight*mod)+2, INFO_FONT.getBounds(String.valueOf(experienceCounters)).width+halfHeight+1, INFO_FONT.getBounds(String.valueOf(experienceCounters)).height+1);
                         g.drawImage(FSkinImage.COMMANDER, 0, (halfHeight*mod)+2, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(experienceCounters), INFO_FONT, INFO_FORE_COLOR.getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
+                        g.drawText(String.valueOf(experienceCounters), INFO_FONT, getInfoForeColor().getColor(), textStart, (halfHeight*mod)+2, textWidth, halfHeight, false, Align.left, false);
                         mod+=1;
                     }
                     adjustHeight = (mod > 2) && (avatar.getHeight() < halfHeight*mod)? mod : 1;
                 }
             } else {
                 if (poisonCounters == 0 && energyCounters == 0) {
-                    g.drawText(lifeStr, Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, INFO_FORE_COLOR, 0, 0, getWidth(), getHeight(), false, Align.center, true);
+                    g.drawText(lifeStr, Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, getInfoForeColor(), 0, 0, getWidth(), getHeight(), false, Align.center, true);
                 } else {
                     float halfHeight = getHeight() / 2;
                     float textStart = halfHeight + Utils.scale(1);
                     float textWidth = getWidth() - textStart;
                     g.drawImage(FSkinImage.QUEST_LIFE, 0, 0, halfHeight, halfHeight);
-                    g.drawText(lifeStr, INFO_FONT, INFO_FORE_COLOR, textStart, 0, textWidth, halfHeight, false, Align.center, true);
+                    g.drawText(lifeStr, INFO_FONT, getInfoForeColor(), textStart, 0, textWidth, halfHeight, false, Align.center, true);
                     if (poisonCounters > 0) { //prioritize showing poison counters over energy counters
                         g.drawImage(FSkinImage.POISON, 0, halfHeight, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(poisonCounters), INFO_FONT, INFO_FORE_COLOR, textStart, halfHeight, textWidth, halfHeight, false, Align.center, true);
+                        g.drawText(String.valueOf(poisonCounters), INFO_FONT, getInfoForeColor(), textStart, halfHeight, textWidth, halfHeight, false, Align.center, true);
                     } else {
                         g.drawImage(FSkinImage.ENERGY, 0, halfHeight, halfHeight, halfHeight);
-                        g.drawText(String.valueOf(energyCounters), INFO_FONT, INFO_FORE_COLOR, textStart, halfHeight, textWidth, halfHeight, false, Align.center, true);
+                        g.drawText(String.valueOf(energyCounters), INFO_FONT, getInfoForeColor(), textStart, halfHeight, textWidth, halfHeight, false, Align.center, true);
                     }
                 }
             }
@@ -598,7 +610,7 @@ public class VPlayerPanel extends FContainer {
                     if (selectedTab == this) {
                         if (drawOverlay)
                             g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);
-                        g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);
+                        g.fillRect(getDisplayAreaBackColor(), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, getWidth(), getHeight() - INFO_TAB_PADDING_Y);
                     }
                 }
             }
@@ -622,9 +634,9 @@ public class VPlayerPanel extends FContainer {
                     g.fillRect(FSkinColor.getStandardColor(50, 200, 150).alphaColor(0.3f), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
                 //change the graveyard tab selection color to active phase color to indicate the player has delirium
                 if ((icon == FSkinImage.HDGRAVEYARD || icon == FSkinImage.GRAVEYARD) && player.hasDelirium()) {
-                    g.fillRect(DELIRIUM_HIGHLIGHT, 0 ,isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
+                    g.fillRect(getDeliriumHighlight(), 0 ,isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
                 } else {
-                    g.fillRect(DISPLAY_AREA_BACK_COLOR, 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
+                    g.fillRect(getDisplayAreaBackColor(), 0, isFlipped() ? INFO_TAB_PADDING_Y : 0, w, getHeight() - INFO_TAB_PADDING_Y);
                 }
                 if (!Forge.isLandscapeMode()) {
                     if (isFlipped()) { //use clip to ensure all corners connect
@@ -633,9 +645,9 @@ public class VPlayerPanel extends FContainer {
                         g.startClip(-1, y, w + 2, yAcross - y);
                     }
                     if (forMultiPlayer) {
-                        g.drawLine(1, MatchScreen.BORDER_COLOR, 0, yAcross, w, yAcross);
-                        g.drawLine(1, MatchScreen.BORDER_COLOR, 0, y, 0, h);
-                        g.drawLine(1, MatchScreen.BORDER_COLOR, w, y, w, h);
+                        g.drawLine(1, MatchScreen.getBorderColor(), 0, yAcross, w, yAcross);
+                        g.drawLine(1, MatchScreen.getBorderColor(), 0, y, 0, h);
+                        g.drawLine(1, MatchScreen.getBorderColor(), w, y, w, h);
                     }
                     g.endClip();
                 }
@@ -674,7 +686,7 @@ public class VPlayerPanel extends FContainer {
                     g.startRotateTransform(x + (getWidth() - x + 1) / 2, getHeight() / 2, 180);
                     alignX = Align.right;
                 }
-                g.drawText(value, INFO_FONT, INFO_FORE_COLOR, x, 0, getWidth() - x + 1, getHeight(), false, alignX, true);
+                g.drawText(value, INFO_FONT, getInfoForeColor(), x, 0, getWidth() - x + 1, getHeight(), false, alignX, true);
                 if (lblLife.getRotate180()) {
                     g.endTransform();
                 }
@@ -694,7 +706,7 @@ public class VPlayerPanel extends FContainer {
                 g.drawImage(icon, x-mod/2, y-mod/2, w+mod, h+mod);
 
                 y += h + INFO_TAB_PADDING_Y;
-                g.drawText(value, INFO_FONT, INFO_FORE_COLOR, 0, y, getWidth(), getHeight() - y + 1, false, Align.center, false);
+                g.drawText(value, INFO_FONT, getInfoForeColor(), 0, y, getWidth(), getHeight() - y + 1, false, Align.center, false);
                 if (lblLife.getRotate180()) {
                     g.endTransform();
                 }

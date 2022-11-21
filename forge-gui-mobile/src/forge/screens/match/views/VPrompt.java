@@ -1,5 +1,6 @@
 package forge.screens.match.views;
 
+import forge.Forge;
 import org.apache.commons.lang3.StringUtils;
 
 import com.badlogic.gdx.utils.Align;
@@ -25,8 +26,16 @@ public class VPrompt extends FContainer {
     public static final float BTN_WIDTH = HEIGHT * 1.5f;
     public static final float PADDING = Utils.scale(2);
     public static final FSkinFont FONT = FSkinFont.get(14);
-    public static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_THEME2);
-    public static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    public static FSkinColor getBackColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_THEME2);
+        return FSkinColor.get(Colors.CLR_THEME2);
+    }
+    public static FSkinColor getForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
 
     private final FButton btnOk, btnCancel;
     private final MessageLabel lblMessage;
@@ -84,7 +93,7 @@ public class VPrompt extends FContainer {
 
     @Override
     protected void drawBackground(Graphics g) {
-        g.fillRect(BACK_COLOR, 0, 0, getWidth(), getHeight());
+        g.fillRect(getBackColor(), 0, 0, getWidth(), getHeight());
     }
     
     private class MessageLabel extends FDisplayObject {
@@ -97,7 +106,7 @@ public class VPrompt extends FContainer {
             float maxHeight = getHeight() - 2 * PADDING;
             TextBounds textBounds = renderer.getWrappedBounds(message, FONT, maxWidth);
             if (textBounds.height > maxHeight) {
-                FMagnifyView.show(this, message, FORE_COLOR, BACK_COLOR, FONT, false);
+                FMagnifyView.show(this, message, getForeColor(), getBackColor(), FONT, false);
             }
             return true;
         }
@@ -125,7 +134,7 @@ public class VPrompt extends FContainer {
                 float y = PADDING;
                 float w = getWidth() - 2 * PADDING;
                 float h = getHeight() - 2 * PADDING;
-                renderer.drawText(g, message, FONT, FORE_COLOR, x, y, w, h, y, h, true, Align.center, true);
+                renderer.drawText(g, message, FONT, getForeColor(), x, y, w, h, y, h, true, Align.center, true);
             }
         }
     }

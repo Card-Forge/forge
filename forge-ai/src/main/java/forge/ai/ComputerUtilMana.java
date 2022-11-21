@@ -376,7 +376,7 @@ public class ComputerUtilMana {
             }
 
             final String typeRes = cost.getSourceRestriction();
-            if (StringUtils.isNotBlank(typeRes) && !paymentChoice.getHostCard().getType().hasStringType(typeRes)) {
+            if (StringUtils.isNotBlank(typeRes) && !paymentChoice.getHostCard().isValid(typeRes, null, null, null)) {
                 continue;
             }
 
@@ -1405,8 +1405,7 @@ public class ComputerUtilMana {
     public static int getAvailableManaEstimate(final Player p, final boolean checkPlayable) {
         int availableMana = 0;
 
-        final CardCollectionView list = new CardCollection(p.getCardsIn(ZoneType.Battlefield));
-        final List<Card> srcs = CardLists.filter(list, new Predicate<Card>() {
+        final List<Card> srcs = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !c.getManaAbilities().isEmpty();

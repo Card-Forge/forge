@@ -122,7 +122,7 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("EffectOwner")) {
-            effectOwner = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("EffectOwner"), sa);
+            effectOwner = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("EffectOwner"), sa);
         } else {
             effectOwner = Lists.newArrayList(sa.getActivatingPlayer());
         }
@@ -147,11 +147,11 @@ public class EffectEffect extends SpellAbilityEffect {
 
         for (Player controller : effectOwner) {
             final Card eff = createEffect(sa, controller, name, image);
-            eff.setSetCode(sa.getHostCard().getSetCode());
+            eff.setSetCode(hostCard.getSetCode());
             if (name.startsWith("Emblem")) {
                 eff.setRarity(CardRarity.Common);
             } else {
-                eff.setRarity(sa.getHostCard().getRarity());
+                eff.setRarity(hostCard.getRarity());
             }
 
             // Abilities and triggers work the same as they do for Token
@@ -208,9 +208,7 @@ public class EffectEffect extends SpellAbilityEffect {
                     effectKeywords = CardFactoryUtil.sharedKeywords(effectKeywords, restrictions, zones, hostCard, sa);
                 }
                 if (effectKeywords != null) {
-                    for (final String s : effectKeywords) {
-                        eff.addRemembered(s);
-                    }
+                    eff.addRemembered(effectKeywords);
                 }
             }
 

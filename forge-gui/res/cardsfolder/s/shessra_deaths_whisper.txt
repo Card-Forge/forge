@@ -3,7 +3,7 @@ ManaCost:2 B G
 Types:Legendary Creature Human Elf Warlock
 PT:1/3
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigProvoke | TriggerDescription$ Bewitching Whispers — When CARDNAME enters the battlefield, target creature blocks this turn if able.
-SVar:TrigProvoke:DB$ Effect | StaticAbilities$ MustBlock | RememberObjects$ Targeted | ExileOnMoved$ Battlefield
+SVar:TrigProvoke:DB$ Effect | ValidTgts$ Creature | StaticAbilities$ MustBlock | RememberObjects$ Targeted | ExileOnMoved$ Battlefield
 SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigDraw | TriggerDescription$ Whispers of the Grave — At the beginning of your end step, if a creature died this turn, you may pay 2 life. If you do, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ PayLife<2>

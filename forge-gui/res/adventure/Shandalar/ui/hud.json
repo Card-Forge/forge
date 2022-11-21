@@ -126,6 +126,15 @@
       "height": 36,
       "x": 424,
       "y": 226
+    },
+    {
+      "type": "TextButton",
+      "name": "openmap",
+      "text": "{Scale=80%}tr(lblZoom)",
+      "width": 80,
+      "height": 18,
+      "x": 0,
+      "y": 80
     }
   ]
 }

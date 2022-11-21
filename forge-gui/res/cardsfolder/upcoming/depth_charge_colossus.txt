@@ -2,7 +2,7 @@ Name:Depth Charge Colossus
 ManaCost:9
 Types:Artifact Creature Dreadnought
 PT:9/9
-K:Prototype:4 U U:2:2
+K:Prototype:4 U U:6:6
 K:CARDNAME doesn't untap during your untap step.
 A:AB$ Untap | Cost$ 3 | SpellDescription$ Untap CARDNAME.
 DeckHints:Color$Blue

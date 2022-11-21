@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.*;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
@@ -58,14 +59,14 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
-        final CardCollection chosen = new CardCollection();
+        CardCollection chosen = new CardCollection();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        ZoneType choiceZone = ZoneType.Battlefield;
+        List<ZoneType> choiceZone = Lists.newArrayList(ZoneType.Battlefield);
         if (sa.hasParam("ChoiceZone")) {
-            choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+            choiceZone = ZoneType.listValueOf(sa.getParam("ChoiceZone"));
         }
         CardCollectionView choices = sa.hasParam("AllCards") ? game.getCardsInGame() : game.getCardsIn(choiceZone);
         if (sa.hasParam("Choices")) {
@@ -220,7 +221,8 @@ public class ChooseCardEffect extends SpellAbilityEffect {
 
             } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("AtRandom") && !choices.isEmpty()) {
-                    Aggregates.random(choices, validAmount, chosen);
+                    // don't pass FCollection for direct modification, the Set part would get messed up
+                    chosen = new CardCollection(Aggregates.random(choices, validAmount));
                     dontRevealToOwner = false;
                 } else {
                     String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";

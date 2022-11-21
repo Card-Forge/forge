@@ -5,7 +5,7 @@ S:Mode$ Continuous | Affected$ Creature.powerGE3 | AddHiddenKeyword$ CARDNAME do
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:CountOpps GTCountMe
-SVar:CountOpp:Count$Valid Creature.OppCtrl+PowerGE3/LimitMax.5
+SVar:CountOpps:Count$Valid Creature.OppCtrl+PowerGE3/LimitMax.5
 SVar:CountMe:Count$Valid Creature.YouCtrl+PowerGE3
 DeckHints:Type$Enchantment|Artifact|Planeswalker & Type$Wall & Keyword$Defender
 Oracle:Creatures with power 3 or greater don't untap during their controllers' untap steps.
