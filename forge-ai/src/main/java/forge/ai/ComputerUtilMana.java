@@ -514,10 +514,9 @@ public class ComputerUtilMana {
 
         // Run triggers like Nissa
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(hostCard);
-        runParams.put(AbilityKey.Player, ai); // assuming AI would only ever gives itself mana
+        runParams.put(AbilityKey.Activator, ai); // assuming AI would only ever gives itself mana
         runParams.put(AbilityKey.AbilityMana, saPayment);
         runParams.put(AbilityKey.Produced, manaProduced);
-        runParams.put(AbilityKey.Activator, ai);
         for (Trigger tr : ai.getGame().getTriggerHandler().getActiveTrigger(TriggerType.TapsForMana, runParams)) {
             SpellAbility trSA = tr.ensureAbility();
             if (trSA == null) {
@@ -529,7 +528,7 @@ public class ComputerUtilMana {
                 if (produced.equals("Chosen")) {
                     produced = MagicColor.toShortString(trSA.getHostCard().getChosenColor());
                 }
-                manaProduced += " " + StringUtils.repeat(produced, pAmount);
+                manaProduced += " " + StringUtils.repeat(produced, " ", pAmount);
             } else if (ApiType.ManaReflected.equals(trSA.getApi())) {
                 final String colorOrType = trSA.getParamOrDefault("ColorOrType", "Color");
                 // currently Color or Type, Type is colors + colorless

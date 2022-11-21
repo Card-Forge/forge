@@ -32,7 +32,7 @@ public class ManaEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
-        AbilityManaPart abMana = sa.getManaPart();
+        final AbilityManaPart abMana = sa.getManaPart();
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
         // Spells are not undoable
@@ -44,6 +44,8 @@ public class ManaEffect extends SpellAbilityEffect {
         if (optional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantAddMana"), null)) {
             return;
         }
+
+        final StringBuilder producedMana = new StringBuilder();
 
         for (Player p : tgtPlayers) {
             if (sa.usesTargeting() && !p.canBeTargetedBy(sa)) {
@@ -241,8 +243,10 @@ public class ManaEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            abMana.produceMana(mana, p, sa);
+            producedMana.append(abMana.produceMana(mana, p, sa));
         }
+
+        abMana.tapsForMana(sa, producedMana.toString());
 
         // Only clear express choice after mana has been produced
         abMana.clearExpressChoice();

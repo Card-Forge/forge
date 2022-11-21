@@ -3,13 +3,13 @@ ManaCost:U U U
 Types:Enchantment
 Text:If tapped for mana, Plains produce {R}, Swamps produce {G}, Mountains produce {W}, and Forests produce {B} instead of any other type.
 K:Cumulative upkeep:1 U U
-R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Plains | ValidAbility$ Activated.hasTapCost | ReplaceWith$ ProduceR | Secondary$ True | Description$ If tapped for mana, Plains produce R.
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Plains | ReplaceWith$ ProduceR | Secondary$ True | Description$ If tapped for mana, Plains produce R.
 SVar:ProduceR:DB$ ReplaceMana | ReplaceType$ R
-R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Swamp | ValidAbility$ Activated.hasTapCost | ReplaceWith$ ProduceG | Secondary$ True | Description$ If tapped for mana, Swamps produce G.
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Swamp | ReplaceWith$ ProduceG | Secondary$ True | Description$ If tapped for mana, Swamps produce G.
 SVar:ProduceG:DB$ ReplaceMana | ReplaceType$ G
-R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Mountain | ValidAbility$ Activated.hasTapCost | ReplaceWith$ ProduceW | Secondary$ True | Description$ If tapped for mana, Mountains produce U.
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Mountain | ReplaceWith$ ProduceW | Secondary$ True | Description$ If tapped for mana, Mountains produce U.
 SVar:ProduceW:DB$ ReplaceMana | ReplaceType$ W
-R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Forest | ValidAbility$ Activated.hasTapCost | ReplaceWith$ ProduceB | Secondary$ True | Description$ If tapped for mana, Forests produce B.
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Forest | ReplaceWith$ ProduceB | Secondary$ True | Description$ If tapped for mana, Forests produce B.
 SVar:ProduceB:DB$ ReplaceMana | ReplaceType$ B
 AI:RemoveDeck:All
 AI:RemoveDeck:Random
