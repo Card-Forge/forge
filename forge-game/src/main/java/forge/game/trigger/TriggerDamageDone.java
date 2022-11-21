@@ -115,6 +115,7 @@ public class TriggerDamageDone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        // TODO try to reuse LKI of CardDamageHistory.registerDamage
         sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageSource)));
         sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
         sa.setTriggeringObjectsFrom(

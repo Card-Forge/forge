@@ -3,6 +3,6 @@ ManaCost:2 B B
 Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Land | AILogic$ Curse
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted land's controller, CARDNAME deals 1 damage to that player.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted land's controller, CARDNAME deals 1 damage to that player.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
 Oracle:Enchant land\nAt the beginning of the upkeep of enchanted land's controller, Cursed Land deals 1 damage to that player.

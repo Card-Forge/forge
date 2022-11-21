@@ -281,12 +281,12 @@ public class AbilityUtils {
             }
         } else if (defined.equals("FirstRemembered")) {
             Object o = hostCard.getFirstRemembered();
-            if (o != null && o instanceof Card) {
+            if (o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
             }
         } else if (defined.equals("LastRemembered")) {
             Object o = Iterables.getLast(hostCard.getRemembered(), null);
-            if (o != null && o instanceof Card) {
+            if (o instanceof Card) {
                 cards.add(game.getCardState((Card) o));
             }
         } else if (defined.equals("ImprintedLKI")) {

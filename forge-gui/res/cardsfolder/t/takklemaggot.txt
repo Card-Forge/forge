@@ -5,7 +5,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ ChangesZone | ValidCard$ Card.Self+nonAura | Origin$ Battlefield | Destination$ Any | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, put a -0/-1 counter on that creature.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, put a -0/-1 counter on that creature.
 SVar:TrigPutCounter:DB$ PutCounter | Defined$ Enchanted | CounterType$ M0M1 | CounterNum$ 1
 T:Mode$ ChangesZone | ValidCard$ Card.EnchantedBy | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigChoose | TriggerDescription$ When enchanted creature dies, that creature's controller chooses a creature that CARDNAME could enchant. If the player does, return CARDNAME to the battlefield under your control attached to that creature. If they don't, return CARDNAME to the battlefield under your control as a non-Aura enchantment. It loses "enchant creature" and gains "At the beginning of that player's upkeep, CARDNAME deals 1 damage to that player."
 SVar:TrigChoose:DB$ ChooseCard | Defined$ TriggeredCardController | Choices$ Creature.CanBeEnchantedBy | Mandatory$ True | SubAbility$ DBChangeZone

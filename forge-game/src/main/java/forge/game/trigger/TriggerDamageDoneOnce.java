@@ -15,7 +15,6 @@ public class TriggerDamageDoneOnce extends Trigger {
 
     public TriggerDamageDoneOnce(Map<String, String> params, Card host, boolean intrinsic) {
         super(params, host, intrinsic);
-
     }
 
     @SuppressWarnings("unchecked")
