@@ -9,6 +9,7 @@ SVar:X:Count$Valid Rat.YouCtrl
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ At the beginning of your end step, you may mill four cards. If you do, return up to two Rat creature cards from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)
 SVar:TrigChange:AB$ ChangeZone | Cost$ Mill<4> | Origin$ Graveyard | Destination$ Hand | ChangeType$ Rat.Creature+YouOwn | ChangeNum$ 2 | SelectPrompt$ Select up to two Rat creature cards
 SVar:HasAttackEffect:TRUE
+SVar:HasBlockEffect:TRUE
 DeckNeeds:Type$Rat
 DeckHas:Ability$Mill|Graveyard
-Oracle:Whenever Ashcoat of the Shadow Swarm attacks or blocks, other Rats you control get +X/+X where X is the number of Rats you control\nAt the beginning of your end step, you may mill four cards. If you do, return up to two Rat creature cards from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)
+Oracle:Whenever Ashcoat of the Shadow Swarm attacks or blocks, other Rats you control get +X/+X where X is the number of Rats you control.\nAt the beginning of your end step, you may mill four cards. If you do, return up to two Rat creature cards from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)
