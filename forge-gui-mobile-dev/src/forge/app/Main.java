@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -246,6 +247,11 @@ public class Main {
         @Override
         public Pair<Integer, Integer> getRealScreenSize(boolean real) {
             return Pair.of(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
+
+        @Override
+        public ArrayList<String> getGamepads() {
+            return new ArrayList<>();
         }
     }
 }

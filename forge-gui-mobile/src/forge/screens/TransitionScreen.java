@@ -19,7 +19,7 @@ public class TransitionScreen extends FContainer {
     Runnable runnable;
     TextureRegion textureRegion;
     private String message = "";
-    boolean matchTransition, isloading, isIntro, isFadeMusic;
+    boolean matchTransition, isloading, isIntro, isFadeMusic, advStartup;
 
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading) {
         this(proc, screen, enterMatch, loading, false, false);
@@ -43,6 +43,7 @@ public class TransitionScreen extends FContainer {
         isIntro = intro;
         isFadeMusic = fadeMusic;
         message = loadingMessage;
+        advStartup = Forge.selector.equals("Adventure");
     }
 
     public FProgressBar getProgressBar() {
@@ -110,10 +111,17 @@ public class TransitionScreen extends FContainer {
                     g.drawWarpImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), percentage);
             } else if (isIntro) {
                 if (textureRegion != null) {
-                    g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-                    g.setAlphaComposite(1-percentage);
-                    g.drawImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-                    g.setAlphaComposite(oldAlpha);
+                    if (advStartup) {
+                        g.drawGrayTransitionImage(Forge.getAssets().fallback_skins().get(0), 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), false, percentage);
+                        g.setAlphaComposite(1-percentage);
+                        g.drawImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+                        g.setAlphaComposite(oldAlpha);
+                    } else {
+                        g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+                        g.setAlphaComposite(1-percentage);
+                        g.drawImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+                        g.setAlphaComposite(oldAlpha);
+                    }
                 }
             } else {
                 if (textureRegion != null)
