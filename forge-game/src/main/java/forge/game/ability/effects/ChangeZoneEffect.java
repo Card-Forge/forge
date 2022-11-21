@@ -61,7 +61,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         if (sa.hasParam("DefinedPlayer")) {
             fetchers = AbilityUtils.getDefinedPlayers(host, sa.getParam("DefinedPlayer"), sa);
         }
-        if (fetchers == null && sa.hasParam("ValidTgts") && sa.usesTargeting()) {
+        if (fetchers == null && sa.usesTargeting()) {
             fetchers = Lists.newArrayList(sa.getTargets().getTargetPlayers());
         }
         if (fetchers == null) {
@@ -325,7 +325,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final StringBuilder sbTargets = new StringBuilder();
         Iterable<Card> tgts;
         if (sa.usesTargeting()) {
-            tgts = sa.getTargets().getTargetCards();
+            tgts = getCardsfromTargets(sa);
         } else { // otherwise add self to list and go from there
             tgts = sa.knownDetermineDefined(sa.getParam("Defined"));
         }

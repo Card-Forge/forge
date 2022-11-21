@@ -81,7 +81,7 @@ public class CostMill extends CostPart {
         }
 
         sb.append(" card");
-        if ((i == null) || (i > 1)) {
+        if (i == null || i > 1) {
             sb.append("s");
         }
 

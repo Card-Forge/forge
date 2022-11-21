@@ -2098,15 +2098,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             if (!equals(sourceController)) {
                 return false;
             }
-        } else if (incR[0].equals("EnchantedController")) {
-            final GameEntity enchanted = source.getEntityAttachedTo();
-            if (enchanted == null || !(enchanted instanceof Card)) {
-                return false;
-            }
-            final Card enchantedCard = (Card) enchanted;
-            if (!equals(enchantedCard.getController())) {
-                return false;
-            }
         } else {
             if (!incR[0].equals("Player")) {
                 return false;

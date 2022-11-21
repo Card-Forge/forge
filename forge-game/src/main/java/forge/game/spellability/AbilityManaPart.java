@@ -564,7 +564,7 @@ public class AbilityManaPart implements java.io.Serializable {
     @Override
     public final boolean equals(final Object o) {
         // Mana abilities with same Descriptions are "equal"
-        if ((o == null) || !(o instanceof AbilityManaPart)) {
+        if (!(o instanceof AbilityManaPart)) {
             return false;
         }
 
