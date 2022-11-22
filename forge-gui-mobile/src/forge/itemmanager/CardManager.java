@@ -2,7 +2,6 @@ package forge.itemmanager;
 
 import java.util.Map.Entry;
 
-import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
