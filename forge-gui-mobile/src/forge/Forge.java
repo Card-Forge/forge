@@ -73,6 +73,7 @@ public class Forge implements ApplicationListener {
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
     public boolean needsUpdate = false;
+    public static boolean advStartup = false;
     public static boolean safeToClose = true;
     public static boolean magnify = false;
     public static boolean magnifyToggle = true;
