@@ -2426,6 +2426,9 @@ public class GameAction {
                     }
                 }
             }
+            if (cause.hasParam("RememberAmount")) {
+                cause.getHostCard().addRemembered(damageMap.totalAmount());
+            }
         }
 
         preventMap.triggerPreventDamage(isCombat);
