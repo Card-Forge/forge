@@ -16,6 +16,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.util.CardTranslation;
 import forge.util.Lang;
 
 public class SkipTurnEffect extends SpellAbilityEffect {
@@ -38,7 +39,7 @@ public class SkipTurnEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
-        final String name = hostCard.getName() + "'s Effect";
+        final String name = CardTranslation.getTranslatedName(hostCard.getName()) + "'s Effect";
         final String image = hostCard.getImageKey();
         final int numTurns = AbilityUtils.calculateAmount(hostCard, sa.getParam("NumTurns"), sa);
         String repeffstr = "Event$ BeginTurn | ActiveZones$ Command | ValidPlayer$ You " +
