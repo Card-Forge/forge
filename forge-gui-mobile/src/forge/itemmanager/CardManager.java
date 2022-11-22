@@ -49,8 +49,7 @@ public class CardManager extends ItemManager<PaperCard> {
 
     public static void addDefaultFilters(final ItemManager<? super PaperCard> itemManager) {
         itemManager.addFilter(new CardColorFilter(itemManager));
-        if (!Forge.isMobileAdventureMode)
-            itemManager.addFilter(new CardFormatFilter(itemManager));
+        itemManager.addFilter(new CardFormatFilter(itemManager));
         itemManager.addFilter(new CardTypeFilter(itemManager));
     }
 
