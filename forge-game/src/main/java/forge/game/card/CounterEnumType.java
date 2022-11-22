@@ -385,6 +385,8 @@ public enum CounterEnumType {
 
     POISON("POISN"),
 
+    TICKET("TICKET"),
+
     // Keyword Counters
 /*
     FLYING("Flying"),

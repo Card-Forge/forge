@@ -59,6 +59,7 @@ Chimera:Chimeras
 Citizen:Citizens
 Clamfolk:Clamfolk
 Cleric:Clerics
+Clown:Clowns
 Cockatrice:Cockatrices
 Construct:Constructs
 Cow:Cows
@@ -116,6 +117,7 @@ Gorgon:Gorgons
 Graveborn:Graveborn
 Gremlin:Gremlins
 Griffin:Griffins
+Guest:Guests
 Hag:Hags
 Halfling:Halflings
 Hamster:Hamsters

@@ -1463,6 +1463,7 @@ public class FSkin {
         addEncodingSymbol("S", FSkinProp.IMG_MANA_SNOW);
         addEncodingSymbol("T", FSkinProp.IMG_TAP);
         addEncodingSymbol("E", FSkinProp.IMG_ENERGY);
+        addEncodingSymbol("TK", FSkinProp.IMG_TICKET);
         addEncodingSymbol("EXPERIENCE", FSkinProp.IMG_EXPERIENCE);
         addEncodingSymbol("A-", FSkinProp.IMG_ALCHEMY);
 

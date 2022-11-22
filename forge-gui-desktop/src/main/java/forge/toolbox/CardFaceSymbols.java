@@ -99,6 +99,7 @@ public class CardFaceSymbols {
         MANA_IMAGES.put("T", FSkin.getImage(FSkinProp.IMG_TAP));
         MANA_IMAGES.put("Q", FSkin.getImage(FSkinProp.IMG_UNTAP));
         MANA_IMAGES.put("E", FSkin.getImage(FSkinProp.IMG_ENERGY, 40, 40));
+        MANA_IMAGES.put("TK", FSkin.getImage(FSkinProp.IMG_TICKET, 40, 40));
         MANA_IMAGES.put("EXPERIENCE", FSkin.getImage(FSkinProp.IMG_EXPERIENCE, 40, 30));
         MANA_IMAGES.put("CHAOS", FSkin.getImage(FSkinProp.IMG_CHAOS));
         MANA_IMAGES.put("slash", FSkin.getImage(FSkinProp.IMG_SLASH));
