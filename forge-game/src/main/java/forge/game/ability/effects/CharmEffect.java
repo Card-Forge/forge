@@ -65,6 +65,10 @@ public class CharmEffect extends SpellAbilityEffect {
             // using getCardForUi game is not set, so can't guess max charm
             num = Integer.MAX_VALUE;
         } else {
+            // fallback needed while ability building
+            if (sa.getActivatingPlayer() == null) {
+                sa.setActivatingPlayer(source.getController());
+            }
             num = Math.min(AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa), list.size());
         }
         final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParam("MinCharmNum"), sa) : num;

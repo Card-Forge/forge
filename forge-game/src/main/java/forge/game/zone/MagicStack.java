@@ -305,7 +305,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        if (sp instanceof AbilityStatic) {
+        if (sp instanceof AbilityStatic || (sp.isTrigger() && sp.getTrigger().getOverridingAbility() instanceof AbilityStatic)) {
             AbilityUtils.resolve(sp);
             // AbilityStatic should do nothing below
             return;

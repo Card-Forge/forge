@@ -2,7 +2,7 @@ Name:Pure Reflection
 ManaCost:2 W
 Types:Enchantment
 T:Mode$ SpellCast | ValidCard$ Creature | Execute$ TrigDestroy | ValidActivatingPlayer$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a creature spell, destroy all Reflections. Then that player creates an X/X white Reflection creature token, where X is the mana value of that spell.
-SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Reflection | SubAbility$ DBToken | SpellDescription$ Destroy all Reflections
+SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Reflection | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenPower$ X | TokenToughness$ X | TokenScript$ w_x_x_reflection | TokenOwner$ TriggeredActivator
 SVar:X:TriggeredStackInstance$CardManaCostLKI
 Oracle:Whenever a player casts a creature spell, destroy all Reflections. Then that player creates an X/X white Reflection creature token, where X is the mana value of that spell.

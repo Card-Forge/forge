@@ -29,7 +29,6 @@ public class StaticAbilityNumLoyaltyAct {
     }
 
     public static boolean applyLimitIncrease(final StaticAbility stAb, final Card card) {
-
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
@@ -58,7 +57,7 @@ public class StaticAbilityNumLoyaltyAct {
                         }
                     }
                     int more = AbilityUtils.calculateAmount(card, stAb.getParam("Additional"), stAb);
-                    addl = addl + more;
+                    addl += more;
                 }
             }
         }
