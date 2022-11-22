@@ -8,16 +8,13 @@ import forge.Graphics;
 import forge.LobbyPlayer;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.character.PlayerSprite;
-import forge.adventure.data.BiomeData;
 import forge.adventure.data.EffectData;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.ItemData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.IAfterMatch;
-import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.Current;
-import forge.adventure.world.World;
 import forge.assets.FBufferedImage;
 import forge.assets.FSkin;
 import forge.deck.Deck;
@@ -342,23 +339,6 @@ public class DuelScene extends ForgeScene {
         this.chaosBattle = this.enemy.getData().copyPlayerDeck && Current.player().isFantasyMode();
         this.AIExtras.clear();
         this.playerExtras.clear();
-    }
-    public String getCurrentLocation() {
-        String location = "";
-        if(MapStage.getInstance().isInMap())
-            location = TileMapScene.instance().rootPoint.getData().type;
-        else {
-            World world= Current.world();
-            int currentBiome = World.highestBiome(world.getBiome((int) player.getX() / world.getTileSize(), (int) player.getY() / world.getTileSize()));
-            List<BiomeData> biomeData = Current.world().getData().GetBiomes();
-            try {
-                BiomeData data = biomeData.get(currentBiome);
-                location = data.name;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return location;
     }
 
     private String selectAI(String ai) { //Decide opponent AI.

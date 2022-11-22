@@ -36,8 +36,8 @@
     {
       "type": "Label",
       "name": "saveDate",
-      "x": 390,
-      "y": 125,
+      "x": 370,
+      "y": 24,
       "width": 86,
       "height": 32
     },
