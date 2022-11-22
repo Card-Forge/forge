@@ -1,0 +1,8 @@
+Name:Ingenious Leonin
+ManaCost:4 W
+Types:Creature Cat Soldier
+PT:4/4
+A:AB$ PutCounter | Cost$ 3 W | ValidTgts$ Creature.attacking+Other+YouCtrl | TgtPrompt$ Select another target attacking creature you control | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on another target attacking creature you control. If that creature is a Cat, it gains first strike until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Targeted | ConditionDefined$ Targeted | ConditionPresent$ Cat | KW$ First Strike
+DeckHints:Type$Cat
+Oracle:{3}{W}: Put a +1/+1 counter on another target attacking creature you control. If that creature is a Cat, it gains first strike until end of turn.

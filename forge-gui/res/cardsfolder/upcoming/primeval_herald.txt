@@ -1,0 +1,10 @@
+Name:Primeval Herald
+ManaCost:3 G
+Types:Creature Elf Scout
+PT:3/1
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | OptionalDecider$ You | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | Tapped$ True | ChangeType$ Land.Basic | ChangeNum$ 1 | ShuffleNonMandatory$ True
+SVar:HasAttackEffect:TRUE
+Oracle:Trample\nWhenever Primeval Herald enters the battlefield or attacks, you may search your library for a basic land card, put it onto the battlefield tapped, then shuffle.
