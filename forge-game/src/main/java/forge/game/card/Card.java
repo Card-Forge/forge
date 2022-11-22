@@ -5636,7 +5636,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     @Override
     public final int addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat, GameEntityCounterTable counterTable) {
         if (damageIn <= 0) {
-            return 0; // Rule 119.8
+            return 0; // 120.8
         }
 
         // 120.1a Damage can’t be dealt to an object that’s neither a creature nor a planeswalker.
