@@ -1,0 +1,11 @@
+Name:Lita, Mechanical Engineer
+ManaCost:2 W
+Types:Legendary Artifact Creature Artificer
+PT:3/3
+K:Vigilance
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigUntap | TriggerDescription$ At the beginning of your end step, untap all artifact creatures you control.
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Artifact.Creature+YouCtrl
+A:AB$ Token | Cost$ 3 W T | TokenScript$ zeppelin | SpellDescription$ Create a 5/5 colorless Vehicle artifact token named Zeppelin with flying and crew 3.
+DeckHas:Type$Vehicle & Ability$Token & Keyword$Flying
+DeckHints:Type$Artifact
+Oracle:Vigilance\nAt the beginning of your end step, untap all artifact creatures you control.\n{3}{W}, {T}: Create a 5/5 colorless Vehicle artifact token named Zeppelin with flying and crew 3.
