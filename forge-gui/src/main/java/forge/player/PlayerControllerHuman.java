@@ -1365,6 +1365,18 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     }
 
     @Override
+    public String chooseSector(Card assignee, String ai, List<String> sectors) {
+        String prompt;
+        if (assignee != null) {
+            String creature = CardTranslation.getTranslatedName(assignee.getName()) + " (" + assignee.getId() + ")";
+            prompt = Localizer.getInstance().getMessage("lblAssignSectorCreature", creature);
+        } else {
+            prompt = Localizer.getInstance().getMessage("lblChooseSectorEffect");
+        }
+        return getGui().one(prompt, sectors);
+    }
+
+    @Override
     public Object vote(final SpellAbility sa, final String prompt, final List<Object> options,
             final ListMultimap<Object, Player> votes, Player forPlayer) {
         return getGui().one(prompt, options);

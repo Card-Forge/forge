@@ -44,6 +44,7 @@ public enum ApiType {
     ChooseEvenOdd (ChooseEvenOddEffect.class),
     ChooseNumber (ChooseNumberEffect.class),
     ChoosePlayer (ChoosePlayerEffect.class),
+    ChooseSector (ChooseSectorEffect.class),
     ChooseSource (ChooseSourceEffect.class),
     ChooseType (ChooseTypeEffect.class),
     Clash (ClashEffect.class),

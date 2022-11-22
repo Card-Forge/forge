@@ -1,11 +1,7 @@
 package forge.ai;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import forge.game.keyword.Keyword;
 import org.apache.commons.lang3.StringUtils;
@@ -589,6 +585,11 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer) {
         return ComputerUtil.vote(player, options, sa, votes, forPlayer);
+    }
+
+    @Override
+    public String chooseSector(Card assignee, String ai, List<String> sectors) {
+        return Aggregates.random(sectors);
     }
 
     @Override

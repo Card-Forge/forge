@@ -68,6 +68,8 @@ public enum TrackableProperty {
     ChosenDirection(TrackableTypes.EnumType(Direction.class)),
     ChosenEvenOdd(TrackableTypes.EnumType(EvenOdd.class)),
     ChosenMode(TrackableTypes.StringType),
+    ChosenSector(TrackableTypes.StringType),
+    Sector(TrackableTypes.StringType),
     ClassLevel(TrackableTypes.IntegerType),
     CurrentRoom(TrackableTypes.StringType),
     Intensity(TrackableTypes.IntegerType),
