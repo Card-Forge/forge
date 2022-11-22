@@ -1,0 +1,11 @@
+Name:Hold for Questioning
+ManaCost:3 U
+Types:Enchantment Aura
+K:Enchant creature or planeswalker
+A:SP$ Attach | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | AILogic$ Curse
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted permanent and investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")
+SVar:TrigTap:DB$ Tap | Defined$ Enchanted | SubAbility$ DBInvestigate
+SVar:DBInvestigate:DB$ Investigate
+S:Mode$ Continuous | Affected$ Permanent.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. & CARDNAME's activated abilities can't be activated. | Description$ Enchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.
+DeckHas:Ability$Investigate|Token|Sacrifice & Type$Artifact|Clue
+Oracle:Enchant creature or planeswalker\nWhen Hold for Questioning enters the battlefield, tap enchanted permanent and investigate. (Create a Clue token. It's an artifact with "{2}, Sacrifice this artifact: Draw a card.")\nEnchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.
