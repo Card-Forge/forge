@@ -175,7 +175,7 @@ public class SaveLoadScene extends UIScene {
                 previewImage.setVisible(true);
                 previewDate.setVisible(true);
                 if (header.saveDate != null)
-                    previewDate.setText(DateFormat.getDateInstance().format(header.saveDate) + "\n" + DateFormat.getTimeInstance(DateFormat.SHORT).format(header.saveDate));
+                    previewDate.setText("{Scale=98%}"+DateFormat.getDateInstance().format(header.saveDate) + " " + DateFormat.getTimeInstance(DateFormat.SHORT).format(header.saveDate));
                 else
                     previewDate.setText("");
                 if (header.name.contains(Character.toString(ASCII_179))) {
