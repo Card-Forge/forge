@@ -6,8 +6,75 @@ Type=Draft
 ScryfallCode=J22
 
 [cards]
+4 U Distinguished Conjurer @Nils Hamm
+5 U Ingenious Leonin @Eric Deschamps
+6 M Lita, Mechanical Engineer @Bartek Fedyczak
+7 U Magnanimous Magistrate @Marie Magny
+8 R Preston, the Vanisher @Christina Kraus
+11 U Hold for Questioning @Samuel Perin
 12 M Isu the Abominable @Victor Adame Minguez
+15 C Merfolk Pupil @Caroline Gariba
+16 M Pirated Copy @Daarken
+19 M Ashcoat of the Shadow Swarm @Christina Kraus
+20 U Conductor of Cacophony @Jason A. Engle
+21 C Creeping Bloodsucker @Antonio José Manzanedo
+23 U Disciple of Perdition @Alix Branwyn
+25 R Rodolf Duskbringer @Billy Christian
+28 R Termination Facilitator @Justine Cruz
 29 R Ardoz, Cobbler of War @Kev Walker
+40 M Kibo, Uktabi Prince @Zoltan Boros
+41 U Mild-Mannered Librarian @Justyna Gil
+42 U Primeval Herald @Tatiana Kirgetova
+44 R Runadi, Behemoth Caller @Billy Christian
+45 C Spectral Hunt-Caller @Uriah Voth
+46 U Towering Gibbon @Chris Seaman
+48 C Dutiful Replicator @Alexander Forssberg
+49 C Infernal Idol @Drew Tucker
+50 U Instruments of War @Drew Tucker
+51 U Planar Atlas @Alexander Forssberg
+52 U Arrest @Katana Canata
+53 R Balan, Wandering Knight @Mai Okuma
+56 C Flicker of Fate
+57 U King of the Pride @Inuchiyo Meimaru
+62 U Mirror Image @Yukie Tajima
+64 U Spectral Sailor @Fuzichoco
+65 C Spellstutter Sprite
+66 U Whirler Rogue @I☆LA
+67 C Diabolic Edict @Tetsu Kurosawa
+68 U Feast on the Fallen
+70 U Oathsworn Vampire @Border
+71 R Ogre Slumlord
 79 M Kiki-Jiki, Mirror Breaker @Ishikawa Kenta
+85 U Arlinn, Voice of the Pack @Hisashi Momose
+88 C Elvish Rejuvenator @Shiramine
+92 U Thrashing Brontodon @Kemonomichi
 94 U Coldsteel Heart @I☆LA
+95 U Magnifying Glass @Yukihiro Maruo
+96 R Peacewalker Colossus @Hisashi Momose
+97 M Karn Liberated @Dai-XT
+117 U Blood Artist @Julie Dillon
+118 U Feast of Blood @Irina Nordsol
+119 U Festering Evil @Samuel Araya
+126 C Renegade Demon @Alexandre Honoré
+133 U Uktabi Orangutan @Milivoj Ćeran
+134 R Wicked Wolf @Steve Ellis
+141 M Ajani, Strength of the Pride @Chris Rallis
+142 U Ajani's Pridemate @Svetlin Velinov
+184 R Felidar Retreat @Ralph Horsley
+208 R Leonin Warleader @Jakub Kasper
+232 R Regal Caracal @Filip Burburan
+259 R Trove Warden @Lars Grant-West
+323 U Nezumi Bone-Reader @Leonardo Santanna
+384 C Burglar Rat @Tyler Walpole
+387 C Chittering Rats @Yeong-Hao Han
+392 U Crypt Rats @Matt Cavotta
+397 R Demon of Catastrophes @Sidharth Chaturvedi
+403 R Dread Presence @Anthony Palumbo
+412 C Eviscerate @Min Yum
+431 R Kothophed, Soul Hoarder @Jakub Kasper
+463 R Seizan, Perverter of Truth @Kev Walker
+465 C Sinuous Vermin @Jason Kang
+468 C Typhoid Rats @Kev Walker
+481 U Ulcerate @Johann Bodin
+806 R Walking Ballista @Daniel Ljunggren
 835 M Kibo, Uktabi Prince @Filipe Pagliuso
