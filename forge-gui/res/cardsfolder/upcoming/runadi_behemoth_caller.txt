@@ -9,7 +9,7 @@ SVar:DBPutP1P1:DB$ PutCounter | Defined$ ReplacedCard | CounterType$ P1P1 | ETB$
 SVar:DBExile:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE3_P1P1 | AddKeyword$ Haste | Description$ Creature you control with three or more +1/+1 counters on them have haste.
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add {G}.
-SVar:X:TriggeredCard$CardManaCost/Minus.4
+SVar:X:Remembered$CardManaCost/Minus.4
 DeckHas:Ability$Counters
 DeckHints:Type$Tyranid|Hydra
 Oracle:Whenever you cast a creature spell with mana value 5 or greater, that creature enters the battlefield with X additional +1/+1 counters on it, where X is its mana value minus 4.\nCreature you control with three or more +1/+1 counters on them have haste.\n{T}: Add {G}.
