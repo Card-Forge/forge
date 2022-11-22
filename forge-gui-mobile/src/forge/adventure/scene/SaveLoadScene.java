@@ -21,6 +21,7 @@ import forge.adventure.util.Current;
 import forge.adventure.world.WorldSave;
 import forge.adventure.world.WorldSaveHeader;
 import forge.screens.TransitionScreen;
+import forge.util.TextUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,7 +43,7 @@ public class SaveLoadScene extends UIScene {
     TextraLabel header;
     int currentSlot = 0, lastSelectedSlot = 0;
     Image previewImage;
-    TextraLabel previewDate;
+    TextraLabel previewDate, playerLocation;
     Image previewBorder;
     TextraButton saveLoadButton, back;
     Selectable<TextraButton> quickSave;
@@ -50,6 +51,7 @@ public class SaveLoadScene extends UIScene {
     Actor lastHighlightedSave;
     SelectBox difficulty;
     ScrollPane scrollPane;
+    char ASCII_179 = '│';
 
     private SaveLoadScene() {
         super(Forge.isLandscapeMode() ? "ui/save_load.json" : "ui/save_load_portrait.json");
@@ -68,9 +70,13 @@ public class SaveLoadScene extends UIScene {
             //DifficultyData difficulty1 = Config.instance().getConfigData().difficulties[difficulty.getSelectedIndex()];
             return null;
         });
-
         previewImage = ui.findActor("preview");
         previewDate = ui.findActor("saveDate");
+        playerLocation = Controls.newTextraLabel("");
+        playerLocation.setText("");
+        playerLocation.setX(previewImage.getX());
+        playerLocation.setY(previewImage.getY()+5);
+        ui.addActor(playerLocation);
         header = Controls.newTextraLabel(Forge.getLocalizer().getMessage("lblSave"));
         header.setAlignment(Align.center);
         layout.add(header).pad(2).colspan(4).align(Align.center).expandX();
@@ -172,6 +178,16 @@ public class SaveLoadScene extends UIScene {
                     previewDate.setText(DateFormat.getDateInstance().format(header.saveDate) + "\n" + DateFormat.getTimeInstance(DateFormat.SHORT).format(header.saveDate));
                 else
                     previewDate.setText("");
+                if (header.name.contains(Character.toString(ASCII_179))) {
+                    String[] split = TextUtil.split(header.name, ASCII_179);
+                    try {
+                        playerLocation.setText(split[1]);
+                    } catch (Exception e) {
+                        playerLocation.setText("");
+                    }
+                } else {
+                    playerLocation.setText("");
+                }
             }
         } else {
             if (previewImage != null)
@@ -239,7 +255,7 @@ public class SaveLoadScene extends UIScene {
 
 
     public void save() {
-        if (WorldSave.getCurrentSave().save(textInput.getText(), currentSlot)) {
+        if (WorldSave.getCurrentSave().save(textInput.getText()+ASCII_179+GameScene.instance().getAdventurePlayerLocation(true), currentSlot)) {
             updateFiles();
             //ensure the dialog is hidden before switching
 
@@ -275,7 +291,13 @@ public class SaveLoadScene extends UIScene {
 
                         int slot = WorldSave.filenameToSlot(name.getName());
                         WorldSaveHeader header = (WorldSaveHeader) oos.readObject();
-                        buttons.get(slot).actor.setText(header.name);
+                        if (header.name.contains(Character.toString(ASCII_179))) {
+                            String[] split = TextUtil.split(header.name, ASCII_179);
+                            buttons.get(slot).actor.setText(split[0]);
+                            //playerLocation.setText(split[1]);
+                        } else {
+                            buttons.get(slot).actor.setText(header.name);
+                        }
                         previews.put(slot, header);
                     }
 
