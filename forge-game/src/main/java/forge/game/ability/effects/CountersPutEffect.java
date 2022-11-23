@@ -66,7 +66,7 @@ public class CountersPutEffect extends SpellAbilityEffect {
         }
 
         stringBuilder.append(pronoun ? "they" : who).append(" ");
-        final String typeName = CounterType.getType(sa.getParam("CounterType")).getName().toLowerCase();
+        final String typeName = sa.hasParam("CounterType") ? CounterType.getType(sa.getParam("CounterType")).getName().toLowerCase() : "";
 
         final List<String> playerCounters = Arrays.asList("energy", "experience", "poison", "ticket");
         if (playerCounters.contains(typeName)) {
