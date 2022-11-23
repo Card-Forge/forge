@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigScry:DB$ Scry | ScryNum$ 3
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Whenever CARDNAME attacks, you may return another creature you control to it's owner's hand. If you do, CARDNAME can't be blocked this turn.
 SVar:TrigChangeZone:DB$ ChangeZone | Optional$ True | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Creature.YouCtrl+Other | SelectPrompt$ Select another creature you control | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBUnblockable
-SVar:DBUnblockable:DB$ Effect | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | RememberObjects$ TriggeredAttacker | ForgetOtherRemembered$ True | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:DBUnblockable:DB$ Effect | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ1 | RememberObjects$ TriggeredAttacker | ForgetOtherRemembered$ True | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable | SubAbility$ DBCleanup
 SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:HasAttackEffect:TRUE
