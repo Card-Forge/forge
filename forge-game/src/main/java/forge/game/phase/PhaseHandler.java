@@ -1239,6 +1239,7 @@ public class PhaseHandler implements java.io.Serializable {
         game.getEndOfCombat().executeUntil();
         if (combat != null) {
             combat.endCombat();
+            game.getEndOfCombat().executeUntil(playerTurn);
             combat = null;
         }
         game.updateCombatForView();
