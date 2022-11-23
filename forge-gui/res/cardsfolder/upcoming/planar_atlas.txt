@@ -1,0 +1,8 @@
+Name:Planar Atlas
+ManaCost:2
+Types:Artifact
+K:CARDNAME enters the battlefield tapped.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may look at the top four cards of your library. If you do, reveal up to one land card from among them, then put that card on top of your library and rest on the bottom of your library in a random order.
+SVar:TrigDig:DB$ Dig | DigNum$ 4 | Optional$ True | ChangeNum$ 1 | ForceRevealToController$ True | ChangeValid$ Land | DestinationZone$ Library | LibraryPosition$ 0 | RestRandomOrder$ True
+A:AB$ Mana | Cost$ T | Produced$ C | SpellDescription$ Add {C}.
+Oracle:Planar Atlas enters the battlefield tapped.\nWhen Planar Atlas enters the battlefield, you may look at the top four cards of your library. If you do, reveal up to one land card from among them, then put that card on top of your library and rest on the bottom of your library in a random order.\n{T}: Add {C}.
