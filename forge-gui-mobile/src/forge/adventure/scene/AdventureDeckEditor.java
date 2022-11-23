@@ -39,8 +39,38 @@ import java.util.HashMap;
 import java.util.Map;
  
     public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
-        public static FSkinImage MAIN_DECK_ICON = Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
-        public static FSkinImage SIDEBOARD_ICON = Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
+        private static final FileHandle deckIcon = Config.instance().getFile("ui/maindeck.png");
+        private static Texture deckTexture = deckIcon.exists() ? new Texture(deckIcon) : null;
+        private static FImage MAIN_DECK_ICON = deckIcon.exists() ? new FImage() {
+            @Override
+            public float getWidth() {
+                return 100f;
+            }
+            @Override
+            public float getHeight() {
+                return 100f;
+            }
+            @Override
+            public void draw(Graphics g, float x, float y, float w, float h) {
+                g.drawImage(deckTexture, x, y, w, h);
+            }
+        } : Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
+        private static final FileHandle sideIcon = Config.instance().getFile("ui/sideboard.png");
+        private static Texture sideTexture = sideIcon.exists() ? new Texture(sideIcon) : null;
+        private static FImage SIDEBOARD_ICON = sideIcon.exists() ? new FImage() {
+            @Override
+            public float getWidth() {
+                return 100f;
+            }
+            @Override
+            public float getHeight() {
+                return 100f;
+            }
+            @Override
+            public void draw(Graphics g, float x, float y, float w, float h) {
+                g.drawImage(sideTexture, x, y, w, h);
+            }
+        } : Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
         private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
         private static final FileHandle binderIcon = Config.instance().getFile("ui/binder.png");
         private static Texture binderTexture = binderIcon.exists() ? new Texture(binderIcon) : null;
