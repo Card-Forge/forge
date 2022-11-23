@@ -743,13 +743,13 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             switch (sa.getParam("ShowCardInPrompt")) {
                 case "FirstRemembered":
                     o = sa.getHostCard().getFirstRemembered();
-                    if (o != null && o instanceof Card) {
+                    if (o instanceof Card) {
                         show = (Card)o;
                     }
                     break;
                 case "LastRemembered":
                     o = sa.getHostCard().getFirstRemembered();
-                    if (o != null && o instanceof Card) {
+                    if (o instanceof Card) {
                         show = (Card)o;
                     }
                     break;

@@ -299,7 +299,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private Map<Long, Player> goad = Maps.newTreeMap();
 
     private final List<GameCommand> leavePlayCommandList = Lists.newArrayList();
-    private final List<GameCommand> etbCommandList = Lists.newArrayList();
     private final List<GameCommand> untapCommandList = Lists.newArrayList();
     private final List<GameCommand> changeControllerCommandList = Lists.newArrayList();
     private final List<GameCommand> unattachCommandList = Lists.newArrayList();
@@ -3265,19 +3264,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return canCounter;
     }
 
-    public final void addComesIntoPlayCommand(final GameCommand c) {
-        etbCommandList.add(c);
-    }
-
-    public final void runComesIntoPlayCommands() {
-        for (final GameCommand c : etbCommandList) {
-            c.run();
-        }
-        etbCommandList.clear();
-    }
-
     public final void addLeavesPlayCommand(final GameCommand c) {
         leavePlayCommandList.add(c);
+    }
+    public final void addUntapCommand(final GameCommand c) {
+        untapCommandList.add(c);
+    }
+    public final void addUnattachCommand(final GameCommand c) {
+        unattachCommandList.add(c);
+    }
+    public final void addFaceupCommand(final GameCommand c) {
+        faceupCommandList.add(c);
+    }
+    public final void addFacedownCommand(final GameCommand c) {
+        facedownCommandList.add(c);
+    }
+    public final void addChangeControllerCommand(final GameCommand c) {
+        changeControllerCommandList.add(c);
     }
 
     public final void runLeavesPlayCommands() {
@@ -3285,22 +3288,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             c.run();
         }
         leavePlayCommandList.clear();
-    }
-
-    public final void addUntapCommand(final GameCommand c) {
-        untapCommandList.add(c);
-    }
-
-    public final void addUnattachCommand(final GameCommand c) {
-        unattachCommandList.add(c);
-    }
-
-    public final void addFaceupCommand(final GameCommand c) {
-        faceupCommandList.add(c);
-    }
-
-    public final void addFacedownCommand(final GameCommand c) {
-        facedownCommandList.add(c);
     }
     public final void runUntapCommands() {
         for (final GameCommand c : untapCommandList) {
@@ -3314,25 +3301,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         unattachCommandList.clear();
     }
-
     public final void runFaceupCommands() {
         for (final GameCommand c : faceupCommandList) {
             c.run();
         }
         faceupCommandList.clear();
     }
-
     public final void runFacedownCommands() {
         for (final GameCommand c : facedownCommandList) {
             c.run();
         }
         facedownCommandList.clear();
     }
-
-    public final void addChangeControllerCommand(final GameCommand c) {
-        changeControllerCommandList.add(c);
-    }
-
     public final void runChangeControllerCommands() {
         for (final GameCommand c : changeControllerCommandList) {
             c.run();
@@ -3346,16 +3326,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         view.updateSickness(this);
     }
 
-    public final boolean isFirstTurnControlled() {
-        return sickness;
-    }
-
     public final boolean hasSickness() {
         return sickness && !hasKeyword(Keyword.HASTE);
     }
 
     public final boolean isSick() {
-        return sickness && isCreature() && !hasKeyword(Keyword.HASTE);
+        return hasSickness() && isCreature();
+    }
+
+    public final boolean isFirstTurnControlled() {
+        return sickness;
     }
 
     public boolean hasBecomeTargetThisTurn() {
@@ -5070,7 +5050,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOut, runParams, false);
             // when it doesn't exist the game will no longer see it as tapped
             runUntapCommands();
-            // TODO need to run UntilHostLeavesPlay commands but only when worded "for as long as"
+            // TODO CR 702.26f need to run LeavesPlay + changeController commands but only when worded "for as long as"
         }
 
         setPhasedOut(!phasedOut);
@@ -5636,7 +5616,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     @Override
     public final int addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat, GameEntityCounterTable counterTable) {
         if (damageIn <= 0) {
-            return 0; // Rule 119.8
+            return 0; // 120.8
         }
 
         // 120.1a Damage can’t be dealt to an object that’s neither a creature nor a planeswalker.

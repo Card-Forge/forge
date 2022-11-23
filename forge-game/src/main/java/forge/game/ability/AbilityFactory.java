@@ -302,8 +302,7 @@ public final class AbilityFactory {
         }
 
         if (spellAbility instanceof SpellApiBased && hostCard.isPermanent()) {
-            String desc = mapParams.containsKey("SpellDescription") ? mapParams.get("SpellDescription")
-                    : spellAbility.getHostCard().getName();
+            String desc = mapParams.getOrDefault("SpellDescription", spellAbility.getHostCard().getName());
             spellAbility.setDescription(desc);
         } else if (mapParams.containsKey("SpellDescription")) {
             spellAbility.rebuiltDescription();
