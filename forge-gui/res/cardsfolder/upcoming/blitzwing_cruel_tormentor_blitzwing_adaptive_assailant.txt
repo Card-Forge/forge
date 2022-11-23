@@ -3,7 +3,7 @@ ManaCost:5 B
 Types:Legendary Artifact Creature Robot
 PT:6/5
 K:More Than Meets the Eye:3 B
-T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, target opponent loses life equal to the life that player lost this turn. If no life is lost this way, convert NICKNAME.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of your end step, target opponent loses life equal to the life that player lost this turn. If no life is lost this way, convert NICKNAME.
 SVar:TrigLoseLife:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ X | SubAbility$ DBConvert
 SVar:DBConvert:DB$ SetState | Mode$ Convert | ConditionCheckSVar$ AFLifeLost | ConditionSVarCompare$ EQ0
 SVar:X:TargetedPlayer$LifeLostThisTurn
