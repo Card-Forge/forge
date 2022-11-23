@@ -1,0 +1,12 @@
+Name:Brazen Cannonade
+ManaCost:3 R
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.attacking+YouCtrl | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever an attacking creature you control dies, CARDNAME deals 2 damage to each opponent.
+SVar:TrigDamage:DB$ DealDamage | Defined$ Opponent | NumDmg$ 2
+T:Mode$ Phase | Phase$ Main2 | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ RaidTest | Execute$ TrigExile | TriggerDescription$ Raid — At the beginning of your postcombat main phase, if you attacked with a creature this turn, exile the top card of your library. Until end of combat on your next turn, you may play that card.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ Play | SubAbility$ DBCleanup | ExileOnMoved$ Exile | Duration$ UntilEndOfYourNextCombat
+SVar:Play:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ Until end of combat on your next turn, you may play that card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RaidTest:Count$AttackersDeclared
+Oracle:Whenever an attacking creature you control dies, Brazen Cannonade deals 2 damage to each opponent.\nRaid — At the beginning of your postcombat main phase, if you attacked with a creature this turn, exile the top card of your library. Until end of combat on your next turn, you may play that card.
