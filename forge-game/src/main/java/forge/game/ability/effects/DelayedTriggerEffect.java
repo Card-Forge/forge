@@ -38,6 +38,7 @@ public class DelayedTriggerEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Game game = host.getGame();
         Map<String, String> mapParams = Maps.newHashMap(sa.getMapParams());
+
         mapParams.remove("Cost");
 
         if (mapParams.containsKey("SpellDescription")) {

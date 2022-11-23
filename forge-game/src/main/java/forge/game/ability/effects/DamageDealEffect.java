@@ -320,12 +320,9 @@ public class DamageDealEffect extends DamageBaseEffect {
         } else {
             if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
                     sourceLKI.isValid(sa.getParam("ExcessDamageCondition").split(","), activationPlayer, hostCard, sa))) {
-
                 damageMap.put(sourceLKI, c, dmgToTarget);
 
-                List<GameEntity> list = Lists.newArrayList();
-                list.addAll(AbilityUtils.getDefinedCards(hostCard, sa.getParam("ExcessDamage"), sa));
-                list.addAll(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("ExcessDamage"), sa));
+                List<GameEntity> list = AbilityUtils.getDefinedEntities(hostCard, sa.getParam("ExcessDamage"), sa);
 
                 if (!list.isEmpty()) {
                     damageMap.put(sourceLKI, list.get(0), excess);

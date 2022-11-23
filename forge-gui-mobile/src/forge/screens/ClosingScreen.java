@@ -1,6 +1,9 @@
 package forge.screens;
-
+import static forge.assets.FSkin.getDefaultSkinFile;
+import static forge.assets.FSkin.getSkinFile;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
@@ -16,6 +19,9 @@ public class ClosingScreen extends FContainer {
     private StaticAnimation staticAnimation;
     private boolean restart = false;
     private boolean drawStatic = false;
+    private FileHandle adv_logo = getSkinFile("adv_logo.png");
+    private FileHandle existingLogo = adv_logo.exists() ? adv_logo : getDefaultSkinFile("adv_logo.png");
+    private Texture logo = existingLogo.exists() && Forge.advStartup ? new Texture(existingLogo) : FSkin.getLogo();
 
     public ClosingScreen(boolean restart0) {
         bgAnimation = new BGAnimation();
@@ -48,13 +54,14 @@ public class ClosingScreen extends FContainer {
             }
             g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
             g.setAlphaComposite(1-percentage);
-            g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+            g.drawImage(Forge.isMobileAdventureMode || Forge.advStartup ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
             g.setAlphaComposite(oldAlpha);
             float xmod = Forge.getScreenHeight() > 2000 ? 1.5f : 1f;
-            if (FSkin.getLogo() != null) {
-                g.drawImage(FSkin.getLogo(), Forge.getScreenWidth()/2 - (FSkin.getLogo().getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkin.getLogo().getHeight()*xmod)/2, FSkin.getLogo().getWidth()*xmod, FSkin.getLogo().getHeight()*xmod);
+
+            if (logo != null) {
+                g.drawImage(logo, Forge.getScreenWidth()/2 - (logo.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (logo.getHeight()*xmod)/2, logo.getWidth()*xmod, logo.getHeight()*xmod);
             } else {
-                g.drawImage(FSkinImage.LOGO,Forge.getScreenWidth()/2 - (FSkinImage.LOGO.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkinImage.LOGO.getHeight()*xmod)/1.5f, FSkinImage.LOGO.getWidth()*xmod, FSkinImage.LOGO.getHeight()*xmod);
+                g.drawImage(FSkinImage.LOGO, Forge.getScreenWidth()/2 - (FSkinImage.LOGO.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkinImage.LOGO.getHeight()*xmod)/1.5f, FSkinImage.LOGO.getWidth()*xmod, FSkinImage.LOGO.getHeight()*xmod);
             }
         }
 
@@ -87,12 +94,12 @@ public class ClosingScreen extends FContainer {
             }
             g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
             g.setAlphaComposite(percentage);
-            g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+            g.drawImage(Forge.isMobileAdventureMode  || Forge.advStartup ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
             g.setAlphaComposite(oldAlpha);
             float xmod = Forge.getScreenHeight() > 2000 ? 1.5f : 1f;
             xmod *= 21-(20*percentage);
-            if (FSkin.getLogo() != null) {
-                g.drawImage(FSkin.getLogo(), Forge.getScreenWidth()/2 - (FSkin.getLogo().getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkin.getLogo().getHeight()*xmod)/2, FSkin.getLogo().getWidth()*xmod, FSkin.getLogo().getHeight()*xmod);
+            if (logo != null) {
+                g.drawImage(logo, Forge.getScreenWidth()/2 - (logo.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (logo.getHeight()*xmod)/2, logo.getWidth()*xmod, logo.getHeight()*xmod);
             } else {
                 g.drawImage(FSkinImage.LOGO,Forge.getScreenWidth()/2 - (FSkinImage.LOGO.getWidth()*xmod)/2, Forge.getScreenHeight()/2 - (FSkinImage.LOGO.getHeight()*xmod)/1.5f, FSkinImage.LOGO.getWidth()*xmod, FSkinImage.LOGO.getHeight()*xmod);
             }

@@ -160,7 +160,7 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.equals("Defending")) {
-            if (!game.getCombat().getAttackersAndDefenders().values().contains(player)) {
+            if (game.getCombat() == null || !game.getCombat().getAttackersAndDefenders().values().contains(player)) {
                 return false;
             }
         } else if (property.equals("LostLifeThisTurn")) {

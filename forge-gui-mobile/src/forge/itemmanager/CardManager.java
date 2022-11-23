@@ -2,7 +2,6 @@ package forge.itemmanager;
 
 import java.util.Map.Entry;
 
-import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
@@ -49,8 +48,7 @@ public class CardManager extends ItemManager<PaperCard> {
 
     public static void addDefaultFilters(final ItemManager<? super PaperCard> itemManager) {
         itemManager.addFilter(new CardColorFilter(itemManager));
-        if (!Forge.isMobileAdventureMode)
-            itemManager.addFilter(new CardFormatFilter(itemManager));
+        itemManager.addFilter(new CardFormatFilter(itemManager));
         itemManager.addFilter(new CardTypeFilter(itemManager));
     }
 

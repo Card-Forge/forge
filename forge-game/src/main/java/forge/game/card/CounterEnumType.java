@@ -294,6 +294,8 @@ public enum CounterEnumType {
     P2P2("+2/+2", "+2/+2", 96, 226, 23),
 
     QUEST("QUEST", 251, 189, 0),
+    
+    REPRIEVE("REPR", 240, 120, 50),
 
     RITUAL("RITUAL", 155, 17, 30),
 

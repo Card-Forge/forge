@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.math.Vector2;
-import forge.adventure.scene.DuelScene;
+import forge.adventure.scene.GameScene;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
 import forge.card.CardImageRenderer;
@@ -807,7 +807,7 @@ public class MatchScreen extends FScreen {
     FSkinTexture getBG() {
         if (Forge.isMobileAdventureMode) {
             //System.out.println("Adventure Location: "+DuelScene.instance().getCurrentLocation());
-            switch(DuelScene.instance().getCurrentLocation()) {
+            switch(GameScene.instance().getAdventurePlayerLocation(false)) {
                 case "green":
                     return FSkinTexture.ADV_BG_FOREST;
                 case "black":

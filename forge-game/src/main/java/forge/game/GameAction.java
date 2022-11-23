@@ -2430,7 +2430,7 @@ public class GameAction {
                     }
                     if (c.isPlaneswalker()) {
                         int lethalPW = c.getCurrentLoyalty();
-                        // 120.10
+                        // CR 120.10
                         lethal = c.isCreature() ? Math.min(lethal, lethalPW) : lethalPW;
                     }
                     lethalDamage.put(c, lethal);
@@ -2442,6 +2442,7 @@ public class GameAction {
                 sourceLKI.getDamageHistory().registerDamage(e.getValue(), isCombat, sourceLKI, e.getKey(), lkiCache);
             }
 
+            // CR 702.15e
             if (sum > 0 && sourceLKI.hasKeyword(Keyword.LIFELINK)) {
                 sourceLKI.getController().gainLife(sum, sourceLKI, cause);
             }
