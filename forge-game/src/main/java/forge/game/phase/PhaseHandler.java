@@ -411,10 +411,10 @@ public class PhaseHandler implements java.io.Serializable {
                         c.onCleanupPhase(playerTurn);
                     }
 
-                    endCombat(); //Repeat here in case Time Stop et. al. ends combat early
                     game.getEndOfTurn().executeUntil();
                     game.getEndOfTurn().executeUntilEndOfPhase(playerTurn);
                     game.getEndOfTurn().registerUntilEndCommand(playerTurn);
+                    game.getEndOfCombat().registerUntilEndCommand(playerTurn);
 
                     for (Player player : game.getPlayers()) {
                         player.getController().autoPassCancel(); // autopass won't wrap to next turn
@@ -1237,9 +1237,9 @@ public class PhaseHandler implements java.io.Serializable {
 
     public void endCombat() {
         game.getEndOfCombat().executeUntil();
+        game.getEndOfCombat().executeUntilEndOfPhase(playerTurn);
         if (combat != null) {
             combat.endCombat();
-            game.getEndOfCombat().executeUntil(playerTurn);
             combat = null;
         }
         game.updateCombatForView();
