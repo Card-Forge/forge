@@ -1,0 +1,8 @@
+Name:Giant Ladybug
+ManaCost:2 G
+Types:Creature Insect
+PT:4/1
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for a basic land card, reveal it, then shuffle and put that card on top.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Library | Destination$ Library | LibraryPosition$ 0 | ChangeType$ Land.Basic | ChangeNum$ 1 | ShuffleNonMandatory$ True
+Oracle:Reach\nWhen Giant Ladybug enters the battlefield, you may search your library for a basic land card, reveal it, then shuffle and put that card on top.
