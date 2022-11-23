@@ -2073,6 +2073,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 return testFailed;
             }
         }
+        else if (incR[0].equals("Ability")) {
+            if (!root.isAbility()) {
+                return testFailed;
+            }
+        }
         else if (incR[0].equals("Instant")) {
             if (!root.getCardState().getType().isInstant()) {
                 return testFailed;
