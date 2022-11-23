@@ -1,0 +1,12 @@
+Name:Merfolk Pupil
+ManaCost:1 U
+Types:Creature Merfolk Wizard
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME enters the battlefield, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
+A:AB$ Draw | Cost$ 1 U  ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | SubAbility$ DBDiscard | SpellDescription$ Draw a card, then discard a card.
+SVar:SacMe:2
+SVar:DiscardMe:2
+DeckHas:Ability$Discard|Graveyard
+Oracle:When Merfolk Pupil enters the battlefield, draw a card, then discard a card.\n{1}{U}, Exile Merfolk Pupil from your graveyard: Draw a card, then discard a card.

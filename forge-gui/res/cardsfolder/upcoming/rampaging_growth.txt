@@ -1,0 +1,7 @@
+Name:Rampaging Growth
+ManaCost:3 G
+Types:Instant
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | RememberChanged$ True | ChangeNum$ 1 | SubAbility$ DBAnimate | SpellDescription$ Search your library for a basic land card and put that card onto the battlefield, then shuffle. Until end of turn, that land becomes a 4/3 Insect creature with reach and haste. It's still a land. 
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Power$ 4 | Toughness$ 3 | Types$ Creature,Insect | Colors$ Green | Keywords$ Haste & Reach | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+Oracle:Search your library for a basic land card and put that card onto the battlefield, then shuffle. Until end of turn, that land becomes a 4/3 Insect creature with reach and haste. It's still a land. 
