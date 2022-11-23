@@ -4,7 +4,7 @@ Types:Creature Cat Angel
 PT:1/1
 K:Flying
 T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | FirstTime$ True | Execute$ TrigCounter | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability for the first time each turn, put a +1/+1 counter on it.
-SVar:TrigCounter:DB$ PutCounter| Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
 S:Mode$ Continuous | Affected$ Card.Self+counters_GE3_P1P1 | AddKeyword$ Flying & Vigilance | Description$ As long as CARDNAME has three or more +1/+1 counters on it, it has flying.
 DeckHas:Ability$Counters & Keyword$Flying
 Oracle:Flying\nWhenever CARDNAME becomes the target of a spell or ability for the first time each turn, put a +1/+1 counter on it.\nAs long as CARDNAME has three or more +1/+1 counters on it, it has flying.
