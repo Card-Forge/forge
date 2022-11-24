@@ -1,0 +1,13 @@
+Name:Kenessos, Priest of Thassa
+ManaCost:1 U
+Types:Legendary Creature Merfolk Cleric
+PT:1/3
+R:Event$ Scry | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ ScryP1 | Description$ If you would scry a number of cards, scry that many cards plus one instead.
+SVar:ScryP1:DB$ ReplaceEffect | VarName$ Num | VarValue$ X
+SVar:X:ReplaceCount$Num/Plus.1
+A:AB$ Dig | Cost$ 3 GU | DigNum$ 1 | ChangeNum$ 1 | Optional$ True | ChangeValid$ Creature.Kraken,Creature.Leviathan,Creature.Octopus,Creature.Serpent | ForceRevealToController$ True | AILogic$ AlwaysConfirm | DestinationZone$ Battlefield | LibraryPosition2$ 0 | RememberMovedToZone$ 2 | SubAbility$ DBBottom | StackDescription$ {p:You} looks at the top card of their library. If it's a Kraken, Leviathan, Octopus, or Serpent creature card, they may put it onto the battlefield. | SpellDescription$ Look at the top card of your library. If it's a Kraken, Leviathan, Octopus, or Serpent creature card, you may put it onto the battlefield.
+SVar:DBBottom:DB$ ChangeZone | ConditionDefined$ Remembered | ConditionPresent$ Card | Defined$ Remembered | Origin$ Library | Destination$ Library | LibraryPosition$ -1 | Optional$ True | OptionalPrompt$ Put that card on the bottom of your library? | SubAbility$ DBCleanup | StackDescription$ If they don't put the card onto the battlefield, they may put it on the bottom of their library. | SpellDescription$ If you don't put the card onto the battlefield, you may put it on the bottom of your library.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AI:RemoveDeck:Random
+DeckHints:Type$Kraken|Leviathan|Octopus|Serpent
+Oracle:If you would scry a number of cards, scry that many cards plus one instead.\n{3}{G/U}: Look at the top card of your library. If it's a Kraken, Leviathan, Octopus, or Serpent creature card, you may put it onto the battlefield. If you don't put the card onto the battlefield, you may put it on the bottom of your library.
