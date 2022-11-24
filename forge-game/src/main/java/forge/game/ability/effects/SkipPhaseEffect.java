@@ -15,7 +15,6 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 
 public class SkipPhaseEffect extends SpellAbilityEffect {
     
@@ -59,7 +58,7 @@ public class SkipPhaseEffect extends SpellAbilityEffect {
             final String duration, final String phase, final String step) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
-        final String name = CardTranslation.getTranslatedName(hostCard.getName()) + "'s Effect";
+        final String name = hostCard + "'s Effect";
         final String image = hostCard.getImageKey();
         final boolean isNextThisTurn = duration != null && duration.equals("NextThisTurn");
 

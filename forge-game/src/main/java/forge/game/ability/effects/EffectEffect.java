@@ -27,7 +27,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 import forge.util.TextUtil;
 import forge.util.collect.FCollection;
 
@@ -114,7 +113,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
         String name = sa.getParam("Name");
         if (name == null) {
-            name = CardTranslation.getTranslatedName(hostCard.getName()) + (sa.hasParam("Boon") ? "'s Boon" : "'s Effect");
+            name = hostCard + (sa.hasParam("Boon") ? "'s Boon" : "'s Effect");
         }
 
         // Unique Effects shouldn't be duplicated
