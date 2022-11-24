@@ -1,0 +1,10 @@
+Name:Chains of Custody
+ManaCost:2 W
+Types:Enchantment Aura
+K:Enchant creature you control
+A:SP$ Attach | ValidTgts$ Creature.YouCtrl | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target nonland permanent an opponent controls until CARDNAME leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls | Duration$ UntilHostLeavesPlay
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Ward:2 | Description$ Enchanted creature has ward {2}. (Whenever enchanted creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.) 
+SVar:PlayMain1:TRUE
+Oracle:Enchant creature you control\nWhen Chains of Custody enters the battlefield, exile target nonland permanent an opponent controls until Chains of Custody leaves the battlefield.\nEnchanted creature has ward {2}. Ward {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)
