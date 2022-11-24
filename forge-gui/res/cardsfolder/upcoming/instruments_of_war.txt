@@ -1,4 +1,4 @@
-Name:War Instrument
+Name:Instruments of War
 ManaCost:4
 Types:Artifact
 K:Flash
