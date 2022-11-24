@@ -24,7 +24,103 @@ public class Shaders {
             + "   v_texCoords = " + ShaderProgram.TEXCOORD_ATTRIBUTE + "0;\n"
             + "   gl_Position =  u_projTrans * " + ShaderProgram.POSITION_ATTRIBUTE + ";\n"
             + "}\n";
-
+    /*
+    * Test Pixelate shader
+    *
+    **/
+    public static final String vertPixelateShader = "attribute vec4 a_position;\n" +
+            "attribute vec4 a_color;\n" +
+            "attribute vec2 a_texCoord0;\n" +
+            "\n" +
+            "uniform mat4 u_projTrans;\n" +
+            "\n" +
+            "varying vec4 v_color;\n" +
+            "varying vec2 v_texCoords;\n" +
+            "\n" +
+            "void main() {\n" +
+            "    v_color = a_color;\n" +
+            "    v_texCoords = a_texCoord0;\n" +
+            "    gl_Position = u_projTrans * a_position;\n" +
+            "}";
+    public static final String fragPixelateShader = "#ifdef GL_ES\n" +
+            "#define PRECISION mediump\n" +
+            "precision PRECISION float;\n" +
+            "precision PRECISION int;\n" +
+            "#else\n" +
+            "#define PRECISION\n" +
+            "#endif\n" +
+            "\n" +
+            "uniform sampler2D u_texture;\n" +
+            "uniform float u_cellSize;\n" +
+            "uniform vec2 u_resolution;\n" +
+            "varying vec4 v_color;\n" +
+            "\n" +
+            "void main() {\n" +
+            "\tvec2 p = floor(gl_FragCoord.xy/u_cellSize) * u_cellSize;\n" +
+            "\tvec4 texColor = texture2D(u_texture, p/u_resolution.xy);\n" +
+            "\tgl_FragColor = v_color * texColor;\n" +
+            "}";
+    public static final String fragPixelateShaderWarp = "#ifdef GL_ES\n" +
+            "precision mediump float;\n" +
+            "#endif\n" +
+            "\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform sampler2D u_texture;\n" +
+            "\n" +
+            "uniform float u_time;\n" +
+            "uniform float u_speed;\n" +
+            "uniform float u_amount;\n" +
+            "uniform float u_cellSize;\n" +
+            "uniform vec2 u_resolution;\n" +
+            "uniform vec2 u_viewport;\n" +
+            "uniform vec2 u_position;\n" +
+            "\n" +
+            "float random2d(vec2 n) {\n" +
+            "    return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);\n" +
+            "}\n" +
+            "\n" +
+            "float randomRange (in vec2 seed, in float min, in float max) {\n" +
+            "    return min + random2d(seed) * (max - min);\n" +
+            "}\n" +
+            "\n" +
+            "float insideRange(float v, float bottom, float top) {\n" +
+            "   return step(bottom, v) - step(top, v);\n" +
+            "}\n" +
+            "\n" +
+            "void main()\n" +
+            "{\n" +
+            "    float time = floor(u_time * u_speed * 60.0);\n" +
+            "\n" +
+            "    vec3 outCol = texture2D(u_texture, v_texCoords).rgb;\n" +
+            "\n" +
+            "    float maxOffset = u_amount/2.0;\n" +
+            "    for (float i = 0.0; i < 2.0; i += 1.0) {\n" +
+            "        float sliceY = random2d(vec2(time, 2345.0 + float(i)));\n" +
+            "        float sliceH = random2d(vec2(time, 9035.0 + float(i))) * 0.25;\n" +
+            "        float hOffset = randomRange(vec2(time, 9625.0 + float(i)), -maxOffset, maxOffset);\n" +
+            "        vec2 uvOff = v_texCoords;\n" +
+            "        uvOff.x += hOffset;\n" +
+            "        if (insideRange(v_texCoords.y, sliceY, fract(sliceY+sliceH)) == 1.0){\n" +
+            "            outCol = texture2D(u_texture, uvOff).rgb;\n" +
+            "        }\n" +
+            "    }\n" +
+            "\n" +
+            "    float maxColOffset = u_amount / 6.0;\n" +
+            "    float rnd = random2d(vec2(time , 9545.0));\n" +
+            "    vec2 colOffset = vec2(randomRange(vec2(time , 9545.0), -maxColOffset, maxColOffset),\n" +
+            "                       randomRange(vec2(time , 7205.0), -maxColOffset, maxColOffset));\n" +
+            "    if (rnd < 0.33) {\n" +
+            "        outCol.r = texture2D(u_texture, v_texCoords + colOffset).r;\n" +
+            "    } else if (rnd < 0.66) {\n" +
+            "        outCol.g = texture2D(u_texture, v_texCoords + colOffset).g;\n" +
+            "    } else {\n" +
+            "        outCol.b = texture2D(u_texture, v_texCoords + colOffset).b;\n" +
+            "    }\n" +
+            "\n" +
+            "\tvec2 p = floor(gl_FragCoord.xy/u_cellSize) * u_cellSize;\n" +
+            "\tvec4 texColor = texture2D(u_texture, p/u_resolution.xy);\n" +
+            "    gl_FragColor = mix(vec4(outCol, 1.0), texColor, 0.6);\n" +
+            "}";
     /**
      * A simple shader that uses additive blending with "normal" RGBA colors (alpha is still multiplicative).
      * With the default SpriteBatch ShaderProgram, white is the neutral color, 50% gray darkens a color by about 50%,
