@@ -695,7 +695,7 @@ public class PlayerControllerAi extends PlayerController {
     public boolean payManaOptional(Card c, Cost cost, SpellAbility sa, String prompt, ManaPaymentPurpose purpose) {
         // TODO replace with EmptySa
         final Ability ability = new AbilityStatic(c, cost, null) { @Override public void resolve() {} };
-        ability.setActivatingPlayer(c.getController());
+        ability.setActivatingPlayer(c.getController(), true);
         ability.setCardState(sa.getCardState());
 
         // FIXME: This is a hack to check if the AI can play the "exile from library" pay costs (Cumulative Upkeep,
@@ -1086,7 +1086,7 @@ public class PlayerControllerAi extends PlayerController {
         final Card source = sa.getHostCard();
         // TODO replace with EmptySa
         final Ability emptyAbility = new AbilityStatic(source, cost, sa.getTargetRestrictions()) { @Override public void resolve() { } };
-        emptyAbility.setActivatingPlayer(player);
+        emptyAbility.setActivatingPlayer(player, true);
         emptyAbility.setTriggeringObjects(sa.getTriggeringObjects());
         emptyAbility.setSVars(sa.getSVars());
         emptyAbility.setCardState(sa.getCardState());

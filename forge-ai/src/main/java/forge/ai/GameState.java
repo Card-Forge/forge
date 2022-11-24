@@ -907,7 +907,6 @@ public abstract class GameState {
                     for (SpellAbility ab : saList) {
                         if (ab.getDescription().startsWith("Awaken")) {
                             ab.setActivatingPlayer(c.getController());
-                            ab.getSubAbility().setActivatingPlayer(c.getController());
                             // target for Awaken is set in its first subability
                             handleScriptedTargetingForSA(game, ab.getSubAbility(), tgtID);
                             sa = kwName.equals("AwakenOnly") ? ab.getSubAbility() : ab;

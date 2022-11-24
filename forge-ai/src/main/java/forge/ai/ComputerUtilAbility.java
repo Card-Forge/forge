@@ -91,7 +91,7 @@ public class ComputerUtilAbility {
         List<SpellAbility> originListWithAddCosts = Lists.newArrayList();
         for (SpellAbility sa : originList) {
             // If this spell has alternative additional costs, add them instead of the unmodified SA itself
-            sa.setActivatingPlayer(player);
+            sa.setActivatingPlayer(player, true);
             originListWithAddCosts.addAll(GameActionUtil.getAdditionalCostSpell(sa));
         }
 
@@ -118,7 +118,7 @@ public class ComputerUtilAbility {
 
         final List<SpellAbility> result = Lists.newArrayList();
         for (SpellAbility sa : newAbilities) {
-            sa.setActivatingPlayer(player);
+            sa.setActivatingPlayer(player, true);
 
             // Optional cost selection through the AI controller
             boolean choseOptCost = false;

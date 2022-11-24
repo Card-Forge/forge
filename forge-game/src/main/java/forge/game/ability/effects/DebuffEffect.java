@@ -69,6 +69,10 @@ public class DebuffEffect extends SpellAbilityEffect {
         final long timestamp = game.getNextTimestamp();
 
         for (final Card tgtC : getTargetCards(sa)) {
+            if (tgtC.isPhasedOut()) {
+                continue;
+            }
+
             final List<String> addedKW = Lists.newArrayList();
             final List<String> removedKW = Lists.newArrayList();
             if (tgtC.isInPlay() && (!sa.usesTargeting() || tgtC.canBeTargetedBy(sa))) {

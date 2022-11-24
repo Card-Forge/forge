@@ -20,7 +20,7 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
             return false;
         }
 
-        trigsa.setActivatingPlayer(ai);
+        trigsa.setActivatingPlayer(ai, true);
 
         if (trigsa instanceof AbilitySub) {
             return SpellApiToAi.Converter.get(trigsa.getApi()).chkDrawbackWithSubs(ai, (AbilitySub)trigsa);
@@ -48,7 +48,7 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
         }
 
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        trigsa.setActivatingPlayer(ai);
+        trigsa.setActivatingPlayer(ai, true);
 
         return aic.doTrigger(trigsa, !"You".equals(sa.getParamOrDefault("OptionalDecider", "You")));
     }
@@ -65,7 +65,7 @@ public class ImmediateTriggerAi extends SpellAbilityAi {
             return false;
         }
 
-        trigsa.setActivatingPlayer(ai);
+        trigsa.setActivatingPlayer(ai, true);
         return AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
     }
 

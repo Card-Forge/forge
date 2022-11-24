@@ -351,6 +351,10 @@ public class WrappedAbility extends Ability {
     public void setActivatingPlayer(final Player player) {
         sa.setActivatingPlayer(player);
     }
+    @Override
+    public boolean setActivatingPlayer(final Player player, final boolean lki) {
+        return sa.setActivatingPlayer(player, lki);
+    }
 
     @Override
     public String getDescription() {

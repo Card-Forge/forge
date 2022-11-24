@@ -26,7 +26,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
         if (trigsa == null) {
             return false;
         }
-        trigsa.setActivatingPlayer(ai);
+        trigsa.setActivatingPlayer(ai, true);
 
         if (trigsa instanceof AbilitySub) {
             return SpellApiToAi.Converter.get(trigsa.getApi()).chkDrawbackWithSubs(ai, (AbilitySub)trigsa);
@@ -43,7 +43,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
         }
 
         AiController aic = ((PlayerControllerAi)ai.getController()).getAi();
-        trigsa.setActivatingPlayer(ai);
+        trigsa.setActivatingPlayer(ai, true);
 
         if (!sa.hasParam("OptionalDecider")) {
             return aic.doTrigger(trigsa, true);
@@ -164,7 +164,7 @@ public class DelayedTriggerAi extends SpellAbilityAi {
         if (trigsa == null) {
             return false;
         }
-        trigsa.setActivatingPlayer(ai);
+        trigsa.setActivatingPlayer(ai, true);
         return AiPlayDecision.WillPlay == ((PlayerControllerAi)ai.getController()).getAi().canPlaySa(trigsa);
     }
 

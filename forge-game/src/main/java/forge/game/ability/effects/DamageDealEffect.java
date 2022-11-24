@@ -269,6 +269,9 @@ public class DamageDealEffect extends DamageBaseEffect {
                         // timestamp different or not in play
                         continue;
                     }
+                    if (c.isPhasedOut()) {
+                        continue;
+                    }
                     if (!sa.usesTargeting() || gc.canBeTargetedBy(sa)) {
                         internalDamageDeal(sa, sourceLKI, gc, dmg, damageMap);
                     }

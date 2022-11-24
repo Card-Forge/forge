@@ -84,7 +84,7 @@ public class SpellAbilityPicker {
             if (sa.isManaAbility()) {
                 continue;
             }
-            sa.setActivatingPlayer(player);
+            sa.setActivatingPlayer(player, true);
 
             AiPlayDecision opinion = canPlayAndPayForSim(sa);
             // print("  " + opinion + ": " + sa);

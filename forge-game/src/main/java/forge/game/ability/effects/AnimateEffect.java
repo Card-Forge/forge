@@ -168,6 +168,11 @@ public class AnimateEffect extends AnimateEffectBase {
         }
 
         for (final Card c : tgts) {
+            // CR 702.26e
+            if (c.isPhasedOut()) {
+                continue;
+            }
+
             doAnimate(c, sa, power, toughness, types, removeTypes, finalColors,
                     keywords, removeKeywords, hiddenKeywords,
                     abilities, triggers, replacements, stAbs, timestamp);

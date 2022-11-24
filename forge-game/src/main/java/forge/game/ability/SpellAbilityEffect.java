@@ -750,8 +750,7 @@ public abstract class SpellAbilityEffect {
             CardCollectionView discardedByPlayer = discardedMap.get(p);
             if (!discardedByPlayer.isEmpty()) {
                 boolean firstDiscard = p.getNumDiscardedThisTurn() - discardedByPlayer.size() == 0;
-                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                runParams.put(AbilityKey.Player, p);
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
                 runParams.put(AbilityKey.Cards, discardedByPlayer);
                 runParams.put(AbilityKey.Cause, sa);
                 runParams.put(AbilityKey.FirstTime, firstDiscard);

@@ -15,7 +15,6 @@ import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerHandler;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 
 public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
 
@@ -25,7 +24,7 @@ public abstract class RegenerateBaseEffect extends SpellAbilityEffect {
 
         // create Effect for Regeneration
         final Card eff = createEffect(
-                sa, sa.getActivatingPlayer(), CardTranslation.getTranslatedName(hostCard.getName()) + "'s Regeneration", hostCard.getImageKey());
+                sa, sa.getActivatingPlayer(), hostCard + "'s Regeneration", hostCard.getImageKey());
 
         eff.addRemembered(list);
         addForgetOnMovedTrigger(eff, "Battlefield");

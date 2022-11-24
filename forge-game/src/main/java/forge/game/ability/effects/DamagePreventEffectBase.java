@@ -17,7 +17,6 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
-import forge.util.CardTranslation;
 import forge.util.TextUtil;
 
 public abstract class DamagePreventEffectBase extends SpellAbilityEffect {
@@ -25,7 +24,7 @@ public abstract class DamagePreventEffectBase extends SpellAbilityEffect {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Player player = hostCard.getController();
-        final String name = CardTranslation.getTranslatedName(hostCard.getName()) + "'s Effect";
+        final String name = hostCard + "'s Effect";
         final String image = hostCard.getImageKey();
         StringBuilder sb = new StringBuilder("Event$ DamageDone | ActiveZones$ Command | ValidTarget$ ");
         sb.append((o instanceof Card ? "Card.IsRemembered" : "Player.IsRemembered"));
