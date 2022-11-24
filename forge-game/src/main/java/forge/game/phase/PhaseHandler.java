@@ -243,10 +243,10 @@ public class PhaseHandler implements java.io.Serializable {
                 return playerTurn.isSkippingCombat();
 
             case COMBAT_DECLARE_BLOCKERS:
-                if (combat != null && combat.getAttackers().isEmpty()) {
+                if (inCombat() && combat.getAttackers().isEmpty()) {
                     endCombat();
                 }
-                // Fall through
+                //$FALL-THROUGH$
             case COMBAT_FIRST_STRIKE_DAMAGE:
             case COMBAT_DAMAGE:
                 return !inCombat();
@@ -484,15 +484,12 @@ public class PhaseHandler implements java.io.Serializable {
 
             case COMBAT_END:
                 GameEventCombatEnded eventEndCombat = null;
-                if (combat != null) {
+                if (inCombat()) {
                     List<Card> attackers = combat.getAttackers();
                     List<Card> blockers = combat.getAllBlockers();
                     eventEndCombat = new GameEventCombatEnded(attackers, blockers);
                 }
                 endCombat();
-                for (Player player : game.getPlayers()) {
-                    player.resetCombatantsThisCombat();
-                }
 
                 if (eventEndCombat != null) {
                     game.fireEvent(eventEndCombat);
@@ -1195,17 +1192,12 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final void endCombatPhaseByEffect() {
-        if (!inCombat()) {
-            return;
-        }
-        endCombat();
         game.getAction().checkStateEffects(true);
         setPhase(PhaseType.COMBAT_END);
         advanceToNextPhase();
     }
 
     public final void endTurnByEffect() {
-        endCombat();
         extraPhases.clear();
         setPhase(PhaseType.CLEANUP);
         onPhaseBegin();
@@ -1236,9 +1228,12 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public void endCombat() {
+        for (Player player : game.getPlayers()) {
+            player.resetCombatantsThisCombat();
+        }
         game.getEndOfCombat().executeUntil();
         game.getEndOfCombat().executeUntilEndOfPhase(playerTurn);
-        if (combat != null) {
+        if (inCombat()) {
             combat.endCombat();
             combat = null;
         }
