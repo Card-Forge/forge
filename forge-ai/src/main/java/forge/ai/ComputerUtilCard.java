@@ -687,7 +687,7 @@ public class ComputerUtilCard {
                     if (!ComputerUtilCost.canPayCost(sa, opp, sa.isTrigger())) {
                         continue;
                     }
-                    sa.setActivatingPlayer(opp);
+                    sa.setActivatingPlayer(opp, true);
                     if (sa.canTarget(card)) {
                         continue;
                     }

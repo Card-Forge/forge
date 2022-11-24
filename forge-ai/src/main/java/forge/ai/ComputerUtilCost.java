@@ -526,7 +526,7 @@ public class ComputerUtilCost {
      */
     public static boolean canPayCost(final SpellAbility sa, final Player player, final boolean effect) {
         if (sa.getActivatingPlayer() == null) {
-            sa.setActivatingPlayer(player); // complaints on NPE had came before this line was added.
+            sa.setActivatingPlayer(player, true); // complaints on NPE had came before this line was added.
         }
 
         final boolean cannotBeCountered = !CardFactoryUtil.isCounterable(sa.getHostCard());

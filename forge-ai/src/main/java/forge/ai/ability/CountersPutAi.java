@@ -427,7 +427,7 @@ public class CountersPutAi extends CountersAi {
                 }
 
                 // need to set Activating player
-                oa.setActivatingPlayer(ai);
+                oa.setActivatingPlayer(ai, true);
                 CardCollection targets = CardLists.getTargetableCards(ai.getOpponents().getCreaturesInPlay(), oa);
 
                 if (!targets.isEmpty()) {

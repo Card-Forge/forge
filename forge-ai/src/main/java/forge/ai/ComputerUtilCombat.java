@@ -1253,7 +1253,7 @@ public class ComputerUtilCombat {
                 continue;
             }
 
-            sa.setActivatingPlayer(source.getController());
+            sa.setActivatingPlayer(source.getController(), true);
 
             if (sa.hasParam("Cost")) {
                 if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
@@ -1433,7 +1433,7 @@ public class ComputerUtilCombat {
             if (sa == null) {
                 continue;
             }
-            sa.setActivatingPlayer(source.getController());
+            sa.setActivatingPlayer(source.getController(), true);
 
             if (sa.usesTargeting()) {
                 continue; // targeted pumping not supported

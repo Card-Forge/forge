@@ -65,7 +65,7 @@ public class PossibleTargetSelector {
         if (targetingSa == null) {
             return;
         }
-        sa.setActivatingPlayer(player);
+        sa.setActivatingPlayer(player, true);
         targetingSa.resetTargets();
         tgt = targetingSa.getTargetRestrictions();
         maxTargets = tgt.getMaxTargets(sa.getHostCard(), targetingSa);
