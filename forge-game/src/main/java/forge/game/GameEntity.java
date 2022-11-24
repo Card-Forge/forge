@@ -228,6 +228,10 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             return false;
         }
 
+        if (attach.isPhasedOut()) {
+            return false;
+        }
+
         // check for rules
         if (attach.isAura() && !canBeEnchantedBy(attach)) {
             return false;

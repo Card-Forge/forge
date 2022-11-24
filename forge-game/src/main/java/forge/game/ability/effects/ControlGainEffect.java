@@ -160,6 +160,9 @@ public class ControlGainEffect extends SpellAbilityEffect {
             if (!tgtC.isInPlay() || !tgtC.canBeControlledBy(newController)) {
                 continue;
             }
+            if (tgtC.isPhasedOut()) {
+                continue;
+            }
 
             if (sa.hasParam("Optional") && !activator.getController().confirmAction(sa, null,
                     Localizer.getInstance().getMessage("lblGainControlConfirm", newController,

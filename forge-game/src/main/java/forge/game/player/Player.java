@@ -827,6 +827,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canReceiveCounters(final CounterType type) {
+        if (!isInGame()) {
+            return false;
+        }
         if (StaticAbilityCantPutCounter.anyCantPutCounter(this, type)) {
             return false;
         }
