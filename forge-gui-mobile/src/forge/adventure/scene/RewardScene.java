@@ -135,6 +135,7 @@ public class RewardScene extends UIScene {
                 continue;
             }
             RewardActor reward = (RewardActor) actor;
+            AdventurePlayer.current().addReward(reward.getReward());
             reward.clearHoldToolTip();
             try {
                 stage.getActors().removeValue(reward, true);
@@ -178,7 +179,6 @@ public class RewardScene extends UIScene {
                     continue;
                 }
                 RewardActor reward = (RewardActor) actor;
-                AdventurePlayer.current().addReward(reward.getReward());
                 if (!reward.isFlipped()) {
                     Timer.schedule(new Timer.Task() {
                         @Override

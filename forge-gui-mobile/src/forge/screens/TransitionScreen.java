@@ -108,7 +108,7 @@ public class TransitionScreen extends FContainer {
                 }
             } else if (matchTransition) {
                 if (textureRegion != null)
-                    g.drawWarpImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), percentage);
+                    g.drawPixelatedWarp(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), 2.6f-(1*percentage));
             } else if (isIntro) {
                 if (textureRegion != null) {
                     if (Forge.advStartup) {
