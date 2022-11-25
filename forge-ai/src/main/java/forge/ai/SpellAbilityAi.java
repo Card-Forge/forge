@@ -118,7 +118,7 @@ public abstract class SpellAbilityAi {
     protected boolean checkAiLogic(final Player ai, final SpellAbility sa, final String aiLogic) {
         if (aiLogic.equals("CheckCondition")) {
             SpellAbility saCopy = sa.copy();
-            saCopy.setActivatingPlayer(ai);
+            saCopy.setActivatingPlayer(ai, true);
             return saCopy.metConditions();
         }
 

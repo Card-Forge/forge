@@ -1,0 +1,6 @@
+Name:Spectral Hunt-Caller
+ManaCost:4 G
+Types:Creature Wolf Spirit
+PT:4/4
+A:AB$ PumpAll | Cost$ 5 G | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | KW$ Trample | SpellDescription$ Creatures you control get +1/+1 and gain trample until end of turn.
+Oracle:{5}{G}: Creatures you control get +1/+1 and gain trample until end of turn.

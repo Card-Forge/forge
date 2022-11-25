@@ -423,6 +423,11 @@ public class PumpEffect extends SpellAbilityEffect {
         for (int j = 0; j < size; j++) {
             final Card tgtC = tgtCards.get(j);
 
+            // CR 702.26e
+            if (tgtC.isPhasedOut()) {
+                continue;
+            }
+
             // only pump things in PumpZone
             if (!tgtC.isInZone(pumpZone)) {
                 continue;

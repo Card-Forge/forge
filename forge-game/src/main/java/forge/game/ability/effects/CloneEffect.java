@@ -52,7 +52,7 @@ public class CloneEffect extends SpellAbilityEffect {
         sb.append(" becomes a copy of ").append(cardToCopy).append(".");
 
         return sb.toString();
-    } // end cloneStackDescription()
+    }
 
     @Override
     public void resolve(SpellAbility sa) {
@@ -132,6 +132,10 @@ public class CloneEffect extends SpellAbilityEffect {
             }
         }
 
+        if (tgtCard.isPhasedOut()) {
+            return;
+        }
+
         final Long ts = game.getNextTimestamp();
         tgtCard.addCloneState(CardFactory.getCloneStates(cardToCopy, tgtCard, sa), ts);
 
@@ -189,6 +193,6 @@ public class CloneEffect extends SpellAbilityEffect {
         }
 
         game.fireEvent(new GameEventCardStatsChanged(tgtCard));
-    } // cloneResolve
+    }
 
 }

@@ -45,6 +45,9 @@ public class UntapEffect extends SpellAbilityEffect {
         } else {
             final CardCollection untargetedCards = CardUtil.getRadiance(sa);
             for (final Card tgtC : getTargetCards(sa)) {
+                if (tgtC.isPhasedOut()) {
+                    continue;
+                }
                 if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {
                     continue;
                 }

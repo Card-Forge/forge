@@ -42,6 +42,8 @@ public class Graphics {
     private final ShaderProgram shaderWarp = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("warp.frag"));
     private final ShaderProgram shaderUnderwater = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("underwater.frag"));
     private final ShaderProgram shaderNightDay = new ShaderProgram(Shaders.vertexShaderDayNight, Shaders.fragmentShaderDayNight);
+    private final ShaderProgram shaderPixelate = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPixelateShader);
+    private final ShaderProgram shaderPixelateWarp = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPixelateShaderWarp);
 
     private Texture dummyTexture = null;
 
@@ -819,6 +821,69 @@ public class Graphics {
             setAlphaComposite(oldalpha);
         }
     }
+    public void drawPixelated(FImage image, float x, float y, float w, float h, Float amount) {
+        if (image == null)
+            return;
+        if (amount != null) {
+            batch.end();
+            shaderPixelate.bind();
+            shaderPixelate.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+            shaderPixelate.setUniformf("u_cellSize", amount);
+            batch.setShader(shaderPixelate);
+            batch.begin();
+            //draw
+            image.draw(this, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            drawImage(image, x, y, w, h);
+        }
+    }
+    public void drawPixelated(TextureRegion image, float x, float y, float w, float h, Float amount) {
+        if (image == null)
+            return;
+        if (amount != null) {
+            batch.end();
+            shaderPixelate.bind();
+            shaderPixelate.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
+            shaderPixelate.setUniformf("u_cellSize", amount);
+            batch.setShader(shaderPixelate);
+            batch.begin();
+            //draw
+            batch.draw(image, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            drawImage(image, x, y, w, h);
+        }
+    }
+    public void drawPixelatedWarp(TextureRegion image, float x, float y, float w, float h, float amount) {
+        if (image == null)
+            return;
+        if (amount > 0) {
+            batch.end();
+            shaderPixelateWarp.bind();
+            shaderPixelateWarp.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
+            shaderPixelateWarp.setUniformf("u_cellSize", amount*6);
+            shaderPixelateWarp.setUniformf("u_amount", 0.2f);
+            shaderPixelateWarp.setUniformf("u_speed", 0.5f);
+            shaderPixelateWarp.setUniformf("u_time", amount);
+            batch.setShader(shaderPixelateWarp);
+            batch.begin();
+            //draw
+            batch.draw(image, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            drawImage(image, x, y, w, h);
+        }
+    }
     public void drawWarpImage(Texture image, float x, float y, float w, float h, float time) {
         batch.end();
         shaderWarp.bind();
@@ -828,7 +893,7 @@ public class Graphics {
         batch.setShader(shaderWarp);
         batch.begin();
         //draw
-        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        batch.draw(image, x, y, w, h);
         //reset
         batch.end();
         batch.setShader(null);
@@ -843,7 +908,7 @@ public class Graphics {
         batch.setShader(shaderWarp);
         batch.begin();
         //draw
-        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        batch.draw(image, x, y, w, h);
         //reset
         batch.end();
         batch.setShader(null);

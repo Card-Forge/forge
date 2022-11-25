@@ -148,7 +148,7 @@ public class PlayAi extends SpellAbilityAi {
                 // of which spell was the reason for the choice can be used there
                 for (SpellAbility s : c.getBasicSpells(c.getState(CardStateName.Original))) {
                     Spell spell = (Spell) s;
-                    s.setActivatingPlayer(ai);
+                    s.setActivatingPlayer(ai, true);
                     // timing restrictions still apply
                     if (!s.getRestrictions().checkTimingRestrictions(c, s))
                         continue;

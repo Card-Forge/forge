@@ -579,6 +579,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public boolean changeCardState(final String mode, final String customState, final SpellAbility cause) {
+        if (isPhasedOut()) {
+            return false;
+        }
         if (mode == null)
             return changeToState(CardStateName.smartValueOf(customState));
 
@@ -1434,6 +1437,9 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     @Override
     public final boolean canReceiveCounters(final CounterType type) {
+        if (isPhasedOut()) {
+            return false;
+        }
         if (StaticAbilityCantPutCounter.anyCantPutCounter(this, type)) {
             return false;
         }
@@ -3667,6 +3673,10 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     public final void unattachFromEntity(final GameEntity entity) {
         if (entityAttachedTo == null || !entityAttachedTo.equals(entity)) {
+            return;
+        }
+
+        if (isPhasedOut()) {
             return;
         }
 

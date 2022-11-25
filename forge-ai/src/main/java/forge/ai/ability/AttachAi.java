@@ -121,7 +121,7 @@ public class AttachAi extends SpellAbilityAi {
 
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Chained to the Rocks")) {
             final SpellAbility effectExile = AbilityFactory.getAbility(source.getSVar("TrigExile"), source);
-            effectExile.setActivatingPlayer(ai);
+            effectExile.setActivatingPlayer(ai, true);
             final TargetRestrictions exile_tgt = effectExile.getTargetRestrictions();
             final List<Card> targets = CardUtil.getValidCardsToTarget(exile_tgt, effectExile);
             return !targets.isEmpty();

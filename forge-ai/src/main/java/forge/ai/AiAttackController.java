@@ -1424,7 +1424,7 @@ public class AiAttackController {
                     continue;
                 }
                 if (sa.usesTargeting()) {
-                    sa.setActivatingPlayer(c.getController());
+                    sa.setActivatingPlayer(c.getController(), true);
                     List<Card> validTargets = CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa);
                     if (validTargets.isEmpty()) {
                         missTarget = true;
