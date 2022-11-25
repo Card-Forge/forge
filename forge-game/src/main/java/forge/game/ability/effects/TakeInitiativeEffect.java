@@ -27,9 +27,11 @@ public class TakeInitiativeEffect extends SpellAbilityEffect {
         final String set = sa.getHostCard().getSetCode();
 
         for (final Player p : getTargetPlayers(sa)) {
-            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                p.getGame().getAction().takeInitiative(p, set);
+            if (!p.isInGame()) {
+                continue;
             }
+
+            p.getGame().getAction().takeInitiative(p, set);
         }
     }
 }
