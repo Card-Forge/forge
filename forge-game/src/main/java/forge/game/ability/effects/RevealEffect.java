@@ -29,76 +29,77 @@ public class RevealEffect extends SpellAbilityEffect {
         int cnt = sa.hasParam("NumCards") ? AbilityUtils.calculateAmount(host, sa.getParam("NumCards"), sa) : 1;
 
         for (final Player p : getTargetPlayers(sa)) {
-            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                final CardCollectionView cardsInHand = p.getZone(ZoneType.Hand).getCards();
-                if (cardsInHand.isEmpty()) {
+            if (!p.isInGame()) {
+                continue;
+            }
+            final CardCollectionView cardsInHand = p.getZone(ZoneType.Hand).getCards();
+            if (cardsInHand.isEmpty()) {
+                continue;
+            }
+            final CardCollection revealed = new CardCollection();
+            if (sa.hasParam("Random")) {
+                CardCollection valid = new CardCollection(cardsInHand);
+
+                if (sa.hasParam("RevealValid")) {
+                    valid = CardLists.getValidCards(valid, sa.getParam("RevealValid"), p, host, sa);
+                }
+
+                if (valid.isEmpty())
                     continue;
-                }
-                final CardCollection revealed = new CardCollection();
-                if (sa.hasParam("Random")) {
-                    CardCollection valid = new CardCollection(cardsInHand);
 
-                    if (sa.hasParam("RevealValid")) {
-                        valid = CardLists.getValidCards(valid, sa.getParam("RevealValid"), p, host, sa);
+                if (sa.hasParam("NumCards")) {
+                    final int revealnum = Math.min(cardsInHand.size(), cnt);
+                    for (int i = 0; i < revealnum; i++) {
+                        final Card random = Aggregates.random(valid);
+                        revealed.add(random);
+                        valid.remove(random);
                     }
-
-                    if (valid.isEmpty())
-                        continue;
-
-                    if (sa.hasParam("NumCards")) {
-                        final int revealnum = Math.min(cardsInHand.size(), cnt);
-                        for (int i = 0; i < revealnum; i++) {
-                            final Card random = Aggregates.random(valid);
-                            revealed.add(random);
-                            valid.remove(random);
-                        }
-                    } else {
-                        revealed.add(Aggregates.random(valid));
-                    }
-
-                } else if (sa.hasParam("RevealDefined")) {
-                    revealed.addAll(AbilityUtils.getDefinedCards(host, sa.getParam("RevealDefined"), sa));
-                } else if (sa.hasParam("RevealAllValid")) {
-                    revealed.addAll(CardLists.getValidCards(cardsInHand, sa.getParam("RevealAllValid"), p, host, sa));
                 } else {
-                    CardCollection valid = new CardCollection(cardsInHand);
-
-                    if (sa.hasParam("RevealValid")) {
-                        valid = CardLists.getValidCards(valid, sa.getParam("RevealValid"), p, host, sa);
-                    }
-
-                    if (valid.isEmpty())
-                        continue;
-
-                    if (sa.hasParam("RevealAll")) { //for when cards to reveal are not in hand
-                        revealed.addAll(valid);
-                    } else {
-                        if (cnt > valid.size())
-                            cnt = valid.size();
-
-                        int min = cnt;
-                        if (anyNumber) {
-                            cnt = valid.size();
-                            min = 0;
-                        } else if (optional) {
-                            min = 0;
-                        }
-
-                        revealed.addAll(p.getController().chooseCardsToRevealFromHand(min, cnt, valid));
-                    }
+                    revealed.add(Aggregates.random(valid));
                 }
 
-                if (sa.hasParam("RevealToAll") || sa.hasParam("Random")) {
-                    game.getAction().reveal(revealed, p, false,
-                            sa.getParamOrDefault("RevealTitle", ""));
+            } else if (sa.hasParam("RevealDefined")) {
+                revealed.addAll(AbilityUtils.getDefinedCards(host, sa.getParam("RevealDefined"), sa));
+            } else if (sa.hasParam("RevealAllValid")) {
+                revealed.addAll(CardLists.getValidCards(cardsInHand, sa.getParam("RevealAllValid"), p, host, sa));
+            } else {
+                CardCollection valid = new CardCollection(cardsInHand);
+
+                if (sa.hasParam("RevealValid")) {
+                    valid = CardLists.getValidCards(valid, sa.getParam("RevealValid"), p, host, sa);
+                }
+
+                if (valid.isEmpty())
+                    continue;
+
+                if (sa.hasParam("RevealAll")) { //for when cards to reveal are not in hand
+                    revealed.addAll(valid);
                 } else {
-                    game.getAction().reveal(revealed, p);
-                }
-                for (final Card c : revealed) {
-                    game.getTriggerHandler().runTrigger(TriggerType.Revealed, AbilityKey.mapFromCard(c), false);
-                    if (sa.hasParam("RememberRevealed")) {
-                        host.addRemembered(c);
+                    if (cnt > valid.size())
+                        cnt = valid.size();
+
+                    int min = cnt;
+                    if (anyNumber) {
+                        cnt = valid.size();
+                        min = 0;
+                    } else if (optional) {
+                        min = 0;
                     }
+
+                    revealed.addAll(p.getController().chooseCardsToRevealFromHand(min, cnt, valid));
+                }
+            }
+
+            if (sa.hasParam("RevealToAll") || sa.hasParam("Random")) {
+                game.getAction().reveal(revealed, p, false,
+                        sa.getParamOrDefault("RevealTitle", ""));
+            } else {
+                game.getAction().reveal(revealed, p);
+            }
+            for (final Card c : revealed) {
+                game.getTriggerHandler().runTrigger(TriggerType.Revealed, AbilityKey.mapFromCard(c), false);
+                if (sa.hasParam("RememberRevealed")) {
+                    host.addRemembered(c);
                 }
             }
         }

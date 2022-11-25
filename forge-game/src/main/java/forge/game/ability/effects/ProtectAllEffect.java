@@ -39,7 +39,7 @@ public class ProtectAllEffect extends SpellAbilityEffect {
         }
 
         return sb.toString();
-    } // protectStackDescription()
+    }
 
     @Override
     public void resolve(SpellAbility sa) {
@@ -83,27 +83,24 @@ public class ProtectAllEffect extends SpellAbilityEffect {
         // Deal with permanents
         final String valid = sa.getParamOrDefault("ValidCards", "");
         if (!valid.equals("")) {
-            CardCollectionView list = game.getCardsIn(ZoneType.Battlefield);
-            list = CardLists.getValidCards(list, valid, sa.getActivatingPlayer(), host, sa);
+            CardCollectionView list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), valid, sa.getActivatingPlayer(), host, sa);
 
             for (final Card tgtC : list) {
-                if (tgtC.isInPlay()) {
-                    tgtC.addChangedCardKeywords(gainsKWList, null, false, timestamp, 0, true);
+                tgtC.addChangedCardKeywords(gainsKWList, null, false, timestamp, 0, true);
 
-                    if (!"Permanent".equals(sa.getParam("Duration"))) {
-                        // If not Permanent, remove protection at EOT
-                        final GameCommand untilEOT = new GameCommand() {
-                            private static final long serialVersionUID = -6573962672873853565L;
+                if (!"Permanent".equals(sa.getParam("Duration"))) {
+                    // If not Permanent, remove protection at EOT
+                    final GameCommand untilEOT = new GameCommand() {
+                        private static final long serialVersionUID = -6573962672873853565L;
 
-                            @Override
-                            public void run() {
-                                if (tgtC.isInPlay()) {
-                                    tgtC.removeChangedCardKeywords(timestamp, 0, true);
-                                }
+                        @Override
+                        public void run() {
+                            if (tgtC.isInPlay()) {
+                                tgtC.removeChangedCardKeywords(timestamp, 0, true);
                             }
-                        };
-                        addUntilCommand(sa, untilEOT);
-                    }
+                        }
+                    };
+                    addUntilCommand(sa, untilEOT);
                 }
             }
         }
@@ -111,11 +108,8 @@ public class ProtectAllEffect extends SpellAbilityEffect {
         // Deal with Players
         final String players = sa.getParamOrDefault("ValidPlayers", "");
         if (!players.equals("")) {
-            final List<Player> playerList = AbilityUtils.getDefinedPlayers(host, players, sa);
-            for (final Player player : playerList) {
-                for (final String gain : gains) {
-                    player.addChangedKeywords(ImmutableList.of("Protection from " + gain), ImmutableList.of(), timestamp, 0);
-                }
+            for (final Player player : AbilityUtils.getDefinedPlayers(host, players, sa)) {
+                player.addChangedKeywords(gainsKWList, ImmutableList.of(), timestamp, 0);
 
                 if (!"Permanent".equals(sa.getParam("Duration"))) {
                     // If not Permanent, remove protection at EOT
