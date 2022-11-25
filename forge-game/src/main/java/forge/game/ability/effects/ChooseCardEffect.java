@@ -22,7 +22,6 @@ import forge.game.card.CardPredicates.Presets;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Lang;
@@ -61,7 +60,6 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         final Game game = activator.getGame();
         CardCollection chosen = new CardCollection();
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         List<ZoneType> choiceZone = Lists.newArrayList(ZoneType.Battlefield);
@@ -101,7 +99,10 @@ public class ChooseCardEffect extends SpellAbilityEffect {
             return;
         }
 
-        for (final Player p : tgtPlayers) {
+        for (Player p : tgtPlayers) {
+            if (!p.isInGame()) {
+                p = getNewChooser(sa, activator, p);
+            }
             boolean dontRevealToOwner = true;
             if (sa.hasParam("EachBasicType")) {
                 // Get all lands, 
@@ -212,51 +213,49 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 // Targeted player (p) chooses N creatures that belongs to them
                 CardCollection tgtPlayerCtrl = CardLists.filterControlledBy(choices, p);
                 chosen.addAll(p.getController().chooseCardsForEffect(tgtPlayerCtrl, sa, title + " " + "you control", minAmount, validAmount,
-                    !sa.hasParam("Mandatory"), null));
+                        !sa.hasParam("Mandatory"), null));
                 // Targeted player (p) chooses N creatures that don't belong to them
                 CardCollection notTgtPlayerCtrl = new CardCollection(choices);
                 notTgtPlayerCtrl.removeAll(tgtPlayerCtrl);
                 chosen.addAll(p.getController().chooseCardsForEffect(notTgtPlayerCtrl, sa, title + " " + "you don't control", minAmount, validAmount,
-                    !sa.hasParam("Mandatory"), null));
+                        !sa.hasParam("Mandatory"), null));
 
-            } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (sa.hasParam("AtRandom") && !choices.isEmpty()) {
-                    // don't pass FCollection for direct modification, the Set part would get messed up
-                    chosen = new CardCollection(Aggregates.random(choices, validAmount));
-                    dontRevealToOwner = false;
+            } else if (sa.hasParam("AtRandom") && !choices.isEmpty()) {
+                // don't pass FCollection for direct modification, the Set part would get messed up
+                chosen = new CardCollection(Aggregates.random(choices, validAmount));
+                dontRevealToOwner = false;
+            } else {
+                String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
+                if (sa.hasParam ("ChoiceTitleAppend")) {
+                    String tag = "";
+                    String value = sa.getParam("ChoiceTitleAppend");
+                    if (value.startsWith("Defined ")) {
+                        tag = AbilityUtils.getDefinedPlayers(host, value.substring(8), sa).toString();
+                    } else if (value.equals("ChosenType")) {
+                        tag = host.getChosenType();
+                    }
+                    if (!tag.equals("")) {
+                        title = title + " (" + tag +")";
+                    }
+                }
+                if (sa.hasParam("QuasiLibrarySearch")) {
+                    final Player searched = AbilityUtils.getDefinedPlayers(host,
+                            sa.getParam("QuasiLibrarySearch"), sa).get(0);
+                    final int fetchNum = Math.min(searched.getCardsIn(ZoneType.Library).size(), 4);
+                    CardCollectionView shown = !p.hasKeyword("LimitSearchLibrary")
+                            ? searched.getCardsIn(ZoneType.Library) : searched.getCardsIn(ZoneType.Library, fetchNum);
+                    DelayedReveal delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(searched),
+                            CardTranslation.getTranslatedName(host.getName()) + " - " +
+                                    Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
+                    Card choice = p.getController().chooseSingleEntityForEffect(choices, delayedReveal, sa, title,
+                            !sa.hasParam("Mandatory"), p, null);
+                    if (choice == null) {
+                        return;
+                    }
+                    chosen.add(choice);
                 } else {
-                    String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
-                    if (sa.hasParam ("ChoiceTitleAppend")) {
-                        String tag = "";
-                        String value = sa.getParam("ChoiceTitleAppend");
-                        if (value.startsWith("Defined ")) {
-                            tag = AbilityUtils.getDefinedPlayers(host, value.substring(8), sa).toString();
-                        } else if (value.equals("ChosenType")) {
-                            tag = host.getChosenType();
-                        }
-                        if (!tag.equals("")) {
-                            title = title + " (" + tag +")";
-                        }
-                    }
-                    if (sa.hasParam("QuasiLibrarySearch")) {
-                        final Player searched = AbilityUtils.getDefinedPlayers(host,
-                                sa.getParam("QuasiLibrarySearch"), sa).get(0);
-                        final int fetchNum = Math.min(searched.getCardsIn(ZoneType.Library).size(), 4);
-                        CardCollectionView shown = !p.hasKeyword("LimitSearchLibrary")
-                                ? searched.getCardsIn(ZoneType.Library) : searched.getCardsIn(ZoneType.Library, fetchNum);
-                        DelayedReveal delayedReveal = new DelayedReveal(shown, ZoneType.Library, PlayerView.get(searched),
-                                CardTranslation.getTranslatedName(host.getName()) + " - " +
-                                        Localizer.getInstance().getMessage("lblLookingCardIn") + " ");
-                        Card choice = p.getController().chooseSingleEntityForEffect(choices, delayedReveal, sa, title,
-                                !sa.hasParam("Mandatory"), p, null);
-                        if (choice == null) {
-                            return;
-                        }
-                        chosen.add(choice);
-                    } else {
-                        chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount,
-                                !sa.hasParam("Mandatory"), null));
-                    }
+                    chosen.addAll(p.getController().chooseCardsForEffect(choices, sa, title, minAmount, validAmount,
+                            !sa.hasParam("Mandatory"), null));
                 }
             }
             if (sa.hasParam("Reveal") && !sa.hasParam("SecretlyChoose")) {

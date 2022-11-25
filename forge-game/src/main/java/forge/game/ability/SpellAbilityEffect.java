@@ -818,4 +818,15 @@ public abstract class SpellAbilityEffect {
             game.getEndOfTurn().addUntil(until);
         }
     }
+
+    public Player getNewChooser(final SpellAbility sa, final Player activator, final Player loser) {
+        // CR 800.4g
+        final PlayerCollection options;
+        if (loser.isOpponentOf(activator)) {
+            options = activator.getOpponents();
+        } else {
+            options = activator.getAllOtherPlayers();
+        }
+        return activator.getController().chooseSingleEntityForEffect(options, sa, Localizer.getInstance().getMessage("lblChoosePlayer") , null);
+    }
 }
