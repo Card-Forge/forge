@@ -135,6 +135,9 @@ public class CopyPermanentEffect extends TokenEffectBase {
         }
 
         for (final Player controller : controllers) {
+            if (!controller.isInGame()) {
+                continue;
+            }
             List<Card> tgtCards = Lists.newArrayList();
 
             if (sa.hasParam("ValidSupportedCopy")) {
@@ -231,10 +234,8 @@ public class CopyPermanentEffect extends TokenEffectBase {
                     continue;
                 }
 
-                // if it only targets player, it already got all needed cards from defined
-                if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer() && !c.canBeTargetedBy(sa)) {
-                    continue;
-                }
+                // because copy should be able to copy LKI values, don't handle target and timestamp there
+
                 if (sa.hasParam("ForEach")) {
                     for (Player p : AbilityUtils.getDefinedPlayers(host, sa.getParam("ForEach"), sa)) {
                         Card proto = getProtoType(sa, c, controller);

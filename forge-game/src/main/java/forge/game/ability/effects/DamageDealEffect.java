@@ -272,14 +272,10 @@ public class DamageDealEffect extends DamageBaseEffect {
                     if (c.isPhasedOut()) {
                         continue;
                     }
-                    if (!sa.usesTargeting() || gc.canBeTargetedBy(sa)) {
-                        internalDamageDeal(sa, sourceLKI, gc, dmg, damageMap);
-                    }
+                    internalDamageDeal(sa, sourceLKI, gc, dmg, damageMap);
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
-                    if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                        damageMap.put(sourceLKI, p, dmg);
-                    }
+                    damageMap.put(sourceLKI, p, dmg);
                 }
             }
             for (final Card unTgtC : untargetedCards) {

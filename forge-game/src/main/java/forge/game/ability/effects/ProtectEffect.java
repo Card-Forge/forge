@@ -90,7 +90,7 @@ public class ProtectEffect extends SpellAbilityEffect {
         }
 
         return sb.toString();
-    } // protectStackDescription()
+    }
 
     @Override
     public void resolve(SpellAbility sa) {
@@ -140,11 +140,6 @@ public class ProtectEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            // if this is a target, make sure we can still target now
-            if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {
-                continue;
-            }
-
             tgtC.addChangedCardKeywords(gainsKWList, null, false, timestamp, 0, true);
 
             if (!"Permanent".equals(sa.getParam("Duration"))) {
@@ -186,7 +181,7 @@ public class ProtectEffect extends SpellAbilityEffect {
                 addUntilCommand(sa, untilEOT);
             }
         }
-    } // protectResolve()
+    }
     
     public static List<String> getProtectionList(final SpellAbility sa) {
         final List<String> gains = new ArrayList<>();

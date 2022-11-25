@@ -48,8 +48,7 @@ public class ManaEffect extends SpellAbilityEffect {
         final StringBuilder producedMana = new StringBuilder();
 
         for (Player p : tgtPlayers) {
-            if (sa.usesTargeting() && !p.canBeTargetedBy(sa)) {
-                // Illegal target. Skip.
+            if (!p.isInGame()) {
                 continue;
             }
 

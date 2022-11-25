@@ -1,10 +1,7 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
-import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardDamageMap;
@@ -68,10 +65,6 @@ public class DamageEachEffect extends DamageBaseEffect {
             sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), sa.getActivatingPlayer(), card, sa);
         }
 
-        final List<GameObject> tgts = getTargets(sa, "DefinedPlayers");
-
-        final boolean targeted = sa.usesTargeting();
-
         boolean usedDamageMap = true;
         CardDamageMap damageMap = sa.getDamageMap();
         CardDamageMap preventMap = sa.getPreventMap();
@@ -85,24 +78,21 @@ public class DamageEachEffect extends DamageBaseEffect {
             usedDamageMap = false;
         }
 
-        for (final Object o : tgts) {
+        for (final Object o : getTargetEntities(sa, "DefinedPlayers")) {
             for (final Card source : sources) {
                 final Card sourceLKI = game.getChangeZoneLKIInfo(source);
 
                 // TODO shouldn't that be using Num or something first?
                 final int dmg = AbilityUtils.calculateAmount(source, "X", sa);
-                
+
                 if (o instanceof Card) {
                     final Card c = (Card) o;
-                    if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
+                    if (c.isInPlay()) {
                         damageMap.put(sourceLKI, c, dmg);
                     }
 
                 } else if (o instanceof Player) {
-                    final Player p = (Player) o;
-                    if (!targeted || p.canBeTargetedBy(sa)) {
-                        damageMap.put(sourceLKI, p, dmg);
-                    }
+                    damageMap.put(sourceLKI, (Player) o, dmg);
                 }
             }
         }

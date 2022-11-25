@@ -1,12 +1,9 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
 import forge.game.Game;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
@@ -34,17 +31,10 @@ public class TapAllEffect extends SpellAbilityEffect {
         }
 
         CardCollectionView cards;
-
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
-
         if (!sa.usesTargeting() && !sa.hasParam("Defined")) {
             cards = game.getCardsIn(ZoneType.Battlefield);
         } else {
-            CardCollection cards2 = new CardCollection();
-            for (final Player p : tgtPlayers) {
-                cards2.addAll(p.getCardsIn(ZoneType.Battlefield));
-            }
-            cards = cards2;
+            cards = getTargetPlayers(sa).getCardsIn(ZoneType.Battlefield);
         }
 
         cards = AbilityUtils.filterListByType(cards, sa.getParam("ValidCards"), sa);

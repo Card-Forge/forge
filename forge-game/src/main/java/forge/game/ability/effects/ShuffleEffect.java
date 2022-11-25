@@ -6,7 +6,6 @@ import java.util.List;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.util.Localizer;
 
 public class ShuffleEffect extends SpellAbilityEffect {
@@ -15,16 +14,13 @@ public class ShuffleEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final boolean optional = sa.hasParam("Optional");
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
-
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
-        for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                boolean mustShuffle = !optional || sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblHaveTargetShuffle", p.getName()), null); 
-                if (mustShuffle) 
-                    p.shuffle(sa);
+        for (final Player p : getTargetPlayers(sa)) {
+            if (!p.isInGame()) {
+                continue;
             }
+            boolean mustShuffle = !optional || sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblHaveTargetShuffle", p.getName()), null); 
+            if (mustShuffle) 
+                p.shuffle(sa);
         }
     }
 

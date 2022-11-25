@@ -64,16 +64,17 @@ public class DestroyEffect extends SpellAbilityEffect {
         CardZoneTable table = new CardZoneTable();
         Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (final Card tgtC : tgtCards) {
-            if (tgtC.isInPlay() && (!sa.usesTargeting() || tgtC.canBeTargetedBy(sa))) {
-                Card gameCard = game.getCardState(tgtC, null);
-                // gameCard is LKI in that case, the card is not in game anymore
-                // or the timestamp did change
-                // this should check Self too
-                if (gameCard == null || !tgtC.equalsWithTimestamp(gameCard)) {
-                    continue;
-                }
-                internalDestroy(gameCard, sa, table, cachedMap, params);
+            if (!tgtC.isInPlay()) {
+                continue;
             }
+            Card gameCard = game.getCardState(tgtC, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !tgtC.equalsWithTimestamp(gameCard)) {
+                continue;
+            }
+            internalDestroy(gameCard, sa, table, cachedMap, params);
         }
 
         if (untargetedCards.size() > 1) {

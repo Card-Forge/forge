@@ -58,13 +58,14 @@ public class LifeGainEffect extends SpellAbilityEffect {
         }
 
         for (final Player p : tgtPlayers) {
-            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                if (variableAmount) {
-                    sa.setSVar("AFNotDrawnNum", sa.getSVar("AFNotDrawnNum_" + p.getId()));
-                    lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
-                }
-                p.gainLife(lifeAmount, sa.getHostCard(), sa);
+            if (!p.isInGame()) {
+                continue;
             }
+            if (variableAmount) {
+                sa.setSVar("AFNotDrawnNum", sa.getSVar("AFNotDrawnNum_" + p.getId()));
+                lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
+            }
+            p.gainLife(lifeAmount, sa.getHostCard(), sa);
         }
     }
 

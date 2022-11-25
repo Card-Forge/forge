@@ -199,7 +199,7 @@ public class PumpEffect extends SpellAbilityEffect {
                 sb.append(" ");
             }
 
-            if (sa instanceof AbilitySub & sa.getRootAbility().getTargets().containsAll(tgts)) {
+            if (sa instanceof AbilitySub && sa.getRootAbility().getTargets().containsAll(tgts)) {
                 //try to avoid having the same long list of targets twice in a StackDescription
                 sb.append(tgts.size() == 1 && tgts.get(0) instanceof Card ? "It " : "They ");
             } else {
@@ -266,7 +266,7 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         return sb.toString();
-    } // pumpStackDescription()
+    }
 
     @Override
     public void resolve(final SpellAbility sa) {
@@ -274,7 +274,6 @@ public class PumpEffect extends SpellAbilityEffect {
         final Game game = activator.getGame();
         final Card host = sa.getHostCard();
         final long timestamp = game.getNextTimestamp();
-        List<GameEntity> tgts = Lists.newArrayList();
         List<Card> tgtCards = getCardsfromTargets(sa);
         List<Player> tgtPlayers = getTargetPlayers(sa);
 
@@ -296,8 +295,6 @@ public class PumpEffect extends SpellAbilityEffect {
             keywords = CardFactoryUtil.sharedKeywords(keywords, restrictions, zones, host, sa);
         }
 
-        tgts.addAll(tgtCards);
-        tgts.addAll(tgtPlayers);
         final CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
         if (sa.hasParam("DefinedKW")) {
@@ -433,11 +430,6 @@ public class PumpEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            // if pump is a target, make sure we can still target now
-            if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {
-                continue;
-            }
-
             // substitute specific tgtC mana cost for keyword placeholder CardManaCost
             List<String> affectedKeywords = Lists.newArrayList(keywords);
 
@@ -486,7 +478,7 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         for (Player p : tgtPlayers) {
-            if (!p.canBeTargetedBy(sa)) {
+            if (!p.isInGame()) {
                 continue;
             }
 
@@ -494,5 +486,5 @@ public class PumpEffect extends SpellAbilityEffect {
         }
 
         replaceDying(sa);
-    } // pumpResolve()
+    }
 }
