@@ -7,4 +7,3 @@ SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.Op
 SVar:X:Count$TypeInYourYard.Creature
 DeckHints:Ability$Graveyard|Mill
 Oracle:When Ossuary Rats enters the battlefield, it deals X damage to target creature or planeswalker an opponent controls, where X is the number of creature cards in your graveyard.
-
