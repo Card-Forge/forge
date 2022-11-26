@@ -4,4 +4,4 @@ Types:Artifact Creature
 PT:5/5
 K:Flying
 K:Crew:3
-Oracle:Flying\nCrew 3.
+Oracle:Flying\nCrew 3

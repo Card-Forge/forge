@@ -1,4 +1,4 @@
-Name:Read the Soul
+Name:Soul Read
 ManaCost:3 U
 Types:Instant
 A:SP$ Charm | Choices$ Counter,Draw | CharmNum$ 1
