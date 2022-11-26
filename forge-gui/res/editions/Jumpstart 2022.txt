@@ -6,75 +6,838 @@ Type=Draft
 ScryfallCode=J22
 
 [cards]
+1 R Agrus Kos, Eternal Soldier @Victor Adame Minguez
+2 U Angelic Cub @Miranda Meeks
+3 C Chains of Custody @Bruno Biazotto
 4 U Distinguished Conjurer @Nils Hamm
 5 U Ingenious Leonin @Eric Deschamps
 6 M Lita, Mechanical Engineer @Bartek Fedyczak
 7 U Magnanimous Magistrate @Marie Magny
 8 R Preston, the Vanisher @Christina Kraus
+9 R Alandra, Sky Dreamer @Caroline Gariba
+10 U Biblioplex Kraken @Caio Monteiro
 11 U Hold for Questioning @Samuel Perin
 12 M Isu the Abominable @Victor Adame Minguez
+13 R Kenessos, Priest of Thassa @Joshua Raphael
+14 U Launch Mishap @Kim Sokol
 15 C Merfolk Pupil @Caroline Gariba
 16 M Pirated Copy @Daarken
+17 C Soul Read @Drew Tucker
+18 U Synchronized Eviction @Nicholas Gregory
 19 M Ashcoat of the Shadow Swarm @Christina Kraus
 20 U Conductor of Cacophony @Jason A. Engle
 21 C Creeping Bloodsucker @Antonio José Manzanedo
+22 U Deadly Plot @Peter Polach
 23 U Disciple of Perdition @Alix Branwyn
+24 C Ossuary Rats @Ralph Horsley
 25 R Rodolf Duskbringer @Billy Christian
+26 U Skullslither Worm @Uriah Voth
+27 C Suspicious Shambler @Javier Charro
 28 R Termination Facilitator @Justine Cruz
 29 R Ardoz, Cobbler of War @Kev Walker
+30 M Auntie Blyte, Bad Influence @Tatiana Kirgetova
+31 R Brazen Cannonade @Ralph Horsley
+32 U Coalborn Entity @Liiga Smilshkalne
+33 U Daring Piracy @Manuel Castañón
+34 C Goblin Researcher @Izzy
+35 R Mizzix, Replica Rider @Zoltan Boros
+36 R Ogre Battlecaster @Javier Charro
+37 C Plundering Predator @Lucas Graciano
+38 R Benevolent Hydra @Eric Deschamps
+39 C Giant Ladybug @Marta Nael
 40 M Kibo, Uktabi Prince @Zoltan Boros
 41 U Mild-Mannered Librarian @Justyna Gil
 42 U Primeval Herald @Tatiana Kirgetova
+43 U Rampaging Growth @Mike Jordana
 44 R Runadi, Behemoth Caller @Billy Christian
 45 C Spectral Hunt-Caller @Uriah Voth
 46 U Towering Gibbon @Chris Seaman
+47 R Zask, Skittering Swarmlord @Alexander Ostrowski
 48 C Dutiful Replicator @Alexander Forssberg
 49 C Infernal Idol @Drew Tucker
 50 U Instruments of War @Drew Tucker
 51 U Planar Atlas @Alexander Forssberg
 52 U Arrest @Katana Canata
 53 R Balan, Wandering Knight @Mai Okuma
+54 U Eidolon of Rhetoric
+55 U Emancipation Angel @Hisashi Momose
 56 C Flicker of Fate
 57 U King of the Pride @Inuchiyo Meimaru
+58 U Sage's Reverie
+59 U Valorous Stance @Susumu Kuroi
+60 U Kasmina, Enigmatic Mentor
+61 U Merrow Reejerey @Penguu
 62 U Mirror Image @Yukie Tajima
+63 C Preordain
 64 U Spectral Sailor @Fuzichoco
 65 C Spellstutter Sprite
 66 U Whirler Rogue @I☆LA
 67 C Diabolic Edict @Tetsu Kurosawa
 68 U Feast on the Fallen
+69 U Lord of the Accursed
 70 U Oathsworn Vampire @Border
 71 R Ogre Slumlord
+72 U Plaguecrafter
+73 U Stitcher's Supplier
+74 C Tragic Slip
+75 M Tree of Perdition
+76 C Dragon Fodder @Yoshiya
+77 U Dragon Mage @M.Matsumoto
+78 C Drannith Stinger
 79 M Kiki-Jiki, Mirror Breaker @Ishikawa Kenta
+80 U Rapacious Dragon
+81 U Rigging Runner
+82 C Spear Spewer
+83 C Thermo-Alchemist
+84 C Thrill of Possibility
 85 U Arlinn, Voice of the Pack @Hisashi Momose
+86 C Caustic Caterpillar @Ai Nanahira
+87 U Colossal Majesty @Tetsu Kurosawa
 88 C Elvish Rejuvenator @Shiramine
+89 U Hydra's Growth
+90 C Khalni Heart Expedition
+91 C Ram Through @Moopic
 92 U Thrashing Brontodon @Kemonomichi
+93 M World Breaker @Kemonomichi
 94 U Coldsteel Heart @I☆LA
 95 U Magnifying Glass @Yukihiro Maruo
 96 R Peacewalker Colossus @Hisashi Momose
 97 M Karn Liberated @Dai-XT
+98 L Plains
+99 L Plains
+100 L Plains
+101 L Island
+102 L Island
+103 L Island
+104 L Swamp
+105 L Swamp
+106 L Swamp
+107 L Mountain
+108 L Mountain
+109 L Mountain
+110 L Forest
+111 L Forest
+112 L Forest
+113 C Task Force @Brian Valeza
+114 R Rhystic Study @Tatiana Kirgetova
+115 C Tragic Lesson @Olena Richards
+116 C Wizard Mentor @Ernanda Souza
 117 U Blood Artist @Julie Dillon
 118 U Feast of Blood @Irina Nordsol
 119 U Festering Evil @Samuel Araya
+120 C Ghoul's Feast @Ovidio Cartagena
+121 U Morkrut Banshee @Jodie Muir
+122 U Nezumi Bone-Reader @Leonardo Santanna
+123 R Phyrexian Plaguelord @Raf Kayupov
+124 U Phyrexian Reclamation @Irina Nordsol
+125 U Reassembling Skeleton @Bruno Biazotto
 126 C Renegade Demon @Alexandre Honoré
+127 U Swarm of Bloodflies @Ralph Horsley
+128 C Wakedancer @Mila Pesic
+129 C Aftershock
+130 C Fireslinger
+131 U Flameblade Adept
+132 U Ruin in Their Wake
 133 U Uktabi Orangutan @Milivoj Ćeran
 134 R Wicked Wolf @Steve Ellis
+135 U Clockwork Hydra @Brian Snõddy
+136 U Spawning Pit
+137 U Leechridden Swamp @Drew Tucker
+138 C Acrobatic Maneuver
+139 U Aerial Modification
+140 U Aethershield Artificer
 141 M Ajani, Strength of the Pride @Chris Rallis
 142 U Ajani's Pridemate @Svetlin Velinov
+143 U Alseid of Life's Bounty
+144 R Angel of Flight Alabaster
+145 C Angelic Edict
+146 C Angelic Page
+147 U Angelic Protector
+148 C Anointer of Valor
+149 C Apothecary Geist
+150 R Archon of Justice
+151 R Archon of Sun's Grace
+152 U Attended Healer
+153 C Auramancer
+154 C Basri's Acolyte
+155 C Benalish Honor Guard
+156 C Blessed Defiance
+157 R Blessed Sanctuary
+158 U Blessed Spirits
+159 U Brightmare
+160 C Bring to Trial
+161 C Built to Last
+162 C Cage of Hands
+163 C Captivating Unicorn
+164 C Caught in the Brights
+165 C Cavalry Drillmaster
+166 M The Circle of Loyalty
+167 C Combat Professor
+168 U Danitha Capashen, Paragon
+169 R Dawn of Hope
+170 C Dawning Angel
+171 C Daybreak Chaplain
+172 C Daybreak Charger
+173 R Decree of Justice
+174 U Defy Death
+175 U Devouring Light
+176 C Divine Arrow
+177 C Divine Verdict
+178 C Doomed Traveler
+179 C Dreadful Apathy
+180 M Emiel the Blessed
+181 U Faith's Fetters
+182 U Favored of Iroas
+183 C Felidar Cub
 184 R Felidar Retreat @Ralph Horsley
+185 C Forced Worship
+186 C Gallant Cavalry
+187 U Gallows Warden
+188 C Giant Ox
+189 M Gideon, Champion of Justice
+190 C Gideon's Lawkeeper
+191 C Glory Bearers
+192 U Goldnight Commander
+193 U Hotshot Mechanic
+194 R Hour of Reckoning
+195 C Impeccable Timing
+196 U Imperial Aerosaur
+197 U Imperial Recovery Unit
+198 C Infantry Veteran
+199 U Inspiring Cleric
+200 C Inspiring Overseer
+201 R Isamaru, Hound of Konda
+202 C Justiciar's Portal
+203 C Kami of Ancient Law
+204 C Kitsune Ace
+205 U Kwende, Pride of Femeref
+206 C Law-Rune Enforcer
+207 C Leonin Snarecaster
 208 R Leonin Warleader @Jakub Kasper
+209 C Light of Hope
+210 M Lyra Dawnbringer
+211 U Make a Stand
+212 C Martyr's Soul
+213 U Mausoleum Guard
+214 C Mesa Lynx
+215 R Michiko Konda, Truth Seeker
+216 C Midnight Guard
+217 U Miraculous Recovery
+218 C Moment of Triumph
+219 U Murder Investigation
+220 C Nightguard Patrol
+221 C Ninth Bridge Patrol
+222 U Not Forgotten
+223 C Order of the Golden Cricket
+224 U Phalanx Tactics
+225 C Pilgrim of the Ages
+226 C Pillardrop Rescuer
+227 C Pious Wayfarer
+228 C Pouncing Lynx
+229 C Prowling Felidar
+230 C Radiant's Judgment
+231 C Rambunctious Mutt
 232 R Regal Caracal @Filip Burburan
+233 R Restoration Angel
+234 R Righteous Valkyrie
+235 U Righteousness
+236 C Sanctum Gargoyle
+237 U Savannah Lions
+238 C Savannah Sage
+239 R Selfless Spirit
+240 C Seller of Songbirds
+241 U Serene Steward
+242 C Settle Beyond Reality
+243 C Shining Armor
+244 R Sigil of the Empty Throne
+245 C Skyhunter Patrol
+246 C Skyhunter Prowler
+247 U Spectral Steel
+248 C Spirited Companion
+249 C Stalwart Valkyrie
+250 U Starnheim Aspirant
+251 C Steppe Lynx
+252 U Syr Alin, the Lion's Claw
+253 R Taranika, Akroan Veteran
+254 U Tempered Veteran
+255 C Thraben Inspector
+256 C Trained Caracal
+257 C Transcendent Envoy
+258 C Triplicate Spirits
 259 R Trove Warden @Lars Grant-West
+260 U Unquestioned Authority
+261 R Valkyrie Harbinger
+262 U Valor in Akros
+263 U Valorous Stance @Victor Adame Minguez
+264 C Valorous Steed
+265 C Weight of Conscience
+266 U Wispweaver Angel
+267 C Academy Journeymage
+268 C Aeronaut Tinkerer
+269 C Amoeboid Changeling
+270 U Anchor to the Aether
+271 U Aquatic Incursion
+272 C Artificer's Epiphany
+273 C Augury Owl
+274 U Avalanche Caller
+275 C Aviation Pioneer
+276 R Barrin, Tolarian Archmage
+277 C Berg Strider
+278 U Brineborn Cutthroat
+279 C Bury in Books
+280 C Chillerpillar
+281 C Chilling Trap
+282 U Condescend
+283 C Crashing Tide
+284 C Crippling Chill
+285 U Cryptic Serpent
+286 U Dismiss
+287 R Djinn of Wishes
+288 C Drag Under
+289 C Drownyard Explorers
+290 C Elite Instructor
+291 U Erdwal Illuminator
+292 U Eternity Snare
+293 C Eyekite
+294 R Faerie Formation
+295 C Faerie Seer
+296 U Faerie Vandal
+297 U Fallowsage
+298 U Filigree Attendant
+299 C Fleeting Distraction
+300 C Floodhound
+301 C Frostpeak Yeti
+302 C Gearseeker Serpent
+303 C Gearsmith Prodigy
+304 R Gigantoplasm
+305 U Glen Elendra Pranksters
+306 R Harbinger of the Tides
+307 C Hieroglyphic Illumination
+308 U Icebind Pillar
+309 U Interpret the Signs
+310 M Jace, Arcane Strategist
+311 C Jace's Scrutiny
+312 U Lay Claim
+313 C Leave in the Dust
+314 C Library Larcenist
+315 C Littjara Kinseekers
+316 U Lookout's Dispersal
+317 U Lumengrid Sentinel
+318 C Mantle of Tides
+319 R Marit Lage's Slumber
+320 M Mechanized Production
+321 R Merfolk Sovereign
+322 U Military Intelligence
 323 U Nezumi Bone-Reader @Leonardo Santanna
+324 C Moonfolk Puzzlemaker
+325 R Multiple Choice
+326 C Mystic Skyfish
+327 U Neutralize
+328 C No Escape
+329 C Octoprophet
+330 C One With the Wind
+331 U Oneirophage
+332 C Opt
+333 U Overwhelmed Apprentice
+334 U Perilous Voyage
+335 C Pestermite
+336 C Pilfering Hawk
+337 C Press for Answers
+338 U Renowned Weaponsmith
+339 U River Sneak
+340 U Sage of the Falls
+341 C Sage's Row Savant
+342 C Saltwater Stalwart
+343 R Seafloor Oracle
+344 C Sentinels of Glen Elendra
+345 U Serum Visions
+346 C Shaper Apprentice
+347 R Shimmer Dragon
+348 U Skilled Animator
+349 C So Tiny
+350 C Startling Development
+351 C Steelgaze Griffin
+352 U Stinging Lionfish
+353 R Stolen by the Fae
+354 C Stonybrook Angler
+355 C Storm Sculptor
+356 M Svyelun of Sea and Sky
+357 U Syr Elenora, the Discerning
+358 M Tamiyo, the Moon Sage
+359 C Teferi's Protege
+360 M Tezzeret, Artifice Master
+361 R Thopter Spy Network
+362 U Tolarian Kraken
+363 C Tolarian Sentinel
+364 C Tome Anima
+365 C Triton Shorestalker
+366 C Undersea Invader
+367 C Vedalken Engineer
+368 M Vendilion Clique
+369 R Wake Thrasher
+370 C Watertrap Weaver
+371 R Wavebreak Hippocamp
+372 C Weldfast Wingsmith
+373 U Windrider Patrol
+374 C Winter's Rest
+375 C Alley Strangler
+376 U Ancient Craving
+377 C Black Cat
+378 C Blight Keeper
+379 C Blood Price
+380 U Bloodbond Vampire
+381 U Bloodthirsty Aerialist
+382 R Bloodtracker
+383 U Bone Picker
 384 C Burglar Rat @Tyler Walpole
+385 C Cemetery Recruitment
+386 C Certain Death
 387 C Chittering Rats @Yeong-Hao Han
+388 C Consign to the Pit
+389 C Corpse Churn
+390 C Crow of Dark Tidings
+391 R Cruel Sadist
 392 U Crypt Rats @Matt Cavotta
+393 C Dead Weight
+394 U Death Wind
+395 C Deathbloom Thallid
+396 R Deathbringer Regent
 397 R Demon of Catastrophes @Sidharth Chaturvedi
+398 C Demonic Gifts
+399 U Demon's Disciple
+400 C Demon's Grasp
+401 C Devouring Swarm
+402 C Doomed Dissenter
 403 R Dread Presence @Anthony Palumbo
+404 C Dread Rider
+405 R Dread Slaver
+406 U Dreadhound
+407 C Dune Beetle
+408 C Durable Coilbug
+409 C Eaten Alive
+410 R Endless Ranks of the Dead
+411 C Epicure of Blood
 412 C Eviscerate @Min Yum
+413 U Exsanguinate
+414 U Falkenrath Noble
+415 C Fetid Imp
+416 C Fungal Infection
+417 C Gavony Unhallowed
+418 C Ghoulraiser
+419 C Gnawing Zombie
+420 C Gorging Vulture
+421 U Graf Harvest
+422 R Graveblade Marauder
+423 R Gravecrawler
+424 U Gravedigger
+425 C Grotesque Mutation
+426 C Hooded Assassin
+427 C Ill-Gotten Inheritance
+428 U Inner Demon
+429 C Kalastria Nightwatch
+430 C Karfell Kennel-Master
 431 R Kothophed, Soul Hoarder @Jakub Kasper
+432 U Kraul Swarm
+433 M Liliana, Death's Majesty
+434 U Liliana's Elite
+435 R Liliana's Mastery
+436 C Liliana's Steward
+437 C Lurking Deadeye
+438 C Maalfeld Twins
+439 C Marauding Blight-Priest
+440 C Marauding Boneslasher
+441 M Massacre Wurm
+442 C Mire Blight
+443 U Mire Triton
+444 C Moment of Craving
+445 C Moodmark Painter
+446 R Necromancer's Stockpile
+447 U Necrotic Wound
+448 U Nested Ghoul
+449 C Nirkana Assassin
+450 U Ob Nixilis, the Hate-Twisted
+451 C Ob Nixilis's Cruelty
+452 R Ophiomancer
+453 R Oversold Cemetery
+454 C Phyrexian Debaser
+455 C Pit Keeper
+456 U Plague Spitter
+457 R Priest of the Blood Rite
+458 M Reaper from the Abyss
+459 C Reave Soul
+460 C Returned Reveler
+461 U Revenant
+462 U Ruthless Disposal
 463 R Seizan, Perverter of Truth @Kev Walker
+464 M Shadowborn Demon
 465 C Sinuous Vermin @Jason Kang
+466 C Sinuous Vermin
+467 R Skirsdag High Priest
 468 C Typhoid Rats @Kev Walker
+469 U Sling-Gang Lieutenant
+470 C Soulcage Fiend
+471 C Spark Reaper
+472 U Stitcher's Supplier
+473 C Strangling Spores
+474 U Syr Konrad, the Grim
+475 C Takenuma Bleeder
+476 R Tivash, Gloom Summoner
+477 C Tormented Soul
+478 C Tragic Slip
+479 R Triskaidekaphobia
+480 C Typhoid Rats
 481 U Ulcerate @Johann Bodin
+482 U Undead Augur
+483 C Vampire Envoy
+484 U Vampiric Rites
+485 C Vermin Gorger
+486 C Village Rites
+487 R Vito, Thorn of the Dusk Rose
+488 C Wailing Ghoul
+489 C Wicked Guardian
+490 U Witch's Cauldron
+491 U Yargle, Glutton of Urborg
+492 U Act on Impulse
+493 U Arms Dealer
+494 C Axgard Cavalry
+495 R Banefire
+496 U Barrage Ogre
+497 U Battle Squadron
+498 C Big Score
+499 U Blaze
+500 C Blisterspit Gremlin
+501 U Blood Aspirant
+502 C Bloodhaze Wolverine
+503 C Bogardan Dragonheart
+504 U Bolt Hound
+505 C Borderland Marauder
+506 C Brazen Freebooter
+507 C Brazen Wolves
+508 C Burn Bright
+509 R Captain Lannery Storm
+510 C Catalyst Elemental
+511 M Chandra, Flame's Fury
+512 C Chandra's Magmutt
+513 U Chandra's Pyreling
+514 C Chandra's Pyrohelix
+515 U Chandra's Spitfire
+516 C Coalhauler Swine
+517 U Cone of Flame
+518 U Cyclops Electromancer
+519 U Dance with Devils
+520 U Deem Worthy
+521 C Destructive Tampering
+522 U Dragon Egg
+523 C Dragon Fodder
+524 U Dragonlord's Servant
+525 U Dragonspeaker Shaman
+526 C Electric Revelation
+527 C Electrify
+528 C Fanatical Firebrand
+529 C Fervent Strike
+530 U Fiery Conclusion
+531 C Fiery Intervention
+532 C Firebolt
+533 C Firecannon Blast
+534 C Flame Lash
+535 U Flames of the Firebrand
+536 C Frenzied Goblin
+537 U Furnace Whelp
+538 R Gadrak, the Crown-Scourge
+539 R Glint-Horn Buccaneer
+540 C Go for Blood
+541 U Goblin Artillery
+542 U Goblin Grenade
+543 U Goblin Oriflamme
+544 U Goblin Psychopath
+545 R Goblin Rabblemaster
+546 U Goblin Rally
+547 C Goblin Trailblazer
+548 U Goblin Warchief
+549 C Goldhound
+550 M Goldspan Dragon
+551 U Grotag Night-Runner
+552 U Hordeling Outburst
+553 C Hungry Flames
+554 R Ib Halfheart, Goblin Tactician
+555 R Ignite the Future
+556 C Immersturm Raider
+557 U Impending Doom
+558 C Improvised Weaponry
+559 R Irencrag Pyromancer
+560 C Irreverent Revelers
+561 C Kargan Dragonrider
+562 R Kari Zev, Skyship Raider
+563 C Keldon Raider
+564 R Krenko, Mob Boss
+565 U Kuldotha Flamefiend
+566 R Lathliss, Dragon Queen
+567 C Lava Serpent
+568 C Lavastep Raider
+569 U Lightning Axe
+570 U Mad Ratter
+571 R Magmatic Channeler
+572 U Mardu Heart-Piercer
+573 U Markov Warlord
+574 C Mudbutton Torchrunner
+575 R Muxus, Goblin Grandee
+576 C Nest Robber
+577 U Ordeal of Purphoros
+578 C Outnumber
+579 C Pillar of Flame
+580 C Prickly Marmoset
+581 R Professional Face-Breaker
+582 U Pyre-Sledge Arsonist
+583 C Quakefoot Cyclops
+584 C Raking Claws
+585 U Ravenous Giant
+586 C Raze the Effigy
+587 C Reckless Fireweaver
+588 U Reptilian Reflection
+589 C Ripscale Predator
+590 U Rooting Moloch
+591 C Rummaging Goblin
+592 C Rush of Adrenaline
+593 M Sarkhan, the Dragonspeaker
+594 C Sarkhan's Rage
+595 U Sarkhan's Whelp
+596 C Scorching Dragonfire
+597 C Searing Spear
+598 U Seize the Storm
+599 C Shredded Sails
+600 C Smoldering Efreet
+601 U Sokenzan Smelter
+602 U Spark of Creativity
+603 C Sparkmage Apprentice
+604 C Sparktongue Dragon
+605 C Spellgorger Weird
+606 U Spiteful Prankster
+607 R Starstorm
+608 C Storm Fleet Pyromancer
+609 C Subterranean Scout
+610 C Sudden Breakthrough
+611 C Swaggering Corsair
+612 C Swift Kick
+613 C Thermo-Alchemist
+614 C Torch Courier
+615 C Tormenting Voice
+616 U Trove of Temptation
+617 C Vault Robber
+618 C Viashino Pyromancer
+619 U Volley Veteran
+620 U War-Name Aspirant
+621 U Warcry Phoenix
+622 C Weaselback Redcap
+623 C Welding Sparks
+624 C Wildfire Elemental
+625 R Yidaro, Wandering Monster
+626 U Young Pyromancer
+627 C Adventurous Impulse
+628 C Ancient Stirrings
+629 M Avenger of Zendikar
+630 U Baloth Woodcrasher
+631 C Band Together
+632 C Blisterpod
+633 C Bounding Wolf
+634 U Briarpack Alpha
+635 C Bristling Boar
+636 C Broken Bond
+637 U Brood Monitor
+638 C Canopy Baloth
+639 U Challenger Troll
+640 C Colossal Dreadmaw
+641 R Courser of Kruphix
+642 U Crawling Sensation
+643 R Creeperhulk
+644 C Cultivate
+645 R Deadbridge Goliath
+646 U Declare Dominance
+647 U Domesticated Hydra
+648 C Drowsing Tyrannodon
+649 C Drudge Beetle
+650 C Duskshell Crawler
+651 U Dwynen's Elite
+652 C Elderleaf Mentor
+653 U Elven Bow
+654 R Elvish Warmaster
+655 R Engulfing Slagwurm
+656 U Enlarge
+657 R Feed the Pack
+658 U Feral Hydra
+659 C Ferocious Pup
+660 C Fertilid
+661 C Fierce Witchstalker
+662 C Flourishing Hunter
+663 C Frontier Mastodon
+664 C Gaea's Protector
+665 U Ghirapur Guide
+666 C Giant Caterpillar
+667 C Gift of the Gargantuan
+668 R Goreclaw, Terror of Qal Sisma
+669 C Groundswell
+670 C Havenwood Wurm
+671 C Hooting Mandrills
+672 C Howl of the Hunt
+673 U Howlgeist
+674 C Hunger of the Howlpack
+675 C Hunter's Edge
+676 C Ilysian Caryatid
+677 R Imperious Perfect
+678 U Iridescent Hornbeetle
+679 C Ironshell Beetle
+680 C Ivy Lane Denizen
+681 R Kessig Cagebreakers
+682 C Kraul Foragers
+683 U Kraul Harpooner
+684 C Kraul Warrior
+685 C Kujar Seedsculptor
+686 C Lys Alana Huntmaster
+687 C Mammoth Spider
+688 M Master of the Wild Hunt
+689 C Master's Rebuke
+690 C Might of the Masses
+691 C Moldgraf Millipede
+692 U Moonlight Hunt
+693 C Naga Vitalist
+694 U Nantuko Cultivator
+695 U Nessian Hornbeetle
+696 R Nightpack Ambusher
+697 C Oashra Cultivator
+698 C Ondu Giant
+699 U Ordeal of Nylea
+700 C Ornery Dilophosaur
+701 U Overcome
+702 C Overgrowth
+703 U Packsong Pup
+704 U Paradise Druid
+705 C Pestilent Wolf
+706 R Phantom Nantuko
+707 C Pounce
+708 U Predator's Howl
+709 C Presence of Gond
+710 C Prey Upon
+711 C Pridemalkin
+712 M Primordial Hydra
+713 R Prowling Serpopard
+714 U Quarry Beetle
+715 R Rampaging Baloths
+716 C Reckless Amplimancer
+717 U Reclamation Sage
+718 C Relentless Pursuit
+719 M Rhonas the Indomitable
+720 U Roar of Challenge
+721 C Roots of Wisdom
+722 C Rosethorn Halberd
+723 C Savage Punch
+724 C Scale the Heights
+725 C Scion Summoner
+726 C Scrounging Bandar
+727 C Servant of the Scale
+728 C Silverback Shaman
+729 C Simian Brawler
+730 C Snapping Gnarlid
+731 C Soul's Might
+732 C Sporeback Wolf
+733 C Stalking Drone
+734 R Swarm Shambler
+735 C Titanic Brawl
+736 U Turntimber Basilisk
+737 C Unnatural Aggression
+738 R Wildborn Preserver
+739 C Wily Bandar
+740 C Wolf's Quarry
+741 C Wolfkin Bond
+742 U Wolfwillow Haven
+743 R Wolverine Riders
+744 U Woodborn Behemoth
+745 U Woodland Champion
+746 C Young Wolf
+747 U Zendikar's Roil
+748 R Endbringer
+749 U Titan's Presence
+750 C Warden of Geometries
+751 C Adventuring Gear
+752 C Aether Spellbomb
+753 C Alchemist's Vial
+754 C Aradara Express
+755 C Assembly-Worker
+756 R Bag of Holding
+757 U Bloodline Pretender
+758 C Campus Guide
+759 U Cellar Door
+760 U Circuit Mender
+761 U Cogwork Assembler
+762 U Dragon Blood
+763 R Dragon's Hoard
+764 U Edifice of Authority
+765 C Expedition Map
+766 C Explorer's Scope
+767 C Gearsmith Guardian
+768 C Gleaming Barrier
+769 C Goldvein Pick
+770 U Golem Artisan
+771 U Hammer of Ruin
+772 R Hangarback Walker
+773 C Heart-Piercer Bow
+774 U Hedron Archive
+775 U Heirloom Blade
+776 U Hero's Blade
+777 U Infiltration Lens
+778 C Iron Bully
+779 C Jousting Lance
+780 U Juggernaut
+781 C Kitesail
+782 C Leonin Scimitar
+783 C Locthwain Gargoyle
+784 R Loxodon Warhammer
+785 C Manakin
+786 U Meteor Golem
+787 R Monkey Cage
+788 R Panharmonicon
+789 U Phyrexian Ironfoot
+790 U Pierce Strider
+791 C Pilgrim's Eye
+792 R Psychosis Crawler
+793 C Raiders' Karve
+794 C Runed Servitor
+795 C Self-Assembler
+796 U Shambling Suit
+797 R Solemn Simulacrum
+798 R Steel Overseer
+799 U Talon of Pain
+800 R Tamiyo's Journal
+801 R Teferi's Puzzle Box
+802 C Thaumaturge's Familiar
+803 C Universal Automaton
+804 C Universal Solvent
+805 C Vial of Dragonfire
 806 R Walking Ballista @Daniel Ljunggren
+807 C Weapon Rack
+808 U Whirlermaker
+809 C Ash Barrens
+810 U Blighted Fen
+811 R Bonders' Enclave
+812 C Desert of the Mindful
+813 C Evolving Wilds
+814 C Forgotten Cave
+815 U Memorial to Genius
+816 U Mishra's Factory
+817 C Mortuary Mire
+818 C Piranha Marsh
+819 C Sandstone Bridge
+820 C Seat of the Synod
+821 C Shimmerdrift Vale
+822 C Thriving Bluff
+823 C Thriving Grove
+824 C Thriving Heath
+825 C Thriving Isle
+826 C Thriving Moor
+827 U Treetop Village
+828 U Urza's Factory
+829 C Urza's Mine
+830 C Urza's Power Plant
+831 C Urza's Tower
+832 C Warped Landscape
+833 C Snow-Covered Island
+834 L Wastes
 835 M Kibo, Uktabi Prince @Filipe Pagliuso
