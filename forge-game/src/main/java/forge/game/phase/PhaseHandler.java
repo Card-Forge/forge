@@ -1285,9 +1285,13 @@ public class PhaseHandler implements java.io.Serializable {
             }
             Player p = game.getRegisteredPlayers().get(oldPlayerIdx);
             if (p.hasLost()) {
+                // CR 702.26n
+                Untap.doPhasing(p);
+
                 game.getUntap().executeUntil(p);
                 game.getUpkeep().executeUntil(p);
                 game.getUpkeep().executeUntilEndOfPhase(p);
+                game.getEndOfCombat().executeUntilEndOfPhase(p);
                 game.getEndOfTurn().executeUntil(p);
                 game.getEndOfTurn().executeUntilEndOfPhase(p);
                 game.getCleanup().executeUntil(p);
