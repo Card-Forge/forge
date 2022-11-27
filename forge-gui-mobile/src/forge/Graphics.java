@@ -44,6 +44,7 @@ public class Graphics {
     private final ShaderProgram shaderNightDay = new ShaderProgram(Shaders.vertexShaderDayNight, Shaders.fragmentShaderDayNight);
     private final ShaderProgram shaderPixelate = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPixelateShader);
     private final ShaderProgram shaderPixelateWarp = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPixelateShaderWarp);
+    private final ShaderProgram shaderChromaticAbberation = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragChromaticAbberation);
 
     private Texture dummyTexture = null;
 
@@ -821,6 +822,25 @@ public class Graphics {
             setAlphaComposite(oldalpha);
         }
     }
+    public void drawChromatic(TextureRegion image, float x, float y, float w, float h, Float time) {
+        if (image == null)
+            return;
+        if (time != null) {
+            batch.end();
+            shaderChromaticAbberation.bind();
+            shaderChromaticAbberation.setUniformf("u_time", time);
+            batch.setShader(shaderChromaticAbberation);
+            batch.begin();
+            //draw
+            batch.draw(image, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            drawImage(image, x, y, w, h);
+        }
+    }
     public void drawPixelated(FImage image, float x, float y, float w, float h, Float amount) {
         if (image == null)
             return;
@@ -868,10 +888,10 @@ public class Graphics {
             batch.end();
             shaderPixelateWarp.bind();
             shaderPixelateWarp.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
-            shaderPixelateWarp.setUniformf("u_cellSize", amount*6);
-            shaderPixelateWarp.setUniformf("u_amount", 0.2f);
+            shaderPixelateWarp.setUniformf("u_cellSize", amount);
+            shaderPixelateWarp.setUniformf("u_amount", 0.2f*amount);
             shaderPixelateWarp.setUniformf("u_speed", 0.5f);
-            shaderPixelateWarp.setUniformf("u_time", amount);
+            shaderPixelateWarp.setUniformf("u_time", 0.8f);
             batch.setShader(shaderPixelateWarp);
             batch.begin();
             //draw
