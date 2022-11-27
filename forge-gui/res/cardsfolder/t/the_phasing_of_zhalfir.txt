@@ -2,11 +2,9 @@ Name:The Phasing of Zhalfir
 ManaCost:2 U U
 Types:Enchantment Saga
 K:Read ahead:3:DBPhase,DBPhase,DBDestroyAll
-SVar:DBPhase:DB$ Phases | ValidTgts$ Permanent.nonLand+Other | WontPhaseInNormal$ True | ConditionPresent$ Card.Self | SubAbility$ DBEffect | SpellDescription$ Another target nonland permanent phases out. It can't phase in for as long as you control CARDNAME.
-SVar:DBEffect:DB$ Effect | Triggers$ TrigComeBack | RememberObjects$ Targeted | ImprintCards$ Self | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnPhasedIn$ True
-SVar:TrigComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ DBPhaseIn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True
-SVar:DBPhaseIn:DB$ Phases | Defined$ Remembered | PhaseInOrOut$ True | SubAbility$ DBExileSelf
-SVar:DBExileSelf:DB$ ChangeZone | Origin$ Command | Destination$ Exile | Defined$ Self
+SVar:DBPhase:DB$ Phases | ValidTgts$ Permanent.nonLand+Other | ConditionPresent$ Card.Self | SubAbility$ DBEffect | SpellDescription$ Another target nonland permanent phases out. It can't phase in for as long as you control CARDNAME.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ CantPhaseIn | RememberObjects$ Targeted | ConditionPresent$ Card.Self | Duration$ UntilLoseControlOfHost
+SVar:CantPhaseIn:Mode$ CantPhaseIn | ValidCard$ Card.phasedOutIsRemembered | Description$ It can't phase in for as long as you control EFFECTSOURCE.
 SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature | RememberDestroyed$ True | SubAbility$ DBRepeat | SpellDescription$ Destroy all creatures. For each creature destroyed this way, its controller creates a 2/2 black Phyrexian creature token.
 SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | DefinedCards$ DirectRemembered | RepeatSubAbility$ DBToken | SubAbility$ DBCleanup | ChangeZoneTable$ True
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenOwner$ ImprintedController | TokenScript$ b_2_2_phyrexian

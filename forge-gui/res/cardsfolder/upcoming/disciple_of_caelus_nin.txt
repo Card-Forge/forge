@@ -7,5 +7,5 @@ SVar:TrigRepeatEach:DB$ RepeatEach | RepeatPlayers$ Player | StartingWithActivat
 SVar:DBChoosePermanent:DB$ ChooseCard | ChoiceTitle$ Choose up to five permanents you control | MinAmount$ 0 | Amount$ 5 | Defined$ Remembered | Choices$ Permanent.RememberedPlayerCtrl | RememberChosen$ True | AILogic$ NotSelf
 SVar:DBPhaseOut:DB$ Phases | AllValid$ Permanent.Other+IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True | ClearRemembered$ True
-S:Mode$ CantPhaseIn | ValidCard$ Permanent | Description$ Permanents can't phase in.
+S:Mode$ CantPhaseIn | ValidCard$ Card.phasedOutPermanent | Description$ Permanents can't phase in.
 Oracle:When Disciple of Caelus Nin enters the battlefield, starting with you, each player chooses up to five permanents they control. All permanents other than Disciple of Caelus Nin that weren't chosen this way phase out.\nPermanents can't phase in.
