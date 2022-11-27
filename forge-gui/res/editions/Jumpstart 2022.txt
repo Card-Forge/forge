@@ -328,7 +328,7 @@ ScryfallCode=J22
 320 M Mechanized Production @Adam Paquette
 321 R Merfolk Sovereign @Jesper Ejsing
 322 U Military Intelligence @Craig J Spearing
-323 U Nezumi Bone-Reader @Leonardo Santanna
+323 C Mistwalker @Steve Prescott
 324 C Moonfolk Puzzlemaker @Miguel Mercado
 325 R Multiple Choice @Campbell White
 326 C Mystic Skyfish @Alayna Danner
@@ -470,7 +470,7 @@ ScryfallCode=J22
 462 U Ruthless Disposal @Dave Kendall
 463 R Seizan, Perverter of Truth @Kev Walker
 464 M Shadowborn Demon @Lucas Graciano
-465 C Sinuous Vermin @Jason Kang
+465 C Shambling Ghoul @Joseph Meehan
 466 C Sinuous Vermin @Jason Kang
 467 R Skirsdag High Priest @Jason A. Engle
 468 C Skirsdag Supplicant @Anastasia Ovchinnikova
