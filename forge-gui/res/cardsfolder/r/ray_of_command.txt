@@ -1,5 +1,7 @@
 Name:Ray of Command
 ManaCost:3 U
 Types:Instant
-A:SP$ GainControl | Cost$ 3 U | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature opponent controls | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | TapOnLose$ True | SpellDescription$ Untap target creature an opponent controls and gain control of it until end of turn. That creature gains haste until end of turn. When you lose control of the creature, tap it.
+A:SP$ GainControl | Cost$ 3 U | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature opponent controls | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBDelay | SpellDescription$ Untap target creature an opponent controls and gain control of it until end of turn. That creature gains haste until end of turn.
+SVar:DBDelay:DB$ DelayedTrigger | Mode$ ChangesController | ValidCard$ Card.IsTriggerRemembered | ValidOriginalController$ You | RememberObjects$ Targeted | Execute$ TrigTap | SpellDescription$ When you lose control of the creature, tap it.
+SVar:TrigTap:DB$ Tap | Defined$ DelayTriggerRememberedLKI
 Oracle:Untap target creature an opponent controls and gain control of it until end of turn. That creature gains haste until end of turn. When you lose control of the creature, tap it.
