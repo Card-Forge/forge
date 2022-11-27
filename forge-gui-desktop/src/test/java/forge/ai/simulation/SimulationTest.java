@@ -34,7 +34,6 @@ public class SimulationTest {
     private static boolean initialized = false;
 
     protected Game initAndCreateGame() {
-
         if (!initialized) {
             GuiBase.setInterface(new GuiDesktop());
             FModel.initialize(null, new Function<ForgePreferences, Void>() {

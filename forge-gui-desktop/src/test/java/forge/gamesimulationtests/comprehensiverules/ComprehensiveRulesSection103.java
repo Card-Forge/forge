@@ -28,7 +28,7 @@ public class ComprehensiveRulesSection103 extends BaseGameSimulationTest {
 		);
 		runGame( gameWrapper, PlayerSpecification.PLAYER_2, 1 );
 	}
-	
+
 	@Test
 	public void test_103_7a_first_player_skips_draw_step_of_first_turn() {
 		GameWrapper gameWrapper = new GameWrapper(

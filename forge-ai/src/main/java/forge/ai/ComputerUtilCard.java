@@ -1708,7 +1708,7 @@ public class ComputerUtilCard {
         pumped.addPTBoost(power + berserkPower, toughness, timestamp, 0);
 
         if (!kws.isEmpty()) {
-            pumped.addChangedCardKeywords(kws, null, false, timestamp, 0);
+            pumped.addChangedCardKeywords(kws, null, false, timestamp, 0, false);
         }
         if (!hiddenKws.isEmpty()) {
             pumped.addHiddenExtrinsicKeywords(timestamp, 0, hiddenKws);
@@ -1729,7 +1729,7 @@ public class ComputerUtilCard {
             }
         }
         final long timestamp2 = c.getGame().getNextTimestamp(); //is this necessary or can the timestamp be re-used?
-        pumped.addChangedCardKeywordsInternal(toCopy, null, false, timestamp2, 0, true);
+        pumped.addChangedCardKeywordsInternal(toCopy, null, false, timestamp2, 0, false);
         applyStaticContPT(ai.getGame(), pumped, new CardCollection(c));
         return pumped;
     }

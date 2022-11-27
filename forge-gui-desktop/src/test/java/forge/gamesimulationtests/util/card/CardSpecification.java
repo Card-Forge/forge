@@ -14,7 +14,7 @@ public class CardSpecification implements Specification<Card> {
 	private final PlayerSpecification owner;
 	private final PlayerSpecification controller;
 	private final CardSpecification target;
-	
+
 	/*package-local*/ CardSpecification( final String name, final ZoneType zoneType, final PlayerSpecification owner, final PlayerSpecification controller, final CardSpecification target ) {
 		this.name = name;
 		this.zoneType = zoneType;
@@ -22,23 +22,23 @@ public class CardSpecification implements Specification<Card> {
 		this.controller = controller;
 		this.target = target;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public ZoneType getZoneType() {
 		return zoneType;
 	}
-	
+
 	public PlayerSpecification getOwner() {
 		return owner;
 	}
-	
+
 	public PlayerSpecification getController() {
 		return controller;
 	}
-	
+
 	public CardSpecification getTarget() {
 		return target;
 	}

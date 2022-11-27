@@ -9,25 +9,25 @@ public class PlayerSpecification implements Specification<Player> {
 	public static final String PLAYER_2_NAME = "Player 2";
 	public static final PlayerSpecification PLAYER_1 = PlayerSpecificationBuilder.player1().build();
 	public static final PlayerSpecification PLAYER_2 = PlayerSpecificationBuilder.player2().build();
-	
+
 	private final String name;
 	private final Integer life;
 	private final Integer poison;
-	
+
 	/*package-local*/ PlayerSpecification( final String name, final Integer life, final Integer poison ) {
 		this.name = name;
 		this.life = life;
 		this.poison = poison;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public Integer getLife() {
 		return life;
 	}
-	
+
 	public Integer getPoison() {
 		return poison;
 	}

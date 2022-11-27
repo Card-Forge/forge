@@ -9,13 +9,13 @@ import forge.gamesimulationtests.util.player.PlayerSpecification;
 public class DeclareAttackersAction extends BasePlayerAction {
 	private final Map<CardSpecification, PlayerSpecification> playerAttackAssignments;
 	private final Map<CardSpecification, CardSpecification> planeswalkerAttackAssignments;
-	
+
 	public DeclareAttackersAction( PlayerSpecification player ) {
 		super( player );
 		playerAttackAssignments = new HashMap<>();
 		planeswalkerAttackAssignments = new HashMap<>();
 	}
-	
+
 	/**
 	 * Attack the only opponent
 	 */
@@ -23,12 +23,12 @@ public class DeclareAttackersAction extends BasePlayerAction {
 		playerAttackAssignments.put( attacker, null );
 		return this;
 	}
-	
+
 	public DeclareAttackersAction attack( CardSpecification attacker, PlayerSpecification player ) {
 		playerAttackAssignments.put( attacker, player );
 		return this;
 	}
-	
+
 	public DeclareAttackersAction attack( CardSpecification attacker, CardSpecification planeswalker ) {
 		planeswalkerAttackAssignments.put( attacker, planeswalker );
 		return this;

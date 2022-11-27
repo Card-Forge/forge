@@ -11,11 +11,11 @@ import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 
 public class PlayerAssertAction extends AssertAction {
 	private final PlayerSpecification playerRequirements;
-	
+
 	public PlayerAssertAction( final PlayerSpecification playerRequirements ) {
 		this.playerRequirements = playerRequirements;
 	}
-	
+
 	public PlayerAssertAction( final PlayerSpecificationBuilder playerRequirements ) {
 		this( playerRequirements.build() );
 	}
