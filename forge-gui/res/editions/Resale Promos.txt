@@ -42,3 +42,4 @@ A12 R Xathrid Necromancer @Maciej Kuciara
 235 R Stonecoil Serpent @Mark Poole
 235★ R Nyx Lotus @Raoul Vitale
 374 R Valkyrie Harbinger @Tran Nguyen
+376 R Cleaving Reaper @Victor Adame Minguez
