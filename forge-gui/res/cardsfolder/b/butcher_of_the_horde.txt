@@ -3,8 +3,6 @@ ManaCost:1 R W B
 Types:Creature Demon
 PT:5/4
 K:Flying
-A:AB$ GenericChoice | Cost$ Sac<1/Creature.Other/another creature> | Choices$ DBVigilance,DBLifelink,DBHaste | SpellDescription$ CARDNAME gains your choice of Vigilance, lifelink, or haste until end of turn.
-SVar:DBVigilance:DB$ Pump | Defined$ Self | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilance until end of turn.
-SVar:DBLifelink:DB$ Pump | Defined$ Self | KW$ Lifelink | SpellDescription$ CARDNAME gains lifelink until end of turn.
-SVar:DBHaste:DB$ Pump | Defined$ Self | KW$ Haste | SpellDescription$ CARDNAME gains haste until end of turn.
+A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | KWChoice$ Vigilance,Lifelink,Haste | SpellDescription$ CARDNAME gains your choice of vigilance, lifelink, or haste until end of turn.
+DeckHas:Ability$Sacrifice|LifeGain
 Oracle:Flying\nSacrifice another creature: Butcher of the Horde gains your choice of vigilance, lifelink, or haste until end of turn.

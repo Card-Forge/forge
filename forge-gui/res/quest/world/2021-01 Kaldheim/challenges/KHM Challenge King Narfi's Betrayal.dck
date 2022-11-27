@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: King Narfi's Betrayal
+OpponentName=The Betrayal
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Ice Tunnel|Ice Tunnel|Ice Tunnel|Ice Tunnel
+HumanExtras=
+[metadata]
+Title=King Narfi's Betrayal
+Difficulty=medium
+Description=To serve the god of death, Narfi forfeited the warmth of life.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: King Narfi's Betrayal
+[Main]
+100 Ice Tunnel|KHM|1
+100 King Narfi's Betrayal|KHM|1

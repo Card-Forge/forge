@@ -503,16 +503,22 @@ public class TriggerHandler {
     // Return true if the trigger went off, false otherwise.
     private void runSingleTriggerInternal(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
         // All tests passed, execute ability.
-        if (regtrig instanceof TriggerTapsForMana) {
+        if (regtrig instanceof TriggerTapsForMana || regtrig instanceof TriggerManaAdded) {
             final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
             if (null != abMana && null != abMana.getManaPart()) {
                 abMana.setUndoable(false);
             }
         }
-        if (regtrig instanceof TriggerSpellAbilityCastOrCopy) {
+        else if (regtrig instanceof TriggerSpellAbilityCastOrCopy) {
             final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.CastSA);
             if (null != abMana && null != abMana.getManaPart()) {
                 abMana.setUndoable(false);
+            }
+        }
+        else if (regtrig instanceof TriggerTaps || regtrig instanceof TriggerUntaps) {
+            final Card c = (Card) runParams.get(AbilityKey.Card);
+            for (SpellAbility sa : game.getStack().filterUndoStackByHost(c)) {
+                sa.setUndoable(false);
             }
         }
 
@@ -541,8 +547,9 @@ public class TriggerHandler {
                 sa.changeText();
             }
         } else {
+            Player controller = regtrig.getSpawningAbility() != null ? regtrig.getSpawningAbility().getActivatingPlayer() : host.getController();
             // need to copy the SA because of TriggeringObjects
-            sa = sa.copy(host, host.getController(), false);
+            sa = sa.copy(host, controller, false);
         }
 
         sa.setLastStateBattlefield(game.getLastStateBattlefield());
@@ -551,11 +558,10 @@ public class TriggerHandler {
         sa.setTrigger(regtrig);
         sa.setSourceTrigger(regtrig.getId());
         regtrig.setTriggeringObjects(sa, runParams);
-        TriggerAbilityTriggered.addTriggeringObject(regtrig, sa, runParams);
         sa.setTriggerRemembered(regtrig.getTriggerRemembered());
 
         if (regtrig.hasParam("TriggerController")) {
-            Player p = AbilityUtils.getDefinedPlayers(regtrig.getHostCard(), regtrig.getParam("TriggerController"), sa).get(0);
+            Player p = AbilityUtils.getDefinedPlayers(host, regtrig.getParam("TriggerController"), sa).get(0);
             sa.setActivatingPlayer(p);
         }
 
@@ -588,6 +594,7 @@ public class TriggerHandler {
             wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory);
         } else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
+            game.getTriggerHandler().runTrigger(TriggerType.AbilityTriggered, TriggerAbilityTriggered.getRunParams(regtrig, wrapperAbility, runParams), false);
         }
 
         regtrig.triggerRun();

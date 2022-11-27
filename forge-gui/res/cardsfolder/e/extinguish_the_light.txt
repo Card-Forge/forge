@@ -1,0 +1,7 @@
+Name:Extinguish the Light
+ManaCost:2 B B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SubAbility$ DBGainLife | SpellDescription$ Destroy target creature or planeswalker.
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 3 | ConditionDefined$ Targeted | ConditionPresent$ Card.cmcLE3 | ConditionCompare$ EQ1 | SpellDescription$ If its mana value was 3 or less, you gain 3 life.
+DeckHas:Ability$LifeGain
+Oracle:Destroy target creature or planeswalker. If its mana value was 3 or less, you gain 3 life.

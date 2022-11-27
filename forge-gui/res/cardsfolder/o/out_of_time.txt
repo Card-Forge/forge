@@ -2,8 +2,8 @@ Name:Out of Time
 ManaCost:1 W W
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, untap all creatures, then phase them out until CARDNAME leaves the battlefield. Put a time counter on CARDNAME for each creature phased out this way.
-SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature | RememberUntapped$ True | SubAbility$ DBPhase
-SVar:DBPhase:DB$ Phases | Defined$ Remembered | WontPhaseInNormal$ True | ConditionPresent$ Card.Self | SubAbility$ DBEffect
+SVar:TrigUntap:DB$ UntapAll | ValidCards$ Creature | SubAbility$ DBPhase
+SVar:DBPhase:DB$ Phases | AllValid$ Creature | RememberAffected$ True | WontPhaseInNormal$ True | ConditionPresent$ Card.Self | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Triggers$ TrigComeBack | RememberObjects$ Remembered | ImprintCards$ Self | ConditionPresent$ Card.Self | Duration$ Permanent | ForgetOnPhasedIn$ True | SubAbility$ DBPutCounter
 SVar:TrigComeBack:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.IsImprinted | Execute$ DBPhaseIn | TriggerZones$ Command | TriggerController$ TriggeredCardController | Static$ True | TriggerDescription$ These creatures phase out until CARDNAME leaves the battlefield.
 SVar:DBPhaseIn:DB$ Phases | Defined$ Remembered | PhaseInOrOut$ True | SubAbility$ DBExileSelf

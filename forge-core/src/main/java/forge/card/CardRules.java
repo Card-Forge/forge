@@ -43,6 +43,11 @@ public final class CardRules implements ICardCharacteristics {
     private CardSplitType splitType;
     private ICardFace mainPart;
     private ICardFace otherPart;
+    private ICardFace wSpecialize;
+    private ICardFace uSpecialize;
+    private ICardFace bSpecialize;
+    private ICardFace rSpecialize;
+    private ICardFace gSpecialize;
     private CardAiHints aiHints;
     private ColorSet colorIdentity;
     private ColorSet deckbuildingColors;
@@ -54,6 +59,12 @@ public final class CardRules implements ICardCharacteristics {
         splitType = altMode;
         mainPart = faces[0];
         otherPart = faces[1];
+        wSpecialize = faces[2];
+        uSpecialize = faces[3];
+        bSpecialize = faces[4];
+        rSpecialize = faces[5];
+        gSpecialize = faces[6];
+
         aiHints = cah;
         meldWith = "";
         partnerWith = "";
@@ -74,6 +85,11 @@ public final class CardRules implements ICardCharacteristics {
         splitType = newRules.splitType;
         mainPart = newRules.mainPart;
         otherPart = newRules.otherPart;
+        wSpecialize = newRules.wSpecialize;
+        uSpecialize = newRules.uSpecialize;
+        bSpecialize = newRules.bSpecialize;
+        rSpecialize = newRules.rSpecialize;
+        gSpecialize = newRules.gSpecialize;
         aiHints = newRules.aiHints;
         colorIdentity = newRules.colorIdentity;
         meldWith = newRules.meldWith;
@@ -130,6 +146,22 @@ public final class CardRules implements ICardCharacteristics {
 
     public ICardFace getOtherPart() {
         return otherPart;
+    }
+
+    public ICardFace getWSpecialize() {
+        return wSpecialize;
+    }
+    public ICardFace getUSpecialize() {
+        return uSpecialize;
+    }
+    public ICardFace getBSpecialize() {
+        return bSpecialize;
+    }
+    public ICardFace getRSpecialize() {
+        return rSpecialize;
+    }
+    public ICardFace getGSpecialize() {
+        return gSpecialize;
     }
 
     public String getName() {
@@ -335,7 +367,7 @@ public final class CardRules implements ICardCharacteristics {
     // Reads cardname.txt
     public static class Reader {
         // fields to build
-        private CardFace[] faces = new CardFace[] { null, null };
+        private CardFace[] faces = new CardFace[] { null, null, null, null, null, null, null };
         private int curFace = 0;
         private CardSplitType altMode = CardSplitType.None;
         private String meldWith = "";
@@ -382,6 +414,11 @@ public final class CardRules implements ICardCharacteristics {
             CardAiHints cah = new CardAiHints(removedFromAIDecks, removedFromRandomDecks, removedFromNonCommanderDecks, hints, needs, has);
             faces[0].assignMissingFields();
             if (null != faces[1]) faces[1].assignMissingFields();
+            if (null != faces[2]) faces[2].assignMissingFields();
+            if (null != faces[3]) faces[3].assignMissingFields();
+            if (null != faces[4]) faces[4].assignMissingFields();
+            if (null != faces[5]) faces[5].assignMissingFields();
+            if (null != faces[6]) faces[6].assignMissingFields();
             final CardRules result = new CardRules(faces, altMode, cah);
 
             result.setNormalizedName(this.normalizedName);
@@ -518,6 +555,18 @@ public final class CardRules implements ICardCharacteristics {
                 case 'S':
                     if ("S".equals(key)) {
                         this.faces[this.curFace].addStaticAbility(value);
+                    } else if (key.startsWith("SPECIALIZE")) {
+                        if (value.equals("WHITE")) {
+                            this.curFace = 2;
+                        } else if (value.equals("BLUE")) {
+                            this.curFace = 3;
+                        } else if (value.equals("BLACK")) {
+                            this.curFace = 4;
+                        } else if (value.equals("RED")) {
+                            this.curFace = 5;
+                        } else if (value.equals("GREEN")) {
+                            this.curFace = 6;
+                        }
                     } else if ("SVar".equals(key)) {
                         if (null == value) throw new IllegalArgumentException("SVar has no variable name");
 
@@ -600,7 +649,7 @@ public final class CardRules implements ICardCharacteristics {
 
     public static CardRules getUnsupportedCardNamed(String name) {
         CardAiHints cah = new CardAiHints(true, true, true, null, null, null);
-        CardFace[] faces = { new CardFace(name), null};
+        CardFace[] faces = { new CardFace(name), null, null, null, null, null, null};
         faces[0].setColor(ColorSet.fromMask(0));
         faces[0].setType(CardType.parse("", false));
         faces[0].setOracleText("This card is not supported by Forge. Whenever you start a game with this card, it will be bugged.");

@@ -1,0 +1,12 @@
+Name:Oracle of the Alpha
+ManaCost:2 U
+Types:Creature Bird Wizard
+PT:2/3
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, conjure the Power Nine into your library, then shuffle.
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Names$ Ancestral Recall,Black Lotus,Mox Emerald,Mox Jet,Mox Pearl,Mox Ruby,Mox Sapphire,Time Walk,Timetwister | Zone$ Library
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ DBScry | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, scry 1.
+SVar:DBScry:DB$ Scry
+SVar:HasAttackEffect:TRUE
+DeckHas:Type$Artifact|Instant|Sorcery & Ability$Sacrifice
+Oracle:Flying\nWhen Oracle of the Alpha enters the battlefield, conjure the Power Nine into your library, then shuffle.\nWhenever Oracle of the Alpha attacks, scry 1.

@@ -1,0 +1,52 @@
+[duel]
+[metadata]
+Name=Alela's Flighty Friends 1
+Title=Alela, Artful Provocateur
+Difficulty=easy
+Description=WBU flying creatures theme deck
+Icon=Alela 1.jpg
+Deck Type=constructed
+[Main]
+1 Alela, Artful Provocateur
+1 Bitterblossom
+2 Empyrean Eagle
+1 Fae of Wishes
+2 Favorable Winds
+1 Gravitational Shift
+5 Island
+1 Karmic Justice
+1 Moat
+1 Notorious Throng
+4 Obscura Storefront
+1 Oona, Queen of the Fae
+5 Plains
+1 Puppeteer Clique
+3 Quicksand
+2 Rally of Wings
+2 Render Silent
+2 Seal of Cleansing
+2 Seal of Doom
+1 Sephara, Sky's Blade
+1 Sower of Temptation
+2 Spirit of the Spires
+2 Sprite Noble
+1 Stolen by the Fae
+5 Swamp
+1 Teferi's Moat
+2 The Raven's Warning
+2 Thunderclap Wyvern
+2 Violet Pall
+2 Windstorm Drake
+1 Wydwen, the Biting Gale
+[Sideboard] 
+1 Admonition Angel
+1 Ancient Brass Dragon
+2 Ascended Lawmage
+2 Bone Shredder
+1 Demon of Dark Schemes
+1 Felisa, Fang of Silverquill
+2 Irenicus's Vile Duplication
+1 Serra the Benevolent
+2 Smog Elemental
+2 Wall of Reverence
+

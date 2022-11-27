@@ -27,6 +27,7 @@ import forge.ai.ability.ExploreAi;
 import forge.ai.ability.LearnAi;
 import forge.ai.simulation.SpellAbilityPicker;
 import forge.card.CardStateName;
+import forge.card.CardType;
 import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.deck.Deck;
@@ -164,7 +165,7 @@ public class AiController {
         for (final Card c : all) {
             for (final SpellAbility sa : c.getNonManaAbilities()) {
                 if (sa instanceof SpellPermanent) {
-                    sa.setActivatingPlayer(player);
+                    sa.setActivatingPlayer(player, true);
                     if (checkETBEffects(c, sa, ApiType.Counter)) {
                         spellAbilities.add(sa);
                     }
@@ -498,7 +499,7 @@ public class AiController {
                     if (reSA == null || !ApiType.Tap.equals(reSA.getApi())) {
                         continue;
                     }
-                    reSA.setActivatingPlayer(reSA.getHostCard().getController());
+                    reSA.setActivatingPlayer(reSA.getHostCard().getController(), true);
                     if (reSA.metConditions()) {
                         foundTapped = true;
                         break;
@@ -582,7 +583,7 @@ public class AiController {
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(possibleCounters, player)) {
             SpellAbility currentSA = sa;
-            sa.setActivatingPlayer(player);
+            sa.setActivatingPlayer(player, true);
             // check everything necessary
 
             AiPlayDecision opinion = canPlayAndPayFor(currentSA);
@@ -637,7 +638,7 @@ public class AiController {
             if (saApi == ApiType.Counter || saApi == exceptSA) {
                 continue;
             }
-            sa.setActivatingPlayer(player);
+            sa.setActivatingPlayer(player, true);
             // TODO: this currently only works as a limited prediction of permanent spells.
             // Ideally this should cast canPlaySa to determine that the AI is truly able/willing to cast a spell,
             // but that is currently difficult to implement due to various side effects leading to stack overflow.
@@ -743,7 +744,7 @@ public class AiController {
                 return AiPlayDecision.CantAfford;
             }
             // TODO check for Reduce too, e.g. Battlefield Thaumaturge could make it castable
-            if (sa.usesTargeting()) {
+            if (!sa.getAllTargetChoices().isEmpty()) {
                 oldCMC = CostAdjustment.adjust(sa.getPayCosts(), sa).getTotalMana().getCMC();
             }
         }
@@ -766,8 +767,8 @@ public class AiController {
 
         // Account for possible Ward after the spell is fully targeted
         // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
-        // one is warded and can't be paid for.
-        if (sa.usesTargeting() && CardFactoryUtil.isCounterable(host)) {
+        // one is warded and can't be paid for. (currently it will be stuck with the target until it could pay)
+        if (sa.usesTargeting() && (!sa.isSpell() || CardFactoryUtil.isCounterable(host))) {
             for (Card tgt : sa.getTargets().getTargetCards()) {
                 // TODO some older cards don't use the keyword, so check for trigger instead
                 if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(host.getController())) {
@@ -1054,11 +1055,9 @@ public class AiController {
                 // Cheaper Spectacle costs should be preferred
                 // FIXME: Any better way to identify that these are the same ability, one with Spectacle and one not?
                 // (looks like it's not a full-fledged alternative cost as such, and is not processed with other alt costs)
-                if (a.isSpectacle() && !b.isSpectacle()
-                        && a.getPayCosts().getTotalMana().getCMC() < b.getPayCosts().getTotalMana().getCMC()) {
+                if (a.isSpectacle() && !b.isSpectacle() && a1 < b1) {
                     return 1;
-                } else if (b.isSpectacle() && !a.isSpectacle()
-                        && b.getPayCosts().getTotalMana().getCMC() < a.getPayCosts().getTotalMana().getCMC()) {
+                } else if (b.isSpectacle() && !a.isSpectacle() && b1 < a1) {
                     return 1;
                 }
             }
@@ -1086,6 +1085,9 @@ public class AiController {
                 }
                 if (source.hasSVar("AIPriorityModifier")) {
                     p += Integer.parseInt(source.getSVar("AIPriorityModifier"));
+                }
+                if (ComputerUtilCard.isCardRemAIDeck(sa.getOriginalHost() != null ? sa.getOriginalHost() : source)) {
+                    p -= 10;
                 }
                 // don't play equipments before having any creatures
                 if (source.isEquipment() && noCreatures) {
@@ -1615,6 +1617,13 @@ public class AiController {
                 }
                 for (String sv : card.getSVars().keySet()) {
                     String varValue = card.getSVar(sv);
+                    if (varValue.equals("Count$Domain")) {
+                        for (String type : landToPlay.getType().getLandTypes()) {
+                            if (CardType.isABasicLandType(type) && CardLists.getType(otb, type).isEmpty()) {
+                                return true;
+                            }
+                        }
+                    }
                     if (varValue.startsWith("Count$Valid") || sv.equals("BuffedBy")) {
                         if (varValue.contains("Land") || varValue.contains("Plains") || varValue.contains("Forest")
                                 || varValue.contains("Mountain") || varValue.contains("Island") || varValue.contains("Swamp")
@@ -1682,8 +1691,9 @@ public class AiController {
 
         Iterables.removeIf(saList, new Predicate<SpellAbility>() {
             @Override
-            public boolean apply(final SpellAbility spellAbility) {
-                return spellAbility instanceof LandAbility;
+            public boolean apply(final SpellAbility spellAbility) { //don't include removedAI cards if somehow the AI can play the ability or gain control of unsupported card
+                // TODO allow when experimental profile?
+                return spellAbility instanceof LandAbility || (spellAbility.getHostCard() != null && ComputerUtilCard.isCardRemAIDeck(spellAbility.getHostCard()));
             }
         });
 
@@ -1724,7 +1734,7 @@ public class AiController {
                 }
             }
 
-            sa.setActivatingPlayer(player);
+            sa.setActivatingPlayer(player, true);
             SpellAbility root = sa.getRootAbility();
 
             if (root.isSpell() || root.isTrigger() || root.isReplacementAbility()) {
@@ -1945,6 +1955,22 @@ public class AiController {
         return max;
     }
 
+    public int chooseNumber(SpellAbility sa, String title, List<Integer> options, Player relatedPlayer) {
+        switch(sa.getApi())
+        {
+            case SetLife: // Reverse the Sands
+                if (relatedPlayer.equals(sa.getHostCard().getController())) {
+                    return Collections.max(options);
+                } else if (relatedPlayer.isOpponentOf(sa.getHostCard().getController())) {
+                    return Collections.min(options);
+                } else {
+                    return options.get(0);
+                }
+            default:
+                return options.get(0);
+        }
+    }
+
     public boolean confirmPayment(CostPart costPart) {
         throw new UnsupportedOperationException("AI is not supposed to reach this code at the moment");
     }
@@ -2109,22 +2135,6 @@ public class AiController {
 
         return library;
     } // smoothComputerManaCurve()
-
-    public int chooseNumber(SpellAbility sa, String title, List<Integer> options, Player relatedPlayer) {
-        switch(sa.getApi())
-        {
-            case SetLife: // Reverse the Sands
-                if (relatedPlayer.equals(sa.getHostCard().getController())) {
-                    return Collections.max(options);
-                } else if (relatedPlayer.isOpponentOf(sa.getHostCard().getController())) {
-                    return Collections.min(options);
-                } else {
-                    return options.get(0);
-                }
-            default:
-                return 0;
-        }
-    }
 
     public boolean chooseDirection(SpellAbility sa) {
         if (sa == null || sa.getApi() == null) {

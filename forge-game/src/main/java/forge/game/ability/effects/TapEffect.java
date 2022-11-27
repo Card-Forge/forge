@@ -20,6 +20,9 @@ public class TapEffect extends SpellAbilityEffect {
         }
 
         for (final Card tgtC : getTargetCards(sa)) {
+            if (tgtC.isPhasedOut()) {
+                continue;
+            }
             if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {
                 continue;
             }

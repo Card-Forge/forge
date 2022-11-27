@@ -1,6 +1,7 @@
 package forge.screens;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 
@@ -13,29 +14,41 @@ import forge.assets.FSkinFont;
 import forge.assets.FSkinTexture;
 import forge.toolbox.FButton;
 import forge.toolbox.FContainer;
-import forge.toolbox.FEvent;
 import forge.toolbox.FProgressBar;
 
 public class SplashScreen extends FContainer {
-    private TextureRegion background;
-    private final FProgressBar progressBar;
+    private TextureRegion splashTexture;
+    private Texture splashBGTexture;
+    private FProgressBar progressBar;
     private FSkinFont disclaimerFont;
     private boolean preparedForDialogs, showModeSelector, init, animateLogo, hideBG, hideBtn, startClassic, clear;
     private FButton btnAdventure, btnHome;
     private BGAnimation bgAnimation;
 
     public SplashScreen() {
-        progressBar = new FProgressBar();
-        progressBar.setDescription("Welcome to Forge");
-        bgAnimation = new BGAnimation();
+        progressBar = getProgressBar();
+        bgAnimation = getBgAnimation();
     }
 
+    public BGAnimation getBgAnimation() {
+        if (bgAnimation == null) {
+            bgAnimation = new BGAnimation();
+        }
+        return bgAnimation;
+    }
     public FProgressBar getProgressBar() {
+        if (progressBar == null) {
+            progressBar = new FProgressBar();
+            progressBar.setDescription("Welcome to Forge");
+        }
         return progressBar;
     }
 
-    public void setBackground(TextureRegion background0) {
-        background = background0;
+    public void setSplashTexture(TextureRegion textureRegion) {
+        splashTexture = textureRegion;
+    }
+    public void setSplashBGTexture(Texture texture) {
+        splashBGTexture = texture;
     }
 
     public void startClassic() {
@@ -93,7 +106,61 @@ public class SplashScreen extends FContainer {
         float DURATION = 0.8f;
         private float progress = 0;
         private boolean finished, openAdventure;
+        private void drawAdventureBackground(Graphics g) {
+            if (splashTexture == null)
+                return;
+            float percentage = progress / DURATION;
+            float oldAlpha = g.getfloatAlphaComposite();
+            if (percentage < 0) {
+                percentage = 0;
+            } else if (percentage > 1) {
+                percentage = 1;
+            }
+            g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+            g.setAlphaComposite(percentage);
+            g.drawRepeatingImage(splashBGTexture, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+            g.setAlphaComposite(oldAlpha);
 
+            float x, y, w, h;
+            float backgroundRatio = (float) splashTexture.getRegionWidth() / splashTexture.getRegionHeight();
+            float screenRatio = getWidth() / getHeight();
+            if (backgroundRatio > screenRatio) {
+                x = 0;
+                w = getWidth();
+                h = getWidth() * backgroundRatio;
+                y = (getHeight() - h) / 2;
+            } else {
+                y = 0;
+                h = getHeight();
+                w = getHeight() / backgroundRatio;
+                x = (getWidth() - w) / 2;
+            }
+            float hmod = Forge.isLandscapeMode() ? 1f : 1.3f;
+            float ymod = 2.6f;
+            g.drawImage(splashTexture, Forge.getScreenWidth()/2 - (w*percentage*hmod)/2 , Forge.getScreenHeight()/2 - (h*percentage*hmod)/ymod, (w*percentage)*hmod, (h*percentage)*hmod);
+
+            y += h * 295f / 450f;
+            if (disclaimerFont == null) {
+                disclaimerFont = FSkinFont.get(9);
+            }
+            float disclaimerHeight = 30f / 450f * h;
+            if (Forge.forcedEnglishonCJKMissing && !clear) {
+                clear = true;
+                FSkinFont.preloadAll("");
+                disclaimerFont = FSkinFont.get(9);
+            }
+            float padding = 20f / 450f * w;
+            float pbHeight = 57f / 450f * h;
+            y += 78f / 450f * h;
+
+            float w2 = Forge.isLandscapeMode() ? Forge.getScreenWidth() / 2 : Forge.getScreenHeight() / 2;
+            float h2 = 57f / 450f * (w2/2);
+
+            String version = "v. " + Forge.CURRENT_VERSION;
+            g.drawText(version, disclaimerFont, FProgressBar.SEL_FORE_COLOR, x, getHeight() - disclaimerHeight, w, disclaimerHeight, false, Align.center, true);
+            progressBar.setBounds((Forge.getScreenWidth() - w2)/2, Forge.getScreenHeight() - h2 * 2f, w2, h2);
+            g.draw(progressBar);
+        }
         public void drawBackground(Graphics g) {
             float percentage = progress / DURATION;
             float oldAlpha = g.getfloatAlphaComposite();
@@ -115,7 +182,7 @@ public class SplashScreen extends FContainer {
                     g.setAlphaComposite(oldAlpha - percentage);
                     float xmod = Forge.getScreenHeight() > 1000 ? 1.5f : Forge.getScreenHeight() > 800 ? 1.3f : 1f;
                     xmod += 10 * percentage;
-                    g.drawImage(FSkin.hdLogo, getWidth() / 2 - (FSkin.hdLogo.getWidth() * xmod) / 2, getHeight() / 2 - (FSkin.hdLogo.getHeight() * xmod) / 1.5f, FSkin.hdLogo.getWidth() * xmod, FSkin.hdLogo.getHeight() * xmod);
+                    g.drawImage(FSkin.getLogo(), getWidth() / 2 - (FSkin.getLogo().getWidth() * xmod) / 2, getHeight() / 2 - (FSkin.getLogo().getHeight() * xmod) / 1.5f, FSkin.getLogo().getWidth() * xmod, FSkin.getLogo().getHeight() * xmod);
                     g.setAlphaComposite(oldAlpha);
                 } else {
                     g.setAlphaComposite(hideBG ? 1 - percentage : 1);
@@ -165,17 +232,14 @@ public class SplashScreen extends FContainer {
     @Override
     protected void drawBackground(Graphics g) {
         bgAnimation.start();
-        bgAnimation.drawBackground(g);
+        if (!Forge.selector.equalsIgnoreCase("Adventure"))
+            bgAnimation.drawBackground(g);
+        else
+            bgAnimation.drawAdventureBackground(g);
     }
 
     void drawTransition(Graphics g, boolean openAdventure, float percentage) {
         TextureRegion tr = new TextureRegion(Forge.getAssets().fallback_skins().get(0));
-        if (!Forge.isLandscapeMode() && tr != null) {
-            float ar = 1.78f;
-            int w = (int) (tr.getRegionHeight() / ar);
-            int x = (int) ((tr.getRegionWidth() - w) / ar);
-            tr.setRegion(x, 0, w, tr.getRegionHeight());
-        }
         float oldAlpha = g.getfloatAlphaComposite();
         g.setAlphaComposite(percentage);
         if (openAdventure) {
@@ -189,14 +253,14 @@ public class SplashScreen extends FContainer {
     }
 
     private void showSelector(Graphics g, float alpha) {
-        if (background == null) {
+        if (splashTexture == null) {
             return;
         }
         g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
         g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, getWidth(), getHeight());
 
         float x, y, w, h;
-        float backgroundRatio = (float) background.getRegionWidth() / background.getRegionHeight();
+        float backgroundRatio = (float) splashTexture.getRegionWidth() / splashTexture.getRegionHeight();
         float screenRatio = getWidth() / getHeight();
         if (backgroundRatio > screenRatio) {
             x = 0;
@@ -209,11 +273,11 @@ public class SplashScreen extends FContainer {
             w = getHeight() / backgroundRatio;
             x = (getWidth() - w) / 2;
         }
-        if (FSkin.hdLogo != null) {
+        if (FSkin.getLogo() != null) {
             float xmod = Forge.getScreenHeight() > 1000 ? 1.5f : Forge.getScreenHeight() > 800 ? 1.3f : 1f;
-            g.drawImage(FSkin.hdLogo, getWidth() / 2 - (FSkin.hdLogo.getWidth() * xmod) / 2, getHeight() / 2 - (FSkin.hdLogo.getHeight() * xmod) / 1.5f, FSkin.hdLogo.getWidth() * xmod, FSkin.hdLogo.getHeight() * xmod);
+            g.drawImage(FSkin.getLogo(), getWidth() / 2 - (FSkin.getLogo().getWidth() * xmod) / 2, getHeight() / 2 - (FSkin.getLogo().getHeight() * xmod) / 1.5f, FSkin.getLogo().getWidth() * xmod, FSkin.getLogo().getHeight() * xmod);
         } else {
-            g.drawImage(background, x, y, w, h);
+            g.drawImage(splashTexture, x, y, w, h);
         }
         y += h * 295f / 450f;
         float padding = 20f / 450f * w;
@@ -223,36 +287,30 @@ public class SplashScreen extends FContainer {
             init = true;
             btnAdventure = new FButton(Forge.getLocalizer().getMessageorUseDefault("lblAdventureMode", "Adventure Mode"));
             btnHome = new FButton(Forge.getLocalizer().getMessageorUseDefault("lblClassicMode", "Classic Mode"));
-            btnAdventure.setCommand(new FEvent.FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    if (FSkin.hdLogo == null) {
-                        hideBG = true;
-                        hideBtn = true;
-                        bgAnimation.progress = 0;
-                        bgAnimation.openAdventure = true;
-                    } else {
-                        hideBtn = true;
-                        animateLogo = true;
-                        bgAnimation.progress = 0;
-                        bgAnimation.openAdventure = true;
-                    }
+            btnAdventure.setCommand(e -> {
+                if (FSkin.getLogo() == null) {
+                    hideBG = true;
+                    hideBtn = true;
+                    bgAnimation.progress = 0;
+                    bgAnimation.openAdventure = true;
+                } else {
+                    hideBtn = true;
+                    animateLogo = true;
+                    bgAnimation.progress = 0;
+                    bgAnimation.openAdventure = true;
                 }
             });
-            btnHome.setCommand(new FEvent.FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    if (FSkin.hdLogo == null) {
-                        hideBG = true;
-                        hideBtn = true;
-                        bgAnimation.progress = 0;
-                        bgAnimation.openAdventure = false;
-                    } else {
-                        hideBtn = true;
-                        animateLogo = true;
-                        bgAnimation.progress = 0;
-                        bgAnimation.openAdventure = false;
-                    }
+            btnHome.setCommand(e -> {
+                if (FSkin.getLogo() == null) {
+                    hideBG = true;
+                    hideBtn = true;
+                    bgAnimation.progress = 0;
+                    bgAnimation.openAdventure = false;
+                } else {
+                    hideBtn = true;
+                    animateLogo = true;
+                    bgAnimation.progress = 0;
+                    bgAnimation.openAdventure = false;
                 }
             });
             float btn_w = (w - 2 * padding);
@@ -276,14 +334,14 @@ public class SplashScreen extends FContainer {
     }
 
     void drawDisclaimer(Graphics g) {
-        if (background == null) {
+        if (splashTexture == null) {
             return;
         }
         g.fillRect(Color.BLACK, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
         g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, getWidth(), getHeight());
 
         float x, y, w, h;
-        float backgroundRatio = (float) background.getRegionWidth() / background.getRegionHeight();
+        float backgroundRatio = (float) splashTexture.getRegionWidth() / splashTexture.getRegionHeight();
         float screenRatio = getWidth() / getHeight();
         if (backgroundRatio > screenRatio) {
             x = 0;
@@ -296,7 +354,7 @@ public class SplashScreen extends FContainer {
             w = getHeight() / backgroundRatio;
             x = (getWidth() - w) / 2;
         }
-        g.drawImage(background, x, y, w, h);
+        g.drawImage(splashTexture, x, y, w, h);
 
         y += h * 295f / 450f;
         if (disclaimerFont == null) {

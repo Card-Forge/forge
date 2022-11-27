@@ -2,11 +2,10 @@ Name:Primal Plasma
 ManaCost:3 U
 Types:Creature Elemental Shapeshifter
 PT:*/*
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ PlasmaChoice | Description$ As CARDNAME enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender.
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ PlasmaChoice | ReplacementResult$ Updated | Description$ As CARDNAME enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender.
 SVar:PlasmaChoice:DB$ GenericChoice | Defined$ You | Choices$ GroundPlasma,AirPlasma,WallPlasma
-SVar:GroundPlasma:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 3 | Toughness$ 3 | SpellDescription$ CARDNAME is 3/3 | SubAbility$ DBMove
-SVar:AirPlasma:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 2 | Toughness$ 2 | Keywords$ Flying | SpellDescription$ CARDNAME is 2/2 with flying | SubAbility$ DBMove
-SVar:WallPlasma:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 1 | Toughness$ 6 | Keywords$ Defender | SpellDescription$ CARDNAME is 1/6 with defender | SubAbility$ DBMove
-SVar:DBMove:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ All | Destination$ Battlefield
+SVar:GroundPlasma:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 3 | Toughness$ 3 | SpellDescription$ CARDNAME is 3/3
+SVar:AirPlasma:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 2 | Toughness$ 2 | Keywords$ Flying | SpellDescription$ CARDNAME is 2/2 with flying
+SVar:WallPlasma:DB$ Animate | Defined$ Self | Duration$ Permanent | Power$ 1 | Toughness$ 6 | Keywords$ Defender | SpellDescription$ CARDNAME is 1/6 with defender
 AI:RemoveDeck:All
 Oracle:As Primal Plasma enters the battlefield, it becomes your choice of a 3/3 creature, a 2/2 creature with flying, or a 1/6 creature with defender.

@@ -1,0 +1,9 @@
+Name:Suspicious Shambler
+ManaCost:3 B
+Types:Creature Zombie
+PT:4/2
+A:AB$ Token | Cost$ 4 B B ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | SorcerySpeed$ True | TokenAmount$ 2 | TokenScript$ b_2_2_zombie | TokenOwner$ You | SpellDescription$ Create two 2/2 black Zombie creature token. Activate only as a sorcery.
+SVar:SacMe:3
+SVar:DiscardMe:3
+DeckHas:Ability$Graveyard|Token
+Oracle:{4}{B}{B}, Exile Suspicious Shambler from your graveyard: Create two 2/2 black Zombie creature tokens. Activate only as a sorcery. 

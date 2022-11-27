@@ -489,7 +489,7 @@ public class PlayerPanel extends FContainer {
     @Override
     protected void drawOverlay(Graphics g) {
         float y = getHeight() - FList.LINE_THICKNESS / 2;
-        g.drawLine(FList.LINE_THICKNESS, FList.LINE_COLOR, 0, y, getWidth(), y);
+        g.drawLine(FList.LINE_THICKNESS, FList.getLineColor(), 0, y, getWidth(), y);
     }
 
     private final FEventHandler humanAiSwitched = new FEventHandler() {

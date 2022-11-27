@@ -1,0 +1,10 @@
+Name:Belisarius Cawl
+ManaCost:2 W U
+Types:Legendary Artifact Creature Human
+PT:2/4
+A:AB$ Token | PrecostDesc$ Ultima Founding — | Cost$ T tapXType<2/Artifact> | TokenScript$ w_2_2_astartes_warrior_vigilance | SpellDescription$ Create a 2/2 white Astartes Warrior creature token with vigilance.
+A:AB$ Dig | PrecostDesc$ Master of Machines — | Cost$ T tapXType<X/Creature> | DigNum$ X | ChangeNum$ 1 | Optional$ True | ChangeValid$ Artifact | ForceRevealToController$ True | RestRandomOrder$ True | SpellDescription$ Look at the top X cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.
+SVar:X:Count$xPaid
+DeckHas:Ability$Token & Type$Astartes|Warrior
+DeckNeeds:Type$Artifact
+Oracle:Ultima Founding — {T}, Tap two untapped artifacts you control: Create a 2/2 white Astartes Warrior creature token with vigilance.\nMaster of Machines — {T}, Tap X untapped creatures you control: Look at the top X cards of your library. You may reveal an artifact card from among them and put it into your hand. Put the rest on the bottom of your library in a random order.

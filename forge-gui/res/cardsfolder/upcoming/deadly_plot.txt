@@ -1,0 +1,9 @@
+Name:Deadly Plot
+ManaCost:3 B
+Types:Instant
+A:SP$ Charm | Choices$ DBMurder,DBReanimate
+SVar:DBMurder:DB$ Destroy | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | SpellDescription$ Destroy target creature or planeswalker.
+SVar:DBReanimate:DB$ ChangeZone | ValidTgts$ Zombie.Creature+YouOwn | TgtPrompt$ Select target zombie creature card | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | SpellDescription$ Return target Zombie creature card from your graveyard to the battlefield tapped.
+DeckHas:Ability$Graveyard
+DeckHints:Type$Zombie & Ability$Graveyard
+Oracle:Choose one —\n• Destroy target creature or planeswalker.\n• Return target Zombie creature card from your graveyard to the battlefield tapped.

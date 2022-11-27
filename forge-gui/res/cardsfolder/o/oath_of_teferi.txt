@@ -6,6 +6,6 @@ SVar:TrigExile:DB$ ChangeZone | ValidTgts$ Permanent.Other+YouCtrl | Mandatory$ 
 SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigBounce | TriggerDescription$ Return exiled permanent to the battlefield. | RememberObjects$ RememberedLKI | SubAbility$ DBCleanup
 SVar:TrigBounce:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Defined$ DelayTriggerRememberedLKI
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-S:Mode$ Continuous | AffectedZone$ Battlefield | Affected$ Planeswalker.YouCtrl | AddHiddenKeyword$ CARDNAME's loyalty abilities can be activated twice each turn rather than only once | Description$ You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.
+S:Mode$ NumLoyaltyAct | ValidCard$ Planeswalker.YouCtrl | Twice$ True | Description$ You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.
 SVar:NeedsToPlay:Planeswalker.YouCtrl
 Oracle:When Oath of Teferi enters the battlefield, exile another target permanent you control. Return it to the battlefield under its owner's control at the beginning of the next end step.\nYou may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.

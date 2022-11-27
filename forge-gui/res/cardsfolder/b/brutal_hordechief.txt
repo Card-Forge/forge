@@ -5,8 +5,9 @@ PT:3/3
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a creature you control attacks, defending player loses 1 life and you gain 1 life.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredDefendingPlayer | LifeAmount$ 1 | SubAbility$ DBGainLife
 SVar:DBGainLife:DB$ GainLife | LifeAmount$ 1
-A:AB$ Effect | Cost$ 3 RW RW | Name$ Brutal Hordechief Effect | StaticAbilities$ STBlock | SubAbility$ DBDeclareCombatants | SpellDescription$ Creatures your opponents control block this turn if able, and you choose how those creatures block.
-SVar:STBlock:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.OppCtrl | AddHiddenKeyword$ CARDNAME blocks each combat if able. | Description$ Creatures your opponents control block this turn if able.
+A:AB$ Effect | Cost$ 3 RW RW | StaticAbilities$ STBlock | SubAbility$ DBDeclareCombatants | SpellDescription$ Creatures your opponents control block this turn if able, and you choose how those creatures block.
+SVar:STBlock:Mode$ MustBlock | ValidCreature$ Creature.OppCtrl | Description$ Creatures your opponents control block this turn if able, and you choose how those creatures block.
 SVar:DBDeclareCombatants:DB$ DeclareCombatants | DeclareBlockers$ True | Until$ EndOfTurn
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$LifeGain
 Oracle:Whenever a creature you control attacks, defending player loses 1 life and you gain 1 life.\n{3}{R/W}{R/W}: Creatures your opponents control block this turn if able, and you choose how those creatures block.

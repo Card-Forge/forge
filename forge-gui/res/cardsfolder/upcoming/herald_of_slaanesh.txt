@@ -1,0 +1,10 @@
+Name:Herald of Slaanesh
+ManaCost:2 R
+Types:Creature Demon
+PT:2/2
+S:Mode$ ReduceCost | ValidCard$ Demon | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Locus of Slaanesh — Demon spells you cast cost {2} less to cast.
+S:Mode$ Continuous | Affected$ Demon.Other+YouCtrl | AddKeyword$ Haste | Description$ Other Demons you control have haste.
+SVar:PlayMain1:TRUE
+DeckHas:Keyword$Haste
+DeckHints:Type$Demon
+Oracle:Locus of Slaanesh — Demon spells you cast cost {2} less to cast.\nOther Demons you control have haste.

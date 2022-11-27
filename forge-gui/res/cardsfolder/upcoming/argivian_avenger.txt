@@ -1,0 +1,6 @@
+Name:Argivian Avenger
+ManaCost:6
+Types:Artifact Creature Shapeshifter
+PT:5/5
+A:AB$ Pump | Cost$ 1 | NumAtt$ -1 | NumDef$ -1 | KWChoice$ Flying,Vigilance,Deathtouch,Haste | StackDescription$ SpellDescription | SpellDescription$ Until end of turn, CARDNAME gets -1/-1 and gains your choice of flying, vigilance, deathtouch, or haste.
+Oracle:{1}: Until end of turn, Argivian Avenger gets -1/-1 and gains your choice of flying, vigilance, deathtouch, or haste.

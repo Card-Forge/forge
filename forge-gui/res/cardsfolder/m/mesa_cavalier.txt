@@ -1,0 +1,9 @@
+Name:Mesa Cavalier
+ManaCost:2 W
+Types:Creature Human Knight
+PT:2/1
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:Flying\nWhen Mesa Cavalier enters the battlefield, you gain 2 life.

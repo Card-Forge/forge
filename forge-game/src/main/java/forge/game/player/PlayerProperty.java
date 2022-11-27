@@ -49,11 +49,11 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.equals("Active")) {
-            if (!player.equals(game.getPhaseHandler().getPlayerTurn())) {
+            if (!game.getPhaseHandler().isPlayerTurn(player)) {
                 return false;
             }
         } else if (property.equals("NonActive")) {
-            if (player.equals(game.getPhaseHandler().getPlayerTurn())) {
+            if (game.getPhaseHandler().isPlayerTurn(player)) {
                 return false;
             }
         } else if (property.equals("OpponentToActive")) {
@@ -160,7 +160,7 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.equals("Defending")) {
-            if (!game.getCombat().getAttackersAndDefenders().values().contains(player)) {
+            if (game.getCombat() == null || !game.getCombat().getAttackersAndDefenders().values().contains(player)) {
                 return false;
             }
         } else if (property.equals("LostLifeThisTurn")) {
@@ -381,6 +381,14 @@ public class PlayerProperty {
             if (player.getCreaturesAttackedThisTurn().isEmpty()) {
                 return false;
             }
+        } else if (property.startsWith("wasAttackedThisTurnBy")) {
+            String restriction = property.split(" ")[1];
+            for (Card c : sourceController.getCreaturesAttackedThisTurn(player)) {
+                if (c.isValid(restriction, sourceController, source, spellAbility)) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.equals("attackedYouTheirLastTurn")) {
             if (!player.getAttackedPlayersMyLastTurn().contains(sourceController)) {
                 return false;

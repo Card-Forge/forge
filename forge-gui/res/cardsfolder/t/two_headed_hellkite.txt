@@ -1,0 +1,10 @@
+Name:Two-Headed Hellkite
+ManaCost:1 W U B R G
+Types:Creature Dragon
+PT:5/5
+K:Flying
+K:Menace
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ Whenever CARDNAME attacks, draw two cards.
+SVar:TrigDraw:DB$ Draw | Defined$ You | NumCards$ 2
+Oracle:Flying,menace,haste\nWhenever Two-Headed Hellkite attacks, draw two cards.

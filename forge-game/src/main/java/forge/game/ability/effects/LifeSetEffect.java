@@ -37,11 +37,11 @@ public class LifeSetEffect extends SpellAbilityEffect {
         for (final Player p : players.threadSafeIterable()) {
             if (tgt == null || p.canBeTargetedBy(sa)) {
                 if (!redistribute) {
-                    p.setLife(lifeAmount, sa.getHostCard());
+                    p.setLife(lifeAmount, sa);
                 } else {
                     List<Integer> validChoices = getDistribution(players, true, lifetotals);
                     int life = sa.getActivatingPlayer().getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblLifeTotal") + ": " + p, validChoices, p);
-                    p.setLife(life, sa.getHostCard());
+                    p.setLife(life, sa);
                     lifetotals.remove((Integer) life);
                     players.remove(p);
                 }

@@ -6,119 +6,121 @@ Type=Online
 ScryfallCode=ANB
 
 [cards]
-89 U Affectionate Indrik @Steve Prescott
-23 U Air Elemental @Tomasz Jedruszek
 1 U Angel of Vitality @Johannes Voss
 2 R Angelic Guardian @Sara Winters
 3 U Angelic Reward @Denman Rooke
-24 C Armored Whirl Turtle @Tingting Yeh
-45 U Bad Deal @Zoltan Boros
-90 C Baloth Packhunter @Nestor Ossandon Leal
-67 C Bombard @Alex Konstad
 4 U Bond of Discipline @Zezhou Chen
-68 C Burn Bright @Scott Murphy
-91 C Charging Badger @Raoul Vitale
 5 C Charmed Stray @Chris Rahn
-25 C Cloudkin Seer @Anastasia Ovchinnikova
-92 U Colossal Majesty @Randy Vargas
-46 C Compound Fracture @Anna Pavleeva
 6 U Confront the Assault @J.P. Targete
-26 C Coral Merfolk @Lie Setiawan
-47 C Cruel Cut @Caio Monteiro
-48 R Demon of Loathing @Tomasz Jedruszek
-93 R Epic Proportions @Jesper Ejsing
-49 U Eternal Thirst @Clint Cearley
-111 C Evolving Wilds @Steven Belledin
-69 C Fearless Halberdier @Suzanne Helmigh
 7 C Fencing Ace @David Rapoza
-94 C Feral Roar @Jonathan Kuo
-112 C Forest @Jonas De Ro
-27 C Frilled Sea Serpent @Steven Belledin
-95 C Generous Stray @Milivoj Ćeran
-96 R Gigantosaurus @Jonathan Kuo
-28 C Glint @Igor Kieryluk
-70 U Goblin Gang Leader @Jakub Kasper
-71 C Goblin Gathering @Svetlin Velinov
-72 R Goblin Trashmaster @Jakub Kasper
-73 C Goblin Tunneler @Jesper Ejsing
 8 R Goring Ceratops @Zezhou Chen
-97 C Greenwood Sentinel @Johann Bodin
 9 U Hallowed Priest @Kim Sokol
-74 C Hurloon Minotaur @Izzy
-98 C Ilysian Caryatid @Winona Nelson
-75 R Immortal Phoenix @Daarken
 10 C Impassioned Orator @Mark Zug
-76 U Inescapable Blaze @Steve Argyle
 11 R Inspiring Commander @Antonio José Manzanedo
-113 C Island @Titus Lunter
-99 C Jungle Delver @Kieran Yanner
 12 C Knight's Pledge @Magali Villeneuve
-50 C Krovikan Scoundrel @Ralph Horsley
 13 R Leonin Warleader @Jakub Kasper
 14 C Loxodon Line Breaker @Jesper Ejsing
-51 U Malakir Cullblade @Igor Kieryluk
-77 C Maniacal Rage @Heonhwa Choe
-52 R Mardu Outrider @Evan Shipard
-78 C Molten Ravager @Dave Kendall
 15 C Moorland Inquisitor @David Palumbo
-114 C Mountain @Richard Wright
-53 U Murder @Tyler Jacobson
-79 C Nest Robber @Jonathan Kuo
-54 R Nightmare @Vance Kovacs
-55 C Nimble Pilferer @Lie Setiawan
-29 C Octoprophet @Grzegorz Rutkowski
-80 R Ogre Battledriver @Greg Staples
-30 R Overflowing Insight @Lucas Graciano
 16 C Pacifism @Jesper Ejsing
-115 C Plains @Nils Hamm
-100 U Prized Unicorn @Rudy Siswanto
-101 C Rabid Bite @Karl Kopinski
-81 C Raging Goblin @Jakub Kasper
-82 U Raid Bombardment @Matt Cavotta
-56 C Raise Dead @Carl Critchlow
-102 R Rampaging Brontodon @Lars Grant-West
-83 C Reduce to Ashes @Jason A. Engle
-31 R Riddlemaster Sphinx @Ryan Yee
-32 C River's Favor @Lie Setiawan
-103 C Rumbling Baloth @Jesper Ejsing
 17 C Sanctuary Cat @David Palumbo
-57 C Sanitarium Skeleton @Kev Walker
-58 C Savage Gorger @Antonio José Manzanedo
-59 C Scathe Zombies @Kev Walker
-60 U Sengir Vampire @Kev Walker
-104 U Sentinel Spider @Vincent Proce
 18 U Serra Angel @Donato Giancola
-84 C Shock @Jason Rainville
 19 C Shrine Keeper @Craig J Spearing
-85 R Siege Dragon @Karl Kopinski
-61 C Skeleton Archer @Randy Vargas
-33 U Sleep @Chris Rahn
-34 R Soulblade Djinn @Viktor Titov
-62 R Soulhunter Rakshasa @Caio Monteiro
 20 C Soulmender @James Ryman
 21 C Spiritual Guardian @J.P. Targete
-105 C Stony Strength @Chris Seaman
-86 C Storm Strike @Dmitry Burmak
-116 C Swamp @Adam Paquette
-35 C Sworn Guardian @Sara Winters
 22 C Tactical Advantage @Lie Setiawan
-87 C Tin Street Cadet @Jarel Threat
-106 C Titanic Growth @Ryan Pancoast
-107 C Treetop Warden @Colin Boyer
-63 C Typhoid Rats @Dave Kendall
-64 C Unlikely Aid @Viktor Titov
+23 U Air Elemental @Tomasz Jedruszek
+24 C Armored Whirl Turtle @Tingting Yeh
+25 C Cloudkin Seer @Anastasia Ovchinnikova
+26 C Coral Merfolk @Lie Setiawan
+27 C Frilled Sea Serpent @Steven Belledin
+28 C Glint @Igor Kieryluk
+29 C Octoprophet @Grzegorz Rutkowski
+30 R Overflowing Insight @Lucas Graciano
+31 R Riddlemaster Sphinx @Ryan Yee
+32 C River's Favor @Lie Setiawan
+33 U Sleep @Chris Rahn
+34 R Soulblade Djinn @Viktor Titov
+35 C Sworn Guardian @Sara Winters
 36 C Unsummon @Izzy
-65 C Vampire Opportunist @Jason Rainville
-88 U Volcanic Dragon @Chris Rahn
 37 C Wall of Runes @Zezhou Chen
 38 U Warden of Evos Isle @Nils Hamm
 39 C Waterkin Shaman @Yeong-Hao Han
 40 C Waterknot @Wayne Reynolds
-108 C Wildwood Patrol @Dan Scott
 41 R Windreader Sphinx @Min Yum
 42 U Windstorm Drake @Daarken
 43 C Winged Words @Chris Seaman
+44 C Zephyr Gull @Antonio José Manzanedo
+45 U Bad Deal @Zoltan Boros
+46 C Compound Fracture @Anna Pavleeva
+47 C Cruel Cut @Caio Monteiro
+48 R Demon of Loathing @Tomasz Jedruszek
+49 U Eternal Thirst @Clint Cearley
+50 C Krovikan Scoundrel @Ralph Horsley
+51 U Malakir Cullblade @Igor Kieryluk
+52 R Mardu Outrider @Evan Shipard
+53 U Murder @Tyler Jacobson
+54 R Nightmare @Vance Kovacs
+55 C Nimble Pilferer @Lie Setiawan
+56 C Raise Dead @Carl Critchlow
+57 C Sanitarium Skeleton @Kev Walker
+58 C Savage Gorger @Antonio José Manzanedo
+59 C Scathe Zombies @Kev Walker
+60 U Sengir Vampire @Kev Walker
+61 C Skeleton Archer @Randy Vargas
+62 R Soulhunter Rakshasa @Caio Monteiro
+63 C Typhoid Rats @Dave Kendall
+64 C Unlikely Aid @Viktor Titov
+65 C Vampire Opportunist @Jason Rainville
 66 C Witch's Familiar @Jack Wang
+67 C Bombard @Alex Konstad
+68 C Burn Bright @Scott Murphy
+69 C Fearless Halberdier @Suzanne Helmigh
+70 U Goblin Gang Leader @Jakub Kasper
+71 C Goblin Gathering @Svetlin Velinov
+72 R Goblin Trashmaster @Jakub Kasper
+73 C Goblin Tunneler @Jesper Ejsing
+74 C Hurloon Minotaur @Izzy
+75 R Immortal Phoenix @Daarken
+76 U Inescapable Blaze @Steve Argyle
+77 C Maniacal Rage @Heonhwa Choe
+78 C Molten Ravager @Dave Kendall
+79 C Nest Robber @Jonathan Kuo
+80 R Ogre Battledriver @Greg Staples
+81 C Raging Goblin @Jakub Kasper
+82 U Raid Bombardment @Matt Cavotta
+83 C Reduce to Ashes @Jason A. Engle
+84 C Shock @Jason Rainville
+85 R Siege Dragon @Karl Kopinski
+86 C Storm Strike @Dmitry Burmak
+87 C Tin Street Cadet @Jarel Threat
+88 U Volcanic Dragon @Chris Rahn
+89 U Affectionate Indrik @Steve Prescott
+90 C Baloth Packhunter @Nestor Ossandon Leal
+91 C Charging Badger @Raoul Vitale
+92 U Colossal Majesty @Randy Vargas
+93 R Epic Proportions @Jesper Ejsing
+94 C Feral Roar @Jonathan Kuo
+95 C Generous Stray @Milivoj Ćeran
+96 R Gigantosaurus @Jonathan Kuo
+97 C Greenwood Sentinel @Johann Bodin
+98 C Ilysian Caryatid @Winona Nelson
+99 C Jungle Delver @Kieran Yanner
+100 U Prized Unicorn @Rudy Siswanto
+101 C Rabid Bite @Karl Kopinski
+102 R Rampaging Brontodon @Lars Grant-West
+103 C Rumbling Baloth @Jesper Ejsing
+104 U Sentinel Spider @Vincent Proce
+105 C Stony Strength @Chris Seaman
+106 C Titanic Growth @Ryan Pancoast
+107 C Treetop Warden @Colin Boyer
+108 C Wildwood Patrol @Dan Scott
 109 C Woodland Mystic @Uriah Voth
 110 R World Shaper @Raymond Swanland
-44 C Zephyr Gull @Antonio José Manzanedo
+111 C Evolving Wilds @Steven Belledin
+112 C Forest @Jonas De Ro
+113 C Island @Titus Lunter
+114 C Mountain @Richard Wright
+115 C Plains @Nils Hamm
+116 C Swamp @Adam Paquette
+117 C Arcane Signet @Dan Scott
+118 C Command Tower @Evan Shipard

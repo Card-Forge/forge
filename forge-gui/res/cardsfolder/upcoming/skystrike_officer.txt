@@ -1,0 +1,12 @@
+Name:Skystrike Officer
+ManaCost:2 U
+Types:Creature Human Soldier
+PT:2/3
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME attacks, create a 1/1 colorless Soldier artifact creature token.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_soldier
+A:AB$ Draw | Cost$ tapXType<3/Soldier> | SpellDescription$ Draw a card.
+SVar:HasAttackEffect:TRUE
+DeckHints:Type$Soldier
+DeckHas:Ability$Token & Type$Artifact
+Oracle:Whenever Skystrike Officer attacks, create a 1/1 colorless Soldier artifact creature token.\nTap three untapped Soldiers you control: Draw a card.

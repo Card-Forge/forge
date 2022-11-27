@@ -6,6 +6,6 @@ K:Deathtouch
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, target opponent discards a nonland card with the greatest mana value among cards in their hand. Create a Blood token.
 SVar:TrigDiscard:DB$ Discard | ValidTgts$ Opponent | TgtPrompt$ Select an opponent | NumCards$ 1 | DiscardValid$ Card.nonLand+cmcEQX | Mode$ TgtChoose | SubAbility$ DBToken
 SVar:DBToken:DB$ Token | TokenScript$ c_a_blood_draw
-SVar:X:Count$HighestCMC_Card.TargetedPlayerOwn+inZoneHand
+SVar:X:Count$ValidHand Card.TargetedPlayerOwn$GreatestCMC
 DeckHas:Ability$Token|Sacrifice & Type$Artifact|Blood
 Oracle:Deathtouch\nWhen Citystalker Connoisseur enters the battlefield, target opponent discards a nonland card with the greatest mana value among cards in their hand. Create a Blood token.

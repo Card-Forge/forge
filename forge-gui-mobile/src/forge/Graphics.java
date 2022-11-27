@@ -41,6 +41,10 @@ public class Graphics {
     private final ShaderProgram shaderGrayscale = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("grayscale.frag"));
     private final ShaderProgram shaderWarp = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("warp.frag"));
     private final ShaderProgram shaderUnderwater = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("underwater.frag"));
+    private final ShaderProgram shaderNightDay = new ShaderProgram(Shaders.vertexShaderDayNight, Shaders.fragmentShaderDayNight);
+    private final ShaderProgram shaderPixelate = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPixelateShader);
+    private final ShaderProgram shaderPixelateWarp = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPixelateShaderWarp);
+    private final ShaderProgram shaderChromaticAbberation = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragChromaticAbberation);
 
     private Texture dummyTexture = null;
 
@@ -818,6 +822,88 @@ public class Graphics {
             setAlphaComposite(oldalpha);
         }
     }
+    public void drawChromatic(TextureRegion image, float x, float y, float w, float h, Float time) {
+        if (image == null)
+            return;
+        if (time != null) {
+            batch.end();
+            shaderChromaticAbberation.bind();
+            shaderChromaticAbberation.setUniformf("u_time", time);
+            batch.setShader(shaderChromaticAbberation);
+            batch.begin();
+            //draw
+            batch.draw(image, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            drawImage(image, x, y, w, h);
+        }
+    }
+    public void drawPixelated(FImage image, float x, float y, float w, float h, Float amount) {
+        if (image == null)
+            return;
+        if (amount != null) {
+            batch.end();
+            shaderPixelate.bind();
+            shaderPixelate.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+            shaderPixelate.setUniformf("u_cellSize", amount);
+            batch.setShader(shaderPixelate);
+            batch.begin();
+            //draw
+            image.draw(this, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            drawImage(image, x, y, w, h);
+        }
+    }
+    public void drawPixelated(TextureRegion image, float x, float y, float w, float h, Float amount) {
+        if (image == null)
+            return;
+        if (amount != null) {
+            batch.end();
+            shaderPixelate.bind();
+            shaderPixelate.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
+            shaderPixelate.setUniformf("u_cellSize", amount);
+            batch.setShader(shaderPixelate);
+            batch.begin();
+            //draw
+            batch.draw(image, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            drawImage(image, x, y, w, h);
+        }
+    }
+    public void drawPixelatedWarp(TextureRegion image, float x, float y, float w, float h, float amount) {
+        if (image == null)
+            return;
+        if (amount > 0) {
+            batch.end();
+            shaderPixelateWarp.bind();
+            shaderPixelateWarp.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
+            shaderPixelateWarp.setUniformf("u_cellSize", amount);
+            shaderPixelateWarp.setUniformf("u_amount", 0.2f*amount);
+            shaderPixelateWarp.setUniformf("u_speed", 0.5f);
+            shaderPixelateWarp.setUniformf("u_time", 0.8f);
+            batch.setShader(shaderPixelateWarp);
+            batch.begin();
+            //draw
+            batch.draw(image, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            drawImage(image, x, y, w, h);
+        }
+    }
     public void drawWarpImage(Texture image, float x, float y, float w, float h, float time) {
         batch.end();
         shaderWarp.bind();
@@ -827,7 +913,7 @@ public class Graphics {
         batch.setShader(shaderWarp);
         batch.begin();
         //draw
-        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        batch.draw(image, x, y, w, h);
         //reset
         batch.end();
         batch.setShader(null);
@@ -842,7 +928,7 @@ public class Graphics {
         batch.setShader(shaderWarp);
         batch.begin();
         //draw
-        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        batch.draw(image, x, y, w, h);
         //reset
         batch.end();
         batch.setShader(null);
@@ -888,6 +974,25 @@ public class Graphics {
             setAlphaComposite(oldalpha);
         }
     }
+    public void drawNightDay(FImage image, float x, float y, float w, float h, Float time) {
+        if (image == null)
+            return;
+        if (time != null) {
+            batch.end();
+            shaderNightDay.bind();
+            shaderNightDay.setUniformf("u_timeOfDay", time);
+            batch.setShader(shaderNightDay);
+            batch.begin();
+            //draw
+            image.draw(this, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            drawImage(image, x, y, w, h);
+        }
+    }
     public void drawUnderWaterImage(TextureRegion image, float x, float y, float w, float h, float time) {
         batch.end();
         shaderUnderwater.bind();
@@ -918,7 +1023,8 @@ public class Graphics {
         }
     }
     public void drawImage(Texture image, float x, float y, float w, float h) {
-        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        if (image != null)
+            batch.draw(image, adjustX(x), adjustY(y, h), w, h);
     }
     public void drawImage(TextureRegion image, float x, float y, float w, float h) {
         if (image != null)
@@ -978,6 +1084,8 @@ public class Graphics {
     }
 
     public void drawRepeatingImage(Texture image, float x, float y, float w, float h) {
+        if (image == null)
+            return;
         if (startClip(x, y, w, h)) { //only render if clip successful, otherwise it will escape bounds
             int tilesW = (int)(w / image.getWidth()) + 1;
             int tilesH = (int)(h / image.getHeight()) + 1;

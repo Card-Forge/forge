@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Enchantment Aura
 K:Cumulative upkeep:R
 A:SP$ Attach | Cost$ 3 R | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ CantBeCast | ValidCard$ Creature | Caster$ EnchantedController | Description$ Enchanted creature's controller can't cast creature spells.
+S:Mode$ CantBeCast | ValidCard$ Creature | Caster$ Player.EnchantedController | Description$ Enchanted creature's controller can't cast creature spells.
 AI:RemoveDeck:All
 Oracle:Enchant creature\nCumulative upkeep {R} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nEnchanted creature's controller can't cast creature spells.

@@ -387,7 +387,7 @@ public class ComputerUtilCombat {
     public static List<Card> getLifeThreateningCommanders(final Player ai, final Combat combat) {
         List<Card> res = Lists.newArrayList();
         for (Card c : combat.getAttackers()) {
-            if (c.isCommander()) {
+            if (c.isCommander() && combat.isAttacking(c, ai)) {
                 int currentCommanderDamage = ai.getCommanderDamage(c);
                 if (damageIfUnblocked(c, ai, combat, false) + currentCommanderDamage >= 21) {
                     res.add(c);
@@ -518,7 +518,7 @@ public class ComputerUtilCombat {
             return true;
         }
 
-        return resultingPoison(ai, combat) > 9;
+        return resultingPoison(ai, combat) >= ai.getGame().getRules().getPoisonCountersToLose();
     }
 
     // This calculates the amount of damage a blockgang can deal to the attacker
@@ -1253,7 +1253,7 @@ public class ComputerUtilCombat {
                 continue;
             }
 
-            sa.setActivatingPlayer(source.getController());
+            sa.setActivatingPlayer(source.getController(), true);
 
             if (sa.hasParam("Cost")) {
                 if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
@@ -1286,8 +1286,8 @@ public class ComputerUtilCombat {
                 power += Integer.parseInt(att);
             } else {
                 String bonus = AbilityUtils.getSVar(sa, att);
-                if (bonus.contains("TriggerCount$NumBlockers")) {
-                    bonus = TextUtil.fastReplace(bonus, "TriggerCount$NumBlockers", "Number$1");
+                if (bonus.contains("Count$Valid Creature.blockingTriggeredAttacker")) {
+                    bonus = TextUtil.fastReplace(bonus, "Count$Valid Creature.blockingTriggeredAttacker", "Number$1");
                 } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
                     bonus = TextUtil.fastReplace(bonus, "TriggeredPlayersDefenders$Amount", "Number$1");
                 } else if (bonus.contains("TriggeredAttacker$CardPower")) { // e.g. Arahbo, Roar of the World
@@ -1433,7 +1433,7 @@ public class ComputerUtilCombat {
             if (sa == null) {
                 continue;
             }
-            sa.setActivatingPlayer(source.getController());
+            sa.setActivatingPlayer(source.getController(), true);
 
             if (sa.usesTargeting()) {
                 continue; // targeted pumping not supported
@@ -1475,8 +1475,8 @@ public class ComputerUtilCombat {
                     toughness += Integer.parseInt(def);
                 } else {
                     String bonus = AbilityUtils.getSVar(sa, def);
-                    if (bonus.contains("TriggerCount$NumBlockers")) {
-                        bonus = TextUtil.fastReplace(bonus, "TriggerCount$NumBlockers", "Number$1");
+                    if (bonus.contains("Count$Valid Creature.blockingTriggeredAttacker")) {
+                        bonus = TextUtil.fastReplace(bonus, "Count$Valid Creature.blockingTriggeredAttacker", "Number$1");
                     } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
                         bonus = TextUtil.fastReplace(bonus, "TriggeredPlayersDefenders$Amount", "Number$1");
                     }
@@ -1507,8 +1507,8 @@ public class ComputerUtilCombat {
                     toughness += Integer.parseInt(def);
                 } else {
                     String bonus = AbilityUtils.getSVar(sa, def);
-                    if (bonus.contains("TriggerCount$NumBlockers")) {
-                        bonus = TextUtil.fastReplace(bonus, "TriggerCount$NumBlockers", "Number$1");
+                    if (bonus.contains("Count$Valid Creature.blockingTriggeredAttacker")) {
+                        bonus = TextUtil.fastReplace(bonus, "Count$Valid Creature.blockingTriggeredAttacker", "Number$1");
                     } else if (bonus.contains("TriggeredPlayersDefenders$Amount")) { // for Melee
                         bonus = TextUtil.fastReplace(bonus, "TriggeredPlayersDefenders$Amount", "Number$1");
                     }
@@ -2489,7 +2489,7 @@ public class ComputerUtilCombat {
         if (combat != null) {
             // 1. If the card that spawned the attacker was sent at a planeswalker, attack the same. Consider improving.
             GameEntity def = combat.getDefenderByAttacker(sa.getHostCard());
-            if (def != null && def instanceof Card && ((Card)def).isPlaneswalker() && defenders.contains(def)) {
+            if (def instanceof Card && ((Card)def).isPlaneswalker() && defenders.contains(def)) {
                 return def;
             }
             // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.

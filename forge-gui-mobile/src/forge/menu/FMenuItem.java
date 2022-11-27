@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.Timer.Task;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
@@ -27,10 +28,22 @@ public class FMenuItem extends FDisplayObject implements IButton {
     private static final float ICON_SIZE = ((int)((HEIGHT - 2 * GAP_X) / 20f)) * 20; //round down to nearest multiple of 20
 
     private static final FSkinFont FONT = FSkinFont.get(12);
-    protected static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor PRESSED_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
-    private static final FSkinColor SEPARATOR_COLOR = FORE_COLOR.alphaColor(0.5f);
-    private static final FSkinColor TAB_SEPARATOR_COLOR = Header.BACK_COLOR.stepColor(-40);
+    protected static FSkinColor getForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
+    private static FSkinColor getPressedColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_ACTIVE).alphaColor(0.9f);
+        return FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.9f);
+    }
+    private static FSkinColor getSeparatorColor() {
+        return getForeColor().alphaColor(0.5f);
+    }
+    private static FSkinColor getTabSeparatorColor() {
+        return Header.getBackColor().stepColor(-40);
+    }
 
     private final String text;
     private final FImage icon;
@@ -121,10 +134,10 @@ public class FMenuItem extends FDisplayObject implements IButton {
         float h = HEIGHT;
 
         if (isHovered() && !pressed)
-            g.fillRect(PRESSED_COLOR.brighter().alphaColor(0.4f), 0, 0, w, h);
+            g.fillRect(getPressedColor().brighter().alphaColor(0.4f), 0, 0, w, h);
 
         if (showPressedColor()) {
-            g.fillRect(PRESSED_COLOR, 0, 0, w, h);
+            g.fillRect(getPressedColor(), 0, 0, w, h);
         }
 
         float x = GAP_X;
@@ -138,18 +151,18 @@ public class FMenuItem extends FDisplayObject implements IButton {
         }
 
         if (textRenderer == null) {
-            g.drawText(text, FONT, FORE_COLOR, x, 0, w - x - GAP_X, h, false, Align.left, true);
+            g.drawText(text, FONT, getForeColor(), x, 0, w - x - GAP_X, h, false, Align.left, true);
         }
         else {
-            textRenderer.drawText(g, text, FONT, FORE_COLOR, x, 0, w - x - GAP_X, h, 0, h, false, Align.left, true);
+            textRenderer.drawText(g, text, FONT, getForeColor(), x, 0, w - x - GAP_X, h, 0, h, false, Align.left, true);
         }
 
         //draw separator line
         if (tabMode) {
-            g.drawLine(1, TAB_SEPARATOR_COLOR, 0, h, w, h);
+            g.drawLine(1, getTabSeparatorColor(), 0, h, w, h);
         }
         else {
-            g.drawLine(1, SEPARATOR_COLOR, 0, h, w, h);
+            g.drawLine(1, getSeparatorColor(), 0, h, w, h);
         }
     }
 

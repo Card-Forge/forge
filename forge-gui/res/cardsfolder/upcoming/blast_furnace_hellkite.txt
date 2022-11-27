@@ -1,0 +1,11 @@
+Name:Blast-Furnace Hellkite
+ManaCost:7 R R
+Types:Creature Dragon
+PT:5/5
+K:Artifact offering
+K:Flying
+K:Double Strike
+S:Mode$ Continuous | Affected$ Creature.attacking Opponent | AddKeyword$ Double Strike | Description$ Creatures attacking your opponents have double strike.
+DeckHints:Type$Artifact
+DeckHas:Ability$Sacrifice
+Oracle:Artifact offering (You may cast this spell as though it had flash by sacrificing an artifact and paying the difference in mana costs between this and the sacrificed artifact. Mana cost includes color.)\nFlying, double strike\nCreatures attacking your opponents have double strike.

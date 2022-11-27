@@ -1,0 +1,12 @@
+Name:Sarevok's Tome
+ManaCost:4
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigInitiative | TriggerDescription$ When CARDNAME enters the battlefield, you take the initiative.
+SVar:TrigInitiative:DB$ TakeInitiative
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | SpellDescription$ Add {C}. If you have the initiative, add {C}{C} instead.
+SVar:X:Count$Initiative.2.1
+A:AB$ DigUntil | Cost$ 3 T | Valid$ Card.nonLand | ValidDescription$ nonland | FoundDestination$ Exile | RevealedDestination$ Exile | RememberFound$ True | SubAbility$ DBPlay | CheckSVar$ Y | NoPutDesc$ True | SpellDescription$ Exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost. Activate only if you've completed a dungeon.
+SVar:DBPlay:DB$ Play | Defined$ Remembered | DefinedDesc$ that card | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:PlayerCountPropertyYou$DungeonsCompleted
+Oracle:When Sarevok's Tome enters the battlefield, you take the initiative.\n{T}: Add {C}. If you have the initiative, add {C}{C} instead.\n{3}, {T}: Exile cards from the top of your library until you exile a nonland card. You may cast that card without paying its mana cost. Activate only if you've completed a dungeon.

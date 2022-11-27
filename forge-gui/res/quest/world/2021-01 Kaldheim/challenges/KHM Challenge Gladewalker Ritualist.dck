@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Gladewalker Ritualist
+OpponentName=The Ritualists
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Littjara Mirrorlake|Littjara Mirrorlake
+HumanExtras=
+[metadata]
+Title=Gladewalker Ritualist
+Difficulty=easy
+Description="We are all."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Gladewalker Ritualist
+[Main]
+10 Bearded Axe|KHM|1
+20 Gladewalker Ritualist|KHM|1
+30 Highland Forest|KHM|1

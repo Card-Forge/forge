@@ -1,0 +1,16 @@
+Name:A-Young Blue Dragon
+ManaCost:4 U
+Types:Creature Dragon
+PT:3/4
+K:Flying
+Oracle:Flying
+AlternateMode:Adventure
+
+ALTERNATE
+
+Name:A-Sand Augury
+ManaCost:1 U
+Types:Sorcery Adventure
+A:SP$ Scry | ScryNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Scry 1,
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1 | SpellDescription$ then draw a card
+Oracle:Scry 1, then draw a card.

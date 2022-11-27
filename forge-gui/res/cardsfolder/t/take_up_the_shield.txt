@@ -1,0 +1,7 @@
+Name:Take Up the Shield
+ManaCost:1 W
+Types:Instant
+A:SP$ PutCounter | ValidTgts$ Creature | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on target creature. It gains lifelink and indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)
+SVar:DBPump:DB$ Pump | Defined$ Targeted | KW$ Lifelink & Indestructible
+DeckHas:Ability$Counters & Keyword$Lifelink|Indestructible
+Oracle:Put a +1/+1 counter on target creature. It gains lifelink and indestructible until end of turn. (Damage and effects that say "destroy" don't destroy it.)

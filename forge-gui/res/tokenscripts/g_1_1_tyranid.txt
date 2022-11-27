@@ -1,0 +1,6 @@
+Name:Tyranid Token
+ManaCost:no cost
+Types:Creature Tyranid
+PT:1/1
+Colors:green
+Oracle:

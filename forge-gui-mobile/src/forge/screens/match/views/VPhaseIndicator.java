@@ -6,6 +6,7 @@ import java.util.Map;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -148,16 +149,16 @@ public class VPhaseIndicator extends FContainer {
             //determine back color according to skip or active state of label
             FSkinColor backColor;
             if (active && stopAtPhase) {
-                backColor = FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED);
+                backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_ENABLED);
             }
             else if (!active && stopAtPhase) {
-                backColor = FSkinColor.get(Colors.CLR_PHASE_INACTIVE_ENABLED);
+                backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_ENABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_ENABLED);
             }
             else if (active && !stopAtPhase) {
-                backColor = FSkinColor.get(Colors.CLR_PHASE_ACTIVE_DISABLED);
+                backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_ACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_ACTIVE_DISABLED);
             }
             else {
-                backColor = FSkinColor.get(Colors.CLR_PHASE_INACTIVE_DISABLED);
+                backColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PHASE_INACTIVE_DISABLED) : FSkinColor.get(Colors.CLR_PHASE_INACTIVE_DISABLED);
             }
             g.fillRect(isHovered() ? backColor.brighter() : backColor, x, 0, w, h);
             g.drawText(caption, isHovered() && font.canIncrease() ? font.increase() : font, Color.BLACK, x, 0, w, h, false, Align.center, true);

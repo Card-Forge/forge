@@ -1,0 +1,7 @@
+Name:Warlord's Elite
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:4/4
+DeckHints:Type$Artifact
+A:SP$ PermanentCreature | Cost$ 2 W tapXType<2/Artifact;Creature;Land/artifacts, creatures, and/or lands> | CostDesc$ As an additional cost to cast this spell, tap two untapped artifacts, creatures, and/or lands you control. | SpellDescription$ As an additional cost to cast this spell, tap two untapped artifacts, creatures, and/or lands you control.
+Oracle:As an additional cost to cast this spell, tap two untapped artifacts, creatures, and/or lands you control.

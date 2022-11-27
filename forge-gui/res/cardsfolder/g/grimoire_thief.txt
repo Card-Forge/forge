@@ -6,7 +6,7 @@ T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ W
 SVar:TrigExile:DB$ Dig | ValidTgts$ Opponent | DigNum$ 3 | ChangeNum$ All | DestinationZone$ Exile | ExileFaceDown$ True | RememberChanged$ True
 S:Mode$ Continuous | Affected$ Card.IsRemembered+ExiledWithSource | AffectedZone$ Exile | MayLookAt$ You | Description$ You may look at cards exiled with CARDNAME.
 A:AB$ SetState | Cost$ U Sac<1/CARDNAME> | Defined$ Remembered | Mode$ TurnFace | SubAbility$ DBCounter | SpellDescription$ Turn all cards exiled with CARDNAME face up. Counter all spells with those names.
-SVar:DBCounter:DB$ Counter | AllType$ Spell | AllValid$ Card.sharesNameWith Remembered.ExiledWithSource | SubAbility$ DBCleanup
+SVar:DBCounter:DB$ Counter | AllValid$ Spell.sharesNameWith Remembered.ExiledWithSource | SubAbility$ DBCleanup
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
 SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup

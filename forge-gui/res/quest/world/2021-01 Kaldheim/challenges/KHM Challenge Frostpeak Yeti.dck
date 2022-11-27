@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Frostpeak Yeti
+OpponentName=The Yetis
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Replicating Ring|Replicating Ring
+HumanExtras=
+[metadata]
+Title=Frostpeak Yeti
+Difficulty=easy
+Description=Some heroes line their coats with yeti fur. More yetis line their bellies with heroes.
+Icon=Dungeon Crawling Blue.jpg
+Deck Type=constructed
+Name=KHM Challenge: Faceless Haven
+[Main]
+30 Frostpeak Yeti|KHM|1
+30 Snow-Covered Island|KHM|2

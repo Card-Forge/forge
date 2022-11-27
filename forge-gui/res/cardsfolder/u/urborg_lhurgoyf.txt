@@ -1,0 +1,12 @@
+Name:Urborg Lhurgoyf
+ManaCost:1 G
+Types:Creature Lhurgoyf
+PT:*/1+*
+K:Kicker:U:B
+K:ETBReplacement:Other:TrigMill
+SVar:TrigMill:DB$ Mill | NumCards$ Z | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, mill three cards for each time it was kicked.
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ Y | Description$ CARDNAME's power is equal to the number of creature cards in your graveyard and its toughness is equal to that number plus 1.
+SVar:X:Count$TypeInYourYard.Creature
+SVar:Y:SVar$X/Plus.1
+SVar:Z:Count$TimesKicked/Times.3
+Oracle:Kicker {U} and/or {B} (You may pay an additional {U} and/or {B} as you cast this spell.)\nAs Urborg Lhurgoyf enters the battlefield, mill three cards for each time it was kicked.\nUrborg Lhurgoyf's power is equal to the number of creature cards in your graveyard and its toughness is equal to that number plus 1.

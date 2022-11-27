@@ -4,6 +4,6 @@ Types:Creature Lizard
 PT:6/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to target creature you control.
 SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature.YouCtrl | NumDmg$ 3 | TgtPrompt$ Select target creature you control
-SVar:NeedsToPlay:Creature.YouCtrl+inZoneBattlefield
+SVar:NeedsToPlay:Creature.YouCtrl
 AI:RemoveDeck:Random
 Oracle:When Whiptail Moloch enters the battlefield, it deals 3 damage to target creature you control.

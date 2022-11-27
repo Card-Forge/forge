@@ -62,7 +62,7 @@ public final class CardUtil {
             "Enchant", "Protection", "Cumulative upkeep", "Equip", "Buyback",
             "Cycling", "Echo", "Kicker", "Flashback", "Madness", "Morph",
             "Affinity", "Entwine", "Splice", "Ninjutsu", "Presence",
-            "Transmute", "Replicate", "Recover", "Suspend", "Aura swap",
+            "Transmute", "Replicate", "Recover", "Squad", "Suspend", "Aura swap",
             "Fortify", "Transfigure", "Champion", "Evoke", "Prowl", "IfReach",
             "Reinforce", "Unearth", "Level up", "Miracle", "Overload", "Cleave",
             "Scavenge", "Encore", "Bestow", "Outlast", "Dash", "Surge", "Emerge", "Hexproof:",
@@ -92,14 +92,6 @@ public final class CardUtil {
         }
 
         return !kw.startsWith("Protection") && !NON_STACKING_LIST.contains(kw);
-    }
-
-    public static String getShortColorsString(final Iterable<String> colors) {
-        StringBuilder colorDesc = new StringBuilder();
-        for (final String col : colors) {
-            colorDesc.append(MagicColor.toShortString(col)).append(" ");
-        }
-        return colorDesc.toString();
     }
 
     /**
@@ -232,7 +224,6 @@ public final class CardUtil {
         }
         //*/
 
-        newCopy.setType(new CardType(in.getType()));
         newCopy.setToken(in.isToken());
         newCopy.setCopiedSpell(in.isCopiedSpell());
         newCopy.setImmutable(in.isImmutable());
@@ -269,6 +260,7 @@ public final class CardUtil {
         }
         newCopy.addRemembered(in.getRemembered());
         newCopy.addImprintedCards(in.getImprintedCards());
+        newCopy.setChosenCards(new CardCollection(in.getChosenCards()));
 
         for (Table.Cell<Player, CounterType, Integer> cl : in.getEtbCounters()) {
             newCopy.addEtbCounter(cl.getColumnKey(), cl.getValue(), cl.getRowKey());
@@ -315,6 +307,7 @@ public final class CardUtil {
         }
         newCopy.setCastFrom(in.getCastFrom());
 
+        newCopy.setExiledBy(in.getExiledBy());
         newCopy.setExiledWith(getLKICopy(in.getExiledWith(), cachedMap));
 
         if (in.getGame().getCombat() != null && in.isPermanent()) {
@@ -529,27 +522,25 @@ public final class CardUtil {
     // however, due to the changes necessary for SA_Requirements this is much
     // different than the original
     public static List<Card> getValidCardsToTarget(TargetRestrictions tgt, SpellAbility ability) {
-        Card activatingCard = ability.getHostCard();
+        final Card activatingCard = ability.getHostCard();
         final Game game = ability.getActivatingPlayer().getGame();
         final List<ZoneType> zone = tgt.getZone();
 
         final boolean canTgtStack = zone.contains(ZoneType.Stack);
-        List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ability.getActivatingPlayer(), ability.getHostCard(), ability);
+        List<Card> validCards = CardLists.getValidCards(game.getCardsIn(zone), tgt.getValidTgts(), ability.getActivatingPlayer(), activatingCard, ability);
         List<Card> choices = CardLists.getTargetableCards(validCards, ability);
         if (canTgtStack) {
             // Since getTargetableCards doesn't have additional checks if one of the Zones is stack
             // Remove the activating card from targeting itself if its on the Stack
             if (activatingCard.isInZone(ZoneType.Stack)) {
-                choices.remove(ability.getHostCard());
+                choices.remove(activatingCard);
             }
         }
         List<GameObject> targetedObjects = ability.getUniqueTargets();
 
         // Remove cards already targeted
         final List<Card> targeted = Lists.newArrayList(ability.getTargets().getTargetCards());
-        for (final Card c : targeted) {
-            choices.remove(c);
-        }
+        choices.removeAll(targeted);
 
         // Remove cards exceeding total CMC
         if (ability.hasParam("MaxTotalTargetCMC")) {

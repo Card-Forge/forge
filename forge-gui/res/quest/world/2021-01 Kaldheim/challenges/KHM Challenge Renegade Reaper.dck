@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Renegade Reaper
+OpponentName=The Reapers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Renegade Reaper
+Difficulty=hard
+Description=Do fear the reaper.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=KHM Challenge: Renegade Reaper
+[Main]
+100 Haunting Voyage|KHM|2
+200 Renegade Reaper|KHM|1
+300 Swamp|KHM|1

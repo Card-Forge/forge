@@ -26,7 +26,7 @@ public abstract class FOverlay extends FContainer {
     private FScreen openedOnScreen;
 
     public FOverlay() {
-        this(FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(ALPHA_COMPOSITE));
+        this(Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_OVERLAY).alphaColor(ALPHA_COMPOSITE) : FSkinColor.get(Colors.CLR_OVERLAY).alphaColor(ALPHA_COMPOSITE));
     }
     public FOverlay(FSkinColor backColor0) {
         backColor = backColor0;

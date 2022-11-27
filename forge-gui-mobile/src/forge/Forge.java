@@ -5,29 +5,22 @@ import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Cursor;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.TextureData;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.ControllerAdapter;
+import com.badlogic.gdx.controllers.ControllerListener;
+import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Clipboard;
-import com.badlogic.gdx.utils.ScreenUtils;
-import forge.adventure.scene.ForgeScene;
-import forge.adventure.scene.GameScene;
-import forge.adventure.scene.Scene;
-import forge.adventure.scene.SceneType;
-import forge.adventure.stage.MapStage;
+import forge.adventure.scene.*;
 import forge.adventure.util.Config;
+import forge.adventure.world.WorldSave;
 import forge.animation.ForgeAnimation;
-import forge.assets.Assets;
-import forge.assets.AssetsDownloader;
-import forge.assets.FSkin;
-import forge.assets.FSkinFont;
-import forge.assets.ImageCache;
+import forge.assets.*;
 import forge.error.ExceptionHandler;
 import forge.gamemodes.limited.BoosterDraft;
 import forge.gui.FThreads;
@@ -52,10 +45,9 @@ import forge.toolbox.*;
 import forge.util.*;
 
 import java.io.File;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class Forge implements ApplicationListener {
     public static final String CURRENT_VERSION = "1.6.53.001";
@@ -74,12 +66,16 @@ public class Forge implements ApplicationListener {
     private static Graphics graphics;
     private static FrameRate frameRate;
     private static FScreen currentScreen;
+    private static ControllerListener controllerListener;
+    private static boolean hasGamepad = false;
+    public static Texture lastPreview = null;
     protected static SplashScreen splashScreen;
     protected static ClosingScreen closingScreen;
     protected static TransitionScreen transitionScreen;
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
     public boolean needsUpdate = false;
+    public static boolean advStartup = false;
     public static boolean safeToClose = true;
     public static boolean magnify = false;
     public static boolean magnifyToggle = true;
@@ -122,7 +118,7 @@ public class Forge implements ApplicationListener {
     public static InputProcessor inputProcessor;
     private static Cursor cursor0, cursor1, cursor2, cursorA0, cursorA1, cursorA2;
     public static boolean forcedEnglishonCJKMissing = false;
-    public static boolean adventureLoaded = false;
+    public static boolean createNewAdventureMap = false;
     private static Localizer localizer;
 
     public static ApplicationListener getApp(Clipboard clipboard0, IDeviceAdapter deviceAdapter0, String assetDir0, boolean value, boolean androidOrientation, int totalRAM, boolean isTablet, int AndroidAPI, String AndroidRelease, String deviceName) {
@@ -180,7 +176,8 @@ public class Forge implements ApplicationListener {
         Gdx.input.setCatchKey(Keys.BACK, true);
         destroyThis = true; //Prevent back()
         ForgePreferences prefs = new ForgePreferences();
-
+        if (Files.exists(Paths.get(ForgeConstants.DEFAULT_SKINS_DIR+ForgeConstants.ADV_TEXTURE_BG_FILE)))
+            selector = prefs.getPref(FPref.UI_SELECTOR_MODE);
         String skinName;
         if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
             skinName = prefs.getPref(FPref.UI_SKIN);
@@ -195,7 +192,6 @@ public class Forge implements ApplicationListener {
         altPlayerLayout = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
         altZoneTabs = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
         animatedCardTapUntap = prefs.getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
-        selector = prefs.getPref(FPref.UI_SELECTOR_MODE);
         enableUIMask = prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING);
         if (prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
             enableUIMask = "Full";
@@ -255,6 +251,13 @@ public class Forge implements ApplicationListener {
                 preloadExtendedArt();
             });
         });
+    }
+    public static boolean hasGamepad() {
+        //Classic Mode Various Screen GUI are not yet supported, needs control mapping for each screens
+        if (isMobileAdventureMode) {
+            return hasGamepad && Forge.isLandscapeMode(); //portrait is not supported for Gamepad
+        }
+        return false;
     }
 
     public static InputProcessor getInputProcessor() {
@@ -323,25 +326,37 @@ public class Forge implements ApplicationListener {
         //continuous rendering is needed for adventure mode
         startContinuousRendering();
         GuiBase.setIsAdventureMode(true);
+        advStartup = false;
         isMobileAdventureMode = true;
         if (GuiBase.isAndroid()) //force it for adventure mode
             altZoneTabs = true;
         //pixl cursor for adventure
         setCursor(null, "0");
+        if (!GuiBase.isAndroid() || !getDeviceAdapter().getGamepads().isEmpty())
+            enableControllerListener();
+        loadAdventureResources(true);
+    }
+    private static void loadAdventureResources(boolean startScene) {
         try {
-            if(!adventureLoaded)
-            {
-                for (SceneType sceneType : SceneType.values()) {
-                    sceneType.instance.resLoaded();
-                }
-                adventureLoaded=true;
-            }
-            switchScene(SceneType.StartScene.instance);
+            Config.instance().loadResources();
+            if (startScene)
+                switchScene(StartScene.instance());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     protected void afterDbLoaded() {
+        //override transition & title bg
+        try {
+            FileHandle transitionFile = Config.instance().getFile("ui/transition.png");
+            FileHandle titleBGFile = Forge.isLandscapeMode() ? Config.instance().getFile("ui/title_bg.png") : Config.instance().getFile("ui/title_bg_portrait.png");
+            if (transitionFile.exists())
+                Forge.getAssets().fallback_skins().put(1, new Texture(transitionFile));
+            if (titleBGFile.exists())
+                Forge.getAssets().fallback_skins().put(0, new Texture(titleBGFile));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         destroyThis = false; //Allow back()
         Gdx.input.setCatchKey(Keys.MENU, true);
 
@@ -362,19 +377,29 @@ public class Forge implements ApplicationListener {
                 //load Drafts
                 preloadBoosterDrafts();
                 FThreads.invokeInEdtLater(() -> {
+                    if (selector.equals("Adventure")) {
+                        //preload adventure resources to speedup startup if selector is adventure. Needs in edt when setting up worldstage
+                        loadAdventureResources(false);
+                        Forge.isMobileAdventureMode = true;
+                    }
                     //selection transition
                     setTransitionScreen(new TransitionScreen(() -> {
-                        if (selector.equals("Classic")) {
-                            openHomeDefault();
-                            clearSplashScreen();
-                        } else if (selector.equals("Adventure")) {
+                        if (createNewAdventureMap) {
                             openAdventure();
                             clearSplashScreen();
-                        } else if (splashScreen != null) {
-                            splashScreen.setShowModeSelector(true);
-                        } else {//default mode in case splashscreen is null at some point as seen on resume..
-                            openHomeDefault();
-                            clearSplashScreen();
+                        } else {
+                            if (selector.equals("Classic")) {
+                                openHomeDefault();
+                                clearSplashScreen();
+                            } else if (selector.equals("Adventure")) {
+                                openAdventure();
+                                clearSplashScreen();
+                            } else if (splashScreen != null) {
+                                splashScreen.setShowModeSelector(true);
+                            } else {//default mode in case splashscreen is null at some point as seen on resume..
+                                openHomeDefault();
+                                clearSplashScreen();
+                            }
                         }
                         //start background music
                         SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS);
@@ -390,13 +415,13 @@ public class Forge implements ApplicationListener {
         if (GuiBase.isAndroid())
             return;
         if (isMobileAdventureMode) {
-            if (cursorA0 != null && name == "0") {
+            if (cursorA0 != null && Objects.equals(name, "0")) {
                 setGdxCursor(cursorA0);
                 return;
-            } else if (cursorA1 != null && name == "1") {
+            } else if (cursorA1 != null && Objects.equals(name, "1")) {
                 setGdxCursor(cursorA1);
                 return;
-            } else if (cursorA2 != null && name == "2") {
+            } else if (cursorA2 != null && Objects.equals(name, "2")) {
                 setGdxCursor(cursorA2);
                 return;
             }
@@ -743,15 +768,38 @@ public class Forge implements ApplicationListener {
     }
 
     public static void clearTransitionScreen() {
-        transitionScreen = null;
+        clearTransitionScreen(false);
+    }
+    public static void clearTransitionScreen(boolean disableMatchTransition) {
+        if (transitionScreen != null) {
+            if (disableMatchTransition) {
+                transitionScreen.disableMatchTransition();
+                transitionScreen = null;
+            }
+            if (!disableMatchTransition && transitionScreen.isMatchTransition()) {
+                return;
+            }
+            transitionScreen = null;
+        }
     }
 
     public static void clearSplashScreen() {
         splashScreen = null;
     }
     public static TextureRegion takeScreenshot() {
-        TextureRegion screenShot = ScreenUtils.getFrameBufferTexture();
-        return screenShot;
+        FThreads.invokeInEdtNowOrLater(() -> {
+            if (lastScreenTexture != null)
+                lastScreenTexture.getTexture().dispose();
+            //some Android device don't support RGBA on FrameBuffer like Unisoc T618 with Mali G52 MP2 and maybe others...
+            Texture texture = new Texture(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Pixmap.Format.RGB888);
+            Gdx.gl.glEnable(GL20.GL_TEXTURE_2D);
+            Gdx.gl.glActiveTexture(GL20.GL_TEXTURE0);
+            texture.bind();
+            Gdx.gl.glCopyTexImage2D(GL20.GL_TEXTURE_2D, 0, GL20.GL_RGB, 0, 0,Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0);
+            Gdx.gl.glDisable(GL20.GL_TEXTURE_2D);
+            lastScreenTexture = new TextureRegion(texture, 0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), -Gdx.graphics.getHeight());
+        });
+        return lastScreenTexture;
     }
 
     private static void setCurrentScreen(FScreen screen0) {
@@ -887,6 +935,8 @@ public class Forge implements ApplicationListener {
             //check if sentry is enabled, if not it will call the gui interface but here we end the graphics so we only send it via sentry..
             if (BugReporter.isSentryEnabled())
                 BugReporter.reportException(ex);
+            else
+                ex.printStackTrace();
         }
         if (showFPS)
             frameRate.render();
@@ -944,26 +994,30 @@ public class Forge implements ApplicationListener {
     @Override
     public void dispose() {
         if (currentScreen != null) {
-            FOverlay.hideAll();
             currentScreen.onClose(null);
             currentScreen = null;
         }
+        FOverlay.hideAll();
         assets.dispose();
         Dscreens.clear();
         graphics.dispose();
         SoundSystem.instance.dispose();
         try {
             ExceptionHandler.unregisterErrorHandling();
+            lastPreview.dispose();
         } catch (Exception e) {
         }
     }
     /** Retrieve assets.
-     * @param other if set to true returns otherAssets otherwise returns cardAssets
      */
     public static Assets getAssets() {
         return ((Forge)Gdx.app.getApplicationListener()).assets;
     }
     public static boolean switchScene(Scene newScene) {
+        if (newScene instanceof RewardScene || newScene instanceof SpellSmithScene || newScene instanceof DeckSelectScene || newScene instanceof PlayerStatisticScene) {
+            if (!(currentScene instanceof ForgeScene)) //prevent overwriting the last preview if last scene is instance of ForgeScene
+                WorldSave.getCurrentSave().header.createPreview();
+        }
         if (currentScene != null) {
             if (!currentScene.leave())
                 return false;
@@ -971,21 +1025,18 @@ public class Forge implements ApplicationListener {
         }
         storeScreen();
         sceneWasSwapped = true;
-        if (newScene instanceof GameScene)
-            MapStage.getInstance().clearIsInMap();
         currentScene = newScene;
+
         currentScene.enter();
+        if (currentScene instanceof DuelScene)
+            Forge.clearTransitionScreen(true);
         return true;
     }
 
     protected static void storeScreen() {
         if (!(currentScene instanceof ForgeScene)) {
-            if (lastScreenTexture != null)
-                lastScreenTexture.getTexture().dispose();
-            lastScreenTexture = Forge.takeScreenshot();
+            Forge.takeScreenshot();
         }
-
-
     }
 
     public static Scene switchToLast() {
@@ -1344,6 +1395,7 @@ public class Forge implements ApplicationListener {
             magnify = true;
             mouseMovedX = screenX;
             mouseMovedY = screenY;
+            hasGamepad = false; //prevent drawing some panels
             //todo: mouse listener for android?
             if (GuiBase.isAndroid())
                 return true;
@@ -1379,5 +1431,172 @@ public class Forge implements ApplicationListener {
             }
             return handled;
         }
+    }
+    public static void enableControllerListener() {
+        if (controllerListener == null) {
+            controllerListener = new ControllerAdapter() {
+                @Override
+                public void connected(final Controller controller) {
+                    Gdx.app.log("Controller", "Controller connected: " + controller.getName()
+                            + "/" + controller.getUniqueId());
+                    hasGamepad = true;
+                    if (controller.canVibrate())
+                        controller.startVibration(200,1);
+                }
+                @Override
+                public void disconnected(Controller controller) {
+                    Gdx.app.log("Controller", "Controller disconnected: " + controller.getName()
+                            + "/" + controller.getUniqueId());
+                    hasGamepad = false;
+                }
+
+                @Override
+                public boolean buttonDown(Controller controller, int buttonIndex) {
+                    //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: "+buttonIndex);
+                    hasGamepad = true;
+                    translateButtons(controller, buttonIndex, true);
+                    return super.buttonDown(controller, buttonIndex);
+                }
+
+                @Override
+                public boolean buttonUp(Controller controller, int buttonIndex) {
+                    hasGamepad = true;
+                    translateButtons(controller, buttonIndex, false);
+                    return super.buttonUp(controller, buttonIndex);
+                }
+
+                @Override
+                public boolean axisMoved(Controller controller, int axisIndex, float value) {
+                    //System.out.println(controller.getName()+"["+controller.getUniqueId()+"]: axis: "+axisIndex+" - "+value);
+                    hasGamepad = true;
+                    translateAxis(controller, axisIndex, value);//prevent multi press axis
+                    return super.axisMoved(controller, axisIndex, value);
+                }
+                private void translateAxis(Controller controller, int axisIndex, float value) {
+                    if (!hasGamepad())
+                        return;//adventure only
+                    FContainer container = FOverlay.getTopOverlay();
+                    if (container == null) {
+                        container = currentScreen;
+                    }
+                    if (container != null) {
+                        if (currentScreen instanceof MatchScreen) {
+                            if (4 == axisIndex && value == 1f) { //others are L2Button if missing this axis
+                                container.keyDown(Keys.ENTER);
+                            }
+                            if (5 == axisIndex && value == 1f) { //others are R2 Button if missing this axis
+                                container.keyDown(Keys.ESCAPE);
+                            }
+                            if (controller.getMapping().axisLeftY == axisIndex) {
+                                if (value == 1f)
+                                    container.keyDown(Keys.PAGE_DOWN);
+                            }
+                        /*if (controller.getMapping().axisLeftX == axisIndex) {
+                            if (value == 1f) {
+
+                            }
+                        }*/
+                        }
+                    }
+                }
+                private void translateButtons(Controller controller, int buttonIndex, boolean keyDown) {
+                    if (!hasGamepad())
+                        return; //adventure only
+                    if (!keyDown)
+                        return; //prevent keyup on forgescene
+                    //overlay shoud have priority
+                    FContainer container = FOverlay.getTopOverlay();
+                    if (container == null) {
+                        container = currentScreen;
+                    }
+                    if (container != null) {
+                        if (currentScreen instanceof MatchScreen) {
+                            if (controller.getMapping().buttonL2 == buttonIndex) {//others are axis-4
+                                container.keyDown(Keys.ENTER);
+                            }
+                            if (controller.getMapping().buttonR2 == buttonIndex) {//others are axis-5
+                                container.keyDown(Keys.ESCAPE);
+                            }
+                            if (controller.getMapping().buttonX == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_X);
+                            }
+                            if (controller.getMapping().buttonY == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_Y);
+                            }
+                            if (controller.getMapping().buttonR1 == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_R1);
+                            }
+                            if (controller.getMapping().buttonL1 == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_L1);
+                            }
+                            if (controller.getMapping().buttonDpadDown == buttonIndex) {
+                                container.keyDown(Keys.DPAD_DOWN);
+                            }
+                            if (controller.getMapping().buttonDpadLeft == buttonIndex) {
+                                container.keyDown(Keys.DPAD_LEFT);
+                            }
+                            if (controller.getMapping().buttonDpadRight == buttonIndex) {
+                                container.keyDown(Keys.DPAD_RIGHT);
+                            }
+                            if (controller.getMapping().buttonDpadUp == buttonIndex) {
+                                container.keyDown(Keys.DPAD_UP);
+                            }
+                            if (controller.getMapping().buttonA == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_A);
+                            }
+                            if (controller.getMapping().buttonB == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_B);
+                            }
+                            if (controller.getMapping().buttonBack == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_SELECT);
+                            }
+                        } else {//Others
+                        /*if (controller.getMapping().buttonL2 == buttonIndex) {//others are axis-4
+                            container.keyDown(Keys.ENTER);
+                        }
+                        if (controller.getMapping().buttonR2 == buttonIndex) {//others are axis-5
+                            container.keyDown(Keys.ESCAPE);
+                        }*/
+                            if (controller.getMapping().buttonDpadDown == buttonIndex) {
+                                container.keyDown(Keys.DPAD_DOWN);
+                            }
+                            if (controller.getMapping().buttonDpadLeft == buttonIndex) {
+                                container.keyDown(Keys.DPAD_LEFT);
+                            }
+                            if (controller.getMapping().buttonDpadRight == buttonIndex) {
+                                container.keyDown(Keys.DPAD_RIGHT);
+                            }
+                            if (controller.getMapping().buttonDpadUp == buttonIndex) {
+                                container.keyDown(Keys.DPAD_UP);
+                            }
+                            if (controller.getMapping().buttonBack == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_SELECT);
+                            }
+                            if (controller.getMapping().buttonB == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_B);
+                            }
+                            if (controller.getMapping().buttonA == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_A);
+                            }
+                            if (controller.getMapping().buttonX == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_X);
+                            }
+                            if (controller.getMapping().buttonY == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_Y);
+                            }
+                            if (controller.getMapping().buttonR1 == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_R1);
+                            }
+                            if (controller.getMapping().buttonL1 == buttonIndex) {
+                                container.keyDown(Keys.BUTTON_L1);
+                            }
+                        }
+                    }
+                }
+            };
+        }
+        Controllers.addListener(controllerListener);
+        if (Controllers.getCurrent() != null)
+            System.out.println("Gamepad: " + Controllers.getCurrent().getName());
     }
 }

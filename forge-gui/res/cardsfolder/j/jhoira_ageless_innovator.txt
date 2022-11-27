@@ -1,0 +1,9 @@
+Name:Jhoira, Ageless Innovator
+ManaCost:U R
+Types:Legendary Creature Human Artificer
+PT:2/3
+A:AB$ PutCounter | Cost$ T | CounterType$ INGENUITY | CounterNum$ 2 | SubAbility$ DBChangeZone | StackDescription$ {p:You} puts two ingenuity counters on CARDNAME, then {p:You} may put an artifact card with mana value X or less from hand onto the battlefield, where X is the number of ingenuity counters on NICKNAME. | SpellDescription$ Put two ingenuity counters on CARDNAME, then you may put an artifact card with mana value X or less from your hand onto the battlefield, where X is the number of ingenuity counters on NICKNAME.
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact.cmcLEX+YouOwn | StackDescription$ None
+SVar:X:Count$CardCounters.INGENUITY
+DeckNeeds:Type$Artifact
+Oracle:{T}: Put two ingenuity counters on Jhoira, Ageless Innovator, then you may put an artifact card with mana value X or less from your hand onto the battlefield, where X is the number of ingenuity counters on Jhoira.

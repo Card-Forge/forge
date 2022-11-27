@@ -3,13 +3,12 @@ ManaCost:10 U U
 Types:Snow Creature Kraken
 PT:8/8
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ CARDNAME costs {1} less to cast for each snow land you control.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ValidCards$ Artifact,Creature | Execute$ DBEffect | TriggerDescription$ When CARDNAME enters the battlefield, artifacts and creatures target opponent controls don't untap during that player's next untap step.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBEffect | TriggerDescription$ When CARDNAME enters the battlefield, artifacts and creatures target opponent controls don't untap during that player's next untap step.
 A:AB$ ChangeZone | Cost$ Return<3/Land.Snow> | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
-SVar:DBEffect:DB$ Effect | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | Duration$ Permanent | ValidTgts$ Opponent | RememberObjects$ Targeted | SubAbility$ DBCleanup | SpellDescription$ During that player's next untap step, artifacts and creatures they control don't untap.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ DontUntap | Triggers$ RemoveEffect | Duration$ Permanent | ValidTgts$ Opponent | RememberObjects$ Targeted | SpellDescription$ During that player's next untap step, artifacts and creatures they control don't untap.
 SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Artifact.RememberedPlayerCtrl,Creature.RememberedPlayerCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step. | Description$ Artifacts and creatures target opponent controls don't untap during their next untap step.
 SVar:RemoveEffect:Mode$ Phase | Phase$ Untap | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Static$ True | Execute$ ExileEffect
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$Valid Land.Snow+YouCtrl
 DeckHints:Type$Snow
 Oracle:This spell costs {1} less to cast for each snow land you control.\nWhen Icebreaker Kraken enters the battlefield, artifacts and creatures target opponent controls don't untap during that player's next untap step.\nReturn three snow lands you control to their owner's hand: Return Icebreaker Kraken to its owner's hand.

@@ -1,0 +1,11 @@
+Name:Phyrexian Warhorse
+ManaCost:3 B
+Types:Creature Phyrexian Horse
+PT:3/3
+K:Kicker:W
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked, create a 1/1 white Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_soldier
+A:AB$ Pump | Cost$ 1 Sac<1/Creature.Other/another creature> | Defined$ Self | NumAtt$ 2 | NumDef$ 1 | SpellDescription$ CARDNAME gets +2/+1 until end of turn.
+DeckHas:Ability$Sacrifice|Token
+DeckHints:Color$White
+Oracle:Kicker {W} (You may pay an additional {W} as you cast this spell.)\nWhen Phyrexian Warhorse enters the battlefield, if it was kicked, create a 1/1 white Soldier creature token.\n{1}, Sacrifice another creature: Phyrexian Warhorse gets +2/+1 until end of turn.

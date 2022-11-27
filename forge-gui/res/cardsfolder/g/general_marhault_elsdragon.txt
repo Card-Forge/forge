@@ -1,0 +1,8 @@
+Name:General Marhault Elsdragon
+ManaCost:2 R G
+Types:Legendary Creature Elf Warrior
+PT:4/4
+T:Mode$ AttackerBlocked | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature you control becomes blocked, it gets +3/+3 until end of turn for each creature blocking it.
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +X | NumDef$ +X
+SVar:X:Count$Valid Creature.blockingTriggeredAttacker/Times.3
+Oracle:Whenever a creature you control becomes blocked, it gets +3/+3 until end of turn for each creature blocking it.

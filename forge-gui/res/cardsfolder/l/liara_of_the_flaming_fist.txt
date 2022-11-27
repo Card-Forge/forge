@@ -1,0 +1,11 @@
+Name:Liara of the Flaming Fist
+ManaCost:R W
+Types:Legendary Creature Human Soldier
+PT:2/2
+T:Mode$ Phase | Phase$ BeginCombat | TriggerZones$ Battlefield | Execute$ TrigRepeatEach | TriggerDescription$ At the beginning of each combat, each creature you control gets +1/+1 until end of turn if it has the same name as another creature you control or a creature card in your graveyard.
+SVar:TrigRepeatEach:DB$ RepeatEach | RepeatCards$ Creature.YouCtrl | RepeatSubAbility$ DBPump
+SVar:DBPump:DB$ Pump | Defined$ Remembered | NumAtt$ +1 | NumDef$ +1 | ConditionCheckSVar$ X
+SVar:X:Count$Valid Creature.IsNotRemembered+YouCtrl+sharesNameWith Remembered/Plus.Y
+SVar:Y:Count$ValidGraveyard Creature.YouOwn+sharesNameWith Remembered
+A:AB$ Pump | Cost$ 1 R W | ValidTgts$ Creature.Other+nonToken+YouCtrl | TgtPrompt$ Select another target nontoken creature you control | KW$ First Strike & Double team | SorcerySpeed$ True | GameActivationLimit$ 1 | SpellDescription$ Another target nontoken creature you control gains first strike and double team until end of turn. Activate only as a sorcery and only once.
+Oracle:At the beginning of each combat, each creature you control gets +1/+1 until end of turn if it has the same name as another creature you control or a creature card in your graveyard.\n{1}{R}{W}: Another target nontoken creature you control gains first strike and double team until end of turn. Activate only as a sorcery and only once.

@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
@@ -39,10 +40,22 @@ import forge.util.TextUtil;
 import forge.util.Utils;
 
 public class FChoiceList<T> extends FList<T> implements ActivateHandler {
-    public static final FSkinColor ITEM_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
-    public static final FSkinColor ALT_ITEM_COLOR = ITEM_COLOR.getContrastColor(-20);
-    public static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
-    public static final FSkinColor BORDER_COLOR = FList.FORE_COLOR;
+    public static FSkinColor getItemColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_ZEBRA);
+        return FSkinColor.get(Colors.CLR_ZEBRA);
+    }
+    public static FSkinColor getAltItemColor() {
+        return getItemColor().getContrastColor(-20);
+    }
+    public static FSkinColor getSelColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_ACTIVE);
+        return FSkinColor.get(Colors.CLR_ACTIVE);
+    }
+    public static FSkinColor getBorderColor() {
+        return FList.getForeColor();
+    }
     public static final float DEFAULT_ITEM_HEIGHT = Utils.AVG_FINGER_HEIGHT * 0.75f;
 
     protected final int minChoices, maxChoices;
@@ -148,7 +161,7 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
             public void drawValue(Graphics g, Integer index, T value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
                 if (maxChoices > 1) {
                     if (pressed) { //if multi-select mode, draw SEL_COLOR when pressed
-                        g.fillRect(SEL_COLOR, x - FList.PADDING, y - FList.PADDING, w + 2 * FList.PADDING, h + 2 * FList.PADDING);
+                        g.fillRect(getSelColor(), x - FList.PADDING, y - FList.PADDING, w + 2 * FList.PADDING, h + 2 * FList.PADDING);
                     }
                     //draw checkbox, with it checked based on whether item is selected
                     float checkBoxSize = h / 2;
@@ -284,18 +297,18 @@ public class FChoiceList<T> extends FList<T> implements ActivateHandler {
     @Override
     public void drawOverlay(Graphics g) {
         super.drawOverlay(g);
-        g.drawRect(1.5f, BORDER_COLOR, 0, 0, getWidth(), getHeight());
+        g.drawRect(1.5f, getBorderColor(), 0, 0, getWidth(), getHeight());
     }
 
     @Override
     protected FSkinColor getItemFillColor(int index) {
         if (maxChoices == 1 && selectedIndices.contains(index)) {
-            return SEL_COLOR; //don't show SEL_COLOR if in multi-select mode
+            return getSelColor(); //don't show SEL_COLOR if in multi-select mode
         }
         if (index % 2 == 1) {
-            return ALT_ITEM_COLOR;
+            return getAltItemColor();
         }
-        return ITEM_COLOR;
+        return getItemColor();
     }
 
     @Override

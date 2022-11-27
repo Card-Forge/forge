@@ -1,56 +1,179 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="53">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="48" height="48" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="71">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
+ <properties>
+  <property name="dungeonEffect" value="{&quot;startBattleWithCard&quot;: [ &quot;Griselbrand presence&quot; ]}"/>
+  <property name="respawnEnemies" type="bool" value="true"/>
+ </properties>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="4425" source="../../tileset/buildings.tsx"/>
- <layer id="1" name="Background" width="30" height="30">
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJztwzEJAAAMA7C+8w/VWyFLIL2kqqqqvjuO1S8b
+   eJzt2LEJACEQRUFTsyvhqrZeuRrc049MMJksDxUER29tAAAAXOx9subATt+9rXKqP2mOfv369etfn7fz3Tn1zqXuv379Kf1Va/Tr169f///9lf8K1RLPKJn++/snqiFdMg==
   </data>
  </layer>
- <layer id="2" name="Ground" width="30" height="30">
+ <layer id="6" name="Floor" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJxz5mNgcB7FGNgNiB9iwa40ttcFiLEBp1F7qYpX8DIwLAXiZbwQ+5ZA+ct56ZO+YP6mtT/paS8ozzwB4sdY6EdQex/gkAfR5OYtbGmohhd7usImTm5YwOxt5GdgaCIBN/NTx155AQYGBRKwosCovaP2jto7au/A2LsXaM4+LFgVh/h+KtmLCygJ4JcftZc4DGtLYcOg9hXI3iV41NCizQUKC5C9A9G+Gsr2AgDO0wnp
+   eJztmEEOwjAMBPOD5AdVBR9tq/Ir4Gtw4YbAbtdxDjNSbpZ3VCWy1VIAAAAAAAAA4BtLLWUVnq329Z+att8s7vePj//+/m6Pdvzcaq7/2VxVn6xc/HNz8c/NVftb59JV7H9pmjnnnUsqf1XevfPc8c7Bp+iejXr/e+eO7L8Y3tzI/qqaCPC310SAv70mAvztNR68+9uvvUtVE7m/9Ua1v3l2vLP/KCL2NwtZb1MF/jZe3r59Qg==
   </data>
  </layer>
- <layer id="3" name="Foreground" width="30" height="30">
+ <layer id="2" name="Ground" width="48" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2LENgDAMRcGwAMoACFGw/05sgiJ24GNy17jMqyw5rQEAfMe1pgsA6tn6M/ee7QAAajmXdAHMK/3/kX4fZvWH+/0o3D7oz9KfM/bP6Ld/ct7ovwHh8AWB
+  </data>
+ </layer>
+ <layer id="3" name="Foreground" width="48" height="48">
   <properties>
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt0cEJACAMBME0YMvWnnd+Ioj3mKlgYasA4N5evwumtB7OJb1LagF4qQHcQwIt
+   eJztmN0NwyAMhFmASt0lE0RNXjpgF+hP1ukGbSZpogYpRRiuYCBSjHRPtexPpDYHzUGpRiQSiUQikSij+klvUOcjHtsV4j9NyrFa4d8F/6CVugG66y/XFYx/6PK9jHynUvu6F350fo4L/wuMl/kp/MKfry+7QvzIfHD1eoirLcSP5Hd9q1h+9Hylzmcu/mHJSfGY893OH/u/pfJQ/mTNRnmNOWeIh6qLnmtUHyF1qRhTez4zQ+flSNRF+4KKR+qaGLt/U3qSiz+mpvBvgx+9k1w0nYuDP/ddx1WTkz/FQ7jmn3n/8HmHHPy9VR+5J/jqIzU5+REW4f/9zZ4B1PsD5UNq81P5/qmXwu/zb749ezr6Hrm/2z5kzeaa54bNNztD/i2X9w/tbYgN9W+uPeNcodrmW3P6txqL0//UWLH+J+Z+GHu/rP3Wu9X3T+Hn1QdsjEll
   </data>
  </layer>
- <layer id="5" name="AboveSprites" width="30" height="30">
+ <layer id="5" name="AboveSprites" width="48" height="48">
   <data encoding="base64" compression="zlib">
-   eJztwQEBAAAAgiD/r25IQAEAAPBoDhAAAQ==
+   eJzt17EJACAQA8Bs8Buro+sC1o94B+lTBZIAAAD8bVQyT1Z1NwEAAABu/Hegi/3hBRuEwwT/
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
-  <object id="47" template="../../obj/gold.tx" x="323" y="219"/>
-  <object id="49" template="../../obj/gold.tx" x="106" y="216"/>
-  <object id="50" template="../../obj/enemy.tx" x="198" y="153" width="32" height="32">
+  <object id="47" template="../../obj/gold.tx" x="603" y="416">
    <properties>
-    <property name="enemy" value="Griselbrand"/>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 180,
+    &quot;addMaxCount&quot;: 40
+ }
+]</property>
    </properties>
   </object>
-  <object id="51" template="../../obj/entry_up.tx" x="209" y="480">
+  <object id="49" template="../../obj/gold.tx" x="134" y="413">
+   <properties>
+    <property name="reward">[
+  {
+    &quot;type&quot;: &quot;gold&quot;,
+    &quot;count&quot;: 180,
+    &quot;addMaxCount&quot;: 40
+ }
+]</property>
+   </properties>
+  </object>
+  <object id="54" template="../../obj/enemy.tx" x="368" y="728">
+   <properties>
+    <property name="enemy" value="Demon"/>
+   </properties>
+  </object>
+  <object id="55" template="../../obj/gate.tx" x="368" y="640">
+   <properties>
+    <property name="dialog">[{
+    &quot;text&quot;:&quot;A gate is blocking the path. I looks like it is open elsewhere&quot;,
+    &quot;options&quot;:[
+    { &quot;name&quot;:&quot;continue&quot; } 
+    ]
+}]</property>
+   </properties>
+  </object>
+  <object id="60" template="../../obj/entry_up.tx" x="357" y="768" width="38" height="16">
    <properties>
     <property name="teleport" value=""/>
    </properties>
   </object>
-  <object id="52" template="../../obj/treasure.tx" x="208" y="80">
+  <object id="61" name="switch" class="dialog" gid="4426" x="624" y="560" width="16" height="16">
    <properties>
-    <property name="reward">[
-  {
-    &quot;type&quot;: &quot;life&quot;,
-    &quot;count&quot;: 2
-  }
-]
-</property>
-    <property name="sprite" value="sprites/2life.atlas"/>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds from the center&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;flip the switch&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:55}],
+			&quot;name&quot;:&quot;ok&quot; }]
+	},
+	{ &quot;name&quot;:&quot;go away&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="63" name="switch" class="dialog" gid="4426" x="368" y="192" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds from the center&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;flip the switch&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:55}],
+			&quot;name&quot;:&quot;ok&quot; }]
+	},
+	{ &quot;name&quot;:&quot;go away&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="64" name="switch" class="dialog" gid="4426" x="112" y="560" width="16" height="16">
+   <properties>
+    <property name="dialog">[
+  { 
+    &quot;text&quot;:&quot;Hmm a big switch is embedded into the wall&quot;, 
+    &quot;options&quot;:[ 
+	{ 
+		&quot;text&quot;:&quot;You hear some loud sounds from the center&quot;,
+		&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;advanceMapFlag&quot;:&quot;gate&quot;}],
+		&quot;name&quot;:&quot;flip the switch&quot; 
+			&quot;options&quot;:[{
+			&quot;condition&quot;:[{&quot;getMapFlag&quot;:{&quot;key&quot;:&quot;gate&quot;,&quot;op&quot;:&quot;&gt;=&quot;,&quot;val&quot;:3}}],
+			&quot;action&quot;:[{&quot;deleteMapObject&quot;:55}],
+			&quot;name&quot;:&quot;ok&quot; }]
+	},
+	{ &quot;name&quot;:&quot;go away&quot; } 	
+	] 
+	} 
+	
+]</property>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/entry_down.tx" x="369" y="489">
+   <properties>
+    <property name="teleport" value="maps/map/main_story/black_castle_f1.tmx"/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/enemy.tx" x="56" y="663">
+   <properties>
+    <property name="enemy" value="Demon"/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/enemy.tx" x="679" y="664">
+   <properties>
+    <property name="enemy" value="Demon"/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/enemy.tx" x="681" y="458">
+   <properties>
+    <property name="enemy" value="Demon"/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/enemy.tx" x="368" y="298">
+   <properties>
+    <property name="enemy" value="Demon"/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/enemy.tx" x="57" y="456">
+   <properties>
+    <property name="enemy" value="Demon"/>
    </properties>
   </object>
  </objectgroup>

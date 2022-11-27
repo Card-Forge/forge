@@ -66,14 +66,6 @@ public class TriggerSacrificed extends Trigger {
             return false;
         }
 
-        if (hasParam("ValidSourceController")) {
-            final SpellAbility sourceSA = (SpellAbility) runParams.get(AbilityKey.Cause);
-
-            if (sourceSA == null || !matchesValid(sourceSA.getActivatingPlayer(), getParam("ValidSourceController").split(","))) {
-                return false;
-            }
-        }
-
         if (hasParam("WhileKeyword")) {
             final String keyword = getParam("WhileKeyword");
             boolean withKeyword = false;

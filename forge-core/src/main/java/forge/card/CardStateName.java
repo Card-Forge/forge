@@ -5,12 +5,18 @@ public enum CardStateName {
     Original,
     FaceDown,
     Flipped,
+    Converted,
     Transformed,
     Meld,
     LeftSplit,
     RightSplit,
     Adventure,
-    Modal
+    Modal,
+    SpecializeW,
+    SpecializeU,
+    SpecializeB,
+    SpecializeR,
+    SpecializeG
 
     ;
 

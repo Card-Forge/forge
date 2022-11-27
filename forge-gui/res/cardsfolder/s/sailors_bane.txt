@@ -1,0 +1,9 @@
+Name:Sailors' Bane
+ManaCost:7 U U
+Types:Creature Dragon Turtle
+PT:7/7
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ X | EffectZone$ All | Description$ This spell costs {1} less to cast for each card you own in exile and in your graveyard that's an instant card, a sorcery card, or a card that has an Adventure.
+SVar:X:Count$ValidGraveyard,Exile Instant.YouOwn,Sorcery.YouOwn,Card.AdventureCard+YouOwn
+K:Ward:4
+DeckHints:Type$Instant|Sorcery|Adventure
+Oracle:This spell costs {1} less to cast for each card you own in exile and in your graveyard that's an instant card, a sorcery card, or a card that has an Adventure.\nWard {4} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {4}.)

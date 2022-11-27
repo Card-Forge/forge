@@ -79,7 +79,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
             public void drawOnContainer(Graphics g) {
                 //draw top border above items
                 float y = scroller.getTop() - FList.LINE_THICKNESS / 2;
-                g.drawLine(FList.LINE_THICKNESS, FList.LINE_COLOR, 0, y, getWidth(), y);
+                g.drawLine(FList.LINE_THICKNESS, FList.getLineColor(), 0, y, getWidth(), y);
             }
         });
 
@@ -89,7 +89,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
 
             lblFluff.setFont(FSkinFont.get(12));
             lblFluff.setAlignment(Align.center);
-            lblFluff.setTextColor(FLabel.INLINE_LABEL_COLOR); //make fluff text a little lighter
+            lblFluff.setTextColor(FLabel.getInlineLabelColor()); //make fluff text a little lighter
         }
 
         @Override
@@ -168,7 +168,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
             lblCost.setText(String.valueOf(buyingPrice));
 
             lblDesc.setFont(FSkinFont.get(12));
-            lblDesc.setTextColor(FLabel.INLINE_LABEL_COLOR);
+            lblDesc.setTextColor(FLabel.getInlineLabelColor());
 
             lblName.setHeight(lblName.getAutoSizeBounds().height);
             btnBuy.setHeight(btnBuy.getAutoSizeBounds().height * 1.2f);
@@ -192,7 +192,7 @@ public class QuestBazaarScreen extends TabPageScreen<QuestBazaarScreen> {
         public void drawOverlay(Graphics g) {
             //draw bottom border
             float y = getHeight() - FList.LINE_THICKNESS / 2;
-            g.drawLine(FList.LINE_THICKNESS, FList.LINE_COLOR, 0, y, getWidth(), y);
+            g.drawLine(FList.LINE_THICKNESS, FList.getLineColor(), 0, y, getWidth(), y);
         }
 
         public float getPreferredHeight(float width) {

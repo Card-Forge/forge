@@ -1,12 +1,18 @@
 package forge.adventure.util;
 
-import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.utils.Array;
+import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.DialogData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.MapStage;
+import forge.card.ColorSet;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
+import forge.sound.AudioClip;
 import forge.util.Localizer;
 
 /**
@@ -16,9 +22,9 @@ import forge.util.Localizer;
 
 public class MapDialog {
     private final MapStage stage;
-    private Array<DialogData> data;
+    private  Array<DialogData> data;
     private final int parentID;
-    private final float WIDTH = 260f;
+    private final static float WIDTH = 260f;
     static private final String defaultJSON = "[\n" +
             "  {\n" +
             "    \"effect\":[],\n" +
@@ -35,13 +41,23 @@ public class MapDialog {
     public MapDialog(String S, MapStage stage, int parentID) {
         this.stage = stage;
         this.parentID = parentID;
-        if (S.isEmpty()) {
-            System.err.print("Dialog error. Dialog property is empty.\n");
-            this.data = JSONStringLoader.parse(Array.class, DialogData.class, defaultJSON, defaultJSON);
-            return;
+        try
+        {
+
+            if (S.isEmpty()) {
+                System.err.print("Dialog error. Dialog property is empty.\n");
+                this.data = JSONStringLoader.parse(Array.class, DialogData.class, defaultJSON, defaultJSON);
+                return;
+            }
+            this.data = JSONStringLoader.parse(Array.class, DialogData.class, S, defaultJSON);
         }
-        this.data = JSONStringLoader.parse(Array.class, DialogData.class, S, defaultJSON);
+        catch (Exception exception)
+        {
+            exception.printStackTrace();
+
+        }
     }
+    static AudioClip audio=null;
 
     private void loadDialog(DialogData dialog) { //Displays a dialog with dialogue and possible choices.
         setEffects(dialog.action);
@@ -51,23 +67,36 @@ public class MapDialog {
         String text; //Check for localized string (locname), otherwise print text.
         if(dialog.loctext != null && !dialog.loctext.isEmpty()) text = L.getMessage(dialog.loctext);
         else text = dialog.text;
-        Label A = Controls.newLabel(text);
+        if(audio!=null)
+            audio.stop();
+        if(dialog.voiceFile!=null)
+        {
+            audio = AudioClip.createClip(Config.instance().getFilePath(dialog.voiceFile));
+            if(audio!=null)
+                audio.play(FModel.getPreferences().getPrefInt(ForgePreferences.FPref.UI_VOL_SOUNDS)/100f);
+        }
+        TypingLabel A = Controls.newTypingLabel(text);
         A.setWrap(true);
         D.getContentTable().add(A).width(WIDTH); //Add() returns a Cell, which is what the width is being applied to.
         if(dialog.options != null) {
+            int i=0;
             for(DialogData option:dialog.options) {
                 if( isConditionOk(option.condition) ) {
                     String name; //Get localized label if present.
                     if(option.locname != null && !option.locname.isEmpty()) name = L.getMessage(option.locname);
                     else name = option.name;
-                    TextButton B = Controls.newTextButton(name,() -> loadDialog(option));
-                    B.getLabel().setWrap(true); //We want this to wrap in case it's a wordy choice.
+                    TextraButton B = Controls.newTextButton(name,() -> loadDialog(option));
+                    B.getTextraLabel().setWrap(true); //We want this to wrap in case it's a wordy choice.
                     D.getButtonTable().add(B).width(WIDTH - 10); //The button table also returns a Cell when adding.
                     //TODO: Reducing the space a tiny bit could help. But should be fine as long as there aren't more than 4-5 options.
                     D.getButtonTable().row(); //Add a row. Tried to allow a few per row but it was a bit erratic.
+                    i++;
                 }
             }
-            stage.showDialog();
+            if(i==0)
+                stage.hideDialog();
+            else
+                stage.showDialog();
         }
         else {
             stage.hideDialog();
@@ -152,7 +181,8 @@ public class MapDialog {
                 } else if(condition.not) return false;
             }
             if(condition.colorIdentity != null && !condition.colorIdentity.isEmpty()) { //Check for player's color ID.
-                if(!player.getColorIdentity().equals(condition.colorIdentity.toUpperCase())){
+                if(player.getColorIdentity().hasAllColors(ColorSet.fromNames(condition.colorIdentity.toCharArray()).getColor()))
+                {
                     if(!condition.not) return false;
                 } else if(condition.not) return false;
             }

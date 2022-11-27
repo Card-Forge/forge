@@ -35,7 +35,7 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
         else {
             uniqueCards = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class);
         }
-        Predicate<CardRules> canPlay = isForAi ? DeckGeneratorBase.AI_CAN_PLAY : DeckGeneratorBase.HUMAN_CAN_PLAY;
+        Predicate<CardRules> canPlay = isForAi ? DeckGeneratorBase.AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
         @SuppressWarnings("unchecked")
         Iterable<PaperCard> legends = Iterables.filter(uniqueCards.toFlatList(), Predicates.and(format.isLegalCommanderPredicate(), Predicates.compose(
                     canPlay, PaperCard.FN_GET_RULES)));
@@ -59,7 +59,7 @@ public class CommanderDeckGenerator extends DeckProxy implements Comparable<Comm
         else {
             uniqueCards = ItemPool.createFrom(FModel.getMagicDb().getCommonCards().getUniqueCards(), PaperCard.class);
         }
-        Predicate<CardRules> canPlay = isForAi ? DeckGeneratorBase.AI_CAN_PLAY : DeckGeneratorBase.HUMAN_CAN_PLAY;
+        Predicate<CardRules> canPlay = isForAi ? DeckGeneratorBase.AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
         @SuppressWarnings("unchecked")
         Iterable<PaperCard> legends = Iterables.filter(uniqueCards.toFlatList(), Predicates.and(format.isLegalCardPredicate(),
                 Predicates.compose(Predicates.and(

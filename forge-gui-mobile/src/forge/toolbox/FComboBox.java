@@ -224,7 +224,7 @@ public class FComboBox<T> extends FTextField implements IComboBox<T> {
         float y1 = getHeight() / 2 - 1;
         float y2 = y1 + divotHeight;
         float y3 = y1;
-        g.fillTriangle(FORE_COLOR, x1, y1, x2, y2, x3, y3);
+        g.fillTriangle(getForeColor(), x1, y1, x2, y2, x3, y3);
     }
 
     private float getDivotWidth() {

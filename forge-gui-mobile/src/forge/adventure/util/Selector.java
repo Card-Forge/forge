@@ -1,57 +1,83 @@
 package forge.adventure.util;
 
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pools;
+import com.github.tommyettinger.textra.TextraButton;
 
 /**
  * UI element to click through options, can be configured in an UiActor
  */
-public class Selector extends Group {
+public class Selector extends Table {
     private final ImageButton leftArrow;
     private final ImageButton rightArrow;
-    private final TextButton label;
+    private final TextraButton label;
     private int currentIndex = 0;
     private Array<String> textList;
 
 
     public Selector() {
-        ImageButton.ImageButtonStyle leftArrowStyle = Controls.GetSkin().get("leftarrow", ImageButton.ImageButtonStyle.class);
-        leftArrow = new ImageButton(leftArrowStyle);
+        Selector self=this;
+        ImageButton.ImageButtonStyle leftArrowStyle = Controls.getSkin().get("leftarrow", ImageButton.ImageButtonStyle.class);
+        leftArrow = new ImageButton(leftArrowStyle)
+        {
+            @Override
+            public boolean hasKeyboardFocus()
+            {
+                return  self.hasKeyboardFocus();
+            }
+        };
 
-        ImageButton.ImageButtonStyle rightArrowStyle = Controls.GetSkin().get("rightarrow", ImageButton.ImageButtonStyle.class);
-        rightArrow = new ImageButton(rightArrowStyle);
+        ImageButton.ImageButtonStyle rightArrowStyle = Controls.getSkin().get("rightarrow", ImageButton.ImageButtonStyle.class);
+        rightArrow = new ImageButton(rightArrowStyle)
+        {
+            @Override
+            public boolean hasKeyboardFocus()
+            {
+                return  self.hasKeyboardFocus();
+            }
+        };
 
-        label = new TextButton("", Controls.GetSkin());
-        addActor(leftArrow);
-        addActor(rightArrow);
-        addActor(label);
+        label = new Controls.TextButtonFix("")
+        {
+            @Override
+            public boolean hasKeyboardFocus()
+            {
+                return  self.hasKeyboardFocus();
+            }
+        };
+        add(leftArrow).pad(2);
+        add(label).expand().fill();
+        add(rightArrow).pad(2);
         leftArrow.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                try {
-                    setCurrentIndex(currentIndex - 1);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                setCurrentIndex(currentIndex - 1);
             }
         });
         rightArrow.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                try {
-                    setCurrentIndex(currentIndex + 1);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                setCurrentIndex(currentIndex + 1);
             }
         });
 
+        addListener(new InputListener()
+        {
+            @Override
+            public boolean keyDown(InputEvent event, int keycode) {
+                if(KeyBinding.Left.isPressed(keycode))
+                    setCurrentIndex(currentIndex - 1);
+                if(KeyBinding.Right.isPressed(keycode))
+                    setCurrentIndex(currentIndex + 1);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -80,16 +106,27 @@ public class Selector extends Group {
         int oldIndex = currentIndex;
         this.currentIndex = currentIndex;
         label.setText(textList.get(currentIndex));
+        label.layout();
         ChangeListener.ChangeEvent changeEvent = Pools.obtain(ChangeListener.ChangeEvent.class);
         if (fire(changeEvent)) {
             this.currentIndex = oldIndex;
             label.setText(textList.get(currentIndex));
+            label.layout();
         }
         Pools.free(changeEvent);
     }
 
     public String getText() {
         return textList.get(currentIndex);
+    }
+    public TextraButton getLabel() {
+        return label;
+    }
+    public ImageButton getLeftArrow() {
+        return leftArrow;
+    }
+    public ImageButton getRightArrow() {
+        return rightArrow;
     }
 
     public Array<String> getTextList() {

@@ -1,0 +1,14 @@
+Name:Racketeer Boss
+ManaCost:R G
+Types:Creature Cat Warrior
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME enters the battlefield, you may choose 2 creature and/or planeswalker cards in your hand. They perpetually gain "When you cast this spell, create a Treasure token and this spell perpetually loses this ability."
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.YouOwn,Planeswalker.YouOwn | ChoiceTitle$ Choose up to two creature and/or planeswalker cards in your hand. | MinAmount$ 0 | Amount$ 2 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ ChosenCard | ForgetOnCast$ True | ConditionDefined$ ChosenCard | ConditionPresent$ Card | ConditionCompare$ GE1 | StaticAbilities$ PerpetualEffect | Name$ Racketeer Boss's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualEffect:Mode$ Continuous | Affected$ Card.IsRemembered | AddTrigger$ SpellCastTrig | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ When you cast this spell, create a Treasure token and this spell perpetually loses this ability.
+SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigTreasure | TriggerDescription$ When you cast this spell, create a Treasure token and this spell perpetually loses this ability.
+SVar:TrigTreasure:DB$ Token | TokenScript$ c_a_treasure_sac
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+DeckHints:Type$Planeswalker
+DeckHas:Ability$Token|Sacrifice & Type$Treasure|Artifact
+Oracle:When Racketeer Boss enters the battlefield, choose up to two creature and/or planeswalker cards in your hand. They perpetually gain "When you cast this spell, create a Treasure token and this spell perpetually loses this ability."

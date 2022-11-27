@@ -1,0 +1,6 @@
+Name:And They Shall Know No Fear
+ManaCost:1 W
+Types:Instant
+A:SP$ ChooseType | Type$ Creature | SubAbility$ DBPumpAll | AILogic$ MostProminentComputerControls | SpellDescription$ Choose a creature type.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl+ChosenType | NumAtt$ +1 | KW$ Indestructible | SpellDescription$ Creatures you control of the chosen type get +1/+0 and gain indestructible until end of turn.
+Oracle:Choose a creature type. Creatures you control of the chosen type get +1/+0 and gain indestructible until end of turn.

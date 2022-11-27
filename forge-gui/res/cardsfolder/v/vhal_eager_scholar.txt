@@ -1,0 +1,96 @@
+Name:Vhal, Eager Scholar
+ManaCost:2 U
+Types:Legendary Creature Human Wizard
+PT:2/2
+K:Specialize:5
+A:AB$ Draw | Cost$ T | SubAbility$ DBDiscard | SpellDescription$ Draw a card,
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBPutCounter | SpellDescription$ then discard a card.
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ STUDY | SpellDescription$ Put a study counter on CARDNAME.
+AlternateMode:Specialize
+DeckHas:Ability$Discard|Counters
+Oracle:Specialize {5}\n{T}: Draw a card, then discard a card. Put a study counter on Vhal, Eager Scholar.
+
+SPECIALIZE:WHITE
+
+Name:Vhal, Scholar of Tactics
+ManaCost:2 W U
+Types:Legendary Creature Human Wizard
+PT:4/4
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigRemoveCounters | TriggerDescription$ When this creature specializes, remove all study counters from it. When you do, distribute that many +1/+1 counters among any number of target creatures.
+SVar:TrigRemoveCounters:DB$ RemoveCounter | CounterType$ STUDY | CounterNum$ All | RememberRemoved$ True | SubAbility$ DBImmediateTrig
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionCheckSVar$ X | Execute$ TrigPutCounters | TriggerDescription$ When you do, distribute that many +1/+1 counters among any number of target creatures.
+SVar:TrigPutCounters:DB$ PutCounter | ValidTgts$ Creature | TgtPrompt$ Select any number of target creatures | CounterType$ P1P1 | CounterNum$ X | TargetMin$ 1 | TargetMax$ X | DividedAsYouChoose$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize
+A:AB$ Draw | Cost$ T | SubAbility$ DBDiscard | SpellDescription$ Draw a card,
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | SpellDescription$ then discard a card.
+DeckHas:Ability$Discard|Counters
+Oracle:When this creature specializes, remove all study counters from it. When you do, distribute that many +1/+1 counters among any number of target creatures.\n{T}: Draw a card, then discard a card.
+
+SPECIALIZE:BLUE
+
+Name:Vhal, Scholar of Prophecy
+ManaCost:2 U U
+Types:Legendary Creature Human Wizard
+PT:4/4
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigRemoveCounters | TriggerDescription$ When this creature specializes, remove all study counters from it. Look at that many cards from the top of your library. Put one of those cards into your hand and the rest on the bottom of your library in a random order.
+SVar:TrigRemoveCounters:DB$ RemoveCounter | CounterType$ STUDY | CounterNum$ All | RememberRemoved$ True | SubAbility$ DBDig
+SVar:DBDig:DB$ Dig | DigNum$ X | ChangeNum$ 1 | DestinationZone$ Hand | DestinationZone2$ Library | LibraryPosition$ -1 | RestRandomOrder$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize
+A:AB$ Draw | Cost$ T | SubAbility$ DBDiscard | SpellDescription$ Draw a card,
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | SpellDescription$ then discard a card.
+DeckHas:Ability$Discard
+Oracle:When this creature specializes, remove all study counters from it. Look at that many cards from the top of your library. Put one of those cards into your hand and the rest on the bottom of your library in a random order.\n{T}: Draw a card, then discard a card.
+
+SPECIALIZE:BLACK
+
+Name:Vhal, Scholar of Mortality
+ManaCost:2 U B
+Types:Legendary Creature Human Wizard
+PT:4/4
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigRemoveCounters | TriggerDescription$ When this creature specializes, remove all study counters from it. When you do, put target creature card with mana value less than or equal to the number of study counters removed this way from a graveyard onto the battlefield under your control.
+SVar:TrigRemoveCounters:DB$ RemoveCounter | CounterType$ STUDY | CounterNum$ All | RememberRemoved$ True | SubAbility$ DBImmediateTrig
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionCheckSVar$ X | Execute$ TrigChangeZone | TriggerDescription$ When you do, put target creature card with mana value less than or equal to the number of study counters removed this way from a graveyard onto the battlefield under your control.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.cmcLEX | TgtPrompt$ Select target creature card with mana value less than or equal to the number of study counters removed | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize
+A:AB$ Draw | Cost$ T | SubAbility$ DBDiscard | SpellDescription$ Draw a card,
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | SpellDescription$ then discard a card.
+DeckHas:Ability$Discard|Graveyard
+Oracle:When this creature specializes, remove all study counters from it. When you do, put target creature card with mana value less than or equal to the number of study counters removed this way from a graveyard onto the battlefield under your control.\n{T}: Draw a card, then discard a card.
+
+SPECIALIZE:RED
+
+Name:Vhal, Scholar of Elements
+ManaCost:2 U R
+Types:Legendary Creature Human Wizard
+PT:4/4
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigRemoveCounters | TriggerDescription$ When this creature specializes, remove all study counters from it. When you do, CARDNAME deals that much damage to target creature or planeswalker an opponent controls.
+SVar:TrigRemoveCounters:DB$ RemoveCounter | CounterType$ STUDY | CounterNum$ All | RememberRemoved$ True | SubAbility$ DBImmediateTrig
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionCheckSVar$ X | Execute$ TrigDealDamage | TriggerDescription$ When you do, CARDNAME deals that much damage to target creature or planeswalker an opponent controls.
+SVar:TrigDealDamage:DB$ DealDamage | ValidTgts$ Creature.OppCtrl,Planeswalker.OppCtrl | TgtPrompt$ Select target creature or planeswalker an opponent controls | NumDmg$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize
+A:AB$ Draw | Cost$ T | SubAbility$ DBDiscard | SpellDescription$ Draw a card,
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | SpellDescription$ then discard a card.
+DeckHas:Ability$Discard
+Oracle:When this creature specializes, remove all study counters from it. When you do, Vhal, Scholar of Elements deals that much damage to target creature or planeswalker an opponent controls.\n{T}: Draw a card, then discard a card.
+
+SPECIALIZE:GREEN
+
+Name:Vhal, Scholar of Creation
+ManaCost:2 G U
+Types:Legendary Creature Human Wizard
+PT:4/4
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigRemoveCounters | TriggerDescription$ When this creature specializes, remove all study counters from it. Seek two creature cards with mana value less than or equal to the number of study counters removed this way. Put one of them onto the battlefield and shuffle the other into your library.
+SVar:TrigRemoveCounters:DB$ RemoveCounter | CounterType$ STUDY | CounterNum$ All | RememberRemoved$ True | SubAbility$ DBSeek
+SVar:DBSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 2 | ChangeType$ Creature.cmcLEX | RememberChanged$ True | SubAbility$ DBBattlefield
+SVar:DBBattlefield:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | SelectPrompt$ Select one to put onto the battlefield | ChangeType$ Card.IsRemembered | ForgetChanged$ True | SubAbility$ DBShuffle
+SVar:DBShuffle:DB$ ChangeZone | Origin$ Hand | Destination$ Library | Shuffle$ True | Defined$ RememberedCard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$RememberedSize
+A:AB$ Draw | Cost$ T | SubAbility$ DBDiscard | SpellDescription$ Draw a card,
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose | SpellDescription$ then discard a card.
+DeckHas:Ability$Discard
+Oracle:When this creature specializes, remove all study counters from it. Seek two creature cards with mana value less than or equal to the number of study counters removed this way. Put one of them onto the battlefield and shuffle the other into your library.\n{T}: Draw a card, then discard a card.

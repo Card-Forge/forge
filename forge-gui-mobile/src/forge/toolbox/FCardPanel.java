@@ -1,5 +1,6 @@
 package forge.toolbox;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import forge.Forge;
 import forge.Graphics;
@@ -96,7 +97,7 @@ public class FCardPanel extends FDisplayObject {
     public void draw(Graphics g) {
         if (card == null) { return; }
         boolean animate = Forge.animatedCardTapUntap;
-        float mod = isHighlighted()||isHovered() ? getWidth()/16f : 0f;
+        float mod = (isHighlighted()||isHovered()) && !Forge.hasGamepad() ? getWidth()/16f : 0f;
         float padding = getPadding();
         float x = padding-mod/2;
         float y = padding-mod/2;
@@ -160,6 +161,8 @@ public class FCardPanel extends FDisplayObject {
             transformAnimation.drawCard(g, card, x, y, w, h);
         } else {
             CardRenderer.drawCardWithOverlays(g, card, x, y, w, h, getStackPosition());
+            if (Forge.hasGamepad() && isHovered())
+                g.drawRect(3f, Color.LIME, x, y, w, h);
         }
         if (tapped) {
             g.endTransform();

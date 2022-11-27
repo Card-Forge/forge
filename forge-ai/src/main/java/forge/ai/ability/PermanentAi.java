@@ -176,7 +176,7 @@ public class PermanentAi extends SpellAbilityAi {
                 emptyAbility.setPayCosts(new Cost(costs, true));
                 emptyAbility.setTargetRestrictions(sa.getTargetRestrictions());
                 emptyAbility.setCardState(sa.getCardState());
-                emptyAbility.setActivatingPlayer(ai);
+                emptyAbility.setActivatingPlayer(ai, true);
 
                 if (!ComputerUtilCost.canPayCost(emptyAbility, ai, true)) {
                     // AiPlayDecision.AnotherTime

@@ -1,0 +1,6 @@
+Name:Forest Dryad Land Token
+ManaCost:no cost
+Types:Creature Forest Dryad Land
+Colors:green
+PT:1/1
+Oracle:{T}: Add {G}.

@@ -8,10 +8,9 @@ import forge.adventure.util.Controls;
 
 public class Console extends Window {
     private final ScrollPane scroll;
-    private String last = "";
+    private  String last = "";
     private final InputLine input;
     private final Table content;
-    private final ConsoleCommandInterpreter interpreter = new ConsoleCommandInterpreter();
 
     public void toggle() {
         if(isVisible()) {
@@ -23,11 +22,11 @@ public class Console extends Window {
         }
     }
 
-    class InputLine extends TextField {
-        private Console console;
+    static class InputLine extends TextField {
+        private final Console console;
 
         public InputLine(Console console) {
-            super("", Controls.GetSkin());
+            super("", Controls.getSkin());
             this.console = console;
             writeEnters=true;
         }
@@ -44,8 +43,15 @@ public class Console extends Window {
                     case BACKSPACE:
                         break;
                     case TAB:
-                        self.setText(console.complete(self.getText()));
-                        self.setCursorPosition(Integer.MAX_VALUE);
+                        if(self.getText().isEmpty())
+                        {
+                            self.setText(console.last);
+                        }
+                        else
+                        {
+                            self.setText(console.complete(self.getText()));
+                            self.setCursorPosition(Integer.MAX_VALUE);
+                        }
                         break;
                     case NEWLINE:
                     case CARRIAGE_RETURN:
@@ -62,7 +68,7 @@ public class Console extends Window {
     }
 
     private String complete(String text) {
-        return interpreter.complete(text);
+        return ConsoleCommandInterpreter.getInstance().complete(text);
     }
 
     public void command(String text) {
@@ -70,7 +76,7 @@ public class Console extends Window {
         newLine.getActor().setColor(1,1,1,1);
         newLine.growX().align(Align.left|Align.bottom).row();
         last = text; //Preserve last command.
-        newLine=content.add(interpreter.command(text));
+        newLine=content.add(ConsoleCommandInterpreter.getInstance().command(text));
         newLine.getActor().setColor(0.6f,0.6f,0.6f,1);
         newLine.growX().align(Align.left|Align.bottom).row();
         scroll.layout();
@@ -78,8 +84,8 @@ public class Console extends Window {
     }
 
     public Console() {
-        super("", Controls.GetSkin());
-        content = new Table(Controls.GetSkin());
+        super("", Controls.getSkin());
+        content = new Table(Controls.getSkin());
         input   = new InputLine(this);
         scroll  = new ScrollPane(content,new ScrollPane.ScrollPaneStyle());
 

@@ -4,11 +4,12 @@ import forge.adventure.data.DifficultyData;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.pointofintrest.PointOfInterestChanges;
 import forge.adventure.stage.WorldStage;
+import forge.adventure.util.AdventureModes;
 import forge.adventure.util.Config;
 import forge.adventure.util.SaveFileData;
 import forge.adventure.util.SignalList;
+import forge.card.ColorSet;
 import forge.deck.Deck;
-import forge.deck.DeckgenUtil;
 import forge.localinstance.properties.ForgeConstants;
 import forge.player.GamePlayerUtil;
 
@@ -57,6 +58,8 @@ public class WorldSave   {
     static public boolean load(int currentSlot) {
 
         String fileName = WorldSave.getSaveFile(currentSlot);
+        if(!new File(fileName).exists())
+            return false;
         new File(getSaveDir()).mkdirs();
         try {
             try(FileInputStream fos  = new FileInputStream(fileName);
@@ -119,16 +122,17 @@ public class WorldSave   {
         return currentSave;
     }
 
-    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, int startingColorIdentity, DifficultyData diff, boolean isFantasy, long seed) {
+    public static WorldSave generateNewWorld(String name, boolean male, int race, int avatarIndex, ColorSet startingColorIdentity, DifficultyData diff, AdventureModes mode, int customDeckIndex, long seed) {
         currentSave.world.generateNew(seed);
         currentSave.pointOfInterestChanges.clear();
-        Deck starterDeck = isFantasy ? DeckgenUtil.getRandomOrPreconOrThemeDeck("", false, false, false) : Config.instance().starterDecks()[startingColorIdentity];
-        currentSave.player.create(name, startingColorIdentity, starterDeck, male, race, avatarIndex, isFantasy, diff);
+        boolean chaos=mode==AdventureModes.Chaos;
+        boolean custom=mode==AdventureModes.Custom;
+        Deck starterDeck = Config.instance().starterDeck(startingColorIdentity,diff,mode,customDeckIndex);
+        currentSave.player.create(name,  starterDeck, male, race, avatarIndex, chaos, custom, diff);
         currentSave.player.setWorldPosY((int) (currentSave.world.getData().playerStartPosY * currentSave.world.getData().height * currentSave.world.getTileSize()));
         currentSave.player.setWorldPosX((int) (currentSave.world.getData().playerStartPosX * currentSave.world.getData().width * currentSave.world.getTileSize()));
         currentSave.onLoadList.emit();
         return currentSave;
-        //return currentSave = ret;
     }
 
     public boolean autoSave() {

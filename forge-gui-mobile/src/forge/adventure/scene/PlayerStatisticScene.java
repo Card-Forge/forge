@@ -1,26 +1,25 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
+import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
 import forge.adventure.player.AdventurePlayer;
-import forge.adventure.stage.GameHUD;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
+import forge.adventure.util.Paths;
 import forge.adventure.world.WorldSave;
+import forge.card.ColorSet;
 import forge.player.GamePlayerUtil;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -29,53 +28,80 @@ import java.util.Map;
 public class PlayerStatisticScene extends UIScene {
     Image avatar, avatarBorder, lifeIcon, goldIcon;
     Image colorFrame;
-    Label money, life;
-    Label wins, totalWins;
-    Label loss, totalLoss;
-    Label winloss, lossWinRatio;
-    Label playerName;
-    TextButton back;
-    Texture colorFrames;
-    private Table enemiesGroup;
-    Label blessingScroll;
+    TextraLabel money, life;
+    TextraLabel wins, totalWins;
+    TextraLabel loss, totalLoss;
+    TextraLabel winloss, lossWinRatio;
+    TextraLabel playerName;
+    TextraButton back;
+    private final Table enemiesGroup;
+    TextraLabel blessingScroll;
+    ScrollPane scrollPane, blessing;
 
-    public PlayerStatisticScene() {
+
+    private PlayerStatisticScene() {
         super(Forge.isLandscapeMode() ? "ui/statistic.json" : "ui/statistic_portrait.json");
+
+
+        enemiesGroup = new Table(Controls.getSkin());
+        enemiesGroup.row();
+        blessingScroll = Controls.newTextraLabel("");
+        blessingScroll.setColor(Color.BLACK);
+        blessingScroll.setAlignment(Align.topLeft);
+        blessingScroll.setWrap(true);
+        ui.onButtonPress("return", PlayerStatisticScene.this::back);
+
+        avatar = ui.findActor("avatar");
+        avatarBorder = ui.findActor("avatarBorder");
+        playerName = ui.findActor("playerName");
+        life = ui.findActor("lifePoints");
+        money = ui.findActor("money");
+        lifeIcon = ui.findActor("lifeIcon");
+        goldIcon = ui.findActor("goldIcon");
+        wins = ui.findActor("wins");
+        colorFrame = ui.findActor("colorFrame");
+        totalWins = ui.findActor("totalWins");
+        loss = ui.findActor("loss");
+        totalLoss = ui.findActor("totalLoss");
+        winloss = ui.findActor("winloss");
+        lossWinRatio = ui.findActor("lossWinRatio");
+        back = ui.findActor("return");
+        ScrollPane scrollPane = ui.findActor("enemies");
+        scrollPane.setActor(enemiesGroup);
+        ScrollPane blessing = ui.findActor("blessingInfo");
+        blessing.setActor(blessingScroll);
     }
+
+    private static PlayerStatisticScene object;
+
+    public static PlayerStatisticScene instance() {
+        if(object==null)
+            object=new PlayerStatisticScene();
+        return object;
+    }
+
 
 
     @Override
     public void dispose() {
-        colorFrames.dispose(); //Get rid of the cached color ID texture.
+
     }
 
 
-    @Override
-    public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
-            back();
-        }
-        return true;
-    }
 
-    public boolean back() {
-        GameHUD.getInstance().getTouchpad().setVisible(false);
-        Forge.switchToLast();
-        return true;
-    }
-    private TextureRegion getColorFrame(String C){
-        int x, y;
-        switch(C){
-            case "B": { x = 0 ; y = 0 ; break; }
-            case "G": { x = 64; y = 0 ; break; }
-            case "R": { x = 0 ; y = 32; break; }
-            case "U": { x = 32; y = 32; break; }
-            case "W": { x = 64; y = 32; break; }
-            default:
-            case "C": { x = 32; y = 0 ; break; }
-        }
-        TextureRegion result = new TextureRegion(colorFrames, x, y, 32, 32);
-        return result;
+    private TextureRegion getColorFrame(ColorSet color){
+        String colorName= "color_";
+        if(color.hasWhite())
+            colorName+="w";
+        if(color.hasBlue())
+            colorName+="u";
+        if(color.hasBlack())
+            colorName+="b";
+        if(color.hasRed())
+            colorName+="r";
+        if(color.hasGreen())
+            colorName+="g";
+        return Config.instance().getAtlas(Paths.COLOR_FRAME_ATLAS).findRegion(colorName);
     }
 
     @Override
@@ -97,26 +123,16 @@ public class PlayerStatisticScene extends UIScene {
             avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
         }
         if (life != null) {
-            AdventurePlayer.current().onLifeChange(new Runnable() {
-                @Override
-                public void run() {
-                    life.setText(AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
-                }
-            });
+            AdventurePlayer.current().onLifeChange(() -> life.setText(AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
         }
         if (money != null) {
-            WorldSave.getCurrentSave().getPlayer().onGoldChange(new Runnable() {
-                @Override
-                public void run() {
-                    money.setText(String.valueOf(AdventurePlayer.current().getGold()));
-                }
-            });
+            WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText(String.valueOf(AdventurePlayer.current().getGold())));
         }
         if (totalWins != null) {
-            totalWins.setText(Current.player().getStatistic().totalWins());
+            totalWins.setText(String.valueOf(Current.player().getStatistic().totalWins()));
         }
         if (totalLoss != null) {
-            totalLoss.setText(Current.player().getStatistic().totalLoss());
+            totalLoss.setText(String.valueOf(Current.player().getStatistic().totalLoss()));
         }
         if (lossWinRatio != null) {
             lossWinRatio.setText(Float.toString(Current.player().getStatistic().winLossRatio()));
@@ -148,52 +164,5 @@ public class PlayerStatisticScene extends UIScene {
         }
 
 
-    }
-
-    @Override
-    public void resLoaded() {
-        super.resLoaded();
-        enemiesGroup = new Table(Controls.GetSkin());
-        enemiesGroup.row();
-        blessingScroll = Controls.newLabel("");
-        blessingScroll.setStyle(new Label.LabelStyle(Controls.getBitmapFont("default"), Color.BLACK));
-        blessingScroll.setAlignment(Align.topLeft);
-        blessingScroll.setWrap(true);
-        ui.onButtonPress("return", new Runnable() {
-            @Override
-            public void run() {
-                PlayerStatisticScene.this.back();
-            }
-        });
-
-        avatar = ui.findActor("avatar");
-        avatarBorder = ui.findActor("avatarBorder");
-        playerName = ui.findActor("playerName");
-        life = ui.findActor("lifePoints");
-        money = ui.findActor("money");
-        lifeIcon = ui.findActor("lifeIcon");
-        goldIcon = ui.findActor("goldIcon");
-        wins = ui.findActor("wins");
-        colorFrame = ui.findActor("colorFrame");
-        wins.setText(Forge.getLocalizer().getMessage("lblWinProper")+":");
-        totalWins = ui.findActor("totalWins");
-        loss = ui.findActor("loss");
-        loss.setText(Forge.getLocalizer().getMessage("lblLossProper")+":");
-        totalLoss = ui.findActor("totalLoss");
-        winloss = ui.findActor("winloss");
-        winloss.setText(Forge.getLocalizer().getMessage("lblWinProper")+"/"+Forge.getLocalizer().getMessage("lblLossProper"));
-        lossWinRatio = ui.findActor("lossWinRatio");
-        back = ui.findActor("return");
-        back.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
-        ScrollPane scrollPane = ui.findActor("enemies");
-        scrollPane.setActor(enemiesGroup);
-        colorFrames = new Texture(Config.instance().getFile("ui/color_frames.png"));
-        ScrollPane blessing = ui.findActor("blessingInfo");
-        blessing.setActor(blessingScroll);
-
-    }
-
-    @Override
-    public void create() {
     }
 }

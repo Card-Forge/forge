@@ -3,6 +3,5 @@ ManaCost:4 G
 Types:Creature Insect
 PT:3/3
 K:This spell can't be countered.
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME gets +3/+3 as long as no opponent controls a creature.
-SVar:X:Count$Valid Creature.OppCtrl
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | IsPresent$ Creature.OppCtrl | PresentCompare$ EQ0 | Description$ CARDNAME gets +3/+3 as long as no opponent controls a creature.
 Oracle:This spell can't be countered.\nVexing Beetle gets +3/+3 as long as no opponent controls a creature.

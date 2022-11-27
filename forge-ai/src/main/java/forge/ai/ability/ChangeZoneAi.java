@@ -123,8 +123,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                 return doSacAndReturnFromGraveLogic(aiPlayer, sa);
             } else if (aiLogic.equals("Necropotence")) {
                 return SpecialCardAi.Necropotence.consider(aiPlayer, sa);
-            } else if (aiLogic.equals("SameName")) { // Declaration in Stone
-                return doSameNameLogic(aiPlayer, sa);
             } else if (aiLogic.equals("ReanimateAll")) {
                 return SpecialCardAi.LivingDeath.consider(aiPlayer, sa);
             } else if (aiLogic.equals("TheScarabGod")) {
@@ -1002,6 +1000,35 @@ public class ChangeZoneAi extends SpellAbilityAi {
 
                     return true;
                 }
+                // blink logic: get my own permanents back or blink permanents with ETB effects
+                if (blink) {
+                    CardCollection blinkTargets = CardLists.filter(list, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            return !c.isToken() && c.getOwner().equals(ai) && (c.getController().isOpponentOf(ai) || c.hasETBTrigger(false));
+                        }
+                    });
+                    if (!blinkTargets.isEmpty()) {
+                        CardCollection opponentBlinkTargets = CardLists.filterControlledBy(blinkTargets, ai.getOpponents());
+                        // prefer post-combat unless targeting opponent's stuff or part of another ability
+                        if (immediately || sa.getParent() != null || sa.isTrigger() || !opponentBlinkTargets.isEmpty() || !game.getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+                            while (!blinkTargets.isEmpty() && sa.canAddMoreTarget()) {
+                                Card choice = null;
+                                // first prefer targeting opponents stuff
+                                if (!opponentBlinkTargets.isEmpty()) {
+                                    choice = ComputerUtilCard.getBestAI(opponentBlinkTargets);
+                                    opponentBlinkTargets.remove(choice);
+                                }
+                                else {
+                                    choice = ComputerUtilCard.getBestAI(blinkTargets);
+                                }
+                                sa.getTargets().add(choice);
+                                blinkTargets.remove(choice);
+                            }
+                            return true;
+                        }
+                    }
+                }
                 // bounce opponent's stuff
                 list = CardLists.filterControlledBy(list, ai.getOpponents());
                 if (!CardLists.getNotType(list, "Land").isEmpty()) {
@@ -1019,26 +1046,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
                         }
                     });
                 }
-                // TODO: Blink permanents with ETB triggers
-                /*else if (!sa.isTrigger() && SpellAbilityAi.playReusable(ai, sa)) {
-                    aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            if (c.hasCounters()) {
-                                return false; // don't blink something with
-                            }
-                            // counters TODO check good and
-                            // bad counters
-                            // checks only if there is a dangerous ETB effect
-                            return !c.equals(sa.getHostCard()) && SpellPermanent.checkETBEffects(c, ai);
-                        }
-                    });
-                    if (!aiPermanents.isEmpty()) {
-                        // Choose "best" of the remaining to save
-                        sa.getTargets().add(ComputerUtilCard.getBestAI(aiPermanents));
-                        return true;
-                    }
-                }*/
             }
 
         } else if (origin.contains(ZoneType.Graveyard)) {
@@ -1268,17 +1275,15 @@ public class ChangeZoneAi extends SpellAbilityAi {
         // TODO: ideally the AI should consider at this point which targets exactly to pick (e.g. one card in the first player's graveyard
         // vs. two cards in the second player's graveyard, which cards are more relevant to be targeted, etc.). Consider improving.
         if (sa.getTargetRestrictions().isSingleZone()) {
-            Card firstTgt = sa.getTargets().getFirstTargetedCard();
+            Card firstTgt = sa.getTargetCard();
             CardCollection toRemove = new CardCollection();
             if (firstTgt != null) {
                 for (Card t : sa.getTargets().getTargetCards()) {
-                   if (!t.getController().equals(firstTgt.getController())) {
-                       toRemove.add(t);
-                   }
+                    if (!t.getController().equals(firstTgt.getController())) {
+                        toRemove.add(t);
+                    }
                 }
-                for (Card dontTarget : toRemove) {
-                   sa.getTargets().remove(dontTarget);
-                }
+                sa.getTargets().removeAll(toRemove);
             }
         }
 
@@ -1852,80 +1857,6 @@ public class ChangeZoneAi extends SpellAbilityAi {
         }
 
         // no candidates to upgrade
-        return false;
-    }
-
-    private boolean doSameNameLogic(Player aiPlayer, SpellAbility sa) {
-        final Game game = aiPlayer.getGame();
-        final Card source = sa.getHostCard();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
-        CardCollection list = CardLists.getValidCards(game.getCardsIn(origin), tgt.getValidTgts(), aiPlayer,
-                source, sa);
-        list = CardLists.filterControlledBy(list, aiPlayer.getOpponents());
-        if (list.isEmpty()) {
-            return false; // no valid targets
-        }
-
-        Map<Player, Map.Entry<String, Integer>> data = Maps.newHashMap();
-
-        // need to filter for the opponents first
-        for (final Player opp : aiPlayer.getOpponents()) {
-            CardCollection oppList = CardLists.filterControlledBy(list, opp);
-
-            // no cards
-            if (oppList.isEmpty()) {
-                continue;
-            }
-
-            // Compute value for each possible target
-            Map<String, Integer> values = ComputerUtilCard.evaluateCreatureListByName(oppList);
-
-            // reject if none of them can be targeted
-            oppList = CardLists.filter(oppList, CardPredicates.isTargetableBy(sa));
-            // none can be targeted
-            if (oppList.isEmpty()) {
-                continue;
-            }
-
-            List<String> toRemove = Lists.newArrayList();
-            for (final String name : values.keySet()) {
-                if (!Iterables.any(oppList, CardPredicates.nameEquals(name))) {
-                    toRemove.add(name);
-                }
-            }
-            values.keySet().removeAll(toRemove);
-
-            // JAVA 1.8 use Map.Entry.comparingByValue()
-            data.put(opp, Collections.max(values.entrySet(), new Comparator<Map.Entry<String, Integer>>() {
-                @Override
-                public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-                    return o1.getValue() - o2.getValue();
-                }
-            }));
-        }
-
-        if (!data.isEmpty()) {
-            // JAVA 1.8 use Map.Entry.comparingByValue() somehow
-            Map.Entry<Player, Map.Entry<String, Integer>> max = Collections.max(data.entrySet(), new Comparator<Map.Entry<Player, Map.Entry<String, Integer>>>() {
-                @Override
-                public int compare(Map.Entry<Player, Map.Entry<String, Integer>> o1, Map.Entry<Player, Map.Entry<String, Integer>> o2) {
-                    return o1.getValue().getValue() - o2.getValue().getValue();
-                }
-            });
-
-            // filter list again by the opponent and a creature of the wanted name that can be targeted
-            list = CardLists.filter(CardLists.filterControlledBy(list, max.getKey()),
-                    CardPredicates.nameEquals(max.getValue().getKey()), CardPredicates.isTargetableBy(sa));
-
-            // list should contain only one element or zero
-            sa.resetTargets();
-            for (Card c : list) {
-                sa.getTargets().add(c);
-                return true;
-            }
-        }
-
         return false;
     }
 

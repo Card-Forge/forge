@@ -18,6 +18,7 @@ public final class ImageKeys {
     public static final String BOOSTERBOX_PREFIX     = "x:";
     public static final String PRECON_PREFIX         = "p:";
     public static final String TOURNAMENTPACK_PREFIX = "o:";
+    public static final String ADVENTURECARD_PREFIX = "a:";
 
     public static final String HIDDEN_CARD           = "hidden";
     public static final String MORPH_IMAGE           = "morph";
@@ -25,9 +26,15 @@ public final class ImageKeys {
     public static final String FORETELL_IMAGE        = "foretell";
 
     public static final String BACKFACE_POSTFIX  = "$alt";
+    public static final String SPECFACE_W = "$wspec";
+    public static final String SPECFACE_U = "$uspec";
+    public static final String SPECFACE_B = "$bspec";
+    public static final String SPECFACE_R = "$rspec";
+    public static final String SPECFACE_G = "$gspec";
 
     private static String CACHE_CARD_PICS_DIR, CACHE_TOKEN_PICS_DIR, CACHE_ICON_PICS_DIR, CACHE_BOOSTER_PICS_DIR,
         CACHE_FATPACK_PICS_DIR, CACHE_BOOSTERBOX_PICS_DIR, CACHE_PRECON_PICS_DIR, CACHE_TOURNAMENTPACK_PICS_DIR;
+    public static String ADVENTURE_CARD_PICS_DIR;
     private static Map<String, String> CACHE_CARD_PICS_SUBDIR;
 
     private static Map<String, Boolean> editionImageLookup = new HashMap<>();
@@ -107,7 +114,10 @@ public final class ImageKeys {
         } else if (key.startsWith(ImageKeys.TOURNAMENTPACK_PREFIX)) {
             filename = key.substring(ImageKeys.TOURNAMENTPACK_PREFIX.length());
             dir = CACHE_TOURNAMENTPACK_PICS_DIR;
-        } else {
+        } else if (key.startsWith(ImageKeys.ADVENTURECARD_PREFIX)) {
+            filename = key.substring(ImageKeys.ADVENTURECARD_PREFIX.length());
+            dir = ADVENTURE_CARD_PICS_DIR;
+        }else {
             filename = key;
             dir = CACHE_CARD_PICS_DIR;
         }
@@ -155,20 +165,8 @@ public final class ImageKeys {
                     cachedCards.put(filename, file);
                     return file;
                 }
-                // if there's a 1st art variant try with it for .fullborder images
-                file = findFile(dir, fullborderFile.replaceAll("[0-9]*.fullborder", "1.fullborder"));
-                if (file != null) {
-                    cachedCards.put(filename, file);
-                    return file;
-                }
                 // if there's an art variant try without it for .full images
                 file = findFile(dir, filename.replaceAll("[0-9].full",".full"));
-                if (file != null) {
-                    cachedCards.put(filename, file);
-                    return file;
-                }
-                // if there's a 1st art variant try with it for .full images
-                file = findFile(dir, filename.replaceAll("[0-9]*.full", "1.full"));
                 if (file != null) {
                     cachedCards.put(filename, file);
                     return file;

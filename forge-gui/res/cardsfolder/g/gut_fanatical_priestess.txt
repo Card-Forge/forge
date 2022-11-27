@@ -1,0 +1,85 @@
+Name:Gut, Fanatical Priestess
+ManaCost:4 R R
+Types:Legendary Creature Goblin Shaman
+PT:4/3
+K:Specialize:5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When CARDNAME enters the battlefield, up to one target creature you control fights target creature you don't control. If the creature you don't control would die this turn, exile it instead.
+SVar:TrigFight:DB$ Pump | ValidTgts$ Creature.YouCtrl | AILogic$ Fight | TgtPrompt$ Select up to one target creature you control | TargetMin$ 0 | TargetMax$ 1 | SubAbility$ DBFight
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control | ReplaceDyingDefined$ ThisTargetedCard | ReplaceDyingRemember$ True
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:Specialize
+Oracle:Specialize {5}\nWhen Gut, Fanatical Priestess enters the battlefield, up to one target creature you control fights target creature you don't control. If the creature you don't control would die this turn, exile it instead.
+
+SPECIALIZE:WHITE
+
+Name:Gut, Zealous Fanatic
+ManaCost:4 R R W
+Types:Legendary Creature Goblin Shaman
+PT:5/4
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When this creature specializes, create two tokens that are copies of a creature card exiled with this creature, except they're 2/2 and have haste. Sacrifice them at the beginning of your next end step.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 2 | SetToughness$ 2 | NumCopies$ 2 | AddKeywords$ Haste | AtEOTTrig$ You_Sacrifice
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Token
+Oracle:When this creature specializes, create two tokens that are copies of a creature card exiled with this creature, except they're 2/2 and have haste. Sacrifice them at the beginning of your next end step.
+
+SPECIALIZE:BLUE
+
+Name:Gut, Devious Fanatic
+ManaCost:4 U R R
+Types:Legendary Creature Goblin Shaman
+PT:5/4
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When this creature specializes, create a token that's a copy of a creature card exiled with this creature, except it's 3/3 and has flying and haste. Sacrifice it at the beginning of your next end step.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 3 | SetToughness$ 3 | AddKeywords$ Flying & Haste | AtEOTTrig$ You_Sacrifice
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When this creature specializes, create a token that's a copy of a creature card exiled with this creature, except it's 3/3 and has flying and haste. Sacrifice it at the beginning of your next end step.
+
+SPECIALIZE:BLACK
+
+Name:Gut, Brutal Fanatic
+ManaCost:4 B R R
+Types:Legendary Creature Goblin Shaman
+PT:5/4
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When this creature specializes, create a token that's a copy of a creature card exiled with this creature, except it's 4/4 and has menace and haste. Sacrifice it at the beginning of your next end step.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Remembered | SetPower$ 4 | SetToughness$ 4 | AddKeywords$ Menace & Haste | AtEOTTrig$ You_Sacrifice
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When this creature specializes, create a token that's a copy of a creature card exiled with this creature, except it's 4/4 and has menace and haste. Sacrifice it at the beginning of your next end step.
+
+SPECIALIZE:RED
+
+Name:Gut, Furious Fanatic
+ManaCost:4 R R R
+Types:Legendary Creature Goblin Shaman
+PT:5/4
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When this creature specializes, create a token that's a copy of a creature card exiled with this creature, except it has double strike and haste. Sacrifice it at the beginning of your next end step.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Remembered | AddKeywords$ Double Strike & Haste | AtEOTTrig$ You_Sacrifice
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When this creature specializes, create a token that's a copy of a creature card exiled with this creature, except it has double strike and haste. Sacrifice it at the beginning of your next end step.
+
+SPECIALIZE:GREEN
+
+Name:Gut, Bestial Fanatic
+ManaCost:4 R R G
+Types:Legendary Creature Goblin Shaman
+PT:5/4
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerDescription$ When this creature specializes, create a token that's a copy of a creature card exiled with this creature, except it's 5/5 and has trample and haste. Sacrifice it at the beginning of your next end step.
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ Remembered.ExiledWithSource | SetPower$ 5 | SetToughness$ 5 | AddKeywords$ Trample & Haste | AtEOTTrig$ You_Sacrifice
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When this creature specializes, create a token that's a copy of a creature card exiled with this creature, except it's 5/5 and has trample and haste. Sacrifice it at the beginning of your next end step.

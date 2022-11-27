@@ -2,6 +2,7 @@ Name:Helldozer
 ManaCost:3 B B B
 Types:Creature Zombie Giant
 PT:6/5
-A:AB$ Destroy | Cost$ B B B T | ValidTgts$ Land | TgtPrompt$ Select target land | SubAbility$ DBUntap | SpellDescription$ Destroy target land. If that land was nonbasic, untap CARDNAME.
-SVar:DBUntap:DB$ Untap | ConditionDefined$ Targeted | ConditionPresent$ Land.nonBasic | ConditionCompare$ EQ1 | Defined$ Self
+A:AB$ Destroy | Cost$ B B B T | ValidTgts$ Land | TgtPrompt$ Select target land | RememberLKI$ True | AlwaysRemember$ True | SubAbility$ DBUntap | SpellDescription$ Destroy target land. If that land was nonbasic, untap CARDNAME.
+SVar:DBUntap:DB$ Untap | ConditionDefined$ RememberedLKI | ConditionPresent$ Land.nonBasic | ConditionCompare$ EQ1 | Defined$ Self | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:{B}{B}{B}, {T}: Destroy target land. If that land was nonbasic, untap Helldozer.

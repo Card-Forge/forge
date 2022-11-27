@@ -8,4 +8,5 @@ SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:X:Remembered$CardManaCost
+AI:RemoveDeck:NonCommander
 Oracle:You draw X cards and you lose X life, where X is the mana value of a commander you own on the battlefield or in the command zone.

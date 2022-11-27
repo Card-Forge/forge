@@ -5,6 +5,6 @@ PT:5/5
 K:Flying
 K:CARDNAME enters the battlefield tapped.
 K:CARDNAME doesn't untap during your untap step.
-T:Mode$ BecomesTarget | ValidTarget$ You | SourceType$ Spell | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you become the target of a spell, you may untap CARDNAME.
+T:Mode$ BecomesTarget | ValidTarget$ You | ValidSource$ Spell | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you become the target of a spell, you may untap CARDNAME.
 SVar:TrigUntap:DB$ Untap | Defined$ Self
 Oracle:Flying\nDormant Gomazoa enters the battlefield tapped.\nDormant Gomazoa doesn't untap during your untap step.\nWhenever you become the target of a spell, you may untap Dormant Gomazoa.

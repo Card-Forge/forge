@@ -1,0 +1,10 @@
+Name:Baru, Wurmspeaker
+ManaCost:2 G G
+Types:Legendary Creature Human Druid
+PT:3/3
+S:Mode$ Continuous | Affected$ Wurm.YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample | Description$ Wurms you control get +2/+2 and have trample.
+A:AB$ Token | Cost$ 7 G T | ReduceCost$ X | TokenScript$ g_4_4_wurm | SpellDescription$ Create a 4/4 green Wurm creature token. This ability costs {X} less to activate, where X is the greatest power among Wurms you control.
+SVar:X:Count$Valid Wurm.YouCtrl$GreatestPower
+DeckHas:Ability$Token & Type$Wurm
+DeckHints:Type$Wurm
+Oracle:Wurms you control get +2/+2 and have trample.\n{7}{G}, {T}: Create a 4/4 green Wurm creature token. This ability costs {X} less to activate, where X is the greatest power among Wurms you control.

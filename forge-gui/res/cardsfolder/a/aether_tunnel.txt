@@ -2,6 +2,7 @@ Name:Aether Tunnel
 ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant creature
-A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Pump | SpellDescription$ Enchant creature
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 0 | AddKeyword$ Unblockable | Description$ Enchanted creature gets +1/+0 and can't be blocked.
+A:SP$ Attach | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | Description$ Enchanted creature gets +1/+0 and can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.EnchantedBy
 Oracle:Enchant creature\nEnchanted creature gets +1/+0 and can't be blocked.

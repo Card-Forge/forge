@@ -6,4 +6,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Sac<2/Swamp> | UnlessPayer$ You
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$Valid Swamp.YouCtrl
+DeckHas:Ability$Sacrifice
 Oracle:When Mold Demon enters the battlefield, sacrifice it unless you sacrifice two Swamps.

@@ -2,6 +2,7 @@ package forge.toolbox;
 
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -9,7 +10,11 @@ import forge.assets.FSkinFont;
 import forge.util.Utils;
 
 public abstract class FGroupBox extends FContainer {
-    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static FSkinColor getForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
     private static final FSkinFont FONT = FSkinFont.get(16);
     private static final float PADDING = Utils.scale(5);
     private static final float BORDER_THICKNESS = Utils.scale(1);
@@ -27,20 +32,20 @@ public abstract class FGroupBox extends FContainer {
         float x = 2 * PADDING;
         float y = FONT.getCapHeight() / 2;
 
-        g.drawLine(BORDER_THICKNESS, FORE_COLOR, 0, y, 0, h); //draw left border
-        g.drawLine(BORDER_THICKNESS, FORE_COLOR, 0, h, w, h); //draw bottom border
-        g.drawLine(BORDER_THICKNESS, FORE_COLOR, w, h, w, y); //draw right border
+        g.drawLine(BORDER_THICKNESS, getForeColor(), 0, y, 0, h); //draw left border
+        g.drawLine(BORDER_THICKNESS, getForeColor(), 0, h, w, h); //draw bottom border
+        g.drawLine(BORDER_THICKNESS, getForeColor(), w, h, w, y); //draw right border
 
         //draw caption
-        g.drawText(caption, FONT, FORE_COLOR, x, 0, w - x - PADDING, h, false, Align.left, false);
+        g.drawText(caption, FONT, getForeColor(), x, 0, w - x - PADDING, h, false, Align.left, false);
 
         //draw border left of caption
-        g.drawLine(BORDER_THICKNESS, FORE_COLOR, 0, y, x, y);
+        g.drawLine(BORDER_THICKNESS, getForeColor(), 0, y, x, y);
 
         //draw border right of caption if needed
         float captionEnd = x + FONT.getBounds(caption).width;
         if (captionEnd < w) {
-            g.drawLine(BORDER_THICKNESS, FORE_COLOR, captionEnd, y, w, y);
+            g.drawLine(BORDER_THICKNESS, getForeColor(), captionEnd, y, w, y);
         }
     }
 

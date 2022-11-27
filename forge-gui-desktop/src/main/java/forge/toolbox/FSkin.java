@@ -1079,7 +1079,7 @@ public class FSkin {
             return str;
         }
         //format mana symbols to display as icons
-        pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
+        pattern = "\\{([A-Z0-9]+)\\}|\\{([A-Z0-9]+)/([A-Z0-9]+)\\}|(A-)|\\{([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)\\}"; //fancy pattern needed so "/" can be omitted from replacement
         try {
             replacement = "<img src=\"" + new File(ForgeConstants.CACHE_SYMBOLS_DIR + "/$1$2$3$4$5$6.png").toURI().toURL().toString() + "\" width=" + SYMBOL_WIDTH + " height=" + SYMBOL_HEIGHT + ">";
             str = str.replaceAll(pattern, replacement);
@@ -1463,7 +1463,9 @@ public class FSkin {
         addEncodingSymbol("S", FSkinProp.IMG_MANA_SNOW);
         addEncodingSymbol("T", FSkinProp.IMG_TAP);
         addEncodingSymbol("E", FSkinProp.IMG_ENERGY);
+        addEncodingSymbol("TK", FSkinProp.IMG_TICKET);
         addEncodingSymbol("EXPERIENCE", FSkinProp.IMG_EXPERIENCE);
+        addEncodingSymbol("A-", FSkinProp.IMG_ALCHEMY);
 
         // Set look and feel after skin loaded
         FView.SINGLETON_INSTANCE.setSplashProgessBarMessage("Setting look and feel...");

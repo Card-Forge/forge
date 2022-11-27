@@ -36,15 +36,16 @@
     {
       "type": "Label",
       "name": "saveDate",
-      "x": 70,
-      "y": 40,
+      "x": 170,
+      "y": 8,
       "width": 96,
       "height": 16
     },
     {
       "type": "TextButton",
       "name": "return",
-      "text": "Back",
+      "text": "tr(lblBack)",
+      "binding": "Back",
       "width": 120,
       "height": 32,
       "x": 10,
@@ -53,7 +54,7 @@
     {
       "type": "TextButton",
       "name": "save",
-      "text": "saveLoad",
+      "binding": "Use",
       "width": 120,
       "height": 32,
       "x": 140,

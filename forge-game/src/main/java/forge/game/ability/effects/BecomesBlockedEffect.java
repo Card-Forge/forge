@@ -41,7 +41,6 @@ public class BecomesBlockedEffect extends SpellAbilityEffect {
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                     runParams.put(AbilityKey.Attacker, c);
                     runParams.put(AbilityKey.Blockers, Lists.<Card>newArrayList());
-                    runParams.put(AbilityKey.NumBlockers, 0);
                     runParams.put(AbilityKey.Defender, game.getCombat().getDefenderByAttacker(c));
                     runParams.put(AbilityKey.DefendingPlayer, game.getCombat().getDefenderPlayerByAttacker(c));
                     game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);

@@ -3,7 +3,6 @@ ManaCost:G G
 Types:Enchantment
 K:Cumulative upkeep:2
 S:Mode$ Continuous | Affected$ Creature.withFlying | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Creatures with flying don't untap during their controllers' untap steps.
-S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | CheckSVar$ X | SVarCompare$ EQ0 | Description$ Cast CARDNAME only if you control a snow land.
-SVar:X:Count$Valid Snow.Land+YouCtrl
+S:Mode$ CantBeCast | ValidCard$ Card.Self | EffectZone$ All | IsPresent$ Snow.Land+YouCtrl | PresentCompare$ EQ0 | Description$ Cast CARDNAME only if you control a snow land.
 AI:RemoveDeck:Random
 Oracle:Cast this spell only if you control a snow land.\nCumulative upkeep {2} (At the beginning of your upkeep, put an age counter on this permanent, then sacrifice it unless you pay its upkeep cost for each age counter on it.)\nCreatures with flying don't untap during their controllers' untap steps.

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="72">
+ <editorsettings>
+  <export target="wastetown..tmx" format="tmx"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../tileset/main.tsx"/>
+ <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
+ <layer id="1" name="Background" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzjENADAIADDeBWOzgn8DM0FgR4/+rRNRAAAAAACMubl/8PP7VdfvAWT0x+U=
+  </data>
+ </layer>
+ <layer id="2" name="Ground" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzlWNFu2zAM9FPtOG26/8jQ79oKuBn8Id1+K92AtPE+aCHgw85nkrLXFhhQAUSTxqJOR/JEuao+1jg1VXXbVtXz+PelWT/f5q6dtxTXp4s9bP7at806H5h/SOZhLdhzMzXdG/tVs3UyTk/kFz7Ol8837XwNfS6ynWDOnjf+umC+x3fEeZ/geY3ZWvBtvFxf8Pxu8jka2yw+b4Gvk5htCxiVP+W/ZEt5QCxt78pJFi/FtzS2hmsgHtbkhOH7XFfVj6ucQ682SvwpLgxbYymPxsmxntail1M7RzNL+Dg2xsH3Cwd3dY7T9sTfge8kOuLtTTFynMDVMOaYGXgzbPfjvC/NFKPG7LCZ7vsw4tP/RTnCOahzvMHYTqNGG0aPS8O4a+d6a/js96GZP5PFrHdwI46we+Gb5yuXwKh5+0S5wc9wbiDmET7UGXMFrYfZnvkM8bjcttN6Yp9H55me+OkK/DEfJS3VXMHazL/5Qm3wXsygN8gxTy+9+DIfmsOICWrIOACen/U8H8zXr9HPrp33HogJ13OED/NfKBaqP1pDXuwwwJnnB/kJTFwvUf2qBqlf1OKj1E4Uu560DzrJ9Rvp9KGAjzWrp7ry9B2a62kTah21q/m2JKcjjWR8rKVR/2c+tRcFbtTHbcCZd96U8CEu3SbW0nOQP56faB3kjOrcGv4yv6pBqG8+H491rFWoSd7bGv44/zy/7Jv7oz1p4dcm1yr1XeKPz8xuxLolTgYHL9e9DdQyaw/OX9bOvYO7pC/4HT6197ORxcu776k2YrCGnZtpzxTxZ/zu66lP7Rn0nI/OQdsrYszzWT87h/8SPosP+4QOc09wR/rDfAIv54nXa8A4DxWjF6eoD+xlnxp//p01O6szrJe9P8ju0PwOQTWA+wi9p3ItZzqK5xjDv97hohrj8zW6F0RrlPTP42+JcZ481X7uc96yRg6NX1de/WIu342W3BlVh7z89/o75kvj7dXvtp1jXnq3VZ2E7g7OXnGnK71/yN6t6dAzg7Wf7z6R9iJ3uAcAR5G+r8G3dET4tDcEJv5+TbHy3m+8J74od6Lz8j2wZfj+l/FR8f0Bb4gVgA==
+  </data>
+ </layer>
+ <layer id="6" name="Ground2" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzNmF1OwkAQx/cdDETUBCIPWlrQRi+lR/DrAgo8GRMRjiGGCyCgRoJnchu7YRhnvwv0n0zS7m63v87uzG43KjIWc4u4NbnlQWHKE6cWcJtym+WEb8I5GiljwvbN7arE2HVO7Ka0ZBRjultmrJIT2ysv/ThDfAfchluyfcQHtUvUNSXzo11grAOsW1itfyjQz+lEMVB1uv4naTxNJXG1CT7xjt6hus+A4Hnk909p2Qt6/qLO2GV9taxlyceId6qEv2fO/blwyFU2fMkYQsYB8APlA/w9kBnqFFwL34p2NnxZCPI1DNqvg4/yJcVHCc9tGz48r11FMX5J2m5ifBdVxn6qbs/68o3dXqsUnB8ufIOMxtlEPv5rS9YyX8F57sMXgj1syMcjksSs0FmNsfOaHastH4z/SUZ7WFVu942PtmLPcsRj9tgxbk0YZHUwVwkfJvvacTH7uWjLR+XW++LfXIzX8D/lM754Lup82ORzrCWJob4kZ2W5fkBG37wjYsaVL9QwZjXWNnyyfUnAyxqgHPsR+lK2D5D17TO+qv0MjGuZL03WblO+D00/MlZd3HyC6y6xtkCGmQF7D+2/sU6IMtvc05esv2ItUPFR0v3P4XWQav9skF/Ed5ryBTtypkiNrOWS8UUE353jeU4i3zOm25Kez+c8J6szJmp8X8t2ZzkjcP1W/t/HyLK/IeoP+89VlZr63lUUH84521RW/rOROK+D696UaJfkvndHPpNcMrfvdmVvLtjiDfsPn2t2CCZsm5TIGRRHBHwG738BVormxQ==
+  </data>
+ </layer>
+ <layer id="3" name="Walls" width="40" height="40">
+  <properties>
+   <property name="spriteLayer" type="bool" value="true"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJztzjENADAIAEEkIKDBv0wGRBSSu+XXjwAAAAAAuOvltPLvB7BLA4lXAFs=
+  </data>
+ </layer>
+ <layer id="5" name="Overlay" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzt1DkKgDAQBdDfuAupp8h59FTqlfRytk4vBsHAyOQ/SJFUswYgInpnisAcraOwxRrkw1rmtQtwiHUU+XA+/qfTfvROe2I1b5XubO1obylt0BkbneyQxz/6KadG39qPuXqsFxGVaQnAqmcL1pHcnZK+E1G5Ls9cDMw=
+  </data>
+ </layer>
+ <objectgroup id="4" name="Objects">
+  <object id="56" template="../../obj/shop.tx" x="208" y="162">
+   <properties>
+    <property name="shopList" value="Human,Boros,Orzhov,Selesnya,Selesnya,Azorius,White,Creature,Instant,Angel"/>
+   </properties>
+  </object>
+  <object id="47" template="../../obj/inn.tx" x="199" y="419"/>
+  <object id="53" template="../../obj/spellsmith.tx" x="327" y="228"/>
+  <object id="55" template="../../obj/shop.tx" x="479" y="453">
+   <properties>
+    <property name="shopList" value="Forest"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="58" template="../../obj/entry_up.tx" x="257" y="644" width="80" height="20">
+   <properties>
+    <property name="spawn" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="59" template="../../obj/entry_left.tx" x="321" y="623" width="16" height="80.9948" rotation="0"/>
+  <object id="60" template="../../obj/entry_right.tx" x="254" y="623" width="16" height="85"/>
+  <object id="62" template="../../obj/shop.tx" x="361" y="370">
+   <properties>
+    <property name="shopList" value="GreenEquipment"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="63" template="../../obj/shop.tx" x="216" y="290">
+   <properties>
+    <property name="shopList" value="GreenItems"/>
+    <property name="signYOffset" type="float" value="0"/>
+   </properties>
+  </object>
+  <object id="64" template="../../obj/shop.tx" x="466" y="417">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="65" template="../../obj/shop.tx" x="529" y="386">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="66" template="../../obj/shop.tx" x="449" y="305">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="67" template="../../obj/shop.tx" x="513" y="241">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="68" template="../../obj/shop.tx" x="448" y="130">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="69" template="../../obj/shop.tx" x="257" y="194">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="70" template="../../obj/shop.tx" x="97" y="417">
+   <properties>
+    <property name="shopList" value="Instant,Creature,Green,Gruul,Selesnya,Golgari,Simic,Elf "/>
+   </properties>
+  </object>
+  <object id="71" template="../../obj/arena.tx" x="359" y="290">
+   <properties>
+    <property name="arena">{
+
+    &quot;enemyPool&quot;:[
+	&quot;Ape&quot;,
+	&quot;Bear&quot;,
+	&quot;Centaur&quot;,
+	&quot;Centaur Warrior&quot;,
+	&quot;Dino&quot;,
+	&quot;Eldraine Faerie&quot;,
+	&quot;Elf&quot;,
+	&quot;Elf warrior&quot;,
+	&quot;Elk&quot;,
+	&quot;Faerie&quot;,
+	&quot;Giant Spider&quot;,
+	&quot;Gorgon&quot;,
+	&quot;Gorgon 2&quot;,
+	&quot;Green Beast&quot;,
+	&quot;Green Wiz1&quot;,
+	&quot;Green Wiz2&quot;,
+	&quot;Green Wiz3&quot;,
+	&quot;High Elf&quot;,
+	&quot;Hydra&quot;,
+	&quot;Satyr&quot;,
+	&quot;Snake&quot;,
+	&quot;Spider&quot;,
+	&quot;Treefolk&quot;,
+	&quot;Treefolk Guardian&quot;,
+	&quot;Viper&quot;,
+	&quot;Werewolf&quot;,
+	&quot;Wurm&quot;
+	],
+    &quot;rounds&quot;:3,
+    &quot;entryFee&quot;:100,
+     &quot;rewards&quot;: [[
+		{
+			&quot;type&quot;: &quot;card&quot;,
+			&quot;probability&quot;: 1, 
+      			&quot;count&quot;:2,
+			&quot;rarity&quot;: [
+				&quot;Mythic Rare&quot;
+			],
+      			&quot;colors&quot;: [&quot;green&quot;] 
+		}
+		],[
+		{
+			&quot;type&quot;: &quot;gold&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 500 
+		}
+		],[{
+			&quot;type&quot;: &quot;item&quot;,
+			&quot;probability&quot;: 1,
+			&quot;count&quot;: 1,
+			&quot;itemNames&quot;: [&quot;Dungeon Map&quot;,&quot;Mad Staff&quot;,&quot;Gold Boots&quot;,&quot;Disrupting Scepter&quot;]
+		}
+		]
+		] 
+}</property>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

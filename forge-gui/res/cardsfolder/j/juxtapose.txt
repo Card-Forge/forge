@@ -9,9 +9,9 @@ SVar:DBChooseArtifactYou:DB$ ChooseCard | Choices$ Artifact.YouCtrl+cmcEQZ | Man
 SVar:DBChooseArtifactOpp:DB$ ChooseCard | Defined$ ParentTarget | Choices$ Artifact.cmcEQW | TargetControls$ True | Mandatory$ True | AILogic$ WorstCard | RememberChosen$ True | SubAbility$ DBExchangeArtifact
 SVar:DBExchangeArtifact:DB$ ExchangeControl | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$HighestCMC_Creature.YouCtrl+inZoneBattlefield
-SVar:Y:Count$HighestCMC_Creature.TargetedPlayerCtrl+inZoneBattlefield
-SVar:Z:Count$HighestCMC_Artifact.YouCtrl+inZoneBattlefield
-SVar:W:Count$HighestCMC_Artifact.TargetedPlayerCtrl+inZoneBattlefield
+SVar:X:Count$Valid Creature.YouCtrl$GreatestCMC
+SVar:Y:Count$Valid Creature.TargetedPlayerCtrl$GreatestCMC
+SVar:Z:Count$Valid Artifact.YouCtrl$GreatestCMC
+SVar:W:Count$Valid Artifact.TargetedPlayerCtrl$GreatestCMC
 AI:RemoveDeck:All
 Oracle:You and target player exchange control of the creature you each control with the highest mana value. Then exchange control of artifacts the same way. If two or more permanents a player controls are tied for highest, their controller chooses one of them.

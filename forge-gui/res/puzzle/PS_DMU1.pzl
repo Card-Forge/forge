@@ -1,0 +1,19 @@
+[metadata]
+Name:Possibility Storm - Dominaria United #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/08/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume you have at least one of each basic land in your library. Remember that you must satisfy all possible blocking decisions. Good luck!
+[state]
+humanlife=20
+ailife=5
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Roaring Earth;Dire-Strain Rampage;Tiller Engine;Yavimaya Iconoclast;Thran Portal
+humanlibrary=Forest;Mountain;Swamp;Plains;Island
+humanbattlefield=Nishoba Brawler;Llanowar Loamspeaker;Mountain;Mountain;Forest;Forest;Devilish Valet|Id:2
+aibattlefield=Raffine, Scheming Seer;Grafted Identity|AttachedTo:2
+# Randomize the order of cards in the library
+humanprecast=Ancestral Knowledge:TrigShuffle

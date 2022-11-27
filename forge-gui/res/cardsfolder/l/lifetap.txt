@@ -3,5 +3,7 @@ ManaCost:U U
 Types:Enchantment
 T:Mode$ Taps | ValidCard$ Forest.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever a Forest an opponent controls becomes tapped, you gain 1 life.
 SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1
+DeckHas:Ability$LifeGain
+DeckHints:Name$Yavimaya, Cradle of Growth
 AI:RemoveDeck:Random
 Oracle:Whenever a Forest an opponent controls becomes tapped, you gain 1 life.

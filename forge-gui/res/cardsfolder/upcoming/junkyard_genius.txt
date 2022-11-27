@@ -1,0 +1,12 @@
+Name:Junkyard Genius
+ManaCost:1 B R
+Types:Creature Human Artificer
+PT:2/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
+A:AB$ PumpAll | Cost$ 1 B R Sac<1/Creature.Other;Artifact.Other/another creature or artifact> | ValidCards$ Creature.YouCtrl+Other | NumAtt$ 1 | KW$ Menace & Haste | SpellDescription$ Until end of turn, other creatures you control get +1/+0 and gain menace and haste.
+SVar:PlayMain1:TRUE
+SVar:AIPreference:SacCost$Artifact.Token,Creature.Other+cmcLE2,Artifact.cmcEQ1
+DeckHas:Ability$Token|Sacrifice & Type$Artifact
+DeckHints:Type$Artifact
+Oracle:When Junkyard Genius enters the battlefield, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")\n{1}{B}{R}, Sacrifice another creature or artifact: Until end of turn, other creatures you control get +1/+0 and gain menace and haste.

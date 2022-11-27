@@ -7,4 +7,5 @@ SVar:TrigRemoveCtr:DB$ RemoveCounter | Defined$ Self | CounterType$ INTERVENTION
 SVar:GameIsADraw:DB$ GameDrawn | ConditionPresent$ Card.Self+counters_EQ0_INTERVENTION
 AI:RemoveDeck:Random
 AI:RemoveDeck:All
+DeckHas:Ability$Counters
 Oracle:Divine Intervention enters the battlefield with two intervention counters on it.\nAt the beginning of your upkeep, remove an intervention counter from Divine Intervention.\nWhen you remove the last intervention counter from Divine Intervention, the game is a draw.

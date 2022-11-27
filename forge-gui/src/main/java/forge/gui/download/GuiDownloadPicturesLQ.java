@@ -40,14 +40,14 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
         existingSets = retrieveManifestDirectory();
 
         for (final PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards()) {
-            addDLObject(c, false);
+            addDLObject(c, "");
             if (c.hasBackFace()) {
-                addDLObject(c, true);
+                addDLObject(c, "back");
             }
         }
 
         for (final PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
-            addDLObject(c, false);
+            addDLObject(c, "");
         }
 
         // Add missing tokens to the list of things to download.
@@ -56,8 +56,8 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
         return downloads;
     }
 
-    private void addDLObject(final PaperCard c, final boolean backFace) {
-        final String imageKey = ImageUtil.getImageKey(c, backFace, false);
+    private void addDLObject(final PaperCard c, final String face) {
+        final String imageKey = ImageUtil.getImageKey(c, face, false);
         final String destPath = ForgeConstants.CACHE_CARD_PICS_DIR + imageKey  + ".jpg";
 
         if (ImageKeys.getImageFile(imageKey) != null) {
@@ -76,6 +76,6 @@ public class GuiDownloadPicturesLQ extends GuiDownloadService {
             return;
         }
 
-        downloads.put(destPath, ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(c, backFace));
+        downloads.put(destPath, ForgeConstants.URL_PIC_DOWNLOAD + ImageUtil.getDownloadUrl(c, face));
     }
 }

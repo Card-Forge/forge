@@ -1,7 +1,7 @@
 Name:Multani's Presence
 ManaCost:G
 Types:Enchantment
-T:Mode$ Countered | ValidCard$ Card | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ DBDraw | TriggerDescription$ Whenever a spell you've cast is countered, draw a card.
+T:Mode$ Countered | ValidCard$ Card.wasCastByYou | ValidType$ Spell | TriggerZones$ Battlefield | Execute$ DBDraw | TriggerDescription$ Whenever a spell you've cast is countered, draw a card.
 SVar:DBDraw:DB$ Draw | NumCards$ 1
 AI:RemoveDeck:Random
 Oracle:Whenever a spell you've cast is countered, draw a card.

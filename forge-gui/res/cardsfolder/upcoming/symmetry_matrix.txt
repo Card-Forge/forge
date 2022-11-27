@@ -1,0 +1,7 @@
+Name:Symmetry Matrix
+ManaCost:4
+Types:Artifact
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.equalPT+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature with power equal to its toughness enters the battlefield under your control, you may pay {1}. If you do, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 1
+AI:RemoveDeck:Random
+Oracle:Whenever a creature with power equal to its toughness enters the battlefield under your control, you may pay {1}. If you do, draw a card.

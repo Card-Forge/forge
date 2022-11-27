@@ -1,0 +1,12 @@
+Name:Tower Worker
+ManaCost:3
+Types:Artifact Creature Assembly-Worker
+PT:1/3
+K:Reach
+A:AB$ Mana | Cost$ T | Produced$ C | Amount$ X | SpellDescription$ Add {C}. If you control creatures named Mine Worker and Power Plant Worker, add {C}{C}{C} instead.
+SVar:X:Count$Compare TronCheck GT0.3.1
+SVar:TronCheck:SVar$Z/Times.Y
+SVar:Z:Count$Valid Creature.YouCtrl+namedMine Worker
+SVar:Y:Count$Valid Creature.YouCtrl+namedPower Plant Worker
+DeckNeeds:Name$Mine Worker|Power Plant Worker
+Oracle:Reach\n{T}: Add {C}. If you control creatures named Mine Worker and Power Plant Worker, add {C}{C}{C} instead.

@@ -1,0 +1,30 @@
+Name:Ultra Magnus, Tactician
+ManaCost:4 R G W
+Types:Legendary Artifact Creature Robot
+PT:7/7
+K:More Than Meets the Eye:2 R G W
+K:Ward:2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever NICKNAME attacks, you may put an artifact creature card from your hand onto the battlefield tapped and attacking. If you do, convert NICKNAME at end of combat.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact.Creature | Tapped$ True | Attacking$ True | RememberChanged$ True | SubAbility$ DBDelayedTrigger
+SVar:DBDelayedTrigger:DB$ DelayedTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigConvert | SubAbility$ DBCleanup | TriggerDescription$ If you do, convert NICKNAME at end of combat.
+SVar:TrigConvert:DB$ SetState | Mode$ Convert
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:HasAttackEffect:TRUE
+AlternateMode:Convert
+Oracle:More Than Meets the Eye {2}{R}{G}{W} (You may cast this card converted for {2}{R}{G}{W}.)\nWard {2}\nWhenever Ultra Magnus attacks, you may put an artifact creature card from your hand onto the battlefield tapped and attacking. If you do, convert Ultra Magnus at end of combat.
+
+ALTERNATE
+
+Name:Ultra Magnus, Armored Carrier
+ManaCost:no cost
+Colors:red,green,white
+Types:Legendary Artifact Vehicle
+PT:4/7
+K:Living metal
+K:Haste
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Formidable — Whenever NICKNAME attacks, attacking creatures you control gain indestructible until end of turn. If those creatures have total power 8 or greater, convert NICKNAME.
+SVar:TrigPump:DB$ PumpAll | ValidCards$ Creature.attacking+YouCtrl | KW$ Indestructible | SubAbility$ DBConvert
+SVar:DBConvert:DB$ SetState | Mode$ Convert | ConditionCheckSVar$ FormidableTest | ConditionSVarCompare$ GE8
+SVar:FormidableTest:Count$SumPower_Creature.attacking+YouCtrl
+SVar:HasAttackEffect:TRUE
+Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nHaste\nFormidable — Whenever Ultra Magnus attacks, attacking creatures you control gain indestructible until end of turn. If those creatures have total power 8 or greater, convert Ultra Magnus.

@@ -4,4 +4,5 @@ Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike | Description$ Enchanted creature has first strike.
+DeckHas:Keyword$FirstStrike
 Oracle:Enchant creature\nEnchanted creature has first strike.

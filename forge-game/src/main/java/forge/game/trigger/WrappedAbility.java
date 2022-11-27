@@ -37,6 +37,16 @@ import forge.game.spellability.TargetRestrictions;
 public class WrappedAbility extends Ability {
 
     static Set<ApiType> noTimestampCheck = ImmutableSet.of(
+            ApiType.Abandon, // no Triggered
+            ApiType.AddPhase, // only player
+            ApiType.AddTurn, // only player
+
+            ApiType.Amass, // no Triggered only you
+            ApiType.Ascend, // only player (you)
+
+            ApiType.BecomeMonarch, // only player
+            ApiType.Bond, // updated
+
             ApiType.PutCounter,
             ApiType.MoveCounter,
             ApiType.MultiplyCounter,
@@ -52,7 +62,9 @@ public class WrappedAbility extends Ability {
             ApiType.Token,
             ApiType.SetState,
             ApiType.Play,
-            ApiType.SacrificeAll
+            ApiType.SacrificeAll,
+
+            ApiType.DelayedTrigger
             );
 
     private final SpellAbility sa;
@@ -276,17 +288,28 @@ public class WrappedAbility extends Ability {
         return sa.isCycling();
     }
 
-
+    @Override
     public boolean isChapter() {
         return sa.isChapter();
     }
 
+    @Override
     public Integer getChapter() {
         return sa.getChapter();
     }
 
+    @Override
     public void setChapter(int val) {
         sa.setChapter(val);
+    }
+
+    @Override
+    public boolean isLastChapter() {
+        return sa.isLastChapter();
+    }
+    @Override
+    public boolean setLastChapter(boolean value) {
+        return sa.setLastChapter(value);
     }
 
     @Override
@@ -327,6 +350,10 @@ public class WrappedAbility extends Ability {
     @Override
     public void setActivatingPlayer(final Player player) {
         sa.setActivatingPlayer(player);
+    }
+    @Override
+    public boolean setActivatingPlayer(final Player player, final boolean lki) {
+        return sa.setActivatingPlayer(player, lki);
     }
 
     @Override
@@ -556,4 +583,5 @@ public class WrappedAbility extends Ability {
     public void setChosenList(List<AbilitySub> choices) {
         sa.setChosenList(choices);
     }
+
 }

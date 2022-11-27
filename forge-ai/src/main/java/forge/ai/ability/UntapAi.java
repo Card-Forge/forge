@@ -373,13 +373,8 @@ public class UntapAi extends SpellAbilityAi {
                         reduced.decreaseShard(ManaCostShard.GENERIC, untappingCards.size());
                         if (ComputerUtilMana.canPayManaCost(reduced, ab, ai, false)) {
                             CardCollection manaLandsTapped = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                                    Predicates.and(Presets.LANDS_PRODUCING_MANA, Presets.TAPPED));
-                            manaLandsTapped = CardLists.filter(manaLandsTapped, new Predicate<Card>() {
-                                @Override
-                                public boolean apply(Card card) {
-                                    return card.isValid(sa.getParam("ValidTgts"), ai, source, null);
-                                }
-                            });
+                                    Presets.LANDS_PRODUCING_MANA, Presets.TAPPED);
+                            manaLandsTapped = CardLists.getValidCards(manaLandsTapped, sa.getParam("ValidTgts"), ai, source, null);
 
                             if (!manaLandsTapped.isEmpty()) {
                                 // already have a tapped land, so agree to proceed with untapping it
@@ -388,13 +383,8 @@ public class UntapAi extends SpellAbilityAi {
 
                             // pool one additional mana by tapping a land to try to ramp to something
                             CardCollection manaLands = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield),
-                                    Predicates.and(Presets.LANDS_PRODUCING_MANA, Presets.UNTAPPED));
-                            manaLands = CardLists.filter(manaLands, new Predicate<Card>() {
-                                @Override
-                                public boolean apply(Card card) {
-                                    return card.isValid(sa.getParam("ValidTgts"), ai, source, null);
-                                }
-                            });
+                                    Presets.LANDS_PRODUCING_MANA, Presets.UNTAPPED);
+                            manaLands = CardLists.getValidCards(manaLands, sa.getParam("ValidTgts"), ai, source, null);
 
                             if (manaLands.isEmpty()) {
                                 // nothing to untap

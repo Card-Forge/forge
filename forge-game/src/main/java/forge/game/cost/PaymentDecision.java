@@ -13,6 +13,7 @@ import forge.util.TextUtil;
 public class PaymentDecision {
     public int c = 0;
     public String type;
+    public List<String> colors;
 
     public final CardCollection cards = new CardCollection();
     public final List<Mana> mana;
@@ -46,6 +47,11 @@ public class PaymentDecision {
     public PaymentDecision(String choice) {
         this(null, null, null, null, null);
         type = choice;
+    }
+
+    public PaymentDecision(List<String> choices) {
+        this(null, null, null, null, null);
+        colors = choices;
     }
 
     public static PaymentDecision card(Card chosen) {
@@ -86,6 +92,10 @@ public class PaymentDecision {
 
     public static PaymentDecision type(String choice) {
         return new PaymentDecision(choice);
+    }
+
+    public static PaymentDecision colors(List<String> choices) {
+        return new PaymentDecision(choices);
     }
 
     public static PaymentDecision players(List<Player> players) {

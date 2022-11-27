@@ -5,7 +5,7 @@ PT:5/5
 K:Flash
 K:Convoke
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ AngelicSalvation | TriggerDescription$ When CARDNAME enters the battlefield, prevent the next 5 damage that would be dealt this turn to any number of targets, divided as you choose.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ AngelicSalvation | TriggerDescription$ When CARDNAME enters the battlefield, prevent the next 5 damage that would be dealt this turn to any number of targets, divided as you choose.
 SVar:AngelicSalvation:DB$ PreventDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select targets to prevent damage to | Amount$ 5 | TargetMin$ 1 | TargetMax$ 5 | DividedAsYouChoose$ 5
 AI:RemoveDeck:All
 SVar:AmbushAI:True

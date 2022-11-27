@@ -4,8 +4,9 @@ Types:Creature Elf Druid
 PT:1/1
 K:Level up:1 G
 SVar:maxLevel:5
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 2 | AddAbility$ ABMana | IsPresent$ Card.Self+counters_GE1_LEVEL+counters_LE4_LEVEL | Description$ LEVEL 1-4 1/2 CARDNAME has "{T}: Add {G}{G}."
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 4 | AddStaticAbility$ SMana | IsPresent$ Card.Self+counters_GE5_LEVEL | Description$ LEVEL 5+ 1/4 Elves you control have "{T}: Add {G}{G}."
-SVar:SMana:Mode$ Continuous | Affected$ Card.Elf+YouCtrl | AddAbility$ ABMana | Secondary$ True | Description$ Elves you control have "{T}: Add {G}{G}."
-SVar:ABMana:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 1 | SetToughness$ 2 | AddAbility$ ABMana | IsPresent$ Card.Self+counters_GE1_LEVEL+counters_LE4_LEVEL | Description$ LEVEL 1-4 1/2 {T}: Add {G}{G}.
+SVar:ABMana:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | Secondary$ True | SpellDescription$ Add {G}{G}.
+S:Mode$ Continuous | Affected$ Elf.YouCtrl | SetPower$ 1 | SetToughness$ 4 | AddAbility$ L5Mana | IsPresent$ Card.Self+counters_GE5_LEVEL | Description$ LEVEL 5+ 1/4 Elves you control have "{T}: Add {G}{G}."
+SVar:L5Mana:AB$ Mana | Cost$ T | Produced$ G | Amount$ 2 | SpellDescription$ Add {G}{G}.
+DeckHints:Type$Elf
 Oracle:Level up {1}{G} ({1}{G}: Put a level counter on this. Level up only as a sorcery.)\nLEVEL 1-4\n1/2\n{T}: Add {G}{G}.\nLEVEL 5+\n1/4\nElves you control have "{T}: Add {G}{G}."

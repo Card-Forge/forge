@@ -1,0 +1,8 @@
+Name:Akroma presence
+ManaCost:no cost
+Colors:White
+Types:Enchantment
+K:Hexproof
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ At the beginning of your upkeep you gain 4 life.
+SVar:TrigGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 4
+Oracle: At the beginning of your upkeep gain 4 life.

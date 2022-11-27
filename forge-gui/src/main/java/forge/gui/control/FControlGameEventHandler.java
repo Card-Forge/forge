@@ -113,7 +113,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
             }
             if (showExileUpdate) {
                 showExileUpdate = false;
-                matchController.openZones(activatingPlayer, Collections.singleton(ZoneType.Exile), playersWithValidTargets);
+                matchController.openZones(activatingPlayer, Collections.singleton(ZoneType.Exile), playersWithValidTargets, false);
                 activatingPlayer = null;
                 playersWithValidTargets.clear();
             }
@@ -259,12 +259,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         } else {
             processEvent();
 
-            final Runnable notifyStackAddition = new Runnable() {
-                @Override
-                public void run() {
-                    matchController.notifyStackAddition(event);
-                }
-            };
+            final Runnable notifyStackAddition = () -> matchController.notifyStackAddition(event);
             GuiBase.getInterface().invokeInEdtLater(notifyStackAddition);
         }
         return null;
@@ -284,12 +279,7 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
         } else {
             processEvent();
 
-            final Runnable notifyStackAddition = new Runnable() {
-                @Override
-                public void run() {
-                    matchController.notifyStackRemoval(event);
-                }
-            };
+            final Runnable notifyStackAddition = () -> matchController.notifyStackRemoval(event);
             GuiBase.getInterface().invokeInEdtLater(notifyStackAddition);
         }
         return null;

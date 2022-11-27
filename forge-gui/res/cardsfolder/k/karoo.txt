@@ -5,5 +5,5 @@ K:CARDNAME enters the battlefield tapped.
 A:AB$ Mana | Cost$ T | Produced$ C W | SpellDescription$ Add {C}{W}.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return an untapped Plains you control to its owner's hand.
 SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Return<1/Plains.untapped/untapped Plains> | UnlessPayer$ You
-SVar:NeedsToPlay:Plains.YouCtrl+inZoneBattlefield+untapped
+SVar:NeedsToPlay:Plains.YouCtrl+untapped
 Oracle:Karoo enters the battlefield tapped.\nWhen Karoo enters the battlefield, sacrifice it unless you return an untapped Plains you control to its owner's hand.\n{T}: Add {C}{W}.

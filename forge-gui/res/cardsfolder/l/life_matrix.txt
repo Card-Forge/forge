@@ -5,4 +5,5 @@ A:AB$ PutCounter | Cost$ 4 T | PlayerTurn$ True | ActivationPhases$ Upkeep | Cou
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Abilities$ Regen | Duration$ Permanent | SpellDescription$ Activate only during your upkeep.
 SVar:Regen:AB$ Regenerate | Cost$ SubCounter<1/MATRIX> | SpellDescription$ Regenerate CARDNAME.
 AI:RemoveDeck:All
+DeckHas:Ability$Counters & Keyword$Regenerate
 Oracle:{4}, {T}: Put a matrix counter on target creature and that creature gains "Remove a matrix counter from this creature: Regenerate this creature." Activate only during your upkeep.

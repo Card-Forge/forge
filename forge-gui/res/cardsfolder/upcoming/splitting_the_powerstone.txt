@@ -1,0 +1,8 @@
+Name:Splitting the Powerstone
+ManaCost:2 U
+Types:Sorcery
+A:SP$ Token | Cost$ 2 U Sac<1/Artifact> | TokenAmount$ 2 | TokenTapped$ True | TokenScript$ c_a_powerstone | TokenOwner$ You | SubAbility$ DBDraw | SpellDescription$ Create two tapped Powerstone tokens. If the sacrificed artifact was legendary, draw a card. (The tokens are artifacts with "{T}: Add {C}. this mana can't be spent to cast a nonartifact spell.")
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Sacrificed | ConditionPresent$ Card.Legendary
+DeckHints:Type$Artifact|Legendary
+DeckHas:Ability$Sacrifice|Token & Type$Artifact
+Oracle:As an additional cost to cast this spell, sacrifice an artifact.\nCreate two tapped Powerstone tokens. If the sacrificed artifact was legendary, draw a card. (The tokens are artifacts with "{T}: Add {C}. this mana can't be spent to cast a nonartifact spell.")

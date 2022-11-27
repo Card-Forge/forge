@@ -243,7 +243,7 @@ public class CardImageRenderer {
         float padding = h / 8;
         float manaCostWidth = 0;
         float manaSymbolSize = isAdventure ? MANA_SYMBOL_SIZE * 0.75f : MANA_SYMBOL_SIZE;
-        if (!noText) {
+        if (!noText && state != null) {
             //draw mana cost for card
             ManaCost mainManaCost = state.getManaCost();
             if (card.isSplitCard() && card.getAlternateState() != null) {
@@ -263,7 +263,7 @@ public class CardImageRenderer {
         //draw name for card
         x += padding;
         w -= 2 * padding;
-        if (!noText)
+        if (!noText && state != null)
             g.drawText(CardTranslation.getTranslatedName(state.getName()), NAME_FONT, Color.BLACK, x, y, w - manaCostWidth - padding, h, false, Align.left, true);
     }
 
@@ -277,16 +277,16 @@ public class CardImageRenderer {
         forgeArt = new FBufferedImage(w, h) {
             @Override
             protected void draw(Graphics g, float w, float h) {
-                g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, w, h);
-                g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, 0, 0, w, h);
+                g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, w, h);
+                g.fillRect(FScreen.getTextureOverlayColor(), 0, 0, w, h);
                 g.drawImage(FSkinImage.LOGO, (w - logoWidth) / 2, (h - logoHeight) / 2, logoWidth, logoHeight);
             }
         };
         stretchedArt = new FBufferedImage(w, h) {
             @Override
             protected void draw(Graphics g, float w, float h) {
-                g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, w, h);
-                g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, 0, 0, w, h);
+                g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, w, h);
+                g.fillRect(FScreen.getTextureOverlayColor(), 0, 0, w, h);
                 g.drawImage(FSkinImage.LOGO, (w - logoWidth) / 2, ((h - logoHeight) / 2)+h/3.5f, logoWidth, logoHeight/3);
             }
         };
@@ -415,7 +415,7 @@ public class CardImageRenderer {
         float padding = h / 8;
 
         //draw square icon for rarity
-        if (!noRarity) {
+        if (!noRarity && state != null) {
             float iconSize = h * 0.9f;
             float iconPadding = (h - iconSize) / 2;
             w -= iconSize + iconPadding * 2;
@@ -439,7 +439,8 @@ public class CardImageRenderer {
         if (noText)
             return;
         x += padding;
-        g.drawText(CardDetailUtil.formatCardType(state, canShow), TYPE_FONT, Color.BLACK, x, y, w, h, false, Align.left, true);
+        if (state != null)
+            g.drawText(CardDetailUtil.formatCardType(state, canShow), TYPE_FONT, Color.BLACK, x, y, w, h, false, Align.left, true);
     }
 
     //use text renderer to handle mana symbols and reminder text
@@ -724,7 +725,7 @@ public class CardImageRenderer {
             return;
         }
 
-        if (image == ImageCache.defaultImage || Forge.enableUIMask.equals("Art")) { //support drawing card image manually if card image not found
+        if (image == ImageCache.getDefaultImage() || Forge.enableUIMask.equals("Art")) { //support drawing card image manually if card image not found
             drawCardImage(g, card, altState, x, y, w, h, CardStackPosition.Top, true, true);
         } else {
             float radius = (h - w)/8;
@@ -819,7 +820,7 @@ public class CardImageRenderer {
                 }
             }
         }
-        CardRenderer.drawFoilEffect(g, card, x, y, w, h, isCurrentCard && canshow && image != ImageCache.defaultImage);
+        CardRenderer.drawFoilEffect(g, card, x, y, w, h, isCurrentCard && canshow && image != ImageCache.getDefaultImage());
     }
 
     public static void drawDetails(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h) {

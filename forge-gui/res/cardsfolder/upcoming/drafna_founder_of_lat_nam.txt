@@ -1,0 +1,8 @@
+Name:Drafna, Founder of Lat-Nam
+ManaCost:1 U
+Types:Legendary Creature Human Artificer Advisor
+PT:2/1
+A:AB$ ChangeZone | Cost$ 1 U | ValidTgts$ Artifact.YouCtrl | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target artifact you control to its owner's hand.
+A:AB$ CopySpellAbility | Cost$ 3 T | TgtPrompt$ Select target artifact spell you control | ValidTgts$ Artifact.YouCtrl | TargetType$ Spell | SpellDescription$ Copy target artifact spell you control. (The copy becomes a token.)
+DeckNeeds:Type$Artifact
+Oracle:{1}{U}: Return target artifact you control to its owner's hand.\n{3}, {T}: Copy target artifact spell you control. (The copy becomes a token.)

@@ -10,9 +10,9 @@ T:Mode$ Attacks | ValidCard$ Card.EnchantedBy | TriggerZones$ Battlefield | Exec
 T:Mode$ Blocks | ValidCard$ Card.EnchantedBy | TriggerZones$ Battlefield | Execute$ TrigDestroy3 | Secondary$ True | TriggerDescription$ Whenever enchanted creature attacks or blocks, you may pay {1}. If you do, tap the creature, remove it from combat, and creatures it was blocking that had become blocked by only that creature this combat become unblocked. If you don't, destroy CARDNAME.
 SVar:TrigDestroy2:DB$ Destroy | Defined$ Self | UnlessCost$ 1 | UnlessPayer$ You | UnlessResolveSubs$ WhenPaid | SubAbility$ DBTapAttacker
 SVar:TrigDestroy3:DB$ Destroy | Defined$ Self | UnlessCost$ 1 | UnlessPayer$ You | UnlessResolveSubs$ WhenPaid | SubAbility$ DBTapBlocker
-SVar:DBTapAttacker:DB$ Tap | Defined$ TriggeredAttacker | SubAbility$ DBRemoveAttacker
-SVar:DBTapBlocker:DB$ Tap | Defined$ TriggeredBlocker | SubAbility$ DBRemoveBlocker
-SVar:DBRemoveAttacker:DB$ RemoveFromCombat | Defined$ TriggeredAttacker
-SVar:DBRemoveBlocker:DB$ RemoveFromCombat | Defined$ TriggeredBlocker | UnblockCreaturesBlockedOnlyBy$ TriggeredBlocker
+SVar:DBTapAttacker:DB$ Tap | Defined$ TriggeredAttackerLKICopy | SubAbility$ DBRemoveAttacker
+SVar:DBTapBlocker:DB$ Tap | Defined$ TriggeredBlockerLKICopy | SubAbility$ DBRemoveBlocker
+SVar:DBRemoveAttacker:DB$ RemoveFromCombat | Defined$ TriggeredAttackerLKICopy
+SVar:DBRemoveBlocker:DB$ RemoveFromCombat | Defined$ TriggeredBlockerLKICopy | UnblockCreaturesBlockedOnlyBy$ TriggeredBlocker
 AI:RemoveDeck:All
 Oracle:Enchant creature\nWhenever a player activates an ability of enchanted creature with {T} in its activation cost that isn't a mana ability, you may pay {1}. If you do, counter that ability. If you don't, destroy Imprison.\nWhenever enchanted creature attacks or blocks, you may pay {1}. If you do, tap the creature, remove it from combat, and creatures it was blocking that had become blocked by only that creature this combat become unblocked. If you don't, destroy Imprison.

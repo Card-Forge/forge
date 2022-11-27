@@ -1,0 +1,15 @@
+Name:Jared Carthalion
+ManaCost:W U B R G
+Types:Legendary Planeswalker Jared
+Loyalty:5
+A:AB$ Token | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | TokenScript$ all_3_3_kavu_trample | SpellDescription$ Create a 3/3 Kavu creature token with trample that's all colors.
+A:AB$ PutCounter | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | Defined$ Targeted | CounterType$ P1P1 | CounterNumPerDefined$ X | ValidTgts$ Creature | TargetMin$ 0 | TargetMax$ 2 | TgtPrompt$ Choose up to two target creatures | StackDescription$ For each of {c:Targeted}, put a number of +1/+1 counters on it equal to the number of colors it is. | SpellDescription$ Choose up to two target creatures. For each of them, put a number of +1/+1 counters on it equal to the number of colors it is.
+SVar:X:Count$CardNumColors
+A:AB$ ChangeZone | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target multicolored card in your graveyard | ValidTgts$ Card.MultiColor+YouOwn | RememberChanged$ True | SubAbility$ DBDraw | SpellDescription$ Return target multicolored card from your graveyard to your hand.
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Remembered | ConditionPresent$ Card.AllColors | SubAbility$ DBTreasure | StackDescription$ If that card was all colors, {p:You} draws a card and creates two Treasure tokens. | SpellDescription$ If that card was all colors, draw a card and create two Treasure tokens.
+SVar:DBTreasure:DB$ Token | ConditionDefined$ Remembered | ConditionPresent$ Card.AllColors | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | SubAbility$ DBCleanup | StackDescription$ None
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Text:CARDNAME can be your commander.
+DeckHas:Ability$Token|Counters|Sacrifice|Graveyard & Type$Kavu|Artifact|Treasure
+AI:RemoveDeck:Random
+Oracle:[+1]: Create a 3/3 Kavu creature token with trample that's all colors.\n[−3]: Choose up to two target creatures. For each of them, put a number of +1/+1 counters on it equal to the number of colors it is.\n[−6]: Return target multicolored card from your graveyard to your hand. If that card was all colors, draw a card and create two Treasure tokens.\nJared Carthalion can be your commander.

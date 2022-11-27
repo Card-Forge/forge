@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -144,64 +143,40 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         add(currentView.getPnlOptions());
         add(currentView.getScroller());
 
-        btnSearch.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                FPopupMenu menu = new FPopupMenu() {
-                    @Override
-                    protected void buildMenu() {
-                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAdvancedSearch"), Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH, new FEventHandler() {
-                            @Override
-                            public void handleEvent(FEvent e) {
-                                if (advancedSearchFilter == null) {
-                                    advancedSearchFilter = createAdvancedSearchFilter();
-                                    ItemManager.this.add(advancedSearchFilter.getWidget());
-                                }
-                                advancedSearchFilter.edit();
-                            }
-                        }));
-                        addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblResetFilters"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, new FEventHandler() {
-                            @Override
-                            public void handleEvent(FEvent e) {
-                                resetFilters();
-                            }
-                        }));
-                    }
-                };
-                menu.show(btnSearch, 0, btnSearch.getHeight());
-            }
-        });
-        btnView.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                FPopupMenu menu = new FPopupMenu() {
-                    @Override
-                    protected void buildMenu() {
-                        for (int i = 0; i < views.size(); i++) {
-                            final int index = i;
-                            ItemView<T> view = views.get(i);
-                            FMenuItem item = new FMenuItem(view.getCaption(), view.getIcon(), new FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e) {
-                                    setViewIndex(index);
-                                }
-                            });
-                            if (currentView == view) {
-                                item.setSelected(true);
-                            }
-                            addItem(item);
+        btnSearch.setCommand(e -> {
+            FPopupMenu menu = new FPopupMenu() {
+                @Override
+                protected void buildMenu() {
+                    addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAdvancedSearch"), Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH, e1 -> {
+                        if (advancedSearchFilter == null) {
+                            advancedSearchFilter = createAdvancedSearchFilter();
+                            ItemManager.this.add(advancedSearchFilter.getWidget());
                         }
+                        advancedSearchFilter.edit();
+                    }));
+                    addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblResetFilters"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, e12 -> resetFilters()));
+                }
+            };
+            menu.show(btnSearch, 0, btnSearch.getHeight());
+        });
+        btnView.setCommand(e -> {
+            FPopupMenu menu = new FPopupMenu() {
+                @Override
+                protected void buildMenu() {
+                    for (int i = 0; i < views.size(); i++) {
+                        final int index = i;
+                        ItemView<T> view = views.get(i);
+                        FMenuItem item = new FMenuItem(view.getCaption(), view.getIcon(), e13 -> setViewIndex(index));
+                        if (currentView == view) {
+                            item.setSelected(true);
+                        }
+                        addItem(item);
                     }
-                };
-                menu.show(btnView, 0, btnView.getHeight());
-            }
+                }
+            };
+            menu.show(btnView, 0, btnView.getHeight());
         });
-        btnAdvancedSearchOptions.setCommand(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                setHideFilters(!hideFilters);
-            }
-        });
+        btnAdvancedSearchOptions.setCommand(e -> setHideFilters(!hideFilters));
 
         //setup initial filters
         addDefaultFilters();
@@ -239,12 +214,7 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 cols.add(colOverrides.get(colConfig.getDef()));
             }
         }
-        Collections.sort(cols, new Comparator<ItemColumn>() {
-            @Override
-            public int compare(ItemColumn arg0, ItemColumn arg1) {
-                return Integer.compare(arg0.getConfig().getIndex(), arg1.getConfig().getIndex());
-            }
-        });
+        Collections.sort(cols, (arg0, arg1) -> Integer.compare(arg0.getConfig().getIndex(), arg1.getConfig().getIndex()));
 
         sortCols.clear();
         if (cbxSortOptions != null) {
@@ -287,14 +257,11 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
         }
 
         if (cbxSortOptions != null) {
-            cbxSortOptions.setDropDownItemTap(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    model.getCascadeManager().add((ItemColumn)e.getArgs(), false);
-                    model.refreshSort();
-                    ItemManagerConfig.save();
-                    updateView(true, null);
-                }
+            cbxSortOptions.setDropDownItemTap(e -> {
+                model.getCascadeManager().add((ItemColumn)e.getArgs(), false);
+                model.refreshSort();
+                ItemManagerConfig.save();
+                updateView(true, null);
             });
         }
 
@@ -735,16 +702,13 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             }
             else {
                 viewUpdating = true;
-                FThreads.invokeInBackgroundThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        do {
-                            needSecondUpdate = false;
-                            updateView(true, null);
-                            Gdx.graphics.requestRendering();
-                        } while (needSecondUpdate);
-                        viewUpdating = false;
-                    }
+                FThreads.invokeInBackgroundThread(() -> {
+                    do {
+                        needSecondUpdate = false;
+                        updateView(true, null);
+                        Gdx.graphics.requestRendering();
+                    } while (needSecondUpdate);
+                    viewUpdating = false;
                 });
             }
         }
@@ -895,12 +859,9 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
                 contextMenu = new ContextMenu();
             }
             if (delay) { //delay showing menu to prevent it hiding right away
-                FThreads.delayInEDT(50, new Runnable() {
-                    @Override
-                    public void run() {
-                        contextMenu.show();
-                        Gdx.graphics.requestRendering();
-                    }
+                FThreads.delayInEDT(50, () -> {
+                    contextMenu.show();
+                    Gdx.graphics.requestRendering();
                 });
             }
             else {
@@ -908,9 +869,27 @@ public abstract class ItemManager<T extends InventoryItem> extends FContainer im
             }
         }
     }
+    public void closeMenu() {
+        if (isContextMenuOpen())
+            contextMenu.hide();
+    }
 
     public boolean isContextMenuOpen() {
         return contextMenu != null && contextMenu.isVisible();
+    }
+    public void selectNextContext() {
+        if (contextMenu != null) {
+            contextMenu.setNextSelected();
+        }
+    }
+    public void selectPreviousContext() {
+        if (contextMenu != null) {
+            contextMenu.setPreviousSelected();
+        }
+    }
+    public void activateSelectedContext() {
+        if (contextMenu != null)
+            contextMenu.tapChild();
     }
 
     public static abstract class ContextMenuBuilder<T> {

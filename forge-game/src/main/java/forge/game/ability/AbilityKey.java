@@ -90,7 +90,6 @@ public enum AbilityKey {
     NewCounterAmount("NewCounterAmount"),
     NoPreventDamage("NoPreventDamage"),
     Num("Num"), // TODO confirm that this and NumThisTurn can be merged
-    NumBlockers("NumBlockers"),
     NumThisTurn("NumThisTurn"),
     Number("Number"),
     Object("Object"),
@@ -113,6 +112,7 @@ public enum AbilityKey {
     Result("Result"),
     RoomName("RoomName"),
     Scheme("Scheme"),
+    ScryBottom("ScryBottom"),
     ScryNum("ScryNum"),
     Sides("Sides"),
     Source("Source"),
@@ -120,8 +120,7 @@ public enum AbilityKey {
     SourceSA("SourceSA"),
     SpellAbility("SpellAbility"),
     SpellAbilityStackInstance("SpellAbilityStackInstance"),
-    SpellAbilityTarget("SpellAbilityTarget"),
-    SpellAbilityTargetingCards("SpellAbilityTargetingCards"),
+    SpellAbilityTargets("SpellAbilityTargets"),
     StackInstance("StackInstance"),
     StackSa("StackSa"),
     StackSi("StackSi"),
@@ -131,7 +130,6 @@ public enum AbilityKey {
     TgtSA("TgtSA"),
     Token("Token"),
     TokenNum("TokenNum"),
-    TriggeredParams("TriggeredParams"),
     Vehicle("Vehicle"),
     Won("Won");
 

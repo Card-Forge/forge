@@ -64,7 +64,8 @@ public final class DeckManager extends ItemManager<DeckProxy> implements IHasGam
         if (getConfig() == ItemManagerConfig.STRING_ONLY) { return; }
 
         addFilter(new DeckColorFilter(this));
-        addFilter(new DeckFormatFilter(this));
+        if (!Forge.isMobileAdventureMode)
+            addFilter(new DeckFormatFilter(this));
     }
 
     @Override

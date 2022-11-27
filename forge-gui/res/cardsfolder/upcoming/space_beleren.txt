@@ -1,0 +1,14 @@
+Name:Space Beleren
+ManaCost:2 W U
+Types:Legendary Planeswalker Jace
+Loyalty:3
+K:Space sculptor
+A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | StaticAbilities$ SectorBlock | SpellDescription$ Creatures in each sector can be blocked this turn only by creatures in the same sector.
+SVar:SectorBlock:Mode$ CantBlockBy | ValidAttacker$ Creature | ValidBlockerRelative$ Creature.DifferentSector | Description$ Creatures in each sector can be blocked this turn only by creatures in the same sector.
+A:AB$ ChooseSector | Cost$ SubCounter<1/LOYALTY> | Planeswalker$ True | SubAbility$ DBPutCounterAll | AILogic$ Pump | SpellDescription$ Put a +1/+1 counter on each creature in the sector of your choice.
+SVar:DBPutCounterAll:DB$ PutCounterAll | ValidCards$ Creature.ChosenSector | CounterType$ P1P1 | StackDescription$ None
+A:AB$ ChooseSector | Cost$ SubCounter<5/LOYALTY> | Planeswalker$ True | Ultimate$ True | SubAbility$ DBDestroyAll | AILogic$ Destroy | SpellDescription$ Destroy all creatures in the sector of your choice.
+SVar:DBDestroyAll:DB$ DestroyAll | ValidCards$ Creature.ChosenSector | StackDescription$ None
+DeckHas:Ability$Counters
+AI:RemoveDeck:All
+Oracle:Space sculptor (Space Beleren divides the battlefield into alpha, beta, and gamma sectors. If a creature isn't assigned to a sector, its controller assigns it to one. Opponents assign first.)\n[+1]: Creatures in each sector can be blocked this turn only by creatures in the same sector.\n[−1]: Put a +1/+1 counter on each creature in the sector of your choice.\n[−5]: Destroy all creatures in the sector of your choice.

@@ -1,0 +1,5 @@
+Name:Idyllic Beachfront
+ManaCost:no cost
+Types:Land Plains Island
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {W} or {U}.)\nIdyllic Beachfront enters the battlefield tapped.

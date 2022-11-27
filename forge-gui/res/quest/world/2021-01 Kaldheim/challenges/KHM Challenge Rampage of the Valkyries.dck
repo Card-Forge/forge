@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Rampage of the Valkyries
+OpponentName=The Valkyries
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Rampage of the Valkyries
+Difficulty=hard
+Description="This is a foul place. Cleanse it."
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Rampage of the Valkyries
+[Main]
+20 Rampage of the Valkyries|KHM|1
+10 Replicating Ring|KHM|1
+30 Snowfield Sinkhole|KHM|1

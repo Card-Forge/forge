@@ -1,0 +1,10 @@
+Name:Dutiful Replicator
+ManaCost:3
+Types:Artifact Creature Assembly-Worker
+PT:3/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigImmediate | TriggerDescription$ When CARDNAME enters the battlefield, you may pay {1}. When you do, create a token that's a copy of target token you control not named Dutiful Replicator.
+SVar:TrigImmediate:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigClone | TriggerDescription$ When you do, create a token that's a copy of target token you control not named Dutiful Replicator.
+SVar:TrigClone:DB$ CopyPermanent | ValidTgts$ Permanent.token+YouCtrl+notnamedDutiful Replicator | TgtPrompt$ Select target token you control not named Dutiful Replicator
+DeckHas:Ability$Token
+DeckNeeds:Ability$Token
+Oracle:When Dutiful Replicator enters the battlefield, you may pay {1}. When you do, create a token that's a copy of target token you control not named Dutiful Replicator.

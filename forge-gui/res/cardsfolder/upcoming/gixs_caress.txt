@@ -1,0 +1,7 @@
+Name:Gix's Caress
+ManaCost:2 B
+Types:Sorcery
+A:SP$ Discard | ValidTgts$ Opponent | NumCards$ 1 | DiscardValid$ Card.nonLand | Mode$ RevealYouChoose | SubAbility$ DBToken | SpellDescription$ Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.
+SVar:DBToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone | SpellDescription$ Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+DeckHas:Ability$Discard|Token & Type$Artifact
+Oracle:Target opponent reveals their hand. You choose a nonland card from it. That player discards that card.\nCreate a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")

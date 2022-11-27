@@ -68,7 +68,7 @@ public class ManaEffectAi extends SpellAbilityAi {
         if (ph.is(PhaseType.END_OF_TURN) && (ph.getNextTurn() == ai || ComputerUtilCard.willUntap(ai, sa.getHostCard())) && canRampPool(ai, sa.getHostCard())) {
             return true;
         }
-        if (!ph.is(PhaseType.MAIN2) || !ComputerUtil.activateForCost(sa, ai)) {
+        if (!ph.is(PhaseType.MAIN2)) {
             return false;
         }
         return super.checkPhaseRestrictions(ai, sa, ph);
@@ -104,14 +104,17 @@ public class ManaEffectAi extends SpellAbilityAi {
             return true; // handled elsewhere, does not meet the standard requirements
         }
 
-        PhaseHandler ph = ai.getGame().getPhaseHandler();
-        boolean moreManaNextTurn = false;
-        if (ph.is(PhaseType.END_OF_TURN) && (ph.getNextTurn() == ai || ComputerUtilCard.willUntap(ai, sa.getHostCard())) && canRampPool(ai, sa.getHostCard())) {
-            moreManaNextTurn = true;
+        // TODO check if it would be worth it to keep mana open for opponents turn anyway
+        if (ComputerUtil.activateForCost(sa, ai)) {
+            return true;
         }
 
+        PhaseHandler ph = ai.getGame().getPhaseHandler();
+        boolean moreManaNextTurn = ph.is(PhaseType.END_OF_TURN) && (ph.getNextTurn() == ai || ComputerUtilCard.willUntap(ai, sa.getHostCard()))
+                && canRampPool(ai, sa.getHostCard());
+
         return sa.getPayCosts().hasNoManaCost() && sa.getPayCosts().isReusuableResource()
-                && sa.getSubAbility() == null && (ComputerUtil.playImmediately(ai, sa) || moreManaNextTurn);
+                && sa.getSubAbility() == null && (moreManaNextTurn || ComputerUtil.playImmediately(ai, sa));
     }
 
     /**
@@ -223,7 +226,7 @@ public class ManaEffectAi extends SpellAbilityAi {
             if (testSaNoCost == null) {
                 continue;
             }
-            testSaNoCost.setActivatingPlayer(ai);
+            testSaNoCost.setActivatingPlayer(ai, true);
             if (((PlayerControllerAi)ai.getController()).getAi().canPlaySa(testSaNoCost) == AiPlayDecision.WillPlay) {
                 if (testSa.getHostCard().isPermanent() && !testSa.getHostCard().hasKeyword(Keyword.HASTE)
                     && !ai.getGame().getPhaseHandler().is(PhaseType.MAIN2)) {

@@ -1,0 +1,8 @@
+Name:Gray Harbor Merfolk
+ManaCost:1 U
+Types:Creature Merfolk Rogue
+PT:0/3
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | IsPresent$ Creature.IsCommander+YouCtrl,Planeswalker.IsCommander+YouCtrl | Description$ CARDNAME gets +2/+0 as long as you control a commander that's a creature or planeswalker.
+AI:RemoveDeck:NonCommander
+Oracle:Gray Harbor Merfolk can't be blocked.\nGray Harbor Merfolk gets +2/+0 as long as you control a commander that's a creature or planeswalker.

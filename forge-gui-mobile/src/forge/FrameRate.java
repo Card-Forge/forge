@@ -41,8 +41,7 @@ public class FrameRate implements Disposable{
     }
 
     public void update(int loadedCardSize, float toAlloc) {
-        if (toAlloc > 300f)
-            allocT = (int) toAlloc;
+        allocT = (int) toAlloc;
         cardsLoaded = loadedCardSize;
         long delta = TimeUtils.timeSinceMillis(lastTimeCounted);
         lastTimeCounted = TimeUtils.millis();
@@ -55,7 +54,7 @@ public class FrameRate implements Disposable{
 
     public void render() {
         batch.begin();
-        font.draw(batch, (int)frameRate + " FPS | " + cardsLoaded + " cards re/loaded - " + allocT + " vMem", 3, Gdx.graphics.getHeight() - 3);
+        font.draw(batch, (int)frameRate + " FPS | " + cardsLoaded + " cards re/loaded | " + allocT + " MB", 3, Gdx.graphics.getHeight() - 3);
         batch.end();
     }
 

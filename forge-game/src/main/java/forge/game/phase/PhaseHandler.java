@@ -52,7 +52,6 @@ import forge.game.event.GameEventTokenStateUpdate;
 import forge.game.event.GameEventTurnBegan;
 import forge.game.event.GameEventTurnEnded;
 import forge.game.event.GameEventTurnPhase;
-import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementResult;
 import forge.game.replacement.ReplacementType;
@@ -244,10 +243,10 @@ public class PhaseHandler implements java.io.Serializable {
                 return playerTurn.isSkippingCombat();
 
             case COMBAT_DECLARE_BLOCKERS:
-                if (combat != null && combat.getAttackers().isEmpty()) {
+                if (inCombat() && combat.getAttackers().isEmpty()) {
                     endCombat();
                 }
-                // Fall through
+                //$FALL-THROUGH$
             case COMBAT_FIRST_STRIKE_DAMAGE:
             case COMBAT_DAMAGE:
                 return !inCombat();
@@ -398,8 +397,7 @@ public class PhaseHandler implements java.io.Serializable {
                         table.triggerChangesZoneAll(game, null);
 
                         if (!discarded.isEmpty()) {
-                            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                            runParams.put(AbilityKey.Player, playerTurn);
+                            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
                             runParams.put(AbilityKey.Cards, discarded);
                             runParams.put(AbilityKey.Cause, null);
                             runParams.put(AbilityKey.FirstTime, firstDiscarded);
@@ -413,10 +411,10 @@ public class PhaseHandler implements java.io.Serializable {
                         c.onCleanupPhase(playerTurn);
                     }
 
-                    endCombat(); //Repeat here in case Time Stop et. al. ends combat early
                     game.getEndOfTurn().executeUntil();
                     game.getEndOfTurn().executeUntilEndOfPhase(playerTurn);
                     game.getEndOfTurn().registerUntilEndCommand(playerTurn);
+                    game.getEndOfCombat().registerUntilEndCommand(playerTurn);
 
                     for (Player player : game.getPlayers()) {
                         player.getController().autoPassCancel(); // autopass won't wrap to next turn
@@ -441,9 +439,8 @@ public class PhaseHandler implements java.io.Serializable {
 
         if (!skipped) {
             // Run triggers if phase isn't being skipped
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
             runParams.put(AbilityKey.Phase, phase.nameForScripts);
-            runParams.put(AbilityKey.Player, playerTurn);
             game.getTriggerHandler().runTrigger(TriggerType.Phase, runParams, false);
         }
 
@@ -487,15 +484,12 @@ public class PhaseHandler implements java.io.Serializable {
 
             case COMBAT_END:
                 GameEventCombatEnded eventEndCombat = null;
-                if (combat != null) {
+                if (inCombat()) {
                     List<Card> attackers = combat.getAttackers();
                     List<Card> blockers = combat.getAllBlockers();
                     eventEndCombat = new GameEventCombatEnded(attackers, blockers);
                 }
                 endCombat();
-                for (Player player : game.getPlayers()) {
-                    player.resetCombatantsThisCombat();
-                }
 
                 if (eventEndCombat != null) {
                     game.fireEvent(eventEndCombat);
@@ -522,8 +516,7 @@ public class PhaseHandler implements java.io.Serializable {
                     handleMultiplayerEffects();
 
                     // "Trigger" for begin turn to get around a phase skipping
-                    final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                    runParams.put(AbilityKey.Player, playerTurn);
+                    final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(playerTurn);
                     game.getTriggerHandler().runTrigger(TriggerType.TurnBegin, runParams, false);
                 }
                 planarDiceRolledthisTurn = 0;
@@ -558,8 +551,7 @@ public class PhaseHandler implements java.io.Serializable {
                 final CardCollection untapFromCancel = new CardCollection();
                 // do a full loop first so attackers can't be used to pay for Propaganda
                 for (final Card attacker : combat.getAttackers()) {
-                    final boolean shouldTapForAttack = !attacker.hasKeyword(Keyword.VIGILANCE) && !attacker.hasKeyword("Attacking doesn't cause CARDNAME to tap.");
-                    if (shouldTapForAttack) {
+                    if (!attacker.attackVigilance()) {
                         // set tapped to true without firing triggers because it may affect propaganda costs
                         attacker.setTapped(true);
                         untapFromCancel.add(attacker);
@@ -591,8 +583,7 @@ public class PhaseHandler implements java.io.Serializable {
             } while (!success);
 
             for (final Card attacker : combat.getAttackers()) {
-                final boolean shouldTapForAttack = !attacker.hasKeyword(Keyword.VIGILANCE) && !attacker.hasKeyword("Attacking doesn't cause CARDNAME to tap.");
-                if (shouldTapForAttack) {
+                if (!attacker.attackVigilance()) {
                     attacker.setTapped(false);
                     attacker.tap(true, true);
                 }
@@ -799,7 +790,6 @@ public class PhaseHandler implements java.io.Serializable {
                 final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                 runParams.put(AbilityKey.Attacker, a);
                 runParams.put(AbilityKey.Blockers, blockers);
-                runParams.put(AbilityKey.NumBlockers, blockers.size());
                 runParams.put(AbilityKey.Defender, combat.getDefenderByAttacker(a));
                 runParams.put(AbilityKey.DefendingPlayer, combat.getDefenderPlayerByAttacker(a));
                 game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
@@ -1204,17 +1194,12 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public final void endCombatPhaseByEffect() {
-        if (!inCombat()) {
-            return;
-        }
-        endCombat();
         game.getAction().checkStateEffects(true);
         setPhase(PhaseType.COMBAT_END);
         advanceToNextPhase();
     }
 
     public final void endTurnByEffect() {
-        endCombat();
         extraPhases.clear();
         setPhase(PhaseType.CLEANUP);
         onPhaseBegin();
@@ -1245,8 +1230,12 @@ public class PhaseHandler implements java.io.Serializable {
     }
 
     public void endCombat() {
+        for (Player player : game.getPlayers()) {
+            player.resetCombatantsThisCombat();
+        }
         game.getEndOfCombat().executeUntil();
-        if (combat != null) {
+        game.getEndOfCombat().executeUntilEndOfPhase(playerTurn);
+        if (inCombat()) {
             combat.endCombat();
             combat = null;
         }

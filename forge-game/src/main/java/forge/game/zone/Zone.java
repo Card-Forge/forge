@@ -214,7 +214,30 @@ public class Zone implements java.io.Serializable, Iterable<Card> {
         if (!cardsAddedThisTurn.containsKey(origin)) {
             return false;
         }
-        return cardsAddedThisTurn.get(origin).contains(card);
+        if (cardsAddedThisTurn.get(origin).contains(card)) {
+            List<Card> cardsAddedThisTurnOrigin = getCardsAddedThisTurn(origin);
+            int cardIndexOrigin = cardsAddedThisTurnOrigin.lastIndexOf(card);
+            long cardTimestampOrigin = cardsAddedThisTurnOrigin.get(cardIndexOrigin).getTimestamp();
+            // need to check other zones if card didn't change again
+            for (ZoneType z : cardsAddedThisTurn.keySet()) {
+                if (z == origin) {
+                    continue;
+                }
+
+                if (cardsAddedThisTurn.get(z).contains(card)) {
+                    List<Card> cardsAddedThisTurnNonOrigin = getCardsAddedThisTurn(z);
+                    int cardIndex = cardsAddedThisTurnNonOrigin.lastIndexOf(card);
+                    long cardTimestamp = cardsAddedThisTurnNonOrigin.get(cardIndex).getTimestamp();
+                    // the most recent version of this card did not come from the requested zone
+                    if (cardTimestamp > cardTimestampOrigin) {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+        return false;
     }
 
     private static List<Card> getCardsAdded(final MapOfLists<ZoneType, Card> cardsAdded, final ZoneType origin) {

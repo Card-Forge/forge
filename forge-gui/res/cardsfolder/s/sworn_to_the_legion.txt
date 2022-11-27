@@ -1,0 +1,11 @@
+Name:Sworn to the Legion
+ManaCost:4 W W
+Types:Enchantment
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBEffect | TriggerDescription$ When CARDNAME enters the battlefield, nontoken creatures you control perpetually gain double team.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Valid Creature.YouCtrl+nonToken | StaticAbilities$ PerpetualDoubleTeam | Name$ Sworn to the Legion's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualDoubleTeam:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Double team | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Nontoken creatures you control perpetually gain double team.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ DBEffectCast | TriggerDescription$ Whenever you cast a creature spell, it perpetually gains double team. 
+SVar:DBEffectCast:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualDoubleTeamCast | Name$ Sworn to the Legion's Perpetual Effect | Duration$ Permanent 
+SVar:PerpetualDoubleTeamCast:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Double team | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains double team.
+SVar:BuffedBy:Creature
+Oracle:When Sworn to the Legion enters the battlefield, nontoken creatures you control perpetually gain double team.\nWhenever you cast a creature spell, it perpetually gains double team.

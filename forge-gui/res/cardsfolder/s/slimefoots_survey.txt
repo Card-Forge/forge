@@ -1,0 +1,8 @@
+Name:Slimefoot's Survey
+ManaCost:4 G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.hasABasicLandType | ChangeNum$ 2 | Tapped$ True | SubAbility$ DBDig | SpellDescription$ Domain — Search your library for up to two land cards that each have a basic land type, put them into the battlefield tapped, then shuffle. Look at the top X cards of your library, where X is the number of basic land types among lands you control. Put up to one of them on top of your library and the rest on the bottom of your library in a random order.
+SVar:DBDig:DB$ Dig | DigNum$ X | ChangeNum$ 1 | RestRandomOrder$ True | DestinationZone$ Library | LibraryPosition$ 0
+SVar:X:Count$Domain
+AI:RemoveDeck:Random
+Oracle:Domain — Search your library for up to two land cards that each have a basic land type, put them into the battlefield tapped, then shuffle. Look at the top X cards of your library, where X is the number of basic land types among lands you control. Put up to one of them on top of your library and the rest on the bottom of your library in a random order.

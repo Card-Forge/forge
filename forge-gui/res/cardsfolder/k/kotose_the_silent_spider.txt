@@ -16,5 +16,6 @@ SVar:TrigLandPlayed:Mode$ LandPlayed | ValidCard$ Land.IsRemembered | Static$ Tr
 SVar:TrigCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Static$ True | TriggerZones$ Command | Execute$ TrigRemoveSelf
 SVar:TrigRemoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:NeedsToPlay:Card.inZoneGraveyard+OppOwn
+SVar:NeedsToPlayVar:Check GE1
+SVar:Check:Count$ValidGraveyard Card.OppOwn
 Oracle:When Kotose, the Silent Spider enters the battlefield, exile target card other than a basic land card from an opponent's graveyard. Search that player's graveyard, hand, and library for any number of cards with the same name as that card and exile them. Then that player shuffles. For as long as you control Kotose, you may play one of the exiled cards, and you may spend mana as though it were mana of any color to cast it.

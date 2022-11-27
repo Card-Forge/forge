@@ -9,5 +9,5 @@ SVar:MoveToGraveyard:DB$ ChangeZone | Origin$ All | Destination$ Graveyard | Def
 SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-SVar:NeedsToPlay:Mountain.YouCtrl+inZoneBattlefield+untapped
+SVar:NeedsToPlay:Mountain.YouCtrl+untapped
 Oracle:If Balduvian Trading Post would enter the battlefield, sacrifice an untapped Mountain instead. If you do, put Balduvian Trading Post onto the battlefield. If you don't, put it into its owner's graveyard.\n{T}: Add {C}{R}.\n{1}, {T}: Balduvian Trading Post deals 1 damage to target attacking creature.

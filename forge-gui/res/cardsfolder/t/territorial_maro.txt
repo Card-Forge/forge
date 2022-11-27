@@ -1,0 +1,9 @@
+Name:Territorial Maro
+ManaCost:4 G
+Types:Creature Elemental
+PT:*/*
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ Domain — CARDNAME's power and toughness are each equal to twice the number of basic land types among lands you control.
+SVar:X:Count$Domain/Twice
+AI:RemoveDeck:Random
+SVar:NeedsToPlayVar:X GE1
+Oracle:Domain — Territorial Maro's power and toughness are each equal to twice the number of basic land types among lands you control.

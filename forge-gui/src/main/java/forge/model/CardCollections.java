@@ -46,6 +46,7 @@ public class CardCollections {
     private IStorage<Deck> tinyLeaders;
     private IStorage<Deck> brawl;
     private IStorage<Deck> genetic;
+    private IStorage<Deck> customStarter;
 
     public CardCollections() {
     }
@@ -153,5 +154,13 @@ public class CardCollections {
                     new DeckStorage(new File(ForgeConstants.GENETIC_AI_DECK_DIR), ForgeConstants.RES_DIR));
         }
         return genetic;
+    }
+
+    public final IStorage<Deck> getCustomStarterDecks() {
+        if (customStarter == null) {
+            customStarter = new StorageImmediatelySerialized<>("Custom Starter decks",
+                    new DeckStorage(new File(ForgeConstants.CUSTOM_STARTER_DECK_DIR), ForgeConstants.USER_CUSTOM_DIR));
+        }
+        return customStarter;
     }
 }

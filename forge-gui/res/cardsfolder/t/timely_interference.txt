@@ -1,0 +1,11 @@
+Name:Timely Interference
+ManaCost:U
+Types:Instant
+K:Kicker:1 R
+A:SP$ Pump | NumAtt$ -1 | ValidTgts$ Creature | IsCurse$ True | SubAbility$ DBEffect | SpellDescription$ Target creature gets -1/-0 until end of turn.
+SVar:DBEffect:DB$ Effect | Condition$ Kicked | StaticAbilities$ MustBlock | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | SubAbility$ DBDraw | SpellDescription$ If this spell was kicked, that creature blocks this turn if able.
+SVar:MustBlock:Mode$ MustBlock | ValidCreature$ Card.IsRemembered | Description$ This creature blocks this turn if able.
+SVar:DBDraw:DB$ Draw | SpellDescription$ Draw a card.
+AI:RemoveDeck:All
+DeckHints:Color$Red
+Oracle:Kicker {1}{R} (You may pay an additional {1}{R} as you cast this spell.)\nTarget creature gets -1/-0 until end of turn. If this spell was kicked, that creature blocks this turn if able.\nDraw a card.

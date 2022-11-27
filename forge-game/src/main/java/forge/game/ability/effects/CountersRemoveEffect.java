@@ -83,7 +83,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
 
         if (sa.hasParam("Optional")) {
             String ctrs = cntToRemove > 1 ? Localizer.getInstance().getMessage("lblCounters") : num.equals("All") ? Localizer.getInstance().getMessage("lblAllCounters") : Localizer.getInstance().getMessage("lblACounters");
-            if (!sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblRemove") + " " + ctrs + "?", null)) {
+            if (!pc.confirmAction(sa, null, Localizer.getInstance().getMessage("lblRemove") + " " + ctrs + "?", null)) {
                 return;
             }
         }
@@ -133,7 +133,7 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
             if (num.equals("Any")) {
                 Map<String, Object> params = Maps.newHashMap();
                 params.put("CounterType", counterType);
-                srcCards = player.getController().chooseCardsForEffect(srcCards, sa, title, 0, srcCards.size(), true, params);
+                srcCards = pc.chooseCardsForEffect(srcCards, sa, title, 0, srcCards.size(), true, params);
             }
         } else if (sa.hasParam("Choices") && counterType != null) {
             ZoneType choiceZone = sa.hasParam("ChoiceZone") ? ZoneType.smartValueOf(sa.getParam("ChoiceZone"))

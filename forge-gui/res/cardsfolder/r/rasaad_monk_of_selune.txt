@@ -1,0 +1,72 @@
+Name:Rasaad, Monk of Selune
+ManaCost:2 W
+Types:Legendary Creature Human Monk
+PT:2/2
+K:Specialize:5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile target creature an opponent controls until this creature leaves the battlefield.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Duration$ UntilHostLeavesPlay | RememberChanged$ True
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+AlternateMode:Specialize
+Oracle:Specialize {5}\nWhen Rasaad, Monk of Selune enters the battlefield, exile target creature an opponent controls until this creature leaves the battlefield.
+
+SPECIALIZE:WHITE
+
+Name:Rasaad, Radiant Monk
+ManaCost:2 W W
+Types:Legendary Creature Human Monk
+PT:4/4
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When this creature specializes, target creature card exiled with this creature perpetually loses all abilities and has base power and toughness 1/1.
+SVar:TrigEffect:DB$ Effect | TgtPrompt$ Select target creature card exiled with this creature | ValidTgts$ Creature.IsRemembered+ExiledWithSource | TgtZone$ Exile | IsCurse$ True | RememberObjects$ Targeted | StaticAbilities$ PerpetualLoss | Name$ Rasaad, Radiant Monk's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualLoss:Mode$ Continuous | SetPower$ 1 | SetToughness$ 1 | Affected$ Card.IsRemembered | RemoveAllAbilities$ True | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually loses all abilities and has base power and toughness 1/1.
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self | Destination$ Any | Execute$ DBCleanup | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:When this creature specializes, target creature card exiled with this creature perpetually loses all abilities and has base power and toughness 1/1.
+
+SPECIALIZE:BLUE
+
+Name:Rasaad, Dragon Monk
+ManaCost:2 W U
+Types:Legendary Creature Human Monk
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create two 1/1 blue Faerie Dragon creature tokens with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_faerie_dragon_flying
+DeckHas:Ability$Token & Type$Faerie|Dragon
+Oracle:When Rasaad, Dragon Monk dies, create two 1/1 blue Faerie Dragon creature tokens with flying.
+
+SPECIALIZE:BLACK
+
+Name:Rasaad, Shadow Monk
+ManaCost:2 W B
+Types:Legendary Creature Human Monk
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 4/1 black Skeleton creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ b_4_1_skeleton_menace
+DeckHas:Ability$Token & Type$Skeleton
+Oracle:When Rasaad, Shadow Monk dies, create a 4/1 black Skeleton creature token with menace.
+
+SPECIALIZE:RED
+
+Name:Rasaad, Warrior Monk
+ManaCost:2 R W
+Types:Legendary Creature Human Monk
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create three 1/1 white Soldier creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 3 | TokenScript$ w_1_1_soldier
+DeckHas:Ability$Token & Type$Soldier
+Oracle:When Rasaad, Warrior Monk dies, create three 1/1 white Soldier creature tokens.
+
+SPECIALIZE:GREEN
+
+Name:Rasaad, Sylvan Monk
+ManaCost:2 G W
+Types:Legendary Creature Human Monk
+PT:4/4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create 2/2 green Boar creature tokens.
+SVar:TrigToken:DB$ Token | TokenAmount$ 2 | TokenScript$ g_2_2_boar
+DeckHas:Ability$Token & Type$Boar
+Oracle:When Rasaad, Sylvan Monk dies, create two 2/2 green Boar creature tokens.

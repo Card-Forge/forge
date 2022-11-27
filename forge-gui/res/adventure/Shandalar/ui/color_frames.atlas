@@ -1,0 +1,104 @@
+color_frames.png
+size: 192,192
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none          
+color_b
+  xy: 0, 0
+  size: 32, 32  
+color_x
+  xy: 32, 0
+  size: 32, 32  
+color_g
+  xy: 64, 0
+  size: 32, 32  
+color_rg
+  xy: 96, 0
+  size: 32, 32  
+color_wubrg
+  xy: 128, 0
+  size: 32, 32  
+color_wbr
+  xy: 160, 0
+  size: 32, 32  
+color_r
+  xy: 0, 32
+  size: 32, 32  
+color_u
+  xy: 32, 32
+  size: 32, 32  
+color_w
+  xy: 64, 32
+  size: 32, 32  
+color_br
+  xy: 96, 32
+  size: 32, 32  
+color_wub
+  xy: 128, 32
+  size: 32, 32  
+color_wbg
+  xy: 160, 32
+  size: 32, 32
+color_wu
+  xy: 0, 64
+  size: 32, 32  
+color_wb
+  xy: 32, 64
+  size: 32, 32  
+color_wr
+  xy: 64, 64
+  size: 32, 32  
+color_bg
+  xy: 96, 64
+  size: 32, 32  
+color_wur
+  xy: 128, 64
+  size: 32, 32  
+color_wrg
+  xy: 160, 64
+  size: 32, 32   
+color_wg
+  xy: 0, 96
+  size: 32, 32  
+color_ur
+  xy: 32, 96
+  size: 32, 32  
+color_ub
+  xy: 64, 96
+  size: 32, 32  
+color_ug
+  xy: 96, 96
+  size: 32, 32  
+color_wug
+  xy: 128, 96
+  size: 32, 32  
+color_wbrg
+  xy: 160, 96
+  size: 32, 32     
+color_ubr
+  xy: 0, 128
+  size: 32, 32  
+color_ubg
+  xy: 32, 128
+  size: 32, 32  
+color_urg
+  xy: 64, 128
+  size: 32, 32  
+color_brg
+  xy: 96, 128
+  size: 32, 32  
+color_wurg
+  xy: 128, 128
+  size: 32, 32  
+color_wubg
+  xy: 160, 128
+  size: 32, 32  
+color_ubrg
+  xy: 0, 160
+  size: 32, 32  
+color_wubr
+  xy: 32, 160
+  size: 32, 32  
+color_
+  xy: 64, 160
+  size: 32, 32  

@@ -10,4 +10,5 @@ T:Mode$ Phase | Phase$ Cleanup | Execute$ TrigCleanup | Static$ True
 SVar:TrigCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
+DeckHas:Ability$Sacrifice
 Oracle:At the beginning of your upkeep, sacrifice Season of the Witch unless you pay 2 life.\nAt the beginning of the end step, destroy all untapped creatures that didn't attack this turn, except for creatures that couldn't attack.

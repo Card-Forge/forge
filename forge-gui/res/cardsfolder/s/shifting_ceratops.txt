@@ -4,8 +4,5 @@ Types:Creature Dinosaur
 PT:5/4
 K:This spell can't be countered.
 K:Protection from blue
-A:AB$ GenericChoice | Cost$ G | Choices$ DBReach,DBTrample,DBHaste | SpellDescription$ CARDNAME gains your choice of reach, trample, or haste until end of turn.
-SVar:DBReach:DB$ Pump | Defined$ Self | KW$ Reach | SpellDescription$ CARDNAME gains reach until end of turn.
-SVar:DBTrample:DB$ Pump | Defined$ Self | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
-SVar:DBHaste:DB$ Pump | Defined$ Self | KW$ Haste | SpellDescription$ CARDNAME gains haste until end of turn.
+A:AB$ Pump | Cost$ G | KWChoice$ Reach,Trample,Haste | StackDescription$ SpellDescription | SpellDescription$ CARDNAME gains your choice of reach, trample, or haste until end of turn.
 Oracle:This spell can't be countered.\nProtection from blue (This creature can't be blocked, targeted, dealt damage, enchanted, or equipped by anything blue.)\n{G}: Shifting Ceratops gains your choice of reach, trample, or haste until end of turn.

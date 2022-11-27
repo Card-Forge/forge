@@ -203,7 +203,7 @@ public class Combat {
 
     //gets attacked player opponents (ignores planeswalkers)
     public final FCollection<Player> getAttackedOpponents(Player atk) {
-        FCollection<Player> attackedOpps = new FCollection<Player>();
+        FCollection<Player> attackedOpps = new FCollection<>();
         if (atk == playerWhoAttacks) {
             for (Player defender : getDefendingPlayers()) {
                 if (!getAttackersOf(defender).isEmpty()) {
@@ -678,7 +678,7 @@ public class Combat {
                     // Run Unblocked Trigger
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                     runParams.put(AbilityKey.Attacker, attacker);
-                    runParams.put(AbilityKey.Defender,getDefenderByAttacker(attacker));
+                    runParams.put(AbilityKey.Defender, getDefenderByAttacker(attacker));
                     runParams.put(AbilityKey.DefendingPlayer, getDefenderPlayerByAttacker(attacker));
                     game.getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams, false);
                 }

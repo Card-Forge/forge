@@ -326,13 +326,29 @@ public abstract class SpellAbilityEffect {
         final SpellAbility newSa = AbilityFactory.getAbility(trigSA, sa.getHostCard());
         newSa.setIntrinsic(intrinsic);
         trig.setOverridingAbility(newSa);
+        trig.setSpawningAbility(sa.copy(sa.getHostCard(), sa.getActivatingPlayer(), true));
         sa.getActivatingPlayer().getGame().getTriggerHandler().registerDelayedTrigger(trig);
     }
 
     protected static void addSelfTrigger(final SpellAbility sa, String location, final Card card) {
+    	String player = "";
+    	String whose = " the ";
+        if (location.contains("_")) {
+    	    String[] locSplit = location.split("_");
+    	    player = locSplit[0];
+    	    location = locSplit[1];
+    	    if (player.equals("You")) {
+    	        whose = " your next ";
+            }
+        }
+
     	String trigStr = "Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield " +
-    	     "| TriggerDescription$ At the beginning of the end step, " + location.toLowerCase()  + " CARDNAME.";
-    	
+    	     "| TriggerDescription$ At the beginning of" + whose + "end step, " + location.toLowerCase()
+                + " CARDNAME.";
+        if (!player.equals("")) {
+            trigStr += " | Player$ " + player;
+        }
+
     	final Trigger trig = TriggerHandler.parseTrigger(trigStr, card, true);
     	
     	String trigSA = "";
@@ -461,6 +477,8 @@ public abstract class SpellAbilityEffect {
             eff.setEmblem(true);
             // Emblem needs to be colorless
             eff.setColor(MagicColor.COLORLESS);
+        } else if (sa.hasParam("Boon")) {
+            eff.setBoon(true);
         }
 
         eff.setOwner(controller);
@@ -515,6 +533,9 @@ public abstract class SpellAbilityEffect {
                     "| Origin$ Battlefield | Destination$ Graveyard " +
                     "| Description$ If that permanent would die this turn, exile it instead.";
             String effect = "DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Battlefield | Destination$ " + zone;
+            if (sa.hasParam("ReplaceDyingRemember")) {
+                effect += " | RememberToEffectSource$ True";
+            }
 
             ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, eff, true);
             re.setLayer(ReplacementLayer.Other);
@@ -623,7 +644,6 @@ public abstract class SpellAbilityEffect {
                     final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
                     runParams.put(AbilityKey.Attacker, attacker);
                     runParams.put(AbilityKey.Blockers, blockers);
-                    runParams.put(AbilityKey.NumBlockers, blockers.size());
                     runParams.put(AbilityKey.Defender, combat.getDefenderByAttacker(attacker));
                     runParams.put(AbilityKey.DefendingPlayer, combat.getDefenderPlayerByAttacker(attacker));
                     game.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
@@ -641,10 +661,16 @@ public abstract class SpellAbilityEffect {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         hostCard.addUntilLeavesBattlefield(triggerList.allCards());
-        final TriggerHandler trigHandler  = game.getTriggerHandler();
-        final Card lki = CardUtil.getLKICopy(hostCard);
-        lki.clearControllers();
-        lki.setOwner(sa.getActivatingPlayer());
+        final TriggerHandler trigHandler = game.getTriggerHandler();
+
+        final Card lki;
+        if (sa.hasParam("ReturnAbility")) {
+            lki = CardUtil.getLKICopy(hostCard);
+            lki.clearControllers();
+            lki.setOwner(sa.getActivatingPlayer());
+        } else {
+            lki = null;
+        }
 
         return new GameCommand() {
 
@@ -671,14 +697,13 @@ public abstract class SpellAbilityEffect {
                         if (newCard == null || !newCard.equalsWithTimestamp(c)) {
                             continue;
                         }
-                        Trigger trig = null;
                         if (sa.hasAdditionalAbility("ReturnAbility")) {
                             String valid = sa.getParamOrDefault("ReturnValid", "Card.IsTriggerRemembered");
 
                             String trigSA = "Mode$ ChangesZone | Origin$ " + cell.getColumnKey() + " | Destination$ " + cell.getRowKey() + " | ValidCard$ " + valid +
                                     " | TriggerDescription$ " + sa.getAdditionalAbility("ReturnAbility").getParam("SpellDescription");
 
-                            trig = TriggerHandler.parseTrigger(trigSA, hostCard, sa.isIntrinsic(), null);
+                            Trigger trig = TriggerHandler.parseTrigger(trigSA, hostCard, sa.isIntrinsic(), null);
                             trig.setSpawningAbility(sa.copy(lki, sa.getActivatingPlayer(), true));
                             trig.setActiveZone(null);
                             trig.addRemembered(newCard);
@@ -725,8 +750,7 @@ public abstract class SpellAbilityEffect {
             CardCollectionView discardedByPlayer = discardedMap.get(p);
             if (!discardedByPlayer.isEmpty()) {
                 boolean firstDiscard = p.getNumDiscardedThisTurn() - discardedByPlayer.size() == 0;
-                final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-                runParams.put(AbilityKey.Player, p);
+                final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
                 runParams.put(AbilityKey.Cards, discardedByPlayer);
                 runParams.put(AbilityKey.Cause, sa);
                 runParams.put(AbilityKey.FirstTime, firstDiscard);

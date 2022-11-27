@@ -2,7 +2,7 @@ Name:The Rack
 ManaCost:1
 Types:Artifact
 K:ETBReplacement:Other:ChooseP
-SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | AILogic$ MostCardsInHand | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Chosen | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the chosen player's upkeep, CARDNAME deals X damage to that player, where X is 3 minus the number of cards in their hand.
 SVar:TrigDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ X
 SVar:X:Count$InChosenHand/NMinus.3

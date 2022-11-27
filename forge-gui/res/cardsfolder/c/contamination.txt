@@ -2,7 +2,7 @@ Name:Contamination
 ManaCost:2 B
 Types:Enchantment
 K:UpkeepCost:Sac<1/Creature>
-R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Land | ValidAbility$ Activated.hasTapCost | ReplaceWith$ ProduceB | Description$ If a land is tapped for mana, it produces {B} instead of any other type and amount.
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Land | ReplaceWith$ ProduceB | Description$ If a land is tapped for mana, it produces {B} instead of any other type and amount.
 SVar:ProduceB:DB$ ReplaceMana | ReplaceMana$ B
 AI:RemoveDeck:All
 SVar:NonStackingEffect:True

@@ -10,7 +10,7 @@ SVar:MimeoChooseCopy:DB$ ChooseCard | ConditionCheckSVar$ MimeoNumRemembered | C
 # Order matters here, put counters first so clone doesn't have to add SVars
 SVar:MimeoAddCounters:DB$ PutCounter | ETB$ True | Defined$ Self | ConditionCheckSVar$ MimeoNumRemembered | ConditionSVarCompare$ EQ1 | CounterType$ P1P1 | CounterNum$ MimeoX | SubAbility$ MimeoCopyChosen
 SVar:MimeoCopyChosen:DB$ Clone | Defined$ ChosenCard | ConditionCheckSVar$ MimeoNumRemembered | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosen$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:MimeoInYard:Count$TypeInAllYards.Creature
 SVar:MimeoNumRemembered:Remembered$Amount
 SVar:MimeoX:Remembered$CardPower

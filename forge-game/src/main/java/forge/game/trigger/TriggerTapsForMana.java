@@ -57,19 +57,7 @@ public class TriggerTapsForMana extends Trigger {
      * @param runParams*/
     @Override
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
-        SpellAbility manaAbility = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
-
-        // Caged Sun special case
-        if (!hasParam("NoTapCheck")) {
-            if (manaAbility == null || !manaAbility.isManaAbility() || !manaAbility.getPayCosts().hasTapCost()) {
-                return false;
-            }
-        }
-
         if (!matchesValidParam("ValidCard", runParams.get(AbilityKey.Card))) {
-            return false;
-        }
-        if (!matchesValidParam("Player", runParams.get(AbilityKey.Player))) {
             return false;
         }
         if (!matchesValidParam("Activator", runParams.get(AbilityKey.Activator))) {
@@ -78,7 +66,7 @@ public class TriggerTapsForMana extends Trigger {
 
         if (hasParam("Produced")) {
             Object prod = runParams.get(AbilityKey.Produced);
-            if (prod == null || !(prod instanceof String)) {
+            if (!(prod instanceof String)) {
                 return false;
             }
             String produced = (String) prod;
@@ -97,15 +85,14 @@ public class TriggerTapsForMana extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Player, AbilityKey.Produced, AbilityKey.Activator);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Card, AbilityKey.Produced, AbilityKey.Activator);
     }
 
     @Override
     public String getImportantStackObjects(SpellAbility sa) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Localizer.getInstance().getMessage("lblTappedForMana")).append(": ").append(sa.getTriggeringObject(AbilityKey.Card));
-        sb.append(Localizer.getInstance().getMessage("lblProduced")).append(": ").append(toManaString(sa.getTriggeringObject(AbilityKey.Produced).toString()));
-        return sb.toString();
+        return Localizer.getInstance().getMessage("lblTappedForMana") + ": " +
+                sa.getTriggeringObject(AbilityKey.Card) + Localizer.getInstance().getMessage("lblProduced") + ": "
+                + toManaString(sa.getTriggeringObject(AbilityKey.Produced).toString());
     }
 
 }

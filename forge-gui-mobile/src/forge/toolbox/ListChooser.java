@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.badlogic.gdx.Input;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -39,7 +40,6 @@ import forge.itemmanager.filters.ItemFilter;
 import forge.itemmanager.filters.ListLabelFilter;
 import forge.menu.FMenuItem;
 import forge.menu.FPopupMenu;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.util.Callback;
 import forge.util.Utils;
 
@@ -95,38 +95,20 @@ public class ListChooser<T> extends FContainer {
             txtSearch = add(new FTextField());
             txtSearch.setFont(FSkinFont.get(12));
             txtSearch.setGhostText(Forge.getLocalizer().getMessage("lblSearch"));
-            txtSearch.setChangedHandler(new FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    applyFilters();
-                }
-            });
+            txtSearch.setChangedHandler(e -> applyFilters());
 
             advancedSearchFilter = lstChoices.getListItemRenderer().getAdvancedSearchFilter(this);
             if (advancedSearchFilter != null) {
                 btnSearch = add(new FLabel.ButtonBuilder()
-                    .icon(Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH).iconScaleFactor(0.9f).command(new FEventHandler() {
-                        @Override
-                        public void handleEvent(FEvent e) {
-                            FPopupMenu menu = new FPopupMenu() {
-                                @Override
-                                protected void buildMenu() {
-                                    addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAdvancedSearch"), Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH, new FEventHandler() {
-                                        @Override
-                                        public void handleEvent(FEvent e) {
-                                            advancedSearchFilter.edit();
-                                        }
-                                    }));
-                                    addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblResetFilters"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, new FEventHandler() {
-                                        @Override
-                                        public void handleEvent(FEvent e) {
-                                            resetFilters();
-                                        }
-                                    }));
-                                }
-                            };
-                            menu.show(btnSearch, 0, btnSearch.getHeight());
-                        }
+                    .icon(Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH).iconScaleFactor(0.9f).command(e -> {
+                        FPopupMenu menu = new FPopupMenu() {
+                            @Override
+                            protected void buildMenu() {
+                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblAdvancedSearch"), Forge.hdbuttons ? FSkinImage.HDSEARCH : FSkinImage.SEARCH, e1 -> advancedSearchFilter.edit()));
+                                addItem(new FMenuItem(Forge.getLocalizer().getMessage("lblResetFilters"), Forge.hdbuttons ? FSkinImage.HDDELETE : FSkinImage.DELETE, e2 -> resetFilters()));
+                            }
+                        };
+                        menu.show(btnSearch, 0, btnSearch.getHeight());
                     }).build());
                 add(advancedSearchFilter.getWidget());
             }
@@ -184,12 +166,7 @@ public class ListChooser<T> extends FContainer {
 
         final String pattern = txtSearch.getText().toLowerCase();
         if (!pattern.isEmpty()) {
-            predicates.add(new Predicate<T>() {
-                @Override
-                public boolean apply(T input) {
-                    return lstChoices.getChoiceText(input).toLowerCase().contains(pattern);
-                }
-            });
+            predicates.add(input -> lstChoices.getChoiceText(input).toLowerCase().contains(pattern));
         }
         if (advancedSearchFilter != null && !advancedSearchFilter.isEmpty()) {
             predicates.add((Predicate<? super T>)advancedSearchFilter.getPredicate());
@@ -317,6 +294,28 @@ public class ListChooser<T> extends FContainer {
         @Override
         public void drawOverlay(Graphics g) {
             //don't draw border
+        }
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        if (Forge.hasGamepad()) {
+            if (keyCode == Input.Keys.DPAD_DOWN) {
+                setNextSelected();
+            } else if (keyCode == Input.Keys.DPAD_UP) {
+                setPreviousSelected();
+            }
+            return true;
+        }
+        return super.keyDown(keyCode);
+    }
+    public void setNextSelected() {
+        if ((lstChoices.getSelectedIndex()+1) < lstChoices.getCount())
+            lstChoices.setSelectedIndex(lstChoices.getSelectedIndex()+1);
+    }
+    public void setPreviousSelected() {
+        if ((lstChoices.getSelectedIndex()-1) > -1) {
+            lstChoices.setSelectedIndex(lstChoices.getSelectedIndex() - 1);
         }
     }
 }

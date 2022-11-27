@@ -1,0 +1,9 @@
+Name:Assault Intercessor
+ManaCost:1 W B
+Types:Creature Astartes Warrior
+PT:3/2
+K:First strike
+K:Menace
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Chainsword — Whenever a creature an opponent controls dies, that player loses 2 life.
+SVar:TrigLoseLife:DB$ LoseLife | LifeAmount$ 2 | Defined$ TriggeredCardController
+Oracle:First strike, menace\nChainsword — Whenever a creature an opponent controls dies, that player loses 2 life.

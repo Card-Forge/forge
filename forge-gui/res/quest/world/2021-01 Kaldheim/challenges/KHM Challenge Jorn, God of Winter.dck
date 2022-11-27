@@ -1,0 +1,22 @@
+[quest]
+id=KHM Challenge: Jorn, God of Winter
+OpponentName=Jorn
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Woodland Chasm
+HumanExtras=
+[metadata]
+Title=Jorn, God of Winter
+Difficulty=medium
+Description="Wherever snow falls, I am home."
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=KHM Challenge: Jorn, God of Winter
+[Main]
+10 Blizzard Brawl|KHM|1
+10 Icehide Troll|KHM|1
+10 Jorn, God of Winter|KHM|2
+30 Snow-Covered Forest|KHM|1

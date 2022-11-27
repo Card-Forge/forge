@@ -7,7 +7,7 @@ SVar:X:Count$Valid Creature.attacking+YouCtrl
 SVar:BuffedBy:Creature.attacking
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigAttach | TriggerDescription$ When CARDNAME enters the battlefield, attach it to target creature you control.
 SVar:TrigAttach:DB$ Attach | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control.
-SVar:NeedsToPlay:Creature.YouCtrl+inZoneBattlefield
+SVar:NeedsToPlay:Creature.YouCtrl
 AI:RemoveDeck:All
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Double Strike & Trample | Description$ Equipped creature gets +1/+1 and has double strike and trample.
 K:Equip:3

@@ -1,0 +1,6 @@
+Name:Loran's Escape
+ManaCost:W
+Types:Instant
+A:SP$ Pump | ValidTgts$ Artifact,Creature | TgtPrompt$ Select target artifact or creature | KW$ Hexproof & Indestructible | SubAbility$ DBScry | SpellDescription$ Target artifact or creature gains hexproof and indestructible until end of turn.
+SVar:DBScry:DB$ Scry | SpellDescription$ Scry 1.
+Oracle:Target artifact or creature gains hexproof and indestructible until end of turn. Scry 1.

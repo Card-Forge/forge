@@ -1,0 +1,21 @@
+[metadata]
+Name:Possibility Storm - Dominaria United #04
+URL:https://i1.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/10/latest-1-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Assume your library contains copies of each card you control and each card in your hand. Note that your opponent has Timeless Lotus available for mana (assume no other sources, and also no cards in hand).
+[state]
+humanlife=20
+ailife=20
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Lightning Strike;Shivan Devastator;Hammerhand;Urabrask, Heretic Praetor
+humanlibrary=Urabrask, Heretic Praetor;Hammerhand;Shivan Devastator;Lightning Strike;Mountain;Mountain;Mountain;Swamp;Swamp;Garna, Bloodfist of Keld;Defiler of Instinct;Lagomos, Hand of Hatred
+humanbattlefield=Lagomos, Hand of Hatred;Defiler of Instinct;Garna, Bloodfist of Keld;Swamp;Swamp;Mountain;Mountain;Mountain
+aibattlefield=Soaring Drake;Soaring Drake;Blight Pile;Blight Pile;Timeless Lotus
+aiprecast=Soaring Drake:CustomScript:DB$ Token | TokenAmount$ 2 | TokenScript$ u_1_1_bird_flying_blockflying
+removesummoningsickness=true
+# Randomize the order of cards in the library
+humanprecast=Ancestral Knowledge:TrigShuffle

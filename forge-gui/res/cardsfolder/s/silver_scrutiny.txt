@@ -1,0 +1,7 @@
+Name:Silver Scrutiny
+ManaCost:X U U
+Types:Sorcery
+S:Mode$ CastWithFlash | ValidCard$ Card.Self | ValidSA$ Spell.XCostLE3 | EffectZone$ All | Caster$ You | Description$ You may cast CARDNAME as though it had flash if X is 3 or less.
+SVar:X:Count$xPaid
+A:SP$ Draw | NumCards$ X | SpellDescription$ Draw X cards.
+Oracle:You may cast Silver Scrutiny as though it had flash if X is 3 or less.\nDraw X cards.

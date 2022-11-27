@@ -2,7 +2,8 @@ Name:Brain Maggot
 ManaCost:1 B
 Types:Enchantment Creature Insect
 PT:1/1
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand and you choose a nonland card from it. Exile that card until CARDNAME leaves the battlefield.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | TgtPrompt$ Select target opponent | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | Duration$ UntilHostLeavesPlay
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand and you choose a nonland card from it. Exile that card until CARDNAME leaves the battlefield.
+SVar:TrigReveal:DB$ RevealHand | Defined$ Targeted | ValidTgts$ Opponent | SubAbility$ ExileCard
+SVar:ExileCard:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True | Duration$ UntilHostLeavesPlay
 SVar:PlayMain1:TRUE
 Oracle:When Brain Maggot enters the battlefield, target opponent reveals their hand and you choose a nonland card from it. Exile that card until Brain Maggot leaves the battlefield.

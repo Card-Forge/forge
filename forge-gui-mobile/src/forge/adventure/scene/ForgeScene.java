@@ -77,10 +77,6 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
             getScreen().buildTouchListeners(x, y, potentialListeners);
     }
 
-    @Override
-    public void resLoaded() {
-
-    }
 
     @Override
     public boolean leave() {

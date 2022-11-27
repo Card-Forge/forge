@@ -1,0 +1,6 @@
+Name:Timeless Lotus
+ManaCost:5
+Types:Legendary Artifact
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ W U B R G | SpellDescription$ Add {W}{U}{B}{R}{G}
+Oracle:Timeless Lotus enters the battlefield tapped.\n{T}: Add {W}{U}{B}{R}{G}.

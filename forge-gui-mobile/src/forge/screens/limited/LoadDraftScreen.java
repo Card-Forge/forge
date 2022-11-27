@@ -37,7 +37,7 @@ public class LoadDraftScreen extends LaunchScreen {
     private final DeckManager lstDecks = add(new DeckManager(GameType.Draft));
     private final FLabel lblTip = add(new FLabel.Builder()
         .text(Forge.getLocalizer().getMessage("lblDoubleTapToEditDeck"))
-        .textColor(FLabel.INLINE_LABEL_COLOR)
+        .textColor(FLabel.getInlineLabelColor())
         .align(Align.center).font(FSkinFont.get(12)).build());
 
     private final FSkinFont GAME_MODE_FONT= FSkinFont.get(12);

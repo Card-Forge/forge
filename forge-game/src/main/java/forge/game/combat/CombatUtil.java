@@ -50,6 +50,7 @@ import forge.game.player.PlayerController.ManaPaymentPurpose;
 import forge.game.spellability.SpellAbility;
 import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityCantAttackBlock;
+import forge.game.staticability.StaticAbilityMustBlock;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.TextUtil;
@@ -383,13 +384,13 @@ public class CombatUtil {
      *            a {@link forge.game.card.Card} object.
      */
     public static void checkDeclaredAttacker(final Game game, final Card c, final Combat combat, boolean triggers) {
-        GameEntity defender = combat.getDefenderByAttacker(c);
+        final GameEntity defender = combat.getDefenderByAttacker(c);
+        final List<Card> otherAttackers = combat.getAttackers();
 
         // Run triggers
         if (triggers) {
             final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
             runParams.put(AbilityKey.Attacker, c);
-            final List<Card> otherAttackers = combat.getAttackers();
             otherAttackers.remove(c);
             runParams.put(AbilityKey.OtherAttackers, otherAttackers);
             runParams.put(AbilityKey.Attacked, defender);
@@ -405,12 +406,9 @@ public class CombatUtil {
             game.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
         }
 
-        c.getDamageHistory().setCreatureAttackedThisCombat(defender);
+        c.getDamageHistory().setCreatureAttackedThisCombat(defender, otherAttackers.size());
         c.getDamageHistory().clearNotAttackedSinceLastUpkeepOf();
-        c.getController().addCreaturesAttackedThisTurn(CardUtil.getLKICopy(c));
-        if (defender instanceof Player) {
-            c.getController().addAttackedPlayersMyTurn(combat.getDefenderPlayerByAttacker(c));
-        }
+        c.getController().addCreaturesAttackedThisTurn(CardUtil.getLKICopy(c), defender);
     }
 
     /**
@@ -557,10 +555,19 @@ public class CombatUtil {
                 return false;
             }
         }
+
+        // Unblockable check
+        for (final Card ca : attacker.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CantBlockBy", attacker, null)) {
+                    return false;
+                }
+            }
+        }
+
         return canBeBlocked(attacker, defendingPlayer);
     }
 
-    // can the attacker be blocked at all?
     /**
      * <p>
      * canBeBlocked.
@@ -573,10 +580,6 @@ public class CombatUtil {
     public static boolean canBeBlocked(final Card attacker, final Player defender) {
         if (attacker == null) {
             return true;
-        }
-
-        if (attacker.hasKeyword("Unblockable")) {
-            return false;
         }
 
         // Landwalk
@@ -810,7 +813,7 @@ public class CombatUtil {
             }
 
             // "CARDNAME blocks each turn/combat if able."
-            if (!blockers.contains(blocker) && blocker.hasKeyword("CARDNAME blocks each combat if able.")) {
+            if (!blockers.contains(blocker) && StaticAbilityMustBlock.blocksEachCombatIfAble(blocker)) {
                 for (final Card attacker : attackers) {
                     if (getBlockCost(blocker.getGame(), blocker, attacker) != null) {
                         continue;

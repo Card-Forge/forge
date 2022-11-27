@@ -2,7 +2,7 @@ Name:Anthem of Rakdos
 ManaCost:2 B R R
 Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ AnthemPump | TriggerDescription$ Whenever a creature you control attacks, it gets +2/+0 until end of turn and CARDNAME deals 1 damage to you.
-SVar:AnthemPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ 2 | SubAbility$ RakdosBurn
+SVar:AnthemPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ 2 | SubAbility$ RakdosBurn
 SVar:RakdosBurn:DB$ DealDamage | Defined$ You | NumDmg$ 1
 R:Event$ DamageDone | ActiveZones$ Battlefield | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | ValidTarget$ Permanent,Player | Hellbent$ True | ReplaceWith$ DmgTwice | Description$ Hellbent — As long as you have no cards in hand, if a source you control would deal damage to a permanent or player, it deals double that damage to that permanent or player instead.
 SVar:DmgTwice:DB$ ReplaceEffect | VarName$ DamageAmount | VarValue$ X

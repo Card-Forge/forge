@@ -1,0 +1,6 @@
+Name:Ticket Turbotubes
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color.
+A:AB$ PutCounter | Cost$ 3 T | Defined$ You | CounterType$ TICKET | AILogic$ AtOppEOT | SpellDescription$ You get {TK} (a ticket counter).
+Oracle:{T}: Add one mana of any color.\n{3}, {T}: You get {TK} (a ticket counter).

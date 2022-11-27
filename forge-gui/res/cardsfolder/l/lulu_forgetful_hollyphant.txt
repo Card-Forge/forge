@@ -1,0 +1,78 @@
+Name:Lulu, Forgetful Hollyphant
+ManaCost:2 W
+Types:Legendary Creature Elephant Angel
+PT:1/3
+K:Flying
+K:Specialize:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigBoon | TriggerDescription$ When CARDNAME enters the battlefield, you get a boon with "When you cast your next creature spell without flying, it perpetually gains flying."
+SVar:TrigBoon:DB$ Effect | Boon$ True | Duration$ Permanent | Triggers$ SpellCast
+SVar:SpellCast:Mode$ SpellCast | ValidCard$ Creature.withoutFlying | ValidActivatingPlayer$ You | OneOff$ True | ActivationLimit$ 1 | TriggerZones$ Command | Execute$ TrigEffect | TriggerDescription$ When you cast your next creature spell without flying, it perpetually gains flying.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredCard | StaticAbilities$ PerpetualPump | Duration$ Permanent | Name$ Flaming Fist Duskguard's Boon's Perpetual Effect
+SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Flying | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains flying.
+Oracle:Flying\nSpecialize {2}\nWhen Lulu, Forgetful Hollyphant enters the battlefield, you get a boon with "When you cast your next creature spell without flying, it perpetually gains flying."
+AlternateMode:Specialize
+
+SPECIALIZE:WHITE
+
+Name:Lulu, Helpful Hollyphant
+ManaCost:2 W W
+Types:Legendary Creature Elephant Angel
+PT:2/4
+K:Flying
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl+Other+withFlying | Execute$ DBGainLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with one or more other creatures with flying, you gain twice that much life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
+SVar:X:TriggerObjectsAttackers$Valid Creature.withFlying/Twice
+DeckHas:Ability$Lifegain
+Oracle:Flying\nWhenever you attack with one or more other creatures with flying, you gain twice that much life.
+
+SPECIALIZE:BLUE
+
+Name:Lulu, Curious Hollyphant
+ManaCost:2 W W
+Types:Legendary Creature Elephant Angel
+PT:2/4
+K:Flying
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl+Other+withFlying | Execute$ DBDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with one or more other creatures with flying, draw that many cards, then discard a card.
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 1
+SVar:X:TriggerObjectsAttackers$Valid Creature.withFlying
+DeckHas:Ability$Discard
+Oracle:Flying\nWhenever you attack with one or more other creatures with flying, draw that many cards, then discard a card.
+
+SPECIALIZE:BLACK
+
+Name:Lulu, Vengeful Hollyphant
+ManaCost:2 W B
+Types:Legendary Creature Elephant Angel
+PT:2/4
+K:Flying
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl+Other+withFlying | Execute$ DBLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with one or more other creatures with flying, each opponent loses that much life and you gain that much life.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X
+SVar:X:TriggerObjectsAttackers$Valid Creature.withFlying
+DeckHas:Ability$LifeGain
+Oracle:Flying\nWhenever you attack with one or more other creatures with flying, each opponent loses that much life and you gain that much life.
+
+SPECIALIZE:RED
+
+Name:Lulu, Inspiring Hollyphant
+ManaCost:2 R W
+Types:Legendary Creature Elephant Angel
+PT:2/4
+K:Flying
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl+Other+withFlying | Execute$ DBToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with one or more other creatures with flying, create that many 1/1 white Soldier creature tokens that are tapped and attacking.
+SVar:DBToken:DB$ Token | TokenAmount$ X | TokenScript$ w_1_1_soldier | TokenOwner$ You | TokenTapped$ True | TokenAttacking$ True
+SVar:X:TriggerObjectsAttackers$Valid Creature.withFlying
+DeckHas:Ability$Tokens & Type$Soldier
+Oracle:Flying\nWhenever you attack with one or more other creatures with flying, create that many 1/1 white Soldier creature tokens that are tapped and attacking.
+
+SPECIALIZE:GREEN
+
+Name:Lulu, Wild Hollyphant
+ManaCost:2 G W
+Types:Legendary Creature Elephant Angel
+PT:2/4
+K:Flying
+T:Mode$ AttackersDeclared | ValidAttackers$ Creature.YouCtrl+Other+withFlying | Execute$ DBPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever you attack with one or more other creatures with flying, those creatures get +2/+2 until end of turn.
+SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl+withFlying+attacking | NumAtt$ +2 | NumDef$ +2
+Oracle:Flying\nWhenever you attack with one or more other creatures with flying, those creatures get +2/+2 until end of turn.

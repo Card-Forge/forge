@@ -1,0 +1,11 @@
+Name:Bloodthirster
+ManaCost:5 R
+Types:Creature Demon
+PT:6/6
+K:Flying
+K:Trample
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigUntap | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, untap it. After this combat phase, there is an additional combat phase.
+SVar:TrigUntap:DB$ Untap | Defined$ Self | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | AfterPhase$ EndCombat
+S:Mode$ CantAttack | ValidCard$ Card.Self | Target$ Player.attackedBySourceThisTurn | Description$ CARDNAME can't attack a player it has already attacked this turn.
+Oracle:Flying, trample\nWhenever Bloodthirster deals combat damage to a player, untap it. After this combat phase, there is an additional combat phase.\nBloodthirster can't attack a player it has already attacked this turn.

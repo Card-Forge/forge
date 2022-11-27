@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="69">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="69">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="30">
   <data encoding="base64" compression="zlib">
    eJztkzEKwDAMA7N27iP7o7y3Q7cQFUm2KRQPtwScs+VkHmPMpml+y3U+rGdMXZYbwfSa5VJ7qXY6Ga+1js91KhlmZcx40Ntx3ezO0N2RmaNvtcrL1jl/CPmZ+apzfvO58yr/ZlfnZszuGfWU4XWyj3iVXCu8ajZN8yU3OswQ5g==
@@ -57,7 +57,7 @@
           &quot;condition&quot;:[ { &quot;item&quot;:&quot;Strange Key&quot;} ],
           &quot;text&quot;:&quot;The gate is unlocked&quot;,
           &quot;options&quot;:[
-          {&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;: [ {&quot;deleteMapObject&quot;:-1 } ] }
+          {&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;: [ {&quot;deleteMapObject&quot;:-1 },{&quot;removeItem&quot;:&quot;Strange Key&quot;} ] }
         ]
       }
     ]

@@ -1,0 +1,10 @@
+Name:Urza, Prince of Kroog
+ManaCost:2 W U
+Types:Legendary Creature Human Artificer
+PT:2/3
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddPower$ 2 | AddToughness$ 2 | Description$ Artifact creatures you control get +2/+2.
+A:AB$ CopyPermanent | Cost$ 6 | ValidTgts$ Artifact.YouCtrl | TgtPrompt$ Select target artifact you control | SetPower$ 1 | SetToughness$ 1 | AddTypes$ Creature & Soldier | SpellDescription$ Create a token that's a copy of target artifact you control, except it's a 1/1 Soldier creature in addition to its other types.
+SVar:PlayMain1:TRUE
+DeckHints:Type$Artifact
+DeckHas:Ability$Token & Type$Soldier
+Oracle:Artifact creatures you control get +2/+2.\n{6}: Create a token that's a copy of target artifact you control, except it's a 1/1 Soldier creature in addition to its other types.

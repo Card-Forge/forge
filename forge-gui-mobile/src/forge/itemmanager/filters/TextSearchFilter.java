@@ -102,7 +102,7 @@ public class TextSearchFilter<T extends InventoryItem> extends ItemFilter<T> {
         @Override
         public void draw(Graphics g) {
             super.draw(g);
-            g.drawText(ratio, renderedFont, GHOST_TEXT_COLOR, 0, 0, getWidth() - PADDING, getHeight(), false, Align.right, true);
+            g.drawText(ratio, renderedFont, getGhostTextColor(), 0, 0, getWidth() - PADDING, getHeight(), false, Align.right, true);
         }
     }
 }

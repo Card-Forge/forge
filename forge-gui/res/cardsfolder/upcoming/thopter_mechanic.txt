@@ -1,0 +1,10 @@
+Name:Thopter Mechanic
+ManaCost:1 U
+Types:Creature Human Artificer
+PT:2/1
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Number$ 2 | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ Whenever you draw your second card each turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 colorless Thopter artifact creature token with flying.
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenScript$ c_1_1_a_thopter_flying
+DeckHas:Ability$Token|Counters & Type$Thopter
+Oracle:Whenever you draw your second card each turn, put a +1/+1 counter on Thopter Mechanic.\nWhen Thopter Mechanic dies, create a 1/1 colorless Thopter artifact creature token with flying.

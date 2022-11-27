@@ -1,0 +1,5 @@
+Name:Flowstone Infusion
+ManaCost:R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | NumDef$ -2 | SpellDescription$ Target creature gets +2/-2 until end of turn.
+Oracle:Target creature gets +2/-2 until end of turn.

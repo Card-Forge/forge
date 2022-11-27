@@ -1,0 +1,14 @@
+Name:Phoenix Chick
+ManaCost:R
+Types:Creature Phoenix
+PT:1/1
+K:Flying
+K:Haste
+K:CARDNAME can't block.
+T:Mode$ AttackersDeclared | CheckSVar$ X | SVarCompare$ GE3 | Execute$ TrigReturn | NoResolvingCheck$ True | TriggerZones$ Graveyard | AttackingPlayer$ You | TriggerDescription$ Whenever you attack with three or more creatures, you may pay {R}{R}. If you do, return Phoenix Chick from your graveyard to the battlefield tapped and attacking with a +1/+1 counter on it.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ R R | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield | Tapped$ True | Attacking$ True | WithCountersType$ P1P1 | WithCountersAmount$ 1
+SVar:X:Count$Valid Creature.attacking
+SVar:DiscardMe:1
+SVar:SacMe:1
+DeckHas:Ability$Counters|Graveyard
+Oracle:Flying, haste\nPhoenix Chick can't block.\nWhenever you attack with three or more creatures, you may pay {R}{R}. If you do, return Phoenix Chick from your graveyard to the battlefield tapped and attacking with a +1/+1 counter on it.

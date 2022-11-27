@@ -1,0 +1,7 @@
+Name:Yotian Medic
+ManaCost:2 W
+Types:Creature Human Soldier Creature
+PT:1/4
+K:Lifelink
+DeckHas:Ability$LifeGain
+Oracle:Lifelink

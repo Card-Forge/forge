@@ -102,7 +102,7 @@ public final class EncodeAi extends SpellAbilityAi {
             public boolean apply(final Card c) {
                 boolean canAttackOpponent = false;
                 for (Player opp : ai.getOpponents()) {
-                    if (CombatUtil.canAttack(c, opp) && !CombatUtil.canBeBlocked(c, opp)) {
+                    if (CombatUtil.canAttack(c, opp) && !CombatUtil.canBeBlocked(c, null, opp)) {
                         canAttackOpponent = true;
                         break;
                     }

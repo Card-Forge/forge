@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Zaxara's Hydrapwnics 4
+Title=Zaxara, the Exemplary
+Difficulty=very hard
+Description=GBU hydra and +1/+1 counter theme deck
+Icon=Zaxara 4.jpg
+Deck Type=constructed
+[Main]
+2 Akroma's Memorial
+2 Ancient Ziggurat
+1 Apex Devastator
+4 Bayou
+3 Branching Evolution
+3 Bred for the Hunt
+1 Gargos, Vicious Watcher
+1 Grakmaw, Skyclave Ravager
+4 Hinterland Harbor
+2 Hydra Broodmaster
+2 Hydroid Krasis
+2 Ironscale Hydra
+2 Kalonian Hydra
+3 Mana Drain
+3 Managorger Hydra
+2 Neverwinter Hydra
+1 Polukranos, World Eater
+2 Primordial Hydra
+2 Repopulate
+3 Ruinous Intrusion
+4 Tropical Island
+2 Whiptongue Hydra
+4 Woodland Cemetery
+4 Zagoth Triome
+1 Zaxara, the Exemplary
+[Sideboard] 
+2 Mistcutter Hydra

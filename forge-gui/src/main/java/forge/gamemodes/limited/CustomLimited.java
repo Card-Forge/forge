@@ -50,10 +50,13 @@ public class CustomLimited extends DeckBase {
      * TODO: Write javadoc for Constructor.
      *
      * @param name0 the name0
-     * @param slots
+     * @param slots slots
      */
     public CustomLimited(final String name0, List<Pair<String, Integer>> slots) {
         super(name0);
+        CardEdition edition = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions());
+        if(edition!=null)//can be null on lazy loading, probably does not work correctly then
+            landSetCode=edition.getCode();
         tpl = new SealedProduct.Template(slots);
     }
 
@@ -65,7 +68,7 @@ public class CustomLimited extends DeckBase {
     private transient ItemPool<PaperCard> cardPool;
 
     /** The Land set code. */
-    private String landSetCode = CardEdition.Predicates.getRandomSetWithAllBasicLands(FModel.getMagicDb().getEditions()).getCode();
+    private String landSetCode = null;
 
     private boolean singleton;
 
@@ -169,7 +172,7 @@ public class CustomLimited extends DeckBase {
 
     /**
      * TODO: Write javadoc for this method.
-     * @return
+     * @return SealedProduct.Template
      */
     public SealedProduct.Template getSealedProductTemplate() {
         return tpl;

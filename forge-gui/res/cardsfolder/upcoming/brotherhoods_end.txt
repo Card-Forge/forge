@@ -1,0 +1,7 @@
+Name:Brotherhood's End
+ManaCost:1 R R
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDamage,DBDestroy | CharmNum$ 1
+SVar:DBDamage:DB$ DamageAll | ValidCards$ Creature,Planeswalker | NumDmg$ 3 | StackDescription$ SpellDescription | SpellDescription$ CARDNAME deals 3 damage to each creature and each planeswalker.
+SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Artifact.cmcLE3 | SpellDescription$ Destroy all artifacts with mana value 3 or less.
+Oracle:Choose one -\n•Brotherhood's End deals 3 damage to each creature and each planeswalker.\n•Destroy all artifacts with mana value 3 or less.

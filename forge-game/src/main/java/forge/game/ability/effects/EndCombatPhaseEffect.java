@@ -16,11 +16,14 @@ public class EndCombatPhaseEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        Game game = sa.getActivatingPlayer().getGame();
-        // Steps taken from gatherer's rulings on Time Stop.
-        // 1) All spells and abilities on the stack are exiled. This includes
-        // Time Stop, though it will continue to resolve. It also includes
-        // spells and abilities that can't be countered.
+        final Game game = sa.getActivatingPlayer().getGame();
+
+        // If an effect attempts to end the combat phase at any time that’s not a combat phase, nothing happens
+        if (game.getCombat() == null) {
+            return;
+        }
+
+        // 1) All spells and abilities on the stack are exiled.
         for (final Card c : Lists.newArrayList(game.getStackZone().getCards())) {
             game.getAction().exile(c, sa);
         }
@@ -28,15 +31,13 @@ public class EndCombatPhaseEffect extends SpellAbilityEffect {
         game.getStack().clearSimultaneousStack();
         game.getTriggerHandler().clearWaitingTriggers();
 
-        // 2) All attacking and blocking creatures are removed from combat.
-        //game.getPhaseHandler().endCombat();
-
-        // 3) State-based actions are checked. No player gets priority, and no
+        // 2) State-based actions are checked. No player gets priority, and no
         // triggered abilities are put onto the stack.
         game.getAction().checkStateEffects(true);
 
-        // 4) The current phase and/or step ends. The game skips straight to the
-        // cleanup step. The cleanup step happens in its entirety.
+        // 3) The current phase and step ends. The game skips straight to the postcombat main phase. As this happens,
+        // all attacking and blocking creatures are removed from combat and effects that last “until end of combat” expire.
+        game.getPhaseHandler().endCombat();
         game.getPhaseHandler().endCombatPhaseByEffect();
     }
 

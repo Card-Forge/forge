@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddKeyword$ Double Strike |
 K:Equip:1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddSVar$ EquipMe | Secondary$ True
 SVar:EquipMe:SVar:EquipMe:Multiple
+DeckHas:Ability$Token
 Oracle:When you cast this spell, copy it. (The copy becomes a token.)\nEquipped creature has double strike as long as two or more Equipment are attached to it.\nEquip {1} ({1}: Attach to target creature you control. Equip only as a sorcery.)

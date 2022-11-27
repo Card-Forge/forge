@@ -1,0 +1,9 @@
+Name:Rust Goliath
+ManaCost:10
+Types:Artifact Creature Construct
+PT:10/10
+K:Prototype:3 G G:3:5
+K:Reach
+K:Trample
+DeckHints:Color$Green
+Oracle:Prototype {3}{G}{G} — 3/5 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nReach, trample

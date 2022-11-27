@@ -1,0 +1,12 @@
+Name:Walking Bulwark
+ManaCost:1
+Types:Artifact Creature Golem
+PT:0/3
+K:Defender
+A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.withDefender | KW$ Haste | SorcerySpeed$ True | TgtPrompt$ Select target creature with defender | StackDescription$ SpellDescription | SubAbility$ DBEffect | SpellDescription$ Until end of turn, target creature with defender gains haste, can attack as though it didn't have defender, and assigns combat damage equal to its toughness rather than its power. Activate only as a sorcery.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Targeted | StaticAbilities$ CanAttack,CombatDamageToughness | ForgetOnMoved$ Battlefield
+SVar:CanAttack:Mode$ CanAttackDefender | ValidCard$ Card.IsRemembered | Description$ This creature gains haste, can attack as though it didn't have defender, and assigns combat damage equal to its toughness rather than its power.
+SVar:CombatDamageToughness:Mode$ CombatDamageToughness | ValidCard$ Card.IsRemembered | Secondary$ True | Description$ This creature gains haste, can attack as though it didn't have defender, and assigns combat damage equal to its toughness rather than its power.
+DeckHas:Keyword$Haste
+DeckHints:Keyword$Defender
+Oracle:Defender\n{2}: Until end of turn, target creature with defender gains haste, can attack as though it didn't have defender, and assigns combat damage equal to its toughness rather than its power. Activate only as a sorcery.

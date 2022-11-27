@@ -2,7 +2,7 @@ Name:Ritual of Subdual
 ManaCost:4 G G
 Types:Enchantment
 K:Cumulative upkeep:2
-R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Land | ValidAbility$ Activated.hasTapCost | ReplaceWith$ ProduceColorless | Description$ If a land is tapped for mana, it produces colorless mana instead of any other type.
+R:Event$ ProduceMana | ActiveZones$ Battlefield | ValidCard$ Land | ReplaceWith$ ProduceColorless | Description$ If a land is tapped for mana, it produces colorless mana instead of any other type.
 SVar:ProduceColorless:DB$ ReplaceMana | ReplaceType$ C
 AI:RemoveDeck:All
 AI:RemoveDeck:Random

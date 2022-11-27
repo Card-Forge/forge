@@ -1,0 +1,6 @@
+Name:A-Case the Joint
+ManaCost:4 U
+Types:Sorcery
+A:SP$ Draw | NumCards$ 3 | SubAbility$ DBLook | SpellDescription$ Draw three cards, then look at the top card of each player's library.
+SVar:DBLook:DB$ PeekAndReveal | Defined$ Player | NoReveal$ True
+Oracle:Draw three cards, then look at the top card of each player's library.

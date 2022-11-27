@@ -1,8 +1,11 @@
 package forge.interfaces;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 public interface IDeviceAdapter {
     boolean isConnectedToInternet();
@@ -15,4 +18,6 @@ public interface IDeviceAdapter {
     void restart();
     void exit();
     void convertToJPEG(InputStream input, OutputStream output) throws IOException;
+    Pair<Integer, Integer> getRealScreenSize(boolean real);
+    ArrayList<String> getGamepads();
 }

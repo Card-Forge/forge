@@ -1,0 +1,8 @@
+Name:Survivor of Korlis
+ManaCost:W
+Types:Creature Human Soldier
+PT:1/1
+K:First Strike
+A:AB$ Scry | Cost$ 1 W ExileFromGrave<1/CARDNAME> | ActivationZone$ Graveyard | ScryNum$ 2 | SpellDescription$ Scry 2.
+DeckHas:Ability$Graveyard
+Oracle:First strike\n{1}{W}, Exile Survivor of Korlis from your graveyard: Scry 2.

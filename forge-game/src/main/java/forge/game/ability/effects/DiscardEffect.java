@@ -119,7 +119,7 @@ public class DiscardEffect extends SpellAbilityEffect {
             }
         }
         return sb.toString();
-    } // discardStackDescription()
+    }
 
     @Override
     public void resolve(SpellAbility sa) {
@@ -314,5 +314,5 @@ public class DiscardEffect extends SpellAbilityEffect {
 
         // run trigger if something got milled
         table.triggerChangesZoneAll(game, sa);
-    } // discardResolve()
+    }
 }

@@ -1,0 +1,8 @@
+Name:Helbrute
+ManaCost:3 B R
+Types:Artifact Creature Astartes Dreadnought
+PT:5/4
+K:Haste
+SVar:AltCost:Cost$ 3 B R ExileFromGrave<1/Creature.Other/another creature card> | PrecostDesc$ Sarcophagus — | ActivationZone$ Graveyard | Description$ You may cast CARDNAME from your graveyard by exiling another creature card from your graveyard in addition to paying its other costs.
+DeckHas:Ability$Graveyard
+Oracle:Haste\nSarcophagus — You may cast Helbrute from your graveyard by exiling another creature card from your graveyard in addition to paying its other costs.

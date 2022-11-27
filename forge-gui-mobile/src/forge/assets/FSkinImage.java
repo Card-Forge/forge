@@ -1,7 +1,6 @@
 package forge.assets;
 
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.TextureLoader.TextureParameter;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -194,6 +193,7 @@ public enum FSkinImage implements FImage {
     COUNTERS3       (FSkinProp.IMG_COUNTERS3, SourceFile.ICONS),
     COUNTERS_MULTI  (FSkinProp.IMG_COUNTERS_MULTI, SourceFile.ICONS),
     ENERGY          (FSkinProp.IMG_ENERGY, SourceFile.ICONS),
+    TICKET          (FSkinProp.IMG_TICKET, SourceFile.ICONS),
 
     //Dock Icons
     SHORTCUTS    (FSkinProp.ICO_SHORTCUTS, SourceFile.ICONS),
@@ -390,6 +390,25 @@ public enum FSkinImage implements FImage {
     BTN_DISABLED_LEFT   (FSkinProp.IMG_BTN_DISABLED_LEFT, SourceFile.ICONS),
     BTN_DISABLED_CENTER (FSkinProp.IMG_BTN_DISABLED_CENTER, SourceFile.ICONS),
     BTN_DISABLED_RIGHT  (FSkinProp.IMG_BTN_DISABLED_RIGHT, SourceFile.ICONS),
+    //adv_buttons
+    ADV_BTN_UP_LEFT         (FSkinProp.IMG_ADV_BTN_UP_LEFT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_UP_CENTER       (FSkinProp.IMG_ADV_BTN_UP_CENTER, SourceFile.ADV_BUTTONS),
+    ADV_BTN_UP_RIGHT        (FSkinProp.IMG_ADV_BTN_UP_RIGHT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_OVER_LEFT       (FSkinProp.IMG_ADV_BTN_OVER_LEFT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_OVER_CENTER     (FSkinProp.IMG_ADV_BTN_OVER_CENTER, SourceFile.ADV_BUTTONS),
+    ADV_BTN_OVER_RIGHT      (FSkinProp.IMG_ADV_BTN_OVER_RIGHT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_DOWN_LEFT       (FSkinProp.IMG_ADV_BTN_DOWN_LEFT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_DOWN_CENTER     (FSkinProp.IMG_ADV_BTN_DOWN_CENTER, SourceFile.ADV_BUTTONS),
+    ADV_BTN_DOWN_RIGHT      (FSkinProp.IMG_ADV_BTN_DOWN_RIGHT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_FOCUS_LEFT      (FSkinProp.IMG_ADV_BTN_FOCUS_LEFT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_FOCUS_CENTER    (FSkinProp.IMG_ADV_BTN_FOCUS_CENTER, SourceFile.ADV_BUTTONS),
+    ADV_BTN_FOCUS_RIGHT     (FSkinProp.IMG_ADV_BTN_FOCUS_RIGHT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_TOGGLE_LEFT     (FSkinProp.IMG_ADV_BTN_TOGGLE_LEFT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_TOGGLE_CENTER   (FSkinProp.IMG_ADV_BTN_TOGGLE_CENTER, SourceFile.ADV_BUTTONS),
+    ADV_BTN_TOGGLE_RIGHT    (FSkinProp.IMG_ADV_BTN_TOGGLE_RIGHT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_DISABLED_LEFT   (FSkinProp.IMG_ADV_BTN_DISABLED_LEFT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_DISABLED_CENTER (FSkinProp.IMG_ADV_BTN_DISABLED_CENTER, SourceFile.ADV_BUTTONS),
+    ADV_BTN_DISABLED_RIGHT  (FSkinProp.IMG_ADV_BTN_DISABLED_RIGHT, SourceFile.ADV_BUTTONS),
     //Hdbuttons
     HDBTN_START_UP        (FSkinProp.IMG_HDBTN_START_UP, SourceFile.BTNSTART),
     HDBTN_START_OVER      (FSkinProp.IMG_HDBTN_START_OVER, SourceFile.BTNSTART),
@@ -500,6 +519,7 @@ public enum FSkinImage implements FImage {
         TROPHIES(ForgeConstants.SPRITE_TROPHIES_FILE),
         ABILITIES(ForgeConstants.SPRITE_ABILITY_FILE),
         BORDERS(ForgeConstants.SPRITE_BORDER_FILE),
+        ADV_BUTTONS(ForgeConstants.SPRITE_ADV_BUTTONS_FILE),
         BUTTONS(ForgeConstants.SPRITE_BUTTONS_FILE),
         BTNSTART(ForgeConstants.SPRITE_START_FILE),
         MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
@@ -543,13 +563,7 @@ public enum FSkinImage implements FImage {
         if (texture == null) {
             if (preferredFile.exists()) {
                 try {
-                    TextureParameter parameter = new TextureParameter();
-                    if (Forge.isTextureFilteringEnabled()) {
-                        parameter.genMipMaps = true;
-                        parameter.minFilter = Texture.TextureFilter.MipMapLinearLinear;
-                        parameter.magFilter = Texture.TextureFilter.Linear;
-                    }
-                    manager.load(preferredFile.path(), Texture.class, parameter);
+                    manager.load(preferredFile.path(), Texture.class, Forge.getAssets().getTextureFilter());
                     manager.finishLoadingAsset(preferredFile.path());
                     texture = manager.get(preferredFile.path(), Texture.class);
                 }
@@ -622,13 +636,7 @@ public enum FSkinImage implements FImage {
         if (texture == null) {
             if (defaultFile.exists()) {
                 try {
-                    TextureParameter parameter = new TextureParameter();
-                    if (Forge.isTextureFilteringEnabled()) {
-                        parameter.genMipMaps = true;
-                        parameter.minFilter = Texture.TextureFilter.MipMapLinearLinear;
-                        parameter.magFilter = Texture.TextureFilter.Linear;
-                    }
-                    manager.load(defaultFile.path(), Texture.class, parameter);
+                    manager.load(defaultFile.path(), Texture.class, Forge.getAssets().getTextureFilter());
                     manager.finishLoadingAsset(defaultFile.path());
                     texture = manager.get(defaultFile.path(), Texture.class);
                 }

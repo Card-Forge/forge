@@ -1,11 +1,5 @@
 package forge.localinstance.achievements;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import org.w3c.dom.Element;
-
 import forge.game.Game;
 import forge.game.player.Player;
 import forge.gui.GuiBase;
@@ -14,7 +8,13 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.skin.FSkinProp;
 import forge.localinstance.skin.ISkinImage;
 import forge.util.Lang;
+import forge.util.Localizer;
 import forge.util.XmlUtil;
+import org.w3c.dom.Element;
+
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public abstract class Achievement {
     private final String key, displayName, sharedDesc, commonDesc, uncommonDesc, rareDesc, mythicDesc;
@@ -181,25 +181,25 @@ public abstract class Achievement {
         String desc = null;
         if (earnedMythic()) {
             if (!hadEarnedMythic) {
-                type = "Mythic";
+                type = Localizer.getInstance().getMessage("lblMythic");
                 desc = mythicDesc;
             }
         }
         else if (earnedRare()) {
             if (!hadEarnedRare) {
-                type = "Rare";
+                type = Localizer.getInstance().getMessage("lblRare");
                 desc = rareDesc;
             }
         }
         else if (earnedUncommon()) {
             if (!hadEarnedUncommon) {
-                type = "Uncommon";
+                type = Localizer.getInstance().getMessage("lblUncommon");
                 desc = uncommonDesc;
             }
         }
         else if (earnedCommon()) {
             if (!hadEarnedCommon) {
-                type = "Common";
+                type = Localizer.getInstance().getMessage("lblCommon");
                 desc = commonDesc;
             }
         }
@@ -208,7 +208,7 @@ public abstract class Achievement {
             if (sharedDesc != null) {
                 desc = sharedDesc + " " + desc;
             }
-            GuiBase.getInterface().showImageDialog(image, displayName + " (" + type + ")\n" + desc, "Achievement Earned");
+            GuiBase.getInterface().showImageDialog(image, displayName + " (" + type + ")\n" + desc, Localizer.getInstance().getMessage("lblAchievementEarned"));
         }
         return value;
     }
@@ -254,10 +254,10 @@ public abstract class Achievement {
 
         String subTitle;
         if (displayNounBefore()) {
-            subTitle = "Best: " + getNoun() + " " + best;
+            subTitle = Localizer.getInstance().getMessage("lblBest") + ": " + getNoun() + " " + best;
         }
         else {
-            subTitle = "Best: " + best + " " + (pluralizeNoun() ? Lang.getPlural(getNoun()) : getNoun());
+            subTitle = Localizer.getInstance().getMessage("lblBest") + ": " + best + " " + (pluralizeNoun() ? Lang.getPlural(getNoun()) : getNoun());
         }
         if (includeTimestamp) {
             final String formattedTimestamp = getFormattedTimestamp();

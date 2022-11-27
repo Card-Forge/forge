@@ -326,13 +326,13 @@ public class FFileChooser extends FDialog {
             float offsetX = w / 8;
             float offsetY = h / 6;
 
-            g.drawLine(BACK_ICON_THICKNESS, FORE_COLOR, x + offsetX, y - offsetY, x - offsetX, y);
-            g.drawLine(BACK_ICON_THICKNESS, FORE_COLOR, x - offsetX, y, x + offsetX, y + offsetY);
+            g.drawLine(BACK_ICON_THICKNESS, getForeColor(), x + offsetX, y - offsetY, x - offsetX, y);
+            g.drawLine(BACK_ICON_THICKNESS, getForeColor(), x - offsetX, y, x + offsetX, y + offsetY);
 
             x += w * 0.3f;
 
-            g.drawLine(BACK_ICON_THICKNESS, FORE_COLOR, x + offsetX, y - offsetY, x - offsetX, y);
-            g.drawLine(BACK_ICON_THICKNESS, FORE_COLOR, x - offsetX, y, x + offsetX, y + offsetY);
+            g.drawLine(BACK_ICON_THICKNESS, getForeColor(), x + offsetX, y - offsetY, x - offsetX, y);
+            g.drawLine(BACK_ICON_THICKNESS, getForeColor(), x - offsetX, y, x + offsetX, y + offsetY);
         }
     }
 
@@ -411,18 +411,18 @@ public class FFileChooser extends FDialog {
         @Override
         public void drawOverlay(Graphics g) {
             super.drawOverlay(g);
-            g.drawRect(1.5f, FChoiceList.BORDER_COLOR, 0, 0, getWidth(), getHeight());
+            g.drawRect(1.5f, FChoiceList.getBorderColor(), 0, 0, getWidth(), getHeight());
         }
 
         @Override
         protected FSkinColor getItemFillColor(int index) {
             if (getItemAt(index).getAbsolutePath().equals(getSelectedFilename())) {
-                return FChoiceList.SEL_COLOR; //don't show SEL_COLOR if in multi-select mode
+                return FChoiceList.getSelColor(); //don't show SEL_COLOR if in multi-select mode
             }
             if (index % 2 == 1) {
-                return FChoiceList.ALT_ITEM_COLOR;
+                return FChoiceList.getAltItemColor();
             }
-            return FChoiceList.ITEM_COLOR;
+            return FChoiceList.getItemColor();
         }
 
         @Override

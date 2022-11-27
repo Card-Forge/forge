@@ -1,0 +1,8 @@
+Name:Illuminor Szeras
+ManaCost:2 B
+Types:Legendary Artifact Creature Necron
+PT:3/3
+A:AB$ Mana | Cost$ T Sac<1/Creature.Other> | Produced$ B | Amount$ X | PrecostDesc$ Secrets of the Soul — | SpellDescription$ Add an amount of {B} equal to the sacrificed creature's mana value.
+SVar:X:Sacrificed$CardManaCost
+DeckHas:Ability$Sacrifice
+Oracle:Secrets of the Soul — {T}, Sacrifice another creature: Add an amount of {B} equal to the sacrificed creature's mana value.

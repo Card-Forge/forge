@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
@@ -14,6 +15,7 @@ import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
+import forge.util.collect.FCollectionView;
 
 public class TwoPilesEffect extends SpellAbilityEffect {
 
@@ -58,12 +60,18 @@ public class TwoPilesEffect extends SpellAbilityEffect {
 
         Player separator = card.getController();
         if (sa.hasParam("Separator")) {
-            separator = AbilityUtils.getDefinedPlayers(card, sa.getParam("Separator"), sa).get(0);
+            final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(card, sa.getParam("Separator"), sa);
+            if (!choosers.isEmpty()) {
+                separator = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, null, null);
+            }
         }
 
         Player chooser = tgtPlayers.get(0);
         if (sa.hasParam("Chooser")) {
-            chooser = AbilityUtils.getDefinedPlayers(card, sa.getParam("Chooser"), sa).get(0);
+            final FCollectionView<Player> choosers = AbilityUtils.getDefinedPlayers(card, sa.getParam("Chooser"), sa);
+            if (!choosers.isEmpty()) {
+                chooser = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(choosers, null, sa, Localizer.getInstance().getMessage("lblChooser") + ":", false, null, null);
+            }
         }
 
         for (final Player p : tgtPlayers) {
@@ -89,12 +97,18 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                     title = Localizer.getInstance().getMessage("lblDivideCardIntoTwoPiles");
                 }
 
-                card.clearRemembered();
-
                 // first, separate the cards into piles
-                final CardCollectionView pile1 = separator.getController().chooseCardsForEffect(pool, sa, title, 0, size, false, null);
-                final CardCollection pile2 = new CardCollection(pool);
-                pile2.removeAll(pile1);
+                final CardCollectionView pile1;
+                final CardCollection pile2;
+                if (sa.hasParam("DefinedPiles")) {
+                    final String[] def = sa.getParam("DefinedPiles").split(",", 2);
+                    pile1 = AbilityUtils.getDefinedCards(card, def[0], sa);
+                    pile2 = AbilityUtils.getDefinedCards(card, def[1], sa);
+                } else {
+                    pile1 = separator.getController().chooseCardsForEffect(pool, sa, title, 0, size, false, null);
+                    pile2 = new CardCollection(pool);
+                    pile2.removeAll(pile1);
+                }
 
                 if (isLeftRightPile) {
                     pile1WasChosen = true;
@@ -140,27 +154,43 @@ public class TwoPilesEffect extends SpellAbilityEffect {
                 }
 
 
+                if (sa.hasParam("RememberChosen")) {
+                    card.addRemembered(chosenPile);
+                }
+
                 // take action on the chosen pile
                 if (sa.hasParam("ChosenPile")) {
+                    List<Object> tempRemembered = Lists.newArrayList(card.getRemembered());
+                    card.removeRemembered(tempRemembered);
                     card.addRemembered(chosenPile);
 
                     SpellAbility sub = sa.getAdditionalAbility("ChosenPile");
                     if (sub != null) {
                         AbilityUtils.resolve(sub);
                     }
+                    card.removeRemembered(chosenPile);
+                    card.addRemembered(tempRemembered);
                 }
 
                 // take action on the unchosen pile
                 if (sa.hasParam("UnchosenPile")) {
-                    card.clearRemembered();
+                    List<Object> tempRemembered = Lists.newArrayList(card.getRemembered());
+                    card.removeRemembered(tempRemembered);
                     card.addRemembered(unchosenPile);
 
                     SpellAbility sub = sa.getAdditionalAbility("UnchosenPile");
                     if (sub != null) {
                         AbilityUtils.resolve(sub);
                     }
+                    card.removeRemembered(unchosenPile);
+                    card.addRemembered(tempRemembered);
                 }
             }
         }
-    } // end twoPiles resolve
+        if (!sa.hasParam("KeepRemembered")) {
+            // prior to addition of "DefinedPiles" param, TwoPilesEffect cleared remembered objects in the
+            // Chosen/Unchosen subability resolutions, so this preserves that
+            card.clearRemembered();
+        }
+    }
 }

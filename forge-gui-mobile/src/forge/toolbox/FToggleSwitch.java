@@ -2,6 +2,7 @@ package forge.toolbox;
 
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -11,10 +12,24 @@ import forge.toolbox.FEvent.FEventType;
 import forge.util.Utils;
 
 public class FToggleSwitch extends FDisplayObject {
-    private static final FSkinColor ACTIVE_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
-    private static final FSkinColor PRESSED_COLOR = ACTIVE_COLOR.stepColor(-30);
-    private static final FSkinColor INACTIVE_COLOR = FSkinColor.get(Colors.CLR_INACTIVE);
-    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static FSkinColor getActiveColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_ACTIVE);
+        return FSkinColor.get(Colors.CLR_ACTIVE);
+    }
+    private static FSkinColor getPressedColor() {
+        return getActiveColor().stepColor(-30);
+    }
+    private static FSkinColor getInactiveColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_INACTIVE);
+        return FSkinColor.get(Colors.CLR_INACTIVE);
+    }
+    private static FSkinColor getForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
     private static final float BORDER_THICKNESS = Utils.scale(1);
     private static final float INSETS = Utils.scale(2);
     private static final float PADDING = Utils.scale(3);
@@ -147,8 +162,8 @@ public class FToggleSwitch extends FDisplayObject {
         float w = getWidth() - 2 * x;
         float h = getHeight() - 2 * y;
 
-        g.fillRect(INACTIVE_COLOR, x, y, w, h);
-        g.drawRect(BORDER_THICKNESS, FORE_COLOR, x, y, w, h);
+        g.fillRect(getInactiveColor(), x, y, w, h);
+        g.drawRect(BORDER_THICKNESS, getForeColor(), x, y, w, h);
 
         final String text;
         float switchWidth = w - h + PADDING;
@@ -163,10 +178,10 @@ public class FToggleSwitch extends FDisplayObject {
         y += INSETS;
         h -= 2 * INSETS;
         w = switchWidth - 2 * INSETS;
-        g.fillRect(pressed ? PRESSED_COLOR : ACTIVE_COLOR, x, y, w, h);
+        g.fillRect(pressed ? getPressedColor() : getActiveColor(), x, y, w, h);
 
         x += PADDING;
         w -= 2 * PADDING;
-        g.drawText(text, font, FORE_COLOR, x, y, w, h, false, Align.center, true);
+        g.drawText(text, font, getForeColor(), x, y, w, h, false, Align.center, true);
     }
 }

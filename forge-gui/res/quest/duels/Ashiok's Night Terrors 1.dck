@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Ashiok's Night Terrors 1
+Title=Ashiok, Nightmare Weaver
+Difficulty=easy
+Description=UB mill deck with Nightmares and Ashiok planeswalkers
+Icon=Ashiok, Nightmare Weaver 1.jpg
+Deck Type=constructed
+[Main]
+1 Ashiok's Erasure
+2 Ashiok's Skulker
+1 Ashiok, Dream Render
+1 Ashiok, Nightmare Muse
+1 Ashiok, Sculptor of Fears
+1 Avatar of Woe
+3 Baleful Strix
+2 Belltower Sphinx
+3 Coerced Confession
+2 Dinrova Horror
+2 Drowned Catacomb
+2 Faceless Butcher
+2 Foul Watcher
+1 Ghastlord of Fugue
+2 Glimpse the Unthinkable
+7 Island
+3 Jwar Isle Refuge
+2 Mind Funeral
+1 Mind Grind
+2 Profane Tutor
+3 Psychic Strike
+2 Riddlekeeper
+2 Screaming Swarm
+7 Swamp
+2 Swimmer in Nightmares
+3 Tainted Isle
+[Sideboard]

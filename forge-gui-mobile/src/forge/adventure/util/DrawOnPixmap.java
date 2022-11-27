@@ -24,8 +24,8 @@ public abstract class DrawOnPixmap {
             textureData.prepare();
         }
         on.drawPixmap(textureData.consumePixmap(), x, y, from.getRegionX(), from.getRegionY(), from.getRegionWidth(), from.getRegionHeight());
-
     }
+
 
     public static void drawText(Pixmap drawingMap, String itemText, int x, int y, float width, boolean bigText, Color color) {
         //used for big numbers on Gold/Life for reward...
@@ -54,6 +54,8 @@ public abstract class DrawOnPixmap {
         frameBuffer.end();
         texture.dispose();
         batch.dispose();
+        if (bigText) //don't know why this is needed to circumvent bug getting default size for the same pixelfont
+            Controls.getBitmapFont("default");
 
     }
 }

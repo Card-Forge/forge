@@ -211,7 +211,7 @@ public class FDeckImportDialog extends FDialog {
         super.drawOverlay(g);
         if (showOptions) {
             float y = txtInput.getTop() - FOptionPane.PADDING;
-            g.drawLine(BORDER_THICKNESS, BORDER_COLOR, 0, y, getWidth(), y);
+            g.drawLine(BORDER_THICKNESS, getBorderColor(), 0, y, getWidth(), y);
         }
     }
 

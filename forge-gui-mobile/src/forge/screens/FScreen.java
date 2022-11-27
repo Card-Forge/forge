@@ -3,6 +3,7 @@ package forge.screens;
 import java.util.List;
 
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
 
@@ -26,7 +27,11 @@ import forge.util.Callback;
 import forge.util.Utils;
 
 public abstract class FScreen extends FContainer {
-    public static final FSkinColor TEXTURE_OVERLAY_COLOR = FSkinColor.get(Colors.CLR_THEME);
+    public static FSkinColor getTextureOverlayColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_THEME);
+        return FSkinColor.get(Colors.CLR_THEME);
+    }
 
     private final Header header;
 
@@ -170,14 +175,22 @@ public abstract class FScreen extends FContainer {
         }
         float w = getWidth();
         float h = getHeight();
-        g.drawImage(FSkinTexture.BG_TEXTURE, 0, 0, w, h);
-        g.fillRect(TEXTURE_OVERLAY_COLOR, 0, 0, w, h);
+        g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, 0, 0, w, h);
+        g.fillRect(getTextureOverlayColor(), 0, 0, w, h);
     }
 
     public static abstract class Header extends FContainer {
-        public static final FSkinColor BTN_PRESSED_COLOR = TEXTURE_OVERLAY_COLOR.alphaColor(1f);
-        public static final FSkinColor LINE_COLOR = BTN_PRESSED_COLOR.stepColor(-40);
-        public static final FSkinColor BACK_COLOR = BTN_PRESSED_COLOR.stepColor(-80);
+        public static FSkinColor getBtnPressedColor() {
+            if (getTextureOverlayColor() == null)
+                return FSkinColor.getStandardColor(Color.DARK_GRAY);
+            return getTextureOverlayColor().alphaColor(1f);
+        }
+        public static FSkinColor getLineColor() {
+            return getBtnPressedColor().stepColor(-40);
+        }
+        public static FSkinColor getBackColor() {
+            return getBtnPressedColor().stepColor(-80);
+        }
         public static final float LINE_THICKNESS = Utils.scale(1);
 
         public abstract float getPreferredHeight();
@@ -196,7 +209,7 @@ public abstract class FScreen extends FContainer {
         protected final FLabel btnBack, lblCaption;
 
         public DefaultHeader(String headerCaption) {
-            btnBack = add(new FLabel.Builder().icon(new BackIcon(HEIGHT, HEIGHT)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(new FEventHandler() {
+            btnBack = add(new FLabel.Builder().icon(new BackIcon(HEIGHT, HEIGHT)).pressedColor(getBtnPressedColor()).align(Align.center).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     Forge.back();
@@ -217,18 +230,18 @@ public abstract class FScreen extends FContainer {
 
         @Override
         public void drawBackground(Graphics g) {
-            g.fillRect(BACK_COLOR, 0, 0, getWidth(), getHeight());
+            g.fillRect(getBackColor(), 0, 0, getWidth(), getHeight());
         }
 
         @Override
         public void drawOverlay(Graphics g) {
             if (Forge.isLandscapeMode() && getWidth() < Forge.getCurrentScreen().getWidth()) {
                 //in landscape mode, draw left border for sidebar if needed
-                g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, 0, 0, getHeight());
+                g.drawLine(LINE_THICKNESS, getLineColor(), 0, 0, 0, getHeight());
                 return;
             }
             float y = HEIGHT - LINE_THICKNESS / 2;
-            g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, y, getWidth(), y);
+            g.drawLine(LINE_THICKNESS, getLineColor(), 0, y, getWidth(), y);
         }
 
         @Override
@@ -244,7 +257,7 @@ public abstract class FScreen extends FContainer {
         public MenuHeader(String headerCaption, FPopupMenu menu0) {
             super(headerCaption);
             menu = menu0;
-            btnMenu = add(new FLabel.Builder().icon(new MenuIcon(HEIGHT, HEIGHT)).pressedColor(BTN_PRESSED_COLOR).align(Align.center).command(new FEventHandler() {
+            btnMenu = add(new FLabel.Builder().icon(new MenuIcon(HEIGHT, HEIGHT)).pressedColor(getBtnPressedColor()).align(Align.center).command(new FEventHandler() {
                 @Override
                 public void handleEvent(FEvent e) {
                     menu.show(btnMenu, 0, HEIGHT);
@@ -256,7 +269,7 @@ public abstract class FScreen extends FContainer {
         public void drawOverlay(Graphics g) {
             if (Forge.isLandscapeMode() && displaySidebarForLandscapeMode()) {
                 //in landscape mode, draw left border for header
-                g.drawLine(LINE_THICKNESS, LINE_COLOR, 0, 0, 0, getHeight());
+                g.drawLine(LINE_THICKNESS, getLineColor(), 0, 0, 0, getHeight());
                 return;
             }
             super.drawOverlay(g);
@@ -306,7 +319,11 @@ public abstract class FScreen extends FContainer {
 
     protected static class BackIcon implements FImage {
         private static final float THICKNESS = Utils.scale(3);
-        private static final FSkinColor COLOR = FSkinColor.get(Colors.CLR_TEXT);
+        private static FSkinColor getColor() {
+            if (Forge.isMobileAdventureMode)
+                return FSkinColor.get(Colors.ADV_CLR_TEXT);
+            return FSkinColor.get(Colors.CLR_TEXT);
+        }
 
         private final float width, height;
         public BackIcon(float width0, float height0) {
@@ -331,13 +348,17 @@ public abstract class FScreen extends FContainer {
             float offsetX = h / 8;
             float offsetY = w / 4;
 
-            g.drawLine(THICKNESS, COLOR, xMid + offsetX, yMid - offsetY, xMid - offsetX, yMid + 1);
-            g.drawLine(THICKNESS, COLOR, xMid - offsetX, yMid - 1, xMid + offsetX, yMid + offsetY);
+            g.drawLine(THICKNESS, getColor(), xMid + offsetX, yMid - offsetY, xMid - offsetX, yMid + 1);
+            g.drawLine(THICKNESS, getColor(), xMid - offsetX, yMid - 1, xMid + offsetX, yMid + offsetY);
         }
     }
 
     protected static class MenuIcon implements FImage {
-        private static final FSkinColor COLOR = FSkinColor.get(Colors.CLR_TEXT);
+        private static FSkinColor getColor() {
+            if (Forge.isMobileAdventureMode)
+                return FSkinColor.get(Colors.ADV_CLR_TEXT);
+            return FSkinColor.get(Colors.CLR_TEXT);
+        }
 
         private final float width, height;
         public MenuIcon(float width0, float height0) {
@@ -361,19 +382,19 @@ public abstract class FScreen extends FContainer {
             float delta = Math.round(thickness * 1.75f);
             y += (h - 2 * delta - thickness) / 2;
 
-            g.fillRect(COLOR, x, y, thickness, thickness);
+            g.fillRect(getColor(), x, y, thickness, thickness);
             y += delta;
-            g.fillRect(COLOR, x, y, thickness, thickness);
+            g.fillRect(getColor(), x, y, thickness, thickness);
             y += delta;
-            g.fillRect(COLOR, x, y, thickness, thickness);
+            g.fillRect(getColor(), x, y, thickness, thickness);
             x += delta;
             y -= 2 * delta;
             w -= delta;
-            g.fillRect(COLOR, x, y, w, thickness);
+            g.fillRect(getColor(), x, y, w, thickness);
             y += delta;
-            g.fillRect(COLOR, x, y, w, thickness);
+            g.fillRect(getColor(), x, y, w, thickness);
             y += delta;
-            g.fillRect(COLOR, x, y, w, thickness);
+            g.fillRect(getColor(), x, y, w, thickness);
         }
     }
 

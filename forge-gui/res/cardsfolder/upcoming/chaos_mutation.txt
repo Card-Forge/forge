@@ -1,0 +1,9 @@
+Name:Chaos Mutation
+ManaCost:3 U R
+Types:Instant
+A:SP$ ChangeZone | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature | TgtPrompt$ Select any number of target creatures controlled by different players | TargetMin$ 0 | TargetMax$ MaxTgt | TargetsWithDifferentControllers$ True | SubAbility$ DBRepeatEach | RememberLKI$ True | SpellDescription$ Exile any number of target creatures controlled by different players.
+SVar:DBRepeatEach:DB$ RepeatEach | DefinedCards$ DirectRemembered | Zone$ Exile | UseImprinted$ True | RepeatSubAbility$ DBDig | SubAbility$ DBCleanup | SpellDescription$ For each creature exiled this way, its controller reveals cards from the top of their library until they reveal a creature card, puts that card onto the battlefield, then puts the rest on the bottom of their library in a random order.
+SVar:DBDig:DB$ DigUntil | Defined$ ImprintedController | Amount$ 1 | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1 | RevealRandomOrder$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:MaxTgt:PlayerCountPlayers$Amount
+Oracle:Exile any number of target creatures controlled by different players. For each creature exiled this way, its controller reveals cards from the top of their library until they reveal a creature card, puts that card onto the battlefield, then puts the rest on the bottom of their library in a random order.

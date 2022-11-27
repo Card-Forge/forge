@@ -1,0 +1,18 @@
+[metadata]
+Name:Possibility Storm - Dominaria United #02
+URL:https://i2.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/09/latest-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Uncommon
+Description:Win this turn. Assume any cards you could put into your hand from your library are not relevant to the solution. (No, not even basic lands!) Remember that your solution must satisfy all possible blocking decisions. Good luck!
+[state]
+humanlife=20
+ailife=9
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Dramatist's Puppet;Shivan Devastator;Astor, Bearer of Blades;Vanquisher's Axe
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Bronzeplate Boar;Karn, Living Legacy|Counters:LOYALTY=6;Towashi Songshaper;Honeymoon Hearse;Plains;Plains;Mountain;Mountain
+aibattlefield=Duelcraft Trainer;Sky Crier
+humanprecast=Karn, Living Legacy:CustomScript:DB$ Token | TokenAmount$ 3 | TokenScript$ c_a_powerstone

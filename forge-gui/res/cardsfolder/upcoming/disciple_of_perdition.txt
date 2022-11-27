@@ -1,0 +1,12 @@
+Name:Disciple of Perdition
+ManaCost:1 B
+Types:Creature Human Warlock
+PT:1/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ When CARDNAME dies, ABILITY
+SVar:TrigCharm:DB$ Charm | MinCharmNum$ 1 | CharmNum$ X | Choices$ DBDraw,DBExile | AdditionalDescription$ . If you have exactly 13 life, you may choose both.
+SVar:DBDraw:DB$ Draw | SubAbility$ DBLoseLife | SpellDescription$ You draw a card and lose 1 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1 | StackDescription$ None
+SVar:X:Count$Compare Count$YourLifeTotal EQ13.2.1
+SVar:DBExile:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player | ChangeType$ Card | SpellDescription$ Exile target player's graveyard. That player loses 1 life.
+SVar:DBLoseLife2:DB$ LoseLife | Defined$ Targeted | LifeAmount$ 1 | StackDescription$ None
+Oracle:When Disciple of Perdition dies, choose one. If you have exactly 13 life, you may choose both.\n• You draw a card and lose 1 life.\n• Exile target player's graveyard. That player loses 1 life.

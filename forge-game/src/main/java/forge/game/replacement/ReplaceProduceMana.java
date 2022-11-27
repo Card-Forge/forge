@@ -40,7 +40,7 @@ public class ReplaceProduceMana extends ReplacementEffect {
         if (!matchesValidParam("ValidActivator", runParams.get(AbilityKey.Activator))) {
             return false;
         }
-        if (!matchesValidParam("ValidAbility", runParams.get(AbilityKey.AbilityMana))) {
+        if (!matchesValid(runParams.get(AbilityKey.AbilityMana), getParamOrDefault("ValidSA", "Activated.hasTapCost+ManaAbility").split(","), getHostCard())) {
             return false;
         }
 

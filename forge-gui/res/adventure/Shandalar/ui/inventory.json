@@ -5,7 +5,7 @@
   "elements": [
     {
       "type": "Image",
-      "image": "ui/title_bg.png",
+      "name": "lastScreen",
       "width": 480,
       "height": 270
     },
@@ -88,7 +88,8 @@
     {
       "type": "TextButton",
       "name": "return",
-      "text": "Back",
+      "text": "tr(lblBack)",
+      "binding": "Back",
       "width": 60,
       "height": 30,
       "x": 400,
@@ -98,6 +99,7 @@
       "type": "TextButton",
       "name": "equip",
       "text": "Equip",
+      "binding": "Equip",
       "width": 60,
       "height": 30,
       "x": 320,
@@ -105,11 +107,22 @@
     },
     {
       "type": "TextButton",
-      "name": "delete",
-      "text": "Discard",
+      "name": "use",
+      "text": "Use",
+      "binding": "Use",
       "width": 60,
       "height": 30,
       "x": 240,
+      "y": 222
+    },
+    {
+      "type": "TextButton",
+      "name": "delete",
+      "text": "Discard",
+      "binding": "Status",
+      "width": 60,
+      "height": 30,
+      "x": 160,
       "y": 222
     }
   ]

@@ -136,6 +136,9 @@ public class ProtectEffect extends SpellAbilityEffect {
             if (!tgtC.isInPlay()) {
                 continue;
             }
+            if (tgtC.isPhasedOut()) {
+                continue;
+            }
 
             // if this is a target, make sure we can still target now
             if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {

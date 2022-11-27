@@ -8,7 +8,7 @@ SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ C
 SVar:TrigCleanup:Mode$ ChangesZone | ValidCard$ Card.ChosenCard | Origin$ Exile | Destination$ Any | TriggerZones$ Command | Execute$ DBExileSelf | Static$ True
 SVar:DBExileSelf:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:{3}, {T}: Target player exiles a card from their hand. Activate only as a sorcery.\n{1}: Choose a card exiled with Muse Vessel. You may play that card this turn.

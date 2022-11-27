@@ -29,25 +29,12 @@ public class CounterEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
         final List<SpellAbility> sas;
 
-        if (sa.hasParam("AllType")) {
-            boolean countersSpells = sa.getParam("AllType").contains("Spell");
-            boolean countersActivated = sa.getParam("AllType").contains("Activated");
-            boolean countersTriggers = sa.getParam("AllType").contains("Triggered");
-
+        if (sa.hasParam("AllValid")) {
             sas = Lists.newArrayList();
             for (SpellAbilityStackInstance si : game.getStack()) {
                 SpellAbility spell = si.getSpellAbility(true);
-                if (spell.isSpell() && !countersSpells) {
+                if (!spell.isValid(sa.getParam("AllValid").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                     continue;
-                } else if (spell.isActivatedAbility() && !countersActivated) {
-                    continue;
-                } else if (spell.isTrigger() && !countersTriggers) {
-                    continue;
-                }
-                if (sa.hasParam("AllValid")) {
-                    if (!spell.getHostCard().isValid(sa.getParam("AllValid"), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
-                        continue;
-                    }
                 }
                 sas.add(spell);
             }
@@ -86,25 +73,12 @@ public class CounterEffect extends SpellAbilityEffect {
         // still on the stack
         final List<SpellAbility> sas;
 
-        if (sa.hasParam("AllType")) {
-            boolean countersSpells = sa.getParam("AllType").contains("Spell");
-            boolean countersActivated = sa.getParam("AllType").contains("Activated");
-            boolean countersTriggers = sa.getParam("AllType").contains("Triggered");
-
+        if (sa.hasParam("AllValid")) {
             sas = Lists.newArrayList();
             for (SpellAbilityStackInstance si : game.getStack()) {
                 SpellAbility spell = si.getSpellAbility(true);
-                if (spell.isSpell() && !countersSpells) {
+                if (!spell.isValid(sa.getParam("AllValid").split(","), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
                     continue;
-                } else if (spell.isActivatedAbility() && !countersActivated) {
-                    continue;
-                } else if (spell.isTrigger() && !countersTriggers) {
-                    continue;
-                }
-                if (sa.hasParam("AllValid")) {
-                    if (!spell.getHostCard().isValid(sa.getParam("AllValid"), sa.getActivatingPlayer(), sa.getHostCard(), sa)) {
-                        continue;
-                    }
                 }
                 sas.add(spell);
             }
@@ -146,7 +120,15 @@ public class CounterEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            removeFromStack(tgtSA, sa, si, table);
+            if (sa.hasParam("RememberSplicedOntoCounteredSpell")) {
+                if (tgtSA.getSplicedCards() != null) {
+                    sa.getHostCard().addRemembered(tgtSA.getSplicedCards());
+                }
+            }
+
+            if (!removeFromStack(tgtSA, sa, si, table)) {
+                continue;
+            }
 
             // Destroy Permanent may be able to be turned into a SubAbility
             if (tgtSA.isAbility() && sa.hasParam("DestroyPermanent")) {
@@ -155,12 +137,6 @@ public class CounterEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("RememberCountered")) {
                 sa.getHostCard().addRemembered(tgtSACard);
-            }
-
-            if (sa.hasParam("RememberSplicedOntoCounteredSpell")) {
-                if (tgtSA.getSplicedCards() != null) {
-                    sa.getHostCard().addRemembered(tgtSA.getSplicedCards());
-                }
             }
         }
         table.triggerChangesZoneAll(game, sa);
@@ -295,7 +271,7 @@ public class CounterEffect extends SpellAbilityEffect {
      *            a {@link forge.game.spellability.SpellAbilityStackInstance}
      *            object.
      */
-    private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, CardZoneTable triggerList) {
+    private static boolean removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, CardZoneTable triggerList) {
         final Game game = tgtSA.getActivatingPlayer().getGame();
         Card movedCard = null;
         final Card c = tgtSA.getHostCard();
@@ -306,7 +282,7 @@ public class CounterEffect extends SpellAbilityEffect {
         repParams.put(AbilityKey.TgtSA, tgtSA);
         repParams.put(AbilityKey.Cause, srcSA.getHostCard());
         if (game.getReplacementHandler().run(ReplacementType.Counter, repParams) != ReplacementResult.NotReplaced) {
-            return;
+            return false;
         }
         game.getStack().remove(si);
 
@@ -366,6 +342,7 @@ public class CounterEffect extends SpellAbilityEffect {
         if (originZone != null && movedCard != null) {
             triggerList.put(originZone.getZoneType(), movedCard.getZone().getZoneType(), movedCard);
         }
+        return true;
     }
 
 }

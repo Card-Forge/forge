@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Firja's Retribution
+OpponentName=The Retribution
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Firja's Retribution
+Difficulty=medium
+Description=She is both shepherd and reaper, and her judgment is final.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Firja's Retribution
+[Main]
+30 Firja's Retribution|KHM|1
+30 Snowfield Sinkhole|KHM|1

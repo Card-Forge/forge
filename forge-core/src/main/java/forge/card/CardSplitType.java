@@ -5,12 +5,14 @@ import forge.card.CardFace.FaceSelectionMethod;
 public enum CardSplitType
 {
     None(FaceSelectionMethod.USE_PRIMARY_FACE, null),
+    Convert(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Converted),
     Transform(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Transformed),
     Meld(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Meld),
     Split(FaceSelectionMethod.COMBINE, CardStateName.RightSplit),
     Flip(FaceSelectionMethod.USE_PRIMARY_FACE, CardStateName.Flipped),
     Adventure(FaceSelectionMethod.USE_PRIMARY_FACE, CardStateName.Adventure),
-    Modal(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Modal);
+    Modal(FaceSelectionMethod.USE_ACTIVE_FACE, CardStateName.Modal),
+    Specialize(FaceSelectionMethod.USE_ACTIVE_FACE, null);
 
     CardSplitType(FaceSelectionMethod calcMode, CardStateName stateName) {
         method = calcMode;

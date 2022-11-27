@@ -11,4 +11,5 @@ S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | ValidBlocker$ Creature.Red 
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:Z GE3
 SVar:Z:Count$Valid Island.YouCtrl+inZoneBattlefield
+DeckHas:Ability$Sacrifice
 Oracle:At the beginning of your upkeep, unless you sacrifice an Island, sacrifice Elder Spawn and it deals 6 damage to you.\nElder Spawn can't be blocked by red creatures.

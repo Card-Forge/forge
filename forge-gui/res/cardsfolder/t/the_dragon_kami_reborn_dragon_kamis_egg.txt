@@ -19,7 +19,7 @@ Colors:green
 Types:Enchantment Creature Egg
 PT:0/1
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self,Dragon.YouCtrl | Execute$ TrigPlay | TriggerDescription$ Whenever CARDNAME or a Dragon you control dies, you may cast a creature spell from among cards you own in exile with hatching counters on them without paying its mana cost.
-SVar:TrigPlay:DB$ Play | Valid$ Creature.YouOwn+counters_GE1_HATCHING | ValidZone$ Exile | Controller$ You | WithoutManaCost$ True | Optional$ True
+SVar:TrigPlay:DB$ Play | Valid$ Creature.YouOwn+counters_GE1_HATCHING | ValidSA$ Spell.Creature | ValidZone$ Exile | Controller$ You | WithoutManaCost$ True | Optional$ True
 SVar:SacMe:5
 DeckHints:Type$Dragon
 Oracle:Whenever Dragon-Kami's Egg or a Dragon you control dies, you may cast a creature spell from among cards you own in exile with hatching counters on them without paying its mana cost.

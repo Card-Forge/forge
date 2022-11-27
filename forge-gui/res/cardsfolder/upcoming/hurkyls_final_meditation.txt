@@ -1,0 +1,7 @@
+Name:Hurkyl's Final Meditation
+ManaCost:4 U U U
+Types:Instant
+S:Mode$ RaiseCost | Affected$ Card.Self | Type$ Spell | Condition$ NotPlayerTurn | EffectZone$ All | Amount$ 3 | Description$ As long as it's not your turn, this spell costs {3} more to cast.
+A:SP$ ChangeZoneAll | ChangeType$ Permanent.nonLand | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBEndTurn | SpellDescription$ Return all nonland permanents to their owners' hands.
+SVar:DBEndTurn:DB$ EndTurn | SpellDescription$ End the turn. (Exile all spells and abilities from the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)
+Oracle:As long as it's not your turn, this spell costs {3} more to cast.\nReturn all nonland permanents to their owners' hands. End the turn. (Exile all spells and abilities from the stack, including this card. The player whose turn it is discards down to their maximum hand size. Damage wears off, and "this turn" and "until end of turn" effects end.)

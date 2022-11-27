@@ -1,0 +1,11 @@
+Name:Evangel of Synthesis
+ManaCost:U B
+Types:Creature Phyrexian Human Cleric
+PT:2/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card, then discard a card.
+SVar:TrigDraw:DB$ Draw | SubAbility$ DBDiscard
+SVar:DBDiscard:DB$ Discard | Mode$ TgtChoose
+S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ X | SVarCompare$ GE2 | AddPower$ 1 | AddKeyword$ Menace | Description$ As long as you've drawn two or more cards this turn, CARDNAME gets +1/+0 and has menace.
+SVar:X:Count$YouDrewThisTurn
+DeckHas:Ability$Discard & Keyword$Menace
+Oracle:When Evangel of Synthesis enters the battlefield, draw a card, then discard a card.\nAs long as you've drawn two or more cards this turn, Evangel of Synthesis gets +1/+0 and has menace.

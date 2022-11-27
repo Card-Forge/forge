@@ -59,6 +59,11 @@ public class ForgeScript {
                 return false;
             return property.startsWith("non") != colors.isMulticolor();
 
+        } else if (property.contains("AllColors")) {
+            if (property.endsWith("Source") && isColorlessSource)
+                return false;
+            return property.startsWith("non") != colors.isAllColors();
+
         } else if (property.contains("MonoColor")) { // ... Card is monocolored
             if (property.endsWith("Source") && isColorlessSource)
                 return false;
@@ -75,6 +80,22 @@ public class ForgeScript {
             return source.hasChosenColor()
                     && colors.hasAnyColor(ColorSet.fromNames(source.getChosenColors()).getColor());
 
+        } else if (property.equals("AssociatedWithChosenColor")) {
+            final String color = source.getChosenColor();
+            switch (color) {
+                case "white":
+                    return cardState.getTypeWithChanges().getLandTypes().contains("Plains");
+                case "blue":
+                    return cardState.getTypeWithChanges().getLandTypes().contains("Island");
+                case "black":
+                    return cardState.getTypeWithChanges().getLandTypes().contains("Swamp");
+                case "red":
+                    return cardState.getTypeWithChanges().getLandTypes().contains("Mountain");
+                case "green":
+                    return cardState.getTypeWithChanges().getLandTypes().contains("Forest");
+                default:
+                    return false;
+            }
         } else if (property.startsWith("non")) {
             // ... Other Card types
             return !cardState.getTypeWithChanges().hasStringType(property.substring(3));
@@ -95,6 +116,15 @@ public class ForgeScript {
             return cardState.getTypeWithChanges().hasStringType(source.getChosenType2());
         } else if (property.equals("IsNotChosenType2")) {
             return !cardState.getTypeWithChanges().hasStringType(source.getChosenType2());
+        } else if (property.equals("NotedType")) {
+            boolean found = false;
+            for (String s : source.getNotedTypes()) {
+                if (cardState.getTypeWithChanges().hasStringType(s)) {
+                    found = true;
+                    break;
+                }
+            }
+            return found;
         } else if (property.startsWith("HasSubtype")) {
             final String subType = property.substring(11);
             return cardState.getTypeWithChanges().hasSubtype(subType);
@@ -155,6 +185,10 @@ public class ForgeScript {
             return !sa.isManaAbility();
         } else if (property.equals("withoutXCost")) {
             return !sa.costHasManaX();
+        } else if (property.startsWith("XCost")) {
+            String comparator = property.substring(5, 7);
+            int y = AbilityUtils.calculateAmount(sa.getHostCard(), property.substring(7), sa);
+            return Expressions.compare(sa.getXManaCostPaid(), comparator, y);
         } else if (property.equals("hasTapCost")) {
             Cost cost = sa.getPayCosts();
             return cost != null && cost.hasTapCost();
@@ -202,11 +236,13 @@ public class ForgeScript {
             return sa.hasParam("Nightbound");
         } else if (property.equals("paidPhyrexianMana")) {
             return sa.getSpendPhyrexianMana();
+        } else if (property.equals("LastChapter")) {
+            return sa.isLastChapter();
         } else if (property.startsWith("ManaSpent")) {
             String[] k = property.split(" ", 2);
             String comparator = k[1].substring(0, 2);
-            int y = AbilityUtils.calculateAmount(sa.getHostCard(), k[1].substring(2), sa);
-            return Expressions.compare(sa.getPayingMana().size(), comparator, y);
+            int y = AbilityUtils.calculateAmount(source, k[1].substring(2), spellAbility);
+            return Expressions.compare(sa.getTotalManaSpent(), comparator, y);
         } else if (property.startsWith("ManaFrom")) {
             final String fromWhat = property.substring(8);
             boolean found = false;

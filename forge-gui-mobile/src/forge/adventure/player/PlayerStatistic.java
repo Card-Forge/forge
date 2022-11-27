@@ -36,6 +36,11 @@ public class PlayerStatistic implements SaveFileContent {
     }
     public float winLossRatio()
     {
+        if (totalLoss() == 0) {
+            // Not a true ratio but fixes division by zero
+            return totalWins();
+        }
+
         return (float) totalWins()/(float)totalLoss();
     }
     public int getPlayTime()

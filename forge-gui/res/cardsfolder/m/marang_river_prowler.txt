@@ -2,8 +2,8 @@ Name:Marang River Prowler
 ManaCost:2 U
 Types:Creature Human Rogue
 PT:2/1
-K:Unblockable
-K:CARDNAME can't block.
+S:Mode$ CantBlockBy | ValidBlocker$ Creature.Self | Description$ CARDNAME can't block and can't be blocked.
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self
 S:Mode$ Continuous | Affected$ Card.Self | AffectedZone$ Graveyard | EffectZone$ Graveyard | MayPlay$ True | IsPresent$ Permanent.Black+YouCtrl,Permanent.Green+YouCtrl | Description$ You may cast CARDNAME from you graveyard as long as you control a black or green permanent.
 SVar:SacMe:3
 SVar:DiscardMe:3

@@ -3,5 +3,6 @@ ManaCost:no cost
 Types:Land
 A:AB$ GainLife | Cost$ T Sac<1/Creature> | LifeAmount$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
+DeckHas:Ability$Sacrifice
 AI:RemoveDeck:All
 Oracle:{T}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness.

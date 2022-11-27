@@ -4,8 +4,9 @@ Types:Legendary Planeswalker Ajani
 Loyalty:5
 A:AB$ GainLife | Cost$ AddCounter<2/LOYALTY> | Planeswalker$ True | LifeAmount$ 2 | SubAbility$ DBPutCounter | SpellDescription$ You gain 2 life. Put two +1/+1 counters on up to one target creature.
 SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 2 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Choose target creature | ValidTgts$ Creature
-A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target creature. Its controller gains 2 life.
-SVar:DBGainLife:DB$ GainLife | Defined$ TargetedController | LifeAmount$ 2
+A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | RememberLKI$ True | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBGainLife | SpellDescription$ Exile target creature. Its controller gains 2 life.
+SVar:DBGainLife:DB$ GainLife | Defined$ RememberedController | LifeAmount$ 2 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ PumpAll | Cost$ SubCounter<10/LOYALTY> | Planeswalker$ True | Ultimate$ True | ValidCards$ Creature.YouCtrl | KW$ Flying & Double Strike | SpellDescription$ Creatures you control gain flying and double strike until end of turn.
 DeckHas:Ability$Counters|LifeGain
 Oracle:[+2]: You gain 2 life. Put two +1/+1 counters on up to one target creature.\n[-3]: Exile target creature. Its controller gains 2 life.\n[-10]: Creatures you control gain flying and double strike until end of turn.

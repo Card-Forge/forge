@@ -1,0 +1,9 @@
+Name:Zar Ojanen, Scion of Efrava
+ManaCost:3 G W
+Types:Legendary Creature Cat Warrior
+PT:4/4
+T:Mode$ Taps | ValidCard$ Card.Self | Execute$ TrigPutcounter | TriggerZones$ Battlefield | TriggerDescription$ Domain — Whenever CARDNAME becomes tapped, put a +1/+1 counter on each creature you control with toughness less than the number of basic land types among lands you control.
+SVar:TrigPutcounter:DB$ PutCounterAll | ValidCards$ Creature.YouCtrl+toughnessLTX | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$Domain
+DeckHas:Ability$Counters
+Oracle:Domain — Whenever Zar Ojanen, Scion of Efrava becomes tapped, put a +1/+1 counter on each creature you control with toughness less than the number of basic land types among lands you control.

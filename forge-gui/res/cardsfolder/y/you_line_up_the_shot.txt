@@ -1,0 +1,8 @@
+Name:You Line Up the Shot
+ManaCost:G
+Types:Instant
+A:SP$ Charm | Choices$ AimForTheWyvern,AimForTheCursedAmulet,FireAWarningShot
+SVar:AimForTheWyvern:DB$ MakeCard | Conjure$ True | Name$ Plummet | Zone$ Hand | SpellDescription$ Aim For the Wyvern — Conjure a card named Plummet into your hand.
+SVar:AimForTheCursedAmulet:DB$ MakeCard | Conjure$ True | Name$ Naturalize | Zone$ Hand | SpellDescription$ Aim For the Cursed Amulet — Conjure a card named Naturalize into your hand.
+SVar:FireAWarningShot:DB$ Draw | Defined$ You | SpellDescription$ Fire a Warning Shot — Draw a card.
+Oracle:Choose one —\n• Aim for the Wyvern — Conjure a card named Plummet into your hand.\n• Aim for the Cursed Amulet — Conjure a card named Naturalize into your hand.\n• Fire a Warning Shot — Draw a card.

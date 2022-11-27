@@ -3,4 +3,5 @@ ManaCost:G
 Types:Creature Human
 PT:1/1
 A:AB$ Destroy | Cost$ G T Sac<1/CARDNAME> | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+DeckHas:Ability$Sacrifice
 Oracle:{G}, {T}, Sacrifice Scavenger Folk: Destroy target artifact.

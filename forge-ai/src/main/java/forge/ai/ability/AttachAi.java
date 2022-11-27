@@ -121,7 +121,7 @@ public class AttachAi extends SpellAbilityAi {
 
         if (ComputerUtilAbility.getAbilitySourceName(sa).equals("Chained to the Rocks")) {
             final SpellAbility effectExile = AbilityFactory.getAbility(source.getSVar("TrigExile"), source);
-            effectExile.setActivatingPlayer(ai);
+            effectExile.setActivatingPlayer(ai, true);
             final TargetRestrictions exile_tgt = effectExile.getTargetRestrictions();
             final List<Card> targets = CardUtil.getValidCardsToTarget(exile_tgt, effectExile);
             return !targets.isEmpty();
@@ -661,8 +661,14 @@ public class AttachAi extends SpellAbilityAi {
             if (card.hasKeyword(Keyword.HORSEMANSHIP)) {
                 cardPriority += 40;
             }
-            if (card.hasKeyword("Unblockable")) {
-                cardPriority += 50;
+            //check if card is generally unblockable
+            for (final Card ca : card.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+                for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                    if (stAb.applyAbility("CantBlockBy", card, null)) {
+                        cardPriority += 50;
+                        break;
+                    }
+                }
             }
             // Prefer "tap to deal damage"
             // TODO : Skip this one if triggers on combat damage only?
@@ -1303,15 +1309,19 @@ public class AttachAi extends SpellAbilityAi {
      * @return the card
      */
     private static Card attachToCardAIPreferences(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final Card attachSource = sa.getHostCard();
         // TODO AttachSource is currently set for the Source of the Spell, but
         // at some point can support attaching a different card
+        Card attachSource = sa.getHostCard();
+        if (sa.hasParam("Object")) {
+            attachSource = AbilityUtils.getDefinedCards(attachSource, sa.getParam("Object"), sa).get(0);
+        }
 
         // Don't equip if DontEquip SVar is set
         if (attachSource.hasSVar("DontEquip")) {
             return null;
         }
+
+        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         // Is a SA that moves target attachment
         if ("MoveTgtAura".equals(sa.getParam("AILogic"))) {
@@ -1551,7 +1561,7 @@ public class AttachAi extends SpellAbilityAi {
             }
         }
 
-        final boolean evasive = keyword.equals("Unblockable") || keyword.equals("Fear")
+        final boolean evasive = keyword.equals("Fear")
                 || keyword.equals("Intimidate") || keyword.equals("Shadow")
                 || keyword.equals("Flying") || keyword.equals("Horsemanship")
                 || keyword.endsWith("walk") || keyword.equals("All creatures able to block CARDNAME do so.");
@@ -1559,8 +1569,9 @@ public class AttachAi extends SpellAbilityAi {
 
         boolean canBeBlocked = false;
         for (Player opp : ai.getOpponents()) {
-            if (CombatUtil.canBeBlocked(card, opp)) {
+            if (CombatUtil.canBeBlocked(card, null, opp)) {
                 canBeBlocked = true;
+                break;
             }
         }
 

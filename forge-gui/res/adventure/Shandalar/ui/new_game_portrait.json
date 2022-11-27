@@ -13,88 +13,82 @@
       "type": "Scroll",
       "name" : "scroll",
       "style": "paper",
-      "x": 10,
+      "x": 5,
       "y": 60,
       "width": 256,
-      "height": 318
+      "height": 323
     },
     {
       "type": "Label",
       "name" : "titleL",
-      "text": "Create a Character",
+      "text": "{SIZE=150%}[BLACK]tr(lblCreateACharacter)",
       "width": 128,
       "height": 32,
-      "fontSize": 1.5,   
-      "fontColor": "0x000000FF",
-      "x": 16,
+      "scale": 2,
+      "x": 30,
       "y": 66
-    },
-    {
-      "type": "Label",
-      "name" : "avatarL",
-      "text": "Avatar:",
-      "width": 128,
-      "height": 32,
-      "fontColor": "0x000000FF",
-      "x": 16,
-      "y": 108
-    },
+    } ,
     {
       "type": "Label",
       "name" : "nameL",
-      "text": "Name:",
+      "text": "[BLACK]tr(lblName):",
       "width": 128,
-      "height": 32,
-      "fontColor": "0x000000FF",
+      "height": 24,
       "x": 16,
       "y": 140
     },
     {
       "type": "Label",
       "name" : "raceL",
-      "text": "Race:",
+      "text": "[BLACK]tr(lblRace):",
       "width": 128,
-      "height": 32,
-      "fontColor": "0x000000FF",
+      "height": 24,
       "x": 16,
-      "y": 174
+      "yOffset": 8
     },
     {
       "type": "Label",
       "name" : "genderL",
-      "text": "Gender:",
+      "text": "[BLACK]tr(lblGender):",
       "width": 128,
-      "height": 32,
-      "fontColor": "0x000000FF",
+      "height": 24,
       "x": 16,
-      "y": 204
+      "yOffset": 8
     },
     {
       "type": "Label",
       "name" : "difficultyL",
-      "text": "Difficulty:",
+      "text": "[BLACK]tr(lblDifficulty):",
       "width": 128,
-      "height": 32,
-      "fontColor": "0x000000FF",
+      "height": 24,
       "x": 16,
-      "y": 236
+      "yOffset": 8
     },
     {
       "type": "Label",
-      "name" : "deckL",
-      "text": "Deck:",
+      "name" : "colorIdL",
+      "text": "[BLACK]tr(lblColors):",
       "width": 128,
-      "height": 32,
-      "font" : "black",
+      "height": 24,
       "x": 16,
-      "y": 268
+      "yOffset": 8
+    },
+    {
+      "type": "Label",
+      "name" : "modeL",
+      "text": "[BLACK]tr(lblMode)",
+      "width": 128,
+      "height": 24,
+      "x": 16,
+      "yOffset": 8
     },
     {
       "type": "ImageButton",
       "name": "leftAvatar",
       "style": "leftarrow",
-      "width": 32,
-      "height": 32,
+      "selectable": true,
+      "width": 24,
+      "height": 24,
       "x": 116,
       "y": 114
     },
@@ -110,68 +104,87 @@
       "type": "ImageButton",
       "name": "rightAvatar",
       "style": "rightarrow",
-      "width": 28,
-      "height": 28,
+      "selectable": true,
+      "width": 24,
+      "height": 24,
       "x": 212,
       "y": 114
     },
     {
       "type": "TextField",
       "name": "nameField",
-      "width": 165,
-      "height": 28,
+      "selectable": true,
+      "width": 160,
+      "height": 24,
       "x": 96,
       "y": 146
     },
     {
       "type": "Selector",
       "name": "race",
-      "width": 170,
-      "height": 28,
+      "selectable": true,
+      "width": 168,
+      "height": 24,
       "x": 96,
-      "y": 178
+      "yOffset": 8
     },
     {
       "type": "Selector",
       "name": "gender",
-      "width": 170,
-      "height": 28,
+      "selectable": true,
+      "width": 168,
+      "height": 24,
       "x": 96,
-      "y": 210
+      "yOffset": 8
     },
     {
       "type": "Selector",
       "name": "difficulty",
-      "width": 170,
-      "height": 28,
+      "selectable": true,
+      "width": 168,
+      "height": 24,
       "x": 96,
-      "y": 242
+      "yOffset": 8
     },
     {
       "type": "Selector",
-      "name": "deck",
-      "width": 170,
-      "height": 28,
+      "name": "colorId",
+      "selectable": true,
+      "width": 168,
+      "height": 24,
       "x": 96,
-      "y": 274
+      "yOffset": 8
+    },
+    {
+      "type": "Selector",
+      "name": "mode",
+      "selectable": true,
+      "width": 168,
+      "height": 24,
+      "x": 96,
+      "yOffset": 8
     },
     {
       "type": "TextButton",
       "name": "back",
-      "text": "Back",
+      "text": "tr(lblBack)",
+      "selectable": true,
+      "binding": "Back",
       "width": 64,
       "height": 28,
       "x": 32,
-      "y": 320
+      "y": 344
     },
     {
       "type": "TextButton",
       "name": "start",
-      "text": "Start",
+      "text": "tr(lblStart)",
+      "selectable": true,
+      "binding": "Status",
       "width": 64,
-      "height": 32,
+      "height": 28,
       "x": 165,
-      "y": 320
+      "y": 344
     }
   ]
 }

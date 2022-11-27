@@ -1,0 +1,9 @@
+Name:Knight Paladin
+ManaCost:5
+Types:Artifact Vehicle
+PT:6/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDmg1 | TriggerDescription$ Rapid-fire Battle Cannon — When CARDNAME enters the battlefield, it deals 4 damage to each opponent.
+SVar:TrigDmg1:DB$ DealDamage | NumDmg$ 4 | Defined$ Opponent
+K:Crew:1
+Oracle:Trample\nRapid-fire Battle Cannon — When Knight Paladin enters the battlefield, it deals 4 damage to each opponent.\nCrew 1 (Tap any number of creatures you control with total power 1 or more: This Vehicle becomes an artifact creature until end of turn.)

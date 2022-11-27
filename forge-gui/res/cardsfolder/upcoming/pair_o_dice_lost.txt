@@ -1,0 +1,10 @@
+Name:Pair o' Dice Lost
+ManaCost:3 G G
+Types:Instant
+A:SP$ RollDice | Amount$ 2 | ResultSVar$ Y | SubAbility$ DBChange | SpellDescription$ Roll two six-sided dice. Return any number of cards with total mana value X or less from your graveyard to your hand, where X is the total of those results. Exile CARDNAME.
+SVar:DBChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeNum$ X | WithTotalCMC$ Y | SelectPrompt$ Choose any number of cards with total mana value X or less from your graveyard to your hand, where X is the total of those results | Hidden$ True | AnyNumber$ True | ChangeType$ Card.YouOwn | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | StackDescription$ Exile CARDNAME.
+SVar:X:Count$ValidGraveyard Card.YouOwn
+DeckHints:Ability$Graveyard|Mill
+DeckHas:Ability$Graveyard
+Oracle:Roll two six-sided dice. Return any number of cards with total mana value X or less from your graveyard to your hand, where X is the total of those results. Exile Pair o' Dice Lost.

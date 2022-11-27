@@ -21,10 +21,13 @@ public abstract class CachedCardImage implements ImageFetcher.Callback {
         this.viewers = viewers;
         this.width = width;
         this.height = height;
-        BufferedImage image = ImageCache.getImageNoDefault(card, viewers, width, height);
-        if (image == null) {
-            String key = card.getCurrentState().getImageKey(viewers);
-            fetcher.fetchImage(key, this);
+        if (ImageCache.isSupportedImageSize(width, height)) {
+            BufferedImage image = ImageCache.getImageNoDefault(card, viewers, width, height);
+            if (image == null) {
+                String key = card.getCurrentState().getImageKey(viewers);
+                System.err.println("Fetch due to missing key: " + key + " for " + card);
+                fetcher.fetchImage(key, this);
+            }
         }
     }
 

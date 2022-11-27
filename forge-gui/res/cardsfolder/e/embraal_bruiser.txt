@@ -3,7 +3,6 @@ ManaCost:1 B
 Types:Creature Human Warrior
 PT:3/1
 K:CARDNAME enters the battlefield tapped.
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has menace as long as you control an artifact.
-SVar:X:Count$Valid Artifact.YouCtrl
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | IsPresent$ Artifact.YouCtrl | Description$ CARDNAME has menace as long as you control an artifact.
 SVar:BuffedBy:Artifact
 Oracle:Embraal Bruiser enters the battlefield tapped.\nEmbraal Bruiser has menace as long as you control an artifact.

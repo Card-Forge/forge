@@ -1,0 +1,6 @@
+Name:Soldiers of the Watch
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/1
+K:Double team
+Oracle:Double team

@@ -300,9 +300,9 @@ public class ManaCostBeingPaid {
             }
             int otherSubtract = manaToSubtract;
             List<ManaCostShard> toRemove = Lists.newArrayList();
-            
+
             //TODO move that for parts into extra function if able
-            
+
             // try to remove multicolored hybrid shards
             // for that, this shard need to be mono colored
             if (shard.isMonoColor()) {
@@ -387,15 +387,14 @@ public class ManaCostBeingPaid {
                     }
                 }
             }
-            
+
             unpaidShards.keySet().removeAll(toRemove);
             //System.out.println("Tried to substract a " + shard.toString() + " shard that is not present in this ManaCostBeingPaid");
             return;
         }
-        
-        
-        int difference = manaToSubtract - sc.totalCount;  
-        
+
+        int difference = manaToSubtract - sc.totalCount;
+
         if (manaToSubtract >= sc.totalCount) {
             sc.xCount = 0;
             sc.totalCount = 0;

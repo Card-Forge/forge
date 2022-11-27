@@ -1,7 +1,8 @@
 Name:Sultai Ascendancy
 ManaCost:B G U
 Types:Enchantment
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ DBDig | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, look at the top two cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order.
-SVar:DBDig:DB$ Dig | ValidTgts$ You | DigNum$ 2 | AnyNumber$ | DestinationZone$ Graveyard | LibraryPosition2$ 0
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSurveil | TriggerDescription$ At the beginning of your upkeep, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)
 AI:RemoveDeck:All
-Oracle:At the beginning of your upkeep, look at the top two cards of your library. Put any number of them into your graveyard and the rest back on top of your library in any order.
+SVar:TrigSurveil:DB$ Surveil | Amount$ 2
+DeckHas:Ability$Surveil|Graveyard
+Oracle:At the beginning of your upkeep, surveil 2. (Look at the top two cards of your library, then put any number of them into your graveyard and the rest on top of your library in any order.)

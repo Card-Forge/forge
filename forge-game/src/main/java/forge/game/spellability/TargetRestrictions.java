@@ -534,8 +534,8 @@ public class TargetRestrictions {
                     num++;
                 }
             }
-
         }
+        // TODO this may count some SA twice
         return num + getAllCandidates(sa, isTargeted).size();
     }
 

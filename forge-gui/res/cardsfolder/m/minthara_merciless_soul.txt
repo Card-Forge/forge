@@ -1,0 +1,10 @@
+Name:Minthara, Merciless Soul
+ManaCost:2 W B
+Types:Legendary Creature Elf Cleric
+PT:2/2
+K:Ward:X:where X is the number of experience counters you have
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Revolt$ True | Execute$ TrigExperience | TriggerDescription$ At the beginning of your end step, if a permanent you controlled left the battlefield this turn, you get an experience counter.
+SVar:TrigExperience:DB$ PutCounter | Defined$ You | CounterType$ Experience | CounterNum$ 1
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ X | Description$ Creatures you control get +1/+0 for each experience counter you have.
+SVar:X:Count$YourCountersExperience
+Oracle:Ward {X}, where X is the number of experience counters you have.\nAt the beginning of your end step, if a permanent you controlled left the battlefield this turn, you get an experience counter.\nCreatures you control get +1/+0 for each experience counter you have.

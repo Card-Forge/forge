@@ -79,6 +79,7 @@ public class CardFaceSymbols {
         Forge.getAssets().manaImages().put("S", FSkinImage.MANA_SNOW);
         Forge.getAssets().manaImages().put("T", FSkinImage.TAP);
         Forge.getAssets().manaImages().put("E", FSkinImage.ENERGY);
+        Forge.getAssets().manaImages().put("TK", FSkinImage.TICKET);
         Forge.getAssets().manaImages().put("slash", FSkinImage.SLASH);
         Forge.getAssets().manaImages().put("attack", FSkinImage.ATTACK);
         Forge.getAssets().manaImages().put("defend", FSkinImage.DEFEND);

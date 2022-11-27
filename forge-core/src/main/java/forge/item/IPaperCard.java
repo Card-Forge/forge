@@ -240,5 +240,10 @@ public interface IPaperCard extends InventoryItem, Serializable {
     boolean hasBackFace();
     String getCardImageKey();
     String getCardAltImageKey();
+    String getCardWSpecImageKey();
+    String getCardUSpecImageKey();
+    String getCardBSpecImageKey();
+    String getCardRSpecImageKey();
+    String getCardGSpecImageKey();
 
 }

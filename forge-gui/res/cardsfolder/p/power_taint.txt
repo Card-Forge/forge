@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Enchantment Aura
 K:Enchant enchantment
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Enchantment | AILogic$ Curse
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the upkeep of enchanted enchantment's controller, that player loses 2 life unless they pay {2}.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | Execute$ TrigLoseLife | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the upkeep of enchanted enchantment's controller, that player loses 2 life unless they pay {2}.
 SVar:TrigLoseLife:DB$ LoseLife | Defined$ TriggeredPlayer | LifeAmount$ 2 | UnlessCost$ 2 | UnlessPayer$ EnchantedController
 K:Cycling:2
 Oracle:Enchant enchantment\nAt the beginning of the upkeep of enchanted enchantment's controller, that player loses 2 life unless they pay {2}.\nCycling {2} ({2}, Discard this card: Draw a card.)

@@ -1,0 +1,8 @@
+Name:Ambush Paratrooper
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:1/2
+K:Flash
+K:Flying
+A:AB$ PumpAll | Cost$ 5 | ValidCards$ Creature.YouCtrl | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Creatures you control get +1/+1 until end of turn.
+Oracle:Flash\nFlying\n{5}: Creatures you control get +1/+1 until end of turn.

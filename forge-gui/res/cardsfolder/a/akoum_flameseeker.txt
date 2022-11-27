@@ -2,7 +2,9 @@ Name:Akoum Flameseeker
 ManaCost:2 R
 Types:Creature Human Shaman Ally
 PT:3/2
-A:AB$ Draw | Cost$ T tapXType<1/Ally> | UnlessCost$ Discard<1/Card> | UnlessSwitched$ True | UnlessPayer$ You | PrecostDesc$ Cohort — | SpellDescription$ Discard a card. If you do, draw a card.
+A:AB$ Discard | Cost$ T tapXType<1/Ally> | Defined$ You | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBDraw | PrecostDesc$ Cohort — | SpellDescription$ Discard a card. If you do, draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:All
 DeckHints:Type$Ally
 Oracle:Cohort — {T}, Tap an untapped Ally you control: Discard a card. If you do, draw a card.

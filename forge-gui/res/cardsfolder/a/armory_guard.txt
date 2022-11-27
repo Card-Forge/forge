@@ -2,7 +2,6 @@ Name:Armory Guard
 ManaCost:3 W
 Types:Creature Giant Soldier
 PT:2/5
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has vigilance as long as you control a Gate.
-SVar:X:Count$Valid Gate.YouCtrl
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Vigilance | IsPresent$ Gate.YouCtrl | Description$ CARDNAME has vigilance as long as you control a Gate.
 DeckHints:Type$Gate
 Oracle:Armory Guard has vigilance as long as you control a Gate.

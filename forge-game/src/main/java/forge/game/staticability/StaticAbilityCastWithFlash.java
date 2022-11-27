@@ -11,7 +11,7 @@ public class StaticAbilityCastWithFlash {
 
     static String MODE = "CastWithFlash";
 
-    public static boolean anyWithFlashNeedsTargeting(final SpellAbility sa, final Card card, final Player activator) {
+    public static boolean anyWithFlashNeedsInfo(final SpellAbility sa, final Card card, final Player activator) {
         final Game game = activator.getGame();
         final CardCollection allp = new CardCollection(game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES));
         allp.add(card);
@@ -20,7 +20,7 @@ public class StaticAbilityCastWithFlash {
                 if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
                     continue;
                 }
-                if (applyWithFlashNeedsTargeting(stAb, sa, card, activator)) {
+                if (applyWithFlashNeedsInfo(stAb, sa, card, activator)) {
                     return true;
                 }
             }
@@ -45,13 +45,15 @@ public class StaticAbilityCastWithFlash {
         return false;
     }
 
-    public static boolean commonParts(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
+    private static boolean commonParts(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator, final boolean skipValidSA) {
         if (!stAb.matchesValidParam("ValidCard", card)) {
             return false;
         }
 
-        if (!stAb.matchesValidParam("ValidSA", sa)) {
-            return false;
+        if (!skipValidSA) {
+            if (!stAb.matchesValidParam("ValidSA", sa)) {
+                return false;
+            }
         }
 
         if (!stAb.matchesValidParam("Caster", activator)) {
@@ -60,27 +62,22 @@ public class StaticAbilityCastWithFlash {
         return true;
     }
 
-    public static boolean applyWithFlashNeedsTargeting(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
-        if (!commonParts(stAb, sa, card, activator)) {
+    public static boolean applyWithFlashNeedsInfo(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
+        boolean info = false;
+        String validSA = stAb.getParam("ValidSA");
+        if (validSA.contains("IsTargeting") || validSA.contains("XCost")) {
+            info = true;
+        }
+        if (!commonParts(stAb, sa, card, activator, info)) {
             return false;
         }
 
-        return stAb.hasParam("Targeting");
+        return info;
     }
 
     public static boolean applyWithFlashAbility(final StaticAbility stAb, final SpellAbility sa, final Card card, final Player activator) {
-        if (!commonParts(stAb, sa, card, activator)) {
+        if (!commonParts(stAb, sa, card, activator, false)) {
             return false;
-        }
-
-        if (stAb.hasParam("Targeting")) {
-            if (!sa.usesTargeting()) {
-                return false;
-            }
-
-            if (!stAb.matchesValidParam("Targeting", sa.getTargets())) {
-                return false;
-            }
         }
 
         return true;

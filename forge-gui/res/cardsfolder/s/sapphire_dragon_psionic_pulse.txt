@@ -1,0 +1,20 @@
+Name:Sapphire Dragon
+ManaCost:5 U U
+Types:Creature Dragon
+PT:5/6
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigScry | TriggerDescription$ Whenever CARDNAME attacks or blocks, scry 2.
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigScry | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+AlternateMode:Adventure
+SVar:HasAttackEffect:TRUE
+SVar:HasBlockEffect:TRUE
+Oracle:Flying\nWhenever Sapphire Dragon attacks or blocks, scry 2.
+
+ALTERNATE
+
+Name:Psionic Pulse
+ManaCost:2 U
+Types:Instant Adventure
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Card.nonCreature | TgtPrompt$ Select target noncreature spell | SpellDescription$ Counter target noncreature spell. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Counter target noncreature spell. (Then exile this card. You may cast the creature later from exile.)

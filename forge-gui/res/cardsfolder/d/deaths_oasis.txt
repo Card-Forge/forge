@@ -6,6 +6,6 @@ SVar:TrigMill:DB$ Mill | NumCards$ 2 | Defined$ You | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ChangeType$ Creature.YouOwn+cmcLTY | Hidden$ True | ChangeNum$ 1
 SVar:Y:TriggeredCard$CardManaCost
 A:AB$ GainLife | Cost$ 1 Sac<1/CARDNAME> | LifeAmount$ X | SpellDescription$ You gain life equal to the highest mana value among creatures you control.
-SVar:X:Count$HighestCMC_Creature.YouCtrl+inZoneBattlefield
+SVar:X:Count$Valid Creature.YouCtrl$GreatestCMC
 DeckHas:Ability$LifeGain
 Oracle:Whenever a nontoken creature you control dies, mill two cards. Then return a creature card with lesser mana value than the creature that died from your graveyard to your hand.\n{1}, Sacrifice Death's Oasis: You gain life equal to the highest mana value among creatures you control.

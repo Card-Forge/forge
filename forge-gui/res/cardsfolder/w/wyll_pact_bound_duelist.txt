@@ -1,0 +1,76 @@
+Name:Wyll, Pact-Bound Duelist
+ManaCost:3 R R
+Types:Legendary Creature Human Warlock
+PT:4/4
+K:Specialize:2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigControl | TriggerDescription$ When CARDNAME enters the battlefield, gain control of target artifact or creature an opponent controls with mana value 4 or less until the end of your next turn.
+SVar:TrigControl:DB$ GainControl | ValidTgts$ Artifact.OppCtrl+cmcLE4,Creature.OppCtrl+cmcLE4 | TgtPrompt$ Select target artifact or creature an opponent controls with mana value 4 or less | LoseControl$ UntilTheEndOfYourNextTurn
+AlternateMode:Specialize
+Oracle:Specialize {2}\nWhen Wyll, Pact-Bound Duelist enters the battlefield, gain control of target artifact or creature an opponent controls with mana value 4 or less until the end of your next turn.
+
+SPECIALIZE:WHITE
+
+Name:Wyll of the Celestial Pact
+ManaCost:3 R R W
+Types:Legendary Creature Human Warlock
+PT:5/5
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ When this creature specializes, you may sacrifice another creature or an artifact. When you do, return target creature card from your graveyard to the battlefield. It gains haste. If its mana value is 4 or greater, sacrifice it at the beginning of your next end step.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other;Artifact/another creature or an artifact> | Execute$ TrigReturn | TriggerDescription$ When you do, return target creature card from your graveyard to the battlefield. It gains haste. If its mana value is 4 or greater, sacrifice it at the beginning of your next end step.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | TgtPrompt$ Select target creature card | SubAbility$ DBHaste
+SVar:DBHaste:DB$ Animate | Keywords$ Haste | Defined$ Targeted | Duration$ Permanent | SubAbility$ EOTSac
+SVar:EOTSac:DB$ Animate | ConditionDefined$ Targeted | ConditionPresent$ Card.cmcGE4 | Defined$ Targeted | AtEOT$ Sacrifice
+DeckHas:Ability$Sacrifice|Graveyard
+DeckHints:Type$Artifact
+Oracle:When this creature specializes, you may sacrifice another creature or an artifact. When you do, return target creature card from your graveyard to the battlefield. It gains haste. If its mana value is 4 or greater, sacrifice it at the beginning of your next end step.
+
+SPECIALIZE:BLUE
+
+Name:Wyll of the Elder Pact
+ManaCost:3 U R R
+Types:Legendary Creature Human Warlock
+PT:5/5
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ When this creature specializes, you may sacrifice another creature or an artifact. When you do, instant or sorcery card from your graveyard to your hand.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other;Artifact/another creature or an artifact> | Execute$ TrigReturn | TriggerDescription$ When you do, return target instant or sorcery card from your graveyard to your hand.
+SVar:TrigReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | Select target instant or sorcery card
+DeckHas:Ability$Sacrifice|Graveyard
+DeckHints:Type$Artifact|Instant|Sorcery
+Oracle:When this creature specializes, you may sacrifice another creature or an artifact. When you do, return target instant or sorcery card from your graveyard to your hand.
+
+SPECIALIZE:BLACK
+
+Name:Wyll of the Fiend Pact
+ManaCost:3 B R R
+Types:Legendary Creature Human Warlock
+PT:5/5
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigImmediateTrig | TriggerDescription$ When this creature specializes, you may sacrifice another creature or an artifact. When you do, draw three cards unless target opponent pays 5 life.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ Sac<1/Creature.Other;Artifact/another creature or an artifact> | Execute$ TrigDraw | TriggerDescription$ When you do, draw three cards unless target opponent pays 5 life.
+SVar:TrigDraw:DB$ Draw | ValidTgts$ Opponent | Defined$ You | NumCards$ 3 | UnlessCost$ PayLife<5> | UnlessPayer$ Targeted
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+Oracle:When this creature specializes, you may sacrifice another creature or an artifact. When you do, draw three cards unless target opponent pays 5 life.
+
+SPECIALIZE:RED
+
+Name:Wyll of the Blade Pact
+ManaCost:3 R R R
+Types:Legendary Creature Human Warlock
+PT:5/5
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigUntap | TriggerDescription$ When this creature specializes, you may sacrifice another creature or an artifact. If you do, untap CARDNAME. After this main phase, there is an additional combat phase followed by an additional main phase.
+SVar:TrigUntap:AB$ Untap | Cost$ Sac<1/Creature.Other;Artifact/another creature or an artifact> | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ Combat | FollowedBy$ Main2 | ConditionPhases$ Main1,Main2
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+Oracle:When this creature specializes, you may sacrifice another creature or an artifact. If you do, untap Wyll of the Blade Pact. After this main phase, there is an additional combat phase followed by an additional main phase.
+
+SPECIALIZE:GREEN
+
+Name:Wyll of the Fey Pact
+ManaCost:3 R R G
+Types:Legendary Creature Human Warlock
+PT:5/5
+T:Mode$ Specializes | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When this creature specializes, you may sacrifice another creature or an artifact. If you do, CARDNAME perpetually gets +3/+3 and gains trample.
+SVar:TrigEffect:AB$ Effect | Cost$ Sac<1/Creature.Other;Artifact/another creature or an artifact> | RememberObjects$ Self | Name$ Wyll of the Fey Pact's Perpetual Effect | StaticAbilities$ PerpetualAbility | Duration$ Permanent
+SVar:PerpetualAbility:Mode$ Continuous | AddPower$ 3 | AddToughness$ 3 | AddKeyword$ Trample | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ EFFECTSOURCE perpetually gets +3/+3 and gains trample.
+DeckHas:Ability$Sacrifice
+DeckHints:Type$Artifact
+Oracle:When this creature specializes, you may sacrifice another creature or an artifact. If you do, Wyll of the Fey Pact perpetually gets +3/+3 and gains trample.

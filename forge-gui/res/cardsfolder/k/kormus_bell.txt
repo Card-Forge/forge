@@ -3,5 +3,6 @@ ManaCost:4
 Types:Artifact
 S:Mode$ Continuous | Affected$ Swamp | SetPower$ 1 | SetToughness$ 1 | AddType$ Creature | SetColor$ Black | Description$ All Swamps are 1/1 black creatures that are still lands.
 SVar:NonStackingEffect:True
+DeckHints:Name$Urborg, Tomb of Yawgmoth
 AI:RemoveDeck:Random
 Oracle:All Swamps are 1/1 black creatures that are still lands.

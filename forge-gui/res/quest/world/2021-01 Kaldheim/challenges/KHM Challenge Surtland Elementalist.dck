@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Surtland Elementalist
+OpponentName=The Elementalists
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Port of Karfell|Port of Karfell
+HumanExtras=
+[metadata]
+Title=Surtland Elementalist
+Difficulty=easy
+Description=There will be blood.
+Icon=Dungeon Crawling Gold.jpg
+Deck Type=constructed
+Name=KHM Challenge: Surtland Elementalist
+[Main]
+15 Blood on the Snow|KHM|1
+30 Ice Tunnel|KHM|1
+15 Surtland Elementalist|KHM|1

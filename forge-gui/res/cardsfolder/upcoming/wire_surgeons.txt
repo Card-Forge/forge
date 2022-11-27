@@ -1,0 +1,8 @@
+Name:Wire Surgeons
+ManaCost:4 B B
+Types:Creature Human Artificer
+PT:6/5
+K:Fear
+S:Mode$ Continuous | EffectZone$ Battlefield | AffectedZone$ Graveyard | Affected$ Creature.Artifact+YouCtrl | AddKeyword$ Encore:CardManaCost  | Description$ Each artifact creature card in your graveyard has encore. Its encore cost is equal to its mana cost. (Exile it and pay its mana cost: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)
+DeckHints:Ability$Graveyard & Type$Artifact
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nEach artifact creature card in your graveyard has encore. Its encore cost is equal to its mana cost. (Exile it and pay its mana cost: For each opponent, create a token copy that attacks that opponent this turn if able. They gain haste. Sacrifice them at the beginning of the next end step. Activate only as a sorcery.)

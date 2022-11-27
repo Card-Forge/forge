@@ -12,6 +12,6 @@ T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ Tr
 T:Mode$ Blocks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigReturn | TriggerDescription$ Whenever CARDNAME attacks or blocks, return up to one target creature that crewed it this turn to its owner's hand.
 SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.IsRemembered | TargetMin$ 0 | TargetMax$ 1 | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Select up to one target creature to return to its owner's hand
 K:Crew:1
-SVar:HasAttackEffect:True
-SVar:HasBlockEffect:True
+SVar:HasAttackEffect:TRUE
+SVar:HasBlockEffect:TRUE
 Oracle:Haste\nWhenever Getaway Car attacks or blocks, return up to one target creature that crewed it this turn to its owner's hand.\nCrew 1

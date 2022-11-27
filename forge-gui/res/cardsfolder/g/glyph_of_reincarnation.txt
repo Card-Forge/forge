@@ -7,4 +7,6 @@ SVar:DBChoose:DB$ ChooseCard | Defined$ You | Choices$ Creature.OwnedBy Player.A
 SVar:DBChangeZone:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$ValidGraveyard Creature.IsRemembered
+DeckHints:Type$Wall & Keyword$Defender
+DeckHas:Ability$Graveyard
 Oracle:Cast this spell only after combat.\nDestroy all creatures that were blocked by target Wall this turn. They can't be regenerated. For each creature that died this way, put a creature card from the graveyard of the player who controlled that creature the last time it became blocked by that Wall onto the battlefield under its owner's control.

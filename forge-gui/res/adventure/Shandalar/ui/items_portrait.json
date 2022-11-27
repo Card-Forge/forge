@@ -5,10 +5,11 @@
   "elements": [
     {
       "type": "Image",
-      "name": "lastScreen",
+      "name": "rewards_background",   
+      "image": "ui/reward_portrait.png",
       "width": 270,
       "height": 480
-    },      
+    },
     {
       "type": "Image",
       "name": "market_background",   
@@ -25,8 +26,19 @@
     },
     {
       "type": "TextButton",
+      "name": "detail",
+      "text": "Detail",
+      "binding": "Equip",
+      "width": 128,
+      "height": 32,
+      "x": 140,
+      "y": 350
+    }  ,
+    {
+      "type": "TextButton",
       "name": "done",
-      "text": "Take all",
+      "text": "tr(lblLeave)",
+      "binding": "Back",
       "width": 128,
       "height": 32,
       "x": 140,
@@ -35,7 +47,8 @@
     {
       "type": "Label",
       "name": "gold",
-      "text": "$",
+	  "style":"background",
+      "text": "[+Gold]",
       "width": 128,
       "height": 32,
       "x": 16,

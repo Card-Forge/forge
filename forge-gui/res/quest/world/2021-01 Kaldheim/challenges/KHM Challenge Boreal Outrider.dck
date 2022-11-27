@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Boreal Outrider
+OpponentName=The Outriders
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Boreal Outrider
+Difficulty=medium
+Description=Outrider\na mounted attendant riding before or beside a carriage.
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=KHM Challenge: Boreal Outrider
+[Main]
+30 Boreal Outrider|KHM|1
+30 Snow-Covered Forest|KHM|2

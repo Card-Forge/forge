@@ -6,11 +6,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import forge.card.CardType;
+import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
+import forge.game.card.CardCollectionView;
+import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.TargetRestrictions;
+import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 
 public class ChooseTypeEffect extends SpellAbilityEffect {
@@ -23,7 +27,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             for (final Player p : getTargetPlayers(sa)) {
                 sb.append(p);
             }
-            sb.append(" chooses a type.");
+            sb.append(" chooses a ").append(sa.getParam("Type").toLowerCase()).append(" type.");
         } else {
             sb.append("Please improve the stack description.");
         }
@@ -49,7 +53,26 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                 validTypes.addAll(CardType.getAllCardTypes());
                 break;
             case "Creature":
-                validTypes.addAll(CardType.getAllCreatureTypes());
+                if (sa.hasParam("TypesFromDefined")) {
+                    for (final Card c : AbilityUtils.getDefinedCards(card, sa.getParam("TypesFromDefined"), sa)) {
+                        for (String t : c.getType()) {
+                            if (CardType.isACreatureType(t)) {
+                                validTypes.add(t);
+                            }
+                        }
+                    }
+                } else if (sa.hasParam("MostPrevalentInDefinedZone")) {
+                    final String[] info = sa.getParam("MostPrevalentInDefinedZone").split("_");
+                    final Player definedP = AbilityUtils.getDefinedPlayers(sa.getHostCard(), info[0], sa).get(0);
+                    final ZoneType z = info.length > 1 ? ZoneType.smartValueOf(info[1]) : ZoneType.Battlefield;
+                    CardCollectionView zoneCards = definedP.getCardsIn(z);
+                    for (String s : CardFactoryUtil.getMostProminentCreatureType(zoneCards)) {
+                        validTypes.add(s);
+                    }
+
+                } else {
+                    validTypes.addAll(CardType.getAllCreatureTypes());
+                }
                 break;
             case "Basic Land":
                 validTypes.addAll(CardType.getBasicTypes());
@@ -72,13 +95,19 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             }
         }
 
-        for (final String s : invalidTypes) {
-            validTypes.remove(s);
+        validTypes.removeAll(invalidTypes);
+
+        if (sa.hasParam("Note") && card.hasAnyNotedType()) {
+            for (String noted : card.getNotedTypes()) {
+                validTypes.remove(noted);
+            }
         }
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
 
-        if (!validTypes.isEmpty()) {
+        if (validTypes.isEmpty() && sa.hasParam("Note")) {
+            // OK to end up with no choices/have nothing new to note
+        } else if (!validTypes.isEmpty()) {
             for (final Player p : tgtPlayers) {
                 String choice;
                 if ((tgt == null) || p.canBeTargetedBy(sa)) {
@@ -89,7 +118,9 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
                     } else {
                         choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
                     }
-                    if (!sa.hasParam("ChooseType2")) {
+                    if (sa.hasParam("Note")) {
+                        card.addNotedType(choice);
+                    } else if (!sa.hasParam("ChooseType2")) {
                         card.setChosenType(choice);
                     } else {
                         card.setChosenType2(choice);

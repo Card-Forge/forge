@@ -47,6 +47,23 @@ public enum FSkinProp {
     CLR_COMBAT_TARGETING_ARROW  (new int[] {70, 270}, PropType.COLOR),
     CLR_NORMAL_TARGETING_ARROW  (new int[] {70, 290}, PropType.COLOR),
     CLR_PWATTK_TARGETING_ARROW  (new int[] {70, 310}, PropType.COLOR),
+    //Adventure Colors
+    ADV_CLR_THEME                   (new int[] {250, 10}, PropType.ADV_BUTTONS),
+    ADV_CLR_BORDERS                 (new int[] {250, 30}, PropType.ADV_BUTTONS),
+    ADV_CLR_ZEBRA                   (new int[] {250, 50}, PropType.ADV_BUTTONS),
+    ADV_CLR_HOVER                   (new int[] {250, 70}, PropType.ADV_BUTTONS),
+    ADV_CLR_ACTIVE                  (new int[] {250, 90}, PropType.ADV_BUTTONS),
+    ADV_CLR_INACTIVE                (new int[] {250, 110}, PropType.ADV_BUTTONS),
+    ADV_CLR_TEXT                    (new int[] {250, 130}, PropType.ADV_BUTTONS),
+    ADV_CLR_PHASE_INACTIVE_ENABLED  (new int[] {250, 150}, PropType.ADV_BUTTONS),
+    ADV_CLR_PHASE_INACTIVE_DISABLED (new int[] {250, 170}, PropType.ADV_BUTTONS),
+    ADV_CLR_PHASE_ACTIVE_ENABLED    (new int[] {250, 190}, PropType.ADV_BUTTONS),
+    ADV_CLR_PHASE_ACTIVE_DISABLED   (new int[] {250, 210}, PropType.ADV_BUTTONS),
+    ADV_CLR_THEME2                  (new int[] {250, 230}, PropType.ADV_BUTTONS),
+    ADV_CLR_OVERLAY                 (new int[] {250, 250}, PropType.ADV_BUTTONS),
+    ADV_CLR_COMBAT_TARGETING_ARROW  (new int[] {250, 270}, PropType.ADV_BUTTONS),
+    ADV_CLR_NORMAL_TARGETING_ARROW  (new int[] {250, 290}, PropType.ADV_BUTTONS),
+    ADV_CLR_PWATTK_TARGETING_ARROW  (new int[] {250, 310}, PropType.ADV_BUTTONS),
 
     //zone images
     IMG_ZONE_HAND        (new int[] {280, 40, 40, 40}, PropType.IMAGE),
@@ -72,6 +89,7 @@ public enum FSkinProp {
     IMG_HDZONE_MANAPOOL  (new int[] {2, 6, 128, 128}, PropType.BUTTONS),
 
     IMG_ZONE_POISON      (new int[] {320, 80, 40, 40}, PropType.IMAGE),
+    IMG_TICKET           (new int[] {360, 80, 40, 40}, PropType.IMAGE),
 
     //mana images
     IMG_MANA_B         (new int[] {166, 2, 80, 80}, PropType.MANAICONS),
@@ -338,6 +356,7 @@ public enum FSkinProp {
     IMG_PACK            (new int[] {80, 760, 40, 40}, PropType.IMAGE),
     IMG_SORCERY         (new int[] {412, 740, 80, 80}, PropType.MANAICONS),
     IMG_COMMANDER       (new int[] {120, 760, 40, 40}, PropType.IMAGE),
+    IMG_ALCHEMY         (new int[] {248, 822, 80, 80}, PropType.MANAICONS),
 
     //achievement trophies and shelf
     IMG_COMMON_TROPHY     (new int[] {0, 0, 135, 185}, PropType.TROPHY),
@@ -381,6 +400,25 @@ public enum FSkinProp {
     IMG_BTN_DISABLED_LEFT   (new int[] {80, 200, 40, 40}, PropType.ICON),
     IMG_BTN_DISABLED_CENTER (new int[] {120, 200, 1, 40}, PropType.ICON),
     IMG_BTN_DISABLED_RIGHT  (new int[] {160, 200, 40, 40}, PropType.ICON),
+    //adv_buttons
+    IMG_ADV_BTN_UP_LEFT         (new int[] {0, 0, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_UP_CENTER       (new int[] {80, 0, 60, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_UP_RIGHT        (new int[] {160, 0, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_OVER_LEFT       (new int[] {0, 80, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_OVER_CENTER     (new int[] {80, 80, 60, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_OVER_RIGHT      (new int[] {160, 80, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_DOWN_LEFT       (new int[] {0, 160, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_DOWN_CENTER     (new int[] {80, 160, 60, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_DOWN_RIGHT      (new int[] {160, 160, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_FOCUS_LEFT      (new int[] {0, 240, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_FOCUS_CENTER    (new int[] {80, 240, 60, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_FOCUS_RIGHT     (new int[] {160, 240, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_TOGGLE_LEFT     (new int[] {0, 320, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_TOGGLE_CENTER   (new int[] {80, 320, 60, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_TOGGLE_RIGHT    (new int[] {160, 320, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_DISABLED_LEFT   (new int[] {0, 400, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_DISABLED_CENTER (new int[] {80, 400, 60, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_DISABLED_RIGHT  (new int[] {160, 400, 80, 80}, PropType.ADV_BUTTONS),
     //hd buttons
     IMG_HDBTN_START_UP        (new int[] {2, 2, 588, 312}, PropType.BTNSTART),
     IMG_HDBTN_START_OVER      (new int[] {1183, 2, 588, 312}, PropType.BTNSTART),
@@ -575,6 +613,7 @@ public enum FSkinProp {
         TROPHY,
         ABILITY,
         BORDERS,
+        ADV_BUTTONS,
         BUTTONS,
         BTNSTART,
         MANAICONS,

@@ -26,7 +26,7 @@ public class ColorDeckGenerator extends DeckProxy implements Comparable<ColorDec
     private final boolean isAi;
     private final Predicate<PaperCard> formatFilter;
 
-    private ColorDeckGenerator(final String name0, final int index0, final IItemManager<DeckProxy> lstDecks0,final Predicate<PaperCard> formatFilter0, final boolean isAi0) {
+    private ColorDeckGenerator(final String name0, final int index0, final IItemManager<DeckProxy> lstDecks0, final Predicate<PaperCard> formatFilter0, final boolean isAi0) {
         super();
         name = name0;
         index = index0;

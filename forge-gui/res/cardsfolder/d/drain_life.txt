@@ -11,4 +11,5 @@ SVar:Y:Count$TotalDamageDoneByThisTurn
 SVar:DrainedLifeCard:SVar$Y/LimitMax.Limit
 SVar:Limit:Count$xPaid
 SVar:Loyalty:Targeted$CardCounters.LOYALTY
+DeckHas:Ability$LifeGain
 Oracle:Spend only black mana on X.\nDrain Life deals X damage to any target. You gain life equal to the damage dealt, but not more life than the player's life total before the damage was dealt, the planeswalker's loyalty before the damage was dealt, or the creature's toughness.

@@ -1,9 +1,6 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import forge.card.MagicColor;
 import forge.game.Game;
@@ -115,7 +112,7 @@ public class DigEffect extends SpellAbilityEffect {
         final Game game = player.getGame();
         final Player cont = host.getController();
         Player chooser = player;
-        int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
+        int digNum = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
 
         final ZoneType srcZone = sa.hasParam("SourceZone") ? ZoneType.smartValueOf(sa.getParam("SourceZone")) : ZoneType.Library;
 
@@ -187,11 +184,15 @@ public class DigEffect extends SpellAbilityEffect {
             }
             final CardCollection top = new CardCollection();
             final CardCollection rest = new CardCollection();
-            final PlayerZone sourceZone = p.getZone(srcZone);
+            CardCollection all = new CardCollection(p.getCardsIn(srcZone));
 
-            numToDig = Math.min(numToDig, sourceZone.size());
+            if (sa.hasParam("FromBottom")) {
+                Collections.reverse(all);
+            }
+
+            int numToDig = Math.min(digNum, all.size());
             for (int i = 0; i < numToDig; i++) {
-                top.add(sourceZone.get(i));
+                top.add(all.get(i));
             }
 
             if (!top.isEmpty()) {
@@ -420,6 +421,16 @@ public class DigEffect extends SpellAbilityEffect {
                                 final int numCtr = AbilityUtils.calculateAmount(host,
                                         sa.getParamOrDefault("WithCounterNum", "1"), sa);
                                 c.addEtbCounter(CounterType.getType(sa.getParam("WithCounter")), numCtr, player);
+                            }
+                            if (sa.hasAdditionalAbility("AnimateSubAbility")) {
+                                // need LKI before Animate does apply
+                                if (!moveParams.containsKey(AbilityKey.CardLKI)) {
+                                    moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
+                                }
+
+                                host.addRemembered(c);
+                                AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
+                                host.removeRemembered(c);
                             }
                             c = game.getAction().moveTo(zone, c, sa, moveParams);
                             if (destZone1.equals(ZoneType.Battlefield)) {

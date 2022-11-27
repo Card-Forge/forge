@@ -1,0 +1,6 @@
+Name:Banana
+ManaCost:no cost
+Types:Artifact
+A:AB$ Mana | Cost$ T Sac<1/CARDNAME/this artifact> | Produced$ Combo R G | Amount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Add {R} or {G}. You gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+Oracle:{T}, Sacrifice this artifact: Add {R} or {G}. You gain 2 life.

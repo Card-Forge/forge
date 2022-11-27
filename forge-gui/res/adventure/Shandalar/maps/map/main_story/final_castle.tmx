@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="30" height="114" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="63">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="114" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="63">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
+ <properties>
+  <property name="respawnEnemies" type="bool" value="true"/>
+ </properties>
  <tileset firstgid="1" source="../../tileset/main.tsx"/>
- <tileset firstgid="6321" source="../../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../../tileset/buildings.tsx"/>
  <layer id="1" name="Background" width="30" height="114">
   <data encoding="base64" compression="zlib">
    eJztw8EJAAAMA6H7dn/IvF1EwV1NVVVVVVVVVVVVVVVV1R62fUyd
@@ -78,7 +81,7 @@
       &quot;text&quot;:&quot;The gate is unlocked&quot;,
       &quot;options&quot;:[
         {
-          &quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1}]
+          &quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Red Key&quot;}]
         }
       ]
     }
@@ -96,7 +99,7 @@
         &quot;name&quot;:&quot;unlock with blue key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Blue Key&quot;}],    
         &quot;text&quot;:&quot;The gate is unlocked&quot;,
-        &quot;options&quot;:[ {&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1}]} ]
+        &quot;options&quot;:[ {&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[{&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Blue Key&quot;}]} ]
     }
     ]
 }]</property>
@@ -112,7 +115,7 @@
         &quot;name&quot;:&quot;unlock with green key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Green Key&quot;}],    
         &quot;text&quot;:&quot;The gate is unlocked&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1}]} ]
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;,&quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Green Key&quot;}]} ]
     }
     ]
 }]</property>
@@ -128,7 +131,7 @@
         &quot;name&quot;:&quot;unlock with white key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;White Key&quot;}],    
         &quot;text&quot;:&quot;The gate is unlocked&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1}]} ]
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;White Key&quot;}]} ]
     }
     ]
 }]</property>
@@ -144,7 +147,7 @@
         &quot;name&quot;:&quot;unlock with black key&quot;,     
         &quot;condition&quot;:[{&quot;item&quot;:&quot;Black Key&quot;}],    
         &quot;text&quot;:&quot;The gate is unlocked&quot;,
-        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1}]} ]
+        &quot;options&quot;:[{&quot;name&quot;:&quot;continue&quot;, &quot;action&quot;:[ {&quot;deleteMapObject&quot;:-1},{&quot;removeItem&quot;:&quot;Black Key&quot;}]} ]
     }
     ]
 }]</property>

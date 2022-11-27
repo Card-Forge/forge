@@ -3,5 +3,9 @@ ManaCost:2 G G G G
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.Green | AddKeyword$ Forestwalk | Description$ Green creatures have forestwalk. (They can't be blocked as long as defending player controls a Forest.)
 SVar:NonStackingEffect:True
+SVar:NeedsToPlayVar:CountOpps LTCountMe
+SVar:CountOpps:Count$Valid Creature.OppCtrl+Green
+SVar:CountMe:Count$Valid Creature.YouCtrl+Green
+DeckHas:Keyword$Forestwalk
 AI:RemoveDeck:Random
 Oracle:Green creatures have forestwalk. (They can't be blocked as long as defending player controls a Forest.)

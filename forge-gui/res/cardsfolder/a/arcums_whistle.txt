@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact
 A:AB$ Animate | Cost$ 3 T | ActivationPhases$ Upkeep->BeginCombat | ActivationFirstCombat$ True | ValidTgts$ Creature.nonWall+ActivePlayerCtrl+notFirstTurnControlled | TgtPrompt$ Select target non-Wall creature the active player has controlled continuously since the beginning of the turn | IsCurse$ True | staticAbilities$ MustAttack | UnlessCost$ X | UnlessPayer$ TargetedController | UnlessResolveSubs$ WhenNotPaid | SubAbility$ DestroyPacifist | SpellDescription$ Choose target non-Wall creature the active player has controlled continuously since the beginning of the turn. That player may pay {X}, where X is that creature's mana value. If they don't pay, the creature attacks this turn if able, and at the beginning of the next end step, destroy it if it didn't attack this turn. Activate only before attackers are declared.
 SVar:MustAttack:Mode$ MustAttack | ValidCreature$ Card.Self | Description$ This creature attacks this turn if able.
-SVar:DestroyPacifist:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDestroy | RememberObjects$ ParentTarget | TriggerDescription$ At the beginning of the end step, destroy that creature if it didn't attack this turn.
+SVar:DestroyPacifist:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDestroy | RememberObjects$ ParentTarget | TriggerDescription$ At the beginning of the next end step, destroy that creature if it didn't attack this turn.
 SVar:TrigDestroy:DB$ Destroy | Defined$ DelayTriggerRemembered | ConditionDefined$ DelayTriggerRemembered | ConditionPresent$ Creature.notAttackedThisTurn | ConditionCompare$ GE1
 SVar:X:Targeted$CardManaCost
 AI:RemoveDeck:All

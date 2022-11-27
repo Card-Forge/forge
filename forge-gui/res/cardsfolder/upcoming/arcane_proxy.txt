@@ -1,0 +1,12 @@
+Name:Arcane Proxy
+ManaCost:7
+Types:Artifact Creature Wizard
+PT:4/3
+K:Prototype:1 U U:2:1
+T:Mode$ ChangesZone | ValidCard$ Card.Self+wasCastByYou | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, exile target instant or sorcery card with mana value less than or equal to CARDNAME's power from your graveyard. Copy that card. You may cast the copy without paying its mana cost.
+SVar:TrigExile:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | TgtPrompt$ Select target instant or sorcery card with mana value less than or equal to CARDNAME's power | ValidTgts$ Instant.YouOwn+cmcLEX,Sorcery.YouOwn+cmcLEX | RememberChanged$ True | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Valid$ Card.IsRemembered | ValidZone$ Exile | Controller$ You | CopyCard$ True | WithoutManaCost$ True | ValidSA$ Spell | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHints:Type$Instant|Sorcery & Color$Blue
+SVar:X:Count$CardPower
+Oracle:Prototype {1}{U}{U} — 2/1 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nWhen Arcane Proxy enters the battlefield, if you cast it, exile target instant or sorcery card with mana value less than or equal to Arcane Proxy's power from your graveyard. Copy that card. You may cast the copy without paying its mana cost.

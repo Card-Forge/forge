@@ -167,7 +167,7 @@ public class LoadQuestScreen extends LaunchScreen {
     @Override
     protected void drawOverlay(Graphics g) {
         float y = lstQuests.getTop();
-        g.drawLine(1, FList.LINE_COLOR, 0, y, lstQuests.getWidth(), y); //draw top border for list
+        g.drawLine(1, FList.getLineColor(), 0, y, lstQuests.getWidth(), y); //draw top border for list
     }
 
     @Override

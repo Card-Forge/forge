@@ -1,0 +1,16 @@
+Name:Topaz Dragon
+ManaCost:4 B B
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Deathtouch
+AlternateMode:Adventure
+Oracle:Flying, deathtouch
+
+ALTERNATE
+
+Name:Entropic Cloud
+ManaCost:1 B
+Types:Instant Adventure
+A:SP$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Deathtouch | SpellDescription$ Creatures you control gain deathtouch until end of turn. (Then exile this card. You may cast the creature later from exile.)
+Oracle:Creatures you control gain deathtouch until end of turn. (Then exile this card. You may cast the creature later from exile.)

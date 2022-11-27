@@ -1,0 +1,12 @@
+Name:Viashino Branchrider
+ManaCost:R
+Types:Creature Viashino Warrior
+PT:1/1
+K:Haste
+K:Kicker:2 G
+K:etbCounter:P1P1:2:CheckSVar$ WasKicked:If CARDNAME was kicked, it enters the battlefield with two +1/+1 counters on it.
+A:AB$ Pump | Cost$ 2 R | Defined$ Self | NumAtt$ +2 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
+SVar:WasKicked:Count$Kicked.1.0
+DeckHas:Ability$Counters
+DeckHints:Color$Green
+Oracle:Kicker {2}{G} (You may pay an additional {2}{G} as you cast this spell.)\nHaste\nIf Viashino Branchrider was kicked, it enters the battlefield with two +1/+1 counters on it.\n{2}{R}: Viashino Branchrider gets +2/+0 until end of turn.

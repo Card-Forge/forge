@@ -1,0 +1,8 @@
+Name:Aron, Benalia's Ruin
+ManaCost:W W B
+Types:Legendary Creature Phyrexian Human
+PT:3/3
+K:Menace
+A:AB$ PutCounterAll | Cost$ W B T Sac<1/Creature.Other/another creature> | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on each creature you control.
+DeckHas:Ability$Counters|Sacrifice
+Oracle:Menace\n{W}{B}, {T}, Sacrifice another creature: Put a +1/+1 counter on each creature you control.

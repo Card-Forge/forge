@@ -4,7 +4,6 @@ Types:Creature Human Warrior
 PT:*/*
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ Domain — CARDNAME's power and toughness are each equal to the number of basic land types among lands you control.
 SVar:X:Count$Domain
-SVar:BuffedBy:Plains,Island,Swamp,Mountain,Forest
 AI:RemoveDeck:Random
 SVar:NeedsToPlayVar:X GE2
 Oracle:Domain — Matca Rioters's power and toughness are each equal to the number of basic land types among lands you control.

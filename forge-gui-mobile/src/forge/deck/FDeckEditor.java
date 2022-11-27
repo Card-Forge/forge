@@ -264,8 +264,8 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
     protected final DeckHeader deckHeader = add(new DeckHeader());
     protected final FLabel lblName = deckHeader.add(new FLabel.Builder().font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build());
-    private final FLabel btnSave = deckHeader.add(new FLabel.Builder().icon(Forge.hdbuttons ? FSkinImage.HDSAVE : FSkinImage.SAVE).align(Align.center).pressedColor(Header.BTN_PRESSED_COLOR).build());
-    private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(Align.center).pressedColor(Header.BTN_PRESSED_COLOR).build());
+    private final FLabel btnSave = deckHeader.add(new FLabel.Builder().icon(Forge.hdbuttons ? FSkinImage.HDSAVE : FSkinImage.SAVE).align(Align.center).pressedColor(Header.getBtnPressedColor()).build());
+    private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(Align.center).pressedColor(Header.getBtnPressedColor()).build());
 
     public FDeckEditor(EditorType editorType0, DeckProxy editDeck, boolean showMainDeck) {
         this(editorType0, editDeck.getName(), editDeck.getPath(), null, showMainDeck,null);
@@ -720,13 +720,13 @@ public class FDeckEditor extends TabPageScreen<FDeckEditor> {
 
         @Override
         public void drawBackground(Graphics g) {
-            g.fillRect(Header.BACK_COLOR, 0, 0, getWidth(), HEADER_HEIGHT);
+            g.fillRect(Header.getBackColor(), 0, 0, getWidth(), HEADER_HEIGHT);
         }
 
         @Override
         public void drawOverlay(Graphics g) {
             float y = HEADER_HEIGHT - Header.LINE_THICKNESS / 2;
-            g.drawLine(Header.LINE_THICKNESS, Header.LINE_COLOR, 0, y, getWidth(), y);
+            g.drawLine(Header.LINE_THICKNESS, Header.getLineColor(), 0, y, getWidth(), y);
         }
 
         @Override

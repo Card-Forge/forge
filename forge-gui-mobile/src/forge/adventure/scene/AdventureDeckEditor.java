@@ -1,26 +1,22 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.base.Function;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.player.AdventurePlayer;
+import forge.adventure.util.Config;
 import forge.assets.FImage;
 import forge.assets.FSkinFont;
 import forge.assets.FSkinImage;
-import forge.deck.CardPool;
-import forge.deck.Deck;
-import forge.deck.DeckFormat;
-import forge.deck.DeckSection;
-import forge.deck.FDeckViewer;
+import forge.deck.*;
 import forge.item.InventoryItem;
 import forge.item.PaperCard;
-import forge.itemmanager.CardManager;
-import forge.itemmanager.ColumnDef;
-import forge.itemmanager.ItemColumn;
-import forge.itemmanager.ItemManager;
-import forge.itemmanager.ItemManagerConfig;
+import forge.itemmanager.*;
 import forge.itemmanager.filters.ItemFilter;
 import forge.localinstance.properties.ForgePreferences;
 import forge.menu.FCheckBoxMenuItem;
@@ -43,12 +39,76 @@ import java.util.HashMap;
 import java.util.Map;
  
     public class AdventureDeckEditor extends TabPageScreen<AdventureDeckEditor> {
-        public static FSkinImage MAIN_DECK_ICON = Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
-        public static FSkinImage SIDEBOARD_ICON = Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
+        private static final FileHandle deckIcon = Config.instance().getFile("ui/maindeck.png");
+        private static Texture deckTexture = deckIcon.exists() ? new Texture(deckIcon) : null;
+        private static FImage MAIN_DECK_ICON = deckIcon.exists() ? new FImage() {
+            @Override
+            public float getWidth() {
+                return 100f;
+            }
+            @Override
+            public float getHeight() {
+                return 100f;
+            }
+            @Override
+            public void draw(Graphics g, float x, float y, float w, float h) {
+                g.drawImage(deckTexture, x, y, w, h);
+            }
+        } : Forge.hdbuttons ? FSkinImage.HDLIBRARY :FSkinImage.DECKLIST;
+        private static final FileHandle sideIcon = Config.instance().getFile("ui/sideboard.png");
+        private static Texture sideTexture = sideIcon.exists() ? new Texture(sideIcon) : null;
+        private static FImage SIDEBOARD_ICON = sideIcon.exists() ? new FImage() {
+            @Override
+            public float getWidth() {
+                return 100f;
+            }
+            @Override
+            public float getHeight() {
+                return 100f;
+            }
+            @Override
+            public void draw(Graphics g, float x, float y, float w, float h) {
+                g.drawImage(sideTexture, x, y, w, h);
+            }
+        } : Forge.hdbuttons ? FSkinImage.HDSIDEBOARD : FSkinImage.FLASHBACK;
         private static final float HEADER_HEIGHT = Math.round(Utils.AVG_FINGER_HEIGHT * 0.8f);
-        private static final FLabel lblGold = new FLabel.Builder().text("0").icon(FSkinImage.QUEST_COINSTACK).font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build();
+        private static final FileHandle binderIcon = Config.instance().getFile("ui/binder.png");
+        private static Texture binderTexture = binderIcon.exists() ? new Texture(binderIcon) : null;
+        private static FImage CATALOG_ICON = binderIcon.exists() ? new FImage() {
+            @Override
+            public float getWidth() {
+                return 100f;
+            }
+            @Override
+            public float getHeight() {
+                return 100f;
+            }
+            @Override
+            public void draw(Graphics g, float x, float y, float w, float h) {
+                g.drawImage(binderTexture, x, y, w, h);
+            }
+        } : FSkinImage.QUEST_BOX;
+        private static final FileHandle sellIcon = Config.instance().getFile("ui/sell.png");
+        private static Texture sellIconTexture = sellIcon.exists() ? new Texture(sellIcon) : null;
+        private static final FLabel lblGold = new FLabel.Builder().text("0").icon( sellIconTexture == null ? FSkinImage.QUEST_COINSTACK :
+                new FImage() {
+                    @Override
+                    public float getWidth() {
+                        return 100f;
+                    }
+                    @Override
+                    public float getHeight() {
+                        return 100f;
+                    }
+                    @Override
+                    public void draw(Graphics g, float x, float y, float w, float h) {
+                        g.drawImage(sellIconTexture, x, y, w, h);
+                    }
+                }
+        ).font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build();
 
         private static ItemPool<InventoryItem> decksUsingMyCards=new ItemPool<>(InventoryItem.class);
+        private int selected = 0;
         public static void leave() {
             AdventurePlayer.current().getNewCards().clear();
             Forge.clearCurrentScreen();
@@ -88,7 +148,7 @@ import java.util.Map;
         }
         private static DeckEditorPage[] getPages() {
             return new DeckEditorPage[] {
-                    new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), FSkinImage.QUEST_BOX),
+                    new CatalogPage(ItemManagerConfig.QUEST_EDITOR_POOL, Forge.getLocalizer().getMessage("lblInventory"), CATALOG_ICON),
                     new DeckSectionPage(DeckSection.Main, ItemManagerConfig.QUEST_DECK_EDITOR),
                     new DeckSectionPage(DeckSection.Sideboard, ItemManagerConfig.QUEST_DECK_EDITOR)
             };
@@ -100,17 +160,12 @@ import java.util.Map;
 
         protected final DeckHeader deckHeader = add(new DeckHeader());
         protected final FLabel lblName = deckHeader.add(new FLabel.Builder().font(FSkinFont.get(16)).insets(new Vector2(Utils.scale(5), 0)).build());
-        private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(Align.center).pressedColor(Header.BTN_PRESSED_COLOR).build());
+        private final FLabel btnMoreOptions = deckHeader.add(new FLabel.Builder().text("...").font(FSkinFont.get(20)).align(Align.center).pressedColor(Header.getBtnPressedColor()).build());
 
 
-        boolean isShop=false;
+        boolean isShop;
         public AdventureDeckEditor(boolean createAsShop) {
-            super(new FEvent.FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    leave();
-                }
-            },getPages());
+            super(e -> leave(),getPages());
 
             isShop=createAsShop;
 
@@ -145,12 +200,7 @@ import java.util.Map;
                     FPopupMenu menu = new FPopupMenu() {
                         @Override
                         protected void buildMenu() {
-                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, new FEvent.FEventHandler() {
-                                @Override
-                                public void handleEvent(FEvent e1) {
-                                    FDeckViewer.copyDeckToClipboard(getDeck());
-                                }
-                            }));
+                            addItem(new FMenuItem(Forge.getLocalizer().getMessage("btnCopyToClipboard"), Forge.hdbuttons ? FSkinImage.HDEXPORT : FSkinImage.BLANK, e1 -> FDeckViewer.copyDeckToClipboard(getDeck())));
                             ((DeckEditorPage)getSelectedPage()).buildDeckMenu(this);
                         }
                     };
@@ -203,13 +253,13 @@ import java.util.Map;
 
             @Override
             public void drawBackground(Graphics g) {
-                g.fillRect(Header.BACK_COLOR, 0, 0, getWidth(), HEADER_HEIGHT);
+                g.fillRect(Header.getBackColor(), 0, 0, getWidth(), HEADER_HEIGHT);
             }
 
             @Override
             public void drawOverlay(Graphics g) {
                 float y = HEADER_HEIGHT - Header.LINE_THICKNESS / 2;
-                g.drawLine(Header.LINE_THICKNESS, Header.LINE_COLOR, 0, y, getWidth(), y);
+                g.drawLine(Header.LINE_THICKNESS, Header.getLineColor(), 0, y, getWidth(), y);
             }
 
             @Override
@@ -252,12 +302,7 @@ import java.util.Map;
             protected CardManagerPage(ItemManagerConfig config0, String caption0, FImage icon0) {
                 super(caption0, icon0);
                 config = config0;
-                cardManager.setItemActivateHandler(new FEvent.FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        CardManagerPage.this.onCardActivated(cardManager.getSelectedItem());
-                    }
-                });
+                cardManager.setItemActivateHandler(e -> CardManagerPage.this.onCardActivated(cardManager.getSelectedItem()));
                 cardManager.setContextMenuBuilder(new ItemManager.ContextMenuBuilder<PaperCard>() {
                     @Override
                     public void buildMenu(final FDropDownMenu menu, final PaperCard card) {
@@ -265,30 +310,10 @@ import java.util.Map;
                     }
                 });
             }
-            private final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = new Function<Map.Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(Map.Entry<InventoryItem, Integer> from) {
-                    return AdventurePlayer.current().getNewCards().contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
-                }
-            };
-            private final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnNewGet = new Function<Map.Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(Map.Entry<? extends InventoryItem, Integer> from) {
-                    return AdventurePlayer.current().getNewCards().contains(from.getKey()) ? "NEW" : "";
-                }
-            };
-            public static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Map.Entry<InventoryItem, Integer>, Comparable<?>>() {
-                @Override
-                public Comparable<?> apply(Map.Entry<InventoryItem, Integer> from) {
-                    return decksUsingMyCards.count(from.getKey());
-                }
-            };
-            public static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = new Function<Map.Entry<? extends InventoryItem, Integer>, Object>() {
-                @Override
-                public Object apply(Map.Entry<? extends InventoryItem, Integer> from) {
-                    return Integer.valueOf(decksUsingMyCards.count(from.getKey())).toString();
-                }
-            };
+            private final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = from -> AdventurePlayer.current().getNewCards().contains(from.getKey()) ? Integer.valueOf(1) : Integer.valueOf(0);
+            private final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnNewGet = from -> AdventurePlayer.current().getNewCards().contains(from.getKey()) ? "NEW" : "";
+            public static final Function<Map.Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = from -> decksUsingMyCards.count(from.getKey());
+            public static final Function<Map.Entry<? extends InventoryItem, Integer>, Object> fnDeckGet = from -> Integer.valueOf(decksUsingMyCards.count(from.getKey())).toString();
 
             protected void initialize() {
 
@@ -418,14 +443,11 @@ import java.util.Map;
                 if (!StringUtils.isEmpty(dest)) {
                     label += " " + dest;
                 }
-                menu.addItem(new FMenuItem(label, icon, new FEvent.FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        if (max == 1) {
-                            callback.run(max);
-                        } else {
-                            GuiChoose.getInteger(cardManager.getSelectedItem() + " - " + verb + " " + Forge.getLocalizer().getMessage("lblHowMany"), 1, max, 20, callback);
-                        }
+                menu.addItem(new FMenuItem(label, icon, e -> {
+                    if (max == 1) {
+                        callback.run(max);
+                    } else {
+                        GuiChoose.getInteger(cardManager.getSelectedItem() + " - " + verb + " " + Forge.getLocalizer().getMessage("lblHowMany"), 1, max, 20, callback);
                     }
                 }));
             }
@@ -542,6 +564,30 @@ import java.util.Map;
 
             protected CatalogPage(ItemManagerConfig config, String caption0, FImage icon0) {
                 super(config, caption0, icon0);
+            }
+            private void setNextSelected() {
+                setNextSelected(1);
+            }
+            private void setNextSelected(int val) {
+                if (cardManager.getItemCount() < 1)
+                    return;
+                if ((cardManager.getSelectedIndex()+val) < cardManager.getItemCount()) {
+                    cardManager.setSelectedIndex(cardManager.getSelectedIndex()+val);
+                } else if ((cardManager.getSelectedIndex()+1) < cardManager.getItemCount()) {
+                    cardManager.setSelectedIndex(cardManager.getSelectedIndex()+1);
+                }
+            }
+            private void setPreviousSelected() {
+                setPreviousSelected(1);
+            }
+            private void setPreviousSelected(int val) {
+                if (cardManager.getItemCount() < 1)
+                    return;
+                if ((cardManager.getSelectedIndex()-val) > -1) {
+                    cardManager.setSelectedIndex(cardManager.getSelectedIndex()-val);
+                } else if ((cardManager.getSelectedIndex()-1) > -1) {
+                    cardManager.setSelectedIndex(cardManager.getSelectedIndex()-1);
+                }
             }
 
             @Override
@@ -668,14 +714,11 @@ import java.util.Map;
             @Override
             protected void buildDeckMenu(FPopupMenu menu) {
                 if (cardManager.getConfig().getShowUniqueCardsOption()) {
-                    menu.addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblUniqueCardsOnly"), cardManager.getWantUnique(), new FEvent.FEventHandler() {
-                        @Override
-                        public void handleEvent(FEvent e) {
-                            boolean wantUnique = !cardManager.getWantUnique();
-                            cardManager.setWantUnique(wantUnique);
-                            CatalogPage.this.refresh();
-                            cardManager.getConfig().setUniqueCardsOnly(wantUnique);
-                        }
+                    menu.addItem(new FCheckBoxMenuItem(Forge.getLocalizer().getMessage("lblUniqueCardsOnly"), cardManager.getWantUnique(), e -> {
+                        boolean wantUnique = !cardManager.getWantUnique();
+                        cardManager.setWantUnique(wantUnique);
+                        CatalogPage.this.refresh();
+                        cardManager.getConfig().setUniqueCardsOnly(wantUnique);
                     }));
                 }
             }
@@ -684,6 +727,30 @@ import java.util.Map;
         protected static class DeckSectionPage extends CardManagerPage {
             private final String captionPrefix;
             private final DeckSection deckSection;
+            private void setNextSelected() {
+                setNextSelected(1);
+            }
+            private void setNextSelected(int val) {
+                if (cardManager.getItemCount() < 1)
+                    return;
+                if ((cardManager.getSelectedIndex()+val) < cardManager.getItemCount()) {
+                    cardManager.setSelectedIndex(cardManager.getSelectedIndex()+val);
+                } else if ((cardManager.getSelectedIndex()+1) < cardManager.getItemCount()) {
+                    cardManager.setSelectedIndex(cardManager.getSelectedIndex()+1);
+                }
+            }
+            private void setPreviousSelected() {
+                setPreviousSelected(1);
+            }
+            private void setPreviousSelected(int val) {
+                if (cardManager.getItemCount() < 1)
+                    return;
+                if ((cardManager.getSelectedIndex()-val) > -1) {
+                    cardManager.setSelectedIndex(cardManager.getSelectedIndex()-val);
+                } else if ((cardManager.getSelectedIndex()-1) > -1) {
+                    cardManager.setSelectedIndex(cardManager.getSelectedIndex()-1);
+                }
+            }
 
             protected DeckSectionPage(DeckSection deckSection0, ItemManagerConfig config) {
                 super(config, null, null);
@@ -844,5 +911,150 @@ import java.util.Map;
             }
         }
 
+        @Override
+        public boolean keyDown(int keyCode) {
+            if (keyCode == Input.Keys.BUTTON_SELECT) {
+                return this.tabHeader.btnBack.trigger();
+            } else if (keyCode == Input.Keys.BUTTON_R1) {
+                if (getSelectedPage() instanceof CatalogPage)
+                    ((CatalogPage) getSelectedPage()).cardManager.closeMenu();
+                else if (getSelectedPage() instanceof DeckSectionPage)
+                    ((DeckSectionPage) getSelectedPage()).cardManager.closeMenu();
+                selected++;
+                if (selected > 2)
+                    selected = 0;
+                setSelectedPage(tabPages[selected]);
+                if (getSelectedPage() instanceof CatalogPage) {
+                    ((CatalogPage) getSelectedPage()).cardManager.getConfig().setPileBy(null);
+                    ((CatalogPage) getSelectedPage()).cardManager.setHideFilters(true);
+                } else if (getSelectedPage() instanceof DeckSectionPage) {
+                    ((DeckSectionPage) getSelectedPage()).cardManager.getConfig().setPileBy(null);
+                    ((DeckSectionPage) getSelectedPage()).cardManager.setHideFilters(true);
+                }
+            } else if (keyCode == Input.Keys.DPAD_RIGHT) {
+                if (getSelectedPage() instanceof CatalogPage) {
+                    if (((CatalogPage) getSelectedPage()).cardManager.getConfig().getViewIndex() == 1)
+                        ((CatalogPage) getSelectedPage()).setNextSelected();
+                } else if (getSelectedPage() instanceof DeckSectionPage) {
+                    if (((DeckSectionPage) getSelectedPage()).cardManager.getConfig().getViewIndex() == 1)
+                        ((DeckSectionPage) getSelectedPage()).setNextSelected();
+                }
+            } else if (keyCode == Input.Keys.DPAD_LEFT) {
+                if (getSelectedPage() instanceof CatalogPage) {
+                    if (((CatalogPage) getSelectedPage()).cardManager.getConfig().getViewIndex() == 1)
+                        ((CatalogPage) getSelectedPage()).setPreviousSelected();
+                } else if (getSelectedPage() instanceof DeckSectionPage) {
+                    if (((DeckSectionPage) getSelectedPage()).cardManager.getConfig().getViewIndex() == 1)
+                        ((DeckSectionPage) getSelectedPage()).setPreviousSelected();
+                }
+            } else if (keyCode == Input.Keys.DPAD_DOWN) {
+                if (getSelectedPage() instanceof CatalogPage) {
+                    if (((CatalogPage) getSelectedPage()).cardManager.isContextMenuOpen()) {
+                        ((CatalogPage) getSelectedPage()).cardManager.selectNextContext();
+                    } else {
+                        if (((CatalogPage) getSelectedPage()).cardManager.getSelectedIndex() < 0)
+                            ((CatalogPage) getSelectedPage()).setNextSelected();
+                        else if (((CatalogPage) getSelectedPage()).cardManager.getConfig().getViewIndex() == 1)
+                            ((CatalogPage) getSelectedPage()).setNextSelected(((CatalogPage) getSelectedPage()).cardManager.getConfig().getImageColumnCount());
+                        else
+                            ((CatalogPage) getSelectedPage()).setNextSelected();
+                    }
+                } else if (getSelectedPage() instanceof DeckSectionPage) {
+                    if (((DeckSectionPage) getSelectedPage()).cardManager.isContextMenuOpen()) {
+                        ((DeckSectionPage) getSelectedPage()).cardManager.selectNextContext();
+                    } else {
+                        if (((DeckSectionPage) getSelectedPage()).cardManager.getSelectedIndex() < 0)
+                            ((DeckSectionPage) getSelectedPage()).setNextSelected();
+                        else if (((DeckSectionPage) getSelectedPage()).cardManager.getConfig().getViewIndex() == 1)
+                            ((DeckSectionPage) getSelectedPage()).setNextSelected(((DeckSectionPage) getSelectedPage()).cardManager.getConfig().getImageColumnCount());
+                        else
+                            ((DeckSectionPage) getSelectedPage()).setNextSelected();
+                    }
+                }
+            } else if (keyCode == Input.Keys.DPAD_UP) {
+                if (getSelectedPage() instanceof CatalogPage) {
+                    if (((CatalogPage) getSelectedPage()).cardManager.isContextMenuOpen()) {
+                        ((CatalogPage) getSelectedPage()).cardManager.selectPreviousContext();
+                    } else {
+                        if (((CatalogPage) getSelectedPage()).cardManager.getSelectedIndex() < 0)
+                            ((CatalogPage) getSelectedPage()).setNextSelected();
+                        else if (((CatalogPage) getSelectedPage()).cardManager.getConfig().getViewIndex() == 1)
+                            ((CatalogPage) getSelectedPage()).setPreviousSelected(((CatalogPage) getSelectedPage()).cardManager.getConfig().getImageColumnCount());
+                        else
+                            ((CatalogPage) getSelectedPage()).setPreviousSelected();
+                    }
+                } else if (getSelectedPage() instanceof DeckSectionPage) {
+                    if (((DeckSectionPage) getSelectedPage()).cardManager.isContextMenuOpen()) {
+                        ((DeckSectionPage) getSelectedPage()).cardManager.selectPreviousContext();
+                    } else {
+                        if (((DeckSectionPage) getSelectedPage()).cardManager.getSelectedIndex() < 0)
+                            ((DeckSectionPage) getSelectedPage()).setNextSelected();
+                        else if (((DeckSectionPage) getSelectedPage()).cardManager.getConfig().getViewIndex() == 1)
+                            ((DeckSectionPage) getSelectedPage()).setPreviousSelected(((DeckSectionPage) getSelectedPage()).cardManager.getConfig().getImageColumnCount());
+                        else
+                            ((DeckSectionPage) getSelectedPage()).setPreviousSelected();
+                    }
+                }
+            } else if (keyCode == Input.Keys.BUTTON_A) {
+                if (getSelectedPage() instanceof CatalogPage) {
+                    if (((CatalogPage) getSelectedPage()).cardManager.isContextMenuOpen())
+                        ((CatalogPage) getSelectedPage()).cardManager.activateSelectedContext();
+                    else
+                        ((CatalogPage) getSelectedPage()).cardManager.showMenu(true);
+                } else if (getSelectedPage() instanceof DeckSectionPage) {
+                    if (((DeckSectionPage) getSelectedPage()).cardManager.isContextMenuOpen() )
+                        ((DeckSectionPage) getSelectedPage()).cardManager.activateSelectedContext();
+                    else
+                        ((DeckSectionPage) getSelectedPage()).cardManager.showMenu(true);
+                }
+            } else if (keyCode == Input.Keys.BUTTON_B) {
+                if (getSelectedPage() instanceof CatalogPage) {
+                    if (((CatalogPage) getSelectedPage()).cardManager.isContextMenuOpen()) {
+                        ((CatalogPage) getSelectedPage()).cardManager.closeMenu();
+                    } else
+                        return this.tabHeader.btnBack.trigger();
+                } else if (getSelectedPage() instanceof DeckSectionPage) {
+                    if (((DeckSectionPage) getSelectedPage()).cardManager.isContextMenuOpen()) {
+                        ((DeckSectionPage) getSelectedPage()).cardManager.closeMenu();
+                    } else
+                        return this.tabHeader.btnBack.trigger();
+                }
+            } else if (keyCode == Input.Keys.BUTTON_Y) {
+                if (getSelectedPage() instanceof CatalogPage) {
+                    if (!((CatalogPage) getSelectedPage()).cardManager.isContextMenuOpen()) {
+                        if (((CatalogPage) getSelectedPage()).cardManager.getCurrentView().getSelectionCount() > 0) {
+                            ((CatalogPage) getSelectedPage()).cardManager.getCurrentView().zoomSelected();
+                        }
+                    } else {
+                        ((CatalogPage) getSelectedPage()).cardManager.closeMenu();
+                        if (((CatalogPage) getSelectedPage()).cardManager.getCurrentView().getSelectionCount() > 0) {
+                            ((CatalogPage) getSelectedPage()).cardManager.getCurrentView().zoomSelected();
+                        }
+                    }
+                } else if (getSelectedPage() instanceof DeckSectionPage) {
+                    if (!((DeckSectionPage) getSelectedPage()).cardManager.isContextMenuOpen()) {
+                        if (((DeckSectionPage) getSelectedPage()).cardManager.getCurrentView().getSelectionCount() > 0) {
+                            ((DeckSectionPage) getSelectedPage()).cardManager.getCurrentView().zoomSelected();
+                        }
+                    } else {
+                        ((DeckSectionPage) getSelectedPage()).cardManager.closeMenu();
+                        if (((DeckSectionPage) getSelectedPage()).cardManager.getCurrentView().getSelectionCount() > 0) {
+                            ((DeckSectionPage) getSelectedPage()).cardManager.getCurrentView().zoomSelected();
+                        }
+                    }
+                }
+            } else if (keyCode == Input.Keys.BUTTON_L1) {
+                if (getSelectedPage() instanceof CatalogPage) {
+                    ((CatalogPage) getSelectedPage()).cardManager.closeMenu();
+                    int index = ((CatalogPage) getSelectedPage()).cardManager.getConfig().getViewIndex() == 1 ? 0 : 1;
+                    ((CatalogPage) getSelectedPage()).cardManager.setViewIndex(index);
+                } else if (getSelectedPage() instanceof DeckSectionPage) {
+                    ((DeckSectionPage) getSelectedPage()).cardManager.closeMenu();
+                    int index = ((DeckSectionPage) getSelectedPage()).cardManager.getConfig().getViewIndex() == 1 ? 0 : 1;
+                    ((DeckSectionPage) getSelectedPage()).cardManager.setViewIndex(index);
+                }
+            }
+            return true;
+        }
     }
 

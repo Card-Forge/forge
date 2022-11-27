@@ -1,12 +1,14 @@
 package forge.adventure.stage;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import forge.Forge;
@@ -15,11 +17,16 @@ import forge.adventure.character.PlayerSprite;
 import forge.adventure.data.PointOfInterestData;
 import forge.adventure.pointofintrest.PointOfInterest;
 import forge.adventure.scene.Scene;
-import forge.adventure.scene.SceneType;
+import forge.adventure.scene.StartScene;
 import forge.adventure.scene.TileMapScene;
+import forge.adventure.util.KeyBinding;
+import forge.adventure.util.Paths;
 import forge.adventure.world.WorldSave;
 import forge.gui.GuiBase;
 import forge.util.MyRandom;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Base class to render a player sprite on a map
@@ -36,7 +43,55 @@ public abstract class GameStage extends Stage {
     private float touchY = -1;
     private final float timer = 0;
     private float animationTimeout = 0;
+    public static float maximumScrollDistance=1.5f;
+    public static float minimumScrollDistance=0.3f;
 
+    public boolean axisMoved(Controller controller, int axisIndex, float value) {
+
+        if (MapStage.getInstance().isDialogOnlyInput()||isPaused()) {
+            return true;
+        }
+        player.getMovementDirection().x = controller.getAxis(0);
+        player.getMovementDirection().y = -controller.getAxis(1);
+        if(player.getMovementDirection().len()<0.2)
+        {
+            player.stop();
+        }
+        return true;
+    }
+
+    enum PlayerModification
+    {
+        Sprint,
+        Hide,
+        Fly
+
+    }
+
+
+    HashMap<PlayerModification,Float> currentModifications=new HashMap<>();
+    public void modifyPlayer(PlayerModification mod,float value) {
+        float currentValue=0;
+        if(currentModifications.containsKey(mod))
+        {
+            currentValue=currentModifications.get(mod);
+        }
+        currentModifications.put(mod,currentValue+value);
+    }
+
+    public void flyFor(float value) {
+        modifyPlayer(PlayerModification.Fly,value);
+        player.playEffect(Paths.EFFECT_FLY);
+    }
+    public void hideFor(float value) {
+        modifyPlayer(PlayerModification.Hide,value);
+        player.setColor(player.getColor().r,player.getColor().g,player.getColor().b,0.5f);
+        player.playEffect(Paths.EFFECT_HIDE);
+    }
+    public void sprintFor(float value) {
+        modifyPlayer(PlayerModification.Sprint,value);
+        player.playEffect(Paths.EFFECT_SPRINT);
+    }
     public void startPause(float i) {
         startPause(i, null);
     }
@@ -46,7 +101,6 @@ public abstract class GameStage extends Stage {
         animationTimeout = i;
         player.setMovementDirection(Vector2.Zero);
     }
-
     public boolean isPaused() {
         return animationTimeout > 0;
     }
@@ -60,7 +114,7 @@ public abstract class GameStage extends Stage {
                     return;
                 foregroundSprites.removeActor(player);
                 player = null;
-                GameStage.this.GetPlayer();
+                GameStage.this.getPlayerSprite();
             }
         });
         camera = (OrthographicCamera) getCamera();
@@ -82,7 +136,7 @@ public abstract class GameStage extends Stage {
         getViewport().setWorldSize(width, height);
     }
 
-    public PlayerSprite GetPlayer() {
+    public PlayerSprite getPlayerSprite() {
         if (player == null) {
             player = new PlayerSprite(this);
             foregroundSprites.addActor(player);
@@ -91,11 +145,11 @@ public abstract class GameStage extends Stage {
     }
 
 
-    public SpriteGroup GetSpriteGroup() {
+    public SpriteGroup getSpriteGroup() {
         return foregroundSprites;
     }
 
-    public Group GetBackgroundSprites() {
+    public Group getBackgroundSprites() {
         return backgroundSprites;
     }
 
@@ -110,6 +164,19 @@ public abstract class GameStage extends Stage {
             animationTimeout -= delta;
             return;
         }
+        Array<PlayerModification> modsToRemove=new Array<>();
+        for(Map.Entry<PlayerModification, Float> mod:currentModifications.entrySet())
+        {
+            mod.setValue(mod.getValue()-delta);
+            if(mod.getValue()<0)
+                modsToRemove.add(mod.getKey());
+        }
+        for(PlayerModification mod:modsToRemove)
+        {
+            currentModifications.remove(mod);
+            onRemoveEffect(mod);
+        }
+
         if (isPaused()) {
             return;
         }
@@ -132,18 +199,26 @@ public abstract class GameStage extends Stage {
             }
             player.setMovementDirection(diff);
         }
-        //debug speed up
-        /*
-        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT))
-            player.setMoveModifier(20);
-        else
-            player.setMoveModifier(1);*/
-
         camera.position.x = Math.min(Math.max(Scene.getIntendedWidth() / 2f, player.pos().x), getViewport().getWorldWidth() - Scene.getIntendedWidth() / 2f);
         camera.position.y = Math.min(Math.max(Scene.getIntendedHeight() / 2f, player.pos().y), getViewport().getWorldHeight() - Scene.getIntendedHeight() / 2f);
 
 
         onActing(delta);
+    }
+
+    private void onRemoveEffect(PlayerModification mod) {
+        switch (mod)
+        {
+            case Hide:
+                player.setColor(player.getColor().r,player.getColor().g,player.getColor().b,1f);
+                break;
+            case Fly:
+                player.removeEffect(Paths.EFFECT_FLY);
+                break;
+            case Sprint:
+                player.removeEffect(Paths.EFFECT_SPRINT);
+                break;
+        }
     }
 
     abstract protected void onActing(float delta);
@@ -152,26 +227,28 @@ public abstract class GameStage extends Stage {
     @Override
     public boolean keyDown(int keycode) {
         super.keyDown(keycode);
-        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A)//todo config
+        if (isPaused())
+            return true;
+        if (KeyBinding.Left.isPressed(keycode))
         {
             player.getMovementDirection().x = -1;
         }
-        if (keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)//todo config
+        if (KeyBinding.Right.isPressed(keycode) )
         {
             player.getMovementDirection().x = +1;
         }
-        if (keycode == Input.Keys.UP || keycode == Input.Keys.W)//todo config
+        if (KeyBinding.Up.isPressed(keycode))
         {
             player.getMovementDirection().y = +1;
         }
-        if (keycode == Input.Keys.DOWN || keycode == Input.Keys.S)//todo config
+        if (KeyBinding.Down.isPressed(keycode))
         {
             player.getMovementDirection().y = -1;
         }
         if (keycode == Input.Keys.F5)//todo config
         {
-            if (!((TileMapScene) SceneType.TileMapScene.instance).currentMap().isInMap()) {
-                GetPlayer().storePos();
+            if (!TileMapScene.instance().currentMap().isInMap()) {
+                getPlayerSprite().storePos();
                 WorldSave.getCurrentSave().header.createPreview();
                 WorldSave.getCurrentSave().quickSave();
             }
@@ -179,27 +256,28 @@ public abstract class GameStage extends Stage {
         }
         if (keycode == Input.Keys.F8)//todo config
         {
-            if (!((TileMapScene) SceneType.TileMapScene.instance).currentMap().isInMap()) {
+            if (!TileMapScene.instance().currentMap().isInMap()) {
                 WorldSave.getCurrentSave().quickLoad();
                 enter();
             }
         }
+        if (keycode == Input.Keys.F11) {
+            debugCollision(false);
+
+        }
         if (keycode == Input.Keys.F12) {
             debugCollision(true);
-            for (Actor actor : foregroundSprites.getChildren()) {
-                if (actor instanceof MapActor) {
-                    ((MapActor) actor).setBoundDebug(true);
-                }
-            }
-            setDebugAll(true);
-            player.setBoundDebug(true);
+
         }
         if (keycode == Input.Keys.F2) {
-            TileMapScene S = ((TileMapScene)SceneType.TileMapScene.instance);
+            TileMapScene S = TileMapScene.instance();
             PointOfInterestData P = PointOfInterestData.getPointOfInterest("DEBUGZONE");
-            PointOfInterest PoI = new PointOfInterest(P,new Vector2(0,0), MyRandom.getRandom());
-            S.load(PoI);
-            Forge.switchScene(S);
+            if( P != null)
+            {
+                PointOfInterest PoI = new PointOfInterest(P,new Vector2(0,0), MyRandom.getRandom());
+                S.load(PoI);
+                Forge.switchScene(S);
+            }
         }
         if (keycode == Input.Keys.F11) {
             debugCollision(false);
@@ -214,7 +292,14 @@ public abstract class GameStage extends Stage {
         return true;
     }
 
-    protected void debugCollision(boolean b) {
+    public void debugCollision(boolean b) {
+        for (Actor actor : foregroundSprites.getChildren()) {
+            if (actor instanceof MapActor) {
+                ((MapActor) actor).setBoundDebug(b);
+            }
+        }
+        setDebugAll(b);
+        player.setBoundDebug(b);
     }
 
     @Override
@@ -222,10 +307,10 @@ public abstract class GameStage extends Stage {
         if (isPaused())
             return true;
         camera.zoom += (amountY * 0.03);
-        if (camera.zoom < 0.3f)
-            camera.zoom = 0.3f;
-        if (camera.zoom > 1.5f)
-            camera.zoom = 1.5f;
+        if (camera.zoom < minimumScrollDistance)
+            camera.zoom = minimumScrollDistance;
+        if (camera.zoom > maximumScrollDistance)
+            camera.zoom = maximumScrollDistance;
         return super.scrolled(amountX, amountY);
     }
 
@@ -255,8 +340,8 @@ public abstract class GameStage extends Stage {
     }
 
     public void stop() {
-        WorldStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
-        MapStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
+        WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
+        MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
         touchX = -1;
         touchY = -1;
         player.stop();
@@ -272,19 +357,19 @@ public abstract class GameStage extends Stage {
     public boolean keyUp(int keycode) {
         if (isPaused())
             return true;
-        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.A || keycode == Input.Keys.RIGHT || keycode == Input.Keys.D)//todo config
+        if (KeyBinding.Left.isPressed(keycode)||KeyBinding.Right.isPressed(keycode))
         {
             player.getMovementDirection().x = 0;
             if (!player.isMoving())
                 stop();
         }
-        if (keycode == Input.Keys.UP || keycode == Input.Keys.W || keycode == Input.Keys.DOWN || keycode == Input.Keys.S)//todo config
+        if (KeyBinding.Down.isPressed(keycode)||KeyBinding.Up.isPressed(keycode))
         {
             player.getMovementDirection().y = 0;
             if (!player.isMoving())
                 stop();
         }
-        if (keycode == Input.Keys.ESCAPE) {
+        if (KeyBinding.Menu.isPressed(keycode)) {
             openMenu();
         }
         return false;
@@ -293,7 +378,7 @@ public abstract class GameStage extends Stage {
     public void openMenu() {
 
         WorldSave.getCurrentSave().header.createPreview();
-        Forge.switchScene(SceneType.StartScene.instance);
+        Forge.switchScene(StartScene.instance());
     }
 
     public void enter() {
@@ -316,6 +401,8 @@ public abstract class GameStage extends Stage {
         Vector2 adjDirY = direction.cpy();
         boolean foundX = false;
         boolean foundY = false;
+        if(isColliding(boundingRect))//if player is already colliding (after flying or teleport) allow to move off collision
+            return direction;
         while (true) {
 
             if (!isColliding(new Rectangle(boundingRect.x + adjDirX.x, boundingRect.y + adjDirX.y, boundingRect.width, boundingRect.height))) {
@@ -350,6 +437,15 @@ public abstract class GameStage extends Stage {
         else if (foundX)
             return adjDirX;
         return Vector2.Zero.cpy();
+    }
+
+    protected void teleported(Vector2 position)
+    {
+
+    }
+    public void setPosition(Vector2 position) {
+        getPlayerSprite().setPosition(position);
+        teleported(position);
     }
 
 }

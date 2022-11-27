@@ -1,8 +1,8 @@
 Name:Invasion Plans
 ManaCost:2 R
 Types:Enchantment
+S:Mode$ MustBlock | ValidCreature$ Creature | Description$ All creatures block each combat if able.
 S:Mode$ Continuous | GlobalRule$ The attacking player chooses how each creature blocks each combat. | Description$ The attacking player chooses how each creature blocks each combat.
-S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME blocks each combat if able. | Description$ All creatures block each combat if able.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 Oracle:All creatures block each combat if able.\nThe attacking player chooses how each creature blocks each combat.

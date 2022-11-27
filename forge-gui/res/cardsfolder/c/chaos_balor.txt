@@ -1,0 +1,22 @@
+Name:Chaos Balor
+ManaCost:3 R R
+Types:Creature Demon
+PT:4/5
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME attacks or dies, ABILITY
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigCharm | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or dies, ABILITY
+SVar:TrigCharm:DB$ Charm | CharmNum$ 2 | Choices$ DiscardSeek,DamageTreasures,DamagePump | AdditionalDescription$ Each mode must target a different player.
+SVar:DiscardSeek:DB$ Discard | ValidTgts$ Player | TargetUnique$ True | TgtPrompt$ Select target player to discard hand and seek | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBSeek | SpellDescription$ Target player discards all cards in their hand, then seeks that many nonland cards.
+SVar:DBSeek:DB$ ChangeZone | Defined$ ParentTarget | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ X | ChangeType$ Card.nonLand | SubAbility$ DBCleanup
+SVar:DamageTreasures:DB$ DealDamage | ValidTgts$ Player | TargetUnique$ True | TgtPrompt$ Select target player to take 2 damage and create two Treasures | NumDmg$ 2 | SubAbility$ DBToken | SpellDescription$ CARDNAME deals 2 damage to target player and they create two Treasure tokens.
+SVar:DBToken:DB$ Token | TokenScript$ c_a_treasure_sac | TokenAmount$ 2 | TokenOwner$ ParentTarget
+SVar:DamagePump:DB$ DamageAll | ValidTgts$ Player | TargetUnique$ True | NumDmg$ 2 | RememberDamaged$ True | ValidCards$ Creature | ValidDescription$ each creature target player controls. | SubAbility$ DBEffect | SpellDescription$ CARDNAME deals 2 damage to each creature target player controls. Those creatures perpetually get +2/+0.
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualP2P0 | Name$ Chaos Balor's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualP2P0:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 2 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Those creatures perpetually get +2/+0.
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+DeckHas:Type$Artifact|Treasure
+DeckHints:Ability$Discard & Type$Treasure
+Oracle:Flying\nWhenever Chaos Balor attacks or dies, choose two. Each mode must target a different player.\n• Target player discards all the cards in their hand, then seeks that many nonland cards.\n• Chaos Balor deals 2 damage to target player and they create two Treasure tokens.\n• Chaos Balor deals 2 damage to each creature target player controls. Those creatures perpetually get +2/+0.

@@ -2,9 +2,10 @@ Name:Thought-Knot Seer
 ManaCost:3 C
 Types:Creature Eldrazi
 PT:4/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand. You choose a nonland card from it and exile that card.
-SVar:TrigExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | ValidTgts$ Opponent | DefinedPlayer$ Targeted | Chooser$ You | TgtPrompt$ Select target opponent | ChangeType$ Card.nonLand | ChangeNum$ 1 | IsCurse$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReveal | TriggerDescription$ When CARDNAME enters the battlefield, target opponent reveals their hand. You choose a nonland card from it and exile that card.
+SVar:TrigReveal:DB$ RevealHand | ValidTgts$ Opponent | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | Chooser$ You | ChangeType$ Card.nonLand
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME leaves the battlefield, target opponent draws a card.
-SVar:TrigDraw:DB$ Draw | NumCards$ 1 | ValidTgts$ Opponent | TgtPrompt$ Choose an opponent
+SVar:TrigDraw:DB$ Draw | ValidTgts$ Opponent
 DeckNeeds:Ability$Mana.Colorless
 Oracle:({C} represents colorless mana.)\nWhen Thought-Knot Seer enters the battlefield, target opponent reveals their hand. You choose a nonland card from it and exile that card.\nWhen Thought-Knot Seer leaves the battlefield, target opponent draws a card.

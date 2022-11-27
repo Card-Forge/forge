@@ -26,6 +26,7 @@ public enum TrackableProperty {
 
     IsImmutable(TrackableTypes.BooleanType),
     IsEmblem(TrackableTypes.BooleanType),
+    IsBoon(TrackableTypes.BooleanType),
 
     Flipped(TrackableTypes.BooleanType),
     Facedown(TrackableTypes.BooleanType),
@@ -59,6 +60,7 @@ public enum TrackableProperty {
     ShieldCount(TrackableTypes.IntegerType),
     ChosenType(TrackableTypes.StringType),
     ChosenType2(TrackableTypes.StringType),
+    NotedTypes(TrackableTypes.StringListType),
     ChosenColors(TrackableTypes.StringListType),
     ChosenCards(TrackableTypes.CardViewCollectionType),
     ChosenNumber(TrackableTypes.StringType),
@@ -66,6 +68,8 @@ public enum TrackableProperty {
     ChosenDirection(TrackableTypes.EnumType(Direction.class)),
     ChosenEvenOdd(TrackableTypes.EnumType(EvenOdd.class)),
     ChosenMode(TrackableTypes.StringType),
+    ChosenSector(TrackableTypes.StringType),
+    Sector(TrackableTypes.StringType),
     ClassLevel(TrackableTypes.IntegerType),
     CurrentRoom(TrackableTypes.StringType),
     Intensity(TrackableTypes.IntegerType),
@@ -137,6 +141,7 @@ public enum TrackableProperty {
     HasDefender(TrackableTypes.BooleanType),
     HasDivideDamage(TrackableTypes.BooleanType),
     HasDoubleStrike(TrackableTypes.BooleanType),
+    HasDoubleTeam(TrackableTypes.BooleanType),
     HasFirstStrike(TrackableTypes.BooleanType),
     HasFlying(TrackableTypes.BooleanType),
     HasFear(TrackableTypes.BooleanType),

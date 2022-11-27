@@ -246,6 +246,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.IsEmblem, c.isEmblem());
     }
 
+    public boolean isBoon() {
+        return get(TrackableProperty.IsBoon);
+    }
+    public void updateBoon(Card c) {
+        set(TrackableProperty.IsBoon, c.isBoon());
+    }
+
     public boolean isTokenCard() { return get(TrackableProperty.TokenCard); }
     void updateTokenCard(Card c) { set(TrackableProperty.TokenCard, c.isTokenCard()); }
 
@@ -359,6 +366,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.ChosenType2, c.getChosenType2());
     }
 
+    public List<String> getNotedTypes() {
+        return get(TrackableProperty.NotedTypes);
+    }
+    void updateNotedTypes(Card c) {
+        set(TrackableProperty.NotedTypes, c.getNotedTypes());
+    }
+
     public String getChosenNumber() {
         return get(TrackableProperty.ChosenNumber);
     }
@@ -442,7 +456,7 @@ public class CardView extends GameEntityView {
         return get(TrackableProperty.Remembered);
     }
     void updateRemembered(Card c) {
-        if (c.getRemembered() == null || Iterables.size(c.getRemembered()) == 0) {
+        if (c.getRemembered() == null || Iterables.isEmpty(c.getRemembered())) {
             set(TrackableProperty.Remembered, null);
             return;
         }
@@ -463,6 +477,13 @@ public class CardView extends GameEntityView {
             }
         }
         set(TrackableProperty.Remembered, sb.toString());
+    }
+
+    public String getSector() {
+       return get(TrackableProperty.Sector);
+    }
+    void updateSector(Card c) {
+        set(TrackableProperty.Sector, c.getSector());
     }
 
     public String getNamedCard() {
@@ -576,12 +597,12 @@ public class CardView extends GameEntityView {
         return Iterables.any(viewers, new Predicate<PlayerView>() {
             @Override
             public final boolean apply(final PlayerView input) {
-                return canFaceDownBeShownTo(input, false);
+                return canFaceDownBeShownTo(input);
             }
         });
     }
 
-    public boolean canFaceDownBeShownTo(final PlayerView viewer, boolean skip) {
+    public boolean canFaceDownBeShownTo(final PlayerView viewer) {
         if (!isFaceDown()) {
             return true;
         }
@@ -590,12 +611,10 @@ public class CardView extends GameEntityView {
         if (mayPlayerLook(viewer)) {
             return true;
         }
-        if (!skip) {
-            //if viewer is controlled by another player, also check if face can be shown to that player
-            final PlayerView mindSlaveMaster = viewer.getMindSlaveMaster();
-            if (mindSlaveMaster != null) {
-                return canFaceDownBeShownTo(mindSlaveMaster, true);
-            }
+        //if viewer is controlled by another player, also check if face can be shown to that player
+        final PlayerView mindSlaveMaster = getController().getMindSlaveMaster();
+        if (mindSlaveMaster != null && mindSlaveMaster != getController() && mindSlaveMaster == viewer) {
+            return canFaceDownBeShownTo(getController());
         }
 
         return isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard)) && getController().equals(viewer);
@@ -1240,12 +1259,17 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Power);
         }
         void updatePower(Card c) {
-            if (c.getCurrentState().getView() == this || c.getAlternateState() == null) {
-                set(TrackableProperty.Power, c.getNetPower());
+            int num;
+            if (getType().hasSubtype("Vehicle") && !isCreature()) {
+                // use printed value so user can still see it
+                num = c.getCurrentPower();
+            } else {
+                num = c.getNetPower();
             }
-            else {
-                set(TrackableProperty.Power, c.getNetPower() - c.getBasePower() + c.getAlternateState().getBasePower());
+            if (c.getCurrentState().getView() != this && c.getAlternateState() != null) {
+                num = num - c.getBasePower() + c.getAlternateState().getBasePower();
             }
+            set(TrackableProperty.Power, num);
         }
         void updatePower(CardState c) {
             Card card = c.getCard();
@@ -1260,12 +1284,17 @@ public class CardView extends GameEntityView {
             return get(TrackableProperty.Toughness);
         }
         void updateToughness(Card c) {
-            if (c.getCurrentState().getView() == this || c.getAlternateState() == null) {
-                set(TrackableProperty.Toughness, c.getNetToughness());
+            int num;
+            if (getType().hasSubtype("Vehicle") && !isCreature()) {
+                // use printed value so user can still see it
+                num = c.getCurrentToughness();
+            } else {
+                num = c.getNetToughness();
             }
-            else {
-                set(TrackableProperty.Toughness, c.getNetToughness() - c.getBaseToughness() + c.getAlternateState().getBaseToughness());
+            if (c.getCurrentState().getView() != this && c.getAlternateState() != null) {
+                num = num - c.getBaseToughness() + c.getAlternateState().getBaseToughness();
             }
+            set(TrackableProperty.Toughness, num);
         }
         void updateToughness(CardState c) {
             Card card = c.getCard();
@@ -1347,6 +1376,7 @@ public class CardView extends GameEntityView {
         public boolean hasDefender() { return get(TrackableProperty.HasDefender); }
         public boolean hasDivideDamage() { return get(TrackableProperty.HasDivideDamage); }
         public boolean hasDoubleStrike() { return get(TrackableProperty.HasDoubleStrike); }
+        public boolean hasDoubleTeam() { return get(TrackableProperty.HasDoubleTeam); }
         public boolean hasFirstStrike() { return get(TrackableProperty.HasFirstStrike); }
         public boolean hasFlying() { return get(TrackableProperty.HasFlying); }
         public boolean hasFear() { return get(TrackableProperty.HasFear); }

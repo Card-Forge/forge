@@ -72,6 +72,7 @@ public class TextRenderer {
         Forge.getAssets().symbolLookup().put("S", FSkinImage.MANA_SNOW);
         Forge.getAssets().symbolLookup().put("T", FSkinImage.TAP);
         Forge.getAssets().symbolLookup().put("E", FSkinImage.ENERGY);
+        Forge.getAssets().symbolLookup().put("TK", FSkinImage.TICKET);
         Forge.getAssets().symbolLookup().put("AE", FSkinImage.AETHER_SHARD);
         Forge.getAssets().symbolLookup().put("PW", FSkinImage.PW_BADGE_COMMON);
         Forge.getAssets().symbolLookup().put("CR", FSkinImage.QUEST_COINSTACK);

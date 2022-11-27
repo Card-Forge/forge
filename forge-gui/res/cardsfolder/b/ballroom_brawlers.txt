@@ -9,6 +9,6 @@ SVar:DBFirstStrike:DB$ Pump | Defined$ Self | KW$ First Strike | SubAbility$ DBF
 SVar:DBFirstStrike2:DB$ Pump | Defined$ Targeted | KW$ First Strike
 SVar:DBLifelink:DB$ Pump | Defined$ Self | KW$ Lifelink | SubAbility$ DBLifelink2 | SpellDescription$ Lifelink
 SVar:DBLifelink2:DB$ Pump | Defined$ Targeted | KW$ Lifelink
-SVar:HasAttackEffect:True
+SVar:HasAttackEffect:TRUE
 DeckHas:Ability$LifeGain
 Oracle:Whenever Ballroom Brawlers attacks, Ballroom Brawlers and up to one other target creature you control both gain your choice of first strike or lifelink until end of turn.

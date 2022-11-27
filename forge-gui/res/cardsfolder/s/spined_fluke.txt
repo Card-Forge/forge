@@ -5,5 +5,5 @@ PT:5/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a creature.
 SVar:TrigSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature
 A:AB$ Regenerate | Cost$ B | SpellDescription$ Regenerate CARDNAME.
-SVar:NeedsToPlay:Creature.YouCtrl+cmcLE3+inZoneBattlefield
+SVar:NeedsToPlay:Creature.YouCtrl+cmcLE3
 Oracle:When Spined Fluke enters the battlefield, sacrifice a creature.\n{B}: Regenerate Spined Fluke.

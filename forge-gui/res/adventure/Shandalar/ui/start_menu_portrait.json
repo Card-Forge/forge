@@ -12,7 +12,8 @@
     {
       "type": "TextButton",
       "name": "Start",
-      "text": "New Game",
+      "text": "tr(lblNewGame)",
+      "selectable": true,
       "width": 238,
       "height": 48,
       "x": 16,
@@ -21,7 +22,8 @@
     {
       "type": "TextButton",
       "name": "Start+",
-      "text": "New Game +",
+      "text": "tr(lblNewGame) +",
+      "selectable": true,
       "width": 238,
       "height": 48,
       "x": 16,
@@ -30,7 +32,8 @@
     {
       "type": "TextButton",
       "name": "Load",
-      "text": "Load",
+      "text": "tr(lblLoad)",
+      "selectable": true,
       "width": 238,
       "height": 48,
       "x": 16,
@@ -39,7 +42,8 @@
     {
       "type": "TextButton",
       "name": "Save",
-      "text": "Save",
+      "text": "tr(lblSave)",
+      "selectable": true,
       "width": 238,
       "height": 48,
       "x": 16,
@@ -48,7 +52,9 @@
     {
       "type": "TextButton",
       "name": "Resume",
-      "text": "Resume",
+      "text": "tr(lblResume)",
+      "selectable": true,
+      "binding": "Back",
       "width": 238,
       "height": 48,
       "x": 16,
@@ -57,7 +63,8 @@
     {
       "type": "TextButton",
       "name": "Settings",
-      "text": "Settings",
+      "text": "tr(lblSettings)",
+      "selectable": true,
       "width": 238,
       "height": 48,
       "x": 16,
@@ -66,7 +73,8 @@
     {
       "type": "TextButton",
       "name": "Switch",
-      "text": "Classic",
+      "text": "tr(lblClassic)",
+      "selectable": true,
       "width": 238,
       "height": 48,
       "x": 16,
@@ -75,7 +83,8 @@
     {
       "type": "TextButton",
       "name": "Exit",
-      "text": "Exit",
+      "text": "tr(lblExit)",
+      "selectable": true,
       "width": 238,
       "height": 48,
       "x": 16,
@@ -84,7 +93,8 @@
     {
       "type": "TextButton",
       "name": "Continue",
-      "text": "Continue",
+      "text": "tr(lblContinue)",
+      "selectable": true,
       "width": 238,
       "height": 48,
       "x": 16,

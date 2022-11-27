@@ -6,6 +6,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
+import org.apache.commons.lang3.StringUtils;
 
 public class LifeLoseEffect extends SpellAbilityEffect {
 
@@ -15,13 +16,19 @@ public class LifeLoseEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
+        final String amountStr = sa.getParam("LifeAmount");
+        final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+        final String spellDesc = sa.getParam("SpellDescription");
 
         int affected = getTargetPlayers(sa).size();
         sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
 
         sb.append(affected > 1 ? " each lose " : " loses ");
-        sb.append(amount).append(" life.");
+        if (!StringUtils.isNumeric(amountStr) && spellDesc != null && spellDesc.contains("life equal to")) {
+            sb.append(spellDesc.substring(spellDesc.indexOf("life equal to")));
+        } else {
+            sb.append(amount).append(" life.");
+        }
 
         return sb.toString();
     }

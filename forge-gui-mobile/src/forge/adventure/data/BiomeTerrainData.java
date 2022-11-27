@@ -16,4 +16,16 @@ public class BiomeTerrainData {
     // factor for the noise resolution
     public float resolution;
 
+    public BiomeTerrainData()
+    {
+
+    }
+    public BiomeTerrainData(BiomeTerrainData other)
+    {
+        spriteName=other.spriteName;
+        min=other.min;
+        max=other.max;
+        resolution=other.resolution;
+    }
+
 }

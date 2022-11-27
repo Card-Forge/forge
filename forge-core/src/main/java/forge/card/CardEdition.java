@@ -140,6 +140,7 @@ public final class CardEdition implements Comparable<CardEdition> {
         BUNDLE("bundle"),
         BOX_TOPPER("box topper"),
         DUNGEONS("dungeons"),
+        JUMPSTART("jumpstart"),
         REBALANCED("rebalanced");
 
         private final String name;

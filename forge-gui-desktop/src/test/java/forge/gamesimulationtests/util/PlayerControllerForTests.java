@@ -47,6 +47,7 @@ import forge.gamesimulationtests.util.player.PlayerSpecificationHandler;
 import forge.gamesimulationtests.util.playeractions.*;
 import forge.item.PaperCard;
 import forge.player.HumanPlay;
+import forge.util.Aggregates;
 import forge.util.ITriggerEvent;
 import forge.util.MyRandom;
 import forge.util.collect.FCollectionView;
@@ -54,10 +55,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import com.google.common.collect.Lists;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Default harmless implementation for tests.
@@ -496,6 +494,11 @@ public class PlayerControllerForTests extends PlayerController {
     }
 
     @Override
+    public String chooseSector(Card assignee, String ai, List<String> sectors) {
+        return chooseItem(sectors);
+    }
+
+    @Override
     public Object vote(SpellAbility sa, String prompt, List<Object> options, ListMultimap<Object, Player> votes, Player forPlayer) {
         return chooseItem(options);
     }
@@ -508,6 +511,14 @@ public class PlayerControllerForTests extends PlayerController {
     @Override
     public CounterType chooseCounterType(List<CounterType> options, SpellAbility sa, String prompt, Map<String, Object> params) {
         return Iterables.getFirst(options, CounterType.get(CounterEnumType.P1P1));
+    }
+
+    @Override
+    public String chooseKeywordForPump(final List<String> options, final SpellAbility sa, final String prompt, final Card tgtCard) {
+        if (options.size() <= 1) {
+            return Iterables.getFirst(options, null);
+        }
+        return Aggregates.random(options);
     }
 
     @Override

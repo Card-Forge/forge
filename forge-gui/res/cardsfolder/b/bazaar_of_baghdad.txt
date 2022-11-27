@@ -3,5 +3,8 @@ ManaCost:no cost
 Types:Land
 A:AB$ Draw | Cost$ T | NumCards$ 2 | SpellDescription$ Draw two cards, then discard three cards. | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$ Discard | Defined$ You | NumCards$ 3 | Mode$ TgtChoose
-AI:RemoveDeck:All
+AI:RemoveDeck:Random
+DeckNeeds:Ability$Graveyard
+DeckHas:Ability$Graveyard|Discard
+DeckHints:Ability$Graveyard|Discard & Type$Zombie|Necron|Phoenix|Skeleton & Keyword$Unearth|Dredge|Flashback
 Oracle:{T}: Draw two cards, then discard three cards.

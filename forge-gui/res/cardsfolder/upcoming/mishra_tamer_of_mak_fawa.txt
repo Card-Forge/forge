@@ -1,0 +1,9 @@
+Name:Mishra, Tamer of Mak Fawa
+ManaCost:3 B R
+Types:Legendary Creature Human Artificer
+PT:4/4
+S:Mode$ Continuous | Affected$ Permanent.YouCtrl | AddKeyword$ Ward:Sac<1/Permanent> | Description$ Permanents you control have "Ward—Sacrifice a permanent."
+S:Mode$ Continuous | Affected$ Artifact.YouOwn | AddKeyword$ Unearth:1 B R | AffectedZone$ Graveyard | Description$ Each artifact card in your graveyard has unearth {1}{B}{R}. ({1}{B}{R}: Return the card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)
+DeckHints:Type$Artifact & Ability$Discard|Sacrifice|Mill
+DeckHas:Ability$Graveyard & Keyword$Ward|Unearth
+Oracle:Permanents you control have "Ward—Sacrifice a permanent."\nEach artifact card in your graveyard has unearth {1}{B}{R}. ({1}{B}{R}: Return the card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

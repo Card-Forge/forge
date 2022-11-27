@@ -1,0 +1,8 @@
+Name:Non-Human Cannonball
+ManaCost:2 R
+Types:Artifact Creature Clown Robot
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigRoll | TriggerDescription$ When CARDNAME dies, roll a six-sided die. If the result is 4 or less, CARDNAME deals that much damage to you.
+SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | ResultSubAbilities$ 1-4:DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ Result
+Oracle:When Non-Human Cannonball dies, roll a six-sided die. If the result is 4 or less, Non-Human Cannonball deals that much damage to you.

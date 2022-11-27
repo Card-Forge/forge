@@ -1,0 +1,6 @@
+Name:Machine Over Matter
+ManaCost:1 U
+Types:Instant
+S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | IsPresent$ Creature.Artifact+YouCtrl | Description$ This spell costs {1} less to cast if you control an artifact creature.
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return target nonland permanent to its owner's hand.
+Oracle:This spell costs {1} less to cast if you control an artifact creature.\nReturn target nonland permanent to its owner's hand.

@@ -2,5 +2,5 @@ Name:Gravity Well
 ManaCost:1 G G
 Types:Enchantment
 T:Mode$ Attacks | ValidCard$ Creature.withFlying | Execute$ Debuff | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature with flying attacks, it loses flying until end of turn.
-SVar:Debuff:DB$ Debuff | Defined$ TriggeredAttacker | Keywords$ Flying
+SVar:Debuff:DB$ Debuff | Defined$ TriggeredAttackerLKICopy | Keywords$ Flying
 Oracle:Whenever a creature with flying attacks, it loses flying until end of turn.

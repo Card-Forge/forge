@@ -1,0 +1,10 @@
+Name:Autonomous Assembler
+ManaCost:5
+Types:Artifact Creature Assembly-Worker
+PT:4/5
+K:Prototype:1 W:2:2
+K:Vigilance
+A:AB$ PutCounter | Cost$ 1 T | ValidTgts$ Assembly-Worker.YouCtrl | TgtPrompt$ Select target Assembly-Worker you control | CounterType$ P1P1 | SpellDescription$ Put a +1/+1 counter on target Assembly-Worker you control.
+DeckHas:Ability$Counters
+DeckHints:Type$Assembly-Worker & Color$White
+Oracle:Prototype {1}{W} — 2/2 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nVigilance\n{1}, {T}: Put a +1/+1 counter on target Assembly-Worker you control.

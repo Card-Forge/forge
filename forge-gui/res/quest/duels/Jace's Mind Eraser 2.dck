@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Jace's Mind Eraser 2
+Title=Jace Beleren
+Difficulty=medium
+Description=Mono-blue mill deck with defensive creatures and Jace planeswalkers
+Icon=Jace Beleren 2.jpg
+Deck Type=constructed
+[Main]
+2 Belltower Sphinx
+3 Blighted Cataract
+3 Brain Freeze
+3 Disallow
+2 Gomazoa
+3 Guard Gomazoa
+2 Hedron Crab
+4 Ipnu Rivulet
+15 Island
+1 Jace Beleren
+2 Jace's Archivist
+1 Jace's Mindseeker
+2 Jace's Triumph
+1 Jace, Memory Adept
+1 Jace, Vryn's Prodigy
+2 Maddening Cacophony
+2 Psychic Spiral
+2 Riddlekeeper
+2 Sanity Grinding
+1 Sphinx Mindbreaker
+3 Sphinx's Tutelage
+2 Tormod's Crypt
+1 Traumatize

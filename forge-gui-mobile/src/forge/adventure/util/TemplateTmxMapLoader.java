@@ -10,11 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileSet;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.badlogic.gdx.utils.ObjectMap;
-import com.badlogic.gdx.utils.SerializationException;
-import com.badlogic.gdx.utils.XmlReader;
+import com.badlogic.gdx.utils.*;
 import forge.Forge;
 
 import java.io.File;
@@ -34,7 +30,7 @@ public class TemplateTmxMapLoader extends TmxMapLoader {
         FileHandle tmxFile = new FileHandle(f);
 
         this.root = xml.parse(tmxFile);
-
+        parameter.generateMipMaps=true;
         final Array<FileHandle> textureFiles = getDependencyFileHandles(tmxFile);
         for (FileHandle textureFile : textureFiles) {
             Texture texture = new Texture(textureFile, parameter.generateMipMaps);
@@ -200,6 +196,8 @@ public class TemplateTmxMapLoader extends TmxMapLoader {
     protected void loadObject(TiledMap map, MapObjects objects, XmlReader.Element element, float heightInPixels) {
         if (element.getName().equals("object")) {
 
+            if( element.hasAttribute("class")&& !element.hasAttribute("type"))
+                element.setAttribute("type",element.getAttribute("class"));//set type to class value for Tiled 1.9 compatibility
             if (!element.hasAttribute("template")) {
                 super.loadObject(map, objects, element, heightInPixels);
                 return;

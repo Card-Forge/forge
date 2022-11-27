@@ -3,12 +3,13 @@
   "height": 480,
   "yDown": true,
   "elements": [
-        {
+    {
       "type": "Image",
-      "image": "ui/title_bg_portrait.png",
+      "name": "lastScreen",
       "width": 270,
       "height": 480
-    }, {
+    },
+	{
       "type": "Image",
       "image": "ui/equipment.png",        
       "x": 8,                                   
@@ -88,7 +89,8 @@
       "type": "TextButton",
       "name": "delete",
       "text": "Discard",
-      "width": 80,
+      "binding": "Status",
+      "width": 60,
       "height": 30,
       "x": 8,
       "y": 363
@@ -97,18 +99,30 @@
       "type": "TextButton",
       "name": "equip",
       "text": "Equip",
-      "width": 80,
+      "binding": "Equip",
+      "width": 60,
       "height": 30,
-      "x": 96,
+      "x": 75,
+      "y": 363
+    } ,
+    {
+      "type": "TextButton",
+      "name": "use",
+      "text": "Use",
+      "binding": "Use",
+      "width": 60,
+      "height": 30,
+      "x": 140,
       "y": 363
     },
     {
       "type": "TextButton",
       "name": "return",
-      "text": "Back",
-      "width": 80,
+      "text": "tr(lblBack)",
+      "binding": "Back",
+      "width": 60,
       "height": 30,
-      "x": 184,
+      "x": 205,
       "y": 363
     }
   ]

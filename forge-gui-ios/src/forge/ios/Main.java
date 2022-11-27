@@ -3,7 +3,9 @@ package forge.ios;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.robovm.apple.foundation.NSAutoreleasePool;
 import org.robovm.apple.uikit.UIApplication;
 import org.robovm.apple.uikit.UIPasteboard;
@@ -113,6 +115,16 @@ public class Main extends IOSApplication.Delegate {
         @Override
         public void convertToJPEG(InputStream input, OutputStream output) throws IOException {
 
+        }
+
+        @Override
+        public Pair<Integer, Integer> getRealScreenSize(boolean real) {
+            return Pair.of(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        }
+
+        @Override
+        public ArrayList<String> getGamepads() {
+            return new ArrayList<>();
         }
     }
 }

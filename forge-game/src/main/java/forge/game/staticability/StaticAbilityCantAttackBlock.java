@@ -115,7 +115,7 @@ public class StaticAbilityCantAttackBlock {
         if (stAb.hasParam("ValidBlocker")) {
             boolean stillblock = true;
             for (final String v : stAb.getParam("ValidBlocker").split(",")) {
-                if (blocker.isValid(v, host.getController(), host, stAb)) {
+                if (blocker != null && blocker.isValid(v, host.getController(), host, stAb)) {
                     stillblock = false;
                     //Dragon Hunter check
                     if (v.contains("withoutReach") && blocker.hasStartOfKeyword("IfReach")) {

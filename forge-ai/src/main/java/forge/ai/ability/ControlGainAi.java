@@ -82,7 +82,7 @@ public class ControlGainAi extends SpellAbilityAi {
         // if Defined, then don't worry about targeting
         if (tgt == null) {
             if (sa.hasParam("AllValid")) {
-                CardCollectionView tgtCards = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), opponents);
+                CardCollectionView tgtCards = opponents.getCardsIn(ZoneType.Battlefield);
                 tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
                 return !tgtCards.isEmpty();
             }
@@ -309,7 +309,7 @@ public class ControlGainAi extends SpellAbilityAi {
 
         if (!sa.usesTargeting()) {
             if (sa.hasParam("AllValid")) {
-                CardCollectionView tgtCards = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield), ai.getOpponents());
+                CardCollectionView tgtCards = ai.getOpponents().getCardsIn(ZoneType.Battlefield);
                 tgtCards = AbilityUtils.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
                 if (tgtCards.isEmpty()) {
                     return false;

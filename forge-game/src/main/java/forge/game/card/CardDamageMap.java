@@ -104,7 +104,7 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
         game.getTriggerHandler().runTrigger(TriggerType.DamageAll, runParams, false);
     }
 
-    public void triggerExcessDamage(boolean isCombat, Map<Card, Integer> lethalDamage, final Game game) {
+    public void triggerExcessDamage(boolean isCombat, Map<Card, Integer> lethalDamage, final Game game, final Map<Integer, Card> lkiCache) {
         for (Entry<Card, Integer> damaged : lethalDamage.entrySet()) {
             int sum = 0;
             for (Integer i : this.column(damaged.getKey()).values()) {
@@ -112,6 +112,10 @@ public class CardDamageMap extends ForwardingTable<Card, GameEntity, Integer> {
             }
 
             int excess = sum - (damaged.getKey().hasBeenDealtDeathtouchDamage() ? 1 : damaged.getValue());
+
+            // also update the DamageHistory, but overwrite previous excess outcomes
+            // because Rith, Liberated Primeval cares about who controlled it at this moment
+            lkiCache.get(damaged.getKey().getId()).setHasBeenDealtExcessDamageThisTurn(excess > 0);
             if (excess > 0) {
                 damaged.getKey().setHasBeenDealtExcessDamageThisTurn(true);
                 // Run triggers

@@ -19,10 +19,9 @@ import forge.localinstance.achievements.AchievementCollection;
 import forge.menu.FDropDown;
 import forge.screens.FScreen;
 import forge.toolbox.FComboBox;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FLabel;
 import forge.toolbox.FScrollPane;
+import forge.util.Localizer;
 import forge.util.Utils;
 
 public class AchievementsScreen extends FScreen {
@@ -33,8 +32,12 @@ public class AchievementsScreen extends FScreen {
     private static final int TROPHIES_PER_SHELVE = 4;
     private static final FSkinFont NAME_FONT = FSkinFont.get(14);
     private static final FSkinFont DESC_FONT = FSkinFont.get(12);
-    private static final FSkinColor TEXT_COLOR = FLabel.DEFAULT_TEXT_COLOR;
-    private static final FSkinColor NOT_EARNED_COLOR = TEXT_COLOR.alphaColor(0.5f);
+    private static FSkinColor getTextColor() {
+        return FLabel.getDefaultTextColor();
+    }
+    private static FSkinColor getNotEarnedColor() {
+        return getTextColor().alphaColor(0.5f);
+    }
     
     private static AchievementsScreen achievementsScreen; //keep settings screen around so scroll positions maintained
 
@@ -55,12 +58,7 @@ public class AchievementsScreen extends FScreen {
 
         cbCollections.setSelectedIndex(0);
         cbCollections.setAlignment(Align.center);
-        cbCollections.setChangedHandler(new FEventHandler() {
-            @Override
-            public void handleEvent(FEvent e) {
-                setAchievements(cbCollections.getSelectedItem());
-            }
-        });
+        cbCollections.setChangedHandler(e -> setAchievements(cbCollections.getSelectedItem()));
         setAchievements(cbCollections.getSelectedItem());
     }
 
@@ -330,47 +328,47 @@ public class AchievementsScreen extends FScreen {
                     }
                 }
 
-                g.drawImage(FSkinTexture.BG_TEXTURE, x, y, w, h);
-                g.fillRect(FScreen.TEXTURE_OVERLAY_COLOR, x, y, w, h);
-                g.drawRect(SELECTED_BORDER_THICKNESS, FDropDown.BORDER_COLOR, x, y, w, h);
+                g.drawImage(Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_TEXTURE : FSkinTexture.BG_TEXTURE, x, y, w, h);
+                g.fillRect(FScreen.getTextureOverlayColor(), x, y, w, h);
+                g.drawRect(SELECTED_BORDER_THICKNESS, FDropDown.getBorderColor(), x, y, w, h);
 
                 x += PADDING;
                 y += PADDING;
                 w -= 2 * PADDING;
                 h -= 2 * PADDING;
-                g.drawText(selectedAchievement.getDisplayName(), NAME_FONT, TEXT_COLOR, x, y, w, h, false, Align.left, false);
+                g.drawText(selectedAchievement.getDisplayName(), NAME_FONT, getTextColor(), x, y, w, h, false, Align.left, false);
                 y += NAME_FONT.getLineHeight();
                 if (subTitle != null) {
-                    g.drawText(subTitle, DESC_FONT, TEXT_COLOR, x, y, w, h, false, Align.left, false);
+                    g.drawText(subTitle, DESC_FONT, getTextColor(), x, y, w, h, false, Align.left, false);
                     y += DESC_FONT.getLineHeight();
                 }
                 y += PADDING;
                 if (sharedDesc != null) {
-                    g.drawText(selectedAchievement.isSpecial() ? sharedDesc : sharedDesc + "...", DESC_FONT, TEXT_COLOR,
+                    g.drawText(selectedAchievement.isSpecial() ? sharedDesc : sharedDesc + "...", DESC_FONT, getTextColor(),
                             x, y, w, h, false, Align.left, false);
                     y += DESC_FONT.getLineHeight();
                 }
                 if (mythicDesc != null) {
-                    g.drawText(selectedAchievement.isSpecial() ? mythicDesc : "(Mythic) " + mythicDesc, DESC_FONT, //handle flavor text here too
-                            selectedAchievement.earnedMythic() ? TEXT_COLOR : NOT_EARNED_COLOR,
+                    g.drawText(selectedAchievement.isSpecial() ? mythicDesc : "(" + Localizer.getInstance().getMessage("lblMythic") + ") " + mythicDesc, DESC_FONT, //handle flavor text here too
+                            selectedAchievement.earnedMythic() ? getTextColor() : getNotEarnedColor(),
                             x, y, w, h, false, Align.left, false);
                     y += DESC_FONT.getLineHeight();
                 }
                 if (rareDesc != null) {
-                    g.drawText("(Rare) " + rareDesc, DESC_FONT,
-                            selectedAchievement.earnedRare() ? TEXT_COLOR : NOT_EARNED_COLOR,
+                    g.drawText("(" + Localizer.getInstance().getMessage("lblRare") + ") " + rareDesc, DESC_FONT,
+                            selectedAchievement.earnedRare() ? getTextColor() : getNotEarnedColor(),
                             x, y, w, h, false, Align.left, false);
                     y += DESC_FONT.getLineHeight();
                 }
                 if (uncommonDesc != null) {
-                    g.drawText("(Uncommon) " + uncommonDesc, DESC_FONT,
-                            selectedAchievement.earnedUncommon() ? TEXT_COLOR : NOT_EARNED_COLOR,
+                    g.drawText("(" + Localizer.getInstance().getMessage("lblUncommon") + ") " + uncommonDesc, DESC_FONT,
+                            selectedAchievement.earnedUncommon() ? getTextColor() : getNotEarnedColor(),
                             x, y, w, h, false, Align.left, false);
                     y += DESC_FONT.getLineHeight();
                 }
                 if (commonDesc != null) {
-                    g.drawText("(Common) " + commonDesc, DESC_FONT,
-                            selectedAchievement.earnedCommon() ? TEXT_COLOR : NOT_EARNED_COLOR,
+                    g.drawText("(" + Localizer.getInstance().getMessage("lblCommon") + ") " + commonDesc, DESC_FONT,
+                            selectedAchievement.earnedCommon() ? getTextColor() : getNotEarnedColor(),
                             x, y, w, h, false, Align.left, false);
                 }
             }

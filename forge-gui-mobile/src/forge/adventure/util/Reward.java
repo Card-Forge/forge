@@ -11,7 +11,8 @@ public class Reward {
         Card,
         Gold,
         Item,
-        Life
+        Life,
+        Mana
     }
     Type type;
     PaperCard card;

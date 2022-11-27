@@ -1,0 +1,13 @@
+Name:Rith, Liberated Primeval
+ManaCost:2 R G W
+Types:Legendary Creature Dragon
+PT:5/5
+K:Flying
+K:Ward:2
+S:Mode$ Continuous | Affected$ Dragon.Other+YouCtrl | AddKeyword$ Ward:2 | Description$ Other Dragons you control have ward {2}.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | CheckSVar$ DragonCheck | TriggerZones$ Battlefield | Execute$ DBDragon | TriggerDescription$ At the beginning of your end step, if a creature or planeswalker an opponent controlled was dealt excess damage this turn, create a 4/4 red Dragon creature token with flying.
+SVar:DBDragon:DB$ Token | TokenScript$ r_4_4_dragon_flying
+SVar:DragonCheck:Count$NumDamageThisTurn Card Creature.OppCtrl+wasDealtExcessDamageThisTurn,Planeswalker.OppCtrl+wasDealtExcessDamageThisTurn
+DeckHas:Ability$Token
+DeckHints:Type$Dragon
+Oracle:Flying, ward {2}\nOther dragons you control have ward {2}.\nAt the beginning of your end step, if a creature or planeswalker an opponent controlled was dealt excess damage this turn, create a 4/4 red Dragon creature token with flying.

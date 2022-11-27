@@ -1,0 +1,7 @@
+Name:Knight Token
+ManaCost:no cost
+Types:Creature Knight
+Colors:white
+PT:2/2
+K:Protection from red
+Oracle:Protection from red

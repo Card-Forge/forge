@@ -1,0 +1,8 @@
+Name:Nexos
+ManaCost:1 G
+Types:Creature Human Tyranid Advisor
+PT:2/2
+S:Mode$ Continuous | Affected$ Land.Basic+YouCtrl | AddAbility$ Mana | Description$ Strategic Coordinator — Basic lands you control have "{T}: Add {C}{C}. Spend this mana only on costs that contain {X}."
+SVar:Mana:AB$ Mana | Cost$ T | Produced$ Any | Produced$ C | Amount$ 2 | RestrictValid$ CostContainsX | SpellDescription$ Add {C}{C}. Spend this mana only on costs that contain {X}.
+AI:RemoveDeck:Random
+Oracle:Strategic Coordinator — Basic lands you control have "{T}: Add {C}{C}. Spend this mana only on costs that contain {X}."

@@ -1,0 +1,10 @@
+Name:Sune's Intervention
+ManaCost:4 W W
+Types:Instant
+A:SP$ Charm | MinCharmNum$ 1 | CharmNum$ 5 | Choices$ KnightTokens,SeekCard,DestroyArtifact,DestroyEnchantment,GainLife
+SVar:KnightTokens:DB$ Token | TokenOwner$ You | TokenScript$ w_2_2_knight | TokenAmount$ 2 | SpellDescription$ Create two 2/2 white Knight creature tokens.
+SVar:SeekCard:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.Permanent+nonLand+cmcLE3 | ChangeNum$ 1 | SpellDescription$ Seek a nonland permanent card with mana value 3 or less.
+SVar:DestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
+SVar:DestroyEnchantment:DB$ Destroy | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment | SpellDescription$ Destroy target enchantment.
+SVar:GainLife:DB$ GainLife | ValidTgts$ Player | TgtPrompt$ Select target player to gain 3 life |  LifeAmount$ 3 | SpellDescription$ Target player gains 3 life.
+Oracle:Choose one or more —\n• Create two 2/2 white Knight creature tokens.\n• Seek a nonland permanent card with mana value 3 or less.\n• Destroy target artifact.\n• Destroy target enchantment.\n• Target player gains 3 life.

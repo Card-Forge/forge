@@ -1,0 +1,8 @@
+Name:A-Lapis Orb of Dragonkind
+ManaCost:2 U
+Types:Artifact
+A:AB$ Mana | Cost$ T | Produced$ Any | TriggersWhenSpent$ TrigSpent | SpellDescription$ Add one mana of any color. When you spend this mana to cast a Dragon creature spell, scry 2.
+SVar:TrigSpent:Mode$ SpellCast | ValidCard$ Creature.Dragon | ValidActivatingPlayer$ You | Execute$ TrigScry | TriggerDescription$ When you spend this mana to cast a Dragon creature spell, scry 2.
+SVar:TrigScry:DB$ Scry | ScryNum$ 2
+DeckHints:Type$Dragon
+Oracle:{T}: Add one mana of any color. When you spend this mana to cast a Dragon creature spell, scry 2.

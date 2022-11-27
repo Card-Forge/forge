@@ -1,0 +1,11 @@
+Name:Defiler of Faith
+ManaCost:3 W W
+Types:Creature Phyrexian Human
+PT:5/5
+K:Vigilance
+S:Mode$ OptionalCost | ValidCard$ Permanent.White | ValidSA$ Spell | Activator$ You | Cost$ PayLife<2> | ReduceColor$ W | Description$ As an additional cost to cast white permanent spells, you may pay 2 life. Those spells cost {W} less to cast if you paid life this way. This effect reduces only the amount of white mana you pay.
+T:Mode$ SpellCast | ValidCard$ Permanent.White | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a white permanent spell, create a 1/1 white Soldier creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ w_1_1_soldier
+DeckHas:Ability$Token & Type$Soldier
+SVar:BuffedBy:Permanent.White
+Oracle:Vigilance\nAs an additional cost to cast white permanent spells, you may pay 2 life. Those spells cost {W} less to cast if you paid life this way. This effect reduces only the amount of white mana you pay.\nWhenever you cast a white permanent spell, create a 1/1 white Soldier creature token.

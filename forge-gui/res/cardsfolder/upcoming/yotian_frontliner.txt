@@ -1,0 +1,11 @@
+Name:Yotian Frontliner
+ManaCost:1
+Types:Artifact Creature Soldier
+PT:1/1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, another target creature you control gets +1/+1 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | NumAtt$ 1 | NumDef$ 1
+SVar:HasAttackEffect:TRUE
+K:Unearth:W
+DeckHas:Ability$Graveyard
+DeckHints:Color$White
+Oracle:Whenever Yotian Frontliner attacks, another target creature you control gets +1/+1 until end of turn.\nUnearth {W} ({W}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

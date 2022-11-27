@@ -3,5 +3,7 @@ ManaCost:1 R
 Types:Creature Dwarf Artificer
 PT:1/1
 A:AB$ PutCounter | Cost$ T Sac<1/Artifact> | CounterType$ P1P1 | CounterNum$ 1 | ValidTgts$ Creature | TgtPrompt$ Select target creature | PlayerTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Put a +1/+1 counter on target creature. Activate only during your upkeep.
-AI:RemoveDeck:All
+AI:RemoveDeck:Random
+DeckHas:Ability$Sacrifice|Counters
+DeckNeeds:Type$Artifact
 Oracle:{T}, Sacrifice an artifact: Put a +1/+1 counter on target creature. Activate only during your upkeep.

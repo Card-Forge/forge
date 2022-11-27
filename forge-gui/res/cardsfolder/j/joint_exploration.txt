@@ -1,0 +1,9 @@
+Name:Joint Exploration
+ManaCost:1 U
+Types:Instant
+K:Kicker:G
+A:SP$ Scry | ScryNum$ 2 | SubAbility$ DBDraw | SpellDescription$ Scry 2, then draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Condition$ Kicked | Origin$ Hand | Destination$ Battlefield | Optional$ You | ChangeType$ Land | ChangeNum$ 1 | SpellDescription$ If this spell was kicked, you may put a land card from your hand onto the battlefield.
+DeckHints:Color$Green
+Oracle:Kicker {G} (You may pay an additional {G} as you cast this spell.)\nScry 2, then draw a card. If this spell was kicked, you may put a land card from your hand onto the battlefield.

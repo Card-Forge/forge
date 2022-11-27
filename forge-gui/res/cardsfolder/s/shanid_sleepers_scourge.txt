@@ -1,0 +1,13 @@
+Name:Shanid, Sleepers' Scourge
+ManaCost:1 R W B
+Types:Legendary Creature Human Knight
+PT:2/4
+K:Menace
+S:Mode$ Continuous | Affected$ Creature.Legendary+Other+YouCtrl | AddKeyword$ Menace | Description$ Other legendary creatures you control have menace.
+T:Mode$ LandPlayed | ValidCard$ Land.Legendary+YouCtrl | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you play a legendary land or cast a legendary spell, you draw a card and you lose 1 life.
+T:Mode$ SpellCast | ValidCard$ Card.Legendary+YouCtrl | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever you play a legendary land or cast a legendary spell, you draw a card and you lose 1 life.
+SVar:TrigDraw:DB$ Draw | Defined$ You | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Defined$ You | LifeAmount$ 1
+SVar:BuffedBy:Legendary
+DeckNeeds:Type$Legendary
+Oracle:Menace\nOther legendary creatures you control have menace.\nWhenever you play a legendary land or cast a legendary spell, you draw a card and you lose 1 life.

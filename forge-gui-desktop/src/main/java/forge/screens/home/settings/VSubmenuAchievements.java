@@ -445,22 +445,22 @@ public enum VSubmenuAchievements implements IVSubmenu<CSubmenuAchievements> {
                 }
                 if (mythicDesc != null) {
                     FSkin.setGraphicsColor(g2d, selectedAchievement.earnedMythic() ? TEXT_COLOR : NOT_EARNED_COLOR);
-                    g2d.drawString(selectedAchievement.isSpecial() ? mythicDesc : "(Mythic) " + mythicDesc, x, y); //handle flavor text here too
+                    g2d.drawString(selectedAchievement.isSpecial() ? mythicDesc : "(" + Localizer.getInstance().getMessage("lblMythic") + ") " + mythicDesc, x, y); //handle flavor text here too
                     y += descHeight;
                 }
                 if (rareDesc != null) {
                     FSkin.setGraphicsColor(g2d, selectedAchievement.earnedRare() ? TEXT_COLOR : NOT_EARNED_COLOR);
-                    g2d.drawString("(Rare) " + rareDesc, x, y);
+                    g2d.drawString("("+ Localizer.getInstance().getMessage("lblRare") + ") " + rareDesc, x, y);
                     y += descHeight;
                 }
                 if (uncommonDesc != null) {
                     FSkin.setGraphicsColor(g2d, selectedAchievement.earnedUncommon() ? TEXT_COLOR : NOT_EARNED_COLOR);
-                    g2d.drawString("(Uncommon) " + uncommonDesc, x, y);
+                    g2d.drawString("(" + Localizer.getInstance().getMessage("lblUncommon") + ") " + uncommonDesc, x, y);
                     y += descHeight;
                 }
                 if (commonDesc != null) {
                     FSkin.setGraphicsColor(g2d, selectedAchievement.earnedCommon() ? TEXT_COLOR : NOT_EARNED_COLOR);
-                    g2d.drawString("(Common) " + commonDesc, x, y);
+                    g2d.drawString("(" + Localizer.getInstance().getMessage("lblCommon") + ") " + commonDesc, x, y);
                 }
             }
 

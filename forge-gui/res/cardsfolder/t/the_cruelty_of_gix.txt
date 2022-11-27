@@ -1,0 +1,10 @@
+Name:The Cruelty of Gix
+ManaCost:3 B B
+Types:Enchantment Saga
+K:Read ahead:3:DBDiscard,DBTutor,DBReanimate
+SVar:DBDiscard:DB$ Discard | ValidTgts$ Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.Creature,Card.Planeswalker | NumCards$ 1 | SpellDescription$ Target opponent reveals their hand. You choose a creature or planeswalker card from it. That player discards that card.
+SVar:DBTutor:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card | SubAbility$ DBLoseLife | SpellDescription$ Search your library for a card, put that card into your hand, then shuffle. You lose 3 life.
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 3
+SVar:DBReanimate:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | ValidTgts$ Creature  | SpellDescription$ Put target creature card from a graveyard onto the battlefield under your control.
+DeckHas:Ability$Discard
+Oracle:Read ahead (Choose a chapter and start with that many lore counters. Add one after your draw step. Skipped chapters don't trigger. Sacrifice after III.)\nI — Target opponent reveals their hand. You choose a creature or planeswalker card from it. That player discards that card.\nII — Search your library for a card, put that card into your hand, then shuffle. You lose 3 life.\nIII — Put target creature card from a graveyard onto the battlefield under your control.

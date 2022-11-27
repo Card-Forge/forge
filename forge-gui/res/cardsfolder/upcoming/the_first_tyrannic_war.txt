@@ -1,0 +1,14 @@
+Name:The First Tyrannic War
+ManaCost:2 G U R
+Types:Enchantment Saga
+K:Saga:3:DBChooseCard,DBDouble,DBDouble
+SVar:DBChooseCard:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Creature.YouOwn | ChoiceTitle$ You may select a creature card | Optional$ True | SubAbility$ DBEffect | SpellDescription$ You may put a creature card from your hand onto the battlefield. If its mana cost contains {X}, it enters the battlefield with a number of +1/+1 counters on it equal to the number of lands you control.
+SVar:DBEffect:DB$ Effect | ConditionDefined$ ChosenCard | ConditionPresent$ Card.hasXCost | ReplacementEffects$ ReplaceETB | RememberObjects$ ChosenCard | ExileOnMoved$ Hand | SubAbility$ DBPut
+SVar:ReplaceETB:Event$ Moved | Origin$ Hand | Destination$ Battlefield | ValidCard$ Card.ChosenCard | ReplaceWith$ PutWithCounters | Description$ If its mana cost contains {X}, it enters the battlefield with a number of +1/+1 counters on it equal to the number of lands you control.
+SVar:PutWithCounters:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ ChosenCard | WithCountersType$ P1P1 | WithCountersAmount$ Count$Valid Land.YouCtrl | SubAbility$ DBCleanup
+SVar:DBPut:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | Defined$ ChosenCard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+SVar:DBDouble:DB$ MultiplyCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | Multiplier$ 2 | SpellDescription$ Double the number of each kind of counter on target creature you control.
+DeckHas:Ability$Counters
+DeckNeeds:Ability$Counters
+Oracle:(As this Saga enters and after your draw step, add a lore counter. Sacrifice after III.)\nI — You may put a creature card from your hand onto the battlefield. If its mana cost contains {X}, it enters the battlefield with a number of +1/+1 counters on it equal to the number of lands you control.\nII, III — Double the number of each kind of counter on target creature you control.

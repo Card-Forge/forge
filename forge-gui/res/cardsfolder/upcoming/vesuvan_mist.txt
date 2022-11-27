@@ -1,0 +1,14 @@
+Name:Vesuvan Mist
+ManaCost:1 U
+Types:Instant
+K:Kicker:1 B
+A:SP$ ChangeZone | ValidTgts$ Permanent.nonLand+nonToken | TgtPrompt$ Select target nontoken, nonland permanent | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBConjure | SpellDescription$ Return target nontoken, nonland permanent to its owner's hand. If this spell was kicked, conjure a duplicate of that card into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+SVar:DBConjure:DB$ MakeCard | Condition$ Kicked | Conjure$ True | DefinedName$ Targeted | Zone$ Hand | RememberMade$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Vesuvan Mist's Perpetual Effect | Triggers$ Update | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The conjured card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
+SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AffectedZone$ Stack | AddHiddenKeyword$ May spend mana as though it were mana of any color to cast CARDNAME | Description$ You may spend mana as though it were mana of any color to cast this spell.
+SVar:Update:Mode$ ChangesZone | Origin$ Any | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBUpdate
+SVar:DBUpdate:DB$ UpdateRemember
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True 
+DeckHints:Color$Black
+Oracle:Kicker {1}{B}\nReturn target nontoken, nonland permanent to its owner's hand. If this spell was kicked, conjure a duplicate of that card into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."

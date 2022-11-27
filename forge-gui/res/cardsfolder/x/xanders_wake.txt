@@ -1,0 +1,8 @@
+Name:Xander's Wake
+ManaCost:1 B
+Types:Enchantment
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraft | ActivationLimit$ 1 | TriggerDescription$ Whenever one or more creatures you control die, draft a card from CARDNAME's spellbook. This ability triggers only once each turn.
+SVar:TrigDraft:DB$ Draft | Spellbook$ Acquisitions Expert,Asylum Visitor,Blade Juggler,Bloodthirsty Aerialist,Boneclad Necromancer,Hoard Robber,Malakir Blood-Priest,Malakir Cullblade,Morbid Opportunist,Slaughter Specialist,Tavern Swindler,Thieves' Guild Enforcer,Tithebearer Giant,Vengeful Warchief,Yuan-Ti Fang-Blade
+DeckHas:Type$Human|Rogue|Vampire|Wizard|Tiefling|Cleric|Warrior|Giant|Orc|Snake|Zombie|Treasure & Ability$Token|Sacrifice|LifeGain|Counters
+DeckHints:Ability$Party|LifeGain|Discard|Sacrifice & Type$Cleric|Rogue|Warrior|Wizard
+Oracle:Whenever one or more creatures you control die, draft a card from Xander's Wake's spellbook. This ability triggers only once each turn.

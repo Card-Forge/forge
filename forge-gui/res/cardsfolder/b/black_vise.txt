@@ -2,7 +2,7 @@ Name:Black Vise
 ManaCost:1
 Types:Artifact
 K:ETBReplacement:Other:ChooseP
-SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent | AILogic$ MostCardsInHand | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Chosen | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the chosen player's upkeep, CARDNAME deals X damage to that player, where X is the number of cards in their hand minus 4.
 SVar:TrigDamage:DB$ DealDamage | Defined$ ChosenPlayer | NumDmg$ X
 SVar:X:Count$InChosenHand/Minus.4

@@ -139,6 +139,7 @@ public class Game {
     private Direction turnOrder = Direction.getDefaultDirection();
 
     private Boolean daytime = null;
+    private Boolean previous = null;
 
     private long timestamp = 0;
     public final GameAction action;
@@ -162,7 +163,6 @@ public class Game {
     public Player getStartingPlayer() {
         return startingPlayer;
     }
-
     public void setStartingPlayer(final Player p) {
         startingPlayer = p;
     }
@@ -170,7 +170,6 @@ public class Game {
     public Player getMonarch() {
         return monarch;
     }
-
     public void setMonarch(final Player p) {
         monarch = p;
     }
@@ -178,7 +177,6 @@ public class Game {
     public Player getMonarchBeginTurn() {
         return monarchBeginTurn;
     }
-
     public void setMonarchBeginTurn(Player monarchBeginTurn) {
         this.monarchBeginTurn = monarchBeginTurn;
     }
@@ -789,6 +787,7 @@ public class Game {
         CardCollectionView cards = this.getCardsInGame();
         boolean planarControllerLost = false;
         boolean isMultiplayer = getPlayers().size() > 2;
+        CardZoneTable triggerList = new CardZoneTable();
 
         // 702.142f & 707.9
         // If a player leaves the game, all face-down cards that player owns must be revealed to all players.
@@ -823,9 +822,13 @@ public class Game {
                         cc.removeRemembered(c);
                         cc.removeAttachedTo(c);
                     }
+
                     // TODO skip effect cards by default
                     // (might be nice to only keep those that will still affect the game, but could be tricky to automate)
                     // will also require other changes because currently only zones of ingame players are checked
+
+                    triggerList.put(c.getZone().getZoneType(), null, c);
+
                     getAction().ceaseToExist(c, false);
                     // CR 603.2f owner of trigger source lost game
                     getTriggerHandler().clearDelayedTrigger(c);
@@ -843,12 +846,15 @@ public class Game {
                     }
                     if (c.getController().equals(p)) {
                         getAction().exile(c, null);
+                        triggerList.put(ZoneType.Battlefield, c.getZone().getZoneType(), c);
                     }
                 }
             } else {
                 c.forceTurnFaceUp();
             }
         }
+
+        triggerList.triggerChangesZoneAll(this, null);
 
         // 901.6: If the current planar controller would leave the game, instead the next player
         // in turn order that wouldn’t leave the game becomes the planar controller, then the old
@@ -890,8 +896,7 @@ public class Game {
         ingamePlayers.remove(p);
         lostPlayers.add(p);
 
-        final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, p);
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
         getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams, false);
     }
 
@@ -1118,11 +1123,9 @@ public class Game {
         List<Pair<Card, Integer>> result = countersAddedThisTurn.get(cType, putter);
         if (result == null) {
             result = Lists.newArrayList();
-        }
-        result.add(Pair.of(CardUtil.getLKICopy(card), value));
-        if (!countersAddedThisTurn.contains(cType, putter)) {
             countersAddedThisTurn.put(cType, putter, result);
         }
+        result.add(Pair.of(CardUtil.getLKICopy(card), value));
     }
 
     public int getCounterAddedThisTurn(CounterType cType, String validPlayer, String validCard, Card source, Player sourceController, CardTraitBase ctb) {
@@ -1207,8 +1210,7 @@ public class Game {
 
                     // If an effect allows or instructs a player to reveal the card as it’s being drawn,
                     // it’s revealed after the spell becomes cast or the ability becomes activated.
-                    final Map<AbilityKey, Object> runParams = Maps.newHashMap();
-                    runParams.put(AbilityKey.Card, c);
+                    final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
                     runParams.put(AbilityKey.Number, facedownWhileCasting.get(c));
                     runParams.put(AbilityKey.Player, this);
                     runParams.put(AbilityKey.CanReveal, true);
@@ -1232,12 +1234,21 @@ public class Game {
     public boolean isNeitherDayNorNight() {
         return this.daytime == null;
     }
+    public boolean previousTimeIsDay() {
+        return this.previous != null && this.previous == false;
+    }
+    public boolean previousTimeIsNight() {
+        return this.previous != null && this.previous == true;
+    }
+    public boolean previousTimeisNeitherDayNorNight() {
+        return this.previous == null;
+    }
 
     public Boolean getDayTime() {
         return this.daytime;
     }
     public void setDayTime(Boolean value) {
-        Boolean previous = this.daytime;
+        previous = this.daytime;
         this.daytime = value;
 
         if (previous != null && value != null && previous != value) {

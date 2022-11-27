@@ -1,13 +1,15 @@
 package forge.adventure.stage;
 
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import forge.StaticData;
+import forge.adventure.character.PlayerSprite;
 import forge.adventure.data.EnemyData;
 import forge.adventure.data.WorldData;
 import forge.adventure.pointofintrest.PointOfInterest;
-import forge.adventure.scene.SceneType;
 import forge.adventure.util.Current;
+import forge.adventure.util.Paths;
 import forge.card.ColorSet;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
@@ -23,9 +25,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ConsoleCommandInterpreter {
+    private static ConsoleCommandInterpreter instance;
     Command root = new Command();
 
-    class Command {
+    static class Command {
         HashMap<String, Command> children = new HashMap<>();
         Function<String[], String> function;
     }
@@ -90,20 +93,34 @@ public class ConsoleCommandInterpreter {
 
         for(String name:path) {
             if(!currentCommand.children.containsKey(name))
-                currentCommand.children.put(name,new Command());
+                currentCommand.children.put(name, new Command());
             currentCommand = currentCommand.children.get(name);
         }
         currentCommand.function = function;
     }
-
-    public ConsoleCommandInterpreter() {
+public static ConsoleCommandInterpreter getInstance()
+{
+    if(instance==null)
+        instance=new ConsoleCommandInterpreter();
+    return instance;
+}
+    GameStage currentGameStage()
+    {
+        return MapStage.getInstance().isInMap()?MapStage.getInstance():WorldStage.getInstance();
+    }
+    PlayerSprite currentSprite()
+    {
+        return currentGameStage().getPlayerSprite();
+    }
+    private ConsoleCommandInterpreter() {
         registerCommand(new String[]{"teleport", "to"}, s -> {
             if(s.length<2)
                 return "Command needs 2 parameter";
             try {
                 int x = Integer.parseInt(s[0]);
                 int y = Integer.parseInt(s[1]);
-                WorldStage.getInstance().GetPlayer().setPosition(x,y);
+                WorldStage.getInstance().setPosition(new Vector2(x,y));
+                WorldStage.getInstance().player.playEffect(Paths.EFFECT_TELEPORT,10);
                 return  "teleport to ("+s[0]+","+s[1]+")";
             } catch (Exception e) {
                 return "Exception occured, Invalid input";
@@ -114,8 +131,16 @@ public class ConsoleCommandInterpreter {
             PointOfInterest poi=Current.world().findPointsOfInterest(s[0]);
             if(poi==null)
                 return "PoI " + s[0] + " not found";
-            WorldStage.getInstance().GetPlayer().setPosition(poi.getPosition());
+            WorldStage.getInstance().setPosition(poi.getPosition());
+            WorldStage.getInstance().player.playEffect(Paths.EFFECT_TELEPORT,10);
             return  "Teleported to " + s[0] + "(" + poi.getPosition() + ")";
+        });
+        registerCommand(new String[]{"spawn","enemy"}, s -> {
+            if(s.length<1) return "Command needs 1 parameter: enemy name.";
+
+            if(WorldStage.getInstance().spawn(s[0]))
+                return  "Spawn " + s[0];
+            return "Can not find enemy "+s[0];
         });
         registerCommand(new String[]{"give", "gold"}, s -> {
             if(s.length<1) return "Command needs 1 parameter: Amount.";
@@ -129,6 +154,18 @@ public class ConsoleCommandInterpreter {
             Current.player().giveGold(amount);
             return "Added "+amount+" gold";
         });
+        registerCommand(new String[]{"give", "mana"}, s -> {
+            if(s.length<1) return "Command needs 1 parameter: Amount.";
+            int amount;
+            try {
+                amount=Integer.parseInt(s[0]);
+            }
+            catch (Exception e) {
+                return "Can not convert " + s[0] + " to number";
+            }
+            Current.player().addMaxMana(amount);
+            return "Added " + amount + " max mana";
+        });
         registerCommand(new String[]{"give", "life"}, s -> {
             if(s.length<1) return "Command needs 1 parameter: Amount.";
             int amount;
@@ -140,6 +177,15 @@ public class ConsoleCommandInterpreter {
             }
             Current.player().addMaxLife(amount);
             return "Added " + amount + " max life";
+        });
+        registerCommand(new String[]{"leave"}, s -> {
+            if(!MapStage.getInstance().isInMap()) return "not on a map";
+            MapStage.getInstance().exit();
+            return "Got out";
+        });
+        registerCommand(new String[]{"debug","collision"}, s -> {
+            currentGameStage().debugCollision(true);
+            return "Got out";
         });
         registerCommand(new String[]{"give", "card"}, s -> {
             //TODO: Specify optional amount.
@@ -156,17 +202,13 @@ public class ConsoleCommandInterpreter {
         });
         registerCommand(new String[]{"fullHeal"}, s -> {
             Current.player().fullHeal();
+            currentSprite().playEffect(Paths.EFFECT_HEAL);
             return "Player fully healed. Health set to " + Current.player().getLife() + ".";
         });
         registerCommand(new String[]{"setColorID"}, s -> {
             if(s.length < 1) return "Please specify color ID: Valid choices: B, G, R, U, W, C. Example:\n\"setColorID G\"";
             Current.player().setColorIdentity(s[0]);
             return "Player color identity set to " + Current.player().getColorIdentity() + ".";
-        });
-        registerCommand(new String[]{"reloadScenes"}, s -> {
-            SceneType.InventoryScene.instance.resLoaded();
-            SceneType.PlayerStatisticScene.instance.resLoaded();
-            return "Force reload status scenes. WARNING: Game might be unstable.";
         });
         registerCommand(new String[]{"resetQuests"}, s -> {
             Current.player().resetQuestFlags();
@@ -179,7 +221,7 @@ public class ConsoleCommandInterpreter {
         });
         registerCommand(new String[]{"dumpEnemyDeckColors"}, s -> {
             for(EnemyData E : new Array.ArrayIterator<>(WorldData.getAllEnemies())){
-                Deck D = E.generateDeck(Current.player().isFantasyMode(), Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
+                Deck D = E.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck()||Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
                 DeckProxy DP = new DeckProxy(D, "Constructed", GameType.Constructed, null);
                 ColorSet colorSet = DP.getColor();
                 System.out.printf("%s: Colors: %s (%s%s%s%s%s%s)\n", D.getName(), DP.getColor(),
@@ -195,7 +237,7 @@ public class ConsoleCommandInterpreter {
         });
         registerCommand(new String[]{"dumpEnemyDeckList"}, s -> {
             for(EnemyData E : new Array.ArrayIterator<>(WorldData.getAllEnemies())){
-                Deck D = E.generateDeck(Current.player().isFantasyMode(), Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
+                Deck D = E.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck()||Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
                 DeckProxy DP = new DeckProxy(D, "Constructed", GameType.Constructed, null);
                 ColorSet colorSet = DP.getColor();
                 System.out.printf("Deck: %s\n%s\n\n", D.getName(), DP.getDeck().getMain().toCardList("\n")
@@ -205,7 +247,7 @@ public class ConsoleCommandInterpreter {
         });
         registerCommand(new String[]{"dumpEnemyColorIdentity"}, s -> {
             for(EnemyData E : new Array.ArrayIterator<>(WorldData.getAllEnemies())){
-                Deck D = E.generateDeck(Current.player().isFantasyMode(), Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
+                Deck D = E.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck()||Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
                 DeckProxy DP = new DeckProxy(D, "Constructed", GameType.Constructed, null);
                 ColorSet colorSet = DP.getColor();
                 System.out.printf("%s Colors: %s | Deck Colors: %s (%s)\n", E.name, E.colors, DP.getColorIdentity().toEnumSet().toString(), DP.getName()
@@ -219,15 +261,52 @@ public class ConsoleCommandInterpreter {
             try { N = Integer.parseInt(s[0]); }
             catch (Exception e) { return "Can not convert " + s[0] + " to integer"; }
             Current.player().heal(N);
+            currentSprite().playEffect(Paths.EFFECT_HEAL);
             return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
         });
-        registerCommand(new String[]{"debug","on"}, s -> {
-            Current.setDebug(true);
-            return "Debug mode ON";
+        registerCommand(new String[]{"heal", "percent"}, s -> {
+            if(s.length<1) return "Command needs 1 parameter: Amount";
+            float value = 0;
+            try { value = Float.parseFloat(s[0]); }
+            catch (Exception e) { return "Can not convert " + s[0] + " to integer"; }
+            Current.player().heal(value);
+            currentSprite().playEffect(Paths.EFFECT_HEAL);
+            return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
+        });
+        registerCommand(new String[]{"heal", "full"}, s -> {
+            Current.player().fullHeal();
+            currentSprite().playEffect(Paths.EFFECT_HEAL);
+            return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
+        });
+
+        registerCommand(new String[]{"getMana", "amount"}, s -> {
+            if(s.length<1) return "Command needs 1 parameter: Amount";
+            int value;
+            try { value = Integer.parseInt(s[0]); }
+            catch (Exception e) { return "Can not convert " + s[0] + " to integer"; }
+            Current.player().addMana(value);
+            return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
+        });
+        registerCommand(new String[]{"getMana", "percent"}, s -> {
+            if(s.length<1) return "Command needs 1 parameter: Amount";
+            float value = 0;
+            try { value = Float.parseFloat(s[0]); }
+            catch (Exception e) { return "Can not convert " + s[0] + " to integer"; }
+            Current.player().addManaPercent(value);
+            return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
+        });
+        registerCommand(new String[]{"getMana", "full"}, s -> {
+            Current.player().addManaPercent(1.0f);
+            return "Player healed to " + Current.player().getLife() + "/" + Current.player().getMaxLife();
+        });
+        registerCommand(new String[]{"debug","map"}, s -> {
+            GameHUD.getInstance().setDebug(true);
+            return "Debug map ON";
         });
         registerCommand(new String[]{"debug","off"}, s -> {
-            Current.setDebug(false);
-            return "Debug mode OFF";
+            GameHUD.getInstance().setDebug(true);
+            currentGameStage().debugCollision(false);
+            return "Debug  OFF";
         });
         registerCommand(new String[]{"remove","enemy","all"}, s -> {
             //TODO: Remove all overworld enemies if not inside a map.
@@ -235,6 +314,36 @@ public class ConsoleCommandInterpreter {
                 return "Only supported for PoI";
             }
             MapStage.getInstance().removeAllEnemies();
+            return "removed all enemies";
+        });
+
+        registerCommand(new String[]{"hide"}, s -> {
+            if(s.length<1) return "Command needs 1 parameter: Amount";
+            float value = 0;
+            try { value = Float.parseFloat(s[0]); }
+            catch (Exception e) { return "Can not convert " + s[0] + " to float"; }
+            currentGameStage().hideFor(value);
+            return "removed all enemies";
+        });
+
+        registerCommand(new String[]{"fly"}, s -> {
+            if(s.length<1) return "Command needs 1 parameter: Amount";
+            float value = 0;
+            try { value = Float.parseFloat(s[0]); }
+            catch (Exception e) { return "Can not convert " + s[0] + " to float"; }
+            currentGameStage().flyFor(value);
+            return "removed all enemies";
+        });
+        registerCommand(new String[]{"sprint"}, s -> {
+            if(s.length<1) return "Command needs 1 parameter: Amount";
+            float value = 0;
+            try { value = Float.parseFloat(s[0]); }
+            catch (Exception e) { return "Can not convert " + s[0] + " to float"; }
+            currentGameStage().sprintFor(value);
+            return "removed all enemies";
+        });
+        registerCommand(new String[]{"remove","enemy","nearest"}, s -> {
+            WorldStage.getInstance().removeNearestEnemy();
             return "removed all enemies";
         });
         registerCommand(new String[]{"remove","enemy"}, s -> {

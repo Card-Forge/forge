@@ -1,0 +1,10 @@
+Name:Defiler of Dreams
+ManaCost:3 U U
+Types:Creature Phyrexian Sphinx
+PT:4/3
+K:Flying
+S:Mode$ OptionalCost | ValidCard$ Permanent.Blue | ValidSA$ Spell | Activator$ You | Cost$ PayLife<2> | ReduceColor$ U | Description$ As an additional cost to cast blue permanent spells, you may pay 2 life. Those spells cost {U} less to cast if you paid life this way. This effect reduces only the amount of blue mana you pay.
+T:Mode$ SpellCast | ValidCard$ Permanent.Blue | ValidActivatingPlayer$ You | Execute$ TrigDraw | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a blue permanent spell, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:BuffedBy:Permanent.Blue
+Oracle:Flying\nAs an additional cost to cast blue permanent spells, you may pay 2 life. Those spells cost {U} less to cast if you paid life this way. This effect reduces only the amount of blue mana you pay.\nWhenever you cast a blue permanent spell, draw a card.

@@ -1,0 +1,12 @@
+Name:Sheoldred's Restoration
+ManaCost:3 B
+Types:Sorcery
+K:Kicker:2 W
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Creature.YouOwn | SubAbility$ DBGainLife | TgtPrompt$ Select target creature to return from your graveyard | TriggerDescription$ Return target creature card from your graveyard to the battlefield. If this spell was kicked, you gain life equal to that card's mana value. Otherwise, you lose that much life. Exile CARDNAME.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ X | SubAbility$ DBLoseLife | Condition$ Kicked
+SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ X | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ0 | SubAbility$ DBChange
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+SVar:X:Targeted$CardManaCost
+SVar:Y:Count$TimesKicked
+DeckHas:Ability$Graveyard|LifeGain
+Oracle:Kicker {2}{W} (You may pay an additional {2}{W} as you cast this spell.)\nReturn target creature card from your graveyard to the battlefield. If this spell was kicked, you gain life equal to that card's mana value. Otherwise, you lose that much life. Exile Sheoldred's Restoration.

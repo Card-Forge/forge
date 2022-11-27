@@ -4,13 +4,12 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import forge.StaticData;
 import forge.adventure.data.GeneratedDeckData;
 import forge.adventure.data.GeneratedDeckTemplateData;
 import forge.adventure.data.RewardData;
 import forge.adventure.world.WorldSave;
-import forge.card.CardRarity;
-import forge.card.CardType;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
@@ -66,7 +65,7 @@ public class CardUtil {
 
             if(this.colors!= MagicColor.ALL_COLORS)
             {
-                if(!card.getRules().getColor().hasNoColorsExcept(this.colors)||card.getRules().getColor().isColorless())
+                if(!card.getRules().getColor().hasNoColorsExcept(this.colors)||(this.colors != MagicColor.COLORLESS && card.getRules().getColor().isColorless()))
                     return !this.shouldBeEqual;
             }
             if(colorType!=ColorType.Any)
@@ -183,7 +182,11 @@ public class CardUtil {
                 this.colors=0;
                 for(String color:type.colors)
                 {
-                    colors|=MagicColor.fromName(color.toLowerCase());
+                    if("colorID".equals(color))
+                        for (byte c : Current.player().getColorIdentity())
+                            colors |= c;
+                    else
+                        colors |= MagicColor.fromName(color.toLowerCase());
                 }
             }
             if(type.keyWords!=null&&type.keyWords.length!=0)
@@ -281,29 +284,71 @@ public class CardUtil {
             return getCardPrice(card);
         if(reward.getItem()!=null)
             return reward.getItem().cost;
+        if(reward.getType()== Reward.Type.Life)
+            return reward.getCount()*500;
+        if(reward.getType()== Reward.Type.Mana)
+            return reward.getCount()*500;
+        if(reward.getType()== Reward.Type.Gold)
+            return reward.getCount();
         return 1000;
     }
 
+    static List<PrintSheet> jumpStartSheetsCandidates=null;
     public static Deck generateDeck(GeneratedDeckData data)
     {
         Deck deck= new Deck(data.name);
-        if(data.template==null)
+        if(data.mainDeck!=null)
         {
             deck.getOrCreate(DeckSection.Main).addAllFlat(generateAllCards(Arrays.asList(data.mainDeck), true));
             if(data.sideBoard!=null)
                 deck.getOrCreate(DeckSection.Sideboard).addAllFlat(generateAllCards(Arrays.asList(data.sideBoard), true));
             return deck;
         }
-        float count=data.template.count;
-        float lands=count*0.4f;
-        float spells=count-lands;
-        List<RewardData> dataArray= generateRewards(data.template,spells*0.5f,new int[]{1,2});
-        dataArray.addAll(generateRewards(data.template,spells*0.3f,new int[]{3,4,5}));
-        dataArray.addAll(generateRewards(data.template,spells*0.2f,new int[]{6,7,8}));
-        List<PaperCard>  nonLand= generateAllCards(dataArray, true);
+        if(data.jumpstartPacks!=null)
+        {
+            deck.getOrCreate(DeckSection.Main);
+            for(int i=0;i<data.jumpstartPacks.length;i++)
+            {
 
-        nonLand.addAll(fillWithLands(nonLand,data.template));
-        deck.getOrCreate(DeckSection.Main).addAllFlat(nonLand);
+                String targetName;
+                switch (MagicColor.fromName(data.jumpstartPacks[i]))
+                {
+                    default:
+                    case MagicColor.WHITE:  targetName = "Plains";  break;
+                    case MagicColor.BLUE:   targetName = "Island";  break;
+                    case MagicColor.BLACK:  targetName = "Swamp";   break;
+                    case MagicColor.RED:    targetName = "Mountain";break;
+                    case MagicColor.GREEN:  targetName = "Forest";  break;
+                }
+                if(jumpStartSheetsCandidates==null)
+                {
+                    jumpStartSheetsCandidates=new ArrayList<>();
+                    for(PrintSheet sheet : StaticData.instance().getPrintSheets())
+                    {
+                        if(sheet.containsCardNamed(targetName,3) && sheet.getName().startsWith("JMP") && sheet.all().size() == 20)//dodge the rainbow jumpstart sheet and the sheet for every card
+                        {
+                            jumpStartSheetsCandidates.add(sheet);
+                        }
+                    }
+                }
+                PrintSheet sheet=jumpStartSheetsCandidates.get(Current.world().getRandom().nextInt(jumpStartSheetsCandidates.size()));
+                deck.getOrCreate(DeckSection.Main).addAllFlat(sheet.all());
+            }
+            return deck;
+        }
+       if(data.template!=null)
+       {
+           float count=data.template.count;
+           float lands=count*0.4f;
+           float spells=count-lands;
+           List<RewardData> dataArray= generateRewards(data.template,spells*0.5f,new int[]{1,2});
+           dataArray.addAll(generateRewards(data.template,spells*0.3f,new int[]{3,4,5}));
+           dataArray.addAll(generateRewards(data.template,spells*0.2f,new int[]{6,7,8}));
+           List<PaperCard>  nonLand= generateAllCards(dataArray, true);
+
+           nonLand.addAll(fillWithLands(nonLand,data.template));
+           deck.getOrCreate(DeckSection.Main).addAllFlat(nonLand);
+       }
         return deck;
     }
 
@@ -504,7 +549,7 @@ public class CardUtil {
         if(path.endsWith(".dck"))
             return DeckSerializer.fromFile(new File(Config.instance().getFilePath(path)));
 
-        if(forAI && isFantasyMode) {
+        if(forAI && (isFantasyMode||useGeneticAI)) {
             Deck deck = DeckgenUtil.getRandomOrPreconOrThemeDeck(colors, forAI, isTheme, useGeneticAI);
             if (deck != null)
                 return deck;

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.adventure.scene.DuelScene;
-import forge.adventure.scene.SceneType;
 import forge.ai.GameState;
 import forge.deck.Deck;
 import forge.game.player.Player;
@@ -82,6 +81,7 @@ public class MatchController extends AbstractGuiGame {
     }
 
     private final Map<PlayerView, InfoTab> zonesToRestore = Maps.newHashMap();
+    private final Map<PlayerView, InfoTab> lastZonesToRestore = Maps.newHashMap();
 
     public static MatchScreen getView() {
         return view;
@@ -130,9 +130,11 @@ public class MatchController extends AbstractGuiGame {
 
     @Override
     public void refreshCardDetails(final Iterable<CardView> cards) {
-        //ensure cards appear in the correct row of the field
         for (final VPlayerPanel pnl : view.getPlayerPanels().values()) {
+            //ensure cards appear in the correct row of the field
             pnl.getField().update(true);
+            //ensure flashback zone has updated info ie Snapcaster Mage, etc..
+            pnl.getZoneTab(ZoneType.Flashback).update();
         }
     }
 
@@ -311,7 +313,7 @@ public class MatchController extends AbstractGuiGame {
     public void finishGame() {
         if (Forge.isMobileAdventureMode) {
             Forge.setCursor(null, "0");
-            if (((DuelScene) SceneType.DuelScene.instance).hasCallbackExit())
+            if (DuelScene.instance().hasCallbackExit())
                 return;
             Forge.setTransitionScreen(new TransitionScreen(() -> {
                 Forge.clearTransitionScreen();
@@ -375,7 +377,7 @@ public class MatchController extends AbstractGuiGame {
     }
 
     @Override
-    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables) {
+    public PlayerZoneUpdates openZones(PlayerView controller, final Collection<ZoneType> zones, final Map<PlayerView, Object> playersWithTargetables, boolean backupLastZones) {
         PlayerZoneUpdates updates = new PlayerZoneUpdates();
         if (zones.size() == 1) {
             final ZoneType zoneType = zones.iterator().next();
@@ -384,10 +386,13 @@ public class MatchController extends AbstractGuiGame {
                 case Command:
                     playersWithTargetables.clear(); //clear since no zones need to be restored
                 default:
+                    lastZonesToRestore.clear();
                     //open zone tab for given zone if needed
                     boolean result = true;
                     for (final PlayerView player : playersWithTargetables.keySet()) {
                         final VPlayerPanel playerPanel = view.getPlayerPanel(player);
+                        if (backupLastZones)
+                            lastZonesToRestore.put(player, playerPanel.getSelectedTab());
                         playersWithTargetables.put(player, playerPanel.getSelectedTab()); //backup selected tab before changing it
                         final InfoTab zoneTab = playerPanel.getZoneTab(zoneType);
                         updates.add(new PlayerZoneUpdate(player, zoneType));
@@ -417,8 +422,14 @@ public class MatchController extends AbstractGuiGame {
                 continue;
             }
 
-            final InfoTab zoneTab = playerPanel.getZoneTab(zone);
-            playerPanel.setSelectedTab(zoneTab);
+            //final InfoTab zoneTab = playerPanel.getZoneTab(zone);
+            //playerPanel.setSelectedTab(zoneTab);
+        }
+        for (Map.Entry<PlayerView, InfoTab> e : lastZonesToRestore.entrySet()) {
+            if (e.getKey() != null && !e.getKey().getHasLost()) {
+                final VPlayerPanel p = view.getPlayerPanel(e.getKey());
+                p.setSelectedTab(e.getValue());
+            }
         }
     }
 

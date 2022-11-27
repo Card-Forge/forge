@@ -26,6 +26,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
+import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.Card;
@@ -227,6 +228,10 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
             return false;
         }
 
+        if (attach.isPhasedOut()) {
+            return false;
+        }
+
         // check for rules
         if (attach.isAura() && !canBeEnchantedBy(attach)) {
             return false;
@@ -330,9 +335,9 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         subtractCounter(CounterType.get(counterName), n);
     }
 
-    abstract public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table);
-    public void addCounterInternal(final CounterEnumType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table) {
-        addCounterInternal(CounterType.get(counterType), n, source, fireEvents, table);
+    abstract public void addCounterInternal(final CounterType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params);
+    public void addCounterInternal(final CounterEnumType counterType, final int n, final Player source, final boolean fireEvents, GameEntityCounterTable table, Map<AbilityKey, Object> params) {
+        addCounterInternal(CounterType.get(counterType), n, source, fireEvents, table, params);
     }
 
     public void receiveDamage(Pair<Integer, Boolean> dmg) {

@@ -1,0 +1,11 @@
+Name:Tiana, Angelic Mechanic
+ManaCost:1 R W
+Types:Legendary Creature Angel Artificer
+PT:3/2
+K:Flying
+T:Mode$ Crewed | ValidCrew$ Card.Self,Creature.Legendary+Other+YouCtrl | Execute$ TrigEffect | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME or another legendary creature you control crews a Vehicle, that Vehicle perpetually gets +1/+0.
+SVar:TrigEffect:DB$ Effect | RememberObjects$ TriggeredVehicle | StaticAbilities$ PerpetualP1P1 | Name$ Tiana, Angelic Mechanic's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This Vehicle perpetually gains +1/+0.
+DeckHints:Type$Legendary
+DeckNeeds:Type$Vehicle
+Oracle:Flying\nWhen Tiana, Angelic Mechanic or another legendary creature you control crews a Vehicle, that Vehicle perpetually gets +1/+0.

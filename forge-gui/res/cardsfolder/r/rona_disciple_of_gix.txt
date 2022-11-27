@@ -6,7 +6,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefi
 SVar:HistoricExile:DB$ ChangeZone | ValidTgts$ Card.Historic+YouOwn | TgtPrompt$ Select target historic card from your graveyard | Origin$ Graveyard | Destination$ Exile | RememberChanged$ True
 S:Mode$ Continuous | MayPlay$ True | Affected$ Card.nonLand+IsRemembered+ExiledWithSource | AffectedZone$ Exile | Description$ You may play cards exiled with CARDNAME.
 T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered+ExiledWithSource | Execute$ DBForget
-SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
+SVar:DBForget:DB$ Pump | ForgetObjects$ TriggeredCard
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Dig | Cost$ 4 T | Defined$ You | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SpellDescription$ Exile the top card of your library.

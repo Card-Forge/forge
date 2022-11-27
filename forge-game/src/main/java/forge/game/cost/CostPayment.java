@@ -313,7 +313,7 @@ public class CostPayment extends ManaConversionMatrix {
                 continue;
             }
 
-            if (StringUtils.isNotBlank(restriction) && !thisMana.getSourceCard().getType().hasStringType(restriction)) {
+            if (StringUtils.isNotBlank(restriction) && !thisMana.getSourceCard().isValid(restriction, null, null, null)) {
                 continue;
             }
 

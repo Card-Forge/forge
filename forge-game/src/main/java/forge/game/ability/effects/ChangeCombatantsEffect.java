@@ -40,17 +40,24 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         boolean isCombatChanged = false;
-        final Game game = sa.getActivatingPlayer().getGame();
+        final Player activator = sa.getActivatingPlayer();
+        final Game game = activator.getGame();
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         // TODO: may expand this effect for defined blocker (False Orders, General Jarkeld, Sorrow's Path, Ydwen Efreet)
         for (final Card c : getTargetCards(sa)) {
+            String cardString = CardTranslation.getTranslatedName(c.getName()) + " (" + c.getId() + ")";
+            boolean isOptional = sa.hasParam("Optional");
+            if (isOptional && !activator.getController().confirmAction(sa, null,
+                    Localizer.getInstance().getMessage("lblChangeCombatantOption", cardString), null)) {
+                continue;
+            }
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
                 final Combat combat = game.getCombat();
                 final GameEntity originalDefender = combat.getDefenderByAttacker(c);
                 final FCollection<GameEntity> defs = new FCollection<>();
                 defs.addAll(sa.hasParam("PlayerOnly") ? combat.getDefendingPlayers() : combat.getDefenders());
 
-                String title = Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", CardTranslation.getTranslatedName(c.getName()));
+                String title = Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", cardString);
                 Map<String, Object> params = Maps.newHashMap();
                 params.put("Attacker", c);
 

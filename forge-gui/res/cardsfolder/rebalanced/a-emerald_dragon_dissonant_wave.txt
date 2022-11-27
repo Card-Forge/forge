@@ -1,0 +1,16 @@
+Name:A-Emerald Dragon
+ManaCost:4 G G
+Types:Creature Dragon
+PT:4/4
+K:Flying
+K:Ward:2
+AlternateMode:Adventure
+Oracle:Flying, ward {2}
+
+ALTERNATE
+
+Name:A-Dissonant Wave
+ManaCost:2 G
+Types:Instant Adventure
+A:SP$ Counter | TargetType$ Activated,Triggered | TgtPrompt$ Select target activated or triggered ability from a noncreature source | ValidTgts$ Card.nonCreature,Emblem | SpellDescription$ Counter target activated or triggered ability from a noncreature source.
+Oracle:Counter target activated or triggered ability from a noncreature source.

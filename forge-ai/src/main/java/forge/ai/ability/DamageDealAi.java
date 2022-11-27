@@ -25,6 +25,7 @@ import forge.ai.SpecialCardAi;
 import forge.ai.SpellAbilityAi;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
+import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
@@ -209,7 +210,7 @@ public class DamageDealAi extends DamageAiBase {
             if (ai.getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)) {
                 boolean doTarget = damageTargetAI(ai, sa, dmg, true);
                 if (doTarget) {
-                    Card tgt = sa.getTargets().getFirstTargetedCard();
+                    Card tgt = sa.getTargetCard();
                     if (tgt != null) {
                         return ai.getGame().getPhaseHandler().getPlayerTurn() == tgt.getController();
                     }
@@ -672,7 +673,7 @@ public class DamageDealAi extends DamageAiBase {
                 c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, false);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
-                    if (sa.isSpell() && !divided && !immediately && tgt.getMaxTargets(sa.getHostCard(), sa) == 1) {
+                    if (sa.isSpell() && !divided && !immediately && tgt.getMaxTargets(source, sa) == 1) {
                         if (!ComputerUtilCard.useRemovalNow(sa, c, dmg, ZoneType.Graveyard)) {
                             return false;
                         }
@@ -723,7 +724,7 @@ public class DamageDealAi extends DamageAiBase {
                 final Card c = dealDamageChooseTgtC(ai, sa, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
                     //option to hold removal instead only applies for single targeted removal
-                    if (!immediately && tgt.getMaxTargets(sa.getHostCard(), sa) == 1 && !divided) {
+                    if (!immediately && tgt.getMaxTargets(source, sa) == 1 && !divided) {
                         if (!ComputerUtilCard.useRemovalNow(sa, c, dmg, ZoneType.Graveyard)) {
                             return false;
                         }
@@ -781,6 +782,13 @@ public class DamageDealAi extends DamageAiBase {
             sa.resetTargets();
             return false;
         }
+
+        // if opponent will gain life (ex. Fiery Justice), don't target only enemy player unless life gain is harmful or ignored
+        if ("OpponentGainLife".equals(logic) && tcs.size() == 1 && tcs.contains(enemy) && ComputerUtil.lifegainPositive(enemy, source)) {
+            sa.resetTargets();
+            return false;
+        }
+
         return true;
     }
 
@@ -798,11 +806,11 @@ public class DamageDealAi extends DamageAiBase {
      */
     private boolean damageChooseNontargeted(Player ai, final SpellAbility saMe, final int dmg) {
         // TODO: Improve circumstances where the Defined Damage is unwanted
-        final List<GameObject> objects = AbilityUtils.getDefinedObjects(saMe.getHostCard(), saMe.getParam("Defined"), saMe);
+        final List<GameEntity> objects = AbilityUtils.getDefinedEntities(saMe.getHostCard(), saMe.getParam("Defined"), saMe);
         boolean urgent = false; // can it wait?
         boolean positive = false;
 
-        for (final Object o : objects) {
+        for (final GameEntity o : objects) {
             if (o instanceof Card) {
                 Card c = (Card) o;
                 final int restDamage = ComputerUtilCombat.predictDamageTo(c, dmg, saMe.getHostCard(), false);

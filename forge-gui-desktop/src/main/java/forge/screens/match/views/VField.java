@@ -79,6 +79,7 @@ public class VField implements IVDoc<CField> {
     private final FLabel lblPoison     = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_ZONE_POISON)).iconInBackground().build();
     private final FLabel lblEnergy     = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_ENERGY)).iconInBackground().build();
     private final FLabel lblExperience = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_EXPERIENCE)).iconInBackground().build();
+    private final FLabel lblTicket     = new FLabel.Builder().fontAlign(SwingConstants.CENTER).fontStyle(Font.BOLD).icon(FSkin.getImage(FSkinProp.IMG_TICKET)).iconInBackground().build();
 
     private final PhaseIndicator phaseIndicator = new PhaseIndicator();
 
@@ -113,6 +114,7 @@ public class VField implements IVDoc<CField> {
         lblPoison.setFocusable(false);
         lblEnergy.setFocusable(false);
         lblExperience.setFocusable(false);
+        lblTicket.setFocusable(false);
 
         avatarArea.setOpaque(false);
         avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
@@ -215,12 +217,29 @@ public class VField implements IVDoc<CField> {
         detailsPanel.updateZones();
     }
 
-    private void addLblExperience() {
-        if (lblExperience.isShowing() || lblEnergy.isShowing()) {
-            return; // energy takes precedence
+    private void addLblTicket() {
+        if (lblTicket.isShowing() || lblExperience.isShowing() || lblEnergy.isShowing() || lblPoison.isShowing()) {
+            return; // experience, energy, poison take precedence
         }
-        if (lblExperience.isShowing() || lblPoison.isShowing()) {
-            return; // poison takes precedence
+        avatarArea.remove(lblLife);
+        lblLife.setIcon(FSkin.getImage(FSkinProp.ICO_QUEST_LIFE));
+        avatarArea.add(lblLife, "w 50%!, h 20px!, split 2");
+        avatarArea.add(lblTicket, "w 50%!, h 20px!, wrap");
+    }
+
+    private void removeLblTicket() {
+        if (!lblTicket.isShowing()) {
+            return;
+        }
+        avatarArea.remove(lblTicket);
+        avatarArea.remove(lblLife);
+        avatarArea.add(lblLife, "w 100%!, h 20px!, wrap");
+    }
+
+
+    private void addLblExperience() {
+        if (lblExperience.isShowing() || lblEnergy.isShowing() || lblPoison.isShowing()) {
+            return; // energy and poison take precedence
         }
         avatarArea.remove(lblLife);
         lblLife.setIcon(FSkin.getImage(FSkinProp.ICO_QUEST_LIFE));
@@ -288,10 +307,12 @@ public class VField implements IVDoc<CField> {
         final int poison = player.getCounters(CounterEnumType.POISON);
         final int energy = player.getCounters(CounterEnumType.ENERGY);
         final int experience = player.getCounters(CounterEnumType.EXPERIENCE);
+        final int ticket = player.getCounters(CounterEnumType.TICKET);
 
         if (poison > 0) {
             removeLblEnergy();
             removeLblExperience();
+            removeLblTicket();
             addLblPoison();
             lblPoison.setText(String.valueOf(poison));
             if (poison < POISON_CRITICAL) {
@@ -305,6 +326,7 @@ public class VField implements IVDoc<CField> {
 
         if (energy > 0) {
             removeLblExperience();
+            removeLblTicket();
             if (poison == 0) {
                 addLblEnergy();
                 lblEnergy.setText(String.valueOf(energy));
@@ -314,12 +336,22 @@ public class VField implements IVDoc<CField> {
         }
 
         if (experience > 0) {
+            removeLblTicket();
             if (poison == 0 && energy == 0) {
                 addLblExperience();
                 lblExperience.setText(String.valueOf(experience));
             }
         } else {
             removeLblExperience();
+        }
+
+        if (ticket > 0) {
+            if (poison == 0 && energy == 0 && experience == 0) {
+                addLblTicket();
+                lblTicket.setText(String.valueOf(ticket));
+            }
+        } else {
+            removeLblTicket();
         }
 
         final boolean highlighted = isHighlighted();

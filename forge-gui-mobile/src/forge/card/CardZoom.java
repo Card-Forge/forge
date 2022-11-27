@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.Align;
 
@@ -78,6 +79,8 @@ public class CardZoom extends FOverlay {
     }
 
     public static void hideZoom() {
+        if (activateHandler != null)
+            activateHandler.setSelectedIndex(currentIndex);
         cardZoom.hide();
     }
 
@@ -345,11 +348,11 @@ public class CardZoom extends FOverlay {
         }
 
         if (currentActivateAction != null) {
-            g.fillRect(FDialog.MSG_BACK_COLOR, 0, 0, w, messageHeight);
-            g.drawText(Forge.getLocalizer().getMessage("lblSwipeUpTo").replace("%s", currentActivateAction), FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, 0, w, messageHeight, false, Align.center, true);
+            g.fillRect(FDialog.getMsgBackColor(), 0, 0, w, messageHeight);
+            g.drawText(Forge.getLocalizer().getMessage("lblSwipeUpTo").replace("%s", currentActivateAction), FDialog.MSG_FONT, FDialog.getMsgForeColor(), 0, 0, w, messageHeight, false, Align.center, true);
         }
-        g.fillRect(FDialog.MSG_BACK_COLOR, 0, h - messageHeight, w, messageHeight);
-        g.drawText(zoomMode ? Forge.getLocalizer().getMessage("lblSwipeDownDetailView") : Forge.getLocalizer().getMessage("lblSwipeDownPictureView"), FDialog.MSG_FONT, FDialog.MSG_FORE_COLOR, 0, h - messageHeight, w, messageHeight, false, Align.center, true);
+        g.fillRect(FDialog.getMsgBackColor(), 0, h - messageHeight, w, messageHeight);
+        g.drawText(zoomMode ? Forge.getLocalizer().getMessage("lblSwipeDownDetailView") : Forge.getLocalizer().getMessage("lblSwipeDownPictureView"), FDialog.MSG_FONT, FDialog.getMsgForeColor(), 0, h - messageHeight, w, messageHeight, false, Align.center, true);
 
         interrupt(false);
     }
@@ -380,5 +383,31 @@ public class CardZoom extends FOverlay {
         }
         if(!MatchController.instance.isGamePaused())
             MatchController.instance.pauseMatch();
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        if (Forge.hasGamepad()) {
+            if (keyCode == Input.Keys.DPAD_LEFT)
+                fling(300, 0);
+            else if (keyCode == Input.Keys.DPAD_RIGHT)
+                fling(-300, 0);
+            else if (keyCode == Input.Keys.BUTTON_B)
+                hideZoom();
+            else if (keyCode == Input.Keys.BUTTON_A)
+                fling(0, -300f);
+            else if (keyCode == Input.Keys.BUTTON_X) {
+                if (mutateIconBounds != null) {
+                    tap(mutateIconBounds.x, mutateIconBounds.y, 1);
+                }
+                if (flipIconBounds != null) {
+                    tap(flipIconBounds.x, flipIconBounds.y, 1);
+                }
+            }
+            else if (keyCode == Input.Keys.BUTTON_Y)
+                fling(0, 300f);
+            return true;
+        }
+        return super.keyDown(keyCode);
     }
 }

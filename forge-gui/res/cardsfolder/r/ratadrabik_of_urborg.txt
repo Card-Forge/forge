@@ -1,0 +1,12 @@
+Name:Ratadrabik of Urborg
+ManaCost:2 W B
+Types:Legendary Creature Zombie Wizard
+PT:3/3
+K:Vigilance
+K:Ward:2
+S:Mode$ Continuous | Affected$ Zombie.YouCtrl+Other | AddKeyword$ Vigilance | Description$ Other zombies you control have vigilance.
+T:Mode$ ChangesZone | ValidCard$ Creature.Legendary+Other+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ DBCopy | TriggerDescription$ Whenever another legendary creature you control dies, create a token that's a copy of that creature, except it's not legendary and it's a 2/2 black Zombie in addition to its other colors and types.
+SVar:DBCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | NonLegendary$ True | SetPower$ 2 | SetToughness$ 2 | AddTypes$ Zombie | AddColors$ Black
+DeckHas:Ability$Token
+DeckHints:Type$Legendary|Zombie
+Oracle:Vigilance, ward {2}\nOther zombies you control have vigilance.\nWhenever another legendary creature you control dies, create a token that's a copy of that creature, except it's not legendary and it's a 2/2 black Zombie in addition to its other colors and types.

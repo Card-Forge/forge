@@ -2,30 +2,34 @@ package forge.adventure.stage;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
+import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
-import forge.adventure.scene.Scene;
-import forge.adventure.scene.SceneType;
+import forge.adventure.scene.*;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
 import forge.adventure.util.UIActor;
 import forge.adventure.world.WorldSave;
+import forge.deck.Deck;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 
@@ -38,16 +42,24 @@ public class GameHUD extends Stage {
     private final GameStage gameStage;
     private final Image avatar;
     private final Image miniMapPlayer;
-    private final Label lifePoints;
-    private final Label money;
+    private final TextraLabel lifePoints;
+    private final TextraLabel money;
+    private final TextraLabel mana;
     private final Image miniMap, gamehud, mapborder, avatarborder, blank;
-    private TextButton deckActor, menuActor, statsActor, inventoryActor;
-    private UIActor ui;
-    private Touchpad touchpad;
-    private Console console;
+    private final InputEvent eventTouchDown;
+    private final InputEvent eventTouchUp;
+    private final TextraButton deckActor;
+    private final TextraButton openMapActor;
+    private final TextraButton menuActor;
+    private final TextraButton statsActor;
+    private final TextraButton inventoryActor;
+    public final UIActor ui;
+    private final Touchpad touchpad;
+    private final Console console;
     float TOUCHPAD_SCALE = 70f, referenceX;
     boolean isHiding = false, isShowing = false;
     float opacity = 1f;
+    private boolean debugMap;
 
     private GameHUD(GameStage gameStage) {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
@@ -61,31 +73,30 @@ public class GameHUD extends Stage {
         blank = ui.findActor("blank");
         miniMap = ui.findActor("map");
         mapborder = ui.findActor("mapborder");
+
         avatarborder = ui.findActor("avatarborder");
         deckActor = ui.findActor("deck");
-        deckActor.getLabel().setText(Forge.getLocalizer().getMessage("lblDeck"));
+        openMapActor = ui.findActor("openmap");
+        ui.onButtonPress("openmap", () -> GameHUD.this.openMap());
         menuActor = ui.findActor("menu");
         referenceX = menuActor.getX();
-        menuActor.getLabel().setText(Forge.getLocalizer().getMessage("lblMenu"));
         statsActor = ui.findActor("statistic");
-        statsActor.getLabel().setText(Forge.getLocalizer().getMessage("lblStatus"));
         inventoryActor = ui.findActor("inventory");
-        inventoryActor.getLabel().setText(Forge.getLocalizer().getMessage("lblItem"));
         gamehud = ui.findActor("gamehud");
 
         miniMapPlayer = new Image(new Texture(Config.instance().getFile("ui/minimap_player.png")));
         //create touchpad
-        touchpad = new Touchpad(10, Controls.GetSkin());
+        touchpad = new Touchpad(10, Controls.getSkin());
         touchpad.setBounds(15, 15, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
         touchpad.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
                 if (MapStage.getInstance().isInMap()) {
-                    MapStage.getInstance().GetPlayer().getMovementDirection().x+=((Touchpad) actor).getKnobPercentX();
-                    MapStage.getInstance().GetPlayer().getMovementDirection().y+=((Touchpad) actor).getKnobPercentY();
+                    MapStage.getInstance().getPlayerSprite().getMovementDirection().x += ((Touchpad) actor).getKnobPercentX();
+                    MapStage.getInstance().getPlayerSprite().getMovementDirection().y += ((Touchpad) actor).getKnobPercentY();
                 } else {
-                    WorldStage.getInstance().GetPlayer().getMovementDirection().x+=((Touchpad) actor).getKnobPercentX();
-                    WorldStage.getInstance().GetPlayer().getMovementDirection().y+=((Touchpad) actor).getKnobPercentY();
+                    WorldStage.getInstance().getPlayerSprite().getMovementDirection().x += ((Touchpad) actor).getKnobPercentX();
+                    WorldStage.getInstance().getPlayerSprite().getMovementDirection().y += ((Touchpad) actor).getKnobPercentY();
                 }
             }
         });
@@ -98,24 +109,18 @@ public class GameHUD extends Stage {
         ui.onButtonPress("statistic", () -> statistic());
         ui.onButtonPress("deck", () -> openDeck());
         lifePoints = ui.findActor("lifePoints");
-        lifePoints.setText("20/20");
-        AdventurePlayer.current().onLifeChange(new Runnable() {
-            @Override
-            public void run() {
-                lifePoints.setText(AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife());
-            }
-        });
+        mana = ui.findActor("mana");
         money = ui.findActor("money");
-        WorldSave.getCurrentSave().getPlayer().onGoldChange(new Runnable() {
-            @Override
-            public void run() {
-                money.setText(String.valueOf(AdventurePlayer.current().getGold()));
-            }
-        }) ;
+        mana.setText("{Scale=80%}0/0");
+        lifePoints.setText("{Scale=80%}20/20");
+        AdventurePlayer.current().onLifeChange(() -> lifePoints.setText("{Scale=80%}"+AdventurePlayer.current().getLife() + "/" + AdventurePlayer.current().getMaxLife()));
+        AdventurePlayer.current().onManaChange(() -> mana.setText("{Scale=80%}"+AdventurePlayer.current().getMana() + "/" + AdventurePlayer.current().getMaxMana()));
+
+        WorldSave.getCurrentSave().getPlayer().onGoldChange(() -> money.setText("{Scale=80%}"+String.valueOf(AdventurePlayer.current().getGold())));
         addActor(ui);
         addActor(miniMapPlayer);
-        console=new Console();
-        console.setBounds(0, GuiBase.isAndroid() ? getHeight() : 0, getWidth(),getHeight()/2);
+        console = new Console();
+        console.setBounds(0, GuiBase.isAndroid() ? getHeight() : 0, getWidth(), getHeight() / 2);
         console.setVisible(false);
         ui.addActor(console);
         if (GuiBase.isAndroid()) {
@@ -123,16 +128,21 @@ public class GameHUD extends Stage {
             avatarborder.addListener(new ConsoleToggleListener());
             gamehud.addListener(new ConsoleToggleListener());
         }
-        WorldSave.getCurrentSave().onLoad(new Runnable() {
-            @Override
-            public void run() {
-                GameHUD.this.enter();
-            }
-        });
+        WorldSave.getCurrentSave().onLoad(() -> GameHUD.this.enter());
+        eventTouchDown = new InputEvent();
+        eventTouchDown.setPointer(-1);
+        eventTouchDown.setType(InputEvent.Type.touchDown);
+        eventTouchUp = new InputEvent();
+        eventTouchUp.setPointer(-1);
+        eventTouchUp.setType(InputEvent.Type.touchUp);
+    }
+
+    private void openMap() {
+        Forge.switchScene(MapViewScene.instance());
     }
 
     private void statistic() {
-        Forge.switchScene(SceneType.PlayerStatisticScene.instance);
+        Forge.switchScene(PlayerStatisticScene.instance());
     }
 
     public static GameHUD getInstance() {
@@ -146,63 +156,61 @@ public class GameHUD extends Stage {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         touchpad.setVisible(false);
-        MapStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
-        WorldStage.getInstance().GetPlayer().setMovementDirection(Vector2.Zero);
+        MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
+        WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
         return super.touchUp(screenX, screenY, pointer, button);
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        Vector2 c=new Vector2();
+        Vector2 c = new Vector2();
         screenToStageCoordinates(c.set(screenX, screenY));
 
-        float x=(c.x-miniMap.getX())/miniMap.getWidth();
-        float y=(c.y-miniMap.getY())/miniMap.getHeight();
+        float x = (c.x - miniMap.getX()) / miniMap.getWidth();
+        float y = (c.y - miniMap.getY()) / miniMap.getHeight();
         //map bounds
-        if (Controls.actorContainsVector(miniMap,c)) {
+        if (Controls.actorContainsVector(miniMap, c)) {
             touchpad.setVisible(false);
-            if (MapStage.getInstance().isInMap())
-                return true;
-            if(Current.isInDebug())
-                WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+
+            if (debugMap)
+                WorldStage.getInstance().getPlayerSprite().setPosition(x * WorldSave.getCurrentSave().getWorld().getWidthInPixels(), y * WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+
             return true;
         }
         return super.touchDragged(screenX, screenY, pointer);
     }
 
     @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button)
-    {
-        Vector2 c=new Vector2();
-        Vector2 touch =new Vector2();
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        Vector2 c = new Vector2();
+        Vector2 touch = new Vector2();
         screenToStageCoordinates(touch.set(screenX, screenY));
         screenToStageCoordinates(c.set(screenX, screenY));
 
-        float x=(c.x-miniMap.getX())/miniMap.getWidth();
-        float y=(c.y-miniMap.getY())/miniMap.getHeight();
-        if (Controls.actorContainsVector(gamehud,c)) {
+        float x = (c.x - miniMap.getX()) / miniMap.getWidth();
+        float y = (c.y - miniMap.getY()) / miniMap.getHeight();
+        if (Controls.actorContainsVector(gamehud, c)) {
             super.touchDown(screenX, screenY, pointer, button);
             return true;
         }
-        if (Controls.actorContainsVector(miniMap,c)) {
-            if (MapStage.getInstance().isInMap())
-                return true;
-            if(Current.isInDebug())
-                WorldStage.getInstance().GetPlayer().setPosition(x*WorldSave.getCurrentSave().getWorld().getWidthInPixels(),y*WorldSave.getCurrentSave().getWorld().getHeightInPixels());
+        if (Controls.actorContainsVector(miniMap, c)) {
+            if (debugMap)
+                WorldStage.getInstance().getPlayerSprite().setPosition(x * WorldSave.getCurrentSave().getWorld().getWidthInPixels(), y * WorldSave.getCurrentSave().getWorld().getHeightInPixels());
             return true;
         }
         //auto follow touchpad
         if (GuiBase.isAndroid() && !MapStage.getInstance().getDialogOnlyInput() && !console.isVisible()) {
-            if (!(Controls.actorContainsVector(avatar,touch)) // not inside avatar bounds
-                    && !(Controls.actorContainsVector(miniMap,touch)) // not inside map bounds
-                    && !(Controls.actorContainsVector(gamehud,touch)) //not inside gamehud bounds
-                    && !(Controls.actorContainsVector(menuActor,touch)) //not inside menu button
-                    && !(Controls.actorContainsVector(deckActor,touch)) //not inside deck button
-                    && !(Controls.actorContainsVector(statsActor,touch)) //not inside stats button
-                    && !(Controls.actorContainsVector(inventoryActor,touch)) //not inside inventory button
-                    && (Controls.actorContainsVector(ui,touch)) //inside display bounds
+            if (!(Controls.actorContainsVector(avatar, touch)) // not inside avatar bounds
+                    && !(Controls.actorContainsVector(miniMap, touch)) // not inside map bounds
+                    && !(Controls.actorContainsVector(gamehud, touch)) //not inside gamehud bounds
+                    && !(Controls.actorContainsVector(menuActor, touch)) //not inside menu button
+                    && !(Controls.actorContainsVector(deckActor, touch)) //not inside deck button
+                    && !(Controls.actorContainsVector(openMapActor, touch)) //not inside openmap button
+                    && !(Controls.actorContainsVector(statsActor, touch)) //not inside stats button
+                    && !(Controls.actorContainsVector(inventoryActor, touch)) //not inside inventory button
+                    && (Controls.actorContainsVector(ui, touch)) //inside display bounds
                     && pointer < 1) { //not more than 1 pointer
-                touchpad.setBounds(touch.x-TOUCHPAD_SCALE/2, touch.y-TOUCHPAD_SCALE/2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
+                touchpad.setBounds(touch.x - TOUCHPAD_SCALE / 2, touch.y - TOUCHPAD_SCALE / 2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
                 touchpad.setVisible(true);
                 touchpad.setResetOnTouchUp(true);
                 hideButtons();
@@ -221,62 +229,101 @@ public class GameHUD extends Stage {
         super.draw(); //draw the Hud
         int xPosMini = (int) (((float) xPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getWidthInTiles()) * miniMap.getWidth());
         int yPosMini = (int) (((float) yPos / (float) WorldSave.getCurrentSave().getWorld().getTileSize() / (float) WorldSave.getCurrentSave().getWorld().getHeightInTiles()) * miniMap.getHeight());
-        miniMapPlayer.setPosition(miniMap.getX() + xPosMini - miniMapPlayer.getWidth()/2, miniMap.getY() + yPosMini -  miniMapPlayer.getHeight()/2);
+        miniMapPlayer.setPosition(miniMap.getX() + xPosMini - miniMapPlayer.getWidth() / 2, miniMap.getY() + yPosMini - miniMapPlayer.getHeight() / 2);
         if (GuiBase.isAndroid()) // prevent drawing on top of console
-            miniMapPlayer.setVisible(!console.isVisible()&&miniMap.isVisible());
-
+            miniMapPlayer.setVisible(!console.isVisible() && miniMap.isVisible());
+        //colored lifepoints
+        if (Current.player().getLife() >= Current.player().getMaxLife()) {
+            //color green if max life
+            lifePoints.setColor(Color.GREEN);
+        } else if (Current.player().getLife() <= 5) {
+            //color red if critical
+            lifePoints.setColor(Color.RED);
+        } else {
+            lifePoints.setColor(Color.WHITE);
+        }
     }
 
     Texture miniMapTexture;
-    public void enter() {
-        if(miniMapTexture!=null)
-            miniMapTexture.dispose();
-        miniMapTexture=new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage());
+    Texture miniMapToolTipTexture;
+    Pixmap miniMapToolTipPixmap;
 
+    public void enter() {
+        if (miniMapTexture != null)
+            miniMapTexture.dispose();
+        miniMapTexture = new Texture(WorldSave.getCurrentSave().getWorld().getBiomeImage());
+        if (miniMapToolTipTexture != null)
+            miniMapToolTipTexture.dispose();
+        if (miniMapToolTipPixmap != null)
+            miniMapToolTipPixmap.dispose();
+        miniMapToolTipPixmap = new Pixmap((int) (miniMap.getWidth() * 3), (int) (miniMap.getHeight() * 3), Pixmap.Format.RGBA8888);
+        miniMapToolTipPixmap.drawPixmap(WorldSave.getCurrentSave().getWorld().getBiomeImage(), 0, 0, WorldSave.getCurrentSave().getWorld().getBiomeImage().getWidth(), WorldSave.getCurrentSave().getWorld().getBiomeImage().getHeight(), 0, 0, miniMapToolTipPixmap.getWidth(), miniMapToolTipPixmap.getHeight());
+        miniMapToolTipTexture = new Texture(miniMapToolTipPixmap);
         miniMap.setDrawable(new TextureRegionDrawable(miniMapTexture));
         avatar.setDrawable(new TextureRegionDrawable(Current.player().avatar()));
+        Deck deck = AdventurePlayer.current().getSelectedDeck();
+        if (deck == null || deck.isEmpty() || deck.getMain().toFlatList().size() < 30) {
+            deckActor.setColor(Color.RED);
+        } else {
+            deckActor.setColor(menuActor.getColor());
+        }
     }
 
     private void openDeck() {
-        Forge.switchScene(SceneType.DeckSelectScene.instance);
+        Forge.switchScene(DeckSelectScene.instance());
     }
 
     private void openInventory() {
         WorldSave.getCurrentSave().header.createPreview();
-        Forge.switchScene(SceneType.InventoryScene.instance);
+        Forge.switchScene(InventoryScene.instance());
     }
+
     private void menu() {
         gameStage.openMenu();
     }
-    public void showHideMap(boolean visible) {
-        miniMap.setVisible(visible);
-        mapborder.setVisible(visible);
-        miniMapPlayer.setVisible(visible);
-        gamehud.setVisible(visible);
-        lifePoints.setVisible(visible);
-        money.setVisible(visible);
-        blank.setVisible(visible);
-        if (visible) {
-            avatarborder.getColor().a = 1f;
-            avatar.getColor().a = 1f;
-            deckActor.getColor().a = 1f;
-            menuActor.getColor().a = 1f;
-            statsActor.getColor().a = 1f;
-            inventoryActor.getColor().a = 1f;
-            opacity = 1f;
-        } else {
-            avatarborder.getColor().a = 0.4f;
-            avatar.getColor().a = 0.4f;
-            deckActor.getColor().a = 0.4f;
-            menuActor.getColor().a = 0.4f;
-            statsActor.getColor().a = 0.4f;
-            inventoryActor.getColor().a = 0.4f;
-            opacity = 0.4f;
+
+    public void setVisibility(Actor actor, boolean visible) {
+        if (actor != null)
+            actor.setVisible(visible);
+    }
+
+    public void setAlpha(Actor actor, boolean visible) {
+        if (actor != null) {
+            if (visible)
+                actor.getColor().a = 1f;
+            else
+                actor.getColor().a = 0.4f;
         }
+    }
+
+    public void showHideMap(boolean visible) {
+        setVisibility(miniMap, visible);
+        setVisibility(mapborder, visible);
+        setVisibility(openMapActor, visible);
+        setVisibility(miniMapPlayer, visible);
+        setVisibility(gamehud, visible);
+        setVisibility(lifePoints, visible);
+        setVisibility(mana, visible);
+        setVisibility(money, visible);
+        setVisibility(blank, visible);
+        setAlpha(avatarborder, visible);
+        setAlpha(avatar, visible);
+        setAlpha(deckActor, visible);
+        setAlpha(menuActor, visible);
+        setAlpha(statsActor, visible);
+        setAlpha(inventoryActor, visible);
+        opacity = visible ? 1f : 0.4f;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        ui.pressUp(keycode);
+        return super.keyUp(keycode);
     }
 
     @Override
     public boolean keyDown(int keycode) {
+        ui.pressDown(keycode);
         if (keycode == Input.Keys.F9 || keycode == Input.Keys.F10) {
             console.toggle();
             return true;
@@ -291,20 +338,40 @@ public class GameHUD extends Stage {
                     showButtons();
             }
         }
+        if (console.isVisible())
+            return true;
+        Button pressedButton = ui.buttonPressed(keycode);
+        if (pressedButton != null) {
+            performTouch(pressedButton);
+        }
         return super.keyDown(keycode);
     }
+
+    public void performTouch(Actor actor) {
+        if (actor == null)
+            return;
+        actor.fire(eventTouchDown);
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                actor.fire(eventTouchUp);
+            }
+        }, 0.10f);
+    }
+
     public void hideButtons() {
         if (isShowing)
             return;
         if (isHiding)
             return;
         isHiding = true;
-        deckActor.addAction(Actions.sequence(Actions.fadeOut(0.10f), Actions.hide(), Actions.moveTo(deckActor.getX()+deckActor.getWidth(), deckActor.getY())));
-        inventoryActor.addAction(Actions.sequence(Actions.fadeOut(0.15f), Actions.hide(), Actions.moveTo(inventoryActor.getX()+inventoryActor.getWidth(), inventoryActor.getY())));
-        statsActor.addAction(Actions.sequence(Actions.fadeOut(0.20f), Actions.hide(), Actions.moveTo(statsActor.getX()+statsActor.getWidth(), statsActor.getY())));
+        deckActor.addAction(Actions.sequence(Actions.fadeOut(0.10f), Actions.hide(), Actions.moveTo(deckActor.getX() + deckActor.getWidth(), deckActor.getY())));
+        inventoryActor.addAction(Actions.sequence(Actions.fadeOut(0.15f), Actions.hide(), Actions.moveTo(inventoryActor.getX() + inventoryActor.getWidth(), inventoryActor.getY())));
+        statsActor.addAction(Actions.sequence(Actions.fadeOut(0.20f), Actions.hide(), Actions.moveTo(statsActor.getX() + statsActor.getWidth(), statsActor.getY())));
         menuActor.addAction(Actions.sequence(Actions.fadeOut(0.25f), Actions.hide(), Actions.moveTo(menuActor.getX() + menuActor.getWidth(), menuActor.getY())));
         FThreads.delayInEDT(300, () -> isHiding = false);
     }
+
     public void showButtons() {
         if (console.isVisible())
             return;
@@ -313,22 +380,29 @@ public class GameHUD extends Stage {
         if (isShowing)
             return;
         isShowing = true;
-        menuActor.addAction(Actions.sequence(Actions.delay(0.1f), Actions.parallel(Actions.show(), Actions.alpha(opacity,0.1f), Actions.moveTo(referenceX, menuActor.getY(), 0.25f))));
-        statsActor.addAction(Actions.sequence(Actions.delay(0.15f), Actions.parallel(Actions.show(), Actions.alpha(opacity,0.1f), Actions.moveTo(referenceX, statsActor.getY(), 0.25f))));
-        inventoryActor.addAction(Actions.sequence(Actions.delay(0.2f), Actions.parallel(Actions.show(), Actions.alpha(opacity,0.1f), Actions.moveTo(referenceX, inventoryActor.getY(), 0.25f))));
-        deckActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.parallel(Actions.show(), Actions.alpha(opacity,0.1f), Actions.moveTo(referenceX, deckActor.getY(), 0.25f))));
+        menuActor.addAction(Actions.sequence(Actions.delay(0.1f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, menuActor.getY(), 0.25f))));
+        statsActor.addAction(Actions.sequence(Actions.delay(0.15f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, statsActor.getY(), 0.25f))));
+        inventoryActor.addAction(Actions.sequence(Actions.delay(0.2f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, inventoryActor.getY(), 0.25f))));
+        deckActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, deckActor.getY(), 0.25f))));
         FThreads.delayInEDT(300, () -> isShowing = false);
     }
+
+    public void setDebug(boolean b) {
+        debugMap = b;
+    }
+
     class ConsoleToggleListener extends ActorGestureListener {
         public ConsoleToggleListener() {
             getGestureDetector().setLongPressSeconds(0.6f);
         }
+
         @Override
         public boolean longPress(Actor actor, float x, float y) {
             hideButtons();
             console.toggle();
             return super.longPress(actor, x, y);
         }
+
         @Override
         public void tap(InputEvent event, float x, float y, int count, int button) {
             super.tap(event, x, y, count, button);

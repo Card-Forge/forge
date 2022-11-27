@@ -1,9 +1,8 @@
 Name:Witch's Cottage
 ManaCost:no cost
 Types:Land Swamp
-R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | Description$ CARDNAME enters the battlefield tapped unless you control three or more other Swamps.
-SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Swamp.YouCtrl+Other | ConditionCompare$ LT3 | SubAbility$ MoveToPlay
-SVar:MoveToPlay:DB$ ChangeZone | Defined$ Self | Origin$ All | Destination$ Battlefield
+R:Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | ReplaceWith$ LandTapped | ReplacementResult$ Updated | Description$ CARDNAME enters the battlefield tapped unless you control three or more other Swamps.
+SVar:LandTapped:DB$ Tap | Defined$ Self | ETB$ True | ConditionPresent$ Swamp.YouCtrl+Other | ConditionCompare$ LT3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+untapped | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield untapped, you may put target creature card from your graveyard on top of your library.
 SVar:TrigChange:DB$ ChangeZone | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | Origin$ Graveyard | Destination$ Library
 DeckNeeds:Color$Black

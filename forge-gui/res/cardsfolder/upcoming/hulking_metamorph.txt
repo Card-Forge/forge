@@ -1,0 +1,11 @@
+Name:Hulking Metamorph
+ManaCost:9
+Types:Artifact Creature Shapeshifter
+PT:7/7
+K:Prototype:2 U U:3:3
+K:ETBReplacement:Copy:DBCopy:Optional
+SVar:DBCopy:DB$ Clone | Choices$ Artifact.YouCtrl+Other,Creature.YouCtrl+Other | AddTypes$ Artifact & Creature | SetPower$ X | SetToughness$ Y | SpellDescription$ You may have CARDNAME enter the battlefield as a copy of an artifact or creature you control, except it's an artifact creature in addition to its other types, and its power and toughness are equal to CARDNAME's power and toughness.
+SVar:X:Count$CardPower
+SVar:Y:Count$CardToughness
+DeckHints:Color$Blue
+Oracle:Prototype {2}{U}{U} — 3/3 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nYou may have Hulking Metamorph enter the battlefield as a copy of an artifact or creature you control, except it's an artifact creature in addition to its other types, and its power and toughness are equal to Hulking Metamorph's power and toughness.

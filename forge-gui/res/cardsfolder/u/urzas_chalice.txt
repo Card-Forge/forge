@@ -4,4 +4,5 @@ Types:Artifact
 T:Mode$ SpellCast | ValidCard$ Artifact | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigGainLife | TriggerDescription$ Whenever a player casts an artifact spell, you may pay {1}. If you do, you gain 1 life.
 SVar:TrigGainLife:AB$GainLife | Cost$ 1 | Defined$ You | LifeAmount$ 1
 AI:RemoveDeck:Random
+DeckHints:Type$Artifact
 Oracle:Whenever a player casts an artifact spell, you may pay {1}. If you do, you gain 1 life.

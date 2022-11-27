@@ -1,0 +1,8 @@
+Name:Rona's Vortex
+ManaCost:U
+Types:Instant
+K:Kicker:2 B
+A:SP$ ChangeZone | ValidTgts$ Creature.YouDontCtrl,Planeswalker.YouDontCtrl | TgtPrompt$ Select target creature or planeswalker | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBChangeZone | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SpellDescription$ Return target creature or planeswalker you don't control to its owner's hand. If this spell was kicked, put that permanent on the bottom of its owner's library instead.
+SVar:DBChangeZone:DB$ ChangeZone | Defined$ Targeted | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | Condition$ Kicked
+SVar:X:Count$TimesKicked
+Oracle:Kicker {2}{B} (You may pay an additional {2}{B} as you cast this spell.)\nReturn target creature or planeswalker you don't control to its owner's hand. If this spell was kicked, put that permanent on the bottom of its owner's library instead.

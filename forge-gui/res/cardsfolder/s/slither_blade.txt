@@ -2,5 +2,5 @@ Name:Slither Blade
 ManaCost:U
 Types:Creature Naga Rogue
 PT:1/2
-K:Unblockable
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 Oracle:Slither Blade can't be blocked.

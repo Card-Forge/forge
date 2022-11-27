@@ -1,0 +1,6 @@
+Name:Clown Robot 
+ManaCost:no cost
+Types:Artifact Creature Clown Robot 
+Colors:white
+PT:1/1
+Oracle:

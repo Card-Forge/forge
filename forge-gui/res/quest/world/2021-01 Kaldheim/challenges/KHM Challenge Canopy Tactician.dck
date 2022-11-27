@@ -1,0 +1,21 @@
+[quest]
+id=KHM Challenge: Canopy Tactician
+OpponentName=The Tacticians
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Canopy Tactician
+Difficulty=medium
+Description="Death and life are two ends of the same spear."
+Icon=Dungeon Crawling Green.jpg
+Deck Type=constructed
+Name=KHM Challenge: Canopy Tactician
+[Main]
+20 Canopy Tactician|KHM|1
+20 Jaspera Sentinel|KHM|1
+20 Snow-Covered Forest|KHM|2

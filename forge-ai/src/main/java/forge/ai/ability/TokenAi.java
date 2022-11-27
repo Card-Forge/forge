@@ -175,8 +175,7 @@ public class TokenAi extends SpellAbilityAi {
                     sa.getTargets().add(ai);
                 } else {
                     // Flash Foliage
-                    CardCollection list = CardLists.filterControlledBy(game.getCardsIn(ZoneType.Battlefield),
-                            ai.getOpponents());
+                    CardCollection list =  ai.getOpponents().getCardsIn(ZoneType.Battlefield);
                     list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source, sa);
                     list = CardLists.getTargetableCards(list, sa);
                     CardCollection betterList = CardLists.filter(list, new Predicate<Card>() {
@@ -273,6 +272,12 @@ public class TokenAi extends SpellAbilityAi {
             }
         }
 
+        if (mandatory) {
+            // Necessary because the AI goes into this method twice, first to set up targets (with mandatory=true)
+            // and then the second time to confirm the trigger (where mandatory may be set to false).
+            return true;
+        }
+
         Card actualToken = spawnToken(ai, sa);
         String tokenPower = sa.getParamOrDefault("TokenPower", actualToken.getBasePowerString());
         String tokenToughness = sa.getParamOrDefault("TokenToughness", actualToken.getBaseToughnessString());
@@ -291,12 +296,6 @@ public class TokenAi extends SpellAbilityAi {
             if (x <= 0) {
                 return false;
             }
-        }
-
-        if (mandatory) {
-            // Necessary because the AI goes into this method twice, first to set up targets (with mandatory=true)
-            // and then the second time to confirm the trigger (where mandatory may be set to false).
-            return true;
         }
 
         if ("OnlyOnAlliedAttack".equals(sa.getParam("AILogic"))) {

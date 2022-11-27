@@ -7,7 +7,8 @@ public class KeywordWithCost extends KeywordInstance<KeywordWithCost> {
 
     @Override
     protected void parse(String details) {
-        cost = new Cost(details.split("\\|", 2)[0].trim(), false);
+        String[] allDetails = details.split(":");
+        cost = new Cost(allDetails[0].split("\\|", 2)[0].trim(), false);
     }
 
     @Override

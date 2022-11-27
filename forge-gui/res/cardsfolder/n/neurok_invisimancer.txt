@@ -2,8 +2,9 @@ Name:Neurok Invisimancer
 ManaCost:1 U U
 Types:Creature Human Wizard
 PT:2/1
-K:Unblockable
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, target creature can't be blocked this turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN Unblockable
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUnblockable | TriggerDescription$ When CARDNAME enters the battlefield, target creature can't be blocked this turn.
+SVar:TrigUnblockable:DB$ Effect | ValidTgts$ Creature | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 SVar:PlayMain1:TRUE
 Oracle:Neurok Invisimancer can't be blocked.\nWhen Neurok Invisimancer enters the battlefield, target creature can't be blocked this turn.

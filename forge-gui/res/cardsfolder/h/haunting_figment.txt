@@ -1,0 +1,10 @@
+Name:Haunting Figment
+ManaCost:1 U
+Types:Creature Illusion
+PT:2/1
+K:Vigilance
+S:Mode$ CantBlockBy | ValidAttacker$ Card.Self | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME can't be blocked as long as you've cast an instant or sorcery spell this turn.
+SVar:X:Count$ThisTurnCast_Instant.YouCtrl,Sorcery.YouCtrl
+SVar:BuffedBy:Instant,Sorcery
+DeckHints:Type$Instant|Sorcery
+Oracle:Vigilance\nHaunting Figment can't be blocked as long as you've cast an instant or sorcery spell this turn.

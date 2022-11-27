@@ -1,0 +1,10 @@
+Name:Nurgle's Rot
+ManaCost:B
+Types:Enchantment Aura
+K:Enchant creature an opponent controls
+A:SP$ Attach | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.EnchantedBy | Execute$ TrigChangeZone | TriggerDescription$ When enchanted creature dies, return CARDNAME to its owner's hand and you create a 1/3 black Demon creature token named Plaguebearer of Nurgle.
+SVar:TrigChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | Defined$ Self | SubAbility$ DBToken
+SVar:DBToken:DB$ Token | TokenScript$ plaguebearer_of_nurgle
+DeckHas:Ability$Token & Type$Demon
+Oracle:Enchant creature an opponent controls\nWhen enchanted creature dies, return Nurgle's Rot to its owner's hand and you create a 1/3 black Demon creature token named Plaguebearer of Nurgle.

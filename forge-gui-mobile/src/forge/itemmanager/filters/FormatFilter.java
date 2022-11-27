@@ -47,6 +47,7 @@ public abstract class FormatFilter<T extends InventoryItem> extends ItemFilter<T
         }
         cbxFormats.addItem(Forge.getLocalizer().getMessage("lblOtherFormats"));
         cbxFormats.addItem(Forge.getLocalizer().getMessage("lblChooseSets"));
+        cbxFormats.setEnabled(!Forge.isMobileAdventureMode);
         selectedFormat = cbxFormats.getText();
 
         cbxFormats.setChangedHandler(new FEventHandler() {

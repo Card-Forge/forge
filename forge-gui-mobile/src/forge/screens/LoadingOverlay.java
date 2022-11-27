@@ -20,8 +20,16 @@ public class LoadingOverlay extends FOverlay {
     private static final float LOGO_SIZE_FACTOR = 0.7f;
     private static final float INSETS_FACTOR = 0.025f;
     private static final FSkinFont FONT = FSkinFont.get(22);
-    private static final FSkinColor BACK_COLOR = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.75f);
-    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static FSkinColor getOverlayColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_ACTIVE).alphaColor(0.75f);
+        return FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.75f);
+    }
+    private static FSkinColor getForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
     public static void show(String caption0, final Runnable runnable) {
         show(caption0, false, runnable);
     }
@@ -93,17 +101,17 @@ public class LoadingOverlay extends FOverlay {
             g.fillRect(Color.BLACK, 0, 0, getWidth(), getHeight());
             g.setAlphaComposite(oldAlpha);
             //overlay
-            g.fillRect(BACK_COLOR, x, y, panelWidth, panelHeight);
-            g.drawRect(Utils.scale(2), FORE_COLOR, x, y, panelWidth, panelHeight);
+            g.fillRect(getOverlayColor(), x, y, panelWidth, panelHeight);
+            g.drawRect(Utils.scale(2), getForeColor(), x, y, panelWidth, panelHeight);
             y += padding;
-            if (FSkin.hdLogo == null)
+            if (FSkin.getLogo() == null)
                 g.drawImage(FSkinImage.LOGO, (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
             else
-                g.drawImage(FSkin.hdLogo, (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
+                g.drawImage(FSkin.getLogo(), (getWidth() - logoSize) / 2f, y, logoSize, logoSize);
             y += logoSize + padding;
-            g.drawText(caption, FONT, FORE_COLOR, x, y, panelWidth, getHeight(), false, Align.center, false);
+            g.drawText(caption, FONT, getForeColor(), x, y, panelWidth, getHeight(), false, Align.center, false);
         } else {
-            g.drawText(caption, FONT, FORE_COLOR, 0, 0, getWidth(), getHeight(), true, Align.center, true);
+            g.drawText(caption, FONT, getForeColor(), 0, 0, getWidth(), getHeight(), true, Align.center, true);
         }
     }
 }

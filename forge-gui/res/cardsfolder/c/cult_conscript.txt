@@ -1,0 +1,10 @@
+Name:Cult Conscript
+ManaCost:B
+Types:Creature Skeleton Warrior
+PT:2/1
+K:CARDNAME enters the battlefield tapped.
+A:AB$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | CheckSVar$ X | SVarCompare GT0 | SpellDescription$ Return CARDNAME from your graveyard to the battlefield. Activate only if a non-Skeleton creature died under your control this turn.
+SVar:X:Count$ThisTurnEntered_Graveyard_from_Battlefield_Creature.YouCtrl+nonSkeleton
+SVar:DiscardMe:1
+SVar:SacMe:1
+Oracle:Cult Conscript enters the battlefield tapped.\n{1}{B}: Return Cult Conscript from your graveyard to the battlefield. Activate only if a non-Skeleton creature died under your control this turn.

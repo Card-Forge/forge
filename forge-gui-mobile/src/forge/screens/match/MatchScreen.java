@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.math.Vector2;
+import forge.adventure.scene.GameScene;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
 import forge.card.CardImageRenderer;
@@ -11,6 +12,7 @@ import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.game.spellability.StackItemView;
 import forge.gui.interfaces.IGuiGame;
+import forge.screens.match.views.VField;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 import forge.util.collect.FCollectionView;
@@ -27,7 +29,6 @@ import forge.animation.AbilityEffect;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinTexture;
-import forge.game.GameEntityView;
 import forge.game.GameView;
 import forge.game.card.CardView;
 import forge.game.combat.CombatView;
@@ -62,13 +63,15 @@ import forge.screens.match.winlose.ViewWinLose;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
 import forge.toolbox.FCardPanel;
-import forge.toolbox.FEvent;
-import forge.toolbox.FEvent.FEventHandler;
 import forge.toolbox.FScrollPane;
 import forge.util.Callback;
 
 public class MatchScreen extends FScreen {
-    public static FSkinColor BORDER_COLOR = FSkinColor.get(Colors.CLR_BORDERS);
+    public static FSkinColor getBorderColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_BORDERS);
+        return FSkinColor.get(Colors.CLR_BORDERS);
+    }
 
     private static final Map<PlayerView, VPlayerPanel> playerPanels = Maps.newHashMap();
     private List<VPlayerPanel> playerPanelsList;
@@ -83,7 +86,8 @@ public class MatchScreen extends FScreen {
     private AbilityEffect activeEffect;
     private BGAnimation bgAnimation;
     private ViewWinLose viewWinLose = null;
-    private List<FDisplayObject> potentialListener;
+    private static List<FDisplayObject> potentialListener;
+    private int selectedPlayer;
 
     public MatchScreen(List<VPlayerPanel> playerPanels0) {
         super(new FMenuBar());
@@ -107,39 +111,19 @@ public class MatchScreen extends FScreen {
         //reorder list so bottom player is at the end of the list ensuring top to bottom turn order
         playerPanelsList.remove(bottomPlayerPanel);
         playerPanelsList.add(bottomPlayerPanel);
-
+        selectedPlayer = playerPanelsList.size()-1;
 
         bottomPlayerPrompt = add(new VPrompt("", "",
-                new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        getGameController().selectButtonOk();
-                    }
-                },
-                new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        getGameController().selectButtonCancel();
-                    }
-                }));
+                e -> getGameController().selectButtonOk(),
+                e -> getGameController().selectButtonCancel()));
 
         if (humanCount < 2 || MatchController.instance.hotSeatMode() || GuiBase.isNetworkplay())
             topPlayerPrompt = null;
         else {
             //show top prompt if multiple human players and not playing in Hot Seat mode and not in network play
             topPlayerPrompt = add(new VPrompt("", "",
-                    new FEventHandler() {
-                        @Override
-                        public void handleEvent(FEvent e) {
-                            getGameController().selectButtonOk();
-                        }
-                    },
-                    new FEventHandler() {
-                        @Override
-                        public void handleEvent(FEvent e) {
-                            getGameController().selectButtonCancel();
-                        }
-                    }));
+                    e -> getGameController().selectButtonOk(),
+                    e -> getGameController().selectButtonCancel()));
             topPlayerPrompt.setRotate180(true);
             topPlayerPanel.setRotate180(true);
             getHeader().setRotate90(true);
@@ -225,19 +209,16 @@ public class MatchScreen extends FScreen {
 
         private class MenuItem extends FMenuItem {
             private MenuItem(String text0, final FDropDown dropDown) {
-                super(text0, new FEventHandler() {
-                    @Override
-                    public void handleEvent(FEvent e) {
-                        dropDown.setRotate180(PlayerSpecificMenu.this.getRotate180());
-                        Rectangle menuScreenPos = PlayerSpecificMenu.this.screenPos;
-                        if (dropDown.getRotate180()) {
-                            dropDown.getMenuTab().screenPos.setPosition(menuScreenPos.x + menuScreenPos.width, menuScreenPos.y);
-                        }
-                        else {
-                            dropDown.getMenuTab().screenPos.setPosition(menuScreenPos.x + menuScreenPos.width, menuScreenPos.y + menuScreenPos.height);
-                        }
-                        dropDown.show();
+                super(text0, e -> {
+                    dropDown.setRotate180(PlayerSpecificMenu.this.getRotate180());
+                    Rectangle menuScreenPos = PlayerSpecificMenu.this.screenPos;
+                    if (dropDown.getRotate180()) {
+                        dropDown.getMenuTab().screenPos.setPosition(menuScreenPos.x + menuScreenPos.width, menuScreenPos.y);
                     }
+                    else {
+                        dropDown.getMenuTab().screenPos.setPosition(menuScreenPos.x + menuScreenPos.width, menuScreenPos.y + menuScreenPos.height);
+                    }
+                    dropDown.show();
                 });
             }
         }
@@ -360,7 +341,7 @@ public class MatchScreen extends FScreen {
         if (game == null) { return; }
 
         if (gameMenu!=null) {
-             if (gameMenu.getChildCount()>2){
+             if (gameMenu.getChildCount()>1){
                  if (viewWinLose == null) {
                      gameMenu.getChildAt(0).setEnabled(!game.isMulligan());
                      gameMenu.getChildAt(1).setEnabled(!game.isMulligan());
@@ -380,66 +361,10 @@ public class MatchScreen extends FScreen {
         }
         if (devMenu!=null) {
             if (devMenu.isVisible()){
-                if (viewWinLose == null)
-                    devMenu.setEnabled(true);
-                else
-                    devMenu.setEnabled(false);
-
                 try {
                     //rollbackphase enable -- todo limit by gametype?
                     devMenu.getChildAt(2).setEnabled(game.getPlayers().size() == 2 && game.getStack().size() == 0 && !GuiBase.isNetworkplay() && game.getPhase().isMain() && !game.getPlayerTurn().isAI());
                 } catch (Exception e) {/*NPE when the game hasn't started yet and you click dev mode*/}
-            }
-        }
-
-        //draw arrows for combat
-        final CombatView combat = game.getCombat();
-        if (combat != null) {
-            for (final CardView attacker : combat.getAttackers()) {
-                final Vector2 vAttacker = CardAreaPanel.get(attacker).getTargetingArrowOrigin();
-                //connect each attacker with planeswalker it's attacking if applicable
-                final GameEntityView defender = combat.getDefender(attacker);
-                if (defender instanceof CardView) {
-                    final Vector2 vDefender = CardAreaPanel.get(((CardView) defender)).getTargetingArrowOrigin();
-                    TargetingOverlay.drawArrow(g, vAttacker, vDefender, TargetingOverlay.ArcConnection.FoesAttacking);
-                }
-                final Iterable<CardView> blockers = combat.getBlockers(attacker);
-                if (blockers != null) {
-                    //connect each blocker with the attacker it's blocking
-                    for (final CardView blocker : blockers) {
-                        final Vector2 vBlocker = CardAreaPanel.get(blocker).getTargetingArrowOrigin();
-                        TargetingOverlay.drawArrow(g, vBlocker, vAttacker, TargetingOverlay.ArcConnection.FoesBlocking);
-                    }
-                }
-                final Iterable<CardView> plannedBlockers = combat.getPlannedBlockers(attacker);
-                if (plannedBlockers != null) {
-                    //connect each planned blocker with the attacker it's blocking
-                    for (final CardView plannedBlocker : plannedBlockers) {
-                        final Vector2 vPlannedBlocker = CardAreaPanel.get(plannedBlocker).getTargetingArrowOrigin();
-                        TargetingOverlay.drawArrow(g, vPlannedBlocker, vAttacker, TargetingOverlay.ArcConnection.FoesBlocking);
-                    }
-                }
-                //player
-                if (is4Player() || is3Player()) {
-                    for (final PlayerView p : game.getPlayers()) {
-                        if (combat.getAttackersOf(p).contains(attacker)) {
-                            final Vector2 vPlayer = MatchController.getView().getPlayerPanel(p).getAvatar().getTargetingArrowOrigin();
-                            TargetingOverlay.drawArrow(g, vAttacker, vPlayer, TargetingOverlay.ArcConnection.FoesAttacking);
-                        }
-                    }
-                }
-            }
-        }
-        //draw arrows for paired cards
-        for (VPlayerPanel playerPanel : playerPanels.values()) {
-            for (CardView card : playerPanel.getField().getRow1().getOrderedCards()) {
-                if (card != null) {
-                    final Vector2 vCard = CardAreaPanel.get(card).getTargetingArrowOrigin();
-                    if (card.getPairedWith() != null) {
-                        final Vector2 vPairedWith = CardAreaPanel.get(card.getPairedWith()).getTargetingArrowOrigin();
-                        TargetingOverlay.drawArrow(g, vCard, vPairedWith, TargetingOverlay.ArcConnection.Friends);
-                    }
-                }
             }
         }
 
@@ -457,8 +382,9 @@ public class MatchScreen extends FScreen {
                 }
             }
         }
+        drawArcs(g);
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ENABLE_MAGNIFIER) && Forge.magnify && Forge.magnifyToggle) {
-            if (Forge.isLandscapeMode() && !GuiBase.isAndroid() && !CardZoom.isOpen() && potentialListener != null) {
+            if (Forge.isLandscapeMode() && (!GuiBase.isAndroid()||Forge.hasGamepad()) && !CardZoom.isOpen() && potentialListener != null) {
                 for (FDisplayObject object : potentialListener) {
                     if (object != null) {
                         if (object instanceof FCardPanel) {
@@ -527,11 +453,149 @@ public class MatchScreen extends FScreen {
             }
         }
     }
+    void drawArcs(Graphics g) {
+        //get all card targeting arrow origins on the battlefield
+        final Map<Integer, Vector2> endpoints = new HashMap<>();
+        final Set<CardView> cardsonBattlefield = new HashSet<>();
+        final Set<PlayerView> playerViewSet = new HashSet<>();
+        final GameView game = MatchController.instance.getGameView();
+        try {
+            for (PlayerView p : game.getPlayers()) {
+                if (p != null && playerPanelsList.contains(getPlayerPanel(p))) {
+                    playerViewSet.add(p);
+                    if (p.getBattlefield() != null) {
+                        for (CardView c : p.getBattlefield()) {
+                            endpoints.put(c.getId(), CardAreaPanel.get(c).getTargetingArrowOrigin());
+                            cardsonBattlefield.add(c);
+                        }
+                    }
+                }
+            }
+            //draw arrows for combat
+            final CombatView combat = game.getCombat();
+            for (CardView c : cardsonBattlefield) {
+                TargetingOverlay.assembleArrows(g, c, endpoints, combat, is4Player() || is3Player() ? playerViewSet : null);
+            }
+        } catch (Exception e) {
+        }
+    }
 
     @Override
     public boolean keyDown(int keyCode) {
         // TODO: make the keyboard shortcuts configurable on Mobile
+        if (Forge.hasGamepad() && ((FMenuBar)getHeader()).isShowingMenu(false) && (keyCode == Keys.ESCAPE || keyCode == Keys.ENTER))
+            return false;
         switch (keyCode) {
+            case Keys.DPAD_DOWN:
+                if (!((FMenuBar)getHeader()).isShowingMenu(true)) {
+                    try {
+                        InfoTab selected = selectedPlayerPanel().getSelectedTab();
+                        if (selected != null && selected.getDisplayArea().isVisible()) {
+                            selectedPlayerPanel().getSelectedTab().getDisplayArea().setNextSelected(2);
+                        } else {
+                            nullPotentialListener();
+                            VField.FieldRow row = selectedPlayerPanel() != getBottomPlayerPanel()
+                                    ? selectedPlayerPanel().getField().getRow2()
+                                    : selectedPlayerPanel().getField().getRow1();
+                            if (selectedPlayerPanel().getSelectedRow() == row) {
+                                selectedPlayerPanel().getSelectedRow().unselectCurrent();
+                                selectedPlayerPanel().switchRow();
+                                selectedPlayerPanel().getSelectedRow().selectCurrent();
+                            } else {
+                                selectedPlayerPanel().getSelectedRow().selectCurrent();
+                            }
+                        }
+                        revalidate(true);
+                    } catch (Exception e) {}
+                }
+                break;
+            case Keys.DPAD_RIGHT:
+                if (!((FMenuBar)getHeader()).isShowingMenu(true)) {
+                    try {
+                        InfoTab selected = selectedPlayerPanel().getSelectedTab();
+                        if (selected != null && selected.getDisplayArea().isVisible()) {
+                            selectedPlayerPanel().getSelectedTab().getDisplayArea().setNextSelected(1);
+                        } else {
+                            selectedPlayerPanel().getSelectedRow().setNextSelected(1);
+                        }
+                        revalidate(true);
+                    } catch (Exception e) {}
+                }
+                break;
+            case Keys.DPAD_UP:
+                if (!((FMenuBar)getHeader()).isShowingMenu(true)) {
+                    try {
+                        InfoTab selected = selectedPlayerPanel().getSelectedTab();
+                        if (selected != null && selected.getDisplayArea().isVisible()) {
+                            selectedPlayerPanel().getSelectedTab().getDisplayArea().setPreviousSelected(2);
+                        } else {
+                            nullPotentialListener();
+                            VField.FieldRow row = selectedPlayerPanel() != getBottomPlayerPanel()
+                                    ? selectedPlayerPanel().getField().getRow1()
+                                    : selectedPlayerPanel().getField().getRow2();
+                            if (selectedPlayerPanel().getSelectedRow() == row) {
+                                selectedPlayerPanel().getSelectedRow().unselectCurrent();
+                                selectedPlayerPanel().switchRow();
+                                selectedPlayerPanel().getSelectedRow().selectCurrent();
+                            } else {
+                                selectedPlayerPanel().getSelectedRow().selectCurrent();
+                            }
+                        }
+                        revalidate(true);
+                    } catch (Exception e) {}
+                }
+                break;
+            case Keys.DPAD_LEFT:
+                if (!((FMenuBar)getHeader()).isShowingMenu(true)) {
+                    try {
+                        InfoTab selected = selectedPlayerPanel().getSelectedTab();
+                        if (selected != null && selected.getDisplayArea().isVisible()) {
+                            selectedPlayerPanel().getSelectedTab().getDisplayArea().setPreviousSelected(1);
+                        } else {
+                            selectedPlayerPanel().getSelectedRow().setPreviousSelected(1);
+                        }
+                        revalidate(true);
+                    } catch (Exception e) {}
+                }
+                break;
+            case Keys.BUTTON_Y:
+                if (!((FMenuBar)getHeader()).isShowingMenu(true)) {
+                    try {
+                        InfoTab selected = selectedPlayerPanel().getSelectedTab();
+                        if (selected != null && selected.getDisplayArea().isVisible()) {
+                            selectedPlayerPanel().getSelectedTab().getDisplayArea().showZoom();
+                        } else {
+                            selectedPlayerPanel().getSelectedRow().showZoom();
+                        }
+                    } catch (Exception e) {}
+                }
+                break;
+            case Keys.BUTTON_A:
+                if (!((FMenuBar)getHeader()).isShowingMenu(true)) {
+                    try {
+                        InfoTab selected = selectedPlayerPanel().getSelectedTab();
+                        if (selected != null && selected.getDisplayArea().isVisible()) {
+                            //nullPotentialListener();
+                            selectedPlayerPanel().getSelectedTab().getDisplayArea().tapChild();
+                        } else {
+                            //nullPotentialListener();
+                            selectedPlayerPanel().getSelectedRow().tapChild();
+                        }
+                    } catch (Exception e) {}
+                }
+                break;
+            case Keys.BUTTON_L1: //switch selected panels
+                if (Forge.hasGamepad()) {
+                    //nullPotentialListener();
+                    selectedPlayerPanel().hideSelectedTab();
+                    selectedPlayer--;
+                    if (selectedPlayer < 0)
+                        selectedPlayer=playerPanelsList.size()-1;
+                    selectedPlayerPanel().closeSelectedTab();
+                    selectedPlayerPanel().getSelectedRow().unselectCurrent();
+                    //selectedPlayerPanel().setNextSelectedTab(true);
+                }
+                break;
             case Keys.ENTER:
             case Keys.SPACE:
                 if (getActivePrompt().getBtnOk().trigger()) { //trigger OK on Enter or Space
@@ -539,7 +603,7 @@ public class MatchScreen extends FScreen {
                 }
                 return getActivePrompt().getBtnCancel().trigger(); //trigger Cancel if can't trigger OK
             case Keys.ESCAPE:
-                if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN)) {
+                if (!FModel.getPreferences().getPrefBoolean(FPref.UI_ALLOW_ESC_TO_END_TURN) && !Forge.hasGamepad()) {//bypass check
                     if (getActivePrompt().getBtnCancel().getText().equals(Forge.getLocalizer().getInstance().getMessage("lblEndTurn"))) {
                         return false;
                     }
@@ -548,7 +612,7 @@ public class MatchScreen extends FScreen {
             case Keys.BACK:
                 return true; //suppress Back button so it's not bumped when trying to press OK or Cancel buttons
             case Keys.A: //alpha strike on Ctrl+A on Android, A when running on desktop
-                if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop()) {
+                if (KeyInputAdapter.isCtrlKeyDown() || GuiBase.getInterface().isRunningOnDesktop() || Forge.hasGamepad()) {
                     getGameController().alphaStrike();
                     return true;
                 }
@@ -566,7 +630,7 @@ public class MatchScreen extends FScreen {
                 }
                 break;
             case Keys.Z: //undo on Ctrl+Z
-                if (KeyInputAdapter.isCtrlKeyDown()) {
+                if (KeyInputAdapter.isCtrlKeyDown() || Forge.hasGamepad()) {
                     getGameController().undoLastAction();
                     return true;
                 }
@@ -737,7 +801,37 @@ public class MatchScreen extends FScreen {
             pnl.setNextPanelInStack(null);
         }
     }
-
+    private String daytime2 = null;
+    private Float time = null;
+    FSkinTexture currentBG = getBG();
+    FSkinTexture getBG() {
+        if (Forge.isMobileAdventureMode) {
+            //System.out.println("Adventure Location: "+DuelScene.instance().getCurrentLocation());
+            switch(GameScene.instance().getAdventurePlayerLocation(false)) {
+                case "green":
+                    return FSkinTexture.ADV_BG_FOREST;
+                case "black":
+                    return FSkinTexture.ADV_BG_SWAMP;
+                case "red":
+                    return FSkinTexture.ADV_BG_MOUNTAIN;
+                case "blue":
+                    return FSkinTexture.ADV_BG_ISLAND;
+                case "white":
+                    return FSkinTexture.ADV_BG_PLAINS;
+                case "waste":
+                    return FSkinTexture.ADV_BG_WASTE;
+                case "cave":
+                    return FSkinTexture.ADV_BG_CAVE;
+                case "dungeon":
+                    return FSkinTexture.ADV_BG_DUNGEON;
+                case "castle":
+                    return FSkinTexture.ADV_BG_CASTLE;
+                default:
+                    return FSkinTexture.ADV_BG_COMMON;
+            }
+        }
+        return FSkinTexture.BG_MATCH;
+    }
     private class BGAnimation extends ForgeAnimation {
         private static final float DURATION = 1.5f;
         private float progress = 0;
@@ -751,12 +845,26 @@ public class MatchScreen extends FScreen {
             } else if (percentage > 1) {
                 percentage = 1;
             }
-            g.setAlphaComposite(percentage);
-            if (!daynightTransition)
-                g.drawGrayTransitionImage(image, x, y, w, h, darkoverlay, 1-(percentage*1));
-            else
-                g.drawUnderWaterImage(image, x, y, w, h, 1-(percentage*1), darkoverlay);
-            g.setAlphaComposite(oldAlpha);
+            if (Forge.isMobileAdventureMode) {
+                if (percentage < 1)
+                    g.drawNightDay(currentBG, x, y, w, h, time);
+                if (MatchController.instance.getGameView().getGame().isDay()) {
+                    g.setAlphaComposite(percentage);
+                    g.drawNightDay(currentBG, x, y, w, h, 100f);
+                    g.setAlphaComposite(oldAlpha);
+                } else if (MatchController.instance.getGameView().getGame().isNight()) {
+                    g.setAlphaComposite(percentage);
+                    g.drawNightDay(currentBG, x, y, w, h, -100f);
+                    g.setAlphaComposite(oldAlpha);
+                }
+            } else {
+                g.setAlphaComposite(percentage);
+                if (!daynightTransition)
+                    g.drawGrayTransitionImage(image, x, y, w, h, darkoverlay, 1 - (percentage * 1));
+                else
+                    g.drawUnderWaterImage(image, x, y, w, h, 1 - (percentage * 1), darkoverlay);
+                g.setAlphaComposite(oldAlpha);
+            }
         }
 
         @Override
@@ -768,6 +876,14 @@ public class MatchScreen extends FScreen {
         @Override
         protected void onEnd(boolean endingAll) {
             finished = true;
+            if (Forge.isMobileAdventureMode) {
+                //set time
+                if (MatchController.instance.getGameView().getGame().isDay())
+                    time = 100f;
+                if (MatchController.instance.getGameView().getGame().isNight())
+                    time = -100f;
+                daytime2 = MatchController.instance.getDayTime();
+            }
         }
     }
     private class FieldScroller extends FScrollPane {
@@ -788,59 +904,83 @@ public class MatchScreen extends FScreen {
             int multiplier = playerPanels.keySet().size() - 1; //fix scaling of background when zoomed in multiplayer
             float bgHeight = (midField + bottomPlayerPanel.getField().getHeight() * multiplier) - y;
 
-            if (MatchController.instance.getDayTime() != null) {
-                //override BG
-                String dayTime = MatchController.instance.getDayTime();
-                if (!daytime.equals(dayTime)) {
+            if (Forge.isMobileAdventureMode) {
+                if (bgAnimation == null)
                     bgAnimation = new BGAnimation();
-                    bgAnimation.start();
-                    daytime = dayTime;
-                }
-                FSkinTexture matchBG = MatchController.instance.getGameView().getGame().isDay() ? FSkinTexture.BG_MATCH_DAY : FSkinTexture.BG_MATCH_NIGHT;
-                bgFullWidth = bgHeight * matchBG.getWidth() / matchBG.getHeight();
+
+                bgFullWidth = bgHeight * currentBG.getWidth() / currentBG.getHeight();
                 if (bgFullWidth < w) {
                     scaledbgHeight = w * (bgHeight / bgFullWidth);
                     bgFullWidth = w;
                     bgHeight = scaledbgHeight;
                 }
-                if (bgAnimation != null && !isGameFast && !MatchController.instance.getGameView().isMatchOver()) {
-                    bgAnimation.drawBackground(g, matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true, true);
+
+                String dayTime = MatchController.instance.getDayTime();
+                if (daytime2 != dayTime) {
+                    bgAnimation.start();
+                    bgAnimation.drawBackground(g, currentBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, false, true);
                 } else {
-                    g.drawImage(matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true);
+                    bgAnimation.progress = 0;
+                    g.drawNightDay(currentBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, time);
                 }
-            } else if (FModel.getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE)) {
-                if(FModel.getPreferences().getPrefBoolean(FPref.UI_DYNAMIC_PLANECHASE_BG)
-                        && hasActivePlane()) {
-                    String imageName = getPlaneName()
-                                .replace(" ", "_")
-                                .replace("'", "")
-                                .replace("-", "");
-                    if (!plane.equals(imageName)) {
+            } else { //non adventure needs update to accomodate multiple BG Effect ie Planchase + Daytime effect...
+                if (MatchController.instance.getDayTime() != null) {
+                    //override BG
+                    String dayTime = MatchController.instance.getDayTime();
+                    if (!daytime.equals(dayTime)) {
                         bgAnimation = new BGAnimation();
                         bgAnimation.start();
-                        plane = imageName;
+                        daytime = dayTime;
                     }
-                    if (FSkinTexture.getValues().contains(imageName)) {
-                        bgFullWidth = bgHeight * FSkinTexture.valueOf(imageName).getWidth() / FSkinTexture.valueOf(imageName).getHeight();
-                        if (bgFullWidth < w) {
-                            scaledbgHeight = w * (bgHeight / bgFullWidth);
-                            bgFullWidth = w;
-                            bgHeight = scaledbgHeight;
-                        }
-                        if (bgAnimation != null && !isGameFast && !MatchController.instance.getGameView().isMatchOver()) {
-                            bgAnimation.drawBackground(g, FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true, false);
-                        } else {
-                            g.drawImage(FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true);
-                        }
-                    }
-                } else {
-                    bgFullWidth = bgHeight * FSkinTexture.BG_MATCH.getWidth() / FSkinTexture.BG_MATCH.getHeight();
+                    FSkinTexture bgDay = Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_MATCH_DAY : FSkinTexture.BG_MATCH_DAY;
+                    FSkinTexture bgNight = Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_MATCH_NIGHT : FSkinTexture.BG_MATCH_NIGHT;
+                    FSkinTexture matchBG = MatchController.instance.getGameView().getGame().isDay() ? bgDay : bgNight;
+                    bgFullWidth = bgHeight * matchBG.getWidth() / matchBG.getHeight();
                     if (bgFullWidth < w) {
                         scaledbgHeight = w * (bgHeight / bgFullWidth);
                         bgFullWidth = w;
                         bgHeight = scaledbgHeight;
                     }
-                    g.drawImage(FSkinTexture.BG_MATCH, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight);
+                    if (bgAnimation != null && !isGameFast && !MatchController.instance.getGameView().isMatchOver()) {
+                        bgAnimation.drawBackground(g, matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, !Forge.isMobileAdventureMode, true);
+                    } else {
+                        g.drawImage(matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, !Forge.isMobileAdventureMode);
+                    }
+                } else if (FModel.getPreferences().getPrefBoolean(FPref.UI_MATCH_IMAGE_VISIBLE)) {
+                    if(FModel.getPreferences().getPrefBoolean(FPref.UI_DYNAMIC_PLANECHASE_BG)
+                            && hasActivePlane()) {
+                        String imageName = getPlaneName()
+                                .replace(" ", "_")
+                                .replace("'", "")
+                                .replace("-", "");
+                        if (!plane.equals(imageName)) {
+                            bgAnimation = new BGAnimation();
+                            bgAnimation.start();
+                            plane = imageName;
+                        }
+                        if (FSkinTexture.getValues().contains(imageName)) {
+                            bgFullWidth = bgHeight * FSkinTexture.valueOf(imageName).getWidth() / FSkinTexture.valueOf(imageName).getHeight();
+                            if (bgFullWidth < w) {
+                                scaledbgHeight = w * (bgHeight / bgFullWidth);
+                                bgFullWidth = w;
+                                bgHeight = scaledbgHeight;
+                            }
+                            if (bgAnimation != null && !isGameFast && !MatchController.instance.getGameView().isMatchOver()) {
+                                bgAnimation.drawBackground(g, FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true, false);
+                            } else {
+                                g.drawImage(FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true);
+                            }
+                        }
+                    } else {
+                        FSkinTexture matchBackground = Forge.isMobileAdventureMode ? FSkinTexture.ADV_BG_MATCH : FSkinTexture.BG_MATCH;
+                        bgFullWidth = bgHeight * matchBackground.getWidth() / matchBackground.getHeight();
+                        if (bgFullWidth < w) {
+                            scaledbgHeight = w * (bgHeight / bgFullWidth);
+                            bgFullWidth = w;
+                            bgHeight = scaledbgHeight;
+                        }
+                        g.drawImage(matchBackground, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight);
+                    }
                 }
             }
         }
@@ -859,12 +999,23 @@ public class MatchScreen extends FScreen {
                 if (!losers.isEmpty()) {
                     float height = 0;
                     for (VPlayerPanel p : losers) {
-                        height = p.getAvatar().getHeight();
-                        p.setVisible(false);
-                        playerPanelsList.remove(p);
-                        System.out.println("Removed panels: "+p.getPlayer().toString());
+                        if (playerPanelsList.size() > 2) {
+                            height = p.getAvatar().getHeight();
+                            p.setVisible(false);
+                            playerPanelsList.remove(p);
+                            System.out.println("Removed panel: "+p.getPlayer().toString());
+                        }
                     }
                     losers.clear();
+                    if (playerPanelsList.size() == 2) {
+                        //reset avatar size
+                        for (VPlayerPanel playerPanel : playerPanelsList) {
+                            float size = playerPanel.getAvatar().getWidth()*2;
+                            playerPanel.getAvatar().setSize(size, size);
+                            playerPanel.revalidate(true);
+                            System.out.println("Panel Resized: "+playerPanel.getPlayer().toString());
+                        }
+                    }
                     zoom(0,0, height);
                 }
             }
@@ -882,19 +1033,19 @@ public class MatchScreen extends FScreen {
                     if (playerPanel.getSelectedTab() == null) {
                         y++;
                     }
-                    g.drawLine(1, BORDER_COLOR, x, y, w, y);
+                    g.drawLine(1, getBorderColor(), x, y, w, y);
                 }
             }
 
             for (VPlayerPanel playerPanel: playerPanelsList){
                 midField = playerPanel.getTop();
                 y = midField - 0.5f;
-                g.drawLine(1, BORDER_COLOR, x, y, w, y);
+                g.drawLine(1, getBorderColor(), x, y, w, y);
             }
 
             if (!Forge.isLandscapeMode()) {
                 y = bottomPlayerPanel.getTop() + bottomPlayerPanel.getField().getHeight();
-                g.drawLine(1, BORDER_COLOR, x, y, w, y);
+                g.drawLine(1, getBorderColor(), x, y, w, y);
             }
         }
 
@@ -1004,7 +1155,26 @@ public class MatchScreen extends FScreen {
 
     @Override
     public void buildTouchListeners(float screenX, float screenY, List<FDisplayObject> listeners) {
-        potentialListener = listeners;
+        setPotentialListener(listeners);
         super.buildTouchListeners(screenX, screenY, listeners);
+    }
+    public VPlayerPanel selectedPlayerPanel() {
+        if (selectedPlayer >= playerPanelsList.size())
+            selectedPlayer = playerPanelsList.size()-1;
+        if (playerPanelsList.isEmpty())
+            return null;
+        return playerPanelsList.get(selectedPlayer);
+    }
+    public static void setPotentialListener(List<FDisplayObject> listener) {
+        if (potentialListener != null)
+            for (FDisplayObject f: potentialListener)
+                f.setHovered(false);
+        potentialListener = listener;
+    }
+    public static void nullPotentialListener() {
+        if (potentialListener != null)
+            for (FDisplayObject f: potentialListener)
+                f.setHovered(false);
+        potentialListener = null;
     }
 }

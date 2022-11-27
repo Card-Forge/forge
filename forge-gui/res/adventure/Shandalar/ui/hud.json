@@ -62,7 +62,16 @@
       "width": 64,
       "height": 16,
       "x": 442,
-      "y": 64
+      "y": 56
+    },
+    {
+      "type": "Label",
+      "name": "mana",
+      "font": "default",
+      "width": 64,
+      "height": 16,
+      "x": 442,
+      "y": 73
     },
     {
       "type": "Label",
@@ -71,44 +80,62 @@
       "width": 64,
       "height": 16,
       "x": 442,
-      "y": 82
+      "y": 90
     },
     {
       "type": "TextButton",
       "name": "deck",
-      "text": "Deck",
-      "width": 40,
+	  "style":"menu",
+      "text": "{Scale=200%}[+Deck]",
+      "binding": "Deck",
+      "width": 48,
       "height": 36,
-      "x": 428,
+      "x": 424,
       "y": 106
     }, 
     {
       "type": "TextButton",
-      "name": "inventory",
-      "text": "Inventory",
-      "width": 40,
+      "name": "inventory", 
+	  "style":"menu",
+      "text": "{Scale=200%}[+Item]",
+      "binding": "Inventory",
+      "width": 48,
       "height": 36,
-      "x": 428,
+      "x": 424,
       "y": 146
     },
     
     {
       "type": "TextButton",
       "name": "statistic",
-      "text": "Status",
-      "width": 40,
+	  "style":"menu",
+      "text": "{Scale=200%}[+Status]",
+      "binding": "Status",
+      "width": 48,
       "height": 36,
-      "x": 428,
+      "x": 424,
       "y": 186
     },
     {
       "type": "TextButton",
       "name": "menu",
-      "text": "Menu",
-      "width": 40,
+	  "style":"menu",
+      "text": "{Scale=200%}[+Menu]",
+      "binding": "Menu",
+      "width": 48,
       "height": 36,
-      "x": 428,
+      "x": 424,
       "y": 226
+    },
+    {
+      "type": "TextButton",
+      "name": "openmap",
+      "text": "{Scale=80%}tr(lblZoom)",
+      "binding": "Map",
+      "width": 80,
+      "height": 18,
+      "x": 0,
+      "y": 80
     }
   ]
 }

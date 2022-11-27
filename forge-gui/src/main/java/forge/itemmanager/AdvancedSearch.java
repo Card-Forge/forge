@@ -299,6 +299,12 @@ public class AdvancedSearch {
                 return cards.get(0) == input;
             }
         }),
+        CARD_ARTIST("lblArtist", PaperCard.class, FilterOperator.STRING_OPS, new StringEvaluator<PaperCard>() {
+            @Override
+            protected String getItemValue(PaperCard input) {
+                return input.getArtist();
+            }
+        }),
         INVITEM_NAME("lblName", InventoryItem.class, FilterOperator.STRING_OPS, new StringEvaluator<InventoryItem>() {
             @Override
             protected String getItemValue(InventoryItem input) {

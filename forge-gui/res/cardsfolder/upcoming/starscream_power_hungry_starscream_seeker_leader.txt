@@ -1,0 +1,30 @@
+Name:Starscream, Power Hungry
+ManaCost:3 B
+Types:Legendary Artifact Creature Robot
+PT:2/3
+K:More Than Meets the Eye:2 B
+K:Flying
+T:Mode$ Drawn | ValidCard$ Card.YouCtrl | Condition$ Monarch | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ Whenever you draw a card, if you're the monarch, target opponent loses 2 life.
+SVar:TrigDrain:DB$ LoseLife | ValidTgts$ Opponent | LifeAmount$ 2
+T:Mode$ DamageDoneOnce | ValidSource$ Creature | TriggerZones$ Battlefield | ValidTarget$ You | CombatDamage$ True | Execute$ TrigConvert | TriggerDescription$ Whenever one or more creatures deal combat damage to you, convert NICKNAME.
+SVar:TrigConvert:DB$ SetState | Mode$ Convert
+AlternateMode:Convert
+Oracle:More Than Meets the Eye {2}{B} (You may cast this card converted for {2}{B}.)\nFlying\nWhenever you draw a card, if you're the monarch, target opponent loses 2 life.\nWhenever one or more creatures deal combat damage to you, convert Starscream.
+
+ALTERNATE
+
+Name:Starscream, Seeker Leader
+ManaCost:no cost
+Colors:black
+Types:Legendary Artifact Vehicle
+PT:2/3
+K:Living metal
+K:Flying
+K:Menace
+K:Haste
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CheckSVar$ Monarch | SVarCompare$ EQ0 | CombatDamage$ True | Execute$ TrigMonarch | TriggerZones$ Battlefield | TriggerDescription$ Whenever NICKNAME deals combat damage to a player, if there is no monarch, that player becomes the monarch.
+SVar:TrigMonarch:DB$ BecomeMonarch | Defined$ TriggeredTarget 
+T:Mode$ BecomeMonarch | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigConvert | TriggerDescription$ Whenever you become the monarch, convert NICKNAME.
+SVar:TrigConvert:DB$ SetState | Mode$ Convert
+SVar:Monarch:PlayerCountPlayers$HasPropertyisMonarch
+Oracle:Living metal (As long as it's your turn, this Vehicle is also a creature.)\nFlying, menace, haste\nWhenever Starscream deals combat damage to a player, if there is no monarch, that player becomes the monarch.\nWhenever you become the monarch, convert Starscream.

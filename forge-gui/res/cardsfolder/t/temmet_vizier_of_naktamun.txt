@@ -3,8 +3,11 @@ ManaCost:W U
 Types:Legendary Creature Human Cleric
 PT:2/2
 T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of combat on your turn, target creature token you control gets +1/+1 until end of turn and can't be blocked this turn.
-SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.token+YouCtrl | TgtPrompt$ Select target creature token you control | NumAtt$ 1 | NumDef$ 1 | KW$ HIDDEN Unblockable
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.token+YouCtrl | TgtPrompt$ Select target creature token you control | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBUnblockable
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Targeted | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ This creature can't be blocked this turn.
 K:Embalm:3 W U
 SVar:PlayMain1:TRUE
-DeckHas:Ability$Token
+DeckHas:Ability$Token & Type$Zombie
+DeckHints:Ability$Token
 Oracle:At the beginning of combat on your turn, target creature token you control gets +1/+1 until end of turn and can't be blocked this turn.\nEmbalm {3}{W}{U} ({3}{W}{U}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Human Cleric with no mana cost. Embalm only as a sorcery.)

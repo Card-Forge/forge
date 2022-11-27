@@ -1,0 +1,20 @@
+
+forest.png
+size: 96,64
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Source
+  rotate: false
+  xy: 0, 0
+  size: 16, 16
+  orig: 0, 0
+  offset: 0, 0
+  index: 0  
+structure_000000
+  rotate: false
+  xy: 48, 0
+  size: 48, 64
+  orig: 0, 0
+  offset: 0, 0
+  index: 0       

@@ -1,0 +1,11 @@
+Name:Hexavus
+ManaCost:6
+Types:Artifact Creature Construct
+PT:0/0
+K:etbCounter:P1P1:6
+K:Flying
+A:AB$ PutCounter | Cost$ 1 SubCounter<1/P1P1> | CounterType$ Flying | CounterNum$ 1 | ValidTgts$ Creature.Other | TgtPrompt$ Select another target creature | SpellDescription$ Put a flying counter on another target creature.
+A:AB$ PutCounter | Cost$ 1 RemoveAnyCounter<1/Any/Creature.YouCtrl+Other/another creature you control> | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+DeckHas:Ability$Counters
+DeckHints:Ability$Counters
+Oracle:Flying\nHexavus enters the battlefield with six +1/+1 counters on it.\n{1}, Remove a +1/+1 counter from Hexavus: Put a flying counter on another target creature.\n{1}, Remove a counter from another creature you control: Put a +1/+1 counter on Hexavus.

@@ -1,0 +1,8 @@
+Name:Screamer-Killer
+ManaCost:4 R
+Types:Creature Tyranid
+PT:5/5
+K:Trample
+T:Mode$ SpellCast | ValidCard$ Creature.cmcGE5 | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Bio-Plasmic Scream — Whenever you cast a creature spell with mana value 5 or greater, CARDNAME deals 5 damage to any target
+SVar:TrigDamage:DB$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target to deal 5 damage to | NumDmg$ 5
+Oracle:Trample\nBio-Plasmic Scream — Whenever you cast a creature spell with mana value 5 or greater, Screamer-Killer deals 5 damage to any target.

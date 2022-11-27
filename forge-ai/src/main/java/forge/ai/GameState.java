@@ -313,6 +313,8 @@ public abstract class GameState {
                 newText.append("|Meld");
             } else if (c.getCurrentStateName().equals(CardStateName.Modal)) {
                 newText.append("|Modal");
+            } else if (c.getCurrentStateName().equals(CardStateName.Converted)) {
+                newText.append("|Converted");
             }
 
             if (c.getPlayerAttachedTo() != null) {
@@ -905,7 +907,6 @@ public abstract class GameState {
                     for (SpellAbility ab : saList) {
                         if (ab.getDescription().startsWith("Awaken")) {
                             ab.setActivatingPlayer(c.getController());
-                            ab.getSubAbility().setActivatingPlayer(c.getController());
                             // target for Awaken is set in its first subability
                             handleScriptedTargetingForSA(game, ab.getSubAbility(), tgtID);
                             sa = kwName.equals("AwakenOnly") ? ab.getSubAbility() : ab;
@@ -1201,7 +1202,7 @@ public abstract class GameState {
         String[] allCounterStrings = counterString.split(",");
         for (final String counterPair : allCounterStrings) {
             String[] pair = counterPair.split("=", 2);
-            entity.addCounterInternal(CounterType.getType(pair[0]), Integer.parseInt(pair[1]), null, false, null);
+            entity.addCounterInternal(CounterType.getType(pair[0]), Integer.parseInt(pair[1]), null, false, null, null);
         }
     }
 
@@ -1344,6 +1345,7 @@ public abstract class GameState {
                     c.setState(CardStateName.Flipped, true);
                 } else if (info.startsWith("Meld")) {
                     c.setState(CardStateName.Meld, true);
+                    c.setBackSide(true);
                 } else if (info.startsWith("Modal")) {
                     c.setState(CardStateName.Modal, true);
                     c.setBackSide(true);

@@ -3,7 +3,7 @@
 	"name": "Adventurer",
 	"sprite": "sprites/swordsman_3.atlas",
 	"deck": "decks/adventurer.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 13,
@@ -11,12 +11,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -24,10 +71,84 @@
 	"colors": "UW"
 },
 {
+	"name": "Aether Channeler",
+	"sprite": "sprites/monk_3.atlas",
+	"deck": "decks/aether_channeler.dck",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 12,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery",
+				"Land"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "WU"
+},
+{
 	"name": "Amonkhet Minotaur",
 	"sprite": "sprites/warden.atlas",
 	"deck": "decks/amonkhet_minotaur.dck",
-	"spawnRate": 1.0,
+	"ai": "",
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 16,
@@ -35,12 +156,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -51,7 +219,7 @@
 	"name": "Ape",
 	"sprite": "sprites/behemoth.atlas",
 	"deck": "decks/ape.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 16,
@@ -59,12 +227,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -75,7 +290,7 @@
 	"name": "Archer",
 	"sprite": "sprites/archer_2.atlas",
 	"deck": "decks/human_archer.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 11,
@@ -83,12 +298,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -99,7 +361,7 @@
 	"name": "Ashmouth Devil",
 	"sprite": "sprites/devil.atlas",
 	"deck": "decks/ashmouth_devil.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 18,
@@ -123,7 +385,7 @@
 	"name": "Axgard Dwarf",
 	"sprite": "sprites/dwarf_8.atlas",
 	"deck": "decks/axgard_dwarf.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 22,
 	"life": 13,
@@ -131,12 +393,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -147,7 +456,7 @@
 	"name": "Bandit",
 	"sprite": "sprites/dwarf_7.atlas",
 	"deck": "decks/bandit.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 13,
@@ -155,12 +464,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -171,7 +527,7 @@
 	"name": "Bear",
 	"sprite": "sprites/bear.atlas",
 	"deck": "decks/bear.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 16,
@@ -179,12 +535,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -192,10 +595,86 @@
 	"colors": "G"
 },
 {
+	"name": "Beastmaster",
+	"sprite": "sprites/calibou_elite.atlas",
+	"deck": "decks/beastmaster.dck",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 13,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery",
+				"Planeswalker",
+				"Land"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "GW"
+},
+{
 	"name": "Beholder",
 	"sprite": "sprites/beholder.atlas",
 	"deck": "decks/beholder.dck",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 15,
@@ -203,12 +682,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -219,7 +745,7 @@
 	"name": "Berserker",
 	"sprite": "sprites/dwarf_5.atlas",
 	"deck": "decks/berserker.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 22,
 	"life": 13,
@@ -243,7 +769,7 @@
 	"name": "Big Zombie",
 	"sprite": "sprites/zombie_2.atlas",
 	"deck": "decks/zombie_bad.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 13,
@@ -278,7 +804,9 @@
 	"name": "Bird",
 	"sprite": "sprites/griffin_2.atlas",
 	"deck": "decks/bird_blue.json",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 11,
@@ -286,12 +814,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -302,7 +877,7 @@
 	"name": "Black Wiz1",
 	"sprite": "sprites/black_wizard.atlas",
 	"deck": "decks/black_bad.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -310,12 +885,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -326,7 +948,7 @@
 	"name": "Black Wiz2",
 	"sprite": "sprites/black_wiz2.atlas",
 	"deck": "decks/fear.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -350,7 +972,7 @@
 	"name": "Black Wiz3",
 	"sprite": "sprites/black_wiz3.atlas",
 	"deck": "decks/black_wiz3.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -374,7 +996,9 @@
 	"name": "Blue Wiz1",
 	"sprite": "sprites/mage.atlas",
 	"deck": "decks/blue_bad.json",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 10,
@@ -382,12 +1006,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -398,7 +1069,7 @@
 	"name": "Blue Wiz2",
 	"sprite": "sprites/blue_wiz2.atlas",
 	"deck": "decks/mill.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -408,9 +1079,10 @@
 			"probability": 1,
 			"count": 4,
 			"addMaxCount": 6
-		},{
+		},
+		{
 			"type": "gold",
-			"probability": 1.0,
+			"probability": 1,
 			"count": 80,
 			"addMaxCount": 40
 		}
@@ -421,7 +1093,9 @@
 	"name": "Blue Wiz3",
 	"sprite": "sprites/mage_2.atlas",
 	"deck": "decks/counter.dck",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 14,
@@ -444,7 +1118,7 @@
 	"name": "Boggart",
 	"sprite": "sprites/goblin_2.atlas",
 	"deck": "decks/eyeblight.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 27,
 	"life": 8,
@@ -479,7 +1153,7 @@
 	"name": "Cat",
 	"sprite": "sprites/lion.atlas",
 	"deck": "decks/cat.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 27,
 	"life": 15,
@@ -487,12 +1161,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -503,7 +1224,7 @@
 	"name": "Cathar",
 	"sprite": "sprites/cathar.atlas",
 	"deck": "decks/cathar.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 13,
@@ -511,12 +1232,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -527,7 +1295,7 @@
 	"name": "Centaur",
 	"sprite": "sprites/centaur.atlas",
 	"deck": "decks/centaur.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 16,
@@ -551,7 +1319,7 @@
 	"name": "Centaur Warrior",
 	"sprite": "sprites/centaur_2.atlas",
 	"deck": "decks/centaur_warrior.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 16,
@@ -575,7 +1343,7 @@
 	"name": "ClayGolem",
 	"sprite": "sprites/golem_2.atlas",
 	"deck": "decks/golem_good.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 19,
 	"life": 12,
@@ -608,7 +1376,7 @@
 	"name": "Cleric",
 	"sprite": "sprites/cleric.atlas",
 	"deck": "decks/cleric.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -616,12 +1384,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -632,7 +1447,7 @@
 	"name": "Construct",
 	"sprite": "sprites/golem_3.atlas",
 	"deck": "decks/artificer.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
 	"life": 14,
@@ -640,12 +1455,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -656,7 +1518,7 @@
 	"name": "Cyclops",
 	"sprite": "sprites/cyclops.atlas",
 	"deck": "decks/cyclops.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 16,
 	"life": 19,
@@ -680,7 +1542,7 @@
 	"name": "Dark Knight",
 	"sprite": "sprites/death_knight.atlas",
 	"deck": "decks/death_knight.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 15,
@@ -688,12 +1550,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -704,7 +1613,7 @@
 	"name": "Dawnhart Witch",
 	"sprite": "sprites/dawnhart_witch.atlas",
 	"deck": "decks/dawnhart_witch.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -712,12 +1621,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -728,7 +1684,7 @@
 	"name": "Death Knight",
 	"sprite": "sprites/death_knight_2.atlas",
 	"deck": "decks/death_knight.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 15,
@@ -736,12 +1692,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -752,7 +1755,7 @@
 	"name": "Demon",
 	"sprite": "sprites/demon_3.atlas",
 	"deck": "decks/demon.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 18,
@@ -760,12 +1763,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -776,7 +1826,7 @@
 	"name": "Devil",
 	"sprite": "sprites/imp.atlas",
 	"deck": "decks/devil.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 11,
@@ -784,12 +1834,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -800,7 +1897,7 @@
 	"name": "Dino",
 	"sprite": "sprites/ancient.atlas",
 	"deck": "decks/dinosaurs.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 19,
@@ -837,7 +1934,7 @@
 	"name": "Dinosaur",
 	"sprite": "sprites/ancient_2.atlas",
 	"deck": "decks/dinosaur_w_r.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 19,
@@ -874,7 +1971,9 @@
 	"name": "Djinn",
 	"sprite": "sprites/djinn.atlas",
 	"deck": "decks/djinn.json",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 32,
 	"life": 18,
@@ -882,12 +1981,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -907,8 +2053,16 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 1
-		},{
+			"count": 1,
+			"rarity": [
+				"common",
+				"uncommon",
+				"rare",
+				"mythicrare",
+				"special"
+			]
+		},
+		{
 			"type": "gold",
 			"probability": 0.3,
 			"count": 100,
@@ -921,6 +2075,8 @@
 	"name": "Dragon",
 	"sprite": "sprites/dragon.atlas",
 	"deck": "decks/dragon.dck",
+	"ai": "",
+	"flying": true,
 	"spawnRate": 0.95,
 	"difficulty": 0.1,
 	"speed": 31,
@@ -929,12 +2085,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -945,7 +2148,7 @@
 	"name": "Dwarf",
 	"sprite": "sprites/dwarf_2.atlas",
 	"deck": "decks/dwarf.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 22,
 	"life": 13,
@@ -953,12 +2156,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -969,7 +2219,9 @@
 	"name": "Efreet",
 	"sprite": "sprites/efreet_2.atlas",
 	"deck": "decks/efreet.dck",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 18,
@@ -993,7 +2245,9 @@
 	"name": "Eldraine Faerie",
 	"sprite": "sprites/pixie.atlas",
 	"deck": "decks/eldraine_faerie.dck",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 8,
@@ -1001,12 +2255,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1017,7 +2318,7 @@
 	"name": "Eldraine Knight",
 	"sprite": "sprites/paladin_2.atlas",
 	"deck": "decks/eldraine_knight.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 14,
@@ -1025,12 +2326,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1041,7 +2389,9 @@
 	"name": "Eldrazi",
 	"sprite": "sprites/mindelemental.atlas",
 	"deck": "decks/eldrazi.json",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 19,
@@ -1049,12 +2399,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1065,7 +2462,7 @@
 	"name": "Elemental",
 	"sprite": "sprites/crystalelemental.atlas",
 	"deck": "decks/elemental_blue.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 16,
@@ -1073,12 +2470,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1089,7 +2533,7 @@
 	"name": "Elf",
 	"sprite": "sprites/druid.atlas",
 	"deck": "decks/elf_bad.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -1124,7 +2568,7 @@
 	"name": "Elf warrior",
 	"sprite": "sprites/hunter.atlas",
 	"deck": "decks/elf_mid.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 11,
@@ -1159,7 +2603,7 @@
 	"name": "Elk",
 	"sprite": "sprites/deer_2.atlas",
 	"deck": "decks/elk.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 29,
 	"life": 11,
@@ -1167,12 +2611,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1183,7 +2674,9 @@
 	"name": "Faerie",
 	"sprite": "sprites/pixie_2.atlas",
 	"deck": "decks/faerie.json",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 8,
@@ -1191,12 +2684,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1207,7 +2747,9 @@
 	"name": "Fire Elemental",
 	"sprite": "sprites/fireelemental.atlas",
 	"deck": "decks/fire_elemental.dck",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 16,
@@ -1215,12 +2757,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1231,7 +2820,7 @@
 	"name": "Flame Elemental",
 	"sprite": "sprites/magmaelemental.atlas",
 	"deck": "decks/flame_elemental.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
 	"life": 17,
@@ -1239,12 +2828,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1252,10 +2888,85 @@
 	"colors": "R"
 },
 {
+	"name": "Frost Titan",
+	"sprite": "sprites/titan.atlas",
+	"deck": "decks/frost_titan.dck",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 23,
+	"life": 18,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery",
+				"Planeswalker"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "WU"
+},
+{
 	"name": "Gargoyle",
 	"sprite": "sprites/gargoyle.atlas",
 	"deck": "decks/gargoyle.json",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 17,
@@ -1263,12 +2974,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1279,7 +3037,9 @@
 	"name": "Gargoyle 2",
 	"sprite": "sprites/gargoyle_2.atlas",
 	"deck": "decks/gargoyle.dck",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 16,
@@ -1287,12 +3047,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1303,7 +3110,9 @@
 	"name": "Geist",
 	"sprite": "sprites/ghost.atlas",
 	"deck": "decks/ghost_blue.dck",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 32,
 	"life": 15,
@@ -1311,12 +3120,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1327,7 +3183,7 @@
 	"name": "Ghoul",
 	"sprite": "sprites/ghoul.atlas",
 	"deck": "decks/ghoul.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 13,
@@ -1351,7 +3207,9 @@
 	"name": "Ghost",
 	"sprite": "sprites/ghost_2.atlas",
 	"deck": "decks/ghost.json",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 14,
@@ -1359,12 +3217,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1375,7 +3280,7 @@
 	"name": "Giant Spider",
 	"sprite": "sprites/spider_2.atlas",
 	"deck": "decks/spider_token.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
 	"life": 15,
@@ -1399,7 +3304,7 @@
 	"name": "Goblin",
 	"sprite": "sprites/goblin.atlas",
 	"deck": "decks/goblin_bad.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 27,
 	"life": 8,
@@ -1434,7 +3339,7 @@
 	"name": "Goblin Chief",
 	"sprite": "sprites/wolf_rider_2.atlas",
 	"deck": "decks/goblin_good.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 29,
 	"life": 10,
@@ -1469,7 +3374,7 @@
 	"name": "Goblin Warrior",
 	"sprite": "sprites/wolf_rider.atlas",
 	"deck": "decks/goblin_mid.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 28,
 	"life": 9,
@@ -1594,7 +3499,7 @@
 	"name": "Gorgon",
 	"sprite": "sprites/gorgone.atlas",
 	"deck": "decks/gorgon.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 14,
@@ -1602,12 +3507,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1618,7 +3570,7 @@
 	"name": "Gorgon 2",
 	"sprite": "sprites/gorgonen.atlas",
 	"deck": "decks/gorgon_2.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 14,
@@ -1626,12 +3578,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1642,7 +3641,7 @@
 	"name": "Green Beast",
 	"sprite": "sprites/basilisk.atlas",
 	"deck": "decks/beast_green.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 22,
 	"life": 18,
@@ -1650,12 +3649,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1666,7 +3712,7 @@
 	"name": "Green Wiz1",
 	"sprite": "sprites/green_wiz1.atlas",
 	"deck": "decks/green_bad.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -1674,12 +3720,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1690,7 +3783,7 @@
 	"name": "Green Wiz2",
 	"sprite": "sprites/green_wiz2.atlas",
 	"deck": "decks/trample.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -1698,12 +3791,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1714,7 +3854,7 @@
 	"name": "Green Wiz3",
 	"sprite": "sprites/green_wiz3.atlas",
 	"deck": "decks/ramp.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -1722,12 +3862,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1738,7 +3925,9 @@
 	"name": "Griffin",
 	"sprite": "sprites/griffin.atlas",
 	"deck": "decks/griffin.json",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 32,
 	"life": 15,
@@ -1746,12 +3935,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1762,7 +3998,9 @@
 	"name": "Harpy",
 	"sprite": "sprites/harpy.atlas",
 	"deck": "decks/harpy.dck",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 13,
@@ -1770,12 +4008,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1786,7 +4071,9 @@
 	"name": "Harpy 2",
 	"sprite": "sprites/harpy_2.atlas",
 	"deck": "decks/harpy_2.dck",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 13,
@@ -1794,12 +4081,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1810,7 +4144,7 @@
 	"name": "Hellhound",
 	"sprite": "sprites/hellhound_2.atlas",
 	"deck": "decks/hellhound.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 17,
@@ -1818,12 +4152,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1834,7 +4215,7 @@
 	"name": "High Elf",
 	"sprite": "sprites/druid_2.atlas",
 	"deck": "decks/elf_good.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 26,
 	"life": 12,
@@ -1869,7 +4250,9 @@
 	"name": "High Vampire",
 	"sprite": "sprites/vampire_2.atlas",
 	"deck": "decks/vampire.json",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 32,
 	"life": 18,
@@ -1877,12 +4260,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -1890,10 +4320,82 @@
 	"colors": "B"
 },
 {
+	"name": "Horror",
+	"sprite": "sprites/leech_2.atlas",
+	"deck": "decks/horror.dck",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 24,
+	"life": 17,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery",
+				"Land"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "BU"
+},
+{
 	"name": "Horseman",
 	"sprite": "sprites/cavalier_2.atlas",
 	"deck": "decks/horsemanship.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 14,
@@ -1928,7 +4430,7 @@
 	"name": "Human",
 	"sprite": "sprites/pikeman.atlas",
 	"deck": "decks/human_bad.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
 	"life": 11,
@@ -1963,7 +4465,7 @@
 	"name": "Human elite",
 	"sprite": "sprites/legionite.atlas",
 	"deck": "decks/human_good.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 13,
@@ -1998,7 +4500,7 @@
 	"name": "Human guard",
 	"sprite": "sprites/swordsman.atlas",
 	"deck": "decks/human_mid.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 12,
@@ -2033,7 +4535,7 @@
 	"name": "Hydra",
 	"sprite": "sprites/hydra.atlas",
 	"deck": "decks/hydra.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 19,
@@ -2068,7 +4570,7 @@
 	"name": "Immersturm Demon",
 	"sprite": "sprites/devil_2.atlas",
 	"deck": "decks/immersturm_demon.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 17,
@@ -2076,12 +4578,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2089,10 +4638,10 @@
 	"colors": "BR"
 },
 {
-	"name": "Khan",
-	"sprite": "sprites/cavalier.atlas",
-	"deck": "decks/mardu.dck",
-	"spawnRate": 1.0,
+	"name": "Kavu",
+	"sprite": "sprites/kavu.atlas",
+	"deck": "decks/kavu.dck",
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 14,
@@ -2100,12 +4649,130 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "RGW"
+},
+{
+	"name": "Khan",
+	"sprite": "sprites/cavalier.atlas",
+	"deck": "decks/mardu.dck",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 30,
+	"life": 14,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2116,7 +4783,7 @@
 	"name": "Knight",
 	"sprite": "sprites/paladin.atlas",
 	"deck": "decks/knight.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 30,
 	"life": 14,
@@ -2151,7 +4818,7 @@
 	"name": "Lich",
 	"sprite": "sprites/lich_2.atlas",
 	"deck": "decks/lich.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,
 	"life": 17,
@@ -2159,12 +4826,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2175,7 +4889,7 @@
 	"name": "Merfolk",
 	"sprite": "sprites/waterelemental.atlas",
 	"deck": "decks/merfolk_bad.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
 	"life": 12,
@@ -2210,7 +4924,9 @@
 	"name": "Merfolk Avatar",
 	"sprite": "sprites/iceelemental.atlas",
 	"deck": "decks/merfolk_good.json",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 14,
@@ -2245,7 +4961,7 @@
 	"name": "Merfolk Fighter",
 	"sprite": "sprites/merfolk.atlas",
 	"deck": "decks/merfolk_lords.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.2,
 	"speed": 22,
 	"life": 16,
@@ -2254,23 +4970,34 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 1
-		},{
+		},
+		{
 			"type": "gold",
 			"probability": 1,
 			"count": 100,
 			"addMaxCount": 150
-		},{
+		},
+		{
 			"type": "card",
 			"probability": 0.65,
 			"count": 2,
-			"colors": [ "Blue" ],
-			"rarity": [ "Rare" ]
-		},{
+			"colors": [
+				"Blue"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
 			"type": "card",
 			"probability": 0.0035,
 			"count": 1,
-			"colors": [ "Blue" ],
-			"rarity": [ "Mythic Rare" ]
+			"colors": [
+				"Blue"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
 		}
 	],
 	"colors": "GU"
@@ -2279,7 +5006,7 @@
 	"name": "Merfolk Lord",
 	"sprite": "sprites/merfolk_lord.atlas",
 	"deck": "decks/merfolk_lord2.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.25,
 	"speed": 25,
 	"life": 20,
@@ -2288,23 +5015,34 @@
 			"type": "deckCard",
 			"probability": 1,
 			"count": 1
-		},{
+		},
+		{
 			"type": "gold",
 			"probability": 1,
 			"count": 200,
 			"addMaxCount": 100
-		},{
+		},
+		{
 			"type": "card",
 			"probability": 0.75,
 			"count": 2,
-			"colors": [ "Blue" ],
-			"rarity": [ "Rare" ]
-		},{
+			"colors": [
+				"Blue"
+			],
+			"rarity": [
+				"Rare"
+			]
+		},
+		{
 			"type": "card",
 			"probability": 0.005,
 			"count": 1,
-			"colors": [ "Blue" ],
-			"rarity": [ "Mythic Rare" ]
+			"colors": [
+				"Blue"
+			],
+			"rarity": [
+				"Mythic Rare"
+			]
 		}
 	],
 	"colors": "GU"
@@ -2313,7 +5051,7 @@
 	"name": "Merfolk Soldier",
 	"sprite": "sprites/mermaid.atlas",
 	"deck": "decks/merfolk_v_goblins.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 22,
 	"life": 13,
@@ -2348,7 +5086,9 @@
 	"name": "Merfolk warrior",
 	"sprite": "sprites/airelemental.atlas",
 	"deck": "decks/merfolk_mid.json",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 13,
@@ -2383,7 +5123,7 @@
 	"name": "Mimic",
 	"sprite": "sprites/mimic.atlas",
 	"deck": "decks/mimic.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 12,
@@ -2391,12 +5131,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2404,10 +5191,82 @@
 	"colors": "BU"
 },
 {
+	"name": "Mindclaw Shaman",
+	"sprite": "sprites/dreamwalker.atlas",
+	"deck": "decks/mindclaw_shaman.dck",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 22,
+	"life": 19,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "BR"
+},
+{
 	"name": "Minotaur",
 	"sprite": "sprites/minotaur.atlas",
 	"deck": "decks/minotaur.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 16,
@@ -2415,12 +5274,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2431,7 +5337,7 @@
 	"name": "Minotaur Flayer",
 	"sprite": "sprites/warden_2.atlas",
 	"deck": "decks/minotaur.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 16,
@@ -2439,12 +5345,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2455,7 +5408,7 @@
 	"name": "Monk",
 	"sprite": "sprites/monk.atlas",
 	"deck": "decks/angel.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -2463,12 +5416,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2479,7 +5479,7 @@
 	"name": "Rakdos Devil",
 	"sprite": "sprites/juggler.atlas",
 	"deck": "decks/rakdos_devil.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 11,
@@ -2503,7 +5503,7 @@
 	"name": "Red Beast",
 	"sprite": "sprites/basilisk_2.atlas",
 	"deck": "decks/beast_red.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 23,
 	"life": 17,
@@ -2511,12 +5511,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2527,7 +5574,7 @@
 	"name": "Red Wiz1",
 	"sprite": "sprites/enchanter.atlas",
 	"deck": "decks/red_bad.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 8,
@@ -2535,12 +5582,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2551,7 +5645,7 @@
 	"name": "Red Wiz2",
 	"sprite": "sprites/red_wiz2.atlas",
 	"deck": "decks/haste_burn.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -2574,7 +5668,7 @@
 	"name": "Red Wiz3",
 	"sprite": "sprites/red_wiz3.atlas",
 	"deck": "decks/lava_axe.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 14,
@@ -2597,7 +5691,7 @@
 	"name": "Rogue",
 	"sprite": "sprites/rogue.atlas",
 	"deck": "decks/rogue.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 11,
@@ -2618,7 +5712,7 @@
 	"name": "Satyr",
 	"sprite": "sprites/satyr.atlas",
 	"deck": "decks/satyr.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 8,
@@ -2626,12 +5720,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2642,7 +5783,7 @@
 	"name": "Sea Monster",
 	"sprite": "sprites/leech_2.atlas",
 	"deck": "decks/sea_monster.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 19,
@@ -2650,12 +5791,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2666,7 +5854,7 @@
 	"name": "Shaman",
 	"sprite": "sprites/shaman_2.atlas",
 	"deck": "decks/shaman.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -2674,12 +5862,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2690,7 +5925,7 @@
 	"name": "Skeleton",
 	"sprite": "sprites/skeleton.atlas",
 	"deck": "decks/skeleton.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,
 	"life": 11,
@@ -2713,7 +5948,7 @@
 	"name": "Skeleton Soldier",
 	"sprite": "sprites/skeleton_2.atlas",
 	"deck": "decks/skeleton_2.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 20,
 	"life": 11,
@@ -2736,7 +5971,7 @@
 	"name": "Sliver",
 	"sprite": "sprites/sliver.atlas",
 	"deck": "decks/sliver.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 15,
@@ -2756,7 +5991,7 @@
 	"name": "Snake",
 	"sprite": "sprites/big_snake.atlas",
 	"deck": "decks/snake.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 10,
@@ -2764,12 +5999,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2780,7 +6062,7 @@
 	"name": "Spider",
 	"sprite": "sprites/spider.atlas",
 	"deck": "decks/spider.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 22,
 	"life": 10,
@@ -2788,12 +6070,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2801,10 +6130,84 @@
 	"colors": "BG"
 },
 {
+	"name": "Symbiote",
+	"sprite": "sprites/basilisk_3.atlas",
+	"deck": "decks/symbiote.dck",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 27,
+	"life": 11,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "BUG"
+},
+{
 	"name": "Tarkir Djinn",
 	"sprite": "sprites/djinn_2.atlas",
 	"deck": "decks/djinn_tarkir.dck",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 18,
@@ -2828,7 +6231,7 @@
 	"name": "Treefolk",
 	"sprite": "sprites/treant.atlas",
 	"deck": "decks/treefolk.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 16,
 	"life": 17,
@@ -2836,12 +6239,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2852,7 +6302,7 @@
 	"name": "Treefolk Guardian",
 	"sprite": "sprites/treant_2.atlas",
 	"deck": "decks/treefolk.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 16,
 	"life": 17,
@@ -2860,12 +6310,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2876,7 +6373,7 @@
 	"name": "Troll",
 	"sprite": "sprites/troll.atlas",
 	"deck": "decks/troll.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 18,
@@ -2884,12 +6381,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2900,7 +6444,9 @@
 	"name": "Vampire",
 	"sprite": "sprites/vampire.atlas",
 	"deck": "decks/vampire.dck",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 17,
@@ -2917,7 +6463,9 @@
 	"name": "Vampire Lord",
 	"sprite": "sprites/vampire_3.atlas",
 	"deck": "decks/vampire_blood_token_fly.dck",
-	"spawnRate": 1.0,
+	"ai": "",
+	"flying": true,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 31,
 	"life": 18,
@@ -2934,7 +6482,7 @@
 	"name": "Viashino",
 	"sprite": "sprites/battler.atlas",
 	"deck": "decks/viashino.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 11,
@@ -2942,12 +6490,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2958,7 +6553,7 @@
 	"name": "Viper",
 	"sprite": "sprites/big_snake_2.atlas",
 	"deck": "decks/snake.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 10,
@@ -2966,12 +6561,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -2982,7 +6624,7 @@
 	"name": "Werewolf",
 	"sprite": "sprites/hellhound.atlas",
 	"deck": "decks/werewolf.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 26,
 	"life": 16,
@@ -3005,7 +6647,7 @@
 	"name": "White Dwarf",
 	"sprite": "sprites/dwarf_6.atlas",
 	"deck": "decks/white_dwarf.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 22,
 	"life": 13,
@@ -3029,7 +6671,7 @@
 	"name": "White Wiz1",
 	"sprite": "sprites/priest.atlas",
 	"deck": "decks/white_bad.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -3037,12 +6679,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -3053,7 +6742,7 @@
 	"name": "White Wiz2",
 	"sprite": "sprites/white_wiz2.atlas",
 	"deck": "decks/basri.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -3061,12 +6750,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -3077,7 +6813,7 @@
 	"name": "White Wiz3",
 	"sprite": "sprites/white_wiz3.atlas",
 	"deck": "decks/human_soldier_token.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 24,
 	"life": 10,
@@ -3085,12 +6821,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -3098,11 +6881,83 @@
 	"colors": "W"
 },
 {
+	"name": "Wild-Magic Sorcerer",
+	"sprite": "sprites/dreamwalker_2.atlas",
+	"deck": "decks/wild-magic_sorcerer.dck",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 22,
+	"life": 15,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare",
+				"mythicrare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
+		},
+		{
+			"type": "gold",
+			"probability": 0.3,
+			"count": 10,
+			"addMaxCount": 90
+		}
+	],
+	"colors": "RG"
+},
+{
 	"name": "Wurm",
 	"sprite": "sprites/leech.atlas",
 	"deck": "decks/wurm.json",
 	"ai": "reckless",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 19,
@@ -3137,7 +6992,7 @@
 	"name": "Yeti",
 	"sprite": "sprites/yeti_2.atlas",
 	"deck": "decks/yeti.dck",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 25,
 	"life": 16,
@@ -3145,12 +7000,59 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 4,
-			"addMaxCount": 6
+			"count": 2,
+			"addMaxCount": 4,
+			"rarity": [
+				"common",
+				"basicland"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.5,
+			"count": 1,
+			"addMaxCount": 2,
+			"rarity": [
+				"uncommon"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.25,
+			"count": 1,
+			"addMaxCount": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Creature",
+				"Artifact",
+				"Enchantment",
+				"Instant",
+				"Sorcery"
+			]
+		},
+		{
+			"type": "deckCard",
+			"probability": 0.1,
+			"count": 1,
+			"rarity": [
+				"rare"
+			],
+			"cardTypes": [
+				"Land"
+			]
 		},
 		{
 			"type": "gold",
-			"probability": 0.7,
+			"probability": 0.3,
 			"count": 10,
 			"addMaxCount": 90
 		}
@@ -3161,7 +7063,7 @@
 	"name": "Zombie",
 	"sprite": "sprites/zombie.atlas",
 	"deck": "decks/zombie_bad.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 15,
 	"life": 12,
@@ -3196,7 +7098,7 @@
 	"name": "Zombie Lord",
 	"sprite": "sprites/lich.atlas",
 	"deck": "decks/zombie_good.json",
-	"spawnRate": 1.0,
+	"spawnRate": 1,
 	"difficulty": 0.1,
 	"speed": 21,
 	"life": 18,
@@ -3227,18 +7129,13 @@
 	],
 	"colors": "B"
 },
-
-
-
-
 {
 	"name": "Wounded Sliver",
 	"sprite": "sprites/boss/wsliver.atlas",
 	"deck": "decks/miniboss/sliver_shandalar.dck",
-	"speed": 0,
-	"life": 28,
-	"boss": true,
 	"ai": "reckless",
+	"boss": true,
+	"life": 28,
 	"rewards": [
 		{
 			"type": "deckCard",
@@ -3254,17 +7151,15 @@
 	],
 	"colors": "GRW"
 },
-
-
-
-
 {
 	"name": "Griselbrand",
 	"sprite": "sprites/boss/griselbrand.atlas",
 	"deck": "decks/boss/griselbrand.dck",
+	"ai": "",
+	"boss": true,
+	"flying": true,
 	"speed": 1,
 	"life": 80,
-	"boss": true,
 	"rewards": [
 		{
 			"type": "card",
@@ -3294,9 +7189,11 @@
 	"name": "Akroma",
 	"sprite": "sprites/boss/akroma.atlas",
 	"deck": "decks/boss/akroma.dck",
+	"ai": "",
+	"boss": true,
+	"flying": true,
 	"speed": 1,
 	"life": 80,
-	"boss": true,
 	"rewards": [
 		{
 			"type": "card",
@@ -3326,9 +7223,9 @@
 	"name": "Ghalta",
 	"sprite": "sprites/boss/ghalta.atlas",
 	"deck": "decks/boss/ghalta.dck",
+	"boss": true,
 	"speed": 1,
 	"life": 80,
-	"boss": true,
 	"rewards": [
 		{
 			"type": "card",
@@ -3358,9 +7255,9 @@
 	"name": "Lorthos",
 	"sprite": "sprites/boss/lorthos.atlas",
 	"deck": "decks/boss/lorthos.dck",
+	"boss": true,
 	"speed": 1,
 	"life": 80,
-	"boss": true,
 	"rewards": [
 		{
 			"type": "card",
@@ -3390,9 +7287,11 @@
 	"name": "Lathliss",
 	"sprite": "sprites/boss/lathiss.atlas",
 	"deck": "decks/boss/lathliss.dck",
+	"ai": "",
+	"boss": true,
+	"flying": true,
 	"speed": 1,
 	"life": 80,
-	"boss": true,
 	"rewards": [
 		{
 			"type": "card",
@@ -3422,9 +7321,11 @@
 	"name": "Emrakul",
 	"sprite": "sprites/boss/emrakul.atlas",
 	"deck": "decks/boss/emrakul.dck",
+	"ai": "",
+	"boss": true,
+	"flying": true,
 	"speed": 1,
 	"life": 100,
-	"boss": true,
 	"rewards": [
 		{
 			"type": "item",
@@ -3448,9 +7349,9 @@
 	"name": "Sliver Queen",
 	"sprite": "sprites/boss/sliver_queen.atlas",
 	"deck": "decks/boss/sliver_queen.dck",
+	"boss": true,
 	"speed": 1,
 	"life": 100,
-	"boss": true,
 	"rewards": [
 		{
 			"type": "item",
@@ -3475,5 +7376,56 @@
 		"Black Lotus"
 	],
 	"colors": "BGRUW"
+},
+{
+	"name": "Goblin pack",
+	"sprite": "sprites/goblin_group.atlas",
+	"deck": "decks/goblin_bad.json",
+	"ai": "",
+	"spawnRate": 1,
+	"difficulty": 0.1,
+	"speed": 27,
+	"life": 8,
+	"rewards": [
+		{
+			"type": "deckCard",
+			"probability": 1,
+			"count": 2,
+			"addMaxCount": 4
+		},
+		{
+			"type": "gold",
+			"probability": 0.7,
+			"count": 10,
+			"addMaxCount": 90
+		},
+		{
+			"type": "card",
+			"probability": 0.5,
+			"count": 3,
+			"colors": [
+				"Red"
+			],
+			"rarity": [
+				"Rare"
+			]
+		}
+	],
+	"colors": "R",
+	"nextEnemy": {
+		"name": "Goblin",
+		"deck": "decks/goblin_bad.json",
+		"ai": "",
+		"life": 8,
+		"nextEnemy": {
+			"name": "Goblin",
+			"deck": "decks/goblin_bad.json",
+			"ai": "",
+			"life": 8,
+			"teamNumber": 1
+		},
+		"teamNumber": 1
+	},
+	"teamNumber": 1
 }
 ]

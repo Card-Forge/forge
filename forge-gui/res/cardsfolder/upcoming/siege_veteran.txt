@@ -1,0 +1,11 @@
+Name:Siege Veteran
+ManaCost:2 W
+Types:Creature Human Soldier
+PT:2/2
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of combat on your turn, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Soldier.Other+nonToken+YouCtrl | Execute$ TrigToken | TriggerDescription$ Whenever another nontoken Soldier you control dies, create a 1/1 colorless Soldier artifact creature token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_1_1_a_soldier
+DeckHints:Type$Soldier
+DeckHas:Ability$Counters|Token 
+Oracle:At the beginning of combat on your turn, put a +1/+1 counter on target creature you control.\nWhenever another nontoken Soldier you control dies, create a 1/1 colorless Soldier artifact creature token.

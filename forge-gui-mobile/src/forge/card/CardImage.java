@@ -24,7 +24,7 @@ public class CardImage implements FImage {
         if (image != null) {
             return image.getWidth();
         }
-        return ImageCache.defaultImage.getWidth();
+        return ImageCache.getDefaultImage().getWidth();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class CardImage implements FImage {
             }
         }
 
-        if (image == ImageCache.defaultImage || Forge.enableUIMask.equals("Art")) {
+        if (image == ImageCache.getDefaultImage() || Forge.enableUIMask.equals("Art")) {
             CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), false, x, y, w, h, CardStackPosition.Top, true, true);
         }
         else {

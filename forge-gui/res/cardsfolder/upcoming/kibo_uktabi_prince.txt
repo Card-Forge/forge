@@ -1,0 +1,13 @@
+Name:Kibo, Uktabi Prince
+ManaCost:2 G
+Types:Legendary Creature Monkey Noble
+PT:2/2
+A:AB$ Token | Cost$ T | TokenOwner$ Player | TokenScript$ banana | SpellDescription$ Each player creates a colorless artifact token named Banana with "{T}, Sacrifice this artifact: Add {R} or {G}. You gain 2 life."
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Artifact.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever an artifact an opponent controls is put into a graveyard from the battlefield, put a +1/+1 counter on each creature you control that's an Ape or Monkey.
+SVar:TrigCounter:DB$ PutCounterAll | ValidCards$ Creature.Monkey+YouCtrl,Creature.Ape+YouCtrl | CounterType$ P1P1 | CounterNum$ 1
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever NICKNAME attacks, defending player sacrifices an artifact.
+SVar:TrigSac:DB$ Sacrifice | Defined$ TriggeredDefendingPlayer | SacValid$ Artifact
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Sacrifice|Token|LifeGain|Counters & Type$Artifact
+DeckNeeds:Type$Ape|Monkey
+Oracle:{T}: Each player creates a colorless artifact token named Banana with "{T}, Sacrifice this artifact: Add {R} or {G}. You gain 2 life."\nWhenever an artifact an opponent controls is put into a graveyard from the battlefield, put a +1/+1 counter on each creature you control that's an Ape or Monkey.\nWhenever Kibo attacks, defending player sacrifices an artifact.

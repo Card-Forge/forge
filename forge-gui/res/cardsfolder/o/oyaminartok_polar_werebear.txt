@@ -1,0 +1,13 @@
+Name:Oyaminartok, Polar Werebear
+ManaCost:2 G G
+Types:Legendary Creature Giant Bear
+PT:4/5
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Hexproof | IsPresent$ Card.Self+dealtDamagetoAny | PresentCompare$ EQ0 | Description$ CARDNAME has hexproof if it hasn't dealt damage yet.
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigToken | CombatDamage$ True | ValidTarget$ Player | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, create a Food token.
+SVar:TrigToken:DB$ Token | TokenScript$ c_a_food_sac
+A:AB$ Draft | Cost$ U Sac<1/Food> | Spellbook$ Archipelagore,Junk Winder,Moat Piranhas,Mystic Skyfish,Nadir Kraken,Nezahal; Primal Tide,Pouncing Shoreshark,Pursued Whale,Riptide Turtle,Ruin Crab,Sea-Dasher Octopus,Sigiled Starfish,Spined Megalodon,Stinging Lionfish,Voracious Greatshark | SubAbility$ TrigImmediateTrig | SpellDescription$ Draft a card from CARDNAME's spellbook. When you do, add {U}{U}{U}. Spend this mana only to cast blue creature spells.
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | Execute$ DBAddMana | TriggerDescription$ When you do, add {U}{U}{U}. Spend this mana only to cast blue creature spells.
+SVar:DBAddMana:DB$ Mana | Produced$ U | Amount$ 3 | RestrictValid$ Spell.Creature+Blue
+DeckHas:Ability$Token|LifeGain|Food
+DeckHints:Ability$Food
+Oracle:Oyaminartok, Polar Werebear has hexproof if it hasn't dealt damage yet.\nWhenever Oyaminartok deals combat damage to a player, create a Food token.\n{U}, Sacrifice a Food: Draft a card from Oyaminartok's spellbook. When you do, add {U}{U}{U}. Spend this mana only to cast blue creature spells.

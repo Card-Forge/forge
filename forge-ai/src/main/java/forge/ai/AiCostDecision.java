@@ -2,10 +2,12 @@ package forge.ai;
 
 import static forge.ai.ComputerUtilCard.getBestCreatureAI;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import forge.card.MagicColor;
 import forge.game.cost.*;
 import org.apache.commons.lang3.ObjectUtils;
 
@@ -53,6 +55,14 @@ public class AiCostDecision extends CostDecisionMakerBase {
         int c = cost.getAbilityAmount(ability);
 
         return PaymentDecision.number(c);
+    }
+
+    @Override
+    public PaymentDecision visit(CostChooseColor cost) {
+        int c = cost.getAbilityAmount(ability);
+        List<String> choices = player.getController().chooseColors("Color", ability, c, c,
+                new ArrayList<>(MagicColor.Constant.ONLY_COLORS));
+        return PaymentDecision.colors(choices);
     }
 
     @Override

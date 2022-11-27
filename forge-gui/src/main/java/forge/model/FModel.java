@@ -172,16 +172,20 @@ public final class FModel {
                 FModel.getPreferences().getPrefBoolean(FPref.LOAD_CARD_SCRIPTS_LAZILY));
         CardStorageReader customReader;
         try {
-           customReader  = new CardStorageReader(ForgeConstants.USER_CUSTOM_CARDS_DIR, progressBarBridge,false);
+           customReader  = new CardStorageReader(ForgeConstants.USER_CUSTOM_CARDS_DIR, progressBarBridge, false);
         } catch (Exception e) {
             customReader = null;
         }
         CardStorageReader customTokenReader;
         try {
-            customTokenReader  = new CardStorageReader(ForgeConstants.USER_CUSTOM_TOKENS_DIR, progressBarBridge,false);
+            customTokenReader  = new CardStorageReader(ForgeConstants.USER_CUSTOM_TOKENS_DIR, progressBarBridge, false);
         } catch (Exception e) {
             customTokenReader = null;
         }
+
+        // do this first so PaperCards see the real preference
+        CardTranslation.preloadTranslation(preferences.getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
+
         magicDb = new StaticData(reader, tokenReader, customReader, customTokenReader, ForgeConstants.EDITIONS_DIR,
                                  ForgeConstants.USER_CUSTOM_EDITIONS_DIR, ForgeConstants.BLOCK_DATA_DIR, ForgeConstants.SETLOOKUP_DIR,
                                  FModel.getPreferences().getPref(FPref.UI_PREFERRED_ART),
@@ -190,7 +194,6 @@ public final class FModel {
                                  FModel.getPreferences().getPrefBoolean(FPref.ALLOW_CUSTOM_CARDS_IN_DECKS_CONFORMANCE),
                                  FModel.getPreferences().getPrefBoolean(FPref.UI_SMART_CARD_ART)
                 );
-        CardTranslation.preloadTranslation(preferences.getPref(FPref.UI_LANGUAGE), ForgeConstants.LANG_DIR);
 
         //create profile dirs if they don't already exist
         for (final String dname : ForgeConstants.PROFILE_DIRS) {

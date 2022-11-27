@@ -1,0 +1,11 @@
+Name:Heavyweight Demolisher
+ManaCost:7
+Types:Artifact Creature Construct
+PT:8/6
+K:Menace
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigTap | TriggerDescription$ At the beginning of your upkeep, tap CARDNAME unless you pay {3}.
+SVar:TrigTap:DB$ Tap | UnlessCost$ 3 | UnlessPayer$ You | Defined$ Self
+K:Unearth:6 R R
+DeckHints:Color$Red
+DeckHas:Ability$Graveyard
+Oracle:Menace\nAt the beginning of your upkeep, tap Heavyweight Demolisher unless you pay {3}.\nUnearth {6}{R}{R}({6}{R}{R}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

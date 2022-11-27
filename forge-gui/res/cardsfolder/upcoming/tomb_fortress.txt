@@ -1,0 +1,9 @@
+Name:Tomb Fortress
+ManaCost:no cost
+Types:Land
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add {B}.
+A:AB$ Mill | Cost$ 2 B B B T Exile<1/CARDNAME> | Defined$ You | SorcerySpeed$ True | NumCards$ 4 | SubAbility$ DBReturn | SpellDescription$ Mill four cards, then return a creature card from your graveyard to the battlefield. Activate only as a sorcery.
+SVar:DBReturn:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature.YouOwn | ChangeNum$ 1 | Hidden$ True
+DeckHas:Ability$Graveyard|Mill
+Oracle:Tomb Fortress enters the battlefield tapped.\n{T}: Add {B}.\n{2}{B}{B}{B}, {T}, Exile Tomb Fortress: Mill four cards, then return a creature card from your graveyard to the battlefield. Activate only as a sorcery.

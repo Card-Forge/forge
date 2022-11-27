@@ -1,0 +1,7 @@
+Name:Wing Commando
+ManaCost:2 U
+Types:Creature Human Soldier
+PT:2/2
+K:Flying
+K:Prowess
+Oracle:Flying\nProwess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)

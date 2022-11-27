@@ -85,7 +85,6 @@ public class DeckgenUtil {
         }
     }
 
-
     public static Deck buildPlanarConquestDeck(PaperCard card, GameFormat format, DeckFormat deckFormat){
         return buildPlanarConquestDeck(card, null, format, deckFormat, false);
     }
@@ -655,7 +654,7 @@ public class DeckgenUtil {
 
         // Get random multicolor Legendary creature
         final DeckFormat format = gameType.getDeckFormat();
-        Predicate<CardRules> canPlay = forAi ? DeckGeneratorBase.AI_CAN_PLAY : DeckGeneratorBase.HUMAN_CAN_PLAY;
+        Predicate<CardRules> canPlay = forAi ? DeckGeneratorBase.AI_CAN_PLAY : CardRulesPredicates.IS_KEPT_IN_RANDOM_DECKS;
         @SuppressWarnings("unchecked")
         Iterable<PaperCard> legends = cardDb.getAllCards(Predicates.and(format.isLegalCardPredicate(), format.isLegalCommanderPredicate(),
                 Predicates.compose(canPlay, PaperCard.FN_GET_RULES)));

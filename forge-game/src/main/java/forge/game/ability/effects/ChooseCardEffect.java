@@ -2,6 +2,7 @@ package forge.game.ability.effects;
 
 import java.util.*;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import forge.game.player.DelayedReveal;
 import forge.game.player.PlayerView;
@@ -40,8 +41,10 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         } else {
             sb.append("may choose ");
         }
-        String desc = sa.getParamOrDefault("ChoiceDesc", "");
-        desc = desc.isEmpty() ? "card" : desc + " card";
+        String desc = sa.getParamOrDefault("ChoiceDesc", "card");
+        if (!desc.contains("card") && !desc.contains("control")) {
+            desc = desc + " card";
+        }
         sb.append(Lang.nounWithNumeralExceptOne(numCards, desc));
         if (sa.hasParam("FromDesc")) {
             sb.append(" ").append(sa.getParam("FromDesc"));
@@ -56,14 +59,14 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
-        final CardCollection chosen = new CardCollection();
+        CardCollection chosen = new CardCollection();
 
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        ZoneType choiceZone = ZoneType.Battlefield;
+        List<ZoneType> choiceZone = Lists.newArrayList(ZoneType.Battlefield);
         if (sa.hasParam("ChoiceZone")) {
-            choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
+            choiceZone = ZoneType.listValueOf(sa.getParam("ChoiceZone"));
         }
         CardCollectionView choices = sa.hasParam("AllCards") ? game.getCardsInGame() : game.getCardsIn(choiceZone);
         if (sa.hasParam("Choices")) {
@@ -99,6 +102,7 @@ public class ChooseCardEffect extends SpellAbilityEffect {
         }
 
         for (final Player p : tgtPlayers) {
+            boolean dontRevealToOwner = true;
             if (sa.hasParam("EachBasicType")) {
                 // Get all lands, 
                 List<Card> land = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
@@ -217,12 +221,22 @@ public class ChooseCardEffect extends SpellAbilityEffect {
 
             } else if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.hasParam("AtRandom") && !choices.isEmpty()) {
-                    Aggregates.random(choices, validAmount, chosen);
+                    // don't pass FCollection for direct modification, the Set part would get messed up
+                    chosen = new CardCollection(Aggregates.random(choices, validAmount));
+                    dontRevealToOwner = false;
                 } else {
                     String title = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseaCard") + " ";
-                    if (sa.hasParam ("ChoiceTitleAppendDefined")) {
-                        String defined = AbilityUtils.getDefinedPlayers(host, sa.getParam("ChoiceTitleAppendDefined"), sa).toString();
-                        title = title + " " + defined;
+                    if (sa.hasParam ("ChoiceTitleAppend")) {
+                        String tag = "";
+                        String value = sa.getParam("ChoiceTitleAppend");
+                        if (value.startsWith("Defined ")) {
+                            tag = AbilityUtils.getDefinedPlayers(host, value.substring(8), sa).toString();
+                        } else if (value.equals("ChosenType")) {
+                            tag = host.getChosenType();
+                        }
+                        if (!tag.equals("")) {
+                            title = title + " (" + tag +")";
+                        }
                     }
                     if (sa.hasParam("QuasiLibrarySearch")) {
                         final Player searched = AbilityUtils.getDefinedPlayers(host,
@@ -246,15 +260,20 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 }
             }
             if (sa.hasParam("Reveal") && !sa.hasParam("SecretlyChoose")) {
-                game.getAction().reveal(chosen, p, true, sa.hasParam("RevealTitle") ? sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ");
+                game.getAction().reveal(chosen, p, dontRevealToOwner, sa.hasParam("RevealTitle") ?
+                        sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ");
             }
         }
-        if(sa.hasParam("Reveal") && sa.hasParam("SecretlyChoose")) {
+        if (sa.hasParam("Reveal") && sa.hasParam("SecretlyChoose")) {
             for (final Player p : tgtPlayers) {
-                game.getAction().reveal(chosen, p, true, sa.hasParam("RevealTitle") ? sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ");
+                game.getAction().reveal(chosen, p, true, sa.hasParam("RevealTitle") ?
+                        sa.getParam("RevealTitle") : Localizer.getInstance().getMessage("lblChosenCards") + " ");
             }
         }
         host.setChosenCards(chosen);
+        if (sa.hasParam("ForgetOtherRemembered")) {
+            host.clearRemembered();
+        }
         if (sa.hasParam("RememberChosen")) {
             host.addRemembered(chosen);
         }

@@ -3,6 +3,6 @@ ManaCost:B B
 Types:Enchantment Aura
 K:Enchant artifact
 A:SP$ Attach | Cost$ B B | ValidTgts$ Artifact | AILogic$ Curse
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted artifact's controller, CARDNAME deals 1 damage to that player.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the upkeep of enchanted artifact's controller, CARDNAME deals 1 damage to that player.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 1
 Oracle:Enchant artifact\nAt the beginning of the upkeep of enchanted artifact's controller, Warp Artifact deals 1 damage to that player.

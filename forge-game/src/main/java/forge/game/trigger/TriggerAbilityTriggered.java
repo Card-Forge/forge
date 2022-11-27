@@ -19,7 +19,6 @@ package forge.game.trigger;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
 import forge.game.card.CardZoneTable;
@@ -54,8 +53,8 @@ public class TriggerAbilityTriggered extends Trigger {
             return false;
         }
         final Card source = spellAbility.getHostCard();
+        @SuppressWarnings("unchecked")
         final Iterable<Card> causes = (Iterable<Card>) runParams.get(AbilityKey.Cause);
-        final Game game = source.getGame();
 
         if (hasParam("ValidMode")) {
             List<String> validModes = Arrays.asList(getParam("ValidMode").split(","));
@@ -73,17 +72,19 @@ public class TriggerAbilityTriggered extends Trigger {
             }
         }
 
+        if (!matchesValidParam("ValidSpellAbility", spellAbility)) {
+            return false;
+        }
+
         if (!matchesValidParam("ValidSource", source)) {
             return false;
         }
 
-        if (!matchesValidParam("ValidCause", causes))
-        {
+        if (!matchesValidParam("ValidCause", causes)) {
             return false;
         }
         
-        if (hasParam("TriggeredOwnAbility") && "True".equals(getParam("TriggeredOwnAbility")) && !Iterables.contains(causes, source))
-        {
+        if (hasParam("TriggeredOwnAbility") && "True".equals(getParam("TriggeredOwnAbility")) && !Iterables.contains(causes, source)) {
             return false;
         }
 
@@ -109,11 +110,11 @@ public class TriggerAbilityTriggered extends Trigger {
         return sb.toString();
     }
 
-    public static void addTriggeringObject(Trigger regtrig, SpellAbility sa, Map<AbilityKey, Object> runParams) {
+    public static Map<AbilityKey, Object> getRunParams(Trigger regtrig, SpellAbility sa, Map<AbilityKey, Object> runParams) {
         Map<AbilityKey, Object> newRunParams = AbilityKey.newMap();
         newRunParams.put(AbilityKey.Mode, regtrig.getMode().toString());
         if (regtrig.getMode() == TriggerType.ChangesZone) {
-            newRunParams.put(AbilityKey.Destination, runParams.get(AbilityKey.Destination));
+            newRunParams.put(AbilityKey.Destination, runParams.getOrDefault(AbilityKey.Destination, ""));
             newRunParams.put(AbilityKey.Cause, ImmutableList.of(runParams.get(AbilityKey.Card)));
         } else if (regtrig.getMode() == TriggerType.ChangesZoneAll) {
             final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
@@ -126,6 +127,9 @@ public class TriggerAbilityTriggered extends Trigger {
             newRunParams.put(AbilityKey.Destination, TextUtil.join(destinations, ","));
             newRunParams.put(AbilityKey.Cause, table.allCards());
         }
-        sa.setTriggeringObject(AbilityKey.TriggeredParams, newRunParams);
+
+        newRunParams.put(AbilityKey.SpellAbility, sa);
+
+        return newRunParams;
     }
 }

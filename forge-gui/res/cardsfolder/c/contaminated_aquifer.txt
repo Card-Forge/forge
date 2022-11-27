@@ -1,0 +1,5 @@
+Name:Contaminated Aquifer
+ManaCost:no cost
+Types:Land Island Swamp
+K:CARDNAME enters the battlefield tapped.
+Oracle:({T}: Add {U} or {B}.)\nContaminated Aquifer enters the battlefield tapped.

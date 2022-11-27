@@ -1,0 +1,13 @@
+Name:Liberator, Urza's Battlethopter
+ManaCost:3
+Types:Legendary Artifact Creature Thopter
+PT:1/2
+K:Flash
+K:Flying
+S:Mode$ CastWithFlash | ValidCard$ Artifact,Card.Colorless | ValidSA$ Spell | Caster$ You | Description$ You may cast colorless spells and artifact spells as though they had flash.
+T:Mode$ SpellCast | ValidCard$ Card | ValidSA$ Spell.ManaSpent GTX | Execute$ TrigCounter | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell, if the amount of mana spent to cast that spell is greater than CARDNAME's power, put a +1/+1 counter on NICKNAME.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:X:Count$CardPower
+DeckHints:Type$Urza|Eldrazi|Ugin|Artificer|Artifact & Color$Colorless
+DeckHas:Ability$Counters
+Oracle:Flash\nFlying\nYou may cast colorless spells and artifact spells as though they had flash.\nWhenever you cast a spell, if the amount of mana spent to cast that spell is greater than Liberator, Urza's Battlethopter's power, put a +1/+1 counter on Liberator.

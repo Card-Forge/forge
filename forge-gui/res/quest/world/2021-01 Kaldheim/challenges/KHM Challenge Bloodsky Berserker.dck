@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Bloodsky Berserker
+OpponentName=The Berserkers
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=
+HumanExtras=
+[metadata]
+Title=Bloodsky Berserker
+Difficulty=easy
+Description="Who's next?!"
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=KHM Challenge: Bloodsky Berserker
+[Main]
+30 Bloodsky Berserker|KHM|1
+30 Swamp|KHM|1

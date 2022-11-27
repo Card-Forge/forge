@@ -48,7 +48,6 @@ import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.item.IPaperCard;
 import forge.item.InventoryItem;
-import forge.item.PaperCard;
 import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.properties.ForgePreferences;
 import forge.localinstance.properties.ForgePreferences.FPref;
@@ -172,12 +171,48 @@ public class ImageCache {
 
         IPaperCard ipc = null;
         boolean altState = imageKey.endsWith(ImageKeys.BACKFACE_POSTFIX);
+        String specColor = "";
+        if (imageKey.endsWith(ImageKeys.SPECFACE_W)) {
+            specColor = "white";
+        } else if (imageKey.endsWith(ImageKeys.SPECFACE_U)) {
+            specColor = "blue";
+        } else if (imageKey.endsWith(ImageKeys.SPECFACE_B)) {
+            specColor = "black";
+        } else if (imageKey.endsWith(ImageKeys.SPECFACE_R)) {
+            specColor = "red";
+        } else if (imageKey.endsWith(ImageKeys.SPECFACE_G)) {
+            specColor = "green";
+        }
         if (altState)
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
+        if (!specColor.equals(""))
+            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.SPECFACE_W.length());
         if (imageKey.startsWith(ImageKeys.CARD_PREFIX)) {
             ipc = ImageUtil.getPaperCardFromImageKey(imageKey);
             if (ipc != null) {
-                imageKey = altState ? ipc.getCardAltImageKey() : ipc.getCardImageKey();
+                if (altState) {
+                    imageKey = ipc.getCardAltImageKey();
+                } else if (!specColor.equals("")) {
+                    switch (specColor) {
+                        case "white":
+                            imageKey = ipc.getCardWSpecImageKey();
+                            break;
+                        case "blue":
+                            imageKey = ipc.getCardUSpecImageKey();
+                            break;
+                        case "black":
+                            imageKey = ipc.getCardBSpecImageKey();
+                            break;
+                        case "red":
+                            imageKey = ipc.getCardRSpecImageKey();
+                            break;
+                        case "green":
+                            imageKey = ipc.getCardGSpecImageKey();
+                            break;
+                    }
+                } else {
+                    imageKey = ipc.getCardImageKey();
+                }
                 if (StringUtils.isBlank(imageKey))
                     return Pair.of(_defaultImage, true);
             }
@@ -191,7 +226,7 @@ public class ImageCache {
         if (useArtCrop) {
             if (ipc != null && ipc.getRules().getSplitType() == CardSplitType.Flip) {
                 // Art crop will always use front face as image key for flip cards
-                imageKey = ((PaperCard) ipc).getCardImageKey();
+                imageKey = ipc.getCardImageKey();
             }
             imageKey = TextUtil.fastReplace(imageKey, ".full", ".artcrop");
         }
@@ -294,9 +329,13 @@ public class ImageCache {
             setCode.equals("6E") || setCode.equals("7E") || setCode.equals("8E") || setCode.equals("9E");
     }
 
+    public static boolean isSupportedImageSize(final int width, final int height) {
+        return !((3 > width && -1 != width) || (3 > height && -1 != height));
+    }
+
     // cardView is for Emblem, since there is no paper card for them
     public static BufferedImage scaleImage(String key, final int width, final int height, boolean useDefaultImage, CardView cardView) {
-        if (StringUtils.isEmpty(key) || (3 > width && -1 != width) || (3 > height && -1 != height)) {
+        if (StringUtils.isEmpty(key) || !isSupportedImageSize(width, height)) {
             // picture too small or key not defined; return a blank
             return null;
         }

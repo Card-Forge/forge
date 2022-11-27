@@ -3,7 +3,7 @@ ManaCost:U
 Types:Creature Zombie
 PT:1/3
 K:Defender
-A:AB$ Dig | Cost$ tapXType<3/Creature/creature> | DigNum$ 1 | DestinationZone$ Graveyard | DestinationZone2$ Library | LibraryPosition2$ 0 | Optional$ True | StackDescription$ SpellDescription | SpellDescription$ Look at the top card of your library. You may put it into your graveyard.
-DeckHas:Ability$Graveyard
+A:AB$ Surveil | Cost$ tapXType<3/Creature/creature> | Amount$ 1 | SpellDescription$ Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)
+DeckHas:Ability$Surveil|Graveyard
 DeckHints:Keyword$Decayed
-Oracle:Defender\nTap three untapped creatures you control: Look at the top card of your library. You may put it into your graveyard.
+Oracle:Defender\nTap three untapped creatures you control: Surveil 1. (Look at the top card of your library. You may put that card into your graveyard.)

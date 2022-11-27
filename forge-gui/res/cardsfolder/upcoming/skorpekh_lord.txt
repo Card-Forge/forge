@@ -1,0 +1,10 @@
+Name:Skorpekh Lord
+ManaCost:2 B
+Types:Artifact Creature Necron Noble
+PT:3/2
+K:Menace
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl+Other | AddKeyword$ Menace | AddPower$ 1 | Description$ Command Protocols — Other artifact creatures you control get +1/+0 and have menace.
+K:Unearth:2 B
+DeckHas:Ability$Graveyard & Keyword$Menace
+DeckHints:Type$Artifact
+Oracle:Menace\nCommand Protocols — Other artifact creatures you control get +1/+0 and have menace.\nUnearth {2}{B} ({2}{B}: Return this card from your graveyard to the battlefield. It gains haste. Exile it at the beginning of the next end step or if it would leave the battlefield. Unearth only as a sorcery.)

@@ -41,20 +41,17 @@ public enum PlanarDice {
             trigRes = Chaos;
         }
 
-        Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, roller);
+        Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(roller);
         runParams.put(AbilityKey.Result, trigRes);
         roller.getGame().getTriggerHandler().runTrigger(TriggerType.PlanarDice, runParams,false);
 
         // Also run normal RolledDie and RolledDieOnce triggers
-        runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, roller);
+        runParams = AbilityKey.mapFromPlayer(roller);
         runParams.put(AbilityKey.Sides, 6);
         runParams.put(AbilityKey.Result, 0);
         roller.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDie, runParams, false);
 
-        runParams = AbilityKey.newMap();
-        runParams.put(AbilityKey.Player, roller);
+        runParams = AbilityKey.mapFromPlayer(roller);
         runParams.put(AbilityKey.Sides, 6);
         runParams.put(AbilityKey.Result, Arrays.asList(0));
         roller.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDieOnce, runParams, false);

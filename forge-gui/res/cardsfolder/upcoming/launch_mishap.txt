@@ -1,0 +1,7 @@
+Name:Launch Mishap
+ManaCost:2 U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker spell | SubAbility$ DBToken | SpellDescription$ Counter target creature or planeswalker spell. Create a 1/1 colorless Thopter artifact creature token with flying.
+SVar:DBToken:DB$ Token | TokenScript$ c_1_1_a_thopter_flying
+DeckHas:Ability$Token & Type$Artifact|Thopter
+Oracle:Counter target creature or planeswalker spell. Create a 1/1 colorless Thopter artifact creature token with flying.

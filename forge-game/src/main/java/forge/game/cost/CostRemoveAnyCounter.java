@@ -41,10 +41,11 @@ public class CostRemoveAnyCounter extends CostPart {
      */
     private static final long serialVersionUID = 1L;
     // RemoveAnyCounter<Num/Type/{TypeDescription}>
-    // Power Conduit and Chisei, Heart of Oceans
-    // Both cards have "Remove a counter from a permanent you control"
+    // things like "Remove a counter from a permanent you control"
+    // or "Remove one or more +1/+1 counters from among artifacts you control"
 
     public final CounterType counter;
+    public final Boolean oneOrMore;
 
     /**
      * Instantiates a new cost CostRemoveAnyCounter.
@@ -52,9 +53,10 @@ public class CostRemoveAnyCounter extends CostPart {
      * @param amount
      *            the amount
      */
-    public CostRemoveAnyCounter(final String amount, final CounterType counter, final String type, final String description) {
+    public CostRemoveAnyCounter(final String amount, final CounterType counter, final String type, final String description, final boolean oneOrMore) {
         super(amount, type, description);
         this.counter = counter;
+        this.oneOrMore = oneOrMore;
     }
 
     @Override
@@ -99,12 +101,16 @@ public class CostRemoveAnyCounter extends CostPart {
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        String counters =  this.counter == null ? "counter" : this.counter.getName().toLowerCase() + " counter";
+        final String counters =  this.counter == null ? "counter" : this.counter.getName().toLowerCase() + " counter";
+        final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
 
         sb.append("Remove ");
-        sb.append(Cost.convertAmountTypeToWords(this.convertAmount(), this.getAmount(), counters));
-        sb.append(this.getAmount().equals("1") ? "" : "s");
-        final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
+        if (oneOrMore) {
+            sb.append("one or more ").append(counters).append("s");
+        } else {
+            sb.append(Cost.convertAmountTypeToWords(this.convertAmount(), this.getAmount(), counters));
+            sb.append(this.getAmount().equals("1") ? "" : "s");
+        }
         sb.append(" from ").append(desc);
 
         return sb.toString();

@@ -1,0 +1,7 @@
+Name:Drag to the Bottom
+ManaCost:2 B B 
+Types:Sorcery
+A:SP$ PumpAll | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | SpellDescription$ Domain — Each creature gets -X/-X until end of turn, where X is 1 plus the number of basic land types among lands you control.
+SVar:X:Count$Domain/Plus.1
+AI:RemoveDeck:Random
+Oracle:Domain — Each creature gets -X/-X until end of turn, where X is 1 plus the number of basic land types among lands you control.

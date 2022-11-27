@@ -9,5 +9,5 @@ SVar:TrigFlip:DB$ RepeatEach | RepeatCards$ Creature.nonDemon+nonDevil+nonImp | 
 SVar:DBFlip:DB$ FlipACoin | NoCall$ True | TailsSubAbility$ DBRememberCreature
 SVar:DBRememberCreature:DB$ Pump | Defined$ Imprinted | RememberObjects$ Imprinted
 SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Creature.IsRemembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Flying, trample\nWhen Rakdos, the Showstopper enters the battlefield, flip a coin for each creature that isn't a Demon, Devil, or Imp. Destroy each creature whose coin comes up tails.

@@ -1,23 +1,14 @@
 package forge.gui.card;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import forge.game.card.*;
-import org.apache.commons.lang3.StringUtils;
-
 import com.google.common.collect.Sets;
-
-import forge.card.CardRarity;
-import forge.card.CardStateName;
-import forge.card.CardType;
-import forge.card.ColorSet;
-import forge.card.MagicColor;
+import forge.card.*;
 import forge.card.mana.ManaCostShard;
+import forge.deck.DeckRecognizer;
 import forge.game.GameView;
+import forge.game.card.Card;
+import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
+import forge.game.card.CounterType;
 import forge.game.zone.ZoneType;
 import forge.item.InventoryItemFromSet;
 import forge.item.PaperCard;
@@ -28,6 +19,14 @@ import forge.localinstance.properties.ForgePreferences;
 import forge.model.FModel;
 import forge.util.CardTranslation;
 import forge.util.Lang;
+import forge.util.Localizer;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 public class CardDetailUtil {
 
@@ -199,7 +198,7 @@ public class CardDetailUtil {
                 ptText.insert(0, "P/T: ");
                 ptText.append(" - ").append("Loy: ");
             } else {
-                ptText.append("Loyalty: ");
+                ptText.append(Localizer.getInstance().getMessage("lblLoyalty")).append(": ");
             }
 
             ptText.append(card.getLoyalty());
@@ -277,6 +276,8 @@ public class CardDetailUtil {
             area.append("Token card");
         } else if (card.isEmblem()) {
             area.append("Emblem");
+        } else if (card.isBoon()) {
+            area.append("Boon");
         } else if (card.isImmutable()) {
             area.append("Effect");
         }
@@ -294,14 +295,23 @@ public class CardDetailUtil {
             card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(state.getName(), "") : null) :
             card.getText(state, needTranslation ? CardTranslation.getTranslationTexts(card.getLeftSplitState().getName(), card.getRightSplitState().getName()) : null );
 
-        // LEVEL [0-9]+-[0-9]+
-        // LEVEL [0-9]+\+
+        // Bracket P/T for Level up
+        if (text.contains("LEVEL")) {
+            String regex = "[0-99]+/[0-99]";
+            text = text.replaceAll(regex, "[$0]");
+        }
 
-        String regex = "LEVEL [0-9]+-[0-9]+ ";
+        // LEVEL [0-9]+-[0-9]+
+        String regex = "LEVEL [0-9]+-[0-9]+ \\[[0-99]+/[0-99]]+ ";
         text = text.replaceAll(regex, "$0\r\n");
 
-        regex = "LEVEL [0-9]+\\+ ";
-        text = text.replaceAll(regex, "\r\n$0\r\n");
+        // LEVEL [0-9]+\+
+        regex = "LEVEL [0-9]+\\+ \\[[0-99]+/[0-99]]+ ";
+        text = text.replaceAll(regex, "$0\r\n");
+
+        // ",,," becomes a line break
+        regex = ",,,";
+        text = text.replaceAll(regex, "\r\n");
 
         // displays keywords that have dots in them a little better:
         regex = "\\., ";
@@ -419,13 +429,23 @@ public class CardDetailUtil {
             area.append(")");
         }
 
+        // noted types
+        if (card.getNotedTypes() != null && !card.getNotedTypes().isEmpty()) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("(noted type").append(card.getNotedTypes().size() == 1 ? ": " : "s: ");
+            area.append(Lang.joinHomogenous(card.getNotedTypes()));
+            area.append(")");
+        }
+
         // chosen color
         if (card.getChosenColors() != null && !card.getChosenColors().isEmpty()) {
             if (area.length() != 0) {
                 area.append("\n");
             }
-            area.append("(chosen colors: ");
-            area.append(Lang.joinHomogenous(card.getChosenColors()));
+            area.append("(").append(Localizer.getInstance().getMessage("lblChosenColors")).append(" ");
+            area.append(Lang.joinHomogenous(card.getChosenColors().stream().map(DeckRecognizer::getLocalisedMagicColorName).collect(Collectors.toList())));
             area.append(")");
         }
 
@@ -505,6 +525,14 @@ public class CardDetailUtil {
                 area.append("\n\n");
             }
             area.append("(Class Level:").append(card.getClassLevel()).append(")");
+        }
+
+        // sector
+        if (!card.getSector().isEmpty()) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("Sector: ").append(card.getSector());
         }
 
         // a card has something attached to it

@@ -19,6 +19,9 @@ public class PointOfInterestData {
     public String sprite;
     public String map;
     public float radiusFactor;
+    public float offsetX=0f;
+    public float offsetY=0f;
+
 
 
 
@@ -41,5 +44,21 @@ public class PointOfInterestData {
             if(data.name.equals(name)) return data;
         }
         return null;
+    }
+    public PointOfInterestData()
+    {
+
+    }
+    public PointOfInterestData(PointOfInterestData other)
+    {
+        name=other.name;
+        type=other.type;
+        count=other.count;
+        spriteAtlas=other.spriteAtlas;
+        sprite=other.sprite;
+        map=other.map;
+        radiusFactor=other.radiusFactor;
+        offsetX=other.offsetX;
+        offsetY=other.offsetY;
     }
 }

@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Cinderheart Giant
+OpponentName=The Giants
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Surtland Frostpyre|Surtland Frostpyre|Surtland Frostpyre
+HumanExtras=
+[metadata]
+Title=Cinderheart Giant
+Difficulty=hard
+Description=What fire giants lack in arcane prowess, they make up for with reckless, explosive rage.
+Icon=Dungeon Crawling Red.jpg
+Deck Type=constructed
+Name=KHM Challenge: Cinderheart Giant
+[Main]
+30 Cinderheart Giant|KHM|1
+30 Mountain|KHM|1

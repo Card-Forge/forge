@@ -29,7 +29,7 @@ class QuestEventPanel extends FDisplayObject {
 
 	private static final FSkinFont TITLE_FONT = FSkinFont.get(16);
 	private static final FSkinFont DESC_FONT = FSkinFont.get(12);
-	private static final FSkinColor TITLE_COLOR = FList.FORE_COLOR;
+	private static final FSkinColor TITLE_COLOR = FList.getForeColor();
 	private static final FSkinColor DESC_COLOR = SettingsScreen.DESC_COLOR;
 	private static final float PADDING = Utils.scale(5);
 	private static final FSkinColor GRADIENT_LEFT_COLOR = FSkinColor.get(Colors.CLR_THEME2).alphaColor(200 / 255f);

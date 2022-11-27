@@ -1,0 +1,9 @@
+Name:Gaea's Courser
+ManaCost:4 G
+Types:Creature Centaur Soldier
+PT:4/5
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDraw | IsPresent$ Creature.YouOwn | PresentZone$ Graveyard | PresentCompare$ GE3 | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, if there are three or more creature cards in your graveyard, draw a card.
+SVar:TrigDraw:DB$ Draw
+SVar:HasAttackEffect:TRUE
+DeckHints:Ability$Graveyard|Mill
+Oracle:Whenever Gaea's Courser attacks, if there are three or more creature cards in your graveyard, draw a card.

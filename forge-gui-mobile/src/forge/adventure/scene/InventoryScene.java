@@ -1,15 +1,18 @@
 package forge.adventure.scene;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
+import com.github.tommyettinger.textra.TextraButton;
+import com.github.tommyettinger.textra.TextraLabel;
 import forge.Forge;
 import forge.adventure.data.ItemData;
+import forge.adventure.stage.ConsoleCommandInterpreter;
 import forge.adventure.stage.GameHUD;
+import forge.adventure.stage.MapStage;
 import forge.adventure.util.Config;
 import forge.adventure.util.Controls;
 import forge.adventure.util.Current;
@@ -19,64 +22,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InventoryScene  extends UIScene {
-    TextButton leave;
+    TextraButton leave;
     Button equipButton;
-    Label itemDescription;
-    Dialog confirm;
-    private Table inventory;
-    Array<Button> inventoryButtons=new Array<>();
-    HashMap<String,Button> equipmentSlots=new HashMap<>();
+    TextraButton useButton;
+    TextraLabel itemDescription;
+    private final Table inventory;
+    private final Array<Button> inventoryButtons=new Array<>();
+    private final HashMap<String,Button> equipmentSlots=new HashMap<>();
     HashMap<Button,String> itemLocation=new HashMap<>();
     Button selected;
     Button deleteButton;
     Texture equipOverlay;
     int columns=0;
-    public InventoryScene() {
+    public InventoryScene()
+    {
         super(Forge.isLandscapeMode() ? "ui/inventory.json" : "ui/inventory_portrait.json");
-    }
-
-    public void done() {
-        GameHUD.getInstance().getTouchpad().setVisible(false);
-        Forge.switchToLast();
-    }
-
-    public void delete() {
-
-        ItemData data = ItemData.getItem(itemLocation.get(selected));
-        if(data != null) {
-            Current.player().removeItem(data.name);
-        }
-        updateInventory();
-
-    }
-    public void equip() {
-        if(selected == null) return;
-        ItemData data = ItemData.getItem(itemLocation.get(selected));
-        Current.player().equip(data);
-        updateInventory();
-    }
-
-    @Override
-    public void act(float delta) {
-        stage.act(delta);
-    }
-
-    @Override
-    public void resLoaded() {
-        super.resLoaded();
         equipOverlay = new Texture(Config.instance().getFile(Paths.ITEMS_EQUIP));
         ui.onButtonPress("return", () -> done());
         leave = ui.findActor("return");
-        ui.onButtonPress("delete", () -> confirm.show(stage));
+        ui.onButtonPress("delete", () -> showConfirm());
         ui.onButtonPress("equip", () -> equip());
+        ui.onButtonPress("use", () -> use());
         equipButton = ui.findActor("equip");
+        useButton= ui.findActor("use");
+        useButton.setDisabled(true);
         deleteButton = ui.findActor("delete");
         itemDescription = ui.findActor("item_description");
         itemDescription.setAlignment(Align.topLeft);
-        leave.getLabel().setText(Forge.getLocalizer().getMessage("lblBack"));
 
-        inventoryButtons=new Array<>();
-        equipmentSlots=new HashMap<>();
 
         Array<Actor> children = ui.getChildren();
         for (int i = 0, n = children.size; i < n; i++)
@@ -100,7 +73,7 @@ public class InventoryScene  extends UIScene {
                                 }
                             }
                             String item=Current.player().itemInSlot(slotName);
-                            if(item!=null&&item!="")
+                            if(item!=null&& !item.equals(""))
                             {
                                 Button changeButton=null;
                                 for(Button invButton:inventoryButtons)
@@ -124,7 +97,7 @@ public class InventoryScene  extends UIScene {
                 });
             }
         }
-        inventory = new Table(Controls.GetSkin());
+        inventory = new Table(Controls.getSkin());
         ScrollPane scrollPane = ui.findActor("inventory");
         scrollPane.setScrollingDisabled(true,false);
         scrollPane.setActor(inventory);
@@ -132,24 +105,70 @@ public class InventoryScene  extends UIScene {
         columns-=1;
         if(columns<=0)columns=1;
         scrollPane.setActor(inventory);
-        confirm = new Dialog("\n "+Forge.getLocalizer().getMessage("lblDelete"), Controls.GetSkin())
-        {
-            protected void result(Object object)
-            {
-                 if(object!=null&&object.equals(true))
-                     delete();
-                 confirm.hide();
-            };
-        };
-
-        confirm.button(Forge.getLocalizer().getMessage("lblYes"), true);
-        confirm.button(Forge.getLocalizer().getMessage("lblNo"), false);
-        ui.addActor(confirm);
-        confirm.hide();
 
         itemDescription.setWrap(true);
-        //makes confirm dialog hidden immediately when you open inventory first time..
-        confirm.getColor().a = 0;
+
+
+    }
+
+    private void showConfirm() {
+        Dialog confirm = prepareDialog("",ButtonYes|ButtonNo,()->delete());
+        confirm.text( Controls.newLabel(Forge.getLocalizer().getMessage("lblDelete")));
+        showDialog(confirm);
+    }
+
+    private static InventoryScene object;
+
+    public static InventoryScene instance() {
+        if(object==null)
+            object=new InventoryScene();
+        return object;
+    }
+
+
+    public void done() {
+        GameHUD.getInstance().getTouchpad().setVisible(false);
+        Forge.switchToLast();
+    }
+
+    public void delete() {
+
+        ItemData data = ItemData.getItem(itemLocation.get(selected));
+        if(data != null) {
+            Current.player().removeItem(data.name);
+        }
+        updateInventory();
+
+    }
+    public void equip() {
+        if(selected == null) return;
+        ItemData data = ItemData.getItem(itemLocation.get(selected));
+        if(data==null)return;
+        Current.player().equip(data);
+        updateInventory();
+    }
+
+    @Override
+    public void act(float delta) {
+        stage.act(delta);
+    }
+
+
+    private void triggerUse() {
+        if(selected==null)return;
+
+        ItemData data = ItemData.getItem(itemLocation.get(selected));
+        if(data==null)return;
+        Current.player().addMana(-data.manaNeeded);
+        done();
+        ConsoleCommandInterpreter.getInstance().command(data.commandOnUse);
+    }
+    private void use() {
+        ItemData data = ItemData.getItem(itemLocation.get(selected));
+        if(data==null)return;
+        Dialog useDialog = prepareDialog("",ButtonYes|ButtonNo,()->triggerUse());
+        useDialog.getContentTable().add(Controls.newTextraLabel("Use "+data.name+"?\n"+data.getDescription()));
+        showDialog(useDialog);
     }
 
     private void setSelected(Button actor) {
@@ -159,6 +178,7 @@ public class InventoryScene  extends UIScene {
             itemDescription.setText("");
             deleteButton.setDisabled(true);
             equipButton.setDisabled(true);
+            useButton.setDisabled(true);
             for(Button button:inventoryButtons)
             {
                 button.setChecked(false);
@@ -166,17 +186,30 @@ public class InventoryScene  extends UIScene {
             return;
         }
         ItemData data = ItemData.getItem(itemLocation.get(actor));
+
+        if(data==null) return;
         deleteButton.setDisabled(data.questItem);
-        if(data.equipmentSlot==null||data.equipmentSlot=="")
+
+        boolean isInPoi = MapStage.getInstance().isInMap();
+        useButton.setDisabled(!(isInPoi&&data.usableInPoi||!isInPoi&&data.usableOnWorldMap));
+        if(data.manaNeeded==0)
+            useButton.setText("Use");
+        else
+            useButton.setText("Use "+data.manaNeeded+"[+Mana]");
+        useButton.layout();
+        if(Current.player().getMana()<data.manaNeeded)
+            useButton.setDisabled(true);
+
+        if(data.equipmentSlot==null|| data.equipmentSlot.equals(""))
         {
             equipButton.setDisabled(true);
         }
         else
         {
             equipButton.setDisabled(false);
-            if(equipButton instanceof TextButton)
+            if(equipButton instanceof TextraButton)
             {
-                TextButton button=(TextButton) equipButton;
+                TextraButton button=(TextraButton) equipButton;
                 String item=Current.player().itemInSlot(data.equipmentSlot);
                 if(item!=null&&item.equals(data.name))
                 {
@@ -186,6 +219,7 @@ public class InventoryScene  extends UIScene {
                 {
                     button.setText("Equip");
                 }
+                button.layout();
             }
         }
 
@@ -201,6 +235,7 @@ public class InventoryScene  extends UIScene {
     }
 
     private void updateInventory() {
+        clearSelectable();
         inventoryButtons.clear();
         inventory.clear();
         for(int i=0;i<Current.player().getItems().size;i++) {
@@ -209,6 +244,13 @@ public class InventoryScene  extends UIScene {
                 inventory.row();
             Button newActor=createInventorySlot();
             inventory.add(newActor).top().left().space(1);
+            addToSelectable(new Selectable(newActor){
+                @Override
+                public void onSelect(UIScene scene) {
+                    setSelected(newActor);
+                    super.onSelect(scene);
+                }
+            });
             inventoryButtons.add(newActor);
             ItemData item=ItemData.getItem(Current.player().getItems().get(i));
             if(item==null)
@@ -268,15 +310,8 @@ public class InventoryScene  extends UIScene {
 
     public Button createInventorySlot() {
 
-        ImageButton button=new ImageButton(Controls.GetSkin(),"item_frame");
+        ImageButton button=new ImageButton(Controls.getSkin(),"item_frame");
         return  button;
     }
 
-    @Override
-    public boolean keyPressed(int keycode) {
-        if (keycode == Input.Keys.ESCAPE || keycode == Input.Keys.BACK) {
-            done();
-        }
-        return true;
-    }
 }

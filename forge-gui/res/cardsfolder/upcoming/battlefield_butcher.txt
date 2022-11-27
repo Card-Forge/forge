@@ -1,0 +1,8 @@
+Name:Battlefield Butcher
+ManaCost:2 B
+Types:Creature Human Soldier
+PT:1/4
+A:AB$ LoseLife | Cost$ 5 T | ReduceCost$ X | Defined$ Opponent | LifeAmount$ 2 | SpellDescription$ Each opponent loses 2 life. This ability costs {1} less to activate for each creature card in your graveyard.
+SVar:X:Count$TypeInYourYard.Creature
+DeckHints:Ability$Graveyard|Mill|Dredge
+Oracle:{5}, {T}: Each opponent loses 2 life. This ability costs {1} less to activate for each creature card in your graveyard.

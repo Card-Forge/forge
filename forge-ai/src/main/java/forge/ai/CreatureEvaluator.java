@@ -10,8 +10,10 @@ import forge.game.card.CounterEnumType;
 import forge.game.cost.CostPayEnergy;
 import forge.game.keyword.Keyword;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbility;
 import forge.game.staticability.StaticAbilityAssignCombatDamageAsUnblocked;
 import forge.game.staticability.StaticAbilityMustAttack;
+import forge.game.zone.ZoneType;
 
 import java.util.List;
 
@@ -60,9 +62,17 @@ public class CreatureEvaluator implements Function<Card, Integer> {
         if (c.hasKeyword(Keyword.HORSEMANSHIP)) {
             value += addValue(power * 10, "horses");
         }
-        if (c.hasKeyword("Unblockable")) {
-            value += addValue(power * 10, "unblockable");
-        } else {
+        boolean unblockable = false;
+        for (final Card ca : c.getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (stAb.applyAbility("CantBlockBy", c, null)) {
+                    value += addValue(power * 10, "unblockable");
+                    unblockable = true;
+                    break;
+                }
+            }
+        }
+        if (!unblockable) {
             if (StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(c)
                     || StaticAbilityAssignCombatDamageAsUnblocked.assignCombatDamageAsUnblocked(c, false)) {
                 value += addValue(power * 6, "thorns");

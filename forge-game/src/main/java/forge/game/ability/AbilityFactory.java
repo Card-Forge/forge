@@ -302,8 +302,7 @@ public final class AbilityFactory {
         }
 
         if (spellAbility instanceof SpellApiBased && hostCard.isPermanent()) {
-            String desc = mapParams.containsKey("SpellDescription") ? mapParams.get("SpellDescription")
-                    : spellAbility.getHostCard().getName();
+            String desc = mapParams.getOrDefault("SpellDescription", spellAbility.getHostCard().getName());
             spellAbility.setDescription(desc);
         } else if (mapParams.containsKey("SpellDescription")) {
             spellAbility.rebuiltDescription();
@@ -334,7 +333,7 @@ public final class AbilityFactory {
         String tgtWhat = mapParams.get("ValidTgts");
         final String[] commonStuff = new String[] {
                 //list of common one word non-core type ValidTgts that should be lowercase in the target prompt
-                "Player", "Opponent", "Card"
+                "Player", "Opponent", "Card", "Spell", "Permanent"
         };
         if (Arrays.asList(commonStuff).contains(tgtWhat) || CardType.CoreType.isValidEnum(tgtWhat)) {
             tgtWhat = tgtWhat.toLowerCase();
@@ -474,11 +473,10 @@ public final class AbilityFactory {
             final TargetRestrictions tgt = sa.getTargetRestrictions();
 
             // Don't set the zone if it targets a player
-            if ((tgt != null) && !tgt.canTgtPlayer()) {
-                sa.getTargetRestrictions().setZone(origin);
+            if (tgt != null && !tgt.canTgtPlayer()) {
+                tgt.setZone(origin);
             }
         }
-
     }
 
     public static final SpellAbility buildFusedAbility(final Card card) {

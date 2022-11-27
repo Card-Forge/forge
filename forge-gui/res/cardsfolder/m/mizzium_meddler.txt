@@ -4,5 +4,5 @@ Types:Creature Vedalken Wizard
 PT:1/4
 K:Flash
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may change a target of target spell or ability to CARDNAME.
-SVar:TrigChange:DB$ ChangeTargets | TargetType$ Spell,Activated,Triggered | ValidTgts$ Card | DefinedMagnet$ Self | ChangeSingleTarget$ True
+SVar:TrigChange:DB$ ChangeTargets | TargetType$ Spell,Activated,Triggered | ValidTgts$ Card,Emblem | DefinedMagnet$ Self | ChangeSingleTarget$ True
 Oracle:Flash (You may cast this spell any time you could cast an instant.)\nWhen Mizzium Meddler enters the battlefield, you may change a target of target spell or ability to Mizzium Meddler.

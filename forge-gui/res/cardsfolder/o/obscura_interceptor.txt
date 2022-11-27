@@ -7,6 +7,6 @@ K:Lifelink
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerDescription$ When CARDNAME enters the battlefield, it connives. When it connives this way, return up to one target spell to its owner's hand. (To have a creature connive, draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)
 SVar:TrigConnive:DB$ Connive | SubAbility$ DBImmediateTrigger
 SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigReturn | TriggerDescription$ When it connives this way, return up to one target spell to its owner's hand.
-SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Card | TgtPrompt$ Select target spell | TargetMax$ 1 | TargetMin$ 0 | TgtZone$ Stack | Origin$ Stack | Fizzle$ True | Destination$ Hand
+SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Card | TgtPrompt$ Select target spell | TargetMax$ 1 | TargetMin$ 0 | TgtZone$ Stack | TargetType$ Spell | Origin$ Stack | Fizzle$ True | Destination$ Hand
 DeckHas:Ability$LifeGain|Discard|Counters
 Oracle:Flash\nLifelink\nWhen Obscura Interceptor enters the battlefield, it connives. When it connives this way, return up to one target spell to its owner's hand. (To have a creature connive, draw a card, then discard a card. If you discarded a nonland card, put a +1/+1 counter on that creature.)

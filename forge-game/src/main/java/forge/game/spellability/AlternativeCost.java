@@ -13,6 +13,7 @@ public enum AlternativeCost {
     Flashback,
     Foretold,
     Madness,
+    MTMtE, // More Than Meets the Eye (Transformers Universes Beyond)
     Mutate,
     Offering,
     Outlast, // ActivatedAbility

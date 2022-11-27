@@ -14,4 +14,6 @@ public class GeneratedDeckData {
     public RewardData[] mainDeck;
     public RewardData[] sideBoard;
 
+    public String[] jumpstartPacks;
+
 }

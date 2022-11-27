@@ -46,14 +46,14 @@ public class GuiDownloadPicturesHQ extends GuiDownloadService {
         existingSets = retrieveManifestDirectory();
 
         for (final PaperCard c : FModel.getMagicDb().getCommonCards().getAllCards()) {
-            addDLObject(c, false);
+            addDLObject(c, "");
             if (c.hasBackFace()) {
-                addDLObject(c, true);
+                addDLObject(c, "back");
             }
         }
 
         for (final PaperCard c : FModel.getMagicDb().getVariantCards().getAllCards()) {
-            addDLObject(c, false);
+            addDLObject(c, "");
         }
 
         // Add missing tokens to the list of things to download.
@@ -62,8 +62,8 @@ public class GuiDownloadPicturesHQ extends GuiDownloadService {
         return downloads;
     }
 
-    private void addDLObject(final PaperCard c, final boolean backFace) {
-        final String imageKey = ImageUtil.getImageKey(c, backFace, false);
+    private void addDLObject(final PaperCard c, final String face) {
+        final String imageKey = ImageUtil.getImageKey(c, face, false);
         final String destPath = ForgeConstants.CACHE_CARD_PICS_DIR + imageKey  + ".jpg";
 
         if (existingImages.contains(imageKey + ".jpg")) {
@@ -98,7 +98,7 @@ public class GuiDownloadPicturesHQ extends GuiDownloadService {
         cardname = cardname.replace("'", "");
         String scryfallurl = ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD + "named?fuzzy=" + cardname;
         if(!setCode.equals("???")) scryfallurl += "&set=" + setCode.toLowerCase();
-        if(backFace) scryfallurl += "&face=back";
+        if(face.equals("back")) scryfallurl += "&face=back";
         scryfallurl += "&format=image";
 
         downloads.put(destPath, scryfallurl);

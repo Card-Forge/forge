@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -21,9 +22,19 @@ import forge.util.Utils;
 public class VLog extends FDropDown {
     private static final float PADDING = Utils.scale(5);
     private static final FSkinFont FONT = FSkinFont.get(11);
-    private static final FSkinColor ALT_ROW_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
-    private static final FSkinColor ROW_COLOR = ALT_ROW_COLOR.darker();
-    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static FSkinColor getAltRowColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_ZEBRA);
+        return FSkinColor.get(Colors.CLR_ZEBRA);
+    }
+    private static FSkinColor getRowColor() {
+        return getAltRowColor().darker();
+    }
+    private static FSkinColor getForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
 
     public VLog() {
     }
@@ -37,7 +48,7 @@ public class VLog extends FDropDown {
     protected void drawBackground(Graphics g) {
         float w = getWidth();
         float h = getHeight();
-        g.fillRect(ROW_COLOR, 0, 0, w, h); //can fill background with main row color since drop down will never be taller than number of rows
+        g.fillRect(getRowColor(), 0, 0, w, h); //can fill background with main row color since drop down will never be taller than number of rows
     }
 
     @Override
@@ -104,11 +115,11 @@ public class VLog extends FDropDown {
             float h = getHeight();
 
             if (isAltRow) {
-                g.fillRect(ALT_ROW_COLOR, 0, 0, w, h);
+                g.fillRect(getAltRowColor(), 0, 0, w, h);
             }
 
             //use full height without padding so text not scaled down
-            renderer.drawText(g, text, FONT, FORE_COLOR, PADDING, PADDING, w - 2 * PADDING, h, 0, h, true, Align.left, false);
+            renderer.drawText(g, text, FONT, getForeColor(), PADDING, PADDING, w - 2 * PADDING, h, 0, h, true, Align.left, false);
         }
     }
 }

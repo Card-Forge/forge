@@ -24,7 +24,7 @@ public abstract class DamagePreventEffectBase extends SpellAbilityEffect {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Player player = hostCard.getController();
-        final String name = hostCard.getName() + "'s Effect";
+        final String name = hostCard + "'s Effect";
         final String image = hostCard.getImageKey();
         StringBuilder sb = new StringBuilder("Event$ DamageDone | ActiveZones$ Command | ValidTarget$ ");
         sb.append((o instanceof Card ? "Card.IsRemembered" : "Player.IsRemembered"));

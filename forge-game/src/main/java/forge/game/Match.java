@@ -334,7 +334,7 @@ public class Match {
         }
 
         final Localizer localizer = Localizer.getInstance();
-        if (!rAICards.isEmpty() && !rules.getGameType().isCardPoolLimited()) {
+        if (!rAICards.isEmpty() && !rules.getGameType().isCardPoolLimited() && rules.warnAboutAICards()) {
             game.getAction().revealUnplayableByAI(localizer.getMessage("lblAICantPlayCards"), rAICards);
         }
 

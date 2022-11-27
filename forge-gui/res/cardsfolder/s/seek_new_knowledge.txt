@@ -1,0 +1,6 @@
+Name:Seek New Knowledge
+ManaCost:1 U
+Types:Instant
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 2 | ChangeType$ Card.nonLand | SubAbility$ DBBottomCard | StackDescription$ SpellDescription | SpellDescription$ Seek two nonland cards, then put a card from your hand on the bottom of your library.
+SVar:DBBottomCard:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | Mandatory$ True
+Oracle:Seek two nonland cards, then put a card from your hand on the bottom of your library.

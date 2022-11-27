@@ -92,7 +92,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
         } else if ("ReplaceToken".equals(sa.getParam("Type"))) {
             Card chosen = null;
             if (sa.hasParam("ValidChoices")) {
-                CardCollectionView choices = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("ValidChoices").split(","), p, card, sa);
+                CardCollectionView choices = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("ValidChoices"), p, card, sa);
                 if (choices.isEmpty()) {
                     originalParams.put(AbilityKey.ReplacementResult, ReplacementResult.NotReplaced);
                     return;
@@ -144,7 +144,7 @@ public class ReplaceTokenEffect extends SpellAbilityEffect {
             }
         } else if ("ReplaceController".equals(sa.getParam("Type"))) {
             long timestamp = game.getNextTimestamp();
-            Player newController = sa.getActivatingPlayer();
+            Player newController = p;
             if (sa.hasParam("NewController")) {
                 newController = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("NewController"), sa).get(0);
             }

@@ -1,0 +1,5 @@
+Name:Cut Down
+ManaCost:B
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.totalPT_LE5 | TgtPrompt$ Select target creature with total power and toughness 5 or less | SpellDescription$ Destroy target creature with total power and toughness 5 or less.
+Oracle:Destroy target creature with total power and toughness 5 or less.

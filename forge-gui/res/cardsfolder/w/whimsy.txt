@@ -9,8 +9,7 @@ SVar:Untap:DB$ ChooseCard | Choices$ Artifact.tapped,Creature.tapped,Land.tapped
 SVar:DBUntap4:DB$ Untap | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:Tap:DB$ ChooseCard | Choices$ Artifact.untapped,Creature.untapped,Land.untapped | AtRandom$ True | SubAbility$ DBTap5 | SpellDescription$ Tap an artifact, creature or land chosen at random.
 SVar:DBTap5:DB$ Tap | Defined$ ChosenCard | SubAbility$ DBCleanup
-SVar:Damage:DB$ ChooseEntity | Random$ True | CardChoices$ Creature | PlayerChoices$ Player | RememberChosen$ True | SubAbility$ DBDamage6 | SpellDescription$ CARDNAME deals 4 damage to a creature or player chosen at random.
-SVar:DBDamage6:DB$ DealDamage | Defined$ Remembered | NumDmg$ 4 | SubAbility$ DBCleanup
+SVar:Damage:DB$ DealDamage | NumDmg$ 4 | Random$ True | CardChoices$ Creature | PlayerChoices$ Player | SubAbility$ DBCleanup | SpellDescription$ CARDNAME deals 4 damage to a creature or player chosen at random.
 SVar:Draw3:DB$ ChoosePlayer | Choices$ Player | Random$ True | SubAbility$ DBDraw7 | SpellDescription$ A player chosen at random draws three cards.
 SVar:DBDraw7:DB$ Draw | NumCards$ 3 | Defined$ ChosenPlayer | SubAbility$ DBCleanup
 SVar:DestroyGain:DB$ ChooseCard | Choices$ Artifact | AtRandom$ True | SubAbility$ DBDestroy8 | SpellDescription$ Destroy an artifact chosen at random. It can't be regenerated. That artifact's controller gains life equal to its converted mana cost.
@@ -21,8 +20,7 @@ SVar:DestroyAE:DB$ ChooseCard | Choices$ Artifact,Enchantment | AtRandom$ True |
 SVar:DBDestroy9:DB$ Destroy | Defined$ ChosenCard | SubAbility$ DBCleanup
 SVar:Gain3:DB$ ChoosePlayer | Choices$ Player | Random$ True | SubAbility$ DBGainLife10 | SpellDescription$ A player chosen at random gains 3 life.
 SVar:DBGainLife10:DB$ GainLife | Defined$ ChosenPlayer | LifeAmount$ 3 | SubAbility$ DBCleanup
-SVar:Anoint:DB$ ChooseEntity | Random$ True | CardChoices$ Creature | PlayerChoices$ Player | RememberChosen$ True | SubAbility$ DBPreventDamage11 | SpellDescription$ Prevent the next 3 damage that would be dealt to a creature or player chosen at random this turn.
-SVar:DBPreventDamage11:DB$ PreventDamage | Defined$ Remembered | Amount$ 3 | SubAbility$ DBCleanup
+SVar:Anoint:DB$ PreventDamage | Random$ True | CardChoices$ Creature | PlayerChoices$ Player | Amount$ 3 | SubAbility$ DBCleanup | SpellDescription$ Prevent the next 3 damage that would be dealt to a creature or player chosen at random this turn.
 SVar:DestroyCL:DB$ ChooseCard | Choices$ Creature,Land | AtRandom$ True | SubAbility$ DBDestroy12 | SpellDescription$ Destroy a creature or land chosen at random. It can't be regenerated.
 SVar:DBDestroy12:DB$ Destroy | Defined$ ChosenCard | NoRegen$ True | SubAbility$ DBCleanup
 SVar:Mill2:DB$ ChoosePlayer | Choices$ Player | Random$ True | SubAbility$ DBMill13 | SpellDescription$ A player chosen at random mills two cards.

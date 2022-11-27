@@ -1,0 +1,9 @@
+Name:Loran, Disciple of History
+ManaCost:3 W
+Types:Legendary Creature Human Artificer
+PT:3/3
+T:Mode$ ChangesZone | ValidCard$ Card.Self,Creature.Other+Legendary+YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ Whenever CARDNAME or another legendary creature enters the battlefield under your control, return target artifact card from your graveyard to your hand.
+SVar:TrigChange:DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Select target artifact card in your graveyard | ValidTgts$ Artifact.YouCtrl
+DeckNeeds:Type$Artifact
+DeckHas:Ability$Graveyard
+Oracle:Whenever Loran, Disciple of History or another legendary creature enters the battlefield under your control, return target artifact card from your graveyard to your hand.

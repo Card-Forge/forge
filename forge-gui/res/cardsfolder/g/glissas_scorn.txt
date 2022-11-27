@@ -1,6 +1,7 @@
 Name:Glissa's Scorn
 ManaCost:1 G
 Types:Instant
-A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SubAbility$ DBDrain | SpellDescription$ Destroy target artifact. Its controller loses 1 life.
-SVar:DBDrain:DB$ LoseLife | Defined$ TargetedController | LifeAmount$ 1
+A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | AlwaysRemember$ True | RememberLKI$ True | SubAbility$ DBDrain | SpellDescription$ Destroy target artifact. Its controller loses 1 life.
+SVar:DBDrain:DB$ LoseLife | Defined$ RememberedController | LifeAmount$ 1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Destroy target artifact. Its controller loses 1 life.

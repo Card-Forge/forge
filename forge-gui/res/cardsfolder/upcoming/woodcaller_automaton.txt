@@ -1,0 +1,13 @@
+Name:Woodcaller Automaton
+ManaCost:10
+Types:Artifact Creature Construct
+PT:8/8
+K:Prototype:2 G G:3:3
+T:Mode$ ChangesZone | ValidCard$ Card.Self+wasCastByYou | Destination$ Battlefield | Execute$ TrigUntap | TriggerDescription$ When CARDNAME enters the battlefield, if you cast it, untap target land you control. It becomes a Treefolk creature with haste and base power and toughness equal to CARDNAME's power and toughness. It's still a land.
+SVar:TrigUntap:DB$ Untap | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Power$ X | Toughness$ Y | Defined$ Targeted | Types$ Creature,Treefolk | Keywords$ Haste | Duration$ Permanent
+SVar:X:Count$CardPower
+SVar:Y:Count$CardToughness
+DeckHas:Type$Treefolk
+DeckHints:Color$Green
+Oracle:Prototype {2}{G}{G} — 3/3 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nWhen Woodcaller Automaton enters the battlefield, if you cast it, untap target land you control. It becomes a Treefolk creature with haste and base power and toughness equal to Woodcaller Automaton's power and toughness. It's still a land.

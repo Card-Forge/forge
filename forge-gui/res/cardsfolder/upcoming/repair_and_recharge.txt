@@ -1,0 +1,8 @@
+Name:Repair and Recharge
+ManaCost:3 W W
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | TgtPrompt$ Choose target artifact,enchantment or planeswalker card in your graveyard | ValidTgts$ Artifact.YouOwn,Enchantment.YouOwn,Planeswalker.YouOwn | SubAbility$ DBToken | SpellDescription$ Return target artifact, enchantment, or planeswalker card from your graveyard to the battlefield. Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:DBToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
+DeckHas:Ability$Graveyard|Token & Type$Artifact
+DeckHints:Ability$Mill|Discard & Type$Enchantment|Artifact|Planeswalker
+Oracle:Return target artifact, enchantment, or planeswalker card from your graveyard to the battlefield. Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")

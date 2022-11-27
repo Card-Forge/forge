@@ -1,0 +1,9 @@
+Name:Space Marine Devastator
+ManaCost:3 W
+Types:Creature Astartes Warrior
+PT:3/3
+K:Squad:2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Grav-cannon — When CARDNAME enters the battlefield, destroy up to one target artifact or enchantment.
+SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select up to one target artifact or enchantment
+DeckHas:Ability$Token
+Oracle:Squad {2} (As an additional cost to cast this spell, you may pay {2} any number of times. When this creature enters the battlefield, create that many tokens that are copies of it.)\nGrav-cannon — When Space Marine Devastator enters the battlefield, destroy up to one target artifact or enchantment.

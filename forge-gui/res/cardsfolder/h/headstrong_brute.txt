@@ -3,7 +3,6 @@ ManaCost:2 R
 Types:Creature Orc Pirate
 PT:3/3
 K:CARDNAME can't block.
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME has menace as long as you control another Pirate.
-SVar:X:Count$Valid Pirate.Other+YouCtrl
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Menace | IsPresent$ Pirate.Other+YouCtrl | Description$ CARDNAME has menace as long as you control another Pirate.
 SVar:BuffedBy:Pirate
 Oracle:Headstrong Brute can't block.\nHeadstrong Brute has menace as long as you control another Pirate.

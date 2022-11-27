@@ -77,14 +77,50 @@ public final class FImageUtil {
         }
 
         boolean altState = key.endsWith(ImageKeys.BACKFACE_POSTFIX);
+        String specColor = "";
+        if (key.endsWith(ImageKeys.SPECFACE_W)) {
+            specColor = "white";
+        } else if (key.endsWith(ImageKeys.SPECFACE_U)) {
+            specColor = "blue";
+        } else if (key.endsWith(ImageKeys.SPECFACE_B)) {
+            specColor = "black";
+        } else if (key.endsWith(ImageKeys.SPECFACE_R)) {
+            specColor = "red";
+        } else if (key.endsWith(ImageKeys.SPECFACE_G)) {
+            specColor = "green";
+        }
         String imageKey = key;
         if (prefix.equals(ImageKeys.CARD_PREFIX)) {
             PaperCard card = ImageUtil.getPaperCardFromImageKey(key);
-            if (card != null)
-                imageKey = altState ? card.getCardAltImageKey() : card.getCardImageKey();
+            if (altState) {
+                imageKey = card.getCardAltImageKey();
+            } else if (!specColor.equals("")) {
+                switch (specColor) {
+                    case "white":
+                        imageKey = card.getCardWSpecImageKey();
+                        break;
+                    case "blue":
+                        imageKey = card.getCardUSpecImageKey();
+                        break;
+                    case "black":
+                        imageKey = card.getCardBSpecImageKey();
+                        break;
+                    case "red":
+                        imageKey = card.getCardRSpecImageKey();
+                        break;
+                    case "green":
+                        imageKey = card.getCardGSpecImageKey();
+                        break;
+                }
+            } else {
+                imageKey = card.getCardImageKey();
+            }
         }
         if(altState) {
             imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.BACKFACE_POSTFIX.length());
+            imageKey += "full.jpg";
+        } else if (!specColor.equals("")) {
+            imageKey = imageKey.substring(0, imageKey.length() - ImageKeys.SPECFACE_W.length());
             imageKey += "full.jpg";
         }
 

@@ -1,0 +1,10 @@
+Name:Vexilus Praetor
+ManaCost:3 W
+Types:Creature Custodes Warrior
+PT:3/4
+K:Flash
+K:Vigilance
+S:Mode$ Continuous | Affected$ Card.IsCommander+YouCtrl | AddKeyword$ Protection from everything | Description$ Aegis of the Emperor — Commanders you control have protection from everything.
+SVar:PlayMain1:TRUE
+AI:RemoveDeck:Random
+Oracle:Flash\nVigilance\nAegis of the Emperor — Commanders you control have protection from everything.

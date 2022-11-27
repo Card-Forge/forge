@@ -1,14 +1,18 @@
 package forge.screens.match.views;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import forge.game.card.CardView;
 import forge.game.card.CardView.CardStateView;
 import forge.game.player.PlayerView;
 import forge.gui.FThreads;
+import forge.screens.match.MatchScreen;
 import forge.screens.match.views.VCardDisplayArea.CardAreaPanel;
+import forge.toolbox.FCardPanel;
 import forge.toolbox.FContainer;
+import forge.toolbox.FDisplayObject;
 
 public class VField extends FContainer {
     private final PlayerView player;
@@ -190,6 +194,9 @@ public class VField extends FContainer {
     }
 
     public class FieldRow extends VCardDisplayArea {
+        private int selected = -1;
+        private FDisplayObject selectedChild;
+
         private FieldRow() {
             setVisible(true); //make visible by default unlike other display areas
         }
@@ -201,6 +208,58 @@ public class VField extends FContainer {
 
         @Override
         public void update() { //no logic needed
+        }
+
+        @Override
+        public void setNextSelected(int val) {
+            this.selected++;
+            if (this.selected >= this.getChildCount())
+                this.selected = this.getChildCount()-1;
+            if (this.selectedChild != null)
+                this.selectedChild.setHovered(false);
+            this.selectedChild = getChildAt(this.selected);
+            this.selectedChild.setHovered(true);
+            MatchScreen.setPotentialListener(Arrays.asList(this.selectedChild));
+        }
+        public void selectCurrent() {
+            if (this.selectedChild != null) {
+                this.selectedChild.setHovered(true);
+                MatchScreen.setPotentialListener(Arrays.asList(this.selectedChild));
+            } else {
+                this.setNextSelected(1);
+            }
+        }
+        public void unselectCurrent() {
+            if (this.selectedChild != null) {
+                this.selectedChild.setHovered(false);
+                MatchScreen.nullPotentialListener();
+            }
+        }
+
+        @Override
+        public void setPreviousSelected(int val) {
+            if (this.getChildCount() < 1)
+                return;
+            this.selected--;
+            if (this.selected < 0)
+                this.selected = 0;
+            if (this.selectedChild != null)
+                this.selectedChild.setHovered(false);
+            this.selectedChild = getChildAt(this.selected);
+            this.selectedChild.setHovered(true);
+            MatchScreen.setPotentialListener(Arrays.asList(this.selectedChild));
+        }
+
+        @Override
+        public void showZoom() {
+            if (this.selectedChild instanceof FCardPanel)
+                VCardDisplayArea.CardAreaPanel.get(((FCardPanel) this.selectedChild).getCard()).showZoom();
+        }
+
+        @Override
+        public void tapChild() {
+            if (this.selectedChild instanceof FCardPanel)
+                VCardDisplayArea.CardAreaPanel.get(((FCardPanel) this.selectedChild).getCard()).selectCard(false);
         }
     }
 }

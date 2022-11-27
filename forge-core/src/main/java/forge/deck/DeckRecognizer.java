@@ -1025,7 +1025,7 @@ public class DeckRecognizer {
         }
     }
 
-    private static String getLocalisedMagicColorName(String colorName){
+    public static String getLocalisedMagicColorName(String colorName){
         Localizer localizer = Localizer.getInstance();
         switch(colorName.toLowerCase()){
             case MagicColor.Constant.WHITE:
@@ -1051,6 +1051,23 @@ public class DeckRecognizer {
             default:
                 return "";
         }
+    }
+
+    /**
+     * Get the magic color by the localised/translated name.
+     * @param localisedName String of localised color name.
+     * @return The string of the magic color.
+     */
+    public static String getColorNameByLocalisedName(String localisedName) {
+        Localizer localizer = Localizer.getInstance();
+
+        if(localisedName.equals(localizer.getMessage("lblWhite"))) return MagicColor.Constant.WHITE;
+        if(localisedName.equals(localizer.getMessage("lblBlue"))) return MagicColor.Constant.BLUE;
+        if(localisedName.equals(localizer.getMessage("lblBlack"))) return MagicColor.Constant.BLACK;
+        if(localisedName.equals(localizer.getMessage("lblRed"))) return MagicColor.Constant.RED;
+        if(localisedName.equals(localizer.getMessage("lblGreen"))) return MagicColor.Constant.GREEN;
+
+        return "";
     }
 
 

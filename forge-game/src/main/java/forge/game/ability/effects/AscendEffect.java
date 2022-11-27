@@ -34,6 +34,9 @@ public class AscendEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         for (Player p : getTargetPlayers(sa)) {
+            if (!p.isInGame()) {
+                continue;
+            }
             // Player need 10+ permanents on the battlefield
             if (p.getZone(ZoneType.Battlefield).size() >= 10) {
                 p.setBlessing(true);

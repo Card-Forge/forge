@@ -1,0 +1,11 @@
+Name:Termagant Swarm
+ManaCost:X G
+Types:Creature Tyranid
+PT:0/0
+K:Ravenous
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ Death Frenzy — When CARDNAME dies, create a number of 1/1 green Tyranid creature tokens equal to CARDNAME's power.
+SVar:TrigToken:DB$ Token | TokenScript$ g_1_1_tyranid | TokenAmount$ Y
+SVar:X:Count$xPaid
+SVar:Y:TriggeredCard$CardPower
+DeckHas:Ability$Counters|Token
+Oracle:Ravenous (This creature enters the battlefield with X +1/+1 counters on it. If X is 5 or more, draw a card when it enters.)\nDeath Frenzy — When Termagant Swarm dies, create a number of 1/1 green Tyranid creature tokens equal to Termagant Swarm's power.

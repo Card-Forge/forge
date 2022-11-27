@@ -1,0 +1,14 @@
+Name:Favored Enemy
+ManaCost:G
+Types:Enchantment
+K:ETBReplacement:Other:ChooseOpp
+SVar:ChooseOpp:DB$ ChoosePlayer | Choices$ Opponent | ChoiceTitle$ Choose an opponent | AILogic$ Curse | SubAbility$ DBChooseType | SpellDescription$ As CARDNAME enters the battlefield, note the most prevalent creature type in an opponent's library.
+SVar:DBChooseType:DB$ ChooseType | Type$ Creature | MostPrevalentInDefinedZone$ ChosenPlayer_Library | Note$ True | SubAbility$ DBCleanupChosen
+SVar:DBCleanupChosen:DB$ Cleanup | ClearChosenPlayer$ True
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFight | TriggerDescription$ When CARDNAME enters the battlefield, target creature you control fights up to one target creature you don't control.
+SVar:TrigFight:DB$ Pump | AILogic$ Fight | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBFight
+SVar:DBFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature.YouDontCtrl | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature you don't control
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.OppCtrl+NotedType | Execute$ TrigPutCounter | TriggerDescription$ Whenever a creature an opponent controls of the noted type dies, put a +1/+1 counter on target creature you control.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | CounterType$ P1P1
+DeckHas:Ability$Counters
+Oracle:As Favored Enemy enters the battlefield, note the most prevalent creature type in an opponent's library.\nWhen Favored Enemy enters the battlefield, target creature you control fights up to one target creature you don't control.\nWhenever a creature an opponent controls of the noted type dies, put a +1/+1 counter on target creature you control.

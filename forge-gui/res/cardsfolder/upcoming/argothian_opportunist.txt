@@ -1,0 +1,8 @@
+Name:Argothian Opportunist
+ManaCost:2 G
+Types:Creature Human Scout
+PT:3/2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:TrigToken:DB$ Token | TokenAmount$ 1 | TokenTapped$ True | TokenScript$ c_a_powerstone
+DeckHas:Ability$Token & Type$Artifact
+Oracle:When Argothian Opportunist enters the battlefield, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")

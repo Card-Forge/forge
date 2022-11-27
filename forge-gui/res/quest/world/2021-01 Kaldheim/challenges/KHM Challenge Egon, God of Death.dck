@@ -1,0 +1,20 @@
+[quest]
+id=KHM Challenge: Egon, God of Death
+OpponentName=Egon
+AILife=20
+Repeat=true
+Wins=0
+Card Reward=chosen card sets:KHM
+Credit Reward=120
+AIExtras=Snowfield Sinkhole
+HumanExtras=
+[metadata]
+Title=Egon, God of Death
+Difficulty=easy
+Description=Egon ages backward, his wisdom soured by youthful spite.
+Icon=Dungeon Crawling Black.jpg
+Deck Type=constructed
+Name=KHM Challenge: Egon, God of Death
+[Main]
+30 Egon, God of Death|KHM|2
+30 Swamp|KHM|1

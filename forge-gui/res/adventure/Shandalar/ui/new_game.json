@@ -21,78 +21,72 @@
     {
       "type": "Label",
       "name" : "titleL",
-      "text": "Create a Character",
+      "text": "{SIZE=150%}[BLACK]tr(lblCreateACharacter)",
       "width": 128,
-      "height": 32,
-      "fontSize": 1.5,   
-      "fontColor": "0x000000FF",
-      "x": 104,
+      "height": 16,
+      "scale": 2,
+      "x": 76,
       "y": 16
-    },
-    {
-      "type": "Label",
-      "name" : "avatarL",
-      "text": "Avatar:",
-      "width": 128,
-      "height": 32,
-      "font" : "black",
-      "x": 75,
-      "y": 58
-    },
+    } ,
     {
       "type": "Label",
       "name" : "nameL",
-      "text": "Name:",
+      "text": "[BLACK]tr(lblName):",
       "width": 128,
-      "height": 32,
-      "font" : "black",
+      "height": 16,
       "x": 75,
-      "y": 90
+      "y": 96
     },
     {
       "type": "Label",
       "name" : "raceL",
-      "text": "Race:",
+      "text": "[BLACK]tr(lblRace):",
       "width": 128,
-      "height": 32,
-      "font" : "black",
+      "height": 16,
       "x": 75,
-      "y": 124
+      "yOffset": 8
     },
     {
       "type": "Label",
       "name" : "genderL",
-      "text": "Gender:",
+      "text": "[BLACK]tr(lblGender):",
       "width": 128,
-      "height": 32,
-      "font" : "black",
+      "height": 16,
       "x": 75,
-      "y": 154
+      "yOffset": 8
     },
     {
       "type": "Label",
       "name" : "difficultyL",
-      "text": "Difficulty:",
+      "text": "[BLACK]tr(lblDifficulty):",
       "width": 128,
-      "height": 32,
-      "font" : "black",
+      "height": 16,
       "x": 75,
-      "y": 186
+      "yOffset": 8
     },
     {
       "type": "Label",
-      "name" : "deckL",
-      "text": "Deck:",
+      "name" : "colorIdL",
+      "text": "[BLACK]tr(lblColors):",
       "width": 128,
-      "height": 32,
-      "font" : "black",
+      "height": 16,
       "x": 75,
-      "y": 218
+      "yOffset": 8
+    },
+    {
+      "type": "Label",
+      "name" : "modeL",
+      "text": "[BLACK]tr(lblMode)",
+      "width": 128,
+      "height": 16,
+      "x": 75,
+      "yOffset": 8
     },
     {
       "type": "ImageButton",
       "name": "leftAvatar",
       "style": "leftarrow",
+      "selectable": true,
       "width": 16,
       "height": 16,
       "x": 164,
@@ -110,6 +104,7 @@
       "type": "ImageButton",
       "name": "rightAvatar",
       "style": "rightarrow",
+      "selectable": true,
       "width": 16,
       "height": 16,
       "x": 260,
@@ -118,6 +113,7 @@
     {
       "type": "TextField",
       "name": "nameField",
+      "selectable": true,
       "align": 1,
       "width": 112,
       "height": 16,
@@ -127,39 +123,54 @@
     {
       "type": "Selector",
       "name": "race",
+      "selectable": true,
       "width": 112,
       "height": 16,
       "x": 164,
-      "y": 128
+      "yOffset": 8
     },
     {
       "type": "Selector",
       "name": "gender",
+      "selectable": true,
       "width": 112,
       "height": 16,
       "x": 164,
-      "y": 160
+      "yOffset": 8
     },
     {
       "type": "Selector",
       "name": "difficulty",
+      "selectable": true,
       "width": 112,
       "height": 16,
       "x": 164,
-      "y": 192
+      "yOffset": 8
     },
     {
       "type": "Selector",
-      "name": "deck",
+      "name": "colorId",
+      "selectable": true,
       "width": 112,
       "height": 16,
       "x": 164,
-      "y": 224
+      "yOffset": 8
+    },
+    {
+      "type": "Selector",
+      "name": "mode",
+      "selectable": true,
+      "width": 112,
+      "height": 16,
+      "x": 164,
+      "yOffset": 8
     },
     {
       "type": "TextButton",
       "name": "back",
-      "text": "Back",
+      "text": "tr(lblBack)",
+      "selectable": true,
+      "binding": "Back",
       "width": 100,
       "height": 30,
       "x": 348,
@@ -168,7 +179,9 @@
     {
       "type": "TextButton",
       "name": "start",
-      "text": "Start",
+      "text": "tr(lblStart)",
+      "selectable": true,
+      "binding": "Status",
       "width": 100,
       "height": 30,
       "x": 348,

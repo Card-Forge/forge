@@ -1,0 +1,17 @@
+[metadata]
+Name:Possibility Storm - Double Masters #01
+URL:https://i0.wp.com/www.possibilitystorm.com/wp-content/uploads/2022/07/latest-2-scaled.jpg?ssl=1
+Goal:Win
+Turns:1
+Difficulty:Rare
+Description:Win this turn. Your opponent has no cards in hand, but can activate on-board abilities. Assume both graveyards start empty, and you do not know the top card of your library. Remember that your solution must satisfy all possible blocking decisions. Good luck!
+[state]
+humanlife=20
+ailife=14
+turn=1
+activeplayer=human
+activephase=MAIN1
+humanhand=Blood Artist;Orzhov Pontiff;Body Double;Bloodflow Connoisseur;Scale Blessing
+humanlibrary=Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt;Opt
+humanbattlefield=Necrotic Ooze;Deranged Assistant;Mikaeus, the Lunarch|Counters:P1P1=2;Deathbringer Liege;Plains;Plains;Island;Swamp;Swamp;Swamp
+aibattlefield=Devoted Druid;Wilt-Leaf Liege;Conclave Mentor|Counters:P1P1=2

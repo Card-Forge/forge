@@ -1,0 +1,52 @@
+{
+  "width": 480,
+  "height": 270,
+  "yDown": true,
+  "elements": [      
+    {
+      "type": "Image", 
+      "image": "ui/arena_bg.png",
+      "width": 480,
+      "height": 270
+    },
+    {
+	  "type":"Scroll",
+      "name": "arena",
+      "x": 5,
+      "y": 5,
+      "width": 470,
+      "height": 235
+    },
+    {
+      "type": "TextButton",
+      "name": "done",
+      "text": "tr(lblBack)",
+      "binding": "Back",
+      "selectable": true,
+      "width": 48,
+      "height": 20,
+      "x": 5,
+      "y": 245
+    }  ,
+    {
+      "type": "Label",
+	  "style":"background",
+      "name": "gold", 
+      "width": 48,
+      "height": 20,
+      "x": 380,
+      "y": 245
+    },
+    {
+      "type": "TextButton",
+      "name": "start",
+      "text": "tr(lblBattle)",
+      "selectable": true,
+      "binding": "Use",
+      "width": 48,
+      "height": 20,
+      "x": 430,
+      "y": 245
+    }
+  ]
+}

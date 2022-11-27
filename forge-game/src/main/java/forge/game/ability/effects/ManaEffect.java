@@ -5,6 +5,7 @@ import static forge.util.TextUtil.toManaString;
 import java.util.List;
 import java.util.Map;
 
+import forge.util.Lang;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.card.ColorSet;
@@ -31,7 +32,7 @@ public class ManaEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getHostCard();
-        AbilityManaPart abMana = sa.getManaPart();
+        final AbilityManaPart abMana = sa.getManaPart();
         final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
 
         // Spells are not undoable
@@ -43,6 +44,8 @@ public class ManaEffect extends SpellAbilityEffect {
         if (optional && !sa.getActivatingPlayer().getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantAddMana"), null)) {
             return;
         }
+
+        final StringBuilder producedMana = new StringBuilder();
 
         for (Player p : tgtPlayers) {
             if (sa.usesTargeting() && !p.canBeTargetedBy(sa)) {
@@ -240,8 +243,10 @@ public class ManaEffect extends SpellAbilityEffect {
                 continue;
             }
 
-            abMana.produceMana(mana, p, sa);
+            producedMana.append(abMana.produceMana(mana, p, sa));
         }
+
+        abMana.tapsForMana(sa, producedMana.toString());
 
         // Only clear express choice after mana has been produced
         abMana.clearExpressChoice();
@@ -264,9 +269,16 @@ public class ManaEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
+        final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
         String mana = !sa.hasParam("Amount") || StringUtils.isNumeric(sa.getParam("Amount"))
                 ? GameActionUtil.generatedMana(sa) : "mana";
-        sb.append("Add ").append(toManaString(mana)).append(".");
+        String manaDesc = "";
+        if (mana.equals("mana") && sa.hasParam("Produced") && sa.hasParam("AmountDesc")) {
+            mana = sa.getParam("Produced");
+            manaDesc = sa.getParam("AmountDesc");
+        }
+        sb.append(Lang.joinHomogenous(tgtPlayers)).append(tgtPlayers.size() == 1 ? " adds " : " add ");
+        sb.append(toManaString(mana)).append(manaDesc).append(".");
         if (sa.hasParam("RestrictValid")) {
             sb.append(" ");
             final String desc = sa.getDescription();

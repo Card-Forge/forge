@@ -69,10 +69,10 @@ public class EffectAi extends SpellAbilityAi {
                     randomReturn = true;
                 }
             } else if (logic.equals("Fog")) {
-                if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+                if (phase.isPlayerTurn(sa.getActivatingPlayer())) {
                     return false;
                 }
-                if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                if (!phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     return false;
                 }
                 if (!game.getStack().isEmpty()) {
@@ -215,6 +215,13 @@ public class EffectAi extends SpellAbilityAi {
                 return topStack.getActivatingPlayer().isOpponentOf(ai) && topStack.getApi() == ApiType.GainLife;
             } else if (logic.equals("Fight")) {
                 return FightAi.canFightAi(ai, sa, 0, 0);
+            } else if (logic.equals("Pump")) {
+                List<Card> options = ai.getCreaturesInPlay();
+                if (phase.isPlayerTurn(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) && !options.isEmpty()) {
+                    sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(options));
+                    return true;
+                }
+                return false;
             } else if (logic.equals("Burn")) {
                 // for DamageDeal sub-abilities (eg. Wild Slash, Skullcrack)
                 SpellAbility burn = sa.getSubAbility();
@@ -241,7 +248,7 @@ public class EffectAi extends SpellAbilityAi {
                 Card host = sa.getHostCard();
                 Combat combat = game.getCombat();
                 if (combat != null && combat.isAttacking(host, ai) && !combat.isBlocked(host)
-                        && game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                        && phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS)
                         && !AiCardMemory.isRememberedCard(ai, host, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN)) {
                     AiCardMemory.rememberCard(ai, host, AiCardMemory.MemorySet.ACTIVATED_THIS_TURN); // ideally needs once per combat or something
                     return true;
@@ -285,12 +292,10 @@ public class EffectAi extends SpellAbilityAi {
 
     @Override
     protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        String aiLogic = sa.getParamOrDefault("AILogic", "");
-
         // E.g. Nova Pentacle
-        if (aiLogic.equals("RedirectFromOppToCreature")) {
+        if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer()) {
             // try to target the opponent's best targetable permanent, if able
-            CardCollection oppPerms = CardLists.getValidCards(aiPlayer.getOpponents().getCardsIn(ZoneType.Battlefield), sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
+            CardCollection oppPerms = CardLists.getValidCards(aiPlayer.getOpponents().getCardsIn(sa.getTargetRestrictions().getZone()), sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
             if (!oppPerms.isEmpty()) {
                 sa.resetTargets();
                 sa.getTargets().add(ComputerUtilCard.getBestAI(oppPerms));
@@ -299,7 +304,7 @@ public class EffectAi extends SpellAbilityAi {
 
             if (mandatory) {
                 // try to target the AI's worst targetable permanent, if able
-                CardCollection aiPerms = CardLists.getValidCards(aiPlayer.getCardsIn(ZoneType.Battlefield), sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
+                CardCollection aiPerms = CardLists.getValidCards(aiPlayer.getCardsIn(sa.getTargetRestrictions().getZone()), sa.getTargetRestrictions().getValidTgts(), aiPlayer, sa.getHostCard(), sa);
                 if (!aiPerms.isEmpty()) {
                     sa.resetTargets();
                     sa.getTargets().add(ComputerUtilCard.getWorstAI(aiPerms));

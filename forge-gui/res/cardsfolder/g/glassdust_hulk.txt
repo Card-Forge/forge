@@ -4,6 +4,10 @@ Types:Artifact Creature Golem
 PT:3/4
 K:Cycling:WU
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another artifact enters the battlefield under your control, CARDNAME gets +1/+1 until end of turn and can't be blocked this turn.
-SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | KW$ HIDDEN Unblockable
+SVar:TrigPump:DB$ Pump | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBUnblockable
+SVar:DBUnblockable:DB$ Effect | RememberObjects$ Self | ExileOnMoved$ Battlefield | StaticAbilities$ Unblockable
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Card.IsRemembered | Description$ EFFECTSOURCE can't be blocked this turn.
 SVar:BuffedBy:Artifact
+DeckHas:Ability$Discard
+DeckHints:Type$Artifact
 Oracle:Whenever another artifact enters the battlefield under your control, Glassdust Hulk gets +1/+1 until end of turn and can't be blocked this turn.\nCycling {W/U} ({W/U}, Discard this card: Draw a card.)

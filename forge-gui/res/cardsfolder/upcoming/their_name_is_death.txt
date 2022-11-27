@@ -1,0 +1,6 @@
+Name:Their Name Is Death
+ManaCost:3 B B B
+Types:Sorcery
+A:SP$ DestroyAll | ValidCards$ Creature.nonArtifact | SpellDescription$ Destroy all nonartifact creatures.
+DeckNeeds:Type$Artifact
+Oracle:Destroy all nonartifact creatures.

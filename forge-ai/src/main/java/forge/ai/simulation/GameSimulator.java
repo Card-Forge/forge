@@ -1,5 +1,6 @@
 package forge.ai.simulation;
 
+import forge.game.spellability.LandAbility;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -154,7 +155,7 @@ public class GameSimulator {
     }
     public Score simulateSpellAbility(SpellAbility origSa, GameStateEvaluator eval) {
         SpellAbility sa;
-        if (origSa instanceof SpellAbilityPicker.PlayLandAbility) {
+        if (origSa instanceof LandAbility) {
             Card hostCard = (Card) copier.find(origSa.getHostCard());
             if (!aiPlayer.playLand(hostCard, false)) {
                 System.err.println("Simulation: Couldn't play land! " + origSa);
@@ -164,7 +165,7 @@ public class GameSimulator {
             // TODO: optimize: prune identical SA (e.g. two of the same card in hand)
             sa = findSaInSimGame(origSa);
             if (sa == null) {
-                System.err.println("Simulation: SA not found! " + origSa);
+                System.err.println("Simulation: SA not found! " + origSa + " / " + origSa.getClass());
                 return new Score(Integer.MIN_VALUE);
             }
 

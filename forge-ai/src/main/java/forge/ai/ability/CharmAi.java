@@ -88,7 +88,7 @@ public class CharmAi extends SpellAbilityAi {
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         // First pass using standard canPlayAi() for good choices
         for (AbilitySub sub : choices) {
-            sub.setActivatingPlayer(ai);
+            sub.setActivatingPlayer(ai, true);
             if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                 chosenList.add(sub);
                 if (chosenList.size() == num) {
@@ -219,13 +219,13 @@ public class CharmAi extends SpellAbilityAi {
         List<AbilitySub> chosenList = Lists.newArrayList();
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         for (AbilitySub sub : choices) {
-            sub.setActivatingPlayer(ai);
+            sub.setActivatingPlayer(ai, true);
             // Assign generic good choice to fill up choices if necessary 
             if ("Good".equals(sub.getParam("AILogic")) && aic.doTrigger(sub, false)) {
                 goodChoice = sub;
             } else {
                 // Standard canPlayAi()
-                sub.setActivatingPlayer(ai);
+                sub.setActivatingPlayer(ai, true);
                 if (AiPlayDecision.WillPlay == aic.canPlaySa(sub)) {
                     chosenList.add(sub);
                     if (chosenList.size() == min) {

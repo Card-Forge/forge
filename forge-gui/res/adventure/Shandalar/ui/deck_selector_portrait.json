@@ -5,7 +5,7 @@
   "elements": [
     {
       "type": "Image",
-      "image": "ui/title_bg_portrait.png",
+      "name": "lastScreen",
       "width": 270,
       "height": 480
     },
@@ -20,7 +20,8 @@
     {
       "type": "TextButton",
       "name": "return",
-      "text": "Back",
+      "text": "tr(lblBack)",
+      "binding": "Back",
       "width": 86,
       "height": 30,
       "x": 4,
@@ -29,7 +30,8 @@
     {
       "type": "TextButton",
       "name": "rename",
-      "text": "Rename Deck",
+      "text": "tr(lblRename)",
+      "binding": "Equip",
       "width": 86,
       "height": 30,
       "x": 92,
@@ -38,7 +40,8 @@
     {
       "type": "TextButton",
       "name": "edit",
-      "text": "Edit Deck",
+      "text": "tr(lblEdit)",
+      "binding": "Use",
       "width": 86,
       "height": 30,
       "x": 180,

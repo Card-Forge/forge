@@ -1,0 +1,8 @@
+Name:Burrowing Razormaw
+ManaCost:2 G
+Types:Creature Beast
+PT:4/2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ When CARDNAME dies, mill four cards. (Put the top four cards of your library into your graveyard.)
+SVar:TrigMill:DB$ Mill | NumCards$ 4
+DeckHas:Ability$Mill|Graveyard
+Oracle:When Burrowing Razormaw dies, mill four cards. (Put the top four cards of your library into your graveyard.)

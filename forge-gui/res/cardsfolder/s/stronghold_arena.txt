@@ -1,0 +1,16 @@
+Name:Stronghold Arena
+ManaCost:1 B
+Types:Enchantment
+K:Kicker:G:W
+PT:4/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 3 life for each time it was kicked.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ X
+T:Mode$ DamageDoneOnce | ValidSource$ Creature.YouCtrl | OptionalDecider$ You | TriggerZones$ Battlefield | ValidTarget$ Player | CombatDamage$ True | Execute$ DBReveal | TriggerDescription$ Whenever one or more creatures you control deal combat damage to a player, you may reveal the top card of your library and put it into your hand. If you do, you lose life equal to its mana value.
+SVar:DBReveal:DB$ Dig | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Card | DestinationZone$ Hand | RememberChanged$ True | SubAbility$ DBLose
+SVar:DBLose:DB$ LoseLife | LifeAmount$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Y:Remembered$CardManaCost
+SVar:X:Count$TimesKicked/Thrice
+DeckHas:Ability$LifeGain
+DeckHints:Color$Green|White
+Oracle:Kicker {G} and/or {W} (You may pay an additional {G} and/or {W} as you cast this spell.)\nWhen Stronghold Arena enters the battlefield, you gain 3 life for each time it was kicked.\nWhenever one or more creatures you control deal combat damage to a player, you may reveal the top card of your library and put it into your hand. If you do, you lose life equal to its mana value.

@@ -2,7 +2,7 @@ package forge.game.keyword;
 
 import java.util.Collection;
 
-public class Trample  extends KeywordInstance<Trample> {
+public class Trample extends KeywordInstance<Trample> {
     private String type = "";
 
     @Override

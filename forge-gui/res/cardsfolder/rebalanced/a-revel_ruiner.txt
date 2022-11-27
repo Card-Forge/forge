@@ -1,0 +1,9 @@
+Name:A-Revel Ruiner
+ManaCost:3 B
+Types:Creature Cephalid Rogue
+PT:3/2
+K:Menace
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConnive | TriggerDescription$ When CARDNAME enters the battlefield, it connives.
+SVar:TrigConnive:DB$ Connive
+DeckHas:Ability$Discard|Counters
+Oracle:Menace\nWhen Revel Ruiner enters the battlefield, it connives.

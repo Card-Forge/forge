@@ -2,6 +2,7 @@ package forge.ai.ability;
 
 import com.google.common.collect.Iterables;
 
+import forge.ai.ComputerUtil;
 import forge.ai.ComputerUtilCombat;
 import forge.ai.SpellAbilityAi;
 import forge.game.Game;
@@ -54,13 +55,14 @@ public abstract class DamageAiBase extends SpellAbilityAi {
         final Game game = comp.getGame();
         Player enemy = comp.getWeakestOpponent();
         boolean dmgByCardsInHand = false;
+        Card hostcard = sa.getHostCard();
 
-        if ("X".equals(sa.getParam("NumDmg")) && sa.getHostCard() != null && sa.hasSVar(sa.getParam("NumDmg")) &&
+        if ("X".equals(sa.getParam("NumDmg")) && hostcard != null && sa.hasSVar(sa.getParam("NumDmg")) &&
                 sa.getSVar(sa.getParam("NumDmg")).equals("TargetedPlayer$CardsInHand")) {
             dmgByCardsInHand = true;
         }
         // Not sure if type choice implemented for the AI yet but it should at least recognize this spell hits harder on larger enemy hand size
-        if ("Blood Oath".equals(sa.getHostCard().getName())) {
+        if ("Blood Oath".equals(hostcard.getName())) {
             dmgByCardsInHand = true;
         }
 
@@ -71,9 +73,13 @@ public abstract class DamageAiBase extends SpellAbilityAi {
             return false;
         }
 
+        // If the opponent will gain life (ex. Fiery Justice), not beneficial unless life gain is harmful or ignored
+        if ("OpponentGainLife".equals(sa.getParam("AILogic")) && ComputerUtil.lifegainPositive(enemy, hostcard)) {
+            return false;
+        }
+
         // Benefits hitting players?
         // If has triggered ability on dealing damage to an opponent, go for it!
-        Card hostcard = sa.getHostCard();
         for (Trigger trig : hostcard.getTriggers()) {
             if (trig.getMode() == TriggerType.DamageDone) {
                 if ("Opponent".equals(trig.getParam("ValidTarget"))
@@ -95,9 +101,9 @@ public abstract class DamageAiBase extends SpellAbilityAi {
         }
 
         if (!noPrevention) {
-            restDamage = ComputerUtilCombat.predictDamageTo(enemy, restDamage, sa.getHostCard(), false);
+            restDamage = ComputerUtilCombat.predictDamageTo(enemy, restDamage, hostcard, false);
         } else {
-            restDamage = enemy.staticReplaceDamage(restDamage, sa.getHostCard(), false);
+            restDamage = enemy.staticReplaceDamage(restDamage, hostcard, false);
         }
 
         if (restDamage == 0) {

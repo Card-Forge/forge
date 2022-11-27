@@ -1,0 +1,8 @@
+Name:Thraxodemon
+ManaCost:1 B
+Types:Creature Demon
+PT:2/2
+A:AB$ Draw | Cost$ 3 T Sac<1/Artifact.Other;Creature.Other/another artifact or creature> | SpellDescription$ Draw a card.
+DeckHints:Type$Artifact
+DeckHas:Ability$Sacrifice
+Oracle:{3}, {T}, Sacrifice another creature or artifact: Draw a card.

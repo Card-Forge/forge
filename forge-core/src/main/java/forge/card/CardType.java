@@ -17,13 +17,7 @@
  */
 package forge.card;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.EnumSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.NotImplementedException;

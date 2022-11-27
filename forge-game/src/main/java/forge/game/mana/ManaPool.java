@@ -218,7 +218,7 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
                 continue;
             }
 
-            if (StringUtils.isNotBlank(restriction) && !mana.getSourceCard().getType().hasStringType(restriction)) {
+            if (StringUtils.isNotBlank(restriction) && !mana.getSourceCard().isValid(restriction, null, null, null)) {
                 continue;
             }
 
@@ -295,26 +295,21 @@ public class ManaPool extends ManaConversionMatrix implements Iterable<Mana> {
         if (sa.getHostCard() != null) {
             sa.getHostCard().setCanCounter(true);
         }
-        for (final Mana m : manaSpent) {
-            player.getManaPool().addMana(m);
-        }
+        player.getManaPool().add(manaSpent);
         manaSpent.clear();
     }
 
     public final void refundManaPaid(final SpellAbility sa) {
         // Send all mana back to your mana pool, before accounting for it.
-        final List<Mana> manaPaid = sa.getPayingMana();
 
         // move non-undoable paying mana back to floating
-        if (sa.getHostCard() != null) {
-            sa.getHostCard().setCanCounter(true);
-        }
-        for (final Mana m : manaPaid) {
-            addMana(m);
-        }
-        manaPaid.clear();
+        refundMana(sa.getPayingMana(), owner, sa);
 
         List<SpellAbility> payingAbilities = sa.getPayingManaAbilities();
+
+        // start with the most recent
+        Collections.reverse(payingAbilities);
+
         for (final SpellAbility am : payingAbilities) {
             // undo paying abilities if we can
             am.undo();

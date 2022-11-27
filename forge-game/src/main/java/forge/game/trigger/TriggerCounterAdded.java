@@ -89,6 +89,19 @@ public class TriggerCounterAdded extends Trigger {
             }
         }
 
+        // TODO check CR for Read Ahead when they are out
+        // for now assume it only is about etb counter
+        if (hasParam("Chapter") && runParams.containsKey(AbilityKey.ETB) && true == (boolean)runParams.get(AbilityKey.ETB)) {
+            Card card = (Card)runParams.get(AbilityKey.Card);
+            Integer readAhead = card.getReadAhead();
+            if (readAhead != null) {
+                final int actualAmount = (Integer) runParams.get(AbilityKey.CounterAmount);
+                if (actualAmount < readAhead) {
+                    return false;
+                }
+            }
+        }
+
         return true;
     }
 

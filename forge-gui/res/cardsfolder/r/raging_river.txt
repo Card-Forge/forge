@@ -10,11 +10,10 @@ SVar:DBDefLeftRight:DB$ TwoPiles | Defined$ Remembered | Separator$ Remembered |
 SVar:DBDefLeftPile:DB$ Animate | Defined$ ValidCommand Effect.namedRaging River Left+IsImprinted | ImprintCards$ Remembered | Duration$ Permanent | SubAbility$ DBLeftPump
 SVar:DBDefRightPile:DB$ Animate | Defined$ ValidCommand Effect.namedRaging River Right+IsImprinted | ImprintCards$ Remembered | Duration$ Permanent | SubAbility$ DBRightPump
 SVar:DBClearImprinted:DB$ Cleanup | ClearImprinted$ True
-SVar:DBAtkLeftRight:DB$ TwoPiles | Defined$ You | Separator$ You | ValidCards$ Creature.attacking+YouCtrl | Zone$ Battlefield | LeftRightPile$ True | ChosenPile$ DBAtkLeftPile | UnchosenPile$ DBAtkRightPile | AILogic$ Random | SubAbility$ DBCleanup
+SVar:DBAtkLeftRight:DB$ TwoPiles | Defined$ You | Separator$ You | ValidCards$ Creature.attacking+YouCtrl | Zone$ Battlefield | LeftRightPile$ True | ChosenPile$ DBAtkLeftPile | UnchosenPile$ DBAtkRightPile | AILogic$ Random
 SVar:DBAtkLeftPile:DB$ Animate | Defined$ ValidCommand Effect.namedRaging River Left | RememberObjects$ RememberedCard | Duration$ Permanent | SubAbility$ DBLeftPump
 SVar:DBAtkRightPile:DB$ Animate | Defined$ ValidCommand Effect.namedRaging River Right | RememberObjects$ RememberedCard | Duration$ Permanent | SubAbility$ DBRightPump
 SVar:DBLeftPump:DB$ Pump | Defined$ Remembered | KW$ "Left" pile | Duration$ UntilEndOfCombat
 SVar:DBRightPump:DB$ Pump | Defined$ Remembered | KW$ "Right" pile | Duration$ UntilEndOfCombat
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
 Oracle:Whenever one or more creatures you control attack, each defending player divides all creatures without flying they control into a "left" pile and a "right" pile. Then, for each attacking creature you control, choose "left" or "right." That creature can't be blocked this combat except by creatures with flying and creatures in a pile with the chosen label.

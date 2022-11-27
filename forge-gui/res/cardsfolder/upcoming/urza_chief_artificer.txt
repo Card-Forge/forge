@@ -1,0 +1,12 @@
+Name:Urza, Chief Artificer
+ManaCost:3 W U B
+Types:Legendary Creature Human Artificer
+PT:4/5
+K:Affinity:Creature.Artifact:artifact creature
+S:Mode$ Continuous | Affected$ Creature.Artifact+YouCtrl | AddKeyword$ Menace | Description$ Artifact creatures you control have menace.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your end step, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."
+SVar:TrigToken:DB$ Token | TokenScript$ c_0_0_a_construct_total_artifacts
+SVar:PlayMain1:TRUE
+DeckHints:Type$Artifact
+DeckHas:Ability$Token & Type$Construct|Artifact
+Oracle:Affinity for artifact creatures (This spell costs {1} less to cast for each artifact creature you control.)\nArtifact creatures you control have menace.\nAt the beginning of your end step, create a 0/0 colorless Construct artifact creature token with "This creature gets +1/+1 for each artifact you control."

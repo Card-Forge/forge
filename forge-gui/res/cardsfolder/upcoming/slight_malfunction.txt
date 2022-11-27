@@ -1,0 +1,9 @@
+Name:Slight Malfunction
+ManaCost:1 R
+Types:Sorcery
+A:SP$ Charm | Choices$ DBDestroyArtifact,DBRoll
+SVar:DBDestroyArtifact:DB$ Destroy | ValidTgts$ Artifact | SpellDescription$ Destroy target artifact.
+SVar:DBRoll:DB$ RollDice | ResultSVar$ X | SubAbility$ DBImmediateTrig | SpellDescription$ Roll a six-sided die. When you do, CARDNAME deals 1 damage to each of up to X target creatures, where X is the result.
+SVar:DBImmediateTrig:DB$ ImmediateTrigger | ConditionCheckSVar$ X | Execute$ TrigDamage
+SVar:TrigDamage:DB$ DealDamage | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Creature | TgtPrompt$ Select up to X target creatures | NumDmg$ 1
+Oracle:Choose one —\n• Destroy target artifact.\n• Roll a six-sided die. When you do, Slight Malfunction deals 1 damage to each of up to X target creatures, where X is the result.

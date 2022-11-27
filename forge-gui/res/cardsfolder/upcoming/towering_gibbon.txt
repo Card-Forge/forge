@@ -1,0 +1,8 @@
+Name:Towering Gibbon
+ManaCost:3 G
+Types:Creature Ape
+PT:*/4
+K:Reach
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the highest mana value among creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl$GreatestCMC
+Oracle:Reach\nTowering Gibbon's power is equal to the greatest mana value among creatures you control.

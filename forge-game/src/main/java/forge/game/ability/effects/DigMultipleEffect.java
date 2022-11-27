@@ -26,7 +26,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
         final Card host = sa.getHostCard();
         final Player player = sa.getActivatingPlayer();
         final Game game = player.getGame();
-        int numToDig = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
+        int digNum = AbilityUtils.calculateAmount(host, sa.getParam("DigNum"), sa);
 
         final ZoneType srcZone = sa.hasParam("SourceZone") ? ZoneType.smartValueOf(sa.getParam("SourceZone")) : ZoneType.Library;
 
@@ -47,7 +47,7 @@ public class DigMultipleEffect extends SpellAbilityEffect {
             final CardCollection rest = new CardCollection();
             final PlayerZone sourceZone = chooser.getZone(srcZone);
 
-            numToDig = Math.min(numToDig, sourceZone.size());
+            int numToDig = Math.min(digNum, sourceZone.size());
             for (int i = 0; i < numToDig; i++) {
                 top.add(sourceZone.get(i));
             }

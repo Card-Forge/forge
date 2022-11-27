@@ -1,0 +1,13 @@
+Name:Vodalian Mindsinger
+ManaCost:1 U U
+Types:Creature Merfolk Wizard
+PT:2/2
+K:Kicker:1 R:1 G
+K:etbCounter:P1P1:X:CheckSVar$ X:CARDNAME enters the battlefield with two +1/+1 counters on it for each time it was kicked.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, gain control of target creature with power less than CARDNAME's power for as long as you control CARDNAME.
+SVar:TrigChange:DB$ GainControl | TgtPrompt$ Choose target creature with power less than CARDNAME's power | ValidTgts$ Creature.cmcLEY | LoseControl$ LeavesPlay,LoseControl
+SVar:X:Count$TimesKicked/Twice
+SVar:Y:TriggeredCard$CardPower
+DeckHints:Color$Red|Green
+DeckHas:Ability$Counters
+Oracle:Kicker {1}{R} and/or {1}{G}\nVodalian Mindsinger enters the battlefield with two +1/+1 counters on it for each time it was kicked.\nWhen Vodalian Mindsinger enters the battlefield, gain control of target creature with power less than Vodalian Mindsinger's power for as long as you control Vodalian Mindsinger.

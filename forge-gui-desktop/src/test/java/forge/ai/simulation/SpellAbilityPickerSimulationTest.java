@@ -1,5 +1,6 @@
 package forge.ai.simulation;
 
+import forge.game.spellability.LandAbility;
 import java.util.List;
 
 import org.testng.AssertJUnit;
@@ -79,14 +80,44 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
 
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-        // assertEquals(game.PLAY_LAND_SURROGATE, sa);
+        AssertJUnit.assertTrue(sa instanceof LandAbility);
         AssertJUnit.assertEquals(mountain, sa.getHostCard());
 
         Plan plan = picker.getPlan();
         AssertJUnit.assertEquals(2, plan.getDecisions().size());
-        AssertJUnit.assertEquals("Play land Mountain", plan.getDecisions().get(0).saRef.toString());
+        AssertJUnit.assertEquals("Mountain (1) -> Play land", plan.getDecisions().get(0).saRef.toString(true));
         AssertJUnit.assertEquals("Shock deals 2 damage to any target.", plan.getDecisions().get(1).saRef.toString());
         AssertJUnit.assertTrue(plan.getDecisions().get(1).targets.toString().contains("Runeclaw Bear"));
+    }
+
+    @Test
+    public void testPlayingLandAfterSpell() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Island", p);
+        addCard("Island", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+
+        Card tatyova = addCardToZone("Tatyova, Benthic Druid", p, ZoneType.Hand);
+        addCardToZone("Forest", p, ZoneType.Hand);
+        addCardToZone("Forest", p, ZoneType.Library);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN1, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertEquals(tatyova, sa.getHostCard());
+
+        // The plan should involve playing Tatyova first and then playing a land, to benefit from
+        // the landfall trigger.
+        Plan plan = picker.getPlan();
+        AssertJUnit.assertEquals(2, plan.getDecisions().size());
+        AssertJUnit.assertEquals("Tatyova, Benthic Druid - Creature 3 / 3", plan.getDecisions().get(0).saRef.toString());
+        AssertJUnit.assertEquals("Play land", plan.getDecisions().get(1).saRef.toString());
     }
 
     @Test
@@ -279,7 +310,8 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(abbot.getSpellAbilities().get(0), sa);
         Plan plan = picker.getPlan();
         AssertJUnit.assertEquals(3, plan.getDecisions().size());
-        AssertJUnit.assertEquals("Play land Mountain", plan.getDecisions().get(1).saRef.toString());
+        AssertJUnit.assertEquals("Mountain (5) -> Play land by Abbot of Keral Keep (3)",
+                plan.getDecisions().get(1).saRef.toString(true));
         AssertJUnit.assertEquals("Lightning Bolt deals 3 damage to any target.",
                 plan.getDecisions().get(2).saRef.toString());
     }

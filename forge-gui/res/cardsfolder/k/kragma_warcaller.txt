@@ -4,7 +4,7 @@ Types:Creature Minotaur Warrior
 PT:2/3
 S:Mode$ Continuous | Affected$ Creature.Minotaur+YouCtrl | AddKeyword$ Haste | Description$ Minotaur Creatures you control have haste.
 T:Mode$ Attacks | ValidCard$ Minotaur.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a Minotaur you control attacks, it gets +2/+0 until end of turn.
-SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttacker | NumAtt$ +2
+SVar:TrigPump:DB$ Pump | Defined$ TriggeredAttackerLKICopy | NumAtt$ +2
 SVar:BuffedBy:Minotaur
 SVar:PlayMain1:TRUE
 Oracle:Minotaur creatures you control have haste.\nWhenever a Minotaur you control attacks, it gets +2/+0 until end of turn.

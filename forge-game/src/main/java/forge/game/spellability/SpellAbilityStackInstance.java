@@ -212,7 +212,7 @@ public class SpellAbilityStackInstance implements IIdentifiable, IHasCardView {
     }
     
     public final int getXManaPaid() {
-    	return xManaPaid;
+    	return xManaPaid == null ? 0 : xManaPaid;
     }
     public final void setXManaPaid(int x) {
         xManaPaid = x;

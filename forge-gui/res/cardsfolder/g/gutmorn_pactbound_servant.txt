@@ -8,7 +8,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:DBDiscard:DB$ Discard | Defined$ Player | DiscardValid$ Card.nonLand | Mode$ TgtChoose | AILogic$ DiscardUncastableAndExcess
 T:Mode$ Discarded | TriggerZones$ Battlefield | Execute$ TrigChoosePlayer | PlayerTurn$ True | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever a player discards a card during your turn, they choose another player. That player conjures a duplicate of that card into their hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
 SVar:TrigChoosePlayer:DB$ ChoosePlayer | Defined$ TriggeredCardOwner | Choices$ Player.Other | ChoiceTitle$ Choose another player | SubAbility$ DBConjure
-SVar:DBConjure:DB$ MakeCard | Defined$ ChosenPlayer | DefinedName$ TriggeredCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBClearChosen
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | Defined$ ChosenPlayer | DefinedName$ TriggeredCard | Zone$ Hand | RememberMade$ True | SubAbility$ DBClearChosen
 SVar:DBClearChosen:DB$ Cleanup | ClearChosenPlayer$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Triggers$ Update | Name$ Gutmorn, Pactbound Servant's Perpetual Effect | SubAbility$ DBCleanup
 SVar:PerpetualAbility:Mode$ Continuous | AddStaticAbility$ SpendAnyMana | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The conjured card perpetually gains "You may spend mana as though it were mana of any color to cast this spell."

@@ -15,5 +15,5 @@ ManaCost:no cost
 Colors:blue
 Types:Creature Spirit
 PT:3/3
-K:Unblockable
+S:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ CARDNAME can't be blocked.
 Oracle:Unimpeded Trespasser can't be blocked.

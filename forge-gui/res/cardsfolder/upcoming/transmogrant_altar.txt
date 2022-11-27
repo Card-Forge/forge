@@ -1,0 +1,8 @@
+Name:Transmogrant Altar
+ManaCost:3
+Types:Artifact
+A:AB$ Mana | Cost$ B T Sac<1/Creature> | Produced$ C | Amount$ 3 | SpellDescription$ Add {C}{C}{C}.
+A:AB$ Token | Cost$ 2 T Sac<1/Creature> | TokenScript$ c_3_3_a_zombie | SorcerySpeed$ True | SpellDescription$ Create a 3/3 colorless Zombie artifact creature token. Activate only as a sorcery.
+SVar:AIPreference:SacCost$Creature.token+powerLE3
+DeckHas:Ability$Sacrifice|Token & Type$Zombie
+Oracle:{B}, {T}, Sacrifice a creature: Add {C}{C}{C}.\n{2}, {T}, Sacrifice a creature: Create a 3/3 colorless Zombie artifact creature token. Activate only as a sorcery.

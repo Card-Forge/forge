@@ -1,0 +1,10 @@
+Name:Sister Repentia
+ManaCost:3 W B
+Types:Creature Human Warrior
+PT:5/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ Martyrdom — When CARDNAME dies, you gain 2 life and draw two cards.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 2 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 2
+DeckHas:Ability$LifeGain
+K:Miracle:W B
+Oracle:Martyrdom — When Sister Repentia dies, you gain 2 life and draw two cards.\nMiracle {W}{B} (You may cast this card for its miracle cost when you draw it if it's the first card you drew this turn.)

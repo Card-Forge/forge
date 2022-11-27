@@ -1,0 +1,7 @@
+Name:Keeper of the Cadence
+ManaCost:4 U
+Types:Creature Human Wizard
+PT:2/5
+A:AB$ ChangeZone | Cost$ 3 | ValidTgts$ Artifact,Instant,Sorcery | TgtPrompt$ Select target artifact, instant, or sorcery card | TgtZone$ Graveyard | Origin$ Graveyard | Destination$ Library | LibraryPosition$ -1 | SpellDescription$ Put target artifact, instant, or sorcery card from a graveyard on the bottom of its owner's library.
+AI:RemoveDeck:Random
+Oracle:{3}: Put target artifact, instant, or sorcery card from a graveyard on the bottom of its owner's library.

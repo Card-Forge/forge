@@ -1,0 +1,9 @@
+Name:Tolarian Geyser
+ManaCost:2 U
+Types:Sorcery
+K:Kicker:W
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target creature to its owner's hand. Draw a card. If this spell was kicked, you gain 3 life. 
+SVar:DBDraw:DB$ Draw | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 3 | Condition$ Kicked
+DeckHas:Ability$LifeGain
+Oracle:Kicker {W} (You may pay an additional {W} as you cast this spell.)\nReturn target creature to its owner's hand. Draw a card. If this spell was kicked, you gain 3 life.
