@@ -48,8 +48,12 @@ public class CardProperty {
         final Player controller = lki.getController();
 
         // CR 702.25b if card is phased out it will not count unless specifically asked for
-        if (card.isPhasedOut() && !property.contains("phasedOut")) {
-            return false;
+        if (card.isPhasedOut()) {
+            if (property.startsWith("phasedOut")) {
+                property = property.substring(9);
+            } else {
+                return false;
+            }
         }
 
         // by name can also have color names, so needs to happen before colors.
