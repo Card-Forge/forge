@@ -828,7 +828,6 @@ public class Game {
                     // will also require other changes because currently only zones of ingame players are checked
 
                     triggerList.put(c.getZone().getZoneType(), null, c);
-
                     getAction().ceaseToExist(c, false);
                     // CR 603.2f owner of trigger source lost game
                     getTriggerHandler().clearDelayedTrigger(c);

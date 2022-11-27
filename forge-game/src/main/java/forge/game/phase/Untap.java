@@ -251,7 +251,7 @@ public class Untap extends Phase {
         }
     }
 
-    private static void doPhasing(final Player turn) {
+    public static void doPhasing(final Player turn) {
         // Needs to include phased out cards
         final List<Card> list = CardLists.filter(turn.getCardsIncludePhasingIn(ZoneType.Battlefield), new Predicate<Card>() {
 
