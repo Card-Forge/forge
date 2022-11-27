@@ -693,11 +693,9 @@ public class MapStage extends GameStage {
                     isLoadingMatch = true;
                     Forge.setTransitionScreen(new TransitionScreen(() -> {
                         duelScene.initDuels(player, mob);
-                        Forge.clearTransitionScreen();
-                        startPause(0.3f, () -> {
-                            if (isInMap && effect != null) duelScene.setDungeonEffect(effect);
-                            Forge.switchScene(DuelScene.instance());
-                        });
+                        if (isInMap && effect != null)
+                            duelScene.setDungeonEffect(effect);
+                        Forge.switchScene(DuelScene.instance());
                     }, Forge.takeScreenshot(), true, false));
                 }
             });

@@ -129,8 +129,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                         FThreads.invokeInEdtNowOrLater(() -> {
                             Forge.setTransitionScreen(new TransitionScreen(() -> {
                                 duelScene.initDuels(player, mob);
-                                Forge.clearTransitionScreen();
-                                startPause(0.3f, () -> Forge.switchScene(DuelScene.instance()));
+                                Forge.switchScene(DuelScene.instance());
                             }, Forge.takeScreenshot(), true, false));
                             currentMob = mob;
                             WorldSave.getCurrentSave().autoSave();

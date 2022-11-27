@@ -45,6 +45,8 @@ import forge.toolbox.*;
 import forge.util.*;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Forge implements ApplicationListener {
@@ -174,7 +176,8 @@ public class Forge implements ApplicationListener {
         Gdx.input.setCatchKey(Keys.BACK, true);
         destroyThis = true; //Prevent back()
         ForgePreferences prefs = new ForgePreferences();
-        selector = prefs.getPref(FPref.UI_SELECTOR_MODE);
+        if (Files.exists(Paths.get(ForgeConstants.DEFAULT_SKINS_DIR+ForgeConstants.ADV_TEXTURE_BG_FILE)))
+            selector = prefs.getPref(FPref.UI_SELECTOR_MODE);
         String skinName;
         if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
             skinName = prefs.getPref(FPref.UI_SKIN);
@@ -323,6 +326,7 @@ public class Forge implements ApplicationListener {
         //continuous rendering is needed for adventure mode
         startContinuousRendering();
         GuiBase.setIsAdventureMode(true);
+        advStartup = false;
         isMobileAdventureMode = true;
         if (GuiBase.isAndroid()) //force it for adventure mode
             altZoneTabs = true;
@@ -764,7 +768,19 @@ public class Forge implements ApplicationListener {
     }
 
     public static void clearTransitionScreen() {
-        transitionScreen = null;
+        clearTransitionScreen(false);
+    }
+    public static void clearTransitionScreen(boolean disableMatchTransition) {
+        if (transitionScreen != null) {
+            if (disableMatchTransition) {
+                transitionScreen.disableMatchTransition();
+                transitionScreen = null;
+            }
+            if (!disableMatchTransition && transitionScreen.isMatchTransition()) {
+                return;
+            }
+            transitionScreen = null;
+        }
     }
 
     public static void clearSplashScreen() {
@@ -1012,6 +1028,8 @@ public class Forge implements ApplicationListener {
         currentScene = newScene;
 
         currentScene.enter();
+        if (currentScene instanceof DuelScene)
+            Forge.clearTransitionScreen(true);
         return true;
     }
 
