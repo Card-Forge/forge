@@ -200,10 +200,10 @@ public class ReplacementHandler {
                     if (!replacementEffect.hasRun()
                             && (layer == null || replacementEffect.getLayer() == layer)
                             && event.equals(replacementEffect.getMode())
-                            && replacementEffect.requirementsCheck(game)
-                            && replacementEffect.canReplace(runParams)
                             && !possibleReplacers.contains(replacementEffect)
-                            && replacementEffect.zonesCheck(cardZone)) {
+                            && replacementEffect.zonesCheck(cardZone)
+                            && replacementEffect.requirementsCheck(game)
+                            && replacementEffect.canReplace(runParams)) {
                         possibleReplacers.add(replacementEffect);
                     }
                 }

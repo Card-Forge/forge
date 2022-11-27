@@ -233,7 +233,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     // set for transform and meld, needed for clone effects
     private boolean backside = false;
 
-    private boolean phasedOut = false;
+    private Player phasedOut;
     private boolean directlyPhasedOut = true;
     private boolean wontPhaseInNormal = false;
 
@@ -4998,9 +4998,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public final boolean isPhasedOut() {
+        return phasedOut != null;
+    }
+    public final boolean isPhasedOut(Player turn) {
+        return turn.equals(phasedOut);
+    }
+    public final Player getPhasedOut() {
         return phasedOut;
     }
-    public final void setPhasedOut(final boolean phasedOut0) {
+    public final void setPhasedOut(final Player phasedOut0) {
         if (phasedOut == phasedOut0) { return; }
         phasedOut = phasedOut0;
         view.updatePhasedOut(this);
@@ -5040,15 +5046,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     private boolean switchPhaseState(final boolean fromUntapStep) {
-        if (phasedOut && StaticAbilityCantPhaseIn.cantPhaseIn(this)) {
+        if (isPhasedOut() && StaticAbilityCantPhaseIn.cantPhaseIn(this)) {
             return false;
         }
 
-        if (!phasedOut && StaticAbilityCantPhaseOut.cantPhaseOut(this)) {
+        if (!isPhasedOut() && StaticAbilityCantPhaseOut.cantPhaseOut(this)) {
             return false;
         }
 
-        if (phasedOut && fromUntapStep && wontPhaseInNormal) {
+        if (isPhasedOut() && fromUntapStep && wontPhaseInNormal) {
             return false;
         }
 
@@ -5061,16 +5067,23 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             // when it doesn't exist the game will no longer see it as tapped
             runUntapCommands();
             // TODO CR 702.26f need to run LeavesPlay + changeController commands but only when worded "for as long as"
+
+            // these links also break
+            clearEncodedCards();
+            if (isPaired()) {
+                getPairedWith().setPairedWith(null);
+                setPairedWith(null);
+            }
         }
 
-        setPhasedOut(!phasedOut);
+        setPhasedOut(isPhasedOut() ? null : getController());
         final Combat combat = getGame().getCombat();
-        if (combat != null && phasedOut) {
+        if (combat != null && isPhasedOut()) {
             combat.saveLKI(this);
             combat.removeFromCombat(this);
         }
 
-        if (!phasedOut) {
+        if (!isPhasedOut()) {
             // Just phased in, time to run the phased in trigger
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
             getGame().getTriggerHandler().runTrigger(TriggerType.PhaseIn, runParams, false);
