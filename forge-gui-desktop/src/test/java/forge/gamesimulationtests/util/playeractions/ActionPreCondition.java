@@ -8,7 +8,7 @@ import forge.game.phase.PhaseType;
 public class ActionPreCondition {
 	private Integer requiredTurn;
 	private PhaseType requiredPhaseType;
-	
+
 	public boolean isApplicable( Game game ) {
 		if( requiredTurn != null ) {
 			if( requiredTurn != game.getPhaseHandler().getTurn() ) {
@@ -21,12 +21,12 @@ public class ActionPreCondition {
 
         return requiredPhaseType == null || requiredPhaseType == game.getPhaseHandler().getPhase();
     }
-	
+
 	public ActionPreCondition turn( int turn ) {
 		requiredTurn = turn;
 		return this;
 	}
-	
+
 	public ActionPreCondition phase( PhaseType phaseType ) {
 		requiredPhaseType = phaseType;
 		return this;

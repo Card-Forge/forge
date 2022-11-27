@@ -29,7 +29,7 @@ public class ActivateAbilityAction extends BasePlayerAction {
 		if( abilities.size() > 1 ) {
 			throw new IllegalStateException( "Multiple abilities found for " + actualCardWithAbility );
 		}
-		
+
 		SpellAbility ability = abilities.get( 0 );
 		game.getStack().add( ability );
 	}

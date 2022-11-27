@@ -28,7 +28,7 @@ public class DeckHintsTest {
 	void setupTest() {
 		GuiBase.setInterface(new GuiDesktop());
 	}
-	
+
     /**
      * Card test.
      */
@@ -152,7 +152,6 @@ public class DeckHintsTest {
 
         Assert.assertEquals(1, hints.filter(list).size());
     }
-
 
     /**
      * Create a CardPrinted from the given filename.

@@ -21,7 +21,6 @@ public class ManaCostBeingPaidTest {
     }
 
     private void runConvokeTest(String initialCost, byte[] colorsToPay, String[] expectedRemainder) {
-
         ManaCostBeingPaid costBeingPaid = createManaCostBeingPaid(initialCost);
 
         for (int i = 0; i < colorsToPay.length; i++) {
