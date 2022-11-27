@@ -210,7 +210,6 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         FThreads.invokeInEdtNowOrLater(() -> {
             Forge.setTransitionScreen(new TransitionScreen(() -> {
                 duelScene.initDuels(WorldStage.getInstance().getPlayerSprite(), enemies.get(enemies.size-1));
-                Forge.clearTransitionScreen();
                 Forge.switchScene(DuelScene.instance());
             }, Forge.takeScreenshot(), true, false));
         });

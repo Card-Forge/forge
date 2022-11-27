@@ -9,9 +9,11 @@ import forge.assets.FSkin;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.sound.SoundSystem;
 import forge.toolbox.FContainer;
 import forge.toolbox.FProgressBar;
+import forge.util.MyRandom;
 
 public class TransitionScreen extends FContainer {
     private BGAnimation bgAnimation;
@@ -43,7 +45,7 @@ public class TransitionScreen extends FContainer {
         isIntro = intro;
         isFadeMusic = fadeMusic;
         message = loadingMessage;
-        Forge.advStartup = Forge.selector.equals("Adventure");
+        Forge.advStartup = intro && Forge.selector.equals("Adventure");
     }
 
     public FProgressBar getProgressBar() {
@@ -52,6 +54,12 @@ public class TransitionScreen extends FContainer {
     @Override
     protected void doLayout(float width, float height) {
 
+    }
+    public boolean isMatchTransition() {
+        return matchTransition;
+    }
+    public void disableMatchTransition() {
+        matchTransition = false;
     }
 
     private class BGAnimation extends ForgeAnimation {
@@ -107,8 +115,16 @@ public class TransitionScreen extends FContainer {
                     g.draw(progressBar);
                 }
             } else if (matchTransition) {
-                if (textureRegion != null)
-                    g.drawPixelatedWarp(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), 2.6f-(1*percentage));
+                if (textureRegion != null) {
+                    if (GuiBase.isAndroid()) {
+                        g.drawChromatic(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), percentage);
+                    } else {
+                        int max = Forge.isLandscapeMode() ? Forge.getScreenHeight() / 32 : Forge.getScreenWidth() / 32;
+                        int min = Forge.isLandscapeMode() ? Forge.getScreenHeight() / 64 : Forge.getScreenWidth() / 64;
+                        int val = MyRandom.getRandom().nextInt(max - min) + min;
+                        g.drawPixelatedWarp(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), val * percentage);
+                    }
+                }
             } else if (isIntro) {
                 if (textureRegion != null) {
                     if (Forge.advStartup) {

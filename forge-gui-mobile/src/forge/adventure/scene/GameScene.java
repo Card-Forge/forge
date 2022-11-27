@@ -72,7 +72,7 @@ public class GameScene extends HudScene {
                 location = forHeader? TextUtil.capitalize(data.name)+" Map" : data.name;
             } catch (Exception e) {
                 e.printStackTrace();
-                location = "";
+                location = forHeader ? "Waste Map" : "waste";
             }
         }
         return location;

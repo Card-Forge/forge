@@ -42,6 +42,34 @@ public class Shaders {
             "    v_texCoords = a_texCoord0;\n" +
             "    gl_Position = u_projTrans * a_position;\n" +
             "}";
+    public static final String fragChromaticAbberation="#ifdef GL_ES\n" +
+            "#define PRECISION mediump\n" +
+            "precision PRECISION float;\n" +
+            "precision PRECISION int;\n" +
+            "#else\n" +
+            "#define PRECISION\n" +
+            "#endif\n" +
+            "\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform sampler2D u_texture;\n" +
+            "uniform float u_time;\n" +
+            "\n" +
+            "void main() {\n" +
+            "\tvec2 uv = v_texCoords;\n" +
+            "\tfloat amount = 0.0;\n" +
+            "\tamount = (1.0 + sin(u_time*6.0)) * 0.5;\n" +
+            "\tamount *= 1.0 + sin(u_time*16.0) * 0.5;\n" +
+            "\tamount *= 1.0 + sin(u_time*19.0) * 0.5;\n" +
+            "\tamount *= 1.0 + sin(u_time*27.0) * 0.5;\n" +
+            "\tamount = pow(amount, 3.0);\n" +
+            "\tamount *= 0.05;\n" +
+            "    vec3 col;\n" +
+            "    col.r = texture2D(u_texture, vec2(uv.x+amount,uv.y)).r;\n" +
+            "    col.g = texture2D(u_texture, uv ).g;\n" +
+            "    col.b = texture2D(u_texture, vec2(uv.x-amount,uv.y)).b;\n" +
+            "\tcol *= (1.0 - amount * 0.5);\n" +
+            "    gl_FragColor = vec4(col,1.0);\n" +
+            "}";
     public static final String fragPixelateShader = "#ifdef GL_ES\n" +
             "#define PRECISION mediump\n" +
             "precision PRECISION float;\n" +
