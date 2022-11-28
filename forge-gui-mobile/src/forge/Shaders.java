@@ -42,6 +42,40 @@ public class Shaders {
             "    v_texCoords = a_texCoord0;\n" +
             "    gl_Position = u_projTrans * a_position;\n" +
             "}";
+    public static final String fragRipple="#ifdef GL_ES\n" +
+            "#define PRECISION mediump\n" +
+            "precision PRECISION float;\n" +
+            "precision PRECISION int;\n" +
+            "#else\n" +
+            "#define PRECISION\n" +
+            "#endif\n" +
+            "\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform sampler2D u_texture;\n" +
+            "uniform float u_time;\n" +
+            "uniform vec2 u_resolution;\n" +
+            "uniform float u_yflip;\n" +
+            "uniform float u_bias;\n" +
+            "\n" +
+            "void main() {\n" +
+            "\tvec2 uv = v_texCoords;\n" +
+            "\n" +
+            "    vec2 dv = vec2(0.5,0.5) - uv;\n" +
+            "    float dis = length(dv);\n" +
+            "    float sinFactor =0.02*(4.0*u_time) *sin(dis * 40.0 +u_time* -12.0);\n" +
+            "    float rippleOffset=0.35;\n" +
+            "    float discardFactor = clamp(0.2 - abs(rippleOffset - dis), 0.0, 1.0) / 0.2;\n" +
+            "    \n" +
+            "    vec2 offset = normalize(dv)* sinFactor * discardFactor;\n" +
+            "    uv = offset + uv;\n" +
+            "\t\n" +
+            "\tvec4 texColor;\n" +
+            "\tif (u_yflip > 0)\n" +
+            "\t\ttexColor = texture2D(u_texture, vec2(uv.x, 1.-uv.y));\n" +
+            "\telse\n" +
+            "\t\ttexColor = texture2D(u_texture, uv);\n" +
+            "    gl_FragColor = mix(vec4(0.0, 0.0, 0.0, 1.0), texColor, u_bias);\n" +
+            "}";
     public static final String fragChromaticAbberation="#ifdef GL_ES\n" +
             "#define PRECISION mediump\n" +
             "precision PRECISION float;\n" +
@@ -81,12 +115,18 @@ public class Shaders {
             "uniform sampler2D u_texture;\n" +
             "uniform float u_cellSize;\n" +
             "uniform vec2 u_resolution;\n" +
-            "varying vec4 v_color;\n" +
+            "uniform float u_yflip;\n" +
+            "uniform float u_bias;\n" +
             "\n" +
             "void main() {\n" +
             "\tvec2 p = floor(gl_FragCoord.xy/u_cellSize) * u_cellSize;\n" +
-            "\tvec4 texColor = texture2D(u_texture, p/u_resolution.xy);\n" +
-            "\tgl_FragColor = v_color * texColor;\n" +
+            "\tvec2 p2 = p/u_resolution.xy;\n" +
+            "\tvec4 texColor;\n" +
+            "\tif (u_yflip > 0)\n" +
+            "\t    texColor = texture2D(u_texture, vec2(p2.x, 1.-p2.y));\n" +
+            "\telse\n" +
+            "\t    texColor = texture2D(u_texture, p2);\n" +
+            "\tgl_FragColor = mix(vec4(0.0, 0.0, 0.0, 1.0), texColor, u_bias);\n" +
             "}";
     public static final String fragPixelateShaderWarp = "#ifdef GL_ES\n" +
             "precision mediump float;\n" +

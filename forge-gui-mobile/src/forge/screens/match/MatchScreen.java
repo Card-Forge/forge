@@ -859,10 +859,14 @@ public class MatchScreen extends FScreen {
                 }
             } else {
                 g.setAlphaComposite(percentage);
-                if (!daynightTransition)
-                    g.drawGrayTransitionImage(image, x, y, w, h, darkoverlay, 1 - (percentage * 1));
-                else
-                    g.drawUnderWaterImage(image, x, y, w, h, 1 - (percentage * 1), darkoverlay);
+                if (!daynightTransition) {
+                    if (image instanceof FSkinTexture)//for loading bg images
+                        g.drawRipple(image, x, y, w, h, 1 - (percentage * 1), false);
+                    else
+                        g.drawGrayTransitionImage(image, x, y, w, h, darkoverlay, 1 - (percentage * 1));
+                } else { //for non adventure transition.. todo generate new daynight + ripple shader for planechase images to use only single image
+                    g.drawUnderWaterImage(image, x, y, w, h, 1 - (percentage * 1));
+                }
                 g.setAlphaComposite(oldAlpha);
             }
         }
