@@ -559,7 +559,7 @@ public class Game {
 
         CardCollection cards = new CardCollection();
         for (final Player p : getPlayers()) {
-            cards.addAll(p.getCardsIncludePhasingIn(zone));
+            cards.addAll(p.getCardsIn(zone, false));
         }
         return cards;
     }

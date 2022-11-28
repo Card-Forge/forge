@@ -419,10 +419,16 @@ public abstract class SpellAbilityEffect {
 
     protected static void addForgetCounterTrigger(final Card card, final String counterType) {
         String trig = "Mode$ CounterRemoved | TriggerZones$ Command | ValidCard$ Card.IsRemembered | CounterType$ " + counterType + " | NewCounterAmount$ 0 | Static$ True";
+        String trig2 = "Mode$ PhaseOut | TriggerZones$ Command | ValidCard$ Card.phasedOutIsRemembered | Static$ True";
+
+        final SpellAbility forgetSA = getForgetSpellAbility(card);
 
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
-        parsedTrigger.setOverridingAbility(getForgetSpellAbility(card));
+        final Trigger parsedTrigger2 = TriggerHandler.parseTrigger(trig2, card, true);
+        parsedTrigger.setOverridingAbility(forgetSA);
+        parsedTrigger2.setOverridingAbility(forgetSA);
         card.addTrigger(parsedTrigger);
+        card.addTrigger(parsedTrigger2);
     }
 
     protected static void addLeaveBattlefieldReplacement(final Card card, final SpellAbility sa, final String zone) {
@@ -764,6 +770,9 @@ public abstract class SpellAbilityEffect {
     }
 
     protected static void addUntilCommand(final SpellAbility sa, GameCommand until) {
+        addUntilCommand(sa, until, sa.getActivatingPlayer());
+    }
+    protected static void addUntilCommand(final SpellAbility sa, GameCommand until, Player controller) {
         Card host = sa.getHostCard();
         final Game game = host.getGame();
         final String duration = sa.getParam("Duration");
@@ -774,19 +783,25 @@ public abstract class SpellAbilityEffect {
 
         if ("UntilEndOfCombat".equals(duration)) {
             game.getEndOfCombat().addUntil(until);
+        } else if ("UntilEndOfCombatYourNextTurn".equals(duration)) {
+            game.getEndOfCombat().registerUntilEnd(controller, until);
         } else if ("UntilYourNextUpkeep".equals(duration)) {
-            game.getUpkeep().addUntil(sa.getActivatingPlayer(), until);
+            game.getUpkeep().addUntil(controller, until);
         } else if ("UntilTheEndOfYourNextUpkeep".equals(duration)) {
             if (game.getPhaseHandler().is(PhaseType.UPKEEP)) {
-                game.getUpkeep().registerUntilEnd(host.getController(), until);
+                game.getUpkeep().registerUntilEnd(controller, until);
             } else {
-                game.getUpkeep().addUntilEnd(host.getController(), until);
+                game.getUpkeep().addUntilEnd(controller, until);
             }
-        }  else if ("UntilTheEndOfYourNextTurn".equals(duration)) {
-            if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
-                game.getEndOfTurn().registerUntilEnd(sa.getActivatingPlayer(), until);
+        } else if ("UntilYourNextEndStep".equals(duration)) {
+            game.getEndOfTurn().addUntil(controller, until);
+        } else if ("UntilYourNextTurn".equals(duration)) {
+            game.getCleanup().addUntil(controller, until);
+        } else if ("UntilTheEndOfYourNextTurn".equals(duration)) {
+            if (game.getPhaseHandler().isPlayerTurn(controller)) {
+                game.getEndOfTurn().registerUntilEnd(controller, until);
             } else {
-                game.getEndOfTurn().addUntilEnd(sa.getActivatingPlayer(), until);
+                game.getEndOfTurn().addUntilEnd(controller, until);
             }
         } else if ("UntilTheEndOfTargetedNextTurn".equals(duration)) {
             Player targeted = sa.getTargets().getFirstTargetedPlayer();
@@ -795,6 +810,17 @@ public abstract class SpellAbilityEffect {
             } else {
                 game.getEndOfTurn().addUntilEnd(targeted, until);
             }
+        } else if ("ThisTurnAndNextTurn".equals(duration)) {
+            game.getEndOfTurn().addUntil(new GameCommand() {
+                private static final long serialVersionUID = -5054153666503075717L;
+
+                @Override
+                public void run() {
+                    game.getEndOfTurn().addUntil(until);
+                }
+            });
+        } else if ("UntilStateBasedActionChecked".equals(duration)) {
+            game.addSBACheckedCommand(until);
         } else if (duration != null && duration.startsWith("UntilAPlayerCastSpell")) {
             game.getStack().addCastCommand(duration.split(" ")[1], until);
         } else if ("UntilHostLeavesPlay".equals(duration)) {
@@ -805,9 +831,8 @@ public abstract class SpellAbilityEffect {
         } else if ("UntilLoseControlOfHost".equals(duration)) {
             host.addLeavesPlayCommand(until);
             host.addChangeControllerCommand(until);
-        } else if ("UntilYourNextTurn".equals(duration)) {
-            game.getCleanup().addUntil(sa.getActivatingPlayer(), until);
         } else if ("UntilUntaps".equals(duration)) {
+            host.addLeavesPlayCommand(until);
             host.addUntapCommand(until);
         } else if ("UntilUnattached".equals(duration)) {
             host.addLeavesPlayCommand(until); //if it leaves play, it's unattached

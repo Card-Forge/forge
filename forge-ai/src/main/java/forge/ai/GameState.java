@@ -200,13 +200,13 @@ public abstract class GameState {
         // Mark the cards that need their ID remembered for various reasons
         cardsReferencedByID.clear();
         for (ZoneType zone : ZONES.keySet()) {
-            for (Card card : game.getCardsIn(zone)) {
+            for (Card card : game.getCardsIncludePhasingIn(zone)) {
                 if (card.getExiledWith() != null) {
                     // Remember the ID of the card that exiled this card
                     cardsReferencedByID.add(card.getExiledWith());
                 }
                 if (zone == ZoneType.Battlefield) {
-                    if (card.hasCardAttachments()) {
+                    if (!card.getAllAttachedCards().isEmpty()) {
                         // Remember the ID of cards that have attachments
                         cardsReferencedByID.add(card);
                     }
@@ -240,7 +240,7 @@ public abstract class GameState {
             // if the zone had no cards in it (e.g. empty hand).
             aiCardTexts.put(zone, "");
             humanCardTexts.put(zone, "");
-            for (Card card : game.getCardsIn(zone)) {
+            for (Card card : game.getCardsIncludePhasingIn(zone)) {
                 if (card.getName().equals("Puzzle Goal") && card.getOracleText().contains("New Puzzle")) {
                     puzzleCreatorState = true;
                 }
@@ -264,7 +264,7 @@ public abstract class GameState {
                 return;
             }
 
-            if (!c.getMergedCards().isEmpty()) {
+            if (c.hasMergedCard()) {
                 // we have to go by the current top card name here
                 newText.append(c.getTopMergedCard().getPaperCard().getName());
             } else {
@@ -297,7 +297,8 @@ public abstract class GameState {
                 newText.append("|Monstrous");
             }
             if (c.isPhasedOut()) {
-                newText.append("|PhasedOut");
+                newText.append("|PhasedOut:");
+                newText.append(c.getPhasedOut().isAI() ? "AI" : "HUMAN");
             }
             if (c.isFaceDown()) {
                 newText.append("|FaceDown");
@@ -1328,7 +1329,10 @@ public abstract class GameState {
                 } else if (info.startsWith("Monstrous")) {
                     c.setMonstrous(true);
                 } else if (info.startsWith("PhasedOut")) {
-                    c.setPhasedOut(true);
+                    String tgt = info.substring(info.indexOf(':') + 1);
+                    Player human = player.getGame().getPlayers().get(0);
+                    Player ai = player.getGame().getPlayers().get(1);
+                    c.setPhasedOut(tgt.equalsIgnoreCase("AI") ? ai : human);
                 } else if (info.startsWith("Counters:")) {
                     applyCountersToGameEntity(c, info.substring(info.indexOf(':') + 1));
                 } else if (info.startsWith("SummonSick")) {

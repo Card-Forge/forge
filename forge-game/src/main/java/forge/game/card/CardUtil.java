@@ -239,7 +239,7 @@ public final class CardUtil {
         newCopy.setCounters(Maps.newHashMap(in.getCounters()));
 
         newCopy.setColor(in.getColor().getColor());
-        newCopy.setPhasedOut(in.isPhasedOut());
+        newCopy.setPhasedOut(in.getPhasedOut());
 
         newCopy.setDamageHistory(in.getDamageHistory());
         newCopy.setDamageReceivedThisTurn(in.getDamageReceivedThisTurn());

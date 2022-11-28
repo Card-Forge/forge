@@ -446,7 +446,7 @@ public class AiController {
         CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS));
 
         // Some considerations for Momir/MoJhoSto
-        boolean hasMomir = player.getZone(ZoneType.Command).contains(CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar"));
+        boolean hasMomir = player.isCardInCommand("Momir Vig, Simic Visionary Avatar");
         if (hasMomir && nonLandsInHand.isEmpty()) {
             // Only do this if we have an all-basic land hand, which covers both stock Momir and MoJhoSto modes
             // and also a custom Vanguard setup with a customized basic land deck and Momir as the avatar.
@@ -1534,7 +1534,7 @@ public class AiController {
     }
 
     private boolean isSafeToHoldLandDropForMain2(Card landToPlay) {
-        boolean hasMomir = player.getZone(ZoneType.Command).contains(CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar"));
+        boolean hasMomir = player.isCardInCommand("Momir Vig, Simic Visionary Avatar");
         if (hasMomir) {
             // Don't do this in Momir variants since it messes with the AI decision making for the avatar.
             return false;

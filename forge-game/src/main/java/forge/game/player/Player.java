@@ -1307,10 +1307,6 @@ public class Player extends GameEntity implements Comparable<Player> {
         return zone == null ? CardCollection.EMPTY : zone.getCards(filterOutPhasedOut);
     }
 
-    public final CardCollectionView getCardsIncludePhasingIn(final ZoneType zone) {
-        return getCardsIn(zone, false);
-    }
-
     /**
      * gets a list of first N cards in the requested zone. This function makes a CardCollectionView from Card[].
      */
@@ -2357,9 +2353,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public CardCollectionView getColoredCardsInPlay(final String color) {
-        return CardLists.getColor(getCardsIn(ZoneType.Battlefield), MagicColor.fromName(color));
+        return getColoredCardsInPlay(MagicColor.fromName(color));
     }
-
     public CardCollectionView getColoredCardsInPlay(final byte color) {
         return CardLists.getColor(getCardsIn(ZoneType.Battlefield), color);
     }
@@ -2631,7 +2626,7 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void resetCombatantsThisCombat() {
         // resets the status of attacked/blocked this phase
-        CardCollectionView list = getCardsIn(ZoneType.Battlefield);
+        CardCollectionView list = getCardsIn(ZoneType.Battlefield, false);
 
         for (Card c : list) {
             if (c.getDamageHistory().getCreatureAttackedThisCombat() > 0) {

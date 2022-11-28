@@ -797,7 +797,7 @@ public class PlayerControllerAi extends PlayerController {
                         case "Never":
                             return false;
                         case "NothingRemembered":
-                            if (source.getRememberedCount() == 0) {
+                            if (!source.hasRemembered()) {
                                 return true;
                             } else {
                                 Card rem = (Card) source.getFirstRemembered();
@@ -807,7 +807,7 @@ public class PlayerControllerAi extends PlayerController {
                             }
                             break;
                         case "BetterTgtThanRemembered":
-                            if (source.getRememberedCount() > 0) {
+                            if (source.hasRemembered()) {
                                 Card rem = (Card) source.getFirstRemembered();
                                 //  avoid pumping opponent creature
                                 if (!rem.isInPlay() || rem.getController().isOpponentOf(source.getController())) {

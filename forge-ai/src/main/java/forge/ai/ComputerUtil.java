@@ -2054,7 +2054,7 @@ public class ComputerUtil {
             return finalHandSize;
         }
 
-        CardCollectionView library = ai.getZone(ZoneType.Library).getCards();
+        CardCollectionView library = ai.getCardsIn(ZoneType.Library);
         int landsInDeck = CardLists.count(library, CardPredicates.isType("Land"));
 
         // no land deck, can't do anything better
