@@ -6,7 +6,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.Localizer;
@@ -36,33 +35,32 @@ public class RevealHandEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final boolean optional = sa.hasParam("Optional");
 
         for (final Player p : getTargetPlayers(sa)) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantRevealYourHand"), null)) {
-                    continue;
-                }
-                CardCollectionView hand = p.getCardsIn(ZoneType.Hand);
-                if (sa.hasParam("RevealType")) {
-                    hand = CardLists.getType(hand, sa.getParam("RevealType"));
-                }
-                if (sa.hasParam("Look")) {
-                    sa.getActivatingPlayer().getController().reveal(hand, ZoneType.Hand, p);
-                } else {
-                    host.getGame().getAction().reveal(hand, p);
-                }
-                if (sa.hasParam("RememberRevealed")) {
-                    host.addRemembered(hand);
-                }
-                if (sa.hasParam("ImprintRevealed")) {
-                    host.addImprintedCards(hand);
-                }
-                if (sa.hasParam("RememberRevealedPlayer")) {
-                    host.addRemembered(p);
-                }
+            if (!p.isInGame()) {
+                continue;
+            }
+            if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantRevealYourHand"), null)) {
+                continue;
+            }
+            CardCollectionView hand = p.getCardsIn(ZoneType.Hand);
+            if (sa.hasParam("RevealType")) {
+                hand = CardLists.getType(hand, sa.getParam("RevealType"));
+            }
+            if (sa.hasParam("Look")) {
+                sa.getActivatingPlayer().getController().reveal(hand, ZoneType.Hand, p);
+            } else {
+                host.getGame().getAction().reveal(hand, p);
+            }
+            if (sa.hasParam("RememberRevealed")) {
+                host.addRemembered(hand);
+            }
+            if (sa.hasParam("ImprintRevealed")) {
+                host.addImprintedCards(hand);
+            }
+            if (sa.hasParam("RememberRevealedPlayer")) {
+                host.addRemembered(p);
             }
         }
     }

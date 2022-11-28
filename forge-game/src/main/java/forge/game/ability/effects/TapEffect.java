@@ -23,9 +23,6 @@ public class TapEffect extends SpellAbilityEffect {
             if (tgtC.isPhasedOut()) {
                 continue;
             }
-            if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {
-                continue;
-            }
             if (tgtC.isInPlay()) {
                 if (tgtC.isUntapped() && remTapped || alwaysRem) {
                     card.addRemembered(tgtC);

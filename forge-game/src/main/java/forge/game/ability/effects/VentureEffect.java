@@ -132,9 +132,10 @@ public class VentureEffect  extends SpellAbilityEffect {
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
 
         for (final Player p : getTargetPlayers(sa)) {
-            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                ventureIntoDungeon(sa, p, moveParams);
+            if (!p.isInGame()) {
+                continue; 
             }
+            ventureIntoDungeon(sa, p, moveParams);
         }
     }
 

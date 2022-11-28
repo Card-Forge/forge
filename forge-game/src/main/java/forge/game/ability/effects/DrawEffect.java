@@ -62,8 +62,7 @@ public class DrawEffect extends SpellAbilityEffect {
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
 
         for (final Player p : getDefinedPlayersOrTargeted(sa)) {
-            // TODO can this be removed?
-            if (sa.usesTargeting() && !p.canBeTargetedBy(sa)) {
+            if (!p.isInGame()) {
                 continue;
             }
 

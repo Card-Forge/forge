@@ -13,9 +13,9 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardFactoryUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
+import forge.util.Lang;
 
 public class ChooseTypeEffect extends SpellAbilityEffect {
 
@@ -24,9 +24,7 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         if (!sa.usesTargeting()) {
-            for (final Player p : getTargetPlayers(sa)) {
-                sb.append(p);
-            }
+            sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
             sb.append(" chooses a ").append(sa.getParam("Type").toLowerCase()).append(" type.");
         } else {
             sb.append("Please improve the stack description.");
@@ -103,30 +101,26 @@ public class ChooseTypeEffect extends SpellAbilityEffect {
             }
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-
         if (validTypes.isEmpty() && sa.hasParam("Note")) {
             // OK to end up with no choices/have nothing new to note
         } else if (!validTypes.isEmpty()) {
             for (final Player p : tgtPlayers) {
                 String choice;
-                if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                    Player noNotify = p;
-                    if (sa.hasParam("AtRandom")) {
-                        choice = Aggregates.random(validTypes);
-                        noNotify = null;
-                    } else {
-                        choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
-                    }
-                    if (sa.hasParam("Note")) {
-                        card.addNotedType(choice);
-                    } else if (!sa.hasParam("ChooseType2")) {
-                        card.setChosenType(choice);
-                    } else {
-                        card.setChosenType2(choice);
-                    }
-                    p.getGame().getAction().notifyOfValue(sa, p, choice, noNotify);
+                Player noNotify = p;
+                if (sa.hasParam("AtRandom")) {
+                    choice = Aggregates.random(validTypes);
+                    noNotify = null;
+                } else {
+                    choice = p.getController().chooseSomeType(type, sa, validTypes, invalidTypes);
                 }
+                if (sa.hasParam("Note")) {
+                    card.addNotedType(choice);
+                } else if (!sa.hasParam("ChooseType2")) {
+                    card.setChosenType(choice);
+                } else {
+                    card.setChosenType2(choice);
+                }
+                p.getGame().getAction().notifyOfValue(sa, p, choice, noNotify);
             }
         } else {
             throw new InvalidParameterException(sa.getHostCard() + "'s ability resulted in no types to choose from");

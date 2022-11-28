@@ -717,8 +717,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (!turnFaceDown(true) && !isFaceDown()) {
             return null;
         }
-        // Move to p's battlefield
-        Game game = p.getGame();
 
         // Just in case you aren't the controller, now you are!
         setController(p, game.getNextTimestamp());
@@ -726,6 +724,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         // Mark this card as "manifested"
         setManifested(true);
 
+        // Move to p's battlefield
         Card c = game.getAction().moveToPlay(this, p, sa, params);
         if (c.isInPlay()) {
             c.setManifested(true);
@@ -3656,7 +3655,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (hasKeyword(Keyword.RECONFIGURE)) {
             // need extra time stamp so it doesn't collide with existing ones
             long ts = getGame().getNextTimestamp();
-            // TODO make it use a Static Layer Effect instead
+            // 702.151b Attaching an Equipment with reconfigure to another creature causes the Equipment to stop being a creature until it becomes unattached from that creature.
+            // it is not a Static Ability
             addChangedCardTypes(null, CardType.parse("Creature", true), false, false, false, false, false, false, false, false, ts, 0, true, false);
 
             GameCommand unattach = new GameCommand() {
@@ -6107,7 +6107,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     @Override
     public final boolean canBeTargetedBy(final SpellAbility sa) {
-        if (getOwner().hasLost()) {
+        if (!getOwner().isInGame()) {
             return false;
         }
 

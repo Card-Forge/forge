@@ -37,7 +37,7 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
                 @Override
                 public void run() {
                     // CR 800.4b
-                    if (controller.hasLost()) {
+                    if (!controller.isInGame()) {
                         return;
                     }
 

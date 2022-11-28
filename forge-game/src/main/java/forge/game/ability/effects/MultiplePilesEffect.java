@@ -16,7 +16,6 @@ import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.Localizer;
@@ -56,7 +55,6 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
 
         final String valid = sa.getParamOrDefault("ValidCards", "");
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         // starting with the activator
         int pSize = tgtPlayers.size();
@@ -66,28 +64,30 @@ public class MultiplePilesEffect extends SpellAbilityEffect {
         }
 
         for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                CardCollection pool;
-                if (sa.hasParam("DefinedCards")) {
-                    pool = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
-                } else {
-                    pool = new CardCollection(p.getCardsIn(zone));
-                }
-                pool = CardLists.getValidCards(pool, valid, source.getController(), source, sa);
-
-                List<CardCollectionView> pileList = Lists.newArrayList();
-
-                for (int i = 1; i < piles; i++) {
-                    int size = pool.size();
-                    CardCollectionView pile = p.getController().chooseCardsForEffect(pool, sa, Localizer.getInstance().getMessage("lblChooseCardsInTargetPile", String.valueOf(i)), 0, size, false, null);
-                    pileList.add(pile);
-                    pool.removeAll(pile);
-                }
-
-                pileList.add(pool);
-                p.getGame().getAction().notifyOfValue(sa, p, pileList.toString(), p);
-                record.put(p, pileList);
+            if (!p.isInGame()) {
+                continue;
             }
+ 
+            CardCollection pool;
+            if (sa.hasParam("DefinedCards")) {
+                pool = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
+            } else {
+                pool = new CardCollection(p.getCardsIn(zone));
+            }
+            pool = CardLists.getValidCards(pool, valid, source.getController(), source, sa);
+
+            List<CardCollectionView> pileList = Lists.newArrayList();
+
+            for (int i = 1; i < piles; i++) {
+                int size = pool.size();
+                CardCollectionView pile = p.getController().chooseCardsForEffect(pool, sa, Localizer.getInstance().getMessage("lblChooseCardsInTargetPile", String.valueOf(i)), 0, size, false, null);
+                pileList.add(pile);
+                pool.removeAll(pile);
+            }
+
+            pileList.add(pool);
+            p.getGame().getAction().notifyOfValue(sa, p, pileList.toString(), p);
+            record.put(p, pileList);
         }
         if (randomChosen) {
             for (Entry<Player, List<CardCollectionView>> ev : record.entrySet()) {

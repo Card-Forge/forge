@@ -1,18 +1,14 @@
 package forge.game.ability.effects;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.game.Game;
 import forge.game.GameEntity;
-import forge.game.GameObject;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 
 public class UnattachAllEffect extends SpellAbilityEffect {
     private static void handleUnattachment(final GameEntity o, final Card cardToUnattach) {
@@ -121,8 +117,7 @@ public class UnattachAllEffect extends SpellAbilityEffect {
     protected String getStackDescription(final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Unattach all valid Equipment and Auras from ");
-        final List<GameObject> targets = getTargets(sa);
-        sb.append(StringUtils.join(targets, " "));
+        sb.append(Lang.joinHomogenous(getTargets(sa)));
         return sb.toString();
     }
 
@@ -130,19 +125,14 @@ public class UnattachAllEffect extends SpellAbilityEffect {
     public void resolve(final SpellAbility sa) {
         Card source = sa.getHostCard();
         final Game game = sa.getActivatingPlayer().getGame();
-        final List<GameObject> targets = getTargets(sa);
 
         // If Cast Targets will be checked on the Stack
-        for (final Object o : targets) {
-            if (!(o instanceof GameEntity)) {
-                continue;
-            }
-
+        for (final GameEntity ge : getTargetEntities(sa)) {
             String valid = sa.getParam("UnattachValid");
             CardCollectionView unattachList = game.getCardsIn(ZoneType.Battlefield);
             unattachList = CardLists.getValidCards(unattachList, valid, source.getController(), source, sa);
             for (final Card c : unattachList) {
-                handleUnattachment((GameEntity) o, c);
+                handleUnattachment(ge, c);
             }
         }
     }

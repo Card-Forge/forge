@@ -44,44 +44,46 @@ public class MillEffect extends SpellAbilityEffect {
         moveParams.put(AbilityKey.LastStateGraveyard, sa.getLastStateGraveyard());
 
         for (final Player p : getTargetPlayers(sa)) {
-            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                if (sa.hasParam("Optional")) {
-                    final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantPutLibraryCardsTo", destination.getTranslatedName()));
-                    // CR 701.13b
-                    if (numCards > p.getZone(ZoneType.Library).size() || !p.getController().confirmAction(sa, null, prompt, null)) {
-                        continue;
+            if (!p.isInGame()) {
+                continue;
+            }
+
+            if (sa.hasParam("Optional")) {
+                final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantPutLibraryCardsTo", destination.getTranslatedName()));
+                // CR 701.13b
+                if (numCards > p.getZone(ZoneType.Library).size() || !p.getController().confirmAction(sa, null, prompt, null)) {
+                    continue;
+                }
+            }
+            final CardCollectionView milled = p.mill(numCards, destination, bottom, sa, table, moveParams);
+            // Reveal the milled cards, so players don't have to manually inspect the
+            // graveyard to figure out which ones were milled.
+            if (!facedown && reveal) { // do not reveal when exiling face down
+                if (showRevealDialog) {
+                    game.getAction().reveal(milled, p, false);
+                }
+                StringBuilder sb = new StringBuilder();
+                sb.append(p).append(" milled ").append(milled).append(" to ").append(destination);
+                p.getGame().getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());
+            }
+            if (destination.equals(ZoneType.Exile)) {
+                Card host = sa.getOriginalHost();
+                if (host == null) {
+                    host = sa.getHostCard();
+                }
+                for (final Card c : milled) {
+                    host.addExiledCard(c);
+                    c.setExiledWith(host);
+                    if (facedown) {
+                        c.turnFaceDown(true);
                     }
                 }
-                final CardCollectionView milled = p.mill(numCards, destination, bottom, sa, table, moveParams);
-                // Reveal the milled cards, so players don't have to manually inspect the
-                // graveyard to figure out which ones were milled.
-                if (!facedown && reveal) { // do not reveal when exiling face down
-                    if (showRevealDialog) {
-                        game.getAction().reveal(milled, p, false);
-                    }
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(p).append(" milled ").append(milled).append(" to ").append(destination);
-                    p.getGame().getGameLog().add(GameLogEntryType.ZONE_CHANGE, sb.toString());
-                }
-                if (destination.equals(ZoneType.Exile)) {
-                    Card host = sa.getOriginalHost();
-                    if (host == null) {
-                        host = sa.getHostCard();
-                    }
-                    for (final Card c : milled) {
-                        host.addExiledCard(c);
-                        c.setExiledWith(host);
-                        if (facedown) {
-                            c.turnFaceDown(true);
-                        }
-                    }
-                }
-                if (sa.hasParam("RememberMilled")) {
-                    source.addRemembered(milled);
-                }
-                if (sa.hasParam("Imprint")) {
-                    source.addImprintedCards(milled);
-                }
+            }
+            if (sa.hasParam("RememberMilled")) {
+                source.addRemembered(milled);
+            }
+            if (sa.hasParam("Imprint")) {
+                source.addImprintedCards(milled);
             }
         }
 

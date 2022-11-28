@@ -537,15 +537,13 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (gameCard == null || !tgtC.equalsWithTimestamp(gameCard) || gameCard.isPhasedOut()) {
                 continue;
             }
-            if (sa.usesTargeting() && !gameCard.canBeTargetedBy(sa)) {
-                continue;
-            }
+
             if (sa.hasParam("RememberLKI")) {
                 hostCard.addRemembered(CardUtil.getLKICopy(gameCard));
             }
 
             final String prompt = TextUtil.concatWithSpace(Localizer.getInstance().getMessage("lblDoYouWantMoveTargetFromOriToDest", CardTranslation.getTranslatedName(gameCard.getName()), Lang.joinHomogenous(origin, ZoneType.Accessors.GET_TRANSLATED_NAME), destination.getTranslatedName()));
-            if (optional && !chooser.getController().confirmAction(sa, null, prompt, null) )
+            if (optional && !chooser.getController().confirmAction(sa, null, prompt, null))
                 continue;
 
             final Zone originZone = game.getZoneOf(gameCard);

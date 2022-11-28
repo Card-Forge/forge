@@ -134,9 +134,6 @@ public class DiscardEffect extends SpellAbilityEffect {
             // In this case the target need not be the discarding player
             discarders = getDefinedPlayersOrTargeted(sa);
             firstTarget = Iterables.getFirst(targets, null);
-            if (sa.usesTargeting() && !firstTarget.canBeTargetedBy(sa)) {
-                firstTarget = null;
-            }
         } else {
             discarders = targets;
         }
@@ -144,6 +141,10 @@ public class DiscardEffect extends SpellAbilityEffect {
         final CardZoneTable table = new CardZoneTable();
         Map<Player, CardCollectionView> discardedMap = Maps.newHashMap();
         for (final Player p : discarders) {
+            if (!p.isInGame()) {
+                continue;
+            }
+
             CardCollectionView toBeDiscarded = new CardCollection();
             if ((mode.equals("RevealTgtChoose") && firstTarget != null) || !sa.usesTargeting() || p.canBeTargetedBy(sa)) {
                 final int numCardsInHand = p.getCardsIn(ZoneType.Hand).size();
@@ -268,9 +269,6 @@ public class DiscardEffect extends SpellAbilityEffect {
                         dPHand = p.getController().chooseCardsToRevealFromHand(amount, amount, dPHand);
                     }
 
-                    final String valid = sa.getParamOrDefault("DiscardValid", "Card");
-                    CardCollection validCards = CardLists.getValidCards(dPHand, valid, source.getController(), source, sa);
-
                     Player chooser = p;
                     if (mode.endsWith("YouChoose")) {
                         chooser = source.getController();
@@ -288,6 +286,9 @@ public class DiscardEffect extends SpellAbilityEffect {
                     if (!p.canDiscardBy(sa, true)) {
                         continue;
                     }
+
+                    final String valid = sa.getParamOrDefault("DiscardValid", "Card");
+                    CardCollection validCards = CardLists.getValidCards(dPHand, valid, source.getController(), source, sa);
 
                     int min = sa.hasParam("AnyNumber") || sa.hasParam("Optional") ? 0 : Math.min(validCards.size(), numCards);
                     int max = sa.hasParam("AnyNumber") ? validCards.size() : Math.min(validCards.size(), numCards);
