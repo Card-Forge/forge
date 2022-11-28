@@ -941,7 +941,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             }
             ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
 
-            if (sa.hasParam("OriginChoice")) {
+            if (sa.hasParam("OriginAlternative")) {
                 // Currently only used for Mishra, but may be used by other things
                 // Improve how this message reacts for other cards
                 final List<ZoneType> alt = ZoneType.listValueOf(sa.getParam("OriginAlternative"));
@@ -952,6 +952,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 sb.append(altFetchList.size()).append(" " + Localizer.getInstance().getMessage("lblCardMatchSearchingTypeInAlternateZones"));
 
                 if (!decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneFromAltSource, sb.toString(), null)) {
+                    origin.clear();
+                }
+                while (!alt.isEmpty() && origin.size() + alt.size() != 1) {
+                    String prompt = Localizer.getInstance().getMessage("lblSearchPlayerZoneConfirm", "{player's}", alt.get(0).getTranslatedName().toLowerCase());
+                    prompt = MessageUtil.formatMessage(prompt , decider, player);
+                    if (decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneFromAltSource, prompt, null)) {
+                        origin.add(alt.get(0));
+                    }
+                    alt.remove(0);
+                }
+                if (origin.isEmpty()) {
                     origin = alt;
                 }
             }
