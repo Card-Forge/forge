@@ -43,6 +43,7 @@ public class Graphics {
     private final ShaderProgram shaderUnderwater = new ShaderProgram(Gdx.files.internal("shaders").child("grayscale.vert"), Gdx.files.internal("shaders").child("underwater.frag"));
     private final ShaderProgram shaderNightDay = new ShaderProgram(Shaders.vertexShaderDayNight, Shaders.fragmentShaderDayNight);
     private final ShaderProgram shaderPixelate = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPixelateShader);
+    private final ShaderProgram shaderRipple = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragRipple);
     private final ShaderProgram shaderPixelateWarp = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPixelateShaderWarp);
     private final ShaderProgram shaderChromaticAbberation = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragChromaticAbberation);
 
@@ -841,14 +842,38 @@ public class Graphics {
             drawImage(image, x, y, w, h);
         }
     }
-    public void drawPixelated(FImage image, float x, float y, float w, float h, Float amount) {
+    public void drawRipple(FImage image, float x, float y, float w, float h, Float amount, boolean flipY) {
+        if (image == null)
+            return;
+        if (amount != null) {
+            batch.end();
+            shaderRipple.bind();
+            shaderRipple.setUniformf("u_resolution", Forge.isLandscapeMode() ? w : h , Forge.isLandscapeMode() ? h : w);
+            shaderRipple.setUniformf("u_time", amount);
+            shaderRipple.setUniformf("u_yflip", flipY ? 1f : 0f);
+            shaderRipple.setUniformf("u_bias", 0.7f);
+            batch.setShader(shaderRipple);
+            batch.begin();
+            //draw
+            image.draw(this, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            drawImage(image, x, y, w, h);
+        }
+    }
+    public void drawPixelated(FImage image, float x, float y, float w, float h, Float amount, boolean flipY) {
         if (image == null)
             return;
         if (amount != null) {
             batch.end();
             shaderPixelate.bind();
-            shaderPixelate.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+            shaderPixelate.setUniformf("u_resolution", Forge.isLandscapeMode() ? w : h , Forge.isLandscapeMode() ? h : w);
             shaderPixelate.setUniformf("u_cellSize", amount);
+            shaderPixelate.setUniformf("u_yflip", flipY ? 1f : 0f);
+            shaderPixelate.setUniformf("u_bias", 0.7f);
             batch.setShader(shaderPixelate);
             batch.begin();
             //draw
@@ -861,14 +886,16 @@ public class Graphics {
             drawImage(image, x, y, w, h);
         }
     }
-    public void drawPixelated(TextureRegion image, float x, float y, float w, float h, Float amount) {
+    public void drawPixelated(TextureRegion image, float x, float y, float w, float h, Float amount, boolean flipY) {
         if (image == null)
             return;
         if (amount != null) {
             batch.end();
             shaderPixelate.bind();
-            shaderPixelate.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
+            shaderPixelate.setUniformf("u_resolution", Forge.isLandscapeMode() ? w : h , Forge.isLandscapeMode() ? h : w);
             shaderPixelate.setUniformf("u_cellSize", amount);
+            shaderPixelate.setUniformf("u_yflip", flipY ? 1 : 0);
+            shaderPixelate.setUniformf("u_bias", 0.6f);
             batch.setShader(shaderPixelate);
             batch.begin();
             //draw
@@ -951,7 +978,7 @@ public class Graphics {
         batch.setShader(null);
         batch.begin();
     }
-    public void drawUnderWaterImage(FImage image, float x, float y, float w, float h, float time, boolean withDarkOverlay) {
+    public void drawUnderWaterImage(FImage image, float x, float y, float w, float h, float time) {
         if (image == null)
             return;
         batch.end();
@@ -959,6 +986,7 @@ public class Graphics {
         shaderUnderwater.setUniformf("u_amount", 10f*time);
         shaderUnderwater.setUniformf("u_speed", 0.5f*time);
         shaderUnderwater.setUniformf("u_time", time);
+        shaderUnderwater.setUniformf("u_bias", 0.7f);
         batch.setShader(shaderUnderwater);
         batch.begin();
         //draw
@@ -967,12 +995,6 @@ public class Graphics {
         batch.end();
         batch.setShader(null);
         batch.begin();
-        if(withDarkOverlay){
-            float oldalpha = alphaComposite;
-            setAlphaComposite(0.4f);
-            fillRect(Color.BLACK, x, y, w, h);
-            setAlphaComposite(oldalpha);
-        }
     }
     public void drawNightDay(FImage image, float x, float y, float w, float h, Float time) {
         if (image == null)
