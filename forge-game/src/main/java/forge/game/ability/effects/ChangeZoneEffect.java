@@ -919,6 +919,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
         final Game game = source.getGame();
         final boolean defined = sa.hasParam("Defined");
         final String changeType = sa.getParamOrDefault("ChangeType", "");
+        boolean mandatory = sa.hasParam("Mandatory");
         Map<Player, HiddenOriginChoices> HiddenOriginChoicesMap = Maps.newHashMap();
 
         for (Player player : fetchers) {
@@ -955,15 +956,22 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     origin.clear();
                 }
                 while (!alt.isEmpty() && origin.size() + alt.size() != 1) {
-                    String prompt = Localizer.getInstance().getMessage("lblSearchPlayerZoneConfirm", "{player's}", alt.get(0).getTranslatedName().toLowerCase());
+                    ZoneType z = alt.get(0);
+                    String prompt = Localizer.getInstance().getMessage("lblSearchPlayerZoneConfirm", "{player's}", z.getTranslatedName().toLowerCase());
                     prompt = MessageUtil.formatMessage(prompt , decider, player);
                     if (decider.getController().confirmAction(sa, PlayerActionConfirmMode.ChangeZoneFromAltSource, prompt, null)) {
-                        origin.add(alt.get(0));
+                        origin.add(z);
                     }
                     alt.remove(0);
                 }
                 if (origin.isEmpty()) {
                     origin = alt;
+                }
+                for (ZoneType z : origin) {
+                    // all cards that use this currently only search 1 card, no extra logic needed
+                    if (z.isKnown() && Iterables.any(altFetchList, CardPredicates.inZone(z))) {
+                        mandatory = true;
+                    }
                 }
             }
 
@@ -1131,7 +1139,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             thisList.removeAll(chosenCards);
                         }
                         Card c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa,
-                                thisList, delayedReveal, selectPrompt, !sa.hasParam("Mandatory"), decider);
+                                thisList, delayedReveal, selectPrompt, !mandatory, decider);
                         if (c == null) {
                             continue;
                         }
@@ -1208,7 +1216,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         if (changeNum > 1) { //indicate progress if multiple cards being chosen
                             title += " (" + (i + 1) + " / " + changeNum + ")";
                         }
-                        c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa, fetchList, shouldReveal ? delayedReveal : null, title, !sa.hasParam("Mandatory"), decider);
+                        c = decider.getController().chooseSingleCardForZoneChange(destination, origin, sa, fetchList, shouldReveal ? delayedReveal : null, title, !mandatory, decider);
                     }
 
                     if (c == null) {
