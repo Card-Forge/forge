@@ -261,10 +261,10 @@ public class AnimateAi extends SpellAbilityAi {
         // something is used for animate into creature
         if (types.isCreature()) {
             final Game game = ai.getGame();
-            CardCollectionView list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
+            CardCollection list = CardLists.getTargetableCards(game.getCardsIn(ZoneType.Battlefield), sa);
 
             // Filter AI-specific targets if provided
-            list = ComputerUtil.filterAITgts(sa, ai, (CardCollection)list, false);
+            list = ComputerUtil.filterAITgts(sa, ai, list, false);
 
             // list is empty, no possible targets
             if (list.isEmpty() && !alwaysActivatePWAbility) {
