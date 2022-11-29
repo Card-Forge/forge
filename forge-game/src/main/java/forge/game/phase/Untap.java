@@ -269,7 +269,7 @@ public class Untap extends Phase {
             if (c.isPhasedOut()) {
                 c.phase(true);
             } else if (c.hasKeyword(Keyword.PHASING)) {
-                // 702.23g If an object would simultaneously phase out directly
+                // CR 702.26h If an object would simultaneously phase out directly
                 // and indirectly, it just phases out indirectly.
                 if (c.isAttachment()) {
                     final Card ent = c.getAttachedTo();

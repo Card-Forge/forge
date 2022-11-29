@@ -5027,7 +5027,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             setDirectlyPhasedOut(direct);
         }
 
-        // CR 702.25g
+        // CR 702.26g
         if (!getAllAttachedCards().isEmpty()) {
             for (final Card eq : getAllAttachedCards()) {
                 if (eq.isPhasedOut() == phasingIn) {
@@ -5084,6 +5084,20 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
 
         if (!isPhasedOut()) {
+            // CR 702.26g phases in unattached if that object is still in the same zone or that player is still in the game
+            if (isAttachedToEntity()) {
+                final GameEntity ge = getEntityAttachedTo();
+                boolean unattach = false;
+                if (ge instanceof Player) {
+                    unattach = !((Player) ge).isInGame();
+                } else {
+                    unattach = !((Card) ge).isInPlay();
+                }
+                if (unattach) {
+                    unattachFromEntity(ge);
+                }
+            }
+
             // Just phased in, time to run the phased in trigger
             getGame().getTriggerHandler().registerActiveTrigger(this, false);
             getGame().getTriggerHandler().runTrigger(TriggerType.PhaseIn, runParams, false);

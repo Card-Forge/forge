@@ -74,9 +74,11 @@ public class ChooseSourceAi extends SpellAbilityAi {
                     }
 
                     final Card threatSource = topStack.getHostCard();
-                    List<? extends GameObject> objects = getTargets(topStack);
+                    List<? extends GameObject> objects;
                     if (!topStack.usesTargeting() && topStack.hasParam("ValidPlayers") && !topStack.hasParam("Defined")) {
                         objects = AbilityUtils.getDefinedPlayers(threatSource, topStack.getParam("ValidPlayers"), topStack);
+                    } else {
+                        objects = getTargets(topStack);
                     }
 
                     if (!objects.contains(ai) || topStack.hasParam("NoPrevention")) {
@@ -201,7 +203,7 @@ public class ChooseSourceAi extends SpellAbilityAi {
 
     private static List<GameObject> getTargets(final SpellAbility sa) {
         return sa.usesTargeting() && (!sa.hasParam("Defined"))
-                ? Lists.newArrayList(sa.getTargets())
+                ? sa.getTargets()
                 : AbilityUtils.getDefinedObjects(sa.getHostCard(), sa.getParam("Defined"), sa);
     }
 }

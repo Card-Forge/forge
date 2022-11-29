@@ -107,9 +107,8 @@ public class CountersRemoveAi extends SpellAbilityAi {
 
         // remove counter with Time might use Exile Zone too
         final TargetRestrictions tgt = sa.getTargetRestrictions();
-        CardCollection list = new CardCollection(game.getCardsIn(tgt.getZone()));
         // need to targetable
-        list = CardLists.getTargetableCards(list, sa);
+        CardCollection list = CardLists.getTargetableCards(game.getCardsIn(tgt.getZone()), sa);
 
         if (list.isEmpty()) {
             return false;
