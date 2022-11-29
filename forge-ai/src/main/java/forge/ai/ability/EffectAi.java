@@ -22,6 +22,7 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
 import forge.game.card.CardPredicates;
+import forge.game.card.CardUtil;
 import forge.game.combat.Combat;
 import forge.game.combat.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -216,8 +217,10 @@ public class EffectAi extends SpellAbilityAi {
             } else if (logic.equals("Fight")) {
                 return FightAi.canFightAi(ai, sa, 0, 0);
             } else if (logic.equals("Pump")) {
-                CardCollection options = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), sa.getTargetRestrictions().getValidTgts(), ai, sa.getHostCard(), sa);
-                options = CardLists.getTargetableCards(options, sa);
+                List<Card> options = CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa);
+                if (sa.getPayCosts().hasTapCost()) {
+                    options.remove(sa.getHostCard());
+                }
                 if (!options.isEmpty() && phase.isPlayerTurn(ai) && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                     sa.getTargets().add(ComputerUtilCard.getBestCreatureAI(options));
                     return true;
