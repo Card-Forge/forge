@@ -617,6 +617,7 @@ public boolean toolTipIsVisible()
                 batch.end();
                 shaderGrayscale.bind();
                 shaderGrayscale.setUniformf("u_grayness", 1f);
+                shaderGrayscale.setUniformf("u_bias", 0.7f);
                 batch.setShader(shaderGrayscale);
                 batch.begin();
                 //draw gray

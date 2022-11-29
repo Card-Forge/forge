@@ -175,6 +175,8 @@ public class RewardScene extends UIScene {
             done(true);
         else if (type == Type.Loot && !shown) {
             shown = true;
+            float delay = 0.09f;
+            generated.shuffle();
             for (Actor actor : new Array.ArrayIterator<>(generated)) {
                 if (!(actor instanceof RewardActor)) {
                     continue;
@@ -186,7 +188,8 @@ public class RewardScene extends UIScene {
                         public void run() {
                             reward.flip();
                         }
-                    }, 0.09f);
+                    }, delay);
+                    delay += 0.15f;
                 }
             }
         } else {
