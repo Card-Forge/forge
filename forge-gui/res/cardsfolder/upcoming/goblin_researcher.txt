@@ -1,0 +1,11 @@
+Name:Goblin Researcher
+ManaCost:3 R
+Types:Creature Goblin Wizard
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile the top card of your library. During any turn you attacked with CARDNAME, you may play that card.
+SVar:TrigExile:DB$ Dig | DigNum$ 1 | ChangeNum$ All | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | RememberObjects$ RememberedCard | StaticAbilities$ STPlay | SubAbility$ DBCleanup | ExileOnMoved$ Exile | Duration$ UntilHostLeavesPlay
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | CheckSVar$ X | Description$ During any turn you attacked with EFFECTSOURCE, you may play that card.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$CreaturesAttackedThisTurn Creature.EffectSource
+Oracle:When Goblin Researcher enters the battlefield, exile the top card of your library. During any turn you attacked with Goblin Researcher, you may play that card.
