@@ -50,31 +50,31 @@ public class Shaders {
             "#define PRECISION\n" +
             "#endif\n" +
             "\n" +
-            "varying vec2 v_texCoords;\n" +
             "uniform sampler2D u_texture;\n" +
+            "varying vec2 v_texCoords;\n" +
             "uniform float u_time;\n" +
-            "uniform vec2 u_resolution;\n" +
             "uniform float u_yflip;\n" +
             "uniform float u_bias;\n" +
             "\n" +
             "void main() {\n" +
             "\tvec2 uv = v_texCoords;\n" +
+            "\tvec2 center = vec2(0.0);\n" +
+            "\tvec2 coord = uv;\n" +
+            "\tvec2 centered_coord = (2.0 * uv) - 1.0;\n" +
             "\n" +
-            "    vec2 dv = vec2(0.5,0.5) - uv;\n" +
-            "    float dis = length(dv);\n" +
-            "    float sinFactor =0.02*(4.0*u_time) *sin(dis * 40.0 +u_time* -12.0);\n" +
-            "    float rippleOffset=0.35;\n" +
-            "    float discardFactor = clamp(0.2 - abs(rippleOffset - dis), 0.0, 1.0) / 0.2;\n" +
+            "\tfloat shutter = 0.9;\n" +
+            "\tfloat texelDistance = distance(center, centered_coord) * u_time;\n" +
+            "\tfloat dist = (1.41 * 1.41 * shutter) - texelDistance;\n" +
+            "\n" +
+            "\tfloat ripples = 1.0 - sin((texelDistance * 32.0) - (2.0 * u_time));\n" +
+            "\tcoord -= normalize(centered_coord - center) * clamp(ripples, 0.0, 1.0)*(0.050 * u_time);\n" +
             "    \n" +
-            "    vec2 offset = normalize(dv)* sinFactor * discardFactor;\n" +
-            "    uv = offset + uv;\n" +
-            "\t\n" +
-            "\tvec4 texColor;\n" +
+            "\tvec4 color;\n" +
             "\tif (u_yflip > 0)\n" +
-            "\t\ttexColor = texture2D(u_texture, vec2(uv.x, 1.-uv.y));\n" +
+            "\t\tcolor = texture2D(u_texture, vec2(coord.x, 1.-coord.y));\n" +
             "\telse\n" +
-            "\t\ttexColor = texture2D(u_texture, uv);\n" +
-            "    gl_FragColor = mix(vec4(0.0, 0.0, 0.0, 1.0), texColor, u_bias);\n" +
+            "\t\tcolor = texture2D(u_texture, coord);\n" +
+            "\tgl_FragColor = mix(vec4(0.0, 0.0, 0.0, 1.0), vec4(color.rgba * dist), u_bias);\n" +
             "}";
     public static final String fragChromaticAbberation="#ifdef GL_ES\n" +
             "#define PRECISION mediump\n" +

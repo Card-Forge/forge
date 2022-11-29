@@ -693,6 +693,7 @@ public class Graphics {
             batch.end();
             shaderGrayscale.bind();
             shaderGrayscale.setUniformf("u_grayness", 1f);
+            shaderGrayscale.setUniformf("u_bias", 1f);
             batch.setShader(shaderGrayscale);
             batch.begin();
             //draw gray
@@ -714,6 +715,7 @@ public class Graphics {
             batch.end();
             shaderGrayscale.bind();
             shaderGrayscale.setUniformf("u_grayness", 1f);
+            shaderGrayscale.setUniformf("u_bias", 0.8f);
             batch.setShader(shaderGrayscale);
             batch.begin();
             //draw gray
@@ -733,6 +735,7 @@ public class Graphics {
             batch.end();
             shaderGrayscale.bind();
             shaderGrayscale.setUniformf("u_grayness", 1f);
+            shaderGrayscale.setUniformf("u_bias", 0.8f);
             batch.setShader(shaderGrayscale);
             batch.begin();
             //draw gray
@@ -753,6 +756,7 @@ public class Graphics {
                 batch.end();
                 shaderGrayscale.bind();
                 shaderGrayscale.setUniformf("u_grayness", 1f);
+                shaderGrayscale.setUniformf("u_bias", 0.8f);
                 batch.setShader(shaderGrayscale);
                 batch.begin();
                 //draw gray
@@ -764,12 +768,13 @@ public class Graphics {
             }
         }
     }
-    public void drawGrayTransitionImage(FImage image, float x, float y, float w, float h, boolean withDarkOverlay, float percentage) {
+    public void drawGrayTransitionImage(FImage image, float x, float y, float w, float h, float percentage) {
         if (image == null)
             return;
         batch.end();
         shaderGrayscale.bind();
         shaderGrayscale.setUniformf("u_grayness", percentage);
+        shaderGrayscale.setUniformf("u_bias", 0.5f);
         batch.setShader(shaderGrayscale);
         batch.begin();
         //draw gray
@@ -778,17 +783,12 @@ public class Graphics {
         batch.end();
         batch.setShader(null);
         batch.begin();
-        if(withDarkOverlay){
-            float oldalpha = alphaComposite;
-            setAlphaComposite(0.4f);
-            fillRect(Color.BLACK, x, y, w, h);
-            setAlphaComposite(oldalpha);
-        }
     }
     public void drawGrayTransitionImage(Texture image, float x, float y, float w, float h, boolean withDarkOverlay, float percentage) {
         batch.end();
         shaderGrayscale.bind();
         shaderGrayscale.setUniformf("u_grayness", percentage);
+        shaderGrayscale.setUniformf("u_bias", withDarkOverlay ? 0.4f : 1f);
         batch.setShader(shaderGrayscale);
         batch.begin();
         //draw gray
@@ -797,17 +797,12 @@ public class Graphics {
         batch.end();
         batch.setShader(null);
         batch.begin();
-        if(withDarkOverlay){
-            float oldalpha = alphaComposite;
-            setAlphaComposite(0.4f);
-            fillRect(Color.BLACK, x, y, w, h);
-            setAlphaComposite(oldalpha);
-        }
     }
     public void drawGrayTransitionImage(TextureRegion image, float x, float y, float w, float h, boolean withDarkOverlay, float percentage) {
         batch.end();
         shaderGrayscale.bind();
         shaderGrayscale.setUniformf("u_grayness", percentage);
+        shaderGrayscale.setUniformf("u_bias", withDarkOverlay ? 0.4f : 1f);
         batch.setShader(shaderGrayscale);
         batch.begin();
         //draw gray
@@ -816,12 +811,6 @@ public class Graphics {
         batch.end();
         batch.setShader(null);
         batch.begin();
-        if(withDarkOverlay){
-            float oldalpha = alphaComposite;
-            setAlphaComposite(0.4f);
-            fillRect(Color.BLACK, x, y, w, h);
-            setAlphaComposite(oldalpha);
-        }
     }
     public void drawChromatic(TextureRegion image, float x, float y, float w, float h, Float time) {
         if (image == null)
@@ -848,10 +837,9 @@ public class Graphics {
         if (amount != null) {
             batch.end();
             shaderRipple.bind();
-            shaderRipple.setUniformf("u_resolution", Forge.isLandscapeMode() ? w : h , Forge.isLandscapeMode() ? h : w);
             shaderRipple.setUniformf("u_time", amount);
             shaderRipple.setUniformf("u_yflip", flipY ? 1f : 0f);
-            shaderRipple.setUniformf("u_bias", 0.7f);
+            shaderRipple.setUniformf("u_bias", 0.5f);
             batch.setShader(shaderRipple);
             batch.begin();
             //draw

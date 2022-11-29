@@ -845,6 +845,8 @@ public class MatchScreen extends FScreen {
             } else if (percentage > 1) {
                 percentage = 1;
             }
+            if (MatchController.instance.getGameView().isMatchOver())
+                percentage=1;
             if (Forge.isMobileAdventureMode) {
                 if (percentage < 1)
                     g.drawNightDay(currentBG, x, y, w, h, time);
@@ -860,10 +862,10 @@ public class MatchScreen extends FScreen {
             } else {
                 g.setAlphaComposite(percentage);
                 if (!daynightTransition) {
-                    if (image instanceof FSkinTexture)//for loading bg images
+                    if (image instanceof FSkinTexture && !GuiBase.isAndroid()) //for loading bg images, currently android version cant load this ripple shader
                         g.drawRipple(image, x, y, w, h, 1 - (percentage * 1), false);
                     else
-                        g.drawGrayTransitionImage(image, x, y, w, h, darkoverlay, 1 - (percentage * 1));
+                        g.drawGrayTransitionImage(image, x, y, w, h, 1 - (percentage * 1));
                 } else { //for non adventure transition.. todo generate new daynight + ripple shader for planechase images to use only single image
                     g.drawUnderWaterImage(image, x, y, w, h, 1 - (percentage * 1));
                 }
@@ -945,7 +947,7 @@ public class MatchScreen extends FScreen {
                         bgFullWidth = w;
                         bgHeight = scaledbgHeight;
                     }
-                    if (bgAnimation != null && !isGameFast && !MatchController.instance.getGameView().isMatchOver()) {
+                    if (bgAnimation != null && !isGameFast) {
                         bgAnimation.drawBackground(g, matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, !Forge.isMobileAdventureMode, true);
                     } else {
                         g.drawImage(matchBG, x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, !Forge.isMobileAdventureMode);
@@ -969,7 +971,7 @@ public class MatchScreen extends FScreen {
                                 bgFullWidth = w;
                                 bgHeight = scaledbgHeight;
                             }
-                            if (bgAnimation != null && !isGameFast && !MatchController.instance.getGameView().isMatchOver()) {
+                            if (bgAnimation != null && !isGameFast) {
                                 bgAnimation.drawBackground(g, FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true, false);
                             } else {
                                 g.drawImage(FSkinTexture.valueOf(imageName), x + (w - bgFullWidth) / 2, y, bgFullWidth, bgHeight, true);
