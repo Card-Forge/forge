@@ -137,9 +137,7 @@ public class TransitionScreen extends FContainer {
                         float centerY = screenH/2;
                         TextureRegion enemyAvatar = Config.instance().getAtlas(enemyAtlasPath).createSprite("Avatar");
                         enemyAvatar.flip(true, false);
-                        g.setColorRGBA(1f, 1f, 1f, 1.8f - percentage);
-                        g.drawImage(screenUIBackground, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-                        g.resetColorRGBA(oldAlpha);
+                        g.drawChromatic(screenUIBackground, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), 1.1f*percentage);
                         if (Forge.isLandscapeMode()) {
                             g.drawImage(playerAvatar, scale / 3 * percentage, centerY - scale / 2, scale, scale);
                             g.drawImage(enemyAvatar, screenW - scale - (percentage * scale / 3), centerY - scale / 2, scale, scale);
