@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.Lists;
 import forge.Forge;
@@ -250,7 +251,9 @@ public class DuelScene extends ForgeScene {
             LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(currentEnemy.name, selectAI(currentEnemy.ai));
             if (!enemy.nameOverride.isEmpty())
                 enemyPlayer.setName(enemy.nameOverride); //Override name if defined in the map.(only supported for 1 enemy atm)
-            FSkin.getAvatars().put(90001 + i, enemy.getAvatar(i));
+            TextureRegion enemyAvatar = enemy.getAvatar(i);
+            enemyAvatar.flip(true, false); //flip facing left
+            FSkin.getAvatars().put(90001 + i, enemyAvatar);
             enemyPlayer.setAvatarIndex(90001 + i);
             aiPlayer.setPlayer(enemyPlayer);
             aiPlayer.setTeamNumber(currentEnemy.teamNumber);

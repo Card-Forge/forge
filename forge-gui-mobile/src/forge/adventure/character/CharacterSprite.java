@@ -22,10 +22,12 @@ public class CharacterSprite extends MapActor {
     private AnimationDirections currentAnimationDir = AnimationDirections.None;
     private final Array<Sprite> avatar=new Array<>();
     public boolean hidden = false;
+    private String atlasPath;
 
     public CharacterSprite(int id,String path) {
         super(id);
         collisionHeight=0.4f;
+        atlasPath = path;
         load(path);
     }
     public CharacterSprite(String path) {
@@ -234,7 +236,12 @@ public class CharacterSprite extends MapActor {
 
 
     public Sprite getAvatar() {
+        if (avatar == null || avatar.isEmpty())
+            return null;
         return avatar.first();
+    }
+    public String getAtlasPath() {
+        return atlasPath;
     }
     public Sprite getAvatar(int index) {
         return avatar.get(index);

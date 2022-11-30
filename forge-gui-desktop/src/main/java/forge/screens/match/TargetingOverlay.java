@@ -257,49 +257,53 @@ public class TargetingOverlay {
         cardPanels.clear();
         cardsVisualized.clear();
 
-        switch (matchUI.getCDock().getArcState()) {
-            case OFF:
-                return true;
-            case MOUSEOVER:
-                // Draw only hovered card
-                activePanel = null;
-                for (final VField f : matchUI.getFieldViews()) {
-                    cardPanels.addAll(f.getTabletop().getCardPanels());
-                    final List<CardPanel> cPanels = f.getTabletop().getCardPanels();
-                    for (final CardPanel c : cPanels) {
-                        if (c.isSelected()) {
-                            activePanel = c;
-                            break;
+        try {
+            switch (matchUI.getCDock().getArcState()) {
+                case OFF:
+                    return true;
+                case MOUSEOVER:
+                    // Draw only hovered card
+                    activePanel = null;
+                    for (final VField f : matchUI.getFieldViews()) {
+                        cardPanels.addAll(f.getTabletop().getCardPanels());
+                        final List<CardPanel> cPanels = f.getTabletop().getCardPanels();
+                        for (final CardPanel c : cPanels) {
+                            if (c.isSelected()) {
+                                activePanel = c;
+                                break;
+                            }
                         }
                     }
-                }
-                if (activePanel == null) { return true; }
-                break;
-            case ON:
-                // Draw all
-                for (final VField f : matchUI.getFieldViews()) {
-                    cardPanels.addAll(f.getTabletop().getCardPanels());
-                }
-        }
-
-        //final Point docOffsets = FView.SINGLETON_INSTANCE.getLpnDocument().getLocationOnScreen();
-        // Locations of arc endpoint, per card, with ID as primary key.
-        final Map<Integer, Point> endpoints = getCardEndpoints();
-
-        if (matchUI.getCDock().getArcState() == ArcState.MOUSEOVER) {
-            // Only work with the active panel
-            if (activePanel != null) {
-                addArcsForCard(activePanel.getCard(), endpoints, combat);
+                    if (activePanel == null) { return true; }
+                    break;
+                case ON:
+                    // Draw all
+                    for (final VField f : matchUI.getFieldViews()) {
+                        cardPanels.addAll(f.getTabletop().getCardPanels());
+                    }
             }
-        }
-        else {
-            // Work with all card panels currently visible
-            for (final CardPanel c : cardPanels) {
-                if (!c.isShowing()) {
-                    continue;
+
+            //final Point docOffsets = FView.SINGLETON_INSTANCE.getLpnDocument().getLocationOnScreen();
+            // Locations of arc endpoint, per card, with ID as primary key.
+            final Map<Integer, Point> endpoints = getCardEndpoints();
+
+            if (matchUI.getCDock().getArcState() == ArcState.MOUSEOVER) {
+                // Only work with the active panel
+                if (activePanel != null) {
+                    addArcsForCard(activePanel.getCard(), endpoints, combat);
                 }
-                addArcsForCard(c.getCard(), endpoints, combat);
             }
+            else {
+                // Work with all card panels currently visible
+                for (final CardPanel c : cardPanels) {
+                    if (!c.isShowing()) {
+                        continue;
+                    }
+                    addArcsForCard(c.getCard(), endpoints, combat);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return true;

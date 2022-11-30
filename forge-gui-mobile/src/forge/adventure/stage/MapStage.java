@@ -695,7 +695,7 @@ public class MapStage extends GameStage {
                         duelScene.initDuels(player, mob);
                         if (isInMap && effect != null)
                             duelScene.setDungeonEffect(effect);
-                        Forge.switchScene(DuelScene.instance());
+                        Forge.switchScene(duelScene);
                     }, Forge.takeScreenshot(), true, false));
                 }
             });

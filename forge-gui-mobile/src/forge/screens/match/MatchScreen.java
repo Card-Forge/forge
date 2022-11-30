@@ -903,8 +903,9 @@ public class MatchScreen extends FScreen {
 
             boolean isGameFast = MatchController.instance.isGameFast();
             float midField = topPlayerPanel.getBottom();
+            float promptHeight = !Forge.isLandscapeMode() || bottomPlayerPrompt == null ? 0f : bottomPlayerPrompt.getHeight()/1.3f;
             float x = topPlayerPanel.getField().getLeft();
-            float y = midField - topPlayerPanel.getField().getHeight();
+            float y = midField - topPlayerPanel.getField().getHeight() - promptHeight;
             float w = getWidth() - x;
             float bgFullWidth, scaledbgHeight;
             int multiplier = playerPanels.keySet().size() - 1; //fix scaling of background when zoomed in multiplayer

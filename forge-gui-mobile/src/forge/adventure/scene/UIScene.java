@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Null;
@@ -672,5 +673,19 @@ public class UIScene extends Scene {
         }
         Gdx.input.setInputProcessor(stage);
         super.enter();
+    }
+    public TextureRegion getUIBackground() {
+        try {
+            Actor a = ui.getChild(0);
+            if (a instanceof Image) {
+                Drawable d = ((Image) a).getDrawable();
+                if (d instanceof TextureRegionDrawable) {
+                    return ((TextureRegionDrawable) d).getRegion();
+                }
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return null;
     }
 }
