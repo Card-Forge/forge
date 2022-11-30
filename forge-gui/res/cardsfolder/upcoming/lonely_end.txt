@@ -1,0 +1,10 @@
+Name:Lonely End
+ManaCost:1 B
+Types:Instant
+A:SP$ Charm | Choices$ DBDebuff,DBLoyalty | CharmNum$ 1
+SVar:DBDebuff:DB$ Pump | ValidTgts$ Creature | NumAtt$ -3 | NumDef$ -3 | SubAbility$ DBGainLife | SpellDescription$ Target creature gets -3/-3 until end of turn
+SVar:DBLoyalty:DB$ RemoveCounter | ValidTgts$ Planeswalker | CounterType$ LOYALTY | CounterNum$ 3 | SubAbility$ DBGainLife | SpellDescription$ Remove three loyalty counters from target planeswalker
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2 | CheckSVar:X | SVarCompare$ EQ0 | SpellDescription$ If you weren't the starting player, you gain two life 
+SVar:X:Count$StartingPlayer.1.0
+DeckHas:Ability$LifeGain
+Oracle:Choose one -\n* Target creature gets -3/-3 until end of turn\n*Remove three loyalty counters from target planeswalker\nIf you weren't the starting player, you gain 2 life. 
