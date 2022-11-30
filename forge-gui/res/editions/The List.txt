@@ -895,3 +895,78 @@ F567 R Puresteel Angel @Lukas Litzsinger
 887 U Shifting Wall @Michael Sutfin
 888 U Desert @Glen Angus
 889 U Dromar's Cavern @Franz Vohwinkel
+890 R Archaeomancer's Map @Ovidio Cartagena
+891 U Argivian Find @Roger Raupp
+892 R Blessed Reversal @Pete Venters
+893 R Catastrophe @Andrew Robinson
+894 R Crescendo of War @Daarken
+895 R Death or Glory @Jeff Easley
+896 R Fall of the Thran @Jason Felix
+897 R Kataki, War's Wage @Matt Thompson
+898 U Pledge of Loyalty @Franz Vohwinkel
+899 R The Antiquities War @Mark Tedin
+900 U Argivian Restoration @Roger Raupp
+901 U Energy Flux @Qiao Dafu
+902 U Glacian, Powerstone Engineer @Magali Villeneuve
+903 R Hurkyl's Recall @Ralph Horsley
+904 R March of the Machines @Ben Thompson
+905 M Mechanized Production @Adam Paquette
+906 U Opportunity @Ron Spears
+907 R Beacon of Unrest @Joseph Meehan
+908 R Dark Suspicions @Matt Cavotta
+909 C Grisly Transformation @Tyler Jacobson
+910 R K'rrik, Son of Yawgmoth @Chase Stone
+911 U Order of Yawgmoth @Chippy
+912 U Priest of Gix @Brian Despain
+913 M Tevesh Szat, Doom of Fools @Livia Prima
+914 R Witch Engine @Kev Walker
+915 R Yawgmoth's Agenda @Arnie Swekel
+916 U Acidic Soil @Scott M. Fischer
+917 R Brand @Donato Giancola
+918 U Detonate @Dave Dorman
+919 M Feldon of the Third Path @Chase Stone
+920 R In the Web of War @Ron Spencer
+921 U Shatterstorm @Paolo Parente
+922 R Words of War @Justin Sweet
+923 R World at War @Igor Kieryluk
+924 U Argothian Elder @DiTerlizzi
+925 R Bane of Progress @Lars Grant-West
+926 R Citanul Hierophants @Vincent Evans
+927 R Collector Ouphe @Filip Burburan
+928 R Force of Vigor @Randy Vargas
+929 U Gaea's Embrace @Paolo Parente
+930 R Gaea's Revenge @Kekai Kotaki
+931 R Molder Slug @Heather Hudson
+932 C Priest of Titania @Rebecca Guay
+933 U Retaliation @Tom Fleming
+934 R Tempting Wurm @Bob Petillo
+935 M Titania, Protector of Argoth @Magali Villeneuve
+936 M Verdurous Gearhulk @Jaime Jones
+937 R Mishra, Artificer Prodigy @Scott M. Fischer
+938 R Powerstone Minefield @Greg Hildebrandt
+939 M Saheeli Rai @Willian Murai
+940 M Tawnos, Urza's Apprentice @Matt Stewart
+941 U Thopter Foundry @Ralph Horsley
+942 R Colossus of Sardia @Greg Staples
+943 U Crumbling Colossus @Michael C. Hayes
+944 U Endoskeleton @Mark Tedin
+945 R Eye of Yawgmoth @DiTerlizzi
+946 R Mishra's Helix @Berry
+947 R Mishra's Self-Replicator @Joseph Meehan
+948 R Pentavus @Greg Staples
+949 R Phyrexian Colossus @Mark Tedin
+950 U Power Armor @Doug Chaffee
+951 C Powerstone Shard @Lindsey Look
+952 R Prototype Portal @Drew Baker
+953 R Smokestack @Scott Kirschner
+954 U Thran Forge @Mark Poole
+955 U Thran War Machine @Pete Venters
+956 U Toymaker @Frank Kelly Freas
+957 U Urza's Armor @rk post
+958 C Yotian Soldier @Luca Zontini
+959 U Memorial to Genius @James Paick
+960 U Mishra's Factory @Scott Chou
+961 U Mouth of Ronom @Daren Bader
+962 R Thran Quarry @Michael Sutfin
+963 U Urza's Factory @Mark Tedin
+964 R Urza's Saga @Titus Lunter
