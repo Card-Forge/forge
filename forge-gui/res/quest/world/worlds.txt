@@ -3,6 +3,7 @@ Name:Random Standard
 Name:Random Pioneer
 Name:Random Modern
 Name:Random Commander
+Name:Evolving Wilds
 Name:Amonkhet|Dir:Amonkhet|Sets:AKH, HOU, AKR
 Name:Jamuraa|Dir:jamuraa|Sets:5ED, ARN, MIR, VIS, WTH
 Name:Kamigawa|Dir:2004 Kamigawa|Sets:CHK, BOK, SOK

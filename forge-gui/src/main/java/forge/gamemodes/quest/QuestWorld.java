@@ -26,9 +26,12 @@ import java.util.Set;
 
 import com.google.common.base.Function;
 
+import forge.card.CardEdition;
 import forge.deck.Deck;
 import forge.game.GameFormat;
 import forge.gamemodes.quest.data.GameFormatQuest;
+import forge.gamemodes.quest.setrotation.ISetRotation;
+import forge.gamemodes.quest.setrotation.QueueRandomRotation;
 import forge.item.PaperCard;
 import forge.model.FModel;
 import forge.util.storage.StorageReaderFile;
@@ -46,6 +49,7 @@ public class QuestWorld implements Comparable<QuestWorld>{
     public static final String MODERNWORLDNAME = "Random Modern";
     public static final String RANDOMCOMMANDERWORLDNAME = "Random Commander";
     public static final String MAINWORLDNAME = "Main world";
+    public static final String EVOLVINGWILDSWORLDNAME = "Evolving Wilds";
 
     private boolean isCustom;
 
@@ -215,6 +219,20 @@ public class QuestWorld implements Comparable<QuestWorld>{
                 useFormat = new GameFormatQuest(QuestWorld.RANDOMCOMMANDERWORLDNAME,
                         FModel.getFormats().getFormat("Commander").getAllowedSetCodes(),
                         FModel.getFormats().getFormat("Commander").getBannedCardNames(),false);
+            }
+
+            if (useName.equalsIgnoreCase(QuestWorld.EVOLVINGWILDSWORLDNAME)){
+                ISetRotation rot = new QueueRandomRotation(6, 5, 1);
+                List<String> allowedCodes = new ArrayList<>();
+                for (CardEdition edition : FModel.getMagicDb().getEditionsTypeMap().get(CardEdition.Type.CORE)) {
+                    allowedCodes.add(edition.getCode());
+                }
+                for (CardEdition edition : FModel.getMagicDb().getEditionsTypeMap().get(CardEdition.Type.EXPANSION)) {
+                    allowedCodes.add(edition.getCode());
+                }
+                useFormat = new GameFormatQuest(QuestWorld.EVOLVINGWILDSWORLDNAME,
+                        allowedCodes,
+                        FModel.getFormats().getVintage().getBannedCardNames(),false, rot);
             }
 
             // System.out.println("Creating quest world " + useName + " (index " + useIdx + ", dir: " + useDir);
