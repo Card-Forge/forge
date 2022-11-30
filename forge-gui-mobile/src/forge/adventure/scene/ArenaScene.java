@@ -1,7 +1,10 @@
 package forge.adventure.scene;
 
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
@@ -12,6 +15,7 @@ import forge.Forge;
 import forge.adventure.character.EnemySprite;
 import forge.adventure.data.ArenaData;
 import forge.adventure.data.WorldData;
+import forge.adventure.player.AdventurePlayer;
 import forge.adventure.stage.GameHUD;
 import forge.adventure.stage.IAfterMatch;
 import forge.adventure.stage.WorldStage;
@@ -25,6 +29,8 @@ import java.util.Random;
  * Displays the rewards of a fight or a treasure
  */
 public class ArenaScene extends UIScene implements IAfterMatch {
+    private FileHandle vsIcon = Config.instance().getFile("ui/vs.png");
+    private TextureRegion vsTextureRegion = vsIcon.exists() ? new TextureRegion(new Texture(vsIcon)) : null;
     private static ArenaScene object;
     private final float gridSize;
     private ArenaData arenaData;
@@ -101,6 +107,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
     private void loose() {
         doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
+        doneButton.layout();
         startButton.setDisabled(true);
         arenaStarted=false;
     }
@@ -123,7 +130,9 @@ public class ArenaScene extends UIScene implements IAfterMatch {
         goldLabel.setVisible(false);
         arenaStarted=true;
         startButton.setText(Forge.getLocalizer().getMessage("lblContinue"));
+        startButton.layout();
         doneButton.setText(Forge.getLocalizer().getMessage("lblConcede"));
+        doneButton.layout();
         Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
         Current.player().takeGold(arenaData.entryFee);
         startRound();
@@ -172,6 +181,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
             arenaStarted=false;
             startButton.setDisabled(true);
             doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
+            doneButton.layout();
         }
     }
 
@@ -207,11 +217,12 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
     private void startRound() {
         DuelScene duelScene =  DuelScene.instance();
+        EnemySprite enemy = enemies.get(enemies.size-1);
         FThreads.invokeInEdtNowOrLater(() -> {
             Forge.setTransitionScreen(new TransitionScreen(() -> {
-                duelScene.initDuels(WorldStage.getInstance().getPlayerSprite(), enemies.get(enemies.size-1));
-                Forge.switchScene(DuelScene.instance());
-            }, Forge.takeScreenshot(), true, false));
+                duelScene.initDuels(WorldStage.getInstance().getPlayerSprite(), enemy);
+                Forge.switchScene(duelScene);
+            }, Forge.takeScreenshot(), true, false, false, false, "", vsTextureRegion, AdventurePlayer.current().avatar(), enemy.getAtlasPath()));
         });
     }
 
@@ -253,7 +264,9 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
     public void loadArenaData(ArenaData data,long seed) {
         startButton.setText(Forge.getLocalizer().getMessage("lblStart"));
+        startButton.layout();
         doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
+        doneButton.layout();
         arenaData=data;
         //rand.setSeed(seed); allow to reshuffle arena enemies for now
 
@@ -275,6 +288,7 @@ public class ArenaScene extends UIScene implements IAfterMatch {
 
 
         goldLabel.setText(data.entryFee +" [+Gold]");
+        goldLabel.layout();
         goldLabel.setVisible(true);
 
         startButton.setDisabled(data.entryFee>Current.player().getGold());

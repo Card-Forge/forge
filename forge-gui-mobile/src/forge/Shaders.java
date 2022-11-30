@@ -43,13 +43,11 @@ public class Shaders {
             "    gl_Position = u_projTrans * a_position;\n" +
             "}";
     public static final String fragRipple="#ifdef GL_ES\n" +
-            "#define PRECISION mediump\n" +
-            "precision PRECISION float;\n" +
-            "precision PRECISION int;\n" +
+            "#define LOWP lowp\n" +
+            "precision mediump float;\n" +
             "#else\n" +
-            "#define PRECISION\n" +
+            "#define LOWP \n" +
             "#endif\n" +
-            "\n" +
             "uniform sampler2D u_texture;\n" +
             "varying vec2 v_texCoords;\n" +
             "uniform float u_time;\n" +
@@ -77,13 +75,11 @@ public class Shaders {
             "\tgl_FragColor = mix(vec4(0.0, 0.0, 0.0, 1.0), vec4(color.rgba * dist), u_bias);\n" +
             "}";
     public static final String fragChromaticAbberation="#ifdef GL_ES\n" +
-            "#define PRECISION mediump\n" +
-            "precision PRECISION float;\n" +
-            "precision PRECISION int;\n" +
+            "#define LOWP lowp\n" +
+            "precision mediump float;\n" +
             "#else\n" +
-            "#define PRECISION\n" +
+            "#define LOWP \n" +
             "#endif\n" +
-            "\n" +
             "varying vec2 v_texCoords;\n" +
             "uniform sampler2D u_texture;\n" +
             "uniform float u_time;\n" +
@@ -105,13 +101,11 @@ public class Shaders {
             "    gl_FragColor = vec4(col,1.0);\n" +
             "}";
     public static final String fragPixelateShader = "#ifdef GL_ES\n" +
-            "#define PRECISION mediump\n" +
-            "precision PRECISION float;\n" +
-            "precision PRECISION int;\n" +
+            "#define LOWP lowp\n" +
+            "precision mediump float;\n" +
             "#else\n" +
-            "#define PRECISION\n" +
+            "#define LOWP \n" +
             "#endif\n" +
-            "\n" +
             "uniform sampler2D u_texture;\n" +
             "uniform float u_cellSize;\n" +
             "uniform vec2 u_resolution;\n" +
@@ -129,9 +123,11 @@ public class Shaders {
             "\tgl_FragColor = mix(vec4(0.0, 0.0, 0.0, 1.0), texColor, u_bias);\n" +
             "}";
     public static final String fragPixelateShaderWarp = "#ifdef GL_ES\n" +
+            "#define LOWP lowp\n" +
             "precision mediump float;\n" +
+            "#else\n" +
+            "#define LOWP \n" +
             "#endif\n" +
-            "\n" +
             "varying vec2 v_texCoords;\n" +
             "uniform sampler2D u_texture;\n" +
             "\n" +

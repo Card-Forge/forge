@@ -774,7 +774,7 @@ public class Graphics {
         batch.end();
         shaderGrayscale.bind();
         shaderGrayscale.setUniformf("u_grayness", percentage);
-        shaderGrayscale.setUniformf("u_bias", 0.5f);
+        shaderGrayscale.setUniformf("u_bias", 0.6f);
         batch.setShader(shaderGrayscale);
         batch.begin();
         //draw gray
@@ -788,7 +788,7 @@ public class Graphics {
         batch.end();
         shaderGrayscale.bind();
         shaderGrayscale.setUniformf("u_grayness", percentage);
-        shaderGrayscale.setUniformf("u_bias", withDarkOverlay ? 0.4f : 1f);
+        shaderGrayscale.setUniformf("u_bias", withDarkOverlay ? 0.5f : 1f);
         batch.setShader(shaderGrayscale);
         batch.begin();
         //draw gray
@@ -802,7 +802,7 @@ public class Graphics {
         batch.end();
         shaderGrayscale.bind();
         shaderGrayscale.setUniformf("u_grayness", percentage);
-        shaderGrayscale.setUniformf("u_bias", withDarkOverlay ? 0.4f : 1f);
+        shaderGrayscale.setUniformf("u_bias", withDarkOverlay ? 0.5f : 1f);
         batch.setShader(shaderGrayscale);
         batch.begin();
         //draw gray
