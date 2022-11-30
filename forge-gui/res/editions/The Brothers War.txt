@@ -31,7 +31,7 @@ ScryfallCode=BRO
 17 C Military Discipline @Francisco Miyara
 18 M Myrel, Shield of Argive @Ryan Pancoast
 19 C Phalanx Vanguard @Izzy
-20 C Powerstone Engineer @Dan Scott
+20 C Powerstone Engineer @Scott Murphy
 21 C Prison Sentence @Valera Lutfullina
 22 C Recommission @Andrew Mar
 23 U Recruitment Officer @Johan Grenier
@@ -107,7 +107,7 @@ ScryfallCode=BRO
 93 C Emergency Weld @Raoul Vitale
 94 R Fateful Handoff @Gaboleps
 95 M Gix, Yawgmoth Praetor @Anna Podedworna
-96 C Gix's Caress @Iqnatius Budi
+96 C Gix's Caress @Ignatius Budi
 97 R Gix's Command @Dominik Mayer
 98 C Gixian Infiltrator @Peter Polach
 99 R Gixian Puppeteer @Bastien L. Deharme
@@ -129,7 +129,7 @@ ScryfallCode=BRO
 115 C Thraxodemon @Nino Is
 116 C Trench Stalker @Nino Vecia
 117 U Ashnod's Harvester @Halil Ural
-118 C Clay Revenant @Filip Burburan
+118 C Clay Revenant @Filipe Pagliuso
 119 C Dredging Claw @Artur Nakhodkin
 120 C Goring Warplow @Wayne Reynolds
 121 M Phyrexian Fleshgorger @Steve Prescott
