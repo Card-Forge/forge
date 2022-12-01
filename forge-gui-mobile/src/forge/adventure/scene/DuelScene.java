@@ -51,10 +51,11 @@ public class DuelScene extends ForgeScene {
     private static DuelScene object;
 
     public static DuelScene instance() {
-        if(object==null)
-            object=new DuelScene();
+        if (object == null)
+            object = new DuelScene();
         return object;
     }
+
     //GameLobby lobby;
     HostedMatch hostedMatch;
     EnemySprite enemy;
@@ -85,7 +86,7 @@ public class DuelScene extends ForgeScene {
         String enemyName = (enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride);
         boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
         Current.player().clearBlessing();
-        if ((chaosBattle||showMessages) && !winner) {
+        if ((chaosBattle || showMessages) && !winner) {
             callbackExit = true;
             List<String> insult = Lists.newArrayList("I'm sorry...", "... ....", "Learn from your defeat.",
                     "I haven't begun to use my full power.", "No matter how much you try, you still won't beat me.",
@@ -244,7 +245,7 @@ public class DuelScene extends ForgeScene {
                 this.AIExtras = aiCards;
                 deck = deckProxy.getDeck();
             } else {
-                deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck()||Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
+                deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
             }
             RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, null, false, null, null);
 
@@ -300,7 +301,7 @@ public class DuelScene extends ForgeScene {
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap);
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
-        if (chaosBattle||showMessages) {
+        if (chaosBattle || showMessages) {
             List<String> list = Lists.newArrayList("It all depends on your skill!", "It's showtime!", "Let's party!",
                     "You've proved yourself!", "Are you ready? Go!", "Prepare to strike, now!", "Let's go!", "What's next?",
                     "Yeah, I've been waitin' for this!", "The stage of battle is set!", "And the battle begins!", "Let's get started!",

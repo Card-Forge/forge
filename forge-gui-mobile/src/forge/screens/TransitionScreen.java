@@ -1,41 +1,44 @@
 package forge.screens;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import forge.Forge;
 import forge.Graphics;
 import forge.adventure.scene.ArenaScene;
 import forge.adventure.util.Config;
+import forge.adventure.util.Controls;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkin;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.gui.FThreads;
-import forge.gui.GuiBase;
 import forge.sound.SoundSystem;
 import forge.toolbox.FContainer;
 import forge.toolbox.FProgressBar;
-import forge.util.MyRandom;
 
 public class TransitionScreen extends FContainer {
     private BGAnimation bgAnimation;
     private FProgressBar progressBar;
     Runnable runnable;
-    TextureRegion textureRegion, screenUIBackground, playerAvatar, vsTexture;
-    String enemyAtlasPath;
+    TextureRegion textureRegion, screenUIBackground, playerAvatar;
+    Texture vsTexture;
+    String enemyAtlasPath, playerAvatarName, enemyAvatarName;
     private String message = "";
     boolean matchTransition, isloading, isIntro, isFadeMusic, isArenaScene;
-
+    GlyphLayout layout;
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading) {
         this(proc, screen, enterMatch, loading, false, false);
     }
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading, String loadingMessage) {
-        this(proc, screen, enterMatch, loading, false, false, loadingMessage, null, null, "");
+        this(proc, screen, enterMatch, loading, false, false, loadingMessage, null, "", "", "");
     }
     public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading, boolean intro, boolean fadeMusic) {
-        this(proc, screen, enterMatch, loading, intro, fadeMusic, "", null, null, "");
+        this(proc, screen, enterMatch, loading, intro, fadeMusic, "", null, "", "", "");
     }
-    public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading, boolean intro, boolean fadeMusic, String loadingMessage, TextureRegion vsIcon, TextureRegion player, String enemy) {
+    public TransitionScreen(Runnable proc, TextureRegion screen, boolean enterMatch, boolean loading, boolean intro, boolean fadeMusic, String loadingMessage, TextureRegion player, String enemyAtlas, String playerName, String enemyName) {
         progressBar = new FProgressBar();
         progressBar.setMaximum(100);
         progressBar.setPercentMode(true);
@@ -57,8 +60,11 @@ public class TransitionScreen extends FContainer {
             screenUIBackground = null;
         }
         playerAvatar = player;
-        enemyAtlasPath = enemy;
-        vsTexture = vsIcon;
+        playerAvatarName = playerName;
+        enemyAvatarName = enemyName;
+        enemyAtlasPath = enemyAtlas;
+        vsTexture = Forge.getAssets().fallback_skins().get(2);
+        layout = new GlyphLayout();
     }
 
     public FProgressBar getProgressBar() {
@@ -128,45 +134,59 @@ public class TransitionScreen extends FContainer {
                     g.draw(progressBar);
                 }
             } else if (matchTransition) {
+                float screenW = Forge.isLandscapeMode() ? Forge.getScreenWidth() : Forge.getScreenHeight();
+                float screenH = Forge.isLandscapeMode() ? Forge.getScreenHeight() : Forge.getScreenWidth();
+                float scale = screenW/4;
+                float centerX = screenW/2;
+                float centerY = screenH/2;
+                TextureRegion enemyAvatar = Config.instance().getAtlas(enemyAtlasPath).createSprite("Avatar");
+                enemyAvatar.flip(true, false);
+                BitmapFont font = Controls.getBitmapFont("default", 5f);
                 if (textureRegion != null) {
-                    if (isArenaScene) {
-                        float screenW = Forge.isLandscapeMode() ? Forge.getScreenWidth() : Forge.getScreenHeight();
-                        float screenH = Forge.isLandscapeMode() ? Forge.getScreenHeight() : Forge.getScreenWidth();
-                        float scale = screenW/4;
-                        float centerX = screenW/2;
-                        float centerY = screenH/2;
-                        TextureRegion enemyAvatar = Config.instance().getAtlas(enemyAtlasPath).createSprite("Avatar");
-                        enemyAvatar.flip(true, false);
-                        g.drawChromatic(screenUIBackground, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), 1.1f*percentage);
-                        if (Forge.isLandscapeMode()) {
-                            g.drawImage(playerAvatar, scale / 3 * percentage, centerY - scale / 2, scale, scale);
-                            g.drawImage(enemyAvatar, screenW - scale - (percentage * scale / 3), centerY - scale / 2, scale, scale);
-                            float vsScale = (screenW / 3.2f) * percentage;
-                            g.startRotateTransform(screenW/2, screenH/2, 180-(180*percentage));
-                            g.drawImage(vsTexture, centerX - vsScale / 2, centerY - vsScale / 2, vsScale, vsScale);
-                            g.endTransform();
-                        } else {
-                            g.drawImage(playerAvatar, centerY - scale / 2, scale / 3 * percentage, scale, scale);
-                            g.drawImage(enemyAvatar,centerY - scale / 2 ,screenW - scale - (percentage * scale / 3), scale, scale);
-                            float vsScale = (screenW / 3.2f) * percentage;
-                            g.startRotateTransform(screenH/2, screenW/2, 180-(180*percentage));
-                            g.drawImage(vsTexture, centerY - vsScale / 2, centerX - vsScale / 2, vsScale, vsScale);
-                            g.endTransform();
-                        }
-                        g.setAlphaComposite(1-(percentage+0.6f));
-                        g.drawImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-                        g.setAlphaComposite(oldAlpha);
-                    } else {
-                        if (GuiBase.isAndroid()) {
-                            g.drawChromatic(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), percentage);
-                        } else {
-                            int max = Forge.isLandscapeMode() ? Forge.getScreenHeight() / 32 : Forge.getScreenWidth() / 32;
-                            int min = Forge.isLandscapeMode() ? Forge.getScreenHeight() / 64 : Forge.getScreenWidth() / 64;
-                            int val = MyRandom.getRandom().nextInt(max - min) + min;
-                            g.drawPixelatedWarp(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), val * percentage);
-                        }
-                    }
+                    if (isArenaScene)
+                        g.drawImage(screenUIBackground, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+                    else
+                        g.drawImage(FSkinTexture.ADV_BG_TEXTURE, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+                    g.setAlphaComposite(1-percentage);
+                    g.drawImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+                    g.setAlphaComposite(oldAlpha);
                 }
+                if (Forge.isLandscapeMode()) {
+                    //player
+                    float playerAvatarX = (screenW/4 - scale/2) * percentage;
+                    float playerAvatarY = centerY - scale/2;
+                    g.drawImage(playerAvatar, playerAvatarX, playerAvatarY, scale, scale);
+                    layout.setText(font, playerAvatarName);
+                    g.drawText(playerAvatarName, font, screenW/4 - layout.width/2, playerAvatarY - layout.height, Color.WHITE, percentage);
+                    //enemy
+                    float enemyAvatarX = screenW - screenW/4 - (scale/2 * percentage);
+                    float enemyAvatarY = centerY - scale/2;
+                    g.drawImage(enemyAvatar, enemyAvatarX, enemyAvatarY, scale, scale);
+                    layout.setText(font, enemyAvatarName);
+                    g.drawText(enemyAvatarName, font,  screenW - screenW/4 - layout.width/2, enemyAvatarY - layout.height, Color.WHITE, percentage);
+                    //vs
+                    float vsScale = (screenW / 3.2f);
+                    g.drawHueShift(vsTexture, centerX - vsScale / 2, centerY - vsScale / 2, vsScale, vsScale, percentage*4);
+                } else {
+                    //enemy
+                    float enemyAvatarX = centerY - scale / 2;
+                    float enemyAvatarY = scale / 3 * percentage;
+                    g.drawImage(enemyAvatar, enemyAvatarX, enemyAvatarY, scale, scale);
+                    //player
+                    float playerAvatarX = centerY - scale / 2;
+                    float playerAvatarY = screenW - scale - (percentage * scale / 3);
+                    g.drawImage(playerAvatar, playerAvatarX, playerAvatarY, scale, scale);
+                    //vs
+                    float vsScale = (screenW / 3.2f);
+                    g.drawHueShift(vsTexture, centerY - vsScale / 2, centerX - vsScale / 2, vsScale, vsScale, percentage*4);
+                    //names
+                    layout.setText(font, enemyAvatarName);
+                    g.drawText(enemyAvatarName, font,  centerY - layout.width/2, screenW - scale/4, Color.WHITE, percentage);
+                    layout.setText(font, playerAvatarName);
+                    g.drawText(playerAvatarName, font, centerY - layout.width/2, 0 + scale/4, Color.WHITE, percentage);
+                }
+                //reset bitmapfont
+                Controls.getBitmapFont("default");
             } else if (isIntro) {
                 if (textureRegion != null) {
                     if (Forge.advStartup) {

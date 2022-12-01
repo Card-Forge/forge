@@ -350,6 +350,9 @@ public class Forge implements ApplicationListener {
         try {
             FileHandle transitionFile = Config.instance().getFile("ui/transition.png");
             FileHandle titleBGFile = Forge.isLandscapeMode() ? Config.instance().getFile("ui/title_bg.png") : Config.instance().getFile("ui/title_bg_portrait.png");
+            FileHandle vsIcon = Config.instance().getFile("ui/vs.png");
+            if (vsIcon.exists())
+                Forge.getAssets().fallback_skins().put(2, new Texture(vsIcon));
             if (transitionFile.exists())
                 Forge.getAssets().fallback_skins().put(1, new Texture(transitionFile));
             if (titleBGFile.exists())
