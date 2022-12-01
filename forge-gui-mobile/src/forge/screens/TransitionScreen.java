@@ -15,6 +15,7 @@ import forge.assets.FSkin;
 import forge.assets.FSkinImage;
 import forge.assets.FSkinTexture;
 import forge.gui.FThreads;
+import forge.gui.GuiBase;
 import forge.sound.SoundSystem;
 import forge.toolbox.FContainer;
 import forge.toolbox.FProgressBar;
@@ -141,7 +142,8 @@ public class TransitionScreen extends FContainer {
                 float centerY = screenH/2;
                 TextureRegion enemyAvatar = Config.instance().getAtlas(enemyAtlasPath).createSprite("Avatar");
                 enemyAvatar.flip(true, false);
-                BitmapFont font = Controls.getBitmapFont("default", 5f);
+                float fontScale = GuiBase.isAndroid() ? 14f : 10f;
+                BitmapFont font = Controls.getBitmapFont("default", fontScale/(screenW/screenH));
                 if (textureRegion != null) {
                     if (isArenaScene)
                         g.drawImage(screenUIBackground, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
