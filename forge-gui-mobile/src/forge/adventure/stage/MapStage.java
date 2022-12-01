@@ -56,7 +56,7 @@ public class MapStage extends GameStage {
     final Array<MapActor> actors = new Array<>();
 
     TiledMap map;
-    Array<Rectangle> collisionRect=new Array<>();
+    Array<Rectangle> collisionRect = new Array<>();
     private boolean isInMap = false;
     MapLayer spriteLayer;
     private PointOfInterestChanges changes;
@@ -76,9 +76,9 @@ public class MapStage extends GameStage {
     //These maps are defined as embedded properties within the Tiled maps.
     private EffectData effect;             //"Dungeon Effect": Character Effect applied to all adversaries within the map.
     private boolean preventEscape = false; //Prevents player from escaping the dungeon by any means that aren't an exit.
-    private final Array< TextraButton> dialogButtonMap=new Array<>();
+    private final Array<TextraButton> dialogButtonMap = new Array<>();
 
-    public InputEvent   eventTouchDown, eventTouchUp;
+    public InputEvent eventTouchDown, eventTouchUp;
     TextraButton selectedKey;
     private boolean respawnEnemies;
 
@@ -118,8 +118,7 @@ public class MapStage extends GameStage {
         return changes;
     }
 
-    private MapStage()
-    {
+    private MapStage() {
         dialog = Controls.newDialog("");
         eventTouchDown = new InputEvent();
         eventTouchDown.setPointer(-1);
@@ -128,6 +127,7 @@ public class MapStage extends GameStage {
         eventTouchUp.setPointer(-1);
         eventTouchUp.setType(InputEvent.Type.touchUp);
     }
+
     public static MapStage getInstance() {
         return instance == null ? instance = new MapStage() : instance;
     }
@@ -246,9 +246,10 @@ public class MapStage extends GameStage {
         setDialogStage(GameHUD.getInstance());
         showDialog();
     }
-    Array<EntryActor> otherEntries=new Array<>();
-    Array<EntryActor> spawnClassified=new Array<>();
-    Array<EntryActor> sourceMapMatch=new Array<>();
+
+    Array<EntryActor> otherEntries = new Array<>();
+    Array<EntryActor> spawnClassified = new Array<>();
+    Array<EntryActor> sourceMapMatch = new Array<>();
 
     public void loadMap(TiledMap map, String sourceMap) {
         isLoadingMatch = false;
@@ -263,9 +264,9 @@ public class MapStage extends GameStage {
         actors.clear();
         collisionRect.clear();
 
-        if(collisionGroup!=null)
+        if (collisionGroup != null)
             collisionGroup.remove();
-        collisionGroup=null;
+        collisionGroup = null;
 
         float width = Float.parseFloat(map.getProperties().get("width").toString());
         float height = Float.parseFloat(map.getProperties().get("height").toString());
@@ -281,13 +282,10 @@ public class MapStage extends GameStage {
             effect = JSONStringLoader.parse(EffectData.class, map.getProperties().get("dungeonEffect").toString(), "");
             effectDialog(effect);
         }
-        if(MP.get("respawnEnemies")!=null&&MP.get("respawnEnemies") instanceof Boolean&&(Boolean)MP.get("respawnEnemies"))
-        {
-            respawnEnemies=true;
-        }
-        else
-        {
-            respawnEnemies=false;
+        if (MP.get("respawnEnemies") != null && MP.get("respawnEnemies") instanceof Boolean && (Boolean) MP.get("respawnEnemies")) {
+            respawnEnemies = true;
+        } else {
+            respawnEnemies = false;
         }
         if (MP.get("preventEscape") != null) preventEscape = (boolean) MP.get("preventEscape");
 
@@ -310,34 +308,31 @@ public class MapStage extends GameStage {
                 loadObjects(layer, sourceMap);
             }
         }
-        if(!spawnClassified.isEmpty())
+        if (!spawnClassified.isEmpty())
             spawnClassified.first().spawn();
-        else if(!sourceMapMatch.isEmpty())
+        else if (!sourceMapMatch.isEmpty())
             sourceMapMatch.first().spawn();
-        else if(!otherEntries.isEmpty())
+        else if (!otherEntries.isEmpty())
             otherEntries.first().spawn();
 
         //reduce geometry in collision rectangles
         int oldSize;
         do {
-            oldSize=collisionRect.size;
-            for(int i=0;i<collisionRect.size;i++)
-            {
-                Rectangle r1= collisionRect.get(i);
-                for(int j=i+1;j<collisionRect.size;j++)
-                {
-                    Rectangle r2= collisionRect.get(j);
-                    if(      (Math.abs(r1.x-(r2.x+r2.width))<1&&Math.abs(r1.y-r2.y)<1&&Math.abs(r1.height-r2.height)<1)//left edge is the same as right edge
+            oldSize = collisionRect.size;
+            for (int i = 0; i < collisionRect.size; i++) {
+                Rectangle r1 = collisionRect.get(i);
+                for (int j = i + 1; j < collisionRect.size; j++) {
+                    Rectangle r2 = collisionRect.get(j);
+                    if ((Math.abs(r1.x - (r2.x + r2.width)) < 1 && Math.abs(r1.y - r2.y) < 1 && Math.abs(r1.height - r2.height) < 1)//left edge is the same as right edge
 
-                            ||(Math.abs((r1.x+r1.width)-r2.x)<1&&Math.abs(r1.y-r2.y)<1&&Math.abs(r1.height-r2.height)<1)//right edge is the same as left edge
+                            || (Math.abs((r1.x + r1.width) - r2.x) < 1 && Math.abs(r1.y - r2.y) < 1 && Math.abs(r1.height - r2.height) < 1)//right edge is the same as left edge
 
-                            ||(Math.abs(r1.x - r2.x )<1&& Math.abs((r1.y+r1.height)-r2.y)<1&&Math.abs(r1.width-r2.width)<1)//top edge is the same as bottom edge
+                            || (Math.abs(r1.x - r2.x) < 1 && Math.abs((r1.y + r1.height) - r2.y) < 1 && Math.abs(r1.width - r2.width) < 1)//top edge is the same as bottom edge
 
-                            ||(Math.abs(r1.x - r2.x )<1&& Math.abs(r1.y-(r2.y+r2.height))<1&&Math.abs(r1.width-r2.width)<1)//bottom edge is the same as left edge
+                            || (Math.abs(r1.x - r2.x) < 1 && Math.abs(r1.y - (r2.y + r2.height)) < 1 && Math.abs(r1.width - r2.width) < 1)//bottom edge is the same as left edge
 
-                            ||containsOrEquals(r1,r2)||containsOrEquals(r2,r1)
-                    )
-                    {
+                            || containsOrEquals(r1, r2) || containsOrEquals(r2, r1)
+                    ) {
                         r1.merge(r2);
                         collisionRect.removeIndex(j);
                         i--;
@@ -345,19 +340,20 @@ public class MapStage extends GameStage {
                     }
                 }
             }
-        }while (oldSize!=collisionRect.size);
+        } while (oldSize != collisionRect.size);
         if (spriteLayer == null) System.err.print("Warning: No spriteLayer present in map.\n");
 
         getPlayerSprite().stop();
     }
 
-    static public boolean containsOrEquals(Rectangle r1,Rectangle r2) {
+    static public boolean containsOrEquals(Rectangle r1, Rectangle r2) {
         float xmi = r2.x;
         float xma = xmi + r2.width;
         float ymi = r2.y;
         float yma = ymi + r2.height;
         return xmi >= r1.x && xmi <= r1.x + r1.width && xma >= r1.x && xma <= r1.x + r1.width && ymi >= r1.y && ymi <= r1.y + r1.height && yma >= r1.y && yma <= r1.y + r1.height;
     }
+
     private void loadCollision(TiledMapTileLayer layer) {
         for (int x = 0; x < layer.getWidth(); x++) {
             for (int y = 0; y < layer.getHeight(); y++) {
@@ -390,7 +386,7 @@ public class MapStage extends GameStage {
         for (MapObject obj : layer.getObjects()) {
             MapProperties prop = obj.getProperties();
             String type = prop.get("type", String.class);
-            if (type!=null) {
+            if (type != null) {
                 int id = prop.get("id", int.class);
                 if (changes.isObjectDeleted(id))
                     continue;
@@ -403,20 +399,16 @@ public class MapStage extends GameStage {
                         float w = Float.parseFloat(prop.get("width").toString());
                         float h = Float.parseFloat(prop.get("height").toString());
 
-                        String targetMap=prop.get("teleport").toString();
-                        boolean spawnPlayerThere=(targetMap==null||targetMap.isEmpty()&&sourceMap.isEmpty())||//if target is null and "from world"
-                                !sourceMap.isEmpty()&&targetMap.equals(sourceMap);
+                        String targetMap = prop.get("teleport").toString();
+                        boolean spawnPlayerThere = (targetMap == null || targetMap.isEmpty() && sourceMap.isEmpty()) ||//if target is null and "from world"
+                                !sourceMap.isEmpty() && targetMap.equals(sourceMap);
 
-                        EntryActor entry=new EntryActor(this, id, prop.get("teleport").toString(), x, y, w, h, prop.get("direction").toString());
-                        if((prop.containsKey("spawn")&& prop.get("spawn").toString().equals("true"))&&spawnPlayerThere)
-                        {
+                        EntryActor entry = new EntryActor(this, id, prop.get("teleport").toString(), x, y, w, h, prop.get("direction").toString());
+                        if ((prop.containsKey("spawn") && prop.get("spawn").toString().equals("true")) && spawnPlayerThere) {
                             spawnClassified.add(entry);
-                        }else if(spawnPlayerThere)
-                        {
+                        } else if (spawnPlayerThere) {
                             sourceMapMatch.add(entry);
-                        }
-                        else
-                        {
+                        } else {
                             otherEntries.add(entry);
                         }
                         addMapActor(obj, entry);
@@ -484,11 +476,10 @@ public class MapStage extends GameStage {
                         addMapActor(obj, new OnCollide(() -> Forge.switchScene(SpellSmithScene.instance())));
                         break;
                     case "arena":
-
                         addMapActor(obj, new OnCollide(() -> {
                             ArenaData arenaData = JSONStringLoader.parse(ArenaData.class, prop.get("arena").toString(), "");
-                            ArenaScene.instance().loadArenaData(arenaData,WorldSave.getCurrentSave().getWorld().getRandom().nextLong());
-                                Forge.switchScene(ArenaScene.instance());
+                            ArenaScene.instance().loadArenaData(arenaData, WorldSave.getCurrentSave().getWorld().getRandom().nextLong());
+                            Forge.switchScene(ArenaScene.instance());
                         }));
                         break;
                     case "exit":
@@ -498,10 +489,10 @@ public class MapStage extends GameStage {
                         if (obj instanceof TiledMapTileMapObject) {
                             TiledMapTileMapObject tiledObj = (TiledMapTileMapObject) obj;
                             DialogActor dialog;
-                            if(prop.containsKey("sprite"))
-                                dialog= new DialogActor(this, id, prop.get("dialog").toString(), prop.get("sprite").toString());
+                            if (prop.containsKey("sprite"))
+                                dialog = new DialogActor(this, id, prop.get("dialog").toString(), prop.get("sprite").toString());
                             else
-                                dialog= new DialogActor(this, id, prop.get("dialog").toString(), tiledObj.getTextureRegion());
+                                dialog = new DialogActor(this, id, prop.get("dialog").toString(), tiledObj.getTextureRegion());
                             addMapActor(obj, dialog);
                         }
                         break;
@@ -611,12 +602,12 @@ public class MapStage extends GameStage {
 
     protected void getReward() {
         isLoadingMatch = false;
-         RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
+        RewardScene.instance().loadRewards(currentMob.getRewards(), RewardScene.Type.Loot, null);
         Forge.switchScene(RewardScene.instance());
         if (currentMob.defeatDialog == null) {
             currentMob.remove();
             actors.removeValue(currentMob, true);
-            if(!respawnEnemies||currentMob.getData().boss)
+            if (!respawnEnemies || currentMob.getData().boss)
                 changes.deleteObject(currentMob.getId());
         } else {
             currentMob.defeatDialog.activate();
@@ -638,8 +629,8 @@ public class MapStage extends GameStage {
 
     @Override
     protected void onActing(float delta) {
-        float sprintingMod=currentModifications.containsKey(PlayerModification.Sprint)?2:1;
-        player.setMoveModifier(2*sprintingMod);
+        float sprintingMod = currentModifications.containsKey(PlayerModification.Sprint) ? 2 : 1;
+        player.setMoveModifier(2 * sprintingMod);
         oldPosition4.set(oldPosition3);
         oldPosition3.set(oldPosition2);
         oldPosition2.set(oldPosition);
@@ -659,10 +650,10 @@ public class MapStage extends GameStage {
                 } else if (actor instanceof RewardSprite) {
                     Gdx.input.vibrate(50);
                     if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
-                        Controllers.getCurrent().startVibration(100,1);
+                        Controllers.getCurrent().startVibration(100, 1);
                     startPause(0.1f, () -> { //Switch to item pickup scene.
                         RewardSprite RS = (RewardSprite) actor;
-                         RewardScene.instance().loadRewards(RS.getRewards(), RewardScene.Type.Loot, null);
+                        RewardScene.instance().loadRewards(RS.getRewards(), RewardScene.Type.Loot, null);
                         RS.remove();
                         actors.removeValue(RS, true);
                         changes.deleteObject(RS.getId());
@@ -683,11 +674,11 @@ public class MapStage extends GameStage {
         Gdx.input.vibrate(50);
         int duration = mob.getData().boss ? 400 : 200;
         if (Controllers.getCurrent() != null && Controllers.getCurrent().canVibrate())
-            Controllers.getCurrent().startVibration(duration,1);
+            Controllers.getCurrent().startVibration(duration, 1);
         startPause(0.8f, () -> {
             Forge.setCursor(null, Forge.magnifyToggle ? "1" : "2");
             SoundSystem.instance.play(SoundEffectType.ManaBurn, false);
-            DuelScene duelScene =  DuelScene.instance();
+            DuelScene duelScene = DuelScene.instance();
             FThreads.invokeInEdtNowOrLater(() -> {
                 if (!isLoadingMatch) {
                     isLoadingMatch = true;
@@ -696,7 +687,7 @@ public class MapStage extends GameStage {
                         if (isInMap && effect != null)
                             duelScene.setDungeonEffect(effect);
                         Forge.switchScene(duelScene);
-                    }, Forge.takeScreenshot(), true, false));
+                    }, Forge.takeScreenshot(), true, false, false, false, "", Current.player().avatar(), mob.getAtlasPath(), Current.player().getName(), mob.nameOverride.isEmpty() ? mob.getData().name : mob.nameOverride));
                 }
             });
         });
@@ -709,6 +700,7 @@ public class MapStage extends GameStage {
     public boolean isInMap() {
         return isInMap;
     }
+
     public boolean isDialogOnlyInput() {
         return dialogOnlyInput;
     }
@@ -717,12 +709,12 @@ public class MapStage extends GameStage {
 
         dialogButtonMap.clear();
         for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
-            dialogButtonMap.add( (TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
+            dialogButtonMap.add((TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
         }
         dialog.show(dialogStage, Actions.show());
         dialog.setPosition((dialogStage.getWidth() - dialog.getWidth()) / 2, (dialogStage.getHeight() - dialog.getHeight()) / 2);
         dialogOnlyInput = true;
-        if (Forge.hasGamepad()&&!dialogButtonMap.isEmpty())
+        if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
             dialogStage.setKeyboardFocus(dialogButtonMap.first());
     }
 
@@ -792,40 +784,36 @@ public class MapStage extends GameStage {
             }
         }, 0.10f);
     }
+
     private void selectNextDialogButton() {
         if (dialogButtonMap.size < 2)
             return;
-        if(!(dialogStage.getKeyboardFocus() instanceof Button))
-        {
+        if (!(dialogStage.getKeyboardFocus() instanceof Button)) {
             dialogStage.setKeyboardFocus(dialogButtonMap.first());
             return;
         }
-        for(int i=0;i<dialogButtonMap.size;i++)
-        {
-            if(dialogStage.getKeyboardFocus()==dialogButtonMap.get(i))
-            {
-                i+=1;
-                i%=dialogButtonMap.size;
+        for (int i = 0; i < dialogButtonMap.size; i++) {
+            if (dialogStage.getKeyboardFocus() == dialogButtonMap.get(i)) {
+                i += 1;
+                i %= dialogButtonMap.size;
                 dialogStage.setKeyboardFocus(dialogButtonMap.get(i));
                 return;
             }
         }
     }
+
     private void selectPreviousDialogButton() {
         if (dialogButtonMap.size < 2)
             return;
-        if(!(dialogStage.getKeyboardFocus() instanceof Button))
-        {
+        if (!(dialogStage.getKeyboardFocus() instanceof Button)) {
             dialogStage.setKeyboardFocus(dialogButtonMap.first());
             return;
         }
-        for(int i=0;i<dialogButtonMap.size;i++)
-        {
-            if(dialogStage.getKeyboardFocus()==dialogButtonMap.get(i))
-            {
-                i-=1;
-                if(i<0)
-                    i=dialogButtonMap.size-1;
+        for (int i = 0; i < dialogButtonMap.size; i++) {
+            if (dialogStage.getKeyboardFocus() == dialogButtonMap.get(i)) {
+                i -= 1;
+                if (i < 0)
+                    i = dialogButtonMap.size - 1;
                 dialogStage.setKeyboardFocus(dialogButtonMap.get(i));
                 return;
             }

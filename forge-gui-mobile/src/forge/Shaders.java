@@ -25,9 +25,9 @@ public class Shaders {
             + "   gl_Position =  u_projTrans * " + ShaderProgram.POSITION_ATTRIBUTE + ";\n"
             + "}\n";
     /*
-    * Test Pixelate shader
-    *
-    **/
+     * Test Pixelate shader
+     *
+     **/
     public static final String vertPixelateShader = "attribute vec4 a_position;\n" +
             "attribute vec4 a_color;\n" +
             "attribute vec2 a_texCoord0;\n" +
@@ -42,7 +42,31 @@ public class Shaders {
             "    v_texCoords = a_texCoord0;\n" +
             "    gl_Position = u_projTrans * a_position;\n" +
             "}";
-    public static final String fragRipple="#ifdef GL_ES\n" +
+    public static final String fragHueShift = "#ifdef GL_ES\n" +
+            "#define LOWP lowp\n" +
+            "precision mediump float;\n" +
+            "#else\n" +
+            "#define LOWP \n" +
+            "#endif\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform sampler2D u_texture;\n" +
+            "uniform float u_time;\n" +
+            "\n" +
+            "vec3 hs(vec3 c, float s) {\n" +
+            "    vec3 m=vec3(cos(s),s=sin(s)*.5774,-s);\n" +
+            "    return c*mat3(m+=(1.-m.x)/3.,m.zxy,m.yzx);\n" +
+            "}\n" +
+            "\n" +
+            "void main() {\n" +
+            "\tvec2 uv = v_texCoords;\n" +
+            "    vec4 orig = texture2D(u_texture, uv);\n" +
+            "    vec3 col = texture2D(u_texture, uv).rgb;\n" +
+            "    vec4 col2 = vec4(hs(col, u_time), 1.);\n" +
+            "    //multiply the original texture alpha to render only opaque shifted colors \n" +
+            "    col2.a *= orig.a;\n" +
+            "    gl_FragColor = col2;\n" +
+            "}";
+    public static final String fragRipple = "#ifdef GL_ES\n" +
             "#define LOWP lowp\n" +
             "precision mediump float;\n" +
             "#else\n" +
@@ -74,7 +98,7 @@ public class Shaders {
             "\t\tcolor = texture2D(u_texture, coord);\n" +
             "\tgl_FragColor = mix(vec4(0.0, 0.0, 0.0, 1.0), vec4(color.rgba * dist), u_bias);\n" +
             "}";
-    public static final String fragChromaticAbberation="#ifdef GL_ES\n" +
+    public static final String fragChromaticAbberation = "#ifdef GL_ES\n" +
             "#define LOWP lowp\n" +
             "precision mediump float;\n" +
             "#else\n" +
@@ -1135,6 +1159,7 @@ public class Shaders {
      * {@link com.github.tommyettinger.colorful.rgb.ColorTools#rgb(float, float, float, float)}.
      * <br>
      * Meant for use with {@link #vertexShader}.
+     *
      * @see #fragmentShaderConfigurableContrast a per-sprite-configurable version of this
      */
     public static String fragmentShaderFlatLightness =
@@ -1176,6 +1201,7 @@ public class Shaders {
      * the specific way this uses them.
      * <br>
      * Meant for use with {@link #vertexShader}.
+     *
      * @see #fragmentShaderFlatLightness if you only need one contrast setting and still want to set color tints
      */
     public static String fragmentShaderConfigurableContrast =
