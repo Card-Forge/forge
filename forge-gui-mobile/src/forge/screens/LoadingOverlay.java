@@ -1,10 +1,12 @@
 package forge.screens;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.animation.ForgeAnimation;
 import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -20,19 +22,26 @@ public class LoadingOverlay extends FOverlay {
     private static final float LOGO_SIZE_FACTOR = 0.7f;
     private static final float INSETS_FACTOR = 0.025f;
     private static final FSkinFont FONT = FSkinFont.get(22);
+    private BGAnimation bgAnimation;
+    private Runnable runnable;
+    private boolean afterMatch;
+
     private static FSkinColor getOverlayColor() {
         if (Forge.isMobileAdventureMode)
             return FSkinColor.get(Colors.ADV_CLR_ACTIVE).alphaColor(0.75f);
         return FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(0.75f);
     }
+
     private static FSkinColor getForeColor() {
         if (Forge.isMobileAdventureMode)
             return FSkinColor.get(Colors.ADV_CLR_TEXT);
         return FSkinColor.get(Colors.CLR_TEXT);
     }
+
     public static void show(String caption0, final Runnable runnable) {
         show(caption0, false, runnable);
     }
+
     public static void show(String caption0, boolean textMode, final Runnable runnable) {
         final LoadingOverlay loader = new LoadingOverlay(caption0, textMode);
         loader.show(); //show loading overlay then delay running remaining logic so UI can respond
@@ -53,16 +62,25 @@ public class LoadingOverlay extends FOverlay {
     }
 
     private String caption;
-    private boolean textMode = false;
-
-    public LoadingOverlay(String caption0) {
-        caption = caption0;
-        textMode = false;
-    }
+    private boolean textMode = false, match = false;
+    private TextureRegion textureRegion;
 
     public LoadingOverlay(String caption0, boolean textOnly) {
         caption = caption0;
         textMode = textOnly;
+    }
+
+    public LoadingOverlay(Runnable toRunBeforeMatch) {
+        this(toRunBeforeMatch, false);
+    }
+    public LoadingOverlay(Runnable toRunBeforeMatch, boolean aftermatch) {
+        caption = "";
+        textMode = true;
+        textureRegion = Forge.takeScreenshot();
+        match = true;
+        bgAnimation = new BGAnimation();
+        runnable = toRunBeforeMatch;
+        afterMatch = aftermatch;
     }
 
     public void setCaption(String caption0) {
@@ -80,6 +98,13 @@ public class LoadingOverlay extends FOverlay {
 
     @Override
     public void drawOverlay(Graphics g) {
+        if (match) {
+            if (bgAnimation != null) {
+                bgAnimation.start();
+                bgAnimation.drawBackground(g);
+                return;
+            }
+        }
         if (!textMode) {
             float x = INSETS;
             float panelWidth = getWidth() - 2 * INSETS;
@@ -112,6 +137,49 @@ public class LoadingOverlay extends FOverlay {
             g.drawText(caption, FONT, getForeColor(), x, y, panelWidth, getHeight(), false, Align.center, false);
         } else {
             g.drawText(caption, FONT, getForeColor(), 0, 0, getWidth(), getHeight(), true, Align.center, true);
+        }
+    }
+
+    @Override
+    public boolean keyDown(int keyCode) {
+        if (match)
+            return true;
+        return super.keyDown(keyCode);
+    }
+
+    private class BGAnimation extends ForgeAnimation {
+        float DURATION = 0.9f;
+        private float progress = 0;
+
+        public void drawBackground(Graphics g) {
+            float percentage = progress / DURATION;
+            float oldAlpha = g.getfloatAlphaComposite();
+            if (percentage < 0) {
+                percentage = 0;
+            } else if (percentage > 1) {
+                percentage = 1;
+            }
+            if (afterMatch) {
+                g.drawGrayTransitionImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), false, percentage);
+            } else {
+                g.setAlphaComposite(1 - percentage);
+                g.drawImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
+                g.setAlphaComposite(oldAlpha);
+            }
+        }
+
+        @Override
+        protected boolean advance(float dt) {
+            progress += dt;
+            return progress < DURATION;
+        }
+
+        @Override
+        protected void onEnd(boolean endingAll) {
+            match = false;
+            hide();
+            if (runnable != null)
+                runnable.run();
         }
     }
 }

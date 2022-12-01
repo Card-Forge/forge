@@ -6,6 +6,7 @@ import java.util.Deque;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -1285,6 +1286,11 @@ public class Graphics {
             return;
         bitmapFont.setColor(color.r, color.g, color.b, alpha);
         bitmapFont.draw(batch, text, x, y);
+    }
+    public void drawText(BitmapFont bitmapFont, GlyphLayout layout, float x, float y) {
+        if (bitmapFont == null || layout == null)
+            return;
+        bitmapFont.draw(batch, layout, x, y);
     }
 
     public void drawText(String text, FSkinFont font, FSkinColor skinColor, float x, float y, float w, float h, boolean wrap, int horzAlignment, boolean centerVertically) {
