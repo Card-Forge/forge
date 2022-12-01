@@ -3549,14 +3549,14 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return hasCardAttachment(c);
     }
 
+    public final boolean isFortifying() {
+        return this.isAttachedToEntity();
+    }
+
     public final Card getEquipping() {
         return this.getAttachedTo();
     }
     public final boolean isEquipping() {
-        return this.isAttachedToEntity();
-    }
-
-    public final boolean isFortifying() {
         return this.isAttachedToEntity();
     }
 
@@ -5063,7 +5063,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         if (!isPhasedOut()) {
             // If this is currently PhasedIn, it's about to phase out.
             // Run trigger before it does because triggers don't work with phased out objects
-            getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOut, runParams, false);
+            getGame().getTriggerHandler().runTrigger(TriggerType.PhaseOut, runParams, true);
             // when it doesn't exist the game will no longer see it as tapped
             runUntapCommands();
             // TODO CR 702.26f need to run LeavesPlay + changeController commands but only when worded "for as long as"

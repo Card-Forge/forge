@@ -234,7 +234,7 @@ public class Untap extends Phase {
         if (c.hasKeyword("You may choose not to untap CARDNAME during your untap step.") && c.isTapped()) {
             StringBuilder prompt = new StringBuilder("Untap " + c.toString() + "?");
             boolean defaultChoice = true;
-            if (c.getGainControlTargets().size() > 0) {
+            if (c.hasGainControlTarget()) {
                 final Iterable<Card> targets = c.getGainControlTargets();
                 prompt.append("\r\n").append(c).append(" is controlling: ");
                 for (final Card target : targets) {
