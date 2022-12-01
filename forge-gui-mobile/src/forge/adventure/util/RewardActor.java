@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -30,7 +32,6 @@ import forge.ImageKeys;
 import forge.adventure.data.ItemData;
 import forge.adventure.scene.Scene;
 import forge.assets.FSkin;
-import forge.assets.FSkinFont;
 import forge.assets.ImageCache;
 import forge.card.CardImageRenderer;
 import forge.card.CardRenderer;
@@ -49,7 +50,7 @@ import static forge.adventure.util.Paths.ITEMS_ATLAS;
  * Render the rewards as a card on the reward scene.
  */
 public class RewardActor extends Actor implements Disposable, ImageFetcher.Callback {
-    Tooltip<Image> tooltip;
+    ImageToolTip tooltip;
     HoldTooltip holdTooltip;
     Reward reward;
     ShaderProgram shaderGrayscale = Forge.getGraphics().getShaderGrayscale();
@@ -86,15 +87,17 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (T != null)
             T.dispose();
     }
-public boolean toolTipIsVisible()
-{
-    if(holdTooltip!=null)
-        return holdTooltip.tooltip_actor.getStage()!=null;
-    return false;
-}
+
+    public boolean toolTipIsVisible() {
+        if (holdTooltip != null)
+            return holdTooltip.tooltip_actor.getStage() != null;
+        return false;
+    }
+
     public Reward getReward() {
         return reward;
     }
+
     @Override
     public void onImageFetched() {
         String imageKey = reward.getCard().getImageKey(false);
@@ -109,7 +112,7 @@ public boolean toolTipIsVisible()
         if (!Forge.getAssets().manager().contains(imageFile.getPath())) {
             Forge.getAssets().manager().load(imageFile.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
             Forge.getAssets().manager().finishLoadingAsset(imageFile.getPath());
-            count+=1;
+            count += 1;
         }
         Texture replacement = Forge.getAssets().manager().get(imageFile.getPath(), Texture.class, false);
         if (replacement == null)
@@ -122,7 +125,7 @@ public boolean toolTipIsVisible()
             }
             toolTipImage.remove();
             toolTipImage = new Image(processDrawable(image));
-            if (GuiBase.isAndroid()||Forge.hasGamepad()) {
+            if (GuiBase.isAndroid() || Forge.hasGamepad()) {
                 if (holdTooltip.tooltip_image.getDrawable() instanceof TextureRegionDrawable) {
                     ((TextureRegionDrawable) holdTooltip.tooltip_image.getDrawable()).getRegion().getTexture().dispose();
                 }
@@ -155,7 +158,7 @@ public boolean toolTipIsVisible()
                             if (!Forge.getAssets().manager().contains(frontFace.getPath())) {
                                 Forge.getAssets().manager().load(frontFace.getPath(), Texture.class, Forge.getAssets().getTextureFilter());
                                 Forge.getAssets().manager().finishLoadingAsset(frontFace.getPath());
-                                count+=1;
+                                count += 1;
                             }
                             Texture front = Forge.getAssets().manager().get(frontFace.getPath(), Texture.class, false);
                             if (front != null) {
@@ -164,7 +167,7 @@ public boolean toolTipIsVisible()
                                 loaded = false;
                             }
                         } catch (Exception e) {
-                            System.err.println("Failed to load image: "+frontFace.getPath());
+                            System.err.println("Failed to load image: " + frontFace.getPath());
                             loaded = false;
                         }
                     } else {
@@ -183,13 +186,13 @@ public boolean toolTipIsVisible()
                                     ImageCache.updateSynqCount(backFace, 1);
                                 }
                             } catch (Exception e) {
-                                System.err.println("Failed to load image: "+backFace.getPath());
+                                System.err.println("Failed to load image: " + backFace.getPath());
                             }
                         }
                     }
                 } else {
                     String imagePath = ImageUtil.getImageRelativePath(reward.getCard(), "", true, false);
-                    File lookup = ImageKeys.hasSetLookup(imagePath) ? ImageKeys.setLookUpFile(imagePath, imagePath+"border") : null;
+                    File lookup = ImageKeys.hasSetLookup(imagePath) ? ImageKeys.setLookUpFile(imagePath, imagePath + "border") : null;
                     int count = 0;
                     if (lookup != null) {
                         try {
@@ -206,7 +209,7 @@ public boolean toolTipIsVisible()
                             }
                             ImageCache.updateSynqCount(lookup, count);
                         } catch (Exception e) {
-                            System.err.println("Failed to load image: "+lookup.getPath());
+                            System.err.println("Failed to load image: " + lookup.getPath());
                             loaded = false;
                         }
                     } else if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
@@ -225,10 +228,9 @@ public boolean toolTipIsVisible()
                 Pixmap drawingMap = new Pixmap((int) backSprite.getWidth(), (int) backSprite.getHeight(), Pixmap.Format.RGBA8888);
 
                 DrawOnPixmap.draw(drawingMap, backSprite);
-                if(reward.getItem()==null)
-                {
+                if (reward.getItem() == null) {
                     needsToBeDisposed = true;
-                    image=new Texture(drawingMap);
+                    image = new Texture(drawingMap);
                     break;
                 }
                 Sprite item = reward.getItem().sprite();
@@ -236,8 +238,8 @@ public boolean toolTipIsVisible()
                 DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - item.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1.7f), item);
                 //DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getItem().name), 0, (int) ((backSprite.getHeight() / 8f) * 1f), backSprite.getWidth(), false);
 
-                setItemTooltips(item);
-                image=new Texture(drawingMap);
+                setItemTooltips(item, backSprite);
+                image = new Texture(drawingMap);
                 drawingMap.dispose();
                 needsToBeDisposed = true;
                 break;
@@ -250,23 +252,25 @@ public boolean toolTipIsVisible()
                 Pixmap drawingMap = new Pixmap((int) backSprite.getWidth(), (int) backSprite.getHeight(), Pixmap.Format.RGBA8888);
 
                 DrawOnPixmap.draw(drawingMap, backSprite);
-                Sprite gold = atlas.createSprite(reward.type.toString());
-                DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - gold.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1f), gold);
-                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f)-1, backSprite.getWidth(), true,Color.WHITE);
+                Sprite item = atlas.createSprite(reward.type.toString());
+                DrawOnPixmap.draw(drawingMap, (int) ((backSprite.getWidth() / 2f) - item.getWidth() / 2f), (int) ((backSprite.getHeight() / 4f) * 1f), item);
+                DrawOnPixmap.drawText(drawingMap, String.valueOf(reward.getCount()), 0, (int) ((backSprite.getHeight() / 4f) * 2f) - 1, backSprite.getWidth(), true, Color.WHITE);
 
-                image=new Texture(drawingMap);
+                setItemTooltips(item, backSprite);
+                image = new Texture(drawingMap);
                 drawingMap.dispose();
                 needsToBeDisposed = true;
                 break;
             }
         }
-        if (GuiBase.isAndroid()||Forge.hasGamepad()) {
+        if (GuiBase.isAndroid() || Forge.hasGamepad()) {
             addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     if (flipOnClick)
                         flip();
                 }
+
                 @Override
                 public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                     hover = true;
@@ -276,6 +280,7 @@ public boolean toolTipIsVisible()
                 public void exit(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                     hover = false;
                 }
+
                 @Override
                 public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                     hover = true;
@@ -311,6 +316,7 @@ public boolean toolTipIsVisible()
             });
         }
     }
+
     private void switchTooltip() {
         if (!Reward.Type.Card.equals(reward.type))
             return;
@@ -318,7 +324,7 @@ public boolean toolTipIsVisible()
             return;
         Texture alt = ImageCache.getImage(reward.getCard().getImageKey(true), false);
         PaperCard altCard = ImageUtil.getPaperCardFromImageKey(reward.getCard().getCardAltImageKey());
-        if (GuiBase.isAndroid()||Forge.hasGamepad()) {
+        if (GuiBase.isAndroid() || Forge.hasGamepad()) {
             if (alternate) {
                 if (alt != null) {
                     holdTooltip.tooltip_actor.clear();
@@ -352,6 +358,7 @@ public boolean toolTipIsVisible()
             }
         }
     }
+
     private TextureRegionDrawable processDrawable(Texture texture) {
         TextureRegionDrawable drawable = new TextureRegionDrawable(ImageCache.croppedBorderImage(texture));
         float origW = texture.getWidth();
@@ -368,7 +375,7 @@ public boolean toolTipIsVisible()
             newH = boundH;
             newW = (newH * origW) / origH;
         }
-        float AR = 480f/270f;
+        float AR = 480f / 270f;
         int x = Forge.getDeviceAdapter().getRealScreenSize(false).getLeft();
         int y = Forge.getDeviceAdapter().getRealScreenSize(false).getRight();
         int realX = Forge.getDeviceAdapter().getRealScreenSize(true).getLeft();
@@ -380,25 +387,26 @@ public boolean toolTipIsVisible()
         }
         float fW = x > y ? x : y;
         float fH = x > y ? y : x;
-        float mul = fW/fH < AR ? AR/(fW/fH) : (fW/fH)/AR;
+        float mul = fW / fH < AR ? AR / (fW / fH) : (fW / fH) / AR;
         Float custom = Forge.isLandscapeMode() ? Config.instance().getSettingData().cardTooltipAdjLandscape : Config.instance().getSettingData().cardTooltipAdj;
         if (custom != null && custom != 1f) {
             mul *= custom;
         } else {
-            if (fW/fH >= 2f) {//tall display
-                mul = (fW/fH) - ((fW/fH)/AR);
-                if ((fW/fH) >= 2.1f && (fW/fH) < 2.2f)
+            if (fW / fH >= 2f) {//tall display
+                mul = (fW / fH) - ((fW / fH) / AR);
+                if ((fW / fH) >= 2.1f && (fW / fH) < 2.2f)
                     mul *= 0.9f;
-                else if ((fW/fH) > 2.2f) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
+                else if ((fW / fH) > 2.2f) //ultrawide 21:9 Galaxy Fold, Huawei X2, Xperia 1
                     mul *= 0.8f;
             }
         }
         if (Forge.isLandscapeMode())
-            drawable.setMinSize(newW*mul, newH);
+            drawable.setMinSize(newW * mul, newH);
         else
-            drawable.setMinSize(newW, newH*mul);
+            drawable.setMinSize(newW, newH * mul);
         return drawable;
     }
+
     private void setCardImage(Texture img) {
         if (img == null)
             return;
@@ -407,41 +415,41 @@ public boolean toolTipIsVisible()
             image.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
         if (toolTipImage == null)
             toolTipImage = new Image(processDrawable(image));
-        if (GuiBase.isAndroid()||Forge.hasGamepad()) {
+        if (GuiBase.isAndroid() || Forge.hasGamepad()) {
             if (holdTooltip == null)
                 holdTooltip = new HoldTooltip(toolTipImage);
-            if (frontSideUp())
-                addListener(holdTooltip);
+            addListener(holdTooltip);
         } else {
             if (tooltip == null)
-                tooltip = new Tooltip<Image>(toolTipImage);
+                tooltip = new ImageToolTip(toolTipImage);
             tooltip.setInstant(true);
-            if (frontSideUp())
-                addListener(tooltip);
+            addListener(tooltip);
         }
     }
+
     public void showTooltip() {
         if (holdTooltip != null) {
             holdTooltip.show();
         }
     }
+
     public void hideTooltip() {
         if (holdTooltip != null) {
             holdTooltip.hide();
         }
     }
 
-    private Texture renderPlaceholder(Graphics g, PaperCard card){ //Use CardImageRenderer to output a Texture.
-        if(renderedCount++ == 0) {
+    private Texture renderPlaceholder(Graphics g, PaperCard card) { //Use CardImageRenderer to output a Texture.
+        if (renderedCount++ == 0) {
             //The first time we find a card that has no art, render one out of view to fully initialize CardImageRenderer.
             g.begin(preview_w, preview_h);
             CardImageRenderer.drawCardImage(g, CardView.getCardForUi(reward.getCard()), false, -(preview_w + 20), 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, true);
             g.end();
         }
-        Matrix4 m  = new Matrix4();
+        Matrix4 m = new Matrix4();
         FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGB888, preview_w, preview_h, false);
         frameBuffer.begin();
-        m.setToOrtho2D(0,preview_h, preview_w, -preview_h); //So it renders flipped directly.
+        m.setToOrtho2D(0, preview_h, preview_w, -preview_h); //So it renders flipped directly.
 
         g.begin(preview_w, preview_h);
         g.setProjectionMatrix(m);
@@ -457,30 +465,38 @@ public boolean toolTipIsVisible()
         return result;
     }
 
-    private void setItemTooltips(Sprite icon) {
+    private void setItemTooltips(Sprite icon, Sprite backSprite) {
         if (generatedTooltip == null) {
-            float icon_w = 64f; float icon_h = 64f; //Sizes for the embedded icon. Could be made smaller on smaller resolutions.
-            Matrix4 m  = new Matrix4();
+            Matrix4 m = new Matrix4();
+            GlyphLayout layout = new GlyphLayout();
             ItemData item = getReward().getItem();
             FrameBuffer frameBuffer = new FrameBuffer(Pixmap.Format.RGBA8888, preview_w, preview_h, false);
             frameBuffer.begin();
-            m.setToOrtho2D(0,preview_h, preview_w, -preview_h); //So it renders flipped directly.
-            getGraphics().begin(preview_w, preview_h);
-            getGraphics().setProjectionMatrix(m);
-            getGraphics().startClip();
-            //Draw item description panel.
-            getGraphics().fillRect(new Color(0f, 0f, 0f, 0.96f), 0, 0, preview_w, preview_h); //Translucent background.
-            getGraphics().drawRectLines(2, Color.WHITE, 0, 0, preview_w, preview_h); //Add a border.
-            getGraphics().drawImage(icon, 2, 2, icon_w, icon_h); //Draw the item's icon.
-            getGraphics().drawText(item.name, FSkinFont.get(24), Color.WHITE, icon_w + 2, 2, preview_w - (icon_w + 2), icon_h, false, 1, true); //Item name.
-            getGraphics().drawRectLines(1, Color.WHITE, 6, icon_h + 2, preview_w - 12, preview_h - (icon_h + 6)); //Description border.
-            getGraphics().drawText(item.getDescription(), FSkinFont.get(18), Color.WHITE, 10, icon_h + 8, preview_w - 10, preview_h - 4, true, Align.left, false); //Description.
-            getGraphics().end();
-            getGraphics().endClip();
-            generatedTooltip = new Texture(Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h), Forge.isTextureFilteringEnabled());
-            frameBuffer.end();
-            getGraphics().dispose();
-            frameBuffer.dispose();
+            try {
+                m.setToOrtho2D(0, preview_h, preview_w, -preview_h); //So it renders flipped directly.
+                getGraphics().begin(preview_w, preview_h);
+                getGraphics().setProjectionMatrix(m);
+                getGraphics().startClip();
+                getGraphics().drawImage(backSprite, 0, 0, preview_w, preview_h);
+                getGraphics().drawImage(icon, preview_w / 2 - 75, 160, 160, 160);
+                BitmapFont font = Controls.getBitmapFont("default", 4 / (preview_h / preview_w));
+                layout.setText(font, item != null ? item.name : getReward().type.name(), Color.WHITE, preview_w - 64, Align.center, true);
+                getGraphics().drawText(font, layout, 32, preview_h - 70);
+                font = Controls.getBitmapFont("default", 3.5f / (preview_h / preview_w));
+                layout.setText(font, item != null ? item.getDescription() : "Adds " +
+                        String.valueOf(getReward().getCount()) + " " + getReward().type, Color.WHITE, preview_w - 128, item != null ? Align.left : Align.center, true);
+                getGraphics().drawText(font, layout, 64, preview_h / 2.5f);
+                getGraphics().end();
+                getGraphics().endClip();
+                generatedTooltip = new Texture(Pixmap.createFromFrameBuffer(0, 0, preview_w, preview_h), Forge.isTextureFilteringEnabled());
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                frameBuffer.end();
+                getGraphics().dispose();
+                frameBuffer.dispose();
+                Controls.getBitmapFont("default");
+            }
         }
 
         //Rendering code ends here.
@@ -488,18 +504,16 @@ public boolean toolTipIsVisible()
         if (toolTipImage == null)
             toolTipImage = new Image(processDrawable(generatedTooltip));
 
-        if (frontSideUp()) {
-            if (GuiBase.isAndroid()||Forge.hasGamepad()) {
-                if (holdTooltip == null)
-                    holdTooltip = new HoldTooltip(toolTipImage);
-                addListener(holdTooltip);
-            } else {
-                if (tooltip == null) {
-                    tooltip = new Tooltip<>(toolTipImage);
-                    tooltip.setInstant(true);
-                }
-                addListener(tooltip);
+        if (GuiBase.isAndroid() || Forge.hasGamepad()) {
+            if (holdTooltip == null)
+                holdTooltip = new HoldTooltip(toolTipImage);
+            addListener(holdTooltip);
+        } else {
+            if (tooltip == null) {
+                tooltip = new ImageToolTip(toolTipImage);
+                tooltip.setInstant(true);
             }
+            addListener(tooltip);
         }
     }
 
@@ -510,18 +524,21 @@ public boolean toolTipIsVisible()
     public boolean isFlipped() {
         return (clicked && flipProcess >= 1);
     }
+
     public void removeTooltip() {
         if (tooltip != null) {
             tooltip.getActor().remove();
         }
     }
+
     public void clearHoldToolTip() {
         if (holdTooltip != null) {
             try {
                 hover = false;
                 holdTooltip.tooltip_actor.clear();
                 holdTooltip.tooltip_actor.remove();
-            } catch (Exception e){}
+            } catch (Exception e) {
+            }
         }
     }
 
@@ -531,6 +548,7 @@ public boolean toolTipIsVisible()
         clicked = true;
         flipProcess = 0;
     }
+
     public void sold() {
         //todo add new card to be sold???
         if (sold)
@@ -538,6 +556,7 @@ public boolean toolTipIsVisible()
         sold = true;
         getColor().a = 0.5f;
     }
+
     @Override
     public void act(float delta) {
         super.act(delta);
@@ -547,12 +566,12 @@ public boolean toolTipIsVisible()
             else
                 flipProcess = 1;
 
-            if (GuiBase.isAndroid()||Forge.hasGamepad()) {
-                if (holdTooltip != null && frontSideUp() && !getListeners().contains(holdTooltip, true)) {
+            if (GuiBase.isAndroid() || Forge.hasGamepad()) {
+                if (holdTooltip != null && !getListeners().contains(holdTooltip, true)) {
                     addListener(holdTooltip);
                 }
             } else {
-                if (tooltip != null && frontSideUp() && !getListeners().contains(tooltip, true)) {
+                if (tooltip != null && !getListeners().contains(tooltip, true)) {
                     addListener(tooltip);
                 }
             }
@@ -569,7 +588,7 @@ public boolean toolTipIsVisible()
         applyProjectionMatrix(batch);
 
 
-        if (hover|hasKeyboardFocus())
+        if (hover | hasKeyboardFocus())
             batch.setColor(0.5f, 0.5f, 0.5f, 1);
 
 
@@ -609,6 +628,7 @@ public boolean toolTipIsVisible()
             batch.draw(image, x, -getHeight() / 2, width, getHeight());
         }
     }
+
     private void drawCard(Batch batch, Texture image, float x, float width) {
         if (image != null) {
             if (!sold)
@@ -629,11 +649,13 @@ public boolean toolTipIsVisible()
             }
         }
     }
+
     private Graphics getGraphics() {
         if (graphics == null)
             graphics = new Graphics();
         return graphics;
     }
+
     private void applyProjectionMatrix(Batch batch) {
         final Vector3 direction = new Vector3(0, 0, -1);
         final Vector3 up = new Vector3(0, 1, 0);
@@ -689,6 +711,19 @@ public boolean toolTipIsVisible()
         return computedTransform;
     }
 
+    class ImageToolTip extends Tooltip<Image> {
+        public ImageToolTip(Image contents) {
+            super(contents);
+        }
+
+        @Override
+        public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+            if (!frontSideUp())
+                return;
+            super.enter(event, x, y, pointer, fromActor);
+        }
+    }
+
     class HoldTooltip extends ActorGestureListener {
         Image tooltip_image;
         Table tooltip_actor;
@@ -717,6 +752,8 @@ public boolean toolTipIsVisible()
 
         @Override
         public boolean longPress(Actor actor, float x, float y) {
+            if (!frontSideUp())
+                return false;
             TextraButton done = actor.getStage().getRoot().findActor("done");
             if (done != null && Reward.Type.Card.equals(reward.type)) {
                 switchButton.setBounds(done.getX(), done.getY(), done.getWidth(), done.getHeight());
@@ -728,7 +765,7 @@ public boolean toolTipIsVisible()
                 //right if poosible, if exceeds width, draw left
                 tooltip_actor.setX(actor.getRight());
                 if (tooltip_actor.getX() + tooltip_actor.getWidth() > Scene.getIntendedWidth())
-                    tooltip_actor.setX(Math.max(0,actor.getX() - tooltip_actor.getWidth()));
+                    tooltip_actor.setX(Math.max(0, actor.getX() - tooltip_actor.getWidth()));
             } else {
                 //middle
                 tooltip_actor.setX(Scene.getIntendedWidth() / 2 - tooltip_actor.getWidth() / 2);
@@ -754,12 +791,16 @@ public boolean toolTipIsVisible()
             }
             super.tap(event, x, y, count, button);
         }
+
         public void show() {
+            if (!frontSideUp())
+                return;
             tooltip_actor.setX(Scene.getIntendedWidth() / 2 - tooltip_actor.getWidth() / 2);
             tooltip_actor.setY(Scene.getIntendedHeight() / 2 - tooltip_actor.getHeight() / 2);
             getStage().addActor(tooltip_actor);
             shown = true;
         }
+
         public void hide() {
             tooltip_actor.remove();
             switchButton.remove();

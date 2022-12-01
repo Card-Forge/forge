@@ -1,10 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import forge.Forge;
-import forge.animation.ForgeAnimation;
-import forge.assets.ImageCache;
 import forge.gamemodes.match.LobbySlotType;
 import forge.interfaces.IUpdateable;
 import forge.screens.FScreen;
@@ -16,14 +13,15 @@ import java.util.List;
 /**
  * base class to render base forge screens like the deck editor and matches
  */
-public abstract  class ForgeScene extends Scene implements IUpdateable {
+public abstract class ForgeScene extends Scene implements IUpdateable {
 
     @Override
     public void dispose() {
     }
+
     @Override
     public void render() {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
+        /*Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // Clear the screen.
         if (getScreen() == null) {
             return;
         }
@@ -50,30 +48,31 @@ public abstract  class ForgeScene extends Scene implements IUpdateable {
                 }
             }
         }
-        Forge.getGraphics().end();
+        Forge.getGraphics().end();*/
     }
+
     @Override
     public void act(float delta) {
-
-        ImageCache.allowSingleLoad();
-        ForgeAnimation.advanceAll();
+        /*ImageCache.allowSingleLoad();
+        ForgeAnimation.advanceAll();*/
     }
 
 
     @Override
     public void enter() {
         FOverlay.hideAll();
-        if(getScreen()!=null)
+        if (getScreen() != null)
             getScreen().setSize(Forge.getScreenWidth(), Forge.getScreenHeight());
         //update language for ForgeScene
         Forge.getLocalizer().setEnglish(Forge.forcedEnglishonCJKMissing);
         Forge.openScreen(getScreen());
         Gdx.input.setInputProcessor(Forge.getInputProcessor());
     }
+
     public abstract FScreen getScreen();
 
     public void buildTouchListeners(int x, int y, List<FDisplayObject> potentialListeners) {
-        if(getScreen()!=null)
+        if (getScreen() != null)
             getScreen().buildTouchListeners(x, y, potentialListeners);
     }
 

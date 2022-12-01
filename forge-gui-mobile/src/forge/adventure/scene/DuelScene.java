@@ -32,6 +32,7 @@ import forge.item.IPaperCard;
 import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
 import forge.screens.FScreen;
+import forge.screens.LoadingOverlay;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
@@ -65,6 +66,7 @@ public class DuelScene extends ForgeScene {
     Deck playerDeck;
     boolean chaosBattle = false;
     boolean callbackExit = false;
+    private LoadingOverlay matchOverlay;
     List<IPaperCard> playerExtras = new ArrayList<>();
     List<IPaperCard> AIExtras = new ArrayList<>();
 
@@ -82,7 +84,12 @@ public class DuelScene extends ForgeScene {
     }
 
     public void GameEnd() {
-        boolean winner = humanPlayer == hostedMatch.getGame().getMatch().getWinner();
+        boolean winner = false;
+        try {
+            winner = humanPlayer == hostedMatch.getGame().getMatch().getWinner();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String enemyName = (enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride);
         boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
         Current.player().clearBlessing();
@@ -101,6 +108,7 @@ public class DuelScene extends ForgeScene {
                     "Is that all you can do?", "You need to learn more to stand a chance.", "You weren't that bad.", "You made an effort at least.",
                     "From today, you can call me teacher.", "Hmph, predictable!", "I haven't used a fraction of my REAL power!");
             String message = Aggregates.random(insult);
+            boolean finalWinner = winner;
             FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, enemyName, new FBufferedImage(120, 120) {
                 @Override
                 protected void draw(Graphics g, float w, float h) {
@@ -111,17 +119,17 @@ public class DuelScene extends ForgeScene {
                 @Override
                 public void run(Integer result) {
                     if (result == 0) {
-                        afterGameEnd(enemyName, winner);
+                        afterGameEnd(enemyName, finalWinner, true);
                     }
                 }
             }));
         } else {
-            afterGameEnd(enemyName, winner);
+            afterGameEnd(enemyName, winner, false);
         }
     }
 
-    void afterGameEnd(String enemyName, boolean winner) {
-        Gdx.app.postRunnable(() -> {
+    void afterGameEnd(String enemyName, boolean winner, boolean showOverlay) {
+        Runnable runnable = () -> Gdx.app.postRunnable(()-> {
             SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
             dungeonEffect = null;
             callbackExit = false;
@@ -134,6 +142,14 @@ public class DuelScene extends ForgeScene {
                 ((IAfterMatch) last).setWinner(winner);
             }
         });
+        if (showOverlay) {
+            FThreads.invokeInEdtNowOrLater(() -> {
+                matchOverlay = new LoadingOverlay(runnable, true);
+                matchOverlay.show();
+            });
+        } else {
+            runnable.run();
+        }
     }
 
     void addEffects(RegisteredPlayer player, Array<EffectData> effects) {
@@ -311,13 +327,17 @@ public class DuelScene extends ForgeScene {
                     "It's all or nothing!", "It's all on the line!", "You can't back down now!", "Do you have what it takes?", "What will happen next?",
                     "Don't blink!", "You can't lose here!", "There's no turning back!", "It's all or nothing now!");
             String message = Aggregates.random(list);
-            FThreads.delayInEDT(600, () -> FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride, new FBufferedImage(120, 120) {
-                @Override
-                protected void draw(Graphics g, float w, float h) {
-                    if (FSkin.getAvatars().get(90001) != null)
-                        g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
-                }
-            })));
+            matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
+                    FOptionPane.showMessageDialog(message, enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride,
+                            new FBufferedImage(120, 120) {
+                                @Override
+                                protected void draw(Graphics g, float w, float h) {
+                                    if (FSkin.getAvatars().get(90001) != null)
+                                        g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
+                                }
+                            }))), false);
+        } else {
+            matchOverlay = new LoadingOverlay(null);
         }
 
         for (final Player p : hostedMatch.getGame().getPlayers()) {
@@ -329,6 +349,7 @@ public class DuelScene extends ForgeScene {
             }
         }
         super.enter();
+        matchOverlay.show();
     }
 
     @Override
