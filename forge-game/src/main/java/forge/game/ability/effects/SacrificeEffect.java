@@ -151,22 +151,18 @@ public class SacrificeEffect extends SpellAbilityEffect {
                         validTargets = CardLists.filter(validTargets, CardPredicates.canBeSacrificedBy(sa, true));
                     }
 
+                    boolean isStrict = sa.hasParam("StrictAmount");
+                    int minTargets = optional && !isStrict ? 0 : amount;
+                    boolean notEnoughTargets = validTargets.size() < minTargets;
+
                     if (sa.hasParam("Random")) {
                         choosenToSacrifice = new CardCollection(Aggregates.random(validTargets, Math.min(amount, validTargets.size())));
-                    } else if (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSacrifice"), null)) {
+                    } else if (notEnoughTargets || (optional && !p.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoYouWantSacrifice"), null))) {
                         choosenToSacrifice = CardCollection.EMPTY;
                     } else {
-                        boolean isStrict = sa.hasParam("StrictAmount");
-                        int minTargets = optional ? 0 : amount;
-                        boolean notEnoughTargets = isStrict && validTargets.size() < minTargets;
-
-                        if (!notEnoughTargets) {
-                            choosenToSacrifice = destroy ?
+                        choosenToSacrifice = destroy ?
                                 p.getController().choosePermanentsToDestroy(sa, minTargets, amount, validTargets, msg) :
-                                p.getController().choosePermanentsToSacrifice(sa, minTargets, amount, validTargets, msg);
-                        } else {
-                            choosenToSacrifice = CardCollection.EMPTY;
-                        }
+                                    p.getController().choosePermanentsToSacrifice(sa, minTargets, amount, validTargets, msg);
                     }
                 }
 
@@ -218,7 +214,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
         final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), num, sa);
 
         if (valid.equals("Self")) {
-            sb.append("Sacrifices ").append(sa.getHostCard().toString());
+            sb.append("Sacrifices ").append(sa.getHostCard());
         } else if (valid.equals("Card.AttachedBy")) {
             final Card toSac = sa.getHostCard().getEnchantingCard();
             sb.append(toSac.getController()).append(" sacrifices ").append(toSac).append(".");
