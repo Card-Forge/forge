@@ -1,0 +1,13 @@
+Name:Fallaji Antiquarian
+ManaCost:3 R
+Types:Creature Human Artificer
+PT:2/4
+K:Haste
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.Self | NoResolvingCheck$ True | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, conjure a duplicate of another target nontoken creature or artifact you control into your graveyard. The duplicate perpetually gains unearth {1}{R}. 
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | TgtPrompt$ Select another target nontoken creature or artifact | DefinedName$ Targeted | ValidTgts$ Creature.YouCtrl+Other+nonToken,Artifact.YouCtrl+Other+nonToken | Zone$ Graveyard | RememberMade$ True | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualUnearth | RememberObjects$ Remembered | Name$ Fallaji Antiquarian's perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualUnearth:Mode$ Continuous | Affected$ Card.IsRemembered | AddKeyword$ Unearth:2 R | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gains unearth {1}{R}.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Graveyard
+DeckHints:Type$Artifact
+Oracle:Haste\nWhen Fallaji Antiquarian enters the battlefield, conjure a duplicate of another target nontoken creature or artifact you control into your graveyard. The duplicate perpetually gains unearth {1}{R}. 
