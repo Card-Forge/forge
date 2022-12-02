@@ -40,14 +40,17 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private static final float PADDING = Utils.scale(5);
     private static final float PILE_SPACING_Y = 0.1f;
     private static final FSkinFont LABEL_FONT = FSkinFont.get(12);
+
     private static FSkinColor getGroupHeaderForeColor() {
         if (Forge.isMobileAdventureMode)
             return FSkinColor.get(Colors.ADV_CLR_TEXT);
         return FSkinColor.get(Colors.CLR_TEXT);
     }
+
     private static FSkinColor getGroupHeaderLineColor() {
         return getGroupHeaderForeColor().alphaColor(0.5f);
     }
+
     private static final FSkinFont GROUP_HEADER_FONT = LABEL_FONT;
     private static final float GROUP_HEADER_HEIGHT = Utils.scale(19);
     private static final float GROUP_HEADER_GLYPH_WIDTH = Utils.scale(6);
@@ -73,7 +76,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         private ExpandCollapseButton() {
             super(new FLabel.ButtonBuilder());
             setCommand(e -> {
-                if (groupBy == null || model.getItems().isEmpty()) { return; }
+                if (groupBy == null || model.getItems().isEmpty()) {
+                    return;
+                }
 
                 boolean collapsed = !isAllCollapsed;
                 for (Group group : groups) {
@@ -109,8 +114,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             float y = Math.round((h - squareSize) / 2 - offset);
             if (pressed) {
                 y += lineThickness;
-            }
-            else {
+            } else {
                 x -= lineThickness;
             }
 
@@ -132,6 +136,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
         }
     }
+
     private final ExpandCollapseButton btnExpandCollapseAll = new ExpandCollapseButton();
     private final FComboBox<Object> cbGroupByOptions = new FComboBox<>(Forge.getLocalizer().getMessage("lblGroups") + " ");
     private final FComboBox<Object> cbPileByOptions = new FComboBox<>(Forge.getLocalizer().getMessage("lblPiles") + " ");
@@ -144,16 +149,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         cbGroupByOptions.setChangedHandler(e -> {
             if (cbGroupByOptions.getSelectedIndex() > 0) {
                 setGroupBy((GroupDef) cbGroupByOptions.getSelectedItem());
-            }
-            else {
+            } else {
                 setGroupBy(null);
             }
         });
         cbPileByOptions.setChangedHandler(e -> {
             if (cbPileByOptions.getSelectedIndex() > 0) {
                 setPileBy((ColumnDef) cbPileByOptions.getSelectedItem());
-            }
-            else {
+            } else {
                 setPileBy(null);
             }
         });
@@ -179,17 +182,20 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     public GroupDef getGroupBy() {
         return groupBy;
     }
+
     public void setGroupBy(GroupDef groupBy0) {
         setGroupBy(groupBy0, false);
     }
+
     private void setGroupBy(GroupDef groupBy0, boolean forSetup) {
-        if (groupBy == groupBy0) { return; }
+        if (groupBy == groupBy0) {
+            return;
+        }
         groupBy = groupBy0;
 
         if (groupBy == null) {
             cbGroupByOptions.setSelectedIndex(0);
-        }
-        else {
+        } else {
             cbGroupByOptions.setSelectedItem(groupBy);
         }
 
@@ -198,8 +204,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         if (groupBy == null) {
             groups.add(new Group(""));
             btnExpandCollapseAll.updateIsAllCollapsed();
-        }
-        else {
+        } else {
             for (String groupName : groupBy.getGroups()) {
                 groups.add(new Group(groupName));
             }
@@ -228,17 +233,20 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     public ColumnDef getPileBy() {
         return pileBy;
     }
+
     public void setPileBy(ColumnDef pileBy0) {
         setPileBy(pileBy0, false);
     }
+
     private void setPileBy(ColumnDef pileBy0, boolean forSetup) {
-        if (pileBy == pileBy0) { return; }
+        if (pileBy == pileBy0) {
+            return;
+        }
         pileBy = pileBy0;
 
         if (pileBy == null) {
             cbPileByOptions.setSelectedIndex(0);
-        }
-        else {
+        } else {
             cbPileByOptions.setSelectedItem(pileBy);
         }
 
@@ -263,14 +271,16 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     public void setColumnCount(int columnCount0) {
         setColumnCount(columnCount0, false);
     }
+
     private void setColumnCount(int columnCount0, boolean forSetup) {
         if (columnCount0 < MIN_COLUMN_COUNT) {
             columnCount0 = MIN_COLUMN_COUNT;
-        }
-        else if (columnCount0 > MAX_COLUMN_COUNT) {
+        } else if (columnCount0 > MAX_COLUMN_COUNT) {
             columnCount0 = MAX_COLUMN_COUNT;
         }
-        if (columnCount == columnCount0) { return; }
+        if (columnCount == columnCount0) {
+            return;
+        }
         columnCount = columnCount0;
 
         if (!forSetup) {
@@ -342,14 +352,12 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             Group group;
             if (groupIndex >= 0) {
                 group = groups.get(groupIndex);
-            }
-            else {
+            } else {
                 if (otherItems == null) {
                     //reuse existing Other group if possible
                     if (groups.size() > groupBy.getGroups().length) {
                         otherItems = groups.get(groups.size() - 1);
-                    }
-                    else {
+                    } else {
                         otherItems = new Group(Forge.getLocalizer().getMessage("lblOther"));
                         otherItems.isCollapsed = btnExpandCollapseAll.isAllCollapsed;
                         groups.add(otherItems);
@@ -389,7 +397,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     }
 
     private void updateLayout(boolean forRefresh) {
-        if (updatingLayout) { return; } //prevent infinite loop
+        if (updatingLayout) {
+            return;
+        } //prevent infinite loop
         updatingLayout = true;
 
         focalItem = null; //clear cached focalItem when layout changes
@@ -471,8 +481,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
                 y += itemHeight;
                 group.scrollWidth = groupWidth;
-            }
-            else {
+            } else {
                 x = 0;
                 pileY = y;
                 maxPileHeight = 0;
@@ -505,7 +514,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             int index = 0;
             orderedItems.clear();
             for (Group group : groups) {
-                if (group.isCollapsed || group.items.isEmpty()) { continue; }
+                if (group.isCollapsed || group.items.isEmpty()) {
+                    continue;
+                }
 
                 for (Pile pile : group.piles) {
                     for (ItemInfo itemInfo : pile.items) {
@@ -558,8 +569,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
     private ItemInfo getItemAtPoint(float x, float y) {
         //check selected items first since they appear on top
         for (int i = selectedIndices.size() - 1; i >= 0; i--) {
-            int currentIndex=selectedIndices.get(i);
-            if(currentIndex<0||orderedItems.size()<=currentIndex)
+            int currentIndex = selectedIndices.get(i);
+            if (currentIndex < 0 || orderedItems.size() <= currentIndex)
                 continue;
             ItemInfo item = orderedItems.get(currentIndex);
             float relX = x + item.group.getScrollLeft() - item.group.getLeft();
@@ -715,7 +726,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         if (item.selected) { //unselect item if already selected
             if (selectedIndices.size() > minSelections) {
                 item.selected = false;
-                selectedIndices.remove((Object)item.index);
+                selectedIndices.remove((Object) item.index);
                 onSelectionChange();
                 item.group.scrollIntoView(item);
             }
@@ -736,9 +747,13 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public void scrollSelectionIntoView() {
-        if (selectedIndices.isEmpty()) { return; }
-        int index=selectedIndices.get(0);
-        if(index<0||orderedItems.size()<=index) { return ; }
+        if (selectedIndices.isEmpty()) {
+            return;
+        }
+        int index = selectedIndices.get(0);
+        if (index < 0 || orderedItems.size() <= index) {
+            return;
+        }
 
         ItemInfo itemInfo = orderedItems.get(index);
         getScroller().scrollIntoView(itemInfo);
@@ -746,10 +761,14 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public Rectangle getSelectionBounds() {
-        if (selectedIndices.isEmpty()) { return new Rectangle(); }
+        if (selectedIndices.isEmpty()) {
+            return new Rectangle();
+        }
 
-        int index=selectedIndices.get(0);
-        if(index<0||orderedItems.size()<=index) { return new Rectangle(); }
+        int index = selectedIndices.get(0);
+        if (index < 0 || orderedItems.size() <= index) {
+            return new Rectangle();
+        }
         ItemInfo itemInfo = orderedItems.get(index);
         Vector2 relPos = itemInfo.group.getChildRelativePosition(itemInfo);
         return new Rectangle(itemInfo.group.screenPos.x + relPos.x - SEL_BORDER_SIZE + itemInfo.group.getLeft(),
@@ -759,15 +778,19 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
     @Override
     public void zoomSelected() {
-        if (selectedIndices.isEmpty()) { return; }
-        int index=selectedIndices.get(0);
-        if(index<0||orderedItems.size()<=index) { return ; }
+        if (selectedIndices.isEmpty()) {
+            return;
+        }
+        int index = selectedIndices.get(0);
+        if (index < 0 || orderedItems.size() <= index) {
+            return;
+        }
 
         ItemInfo itemInfo = orderedItems.get(index);
         if (itemInfo != null) {
-            if(itemInfo.getKey() instanceof CardThemedDeckGenerator || itemInfo.getKey() instanceof CommanderDeckGenerator
-                    || itemInfo.getKey() instanceof ArchetypeDeckGenerator || itemInfo.getKey() instanceof DeckProxy){
-                FDeckViewer.show(((DeckProxy)itemInfo.getKey()).getDeck());
+            if (itemInfo.getKey() instanceof CardThemedDeckGenerator || itemInfo.getKey() instanceof CommanderDeckGenerator
+                    || itemInfo.getKey() instanceof ArchetypeDeckGenerator || itemInfo.getKey() instanceof DeckProxy) {
+                FDeckViewer.show(((DeckProxy) itemInfo.getKey()).getDeck());
             }
             CardZoom.show(orderedItems, orderedItems.indexOf(itemInfo), itemManager);
         }
@@ -795,7 +818,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
 
         @Override
         public void draw(Graphics g) {
-            if (items.isEmpty()) { return; }
+            if (items.isEmpty()) {
+                return;
+            }
 
             if (groupBy != null) {
                 //draw group name and horizontal line
@@ -816,15 +841,16 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                             x, y - offset,
                             x + offset, y,
                             x, y + offset);
-                }
-                else {
+                } else {
                     g.fillTriangle(getGroupHeaderLineColor(),
                             x - offset + 2, y + offset - 1,
                             x + offset, y + offset - 1,
                             x + offset, y - offset + 1);
                 }
 
-                if (isCollapsed) { return; }
+                if (isCollapsed) {
+                    return;
+                }
 
                 float visibleLeft = getScrollLeft();
                 float visibleRight = visibleLeft + getWidth();
@@ -862,8 +888,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         public boolean tap(float x, float y, int count) {
             ItemInfo item = getItemAtPoint(x + getLeft(), y + getTop());
             if (item != null) {
-                if(item.getKey() instanceof DeckProxy) {
-                    DeckProxy dp = (DeckProxy)item.getKey();
+                if (item.getKey() instanceof DeckProxy) {
+                    DeckProxy dp = (DeckProxy) item.getKey();
                     if (count >= 2 && !dp.isGeneratedDeck()) {
                         //double tap to add to favorites or remove....
                         if (DeckPreferences.getPrefs(dp).getStarCount() > 0)
@@ -889,9 +915,9 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
         public boolean longPress(float x, float y) {
             ItemInfo item = getItemAtPoint(x + getLeft(), y + getTop());
             if (item != null) {
-                if(item.getKey() instanceof CardThemedDeckGenerator || item.getKey() instanceof CommanderDeckGenerator
-                        || item.getKey() instanceof ArchetypeDeckGenerator || item.getKey() instanceof DeckProxy){
-                    FDeckViewer.show(((DeckProxy)item.getKey()).getDeck());
+                if (item.getKey() instanceof CardThemedDeckGenerator || item.getKey() instanceof CommanderDeckGenerator
+                        || item.getKey() instanceof ArchetypeDeckGenerator || item.getKey() instanceof DeckProxy) {
+                    FDeckViewer.show(((DeckProxy) item.getKey()).getDeck());
                     return true;
                 }
                 CardZoom.show(orderedItems, orderedItems.indexOf(item), itemManager);
@@ -906,6 +932,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             return new Vector2(child.getLeft() - getScrollLeft() + offsetX - getLeft(), child.getTop() - getScrollValue() + offsetY - getTop());
         }
     }
+
     private class Pile extends FDisplayObject {
         private final List<ItemInfo> items = new ArrayList<>();
 
@@ -924,8 +951,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 }
                 if (itemInfo.selected) {
                     skippedItem = itemInfo;
-                }
-                else {
+                } else {
                     itemInfo.draw(g);
                 }
             }
@@ -937,6 +963,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
             }
         }
     }
+
     private class ItemInfo extends FDisplayObject implements Entry<InventoryItem, Integer> {
         private final T item;
         private final Group group;
@@ -990,8 +1017,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         g.fillRoundRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE, (h - w) / 10);
                         //drawroundrect has GL_SMOOTH to `smoothen/faux` the aliased corner
                         g.drawRoundRect(1f, Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 1.5f * SEL_BORDER_SIZE, h + 1.5f * SEL_BORDER_SIZE, (h - w) / 10);
-                    }
-                    else //default rectangle highlight
+                    } else //default rectangle highlight
                         g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
                 }
             }
@@ -1001,22 +1027,22 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 if (itemManager.getShowRanking() && FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_OVERLAY_DRAFT_RANKING)) {
                     double score = CardRanker.getRawScore((PaperCard) item);
                     int draftRank = score <= 0 ? 0 : score > 99 ? 99 : (int) Math.round(CardRanker.getRawScore((PaperCard) item));
-                    float rankSize = w/2;
-                    float y2 = y+(rankSize-(rankSize*0.1f));
-                    float x2 = x+rankSize/2;
+                    float rankSize = w / 2;
+                    float y2 = y + (rankSize - (rankSize * 0.1f));
+                    float x2 = x + rankSize / 2;
                     if (draftRank >= 90) {
-                        g.drawImage(FSkinImage.DRAFTRANK_S, x2, y2+1, rankSize, rankSize);
-                    } else if (draftRank >= 80 && draftRank <= 89 ) {
-                        g.drawImage(FSkinImage.DRAFTRANK_A, x2, y2+1, rankSize, rankSize);
-                    } else if (draftRank >= 60 && draftRank <= 79 ) {
-                        g.drawImage(FSkinImage.DRAFTRANK_B, x2, y2+1, rankSize, rankSize);
-                    } else if (draftRank >= 25 && draftRank <= 59 ) {
-                        g.drawImage(FSkinImage.DRAFTRANK_C, x2, y2+1, rankSize, rankSize);
+                        g.drawImage(FSkinImage.DRAFTRANK_S, x2, y2 + 1, rankSize, rankSize);
+                    } else if (draftRank >= 80 && draftRank <= 89) {
+                        g.drawImage(FSkinImage.DRAFTRANK_A, x2, y2 + 1, rankSize, rankSize);
+                    } else if (draftRank >= 60 && draftRank <= 79) {
+                        g.drawImage(FSkinImage.DRAFTRANK_B, x2, y2 + 1, rankSize, rankSize);
+                    } else if (draftRank >= 25 && draftRank <= 59) {
+                        g.drawImage(FSkinImage.DRAFTRANK_C, x2, y2 + 1, rankSize, rankSize);
                     } else {
-                        g.drawImage(FSkinImage.DRAFTRANK_D, x2, y2+1, rankSize, rankSize);
+                        g.drawImage(FSkinImage.DRAFTRANK_D, x2, y2 + 1, rankSize, rankSize);
                     }
                     String value = String.valueOf(draftRank);
-                    g.drawText(value, FSkinFont.forHeight(rankSize/4), Color.WHITE, x, y, w, h, true, Align.center, true);
+                    g.drawText(value, FSkinFont.forHeight(rankSize / 4), Color.WHITE, x, y, w, h, true, Align.center, true);
                 }
             } else if (item instanceof ConquestCommander) {
                 CardRenderer.drawCard(g, ((ConquestCommander) item).getCard(), x, y, w, h, pos);
@@ -1026,7 +1052,7 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                 float scale = 0.75f;
 
                 if (dpImg != null) {//generated decks have missing info...
-                    if (Forge.enableUIMask.equals("Off")){
+                    if (Forge.enableUIMask.equals("Off")) {
                         if (selected)
                             g.fillRect(Color.GREEN, x - SEL_BORDER_SIZE, y - SEL_BORDER_SIZE, w + 2 * SEL_BORDER_SIZE, h + 2 * SEL_BORDER_SIZE);
                         g.drawImage(dpImg, x, y, w, h);
@@ -1049,28 +1075,28 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                         }
                     }
                     //fake labelname shadow
-                    g.drawText(item.getName(), GROUP_HEADER_FONT, Color.BLACK, (x + PADDING)-1f, (y + PADDING*2)+1f, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
+                    g.drawText(item.getName(), GROUP_HEADER_FONT, Color.BLACK, (x + PADDING) - 1f, (y + PADDING * 2) + 1f, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
                     //labelname
-                    g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING*2, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
+                    g.drawText(item.getName(), GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + PADDING * 2, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, false);
                 } else {
                     if (!dp.isGeneratedDeck()) {
                         if (dp.getDeck().isEmpty()) {
-                            g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y-(h*0.25f), w, h, Color.RED, selected);
+                            g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y - (h * 0.25f), w, h, Color.RED, selected);
                         } else {
                             //If deck has Commander, use it as cardArt reference
                             PaperCard paperCard = dp.getDeck().getCommanders().isEmpty() ? dp.getHighestCMCCard() : dp.getDeck().getCommanders().get(0);
                             FImageComplex cardArt = CardRenderer.getCardArt(paperCard);
                             //draw the deckbox
-                            if (cardArt == null){
+                            if (cardArt == null) {
                                 //draw generic box if null or still loading
-                                g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y-(h*0.25f), w, h, Color.GREEN, selected);
+                                g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y - (h * 0.25f), w, h, Color.GREEN, selected);
                             } else {
                                 g.drawDeckBox(cardArt, scale, FSkin.getDeckbox().get(1), FSkin.getDeckbox().get(2), x, y, w, h, Color.GREEN, selected);
                             }
                         }
                     } else {
                         //generic box
-                        g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y-(h*0.25f), w, h, Color.GREEN, selected);
+                        g.drawImage(FSkin.getDeckbox().get(2), FSkin.getDeckbox().get(2), x, y - (h * 0.25f), w, h, Color.GREEN, selected);
                     }
                     if (deckColor != null) {
                         //deck color identity
@@ -1089,8 +1115,8 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                                 symbolSize = IMAGE_SIZE * (0.5f);
                         }
                         //vertical mana icons
-                        CardFaceSymbols.drawColorSet(g, deckColor, x +(w-symbolSize), y+(h/8), symbolSize, true);
-                        if(!dp.isGeneratedDeck()) {
+                        CardFaceSymbols.drawColorSet(g, deckColor, x + (w - symbolSize), y + (h / 8), symbolSize, true);
+                        if (!dp.isGeneratedDeck()) {
                             if (dp.getDeck().isEmpty()) {
                                 g.drawImage(Forge.hdbuttons ? FSkinImage.HDYIELD : FSkinImage.WARNING, x, y, symbolSize, symbolSize);
                             } else {
@@ -1099,15 +1125,15 @@ public class ImageView<T extends InventoryItem> extends ItemView<T> {
                                 else
                                     g.drawImage(DeckPreferences.getPrefs(dp).getStarCount() > 0 ? FSkinImage.STAR_FILLED : FSkinImage.STAR_OUTLINE, x, y, symbolSize, symbolSize);
                                 //AI Icon
-                                g.drawImage(dp.getAI().inMainDeck == 0 ? FSkinImage.AI_ACTIVE : FSkinImage.AI_INACTIVE, x, y+symbolSize, symbolSize, symbolSize);
+                                g.drawImage(dp.getAI().inMainDeck == 0 ? FSkinImage.AI_ACTIVE : FSkinImage.AI_INACTIVE, x, y + symbolSize, symbolSize, symbolSize);
                             }
                         }
                     }
-                    String deckname = TextUtil.fastReplace(item.getName(),"] #", "]\n#");
+                    String deckname = TextUtil.fastReplace(item.getName(), "] #", "]\n#");
                     //deckname fakeshadow
-                    g.drawText(deckname, GROUP_HEADER_FONT, Color.BLACK, (x + PADDING)-1f, (y + (h/10) + PADDING)+1f, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, true);
+                    g.drawText(deckname, GROUP_HEADER_FONT, Color.BLACK, (x + PADDING) - 1f, (y + (h / 10) + PADDING) + 1f, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, true);
                     //deck name
-                    g.drawText(deckname, GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + (h/10) + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, true);
+                    g.drawText(deckname, GROUP_HEADER_FONT, Color.WHITE, x + PADDING, y + (h / 10) + PADDING, w - 2 * PADDING, h - 2 * PADDING, true, Align.center, true);
                 }
             } else {
                 Texture img = ImageCache.getImage(item);

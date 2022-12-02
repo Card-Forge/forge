@@ -53,15 +53,18 @@ public class CardZoom extends FOverlay {
     public static void show(Object item) {
         show(item, false);
     }
+
     public static void show(Object item, boolean showbackside) {
         List<Object> items0 = new ArrayList<>();
         items0.add(item);
         showBackSide = showbackside; //reverse the displayed zoomed card for the choice list
         show(items0, 0, null);
     }
+
     public static void show(FCollectionView<?> items0, int currentIndex0, ActivateHandler activateHandler0) {
-        show((List<?>)items0, currentIndex0, activateHandler0);
+        show((List<?>) items0, currentIndex0, activateHandler0);
     }
+
     public static void show(final List<?> items0, int currentIndex0, ActivateHandler activateHandler0) {
         items = items0;
         activateHandler = activateHandler0;
@@ -89,7 +92,9 @@ public class CardZoom extends FOverlay {
 
     @Override
     public void setVisible(boolean visible0) {
-        if (this.isVisible() == visible0) { return; }
+        if (this.isVisible() == visible0) {
+            return;
+        }
 
         super.setVisible(visible0);
 
@@ -101,7 +106,9 @@ public class CardZoom extends FOverlay {
 
     private static void incrementCard(int dir) {
         if (dir > 0) {
-            if (currentIndex == items.size() - 1) { return; }
+            if (currentIndex == items.size() - 1) {
+                return;
+            }
             currentIndex++;
 
             prevCard = currentCard;
@@ -130,7 +137,7 @@ public class CardZoom extends FOverlay {
             flipIconBounds = null;
         }
         if (currentCard != null) {
-            if (currentCard.getMergedCardsCollection() != null )
+            if (currentCard.getMergedCardsCollection() != null)
                 if (currentCard.getMergedCardsCollection().size() > 0)
                     mutateIconBounds = new Rectangle();
         }
@@ -139,29 +146,29 @@ public class CardZoom extends FOverlay {
 
     private static CardView getCardView(Object item) {
         if (item instanceof Entry) {
-            item = ((Entry<?, ?>)item).getKey();
+            item = ((Entry<?, ?>) item).getKey();
         }
         if (item instanceof CardView) {
-            return (CardView)item;
+            return (CardView) item;
         }
         if (item instanceof DeckProxy) {
-            if (item instanceof CardThemedDeckGenerator){
-                return CardView.getCardForUi(((CardThemedDeckGenerator)item).getPaperCard());
-            }else if (item instanceof CommanderDeckGenerator){
-                return CardView.getCardForUi(((CommanderDeckGenerator)item).getPaperCard());
-            }else if (item instanceof ArchetypeDeckGenerator){
-                return CardView.getCardForUi(((ArchetypeDeckGenerator)item).getPaperCard());
-            }else{
-                DeckProxy deck = ((DeckProxy)item);
+            if (item instanceof CardThemedDeckGenerator) {
+                return CardView.getCardForUi(((CardThemedDeckGenerator) item).getPaperCard());
+            } else if (item instanceof CommanderDeckGenerator) {
+                return CardView.getCardForUi(((CommanderDeckGenerator) item).getPaperCard());
+            } else if (item instanceof ArchetypeDeckGenerator) {
+                return CardView.getCardForUi(((ArchetypeDeckGenerator) item).getPaperCard());
+            } else {
+                DeckProxy deck = ((DeckProxy) item);
                 return new CardView(-1, null, deck.getName(), null, deck.getImageKey(false));
             }
 
         }
         if (item instanceof IPaperCard) {
-            return CardView.getCardForUi((IPaperCard)item);
+            return CardView.getCardForUi((IPaperCard) item);
         }
         if (item instanceof ConquestCommander) {
-            return CardView.getCardForUi(((ConquestCommander)item).getCard());
+            return CardView.getCardForUi(((ConquestCommander) item).getCard());
         }
         if (item instanceof InventoryItem) {
             InventoryItem ii = (InventoryItem)item;
@@ -173,7 +180,7 @@ public class CardZoom extends FOverlay {
     @Override
     public boolean tap(float x, float y, int count) {
         if (mutateIconBounds != null && mutateIconBounds.contains(x, y)) {
-            if(showMerged) {
+            if (showMerged) {
                 showMerged = false;
             } else {
                 showMerged = true;
@@ -226,7 +233,9 @@ public class CardZoom extends FOverlay {
     }
 
     private void setOneCardView(boolean oneCardView0) {
-        if (oneCardView == oneCardView0 || Forge.isLandscapeMode()) { return; } //don't allow changing this when in landscape mode
+        if (oneCardView == oneCardView0 || Forge.isLandscapeMode()) {
+            return;
+        } //don't allow changing this when in landscape mode
 
         oneCardView = oneCardView0;
         prefs.setPref(FPref.UI_SINGLE_CARD_ZOOM, oneCardView0);
@@ -240,8 +249,7 @@ public class CardZoom extends FOverlay {
         if (totalZoomAmount >= REQ_AMOUNT) {
             setOneCardView(true);
             totalZoomAmount = 0;
-        }
-        else if (totalZoomAmount <= -REQ_AMOUNT) {
+        } else if (totalZoomAmount <= -REQ_AMOUNT) {
             setOneCardView(false);
             totalZoomAmount = 0;
         }
@@ -279,24 +287,22 @@ public class CardZoom extends FOverlay {
         float maxCardHeight = h - AspectRatioMultiplier * messageHeight; //maxheight of currently zoomed card
 
         float cardWidth, cardHeight, y;
-        
+
         if (oneCardView && !Forge.isLandscapeMode()) {
 
             cardWidth = w;
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
-            
+
             boolean rotateSplit = FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_ROTATE_SPLIT_CARDS);
             if (currentCard != null && currentCard.isSplitCard() && rotateSplit) {
                 // card will be rotated.  Make sure that the height does not exceed the width of the view
-                if (cardHeight > Gdx.graphics.getWidth())
-                {
+                if (cardHeight > Gdx.graphics.getWidth()) {
                     cardHeight = Gdx.graphics.getWidth();
                     cardWidth = cardHeight / FCardPanel.ASPECT_RATIO;
                 }
             }
-        }
-        else {
-            
+        } else {
+
             cardWidth = w * 0.5f;
             cardHeight = FCardPanel.ASPECT_RATIO * cardWidth;
 
@@ -326,7 +332,7 @@ public class CardZoom extends FOverlay {
         if (zoomMode) {
             CardImageRenderer.drawZoom(g, currentCard, gameView, showBackSide? showBackSide : showAltState, x, y, cardWidth, cardHeight, getWidth(), getHeight(), true);
         } else {
-            CardImageRenderer.drawDetails(g, currentCard, gameView, showBackSide? showBackSide : showAltState, x, y, cardWidth, cardHeight);
+            CardImageRenderer.drawDetails(g, currentCard, gameView, showBackSide ? showBackSide : showAltState, x, y, cardWidth, cardHeight);
         }
 
         if (!showMerged) {
@@ -370,18 +376,20 @@ public class CardZoom extends FOverlay {
 
     public interface ActivateHandler {
         String getActivateAction(int index);
+
         void setSelectedIndex(int index);
+
         void activate(int index);
     }
 
     public void interrupt(boolean resume) {
         if (MatchController.instance.hasLocalPlayers())
             return;
-        if(resume && MatchController.instance.isGamePaused()) {
+        if (resume && MatchController.instance.isGamePaused()) {
             MatchController.instance.resumeMatch();
             return;
         }
-        if(!MatchController.instance.isGamePaused())
+        if (!MatchController.instance.isGamePaused())
             MatchController.instance.pauseMatch();
     }
 
@@ -403,8 +411,7 @@ public class CardZoom extends FOverlay {
                 if (flipIconBounds != null) {
                     tap(flipIconBounds.x, flipIconBounds.y, 1);
                 }
-            }
-            else if (keyCode == Input.Keys.BUTTON_Y)
+            } else if (keyCode == Input.Keys.BUTTON_Y)
                 fling(0, 300f);
             return true;
         }

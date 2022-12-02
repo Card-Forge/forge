@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
+import forge.assets.ImageCache;
 import forge.toolbox.FDisplayObject;
 import forge.util.TextBounds;
 import forge.util.Utils;
@@ -49,6 +50,7 @@ public class Graphics {
     private final ShaderProgram shaderPixelateWarp = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPixelateShaderWarp);
     private final ShaderProgram shaderChromaticAbberation = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragChromaticAbberation);
     private final ShaderProgram shaderHueShift = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragHueShift);
+    private final ShaderProgram shaderRoundedRect = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragRoundedRect);
 
     private Texture dummyTexture = null;
 
@@ -62,6 +64,10 @@ public class Graphics {
 
     public ShaderProgram getShaderGrayscale() {
         return shaderGrayscale;
+    }
+
+    public ShaderProgram getShaderRoundedRect() {
+        return shaderRoundedRect;
     }
 
     public ShaderProgram getShaderWarp() {
@@ -879,6 +885,44 @@ public class Graphics {
         batch.begin();
     }
 
+    public void drawCardRoundRect(Texture image, TextureRegion damage_overlay, float x, float y, float w, float h, boolean drawGray, boolean damaged) {
+        if (image == null)
+            return;
+        batch.end();
+        shaderRoundedRect.bind();
+        shaderRoundedRect.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+        shaderRoundedRect.setUniformf("edge_radius", (image.getHeight() / image.getWidth()) * ImageCache.getRadius(image));
+        shaderRoundedRect.setUniformf("u_gray", drawGray ? 0.8f : 0f);
+        batch.setShader(shaderRoundedRect);
+        batch.begin();
+        //draw
+        batch.draw(image, adjustX(x), adjustY(y, h), w, h);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+        if (damage_overlay != null && damaged)
+            batch.draw(damage_overlay, adjustX(x), adjustY(y, h), w, h);
+    }
+
+    public void drawCardRoundRect(Texture image, float x, float y, float w, float h, float originX, float originY, float rotation) {
+        if (image == null)
+            return;
+        batch.end();
+        shaderRoundedRect.bind();
+        shaderRoundedRect.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+        shaderRoundedRect.setUniformf("edge_radius", (image.getHeight() / image.getWidth()) * ImageCache.getRadius(image));
+        shaderRoundedRect.setUniformf("u_gray", 0f);
+        batch.setShader(shaderRoundedRect);
+        batch.begin();
+        //draw
+        drawRotatedImage(image, x, y, w, h, originX, originY, 0, 0, image.getWidth(), image.getHeight(), rotation);
+        //reset
+        batch.end();
+        batch.setShader(null);
+        batch.begin();
+    }
+
     public void drawHueShift(Texture image, float x, float y, float w, float h, Float time) {
         if (image == null)
             return;
@@ -1287,6 +1331,7 @@ public class Graphics {
         bitmapFont.setColor(color.r, color.g, color.b, alpha);
         bitmapFont.draw(batch, text, x, y);
     }
+
     public void drawText(BitmapFont bitmapFont, GlyphLayout layout, float x, float y) {
         if (bitmapFont == null || layout == null)
             return;

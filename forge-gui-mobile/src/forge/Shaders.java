@@ -42,6 +42,42 @@ public class Shaders {
             "    v_texCoords = a_texCoord0;\n" +
             "    gl_Position = u_projTrans * a_position;\n" +
             "}";
+    public static final String fragRoundedRect = "#ifdef GL_ES\n" +
+            "#define LOWP lowp\n" +
+            "precision mediump float;\n" +
+            "#else\n" +
+            "#define LOWP \n" +
+            "#endif\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform sampler2D u_texture;\n" +
+            "uniform vec2 u_resolution;\n" +
+            "uniform float edge_radius;\n" +
+            "uniform float u_gray;\n" +
+            "vec4 color = vec4(1.0,1.0,1.0,1.0);\n" +
+            "float gradientIntensity = 0.5;\n" +
+            "\n" +
+            "void main() {\n" +
+            "    vec2 uv = v_texCoords;\n" +
+            "    vec2 uv_base_center = uv * 2.0 - 1.0;\n" +
+            "\n" +
+            "    vec2 half_resolution = u_resolution.xy * 0.5;\n" +
+            "    vec2 abs_rounded_center = half_resolution.xy - edge_radius;\n" +
+            "    vec2 abs_pixel_coord = vec2( abs(uv_base_center.x * half_resolution.x), abs(uv_base_center.y * half_resolution.y) );\n" +
+            "\n" +
+            "    float alpha = 1.0;\n" +
+            "    vec4 col = color * texture2D(u_texture, uv);\n" +
+            "    if (abs_pixel_coord.x > abs_rounded_center.x && abs_pixel_coord.y > abs_rounded_center.y) {\n" +
+            "         float r = length(abs_pixel_coord - abs_rounded_center);\n" +
+            "         alpha = smoothstep(edge_radius, edge_radius - gradientIntensity, r);\n" +
+            "         \n" +
+            "    }\n" +
+            "\tif (u_gray > 0.0) {\n" +
+            "\t    float grey = dot( col.rgb, vec3(0.22, 0.707, 0.071) );\n" +
+            "\t\tvec3 blendedColor = mix(col.rgb, vec3(grey), 1.0);\n" +
+            "\t\tcol = vec4(blendedColor.rgb, col.a);\n" +
+            "\t}\n" +
+            "    gl_FragColor = col*alpha;\n" +
+            "}";
     public static final String fragHueShift = "#ifdef GL_ES\n" +
             "#define LOWP lowp\n" +
             "precision mediump float;\n" +

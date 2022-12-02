@@ -1,6 +1,8 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -54,9 +56,24 @@ public class RewardScene extends UIScene {
         ui.onButtonPress("done", () -> RewardScene.this.done());
         ui.onButtonPress("detail",()->RewardScene.this.toggleToolTip());
         detailButton = ui.findActor("detail");
-        if (Forge.getDeviceAdapter().getGamepads().isEmpty())
-            detailButton.setVisible(false);
+        detailButton.setVisible(false);
         doneButton = ui.findActor("done");
+    }
+
+    @Override
+    public void connected(Controller controller) {
+        super.connected(controller);
+        updateDetailButton();
+    }
+
+    @Override
+    public void disconnected(Controller controller) {
+        super.disconnected(controller);
+        updateDetailButton();
+    }
+    private void updateDetailButton() {
+        detailButton.setVisible(Controllers.getCurrent() != null);
+        detailButton.layout();
     }
 
     private void toggleToolTip() {
@@ -159,6 +176,13 @@ public class RewardScene extends UIScene {
             }
         }
     }
+
+    @Override
+    public void enter() {
+        updateDetailButton();
+        super.enter();
+    }
+
     private void showLootOrDone() {
         boolean exit = true;
         for (Actor actor : new Array.ArrayIterator<>(generated)) {
