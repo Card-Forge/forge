@@ -96,7 +96,7 @@ public class AiAttackController {
 
     public AiAttackController(final Player ai, boolean nextTurn) {
         this.ai = ai;
-        defendingOpponent = choosePreferredDefenderPlayer(ai);
+        defendingOpponent = choosePreferredDefenderPlayer(ai, true);
         myList = ai.getCreaturesInPlay();
         this.nextTurn = nextTurn;
         refreshCombatants(defendingOpponent);
@@ -104,7 +104,7 @@ public class AiAttackController {
 
     public AiAttackController(final Player ai, Card attacker) {
         this.ai = ai;
-        defendingOpponent = choosePreferredDefenderPlayer(ai);
+        defendingOpponent = choosePreferredDefenderPlayer(ai, true);
         this.oppList = getOpponentCreatures(defendingOpponent);
         myList = ai.getCreaturesInPlay();
         this.nextTurn = false;
@@ -167,6 +167,9 @@ public class AiAttackController {
      * No strategy to secure a second place instead, since Forge has no variant for that
      */
     public static Player choosePreferredDefenderPlayer(Player ai) {
+        return choosePreferredDefenderPlayer(ai, false);
+    }
+    public static Player choosePreferredDefenderPlayer(Player ai, boolean forCombatDmg) {
         Player defender = ai.getWeakestOpponent(); //Concentrate on opponent within easy kill range
 
         // TODO for multiplayer combat avoid players with cantLose or (if not playing infect) cantLoseForZeroOrLessLife and !canLoseLife
@@ -174,10 +177,24 @@ public class AiAttackController {
         if (defender.getLife() > 8) {
             // TODO connect with evaluateBoardPosition and only fall back to random when no player is the biggest threat by a fair margin
 
+            List<Player> opps = Lists.newArrayList(ai.getOpponents());
+            if (forCombatDmg) {
+                for (Player p : opps) {
+                    if (p.isMonarch() && ai.canBecomeMonarch()) {
+                        // just increase the odds for now instead of being fully predictable
+                        // as it could lead to other too complex factors giving this reasoning negative impact
+                        opps.add(p);
+                    }
+                    if (p.hasInitiative()) {
+                        opps.add(p);
+                    }
+                }
+            }
+
             // TODO should we cache the random for each turn? some functions like shouldPumpCard base their decisions on the assumption who will be attacked
 
             //Otherwise choose a random opponent to ensure no ganging up on players
-            return Aggregates.random(ai.getOpponents());
+            return Aggregates.random(opps);
         }
         return defender;
     }
