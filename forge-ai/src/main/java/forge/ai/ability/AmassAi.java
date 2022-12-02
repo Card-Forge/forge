@@ -29,7 +29,7 @@ public class AmassAi extends SpellAbilityAi {
         final Game game = ai.getGame();
 
         if (!aiArmies.isEmpty()) {
-            return CardLists.count(aiArmies, CardPredicates.canReceiveCounters(CounterEnumType.P1P1)) > 0;
+            return Iterables.any(aiArmies, CardPredicates.canReceiveCounters(CounterEnumType.P1P1));
         }
         final String tokenScript = "b_0_0_zombie_army";
         final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("Num", "1"), sa);
