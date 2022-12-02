@@ -25,6 +25,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.Scaling;
 import com.github.tommyettinger.textra.TextraButton;
 import forge.Forge;
 import forge.Graphics;
@@ -54,6 +55,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     HoldTooltip holdTooltip;
     Reward reward;
     ShaderProgram shaderGrayscale = Forge.getGraphics().getShaderGrayscale();
+    ShaderProgram shaderRoundRect = Forge.getGraphics().getShaderRoundedRect();
 
     final int preview_w = 488; //Width and height for generated images.
     final int preview_h = 680;
@@ -73,7 +75,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     public static int renderedCount = 0; //Counter for cards that require rendering a preview.
     static final ImageFetcher fetcher = GuiBase.getInterface().getImageFetcher();
-    Image toolTipImage;
+    RewardImage toolTipImage;
 
     @Override
     public void dispose() {
@@ -124,7 +126,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 ((TextureRegionDrawable) toolTipImage.getDrawable()).getRegion().getTexture().dispose();
             }
             toolTipImage.remove();
-            toolTipImage = new Image(processDrawable(image));
+            toolTipImage = new RewardImage(processDrawable(image));
             if (GuiBase.isAndroid() || Forge.hasGamepad()) {
                 if (holdTooltip.tooltip_image.getDrawable() instanceof TextureRegionDrawable) {
                     ((TextureRegionDrawable) holdTooltip.tooltip_image.getDrawable()).getRegion().getTexture().dispose();
@@ -328,12 +330,12 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (alternate) {
                 if (alt != null) {
                     holdTooltip.tooltip_actor.clear();
-                    holdTooltip.tooltip_actor.add(new Image(processDrawable(alt)));
+                    holdTooltip.tooltip_actor.add(new RewardImage(processDrawable(alt)));
                 } else {
                     if (T == null)
                         T = renderPlaceholder(getGraphics(), altCard);
                     holdTooltip.tooltip_actor.clear();
-                    holdTooltip.tooltip_actor.add(new Image(processDrawable(T)));
+                    holdTooltip.tooltip_actor.add(new RewardImage(processDrawable(T)));
                 }
             } else {
                 if (toolTipImage != null) {
@@ -345,11 +347,11 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             if (hover) {
                 if (alternate) {
                     if (alt != null) {
-                        tooltip.setActor(new Image(processDrawable(alt)));
+                        tooltip.setActor(new RewardImage(processDrawable(alt)));
                     } else {
                         if (T == null)
                             T = renderPlaceholder(getGraphics(), altCard);
-                        tooltip.setActor(new Image(processDrawable(T)));
+                        tooltip.setActor(new RewardImage(processDrawable(T)));
                     }
                 } else {
                     if (toolTipImage != null)
@@ -414,7 +416,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (Forge.isTextureFilteringEnabled())
             image.setFilter(Texture.TextureFilter.MipMapLinearLinear, Texture.TextureFilter.Linear);
         if (toolTipImage == null)
-            toolTipImage = new Image(processDrawable(image));
+            toolTipImage = new RewardImage(processDrawable(image));
         if (GuiBase.isAndroid() || Forge.hasGamepad()) {
             if (holdTooltip == null)
                 holdTooltip = new HoldTooltip(toolTipImage);
@@ -502,7 +504,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         //Rendering code ends here.
 
         if (toolTipImage == null)
-            toolTipImage = new Image(processDrawable(generatedTooltip));
+            toolTipImage = new RewardImage(processDrawable(generatedTooltip));
 
         if (GuiBase.isAndroid() || Forge.hasGamepad()) {
             if (holdTooltip == null)
@@ -631,21 +633,37 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     private void drawCard(Batch batch, Texture image, float x, float width) {
         if (image != null) {
-            if (!sold)
-                batch.draw(ImageCache.croppedBorderImage(image), x, -getHeight() / 2, width, getHeight());
-            else {
+            if (image.toString().contains(".fullborder.") && Forge.enableUIMask.equals("Full")) {
                 batch.end();
-                shaderGrayscale.bind();
-                shaderGrayscale.setUniformf("u_grayness", 1f);
-                shaderGrayscale.setUniformf("u_bias", 0.7f);
-                batch.setShader(shaderGrayscale);
+                shaderRoundRect.bind();
+                shaderRoundRect.setUniformf("u_resolution", image.getWidth(), image.getHeight());
+                shaderRoundRect.setUniformf("edge_radius", (image.getHeight()/image.getWidth())*20);
+                shaderRoundRect.setUniformf("u_gray", sold ? 1f : 0f);
+                batch.setShader(shaderRoundRect);
                 batch.begin();
-                //draw gray
-                batch.draw(ImageCache.croppedBorderImage(image), x, -getHeight() / 2, width, getHeight());
+                //draw rounded
+                batch.draw(image, x, -getHeight() / 2, width, getHeight());
                 //reset
                 batch.end();
                 batch.setShader(null);
                 batch.begin();
+            } else {
+                if (!sold)
+                    batch.draw(ImageCache.croppedBorderImage(image), x, -getHeight() / 2, width, getHeight());
+                else {
+                    batch.end();
+                    shaderGrayscale.bind();
+                    shaderGrayscale.setUniformf("u_grayness", 1f);
+                    shaderGrayscale.setUniformf("u_bias", 0.7f);
+                    batch.setShader(shaderGrayscale);
+                    batch.begin();
+                    //draw gray
+                    batch.draw(ImageCache.croppedBorderImage(image), x, -getHeight() / 2, width, getHeight());
+                    //reset
+                    batch.end();
+                    batch.setShader(null);
+                    batch.begin();
+                }
             }
         }
     }
@@ -725,18 +743,20 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     }
 
     class HoldTooltip extends ActorGestureListener {
-        Image tooltip_image;
+        RewardImage tooltip_image;
         Table tooltip_actor;
         float height;
         TextraButton switchButton;
         //Vector2 tmp = new Vector2();
 
-        public HoldTooltip(Image tooltip_image) {
+        public HoldTooltip(RewardImage tooltip_image) {
             this.tooltip_image = tooltip_image;
             tooltip_actor = new Table();
             tooltip_actor.add(this.tooltip_image);
             tooltip_actor.align(Align.center);
             tooltip_actor.setSize(this.tooltip_image.getPrefWidth(), this.tooltip_image.getPrefHeight());
+            tooltip_actor.setX(Scene.getIntendedWidth() / 2 - tooltip_actor.getWidth() / 2);
+            tooltip_actor.setY(Scene.getIntendedHeight() / 2 - tooltip_actor.getHeight() / 2);
             this.height = tooltip_actor.getHeight();
             switchButton = Controls.newTextButton("Flip");
             switchButton.addListener(new ClickListener() {
@@ -760,17 +780,6 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 if (reward.getCard().hasBackFace())
                     actor.getStage().addActor(switchButton);
             }
-            //Vector2 point = actor.localToStageCoordinates(tmp.set(x, y));
-            if (Forge.isLandscapeMode()) {
-                //right if poosible, if exceeds width, draw left
-                tooltip_actor.setX(actor.getRight());
-                if (tooltip_actor.getX() + tooltip_actor.getWidth() > Scene.getIntendedWidth())
-                    tooltip_actor.setX(Math.max(0, actor.getX() - tooltip_actor.getWidth()));
-            } else {
-                //middle
-                tooltip_actor.setX(Scene.getIntendedWidth() / 2 - tooltip_actor.getWidth() / 2);
-            }
-            tooltip_actor.setY(Scene.getIntendedHeight() / 2 - tooltip_actor.getHeight() / 2);
 
             actor.getStage().addActor(tooltip_actor);
             return super.longPress(actor, x, y);
@@ -805,6 +814,60 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             tooltip_actor.remove();
             switchButton.remove();
             shown = false;
+        }
+    }
+    class RewardImage extends Image {
+        public RewardImage(TextureRegionDrawable processDrawable) {
+            setDrawable(processDrawable);
+            setScaling(Scaling.stretch);
+            setAlign(Align.center);
+        }
+
+        @Override
+        public void draw(Batch batch, float parentAlpha) {
+            try {
+                if (getDrawable() instanceof TextureRegionDrawable) {
+                    Texture t = ((TextureRegionDrawable) getDrawable()).getRegion().getTexture();
+                    if (t != null) {
+                        float x = GuiBase.isAndroid() || Forge.hasGamepad() ? Scene.getIntendedWidth() / 2 - holdTooltip.tooltip_actor.getWidth() / 2: tooltip.getActor().getImageX();
+                        float y = GuiBase.isAndroid() || Forge.hasGamepad() ? Scene.getIntendedHeight() / 2 - holdTooltip.tooltip_actor.getHeight() / 2 : tooltip.getActor().getImageY();
+                        float w = GuiBase.isAndroid() || Forge.hasGamepad() ? holdTooltip.tooltip_actor.getPrefWidth() : tooltip.getActor().getPrefWidth();
+                        float h = GuiBase.isAndroid() || Forge.hasGamepad() ? holdTooltip.tooltip_actor.getPrefHeight() : tooltip.getActor().getPrefHeight();
+                        if (t.toString().contains(".fullborder.") && Forge.enableUIMask.equals("Full")) {
+                            batch.end();
+                            shaderRoundRect.bind();
+                            shaderRoundRect.setUniformf("u_resolution", t.getWidth(), t.getHeight());
+                            shaderRoundRect.setUniformf("edge_radius", (t.getHeight()/t.getWidth())*ImageCache.getRadius(t));
+                            shaderRoundRect.setUniformf("u_gray", sold ? 0.8f : 0f);
+                            batch.setShader(shaderRoundRect);
+                            batch.begin();
+                            //draw rounded
+                            batch.draw(t, x, y, w, h);
+                            //reset
+                            batch.end();
+                            batch.setShader(null);
+                            batch.begin();
+                        } else {
+                            batch.end();
+                            shaderGrayscale.bind();
+                            shaderGrayscale.setUniformf("u_grayness", sold ? 1f : 0f);
+                            shaderGrayscale.setUniformf("u_bias", sold ? 0.8f : 1f);
+                            batch.setShader(shaderGrayscale);
+                            batch.begin();
+                            //draw gray
+                            batch.draw(t, x, y, w, h);
+                            //reset
+                            batch.end();
+                            batch.setShader(null);
+                            batch.begin();
+                        }
+                        return;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            super.draw(batch, parentAlpha);
         }
     }
 }
