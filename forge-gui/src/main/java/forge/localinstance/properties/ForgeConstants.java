@@ -47,6 +47,7 @@ public final class ForgeConstants {
     public static final String IMAGE_LIST_QUEST_PRECONS_FILE         = LISTS_DIR + "precon-images.txt";
     public static final String IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE = LISTS_DIR + "tournamentpack-images.txt";
     public static final String IMAGE_LIST_ACHIEVEMENTS_FILE          = LISTS_DIR + "achievement-images.txt";
+    public static final String IMAGE_LIST_PLANES_IMAGES_FILE         = LISTS_DIR + "planes-images.txt";
     public static final String NET_DECKS_LIST_FILE                   = LISTS_DIR + "net-decks.txt";
     public static final String NET_DECKS_COMMANDER_LIST_FILE         = LISTS_DIR + "net-decks-commander.txt";
     public static final String NET_DECKS_BRAWL_LIST_FILE             = LISTS_DIR + "net-decks-brawl.txt";
@@ -234,6 +235,14 @@ public final class ForgeConstants {
     public static final String BG_76                  = "Horizon_Boughs.jpg";
     public static final String BG_77                  = "Mirrored_Depths.jpg";
     public static final String BG_78                  = "Talon_Gates.jpg";
+    public static final String BG_79                  = "Planewide_Disaster.jpg";
+    public static final String BG_80                  = "Reality_Shaping.jpg";
+    public static final String BG_81                  = "Spatial_Merging.jpg";
+    public static final String BG_82                  = "Chaotic_Aether.jpg";
+    public static final String BG_83                  = "Interplanar_Tunnel.jpg";
+    public static final String BG_84                  = "Morphic_Tide.jpg";
+    public static final String BG_85                  = "Mutual_Epiphany.jpg";
+    public static final String BG_86                  = "Time_Distortion.jpg";
 
     // data tree roots
     public static final String USER_DIR;

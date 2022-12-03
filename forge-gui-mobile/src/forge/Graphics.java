@@ -983,15 +983,14 @@ public class Graphics {
         }
     }
 
-    public void drawRipple(FImage image, float x, float y, float w, float h, Float amount, boolean flipY) {
+    public void drawRipple(FImage image, float x, float y, float w, float h, Float amount) {
         if (image == null)
             return;
         if (amount != null) {
             batch.end();
             shaderRipple.bind();
             shaderRipple.setUniformf("u_time", amount);
-            shaderRipple.setUniformf("u_yflip", flipY ? 1f : 0f);
-            shaderRipple.setUniformf("u_bias", 0.5f);
+            shaderRipple.setUniformf("u_bias", 0.7f);
             batch.setShader(shaderRipple);
             batch.begin();
             //draw
