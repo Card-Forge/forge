@@ -219,7 +219,6 @@ public class ChooseCardEffect extends SpellAbilityEffect {
                 notTgtPlayerCtrl.removeAll(tgtPlayerCtrl);
                 chosen.addAll(p.getController().chooseCardsForEffect(notTgtPlayerCtrl, sa, title + " " + "you don't control", minAmount, validAmount,
                         !sa.hasParam("Mandatory"), null));
-
             } else if (sa.hasParam("AtRandom") && !choices.isEmpty()) {
                 // don't pass FCollection for direct modification, the Set part would get messed up
                 chosen = new CardCollection(Aggregates.random(choices, validAmount));
