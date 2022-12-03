@@ -1,0 +1,6 @@
+[format]
+Name:Alchemy (YBRO)
+Type:Archived
+Subtype:Arena
+Effective:2022-12-13
+Sets:ANA, ANB, MID, VOW, YMID, NEO, YNEO, SNC, YSNC, HBG, DMU, YDMU, BRO, YBRO
