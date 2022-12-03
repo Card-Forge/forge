@@ -1,0 +1,21 @@
+[metadata]
+Code=EA2
+Date=2022-12-13
+Name=Explorer Anthology 2
+Type=Online
+ScryfallCode=EA2
+
+[cards]
+0 C Fiery Impulse @Daarken
+0 C Satyr Wayfinder @Steve Prescott
+0 M Clever Impersonator @Slawomir Maniak
+0 M Kozilek, the Great Distortion @Aleksi Briclot
+0 M World Breaker @Jaime Jones
+0 R Courser of Kruphix @Eric Deschamps
+0 R Eerie Interlude @Svetlin Velinov
+0 R Eidolon of the Great Revel @Cyril Van Der Haegen
+0 R Eldrazi Displacer @Daarken
+0 R Mutavault @Fred Fields
+0 R Soldier of the Pantheon @Eric Deschamps
+0 R Thought-Knot Seer @Svetlin Velinov
+0 U Reflector Mage @Willian Murai
