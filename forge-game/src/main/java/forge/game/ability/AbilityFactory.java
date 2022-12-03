@@ -110,7 +110,7 @@ public final class AbilityFactory {
     }
 
     public static final SpellAbility getAbility(final String abString, final Card card) {
-        return getAbility(abString, card, card.getCurrentState());
+        return getAbility(abString, card.getCurrentState());
     }
     public static final SpellAbility getAbility(final String abString, final Card card, final IHasSVars sVarHolder) {
         return getAbility(abString, card.getCurrentState(), sVarHolder);

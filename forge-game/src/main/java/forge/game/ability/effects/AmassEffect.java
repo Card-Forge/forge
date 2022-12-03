@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 
 import forge.game.Game;
@@ -53,7 +54,7 @@ public class AmassEffect extends TokenEffectBase {
         final boolean remember = sa.hasParam("RememberAmass");
 
         // create army token if needed
-        if (CardLists.count(activator.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Army")) == 0) {
+        if (!Iterables.any(activator.getCardsIn(ZoneType.Battlefield), CardPredicates.isType("Army"))) {
             CardZoneTable triggerList = new CardZoneTable();
             MutableBoolean combatChanged = new MutableBoolean(false);
 

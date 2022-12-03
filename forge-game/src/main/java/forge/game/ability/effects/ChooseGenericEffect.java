@@ -8,7 +8,6 @@ import com.google.common.collect.Lists;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.event.GameEventCardModeChosen;
 import forge.game.player.Player;
@@ -66,24 +65,24 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             List<SpellAbility> chosenSAs = Lists.newArrayList();
             String prompt = sa.getParamOrDefault("ChoicePrompt", "Choose");
             boolean random = false;
+
             if (sa.hasParam("AtRandom")) {
                 random = true;
-                Aggregates.random(abilities, amount, chosenSAs);
-            } else if (!abilities.isEmpty()) {
-                chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, prompt, amount, ImmutableMap.of());
-            }
+                chosenSAs = Aggregates.random(abilities, amount);
 
-            for (SpellAbility chosenSA : chosenSAs) {
-                if (random && sa.getParam("AtRandom").equals("Urza") && chosenSA.usesTargeting()) {
-                    List<Card> validTargets = CardUtil.getValidCardsToTarget(chosenSA.getTargetRestrictions(), sa);
-                    if (validTargets.isEmpty()) {
-                        List <SpellAbility> newChosenSAs = Lists.newArrayList();
-                        Aggregates.random(abilities, amount, newChosenSAs);
-                        chosenSAs = newChosenSAs;
+                int i = 0;
+                while (sa.getParam("AtRandom").equals("Urza") && i < chosenSAs.size()) {
+                    if (!chosenSAs.get(i).usesTargeting()) {
+                        i++;
+                    } else if (sa.getTargetRestrictions().hasCandidates(chosenSAs.get(i))) {
+                        p.getController().chooseTargetsFor(chosenSAs.get(i));
+                        i++;
                     } else {
-                        p.getController().chooseTargetsFor(chosenSA);
+                        chosenSAs.set(i, Aggregates.random(abilities));
                     }
                 }
+            } else if (!abilities.isEmpty()) {
+                chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, prompt, amount, ImmutableMap.of());
             }
 
             if (!chosenSAs.isEmpty()) {
