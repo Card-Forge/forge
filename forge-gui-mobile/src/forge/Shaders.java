@@ -3,7 +3,7 @@ package forge;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
 /**
- * Shader codes from https://github.com/tommyettinger/colorful-gdx/blob/master/colorful/src/main/java/com/github/tommyettinger/colorful/Shaders.java
+ * Shader codes from <a href="https://github.com/tommyettinger/colorful-gdx/blob/master/colorful/src/main/java/com/github/tommyettinger/colorful/Shaders.java">...</a>
  * Credit to Tommy Ettinger
  */
 public class Shaders {
@@ -53,7 +53,7 @@ public class Shaders {
             "uniform vec2 u_resolution;\n" +
             "uniform float edge_radius;\n" +
             "uniform float u_gray;\n" +
-            "vec4 color = vec4(1.0,1.0,1.0,1.0);\n" +
+            "LOWP vec4 color = vec4(1.0,1.0,1.0,1.0);\n" +
             "float gradientIntensity = 0.5;\n" +
             "\n" +
             "void main() {\n" +
@@ -65,17 +65,17 @@ public class Shaders {
             "    vec2 abs_pixel_coord = vec2( abs(uv_base_center.x * half_resolution.x), abs(uv_base_center.y * half_resolution.y) );\n" +
             "\n" +
             "    float alpha = 1.0;\n" +
-            "    vec4 col = color * texture2D(u_texture, uv);\n" +
+            "    LOWP vec4 col = color * texture2D(u_texture, uv);\n" +
             "    if (abs_pixel_coord.x > abs_rounded_center.x && abs_pixel_coord.y > abs_rounded_center.y) {\n" +
             "         float r = length(abs_pixel_coord - abs_rounded_center);\n" +
             "         alpha = smoothstep(edge_radius, edge_radius - gradientIntensity, r);\n" +
             "         \n" +
             "    }\n" +
-            "\tif (u_gray > 0.0) {\n" +
-            "\t    float grey = dot( col.rgb, vec3(0.22, 0.707, 0.071) );\n" +
-            "\t\tvec3 blendedColor = mix(col.rgb, vec3(grey), 1.0);\n" +
-            "\t\tcol = vec4(blendedColor.rgb, col.a);\n" +
-            "\t}\n" +
+            "    if (u_gray > 0.0) {\n" +
+            "        LOWP float grey = dot( col.rgb, vec3(0.22, 0.707, 0.071) );\n" +
+            "        LOWP vec3 blendedColor = mix(col.rgb, vec3(grey), 1.0);\n" +
+            "        col = vec4(blendedColor.rgb, col.a);\n" +
+            "    }\n" +
             "    gl_FragColor = col*alpha;\n" +
             "}";
     public static final String fragHueShift = "#ifdef GL_ES\n" +
@@ -111,28 +111,14 @@ public class Shaders {
             "uniform sampler2D u_texture;\n" +
             "varying vec2 v_texCoords;\n" +
             "uniform float u_time;\n" +
-            "uniform float u_yflip;\n" +
             "uniform float u_bias;\n" +
             "\n" +
             "void main() {\n" +
-            "\tvec2 uv = v_texCoords;\n" +
-            "\tvec2 center = vec2(0.0);\n" +
-            "\tvec2 coord = uv;\n" +
-            "\tvec2 centered_coord = (2.0 * uv) - 1.0;\n" +
-            "\n" +
-            "\tfloat shutter = 0.9;\n" +
-            "\tfloat texelDistance = distance(center, centered_coord) * u_time;\n" +
-            "\tfloat dist = (1.41 * 1.41 * shutter) - texelDistance;\n" +
-            "\n" +
-            "\tfloat ripples = 1.0 - sin((texelDistance * 32.0) - (2.0 * u_time));\n" +
-            "\tcoord -= normalize(centered_coord - center) * clamp(ripples, 0.0, 1.0)*(0.050 * u_time);\n" +
-            "    \n" +
-            "\tvec4 color;\n" +
-            "\tif (u_yflip > 0)\n" +
-            "\t\tcolor = texture2D(u_texture, vec2(coord.x, 1.-coord.y));\n" +
-            "\telse\n" +
-            "\t\tcolor = texture2D(u_texture, coord);\n" +
-            "\tgl_FragColor = mix(vec4(0.0, 0.0, 0.0, 1.0), vec4(color.rgba * dist), u_bias);\n" +
+            "    vec2 uv = v_texCoords;\n" +
+            "    float len = length(uv - vec2(.5)) * 50.;\n" +
+            "    vec2 s = normalize(uv) * ( sin((len - u_time * 10.))) * (.01 * u_time);\n" +
+            "    LOWP vec4 tex = texture2D(u_texture, uv + s);\n" +
+            "    gl_FragColor = mix(vec4(0.0, 0.0, 0.0, 1.0), tex, u_bias);\n" +
             "}";
     public static final String fragChromaticAbberation = "#ifdef GL_ES\n" +
             "#define LOWP lowp\n" +
@@ -720,7 +706,7 @@ public class Shaders {
      * of hue used for cyan and a larger range for orange. Not currently used. This is pretty much only meant so people
      * reading the source code and trying different variations on HSL can see some of the attempts I made.
      * <br>
-     * Credit to Sam Hocevar, https://gamedev.stackexchange.com/a/59808 .
+     * Credit to Sam Hocevar, <a href="https://gamedev.stackexchange.com/a/59808">...</a> .
      * <br>
      * EXPERIMENTAL. Meant more for reading and editing than serious usage.
      */

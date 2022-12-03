@@ -862,8 +862,8 @@ public class MatchScreen extends FScreen {
             } else {
                 g.setAlphaComposite(percentage);
                 if (!daynightTransition) {
-                    if (image instanceof FSkinTexture && !GuiBase.isAndroid()) //for loading bg images, currently android version cant load this ripple shader
-                        g.drawRipple(image, x, y, w, h, 1 - (percentage * 1), false);
+                    if (image instanceof FSkinTexture) //for loading Planechase BG
+                        g.drawRipple(image, x, y, w, h, 1 - (percentage * 1));
                     else
                         g.drawGrayTransitionImage(image, x, y, w, h, 1 - (percentage * 1));
                 } else { //for non adventure transition.. todo generate new daynight + ripple shader for planechase images to use only single image

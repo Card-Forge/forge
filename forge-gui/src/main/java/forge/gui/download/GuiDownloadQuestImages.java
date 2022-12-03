@@ -25,7 +25,7 @@ import forge.localinstance.properties.ForgeConstants;
 public class GuiDownloadQuestImages extends GuiDownloadService {
     @Override
     public String getTitle() {
-        return "Download Quest Images";
+        return "Download Quest & Planes Images";
     }
 
     @Override
@@ -40,6 +40,7 @@ public class GuiDownloadQuestImages extends GuiDownloadService {
         addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_PRECONS_FILE,         ForgeConstants.CACHE_PRECON_PICS_DIR);
         addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE, ForgeConstants.CACHE_TOURNAMENTPACK_PICS_DIR);
         addMissingItems(urls, ForgeConstants.IMAGE_LIST_QUEST_TOKENS_FILE,          ForgeConstants.CACHE_TOKEN_PICS_DIR);
+        addMissingItems(urls, ForgeConstants.IMAGE_LIST_PLANES_IMAGES_FILE,         ForgeConstants.CACHE_PLANECHASE_PICS_DIR);
 
         return urls;
     }
