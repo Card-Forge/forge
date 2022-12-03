@@ -1,4 +1,4 @@
-Name:Rusko Clockmaker
+Name:Rusko, Clockmaker
 ManaCost:2 U B
 Types:Legendary Creature Human Artificer
 PT:3/3
@@ -12,4 +12,4 @@ SVar:BuffedBy:nonCreature
 SVar:BuffedBy:Artifact.namedMidnight Clock
 DeckHas:Ability$Lifegain|Counters & Type$Artifact
 DeckHints:Name$Midnight Clock
-Oracle:When Rusko Clockmaker enters the battlefield, conjure a card named Midnight Clock onto the battlefield.\nWhenever you cast a noncreature spell, put an hour counter on each permanent you control named Midnight Clock. Each opponent loses 1 life and you gain 1 life. 
+Oracle:When Rusko, Clockmaker enters the battlefield, conjure a card named Midnight Clock onto the battlefield.\nWhenever you cast a noncreature spell, put an hour counter on each permanent you control named Midnight Clock. Each opponent loses 1 life and you gain 1 life.
