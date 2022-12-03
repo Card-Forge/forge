@@ -2,7 +2,7 @@ Name:Rusko Clockmaker
 ManaCost:2 U B
 Types:Legendary Creature Human Artificer
 PT:3/3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.Self | NoResolvingCheck$ True | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, conjure a card named Midnight Clock onto the battlefield.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, conjure a card named Midnight Clock onto the battlefield.
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Midnight Clock | Zone$ Battlefield
 T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ SpellDescription$ Whenever you cast a noncreature spell, put an hour counter on each permanent you control named Midnight Clock. Each opponent loses 1 life and you gain 1 life. 
 SVar:TrigPutCounter:DB$ PutCounterAll | ValidCards$ Permanent.YouCtrl+namedMidnight Clock | CounterType$ HOUR | CounterNum$ 1 | SubAbility$ DBDrain

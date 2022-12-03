@@ -8,4 +8,4 @@ T:Mode$ AttackersDeclared | ValidAttackers$ Knight.YouCtrl |Execute$ TrigDraft |
 SVar:TrigDraft:DB$ Draft | Spellbook$ Midnight Reaper,Guardian of Faith,Knight of the Ebon Legion,Cavalier of Dawn,Benalish Marshal,Cavalier of Night,Murderous Rider,Order of Midnight,Acclaimed Contender,Dauntless Bodyguard,Valiant Knight,Smitten Swordmaster,Blacklance Paragon,History of Benalia,The Circle of Loyalty
 DeckHints:Type$Knight
 DeckHas:Type$Saga|Enchantment|Vampire|Artifact|Zombie|Elemental & Ability$Graveyard|LifeGain|Token|Counters
-Oracle:Hexproof from white, Hexproof from black.\nWhenever one or more Knights you control attack, draft a card from Raddic, Tal Zealot's spellbook.
+Oracle:Hexproof from white, Hexproof from black\nWhenever one or more Knights you control attack, draft a card from Raddic, Tal Zealot's spellbook.
