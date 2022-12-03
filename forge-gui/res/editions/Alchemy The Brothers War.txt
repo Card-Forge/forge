@@ -1,0 +1,19 @@
+[metadata]
+Code=YBRO
+Date=2022-12-13
+Name=Alchemy: The Brothers' War
+Type=Online
+ScryfallCode=YBRO
+
+[cards]
+0 M Crucias, Titan of the Waves @Filipe Pagliuso
+0 U Lonely End @Piotr Foksowicz
+0 U Argivian Welcome @Paolo Parente
+0 R Rusko, Clockmaker @Samuel Perin
+0 R Fallaji Antiquarian @Ernanda Souza
+0 R Raddic, Tal Zealot @Camille Alquier
+0 R Yotian Courier @Monztre
+0 R Penregon Besieged @Artur Treffner
+0 R Tomakul Phoenix @Monztre
+0 M Richlau, Headmaster @Yangtian Li
+0 M Forgefire Automaton @Diego Gisbert
