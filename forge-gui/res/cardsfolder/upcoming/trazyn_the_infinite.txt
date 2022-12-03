@@ -1,7 +1,0 @@
-Name:Trazyn the Infinite
-ManaCost:4 B B
-Types:Legendary Artifact Creature Necron
-PT:4/6
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ Battlefield | GainsAbilitiesOf$ Artifact.YouOwn | GainsAbilitiesOfZones$ Graveyard | Description$ As long as Trazyn the Infinite is on the battlefield, it has all activated abilities of all artifact cards in your graveyard.
-DeckHints:Type$Artifact & Ability$Graveyard
-Oracle:As long as Trazyn the Infinite is on the battlefield, it has all activated abilities of all artifact cards in your graveyard.

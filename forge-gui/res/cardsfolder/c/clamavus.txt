@@ -1,0 +1,8 @@
+Name:Clamavus
+ManaCost:4 G
+Types:Creature Human Tyranid Artificer
+PT:3/3
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ AffectedX | AddToughness$ AffectedX | Description$ Proclamator Hailer — Each creature you control gets +1/+1 for each +1/+1 counter on it.
+SVar:AffectedX:Count$CardCounters.P1P1
+DeckNeeds:Type$Counters
+Oracle:Proclamator Hailer — Each creature you control gets +1/+1 for each +1/+1 counter on it.
