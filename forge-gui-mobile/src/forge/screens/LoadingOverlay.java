@@ -148,7 +148,7 @@ public class LoadingOverlay extends FOverlay {
     }
 
     private class BGAnimation extends ForgeAnimation {
-        float DURATION = 0.9f;
+        float DURATION = 1f;
         private float progress = 0;
 
         public void drawBackground(Graphics g) {
@@ -162,9 +162,7 @@ public class LoadingOverlay extends FOverlay {
             if (afterMatch) {
                 g.drawGrayTransitionImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), false, percentage);
             } else {
-                g.setAlphaComposite(1 - percentage);
-                g.drawImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-                g.setAlphaComposite(oldAlpha);
+                g.drawNoiseFade(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), percentage);
             }
         }
 

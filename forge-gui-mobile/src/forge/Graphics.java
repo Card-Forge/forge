@@ -51,6 +51,7 @@ public class Graphics {
     private final ShaderProgram shaderChromaticAbberation = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragChromaticAbberation);
     private final ShaderProgram shaderHueShift = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragHueShift);
     private final ShaderProgram shaderRoundedRect = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragRoundedRect);
+    private final ShaderProgram shaderNoiseFade = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragNoiseFade);
 
     private Texture dummyTexture = null;
 
@@ -923,6 +924,26 @@ public class Graphics {
         batch.begin();
     }
 
+    public void drawNoiseFade(TextureRegion image, float x, float y, float w, float h, Float time) {
+        if (image == null)
+            return;
+        if (time != null) {
+            batch.end();
+            shaderNoiseFade.bind();
+            shaderNoiseFade.setUniformf("u_time", time);
+            batch.setShader(shaderNoiseFade);
+            batch.begin();
+            //draw
+            batch.draw(image, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            drawImage(image, x, y, w, h);
+        }
+    }
+
     public void drawHueShift(Texture image, float x, float y, float w, float h, Float time) {
         if (image == null)
             return;
@@ -1143,13 +1164,15 @@ public class Graphics {
         batch.begin();
     }
 
-    public void drawNightDay(FImage image, float x, float y, float w, float h, Float time) {
+    public void drawNightDay(FImage image, float x, float y, float w, float h, Float timeOfDay, boolean darkOverlay, float rippleAmount) {
         if (image == null)
             return;
-        if (time != null) {
+        if (timeOfDay != null) {
             batch.end();
             shaderNightDay.bind();
-            shaderNightDay.setUniformf("u_timeOfDay", time);
+            shaderNightDay.setUniformf("u_timeOfDay", timeOfDay);
+            shaderNightDay.setUniformf("u_time", rippleAmount);
+            shaderNightDay.setUniformf("u_bias",  darkOverlay? 0.7f : 1f);
             batch.setShader(shaderNightDay);
             batch.begin();
             //draw
