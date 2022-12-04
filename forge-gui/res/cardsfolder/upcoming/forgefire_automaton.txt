@@ -3,7 +3,7 @@ ManaCost:7
 Types:Artifact Creature Construct
 PT:8/5
 K:Prototype:2 B:3:2
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, return target creature card with power less than CARDNAME's power from your graveyard to the battlefield. Its base power perpetually becomes equal to CARDNAME's Power
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZone$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, return target creature card with power less than CARDNAME's power from your graveyard to the battlefield. Its base power perpetually becomes equal to CARDNAME's Power
 SVar:TrigReturn:DB$ ChangeZone |  ValidTgts$ Creature.powerLTX+YouOwn | RememberChanged$ True | TgtPrompt$ Select target creature card with lesser power | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | Name$ Forgefire Automaton's Perpetual Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualStatic | Duration$ Permanent
 SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | SetPower$ Y | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The base power of this card perpetually becomes equal to Forgefire Automaton's Power
