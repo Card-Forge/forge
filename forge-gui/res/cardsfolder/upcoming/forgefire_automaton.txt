@@ -10,5 +10,4 @@ SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | SetPower$ 
 SVar:X:TriggeredCard$CardPower
 SVar:Y:Count$CardPower
 DeckHints:Ability$Graveyard|Discard|Mill & Color$Black
-SVar:X:Count$CardPower
 Oracle:Prototype {2}{B} — 3/2 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nAt the beginning of your upkeep, return target creature card with power less than Forgefire Automaton's power from your graveyard to the battlefield.\nIts base power perpetually becomes equal to Forgefire Automaton's Power
