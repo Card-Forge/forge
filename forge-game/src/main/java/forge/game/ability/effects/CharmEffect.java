@@ -247,20 +247,6 @@ public class CharmEffect extends SpellAbilityEffect {
                 clone.putParam("StackDescription", "SpellDescription");
             }
 
-            // do not forget what was targeted by the subability
-            SpellAbility ssa = sub;
-            SpellAbility ssaClone = clone;
-            while (ssa != null) {
-                ssaClone.setTargetRestrictions(ssa.getTargetRestrictions());
-                if (ssa.getTargetCard() != null)
-                    ssaClone.setTargetCard(ssa.getTargetCard());
-                ssaClone.setTargetingPlayer(ssa.getTargetingPlayer());
-                ssaClone.setTargets(ssa.getTargets());
-
-                ssa = ssa.getSubAbility();
-                ssaClone = ssaClone.getSubAbility();
-            }
-
             // add Clone to Tail of sa
             sa.appendSubAbility(clone);
         }

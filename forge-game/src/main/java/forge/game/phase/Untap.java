@@ -70,7 +70,7 @@ public class Untap extends Phase {
      */
     @Override
     public void executeAt() {
-        this.execute(this.at);
+        super.executeAt();
 
         doPhasing(game.getPhaseHandler().getPlayerTurn());
         doDayTime(game.getPhaseHandler().getPreviousPlayerTurn());
