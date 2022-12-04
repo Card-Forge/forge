@@ -219,8 +219,13 @@ public class Assets implements Disposable {
         return defaultImage;
     }
     private Texture getDummy() {
-        if (dummy == null)
-            dummy =  new Texture(10, 10, Pixmap.Format.RGBA4444);
+        if (dummy == null) {
+            Pixmap P = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+            P.setColor(0f, 0f, 0f, 1f);
+            P.drawPixel(0, 0);
+            dummy = new Texture(P);
+            P.dispose();
+        }
         return dummy;
     }
     public class MemoryTrackingAssetManager extends AssetManager {

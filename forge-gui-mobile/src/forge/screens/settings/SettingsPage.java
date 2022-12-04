@@ -574,10 +574,6 @@ public class SettingsPage extends TabPage<SettingsScreen> {
                 Forge.getLocalizer().getMessage("lblRotateZoomPlanesPhenomena"),
                 Forge.getLocalizer().getMessage("nlRotateZoomPlanesPhenomena")),
                 4);
-        lstSettings.addItem(new BooleanSetting(FPref.UI_DYNAMIC_PLANECHASE_BG,
-                Forge.getLocalizer().getMessage("lblDynamicBackgroundPlanechase"),
-                Forge.getLocalizer().getMessage("nlDynamicBackgroundPlanechase")),
-                4);
         lstSettings.addItem(new BooleanSetting(FPref.UI_DISABLE_IMAGES_EFFECT_CARDS,
                 Forge.getLocalizer().getMessage("lblDisableCardEffect"),
                 Forge.getLocalizer().getMessage("nlDisableCardEffect")),
