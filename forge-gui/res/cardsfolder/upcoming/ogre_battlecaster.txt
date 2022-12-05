@@ -1,0 +1,16 @@
+Name:Ogre Battlecaster
+ManaCost:2 R
+Types:Creature Ogre Shaman
+PT:3/3
+K:First Strike
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPlay | TriggerDescription$ Whenever CARDNAME attacks, you may cast target instant or sorcery card from your graveyard by paying {R}{R} in addition to its other costs. If that spell would be put into a graveyard, exile it instead.
+SVar:TrigPlay:Mode$ Continuous | Affected$ Instant.YouCtrl,Sorcery.YouCtrl | MayPlay$ True | MayPlayAltManaCost$ R R RegularCost | EffectZone$ Battlefield | AffectedZone$ Graveyard | RememberObjects$ Targeted | SubAbility$ DTCast
+SVar:DTCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Execute$ TrigPump | TriggerDescription$ When you cast that spell, CARDNAME gets +X/+0 until end of turn, where X is that spell's mana value.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X
+SVar:X:TriggeredStackInstance$CardManaCostLKI
+R:Event$ Moved | ValidLKI$ Card.CastSa Spell.MayPlaySource | Origin$ Stack | Destination$ Graveyard | ReplaceWith$ MoveExile
+SVar:MoveExile:DB$ ChangeZone | Defined$ ReplacedCard | Origin$ Stack | Destination$ Exile
+AI:RemoveDeck:All
+SVar:BuffedBy:Instant,Sorcery
+DeckHints:Type$Instant|Sorcery
+Oracle:First strike\nWhenever Ogre Battlecaster attacks, you may cast target instant or sorcery card from your graveyard by paying {R}{R} in addition to its other costs. If that spell would be put into a graveyard, exile it instead. When you cast that spell, Ogre Battlecaster gets +X/+0 until end of turn, where X is that spell's mana value.
