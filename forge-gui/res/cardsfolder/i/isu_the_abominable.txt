@@ -4,7 +4,7 @@ Types:Legendary Snow Creature Yeti
 PT:5/5
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl | AffectedZone$ Library | MayLookAt$ You | Description$ You may look at the top card of your library any time.
 S:Mode$ Continuous | Affected$ Card.TopLibrary+YouCtrl+Snow | AffectedZone$ Library | MayPlay$ True | Description$ You may play snow lands and cast snow spells from the top of your library.
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.Snow+Other+YouCtrl | Execute$ TrigChoice | OptionalDecider$ You | TriggerDescription$ Whenever another snow permanent enters the battlefield under your control, you may pay {G}, {W}, or {U}. If you do, put a +1/+1 counter on CARDNAME.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Permanent.Snow+Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigChoice | OptionalDecider$ You | TriggerDescription$ Whenever another snow permanent enters the battlefield under your control, you may pay {G}, {W}, or {U}. If you do, put a +1/+1 counter on CARDNAME.
 SVar:TrigChoice:DB$ GenericChoice | Choices$ PayG,PayW,PayU
 SVar:PayG:DB$ PutCounter | UnlessCost$ G | UnlessPayer$ You | UnlessSwitched$ True | CounterType$ P1P1 | SpellDescription$ {G}: Put a +1/+1 counter on CARDNAME.
 SVar:PayW:DB$ PutCounter | UnlessCost$ W | UnlessPayer$ You | UnlessSwitched$ True | CounterType$ P1P1 | SpellDescription$ {W}: Put a +1/+1 counter on CARDNAME.

@@ -24,7 +24,7 @@ public class LoadingOverlay extends FOverlay {
     private static final FSkinFont FONT = FSkinFont.get(22);
     private BGAnimation bgAnimation;
     private Runnable runnable;
-    private boolean afterMatch;
+    private boolean afterMatch, alternate;
 
     private static FSkinColor getOverlayColor() {
         if (Forge.isMobileAdventureMode)
@@ -70,17 +70,18 @@ public class LoadingOverlay extends FOverlay {
         textMode = textOnly;
     }
 
-    public LoadingOverlay(Runnable toRunBeforeMatch) {
-        this(toRunBeforeMatch, false);
+    public LoadingOverlay(Runnable runnable) {
+        this(runnable, false, false);
     }
-    public LoadingOverlay(Runnable toRunBeforeMatch, boolean aftermatch) {
+    public LoadingOverlay(Runnable toRun, boolean aftermatch, boolean otherTransition) {
         caption = "";
         textMode = true;
         textureRegion = Forge.takeScreenshot();
         match = true;
         bgAnimation = new BGAnimation();
-        runnable = toRunBeforeMatch;
+        runnable = toRun;
         afterMatch = aftermatch;
+        alternate = otherTransition;
     }
 
     public void setCaption(String caption0) {
@@ -148,7 +149,7 @@ public class LoadingOverlay extends FOverlay {
     }
 
     private class BGAnimation extends ForgeAnimation {
-        float DURATION = 0.9f;
+        float DURATION = afterMatch ? 0.8f : 1.3f;
         private float progress = 0;
 
         public void drawBackground(Graphics g) {
@@ -162,9 +163,10 @@ public class LoadingOverlay extends FOverlay {
             if (afterMatch) {
                 g.drawGrayTransitionImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), false, percentage);
             } else {
-                g.setAlphaComposite(1 - percentage);
-                g.drawImage(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight());
-                g.setAlphaComposite(oldAlpha);
+                if (alternate)
+                    g.drawPortalFade(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), percentage > 0.8f ? 0.8f : percentage, afterMatch);
+                else
+                    g.drawNoiseFade(textureRegion, 0, 0, Forge.getScreenWidth(), Forge.getScreenHeight(), percentage);
             }
         }
 

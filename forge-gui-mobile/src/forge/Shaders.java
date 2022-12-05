@@ -42,6 +42,78 @@ public class Shaders {
             "    v_texCoords = a_texCoord0;\n" +
             "    gl_Position = u_projTrans * a_position;\n" +
             "}";
+    public static final String fragPortal="#ifdef GL_ES\n" +
+            "#define LOWP lowp\n" +
+            "#define PI 3.14159\n" +
+            "precision mediump float;\n" +
+            "#else\n" +
+            "#define LOWP \n" +
+            "#define PI 3.14159\n" +
+            "#endif\n" +
+            "\n" +
+            "uniform sampler2D u_texture;\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform vec2 u_resolution;\n" +
+            "uniform float u_time;\n" +
+            "uniform float u_opaque;\n" +
+            "\n" +
+            "void main()\n" +
+            "{\n" +
+            "    vec2 uv = v_texCoords;\n" +
+            "    \n" +
+            "    float t1 = u_time;\n" +
+            "    if (t1>1.25)\n" +
+            "        t1=0.0;\n" +
+            "    t1 = clamp(t1,0.0,1.0);\n" +
+            "    float nt = fract(t1);\n" +
+            "\n" +
+            "    float eRad = 1.5 * nt;\n" +
+            "    float eAng = (2. * PI) * (nt*4.5);\n" +
+            "\n" +
+            "    vec2 centre = vec2(.5,.5);\n" +
+            "    uv -= centre;\n" +
+            "    float len = length(uv * vec2(u_resolution.x / u_resolution.y, 1.));\n" +
+            "    float ang = atan(uv.y, uv.x) + eAng * smoothstep(eRad, 0., len);\n" +
+            "    float rad = length(uv);\n" +
+            "    \n" +
+            "    vec3 col1 = texture2D(u_texture, vec2(rad * cos(ang), rad * sin(ang)) + centre ).xyz;    \n" +
+            "    float nt2 = (len*2.0) - (nt*2.0);\n" +
+            "    nt2 = mix(1.0,nt2-nt,nt);\n" +
+            "    nt2 = clamp(nt2,0.0,1.0);\n" +
+            "   \tvec3 col2 = texture2D(u_texture,uv+ centre).xyz;  \n" +
+            "    col2 = vec3(0.0);\n" +
+            "    \n" +
+            "    vec4 col3 =  vec4(mix(col2,col1,nt2), 1.);\n" +
+            "    if (u_opaque < 1.)" +
+            "        col3.a *= nt2;\n" +
+            "    gl_FragColor = col3;\n" +
+            "}";
+    public static final String fragNoiseFade="#ifdef GL_ES\n" +
+            "#define LOWP lowp\n" +
+            "precision mediump float;\n" +
+            "#else\n" +
+            "#define LOWP \n" +
+            "#endif\n" +
+            "uniform sampler2D u_texture;\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform float u_time;\n" +
+            "\n" +
+            "void main()\n" +
+            "{\n" +
+            "\tvec2 uv = v_texCoords;\n" +
+            "    LOWP vec4 orig = texture2D(u_texture, uv);\n" +
+            "    float th = u_time;\n" +
+            "    \n" +
+            "    float tex = ((orig.r -.5) + 2. * uv.x ) / 3.;\n" +
+            "    float mask = smoothstep( th - .1, th, tex);\n" +
+            "    float dist = smoothstep( th - .3, th + .05, tex);\n" +
+            "    float col = pow( smoothstep( th - .2, th + .15, tex), 3.);\n" +
+            "    \n" +
+            "    LOWP vec3 color = vec4(orig.rgb, uv * (.7 + pow(dist, 2.) * .3 )).rgb;\n" +
+            "    LOWP vec3 discolor = color * vec3( 0.5, 0.4, 0.3 );\n" +
+            "    \n" +
+            "\tgl_FragColor = vec4( mix(discolor, color, col) * mask, 1.0);\n" +
+            "}";
     public static final String fragRoundedRect = "#ifdef GL_ES\n" +
             "#define LOWP lowp\n" +
             "precision mediump float;\n" +
@@ -1313,19 +1385,25 @@ public class Shaders {
                     "varying float v_lightFix;\n" +
                     "uniform sampler2D u_texture;\n" +
                     "const vec3 forward = vec3(1.0 / 3.0);\n" +
+                    "uniform float u_time;\n" +
+                    "uniform float u_bias;\n" +
                     "void main()\n" +
                     "{\n" +
-                    "  vec4 tgt = texture2D( u_texture, v_texCoords );\n" +
+                    "  vec2 uv = v_texCoords;\n" +
+                    "  float len = length(uv - vec2(.5)) * 50.;\n" +
+                    "  vec2 s = normalize(uv) * ( sin((len - u_time * 10.))) * (.01 * u_time);\n" +
+                    "  vec4 tgt = texture2D( u_texture, uv + s);\n" +
                     "  vec3 lab = mat3(+0.2104542553, +1.9779984951, +0.0259040371, +0.7936177850, -2.4285922050, +0.7827717662, -0.0040720468, +0.4505937099, -0.8086757660) *" +
                     "             pow(mat3(0.4121656120, 0.2118591070, 0.0883097947, 0.5362752080, 0.6807189584, 0.2818474174, 0.0514575653, 0.1074065790, 0.6302613616) \n" +
                     "             * (tgt.rgb * tgt.rgb), forward);\n" +
                     "  lab.x = clamp(pow(lab.x, v_tweak.w) * v_lightFix * v_tweak.x + v_color.x - 1.0, 0.0, 1.0);\n" +
                     "  lab.yz = clamp((lab.yz * v_tweak.yz + v_color.yz) * 1.5, -1.0, 1.0);\n" +
                     "  lab = mat3(1.0, 1.0, 1.0, +0.3963377774, -0.1055613458, -0.0894841775, +0.2158037573, -0.0638541728, -1.2914855480) * lab;\n" +
-                    "  gl_FragColor = vec4(sqrt(clamp(" +
+                    "  vec4 daynight = vec4(sqrt(clamp(" +
                     "                 mat3(+4.0767245293, -1.2681437731, -0.0041119885, -3.3072168827, +2.6093323231, -0.7034763098, +0.2307590544, -0.3411344290, +1.7068625689) *\n" +
                     "                 (lab * lab * lab)," +
                     "                 0.0, 1.0)), v_color.a * tgt.a);\n" +
+                    "  gl_FragColor = mix(vec4(0.,0.,0.,1.), daynight, u_bias);\n" +
                     "}";
 
     /**

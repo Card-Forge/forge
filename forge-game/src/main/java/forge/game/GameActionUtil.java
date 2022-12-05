@@ -932,7 +932,9 @@ public final class GameActionUtil {
             // add back to where it came from, hopefully old state
             // skip GameAction
             oldCard.getZone().remove(oldCard);
-            fromZone.add(oldCard, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
+            // in some rare cases the old position no longer exists (Panglacial Wurm + Selvala)
+            Integer newPosition = zonePosition >= 0 ? Math.min(Integer.valueOf(zonePosition), fromZone.size()) : null;
+            fromZone.add(oldCard, newPosition);
             ability.setHostCard(oldCard);
             ability.setXManaCostPaid(null);
             ability.setSpendPhyrexianMana(false);
