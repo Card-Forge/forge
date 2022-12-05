@@ -4,10 +4,10 @@ Types:Artifact Creature Construct
 PT:8/5
 K:Prototype:2 B:3:2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, return target creature card with power less than CARDNAME's power from your graveyard to the battlefield. Its base power perpetually becomes equal to CARDNAME's Power
-SVar:TrigReturn:DB$ ChangeZone |  ValidTgts$ Creature.powerLTY+YouOwn | RememberChanged$ True | TgtPrompt$ Select target creature card with lesser power | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBEffect
-SVar:DBEffect:DB$ Effect | Name$ Forgefire Automaton's Perpetual Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualStatic | Duration$ Permanent
-SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | SetPower$ X | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The base power of this card perpetually becomes equal to Forgefire Automaton's Power
-SVar:X:TriggeredCard$CardPower
-SVar:Y:Count$CardPower
+SVar:TrigReturn:DB$ ChangeZone |  ValidTgts$ Creature.powerLTX+YouOwn | RememberChanged$ True | TgtPrompt$ Select target creature card with lesser power | Origin$ Graveyard | Destination$ Battlefield | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | Name$ Forgefire Automaton's Perpetual Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualStatic | ImprintCards$ Self | Duration$ Permanent
+SVar:PerpetualStatic:Mode$ Continuous | Affected$ Card.IsRemembered | SetPower$ Y | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The base power of this card perpetually becomes equal to Forgefire Automaton's Power
+SVar:X:Count$CardPower
+SVar:Y:Imprinted$CardPower
 DeckHints:Ability$Graveyard|Discard|Mill & Color$Black
 Oracle:Prototype {2}{B} — 3/2 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\nAt the beginning of your upkeep, return target creature card with power less than Forgefire Automaton's power from your graveyard to the battlefield.\nIts base power perpetually becomes equal to Forgefire Automaton's Power
