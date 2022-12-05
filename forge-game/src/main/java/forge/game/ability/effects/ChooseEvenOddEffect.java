@@ -6,6 +6,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 public class ChooseEvenOddEffect extends SpellAbilityEffect {
@@ -17,9 +18,7 @@ public class ChooseEvenOddEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa)) {
-            sb.append(p).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
         sb.append("chooses even or odd.");
 
         return sb.toString();

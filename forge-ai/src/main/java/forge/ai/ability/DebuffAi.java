@@ -68,7 +68,6 @@ public class DebuffAi extends SpellAbilityAi {
         if (!sa.usesTargeting()) {
             List<Card> cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
 
-
             final Combat combat = game.getCombat();
             return Iterables.any(cards, new Predicate<Card>() {
                 @Override
@@ -121,7 +120,6 @@ public class DebuffAi extends SpellAbilityAi {
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         sa.resetTargets();
         CardCollection list = getCurseCreatures(ai, sa, kws == null ? Lists.newArrayList() : kws);
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getHostCard(), sa);
 
         // several uses here:
         // 1. make human creatures lose evasion when they are attacking
@@ -205,9 +203,7 @@ public class DebuffAi extends SpellAbilityAi {
         }
 
         // Remove anything that's already been targeted
-        for (final Card c : sa.getTargets().getTargetCards()) {
-            list.remove(c);
-        }
+        list.removeAll(sa.getTargets().getTargetCards());
 
         final CardCollection pref = CardLists.filterControlledBy(list, ai.getOpponents());
         final CardCollection forced = CardLists.filterControlledBy(list, ai);

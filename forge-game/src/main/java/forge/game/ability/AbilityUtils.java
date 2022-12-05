@@ -2918,8 +2918,7 @@ public class AbilityUtils {
                     sas.add(s);
                 }
             } else {
-                final Spell newSA = (Spell) s.copy();
-                newSA.setActivatingPlayer(controller);
+                final Spell newSA = (Spell) s.copy(controller);
                 SpellAbilityRestriction res = new SpellAbilityRestriction();
                 // timing restrictions still apply
                 res.setPlayerTurn(s.getRestrictions().getPlayerTurn());

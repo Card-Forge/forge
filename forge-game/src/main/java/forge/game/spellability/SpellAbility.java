@@ -1141,7 +1141,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.payingMana.addAll(payingMana);
             }
             clone.paidAbilities = Lists.newArrayList();
-            clone.setPaidHash(Maps.newHashMap(getPaidHash()));
+            clone.setPaidHash(getPaidHash());
 
             // copy last chapter flag for Trigger
             clone.lastChapter = this.lastChapter;

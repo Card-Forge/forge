@@ -21,9 +21,8 @@ public class ChooseColorEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa)) {
-            sb.append(p).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
+
         sb.append("chooses a color");
         if (sa.hasParam("OrColors")) {
             sb.append(" or colors");

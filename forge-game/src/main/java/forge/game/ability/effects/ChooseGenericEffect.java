@@ -13,6 +13,7 @@ import forge.game.event.GameEventCardModeChosen;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
+import forge.util.Lang;
 
 public class ChooseGenericEffect extends SpellAbilityEffect {
 
@@ -20,9 +21,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa)) {
-            sb.append(p).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getDefinedPlayersOrTargeted(sa)));
         sb.append("chooses from a list.");
 
         return sb.toString();

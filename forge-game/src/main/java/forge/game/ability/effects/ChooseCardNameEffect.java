@@ -20,6 +20,7 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 public class ChooseCardNameEffect extends SpellAbilityEffect {
@@ -28,9 +29,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa)) {
-            sb.append(p).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
         sb.append("names a card.");
 
         return sb.toString();
