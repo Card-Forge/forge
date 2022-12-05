@@ -118,6 +118,7 @@ public class DeckSelectScene extends UIScene {
             if (buttons.containsKey(i)) {
                 buttons.get(i).setText(Current.player().getDeck(i).getName());
                 buttons.get(i).getTextraLabel().layout();
+                buttons.get(i).layout();
             }
         }
         select(Current.player().getSelectedDeckIndex());
@@ -131,6 +132,7 @@ public class DeckSelectScene extends UIScene {
         Current.player().renameDeck(text);
         buttons.get(currentSlot).setText(Current.player().getDeck(currentSlot).getName());
         buttons.get(currentSlot).getTextraLabel().layout();
+        buttons.get(currentSlot).layout();
     }
 
     private void edit() {
