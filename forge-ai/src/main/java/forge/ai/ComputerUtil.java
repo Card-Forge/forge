@@ -2961,7 +2961,7 @@ public class ComputerUtil {
         return false;
     }
 
-    public static boolean targetPlayableSpellCard(final Player ai, CardCollection options, final SpellAbility sa, final boolean withoutPayingManaCost, boolean mandatory) {
+    public static boolean targetPlayableSpellCard(final Player ai, Iterable<Card> options, final SpellAbility sa, final boolean withoutPayingManaCost, boolean mandatory) {
         // determine and target a card with a SA that the AI can afford and will play
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         sa.resetTargets();
@@ -2993,8 +2993,8 @@ public class ComputerUtil {
         }
 
         if (targets.isEmpty()) {
-            if (mandatory && !options.isEmpty()) {
-                targets = options;
+            if (mandatory && !Iterables.isEmpty(options)) {
+                targets.addAll(options);
             } else {
                 return false;
             }

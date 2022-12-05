@@ -153,7 +153,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
 
                     boolean isStrict = sa.hasParam("StrictAmount");
                     int minTargets = optional && !isStrict ? 0 : amount;
-                    boolean notEnoughTargets = validTargets.size() < minTargets;
+                    boolean notEnoughTargets = isStrict && validTargets.size() < minTargets;
 
                     if (sa.hasParam("Random")) {
                         choosenToSacrifice = new CardCollection(Aggregates.random(validTargets, Math.min(amount, validTargets.size())));
