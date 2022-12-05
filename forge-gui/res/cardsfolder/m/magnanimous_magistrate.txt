@@ -3,7 +3,7 @@ ManaCost:5 W
 Types:Creature Human Advisor
 PT:3/4
 K:etbCounter:REPR:5
-T:Mode$ ChangesZone | ValidCard$ Creature.Other+nonToken+cmcGE1 | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Whenever another nontoken creature you control dies, if its mana value was 1 or greater, you may remove that many reprieve counters from CARDNAME. If you do, return that card to the battlefield under its owner's control.
+T:Mode$ ChangesZone | ValidCard$ Creature.Other+YouCtrl+nonToken+cmcGE1 | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigChangeZone | TriggerDescription$ Whenever another nontoken creature you control dies, if its mana value was 1 or greater, you may remove that many reprieve counters from CARDNAME. If you do, return that card to the battlefield under its owner's control.
 SVar:TrigChangeZone:AB$ ChangeZone | Cost$ SubCounter<X/REPR> | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard | Destination$ Battlefield
 SVar:X:TriggeredCard$CardManaCost
 DeckHas:Ability$Counters
