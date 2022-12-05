@@ -119,16 +119,16 @@ public class DuelScene extends ForgeScene {
                 @Override
                 public void run(Integer result) {
                     if (result == 0) {
-                        afterGameEnd(enemyName, finalWinner, true);
+                        afterGameEnd(enemyName, finalWinner, true, true);
                     }
                 }
             }));
         } else {
-            afterGameEnd(enemyName, winner, false);
+            afterGameEnd(enemyName, winner, false, false);
         }
     }
 
-    void afterGameEnd(String enemyName, boolean winner, boolean showOverlay) {
+    void afterGameEnd(String enemyName, boolean winner, boolean showOverlay, boolean alternate) {
         Runnable runnable = () -> Gdx.app.postRunnable(()-> {
             SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
             dungeonEffect = null;
@@ -144,7 +144,7 @@ public class DuelScene extends ForgeScene {
         });
         if (showOverlay) {
             FThreads.invokeInEdtNowOrLater(() -> {
-                matchOverlay = new LoadingOverlay(runnable, true);
+                matchOverlay = new LoadingOverlay(runnable, true, alternate);
                 matchOverlay.show();
             });
         } else {
@@ -335,7 +335,7 @@ public class DuelScene extends ForgeScene {
                                     if (FSkin.getAvatars().get(90001) != null)
                                         g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
                                 }
-                            }))), false);
+                            }))), false, true);
         } else {
             matchOverlay = new LoadingOverlay(null);
         }

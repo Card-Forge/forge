@@ -52,6 +52,7 @@ public class Graphics {
     private final ShaderProgram shaderHueShift = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragHueShift);
     private final ShaderProgram shaderRoundedRect = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragRoundedRect);
     private final ShaderProgram shaderNoiseFade = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragNoiseFade);
+    private final ShaderProgram shaderPortal = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPortal);
 
     private Texture dummyTexture = null;
 
@@ -932,6 +933,28 @@ public class Graphics {
             shaderNoiseFade.bind();
             shaderNoiseFade.setUniformf("u_time", time);
             batch.setShader(shaderNoiseFade);
+            batch.begin();
+            //draw
+            batch.draw(image, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else {
+            drawImage(image, x, y, w, h);
+        }
+    }
+
+    public void drawPortalFade(TextureRegion image, float x, float y, float w, float h, Float time, boolean opaque) {
+        if (image == null)
+            return;
+        if (time != null) {
+            batch.end();
+            shaderPortal.bind();
+            shaderPortal.setUniformf("u_resolution", image.getRegionWidth(), image.getRegionHeight());
+            shaderPortal.setUniformf("u_time", time);
+            shaderPortal.setUniformf("u_opaque", opaque ? 1f : 0f);
+            batch.setShader(shaderPortal);
             batch.begin();
             //draw
             batch.draw(image, x, y, w, h);
