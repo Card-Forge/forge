@@ -6,16 +6,24 @@ Type=Online
 ScryfallCode=EA2
 
 [cards]
+0 C Dispel @Chase Stone
+0 C Ethereal Armor @Daarken
 0 C Fiery Impulse @Daarken
+0 C Nylea's Presence @Ralph Horsley
 0 C Satyr Wayfinder @Steve Prescott
 0 M Clever Impersonator @Slawomir Maniak
 0 M Kozilek, the Great Distortion @Aleksi Briclot
+0 M Sliver Hivelord @Aleksi Briclot
 0 M World Breaker @Jaime Jones
 0 R Courser of Kruphix @Eric Deschamps
 0 R Eerie Interlude @Svetlin Velinov
 0 R Eidolon of the Great Revel @Cyril Van Der Haegen
 0 R Eldrazi Displacer @Daarken
+0 R Matter Reshaper @Chris Rahn
 0 R Mutavault @Fred Fields
 0 R Soldier of the Pantheon @Eric Deschamps
 0 R Thought-Knot Seer @Svetlin Velinov
 0 U Reflector Mage @Willian Murai
+0 U Rending Volley @Lucas Graciano
+0 U Shaman of the Pack @Dan Scott
+0 U Zulaport Cutthroat @Jason Rainville
