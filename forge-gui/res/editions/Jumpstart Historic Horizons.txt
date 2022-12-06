@@ -27,8 +27,8 @@ ScryfallCode=J21
 19 R Subversive Acolyte @Darren Tan
 20 R Managorger Phoenix @Brian Valeza
 21 C Reckless Ringleader @Brian Valeza
-22 C Sarkhan's Scorn @Daarken
-23 M Sarkhan, Wanderer to Shiv @Grzegorz Rutkowski
+22 M Sarkhan, Wanderer to Shiv @Grzegorz Rutkowski
+23 C Sarkhan's Scorn @Daarken
 24 C Scion of Shiv @Grzegorz Rutkowski
 25 U Static Discharge @Liiga Smilshkalne
 26 M Freyalise, Skyshroud Partisan @Daarken
@@ -40,375 +40,164 @@ ScryfallCode=J21
 32 U Abiding Grace
 33 U Abzan Battle Priest
 34 U Abzan Falconer
-35 U Aethershield Artificer
 36 C Ainok Bond-Kin
-37 U Allied Assault
-38 U Alseid of Life's Bounty
-39 C Angelheart Protector
-40 C Angelic Edict
-41 U Angelic Exaltation
 42 C Angelic Purge
-43 C Angel of the Dawn
 44 U Angel of the God-Pharaoh
-45 C Anointed Chorister
 46 C Anointer of Valor
 47 C Arcbound Mouser
 48 C Arcbound Prototype
-49 U Baffling End
 50 U Barbed Spike
-51 C Battlefield Promotion
-52 C Battlefield Raptor
 53 U Battle Screech
 54 R Blade Splicer
 55 C Bonds of Faith
 56 R Bonescythe Sliver
 57 U Boros Elite
-58 C Captivating Unicorn
-59 U Cast Out
-60 C Celestial Enforcer
-61 R Charming Prince
-62 C Cloudshift
-63 C Codespell Cleric
-64 U Conclave Tribunal
-65 C Coordinated Charge
-66 U Dauntless Bodyguard
 67 U Devouring Light
 68 C Disciple of the Sun
 69 C Djeru's Renunciation
 70 C Doomed Traveler
-71 C Drannith Healer
-72 U Dueling Coach
-73 R Elite Spellbinder
 74 C Enduring Sliver
 75 R Esper Sentinel
-76 C Faerie Guidemother
 77 C Fairgrounds Patrol
-78 C Feat of Resistance
-79 U Fencing Ace
-80 U Fight as One
 81 U First Sliver's Chosen
-82 U Flourishing Fox
-83 C Forsake the Worldly
-84 C Fortify
-85 U Gauntlets of Light
 86 C Gilded Light
-87 U Gird for Battle
-88 U Glass Casket
 89 U Glorious Enforcer
 90 R Hanweir Militia Captain
 91 U Healer's Flock
-92 C Healer's Hawk
-93 U Herald of the Sun
 94 C Hive Stirrings
-95 C Imposing Vantasaur
 96 C Impostor of the Sixth Pride
 97 C Irregular Cohort
-98 U Journey to Oblivion
 99 U King of the Pride
 100 C Kor Skyfisher
-101 U Lagonna-Band Storyteller
 102 C Lancer Sliver
 103 C Late to Dinner
-104 C Law-Rune Enforcer
-105 C Light of Hope
-106 C Makeshift Battalion
-107 C Martyr for the Cause
-108 C Moment of Heroism
-109 U Oketra's Attendant
-110 C Omen of the Sun
-111 U On Serra's Wings
-112 C Pacifism
-113 C Pious Wayfarer
 114 C Radiant's Judgment
 115 M Ranger-Captain of Eos
 116 C Reprobation
 117 R Restoration Angel
 118 R Return to the Ranks
-119 R Righteous Valkyrie
 120 U Roc Egg
 121 C Sandsteppe Outcast
 122 U Scour the Desert
-123 C Sea Gate Banneret
-124 U Seal Away
 125 C Segovian Angel
 126 C Selfless Cathar
-127 U Selfless Savior
 128 C Sentinel Sliver
 129 C Seraph of Dawn
-130 U Serra Angel
 131 M Serra's Emissary
 132 M Serra the Benevolent
 133 C Shelter
-134 U Shepherd of the Flock
-135 U Sigiled Contender
 136 U Skyblade's Boon
-137 C Snare Tactician
 138 C Soul of Migration
-139 U Splendor Mare
-140 C Stalwart Valkyrie
-141 R Starfield Mystic
-142 C Star Pupil
-143 C Steadfast Sentry
 144 U Steelform Sliver
 145 C Stirring Address
 146 C Sustainer of the Realm
-147 U Teyo, the Shieldmage
 148 R Thalia's Lieutenant
-149 C Thraben Inspector
 150 C Thraben Standard Bearer
 151 U Thraben Watcher
-152 U Triumph of Gerrard
-153 U Valiant Rescuer
-154 U Valkyrie's Sword
-155 U Valorous Stance
 156 U Vesperlark
 157 C Wall of One Thousand Cuts
 158 C Winged Shepherd
-159 U Wispweaver Angel
 160 C Yoked Plowbeast
-161 U Youthful Valkyrie
 162 U Zhalfirin Decoy
 163 C Aeromoeba
-164 U Alirios, Enraptured
-165 U Animating Faerie
 166 R Archmage's Charm
-167 C Aven Eternal
-168 C Aviation Pioneer
 169 R Bazaar Trademage
 170 C Breaching Hippocamp
-171 U Brineborn Cutthroat
-172 C Bubble Snare
 173 C Burdened Aerialist
-174 C Burrog Befuddler
-175 C Capture Sphere
-176 U Censor
-177 R Champion of Wits
 178 C Choking Tethers
 179 C Coralhelm Guide
-180 C Crookclaw Transmuter
 181 U Diffusion Sliver
 182 U Dismiss
-183 U Essence Capture
 184 C Etherium Spinner
-185 U Exclude
-186 U Exclusion Mage
-187 C Expedition Diviner
 188 C Eyekite
-189 C Faerie Duelist
 190 C Faerie Seer
-191 U Faerie Vandal
 192 U Filigree Attendant
 193 C Floodhound
 194 C Foul Watcher
-195 C Ghostform
 196 U Ghost-Lit Drifter
-197 U Giant's Amulet
-198 C Glimmerbell
-199 C Gust of Wind
 200 C Hard Evidence
-201 U Hypnotic Sprite
-202 R Inniaz, the Gale Force
-203 C Into the Roil
 204 U Junk Winder
 205 C Just the Wind
-206 U Jwari Disruption
-207 C Keen Glidemaster
-208 C Kitesail Corsair
-209 C Living Tempest
-210 C Lofty Denial
 211 U Manic Scribe
 212 C Man-o'-War
-213 C Mantle of Tides
 214 R Master of the Pearl Trident
-215 U Merfolk Falconer
-216 U Merfolk Trickster
-217 U Merrow Reejerey
 218 R Mist-Syndicate Naga
-219 C Mistwalker
 220 C Moonblade Shinobi
 221 C Mulldrifter
-222 U Neutralize
 223 C Ninja of the Deep Hours
 224 C Ojutai's Summons
-225 C Omen of the Sea
-226 U Oneirophage
 227 C Parcel Myr
-228 C Passwall Adept
 229 C Phantasmal Form
 230 C Phantom Ninja
 231 C Pondering Mage
-232 C Prosperous Pirates
-233 U Rain of Revelation
 234 U Raving Visionary
 235 C Recalibrate
-236 C Resculpt
-237 U Rewind
 238 R Rise and Shine
-239 C Roaming Ghostlight
-240 C Rousing Read
-241 C Sailor of Means
 242 C Scour All Possibilities
 243 U Scour the Laboratory
 244 U Scuttletide
 245 U Scuttling Sliver
-246 C Shaper Apprentice
-247 U Sigiled Starfish
-248 U Silvergill Adept
-249 U Skatewing Spy
-250 U Skilled Animator
-251 C Skyclave Squid
 252 C So Shiny
 253 U Specimen Collector
-254 U Spectral Sailor
 255 C Steelfin Whale
 256 U Stitchwing Skaab
-257 C Storm Sculptor
-258 U Supreme Will
 259 M Svyelun of Sea and Sky
-260 C Tazeem Roilmage
 261 R Thought Monitor
-262 U Tide Skimmer
 263 C Tightening Coils
-264 U Tolarian Kraken
-265 C Tome Anima
-266 U Turn into a Pumpkin
-267 U Unsubstantiate
-268 C Unsummon
-269 C Vexing Gull
-270 R Voracious Greatshark
-271 U Waker of Waves
-272 U Waterkin Shaman
-273 C Waterknot
-274 C Watertrap Weaver
 275 C Windcaller Aven
-276 U Windstorm Drake
-277 C Winged Words
-278 C Witching Well
 279 R Wonder
-280 U Wormhole Serpent
-281 C Abnormal Endurance
 282 U Accursed Horde
-283 C Alchemist's Gift
-284 C Anointed Deacon
 285 U Archfiend of Sorrows
 286 R Asylum Visitor
 287 C Azra Smokeshaper
-288 C Black Cat
-289 C Blighted Bat
-290 C Blight Keeper
-291 C Blitz Leech
-292 U Blood Artist
-293 C Blood Burglar
-294 U Bloodchief's Thirst
-295 C Blood Glutton
-296 U Bond of Revival
-297 C Boneclad Necromancer
 298 C Bone Shards
-299 C Burglar Rat
 300 C Cabal Initiate
-301 R Callous Bloodmage
 302 U Carrier Thrall
-303 C Cemetery Recruitment
 304 C Changeling Outcast
 305 U Clattering Augur
 306 R Cordial Vampire
-307 C Corpse Churn
 308 R Dark Salvation
-309 U Davriel, Rogue Shadowmage
-310 C Davriel's Shadowfugue
-311 C Deadly Alliance
-312 C Deathbloom Thallid
-313 U Deathless Ancient
 314 C Death Wind
-315 R Dire Fleet Poisoner
 316 R Diregraf Colossus
 317 C Discerning Taste
-318 C Drainpipe Vermin
 319 U Dregscape Sliver
 320 C Echoing Return
-321 C Elderfang Disciple
 322 R Endling
-323 C Epicure of Blood
-324 U Eternal Taskmaster
 325 C Eyeblight Assassin
 326 C Facevaulter
-327 C Feed the Serpent
-328 C Feed the Swarm
-329 U Fell Specter
 330 C First-Sphere Gargantua
 331 U Fleshbag Marauder
 332 C Gilt-Blade Prowler
-333 U Goremand
 334 U Graveshifter
-335 C Grim Physician
 336 U Haunted Dead
-337 U Heartless Act
 338 U Heir of Falkenrath
 339 C Hell Mongrel
 340 U Indulgent Aristocrat
-341 C Karfell Kennel-Master
 342 C Kitchen Imp
-343 U Kraul Swarm
 344 U Leeching Sliver
 345 U Legion Vanguard
-346 U Liliana's Devotee
-347 U Liliana's Elite
-348 C Liliana's Steward
-349 U Lord of the Accursed
-350 C Macabre Waltz
-351 C Marauding Blight-Priest
-352 C Marauding Boneslasher
-353 C Mark of the Vampire
 354 U Markov Crusader
 355 R Marrow-Gnawer
-356 C Miasmic Mummy
 357 C Mind Rake
-358 U Mire Triton
 359 C Mob
-360 C Moment of Craving
-361 C Murder
-362 R Murderous Rider
 363 R Necrogoyf
 364 U Necromancer's Familiar
 365 C Nested Shambler
 366 R Nether Spirit
 367 C Nezumi Cutthroat
-368 R Nullpriest of Oblivion
-369 C Ob Nixilis's Cruelty
 370 C Okiba-Gang Shinobi
-371 U Pelakka Predation
-372 R Piper of the Swarm
-373 U Plaguecrafter
-374 C Plague Wight
 375 C Putrid Goblin
-376 C Queen's Agent
-377 C Raise the Draugr
 378 C Ransack the Lab
-379 C Rat Colony
-380 C Reaper of Night
 381 C Ruin Rat
-382 C Shambling Goblin
 383 C Sinister Starfish
 384 C Skullsnatcher
-385 C Skymarch Bloodletter
 386 U Sling-Gang Lieutenant
-387 C Strangling Spores
-388 C Subtle Strike
 389 U Sudden Edict
-390 C Supernatural Stamina
 391 U Throatseeker
-392 U Thwart the Grave
 393 C Tourach's Canticle
-394 C Typhoid Rats
-395 U Unbreakable Bond
 396 U Undead Augur
-397 C Unexpected Fangs
-398 U Urgoros, the Empty One
-399 U Vampire of the Dire Moon
 400 C Venomous Changeling
 401 C Vermin Gorger
-402 C Village Rites
-403 U Void Beckoner
 404 C Warteye Witch
 405 M Yawgmoth, Thran Physician
 406 U Young Necromancer
@@ -416,239 +205,105 @@ ScryfallCode=J21
 408 C Arcbound Slasher
 409 C Arcbound Tracker
 410 U Arcbound Whelp
-411 C Barge In
-412 U Battle-Rattle Shaman
 413 U Battle Squadron
-414 U Beetleback Chief
 415 U Belligerent Sliver
-416 R Birgi, God of Storytelling
 417 C Bladeback Sliver
 418 U Blazing Rootwalla
 419 C Blisterstick Shaman
 420 R Bloodbraid Marauder
-421 C Bloodhaze Wolverine
 422 C Blur Sliver
 423 C Bogardan Dragonheart
 424 R Breya's Apprentice
-425 C Burn Bright
-426 C Burning-Tree Vandal
 427 U Captain Ripley Vance
-428 C Cathartic Reunion
-429 U Clamor Shaman
 430 C Cleaving Sliver
-431 R Conspiracy Theorist
-432 R Dark-Dweller Oracle
-433 C Destructive Digger
-434 U Dragon Egg
-435 C Dragon Fodder
-436 C Dragon Hatchling
 437 C Dragon Mantle
 438 U Dragon's Rage Channeler
 439 C Faithless Salvaging
 440 C Fiery Temper
-441 C Fire Prophecy
-442 C Fissure Wizard
 443 C Fists of Flame
-444 U Flameblade Adept
-445 U Flame Sweep
 446 C Foundry Street Denizen
-447 U Furnace Whelp
 448 U Furyblade Vampire
-449 R Gadrak, the Crown-Scourge
 450 C Galvanic Relay
-451 U Gempalm Incinerator
 452 C Geomancer's Gambit
 453 C Goatnap
-454 C Goblin Arsonist
-455 U Goblin Barrage
-456 C Goblin Bird-Grabber
 457 R Goblin Dark-Dwellers
 458 R Goblin Engineer
-459 U Goblin Morningstar
-460 U Goblin Oriflamme
-461 U Goblin Rally
-462 C Goblin Wizardry
 463 C Gouged Zealot
-464 U Grinning Ignus
-465 U Guttersnipe
 466 R Harmonic Prodigy
-467 U Hellkite Punisher
-468 C Hobblefiend
 469 U Hollowhead Sliver
 470 U Hordeling Outburst
 471 C Igneous Elemental
-472 C Incendiary Oracle
 473 U Incorrigible Youths
 474 U Insatiable Gorgers
 475 C Insolent Neonate
-476 R Irencrag Pyromancer
-477 C Kargan Dragonrider
-478 C Keldon Raider
-479 U Kinetic Augur
 480 C Krenko's Command
 481 U Kuldotha Flamefiend
-482 U Lava Coil
-483 U Lightning Axe
 484 C Lightning Spear
-485 C Lightning Visionary
-486 U Living Lightning
 487 C Mad Prophet
-488 U Mad Ratter
-489 C Merchant of the Vale
-490 C Omen of the Forge
-491 U Orcish Vandal
-492 C Oread of Mountain's Blaze
 493 U Ore-Scale Guardian
-494 C Ornery Goblin
 495 R Pashalik Mons
 496 U Rage Forger
-497 U Rapacious Dragon
 498 U Ravenous Bloodseeker
-499 U Ravenous Intruder
 500 C Reckless Charge
 501 U Reckless Racer
 502 U Reckless Wurm
 503 C Renegade Tactics
 504 C Revolutionist
-505 U Rust Monster
-506 C Sarkhan's Rage
-507 U Sarkhan's Whelp
-508 C Scorching Dragonfire
 509 M Seasoned Pyromancer
-510 C Shivan Fire
 511 U Shiv's Embrace
-512 C Shock
 513 C Skophos Reaver
 514 U Slag Strider
-515 C Sparktongue Dragon
 516 C Spinehorn Minotaur
 517 R Spiteful Sliver
 518 U Spreading Insurrection
-519 C Storm Caller
-520 U Storm-Kiln Artist
 521 U Strike It Rich
 522 C Striking Sliver
-523 C Sure Strike
-524 C Thermo-Alchemist
-525 C Thrill of Possibility
 526 U Throes of Chaos
 527 R Thunderbreak Regent
-528 C Tormenting Voice
 529 C Unholy Heat
 530 C Viashino Lashclaw
-531 U Volcanic Dragon
-532 U Volley Veteran
-533 C Warlord's Fury
-534 C Weaselback Redcap
-535 U Young Pyromancer
-536 U You See a Pair of Goblins
 537 C Adaptive Snapjaw
 538 C Aetherstream Leopard
 539 R Aeve, Progenitor Ooze
-540 C Arbor Armament
-541 U Armorcraft Judge
 542 C Awaken the Bear
 543 R Ayula, Queen Among Bears
 544 C Bannerhide Krushok
 545 C Battering Krasis
 546 C Bear Cub
 547 U Bestial Menace
-548 U Biogenic Upgrade
-549 C Bloom Hulk
-550 R Bristling Hydra
-551 C Charge Through
 552 M Chatterfang, Squirrel General
 553 C Chatter of the Squirrel
 554 C Chatterstorm
 555 R Chitterspitter
-556 C Courage in Crisis
 557 C Crocanura
 558 C Deepwood Denizen
-559 U Destiny Spinner
-560 R Dragonsguard Elite
 561 C Duskshell Crawler
-562 U Dwynen's Elite
-563 C Elderleaf Mentor
-564 U Elven Bow
-565 U Enlarge
-566 R Esika's Chariot
-567 U Evolution Sage
 568 C Excavating Anurid
-569 U Exuberant Wolfbear
-570 C Ferocious Pup
-571 C Fierce Witchstalker
-572 U Flaxen Intruder
 573 C Funnel-Web Recluse
-574 U Ghirapur Guide
-575 C Gift of Growth
 576 C Glimmer Bairn
-577 C Gnarlid Colony
-578 R Goreclaw, Terror of Qal Sisma
-579 C Grizzled Outrider
 580 C Grizzly Bears
-581 C Guardian Gladewalker
 582 R Hardened Scales
 583 C Harrow
 584 U Herd Baloth
-585 C Highspire Infusion
-586 C Hunter's Edge
 587 U Hunting Pack
 588 U Incremental Growth
-589 U Inspiring Call
-590 U Invigorating Surge
-591 U Iridescent Hornbeetle
 592 C Jewel-Eyed Cobra
-593 C Jungleborn Pioneer
-594 C Kujar Seedsculptor
-595 C Lifecraft Cavalry
-596 U Littjara Glade-Warden
-597 C Llanowar Elves
 598 U Llanowar Tribe
-599 C Llanowar Visionary
-600 U Longtusk Cub
 601 U Manaweft Sliver
-602 R Marwyn, the Nurturer
-603 U Might of the Masses
 604 C Mother Bear
-605 U Mowu, Loyal Companion
 606 C Murasa Behemoth
 607 U Nantuko Cultivator
-608 U Nessian Hornbeetle
-609 C Nylea's Forerunner
-610 R Oran-Rief Ooze
-611 U Overcome
-612 C Owlbear
-613 C Pack's Favor
-614 U Paradise Druid
 615 R Parallel Lives
-616 U Peema Aether-Seer
-617 C Penumbra Bobcat
-618 C Pollenbright Druid
 619 C Predatory Sliver
 620 C Prey's Vengeance
-621 C Professor of Zoomancy
-622 C Riparian Tiger
-623 R Rishkar, Peema Renegade
 624 C Runeclaw Bear
-625 C Sabertooth Mauler
-626 C Sage of Shaila's Claim
 627 R Sanctum Weaver
-628 C Saproling Migration
-629 C Sauroform Hybrid
 630 C Savage Swipe
 631 U Scale Up
-632 C Scurrid Colony
 633 U Scurry Oak
-634 U Servant of the Conduit
 635 C Servant of the Scale
-636 C Setessan Skirmisher
-637 C Skola Grovedancer
 638 C Smell Fear
-639 C Snakeskin Veil
-640 U Song of Freyalise
-641 U Spore Swarm
 642 C Springbloom Druid
-643 U Sprouting Renewal
 644 R Squirrel Mob
 645 U Squirrel Sanctuary
 646 U Squirrel Sovereign
@@ -656,35 +311,19 @@ ScryfallCode=J21
 648 C Striped Bears
 649 R Sylvan Anthem
 650 C Tajuru Pathwarden
-651 U Taunting Arbormage
 652 U Tempered Sliver
-653 C Thriving Rhino
 654 U Timeless Witness
 655 U Tireless Provisioner
-656 C Titanic Brawl
-657 C Titanic Growth
-658 C Trufflesnout
 659 C Trumpeting Herd
 660 C Twin-Silk Spider
 661 U Ulvenwald Mysteries
 662 C Urban Daggertooth
-663 U Vastwood Fortification
 664 R Verdant Command
-665 C Vivien's Grizzly
 666 U Webweaver Changeling
-667 C Wildheart Invoker
-668 U Wild Onslaught
-669 U Wildwood Scourge
 670 C Winding Way
-671 U Woodland Champion
 672 U Wren's Run Hydra
-673 C Yavimaya Sapherd
-674 U Acolyte of Affliction
-675 C Aeromunculus
-676 C Applied Biomancy
 677 U Arcbound Shikari
 678 U Arcus Acolyte
-679 U Ascent of the Worthy
 680 C Breathless Knight
 681 U Bred for the Hunt
 682 C Captured by Lagacs
@@ -695,36 +334,24 @@ ScryfallCode=J21
 687 C Drey Keeper
 688 U Elusive Krasis
 689 U Etchings of the Chosen
-690 U Fall of the Impostor
 691 M The First Sliver
-692 U Glowspore Shaman
 693 C Goblin Anarchomancer
 694 U Good-Fortune Unicorn
 695 U Graceful Restoration
-696 U Improbable Alliance
 697 U Ingenious Infiltrator
-698 U Jungle Creeper
-699 U Justice Strike
-700 R Knight of Autumn
 701 U Lavabelly Sliver
 702 U Lazotep Chancellor
 703 R Lonis, Cryptozoologist
-704 R Lord of Extinction
 705 U Munitions Expert
 706 U Nimbus Swimmer
 707 R Priest of Fell Rites
 708 U Prophetic Titan
 709 U Rakdos Headliner
 710 R Reap the Past
-711 U Rip Apart
 712 U Rotwidow Pack
 713 U Ruination Rioter
 714 C Shambleshark
-715 U Sharktocrab
-716 R Simic Ascendancy
-717 U Skull Prophet
 718 U Soulherder
-719 U Spire Patrol
 720 R Sterling Grove
 721 C Storm God's Oracle
 722 R Sythis, Harvest's Hand
@@ -732,67 +359,26 @@ ScryfallCode=J21
 724 R Territorial Kavu
 725 U Thundering Djinn
 726 C Wavesifter
-727 U Loch Dragon
 728 U Ravenous Squirrel
-729 C Scuttlegator
 730 U Fast // Furious
-731 U Integrity // Intervention
-732 R Abandoned Sarcophagus
 733 U Altar of the Goyf
 734 C Amorphous Axe
 735 U Batterbone
 736 U Birthing Boughs
-737 U Bloodline Pretender
 738 C Bonded Construct
-739 C Chromatic Sphere
-740 C Cogworker's Puzzleknot
-741 U Foundry Inspector
-742 C Ichor Wellspring
-743 U Icy Manipulator
 744 C Implement of Combustion
-745 C Implement of Examination
-746 C Iron Bully
-747 C Lightning-Core Excavator
 748 U Monoskelion
 749 C Myr Enforcer
 750 C Myr Scrapling
-751 C Myr Sire
 752 R Nettlecyst
 753 C Ornithopter of Paradise
-754 C Prophetic Prism
 755 U Sanctuary Raptor
-756 R Scrap Trawler
-757 C Sparring Construct
 758 U Treasure Keeper
 759 C Universal Automaton
-760 C Weapon Rack
-761 U Witch's Oven
 762 R Zabaz, the Glimmerwasp
-763 C Barren Moor
-764 C Bloodfell Caves
-765 C Blossoming Sands
-766 C Dismal Backwater
-767 C Evolving Wilds
-768 C Forgotten Cave
-769 C Jungle Hollow
+763 C Ichor Wellspring
 770 C Khalni Garden
-771 C Lonely Sandbar
-772 C Rugged Highlands
-773 C Rupture Spire
-774 C Scoured Barrens
-775 C Secluded Steppe
 776 R Sliver Hive
-777 C Swiftwater Cliffs
-778 C Thornwood Falls
-779 C Tranquil Cove
-780 C Tranquil Thicket
-781 C Unknown Shores
-782 C Wind-Scarred Crag
-783 L Plains
-784 L Island
-785 L Swamp
-786 L Mountain
-787 L Forest
 
 [rebalanced]
 A438 U A-Dragon's Rage Channeler @Martina Fackova
