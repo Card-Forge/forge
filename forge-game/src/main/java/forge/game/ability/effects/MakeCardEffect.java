@@ -117,6 +117,9 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 if (sa.hasParam("FaceDown")) {
                     made.turnFaceDown(true);
                 }
+                if (sa.hasParam("Tapped")) {
+                    made.setTapped(true);
+                }
                 triggerList.put(ZoneType.None, made.getZone().getZoneType(), made);
                 madeCards.add(made);
                 if (sa.hasParam("RememberMade")) {
