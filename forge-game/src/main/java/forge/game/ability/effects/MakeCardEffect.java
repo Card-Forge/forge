@@ -95,6 +95,9 @@ public class MakeCardEffect extends SpellAbilityEffect {
                         game.getAction().moveTo(ZoneType.None, card, sa, moveParams);
                         cards.add(card);
                         toMake--;
+	                        if (sa.hasParam("Tapped")) {
+	                            card.setTapped(true);
+	                  }
                     }
                 }
             }
@@ -116,9 +119,6 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 }
                 if (sa.hasParam("FaceDown")) {
                     made.turnFaceDown(true);
-                }
-                if (sa.hasParam("Tapped")) {
-                    made.setTapped(true);
                 }
                 triggerList.put(ZoneType.None, made.getZone().getZoneType(), made);
                 madeCards.add(made);
