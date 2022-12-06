@@ -782,17 +782,6 @@ ScryfallCode=J21
 774 C Scoured Barrens
 775 C Secluded Steppe
 776 R Sliver Hive
-777 C Swiftwater Cliffs
-778 C Thornwood Falls
-779 C Tranquil Cove
-780 C Tranquil Thicket
-781 C Unknown Shores
-782 C Wind-Scarred Crag
-783 L Plains
-784 L Island
-785 L Swamp
-786 L Mountain
-787 L Forest
 
 [rebalanced]
 A438 U A-Dragon's Rage Channeler @Martina Fackova
