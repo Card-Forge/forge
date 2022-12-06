@@ -27,8 +27,8 @@ ScryfallCode=J21
 19 R Subversive Acolyte @Darren Tan
 20 R Managorger Phoenix @Brian Valeza
 21 C Reckless Ringleader @Brian Valeza
-22 C Sarkhan's Scorn @Daarken
-23 M Sarkhan, Wanderer to Shiv @Grzegorz Rutkowski
+22 M Sarkhan, Wanderer to Shiv @Grzegorz Rutkowski
+23 C Sarkhan's Scorn @Daarken
 24 C Scion of Shiv @Grzegorz Rutkowski
 25 U Static Discharge @Liiga Smilshkalne
 26 M Freyalise, Skyshroud Partisan @Daarken
