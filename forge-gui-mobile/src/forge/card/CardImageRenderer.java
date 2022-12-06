@@ -17,6 +17,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.Align;
 import com.google.common.collect.ImmutableList;
 
+import forge.CachedCardImage;
 import forge.Forge;
 import forge.Graphics;
 import forge.card.CardRenderer.CardStackPosition;
