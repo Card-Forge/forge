@@ -712,20 +712,22 @@ public class CardImageRenderer {
             x += pieceWidths[i];
         }
     }
+    static class CachedCardImageRenderer extends CachedCardImage {
 
+        public CachedCardImageRenderer(String key) {
+            super(key);
+        }
+
+        @Override
+        public void onImageFetched() {
+            ImageCache.clear();
+        }
+    }
     public static void drawZoom(Graphics g, CardView card, GameView gameView, boolean altState, float x, float y, float w, float h, float dispW, float dispH, boolean isCurrentCard) {
         boolean canshow = MatchController.instance.mayView(card);
-        Texture image = null;
-        try {
-            image = ImageCache.getImage(card.getState(altState).getImageKey(), true);
-        } catch (Exception ex) {
-            //System.err.println(card.toString()+" : " +ex.getMessage());
-            //TODO: don't know why this is needed, needs further investigation...
-            if (!card.hasAlternateState()) {
-                altState = false;
-                image = ImageCache.getImage(card.getState(altState).getImageKey(), true);
-            }
-        }
+        String key = card.getState(altState).getImageKey();
+        Texture image = new CachedCardImageRenderer(key).getImage();
+
         FImage sleeves = MatchController.getPlayerSleeve(card.getOwner());
         if (image == null) { //draw details if can't draw zoom
             drawDetails(g, card, gameView, altState, x, y, w, h);
