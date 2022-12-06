@@ -6,14 +6,26 @@ Type=Online
 ScryfallCode=YBRO
 
 [cards]
-0 M Crucias, Titan of the Waves @Filipe Pagliuso
-0 U Lonely End @Piotr Foksowicz
-0 U Argivian Welcome @Paolo Parente
-0 R Rusko, Clockmaker @Samuel Perin
-0 R Fallaji Antiquarian @Ernanda Souza
-0 R Raddic, Tal Zealot @Camille Alquier
-0 R Yotian Courier @Monztre
-0 R Penregon Besieged @Artur Treffner
-0 R Tomakul Phoenix @Monztre
-0 M Richlau, Headmaster @Yangtian Li
-0 M Forgefire Automaton @Diego Gisbert
+1 R By Elspeth's Command @Carlos Palma Cruchaga
+2 R Norn's Disassembly @Camille Alquier
+3 U Tawnos Endures @Steven Belledin
+4 U Piece It Together @Peter Polach
+5 R Warzone Duplicator @Daniel Ljunggren
+6 M Forgefire Automaton @Diego Gisbert
+7 R Gixian Recycler @Michele Giorgi
+8 U Lonely End @Piotr Dura
+9 R Penregon Besieged @Artur Treffner
+10 R Fallaji Antiquarian @Ernada Souza
+11 M Kayla's Kindling @Ernada Souza
+12 R Tomakul Phoenix @Monztre
+13 R Argothian Uprooting @Johan Grenier
+14 R Foundry Groundbreaker @Paolo Parente
+15 U Sylvan Smite @Artur Nakhodkin
+16 U Argivian Welcome @Paolo Parente
+17 M Crucias, Titan of the Waves @Filipe Pagliuso
+18 R Great Desert Hellion @Uriah Voth
+19 M Jarsyl, Dark Age Scion @Chris Rallis
+20 R Raddic, Tal Zealot @Camille Alquier
+21 M Richlau, Headmaster @Yangtian Li
+22 R Rusko, Clockmaker @Samuel Perin
+23 R Yotian Courier @Monztre
