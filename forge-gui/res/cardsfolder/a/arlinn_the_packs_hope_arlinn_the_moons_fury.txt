@@ -5,9 +5,8 @@ Loyalty:4
 K:Daybound
 A:AB$ Effect | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Duration$ UntilYourNextTurn | StaticAbilities$ WithFlash | ReplacementEffects$ ExtraETBCounter | SpellDescription$ Until your next turn, you may cast creature spells as though they had flash, and each creature you control enters the battlefield with an additional +1/+1 counter on it.
 SVar:WithFlash:Mode$ CastWithFlash | ValidCard$ Creature | ValidSA$ Spell | EffectZone$ Command | Caster$ You | Description$ Until your next turn, you may cast creature spells as though they had flash, and each creature you control enters the battlefield with an additional +1/+1 counter on it.
-SVar:ExtraETBCounter:Event$ Moved | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | ReplaceWith$ AddExtraCounter | Secondary$ True | Description$ Until your next turn, you may cast creature spells as though they had flash, and each creature you control enters the battlefield with an additional +1/+1 counter on it.
-SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToBattlefield
-SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+SVar:ExtraETBCounter:Event$ Moved | ReplacementResult$ Updated | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | ReplaceWith$ AddExtraCounter | Secondary$ True | Description$ Until your next turn, you may cast creature spells as though they had flash, and each creature you control enters the battlefield with an additional +1/+1 counter on it.
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ Token | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | TokenAmount$ 2 | TokenScript$ g_2_2_wolf | SpellDescription$ Create two 2/2 green Wolf creature tokens.
 DeckHas:Ability$Token|Counters & Type$Wolf
 AlternateMode:DoubleFaced

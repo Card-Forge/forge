@@ -2,7 +2,7 @@ Name:Justice
 ManaCost:2 W W
 Types:Enchantment
 K:UpkeepCost:W W
-T:Mode$ DamageDealtOnce | ValidSource$ Instant.Red,Sorcery.Red,Creature.Red | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a red creature or spell deals damage, CARDNAME deals that much damage to that creature's or spell's controller.
+T:Mode$ DamageDealtOnce | ValidSource$ Instant.Red,Sorcery.Red,Creature.Red+inZoneBattlefield | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever a red creature or spell deals damage, CARDNAME deals that much damage to that creature's or spell's controller.
 SVar:TrigDamage:DB$ DealDamage | Defined$ TriggeredSourceController | NumDmg$ X
 SVar:X:TriggerCount$DamageAmount
 AI:RemoveDeck:Random

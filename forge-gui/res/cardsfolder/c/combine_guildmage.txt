@@ -3,8 +3,7 @@ ManaCost:G U
 Types:Creature Merfolk Wizard
 PT:2/2
 A:AB$ Effect | Cost$ 1 G T | ReplacementEffects$ ExtraETBCounter | SpellDescription$ This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.
-SVar:ExtraETBCounter:Event$ Moved | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | ReplaceWith$ AddExtraCounter | Description$ This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.
-SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToBattlefield
-SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+SVar:ExtraETBCounter:Event$ Moved | ReplacementResult$ Updated | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | ReplaceWith$ AddExtraCounter | Description$ This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.
+SVar:AddExtraCounter:DB$ PutCounter | ETB$ True | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1
 A:AB$ MoveCounter | Cost$ 1 U T | ValidTgts$ Creature.YouCtrl | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select target creatures to move +1/+1 counter | CounterType$ P1P1 | CounterNum$ 1 | StackDescription$ SpellDescription | SpellDescription$ Move a +1/+1 counter from target creature you control onto another target creature you control.
 Oracle:{1}{G}, {T}: This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.\n{1}{U}, {T}: Move a +1/+1 counter from target creature you control onto another target creature you control.
