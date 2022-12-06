@@ -3,8 +3,8 @@ ManaCost:2 R
 Types:Legendary Creature Devil Advisor
 PT:2/2
 K:Flying
-T:Mode$ DamageDoneOnce | Execute$ TrigCounter | ValidTarget$ You | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a source you control deals damage to you, put that many +1/+1 counters on CARDNAME. 
-SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterAmount$ Y | CounterType$ P1P1
+T:Mode$ DamageDone | Execute$ TrigCounter | ValidTarget$ You | ValidSource$ Card.YouCtrl,Emblem.YouCtrl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a source you control deals damage to you, put that many +1/+1 counters on CARDNAME. 
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterNum$ Y | CounterType$ P1P1
 SVar:Y:TriggerCount$DamageAmount
 A:AB$ DealDamage | Cost$ 1 R T SubCounter<X/P1P1/NICKNAME> | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ X | SpellDescription$ It deals X damage to any target.
 SVar:X:Count$xPaid
