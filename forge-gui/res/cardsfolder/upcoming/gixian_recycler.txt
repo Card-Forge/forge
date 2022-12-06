@@ -4,8 +4,9 @@ Types:Artifact Creature Phyrexian Horror
 PT:3/1
 K:Unearth:1 B
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigConjure | TriggerDescription$ When CARDNAME dies or is put into your graveyard from your hand or library, conjure a card named Gixian Recycler into your graveyard.
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Graveyard | Destination$ Hand,Library | Execute$ TrigConjure | Secondary$ True | TriggerDescription$ When CARDNAME dies or is put into your graveyard from your hand or library, conjure a card named Gixian Recycler into your graveyard.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Hand,Library | Destination$ Graveyard  | Execute$ TrigConjure | Secondary$ True | TriggerDescription$ When CARDNAME dies or is put into your graveyard from your hand or library, conjure a card named Gixian Recycler into your graveyard.
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Gixian Recycler | Amount$ 1 | Zone$ Graveyard
+SVar:DiscardMe:2
 DeckHas:Ability$Graveyard
 DeckHints:Color$Black
 Oracle:When Gixian Recycler dies or is put into your graveyard from your hand or library, conjure a card named Gixian Recycler into your graveyard.\nUnearth {1}{B}
