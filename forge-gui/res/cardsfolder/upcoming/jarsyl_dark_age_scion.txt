@@ -1,0 +1,14 @@
+Name:Jarsyl, Dark Age Scion
+ManaCost:1 R G
+Types:Legendary Creature Human Wizard
+PT:3/3
+K:Starting intensity:1
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, you may cast a spell with mana value equal to CARDNAME's intensity from your graveyard without paying its mana cost. If you do, perpetually increase NICKNAME's intensity by 1.
+SVar:TrigChoose:DB$ ChooseCard | ChoiceZone$ Graveyard | Choices$ Card.YouCtrl+cmcEQX | ChoiceTitle$ Choose target spell with mana value equal to Jarsyl, Dark Age Scion's intensity | MinAmount$ 1 | Amount$ 1 | SubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ ChosenCard  | ValidSA$ Spell | WithoutManaCost$ True | Optional$ True | AILogic$ ReplaySpell | SubAbility$ DBIncrease | RememberPlayed$ True 
+SVar:DBIncrease:DB$ Intensify | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:X:Count$Intensity
+DeckHas:Ability$Graveyard
+DeckHints:Ability$Mill|Graveyard
+Oracle:Starting intensity 1\nAt the beginning of combat on your turn, you may cast a spell with mana value equal to Jarsyl, Dark Age Scion's intensity from your graveyard without paying its mana cost. If you do, perpetually increase Jarsyl's intensity by 1.

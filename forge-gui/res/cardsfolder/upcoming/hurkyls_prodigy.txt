@@ -1,0 +1,14 @@
+Name:Hurkyl’s Prodigy
+ManaCost:2 U
+Types:Creature Human Soldier
+PT:1/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:TrigToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigUnblockable | TriggerDescription$ Whenever CARDNAME attacks, you may pay {3}. If you go, Hurkyl's Prodigy can't be blocked this turn and it perpetually gets +2/+0. 
+SVar:TrigUnblockable:AB$ Effect | Cost$ 3 | StaticAbilities$ Unblockable | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualPump | Duration$ Permanent | Name$ Hurkyl’s Prodigy's Perpetual Effect |
+SVar:Unblockable:Mode$ CantBlockBy | ValidAttacker$ Creature.Self | Description$ This creature can't be blocked.
+SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.EffectSource | AddPower$ 2 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ EFFECTSOURCE perpetually gets +2/+0.
+SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Token & Type$Artifact
+Oracle:When Hurkyl's Prodigy enter the battlefield, create a tapped Powerstone token.\nWhenever Hurkyl's Prodigy attacks, you may pay {3}. If you go, Hurkyl's Prodigy can't be blocked this turn and it perpetually gets +2/+0. 
