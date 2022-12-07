@@ -1,0 +1,10 @@
+Name:Piece It Together
+ManaCost:U
+Types:Sorcery
+K:Starting intensity:1
+A:SP$ Branch | BranchConditionSVar$ X | BranchConditionSVarCompare$ EQ4 | TrueSubAbility$ DBExtraTurn | FalseSubAbility$ DBDraw | SpellDescription$ Draw a card. If CARDNAME's intensity is 4, instead take an extra turn after this one.Perpetually increase CARDNAME's intensity and the intensity of cards named Piece It Together in your graveyard, hand, and library by 1.
+SVar:DBDraw:DB$ Draw | NumCards$ 1  | SubAbility$ DBIntensify
+SVar:DBExtraTurn:DB$ AddTurn | NumTurns$ 1 | SubAbility$ DBIntensify
+SVar:DBIntensify:DB$ Intensify | AllDefined$ Card.Self,Card.inZoneGraveyard+namedPiece It Together+YouOwn,Card.inZoneHand+namedPiece It Together+YouOwn,Card.inZoneExile+namedPiece It Together+YouOwn
+SVar:X:Count$Intensity
+Oracle:Starting intensity 1\nDraw a card. If Piece It Together's intensity is 4, instead take an extra turn after this one.\nPerpetually increase Piece It Together's intensity and the intensity of cards named Piece It Together in your graveyard, hand, and library by 1.

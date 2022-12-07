@@ -1,0 +1,12 @@
+Name:Tawnos Endures
+ManaCost:W
+Types:Instant
+A:SP$ ChangeZone | ValidTgts$ Creature | Origin$ Battlefield | Destination$ Exile | RememberLKI$ True | SubAbility$ DBEffect | SpellDescription$ Exile target creature. It gains "At the beginning of your upkeep, if this card is exiled, it perpetually gets +1/+1, then you may put it onto the battlefield."
+SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | Duration$ Permanent | StaticAbilities$ PerpetualEffect | Name$ Tawnos Endures's Perpetual Effect | SubAbility$ DBCleanup
+SVar:PerpetualEffect:Mode$ Continuous | Affected$ Card.IsRemembered | AddTrigger$ UpkeepTrig | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ At the beginning of your upkeep, if this card is exiled, it perpetually gets +1/+1, then you may put it onto the battlefield.
+SVar:UpkeepTrig:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Exile | Execute$ TrigPerpetual | ValidPlayer$ You | TriggerDescription$ At the beginning of your upkeep, if this card is exiled, it perpetually gets +1/+1, then you may put it onto the battlefield.
+SVar:TrigPerpetual:DB$ Effect | StaticAbilities$ PerpetualBuff | Name$ Tawnos Endures's Perpetual Effect | Duration$ Permanent | SubAbility$ DBReturn
+SVar:DBReturn:DB$ ChangeZone | Defined$ Self | Origin$ Exile | Destination$ Battlefield | Optional$ True
+SVar:PerpetualBuff:Mode$ Continuous | Affected$ Card.EffectSource | AddPower$ +1 | AddToughness$ +1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets +1/+1
+SVar:DBCleanup:DB$ Cleanup | ClearChosenCard$ True
+Oracle:Exile target creature. It gains "At the beginning of your upkeep, if this card is exiled, it perpetually gets +1/+1, then you may put it onto the battlefield."
