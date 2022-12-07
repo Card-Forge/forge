@@ -1,7 +1,6 @@
 package forge.game.ability.effects;
 
 import forge.StaticData;
-import forge.card.ICardFace;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
