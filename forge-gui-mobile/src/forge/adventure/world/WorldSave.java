@@ -79,6 +79,7 @@ public class WorldSave   {
                     System.err.println("Generating New World");
                     currentSave.world.generateNew(0);
                 }
+                currentSave.pointOfInterestChanges.clear();
 
                 currentSave.onLoadList.emit();
 
