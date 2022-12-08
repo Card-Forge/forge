@@ -475,14 +475,13 @@ public abstract class SpellAbilityEffect {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Card eff = new Card(game.nextCardId(), game);
-        //this should support localization and check if using CJK fonts...
         String finalname = name.replaceAll("\\([^()]*\\)", "");
         if (finalname.contains(" 's Effect")) {
             finalname = finalname.replace( " 's Effect", "");
-            finalname += finalname.endsWith("s") ? "' Effect" : "'s Effect";
+            finalname = CardTranslation.getTranslatedName(finalname) +"\n" + Localizer.getInstance().getMessage("lblEffect");
         } else if (finalname.contains("'s Effect")) {
             finalname = finalname.replace( "'s Effect", "");
-            finalname += finalname.endsWith("s") ? "' Effect" : "'s Effect";
+            finalname = CardTranslation.getTranslatedName(finalname) +"\n" + Localizer.getInstance().getMessage("lblEffect");
         }
         eff.setTimestamp(game.getNextTimestamp());
         eff.setName(finalname);
