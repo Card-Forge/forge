@@ -3,5 +3,5 @@ ManaCost:R
 Types:Instant
 A:SP$ DealDamage | ValidTgts$ Creature,Player,Planeswalker | TgtPrompt$ Select any target | NumDmg$ 2 | SubAbility$ DBEffect | SpellDescription$ Melt Through deals 2 damage to any target. If it's a creature, it perpetually gains "As long as this creature is on the battlefield, damage isn't removed from it during cleanup step."
 SVar:DBEffect:DB$ Effect | ConditionDefined$ Targeted | ConditionPresent$ Creature | RememberObjects$ Targeted | StaticAbilities$ PerpetualEffect | Name$ Melt Through's Perpetual Effect | Duration$ Permanent
-SVar:PerpetualEffect:Mode$ Continuous | Affected$ Card.IsRemembered | PresentZone$ Battlefield | AddHiddenKeyword$ Damage isn't removed from CARDNAME during cleanup steps. | Description$ As long as this creature is on the battlefield, damage isn't removed from it during cleanup step
+SVar:PerpetualEffect:Mode$ Continuous | Affected$ Card.IsRemembered | AddHiddenKeyword$ Damage isn't removed from CARDNAME during cleanup steps. | Description$ As long as this creature is on the battlefield, damage isn't removed from it during cleanup step
 Oracle:Melt Through deals 2 damage to any target. If it's a creature, it perpetually gains "As long as this creature is on the battlefield, damage isn't removed from it during cleanup step."
