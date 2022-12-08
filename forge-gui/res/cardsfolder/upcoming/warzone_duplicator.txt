@@ -3,7 +3,7 @@ ManaCost:6
 Types:Artifact Creature Construct
 PT:6/6
 K:Prototype:3 U:3:3
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return target creature an opponentcontrols with power less than CARDNAME's power to it's owner's hand. If that creature wasn't a token, conjure a duplicate of it into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell".  
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When CARDNAME enters the battlefield, return target creature an opponentcontrols with power less than CARDNAME's power to it's owner's hand. If that creature wasn't a token, conjure a duplicate of it into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
 SVar:TrigReturn:DB$ ChangeZone | ValidTgts$ Creature.OppCtrl+powerLTX | Origin$ Battlefield | Destination$ Hand | TgtPrompt$ Choose target creature an opponent controls with power less than Warzone Duplicator's power. | SubAbility$ DBConjure
 SVar:DBConjure:DB$ MakeCard | Conjure$ True | ConditionDefined$ Targeted | ConditionPresent$ Card.nonToken | DefinedName$ Targeted | Zone$ Hand | RememberMade$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | RememberObjects$ Remembered | StaticAbilities$ PerpetualAbility | Duration$ Permanent | Name$ Warzone Duplicator's Perpetual Effect | SubAbility$ DBCleanup | SpellDescription$ It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."
@@ -12,4 +12,4 @@ SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | Aff
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggeredCard$CardPower
 DeckHints:Color$Blue
-Oracle:Prototype {3}{U} — 3/3 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\n\nWhen Warzone Duplicator enters the battlefield, return target creature an opponent controls with power less than Warzone Duplicator's power to it's owner's hand. If that creature wasn't a token, conjure a duplicate of it into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell".  
+Oracle:Prototype {3}{U} — 3/3 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\n\nWhen Warzone Duplicator enters the battlefield, return target creature an opponent controls with power less than Warzone Duplicator's power to it's owner's hand. If that creature wasn't a token, conjure a duplicate of it into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell." 
