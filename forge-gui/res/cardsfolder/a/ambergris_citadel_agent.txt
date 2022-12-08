@@ -4,10 +4,11 @@ Types:Legendary Creature Dwarf Cleric
 PT:3/2
 K:Haste
 K:Specialize:3
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards.
-SVar:TrigDiscard:DB$ Discard | Optional$ True | Mode$ Hand | Defined$ You | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards.
+SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 2
 SVar:HasAttackEffect:TRUE
+DeckHas:Ability$Discard
 DeckHints:Ability$Discard
 Oracle:Haste\nSpecialize {3}\nWhenever Ambergris, Citadel Agent attacks, you may discard your hand and draw two cards.
 AlternateMode:Specialize
@@ -19,13 +20,10 @@ ManaCost:2 R W
 Types:Legendary Creature Dwarf Cleric
 PT:4/3
 K:Haste
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards. If you do, other creatures you control get +X/+X until end of turn, where X is the number of cards you've discarded this turn.
-SVar:TrigDiscard:DB$ Discard | Optional$ True |  Mode$ Hand | Defined$ You | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBPump
-SVar:DBPump:DB$ PumpAll | ValidCards$ Creature.Other+YouCtrl | NumAtt$ X | NumDef$ X
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards. If you do, other creatures you control get +X/+X until end of turn, where X is the number of cards you've discarded this turn.
+SVar:TrigPump:AB$ PumpAll | Cost$ Discard<1/Hand> Draw<2/You> | ValidCards$ Creature.Other+YouCtrl | NumAtt$ X | NumDef$ X
 SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
 SVar:HasAttackEffect:TRUE
-DeckHints:Ability$Discard
 Oracle:Haste\nWhenever Ambergris, Agent of Law attacks, you may discard your hand and draw two cards. If you do, other creatures you control get +X/+X until end of turn, where X is the number of cards you've discarded this turn.
 
 SPECIALIZE:BLUE
@@ -35,12 +33,11 @@ ManaCost:2 U R
 Types:Legendary Creature Dwarf Cleric
 PT:4/3
 K:Haste
-T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw three cards
-SVar:TrigDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw three cards.
+SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 3
 SVar:HasAttackEffect:TRUE
-DeckHints:Ability$Discard
-Oracle:Haste\nWhenever Ambergris, Agent of Law Progress attacks, you may discard your hand and draw three cards. 
+Oracle:Haste\nWhenever Ambergris, Agent of Progress attacks, you may discard your hand and draw three cards.
 
 SPECIALIZE:BLACK
 
@@ -49,13 +46,13 @@ ManaCost:2 B R
 Types:Legendary Creature Dwarf Cleric
 PT:4/3
 K:Haste
-T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ ImmediateTrigger | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards. When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the number of cards you've discarded this turn.
-SVar:ImmediateTrigger:AB$ ImmediateTrigger | Cost$ Discard<1/Hand> | Execute$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBPump
-SVar:DBPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | NumAtt$ -X | NumDef$ -X | IsCurse$ True
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards. When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the number of cards you've discarded this turn.
+SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigPump | TriggerDescription$ When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the number of cards you've discarded this turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | NumAtt$ -X | NumDef$ -X | IsCurse$ True
 SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
 SVar:HasAttackEffect:TRUE
-DeckHints:Ability$Discard
 Oracle:Haste\nWhenever Ambergris, Agent of Law Tyranny attacks, you may discard your hand and draw two cards. When you do, target creature an opponent controls gets -X/-X until end of turn, where X is the number of cards you've discarded this turn.
 
 SPECIALIZE:RED
@@ -65,13 +62,10 @@ ManaCost:2 R R
 Types:Legendary Creature Dwarf Cleric
 PT:4/3
 K:Haste
-T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards. If you do, NICKNAME deals X damage to each opponent, where X is the number of cards you've discarded this turn.
-SVar:TrigDiscard:DB$ Discard | Mode$ Hand | Defined$ You | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DamageAll | NumDmg$ X | ValidPlayers$ Player.Opponent
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards. If you do, NICKNAME deals X damage to each opponent, where X is the number of cards you've discarded this turn.
+SVar:TrigDamage:AB$ DamageAll | Cost$ Discard<1/Hand> Draw<2/You> | NumDmg$ X | ValidPlayers$ Opponent
 SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
 SVar:HasAttackEffect:TRUE
-DeckHints:Ability$Discard
 Oracle:Haste\nWhenever Ambergris, Agent of Destruction attacks, you may discard your hand and draw two cards. If you do, NICKNAME deals X damage to each opponent, where X is the number of cards you've discarded this turn.
 
 SPECIALIZE:GREEN
@@ -81,12 +75,12 @@ ManaCost:2 G R
 Types:Legendary Creature Dwarf Cleric
 PT:4/3
 K:Haste
-T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ ImmediateTrigger | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards. When you do, put X +1/+1 counters on another target creature you control, where X is the number of cards you've discarded this turn.
-SVar:ImmediateTrigger:AB$ ImmediateTrigger | Cost$ Discard<1/Hand> | Execute$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2 | SubAbility$ DBCounters
-SVar:DBCounters:DB$ PutCounter | ValidTgts$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ X
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may discard your hand and draw two cards. When you do, put X +1/+1 counters on another target creature you control, where X is the number of cards you've discarded this turn.
+SVar:TrigDiscard:DB$ Discard | Mode$ Hand | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | SubAbility$ DBImmediateTrigger
+SVar:DBImmediateTrigger:DB$ ImmediateTrigger | Execute$ TrigPutCounter | TriggerDescription$ When you do, put X +1/+1 counters on another target creature you control, where X is the number of cards you've discarded this turn.
+SVar:TrigPutCounter:DB$ PutCounter | ValidTgts$ Creature.YouCtrl+Other | TgtPrompt$ Select another target creature you control | CounterType$ P1P1 | CounterNum$ X
 SVar:X:PlayerCountPropertyYou$CardsDiscardedThisTurn
 SVar:HasAttackEffect:TRUE
 DeckHas:Ability$Counters
-DeckHints:Ability$Discard
 Oracle:Haste\nWhenever Ambergris, Agent of Balance attacks, you may discard your hand and draw two cards. When you do, put X +1/+1 counters on another target creature you control, where X is the number of cards you've discarded this turn.
