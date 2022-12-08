@@ -49,7 +49,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
     // Get Card From Editions Test fixtures
     protected final String originalArtShivanDragonEdition = "LEA";
     protected final String latestArtShivanDragonEdition = "30A";
-    protected final String latestArtShivanDragonEditionNoPromo = "M20";
+    protected final String latestArtShivanDragonEditionNoPromo = "DMR";
 
     protected final String originalArtLightningDragonEdition = "USG";
     protected final String originalArtLightningDragonEditionNoPromo = "USG";
