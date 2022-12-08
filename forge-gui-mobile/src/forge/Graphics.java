@@ -53,6 +53,7 @@ public class Graphics {
     private final ShaderProgram shaderRoundedRect = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragRoundedRect);
     private final ShaderProgram shaderNoiseFade = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragNoiseFade);
     private final ShaderProgram shaderPortal = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPortal);
+    private final ShaderProgram shaderPixelateSimple = new ShaderProgram(Shaders.vertPixelateShader, Shaders.fragPixelateSimple);
 
     private Texture dummyTexture = null;
 
