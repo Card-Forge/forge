@@ -338,23 +338,23 @@ ScryfallCode=SCD
 330 U Tranquil Expanse @Cliff Childs
 331 U Urborg Volcano @Tony Szczudlo
 332 U Vitu-Ghazi, the City-Tree @Martina Pilcerova
-333 C Plains @Alayna Danner
-334 C Plains @Titus Lunter
-335 C Plains @James Paick
-336 C Plains @Richard Wright
-337 C Island @Alayna Danner
-338 C Island @Jonas De Ro
-339 C Island @Adam Paquette
-340 C Island @Eytan Zana
-341 C Swamp @Jonas De Ro
-342 C Swamp @Piotr Dura
-343 C Swamp @Jung Park
-344 C Swamp @Mark Poole
-345 C Mountain @Sam Burley
-346 C Mountain @Florian de Gesincourt
-347 C Mountain @Titus Lunter
-348 C Mountain @Titus Lunter
-349 C Forest @Alayna Danner
-350 C Forest @Yeong-Hao Han
-351 C Forest @Titus Lunter
-352 C Forest @Titus Lunter
+333 L Plains @Alayna Danner
+334 L Plains @Titus Lunter
+335 L Plains @James Paick
+336 L Plains @Richard Wright
+337 L Island @Alayna Danner
+338 L Island @Jonas De Ro
+339 L Island @Adam Paquette
+340 L Island @Eytan Zana
+341 L Swamp @Jonas De Ro
+342 L Swamp @Piotr Dura
+343 L Swamp @Jung Park
+344 L Swamp @Mark Poole
+345 L Mountain @Sam Burley
+346 L Mountain @Florian de Gesincourt
+347 L Mountain @Titus Lunter
+348 L Mountain @Titus Lunter
+349 L Forest @Alayna Danner
+350 L Forest @Yeong-Hao Han
+351 L Forest @Titus Lunter
+352 L Forest @Titus Lunter

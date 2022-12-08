@@ -21,7 +21,7 @@ ScryfallCode=DMR
 11 C Kjeldoran Gargoyle @Marcelo Vignali
 12 R Lieutenant Kirtar @Paolo Parente
 13 M Lyra Dawnbringer @Chris Rahn
-14 U Mesa Enchantress @Chris Rahn
+14 U Mesa Enchantress @Randy Gallegos
 15 C Momentary Blink @Anthony S. Waters
 16 C Mystic Zealot @Paolo Parente
 17 C Nomad Decoy @Pete Venters
@@ -138,7 +138,7 @@ ScryfallCode=DMR
 128 C Lightning Reflexes @Slawomir Maniak
 129 U Lightning Rift @Eric Peterson
 130 C Macetail Hystrodon @Daren Bader
-131 C Mogg War Marshal @Wayne England
+131 C Mogg War Marshal @Jesper Ejsing
 132 R Overmaster @Chris Seaman
 133 R Pashalik Mons @Dave Kendall
 134 C Ridgetop Raptor @Daren Bader
@@ -146,7 +146,7 @@ ScryfallCode=DMR
 136 R Siege-Gang Commander @Aaron Miller
 137 C Skirk Prospector @Slawomir Maniak
 138 U Slice and Dice @Jeremy Wilson
-139 R Sneak Attack @Jerry Tiritilli
+139 M Sneak Attack @Jerry Tiritilli
 140 C Solar Blast @Greg Staples
 141 C Spark Spray @Pete Venters
 142 U Storm Entity @Lucio Parrillo
@@ -220,9 +220,9 @@ ScryfallCode=DMR
 210 U Assault // Battery @Ben Thompson
 211 U Wax // Wane @Ben Thompson
 212 U Order // Chaos @Tim Hildebrandt
-213 U Illusion // Reality @John Avon
-214 U Night // Day @Christopher Moeller
-215 U Fire // Ice @David Martin
+213 U Illusion // Reality @John Avon & David Martin
+214 U Night // Day @Christopher Moeller & Anthony S. Waters
+215 U Fire // Ice @David Martin & Franz Vohwinkel
 216 U Life // Death @Ryan Barger
 217 R Crawlspace @Zoltan Boros
 218 R Cryptic Gateway @David Martin
@@ -274,7 +274,7 @@ ScryfallCode=DMR
 264 R Glory @Donato Giancola
 265 R Lieutenant Kirtar @Paolo Parente
 266 M Lyra Dawnbringer @Chris Rahn
-267 U Mesa Enchantress @Chris Rahn
+267 U Mesa Enchantress @Randy Gallegos
 268 C Momentary Blink @Anthony S. Waters
 269 C Renewed Faith @Steve Argyle
 270 C Savannah Lions @Winona Nelson
@@ -289,11 +289,11 @@ ScryfallCode=DMR
 279 R Wrath of God @Kev Walker
 280 R Arcanis the Omnipotent @Justin Sweet
 281 C Counterspell @Zack Stella
-282 U Denizen of the Deep @Jeff Miracola
-283 M Fact or Fiction @Anna Christenson
+282 R Denizen of the Deep @Anson Maddocks
+283 U Fact or Fiction @Anna Christenson
 284 M Force of Will @Donato Giancola
-285 U Frantic Search @Mitchell Malloy
-286 R High Tide @Marc Simonetti
+285 C Frantic Search @Mitchell Malloy
+286 U High Tide @Marc Simonetti
 287 C Impulse @Sam Guay
 288 R Mystic Remora @Jesper Ejsing
 289 R Mystical Tutor @Lindsey Look
@@ -333,12 +333,12 @@ ScryfallCode=DMR
 323 C Goblin Matron @Jesper Ejsing
 324 R Grim Lavamancer @Michael Sutfin
 325 M Last Chance @Joshua Raphael
-326 C Mogg War Marshal @Wayne England
+326 C Mogg War Marshal @Jesper Ejsing
 327 R Overmaster @Chris Seaman
 328 R Pashalik Mons @Dave Kendall
 329 R Shivan Dragon @Donato Giancola
 330 R Siege-Gang Commander @Aaron Miller
-331 R Sneak Attack @Jerry Tiritilli
+331 M Sneak Attack @Jerry Tiritilli
 332 R Sulfuric Vortex @Greg Staples
 333 U Valduk, Keeper of the Flame @Victor Adame Minguez
 334 M Worldgorger Dragon @Nestor Ossandon Leal
@@ -352,7 +352,7 @@ ScryfallCode=DMR
 342 U Invigorating Boon @Sam Guay
 343 R Jolrael, Mwonvuli Recluse @Izzy
 344 M Kamahl, Fist of Krosa @Matthew D. Wilson
-345 C Lull @Julie Dillon
+345 C Lull @Marta Nael
 346 U Nature's Lore @Julie Dillon
 347 M Nut Collector @Jesper Ejsing
 348 R Saproling Symbiosis @Ciruelo
@@ -409,16 +409,16 @@ ScryfallCode=DMR
 399 U Mishra's Factory @Scott Chou
 400 R Sulfur Falls @Cliff Childs
 401 R Woodland Cemetery @Christine Choi
-402 C Plains @John Avon
-403 C Plains @Eric Peterson
-404 C Island @Mark Poole
-405 C Island @Richard Wright
-406 C Swamp @Titus Lunter
-407 C Swamp @Romas Kukalis
-408 C Mountain @Rob Alexander
-409 C Mountain @John Avon
-410 C Forest @John Avon
-411 C Forest @Anthony S. Waters
+402 L Plains @John Avon
+403 L Plains @Eric Peterson
+404 L Island @Mark Poole
+405 L Island @Richard Wright
+406 L Swamp @Titus Lunter
+407 L Swamp @Romas Kukalis
+408 L Mountain @Rob Alexander
+409 L Mountain @John Avon
+410 L Forest @John Avon
+411 L Forest @Anthony S. Waters
 412 R Enlightened Tutor @Richard Kane Ferguson
 413 M Lyra Dawnbringer @Donato Giancola
 414 M Test of Endurance @Carl Critchlow
@@ -465,3 +465,19 @@ ScryfallCode=DMR
 455 R Gemstone Mine @Mark Poole
 456 R Maze of Ith @Mark Tedin
 457 R Counterspell @Mark Poole
+
+[tokens]
+b_2_1_cat
+b_2_2_zombie
+c_0_0_a_construct_total_artifacts
+g_0_1_sheep
+g_1_1_insect
+g_1_1_saproling
+g_1_1_squirrel
+g_2_2_cat
+g_3_3_elephant
+marit_lage
+r_1_1_goblin
+r_3_1_elemental_trample_haste
+w_1_1_bird_flying
+w_2_2_griffin_flying

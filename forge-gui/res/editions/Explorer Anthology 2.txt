@@ -6,24 +6,28 @@ Type=Online
 ScryfallCode=EA2
 
 [cards]
-0 C Dispel @Chase Stone
-0 C Ethereal Armor @Daarken
-0 C Fiery Impulse @Daarken
-0 C Nylea's Presence @Ralph Horsley
-0 C Satyr Wayfinder @Steve Prescott
-0 M Clever Impersonator @Slawomir Maniak
-0 M Kozilek, the Great Distortion @Aleksi Briclot
-0 M Sliver Hivelord @Aleksi Briclot
-0 M World Breaker @Jaime Jones
-0 R Courser of Kruphix @Eric Deschamps
-0 R Eerie Interlude @Svetlin Velinov
-0 R Eidolon of the Great Revel @Cyril Van Der Haegen
-0 R Eldrazi Displacer @Daarken
-0 R Matter Reshaper @Chris Rahn
-0 R Mutavault @Fred Fields
-0 R Soldier of the Pantheon @Eric Deschamps
-0 R Thought-Knot Seer @Svetlin Velinov
-0 U Reflector Mage @Willian Murai
-0 U Rending Volley @Lucas Graciano
-0 U Shaman of the Pack @Dan Scott
-0 U Zulaport Cutthroat @Jason Rainville
+1 M Kozilek, the Great Distortion @Aleksi Briclot
+2 R Matter Reshaper @Chris Rahn
+3 R Thought-Knot Seer @Svetlin Velinov
+4 U Brave the Elements @Goran Josic
+5 R Eerie Interlude @Svetlin Velinov
+6 R Eldrazi Displacer @Daarken
+7 C Ethereal Armor @Daarken
+8 R Soldier of the Pantheon @Eric Deschamps
+9 M Clever Impersonator @Slawomir Maniak
+10 C Dispel @Chase Stone
+11 U Zulaport Cutthroat @Jason Rainville
+12 R Eidolon of the Great Revel @Cyril Van Der Haegen
+13 C Fiery Impulse @Daarken
+14 U Rending Volley @Lucas Graciano
+15 R Courser of Kruphix @Eric Deschamps
+16 C Nylea's Presence
+17 C Satyr Wayfinder @Steve Prescott
+18 M World Breaker @Jaime Jones
+19 U Reflector Mage @Willian Murai
+20 U Shaman of the Pack @Dan Scott
+21 M Sliver Hivelord @Aleksi Briclot
+22 R Mana Confluence @Richard Wright
+23 R Mutavault @Fred Fields
+24 R Nykthos, Shrine to Nyx @Jung Park
+25 L Wastes @Raymond Swanland
