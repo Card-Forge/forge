@@ -48,7 +48,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
 
     // Get Card From Editions Test fixtures
     protected final String originalArtShivanDragonEdition = "LEA";
-    protected final String latestArtShivanDragonEdition = "30A";
+    protected final String latestArtShivanDragonEdition = "DMR";
     protected final String latestArtShivanDragonEditionNoPromo = "M20";
 
     protected final String originalArtLightningDragonEdition = "USG";
@@ -1751,7 +1751,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
 
         Date alphaReleaseDate = null;
         Date currentDate = Date.from(Instant.now());
-        Date latestShivanDragonReleaseDateToDate = null; // latest print to date for Shivan is in 30A
+        Date latestShivanDragonReleaseDateToDate = null; // latest print to date for Shivan is in DMR
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             alphaReleaseDate = format.parse(alphaEditionReleaseDate);
