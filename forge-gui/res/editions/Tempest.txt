@@ -3,7 +3,6 @@ Code=TMP
 Date=1997-10-14
 Name=Tempest
 Code2=TE
-MciCode=tp
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare

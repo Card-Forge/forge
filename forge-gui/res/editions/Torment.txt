@@ -3,7 +3,6 @@ Code=TOR
 Date=2002-02-04
 Name=Torment
 Code2=TO
-MciCode=tr
 Type=Expansion
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare

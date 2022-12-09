@@ -4,7 +4,6 @@ Date=2016-09-30
 Name=Kaladesh
 Code2=KLD
 Type=Expansion
-MciCode=kld
 BoosterCovers=3
 Booster=10 Common:fromSheet("KLD cards"), 3 Uncommon:fromSheet("KLD cards"), 1 RareMythic:fromSheet("KLD cards"), 1 BasicLand
 AdditionalSheetForFoils=fromSheet("KLD Kaladesh Inventions")

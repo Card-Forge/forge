@@ -3,7 +3,6 @@ Code=AFR
 Date=2021-07-23
 Name=Dungeons & Dragons: Adventures in the Forgotten Realms
 Code2=AFR
-MciCode=afr
 Type=Expansion
 ScryfallCode=AFR
 BoosterCovers=5

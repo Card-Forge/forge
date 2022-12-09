@@ -252,11 +252,10 @@ public final class CardEdition implements Comparable<CardEdition> {
 
     private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", "???", "??", "??", Type.UNKNOWN, "Undefined", FoilType.NOT_SUPPORTED, new CardInSet[]{});
+    public static final CardEdition UNKNOWN = new CardEdition("1990-01-01", "???", "??", Type.UNKNOWN, "Undefined", FoilType.NOT_SUPPORTED, new CardInSet[]{});
     private Date date;
     private String code;
     private String code2;
-    private String mciCode;
     private String scryfallCode;
     private String cardsLanguage;
     private Type   type;
@@ -323,16 +322,14 @@ public final class CardEdition implements Comparable<CardEdition> {
      *   use Magic Workstation-type edition codes. Older sets only had 2-letter codes, and some of the 3-letter
      *   codes they use now aren't the same as the official list of 3-letter codes.  When Forge downloads set-pics,
      *   it uses the 3-letter codes for the folder no matter the age of the set.
-     * @param mciCode the code used by magiccards.info website.
      * @param type the set type
      * @param name the name of the set
      * @param cards the cards in the set
      */
-    private CardEdition(String date, String code, String code2, String mciCode, Type type, String name, FoilType foil, CardInSet[] cards) {
+    private CardEdition(String date, String code, String code2, Type type, String name, FoilType foil, CardInSet[] cards) {
         this(cards, new HashMap<>());
         this.code  = code;
         this.code2 = code2;
-        this.mciCode = mciCode;
         this.type  = type;
         this.name  = name;
         this.date = parseDate(date);
@@ -352,7 +349,6 @@ public final class CardEdition implements Comparable<CardEdition> {
     public Date getDate()  { return date;  }
     public String getCode()  { return code;  }
     public String getCode2() { return code2; }
-    public String getMciCode() { return mciCode; }
     public String getScryfallCode() { return scryfallCode.toLowerCase(); }
     public String getCardsLangCode() { return cardsLanguage.toLowerCase(); }
     public Type   getType()  { return type;  }
@@ -621,10 +617,6 @@ public final class CardEdition implements Comparable<CardEdition> {
             if (res.code2 == null) {
                 res.code2 = res.code;
             }
-            res.mciCode = section.get("MciCode");
-            if (res.mciCode == null) {
-                res.mciCode = res.code2.toLowerCase();
-            }
             res.scryfallCode = section.get("ScryfallCode");
             if (res.scryfallCode == null) {
                 res.scryfallCode = res.code;
@@ -753,7 +745,7 @@ public final class CardEdition implements Comparable<CardEdition> {
                 this.add(E);
                 initAliases(E); //Made a method in case the system changes, so it's consistent.
             }
-            CardEdition customBucket = new CardEdition("2990-01-01", "USER", "USER", "USER",
+            CardEdition customBucket = new CardEdition("2990-01-01", "USER", "USER",
                     Type.CUSTOM_SET, "USER", FoilType.NOT_SUPPORTED, new CardInSet[]{});
             this.add(customBucket);
             initAliases(customBucket);
@@ -802,12 +794,6 @@ public final class CardEdition implements Comparable<CardEdition> {
         public String getCode2ByCode(final String code) {
             final CardEdition set = this.get(code);
             return set == null ? "" : set.getCode2();
-        }
-
-        // used by image generating code
-        public String getMciCodeByCode(final String code) {
-            final CardEdition set = this.get(code);
-            return set == null ? "" : set.getMciCode();
         }
 
         public final Function<String, CardEdition> FN_EDITION_BY_CODE = new Function<String, CardEdition>() {

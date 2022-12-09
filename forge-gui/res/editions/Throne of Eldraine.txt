@@ -3,7 +3,6 @@ Code=ELD
 Date=2019-10-04
 Name=Throne of Eldraine
 Code2=ELD
-MciCode=eld
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromSheet("ELD cards"), 3 Uncommon:fromSheet("ELD cards"), 1 RareMythic:fromSheet("ELD cards"), 1 BasicLand

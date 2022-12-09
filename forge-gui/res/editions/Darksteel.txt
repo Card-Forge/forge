@@ -3,7 +3,6 @@ Code=DST
 Date=2004-02-06
 Name=Darksteel
 Code2=DS
-MciCode=ds
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare

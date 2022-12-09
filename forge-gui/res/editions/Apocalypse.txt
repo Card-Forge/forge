@@ -3,7 +3,6 @@ Code=APC
 Date=2001-06-04
 Name=Apocalypse
 Code2=AP
-MciCode=ap
 Type=Expansion
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare

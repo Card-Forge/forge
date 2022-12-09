@@ -3,7 +3,6 @@ Code=DDS
 Date=2017-03-31
 Name=Duel Decks: Mind vs. Might
 Code2=DDS
-MciCode=dds
 Type=Duel_Deck
 ScryfallCode=DDS
 

@@ -2,7 +2,6 @@
 Name=Masters 25
 Code=A25
 Date=2018-03-16
-MciCode=a25
 Type=Reprint
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 RareMythic

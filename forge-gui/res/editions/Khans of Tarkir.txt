@@ -3,7 +3,6 @@ Code=KTK
 Date=2014-09-26
 Name=Khans of Tarkir
 Code2=KTK
-MciCode=ktk
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand KTK

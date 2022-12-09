@@ -3,7 +3,6 @@ Code=NEO
 Date=2022-02-18
 Name=Kamigawa: Neon Dynasty
 Code2=NEO
-MciCode=neo
 Type=Expansion
 BoosterCovers=3
 Booster=9 Common:!dfc:!fromSheet("NEO lands"):fromSheet("NEO cards"), 3 Uncommon:!dfc:!fromSheet("NEO lands"):fromSheet("NEO cards"), 1 dfc:!Rare:!Mythic:fromSheet("NEO cards"), 1 RareMythic:fromSheet("NEO cards"), 1 fromSheet("NEO lands")

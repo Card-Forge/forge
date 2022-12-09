@@ -3,7 +3,6 @@ Code=PD2
 Date=2010-11-19
 Name=Premium Deck Series: Fire and Lightning
 Code2=PD2
-MciCode=pd2
 Type=Collector_Edition
 ScryfallCode=PD2
 

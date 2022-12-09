@@ -2,7 +2,6 @@
 Code=DDJ
 Date=2012-09-07
 Name=Duel Decks: Izzet vs. Golgari
-MciCode=ddj
 Type=Duel_Deck
 ScryfallCode=DDJ
 

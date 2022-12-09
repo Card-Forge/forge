@@ -3,7 +3,6 @@ Code=MRD
 Date=2003-10-02
 Name=Mirrodin
 Code2=MR
-MciCode=mi
 Type=Expansion
 BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare

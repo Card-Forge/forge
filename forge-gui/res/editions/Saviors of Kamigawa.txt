@@ -3,7 +3,6 @@ Code=SOK
 Date=2005-06-03
 Name=Saviors of Kamigawa
 Code2=SOK
-MciCode=sok
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare

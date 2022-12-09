@@ -3,7 +3,6 @@ Code=LEB
 Date=1993-10-04
 Name=Limited Edition Beta
 Code2=B
-MciCode=be
 Type=Core
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare

@@ -3,7 +3,6 @@ Code=ULG
 Date=1999-02-15
 Name=Urza's Legacy
 Code2=UL
-MciCode=ul
 Type=Expansion
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare

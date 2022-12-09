@@ -3,7 +3,6 @@ Code=ALL
 Date=1996-06-10
 Name=Alliances
 Code2=AL
-MciCode=ai
 Type=Expansion
 BoosterCovers=1
 Booster=8 Common, 3 Uncommon, 1 Rare

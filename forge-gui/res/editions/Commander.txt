@@ -4,7 +4,6 @@ Date=2011-06-17
 Name=Commander
 Code2=COM
 Alias=CMD
-MciCode=cmd
 Type=Commander
 BoosterBox=0
 ScryfallCode=cmd

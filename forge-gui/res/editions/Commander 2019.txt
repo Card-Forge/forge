@@ -3,7 +3,6 @@ Code=C19
 Date=2019-08-23
 Name=Commander 2019
 Code2=C19
-MciCode=c19
 Type=Commander
 ScryfallCode=C19
 

@@ -3,7 +3,6 @@ Code=7ED
 Date=2001-04-11
 Name=Seventh Edition
 Code2=7E
-MciCode=7e
 Type=Core
 Border=White
 BoosterCovers=5

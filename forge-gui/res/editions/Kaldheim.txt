@@ -3,7 +3,6 @@ Code=KHM
 Date=2021-02-05
 Name=Kaldheim
 Code2=KHM
-MciCode=khm
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!fromSheet("KHM Snow Lands"):fromsheet("KHM cards"), 3 Uncommon:fromSheet("KHM cards"), 1 RareMythic:fromSheet("KHM cards"), 1 fromSheet("KHM Snow Lands")

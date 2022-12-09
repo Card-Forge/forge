@@ -3,7 +3,6 @@ Code=PCA
 Date=2016-11-25
 Name=Planechase Anthology
 Code2=PCA
-MciCode=pca
 Type=Multiplayer
 ScryfallCode=PCA
 

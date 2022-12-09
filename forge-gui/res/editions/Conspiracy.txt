@@ -3,7 +3,6 @@ Code=CNS
 Date=2014-06-06
 Name=Conspiracy
 Code2=CNS
-MciCode=cns
 Type=Draft
 BoosterCovers=3
 Booster=10 Common:!fromSheet("CNS Draft Matters"), 3 Uncommon:!fromSheet("CNS Draft Matters"), 1 RareMythic:!fromSheet("CNS Draft Matters"), 1 fromSheet("CNS Draft Matters")

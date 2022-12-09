@@ -3,7 +3,6 @@ Code=DIS
 Date=2006-05-05
 Name=Dissension
 Code2=DIS
-MciCode=di
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare

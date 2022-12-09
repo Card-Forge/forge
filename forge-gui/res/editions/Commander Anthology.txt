@@ -3,7 +3,6 @@ Code=CMA
 Date=2017-06-09
 Name=Commander Anthology
 Code2=CMA
-MciCode=CMA
 Type=Commander
 ScryfallCode=CMA
 

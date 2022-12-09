@@ -2,7 +2,6 @@
 Code=MPS_GRN
 Date=2018-10-05
 Name=Mythic Edition - Guilds of Ravnica
-MciCode=med
 Type=Collector_Edition
 ScryfallCode=med
 

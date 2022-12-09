@@ -3,7 +3,6 @@ Code=MOR
 Date=2008-02-01
 Name=Morningtide
 Code2=MOR
-MciCode=mt
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare

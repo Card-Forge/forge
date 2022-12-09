@@ -3,7 +3,6 @@ Code=WAR
 Date=2019-05-03
 Name=War of the Spark
 Code2=WAR
-MciCode=war
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromSheet("WAR cards"):!fromSheet("WAR Secret Cards"), 3 Uncommon:fromSheet("WAR cards"):!fromSheet("WAR Secret Cards"), 1 RareMythic:fromSheet("WAR cards"):!fromSheet("WAR Secret Cards"), 1 BasicLand

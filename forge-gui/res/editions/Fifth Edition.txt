@@ -3,7 +3,6 @@ Code=5ED
 Date=1997-03-24
 Name=Fifth Edition
 Code2=5E
-MciCode=5e
 Type=Core
 Border=White
 BoosterCovers=5

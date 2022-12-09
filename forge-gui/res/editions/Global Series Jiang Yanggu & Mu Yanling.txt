@@ -2,7 +2,6 @@
 Code=GS1
 Date=2018-06-22
 Name=Global Series Jiang Yanggu & Mu Yanling
-MciCode=gs1
 Type=Duel_Deck
 ScryfallCode=GS1
 

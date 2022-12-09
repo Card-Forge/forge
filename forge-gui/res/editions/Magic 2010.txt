@@ -3,7 +3,6 @@ Code=M10
 Date=2009-07-17
 Name=Magic 2010
 Code2=M10
-MciCode=m10
 Type=Core
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand

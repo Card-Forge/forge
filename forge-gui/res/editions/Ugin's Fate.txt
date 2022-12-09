@@ -2,7 +2,6 @@
 Code=UGF
 Date=2015-01-17
 Name=Ugin's Fate
-MciCode=ugin
 Type=Promo
 ScryfallCode=ugin
 

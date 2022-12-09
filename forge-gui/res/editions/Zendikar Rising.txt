@@ -3,7 +3,6 @@ Code=ZNR
 Date=2020-09-25
 Name=Zendikar Rising
 Code2=ZNR
-MciCode=znr
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!dfc:fromSheet("ZNR cards"), 3 Uncommon:!dfc:fromSheet("ZNR cards"), 1 RareMythic:!dfc:fromSheet("ZNR cards"), 1 BasicLand

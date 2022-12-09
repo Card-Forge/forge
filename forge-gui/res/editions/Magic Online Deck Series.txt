@@ -2,7 +2,6 @@
 Code=TD1
 Date=2010-11-08
 Name=Magic Online Deck Series
-MciCode=td1
 Type=Online
 ScryfallCode=td0
 

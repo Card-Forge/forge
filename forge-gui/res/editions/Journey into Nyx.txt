@@ -2,7 +2,6 @@
 Code=JOU
 Date=2014-05-02
 Name=Journey into Nyx
-MciCode=jou
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand THS

@@ -3,7 +3,6 @@ Code=CSP
 Date=2006-07-21
 Name=Coldsnap
 Code2=CS
-MciCode=cs
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
