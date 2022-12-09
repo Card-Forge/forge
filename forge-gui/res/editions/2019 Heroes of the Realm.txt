@@ -1,11 +1,10 @@
 [metadata]
-Code=HTR19
+Code=PH19
 Date=2020-08-01
 Name=2019 Heroes of the Realm
-Code2=HTR19
-MciCode=htr19
+Alias=HTR19
 Type=Funny
-ScryfallCode=HTR19
+ScryfallCode=PH19
 
 [cards]
 1 M Collectigull @Wylie Beckert

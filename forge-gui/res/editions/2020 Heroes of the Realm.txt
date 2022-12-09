@@ -1,11 +1,10 @@
 [metadata]
-Code=HTR20
+Code=PH20
 Date=2021-08-01
 Name=2020 Heroes of the Realm
-Code2=HTR20
-MciCode=htr20
+Alias=HTR20
 Type=Funny
-ScryfallCode=HTR20
+ScryfallCode=PH20
 
 [cards]
 1 M Euroakus @Franz Vohwinkel
