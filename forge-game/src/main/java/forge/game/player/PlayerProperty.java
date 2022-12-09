@@ -369,7 +369,7 @@ public class PlayerProperty {
             if (player.getLife() >= (int) Math.ceil(player.getStartingLife() / 2.0)) {
                 return false;
             }
-        } else if (property.startsWith("Triggered")) {
+        } else if (property.startsWith("Triggered") || property.equals("OriginalHostRemembered")) {
             if (!AbilityUtils.getDefinedPlayers(source, property, spellAbility).contains(player)) {
                 return false;
             }
