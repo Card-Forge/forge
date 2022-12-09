@@ -958,6 +958,10 @@ public final class GameActionUtil {
             oldCard.setBackSide(false);
             oldCard.setState(oldCard.getFaceupCardStateName(), true);
             oldCard.unanimateBestow();
+
+            if (ability.hasParam("Prototype")) {
+                oldCard.removeCloneState(oldCard.getPrototypeTimestamp());
+            }
         }
 
         ability.clearTargets();
