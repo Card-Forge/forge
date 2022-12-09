@@ -42,6 +42,37 @@ public class Shaders {
             "    v_texCoords = a_texCoord0;\n" +
             "    gl_Position = u_projTrans * a_position;\n" +
             "}";
+    public static final String fragPixelateSimple="#ifdef GL_ES\n" +
+            "#define LOWP lowp\n" +
+            "precision mediump float;\n" +
+            "#else\n" +
+            "#define LOWP \n" +
+            "#endif\n" +
+            "\n" +
+            "uniform sampler2D u_texture;\n" +
+            "varying vec2 v_texCoords;\n" +
+            "uniform vec2 u_resolution;\n" +
+            "uniform float u_time;\n" +
+            "uniform float u_cellSize;\n" +
+            "\n" +
+            "void main()\n" +
+            "{\n" +
+            "    float t = u_time;\n" +
+            "    \n" +
+            "\tvec2 uv = v_texCoords;\n" +
+            "    \n" +
+            "    float res = floor((pow(t,1.4)) * u_cellSize) * 2.0 + 0.01;\n" +
+            "    \n" +
+            "    uv *= u_resolution.xy / res;\n" +
+            "    uv = floor(uv);\n" +
+            "    uv /= u_resolution.xy / res;\n" +
+            "    \n" +
+            "    uv += res * 0.002;\n" +
+            "    vec4 texColor = texture2D(u_texture, uv);\n" +
+            "    //texColor.g *= (1.-t);\n" +
+            "    //texColor.b *= (1.-t);\n" +
+            "\tgl_FragColor = texColor * clamp(1.4 - t, 1.0, 1.0);\n" +
+            "}";
     public static final String fragPortal="#ifdef GL_ES\n" +
             "#define LOWP lowp\n" +
             "#define PI 3.14159\n" +
