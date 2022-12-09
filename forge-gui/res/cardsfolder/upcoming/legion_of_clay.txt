@@ -2,9 +2,9 @@ Name:Legion of Clay
 ManaCost:3 G
 Types:Enchantment
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Trample | Description$ Creatures you control have trample.
-T:Mode$ ChangesZoneAll | ValidCards$ Artifact.YouCtrl+nonToken | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever one or more nontoken artifacts enter the battlefield under your control, creatures you control perpetually get +1/+1
+T:Mode$ ChangesZoneAll | ValidCards$ Artifact.YouCtrl+nonToken | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ Whenever one or more nontoken artifacts enter the battlefield under your control, creatures you control perpetually get +1/+1.
 SVar:TrigEffect:DB$ Effect | RememberObjects$ Valid Creature.YouCtrl | StaticAbilities$ PerpetualP1P1 | Duration$ Permanent | SubAbility$ DBCleanup | Name$ Legion of Clay's Perpetual Effect
 SVar:PerpetualP1P1:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ Creatures you control perpetually get +1/+1.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 DeckHints:Type$Artifact|Golem|Construct|Thopter|Assembly-Worker|Myr|Necron|Juggernaut|Scarecrow
-Oracle:Creatures you control have trample.\nWhenever one or more nontoken artifacts enter the battlefield under your control, creatures you control perpetually get +1/+1
+Oracle:Creatures you control have trample.\nWhenever one or more nontoken artifacts enter the battlefield under your control, creatures you control perpetually get +1/+1.
