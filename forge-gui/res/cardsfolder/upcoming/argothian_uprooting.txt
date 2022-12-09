@@ -1,0 +1,10 @@
+Name:Argothian Uprooting
+ManaCost:X G
+Types:Sorcery
+A:SP$ PutCounter | TargetMin$ 0 | TargetMax$ X | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select up to X target lands you control | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBAnimate | SpellDescription$ Put two +1/+1 counters on each of up to X target lands you control. They each become 0/0 Elemental creatures with reach, haste, and "When this creature leaves the battlefield, conjure a card named Forest onto the battlefield tapped." They're still lands.
+SVar:DBAnimate:DB$ Animate | Defined$ ParentTarget | Power$ 0 | Toughness$ 0 | Types$ Creature,Elemental | Keywords$ Haste & Reach | Duration$ Permanent | Triggers$ DiesTrig
+SVar:DiesTrig:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When this creature leaves the battlefield, conjure a card named Forest onto the battlefield tapped
+SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Name$ Forest | Zone$ Battlefield | Tapped$ True
+SVar:X:Count$xPaid
+DeckHas:Type$Elemental & Ability$Counters
+Oracle:Put two +1/+1 counters on each of up to X target lands you control. They each become 0/0 Elemental creatures with reach, haste, and "When this creature leaves the battlefield, conjure a card named Forest onto the battlefield tapped." They're still lands.

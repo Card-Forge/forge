@@ -95,6 +95,9 @@ public class MakeCardEffect extends SpellAbilityEffect {
                         game.getAction().moveTo(ZoneType.None, card, sa, moveParams);
                         cards.add(card);
                         toMake--;
+	                        if (sa.hasParam("Tapped")) {
+	                            card.setTapped(true);
+	                  }
                     }
                 }
             }
