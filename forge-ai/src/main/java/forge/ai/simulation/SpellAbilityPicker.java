@@ -1,8 +1,10 @@
 package forge.ai.simulation;
 
+import forge.util.MyRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import forge.ai.AiPlayDecision;
@@ -363,10 +365,17 @@ public class SpellAbilityPicker {
         controller.evaluateSpellAbility(saList, saIndex);
         SpellAbility sa = saList.get(saIndex);
 
+        // Use a deterministic random seed when evaluating different choices of a spell ability.
+        // This is needed as otherwise random effects may result in a different number of choices
+        // each iteration, which will break the logic in SpellAbilityChoicesIterator.
+        Random origRandom = MyRandom.getRandom();
+        long randomSeedToUse = origRandom.nextLong();
+
         Score bestScore = new Score(Integer.MIN_VALUE);
         final SpellAbilityChoicesIterator choicesIterator = new SpellAbilityChoicesIterator(controller);
-        Score lastScore = null;
+        Score lastScore;
         do {
+            MyRandom.setRandom(new Random(randomSeedToUse));
             GameSimulator simulator = new GameSimulator(controller, game, player, phase);
             simulator.setInterceptor(choicesIterator);
             lastScore = simulator.simulateSpellAbility(sa);
@@ -375,6 +384,7 @@ public class SpellAbilityPicker {
             }
         } while (choicesIterator.advance(lastScore));
         controller.doneEvaluating(bestScore);
+        MyRandom.setRandom(origRandom);
         return bestScore;
     }
 
