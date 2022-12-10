@@ -328,6 +328,9 @@ public enum FSkinProp {
 
     ICO_FAVICON         (new int[] {0, 640, 80, 80}, PropType.ICON),
     ICO_LOCK            (new int[] {620, 800, 48, 48}, PropType.ICON),
+    //reveal icons
+    ICO_SEE             (new int[] {568, 1520, 60, 40}, PropType.ICON),
+    ICO_UNSEE           (new int[] {568, 1560, 60, 40}, PropType.ICON),
 
     //layout images
     IMG_HANDLE  (new int[] {320, 450, 80, 20}, PropType.IMAGE),

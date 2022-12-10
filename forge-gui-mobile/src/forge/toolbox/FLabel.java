@@ -427,9 +427,7 @@ public class FLabel extends FDisplayObject implements IButton {
             else if (!text.isEmpty()) {
                 float oldAlpha = g.getfloatAlphaComposite();
                 if (isHovered() && selectable) {
-                    g.setAlphaComposite(0.4f);
-                    g.fillRect(Color.GRAY, x, y, w, h);
-                    g.setAlphaComposite(oldAlpha);
+                    g.fillRect(FSkinColor.getStandardColor(Color.GRAY).alphaColor(0.4f), x, y, w, h);
                 }
                 drawText(g, x, y, w, h, alignment);
             }

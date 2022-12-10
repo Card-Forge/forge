@@ -5,14 +5,18 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 
 public class FMenuTab extends FDisplayObject {
     public static final FSkinFont FONT = FSkinFont.get(12);
+    boolean iconOnly = false;
+    boolean active = false;
     private static FSkinColor getSelBackColor() {
         if (Forge.isMobileAdventureMode)
             return FSkinColor.get(Colors.ADV_CLR_ACTIVE);
@@ -42,10 +46,11 @@ public class FMenuTab extends FDisplayObject {
     private float minWidth;
     private int index;
 
-    public FMenuTab(String text0, FMenuBar menuBar0, FDropDown dropDown0, int index0) {
+    public FMenuTab(String text0, FMenuBar menuBar0, FDropDown dropDown0, int index0, boolean iconOnly0) {
         menuBar = menuBar0;
         dropDown = dropDown0;
         index = index0;
+        iconOnly = iconOnly0;
         setText(text0);
     }
 
@@ -89,6 +94,10 @@ public class FMenuTab extends FDisplayObject {
         menuBar.revalidate();
     }
 
+    public void setActiveIcon(boolean value) {
+        active = value;
+    }
+
     @Override
     public void setVisible(boolean visible0) {
         if (isVisible() == visible0) { return; }
@@ -102,6 +111,10 @@ public class FMenuTab extends FDisplayObject {
     }
 
     public float getMinWidth() {
+        if (iconOnly) {
+            float multiplier = Forge.isLandscapeMode() ? 2.5f : 1.8f;
+            return FONT.getLineHeight() * multiplier;
+        }
         return minWidth;
     }
 
@@ -140,7 +153,14 @@ public class FMenuTab extends FDisplayObject {
         h = getHeight() - 2 * PADDING;
         if (isHovered())
             g.fillRect(getSelBackColor().brighter(), x, y, w, h);
-        g.drawText(text, FONT, foreColor, x, y, w, h, false, Align.center, true);
+        if (iconOnly) {
+            float mod = w * 0.75f;
+            FImage icon = active ? FSkinImage.SEE : FSkinImage.UNSEE;
+            float scaleW = icon.getWidth() * 0.8f;
+            float scaleH = icon.getHeight() * 0.8f;
+            g.drawImage(icon, x + w/2 - scaleW/2, y + h/2 - scaleH/2, scaleW, scaleH);
+        } else
+            g.drawText(text, FONT, foreColor, x, y, w, h, false, Align.center, true);
     }
     public boolean isShowingDropdownMenu(boolean any) {
         if (dropDown == null)

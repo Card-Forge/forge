@@ -1132,7 +1132,8 @@ public class Forge implements ApplicationListener {
             return false;
         }
     }
-
+    public static float mouseMovedX = 0;
+    public static float mouseMovedY = 0;
     private static class MainInputProcessor extends FGestureAdapter {
         private static final List<FDisplayObject> potentialListeners = new ArrayList<>();
         private static char lastKeyTyped;
@@ -1216,7 +1217,7 @@ public class Forge implements ApplicationListener {
             return false;
         }
 
-        private void updatePotentialListeners(int x, int y) {
+        private void updatePotentialListeners(float x, float y) {
             potentialListeners.clear();
 
             //base potential listeners on object containing touch down point
@@ -1391,8 +1392,6 @@ public class Forge implements ApplicationListener {
         }
 
         //mouseMoved and scrolled events for desktop version
-        private int mouseMovedX, mouseMovedY;
-
         @Override
         public boolean mouseMoved(int screenX, int screenY) {
             magnify = true;

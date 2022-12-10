@@ -774,9 +774,7 @@ public class CardRenderer {
         }
         //Darken unselectable cards
         if (unselectable) {
-            g.setAlphaComposite(0.6f);
-            g.fillRect(Color.BLACK, cx, cy, cw, ch);
-            g.setAlphaComposite(oldAlpha);
+            g.fillRect(FSkinColor.getStandardColor(Color.BLACK).alphaColor(0.6f), cx, cy, cw, ch);
         }
         //Magenta outline when card is chosen
         if (MatchController.instance.isUsedToPay(card)) {

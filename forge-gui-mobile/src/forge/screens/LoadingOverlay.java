@@ -123,9 +123,7 @@ public class LoadingOverlay extends FOverlay {
             float y = (getHeight() - panelHeight) / 2;
             float oldAlpha = g.getfloatAlphaComposite();
             //dark translucent back..
-            g.setAlphaComposite(0.6f);
-            g.fillRect(Color.BLACK, 0, 0, getWidth(), getHeight());
-            g.setAlphaComposite(oldAlpha);
+            g.fillRect(FSkinColor.getStandardColor(Color.BLACK).alphaColor(0.6f), 0, 0, getWidth(), getHeight());
             //overlay
             g.fillRect(getOverlayColor(), x, y, panelWidth, panelHeight);
             g.drawRect(Utils.scale(2), getForeColor(), x, y, panelWidth, panelHeight);
