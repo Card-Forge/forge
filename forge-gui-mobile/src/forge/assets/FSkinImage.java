@@ -338,6 +338,9 @@ public enum FSkinImage implements FImage {
 
     FAVICON         (FSkinProp.ICO_FAVICON, SourceFile.ICONS),
     LOCK            (FSkinProp.ICO_LOCK, SourceFile.ICONS),
+    //reveal icons
+    SEE             (FSkinProp.ICO_SEE, SourceFile.ICONS),
+    UNSEE           (FSkinProp.ICO_UNSEE, SourceFile.ICONS),
 
     //Layout images
     HANDLE  (FSkinProp.IMG_HANDLE, SourceFile.ICONS),

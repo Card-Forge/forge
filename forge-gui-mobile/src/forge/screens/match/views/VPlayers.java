@@ -13,7 +13,6 @@ import forge.menu.FDropDown;
 import forge.screens.match.MatchController;
 import forge.toolbox.FContainer;
 import forge.toolbox.FDisplayObject;
-import forge.toolbox.FEvent;
 import forge.toolbox.FLabel;
 import forge.toolbox.FList;
 import forge.util.Utils;
@@ -57,17 +56,14 @@ public class VPlayers extends FDropDown {
             btnDeck = new FLabel.ButtonBuilder().opaque(true).iconScaleFactor(0.99f).selectable().alphaComposite(1).iconInBackground(true).build();
             btnDeck.setEnabled(!Forge.isMobileAdventureMode);
             btnDeck.setVisible(!Forge.isMobileAdventureMode);
-            btnDeck.setCommand(new FEvent.FEventHandler() {
-                @Override
-                public void handleEvent(FEvent e) {
-                    if (playerDeck != null) {
-                        //pause game when spectating AI Match
-                        if (!MatchController.instance.hasLocalPlayers()) {
-                            if(!MatchController.instance.isGamePaused())
-                                MatchController.instance.pauseMatch();
-                        }
-                        FDeckViewer.show(playerDeck);
+            btnDeck.setCommand(e -> {
+                if (playerDeck != null) {
+                    //pause game when spectating AI Match
+                    if (!MatchController.instance.hasLocalPlayers()) {
+                        if (!MatchController.instance.isGamePaused())
+                            MatchController.instance.pauseMatch();
                     }
+                    FDeckViewer.show(playerDeck);
                 }
             });
         }
@@ -88,15 +84,30 @@ public class VPlayers extends FDropDown {
             float x = PADDING;
             float y = PADDING;
             float h = getHeight() - 2 * y;
+            int extra = 0;
             String details = player.getDetails();
             if (Forge.isMobileAdventureMode) {
                 g.drawImage(MatchController.getPlayerAvatar(player), x, y, h, h);
+            }
+            if (!MatchController.instance.getGameView().isCommander()) {
+                if (!Forge.isMobileAdventureMode)
+                    details += playerDeck.getName();
             } else {
-                details += playerDeck.getName();
+                extra += 2;
             }
             x += h + PADDING;
-            //Draw Player Details
-            g.drawText(details, FONT, FList.getForeColor(), x, y, getWidth() - PADDING - x, h, true, Align.left, true);
+            float w = getWidth() - PADDING - x;
+            String s[] = details.split("\n");
+            String line1 = "", line2 = "";
+            int limit = (s.length / 2) + extra;
+            for (int i = 0; i < s.length; i++) {
+                if (i < limit)
+                    line1 += s[i] + "\n";
+                else
+                    line2 += s[i] + "\n";
+            }
+            g.drawText(line1, FONT, FList.getForeColor(), x, y, w / 2, h, true, Align.left, true);
+            g.drawText(line2, FONT, FList.getForeColor(), x + w / 2, y, w / 2, h, true, Align.left, true);
         }
 
         @Override

@@ -18,6 +18,7 @@ import forge.game.player.PlayerView;
 import forge.game.player.RegisteredPlayer;
 import forge.game.spellability.StackItemView;
 import forge.game.zone.MagicStack;
+import forge.trackable.TrackableCollection;
 import forge.trackable.TrackableObject;
 import forge.trackable.TrackableProperty;
 import forge.util.collect.FCollectionView;
@@ -64,15 +65,19 @@ public class GameView extends TrackableObject {
     public String getTitle() {
         return get(TrackableProperty.Title);
     }
+
     public boolean isCommander() {
         return get(TrackableProperty.IsCommander);
     }
+
     public GameType getGameType() {
         return get(TrackableProperty.GameType);
     }
+
     public int getPoisonCountersToLose() {
         return get(TrackableProperty.PoisonCountersToLose);
     }
+
     public int getNumGamesInMatch() {
         return get(TrackableProperty.NumGamesInMatch);
     }
@@ -80,31 +85,39 @@ public class GameView extends TrackableObject {
     public int getTurn() {
         return get(TrackableProperty.Turn);
     }
+
     void updateTurn(PhaseHandler phaseHandler) {
         set(TrackableProperty.Turn, phaseHandler.getTurn());
     }
+
     public PhaseType getPhase() {
         return get(TrackableProperty.Phase);
     }
+
     void updatePhase(PhaseHandler phaseHandler) {
         set(TrackableProperty.Phase, phaseHandler.getPhase());
     }
+
     public PlayerView getPlayerTurn() {
         return get(TrackableProperty.PlayerTurn);
     }
+
     void updatePlayerTurn(PhaseHandler phaseHandler) {
         set(TrackableProperty.PlayerTurn, PlayerView.get(phaseHandler.getPlayerTurn()));
     }
+
     public void updateNeedsPhaseRedrawn(PlayerView p, PhaseType ph) {
         set(TrackableProperty.PlayerTurn, p);
         set(TrackableProperty.Phase, ph);
         set(TrackableProperty.NeedsPhaseRedrawn, true);
     }
+
     public boolean getNeedsPhaseRedrawn() {
         if (get(TrackableProperty.NeedsPhaseRedrawn) == null)
             return false;
         return get(TrackableProperty.NeedsPhaseRedrawn);
     }
+
     public void clearNeedsPhaseRedrawn() {
         set(TrackableProperty.NeedsPhaseRedrawn, false);
     }
@@ -112,18 +125,23 @@ public class GameView extends TrackableObject {
     public void updatePlanarPlayer(PlayerView p) {
         set(TrackableProperty.PlanarPlayer, p);
     }
+
     public PlayerView getPlanarPlayer() {
         return get(TrackableProperty.PlanarPlayer);
     }
+
     public FCollectionView<StackItemView> getStack() {
         return get(TrackableProperty.Stack);
     }
+
     public StackItemView peekStack() {
         return Iterables.getFirst(getStack(), null);
     }
+
     public int getStormCount() {
         return get(TrackableProperty.StormCount);
     }
+
     void updateStack(final MagicStack stack) {
         set(TrackableProperty.Stack, StackItemView.getCollection(stack));
         set(TrackableProperty.StormCount, stack.getSpellsCastThisTurn().size());
@@ -132,6 +150,7 @@ public class GameView extends TrackableObject {
     public boolean isFirstGameInMatch() {
         return getNumPlayedGamesInMatch() == 0;
     }
+
     public int getNumPlayedGamesInMatch() {
         return get(TrackableProperty.NumPlayedGamesInMatch);
     }
@@ -139,23 +158,29 @@ public class GameView extends TrackableObject {
     public boolean isGameOver() {
         return get(TrackableProperty.GameOver);
     }
+
     public boolean isMatchOver() {
         return get(TrackableProperty.MatchOver);
     }
+
     public boolean isMulligan() {
         if (get(TrackableProperty.Mulligan) == null)
             return false;
         return get(TrackableProperty.Mulligan);
     }
+
     public void updateIsMulligan(boolean value) {
         set(TrackableProperty.Mulligan, value);
     }
+
     public String getWinningPlayerName() {
         return get(TrackableProperty.WinningPlayerName);
     }
+
     public int getWinningTeam() {
         return get(TrackableProperty.WinningTeam);
     }
+
     void updateGameOver(final Game game) {
         set(TrackableProperty.GameOver, game.isGameOver());
         set(TrackableProperty.MatchOver, game.getMatch().isMatchOver());
@@ -168,16 +193,27 @@ public class GameView extends TrackableObject {
     public GameLog getGameLog() {
         return get(TrackableProperty.GameLog);
     }
+
     void updateGameLog(GameLog gameLog) {
         flagAsChanged(TrackableProperty.GameLog); //don't need to set the property since it won't change
+    }
+
+    public TrackableCollection<CardView> getRevealedCollection() {
+        return get(TrackableProperty.RevealedCardsCollection);
+    }
+
+    public void updateRevealedCards(TrackableCollection<CardView> collection) {
+        set(TrackableProperty.RevealedCardsCollection, collection);
     }
 
     public CombatView getCombat() {
         return get(TrackableProperty.CombatView);
     }
+
     public void updateCombatView(CombatView combatView) {
         set(TrackableProperty.CombatView, combatView);
     }
+
     void updateCombat(Combat combat) {
         if (combat == null) {
             set(TrackableProperty.CombatView, null);

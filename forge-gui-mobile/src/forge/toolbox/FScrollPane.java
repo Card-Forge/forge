@@ -15,7 +15,7 @@ import forge.util.Utils;
 
 public abstract class FScrollPane extends FContainer {
     private static final float FLING_DECEL = 750f;
-    private static FSkinColor getIndicatorColor() {
+    public static FSkinColor getIndicatorColor() {
         if (Forge.isMobileAdventureMode)
             return FSkinColor.get(FSkinColor.Colors.ADV_CLR_TEXT).alphaColor(0.7f);
         return FSkinColor.get(FSkinColor.Colors.CLR_TEXT).alphaColor(0.7f);
@@ -28,6 +28,14 @@ public abstract class FScrollPane extends FContainer {
 
     public FScrollPane() {
         scrollBounds = new ScrollBounds();
+    }
+
+    public float getIndicatorMargin() {
+        return INDICATOR_MARGIN;
+    }
+
+    public float getIndicatorSize() {
+        return INDICATOR_SIZE;
     }
 
     public float getScrollLeft() {

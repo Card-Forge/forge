@@ -11,6 +11,7 @@ import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
 import forge.assets.FSkin;
+import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.game.card.CounterEnumType;
 import forge.game.player.PlayerView;
@@ -153,15 +154,11 @@ public class VAvatar extends FDisplayObject {
             float alpha = displayPriority ? 1f : 0.8f;
             if (alphaModifier < 1)
                 alpha = alphaModifier;
-            g.setAlphaComposite(alpha);
-            g.drawRect(w / 16f, Color.CYAN, 0, 0, w, h);
-            g.setAlphaComposite(oldAlpha);
+            g.drawRect(w / 16f, FSkinColor.getStandardColor(Color.CYAN).alphaColor(alpha), 0, 0, w, h);
         }
         //priority indicator
         if (displayPriority && player.getHasPriority() && alphaModifier == 1) {
-            g.setAlphaComposite(0.6f);
-            g.drawRect(w / 16f, Color.LIME, 0, 0, w, h);
-            g.setAlphaComposite(oldAlpha);
+            g.drawRect(w / 16f, FSkinColor.getStandardColor(Color.LIME).alphaColor(0.6f), 0, 0, w, h);
         }
         //highlighted
         if (MatchController.instance.isHighlighted(player)) {
