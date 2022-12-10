@@ -91,6 +91,15 @@ public class GameCopier {
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
             newPlayer.setLifeGainedThisTurn(origPlayer.getLifeGainedThisTurn());
+            newPlayer.setBlessing(origPlayer.hasBlessing());
+            newPlayer.setRevolt(origPlayer.hasRevolt());
+            newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
+            newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());
+            for (int j = 0; j < origPlayer.getSpellsCastThisTurn(); j++) {
+                newPlayer.addSpellCastThisTurn();
+            }
+            newPlayer.setMaxHandSize(origPlayer.getMaxHandSize());
+            newPlayer.setUnlimitedHandSize(origPlayer.isUnlimitedHandSize());
             // TODO creatureAttackedThisTurn
             for (Mana m : origPlayer.getManaPool()) {
                 newPlayer.getManaPool().addMana(m, false);
@@ -116,6 +125,20 @@ public class GameCopier {
             }
             p.setCommanders(commanders);
             ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(true);
+        }
+        for (Player origPlayer : playerMap.keySet()) {
+            Player newPlayer = playerMap.get(origPlayer);
+            for (final Card c : origPlayer.getCommanders()) {
+                Card newCommander = gameObjectMap.map(c);
+                int castTimes = origPlayer.getCommanderCast(c);
+                for (int i = 0; i < castTimes; i++) {
+                    newPlayer.incCommanderCast(newCommander);
+                }
+            }
+            for (Map.Entry<Card, Integer> entry : origPlayer.getCommanderDamage()) {
+                Card newCommander = gameObjectMap.map(entry.getKey());
+                newPlayer.addCommanderDamage(newCommander, entry.getValue());
+            }
         }
         newGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
@@ -211,8 +234,20 @@ public class GameCopier {
 
         // TODO countersAddedThisTurn
 
+        if (origGame.getStartingPlayer() != null) {
+            newGame.setStartingPlayer(origGame.getStartingPlayer());
+        }
         if (origGame.getMonarch() != null) {
             newGame.setMonarch(playerMap.get(origGame.getMonarch()));
+        }
+        if (origGame.getMonarchBeginTurn() != null) {
+            newGame.setMonarchBeginTurn(playerMap.get(origGame.getMonarchBeginTurn()));
+        }
+        if (origGame.getHasInitiative() != null) {
+            newGame.setHasInitiative(playerMap.get(origGame.getHasInitiative()));
+        }
+        if (origGame.getDayTime() != null) {
+            newGame.setDayTime(origGame.getDayTime());
         }
 
         for (ZoneType zone : ZONES) {

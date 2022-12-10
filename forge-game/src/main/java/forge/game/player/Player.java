@@ -691,8 +691,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 && !this.getGame().getRules().hasAppliedVariant(GameType.Brawl)) {
             // In case that commander is merged permanent, get the real commander card
             final Card realCommander = source.getRealCommander();
-            int damage = getCommanderDamage(realCommander) + amount;
-            commanderDamage.put(realCommander, damage);
+            addCommanderDamage(realCommander, amount);
             view.updateCommanderDamage(this);
             if (realCommander != source) {
                 view.updateMergedCommanderDamage(source, realCommander);
@@ -2674,6 +2673,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public int getCommanderDamage(Card commander) {
         Integer damage = commanderDamage.get(commander);
         return damage == null ? 0 : damage.intValue();
+    }
+    public void addCommanderDamage(Card commander, int damage) {
+        commanderDamage.merge(commander, damage, Integer::sum);
     }
 
     public ColorSet getCommanderColorID() {
