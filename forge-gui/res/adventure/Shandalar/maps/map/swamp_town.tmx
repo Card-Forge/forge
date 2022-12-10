@@ -32,32 +32,32 @@
   <object id="38" template="../obj/entry_up.tx" x="208" y="272"/>
   <object id="41" template="../obj/shop.tx" x="129" y="146">
    <properties>
-    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Zombie "/>
    </properties>
   </object>
   <object id="42" template="../obj/shop.tx" x="177" y="145">
    <properties>
-    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Zombie "/>
    </properties>
   </object>
   <object id="43" template="../obj/shop.tx" x="321" y="129">
    <properties>
-    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Zombie "/>
    </properties>
   </object>
   <object id="44" template="../obj/shop.tx" x="114" y="194">
    <properties>
-    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Zombie "/>
    </properties>
   </object>
   <object id="45" template="../obj/shop.tx" x="273" y="130">
    <properties>
-    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Zombie "/>
    </properties>
   </object>
   <object id="46" template="../obj/shop.tx" x="337" y="177">
    <properties>
-    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Simic,Zombie "/>
+    <property name="shopList" value="Instant,Creature,Black,Dimir,Rakdos,Orzhov,Golgari,Zombie "/>
    </properties>
   </object>
   <object id="47" template="../obj/inn.tx" x="230" y="98"/>
