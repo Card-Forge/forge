@@ -22,12 +22,10 @@ public class CLobby {
     private final VLobby view;
     public CLobby(final VLobby view) {
         this.view = view;
-        this.view.setForCommander(true);
     }
 
     private void addDecks(final Iterable<DeckProxy> commanderDecks, FList<Object> deckList, String... initialItems) {
-        Vector<Object> listData = new Vector<>();
-        listData.addAll(Arrays.asList(initialItems));
+        Vector<Object> listData = new Vector<>(Arrays.asList(initialItems));
         listData.add("Generate");
         if (!Iterables.isEmpty(commanderDecks)) {
             listData.add("Random");
