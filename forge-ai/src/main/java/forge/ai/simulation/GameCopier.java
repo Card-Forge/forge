@@ -124,12 +124,17 @@ public class GameCopier {
             if (origCard.hasRemembered()) {
                 for (Object o : origCard.getRemembered()) {
                     if (o instanceof GameObject) {
-                        c.addRemembered(find((GameObject)o));
+                        // Sometimes, a spell can "remember" a token card that's not in any zone
+                        // (and thus wouldn't have been copied) - for example Swords to Plowshares
+                        // remembering its target for LKI. Skip these to not crash in find().
+                        if (o instanceof Card && ((Card)o).getZone() == null) {
+                           continue;
+                        }
+                        c.addRemembered(find((GameObject) o));
                     } else {
                         System.err.println(c + " Remembered: " + o + "/" + o.getClass());
                         c.addRemembered(o);
                     }
-                    
                 }
             }
             for (SpellAbility sa : c.getSpellAbilities()) {
