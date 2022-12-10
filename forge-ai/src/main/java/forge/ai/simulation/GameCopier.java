@@ -235,7 +235,7 @@ public class GameCopier {
         // TODO countersAddedThisTurn
 
         if (origGame.getStartingPlayer() != null) {
-            newGame.setStartingPlayer(origGame.getStartingPlayer());
+            newGame.setStartingPlayer(playerMap.get(origGame.getStartingPlayer()));
         }
         if (origGame.getMonarch() != null) {
             newGame.setMonarch(playerMap.get(origGame.getMonarch()));
