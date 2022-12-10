@@ -3,7 +3,6 @@ Code=TSP
 Date=2006-10-06
 Name=Time Spiral
 Code2=TSP
-MciCode=ts
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 Rare, 1 TimeShifted TSB

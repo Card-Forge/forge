@@ -3,7 +3,6 @@ Code=INV
 Date=2000-10-02
 Name=Invasion
 Code2=IN
-MciCode=in
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare

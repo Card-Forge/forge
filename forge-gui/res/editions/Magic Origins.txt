@@ -3,7 +3,6 @@ Code=ORI
 Date=2015-07-17
 Name=Magic Origins
 Code2=ORI
-MciCode=ori
 Type=Core
 BoosterCovers=5
 Booster=10 Common:!fromSheet("ORI Sample Cards"), 3 Uncommon:!fromSheet("ORI Sample Cards"), 1 RareMythic:!fromSheet("ORI Sample Cards"), 1 BasicLand

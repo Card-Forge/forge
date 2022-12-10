@@ -3,7 +3,6 @@ Code=FEM
 Date=1994-11-01
 Name=Fallen Empires
 Code2=FE
-MciCode=fe
 Type=Expansion
 BoosterCovers=1
 Booster=5 Common, 2 Uncommon, 1 Rare

@@ -4,7 +4,6 @@ Date=2002-06-24
 Name=Promo set for Gatherer
 Alias=PRO
 Code2=MBP
-MciCode=mbp
 Type=Online
 ScryfallCode=PRM
 

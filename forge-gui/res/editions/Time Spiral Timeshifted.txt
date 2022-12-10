@@ -3,7 +3,6 @@ Code=TSB
 Date=2006-10-06
 Name=Time Spiral "Timeshifted"
 Code2=TSB
-MciCode=tsts
 Type=Expansion
 ScryfallCode=TSB
 BoosterBox=0

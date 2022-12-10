@@ -3,7 +3,6 @@ Code=UND
 Code2=UND
 Date=2020-02-29
 Name=Unsanctioned
-MciCode=und
 Type=Funny
 Border=Silver
 ScryfallCode=UND

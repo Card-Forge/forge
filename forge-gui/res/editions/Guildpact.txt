@@ -3,7 +3,6 @@ Code=GPT
 Date=2006-02-03
 Name=Guildpact
 Code2=GP
-MciCode=gp
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare

@@ -3,7 +3,6 @@ Code=4ED
 Date=1995-04-01
 Name=Fourth Edition
 Code2=4E
-MciCode=4e
 Type=Core
 Border=White
 BoosterCovers=5

@@ -3,7 +3,6 @@ Code=BRO
 Date=2022-11-18
 Name=The Brothers' War
 Code2=BRO
-MciCode=bro
 Type=Expansion
 BoosterCovers=3
 Booster=9 Common:fromsheet("BRO cards"), 3 Uncommon:fromSheet("BRO cards"), 1 RareMythic:fromSheet("BRO cards"), 1 fromSheet("BRO lands"), 1 fromSheet("BRR cards")

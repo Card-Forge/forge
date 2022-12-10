@@ -2,7 +2,6 @@
 Code=GK2
 Date=2019-02-15
 Name=Ravnica Allegiance Guild Kit
-MciCode=gk2
 Type=Boxed_Set
 ScryfallCode=GK2
 

@@ -2,7 +2,6 @@
 Code=UNF
 Date=2022-10-07
 Name=Unfinity
-MciCode=unf
 Type=Funny
 ScryfallCode=UNF
 

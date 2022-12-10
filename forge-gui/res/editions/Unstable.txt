@@ -2,7 +2,6 @@
 Code=UST
 Date=2017-12-08
 Name=Unstable
-MciCode=ust
 Type=Funny
 Border=Silver
 BoosterCovers=1

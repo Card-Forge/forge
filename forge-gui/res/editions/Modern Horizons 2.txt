@@ -3,7 +3,6 @@ Code=MH2
 Date=2021-06-18
 Name=Modern Horizons 2
 Code2=MH2
-MciCode=mh2
 Type=Draft
 Booster=10 Common:fromSheet("MH2 cards"), 3 Uncommon:fromSheet("MH2 cards"), 1 RareMythic:fromSheet("MH2 cards"), 1 fromSheet("MH2 Lands")
 BoosterReplaceSlotFromPrintSheet=MH2 NewToModern

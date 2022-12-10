@@ -3,7 +3,6 @@ Code=BOK
 Date=2005-02-04
 Name=Betrayers of Kamigawa
 Code2=BOK
-MciCode=bok
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare

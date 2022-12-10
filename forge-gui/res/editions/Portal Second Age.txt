@@ -4,7 +4,6 @@ Date=1998-06-24
 Name=Portal: Second Age
 Code2=P2
 Alias=P02
-MciCode=po2
 Type=Starter
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare

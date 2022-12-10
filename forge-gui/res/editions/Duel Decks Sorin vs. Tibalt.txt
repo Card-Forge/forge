@@ -2,7 +2,6 @@
 Code=DDK
 Date=2013-03-15
 Name=Duel Decks: Sorin vs. Tibalt
-MciCode=ddk
 Type=Duel_Deck
 ScryfallCode=DDK
 

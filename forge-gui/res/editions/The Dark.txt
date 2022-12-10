@@ -3,7 +3,6 @@ Code=DRK
 Date=1994-08-01
 Name=The Dark
 Code2=DK
-MciCode=dk
 Type=Expansion
 BoosterCovers=1
 Booster=6 Common, 2 UncommonRare

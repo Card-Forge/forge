@@ -2,7 +2,6 @@
 Code=MPS_WAR
 Date=2018-10-05
 Name=Mythic Edition - War of the Spark
-MciCode=med
 Type=Collector_Edition
 ScryfallCode=med
 

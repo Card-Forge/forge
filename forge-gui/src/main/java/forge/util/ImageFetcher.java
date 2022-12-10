@@ -67,7 +67,6 @@ public abstract class ImageFetcher {
             }
             return null;
         } else {
-            // 1. Try MCI code first, as it original.
             String setCode = edition.getScryfallCode();
             String langCode = edition.getCardsLangCode();
             return ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD +

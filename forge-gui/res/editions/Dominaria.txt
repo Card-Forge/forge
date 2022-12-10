@@ -3,7 +3,6 @@ Code=DOM
 Date=2018-04-27
 Name=Dominaria
 Type=Expansion
-MciCode=dom
 BoosterCovers=5
 Booster=10 Common:!fromSheet("DOM Planeswalker Decks and Additional Promo"), 3 Uncommon:!fromSheet("DOM Planeswalker Decks and Additional Promo"), 1 RareMythic:!fromSheet("DOM Planeswalker Decks and Additional Promo"), 1 BasicLand DOM
 BoosterMustContain=Legendary Creature

@@ -2,7 +2,6 @@
 Code=BTD
 Date=2000-10-01
 Name=Beatdown
-MciCode=bd
 Type=Boxed_Set
 Border=White
 Foil=NotSupported

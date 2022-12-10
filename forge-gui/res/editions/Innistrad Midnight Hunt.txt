@@ -3,7 +3,6 @@ Code=MID
 Date=2021-09-24
 Name=Innistrad: Midnight Hunt
 Code2=MID
-MciCode=mid
 Type=Expansion
 ScryfallCode=MID
 Booster=10 Common:fromSheet("MID cards"), 3 Uncommon:fromSheet("MID cards"), 1 RareMythic:fromSheet("MID cards"), 1 BasicLand

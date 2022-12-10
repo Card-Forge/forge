@@ -3,7 +3,6 @@ Code=AVR
 Date=2012-05-04
 Name=Avacyn Restored
 Code2=AVR
-MciCode=avr
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand

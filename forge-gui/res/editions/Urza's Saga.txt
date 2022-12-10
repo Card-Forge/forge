@@ -3,7 +3,6 @@ Code=USG
 Date=1998-10-12
 Name=Urza's Saga
 Code2=US
-MciCode=us
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare

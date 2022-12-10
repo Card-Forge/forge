@@ -3,7 +3,6 @@ Code=NPH
 Date=2011-05-13
 Name=New Phyrexia
 Code2=NPH
-MciCode=nph
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand

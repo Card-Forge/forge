@@ -3,7 +3,6 @@ Code=V13
 Alias=V20
 Date=2013-08-23
 Name=From the Vault: Twenty
-MciCode=v13
 Type=Collector_Edition
 ScryfallCode=V13
 

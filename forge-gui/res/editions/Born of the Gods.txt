@@ -2,7 +2,6 @@
 Code=BNG
 Date=2014-02-07
 Name=Born of the Gods
-MciCode=bng
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand THS

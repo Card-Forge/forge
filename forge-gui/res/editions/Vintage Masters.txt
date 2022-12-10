@@ -2,7 +2,6 @@
 Name=Vintage Masters
 Code=VMA
 Date=2014-06-16
-MciCode=vma
 Type=Online
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 RareMythic, 0 Special

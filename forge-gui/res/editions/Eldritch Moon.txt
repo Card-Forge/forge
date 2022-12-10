@@ -4,7 +4,6 @@ Date=2016-07-22
 Name=Eldritch Moon
 Code2=EMN
 Type=Expansion
-MciCode=emn
 BoosterCovers=3
 Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc:!Rare:!Mythic, 1 BasicLand SOI
 FatPack=9

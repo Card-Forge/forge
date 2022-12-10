@@ -3,7 +3,6 @@ Code=ONS
 Date=2002-10-07
 Name=Onslaught
 Code2=ON
-MciCode=on
 Type=Expansion
 BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare

@@ -3,7 +3,6 @@ Code=VOW
 Date=2021-11-19
 Name=Innistrad: Crimson Vow
 Code2=VOW
-MciCode=vow
 Type=Expansion
 ScryfallCode=VOW
 Booster=10 Common:fromSheet("VOW cards"), 3 Uncommon:fromSheet("VOW cards"), 1 RareMythic:fromSheet("VOW cards"), 1 BasicLand

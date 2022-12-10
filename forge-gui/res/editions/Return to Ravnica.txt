@@ -3,7 +3,6 @@ Code=RTR
 Date=2012-10-05
 Name=Return to Ravnica
 Code2=RTR
-MciCode=rtr
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand

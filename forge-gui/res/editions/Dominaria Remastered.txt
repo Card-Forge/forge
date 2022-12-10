@@ -3,7 +3,6 @@ Code=DMR
 Date=2023-01-13
 Name=Dominaria Remastered
 Code2=DMR
-MciCode=dmr
 Type=Reprint
 ScryfallCode=DMR
 

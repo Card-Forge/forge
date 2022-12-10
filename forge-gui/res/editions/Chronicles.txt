@@ -3,7 +3,6 @@ Code=CHR
 Date=1995-07-01
 Name=Chronicles
 Code2=CH
-MciCode=ch
 Type=Reprint
 Border=White
 BoosterCovers=1

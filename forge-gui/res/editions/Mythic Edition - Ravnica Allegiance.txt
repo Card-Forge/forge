@@ -2,7 +2,6 @@
 Code=MPS_RNA
 Date=2018-10-05
 Name=Mythic Edition - Ravnica Allegiance
-MciCode=med
 Type=Collector_Edition
 ScryfallCode=med
 

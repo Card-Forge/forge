@@ -3,7 +3,6 @@ Code=ATQ
 Date=1994-03-04
 Name=Antiquities
 Code2=AQ
-MciCode=aq
 Type=Expansion
 BoosterCovers=1
 Booster=6 Common, 2 UncommonRare

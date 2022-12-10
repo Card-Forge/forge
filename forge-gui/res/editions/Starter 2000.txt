@@ -4,7 +4,6 @@ Date=2000-04-01
 Name=Starter 2000
 Border=White
 Code2=S2K
-MciCode=st2k
 Type=Starter
 Foil=OldStyle
 FoilAlwaysInCommonSlot=False

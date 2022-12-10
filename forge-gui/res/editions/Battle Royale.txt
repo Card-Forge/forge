@@ -2,7 +2,6 @@
 Code=BRB
 Date=1999-11-12
 Name=Battle Royale
-MciCode=br
 Type=Boxed_Set
 Border=White
 Foil=NotSupported

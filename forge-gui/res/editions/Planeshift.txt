@@ -3,7 +3,6 @@ Code=PLS
 Date=2001-02-05
 Name=Planeshift
 Code2=PS
-MciCode=ps
 Type=Expansion
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare, 0 Special

@@ -3,7 +3,6 @@ Code=M15
 Date=2014-07-18
 Name=Magic 2015
 Code2=M15
-MciCode=m15
 Type=Core
 BoosterCovers=5
 Booster=10 Common:!fromSheet("M15 Sample Cards"), 3 Uncommon:!fromSheet("M15 Sample Cards"), 1 RareMythic:!fromSheet("M15 Sample Cards"), 1 BasicLand

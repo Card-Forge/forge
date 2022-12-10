@@ -3,7 +3,6 @@ Code=FUT
 Date=2007-05-04
 Name=Future Sight
 Code2=FUT
-MciCode=fut
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare
