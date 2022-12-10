@@ -1,5 +1,6 @@
 package forge.screens.home;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
 import forge.Singletons;
 import forge.ai.AIOption;
@@ -41,7 +42,6 @@ import java.awt.event.MouseEvent;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JPopupMenu;
@@ -533,7 +533,11 @@ public class PlayerPanel extends FPanel {
 
         scmDeckEditor.setCommand(() -> {
             lobby.setCurrentGameMode(lobby.hasVariant(GameType.Archenemy) ? GameType.Archenemy : GameType.ArchenemyRumble);
-            final Predicate<PaperCard> predSchemes = arg0 -> arg0.getRules().getType().isScheme();
+            final Predicate<PaperCard> predSchemes = new Predicate<PaperCard>() {
+                @Override public final boolean apply(final PaperCard arg0) {
+                    return arg0.getRules().getType().isScheme();
+                }
+            };
 
             Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_ARCHENEMY);
             CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
@@ -560,7 +564,12 @@ public class PlayerPanel extends FPanel {
 
         pchDeckEditor.setCommand(() -> {
             lobby.setCurrentGameMode(GameType.Planechase);
-            final Predicate<PaperCard> predPlanes = arg0 -> arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
+            final Predicate<PaperCard> predPlanes = new Predicate<PaperCard>() {
+                @Override
+                public boolean apply(final PaperCard arg0) {
+                    return arg0.getRules().getType().isPlane() || arg0.getRules().getType().isPhenomenon();
+                }
+            };
 
             Singletons.getControl().setCurrentScreen(FScreen.DECK_EDITOR_PLANECHASE);
             CDeckEditorUI.SINGLETON_INSTANCE.setEditorController(
