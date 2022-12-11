@@ -1203,6 +1203,12 @@ public class CardView extends GameEntityView {
             }
             return ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD);
         }
+        /*
+        * Use this for revealing purposes only
+        * */
+        public String getTrackableImageKey() {
+            return get(TrackableProperty.ImageKey);
+        }
         void updateImageKey(Card c) {
             set(TrackableProperty.ImageKey, c.getImageKey());
         }

@@ -21,7 +21,6 @@ import forge.util.ImageUtil;
 import forge.util.Utils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class VReveal extends FDropDown {
@@ -89,13 +88,17 @@ public class VReveal extends FDropDown {
                 y = 1;
                 for (CardView c :  MatchController.instance.getGameView().getRevealedCollection()) {
                     //the card may be returned to hidden zone and cannot be viewed currently (ie Capsize), to fix this just get the imagekey and get the papercard
-                    PaperCard pc = ImageUtil.getPaperCardFromImageKey(c.getCurrentState().getImageKey(Collections.singleton(c.getOwner())));
-                    revealed.add(pc);
-                    revealEntryDisplay = add(new RevealEntryDisplay(pc, isAltRow));
-                    isAltRow = !isAltRow;
-                    entryHeight = revealEntryDisplay.getMinHeight(entryWidth) + MARGINS;
-                    revealEntryDisplay.setBounds(0, y, entryWidth, entryHeight);
-                    y += entryHeight;
+                    PaperCard pc = ImageUtil.getPaperCardFromImageKey(c.getCurrentState().getTrackableImageKey());
+                    if (pc != null) {
+                        revealed.add(pc);
+                        revealEntryDisplay = add(new RevealEntryDisplay(pc, isAltRow));
+                        isAltRow = !isAltRow;
+                        entryHeight = revealEntryDisplay.getMinHeight(entryWidth) + MARGINS;
+                        revealEntryDisplay.setBounds(0, y, entryWidth, entryHeight);
+                        y += entryHeight;
+                    } else {
+                        System.out.println("Unable to get PaperCard from imageKey: "+ c);
+                    }
                 }
             } else {
                 RevealEntryDisplay revealEntryDisplay;
@@ -128,7 +131,6 @@ public class VReveal extends FDropDown {
             paperCard = pc;
             altRow = isAltRow;
             text = CardTranslation.getTranslatedName(pc.getName()) + "\n" + formatType();
-            cardArt = CardRenderer.getCardArt(pc);
         }
 
         public float getMinHeight(float width) {
@@ -161,6 +163,8 @@ public class VReveal extends FDropDown {
             if (isHovered()) {
                 g.fillRect(getForeColor().brighter().alphaColor(0.3f), 0, 0, w, h);
             }
+            if (cardArt == null)
+                cardArt = CardRenderer.getCardArt(paperCard);
             g.drawImage(cardArt, 0, 0, cardArtWidth, h);
             //use full height without padding so text not scaled down
             renderer.drawText(g, text, FONT, getForeColor(), cardArtWidth + PADDING, PADDING, w - (2 * PADDING + cardArtWidth), h, 0, h, false, Align.left, false);
