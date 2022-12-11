@@ -13,12 +13,13 @@ public class ImageUtil {
         return (float)Math.round(actualSize) * (float)Math.pow(2, (double)Math.round(Math.log(baseSize / actualSize) / Math.log(2)));
     }
 
-    public static PaperCard getPaperCardFromImageKey(String key) {
-        if (key == null || key.length() < 2) {
+    public static PaperCard getPaperCardFromImageKey(final String imageKey) {
+        String key;
+        if (imageKey == null || imageKey.length() < 2) {
             return null;
         }
 
-        key = key.substring(2);
+        key = imageKey.substring(2);
         PaperCard cp = StaticData.instance().getCommonCards().getCard(key);
         if (cp == null) {
             cp = StaticData.instance().getVariantCards().getCard(key);
