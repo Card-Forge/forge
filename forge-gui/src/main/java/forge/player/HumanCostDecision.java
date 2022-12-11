@@ -1194,12 +1194,12 @@ public class HumanCostDecision extends CostDecisionMakerBase {
             try {
                 //for cards like Sword-Point Diplomacy and others that uses imprinted as container for their ability
                 if (cardView != null && cardView.getImprintedCards() != null && cardView.getImprintedCards().size() == 1)
-                    cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getImprintedCards().get(0).getCurrentState().getImageKey()));
+                    cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getImprintedCards().get(0).getCurrentState().getTrackableImageKey()));
                 else if (ability.getTargets() != null && ability.getTargets().isTargetingAnyCard() && ability.getTargets().size() == 1)
                     cardView = CardView.get(ability.getTargetCard());
                 else if (cardView.getZone() == null || cardView.getZone().isHidden()) {
                     if (!cardView.hasAlternateState()) //don't override if it has alternatestate since it maybe showing alternate view
-                        cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getCurrentState().getImageKey()));
+                        cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getCurrentState().getTrackableImageKey()));
                 }
             } catch (Exception e) {
                 //prevent NPE when overriding the cardView, the getPaperCardFromImageKey can return null making the GUI freeze, reset the view if error happens

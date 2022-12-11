@@ -1815,12 +1815,10 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
     @Override
     public boolean confirmPayment(final CostPart costPart, final String question, SpellAbility sa) {
         if (GuiBase.getInterface().isLibgdxPort()) {
-            CardView cardView = sa.getView().getHostCard();
+            CardView cardView;
             try {
-                if (cardView.getZone() == null || cardView.getZone().isHidden())
-                    cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(cardView.getCurrentState().getImageKey()));
+                cardView = CardView.getCardForUi(ImageUtil.getPaperCardFromImageKey(sa.getView().getHostCard().getCurrentState().getTrackableImageKey()));
             } catch (Exception e) {
-                //prevent NPE
                 cardView = sa.getView().getHostCard();
             }
             return this.getGui().confirm(cardView, question.replaceAll("\n", " "));
