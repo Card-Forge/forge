@@ -2,8 +2,8 @@ Name:Richlau, Headmaster
 ManaCost:1 W U
 Types:Legendary Creature Human Advisor
 PT:2/4
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ At the beginning of your end step, you may pay {1}. When you do, target artifact card in your graveyard perpetually gains "This spell costs {1} less to cast." If it's a creature or Vehicle card, it perpetually gets +2/+2. Put it into your library second from the top. 
-SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigPump | TriggerDescription$ When you do, target artifact card in your graveyard perpetually gains "This spell costs {1} less to cast." If it's a creature or Vehicle card, it perpetually gets +2/+2. Put it into your library second from the top. 
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigImmediateTrig | TriggerDescription$ At the beginning of your end step, you may pay {1}. When you do, target artifact card in your graveyard perpetually gains "This spell costs {1} less to cast." If it's a creature or Vehicle card, it perpetually gets +2/+2. Put it into your library second from the top.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 1 | Execute$ TrigPump | TriggerDescription$ When you do, target artifact card in your graveyard perpetually gains "This spell costs {1} less to cast." If it's a creature or Vehicle card, it perpetually gets +2/+2. Put it into your library second from the top.
 SVar:TrigPump:DB$ Effect | TgtZone$ Graveyard | ValidTgts$ Artifact.YouOwn | TgtPrompt$ Select target artifact card in your graveyard | StaticAbilities$ CostReduction | RememberObjects$ Targeted | Name$ Richlau, Headmaster's Perpetual Effect | Duration$ Permanent | SubAbility$ PumpVehicle
 SVar:CostReduction:Mode$ Continuous | Affected$ Card.IsRemembered | AddStaticAbility$ PerpetualReduce | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The card perpetually gains "This spell costs {1} less to cast."
 SVar:PerpetualReduce:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 1 | EffectZone$ All | Description$ This spell costs {1} less to cast.
@@ -11,4 +11,4 @@ SVar:PumpVehicle:DB$ Effect | ConditionDefined$ Targeted | ConditionPresent$ Veh
 SVar:PerpetualPump:Mode$ Continuous | AddPower$ 2 | AddToughness$ 2 | Affected$ Card.IsRemembered | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ If it's a creature or Vehicle card, it perpetually gets +2/+2.
 SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 1 | Defined$ Targeted
 DeckHints:Ability$Graveyard & Type$Vehicle
-Oracle:At the beginning of your end step, you may pay {1}. When you do, target artifact card in your graveyard perpetually gains "This spell costs {1} less to cast." If it's a creature or Vehicle card, it perpetually gets +2/+2. Put it into your library second from the top. 
+Oracle:At the beginning of your end step, you may pay {1}. When you do, target artifact card in your graveyard perpetually gains "This spell costs {1} less to cast." If it's a creature or Vehicle card, it perpetually gets +2/+2. Put it into your library second from the top.

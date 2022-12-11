@@ -5,6 +5,6 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigChoose:DB$ ChooseCard | Choices$ Creature.leastToughness+OppCtrl | ChoiceTitle$ Choose a creature with the least toughness among creatures your opponents control | Mandatory$ True | SubAbility$ DBEffect
 SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualDebuff | Name$ Penregon Besieged's Perpetual Effect | Duration$ Permanent
 SVar:PerpetualDebuff:Mode$ Continuous | Affected$ Card.ChosenCard | AddPower$ -1 | AddToughness$ -1 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets -1/-1.
-T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature.OppCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When your opponents control no creatures, sacrifice CARDNAME. 
+T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Creature.OppCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When your opponents control no creatures, sacrifice CARDNAME.
 SVar:TrigSac:DB$ Sacrifice | Defined$ Self
-Oracle:At the beginning of your end step, choose a creature with the least toughness among creatures your opponents control. It perpetually gets -1/-1.\nWhen your opponents control no creatures, sacrifice Penregon Besieged. 
+Oracle:At the beginning of your end step, choose a creature with the least toughness among creatures your opponents control. It perpetually gets -1/-1.\nWhen your opponents control no creatures, sacrifice Penregon Besieged.
