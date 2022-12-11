@@ -1,6 +1,7 @@
 package forge.screens.match.views;
 
 import com.badlogic.gdx.utils.Align;
+import com.google.common.collect.Iterables;
 import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
@@ -10,23 +11,24 @@ import forge.assets.TextRenderer;
 import forge.card.CardRenderer;
 import forge.card.CardZoom;
 import forge.game.card.CardView;
-import forge.gui.card.CardDetailUtil;
+import forge.item.PaperCard;
 import forge.menu.FDropDown;
 import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 import forge.toolbox.FLabel;
-import forge.trackable.TrackableCollection;
 import forge.util.CardTranslation;
+import forge.util.ImageUtil;
 import forge.util.Utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class VReveal extends FDropDown {
     public static final float MARGINS = Utils.scale(4);
     private static final FSkinFont FONT = FSkinFont.get(11);
     public static final float PADDING = Utils.scale(3);
-    private TrackableCollection<CardView> revealed;
+    private List<PaperCard> revealed = new ArrayList<>();
 
     private static FSkinColor getAltRowColor() {
         if (Forge.isMobileAdventureMode)
@@ -70,8 +72,7 @@ public class VReveal extends FDropDown {
         if (entryWidth < minWidth) {
             entryWidth = minWidth;
         }
-        revealed = MatchController.instance.getGameView().getRevealedCollection();
-        if (revealed == null || revealed.isEmpty()) {
+        if (MatchController.instance.getGameView().getRevealedCollection() == null || MatchController.instance.getGameView().getRevealedCollection().isEmpty()) {
             FLabel label = add(new FLabel.Builder().text("[" + Forge.getLocalizer().getMessage("lblEmpty") + "]").font(FSkinFont.get(11)).align(Align.center).build());
 
             float height = Math.round(label.getAutoSizeBounds().height) + 2 * PADDING;
@@ -79,36 +80,58 @@ public class VReveal extends FDropDown {
 
             return new ScrollBounds(totalWidth, y + height + MARGINS);
         } else {
-            clear();
-            boolean isAltRow = false;
-            RevealEntryDisplay revealEntryDisplay;
-            x = getMenuTab().screenPos.x;
-            y = 1;
-            for (CardView c : revealed) {
-                revealEntryDisplay = add(new RevealEntryDisplay(c, isAltRow));
-                isAltRow = !isAltRow;
-                entryHeight = revealEntryDisplay.getMinHeight(entryWidth) + MARGINS;
-                revealEntryDisplay.setBounds(0, y, entryWidth, entryHeight);
-                y += entryHeight;
+            if (MatchController.instance.getGameView().getRevealedCollection().size() > revealed.size()) {
+                clear();
+                revealed.clear();
+                boolean isAltRow = false;
+                RevealEntryDisplay revealEntryDisplay;
+                x = getMenuTab().screenPos.x;
+                y = 1;
+                for (CardView c :  MatchController.instance.getGameView().getRevealedCollection()) {
+                    //the card may be returned to hidden zone and cannot be viewed currently (ie Capsize), to fix this just get the imagekey and get the papercard
+                    PaperCard pc = ImageUtil.getPaperCardFromImageKey(c.getCurrentState().getImageKey(Collections.singleton(c.getOwner())));
+                    revealed.add(pc);
+                    revealEntryDisplay = add(new RevealEntryDisplay(pc, isAltRow));
+                    isAltRow = !isAltRow;
+                    entryHeight = revealEntryDisplay.getMinHeight(entryWidth) + MARGINS;
+                    revealEntryDisplay.setBounds(0, y, entryWidth, entryHeight);
+                    y += entryHeight;
+                }
+            } else {
+                RevealEntryDisplay revealEntryDisplay;
+                y = 1;
+                try {
+                    for (FDisplayObject displayObject : Iterables.unmodifiableIterable(getChildren())) {
+                        if (displayObject instanceof RevealEntryDisplay) {
+                            revealEntryDisplay = ((RevealEntryDisplay) displayObject);
+                            entryHeight = revealEntryDisplay.getMinHeight(entryWidth) + MARGINS;
+                            revealEntryDisplay.setBounds(0, y, entryWidth, entryHeight);
+                            y += entryHeight;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
+
         }
         return new ScrollBounds(totalWidth, y + MARGINS);
     }
 
     private class RevealEntryDisplay extends FDisplayObject {
-        CardView card;
+        PaperCard paperCard;
         boolean altRow;
         String text;
         FImage cardArt;
 
-        private RevealEntryDisplay(CardView cardView, boolean isAltRow) {
-            card = cardView;
+        private RevealEntryDisplay(PaperCard pc, boolean isAltRow) {
+            paperCard = pc;
             altRow = isAltRow;
-            text = CardTranslation.getTranslatedName(card.getCurrentState().getName()) + "\n" + formatType();
-            cardArt = CardRenderer.getCardArt(cardView);
+            text = CardTranslation.getTranslatedName(pc.getName()) + "\n" + formatType();
+            cardArt = CardRenderer.getCardArt(pc);
         }
 
-        private float getMinHeight(float width) {
+        public float getMinHeight(float width) {
             width -= 2 * PADDING; //account for left and right insets
             float height = renderer.getWrappedBounds("\n", FONT, width).height;
             height += 2 * PADDING;
@@ -118,9 +141,8 @@ public class VReveal extends FDropDown {
         @Override
         public boolean tap(float x, float y, int count) {
             try {
-                List<CardView> cardViewList = new ArrayList<>(revealed);
-                int index = cardViewList.indexOf(card);
-                CardZoom.show(cardViewList, index, null);
+                int index = revealed.indexOf(paperCard);
+                CardZoom.show(revealed, index, null);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -145,13 +167,13 @@ public class VReveal extends FDropDown {
         }
 
         private String formatType() {
-            String type = CardDetailUtil.formatCardType(card.getCurrentState(), true);
-            if (card.getCurrentState().isCreature()) { //include P/T or Loyalty at end of type
-                type += " (" + card.getCurrentState().getPower() + " / " + card.getCurrentState().getToughness() + ")";
-            } else if (card.getCurrentState().isPlaneswalker()) {
-                type += " (" + card.getCurrentState().getLoyalty() + ")";
-            } else if (card.getCurrentState().getType().hasSubtype("Vehicle")) {
-                type += String.format(" [%s / %s]", card.getCurrentState().getPower(), card.getCurrentState().getToughness());
+            String type = paperCard.getRules().getType().toString();
+            if (paperCard.getRules().getType().isCreature()) { //include P/T or Loyalty at end of type
+                type += " (" + paperCard.getRules().getPower() + " / " + paperCard.getRules().getToughness() + ")";
+            } else if (paperCard.getRules().getType().isPlaneswalker()) {
+                type += " (" + paperCard.getRules().getInitialLoyalty() + ")";
+            } else if (paperCard.getRules().getType().hasSubtype("Vehicle")) {
+                type += String.format(" [%s / %s]", paperCard.getRules().getPower(), paperCard.getRules().getToughness());
             }
             return type;
         }
