@@ -6,7 +6,7 @@ K:This spell can't be countered.
 K:Flying
 K:Protection:Spell.nonColorless:Protection from colored spells
 K:Annihilator:6
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.Self | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, its owner shuffles their graveyard into their library.
 SVar:TrigShuffle:DB$ ChangeZoneAll | Defined$ TriggeredCardOwner | ChangeType$ Card | Origin$ Graveyard | Destination$ Library | Shuffle$ True
 T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigAddTurn | TriggerDescription$ When you cast CARDNAME, take an extra turn after this one.
 SVar:TrigAddTurn:DB$ AddTurn | Defined$ You | NumTurns$ 1
