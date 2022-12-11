@@ -4,10 +4,10 @@ Types:Artifact Creature Construct
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigConjure | TriggerDescription$ When CARDNAME enters the battlefield, conjure cards named Urza's Mine, Urza's Power Plant, and Urza's Tower into your library, then shuffle.
 SVar:TrigConjure:DB$ MakeCard | Conjure$ True | Names$ Urza's Mine,Urza's Tower,Urza's Power Plant | Zone$ Library
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ Whenever CARDNAME attacks or dies, seek an Urza's land card. 
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigSeek | Secondary$ True | Execute$ TrigSeek | TriggerDescription$ Whenever CARDNAME attacks or dies, seek an Urza's land card. 
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSeek | TriggerDescription$ Whenever CARDNAME attacks or dies, seek an Urza's land card.
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigSeek | Secondary$ True | Execute$ TrigSeek | TriggerDescription$ Whenever CARDNAME attacks or dies, seek an Urza's land card.
 SVar:TrigSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Land.Urza's | ChangeNum$ 1
 SVar:HasAttackEffect:TRUE
 DeckHas:Type$Urza's
 DeckHints:Type$Urza's
-Oracle:When Urza's Construction Drone enters the battlefield, conjure cards named Urza's Mine, Urza's Power Plant, and Urza's Tower into your library, then shuffle.\nWhenever Urza's Construction Drone attacks or dies, seek an Urza's land card. 
+Oracle:When Urza's Construction Drone enters the battlefield, conjure cards named Urza's Mine, Urza's Power Plant, and Urza's Tower into your library, then shuffle.\nWhenever Urza's Construction Drone attacks or dies, seek an Urza's land card.
