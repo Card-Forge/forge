@@ -440,7 +440,8 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals(blocker, sa.getTargetCard());
     }
 
-    @Test
+    // Run the test 100 times to ensure there's no flakiness.
+    @Test(invocationCount = 100)
     public void testChoicesResultingFromRandomEffects() {
         // Sometimes, the effect of a spell can be random, and as a result of that, new choices
         // could be selected during simulation. This test verifies that this doesn't cause problems.
@@ -449,40 +450,37 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         // seed during choice evaluation, although in the future, it may make sense to handle it
         // some other way.
 
-        // Run the test 100 times to ensure there's no flakiness.
-        for (int i = 0; i < 100; i++) {
-            Game game = initAndCreateGame();
-            Player p = game.getPlayers().get(1);
-            Player opponent = game.getPlayers().get(0);
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
 
-            addCardToZone("Chaos Warp", p, ZoneType.Hand);
-            addCard("Mountain", p);
-            addCard("Mountain", p);
-            addCard("Mountain", p);
+        addCardToZone("Chaos Warp", p, ZoneType.Hand);
+        addCard("Mountain", p);
+        addCard("Mountain", p);
+        addCard("Mountain", p);
 
-            addCard("Plains", opponent);
-            addCard("Mountain", opponent);
-            addCard("Forest", opponent);
-            // Use a card that is worthwhile to target even if the shuffle ends up choosing it
-            // again. In this case, life loss on ETB and leaving.
-            Card expectedTarget = addCard("Raving Oni-Slave", opponent);
+        addCard("Plains", opponent);
+        addCard("Mountain", opponent);
+        addCard("Forest", opponent);
+        // Use a card that is worthwhile to target even if the shuffle ends up choosing it
+        // again. In this case, life loss on ETB and leaving.
+        Card expectedTarget = addCard("Raving Oni-Slave", opponent);
 
-            addCardToZone("Chaos Warp", opponent, ZoneType.Library);
-            addCardToZone("Island", opponent, ZoneType.Library);
-            addCardToZone("Swamp", opponent, ZoneType.Library);
-            // The presence of Pilgrim's Eye in the library is important for this test, as this
-            // will result in sub-choices (which land to pick) if this card ends up being the top
-            // of the library during simulation.
-            addCardToZone("Pilgrim's Eye", opponent, ZoneType.Library);
+        addCardToZone("Chaos Warp", opponent, ZoneType.Library);
+        addCardToZone("Island", opponent, ZoneType.Library);
+        addCardToZone("Swamp", opponent, ZoneType.Library);
+        // The presence of Pilgrim's Eye in the library is important for this test, as this
+        // will result in sub-choices (which land to pick) if this card ends up being the top
+        // of the library during simulation.
+        addCardToZone("Pilgrim's Eye", opponent, ZoneType.Library);
 
-            game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
-            game.getAction().checkStateEffects(true);
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
 
-            SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
-            SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
-            AssertJUnit.assertNotNull(sa);
-            AssertJUnit.assertEquals("Chaos Warp", sa.getHostCard().getName());
-            AssertJUnit.assertEquals(expectedTarget, sa.getTargetCard());
-        }
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertEquals("Chaos Warp", sa.getHostCard().getName());
+        AssertJUnit.assertEquals(expectedTarget, sa.getTargetCard());
     }
 }
