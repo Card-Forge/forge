@@ -156,8 +156,8 @@ public class FMenuTab extends FDisplayObject {
         if (iconOnly) {
             float mod = w * 0.75f;
             FImage icon = active ? FSkinImage.SEE : FSkinImage.UNSEE;
-            float scaleW = icon.getWidth() * 0.8f;
-            float scaleH = icon.getHeight() * 0.8f;
+            float scaleW = w * 0.8f;
+            float scaleH = scaleW * 0.6f;
             g.drawImage(icon, x + w/2 - scaleW/2, y + h/2 - scaleH/2, scaleW, scaleH);
         } else
             g.drawText(text, FONT, foreColor, x, y, w, h, false, Align.center, true);
