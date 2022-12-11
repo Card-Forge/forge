@@ -275,7 +275,7 @@ ScryfallCode=30A
 263 R Nevinyrral's Disk @Mark Tedin
 264 U Obsianus Golem @Jesper Myrfors
 265 U Rod of Ruin @Christopher Rush
-266 C Sol Ring @Mark Tedin
+266 U Sol Ring @Mark Tedin
 267 U Soul Net @Dameon Willich
 268 R Sunglasses of Urza @Dan Frazier
 269 U Throne of Bone @Anson Maddocks
@@ -437,7 +437,7 @@ ScryfallCode=30A
 425 C Unholy Strength @Douglas Shuler
 426 U Wall of Bone @Anson Maddocks
 427 R Warp Artifact @Amy Weber
-428 U Sol Ring @Mark Tedin
+428 C Sol Ring @Mark Tedin
 429 R Will-o'-the-Wisp @Jesper Myrfors
 430 R Word of Command @Jesper Myrfors
 431 R Zombie Master @Jeff A. Menges

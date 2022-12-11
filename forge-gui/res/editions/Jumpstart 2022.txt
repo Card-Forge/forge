@@ -89,7 +89,7 @@ ScryfallCode=J22
 81 U Rigging Runner @Midon
 82 C Spear Spewer @Ryuichi Sakuma
 83 C Thermo-Alchemist @Azutaro
-84 C Thrill of Possibility @Tatsuma Daisuke
+84 C Thrill of Possibility @Daisuke Tatsuma
 85 U Arlinn, Voice of the Pack @Hisashi Momose
 86 C Caustic Caterpillar @Ai Nanahira
 87 U Colossal Majesty @Tetsu Kurosawa

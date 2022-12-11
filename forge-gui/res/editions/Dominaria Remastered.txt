@@ -41,7 +41,7 @@ ScryfallCode=DMR
 32 M Test of Endurance @Denman Rooke
 33 C Vigilant Sentry @Eric Peterson
 34 U Voice of All @rk post
-35 C Whitemane Lion @Zoltan Boros
+35 C Whitemane Lion @Zoltan Boros & Gabor Szikszai
 36 R Windborn Muse @Adam Rex
 37 R Wrath of God @Kev Walker
 38 C Aquamoeba @Arnie Swekel
@@ -96,7 +96,7 @@ ScryfallCode=DMR
 87 C Goblin Turncoat @Borja Pindado
 88 C Howl from Beyond @Dave Dorman
 89 C Hyalopterous Lemure @Pavel Kolomeyets
-90 C Ichor Slick @Zoltan Boros
+90 C Ichor Slick @Zoltan Boros & Gabor Szikszai
 91 R Mindslicer @Kev Walker
 92 R Nantuko Shade @Brian Snõddy
 93 U Necrosavant @Alexander Mokhov
@@ -283,7 +283,7 @@ ScryfallCode=DMR
 274 C Spirit Link @Kev Walker
 275 U Swords to Plowshares @Jesper Ejsing
 276 M Test of Endurance @Denman Rooke
-277 C Whitemane Lion @Zoltan Boros
+277 C Whitemane Lion @Zoltan Boros & Gabor Szikszai
 278 R Windborn Muse @Adam Rex
 279 R Wrath of God @Kev Walker
 280 R Arcanis the Omnipotent @Justin Sweet
