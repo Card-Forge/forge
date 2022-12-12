@@ -61,7 +61,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
     final int preview_h = 680;
 
     static TextureRegion backTexture;
-    Texture image, T;
+    Texture image, T, Talt;
     Graphics graphics;
     Texture generatedTooltip = null; //Storage for a generated tooltip. To dispose of on exit.
     boolean needsToBeDisposed;
@@ -102,6 +102,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
 
     @Override
     public void onImageFetched() {
+        ImageCache.clear();
         String imageKey = reward.getCard().getImageKey(false);
         PaperCard card = ImageUtil.getPaperCardFromImageKey(imageKey);
         imageKey = card.getCardImageKey();
@@ -216,10 +217,15 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                         }
                     } else if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(false))) {
                         //Cannot find an image file, set up a rendered card until (if) a file is downloaded.
-                        T = renderPlaceholder(getGraphics(), reward.getCard()); //Now we can render the card.
+                        T = renderPlaceholder(new Graphics(), reward.getCard(), false); //Now we can render the card.
                         setCardImage(T);
                         loaded = false;
                         fetcher.fetchImage(reward.getCard().getImageKey(false), this);
+                        if (reward.getCard().hasBackFace()) {
+                            if (!ImageCache.imageKeyFileExists(reward.getCard().getImageKey(true))) {
+                                fetcher.fetchImage(reward.getCard().getImageKey(true), this);
+                            }
+                        }
                     }
                 }
                 break;
@@ -325,17 +331,16 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         if (!reward.getCard().hasBackFace())
             return;
         Texture alt = ImageCache.getImage(reward.getCard().getImageKey(true), false);
-        PaperCard altCard = ImageUtil.getPaperCardFromImageKey(reward.getCard().getCardAltImageKey());
         if (GuiBase.isAndroid() || Forge.hasGamepad()) {
             if (alternate) {
                 if (alt != null) {
                     holdTooltip.tooltip_actor.clear();
                     holdTooltip.tooltip_actor.add(new RewardImage(processDrawable(alt)));
                 } else {
-                    if (T == null)
-                        T = renderPlaceholder(getGraphics(), altCard);
+                    if (Talt == null)
+                        Talt = renderPlaceholder(new Graphics(), reward.getCard(), true);
                     holdTooltip.tooltip_actor.clear();
-                    holdTooltip.tooltip_actor.add(new RewardImage(processDrawable(T)));
+                    holdTooltip.tooltip_actor.add(new RewardImage(processDrawable(Talt)));
                 }
             } else {
                 if (toolTipImage != null) {
@@ -349,9 +354,9 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                     if (alt != null) {
                         tooltip.setActor(new RewardImage(processDrawable(alt)));
                     } else {
-                        if (T == null)
-                            T = renderPlaceholder(getGraphics(), altCard);
-                        tooltip.setActor(new RewardImage(processDrawable(T)));
+                        if (Talt == null)
+                            Talt = renderPlaceholder(new Graphics(), reward.getCard(), true);
+                        tooltip.setActor(new RewardImage(processDrawable(Talt)));
                     }
                 } else {
                     if (toolTipImage != null)
@@ -441,7 +446,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
     }
 
-    private Texture renderPlaceholder(Graphics g, PaperCard card) { //Use CardImageRenderer to output a Texture.
+    private Texture renderPlaceholder(Graphics g, PaperCard card, boolean alternate) { //Use CardImageRenderer to output a Texture.
         if (renderedCount++ == 0) {
             //The first time we find a card that has no art, render one out of view to fully initialize CardImageRenderer.
             g.begin(preview_w, preview_h);
@@ -456,7 +461,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         g.begin(preview_w, preview_h);
         g.setProjectionMatrix(m);
         g.startClip();
-        CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), false, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, true);
+        CardImageRenderer.drawCardImage(g, CardView.getCardForUi(card), alternate, 0, 0, preview_w, preview_h, CardRenderer.CardStackPosition.Top, Forge.allowCardBG, true);
         g.end();
         g.endClip();
         //Rendering ends here. Create a new Pixmap to Texture with mipmaps, otherwise will render as full black.
@@ -623,7 +628,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 drawCard(batch, image, x, width);
             } else if (!loaded) {
                 if (T == null)
-                    T = renderPlaceholder(getGraphics(), reward.getCard());
+                    T = renderPlaceholder(getGraphics(), reward.getCard(), false);
                 drawCard(batch, T, x, width);
             }
         } else if (image != null) {
@@ -637,7 +642,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 batch.end();
                 shaderRoundRect.bind();
                 shaderRoundRect.setUniformf("u_resolution", image.getWidth(), image.getHeight());
-                shaderRoundRect.setUniformf("edge_radius", (image.getHeight()/image.getWidth())*20);
+                shaderRoundRect.setUniformf("edge_radius", (image.getHeight() / image.getWidth()) * 20);
                 shaderRoundRect.setUniformf("u_gray", sold ? 1f : 0f);
                 batch.setShader(shaderRoundRect);
                 batch.begin();
@@ -816,6 +821,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
             shown = false;
         }
     }
+
     class RewardImage extends Image {
         public RewardImage(TextureRegionDrawable processDrawable) {
             setDrawable(processDrawable);
@@ -829,7 +835,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                 if (getDrawable() instanceof TextureRegionDrawable) {
                     Texture t = ((TextureRegionDrawable) getDrawable()).getRegion().getTexture();
                     if (t != null) {
-                        float x = GuiBase.isAndroid() || Forge.hasGamepad() ? Scene.getIntendedWidth() / 2 - holdTooltip.tooltip_actor.getWidth() / 2: tooltip.getActor().getImageX();
+                        float x = GuiBase.isAndroid() || Forge.hasGamepad() ? Scene.getIntendedWidth() / 2 - holdTooltip.tooltip_actor.getWidth() / 2 : tooltip.getActor().getImageX();
                         float y = GuiBase.isAndroid() || Forge.hasGamepad() ? Scene.getIntendedHeight() / 2 - holdTooltip.tooltip_actor.getHeight() / 2 : tooltip.getActor().getImageY();
                         float w = GuiBase.isAndroid() || Forge.hasGamepad() ? holdTooltip.tooltip_actor.getPrefWidth() : tooltip.getActor().getPrefWidth();
                         float h = GuiBase.isAndroid() || Forge.hasGamepad() ? holdTooltip.tooltip_actor.getPrefHeight() : tooltip.getActor().getPrefHeight();
@@ -837,7 +843,7 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
                             batch.end();
                             shaderRoundRect.bind();
                             shaderRoundRect.setUniformf("u_resolution", t.getWidth(), t.getHeight());
-                            shaderRoundRect.setUniformf("edge_radius", (t.getHeight()/t.getWidth())*ImageCache.getRadius(t));
+                            shaderRoundRect.setUniformf("edge_radius", (t.getHeight() / t.getWidth()) * ImageCache.getRadius(t));
                             shaderRoundRect.setUniformf("u_gray", sold ? 0.8f : 0f);
                             batch.setShader(shaderRoundRect);
                             batch.begin();
