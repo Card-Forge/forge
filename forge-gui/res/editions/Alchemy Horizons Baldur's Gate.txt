@@ -3,6 +3,10 @@ Code=HBG
 Date=2022-07-07
 Name=Alchemy Horizons: Baldur's Gate
 Type=Online
+BoosterCovers=3
+Booster=10 Common:fromsheet("HBG cards"), 3 Uncommon:fromSheet("HBG cards"), 1 RareMythic:fromSheet("HBG cards"), 1 fromSheet("HBG lands")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=HBG
 
 [cards]
@@ -331,3 +335,25 @@ A232 R A-Baba Lysaga, Night Witch @Slawomir Maniak
 A243 M A-Minsc & Boo, Timeless Heroes @Andreas Zafiratos
 A259 C A-Lantern of Revealing @Eytan Zana
 A262 U A-Navigation Orb @Robin Olausson
+
+[lands]
+1 Plains|HBG|1
+1 Plains|HBG|2
+1 Plains|HBG|3
+1 Plains|HBG|4
+1 Island|HBG|1
+1 Island|HBG|2
+1 Island|HBG|3
+1 Island|HBG|4
+1 Swamp|HBG|1
+1 Swamp|HBG|2
+1 Swamp|HBG|3
+1 Swamp|HBG|4
+1 Mountain|HBG|1
+1 Mountain|HBG|2
+1 Mountain|HBG|3
+1 Mountain|HBG|4
+1 Forest|HBG|1
+1 Forest|HBG|2
+1 Forest|HBG|3
+1 Forest|HBG|4
