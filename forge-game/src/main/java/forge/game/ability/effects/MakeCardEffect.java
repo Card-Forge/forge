@@ -87,17 +87,16 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 int toMake = amount;
                 if (!name.equals("")) {
                     while (toMake > 0) {
-                        Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name),
-                                player);
+                        Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), player);
                         if (sa.hasParam("TokenCard")) {
                             card.setTokenCard(true);
                         }
                         game.getAction().moveTo(ZoneType.None, card, sa, moveParams);
                         cards.add(card);
                         toMake--;
-	                        if (sa.hasParam("Tapped")) {
-	                            card.setTapped(true);
-	                  }
+                        if (sa.hasParam("Tapped")) {
+                            card.setTapped(true);
+                        }
                     }
                 }
             }

@@ -75,11 +75,6 @@ public class TriggerDamagePreventedOnce extends Trigger {
             if (!Expressions.compare(actualAmount, operator, operand)) {
                 return false;
             }
-
-            System.out.print("DamageDone Amount Operator: ");
-            System.out.println(operator);
-            System.out.print("DamageDone Amount Operand: ");
-            System.out.println(operand);
         }
 
         return true;
