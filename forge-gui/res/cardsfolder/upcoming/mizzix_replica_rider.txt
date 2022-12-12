@@ -11,5 +11,5 @@ SVar:TrigSac:DB$ Sacrifice
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 AI:RemoveDeck:Random
 DeckHas:Ability$Token|Sacrifice
-DeckHints:Type$Instant|Sorcery & Keyword$Unearth|Foretell|Flashback
+DeckHints:Type$Instant|Sorcery & Keyword$Foretell|Flashback
 Oracle:Flying\nWhenever you cast a spell from anywhere other than your hand, you may pay {1}{U/R}. If you do, copy that spell and you may choose new targets for the copy. If the copy is a permanent spell, it gains haste and "At the beginning of the end step, sacrifice this permanent." (A copy of a permanent spell becomes a token.)
