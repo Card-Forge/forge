@@ -44,7 +44,7 @@ public class VAvatar extends FDisplayObject {
         avatarAnimation = new AvatarAnimation();
     }
     private class AvatarAnimation extends ForgeAnimation {
-        private static final float DURATION = 0.6f;
+        private static final float DURATION = 1.2f;
         private float progress = 0;
         Texture splatter = FSkin.splatter;
 

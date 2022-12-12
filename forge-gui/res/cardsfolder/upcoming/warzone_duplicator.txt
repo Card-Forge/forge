@@ -12,4 +12,4 @@ SVar:SpendAnyMana:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | Aff
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggeredCard$CardPower
 DeckHints:Color$Blue
-Oracle:Prototype {3}{U} — 3/3 (You may cast this spell with different mana cost, color, and size. It keeps its abilities and types.)\n\nWhen Warzone Duplicator enters the battlefield, return target creature an opponent controls with power less than Warzone Duplicator's power to it's owner's hand. If that creature wasn't a token, conjure a duplicate of it into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell." 
+Oracle:Prototype {3}{U} — 3/3\nWhen Warzone Duplicator enters the battlefield, return target creature an opponent controls with power less than Warzone Duplicator's power to it's owner's hand. If that creature wasn't a token, conjure a duplicate of it into your hand. It perpetually gains "You may spend mana as though it were mana of any color to cast this spell."

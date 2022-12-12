@@ -183,7 +183,7 @@ public class Game {
     public Player getHasInitiative() {
         return initiative;
     }
-    public void setHasInitiative(final Player p ) {
+    public void setHasInitiative(final Player p) {
         initiative = p;
     }
 

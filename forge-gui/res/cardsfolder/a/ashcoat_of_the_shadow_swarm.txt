@@ -7,7 +7,7 @@ T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPump | Secondary$ True | Tr
 SVar:TrigPump:DB$ PumpAll | ValidCards$ Rat.Other+YouCtrl | NumAtt$ +X | NumDef$ +X
 SVar:X:Count$Valid Rat.YouCtrl
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigChange | TriggerDescription$ At the beginning of your end step, you may mill four cards. If you do, return up to two Rat creature cards from your graveyard to your hand. (To mill a card, put the top card of your library into your graveyard.)
-SVar:TrigChange:AB$ ChangeZone | Cost$ Mill<4> | Origin$ Graveyard | Destination$ Hand | ChangeType$ Rat.Creature+YouOwn | ChangeNum$ 2 | SelectPrompt$ Select up to two Rat creature cards
+SVar:TrigChange:AB$ ChangeZone | Cost$ Mill<4> | Origin$ Graveyard | Destination$ Hand | ChangeType$ Rat.Creature+YouOwn | ChangeNum$ 2 | Hidden$ True | SelectPrompt$ Select up to two Rat creature cards
 SVar:HasAttackEffect:TRUE
 SVar:HasBlockEffect:TRUE
 DeckNeeds:Type$Rat

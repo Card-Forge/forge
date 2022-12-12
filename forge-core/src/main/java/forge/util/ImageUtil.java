@@ -18,13 +18,44 @@ public class ImageUtil {
         if (imageKey == null || imageKey.length() < 2) {
             return null;
         }
+        if (imageKey.startsWith(ImageKeys.CARD_PREFIX))
+            key = imageKey.substring(ImageKeys.CARD_PREFIX.length());
+        else if (imageKey.startsWith(ImageKeys.TOKEN_PREFIX))
+            key = imageKey.substring(ImageKeys.TOKEN_PREFIX.length());
+        else if (imageKey.startsWith(ImageKeys.ICON_PREFIX))
+            key = imageKey.substring(ImageKeys.ICON_PREFIX.length());
+        else if (imageKey.startsWith(ImageKeys.BOOSTER_PREFIX))
+            key = imageKey.substring(ImageKeys.BOOSTER_PREFIX.length());
+        else if (imageKey.startsWith(ImageKeys.FATPACK_PREFIX))
+            key = imageKey.substring(ImageKeys.FATPACK_PREFIX.length());
+        else if (imageKey.startsWith(ImageKeys.BOOSTERBOX_PREFIX))
+            key = imageKey.substring(ImageKeys.BOOSTERBOX_PREFIX.length());
+        else if (imageKey.startsWith(ImageKeys.PRECON_PREFIX))
+            key = imageKey.substring(ImageKeys.PRECON_PREFIX.length());
+        else if (imageKey.startsWith(ImageKeys.TOURNAMENTPACK_PREFIX))
+            key = imageKey.substring(ImageKeys.TOURNAMENTPACK_PREFIX.length());
+        else if (imageKey.startsWith(ImageKeys.ADVENTURECARD_PREFIX))
+            key = imageKey.substring(ImageKeys.ADVENTURECARD_PREFIX.length());
+        else if (imageKey.contains(".full")) {//no prefix found, construct a valid key if imageKey is art imagekey.
+            key = transformKey(imageKey);
+        } else //try anyway...
+            key = imageKey;
 
-        key = imageKey.substring(2);
         PaperCard cp = StaticData.instance().getCommonCards().getCard(key);
         if (cp == null) {
             cp = StaticData.instance().getVariantCards().getCard(key);
         }
         return cp;
+    }
+    public static String transformKey(String imageKey) {
+        String key;
+        String edition= imageKey.substring(0, imageKey.indexOf("/"));
+        String artIndex = imageKey.substring(imageKey.indexOf("/")+1, imageKey.indexOf(".")).replaceAll("[^0-9]", "");
+        String name = artIndex.isEmpty() ? imageKey.substring(imageKey.indexOf("/")+1, imageKey.indexOf(".")) : imageKey.substring(imageKey.indexOf("/")+1, imageKey.indexOf(artIndex));
+        key = name + "|" + edition;
+        if (!artIndex.isEmpty())
+            key += "|" + artIndex;
+        return key;
     }
 
     public static String getImageRelativePath(PaperCard cp, String face, boolean includeSet, boolean isDownloadUrl) {
