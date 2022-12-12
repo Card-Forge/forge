@@ -3,6 +3,6 @@ ManaCost:2 R R
 Types:Creature Boar Beast
 PT:5/5
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice an artifact.
-SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Sac<1/Artifact> | UnlessPayer$ You
+SVar:TrigSacUnless:DB$ Sacrifice | UnlessCost$ Sac<1/Artifact> | UnlessPayer$ You
 AI:RemoveDeck:Random
 Oracle:When Vulshok War Boar enters the battlefield, sacrifice it unless you sacrifice an artifact.

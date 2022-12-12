@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | ManaNotSpent$ B | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless {B} was spent to cast it.
 SVar:TrigPump:AB$ Pump | Cost$ X | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | SpellDescription$ Target creature gets +X/+0 until end of turn.
 SVar:X:Count$xPaid
-SVar:TrigSac:DB$ Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice
 SVar:ManaNeededToAvoidNegativeEffect:black
 AI:RemoveDeck:All
 Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nWhen Squealing Devil enters the battlefield, you may pay {X}. If you do, target creature gets +X/+0 until end of turn.\nWhen Squealing Devil enters the battlefield, sacrifice it unless {B} was spent to cast it.

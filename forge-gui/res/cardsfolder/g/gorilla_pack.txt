@@ -4,6 +4,6 @@ Types:Creature Ape
 PT:3/3
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Forest | Description$ CARDNAME can't attack unless defending player controls a Forest.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Forest.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Forests, sacrifice CARDNAME.
-SVar:TrigSac:DB$ Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice
 SVar:NeedsToPlay:Forest.YouCtrl
 Oracle:Gorilla Pack can't attack unless defending player controls a Forest.\nWhen you control no Forests, sacrifice Gorilla Pack.
