@@ -88,6 +88,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
         if (T != null)
             T.dispose();
+        if (Talt != null)
+            Talt.dispose();
     }
 
     public boolean toolTipIsVisible() {
@@ -140,6 +142,8 @@ public class RewardActor extends Actor implements Disposable, ImageFetcher.Callb
         }
         if (T != null)
             T.dispose();
+        if (alternate && Talt != null)
+            Talt.dispose();
         ImageCache.updateSynqCount(imageFile, count);
         Gdx.graphics.requestRendering();
     }
