@@ -549,7 +549,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             final Zone originZone = game.getZoneOf(gameCard);
 
             // if Target isn't in the expected Zone, continue
-
             if (originZone == null || (!origin.isEmpty() && !origin.contains(originZone.getZoneType()))) {
                 continue;
             }
@@ -559,10 +558,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (destination.equals(ZoneType.Library)) {
                 // library position is zero indexed
                 int libraryPosition = 0;
-                if (!altDest) {
-                    libraryPosition = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(hostCard, sa.getParam("LibraryPosition"), sa) : 0;
-                } else {
+                if (altDest) {
                     libraryPosition = sa.hasParam("LibraryPositionAlternative") ? Integer.parseInt(sa.getParam("LibraryPositionAlternative")) : 0;
+                } else {
+                    libraryPosition = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(hostCard, sa.getParam("LibraryPosition"), sa) : 0;
                 }
 
                 // If a card is moved to library from the stack, remove its spells from the stack
