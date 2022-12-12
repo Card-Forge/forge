@@ -4,7 +4,7 @@ Types:Creature Dragon
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice two Mountains.
-SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Sac<2/Mountain> | UnlessPayer$ You
+SVar:TrigSacUnless:DB$ Sacrifice | UnlessCost$ Sac<2/Mountain> | UnlessPayer$ You
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$Valid Mountain.YouCtrl
 Oracle:Flying (This creature can't be blocked except by creatures with flying or reach.)\nWhen Rathi Dragon enters the battlefield, sacrifice it unless you sacrifice two Mountains.

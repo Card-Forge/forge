@@ -3,6 +3,6 @@ ManaCost:G
 Types:Creature Elephant
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice a Forest.
-SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Sac<1/Forest> | UnlessPayer$ You
+SVar:TrigSacUnless:DB$ Sacrifice | UnlessCost$ Sac<1/Forest> | UnlessPayer$ You
 SVar:NeedsToPlay:Forest.YouCtrl
 Oracle:When Rogue Elephant enters the battlefield, sacrifice it unless you sacrifice a Forest.

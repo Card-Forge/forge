@@ -8,7 +8,7 @@ SVar:DBMill:DB$ Mill | NumCards$ 1 | RememberMilled$ True | Defined$ Targeted | 
 SVar:DBAccumulateX:DB$ StoreSVar | SVar$ AccumulatedMilled | Type$ CountSVar | Expression$ AccumulatedMilled/Plus.1 | ConditionCheckSVar$ MilledCard | ConditionSVarCompare$ EQ1 | SubAbility$ DBMilledCreature
 SVar:DBMilledCreature:DB$ StoreSVar | SVar$ AccumulatedMilled | Type$ Calculate | Expression$ X | ConditionCheckSVar$ MilledCreature | ConditionSVarCompare$ EQ1 | SubAbility$ DBEmptyLibrary
 SVar:DBEmptyLibrary:DB$ StoreSVar | SVar$ AccumulatedMilled | Type$ Calculate | Expression$ X | ConditionCheckSVar$ TargetedLibrary | ConditionSVarCompare$ EQ0
-SVar:DBSacHelm:DB$ Sacrifice | Defined$ Self | ConditionCheckSVar$ MilledCreature | ConditionSVarCompare$ EQ1 | SubAbility$ DBStealCreature
+SVar:DBSacHelm:DB$ Sacrifice | ConditionCheckSVar$ MilledCreature | ConditionSVarCompare$ EQ1 | SubAbility$ DBStealCreature
 SVar:DBStealCreature:DB$ ChangeZone | Defined$ Remembered | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBResetCounter | ConditionCheckSVar$ MilledCreature | ConditionSVarCompare$ EQ1
 SVar:DBResetCounter:DB$ StoreSVar | SVar$ AccumulatedMilled | Type$ Number | Expression$ 0 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
