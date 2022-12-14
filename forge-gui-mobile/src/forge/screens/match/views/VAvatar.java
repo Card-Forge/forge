@@ -2,7 +2,6 @@ package forge.screens.match.views;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
@@ -10,7 +9,6 @@ import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
-import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.game.card.CounterEnumType;
@@ -46,7 +44,6 @@ public class VAvatar extends FDisplayObject {
     private class AvatarAnimation extends ForgeAnimation {
         private static final float DURATION = 0.8f;
         private float progress = 0;
-        Texture splatter = FSkin.splatter;
 
         private void drawAvatar(Graphics g, FImage image, float x, float y, float w, float h) {
             float percentage = progress / DURATION;
