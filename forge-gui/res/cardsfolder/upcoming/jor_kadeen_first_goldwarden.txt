@@ -5,7 +5,7 @@ PT:2/2
 K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +X/+X until end of turn, where X is the number of equipped creatures you control. Then if NICKNAME's power is 4 or greater, draw a card.
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ X | NumDef$ X | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | ConditionDefined$ Self | ConditionPresent$ Card.powGE4
+SVar:DBDraw:DB$ Draw | ConditionDefined$ Self | ConditionPresent$ Card.powerGE4
 SVar:X:Count$Valid Creature.YouCtrl+equipped
 DeckNeeds:Type$Equipment
 SVar:HasAttackEffect:TRUE
