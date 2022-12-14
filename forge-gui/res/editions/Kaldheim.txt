@@ -429,6 +429,8 @@ ScryfallCode=KHM
 403 U Poison the Cup @Colin Boyer
 404 C Frost Bite @Caio Monteiro
 405 C Masked Vandal @Jason A. Engle
+406 M Vorinclex, Monstrous Raider @Richard Whitters
+407 M Vorinclex, Monstrous Raider @Richard Whitters
 
 [rebalanced]
 A40 M A-Alrund, God of the Cosmos @Kieran Yanner

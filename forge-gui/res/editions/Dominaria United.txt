@@ -458,6 +458,8 @@ ScryfallCode=DMU
 432 U Cut Down @Dominik Mayer
 433 C Lightning Strike @Marta Nael
 434 U Nishoba Brawler @Valera Lutfullina
+435 M Sheoldred, the Apocalypse @Richard Whitters
+436 M Sheoldred, the Apocalypse @Richard Whitters
 
 [lands]
 2 Plains|DMU|1
