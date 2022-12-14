@@ -915,49 +915,64 @@ public class CardImageRenderer {
                 } else if (backColors.get(0) == DetailColors.LAND) {
                     g.drawImage(isPW ? FSkinTexture.PWBG_C : FSkinTexture.CARDBG_L, x, y, w, h);
                 } else if (backColors.get(0) == DetailColors.MULTICOLOR) {
-                    if (isNyx)
+                    if (state.isVehicle())
+                        g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
+                    else if (isNyx)
                         g.drawImage(FSkinTexture.NYX_M, x, y, w, h);
                     else
                         g.drawImage(isPW ? FSkinTexture.PWBG_M : FSkinTexture.CARDBG_M, x, y, w, h);
                 } else if (backColors.get(0) == DetailColors.COLORLESS) {
-                    if (isPW)
-                        g.drawImage(FSkinTexture.PWBG_C, x, y, w, h);
-                    else if (state.isVehicle())
+                    if (state.isVehicle())
                         g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
+                    else if (isPW)
+                        g.drawImage(FSkinTexture.PWBG_C, x, y, w, h);
                     else if (state.isArtifact())
                         g.drawImage(FSkinTexture.CARDBG_A, x, y, w, h);
+                    else if (isNyx)
+                        g.drawImage(FSkinTexture.NYX_C, x, y, w, h);
                     else
                         g.drawImage(FSkinTexture.CARDBG_C, x, y, w, h);
-                    //todo add NYX for colorless?
                 } else if (backColors.get(0) == DetailColors.GREEN) {
-                    if (isNyx)
+                    if (state.isVehicle())
+                        g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
+                    else if (isNyx)
                         g.drawImage(FSkinTexture.NYX_G, x, y, w, h);
                     else
                         g.drawImage(isPW ? FSkinTexture.PWBG_G : FSkinTexture.CARDBG_G, x, y, w, h);
                 } else if (backColors.get(0) == DetailColors.RED) {
-                    if (isNyx)
+                    if (state.isVehicle())
+                        g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
+                    else if (isNyx)
                         g.drawImage(FSkinTexture.NYX_R, x, y, w, h);
                     else
                         g.drawImage(isPW ? FSkinTexture.PWBG_R : FSkinTexture.CARDBG_R, x, y, w, h);
                 } else if (backColors.get(0) == DetailColors.BLACK) {
-                    if (isNyx)
+                    if (state.isVehicle())
+                        g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
+                    else if (isNyx)
                         g.drawImage(FSkinTexture.NYX_B, x, y, w, h);
                     else
                         g.drawImage(isPW ? FSkinTexture.PWBG_B : FSkinTexture.CARDBG_B, x, y, w, h);
                 } else if (backColors.get(0) == DetailColors.BLUE) {
-                    if (isNyx)
+                    if (state.isVehicle())
+                        g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
+                    else if (isNyx)
                         g.drawImage(FSkinTexture.NYX_U, x, y, w, h);
                     else
                         g.drawImage(isPW ? FSkinTexture.PWBG_U : FSkinTexture.CARDBG_U, x, y, w, h);
                 } else if (backColors.get(0) == DetailColors.WHITE) {
-                    if (isNyx)
+                    if (state.isVehicle())
+                        g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
+                    else if (isNyx)
                         g.drawImage(FSkinTexture.NYX_W, x, y, w, h);
                     else
                         g.drawImage(isPW ? FSkinTexture.PWBG_W : FSkinTexture.CARDBG_W, x, y, w, h);
                 }
                 break;
             case 2:
-                if (isNyx)
+                if (state.isVehicle())
+                    g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
+                else if (isNyx)
                     g.drawImage(FSkinTexture.NYX_M, x, y, w, h);
                 else {
                     if (!isHybrid) {
@@ -986,13 +1001,17 @@ public class CardImageRenderer {
                 }
                 break;
             case 3:
-                if (isNyx)
+                if (state.isVehicle())
+                    g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
+                else if (isNyx)
                     g.drawImage(FSkinTexture.NYX_M, x, y, w, h);
                 else
                     g.drawImage(isPW ? FSkinTexture.PWBG_M : FSkinTexture.CARDBG_M, x, y, w, h);
                 break;
             default:
-                if (isNyx)
+                if (state.isVehicle())
+                    g.drawImage(FSkinTexture.CARDBG_V, x, y, w, h);
+                else if (isNyx)
                     g.drawImage(FSkinTexture.NYX_C, x, y, w, h);
                 else
                     g.drawImage(isPW ? FSkinTexture.PWBG_C : FSkinTexture.CARDBG_C, x, y, w, h);
