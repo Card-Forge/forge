@@ -1922,7 +1922,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean cantLoseForZeroOrLessLife() {
-        return hasKeyword("You don't lose the game for having 0 or less life.");
+        return cantLose() || hasKeyword("You don't lose the game for having 0 or less life.");
     }
 
     public final boolean cantWin() {

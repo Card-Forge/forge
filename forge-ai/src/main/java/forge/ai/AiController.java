@@ -814,15 +814,18 @@ public class AiController {
     }
 
     public AiPlayDecision canPlaySa(SpellAbility sa) {
-        final Card card = sa.getHostCard();
-        final boolean isRightTiming = sa.canCastTiming(player);
-
         if (!checkAiSpecificRestrictions(sa)) {
             return AiPlayDecision.CantPlayAi;
         }
         if (sa instanceof WrappedAbility) {
             return canPlaySa(((WrappedAbility) sa).getWrappedAbility());
         }
+
+        if (!sa.canCastTiming(player)) {
+            return AiPlayDecision.AnotherTime;
+        }
+
+        final Card card = sa.getHostCard();
 
         // Trying to play a card that has Buyback without a Buyback cost, look for possible additional considerations
         if (getBooleanProperty(AiProps.TRY_TO_PRESERVE_BUYBACK_SPELLS)) {
@@ -898,9 +901,6 @@ public class AiController {
             return AiPlayDecision.AnotherTime;
         }
         if (sa instanceof SpellPermanent) {
-            if (!isRightTiming) {
-                return AiPlayDecision.AnotherTime;
-            }
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
         if (sa.usesTargeting()) {
@@ -912,18 +912,13 @@ public class AiController {
             }
         }
         if (sa instanceof Spell) {
-            if (ComputerUtil.getDamageForPlaying(player, sa) >= player.getLife() 
-                    && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
+            if (!player.cantLoseForZeroOrLessLife() && player.canLoseLife() &&
+                    ComputerUtil.getDamageForPlaying(player, sa) >= player.getLife()) {
                 return AiPlayDecision.CurseEffects;
-            }
-            if (!isRightTiming) {
-                return AiPlayDecision.AnotherTime;
             }
             return canPlaySpellBasic(card, sa);
         }
-        if (!isRightTiming) {
-            return AiPlayDecision.AnotherTime;
-        }
+
         return AiPlayDecision.WillPlay;
     }
 
@@ -1411,8 +1406,8 @@ public class AiController {
                 if (!checkETBEffects(card, spell, null)) {
                     return AiPlayDecision.BadEtbEffects;
                 }
-                if (damage + ComputerUtil.getDamageFromETB(player, card) >= player.getLife()
-                        && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
+                if (!player.cantLoseForZeroOrLessLife() && player.canLoseLife()
+                        && damage + ComputerUtil.getDamageFromETB(player, card) >= player.getLife()) {
                     return AiPlayDecision.BadEtbEffects;
                 }
             }
@@ -1493,38 +1488,36 @@ public class AiController {
         if (landsWannaPlay != null) {
             landsWannaPlay = filterLandsToPlay(landsWannaPlay);
             Log.debug("Computer " + game.getPhaseHandler().getPhase().nameForUi);
-            if (landsWannaPlay != null && !landsWannaPlay.isEmpty()) {
+            if (!landsWannaPlay.isEmpty()) {
                 // TODO search for other land it might want to play?
                 Card land = chooseBestLandToPlay(landsWannaPlay);
-                if (ComputerUtil.getDamageFromETB(player, land) < player.getLife() || !player.canLoseLife() 
-                        || player.cantLoseForZeroOrLessLife() ) {
-                    if (!game.getPhaseHandler().is(PhaseType.MAIN1) || !isSafeToHoldLandDropForMain2(land)) {
-                        final List<SpellAbility> abilities = Lists.newArrayList();
+                if ((!player.canLoseLife() || player.cantLoseForZeroOrLessLife() || ComputerUtil.getDamageFromETB(player, land) < player.getLife())
+                        && (!game.getPhaseHandler().is(PhaseType.MAIN1) || !isSafeToHoldLandDropForMain2(land))) {
+                    final List<SpellAbility> abilities = Lists.newArrayList();
 
-                        // TODO extend this logic to evaluate MDFC with both sides land
-                        // this can only happen if its a MDFC land
-                        if (!land.isLand()) {
-                            land.setState(CardStateName.Modal, true);
-                            land.setBackSide(true);
-                        }
+                    // TODO extend this logic to evaluate MDFC with both sides land
+                    // this can only happen if its a MDFC land
+                    if (!land.isLand()) {
+                        land.setState(CardStateName.Modal, true);
+                        land.setBackSide(true);
+                    }
 
-                        LandAbility la = new LandAbility(land, player, null);
+                    LandAbility la = new LandAbility(land, player, null);
+                    la.setCardState(land.getCurrentState());
+                    if (la.canPlay()) {
+                        abilities.add(la);
+                    }
+
+                    // add mayPlay option
+                    for (CardPlayOption o : land.mayPlay(player)) {
+                        la = new LandAbility(land, player, o.getAbility());
                         la.setCardState(land.getCurrentState());
                         if (la.canPlay()) {
                             abilities.add(la);
                         }
-
-                        // add mayPlay option
-                        for (CardPlayOption o : land.mayPlay(player)) {
-                            la = new LandAbility(land, player, o.getAbility());
-                            la.setCardState(land.getCurrentState());
-                            if (la.canPlay()) {
-                                abilities.add(la);
-                            }
-                        }
-                        if (!abilities.isEmpty()) {
-                            return abilities;
-                        }
+                    }
+                    if (!abilities.isEmpty()) {
+                        return abilities;
                     }
                 }
             }
