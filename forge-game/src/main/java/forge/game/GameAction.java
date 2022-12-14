@@ -1420,10 +1420,8 @@ public class GameAction {
                     checkAgain = true;
                 }
             }
-            if (!spaceSculptors.isEmpty()) {
-                for (Player p : spaceSculptors) {
-                    checkAgain |= stateBasedAction704_5u(p);
-                }
+            for (Player p : spaceSculptors) {
+                checkAgain |= stateBasedAction704_5u(p);
             }
             // 704.5m World rule
             checkAgain |= handleWorldRule(noRegCreats);
