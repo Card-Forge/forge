@@ -6,4 +6,4 @@ A:AB$ Mana | Cost$ T Sac<1/Artifact> | Produced$ R | Amount$ X | RestrictValid$ 
 SVar:X:Sacrificed$CardManaCost
 DeckHas:Ability$Sacrifice
 DeckNeeds:Type$Artifact
-Oracle:Add an amount of {R} equal to the sacrificed artifact's mana value. Spend this mana only to cast artifact spells or activate abilities of artifacts.
+Oracle:{T}, Sacrifice an artifact: Add an amount of {R} equal to the sacrificed artifact's mana value. Spend this mana only to cast artifact spells or activate abilities of artifacts.
