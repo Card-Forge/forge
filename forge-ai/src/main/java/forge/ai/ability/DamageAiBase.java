@@ -100,17 +100,16 @@ public abstract class DamageAiBase extends SpellAbilityAi {
             return false;
         }
 
+        if (!enemy.canLoseLife()) {
+            return false;
+        }
+
         if (!noPrevention) {
             restDamage = ComputerUtilCombat.predictDamageTo(enemy, restDamage, hostcard, false);
         } else {
             restDamage = enemy.staticReplaceDamage(restDamage, hostcard, false);
         }
-
         if (restDamage == 0) {
-            return false;
-        }
-
-        if (!enemy.canLoseLife()) {
             return false;
         }
 
