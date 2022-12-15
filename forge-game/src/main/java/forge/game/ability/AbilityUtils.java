@@ -153,8 +153,17 @@ public class AbilityUtils {
         }
         else if (defined.endsWith("OfLibrary")) {
             final CardCollectionView lib = hostCard.getController().getCardsIn(ZoneType.Library);
-            if (lib.size() > 0) { // TopOfLibrary or BottomOfLibrary
-                c = lib.get(defined.startsWith("Top") ? 0 : lib.size() - 1);
+            int libSize = lib.size();
+            if (libSize > 0) { // TopOfLibrary or BottomOfLibrary
+                if (defined.startsWith("TopThird")) {
+                    int third = defined.contains("RoundedDown") ? (int) Math.floor(libSize / 3.0)
+                            : (int) Math.ceil(libSize / 3.0);
+                    for (int i=0; i<third; i++) {
+                        cards.add(lib.get(i));
+                    }
+                } else {
+                    c = lib.get(defined.startsWith("Top") ? 0 : libSize - 1);
+                }
             } else {
                 // we don't want this to fall through and return the "Self"
                 return cards;
