@@ -39,12 +39,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         // when damageStackDescription is called, just build exactly what is happening
         final StringBuilder stringBuilder = new StringBuilder();
         final String damage = spellAbility.getParam("NumDmg");
-        int dmg;
-        try { // try-catch to fix Volcano Hellion Crash
-            dmg = AbilityUtils.calculateAmount(spellAbility.getHostCard(), damage, spellAbility);
-        } catch (NullPointerException e) {
-            dmg = 0;
-        }
+        int dmg = AbilityUtils.calculateAmount(spellAbility.getHostCard(), damage, spellAbility);
 
         List<GameObject> targets = SpellAbilityEffect.getTargets(spellAbility);
         final List<Card> definedSources = AbilityUtils.getDefinedCards(spellAbility.getHostCard(), spellAbility.getParam("DamageSource"), spellAbility);

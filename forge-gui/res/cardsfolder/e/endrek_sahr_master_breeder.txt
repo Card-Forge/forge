@@ -6,5 +6,5 @@ T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ 
 T:Mode$ Always | IsPresent$ Card.Thrull+YouCtrl | PresentCompare$ GE7 | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When you control seven or more Thrulls, sacrifice CARDNAME.
 SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ X | TokenScript$ b_1_1_thrull
 SVar:X:TriggeredStackInstance$CardManaCostLKI
-SVar:TrigSac:DB$ Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice
 Oracle:Whenever you cast a creature spell, create X 1/1 black Thrull creature tokens, where X is that spell's mana value.\nWhen you control seven or more Thrulls, sacrifice Endrek Sahr, Master Breeder.

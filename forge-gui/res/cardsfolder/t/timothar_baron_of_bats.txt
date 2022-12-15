@@ -7,7 +7,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigToken:AB$ Token | Cost$ 1 ExileFromGrave<1/Card.TriggeredNewCard/the Vampire card> | TokenRemembered$ ExiledCards | TokenScript$ b_1_1_bat_flying | ImprintTokens$ True | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Imprinted | Duration$ Permanent | Triggers$ CDTrigger
 SVar:CDTrigger:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When this creature deals combat damage to a player, sacrifice it and return the exiled card to the battlefield tapped.
-SVar:TrigSac:DB$ Sacrifice | Defined$ Self | SubAbility$ DBReturn
+SVar:TrigSac:DB$ Sacrifice | SubAbility$ DBReturn
 SVar:DBReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | Tapped$ True
 DeckNeeds:Type$Vampire
 DeckHas:Ability$Token|Sacrifice

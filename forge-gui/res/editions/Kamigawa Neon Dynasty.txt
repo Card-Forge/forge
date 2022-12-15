@@ -533,6 +533,8 @@ ScryfallCode=NEO
 510 U Jukai Naturalist @Anna Steinbauer
 511 U Silver-Fur Master @Carl Critchlow
 512 U Secluded Courtyard @Sam Burley
+513 M Jin-Gitaxias, Progress Tyrant @Richard Whitters
+514 M Jin-Gitaxias, Progress Tyrant @Richard Whitters
 
 [lands]
 1 Plains|NEO|1

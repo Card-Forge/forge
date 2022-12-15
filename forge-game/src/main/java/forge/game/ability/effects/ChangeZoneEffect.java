@@ -549,7 +549,6 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             final Zone originZone = game.getZoneOf(gameCard);
 
             // if Target isn't in the expected Zone, continue
-
             if (originZone == null || (!origin.isEmpty() && !origin.contains(originZone.getZoneType()))) {
                 continue;
             }
@@ -559,10 +558,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
             if (destination.equals(ZoneType.Library)) {
                 // library position is zero indexed
                 int libraryPosition = 0;
-                if (!altDest) {
-                    libraryPosition = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(hostCard, sa.getParam("LibraryPosition"), sa) : 0;
-                } else {
+                if (altDest) {
                     libraryPosition = sa.hasParam("LibraryPositionAlternative") ? Integer.parseInt(sa.getParam("LibraryPositionAlternative")) : 0;
+                } else {
+                    libraryPosition = sa.hasParam("LibraryPosition") ? AbilityUtils.calculateAmount(hostCard, sa.getParam("LibraryPosition"), sa) : 0;
                 }
 
                 // If a card is moved to library from the stack, remove its spells from the stack
@@ -606,7 +605,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("GainControl")) {
                         final String g = sa.getParam("GainControl");
                         Player newController = g.equals("True") ? player :
-                                AbilityUtils.getDefinedPlayers(sa.getHostCard(), g, sa).get(0);
+                                AbilityUtils.getDefinedPlayers(hostCard, g, sa).get(0);
                         if (newController != null) {
                             if (newController != gameCard.getController()) {
                                 gameCard.runChangeControllerCommands();
@@ -1318,7 +1317,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     if (sa.hasParam("GainControl")) {
                         final String g = sa.getParam("GainControl");
                         Player newController = g.equals("True") ? sa.getActivatingPlayer() :
-                                AbilityUtils.getDefinedPlayers(sa.getHostCard(), g, sa).get(0);
+                                AbilityUtils.getDefinedPlayers(source, g, sa).get(0);
                         if (newController != c.getController()) {
                             c.runChangeControllerCommands();
                         }

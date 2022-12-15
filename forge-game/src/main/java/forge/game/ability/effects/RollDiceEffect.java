@@ -124,13 +124,15 @@ public class RollDiceEffect extends SpellAbilityEffect {
         total += modifier;
 
         // Run triggers
+        int rollNum = 1;
         for (Integer roll : rolls) {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
             runParams.put(AbilityKey.Sides, sides);
             runParams.put(AbilityKey.Modifier, modifier);
             runParams.put(AbilityKey.Result, roll);
-            runParams.put(AbilityKey.Number, player.getNumRollsThisTurn() + 1 - amount + rolls.indexOf(roll));
+            runParams.put(AbilityKey.Number, player.getNumRollsThisTurn() - amount + rollNum);
             player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDie, runParams, false);
+            rollNum++;
         }
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
         runParams.put(AbilityKey.Sides, sides);

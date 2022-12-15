@@ -153,11 +153,8 @@ public class Forge implements ApplicationListener {
 
         GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
 
-        if (!GuiBase.isAndroid() || (androidVersion > 28 && totalDeviceRAM > 7000)) {
+        if (!GuiBase.isAndroid() || (androidVersion > 25 && totalDeviceRAM > 3400)) {
             allowCardBG = true;
-        } else {
-            // don't allow to read and process
-            ForgeConstants.SPRITE_CARDBG_FILE = "";
         }
         assets = new Assets();
         graphics = new Graphics();

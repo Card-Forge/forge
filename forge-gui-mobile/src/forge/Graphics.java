@@ -753,10 +753,24 @@ public class Graphics {
         fillRoundRect(borderColor, x + 1, y + 1, w - 1.5f, h - 1.5f, (h - w) / 10);//used by zoom let some edges show...
     }
 
-    public void drawAvatarImage(FImage image, float x, float y, float w, float h, boolean drawGrayscale) {
+    public void drawAvatarImage(FImage image, float x, float y, float w, float h, boolean drawGrayscale, float amount) {
         if (image == null)
             return;
-        if (!drawGrayscale) {
+        if (amount > 0) {
+            batch.end();
+            shaderWarp.bind();
+            shaderWarp.setUniformf("u_amount", 0.2f);
+            shaderWarp.setUniformf("u_speed", 0.2f);
+            shaderWarp.setUniformf("u_time", amount);
+            batch.setShader(shaderWarp);
+            batch.begin();
+            //draw
+            image.draw(this, x, y, w, h);
+            //reset
+            batch.end();
+            batch.setShader(null);
+            batch.begin();
+        } else if (!drawGrayscale) {
             image.draw(this, x, y, w, h);
         } else {
             batch.end();

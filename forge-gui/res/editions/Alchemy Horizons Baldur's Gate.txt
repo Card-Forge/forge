@@ -3,6 +3,10 @@ Code=HBG
 Date=2022-07-07
 Name=Alchemy Horizons: Baldur's Gate
 Type=Online
+BoosterCovers=3
+Booster=10 Common:fromsheet("HBG cards"), 3 Uncommon:fromSheet("HBG cards"), 1 RareMythic:fromSheet("HBG cards"), 1 BasicLand:fromSheet("HBG cards")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=HBG
 
 [cards]

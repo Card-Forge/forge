@@ -61,7 +61,7 @@ public final class GameFormatQuest extends GameFormat {
 		// Filter must be continuously rebuilt if the format is mutable
 		if(setRotation != null)
 			return super.buildFilter(true);
-		return super.getFilterRules();
+		return super.getFilterPrinted();
 	}
 
 	/**

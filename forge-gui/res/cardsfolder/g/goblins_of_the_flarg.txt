@@ -4,7 +4,7 @@ Types:Creature Goblin Warrior
 PT:1/1
 K:Mountainwalk
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Dwarf.YouCtrl | PresentCompare$ GE1 | Execute$ TrigSac | TriggerDescription$ When you control a Dwarf, sacrifice CARDNAME.
-SVar:TrigSac:DB$ Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice
 SVar:NeedsToPlayVar:DwarfsYouCtrl EQ0
 SVar:DwarfsYouCtrl:Count$Valid Dwarf.YouCtrl
 DeckHas:Ability$Sacrifice
