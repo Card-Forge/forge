@@ -1,6 +1,8 @@
 package forge.util.storage;
 
 import java.io.File;
+import java.util.Map;
+import java.util.TreeMap;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
@@ -11,6 +13,10 @@ public abstract class StorageReaderBase<T> implements IItemReader<T> {
     protected final Function<? super T, String> keySelector;
     public StorageReaderBase(final Function<? super T, String> keySelector0) {
         keySelector = keySelector0;
+    }
+
+    protected Map<String, T> createMap() {
+        return new TreeMap<>();
     }
 
     @Override
