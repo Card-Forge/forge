@@ -200,6 +200,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(getSourceCard());
         runParams.put(AbilityKey.Produced, mana);
+        runParams.put(AbilityKey.AbilityMana, root);
         runParams.put(AbilityKey.Activator, root.getActivatingPlayer());
 
         getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
