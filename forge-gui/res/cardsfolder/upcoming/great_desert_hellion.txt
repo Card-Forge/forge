@@ -9,11 +9,9 @@ SVar:TrigDiscard:DB$ Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1 | Op
 SVar:DBSacrifice:DB$ Sacrifice | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0 | SubAbility$ DBIncrease
 SVar:DBIncrease:DB$ Intensify | ConditionDefined$ Remembered | ConditionPresent$ Card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigStore | TriggerDescription$ When CARDNAME leaves the battlefield, you may discard your hand. If you do, draw cards equal to CARDNAME's intensity. 
-SVar:TrigStore:DB$ StoreSVar | SVar$ CountIntensity | Type$ Calculate | Expression$ CountIntensity/Plus.X | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | Optional$ True | Mode$ Hand | Defined$ You | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ CountIntensity
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDiscardBis | TriggerDescription$ When CARDNAME leaves the battlefield, you may discard your hand. If you do, draw cards equal to CARDNAME's intensity. 
+SVar:TrigDiscardBis:DB$ Discard | Optional$ True | Mode$ Hand | Defined$ You | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$Intensity
-SVar:CountIntensity:Number$0
 DeckHas:Ability$Discard|Sacrifice
 Oracle:Starting intensity 1\nMenace\nAt the beginning of your upkeep, sacrifice Great Desert Hellion unless you discard a card. If you discard a card this way, perpetually increase Great Desert Hellion's intensity by 1.\nWhen Great Desert Hellion leaves the battlefield, you may discard your hand. If you do, draw cards equal to Great Desert Hellion's intensity. 
