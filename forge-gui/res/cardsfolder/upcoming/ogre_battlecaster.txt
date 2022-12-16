@@ -3,12 +3,11 @@ ManaCost:2 R
 Types:Creature Ogre Shaman
 PT:3/3
 K:First Strike
-T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTarget | TriggerDescription$ Whenever CARDNAME attacks, you may cast target instant or sorcery card from your graveyard by paying {R}{R} in addition to its other costs. If that spell would be put into a graveyard, exile it instead. When you cast that spell, CARDNAME gets +X/+0 until end of turn, where X is that spell's mana value.
-SVar:TrigTarget:DB$ Pump | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TgtZone$ Graveyard | RememberObjects$ Targeted | TgtPrompt$ Select target instant or sorcery card | SubAbility$ DTCast
-SVar:DTCast:DB$ DelayedTrigger | Mode$ SpellCast | Card.IsTriggerRemembered | Execute$ TrigPump | RememberObjects$ Remembered | SubAbility$ DBPlay | TriggerDescription$ When you cast that spell, CARDNAME gets +X/+0 until end of turn, where X is that spell's mana value.
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDT | TriggerDescription$ Whenever CARDNAME attacks, you may cast target instant or sorcery card from your graveyard by paying {R}{R} in addition to its other costs. If that spell would be put into a graveyard, exile it instead. When you cast that spell, CARDNAME gets +X/+0 until end of turn, where X is that spell's mana value.
+SVar:TrigDT:DB$ DelayedTrigger | ValidTgts$ Instant.YouOwn,Sorcery.YouOwn | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card | Mode$ SpellCast | ValidCard$ Card.IsTriggerRemembered | Execute$ TrigPump | RememberObjects$ Targeted | SubAbility$ DBPlay | TriggerDescription$ When you cast that spell, CARDNAME gets +X/+0 until end of turn, where X is that spell's mana value.
 SVar:DBPlay:DB$ Play | Defined$ Targeted | ValidSA$ Spell | ReplaceGraveyard$ Exile | PlayRaiseCost$ R R | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearTriggered$ True
 SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +X
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearTriggered$ True
 SVar:X:TriggeredStackInstance$CardManaCostLKI
 AI:RemoveDeck:All
 SVar:HasAttackEffect:TRUE
