@@ -293,21 +293,17 @@ public class DigEffect extends SpellAbilityEffect {
                             chooser.getController().notifyOfValue(sa, null,
                                     Localizer.getInstance().getMessage("lblNoValidCards"));
                         }
-                        boolean opt = false;
-                        if (anyNumber) {
-                            opt = true;
-                        }
-                        while (!valid.isEmpty()) {
+                        while (!valid.isEmpty() && (anyNumber || movedCards.size() < destZone1ChangeNum)) {
                             Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, delayedReveal, sa,
-                                    Localizer.getInstance().getMessage("lblChooseOne"), opt, p, null);
-                            if (chosen != null) {
-                                movedCards.add(chosen);
-                                valid.remove(chosen);
-                                totcmc = totcmc - chosen.getCMC();
-                                valid = CardLists.getValidCards(valid, "Card.cmcLE" + totcmc, cont, host, sa);
-                            } else { //if they can and did choose nothing, we're done here
+                                    Localizer.getInstance().getMessage("lblChooseOne"), anyNumber || optional, p, null);
+                            if (chosen == null) {
+                                //if they can and did choose nothing, we're done here
                                 break;
                             }
+                            movedCards.add(chosen);
+                            valid.remove(chosen);
+                            totcmc = totcmc - chosen.getCMC();
+                            valid = CardLists.getValidCards(valid, "Card.cmcLE" + totcmc, cont, host, sa);
                         }
                         chooser.getController().endTempShowCards();
                         if (!movedCards.isEmpty()) {
