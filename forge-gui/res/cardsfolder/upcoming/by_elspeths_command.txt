@@ -1,0 +1,15 @@
+Name:By Elspeth's Command
+ManaCost:2 W
+Types:Enchantment
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of combat on your turn, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ PumpField,PumpHand,Token | ChoiceRestriction$ YourLastCombat
+SVar:PumpField:DB$ Pump | ValidTgts$ Soldier | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target Soldier | SubAbility$ DBEffect | SpellDescription$ Up to one target Soldier perpetually gets +1/+1 and gains flying.
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualPump | RememberObjects$ Targeted | Name$ By Elspeth's Command's First Mode's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualPump:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This Soldier perpetually gets +1/+1 and gains flying.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
+SVar:PumpHand:DB$ ChooseCard | ChoiceZone$ Hand | Choices$ Soldier.YouOwn | ChoiceTitle$ Choose a Soldier card in your hand | Amount$ 1 | SubAbility$ DBEffect2 | SpellDescription$ Choose a Soldier card in your hand. It perpetually gets +1/+1 and gains vigilance.
+SVar:DBEffect2:DB$ Effect | StaticAbilities$ PerpetualPump2 | Name$ By Elspeth's Command's Second Mode's Perpetual Effect | Duration$ Permanent | SubAbility$ DBCleanup
+SVar:PerpetualPump2:Mode$ Continuous | Affected$ Card.ChosenCard | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Vigilance | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen Soldier card perpetually gets +1/+1 and gains vigilance.
+SVar:Token:DB$ Token | TokenScript$ c_1_1_a_soldier | SpellDescription$ Create a 1/1 colorless Soldier artifact creature token.
+DeckHas:Ability$Token & Type$Artifact|Soldier
+Oracle:At the beginning of combat on your turn, choose one that wasn't chosen during your last combat —\n• Up to one target Soldier perpetually gets +1/+1 and gains flying.\n• Choose a Soldier card in your hand. It perpetually gets +1/+1 and gains vigilance.\n• Create a 1/1 colorless Soldier artifact creature token.

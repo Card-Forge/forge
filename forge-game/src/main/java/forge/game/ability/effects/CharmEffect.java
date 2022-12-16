@@ -25,19 +25,15 @@ public class CharmEffect extends SpellAbilityEffect {
         List<String> restriction = null;
 
         if (sa.hasParam("ChoiceRestriction")) {
-            String rest = sa.getParam("ChoiceRestriction");
-            if (rest.equals("ThisGame")) {
-                restriction = source.getChosenModesGame(sa);
-            } else if (rest.equals("ThisTurn")) {
-                restriction = source.getChosenModesTurn(sa);
-            }
+            restriction = source.getChosenModes(sa, sa.getParam("ChoiceRestriction"));
         }
 
         List<AbilitySub> choices = Lists.newArrayList(sa.getAdditionalAbilityList("Choices"));
         List<AbilitySub> toRemove = Lists.newArrayList();
         for (AbilitySub ch : choices) {
             // 603.3c If one of the modes would be illegal, that mode can't be chosen.
-            if ((ch.usesTargeting() && ch.isTrigger() && ch.getTargetRestrictions().getNumCandidates(ch, true) == 0) ||
+            if ((ch.usesTargeting() && ch.isTrigger() && ch.getMinTargets() > 0 &&
+                    ch.getTargetRestrictions().getNumCandidates(ch, true) == 0) ||
                     (restriction != null && restriction.contains(ch.getDescription()))) {
                 toRemove.add(ch);
             }
@@ -97,6 +93,8 @@ public class CharmEffect extends SpellAbilityEffect {
                 sb.append(" that hasn't been chosen");
             } else if (rest.equals("ThisTurn")) {
                 sb.append(" that hasn't been chosen this turn");
+            } else if (rest.equals("YourLastCombat")) {
+                sb.append(" that wasn't chosen during your last combat");
             }
         }
 

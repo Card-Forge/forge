@@ -331,9 +331,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
 
     private final Map<SpellAbility, List<String>> chosenModesTurn = Maps.newHashMap();
     private final Map<SpellAbility, List<String>> chosenModesGame = Maps.newHashMap();
+    private final Map<SpellAbility, List<String>> chosenModesYourCombat = Maps.newHashMap();
+    private final Map<SpellAbility, List<String>> chosenModesYourLastCombat = Maps.newHashMap();
 
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesTurnStatic = HashBasedTable.create();
     private final Table<SpellAbility, StaticAbility, List<String>> chosenModesGameStatic = HashBasedTable.create();
+    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesYourCombatStatic = HashBasedTable.create();
+    private final Table<SpellAbility, StaticAbility, List<String>> chosenModesYourLastCombatStatic = HashBasedTable.create();
 
     private CombatLki combatLKI;
 
@@ -6340,6 +6344,18 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         return isInZone(ZoneType.Battlefield);
     }
 
+    public void onEndOfCombat(final Player active) {
+        if (this.getController().equals(active)) {
+            chosenModesYourLastCombat.clear();
+            chosenModesYourLastCombatStatic.clear();
+            chosenModesYourLastCombat.putAll(chosenModesYourCombat);
+            chosenModesYourLastCombatStatic.putAll(chosenModesYourCombatStatic);
+            chosenModesYourCombat.clear();
+            chosenModesYourCombatStatic.clear();
+            updateAbilityTextForView();
+        }
+    }
+
     public void onCleanupPhase(final Player turn) {
         if (!this.hasKeyword("Damage isn't removed from CARDNAME during cleanup steps.")) {
             setDamage(0);
@@ -7032,7 +7048,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         numberAbilityResolved.clear();
     }
 
-    public List<String> getChosenModesTurn(SpellAbility ability) {
+    public List<String> getChosenModes(SpellAbility ability, String type) {
         SpellAbility original = null;
         SpellAbility root = ability.getRootAbility();
 
@@ -7046,32 +7062,26 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
             }
         }
 
-        if (ability.getGrantorStatic() != null) {
-            return chosenModesTurnStatic.get(original, ability.getGrantorStatic());
-        }
-        return chosenModesTurn.get(original);
-    }
-    public List<String> getChosenModesGame(SpellAbility ability) {
-        SpellAbility original = null;
-        SpellAbility root = ability.getRootAbility();
-
-        // because trigger spell abilities are copied, try to get original one
-        if (root.isTrigger()) {
-            original = root.getTrigger().getOverridingAbility();
-        } else {
-            original = ability.getOriginalAbility();
-            if (original == null) {
-                original = ability;
+        if (type.equals("ThisTurn")) {
+            if (ability.getGrantorStatic() != null) {
+                return chosenModesTurnStatic.get(original, ability.getGrantorStatic());
             }
+            return chosenModesTurn.get(original);
+        } else if (type.equals("ThisGame")) {
+            if (ability.getGrantorStatic() != null) {
+                return chosenModesGameStatic.get(original, ability.getGrantorStatic());
+            }
+            return chosenModesGame.get(original);
+        } else if (type.equals("YourLastCombat")) {
+            if (ability.getGrantorStatic() != null) {
+                return chosenModesYourLastCombatStatic.get(original, ability.getGrantorStatic());
+            }
+            return chosenModesYourLastCombat.get(original);
         }
-
-        if (ability.getGrantorStatic() != null) {
-            return chosenModesGameStatic.get(original, ability.getGrantorStatic());
-        }
-        return chosenModesGame.get(original);
+        return null;
     }
 
-    public void addChosenModes(SpellAbility ability, String mode) {
+    public void addChosenModes(SpellAbility ability, String mode, boolean yourCombat) {
         SpellAbility original = null;
         SpellAbility root = ability.getRootAbility();
 
@@ -7098,6 +7108,13 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 chosenModesGameStatic.put(original, ability.getGrantorStatic(), result);
             }
             result.add(mode);
+            if (yourCombat) {
+                result = chosenModesYourCombatStatic.get(original, ability.getGrantorStatic());
+                if (result == null) {
+                    result = Lists.newArrayList();
+                    chosenModesYourCombatStatic.put(original, ability.getGrantorStatic(), result);
+                }
+            }
         } else {
             List<String> result = chosenModesTurn.get(original);
             if (result == null) {
@@ -7112,6 +7129,15 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                 chosenModesGame.put(original, result);
             }
             result.add(mode);
+
+            if (yourCombat) {
+                result = chosenModesYourCombat.get(original);
+                if (result == null) {
+                    result = Lists.newArrayList();
+                    chosenModesYourCombat.put(original, result);
+                }
+                result.add(mode);
+            }
         }
     }
 
