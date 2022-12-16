@@ -83,7 +83,7 @@ public class CostAdjustment {
         if (sa.hasParam("RaiseCost")) {
             String raise = sa.getParam("RaiseCost");
             ManaCost mc;
-            if (StringUtils.isNumeric(raise)) {
+            if (sa.hasSVar(raise)) {
                 mc = ManaCost.get(AbilityUtils.calculateAmount(host, raise, sa));
             } else {
                 mc = new ManaCost(new ManaCostParser(raise));
