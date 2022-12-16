@@ -544,6 +544,9 @@ public final class GameActionUtil {
         if (sa.hasParam("ReduceCost")) {
             result.putParam("ReduceCost", sa.getParam("ReduceCost"));
         }
+        if (sa.hasParam("RaiseCost")) {
+            result.putParam("RaiseCost", sa.getParam("RaiseCost"));
+        }
         for (OptionalCostValue v : list) {
             result.getPayCosts().add(v.getCost());
             result.addOptionalCost(v.getType());
