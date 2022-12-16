@@ -1,0 +1,14 @@
+Name:Yotian Courier
+ManaCost:U R
+Types:Creature Human Artificer
+PT:2/2
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigCharm | TriggerDescription$ Whenever CARDNAME attacks, ABILITY
+SVar:TrigCharm:DB$ Charm | Choices$ Powerstone,Seek | ChoiceRestriction$ YourLastCombat
+SVar:Powerstone:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone | SpellDescription$ Create a tapped Powerstone token.
+SVar:Seek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | NoLooking$ True | NoReveal$ True | ChangeNum$ 1 | ChangeType$ Artifact.cmcEQX | SpellDescription$ Seek an artifact card with mana value equal to the number of Powerstones you control.
+SVar:X:Count$Valid Powerstone.YouCtrl
+DeckNeeds:Type$Artifact
+DeckHas:Ability$Token & Type$Artifact
+SVar:HasAttackEffect:TRUE
+Oracle:Flying\nWhenever Yotian Courier attacks, choose one that wasn't chosen during your last combat —\n• Create a tapped Powerstone token.\n• Seek an artifact card with mana value equal to the number of Powerstones you control.
