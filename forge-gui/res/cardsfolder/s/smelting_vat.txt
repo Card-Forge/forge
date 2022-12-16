@@ -1,7 +1,7 @@
 Name:Smelting Vat
 ManaCost:4
 Types:Artifact
-A:AB$ Dig | Cost$ 1 T Sac<1/Artifact.Other/another artifact> | DigNum$ 8 | Reveal$ True | ChangeNum$ 2 | ChangeValid$ Artifact.nonCreature+YouOwn | WithTotalCMC$ X | ChangeNum$ 2 | DestinationZone$ Battlefield | DestinationZone2$ Library | RestRandomOrder$ True | SpellDescription$ Reveal the top eight cards of your library. Put up to two noncreature artifact cards with total mana value less than or equal to the sacrificed artifact's mana value from among them onto the battlefield, and the rest on the bottom of your library in a random order.
+A:AB$ Dig | Cost$ 1 T Sac<1/Artifact.Other/another artifact> | DigNum$ 8 | Reveal$ True | ChangeNum$ 2 | ChangeValid$ Artifact.nonCreature+YouOwn | WithTotalCMC$ X | Optional$ True | DestinationZone$ Battlefield | DestinationZone2$ Library | RestRandomOrder$ True | SpellDescription$ Reveal the top eight cards of your library. Put up to two noncreature artifact cards with total mana value less than or equal to the sacrificed artifact's mana value from among them onto the battlefield, and the rest on the bottom of your library in a random order.
 SVar:X:Sacrificed$CardManaCost
 DeckNeeds:Type$Artifact
 DeckHas:Ability$Sacrifice
