@@ -258,6 +258,8 @@ public final class CardUtil {
             newCopy.addHauntedBy(haunter, false);
         }
 
+        newCopy.setIntensity(in.getIntensity(false));
+
         newCopy.addRemembered(in.getRemembered());
         newCopy.addImprintedCards(in.getImprintedCards());
         newCopy.setChosenCards(new CardCollection(in.getChosenCards()));
