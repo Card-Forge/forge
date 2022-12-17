@@ -574,3 +574,75 @@ Switch_Up
 Switch_Up_pressed
   xy: 432, 96
   size: 16, 16 
+F1 
+  xy: 0, 112
+  size: 16, 16  
+F1_pressed
+  xy: 16, 112
+  size: 16, 16 
+F2 
+  xy: 32, 112
+  size: 16, 16  
+F2_pressed
+  xy: 48, 112
+  size: 16, 16
+F3 
+  xy: 64, 112
+  size: 16, 16  
+F3_pressed
+  xy: 80, 112
+  size: 16, 16 
+F4 
+  xy: 96, 112
+  size: 16, 16  
+F4_pressed
+  xy: 112, 112
+  size: 16, 16 
+F5 
+  xy: 128, 112
+  size: 16, 16  
+F5_pressed
+  xy: 144, 112
+  size: 16, 16 
+F6 
+  xy: 160, 112
+  size: 16, 16
+F6_pressed
+  xy: 176, 112
+  size: 16, 16 
+F7
+  xy: 192, 112
+  size: 16, 16  
+F7_pressed
+  xy: 208, 112
+  size: 16, 16
+F8 
+  xy: 224, 112
+  size: 16, 16  
+F8_pressed
+  xy: 240, 112
+  size: 16, 16
+F9 
+  xy: 256, 112
+  size: 16, 16  
+F9_pressed
+  xy: 272, 112
+  size: 16, 16
+F10 
+  xy: 288, 112
+  size: 16, 16  
+F10_pressed
+  xy: 304, 112
+  size: 16, 16
+F11 
+  xy: 320, 112
+  size: 16, 16  
+F11_pressed
+  xy: 336, 112
+  size: 16, 16
+F12 
+  xy: 352, 112
+  size: 16, 16  
+F12_pressed
+  xy: 368, 112
+  size: 16, 16

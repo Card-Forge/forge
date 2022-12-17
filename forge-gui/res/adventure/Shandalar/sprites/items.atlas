@@ -35,7 +35,10 @@ Mana
   size: 16, 16        
 Deck 
   xy: 48, 48
-  size: 16, 16   
+  size: 16, 16  
+ExitToWorldMap 
+  xy: 48, 64
+  size: 16, 16
 Item 
   xy: 0, 64
   size: 16, 16  

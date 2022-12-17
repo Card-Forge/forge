@@ -136,6 +136,17 @@
       "height": 18,
       "x": 0,
       "y": 80
+    },
+	{
+      "type": "TextButton",
+      "name": "exittoworldmap", 
+	  "style":"menu",
+      "text": "{Scale=200%}[+ExitToWorldMap]",
+	  "binding": "ExitToWorldMap",
+      "width": 64,
+      "height": 32,
+      "x": -128,
+      "y": -128
     }
   ]
 }
