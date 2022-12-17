@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -19,7 +19,6 @@ package forge.util.storage;
 
 import java.io.File;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -29,7 +28,7 @@ import forge.util.FileUtil;
 
 /**
  * This class treats every line of a given file as a source for a named object.
- * 
+ *
  * @param <T>
  *            the generic type
  */
@@ -52,14 +51,14 @@ public abstract class StorageReaderFile<T> extends StorageReaderBase<T> {
 
     @Override
     public Map<String, T> readAll() {
-        final Map<String, T> result = new TreeMap<>();
+        final Map<String, T> result = createMap();
 
         int idx = 0;
         for (String line : FileUtil.readFile(file)) {
             line = line.trim();
             if (line.isEmpty()) {
                 continue; //ignore blank or whitespace lines
-            }  
+            }
 
             if (!lineContainsObject(line)) {
                 continue;
