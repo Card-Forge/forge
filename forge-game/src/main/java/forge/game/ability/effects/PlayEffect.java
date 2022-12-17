@@ -411,7 +411,10 @@ public class PlayEffect extends SpellAbilityEffect {
 
             // can't be done later
             if (sa.hasParam("ReplaceGraveyard")) {
-                addReplaceGraveyardEffect(tgtCard, sa, sa.getParam("ReplaceGraveyard"), moveParams);
+                if (!sa.hasParam("ReplaceGraveyardValid")
+                        || tgtSA.isValid(sa.getParam("ReplaceGraveyardValid").split(","), activator, source, sa)) {
+                    addReplaceGraveyardEffect(tgtCard, sa, sa.getParam("ReplaceGraveyard"), moveParams);
+                }
             }
 
             // For Illusionary Mask effect
