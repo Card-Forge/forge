@@ -181,6 +181,7 @@ public class WorldStage extends GameStage implements SaveFileContent {
                         continue;
                     }
                      TileMapScene.instance().load(point.getPointOfInterest());
+                    stop();
                     Forge.switchScene(TileMapScene.instance());
                 } else {
                     if (point == collidingPoint) {
