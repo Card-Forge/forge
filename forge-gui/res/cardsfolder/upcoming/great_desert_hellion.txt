@@ -1,0 +1,15 @@
+Name:Great Desert Hellion
+ManaCost:1 B R
+Types:Creature Hellion
+PT:5/5
+K:Starting intensity:1
+K:Menace
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you discard a card. If you discard a card this way, perpetually increase CARDNAME's intensity by 1.
+SVar:TrigSacrifice:DB$ Sacrifice | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | OrString$ Sacrifice {c:Self}. | UnlessResolveSubs$ WhenPaid | SubAbility$ DBIntensify
+SVar:DBIntensify:DB$ Intensify
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME leaves the battlefield, you may discard your hand. If you do, draw cards equal to CARDNAME's intensity.
+SVar:TrigDraw:AB$ Draw | Cost$ Discard<1/Hand> | NumCards$ X
+SVar:X:Count$Intensity
+DeckHas:Ability$Discard|Sacrifice
+DeckHints:Ability$Graveyard
+Oracle:Starting intensity 1\nMenace\nAt the beginning of your upkeep, sacrifice Great Desert Hellion unless you discard a card. If you discard a card this way, perpetually increase Great Desert Hellion's intensity by 1.\nWhen Great Desert Hellion leaves the battlefield, you may discard your hand. If you do, draw cards equal to Great Desert Hellion's intensity.
