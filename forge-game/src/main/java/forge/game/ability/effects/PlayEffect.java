@@ -413,7 +413,7 @@ public class PlayEffect extends SpellAbilityEffect {
             if (sa.hasParam("ReplaceGraveyard")) {
                 if (!sa.hasParam("ReplaceGraveyardValid")
                         || tgtSA.isValid(sa.getParam("ReplaceGraveyardValid").split(","), activator, source, sa)) {
-                    addReplaceGraveyardEffect(tgtCard, sa, sa.getParam("ReplaceGraveyard"), moveParams);
+                    addReplaceGraveyardEffect(tgtCard, sa, tgtSA, sa.getParam("ReplaceGraveyard"), moveParams);
                 }
             }
 
@@ -466,7 +466,7 @@ public class PlayEffect extends SpellAbilityEffect {
         }
     } // end resolve
 
-    protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, String zone, Map<AbilityKey, Object> moveParams) {
+    protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, SpellAbility tgtSA, String zone, Map<AbilityKey, Object> moveParams) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Player controller = sa.getActivatingPlayer();
@@ -504,6 +504,8 @@ public class PlayEffect extends SpellAbilityEffect {
         };
 
         game.getEndOfTurn().addUntil(endEffect);
+
+        tgtSA.addRollbackEffect(eff);
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
