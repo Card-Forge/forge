@@ -2,6 +2,7 @@ package forge.screens.match.views;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
@@ -9,6 +10,7 @@ import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FImage;
+import forge.assets.FSkin;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinFont;
 import forge.game.card.CounterEnumType;
@@ -42,8 +44,9 @@ public class VAvatar extends FDisplayObject {
         avatarAnimation = new AvatarAnimation();
     }
     private class AvatarAnimation extends ForgeAnimation {
-        private static final float DURATION = 0.8f;
+        private static final float DURATION = 1.2f;
         private float progress = 0;
+        Texture splatter = FSkin.splatter;
 
         private void drawAvatar(Graphics g, FImage image, float x, float y, float w, float h) {
             float percentage = progress / DURATION;
@@ -64,7 +67,16 @@ public class VAvatar extends FDisplayObject {
                 g.drawOutlinedText("+"+amount, Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, Color.WHITE, Color.SKY, 0, (getHeight()/2)*fade, getWidth(), getHeight(), false, Align.center, true);
                 g.setAlphaComposite(oldAlpha);
             } else if (amount < 0) {
-                g.drawAvatarImage(image, x, y, w, h, player.getHasLost(), 1-percentage);
+                if (splatter == null) {
+                    g.setColorRGBA(1, percentage, percentage, oldAlpha);
+                    g.drawAvatarImage(image, x, y, w, h, player.getHasLost(), 0);
+                    g.resetColorRGBA(oldAlpha);
+                } else {
+                    g.drawAvatarImage(image, x, y, w, h, player.getHasLost(), 0);
+                    g.setAlphaComposite(fade);
+                    g.drawImage(splatter, x-mod/2, y-mod/2, w+mod, h+mod);
+                    g.setAlphaComposite(oldAlpha);
+                }
                 drawPlayerIndicator(g, w, h, percentage);
                 g.setAlphaComposite(fade);
                 g.drawOutlinedText(String.valueOf(amount), Forge.altZoneTabs ? LIFE_FONT_ALT : LIFE_FONT, Color.RED, Color.ORANGE, 0, (getHeight()/2)*fade, getWidth(), getHeight(), false, Align.center, true);
