@@ -1,0 +1,6 @@
+Name:Booster Tutor
+ManaCost:B
+Types:Instant
+A:SP$ MakeCard | Booster$ True | Reveal$ True | Zone$ Hand | StackDescription$ SpellDescription | SpellDescription$ Open a sealed Magic booster pack, reveal the cards, and put one of them into your hand. (Remove that card from your deck before beginning a new game.)
+AI:RemoveDeck:Random
+Oracle:Open a sealed Magic booster pack, reveal the cards, and put one of them into your hand. (Remove that card from your deck before beginning a new game.)

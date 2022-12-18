@@ -44,7 +44,7 @@ public class VAvatar extends FDisplayObject {
         avatarAnimation = new AvatarAnimation();
     }
     private class AvatarAnimation extends ForgeAnimation {
-        private static final float DURATION = 0.6f;
+        private static final float DURATION = 1.2f;
         private float progress = 0;
         Texture splatter = FSkin.splatter;
 
@@ -60,7 +60,7 @@ public class VAvatar extends FDisplayObject {
             float oldAlpha = g.getfloatAlphaComposite();
             float fade = 1-(percentage*1);
             if (amount > 0) {
-                g.drawAvatarImage(image, x, y, w, h, player.getHasLost());
+                g.drawAvatarImage(image, x, y, w, h, player.getHasLost(), 0);
                 drawPlayerIndicator(g, w, h, percentage);
                 g.setAlphaComposite(fade);
                 g.drawRect(w / 12f, Color.WHITE, 0, 0, w, h);
@@ -69,10 +69,10 @@ public class VAvatar extends FDisplayObject {
             } else if (amount < 0) {
                 if (splatter == null) {
                     g.setColorRGBA(1, percentage, percentage, oldAlpha);
-                    g.drawAvatarImage(image, x, y, w, h, player.getHasLost());
+                    g.drawAvatarImage(image, x, y, w, h, player.getHasLost(), 0);
                     g.resetColorRGBA(oldAlpha);
                 } else {
-                    g.drawAvatarImage(image, x, y, w, h, player.getHasLost());
+                    g.drawAvatarImage(image, x, y, w, h, player.getHasLost(), 0);
                     g.setAlphaComposite(fade);
                     g.drawImage(splatter, x-mod/2, y-mod/2, w+mod, h+mod);
                     g.setAlphaComposite(oldAlpha);
@@ -120,11 +120,11 @@ public class VAvatar extends FDisplayObject {
                 avatarAnimation.start();
                 avatarAnimation.drawAvatar(g, image, 0, 0, w, h);
             } else {
-                g.drawAvatarImage(image, 0, 0, w, h, player.getHasLost());
+                g.drawAvatarImage(image, 0, 0, w, h, player.getHasLost(), 0);
                 drawPlayerIndicator(g, w, h, 1);
             }
         } else {
-            g.drawAvatarImage(image, 0, 0, w, h, player.getHasLost());
+            g.drawAvatarImage(image, 0, 0, w, h, player.getHasLost(), 0);
         }
 
         if (Forge.altPlayerLayout && !Forge.altZoneTabs && Forge.isLandscapeMode())

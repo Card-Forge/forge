@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Battlefiel
 SVar:TrigAnimate:DB$ Animate | ValidTgts$ Permanent.nonLand+YouCtrl | TgtPrompt$ Select target nonland permanent you control | RemoveCardTypes$ True | Power$ X | Toughness$ X | Types$ Vehicle,Artifact | Keywords$ Crew:2 | Triggers$ CrashLand
 SVar:CrashLand:Mode$ DamageDealtOnce | ValidSource$ Card.Self | ValidTarget$ Player,Permanent | Execute$ RollCounters | TriggerZones$ Battlefield | TriggerDescription$ Crash Land — Whenever this Vehicle deals damage, roll a six-sided die. If the result is equal to this Vehicle's mana value, sacrifice this Vehicle, then it deals that much damage to any target.
 SVar:RollCounters:DB$ RollDice | ResultSVar$ Result | SubAbility$ Crash
-SVar:Crash:DB$ Sacrifice | Defined$ Card.Self | ConditionCheckSVar$ Result | ConditionSVarCompare$ EQY | SubAbility$ CrashDamage
+SVar:Crash:DB$ Sacrifice | ConditionCheckSVar$ Result | ConditionSVarCompare$ EQY | SubAbility$ CrashDamage
 SVar:CrashDamage:DB$ DealDamage | ValidTgt$ Planeswalker,Player,Permanent | TgtPromp$ Choose any target | NumDmg$ Y | ConditionCheckSVar$ Result | ConditionSVarCompare$ EQY
 SVar:X:Targeted$CardManaCost
 SVar:Y:Count$CardManaCost

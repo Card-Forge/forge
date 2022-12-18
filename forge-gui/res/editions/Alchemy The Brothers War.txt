@@ -8,31 +8,31 @@ ScryfallCode=YBRO
 [cards]
 1 R By Elspeth's Command @Carlos Palma Cruchaga
 2 R Norn's Disassembly @Camille Alquier
-3 U Patchplate Resolute @Wayne Reynolds
-4 U Tawnos Endures @Steven Belledin
-5 U Hurkyl's Prodigy @Artur Nakhodkin
-6 U Piece It Together @Peter Polach
-7 R Warzone Duplicator @Daniel Ljunggren
-8 M Forgefire Automaton @Diego Gisbert
-9 R Gixian Recycler @Michele Giorgi
-10 U Lonely End @Piotr Dura
-11 R Penregon Besieged @Artur Treffner
-12 R Fallaji Antiquarian @Ernada Souza
-13 M Kayla's Kindling @Ernada Souza
-14 U Melt Through @Piotr Foksowicz
-15 R Tomakul Phoenix @Monztre
-16 R Argothian Uprooting @Johan Grenier
-17 R Foundry Groundbreaker @Paolo Parente
-18 R Legion of Clay @Chris Cold
-19 U Sylvan Smite @Artur Nakhodkin
-20 U Argivian Welcome @Paolo Parente
-21 U Assemble the Team @Samuel Perin
-22 M Crucias, Titan of the Waves @Filipe Pagliuso
-23 R Great Desert Hellion @Uriah Voth
-24 M Jarsyl, Dark Age Scion @Chris Rallis
-25 U Perilous Iteration @Brent Hollowell
-26 R Raddic, Tal Zealot @Camille Alquier
-27 M Richlau, Headmaster @Yangtian Li
-28 R Rusko, Clockmaker @Samuel Perin
-29 R Yotian Courier @Monztre
-30 R Urza's Construction Drone @Yeong-Hao Han
+3 U Tawnos Endures @Steven Belledin
+4 U Hurkyl's Prodigy @Artur Nakhodkin
+5 U Piece It Together @Peter Polach
+6 U Lonely End @Piotr Dura
+7 R Penregon Besieged @Artur Treffner
+8 R Fallaji Antiquarian @Ernanda Souza
+9 M Kayla's Kindling @Ernanda Souza
+10 U Melt Through @Piotr Foksowicz
+11 R Tomakul Phoenix @Monztre
+12 R Argothian Uprooting @Johan Grenier
+13 R Foundry Groundbreaker @Paolo Parente
+14 R Legion of Clay @Chris Cold
+15 U Sylvan Smite @Artur Nakhodkin
+16 U Argivian Welcome @Paolo Parente
+17 U Assemble the Team @Samuel Perin
+18 M Crucias, Titan of the Waves @Filipe Pagliuso
+19 R Great Desert Hellion @Uriah Voth
+20 M Jarsyl, Dark Age Scion @Chris Rallis
+21 U Perilous Iteration @Brent Hollowell
+22 R Raddic, Tal Zealot @Camille Alquier
+23 M Richlau, Headmaster @Yangtian Li
+24 R Rusko, Clockmaker @Samuel Perin
+25 R Yotian Courier @Monztre
+26 M Forgefire Automaton @Diego Gisbert
+27 R Gixian Recycler @Michele Giorgi
+28 U Patchplate Resolute @Wayne Reynolds
+29 R Urza's Construction Drone @Yeong-Hao Han
+30 R Warzone Duplicator @Daniel Ljunggren

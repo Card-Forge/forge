@@ -63,7 +63,6 @@ import java.util.*;
              }
 
              Card chosenCard = player.getController().chooseSingleCardForZoneChange(ZoneType.None, new ArrayList<ZoneType>(), sa, new CardCollection(draftOptions), null, Localizer.getInstance().getMessage("lblChooseCardDraft"), false, player);
-             chosenCard.setTokenCard(true);
              game.getAction().moveTo(ZoneType.None, chosenCard, sa, moveParams);
              drafted.add(chosenCard);
          }

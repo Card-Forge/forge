@@ -4,6 +4,11 @@ Date=2023-01-13
 Name=Dominaria Remastered
 Code2=DMR
 Type=Reprint
+BoosterCovers=3
+Booster=9 Common:fromsheet("DMR cards"), 3 Uncommon:fromSheet("DMR cards"), 1 RareMythic:fromSheet("DMR cards"), 1 BasicLand:fromSheet("DMR showcase"), 1 Any:fromSheet("DMR oldframes")
+BoosterMustContain=Legendary Creature
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=DMR
 
 [cards]
@@ -41,7 +46,7 @@ ScryfallCode=DMR
 32 M Test of Endurance @Denman Rooke
 33 C Vigilant Sentry @Eric Peterson
 34 U Voice of All @rk post
-35 C Whitemane Lion @Zoltan Boros
+35 C Whitemane Lion @Zoltan Boros & Gabor Szikszai
 36 R Windborn Muse @Adam Rex
 37 R Wrath of God @Kev Walker
 38 C Aquamoeba @Arnie Swekel
@@ -96,7 +101,7 @@ ScryfallCode=DMR
 87 C Goblin Turncoat @Borja Pindado
 88 C Howl from Beyond @Dave Dorman
 89 C Hyalopterous Lemure @Pavel Kolomeyets
-90 C Ichor Slick @Zoltan Boros
+90 C Ichor Slick @Zoltan Boros & Gabor Szikszai
 91 R Mindslicer @Kev Walker
 92 R Nantuko Shade @Brian Snõddy
 93 U Necrosavant @Alexander Mokhov
@@ -268,6 +273,8 @@ ScryfallCode=DMR
 259 C Terminal Moraine @Scott Bailey
 260 U Treva's Ruins @Jerry Tiritilli
 261 R Woodland Cemetery @Christine Choi
+
+[showcase]
 262 R Divine Sacrament @Ekaterina Burmak
 263 R Enlightened Tutor @Howard Lyon
 264 R Glory @Donato Giancola
@@ -283,7 +290,7 @@ ScryfallCode=DMR
 274 C Spirit Link @Kev Walker
 275 U Swords to Plowshares @Jesper Ejsing
 276 M Test of Endurance @Denman Rooke
-277 C Whitemane Lion @Zoltan Boros
+277 C Whitemane Lion @Zoltan Boros & Gabor Szikszai
 278 R Windborn Muse @Adam Rex
 279 R Wrath of God @Kev Walker
 280 R Arcanis the Omnipotent @Justin Sweet
@@ -418,6 +425,8 @@ ScryfallCode=DMR
 409 L Mountain @John Avon
 410 L Forest @John Avon
 411 L Forest @Anthony S. Waters
+
+[borderless]
 412 R Enlightened Tutor @Richard Kane Ferguson
 413 M Lyra Dawnbringer @Donato Giancola
 414 M Test of Endurance @Carl Critchlow
@@ -463,7 +472,151 @@ ScryfallCode=DMR
 454 M Dark Depths @Rob Alexander
 455 R Gemstone Mine @Mark Poole
 456 R Maze of Ith @Mark Tedin
+
+[promo]
 457 R Counterspell @Mark Poole
+
+[oldframes]
+1 Divine Sacrament|DMR|2
+1 Enlightened Tutor|DMR|2
+1 Glory|DMR|2
+1 Lieutenant Kirtar|DMR|2
+1 Lyra Dawnbringer|DMR|2
+1 Mesa Enchantress|DMR|2
+1 Momentary Blink|DMR|2
+1 Renewed Faith|DMR|2
+1 Savannah Lions|DMR|2
+1 Serra Angel|DMR|2
+1 Serra Avatar|DMR|2
+1 Sevinne's Reclamation|DMR|2
+1 Spirit Link|DMR|2
+1 Swords to Plowshares|DMR|2
+1 Test of Endurance|DMR|2
+1 Whitemane Lion|DMR|2
+1 Windborn Muse|DMR|2
+1 Wrath of God|DMR|2
+1 Arcanis the Omnipotent|DMR|2
+1 Counterspell|DMR|2
+1 Denizen of the Deep|DMR|2
+1 Fact or Fiction|DMR|2
+1 Force of Will|DMR|2
+1 Frantic Search|DMR|2
+1 High Tide|DMR|2
+1 Impulse|DMR|2
+1 Mystic Remora|DMR|2
+1 Mystical Tutor|DMR|2
+1 Opposition|DMR|2
+1 Ovinize|DMR|2
+1 Peregrine Drake|DMR|2
+1 Stroke of Genius|DMR|2
+1 Time Stretch|DMR|2
+1 Turnabout|DMR|2
+1 Urza, Lord High Artificer|DMR|2
+1 Vexing Sphinx|DMR|2
+1 Body Snatcher|DMR|2
+1 Chainer, Dementia Master|DMR|2
+1 Chainer's Edict|DMR|2
+1 Dark Withering|DMR|2
+1 Dread Return|DMR|2
+1 Duress|DMR|2
+1 Entomb|DMR|2
+1 Mindslicer|DMR|2
+1 Nantuko Shade|DMR|2
+1 Necrosavant|DMR|2
+1 No Mercy|DMR|2
+1 Oversold Cemetery|DMR|2
+1 Royal Assassin|DMR|2
+1 Street Wraith|DMR|2
+1 Terror|DMR|2
+1 Undead Gladiator|DMR|2
+1 Vampiric Tutor|DMR|2
+1 Yawgmoth, Thran Physician|DMR|2
+1 Chain Lightning|DMR|2
+1 Dragon Whelp|DMR|2
+1 Empty the Warrens|DMR|2
+1 Fireblast|DMR|2
+1 Flametongue Kavu|DMR|2
+1 Gamble|DMR|2
+1 Gempalm Incinerator|DMR|2
+1 Goblin Matron|DMR|2
+1 Grim Lavamancer|DMR|2
+1 Last Chance|DMR|2
+1 Mogg War Marshal|DMR|2
+1 Overmaster|DMR|2
+1 Pashalik Mons|DMR|2
+1 Shivan Dragon|DMR|2
+1 Siege-Gang Commander|DMR|2
+1 Sneak Attack|DMR|2
+1 Sulfuric Vortex|DMR|2
+1 Valduk, Keeper of the Flame|DMR|2
+1 Worldgorger Dragon|DMR|2
+1 Arboria|DMR|2
+1 Birds of Paradise|DMR|2
+1 Deadwood Treefolk|DMR|2
+1 Elvish Spirit Guide|DMR|2
+1 Exploration|DMR|2
+1 Fa'adiyah Seer|DMR|2
+1 Forgotten Ancient|DMR|2
+1 Invigorating Boon|DMR|2
+1 Jolrael, Mwonvuli Recluse|DMR|2
+1 Kamahl, Fist of Krosa|DMR|2
+1 Lull|DMR|2
+1 Nature's Lore|DMR|2
+1 Nut Collector|DMR|2
+1 Saproling Symbiosis|DMR|2
+1 Squirrel Nest|DMR|2
+1 Sylvan Library|DMR|2
+1 Wild Dogs|DMR|2
+1 Wild Growth|DMR|2
+1 Worldly Tutor|DMR|2
+1 Absorb|DMR|2
+1 Arcades Sabboth|DMR|2
+1 Decimate|DMR|2
+1 Dralnu's Crusade|DMR|2
+1 Gerrard's Verdict|DMR|2
+1 Hunting Grounds|DMR|2
+1 Mystic Enforcer|DMR|2
+1 Phantom Nishoba|DMR|2
+1 Pyre Zombie|DMR|2
+1 Quicksilver Dagger|DMR|2
+1 Radha, Heir to Keld|DMR|2
+1 Recoil|DMR|2
+1 Rith, the Awakener|DMR|2
+1 Sawtooth Loon|DMR|2
+1 Sol'kanar the Swamp King|DMR|2
+1 Spinal Embrace|DMR|2
+1 Spiritmonger|DMR|2
+1 Tatyova, Benthic Druid|DMR|2
+1 Tiana, Ship's Caretaker|DMR|2
+1 Xira Arien|DMR|2
+1 Zur the Enchanter|DMR|2
+1 Crawlspace|DMR|2
+1 Cryptic Gateway|DMR|2
+1 Damping Sphere|DMR|2
+1 Gauntlet of Power|DMR|2
+1 Helm of Awakening|DMR|2
+1 Icy Manipulator|DMR|2
+1 Jester's Cap|DMR|2
+1 Juggernaut|DMR|2
+1 Legacy Weapon|DMR|2
+1 Lotus Blossom|DMR|2
+1 Mind Stone|DMR|2
+1 Ornithopter|DMR|2
+1 Thran Golem|DMR|2
+1 Tormod's Crypt|DMR|2
+1 Triskelion|DMR|2
+1 Umbilicus|DMR|2
+1 Urza's Blueprints|DMR|2
+1 Urza's Incubator|DMR|2
+1 Clifftop Retreat|DMR|2
+1 Dark Depths|DMR|2
+1 Gemstone Mine|DMR|2
+1 Hinterland Harbor|DMR|2
+1 Isolated Chapel|DMR|2
+1 Maze of Ith|DMR|2
+1 Mishra's Factory|DMR|2
+1 Sulfur Falls|DMR|2
+1 Woodland Cemetery|DMR|2
 
 [tokens]
 b_2_1_cat

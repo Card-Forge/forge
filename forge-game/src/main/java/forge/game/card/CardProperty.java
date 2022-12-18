@@ -1896,9 +1896,12 @@ public class CardProperty {
             }
         } else if (property.startsWith("set")) {
             final String setCode = property.substring(3, 6);
+            if (card.getName().isEmpty()) {
+                return false;
+            }
             final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEditions(card.getName(),
-                                                                                     CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
-            if (!setCard.getEdition().equals(setCode)) {
+                    CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+            if (setCard != null && !setCard.getEdition().equals(setCode)) {
                 return false;
             }
         } else if (property.startsWith("inZone")) {

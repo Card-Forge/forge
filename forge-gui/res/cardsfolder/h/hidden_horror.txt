@@ -3,7 +3,7 @@ ManaCost:1 B B
 Types:Creature Horror
 PT:4/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DBSacSelf | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you discard a creature card.
-SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | UnlessCost$ Discard<1/Creature> | UnlessPayer$ You
+SVar:DBSacSelf:DB$ Sacrifice | UnlessCost$ Discard<1/Creature> | UnlessPayer$ You
 SVar:NeedsToPlayVar:Y GE2
 SVar:Y:Count$TypeInYourHand.Creature
 Oracle:When Hidden Horror enters the battlefield, sacrifice it unless you discard a creature card.

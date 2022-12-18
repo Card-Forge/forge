@@ -2,7 +2,7 @@ Name:Energy Field
 ManaCost:1 U
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.nonToken+YouOwn+Other | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ When a card is put into your graveyard from anywhere, sacrifice CARDNAME.
-SVar:TrigSac:DB$ Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice
 R:Event$ DamageDone | ActiveZones$ Battlefield | Prevent$ True | ValidTarget$ You | ValidSource$ Card.YouDontCtrl,Emblem.YouDontCtrl | Description$ Prevent all damage that would be dealt to you by sources you don't control.
 SVar:NonStackingEffect:True
 #NOTE: The AI will not play around this effect, so it's only good in properly designed decks that circumvent the necessity to worry about the detrimental effect.

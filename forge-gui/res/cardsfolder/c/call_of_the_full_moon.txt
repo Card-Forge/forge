@@ -5,5 +5,5 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness$ 2 | AddKeyword$ Trample | Description$ Enchanted creature gets +3/+2 and has trample.
 T:Mode$ Phase | Phase$ Upkeep | WerewolfUntransformCondition$ True | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each upkeep, if a player cast two or more spells last turn, sacrifice CARDNAME.
-SVar:TrigSac:DB$ Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice
 Oracle:Enchant creature\nEnchanted creature gets +3/+2 and has trample. (It can deal excess combat damage to the player or planeswalker it's attacking.)\nAt the beginning of each upkeep, if a player cast two or more spells last turn, sacrifice Call of the Full Moon.

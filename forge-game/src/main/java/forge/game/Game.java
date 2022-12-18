@@ -139,7 +139,6 @@ public class Game {
     private Direction turnOrder = Direction.getDefaultDirection();
 
     private Boolean daytime = null;
-    private Boolean previous = null;
 
     private long timestamp = 0;
     public final GameAction action;
@@ -184,7 +183,7 @@ public class Game {
     public Player getHasInitiative() {
         return initiative;
     }
-    public void setHasInitiative(final Player p ) {
+    public void setHasInitiative(final Player p) {
         initiative = p;
     }
 
@@ -1228,21 +1227,12 @@ public class Game {
     public boolean isNeitherDayNorNight() {
         return this.daytime == null;
     }
-    public boolean previousTimeIsDay() {
-        return this.previous != null && this.previous == false;
-    }
-    public boolean previousTimeIsNight() {
-        return this.previous != null && this.previous == true;
-    }
-    public boolean previousTimeisNeitherDayNorNight() {
-        return this.previous == null;
-    }
 
     public Boolean getDayTime() {
         return this.daytime;
     }
     public void setDayTime(Boolean value) {
-        previous = this.daytime;
+        Boolean previous = this.daytime;
         this.daytime = value;
 
         if (previous != null && value != null && previous != value) {

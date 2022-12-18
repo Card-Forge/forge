@@ -12,4 +12,4 @@ ScryfallCode=PW22
 4 U Swiftfoot Boots @Svetlin Velinov
 5 R Dismember @Alix Branwyn
 6 R Psychosis Crawler @Stephan Martiniere
-7 R Thought Vessel @Milivoj Ćeran
+

@@ -42,8 +42,6 @@ ScryfallCode=BRC
 34 L Swamp @Robin Olausson
 35 L Mountain @Bruce Brenneise
 36 L Mountain @Victor Harmatiuk
-37 L Forest
-38 L Forest
 39 M Mishra, Eminent One @Randy Vargas
 40 M Urza, Chief Artificer @Bartlomiej Gawel
 41 R Disciple of Caelus Nin @Steve Argyle

@@ -6,7 +6,7 @@ A:SP$ Attach | Cost$ 1 B B | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target 
 A:AB$ PutCounter | Cost$ Sac<1/Thrull> | Defined$ Self | CounterType$ TIME | CounterNum$ 3 | SpellDescription$ Put three time counters on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSubCounter | TriggerDescription$ At the beginning of your upkeep, remove a time counter from CARDNAME. If there are no time counters on CARDNAME, sacrifice it.
 SVar:TrigSubCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ TIME | CounterNum$ 1 | SubAbility$ Sac
-SVar:Sac:DB$ Sacrifice | Defined$ Self | ConditionPresent$ Card.Self+counters_EQ0_TIME
+SVar:Sac:DB$ Sacrifice | ConditionPresent$ Card.Self+counters_EQ0_TIME
 A:AB$ PumpAll | Cost$ tapXType<1/Land.EnchantedBy/Enchanted Land> | ValidCards$ Creature.attacking+YouCtrl | NumAtt$ 2 | NumDef$ -1 | SpellDescription$ Attacking creatures you control get +2/-1 until end of turn.
 AI:RemoveDeck:Random
 SVar:NonStackingAttachEffect:True

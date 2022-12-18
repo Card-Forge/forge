@@ -396,6 +396,10 @@ public class PlayEffect extends SpellAbilityEffect {
                     tgtSA.setSVar(reduce, sa.getSVar(reduce));
                 }
             }
+            if (sa.hasParam("PlayRaiseCost")) {
+                String raise = sa.getParam("PlayRaiseCost");
+                tgtSA.putParam("RaiseCost", raise);
+            }
 
             if (sa.hasParam("Madness")) {
                 tgtSA.setAlternativeCost(AlternativeCost.Madness);
@@ -407,7 +411,10 @@ public class PlayEffect extends SpellAbilityEffect {
 
             // can't be done later
             if (sa.hasParam("ReplaceGraveyard")) {
-                addReplaceGraveyardEffect(tgtCard, sa, sa.getParam("ReplaceGraveyard"), moveParams);
+                if (!sa.hasParam("ReplaceGraveyardValid")
+                        || tgtSA.isValid(sa.getParam("ReplaceGraveyardValid").split(","), activator, source, sa)) {
+                    addReplaceGraveyardEffect(tgtCard, sa, sa.getParam("ReplaceGraveyard"), moveParams);
+                }
             }
 
             // For Illusionary Mask effect
@@ -509,7 +516,7 @@ public class PlayEffect extends SpellAbilityEffect {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Player controller = sa.getActivatingPlayer();
-        final String name = hostCard.getName() + "'s Effect";
+        final String name = hostCard + "'s Effect";
         final String image = hostCard.getImageKey();
         final Card eff = createEffect(sa, controller, name, image);
 

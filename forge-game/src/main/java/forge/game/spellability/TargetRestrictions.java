@@ -585,7 +585,7 @@ public class TargetRestrictions {
         final Card srcCard = sa.getHostCard(); // should there be OrginalHost at any moment?
 
         for (final Card c : game.getCardsIn(this.tgtZone)) {
-            if (c.isValid(this.validTgts, srcCard.getController(), srcCard, sa)
+            if (c.isValid(this.validTgts, sa.getActivatingPlayer(), srcCard, sa)
                     && (!isTargeted || sa.canTarget(c))
                     && !sa.getTargets().contains(c)) {
                 candidates.add(c);

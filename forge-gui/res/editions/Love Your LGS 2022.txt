@@ -7,3 +7,4 @@ ScryfallCode=PLG22
 
 [cards]
 1 R Sol Ring @Mike Bierek
+2 R Thought Vessel @Milivoj Ćeran

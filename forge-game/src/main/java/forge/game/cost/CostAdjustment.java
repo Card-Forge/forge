@@ -81,8 +81,14 @@ public class CostAdjustment {
             }
         }
         if (sa.hasParam("RaiseCost")) {
-            int n = AbilityUtils.calculateAmount(host, sa.getParam("RaiseCost"), sa);
-            result.add(new Cost(ManaCost.get(n), false));
+            String raise = sa.getParam("RaiseCost");
+            ManaCost mc;
+            if (sa.hasSVar(raise)) {
+                mc = ManaCost.get(AbilityUtils.calculateAmount(host, raise, sa));
+            } else {
+                mc = new ManaCost(new ManaCostParser(raise));
+            }
+            result.add(new Cost(mc, false));
         }
 
         // Raise cost

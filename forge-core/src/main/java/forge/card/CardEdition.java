@@ -173,7 +173,7 @@ public final class CardEdition implements Comparable<CardEdition> {
             this.rarity = rarity;
             this.artistName = artistName;
         }
- 
+
         public String toString() {
             StringBuilder sb = new StringBuilder();
             if (collectorNumber != null) {
@@ -531,6 +531,11 @@ public final class CardEdition implements Comparable<CardEdition> {
         public Reader(File path, boolean isCustomEditions) {
             super(path, CardEdition.FN_GET_CODE);
             this.isCustomEditions = isCustomEditions;
+        }
+
+        protected Map<String, CardEdition> createMap() {
+            // Create our own map to make it case-insensitive for set codes.
+            return new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
         }
 
         @Override

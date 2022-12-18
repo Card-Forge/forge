@@ -1,7 +1,7 @@
 Name:Perennial Behemoth
 ManaCost:5
 Types:Artifact Creature Beast
-PT:5/3
+PT:2/7
 S:Mode$ Continuous | Affected$ Land.YouOwn | MayPlay$ True | AffectedZone$ Graveyard | Description$ You may play lands from your graveyard.
 K:Unearth:G G
 DeckHas:Ability$Graveyard

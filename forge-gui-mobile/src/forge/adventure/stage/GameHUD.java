@@ -11,23 +11,24 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.utils.viewport.ScalingViewport;
 import com.github.tommyettinger.textra.TextraButton;
 import com.github.tommyettinger.textra.TextraLabel;
+import com.github.tommyettinger.textra.TypingAdapter;
+import com.github.tommyettinger.textra.TypingLabel;
 import forge.Forge;
 import forge.adventure.player.AdventurePlayer;
 import forge.adventure.scene.*;
-import forge.adventure.util.Config;
-import forge.adventure.util.Controls;
-import forge.adventure.util.Current;
-import forge.adventure.util.UIActor;
+import forge.adventure.util.*;
 import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.gui.FThreads;
@@ -53,6 +54,7 @@ public class GameHUD extends Stage {
     private final TextraButton menuActor;
     private final TextraButton statsActor;
     private final TextraButton inventoryActor;
+    private final TextraButton exitToWorldMapActor;
     public final UIActor ui;
     private final Touchpad touchpad;
     private final Console console;
@@ -60,6 +62,11 @@ public class GameHUD extends Stage {
     boolean isHiding = false, isShowing = false;
     float opacity = 1f;
     private boolean debugMap;
+
+    private final Dialog dialog;
+    private boolean dialogOnlyInput;
+    private final Array<TextraButton> dialogButtonMap = new Array<>();
+    TextraButton selectedKey;
 
     private GameHUD(GameStage gameStage) {
         super(new ScalingViewport(Scaling.stretch, Scene.getIntendedWidth(), Scene.getIntendedHeight()), gameStage.getBatch());
@@ -69,6 +76,7 @@ public class GameHUD extends Stage {
         ui = new UIActor(Config.instance().getFile(GuiBase.isAndroid()
                 ? Forge.isLandscapeMode() ? "ui/hud_landscape.json" : "ui/hud_portrait.json"
                 : Forge.isLandscapeMode() ? "ui/hud.json" : "ui/hud_portrait.json"));
+
 
         blank = ui.findActor("blank");
         miniMap = ui.findActor("map");
@@ -83,6 +91,8 @@ public class GameHUD extends Stage {
         statsActor = ui.findActor("statistic");
         inventoryActor = ui.findActor("inventory");
         gamehud = ui.findActor("gamehud");
+        exitToWorldMapActor = ui.findActor("exittoworldmap");
+        dialog = Controls.newDialog("");
 
         miniMapPlayer = new Image(new Texture(Config.instance().getFile("ui/minimap_player.png")));
         //create touchpad
@@ -108,6 +118,7 @@ public class GameHUD extends Stage {
         ui.onButtonPress("inventory", () -> openInventory());
         ui.onButtonPress("statistic", () -> statistic());
         ui.onButtonPress("deck", () -> openDeck());
+        ui.onButtonPress("exittoworldmap", () -> exitToWorldMap());
         lifePoints = ui.findActor("lifePoints");
         mana = ui.findActor("mana");
         money = ui.findActor("money");
@@ -208,6 +219,7 @@ public class GameHUD extends Stage {
                     && !(Controls.actorContainsVector(openMapActor, touch)) //not inside openmap button
                     && !(Controls.actorContainsVector(statsActor, touch)) //not inside stats button
                     && !(Controls.actorContainsVector(inventoryActor, touch)) //not inside inventory button
+                    && !(Controls.actorContainsVector(exitToWorldMapActor, touch)) //not inside deck button
                     && (Controls.actorContainsVector(ui, touch)) //inside display bounds
                     && pointer < 1) { //not more than 1 pointer
                 touchpad.setBounds(touch.x - TOUCHPAD_SCALE / 2, touch.y - TOUCHPAD_SCALE / 2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);
@@ -278,6 +290,39 @@ public class GameHUD extends Stage {
         Forge.switchScene(InventoryScene.instance());
     }
 
+    private void exitToWorldMap(){
+        dialog.getButtonTable().clear();
+        dialog.getContentTable().clear();
+        TextraButton YES = Controls.newTextButton("YES", this::exitDungeonCallback);
+        YES.setVisible(false);
+        TextraButton NO = Controls.newTextButton("NO", this::hideDialog);
+        NO.setVisible(false);
+        TypingLabel L = Controls.newTypingLabel("Exit to the World Map?");
+        L.setWrap(true);
+        L.setTypingListener(new TypingAdapter() {
+            @Override
+            public void end() {
+                YES.setVisible(true);
+                NO.setVisible(true);
+            }
+        });
+
+        dialog.getButtonTable().add(YES).width(60f);
+        dialog.getButtonTable().add(NO).width(60f);
+        dialog.getContentTable().add(L).width(120f);
+        dialog.setKeepWithinStage(true);
+        showDialog();
+
+    }
+    private void exitDungeonCallback(){
+        hideDialog();
+        Forge.switchScene(GameScene.instance());
+        WorldStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
+        MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
+
+        gameStage.getPlayerSprite().stop();
+    }
+
     private void menu() {
         gameStage.openMenu();
     }
@@ -306,12 +351,14 @@ public class GameHUD extends Stage {
         setVisibility(mana, visible);
         setVisibility(money, visible);
         setVisibility(blank, visible);
+        setVisibility(exitToWorldMapActor, !visible); //hide when not in a dungeon
         setAlpha(avatarborder, visible);
         setAlpha(avatar, visible);
         setAlpha(deckActor, visible);
         setAlpha(menuActor, visible);
         setAlpha(statsActor, visible);
         setAlpha(inventoryActor, visible);
+        setAlpha(exitToWorldMapActor, visible);
         opacity = visible ? 1f : 0.4f;
     }
 
@@ -323,6 +370,9 @@ public class GameHUD extends Stage {
 
     @Override
     public boolean keyDown(int keycode) {
+        if (dialogOnlyInput) {
+            return dialogInput(keycode);
+        }
         ui.pressDown(keycode);
         if (keycode == Input.Keys.F9 || keycode == Input.Keys.F10) {
             console.toggle();
@@ -347,6 +397,21 @@ public class GameHUD extends Stage {
         return super.keyDown(keycode);
     }
 
+    public boolean dialogInput(int keycode) {
+        if (dialogOnlyInput) {
+            if (KeyBinding.Up.isPressed(keycode)) {
+                selectPreviousDialogButton();
+            }
+            if (KeyBinding.Down.isPressed(keycode)) {
+                selectNextDialogButton();
+            }
+            if (KeyBinding.Use.isPressed(keycode)) {
+                performTouch(this.getKeyboardFocus());
+            }
+        }
+        return true;
+    }
+
     public void performTouch(Actor actor) {
         if (actor == null)
             return;
@@ -369,6 +434,7 @@ public class GameHUD extends Stage {
         inventoryActor.addAction(Actions.sequence(Actions.fadeOut(0.15f), Actions.hide(), Actions.moveTo(inventoryActor.getX() + inventoryActor.getWidth(), inventoryActor.getY())));
         statsActor.addAction(Actions.sequence(Actions.fadeOut(0.20f), Actions.hide(), Actions.moveTo(statsActor.getX() + statsActor.getWidth(), statsActor.getY())));
         menuActor.addAction(Actions.sequence(Actions.fadeOut(0.25f), Actions.hide(), Actions.moveTo(menuActor.getX() + menuActor.getWidth(), menuActor.getY())));
+        exitToWorldMapActor.addAction(Actions.sequence(Actions.fadeOut(0.2f), Actions.hide(), Actions.moveTo(exitToWorldMapActor.getX() + exitToWorldMapActor.getWidth(), exitToWorldMapActor.getY())));
         FThreads.delayInEDT(300, () -> isHiding = false);
     }
 
@@ -384,11 +450,66 @@ public class GameHUD extends Stage {
         statsActor.addAction(Actions.sequence(Actions.delay(0.15f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, statsActor.getY(), 0.25f))));
         inventoryActor.addAction(Actions.sequence(Actions.delay(0.2f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, inventoryActor.getY(), 0.25f))));
         deckActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, deckActor.getY(), 0.25f))));
+        exitToWorldMapActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, exitToWorldMapActor.getY(), 0.25f))));
         FThreads.delayInEDT(300, () -> isShowing = false);
     }
 
     public void setDebug(boolean b) {
         debugMap = b;
+    }
+
+    public void showDialog() {
+
+        dialogButtonMap.clear();
+        for (int i = 0; i < dialog.getButtonTable().getCells().size; i++) {
+            dialogButtonMap.add((TextraButton) dialog.getButtonTable().getCells().get(i).getActor());
+        }
+        dialog.show(this, Actions.show());
+        dialog.setPosition((this.getWidth() - dialog.getWidth()) / 2, (this.getHeight() - dialog.getHeight()) / 2);
+        dialogOnlyInput = true;
+        if (Forge.hasGamepad() && !dialogButtonMap.isEmpty())
+            this.setKeyboardFocus(dialogButtonMap.first());
+    }
+
+    public void hideDialog() {
+        dialog.hide(Actions.sequence(Actions.sizeTo(dialog.getOriginX(), dialog.getOriginY(), 0.3f), Actions.hide()));
+        dialogOnlyInput = false;
+        selectedKey = null;
+    }
+
+    private void selectNextDialogButton() {
+        if (dialogButtonMap.size < 2)
+            return;
+        if (!(this.getKeyboardFocus() instanceof Button)) {
+            this.setKeyboardFocus(dialogButtonMap.first());
+            return;
+        }
+        for (int i = 0; i < dialogButtonMap.size; i++) {
+            if (this.getKeyboardFocus() == dialogButtonMap.get(i)) {
+                i += 1;
+                i %= dialogButtonMap.size;
+                this.setKeyboardFocus(dialogButtonMap.get(i));
+                return;
+            }
+        }
+    }
+
+    private void selectPreviousDialogButton() {
+        if (dialogButtonMap.size < 2)
+            return;
+        if (!(this.getKeyboardFocus() instanceof Button)) {
+            this.setKeyboardFocus(dialogButtonMap.first());
+            return;
+        }
+        for (int i = 0; i < dialogButtonMap.size; i++) {
+            if (this.getKeyboardFocus() == dialogButtonMap.get(i)) {
+                i -= 1;
+                if (i < 0)
+                    i = dialogButtonMap.size - 1;
+                this.setKeyboardFocus(dialogButtonMap.get(i));
+                return;
+            }
+        }
     }
 
     class ConsoleToggleListener extends ActorGestureListener {
@@ -410,5 +531,7 @@ public class GameHUD extends Stage {
             if (count > 1)
                 showButtons();
         }
+
+
     }
 }

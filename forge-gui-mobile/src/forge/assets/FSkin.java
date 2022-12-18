@@ -306,7 +306,7 @@ public class FSkin {
 
             //hdbuttons
             if (f11.exists()) {
-                if (GuiBase.isAndroid() && Forge.totalDeviceRAM <5000) {
+                if (!Forge.allowCardBG) {
                     Forge.hdbuttons = false;
                 } else {
                     manager.load(f11.path(), Texture.class, Forge.getAssets().getTextureFilter());
@@ -315,7 +315,7 @@ public class FSkin {
                 }
             } else { Forge.hdbuttons = false; } //how to refresh buttons when a theme don't have hd buttons?
             if (f12.exists()) {
-                if (GuiBase.isAndroid() && Forge.totalDeviceRAM <5000) {
+                if (!Forge.allowCardBG) {
                     Forge.hdstart = false;
                 } else {
                     manager.load(f12.path(), Texture.class, Forge.getAssets().getTextureFilter());
@@ -334,7 +334,7 @@ public class FSkin {
             //load images
             for (FSkinImage image : FSkinImage.values()) {
                 if (GuiBase.isAndroid()) {
-                    if (Forge.totalDeviceRAM>5000)
+                    if (Forge.allowCardBG)
                         image.load(manager, preferredIcons);
                     else if (image.toString().equals("HDMULTI"))
                         image.load(manager, preferredIcons);

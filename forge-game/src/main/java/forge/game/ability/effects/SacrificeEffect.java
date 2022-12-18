@@ -92,7 +92,6 @@ public class SacrificeEffect extends SpellAbilityEffect {
         // Expand Sacrifice keyword here depending on what we need out of it.
         final String num = sa.getParamOrDefault("Amount", "1");
         final int amount = AbilityUtils.calculateAmount(card, num, sa);
-        final List<Player> tgts = getTargetPlayers(sa);
         final boolean devour = sa.hasParam("Devour");
         final boolean exploit = sa.hasParam("Exploit");
         final boolean sacEachValid = sa.hasParam("SacEachValid");
@@ -120,7 +119,7 @@ public class SacrificeEffect extends SpellAbilityEffect {
             }
         } else {
             CardCollectionView choosenToSacrifice = null;
-            for (final Player p : tgts) {
+            for (final Player p : getTargetPlayers(sa)) {
                 CardCollectionView battlefield = p.getCardsIn(ZoneType.Battlefield);
                 if (sacEachValid) { // Sacrifice maximum permanents in any combination of types specified by SacValid
                     String [] validArray = valid.split(" & ");
