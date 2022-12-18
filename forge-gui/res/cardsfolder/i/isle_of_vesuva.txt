@@ -2,7 +2,7 @@ Name:Isle of Vesuva
 ManaCost:no cost
 Types:Plane Dominaria
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.nonToken | TriggerZones$ Command | Execute$ TrigVesuvaCopy | TriggerDescription$ Whenever a nontoken creature enters the battlefield, its controller creates a token that's a copy of that creature.
-SVar:TrigVesuvaCopy:DB$ CopyPermanent | Defined$ TriggeredCard | Controller$ TriggeredCardController
+SVar:TrigVesuvaCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy | Controller$ TriggeredCardController
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll {CHAOS}, destroy target creature and all other creatures with the same name as that creature.
 SVar:RolledChaos:DB$ Destroy | ValidTgts$ Creature | SubAbility$ DestroyOtherAll
 SVar:DestroyOtherAll:DB$ DestroyAll | ValidCards$ Targeted.sameName+Other
