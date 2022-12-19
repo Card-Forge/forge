@@ -247,6 +247,8 @@ public enum CounterEnumType {
 
     NET("NET", 0, 221, 251),
 
+    OIL("OIL", 99, 102, 106),
+
     OMEN("OMEN", 255, 178, 120),
 
     ORE("ORE", 200, 201, 163),
