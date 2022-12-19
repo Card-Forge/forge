@@ -315,7 +315,7 @@ public final class CardRules implements ICardCharacteristics {
         if (!type.isLegendary()) {
             return false;
         }
-        if (type.isCreature() || type.isPlaneswalker()) {
+        if (type.isCreature() || type.isPlaneswalker() || canBeBackground()) {
             return true;
         }
 
