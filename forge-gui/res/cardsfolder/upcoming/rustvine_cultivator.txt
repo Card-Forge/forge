@@ -1,0 +1,8 @@
+Name:Rustvine Cultivator
+ManaCost:G
+Types:Creature Phyrexian Elf Druid
+PT:1/2
+A:AB$ PutCounter | Cost$ T | CounterType$ OIL | SpellDescription$ Put an oil counter on CARDNAME.
+A:AB$ Untap | Cost$ T SubCounter<1/OIL> | ValidTgts$ Land | SpellDescription$ Untap target land.
+DeckHas:Ability$Counters
+Oracle:{T}: Put an oil counter on Rustvine Cultivator.\n{T}, Remove an oil counter from Rustvine Cultivator: Untap target land.
