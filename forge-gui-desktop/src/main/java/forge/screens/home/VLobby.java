@@ -216,9 +216,8 @@ public class VLobby implements ILobbyView {
 
     @Override
     public void update(final int slot, final LobbySlotType type) {
-        final FDeckChooser deckChooser = getPlayerPanel(slot).getDeckChooser();
+        final FDeckChooser deckChooser = getDeckChooser(slot);
         deckChooser.setIsAi(type==LobbySlotType.AI);
-
         DeckType selectedDeckType = deckChooser.getSelectedDeckType();
         switch (selectedDeckType){
             case STANDARD_CARDGEN_DECK:
@@ -573,7 +572,7 @@ public class VLobby implements ILobbyView {
                 }
             }
             if (sel.equals("Random")) {
-                final Deck randomDeck = RandomDeckGenerator.getRandomUserDeck(lobby, getPlayerPanel(playerIndex).isAi());
+                final Deck randomDeck = RandomDeckGenerator.getRandomUserDeck(lobby, isPlayerAI(playerIndex));
                 planePool = randomDeck.get(DeckSection.Planes);
             }
         } else if (selected instanceof Deck) {
@@ -615,7 +614,7 @@ public class VLobby implements ILobbyView {
             if (sel.contains("Use deck's default avatar") && deck != null && deck.has(DeckSection.Avatar)) {
                 vanguardAvatar = deck.get(DeckSection.Avatar).get(0);
             } else { //Only other string is "Random"
-                if (getPlayerPanel(playerIndex).isAi()) { //AI
+                if (isPlayerAI(playerIndex)) { //AI
                     vanguardAvatar = Aggregates.random(getNonRandomAiAvatars());
                 } else { //Human
                     vanguardAvatar = Aggregates.random(getNonRandomHumanAvatars());
@@ -683,7 +682,7 @@ public class VLobby implements ILobbyView {
     public JPanel getPanelStart() { return pnlStart; }
     public List<FDeckChooser> getDeckChoosers() {
         List<FDeckChooser> choosers = new ArrayList<>(playerPanels.size());
-        for (PlayerPanel playerPanel : playerPanels) {
+        for (final PlayerPanel playerPanel : playerPanels) {
             choosers.add(playerPanel.getDeckChooser());
         }
         return choosers;
