@@ -840,9 +840,9 @@ public class FDeckChooser extends JPanel implements IDecksComboBoxListener {
         try {
             if (StringUtils.isBlank(savedState)) {
                 return new ArrayList<>();
-            } else {
-                return Arrays.asList(savedState.split(";")[1].split(SELECTED_DECK_DELIMITER));
             }
+            final String[] parts = savedState.split(";", -1);
+            return Arrays.asList(parts[1].split(SELECTED_DECK_DELIMITER));
         } catch (final Exception ex) {
             System.err.println(ex + " [savedState=" + savedState + "]");
             return new ArrayList<>();
