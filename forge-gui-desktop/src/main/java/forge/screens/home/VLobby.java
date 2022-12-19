@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.*;
@@ -102,6 +104,8 @@ public class VLobby implements ILobbyView {
     private final JPanel playersFrame = new JPanel(new MigLayout("insets 0, gap 0 5, wrap, hidemode 3"));
     private final FScrollPanel playersScroll = new FScrollPanel(new MigLayout("insets 0, gap 0, wrap, hidemode 3"), true);
     private final List<PlayerPanel> playerPanels = new ArrayList<>(MAX_PLAYERS);
+    // Cache deck choosers so switching settings doesn't re-generate random decks.
+    private final Map<FPref, FDeckChooser> cachedDeckChoosers = new HashMap<>();
 
     private final FLabel addPlayerBtn = new FLabel.ButtonBuilder().fontSize(14).text(localizer.getMessage("lblAddAPlayer")).build();
 
@@ -780,44 +784,44 @@ public class VLobby implements ILobbyView {
         }
     }
 
-    private FDeckChooser createDeckChooser(final GameType gameType, final int iSlot, final boolean ai) {
-        switch (gameType) {
-            case Commander: {
-                final FDeckChooser fdc = new FDeckChooser(null, ai, GameType.Commander, true);
-                final DeckType type = iSlot == 0 ? DeckType.COMMANDER_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
-                fdc.initialize(FPref.COMMANDER_DECK_STATES[iSlot], type);
-                fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, true));
-                return fdc;
-            }
-            case TinyLeaders: {
-                final FDeckChooser fdc = new FDeckChooser(null, ai, GameType.TinyLeaders, true);
-                final DeckType type = iSlot == 0 ? DeckType.TINY_LEADERS_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
-                fdc.initialize(FPref.TINY_LEADER_DECK_STATES[iSlot], type);
-                fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, true));
-                return fdc;
-            }
-            case Oathbreaker: {
-                final FDeckChooser fdc = new FDeckChooser(null, ai, GameType.Oathbreaker, true);
-                final DeckType type = iSlot == 0 ? DeckType.OATHBREAKER_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
-                fdc.initialize(FPref.OATHBREAKER_DECK_STATES[iSlot], type);
-                fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, true));
-                return fdc;
-            }
-            case Brawl: {
-                final FDeckChooser fdc = new FDeckChooser(null, ai, GameType.Brawl, true);
-                final DeckType type = iSlot == 0 ? DeckType.BRAWL_DECK : DeckType.CUSTOM_DECK;
-                fdc.initialize(FPref.BRAWL_DECK_STATES[iSlot], type);
-                fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, true));
-                return fdc;
-            }
-            default: {
-                final FDeckChooser fdc = new FDeckChooser(null, ai, GameType.Constructed, false);
-                final DeckType type = iSlot == 0 ? DeckType.PRECONSTRUCTED_DECK : DeckType.COLOR_DECK;
-                fdc.initialize(FPref.CONSTRUCTED_DECK_STATES[iSlot], type);
-                fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, false));
-                return fdc;
-            }
+    private FDeckChooser createDeckChooser(final GameType type, final int iSlot, final boolean ai) {
+        boolean forCommander;
+        DeckType deckType;
+        FPref prefKey;
+        switch (type) {
+            case Commander:
+                forCommander = true;
+                deckType = iSlot == 0 ? DeckType.COMMANDER_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
+                prefKey = FPref.COMMANDER_DECK_STATES[iSlot];
+                break;
+            case TinyLeaders:
+                forCommander = true;
+                deckType = iSlot == 0 ? DeckType.TINY_LEADERS_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
+                prefKey = FPref.TINY_LEADER_DECK_STATES[iSlot];
+                break;
+            case Oathbreaker:
+                forCommander = true;
+                deckType = iSlot == 0 ? DeckType.OATHBREAKER_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
+                prefKey = FPref.OATHBREAKER_DECK_STATES[iSlot];
+                break;
+            case Brawl:
+                forCommander = true;
+                deckType = iSlot == 0 ? DeckType.BRAWL_DECK : DeckType.CUSTOM_DECK;
+                prefKey = FPref.BRAWL_DECK_STATES[iSlot];
+                break;
+            default:
+                forCommander = false;
+                deckType = iSlot == 0 ? DeckType.PRECONSTRUCTED_DECK : DeckType.COLOR_DECK;
+                prefKey = FPref.CONSTRUCTED_DECK_STATES[iSlot];
+                break;
         }
+        return cachedDeckChoosers.computeIfAbsent(prefKey, (key) -> {
+            final GameType gameType = forCommander ? type : GameType.Constructed;
+            final FDeckChooser fdc = new FDeckChooser(null, ai, gameType, forCommander);
+            fdc.initialize(prefKey, deckType);
+            fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, forCommander));
+            return fdc;
+        });
     }
 
     final ActionListener nameListener = new ActionListener() {
