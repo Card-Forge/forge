@@ -216,7 +216,6 @@ public class VLobby implements ILobbyView {
 
     @Override
     public void update(final int slot, final LobbySlotType type) {
-        System.err.println("Update:"+slot+" / "+type);
         final FDeckChooser deckChooser = getPlayerPanel(slot).getDeckChooser();
         deckChooser.setIsAi(type==LobbySlotType.AI);
 
@@ -242,8 +241,6 @@ public class VLobby implements ILobbyView {
 
     @Override
     public void update(final boolean fullUpdate) {
-        System.err.println("Update:"+fullUpdate);
-
         activePlayersNum = lobby.getNumberOfSlots();
         addPlayerBtn.setEnabled(activePlayersNum < MAX_PLAYERS);
 
