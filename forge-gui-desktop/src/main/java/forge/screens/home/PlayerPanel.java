@@ -1,5 +1,6 @@
 package forge.screens.home;
 
+import forge.deckchooser.FDeckChooser;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -102,6 +103,8 @@ public class PlayerPanel extends FPanel {
     private FCheckBox chkDevMode;
 
     private boolean allowNetworking;
+
+    private FDeckChooser deckChooser;
 
     private final VLobby lobby;
     public PlayerPanel(final VLobby lobby, final boolean allowNetworking, final int index, final LobbySlot slot, final boolean mayEdit, final boolean mayControl) {
@@ -463,10 +466,6 @@ public class PlayerPanel extends FPanel {
         radioAiUseSimulation.setSelected(useSimulation);
     }
 
-    public boolean isLocal() {
-        return type == LobbySlotType.LOCAL;
-    }
-
     public boolean isArchenemy() {
         return aeTeamComboBox.getSelectedIndex() == 0;
     }
@@ -540,9 +539,6 @@ public class PlayerPanel extends FPanel {
         }
     };
 
-    /**
-     * @param index
-     */
     private void addHandlersToVariantsControls() {
         // Archenemy buttons
         scmDeckSelectorBtn.setCommand(new Runnable() {
@@ -621,9 +617,6 @@ public class PlayerPanel extends FPanel {
         });
     }
 
-    /**
-     * @param index
-     */
     private void createPlayerTypeOptions() {
         radioHuman = new FRadioButton(localizer.getMessage("lblHuman"));
         radioAi = new FRadioButton(localizer.getMessage("lblAI"));
@@ -674,9 +667,6 @@ public class PlayerPanel extends FPanel {
         });
     }
 
-    /**
-     * @param index
-     */
     private void addHandlersDeckSelector() {
         deckBtn.setCommand(new Runnable() {
             @Override
@@ -688,10 +678,6 @@ public class PlayerPanel extends FPanel {
         });
     }
 
-    /**
-     * @param index
-     * @return
-     */
     private FLabel createNameRandomizer() {
         final FLabel newNameBtn = new FLabel.Builder().tooltip(localizer.getMessage("lblGetaNewRandomName")).iconInBackground(false)
                 .icon(FSkin.getIcon(FSkinProp.ICO_EDIT)).hoverable(true).opaque(false)
@@ -717,10 +703,6 @@ public class PlayerPanel extends FPanel {
         return newNameBtn;
     }
 
-    /**
-     * @param index
-     * @return
-     */
     private void createNameEditor() {
         String name;
         if (index == 0) {
@@ -897,5 +879,13 @@ public class PlayerPanel extends FPanel {
 
     public void setMayRemove(final boolean mayRemove) {
         this.mayRemove = mayRemove;
+    }
+
+    FDeckChooser getDeckChooser() {
+        return deckChooser;
+    }
+
+    void setDeckChooser(final FDeckChooser deckChooser) {
+        this.deckChooser = deckChooser;
     }
 }
