@@ -251,11 +251,11 @@ public class Game {
 
     // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
     private final HashMap<Integer, Card> changeZoneLKIInfo = new HashMap<>();
-    public final void addChangeZoneLKIInfo(Card c) {
-        if (c == null) {
+    public final void addChangeZoneLKIInfo(Card lki) {
+        if (lki == null) {
             return;
         }
-        changeZoneLKIInfo.put(c.getId(), CardUtil.getLKICopy(c));
+        changeZoneLKIInfo.put(lki.getId(), lki);
     }
     public final Card getChangeZoneLKIInfo(Card c) {
         if (c == null) {

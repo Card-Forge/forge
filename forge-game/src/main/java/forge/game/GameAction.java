@@ -171,12 +171,6 @@ public class GameAction {
             }
         }
 
-        // LKI is only needed when something is moved from the battlefield.
-        // also it does messup with Blink Effects like Eldrazi Displacer
-        if (fromBattlefield && zoneTo != null && !zoneTo.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Flashback)) {
-            game.addChangeZoneLKIInfo(c);
-        }
-
         boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
 
         Card copied = null;
@@ -253,6 +247,12 @@ public class GameAction {
 
             if (lastKnownInfo == null) {
                 lastKnownInfo = CardUtil.getLKICopy(c);
+            }
+
+            // LKI is only needed when something is moved from the battlefield.
+            // also it does messup with Blink Effects like Eldrazi Displacer
+            if (fromBattlefield && !zoneTo.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Flashback)) {
+                game.addChangeZoneLKIInfo(lastKnownInfo);
             }
 
             // CR 707.12 casting of a card copy, don't copy it again
@@ -980,7 +980,6 @@ public class GameAction {
 
         // CR 603.6c other players LTB triggers should work
         if (!skipTrig) {
-            game.addChangeZoneLKIInfo(c);
             CardCollectionView lastBattlefield = game.getLastStateBattlefield();
             int idx = lastBattlefield.indexOf(c);
             Card lki = null;
@@ -990,6 +989,7 @@ public class GameAction {
             if (lki == null) {
                 lki = CardUtil.getLKICopy(c);
             }
+            game.addChangeZoneLKIInfo(lki);
             if (lki.isInPlay()) {
                 if (game.getCombat() != null) {
                     game.getCombat().saveLKI(lki);
