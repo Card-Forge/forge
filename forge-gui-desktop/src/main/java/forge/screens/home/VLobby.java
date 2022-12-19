@@ -435,11 +435,11 @@ public class VLobby implements ILobbyView {
         deckPanels.add(deckPanel);
     }
 
-    private void selectMainDeck(final FDeckChooser mainChooser, final int playerIndex) {
-        if (hasVariant(GameType.Commander) || hasVariant(GameType.Oathbreaker) || hasVariant(GameType.TinyLeaders) || hasVariant(GameType.Brawl)) {
-            // These game types use specific deck panel
-            return;
-        }
+    private FDeckChooser getDeckChooser(final int iSlot) {
+        return getPlayerPanel(iSlot).getDeckChooser();
+    }
+
+    private void selectMainDeck(final FDeckChooser mainChooser, final int playerIndex, final boolean isCommanderDeck) {
         final DeckType type = mainChooser.getSelectedDeckType();
         final Deck deck = mainChooser.getDeck();
         // something went wrong, clear selection to prevent error loop
@@ -449,75 +449,11 @@ public class VLobby implements ILobbyView {
         final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
         if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
             final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
-            getPlayerPanel(playerIndex).setDeckSelectorButtonText(text);
-            fireDeckChangeListener(playerIndex, deck);
-        }
-        mainChooser.saveState();
-    }
-
-    private FDeckChooser getDeckChooser(final int iSlot) {
-        return getPlayerPanel(iSlot).getDeckChooser();
-    }
-
-    private void selectCommanderDeck(final FDeckChooser mainChooser, final int playerIndex) {
-        if (!hasVariant(GameType.Commander) && !hasVariant(GameType.Oathbreaker) && !hasVariant(GameType.TinyLeaders) && !hasVariant(GameType.Brawl)) {
-            // Only these game types use this specific deck panel
-            return;
-        }
-        final DeckType type = mainChooser.getSelectedDeckType();
-        final Deck deck = mainChooser.getDeck();
-        final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
-        if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
-            final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
-            getPlayerPanel(playerIndex).setCommanderDeckSelectorButtonText(text);
-            fireDeckChangeListener(playerIndex, deck);
-        }
-        mainChooser.saveState();
-    }
-
-    private void selectOathbreakerDeck(final FDeckChooser mainChooser, final int playerIndex) {
-        if (!hasVariant(GameType.Oathbreaker)) {
-            // Only these game types use this specific deck panel
-            return;
-        }
-        final DeckType type = mainChooser.getSelectedDeckType();
-        final Deck deck = mainChooser.getDeck();
-        final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
-        if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
-            final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
-            getPlayerPanel(playerIndex).setCommanderDeckSelectorButtonText(text);
-            fireDeckChangeListener(playerIndex, deck);
-        }
-        mainChooser.saveState();
-    }
-
-    private void selectTinyLeadersDeck(final FDeckChooser mainChooser, final int playerIndex) {
-        if (!hasVariant(GameType.TinyLeaders)) {
-            // Only these game types use this specific deck panel
-            return;
-        }
-        final DeckType type = mainChooser.getSelectedDeckType();
-        final Deck deck = mainChooser.getDeck();
-        final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
-        if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
-            final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
-            getPlayerPanel(playerIndex).setCommanderDeckSelectorButtonText(text);
-            fireDeckChangeListener(playerIndex, deck);
-        }
-        mainChooser.saveState();
-    }
-
-    private void selectBrawlDeck(final FDeckChooser mainChooser,final int playerIndex) {
-        if (!hasVariant(GameType.Brawl)) {
-            // Only these game types use this specific deck panel
-            return;
-        }
-        final DeckType type = mainChooser.getSelectedDeckType();
-        final Deck deck = mainChooser.getDeck();
-        final Collection<DeckProxy> selectedDecks = mainChooser.getLstDecks().getSelectedItems();
-        if (playerIndex < activePlayersNum && lobby.mayEdit(playerIndex)) {
-            final String text = type.toString() + ": " + Lang.joinHomogenous(selectedDecks, DeckProxy.FN_GET_NAME);
-            getPlayerPanel(playerIndex).setCommanderDeckSelectorButtonText(text);
+            if (isCommanderDeck) {
+                getPlayerPanel(playerIndex).setCommanderDeckSelectorButtonText(text);
+            } else {
+                getPlayerPanel(playerIndex).setDeckSelectorButtonText(text);
+            }
             fireDeckChangeListener(playerIndex, deck);
         }
         mainChooser.saveState();
@@ -850,35 +786,35 @@ public class VLobby implements ILobbyView {
                 final FDeckChooser fdc = new FDeckChooser(null, ai, GameType.Commander, true);
                 final DeckType type = iSlot == 0 ? DeckType.COMMANDER_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
                 fdc.initialize(FPref.COMMANDER_DECK_STATES[iSlot], type);
-                fdc.getLstDecks().setSelectCommand(() -> selectCommanderDeck(fdc, iSlot));
+                fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, true));
                 return fdc;
             }
             case TinyLeaders: {
                 final FDeckChooser fdc = new FDeckChooser(null, ai, GameType.TinyLeaders, true);
                 final DeckType type = iSlot == 0 ? DeckType.TINY_LEADERS_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
                 fdc.initialize(FPref.TINY_LEADER_DECK_STATES[iSlot], type);
-                fdc.getLstDecks().setSelectCommand(() -> selectTinyLeadersDeck(fdc, iSlot));
+                fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, true));
                 return fdc;
             }
             case Oathbreaker: {
                 final FDeckChooser fdc = new FDeckChooser(null, ai, GameType.Oathbreaker, true);
                 final DeckType type = iSlot == 0 ? DeckType.OATHBREAKER_DECK : DeckType.RANDOM_CARDGEN_COMMANDER_DECK;
                 fdc.initialize(FPref.OATHBREAKER_DECK_STATES[iSlot], type);
-                fdc.getLstDecks().setSelectCommand(() -> selectOathbreakerDeck(fdc, iSlot));
+                fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, true));
                 return fdc;
             }
             case Brawl: {
                 final FDeckChooser fdc = new FDeckChooser(null, ai, GameType.Brawl, true);
                 final DeckType type = iSlot == 0 ? DeckType.BRAWL_DECK : DeckType.CUSTOM_DECK;
                 fdc.initialize(FPref.BRAWL_DECK_STATES[iSlot], type);
-                fdc.getLstDecks().setSelectCommand(() -> selectBrawlDeck(fdc, iSlot));
+                fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, true));
                 return fdc;
             }
             default: {
                 final FDeckChooser fdc = new FDeckChooser(null, ai, GameType.Constructed, false);
                 final DeckType type = iSlot == 0 ? DeckType.PRECONSTRUCTED_DECK : DeckType.COLOR_DECK;
                 fdc.initialize(FPref.CONSTRUCTED_DECK_STATES[iSlot], type);
-                fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot));
+                fdc.getLstDecks().setSelectCommand(() -> selectMainDeck(fdc, iSlot, false));
                 return fdc;
             }
         }
