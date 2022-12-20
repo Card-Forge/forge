@@ -688,8 +688,8 @@ public class AbilityUtils {
                 val = o instanceof Player ? playerXProperty((Player) o, calcX[1], card, ability) : 0;
             }
             else if (calcX[0].equals("TriggeredSpellAbility") || calcX[0].equals("TriggeredStackInstance") || calcX[0].equals("SpellTargeted")) {
-                final SpellAbility sat = getDefinedSpellAbilities(card, calcX[0], sa).get(0);
-                val = xCount(sat.getHostCard(), calcX[1], sat);
+                final SpellAbility sat = Iterables.getFirst(getDefinedSpellAbilities(card, calcX[0], sa), null);
+                val = sat == null ? 0 : xCount(sat.getHostCard(), calcX[1], sat);
             }
             else if (calcX[0].startsWith("TriggerCount")) {
                 // TriggerCount is similar to a regular Count, but just
