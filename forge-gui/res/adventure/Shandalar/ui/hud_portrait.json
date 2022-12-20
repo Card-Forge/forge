@@ -144,8 +144,8 @@
 	  "binding": "ExitToWorldMap",
       "width": 64,
       "height": 32,
-      "x": -128,
-      "y": -128
+      "x": 206,
+      "y": 266
     }
   ]
 }

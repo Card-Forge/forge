@@ -293,11 +293,11 @@ public class GameHUD extends Stage {
     private void exitToWorldMap(){
         dialog.getButtonTable().clear();
         dialog.getContentTable().clear();
-        TextraButton YES = Controls.newTextButton("YES", this::exitDungeonCallback);
+        TextraButton YES = Controls.newTextButton(Forge.getLocalizer().getMessage("lblYes"), this::exitDungeonCallback);
         YES.setVisible(false);
-        TextraButton NO = Controls.newTextButton("NO", this::hideDialog);
+        TextraButton NO = Controls.newTextButton(Forge.getLocalizer().getMessage("lblNo"), this::hideDialog);
         NO.setVisible(false);
-        TypingLabel L = Controls.newTypingLabel("Exit to the World Map?");
+        TypingLabel L = Controls.newTypingLabel(Forge.getLocalizer().getMessageorUseDefault("lblExitToWoldMap", "Exit to the World Map?"));
         L.setWrap(true);
         L.setTypingListener(new TypingAdapter() {
             @Override
@@ -321,6 +321,7 @@ public class GameHUD extends Stage {
         MapStage.getInstance().getPlayerSprite().setMovementDirection(Vector2.Zero);
 
         gameStage.getPlayerSprite().stop();
+        exitToWorldMapActor.setVisible(false);
     }
 
     private void menu() {
@@ -351,7 +352,7 @@ public class GameHUD extends Stage {
         setVisibility(mana, visible);
         setVisibility(money, visible);
         setVisibility(blank, visible);
-        setVisibility(exitToWorldMapActor, !visible); //hide when not in a dungeon
+        setVisibility(exitToWorldMapActor, GameScene.instance().isInDungeonOrCave());
         setAlpha(avatarborder, visible);
         setAlpha(avatar, visible);
         setAlpha(deckActor, visible);
@@ -434,7 +435,8 @@ public class GameHUD extends Stage {
         inventoryActor.addAction(Actions.sequence(Actions.fadeOut(0.15f), Actions.hide(), Actions.moveTo(inventoryActor.getX() + inventoryActor.getWidth(), inventoryActor.getY())));
         statsActor.addAction(Actions.sequence(Actions.fadeOut(0.20f), Actions.hide(), Actions.moveTo(statsActor.getX() + statsActor.getWidth(), statsActor.getY())));
         menuActor.addAction(Actions.sequence(Actions.fadeOut(0.25f), Actions.hide(), Actions.moveTo(menuActor.getX() + menuActor.getWidth(), menuActor.getY())));
-        exitToWorldMapActor.addAction(Actions.sequence(Actions.fadeOut(0.2f), Actions.hide(), Actions.moveTo(exitToWorldMapActor.getX() + exitToWorldMapActor.getWidth(), exitToWorldMapActor.getY())));
+        if (GameScene.instance().isInDungeonOrCave())
+            exitToWorldMapActor.addAction(Actions.sequence(Actions.fadeOut(0.2f), Actions.hide(), Actions.moveTo(exitToWorldMapActor.getX() + exitToWorldMapActor.getWidth(), exitToWorldMapActor.getY())));
         FThreads.delayInEDT(300, () -> isHiding = false);
     }
 
@@ -450,7 +452,8 @@ public class GameHUD extends Stage {
         statsActor.addAction(Actions.sequence(Actions.delay(0.15f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, statsActor.getY(), 0.25f))));
         inventoryActor.addAction(Actions.sequence(Actions.delay(0.2f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, inventoryActor.getY(), 0.25f))));
         deckActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, deckActor.getY(), 0.25f))));
-        exitToWorldMapActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, exitToWorldMapActor.getY(), 0.25f))));
+        if (GameScene.instance().isInDungeonOrCave())
+            exitToWorldMapActor.addAction(Actions.sequence(Actions.delay(0.25f), Actions.parallel(Actions.show(), Actions.alpha(opacity, 0.1f), Actions.moveTo(referenceX, exitToWorldMapActor.getY(), 0.25f))));
         FThreads.delayInEDT(300, () -> isShowing = false);
     }
 

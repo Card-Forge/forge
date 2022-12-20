@@ -70,11 +70,16 @@ public class GameScene extends HudScene {
                 BiomeData data = biomeData.get(currentBiome);
                 location = forHeader ? TextUtil.capitalize(data.name) + " Map" : data.name;
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
                 location = forHeader ? "Waste Map" : "waste";
             }
         }
         return location;
+    }
+
+    public boolean isInDungeonOrCave() {
+        String location = getAdventurePlayerLocation(false);
+        return location.equalsIgnoreCase("dungeon") || location.equalsIgnoreCase("cave");
     }
 }
 
