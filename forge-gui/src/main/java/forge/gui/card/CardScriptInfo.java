@@ -69,7 +69,7 @@ public final class CardScriptInfo {
     public static CardScriptInfo getScriptFor(final String name) {
         CardScriptInfo script = allScripts.get(name);
         if (script == null) { //attempt to load script if not previously loaded
-            final String filename = name.toLowerCase().replaceAll("[^-a-z0-9\\s]","").replaceAll("[-\\s]","_").replaceAll("__","_") + ".txt";
+            final String filename = name.toLowerCase().replaceAll("[^-a-z0-9_\\s]","").replaceAll("[-\\s]","_").replaceAll("__","_") + ".txt";
             String[] folders = {
                 ForgeConstants.CARD_DATA_DIR + File.separator + String.valueOf(filename.charAt(0)),
                 ForgeConstants.CARD_DATA_DIR + File.separator + "upcoming",
