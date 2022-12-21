@@ -5,5 +5,5 @@ PT:1/1
 A:AB$ Tap | Cost$ 3 W T | ValidTgts$ Creature | SpellDescription$ Tap target creature.
 A:AB$ Tap | PrecostDesc$ Corrupted — | Cost$ W T | ValidTgts$ Creature | CheckSVar$ X | SVarCompare$ GE3 | SpellDescription$ Tap target creature. Activate only if an opponent has three or more poison counters.
 SVar:X:PlayerCountOpponents$HighestPoisonCounters
-DeckHints:AbilityCounters
+DeckHints:Ability$Counters
 Oracle:{3}{W}, {T}: Tap target creature.\nCorrupted - {W}, {T}: Tap target creature. Activate only if an opponent has three or more poison counters.

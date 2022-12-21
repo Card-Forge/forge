@@ -7,5 +7,5 @@ S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ X | SVarCompare$ GE3 | Add
 SVar:X:PlayerCountOpponents$HighestPoisonCounters
 DeckHas:Ability$LifeGain
 AI:RemoveDeck:Random
-DeckNeeds:AbilityCounters
+DeckNeeds:Ability$Counters
 Oracle:Flying\nCorrupted – As long as an opponent has three or more poison counters, Bonepicker Skirge has deathtouch and lifelink.
