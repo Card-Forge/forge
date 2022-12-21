@@ -108,7 +108,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Card playEffectCard;
     private Pair<Long, Player> controlledByPlayer;
     private ManaCostBeingPaid manaCostBeingPaid;
-    private boolean spentPhyrexian = false;
+    private int spentPhyrexian = 0;
     private int paidLifeAmount = 0;
 
     private SpellAbility grantorOriginal;
@@ -614,11 +614,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         payingMana.clear();
     }
 
-    public final boolean getSpendPhyrexianMana() {
+    //getSpendPhyrexianMana
+    public final int getSpendPhyrexianMana() {
         return this.spentPhyrexian;
     }
-    public final void setSpendPhyrexianMana(boolean value) {
-        this.spentPhyrexian = value;
+    public final void setSpendPhyrexianMana(boolean bool) {
+        this.spentPhyrexian = bool ? this.spentPhyrexian + 2 : 0;
     }
 
     public final int getAmountLifePaid() {

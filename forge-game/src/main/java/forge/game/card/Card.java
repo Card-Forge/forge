@@ -2215,16 +2215,16 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
                     final String[] k = keyword.split(":");
                     sbLong.append("Partner with ").append(k[1]).append(" (").append(inst.getReminderText()).append(")");
                 } else if (keyword.equals("Compleated")) {
+                    sbLong.append(keyword).append(" (");
                     final ManaCost mc = this.getManaCost();
                     if (mc != ManaCost.NO_COST && mc.getFirstPhyrexianHybridPip() != null) {
                         String hybrid = mc.getFirstPhyrexianHybridPip().replaceAll("\\{", "")
                                 .replaceAll("\\}","");
-                        String remText = inst.getReminderText();
                         String[] parts = hybrid.split("/");
-                        remText = remText.replace("$0", hybrid).replace("$1", parts[1])
-                                .replace("$2", parts[2]);
-                        sbLong.append(keyword).append(" (").append(remText).append(")");
+                        String rem = "{" + hybrid + "} can be paid with {" + parts[1] + "}, {" + parts[2] + "}, or 2 life. ";
+                        sbLong.append(rem);
                     }
+                    sbLong.append(inst.getReminderText()).append(")");
                 } else if (keyword.startsWith("Devour ")) {
                     final String[] k = keyword.split(":");
                     final String[] s = (k[0]).split(" ");

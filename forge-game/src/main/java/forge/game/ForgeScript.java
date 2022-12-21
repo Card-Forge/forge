@@ -235,7 +235,7 @@ public class ForgeScript {
         } else if (property.equals("Nightbound")) {
             return sa.hasParam("Nightbound");
         } else if (property.equals("paidPhyrexianMana")) {
-            return sa.getSpendPhyrexianMana();
+            return sa.getSpendPhyrexianMana() > 0;
         } else if (property.equals("LastChapter")) {
             return sa.isLastChapter();
         } else if (property.startsWith("ManaSpent")) {
