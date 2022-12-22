@@ -94,7 +94,7 @@ public enum CCardScript implements ICDoc {
         }
 
         currentCard = card;
-        currentScriptInfo = card != null ? CardScriptInfo.getScriptFor(currentCard.getRules().getName()) : null;
+        currentScriptInfo = card != null ? CardScriptInfo.getScriptFor(currentCard.getRules().getNormalizedName()) : null;
         refresh();
     }
 
