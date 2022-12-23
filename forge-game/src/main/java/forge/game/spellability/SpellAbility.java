@@ -1254,10 +1254,15 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false;
         }
 
-        final TargetRestrictions tr = getTargetRestrictions();
+        final SpellAbility rootAbility = this.getRootAbility();
+        // 115.5. A spell or ability on the stack is an illegal target for itself.
+        if (rootAbility.isSpell() && rootAbility.getHostCard() == entity) {
+            return false;
+        }
 
         // Restriction related to this ability
         if (usesTargeting()) {
+            final TargetRestrictions tr = getTargetRestrictions();
             if (tr.isUniqueTargets() && getUniqueTargets().contains(entity))
                 return false;
 
@@ -1647,6 +1652,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public boolean usesTargeting() {
         return targetRestrictions != null;
+    }
+
+    public boolean hasLegalTargets() {
+        if (!isTargetNumberValid() && getTargetRestrictions().getNumCandidates(this, true) == 0) {
+            return false;
+        }
+        if (!StaticAbilityMustTarget.meetsMustTargetRestriction(this)) {
+            return false;
+        }
+        return true;
     }
 
     public TargetRestrictions getTargetRestrictions() {

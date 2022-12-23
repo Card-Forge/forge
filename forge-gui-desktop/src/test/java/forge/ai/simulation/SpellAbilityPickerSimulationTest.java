@@ -483,4 +483,87 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         AssertJUnit.assertEquals("Chaos Warp", sa.getHostCard().getName());
         AssertJUnit.assertEquals(expectedTarget, sa.getTargetCard());
     }
+
+    @Test
+    public void testNoSimulationsWhenNoTargets() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCard("Island", p);
+        addCard("Island", p);
+        addCardToZone("Counterspell", p, ZoneType.Hand);
+        addCardToZone("Unsummon", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNull(sa);
+        AssertJUnit.assertEquals(0, picker.getNumSimulations());
+    }
+
+    @Test
+    public void testLandDropPruning() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+
+        addCardToZone("Island", p, ZoneType.Hand);
+        addCardToZone("Island", p, ZoneType.Hand);
+        addCardToZone("Island", p, ZoneType.Hand);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNotNull(sa);
+        // Only one land drop should be simulated, since the cards are identical.
+        AssertJUnit.assertEquals(1, picker.getNumSimulations());
+    }
+
+    @Test
+    public void testSpellCantTargetSelf() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCardToZone("Unsubstantiate", p, ZoneType.Hand);
+        addCard("Forest", p);
+        addCard("Island", p);
+        Card expectedTarget = addCard("Flying Men", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNotNull(sa);
+        AssertJUnit.assertEquals(expectedTarget, sa.getTargetCard());
+        // Only a single simulation expected (no target self).
+        AssertJUnit.assertEquals(1, picker.getNumSimulations());
+    }
+
+    @Test
+    public void testModalSpellCantTargetSelf() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCardToZone("Decisive Denial", p, ZoneType.Hand);
+        addCard("Forest", p);
+        addCard("Island", p);
+        addCard("Runeclaw Bear", p);
+        addCard("Flying Men", opponent);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNotNull(sa);
+        // Expected: Runeclaw Bear fights Flying Men
+        // Only a single simulation expected (no target self).
+        AssertJUnit.assertEquals(1, picker.getNumSimulations());
+    }
 }

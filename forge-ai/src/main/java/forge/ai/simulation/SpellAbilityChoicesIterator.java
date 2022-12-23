@@ -16,7 +16,7 @@ import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
 
 public class SpellAbilityChoicesIterator {
-    private SimulationController controller;
+    private final SimulationController controller;
 
     private Iterator<int[]> modeIterator;
     private int[] selectedModes;
@@ -34,11 +34,13 @@ public class SpellAbilityChoicesIterator {
         Card selectedChoice;
         Score bestScoreForChoice = new Score(Integer.MIN_VALUE);
     }
-    private ArrayList<ChoicePoint> choicePoints = new ArrayList<>();
+    private final ArrayList<ChoicePoint> choicePoints = new ArrayList<>();
     private int incrementedCpIndex = 0;
     private int cpIndex = -1;
 
     private int evalDepth;
+    // Maps from filtered mode indexes to original ones.
+    private List<Integer> modesMap;
 
     public SpellAbilityChoicesIterator(SimulationController controller) {
         this.controller = controller;
@@ -46,17 +48,26 @@ public class SpellAbilityChoicesIterator {
 
     public List<AbilitySub> chooseModesForAbility(List<AbilitySub> choices, int min, int num, boolean allowRepeat) {
         if (modeIterator == null) {
-            // TODO: Need to skip modes that are invalid (e.g. targets don't exist)!
+            // Skip modes that don't have legal targets.
+            modesMap = new ArrayList<>();
+            int origIndex = -1;
+            for (AbilitySub sub : choices) {
+                origIndex++;
+                if (sub.usesTargeting() && !sub.hasLegalTargets()) {
+                    continue;
+                }
+                modesMap.add(origIndex);
+            }
             // TODO: Do we need to do something special to support cards that have extra costs
             // when choosing more modes, like Blessed Alliance?
             if (!allowRepeat) {
-                modeIterator = CombinatoricsUtils.combinationsIterator(choices.size(), num);
+                modeIterator = CombinatoricsUtils.combinationsIterator(modesMap.size(), num);
             } else {
                 // Note: When allowRepeat is true, it does result in many possibilities being tried.
                 // We should ideally prune some of those at a higher level.
-                modeIterator = new AllowRepeatModesIterator(choices.size(), min, num);
+                modeIterator = new AllowRepeatModesIterator(modesMap.size(), min, num);
             }
-            selectedModes = modeIterator.next();
+            selectedModes = remapModes(modeIterator.next());
             advancedToNextMode = true;
         }
         // Note: If modeIterator already existed, selectedModes would have been updated in advance().
@@ -78,6 +89,13 @@ public class SpellAbilityChoicesIterator {
         return result;
     }
 
+    private int[] remapModes(int[] modes) {
+        for (int i = 0; i < modes.length; i++) {
+            modes[i] = modesMap.get(modes[i]);
+        }
+        return modes;
+    }
+
     public Card chooseCard(CardCollection fetchList) {
         cpIndex++;
         if (cpIndex >= choicePoints.size()) {
@@ -86,8 +104,7 @@ public class SpellAbilityChoicesIterator {
         ChoicePoint cp = choicePoints.get(cpIndex);
         // Prune duplicates.
         HashSet<String> uniqueCards = new HashSet<>();
-        for (int i = 0; i < fetchList.size(); i++) {
-            Card card = fetchList.get(i);
+        for (Card card : fetchList) {
             if (uniqueCards.add(card.getName()) && uniqueCards.size() == cp.nextChoice + 1) {
                 cp.selectedChoice = card;
             }
@@ -137,12 +154,7 @@ public class SpellAbilityChoicesIterator {
                 evalDepth++;
                 pushTarget = false;
             }
-            return;
         }
-    }
-
-    public int[] getSelectModes() {
-        return selectedModes;
     }
 
     public boolean advance(Score lastScore) {
@@ -195,7 +207,7 @@ public class SpellAbilityChoicesIterator {
             doneEvaluating(bestScoreForMode);
             bestScoreForMode = new Score(Integer.MIN_VALUE);
             if (modeIterator.hasNext()) {
-                selectedModes = modeIterator.next();
+                selectedModes = remapModes(modeIterator.next());
                 advancedToNextMode = true;
                 return true;
             }
@@ -232,8 +244,8 @@ public class SpellAbilityChoicesIterator {
     }
 
     private static class AllowRepeatModesIterator implements Iterator<int[]> {
-        private int numChoices;
-        private int max;
+        private final int numChoices;
+        private final int max;
         private int[] indexes;
 
         public AllowRepeatModesIterator(int numChoices, int min, int max) {

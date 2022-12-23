@@ -903,13 +903,8 @@ public class AiController {
         if (sa instanceof SpellPermanent) {
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
-        if (sa.usesTargeting()) {
-            if (!sa.isTargetNumberValid() && sa.getTargetRestrictions().getNumCandidates(sa, true) == 0) {
-                return AiPlayDecision.TargetingFailed;
-            }
-            if (!StaticAbilityMustTarget.meetsMustTargetRestriction(sa)) {
-                return AiPlayDecision.TargetingFailed;
-            }
+        if (sa.usesTargeting() && !sa.hasLegalTargets()) {
+            return AiPlayDecision.TargetingFailed;
         }
         if (sa instanceof Spell) {
             if (!player.cantLoseForZeroOrLessLife() && player.canLoseLife() &&
