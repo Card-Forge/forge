@@ -1,6 +1,7 @@
 package forge.ai.simulation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -60,7 +61,9 @@ public class SpellAbilityChoicesIterator {
             }
             // TODO: Do we need to do something special to support cards that have extra costs
             // when choosing more modes, like Blessed Alliance?
-            if (!allowRepeat) {
+            if (modesMap.size() == 0) {
+                modeIterator = Collections.emptyIterator();
+            } else if (!allowRepeat) {
                 modeIterator = CombinatoricsUtils.combinationsIterator(modesMap.size(), num);
             } else {
                 // Note: When allowRepeat is true, it does result in many possibilities being tried.
