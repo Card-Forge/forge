@@ -229,7 +229,7 @@ public class PlayerProperty {
             Matcher regexMatcher = regex.matcher(property.substring(8));
             while (regexMatcher.find()) {
                 type.add(regexMatcher.group());
-            } 
+            }
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.get(0).replace("\\_", "_"), sourceController, source, spellAbility);
             String comparator = type.size() > 1 ? type.get(1) : "GE";
             int y = type.size() > 1 ? AbilityUtils.calculateAmount(source, comparator.substring(2), spellAbility) : 1;

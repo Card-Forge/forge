@@ -21,11 +21,7 @@ import java.util.Map;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
-import forge.game.card.CardCollection;
-import forge.game.card.CardLists;
-import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 
 /**
@@ -59,16 +55,6 @@ public class TriggerLifeGained extends Trigger {
     public final boolean performTest(final Map<AbilityKey, Object> runParams) {
         if (!matchesValidParam("ValidPlayer", runParams.get(AbilityKey.Player))) {
             return false;
-        }
-        if (hasParam("ValidPlayerControls")) {
-            final String sIsPresent = this.getParam("ValidPlayerControls");
-            final Player p = ((Player)runParams.get(AbilityKey.Player));
-            CardCollection list = (CardCollection) p.getCardsIn(ZoneType.Battlefield);
-            list = CardLists.getValidCards(list, sIsPresent, this.getHostCard().getController(),
-                    this.getHostCard(), this);
-            if (list.size() == 0) {
-                return false;
-            }
         }
 
         if (!matchesValidParam("ValidSource", runParams.get(AbilityKey.Source))) {
