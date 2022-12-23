@@ -2172,8 +2172,10 @@ public class CardFactoryUtil {
 
             inst.addReplacement(re);
         } else if (keyword.equals("Compleated")) {
-            String sb = "etbCounter:LOYALTY:-2:ValidCard$ Card.CastSa Spell.paidPhyrexianMana:If life was paid, this planeswalker enters with two fewer loyalty counters";
+            String sb = "etbCounter:LOYALTY:PhySpent:CheckSVar$ PhySpent | SVarCompare$ LT0:This planeswalker" +
+                    " enters with two fewer loyalty counters for each Phyrexian mana symbol life was paid for";
             final ReplacementEffect re = makeEtbCounter(sb, card, intrinsic);
+            card.setSVar("PhySpent", "Count$EachPhyrexianPaidWithLife/Negative");
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Dredge")) {

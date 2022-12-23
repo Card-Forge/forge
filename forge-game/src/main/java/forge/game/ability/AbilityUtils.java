@@ -2097,6 +2097,14 @@ public class AbilityUtils {
             return doXMath(castSA == null ? 0 : castSA.getPayingColors().countColors(), expr, c, ctb);
         }
 
+        if (sq[0].startsWith("EachPhyrexianPaidWithLife")) {
+            SpellAbility castSA = c.getCastSA();
+            if (castSA == null) {
+                return 0;
+            }
+            return doXMath(castSA.getSpendPhyrexianMana(), expr, c, ctb);
+        }
+
         if (sq[0].startsWith("EachSpentToCast")) {
             SpellAbility castSA = c.getCastSA();
             if (castSA == null) {
