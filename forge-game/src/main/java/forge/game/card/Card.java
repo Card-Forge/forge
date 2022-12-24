@@ -1666,6 +1666,11 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         currentState.setSVar(var, str);
     }
 
+    public final void copyChangedSVarsFrom(Card other) {
+        changedSVars.clear();
+        changedSVars.putAll(other.changedSVars);
+    }
+
     @Override
     public final Map<String, String> getSVars() {
         return currentState.getSVars();
