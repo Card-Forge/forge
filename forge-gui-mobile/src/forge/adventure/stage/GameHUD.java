@@ -219,7 +219,7 @@ public class GameHUD extends Stage {
                     && !(Controls.actorContainsVector(openMapActor, touch)) //not inside openmap button
                     && !(Controls.actorContainsVector(statsActor, touch)) //not inside stats button
                     && !(Controls.actorContainsVector(inventoryActor, touch)) //not inside inventory button
-                    && !(Controls.actorContainsVector(exitToWorldMapActor, touch)) //not inside deck button
+                    && !(Controls.actorContainsVector(exitToWorldMapActor, touch)) //not inside exit button
                     && (Controls.actorContainsVector(ui, touch)) //inside display bounds
                     && pointer < 1) { //not more than 1 pointer
                 touchpad.setBounds(touch.x - TOUCHPAD_SCALE / 2, touch.y - TOUCHPAD_SCALE / 2, TOUCHPAD_SCALE, TOUCHPAD_SCALE);

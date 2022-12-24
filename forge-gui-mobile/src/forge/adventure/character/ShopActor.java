@@ -2,6 +2,7 @@ package forge.adventure.character;
 
 import com.badlogic.gdx.utils.Array;
 import forge.Forge;
+import forge.adventure.data.ShopData;
 import forge.adventure.scene.RewardScene;
 import forge.adventure.stage.MapStage;
 import forge.adventure.util.Reward;
@@ -11,15 +12,15 @@ import forge.adventure.util.Reward;
  */
 public class ShopActor extends MapActor{
     private final MapStage stage;
-    private final boolean unlimited;
+    private ShopData shopData;
     Array<Reward> rewardData;
 
-    public ShopActor(MapStage stage, int id, Array<Reward> rewardData, boolean unlimited)
+    public ShopActor(MapStage stage, int id, Array<Reward> rewardData, ShopData data)
     {
         super(id);
         this.stage = stage;
+        this.shopData = data;
         this.rewardData = rewardData;
-        this.unlimited = unlimited;
 
     }
 
@@ -39,6 +40,15 @@ public class ShopActor extends MapActor{
 
 
     public boolean isUnlimited() {
-        return unlimited;
+        return shopData.unlimited;
+    }
+
+    @Override
+    public String getName() {
+        return shopData.name;
+    }
+
+    public String getDescription() {
+        return shopData.description;
     }
 }

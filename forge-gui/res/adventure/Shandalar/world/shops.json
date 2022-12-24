@@ -1,151 +1,7 @@
-[{                                      
-"name":"WhiteEquipment",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"CapitalShop",   
-  "rewards": [ 
-    { "type": "item","count":1, "itemName": "Life Amulet"  },
-    { "type": "item","count":1, "itemName": "Gold Armor"  },
-    { "type": "item","count":1, "itemName": "Mirror Shield"  },
-    { "type": "item","count":1, "itemName": "Entrancing Lyre"  },
-    { "type": "item","count":1, "itemName": "Nine-Ringed Bo"  },
-    { "type": "item","count":1, "itemName": "Kite Shield"  }
-    
-    ]
-
-},{                                      
-"name":"WhiteItems",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"ItemShop",   
-  "rewards": [ 
-    { "type": "item","count":1, "itemName": "White rune"  },
-    { "type": "item","count":1, "itemName": "White Staff"  },
-    { "type": "mana","count":2    },
-    { "type": "life","count":1    }
-    
-    ]
-
-},{                                      
-"name":"RedEquipment",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"CapitalShop",   
-  "rewards": [ 
-    { "type": "item","count":1, "itemName": "Axt"  },
-    { "type": "item","count":1, "itemName": "Aladdin's Ring"  },
-    { "type": "item","count":1, "itemName": "Flame Sword"  },
-    { "type": "item","count":1, "itemName": "Heavy Arbalest"  },
-    { "type": "item","count":1, "itemName": "Jeweled Amulet"  },
-    { "type": "item","count":1, "itemName": "Ring of Immortals"  }
-    
-    ]
-
-},{                                      
-"name":"RedItems",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",    
-"sprite":"ItemShop",   
-  "rewards": [ 
-    { "type": "item","count":1, "itemName": "Red rune"  },
-    { "type": "item","count":1, "itemName": "Red Staff"  },
-    { "type": "mana","count":2    },
-    { "type": "life","count":1    }
-    
-    ]
-
-},{                                      
-"name":"BlueEquipment",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"CapitalShop",   
-  "rewards": [ 
-    { "type": "item","count":1, "itemName": "Traveler's Amulet"  },
-    { "type": "item","count":1, "itemName": "Magic Shard"  },
-    { "type": "item","count":1, "itemName": "Spell Book"  },
-    { "type": "item","count":1, "itemName": "Mithril Armor"  },
-    { "type": "item","count":1, "itemName": "Mithril Boots"  },
-    { "type": "item","count":1, "itemName": "Mithril Shield"  }
-    
-    ]
-
-},{                                      
-"name":"BlueItems",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",    
-"sprite":"ItemShop",   
-  "rewards": [ 
-    { "type": "item","count":1, "itemName": "Blue rune"  },
-    { "type": "item","count":1, "itemName": "Blue Staff"  },
-    { "type": "mana","count":2    },
-    { "type": "life","count":1    }
-    
-    ]
-
-},
+[
 {                                      
-"name":"BlackEquipment",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"CapitalShop",   
-  "rewards": [ 
-    { "type": "item","count":1, "itemName": "Death Ring"  },
-    { "type": "item","count":1, "itemName": "Dark Amulet"  },
-    { "type": "item","count":1, "itemName": "Mad Staff"  },
-    { "type": "item","count":1, "itemName": "Dark Armor"  },
-    { "type": "item","count":1, "itemName": "Dark Boots"  },
-    { "type": "item","count":1, "itemName": "Dark Shield"  }
-    
-    ]
-
-},{                                      
-"name":"BlackItems",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",    
-"sprite":"ItemShop",   
-  "rewards": [ 
-    { "type": "item","count":1, "itemName": "Black rune"  },
-    { "type": "item","count":1, "itemName": "Black Staff"  },
-    { "type": "mana","count":2    },
-    { "type": "life","count":1    }
-    
-    ]
-
-},
-{                                      
-"name":"GreenEquipment",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"CapitalShop",   
-  "rewards": [ 
-    { "type": "item","count":1, "itemName": "Jungle Shield"  },
-    { "type": "item","count":1, "itemName": "Ring of Three Wishes"  },
-    { "type": "item","count":1, "itemName": "Heart-Piercer"  },
-    { "type": "item","count":1, "itemName": "Wood Bow"  },
-    { "type": "item","count":1, "itemName": "Steel Sword"  },
-    { "type": "item","count":1, "itemName": "Unerring Sling"  }
-    
-    ]
-
-},{                                      
-"name":"GreenItems",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",    
-"sprite":"ItemShop",   
-  "rewards": [ 
-    { "type": "item","count":1, "itemName": "Green rune"  },
-    { "type": "item","count":1, "itemName": "Green Staff"  },
-    { "type": "mana","count":2    },
-    { "type": "life","count":1   }
-    
-    ]
-
-},{
-"name":"Equipment",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"EquipmentShop",   
-  "rewards": [ 
-    { "type": "item","count":1, "itemName": "Steel Boots"  },
-    { "type": "item","count":1, "itemName": "Steel Shield"  },
-    { "type": "item","count":1, "itemName": "Steel Armor"  },
-    { "type": "item","count":1, "itemName": "Iron Boots"  },
-    { "type": "item","count":1, "itemName": "Iron Shield"  },
-    { "type": "item","count":1, "itemName": "Iron Armor"  }
-    
-    ]
-
-},{                                      
-"name":"Swamp",                  
+"name":"Swamp",    
+"description":"The Cartographer's Guild",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"LandShop",      
 "unlimited":true,
@@ -158,7 +14,8 @@
     }]
 
 },{                                      
-"name":"Forest",                  
+"name":"Forest",
+"description":"The Cartographer's Guild",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"LandShop",      
 "unlimited":true,
@@ -171,7 +28,8 @@
     }]
 
 },{                                      
-"name":"Mountain",                  
+"name":"Mountain",   
+"description":"The Cartographer's Guild",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"LandShop",      
 "unlimited":true,
@@ -185,6 +43,7 @@
 
 },{                                      
 "name":"Island",                  
+"description":"The Cartographer's Guild",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"LandShop",      
 "unlimited":true,
@@ -198,6 +57,7 @@
 
 },{                                      
 "name":"Plains",                  
+"description":"The Cartographer's Guild",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"LandShop",      
 "unlimited":true,
@@ -211,6 +71,7 @@
 
 },{                                      
 "name":"Instant",                  
+"description":"Buy-it-now!!!",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"InstantShop",
   "rewards": [
@@ -219,8 +80,94 @@
       "cardTypes": ["Instant","Sorcery"]
     }]
 
+},{                                      
+"name":"Instant4Black",                  
+"description":"Sudden Death",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay4Black",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["black"]
+    }]
+
+},{                                      
+"name":"Instant4Blue",                  
+"description":"Mind Games",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay4Blue",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["blue"]
+    }]
+
+},{                                      
+"name":"Instant4Green",                  
+"description":"Primal Commands",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay4Green",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["green"]
+    }]
+
+},{                                      
+"name":"Instant4Red",                  
+"description":"Furnace of Rath",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay4Red",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["red"]
+    }]
+
+},{                                      
+"name":"Instant4White",                  
+"description":"Gerrard's Wisdom",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"InstantShop",
+"overlaySprite":"Overlay4White",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Instant","Sorcery"],
+	  "colors": ["white"]
+    }]
+
 },{                                    
 "name":"Creature",                  
+"description":"The Menagerie",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"CreatureShop",
   "rewards": [
@@ -229,89 +176,360 @@
       "cardTypes": ["Creature"]
     }]
 },{                                    
-"name":"Land",                  
+"name":"Creature2Colorless",                  
+"description":"Junk Market",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"LandShop",
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay2Colorless",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Creature"]
+    },
+	{
+      "count":2,
+      "cardTypes": ["Creature"],
+	  "colorType": "Colorless"
+    }]
+},{                                    
+"name":"Creature2Eldrazi",
+"description": "Eldritch Emissaries"
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay2Colorless",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Creature"]
+    },
+	{
+      "count":2,
+      "subTypes": ["Eldrazi"]
+    }]
+},{                                    
+"name":"Creature2Black",                  
+"description":"The Boneyard",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay2Black",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Creature"]
+    },
+	{
+      "count":2,
+      "cardTypes": ["Creature"],
+	  "colors": ["black"]
+    }]
+},{                                    
+"name":"Creature6Black",                  
+"description":"Tomb Of Yawgmoth",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay6Black",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Creature"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Creature"],
+	  "colors": ["black"]
+    }]
+},{                                    
+"name":"Creature2Blue",                  
+"description":"Riverside Market",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay2Blue",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Creature"]
+    },
+	{
+      "count":2,
+      "cardTypes": ["Creature"],
+	  "colors": ["blue"]
+    }]
+},{                                    
+"name":"Creature6Blue",                  
+"description":"The Yawning Depths",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay6Blue",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Creature"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Creature"],
+	  "colors": ["blue"]
+    }]
+},{                                    
+"name":"Creature2Green",                  
+"description":"Hunter's Glade",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay2Green",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Creature"]
+    },
+	{
+      "count":2,
+      "cardTypes": ["Creature"],
+	  "colors": ["green"]
+    }]
+},{                                    
+"name":"Creature6Green",                  
+"description":"Natural Order",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay6Green",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Creature"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Creature"],
+	  "colors": ["green"]
+    }]
+},{                                    
+"name":"Creature2Red",
+"description":"Hillside Traders",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay2Red",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Creature"]
+    },
+	{
+      "count":2,
+      "cardTypes": ["Creature"],
+	  "colors": ["red"]
+    }]
+},{                                    
+"name":"Creature6Red",                  
+"description":"Furious Assault",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay6Red",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Creature"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Creature"],
+	  "colors": ["red"]
+    }]
+},{                                    
+"name":"Creature2White",                  
+"description":"Countryside Farms",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay2White",
+  "rewards": [
+    {
+      "count":6,
+      "cardTypes": ["Creature"]
+    },
+	{
+      "count":2,
+      "cardTypes": ["Creature"],
+	  "colors": ["white"]
+    }]
+},{                                    
+"name":"Creature6White",                  
+"description":"Heavenly Host",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"CreatureShop",
+"overlaySprite":"Overlay6White",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Creature"]
+    },
+	{
+      "count":6,
+      "cardTypes": ["Creature"],
+	  "colors": ["white"]
+    }]
+},{
+  "name":"Land4Blue",
+  "description":"Oceanside Property",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay4Blue",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\EU\\Q\\E}"
+    },
+	{
+      "count":4,
+      "cardTypes": ["Land"]
+    }]
+},{
+  "name":"Land8Blue",
+  "description":"20,000 Leagues",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay8Blue",
   "rewards": [
     {
       "count":8,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\EU\\Q\\E}"
+    }]
+},{
+  "name":"Land4Black",
+  "description":"Boggy Depths",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay4Black",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\EB\\Q\\E}"
+    },
+	{
+      "count":4,
+      "cardTypes": ["Land"]
+    }]
+},{
+  "name":"Land8Black",
+  "description":"Heart of Darkness",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay8Black",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\EB\\Q\\E}"
+    }]
+},{
+  "name":"Land4Red",
+  "description":"Mon's Warrens",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay4Red",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\ER\\Q\\E}"
+    },
+	{
+      "count":4,
+      "cardTypes": ["Land"]
+    }]
+},{
+  "name":"Land8Red",
+  "description":"Volcanic Vistas",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay8Red",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\ER\\Q\\E}"
+    }]
+},{
+  "name":"Land4Green",
+  "description":"Green Acres",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay4Green",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\EG\\Q\\E}"
+    },
+	{
+      "count":4,
+      "cardTypes": ["Land"]
+    }]
+},{
+  "name":"Land8Green",
+  "description":"Gaea's Gifts",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay8Green",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\EG\\Q\\E}"
+    }]
+},{
+  "name":"Land4White",
+  "description":"Planes & Plowshares",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay4White",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\EW\\Q\\E}"
+    },
+	{
+      "count":4,
+      "cardTypes": ["Land"]
+    }]
+},{
+  "name":"Land8White",
+  "description":"Spiritual Sanctuary",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay8White",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\EW\\Q\\E}"
+    }]
+},{
+  "name":"Land4Colorless",
+  "description":"The Flowering Wastes",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "overlaySprite":"Overlay4Colorless",
+  "rewards": [
+    {
+      "count":2,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\EC\\Q\\E}"
+    },
+	{
+      "count":2,
+      "cardTypes": ["Land"],
+	  "cardText": "\\Q{\\E1\\Q\\E}"
+    },
+	{
+      "count":4,
       "cardTypes": ["Land"]
     }]
 },{                                    
-"name":"Colorless",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"ColorlessShop",
-  "rewards": [
-    {
-      "count":8,
-      "colorType": "Colorless"
-    }]
-},{                                    
-"name":"Artifact",
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"ArtifactShop",
-  "rewards": [
-    {
-      "count":8,
-      "colorType": "Colorless",
-      "cardTypes": ["Artifact"]
-    }]
-},{                                    
-"name":"Multicolor",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"MultiColorShop",
-  "rewards": [
-    {
-      "count":8,
-      "colorType": "MultiColor"
-    }]
-},{                                    
-"name":"Green",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"GreenShop",
-  "rewards": [
-    {
-      "count":8,
-      "colors": ["green"]
-    }]
-},{                                    
-"name":"Red",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"RedShop",
-  "rewards": [
-    {
-      "count":8,
-      "colors": ["red"]
-    }]
-},{                                    
-"name":"Black",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"BlackShop",
-  "rewards": [
-    {
-      "count":8,
-      "colors": ["black"]
-    }]
-},{                                    
-"name":"White",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"WhiteShop",
-  "rewards": [
-    {
-      "count":8,
-      "colors": ["white"]
-    }]
-},{                                    
-"name":"Blue",                  
-"spriteAtlas":"maps/tileset/buildings.atlas",   
-"sprite":"BlueShop",
-  "rewards": [
-    {
-      "count":8,
-      "colors": ["blue"]
-    }]
-} ,{                                    
 "name":"Azorius",      
+"description":"Azorious Shop, LLC",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"AzoriusShop",
   "rewards": [
@@ -326,6 +544,7 @@
     }]
 },{                                    
 "name":"Dimir",                  
+"description":"Dimir Prospects",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"DimirShop",
   "rewards": [
@@ -340,6 +559,7 @@
     }]
 },{                                    
 "name":"Rakdos",                  
+"description":"The Rakdos Carnival",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"RakdosShop",
   "rewards": [
@@ -354,6 +574,7 @@
     }]
 },{                                    
 "name":"Gruul",                  
+"description":"Gruul Fire Sale",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"GruulShop",
   "rewards": [
@@ -368,6 +589,7 @@
     }]
 },{                                    
 "name":"Selesnya",                  
+"description":"A Token Selesnya Shop",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"SelesnyaShop",
   "rewards": [
@@ -382,6 +604,7 @@
     }]
 },{                                    
 "name":"Orzhov",                  
+"description":"Orzhov Extortion",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"OrzhovShop",
   "rewards": [
@@ -396,6 +619,7 @@
     }]
 },{                                    
 "name":"Izzet",                  
+"description":"Izzet For Sale?",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"IzzetShop",
   "rewards": [
@@ -410,6 +634,7 @@
     }]
 }  ,{                                    
 "name":"Golgari",                  
+"description":"The Golgari Graveyard",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"GolgariShop",
   "rewards": [
@@ -424,6 +649,7 @@
     }]
 },{                                    
 "name":"Boros",                  
+"description":"Ravnican Foreign Legion",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"BorosShop",
   "rewards": [
@@ -438,6 +664,7 @@
     }]
 },{                                    
 "name":"Simic",                  
+"description":"Simic Research Lab",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"SimicShop",
   "rewards": [
@@ -450,8 +677,191 @@
       "colors": ["blue","green"],
       "colorType": "MultiColor"
     }]
+},{
+  "name":"RWB",
+  "description":"Mardu Mercantile"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"RWBShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["red","white","black"],
+      "colorType": "MultiColor",
+	  "matchAllColors": "true"
+    },
+	{
+      "count":4,
+      "colors": ["red","white","black"],
+      "colorType": "MultiColor",
+    }]
+},{
+  "name":"RWU",
+  "description":"Jeskai Wayfinders",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"RWUShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["blue","red","white"],
+      "colorType": "MultiColor",
+	  "matchAllColors": "true"
+    },
+	{
+      "count":4,
+      "colors": ["blue","red","white"],
+      "colorType": "MultiColor",
+    }]
+},{
+  "name":"RWG",
+  "description":"Caberetti Curios",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"RWGShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["green","red","white"],
+      "colorType": "MultiColor",
+	  "matchAllColors": "true"
+    },
+	{
+      "count":4,
+      "colors": ["green","red","white"],
+      "colorType": "MultiColor"
+    }]
+},{
+  "name":"RUB",
+  "description":"Grixis General Store",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"RUBShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["red","blue","black"],
+      "colorType": "MultiColor",
+	  "matchAllColors": "true"
+    },
+	{
+      "count":4,
+      "colors": ["red","blue","black"],
+      "colorType": "MultiColor"
+    }]
+},{
+  "name":"RGB",
+  "description":"Rosie's Riveteers",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"RGBShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["red","green","black"],
+      "colorType": "MultiColor",
+	  "matchAllColors": "true"
+    },
+	{
+      "count":4,
+      "colors": ["red","green","black"],
+      "colorType": "MultiColor"
+    }]
+},{
+  "name":"RGU",
+  "description":"Frontier Necessities",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"RGUShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["red","blue","green"],
+      "colorType": "MultiColor",
+	  "matchAllColors": "true"
+    },
+	{
+      "count":4,
+      "colors": ["red","blue","green"],
+      "colorType": "MultiColor"
+    }]
+},{
+  "name":"UGB",
+  "description":"Sultai Supply"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"UGBShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["blue","green","black"],
+      "colorType": "MultiColor",
+	  "matchAllColors": "true"
+    },
+	{
+      "count":4,
+      "colors": ["blue","green","black"],
+      "colorType": "MultiColor"
+    }]
+},{
+  "name":"UWG",
+  "description":"Bant Bazaar",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"UWGShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["blue","white","green"],
+      "colorType": "MultiColor",
+	  "matchAllColors": "true"
+    },
+	{
+      "count":4,
+      "colors": ["blue","white","green"],
+      "colorType": "MultiColor"
+    }]
+},{
+  "name":"UWB",
+  "description":"Esper Etcetera",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"UWBShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["blue","white","black"],
+      "colorType": "MultiColor",
+	  "matchAllColors": "true"
+    },
+	{
+      "count":4,
+      "colors": ["blue","white","black"],
+      "colorType": "MultiColor"
+    }]
+},{
+  "name":"GWB",
+  "description":"Abzan Armory",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"GWBShop",
+  "rewards": [
+    {
+      "count":4,
+      "colors": ["green","white","black"],
+      "colorType": "MultiColor",
+	  "matchAllColors": "true"
+    },
+	{
+      "count":4,
+      "colors": ["green","white","black"],
+      "colorType": "MultiColor"
+    }]
+},{
+  "name":"WUBRG",
+  "description":"Domain of Dominaria"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"WUBRGShop",
+  "rewards": [
+    {
+      "count":8,
+      "colors": ["blue","green","red","white","black"],
+      "colorType": "MultiColor",
+	  "matchAllColors": "true"
+    }]
 },{                                    
-"name":"Goblin",                  
+"name":"Goblin",
+"description":"Squee's Sundries",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"GoblinShop",
   "rewards": [
@@ -460,7 +870,8 @@
       "subTypes": ["Goblin"]
     }]
 } ,{                                    
-"name":"Elf",                  
+"name":"Elf",
+"description":"Elf On A Shelf",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"ElfShop",
   "rewards": [
@@ -470,6 +881,7 @@
     }]
 },{                                    
 "name":"Merfolk",                  
+"description":"Catch O' The Day",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"MerfolkShop",
   "rewards": [
@@ -479,6 +891,7 @@
     }]
 },{                                    
 "name":"Zombie",                  
+"description":"Braaaaaains???",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"ZombieShop",
   "rewards": [
@@ -488,6 +901,7 @@
     }]
 },{                                    
 "name":"Human",                  
+"description":"Adam & Eve's",
 "spriteAtlas":"maps/tileset/buildings.atlas",   
 "sprite":"HumanShop",
   "rewards": [
@@ -495,8 +909,25 @@
       "count":8,
       "subTypes": ["Human"]
     }]
+},
+{                                    
+"name":"Human4White",                  
+"description":"Fresh Volunteers",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"HumanShop",
+  "rewards": [
+    {
+      "count":4,
+      "subTypes": ["Human"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Human"],
+	  "colors": ["white"]
+    }]
 },{
   "name":"Angel",
+  "description":"Halos R' Us",
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"AngelShop",
   "rewards": [
@@ -506,6 +937,7 @@
     }]
 },{
   "name":"Golem",
+  "description":"Karn's Workshop",
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"GolemShop",
   "rewards": [
@@ -514,13 +946,1113 @@
       "subTypes": ["Golem"]
     }]
 },{
+  "name":"Assembly",
+  "description":"Assembly Required",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"AssemblyShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Myr","Construct","Assembly-Worker"]
+    }]
+},{
+  "name":"Wall",
+  "description":"Wall Mart",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"WallShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Wall"]
+    }]
+},{
   "name":"Sliver",
+  "description":"Sliver Hive",
   "spriteAtlas":"maps/tileset/buildings.atlas",
   "sprite":"SliverShop",
   "rewards": [
     {
       "count":8,
       "subTypes": ["Sliver"]
+    }]
+},{
+  "name":"Sliver2Black",
+  "description":"Plagued Hive",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SliverShop",
+  "overlaySprite":"Overlay2Black",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Sliver"]
+    },
+	{
+      "count":2,
+      "subTypes": ["Sliver"],
+	  "colors": ["Black"]
+    }]
+},{
+  "name":"Sliver2Blue",
+  "description":"Shifting Hive",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SliverShop",
+  "overlaySprite":"Overlay2Blue",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Sliver"]
+    },
+	{
+      "count":2,
+      "subTypes": ["Sliver"],
+	  "colors": ["Blue"]
+    }]
+},{
+  "name":"Sliver2Green",
+  "description":"Venomous Hive",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SliverShop",
+  "overlaySprite":"Overlay2Green",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Sliver"]
+    },
+	{
+      "count":2,
+      "subTypes": ["Sliver"],
+	  "colors": ["Green"]
+    }]
+},{
+  "name":"Sliver2Red",
+  "description":"Spiteful Hive",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SliverShop",
+  "overlaySprite":"Overlay2Red",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Sliver"]
+    },
+	{
+      "count":2,
+      "subTypes": ["Sliver"],
+	  "colors": ["Red"]
+    }]
+},{
+  "name":"Sliver2White",
+  "description":"Warded Hive",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SliverShop",
+  "overlaySprite":"Overlay2White",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Sliver"]
+    },
+	{
+      "count":2,
+      "subTypes": ["Sliver"],
+	  "colors": ["White"]
+    }]
+},{                                    
+"name":"Assassin",
+"description":"Guild of Nightshade",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"AssassinShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Assassin"]
+    }]
+},{
+  "name":"Enchantment",
+  "description":"Charms and Curiosities"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Enchantment"]
+    }]
+},{
+  "name":"Enchantment4Black",
+  "description":"Open the Graves"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay4Black",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Enchantment"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["black"]
+    }]
+},{
+  "name":"Enchantment4Blue",
+  "description":"Dream Halls"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay4Blue",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Enchantment"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["blue"]
+    }]
+},{
+  "name":"Enchantment4Green",
+  "description":"Familiar Ground"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay4Green",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Enchantment"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["green"]
+    }]
+},{
+  "name":"Enchantment4Red",
+  "description":"Crucible of Fire"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay4Red",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Enchantment"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["red"]
+    }]
+},{
+  "name":"Enchantment4White",
+  "description":"Holy Strength"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"EnchantmentShop",
+  "overlaySprite":"Overlay4White",
+  "rewards": [
+    {
+      "count":4,
+      "cardTypes": ["Enchantment"]
+    },
+	{
+      "count":4,
+      "cardTypes": ["Enchantment"],
+	  "colors": ["white"]
+    }]
+},{
+  "name":"Squirrel",
+  "description":"Aww, Nuts"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SquirrelShop",
+  "rewards": [
+    {
+      "count":4,
+      "cardText": "Squirrel"
+    },
+	{
+      "count":4,
+      "subTypes": ["Squirrel"]
+    }]
+},{
+  "name":"Land",
+  "description":"Exotic Lands"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NonbasicLandShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Land"]
+    }]
+},{                                    
+"name":"Colorless",     
+"description":"One Size Fits All",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"ColorlessShop",
+  "rewards": [
+    {
+      "count":8,
+      "colorType": "Colorless"
+    }]
+},{                                    
+"name":"Artifact",
+"description":"Antiquities",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"ArtifactShop",
+  "rewards": [
+    {
+      "count":8,
+      "colorType": "Colorless",
+      "cardTypes": ["Artifact"]
+    }]
+},{                                    
+"name":"Multicolor",                  
+"description":"The Goldsmith",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"MultiColorShop",
+  "rewards": [
+    {
+      "count":8,
+      "colorType": "MultiColor"
+    }]
+},{
+  "name":"SpaceMarine",
+  "description":"The Codex",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SpaceMarineShop",
+  "rewards": [
+    {
+      "count":8,
+      "editions":["40K"]
+    }]
+},{
+  "name":"Necron",
+  "description":"Like-New Necrons",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"NecronShop",
+  "rewards": [
+    {
+      "count":8,
+      "editions":["40K"]
+    }]
+},{
+  "name":"Chaos",
+  "description":"Archon's Archive",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"ChaosShop",
+  "rewards": [
+    {
+      "count":8,
+      "editions":["40K"]
+    }]
+},{
+  "name":"Tyranid",
+  "description":"Gene's Steals",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"TyranidShop",
+  "rewards": [
+    {
+      "count":8,
+      "editions":["40K"]
+    }]
+},{
+  "name":"Dragon",
+  "description":"Here There Be Dragons",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"DragonShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Dragon"]
+    }]
+},{
+  "name":"Vampire",
+  "description":"A Fly By Night Establishment",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"VampireShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Vampire"]
+    }]
+},{
+  "name":"Vehicle",
+  "description":"Al's Used Artifacts",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"VehicleShop",
+  "rewards": [
+    {
+      "count":4,
+	  "subTypes": ["Vehicle"]
+    },
+	{
+      "count":4,
+	  "subTypes": ["Vehicle", "Pilot"]
+    }]
+},{
+  "name":"Minotaur",
+  "description":"Ye Olde China Shoppe"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"MinotaurShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Minotaur"]
+    },
+	{
+      "count":2,
+      "cardText": "Minotaur"
+    }]
+},
+{
+  "name":"Ogre",
+  "description":"Indentured Oafs"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"OgreShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Ogre"]
+    }]
+},
+{
+  "name":"Ogre4Red",
+  "description":"Ogre Warriors"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"OgreShop",
+  "rewards": [
+    {
+      "count":4,
+      "subTypes": ["Ogre"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Ogre"],
+	  "colors": ["red"]
+    }]
+},{
+  "name":"Dinosaur",
+  "description":"Huatli's Spurring"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"DinosaurShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Dinosaur"]
+    },
+	{
+      "count":2,
+      "cardText": "Dinosaur"
+    }]
+},{
+  "name":"Dinosaur4Green",
+  "description":"Apex Predators"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"DinosaurShop",
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Dinosaur"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Dinosaur"],
+	  "colors": ["green"]
+    },
+	{
+      "count":2,
+      "cardText": "Dinosaur"
+    }]
+},{
+  "name":"Dinosaur4Red",
+  "description":"Dinosaur Stampede"
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"DinosaurShop",
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Dinosaur"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Dinosaur"],
+	  "colors": ["red"]
+    },
+	{
+      "count":2,
+      "cardText": "Dinosaur"
+    }]
+},{
+  "name":"Dwarf",
+  "description":"Take Your Pick",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"DwarfShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Dwarf"]
+    },
+	{
+      "count":2,
+      "cardText": "Dwarf"
+    }]
+},{
+  "name":"Devil",
+  "description":"Deal With the Devil",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"DevilShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Devil"]
+    },
+	{
+      "count":2,
+      "cardText": "Devil"
+    }]
+},{                                    
+"name":"ToDo",  
+ "description":"To Do",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"ToDoShop",
+  "rewards": [
+    {
+      "count":8
+    }]
+},{                                    
+"name":"Equip",
+"description":"Arms & Armor",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"EquipShop",
+  "rewards": [
+    {
+      "count":8,
+	  "subTypes": ["Equipment"]
+    }]
+},{
+  "name":"Soldier",
+  "description":"The Garrison",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SoldierShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Soldier"]
+    },
+	{
+      "count":2,
+      "cardText": "Soldier"
+    }]
+},{
+  "name":"Soldier4Red",
+  "description":"Shock Troops",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SoldierShop",
+  "overlaySprite":"Overlay4Red",
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Soldier"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Soldier"],
+	  "colors": ["red"]
+    },
+	{
+      "count":2,
+      "cardText": "Soldier"
+    }]
+},{
+  "name":"Soldier4White",
+  "description":"Benalish Barracks",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SoldierShop",
+  "overlaySprite":"Overlay4White",
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Soldier"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Soldier"],
+	  "colors": ["white"]
+    },
+	{
+      "count":2,
+      "cardText": "Soldier"
+    }]
+},{
+  "name":"Card",
+  "description":"Sleight of Hand",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"CardShop",
+  "rewards": [
+	{
+      "count":3,
+      "cardText": "draw"
+    },
+	{
+	  "count":3,
+	  "cardText": "discard"
+	},
+	{
+	  "count":2,
+	  "cardText": "hand"
+	}]
+},{                                    
+"name":"DnD",
+"description":"Boo's Bargains",
+"spriteAtlas":"maps/tileset/buildings.atlas",   
+"sprite":"DnDShop",
+  "rewards": [
+    {
+      "count":8,
+      "editions": ["AFR", "HBG", "CLB", "AFC"]
+    }]
+},{
+  "name":"Demon",
+  "description":"The Demonic Altar",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"DemonShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Demon"]
+    },
+	{
+      "count":2,
+      "cardText": "Demon"
+    }]
+},{
+  "name":"Druid",
+  "description":"Discount Druids",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"DruidShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Druid"]
+    },
+	{
+      "count":2,
+      "cardText": "Druid"
+    }]
+},{
+  "name":"Wand",
+  "description":"Ashnod's Artifacts",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"WandShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Artifact"],
+	  "cardText": "\\Q{\\ET\\Q\\E}"
+    }]
+},{
+  "name":"Bird",
+  "description":"Birds Of A Feather",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"BirdShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Bird"]
+    },
+	{
+      "count":2,
+      "cardText": "Bird"
+    }]
+},{
+  "name":"Bird4Blue",
+  "description":"Aven Windreaders",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"BirdShop",
+  "overlaySprite":"Overlay4Blue",
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Bird"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Bird"],
+	  "colors":["blue"]
+    },
+	{
+      "count":2,
+      "cardText": "Bird"
+    }]
+},{
+  "name":"Bird4White",
+  "description":"Wing Stop",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"BirdShop",
+  "overlaySprite":"Overlay4White",
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Bird"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Bird"],
+	  "colors":["white"]
+    },
+	{
+      "count":2,
+      "cardText": "Bird"
+    }]
+},{
+  "name":"Spirit",
+  "description":"Spirit Halloween",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SpiritShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Spirit"]
+    },
+	{
+      "count":2,
+      "cardText": "Spirit"
+    }]
+},{
+  "name":"Spirit4Blue",
+  "description":"Dreamcatchers",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SpiritShop",
+  "overlaySprite":"Overlay4Blue",
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Spirit"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Spirit"],
+	  "colors":["blue"]
+    },
+	{
+      "count":2,
+      "cardText": "Spirit"
+    }]
+},{
+  "name":"Spirit4White",
+  "description":"Blessed Spirits",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SpiritShop",
+  "overlaySprite":"Overlay4White",
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Spirit"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Spirit"],
+	  "colors":["white"]
+    },
+	{
+      "count":2,
+      "cardText": "Spirit"
+    }]
+},{
+  "name":"Wolf",
+  "description":"Spirit of the Hunt",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"WolfShop",
+  "rewards": [
+    {
+      "count":8,
+      "subTypes": ["Wolf", "Werewolf"]
+    }]
+},{
+  "name":"Wolf4Green",
+  "description":"Predator's Howl",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"WolfShop",
+  "overlaySprite":"Overlay4Green",
+  "rewards": [
+    {
+      "count":4,
+      "subTypes": ["Wolf", "Werewolf"]
+    },{
+      "count":4,
+      "subTypes": ["Wolf", "Werewolf"],
+	  "colors": ["green"]
+    }]
+},{
+  "name":"Wolf4Red",
+  "description":"Assembled Alphas",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"WolfShop",
+  "overlaySprite":"Overlay4Red",
+  "rewards": [
+    {
+      "count":4,
+      "subTypes": ["Wolf", "Werewolf"]
+    },{
+      "count":4,
+      "subTypes": ["Wolf", "Werewolf"],
+	  "colors": ["red"]
+    }]
+},{
+  "name":"Knight",
+  "description":"Knight Riders",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"KnightShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Knight"]
+    },
+	{
+      "count":2,
+      "cardText": "Knight"
+    }]
+},{
+  "name":"Knight4Black",
+  "description":"Dread Riders",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"KnightShop",
+  "overlaySprite":"Overlay4Black",
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Knight"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Knight"],
+	  "colors":["black"]
+    },
+	{
+      "count":2,
+      "cardText": "Knight"
+    }]
+},{
+  "name":"Knight4Red",
+  "description":"Defenders of Chaos",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"KnightShop",
+  "overlaySprite":"Overlay4Red",
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Knight"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Knight"],
+	  "colors":["red"]
+    },
+	{
+      "count":2,
+      "cardText": "Knight"
+    }]
+},{
+  "name":"Knight4White",
+  "description":"Defenders of Law",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"KnightShop",
+  "overlaySprite":"Overlay4White",
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Knight"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Knight"],
+	  "colors":["white"]
+    },
+	{
+      "count":2,
+      "cardText": "Knight"
+    }]
+},{
+  "name":"Random",
+  "description":"Pack Shop (?)",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"RandomShop",
+  "rewards": [
+    {
+      "count":8
+    }]
+},{
+  "name":"Planeswalker",
+  "description":"Plain ol' Planeswalkers",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"PlaneswalkerShop",
+  "rewards": [
+    {
+      "count":8,
+      "cardTypes": ["Planeswalker"]
+    }]
+},{
+  "name":"Skeleton",
+  "description":"Bob's Bones",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"SkeletonShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Skeleton"]
+    },
+	{
+      "count":2,
+      "cardText": "Skeleton"
+    }]
+},{
+  "name":"Pirate",
+  "description":"Marauding Looters",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"PirateShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Pirate"]
+    },
+	{
+      "count":2,
+      "cardText": "Pirate"
+    }]
+},{
+  "name":"Pirate4Blue",
+  "description":"Merchant Raiders",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"PirateShop",
+  "overlaySprite":"Overlay4Blue"
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Pirate"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Pirate"],
+	  "colors":["blue"]
+    },
+	{
+      "count":2,
+      "cardText": "Pirate"
+    }]
+},{
+  "name":"Rogue",
+  "description":"Bane Alley Brokers",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"RogueShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Rogue"]
+    },
+	{
+      "count":2,
+      "cardText": "Rogue"
+    }]
+},{
+  "name":"Rogue4Black",
+  "description":"Acquisitions Experts",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"RogueShop",
+  "overlaySprite":"Overlay4Black",
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Rogue"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Rogue"],
+	  "colors": ["black"]
+    },
+	{
+      "count":2,
+      "cardText": "Rogue"
+    }]
+},{
+  "name":"Rogue4Blue",
+  "description":"Keepers of Keys",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"RogueShop",
+  "overlaySprite":"Overlay4Blue",
+  "rewards": [
+    {
+      "count":2,
+      "subTypes": ["Rogue"]
+    },
+	{
+      "count":4,
+      "subTypes": ["Rogue"],
+	  "colors": ["blue"]
+    },
+	{
+      "count":2,
+      "cardText": "Rogue"
+    }]
+},{
+  "name":"Shaman",
+  "description":"Shaman for ya man",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"ShamanShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Shaman"]
+    },
+	{
+      "count":2,
+      "cardText": "Shaman"
+    }]
+},{
+  "name":"Wizard",
+  "description":"Tim's Prestidigitation",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"WizardShop",
+  "rewards": [
+    {
+      "count":6,
+      "subTypes": ["Wizard"]
+    },
+	{
+      "count":2,
+      "cardText": "Wizard"
+    }]
+},{
+  "name":"Legend",
+  "description":"Tome of Legends",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"LegendShop",
+  "rewards": [
+    {
+      "count":6,
+      "superTypes": ["Legendary", "Legend"]
+    },
+	{
+      "count":1,
+      "cardText": "Legendary"
+    },
+	{
+      "count":1,
+      "cardText": "Historic"
+    }]
+},{
+  "name":"Legend4Black",
+  "description":"Phyrexian Tower",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"LegendShop",
+  "overlaySprite":"Overlay4Black",
+  "rewards": [
+    {
+      "count":2,
+      "superTypes": ["Legendary", "Legend"]
+    },
+	{
+      "count":4,
+      "superTypes": ["Legendary", "Legend"],
+	  "colors":["black"]
+    }
+	{
+      "count":1,
+      "cardText": "Legendary"
+    },
+	{
+      "count":1,
+      "cardText": "Historic"
+    }]
+},{
+  "name":"Legend4Blue",
+  "description":"Teferi's Insight",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"LegendShop",
+  "overlaySprite":"Overlay4Blue",
+  "rewards": [
+    {
+      "count":2,
+      "superTypes": ["Legendary", "Legend"]
+    },
+	{
+      "count":4,
+      "superTypes": ["Legendary", "Legend"],
+	  "colors":["blue"]
+    }
+	{
+      "count":1,
+      "cardText": "Legendary"
+    },
+	{
+      "count":1,
+      "cardText": "Historic"
+    }]
+},{
+  "name":"Legend4Green",
+  "description":"History of Kamigawa",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"LegendShop",
+  "overlaySprite":"Overlay4Green",
+  "rewards": [
+    {
+      "count":2,
+      "superTypes": ["Legendary", "Legend"]
+    },
+	{
+      "count":4,
+      "superTypes": ["Legendary", "Legend"],
+	  "colors":["green"]
+    }
+	{
+      "count":1,
+      "cardText": "Legendary"
+    },
+	{
+      "count":1,
+      "cardText": "Historic"
+    }]
+},{
+  "name":"Legend4Red",
+  "description":"Crucible of Defiance",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"LegendShop",
+  "overlaySprite":"Overlay4Red",
+  "rewards": [
+    {
+      "count":2,
+      "superTypes": ["Legendary", "Legend"]
+    },
+	{
+      "count":4,
+      "superTypes": ["Legendary", "Legend"],
+	  "colors":["red"]
+    }
+	{
+      "count":1,
+      "cardText": "Legendary"
+    },
+	{
+      "count":1,
+      "cardText": "Historic"
+    }]
+},{
+  "name":"Legend4White",
+  "description":"Avacyn's Memorial",
+  "spriteAtlas":"maps/tileset/buildings.atlas",
+  "sprite":"LegendShop",
+  "overlaySprite":"Overlay4White",
+  "rewards": [
+    {
+      "count":2,
+      "superTypes": ["Legendary", "Legend"]
+    },
+	{
+      "count":4,
+      "superTypes": ["Legendary", "Legend"],
+	  "colors":["white"]
+    }
+	{
+      "count":1,
+      "cardText": "Legendary"
+    },
+	{
+      "count":1,
+      "cardText": "Historic"
     }]
 }
 ]   

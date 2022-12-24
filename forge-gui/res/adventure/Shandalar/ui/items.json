@@ -53,6 +53,16 @@
       "height": 30,
       "x": 420,
       "y": 160
+    },
+    {
+      "type": "Label",
+      "name": "shopName",
+      "style":"background",
+      "text": "A Street Market",
+      "width": 48,
+      "height": 20,
+      "x": 200,
+      "y": 0
     }
   ]
 }

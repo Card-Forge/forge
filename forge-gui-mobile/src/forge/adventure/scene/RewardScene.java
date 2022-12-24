@@ -26,7 +26,7 @@ import forge.sound.SoundSystem;
  */
 public class RewardScene extends UIScene {
     private final TextraButton doneButton, detailButton;
-    private final TextraLabel goldLabel;
+    private final TextraLabel goldLabel, shopNameLabel;
 
     private static RewardScene object;
 
@@ -53,6 +53,7 @@ public class RewardScene extends UIScene {
         super(Forge.isLandscapeMode() ? "ui/items.json" : "ui/items_portrait.json");
 
         goldLabel=ui.findActor("gold");
+        shopNameLabel = ui.findActor("shopName");
         ui.onButtonPress("done", () -> RewardScene.this.done());
         ui.onButtonPress("detail",()->RewardScene.this.toggleToolTip());
         detailButton = ui.findActor("detail");
@@ -238,11 +239,22 @@ public class RewardScene extends UIScene {
         Actor card = ui.findActor("cards");
         if(type==Type.Shop) {
             goldLabel.setText(Current.player().getGold()+"[+Gold]");
+            String shopName = shopActor.getDescription();
+            if (shopName != null && !shopName.isEmpty()) {
+                shopNameLabel.setVisible(true);
+                shopNameLabel.setText(shopName);
+            }
+            else
+            {
+                shopNameLabel.setVisible(false);
+            }
             Actor background = ui.findActor("market_background");
             if(background!=null)
                 background.setVisible(true);
         } else {
             goldLabel.setText("");
+            shopNameLabel.setVisible(false);
+            shopNameLabel.setText("");
             Actor background = ui.findActor("market_background");
             if(background!=null)
                 background.setVisible(false);
@@ -267,9 +279,18 @@ public class RewardScene extends UIScene {
             case Shop:
                 doneButton.setText(Forge.getLocalizer().getMessage("lblLeave"));
                 goldLabel.setText(Current.player().getGold()+"[+Gold]");
+                String shopName = shopActor.getDescription();
+                if ((shopName != null && !shopName.isEmpty())) {
+                    shopNameLabel.setVisible(true);
+                    shopNameLabel.setText(shopName);
+                }
+
+
                 break;
             case Loot:
                 goldLabel.setText("");
+                shopNameLabel.setVisible(false);
+                shopNameLabel.setText("");
                 doneButton.setText(Forge.getLocalizer().getMessage("lblDone"));
                 break;
         }

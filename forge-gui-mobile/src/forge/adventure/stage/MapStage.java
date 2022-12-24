@@ -41,6 +41,8 @@ import forge.adventure.world.WorldSave;
 import forge.deck.Deck;
 import forge.deck.DeckProxy;
 import forge.gui.FThreads;
+import forge.localinstance.properties.ForgePreferences;
+import forge.model.FModel;
 import forge.screens.TransitionScreen;
 import forge.sound.SoundEffectType;
 import forge.sound.SoundSystem;
@@ -497,7 +499,37 @@ public class MapStage extends GameStage {
                         }
                         break;
                     case "shop":
-                        String shopList = prop.get("shopList").toString();
+                        String shopList = new String();
+                        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.EXPANDEDADVENTURESHOPS))
+                        {
+                            int rarity = WorldSave.getCurrentSave().getWorld().getRandom().nextInt(100);
+
+                            if (rarity > 95 & prop.containsKey("mythicShopList")){
+                                shopList = prop.get("mythicShopList").toString();
+                            }
+
+                            if (shopList.isEmpty() && (rarity > 85 & prop.containsKey("rareShopList"))){
+                                shopList = prop.get("rareShopList").toString();
+                            }
+
+                            if (shopList.isEmpty() && (rarity > 55 & prop.containsKey("uncommonShopList"))){
+                                shopList = prop.get("uncommonShopList").toString();
+                            }
+
+                            if (shopList.isEmpty() & prop.containsKey("commonShopList")){
+                                shopList = prop.get("commonShopList").toString();
+                            }
+                        }
+
+                        if (shopList.trim().isEmpty()){
+                            shopList = prop.get("shopList").toString();
+                        }
+
+                        //refactor to tag Universes Beyond shops in some way but still include in rarity list above.
+                        if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.EXPANDEDADVENTURESHOPS) & prop.containsKey("universesBeyondShopList"))
+                        {
+                            shopList = String.join(",", shopList, prop.get("universesBeyondShopList").toString());
+                        }
                         shopList = shopList.replaceAll("\\s", "");
                         Array<String> possibleShops = new Array<>(shopList.split(","));
                         Array<ShopData> shops;
@@ -518,7 +550,7 @@ public class MapStage extends GameStage {
                         for (RewardData rdata : new Array.ArrayIterator<>(data.rewards)) {
                             ret.addAll(rdata.generate(false));
                         }
-                        ShopActor actor = new ShopActor(this, id, ret, data.unlimited);
+                        ShopActor actor = new ShopActor(this, id, ret, data);
                         addMapActor(obj, actor);
                         if (prop.containsKey("signYOffset") && prop.containsKey("signXOffset")) {
                             try {
@@ -526,6 +558,13 @@ public class MapStage extends GameStage {
                                 sprite.setX(actor.getX() + Float.parseFloat(prop.get("signXOffset").toString()));
                                 sprite.setY(actor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
                                 addMapActor(sprite);
+
+                                if (!(data.overlaySprite == null | data.overlaySprite.isEmpty())){
+                                    TextureSprite overlay = new TextureSprite(Config.instance().getAtlas(data.spriteAtlas).createSprite(data.overlaySprite));
+                                    overlay.setX(actor.getX() + Float.parseFloat(prop.get("signXOffset").toString()));
+                                    overlay.setY(actor.getY() + Float.parseFloat(prop.get("signYOffset").toString()));
+                                    addMapActor(overlay);
+                                }
                             } catch (Exception e) {
                                 System.err.print("Can not create Texture for " + data.sprite + " Obj:" + data);
                             }

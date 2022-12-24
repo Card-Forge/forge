@@ -48,6 +48,7 @@ public class CardUtil {
         private final List<Integer> manaCosts =new ArrayList<>();
         private final Pattern text;
         private final boolean matchAllSubTypes;
+        private final boolean matchAllColors;
         private  int colors;
         private final ColorType colorType;
         private final boolean shouldBeEqual;
@@ -62,6 +63,14 @@ public class CardUtil {
                 return !this.shouldBeEqual;
             if(this.text!=null&& !this.text.matcher(card.getRules().getOracleText()).find())
                 return !this.shouldBeEqual;
+
+            if(this.matchAllColors)
+            {
+                if(!card.getRules().getColor().hasAllColors(this.colors))
+                {
+                    return !this.shouldBeEqual;
+                }
+            }
 
             if(this.colors!= MagicColor.ALL_COLORS)
             {
@@ -169,6 +178,7 @@ public class CardUtil {
 
         public CardPredicate(final RewardData type, final boolean wantEqual) {
             this.matchAllSubTypes=type.matchAllSubTypes;
+            this.matchAllColors=type.matchAllColors;
             this.shouldBeEqual = wantEqual;
             for(int i=0;type.manaCosts!=null&&i<type.manaCosts.length;i++)
                 manaCosts.add(type.manaCosts[i]);

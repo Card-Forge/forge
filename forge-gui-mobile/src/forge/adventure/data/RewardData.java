@@ -42,6 +42,7 @@ public class RewardData {
     public String colorType;
     public String cardText;
     public boolean matchAllSubTypes;
+    public boolean matchAllColors;
 
     public RewardData() { }
 
@@ -64,6 +65,7 @@ public class RewardData {
         colorType   =rewardData.colorType;
         cardText    =rewardData.cardText;
         matchAllSubTypes    =rewardData.matchAllSubTypes;
+        matchAllColors =rewardData.matchAllColors;
     }
 
     private static Iterable<PaperCard> allCards;

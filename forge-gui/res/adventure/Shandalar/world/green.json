@@ -67,7 +67,9 @@
 "pointsOfInterest": [
 	"Green Castle",
 	"Forest Capital",
-	"Forest Town",
+	"Forest Town Generic",
+	"Forest Town Identity",
+	"Forest Town Tribal",
 	"ElfTown",
 	"WurmPond",
 	"Kavu Lair",
