@@ -15,6 +15,7 @@ import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 public class ChooseSourceEffect extends SpellAbilityEffect {
@@ -22,9 +23,8 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa)) {
-            sb.append(p).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
+
         sb.append("chooses a source.");
 
         return sb.toString();
@@ -129,21 +129,22 @@ public class ChooseSourceEffect extends SpellAbilityEffect {
         final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) : AbilityUtils.calculateAmount(host, numericAmount, sa);
 
         for (final Player p : tgtPlayers) {
+            if (!p.isInGame()) {
+                continue;
+            }
             final CardCollection chosen = new CardCollection();
-            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                for (int i = 0; i < validAmount; i++) {
-                    final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseSource") + " ";
-                    Card o = null;
-                    do {
-                        o = p.getController().chooseSingleEntityForEffect(sourcesToChooseFrom, sa, choiceTitle, null);
-                    } while (o == null || o.getName().startsWith("--"));
-                    chosen.add(o);
-                    sourcesToChooseFrom.remove(o);
-                }
-                host.setChosenCards(chosen);
-                if (sa.hasParam("RememberChosen")) {
-                    host.addRemembered(chosen);
-                }
+            for (int i = 0; i < validAmount; i++) {
+                final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : Localizer.getInstance().getMessage("lblChooseSource") + " ";
+                Card o = null;
+                do {
+                    o = p.getController().chooseSingleEntityForEffect(sourcesToChooseFrom, sa, choiceTitle, null);
+                } while (o == null || o.getName().startsWith("--"));
+                chosen.add(o);
+                sourcesToChooseFrom.remove(o);
+            }
+            host.setChosenCards(chosen);
+            if (sa.hasParam("RememberChosen")) {
+                host.addRemembered(chosen);
             }
         }
     }

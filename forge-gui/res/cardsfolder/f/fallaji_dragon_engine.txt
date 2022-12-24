@@ -1,0 +1,9 @@
+Name:Fallaji Dragon Engine
+ManaCost:8
+Types:Artifact Creature Dragon
+PT:5/5
+K:Prototype:2 R:1:3
+K:Flying
+A:AB$ Pump | Cost$ 2 | NumAtt$ +1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+DeckHints:Color$Red
+Oracle:Flying\n{2}: Fallaji Dragon Engine gets +1/+0 until end of turn.

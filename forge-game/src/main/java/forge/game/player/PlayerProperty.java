@@ -160,7 +160,7 @@ public class PlayerProperty {
                 return false;
             }
         } else if (property.equals("Defending")) {
-            if (!game.getCombat().getAttackersAndDefenders().values().contains(player)) {
+            if (game.getCombat() == null || !game.getCombat().getAttackersAndDefenders().values().contains(player)) {
                 return false;
             }
         } else if (property.equals("LostLifeThisTurn")) {
@@ -229,7 +229,7 @@ public class PlayerProperty {
             Matcher regexMatcher = regex.matcher(property.substring(8));
             while (regexMatcher.find()) {
                 type.add(regexMatcher.group());
-            } 
+            }
             final CardCollectionView list = CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), type.get(0).replace("\\_", "_"), sourceController, source, spellAbility);
             String comparator = type.size() > 1 ? type.get(1) : "GE";
             int y = type.size() > 1 ? AbilityUtils.calculateAmount(source, comparator.substring(2), spellAbility) : 1;
@@ -369,7 +369,7 @@ public class PlayerProperty {
             if (player.getLife() >= (int) Math.ceil(player.getStartingLife() / 2.0)) {
                 return false;
             }
-        } else if (property.startsWith("Triggered")) {
+        } else if (property.startsWith("Triggered") || property.equals("OriginalHostRemembered")) {
             if (!AbilityUtils.getDefinedPlayers(source, property, spellAbility).contains(player)) {
                 return false;
             }

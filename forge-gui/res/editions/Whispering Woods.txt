@@ -1,9 +1,0 @@
-[metadata]
-Code=WW
-Date=1994-09-01
-Name=Whispering Woods
-Type=Promo
-ScryfallCode=PHPR
-
-[cards]
-3 C Windseeker Centaur @Anson Maddocks

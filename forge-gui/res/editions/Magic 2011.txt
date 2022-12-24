@@ -3,7 +3,6 @@ Code=M11
 Date=2010-07-16
 Name=Magic 2011
 Code2=M11
-MciCode=m11
 Type=Core
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand

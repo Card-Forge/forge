@@ -1,0 +1,9 @@
+Name:Slobad, Iron Goblin
+ManaCost:2 R
+Types:Legendary Creature Phyrexian Goblin Artificer
+PT:3/3
+A:AB$ Mana | Cost$ T Sac<1/Artifact> | Produced$ R | Amount$ X | RestrictValid$ Spell.Artifact,Activated.Artifact+inZoneBattlefield | SpellDescription$ Add an amount of {R} equal to the sacrificed artifact's mana value. Spend this mana only to cast artifact spells or activate abilities of artifacts.
+SVar:X:Sacrificed$CardManaCost
+DeckHas:Ability$Sacrifice
+DeckNeeds:Type$Artifact
+Oracle:{T}, Sacrifice an artifact: Add an amount of {R} equal to the sacrificed artifact's mana value. Spend this mana only to cast artifact spells or activate abilities of artifacts.

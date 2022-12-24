@@ -1,0 +1,5 @@
+Name:Scatter Ray
+ManaCost:1 U
+Types:Instant
+A:SP$ Counter | TargetType$ Spell | TgtPrompt$ Select target creature or artifact spell | ValidTgts$ Creature,Artifact | UnlessCost$ 4 | SpellDescription$ Counter target artifact or creature spell unless its controller pays {4}.
+Oracle:Counter target artifact or creature spell unless its controller pays {4}.

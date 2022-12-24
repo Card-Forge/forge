@@ -3,7 +3,6 @@ Name=Battle for Zendikar
 Date=2015-10-02
 Code=BFZ
 Code2=BFZ
-MciCode=bfz
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand BFZ

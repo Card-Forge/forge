@@ -131,53 +131,6 @@ public enum FSkinImage implements FImage {
     DRAFTRANK_A (FSkinProp.IMG_DRAFTRANK_A, SourceFile.DRAFTRANKS),
     DRAFTRANK_S (FSkinProp.IMG_DRAFTRANK_S, SourceFile.DRAFTRANKS),
 
-    //CardBG
-    CARDBG_A       (FSkinProp.IMG_CARDBG_A, SourceFile.CARDBG),
-    CARDBG_B       (FSkinProp.IMG_CARDBG_B, SourceFile.CARDBG),
-    CARDBG_BG      (FSkinProp.IMG_CARDBG_BG, SourceFile.CARDBG),
-    CARDBG_BR      (FSkinProp.IMG_CARDBG_BR, SourceFile.CARDBG),
-    CARDBG_C       (FSkinProp.IMG_CARDBG_C, SourceFile.CARDBG),
-    CARDBG_G       (FSkinProp.IMG_CARDBG_G, SourceFile.CARDBG),
-    CARDBG_L       (FSkinProp.IMG_CARDBG_L, SourceFile.CARDBG),
-    CARDBG_M       (FSkinProp.IMG_CARDBG_M, SourceFile.CARDBG),
-    CARDBG_R       (FSkinProp.IMG_CARDBG_R, SourceFile.CARDBG),
-    CARDBG_RG      (FSkinProp.IMG_CARDBG_RG, SourceFile.CARDBG),
-    CARDBG_U       (FSkinProp.IMG_CARDBG_U, SourceFile.CARDBG),
-    CARDBG_UB      (FSkinProp.IMG_CARDBG_UB, SourceFile.CARDBG),
-    CARDBG_UG      (FSkinProp.IMG_CARDBG_UG, SourceFile.CARDBG),
-    CARDBG_UR      (FSkinProp.IMG_CARDBG_UR, SourceFile.CARDBG),
-    CARDBG_V       (FSkinProp.IMG_CARDBG_V, SourceFile.CARDBG),
-    CARDBG_W       (FSkinProp.IMG_CARDBG_W, SourceFile.CARDBG),
-    CARDBG_WB      (FSkinProp.IMG_CARDBG_WB, SourceFile.CARDBG),
-    CARDBG_WG      (FSkinProp.IMG_CARDBG_WG, SourceFile.CARDBG),
-    CARDBG_WR      (FSkinProp.IMG_CARDBG_WR, SourceFile.CARDBG),
-    CARDBG_WU      (FSkinProp.IMG_CARDBG_WU, SourceFile.CARDBG),
-    //PWBG
-    PWBG_B         (FSkinProp.IMG_PWBG_B, SourceFile.CARDBG),
-    PWBG_BG        (FSkinProp.IMG_PWBG_BG, SourceFile.CARDBG),
-    PWBG_BR        (FSkinProp.IMG_PWBG_BR, SourceFile.CARDBG),
-    PWBG_C         (FSkinProp.IMG_PWBG_C, SourceFile.CARDBG),
-    PWBG_G         (FSkinProp.IMG_PWBG_G, SourceFile.CARDBG),
-    PWBG_M         (FSkinProp.IMG_PWBG_M, SourceFile.CARDBG),
-    PWBG_R         (FSkinProp.IMG_PWBG_R, SourceFile.CARDBG),
-    PWBG_RG        (FSkinProp.IMG_PWBG_RG, SourceFile.CARDBG),
-    PWBG_U         (FSkinProp.IMG_PWBG_U, SourceFile.CARDBG),
-    PWBG_UB        (FSkinProp.IMG_PWBG_UB, SourceFile.CARDBG),
-    PWBG_UG        (FSkinProp.IMG_PWBG_UG, SourceFile.CARDBG),
-    PWBG_UR        (FSkinProp.IMG_PWBG_UR, SourceFile.CARDBG),
-    PWBG_W         (FSkinProp.IMG_PWBG_W, SourceFile.CARDBG),
-    PWBG_WB        (FSkinProp.IMG_PWBG_WB, SourceFile.CARDBG),
-    PWBG_WG        (FSkinProp.IMG_PWBG_WG, SourceFile.CARDBG),
-    PWBG_WR        (FSkinProp.IMG_PWBG_WR, SourceFile.CARDBG),
-    PWBG_WU        (FSkinProp.IMG_PWBG_WU, SourceFile.CARDBG),
-    //NYX OVERLAY
-    NYX_B          (FSkinProp.IMG_NYX_B, SourceFile.CARDBG),
-    NYX_G          (FSkinProp.IMG_NYX_G, SourceFile.CARDBG),
-    NYX_M          (FSkinProp.IMG_NYX_M, SourceFile.CARDBG),
-    NYX_R          (FSkinProp.IMG_NYX_R, SourceFile.CARDBG),
-    NYX_U          (FSkinProp.IMG_NYX_U, SourceFile.CARDBG),
-    NYX_W          (FSkinProp.IMG_NYX_W, SourceFile.CARDBG),
-
     //Gameplay
     TAP             (FSkinProp.IMG_TAP, SourceFile.MANAICONS),
     UNTAP           (FSkinProp.IMG_UNTAP, SourceFile.MANAICONS),
@@ -193,6 +146,7 @@ public enum FSkinImage implements FImage {
     COUNTERS3       (FSkinProp.IMG_COUNTERS3, SourceFile.ICONS),
     COUNTERS_MULTI  (FSkinProp.IMG_COUNTERS_MULTI, SourceFile.ICONS),
     ENERGY          (FSkinProp.IMG_ENERGY, SourceFile.ICONS),
+    TICKET          (FSkinProp.IMG_TICKET, SourceFile.ICONS),
 
     //Dock Icons
     SHORTCUTS    (FSkinProp.ICO_SHORTCUTS, SourceFile.ICONS),
@@ -337,6 +291,9 @@ public enum FSkinImage implements FImage {
 
     FAVICON         (FSkinProp.ICO_FAVICON, SourceFile.ICONS),
     LOCK            (FSkinProp.ICO_LOCK, SourceFile.ICONS),
+    //reveal icons
+    SEE             (FSkinProp.ICO_SEE, SourceFile.ICONS),
+    UNSEE           (FSkinProp.ICO_UNSEE, SourceFile.ICONS),
 
     //Layout images
     HANDLE  (FSkinProp.IMG_HANDLE, SourceFile.ICONS),
@@ -389,6 +346,25 @@ public enum FSkinImage implements FImage {
     BTN_DISABLED_LEFT   (FSkinProp.IMG_BTN_DISABLED_LEFT, SourceFile.ICONS),
     BTN_DISABLED_CENTER (FSkinProp.IMG_BTN_DISABLED_CENTER, SourceFile.ICONS),
     BTN_DISABLED_RIGHT  (FSkinProp.IMG_BTN_DISABLED_RIGHT, SourceFile.ICONS),
+    //adv_buttons
+    ADV_BTN_UP_LEFT         (FSkinProp.IMG_ADV_BTN_UP_LEFT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_UP_CENTER       (FSkinProp.IMG_ADV_BTN_UP_CENTER, SourceFile.ADV_BUTTONS),
+    ADV_BTN_UP_RIGHT        (FSkinProp.IMG_ADV_BTN_UP_RIGHT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_OVER_LEFT       (FSkinProp.IMG_ADV_BTN_OVER_LEFT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_OVER_CENTER     (FSkinProp.IMG_ADV_BTN_OVER_CENTER, SourceFile.ADV_BUTTONS),
+    ADV_BTN_OVER_RIGHT      (FSkinProp.IMG_ADV_BTN_OVER_RIGHT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_DOWN_LEFT       (FSkinProp.IMG_ADV_BTN_DOWN_LEFT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_DOWN_CENTER     (FSkinProp.IMG_ADV_BTN_DOWN_CENTER, SourceFile.ADV_BUTTONS),
+    ADV_BTN_DOWN_RIGHT      (FSkinProp.IMG_ADV_BTN_DOWN_RIGHT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_FOCUS_LEFT      (FSkinProp.IMG_ADV_BTN_FOCUS_LEFT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_FOCUS_CENTER    (FSkinProp.IMG_ADV_BTN_FOCUS_CENTER, SourceFile.ADV_BUTTONS),
+    ADV_BTN_FOCUS_RIGHT     (FSkinProp.IMG_ADV_BTN_FOCUS_RIGHT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_TOGGLE_LEFT     (FSkinProp.IMG_ADV_BTN_TOGGLE_LEFT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_TOGGLE_CENTER   (FSkinProp.IMG_ADV_BTN_TOGGLE_CENTER, SourceFile.ADV_BUTTONS),
+    ADV_BTN_TOGGLE_RIGHT    (FSkinProp.IMG_ADV_BTN_TOGGLE_RIGHT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_DISABLED_LEFT   (FSkinProp.IMG_ADV_BTN_DISABLED_LEFT, SourceFile.ADV_BUTTONS),
+    ADV_BTN_DISABLED_CENTER (FSkinProp.IMG_ADV_BTN_DISABLED_CENTER, SourceFile.ADV_BUTTONS),
+    ADV_BTN_DISABLED_RIGHT  (FSkinProp.IMG_ADV_BTN_DISABLED_RIGHT, SourceFile.ADV_BUTTONS),
     //Hdbuttons
     HDBTN_START_UP        (FSkinProp.IMG_HDBTN_START_UP, SourceFile.BTNSTART),
     HDBTN_START_OVER      (FSkinProp.IMG_HDBTN_START_OVER, SourceFile.BTNSTART),
@@ -499,6 +475,7 @@ public enum FSkinImage implements FImage {
         TROPHIES(ForgeConstants.SPRITE_TROPHIES_FILE),
         ABILITIES(ForgeConstants.SPRITE_ABILITY_FILE),
         BORDERS(ForgeConstants.SPRITE_BORDER_FILE),
+        ADV_BUTTONS(ForgeConstants.SPRITE_ADV_BUTTONS_FILE),
         BUTTONS(ForgeConstants.SPRITE_BUTTONS_FILE),
         BTNSTART(ForgeConstants.SPRITE_START_FILE),
         MANAICONS(ForgeConstants.SPRITE_MANAICONS_FILE),
@@ -507,7 +484,6 @@ public enum FSkinImage implements FImage {
         WATERMARKS(ForgeConstants.SPRITE_WATERMARK_FILE),
         DRAFTRANKS(ForgeConstants.SPRITE_DRAFTRANKS_FILE),
         CRACKS(ForgeConstants.SPRITE_CRACKS_FILE),
-        CARDBG(ForgeConstants.SPRITE_CARDBG_FILE),
         PLANAR_CONQUEST(ForgeConstants.SPRITE_PLANAR_CONQUEST_FILE);
 
         private final String filename;

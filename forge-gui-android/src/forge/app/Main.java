@@ -3,8 +3,10 @@ package forge.app;
 import java.io.File;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import android.graphics.Point;
+import android.view.InputDevice;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Version;
 import com.badlogic.gdx.backends.android.AndroidApplication;
@@ -59,11 +61,12 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class Main extends AndroidApplication {
     AndroidAdapter Gadapter;
+    ArrayList<String> gamepads;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        gamepads = getGameControllers();
         //init Sentry
         //SentryAndroid.init(this);
 
@@ -475,6 +478,31 @@ public class Main extends AndroidApplication {
             }
             return Pair.of(size.x, size.y);
         }
+
+        @Override
+        public ArrayList<String> getGamepads() {
+            return gamepads;
+        }
+    }
+    private ArrayList<String> getGameControllers() {
+        ArrayList<String> gameControllerDeviceIds = new ArrayList<String>();
+        int[] deviceIds = InputDevice.getDeviceIds();
+        for (int deviceId : deviceIds) {
+            InputDevice dev = InputDevice.getDevice(deviceId);
+            int sources = dev.getSources();
+            String devNameId = dev.getName()+"["+deviceId+"]";
+
+            // Verify that the device has gamepad buttons, control sticks, or both.
+            if (((sources & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD)
+                    || ((sources & InputDevice.SOURCE_JOYSTICK)
+                    == InputDevice.SOURCE_JOYSTICK)) {
+                // This device is a game controller. Store its device ID.
+                if (!gameControllerDeviceIds.contains(devNameId)) {
+                    gameControllerDeviceIds.add(devNameId);
+                }
+            }
+        }
+        return gameControllerDeviceIds;
     }
 
     public String getDeviceName() {

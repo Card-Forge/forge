@@ -1,0 +1,12 @@
+Name:Szarekh, the Silent King
+ManaCost:1 B B B
+Types:Legendary Artifact Creature Necron
+PT:3/4
+K:Flying
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigMill | TriggerDescription$ My Will Be Done — Whenever CARDNAME attacks, mill three cards. You may put an artifact creature card or Vehicle card from among the cards milled this way into your hand.
+SVar:TrigMill:DB$ Mill | NumCards$ 3 | Defined$ You | RememberMilled$ True | SubAbility$ DBChangeZone
+SVar:DBChangeZone:DB$ ChangeZone | Origin$ Graveyard,Exile | Destination$ Hand | Hidden$ True | Optional$ True | ChangeType$ Creature.IsRemembered+Artifact,Vehicle.IsRemembered | ChangeTypeDesc$ artifact creature card or vehicle card milled this way | ChangeNum$ 1 | SelectPrompt$ Select an artifact creature card or vehicle card milled this way | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+DeckHas:Ability$Mill
+DeckNeeds:Type$Artifact|Creature|Vehicle
+Oracle:Flying\nMy Will Be Done — Whenever Szarekh, the Silent King attacks, mill three cards. You may put an artifact creature card or Vehicle card from among the cards milled this way into your hand.

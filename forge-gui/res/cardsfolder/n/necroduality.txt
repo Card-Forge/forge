@@ -2,7 +2,7 @@ Name:Necroduality
 ManaCost:3 U
 Types:Enchantment
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Zombie.nonToken+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigCopy | TriggerDescription$ Whenever a nontoken Zombie enters the battlefield under your control, create a token that's a copy of that creature.
-SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredCard
+SVar:TrigCopy:DB$ CopyPermanent | Defined$ TriggeredCardLKICopy
 DeckNeeds:Type$Zombie
 DeckHas:Ability$Token
 AI:RemoveDeck:Random

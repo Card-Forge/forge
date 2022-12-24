@@ -5,19 +5,37 @@ import com.badlogic.gdx.utils.Align;
 
 import forge.Forge;
 import forge.Graphics;
+import forge.assets.FImage;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
 import forge.assets.FSkinFont;
+import forge.assets.FSkinImage;
 import forge.toolbox.FDisplayObject;
 import forge.util.Utils;
 
 public class FMenuTab extends FDisplayObject {
     public static final FSkinFont FONT = FSkinFont.get(12);
-    private static final FSkinColor SEL_BACK_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
-    private static final FSkinColor SEL_BORDER_COLOR = FDropDown.BORDER_COLOR;
-    private static final FSkinColor SEL_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor FORE_COLOR = SEL_FORE_COLOR.alphaColor(0.5f);
-    private static final FSkinColor SEPARATOR_COLOR = SEL_FORE_COLOR.alphaColor(0.3f);
+    boolean iconOnly = false;
+    boolean active = false;
+    private static FSkinColor getSelBackColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_ACTIVE);
+        return FSkinColor.get(Colors.CLR_ACTIVE);
+    }
+    private static FSkinColor getSelBorderColor() {
+        return FDropDown.getBorderColor();
+    }
+    private static FSkinColor getSelForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
+    private static FSkinColor getForeColor() {
+        return getSelForeColor().alphaColor(0.5f);
+    }
+    private static FSkinColor getSeparatorColor() {
+        return getSelForeColor().alphaColor(0.3f);
+    }
     public static final float PADDING = Utils.scale(2);
     private static final float SEPARATOR_WIDTH = Utils.scale(1);
 
@@ -28,10 +46,11 @@ public class FMenuTab extends FDisplayObject {
     private float minWidth;
     private int index;
 
-    public FMenuTab(String text0, FMenuBar menuBar0, FDropDown dropDown0, int index0) {
+    public FMenuTab(String text0, FMenuBar menuBar0, FDropDown dropDown0, int index0, boolean iconOnly0) {
         menuBar = menuBar0;
         dropDown = dropDown0;
         index = index0;
+        iconOnly = iconOnly0;
         setText(text0);
     }
 
@@ -75,6 +94,10 @@ public class FMenuTab extends FDisplayObject {
         menuBar.revalidate();
     }
 
+    public void setActiveIcon(boolean value) {
+        active = value;
+    }
+
     @Override
     public void setVisible(boolean visible0) {
         if (isVisible() == visible0) { return; }
@@ -88,6 +111,10 @@ public class FMenuTab extends FDisplayObject {
     }
 
     public float getMinWidth() {
+        if (iconOnly) {
+            float multiplier = Forge.isLandscapeMode() ? 2.5f : 1.8f;
+            return FONT.getLineHeight() * multiplier;
+        }
         return minWidth;
     }
 
@@ -103,21 +130,21 @@ public class FMenuTab extends FDisplayObject {
             h = getHeight() - y + 1;
 
             g.startClip(x, y, w, h);
-            g.fillRect(SEL_BACK_COLOR, x, y, w, h);
-            g.drawRect(2, SEL_BORDER_COLOR, x, y, w, h);
+            g.fillRect(getSelBackColor(), x, y, w, h);
+            g.drawRect(2, getSelBorderColor(), x, y, w, h);
             g.endClip();
 
-            foreColor = SEL_FORE_COLOR;
+            foreColor = getSelForeColor();
         }
         else { 
-            foreColor = FORE_COLOR;
+            foreColor = getForeColor();
         }
 
         //draw right separator
         if (index < menuBar.getTabCount() - 1) {
             x = getWidth();
             y = getHeight() / 4;
-            g.drawLine(SEPARATOR_WIDTH, SEPARATOR_COLOR, x, y, x, getHeight() - y);
+            g.drawLine(SEPARATOR_WIDTH, getSeparatorColor(), x, y, x, getHeight() - y);
         }
 
         x = PADDING;
@@ -125,8 +152,15 @@ public class FMenuTab extends FDisplayObject {
         w = getWidth() - 2 * PADDING;
         h = getHeight() - 2 * PADDING;
         if (isHovered())
-            g.fillRect(SEL_BACK_COLOR.brighter(), x, y, w, h);
-        g.drawText(text, FONT, foreColor, x, y, w, h, false, Align.center, true);
+            g.fillRect(getSelBackColor().brighter(), x, y, w, h);
+        if (iconOnly) {
+            float mod = w * 0.75f;
+            FImage icon = active ? FSkinImage.SEE : FSkinImage.UNSEE;
+            float scaleW = w * 0.8f;
+            float scaleH = scaleW * 0.6f;
+            g.drawImage(icon, x + w/2 - scaleW/2, y + h/2 - scaleH/2, scaleW, scaleH);
+        } else
+            g.drawText(text, FONT, foreColor, x, y, w, h, false, Align.center, true);
     }
     public boolean isShowingDropdownMenu(boolean any) {
         if (dropDown == null)

@@ -1,6 +1,5 @@
 [metadata]
 Code=CM1
-MciCode=CM1
 Date=2012-11-02
 Name=Commander's Arsenal
 ScryfallCode=CM1

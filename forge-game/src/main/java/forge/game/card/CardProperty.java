@@ -48,8 +48,12 @@ public class CardProperty {
         final Player controller = lki.getController();
 
         // CR 702.25b if card is phased out it will not count unless specifically asked for
-        if (card.isPhasedOut() && !property.contains("phasedOut")) {
-            return false;
+        if (card.isPhasedOut()) {
+            if (property.startsWith("phasedOut")) {
+                property = property.substring(9);
+            } else {
+                return false;
+            }
         }
 
         // by name can also have color names, so needs to happen before colors.
@@ -118,6 +122,14 @@ public class CardProperty {
             }
         } else if (property.equals("nonChosenCard")) {
             if (source.hasChosenCard(card)) {
+                return false;
+            }
+        } else if (property.equals("ChosenSector")) {
+            if (!source.getChosenSector().equals(card.getSector())) {
+                return false;
+            }
+        } else if (property.equals("DifferentSector")) {
+            if (source.getSector().equals(card.getSector())) {
                 return false;
             }
         } else if (property.equals("DoubleFaced")) {
@@ -315,7 +327,15 @@ public class CardProperty {
                 }
             } else {
                 final CardCollectionView cards = controller.getCardsIn(ZoneType.Battlefield);
-                if (CardLists.getType(cards, type).isEmpty()) {
+                if (type.contains("_")) {
+                    final String[] parts = type.split("_", 2);
+                    CardCollectionView found = CardLists.getType(cards, parts[0]);
+                    final int num = AbilityUtils.calculateAmount(card, parts[1].substring(2), spellAbility);
+                    if (!Expressions.compare(found.size(), parts[1].substring(0, 2), num)) {
+                        return false;
+                    }
+
+                } else if (CardLists.getType(cards, type).isEmpty()) {
                     return false;
                 }
             }
@@ -377,10 +397,6 @@ public class CardProperty {
         } else if (property.equals("CanBeSacrificedBy") && spellAbility instanceof SpellAbility) {
             // used for Emerge and Offering, these are SpellCost, not effect
             if (!card.canBeSacrificedBy((SpellAbility) spellAbility, false)) {
-                return false;
-            }
-        } else if (property.startsWith("AttachedBy")) {
-            if (!card.hasCardAttachment(source)) {
                 return false;
             }
         } else if (property.equals("Attached")) {
@@ -490,7 +506,7 @@ public class CardProperty {
                     return false;
                 }
             }
-        } else if (property.startsWith("EquippedBy")) {
+        } else if (property.startsWith("EquippedBy") || property.startsWith("AttachedBy")) {
             if (property.substring(10).equals("Targeted")) {
                 for (final Card c : AbilityUtils.getDefinedCards(source, "Targeted", spellAbility)) {
                     if (!card.hasCardAttachment(c)) {
@@ -513,11 +529,6 @@ public class CardProperty {
             }
         } else if (property.startsWith("CanBeAttachedBy")) {
             if (!card.canBeAttached(source, null)) {
-                return false;
-            }
-        } else if (property.startsWith("Fortified")) {
-            // FIXME TODO what property has this?
-            if (!source.hasCardAttachment(card)) {
                 return false;
             }
         } else if (property.startsWith("HauntedBy")) {
@@ -1885,9 +1896,12 @@ public class CardProperty {
             }
         } else if (property.startsWith("set")) {
             final String setCode = property.substring(3, 6);
+            if (card.getName().isEmpty()) {
+                return false;
+            }
             final PaperCard setCard = StaticData.instance().getCommonCards().getCardFromEditions(card.getName(),
-                                                                                     CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
-            if (!setCard.getEdition().equals(setCode)) {
+                    CardDb.CardArtPreference.ORIGINAL_ART_ALL_EDITIONS);
+            if (setCard != null && !setCard.getEdition().equals(setCode)) {
                 return false;
             }
         } else if (property.startsWith("inZone")) {

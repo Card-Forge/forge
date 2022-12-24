@@ -58,13 +58,20 @@ public class TriggerScry extends Trigger {
             return false;
         }
 
+        if (hasParam("ToBottom")) {
+            Integer numBottom = (Integer) runParams.get(AbilityKey.ScryBottom);
+            if (numBottom <= 0) {
+                return false;
+            }
+        }
+
         return true;
     }
 
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
-        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player, AbilityKey.ScryNum);
+        sa.setTriggeringObjectsFrom(runParams, AbilityKey.Player, AbilityKey.ScryNum, AbilityKey.ScryBottom);
     }
 
     @Override

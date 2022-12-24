@@ -3,7 +3,6 @@ Code=8ED
 Date=2003-07-28
 Name=Eighth Edition
 Code2=8E
-MciCode=8e
 Type=Core
 Border=White
 BoosterCovers=5

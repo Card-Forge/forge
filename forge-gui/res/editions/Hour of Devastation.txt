@@ -4,7 +4,6 @@ Date=2017-07-14
 Name=Hour of Devastation
 Code2=HOU
 Type=Expansion
-MciCode=hou
 BoosterCovers=5
 Booster=10 Common:!fromSheet("HOU Planeswalker Decks and Toolkit"), 3 Uncommon:!fromSheet("HOU Planeswalker Decks and Toolkit"), 1 RareMythic:!fromSheet("HOU Planeswalker Decks and Toolkit"), 1 BasicLand
 AdditionalSheetForFoils=fromSheet("MPS Hour of Devastation Invocations")

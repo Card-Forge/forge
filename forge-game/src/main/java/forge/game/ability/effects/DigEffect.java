@@ -15,7 +15,6 @@ import forge.game.player.DelayedReveal;
 import forge.game.player.Player;
 import forge.game.player.PlayerView;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.util.CardTranslation;
@@ -169,26 +168,28 @@ public class DigEffect extends SpellAbilityEffect {
             }
         }
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
-
         CardZoneTable table = new CardZoneTable();
         GameEntityCounterTable counterTable = new GameEntityCounterTable();
         boolean combatChanged = false;
         CardCollectionView lastStateBattlefield = game.copyLastStateBattlefield();
         CardCollectionView lastStateGraveyard = game.copyLastStateGraveyard();
 
-        for (final Player p : tgtPlayers) {
-            if (tgt != null && !p.canBeTargetedBy(sa)) {
+        for (final Player p : getDefinedPlayersOrTargeted(sa)) {
+            if (!p.isInGame()) {
                 continue;
             }
+
             final CardCollection top = new CardCollection();
             final CardCollection rest = new CardCollection();
-            final PlayerZone sourceZone = p.getZone(srcZone);
+            CardCollection all = new CardCollection(p.getCardsIn(srcZone));
 
-            int numToDig = Math.min(digNum, sourceZone.size());
+            if (sa.hasParam("FromBottom")) {
+                Collections.reverse(all);
+            }
+
+            int numToDig = Math.min(digNum, all.size());
             for (int i = 0; i < numToDig; i++) {
-                top.add(sourceZone.get(i));
+                top.add(all.get(i));
             }
 
             if (!top.isEmpty()) {
@@ -292,21 +293,17 @@ public class DigEffect extends SpellAbilityEffect {
                             chooser.getController().notifyOfValue(sa, null,
                                     Localizer.getInstance().getMessage("lblNoValidCards"));
                         }
-                        boolean opt = false;
-                        if (anyNumber) {
-                            opt = true;
-                        }
-                        while (!valid.isEmpty()) {
+                        while (!valid.isEmpty() && (anyNumber || movedCards.size() < destZone1ChangeNum)) {
                             Card chosen = chooser.getController().chooseSingleEntityForEffect(valid, delayedReveal, sa,
-                                    Localizer.getInstance().getMessage("lblChooseOne"), opt, p, null);
-                            if (chosen != null) {
-                                movedCards.add(chosen);
-                                valid.remove(chosen);
-                                totcmc = totcmc - chosen.getCMC();
-                                valid = CardLists.getValidCards(valid, "Card.cmcLE" + totcmc, cont, host, sa);
-                            } else { //if they can and did choose nothing, we're done here
+                                    Localizer.getInstance().getMessage("lblChooseOne"), anyNumber || optional, p, null);
+                            if (chosen == null) {
+                                //if they can and did choose nothing, we're done here
                                 break;
                             }
+                            movedCards.add(chosen);
+                            valid.remove(chosen);
+                            totcmc = totcmc - chosen.getCMC();
+                            valid = CardLists.getValidCards(valid, "Card.cmcLE" + totcmc, cont, host, sa);
                         }
                         chooser.getController().endTempShowCards();
                         if (!movedCards.isEmpty()) {

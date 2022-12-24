@@ -4,6 +4,6 @@ Types:Creature Serpent
 PT:5/5
 S:Mode$ CantAttack | ValidCard$ Card.Self | UnlessDefenderControls$ Swamp | Description$ CARDNAME can't attack unless defending player controls a Swamp.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Swamp.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Swamps, sacrifice CARDNAME.
-SVar:TrigSac:DB$ Sacrifice | Defined$ Self
+SVar:TrigSac:DB$ Sacrifice
 SVar:NeedsToPlay:Swamp.YouCtrl
 Oracle:Bog Serpent can't attack unless defending player controls a Swamp.\nWhen you control no Swamps, sacrifice Bog Serpent.

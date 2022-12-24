@@ -3,7 +3,6 @@ Code=E01
 Date=2017-06-16
 Name=Archenemy: Nicol Bolas
 Code2=E01
-MciCode=E01
 Type=Multiplayer
 ScryfallCode=E01
 

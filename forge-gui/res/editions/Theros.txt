@@ -2,7 +2,6 @@
 Code=THS
 Date=2013-09-27
 Name=Theros
-MciCode=ths
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand

@@ -3,7 +3,6 @@ Code=UDS
 Date=1999-06-07
 Name=Urza's Destiny
 Code2=UD
-MciCode=ud
 Type=Expansion
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare

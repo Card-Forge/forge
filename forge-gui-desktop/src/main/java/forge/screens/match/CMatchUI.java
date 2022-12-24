@@ -35,7 +35,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 
@@ -918,9 +917,6 @@ public final class CMatchUI
 
         //show menu if mouse was trigger for ability
         final JPopupMenu menu = new JPopupMenu(Localizer.getInstance().getMessage("lblAbilities"));
-        //add scroll area when too big
-        // TODO: do we need a user setting for the scrollCount?
-        MenuScroller.setScrollerFor(menu, 8, 125, 3, 1);
 
         boolean enabled;
         int firstEnabled = -1;
@@ -931,7 +927,11 @@ public final class CMatchUI
             if (enabled && firstEnabled < 0) {
                 firstEnabled = index;
             }
-            GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(ab.toString(), true),
+            String s = ab.toString();
+            if (s.contains("\n")) {
+                s = s.substring(0, s.indexOf("\n"));
+            }
+            GuiUtils.addMenuItem(menu, FSkin.encodeSymbols(s, true),
                     shortcut > 0 ? KeyStroke.getKeyStroke(shortcut, 0) : null,
                     new Runnable() {
                         @Override
@@ -949,6 +949,10 @@ public final class CMatchUI
         }
 
         if (firstEnabled >= 0) { //only show menu if at least one ability can be played
+            //add scroll area when too big
+            // TODO: do we need a user setting for the scrollCount?
+            MenuScroller.setScrollerFor(menu, 8, 125, 3, 1);
+
             final CardPanel panel = findCardPanel(hostCard);
             final Component menuParent;
             final int x, y;
@@ -983,14 +987,8 @@ public final class CMatchUI
             menu.show(menuParent, x, y);
             openAbilityMenu = menu;
 
-            final int _firstEnabled = firstEnabled;
-            SwingUtilities.invokeLater(new Runnable() { //use invoke later to ensure first enabled ability selected by default
-                @Override public final void run() {
-                    for (int i = 0; i <= _firstEnabled; i++) {
-                        menu.dispatchEvent(new KeyEvent(menu, KeyEvent.KEY_PRESSED, 0, 0, KeyEvent.VK_DOWN, KeyEvent.CHAR_UNDEFINED));
-                    }
-                }
-            });
+            // TODO seems 1 would now always lead to the first enabled one?
+            MenuScroller.setMenuSelectedIndex(menu, firstEnabled, false);
         }
 
         return null; //delay ability until choice made

@@ -18,7 +18,6 @@ import forge.game.event.GameEventCombatChanged;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
-import forge.game.spellability.TargetRestrictions;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
@@ -42,7 +41,6 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
         boolean isCombatChanged = false;
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         // TODO: may expand this effect for defined blocker (False Orders, General Jarkeld, Sorrow's Path, Ydwen Efreet)
         for (final Card c : getTargetCards(sa)) {
             String cardString = CardTranslation.getTranslatedName(c.getName()) + " (" + c.getId() + ")";
@@ -51,38 +49,37 @@ public class ChangeCombatantsEffect extends SpellAbilityEffect {
                     Localizer.getInstance().getMessage("lblChangeCombatantOption", cardString), null)) {
                 continue;
             }
-            if ((tgt == null) || c.canBeTargetedBy(sa)) {
-                final Combat combat = game.getCombat();
-                final GameEntity originalDefender = combat.getDefenderByAttacker(c);
-                final FCollection<GameEntity> defs = new FCollection<>();
-                defs.addAll(sa.hasParam("PlayerOnly") ? combat.getDefendingPlayers() : combat.getDefenders());
 
-                String title = Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", cardString);
-                Map<String, Object> params = Maps.newHashMap();
-                params.put("Attacker", c);
+            final Combat combat = game.getCombat();
+            final GameEntity originalDefender = combat.getDefenderByAttacker(c);
+            final FCollection<GameEntity> defs = new FCollection<>();
+            defs.addAll(sa.hasParam("PlayerOnly") ? combat.getDefendingPlayers() : combat.getDefenders());
 
-                final GameEntity defender = sa.getActivatingPlayer().getController().chooseSingleEntityForEffect(defs, sa, title, false, params);
-                if (originalDefender != null && !originalDefender.equals(defender)) {
-                    AttackingBand ab = combat.getBandOfAttacker(c);
-                    if (ab != null) {
-                        combat.unregisterAttacker(c, ab);
-                        ab.removeAttacker(c);
-                    }
-                    combat.addAttacker(c, defender);
-                    // retarget triggers to the new defender (e.g. Ulamog, Ceaseless Hunger + Portal Mage)
-                    for (SpellAbilityStackInstance si : game.getStack()) {
-                        if (si.isTrigger() && c.equals(si.getSourceCard())
-                                && si.getTriggeringObject(AbilityKey.Attacker) != null) {
-                            si.addTriggeringObject(AbilityKey.OriginalDefender, originalDefender);
-                            if (defender instanceof Player) {
-                                si.updateTriggeringObject(AbilityKey.DefendingPlayer, defender);
-                            } else if (defender instanceof Card) {
-                                si.updateTriggeringObject(AbilityKey.DefendingPlayer, ((Card)defender).getController());
-                            }
+            String title = Localizer.getInstance().getMessage("lblChooseDefenderToAttackWithCard", cardString);
+            Map<String, Object> params = Maps.newHashMap();
+            params.put("Attacker", c);
+
+            final GameEntity defender = activator.getController().chooseSingleEntityForEffect(defs, sa, title, false, params);
+            if (originalDefender != null && !originalDefender.equals(defender)) {
+                AttackingBand ab = combat.getBandOfAttacker(c);
+                if (ab != null) {
+                    combat.unregisterAttacker(c, ab);
+                    ab.removeAttacker(c);
+                }
+                combat.addAttacker(c, defender);
+                // retarget triggers to the new defender (e.g. Ulamog, Ceaseless Hunger + Portal Mage)
+                for (SpellAbilityStackInstance si : game.getStack()) {
+                    if (si.isTrigger() && c.equals(si.getSourceCard())
+                            && si.getTriggeringObject(AbilityKey.Attacker) != null) {
+                        si.addTriggeringObject(AbilityKey.OriginalDefender, originalDefender);
+                        if (defender instanceof Player) {
+                            si.updateTriggeringObject(AbilityKey.DefendingPlayer, defender);
+                        } else if (defender instanceof Card) {
+                            si.updateTriggeringObject(AbilityKey.DefendingPlayer, ((Card)defender).getController());
                         }
                     }
-                    isCombatChanged = true;
                 }
+                isCombatChanged = true;
             }
         }
 

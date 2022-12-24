@@ -82,7 +82,7 @@ public class ComputerUtilMana {
     public static boolean hasEnoughManaSourcesToCast(final SpellAbility sa, final Player ai) {
         if (ai == null || sa == null)
             return false;
-        sa.setActivatingPlayer(ai);
+        sa.setActivatingPlayer(ai, true);
         return payManaCost(sa, ai, true, 0, false, false);
     }
 
@@ -90,7 +90,7 @@ public class ComputerUtilMana {
         int score = 0;
 
         for (SpellAbility ability : card.getSpellAbilities()) {
-            ability.setActivatingPlayer(card.getController());
+            ability.setActivatingPlayer(card.getController(), true);
             if (ability.isManaAbility()) {
                 score += ability.calculateScoreForManaAbility();
             }
@@ -376,7 +376,7 @@ public class ComputerUtilMana {
             }
 
             final String typeRes = cost.getSourceRestriction();
-            if (StringUtils.isNotBlank(typeRes) && !paymentChoice.getHostCard().getType().hasStringType(typeRes)) {
+            if (StringUtils.isNotBlank(typeRes) && !paymentChoice.getHostCard().isValid(typeRes, null, null, null)) {
                 continue;
             }
 
@@ -514,10 +514,9 @@ public class ComputerUtilMana {
 
         // Run triggers like Nissa
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(hostCard);
-        runParams.put(AbilityKey.Player, ai); // assuming AI would only ever gives itself mana
+        runParams.put(AbilityKey.Activator, ai); // assuming AI would only ever gives itself mana
         runParams.put(AbilityKey.AbilityMana, saPayment);
         runParams.put(AbilityKey.Produced, manaProduced);
-        runParams.put(AbilityKey.Activator, ai);
         for (Trigger tr : ai.getGame().getTriggerHandler().getActiveTrigger(TriggerType.TapsForMana, runParams)) {
             SpellAbility trSA = tr.ensureAbility();
             if (trSA == null) {
@@ -529,7 +528,7 @@ public class ComputerUtilMana {
                 if (produced.equals("Chosen")) {
                     produced = MagicColor.toShortString(trSA.getHostCard().getChosenColor());
                 }
-                manaProduced += " " + StringUtils.repeat(produced, pAmount);
+                manaProduced += " " + StringUtils.repeat(produced, " ", pAmount);
             } else if (ApiType.ManaReflected.equals(trSA.getApi())) {
                 final String colorOrType = trSA.getParamOrDefault("ColorOrType", "Color");
                 // currently Color or Type, Type is colors + colorless
@@ -1013,7 +1012,7 @@ public class ComputerUtilMana {
 
         if (checkCosts) {
             // Check if AI can still play this mana ability
-            ma.setActivatingPlayer(ai);
+            ma.setActivatingPlayer(ai, true);
             // if the AI can't pay the additional costs skip the mana ability
             if (!CostPayment.canPayAdditionalCosts(ma.getPayCosts(), ma)) {
                 return false;
@@ -1406,8 +1405,7 @@ public class ComputerUtilMana {
     public static int getAvailableManaEstimate(final Player p, final boolean checkPlayable) {
         int availableMana = 0;
 
-        final CardCollectionView list = new CardCollection(p.getCardsIn(ZoneType.Battlefield));
-        final List<Card> srcs = CardLists.filter(list, new Predicate<Card>() {
+        final List<Card> srcs = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return !c.getManaAbilities().isEmpty();
@@ -1422,7 +1420,7 @@ public class ComputerUtilMana {
             maxProduced = 0;
 
             for (SpellAbility ma : src.getManaAbilities()) {
-                ma.setActivatingPlayer(p);
+                ma.setActivatingPlayer(p, true);
                 if (!checkPlayable || ma.canPlay()) {
                     int costsToActivate = ma.getPayCosts().getCostMana() != null ? ma.getPayCosts().getCostMana().convertAmount() : 0;
                     int producedMana = ma.getParamOrDefault("Produced", "").split(" ").length;
@@ -1461,7 +1459,7 @@ public class ComputerUtilMana {
             @Override
             public boolean apply(final Card c) {
                 for (final SpellAbility am : getAIPlayableMana(c)) {
-                    am.setActivatingPlayer(ai);
+                    am.setActivatingPlayer(ai, true);
                     if (!checkPlayable || (am.canPlay() && am.checkRestrictions(ai))) {
                         return true;
                     }
@@ -1518,7 +1516,7 @@ public class ComputerUtilMana {
                     needsLimitedResources |= !cost.isReusuableResource();
 
                     // if the AI can't pay the additional costs skip the mana ability
-                    m.setActivatingPlayer(ai);
+                    m.setActivatingPlayer(ai, true);
                     if (!CostPayment.canPayAdditionalCosts(m.getPayCosts(), m)) {
                         continue;
                     }
@@ -1587,7 +1585,7 @@ public class ComputerUtilMana {
                 if (DEBUG_MANA_PAYMENT) {
                     System.out.println("DEBUG_MANA_PAYMENT: groupSourcesByManaColor m = " + m);
                 }
-                m.setActivatingPlayer(ai);
+                m.setActivatingPlayer(ai, true);
                 if (checkPlayable && !m.canPlay()) {
                     continue;
                 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.badlogic.gdx.math.Vector2;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.animation.ForgeAnimation;
 import forge.assets.FSkinColor;
@@ -14,7 +15,11 @@ import forge.util.Utils;
 
 public abstract class FScrollPane extends FContainer {
     private static final float FLING_DECEL = 750f;
-    private static final FSkinColor INDICATOR_COLOR = FSkinColor.get(FSkinColor.Colors.CLR_TEXT).alphaColor(0.7f);
+    public static FSkinColor getIndicatorColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(FSkinColor.Colors.ADV_CLR_TEXT).alphaColor(0.7f);
+        return FSkinColor.get(FSkinColor.Colors.CLR_TEXT).alphaColor(0.7f);
+    }
     private static final float INDICATOR_SIZE = Utils.scale(5);
     private static final float INDICATOR_MARGIN = Utils.scale(3);
 
@@ -23,6 +28,14 @@ public abstract class FScrollPane extends FContainer {
 
     public FScrollPane() {
         scrollBounds = new ScrollBounds();
+    }
+
+    public float getIndicatorMargin() {
+        return INDICATOR_MARGIN;
+    }
+
+    public float getIndicatorSize() {
+        return INDICATOR_SIZE;
     }
 
     public float getScrollLeft() {
@@ -178,22 +191,22 @@ public abstract class FScrollPane extends FContainer {
             if (scrollLeft > 0) {
                 float x = INDICATOR_MARGIN;
                 float y = getHeight() / 2;
-                g.fillTriangle(INDICATOR_COLOR, x, y, x + INDICATOR_SIZE, y - INDICATOR_SIZE, x + INDICATOR_SIZE, y + INDICATOR_SIZE);
+                g.fillTriangle(getIndicatorColor(), x, y, x + INDICATOR_SIZE, y - INDICATOR_SIZE, x + INDICATOR_SIZE, y + INDICATOR_SIZE);
             }
             if (scrollLeft < getMaxScrollLeft()) {
                 float x = getWidth() - INDICATOR_MARGIN;
                 float y = getHeight() / 2;
-                g.fillTriangle(INDICATOR_COLOR, x, y, x - INDICATOR_SIZE, y - INDICATOR_SIZE, x - INDICATOR_SIZE, y + INDICATOR_SIZE);
+                g.fillTriangle(getIndicatorColor(), x, y, x - INDICATOR_SIZE, y - INDICATOR_SIZE, x - INDICATOR_SIZE, y + INDICATOR_SIZE);
             }
             if (scrollTop > 0) {
                 float x = getWidth() / 2;
                 float y = INDICATOR_MARGIN;
-                g.fillTriangle(INDICATOR_COLOR, x, y, x - INDICATOR_SIZE, y + INDICATOR_SIZE, x + INDICATOR_SIZE, y + INDICATOR_SIZE);
+                g.fillTriangle(getIndicatorColor(), x, y, x - INDICATOR_SIZE, y + INDICATOR_SIZE, x + INDICATOR_SIZE, y + INDICATOR_SIZE);
             }
             if (scrollTop < getMaxScrollTop()) {
                 float x = getWidth() / 2;
                 float y = getHeight() - INDICATOR_MARGIN;
-                g.fillTriangle(INDICATOR_COLOR, x, y, x - INDICATOR_SIZE, y - INDICATOR_SIZE, x + INDICATOR_SIZE, y - INDICATOR_SIZE);
+                g.fillTriangle(getIndicatorColor(), x, y, x - INDICATOR_SIZE, y - INDICATOR_SIZE, x + INDICATOR_SIZE, y - INDICATOR_SIZE);
             }
         } catch (Exception e) {}
     }

@@ -4,5 +4,5 @@ Types:Legendary Creature Human Advisor
 PT:2/3
 K:Flying
 S:Mode$ CantTarget | AffectedZone$ Battlefield,Graveyard | ValidCard$ Land | Activator$ Opponent | Description$ Lands on the battlefield and land cards in graveyards can't be the targets of spells or abilities your opponents control.
-S:Mode$ CantPlayLand | ValidCard$ Land.OppCtrl | Origin$ Graveyard | Description$ Your opponents can't play land cards from graveyards.
+S:Mode$ CantPlayLand | ValidCard$ Land | Player$ Opponent | Origin$ Graveyard | Description$ Your opponents can't play land cards from graveyards.
 Oracle:Flying\nLands on the battlefield and land cards in graveyards can't be the targets of spells or abilities your opponents control.\nYour opponents can't play land cards from graveyards.

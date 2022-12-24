@@ -9,6 +9,6 @@ public abstract class TestAction extends BasePlayerAction {
 	public TestAction( PlayerSpecification player ) {
 		super( player );
 	}
-	
+
 	public abstract void perform( Game game, Player player );
 }

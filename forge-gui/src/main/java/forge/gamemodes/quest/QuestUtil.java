@@ -32,6 +32,7 @@ import forge.gamemodes.quest.bazaar.QuestPetController;
 import forge.gamemodes.quest.data.DeckConstructionRules;
 import forge.gamemodes.quest.data.QuestAchievements;
 import forge.gamemodes.quest.data.QuestAssets;
+import forge.gamemodes.quest.data.QuestPreferences;
 import forge.gui.FThreads;
 import forge.gui.GuiBase;
 import forge.gui.interfaces.IButton;
@@ -664,7 +665,7 @@ public class QuestUtil {
         }
 
         if (FModel.getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            final String errorMessage = getDeckConformanceProblems(deck);
+            final String errorMessage = getDeckConformanceProblemsBeforeGame(deck);
             if (null != errorMessage) {
                 SOptionPane.showErrorDialog(localizer.getMessage("lblInvalidDeckDesc").replace("%n",errorMessage), "Invalid Deck");
                 return false;
@@ -674,9 +675,13 @@ public class QuestUtil {
         return true;
     }
 
-    public static String getDeckConformanceProblems(Deck deck){
-        String errorMessage = GameType.Quest.getDeckFormat().getDeckConformanceProblem(deck);
+    public static String getDeckConformanceProblemsBeforeGame(Deck deck){
+        // Challenges with fixed decks override conformance settings
+        if(event instanceof QuestEventChallenge && ((QuestEventChallenge) event).getHumanDeck() != null)
+            return null;
 
+        //Check quest mode's generic deck construction rules: minimum cards in deck, sideboard etc
+        String errorMessage = GameType.Quest.getDeckFormat().getDeckConformanceProblem(deck);
         if(errorMessage != null) return errorMessage; //return immediately if the deck does not conform to quest requirements
 
         //Check for all applicable deck construction rules per this quests's saved DeckConstructionRules enum
@@ -684,6 +689,13 @@ public class QuestUtil {
             case Commander:
                 errorMessage = GameType.Commander.getDeckFormat().getDeckConformanceProblem(deck);
                 break;
+        }
+        if(errorMessage != null) return errorMessage;
+
+        //Check for this quest- and World's deck construction rules: allowed sets, banned/restricted cards etc
+        if (FModel.getQuestPreferences().getPrefInt(QuestPreferences.QPref.WORLD_RULES_CONFORMANCE) == 1) {
+            if(FModel.getQuest().getFormat() != null)
+                errorMessage = FModel.getQuest().getFormat().getDeckConformanceProblem(deck);
         }
 
         return errorMessage;

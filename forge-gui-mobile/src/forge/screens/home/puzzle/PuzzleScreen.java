@@ -39,7 +39,7 @@ public class PuzzleScreen extends LaunchScreen {
         super(null, NewGameMenu.getMenu());
 
         lblDesc.setFont(FSkinFont.get(12));
-        lblDesc.setTextColor(FLabel.INLINE_LABEL_COLOR);
+        lblDesc.setTextColor(FLabel.getInlineLabelColor());
     }
 
     @Override

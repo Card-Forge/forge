@@ -3,7 +3,7 @@ ManaCost:3 U B
 Types:Legendary Planeswalker Tasha
 Loyalty:4
 Text:CARDNAME can be your commander.
-T:Mode$ SpellCast | ValidCard$ Card.OppOwn | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell you don't own, create a 3/3 black Demon creature token.
+T:Mode$ SpellCast | ValidCard$ Card.YouDontOwn | ValidActivatingPlayer$ You | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a spell you don't own, create a 3/3 black Demon creature token.
 SVar:TrigToken:DB$ Token | TokenOwner$ You | TokenAmount$ 1 | TokenScript$ b_3_3_demon
 A:AB$ Draw | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Defined$ You | NumCards$ 1 | SubAbility$ DBExileForEach | SpellDescription$ Draw a card. For each opponent, exile up to one target instant or sorcery card from that player's graveyard and put a page counter on it.
 SVar:DBExileForEach:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Instant.OppCtrl,Sorcery.OppCtrl | TgtPrompt$ Choose up to one target instant or sorcery card in each opponent's graveyard | TargetMin$ 0 | TargetMax$ OneEach | TargetsWithDifferentControllers$ True | WithCountersType$ PAGE

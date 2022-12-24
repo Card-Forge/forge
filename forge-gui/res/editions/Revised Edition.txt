@@ -3,7 +3,6 @@ Code=3ED
 Date=1994-04-01
 Name=Revised Edition
 Code2=R
-MciCode=rv
 Type=Core
 Border=White
 BoosterCovers=1

@@ -1,6 +1,7 @@
 package forge.adventure.scene;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import com.google.common.collect.Lists;
 import forge.Forge;
@@ -31,6 +32,7 @@ import forge.item.IPaperCard;
 import forge.player.GamePlayerUtil;
 import forge.player.PlayerControllerHuman;
 import forge.screens.FScreen;
+import forge.screens.LoadingOverlay;
 import forge.screens.match.MatchController;
 import forge.sound.MusicPlaylist;
 import forge.sound.SoundSystem;
@@ -50,10 +52,11 @@ public class DuelScene extends ForgeScene {
     private static DuelScene object;
 
     public static DuelScene instance() {
-        if(object==null)
-            object=new DuelScene();
+        if (object == null)
+            object = new DuelScene();
         return object;
     }
+
     //GameLobby lobby;
     HostedMatch hostedMatch;
     EnemySprite enemy;
@@ -63,6 +66,7 @@ public class DuelScene extends ForgeScene {
     Deck playerDeck;
     boolean chaosBattle = false;
     boolean callbackExit = false;
+    private LoadingOverlay matchOverlay;
     List<IPaperCard> playerExtras = new ArrayList<>();
     List<IPaperCard> AIExtras = new ArrayList<>();
 
@@ -80,11 +84,16 @@ public class DuelScene extends ForgeScene {
     }
 
     public void GameEnd() {
-        boolean winner = humanPlayer == hostedMatch.getGame().getMatch().getWinner();
+        boolean winner = false;
+        try {
+            winner = humanPlayer == hostedMatch.getGame().getMatch().getWinner();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String enemyName = (enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride);
         boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
         Current.player().clearBlessing();
-        if ((chaosBattle||showMessages) && !winner) {
+        if ((chaosBattle || showMessages) && !winner) {
             callbackExit = true;
             List<String> insult = Lists.newArrayList("I'm sorry...", "... ....", "Learn from your defeat.",
                     "I haven't begun to use my full power.", "No matter how much you try, you still won't beat me.",
@@ -99,6 +108,7 @@ public class DuelScene extends ForgeScene {
                     "Is that all you can do?", "You need to learn more to stand a chance.", "You weren't that bad.", "You made an effort at least.",
                     "From today, you can call me teacher.", "Hmph, predictable!", "I haven't used a fraction of my REAL power!");
             String message = Aggregates.random(insult);
+            boolean finalWinner = winner;
             FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, enemyName, new FBufferedImage(120, 120) {
                 @Override
                 protected void draw(Graphics g, float w, float h) {
@@ -109,17 +119,17 @@ public class DuelScene extends ForgeScene {
                 @Override
                 public void run(Integer result) {
                     if (result == 0) {
-                        afterGameEnd(enemyName, winner);
+                        afterGameEnd(enemyName, finalWinner, true, true);
                     }
                 }
             }));
         } else {
-            afterGameEnd(enemyName, winner);
+            afterGameEnd(enemyName, winner, false, false);
         }
     }
 
-    void afterGameEnd(String enemyName, boolean winner) {
-        Gdx.app.postRunnable(() -> {
+    void afterGameEnd(String enemyName, boolean winner, boolean showOverlay, boolean alternate) {
+        Runnable runnable = () -> Gdx.app.postRunnable(()-> {
             SoundSystem.instance.setBackgroundMusic(MusicPlaylist.MENUS); //start background music
             dungeonEffect = null;
             callbackExit = false;
@@ -132,6 +142,14 @@ public class DuelScene extends ForgeScene {
                 ((IAfterMatch) last).setWinner(winner);
             }
         });
+        if (showOverlay) {
+            FThreads.invokeInEdtNowOrLater(() -> {
+                matchOverlay = new LoadingOverlay(runnable, true, alternate);
+                matchOverlay.show();
+            });
+        } else {
+            runnable.run();
+        }
     }
 
     void addEffects(RegisteredPlayer player, Array<EffectData> effects) {
@@ -243,14 +261,16 @@ public class DuelScene extends ForgeScene {
                 this.AIExtras = aiCards;
                 deck = deckProxy.getDeck();
             } else {
-                deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck()||Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
+                deck = currentEnemy.copyPlayerDeck ? this.playerDeck : currentEnemy.generateDeck(Current.player().isFantasyMode(), Current.player().isUsingCustomDeck() || Current.player().getDifficulty().name.equalsIgnoreCase("Hard"));
             }
             RegisteredPlayer aiPlayer = RegisteredPlayer.forVariants(playerCount, appliedVariants, deck, null, false, null, null);
 
             LobbyPlayer enemyPlayer = GamePlayerUtil.createAiPlayer(currentEnemy.name, selectAI(currentEnemy.ai));
             if (!enemy.nameOverride.isEmpty())
                 enemyPlayer.setName(enemy.nameOverride); //Override name if defined in the map.(only supported for 1 enemy atm)
-            FSkin.getAvatars().put(90001 + i, enemy.getAvatar(i));
+            TextureRegion enemyAvatar = enemy.getAvatar(i);
+            enemyAvatar.flip(true, false); //flip facing left
+            FSkin.getAvatars().put(90001 + i, enemyAvatar);
             enemyPlayer.setAvatarIndex(90001 + i);
             aiPlayer.setPlayer(enemyPlayer);
             aiPlayer.setTeamNumber(currentEnemy.teamNumber);
@@ -297,7 +317,7 @@ public class DuelScene extends ForgeScene {
         hostedMatch.startMatch(rules, appliedVariants, players, guiMap);
         MatchController.instance.setGameView(hostedMatch.getGameView());
         boolean showMessages = enemy.getData().copyPlayerDeck && Current.player().isUsingCustomDeck();
-        if (chaosBattle||showMessages) {
+        if (chaosBattle || showMessages) {
             List<String> list = Lists.newArrayList("It all depends on your skill!", "It's showtime!", "Let's party!",
                     "You've proved yourself!", "Are you ready? Go!", "Prepare to strike, now!", "Let's go!", "What's next?",
                     "Yeah, I've been waitin' for this!", "The stage of battle is set!", "And the battle begins!", "Let's get started!",
@@ -307,13 +327,17 @@ public class DuelScene extends ForgeScene {
                     "It's all or nothing!", "It's all on the line!", "You can't back down now!", "Do you have what it takes?", "What will happen next?",
                     "Don't blink!", "You can't lose here!", "There's no turning back!", "It's all or nothing now!");
             String message = Aggregates.random(list);
-            FThreads.delayInEDT(600, () -> FThreads.invokeInEdtNowOrLater(() -> FOptionPane.showMessageDialog(message, enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride, new FBufferedImage(120, 120) {
-                @Override
-                protected void draw(Graphics g, float w, float h) {
-                    if (FSkin.getAvatars().get(90001) != null)
-                        g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
-                }
-            })));
+            matchOverlay = new LoadingOverlay(() -> FThreads.delayInEDT(300, () -> FThreads.invokeInEdtNowOrLater(() ->
+                    FOptionPane.showMessageDialog(message, enemy.nameOverride.isEmpty() ? enemy.getData().name : enemy.nameOverride,
+                            new FBufferedImage(120, 120) {
+                                @Override
+                                protected void draw(Graphics g, float w, float h) {
+                                    if (FSkin.getAvatars().get(90001) != null)
+                                        g.drawImage(FSkin.getAvatars().get(90001), 0, 0, w, h);
+                                }
+                            }))), false, true);
+        } else {
+            matchOverlay = new LoadingOverlay(null);
         }
 
         for (final Player p : hostedMatch.getGame().getPlayers()) {
@@ -325,6 +349,7 @@ public class DuelScene extends ForgeScene {
             }
         }
         super.enter();
+        matchOverlay.show();
     }
 
     @Override
@@ -335,7 +360,7 @@ public class DuelScene extends ForgeScene {
     public void initDuels(PlayerSprite playerSprite, EnemySprite enemySprite) {
         this.player = playerSprite;
         this.enemy = enemySprite;
-        this.playerDeck = (Deck) AdventurePlayer.current().getSelectedDeck().copyTo("PlayerDeckCopy");
+        this.playerDeck = (Deck) Current.player().getSelectedDeck().copyTo("PlayerDeckCopy");
         this.chaosBattle = this.enemy.getData().copyPlayerDeck && Current.player().isFantasyMode();
         this.AIExtras.clear();
         this.playerExtras.clear();

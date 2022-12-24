@@ -2,13 +2,19 @@ package forge.game.ability.effects;
 
 import java.util.List;
 
+import com.google.common.collect.Lists;
+import forge.game.GameEntity;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
+import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
+import forge.util.collect.FCollection;
 
 public class DamagePreventEffect extends DamagePreventEffectBase {
 
@@ -65,23 +71,37 @@ public class DamagePreventEffect extends DamagePreventEffectBase {
         Card host = sa.getHostCard();
         int numDam = AbilityUtils.calculateAmount(host, sa.getParam("Amount"), sa);
 
-        final List<GameObject> tgts = getTargets(sa);
+        List<GameObject> tgts = Lists.newArrayList();
+        if (sa.hasParam("CardChoices") || sa.hasParam("PlayerChoices")) { // choosing outside Defined/Targeted
+            // only for Whimsy, for more robust version see DamageDealEffect
+            FCollection<GameEntity> choices = new FCollection<>();
+            if (sa.hasParam("CardChoices")) {
+                choices.addAll(CardLists.getValidCards(host.getGame().getCardsIn(ZoneType.Battlefield),
+                        sa.getParam("CardChoices"), sa.getActivatingPlayer(), host, sa));
+            }
+            if (sa.hasParam("PlayerChoices")) {
+                choices.addAll(AbilityUtils.getDefinedPlayers(host, sa.getParam("PlayerChoices"), sa));
+            }
+            if (sa.hasParam("Random")) { // currently everything using Choices is random
+                GameObject random = Aggregates.random(choices);
+                tgts.add(random);
+                host.addRemembered(random); // remember random choices for log
+            }
+        } else {
+            tgts = getTargets(sa);
+        }
+
         final CardCollection untargetedCards = CardUtil.getRadiance(sa);
 
-        final boolean targeted = sa.usesTargeting();
-
         for (final GameObject o : tgts) {
-            numDam = targeted && sa.isDividedAsYouChoose() ? sa.getDividedValue(o) : numDam;
+            numDam = sa.usesTargeting() && sa.isDividedAsYouChoose() ? sa.getDividedValue(o) : numDam;
             if (o instanceof Card) {
                 final Card c = (Card) o;
-                if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
+                if (c.isInPlay()) {
                     addPreventNextDamage(sa, o, numDam);
                 }
             } else if (o instanceof Player) {
-                final Player p = (Player) o;
-                if (!targeted || p.canBeTargetedBy(sa)) {
-                    addPreventNextDamage(sa, o, numDam);
-                }
+                addPreventNextDamage(sa, o, numDam);
             }
         }
 
@@ -90,5 +110,5 @@ public class DamagePreventEffect extends DamagePreventEffectBase {
                 addPreventNextDamage(sa, c, numDam);
             }
         }
-    } // preventDamageResolve
+    }
 }

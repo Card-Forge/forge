@@ -27,7 +27,6 @@ f.write('Code=%s\n' % result.setcode)
 f.write('Date=%s\n' % d['releaseDate'])
 f.write('Name=%s\n' % d['name'])
 f.write('Code2=%s\n' % result.setcode)
-f.write('MciCode=%s\n' % result.setcode.lower())
 f.write('Type=%s\n\n' % d['type'])
 f.write('[cards]\n')
 

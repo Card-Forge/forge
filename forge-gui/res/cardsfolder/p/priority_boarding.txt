@@ -1,0 +1,11 @@
+Name:Priority Boarding
+ManaCost:2 R
+Types:Enchantment
+T:Mode$ RolledDie | TriggerZones$ Battlefield | Execute$ TrigReveal | ValidPlayer$ You | OptionalDecider$ You | ResolvedLimit$ 1 | TriggerDescription$ Whenever you roll a die, you may reveal the top card of your library. Do this only once each turn. Whenever you reveal a card with mana value less than the result this way, you may exile it. If you do, you may play it this turn.
+SVar:TrigReveal:DB$ PeekAndReveal | NoPeek$ True | ImprintRevealed$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | ConditionDefined$ Imprinted | ConditionPresent$ Card.cmcLTX | Optional$ True | Defined$ Imprinted | RememberChanged$ True | Origin$ Library | Destination$ Exile | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ STPlay | RememberObjects$ Remembered | SubAbility$ DBCleanup
+SVar:STPlay:Mode$ Continuous | MayPlay$ True | EffectZone$ Command | Affected$ Card.IsRemembered | AffectedZone$ Exile | Description$ You may play this card this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearImprinted$ True
+SVar:X:TriggerCount$Result
+Oracle:Whenever you roll a die, you may reveal the top card of your library. Do this only once each turn. Whenever you reveal a card with mana value less than the result this way, you may exile it. If you do, you may play it this turn.

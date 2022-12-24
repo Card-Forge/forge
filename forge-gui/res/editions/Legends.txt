@@ -3,7 +3,6 @@ Code=LEG
 Date=1994-06-01
 Name=Legends
 Code2=LG
-MciCode=lg
 Type=Expansion
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare

@@ -3,7 +3,6 @@ Code=ALA
 Date=2008-10-03
 Name=Shards of Alara
 Code2=ALA
-MciCode=ala
 Type=Expansion
 BoosterCovers=5
 Booster=10 Common:fromsheet("ALA cards"), 3 Uncommon:fromSheet("ALA cards"), 1 RareMythic:fromSheet("ALA cards"), 1 BasicLand:fromSheet("ALA cards")

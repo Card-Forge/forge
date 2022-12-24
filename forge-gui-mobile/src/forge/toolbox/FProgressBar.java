@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import forge.Forge;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.badlogic.gdx.graphics.Color;
@@ -15,7 +16,27 @@ import forge.gui.interfaces.IProgressBar;
 import forge.util.Utils;
 
 public class FProgressBar extends FDisplayObject implements IProgressBar {
-    public static Color BACK_COLOR, FORE_COLOR, SEL_BACK_COLOR, SEL_FORE_COLOR;
+    public static Color BACK_COLOR, FORE_COLOR, SEL_BACK_COLOR, SEL_FORE_COLOR, ADV_BACK_COLOR, ADV_FORE_COLOR, ADV_SEL_BACK_COLOR, ADV_SEL_FORE_COLOR;
+    public static Color getBackColor() {
+        if (Forge.isMobileAdventureMode)
+            return ADV_BACK_COLOR;
+        return BACK_COLOR;
+    }
+    public static Color getForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return ADV_FORE_COLOR;
+        return FORE_COLOR;
+    }
+    public static Color getSelBackColor() {
+        if (Forge.isMobileAdventureMode)
+            return ADV_SEL_BACK_COLOR;
+        return SEL_BACK_COLOR;
+    }
+    public static Color getSelForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return ADV_SEL_FORE_COLOR;
+        return SEL_FORE_COLOR;
+    }
     private static FSkinFont MSG_FONT;
     private static float TRAIL_INTERVAL = 5000; //complete one trail round every 5 seconds
 
@@ -129,14 +150,14 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
             float halfWidth = w / 2;
             float trailPercent = ((now - progressTrailStart) % TRAIL_INTERVAL) / TRAIL_INTERVAL;
             if (trailPercent == 0) {
-                g.fillGradientRect(BACK_COLOR, SEL_BACK_COLOR, false, 0, 0, w, h);
+                g.fillGradientRect(getBackColor(), getSelBackColor(), false, 0, 0, w, h);
                 selTextRegions.add(Pair.of(halfWidth, halfWidth));
             }
             else {
                 float trailX = trailPercent * w;
                 g.startClip(0, 0, w, h);
-                g.fillGradientRect(BACK_COLOR, SEL_BACK_COLOR, false, trailX - w, 0, w, h);
-                g.fillGradientRect(BACK_COLOR, SEL_BACK_COLOR, false, trailX, 0, w, h);
+                g.fillGradientRect(getBackColor(), getSelBackColor(), false, trailX - w, 0, w, h);
+                g.fillGradientRect(getBackColor(), getSelBackColor(), false, trailX, 0, w, h);
                 g.endClip();
                 if (trailX >= halfWidth) {
                     selTextRegions.add(Pair.of(trailX - halfWidth, halfWidth));
@@ -149,11 +170,11 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
             }
         }
         else {
-            g.fillRect(BACK_COLOR, 0, 0, w, h);
+            g.fillRect(getBackColor(), 0, 0, w, h);
 
             float selWidth = Math.round(w * (float)value / (float)maximum);
             if (selWidth > 0) {
-                g.fillRect(SEL_BACK_COLOR, 0, 0, selWidth, h);
+                g.fillRect(getSelBackColor(), 0, 0, selWidth, h);
                 selTextRegions.add(Pair.of(0f, selWidth));
             }
         }
@@ -163,13 +184,13 @@ public class FProgressBar extends FDisplayObject implements IProgressBar {
             MSG_FONT = FSkinFont.get(11);
         }
 
-        g.drawText(message, MSG_FONT, FORE_COLOR, 0, 0, w, h, false, Align.center, true);
+        g.drawText(message, MSG_FONT, getForeColor(), 0, 0, w, h, false, Align.center, true);
 
         //draw text using selection fore color in needed regions over top of regular text using clipping
-        if (!SEL_FORE_COLOR.equals(FORE_COLOR)) {
+        if (!getSelForeColor().equals(getForeColor())) {
             for (Pair<Float, Float> region : selTextRegions) {
                 g.startClip(region.getLeft(), 0, region.getRight(), h);
-                g.drawText(message, MSG_FONT, SEL_FORE_COLOR, 0, 0, w, h, false, Align.center, true);
+                g.drawText(message, MSG_FONT, getSelForeColor(), 0, 0, w, h, false, Align.center, true);
                 g.endClip();
             }
         }

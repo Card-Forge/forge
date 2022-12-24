@@ -20,6 +20,7 @@ package forge.game.spellability;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
@@ -37,6 +38,7 @@ import forge.game.cost.IndividualCostPaymentInstance;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbilityCastWithFlash;
+import forge.game.staticability.StaticAbilityNumLoyaltyAct;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -473,11 +475,11 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         }
 
         if (sa.isPwAbility()) {
-            final int initialLimit = c.hasKeyword("CARDNAME's loyalty abilities can be activated twice each turn rather than only once") ? 1 : 0;
-            final int limits = c.getAmountOfKeyword("May activate CARDNAME's loyalty abilities once") + initialLimit;
+            final int initialLimit = StaticAbilityNumLoyaltyAct.limitIncrease(c) ? 1 : 0;
+            final int limit = StaticAbilityNumLoyaltyAct.additionalActivations(c, sa) + initialLimit;
 
             int numActivates = c.getPlaneswalkerAbilityActivated();
-            if (numActivates > limits) {
+            if (numActivates > limit) {
                 return false;
             }
         }
@@ -540,6 +542,13 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             final int levelOperand = AbilityUtils.calculateAmount(c, this.getClassLevel(), sa);
 
             if (!Expressions.compare(level, this.getClassLevelOperator(), levelOperand)) {
+                return false;
+            }
+        }
+
+        if (this.getGameTypes().size() > 0) {
+            Predicate<GameType> pgt = type -> game.getRules().hasAppliedVariant(type);
+            if (!Iterables.any(getGameTypes(), pgt)) {
                 return false;
             }
         }

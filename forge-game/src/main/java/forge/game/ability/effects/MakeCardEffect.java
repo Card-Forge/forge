@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import forge.StaticData;
 import forge.card.ICardFace;
@@ -19,6 +20,10 @@ import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
 import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
+import forge.item.BoosterPack;
+import forge.item.IPaperCard;
+import forge.item.PaperCard;
+import forge.item.SealedProduct;
 import forge.util.Aggregates;
 import forge.util.CardTranslation;
 import forge.util.Localizer;
@@ -35,6 +40,8 @@ public class MakeCardEffect extends SpellAbilityEffect {
         for (final Player player : players) {
             final Game game = player.getGame();
 
+            List<ICardFace> faces = new ArrayList<>();
+            List<PaperCard> pack = null;
             List<String> names = Lists.newArrayList();
             if (sa.hasParam("Name")) {
                 final String n = sa.getParam("Name");
@@ -56,19 +63,25 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 }
             } else if (sa.hasParam("DefinedName")) {
                 final CardCollection def = AbilityUtils.getDefinedCards(source, sa.getParam("DefinedName"), sa);
-                if (def.size() > 0) {
-                    for (final Card c : def) {
-                        names.add(c.getName());
-                    }
+                for (final Card c : def) {
+                    names.add(c.getName());
                 }
             } else if (sa.hasParam("Spellbook")) {
                 List<String> spellbook = Arrays.asList(sa.getParam("Spellbook").split(","));
-                List<ICardFace> faces = new ArrayList<>();
                 for (String s : spellbook) {
                     // Cardnames that include "," must use ";" instead in Spellbook$ (i.e. Tovolar; Dire Overlord)
                     s = s.replace(";", ",");
                     faces.add(StaticData.instance().getCommonCards().getFaceByName(s));
                 }
+            } else if (sa.hasParam("Booster")) {
+                SealedProduct.Template booster = Aggregates.random(StaticData.instance().getBoosters());
+                pack = new BoosterPack(booster.getEdition(), booster).getCards();
+                for (PaperCard pc : pack) {
+                    faces.add(pc.getRules().getMainPart());
+                }
+            }
+
+            if (!faces.isEmpty()) {
                 if (sa.hasParam("AtRandom")) {
                     names.add(Aggregates.random(faces).getName());
                 } else {
@@ -77,6 +90,7 @@ public class MakeCardEffect extends SpellAbilityEffect {
                                     CardTranslation.getTranslatedName(source.getName()))));
                 }
             }
+
             final ZoneType zone = ZoneType.smartValueOf(sa.getParamOrDefault("Zone", "Library"));
             final int amount = sa.hasParam("Amount") ?
                     AbilityUtils.calculateAmount(source, sa.getParam("Amount"), sa) : 1;
@@ -87,14 +101,23 @@ public class MakeCardEffect extends SpellAbilityEffect {
                 int toMake = amount;
                 if (!name.equals("")) {
                     while (toMake > 0) {
-                        Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name),
-                                player);
+                        PaperCard pc;
+                        if (pack != null) {
+                            pc = Iterables.getLast(Iterables.filter(pack, IPaperCard.Predicates.name(name)));
+                        } else {
+                            pc = StaticData.instance().getCommonCards().getUniqueByName(name);
+                        }
+                        Card card = Card.fromPaperCard(pc, player);
+
                         if (sa.hasParam("TokenCard")) {
                             card.setTokenCard(true);
                         }
                         game.getAction().moveTo(ZoneType.None, card, sa, moveParams);
                         cards.add(card);
                         toMake--;
+                        if (sa.hasParam("Tapped")) {
+                            card.setTapped(true);
+                        }
                     }
                 }
             }
@@ -128,6 +151,10 @@ public class MakeCardEffect extends SpellAbilityEffect {
             }
             triggerList.triggerChangesZoneAll(game, sa);
             counterTable.replaceCounterEffect(game, sa, true);
+
+            if (sa.hasParam("Reveal")) {
+                game.getAction().reveal(cards, player, true);
+            }
 
             if (sa.hasParam("Conjure")) {
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);

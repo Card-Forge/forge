@@ -3,7 +3,6 @@ Code=ODY
 Date=2001-10-01
 Name=Odyssey
 Code2=OD
-MciCode=od
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare

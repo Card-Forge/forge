@@ -47,6 +47,23 @@ public enum FSkinProp {
     CLR_COMBAT_TARGETING_ARROW  (new int[] {70, 270}, PropType.COLOR),
     CLR_NORMAL_TARGETING_ARROW  (new int[] {70, 290}, PropType.COLOR),
     CLR_PWATTK_TARGETING_ARROW  (new int[] {70, 310}, PropType.COLOR),
+    //Adventure Colors
+    ADV_CLR_THEME                   (new int[] {250, 10}, PropType.ADV_BUTTONS),
+    ADV_CLR_BORDERS                 (new int[] {250, 30}, PropType.ADV_BUTTONS),
+    ADV_CLR_ZEBRA                   (new int[] {250, 50}, PropType.ADV_BUTTONS),
+    ADV_CLR_HOVER                   (new int[] {250, 70}, PropType.ADV_BUTTONS),
+    ADV_CLR_ACTIVE                  (new int[] {250, 90}, PropType.ADV_BUTTONS),
+    ADV_CLR_INACTIVE                (new int[] {250, 110}, PropType.ADV_BUTTONS),
+    ADV_CLR_TEXT                    (new int[] {250, 130}, PropType.ADV_BUTTONS),
+    ADV_CLR_PHASE_INACTIVE_ENABLED  (new int[] {250, 150}, PropType.ADV_BUTTONS),
+    ADV_CLR_PHASE_INACTIVE_DISABLED (new int[] {250, 170}, PropType.ADV_BUTTONS),
+    ADV_CLR_PHASE_ACTIVE_ENABLED    (new int[] {250, 190}, PropType.ADV_BUTTONS),
+    ADV_CLR_PHASE_ACTIVE_DISABLED   (new int[] {250, 210}, PropType.ADV_BUTTONS),
+    ADV_CLR_THEME2                  (new int[] {250, 230}, PropType.ADV_BUTTONS),
+    ADV_CLR_OVERLAY                 (new int[] {250, 250}, PropType.ADV_BUTTONS),
+    ADV_CLR_COMBAT_TARGETING_ARROW  (new int[] {250, 270}, PropType.ADV_BUTTONS),
+    ADV_CLR_NORMAL_TARGETING_ARROW  (new int[] {250, 290}, PropType.ADV_BUTTONS),
+    ADV_CLR_PWATTK_TARGETING_ARROW  (new int[] {250, 310}, PropType.ADV_BUTTONS),
 
     //zone images
     IMG_ZONE_HAND        (new int[] {280, 40, 40, 40}, PropType.IMAGE),
@@ -72,6 +89,7 @@ public enum FSkinProp {
     IMG_HDZONE_MANAPOOL  (new int[] {2, 6, 128, 128}, PropType.BUTTONS),
 
     IMG_ZONE_POISON      (new int[] {320, 80, 40, 40}, PropType.IMAGE),
+    IMG_TICKET           (new int[] {360, 80, 40, 40}, PropType.IMAGE),
 
     //mana images
     IMG_MANA_B         (new int[] {166, 2, 80, 80}, PropType.MANAICONS),
@@ -310,6 +328,9 @@ public enum FSkinProp {
 
     ICO_FAVICON         (new int[] {0, 640, 80, 80}, PropType.ICON),
     ICO_LOCK            (new int[] {620, 800, 48, 48}, PropType.ICON),
+    //reveal icons
+    ICO_SEE             (new int[] {568, 1520, 60, 40}, PropType.ICON),
+    ICO_UNSEE           (new int[] {568, 1560, 60, 40}, PropType.ICON),
 
     //layout images
     IMG_HANDLE  (new int[] {320, 450, 80, 20}, PropType.IMAGE),
@@ -382,6 +403,25 @@ public enum FSkinProp {
     IMG_BTN_DISABLED_LEFT   (new int[] {80, 200, 40, 40}, PropType.ICON),
     IMG_BTN_DISABLED_CENTER (new int[] {120, 200, 1, 40}, PropType.ICON),
     IMG_BTN_DISABLED_RIGHT  (new int[] {160, 200, 40, 40}, PropType.ICON),
+    //adv_buttons
+    IMG_ADV_BTN_UP_LEFT         (new int[] {0, 0, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_UP_CENTER       (new int[] {80, 0, 60, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_UP_RIGHT        (new int[] {160, 0, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_OVER_LEFT       (new int[] {0, 80, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_OVER_CENTER     (new int[] {80, 80, 60, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_OVER_RIGHT      (new int[] {160, 80, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_DOWN_LEFT       (new int[] {0, 160, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_DOWN_CENTER     (new int[] {80, 160, 60, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_DOWN_RIGHT      (new int[] {160, 160, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_FOCUS_LEFT      (new int[] {0, 240, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_FOCUS_CENTER    (new int[] {80, 240, 60, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_FOCUS_RIGHT     (new int[] {160, 240, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_TOGGLE_LEFT     (new int[] {0, 320, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_TOGGLE_CENTER   (new int[] {80, 320, 60, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_TOGGLE_RIGHT    (new int[] {160, 320, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_DISABLED_LEFT   (new int[] {0, 400, 80, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_DISABLED_CENTER (new int[] {80, 400, 60, 80}, PropType.ADV_BUTTONS),
+    IMG_ADV_BTN_DISABLED_RIGHT  (new int[] {160, 400, 80, 80}, PropType.ADV_BUTTONS),
     //hd buttons
     IMG_HDBTN_START_UP        (new int[] {2, 2, 588, 312}, PropType.BTNSTART),
     IMG_HDBTN_START_OVER      (new int[] {1183, 2, 588, 312}, PropType.BTNSTART),
@@ -431,53 +471,6 @@ public enum FSkinProp {
     IMG_DRAFTRANK_B (new int[] {2, 244, 240, 240}, PropType.DRAFTRANKS),
     IMG_DRAFTRANK_A (new int[] {244, 244, 240, 240}, PropType.DRAFTRANKS),
     IMG_DRAFTRANK_S (new int[] {2, 486, 240, 240}, PropType.DRAFTRANKS),
-
-    //FOR CARDBG
-    IMG_CARDBG_A (new int[] {2, 2, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_B (new int[] {343, 2, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_BG (new int[] {684, 2, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_BR (new int[] {1025, 2, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_C (new int[] {1366, 2, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_G (new int[] {2, 500, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_L (new int[] {343, 500, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_M (new int[] {684, 500, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_R (new int[] {1025, 500, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_RG (new int[] {1366, 500, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_U (new int[] {2, 998, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_UB (new int[] {343, 998, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_UG (new int[] {684, 998, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_UR (new int[] {1025, 998, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_V (new int[] {1366, 998, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_W (new int[] {2, 1496, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_WB (new int[] {343, 1496, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_WG (new int[] {684, 1496, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_WR (new int[] {1025, 1496, 339, 496}, PropType.CARDBG),
-    IMG_CARDBG_WU (new int[] {1366, 1496, 339, 496}, PropType.CARDBG),
-    //FOR PW BG
-    IMG_PWBG_B (new int[] {2, 1994, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_BG (new int[] {343, 1994, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_BR (new int[] {684, 1994, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_C (new int[] {1025, 1994, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_G (new int[] {1366, 1994, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_M (new int[] {2, 2492, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_R (new int[] {343, 2492, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_RG (new int[] {684, 2492, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_U (new int[] {1025, 2492, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_UB (new int[] {1366, 2492, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_UG (new int[] {2, 2990, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_UR (new int[] {343, 2990, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_W (new int[] {684, 2990, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_WB (new int[] {1025, 2990, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_WG (new int[] {1366, 2990, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_WR (new int[] {2, 3488, 339, 496}, PropType.CARDBG),
-    IMG_PWBG_WU (new int[] {343, 3488, 339, 496}, PropType.CARDBG),
-    //NYX OVERLAY
-    IMG_NYX_B (new int[] {684, 3488, 339, 248}, PropType.CARDBG),
-    IMG_NYX_G (new int[] {1025, 3488, 339, 248}, PropType.CARDBG),
-    IMG_NYX_M (new int[] {1366, 3488, 339, 248}, PropType.CARDBG),
-    IMG_NYX_R (new int[] {684, 3736, 339, 248}, PropType.CARDBG),
-    IMG_NYX_U (new int[] {1025, 3736, 339, 248}, PropType.CARDBG),
-    IMG_NYX_W (new int[] {1366, 3736, 339, 248}, PropType.CARDBG),
 
     IMG_FAV1    (new int[] {0, 0, 100, 100}, PropType.FAVICON),
     IMG_FAV2    (new int[] {100, 0, 100, 100}, PropType.FAVICON),
@@ -576,6 +569,7 @@ public enum FSkinProp {
         TROPHY,
         ABILITY,
         BORDERS,
+        ADV_BUTTONS,
         BUTTONS,
         BTNSTART,
         MANAICONS,
@@ -585,7 +579,6 @@ public enum FSkinProp {
         SETLOGO,
         WATERMARKS,
         DRAFTRANKS,
-        CARDBG,
         FAVICON
     }
 }

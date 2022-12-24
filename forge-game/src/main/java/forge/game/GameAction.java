@@ -37,6 +37,7 @@ import forge.game.mulligan.MulliganService;
 import forge.game.player.GameLossReason;
 import forge.game.player.Player;
 import forge.game.player.PlayerActionConfirmMode;
+import forge.game.player.PlayerCollection;
 import forge.game.player.PlayerPredicates;
 import forge.game.replacement.ReplacementEffect;
 import forge.game.replacement.ReplacementResult;
@@ -170,12 +171,6 @@ public class GameAction {
             }
         }
 
-        // LKI is only needed when something is moved from the battlefield.
-        // also it does messup with Blink Effects like Eldrazi Displacer
-        if (fromBattlefield && zoneTo != null && !zoneTo.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Flashback)) {
-            game.addChangeZoneLKIInfo(c);
-        }
-
         boolean suppress = !c.isToken() && zoneFrom.equals(zoneTo);
 
         Card copied = null;
@@ -252,6 +247,12 @@ public class GameAction {
 
             if (lastKnownInfo == null) {
                 lastKnownInfo = CardUtil.getLKICopy(c);
+            }
+
+            // LKI is only needed when something is moved from the battlefield.
+            // also it does messup with Blink Effects like Eldrazi Displacer
+            if (fromBattlefield && !zoneTo.is(ZoneType.Stack) && !zoneTo.is(ZoneType.Flashback)) {
+                game.addChangeZoneLKIInfo(lastKnownInfo);
             }
 
             // CR 707.12 casting of a card copy, don't copy it again
@@ -979,7 +980,6 @@ public class GameAction {
 
         // CR 603.6c other players LTB triggers should work
         if (!skipTrig) {
-            game.addChangeZoneLKIInfo(c);
             CardCollectionView lastBattlefield = game.getLastStateBattlefield();
             int idx = lastBattlefield.indexOf(c);
             Card lki = null;
@@ -989,6 +989,7 @@ public class GameAction {
             if (lki == null) {
                 lki = CardUtil.getLKICopy(c);
             }
+            game.addChangeZoneLKIInfo(lki);
             if (lki.isInPlay()) {
                 if (game.getCombat() != null) {
                     game.getCombat().saveLKI(lki);
@@ -1317,7 +1318,11 @@ public class GameAction {
             CardCollection desCreats = null;
             CardCollection unAttachList = new CardCollection();
             CardCollection sacrificeList = new CardCollection();
+            PlayerCollection spaceSculptors = new PlayerCollection();
             for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
+                if (c.hasKeyword(Keyword.SPACE_SCULPTOR)) {
+                    spaceSculptors.add(c.getController());
+                }
                 if (c.isCreature()) {
                     // Rule 704.5f - Put into grave (no regeneration) for toughness <= 0
                     if (c.getNetToughness() <= 0) {
@@ -1393,6 +1398,9 @@ public class GameAction {
             }
 
             for (Player p : game.getPlayers()) {
+                if (!spaceSculptors.isEmpty() && !spaceSculptors.contains(p)) {
+                    checkAgain |= stateBasedAction704_5u(p);
+                }
                 if (handleLegendRule(p, noRegCreats)) {
                     checkAgain = true;
                 }
@@ -1411,6 +1419,9 @@ public class GameAction {
                 if (handlePlaneswalkerRule(p, noRegCreats)) {
                     checkAgain = true;
                 }
+            }
+            for (Player p : spaceSculptors) {
+                checkAgain |= stateBasedAction704_5u(p);
             }
             // 704.5m World rule
             checkAgain |= handleWorldRule(noRegCreats);
@@ -1548,6 +1559,37 @@ public class GameAction {
             unAttachList.add(c);
             checkAgain = true;
         }
+        return checkAgain;
+    }
+
+    private boolean stateBasedAction704_5u(Player p) {
+        boolean checkAgain = false;
+
+        CardCollection toAssign = new CardCollection();
+
+        for (final Card c : p.getCreaturesInPlay().threadSafeIterable()) {
+            if (!c.hasSector()) {
+                toAssign.add(c);
+                if (!checkAgain) {
+                    checkAgain = true;
+                }
+            }
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        for (Card assignee : toAssign) { // probably would be nice for players to pick order of assigning?
+            String sector = p.getController().chooseSector(assignee, "Assign");
+            assignee.assignSector(sector);
+            if (sb.length() == 0) {
+                sb.append(p).append(" ").append(Localizer.getInstance().getMessage("lblAssigns")).append("\n");
+            }
+            String creature = CardTranslation.getTranslatedName(assignee.getName()) + " (" + assignee.getId() + ")";
+            sb.append(creature).append(" ").append(sector).append("\n");
+        }
+        if (sb.length() > 0) {
+            notifyOfValue(null, p, sb.toString(), p);
+        }
+
         return checkAgain;
     }
 
@@ -1722,13 +1764,13 @@ public class GameAction {
         boolean recheck = false;
 
         // Corner Case 1: Legendary with non legendary creature names
-        CardCollection nonLegendaryNames = new CardCollection(Iterables.filter(a, new Predicate<Card>() {
+        CardCollection nonLegendaryNames = CardLists.filter(a, new Predicate<Card>() {
             @Override
             public boolean apply(Card input) {
                 return input.hasNonLegendaryCreatureNames();
             }
 
-        }));
+        });
 
         Multimap<String, Card> uniqueLegends = Multimaps.index(a, CardPredicates.Accessors.fnGetNetName);
         CardCollection removed = new CardCollection();
@@ -1938,9 +1980,11 @@ public class GameAction {
 
     /** Delivers a message to all players. (use reveal to show Cards) */
     public void notifyOfValue(SpellAbility saSource, GameObject relatedTarget, String value, Player playerExcept) {
-        String name = CardTranslation.getTranslatedName(saSource.getHostCard().getName());
-        value = TextUtil.fastReplace(value, "CARDNAME", name);
-        value = TextUtil.fastReplace(value, "NICKNAME", Lang.getInstance().getNickName(name));
+        if (saSource != null) {
+            String name = CardTranslation.getTranslatedName(saSource.getHostCard().getName());
+            value = TextUtil.fastReplace(value, "CARDNAME", name);
+            value = TextUtil.fastReplace(value, "NICKNAME", Lang.getInstance().getNickName(name));
+        }
         for (Player p : game.getPlayers()) {
             if (playerExcept == p) continue;
             p.getController().notifyOfValue(saSource, relatedTarget, value);
@@ -2343,6 +2387,7 @@ public class GameAction {
                 // set up triggers (but not actually do them until later)
                 final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(p);
                 runParams.put(AbilityKey.ScryNum, numLookedAt);
+                runParams.put(AbilityKey.ScryBottom, toBottom == null ? 0 : toBottom.size());
                 game.getTriggerHandler().runTrigger(TriggerType.Scry, runParams, false);
             }
         }
@@ -2383,7 +2428,7 @@ public class GameAction {
                     }
                     if (c.isPlaneswalker()) {
                         int lethalPW = c.getCurrentLoyalty();
-                        // 120.10
+                        // CR 120.10
                         lethal = c.isCreature() ? Math.min(lethal, lethalPW) : lethalPW;
                     }
                     lethalDamage.put(c, lethal);
@@ -2395,6 +2440,7 @@ public class GameAction {
                 sourceLKI.getDamageHistory().registerDamage(e.getValue(), isCombat, sourceLKI, e.getKey(), lkiCache);
             }
 
+            // CR 702.15e
             if (sum > 0 && sourceLKI.hasKeyword(Keyword.LIFELINK)) {
                 sourceLKI.getController().gainLife(sum, sourceLKI, cause);
             }
@@ -2424,6 +2470,9 @@ public class GameAction {
                         cause.getHostCard().addRemembered(e);
                     }
                 }
+            }
+            if (cause.hasParam("RememberAmount")) {
+                cause.getHostCard().addRemembered(damageMap.totalAmount());
             }
         }
 

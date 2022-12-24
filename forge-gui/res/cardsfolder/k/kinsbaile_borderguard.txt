@@ -7,7 +7,7 @@ SVar:X:Count$Valid Kithkin.YouCtrl+Other
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME dies, create a 1/1 white Kithkin Soldier creature token for each counter on it.
 SVar:TrigToken:DB$ Token | TokenAmount$ Y | TokenScript$ w_1_1_kithkin_soldier | TokenOwner$ TriggeredCardController
 SVar:Y:TriggeredCard$CardCounters.ALL
-SVar:NeedsToPlay:X GE2
+SVar:NeedsToPlayVar:X GE2
 SVar:BuffedBy:Kithkin
 DeckHints:Type$Kithkin
 AI:RemoveDeck:Random

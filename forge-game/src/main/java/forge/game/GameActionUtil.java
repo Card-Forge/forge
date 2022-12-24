@@ -23,6 +23,7 @@ import java.util.Map;
 
 import com.google.common.collect.*;
 import forge.game.card.*;
+import forge.game.staticability.StaticAbility;
 import forge.util.Aggregates;
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,7 +31,6 @@ import forge.card.MagicColor;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaCostParser;
 import forge.game.ability.AbilityFactory;
-import forge.game.ability.AbilityUtils;
 import forge.game.ability.ApiType;
 import forge.game.card.CardPlayOption.PayManaCost;
 import forge.game.cost.Cost;
@@ -150,7 +150,7 @@ public final class GameActionUtil {
                 final StringBuilder sb = new StringBuilder(sa.getDescription());
                 if (!source.equals(host)) {
                     sb.append(" by ");
-                    if ((host.isImmutable()) && host.getEffectSource() != null) {
+                    if (host.isImmutable() && host.getEffectSource() != null) {
                         sb.append(host.getEffectSource());
                     } else {
                         sb.append(host);
@@ -446,6 +446,41 @@ public final class GameActionUtil {
             game.getAction().checkStaticAbilities(false, Sets.newHashSet(source), preList);
         }
 
+        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+            for (final StaticAbility stAb : ca.getStaticAbilities()) {
+                if (!stAb.getParam("Mode").equals("OptionalCost") || stAb.isSuppressed() || !stAb.checkConditions()) {
+                    continue;
+                }
+
+                if (!stAb.matchesValidParam("ValidCard", source)) {
+                    continue;
+                }
+                if (!stAb.matchesValidParam("ValidSA", sa)) {
+                    continue;
+                }
+                if (!stAb.matchesValidParam("Activator", sa.getActivatingPlayer())) {
+                    continue;
+                }
+
+                final Cost cost = new Cost(stAb.getParam("Cost"), false);
+                if (stAb.hasParam("ReduceColor")) {
+                    if (stAb.getParam("ReduceColor").equals("W")) {
+                        costs.add(new OptionalCostValue(OptionalCost.ReduceW, cost));
+                    } else if (stAb.getParam("ReduceColor").equals("U")) {
+                        costs.add(new OptionalCostValue(OptionalCost.ReduceU, cost));
+                    } else if (stAb.getParam("ReduceColor").equals("B")) {
+                        costs.add(new OptionalCostValue(OptionalCost.ReduceB, cost));
+                    } else if (stAb.getParam("ReduceColor").equals("R")) {
+                        costs.add(new OptionalCostValue(OptionalCost.ReduceR, cost));
+                    } else if (stAb.getParam("ReduceColor").equals("G")) {
+                        costs.add(new OptionalCostValue(OptionalCost.ReduceG, cost));
+                    }
+                } else {
+                    costs.add(new OptionalCostValue(OptionalCost.AltCost, cost));
+                }
+            }
+        }
+
         for (KeywordInterface inst : source.getKeywords()) {
             final String keyword = inst.getOriginal();
             if (keyword.startsWith("Buyback")) {
@@ -508,6 +543,9 @@ public final class GameActionUtil {
         final SpellAbility result = sa.copy();
         if (sa.hasParam("ReduceCost")) {
             result.putParam("ReduceCost", sa.getParam("ReduceCost"));
+        }
+        if (sa.hasParam("RaiseCost")) {
+            result.putParam("RaiseCost", sa.getParam("RaiseCost"));
         }
         for (OptionalCostValue v : list) {
             result.getPayCosts().add(v.getCost());
@@ -798,12 +836,13 @@ public final class GameActionUtil {
     }
 
     public static String generatedMana(final SpellAbility sa) {
-        int amount = sa.amountOfManaGenerated(false);
         AbilityManaPart abMana = sa.getManaPart();
         if (abMana == null) {
             return "";
         }
+
         String baseMana;
+        int amount = sa.amountOfManaGenerated(false);
 
         if (abMana.isComboMana()) {
             baseMana = abMana.getExpressChoice();
@@ -827,7 +866,7 @@ public final class GameActionUtil {
             // Mark SAs with subAbilities as undoable. These are generally things like damage, and other stuff
             // that's hard to track and remove
             sa.setUndoable(false);
-        } else if (sa.getParam("Amount") != null && amount != AbilityUtils.calculateAmount(sa.getHostCard(),sa.getParam("Amount"), sa)) {
+        } else if (sa.hasParam("Amount") && !StringUtils.isNumeric(sa.getParam("Amount"))) {
             sa.setUndoable(false);
         }
 
@@ -896,10 +935,13 @@ public final class GameActionUtil {
             // add back to where it came from, hopefully old state
             // skip GameAction
             oldCard.getZone().remove(oldCard);
-            fromZone.add(oldCard, zonePosition >= 0 ? Integer.valueOf(zonePosition) : null);
+            // in some rare cases the old position no longer exists (Panglacial Wurm + Selvala)
+            Integer newPosition = zonePosition >= 0 ? Math.min(Integer.valueOf(zonePosition), fromZone.size()) : null;
+            fromZone.add(oldCard, newPosition);
             ability.setHostCard(oldCard);
             ability.setXManaCostPaid(null);
             ability.setSpendPhyrexianMana(false);
+            ability.clearPipsToReduce();
             ability.setPaidLife(0);
             if (ability.hasParam("Announce")) {
                 for (final String aVar : ability.getParam("Announce").split(",")) {
@@ -919,6 +961,10 @@ public final class GameActionUtil {
             oldCard.setBackSide(false);
             oldCard.setState(oldCard.getFaceupCardStateName(), true);
             oldCard.unanimateBestow();
+
+            if (ability.hasParam("Prototype")) {
+                oldCard.removeCloneState(oldCard.getPrototypeTimestamp());
+            }
         }
 
         ability.clearTargets();

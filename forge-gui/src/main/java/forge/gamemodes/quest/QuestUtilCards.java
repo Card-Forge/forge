@@ -561,7 +561,7 @@ public final class QuestUtilCards {
      * @return the predicate
      */
     public static Predicate<CardEdition> isLegalInQuestFormat(final GameFormatQuest qFormat) {
-        return GameFormatQuest.Predicates.isLegalInFormatQuest(qFormat);
+        return GameFormatQuest.QPredicates.isLegalInFormatQuest(qFormat);
     }
 
 

@@ -4,7 +4,6 @@ Date=2018-01-19
 Name=Rivals of Ixalan
 Code2=RIX
 Type=Expansion
-MciCode=rix
 BoosterCovers=5
 Booster=10 Common:fromSheet("RIX cards"), 3 Uncommon:fromSheet("RIX cards"), 1 RareMythic:fromSheet("RIX cards"), 1 BasicLand:fromSheet("RIX Basic Lands")
 FatPack=10

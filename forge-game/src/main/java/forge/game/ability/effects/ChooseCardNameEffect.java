@@ -19,8 +19,8 @@ import forge.game.card.CardCollection;
 import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.util.Aggregates;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 public class ChooseCardNameEffect extends SpellAbilityEffect {
@@ -29,9 +29,7 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa)) {
-            sb.append(p).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
         sb.append("names a card.");
 
         return sb.toString();
@@ -40,9 +38,6 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getHostCard();
-
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         String valid = "Card";
         String validDesc = null;
@@ -68,102 +63,103 @@ public class ChooseCardNameEffect extends SpellAbilityEffect {
             }
         }
 
-        for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                String chosen = "";
-                //This section was used for Momir Avatar, which no longer uses it - commented out 7/28/2021
-                //if (randomChoice) {
-                    //String numericAmount = "X";
-                    //final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) :
-                    //    AbilityUtils.calculateAmount(host, numericAmount, sa);
-                    // Momir needs PaperCard
-                    //Collection<PaperCard> cards = StaticData.instance().getCommonCards().getUniqueCards();
-                    //Predicate<PaperCard> cpp = Predicates.and(
-                    //    Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES),
-                    //    Predicates.compose(CardRulesPredicates.cmc(ComparableOp.EQUALS, validAmount), PaperCard.FN_GET_RULES));
-                    //cards = Lists.newArrayList(Iterables.filter(cards, cpp));
-                    //if (!cards.isEmpty()) { chosen = Aggregates.random(cards).getName();
-                    //} else {
-                    //    chosen = "";
-                    //}
-                if (chooseFromDefined) {
-                    CardCollection choices = AbilityUtils.getDefinedCards(host, sa.getParam("ChooseFromDefinedCards"), sa);
-                    choices = CardLists.getValidCards(choices, valid, host.getController(), host, sa);
-                    List<ICardFace> faces = new ArrayList<>();
-                    // get Card
-                    for (final Card c : choices) {
-                        final CardRules rules = c.getRules();
-                        if (faces.contains(rules.getMainPart()))
-                            continue;
-                        faces.add(rules.getMainPart());
-                        // Alhammarret only allows Split for other faces
-                        if (rules.getSplitType() == CardSplitType.Split) {
-                            faces.add(rules.getOtherPart());
-                        }
+        for (final Player p : getTargetPlayers(sa)) {
+            if (!p.isInGame()) {
+                continue;
+            }
+            String chosen = "";
+            //This section was used for Momir Avatar, which no longer uses it - commented out 7/28/2021
+            //if (randomChoice) {
+            //String numericAmount = "X";
+            //final int validAmount = StringUtils.isNumeric(numericAmount) ? Integer.parseInt(numericAmount) :
+            //    AbilityUtils.calculateAmount(host, numericAmount, sa);
+            // Momir needs PaperCard
+            //Collection<PaperCard> cards = StaticData.instance().getCommonCards().getUniqueCards();
+            //Predicate<PaperCard> cpp = Predicates.and(
+            //    Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, PaperCard.FN_GET_RULES),
+            //    Predicates.compose(CardRulesPredicates.cmc(ComparableOp.EQUALS, validAmount), PaperCard.FN_GET_RULES));
+            //cards = Lists.newArrayList(Iterables.filter(cards, cpp));
+            //if (!cards.isEmpty()) { chosen = Aggregates.random(cards).getName();
+            //} else {
+            //    chosen = "";
+            //}
+            if (chooseFromDefined) {
+                CardCollection choices = AbilityUtils.getDefinedCards(host, sa.getParam("ChooseFromDefinedCards"), sa);
+                choices = CardLists.getValidCards(choices, valid, host.getController(), host, sa);
+                List<ICardFace> faces = new ArrayList<>();
+                // get Card
+                for (final Card c : choices) {
+                    final CardRules rules = c.getRules();
+                    if (faces.contains(rules.getMainPart()))
+                        continue;
+                    faces.add(rules.getMainPart());
+                    // Alhammarret only allows Split for other faces
+                    if (rules.getSplitType() == CardSplitType.Split) {
+                        faces.add(rules.getOtherPart());
                     }
-                    Collections.sort(faces);
-                    chosen = p.getController().chooseCardName(sa, faces, message);
-                } else if (chooseFromList) {
-                    String [] names = sa.getParam("ChooseFromList").split(",");
-                    List<ICardFace> faces = new ArrayList<>();
-                    for (String name : names) {
-                        // Cardnames that include "," must use ";" instead in ChooseFromList$ (i.e. Tovolar; Dire Overlord)
-                        name = name.replace(";", ",");
-                        faces.add(StaticData.instance().getCommonCards().getFaceByName(name));
-                    }
-                    if (randomChoice) {
-                        chosen = Aggregates.random(faces).getName();
-                    } else {
-                        chosen = p.getController().chooseCardName(sa, faces, message);
-                    }
-                } else if (chooseFromOneTimeList) {
-                    String [] names = sa.getParam("ChooseFromOneTimeList").split(",");
-                    List<ICardFace> faces = new ArrayList<>();
-                    for (String name : names) {
-                        faces.add(StaticData.instance().getCommonCards().getFaceByName(name));
-                    }
-                    chosen = p.getController().chooseCardName(sa, faces, message);
-
-                    // Remove chosen Name from List
-                    StringBuilder sb = new StringBuilder();
-                    for (String name : names) {
-                        if (chosen.equals(name)) continue;
-                        if (sb.length() > 0) sb.append(',');
-                        sb.append(name);
-                    }
-                    sa.putParam("ChooseFromOneTimeList", sb.toString());
+                }
+                Collections.sort(faces);
+                chosen = p.getController().chooseCardName(sa, faces, message);
+            } else if (chooseFromList) {
+                String [] names = sa.getParam("ChooseFromList").split(",");
+                List<ICardFace> faces = new ArrayList<>();
+                for (String name : names) {
+                    // Cardnames that include "," must use ";" instead in ChooseFromList$ (i.e. Tovolar; Dire Overlord)
+                    name = name.replace(";", ",");
+                    faces.add(StaticData.instance().getCommonCards().getFaceByName(name));
+                }
+                if (randomChoice) {
+                    chosen = Aggregates.random(faces).getName();
                 } else {
-                    // use CardFace because you might name a alternate names
-                    Predicate<ICardFace> cpp = Predicates.alwaysTrue();
-                    if (sa.hasParam("ValidCards")) {
-                        //Calculating/replacing this must happen before running valid in CardFacePredicates
-                        if (valid.contains("ManaCost=")) {
-                            if (valid.contains("ManaCost=Equipped")) {
-                                String s = host.getEquipping().getManaCost().getShortString();
-                                valid = valid.replace("=Equipped", s);
-                            } else if (valid.contains("ManaCost=Imprinted")) {
-                                String s = host.getImprintedCards().getFirst().getManaCost().getShortString();
-                                valid = valid.replace("=Imprinted", s);
-                            }
-                        }
-                        cpp = CardFacePredicates.valid(valid);
-                    }
-                    if (randomChoice) {
-                        final Iterable<ICardFace> cardsFromDb = StaticData.instance().getCommonCards().getAllFaces();
-                        final List<ICardFace> cards = Lists.newArrayList(Iterables.filter(cardsFromDb, cpp));
-                        chosen = Aggregates.random(cards).getName();
-                    } else {
-                        chosen = p.getController().chooseCardName(sa, cpp, valid, message);
-                    }
+                    chosen = p.getController().chooseCardName(sa, faces, message);
                 }
+            } else if (chooseFromOneTimeList) {
+                String [] names = sa.getParam("ChooseFromOneTimeList").split(",");
+                List<ICardFace> faces = new ArrayList<>();
+                for (String name : names) {
+                    faces.add(StaticData.instance().getCommonCards().getFaceByName(name));
+                }
+                chosen = p.getController().chooseCardName(sa, faces, message);
 
-                host.setNamedCard(chosen);
-                if (!randomChoice) {
-                    p.setNamedCard(chosen);
+                // Remove chosen Name from List
+                StringBuilder sb = new StringBuilder();
+                for (String name : names) {
+                    if (chosen.equals(name)) continue;
+                    if (sb.length() > 0) sb.append(',');
+                    sb.append(name);
                 }
-                if (sa.hasParam("NoteFor")) {
-                    p.addNoteForName(sa.getParam("NoteFor"), "Name:" + chosen);
+                sa.putParam("ChooseFromOneTimeList", sb.toString());
+            } else {
+                // use CardFace because you might name a alternate names
+                Predicate<ICardFace> cpp = Predicates.alwaysTrue();
+                if (sa.hasParam("ValidCards")) {
+                    //Calculating/replacing this must happen before running valid in CardFacePredicates
+                    if (valid.contains("ManaCost=")) {
+                        if (valid.contains("ManaCost=Equipped")) {
+                            String s = host.getEquipping().getManaCost().getShortString();
+                            valid = valid.replace("=Equipped", s);
+                        } else if (valid.contains("ManaCost=Imprinted")) {
+                            String s = host.getImprintedCards().getFirst().getManaCost().getShortString();
+                            valid = valid.replace("=Imprinted", s);
+                        }
+                    }
+                    cpp = CardFacePredicates.valid(valid);
                 }
+                if (randomChoice) {
+                    final Iterable<ICardFace> cardsFromDb = StaticData.instance().getCommonCards().getAllFaces();
+                    final List<ICardFace> cards = Lists.newArrayList(Iterables.filter(cardsFromDb, cpp));
+                    chosen = Aggregates.random(cards).getName();
+                } else {
+                    chosen = p.getController().chooseCardName(sa, cpp, valid, message);
+                }
+            }
+
+            host.setNamedCard(chosen);
+            if (!randomChoice) {
+                p.setNamedCard(chosen);
+            }
+            if (sa.hasParam("NoteFor")) {
+                p.addNoteForName(sa.getParam("NoteFor"), "Name:" + chosen);
             }
         }
     }

@@ -43,6 +43,7 @@ public enum TrackableProperty {
     SplitCard(TrackableTypes.BooleanType),
     MergedCards(TrackableTypes.StringType),
     MergedCardsCollection(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
+    RevealedCardsCollection(TrackableTypes.CardViewCollectionType, FreezeMode.IgnoresFreeze),
     PaperCardBackup(TrackableTypes.IPaperCardType),
 
     Attacking(TrackableTypes.BooleanType),
@@ -68,6 +69,8 @@ public enum TrackableProperty {
     ChosenDirection(TrackableTypes.EnumType(Direction.class)),
     ChosenEvenOdd(TrackableTypes.EnumType(EvenOdd.class)),
     ChosenMode(TrackableTypes.StringType),
+    ChosenSector(TrackableTypes.StringType),
+    Sector(TrackableTypes.StringType),
     ClassLevel(TrackableTypes.IntegerType),
     CurrentRoom(TrackableTypes.StringType),
     Intensity(TrackableTypes.IntegerType),
@@ -276,6 +279,7 @@ public enum TrackableProperty {
     TrackableProperty(TrackableType<?> type0) {
         this(type0, FreezeMode.RespectsFreeze);
     }
+
     TrackableProperty(TrackableType<?> type0, FreezeMode freezeMode0) {
         type = type0;
         freezeMode = freezeMode0;
@@ -291,7 +295,7 @@ public enum TrackableProperty {
 
     @SuppressWarnings("unchecked")
     public <T> void updateObjLookup(Tracker tracker, T newObj) {
-        ((TrackableType<T>)type).updateObjLookup(tracker, newObj);
+        ((TrackableType<T>) type).updateObjLookup(tracker, newObj);
     }
 
     public void copyChangedProps(TrackableObject from, TrackableObject to) {
@@ -300,15 +304,17 @@ public enum TrackableProperty {
 
     @SuppressWarnings("unchecked")
     public <T> T getDefaultValue() {
-        return ((TrackableType<T>)type).getDefaultValue();
+        return ((TrackableType<T>) type).getDefaultValue();
     }
+
     @SuppressWarnings("unchecked")
     public <T> T deserialize(TrackableDeserializer td, T oldValue) {
-        return ((TrackableType<T>)type).deserialize(td, oldValue);
+        return ((TrackableType<T>) type).deserialize(td, oldValue);
     }
+
     @SuppressWarnings("unchecked")
     public <T> void serialize(TrackableSerializer ts, T value) {
-        ((TrackableType<T>)type).serialize(ts, value);
+        ((TrackableType<T>) type).serialize(ts, value);
     }
 
     //cache array of all properties to allow quick lookup by ordinal,
@@ -316,9 +322,11 @@ public enum TrackableProperty {
     //we don't need to worry about the values changing since we will ensure
     //both players are on the same version of Forge before allowing them to connect
     private static TrackableProperty[] props = values();
+
     public static int serialize(TrackableProperty prop) {
         return prop.ordinal();
     }
+
     public static TrackableProperty deserialize(int ordinal) {
         return props[ordinal];
     }

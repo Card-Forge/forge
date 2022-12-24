@@ -3,81 +3,291 @@ Code=BRO
 Date=2022-11-18
 Name=The Brothers' War
 Code2=BRO
-MciCode=bro
 Type=Expansion
+BoosterCovers=3
+Booster=9 Common:fromsheet("BRO cards"), 3 Uncommon:fromSheet("BRO cards"), 1 RareMythic:fromSheet("BRO cards"), 1 fromSheet("BRO lands"), 1 fromSheet("BRR cards")
+Prerelease=6 Boosters, 1 RareMythic+
+BoosterBox=36
 ScryfallCode=BRO
 
 [cards]
+1 C Aeronaut Cavalry @Lorenzo Mastroianni
+2 C Airlift Chaplain @Caroline Gariba
+3 C Ambush Paratrooper @Vladimir Krisetskiy
 4 U Calamity's Wake @Slawomir Maniak
+5 C Deadly Riposte @Olena Richards
 6 C Disenchant @Richard Kane Ferguson
+7 U Great Desert Prospector @Nestor Ossandon Leal
 8 M In the Trenches @Daarken
 9 R Kayla's Command @Dominik Mayer
 10 R Kayla's Reconstruction @Nicholas Elias
+11 U Lay Down Arms @Liiga Smilshkalne
 12 R Loran of the Third Path @Steven Belledin
+13 U Loran, Disciple of History @Cristi Balanescu
+14 C Loran's Escape @Matt Stewart
+15 U Mass Production @Rémi Jacquot
+16 U Meticulous Excavation @Lucas Graciano
+17 C Military Discipline @Francisco Miyara
+18 M Myrel, Shield of Argive @Ryan Pancoast
+19 C Phalanx Vanguard @Izzy
+20 C Powerstone Engineer @Scott Murphy
+21 C Prison Sentence @Valera Lutfullina
+22 C Recommission @Andrew Mar
 23 U Recruitment Officer @Johan Grenier
 24 U Repair and Recharge @Ben Wootten
+25 R Siege Veteran @Darren Tan
 26 R Soul Partition @Kekai Kotaki
+27 U Static Net @Josh Hass
 28 C Survivor of Korlis @Julia Metzger
+29 U Thopter Architect @Michal Ivan
 30 R Tocasia's Welcome @Johan Grenier
+31 C Union of the Third Path @Robin Olausson
+32 C Warlord's Elite @Joshua Raphael
 33 C Yotian Medic @Aaron J. Riley
+34 R Autonomous Assembler @Slawomir Maniak
+35 U Combat Thresher @Victor Harmatiuk
+36 M Platoon Dispenser @Leon Tukker
 37 C Scrapwork Cohort @Caio Monteiro
+38 R Steel Seraph @Denys Tsiperko
 39 C Tocasia's Onulet @Eddie Mendoza
 40 M Urza's Sylex @Joseph Meehan
+41 C Veteran's Powerblade @Alexandre Honoré
+42 U Yotian Frontliner @Jehan Choo
+43 C Air Marshal @Johan Grenier
+44 C Curate @Ryan Valle
+45 U Defabricate @Uriah Voth
+46 C Desynchronize @Rovina Cai
 47 R Drafna, Founder of Lat-Nam @Lie Setiawan
+48 C Fallaji Archaeologist @Caroline Gariba
+49 U Flow of Knowledge @Tuan Duong Chu
+50 U Forging the Anchor @Liiga Smilshkalne
 51 R Hurkyl, Master Wizard @Randy Vargas
 52 R Hurkyl's Final Meditation @Nephelomancer
+53 U Involuntary Cooldown @Eelis Kyttanen
+54 U Keeper of the Cadence @Alix Branwyn
+55 C Koilos Roc @Antonio José Manzanedo
+56 C Lat-Nam Adept @Zara Alfonso
+57 C Machine Over Matter @Tuan Duong Chu
+58 C Mightstone's Animation @Igor Kieryluk
+59 M One with the Multiverse @Liiga Smilshkalne
+60 C Retrieval Agent @Vladimir Krisetskiy
+61 C Scatter Ray @Awanqi (Angela Wang)
+62 R Skystrike Officer @Diego Gisbert
 63 U Splitting the Powerstone @Campbell White
 64 C Stern Lesson @Lie Setiawan
+65 U Take Flight @Joshua Cairos
 66 M Teferi, Temporal Pilgrim @Magali Villeneuve
 67 C Third Path Savant @Artur Treffner
+68 U Thopter Mechanic @Joshua Raphael
 69 U Urza, Powerstone Prodigy @Donato Giancola
 70 R Urza's Command @Dominik Mayer
+71 C Urza's Rebuff @Josu Hernaiz
+72 C Weakstone's Subjugation @Igor Kieryluk
+73 C Wing Commando @David Auden Nash
+74 U Zephyr Sentinel @Inkognit
 75 M Arcane Proxy @Kekai Kotaki
+76 C Coastal Bulwark @Artur Nakhodkin
+77 C Combat Courier @Alix Branwyn
 78 C Depth Charge Colossus @Daniel Ljunggren
+79 U Hulking Metamorph @Diego Gisbert
+80 U Spotter Thopter @Michael Phillippi
 81 M Surge Engine @Daarken
 82 R The Temporal Anchor @Kekai Kotaki
+83 R Terisian Mindbreaker @Steve Prescott
+84 R Ashnod, Flesh Mechanist @Howard Lyon
+85 C Ashnod's Intervention @Miguel Mercado
+86 U Battlefield Butcher @Lucas Graciano
+87 C Carrion Locust @Nino Is
+88 U Corrupt @Julie Dillon
+89 R Diabolic Intent @Dan Scott
+90 U Disciples of Gix @Peter Polach
+91 C Disfigure @Svetlin Velinov
+92 U Dreams of Steel and Oil @Jeremy Wilson
+93 C Emergency Weld @Raoul Vitale
+94 R Fateful Handoff @Gaboleps
 95 M Gix, Yawgmoth Praetor @Anna Podedworna
+96 C Gix's Caress @Ignatius Budi
+97 R Gix's Command @Dominik Mayer
+98 C Gixian Infiltrator @Peter Polach
+99 R Gixian Puppeteer @Bastien L. Deharme
+100 C Gixian Skullflayer @Anna Pavleeva
+101 U Gnawing Vermin @Raoul Vitale
 102 U Go for the Throat @Kristina Carroll
+103 U Gruesome Realization @Julie Dillon
+104 U Gurgling Anointer @David Astruga
+105 R Hostile Negotiations @David Auden Nash
+106 C Kill-Zone Acrobat @Justine Cruz
+107 R Misery's Shadow @Igor Kieryluk
+108 C Moment of Defiance @Inkognit
+109 U No One Left Behind @Chris Cold
 110 C Overwhelming Remorse @Ryan Valle
+111 R Painful Quandary @David Palumbo
+112 C Powerstone Fracture @Campbell White
+113 C Ravenous Gigamole @Milivoj Ćeran
+114 U Thran Vigil @Jinho Bae
+115 C Thraxodemon @Nino Is
+116 C Trench Stalker @Nino Vecia
 117 U Ashnod's Harvester @Halil Ural
-118 C Clay Revenant @Filip Burburan
+118 C Clay Revenant @Filipe Pagliuso
+119 C Dredging Claw @Artur Nakhodkin
+120 C Goring Warplow @Wayne Reynolds
 121 M Phyrexian Fleshgorger @Steve Prescott
+122 R Razorlash Transmogrant @Kekai Kotaki
+123 C Scrapwork Rager @Michal Ivan
+124 U Transmogrant Altar @Dan Scott
 125 R Transmogrant's Crown @Nino Vecia
+126 U Arms Race @Leesha Hannigan
 127 C Bitter Reunion @Jake Murray
+128 R Brotherhood's End @Bryan Sola
+129 C Conscripted Infantry @Noah Thatcher
+130 M Draconic Destiny @Justin Hernandez & Alexis Hernandez
+131 C Dwarven Forge-Chanter @Bartlomiej Gawel
+132 C Excavation Explosion @Campbell White
 133 U The Fall of Kroog @David Auden Nash
+134 C Fallaji Chaindancer @Filipe Pagliuso
 135 R Feldon, Ronom Excavator @Howard Lyon
+136 U Giant Cindermaw @Edgar Sánchez Hidalgo
+137 C Goblin Blast-Runner @Joseph Weston
+138 U Horned Stoneseeker @Eric Velhagen
+139 R Mechanized Warfare @Robin Olausson
 140 U Mishra, Excavation Prodigy @Donato Giancola
 141 R Mishra's Command @Dominik Mayer
+142 C Mishra's Domination @Fajareka Setiawan
+143 C Mishra's Onslaught @Josu Hernaiz
 144 U Monastery Swiftspear @Gabor Szikszai
+145 U Obliterating Bolt @Campbell White
+146 R Over the Top @Cristi Balanescu
+147 C Penregon Strongbull @Michael Phillippi
+148 U Pyrrhic Blast @Raf Kayupov
+149 C Raze to the Ground @Joshua Raphael
+150 C Roc Hunter @Ina Wong
+151 U Sardian Cliffstomper @Joseph Weston
+152 C Sibling Rivalry @Rovina Cai
+153 C Tomakul Scrapsmith @Caio Monteiro
+154 R Tyrant of Kher Ridges @Karl Kopinski
+155 C Unleash Shell @Campbell White
+156 R Visions of Phyrexia @Dominik Mayer
+157 C Whirling Strike @Aaron J. Riley
+158 C Blitz Automaton @Simon Dominic
+159 U Fallaji Dragon Engine @Filip Burburan
+160 U Heavyweight Demolisher @Svetlin Velinov
 161 C Mishra's Juggernaut @Steve Prescott
+162 U Mishra's Research Desk @Matt Stewart
 163 R Phyrexian Dragon Engine @Chris Rahn
+164 C Scrapwork Mutt @Sidharth Chaturvedi
 165 M Skitterbeam Battalion @Leon Tukker
+166 U Alloy Animist @Kim Sokol
 167 C Argothian Opportunist @Ina Wong
+168 C Argothian Sprite @Rudy Siswanto
+169 U Audacity @Rudy Siswanto
+170 M Awaken the Woods @Bryan Sola
+171 U Blanchwood Armor @Manuel Castañón
+172 C Blanchwood Prowler @Justine Cruz
+173 C Burrowing Razormaw @Uriah Voth
+174 U Bushwhack @Artur Nakhodkin
+175 C Citanul Stalwart @Alexandr Leskinen
+176 C Epic Confrontation @Lucas Graciano
 177 R Fade from History @Alessandra Pisano
+178 U Fallaji Excavation @Eilene Cherie
+179 R Fauna Shaman @Nicholas Elias
+180 C Fog of War @Josu Hernaiz
 181 U Gaea's Courser @Michele Giorgi
+182 C Gaea's Gift @Olivier Bernard
 183 C Giant Growth @Raoul Vitale
+184 C Gnarlroot Pallbearer @Nino Is
+185 R Gwenna, Eyes of Gaea @Steve Prescott
+186 C Hoarding Recluse @Jorge Jacinto
+187 U Obstinate Baloth @Chris Rahn
+188 C Perimeter Patrol @Edgar Sánchez Hidalgo
+189 U Sarinth Steelseeker @Olivier Bernard
+190 C Shoot Down @Lius Lasahido
+191 C Tawnos's Tinkering @Alex Stone
+192 R Teething Wurmlet @Jesper Ejsing
 193 M Titania, Voice of Gaea @Cristi Balanescu
+194 R Titania's Command @Dominik Mayer
+195 C Tomakul Honor Guard @Francisco Miyara
+196 C Wasteful Harvest @Alex Stone
+197 C Boulderbranch Golem @Dan Scott
+198 U Cradle Clearcutter @Daarken
+199 U Haywire Mite @Izzy
+200 U Iron-Craw Crusher @Filip Burburan
+201 U Mask of the Jadecrafter @Alessandra Pisano
+202 R Perennial Behemoth @Wayne Reynolds
+203 M Rootwire Amalgam @Leon Tukker
 204 C Rust Goliath @Nicholas Gregory
+205 R Simian Simulacrum @Randy Vargas
+206 U Arbalest Engineers @Marta Nael
+207 U Battery Bearer @Edgar Sánchez Hidalgo
+208 R Deathbloom Ritualist @Taras Susak
+209 U Evangel of Synthesis @Denman Rooke
+210 U Fallaji Vanguard @Joshua Cairos
 211 R Hajar, Loyal Bodyguard @Joshua Raphael
 212 R Harbin, Vanguard Aviator @Kieran Yanner
+213 U Hero of the Dunes @Taras Susak
+214 U Junkyard Genius @Rémi Jacquot
+215 R Legions to Ashes @Artur Nakhodkin
 216 M Mishra, Claimed by Gix @Chris Rahn
 217 R Mishra, Tamer of Mak Fawa @Darren Tan
 218 R Queen Kayla bin-Kroog @Cristi Balanescu
+219 M Saheeli, Filigree Master @Aurore Folny
+220 M Sarinth Greatwurm @Jesper Ejsing
+221 U Skyfisher Spider @Henry Peters
 222 R Tawnos, the Toymaker @Livia Prima
+223 U Third Path Iconoclast @Manuel Castañón
+224 R Tocasia, Dig Site Mentor @Lie Setiawan
 225 M Urza, Lord Protector @Ryan Pancoast
 226 R Urza, Prince of Kroog @Joshua Raphael
 227 U Yotian Dissident @Steve Prescott
+228 U Yotian Tactician @Fariba Khamseh
+229 M Bladecoil Serpent @Joshua Cairos
+230 M Clay Champion @Leon Tukker
+231 C Aeronaut's Wings @Leon Tukker
+232 U Argivian Avenger @Milivoj Ćeran
+233 M Cityscape Leveler @Leon Tukker
+234 C Energy Refractor @Maria Poliakova
+235 C Goblin Firebomb @Noah Thatcher
+236 U Levitating Statue @Artur Nakhodkin
+237 R Liberator, Urza's Battlethopter @Ekaterina Burmak
 238 R The Mightstone and Weakstone @Ryan Pancoast
+239 C Mine Worker @Raoul Vitale
+240 M Portal to Phyrexia @Svetlin Velinov
+241 C Power Plant Worker @Aaron Miller
+242 U Reconstructed Thopter @Dan Scott
+243 U Slagstone Refinery @Victor Harmatiuk
+244 U Spectrum Sentinel @Olivier Bernard
+245 R The Stasis Coffin @Artur Nakhodkin
+246 U Steel Exemplar @Kekai Kotaki
 247 R The Stone Brain @Irina Nordsol
+248 C Stone Retrieval Unit @Andreas Zafiratos
+249 U Su-Chi Cave Guard @Dmitry Burmak
+250 C Supply Drop @Brian Valeza
+251 C Swiftgear Drake @Zoltan Boros
+252 U Symmetry Matrix @Slawomir Maniak
+253 U Thran Power Suit @Raf Kayupov
 254 R Thran Spider @Joshua Cairos
+255 C Tower Worker @Gaboleps
 256 R Argoth, Sanctum of Nature @Cristi Balanescu
 257 R Battlefield Forge @Thomas Stoop
 258 R Blast Zone @Jorge Jacinto
 259 R Brushland @Thomas Stoop
+260 U Demolition Field @Kamila Szutenberg
+261 C Evolving Wilds @Sam Burley
+262 R Fortified Beachhead @Christian Dimitrov
 263 R Hall of Tagsin @Christian Dimitrov
 264 R Llanowar Wastes @Lucas Graciano
 265 R Mishra's Foundry @Leon Tukker
+266 C Tocasia's Dig Site @Nadia Hurianova
 267 R Underground River @Volkan Baǵa
+268 L Plains @Raymond Bonilla
+269 L Plains @Jorge Jacinto
+270 L Island @Eddie Mendoza
+271 L Island @Lucas Staniec
+272 L Swamp @Sam Burley
+273 L Swamp @Robin Olausson
+274 L Mountain @Bruce Brenneise
+275 L Mountain @Victor Harmatiuk
+276 L Forest @Jonas De Ro
+277 L Forest @Piotr Dura
 278 L Plains @Sergey Glushakov
 279 L Plains @Robin Olausson
 280 L Island @Robin Olausson
@@ -88,17 +298,145 @@ ScryfallCode=BRO
 285 L Mountain @Victor Harmatiuk
 286 L Forest @Jonas De Ro
 287 L Forest @Piotr Dura
-292 M Teferi, Temporal Pilgrim @Cosmin Podar
+
+[jumpstart]
+288 R Rescue Retriever @Jesper Ejsing
+289 R Geology Enthusiast @Fajareka Setiawan
+290 R Terror Ballista @Leon Tukker
+291 R Artificer's Dragon @Leon Tukker
+292 R Woodcaller Automaton @Ryan Pancoast
+373 R Rescue Retriever @Jesper Ejsing
+374 R Geology Enthusiast @Fajareka Setiawan
+375 R Terror Ballista @Leon Tukker
+376 R Artificer's Dragon @Leon Tukker
+377 R Woodcaller Automaton @Ryan Pancoast
+
+[borderless]
+293 M Teferi, Temporal Pilgrim @Cosmin Podar
+294 M Saheeli, Filigree Master @Cosmin Podar
 295 R Mishra, Tamer of Mak Fawa @Cosmin Podar
 296 R Urza, Prince of Kroog @Cosmin Podar
 297 R Battlefield Forge @Rob Alexander
 298 R Brushland @Rob Alexander
 299 R Llanowar Wastes @Rob Alexander
 300 R Underground River @Rob Alexander
+
+[extended art]
+301 M In the Trenches @Daarken
+302 R Kayla's Command @Dominik Mayer
+303 R Kayla's Reconstruction @Nicholas Elias
+304 R Loran of the Third Path @Steven Belledin
+305 M Myrel, Shield of Argive @Ryan Pancoast
+306 R Siege Veteran @Darren Tan
+307 R Soul Partition @Kekai Kotaki
+308 R Tocasia's Welcome @Johan Grenier
+309 R Autonomous Assembler @Slawomir Maniak
+310 M Platoon Dispenser @Leon Tukker
+311 R Steel Seraph @Denys Tsiperko
+312 M Urza's Sylex @Joseph Meehan
+313 R Drafna, Founder of Lat-Nam @Lie Setiawan
 314 M Hurkyl, Master Wizard @Randy Vargas
+315 R Hurkyl's Final Meditation @Nephelomancer
+316 M One with the Multiverse @Liiga Smilshkalne
+317 R Skystrike Officer @Diego Gisbert
+318 R Urza's Command @Dominik Mayer
+319 M Arcane Proxy @Kekai Kotaki
 320 M Surge Engine @Daarken
+321 R The Temporal Anchor @Kekai Kotaki
+322 R Terisian Mindbreaker @Steve Prescott
+323 R Ashnod, Flesh Mechanist @Howard Lyon
+324 R Diabolic Intent @Dan Scott
+325 R Fateful Handoff @Gaboleps
+326 M Gix, Yawgmoth Praetor @Anna Podedworna
+327 R Gix's Command @Dominik Mayer
+328 R Gixian Puppeteer @Bastien L. Deharme
+329 R Hostile Negotiations @David Auden Nash
+330 R Misery's Shadow @Igor Kieryluk
+331 R Painful Quandary @David Palumbo
 332 M Phyrexian Fleshgorger @Steve Prescott
+333 R Razorlash Transmogrant @Kekai Kotaki
+334 R Transmogrant's Crown @Nino Vecia
+335 R Brotherhood's End @Bryan Sola
+336 M Draconic Destiny @Justin Hernandez & Alexis Hernandez
+337 R Feldon, Ronom Excavator @Howard Lyon
+338 R Mechanized Warfare @Robin Olausson
+339 R Mishra's Command @Dominik Mayer
+340 R Over the Top @Cristi Balanescu
+341 R Tyrant of Kher Ridges @Karl Kopinski
+342 R Visions of Phyrexia @Dominik Mayer
+343 M Skitterbeam Battalion @Leon Tukker
+344 M Awaken the Woods @Bryan Sola
+345 R Fade from History @Alessandra Pisano
+346 R Fauna Shaman @Nicholas Elias
+347 R Gwenna, Eyes of Gaea @Steve Prescott
+348 R Teething Wurmlet @Jesper Ejsing
+349 R Titania's Command @Dominik Mayer
+350 R Perennial Behemoth @Wayne Reynolds
+351 M Rootwire Amalgam @Leon Tukker
+352 R Simian Simulacrum @Randy Vargas
+353 R Deathbloom Ritualist @Taras Susak
+354 R Hajar, Loyal Bodyguard @Joshua Raphael
+355 R Harbin, Vanguard Aviator @Kieran Yanner
+356 R Legions to Ashes @Artur Nakhodkin
 357 R Queen Kayla bin-Kroog @Cristi Balanescu
+358 M Sarinth Greatwurm @Jesper Ejsing
+359 R Tawnos, the Toymaker @Livia Prima
+360 R Tocasia, Dig Site Mentor @Lie Setiawan
+361 M Bladecoil Serpent @Joshua Cairos
+362 M Clay Champion @Leon Tukker
+363 M Cityscape Leveler @Leon Tukker
+364 R Liberator, Urza's Battlethopter @Ekaterina Burmak
+365 M Portal to Phyrexia @Svetlin Velinov
+366 R The Stasis Coffin @Artur Nakhodkin
+367 R The Stone Brain @Irina Nordsol
+368 R Thran Spider @Joshua Cairos
+369 R Blast Zone @Jorge Jacinto
+370 R Fortified Beachhead @Christian Dimitrov
+371 R Hall of Tagsin @Christian Dimitrov
 372 R Mishra's Foundry @Leon Tukker
+
+[buy a box]
 378 R Mishra's Foundry @Leon Tukker
+
+[promo]
 379 R Queen Kayla bin-Kroog @Howard Lyon
+380 U Lay Down Arms @Liiga Smilshkalne
+381 U Flow of Knowledge @Tuan Duong Chu
+382 U Corrupt @Julie Dillon
+383 U Sardian Cliffstomper @Joseph Weston
+384 U Blanchwood Armor @Manuel Castañón
+
+[lands]
+2 Plains|BRO|1
+2 Plains|BRO|2
+1 Plains|BRO|3
+1 Plains|BRO|4
+2 Island|BRO|1
+2 Island|BRO|2
+1 Island|BRO|3
+1 Island|BRO|4
+2 Swamp|BRO|1
+2 Swamp|BRO|2
+1 Swamp|BRO|3
+1 Swamp|BRO|4
+2 Mountain|BRO|1
+2 Mountain|BRO|2
+1 Mountain|BRO|3
+1 Mountain|BRO|4
+2 Forest|BRO|1
+2 Forest|BRO|2
+1 Forest|BRO|3
+1 Forest|BRO|4
+
+[tokens]
+c_0_0_a_construct_total_artifacts
+c_1_1_a_soldier
+c_1_1_a_soldier
+c_1_1_a_thopter_flying
+c_2_2_a_construct
+c_3_3_a_zombie
+c_a_powerstone
+c_x_x_a_golem
+g_1_1_forest_dryad_land
+g_2_2_bear
+u_2_2_spirit_vigilance_drawcounter

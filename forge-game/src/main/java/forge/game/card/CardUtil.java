@@ -239,25 +239,27 @@ public final class CardUtil {
         newCopy.setCounters(Maps.newHashMap(in.getCounters()));
 
         newCopy.setColor(in.getColor().getColor());
-        newCopy.setPhasedOut(in.isPhasedOut());
+        newCopy.setPhasedOut(in.getPhasedOut());
 
         newCopy.setDamageHistory(in.getDamageHistory());
         newCopy.setDamageReceivedThisTurn(in.getDamageReceivedThisTurn());
-        for (Card c : in.getBlockedThisTurn()) {
-            newCopy.addBlockedThisTurn(c);
-        }
-        for (Card c : in.getBlockedByThisTurn()) {
-            newCopy.addBlockedByThisTurn(c);
-        }
+
+        // these are LKI already
+        newCopy.getBlockedThisTurn().addAll(in.getBlockedThisTurn());
+        newCopy.getBlockedByThisTurn().addAll(in.getBlockedByThisTurn());
 
         newCopy.setAttachedCards(getLKICopyList(in.getAttachedCards(), cachedMap));
         newCopy.setEntityAttachedTo(getLKICopy(in.getEntityAttachedTo(), cachedMap));
 
-        newCopy.setHaunting(in.getHaunting());
         newCopy.setCopiedPermanent(in.getCopiedPermanent());
+
+        newCopy.setHaunting(in.getHaunting());
         for (final Card haunter : in.getHauntedBy()) {
             newCopy.addHauntedBy(haunter, false);
         }
+
+        newCopy.setIntensity(in.getIntensity(false));
+
         newCopy.addRemembered(in.getRemembered());
         newCopy.addImprintedCards(in.getImprintedCards());
         newCopy.setChosenCards(new CardCollection(in.getChosenCards()));
@@ -278,6 +280,8 @@ public final class CardUtil {
 
         newCopy.copyChangedTextFrom(in);
 
+        newCopy.setTimestamp(in.getTimestamp());
+
         newCopy.setBestowTimestamp(in.getBestowTimestamp());
 
         newCopy.setForetold(in.isForetold());
@@ -285,8 +289,6 @@ public final class CardUtil {
         newCopy.setForetoldByEffect(in.isForetoldByEffect());
 
         newCopy.setMeldedWith(getLKICopy(in.getMeldedWith(), cachedMap));
-
-        newCopy.setTimestamp(in.getTimestamp());
 
         // update keyword cache on all states
         for (CardStateName s : newCopy.getStates()) {

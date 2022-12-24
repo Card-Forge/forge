@@ -3,7 +3,6 @@ Code=DGM
 Date=2013-05-03
 Name=Dragon's Maze
 Code2=DGM
-MciCode=dgm
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!land, 3 Uncommon, 1 RareMythic:!land, 1 fromSheet("DGM Lands")

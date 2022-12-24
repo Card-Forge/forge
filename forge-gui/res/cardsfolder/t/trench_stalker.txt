@@ -1,0 +1,8 @@
+Name:Trench Stalker
+ManaCost:4 B
+Types:Creature Beast Horror
+PT:4/5
+S:Mode$ Continuous | Affected$ Card.Self | CheckSVar$ X | SVarCompare$ GE2 | AddKeyword$ Lifelink & Deathtouch | Description$ As long as you've drawn two or more cards this turn, CARDNAME has deathtouch and lifelink.
+SVar:X:Count$YouDrewThisTurn
+DeckHas:Ability$LifeGain & Keyword$Lifelink|Deathtouch
+Oracle:As long as you've drawn two or more cards this turn, Trench Stalker has deathtouch and lifelink.

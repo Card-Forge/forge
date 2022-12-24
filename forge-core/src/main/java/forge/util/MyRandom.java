@@ -39,8 +39,7 @@ public class MyRandom {
      * If percent is like 30, then 30% of the time it will be true.
      * </p>
      * 
-     * @param percent
-     *            a int.
+     * @param percent an int.
      * @return a boolean.
      */
     public static boolean percentTrue(final int percent) {
@@ -54,6 +53,14 @@ public class MyRandom {
      */
     public static Random getRandom() {
         return MyRandom.random;
+    }
+
+    /**
+     * Sets the random provider. Used for deterministic simulation.
+     * @param random the random
+     */
+    public static void setRandom(Random random) {
+        MyRandom.random = random;
     }
 
     public static int[] splitIntoRandomGroups(final int value, final int numGroups) {

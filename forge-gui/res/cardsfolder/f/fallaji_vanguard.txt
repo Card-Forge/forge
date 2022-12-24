@@ -1,0 +1,8 @@
+Name:Fallaji Vanguard
+ManaCost:2 R W
+Types:Creature Human Soldier
+PT:2/3
+K:First Strike
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Creature.YouCtrl+Other,Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield under your control, target creature gets +2/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | ValidTgts$ Creature | NumAtt$ 2
+Oracle:First strike\nWhenever Fallaji Vanguard or another creature enters the battlefield under your control, target creature gets +2/+0 until end of turn.

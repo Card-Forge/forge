@@ -88,7 +88,7 @@ public abstract class DeckGeneratorBase {
 
     protected void addCreaturesAndSpells(int size, List<ImmutablePair<FilterCMC, Integer>> cmcLevels, boolean forAi) {
         trace.append("Building deck of ").append(size).append("cards\n");
-        
+
         final Iterable<PaperCard> cards = selectCardsOfMatchingColorForPlayer(forAi);
         // build subsets based on type
 
@@ -102,7 +102,7 @@ public abstract class DeckGeneratorBase {
         final int spellCnt = (int) Math.ceil(getSpellPercentage() * size);
         trace.append("Spells to add:").append(spellCnt).append("\n");
         addCmcAdjusted(spells, spellCnt, cmcLevels);
-        
+
         trace.append(String.format("Current deck size: %d... should be %f%n", tDeck.countAll(), size * (getCreaturePercentage() + getSpellPercentage())));
     }
 
@@ -258,7 +258,7 @@ public abstract class DeckGeneratorBase {
         for (ImmutablePair<FilterCMC, Integer> pair : cmcLevels) {
             totalWeight += pair.getRight();
         }
-        
+
         float variability = 0.6f; // if set to 1, you'll get minimum cards to choose from
         float desiredWeight = (float)cnt / ( maxDuplicates * variability ); 
         float desiredOverTotal = desiredWeight / totalWeight;

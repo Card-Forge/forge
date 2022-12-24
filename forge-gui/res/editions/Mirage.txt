@@ -3,7 +3,6 @@ Code=MIR
 Date=1996-10-08
 Name=Mirage
 Code2=MI
-MciCode=mr
 Type=Expansion
 BoosterCovers=5
 Booster=11 Common, 3 Uncommon, 1 Rare

@@ -2053,7 +2053,14 @@
 		{
 			"type": "deckCard",
 			"probability": 1,
-			"count": 1
+			"count": 1,
+			"rarity": [
+				"common",
+				"uncommon",
+				"rare",
+				"mythicrare",
+				"special"
+			]
 		},
 		{
 			"type": "gold",

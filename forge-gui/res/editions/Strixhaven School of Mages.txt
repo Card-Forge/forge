@@ -3,7 +3,6 @@ Code=STX
 Date=2021-04-23
 Name=Strixhaven: School of Mages
 Code2=STX
-MciCode=stx
 Type=Expansion
 BoosterCovers=5
 DraftBooster=1 fromSheet("STX lesson"), 9 Common, 3 Uncommon, 1 RareMythic, 1 Any STA

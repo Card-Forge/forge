@@ -126,6 +126,27 @@
       "height": 36,
       "x": 416,
       "y": 226
+    },
+    {
+      "type": "TextButton",
+      "name": "openmap",
+      "text": "{Scale=80%}tr(lblZoom)",
+      "binding": "Map",
+      "width": 80,
+      "height": 18,
+      "x": 0,
+      "y": 80
+    },
+	{
+      "type": "TextButton",
+      "name": "exittoworldmap", 
+	  "style":"menu",
+      "text": "{Scale=200%}[+ExitToWorldMap]",
+	  "binding": "ExitToWorldMap",
+      "width": 64,
+      "height": 32,
+      "x": 416,
+      "y": 66
     }
   ]
 }

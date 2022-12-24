@@ -82,6 +82,7 @@ public class ImageCache {
     static EvictingQueue<String> q;
     static Set<String> cardsLoaded;
     static Queue<String> syncQ;
+
     public static void initCache(int capacity) {
         //override maxCardCapacity
         maxCardCapacity = capacity;
@@ -90,17 +91,17 @@ public class ImageCache {
         //init syncQ for threadsafe use
         syncQ = Queues.synchronizedQueue(q);
         //cap
-        int cl = GuiBase.isAndroid() ? maxCardCapacity+(capacity/3) : 400;
+        int cl = GuiBase.isAndroid() ? maxCardCapacity + (capacity / 3) : 400;
         cardsLoaded = new HashSet<>(cl);
     }
+
     public static Texture getDefaultImage() {
         return Forge.getAssets().getDefaultImage();
     }
-    public static FImage BlackBorder = FSkinImage.IMG_BORDER_BLACK;
-    public static FImage WhiteBorder = FSkinImage.IMG_BORDER_WHITE;
-    private static final HashMap<String, Pair<String, Boolean>> imageBorder = new HashMap<>(1024);
 
+    private static final HashMap<String, ImageRecord> imageRecord = new HashMap<>(1024);
     private static boolean imageLoaded, delayLoadRequested;
+
     public static void allowSingleLoad() {
         imageLoaded = false; //reset at the beginning of each render
         delayLoadRequested = false;
@@ -110,10 +111,12 @@ public class ImageCache {
         missingIconKeys.clear();
         ImageKeys.clearMissingCards();
     }
+
     public static void clearGeneratedCards() {
         Forge.getAssets().generatedCards().clear();
     }
-    public static void disposeTextures(){
+
+    public static void disposeTextures() {
         CardRenderer.clearcardArtCache();
         //unload all cardsLoaded
         for (String fileName : cardsLoaded) {
@@ -122,8 +125,9 @@ public class ImageCache {
             }
         }
         cardsLoaded.clear();
-        ((Forge)Gdx.app.getApplicationListener()).needsUpdate = true;
+        ((Forge) Gdx.app.getApplicationListener()).needsUpdate = true;
     }
+
     /**
      * Update counter for use with adventure mode since it uses direct loading for assetmanager for loot and shops
      */
@@ -132,14 +136,14 @@ public class ImageCache {
             return;
         syncQ.add(file.getPath());
         cardsLoaded.add(file.getPath());
-        counter+=count;
+        counter += count;
     }
 
     public static Texture getImage(InventoryItem ii) {
         boolean useDefault = ii instanceof DeckProxy;
         String imageKey = ii.getImageKey(false);
         if (imageKey != null) {
-            if(imageKey.startsWith(ImageKeys.CARD_PREFIX) || imageKey.startsWith(ImageKeys.TOKEN_PREFIX))
+            if (imageKey.startsWith(ImageKeys.CARD_PREFIX) || imageKey.startsWith(ImageKeys.TOKEN_PREFIX))
                 return getImage(ii.getImageKey(false), useDefault, false);
         }
         return getImage(ii.getImageKey(false), true, true);
@@ -209,6 +213,7 @@ public class ImageCache {
     public static Texture getImage(String imageKey, boolean useDefaultIfNotFound) {
         return getImage(imageKey, useDefaultIfNotFound, false);
     }
+
     public static Texture getImage(String imageKey, boolean useDefaultIfNotFound, boolean others) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
             return null;
@@ -239,7 +244,9 @@ public class ImageCache {
             // Load from file and add to cache if not found in cache initially.
             image = getAsset(imageKey, imageFile, others);
 
-            if (image != null) { return image; }
+            if (image != null) {
+                return image;
+            }
 
             if (imageLoaded) { //prevent loading more than one image each render for performance
                 if (!delayLoadRequested) {
@@ -266,19 +273,21 @@ public class ImageCache {
                 /*fix not loading image file since we intentionally not to update the cache in order for the
                   image fetcher to update automatically after the card image/s are downloaded*/
                 imageLoaded = false;
-                if (image != null && imageBorder.get(image.toString()) == null)
-                    imageBorder.put(image.toString(), Pair.of(Color.valueOf("#171717").toString(), false)); //black border
+                if (image != null && imageRecord.get(image.toString()) == null)
+                    imageRecord.put(image.toString(), new ImageRecord(Color.valueOf("#171717").toString(), false, getRadius(image))); //black border
             }
         }
         return image;
     }
+
     static Texture getAsset(String imageKey, File file, boolean others) {
         if (file == null)
             return null;
-        if (!others && Forge.enableUIMask.equals("Full") && isBorderless(imageKey))
-            return Forge.getAssets().generatedCards().get(imageKey);
+        /*if (!others && Forge.enableUIMask.equals("Full") && isBorderless(imageKey))
+            return Forge.getAssets().generatedCards().get(imageKey);*/
         return Forge.getAssets().manager().get(file.getPath(), Texture.class, false);
     }
+
     static Texture loadAsset(String imageKey, File file, boolean others) {
         if (file == null)
             return null;
@@ -300,7 +309,7 @@ public class ImageCache {
                 counter += 1;
             }
         } catch (Exception e) {
-            System.err.println("Failed to load image: "+fileName);
+            System.err.println("Failed to load image: " + fileName);
         }
 
         //return loaded assets
@@ -309,17 +318,28 @@ public class ImageCache {
         } else {
             Texture cardTexture = Forge.getAssets().manager().get(fileName, Texture.class, false);
             //if full bordermasking is enabled, update the border color
-            if (cardTexture != null && Forge.enableUIMask.equals("Full")) {
+            if (cardTexture != null) {
                 boolean borderless = isBorderless(imageKey);
-                updateBorders(cardTexture.toString(), borderless ? Pair.of(Color.valueOf("#171717").toString(), false): isCloserToWhite(getpixelColor(cardTexture)));
+                String setCode = imageKey.split("/")[0].trim().toUpperCase();
+                int radius;
+                if (setCode.equals("A") || setCode.equals("LEA") || setCode.equals("B") || setCode.equals("LEB"))
+                    radius = 28;
+                else if (setCode.equals("MED") || setCode.equals("ME2") || setCode.equals("ME3") || setCode.equals("ME4") || setCode.equals("TD0") || setCode.equals("TD1"))
+                    radius = 25;
+                else
+                    radius = 22;
+                updateImageRecord(cardTexture.toString(),
+                        borderless ? Color.valueOf("#171717").toString() : isCloserToWhite(getpixelColor(cardTexture)).getLeft(),
+                        borderless ? false : isCloserToWhite(getpixelColor(cardTexture)).getRight(), radius);
                 //if borderless, generate new texture from the asset and store
-                if (borderless) {
+                /*if (borderless) {
                     Forge.getAssets().generatedCards().put(imageKey, generateTexture(new FileHandle(file), cardTexture, Forge.isTextureFilteringEnabled()));
-                }
+                }*/
             }
             return cardTexture;
         }
     }
+
     public static void unloadCardTextures(boolean removeAll) {
         if (removeAll) {
             try {
@@ -359,45 +379,50 @@ public class ImageCache {
             //e.printstacktrace
         }
     }
+
     public static void preloadCache(Iterable<String> keys) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
             return;
-        for (String imageKey : keys){
-            if(getImage(imageKey, false) == null)
-                System.err.println("could not load card image:"+imageKey);
+        for (String imageKey : keys) {
+            if (getImage(imageKey, false) == null)
+                System.err.println("could not load card image:" + imageKey);
         }
     }
+
     public static void preloadCache(Deck deck) {
         if (FModel.getPreferences().getPrefBoolean(ForgePreferences.FPref.UI_DISABLE_CARD_IMAGES))
             return;
-        if(deck == null||!Forge.enablePreloadExtendedArt)
+        if (deck == null || !Forge.enablePreloadExtendedArt)
             return;
         if (deck.getAllCardsInASinglePool().toFlatList().size() <= 100) {
             for (PaperCard p : deck.getAllCardsInASinglePool().toFlatList()) {
-                if (getImage(p.getImageKey(false),false) == null)
-                    System.err.println("could not load card image:"+p.toString());
+                if (getImage(p.getImageKey(false), false) == null)
+                    System.err.println("could not load card image:" + p.toString());
             }
         }
     }
+
     public static TextureRegion croppedBorderImage(Texture image) {
         if (!image.toString().contains(".fullborder."))
             return new TextureRegion(image);
         float rscale = 0.96f;
-        int rw = Math.round(image.getWidth()*rscale);
-        int rh = Math.round(image.getHeight()*rscale);
-        int rx = Math.round((image.getWidth() - rw)/2f);
-        int ry = Math.round((image.getHeight() - rh)/2f)-2;
+        int rw = Math.round(image.getWidth() * rscale);
+        int rh = Math.round(image.getHeight() * rscale);
+        int rx = Math.round((image.getWidth() - rw) / 2f);
+        int ry = Math.round((image.getHeight() - rh) / 2f) - 2;
         return new TextureRegion(image, rx, ry, rw, rh);
     }
+
     public static Color borderColor(Texture t) {
         if (t == null)
             return Color.valueOf("#171717");
         try {
-            return Color.valueOf(imageBorder.get(t.toString()).getLeft());
+            return Color.valueOf(imageRecord.get(t.toString()).colorValue);
         } catch (Exception e) {
             return Color.valueOf("#171717");
         }
     }
+
     public static int getFSkinBorders(CardView c) {
         if (c == null)
             return 0;
@@ -409,25 +434,44 @@ public class ImageCache {
             return 1;
         return 0;
     }
-    public static boolean isBorderlessCardArt(Texture t) {
+
+    /*public static boolean isBorderlessCardArt(Texture t) {
         return isBorderless(t);
+    }*/
+    public static void updateImageRecord(String textureString, String colorValue, Boolean isClosertoWhite, int radius) {
+        imageRecord.put(textureString, new ImageRecord(colorValue, isClosertoWhite, radius));
     }
-    public static void updateBorders(String textureString, Pair<String, Boolean> colorPair){
-        imageBorder.put(textureString, colorPair);
+
+    public static int getRadius(Texture t) {
+        ImageRecord record = imageRecord.get(t.toString());
+        if (record == null)
+            return 20;
+        Integer i = record.cardRadius;
+        if (i == null)
+            return 20;
+        return i;
     }
+
     public static FImage getBorder(String textureString) {
-        if (imageBorder.get(textureString) == null)
-            return BlackBorder;
-        return imageBorder.get(textureString).getRight() ? WhiteBorder : BlackBorder;
+        ImageRecord record = imageRecord.get(textureString);
+        if (record == null)
+            return FSkinImage.IMG_BORDER_BLACK;
+        Boolean border = record.isCloserToWhite;
+        if (border == null)
+            return FSkinImage.IMG_BORDER_BLACK;
+        return border ? FSkinImage.IMG_BORDER_WHITE : FSkinImage.IMG_BORDER_BLACK;
     }
+
     public static FImage getBorderImage(String textureString, boolean canshow) {
         if (!canshow)
-            return BlackBorder;
+            return FSkinImage.IMG_BORDER_BLACK;
         return getBorder(textureString);
     }
+
     public static FImage getBorderImage(String textureString) {
         return getBorder(textureString);
     }
+
     public static Color getTint(CardView c, Texture t) {
         if (c == null)
             return borderColor(t);
@@ -439,8 +483,7 @@ public class ImageCache {
             if (state.hasDevoid()) //devoid is colorless at all zones so return its corresponding border color...
                 return borderColor(t);
             return Color.valueOf("#A0A6A4");
-        }
-        else if (state.getColors().isMonoColor()) {
+        } else if (state.getColors().isMonoColor()) {
             if (state.getColors().hasBlack())
                 return Color.valueOf("#48494a");
             else if (state.getColors().hasBlue())
@@ -451,12 +494,12 @@ public class ImageCache {
                 return Color.valueOf("#66cb35");
             else if (state.getColors().hasWhite())
                 return Color.valueOf("#EEEBE1");
-        }
-        else if (state.getColors().isMulticolor())
+        } else if (state.getColors().isMulticolor())
             return Color.valueOf("#F9E084");
 
         return borderColor(t);
     }
+
     public static Texture generateTexture(FileHandle fh, Texture cardTexture, boolean textureFilter) {
         if (cardTexture == null || fh == null)
             return cardTexture;
@@ -481,6 +524,7 @@ public class ImageCache {
         });
         return placeholder[0];
     }
+
     public static Pixmap createRoundedRectangle(int width, int height, int cornerRadius, Color color) {
         Pixmap pixmap = new Pixmap(width, height, Format.RGBA4444);
         Pixmap ret = new Pixmap(width, height, Format.RGBA4444);
@@ -503,12 +547,13 @@ public class ImageCache {
         pixmap.dispose();
         return ret;
     }
-    public static void drawPixelstoMask(Pixmap pixmap, Pixmap mask){
+
+    public static void drawPixelstoMask(Pixmap pixmap, Pixmap mask) {
         int pixmapWidth = mask.getWidth();
         int pixmapHeight = mask.getHeight();
         Color pixelColor = new Color();
-        for (int x=0; x<pixmapWidth; x++){
-            for (int y=0; y<pixmapHeight; y++){
+        for (int x = 0; x < pixmapWidth; x++) {
+            for (int y = 0; y < pixmapHeight; y++) {
                 if (mask.getPixel(x, y) != 0) {
                     Color.rgba8888ToColor(pixelColor, pixmap.getPixel(x, y));
                     mask.setColor(pixelColor);
@@ -519,17 +564,17 @@ public class ImageCache {
     }
 
     public static boolean isBorderless(String imagekey) {
-        if(borderlessCardlistKey.isEmpty())
+        if (borderlessCardlistKey.isEmpty())
             return false;
         if (imagekey.length() > 7) {
-            if ((!imagekey.substring(0, 7).contains("MPS_KLD"))&&(imagekey.substring(0, 4).contains("MPS_"))) //MPS_ sets except MPD_KLD
+            if ((!imagekey.substring(0, 7).contains("MPS_KLD")) && (imagekey.substring(0, 4).contains("MPS_"))) //MPS_ sets except MPD_KLD
                 return true;
         }
-        return borderlessCardlistKey.contains(TextUtil.fastReplace(imagekey,".full",".fullborder"));
+        return borderlessCardlistKey.contains(TextUtil.fastReplace(imagekey, ".full", ".fullborder"));
     }
 
     public static boolean isBorderless(Texture t) {
-        if(borderlessCardlistKey.isEmpty())
+        if (borderlessCardlistKey.isEmpty())
             return false;
         //generated texture/pixmap?
         if (t.toString().contains("com.badlogic.gdx.graphics.Texture@"))
@@ -544,17 +589,30 @@ public class ImageCache {
         //get pixmap from texture data
         Pixmap pixmap = i.getTextureData().consumePixmap();
         //get pixel color from x,y texture coordinate based on the image fullborder or not
-        Color color = new Color(pixmap.getPixel(croppedBorderImage(i).getRegionX()+1, croppedBorderImage(i).getRegionY()+1));
+        Color color = new Color(pixmap.getPixel(croppedBorderImage(i).getRegionX() + 1, croppedBorderImage(i).getRegionY() + 1));
         pixmap.dispose();
         return color.toString();
     }
-    public static Pair<String, Boolean> isCloserToWhite(String c){
+
+    public static Pair<String, Boolean> isCloserToWhite(String c) {
         if (c == null || c == "")
             return Pair.of(Color.valueOf("#171717").toString(), false);
-        int c_r = Integer.parseInt(c.substring(0,2),16);
-        int c_g = Integer.parseInt(c.substring(2,4),16);
-        int c_b = Integer.parseInt(c.substring(4,6),16);
+        int c_r = Integer.parseInt(c.substring(0, 2), 16);
+        int c_g = Integer.parseInt(c.substring(2, 4), 16);
+        int c_b = Integer.parseInt(c.substring(4, 6), 16);
         int brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
-        return  Pair.of(c,brightness > 155);
+        return Pair.of(c, brightness > 155);
+    }
+
+    static class ImageRecord {
+        String colorValue;
+        Boolean isCloserToWhite;
+        Integer cardRadius;
+
+        ImageRecord(String colorString, Boolean closetoWhite, int radius) {
+            colorValue = colorString;
+            isCloserToWhite = closetoWhite;
+            cardRadius = radius;
+        }
     }
 }

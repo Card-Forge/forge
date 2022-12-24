@@ -19,11 +19,13 @@ package forge.game.trigger;
 
 import java.util.*;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
+import com.google.common.collect.Table.Cell;
 
 import forge.game.CardTraitBase;
 import forge.game.CardTraitPredicates;
@@ -445,28 +447,70 @@ public class TriggerHandler {
 
         // Torpor Orb check
         if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)
-                && !regtrig.isStatic() && mode.equals(TriggerType.ChangesZone)) {
-            if (runParams.get(AbilityKey.Destination) instanceof String) {
-                final String dest = (String) runParams.get(AbilityKey.Destination);
-                if (dest.equals("Battlefield") && runParams.get(AbilityKey.Card) instanceof Card) {
-                    final Card card = (Card) runParams.get(AbilityKey.Card);
-                    if (card.isCreature()) {
-                        return false;
+                && !regtrig.isStatic()) {
+            if (mode.equals(TriggerType.ChangesZone)) {
+                if (runParams.get(AbilityKey.Destination) instanceof String) {
+                    final String dest = (String) runParams.get(AbilityKey.Destination);
+                    if (dest.equals("Battlefield") && runParams.get(AbilityKey.Card) instanceof Card) {
+                        final Card card = (Card) runParams.get(AbilityKey.Card);
+                        if (card.isCreature()) {
+                            return false;
+                        }
                     }
+                }
+            } else if (mode.equals(TriggerType.ChangesZoneAll)) {
+                CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
+                // find out if any other cards would still trigger it
+                boolean found = false;
+                for (Cell<ZoneType, ZoneType, CardCollection> cell : table.cellSet()) {
+                    // this currently assumes the table will not contain multiple destinations
+                    // however with some effects (e.g. Goblin Welder) that should indeed be the case
+                    // once Forge handles that correctly this section needs to account for that
+                    // (by doing a closer check of the triggered ability first)
+                    if (cell.getColumnKey() != ZoneType.Battlefield) {
+                        found = true;
+                    } else if (Iterables.any(cell.getValue(), Predicates.not(CardPredicates.isType("Creature")))) {
+                        found = true;
+                    }
+                    if (found) break;
+                }
+                if (!found) {
+                    return false;
                 }
             }
         } // Torpor Orb check
 
         if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureDyingTriggers)
-                && !regtrig.isStatic() && mode.equals(TriggerType.ChangesZone)) {
-            if (runParams.get(AbilityKey.Destination) instanceof String && runParams.get(AbilityKey.Origin) instanceof String) {
-                final String dest = (String) runParams.get(AbilityKey.Destination);
-                final String origin = (String) runParams.get(AbilityKey.Origin);
-                if (dest.equals("Graveyard") && origin.equals("Battlefield") && runParams.get(AbilityKey.Card) instanceof Card) {
-                    final Card card = (Card) runParams.get(AbilityKey.Card);
-                    if (card.isCreature()) {
-                        return false;
+                && !regtrig.isStatic()) {
+            if (mode.equals(TriggerType.ChangesZone)) {
+                if (runParams.get(AbilityKey.Destination) instanceof String && runParams.get(AbilityKey.Origin) instanceof String) {
+                    final String dest = (String) runParams.get(AbilityKey.Destination);
+                    final String origin = (String) runParams.get(AbilityKey.Origin);
+                    if (dest.equals("Graveyard") && origin.equals("Battlefield") && runParams.get(AbilityKey.Card) instanceof Card) {
+                        // It will trigger if the ability is of a dying creature that triggers only when that creature is put into a graveyard from anywhere
+                        if (!"Card.Self".equals(regtrig.getParam("ValidCard")) || (regtrig.hasParam("Origin") && !"Any".equals(regtrig.getParam("Origin")))) {
+                            final Card card = (Card) runParams.get(AbilityKey.Card);
+                            if (card.isCreature()) {
+                                return false;
+                            }
+                        }
                     }
+                }
+            } else if (mode.equals(TriggerType.ChangesZoneAll)) {
+                CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
+                boolean found = false;
+                for (Cell<ZoneType, ZoneType, CardCollection> cell : table.cellSet()) {
+                    if (cell.getRowKey() != ZoneType.Battlefield) {
+                        found = true;
+                    } else if (cell.getColumnKey() != ZoneType.Graveyard) {
+                        found = true;
+                    } else if (Iterables.any(cell.getValue(), Predicates.not(CardPredicates.isType("Creature")))) {
+                        found = true;
+                    }
+                    if (found) break;
+                }
+                if (!found) {
+                    return false;
                 }
             }
         }
@@ -503,7 +547,7 @@ public class TriggerHandler {
     // Return true if the trigger went off, false otherwise.
     private void runSingleTriggerInternal(final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
         // All tests passed, execute ability.
-        if (regtrig instanceof TriggerTapsForMana) {
+        if (regtrig instanceof TriggerTapsForMana || regtrig instanceof TriggerManaAdded) {
             final SpellAbility abMana = (SpellAbility) runParams.get(AbilityKey.AbilityMana);
             if (null != abMana && null != abMana.getManaPart()) {
                 abMana.setUndoable(false);
@@ -594,11 +638,10 @@ public class TriggerHandler {
             wrapperAbility.getActivatingPlayer().getController().playTrigger(host, wrapperAbility, isMandatory);
         } else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
+            game.getTriggerHandler().runTrigger(TriggerType.AbilityTriggered, TriggerAbilityTriggered.getRunParams(regtrig, wrapperAbility, runParams), false);
         }
 
         regtrig.triggerRun();
-
-        game.getTriggerHandler().runTrigger(TriggerType.AbilityTriggered, TriggerAbilityTriggered.getRunParams(regtrig, sa, runParams), false);
 
         if (regtrig.hasParam("OneOff")) {
             if (regtrig.getHostCard().isImmutable()) {

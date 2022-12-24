@@ -4,7 +4,6 @@ Date=2017-09-29
 Name=Ixalan
 Code2=XLN
 Type=Expansion
-MciCode=xln
 BoosterCovers=5
 Booster=10 Common:fromSheet("XLN cards"), 3 Uncommon:fromSheet("XLN cards"), 1 RareMythic:fromSheet("XLN cards"), 1 BasicLand
 FatPack=10

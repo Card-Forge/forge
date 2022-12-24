@@ -47,6 +47,7 @@ public final class ForgeConstants {
     public static final String IMAGE_LIST_QUEST_PRECONS_FILE         = LISTS_DIR + "precon-images.txt";
     public static final String IMAGE_LIST_QUEST_TOURNAMENTPACKS_FILE = LISTS_DIR + "tournamentpack-images.txt";
     public static final String IMAGE_LIST_ACHIEVEMENTS_FILE          = LISTS_DIR + "achievement-images.txt";
+    public static final String IMAGE_LIST_PLANES_IMAGES_FILE         = LISTS_DIR + "planes-images.txt";
     public static final String NET_DECKS_LIST_FILE                   = LISTS_DIR + "net-decks.txt";
     public static final String NET_DECKS_COMMANDER_LIST_FILE         = LISTS_DIR + "net-decks-commander.txt";
     public static final String NET_DECKS_BRAWL_LIST_FILE             = LISTS_DIR + "net-decks-brawl.txt";
@@ -113,6 +114,7 @@ public final class ForgeConstants {
     public static final String SPRITE_TROPHIES_FILE   = "sprite_trophies.png";
     public static final String SPRITE_ABILITY_FILE    = "sprite_ability.png";
     public static final String SPRITE_BORDER_FILE     = "sprite_border.png";
+    public static final String SPRITE_ADV_BUTTONS_FILE  = "sprite_adv_buttons.png";
     public static final String SPRITE_BUTTONS_FILE    = "sprite_buttons.png";
     public static final String SPRITE_DECKBOX_FILE    = "sprite_deckbox.png";
     public static final String SPRITE_START_FILE      = "sprite_start.png";
@@ -128,16 +130,31 @@ public final class ForgeConstants {
     public static final String SPRITE_SETLOGO_FILE    = "sprite_setlogo.png";
     public static final String SPRITE_WATERMARK_FILE  = "sprite_watermark.png";
     public static final String SPRITE_DRAFTRANKS_FILE  = "sprite_draftranks.png";
-    public static String SPRITE_CARDBG_FILE           = "sprite_cardbg.png";
     public static final String FONT_FILE              = "font1.ttf";
     public static final String SPLASH_BG_FILE         = "bg_splash.png";
     public static final String MATCH_BG_FILE          = "bg_match.jpg";
     public static final String MATCH_BG_DAY_FILE      = "bg_day.jpg";
     public static final String MATCH_BG_NIGHT_FILE    = "bg_night.jpg";
+    public static final String ADV_MATCH_BG_FILE      = "adv_bg_match.jpg";
+    public static final String ADV_MATCH_BG_DAY_FILE  = "adv_bg_match_day.jpg";
+    public static final String ADV_MATCH_BG_NIGHT_FILE= "adv_bg_match_nigh.jpg";
+    public static final String ADV_TEXTURE_BG_FILE    = "adv_bg_texture.jpg";
     public static final String TEXTURE_BG_FILE        = "bg_texture.jpg";
     public static final String SPACE_BG_FILE          = "bg_space.png";
     public static final String CHAOS_WHEEL_IMG_FILE   = "bg_chaos_wheel.png";
     public static final String DRAFT_DECK_IMG_FILE    = "bg_draft_deck.png";
+    //Adventure locations
+    public static final String ADV_BG_SWAMP_FILE      = "adv_bg_swamp.jpg";
+    public static final String ADV_BG_FOREST_FILE     = "adv_bg_forest.jpg";
+    public static final String ADV_BG_MOUNTAIN_FILE   = "adv_bg_mountain.jpg";
+    public static final String ADV_BG_ISLAND_FILE     = "adv_bg_island.jpg";
+    public static final String ADV_BG_PLAINS_FILE     = "adv_bg_plains.jpg";
+    public static final String ADV_BG_WASTE_FILE      = "adv_bg_waste.jpg";
+    public static final String ADV_BG_COMMON_FILE     = "adv_bg_common.jpg";
+    public static final String ADV_BG_CAVE_FILE       = "adv_bg_cave.jpg";
+    public static final String ADV_BG_DUNGEON_FILE    = "adv_bg_dungeon.jpg";
+    public static final String ADV_BG_CASTLE_FILE     = "adv_bg_castle.jpg";
+
     //Planes addon
     public static final String BG_1                   = "Academy_at_Tolaria_West.jpg";
     public static final String BG_2                   = "Agyrem.jpg";
@@ -217,6 +234,59 @@ public final class ForgeConstants {
     public static final String BG_76                  = "Horizon_Boughs.jpg";
     public static final String BG_77                  = "Mirrored_Depths.jpg";
     public static final String BG_78                  = "Talon_Gates.jpg";
+    public static final String BG_79                  = "Planewide_Disaster.jpg";
+    public static final String BG_80                  = "Reality_Shaping.jpg";
+    public static final String BG_81                  = "Spatial_Merging.jpg";
+    public static final String BG_82                  = "Chaotic_Aether.jpg";
+    public static final String BG_83                  = "Interplanar_Tunnel.jpg";
+    public static final String BG_84                  = "Morphic_Tide.jpg";
+    public static final String BG_85                  = "Mutual_Epiphany.jpg";
+    public static final String BG_86                  = "Time_Distortion.jpg";
+    //CARD BG
+    public static final String IMG_CARDBG_A           = "IMG_CARDBG_A.png";
+    public static final String IMG_CARDBG_B           = "IMG_CARDBG_B.png";
+    public static final String IMG_CARDBG_BG          = "IMG_CARDBG_BG.png";
+    public static final String IMG_CARDBG_BR          = "IMG_CARDBG_BR.png";
+    public static final String IMG_CARDBG_C           = "IMG_CARDBG_C.png";
+    public static final String IMG_CARDBG_G           = "IMG_CARDBG_G.png";
+    public static final String IMG_CARDBG_L           = "IMG_CARDBG_L.png";
+    public static final String IMG_CARDBG_M           = "IMG_CARDBG_M.png";
+    public static final String IMG_CARDBG_R           = "IMG_CARDBG_R.png";
+    public static final String IMG_CARDBG_RG          = "IMG_CARDBG_RG.png";
+    public static final String IMG_CARDBG_U           = "IMG_CARDBG_U.png";
+    public static final String IMG_CARDBG_UB          = "IMG_CARDBG_UB.png";
+    public static final String IMG_CARDBG_UG          = "IMG_CARDBG_UG.png";
+    public static final String IMG_CARDBG_UR          = "IMG_CARDBG_UR.png";
+    public static final String IMG_CARDBG_V           = "IMG_CARDBG_V.png";
+    public static final String IMG_CARDBG_W           = "IMG_CARDBG_W.png";
+    public static final String IMG_CARDBG_WB          = "IMG_CARDBG_WB.png";
+    public static final String IMG_CARDBG_WG          = "IMG_CARDBG_WG.png";
+    public static final String IMG_CARDBG_WR          = "IMG_CARDBG_WR.png";
+    public static final String IMG_CARDBG_WU          = "IMG_CARDBG_WU.png";
+    public static final String IMG_PWBG_B             = "IMG_PWBG_B.png";
+    public static final String IMG_PWBG_BG            = "IMG_PWBG_BG.png";
+    public static final String IMG_PWBG_BR            = "IMG_PWBG_BR.png";
+    public static final String IMG_PWBG_C             = "IMG_PWBG_C.png";
+    public static final String IMG_PWBG_G             = "IMG_PWBG_G.png";
+    public static final String IMG_PWBG_M             = "IMG_PWBG_M.png";
+    public static final String IMG_PWBG_R             = "IMG_PWBG_R.png";
+    public static final String IMG_PWBG_RG            = "IMG_PWBG_RG.png";
+    public static final String IMG_PWBG_U             = "IMG_PWBG_U.png";
+    public static final String IMG_PWBG_UB            = "IMG_PWBG_UB.png";
+    public static final String IMG_PWBG_UG            = "IMG_PWBG_UG.png";
+    public static final String IMG_PWBG_UR            = "IMG_PWBG_UR.png";
+    public static final String IMG_PWBG_W             = "IMG_PWBG_W.png";
+    public static final String IMG_PWBG_WB            = "IMG_PWBG_WB.png";
+    public static final String IMG_PWBG_WG            = "IMG_PWBG_WG.png";
+    public static final String IMG_PWBG_WR            = "IMG_PWBG_WR.png";
+    public static final String IMG_PWBG_WU            = "IMG_PWBG_WU.png";
+    public static final String IMG_NYX_B              = "IMG_NYX_B.png";
+    public static final String IMG_NYX_G              = "IMG_NYX_G.png";
+    public static final String IMG_NYX_M              = "IMG_NYX_M.png";
+    public static final String IMG_NYX_R              = "IMG_NYX_R.png";
+    public static final String IMG_NYX_U              = "IMG_NYX_U.png";
+    public static final String IMG_NYX_W              = "IMG_NYX_W.png";
+    public static final String IMG_NYX_C              = "IMG_NYX_C.png";
 
     // data tree roots
     public static final String USER_DIR;

@@ -162,7 +162,6 @@ public class Game {
     public Player getStartingPlayer() {
         return startingPlayer;
     }
-
     public void setStartingPlayer(final Player p) {
         startingPlayer = p;
     }
@@ -170,7 +169,6 @@ public class Game {
     public Player getMonarch() {
         return monarch;
     }
-
     public void setMonarch(final Player p) {
         monarch = p;
     }
@@ -178,7 +176,6 @@ public class Game {
     public Player getMonarchBeginTurn() {
         return monarchBeginTurn;
     }
-
     public void setMonarchBeginTurn(Player monarchBeginTurn) {
         this.monarchBeginTurn = monarchBeginTurn;
     }
@@ -186,7 +183,7 @@ public class Game {
     public Player getHasInitiative() {
         return initiative;
     }
-    public void setHasInitiative(final Player p ) {
+    public void setHasInitiative(final Player p) {
         initiative = p;
     }
 
@@ -254,11 +251,11 @@ public class Game {
 
     // methods that deal with saving, retrieving and clearing LKI information about cards on zone change
     private final HashMap<Integer, Card> changeZoneLKIInfo = new HashMap<>();
-    public final void addChangeZoneLKIInfo(Card c) {
-        if (c == null) {
+    public final void addChangeZoneLKIInfo(Card lki) {
+        if (lki == null) {
             return;
         }
-        changeZoneLKIInfo.put(c.getId(), CardUtil.getLKICopy(c));
+        changeZoneLKIInfo.put(lki.getId(), lki);
     }
     public final Card getChangeZoneLKIInfo(Card c) {
         if (c == null) {
@@ -561,7 +558,7 @@ public class Game {
 
         CardCollection cards = new CardCollection();
         for (final Player p : getPlayers()) {
-            cards.addAll(p.getCardsIncludePhasingIn(zone));
+            cards.addAll(p.getCardsIn(zone, false));
         }
         return cards;
     }

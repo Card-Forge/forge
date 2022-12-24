@@ -6,7 +6,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.zone.ZoneType;
 import forge.util.Lang;
 
 import java.util.List;
@@ -36,12 +35,7 @@ public class GoadEffect extends SpellAbilityEffect {
 
         for (final Card tgtC : getDefinedCardsOrTargeted(sa)) {
             // only goad things on the battlefield
-            if (!game.getCardsIn(ZoneType.Battlefield).contains(tgtC)) {
-                continue;
-            }
-
-            // make sure we can still target now if using targeting
-            if (sa.usesTargeting() && !sa.getTargetRestrictions().canTgtPlayer() && !tgtC.canBeTargetedBy(sa)) {
+            if (!tgtC.isInPlay()) {
                 continue;
             }
 

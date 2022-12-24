@@ -527,6 +527,14 @@ public class CardDetailUtil {
             area.append("(Class Level:").append(card.getClassLevel()).append(")");
         }
 
+        // sector
+        if (!card.getSector().isEmpty()) {
+            if (area.length() != 0) {
+                area.append("\n");
+            }
+            area.append("Sector: ").append(card.getSector());
+        }
+
         // a card has something attached to it
         if (card.hasCardAttachments()) {
             if (area.length() != 0) {

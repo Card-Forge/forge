@@ -1,9 +1,0 @@
-[metadata]
-Code=SHC
-Date=1994-09-01
-Name=Shattered Chains
-Type=Promo
-ScryfallCode=PHPR
-
-[cards]
-4 C Giant Badger @Liz Danforth

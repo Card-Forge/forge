@@ -1,0 +1,8 @@
+Name:Ashnod's Intervention
+ManaCost:B
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | SubAbility$ DBAnimate | SpellDescription$ Until end of turn, target creature gets +2/+0 and gains "When this creature dies or is put into exile from the battlefield, return it to its owner's hand."
+SVar:DBAnimate:DB$ Animate | Triggers$ TrigDieExile | Defined$ ParentTarget | StackDescription$ None
+SVar:TrigDieExile:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard,Exile | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerDescription$ When this creature dies or is put into exile from the battlefield, return it to its owner's hand.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ TriggeredNewCardLKICopy | Origin$ Graveyard,Exile | Destination$ Hand
+Oracle:Until end of turn, target creature gets +2/+0 and gains "When this creature dies or is put into exile from the battlefield, return it to its owner's hand."

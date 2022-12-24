@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
@@ -40,7 +41,7 @@ public class FLabel extends FDisplayObject implements IButton {
 
         private String bldText;
         private FImage bldIcon;
-        private FSkinColor bldTextColor = DEFAULT_TEXT_COLOR;
+        private FSkinColor bldTextColor = getDefaultTextColor();
         private FSkinColor bldPressedColor;
         private FEventHandler bldCommand;
 
@@ -83,23 +84,42 @@ public class FLabel extends FDisplayObject implements IButton {
 
     public static void drawButtonBackground(Graphics g, float w, float h, boolean pressed) {
         if (pressed) {
-            g.fillGradientRect(d50, d10, true, 0, 0, w, h);
-            g.drawRect(BORDER_THICKNESS, d50, 0, 0, w, h);
+            g.fillGradientRect(getD50(), getD10(), true, 0, 0, w, h);
+            g.drawRect(BORDER_THICKNESS, getD50(), 0, 0, w, h);
         }
         else {
-            g.fillGradientRect(d10, l20, true, 0, 0, w, h);
-            g.drawRect(BORDER_THICKNESS, d10, 0, 0, w, h);
+            g.fillGradientRect(getD10(), getL20(), true, 0, 0, w, h);
+            g.drawRect(BORDER_THICKNESS, getD10(), 0, 0, w, h);
         }
     }
-
-    public static final FSkinColor DEFAULT_TEXT_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    public static final FSkinColor INLINE_LABEL_COLOR = DEFAULT_TEXT_COLOR.alphaColor(0.7f);
-    private static final FSkinColor clrMain = FSkinColor.get(Colors.CLR_INACTIVE);
-    private static final FSkinColor d50 = clrMain.stepColor(-50);
-    private static final FSkinColor d30 = clrMain.stepColor(-30);
-    private static final FSkinColor d10 = clrMain.stepColor(-10);
-    private static final FSkinColor l10 = clrMain.stepColor(10);
-    private static final FSkinColor l20 = clrMain.stepColor(20);
+    public static FSkinColor getDefaultTextColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
+    public static FSkinColor getInlineLabelColor() {
+        return getDefaultTextColor().alphaColor(0.7f);
+    }
+    private static FSkinColor getClrMain() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_INACTIVE);
+        return FSkinColor.get(Colors.CLR_INACTIVE);
+    }
+    private static FSkinColor getD50() {
+        return getClrMain().stepColor(-50);
+    }
+    private static FSkinColor getD30() {
+        return getClrMain().stepColor(-30);
+    }
+    private static FSkinColor getD10() {
+        return getClrMain().stepColor(-10);
+    }
+    private static FSkinColor getL10() {
+        return getClrMain().stepColor(10);
+    }
+    private static FSkinColor getL20() {
+        return getClrMain().stepColor(20);
+    }
     public static final float BORDER_THICKNESS = Utils.scale(1);
 
     private float iconScaleFactor;
@@ -288,20 +308,20 @@ public class FLabel extends FDisplayObject implements IButton {
                 g.fillRect(pressedColor, 0, 0, w, h);
             }
             else {
-                g.fillGradientRect(d50, d10, true, 0, 0, w, h);
-                g.drawRect(BORDER_THICKNESS, d50, 0, 0, w, h);
+                g.fillGradientRect(getD50(), getD10(), true, 0, 0, w, h);
+                g.drawRect(BORDER_THICKNESS, getD50(), 0, 0, w, h);
             }
         }
         else if (selected && (opaque || selectable)) {
-            g.fillGradientRect(d30, l10, true, 0, 0, w, h);
-            g.drawRect(BORDER_THICKNESS, d30, 0, 0, w, h);
+            g.fillGradientRect(getD30(), getL10(), true, 0, 0, w, h);
+            g.drawRect(BORDER_THICKNESS, getD30(), 0, 0, w, h);
         }
         else if (opaque) {
-            g.fillGradientRect(d10, l20, true, 0, 0, w, h);
-            g.drawRect(BORDER_THICKNESS, d10, 0, 0, w, h);
+            g.fillGradientRect(getD10(), getL20(), true, 0, 0, w, h);
+            g.drawRect(BORDER_THICKNESS, getD10(), 0, 0, w, h);
         }
         else if (selectable) {
-            g.drawRect(BORDER_THICKNESS, l10, 0, 0, w, h);
+            g.drawRect(BORDER_THICKNESS, getL10(), 0, 0, w, h);
         }
 
         drawContent(g, w, h, pressed);
@@ -407,9 +427,7 @@ public class FLabel extends FDisplayObject implements IButton {
             else if (!text.isEmpty()) {
                 float oldAlpha = g.getfloatAlphaComposite();
                 if (isHovered() && selectable) {
-                    g.setAlphaComposite(0.4f);
-                    g.fillRect(Color.GRAY, x, y, w, h);
-                    g.setAlphaComposite(oldAlpha);
+                    g.fillRect(FSkinColor.getStandardColor(Color.GRAY).alphaColor(0.4f), x, y, w, h);
                 }
                 drawText(g, x, y, w, h, alignment);
             }

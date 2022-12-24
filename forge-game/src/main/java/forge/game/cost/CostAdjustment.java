@@ -81,8 +81,14 @@ public class CostAdjustment {
             }
         }
         if (sa.hasParam("RaiseCost")) {
-            int n = AbilityUtils.calculateAmount(host, sa.getParam("RaiseCost"), sa);
-            result.add(new Cost(ManaCost.get(n), false));
+            String raise = sa.getParam("RaiseCost");
+            ManaCost mc;
+            if (sa.hasSVar(raise)) {
+                mc = ManaCost.get(AbilityUtils.calculateAmount(host, raise, sa));
+            } else {
+                mc = new ManaCost(new ManaCostParser(raise));
+            }
+            result.add(new Cost(mc, false));
         }
 
         // Raise cost
@@ -207,6 +213,12 @@ public class CostAdjustment {
         }
         // need to reduce generic extra because of 2 hybrid mana
         cost.decreaseGenericMana(sumGeneric);
+
+        if (sa.isSpell() && !sa.getPipsToReduce().isEmpty()) {
+            for (String pip : sa.getPipsToReduce()) {
+                cost.decreaseShard(ManaCostShard.parseNonGeneric(pip), 1);
+            }
+        }
 
         if (sa.isSpell() && sa.isOffering()) { // cost reduction from offerings
             adjustCostByOffering(cost, sa);

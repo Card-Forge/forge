@@ -4,7 +4,6 @@ Date=2009-02-06
 Name=Conflux
 Code2=CFX
 Alias=CON
-MciCode=cfx
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand ALA

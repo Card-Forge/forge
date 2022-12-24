@@ -91,6 +91,15 @@ public class GameCopier {
             newPlayer.setLifeLostLastTurn(origPlayer.getLifeLostLastTurn());
             newPlayer.setLifeLostThisTurn(origPlayer.getLifeLostThisTurn());
             newPlayer.setLifeGainedThisTurn(origPlayer.getLifeGainedThisTurn());
+            newPlayer.setBlessing(origPlayer.hasBlessing());
+            newPlayer.setRevolt(origPlayer.hasRevolt());
+            newPlayer.setLibrarySearched(origPlayer.getLibrarySearched());
+            newPlayer.setSpellsCastLastTurn(origPlayer.getSpellsCastLastTurn());
+            for (int j = 0; j < origPlayer.getSpellsCastThisTurn(); j++) {
+                newPlayer.addSpellCastThisTurn();
+            }
+            newPlayer.setMaxHandSize(origPlayer.getMaxHandSize());
+            newPlayer.setUnlimitedHandSize(origPlayer.isUnlimitedHandSize());
             // TODO creatureAttackedThisTurn
             for (Mana m : origPlayer.getManaPool()) {
                 newPlayer.getManaPool().addMana(m, false);
@@ -117,6 +126,20 @@ public class GameCopier {
             p.setCommanders(commanders);
             ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
+        for (Player origPlayer : playerMap.keySet()) {
+            Player newPlayer = playerMap.get(origPlayer);
+            for (final Card c : origPlayer.getCommanders()) {
+                Card newCommander = gameObjectMap.map(c);
+                int castTimes = origPlayer.getCommanderCast(c);
+                for (int i = 0; i < castTimes; i++) {
+                    newPlayer.incCommanderCast(newCommander);
+                }
+            }
+            for (Map.Entry<Card, Integer> entry : origPlayer.getCommanderDamage()) {
+                Card newCommander = gameObjectMap.map(entry.getKey());
+                newPlayer.addCommanderDamage(newCommander, entry.getValue());
+            }
+        }
         newGame.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         for (Card c : newGame.getCardsInGame()) {
@@ -124,12 +147,17 @@ public class GameCopier {
             if (origCard.hasRemembered()) {
                 for (Object o : origCard.getRemembered()) {
                     if (o instanceof GameObject) {
-                        c.addRemembered(find((GameObject)o));
+                        // Sometimes, a spell can "remember" a token card that's not in any zone
+                        // (and thus wouldn't have been copied) - for example Swords to Plowshares
+                        // remembering its target for LKI. Skip these to not crash in find().
+                        if (o instanceof Card && ((Card)o).getZone() == null) {
+                           continue;
+                        }
+                        c.addRemembered(find((GameObject) o));
                     } else {
                         System.err.println(c + " Remembered: " + o + "/" + o.getClass());
                         c.addRemembered(o);
                     }
-                    
                 }
             }
             for (SpellAbility sa : c.getSpellAbilities()) {
@@ -211,8 +239,20 @@ public class GameCopier {
 
         // TODO countersAddedThisTurn
 
+        if (origGame.getStartingPlayer() != null) {
+            newGame.setStartingPlayer(playerMap.get(origGame.getStartingPlayer()));
+        }
         if (origGame.getMonarch() != null) {
             newGame.setMonarch(playerMap.get(origGame.getMonarch()));
+        }
+        if (origGame.getMonarchBeginTurn() != null) {
+            newGame.setMonarchBeginTurn(playerMap.get(origGame.getMonarchBeginTurn()));
+        }
+        if (origGame.getHasInitiative() != null) {
+            newGame.setHasInitiative(playerMap.get(origGame.getHasInitiative()));
+        }
+        if (origGame.getDayTime() != null) {
+            newGame.setDayTime(origGame.getDayTime());
         }
 
         for (ZoneType zone : ZONES) {
@@ -381,6 +421,7 @@ public class GameCopier {
                 newCard.setNamedCard2(c.getNamedCard());
             }
             newCard.setSVars(c.getSVars());
+            newCard.copyChangedSVarsFrom(c);
         }
 
         if (zone == ZoneType.Stack) {

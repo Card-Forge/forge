@@ -222,8 +222,10 @@ public class CardFactoryUtil {
         if (name == null || name.isEmpty()) {
             return false;
         }
+        card.setNamedCard(name);
+
         if (card.hasKeyword("Double agenda")) {
-            String name2 = player.getController().chooseCardName(sa, cpp, "Card",
+            String name2 = player.getController().chooseCardName(sa, cpp, "Card.!NamedCard",
                     "Name a second card for " + card.getName());
             if (name2 == null || name2.isEmpty()) {
                 return false;
@@ -231,7 +233,6 @@ public class CardFactoryUtil {
             card.setNamedCard2(name2);
         }
 
-        card.setNamedCard(name);
         card.turnFaceDown();
         card.addMayLookAt(player.getGame().getNextTimestamp(), ImmutableList.of(player));
         card.addSpellAbility(abilityRevealHiddenAgenda(card));
@@ -923,15 +924,14 @@ public class CardFactoryUtil {
 
             StringBuilder trigReturn = new StringBuilder();
             trigReturn.append("Mode$ ChangesZone | Origin$ Battlefield | ValidCard$ Card.Self");
-            trigReturn.append(" | Secondary$ True | TriggerDescription$ When this leaves the battlefield, that card returns to the battlefield.");
+            trigReturn.append(" | Secondary$ True | TriggerDescription$ When this permanent leaves the battlefield, return the exiled card to the battlefield under its owner's control.");
 
             StringBuilder ab = new StringBuilder();
             ab.append("DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True ");
             ab.append(" | Champion$ True | Hidden$ True | Optional$ True | ChangeType$ ").append(changeType);
 
             StringBuilder subAb = new StringBuilder();
-            subAb.append("DB$ Sacrifice | Defined$ Card.Self");
-            subAb.append(" | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0");
+            subAb.append("DB$ Sacrifice | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ EQ0");
 
             String returnChampion = "DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield";
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig.toString(), card, intrinsic);
@@ -2172,8 +2172,10 @@ public class CardFactoryUtil {
 
             inst.addReplacement(re);
         } else if (keyword.equals("Compleated")) {
-            String sb = "etbCounter:LOYALTY:-2:ValidCard$ Card.CastSa Spell.paidPhyrexianMana:If life was paid, this planeswalker enters with two fewer loyalty counters";
+            String sb = "etbCounter:LOYALTY:PhySpent:CheckSVar$ PhySpent | SVarCompare$ LT0:This planeswalker" +
+                    " enters with two fewer loyalty counters for each Phyrexian mana symbol life was paid for";
             final ReplacementEffect re = makeEtbCounter(sb, card, intrinsic);
+            card.setSVar("PhySpent", "Count$EachPhyrexianPaidWithLife/Negative");
 
             inst.addReplacement(re);
         } else if (keyword.startsWith("Dredge")) {
@@ -2593,7 +2595,6 @@ public class CardFactoryUtil {
         }
         else if (keyword.startsWith("If CARDNAME would be put into a graveyard "
                 + "from anywhere, reveal CARDNAME and shuffle it into its owner's library instead.")) {
-
             StringBuilder sb = new StringBuilder("Event$ Moved | Destination$ Graveyard | ValidCard$ Card.Self ");
 
             // to show it on Nexus
@@ -2886,7 +2887,7 @@ public class CardFactoryUtil {
                 abilityStr.append(" ").append(vstr);
             }
             Cost cost = new Cost(equipCost, true);
-            if (!cost.isOnlyManaCost() || altCost) { //Something other than a mana cost
+            if (!cost.isOnlyManaCost() || (altCost && extra.contains("<"))) { //Something other than a mana cost
                 abilityStr.append("—");
             } else {
                 abilityStr.append(" ");
@@ -3189,6 +3190,29 @@ public class CardFactoryUtil {
             sa.setIntrinsic(intrinsic);
             sa.setAlternativeCost(AlternativeCost.Outlast);
             inst.addSpellAbility(sa);
+        } else if (keyword.startsWith("Prototype")) {
+            final String[] k = keyword.split(":");
+            if (k.length < 4) {
+                System.err.println("Malformed Prototype entry! - Card: " + card.toString());
+                return;
+            }
+
+            final Cost protoCost = new Cost(k[1], false);
+            final SpellAbility newSA = card.getFirstSpellAbility().copyWithDefinedCost(protoCost);
+            newSA.putParam("SetManaCost", k[1]);
+            newSA.putParam("SetColorByManaCost", "True");
+            newSA.putParam("SetPower", k[2]);
+            newSA.putParam("SetToughness", k[3]);
+            newSA.putParam("Prototype", "True");
+
+            // need to store them for additional copies
+            newSA.getOriginalMapParams().putAll(newSA.getMapParams());
+
+            // only makes description for prompt
+            newSA.setDescription(k[0] + " " + ManaCostParser.parse(k[1]) + " [" + k[2] + "/" + k[3] + "]");
+
+            newSA.setIntrinsic(intrinsic);
+            inst.addSpellAbility(newSA);
         } else if (keyword.startsWith("Prowl")) {
             final String[] k = keyword.split(":");
             final Cost prowlCost = new Cost(k[1], false);

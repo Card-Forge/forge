@@ -45,7 +45,7 @@ public class UntapEffect extends SpellAbilityEffect {
         } else {
             final CardCollection untargetedCards = CardUtil.getRadiance(sa);
             for (final Card tgtC : getTargetCards(sa)) {
-                if (sa.usesTargeting() && !tgtC.canBeTargetedBy(sa)) {
+                if (tgtC.isPhasedOut()) {
                     continue;
                 }
                 if (tgtC.isInPlay()) {
@@ -83,6 +83,10 @@ public class UntapEffect extends SpellAbilityEffect {
         final String valid = sa.getParam("UntapType");
 
         for (final Player p : AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("Defined"), sa)) {
+            if (!p.isInGame()) {
+                continue;
+            }
+
             CardCollectionView list = CardLists.getValidCards(p.getGame().getCardsIn(ZoneType.Battlefield),
                     valid, sa.getActivatingPlayer(), sa.getHostCard(), sa);
             list = CardLists.filter(list, Presets.TAPPED);

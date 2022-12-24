@@ -7,9 +7,9 @@ public class LangFrench extends Lang {
     @Override
     public String getOrdinal(final int position) {
         if (position == 1) {
-            return position + "ᵉʳ";
+            return position + "er";
         } else {
-            return position + "ᵉ";
+            return position + "e";
         }
     }
 

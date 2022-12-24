@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import forge.trackable.TrackableCollection;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
@@ -50,12 +51,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final boolean hasLocalPlayers() {
         return !gameControllers.isEmpty();
     }
+
     public final Set<PlayerView> getLocalPlayers() {
         return gameControllers.keySet();
     }
+
     public final int getLocalPlayerCount() {
         return gameControllers.size();
     }
+
     public final boolean isLocalPlayer(final PlayerView player) {
         return gameControllers.containsKey(player);
     }
@@ -94,12 +98,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         currentPlayer = player;
         updateCurrentPlayer(player);
     }
+
     protected abstract void updateCurrentPlayer(PlayerView player);
 
     private GameView gameView = null;
+
     public final GameView getGameView() {
         return gameView;
     }
+
     @Override
     public void setGameView(final GameView gameView0) {
         if (gameView == null || gameView0 == null) {
@@ -118,6 +125,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public final IGameController getGameController() {
         return getGameController(getCurrentPlayer());
     }
+
     public final IGameController getGameController(final PlayerView player) {
         if (player == null) {
             return spectator;
@@ -181,6 +189,16 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     @Override
+    public void updateRevealedCards(TrackableCollection<CardView> collection) {
+        if (gameView != null) {
+            TrackableCollection<CardView> existing = gameView.getRevealedCollection();
+            if (existing != null)
+                collection.addAll(existing);
+            gameView.updateRevealedCards(collection);
+        }
+    }
+
+    @Override
     public void refreshCardDetails(final Iterable<CardView> cards) {
         //not needed for base game implementation
     }
@@ -199,7 +217,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             if (gameView != null && gameView.isGameOver()) {
                 return true;
             }
-            if (spectator!=null) { //workaround fix!! this is needed on above code or it will
+            if (spectator != null) { //workaround fix!! this is needed on above code or it will
                 for (Map.Entry<PlayerView, IGameController> e : gameControllers.entrySet()) {
                     if (e.getValue().equals(spectator)) {
                         gameControllers.remove(e.getKey());
@@ -212,7 +230,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
                 if (getGameController().mayLookAtAllCards()) { // when it bugged here, the game thinks the spectator (null)
                     return true;                               // is the humancontroller here (maybe because there is an existing game thread???)
                 }
-            } catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 return true; // return true so it will work as normal
             }
         } else {
@@ -225,10 +243,14 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public boolean mayFlip(final CardView cv) {
-        if (cv == null) { return false; }
+        if (cv == null) {
+            return false;
+        }
 
         final CardStateView altState = cv.getAlternateState();
-        if (altState == null) { return false; }
+        if (altState == null) {
+            return false;
+        }
 
         switch (altState.getState()) {
             case Original:
@@ -252,6 +274,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     private final Set<PlayerView> highlightedPlayers = Sets.newHashSet();
+
     @Override
     public void setHighlighted(final PlayerView pv, final boolean b) {
         final boolean hasChanged = b ? highlightedPlayers.add(pv) : highlightedPlayers.remove(pv);
@@ -265,6 +288,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     private final Set<CardView> highlightedCards = Sets.newHashSet();
+
     // used to highlight cards in UI
     @Override
     public void setUsedToPay(final CardView card, final boolean value) {
@@ -279,34 +303,56 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     private final Set<CardView> selectableCards = Sets.newHashSet();
+
     public void setSelectables(final Iterable<CardView> cards) {
-        for (CardView cv : cards) { selectableCards.add(cv); }
+        for (CardView cv : cards) {
+            selectableCards.add(cv);
+        }
     }
+
     public void clearSelectables() {
         selectableCards.clear();
     }
+
     public boolean isSelectable(final CardView card) {
         return selectableCards.contains(card);
     }
+
     public boolean isSelecting() {
         return !selectableCards.isEmpty();
     }
-    public boolean isGamePaused() { return gamePause; }
-    public boolean isGameFast() { return gameSpeed; }
-    public void setgamePause(boolean pause) { gamePause = pause; }
-    public void setGameSpeed(boolean isFast) { gameSpeed = isFast; }
+
+    public boolean isGamePaused() {
+        return gamePause;
+    }
+
+    public boolean isGameFast() {
+        return gameSpeed;
+    }
+
+    public void setgamePause(boolean pause) {
+        gamePause = pause;
+    }
+
+    public void setGameSpeed(boolean isFast) {
+        gameSpeed = isFast;
+    }
+
     public void pauseMatch() {
         IGameController controller = spectator;
         if (controller != null && !isGamePaused())
             controller.selectButtonOk();
     }
+
     public void resumeMatch() {
         IGameController controller = spectator;
         if (controller != null && isGamePaused())
             controller.selectButtonOk();
     }
 
-    /** Concede game, bring up WinLose UI. */
+    /**
+     * Concede game, bring up WinLose UI.
+     */
     public boolean concede() {
         if (gameView.isGameOver()) {
             return true;
@@ -346,11 +392,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             }
             ignoreConcedeChain = false;
             return false;
-        }
-        else if (spectator == null) {
+        } else if (spectator == null) {
             return true; //if no local players or spectator, just quit
-        }
-        else {
+        } else {
             if (showConfirmDialog(Localizer.getInstance().getMessage("lblCloseGameSpectator"), Localizer.getInstance().getMessage("lblCloseGame"), Localizer.getInstance().getMessage("lblClose"), Localizer.getInstance().getMessage("lblCancel"))) {
                 IGameController controller = spectator;
                 spectator = null; //ensure we don't prompt again, including when calling nextGameDecision below
@@ -421,14 +465,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
         awaitNextInputTask = new TimerTask() {
             @Override
             public void run() {
-                FThreads.invokeInEdtLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        synchronized (awaitNextInputTimer) {
-                            if (awaitNextInputTask != null) {
-                                updatePromptForAwait(getCurrentPlayer());
-                                awaitNextInputTask = null;
-                            }
+                FThreads.invokeInEdtLater(() -> {
+                    synchronized (awaitNextInputTimer) {
+                        if (awaitNextInputTask != null) {
+                            updatePromptForAwait(getCurrentPlayer());
+                            awaitNextInputTask = null;
                         }
                     }
                 });
@@ -451,7 +492,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
             if (awaitNextInputTask != null) {
                 try {
                     awaitNextInputTask.cancel(); //cancel timer once next input shown if needed
-                } catch (final Exception ex) {} //suppress any exception thrown by cancel()
+                } catch (final Exception ex) {
+                } //suppress any exception thrown by cancel()
                 awaitNextInputTask = null;
             }
         }
@@ -470,9 +512,11 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     // Abilities to auto-yield to
     private final Set<String> autoYields = Sets.newHashSet();
+
     public final Iterable<String> getAutoYields() {
         return autoYields;
     }
+
     @Override
     public final boolean shouldAutoYield(final String key) {
         String abilityKey = key.indexOf("): ") != -1 ? key.substring(key.indexOf("): ") + 3) : key;
@@ -480,6 +524,7 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         return !getDisableAutoYields() && autoYields.contains(yieldPerAbility ? abilityKey : key);
     }
+
     @Override
     public final void setShouldAutoYield(final String key, final boolean autoYield) {
         String abilityKey = key.indexOf("): ") != -1 ? key.substring(key.indexOf("): ") + 3) : key;
@@ -487,16 +532,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         if (autoYield) {
             autoYields.add(yieldPerAbility ? abilityKey : key);
-        }
-        else {
+        } else {
             autoYields.remove(yieldPerAbility ? abilityKey : key);
         }
     }
 
     private boolean disableAutoYields;
+
     public final boolean getDisableAutoYields() {
         return disableAutoYields;
     }
+
     public final void setDisableAutoYields(final boolean b0) {
         disableAutoYields = b0;
     }
@@ -511,16 +557,29 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     private final Map<Integer, Boolean> triggersAlwaysAccept = Maps.newTreeMap();
 
     @Override
-    public final boolean shouldAlwaysAcceptTrigger(final int trigger) { return Boolean.TRUE.equals(triggersAlwaysAccept.get(Integer.valueOf(trigger))); }
-    @Override
-    public final boolean shouldAlwaysDeclineTrigger(final int trigger) { return Boolean.FALSE.equals(triggersAlwaysAccept.get(Integer.valueOf(trigger))); }
+    public final boolean shouldAlwaysAcceptTrigger(final int trigger) {
+        return Boolean.TRUE.equals(triggersAlwaysAccept.get(Integer.valueOf(trigger)));
+    }
 
     @Override
-    public final void setShouldAlwaysAcceptTrigger(final int trigger) { triggersAlwaysAccept.put(Integer.valueOf(trigger), Boolean.TRUE); }
+    public final boolean shouldAlwaysDeclineTrigger(final int trigger) {
+        return Boolean.FALSE.equals(triggersAlwaysAccept.get(Integer.valueOf(trigger)));
+    }
+
     @Override
-    public final void setShouldAlwaysDeclineTrigger(final int trigger) { triggersAlwaysAccept.put(Integer.valueOf(trigger), Boolean.FALSE); }
+    public final void setShouldAlwaysAcceptTrigger(final int trigger) {
+        triggersAlwaysAccept.put(Integer.valueOf(trigger), Boolean.TRUE);
+    }
+
     @Override
-    public final void setShouldAlwaysAskTrigger(final int trigger) { triggersAlwaysAccept.remove(Integer.valueOf(trigger)); }
+    public final void setShouldAlwaysDeclineTrigger(final int trigger) {
+        triggersAlwaysAccept.put(Integer.valueOf(trigger), Boolean.FALSE);
+    }
+
+    @Override
+    public final void setShouldAlwaysAskTrigger(final int trigger) {
+        triggersAlwaysAccept.remove(Integer.valueOf(trigger));
+    }
 
     // End of Triggers preliminary choice
 
@@ -529,15 +588,12 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     /**
      * Convenience for getChoices(message, 0, 1, choices).
      *
-     * @param <T>
-     *            is automatically inferred.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            a T object.
+     * @param <T>     is automatically inferred.
+     * @param message a {@link java.lang.String} object.
+     * @param choices a T object.
      * @return null if choices is missing, empty, or if the users' choices are
-     *         empty; otherwise, returns the first item in the List returned by
-     *         getChoices.
+     * empty; otherwise, returns the first item in the List returned by
+     * getChoices.
      * @see #getChoices(String, int, int, List)
      */
     @Override
@@ -550,17 +606,15 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     }
 
     // returned Object will never be null
+
     /**
      * <p>
      * getChoice.
      * </p>
      *
-     * @param <T>
-     *            a T object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param choices
-     *            a T object.
+     * @param <T>     a T object.
+     * @param message a {@link java.lang.String} object.
+     * @param choices a T object.
      * @return a T object.
      */
     @Override
@@ -588,13 +642,17 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
     public Integer getInteger(final String message, final int min) {
         return getInteger(message, min, Integer.MAX_VALUE, false);
     }
+
     @Override
     public Integer getInteger(final String message, final int min, final int max) {
         return getInteger(message, min, max, false);
     }
+
     @Override
     public Integer getInteger(final String message, final int min, final int max, final boolean sortDesc) {
-        if (max <= min) { return min; } //just return min if max <= min
+        if (max <= min) {
+            return min;
+        } //just return min if max <= min
 
         //force cutting off after 100 numbers at most
         if (max == Integer.MAX_VALUE) {
@@ -654,7 +712,9 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
         while (true) {
             final String str = showInputDialog(prompt, message);
-            if (str == null) { return null; } // that is 'cancel'
+            if (str == null) {
+                return null;
+            } // that is 'cancel'
 
             if (StringUtils.isNumeric(str)) {
                 final Integer val = Integer.valueOf(str);
@@ -696,8 +756,8 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
      * current implementation requires the user to cancel in order to get the
      * new item to be the first item in the resulting list.
      *
-     * @param title the dialog title.
-     * @param newItem the object to insert.
+     * @param title    the dialog title.
+     * @param newItem  the object to insert.
      * @param oldItems the list of objects.
      * @return A shallow copy of the list of objects, with newItem inserted.
      */
@@ -753,24 +813,24 @@ public abstract class AbstractGuiGame implements IGuiGame, IMayViewCards {
 
     @Override
     public boolean showConfirmDialog(final String message, final String title,
-            final boolean defaultYes) {
+                                     final boolean defaultYes) {
         return showConfirmDialog(message, title, Localizer.getInstance().getMessage("lblYes"), Localizer.getInstance().getMessage("lblNo"));
     }
 
     @Override
     public boolean showConfirmDialog(final String message, final String title,
-            final String yesButtonText, final String noButtonText) {
+                                     final String yesButtonText, final String noButtonText) {
         return showConfirmDialog(message, title, yesButtonText, noButtonText, true);
     }
 
     @Override
-    public void notifyStackAddition(GameEventSpellAbilityCast event) { 
+    public void notifyStackAddition(GameEventSpellAbilityCast event) {
     }
 
     @Override
     public void notifyStackRemoval(GameEventSpellRemovedFromStack event) {
     }
-    
+
     @Override
     public void handleLandPlayed(Card land) {
     }

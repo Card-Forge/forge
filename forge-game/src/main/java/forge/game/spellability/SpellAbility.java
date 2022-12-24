@@ -17,13 +17,7 @@
  */
 package forge.game.spellability;
 
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -114,7 +108,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private Card playEffectCard;
     private Pair<Long, Player> controlledByPlayer;
     private ManaCostBeingPaid manaCostBeingPaid;
-    private boolean spentPhyrexian = false;
+    private int spentPhyrexian = 0;
     private int paidLifeAmount = 0;
 
     private SpellAbility grantorOriginal;
@@ -158,6 +152,8 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
     private EnumMap<AbilityKey, Object> triggeringObjects = AbilityKey.newMap();
 
     private EnumMap<AbilityKey, Object> replacingObjects = AbilityKey.newMap();
+
+    private final List<String> pipsToReduce = new ArrayList<>();
 
     private List<AbilitySub> chosenList = null;
     private CardCollection tappedForConvoke = new CardCollection();
@@ -371,7 +367,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false; //Loyalty ability, not a mana ability.
         }
         // CR 605.1b
-        if (isTrigger() && this.getTrigger().getMode() != TriggerType.TapsForMana) {
+        if (isTrigger() && this.getTrigger().getMode() != TriggerType.TapsForMana && this.getTrigger().getMode() != TriggerType.ManaAdded) {
             return false;
         }
 
@@ -618,11 +614,12 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         payingMana.clear();
     }
 
-    public final boolean getSpendPhyrexianMana() {
+    //getSpendPhyrexianMana
+    public final int getSpendPhyrexianMana() {
         return this.spentPhyrexian;
     }
-    public final void setSpendPhyrexianMana(boolean value) {
-        this.spentPhyrexian = value;
+    public final void setSpendPhyrexianMana(boolean bool) {
+        this.spentPhyrexian = bool ? this.spentPhyrexian + 2 : 0;
     }
 
     public final int getAmountLifePaid() {
@@ -716,6 +713,9 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         // Thus, to protect the original's set from changes, we make a copy right here.
         optionalCosts = EnumSet.copyOf(optionalCosts);
         optionalCosts.add(cost);
+        if (!cost.getPip().equals("")) {
+            pipsToReduce.add(cost.getPip());
+        }
     }
 
     public boolean isBuyBackAbility() {
@@ -883,7 +883,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                     sb.append(payCosts.toString());
                     sb.append(" or ").append(altOnlyMana ? alternateCost.toString() :
                             StringUtils.uncapitalize(alternateCost.toString()));
-                    sb.append(isEquip() ? "." : "");
+                    sb.append(isEquip() && !altOnlyMana ? "." : "");
                 } else {
                     sb.append(payCosts.toString());
                 }
@@ -1142,7 +1142,7 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
                 clone.payingMana.addAll(payingMana);
             }
             clone.paidAbilities = Lists.newArrayList();
-            clone.setPaidHash(Maps.newHashMap(getPaidHash()));
+            clone.setPaidHash(getPaidHash());
 
             // copy last chapter flag for Trigger
             clone.lastChapter = this.lastChapter;
@@ -1482,6 +1482,13 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
     public final boolean isSpectacle() {
         return isAlternativeCost(AlternativeCost.Spectacle);
+    }
+
+    public List<String> getPipsToReduce() {
+        return pipsToReduce;
+    }
+    public final void clearPipsToReduce() {
+        pipsToReduce.clear();
     }
 
     public CardCollection getTappedForConvoke() {
@@ -2064,6 +2071,11 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
 
         if (incR[0].equals("Spell")) {
             if (!root.isSpell()) {
+                return testFailed;
+            }
+        }
+        else if (incR[0].equals("Ability")) {
+            if (!root.isAbility()) {
                 return testFailed;
             }
         }

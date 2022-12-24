@@ -2,7 +2,6 @@
 Code=UGL
 Date=1998-08-11
 Name=Unglued
-MciCode=ug
 Type=Funny
 Border=Silver
 BoosterCovers=1

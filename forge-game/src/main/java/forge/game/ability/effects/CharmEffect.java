@@ -65,6 +65,10 @@ public class CharmEffect extends SpellAbilityEffect {
             // using getCardForUi game is not set, so can't guess max charm
             num = Integer.MAX_VALUE;
         } else {
+            // fallback needed while ability building
+            if (sa.getActivatingPlayer() == null) {
+                sa.setActivatingPlayer(source.getController(), true);
+            }
             num = Math.min(AbilityUtils.calculateAmount(source, sa.getParamOrDefault("CharmNum", "1"), sa), list.size());
         }
         final int min = sa.hasParam("MinCharmNum") ? AbilityUtils.calculateAmount(source, sa.getParam("MinCharmNum"), sa) : num;
@@ -233,28 +237,11 @@ public class CharmEffect extends SpellAbilityEffect {
 
         for (AbilitySub sub : chosen) {
             // Clone the chosen, just in case the same subAb gets chosen multiple times
-            AbilitySub clone = (AbilitySub)sub.copy();
-
-            // update ActivatingPlayer
-            clone.setActivatingPlayer(sa.getActivatingPlayer());
+            AbilitySub clone = (AbilitySub)sub.copy(sa.getActivatingPlayer());
 
             // make StackDescription be the SpellDescription if it doesn't already have one
             if (!clone.hasParam("StackDescription")) {
                 clone.putParam("StackDescription", "SpellDescription");
-            }
-
-            // do not forget what was targeted by the subability
-            SpellAbility ssa = sub;
-            SpellAbility ssaClone = clone;
-            while (ssa != null) {
-                ssaClone.setTargetRestrictions(ssa.getTargetRestrictions());
-                if (ssa.getTargetCard() != null)
-                    ssaClone.setTargetCard(ssa.getTargetCard());
-                ssaClone.setTargetingPlayer(ssa.getTargetingPlayer());
-                ssaClone.setTargets(ssa.getTargets());
-
-                ssa = ssa.getSubAbility();
-                ssaClone = ssaClone.getSubAbility();
             }
 
             // add Clone to Tail of sa

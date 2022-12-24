@@ -11,11 +11,11 @@ import forge.gamesimulationtests.util.card.CardSpecificationHandler;
 
 public class CardAssertAction extends AssertAction {
 	private final CardSpecification cardRequirements;
-	
+
 	public CardAssertAction( final CardSpecification cardRequirements ) {
 		this.cardRequirements = cardRequirements;
 	}
-	
+
 	public CardAssertAction( final CardSpecificationBuilder cardRequirements ) {
 		this( cardRequirements.build() );
 	}

@@ -3,7 +3,6 @@ Code=DDP
 Date=2015-08-28
 Name=Duel Decks: Zendikar vs. Eldrazi
 Code2=DDP
-MciCode=ddp
 Type=Duel_Deck
 ScryfallCode=DDP
 

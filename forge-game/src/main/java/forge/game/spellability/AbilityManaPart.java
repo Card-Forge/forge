@@ -28,6 +28,7 @@ import forge.card.ColorSet;
 import forge.card.MagicColor;
 import forge.card.mana.ManaAtom;
 import forge.card.mana.ManaCostShard;
+import forge.game.Game;
 import forge.game.GameActionUtil;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityKey;
@@ -126,29 +127,31 @@ public class AbilityManaPart implements java.io.Serializable {
      * @param player
      *            a {@link forge.game.player.Player} object.
      * @param sa
+     *
      */
-    public final void produceMana(final String produced, final Player player, SpellAbility sa) {
+    public final String produceMana(final String produced, final Player player, SpellAbility sa) {
         final Card source = this.getSourceCard();
         final ManaPool manaPool = player.getManaPool();
+        final Game game = player.getGame();
         String afterReplace = produced;
 
         SpellAbility root = sa == null ? null : sa.getRootAbility();
 
-        if (root != null && root.isManaAbility()) {
+        if (root != null) {
             final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(source);
             repParams.put(AbilityKey.Mana, afterReplace);
             repParams.put(AbilityKey.Player, player);
             repParams.put(AbilityKey.AbilityMana, root);
             repParams.put(AbilityKey.Activator, root.getActivatingPlayer());
 
-            switch (player.getGame().getReplacementHandler().run(ReplacementType.ProduceMana, repParams)) {
+            switch (game.getReplacementHandler().run(ReplacementType.ProduceMana, repParams)) {
             case NotReplaced:
                 break;
             case Updated:
                 afterReplace = (String) repParams.get(AbilityKey.Mana);
                 break;
             default:
-                return;
+                return "";
             }
         }
 
@@ -181,10 +184,26 @@ public class AbilityManaPart implements java.io.Serializable {
         runParams.put(AbilityKey.AbilityMana, root);
         runParams.put(AbilityKey.Activator, root == null ? null : root.getActivatingPlayer());
 
-        player.getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
-        if (source.isLand() && root.isManaAbility() && root.getPayCosts() != null && root.getPayCosts().hasTapCost()) {
+        game.getTriggerHandler().runTrigger(TriggerType.ManaAdded, runParams, false);
+
+        return afterReplace;
+    }
+
+    public void tapsForMana(final SpellAbility root, String mana) {
+        if (!root.isManaAbility() || root.getPayCosts() == null || !root.getPayCosts().hasTapCost()) {
+            return;
+        }
+
+        if (getSourceCard().isLand()) {
             root.getActivatingPlayer().setTappedLandForManaThisTurn(true);
         }
+
+        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(getSourceCard());
+        runParams.put(AbilityKey.Produced, mana);
+        runParams.put(AbilityKey.AbilityMana, root);
+        runParams.put(AbilityKey.Activator, root.getActivatingPlayer());
+
+        getSourceCard().getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
     }
 
     /**
@@ -529,7 +548,10 @@ public class AbilityManaPart implements java.io.Serializable {
      * @return a boolean.
      */
     public final boolean canProduce(final String s, final SpellAbility sa) {
-        // TODO: need to handle replacement effects like 106.7
+        // TODO: need to handle replacement effects like 106.7 before deciding no mana is produced
+        //if (sa.amountOfManaGenerated(false) == 0) {
+        //    return false;
+        //}
 
         // Any mana never means Colorless?
         if (isAnyMana() && !s.equals("C")) {
@@ -543,7 +565,7 @@ public class AbilityManaPart implements java.io.Serializable {
     @Override
     public final boolean equals(final Object o) {
         // Mana abilities with same Descriptions are "equal"
-        if ((o == null) || !(o instanceof AbilityManaPart)) {
+        if (!(o instanceof AbilityManaPart)) {
             return false;
         }
 

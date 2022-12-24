@@ -3,7 +3,6 @@ Code=LEA
 Date=1993-08-05
 Name=Limited Edition Alpha
 Code2=A
-MciCode=al
 Type=Core
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare

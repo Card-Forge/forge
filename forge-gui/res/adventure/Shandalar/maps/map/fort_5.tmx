@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="59">
+<map version="1.9" tiledversion="1.9.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="59">
  <editorsettings>
   <export target="wastetown..tmx" format="tmx"/>
  </editorsettings>
  <tileset firstgid="1" source="../tileset/main.tsx"/>
- <tileset firstgid="3477" source="../tileset/buildings.tsx"/>
+ <tileset firstgid="10113" source="../tileset/buildings.tsx"/>
  <layer id="6" name="Collision" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzllF0KgCAQhH1PT1BdrM6Snauyu6XUgC3rQzD9QANLrYWfo7s21pjmo9E7Y2a7R+fOOcbuYC7xCU3xvc1yjDHZkglJLputzV/iJtUkv2uMsXqeK+sH0tYzxDyQuCVfWA/Eruu3zvev3Mme60sGevxuvyUx+9cr/avJE/so7WHyoN0duVLvtsf/DC7Y8K3dFfDJZII7Z/xcQXy/Mu8G2v1g1Q==
+   eJyT4WFgkBmkOJqXgWEXDwRH8aLyYWK0sHM3kIaBnUC2LBIfJkZNu9HthAF0e6ltNzbzcdkLAtJU8u9eIK7npr+96OkHBrC5pxbI30Mle3H5C+YeGKB2uiY1fj3FR+2lxN6dPKjpCx2ridHHv7gAtewF5Zc6LPkXG6ijYj4ChSGoLMBWdiADUN6Vhaqnhr0wu2H+xlZWwPxJTTth9u5Csh8Z7EGTJ8VcAMtiYWc=
   </data>
  </layer>
  <layer id="1" name="Background" width="30" height="17">
@@ -25,7 +25,7 @@
    <property name="spriteLayer" type="bool" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2BwgnfsA+2CUUBL8J2fgeEHP/3tFRZgYBARoL+9IwFE0tm+Ol7s7FGAHwAA/+cEuQ==
+   eJxjYBgFo2BwgnfsA+2CUUBt8FiTgeGJJoTNCMX0AP9BdmrR396RBiLpbF8dL3b2KMAPAISEBdQ=
   </data>
  </layer>
  <objectgroup id="4" name="Objects">
@@ -35,7 +35,7 @@
    </properties>
   </object>
   <object id="48" template="../obj/treasure.tx" x="218.125" y="43.8175"/>
-  <object id="50" template="../obj/enemy.tx" x="278.833" y="169.777">
+  <object id="50" template="../obj/enemy.tx" x="288.333" y="177.277">
    <properties>
     <property name="enemy" value="Demon"/>
    </properties>

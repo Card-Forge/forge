@@ -3,7 +3,6 @@ Code=KHM
 Date=2021-02-05
 Name=Kaldheim
 Code2=KHM
-MciCode=khm
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:!fromSheet("KHM Snow Lands"):fromsheet("KHM cards"), 3 Uncommon:fromSheet("KHM cards"), 1 RareMythic:fromSheet("KHM cards"), 1 fromSheet("KHM Snow Lands")
@@ -430,6 +429,8 @@ ScryfallCode=KHM
 403 U Poison the Cup @Colin Boyer
 404 C Frost Bite @Caio Monteiro
 405 C Masked Vandal @Jason A. Engle
+406 M Vorinclex, Monstrous Raider @Richard Whitters
+407 M Vorinclex, Monstrous Raider @Richard Whitters
 
 [rebalanced]
 A40 M A-Alrund, God of the Cosmos @Kieran Yanner

@@ -32,6 +32,8 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
      */
     public enum QPref {
 
+        // if enabled, player must follow world rules in duels (allowed sets only, banned/restricted cards etc.)
+        WORLD_RULES_CONFORMANCE("0"),
         // How many of each rarity comes in a won booster pack
         BOOSTER_COMMONS("11"),
         BOOSTER_UNCOMMONS("3"),
@@ -293,6 +295,7 @@ public class QuestPreferences extends PreferencesStore<QuestPreferences.QPref> i
                     return "Bias value too large (maximum 100).";
                 }
                 break;
+            case WORLD_RULES_CONFORMANCE:
             case DRAFT_ROTATION:
             case SPECIAL_BOOSTERS:
             case FOIL_FILTER_DEFAULT:

@@ -7,7 +7,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.CardCollection;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.game.zone.ZoneType;
 import forge.util.Lang;
 import forge.util.MyRandom;
@@ -26,17 +25,18 @@ public class ReorderZoneEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final ZoneType zone = ZoneType.smartValueOf(sa.getParam("Zone"));
         boolean shuffle = sa.hasParam("Random");
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
 
         for (final Player p : getTargetPlayers(sa)) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                CardCollection list = new CardCollection(p.getCardsIn(zone));
-                if (shuffle) {
-                    Collections.shuffle(list, MyRandom.getRandom());
-                    p.getZone(zone).setCards(list);
-                } else {
-                    p.getController().orderMoveToZoneList(list, zone, sa);
-                }
+            if (!p.isInGame()) {
+                continue;
+            }
+
+            CardCollection list = new CardCollection(p.getCardsIn(zone));
+            if (shuffle) {
+                Collections.shuffle(list, MyRandom.getRandom());
+                p.getZone(zone).setCards(list);
+            } else {
+                p.getController().orderMoveToZoneList(list, zone, sa);
             }
         }
     }

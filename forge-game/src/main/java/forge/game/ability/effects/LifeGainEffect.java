@@ -7,6 +7,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Lang;
+import org.apache.commons.lang3.StringUtils;
 
 public class LifeGainEffect extends SpellAbilityEffect {
 
@@ -17,16 +18,22 @@ public class LifeGainEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final String amountStr = sa.getParam("LifeAmount");
+        final String spellDesc = sa.getParam("SpellDescription");
 
         sb.append(Lang.joinHomogenous(getDefinedPlayersOrTargeted(sa)));
-
-        if (!amountStr.equals("AFLifeLost") || sa.hasSVar(amountStr)) {
-            final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
-
-            sb.append(getDefinedPlayersOrTargeted(sa).size() > 1 ? " gain " : " gains ").append(amount);
-            sb.append(" life.");
+        if (sb.length() == 0 && spellDesc != null) {
+            return (spellDesc);
         } else {
-            sb.append(" gains life equal to the life lost this way.");
+            sb.append(getDefinedPlayersOrTargeted(sa).size() > 1 ? " gain " : " gains ");
+            if (!StringUtils.isNumeric(amountStr) && spellDesc != null && spellDesc.contains("life equal to")) {
+                sb.append(spellDesc.substring(spellDesc.indexOf("life equal to")));
+            } else if (!amountStr.equals("AFLifeLost") || sa.hasSVar(amountStr)) {
+                final int amount = AbilityUtils.calculateAmount(sa.getHostCard(), amountStr, sa);
+
+                sb.append(amount).append(" life.");
+            } else {
+                sb.append("life equal to the life lost this way.");
+            }
         }
 
         return sb.toString();
@@ -51,13 +58,14 @@ public class LifeGainEffect extends SpellAbilityEffect {
         }
 
         for (final Player p : tgtPlayers) {
-            if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                if (variableAmount) {
-                    sa.setSVar("AFNotDrawnNum", sa.getSVar("AFNotDrawnNum_" + p.getId()));
-                    lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
-                }
-                p.gainLife(lifeAmount, sa.getHostCard(), sa);
+            if (!p.isInGame()) {
+                continue;
             }
+            if (variableAmount) {
+                sa.setSVar("AFNotDrawnNum", sa.getSVar("AFNotDrawnNum_" + p.getId()));
+                lifeAmount = AbilityUtils.calculateAmount(sa.getHostCard(), amount, sa);
+            }
+            p.gainLife(lifeAmount, sa.getHostCard(), sa);
         }
     }
 

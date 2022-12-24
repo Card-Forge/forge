@@ -3,7 +3,6 @@ Code=M14
 Date=2013-07-19
 Name=Magic 2014
 Code2=M14
-MciCode=m14
 Type=Core
 BoosterCovers=5
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand

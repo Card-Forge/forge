@@ -1337,7 +1337,7 @@ public class AiBlockController {
         }
 
         int evalBlk;
-        if (blocker.isFaceDown() && blocker.getView().canFaceDownBeShownTo(ai.getView(), false) && blocker.getState(CardStateName.Original).getType().isCreature()) {
+        if (blocker.isFaceDown() && blocker.getView().canFaceDownBeShownTo(ai.getView()) && blocker.getState(CardStateName.Original).getType().isCreature()) {
             // if the blocker is a face-down creature (e.g. cast via Morph, Manifest), evaluate it
             // in relation to the original state, not to the Morph state
             evalBlk = ComputerUtilCard.evaluateCreature(Card.fromPaperCard(blocker.getPaperCard(), ai), false, true);

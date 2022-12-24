@@ -22,7 +22,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.spellability.Spell;
 import forge.game.spellability.SpellAbility;
-import forge.game.trigger.WrappedAbility;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 import forge.util.TextUtil;
@@ -409,7 +408,7 @@ public class ComputerUtilCost {
     }
 
     /**
-     * Check creature sacrifice cost.
+     * Check TapType cost.
      *
      * @param cost
      *            the cost
@@ -527,7 +526,7 @@ public class ComputerUtilCost {
      */
     public static boolean canPayCost(final SpellAbility sa, final Player player, final boolean effect) {
         if (sa.getActivatingPlayer() == null) {
-            sa.setActivatingPlayer(player); // complaints on NPE had came before this line was added.
+            sa.setActivatingPlayer(player, true); // complaints on NPE had came before this line was added.
         }
 
         final boolean cannotBeCountered = !CardFactoryUtil.isCounterable(sa.getHostCard());
@@ -594,7 +593,7 @@ public class ComputerUtilCost {
         }
 
         // Ward - will be accounted for when rechecking a targeted ability
-        if (!(sa instanceof WrappedAbility) && sa.usesTargeting() && !cannotBeCountered) {
+        if (!sa.isTrigger() && sa.usesTargeting() && (!sa.isSpell() || !cannotBeCountered)) {
             for (Card tgt : sa.getTargets().getTargetCards()) {
                 if (tgt.hasKeyword(Keyword.WARD) && tgt.isInPlay() && tgt.getController().isOpponentOf(sa.getHostCard().getController())) {
                     Cost wardCost = ComputerUtilCard.getTotalWardCost(tgt);
@@ -797,7 +796,7 @@ public class ComputerUtilCost {
         if (ApiType.Counter.equals(sa.getApi())) {
             List<SpellAbility> spells = AbilityUtils.getDefinedSpellAbilities(source, sa.getParamOrDefault("Defined", "Targeted"), sa);
             for (SpellAbility toBeCountered : spells) {
-                if (sa.isSpell() && !CardFactoryUtil.isCounterable(toBeCountered.getHostCard())) {
+                if (toBeCountered.isSpell() && !CardFactoryUtil.isCounterable(toBeCountered.getHostCard())) {
                     return false;
                 }
                 // TODO check hasFizzled

@@ -40,7 +40,7 @@ public class PlayAi extends SpellAbilityAi {
             return false; // prevent infinite loop
         }
 
-        CardCollection cards = getPlayableCards(sa, ai);
+        List<Card> cards = getPlayableCards(sa, ai);
         if (cards.isEmpty()) {
             return false;
         }
@@ -148,7 +148,7 @@ public class PlayAi extends SpellAbilityAi {
                 // of which spell was the reason for the choice can be used there
                 for (SpellAbility s : c.getBasicSpells(c.getState(CardStateName.Original))) {
                     Spell spell = (Spell) s;
-                    s.setActivatingPlayer(ai);
+                    s.setActivatingPlayer(ai, true);
                     // timing restrictions still apply
                     if (!s.getRestrictions().checkTimingRestrictions(c, s))
                         continue;
@@ -188,14 +188,14 @@ public class PlayAi extends SpellAbilityAi {
         });
         return ComputerUtilCard.getBestAI(tgtCards);
     }
-    
-    private static CardCollection getPlayableCards(SpellAbility sa, Player ai) {
-        CardCollection cards = new CardCollection();
+
+    private static List<Card> getPlayableCards(SpellAbility sa, Player ai) {
+        List<Card> cards = null;
         final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Card source = sa.getHostCard();
 
         if (tgt != null) {
-            cards = CardLists.getValidCards(ai.getGame().getCardsIn(tgt.getZone()), tgt.getValidTgts(), ai, source, sa);
+            cards = CardUtil.getValidCardsToTarget(tgt, sa);
         } else if (!sa.hasParam("Valid")) {
             cards = AbilityUtils.getDefinedCards(source, sa.getParam("Defined"), sa);
         }

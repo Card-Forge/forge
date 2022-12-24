@@ -12,7 +12,7 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
+import forge.util.Lang;
 import forge.util.Localizer;
 import forge.util.MyRandom;
 
@@ -25,9 +25,8 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa)) {
-            sb.append(p).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
+
         sb.append("chooses a number.");
 
         return sb.toString();
@@ -46,35 +45,34 @@ public class ChooseNumberEffect extends SpellAbilityEffect {
         final String sMax = sa.getParamOrDefault("Max", "99");
         final int max = AbilityUtils.calculateAmount(card, sMax, sa); 
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa);
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final Map<Player, Integer> chooseMap = Maps.newHashMap(); 
 
-        for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                int chosen;
-                if (random) {
-                    chosen = MyRandom.getRandom().nextInt((max - min) + 1) + min;
-                    //TODO more useful notify for RepeatEach -> ChooseNumber with random
-                    p.getGame().getAction().notifyOfValue(sa, p, Integer.toString(chosen), null);
+        for (final Player p : getTargetPlayers(sa)) {
+            if (!p.isInGame()) {
+                continue;
+            }
+            int chosen;
+            if (random) {
+                chosen = MyRandom.getRandom().nextInt((max - min) + 1) + min;
+                //TODO more useful notify for RepeatEach -> ChooseNumber with random
+                p.getGame().getAction().notifyOfValue(sa, p, Integer.toString(chosen), null);
+            } else {
+                String title = sa.hasParam("ListTitle") ? sa.getParam("ListTitle") : Localizer.getInstance().getMessage("lblChooseNumber");
+                if (anyNumber) {
+                    Integer value = p.getController().announceRequirements(sa, title);
+                    chosen = value == null ? 0 : value;
                 } else {
-                    String title = sa.hasParam("ListTitle") ? sa.getParam("ListTitle") : Localizer.getInstance().getMessage("lblChooseNumber");
-                    if (anyNumber) {
-                        Integer value = p.getController().announceRequirements(sa, title);
-                        chosen = value == null ? 0 : value;
-                    } else {
-                        chosen = p.getController().chooseNumber(sa, title, min, max);
-                    }
-                    // don't notify here, because most scripts I've seen don't store that number in a long term
+                    chosen = p.getController().chooseNumber(sa, title, min, max);
                 }
-                if (secretlyChoose) {
-                    chooseMap.put(p, chosen);
-                } else {
-                    card.setChosenNumber(chosen);
-                }
-                if (sa.hasParam("Notify")) {
-                    p.getGame().getAction().notifyOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
-                }
+                // don't notify here, because most scripts I've seen don't store that number in a long term
+            }
+            if (secretlyChoose) {
+                chooseMap.put(p, chosen);
+            } else {
+                card.setChosenNumber(chosen);
+            }
+            if (sa.hasParam("Notify")) {
+                p.getGame().getAction().notifyOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
             }
         }
         if (secretlyChoose) {

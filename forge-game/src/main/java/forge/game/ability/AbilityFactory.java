@@ -110,7 +110,7 @@ public final class AbilityFactory {
     }
 
     public static final SpellAbility getAbility(final String abString, final Card card) {
-        return getAbility(abString, card, card.getCurrentState());
+        return getAbility(abString, card.getCurrentState());
     }
     public static final SpellAbility getAbility(final String abString, final Card card, final IHasSVars sVarHolder) {
         return getAbility(abString, card.getCurrentState(), sVarHolder);
@@ -302,8 +302,7 @@ public final class AbilityFactory {
         }
 
         if (spellAbility instanceof SpellApiBased && hostCard.isPermanent()) {
-            String desc = mapParams.containsKey("SpellDescription") ? mapParams.get("SpellDescription")
-                    : spellAbility.getHostCard().getName();
+            String desc = mapParams.getOrDefault("SpellDescription", spellAbility.getHostCard().getName());
             spellAbility.setDescription(desc);
         } else if (mapParams.containsKey("SpellDescription")) {
             spellAbility.rebuiltDescription();

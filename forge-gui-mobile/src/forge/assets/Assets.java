@@ -44,11 +44,12 @@ public class Assets implements Disposable {
     private TextureParameter textureParameter;
     private int cGen = 0, cGenVal = 0, cFB = 0, cFBVal = 0, cTM = 0, cTMVal = 0, cSF = 0, cSFVal = 0, cCF = 0, cCFVal = 0, aDF = 0, cDFVal = 0;
     public Assets() {
+        String titleFilename = Forge.isLandscapeMode() ? "title_bg_lq.png" : "title_bg_lq_portrait.png";
         try {
             //init titleLQ
             Texture titleBG_LQ = GuiBase.isAndroid() ?
-                    new Texture(Gdx.files.internal("fallback_skin").child("title_bg_lq.png")) :
-                    new Texture(Gdx.files.classpath("fallback_skin").child("title_bg_lq.png"));
+                    new Texture(Gdx.files.internal("fallback_skin").child(titleFilename)) :
+                    new Texture(Gdx.files.classpath("fallback_skin").child(titleFilename));
             fallback_skins().put(0, titleBG_LQ == null ? getDummy() : titleBG_LQ);
             //init transition
             Texture transitionLQ = GuiBase.isAndroid() ?
@@ -56,7 +57,9 @@ public class Assets implements Disposable {
                     new Texture(Gdx.files.classpath("fallback_skin").child("transition.png"));
             fallback_skins().put(1, transitionLQ == null ? getDummy() : transitionLQ);
         } catch (Exception e) {
-            e.printStackTrace();
+            fallback_skins().clear();
+            fallback_skins().put(0, getDummy());
+            fallback_skins().put(1, getDummy());
         }
     }
     @Override
@@ -216,8 +219,13 @@ public class Assets implements Disposable {
         return defaultImage;
     }
     private Texture getDummy() {
-        if (dummy == null)
-            dummy =  new Texture(10, 10, Pixmap.Format.RGBA4444);
+        if (dummy == null) {
+            Pixmap P = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
+            P.setColor(0f, 0f, 0f, 1f);
+            P.drawPixel(0, 0);
+            dummy = new Texture(P);
+            P.dispose();
+        }
         return dummy;
     }
     public class MemoryTrackingAssetManager extends AssetManager {

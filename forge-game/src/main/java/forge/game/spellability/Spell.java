@@ -23,6 +23,7 @@ import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.Game;
 import forge.game.card.Card;
+import forge.game.card.CardFactory;
 import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.cost.CostPayment;
@@ -192,6 +193,13 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             // need to reset CMC
             source.setLKICMC(-1);
             source.setLKICMC(source.getCMC());
+            lkicheck = true;
+        } else if (hasParam("Prototype")) {
+            if (!source.isLKI()) {
+                source = CardUtil.getLKICopy(source);
+            }
+            Long next = source.getGame().getNextTimestamp();
+            source.addCloneState(CardFactory.getCloneStates(source, source, this), next);
             lkicheck = true;
         }
 

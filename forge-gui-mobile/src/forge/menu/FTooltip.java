@@ -14,7 +14,11 @@ import forge.util.Utils;
 
 public class FTooltip extends FDropDown {
     private static final FSkinFont FONT = FSkinFont.get(12);
-    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static FSkinColor getForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
     private static final float PADDING = Utils.scale(5);
 
     private FDisplayObject owner;
@@ -68,6 +72,6 @@ public class FTooltip extends FDropDown {
     @Override
     public void drawBackground(Graphics g) {
         super.drawBackground(g);
-        g.drawText(text, FONT, FORE_COLOR, PADDING - getScrollLeft(), PADDING - getScrollTop(), getScrollWidth() - 2 * PADDING, getScrollHeight() - 2 * PADDING, true, Align.left, false);
+        g.drawText(text, FONT, getForeColor(), PADDING - getScrollLeft(), PADDING - getScrollTop(), getScrollWidth() - 2 * PADDING, getScrollHeight() - 2 * PADDING, true, Align.left, false);
     }
 }

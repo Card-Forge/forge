@@ -10,7 +10,6 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.player.Player;
 import forge.game.player.PlayerCollection;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 import forge.util.Localizer;
 
 public class LifeSetEffect extends SpellAbilityEffect {
@@ -22,29 +21,30 @@ public class LifeSetEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final boolean redistribute = sa.hasParam("Redistribute");
         final int lifeAmount = redistribute ? 0 : AbilityUtils.calculateAmount(sa.getHostCard(), sa.getParam("LifeAmount"), sa);
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         final List<Integer> lifetotals = new ArrayList<>();
         final PlayerCollection players = getTargetPlayers(sa);
 
         if (redistribute) {
             for (final Player p : players) {
-                if (tgt == null || p.canBeTargetedBy(sa)) {
-                    lifetotals.add(p.getLife());
+                if (!p.isInGame()) {
+                    continue;
                 }
+                lifetotals.add(p.getLife());
             }
         }
 
         for (final Player p : players.threadSafeIterable()) {
-            if (tgt == null || p.canBeTargetedBy(sa)) {
-                if (!redistribute) {
-                    p.setLife(lifeAmount, sa);
-                } else {
-                    List<Integer> validChoices = getDistribution(players, true, lifetotals);
-                    int life = sa.getActivatingPlayer().getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblLifeTotal") + ": " + p, validChoices, p);
-                    p.setLife(life, sa);
-                    lifetotals.remove((Integer) life);
-                    players.remove(p);
-                }
+            if (!p.isInGame()) {
+                continue;
+            }
+            if (!redistribute) {
+                p.setLife(lifeAmount, sa);
+            } else {
+                List<Integer> validChoices = getDistribution(players, true, lifetotals);
+                int life = sa.getActivatingPlayer().getController().chooseNumber(sa, Localizer.getInstance().getMessage("lblLifeTotal") + ": " + p, validChoices, p);
+                p.setLife(life, sa);
+                lifetotals.remove((Integer) life);
+                players.remove(p);
             }
         }
     }
@@ -87,7 +87,7 @@ public class LifeSetEffect extends SpellAbilityEffect {
                 return validChoices;
             }
         }
-        return new ArrayList<Integer>();
+        return new ArrayList<>();
     }
 
     /* (non-Javadoc)

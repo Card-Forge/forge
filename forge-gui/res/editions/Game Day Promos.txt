@@ -13,4 +13,5 @@ ScryfallCode=GDY
 5 R Workshop Warchief @Minard Maxime
 6 M Shivan Devastator @Aldo Domínguez
 7 U Recruitment Officer @Zoltan Boros
+8 R Braids, Arisen Nightmare @Anastasia Balakchina
 9 M Surge Engine @Volkan Baga

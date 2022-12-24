@@ -1,0 +1,9 @@
+Name:Perilous Iteration
+ManaCost:R G
+Types:Sorcery
+A:SP$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.YouOwn+cmcLE2 | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBSeek | SpellDescription$ Seek a card with mana value 2 or less and a card with mana value 3 or greater. Discard those cards at the beginning of your next turn's end step.
+SVar:DBSeek:DB$ ChangeZone | Origin$ Library | Destination$ Hand | AtRandom$ True | NoShuffle$ True | Mandatory$ True | NoLooking$ True | NoReveal$ True | ChangeType$ Card.YouOwn+cmcGE3 | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBDelay
+SVar:DBDelay:DB$ DelayedTrigger | DelayedTriggerDefinedPlayer$ You | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDiscard | RememberObjects$ Remembered | TriggerDescription$ Discard those cards at the beginning of your next turn's end step. 
+SVar:TrigDiscard:DB$ Discard | Mode$ Defined | DefinedCards$ DelayTriggerRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+Oracle:Seek a card with mana value 2 or less and a card with mana value 3 or greater. Discard those cards at the beginning of your next turn's end step.

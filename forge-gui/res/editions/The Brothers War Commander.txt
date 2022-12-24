@@ -26,7 +26,14 @@ ScryfallCode=BRC
 18 R Smelting Vat @Robin Olausson
 19 R Thopter Shop @Craig J Spearing
 20 R Wondrous Crucible @Evan Shipard
+21 R Disciple of Caelus Nin @Steve Argyle
 22 R The Brothers' War @Mark Poole
+23 R Sardian Avenger @Joseph Weston
+24 M Rootpath Purifier @Justyna Gil
+25 M Titania, Nature's Force @Heonhwa Choe
+26 R The Archimandrite @Cristi Balanescu
+27 R Staff of Titania @Samuel Perin
+28 R Urza's Workshop @Alexander Forssberg
 29 L Plains @Raymond Bonilla
 30 L Plains @Jorge Jacinto
 31 L Island @Eddie Mendoza
@@ -37,8 +44,33 @@ ScryfallCode=BRC
 36 L Mountain @Victor Harmatiuk
 39 M Mishra, Eminent One @Randy Vargas
 40 M Urza, Chief Artificer @Bartlomiej Gawel
+41 R Disciple of Caelus Nin @Steve Argyle
+42 M Tawnos, Solemn Survivor @Matt Stewart
+43 R Sardian Avenger @Joseph Weston
+44 M Rootpath Purifier @Justyna Gil
+45 M Titania, Nature's Force @Heonhwa Choe
+46 R The Archimandrite @Cristi Balanescu
+47 M Ashnod the Uncaring @Kieran Yanner
 48 M Mishra, Eminent One @Randy Vargas
 49 M Urza, Chief Artificer @Bartlomiej Gawel
+50 R Staff of Titania @Samuel Perin
+51 R Urza's Workshop @Alexander Forssberg
+52 R Sanwell, Avenger Ace @Josu Hernaiz
+53 R Scholar of New Horizons @Randy Vargas
+54 R Glint Raker @Lars Grant-West
+55 R March of Progress @Ben Wootten
+56 R Terisiare's Devastation @Bram Sels
+57 R Wire Surgeons @Josu Hernaiz
+58 R Wreck Hunter @Josu Hernaiz
+59 R Blast-Furnace Hellkite @Aldo Domínguez
+60 R Farid, Enterprising Salvager @Bruno Biazotto
+61 R Hexavus @Mark Tedin
+62 R Kayla's Music Box @Aaron Miller
+63 R Machine God's Effigy @Martin de Diego Sádaba
+64 R Scavenged Brawler @Craig J Spearing
+65 R Smelting Vat @Robin Olausson
+66 R Thopter Shop @Craig J Spearing
+67 R Wondrous Crucible @Evan Shipard
 68 R Angel of the Ruins @Viko Menezes
 69 R Austere Command @Anna Steinbauer
 70 R Bronze Guardian @Grzegorz Rutkowski
@@ -161,8 +193,9 @@ ScryfallCode=BRC
 187 C Great Furnace @Raymond Bonilla
 188 U Izzet Boilerworks @John Avon
 189 C Mistvault Bridge @Mathias Kollros
+190 U Myriad Landscape @Richard Wright
 191 U Orzhov Basilica @John Avon
-192 U Myriad Landscape @Richard Wright
+192 C Path of Ancestry @Alayna Danner
 193 R Prairie Stream @Adam Paquette
 194 U Rakdos Carnarium @John Avon
 195 C Razortide Bridge @Rob Alexander
@@ -182,3 +215,17 @@ ScryfallCode=BRC
 209 R Temple of Silence @Adam Paquette
 210 C Terramorphic Expanse @Dan Scott
 211 C Vault of Whispers @Alexander Forssberg
+
+[tokens]
+c_10_10_eldrazi
+c_1_1_a_construct
+c_1_1_a_myr
+c_1_1_a_servo
+c_x_x_a_phyrexian_horror
+g_5_3_elemental
+scrap
+u_1_1_a_thopter_flying
+u_1_1_faerie_flying
+u_2_1_a_phyrexian_myr
+w_0_1_goat
+wb_2_1_inkling_flying

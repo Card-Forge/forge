@@ -84,6 +84,10 @@ public enum CSubmenuQuestPrefs implements ICDoc {
         final Localizer localizer = Localizer.getInstance();
         final String s = localizer.getMessage("lblSavefailed") +":" + s0;
         switch(i0.getErrType()) {
+        case GAME_SETTINGS:
+            view.getLblErrGameSettings().setVisible(true);
+            view.getLblErrGameSettings().setText(s);
+            break;
         case BOOSTER:
             view.getLblErrBooster().setVisible(true);
             view.getLblErrBooster().setText(s);
@@ -115,6 +119,7 @@ public enum CSubmenuQuestPrefs implements ICDoc {
     public static void resetErrors() {
         final VSubmenuQuestPrefs view = VSubmenuQuestPrefs.SINGLETON_INSTANCE;
 
+        view.getLblErrGameSettings().setVisible(false);
         view.getLblErrBooster().setVisible(false);
         view.getLblErrDifficulty().setVisible(false);
         view.getLblErrRewards().setVisible(false);

@@ -3,7 +3,6 @@ Code=SCG
 Date=2003-05-26
 Name=Scourge
 Code2=SC
-MciCode=sc
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare

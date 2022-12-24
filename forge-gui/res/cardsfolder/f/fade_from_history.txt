@@ -1,0 +1,8 @@
+Name:Fade from History
+ManaCost:2 G G
+Types:Sorcery
+A:SP$ Token | TokenOwner$ Player.controlsEnchantment,controlsArtifact | TokenScript$ g_2_2_bear | SubAbility$ DBDestroy | SpellDescription$ Each player who controls an artifact or enchantment creates a 2/2 green Bear creature token. Then destroy all artifacts and enchantments.
+SVar:DBDestroy:DB$ DestroyAll | ValidCards$ Artifact,Enchantment
+AI:RemoveDeck:Random
+DeckHas:Ability$Token & Type$Bear
+Oracle:Each player who controls an artifact or enchantment creates a 2/2 green Bear creature token. Then destroy all artifacts and enchantments.

@@ -22,7 +22,7 @@ public class FogEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
-        final String name = hostCard.getName() + "'s Effect";
+        final String name = hostCard + "'s Effect";
         final String image = hostCard.getImageKey();
         StringBuilder sb = new StringBuilder("Event$ DamageDone | ActiveZones$ Command | IsCombat$ True");
         sb.append(" | Prevent$ True | Description$ Prevent all combat damage this turn.");

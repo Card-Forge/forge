@@ -691,8 +691,7 @@ public class Player extends GameEntity implements Comparable<Player> {
                 && !this.getGame().getRules().hasAppliedVariant(GameType.Brawl)) {
             // In case that commander is merged permanent, get the real commander card
             final Card realCommander = source.getRealCommander();
-            int damage = getCommanderDamage(realCommander) + amount;
-            commanderDamage.put(realCommander, damage);
+            addCommanderDamage(realCommander, amount);
             view.updateCommanderDamage(this);
             if (realCommander != source) {
                 view.updateMergedCommanderDamage(source, realCommander);
@@ -827,6 +826,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean canReceiveCounters(final CounterType type) {
+        if (!isInGame()) {
+            return false;
+        }
         if (StaticAbilityCantPutCounter.anyCantPutCounter(this, type)) {
             return false;
         }
@@ -1302,10 +1304,6 @@ public class Player extends GameEntity implements Comparable<Player> {
 
         PlayerZone zone = getZone(zoneType);
         return zone == null ? CardCollection.EMPTY : zone.getCards(filterOutPhasedOut);
-    }
-
-    public final CardCollectionView getCardsIncludePhasingIn(final ZoneType zone) {
-        return getCardsIn(zone, false);
     }
 
     /**
@@ -1923,7 +1921,7 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public final boolean cantLoseForZeroOrLessLife() {
-        return hasKeyword("You don't lose the game for having 0 or less life.");
+        return cantLose() || hasKeyword("You don't lose the game for having 0 or less life.");
     }
 
     public final boolean cantWin() {
@@ -2096,15 +2094,6 @@ public class Player extends GameEntity implements Comparable<Player> {
             }
         } else if (incR[0].equals("You")) {
             if (!equals(sourceController)) {
-                return false;
-            }
-        } else if (incR[0].equals("EnchantedController")) {
-            final GameEntity enchanted = source.getEntityAttachedTo();
-            if (enchanted == null || !(enchanted instanceof Card)) {
-                return false;
-            }
-            final Card enchantedCard = (Card) enchanted;
-            if (!equals(enchantedCard.getController())) {
                 return false;
             }
         } else {
@@ -2363,9 +2352,8 @@ public class Player extends GameEntity implements Comparable<Player> {
     }
 
     public CardCollectionView getColoredCardsInPlay(final String color) {
-        return CardLists.getColor(getCardsIn(ZoneType.Battlefield), MagicColor.fromName(color));
+        return getColoredCardsInPlay(MagicColor.fromName(color));
     }
-
     public CardCollectionView getColoredCardsInPlay(final byte color) {
         return CardLists.getColor(getCardsIn(ZoneType.Battlefield), color);
     }
@@ -2637,11 +2625,11 @@ public class Player extends GameEntity implements Comparable<Player> {
 
     public final void resetCombatantsThisCombat() {
         // resets the status of attacked/blocked this phase
-        CardCollectionView list = getCardsIn(ZoneType.Battlefield);
+        CardCollectionView list = getCardsIn(ZoneType.Battlefield, false);
 
         for (Card c : list) {
             if (c.getDamageHistory().getCreatureAttackedThisCombat() > 0) {
-                c.getDamageHistory().setCreatureAttackedThisCombat(null, 0);
+                c.getDamageHistory().setCreatureAttackedThisCombat(null, -1);
             }
             if (c.getDamageHistory().getCreatureBlockedThisCombat()) {
                 c.getDamageHistory().setCreatureBlockedThisCombat(false);
@@ -2685,6 +2673,9 @@ public class Player extends GameEntity implements Comparable<Player> {
     public int getCommanderDamage(Card commander) {
         Integer damage = commanderDamage.get(commander);
         return damage == null ? 0 : damage.intValue();
+    }
+    public void addCommanderDamage(Card commander, int damage) {
+        commanderDamage.merge(commander, damage, Integer::sum);
     }
 
     public ColorSet getCommanderColorID() {

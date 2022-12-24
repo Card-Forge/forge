@@ -295,6 +295,11 @@ public class FControlGameEventHandler extends IGameEventVisitor.Base<Void> {
                 updateZone(p, ZoneType.Exile);
                 updateZone(p, ZoneType.Command);
             }
+            //update matchscreen view to reflect maingame/previous daytime
+            if (event.maingame.isDay())
+                matchController.updateDayTime("Day");
+            else if (event.maingame.isNight())
+                matchController.updateDayTime("Night");
             return processEvent();
         }
         return null;

@@ -3,7 +3,6 @@ Code=OGW
 Date=2016-01-22
 Name=Oath of the Gatewatch
 Code2=OGW
-MciCode=ogw
 Type=Expansion
 BoosterCovers=4
 Booster=10 Common, 3 Uncommon, 1 RareMythic, 1 BasicLand BFZ

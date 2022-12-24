@@ -1,0 +1,6 @@
+Name:Mass Production
+ManaCost:5 W
+Types:Sorcery
+A:SP$ Token | TokenAmount$ 4 | TokenScript$ c_1_1_a_soldier | TokenOwner$ You | SpellDescription$ Create four 1/1 colorless Soldier artifact creature tokens.
+DeckHas:Ability$Token & Type$Artifact|Soldier
+Oracle:Create four 1/1 colorless Soldier artifact creature tokens.

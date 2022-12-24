@@ -91,7 +91,7 @@ public abstract class LobbyScreen extends LaunchScreen implements ILobbyView {
         public void drawOnContainer(Graphics g) {
             //draw top border above items
             float y = playersScroll.getTop() - FList.LINE_THICKNESS / 2;
-            g.drawLine(FList.LINE_THICKNESS, FList.LINE_COLOR, 0, y, getWidth(), y);
+            g.drawLine(FList.LINE_THICKNESS, FList.getLineColor(), 0, y, getWidth(), y);
         }
     };
 

@@ -1,22 +1,18 @@
 package forge.game.ability.effects;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.GameCommand;
+import forge.card.CardType;
 import forge.game.Game;
 import forge.game.GameEntityCounterTable;
 import forge.game.GameObject;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
-import forge.game.card.Card;
-import forge.game.card.CardCollectionView;
-import forge.game.card.CardDamageMap;
-import forge.game.card.CardLists;
-import forge.game.card.CardZoneTable;
+import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
@@ -68,7 +64,7 @@ public class RepeatEachEffect extends SpellAbilityEffect {
         }
         else if (sa.hasParam(("RepeatSpellAbilities"))) {
             repeatSas = Lists.newArrayList();
-            String[] restrictions = sa.getParam("RepeatSpellAbilities").split((","));
+            String[] restrictions = sa.getParam("RepeatSpellAbilities").split(",");
             for (SpellAbilityStackInstance stackInstance : game.getStack()) {
                 if (stackInstance.getSpellAbility(false).isValid(restrictions, source.getController(), source, sa)) {
                     repeatSas.add(stackInstance.getSpellAbility(false));
@@ -137,6 +133,41 @@ public class RepeatEachEffect extends SpellAbilityEffect {
                     source.removeRemembered(o);
                 }
             }
+        }
+
+        if (sa.hasParam("RepeatTypesFrom")) {
+            final Set<String> validTypes = new HashSet<>();
+            final String def = sa.getParam("RepeatTypesFrom");
+            final List<Card> res;
+            if (def.startsWith("ThisTurnCast")) {
+                final String[] workingCopy = def.split("_");
+                final String validFilter = workingCopy[1];
+                res = CardUtil.getThisTurnCast(validFilter, source, sa);
+            } else if (def.startsWith("Defined ")) {
+                res = AbilityUtils.getDefinedCards(source, def.substring(8), sa);
+            } else {
+                final ZoneType zone = sa.hasParam("TypesFromZone") ?
+                        ZoneType.smartValueOf(sa.getParam("TypesFromZone")) : ZoneType.Battlefield;
+                res = CardLists.getValidCards(game.getCardsIn(zone), def, source.getController(), source, sa);
+            }
+            for (final Card c : res) {
+                for (CardType.CoreType type : c.getType().getCoreTypes()) {
+                    validTypes.add(type.name());
+                }
+            }
+
+            final String storedType = source.getChosenType();
+            Player chooser = player;
+            if (sa.hasParam("ChooseOrder") && !sa.getParam("ChooseOrder").equals("True")) {
+                chooser = AbilityUtils.getDefinedPlayers(source, sa.getParam("ChooseOrder"), sa).get(0);
+            }
+            while (validTypes.size() > 0) {
+                String chosenT = chooser.getController().chooseSomeType("card", sa, validTypes, null);
+                source.setChosenType(chosenT);
+                AbilityUtils.resolve(repeat);
+                validTypes.remove(chosenT);
+            }
+            source.setChosenType(storedType);
         }
 
         if (sa.hasParam("RepeatPlayers")) {

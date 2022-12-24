@@ -5,7 +5,7 @@ SVar:AltCost:Cost$ 2 U | Description$ You may pay {2}{U} rather than pay this sp
 A:SP$ Branch | BranchConditionSVar$ AltCostPaid | BranchConditionSVarCompare$ GE1 | TrueSubAbility$ DBAltCostEffect | FalseSubAbility$ DBDrawX
 SVar:DBAltCostEffect:DB$ Draw | Defined$ You | NumCards$ 3 | SubAbility$ OppTreasureScry
 SVar:OppTreasureScry:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to create treasure tokens and scry 2 | SubAbility$ OppTreasure
-SVar:OppTreasure:DB$ Token | Defined$ ChosenPlayer | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ ChosenPlayer | SubAbility$ OppScry
+SVar:OppTreasure:DB$ Token | TokenAmount$ 2 | TokenScript$ c_a_treasure_sac | TokenOwner$ ChosenPlayer | SubAbility$ OppScry
 SVar:OppScry:DB$ Scry | ScryNum$ 2 | Defined$ ChosenPlayer
 SVar:DBDrawX:DB$ Draw | Defined$ You | NumCards$ X
 SVar:X:Count$xPaid

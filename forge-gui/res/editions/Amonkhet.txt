@@ -4,7 +4,6 @@ Date=2017-04-28
 Name=Amonkhet
 Code2=AKH
 Type=Expansion
-MciCode=akh
 BoosterCovers=5
 Booster=10 Common:!fromSheet("AKH Planeswalker Decks and Toolkit"), 3 Uncommon:!fromSheet("AKH Planeswalker Decks and Toolkit"), 1 RareMythic:!fromSheet("AKH Planeswalker Decks and Toolkit"), 1 BasicLand AKH
 AdditionalSheetForFoils=fromSheet("MPS Amonkhet Invocations")

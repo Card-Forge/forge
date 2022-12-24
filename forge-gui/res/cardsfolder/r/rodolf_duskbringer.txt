@@ -1,0 +1,16 @@
+Name:Rodolf Duskbringer
+ManaCost:5 B
+Types:Legendary Creature Vampire Angel
+PT:4/4
+K:Flying
+K:Deathtouch
+K:Lifelink
+T:Mode$ LifeGained | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever you gain life, CARDNAME gains indestructible until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | KW$ Indestructible
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | CheckSVar$ X | Execute$ TrigImmediateTrig | TriggerDescription$ At the beginning of your end step, you may pay {1}{W/B}. When you do, return target creature with mana value X or less from your graveyard to the battlefield, where X is the amount of life you gained this turn.
+SVar:TrigImmediateTrig:AB$ ImmediateTrigger | Cost$ 1 WB | Execute$ TrigChangeZone | TriggerDescription$ When you do, return target creature with mana value X or less from your graveyard to the battlefield, where X is the amount of life you gained this turn.
+SVar:TrigChangeZone:DB$ ChangeZone | ValidTgts$ Creature.cmcLEX+YouOwn | TgtPrompt$ Select target creature card with mana value X or less | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:Count$LifeYouGainedThisTurn
+DeckHas:Ability$Graveyard|LifeGain & Keyword$Indestructible
+DeckHints:Ability$Graveyard|LifeGain|Mill
+Oracle:Flying, deathtouch, lifelink\nWhenever you gain life, Rodolf Duskbringer gains indestructible until end of turn.\nAt the beginning of your end step, you may pay {1}{W/B}. When you do, return target creature with mana value X or less from your graveyard to the battlefield, where X is the amount of life you gained this turn.

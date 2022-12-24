@@ -82,6 +82,17 @@
       "x": 442,
       "y": 90
     },
+	{
+      "type": "TextButton",
+      "name": "exittoworldmap", 
+	  "style":"menu",
+      "text": "{Scale=200%}[+ExitToWorldMap]",
+	  "binding": "ExitToWorldMap",
+      "width": 48,
+      "height": 36,
+      "x": 424,
+      "y": 66
+    }
     {
       "type": "TextButton",
       "name": "deck",
@@ -126,6 +137,16 @@
       "height": 36,
       "x": 424,
       "y": 226
+    },
+    {
+      "type": "TextButton",
+      "name": "openmap",
+      "text": "{Scale=80%}tr(lblZoom)",
+      "binding": "Map",
+      "width": 80,
+      "height": 18,
+      "x": 0,
+      "y": 80
     }
   ]
 }

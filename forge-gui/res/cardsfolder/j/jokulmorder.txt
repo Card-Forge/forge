@@ -5,7 +5,7 @@ PT:12/12
 K:Trample
 K:CARDNAME enters the battlefield tapped.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacUnless | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you sacrifice five lands.
-SVar:TrigSacUnless:DB$ Sacrifice | Defined$ Self | UnlessCost$ Sac<5/Land> | UnlessPayer$ You
+SVar:TrigSacUnless:DB$ Sacrifice | UnlessCost$ Sac<5/Land> | UnlessPayer$ You
 K:CARDNAME doesn't untap during your untap step.
 T:Mode$ LandPlayed | ValidCard$ Island.YouCtrl | Execute$ TrigUntap | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you play an Island, you may untap CARDNAME.
 SVar:TrigUntap:DB$ Untap | Defined$ Self

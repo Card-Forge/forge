@@ -3,7 +3,7 @@ ManaCost:1 R
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | ValidTgts$ Creature | AILogic$ Curse
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ EnchantedController | Execute$ TriggeredParoxysm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player reveals the top card of their library. If that card is a land card, destroy that creature. Otherwise, it gets +3/+3 until end of turn.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.EnchantedController | Execute$ TriggeredParoxysm | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player reveals the top card of their library. If that card is a land card, destroy that creature. Otherwise, it gets +3/+3 until end of turn.
 SVar:TriggeredParoxysm:DB$ PeekAndReveal | Defined$ TriggeredPlayer | NoPeek$ True | RememberRevealed$ True | SubAbility$ DestructiveParoxysm
 SVar:DestructiveParoxysm:DB$ Destroy | Defined$ Enchanted | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | SubAbility$ BeserkParoxysm
 SVar:BeserkParoxysm:DB$ Pump | Defined$ Enchanted | NumAtt$ 3 | NumDef$ 3 | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ0 | SubAbility$ DBCleanup

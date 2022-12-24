@@ -396,6 +396,10 @@ public class PlayEffect extends SpellAbilityEffect {
                     tgtSA.setSVar(reduce, sa.getSVar(reduce));
                 }
             }
+            if (sa.hasParam("PlayRaiseCost")) {
+                String raise = sa.getParam("PlayRaiseCost");
+                tgtSA.putParam("RaiseCost", raise);
+            }
 
             if (sa.hasParam("Madness")) {
                 tgtSA.setAlternativeCost(AlternativeCost.Madness);
@@ -407,7 +411,10 @@ public class PlayEffect extends SpellAbilityEffect {
 
             // can't be done later
             if (sa.hasParam("ReplaceGraveyard")) {
-                addReplaceGraveyardEffect(tgtCard, sa, sa.getParam("ReplaceGraveyard"), moveParams);
+                if (!sa.hasParam("ReplaceGraveyardValid")
+                        || tgtSA.isValid(sa.getParam("ReplaceGraveyardValid").split(","), activator, source, sa)) {
+                    addReplaceGraveyardEffect(tgtCard, sa, tgtSA, sa.getParam("ReplaceGraveyard"), moveParams);
+                }
             }
 
             // For Illusionary Mask effect
@@ -459,7 +466,7 @@ public class PlayEffect extends SpellAbilityEffect {
         }
     } // end resolve
 
-    protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, String zone, Map<AbilityKey, Object> moveParams) {
+    protected void addReplaceGraveyardEffect(Card c, SpellAbility sa, SpellAbility tgtSA, String zone, Map<AbilityKey, Object> moveParams) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Player controller = sa.getActivatingPlayer();
@@ -498,6 +505,8 @@ public class PlayEffect extends SpellAbilityEffect {
 
         game.getEndOfTurn().addUntil(endEffect);
 
+        tgtSA.addRollbackEffect(eff);
+
         // TODO: Add targeting to the effect so it knows who it's dealing with
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         game.getAction().moveTo(ZoneType.Command, eff, sa, moveParams);
@@ -509,7 +518,7 @@ public class PlayEffect extends SpellAbilityEffect {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
         final Player controller = sa.getActivatingPlayer();
-        final String name = hostCard.getName() + "'s Effect";
+        final String name = hostCard + "'s Effect";
         final String image = hostCard.getImageKey();
         final Card eff = createEffect(sa, controller, name, image);
 

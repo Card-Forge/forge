@@ -12,7 +12,6 @@ import forge.game.card.CardCollection;
 import forge.game.combat.Combat;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
-import forge.game.spellability.TargetRestrictions;
 
 public class RemoveFromCombatEffect extends SpellAbilityEffect {
 
@@ -34,37 +33,38 @@ public class RemoveFromCombatEffect extends SpellAbilityEffect {
         final Player activator = sa.getActivatingPlayer();
         final Game game = activator.getGame();
         final boolean rem = sa.hasParam("RememberRemovedFromCombat");
+        final Combat combat = game.getPhaseHandler().getCombat();
 
-        final TargetRestrictions tgt = sa.getTargetRestrictions();
         for (final Card c : getTargetCards(sa)) {
-            final Combat combat = game.getPhaseHandler().getCombat();
-            if (combat != null && (tgt == null || c.canBeTargetedBy(sa))) {
-                // Unblock creatures that were blocked only by this card (e.g. Ydwen Efreet)
-                if (sa.hasParam("UnblockCreaturesBlockedOnlyBy")) {
-                    CardCollection attackers = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("UnblockCreaturesBlockedOnlyBy"), sa);
-                    if (!attackers.isEmpty()) {
-                        CardCollection blockedByCard = combat.getAttackersBlockedBy(attackers.getFirst());
-                        for (Card atk : blockedByCard) {
-                            boolean blockedOnlyByCard = true;
-                            for (Card blocker : combat.getBlockers(atk)) {
-                                if (!blocker.equals(attackers.getFirst())) {
-                                    blockedOnlyByCard = false;
-                                    break;
-                                }
+            if (combat == null || !c.isInPlay()) {
+                continue;
+            }
+
+            // Unblock creatures that were blocked only by this card (e.g. Ydwen Efreet)
+            if (sa.hasParam("UnblockCreaturesBlockedOnlyBy")) {
+                CardCollection attackers = AbilityUtils.getDefinedCards(sa.getHostCard(), sa.getParam("UnblockCreaturesBlockedOnlyBy"), sa);
+                if (!attackers.isEmpty()) {
+                    CardCollection blockedByCard = combat.getAttackersBlockedBy(attackers.getFirst());
+                    for (Card atk : blockedByCard) {
+                        boolean blockedOnlyByCard = true;
+                        for (Card blocker : combat.getBlockers(atk)) {
+                            if (!blocker.equals(attackers.getFirst())) {
+                                blockedOnlyByCard = false;
+                                break;
                             }
-                            if (blockedOnlyByCard) {
-                                combat.setBlocked(atk, false);
-                            }
+                        }
+                        if (blockedOnlyByCard) {
+                            combat.setBlocked(atk, false);
                         }
                     }
                 }
+            }
 
-                game.getCombat().saveLKI(c);
-                combat.removeFromCombat(c);
+            game.getCombat().saveLKI(c);
+            combat.removeFromCombat(c);
 
-                if (rem) {
-                    sa.getHostCard().addRemembered(c);
-                }
+            if (rem) {
+                sa.getHostCard().addRemembered(c);
             }
         }
     }

@@ -1,0 +1,8 @@
+Name:Mishra's Onslaught
+ManaCost:3 R
+Types:Instant
+A:SP$ Charm | Choices$ DBToken,DBPumpAll | CharmNum$ 1
+SVar:DBToken:DB$ Token | TokenAmount$ 2 | TokenScript$ c_1_1_a_soldier | TokenOwner$ You | SpellDescription$ Create two 1/1 colorless Soldier artifact creature tokens.
+SVar:DBPumpAll:DB$ PumpAll | ValidCards$ Creature.YouCtrl | NumAtt$ +2 | SpellDescription$ Creatures you control get +2/+0 until end of turn. 
+DeckHas:Ability$Token & Type$Artifact|Soldier
+Oracle:Choose one —\n• Create two 1/1 colorless Soldier artifact creature tokens.\n• Creatures you control get +2/+0 until end of turn.

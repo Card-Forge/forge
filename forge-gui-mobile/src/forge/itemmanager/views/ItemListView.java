@@ -44,9 +44,19 @@ import forge.toolbox.FList;
 
 
 public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
-    private static final FSkinColor ROW_COLOR = FSkinColor.get(Colors.CLR_ZEBRA);
-    private static final FSkinColor ALT_ROW_COLOR = ROW_COLOR.getContrastColor(-20);
-    private static final FSkinColor SEL_COLOR = FSkinColor.get(Colors.CLR_ACTIVE);
+    private static FSkinColor getRowColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_ZEBRA);
+        return FSkinColor.get(Colors.CLR_ZEBRA);
+    }
+    private static FSkinColor getAltRowColor() {
+        return getRowColor().getContrastColor(-20);
+    }
+    private static FSkinColor getSelColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_ACTIVE);
+        return FSkinColor.get(Colors.CLR_ACTIVE);
+    }
 
     private final ItemList list = new ItemList();
     private final ItemListModel listModel;
@@ -257,7 +267,7 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
                 public void drawValue(Graphics g, Integer index, Entry<T, Integer> value, FSkinFont font, FSkinColor foreColor, FSkinColor backColor, boolean pressed, float x, float y, float w, float h) {
                     if (maxSelections > 1) {
                         if (pressed) { //if multi-select mode, draw SEL_COLOR when pressed
-                            g.fillRect(SEL_COLOR, x - FList.PADDING, y - FList.PADDING, w + 2 * FList.PADDING, h + 2 * FList.PADDING);
+                            g.fillRect(getSelColor(), x - FList.PADDING, y - FList.PADDING, w + 2 * FList.PADDING, h + 2 * FList.PADDING);
                         }
                         //draw checkbox, with it checked based on whether item is selected
                         float checkBoxSize = h * 0.4f;
@@ -288,12 +298,12 @@ public final class ItemListView<T extends InventoryItem> extends ItemView<T> {
         @Override
         protected FSkinColor getItemFillColor(int index) {
             if (maxSelections == 1 && selectedIndices.contains(index)) {
-                return SEL_COLOR; //don't show SEL_COLOR if in multi-select mode
+                return getSelColor(); //don't show SEL_COLOR if in multi-select mode
             }
             if (index % 2 == 1) {
-                return ALT_ROW_COLOR;
+                return getAltRowColor();
             }
-            return ROW_COLOR;
+            return getRowColor();
         }
 
         @Override

@@ -49,6 +49,12 @@ public class TriggerRolledDie extends Trigger {
             final int sides = (int) runParams.get(AbilityKey.Sides);
             if (sides == validSides) return true;
         }
+
+        if (hasParam("Number")) {
+            if (((Integer) runParams.get(AbilityKey.Number)) != Integer.parseInt(getParam("Number"))) {
+                return false;
+            }
+        } 
         return true;
     }
 

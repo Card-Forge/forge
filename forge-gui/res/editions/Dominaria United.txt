@@ -3,7 +3,6 @@ Code=DMU
 Date=2022-09-09
 Name=Dominaria United
 Code2=DMU
-MciCode=dmu
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromsheet("DMU cards"), 3 Uncommon:fromSheet("DMU cards"), 1 RareMythic:fromSheet("DMU cards"), 1 fromSheet("DMU lands")
@@ -459,6 +458,8 @@ ScryfallCode=DMU
 432 U Cut Down @Dominik Mayer
 433 C Lightning Strike @Marta Nael
 434 U Nishoba Brawler @Valera Lutfullina
+435 M Sheoldred, the Apocalypse @Richard Whitters
+436 M Sheoldred, the Apocalypse @Richard Whitters
 
 [lands]
 2 Plains|DMU|1

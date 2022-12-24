@@ -4,7 +4,6 @@ Date=2008-07-25
 Name=Eventide
 Code2=EVE
 Alias=EVT
-MciCode=eve
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare

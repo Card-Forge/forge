@@ -6,6 +6,7 @@ import forge.game.card.Card;
 import forge.game.player.Player;
 import forge.game.player.PlayerController.BinaryChoiceType;
 import forge.game.spellability.SpellAbility;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 public class ChooseEvenOddEffect extends SpellAbilityEffect {
@@ -17,9 +18,7 @@ public class ChooseEvenOddEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa)) {
-            sb.append(p).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
         sb.append("chooses even or odd.");
 
         return sb.toString();
@@ -30,12 +29,13 @@ public class ChooseEvenOddEffect extends SpellAbilityEffect {
         final Card card = sa.getHostCard();
 
         for (final Player p : getTargetPlayers(sa)) {
-            if ((!sa.usesTargeting()) || p.canBeTargetedBy(sa)) {
-                EvenOdd chosen = p.getController().chooseBinary(sa, "odd or even", BinaryChoiceType.OddsOrEvens) ? EvenOdd.Odd : EvenOdd.Even;
-                card.setChosenEvenOdd(chosen);
-                if (sa.hasParam("Notify")) {
-                    p.getGame().getAction().notifyOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
-                }
+            if (!p.isInGame()) {
+                continue;
+            }
+            EvenOdd chosen = p.getController().chooseBinary(sa, "odd or even", BinaryChoiceType.OddsOrEvens) ? EvenOdd.Odd : EvenOdd.Even;
+            card.setChosenEvenOdd(chosen);
+            if (sa.hasParam("Notify")) {
+                p.getGame().getAction().notifyOfValue(sa, card, Localizer.getInstance().getMessage("lblPlayerPickedChosen", p.getName(), chosen), p);
             }
         }
         card.updateStateForView();

@@ -1,0 +1,8 @@
+Name:Sibling Rivalry
+ManaCost:3 R
+Types:Sorcery
+A:SP$ GainControl | ValidTgts$ Creature,Artifact | LoseControl$ EOT | Untap$ True | AddKWs$ Haste | SubAbility$ DBToken | SpellDescription$ Gain control of target artifact or creature until end of turn. Untap it. It gains haste until end of turn. Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")
+SVar:DBToken:DB$ Token | TokenTapped$ True | TokenScript$ c_a_powerstone
+SVar:PlayMain1:OPPONENTCREATURES
+DeckHas:Ability$Token & Type$Artifact
+Oracle:Gain control of target artifact or creature until end of turn. Untap it. It gains haste until end of turn. Create a tapped Powerstone token. (It's an artifact with "{T}: Add {C}. This mana can't be spent to cast a nonartifact spell.")

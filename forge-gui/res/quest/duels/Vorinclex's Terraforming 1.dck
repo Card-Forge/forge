@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Vorinclex's Terraforming 1
+Title=Vorinclex
+Difficulty=easy
+Description=Mono-green landfall theme deck with land retrieval
+Icon=Vorinclex 1.jpg
+Deck Type=constructed
+[Main]
+1 Ancient Greenwarden
+3 Ash Barrens
+2 Baloth Woodcrasher
+2 Brutalizer Exarch
+1 Chancellor of the Tangle
+1 Crucible of Worlds
+3 Cultivate
+2 Desert Twister
+2 Essence Warden
+4 Evolving Wilds
+12 Forest
+2 Grazing Gladehart
+2 Jaddi Offshoot
+2 Krosan Grip
+2 Oran-Rief Hydra
+1 Overrun
+1 Rampaging Baloths
+1 Ramunap Excavator
+2 Retreat to Kazandu
+1 Scute Swarm
+1 Seer's Sundial
+1 Spinebiter
+2 Territorial Scythecat
+2 Tireless Provisioner
+1 Vorinclex, Monstrous Raider
+1 Vorinclex, Voice of Hunger
+3 Warped Landscape
+2 Zendikar's Roil

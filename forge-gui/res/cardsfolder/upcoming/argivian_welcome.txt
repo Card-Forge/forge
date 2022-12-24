@@ -1,0 +1,8 @@
+Name:Argivian Welcome
+ManaCost:W U
+Types:Instant
+A:SP$ Destroy | ValidTgts$ Creature.powerGE4 | TargetMin$ 0 | TargetMax$ 1 | TgtPrompt$ Select up to one target creature with power 4 or greater | SubAbility$ DBChoose | StackDescription$ SpellDescription | SpellDescription$ Destroy up to one target creature with power 4 or greater. Choose a nonland card in your hand. It perpetually gains flash.
+SVar:DBChoose:DB$ ChooseCard | Mandatory$ True | ChoiceZone$ Hand | Choices$ Card.nonLand+YouOwn | ChoiceTitle$ Choose a nonland card in your hand | Amount$ 1 | SubAbility$ DBEffect
+SVar:DBEffect:DB$ Effect | StaticAbilities$ PerpetualFlash | Name$ Argivian Welcome's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualFlash:Mode$ Continuous | Affected$ Card.ChosenCard | AddKeyword$ Flash | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ The chosen card perpetually gains flash.
+Oracle:Destroy up to one target creature with power 4 or greater.\nChoose a nonland card in your hand. It perpetually gains flash.

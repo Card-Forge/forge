@@ -1,0 +1,6 @@
+Name:Unleash Shell
+ManaCost:3 R R
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature,Planeswalker | TgtPrompt$ Select target creature or planeswalker | NumDmg$ 5 | SubAbility$ DBDamagePlayer | SpellDescription$ CARDNAME deals 5 damage to target creature or planeswalker and 2 damage to that permanent's controller.
+SVar:DBDamagePlayer:DB$ DealDamage | Defined$ TargetedController | NumDmg$ 2
+Oracle:Unleash Shell deals 5 damage to target creature or planeswalker and 2 damage to that permanent's controller.

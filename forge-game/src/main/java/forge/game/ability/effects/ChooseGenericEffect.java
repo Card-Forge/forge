@@ -8,12 +8,12 @@ import com.google.common.collect.Lists;
 import forge.game.ability.AbilityUtils;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
-import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.event.GameEventCardModeChosen;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.util.Aggregates;
+import forge.util.Lang;
 
 public class ChooseGenericEffect extends SpellAbilityEffect {
 
@@ -21,9 +21,7 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa)) {
-            sb.append(p).append(" ");
-        }
+        sb.append(Lang.joinHomogenous(getDefinedPlayersOrTargeted(sa)));
         sb.append("chooses from a list.");
 
         return sb.toString();
@@ -43,9 +41,10 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
         final SpellAbility fallback = sa.getAdditionalAbility("FallbackAbility");
         final int amount = AbilityUtils.calculateAmount(host, sa.getParamOrDefault("ChoiceAmount", "1"), sa);
 
-        final List<Player> tgtPlayers = getDefinedPlayersOrTargeted(sa);
-
-        for (final Player p : tgtPlayers) {
+        for (Player p : getDefinedPlayersOrTargeted(sa)) {
+            if (!p.isInGame()) {
+                p = getNewChooser(sa, sa.getActivatingPlayer(), p);
+            }
             // determine if any of the choices are not valid
             List<SpellAbility> saToRemove = Lists.newArrayList();
             
@@ -62,31 +61,27 @@ public class ChooseGenericEffect extends SpellAbilityEffect {
             }
             abilities.removeAll(saToRemove);
 
-            if (sa.usesTargeting() && sa.getTargets().contains(p) && !p.canBeTargetedBy(sa)) {
-                continue;
-            }
-
             List<SpellAbility> chosenSAs = Lists.newArrayList();
             String prompt = sa.getParamOrDefault("ChoicePrompt", "Choose");
             boolean random = false;
+
             if (sa.hasParam("AtRandom")) {
                 random = true;
-                Aggregates.random(abilities, amount, chosenSAs);
-            } else if (!abilities.isEmpty()) {
-                chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, prompt, amount, ImmutableMap.of());
-            }
+                chosenSAs = Aggregates.random(abilities, amount);
 
-            for (SpellAbility chosenSA : chosenSAs) {
-                if (sa.hasParam("AtRandom") && sa.getParam("AtRandom").equals("Urza") && chosenSA.usesTargeting()) {
-                    List<Card> validTargets = CardUtil.getValidCardsToTarget(chosenSA.getTargetRestrictions(), sa);
-                    if (validTargets.isEmpty()) {
-                        List <SpellAbility> newChosenSAs = Lists.newArrayList();
-                        Aggregates.random(abilities, amount, newChosenSAs);
-                        chosenSAs = newChosenSAs;
+                int i = 0;
+                while (sa.getParam("AtRandom").equals("Urza") && i < chosenSAs.size()) {
+                    if (!chosenSAs.get(i).usesTargeting()) {
+                        i++;
+                    } else if (sa.getTargetRestrictions().hasCandidates(chosenSAs.get(i))) {
+                        p.getController().chooseTargetsFor(chosenSAs.get(i));
+                        i++;
                     } else {
-                        p.getController().chooseTargetsFor(chosenSA);
+                        chosenSAs.set(i, Aggregates.random(abilities));
                     }
                 }
+            } else if (!abilities.isEmpty()) {
+                chosenSAs = p.getController().chooseSpellAbilitiesForEffect(abilities, sa, prompt, amount, ImmutableMap.of());
             }
 
             if (!chosenSAs.isEmpty()) {

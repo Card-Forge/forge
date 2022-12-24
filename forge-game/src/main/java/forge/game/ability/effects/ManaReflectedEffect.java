@@ -21,18 +21,20 @@ public class ManaReflectedEffect extends SpellAbilityEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
+        final Collection<String> colors = CardUtil.getReflectableManaColors(sa);
+        final AbilityManaPart ma = sa.getManaPart();
+
         // Spells are not undoable
-        AbilityManaPart ma = sa.getManaPart();
         sa.setUndoable(sa.isAbility() && sa.isUndoable() && sa.getSubAbility() == null);
 
-        final Collection<String> colors = CardUtil.getReflectableManaColors(sa);
-
+        final StringBuilder producedMana = new StringBuilder();
         for (final Player player : getTargetPlayers(sa)) {
             final String generated = generatedReflectedMana(sa, colors, player);
-            ma.produceMana(generated, player, sa);
+            producedMana.append(ma.produceMana(generated, player, sa));
         }
-    }
 
+        ma.tapsForMana(sa, producedMana.toString());
+    }
 
     // *************** Utility Functions **********************
 

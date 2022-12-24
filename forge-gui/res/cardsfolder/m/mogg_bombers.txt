@@ -3,6 +3,6 @@ ManaCost:3 R
 Types:Creature Goblin
 PT:3/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When another creature enters the battlefield, sacrifice CARDNAME and it deals 3 damage to target player or planeswalker.
-SVar:TrigSac:DB$ Sacrifice | Defined$ Self | SubAbility$ DBDamage
+SVar:TrigSac:DB$ Sacrifice | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player,Planeswalker | TgtPrompt$ Select target player or planeswalker to deal 3 damage to | NumDmg$ 3
 Oracle:When another creature enters the battlefield, sacrifice Mogg Bombers and it deals 3 damage to target player or planeswalker.

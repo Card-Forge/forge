@@ -3,7 +3,6 @@ Code=SNC
 Date=2022-04-29
 Name=Streets of New Capenna
 Code2=SNC
-MciCode=snc
 Type=Expansion
 BoosterCovers=3
 Booster=10 Common:fromsheet("SNC cards"), 3 Uncommon:fromSheet("SNC cards"), 1 RareMythic:fromSheet("SNC cards"), 1 fromSheet("SNC lands")
@@ -491,6 +490,8 @@ ScryfallCode=SNC
 465 C Incriminate @Kieran Yanner
 466 C Light 'Em Up @Tony Foti
 467 U Courier's Briefcase @Josu Hernaiz
+468 M Urabrask, Heretic Praetor @Richard Whitters
+469 M Urabrask, Heretic Praetor @Richard Whitters
 
 [rebalanced]
 A6 C A-Buy Your Silence @Tony Foti

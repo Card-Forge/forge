@@ -1,0 +1,10 @@
+Name:Penregon Strongbull
+ManaCost:2 R
+Types:Creature Minotaur
+PT:2/3
+A:AB$ Pump | Cost$ 1 Sac<1/Artifact> | Defined$ Self | NumAtt$ 1 | NumDef$ 1 | SubAbility$ DBPing | SpellDescription$ CARDNAME gets +1/+1 until end of turn and deals 1 damage to each opponent.
+SVar:DBPing:DB$ DealDamage | Defined$ Opponent | NumDmg$ 1
+SVar:AIPreference:SacCost$Artifact.token
+DeckHas:Ability$Artifact
+DeckHints:Type$Artifact
+Oracle:{1}, Sacrifice an artifact: Penregon Strongbull gets +1/+1 until end of turn and deals 1 damage to each opponent.

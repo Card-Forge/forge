@@ -479,6 +479,13 @@ public class CardView extends GameEntityView {
         set(TrackableProperty.Remembered, sb.toString());
     }
 
+    public String getSector() {
+       return get(TrackableProperty.Sector);
+    }
+    void updateSector(Card c) {
+        set(TrackableProperty.Sector, c.getSector());
+    }
+
     public String getNamedCard() {
         return get(TrackableProperty.NamedCard);
     }
@@ -590,12 +597,12 @@ public class CardView extends GameEntityView {
         return Iterables.any(viewers, new Predicate<PlayerView>() {
             @Override
             public final boolean apply(final PlayerView input) {
-                return canFaceDownBeShownTo(input, false);
+                return canFaceDownBeShownTo(input);
             }
         });
     }
 
-    public boolean canFaceDownBeShownTo(final PlayerView viewer, boolean skip) {
+    public boolean canFaceDownBeShownTo(final PlayerView viewer) {
         if (!isFaceDown()) {
             return true;
         }
@@ -604,12 +611,10 @@ public class CardView extends GameEntityView {
         if (mayPlayerLook(viewer)) {
             return true;
         }
-        if (!skip) {
-            //if viewer is controlled by another player, also check if face can be shown to that player
-            final PlayerView mindSlaveMaster = viewer.getMindSlaveMaster();
-            if (mindSlaveMaster != null) {
-                return canFaceDownBeShownTo(mindSlaveMaster, true);
-            }
+        //if viewer is controlled by another player, also check if face can be shown to that player
+        final PlayerView mindSlaveMaster = getController().getMindSlaveMaster();
+        if (mindSlaveMaster != null && mindSlaveMaster != getController() && mindSlaveMaster == viewer) {
+            return canFaceDownBeShownTo(getController());
         }
 
         return isInZone(EnumSet.of(ZoneType.Battlefield, ZoneType.Stack, ZoneType.Sideboard)) && getController().equals(viewer);
@@ -1197,6 +1202,12 @@ public class CardView extends GameEntityView {
                 return get(TrackableProperty.ImageKey);
             }
             return ImageKeys.getTokenKey(ImageKeys.HIDDEN_CARD);
+        }
+        /*
+        * Use this for revealing purposes only
+        * */
+        public String getTrackableImageKey() {
+            return get(TrackableProperty.ImageKey);
         }
         void updateImageKey(Card c) {
             set(TrackableProperty.ImageKey, c.getImageKey());

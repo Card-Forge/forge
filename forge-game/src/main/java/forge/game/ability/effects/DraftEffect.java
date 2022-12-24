@@ -1,7 +1,6 @@
 package forge.game.ability.effects;
 
 import forge.StaticData;
-import forge.card.ICardFace;
 import forge.game.Game;
 import forge.game.ability.AbilityKey;
 import forge.game.ability.AbilityUtils;
@@ -54,20 +53,18 @@ import java.util.*;
          for (int i = 0; i < numToDraft; i++) {
              String chosen = "";
              Collections.shuffle(spellbook);
-             List<ICardFace> faces = new ArrayList<>();
+             List<Card> draftOptions = new ArrayList<>();
              for (String name : spellbook.subList(0, 3)) {
                  // Cardnames that include "," must use ";" instead in Spellbook$ (i.e. Tovolar; Dire Overlord)
                  name = name.replace(";", ",");
-                 faces.add(StaticData.instance().getCommonCards().getFaceByName(name));
+                 Card cardOption = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(name), player);
+                 cardOption.setTokenCard(true);
+                 draftOptions.add(cardOption);
              }
-             chosen = player.getController().chooseCardName(sa, faces,
-                     Localizer.getInstance().getMessage("lblChooseCardDraft"));
-             if (!chosen.equals("")) {
-                 Card card = Card.fromPaperCard(StaticData.instance().getCommonCards().getUniqueByName(chosen), player);
-                 card.setTokenCard(true);
-                 game.getAction().moveTo(ZoneType.None, card, sa, moveParams);
-                 drafted.add(card);
-             }
+
+             Card chosenCard = player.getController().chooseSingleCardForZoneChange(ZoneType.None, new ArrayList<ZoneType>(), sa, new CardCollection(draftOptions), null, Localizer.getInstance().getMessage("lblChooseCardDraft"), false, player);
+             game.getAction().moveTo(ZoneType.None, chosenCard, sa, moveParams);
+             drafted.add(chosenCard);
          }
 
          final CardZoneTable triggerList = new CardZoneTable();

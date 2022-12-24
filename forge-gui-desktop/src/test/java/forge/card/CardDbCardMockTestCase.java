@@ -48,8 +48,9 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
 
     // Get Card From Editions Test fixtures
     protected final String originalArtShivanDragonEdition = "LEA";
-    protected final String latestArtShivanDragonEdition = "30A";
-    protected final String latestArtShivanDragonEditionNoPromo = "M20";
+    // next lines need to be updated with each printing of Shivan Dragon
+    protected final String latestArtShivanDragonEdition = "DMR";
+    protected final String latestArtShivanDragonEditionNoPromo = "DMR";
 
     protected final String originalArtLightningDragonEdition = "USG";
     protected final String originalArtLightningDragonEditionNoPromo = "USG";
@@ -1751,11 +1752,12 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
 
         Date alphaReleaseDate = null;
         Date currentDate = Date.from(Instant.now());
-        Date latestShivanDragonReleaseDateToDate = null; // latest print to date for Shivan is in 30A
+        Date latestShivanDragonReleaseDateToDate = null;
         try {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             alphaReleaseDate = format.parse(alphaEditionReleaseDate);
-            latestShivanDragonReleaseDateToDate = format.parse("2022-11-28");
+            // next line needs to be updated each time Shivan Dragon is reprinted
+            latestShivanDragonReleaseDateToDate = format.parse("2023-03-31");
         } catch (ParseException e) {
             e.printStackTrace();
             fail();
@@ -1887,7 +1889,7 @@ public class CardDbCardMockTestCase extends CardMockTestCase {
         PaperCard landCard = this.cardDb.getCard(snowCoveredLand);
         assertNotNull(landCard);
         assertEquals(landCard.getName(), snowCoveredLand);
-        assertEquals(landCard.getEdition(), "KHM");
+        assertEquals(landCard.getEdition(), "J22");
 
         this.cardDb.setCardArtPreference(true, true);
         assertEquals(this.cardDb.getCardArtPreference(),

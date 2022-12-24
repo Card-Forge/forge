@@ -8,7 +8,7 @@ public class EndTestAction extends TestAction {
 	public EndTestAction( PlayerSpecification player ) {
 		super( player );
 	}
-	
+
 	public void endTest( Player player ) {
 		player.concede();
 	}

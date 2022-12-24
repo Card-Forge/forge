@@ -372,6 +372,15 @@ public class SpellAbilityVariables implements Cloneable {
     }
 
     /**
+     * Gets the game types.
+     *
+     * @return the game types
+     */
+    public final Set<GameType> getGameTypes() {
+        return this.gameTypes;
+    }
+
+    /**
      * <p>
      * Setter for the field <code>gameTypes</code>.
      * </p>
@@ -707,15 +716,6 @@ public class SpellAbilityVariables implements Cloneable {
     }
     public final boolean setFirstCombatOnly(boolean first) {
         return this.firstCombatOnly = first;
-    }
-
-    /**
-     * Gets the game types.
-     *
-     * @return the game types
-     */
-    public final Set<GameType> getGameTypes() {
-        return this.gameTypes;
     }
 
     /**

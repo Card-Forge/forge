@@ -1,0 +1,9 @@
+Name:Mild-Mannered Librarian
+ManaCost:G
+Types:Creature Human
+PT:1/1
+A:AB$ Animate | Cost$ 3 G | GameActivationLimit$ 1 | Types$ Werewolf | RemoveCreatureTypes$ True | Duration$ Permanent | SubAbility$ DBCounter | SpellDescription$ CARDNAME becomes a Werewolf. Put two +1/+1 counters on it and you draw a card. Activate only once.
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 2 | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw
+DeckHas:Ability$Counters & Type$Werewolf
+Oracle:{3}{G}: Mild-Mannered Librarian becomes a Werewolf. Put two +1/+1 counters on it and you draw a card. Activate only once.

@@ -1,0 +1,10 @@
+Name:Fateful Handoff
+ManaCost:3 B
+Types:Sorcery
+A:SP$ Pump | ValidTgts$ Artifact.YouCtrl,Creature.YouCtrl | TgtPrompt$ Select artifact or creature you control | SubAbility$ DBDraw | AILogic$ DonateTargetPlayer | SpellDescription$ Draw cards equal to the mana value of target artifact or creature you control. An opponent gains control of that permanent.
+SVar:DBDraw:DB$ Draw | NumCards$ X | SubAbility$ DBChoose
+SVar:DBChoose:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | ChoiceTitle$ Choose an opponent to give control to: | AILogic$ Curse | SubAbility$ DBGiveControl
+SVar:DBGiveControl:DB$ GainControl | Defined$ Targeted | NewController$ Player.Chosen | AILogic$ DonateTargetPerm
+SVar:X:Targeted$CardManaCost
+AI:RemoveDeck:Random
+Oracle:Draw cards equal to the mana value of target artifact or creature you control. An opponent gains control of that permanent.

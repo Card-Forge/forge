@@ -3,7 +3,6 @@ Code=CMB1
 Date=2019-11-07
 Name=Mystery Booster Playtest Cards
 Code2=CMB1
-MciCode=cmb1
 Type=Funny
 ScryfallCode=CMB1
 

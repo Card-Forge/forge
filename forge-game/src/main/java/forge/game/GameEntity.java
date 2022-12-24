@@ -179,7 +179,7 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
     }
 
     public final boolean hasCardAttachment(final String cardName) {
-        return CardLists.count(getAttachedCards(), CardPredicates.nameEquals(cardName)) > 0;
+        return Iterables.any(getAttachedCards(), CardPredicates.nameEquals(cardName));
     }
     public final boolean isEnchantedBy(final String cardName) {
         // Rule 303.4k  Even if c is no Aura it still counts
@@ -225,6 +225,10 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         // master mode
         if (!attach.isAttachment() || (attach.isCreature() && !attach.hasKeyword(Keyword.RECONFIGURE))
                 || equals(attach)) {
+            return false;
+        }
+
+        if (attach.isPhasedOut()) {
             return false;
         }
 

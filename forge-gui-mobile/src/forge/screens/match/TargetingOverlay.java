@@ -20,6 +20,7 @@ package forge.screens.match;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FSkinColor;
 import forge.assets.FSkinColor.Colors;
@@ -49,17 +50,17 @@ public class TargetingOverlay {
     }
 
     public static void updateColors() {
-        friendColor = FSkinColor.get(Colors.CLR_NORMAL_TARGETING_ARROW);
+        friendColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_NORMAL_TARGETING_ARROW) : FSkinColor.get(Colors.CLR_NORMAL_TARGETING_ARROW);
         if (friendColor.getAlpha() == 0) {
-            friendColor = FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(153f / 255f);
+            friendColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_ACTIVE).alphaColor(153f / 255f) : FSkinColor.get(Colors.CLR_ACTIVE).alphaColor(153f / 255f);
         }
 
-        foeDefColor = FSkinColor.get(Colors.CLR_COMBAT_TARGETING_ARROW);
+        foeDefColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_COMBAT_TARGETING_ARROW) : FSkinColor.get(Colors.CLR_COMBAT_TARGETING_ARROW);
         if (foeDefColor.getAlpha() == 0) {
             foeDefColor = FSkinColor.getStandardColor(new Color(1, 0, 0, 153 / 255f));
         }
 
-        foeAtkColor = FSkinColor.get(Colors.CLR_PWATTK_TARGETING_ARROW);
+        foeAtkColor = Forge.isMobileAdventureMode ? FSkinColor.get(Colors.ADV_CLR_PWATTK_TARGETING_ARROW) : FSkinColor.get(Colors.CLR_PWATTK_TARGETING_ARROW);
         if (foeAtkColor.getAlpha() == 0) {
             foeAtkColor = FSkinColor.getStandardColor(new Color(255 / 255f, 138 / 255f, 1 / 255f, 153 / 255f));
         }

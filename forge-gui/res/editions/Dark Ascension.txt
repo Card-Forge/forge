@@ -3,7 +3,6 @@ Code=DKA
 Date=2012-02-03
 Name=Dark Ascension
 Code2=DKA
-MciCode=dka
 Type=Expansion
 BoosterCovers=3
 Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc, 1 BasicLand ISD

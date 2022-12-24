@@ -62,7 +62,9 @@ public class WrappedAbility extends Ability {
             ApiType.Token,
             ApiType.SetState,
             ApiType.Play,
-            ApiType.SacrificeAll
+            ApiType.SacrificeAll,
+
+            ApiType.DelayedTrigger
             );
 
     private final SpellAbility sa;
@@ -348,6 +350,10 @@ public class WrappedAbility extends Ability {
     @Override
     public void setActivatingPlayer(final Player player) {
         sa.setActivatingPlayer(player);
+    }
+    @Override
+    public boolean setActivatingPlayer(final Player player, final boolean lki) {
+        return sa.setActivatingPlayer(player, lki);
     }
 
     @Override

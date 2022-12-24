@@ -165,7 +165,7 @@ public class AiController {
         for (final Card c : all) {
             for (final SpellAbility sa : c.getNonManaAbilities()) {
                 if (sa instanceof SpellPermanent) {
-                    sa.setActivatingPlayer(player);
+                    sa.setActivatingPlayer(player, true);
                     if (checkETBEffects(c, sa, ApiType.Counter)) {
                         spellAbilities.add(sa);
                     }
@@ -446,7 +446,7 @@ public class AiController {
         CardCollection nonLandsInHand = CardLists.filter(player.getCardsIn(ZoneType.Hand), Predicates.not(CardPredicates.Presets.LANDS));
 
         // Some considerations for Momir/MoJhoSto
-        boolean hasMomir = player.getZone(ZoneType.Command).contains(CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar"));
+        boolean hasMomir = player.isCardInCommand("Momir Vig, Simic Visionary Avatar");
         if (hasMomir && nonLandsInHand.isEmpty()) {
             // Only do this if we have an all-basic land hand, which covers both stock Momir and MoJhoSto modes
             // and also a custom Vanguard setup with a customized basic land deck and Momir as the avatar.
@@ -499,7 +499,7 @@ public class AiController {
                     if (reSA == null || !ApiType.Tap.equals(reSA.getApi())) {
                         continue;
                     }
-                    reSA.setActivatingPlayer(reSA.getHostCard().getController());
+                    reSA.setActivatingPlayer(reSA.getHostCard().getController(), true);
                     if (reSA.metConditions()) {
                         foundTapped = true;
                         break;
@@ -583,7 +583,7 @@ public class AiController {
 
         for (final SpellAbility sa : ComputerUtilAbility.getOriginalAndAltCostAbilities(possibleCounters, player)) {
             SpellAbility currentSA = sa;
-            sa.setActivatingPlayer(player);
+            sa.setActivatingPlayer(player, true);
             // check everything necessary
 
             AiPlayDecision opinion = canPlayAndPayFor(currentSA);
@@ -638,7 +638,7 @@ public class AiController {
             if (saApi == ApiType.Counter || saApi == exceptSA) {
                 continue;
             }
-            sa.setActivatingPlayer(player);
+            sa.setActivatingPlayer(player, true);
             // TODO: this currently only works as a limited prediction of permanent spells.
             // Ideally this should cast canPlaySa to determine that the AI is truly able/willing to cast a spell,
             // but that is currently difficult to implement due to various side effects leading to stack overflow.
@@ -767,7 +767,7 @@ public class AiController {
 
         // Account for possible Ward after the spell is fully targeted
         // TODO: ideally, this should be done while targeting, so that a different target can be preferred if the best
-        // one is warded and can't be paid for.
+        // one is warded and can't be paid for. (currently it will be stuck with the target until it could pay)
         if (sa.usesTargeting() && (!sa.isSpell() || CardFactoryUtil.isCounterable(host))) {
             for (Card tgt : sa.getTargets().getTargetCards()) {
                 // TODO some older cards don't use the keyword, so check for trigger instead
@@ -814,15 +814,18 @@ public class AiController {
     }
 
     public AiPlayDecision canPlaySa(SpellAbility sa) {
-        final Card card = sa.getHostCard();
-        final boolean isRightTiming = sa.canCastTiming(player);
-
         if (!checkAiSpecificRestrictions(sa)) {
             return AiPlayDecision.CantPlayAi;
         }
         if (sa instanceof WrappedAbility) {
             return canPlaySa(((WrappedAbility) sa).getWrappedAbility());
         }
+
+        if (!sa.canCastTiming(player)) {
+            return AiPlayDecision.AnotherTime;
+        }
+
+        final Card card = sa.getHostCard();
 
         // Trying to play a card that has Buyback without a Buyback cost, look for possible additional considerations
         if (getBooleanProperty(AiProps.TRY_TO_PRESERVE_BUYBACK_SPELLS)) {
@@ -898,9 +901,6 @@ public class AiController {
             return AiPlayDecision.AnotherTime;
         }
         if (sa instanceof SpellPermanent) {
-            if (!isRightTiming) {
-                return AiPlayDecision.AnotherTime;
-            }
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
         if (sa.usesTargeting()) {
@@ -912,18 +912,13 @@ public class AiController {
             }
         }
         if (sa instanceof Spell) {
-            if (ComputerUtil.getDamageForPlaying(player, sa) >= player.getLife() 
-                    && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
+            if (!player.cantLoseForZeroOrLessLife() && player.canLoseLife() &&
+                    ComputerUtil.getDamageForPlaying(player, sa) >= player.getLife()) {
                 return AiPlayDecision.CurseEffects;
-            }
-            if (!isRightTiming) {
-                return AiPlayDecision.AnotherTime;
             }
             return canPlaySpellBasic(card, sa);
         }
-        if (!isRightTiming) {
-            return AiPlayDecision.AnotherTime;
-        }
+
         return AiPlayDecision.WillPlay;
     }
 
@@ -1411,8 +1406,8 @@ public class AiController {
                 if (!checkETBEffects(card, spell, null)) {
                     return AiPlayDecision.BadEtbEffects;
                 }
-                if (damage + ComputerUtil.getDamageFromETB(player, card) >= player.getLife()
-                        && !player.cantLoseForZeroOrLessLife() && player.canLoseLife()) {
+                if (!player.cantLoseForZeroOrLessLife() && player.canLoseLife()
+                        && damage + ComputerUtil.getDamageFromETB(player, card) >= player.getLife()) {
                     return AiPlayDecision.BadEtbEffects;
                 }
             }
@@ -1496,35 +1491,33 @@ public class AiController {
             if (landsWannaPlay != null && !landsWannaPlay.isEmpty()) {
                 // TODO search for other land it might want to play?
                 Card land = chooseBestLandToPlay(landsWannaPlay);
-                if (ComputerUtil.getDamageFromETB(player, land) < player.getLife() || !player.canLoseLife() 
-                        || player.cantLoseForZeroOrLessLife() ) {
-                    if (!game.getPhaseHandler().is(PhaseType.MAIN1) || !isSafeToHoldLandDropForMain2(land)) {
-                        final List<SpellAbility> abilities = Lists.newArrayList();
+                if ((!player.canLoseLife() || player.cantLoseForZeroOrLessLife() || ComputerUtil.getDamageFromETB(player, land) < player.getLife())
+                        && (!game.getPhaseHandler().is(PhaseType.MAIN1) || !isSafeToHoldLandDropForMain2(land))) {
+                    final List<SpellAbility> abilities = Lists.newArrayList();
 
-                        // TODO extend this logic to evaluate MDFC with both sides land
-                        // this can only happen if its a MDFC land
-                        if (!land.isLand()) {
-                            land.setState(CardStateName.Modal, true);
-                            land.setBackSide(true);
-                        }
+                    // TODO extend this logic to evaluate MDFC with both sides land
+                    // this can only happen if its a MDFC land
+                    if (!land.isLand()) {
+                        land.setState(CardStateName.Modal, true);
+                        land.setBackSide(true);
+                    }
 
-                        LandAbility la = new LandAbility(land, player, null);
+                    LandAbility la = new LandAbility(land, player, null);
+                    la.setCardState(land.getCurrentState());
+                    if (la.canPlay()) {
+                        abilities.add(la);
+                    }
+
+                    // add mayPlay option
+                    for (CardPlayOption o : land.mayPlay(player)) {
+                        la = new LandAbility(land, player, o.getAbility());
                         la.setCardState(land.getCurrentState());
                         if (la.canPlay()) {
                             abilities.add(la);
                         }
-
-                        // add mayPlay option
-                        for (CardPlayOption o : land.mayPlay(player)) {
-                            la = new LandAbility(land, player, o.getAbility());
-                            la.setCardState(land.getCurrentState());
-                            if (la.canPlay()) {
-                                abilities.add(la);
-                            }
-                        }
-                        if (!abilities.isEmpty()) {
-                            return abilities;
-                        }
+                    }
+                    if (!abilities.isEmpty()) {
+                        return abilities;
                     }
                 }
             }
@@ -1534,7 +1527,7 @@ public class AiController {
     }
 
     private boolean isSafeToHoldLandDropForMain2(Card landToPlay) {
-        boolean hasMomir = player.getZone(ZoneType.Command).contains(CardPredicates.nameEquals("Momir Vig, Simic Visionary Avatar"));
+        boolean hasMomir = player.isCardInCommand("Momir Vig, Simic Visionary Avatar");
         if (hasMomir) {
             // Don't do this in Momir variants since it messes with the AI decision making for the avatar.
             return false;
@@ -1734,7 +1727,7 @@ public class AiController {
                 }
             }
 
-            sa.setActivatingPlayer(player);
+            sa.setActivatingPlayer(player, true);
             SpellAbility root = sa.getRootAbility();
 
             if (root.isSpell() || root.isTrigger() || root.isReplacementAbility()) {

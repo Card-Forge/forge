@@ -1,0 +1,7 @@
+Name:Deadly Riposte
+ManaCost:1 W
+Types:Instant
+A:SP$ DealDamage | ValidTgts$ Creature.tapped | NumDmg$ 3 | TgtPrompt$ Select target tapped creature | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 3 damage to target tapped creature and you gain 2 life.
+SVar:DBGainLife:DB$ GainLife | LifeAmount$ 2
+DeckHas:Ability$LifeGain
+Oracle:Deadly Riposte deals 3 damage to target tapped creature and you gain 2 life.

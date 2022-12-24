@@ -1,0 +1,7 @@
+Name:Soul Read
+ManaCost:3 U
+Types:Instant
+A:SP$ Charm | Choices$ Counter,Draw | CharmNum$ 1
+SVar:Counter:DB$ Counter | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | UnlessCost$ 4 | SpellDescription$ Counter target spell unless its controller pays {4}.
+SVar:Draw:DB$ Draw | NumCards$ 2 | SpellDescription$ Draw two cards.
+Oracle:Choose one —\n• Counter target spell unless its controller pays {4}.\n• Draw two cards.

@@ -19,7 +19,11 @@ import forge.screens.match.MatchController;
 import forge.toolbox.FDisplayObject;
 
 public class VManaPool extends VDisplayArea {
-    private static final FSkinColor FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static FSkinColor getForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
     private static final FSkinFont FONT = FSkinFont.get(16);
 
     private final PlayerView player;
@@ -152,7 +156,7 @@ public class VManaPool extends VDisplayArea {
             w = getWidth();
             h = getHeight() - y;
 
-            g.drawText(text, FONT, FORE_COLOR, x, y, w, h, false, Align.center, false);
+            g.drawText(text, FONT, getForeColor(), x, y, w, h, false, Align.center, false);
         }
     }
 }

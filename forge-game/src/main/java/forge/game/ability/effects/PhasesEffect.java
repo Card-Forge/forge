@@ -81,10 +81,16 @@ public class PhasesEffect extends SpellAbilityEffect {
                 if (!tgtC.isPhasedOut()) {
                     tgtC.phase(false);
                     if (tgtC.isPhasedOut()) {
+                        if (sa.hasParam("RememberAffected")) {
+                            source.addRemembered(tgtC);
+                        }
                         tgtC.setWontPhaseInNormal(wontPhaseInNormal);
                     }
                 }
             }
+        }
+        if (sa.hasParam("RememberValids")) {
+            source.addRemembered(tgtCards);
         }
     }
 }

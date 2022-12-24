@@ -2,7 +2,6 @@
 Name=Modern Masters 2015
 Code=MM2
 Date=2015-05-22
-MciCode=mm2
 Type=Reprint
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 RareMythic

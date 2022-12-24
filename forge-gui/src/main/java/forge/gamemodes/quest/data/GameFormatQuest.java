@@ -21,9 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
-
 import forge.card.CardEdition;
 import forge.game.GameFormat;
+import forge.gamemodes.quest.setrotation.ISetRotation;
+import forge.item.PaperCard;
 import forge.model.FModel;
 
 
@@ -38,6 +39,31 @@ public final class GameFormatQuest extends GameFormat {
 	private final boolean allowUnlocks;
 	private int unlocksUsed = 0;
 
+	private ISetRotation setRotation;
+
+	@Override
+	public List<String> getAllowedSetCodes() {
+		if(setRotation != null)
+			return setRotation.getCurrentSetCodes(super.getAllowedSetCodes());
+		return super.getAllowedSetCodes();
+	}
+
+	@Override
+	public Predicate<PaperCard> getFilterRules() {
+		// Filter must be continuously rebuilt if the format is mutable
+		if(setRotation != null)
+			return super.buildFilter(false);
+		return super.getFilterRules();
+	}
+
+	@Override
+	public Predicate<PaperCard> getFilterPrinted() {
+		// Filter must be continuously rebuilt if the format is mutable
+		if(setRotation != null)
+			return super.buildFilter(true);
+		return super.getFilterPrinted();
+	}
+
 	/**
 	 * Instantiates a new game format based on two lists.
 	 *
@@ -48,11 +74,27 @@ public final class GameFormatQuest extends GameFormat {
 	public GameFormatQuest(final String newName, final List<String> setsToAllow, final List<String> cardsToBan) {
 		super(newName, setsToAllow, cardsToBan);
 		allowUnlocks = false;
+		setRotation = null;
 	}
 
 	public GameFormatQuest(final String newName, final List<String> setsToAllow, final List<String> cardsToBan, boolean allowSetUnlocks) {
 		super(newName, setsToAllow, cardsToBan);
 		allowUnlocks = allowSetUnlocks;
+		setRotation = null;
+	}
+
+	/**
+	 * Instantiates a format that uses an ISetRotation to automatically rotate sets in and out
+	 * @param newName
+	 * @param setsToAllow
+	 * @param cardsToBan
+	 * @param allowSetUnlocks
+	 * @param setRotation	  an ISetRotation that determines the currently allowed sets
+	 */
+	public GameFormatQuest(final String newName, final List<String> setsToAllow, final List<String> cardsToBan, boolean allowSetUnlocks, ISetRotation setRotation) {
+		super(newName, setsToAllow, cardsToBan);
+		allowUnlocks = allowSetUnlocks;
+		this.setRotation = setRotation;
 	}
 
 	/**
@@ -60,12 +102,14 @@ public final class GameFormatQuest extends GameFormat {
 	 *
 	 * @param toCopy          an existing format
 	 * @param allowSetUnlocks
+	 * @param setRotation
 	 */
-	public GameFormatQuest(final GameFormat toCopy, boolean allowSetUnlocks) {
+	public GameFormatQuest(final GameFormat toCopy, boolean allowSetUnlocks, ISetRotation setRotation) {
 		super(toCopy.getName(), toCopy.getEffectiveDate(), toCopy.getAllowedSetCodes(), toCopy.getBannedCardNames(), toCopy.getRestrictedCards(),
 				toCopy.isRestrictedLegendary(),toCopy.getAdditionalCards(), toCopy.getAllowedRarities(),
 				toCopy.getIndex(), FormatType.CUSTOM, FormatSubType.CUSTOM);
 		allowUnlocks = allowSetUnlocks;
+		this.setRotation = setRotation;
 	}
 
 	/**
@@ -118,7 +162,7 @@ public final class GameFormatQuest extends GameFormat {
 		return unlocksUsed;
 	}
 
-	public abstract static class Predicates {
+	public abstract static class QPredicates {
 		/**
 		 * Checks if is legal in quest format.
 		 *

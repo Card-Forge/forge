@@ -3,7 +3,6 @@ Code=EXO
 Date=1998-06-15
 Name=Exodus
 Code2=EX
-MciCode=ex
 Type=Expansion
 BoosterCovers=1
 Booster=11 Common, 3 Uncommon, 1 Rare

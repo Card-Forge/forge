@@ -59,6 +59,7 @@ import forge.game.spellability.OptionalCost;
 import forge.game.spellability.SpellAbility;
 import forge.game.spellability.SpellAbilityStackInstance;
 import forge.game.spellability.TargetChoices;
+import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
 import forge.util.TextUtil;
@@ -304,7 +305,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             return;
         }
 
-        if (sp instanceof AbilityStatic) {
+        if (sp instanceof AbilityStatic || (sp.isTrigger() && sp.getTrigger().getOverridingAbility() instanceof AbilityStatic)) {
             AbilityUtils.resolve(sp);
             // AbilityStatic should do nothing below
             return;
@@ -835,6 +836,8 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
             if (activator.equals(activePlayer)) {
                 activePlayerSAs.add(sa);
             }
+
+            adjustAuraHost(sa);
         }
         simultaneousStackEntryList.removeAll(activePlayerSAs);
 
@@ -845,6 +848,18 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         activePlayer.getController().orderAndPlaySimultaneousSa(activePlayerSAs);
         activePlayerSAs.clear();
         return true;
+    }
+
+    // 400.7f Abilities of Auras that trigger when the enchanted permanent leaves the battlefield
+    // can find the new object that Aura became in its owner’s graveyard
+    public void adjustAuraHost(SpellAbility sa) {
+        final Card host = sa.getHostCard();
+        final Trigger trig = sa.getTrigger();
+        final Card newHost = game.getCardState(host);
+        if (host.isAura() && newHost.isInZone(ZoneType.Graveyard) && trig.getMode() == TriggerType.ChangesZone && 
+                trig.getParam("Destination").equals("Graveyard") && trig.getParam("ValidCard").equals("Card.EnchantedBy")) {
+            sa.setHostCard(newHost);
+        }
     }
 
     public final boolean hasStateTrigger(final int triggerID) {

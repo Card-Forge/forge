@@ -1,0 +1,9 @@
+Name:Foundry Groundbreaker
+ManaCost:3 G
+Types:Creature Artificer
+PT:3/4
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice a land. Then conjure two cards named Mishra's Foundry onto the battlefield tapped.
+SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Land | Defined$ You | SubAbility$ DBConjure
+SVar:DBConjure:DB$ MakeCard | Conjure$ True | Name$ Mishra's Foundry | Amount$ 2 | Zone$ Battlefield | Tapped$ True
+DeckHas:Ability$Sacrifice & Type$Assembly-Worker|Artifact
+Oracle:When Foundry Groundbreaker enters the battlefield, sacrifice a land. Then conjure two cards named Mishra's Foundry onto the battlefield tapped.

@@ -17,13 +17,17 @@ import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardCollection;
 import forge.game.card.CardDamageMap;
+import forge.game.card.CardLists;
 import forge.game.card.CardUtil;
 import forge.game.keyword.Keyword;
 import forge.game.player.Player;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.SpellAbility;
+import forge.game.zone.ZoneType;
+import forge.util.Aggregates;
 import forge.util.Lang;
 import forge.util.Localizer;
+import forge.util.collect.FCollection;
 
 public class DamageDealEffect extends DamageBaseEffect {
 
@@ -35,12 +39,7 @@ public class DamageDealEffect extends DamageBaseEffect {
         // when damageStackDescription is called, just build exactly what is happening
         final StringBuilder stringBuilder = new StringBuilder();
         final String damage = spellAbility.getParam("NumDmg");
-        int dmg;
-        try { // try-catch to fix Volcano Hellion Crash
-            dmg = AbilityUtils.calculateAmount(spellAbility.getHostCard(), damage, spellAbility);
-        } catch (NullPointerException e) {
-            dmg = 0;
-        }
+        int dmg = AbilityUtils.calculateAmount(spellAbility.getHostCard(), damage, spellAbility);
 
         List<GameObject> targets = SpellAbilityEffect.getTargets(spellAbility);
         final List<Card> definedSources = AbilityUtils.getDefinedCards(spellAbility.getHostCard(), spellAbility.getParam("DamageSource"), spellAbility);
@@ -153,7 +152,37 @@ public class DamageDealEffect extends DamageBaseEffect {
         final boolean removeDamage = sa.hasParam("Remove");
         final boolean divideOnResolution = sa.hasParam("DividerOnResolution");
 
-        List<GameObject> tgts = getTargets(sa);
+        List<GameObject> tgts = Lists.newArrayList();
+        if (sa.hasParam("CardChoices") || sa.hasParam("PlayerChoices")) { // choosing outside Defined/Targeted
+            final Player activator = sa.getActivatingPlayer();
+            FCollection<GameEntity> choices = new FCollection<>();
+            if (sa.hasParam("CardChoices")) {
+                choices.addAll(CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield),
+                        sa.getParam("CardChoices"), activator, hostCard, sa));
+            }
+            if (sa.hasParam("PlayerChoices")) {
+                choices.addAll(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("PlayerChoices"), sa));
+            }
+
+            int n = sa.hasParam("ChoiceAmount") ?
+                    AbilityUtils.calculateAmount(hostCard, sa.getParam("ChoiceAmount"), sa) : 1;
+            if (sa.hasParam("Random")) { // only for Whimsy and Faerie Dragon
+                for (int i = 0; i < n; i++) {
+                    GameObject random = Aggregates.random(choices);
+                    tgts.add(random);
+                    choices.remove(random);
+                    hostCard.addRemembered(random); // remember random choices for log
+                }
+            } else { // only for Comet, Stellar Pup
+                final String prompt = sa.hasParam("ChoicePrompt") ? sa.getParam("ChoicePrompt") :
+                        Localizer.getInstance().getMessage("lblChooseEntityDmg");
+                tgts.addAll(sa.getActivatingPlayer().getController().chooseEntitiesForEffect(choices, n, n, null, sa,
+                        prompt, null, null));
+            }
+        } else {
+            tgts = getTargets(sa);
+        }
+
         if (sa.hasParam("OptionalDecider")) {
             Player decider = Iterables.getFirst(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("OptionalDecider"), sa), null);
             if (decider != null && !decider.getController().confirmAction(sa, null, Localizer.getInstance().getMessage("lblDoyouWantDealTargetDamageToTarget", String.valueOf(dmg), tgts.toString()), null)) {
@@ -235,14 +264,13 @@ public class DamageDealEffect extends DamageBaseEffect {
                         // timestamp different or not in play
                         continue;
                     }
-                    if (!sa.usesTargeting() || gc.canBeTargetedBy(sa)) {
-                        internalDamageDeal(sa, sourceLKI, gc, dmg, damageMap);
+                    if (c.isPhasedOut()) {
+                        continue;
                     }
+                    internalDamageDeal(sa, sourceLKI, gc, dmg, damageMap);
                 } else if (o instanceof Player) {
                     final Player p = (Player) o;
-                    if (!sa.usesTargeting() || p.canBeTargetedBy(sa)) {
-                        damageMap.put(sourceLKI, p, dmg);
-                    }
+                    damageMap.put(sourceLKI, p, dmg);
                 }
             }
             for (final Card unTgtC : untargetedCards) {
@@ -286,12 +314,9 @@ public class DamageDealEffect extends DamageBaseEffect {
         } else {
             if (sa.hasParam("ExcessDamage") && (!sa.hasParam("ExcessDamageCondition") ||
                     sourceLKI.isValid(sa.getParam("ExcessDamageCondition").split(","), activationPlayer, hostCard, sa))) {
-
                 damageMap.put(sourceLKI, c, dmgToTarget);
 
-                List<GameEntity> list = Lists.newArrayList();
-                list.addAll(AbilityUtils.getDefinedCards(hostCard, sa.getParam("ExcessDamage"), sa));
-                list.addAll(AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("ExcessDamage"), sa));
+                List<GameEntity> list = AbilityUtils.getDefinedEntities(hostCard, sa.getParam("ExcessDamage"), sa);
 
                 if (!list.isEmpty()) {
                     damageMap.put(sourceLKI, list.get(0), excess);

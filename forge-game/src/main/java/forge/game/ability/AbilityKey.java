@@ -112,6 +112,7 @@ public enum AbilityKey {
     Result("Result"),
     RoomName("RoomName"),
     Scheme("Scheme"),
+    ScryBottom("ScryBottom"),
     ScryNum("ScryNum"),
     Sides("Sides"),
     Source("Source"),

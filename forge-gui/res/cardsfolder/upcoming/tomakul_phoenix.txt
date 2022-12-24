@@ -1,0 +1,16 @@
+Name:Tomakul Phoenix
+ManaCost:1 R R 
+Types:Creature Phoenix
+PT:2/2
+K:Flying
+K:Haste
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigEffect | TriggerDescription$ When CARDNAME dies, it perpetually gets +2/+2.
+SVar:TrigEffect:DB$ Effect | StaticAbilities$ PerpetualBuff | RememberObjects$ Self | Name$ Tomakul Phoenix's Perpetual Effect | Duration$ Permanent
+SVar:PerpetualBuff:Mode$ Continuous | Affected$ Card.IsRemembered | AddPower$ 2 | AddToughness$ 2 | EffectZone$ Command | AffectedZone$ Battlefield,Hand,Graveyard,Exile,Stack,Library,Command | Description$ This creature perpetually gets +2/+2.
+T:Mode$ Phase | Phase$ BeginCombat | ValidPlayer$ You | TriggerZones$ Graveyard | Execute$ TrigReturn | TriggerDescription$ At the beginning of combat on your turn, you may pay {X}{R}, where X is CARDNAME's power. If you do, return it from you graveyard to the battlefield.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ X R | Defined$ Self | Origin$ Graveyard | Destination$ Battlefield
+SVar:X:Count$CardPower
+DeckHas:Ability$Graveyard
+SVar:SacMe:1
+SVar:DiscardMe:1
+Oracle:Flying, haste\nWhen Tomakul Phoenix dies, it perpetually gets +2/+2.\nAt the beginning of combat on your turn, you may pay {X}{R}, where X is Tomakul Phoenix's power. If you do, return it from you graveyard to the battlefield.

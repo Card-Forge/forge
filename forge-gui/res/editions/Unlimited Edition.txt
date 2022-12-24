@@ -3,7 +3,6 @@ Code=2ED
 Date=1993-12-01
 Name=Unlimited Edition
 Code2=U
-MciCode=un
 Type=Core
 Border=White
 BoosterCovers=1

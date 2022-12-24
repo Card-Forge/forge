@@ -1253,7 +1253,7 @@ public class ComputerUtilCombat {
                 continue;
             }
 
-            sa.setActivatingPlayer(source.getController());
+            sa.setActivatingPlayer(source.getController(), true);
 
             if (sa.hasParam("Cost")) {
                 if (!CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa)) {
@@ -1433,7 +1433,7 @@ public class ComputerUtilCombat {
             if (sa == null) {
                 continue;
             }
-            sa.setActivatingPlayer(source.getController());
+            sa.setActivatingPlayer(source.getController(), true);
 
             if (sa.usesTargeting()) {
                 continue; // targeted pumping not supported
@@ -2489,7 +2489,7 @@ public class ComputerUtilCombat {
         if (combat != null) {
             // 1. If the card that spawned the attacker was sent at a planeswalker, attack the same. Consider improving.
             GameEntity def = combat.getDefenderByAttacker(sa.getHostCard());
-            if (def != null && def instanceof Card && ((Card)def).isPlaneswalker() && defenders.contains(def)) {
+            if (def instanceof Card && ((Card)def).isPlaneswalker() && defenders.contains(def)) {
                 return def;
             }
             // 2. Otherwise, go through the list of options one by one, choose the first one that can't be blocked profitably.

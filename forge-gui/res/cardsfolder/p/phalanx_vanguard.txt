@@ -1,0 +1,9 @@
+Name:Phalanx Vanguard
+ManaCost:1 W
+Types:Creature Human Soldier
+PT:2/2
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Artifact.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever an artifact enters the battlefield under your control, CARDNAME gets +1/+0 until end of turn.
+SVar:TrigPump:DB$ Pump | Defined$ Self | NumAtt$ +1
+DeckHints:Type$Artifact
+Oracle:Vigilance\nWhenever an artifact enters the battlefield under your control, Phalanx Vanguard gets +1/+0 until end of turn.

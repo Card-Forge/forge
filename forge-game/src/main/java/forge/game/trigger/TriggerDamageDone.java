@@ -70,15 +70,6 @@ public class TriggerDamageDone extends Trigger {
             }
         }
 
-        if (hasParam("Condition")) {
-            if (getParam("Condition").equalsIgnoreCase("TargetIsTriggerRemembered")) {
-                final Object target = runParams.get(AbilityKey.DamageTarget);
-                if (!this.getTriggerRemembered().contains(target)) {
-                    return false;
-                }
-            }
-        }
-
         if (hasParam("DamageAmount")) {
             final String fullParam = getParam("DamageAmount");
 
@@ -115,6 +106,7 @@ public class TriggerDamageDone extends Trigger {
     /** {@inheritDoc} */
     @Override
     public final void setTriggeringObjects(final SpellAbility sa, Map<AbilityKey, Object> runParams) {
+        // TODO try to reuse LKI of CardDamageHistory.registerDamage
         sa.setTriggeringObject(AbilityKey.Source, CardUtil.getLKICopy((Card)runParams.get(AbilityKey.DamageSource)));
         sa.setTriggeringObject(AbilityKey.Target, runParams.get(AbilityKey.DamageTarget));
         sa.setTriggeringObjectsFrom(
@@ -134,4 +126,3 @@ public class TriggerDamageDone extends Trigger {
         return sb.toString();
     }
 }
-

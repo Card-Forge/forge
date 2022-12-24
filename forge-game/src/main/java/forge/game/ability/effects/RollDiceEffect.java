@@ -1,9 +1,6 @@
 package forge.game.ability.effects;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import forge.game.event.GameEventRollDie;
 import org.apache.commons.lang3.StringUtils;
@@ -102,18 +99,40 @@ public class RollDiceEffect extends SpellAbilityEffect {
         }
 
         List<Integer> rolls = Lists.newArrayList();
+        int oddResults = 0;
+        int evenResults = 0;
+        int differentResults = 0;
         for (Integer i : naturalRolls) {
-            rolls.add(i + modifier);
+            final int modifiedRoll = i + modifier;
+            if (!rolls.contains(modifiedRoll)) {
+                differentResults++;
+            }
+            rolls.add(modifiedRoll);
+            if (modifiedRoll % 2 == 0) {
+                evenResults++;
+            } else {
+                oddResults++;
+            }
+        }
+        if (sa.hasParam("EvenOddResults")) {
+            sa.setSVar("EvenResults", Integer.toString(evenResults));
+            sa.setSVar("OddResults", Integer.toString(oddResults));
+        }
+        if (sa.hasParam("DifferentResults")) {
+            sa.setSVar("DifferentResults", Integer.toString(differentResults));
         }
         total += modifier;
 
         // Run triggers
+        int rollNum = 1;
         for (Integer roll : rolls) {
             final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
             runParams.put(AbilityKey.Sides, sides);
             runParams.put(AbilityKey.Modifier, modifier);
             runParams.put(AbilityKey.Result, roll);
+            runParams.put(AbilityKey.Number, player.getNumRollsThisTurn() - amount + rollNum);
             player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDie, runParams, false);
+            rollNum++;
         }
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(player);
         runParams.put(AbilityKey.Sides, sides);
@@ -121,6 +140,30 @@ public class RollDiceEffect extends SpellAbilityEffect {
         player.getGame().getTriggerHandler().runTrigger(TriggerType.RolledDieOnce, runParams, false);
 
         return total;
+    }
+
+    private static void resolveSub(SpellAbility sa, int num) {
+        Map<String, SpellAbility> diceAbilities = sa.getAdditionalAbilities();
+        SpellAbility resultAbility = null;
+        for (Map.Entry<String, SpellAbility> e : diceAbilities.entrySet()) {
+            String diceKey = e.getKey();
+            if (diceKey.contains("-")) {
+                String[] ranges = diceKey.split("-");
+                if (Integer.parseInt(ranges[0]) <= num && Integer.parseInt(ranges[1]) >= num) {
+                    resultAbility = e.getValue();
+                    break;
+                }
+            } else if (StringUtils.isNumeric(diceKey) && Integer.parseInt(diceKey) == num) {
+                resultAbility = e.getValue();
+                break;
+            }
+        }
+        if (resultAbility != null) {
+            AbilityUtils.resolve(resultAbility);
+
+        } else if (sa.hasAdditionalAbility("Else")) {
+            AbilityUtils.resolve(sa.getAdditionalAbility("Else"));
+        }
     }
 
     private int rollDice(SpellAbility sa, Player player, int amount, int sides) {
@@ -154,26 +197,23 @@ public class RollDiceEffect extends SpellAbilityEffect {
             total = Collections.max(rolls);
         }
 
-        Map<String, SpellAbility> diceAbilities = sa.getAdditionalAbilities();
-        SpellAbility resultAbility = null;
-        for (Map.Entry<String, SpellAbility> e: diceAbilities.entrySet()) {
-            String diceKey = e.getKey();
-            if (diceKey.contains("-")) {
-                String [] ranges = diceKey.split("-");
-                if (Integer.parseInt(ranges[0]) <= total && Integer.parseInt(ranges[1]) >= total) {
-                    resultAbility = e.getValue();
-                    break;
+        if (sa.hasParam("SubsForEach")) {
+            for (Integer roll : rolls) {
+                resolveSub(sa, roll);
+            }
+        } else {
+            resolveSub(sa, total);
+        }
+
+        if (sa.hasParam("NoteDoubles")) {
+            Set<Integer> unique = new HashSet<>();
+            for (Integer roll : rolls) {
+                if (!unique.add(roll)) {
+                    sa.setSVar("Doubles", "1");
                 }
-            } else if (StringUtils.isNumeric(diceKey) && Integer.parseInt(diceKey) == total) {
-                resultAbility = e.getValue();
-                break;
             }
         }
-        if (resultAbility != null) {
-            AbilityUtils.resolve(resultAbility);
-        } else if (sa.hasAdditionalAbility("Else")) {
-            AbilityUtils.resolve(sa.getAdditionalAbility("Else"));
-        }
+
         return total;
     }
 

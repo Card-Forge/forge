@@ -3,7 +3,6 @@ Code=VAN
 Date=1997-08
 Name=Vanguard
 Code2=VAN
-MciCode=null
 Type=Other
 Foil=NotSupported
 

@@ -38,7 +38,7 @@ public class SkipTurnEffect extends SpellAbilityEffect {
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getHostCard();
         final Game game = hostCard.getGame();
-        final String name = hostCard.getName() + "'s Effect";
+        final String name = hostCard + "'s Effect";
         final String image = hostCard.getImageKey();
         final int numTurns = AbilityUtils.calculateAmount(hostCard, sa.getParam("NumTurns"), sa);
         String repeffstr = "Event$ BeginTurn | ActiveZones$ Command | ValidPlayer$ You " +

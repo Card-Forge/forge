@@ -3,7 +3,6 @@ Code=LGN
 Date=2003-02-03
 Name=Legions
 Code2=LE
-MciCode=le
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare

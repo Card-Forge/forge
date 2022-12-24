@@ -2,7 +2,6 @@
 Code=PUMA
 Date=2018-12-07
 Name=Ultimate Box Topper - Ultimate Masters
-MciCode=uma
 Type=Reprint
 ScryfallCode=puma
 

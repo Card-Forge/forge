@@ -67,7 +67,6 @@ public abstract class ImageFetcher {
             }
             return null;
         } else {
-            // 1. Try MCI code first, as it original.
             String setCode = edition.getScryfallCode();
             String langCode = edition.getCardsLangCode();
             return ForgeConstants.URL_PIC_SCRYFALL_DOWNLOAD +
@@ -148,6 +147,16 @@ public abstract class ImageFetcher {
             if (useArtCrop) {
                 filename = TextUtil.fastReplace(filename, ".full", ".artcrop");
             }
+            boolean updateLink = false;
+            if ("back".equals(face)) {// seems getimage relative path don't process variants for back faces.
+                try {
+                    filename = TextUtil.fastReplace(filename, "1.full", imageKey.substring(imageKey.lastIndexOf('|') + 1, imageKey.indexOf('$')) + ".full");
+                    updateLink = true;
+                } catch (Exception e) {
+                    filename = paperCard.getCardAltImageKey();
+                    updateLink = false;
+                }
+            }
             destFile = new File(ForgeConstants.CACHE_CARD_PICS_DIR, filename + ".jpg");
 
             //skip ftp if using art crop
@@ -155,8 +164,14 @@ public abstract class ImageFetcher {
                 //move priority of ftp image here
                 StringBuilder setDownload = new StringBuilder(ForgeConstants.URL_PIC_DOWNLOAD);
                 if (!hasSetLookup) {
-                    setDownload.append(ImageUtil.getDownloadUrl(paperCard, face));
-                    downloadUrls.add(setDownload.toString());
+                    if (!updateLink) {
+                        setDownload.append(ImageUtil.getDownloadUrl(paperCard, face));
+                        downloadUrls.add(setDownload.toString());
+                    } else {
+                        String url = ImageUtil.getDownloadUrl(paperCard, face);
+                        setDownload.append(TextUtil.fastReplace(url, "1.full", imageKey.substring(imageKey.lastIndexOf('|') + 1, imageKey.indexOf('$')) + ".full"));
+                        downloadUrls.add(setDownload.toString());
+                    }
                 } else {
                     List<PaperCard> clones = StaticData.instance().getCommonCards().getAllCards(paperCard.getName());
                     for (PaperCard pc : clones) {
@@ -234,15 +249,13 @@ public abstract class ImageFetcher {
         observers.add(callback);
         currentFetches.put(destPath, observers);
 
-        final Runnable notifyObservers = new Runnable() {
-            public void run() {
-                FThreads.assertExecutedByEdt(true);
+        final Runnable notifyObservers = () -> {
+            FThreads.assertExecutedByEdt(true);
 
-                for (Callback o : currentFetches.get(destPath)) {
-                    o.onImageFetched();
-                }
-                currentFetches.remove(destPath);
+            for (Callback o : currentFetches.get(destPath)) {
+                o.onImageFetched();
             }
+            currentFetches.remove(destPath);
         };
         try {
             ThreadUtil.getServicePool().submit(getDownloadTask(downloadUrls.toArray(new String[0]), destPath, notifyObservers));

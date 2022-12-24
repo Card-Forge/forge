@@ -2,7 +2,6 @@
 Code=FVE
 Date=2009-08-28
 Name=From the Vault: Exiled
-MciCode=fve
 Type=Collector_Edition
 Alias=V09
 ScryfallCode=V09

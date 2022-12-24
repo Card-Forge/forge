@@ -3,7 +3,6 @@ Code=5DN
 Date=2004-06-04
 Name=Fifth Dawn
 Code2=FD
-MciCode=5dn
 Type=Expansion
 BoosterCovers=3
 Booster=11 Common, 3 Uncommon, 1 Rare

@@ -3,6 +3,6 @@ ManaCost:1 B
 Types:Enchantment Aura
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | AILogic$ Curse
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ EnchantedController | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of the end step of enchanted creature's controller, that player sacrifices that creature.
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player.EnchantedController | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of the end step of enchanted creature's controller, that player sacrifices that creature.
 SVar:TrigSacrifice:DB$ Sacrifice | SacValid$ Card.AttachedBy | Defined$ TriggeredPlayer | SacMessage$ enchanted creature
 Oracle:Enchant creature\nAt the beginning of the end step of enchanted creature's controller, that player sacrifices that creature.

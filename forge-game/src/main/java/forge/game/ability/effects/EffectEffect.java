@@ -55,11 +55,14 @@ public class EffectEffect extends SpellAbilityEffect {
         List<Player> effectOwner = null;
         final String duration = sa.getParam("Duration");
 
-        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration))
+        if (((duration != null && duration.startsWith("UntilHostLeavesPlay")) || "UntilLoseControlOfHost".equals(duration) || "UntilUntaps".equals(duration))
                 && !(hostCard.isInPlay() || hostCard.isInZone(ZoneType.Stack))) {
             return;
         }
         if ("UntilLoseControlOfHost".equals(duration) && hostCard.getController() != sa.getActivatingPlayer()) {
+            return;
+        }
+        if ("UntilUntaps".equals(duration) && !hostCard.isTapped()) {
             return;
         }
 
@@ -94,7 +97,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
             if (sa.hasParam("ForgetCounter")) {
                 CounterType cType = CounterType.getType(sa.getParam("ForgetCounter"));
-                rememberList = new FCollection<GameObject>(CardLists.filter(Iterables.filter(rememberList, Card.class), CardPredicates.hasCounter(cType)));
+                rememberList = new FCollection<>(CardLists.filter(Iterables.filter(rememberList, Card.class), CardPredicates.hasCounter(cType)));
             }
 
             // don't create Effect if there is no remembered Objects
@@ -113,7 +116,7 @@ public class EffectEffect extends SpellAbilityEffect {
 
         String name = sa.getParam("Name");
         if (name == null) {
-            name = hostCard.getName() + (sa.hasParam("Boon") ? "'s Boon" : "'s Effect");
+            name = hostCard + (sa.hasParam("Boon") ? "'s Boon" : "'s Effect");
         }
 
         // Unique Effects shouldn't be duplicated
@@ -122,7 +125,7 @@ public class EffectEffect extends SpellAbilityEffect {
         }
 
         if (sa.hasParam("EffectOwner")) {
-            effectOwner = AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("EffectOwner"), sa);
+            effectOwner = AbilityUtils.getDefinedPlayers(hostCard, sa.getParam("EffectOwner"), sa);
         } else {
             effectOwner = Lists.newArrayList(sa.getActivatingPlayer());
         }
@@ -147,11 +150,11 @@ public class EffectEffect extends SpellAbilityEffect {
 
         for (Player controller : effectOwner) {
             final Card eff = createEffect(sa, controller, name, image);
-            eff.setSetCode(sa.getHostCard().getSetCode());
+            eff.setSetCode(hostCard.getSetCode());
             if (name.startsWith("Emblem")) {
                 eff.setRarity(CardRarity.Common);
             } else {
-                eff.setRarity(sa.getHostCard().getRarity());
+                eff.setRarity(hostCard.getRarity());
             }
 
             // Abilities and triggers work the same as they do for Token
@@ -208,9 +211,7 @@ public class EffectEffect extends SpellAbilityEffect {
                     effectKeywords = CardFactoryUtil.sharedKeywords(effectKeywords, restrictions, zones, hostCard, sa);
                 }
                 if (effectKeywords != null) {
-                    for (final String s : effectKeywords) {
-                        eff.addRemembered(s);
-                    }
+                    eff.addRemembered(effectKeywords);
                 }
             }
 
@@ -296,7 +297,6 @@ public class EffectEffect extends SpellAbilityEffect {
                 registerDelayedTrigger(sa, sa.getParam("AtEOT"), Lists.newArrayList(hostCard));
             }
 
-            // Duration
             if (duration == null || !duration.equals("Permanent")) {
                 final GameCommand endEffect = new GameCommand() {
                     private static final long serialVersionUID = -5861759814760561373L;
@@ -307,42 +307,7 @@ public class EffectEffect extends SpellAbilityEffect {
                     }
                 };
 
-                if (duration == null || duration.equals("EndOfTurn")) {
-                    game.getEndOfTurn().addUntil(endEffect);
-                } else if (duration.equals("UntilHostLeavesPlay")) {
-                    hostCard.addLeavesPlayCommand(endEffect);
-                } else if (duration.equals("UntilHostLeavesPlayOrEOT")) {
-                    game.getEndOfTurn().addUntil(endEffect);
-                    hostCard.addLeavesPlayCommand(endEffect);
-                } else if (duration.equals("UntilLoseControlOfHost")) {
-                    hostCard.addLeavesPlayCommand(endEffect);
-                    hostCard.addChangeControllerCommand(endEffect);
-                } else if (duration.equals("UntilYourNextTurn")) {
-                    game.getCleanup().addUntil(controller, endEffect);
-                } else if (duration.equals("UntilYourNextUpkeep")) {
-                    game.getUpkeep().addUntil(controller, endEffect);
-                } else if (duration.equals("UntilEndOfCombat")) {
-                    game.getEndOfCombat().addUntil(endEffect);
-                } else if (duration.equals("UntilYourNextEndStep")) {
-                    game.getEndOfTurn().addUntil(controller, endEffect);
-                } else if (duration.equals("UntilTheEndOfYourNextTurn")) {
-                    if (game.getPhaseHandler().isPlayerTurn(controller)) {
-                        game.getEndOfTurn().registerUntilEnd(controller, endEffect);
-                    } else {
-                        game.getEndOfTurn().addUntilEnd(controller, endEffect);
-                    }
-                } else if (duration.equals("ThisTurnAndNextTurn")) {
-                    game.getEndOfTurn().addUntil(new GameCommand() {
-                        private static final long serialVersionUID = -5054153666503075717L;
-
-                        @Override
-                        public void run() {
-                            game.getEndOfTurn().addUntil(endEffect);
-                        }
-                    });
-                } else if (duration.equals("UntilStateBasedActionChecked")) {
-                    game.addSBACheckedCommand(endEffect);
-                }
+                addUntilCommand(sa, endEffect, controller);
             }
 
             if (sa.hasParam("ImprintOnHost")) {

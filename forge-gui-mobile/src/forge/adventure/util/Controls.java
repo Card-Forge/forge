@@ -80,6 +80,8 @@ public class Controls {
         return new Rectangle(actor.getX(),actor.getY(),actor.getWidth(),actor.getHeight());
     }
     static public boolean actorContainsVector (Actor actor, Vector2 point) {
+        if (actor == null)
+            return false;
         if (!actor.isVisible())
             return false;
         return getBoundingRect(actor).contains(point);
@@ -227,12 +229,14 @@ public class Controls {
         switch (fontName) {
             case "blackbig":
             case "big":
-                getSkin().getFont("default").getData().setScale(2, 2);
-                return getSkin().getFont("default");
+                return getBitmapFont("default", 2);
             default:
-                getSkin().getFont("default").getData().setScale(1, 1);
-                return getSkin().getFont("default");
+                return getBitmapFont("default", 1);
         }
+    }
+    static public BitmapFont getBitmapFont(String fontName, float scaleXY) {
+        getSkin().getFont(fontName).getData().setScale(scaleXY, scaleXY);
+        return getSkin().getFont("default");
     }
 
     static public Skin getSkin() {

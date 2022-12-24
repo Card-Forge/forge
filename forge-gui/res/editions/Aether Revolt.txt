@@ -4,7 +4,6 @@ Date=2017-01-20
 Name=Aether Revolt
 Code2=AER
 Type=Expansion
-MciCode=aer
 BoosterCovers=3
 Booster=10 Common:fromSheet("AER cards"), 3 Uncommon:fromSheet("AER cards"), 1 RareMythic:fromSheet("AER cards"), 1 BasicLand KLD
 AdditionalSheetForFoils=fromSheet("AER Aether Revolt Inventions")

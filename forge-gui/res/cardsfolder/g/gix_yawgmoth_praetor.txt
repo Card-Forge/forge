@@ -1,0 +1,13 @@
+Name:Gix, Yawgmoth Praetor
+ManaCost:1 B B
+Types:Legendary Creature Phyrexian Praetor
+PT:3/3
+T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ TriggeredSourceController | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a creature deals combat damage to one of your opponents, its controller may pay 1 life. If they do, they draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1 | UnlessCost$ PayLife<1> | UnlessPayer$ TriggeredSourceController | Defined$ TriggeredSourceController | UnlessSwitched$ True
+A:AB$ Dig | Cost$ 4 B B B Discard<X/Card/card> | DigNum$ X | ChangeNum$ All | ValidTgts$ Opponent | DestinationZone$ Exile | RememberChanged$ True | SubAbility$ DBPlay | StackDescription$ Exile the top X cards of {p:Targeted}'s library. | SpellDescription$ Exile the top X cards of target opponent's library.
+SVar:DBPlay:DB$ Play | WithoutManaCost$ True | ValidZone$ Exile | Valid$ Card.IsRemembered | Amount$ All | Optional$ True | SubAbility$ DBCleanup | SpellDescription$ You may play lands and cast spells from among cards exiled this way without paying their mana costs.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+SVar:PlayMain1:TRUE
+DeckHas:Ability$Discard
+Oracle:Whenever a creature deals combat damage to one of your opponents, its controller may pay 1 life. If they do, they draw a card.\n{4}{B}{B}{B}, Discard X cards: Exile the top X cards of target opponent's library. You may play lands and cast spells from among cards exiled this way without paying their mana costs.

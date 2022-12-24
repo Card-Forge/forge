@@ -3,7 +3,6 @@ Code=HML
 Date=1995-10-01
 Name=Homelands
 Code2=HL
-MciCode=hl
 Type=Expansion
 BoosterCovers=1
 Booster=6 Common, 2 UncommonRare

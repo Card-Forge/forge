@@ -3,7 +3,6 @@ Code=ISD
 Date=2011-09-30
 Name=Innistrad
 Code2=ISD
-MciCode=isd
 Type=Expansion
 BoosterCovers=5
 Booster=9 Common:!dfc, 3 Uncommon:!dfc, 1 RareMythic:!dfc, 1 dfc, 1 BasicLand

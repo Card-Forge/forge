@@ -1,0 +1,6 @@
+Name:Whirling Strike
+ManaCost:1 R
+Types:Instant
+A:SP$ Pump | ValidTgts$ Creature | NumAtt$ +2 | KW$ First Strike & Trample | SpellDescription$ Target creature gets +2/+0 and gains first strike and trample until end of turn.
+DeckHas:Keyword$FirstStrike|Trample
+Oracle:Target creature gets +2/+0 and gains first strike and trample until end of turn.

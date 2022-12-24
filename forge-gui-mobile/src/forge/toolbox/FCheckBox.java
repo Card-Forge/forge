@@ -2,6 +2,7 @@ package forge.toolbox;
 
 import com.badlogic.gdx.utils.Align;
 
+import forge.Forge;
 import forge.Graphics;
 import forge.assets.FImage;
 import forge.assets.FSkinColor;
@@ -10,8 +11,14 @@ import forge.gui.interfaces.ICheckBox;
 import forge.util.Utils;
 
 public class FCheckBox extends FLabel implements ICheckBox {
-    private static final FSkinColor CHECK_COLOR = FSkinColor.get(Colors.CLR_TEXT);
-    private static final FSkinColor BOX_COLOR = CHECK_COLOR.alphaColor(0.5f);
+    private static FSkinColor getCheckColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
+    private static FSkinColor getBoxColor() {
+        return getCheckColor().alphaColor(0.5f);
+    }
     private static final float EXTRA_GAP = Utils.scale(3);
 
     public FCheckBox() {
@@ -53,7 +60,7 @@ public class FCheckBox extends FLabel implements ICheckBox {
     }
 
     public static void drawCheckBox(Graphics g, boolean isChecked, float x, float y, float w, float h) {
-        drawCheckBox(g, BOX_COLOR, CHECK_COLOR, isChecked, x, y, w, h);
+        drawCheckBox(g, getBoxColor(), getCheckColor(), isChecked, x, y, w, h);
     }
     public static void drawCheckBox(Graphics g, FSkinColor boxColor, FSkinColor checkColor, boolean isChecked, float x, float y, float w, float h) {
         g.drawRect(Utils.scale(1), boxColor, x, y, w, h);

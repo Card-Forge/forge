@@ -3,7 +3,6 @@ Code=M19
 Date=2018-07-13
 Name=Core Set 2019
 Code2=M19
-MciCode=m19
 Type=Core
 BoosterCovers=5
 Booster=10 Common:!fromSheet("M19 Secret Cards"), 3 Uncommon:!fromSheet("M19 Secret Cards"), 1 RareMythic:!fromSheet("M19 Secret Cards"), 1 fromSheet("M19 Lands")

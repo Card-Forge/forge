@@ -100,7 +100,7 @@ public class QuestData {
         this.name = name0;
 
         if (userFormat != null) {
-            this.format = new GameFormatQuest(userFormat, allowSetUnlocks);
+            this.format = new GameFormatQuest(userFormat, allowSetUnlocks, null);
         }
         this.mode = mode0;
         this.achievements = new QuestAchievements(diff);

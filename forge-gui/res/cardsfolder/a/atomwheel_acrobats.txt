@@ -1,0 +1,10 @@
+Name:Atomwheel Acrobats
+ManaCost:3 G
+Types:Creature Elf Performer
+PT:3/2
+T:Mode$ RolledDie | TriggerZones$ Battlefield | Execute$ TrigPutCounter | ValidResult$ 1,2 | TriggerDescription$ Whenever you roll a 1 or 2, put that many +1/+1 counters on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ X
+SVar:X:TriggerCount$Result
+A:AB$ RollDice | Cost$ 2 G | AILogic$ AtOppEOT | SpellDescription$ Roll a six-sided die.
+DeckHas:Ability$Counters
+Oracle:Whenever you roll a 1 or 2, put that many +1/+1 counters on Atomwheel Acrobats.\n{2}{G}: Roll a six-sided die.

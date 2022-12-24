@@ -21,13 +21,17 @@ import forge.util.TextBounds;
 import forge.util.Utils;
 
 public class FButton extends FDisplayObject implements IButton {
-    private static final FSkinColor DEFAULT_FORE_COLOR = FSkinColor.get(Colors.CLR_TEXT);
+    private static FSkinColor getDefaultForeColor() {
+        if (Forge.isMobileAdventureMode)
+            return FSkinColor.get(Colors.ADV_CLR_TEXT);
+        return FSkinColor.get(Colors.CLR_TEXT);
+    }
     private static final float PADDING = Utils.scale(10);
 
     private FSkinImage imgL, imgM, imgR;
     private String text;
     private FSkinFont font;
-    private FSkinColor foreColor = DEFAULT_FORE_COLOR;
+    private FSkinColor foreColor = getDefaultForeColor();
     private boolean toggled = false;
     private boolean pressed = false;
     private FEventHandler command;
@@ -66,8 +70,11 @@ public class FButton extends FDisplayObject implements IButton {
         imgL = FSkinImage.BTN_UP_LEFT;
         imgM = FSkinImage.BTN_UP_CENTER;
         imgR = FSkinImage.BTN_UP_RIGHT;
-        if (hdbuttonskin())
-        {
+        if (Forge.isMobileAdventureMode) {
+            imgL = FSkinImage.ADV_BTN_UP_LEFT;
+            imgM = FSkinImage.ADV_BTN_UP_CENTER;
+            imgR = FSkinImage.ADV_BTN_UP_RIGHT;
+        } else if (hdbuttonskin()) {
             imgL = FSkinImage.HDBTN_UP_LEFT;
             imgM = FSkinImage.HDBTN_UP_CENTER;
             imgR = FSkinImage.HDBTN_UP_RIGHT;
@@ -104,8 +111,11 @@ public class FButton extends FDisplayObject implements IButton {
             imgL = FSkinImage.BTN_DISABLED_LEFT;
             imgM = FSkinImage.BTN_DISABLED_CENTER;
             imgR = FSkinImage.BTN_DISABLED_RIGHT;
-            if (hdbuttonskin())
-            {
+            if (Forge.isMobileAdventureMode) {
+                imgL = FSkinImage.ADV_BTN_DISABLED_LEFT;
+                imgM = FSkinImage.ADV_BTN_DISABLED_CENTER;
+                imgR = FSkinImage.ADV_BTN_DISABLED_RIGHT;
+            } else if (hdbuttonskin()) {
                 imgL = FSkinImage.HDBTN_DISABLED_LEFT;
                 imgM = FSkinImage.HDBTN_DISABLED_CENTER;
                 imgR = FSkinImage.HDBTN_DISABLED_RIGHT;
@@ -133,8 +143,11 @@ public class FButton extends FDisplayObject implements IButton {
             imgL = FSkinImage.BTN_TOGGLE_LEFT;
             imgM = FSkinImage.BTN_TOGGLE_CENTER;
             imgR = FSkinImage.BTN_TOGGLE_RIGHT;
-            if (hdbuttonskin())
-            {
+            if (Forge.isMobileAdventureMode) {
+                imgL = FSkinImage.ADV_BTN_TOGGLE_LEFT;
+                imgM = FSkinImage.ADV_BTN_TOGGLE_CENTER;
+                imgR = FSkinImage.ADV_BTN_TOGGLE_RIGHT;
+            } else if (hdbuttonskin()) {
                 imgL = FSkinImage.HDBTN_TOGGLE_LEFT;
                 imgM = FSkinImage.HDBTN_TOGGLE_CENTER;
                 imgR = FSkinImage.HDBTN_TOGGLE_RIGHT;
@@ -151,8 +164,11 @@ public class FButton extends FDisplayObject implements IButton {
             imgL = FSkinImage.BTN_DISABLED_LEFT;
             imgM = FSkinImage.BTN_DISABLED_CENTER;
             imgR = FSkinImage.BTN_DISABLED_RIGHT;
-            if (hdbuttonskin())
-            {
+            if (Forge.isMobileAdventureMode) {
+                imgL = FSkinImage.ADV_BTN_DISABLED_LEFT;
+                imgM = FSkinImage.ADV_BTN_DISABLED_CENTER;
+                imgR = FSkinImage.ADV_BTN_DISABLED_RIGHT;
+            } else if (hdbuttonskin()) {
                 imgL = FSkinImage.HDBTN_DISABLED_LEFT;
                 imgM = FSkinImage.HDBTN_DISABLED_CENTER;
                 imgR = FSkinImage.HDBTN_DISABLED_RIGHT;
@@ -189,9 +205,11 @@ public class FButton extends FDisplayObject implements IButton {
         imgL = FSkinImage.BTN_DOWN_LEFT;
         imgM = FSkinImage.BTN_DOWN_CENTER;
         imgR = FSkinImage.BTN_DOWN_RIGHT;
-
-        if (hdbuttonskin())
-        {
+        if (Forge.isMobileAdventureMode) {
+            imgL = FSkinImage.ADV_BTN_DOWN_LEFT;
+            imgM = FSkinImage.ADV_BTN_DOWN_CENTER;
+            imgR = FSkinImage.ADV_BTN_DOWN_RIGHT;
+        } else if (hdbuttonskin()) {
             imgL = FSkinImage.HDBTN_DOWN_LEFT;
             imgM = FSkinImage.HDBTN_DOWN_CENTER;
             imgR = FSkinImage.HDBTN_DOWN_RIGHT;
@@ -255,27 +273,34 @@ public class FButton extends FDisplayObject implements IButton {
         if (imgL.getTextureRegion() == null) {
             //handle rendering buttons before textures loaded
             FLabel.drawButtonBackground(g, w, h, imgL == FSkinImage.BTN_DOWN_LEFT);
-        }
-        else {
+        } else {
             //determine images to draw and text alignment based on which corner button is in (if any)
+            FSkinImage btnOverL = hdbuttonskin() ? FSkinImage.HDBTN_OVER_LEFT : FSkinImage.BTN_OVER_LEFT;
+            FSkinImage btnOverC = hdbuttonskin() ? FSkinImage.HDBTN_OVER_CENTER : FSkinImage.BTN_OVER_CENTER;
+            FSkinImage btnOverR = hdbuttonskin() ? FSkinImage.HDBTN_OVER_RIGHT : FSkinImage.BTN_OVER_RIGHT;
+            if (Forge.isMobileAdventureMode) {
+                btnOverL = FSkinImage.ADV_BTN_OVER_LEFT;
+                btnOverC = FSkinImage.ADV_BTN_OVER_CENTER;
+                btnOverR = FSkinImage.ADV_BTN_OVER_RIGHT;
+            }
             switch (corner) {
                 case None:
                     if (w > 2 * h) {
-                        g.drawImage(isHovered() && !pressed ? hdbuttonskin() ? FSkinImage.HDBTN_OVER_LEFT : FSkinImage.BTN_OVER_LEFT : imgL, 0, 0, h, h);
-                        g.drawImage(isHovered() && !pressed ? hdbuttonskin() ? FSkinImage.HDBTN_OVER_CENTER : FSkinImage.BTN_OVER_CENTER : imgM, h, 0, w - (2 * h), h);
-                        g.drawImage(isHovered() && !pressed ? hdbuttonskin() ? FSkinImage.HDBTN_OVER_RIGHT : FSkinImage.BTN_OVER_RIGHT : imgR, w - h, 0, h, h);
+                        g.drawImage(isHovered() && !pressed ? btnOverL : imgL, 0, 0, h, h);
+                        g.drawImage(isHovered() && !pressed ? btnOverC : imgM, h, 0, w - (2 * h), h);
+                        g.drawImage(isHovered() && !pressed ? btnOverR : imgR, w - h, 0, h, h);
                     }
                     else {
-                        g.drawImage(isHovered() && !pressed ? hdbuttonskin() ? FSkinImage.HDBTN_OVER_LEFT : FSkinImage.BTN_OVER_LEFT : imgL, 0, 0, cornerButtonWidth, h);
-                        g.drawImage(isHovered() && !pressed ? hdbuttonskin() ? FSkinImage.HDBTN_OVER_RIGHT : FSkinImage.BTN_OVER_RIGHT : imgR, cornerButtonWidth, 0, w - cornerButtonWidth, h);
+                        g.drawImage(isHovered() && !pressed ? btnOverL : imgL, 0, 0, cornerButtonWidth, h);
+                        g.drawImage(isHovered() && !pressed ? btnOverR : imgR, cornerButtonWidth, 0, w - cornerButtonWidth, h);
                     }
                     x += PADDING;
                     w -= 2 * PADDING;
                     break;
                 case BottomLeft:
                     g.startClip(x, y, w, h);
-                    g.drawImage(isHovered() && !pressed ? hdbuttonskin() ? FSkinImage.HDBTN_OVER_CENTER : FSkinImage.BTN_OVER_CENTER : imgM, 0, 0, cornerButtonWidth, cornerButtonHeight);
-                    g.drawImage(isHovered() && !pressed ? hdbuttonskin() ? FSkinImage.HDBTN_OVER_RIGHT : FSkinImage.BTN_OVER_RIGHT : imgR, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
+                    g.drawImage(isHovered() && !pressed ? btnOverC : imgM, 0, 0, cornerButtonWidth, cornerButtonHeight);
+                    g.drawImage(isHovered() && !pressed ? btnOverR : imgR, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
                     g.endClip();
                     w -= cornerTextOffsetX;
                     y += cornerTextOffsetY;
@@ -283,8 +308,8 @@ public class FButton extends FDisplayObject implements IButton {
                     break;
                 case BottomRight:
                     g.startClip(x, y, w, h);
-                    g.drawImage(isHovered() && !pressed ? hdbuttonskin() ? FSkinImage.HDBTN_OVER_LEFT : FSkinImage.BTN_OVER_LEFT : imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
-                    g.drawImage(isHovered() && !pressed ? hdbuttonskin() ? FSkinImage.HDBTN_OVER_CENTER : FSkinImage.BTN_OVER_CENTER : imgM, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
+                    g.drawImage(isHovered() && !pressed ? btnOverL : imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
+                    g.drawImage(isHovered() && !pressed ? btnOverC : imgM, cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
                     g.endClip();
                     x += cornerTextOffsetX;
                     w -= cornerTextOffsetX;
@@ -295,9 +320,9 @@ public class FButton extends FDisplayObject implements IButton {
                     g.startClip(x, y, w, h);
                     cornerButtonWidth = w / 3;
                     cornerTextOffsetX = cornerButtonWidth / 2;
-                    g.drawImage(isHovered() && !pressed ? hdbuttonskin() ? FSkinImage.HDBTN_OVER_LEFT : FSkinImage.BTN_OVER_LEFT : imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
-                    g.drawImage(isHovered() && !pressed ? hdbuttonskin() ? FSkinImage.HDBTN_OVER_CENTER : FSkinImage.BTN_OVER_CENTER : imgM, cornerButtonWidth, 0, w - 2 * cornerButtonWidth, cornerButtonHeight);
-                    g.drawImage(isHovered() && !pressed ? hdbuttonskin() ? FSkinImage.HDBTN_OVER_RIGHT : FSkinImage.BTN_OVER_RIGHT : imgR, w - cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
+                    g.drawImage(isHovered() && !pressed ? btnOverL : imgL, 0, 0, cornerButtonWidth, cornerButtonHeight);
+                    g.drawImage(isHovered() && !pressed ? btnOverC : imgM, cornerButtonWidth, 0, w - 2 * cornerButtonWidth, cornerButtonHeight);
+                    g.drawImage(isHovered() && !pressed ? btnOverR : imgR, w - cornerButtonWidth, 0, cornerButtonWidth, cornerButtonHeight);
                     g.endClip();
                     x += cornerTextOffsetX / 2;
                     w -= cornerTextOffsetX;

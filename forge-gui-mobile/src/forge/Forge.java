@@ -9,6 +9,7 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerAdapter;
 import com.badlogic.gdx.controllers.ControllerListener;
 import com.badlogic.gdx.controllers.Controllers;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -44,6 +45,8 @@ import forge.toolbox.*;
 import forge.util.*;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Forge implements ApplicationListener {
@@ -72,6 +75,7 @@ public class Forge implements ApplicationListener {
     public static KeyInputAdapter keyInputAdapter;
     private static boolean exited;
     public boolean needsUpdate = false;
+    public static boolean advStartup = false;
     public static boolean safeToClose = true;
     public static boolean magnify = false;
     public static boolean magnifyToggle = true;
@@ -149,11 +153,8 @@ public class Forge implements ApplicationListener {
 
         GuiBase.setIsAndroid(Gdx.app.getType() == Application.ApplicationType.Android);
 
-        if (!GuiBase.isAndroid() || (androidVersion > 28 && totalDeviceRAM > 7000)) {
+        if (!GuiBase.isAndroid() || (androidVersion > 25 && totalDeviceRAM > 3400)) {
             allowCardBG = true;
-        } else {
-            // don't allow to read and process
-            ForgeConstants.SPRITE_CARDBG_FILE = "";
         }
         assets = new Assets();
         graphics = new Graphics();
@@ -172,7 +173,8 @@ public class Forge implements ApplicationListener {
         Gdx.input.setCatchKey(Keys.BACK, true);
         destroyThis = true; //Prevent back()
         ForgePreferences prefs = new ForgePreferences();
-
+        if (Files.exists(Paths.get(ForgeConstants.DEFAULT_SKINS_DIR+ForgeConstants.ADV_TEXTURE_BG_FILE)))
+            selector = prefs.getPref(FPref.UI_SELECTOR_MODE);
         String skinName;
         if (FileUtil.doesFileExist(ForgeConstants.MAIN_PREFS_FILE)) {
             skinName = prefs.getPref(FPref.UI_SKIN);
@@ -187,7 +189,6 @@ public class Forge implements ApplicationListener {
         altPlayerLayout = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERINFOLAYOUT);
         altZoneTabs = prefs.getPrefBoolean(FPref.UI_ALT_PLAYERZONETABS);
         animatedCardTapUntap = prefs.getPrefBoolean(FPref.UI_ANIMATED_CARD_TAPUNTAP);
-        selector = prefs.getPref(FPref.UI_SELECTOR_MODE);
         enableUIMask = prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING);
         if (prefs.getPref(FPref.UI_ENABLE_BORDER_MASKING).equals("true")) //override old settings if not updated
             enableUIMask = "Full";
@@ -322,12 +323,14 @@ public class Forge implements ApplicationListener {
         //continuous rendering is needed for adventure mode
         startContinuousRendering();
         GuiBase.setIsAdventureMode(true);
+        advStartup = false;
         isMobileAdventureMode = true;
         if (GuiBase.isAndroid()) //force it for adventure mode
             altZoneTabs = true;
         //pixl cursor for adventure
         setCursor(null, "0");
-        enableControllerListener();
+        if (!GuiBase.isAndroid() || !getDeviceAdapter().getGamepads().isEmpty())
+            enableControllerListener();
         loadAdventureResources(true);
     }
     private static void loadAdventureResources(boolean startScene) {
@@ -340,6 +343,20 @@ public class Forge implements ApplicationListener {
         }
     }
     protected void afterDbLoaded() {
+        //override transition & title bg
+        try {
+            FileHandle transitionFile = Config.instance().getFile("ui/transition.png");
+            FileHandle titleBGFile = Forge.isLandscapeMode() ? Config.instance().getFile("ui/title_bg.png") : Config.instance().getFile("ui/title_bg_portrait.png");
+            FileHandle vsIcon = Config.instance().getFile("ui/vs.png");
+            if (vsIcon.exists())
+                Forge.getAssets().fallback_skins().put(2, new Texture(vsIcon));
+            if (transitionFile.exists())
+                Forge.getAssets().fallback_skins().put(1, new Texture(transitionFile));
+            if (titleBGFile.exists())
+                Forge.getAssets().fallback_skins().put(0, new Texture(titleBGFile));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         destroyThis = false; //Allow back()
         Gdx.input.setCatchKey(Keys.MENU, true);
 
@@ -363,6 +380,7 @@ public class Forge implements ApplicationListener {
                     if (selector.equals("Adventure")) {
                         //preload adventure resources to speedup startup if selector is adventure. Needs in edt when setting up worldstage
                         loadAdventureResources(false);
+                        Forge.isMobileAdventureMode = true;
                     }
                     //selection transition
                     setTransitionScreen(new TransitionScreen(() -> {
@@ -750,7 +768,19 @@ public class Forge implements ApplicationListener {
     }
 
     public static void clearTransitionScreen() {
-        transitionScreen = null;
+        clearTransitionScreen(false);
+    }
+    public static void clearTransitionScreen(boolean disableMatchTransition) {
+        if (transitionScreen != null) {
+            if (disableMatchTransition) {
+                transitionScreen.disableMatchTransition();
+                transitionScreen = null;
+            }
+            if (!disableMatchTransition && transitionScreen.isMatchTransition()) {
+                return;
+            }
+            transitionScreen = null;
+        }
     }
 
     public static void clearSplashScreen() {
@@ -998,6 +1028,8 @@ public class Forge implements ApplicationListener {
         currentScene = newScene;
 
         currentScene.enter();
+        if (currentScene instanceof DuelScene)
+            Forge.clearTransitionScreen(true);
         return true;
     }
 
@@ -1097,7 +1129,8 @@ public class Forge implements ApplicationListener {
             return false;
         }
     }
-
+    public static float mouseMovedX = 0;
+    public static float mouseMovedY = 0;
     private static class MainInputProcessor extends FGestureAdapter {
         private static final List<FDisplayObject> potentialListeners = new ArrayList<>();
         private static char lastKeyTyped;
@@ -1181,7 +1214,7 @@ public class Forge implements ApplicationListener {
             return false;
         }
 
-        private void updatePotentialListeners(int x, int y) {
+        private void updatePotentialListeners(float x, float y) {
             potentialListeners.clear();
 
             //base potential listeners on object containing touch down point
@@ -1356,8 +1389,6 @@ public class Forge implements ApplicationListener {
         }
 
         //mouseMoved and scrolled events for desktop version
-        private int mouseMovedX, mouseMovedY;
-
         @Override
         public boolean mouseMoved(int screenX, int screenY) {
             magnify = true;

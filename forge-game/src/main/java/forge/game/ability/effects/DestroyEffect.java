@@ -1,6 +1,5 @@
 package forge.game.ability.effects;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +15,7 @@ import forge.game.card.CardUtil;
 import forge.game.card.CardZoneTable;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 
 public class DestroyEffect extends SpellAbilityEffect {
     @Override
@@ -24,40 +24,18 @@ public class DestroyEffect extends SpellAbilityEffect {
         final StringBuilder sb = new StringBuilder();
 
         final List<Card> tgtCards = getTargetCards(sa);
+        final boolean justOne = tgtCards.size() == 1;
 
-        if (sa.hasParam("Sacrifice")) {
-            sb.append("Sacrifice ");
-        } else {
-            sb.append("Destroy ");
-        }
-
-        final Iterator<Card> it = tgtCards.iterator();
-        while (it.hasNext()) {
-            sb.append(it.next());
-
-            if (it.hasNext()) {
-                sb.append(", ");
-            }
-        }
+        sb.append(sa.hasParam("Sacrifice") ? "Sacrifice " : "Destroy ").append(Lang.joinHomogenous(tgtCards));
 
         if (sa.hasParam("Radiance")) {
-            sb.append(" and each other ").append(sa.getParam("ValidTgts"))
-                    .append(" that shares a color with ");
-            if (tgtCards.size() > 1) {
-                sb.append("them");
-            } else {
-                sb.append("it");
-            }
+            final String thing = sa.getParamOrDefault("ValidTgts", "thing");
+            sb.append(" and each other ").append(thing).append(" that shares a color with ");
+            sb.append(justOne ? "it" : "them");
         }
 
         if (noRegen) {
-            sb.append(". ");
-            if (tgtCards.size() == 1) {
-                sb.append("It");
-            } else {
-                sb.append("They");
-            }
-            sb.append(" can't be regenerated");
+            sb.append(". ").append(justOne ? "It" : "They").append(" can't be regenerated");
         }
         sb.append(".");
 
@@ -86,16 +64,17 @@ public class DestroyEffect extends SpellAbilityEffect {
         CardZoneTable table = new CardZoneTable();
         Map<Integer, Card> cachedMap = Maps.newHashMap();
         for (final Card tgtC : tgtCards) {
-            if (tgtC.isInPlay() && (!sa.usesTargeting() || tgtC.canBeTargetedBy(sa))) {
-                Card gameCard = game.getCardState(tgtC, null);
-                // gameCard is LKI in that case, the card is not in game anymore
-                // or the timestamp did change
-                // this should check Self too
-                if (gameCard == null || !tgtC.equalsWithTimestamp(gameCard)) {
-                    continue;
-                }
-                internalDestroy(gameCard, sa, table, cachedMap, params);
+            if (!tgtC.isInPlay()) {
+                continue;
             }
+            Card gameCard = game.getCardState(tgtC, null);
+            // gameCard is LKI in that case, the card is not in game anymore
+            // or the timestamp did change
+            // this should check Self too
+            if (gameCard == null || !tgtC.equalsWithTimestamp(gameCard)) {
+                continue;
+            }
+            internalDestroy(gameCard, sa, table, cachedMap, params);
         }
 
         if (untargetedCards.size() > 1) {

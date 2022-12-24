@@ -35,7 +35,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		);
 		runGame( gameWrapper, PlayerSpecification.PLAYER_1, 3 );
 	}
-	
+
 	@Test
 	public void test_104_2b_effect_may_state_that_player_wins() {
 		GameWrapper gameWrapper = new GameWrapper(
@@ -47,7 +47,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		);
 		runGame( gameWrapper, PlayerSpecification.PLAYER_2, 2 );
 	}
-	
+
 	@Test
 	public void test_104_3b_player_with_zero_life_loses_the_game() {
 		GameWrapper gameWrapper = new GameWrapper(
@@ -58,7 +58,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		);
 		runGame( gameWrapper, PlayerSpecification.PLAYER_1, 1 );
 	}
-	
+
 	@Test
 	public void test_104_3b_player_with_less_than_zero_life_loses_the_game() {
 		GameWrapper gameWrapper = new GameWrapper(
@@ -69,7 +69,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		);
 		runGame( gameWrapper, PlayerSpecification.PLAYER_1, 1 );
 	}
-	
+
 	@Test
 	public void test_104_3b_player_with_less_than_zero_life_loses_the_game_only_when_a_player_receives_priority() {
 		//The Lightning Helix targeting himself theoretically drops him to -1, but he's back up to 2 before he could lose
@@ -88,7 +88,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		);
 		runGame( gameWrapper, PlayerSpecification.PLAYER_1, 1 );
 	}
-	
+
 	@Test
 	public void test_104_3b_player_with_less_than_zero_life_loses_the_game_only_when_a_player_receives_priority_variant_with_combat() {
 		//Player 2 has 2 life, then takes 3 combat damage but also gains 2 life from lifelink
@@ -113,13 +113,13 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		);
 		runGame( gameWrapper, PlayerSpecification.PLAYER_2, 1 );
 	}
-	
+
 	@Test
 	public void test_104_3c_player_who_draws_card_with_empty_library_loses() {
 		GameWrapper gameWrapper = new GameWrapper( null, null );
 		runGame( gameWrapper, PlayerSpecification.PLAYER_1, 2 );
 	}
-	
+
 	@Test
 	public void test_104_3c_player_who_draws_more_cards_than_library_contains_draw_as_much_as_possible_and_loses() {
 		GameWrapper gameWrapper = new GameWrapper( 
@@ -137,7 +137,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 				new CardAssertAction( new CardSpecificationBuilder( "Mountain" ).owner( PlayerSpecification.PLAYER_1 ).hand() )
 		);
 	}
-	
+
 	@Test
 	public void test_104_3d_player_with_ten_poison_counters_loses() {
 		GameWrapper gameWrapper = new GameWrapper(
@@ -148,7 +148,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		);
 		runGame( gameWrapper, PlayerSpecification.PLAYER_1, 1 );
 	}
-	
+
 	@Test
 	public void test_104_3d_player_with_more_than_ten_poison_counters_loses() {
 		GameWrapper gameWrapper = new GameWrapper(
@@ -159,7 +159,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		);
 		runGame( gameWrapper, PlayerSpecification.PLAYER_1, 1 );
 	}
-	
+
 	@Test
 	public void test_104_3e_effect_may_state_that_player_loses() {
 		GameWrapper gameWrapper = new GameWrapper(
@@ -176,7 +176,7 @@ public class ComprehensiveRulesSection104 extends BaseGameSimulationTest {
 		);
 		runGame( gameWrapper, PlayerSpecification.PLAYER_2, 2 );
 	}
-	
+
 	@Test( enabled = false )//TODO fails, so disable for now.  Note that it seems to really be an issue with Forge and this rule, as commenting out the Laboratory Maniac line below (so there's just a loss, not a win), correctly triggers the loss
 	public void test_104_3f_if_a_player_would_win_and_lose_simultaneously_he_loses() {
 		/* http://community.wizards.com/content/forum-topic/3199056

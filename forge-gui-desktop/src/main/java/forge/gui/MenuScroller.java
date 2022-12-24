@@ -12,6 +12,7 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 
@@ -334,7 +335,7 @@ public class MenuScroller {
      *
      * @return the number of items to display at a time
      */
-    public int getscrollCount() {
+    public int getScrollCount() {
         return scrollCount;
     }
 
@@ -603,10 +604,20 @@ public class MenuScroller {
     }
 
     private class MouseScrollListener implements MouseWheelListener {
-        public void mouseWheelMoved(MouseWheelEvent mwe){
-            firstIndex += mwe.getWheelRotation();
-            refreshMenu();
+        public void mouseWheelMoved(MouseWheelEvent mwe) {
+            int rot = mwe.getWheelRotation();
+            if (rot == 0) {
+                return;
+            }
+            // anything to scroll? otherwise select items directly
+            if (menu.getComponentCount() <= scrollCount + topFixedCount + bottomFixedCount) {
+                setMenuSelectedIndex(menu, Math.abs(rot), rot < 0);
+                return;
+            }
+
+            firstIndex += rot;
             mwe.consume();
+            refreshMenu();
         }
     }
 
@@ -630,5 +641,15 @@ public class MenuScroller {
         int scrollCount = (height / miHeight) - bottomFixedCount - 2;  // 2 just takes the menu up a bit from the bottom which looks nicer
 
         return scrollCount;
+    }
+
+    public static void setMenuSelectedIndex(final JPopupMenu menu, final int index, boolean scrollUp) {
+        SwingUtilities.invokeLater(new Runnable() { //use invoke later to ensure first enabled item selected by default
+            public void run() {
+                for (int i = 0; i < index; i++) {
+                    menu.dispatchEvent(new KeyEvent(menu, KeyEvent.KEY_PRESSED, 0, 0, scrollUp ? KeyEvent.VK_UP : KeyEvent.VK_DOWN, KeyEvent.CHAR_UNDEFINED));
+                }
+            }
+        });
     }
 }

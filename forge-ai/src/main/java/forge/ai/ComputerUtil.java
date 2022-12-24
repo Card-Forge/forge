@@ -244,7 +244,7 @@ public class ComputerUtil {
 
     // this is used for AI's counterspells
     public static final boolean playStack(SpellAbility sa, final Player ai, final Game game) {
-        sa.setActivatingPlayer(ai);
+        sa.setActivatingPlayer(ai, true);
         if (!ComputerUtilCost.canPayCost(sa, ai, false))
             return false;
 
@@ -284,7 +284,7 @@ public class ComputerUtil {
 
     public static final void playSpellAbilityForFree(final Player ai, final SpellAbility sa) {
         final Game game = ai.getGame();
-        sa.setActivatingPlayer(ai);
+        sa.setActivatingPlayer(ai, true);
 
         final Card source = sa.getHostCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
@@ -296,7 +296,7 @@ public class ComputerUtil {
 
     public static final boolean playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final Game game) {
         SpellAbility newSA = sa.copyWithNoManaCost();
-        newSA.setActivatingPlayer(ai);
+        newSA.setActivatingPlayer(ai, true);
 
         if (!CostPayment.canPayAdditionalCosts(newSA.getPayCosts(), newSA) || !ComputerUtilMana.canPayManaCost(newSA, ai, 0, false)) {
             return false;
@@ -336,7 +336,7 @@ public class ComputerUtil {
     }
 
     public static final void playNoStack(final Player ai, SpellAbility sa, final Game game, final boolean effect) {
-        sa.setActivatingPlayer(ai);
+        sa.setActivatingPlayer(ai, true);
         // TODO: We should really restrict what doesn't use the Stack
         if (ComputerUtilCost.canPayCost(sa, ai, effect)) {
             final Card source = sa.getHostCard();
@@ -955,7 +955,7 @@ public class ComputerUtil {
                     if (!sa.isActivatedAbility() || sa.getApi() != ApiType.Regenerate) {
                         continue; // Not a Regenerate ability
                     }
-                    sa.setActivatingPlayer(controller);
+                    sa.setActivatingPlayer(controller, true);
                     if (!(sa.canPlay() && ComputerUtilCost.canPayCost(sa, controller, false))) {
                         continue; // Can't play ability
                     }
@@ -1530,7 +1530,7 @@ public class ComputerUtil {
                 if (sa.getApi() != ApiType.DealDamage) {
                     continue;
                 }
-                sa.setActivatingPlayer(ai);
+                sa.setActivatingPlayer(ai, true);
                 final String numDam = sa.getParam("NumDmg");
                 int dmg = AbilityUtils.calculateAmount(sa.getHostCard(), numDam, sa);
                 if (dmg <= damage) {
@@ -2054,7 +2054,7 @@ public class ComputerUtil {
             return finalHandSize;
         }
 
-        CardCollectionView library = ai.getZone(ZoneType.Library).getCards();
+        CardCollectionView library = ai.getCardsIn(ZoneType.Library);
         int landsInDeck = CardLists.count(library, CardPredicates.isType("Land"));
 
         // no land deck, can't do anything better
@@ -2282,23 +2282,31 @@ public class ComputerUtil {
         if (goodChoices.isEmpty()) {
             goodChoices = validCards;
         }
-        final CardCollection dChoices = new CardCollection();
-        if (sa.hasParam("DiscardValid")) {
-            final String validString = sa.getParam("DiscardValid");
-            if (validString.contains("Creature") && !validString.contains("nonCreature")) {
-                final Card c = ComputerUtilCard.getBestCreatureAI(goodChoices);
-                if (c != null) {
-                    dChoices.add(c);
+
+        if (min == 1 && max == 1) {
+            if (sa.hasParam("DiscardValid")) {
+                final String validString = sa.getParam("DiscardValid");
+                if (validString.contains("Creature") && !validString.contains("nonCreature")) {
+                    final Card c = ComputerUtilCard.getBestCreatureAI(goodChoices);
+                    if (c != null) {
+                        return new CardCollection(c);
+                    }
                 }
             }
+        }
+
+        // not enough good choices, need to fill the rest
+        int minDiff = min - goodChoices.size();
+        if (minDiff > 0) {
+            goodChoices.addAll(Aggregates.random(CardLists.filter(validCards, Predicates.not(Predicates.in(goodChoices))), minDiff));
+            return goodChoices;
         }
 
         Collections.sort(goodChoices, CardLists.TextLenComparator);
 
         CardLists.sortByCmcDesc(goodChoices);
-        dChoices.add(goodChoices.get(0));
 
-        return Aggregates.random(goodChoices, min, new CardCollection());
+        return new CardCollection(Aggregates.random(goodChoices, max));
     }
 
     public static CardCollection getCardsToDiscardFromFriend(Player aiChooser, Player p, SpellAbility sa, CardCollection validCards, int min, int max) {
@@ -2953,7 +2961,7 @@ public class ComputerUtil {
         return false;
     }
 
-    public static boolean targetPlayableSpellCard(final Player ai, CardCollection options, final SpellAbility sa, final boolean withoutPayingManaCost, boolean mandatory) {
+    public static boolean targetPlayableSpellCard(final Player ai, Iterable<Card> options, final SpellAbility sa, final boolean withoutPayingManaCost, boolean mandatory) {
         // determine and target a card with a SA that the AI can afford and will play
         AiController aic = ((PlayerControllerAi) ai.getController()).getAi();
         sa.resetTargets();
@@ -2976,7 +2984,7 @@ public class ComputerUtil {
                 }
                 SpellAbility abTest = withoutPayingManaCost ? ab.copyWithNoManaCost() : ab.copy();
                 // at this point, we're assuming that card will be castable from whichever zone it's in by the AI player.
-                abTest.setActivatingPlayer(ai);
+                abTest.setActivatingPlayer(ai, true);
                 abTest.getRestrictions().setZone(c.getZone().getZoneType());
                 if (AiPlayDecision.WillPlay == aic.canPlaySa(abTest) && ComputerUtilCost.canPayCost(abTest, ai, false)) {
                     targets.add(c);
@@ -2985,8 +2993,8 @@ public class ComputerUtil {
         }
 
         if (targets.isEmpty()) {
-            if (mandatory && !options.isEmpty()) {
-                targets = options;
+            if (mandatory && !Iterables.isEmpty(options)) {
+                targets.addAll(options);
             } else {
                 return false;
             }

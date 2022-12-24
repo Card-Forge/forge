@@ -131,7 +131,7 @@ public class CopyPermanentAi extends SpellAbilityAi {
         if (sa.usesTargeting()) {
             sa.resetTargets();
 
-            CardCollection list = new CardCollection(CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa));
+            List<Card> list = CardUtil.getValidCardsToTarget(sa.getTargetRestrictions(), sa);
 
             //Nothing to target
             if (list.isEmpty()) {

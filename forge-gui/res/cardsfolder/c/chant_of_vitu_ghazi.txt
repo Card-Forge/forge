@@ -3,7 +3,7 @@ ManaCost:6 W W
 Types:Instant
 K:Convoke
 A:SP$ Effect | Cost$ 6 W W | ReplacementEffects$ RepDmg | SpellDescription$ Prevent all damage that would be dealt by creatures this turn. You gain life equal to the damage prevented this way.
-SVar:RepDmg:Event$ DamageDone | ValidSource$ Creature | ReplaceWith$ GainLifeYou | PreventionEffect$ True | Description$ Prevent all damage that would be dealt by creatures this turn. You gain life equal to the damage prevented this way.
+SVar:RepDmg:Event$ DamageDone | ValidSource$ Creature.inZoneBattlefield | ReplaceWith$ GainLifeYou | PreventionEffect$ True | Description$ Prevent all damage that would be dealt by creatures this turn. You gain life equal to the damage prevented this way.
 SVar:GainLifeYou:DB$ GainLife | Defined$ You | LifeAmount$ X
 SVar:X:ReplaceCount$DamageAmount
 Oracle:Convoke (Your creatures can help cast this spell. Each creature you tap while casting this spell pays for {1} or one mana of that creature's color.)\nPrevent all damage that would be dealt by creatures this turn. You gain life equal to the damage prevented this way.

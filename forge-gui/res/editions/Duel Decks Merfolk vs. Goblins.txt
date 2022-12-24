@@ -3,7 +3,6 @@ Code=DDT
 Date=2017-10-24
 Name=Duel Decks: Merfolk vs. Goblins
 Code2=DDT
-MciCode=ddt
 Type=Duel_Deck
 ScryfallCode=DDT
 

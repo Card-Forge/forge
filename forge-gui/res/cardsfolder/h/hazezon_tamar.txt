@@ -8,5 +8,6 @@ SVar:TrigTokens:DB$ Token | TokenAmount$ X | TokenScript$ rgw_1_1_sand_warrior |
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ TrigExile | TriggerDescription$ When NICKNAME leaves the battlefield, exile all Sand Warriors.
 SVar:TrigExile:DB$ ChangeZoneAll | Origin$ Battlefield | Destination$ Exile | ChangeType$ Sand.Warrior
 SVar:X:Count$Valid Land.YouCtrl
-DeckHas:Ability$Token
+SVar:BuffedBy:Land
+DeckHas:Ability$Token & Type$Sand
 Oracle:When Hazezon Tamar enters the battlefield, create X 1/1 Sand Warrior creature tokens that are red, green, and white at the beginning of your next upkeep, where X is the number of lands you control at that time.\nWhen Hazezon leaves the battlefield, exile all Sand Warriors.

@@ -1,0 +1,12 @@
+Name:Teething Wurmlet
+ManaCost:G
+Types:Creature Wurm
+PT:1/1
+S:Mode$ Continuous | Affected$ Card.Self | IsPresent$ Artifact.YouCtrl | PresentCompare$ GE3 | AddKeyword$ Deathtouch | Description$ CARDNAME has deathtouch as long as you control three or more artifacts.
+T:Mode$ ChangesZone | ValidCard$ Artifact.YouCtrl | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever an artifact enters the battlefield under your control, you gain 1 life. If this is the first time this ability has resolved this turn, put a +1/+1 counter on CARDNAME.
+SVar:TrigGainLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ DBCounter
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | ConditionCheckSVar$ Resolved | ConditionSVarCompare$ EQ1
+SVar:Resolved:Count$ResolvedThisTurn
+DeckHints:Type$Artifact
+DeckHas:Ability$LifeGain|Counters & Keyword$Deathtouch
+Oracle:Teething Wurmlet has deathtouch as long as you control three or more artifacts.\nWhenever an artifact enters the battlefield under your control, you gain 1 life. If this is the first time this ability has resolved this turn, put a +1/+1 counter on Teething Wurmlet.
