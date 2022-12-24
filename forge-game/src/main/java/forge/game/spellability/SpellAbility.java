@@ -1655,16 +1655,6 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
         return targetRestrictions != null;
     }
 
-    public boolean hasLegalTargets() {
-        if (!isTargetNumberValid() && getTargetRestrictions().getNumCandidates(this, true) == 0) {
-            return false;
-        }
-        if (!StaticAbilityMustTarget.meetsMustTargetRestriction(this)) {
-            return false;
-        }
-        return true;
-    }
-
     public TargetRestrictions getTargetRestrictions() {
         return targetRestrictions;
     }

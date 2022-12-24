@@ -352,7 +352,7 @@ public class SpellAbilityPicker {
         if (!ComputerUtilCost.canPayCost(sa, player, sa.isTrigger())) {
             return AiPlayDecision.CantAfford;
         }
-        if (sa.usesTargeting() && !sa.hasLegalTargets()) {
+        if (!ComputerUtilAbility.isFullyTargetable(sa)) {
             return AiPlayDecision.TargetingFailed;
         }
         if (shouldWaitForLater(sa)) {

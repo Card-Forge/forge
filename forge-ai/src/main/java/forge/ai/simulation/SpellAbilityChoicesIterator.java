@@ -1,5 +1,6 @@
 package forge.ai.simulation;
 
+import forge.ai.ComputerUtilAbility;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -53,7 +54,7 @@ public class SpellAbilityChoicesIterator {
             int origIndex = -1;
             for (AbilitySub sub : choices) {
                 origIndex++;
-                if (sub.usesTargeting() && !sub.hasLegalTargets()) {
+                if (!ComputerUtilAbility.isFullyTargetable(sub)) {
                     continue;
                 }
                 modesMap.add(origIndex);

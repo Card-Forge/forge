@@ -566,4 +566,45 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         // Only a single simulation expected (no target self).
         AssertJUnit.assertEquals(1, picker.getNumSimulations());
     }
+
+    @Test
+    public void testModalSpellNoTargetsForModeWithSubAbility() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCardToZone("Temur Charm", p, ZoneType.Hand);
+        addCard("Forest", p);
+        addCard("Island", p);
+        addCard("Mountain", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        // Only mode "Creatures with power 3 or less can’t block this turn" should be simulated.
+        AssertJUnit.assertEquals(1, picker.getNumSimulations());
+    }
+
+    @Test
+    public void testModalSpellNoTargetsForAnyModes() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCardToZone("Drown in the Loch", p, ZoneType.Hand);
+        addCard("Swamp", p);
+        addCard("Island", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        // TODO: Ideally, this would be 0 simulations, but we currently only determine there are no
+        // valid in SpellAbilityChoicesIterator, which runs once we're already simulating the spell.
+        // Still, this test case exercises the code path and ensures we don't crash in this case.
+        AssertJUnit.assertEquals(1, picker.getNumSimulations());
+    }
 }

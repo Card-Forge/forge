@@ -54,6 +54,7 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
 import forge.game.trigger.WrappedAbility;
@@ -902,8 +903,13 @@ public class AiController {
         if (sa instanceof SpellPermanent) {
             return canPlayFromEffectAI((SpellPermanent)sa, false, true);
         }
-        if (sa.usesTargeting() && !sa.hasLegalTargets()) {
-            return AiPlayDecision.TargetingFailed;
+        if (sa.usesTargeting()) {
+            if (!sa.isTargetNumberValid() && sa.getTargetRestrictions().getNumCandidates(sa, true) == 0) {
+                return AiPlayDecision.TargetingFailed;
+            }
+            if (!StaticAbilityMustTarget.meetsMustTargetRestriction(sa)) {
+                return AiPlayDecision.TargetingFailed;
+            }
         }
         if (sa instanceof Spell) {
             if (!player.cantLoseForZeroOrLessLife() && player.canLoseLife() &&
