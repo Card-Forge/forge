@@ -41,7 +41,7 @@ public class PointOfInterestChanges implements SaveFileContent  {
             }
             data.storeObject("keys",keys.toArray(new String[0]));
             for(int i=0;i<items.size();i++)
-                data.store("value_"+i,items.get(0).save());
+                data.store("value_"+i,items.get(1).save());
             return data;
         }
     }
