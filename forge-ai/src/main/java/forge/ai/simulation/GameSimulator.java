@@ -1,9 +1,6 @@
 package forge.ai.simulation;
 
-import forge.game.ability.ApiType;
-import forge.game.ability.effects.CharmEffect;
 import forge.game.spellability.LandAbility;
-import forge.game.zone.ZoneType;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
