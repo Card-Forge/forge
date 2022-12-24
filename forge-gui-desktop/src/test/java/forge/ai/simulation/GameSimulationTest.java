@@ -590,6 +590,7 @@ public class GameSimulationTest extends SimulationTest {
 
         Card berserker = findCardWithName(simGame, berserkerCardName);
         AssertJUnit.assertNotNull(berserker);
+        AssertJUnit.assertTrue(berserker.hasSVar("EndOfTurnLeavePlay"));
         AssertJUnit.assertEquals(1, berserker.getNetPower());
         AssertJUnit.assertEquals(1, berserker.getNetToughness());
         AssertJUnit.assertFalse(berserker.isSick());
@@ -602,6 +603,7 @@ public class GameSimulationTest extends SimulationTest {
 
         Card berserker2 = findCardWithName(simGame2, berserkerCardName);
         AssertJUnit.assertNotNull(berserker2);
+        AssertJUnit.assertTrue(berserker2.hasSVar("EndOfTurnLeavePlay"));
         AssertJUnit.assertEquals(2, berserker2.getNetPower());
         AssertJUnit.assertEquals(1, berserker2.getNetToughness());
         AssertJUnit.assertFalse(berserker2.isSick());
@@ -646,10 +648,8 @@ public class GameSimulationTest extends SimulationTest {
     @Test
     public void testMarkedDamage() {
         // Marked damage is important, as it's used during the AI declare
-        // attackers logic
-        // which affects game state score - since P/T boosts are evaluated
-        // differently for
-        // creatures participating in combat.
+        // attackers logic which affects game state score - since P/T boosts
+        // are evaluated differently for creatures participating in combat.
 
         Game game = initAndCreateGame();
         Player p = game.getPlayers().get(1);

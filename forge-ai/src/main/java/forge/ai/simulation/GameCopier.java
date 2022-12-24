@@ -421,6 +421,7 @@ public class GameCopier {
                 newCard.setNamedCard2(c.getNamedCard());
             }
             newCard.setSVars(c.getSVars());
+            newCard.copyChangedSVarsFrom(c);
         }
 
         if (zone == ZoneType.Stack) {
