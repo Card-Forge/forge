@@ -603,7 +603,7 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
         SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
         // TODO: Ideally, this would be 0 simulations, but we currently only determine there are no
-        // valid in SpellAbilityChoicesIterator, which runs once we're already simulating the spell.
+        // valid modes in SpellAbilityChoicesIterator, which runs already when we're simulating.
         // Still, this test case exercises the code path and ensures we don't crash in this case.
         AssertJUnit.assertEquals(1, picker.getNumSimulations());
     }
