@@ -86,11 +86,11 @@
   </object>
   <object id="53" template="../obj/shop.tx" x="304" y="272">
    <properties>
-    <property name="commonShopList" value=""/>
-    <property name="mythicShopList" value=""/>
-    <property name="rareShopList" value=""/>
-    <property name="shopList" value="Dragon"/>
-    <property name="uncommonShopList" value=""/>
+    <property name="commonShopList" value="Colorless,Colorless,Artifact,Creature2Colorless,Vehicle,Equip,Wand"/>
+    <property name="mythicShopList" value="White,Blue,Red,Green,Black,Legend"/>
+    <property name="rareShopList" value="Land4Colorless,Land4Colorless,Creature2Eldrazi"/>
+    <property name="shopList" value="Instant,Creature,Land,Colorless,Artifact,Multicolor,Azorius,Dimir,Rakdos,Gruul,Selesnya,Orzhov,Izzet,Golgari,Boros,Simic,Golem,Sliver"/>
+    <property name="uncommonShopList" value="Land,Enchantment,Instant,Creature"/>
    </properties>
   </object>
   <object id="54" template="../obj/shop.tx" x="256" y="272">
