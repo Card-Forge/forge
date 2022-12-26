@@ -5,7 +5,7 @@ A:SP$ ChangeZone | Cost$ 2 R R | Origin$ Battlefield | Destination$ Exile | Vali
 SVar:ExileYard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | Defined$ RememberedController | ChangeType$ Remembered.sameName | SubAbility$ ExileHand | StackDescription$ None
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ RememberedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None
 SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ RememberedController | ChangeType$ Remembered.sameName | ChangeNum$ NumInLib | Chooser$ You | Search$ True | Shuffle$ True | SubAbility$ DBCleanup | StackDescription$ None
-SVar:NumInHand:RememberedController$CardsInHand
-SVar:NumInLib:RememberedController$CardsInLibrary
+SVar:NumInHand:PlayerCountRememberedController$CardsInHand
+SVar:NumInLib:PlayerCountRememberedController$CardsInLibrary
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Exile target nonbasic land. Search its controller's graveyard, hand, and library for all cards with the same name as that land and exile them. Then that player shuffles.

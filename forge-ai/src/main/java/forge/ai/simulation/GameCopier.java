@@ -83,6 +83,7 @@ public class GameCopier {
             Player origPlayer = origGame.getPlayers().get(i);
             Player newPlayer = newGame.getPlayers().get(i);
             newPlayer.setLife(origPlayer.getLife(), null);
+            newPlayer.setDamageReceivedThisTurn(origPlayer.getDamageReceivedThisTurn());
             newPlayer.setActivateLoyaltyAbilityThisTurn(origPlayer.getActivateLoyaltyAbilityThisTurn());
             for (int j = 0; j < origPlayer.getSpellsCastThisTurn(); j++)
                 newPlayer.addSpellCastThisTurn();
@@ -350,6 +351,7 @@ public class GameCopier {
             newCard.setPTBoost(c.getPTBoostTable());
             // TODO copy by map
             newCard.setDamage(c.getDamage());
+            newCard.setDamageReceivedThisTurn(c.getDamageReceivedThisTurn());
 
             newCard.setChangedCardColors(c.getChangedCardColorsTable());
             newCard.setChangedCardColorsCharacterDefining(c.getChangedCardColorsCharacterDefiningTable());

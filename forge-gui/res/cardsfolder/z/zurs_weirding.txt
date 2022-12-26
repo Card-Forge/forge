@@ -4,7 +4,7 @@ Types:Enchantment
 S:Mode$ Continuous | AffectedZone$ Hand | MayLookAt$ Player | Description$ Players play with their hands revealed.
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ Player | ReplaceWith$ RevealTop | Description$ If a player would draw a card, they reveal it instead. Then any other player may pay 2 life. If a player does, put that card into its owner's graveyard. Otherwise, that player draws a card.
 SVar:RevealTop:DB$ PeekAndReveal | Defined$ ReplacedPlayer | NoPeek$ True | SubAbility$ DBMill
-SVar:DBMill:DB$ Dig | Defined$ ReplacedPlayer | DestinationZone$ Graveyard | SubAbility$ DBDraw | UnlessPayer$ NonReplacedPlayer | UnlessCost$ PayLife<2> | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid | StackDescription$ None
+SVar:DBMill:DB$ Dig | Defined$ ReplacedPlayer | DestinationZone$ Graveyard | DigNum$ 1 | ChangeNum$ All | SubAbility$ DBDraw | UnlessPayer$ NonReplacedPlayer | UnlessCost$ PayLife<2> | UnlessSwitched$ True | UnlessResolveSubs$ WhenNotPaid | StackDescription$ None
 SVar:DBDraw:DB$ Draw | Defined$ ReplacedPlayer | NumCards$ 1 | StackDescription$ that player draws a card
 SVar:NonStackingEffect:True
 AI:RemoveDeck:All

@@ -511,12 +511,8 @@ public class AbilityUtils {
             } else if (hType.equals("Other")) {
                 players.addAll(player.getAllOtherPlayers());
                 val = playerXCount(players, calcX[1], card, ability);
-            } else if (hType.equals("Remembered")) {
-                for (final Object o : card.getRemembered()) {
-                    if (o instanceof Player) {
-                        players.add((Player) o);
-                    }
-                }
+            } else if (hType.startsWith("Remembered")) {
+                addPlayer(card.getRemembered(), hType, players);
                 val = playerXCount(players, calcX[1], card, ability);
             } else if (hType.equals("NonActive")) {
                 players.addAll(game.getPlayers());
