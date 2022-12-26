@@ -1,0 +1,11 @@
+Name:Sawblade Scamp
+ManaCost:R
+Types:Creature Phyrexian Beast
+PT:1/1
+K:Haste
+T:Mode$ SpellCast | ValidCard$ Card.nonCreature | ValidActivatingPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a noncreature spell, put an oil counter on CARDNAME.
+SVar:TrigPutCounter:DB$ PutCounter | CounterType$ OIL
+A:AB$ DealDamage | Cost$ T SubCounter<1/OIL> | Defined$ Opponent | NumDmg$ 1 | SpellDescription$ It deals 1 damage to each opponent.
+SVar:BuffedBy:Card.nonCreature
+DeckHas:Ability$Counters
+Oracle:Haste\nWhenever you cast a noncreature spell, put an oil counter on Sawblade Scamp.\n{T}, Remove an oil counter from Sawblade Scamp: It deals 1 damage to each opponent.
