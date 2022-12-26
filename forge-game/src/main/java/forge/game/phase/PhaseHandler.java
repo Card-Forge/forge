@@ -357,6 +357,9 @@ public class PhaseHandler implements java.io.Serializable {
 
                 case COMBAT_END:
                     // End Combat always happens
+                    for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
+                        c.onEndOfCombat(playerTurn);
+                    }
                     game.getEndOfCombat().executeAt();
 
                     //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
