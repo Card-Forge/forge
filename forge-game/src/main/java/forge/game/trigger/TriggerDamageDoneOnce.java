@@ -1,9 +1,6 @@
 package forge.game.trigger;
 
 import java.util.Map;
-import java.util.Set;
-
-import com.google.common.collect.Sets;
 
 import forge.game.ability.AbilityKey;
 import forge.game.card.Card;
@@ -92,5 +89,5 @@ public class TriggerDamageDoneOnce extends Trigger {
         }
     }
     return result;
-}
+    }
 }
