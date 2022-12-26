@@ -198,13 +198,10 @@ public class GameSimulator {
             final SpellAbility playingSa = sa;
 
             simGame.copyLastState();
-            boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, simGame, new Runnable() {
-                @Override
-                public void run() {
-                    if (interceptor != null) {
-                        interceptor.announceX(playingSa);
-                        interceptor.chooseTargets(playingSa, GameSimulator.this);
-                    }
+            boolean success = ComputerUtil.handlePlayingSpellAbility(aiPlayer, sa, simGame, () -> {
+                if (interceptor != null) {
+                    interceptor.announceX(playingSa);
+                    interceptor.chooseTargets(playingSa, GameSimulator.this);
                 }
             });
             if (!success) {

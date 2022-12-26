@@ -1254,10 +1254,16 @@ public abstract class SpellAbility extends CardTraitBase implements ISpellAbilit
             return false;
         }
 
-        final TargetRestrictions tr = getTargetRestrictions();
+        final SpellAbility rootAbility = this.getRootAbility();
+        // 115.5. A spell or ability on the stack is an illegal target for itself.
+        // (This covers the spell case.)
+        if (rootAbility.isSpell() && rootAbility.getHostCard() == entity) {
+            return false;
+        }
 
         // Restriction related to this ability
         if (usesTargeting()) {
+            final TargetRestrictions tr = getTargetRestrictions();
             if (tr.isUniqueTargets() && getUniqueTargets().contains(entity))
                 return false;
 
