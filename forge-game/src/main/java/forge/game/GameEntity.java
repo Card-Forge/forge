@@ -340,6 +340,13 @@ public abstract class GameEntity extends GameObject implements IIdentifiable {
         addCounterInternal(CounterType.get(counterType), n, source, fireEvents, table, params);
     }
 
+    public List<Pair<Integer, Boolean>> getDamageReceivedThisTurn() {
+        return damageReceivedThisTurn;
+    }
+    public void setDamageReceivedThisTurn(List<Pair<Integer, Boolean>> dmg) {
+        damageReceivedThisTurn.addAll(dmg);
+    }
+
     public void receiveDamage(Pair<Integer, Boolean> dmg) {
         damageReceivedThisTurn.add(dmg);
     }

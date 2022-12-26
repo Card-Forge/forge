@@ -423,7 +423,7 @@ public class PumpAi extends PumpAiBase {
         }
 
         if (sa.hasParam("TargetingPlayer") && sa.getActivatingPlayer().equals(ai) && !sa.isTrigger()) {
-            if (ComputerUtilAbility.isFullyTargetable(sa)) { // Volcanic Offering: only prompt if second part can happen too
+            if (!ComputerUtilAbility.isFullyTargetable(sa)) { // Volcanic Offering: only prompt if second part can happen too
                 return false;
             }
             Player targetingPlayer = AbilityUtils.getDefinedPlayers(source, sa.getParam("TargetingPlayer"), sa).get(0);
