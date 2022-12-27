@@ -35,6 +35,7 @@ public class MessageUtil {
         String choser = StringUtils.capitalize(mayBeYou(player, target));
         switch(sa.getApi()) {
             case ChooseDirection:
+            case DigMultiple:
                 return value;
             case ChooseColor:
                 return sa.hasParam("Random")
