@@ -311,6 +311,7 @@ public abstract class GameState {
             }
 
             if (c.getPlayerAttachedTo() != null) {
+                newText.append("|EnchantingPlayer:");
                 newText.append(getPlayerString(c.getPlayerAttachedTo()));
             } else if (c.isAttachedToEntity()) {
                 newText.append("|AttachedTo:").append(c.getEntityAttachedTo().getId());
