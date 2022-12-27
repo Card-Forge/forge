@@ -79,15 +79,15 @@ public class TriggerDamageDoneOnce extends Trigger {
     }
 
     public CardCollection getDamageSources(Map<Card, Integer> damageMap) {
-    if (!hasParam("ValidSource")) {
-        return new CardCollection(damageMap.keySet());
-    }
-    CardCollection result = new CardCollection();
-    for (Card c : damageMap.keySet()) {
-        if (matchesValid(c, getParam("ValidSource").split(","))) {
-            result.add(c);
+        if (!hasParam("ValidSource")) {
+            return new CardCollection(damageMap.keySet());
         }
-    }
-    return result;
+        CardCollection result = new CardCollection();
+        for (Card c : damageMap.keySet()) {
+            if (matchesValid(c, getParam("ValidSource").split(","))) {
+                result.add(c);
+            }
+        }
+        return result;
     }
 }
