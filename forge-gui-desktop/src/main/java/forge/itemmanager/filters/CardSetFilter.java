@@ -9,7 +9,7 @@ import forge.item.PaperCard;
 import forge.itemmanager.ItemManager;
 import forge.screens.home.quest.DialogChooseSets;
 
-/** 
+/**
  * TODO: Write javadoc for this type.
  *
  */
@@ -26,7 +26,9 @@ public class CardSetFilter extends CardFormatFilter {
 
     public CardSetFilter(ItemManager<? super PaperCard> itemManager0, Collection<String> sets0, Collection<String> limitedSets0, boolean allowReprints0){
         this(itemManager0, sets0, allowReprints0);
-        this.limitedSets.addAll(limitedSets0);
+        if (limitedSets0 != null) {
+            this.limitedSets.addAll(limitedSets0);
+        }
     }
 
     @Override
@@ -60,7 +62,7 @@ public class CardSetFilter extends CardFormatFilter {
         final DialogChooseSets dialog = new DialogChooseSets(this.sets, null, this.limitedSets,
                                                             true, this.allowReprints);
         final CardSetFilter itemFilter = this;
-        
+
         dialog.setOkCallback(new Runnable() {
             @Override
             public void run() {
