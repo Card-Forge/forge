@@ -3042,8 +3042,9 @@ public class PlayerControllerHuman extends PlayerController implements IGameCont
             });
         }
 
-        public void askAI() {
+        public void askAI(boolean useSimulation) {
             PlayerControllerAi ai = new PlayerControllerAi(player.getGame(), player, player.getOriginalLobbyPlayer());
+            ai.setUseSimulation(useSimulation);
             player.runWithController(() -> {
                 List<SpellAbility> sas = ai.chooseSpellAbilityToPlay();
                 SpellAbility chosen = sas == null ? null : sas.get(0);
