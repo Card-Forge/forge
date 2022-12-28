@@ -68,7 +68,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && !sa.getActivatingPlayer().canSearchLibraryWith(sa, p)) {
                     cards.removeAll(p.getCardsIn(ZoneType.Library));
                 }
-
             }
             if (origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
                 // Search library using changezoneall effect need a param "Search"

@@ -20,7 +20,7 @@ public class ControlPlayerEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         List<Player> tgtPlayers = getTargetPlayers(sa);
-        return TextUtil.concatWithSpace(sa.getActivatingPlayer().toString(),"controls", Lang.joinHomogenous(tgtPlayers),"during their next turn");
+        return TextUtil.concatWithSpace(sa.getActivatingPlayer().toString(), "controls", Lang.joinHomogenous(tgtPlayers), "during their next turn");
     }
 
     @SuppressWarnings("serial")
