@@ -319,7 +319,7 @@ public class VDev implements IVDoc<CDev>, IDevListener {
         private final FSkin.SkinColor pressedBG = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
         private boolean toggled;
 
-        private final int r, i;
+        private final int r, i; // Radius, insets (for paintComponent)
 
         public DevLabel(final String text0) {
             super();
@@ -385,7 +385,6 @@ public class VDev implements IVDoc<CDev>, IDevListener {
         @Override
         protected void paintComponent(final Graphics g) {
             int w = this.getWidth();
-            // Width, height, radius, insets (for paintComponent)
             int h = this.getHeight();
             g.setColor(this.getBackground());
             g.fillRoundRect(this.i, this.i, w - (2 * this.i), h - this.i, this.r, this.r);
