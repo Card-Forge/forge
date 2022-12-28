@@ -1,7 +1,7 @@
 Name:Torpor Orb
 ManaCost:2
 Types:Artifact
-S:Mode$ Continuous | GlobalRule$ Creatures entering the battlefield don't cause abilities to trigger. | Description$ Creatures entering the battlefield don't cause abilities to trigger.
+S:Mode$ DisableTriggers | ValidCause$ Creature | ValidMode$ ChangesZone,ChangesZoneAll | Destination$ Battlefield | Description$ Permanents entering the battlefield don't cause abilities of permanents your opponents control to trigger.
 SVar:NonStackingEffect:True
 AI:RemoveDeck:Random
 Oracle:Creatures entering the battlefield don't cause abilities to trigger.
