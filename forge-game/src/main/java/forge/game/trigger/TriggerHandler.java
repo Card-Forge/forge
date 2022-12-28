@@ -19,18 +19,14 @@ package forge.game.trigger;
 
 import java.util.*;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
-import com.google.common.collect.Table.Cell;
 
 import forge.game.CardTraitBase;
 import forge.game.CardTraitPredicates;
 import forge.game.Game;
-import forge.game.GlobalRuleChange;
 import forge.game.IHasSVars;
 import forge.game.ability.AbilityFactory;
 import forge.game.ability.AbilityKey;
@@ -39,6 +35,7 @@ import forge.game.card.*;
 import forge.game.player.Player;
 import forge.game.spellability.AbilitySub;
 import forge.game.spellability.SpellAbility;
+import forge.game.staticability.StaticAbilityDisableTriggers;
 import forge.game.staticability.StaticAbilityPanharmonicon;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -445,74 +442,9 @@ public class TriggerHandler {
             }
         }
 
-        // Torpor Orb check
-        if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)
-                && !regtrig.isStatic()) {
-            if (mode.equals(TriggerType.ChangesZone)) {
-                if (runParams.get(AbilityKey.Destination) instanceof String) {
-                    final String dest = (String) runParams.get(AbilityKey.Destination);
-                    if (dest.equals("Battlefield") && runParams.get(AbilityKey.Card) instanceof Card) {
-                        final Card card = (Card) runParams.get(AbilityKey.Card);
-                        if (card.isCreature()) {
-                            return false;
-                        }
-                    }
-                }
-            } else if (mode.equals(TriggerType.ChangesZoneAll)) {
-                CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
-                // find out if any other cards would still trigger it
-                boolean found = false;
-                for (Cell<ZoneType, ZoneType, CardCollection> cell : table.cellSet()) {
-                    // this currently assumes the table will not contain multiple destinations
-                    // however with some effects (e.g. Goblin Welder) that should indeed be the case
-                    // once Forge handles that correctly this section needs to account for that
-                    // (by doing a closer check of the triggered ability first)
-                    if (cell.getColumnKey() != ZoneType.Battlefield) {
-                        found = true;
-                    } else if (Iterables.any(cell.getValue(), Predicates.not(CardPredicates.isType("Creature")))) {
-                        found = true;
-                    }
-                    if (found) break;
-                }
-                if (!found) {
-                    return false;
-                }
-            }
-        } // Torpor Orb check
-
-        if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureDyingTriggers)
-                && !regtrig.isStatic()) {
-            if (mode.equals(TriggerType.ChangesZone)) {
-                if (runParams.get(AbilityKey.Destination) instanceof String && runParams.get(AbilityKey.Origin) instanceof String) {
-                    final String dest = (String) runParams.get(AbilityKey.Destination);
-                    final String origin = (String) runParams.get(AbilityKey.Origin);
-                    if (dest.equals("Graveyard") && origin.equals("Battlefield") && runParams.get(AbilityKey.Card) instanceof Card) {
-                        // It will trigger if the ability is of a dying creature that triggers only when that creature is put into a graveyard from anywhere
-                        if (!"Card.Self".equals(regtrig.getParam("ValidCard")) || (regtrig.hasParam("Origin") && !"Any".equals(regtrig.getParam("Origin")))) {
-                            final Card card = (Card) runParams.get(AbilityKey.Card);
-                            if (card.isCreature()) {
-                                return false;
-                            }
-                        }
-                    }
-                }
-            } else if (mode.equals(TriggerType.ChangesZoneAll)) {
-                CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
-                boolean found = false;
-                for (Cell<ZoneType, ZoneType, CardCollection> cell : table.cellSet()) {
-                    if (cell.getRowKey() != ZoneType.Battlefield) {
-                        found = true;
-                    } else if (cell.getColumnKey() != ZoneType.Graveyard) {
-                        found = true;
-                    } else if (Iterables.any(cell.getValue(), Predicates.not(CardPredicates.isType("Creature")))) {
-                        found = true;
-                    }
-                    if (found) break;
-                }
-                if (!found) {
-                    return false;
-                }
-            }
+        // check if any static abilities are disabling the trigger (Torpor Orb and the like)
+        if (!regtrig.isStatic() && StaticAbilityDisableTriggers.disabled(game, mode, regtrig, runParams)) {
+            return false;
         }
         return true;
     }
