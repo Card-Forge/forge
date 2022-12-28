@@ -17,12 +17,11 @@ import forge.game.spellability.TargetRestrictions;
 
 public class PossibleTargetSelector {
     private final SpellAbility sa;
-    private SpellAbility targetingSa;
-    private int targetingSaIndex;
+    private final SpellAbility targetingSa;
+    private final int targetingSaIndex;
     private int maxTargets;
-    private TargetRestrictions tgt;
     private int targetIndex;
-    private List<GameObject> validTargets;
+    private final List<GameObject> validTargets;
 
     public static class Targets {
         final int targetingSaIndex;
@@ -67,7 +66,7 @@ public class PossibleTargetSelector {
         }
         sa.setActivatingPlayer(player, true);
         targetingSa.resetTargets();
-        tgt = targetingSa.getTargetRestrictions();
+        TargetRestrictions tgt = targetingSa.getTargetRestrictions();
         maxTargets = tgt.getMaxTargets(sa.getHostCard(), targetingSa);
 
         SimilarTargetSkipper skipper = new SimilarTargetSkipper();
@@ -80,8 +79,8 @@ public class PossibleTargetSelector {
     }
 
     private static class SimilarTargetSkipper {
-        private ArrayListMultimap<String, Card> validTargetsMap = ArrayListMultimap.create();
-        private HashMap<Card, String> cardTypeStrings = new HashMap<>();
+        private final ArrayListMultimap<String, Card> validTargetsMap = ArrayListMultimap.create();
+        private final HashMap<Card, String> cardTypeStrings = new HashMap<>();
         private HashMap<Card, Integer> creatureScores;
 
         private int getCreatureScore(Card c) {
@@ -203,8 +202,8 @@ public class PossibleTargetSelector {
     }
 
     public boolean selectTargets(Targets targets) {
-        if (targets.originalTargetCount != validTargets.size() || targets.targetingSaIndex != targetingSaIndex) {
-            System.err.println("Expected: " + validTargets.size() + " " + targetingSaIndex + " got: " + targets.originalTargetCount + " " + targets.targetingSaIndex);
+        if (targets.targetingSaIndex != targetingSaIndex) {
+            System.err.println("Expected: " + targetingSaIndex + " got: " + targets.targetingSaIndex);
             return false;
         }
         selectTargetsByIndexImpl(targets.targetIndex);

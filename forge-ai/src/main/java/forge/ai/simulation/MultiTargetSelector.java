@@ -11,6 +11,10 @@ public class MultiTargetSelector {
     public static class Targets {
         private ArrayList<PossibleTargetSelector.Targets> targets;
 
+        public int size() {
+            return targets.size();
+        }
+
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder();
@@ -24,8 +28,8 @@ public class MultiTargetSelector {
         }
     }
 
-    private List<PossibleTargetSelector> selectors;
-    private List<SpellAbility> targetingSAs;
+    private final List<PossibleTargetSelector> selectors;
+    private final List<SpellAbility> targetingSAs;
     private int currentIndex;
 
     public MultiTargetSelector(SpellAbility sa, List<AbilitySub> plannedSubs) {
@@ -52,8 +56,8 @@ public class MultiTargetSelector {
     public Targets getLastSelectedTargets() {
         Targets targets = new Targets();
         targets.targets = new ArrayList<>(selectors.size());
-        for (int i = 0; i < selectors.size(); i++) {
-            targets.targets.add(selectors.get(i).getLastSelectedTargets());
+        for (PossibleTargetSelector selector : selectors) {
+            targets.targets.add(selector.getLastSelectedTargets());
         }
         return targets;
     }

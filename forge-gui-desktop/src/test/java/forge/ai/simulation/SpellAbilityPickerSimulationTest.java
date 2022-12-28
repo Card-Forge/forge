@@ -605,4 +605,34 @@ public class SpellAbilityPickerSimulationTest extends SimulationTest {
         // Still, this test case exercises the code path and ensures we don't crash in this case.
         AssertJUnit.assertEquals(1, picker.getNumSimulations());
     }
+
+    @Test
+    public void threeTargetSpell() {
+        Game game = initAndCreateGame();
+        Player p = game.getPlayers().get(1);
+        Player opponent = game.getPlayers().get(0);
+
+        addCardToZone("Incremental Growth", p, ZoneType.Hand);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest", p);
+        addCard("Forest Bear", p);
+        addCard("Flying Men", opponent);
+        addCard("Runeclaw Bear", p);
+        addCard("Water Elemental", opponent);
+        addCard("Grizzly Bears", p);
+
+        game.getPhaseHandler().devModeSet(PhaseType.MAIN2, p);
+        game.getAction().checkStateEffects(true);
+        SpellAbilityPicker picker = new SpellAbilityPicker(game, p);
+        SpellAbility sa = picker.chooseSpellAbilityToPlay(null);
+        AssertJUnit.assertNotNull(sa);
+        MultiTargetSelector.Targets targets = picker.getPlan().getSelectedDecision().targets;
+        AssertJUnit.assertEquals(3, targets.size());
+        AssertJUnit.assertTrue(targets.toString().contains("Forest Bear"));
+        AssertJUnit.assertTrue(targets.toString().contains("Runeclaw Bear"));
+        AssertJUnit.assertTrue(targets.toString().contains("Grizzly Bear"));
+    }
 }
