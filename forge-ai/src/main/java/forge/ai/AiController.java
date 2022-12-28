@@ -54,6 +54,7 @@ import forge.game.replacement.ReplacementLayer;
 import forge.game.replacement.ReplacementType;
 import forge.game.spellability.*;
 import forge.game.staticability.StaticAbility;
+import forge.game.staticability.StaticAbilityDisableTriggers;
 import forge.game.staticability.StaticAbilityMustTarget;
 import forge.game.trigger.Trigger;
 import forge.game.trigger.TriggerType;
@@ -262,16 +263,15 @@ public class AiController {
             }
         }
 
-        if (card.isCreature()
-                && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)) {
-            return api == null;
-        }
-
         boolean rightapi = false;
 
         // Trigger play improvements
         for (final Trigger tr : card.getTriggers()) {
             // These triggers all care for ETB effects
+
+            if (StaticAbilityDisableTriggers.disabled(game, TriggerType.ChangesZone, tr)) {
+                return api == null;
+            }
 
             if (tr.getMode() != TriggerType.ChangesZone) {
                 continue;
