@@ -312,6 +312,7 @@ public class VLobby implements ILobbyView {
                 }
                 if (fullUpdate && (type == LobbySlotType.LOCAL || isSlotAI)) {
                     // Deck section selection
+                    panel.getDeckChooser().getLstDecks().getSelectCommand().run();
                     selectSchemeDeck(i);
                     selectPlanarDeck(i);
                     selectVanguardAvatar(i);
