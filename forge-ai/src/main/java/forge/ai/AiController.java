@@ -281,6 +281,10 @@ public class AiController {
                 continue;
             }
 
+            if (StaticAbilityDisableTriggers.disabled(game, TriggerType.ChangesZone, tr)) {
+                return api == null;
+            }
+
             if (tr.hasParam("ValidCard")) {
                 String validCard = tr.getParam("ValidCard");
                 if (!validCard.contains("Self")) {
