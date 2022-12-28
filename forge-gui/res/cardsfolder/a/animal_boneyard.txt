@@ -4,7 +4,7 @@ Types:Enchantment Aura
 K:Enchant land
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Land | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Land.AttachedBy | AddAbility$ GainLife | AddSVar$ AnimalBoneyardX | Description$ Enchanted land has "{T}, Sacrifice a creature: You gain life equal to the sacrificed creature's toughness."
-SVar:GainLife:AB$GainLife | Cost$ T Sac<1/Creature> | LifeAmount$ AnimalBoneyardX | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
+SVar:GainLife:AB$ GainLife | Cost$ T Sac<1/Creature> | LifeAmount$ AnimalBoneyardX | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
 SVar:AnimalBoneyardX:Sacrificed$CardToughness
 AI:RemoveDeck:All
 SVar:NonStackingAttachEffect:True
