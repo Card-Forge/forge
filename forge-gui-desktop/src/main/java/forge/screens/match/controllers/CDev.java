@@ -28,31 +28,32 @@ public final class CDev implements ICDoc {
         this.view = new VDev(this);
         addListener(view);
 
-        view.getLblUnlimitedLands().addMouseListener(madUnlimited);
-        view.getLblViewAll().addMouseListener(madViewAll);
-        view.getLblGenerateMana().addMouseListener(madMana);
-        view.getLblSetupGame().addMouseListener(madSetup);
-        view.getLblDumpGame().addMouseListener(madDump);
-        view.getLblTutor().addMouseListener(madTutor);
-        view.getLblCardToHand().addMouseListener(madCardToHand);
-        view.getLblExileFromHand().addMouseListener(madExileFromHand);
-        view.getLblCardToBattlefield().addMouseListener(madCardToBattlefield);
-        view.getLblCardToLibrary().addMouseListener(madCardToLibrary);
-        view.getLblCardToGraveyard().addMouseListener(madCardToGraveyard);
-        view.getLblCardToExile().addMouseListener(madCardToExile);
-        view.getLblCastSpell().addMouseListener(madCastASpell);
-        view.getLblRepeatAddCard().addMouseListener(madRepeatAddCard);
-        view.getLblAddCounterPermanent().addMouseListener(madAddCounter);
-        view.getLblSubCounterPermanent().addMouseListener(madSubCounter);
-        view.getLblTapPermanent().addMouseListener(madTap);
-        view.getLblUntapPermanent().addMouseListener(madUntap);
-        view.getLblSetLife().addMouseListener(madLife);
-        view.getLblWinGame().addMouseListener(madWinGame);
-        view.getLblExileFromPlay().addMouseListener(madExileFromPlay);
-        view.getLblRemoveFromGame().addMouseListener(madRemoveFromGame);
-        view.getLblRiggedRoll().addMouseListener(madRiggedRoll);
-        view.getLblWalkTo().addMouseListener(madWalkToPlane);
-        view.getLblAskAI().addMouseListener(madAskAI);
+        view.getLblUnlimitedLands().addMouseListener(onClick(this::togglePlayManyLandsPerTurn));
+        view.getLblViewAll().addMouseListener(onClick(this::toggleViewAllCards));
+        view.getLblGenerateMana().addMouseListener(onClick(this::generateMana));
+        view.getLblSetupGame().addMouseListener(onClick(this::setupGameState));
+        view.getLblDumpGame().addMouseListener(onClick(this::dumpGameState));
+        view.getLblTutor().addMouseListener(onClick(this::tutorForCard));
+        view.getLblCardToHand().addMouseListener(onClick(this::addCardToHand));
+        view.getLblExileFromHand().addMouseListener(onClick(this::exileCardsFromHand));
+        view.getLblCardToBattlefield().addMouseListener(onClick(this::addCardToBattlefield));
+        view.getLblCardToLibrary().addMouseListener(onClick(this::addCardToLibrary));
+        view.getLblCardToGraveyard().addMouseListener(onClick(this::addCardToGraveyard));
+        view.getLblCardToExile().addMouseListener(onClick(this::addCardToExile));
+        view.getLblCastSpell().addMouseListener(onClick(this::castASpell));
+        view.getLblRepeatAddCard().addMouseListener(onClick(this::repeatAddCard));
+        view.getLblAddCounterPermanent().addMouseListener(onClick(this::addCounterToPermanent));
+        view.getLblSubCounterPermanent().addMouseListener(onClick(this::removeCountersFromPermanent));
+        view.getLblTapPermanent().addMouseListener(onClick(this::tapPermanent));
+        view.getLblUntapPermanent().addMouseListener(onClick(this::untapPermanent));
+        view.getLblSetLife().addMouseListener(onClick(this::setPlayerLife));
+        view.getLblWinGame().addMouseListener(onClick(this::winGame));
+        view.getLblExileFromPlay().addMouseListener(onClick(this::exileCardsFromPlay));
+        view.getLblRemoveFromGame().addMouseListener(onClick(this::removeCardsFromGame));
+        view.getLblRiggedRoll().addMouseListener(onClick(this::riggedPlanerRoll));
+        view.getLblWalkTo().addMouseListener(onClick(this::planeswalkTo));
+        view.getLblAskAI().addMouseListener(onClick(this::askAI));
+        view.getLblAskSimulationAI().addMouseListener(onClick(this::askSimulationAI));
     }
     public IGameController getController() {
         return matchUI.getGameController();
@@ -66,258 +67,99 @@ public final class CDev implements ICDoc {
         listeners.add(listener);
     }
 
-    private final MouseListener madUnlimited = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            togglePlayManyLandsPerTurn();
-        }
-    };
+    private MouseListener onClick(Runnable r) {
+        return new MouseAdapter() {
+            @Override
+            public void mousePressed(final MouseEvent e) {
+                r.run();
+            }
+        };
+    }
+
     public void togglePlayManyLandsPerTurn() {
         final boolean newValue = !view.getLblUnlimitedLands().getToggled();
         getController().cheat().setCanPlayUnlimitedLands(newValue);
         update();
     }
 
-    private final MouseListener madViewAll = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            toggleViewAllCards();
-        }
-    };
     public void toggleViewAllCards() {
         final boolean newValue = !view.getLblViewAll().getToggled();
         getController().cheat().setViewAllCards(newValue);
         update();
     }
 
-    private final MouseListener madMana = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            generateMana();
-        }
-    };
     public void generateMana() {
         getController().cheat().generateMana();
     }
-
-    private final MouseListener madSetup = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            setupGameState();
-        }
-    };
     public void setupGameState() {
         getController().cheat().setupGameState();
     }
-
-    private final MouseListener madDump = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            dumpGameState();
-        }
-    };
     public void dumpGameState() {
         getController().cheat().dumpGameState();
     }
-
-    private final MouseListener madTutor = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            tutorForCard();
-        }
-    };
     public void tutorForCard() {
         getController().cheat().tutorForCard();
     }
-
-    private final MouseListener madCardToHand = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            addCardToHand();
-        }
-    };
     public void addCardToHand() {
         getController().cheat().addCardToHand();
     }
-
-    private final MouseListener madCardToLibrary = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            addCardToLibrary();
-        }
-    };
     public void addCardToLibrary() {
         getController().cheat().addCardToLibrary();
     }
-
-    private final MouseListener madCardToGraveyard = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            addCardToGraveyard();
-        }
-    };
     public void addCardToGraveyard() {
         getController().cheat().addCardToGraveyard();
     }
-
-    private final MouseListener madCardToExile = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            addCardToExile();
-        }
-    };
     public void addCardToExile() {
         getController().cheat().addCardToExile();
     }
 
-    private final MouseListener madCastASpell = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            castASpell();
-        }
-    };
     public void castASpell() {
         getController().cheat().castASpell();
     }
-
-    private final MouseListener madRepeatAddCard = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            repeatAddCard();
-        }
-    };
     public void repeatAddCard() {
         getController().cheat().repeatLastAddition();
     }
-
-    private final MouseListener madExileFromHand = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            exileCardsFromHand();
-        }
-    };
     public void exileCardsFromHand() {
         getController().cheat().exileCardsFromHand();
     }
-
-    private final MouseListener madAddCounter = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            addCounterToPermanent();
-        }
-    };
     public void addCounterToPermanent() {
         getController().cheat().addCountersToPermanent();
     }
-
-    private final MouseListener madSubCounter = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            removeCountersFromPermanent();
-        }
-    };
     public void removeCountersFromPermanent() {
         getController().cheat().removeCountersFromPermanent();
     }
-
-    private final MouseListener madTap = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            tapPermanent();
-        }
-    };
     public void tapPermanent() {
         getController().cheat().tapPermanents();
     }
-
-    private final MouseListener madUntap = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            untapPermanent();
-        }
-    };
     public void untapPermanent() {
         getController().cheat().untapPermanents();
     }
-
-    private final MouseListener madLife = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            setPlayerLife();
-        }
-    };
     public void setPlayerLife() {
         getController().cheat().setPlayerLife();
     }
-
-    private final MouseListener madWinGame = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            winGame();
-        }
-    };
     public void winGame() {
         getController().cheat().winGame();
     }
-
-    private final MouseListener madCardToBattlefield = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            addCardToBattlefield();
-        }
-    };
     public void addCardToBattlefield() {
         getController().cheat().addCardToBattlefield();
     }
-
-    private final MouseListener madExileFromPlay = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            exileCardsFromPlay();
-        }
-    };
     public void exileCardsFromPlay() {
         getController().cheat().exileCardsFromBattlefield();
     }
-
-    private final MouseListener madRemoveFromGame = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            removeCardsFromGame();
-        }
-    };
     public void removeCardsFromGame() {
         getController().cheat().removeCardsFromGame();
     }
-
-    private final MouseListener madRiggedRoll = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            riggedPlanerRoll();
-        }
-    };
     public void riggedPlanerRoll() {
         getController().cheat().riggedPlanarRoll();
     }
-
-    private final MouseListener madWalkToPlane = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            planeswalkTo();
-        }
-    };
     public void planeswalkTo() {
         getController().cheat().planeswalkTo();
     }
-
-    private final MouseListener madAskAI = new MouseAdapter() {
-        @Override
-        public void mousePressed(final MouseEvent e) {
-            askAI();
-        }
-    };
     public void askAI() {
-        getController().cheat().askAI();
+        getController().cheat().askAI(false);
+    }
+    public void askSimulationAI() {
+        getController().cheat().askAI(true);
     }
 
     //========== End mouse listener inits
