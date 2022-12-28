@@ -269,10 +269,6 @@ public class AiController {
         for (final Trigger tr : card.getTriggers()) {
             // These triggers all care for ETB effects
 
-            if (StaticAbilityDisableTriggers.disabled(game, TriggerType.ChangesZone, tr)) {
-                return api == null;
-            }
-
             if (tr.getMode() != TriggerType.ChangesZone) {
                 continue;
             }
