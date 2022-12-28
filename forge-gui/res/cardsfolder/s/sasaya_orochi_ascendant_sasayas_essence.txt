@@ -13,9 +13,7 @@ Name:Sasaya's Essence
 ManaCost:1 G G
 Colors:green
 Types:Legendary Enchantment
-T:Mode$ TapsForMana | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever a land you control is tapped for mana, add an additional one mana of any type that land produced for each other land you control with the same name as it.
-SVar:TrigMana:DB$ Pump | RememberObjects$ TriggeredCard | SubAbility$ DBRepeat
-SVar:DBRepeat:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Land.YouCtrl+IsNotRemembered+sharesNameWith Remembered | RepeatSubAbility$ DBManaReflect | SubAbility$ DBCleanup
+T:Mode$ TapsForMana | ValidCard$ Land.YouCtrl | TriggerZones$ Battlefield | Execute$ DBRepeat | Static$ True | TriggerDescription$ Whenever a land you control is tapped for mana, add an additional one mana of any type that land produced for each other land you control with the same name as it.
+SVar:DBRepeat:DB$ RepeatEach | RepeatCards$ Land.YouCtrl+NotTriggeredCard+sharesNameWith TriggeredCard | RepeatSubAbility$ DBManaReflect
 SVar:DBManaReflect:DB$ ManaReflected | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ You
-SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 Oracle:Whenever a land you control is tapped for mana, add an additional one mana of any type that land produced for each other land you control with the same name as it.
