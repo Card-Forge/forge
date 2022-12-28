@@ -28,8 +28,9 @@ public class CountersPutOrRemoveEffect extends SpellAbilityEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final Player pl = !sa.hasParam("DefinedPlayer") ? sa.getActivatingPlayer() :
-                AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa).getFirst();
+        final Player pl = sa.hasParam("DefinedPlayer") ? 
+                AbilityUtils.getDefinedPlayers(sa.getHostCard(), sa.getParam("DefinedPlayer"), sa).getFirst()
+                : sa.getActivatingPlayer();
         sb.append(pl.getName());
 
         if (sa.hasParam("CounterType")) {
