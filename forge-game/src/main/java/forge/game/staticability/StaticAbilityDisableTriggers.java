@@ -26,7 +26,20 @@ public class StaticAbilityDisableTriggers {
     }
 
     public static boolean disabled(final Game game, final TriggerType triggerType, final Trigger regtrig, final Map<AbilityKey, Object> runParams)  {
-        for (final Card ca : game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES)) {
+        CardCollectionView cardList = null;
+        // if LTB look back
+        if (regtrig.getMode() == TriggerType.ChangesZone && "Battlefield".equals(regtrig.getParam("Origin"))) {
+            if (runParams.containsKey(AbilityKey.LastStateBattlefield)) {
+                cardList = (CardCollectionView) runParams.get(AbilityKey.LastStateBattlefield);
+            }
+            if (cardList == null) {
+                cardList = game.getLastStateBattlefield();
+            }
+        } else {
+            cardList = game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+        }
+
+        for (final Card ca : cardList) {
             for (final StaticAbility stAb : ca.getStaticAbilities()) {
                 if (!stAb.getParam("Mode").equals(MODE) || stAb.isSuppressed() || !stAb.checkConditions()) {
                     continue;
