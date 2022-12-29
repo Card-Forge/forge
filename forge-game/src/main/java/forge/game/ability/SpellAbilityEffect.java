@@ -400,13 +400,21 @@ public abstract class SpellAbilityEffect {
         addedTrigger.setIntrinsic(true);
     }
 
-    protected static void addExileOnCastTrigger(final Card card) {
+    protected static void addExileOnCastOrMoveTrigger(final Card card, final String zone) {
         String trig = "Mode$ SpellCast | ValidCard$ Card.IsRemembered | TriggerZones$ Command | Static$ True";
         String effect = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
         final Trigger parsedTrigger = TriggerHandler.parseTrigger(trig, card, true);
         parsedTrigger.setOverridingAbility(AbilityFactory.getAbility(effect, card));
         final Trigger addedTrigger = card.addTrigger(parsedTrigger);
         addedTrigger.setIntrinsic(true);
+        //Any on Destination will cause the effect to remove itself when cancelling to play the card
+        String trig2 = "Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ " + zone + " | Destination$ Hand,Library,Graveyard,Battlefield,Command,Sideboard | TriggerZones$ Command | Static$ True";
+        String effect2 = "DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile";
+        final Trigger parsedTrigger2 = TriggerHandler.parseTrigger(trig2, card, true);
+        parsedTrigger2.setOverridingAbility(AbilityFactory.getAbility(effect2, card));
+        final Trigger addedTrigger2 = card.addTrigger(parsedTrigger2);
+        addedTrigger2.setIntrinsic(true);
+
     }
 
     protected static void addExileOnCounteredTrigger(final Card card) {
