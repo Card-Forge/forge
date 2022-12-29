@@ -1,6 +1,8 @@
 package forge.game.staticability;
 
-import com.google.common.collect.ImmutableList;
+import com.google.common.base.Predicates;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Table.Cell;
 
 import forge.game.Game;
 import forge.game.card.*;
@@ -39,6 +41,11 @@ public class StaticAbilityDisableTriggers {
     }
 
     public static boolean isDisabled(final StaticAbility stAb, final TriggerType triggerType, final Trigger regtrig, final Map<AbilityKey, Object> runParams) {
+        // CR 603.2e
+        if (stAb.hasParam("ValidCard") && regtrig.getSpawningAbility() != null) {
+            return false;
+        }
+
         if (!stAb.matchesValidParam("ValidCard", regtrig.getHostCard())) {
             return false;
         }
@@ -54,23 +61,41 @@ public class StaticAbilityDisableTriggers {
             if (!stAb.matchesValidParam("ValidCause", runParams.get(AbilityKey.Card))) {
                 return false;
             }
-            if (!stAb.matchesValidParam("Origin", runParams.get(AbilityKey.Origin))) {
-                return false;
-            }
             if (!stAb.matchesValidParam("Destination", runParams.get(AbilityKey.Destination))) {
                 return false;
             }
+            if (!stAb.matchesValidParam("Origin", runParams.get(AbilityKey.Origin))) {
+                return false;
+            }
+            if ("Graveyard".equals(runParams.get(AbilityKey.Destination))
+                    && "Battlefield".equals(runParams.get(AbilityKey.Origin))) {
+                // Allow triggered ability of a dying creature that triggers
+                // only when that creature is put into a graveyard from anywhere
+                if ("Card.Self".equals(regtrig.getParam("ValidCard"))
+                        && (!regtrig.hasParam("Origin") || "Any".equals(regtrig.getParam("Origin")))) {
+                    return false;
+                }
+            }
         } else if (triggerType.equals(TriggerType.ChangesZoneAll)) {
-            // Check if the cards have a trigger at all
-            final String origin = stAb.getParamOrDefault("Origin", null);
             final String destination = stAb.getParamOrDefault("Destination", null);
             final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
 
-            if (table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)),
-                    ZoneType.smartValueOf(destination), stAb.getParam("ValidCause"), stAb.getHostCard(),
-                    stAb).isEmpty()) {
-                return false;
+            // find out if any other cards would still trigger it
+            boolean found = false;
+            for (Cell<ZoneType, ZoneType, CardCollection> cell : table.cellSet()) {
+                // this currently assumes the table will not contain multiple destinations
+                // however with some effects (e.g. Goblin Welder) that should indeed be the case
+                // once Forge handles that correctly this section needs to account for that
+                // (by doing a closer check of the triggered ability first)
+                if (cell.getColumnKey() != ZoneType.valueOf(destination)) {
+                    found = true;
+                } else if (Iterables.any(cell.getValue(),
+                        Predicates.not(CardPredicates.isType(stAb.getParam("ValidCause"))))) {
+                    found = true;
+                }
+                if (found) break;
             }
+            if (found) return false;
         }
         return true;
     }
