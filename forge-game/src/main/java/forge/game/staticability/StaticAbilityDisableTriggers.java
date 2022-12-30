@@ -1,7 +1,6 @@
 package forge.game.staticability;
 
 import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Table.Cell;
 
 import forge.game.Game;
@@ -90,25 +89,40 @@ public class StaticAbilityDisableTriggers {
                 }
             }
         } else if (triggerType.equals(TriggerType.ChangesZoneAll)) {
-            final String destination = stAb.getParamOrDefault("Destination", null);
+            final String origin = stAb.getParam("Origin");
+            final String destination = stAb.getParam("Destination");
             final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
 
-            // find out if any other cards would still trigger it
-            boolean found = false;
+            // purge all forbidden causes from table
+            CardZoneTable filtered = new CardZoneTable();
+            boolean possiblyDisabled = false;
             for (Cell<ZoneType, ZoneType, CardCollection> cell : table.cellSet()) {
                 // this currently assumes the table will not contain multiple destinations
                 // however with some effects (e.g. Goblin Welder) that should indeed be the case
                 // once Forge handles that correctly this section needs to account for that
                 // (by doing a closer check of the triggered ability first)
-                if (cell.getColumnKey() != ZoneType.valueOf(destination)) {
-                    found = true;
-                } else if (Iterables.any(cell.getValue(),
-                        Predicates.not(CardPredicates.isType(stAb.getParam("ValidCause"))))) {
-                    found = true;
+                CardCollection changers = cell.getValue();
+                if ((origin == null || cell.getRowKey() == ZoneType.valueOf(origin)) &&
+                (destination == null || cell.getColumnKey() == ZoneType.valueOf(destination))) {
+                    changers = CardLists.filter(changers, Predicates.not(CardPredicates.isType(stAb.getParam("ValidCause"))));
+                    // the static will match some of the causes
+                    if (changers.size() < cell.getValue().size()) {
+                        possiblyDisabled = true;
+                    }
                 }
-                if (found) break;
+                filtered.put(cell.getRowKey(), cell.getColumnKey(), changers);
             }
-            if (found) return false;
+
+            if (!possiblyDisabled) {
+                return false;
+            }
+
+            // test if trigger would still fire when ignoring forbidden causes
+            final Map<AbilityKey, Object> runParamsFiltered = AbilityKey.newMap(runParams);
+            runParamsFiltered.put(AbilityKey.Cards, filtered);
+            if (regtrig.performTest(runParamsFiltered)) {
+                return false;
+            }
         }
         return true;
     }
