@@ -133,10 +133,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 if (sa.hasParam("ExileFaceDown")) {
                     sb.append(" face down");
                 }
+                sb.append(".");
             } else if (destination.equals("Ante")) {
-                sb.append("Add the top card of your library to the ante");
+                sb.append("Add the top card of your library to the ante.");
             }
-            sb.append(".");
         } else if (origin.equals("Library")) {
             final boolean originAlt = sa.hasParam("OriginAlternative");
             sb.append(chooserNames).append(" search").append(choosers.size() > 1 ? " " : "es ");
@@ -1109,7 +1109,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 fetchList = (CardCollection)AbilityUtils.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
             }
 
-            if (sa.hasParam("NoShuffle")) {
+            if (sa.hasParam("NoShuffle") || "False".equals(sa.getParam("Shuffle"))) {
                 shuffleMandatory = false;
             }
 
@@ -1249,7 +1249,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 CardLists.shuffle(chosenCards);
             }
             // do not shuffle the library once we have placed a fetched card on top.
-            if (origin.contains(ZoneType.Library) && (destination == ZoneType.Library) && !"False".equals(sa.getParam("Shuffle"))) {
+            if (origin.contains(ZoneType.Library) && (destination == ZoneType.Library) && shuffleMandatory) {
                 player.shuffle(sa);
             }
 
