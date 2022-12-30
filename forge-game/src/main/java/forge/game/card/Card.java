@@ -324,6 +324,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private SpellAbility[] basicLandAbilities = new SpellAbility[MagicColor.WUBRG.length];
 
     private int planeswalkerAbilityActivated;
+    private boolean planeswalkerActivationLimitUsed;
 
     private final ActivationTable numberTurnActivations = new ActivationTable();
     private final ActivationTable numberGameActivations = new ActivationTable();
@@ -7149,11 +7150,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void addPlaneswalkerAbilityActivated() {
-        planeswalkerAbilityActivated++;
+        // track if increased limit was used for activation because if there are also additional ones they can count on top
+        if (++planeswalkerAbilityActivated == 2 && StaticAbilityNumLoyaltyAct.limitIncrease(this)) {
+            planeswalkerActivationLimitUsed = true;
+        }
+    }
+
+    public boolean planeswalkerActivationLimitUsed() {
+        return planeswalkerActivationLimitUsed;
     }
 
     public void resetActivationsPerTurn() {
         planeswalkerAbilityActivated = 0;
+        planeswalkerActivationLimitUsed = false;
         numberTurnActivations.clear();
     }
 
