@@ -189,7 +189,7 @@ public class FDeckViewer extends FDialog {
             sectionCards = new TreeMap<>();
             deckList.append(nl);
             for (final Entry<PaperCard, Integer> ev : cp) {
-                cardName = ev.getKey().toString();
+                cardName = ev.getKey().getCardName();
                 if (sectionCards.containsKey(cardName)) {
                     sectionCards.put(cardName, (int)sectionCards.get(cardName) + ev.getValue());
                 }

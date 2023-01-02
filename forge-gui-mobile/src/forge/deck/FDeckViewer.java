@@ -99,7 +99,7 @@ public class FDeckViewer extends FScreen {
             deckList.append(s.toString()).append(": ");
             deckList.append(nl);
             for (final Entry<PaperCard, Integer> ev : cp) {
-                deckList.append(ev.getValue()).append(" ").append(ev.getKey()).append(nl);
+                deckList.append(ev.getValue()).append(" ").append(ev.getKey().getCardName()).append(nl);
             }
             deckList.append(nl);
         }
