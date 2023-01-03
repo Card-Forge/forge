@@ -895,7 +895,7 @@ public final class GameActionUtil {
         }
         CardCollection completeList = new CardCollection();
         PlayerCollection players = new PlayerCollection(game.getPlayers());
-        // CR 613.7k use APNAP
+        // CR 613.7m use APNAP
         int indexAP = players.indexOf(game.getPhaseHandler().getPlayerTurn());
         if (indexAP != -1) {
             Collections.rotate(players, - indexAP);

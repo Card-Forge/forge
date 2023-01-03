@@ -451,7 +451,7 @@ public abstract class SpellAbilityEffect {
     protected static void addLeaveBattlefieldReplacement(final Card card, final SpellAbility sa, final String zone) {
         final Card host = sa.getHostCard();
         final Game game = card.getGame();
-        final Card eff = createEffect(sa, sa.getActivatingPlayer(), host.getName() + "'s Effect", host.getImageKey());
+        final Card eff = createEffect(sa, sa.getActivatingPlayer(), host + "'s Effect", host.getImageKey());
 
         addLeaveBattlefieldReplacement(eff, zone);
 

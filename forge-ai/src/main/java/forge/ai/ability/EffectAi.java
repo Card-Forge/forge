@@ -115,8 +115,7 @@ public class EffectAi extends SpellAbilityAi {
                 }
                 randomReturn = true;
             } else if (logic.equals("ChainVeil")) {
-                if (!phase.isPlayerTurn(ai) || !phase.getPhase().equals(PhaseType.MAIN2)
-                        || CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "Planeswalker").isEmpty()) {
+                if (!phase.isPlayerTurn(ai) || !phase.getPhase().equals(PhaseType.MAIN2) || ai.getPlaneswalkersInPlay().isEmpty()) {
                     return false;
                 }
                 randomReturn = true;
