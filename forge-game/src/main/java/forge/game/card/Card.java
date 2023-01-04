@@ -3268,7 +3268,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isFlipped() {
         return flipped;
     }
-
     public final void setFlipped(boolean value) {
         flipped = value;
     }
@@ -3276,7 +3275,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setCanCounter(final boolean b) {
         canCounter = b;
     }
-
     public final boolean getCanCounter() {
         return canCounter;
     }
