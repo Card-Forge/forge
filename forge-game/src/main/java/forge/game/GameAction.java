@@ -368,10 +368,14 @@ public class GameAction {
                     c.clearEtbCounters();
                     if (cause != null) {
                         if (cause.hasParam("AnimateSubAbility")) {
-                            c.removeChangedCardKeywords(game.getTimestamp(), 0);
-                            c.removeChangedCardTraits(game.getTimestamp(), 0);
-                            c.removeChangedCardTypes(game.getTimestamp(), 0);
-                            c.removeChangedName(game.getTimestamp(), 0);
+                            long unanimateTimestamp = Long.valueOf(cause.getAdditionalAbility("AnimateSubAbility").getSVar("unanimateTimestamp"));
+                            c.removeChangedCardKeywords(unanimateTimestamp, 0);
+                            c.removeChangedCardTypes(unanimateTimestamp, 0);
+                            c.removeChangedName(unanimateTimestamp, 0);
+                            c.removeNewPT(unanimateTimestamp, 0);
+                            if (c.removeChangedCardTraits(unanimateTimestamp, 0)) {
+                                c.updateStateForView();
+                            }
                         }
                         if (cause.hasParam("Transformed") || cause.hasParam("FaceDown")) {
                             c.setBackSide(false);

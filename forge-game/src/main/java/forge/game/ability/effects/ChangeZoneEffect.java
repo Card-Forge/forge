@@ -671,9 +671,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                             moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(gameCard));
                         }
 
+                        final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
                         hostCard.addRemembered(gameCard);
-                        AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
+                        AbilityUtils.resolve(animate);
                         hostCard.removeRemembered(gameCard);
+                        animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
                     }
 
                     // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
@@ -1314,9 +1316,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         // need LKI before Animate does apply
                         moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
 
+                        final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
                         source.addRemembered(c);
-                        AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
+                        AbilityUtils.resolve(animate);
                         source.removeRemembered(c);
+                        animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
                     }
                     if (sa.hasParam("GainControl")) {
                         final String g = sa.getParam("GainControl");
@@ -1335,6 +1339,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("Transformed")) {
                         if (c.isDoubleFaced()) {
+                            // need LKI before Animate does apply
+                            if (!moveParams.containsKey(AbilityKey.CardLKI)) {
+                                moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
+                            }
                             c.changeCardState("Transform", null, sa);
                         } else {
                             // If it can't Transform, don't change zones.
