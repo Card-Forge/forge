@@ -164,8 +164,8 @@ public class GameAction {
             }
             if (!found) {
                 c.clearControllers();
-                if (c.removeChangedState()) {
-                    c.updateStateForView();
+                if (cause != null) {
+                    unanimateOnAbortedChange(cause, c);
                 }
                 return c;
             }
@@ -367,16 +367,7 @@ public class GameAction {
                 if (repres == ReplacementResult.Prevented) {
                     c.clearEtbCounters();
                     if (cause != null) {
-                        if (cause.hasParam("AnimateSubAbility")) {
-                            long unanimateTimestamp = Long.valueOf(cause.getAdditionalAbility("AnimateSubAbility").getSVar("unanimateTimestamp"));
-                            c.removeChangedCardKeywords(unanimateTimestamp, 0);
-                            c.removeChangedCardTypes(unanimateTimestamp, 0);
-                            c.removeChangedName(unanimateTimestamp, 0);
-                            c.removeNewPT(unanimateTimestamp, 0);
-                            if (c.removeChangedCardTraits(unanimateTimestamp, 0)) {
-                                c.updateStateForView();
-                            }
-                        }
+                        unanimateOnAbortedChange(cause, c);
                         if (cause.hasParam("Transformed") || cause.hasParam("FaceDown")) {
                             c.setBackSide(false);
                             c.changeToState(CardStateName.Original);
@@ -2576,5 +2567,18 @@ public class GameAction {
             }
         }
         return false;
+    }
+
+    private static void unanimateOnAbortedChange(final SpellAbility cause, final Card c) {
+        if (cause.hasParam("AnimateSubAbility")) {
+            long unanimateTimestamp = Long.valueOf(cause.getAdditionalAbility("AnimateSubAbility").getSVar("unanimateTimestamp"));
+            c.removeChangedCardKeywords(unanimateTimestamp, 0);
+            c.removeChangedCardTypes(unanimateTimestamp, 0);
+            c.removeChangedName(unanimateTimestamp, 0);
+            c.removeNewPT(unanimateTimestamp, 0);
+            if (c.removeChangedCardTraits(unanimateTimestamp, 0)) {
+                c.updateStateForView();
+            }
+        }
     }
 }
