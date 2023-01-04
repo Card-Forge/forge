@@ -366,6 +366,7 @@ public class GameAction {
 
                 if (repres == ReplacementResult.Prevented) {
                     c.clearEtbCounters();
+                    c.clearControllers();
                     if (cause != null) {
                         unanimateOnAbortedChange(cause, c);
                         if (cause.hasParam("Transformed") || cause.hasParam("FaceDown")) {
