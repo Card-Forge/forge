@@ -1402,7 +1402,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                     movedCard.setTimestamp(ts);
 
-                    if (sa.hasParam("AttachAfter") && movedCard.isAttachment()) {
+                    if (sa.hasParam("AttachAfter") && movedCard.isAttachment() && movedCard.isInPlay()) {
                         CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachAfter"), sa);
                         if (list.isEmpty()) {
                             list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachAfter"), c.getController(), c, sa);
