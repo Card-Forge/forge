@@ -365,7 +365,22 @@ public class GameAction {
                 copied.getOwner().removeInboundToken(copied);
 
                 if (repres == ReplacementResult.Prevented) {
-                    if (game.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard)) {
+                    c.clearEtbCounters();
+                    if (cause != null) {
+                        if (cause.hasParam("AnimateSubAbility")) {
+                            c.removeChangedCardKeywords(game.getTimestamp(), 0);
+                            c.removeChangedCardTraits(game.getTimestamp(), 0);
+                            c.removeChangedCardTypes(game.getTimestamp(), 0);
+                            c.removeChangedName(game.getTimestamp(), 0);
+                        }
+                        if (cause.hasParam("Transformed") || cause.hasParam("FaceDown")) {
+                            c.setBackSide(false);
+                            c.changeToState(CardStateName.Original);
+                        }
+                        unattachCardLeavingBattlefield(c);
+                    }
+
+                    if (c.isInZone(ZoneType.Stack) && !zoneTo.is(ZoneType.Graveyard)) {
                         return moveToGraveyard(c, cause, params);
                     }
 
@@ -373,10 +388,8 @@ public class GameAction {
                     copied.clearDelved();
                     copied.clearConvoked();
                     copied.clearExploited();
-                }
-
-                // was replaced with another Zone Change
-                if (toBattlefield && !c.isInPlay()) {
+                } else if (toBattlefield && !c.isInPlay()) {
+                    // was replaced with another Zone Change
                     if (c.removeChangedState()) {
                         c.updateStateForView();
                     }
