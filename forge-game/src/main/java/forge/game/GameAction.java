@@ -164,8 +164,8 @@ public class GameAction {
             }
             if (!found) {
                 c.clearControllers();
-                if (c.removeChangedState()) {
-                    c.updateStateForView();
+                if (cause != null) {
+                    unanimateOnAbortedChange(cause, c);
                 }
                 return c;
             }
@@ -365,7 +365,18 @@ public class GameAction {
                 copied.getOwner().removeInboundToken(copied);
 
                 if (repres == ReplacementResult.Prevented) {
-                    if (game.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard)) {
+                    c.clearEtbCounters();
+                    c.clearControllers();
+                    if (cause != null) {
+                        unanimateOnAbortedChange(cause, c);
+                        if (cause.hasParam("Transformed") || cause.hasParam("FaceDown")) {
+                            c.setBackSide(false);
+                            c.changeToState(CardStateName.Original);
+                        }
+                        unattachCardLeavingBattlefield(c);
+                    }
+
+                    if (c.isInZone(ZoneType.Stack) && !zoneTo.is(ZoneType.Graveyard)) {
                         return moveToGraveyard(c, cause, params);
                     }
 
@@ -373,10 +384,8 @@ public class GameAction {
                     copied.clearDelved();
                     copied.clearConvoked();
                     copied.clearExploited();
-                }
-
-                // was replaced with another Zone Change
-                if (toBattlefield && !c.isInPlay()) {
+                } else if (toBattlefield && !c.isInPlay()) {
+                    // was replaced with another Zone Change
                     if (c.removeChangedState()) {
                         c.updateStateForView();
                     }
@@ -2559,5 +2568,18 @@ public class GameAction {
             }
         }
         return false;
+    }
+
+    private static void unanimateOnAbortedChange(final SpellAbility cause, final Card c) {
+        if (cause.hasParam("AnimateSubAbility")) {
+            long unanimateTimestamp = Long.valueOf(cause.getAdditionalAbility("AnimateSubAbility").getSVar("unanimateTimestamp"));
+            c.removeChangedCardKeywords(unanimateTimestamp, 0);
+            c.removeChangedCardTypes(unanimateTimestamp, 0);
+            c.removeChangedName(unanimateTimestamp, 0);
+            c.removeNewPT(unanimateTimestamp, 0);
+            if (c.removeChangedCardTraits(unanimateTimestamp, 0)) {
+                c.updateStateForView();
+            }
+        }
     }
 }

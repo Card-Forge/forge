@@ -171,9 +171,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                     // need LKI before Animate does apply
                     moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
 
+                    final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
                     source.addRemembered(c);
-                    AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
+                    AbilityUtils.resolve(animate);
                     source.removeRemembered(c);
+                    animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
                 }
                 if (sa.hasParam("Tapped")) {
                     c.setTapped(true);
