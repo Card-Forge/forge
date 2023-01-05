@@ -16,7 +16,7 @@ SVar:RepeatOpp:DB$ RepeatEach | RepeatSubAbility$ ChooseCardsToTap | RepeatPlaye
 SVar:ChooseCardsToTap:DB$ ChooseCard | Defined$ Opponent | MinAmount$ 0 | Amount$ NumCreatures | Choices$ Creature.untapped+RememberedPlayerCtrl | ChoiceTitle$ Choose any number of untapped creatures you control | ChoiceZone$ Battlefield | RememberChosen$ True | AILogic$ BowToMyCommand | SubAbility$ TapChosenCards
 SVar:TapChosenCards:DB$ Tap | Defined$ Remembered | SubAbility$ AbandonSelf | ConditionCheckSVar$ TappedCreaturePower | ConditionSVarCompare$ GE8
 SVar:AbandonSelf:DB$ Abandon | SubAbility$ DBCleanup | ConditionCheckSVar$ TappedCreaturePower | ConditionSVarCompare$ GE8
-T:Mode$ Abandoned | ValidCard$ Self | Execute$ DBCleanup
+T:Mode$ Abandoned | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | ClearChosenCard$ True
 SVar:NumCreatures:Count$Valid Creature.RememberedPlayerCtrl
 SVar:TappedCreaturePower:Count$SumPower_Card.IsRemembered
