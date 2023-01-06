@@ -6,6 +6,7 @@ package forge.game.replacement;
  *
  */
 public enum ReplacementLayer {
+    CantHappen, // 614.17
     Control, // 616.1b
     Copy, // 616.1c
     Transform, // 616.1d

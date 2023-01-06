@@ -1444,6 +1444,9 @@ public class Player extends GameEntity implements Comparable<Player> {
             newCard = game.getAction().moveToGraveyard(c, sa, params);
             // Play the Discard sound
         }
+
+        newCard.setDiscarded(true);
+
         if (table != null) {
             table.put(origin, newCard.getZone().getZoneType(), newCard);
         }

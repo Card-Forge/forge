@@ -984,8 +984,7 @@ public class CardProperty {
                 return false;
             }
 
-            List<Card> cards = CardUtil.getThisTurnEntered(ZoneType.Graveyard, ZoneType.Hand, "Card", source, spellAbility);
-            if (!cards.contains(card) && !card.getMadnessWithoutCast()) {
+            if (!card.wasDiscarded()) {
                 return false;
             }
         } else if (property.startsWith("ControlledByPlayerInTheDirection")) {

@@ -575,6 +575,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                 movedCard = game.getAction().moveToLibrary(gameCard, libraryPosition, sa);
             } else {
                 if (destination.equals(ZoneType.Battlefield)) {
+                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
+                    moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
+                    moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
+                    if (sa.isReplacementAbility()) {
+                        ReplacementEffect re = sa.getReplacementEffect();
+                        moveParams.put(AbilityKey.ReplacementEffect, re);
+                        if (ReplacementType.Moved.equals(re.getMode()) && sa.getReplacingObject(AbilityKey.CardLKI) != null) {
+                            moveParams.put(AbilityKey.CardLKI, sa.getReplacingObject(AbilityKey.CardLKI));
+                        }
+                    }
+ 
                     if (sa.hasParam("Tapped") || sa.isNinjutsu()) {
                         gameCard.setTapped(true);
                     }
@@ -583,6 +594,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("Transformed")) {
                         if (gameCard.isDoubleFaced()) {
+                            // need LKI before Animate does apply
+                            if (!moveParams.containsKey(AbilityKey.CardLKI)) {
+                                moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(gameCard));
+                            }
                             gameCard.changeCardState("Transform", null, sa);
                         } else {
                             // If it can't Transform, don't change zones.
@@ -650,26 +665,17 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         }
                     }
 
-                    Map<AbilityKey, Object> moveParams = AbilityKey.newMap();
-                    moveParams.put(AbilityKey.LastStateBattlefield, lastStateBattlefield);
-                    moveParams.put(AbilityKey.LastStateGraveyard, lastStateGraveyard);
-                    if (sa.isReplacementAbility()) {
-                        ReplacementEffect re = sa.getReplacementEffect();
-                        moveParams.put(AbilityKey.ReplacementEffect, re);
-                        if (ReplacementType.Moved.equals(re.getMode()) && sa.getReplacingObject(AbilityKey.CardLKI) != null) {
-                            moveParams.put(AbilityKey.CardLKI, sa.getReplacingObject(AbilityKey.CardLKI));
-                        }
-                    }
-
                     if (sa.hasAdditionalAbility("AnimateSubAbility")) {
                         // need LKI before Animate does apply
                         if (!moveParams.containsKey(AbilityKey.CardLKI)) {
                             moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(gameCard));
                         }
 
+                        final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
                         hostCard.addRemembered(gameCard);
-                        AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
+                        AbilityUtils.resolve(animate);
                         hostCard.removeRemembered(gameCard);
+                        animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
                     }
 
                     // need to be facedown before it hits the battlefield in case of Replacement Effects or Trigger
@@ -776,7 +782,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
 
                     if (sa.hasParam("TrackDiscarded")) {
-                        movedCard.setMadnessWithoutCast(true);
+                        movedCard.setDiscarded(true);
                     }
                 }
             }
@@ -1310,9 +1316,11 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                         // need LKI before Animate does apply
                         moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
 
+                        final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
                         source.addRemembered(c);
-                        AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
+                        AbilityUtils.resolve(animate);
                         source.removeRemembered(c);
+                        animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
                     }
                     if (sa.hasParam("GainControl")) {
                         final String g = sa.getParam("GainControl");
@@ -1331,6 +1339,10 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
                     if (sa.hasParam("Transformed")) {
                         if (c.isDoubleFaced()) {
+                            // need LKI before Animate does apply
+                            if (!moveParams.containsKey(AbilityKey.CardLKI)) {
+                                moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
+                            }
                             c.changeCardState("Transform", null, sa);
                         } else {
                             // If it can't Transform, don't change zones.
@@ -1390,7 +1402,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
 
                     movedCard.setTimestamp(ts);
 
-                    if (sa.hasParam("AttachAfter") && movedCard.isAttachment()) {
+                    if (sa.hasParam("AttachAfter") && movedCard.isAttachment() && movedCard.isInPlay()) {
                         CardCollection list = AbilityUtils.getDefinedCards(source, sa.getParam("AttachAfter"), sa);
                         if (list.isEmpty()) {
                             list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), sa.getParam("AttachAfter"), c.getController(), c, sa);
