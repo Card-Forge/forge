@@ -65,16 +65,6 @@ public class PlayerZoneBattlefield extends PlayerZone {
         }
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final void remove(final Card c) {
-        super.remove(c);
-
-        if (trigger) {
-            c.runLeavesPlayCommands();
-        }
-    }
-
     public final void setTriggers(final boolean b) {
         trigger = b;
     }

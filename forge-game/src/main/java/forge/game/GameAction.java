@@ -579,6 +579,12 @@ public class GameAction {
             c.setZone(zoneTo);
         }
 
+        if (fromBattlefield) {
+            // order here is important so it doesn't unattach cards that might have returned from UntilHostLeavesPlay
+            unattachCardLeavingBattlefield(copied);
+            c.runLeavesPlayCommands();
+        }
+
         // do ETB counters after zone add
         if (!suppress && toBattlefield && !copied.getEtbCounters().isEmpty()) {
             game.getTriggerHandler().registerActiveTrigger(copied, false);
@@ -706,7 +712,6 @@ public class GameAction {
 
                 copied.setState(CardStateName.Original, true);
             }
-            unattachCardLeavingBattlefield(copied);
         } else if (toBattlefield) {
             for (Player p : game.getPlayers()) {
                 copied.getDamageHistory().setNotAttackedSinceLastUpkeepOf(p);
@@ -982,9 +987,15 @@ public class GameAction {
         if (c.isInZone(ZoneType.Stack)) {
             c.getGame().getStack().remove(c);
         }
+
+        final Zone z = c.getZone();
         // in some corner cases there's no zone yet (copied spell that failed targeting)
-        if (c.getZone() != null) {
-            c.getZone().remove(c);
+        if (z != null) {
+            z.remove(c);
+            if (z.is(ZoneType.Battlefield)) {
+                c.runLeavesPlayCommands();
+            }
+
         }
 
         // CR 603.6c other players LTB triggers should work
@@ -1045,20 +1056,13 @@ public class GameAction {
         }
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        for (Player p : game.getPlayers()) {
-            ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(false);
-        }
-
-        final int tiz = c.getTurnInZone();
 
         oldBattlefield.remove(c);
         newBattlefield.add(c);
-        c.setSickness(true);
         if (game.getPhaseHandler().inCombat()) {
             game.getCombat().removeFromCombat(c);
         }
 
-        c.setTurnInZone(tiz);
         c.setCameUnderControlSinceLastUpkeep(true);
 
         final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(c);
@@ -1066,9 +1070,6 @@ public class GameAction {
         game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams, false);
 
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        for (Player p : game.getPlayers()) {
-            ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(true);
-        }
         c.runChangeControllerCommands();
     }
 
