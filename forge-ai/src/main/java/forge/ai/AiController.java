@@ -277,7 +277,9 @@ public class AiController {
                 continue;
             }
 
-            if (StaticAbilityDisableTriggers.disabled(game, TriggerType.ChangesZone, tr)) {
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(tr.getHostCard());
+            runParams.put(AbilityKey.Destination, ZoneType.Battlefield);
+            if (StaticAbilityDisableTriggers.disabled(game, TriggerType.ChangesZone, tr, runParams)) {
                 return api == null;
             }
 

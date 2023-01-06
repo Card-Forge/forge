@@ -17,13 +17,6 @@ public class StaticAbilityDisableTriggers {
 
     static String MODE = "DisableTriggers";
 
-    public static boolean disabled(final Game game, final TriggerType triggerType, final Trigger regtrig) {
-        //for AiController ETB tests
-        final Map<AbilityKey, Object> runParams = AbilityKey.mapFromCard(regtrig.getHostCard());
-        runParams.put(AbilityKey.Destination, ZoneType.Battlefield);
-        return disabled(game, triggerType, regtrig, runParams);
-    }
-
     public static boolean disabled(final Game game, final TriggerType triggerType, final Trigger regtrig, final Map<AbilityKey, Object> runParams)  {
         CardCollectionView cardList = null;
         // if LTB look back
@@ -92,20 +85,16 @@ public class StaticAbilityDisableTriggers {
             final String origin = stAb.getParam("Origin");
             final String destination = stAb.getParam("Destination");
             final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
-
-            // purge all forbidden causes from table
             CardZoneTable filtered = new CardZoneTable();
             boolean possiblyDisabled = false;
+
+            // purge all forbidden causes from table
             for (Cell<ZoneType, ZoneType, CardCollection> cell : table.cellSet()) {
-                // this currently assumes the table will not contain multiple destinations
-                // however with some effects (e.g. Goblin Welder) that should indeed be the case
-                // once Forge handles that correctly this section needs to account for that
-                // (by doing a closer check of the triggered ability first)
                 CardCollection changers = cell.getValue();
                 if ((origin == null || cell.getRowKey() == ZoneType.valueOf(origin)) &&
                 (destination == null || cell.getColumnKey() == ZoneType.valueOf(destination))) {
-                    changers = CardLists.filter(changers, Predicates.not(CardPredicates.isType(stAb.getParam("ValidCause"))));
-                    // the static will match some of the causes
+                    changers = CardLists.filter(changers, Predicates.not(CardPredicates.restriction(stAb.getParam("ValidCause").split(","), stAb.getHostCard().getController(), stAb.getHostCard(), stAb)));
+                    // static will match some of the causes
                     if (changers.size() < cell.getValue().size()) {
                         possiblyDisabled = true;
                     }

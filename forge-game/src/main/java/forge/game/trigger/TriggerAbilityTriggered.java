@@ -83,7 +83,7 @@ public class TriggerAbilityTriggered extends Trigger {
         if (!matchesValidParam("ValidCause", causes)) {
             return false;
         }
-        
+
         if (hasParam("TriggeredOwnAbility") && "True".equals(getParam("TriggeredOwnAbility")) && !Iterables.contains(causes, source)) {
             return false;
         }
