@@ -782,7 +782,7 @@ public class ChangeZoneEffect extends SpellAbilityEffect {
                     }
 
                     if (sa.hasParam("TrackDiscarded")) {
-                        movedCard.setMadnessWithoutCast(true);
+                        movedCard.setDiscarded(true);
                     }
                 }
             }

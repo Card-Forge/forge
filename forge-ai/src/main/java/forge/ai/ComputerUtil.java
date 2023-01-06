@@ -1063,6 +1063,10 @@ public class ComputerUtil {
             return true;
         }
 
+        if (cardState.hasKeyword(Keyword.EXALTED) || cardState.hasKeyword(Keyword.EXTORT)) {
+            return true;
+        }
+
         if (cardState.hasKeyword(Keyword.RIOT) && ChooseGenericEffectAi.preferHasteForRiot(sa, ai)) {
             // Planning to choose Haste for Riot, so do this in Main 1
             return true;
@@ -1070,6 +1074,7 @@ public class ComputerUtil {
 
         // if we have non-persistent mana in our pool, would be good to try to use it and not waste it
         if (ai.getManaPool().willManaBeLostAtEndOfPhase()) {
+            // TODO should check if some will be kept and skip those
             boolean canUseToPayCost = false;
             for (byte color : ManaAtom.MANATYPES) {
                 // tries to reuse any amount of colorless if cost only has generic
@@ -1086,10 +1091,6 @@ public class ComputerUtil {
 
         if (card.isCreature() && !cardState.hasKeyword(Keyword.DEFENDER)
                 && (cardState.hasKeyword(Keyword.HASTE) || hasACardGivingHaste(ai, true) || sa.isDash())) {
-            return true;
-        }
-
-        if (cardState.hasKeyword(Keyword.EXALTED) || cardState.hasKeyword(Keyword.EXTORT)) {
             return true;
         }
 

@@ -664,9 +664,9 @@ public class AbilityManaPart implements java.io.Serializable {
         // check for produce mana replacement effects - they mess this up, so just use the mana ability
         final Card source = am.getHostCard();
         final Player activator = am.getActivatingPlayer();
-        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromPlayer(activator);
+        final Map<AbilityKey, Object> repParams = AbilityKey.mapFromAffected(source);
         repParams.put(AbilityKey.Mana, getOrigProduced());
-        repParams.put(AbilityKey.Affected, source);
+        repParams.put(AbilityKey.Activator, activator);
         repParams.put(AbilityKey.AbilityMana, am.getRootAbility());
 
         if (!source.getGame().getReplacementHandler().getReplacementList(ReplacementType.ProduceMana, repParams, ReplacementLayer.Other).isEmpty()) {

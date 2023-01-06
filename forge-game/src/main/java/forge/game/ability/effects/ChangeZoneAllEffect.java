@@ -94,8 +94,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (!libCards.isEmpty()) {
                 sa.getActivatingPlayer().getController().reveal(libCards, ZoneType.Library, libCards.get(0).getOwner());
             }
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.Player, sa.getActivatingPlayer());
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sa.getActivatingPlayer());
             runParams.put(AbilityKey.Target, tgtPlayers);
             game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
         }
