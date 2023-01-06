@@ -17,8 +17,6 @@
  */
 package forge.game.spellability;
 
-import org.apache.commons.lang3.ObjectUtils;
-
 import forge.card.CardStateName;
 import forge.card.mana.ManaCost;
 import forge.game.card.Card;
@@ -26,6 +24,10 @@ import forge.game.card.CardUtil;
 import forge.game.cost.Cost;
 import forge.game.player.Player;
 import forge.game.staticability.StaticAbility;
+import forge.util.CardTranslation;
+import forge.util.Localizer;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class LandAbility extends Ability {
 
@@ -85,10 +87,12 @@ public class LandAbility extends Ability {
 
     @Override
     public String toUnsuppressedString() {
-        StringBuilder sb = new StringBuilder("Play land");
+
+        Localizer localizer = Localizer.getInstance();
+        StringBuilder sb = new StringBuilder(StringUtils.capitalize(localizer.getMessage("lblPlayLand")));
 
         if (getHostCard().isModal()) {
-            sb.append(" (").append(getHostCard().getName(ObjectUtils.firstNonNull(getCardStateName(), CardStateName.Original))).append(")");
+            sb.append(" (").append(CardTranslation.getTranslatedName(getHostCard().getName(ObjectUtils.firstNonNull(getCardStateName(), CardStateName.Original)))).append(")");
         }
 
         StaticAbility sta = getMayPlay();
