@@ -31,6 +31,7 @@ public enum AbilityKey {
     CastSA("CastSA"),
     Card("Card"),
     Cards("Cards"),
+    CardsFiltered("CardsFiltered"),
     CardLKI("CardLKI"),
     Cause("Cause"),
     Causer("Causer"),

@@ -110,6 +110,9 @@ public class StaticAbilityDisableTriggers {
             final Map<AbilityKey, Object> runParamsFiltered = AbilityKey.newMap(runParams);
             runParamsFiltered.put(AbilityKey.Cards, filtered);
             if (regtrig.performTest(runParamsFiltered)) {
+                // store the filtered Cards because Panharmonicon shouldn't see the others
+                runParams.put(AbilityKey.CardsFiltered, filtered);
+
                 return false;
             }
         }

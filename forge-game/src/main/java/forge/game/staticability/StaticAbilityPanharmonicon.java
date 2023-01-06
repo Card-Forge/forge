@@ -102,7 +102,11 @@ public class StaticAbilityPanharmonicon {
             // Check if the cards have a trigger at all
             final String origin = stAb.getParamOrDefault("Origin", null);
             final String destination = stAb.getParamOrDefault("Destination", null);
-            final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
+            // check if some causes were ignored
+            CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.CardsFiltered);
+            if (table == null) {
+                table = (CardZoneTable) runParams.get(AbilityKey.Cards);
+            }
 
             if (table.filterCards(origin == null ? null : ImmutableList.of(ZoneType.smartValueOf(origin)), ZoneType.smartValueOf(destination), stAb.getParam("ValidCause"), card, stAb).isEmpty()) {
                 return false;
