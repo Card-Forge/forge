@@ -84,7 +84,11 @@ public class StaticAbilityDisableTriggers {
         } else if (triggerType.equals(TriggerType.ChangesZoneAll)) {
             final String origin = stAb.getParam("Origin");
             final String destination = stAb.getParam("Destination");
-            final CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.Cards);
+            // check if some causes were already ignored by a different ability, then the forbidden causes will be combined
+            CardZoneTable table = (CardZoneTable) runParams.get(AbilityKey.CardsFiltered);
+            if (table == null) {
+                table = (CardZoneTable) runParams.get(AbilityKey.Cards);
+            }
             CardZoneTable filtered = new CardZoneTable();
             boolean possiblyDisabled = false;
 
