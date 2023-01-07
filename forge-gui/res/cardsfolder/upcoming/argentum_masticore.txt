@@ -5,8 +5,8 @@ PT:5/5
 K:First strike
 K:Protection:Card.MultiColor:Protection from multicolored
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSacrifice | TriggerDescription$ At the beginning of your upkeep, sacrifice CARDNAME unless you discard a card. When you discard a card this way, destroy target nonland permanent an opponent controls with mana value less than or equal to the mana value of the discarded card. 
-SVar:TrigSacrifice:DB$ Sacrifice | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | OrString$ Sacrifice {c:Self}. | RememberObjects$ Discarded | SubAbility$ TrigImmediateTrig
-SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | Execute$ TrigDestroy | TriggerDescription$ When you discard a card this way, destroy target nonland permanent an opponent controls with mana value less than or equal to the mana value of the discarded card. 
+SVar:TrigSacrifice:DB$ Sacrifice | UnlessCost$ Discard<1/Card> | UnlessPayer$ You | OrString$ Sacrifice {c:Self}. | SubAbility$ TrigImmediateTrig
+SVar:TrigImmediateTrig:DB$ ImmediateTrigger | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1 | RememberObjects$ Discarded | Execute$ TrigDestroy | TriggerDescription$ When you discard a card this way, destroy target nonland permanent an opponent controls with mana value less than or equal to the mana value of the discarded card. 
 SVar:TrigDestroy:DB$ Destroy | ValidTgts$ Permanent.nonLand+cmcLEX+OppCtrl | TgtPrompt$ Select target nonland permanent an opponent controls with mana value less or equal to the discarded card | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggeredRemembered$CardManaCost
