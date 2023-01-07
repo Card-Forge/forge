@@ -5,6 +5,7 @@ import java.util.List;
 import forge.game.Game;
 import forge.game.GameEntity;
 import forge.game.GameEntityCounterTable;
+import forge.game.ability.AbilityKey;
 import forge.game.ability.SpellAbilityEffect;
 import forge.game.card.Card;
 import forge.game.card.CardLists;
@@ -14,6 +15,7 @@ import forge.game.player.Player;
 import forge.game.player.PlayerController;
 import forge.game.player.PlayerPredicates;
 import forge.game.spellability.SpellAbility;
+import forge.game.trigger.TriggerType;
 import forge.game.zone.ZoneType;
 import forge.util.Localizer;
 import forge.util.collect.FCollection;
@@ -52,5 +54,7 @@ public class CountersProliferateEffect extends SpellAbilityEffect {
             }
         }
         table.replaceCounterEffect(game, sa, true);
+
+        game.getTriggerHandler().runTrigger(TriggerType.Proliferate, AbilityKey.mapFromPlayer(p), false);
     }
 }
