@@ -240,6 +240,9 @@ public class PaperCard implements Comparable<IPaperCard>, InventoryItemFromSet, 
         // cannot still decide, if this "name|set" format is needed anymore
         // return String.format("%s|%s", name, cardSet);
     }
+    public String getCardName() {
+        return name;
+    }
 
     /*
      * This (utility) method transform a collectorNumber String into a key string for sorting.

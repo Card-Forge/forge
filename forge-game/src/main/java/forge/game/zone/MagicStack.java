@@ -857,7 +857,7 @@ public class MagicStack /* extends MyObservable */ implements Iterable<SpellAbil
         final Trigger trig = sa.getTrigger();
         final Card newHost = game.getCardState(host);
         if (host.isAura() && newHost.isInZone(ZoneType.Graveyard) && trig.getMode() == TriggerType.ChangesZone && 
-                trig.getParam("Destination").equals("Graveyard") && trig.getParam("ValidCard").equals("Card.EnchantedBy")) {
+                "Graveyard".equals(trig.getParam("Destination")) && "Card.EnchantedBy".equals(trig.getParam("ValidCard"))) {
             sa.setHostCard(newHost);
         }
     }

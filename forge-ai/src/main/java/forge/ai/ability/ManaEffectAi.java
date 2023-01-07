@@ -266,6 +266,7 @@ public class ManaEffectAi extends SpellAbilityAi {
         ManaPool mp = ai.getManaPool();
         Mana test = null;
         if (mp.isEmpty()) {
+            // TODO use color from ability
             test = new Mana((byte) ManaAtom.COLORLESS, source, null);
             mp.addMana(test, false);
         }

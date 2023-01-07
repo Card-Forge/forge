@@ -171,8 +171,9 @@ public class CardDetailUtil {
     }
 
     public static String formatCardType(final CardStateView card, final boolean canShow) {
+        boolean isInPlay = card.getCard() != null && ZoneType.Battlefield.equals(card.getCard().getZone());
         String translatedtype = CardTranslation.getTranslatedType(card.getName(), card.getType().toString());
-        return canShow ? translatedtype : (card.getState() == CardStateName.FaceDown ? "Creature" : "---");
+        return canShow ? translatedtype : (card.getState() == CardStateName.FaceDown && isInPlay ? "Creature" : "");
     }
 
     public static String formatPowerToughness(final CardStateView card, final boolean canShow) {

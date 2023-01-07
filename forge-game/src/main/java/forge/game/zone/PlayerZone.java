@@ -20,6 +20,7 @@ package forge.game.zone;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
+import forge.card.CardStateName;
 import forge.game.card.Card;
 import forge.game.card.CardCollectionView;
 import forge.game.card.CardLists;
@@ -63,7 +64,7 @@ public class PlayerZone extends Zone {
             boolean graveyardCastable = c.hasKeyword(Keyword.FLASHBACK) ||
                     c.hasKeyword(Keyword.RETRACE) || c.hasKeyword(Keyword.JUMP_START) || c.hasKeyword(Keyword.ESCAPE) ||
                     c.hasKeyword(Keyword.DISTURB);
-            boolean exileCastable = (c.isAdventureCard() || c.isForetold()) && c.isInZone(ZoneType.Exile);
+            boolean exileCastable = c.isForetold() || isOnAdventure(c);
             for (final SpellAbility sa : c.getSpellAbilities()) {
                 final ZoneType restrictZone = sa.getRestrictions().getZone();
 
@@ -91,6 +92,15 @@ public class PlayerZone extends Zone {
             }
             return false;
         }
+    }
+    private boolean isOnAdventure(Card c) {
+        if (!c.isAdventureCard())
+            return false;
+        if (c.getExiledWith() == null)
+            return false;
+        if (!CardStateName.Adventure.equals(c.getExiledWith().getCurrentStateName()))
+            return false;
+        return true;
     }
 
     private final Player player;

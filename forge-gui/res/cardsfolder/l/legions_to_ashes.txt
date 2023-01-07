@@ -1,6 +1,7 @@
 Name:Legions to Ashes
 ManaCost:1 W B
 Types:Sorcery
-A:SP$ ChangeZoneAll | TgtPrompt$ Select target nonland permanent an opponent controls | ValidTgts$ Permanent.nonLand+OppCtrl | ChangeType$ TargetedCard.Self,Creature.NotDefinedTargeted+token+sharesNameWith Targeted | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target nonland permanent an opponent controls and all tokens that player controls with the same name as that permanent.
+A:SP$ Pump | ValidTgts$ Permanent.nonland | TgtPrompt$ Select target nonland permanent an opponent controls | SubAbility$ ExileAll | SpellDescription$ Exile target nonland permanent an opponent controls and all tokens that player controls with the same name as that permanent.
+SVar:ExileAll:DB$ ChangeZoneAll | ChangeType$ TargetedCard.Self,Card.NotDefinedTargeted+token+sharesNameWith Targeted+ControlledBy TargetedController | Origin$ Battlefield | Destination$ Exile
 AI:RemoveDeck:Random
 Oracle:Exile target nonland permanent an opponent controls and all tokens that player controls with the same name as that permanent.

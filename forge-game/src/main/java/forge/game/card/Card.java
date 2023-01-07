@@ -226,7 +226,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private boolean tributed = false;
     private boolean embalmed = false;
     private boolean eternalized = false;
-    private boolean madnessWithoutCast = false;
+    private boolean discarded = false;
 
     private boolean flipped = false;
     private boolean facedown = false;
@@ -324,6 +324,7 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     private SpellAbility[] basicLandAbilities = new SpellAbility[MagicColor.WUBRG.length];
 
     private int planeswalkerAbilityActivated;
+    private boolean planeswalkerActivationLimitUsed;
 
     private final ActivationTable numberTurnActivations = new ActivationTable();
     private final ActivationTable numberGameActivations = new ActivationTable();
@@ -3267,7 +3268,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final boolean isFlipped() {
         return flipped;
     }
-
     public final void setFlipped(boolean value) {
         flipped = value;
     }
@@ -3275,7 +3275,6 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     public final void setCanCounter(final boolean b) {
         canCounter = b;
     }
-
     public final boolean getCanCounter() {
         return canCounter;
     }
@@ -5802,8 +5801,8 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
         }
         return getCastSA().isMadness();
     }
-    public boolean getMadnessWithoutCast() { return madnessWithoutCast; }
-    public void setMadnessWithoutCast(boolean state) { madnessWithoutCast = state; }
+    public boolean wasDiscarded() { return discarded; }
+    public void setDiscarded(boolean state) { discarded = state; }
 
     public final boolean isMonstrous() {
         return monstrous;
@@ -7149,11 +7148,19 @@ public class Card extends GameEntity implements Comparable<Card>, IHasSVars {
     }
 
     public void addPlaneswalkerAbilityActivated() {
-        planeswalkerAbilityActivated++;
+        // track if increased limit was used for activation because if there are also additional ones they can count on top
+        if (++planeswalkerAbilityActivated == 2 && StaticAbilityNumLoyaltyAct.limitIncrease(this)) {
+            planeswalkerActivationLimitUsed = true;
+        }
+    }
+
+    public boolean planeswalkerActivationLimitUsed() {
+        return planeswalkerActivationLimitUsed;
     }
 
     public void resetActivationsPerTurn() {
         planeswalkerAbilityActivated = 0;
+        planeswalkerActivationLimitUsed = false;
         numberTurnActivations.clear();
     }
 

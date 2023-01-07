@@ -9,6 +9,7 @@ import forge.game.card.CardLists;
 import forge.game.player.Player;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.collect.FCollectionView;
 
 public class DamageEachEffect extends DamageBaseEffect {
@@ -38,9 +39,7 @@ public class DamageEachEffect extends DamageBaseEffect {
             sb.append(sa.getParam("StackDescription"));
         } else {
             sb.append("Each ").append(desc).append(" deals ").append(dmg).append(" to ");
-            for (final Player p : getTargetPlayers(sa)) {
-                sb.append(p);
-            }
+            Lang.joinHomogenous(getTargetPlayers(sa));
             if (sa.hasParam("DefinedCards")) {
                 if (sa.getParam("DefinedCards").equals("Self")) {
                     sb.append(" itself");

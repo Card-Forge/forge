@@ -68,7 +68,6 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                 if (origin.contains(ZoneType.Library) && sa.hasParam("Search") && !sa.getActivatingPlayer().canSearchLibraryWith(sa, p)) {
                     cards.removeAll(p.getCardsIn(ZoneType.Library));
                 }
-
             }
             if (origin.contains(ZoneType.Library) && sa.hasParam("Search")) {
                 // Search library using changezoneall effect need a param "Search"
@@ -95,8 +94,7 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
             if (!libCards.isEmpty()) {
                 sa.getActivatingPlayer().getController().reveal(libCards, ZoneType.Library, libCards.get(0).getOwner());
             }
-            final Map<AbilityKey, Object> runParams = AbilityKey.newMap();
-            runParams.put(AbilityKey.Player, sa.getActivatingPlayer());
+            final Map<AbilityKey, Object> runParams = AbilityKey.mapFromPlayer(sa.getActivatingPlayer());
             runParams.put(AbilityKey.Target, tgtPlayers);
             game.getTriggerHandler().runTrigger(TriggerType.SearchedLibrary, runParams, false);
         }
@@ -172,9 +170,11 @@ public class ChangeZoneAllEffect extends SpellAbilityEffect {
                     // need LKI before Animate does apply
                     moveParams.put(AbilityKey.CardLKI, CardUtil.getLKICopy(c));
 
+                    final SpellAbility animate = sa.getAdditionalAbility("AnimateSubAbility");
                     source.addRemembered(c);
-                    AbilityUtils.resolve(sa.getAdditionalAbility("AnimateSubAbility"));
+                    AbilityUtils.resolve(animate);
                     source.removeRemembered(c);
+                    animate.setSVar("unanimateTimestamp", String.valueOf(game.getTimestamp()));
                 }
                 if (sa.hasParam("Tapped")) {
                     c.setTapped(true);

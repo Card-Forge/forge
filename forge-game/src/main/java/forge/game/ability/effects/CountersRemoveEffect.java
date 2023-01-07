@@ -18,6 +18,7 @@ import forge.game.player.PlayerController;
 import forge.game.spellability.SpellAbility;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.util.Lang;
 import forge.util.Localizer;
 
 public class CountersRemoveEffect extends SpellAbilityEffect {
@@ -53,13 +54,9 @@ public class CountersRemoveEffect extends SpellAbilityEffect {
         }
         sb.append(" from");
 
-        for (final Card c : getTargetCards(sa)) {
-            sb.append(" ").append(c);
-        }
+        sb.append(Lang.joinHomogenous(getTargetCards(sa)));
 
-        for (final Player tgtPlayer : getTargetPlayers(sa)) {
-            sb.append(" ").append(tgtPlayer);
-        }
+        sb.append(Lang.joinHomogenous(getTargetPlayers(sa)));
 
         sb.append(".");
 

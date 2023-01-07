@@ -5,12 +5,12 @@ PT:3/3
 T:Mode$ ChangesZone | ValidCard$ Artifact.nonToken+YouCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigToken | TriggerZones$ Battlefield | TriggerDescription$ Whenever a nontoken artifact you control is put into a graveyard from the battlefield, create a colorless artifact token named Scrap.
 SVar:TrigToken:DB$ Token | TokenScript$ scrap 
 A:AB$ Charm | Cost$ 1 R Sac<1/Artifact> | Choices$ DBCounter,DBGoad,DBLoot | CharmNum$ 1
-SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on NICKNAME. It gains haste until end of turn.
-SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Haste
+SVar:DBCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | SubAbility$ DBPump | SpellDescription$ Put a +1/+1 counter on NICKNAME. It gains menace until end of turn.
+SVar:DBPump:DB$ Pump | Defined$ Self | KW$ Menace
 SVar:DBGoad:DB$ Goad | ValidTgts$ Creature | SpellDescription$ Goad target creature.
 SVar:DBLoot:DB$ Discard | Mode$ TgtChoose | SubAbility$ DBDraw | SpellDescription$ Discard a card, then draw a card.
 SVar:DBDraw:DB$ Draw
 SVar:AIPreference:SacCost$Artifact.token
 DeckHints:Type$Artifact 
-DeckHas:Ability$Discard|Token|Counters & Type$Artifact & Keyword$Haste
-Oracle:Whenever a nontoken artifact you control is put into a graveyard from the battlefield, create a colorless artifact token named Scrap.\n{1}{R}, Sacrifice an artifact: Choose one —\n• Put a +1/+1 counter on Farid. It gains haste until end of turn.\n• Goad target creature.\n• Discard a card, then draw a card.
+DeckHas:Ability$Discard|Token|Counters & Type$Artifact & Keyword$Menace
+Oracle:Whenever a nontoken artifact you control is put into a graveyard from the battlefield, create a colorless artifact token named Scrap.\n{1}{R}, Sacrifice an artifact: Choose one —\n• Put a +1/+1 counter on Farid. It gains menace until end of turn.\n• Goad target creature.\n• Discard a card, then draw a card.

@@ -59,7 +59,7 @@ public interface IDevModeCheats {
 
     void planeswalkTo();
 
-    void askAI();
+    void askAI(boolean useSimulation);
 
     /**
      * Implementation of {@link IDevModeCheats} that disallows cheating by
@@ -144,7 +144,7 @@ public interface IDevModeCheats {
         public void removeCardsFromGame() {
         }
         @Override
-        public void askAI() {
+        public void askAI(boolean useSimulation) {
         }
     };
 

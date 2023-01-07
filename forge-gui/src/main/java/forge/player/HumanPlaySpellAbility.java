@@ -173,7 +173,7 @@ public class HumanPlaySpellAbility {
                 if (ability.getHostCard().isMadness()) {
                     // if a player failed to play madness cost, move the card to graveyard
                     Card newCard = game.getAction().moveToGraveyard(c, null);
-                    newCard.setMadnessWithoutCast(true);
+                    newCard.setDiscarded(true);
                 }
             } else {
                 payment.refundPayment();
