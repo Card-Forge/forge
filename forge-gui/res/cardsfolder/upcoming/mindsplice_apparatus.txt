@@ -8,4 +8,4 @@ S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You |
 SVar:X:Count$CardCounters.OIL
 DeckHas:Ability$Counters
 DeckHints:Type$Instant|Sorcery
-Oracle:At the beginning of your upkeep, put an oil counter on Mindsplice Apparatus.\nInstant and sorcery spells you cast cost 1 less to cast for each oil counter on Mindsplice Apparatus.
+Oracle:Flash\nAt the beginning of your upkeep, put an oil counter on Mindsplice Apparatus.\nInstant and sorcery spells you cast cost 1 less to cast for each oil counter on Mindsplice Apparatus.
