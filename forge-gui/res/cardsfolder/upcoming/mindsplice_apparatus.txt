@@ -1,0 +1,11 @@
+Name:Mindsplice Apparatus
+ManaCost:3 U
+Types:Artifact
+K:Flash
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ At the beginning of your upkeep, put an oil counter on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ OIL | CounterNum$ 1
+S:Mode$ ReduceCost | ValidCard$ Instant,Sorcery | Type$ Spell | Activator$ You | Amount$ X | Description$ Instant and sorcery spells you cast cost 1 less to cast for each oil counter on CARDNAME.
+SVar:X:Count$CardCounters.OIL
+DeckHas:Ability$Counters
+DeckHints:Type$Instant|Sorcery
+Oracle:At the beginning of your upkeep, put an oil counter on Mindsplice Apparatus.\nInstant and sorcery spells you cast cost 1 less to cast for each oil counter on Mindsplice Apparatus.
