@@ -2480,6 +2480,8 @@ public class ComputerUtilCombat {
                 }
                 // TODO: Predict replacement effects for counters (doubled, reduced, additional counters, etc.)
             }
+            // intern toxic effect
+            poison += attacker.getKeywordMagnitude(Keyword.TOXIC);
         }
         return poison;
     }
